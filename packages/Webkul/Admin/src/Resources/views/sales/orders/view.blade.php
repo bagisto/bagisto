@@ -14,7 +14,7 @@
                 <h1>
                     <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
 
-                    {{ __('admin::app.sales.orders.view-title', ['order_id' => $order->id]) }}
+                    {{ __('admin::app.sales.orders.view-title', ['order_id' => $order->increment_id]) }}
                 </h1>
             </div>
 

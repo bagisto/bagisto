@@ -165,7 +165,8 @@ return [
         'ends-till' => 'Ends Till',
         'per-cust' => 'Per Customer',
         'usage-throttle' => 'Usage Times',
-        'for-guest' => 'For Guest'
+        'for-guest' => 'For Guest',
+        'order_number' => 'Order Number'
     ],
 
     'account' => [
@@ -1096,7 +1097,13 @@ return [
             'logo-image' => 'Logo Image',
             'credit-max' => 'Customer Credit Max',
             'credit-max-value' => 'Credit Max Value',
-            'use-credit-max' => 'Use Credit Max'
+            'use-credit-max' => 'Use Credit Max',
+            'invoice-settings' => 'Invoice Settings',
+            'invoiceNumber' => 'Invoice Number Settings',
+            'invoice number prefix' => 'Invoice Number Prefix',
+            'invoice number length' => 'Invoice Number Length',
+            'invoice number suffix' => 'Invoice Number Suffix',
+
         ]
     ]
 ];

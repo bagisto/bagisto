@@ -9,7 +9,7 @@
     <div class="order-success-content" style="min-height: 300px;">
         <h1>{{ __('shop::app.checkout.success.thanks') }}</h1>
 
-        <p>{{ __('shop::app.checkout.success.order-id-info', ['order_id' => $order->id]) }}</p>
+        <p>{{ __('shop::app.checkout.success.order-id-info', ['order_id' => $order->increment_id]) }}</p>
 
         <p>{{ __('shop::app.checkout.success.info') }}</p>
 
