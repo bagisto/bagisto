@@ -15,12 +15,6 @@ class FixedAmount extends Action
 
         $totalDiscount = 0;
 
-        if ($rule->discount_amount >= 100) {
-            $impact->discount = $cart->base_sub_total;
-
-            $impact->formatted_discount = core()->currency($impact->discount);
-        }
-
         if ($rule->uses_attribute_conditions) {
             $productIDs = $rule->product_ids;
 
