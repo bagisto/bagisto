@@ -28,8 +28,11 @@
                 <div class="form-container">
                     @csrf()
 
+                    {!! view_render_event('bagisto.admin.settings.currencies.create.before') !!}
+
                     <accordian :title="'{{ __('admin::app.settings.currencies.general') }}'" :active="true">
                         <div slot="body">
+
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                                 <label for="code" class="required">{{ __('admin::app.settings.currencies.code') }}</label>
                                 <input v-validate="'required|min:3|max:3'" class="control" id="code" name="code" value="{{ old('code') }}" data-vv-as="&quot;{{ __('admin::app.settings.currencies.code') }}&quot;" style="text-transform:uppercase" v-code/>
@@ -41,9 +44,11 @@
                                 <input v-validate="'required'" class="control" id="name" name="name" data-vv-as="&quot;{{ __('admin::app.settings.currencies.name') }}&quot;" value="{{ old('name') }}"/>
                                 <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
                             </div>
+
                         </div>
                     </accordian>
 
+                    {!! view_render_event('bagisto.admin.settings.currencies.create.after') !!}
                 </div>
             </div>
         </form>

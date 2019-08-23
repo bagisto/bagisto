@@ -27,6 +27,9 @@
             <div class="page-content">
                 <div class="form-container">
                     @csrf()
+
+                    {!! view_render_event('bagisto.admin.settings.locale.edit.before') !!}
+
                     <input name="_method" type="hidden" value="PUT">
 
                     <accordian :title="'{{ __('admin::app.settings.locales.general') }}'" :active="true">
@@ -53,9 +56,11 @@
                                 </select>
                                 <span class="control-error" v-if="errors.has('direction')">@{{ errors.first('direction') }}</span>
                             </div>
+
                         </div>
                     </accordian>
 
+                    {!! view_render_event('bagisto.admin.settings.locale.edit.after') !!}
                 </div>
             </div>
         </form>

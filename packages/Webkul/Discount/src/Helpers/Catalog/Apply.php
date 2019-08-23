@@ -13,7 +13,7 @@ use Webkul\Discount\Helpers\Catalog\Sale;
  * Apply - Applies catalog rule to products intended in the rules
  *
  * @author  Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
- * @copyright 2019 Webkul Software Pvt Ltd (http://www.webkul.com)
+ * @copyright  2019 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class Apply extends Sale
 {
@@ -119,10 +119,8 @@ class Apply extends Sale
                     $this->setSale($rule, $productIDs);
                 }
             }
-
-            // dd($result, 'processing done');
         } else {
-            // handle the deceased rules here
+            // handle the deceased rules here or call the declutter handler over here
             // dd($this->deceased);
         }
     }
@@ -196,6 +194,8 @@ class Apply extends Sale
 
                         $winnerRuleId = $this->breakTie($previousRuleID, $newRuleID, $product);
 
+                        $discountAmount = $this->getDiscountAmount($product, $rule);
+
                         $data = [
                             'catalog_rule_id' => $rule->id,
                             'starts_from' => $rule->starts_from,
@@ -204,7 +204,7 @@ class Apply extends Sale
                             'channel_id' => $channelId,
                             'product_id' => $productID,
                             'action_code' => $rule->action_code,
-                            'action_amount' => $discountPrice
+                            'action_amount' => $discountAmount
                         ];
 
                         if ($rule->id == $winnerRuleId) {
