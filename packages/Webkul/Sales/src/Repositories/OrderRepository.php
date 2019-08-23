@@ -154,7 +154,7 @@ class OrderRepository extends Repository
         $invoiceNumberLength = $config->where('code','=',"sales.invoiceSettings.invoice_number.invoice_number_length")->first()
             ? $config->where('code','=',"sales.invoiceSettings.invoice_number.invoice_number_length")->first()->value : false;
         $invoiceNumberSuffix = $config->where('code','=',"sales.invoiceSettings.invoice_number.invoice_number_suffix")->first()
-            ? $config->where('code','=',"sales.invoiceSettings.invoice_number.invoice_number_suffix")->value: false;
+            ? $config->where('code','=',"sales.invoiceSettings.invoice_number.invoice_number_suffix")->first()->value: false;
 
         $lastOrder = $this->model->orderBy('id', 'desc')->limit(1)->first();
         $lastId = $lastOrder ? $lastOrder->id : 0;
