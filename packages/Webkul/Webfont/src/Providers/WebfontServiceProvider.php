@@ -22,7 +22,7 @@ class WebfontServiceProvider extends ServiceProvider
 
         $this->loadRoutesFrom(__DIR__ . '/../Http/routes.php');
 
-        $this->app->concord->registerModel(\Webkul\Webfont\Contracts\Webfont::class, \Webkul\Webfont\Models\Webfont::class);
+        \Webkul\Webfont\Models\Webfont::observe(\Webkul\Webfont\Observers\WebfontObserver::class);
 
         $this->app->register(EventServiceProvider::class);
     }
