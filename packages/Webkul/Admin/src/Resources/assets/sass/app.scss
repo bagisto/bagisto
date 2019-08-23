@@ -27,7 +27,7 @@ body {
 
 ::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
 .navbar-top {
@@ -211,8 +211,12 @@ body {
 
         .page-header {
             display: inline-block;
-            margin-bottom: 20px;
             width: 100%;
+            padding: 15px 0px 15px 0px;
+            position: sticky;
+            top: 60px;
+            background-color: #ffffff;
+            z-index: 3;
 
             .page-title {
                 float: left;
@@ -274,7 +278,7 @@ body {
 
     .control {
         background: #fff;
-        border: 2px solid #C7C7C7;
+        border: 2px solid #c7c7c7;
         @include border-radius(3px);
         width: 150px;
         height: 36px;
@@ -285,7 +289,7 @@ body {
         font-size: 15px;
 
         &:focus {
-            border-color: #0041FF;
+            border-color: #0041ff;
         }
     }
 
@@ -315,7 +319,7 @@ body {
 
         .locale {
             float: right;
-            color: #8E8E8E;
+            color: #8e8e8e;
         }
     }
 
@@ -325,10 +329,8 @@ body {
     }
 }
 
-
 // admin dashboard css
 .dashboard {
-
     .page-header {
         margin-bottom: 0 !important;
         padding-bottom: 15px;
@@ -341,16 +343,16 @@ body {
 
     .card {
         height: 445px;
-        background: #FFFFFF;
-        border: 1px solid #E7E7E7;
-        box-shadow: 0 5px 10px 2px rgba(0,0,0,0.08);
+        background: #ffffff;
+        border: 1px solid #e7e7e7;
+        box-shadow: 0 5px 10px 2px rgba(0, 0, 0, 0.08);
         border-radius: 2px;
         padding: 20px 0px 0px 20px;
         overflow: auto;
 
         .card-title {
             font-size: 14px;
-            color: #A2A2A2;
+            color: #a2a2a2;
             letter-spacing: -0.26px;
             text-transform: uppercase;
         }
@@ -378,7 +380,7 @@ body {
                         margin-right: 15px;
 
                         &.product {
-                            background: #F2F2F2;
+                            background: #f2f2f2;
                         }
 
                         img {
@@ -390,11 +392,11 @@ body {
                         margin-top: 10px;
 
                         .name {
-                            color: #0041FF;
+                            color: #0041ff;
                         }
 
                         .info {
-                            color: #3A3A3A;
+                            color: #3a3a3a;
                             margin-top: 5px;
                         }
                     }
@@ -417,7 +419,7 @@ body {
 
                 p {
                     margin: 0;
-                    color: #A2A2A2;
+                    color: #a2a2a2;
                 }
             }
         }
@@ -432,28 +434,27 @@ body {
 
         .dashboard-card {
             height: 100px;
-            background: #FFFFFF;
-            border: 1px solid #E7E7E7;
-            box-shadow: 0 5px 10px 2px rgba(0,0,0,0.08);
+            background: #ffffff;
+            border: 1px solid #e7e7e7;
+            box-shadow: 0 5px 10px 2px rgba(0, 0, 0, 0.08);
             border-radius: 5px;
             position: relative;
             padding: 15px;
 
-
             .title {
                 font-size: 14px;
-                color: #A2A2A2;
+                color: #a2a2a2;
                 text-transform: uppercase;
             }
 
             .data {
                 padding-top: 13px;
                 font-size: 32px;
-                color: #0041FF;
+                color: #0041ff;
 
                 .progress {
                     font-size: 14px;
-                    color: #8E8E8E;
+                    color: #8e8e8e;
                     float: right;
                     margin-top: -2px;
 
@@ -503,7 +504,7 @@ body {
 
         .secton-title {
             font-size: 18px;
-            color: #8E8E8E;
+            color: #8e8e8e;
             padding: 15px 0;
             border-bottom: 1px solid $border-color;
         }
@@ -553,7 +554,6 @@ body {
         float: right;
 
         tr {
-
             td {
                 padding: 5px 8px;
             }
@@ -584,7 +584,8 @@ body {
 .export-import {
     cursor: pointer;
 
-    .export-icon, .import-icon {
+    .export-icon,
+    .import-icon {
         position: relative;
         top: 10px;
     }
@@ -619,7 +620,8 @@ body {
     padding-top: 15px;
     border-top: 1px solid rgba(162, 162, 162, 0.2);
 
-    .close-icon, .open-icon {
+    .close-icon,
+    .open-icon {
         position: absolute;
         cursor: pointer;
         left: 45%;
@@ -762,7 +764,7 @@ body {
     // ui
     .grid-container {
         .filter-row-one .search-filter {
-            border: 2px solid #C7C7C7;
+            border: 2px solid #c7c7c7;
             border-radius: 2px;
 
             .control {
@@ -774,13 +776,14 @@ body {
                 border: none;
                 padding-top: 2px;
                 padding-right: 5px;
-                border-right: 2px solid #C7C7C7;
+                border-right: 2px solid #c7c7c7;
                 border-radius: 0px;
             }
         }
 
         .filter-row-two .filter-tag {
-            .wrapper, .icon.cross-icon {
+            .wrapper,
+            .icon.cross-icon {
                 margin-right: 10px;
                 margin-left: 0px;
             }
@@ -792,8 +795,15 @@ body {
         }
     }
 
-    .grid-container .filter-wrapper .filter-row-one .dropdown-filters .more-filters .dropdown-toggle .dropdown-header span  {
-       padding-right: 5px;
+    .grid-container
+        .filter-wrapper
+        .filter-row-one
+        .dropdown-filters
+        .more-filters
+        .dropdown-toggle
+        .dropdown-header
+        span {
+        padding-right: 5px;
     }
 
     .grid-container .table tbody td.action a:first-child {
@@ -830,13 +840,14 @@ body {
     .tree-container .tree-item {
         padding-right: 30px;
 
-        .expand-icon ,.folder-icon {
+        .expand-icon,
+        .folder-icon {
             margin-left: 10px;
             margin-right: 0px;
         }
     }
 
-    .tree-container >.tree-item {
+    .tree-container > .tree-item {
         padding-right: 0px;
     }
 
@@ -855,7 +866,7 @@ body {
 
     .control-group label.required::before {
         content: "*";
-        color: #FC6868;
+        color: #fc6868;
         font-weight: 700;
     }
 
