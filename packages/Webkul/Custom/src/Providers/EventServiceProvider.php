@@ -18,8 +18,6 @@ class EventServiceProvider extends ServiceProvider
             $viewRenderEventManager->addTemplate('custom::customslider');
         });
 
-        // Event::listen('bagisto.admin.settings.slider.create.after', 'Webkul\Custom\Listeners\CustomSliderEventsHandler@createAfter');
-
         Event::listen('bagisto.admin.settings.slider.edit.after', function($viewRenderEventManager) {
             $viewRenderEventManager->addTemplate('custom::customslider');
         });

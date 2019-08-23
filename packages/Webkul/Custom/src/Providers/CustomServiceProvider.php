@@ -17,6 +17,8 @@ class CustomServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
         $this->app->concord->registerModel(\Webkul\Core\Contracts\Slider::class, \Webkul\Custom\Models\Slider::class);
+
+        \Webkul\Custom\Models\Slider::observe(\Webkul\Custom\Observers\SliderObserver::class);
     }
 
     public function register()
