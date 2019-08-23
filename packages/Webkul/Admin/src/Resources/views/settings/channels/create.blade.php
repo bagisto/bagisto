@@ -28,6 +28,8 @@
                 <div class="form-container">
                     @csrf()
 
+                    {!! view_render_event('bagisto.admin.settings.channel.create.before') !!}
+
                     <accordian :title="'{{ __('admin::app.settings.channels.general') }}'" :active="true">
                         <div slot="body">
 
@@ -197,6 +199,8 @@
                             </div>
                         </div>
                     </accordian>
+
+                    {!! view_render_event('bagisto.admin.settings.channel.create.after') !!}
                 </div>
             </div>
         </form>

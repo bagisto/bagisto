@@ -28,6 +28,8 @@
                 <div class="form-container">
                     @csrf()
 
+                    {!! view_render_event('bagisto.admin.settings.locale.create.before') !!}
+
                     <accordian :title="'{{ __('admin::app.settings.locales.general') }}'" :active="true">
                         <div slot="body">
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
@@ -50,6 +52,8 @@
                                 </select>
                                 <span class="control-error" v-if="errors.has('direction')">@{{ errors.first('direction') }}</span>
                             </div>
+
+                            {!! view_render_event('bagisto.admin.settings.locale.create.after') !!}
                         </div>
                     </accordian>
 

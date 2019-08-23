@@ -71,8 +71,7 @@ class Price extends AbstractProduct
         }
 
         $qb = ProductFlat::join('products', 'product_flat.product_id', '=', 'products.id')
-                ->join('catalog_rule_products', 'catalog_rule_products.product_id', '=', 'products.id')
-                ->where('products.parent_id', $productId);
+            ->where('products.parent_id', $productId);
 
         $result = $qb
             ->distinct()

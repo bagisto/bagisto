@@ -26,6 +26,9 @@
             <div class="page-content">
                 <div class="form-container">
                     @csrf()
+
+                    {!! view_render_event('bagisto.admin.settings.slider.create.before') !!}
+
                     <div class="control-group" :class="[errors.has('title') ? 'has-error' : '']">
                         <label for="title" class="required">{{ __('admin::app.settings.sliders.title') }}</label>
                         <input type="text" class="control" name="title" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.settings.sliders.title') }}&quot;">
@@ -64,6 +67,8 @@
 
                         <span class="control-error" v-if="errors.has('content')">@{{ errors.first('content') }}</span>
                     </div>
+
+                    {!! view_render_event('bagisto.admin.settings.slider.create.after') !!}
                 </div>
             </div>
         </form>
