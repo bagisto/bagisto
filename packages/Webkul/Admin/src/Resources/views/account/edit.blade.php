@@ -14,7 +14,7 @@
                     </h1>
                 </div>
 
-                <div class="page-action fixed-action">
+                <div class="page-action">
                     <button type="submi t" class="btn btn-lg btn-primary">
                         {{ __('admin::app.account.save-btn-title') }}
                     </button>
