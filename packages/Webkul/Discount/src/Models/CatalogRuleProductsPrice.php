@@ -7,7 +7,7 @@ use Webkul\Discount\Contracts\CatalogRuleProductsPrice as CatalogRuleProductsPri
 
 class CatalogRuleProductsPrice extends Model implements CatalogRuleProductsPriceContract
 {
-    protected $table = 'catalog_rules_products_price';
+    protected $table = 'catalog_rule_products_price';
 
     protected $fillable = ['catalog_rule_id', 'starts_from', 'ends_till', 'customer_group_id', 'channel_id', 'product_id', 'rule_price'];
 }

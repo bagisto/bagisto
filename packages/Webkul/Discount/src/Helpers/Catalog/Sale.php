@@ -3,8 +3,14 @@
 namespace Webkul\Discount\Helpers\Catalog;
 
 use Webkul\Discount\Repositories\CatalogRepository as CatalogRule;
-use Webkul\Discount\Helpers\Catalog\ConvertXToProductId;
+use Carbon\Carbon;
 
+/**
+ * Sale - Abstract class designed to initiate the application of Catalog Rules
+ *
+ * @author  Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @copyright 2019 Webkul Software Pvt Ltd (http://www.webkul.com)
+ */
 abstract class Sale
 {
     abstract function apply();
@@ -64,7 +70,7 @@ abstract class Sale
         if ($rule->conditions) {
             $conditions = $rule->conditions;
 
-            $productIDs = $this->convertX->convertX($rule->conditions);
+            $productIDs = $this->convertX->convertX($conditions);
         } else {
             $productIDs = '*';
         }

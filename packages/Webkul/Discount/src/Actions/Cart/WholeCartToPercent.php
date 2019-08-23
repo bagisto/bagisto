@@ -23,13 +23,7 @@ class WholeCartToPercent extends Action
 
         $impact = collect();
 
-        if ($rule->discount_amount >= 100) {
-            $impact->discount = $cart->base_sub_total;
-        } else {
-            $impact->discount = ($rule->disc_amount / 100) * $cart->base_sub_total;
-        }
-
-        $impact->formatted_discount = core()->currency($impact->discount);
+        $totalDiscount = 0;
 
         if ($rule->uses_attribute_conditions) {
             $productIDs = $rule->product_ids;
@@ -47,41 +41,67 @@ class WholeCartToPercent extends Action
             }
 
             if ($matchCount > 0) {
-                $discountPerItem = $impact->discount / $matchCount;
-            }
+                foreach ($productIDs as $productID) {
+                    foreach ($items as $item) {
+                        $itemPrice = $item->base_price;
 
-            foreach ($productIDs as $productID) {
-                foreach ($items as $item) {
-                    if ($item->product_id == $productID) {
-                        $report = array();
+                        $discount = round(($itemPrice * $rule->disc_amount) / 100, 4);
 
-                        $report['item_id'] = $item->id;
-                        $report['product_id'] = $item->product_id;
-                        $report['discount'] = round($discountPerItem, 4);
-                        $report['formatted_discount'] = core()->currency(round($discountPerItem, 4));
+                        $totalDiscount = $totalDiscount + $discount;
 
-                        $impact->push($report);
+                        if ($item->product_id == $productID) {
+                            $report = array();
 
-                        unset($report);
+                            $report['item_id'] = $item->id;
+                            $report['product_id'] = $item->child ? $item->child->product_id : $item->product_id;
+
+                            if ($discount <= $itemPrice) {
+                                $report['discount'] = $discount;
+                            } else {
+                                $report['discount'] = $itemPrice;
+                            }
+
+                            $report['formatted_discount'] = core()->currency(round($discount, 4));
+
+                            $impact->push($report);
+
+                            unset($report);
+                        }
                     }
                 }
             }
         } else {
-            $discountPerItem = $impact->discount / $cart->items_qty;
-
             foreach ($items as $item) {
-                $report = array();
+                $itemPrice = $item->base_price;
 
-                $report['item_id'] = $item->id;
-                $report['product_id'] = $item->product_id;
-                $report['discount'] = round($discountPerItem, 4);
-                $report['formatted_discount'] = core()->currency(round($discountPerItem, 4));
+                $discount = round(($itemPrice * $rule->disc_amount) / 100, 4);
 
-                $impact->push($report);
+                $totalDiscount = $totalDiscount + $discount;
 
-                unset($report);
+                if ($item->product_id == $productID) {
+                    $report = array();
+
+                    $report['item_id'] = $item->id;
+                    $report['product_id'] = $item->child ? $item->child->product_id : $item->product_id;
+
+                    if ($discount <= $itemPrice) {
+                        $report['discount'] = $discount;
+                    } else {
+                        $report['discount'] = $itemPrice;
+                    }
+
+                    $report['formatted_discount'] = core()->currency(round($discount, 4));
+
+                    $impact->push($report);
+
+                    unset($report);
+                }
             }
         }
+
+        $impact->discount = $totalDiscount;
+
+        $impact->fomatted_discount = core()->currency($impact->discount);
 
         return $impact;
     }

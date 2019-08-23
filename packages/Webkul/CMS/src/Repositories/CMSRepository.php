@@ -46,19 +46,12 @@ class CMSRepository extends Repository
 
     public function create(array $data)
     {
-        $channel = $this->channel->findOneByField('code', $data['channel']);
-
-        $locale = $this->locale->findOneByField('code', $data['locale']);
-
-        $data['channel_id'] = $channel->id;
-        $data['locale_id'] = $locale->id;
-
         $result = $this->model->create($data);
 
         if ($result) {
-            return true;
+            return $result;
         } else {
-            return false;
+            return $result;
         }
     }
 }

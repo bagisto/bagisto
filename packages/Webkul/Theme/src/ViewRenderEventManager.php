@@ -77,13 +77,16 @@ class ViewRenderEventManager
     public function render()
     {
         $string = "";
-
+        
         foreach ($this->templates as $template) {
             if (view()->exists($template)) {
-                $string .= view($template, $this->params)->render();
+                $string .= view($template , $this->params)->render();
+            }
+            elseif (is_string($template)) {
+                $string .= $template;
             }
         }
-
+        
         return $string;
     }
 }

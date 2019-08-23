@@ -19,13 +19,17 @@ class CMSPageDataGrid extends DataGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('cms_pages')->select('id', 'url_key', 'page_title');
+        $queryBuilder = DB::table('cms_pages')->select('id', 'url_key', 'page_title', 'channel_id', 'locale_id');
 
         $this->setQueryBuilder($queryBuilder);
     }
 
     public function addColumns()
     {
+        $channels = app('Webkul\Core\Repositories\ChannelRepository');
+
+        $locales = app('Webkul\Core\Repositories\LocaleRepository');
+
         $this->addColumn([
             'index' => 'id',
             'label' => trans('admin::app.datagrid.id'),
@@ -52,6 +56,34 @@ class CMSPageDataGrid extends DataGrid
             'sortable' => true,
             'filterable' => true
         ]);
+
+        $this->addColumn([
+            'index' => 'locale_id',
+            'label' => trans('admin::app.cms.pages.locale'),
+            'type' => 'number',
+            'searchable' => false,
+            'sortable' => true,
+            'filterable' => true,
+            'wrapper' => function($row) use($locales) {
+                $localeCode = $locales->find($row->locale_id)->code;
+
+                return $row->locale_id.' ('. $localeCode. ')';
+            }
+        ]);
+
+        $this->addColumn([
+            'index' => 'channel_id',
+            'label' => trans('admin::app.cms.pages.channel'),
+            'type' => 'number',
+            'searchable' => false,
+            'sortable' => true,
+            'filterable' => true,
+            'wrapper' => function($row) use($channels) {
+                $channelCode = $channels->find($row->channel_id)->name;
+
+                return $row->channel_id.' ('. $channelCode. ')';
+            }
+        ]);
     }
 
     public function prepareActions() {
@@ -67,6 +99,16 @@ class CMSPageDataGrid extends DataGrid
             'method' => 'POST', // use GET request only for redirect purposes
             'route' => 'admin.cms.delete',
             'icon' => 'icon trash-icon'
+        ]);
+    }
+
+    public function prepareMassActions()
+    {
+        $this->addMassAction([
+            'type' => 'delete',
+            'label' => 'Delete',
+            'action' => route('admin.cms.mass-delete'),
+            'method' => 'DELETE'
         ]);
     }
 }

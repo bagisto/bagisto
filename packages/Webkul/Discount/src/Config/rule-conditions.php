@@ -109,10 +109,10 @@ return [
 
     'catalog' => [
         'actions' => [
-            'percent_of_product' => 'Percentage of product',
+            'percent_of_original' => 'Percentage of product',
             'fixed_amount' => 'Apply as fixed amount',
-            'adjust_to_percent' => 'Adjust price to percentage',
-            'adjust_to_fixed_amount' => 'Adjust price to given amount'
+            'final_price_to_percent' => 'Adjust price to percentage',
+            'to_discount_value' => 'Adjust price to given amount'
         ],
 
         'validation' => [

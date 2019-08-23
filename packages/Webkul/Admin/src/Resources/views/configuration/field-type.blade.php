@@ -128,6 +128,10 @@
                                     $value = null;
                                 } else {
                                     $value = $option['value'];
+
+                                    if (! $value) {
+                                        $value = 0;
+                                    }
                                 }
                             ?>
 
@@ -162,6 +166,10 @@
                                     $value = null;
                                 } else {
                                     $value = $option['value'];
+
+                                    if (! $value) {
+                                        $value = 0;
+                                    }
                                 }
                             ?>
 

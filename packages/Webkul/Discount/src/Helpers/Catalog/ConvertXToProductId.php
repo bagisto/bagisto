@@ -9,6 +9,12 @@ use Webkul\Category\Repositories\CategoryRepository as Category;
 use Webkul\Product\Repositories\ProductRepository as Product;
 use Webkul\Product\Models\ProductAttributeValue as ProductAttributeValue;
 
+/**
+ * ConvertXToProductID
+ *
+ * @author  Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @copyright 2019 Webkul Software Pvt Ltd (http://www.webkul.com)
+ */
 class ConvertXToProductId
 {
     /**
@@ -73,9 +79,9 @@ class ConvertXToProductId
     {
         $attributeConditions = json_decode(json_decode($attribute_conditions));
 
-        $categoryValues = $attributeConditions->categories;
+        $categoryValues = $attributeConditions->categories ?? null;
 
-        $attributeValues = $attributeConditions->attributes;
+        $attributeValues = $attributeConditions->attributes ?? null;
 
         if (!isset($categoryValues) && !isset($attributeValues)) {
             return false;
@@ -88,6 +94,7 @@ class ConvertXToProductId
         }
 
         $attributeResult = collect();
+
         if (isset($attributeValues) && count($attributeValues)) {
             $attributeResult = $this->convertFromAttributes($attributeValues);
         }
@@ -193,6 +200,7 @@ class ConvertXToProductId
 
         foreach ($categories as $category) {
             $data = $this->getAll($category->id);
+
             if ($data->count()) {
                 $products->push($data);
 
@@ -249,7 +257,6 @@ class ConvertXToProductId
                 ->select('products.id')
                 ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
                 ->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id')
-                ->where('products.type', '!=', 'configurable')
                 ->whereNotNull('product_flat.url_key');
 
             if ($categoryId) {

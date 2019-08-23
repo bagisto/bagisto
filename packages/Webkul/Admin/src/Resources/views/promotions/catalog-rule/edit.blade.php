@@ -46,7 +46,7 @@
                                     </div>
 
                                     <div class="control-group" :class="[errors.has('description') ? 'has-error' : '']">
-                                        <label for="description">{{ __('admin::app.promotion.general-info.description') }}</label>
+                                        <label for="description" class="required">{{ __('admin::app.promotion.general-info.description') }}</label>
 
                                         <textarea class="control" name="description" v-model="description" v-validate="'required'" value="{{ old('description') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.description') }}&quot;"></textarea>
 
@@ -97,7 +97,7 @@
 
                                     <date :name="starts_from">
                                         <div class="control-group" :class="[errors.has('starts_from') ? 'has-error' : '']">
-                                            <label for="starts_from" class="required">{{ __('admin::app.promotion.general-info.starts-from') }}</label>
+                                            <label for="starts_from">{{ __('admin::app.promotion.general-info.starts-from') }}</label>
 
                                             <input type="text" class="control" v-model="starts_from" name="starts_from" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.starts-from') }}&quot;">
 
@@ -107,7 +107,7 @@
 
                                     <date :name="starts_from">
                                         <div class="control-group" :class="[errors.has('ends_till') ? 'has-error' : '']">
-                                            <label for="ends_till" class="required">{{ __('admin::app.promotion.general-info.ends-till') }}</label>
+                                            <label for="ends_till">{{ __('admin::app.promotion.general-info.ends-till') }}</label>
 
                                             <input type="text" class="control" v-model="ends_till" name="ends_till" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.ends-till') }}&quot;">
 
@@ -229,7 +229,7 @@
 
                         actions: @json($catalog_rule[3]).actions,
                         action_type: '{{ $catalog_rule[5]->action_code }}',
-                        disc_amount: '{{ $catalog_rule[5]->disc_amount }}',
+                        disc_amount: null,
                         end_other_rules: '{{ $catalog_rule[5]->end_other_rules }}',
 
                         all_conditions: [],
@@ -256,7 +256,7 @@
                 },
 
                 mounted () {
-                    console.log(this.conditions)
+                    catalog_rule = @json($catalog_rule[5]);
                     channels = @json($catalog_rule[5]->channels);
 
                     this.channels = [];
@@ -295,9 +295,9 @@
                         }
                     }
 
-                    this.action_type = '{{ $catalog_rule[5]->action_code }}',
-                    this.disc_amount = '{{ $catalog_rule[5]->discount_amount }}',
-                    this.end_other_rules = '{{ $catalog_rule[5]->end_other_rules }}'
+                    this.action_type = '{{ $catalog_rule[5]->action_code }}';
+                    this.disc_amount = catalog_rule.discount_amount;
+                    this.end_other_rules = '{{ $catalog_rule[5]->end_other_rules }}';
                 },
 
                 methods: {
@@ -342,8 +342,6 @@
                                 }
 
                                 this.attribute_values[index].type = this.attribute_input[i].type;
-
-                                debugger
                             }
                         }
                     },
@@ -367,12 +365,12 @@
                     },
 
                     onSubmit: function (e) {
-                        if (this.attribute_values.length > 0 || this.category_values.length > 0) {
+                        if (this.attribute_values != null || this.category_values != null) {
                             for (i in this.attribute_values) {
                                 delete this.attribute_values[i].options;
                             }
 
-                            if (this.category_values.length > 0) {
+                            if (this.category_values != null) {
                                 this.all_attributes.categories = this.category_values;
                             }
 
