@@ -8,9 +8,9 @@ use Webkul\Core\Repositories\ChannelRepository as Channel;
 use Storage;
 
 /**
- * Slider Reposotory
+ * Slider Repository
  *
- * @author    Prashant Singh <prashant.singh852@webkul.com>
+ * @author  Prashant Singh <prashant.singh852@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class SliderRepository extends Repository
@@ -88,7 +88,7 @@ class SliderRepository extends Repository
         $image = false;
 
         if (isset($data['image'])) {
-            $image = $first = array_first($data['image'], function ($value, $key) {
+            $image = array_first($data['image'], function ($value) {
                 if ($value)
                     return $value;
                 else
@@ -105,7 +105,7 @@ class SliderRepository extends Repository
         if ($uploaded) {
             $sliderItem = $this->find($id);
 
-            $deleted = Storage::delete($sliderItem->path);
+            Storage::delete($sliderItem->path);
 
             $data['path'] = $uploaded;
         } else {
