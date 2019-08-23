@@ -10,4 +10,6 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('admin/webfont/activate/{id}', 'Webkul\Webfont\Http\Controllers\WebfontController@activate')->name('admin.cms.webfont.activate');
 
     Route::post('admin/webfont/remove/{id}', 'Webkul\Webfont\Http\Controllers\WebfontController@remove')->name('admin.cms.webfont.remove');
+
+    Route::get('admin/home/seo', 'Webkul\Webfont\Http\Controllers\WebfontController@homeSeo')->name('admin.cms.homeseo');
 });

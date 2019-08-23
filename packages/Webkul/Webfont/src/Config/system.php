@@ -59,6 +59,18 @@ return [
                         'value' => false
                     ]
                 ]
+            ], [
+                'name' => 'primary_color',
+                'title' => 'webfont::app.webfont-primary',
+                'type' => 'text',
+                'channel_based' => false,
+                'locale_based' => false
+            ], [
+                'name' => 'secondary_color',
+                'title' => 'webfont::app.webfont-secondary',
+                'type' => 'text',
+                'channel_based' => false,
+                'locale_based' => false
             ]
         ]
     ]

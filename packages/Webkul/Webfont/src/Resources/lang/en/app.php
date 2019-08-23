@@ -2,6 +2,9 @@
 
 return [
     'id' => 'ID',
+    'homeseo' => 'Home Page SEO',
+    'webfont-primary' => 'Primary accent color',
+    'webfont-secondary' => 'Secondary accent color',
     'font' => 'Font',
     'title' => 'Webfonts',
     'save-btn-title' => 'Save Web Font',

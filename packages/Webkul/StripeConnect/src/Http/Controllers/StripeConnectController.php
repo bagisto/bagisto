@@ -258,10 +258,8 @@ class StripeConnectController extends Controller
 
             if (core()->getConfigData('stripe.connect.details.stripefees') == "customer") {
 
-                $applicationFee1 = $applicationFee + $cart->base_grand_total * (2.9 / 100);
-
                 $result = StripeCharge::create([
-                    "amount" => round(Cart::getCart()->base_grand_total + $applicationFee1, 2) * 100,
+                    "amount" => round(Cart::getCart()->base_grand_total + $applicationFee, 2) * 100,
                     "currency" => Cart::getCart()->base_currency_code,
                     "source" => $stripeToken,
                     "description" => "Purchased ".Cart::getCart()->items_count." items",

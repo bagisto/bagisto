@@ -2,7 +2,6 @@
 
 namespace Webkul\Webfont\Http\Controllers;
 
-use Illuminate\Support\Facades\Storage;
 use Webkul\Webfont\Repositories\WebfontRepository as Webfont;
 use GuzzleHttp;
 
@@ -118,5 +117,10 @@ class WebfontController extends Controller
         $client = new GuzzleHttp\Client();
 
         return view('webfont::add-font');
+    }
+
+    public function homeSeo()
+    {
+        return redirect()->route('admin.cms.index');
     }
 }

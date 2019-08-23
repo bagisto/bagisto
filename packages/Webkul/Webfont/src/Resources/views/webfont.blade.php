@@ -3,6 +3,10 @@
 @php
     $activatedFont = app('Webkul\Webfont\Repositories\WebfontRepository');
 
+    $primaryColor = core()->getConfigData('general.design.webfont.primary_color') ?? '#02bb89';
+
+    $secondaryColor = core()->getConfigData('general.design.webfont.secondary_color') ?? '#436be0';
+
     $font = $activatedFont->findOneWhere([
         'activated' => 1
     ]);
@@ -48,4 +52,52 @@
     body {
         font-family: "{{ $font }}", {{ $family }};
     }
+
+    .btn.btn-primary {
+        background: {{ $primaryColor }};
+        color: #fff;
+    }
+
+    .btn.btn-black {
+        background: {{ $secondaryColor }};
+        color: #fff;
+    }
+
+    .btn.btn-white {
+        background: #c7c7c7;
+        color: #fff;
+    }
+
+    .btn:disabled, .btn[disabled="disabled"], .btn[disabled="disabled"]:hover, .btn[disabled="disabled"]:active {
+        cursor: not-allowed;
+        background: {{ $secondaryColor }};
+        -webkit-box-shadow: none;
+                box-shadow: none;
+        opacity: 1;
+    }
+
+    .tabs ul li.active a {
+        border-bottom: 3px solid {{ $secondaryColor }};
+    }
+
+    .dropdown-list .dropdown-container ul li a:hover {
+        color: {{ $secondaryColor }};
+    }
+
+    a:hover {
+        color: {{ $secondaryColor }};
+    }
+
+    a:link, a:hover, a:visited, a:focus, a:active {
+        color: {{ $secondaryColor }};
+    }
+
+    .control-group .control:focus {
+        border-color: {{ $primaryColor }};
+    }
+
+    .account-content .menu-block .menubar li.active a {
+        color: {{ $primaryColor }};
+    }
+}
 </style>

@@ -249,6 +249,8 @@ return [
         Webkul\CustomerDocument\Providers\CustomerDocumentServiceProvider::class,
         Webkul\BulkAddToCart\Providers\BulkAddToCartServiceProvider::class,
         Webkul\AdminAuthCheck\Providers\AdminAuthCheckServiceProvider::class,
+        Webkul\Webfont\Providers\WebfontServiceProvider::class,
+        Webkul\GTM\Providers\GTMServiceProvider::class,
         Webkul\StripeConnect\Providers\StripeConnectServiceProvider::class,
         Webkul\ShowPriceAfterLogin\Providers\ShowPriceAfterLoginServiceProvider::class,
         Webkul\CustomerCreditMax\Providers\CustomerCreditMaxServiceProvider::class,
