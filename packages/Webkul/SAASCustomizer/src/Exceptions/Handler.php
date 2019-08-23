@@ -29,7 +29,6 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         $path = 'saas';
-        dd($exception->getMessage());
 
         if ($exception->getMessage() == 'domain_not_found') {
             return $this->response($path, 400, trans('saas::app.exceptions.domain-not-found'), 'domain_not_found');

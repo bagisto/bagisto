@@ -255,8 +255,9 @@ return [
         Webkul\ShowPriceAfterLogin\Providers\ShowPriceAfterLoginServiceProvider::class,
         Webkul\CustomerCreditMax\Providers\CustomerCreditMaxServiceProvider::class,
         Webkul\PreOrder\Providers\PreOrderServiceProvider::class,
-        Webkul\SAASCustomizer\Providers\SAASCustomizerServiceProvider::class,
-        Webkul\CustomerGroupCatalog\Providers\CustomerGroupCatalogServiceProvider::class
+        Webkul\CustomerGroupCatalog\Providers\CustomerGroupCatalogServiceProvider::class,
+        Webkul\Custom\Providers\CustomServiceProvider::class,
+        Webkul\SAASCustomizer\Providers\SAASCustomizerServiceProvider::class
     ],
 
     /*
