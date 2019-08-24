@@ -23,7 +23,6 @@ class CustomerGroupCatalogServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__ . '/../Resources/views/admin/customers/groups' => resource_path('views/vendor/admin/customers/groups'),
-            __DIR__ . '/../Resources/views/shop/products' => resource_path('views/vendor/shop/products'),
             __DIR__ . '/../Resources/views/shop/layouts' => resource_path('views/vendor/shop/layouts'),
         ]);
     }

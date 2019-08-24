@@ -18,7 +18,13 @@ class CustomServiceProvider extends ServiceProvider
 
         $this->app->concord->registerModel(\Webkul\Core\Contracts\Slider::class, \Webkul\Custom\Models\Slider::class);
 
+        \Webkul\SAASCustomizer\Models\Customer\Customer::observe(\Webkul\Custom\Observers\CustomerObserver::class);
+
         \Webkul\Custom\Models\Slider::observe(\Webkul\Custom\Observers\SliderObserver::class);
+
+        $this->publishes([
+            __DIR__ . '/../Resources/views/navmenu.blade.php' => resource_path('views/vendor/shop/layouts/header/nav-menu/navmenu.blade.php'),
+        ]);
     }
 
     public function register()
