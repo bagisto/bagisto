@@ -17,7 +17,7 @@
                     </h1>
                 </div>
 
-                <div class="page-action fixed-action">
+                <div class="page-action">
                     <button type="submit" class="btn btn-lg btn-primary">
                         {{ __('admin::app.settings.channels.save-btn-title') }}
                     </button>
@@ -27,6 +27,8 @@
             <div class="page-content">
                 <div class="form-container">
                     @csrf()
+
+                    {!! view_render_event('bagisto.admin.settings.channel.create.before') !!}
 
                     <accordian :title="'{{ __('admin::app.settings.channels.general') }}'" :active="true">
                         <div slot="body">
@@ -197,6 +199,8 @@
                             </div>
                         </div>
                     </accordian>
+
+                    {!! view_render_event('bagisto.admin.settings.channel.create.after') !!}
                 </div>
             </div>
         </form>

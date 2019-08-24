@@ -99,5 +99,17 @@
     .account-content .menu-block .menubar li.active a {
         color: {{ $primaryColor }};
     }
+
+    .dashboard .dashboard-stats .dashboard-card .title {
+        color: {{ $primaryColor }}
+    }
+
+    .dashboard .dashboard-stats .dashboard-card .data {
+        color: {{ $secondaryColor }}
+    }
+
+    .dashboard .card .card-info ul li .description .name {
+        color: {{ $primaryColor }}
+    }
 }
 </style>

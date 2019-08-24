@@ -17,7 +17,7 @@
                     </h1>
                 </div>
 
-                <div class="page-action fixed-action">
+                <div class="page-action">
                     <button type="submit" class="btn btn-lg btn-primary">
                         {{ __('admin::app.settings.locales.save-btn-title') }}
                     </button>
@@ -27,6 +27,8 @@
             <div class="page-content">
                 <div class="form-container">
                     @csrf()
+
+                    {!! view_render_event('bagisto.admin.settings.locale.create.before') !!}
 
                     <accordian :title="'{{ __('admin::app.settings.locales.general') }}'" :active="true">
                         <div slot="body">
@@ -50,6 +52,8 @@
                                 </select>
                                 <span class="control-error" v-if="errors.has('direction')">@{{ errors.first('direction') }}</span>
                             </div>
+
+                            {!! view_render_event('bagisto.admin.settings.locale.create.after') !!}
                         </div>
                     </accordian>
 

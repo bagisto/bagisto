@@ -35,7 +35,7 @@ class WebfontController extends Controller
         $client = new GuzzleHttp\Client();
 
         if (core()->getConfigData('general.design.webfont.webfont')) {
-            $res = $client->request('GET', 'https://www.googleapis.com/webfonts/v1/webfonts?key='.core()->getConfigData('general.design.webfont.webfont'));
+            $res = $client->request('GET', 'https://www.googleapis.com/webfonts/v1/webfonts?key='.env('WEBFONT_API_ID'));
 
             if ($res->getStatusCode() == 200) {
                 $result =  (string) $res->getBody()->getContents();

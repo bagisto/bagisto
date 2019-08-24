@@ -17,7 +17,7 @@
                     </h1>
                 </div>
 
-                <div class="page-action fixed-action">
+                <div class="page-action">
                     <button type="submit" class="btn btn-lg btn-primary">
                         {{ __('admin::app.settings.exchange_rates.save-btn-title') }}
                     </button>
@@ -47,6 +47,8 @@
 
                             <tbody>
                                 <tr>
+                                    {!! view_render_event('bagisto.admin.settings.exchangerate.edit.before') !!}
+
                                     <td>
                                         {{ core()->getBaseCurrencyCode() }}
                                     </td>
@@ -70,6 +72,8 @@
                                             <span class="control-error" v-if="errors.has('rate')">@{{ errors.first('rate') }}</span>
                                         </div>
                                     </td>
+
+                                    {!! view_render_event('bagisto.admin.settings.exchangerate.edit.after') !!}
                                 <tr>
                             </tbody>
                         </table>
