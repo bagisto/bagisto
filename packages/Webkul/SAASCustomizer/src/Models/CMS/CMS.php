@@ -8,6 +8,8 @@ use Company;
 
 class CMS extends BaseModel
 {
+    protected $fillable = ['url_key', 'html_content', 'page_title', 'meta_title', 'meta_description', 'meta_keywords', 'content', 'channel_id', 'locale_id', 'company_id'];
+
     /**
      * Create a new Eloquent query builder for the model.
      *
@@ -21,7 +23,7 @@ class CMS extends BaseModel
         if (auth()->guard('super-admin')->check() || ! isset($company->id)) {
             return new \Illuminate\Database\Eloquent\Builder($query);
         } else {
-            return new \Illuminate\Database\Eloquent\Builder($query->where('cart_rules' . '.company_id', $company->id));
+            return new \Illuminate\Database\Eloquent\Builder($query->where('cms_pages' . '.company_id', $company->id));
         }
     }
 }

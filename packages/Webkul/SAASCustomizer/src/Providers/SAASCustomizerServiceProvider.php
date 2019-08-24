@@ -237,6 +237,8 @@ class SAASCustomizerServiceProvider extends ServiceProvider
         $this->app->concord->registerModel(\Webkul\Discount\Contracts\CatalogRule::class, \Webkul\SAASCustomizer\Models\Discount\CatalogRule::class);
         $this->app->concord->registerModel(\Webkul\Discount\Contracts\CatalogRuleProducts::class, \Webkul\SAASCustomizer\Models\Discount\CatalogRuleProducts::class);
         $this->app->concord->registerModel(\Webkul\Discount\Contracts\CatalogRuleProductsPrice::class, \Webkul\SAASCustomizer\Models\Discount\CatalogRuleProductsPrice::class);
+
+        $this->app->concord->registerModel(\Webkul\CMS\Contracts\CMS::class, \Webkul\SAASCustomizer\Models\CMS\CMS::class);
     }
 
     /**

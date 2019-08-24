@@ -13,10 +13,10 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
 use Webkul\Core\Repositories\CurrencyRepository as Currency;
 use Webkul\Core\Repositories\ChannelRepository as Channel;
 use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
-use Webkul\Attribute\Repositories\AttributeOptionRepository as AttributeOption;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
 use Webkul\Attribute\Repositories\AttributeGroupRepository as AttributeGroup;
 use Webkul\Customer\Repositories\CustomerGroupRepository as CustomerGroup;
+use Webkul\CMS\Repositories\CMSRepository as CMS;
 use Log;
 
 /**
@@ -25,54 +25,59 @@ use Log;
 class DataPurger
 {
     /**
-     * Company Repository Object
+     * Company Repository instance
      */
     protected $company;
 
     /**
-     * CategoryRepository Object
+     * CategoryRepository instance
      */
     protected $category;
 
     /**
-     * InventoryRepository Object
+     * InventoryRepository instance
      */
     protected $inventory;
 
     /**
-     * LocaleRepository Object
+     * LocaleRepository instance
      */
     protected $locale;
 
     /**
-     * CurrencyRepository Object
+     * CurrencyRepository instance
      */
     protected $currency;
 
     /**
-     * ChannelRepository Object
+     * ChannelRepository instance
      */
     protected $channel;
 
     /**
-     * AttributeRepository Object
+     * AttributeRepository instance
      */
     protected $attribute;
 
     /**
-     * AttributeFamilyRepository Object
+     * AttributeFamilyRepository instance
      */
     protected $attributeFamily;
 
     /**
-     * AttributeGroupRepository Object
+     * AttributeGroupRepository instance
      */
     protected $attributeGroup;
 
     /**
-     * CustomerGroupRepository Object
+     * CustomerGroupRepository instance
      */
     protected $customerGroup;
+
+    /**
+     * CMSRepository instance
+     */
+    protected $cms;
 
     protected $seedCompleted = true;
 
@@ -85,7 +90,8 @@ class DataPurger
         Attribute $attribute,
         AttributeFamily $attributeFamily,
         AttributeGroup $attributeGroup,
-        CustomerGroup $customerGroup
+        CustomerGroup $customerGroup,
+        CMS $cms
     )
     {
         // $this->company = Company::getCurrent();
@@ -98,6 +104,7 @@ class DataPurger
         $this->attributeFamily = $attributeFamily;
         $this->attributeGroup = $attributeGroup;
         $this->customerGroup = $customerGroup;
+        $this->cms = $cms;
     }
 
     /**
@@ -259,7 +266,7 @@ class DataPurger
 
             'home_page_content' => '<p>@include("shop::home.slider") @include("shop::home.featured-products") @include("shop::home.new-products")</p><div class="banner-container"><div class="left-banner"><img src="https://s3-ap-southeast-1.amazonaws.com/cdn.uvdesk.com/website/1/201902045c581f9494b8a1.png" /></div><div class="right-banner"><img src="https://s3-ap-southeast-1.amazonaws.com/cdn.uvdesk.com/website/1/201902045c581fb045cf02.png" /> <img src="https://s3-ap-southeast-1.amazonaws.com/cdn.uvdesk.com/website/1/201902045c581fc352d803.png" /></div></div>',
 
-            'footer_content' => '<div class="list-container"><span class="list-heading">Quick Links</span><ul class="list-group"><li><a href="#">About Us</a></li><li><a href="#">Return Policy</a></li><li><a href="#">Refund Policy</a></li><li><a href="#">Terms and conditions</a></li><li><a href="#">Terms of Use</a></li><li><a href="#">Contact Us</a></li></ul></div><div class="list-container"><span class="list-heading">Connect With Us</span><ul class="list-group"><li><a href="#"><span class="icon icon-facebook"></span>Facebook </a></li><li><a href="#"><span class="icon icon-twitter"></span> Twitter </a></li><li><a href="#"><span class="icon icon-instagram"></span> Instagram </a></li><li><a href="#"> <span class="icon icon-google-plus"></span>Google+ </a></li><li><a href="#"> <span class="icon icon-linkedin"></span>LinkedIn </a></li></ul></div>',
+            'footer_content' => '<div class="list-container"><span class="list-heading">Quick Links</span><ul class="list-group"><li><a href="@php echo route("shop.cms.page", "about-us") @endphp">About Us</a></li><li><a href="@php echo route("shop.cms.page", "return-policy") @endphp">Return Policy</a></li><li><a href="@php echo route("shop.cms.page", "refund-policy") @endphp">Refund Policy</a></li><li><a href="@php echo route("shop.cms.page", "terms-conditions") @endphp">Terms and conditions</a></li><li><a href="@php echo route("shop.cms.page", "terms-of-use") @endphp">Terms of Use</a></li><li><a href="@php echo route("shop.cms.page", "contact-us") @endphp">Contact Us</a></li></ul></div><div class="list-container"><span class="list-heading">Connect With Us</span><ul class="list-group"><li><a href="#"><span class="icon icon-facebook"></span>Facebook </a></li><li><a href="#"><span class="icon icon-twitter"></span> Twitter </a></li><li><a href="#"><span class="icon icon-instagram"></span> Instagram </a></li><li><a href="#"> <span class="icon icon-google-plus"></span>Google+ </a></li><li><a href="#"> <span class="icon icon-linkedin"></span>LinkedIn </a></li></ul></div>',
 
             'company_id' => $this->company->id
         ];
@@ -536,6 +543,132 @@ class DataPurger
     }
 
     /**
+     * To prepare the cms pages data for the seller's shop
+     */
+    public function prepareCMSPagesData($channel, $locale)
+    {
+        $aboutus = [
+            'url_key' => 'about-us',
+            'html_content' => '<div class="static-container one-column">
+                               <div class="mb-5">About us page content</div>
+                               </div>',
+            'page_title' => 'About Us',
+            'meta_title' => 'about us',
+            'meta_description' => '',
+            'meta_keywords' => 'aboutus',
+            'content' => '{"html": "<div class=\"static-container one-column\">\r\n<div class=\"mb-5\">About us page content</div>\r\n</div>",
+                        "meta_title": "about us",
+                        "page_title": "About Us",
+                        "meta_keywords": "aboutus ", "meta_description": ""}',
+            'channel_id' => $channel->id,
+            'locale_id' => $locale->id,
+            'company_id' => $this->company->id
+        ];
+
+        $this->cms->create($aboutus);
+
+        $returnpolicy = [
+                'url_key' => 'return-policy',
+                'html_content' => '<div class="static-container one-column">
+                                <div class="mb-5">Return policy page content</div>
+                                </div>',
+                'page_title' => 'Return Policy',
+                'meta_title' => 'return policy',
+                'meta_description' => '',
+                'meta_keywords' => 'return, policy',
+                'content' => '{"html": "<div class=\"static-container one-column\">\r\n<div class=\"mb-5\">Return policy page content</div>\r\n</div>",
+                            "meta_title": "return policy",
+                            "page_title": "Return Policy",
+                            "meta_keywords": "return, policy ", "meta_description": ""}',
+                'channel_id' => $channel->id,
+                'locale_id' => $locale->id,
+                'company_id' => $this->company->id
+            ];
+
+        $this->cms->create($returnpolicy);
+
+        $refundpolicy = [
+                'url_key' => 'refund-policy',
+                'html_content' => '<div class="static-container one-column">
+                                <div class="mb-5">Refund policy page content</div>
+                                </div>',
+                'page_title' => 'Refund Policy',
+                'meta_title' => 'Refund policy',
+                'meta_description' => '',
+                'meta_keywords' => 'refund, policy',
+                'content' => '{"html": "<div class=\"static-container one-column\">\r\n<div class=\"mb-5\">Refund policy page content</div>\r\n</div>",
+                            "meta_title": "Refund policy",
+                            "page_title": "Refund Policy",
+                            "meta_keywords": "refund,policy ", "meta_description": ""}',
+                'channel_id' => $channel->id,
+                'locale_id' => $locale->id,
+                'company_id' => $this->company->id
+            ];
+
+        $this->cms->create($refundpolicy);
+
+        $termsconditions = [
+                'url_key' => 'terms-conditions',
+                'html_content' => '<div class="static-container one-column">
+                                    <div class="mb-5">Terms & conditions page content</div>
+                                    </div>',
+                'page_title' => 'Terms & Conditions',
+                'meta_title' => 'Terms & Conditions',
+                'meta_description' => '',
+                'meta_keywords' => 'term, conditions',
+                'content' => '{"html": "<div class=\"static-container one-column\">\r\n<div class=\"mb-5\">Terms & conditions page content</div>\r\n</div>",
+                            "meta_title": "Terms & Conditions",
+                            "page_title": "Terms & Conditions",
+                            "meta_keywords": "terms, conditions ", "meta_description": ""}',
+                'channel_id' => $channel->id,
+                'locale_id' => $locale->id,
+                'company_id' => $this->company->id
+            ];
+
+        $this->cms->create($termsconditions);
+
+        $termsofuse = [
+            'url_key' => 'terms-of-use',
+            'html_content' => '<div class="static-container one-column">
+                            <div class="mb-5">Terms of use page content</div>
+                            </div>',
+            'page_title' => 'Terms of use',
+            'meta_title' => 'Terms of use',
+            'meta_description' => '',
+            'meta_keywords' => 'term, use',
+            'content' => '{"html": "<div class=\"static-container one-column\">\r\n<div class=\"mb-5\">Terms of use page content</div>\r\n</div>",
+                        "meta_title": "Terms of use",
+                        "page_title": "Terms of use",
+                        "meta_keywords": "terms, use ", "meta_description": ""}',
+            'channel_id' => $channel->id,
+            'locale_id' => $locale->id,
+            'company_id' => $this->company->id
+        ];
+
+        $this->cms->create($termsofuse);
+
+        $contactus = [
+                'url_key' => 'contact-us',
+                'html_content' => '<div class="static-container one-column">
+                                <div class="mb-5">Contact us page content</div>
+                                </div>',
+                'page_title' => 'Contact Us',
+                'meta_title' => 'Contact Us',
+                'meta_description' => '',
+                'meta_keywords' => 'contact, us',
+                'content' => '{"html": "<div class=\"static-container one-column\">\r\n<div class=\"mb-5\">Contact us page content</div>\r\n</div>",
+                            "meta_title": "Contact Us",
+                            "page_title": "Contact Us",
+                            "meta_keywords": "contact, us ", "meta_description": ""}',
+                'channel_id' => $channel->id,
+                'locale_id' => $locale->id,
+                'company_id' => $this->company->id
+            ];
+
+        $this->cms->create($contactus);
+    }
+
+    /**
      * It will store a check in the companies
      * that all the necessary data had been
      * inserted successfully or not
@@ -548,7 +681,7 @@ class DataPurger
 
         $info = [
             'company_created' => true,
-            'seeded' => true,
+            'seeded' => true
         ];
 
         $info = json_encode($info);

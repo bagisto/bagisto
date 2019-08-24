@@ -25,20 +25,29 @@ class PurgeController extends Controller
 
     public function seedDatabase()
     {
-        $this->dataSeed->prepareLocaleData();
+        $locale = $this->dataSeed->prepareLocaleData();
+
         $this->dataSeed->prepareCategoryData(); // translation table not getting populated
+
         $this->dataSeed->prepareInventoryData();
+
         $this->dataSeed->prepareCurrencyData();
-        $this->dataSeed->prepareChannelData();
+
+        $channel = $this->dataSeed->prepareChannelData();
 
         // need to get executed only first time
         if (Company::count() == 1)
             $this->dataSeed->prepareCountryStateData();
 
         $this->dataSeed->prepareCustomerGroupData();
+
         $this->dataSeed->prepareAttributeData();
+
         $this->dataSeed->prepareAttributeFamilyData();
+
         $this->dataSeed->prepareAttributeGroupData();
+
+        $this->dataSeed->prepareCMSPagesData($channel, $locale);
 
         Event::fire('new.company.registered');
 
