@@ -32,64 +32,71 @@
 
                 <div class="form-container">
                     @csrf()
+                    <accordian :title="'{{ __('admin::app.cms.pages.general') }}'" :active="true">
+                        <div slot="body">
+                            <div class="control-group" :class="[errors.has('page_title') ? 'has-error' : '']">
+                                <label for="page_title" class="required">{{ __('admin::app.cms.pages.page-title') }}</label>
 
-                    <div class="control-group" :class="[errors.has('page_title') ? 'has-error' : '']">
-                        <label for="page_title" class="required">{{ __('admin::app.cms.pages.page-title') }}</label>
+                                <input type="text" class="control" name="page_title" v-validate="'required'" value="{{ $page->page_title ?? old('page_title') }}" data-vv-as="&quot;{{ __('admin::app.cms.pages.page-title') }}&quot;">
 
-                        <input type="text" class="control" name="page_title" v-validate="'required'" value="{{ $page->page_title ?? old('page_title') }}" data-vv-as="&quot;{{ __('admin::app.cms.pages.page-title') }}&quot;">
+                                <span class="control-error" v-if="errors.has('page_title')">@{{ errors.first('page_title') }}</span>
+                            </div>
 
-                        <span class="control-error" v-if="errors.has('page_title')">@{{ errors.first('page_title') }}</span>
-                    </div>
+                            <div class="control-group" :class="[errors.has('url_key') ? 'has-error' : '']">
+                                <label for="url-key" class="required">{{ __('admin::app.cms.pages.url-key') }}</label>
 
-                    <div class="control-group" :class="[errors.has('url_key') ? 'has-error' : '']">
-                        <label for="url-key" class="required">{{ __('admin::app.cms.pages.url-key') }}</label>
+                                <input type="text" class="control" name="url_key" v-validate="'required'" value="{{ $page->url_key ?? old('url_key') }}" data-vv-as="&quot;{{ __('admin::app.cms.pages.url-key') }}&quot;" disabled>
 
-                        <input type="text" class="control" name="url_key" v-validate="'required'" value="{{ $page->url_key ?? old('url_key') }}" data-vv-as="&quot;{{ __('admin::app.cms.pages.url-key') }}&quot;" disabled>
+                                <span class="control-error" v-if="errors.has('url_key')">@{{ errors.first('url_key') }}</span>
+                            </div>
 
-                        <span class="control-error" v-if="errors.has('url_key')">@{{ errors.first('url_key') }}</span>
-                    </div>
+                            <div class="control-group" :class="[errors.has('html_content') ? 'has-error' : '']">
+                                <label for="html_content" class="required">{{ __('admin::app.cms.pages.content') }}</label>
 
-                    <div class="control-group" :class="[errors.has('html_content') ? 'has-error' : '']">
-                        <label for="html_content" class="required">{{ __('admin::app.cms.pages.content') }}</label>
+                                <textarea type="text" class="control" id="content" name="html_content" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.cms.pages.content') }}&quot;">{{ $page->html_content ?? old('html_content') }}</textarea>
 
-                        <textarea type="text" class="control" id="content" name="html_content" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.cms.pages.content') }}&quot;">{{ $page->html_content ?? old('html_content') }}</textarea>
+                                {!! __('admin::app.cms.pages.one-col') !!}
+                                {!! __('admin::app.cms.pages.two-col') !!}
+                                {!! __('admin::app.cms.pages.three-col') !!}
 
-                        {!! __('admin::app.cms.pages.one-col') !!}
-                        {!! __('admin::app.cms.pages.two-col') !!}
-                        {!! __('admin::app.cms.pages.three-col') !!}
+                                <div class="mt-10 mb-10">
+                                    <a target="_blank" href="{{ route('ui.helper.classes') }}" class="btn btn-sm btn-primary">
+                                        {{ __('admin::app.cms.pages.helper-classes') }}
+                                    </a>
+                                </div>
 
-                        <div class="mt-10 mb-10">
-                            <a target="_blank" href="{{ route('ui.helper.classes') }}" class="btn btn-sm btn-primary">
-                                {{ __('admin::app.cms.pages.helper-classes') }}
-                            </a>
+                                <span class="control-error" v-if="errors.has('html_content')">@{{ errors.first('html_content') }}</span>
+                            </div>
                         </div>
+                    </accordian>
 
-                        <span class="control-error" v-if="errors.has('html_content')">@{{ errors.first('html_content') }}</span>
-                    </div>
+                    <accordian :title="'{{ __('admin::app.cms.pages.seo') }}'" :active="true">
+                        <div slot="body">
+                            <div class="control-group" :class="[errors.has('meta_title') ? 'has-error' : '']">
+                                <label for="meta_title" class="required">{{ __('admin::app.cms.pages.meta_title') }}</label>
 
-                    <div class="control-group" :class="[errors.has('meta_title') ? 'has-error' : '']">
-                        <label for="meta_title" class="required">{{ __('admin::app.cms.pages.meta_title') }}</label>
+                                <input type="text" class="control" name="meta_title" v-validate="'required'" value="{{ $page->meta_title ?? old('meta_title') }}" data-vv-as="&quot;{{ __('admin::app.cms.pages.meta_title') }}&quot;">
 
-                        <input type="text" class="control" name="meta_title" v-validate="'required'" value="{{ $page->meta_title ?? old('meta_title') }}" data-vv-as="&quot;{{ __('admin::app.cms.pages.meta_title') }}&quot;">
+                                <span class="control-error" v-if="errors.has('meta_title')">@{{ errors.first('meta_title') }}</span>
+                            </div>
 
-                        <span class="control-error" v-if="errors.has('meta_title')">@{{ errors.first('meta_title') }}</span>
-                    </div>
+                            <div class="control-group" :class="[errors.has('meta_keywords') ? 'has-error' : '']">
+                                <label for="meta_keywords" class="required">{{ __('admin::app.cms.pages.meta_keywords') }}</label>
 
-                    <div class="control-group" :class="[errors.has('meta_keywords') ? 'has-error' : '']">
-                        <label for="meta_keywords" class="required">{{ __('admin::app.cms.pages.meta_keywords') }}</label>
+                                <textarea type="text" class="control" name="meta_keywords" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.cms.pages.meta_keywords') }}&quot;">{{ $page->meta_keywords ?? old('meta_keywords') }}</textarea>
 
-                        <textarea type="text" class="control" name="meta_keywords" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.cms.pages.meta_keywords') }}&quot;">{{ $page->meta_keywords ?? old('meta_keywords') }}</textarea>
+                                <span class="control-error" v-if="errors.has('meta_keywords')">@{{ errors.first('meta_keywords') }}</span>
+                            </div>
 
-                        <span class="control-error" v-if="errors.has('meta_keywords')">@{{ errors.first('meta_keywords') }}</span>
-                    </div>
+                            <div class="control-group" :class="[errors.has('meta_description') ? 'has-error' : '']">
+                                <label for="meta_description">{{ __('admin::app.cms.pages.meta_description') }}</label>
 
-                    <div class="control-group" :class="[errors.has('meta_description') ? 'has-error' : '']">
-                        <label for="meta_description">{{ __('admin::app.cms.pages.meta_description') }}</label>
+                                <textarea type="text" class="control" name="meta_description" data-vv-as="&quot;{{ __('admin::app.cms.pages.meta_description') }}&quot;">{{ $page->meta_description ?? old('meta_description') }}</textarea>
 
-                        <textarea type="text" class="control" name="meta_description" data-vv-as="&quot;{{ __('admin::app.cms.pages.meta_description') }}&quot;">{{ $page->meta_description ?? old('meta_description') }}</textarea>
-
-                        <span class="control-error" v-if="errors.has('meta_description')">@{{ errors.first('meta_description') }}</span>
-                    </div>
+                                <span class="control-error" v-if="errors.has('meta_description')">@{{ errors.first('meta_description') }}</span>
+                            </div>
+                        </div>
+                    </accordian>
                 </div>
             </div>
         </form>

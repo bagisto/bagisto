@@ -991,6 +991,8 @@ return [
 
     'cms' => [
         'pages' => [
+            'general' => 'General',
+            'seo' => 'SEO',
             'pages' => 'Page',
             'title' => 'pages',
             'add-title' => 'Add Page',
