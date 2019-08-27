@@ -78,24 +78,22 @@ class WholeCartToPercent extends Action
 
                 $totalDiscount = $totalDiscount + $discount;
 
-                if ($item->product_id == $productID) {
-                    $report = array();
+                $report = array();
 
-                    $report['item_id'] = $item->id;
-                    $report['product_id'] = $item->child ? $item->child->product_id : $item->product_id;
+                $report['item_id'] = $item->id;
+                $report['product_id'] = $item->child ? $item->child->product_id : $item->product_id;
 
-                    if ($discount <= $itemPrice) {
-                        $report['discount'] = $discount;
-                    } else {
-                        $report['discount'] = $itemPrice;
-                    }
-
-                    $report['formatted_discount'] = core()->currency(round($discount, 4));
-
-                    $impact->push($report);
-
-                    unset($report);
+                if ($discount <= $itemPrice) {
+                    $report['discount'] = $discount;
+                } else {
+                    $report['discount'] = $itemPrice;
                 }
+
+                $report['formatted_discount'] = core()->currency(round($discount, 4));
+
+                $impact->push($report);
+
+                unset($report);
             }
         }
 
