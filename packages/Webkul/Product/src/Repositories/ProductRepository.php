@@ -2,15 +2,16 @@
 
 namespace Webkul\Product\Repositories;
 
-use Illuminate\Container\Container as App;
 use DB;
-use Illuminate\Support\Facades\Event;
-use Webkul\Core\Eloquent\Repository;
-use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Attribute\Repositories\AttributeOptionRepository;
-use Webkul\Product\Models\ProductAttributeValue;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Storage;
+use Illuminate\Support\Str;
+use Webkul\Core\Eloquent\Repository;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Container\Container as App;
+use Webkul\Product\Models\ProductAttributeValue;
+use Webkul\Attribute\Repositories\AttributeRepository;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Webkul\Attribute\Repositories\AttributeOptionRepository;
 
 /**
  * Product Repository
@@ -71,8 +72,8 @@ class ProductRepository extends Repository
         ProductAttributeValueRepository $attributeValue,
         ProductInventoryRepository $productInventory,
         ProductImageRepository $productImage,
-        App $app)
-    {
+        App $app
+    ) {
         $this->attribute = $attribute;
 
         $this->attributeOption = $attributeOption;
@@ -109,10 +110,10 @@ class ProductRepository extends Repository
 
         $nameAttribute = $this->attribute->findOneByField('code', 'status');
         $this->attributeValue->create([
-                'product_id' => $product->id,
-                'attribute_id' => $nameAttribute->id,
-                'value' => 1
-            ]);
+            'product_id' => $product->id,
+            'attribute_id' => $nameAttribute->id,
+            'value' => 1
+        ]);
 
         if (isset($data['super_attributes'])) {
 
@@ -158,7 +159,7 @@ class ProductRepository extends Repository
         $attributes = $product->attribute_family->custom_attributes;
 
         foreach ($attributes as $attribute) {
-            if (! isset($data[$attribute->code]) || (in_array($attribute->type, ['date', 'datetime']) && ! $data[$attribute->code]))
+            if (!isset($data[$attribute->code]) || (in_array($attribute->type, ['date', 'datetime']) && !$data[$attribute->code]))
                 continue;
 
             if ($attribute->type == 'multiselect' || $attribute->type == 'checkbox') {
@@ -175,13 +176,13 @@ class ProductRepository extends Repository
             }
 
             $attributeValue = $this->attributeValue->findOneWhere([
-                    'product_id' => $product->id,
-                    'attribute_id' => $attribute->id,
-                    'channel' => $attribute->value_per_channel ? $data['channel'] : null,
-                    'locale' => $attribute->value_per_locale ? $data['locale'] : null
-                ]);
+                'product_id' => $product->id,
+                'attribute_id' => $attribute->id,
+                'channel' => $attribute->value_per_channel ? $data['channel'] : null,
+                'locale' => $attribute->value_per_locale ? $data['locale'] : null
+            ]);
 
-            if (! $attributeValue) {
+            if (!$attributeValue) {
                 $this->attributeValue->create([
                     'product_id' => $product->id,
                     'attribute_id' => $attribute->id,
@@ -190,9 +191,11 @@ class ProductRepository extends Repository
                     'locale' => $attribute->value_per_locale ? $data['locale'] : null
                 ]);
             } else {
-                $this->attributeValue->update([
-                    ProductAttributeValue::$attributeTypeFields[$attribute->type] => $data[$attribute->code]
-                    ], $attributeValue->id
+                $this->attributeValue->update(
+                    [
+                        ProductAttributeValue::$attributeTypeFields[$attribute->type] => $data[$attribute->code]
+                    ],
+                    $attributeValue->id
                 );
 
                 if ($attribute->type == 'image' || $attribute->type == 'file') {
@@ -202,7 +205,7 @@ class ProductRepository extends Repository
         }
 
         if (request()->route()->getName() != 'admin.catalog.products.massupdate') {
-            if  (isset($data['categories'])) {
+            if (isset($data['categories'])) {
                 $product->categories()->sync($data['categories']);
             }
 
@@ -231,7 +234,7 @@ class ProductRepository extends Repository
 
             if (isset($data['variants'])) {
                 foreach ($data['variants'] as $variantId => $variantData) {
-                    if (str_contains($variantId, 'variant_')) {
+                    if (Str::contains($variantId, 'variant_')) {
                         $permutation = [];
                         foreach ($product->super_attributes as $superAttribute) {
                             $permutation[$superAttribute->id] = $variantData[$superAttribute->code];
@@ -290,23 +293,23 @@ class ProductRepository extends Repository
      */
     public function createVariant($product, $permutation, $data = [])
     {
-        if (! count($data)) {
+        if (!count($data)) {
             $data = [
-                    "sku" => $product->sku . '-variant-' . implode('-', $permutation),
-                    "name" => "",
-                    "inventories" => [],
-                    "price" => 0,
-                    "weight" => 0,
-                    "status" => 1
-                ];
+                "sku" => $product->sku . '-variant-' . implode('-', $permutation),
+                "name" => "",
+                "inventories" => [],
+                "price" => 0,
+                "weight" => 0,
+                "status" => 1
+            ];
         }
 
         $variant = $this->model->create([
-                'parent_id' => $product->id,
-                'type' => 'simple',
-                'attribute_family_id' => $product->attribute_family_id,
-                'sku' => $data['sku'],
-            ]);
+            'parent_id' => $product->id,
+            'type' => 'simple',
+            'attribute_family_id' => $product->attribute_family_id,
+            'sku' => $data['sku'],
+        ]);
 
         foreach (['sku', 'name', 'price', 'weight', 'status'] as $attributeCode) {
             $attribute = $this->attribute->findOneByField('code', $attributeCode);
@@ -316,50 +319,50 @@ class ProductRepository extends Repository
                     foreach (core()->getAllChannels() as $channel) {
                         foreach (core()->getAllLocales() as $locale) {
                             $this->attributeValue->create([
-                                    'product_id' => $variant->id,
-                                    'attribute_id' => $attribute->id,
-                                    'channel' => $channel->code,
-                                    'locale' => $locale->code,
-                                    'value' => $data[$attributeCode]
-                                ]);
+                                'product_id' => $variant->id,
+                                'attribute_id' => $attribute->id,
+                                'channel' => $channel->code,
+                                'locale' => $locale->code,
+                                'value' => $data[$attributeCode]
+                            ]);
                         }
                     }
                 } else {
                     foreach (core()->getAllChannels() as $channel) {
                         $this->attributeValue->create([
-                                'product_id' => $variant->id,
-                                'attribute_id' => $attribute->id,
-                                'channel' => $channel->code,
-                                'value' => $data[$attributeCode]
-                            ]);
+                            'product_id' => $variant->id,
+                            'attribute_id' => $attribute->id,
+                            'channel' => $channel->code,
+                            'value' => $data[$attributeCode]
+                        ]);
                     }
                 }
             } else {
                 if ($attribute->value_per_locale) {
                     foreach (core()->getAllLocales() as $locale) {
                         $this->attributeValue->create([
-                                'product_id' => $variant->id,
-                                'attribute_id' => $attribute->id,
-                                'locale' => $locale->code,
-                                'value' => $data[$attributeCode]
-                            ]);
+                            'product_id' => $variant->id,
+                            'attribute_id' => $attribute->id,
+                            'locale' => $locale->code,
+                            'value' => $data[$attributeCode]
+                        ]);
                     }
                 } else {
                     $this->attributeValue->create([
-                            'product_id' => $variant->id,
-                            'attribute_id' => $attribute->id,
-                            'value' => $data[$attributeCode]
-                        ]);
+                        'product_id' => $variant->id,
+                        'attribute_id' => $attribute->id,
+                        'value' => $data[$attributeCode]
+                    ]);
                 }
             }
         }
 
         foreach ($permutation as $attributeId => $optionId) {
             $this->attributeValue->create([
-                    'product_id' => $variant->id,
-                    'attribute_id' => $attributeId,
-                    'value' => $optionId
-                ]);
+                'product_id' => $variant->id,
+                'attribute_id' => $attributeId,
+                'value' => $optionId
+            ]);
         }
 
         $this->productInventory->saveInventories($data, $variant);
@@ -382,20 +385,20 @@ class ProductRepository extends Repository
             $attribute = $this->attribute->findOneByField('code', $attributeCode);
 
             $attributeValue = $this->attributeValue->findOneWhere([
+                'product_id' => $id,
+                'attribute_id' => $attribute->id,
+                'channel' => $attribute->value_per_channel ? $data['channel'] : null,
+                'locale' => $attribute->value_per_locale ? $data['locale'] : null
+            ]);
+
+            if (!$attributeValue) {
+                $this->attributeValue->create([
                     'product_id' => $id,
                     'attribute_id' => $attribute->id,
+                    'value' => $data[$attribute->code],
                     'channel' => $attribute->value_per_channel ? $data['channel'] : null,
                     'locale' => $attribute->value_per_locale ? $data['locale'] : null
                 ]);
-
-            if (! $attributeValue) {
-                $this->attributeValue->create([
-                        'product_id' => $id,
-                        'attribute_id' => $attribute->id,
-                        'value' => $data[$attribute->code],
-                        'channel' => $attribute->value_per_channel ? $data['channel'] : null,
-                        'locale' => $attribute->value_per_locale ? $data['locale'] : null
-                    ]);
             } else {
                 $this->attributeValue->update([
                     ProductAttributeValue::$attributeTypeFields[$attribute->type] => $data[$attribute->code]
@@ -428,7 +431,7 @@ class ProductRepository extends Repository
             $matchCount = 0;
 
             foreach ($superAttributeCodes as $attributeCode) {
-                if (! isset($data[$attributeCode]))
+                if (!isset($data[$attributeCode]))
                     return false;
 
                 if ($data[$attributeCode] == $variant->{$attributeCode})
@@ -451,100 +454,100 @@ class ProductRepository extends Repository
     {
         $params = request()->input();
 
-        $results = app('Webkul\Product\Repositories\ProductFlatRepository')->scopeQuery(function($query) use($params, $categoryId) {
-                $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
+        $results = app('Webkul\Product\Repositories\ProductFlatRepository')->scopeQuery(function ($query) use ($params, $categoryId) {
+            $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
-                $locale = request()->get('locale') ?: app()->getLocale();
+            $locale = request()->get('locale') ?: app()->getLocale();
 
-                $qb = $query->distinct()
-                        ->addSelect('product_flat.*')
-                        ->addSelect(DB::raw('IF( product_flat.special_price_from IS NOT NULL
+            $qb = $query->distinct()
+                ->addSelect('product_flat.*')
+                ->addSelect(DB::raw('IF( product_flat.special_price_from IS NOT NULL
                             AND product_flat.special_price_to IS NOT NULL , IF( NOW( ) >= product_flat.special_price_from
                             AND NOW( ) <= product_flat.special_price_to, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) , IF( product_flat.special_price_from IS NULL , IF( product_flat.special_price_to IS NULL , IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , IF( NOW( ) <= product_flat.special_price_to, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) ) , IF( product_flat.special_price_to IS NULL , IF( NOW( ) >= product_flat.special_price_from, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) , product_flat.price ) ) ) AS final_price'))
 
-                        ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
-                        ->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id')
-                        ->where('product_flat.channel', $channel)
-                        ->where('product_flat.locale', $locale)
-                        ->whereNotNull('product_flat.url_key');
+                ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
+                ->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id')
+                ->where('product_flat.channel', $channel)
+                ->where('product_flat.locale', $locale)
+                ->whereNotNull('product_flat.url_key');
 
-                if ($categoryId) {
-                    $qb->where('product_categories.category_id', $categoryId);
-                }
+            if ($categoryId) {
+                $qb->where('product_categories.category_id', $categoryId);
+            }
 
-                if (is_null(request()->input('status'))) {
-                    $qb->where('product_flat.status', 1);
-                }
+            if (is_null(request()->input('status'))) {
+                $qb->where('product_flat.status', 1);
+            }
 
-                if (is_null(request()->input('visible_individually'))) {
-                    $qb->where('product_flat.visible_individually', 1);
-                }
+            if (is_null(request()->input('visible_individually'))) {
+                $qb->where('product_flat.visible_individually', 1);
+            }
 
-                $queryBuilder = $qb->leftJoin('product_flat as flat_variants', function($qb) use($channel, $locale) {
-                    $qb->on('product_flat.id', '=', 'flat_variants.parent_id')
-                        ->where('flat_variants.channel', $channel)
-                        ->where('flat_variants.locale', $locale);
-                });
+            $queryBuilder = $qb->leftJoin('product_flat as flat_variants', function ($qb) use ($channel, $locale) {
+                $qb->on('product_flat.id', '=', 'flat_variants.parent_id')
+                    ->where('flat_variants.channel', $channel)
+                    ->where('flat_variants.locale', $locale);
+            });
 
-                if (isset($params['search'])) {
-                    $qb->where('product_flat.name', 'like', '%' . urldecode($params['search']) . '%');
-                }
+            if (isset($params['search'])) {
+                $qb->where('product_flat.name', 'like', '%' . urldecode($params['search']) . '%');
+            }
 
-                if (isset($params['sort'])) {
-                    $attribute = $this->attribute->findOneByField('code', $params['sort']);
+            if (isset($params['sort'])) {
+                $attribute = $this->attribute->findOneByField('code', $params['sort']);
 
-                    if ($params['sort'] == 'price') {
-                        if ($attribute->code == 'price') {
-                            $qb->orderBy('final_price', $params['order']);
-                        } else {
-                            $qb->orderBy($attribute->code, $params['order']);
-                        }
+                if ($params['sort'] == 'price') {
+                    if ($attribute->code == 'price') {
+                        $qb->orderBy('final_price', $params['order']);
                     } else {
-                        $qb->orderBy($params['sort'] == 'created_at' ? 'product_flat.created_at' : $attribute->code, $params['order']);
+                        $qb->orderBy($attribute->code, $params['order']);
                     }
+                } else {
+                    $qb->orderBy($params['sort'] == 'created_at' ? 'product_flat.created_at' : $attribute->code, $params['order']);
                 }
+            }
 
-                $qb = $qb->leftJoin('products as variants', 'products.id', '=', 'variants.parent_id');
+            $qb = $qb->leftJoin('products as variants', 'products.id', '=', 'variants.parent_id');
 
-                $qb = $qb->where(function($query1) use($qb) {
-                    $aliases = [
-                            'products' => 'filter_',
-                            'variants' => 'variant_filter_'
-                        ];
+            $qb = $qb->where(function ($query1) use ($qb) {
+                $aliases = [
+                    'products' => 'filter_',
+                    'variants' => 'variant_filter_'
+                ];
 
-                    foreach($aliases as $table => $alias) {
-                        $query1 = $query1->orWhere(function($query2) use($qb, $table, $alias) {
+                foreach ($aliases as $table => $alias) {
+                    $query1 = $query1->orWhere(function ($query2) use ($qb, $table, $alias) {
 
-                            foreach ($this->attribute->getProductDefaultAttributes(array_keys(request()->input())) as $code => $attribute) {
-                                $aliasTemp = $alias . $attribute->code;
+                        foreach ($this->attribute->getProductDefaultAttributes(array_keys(request()->input())) as $code => $attribute) {
+                            $aliasTemp = $alias . $attribute->code;
 
-                                $qb = $qb->leftJoin('product_attribute_values as ' . $aliasTemp, $table . '.id', '=', $aliasTemp . '.product_id');
+                            $qb = $qb->leftJoin('product_attribute_values as ' . $aliasTemp, $table . '.id', '=', $aliasTemp . '.product_id');
 
-                                $column = ProductAttributeValue::$attributeTypeFields[$attribute->type];
+                            $column = ProductAttributeValue::$attributeTypeFields[$attribute->type];
 
-                                $temp = explode(',', request()->get($attribute->code));
+                            $temp = explode(',', request()->get($attribute->code));
 
-                                if ($attribute->type != 'price') {
-                                    $query2 = $query2->where($aliasTemp . '.attribute_id', $attribute->id);
+                            if ($attribute->type != 'price') {
+                                $query2 = $query2->where($aliasTemp . '.attribute_id', $attribute->id);
 
-                                    $query2 = $query2->where(function($query3) use($aliasTemp, $column, $temp) {
-                                        foreach($temp as $code => $filterValue) {
-                                            $columns = $aliasTemp . '.' . $column;
-                                            $query3 = $query3->orwhereRaw("find_in_set($filterValue, $columns)");
-                                        }
-                                    });
-                                } else {
-                                    $query2 = $query2->where($aliasTemp . '.' . $column, '>=', core()->convertToBasePrice(current($temp)))
-                                            ->where($aliasTemp . '.' . $column, '<=', core()->convertToBasePrice(end($temp)))
-                                            ->where($aliasTemp . '.attribute_id', $attribute->id);
-                                }
+                                $query2 = $query2->where(function ($query3) use ($aliasTemp, $column, $temp) {
+                                    foreach ($temp as $code => $filterValue) {
+                                        $columns = $aliasTemp . '.' . $column;
+                                        $query3 = $query3->orwhereRaw("find_in_set($filterValue, $columns)");
+                                    }
+                                });
+                            } else {
+                                $query2 = $query2->where($aliasTemp . '.' . $column, '>=', core()->convertToBasePrice(current($temp)))
+                                    ->where($aliasTemp . '.' . $column, '<=', core()->convertToBasePrice(end($temp)))
+                                    ->where($aliasTemp . '.attribute_id', $attribute->id);
                             }
-                        });
-                    }
-                });
+                        }
+                    });
+                }
+            });
 
-                return $qb->groupBy('product_flat.id');
-            })->paginate(isset($params['limit']) ? $params['limit'] : 9);
+            return $qb->groupBy('product_flat.id');
+        })->paginate(isset($params['limit']) ? $params['limit'] : 9);
 
         return $results;
     }
@@ -558,14 +561,15 @@ class ProductRepository extends Repository
     public function findBySlugOrFail($slug, $columns = null)
     {
         $product = app('Webkul\Product\Repositories\ProductFlatRepository')->findOneWhere([
-                'url_key' => $slug,
-                'locale' => app()->getLocale(),
-                'channel' => core()->getCurrentChannelCode(),
-            ]);
+            'url_key' => $slug,
+            'locale' => app()->getLocale(),
+            'channel' => core()->getCurrentChannelCode(),
+        ]);
 
-        if (! $product) {
+        if (!$product) {
             throw (new ModelNotFoundException)->setModel(
-                get_class($this->model), $slug
+                get_class($this->model),
+                $slug
             );
         }
 
@@ -579,20 +583,20 @@ class ProductRepository extends Repository
      */
     public function getNewProducts()
     {
-        $results = app('Webkul\Product\Repositories\ProductFlatRepository')->scopeQuery(function($query) {
-                $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
+        $results = app('Webkul\Product\Repositories\ProductFlatRepository')->scopeQuery(function ($query) {
+            $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
-                $locale = request()->get('locale') ?: app()->getLocale();
+            $locale = request()->get('locale') ?: app()->getLocale();
 
-                return $query->distinct()
-                        ->addSelect('product_flat.*')
-                        ->where('product_flat.status', 1)
-                        ->where('product_flat.visible_individually', 1)
-                        ->where('product_flat.new', 1)
-                        ->where('product_flat.channel', $channel)
-                        ->where('product_flat.locale', $locale)
-                        ->orderBy('product_id', 'desc');
-            })->paginate(4);
+            return $query->distinct()
+                ->addSelect('product_flat.*')
+                ->where('product_flat.status', 1)
+                ->where('product_flat.visible_individually', 1)
+                ->where('product_flat.new', 1)
+                ->where('product_flat.channel', $channel)
+                ->where('product_flat.locale', $locale)
+                ->orderBy('product_id', 'desc');
+        })->paginate(4);
 
         return $results;
     }
@@ -604,20 +608,20 @@ class ProductRepository extends Repository
      */
     public function getFeaturedProducts()
     {
-        $results = app('Webkul\Product\Repositories\ProductFlatRepository')->scopeQuery(function($query) {
-                $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
+        $results = app('Webkul\Product\Repositories\ProductFlatRepository')->scopeQuery(function ($query) {
+            $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
-                $locale = request()->get('locale') ?: app()->getLocale();
+            $locale = request()->get('locale') ?: app()->getLocale();
 
-                return $query->distinct()
-                        ->addSelect('product_flat.*')
-                        ->where('product_flat.status', 1)
-                        ->where('product_flat.visible_individually', 1)
-                        ->where('product_flat.featured', 1)
-                        ->where('product_flat.channel', $channel)
-                        ->where('product_flat.locale', $locale)
-                        ->orderBy('product_id', 'desc');
-            })->paginate(4);
+            return $query->distinct()
+                ->addSelect('product_flat.*')
+                ->where('product_flat.status', 1)
+                ->where('product_flat.visible_individually', 1)
+                ->where('product_flat.featured', 1)
+                ->where('product_flat.channel', $channel)
+                ->where('product_flat.locale', $locale)
+                ->orderBy('product_id', 'desc');
+        })->paginate(4);
 
         return $results;
     }
@@ -629,21 +633,21 @@ class ProductRepository extends Repository
      */
     public function searchProductByAttribute($term)
     {
-        $results = app('Webkul\Product\Repositories\ProductFlatRepository')->scopeQuery(function($query) use($term) {
-                $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
+        $results = app('Webkul\Product\Repositories\ProductFlatRepository')->scopeQuery(function ($query) use ($term) {
+            $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
-                $locale = request()->get('locale') ?: app()->getLocale();
+            $locale = request()->get('locale') ?: app()->getLocale();
 
-                return $query->distinct()
-                        ->addSelect('product_flat.*')
-                        ->where('product_flat.status', 1)
-                        ->where('product_flat.visible_individually', 1)
-                        ->where('product_flat.channel', $channel)
-                        ->where('product_flat.locale', $locale)
-                        ->whereNotNull('product_flat.url_key')
-                        ->where('product_flat.name', 'like', '%' . urldecode($term) . '%')
-                        ->orderBy('product_id', 'desc');
-            })->paginate(16);
+            return $query->distinct()
+                ->addSelect('product_flat.*')
+                ->where('product_flat.status', 1)
+                ->where('product_flat.visible_individually', 1)
+                ->where('product_flat.channel', $channel)
+                ->where('product_flat.locale', $locale)
+                ->whereNotNull('product_flat.url_key')
+                ->where('product_flat.name', 'like', '%' . urldecode($term) . '%')
+                ->orderBy('product_id', 'desc');
+        })->paginate(16);
 
         return $results;
     }

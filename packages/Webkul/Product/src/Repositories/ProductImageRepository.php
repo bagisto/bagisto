@@ -2,8 +2,9 @@
 
 namespace Webkul\Product\Repositories;
 
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Webkul\Core\Eloquent\Repository;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Product Image Reposotory
@@ -37,12 +38,12 @@ class ProductImageRepository extends Repository
                 $file = 'images.' . $imageId;
                 $dir = 'product/' . $product->id;
 
-                if (str_contains($imageId, 'image_')) {
+                if (Str::contains($imageId, 'image_')) {
                     if (request()->hasFile($file)) {
                         $this->create([
-                                'path' => request()->file($file)->store($dir),
-                                'product_id' => $product->id
-                            ]);
+                            'path' => request()->file($file)->store($dir),
+                            'product_id' => $product->id
+                        ]);
                     }
                 } else {
                     if (is_numeric($index = $previousImageIds->search($imageId))) {
@@ -55,8 +56,8 @@ class ProductImageRepository extends Repository
                         }
 
                         $this->update([
-                                'path' => request()->file($file)->store($dir)
-                            ], $imageId);
+                            'path' => request()->file($file)->store($dir)
+                        ], $imageId);
                     }
                 }
             }

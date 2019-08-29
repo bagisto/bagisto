@@ -2,10 +2,11 @@
 
 namespace Webkul\CMS\Http\Controllers\Admin;
 
+use Illuminate\Support\Str;
 use Webkul\CMS\Http\Controllers\Controller;
 use Webkul\CMS\Repositories\CMSRepository as CMS;
-use Webkul\Core\Repositories\ChannelRepository as Channel;
 use Webkul\Core\Repositories\LocaleRepository as Locale;
+use Webkul\Core\Repositories\ChannelRepository as Channel;
 
 /**
  * CMS controller
@@ -13,7 +14,7 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
  * @author  Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
- class PageController extends Controller
+class PageController extends Controller
 {
     /**
      * To hold the request variables from route file
@@ -130,7 +131,7 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
 
                 $data['locale_id'] = $locale;
 
-                if (! $pageFound) {
+                if (!$pageFound) {
                     $result = $this->cms->create($data);
 
                     if ($result) {
@@ -177,9 +178,9 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
                 'url_key' => $page->url_key
             ]);
 
-            if (! $page) {
+            if (!$page) {
                 $page  = $this->cms->create([
-                    'url_key' => str_random(8),
+                    'url_key' => Str::random(8),
                     'channel' => $channel->code,
                     'locale' => $locale->code
                 ]);

@@ -2,11 +2,12 @@
 
 namespace Webkul\Attribute\Repositories;
 
+use Illuminate\Support\Str;
 use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Container\Container as App;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Attribute\Repositories\AttributeGroupRepository;
-use Illuminate\Container\Container as App;
 
 /**
  * Attribute Reposotory
@@ -107,7 +108,7 @@ class AttributeFamilyRepository extends Repository
 
         if (isset($data['attribute_groups'])) {
             foreach ($data['attribute_groups'] as $attributeGroupId => $attributeGroupInputs) {
-                if (str_contains($attributeGroupId, 'group_')) {
+                if (Str::contains($attributeGroupId, 'group_')) {
                     $attributeGroup = $family->attribute_groups()->create($attributeGroupInputs);
 
                     if (isset($attributeGroupInputs['custom_attributes'])) {
@@ -158,7 +159,7 @@ class AttributeFamilyRepository extends Repository
         $attributeFamilies = $this->model->all();
         $trimmed = array();
 
-        foreach($attributeFamilies as $key => $attributeFamily) {
+        foreach ($attributeFamilies as $key => $attributeFamily) {
             if ($attributeFamily->name != null || $attributeFamily->name != "") {
                 $trimmed[$key] = [
                     'id' => $attributeFamily->id,

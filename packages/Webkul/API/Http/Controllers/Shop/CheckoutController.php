@@ -2,17 +2,18 @@
 
 namespace Webkul\API\Http\Controllers\Shop;
 
+use Cart;
+use Illuminate\Support\Str;
+use Webkul\Payment\Facades\Payment;
 use Illuminate\Support\Facades\Event;
+use Webkul\Shipping\Facades\Shipping;
+use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Checkout\Repositories\CartItemRepository;
-use Webkul\Shipping\Facades\Shipping;
-use Webkul\Payment\Facades\Payment;
+use Webkul\Checkout\Http\Requests\CustomerAddressForm;
+use Webkul\API\Http\Resources\Sales\Order as OrderResource;
 use Webkul\API\Http\Resources\Checkout\Cart as CartResource;
 use Webkul\API\Http\Resources\Checkout\CartShippingRate as CartShippingRateResource;
-use Webkul\API\Http\Resources\Sales\Order as OrderResource;
-use Webkul\Checkout\Http\Requests\CustomerAddressForm;
-use Webkul\Sales\Repositories\OrderRepository;
-use Cart;
 
 /**
  * Checkout controller
@@ -54,15 +55,14 @@ class CheckoutController extends Controller
         CartRepository $cartRepository,
         CartItemRepository $cartItemRepository,
         OrderRepository $orderRepository
-    )
-    {
+    ) {
         $this->guard = request()->has('token') ? 'api' : 'customer';
 
         auth()->setDefaultDriver($this->guard);
 
-        
+
         // $this->middleware('auth:' . $this->guard);
-        
+
         $this->_config = request('_config');
 
         $this->cartRepository = $cartRepository;
@@ -77,7 +77,7 @@ class CheckoutController extends Controller
      *
      * @param  \Webkul\Checkout\Http\Requests\CustomerAddressForm $request
      * @return \Illuminate\Http\Response
-    */
+     */
     public function saveAddress(CustomerAddressForm $request)
     {
         $data = request()->all();
@@ -85,18 +85,18 @@ class CheckoutController extends Controller
         $data['billing']['address1'] = implode(PHP_EOL, array_filter($data['billing']['address1']));
         $data['shipping']['address1'] = implode(PHP_EOL, array_filter($data['shipping']['address1']));
 
-        if (isset($data['billing']['id']) && str_contains($data['billing']['id'], 'address_')) {
+        if (isset($data['billing']['id']) && Str::contains($data['billing']['id'], 'address_')) {
             unset($data['billing']['id']);
             unset($data['billing']['address_id']);
         }
 
-        if (isset($data['shipping']['id']) && str_contains($data['shipping']['id'], 'address_')) {
+        if (isset($data['shipping']['id']) && Str::contains($data['shipping']['id'], 'address_')) {
             unset($data['shipping']['id']);
             unset($data['shipping']['address_id']);
         }
 
 
-        if (Cart::hasError() || ! Cart::saveCustomerAddress($data) || ! Shipping::collectRates())
+        if (Cart::hasError() || !Cart::saveCustomerAddress($data) || !Shipping::collectRates())
             abort(400);
 
         $rates = [];
@@ -122,12 +122,12 @@ class CheckoutController extends Controller
      * Saves shipping method.
      *
      * @return \Illuminate\Http\Response
-    */
+     */
     public function saveShipping()
     {
         $shippingMethod = request()->get('shipping_method');
 
-        if (Cart::hasError() || !$shippingMethod || ! Cart::saveShippingMethod($shippingMethod))
+        if (Cart::hasError() || !$shippingMethod || !Cart::saveShippingMethod($shippingMethod))
             abort(400);
 
         Cart::collectTotals();
@@ -144,12 +144,12 @@ class CheckoutController extends Controller
      * Saves payment method.
      *
      * @return \Illuminate\Http\Response
-    */
+     */
     public function savePayment()
     {
         $payment = request()->get('payment');
 
-        if (Cart::hasError() || ! $payment || ! Cart::savePaymentMethod($payment))
+        if (Cart::hasError() || !$payment || !Cart::savePaymentMethod($payment))
             abort(400);
 
         return response()->json([
@@ -163,7 +163,7 @@ class CheckoutController extends Controller
      * Saves order.
      *
      * @return \Illuminate\Http\Response
-    */
+     */
     public function saveOrder()
     {
         if (Cart::hasError())
@@ -177,9 +177,9 @@ class CheckoutController extends Controller
 
         if ($redirectUrl = Payment::getRedirectUrl($cart)) {
             return response()->json([
-                    'success' => true,
-                    'redirect_url' => $redirectUrl
-                ]);
+                'success' => true,
+                'redirect_url' => $redirectUrl
+            ]);
         }
 
         $order = $this->orderRepository->create(Cart::prepareDataForOrder());
@@ -187,9 +187,9 @@ class CheckoutController extends Controller
         Cart::deActivateCart();
 
         return response()->json([
-                'success' => true,
-                'order' => new OrderResource($order),
-            ]);
+            'success' => true,
+            'order' => new OrderResource($order),
+        ]);
     }
 
     /**
@@ -201,19 +201,19 @@ class CheckoutController extends Controller
     {
         $cart = Cart::getCart();
 
-        if (! $cart->shipping_address) {
+        if (!$cart->shipping_address) {
             throw new \Exception(trans('Please check shipping address.'));
         }
 
-        if (! $cart->billing_address) {
+        if (!$cart->billing_address) {
             throw new \Exception(trans('Please check billing address.'));
         }
 
-        if (! $cart->selected_shipping_rate) {
+        if (!$cart->selected_shipping_rate) {
             throw new \Exception(trans('Please specify shipping method.'));
         }
 
-        if (! $cart->payment) {
+        if (!$cart->payment) {
             throw new \Exception(trans('Please specify payment method.'));
         }
     }
