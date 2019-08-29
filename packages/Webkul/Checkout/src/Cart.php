@@ -3,16 +3,17 @@
 namespace Webkul\Checkout;
 
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
+use Webkul\Product\Helpers\Price;
+use Webkul\Checkout\Models\CartPayment;
 use Webkul\Checkout\Repositories\CartRepository;
-use Webkul\Checkout\Repositories\CartItemRepository;
-use Webkul\Checkout\Repositories\CartAddressRepository;
-use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
-use Webkul\Checkout\Models\CartPayment;
+use Webkul\Checkout\Repositories\CartItemRepository;
+use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\WishlistRepository;
+use Webkul\Checkout\Repositories\CartAddressRepository;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
-use Webkul\Product\Helpers\Price;
 
 /**
  * Facades handler for all the methods to be implemented in Cart.
@@ -21,7 +22,8 @@ use Webkul\Product\Helpers\Price;
  * @author    Jitendra Singh <jitendra@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class Cart {
+class Cart
+{
 
     /**
      * CartRepository instance
@@ -81,12 +83,12 @@ class Cart {
 
     /**
      * Suppress the session flash messages
-    */
+     */
     protected $suppressFlash;
 
     /**
      * Product price helper instance
-    */
+     */
     protected $price;
 
     /**
@@ -114,8 +116,7 @@ class Cart {
         WishlistRepository $wishlist,
         CustomerAddressRepository $customerAddress,
         Price $price
-    )
-    {
+    ) {
         $this->customer = $customer;
 
         $this->cart = $cart;
@@ -205,7 +206,8 @@ class Cart {
      *
      * @return void
      */
-    public function add($id, $data) {
+    public function add($id, $data)
+    {
         $cart = $this->getCart();
 
         if ($cart != null) {
@@ -232,7 +234,8 @@ class Cart {
      *
      * @return boolean
      */
-    public function checkIfItemExists($id, $data) {
+    public function checkIfItemExists($id, $data)
+    {
         $items = $this->getCart()->items;
 
         foreach ($items as $item) {
@@ -266,7 +269,7 @@ class Cart {
         $product = $this->product->findOneByField('id', $id);
 
         if ($product->type == 'configurable') {
-            if (! isset($data['selected_configurable_option']) || ! $data['selected_configurable_option']) {
+            if (!isset($data['selected_configurable_option']) || !$data['selected_configurable_option']) {
                 return false;
             }
 
@@ -274,7 +277,7 @@ class Cart {
 
             $canAdd = $childProduct->haveSufficientQuantity($data['quantity']);
 
-            if (! $canAdd) {
+            if (!$canAdd) {
                 session()->flash('warning', trans('shop::app.checkout.cart.quantity.inventory_warning'));
 
                 return false;
@@ -282,7 +285,7 @@ class Cart {
         } else {
             $canAdd = $product->haveSufficientQuantity($data['quantity']);
 
-            if (! $canAdd) {
+            if (!$canAdd) {
                 session()->flash('warning', trans('shop::app.checkout.cart.quantity.inventory_warning'));
 
                 return false;
@@ -290,12 +293,12 @@ class Cart {
         }
 
         //Check if the product's information is proper or not
-        if (! isset($data['product']) || ! isset($data['quantity'])) {
+        if (!isset($data['product']) || !isset($data['quantity'])) {
             session()->flash('error', trans('shop::app.checkout.cart.integrity.missing_fields'));
 
             return false;
         } else {
-            if ($product->type == 'configurable' && ! isset($data['super_attribute'])) {
+            if ($product->type == 'configurable' && !isset($data['super_attribute'])) {
                 session()->flash('error', trans('shop::app.checkout.cart.integrity.missing_options'));
 
                 return false;
@@ -337,7 +340,7 @@ class Cart {
 
             $parentData['additional'] = array_merge($parentData['additional'], $attributeDetails);
 
-            $childData['product_id'] = (int)$data['selected_configurable_option'];
+            $childData['product_id'] = (int) $data['selected_configurable_option'];
             $childData['sku'] = $childProduct->sku;
             $childData['name'] = $childProduct->name;
             $childData['type'] = 'simple';
@@ -375,7 +378,7 @@ class Cart {
         if ($item->type == 'configurable') {
             $product = $this->product->findOneByField('id', $item->child->product_id);
 
-            if (! $product->haveSufficientQuantity($data['quantity'])) {
+            if (!$product->haveSufficientQuantity($data['quantity'])) {
                 session()->flash('warning', trans('shop::app.checkout.cart.quantity.inventory_warning'));
 
                 return false;
@@ -388,7 +391,7 @@ class Cart {
         } else {
             $product = $this->product->findOneByField('id', $item->product_id);
 
-            if (! $product->haveSufficientQuantity($data['quantity'])) {
+            if (!$product->haveSufficientQuantity($data['quantity'])) {
                 session()->flash('warning', trans('shop::app.checkout.cart.quantity.inventory_warning'));
 
                 return false;
@@ -466,7 +469,7 @@ class Cart {
             $guestCart = session()->get('cart');
 
             //when the logged in customer is not having any of the cart instance previously and are active.
-            if (! $cart) {
+            if (!$cart) {
                 $guestCart->update([
                     'customer_id' => $this->getCurrentCustomer()->user()->id,
                     'is_guest' => 0,
@@ -496,7 +499,7 @@ class Cart {
 
                             $product = $this->product->findOneByField('id', $cartItem->product_id);
 
-                            if (! $product->haveSufficientQuantity($prevQty + $newQty)) {
+                            if (!$product->haveSufficientQuantity($prevQty + $newQty)) {
                                 $this->cartItem->delete($guestCartItem->id);
                                 continue;
                             }
@@ -519,7 +522,7 @@ class Cart {
 
                             $product = $this->product->findOneByField('id', $cartItem->child->product_id);
 
-                            if (! $product->haveSufficientQuantity($prevQty + $newQty)) {
+                            if (!$product->haveSufficientQuantity($prevQty + $newQty)) {
                                 $this->cartItem->delete($guestCartItem->id);
                                 continue;
                             }
@@ -543,7 +546,7 @@ class Cart {
                     $guestCartItem->update(['cart_id' => $cart->id]);
 
                     $guestCartItem->child->update(['cart_id' => $cart->id]);
-                } else{
+                } else {
                     $guestCartItem->update(['cart_id' => $cart->id]);
                 }
             }
@@ -569,7 +572,7 @@ class Cart {
      */
     public function putCart($cart)
     {
-        if (! $this->getCurrentCustomer()->check()) {
+        if (!$this->getCurrentCustomer()->check()) {
             session()->put('cart', $cart);
         }
     }
@@ -588,7 +591,6 @@ class Cart {
                 'customer_id' => $this->getCurrentCustomer()->user()->id,
                 'is_active' => 1
             ]);
-
         } elseif (session()->has('cart')) {
             $cart = $this->cart->find(session()->get('cart')->id);
         }
@@ -655,7 +657,7 @@ class Cart {
      */
     public function saveCustomerAddress($data)
     {
-        if (! $cart = $this->getCart())
+        if (!$cart = $this->getCart())
             return false;
 
         $billingAddress = $data['billing'];
@@ -663,7 +665,7 @@ class Cart {
         $billingAddress['cart_id'] = $shippingAddress['cart_id'] = $cart->id;
 
         if (isset($data['billing']['address_id']) && $data['billing']['address_id']) {
-            $address = $this->customerAddress->findOneWhere(['id'=> $data['billing']['address_id']])->toArray();
+            $address = $this->customerAddress->findOneWhere(['id' => $data['billing']['address_id']])->toArray();
             $billingAddress['first_name'] = $this->getCurrentCustomer()->user()->first_name;
             $billingAddress['last_name'] = $this->getCurrentCustomer()->user()->last_name;
             $billingAddress['email'] = $this->getCurrentCustomer()->user()->email;
@@ -676,7 +678,7 @@ class Cart {
         }
 
         if (isset($data['shipping']['address_id']) && $data['shipping']['address_id']) {
-            $address = $this->customerAddress->findOneWhere(['id'=> $data['shipping']['address_id']])->toArray();
+            $address = $this->customerAddress->findOneWhere(['id' => $data['shipping']['address_id']])->toArray();
             $shippingAddress['first_name'] = $this->getCurrentCustomer()->user()->first_name;
             $shippingAddress['last_name'] = $this->getCurrentCustomer()->user()->last_name;
             $shippingAddress['email'] = $this->getCurrentCustomer()->user()->email;
@@ -747,7 +749,7 @@ class Cart {
      */
     public function saveShippingMethod($shippingMethodCode)
     {
-        if (! $cart = $this->getCart())
+        if (!$cart = $this->getCart())
             return false;
 
         $cart->shipping_method = $shippingMethodCode;
@@ -764,7 +766,7 @@ class Cart {
      */
     public function savePaymentMethod($payment)
     {
-        if (! $cart = $this->getCart())
+        if (!$cart = $this->getCart())
             return false;
 
         if ($cartPayment = $cart->payment)
@@ -788,11 +790,11 @@ class Cart {
     {
         $validated = $this->validateItems();
 
-        if (! $validated) {
+        if (!$validated) {
             return false;
         }
 
-        if (! $cart = $this->getCart())
+        if (!$cart = $this->getCart())
             return false;
 
         $this->calculateItemsTax();
@@ -843,7 +845,7 @@ class Cart {
     {
         $cart = $this->getCart();
 
-        if (! $cart) {
+        if (!$cart) {
             return false;
         }
 
@@ -861,14 +863,12 @@ class Cart {
                 if ($productFlat->type == 'configurable') {
                     if ($productFlat->sku != $item->sku) {
                         $item->update(['sku' => $productFlat->sku]);
-
                     } else if ($productFlat->name != $item->name) {
                         $item->update(['name' => $productFlat->name]);
-
                     } else if ($this->price->getMinimalPrice($item->child->product_flat) != $item->price) {
                         // $price = (float) $item->custom_price ? $item->custom_price : $item->child->product->price;
 
-                        if (! is_null($item->custom_price)) {
+                        if (!is_null($item->custom_price)) {
                             $price = $item->custom_price;
                         } else {
                             $price = $this->price->getMinimalPrice($item->child->product_flat);
@@ -881,18 +881,15 @@ class Cart {
                             'base_total' => $price * ($item->quantity),
                         ]);
                     }
-
                 } else if ($productFlat->type == 'simple') {
                     if ($productFlat->sku != $item->sku) {
                         $item->update(['sku' => $productFlat->sku]);
-
                     } else if ($productFlat->name != $item->name) {
                         $item->update(['name' => $productFlat->name]);
-
                     } else if ($this->price->getMinimalPrice($productFlat) != $item->price) {
                         // $price = (float) $item->custom_price ? $item->custom_price : $item->product->price;
 
-                        if (! is_null($item->custom_price)) {
+                        if (!is_null($item->custom_price)) {
                             $price = $item->custom_price;
                         } else {
                             $price = $this->price->getMinimalPrice($productFlat);
@@ -916,31 +913,31 @@ class Cart {
      * Calculates cart items tax
      *
      * @return void
-    */
+     */
     public function calculateItemsTax()
     {
-        if (! $cart = $this->getCart())
+        if (!$cart = $this->getCart())
             return false;
 
-        if (! $shippingAddress = $cart->shipping_address)
+        if (!$shippingAddress = $cart->shipping_address)
             return;
 
         foreach ($cart->items()->get() as $item) {
             $taxCategory = $this->taxCategory->find($item->product->tax_category_id);
 
-            if (! $taxCategory)
+            if (!$taxCategory)
                 continue;
 
             $taxRates = $taxCategory->tax_rates()->where([
-                    'state' => $shippingAddress->state,
-                    'country' => $shippingAddress->country,
-                ])->orderBy('tax_rate', 'desc')->get();
+                'state' => $shippingAddress->state,
+                'country' => $shippingAddress->country,
+            ])->orderBy('tax_rate', 'desc')->get();
 
-            if (count( $taxRates) > 0) {
+            if (count($taxRates) > 0) {
                 foreach ($taxRates as $rate) {
                     $haveTaxRate = false;
 
-                    if (! $rate->is_zip) {
+                    if (!$rate->is_zip) {
                         if ($rate->zip_code == '*' || $rate->zip_code == $shippingAddress->postcode) {
                             $haveTaxRate = true;
                         }
@@ -976,10 +973,10 @@ class Cart {
      */
     public function hasError()
     {
-        if (! $this->getCart())
+        if (!$this->getCart())
             return true;
 
-        if (! $this->isItemsHaveSufficientQuantity())
+        if (!$this->isItemsHaveSufficientQuantity())
             return true;
 
         return false;
@@ -993,7 +990,7 @@ class Cart {
     public function isItemsHaveSufficientQuantity()
     {
         foreach ($this->getCart()->items as $item) {
-            if (! $this->isItemHaveQuantity($item))
+            if (!$this->isItemHaveQuantity($item))
                 return false;
         }
 
@@ -1009,7 +1006,7 @@ class Cart {
     {
         $product = $item->type == 'configurable' ? $item->child->product : $item->product;
 
-        if (! $product->haveSufficientQuantity($item->quantity))
+        if (!$product->haveSufficientQuantity($item->quantity))
             return false;
 
         return true;
@@ -1070,9 +1067,9 @@ class Cart {
             'discount_amount' => $data['discount_amount'],
             'base_discount_amount' => $data['base_discount_amount'],
 
-            'shipping_address' => array_except($data['shipping_address'], ['id', 'cart_id']),
-            'billing_address' => array_except($data['billing_address'], ['id', 'cart_id']),
-            'payment' => array_except($data['payment'], ['id', 'cart_id']),
+            'shipping_address' => Arr::except($data['shipping_address'], ['id', 'cart_id']),
+            'billing_address' => Arr::except($data['billing_address'], ['id', 'cart_id']),
+            'payment' => Arr::except($data['payment'], ['id', 'cart_id']),
 
             'channel' => core()->getCurrentChannel(),
         ];
