@@ -90,11 +90,11 @@ class UserController extends Controller
         if (isset($data['password']) && $data['password'])
             $data['password'] = bcrypt($data['password']);
 
-        Event::fire('user.admin.create.before');
+        Event::dispatch('user.admin.create.before');
 
         $admin = $this->admin->create($data);
 
-        Event::fire('user.admin.create.after', $admin);
+        Event::dispatch('user.admin.create.after', $admin);
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'User']));
 
@@ -138,11 +138,11 @@ class UserController extends Controller
             $data['status'] = 0;
         }
 
-        Event::fire('user.admin.update.before', $id);
+        Event::dispatch('user.admin.update.before', $id);
 
         $admin = $this->admin->update($data, $id);
 
-        Event::fire('user.admin.update.after', $admin);
+        Event::dispatch('user.admin.update.after', $admin);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'User']));
 
@@ -162,7 +162,7 @@ class UserController extends Controller
         if ($this->admin->count() == 1) {
             session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Admin']));
         } else {
-            Event::fire('user.admin.delete.before', $id);
+            Event::dispatch('user.admin.delete.before', $id);
 
             if (auth()->guard('admin')->user()->id == $id) {
                 return view('admin::customers.confirm-password');
@@ -173,7 +173,7 @@ class UserController extends Controller
 
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Admin']));
 
-                Event::fire('user.admin.delete.after', $id);
+                Event::dispatch('user.admin.delete.after', $id);
 
                 return response()->json(['message' => true], 200);
             } catch (Exception $e) {
@@ -199,11 +199,11 @@ class UserController extends Controller
             } else {
                 $id = auth()->guard('admin')->user()->id;
 
-                Event::fire('user.admin.delete.before', $id);
+                Event::dispatch('user.admin.delete.before', $id);
 
                 $this->admin->delete($id);
 
-                Event::fire('user.admin.delete.after', $id);
+                Event::dispatch('user.admin.delete.after', $id);
 
                 session()->flash('success', trans('admin::app.users.users.delete-success'));
 

@@ -78,7 +78,7 @@ class SessionController extends Controller
         }
 
         //Event passed to prepare cart after login
-        Event::fire('customer.after.login', $request->input('email'));
+        Event::dispatch('customer.after.login', $request->input('email'));
 
         return redirect()->intended(route($this->_config['redirect']));
     }
@@ -87,7 +87,7 @@ class SessionController extends Controller
     {
         auth()->guard('customer')->logout();
 
-        Event::fire('customer.after.logout', $id);
+        Event::dispatch('customer.after.logout', $id);
 
         return redirect()->route($this->_config['redirect']);
     }

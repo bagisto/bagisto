@@ -267,7 +267,7 @@ class ProductController extends Controller
      */
     public function sync()
     {
-        Event::fire('products.datagrid.sync', true);
+        Event::dispatch('products.datagrid.sync', true);
 
         return redirect()->route('admin.catalog.products.index');
     }

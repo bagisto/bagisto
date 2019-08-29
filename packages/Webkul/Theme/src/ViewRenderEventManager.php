@@ -31,7 +31,7 @@ class ViewRenderEventManager
     {
         $this->params = $params ?? [];
 
-        Event::fire($eventName, $this);
+        Event::dispatch($eventName, $this);
 
         return $this->templates;
     }
@@ -77,7 +77,7 @@ class ViewRenderEventManager
     public function render()
     {
         $string = "";
-        
+
         foreach ($this->templates as $template) {
             if (view()->exists($template)) {
                 $string .= view($template , $this->params)->render();
@@ -86,7 +86,7 @@ class ViewRenderEventManager
                 $string .= $template;
             }
         }
-        
+
         return $string;
     }
 }

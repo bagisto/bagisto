@@ -1132,12 +1132,12 @@ class Cart {
             $data['quantity'] = 1;
             $data['product'] = $product->id;
 
-            \Event::fire('checkout.cart.add.before', $product->id);
+            \Event::dispatch('checkout.cart.add.before', $product->id);
 
             $result = $this->add($product->id, $data);
 
             if ($result) {
-                \Event::fire('checkout.cart.add.after', $result);
+                \Event::dispatch('checkout.cart.add.after', $result);
 
                 return 1;
             } else {

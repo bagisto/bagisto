@@ -64,7 +64,7 @@ class ShipmentRepository extends Repository
 
         parent::__construct($app);
     }
-    
+
     /**
      * Specify Model class name
      *
@@ -83,9 +83,9 @@ class ShipmentRepository extends Repository
     public function create(array $data)
     {
         DB::beginTransaction();
-        
+
         try {
-            Event::fire('sales.shipment.save.before', $data);
+            Event::dispatch('sales.shipment.save.before', $data);
 
             $order = $this->order->find($data['order_id']);
 
@@ -151,13 +151,13 @@ class ShipmentRepository extends Repository
 
             $this->order->updateOrderStatus($order);
 
-            Event::fire('sales.shipment.save.after', $shipment);
+            Event::dispatch('sales.shipment.save.after', $shipment);
         } catch (\Exception $e) {
             DB::rollBack();
 
             throw $e;
         }
-        
+
         DB::commit();
 
         return $shipment;

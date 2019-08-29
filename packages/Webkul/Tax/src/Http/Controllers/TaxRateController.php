@@ -94,11 +94,11 @@ class TaxRateController extends Controller
             unset($data['zip_code']);
         }
 
-        Event::fire('tax.tax_rate.create.before');
+        Event::dispatch('tax.tax_rate.create.before');
 
         $taxRate = $this->taxRate->create($data);
 
-        Event::fire('tax.tax_rate.create.after', $taxRate);
+        Event::dispatch('tax.tax_rate.create.after', $taxRate);
 
         session()->flash('success', trans('admin::app.settings.tax-rates.create-success'));
 
@@ -137,11 +137,11 @@ class TaxRateController extends Controller
             'tax_rate' => 'required|numeric|min:0.0001'
         ]);
 
-        Event::fire('tax.tax_rate.update.before', $id);
+        Event::dispatch('tax.tax_rate.update.before', $id);
 
         $taxRate = $this->taxRate->update(request()->input(), $id);
 
-        Event::fire('tax.tax_rate.update.after', $taxRate);
+        Event::dispatch('tax.tax_rate.update.after', $taxRate);
 
         session()->flash('success', trans('admin::app.settings.tax-rates.update-success'));
 
@@ -159,11 +159,11 @@ class TaxRateController extends Controller
         $taxRate = $this->taxRate->findOrFail($id);
 
         try {
-            Event::fire('tax.tax_rate.delete.before', $id);
+            Event::dispatch('tax.tax_rate.delete.before', $id);
 
             $this->taxRate->delete($id);
 
-            Event::fire('tax.tax_rate.delete.after', $id);
+            Event::dispatch('tax.tax_rate.delete.after', $id);
 
             session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Tax Rate']));
 

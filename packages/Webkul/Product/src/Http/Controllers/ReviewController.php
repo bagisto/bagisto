@@ -86,11 +86,11 @@ class ReviewController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Event::fire('customer.review.update.before', $id);
+        Event::dispatch('customer.review.update.before', $id);
 
         $this->productReview->update(request()->all(), $id);
 
-        Event::fire('customer.review.update.after', $id);
+        Event::dispatch('customer.review.update.after', $id);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Review']));
 
@@ -108,11 +108,11 @@ class ReviewController extends Controller
         $productReview = $this->productReview->findOrFail($id);
 
         try {
-            Event::fire('customer.review.delete.before', $id);
+            Event::dispatch('customer.review.delete.before', $id);
 
             $this->productReview->delete($id);
 
-            Event::fire('customer.review.delete.after', $id);
+            Event::dispatch('customer.review.delete.after', $id);
 
             session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Review']));
 
@@ -139,11 +139,11 @@ class ReviewController extends Controller
 
             foreach ($indexes as $key => $value) {
                 try {
-                    Event::fire('customer.review.delete.before', $value);
+                    Event::dispatch('customer.review.delete.before', $value);
 
                     $this->productReview->delete($value);
 
-                    Event::fire('customer.review.delete.after', $value);
+                    Event::dispatch('customer.review.delete.after', $value);
                 } catch(\Exception $e) {
                     $suppressFlash = true;
 
@@ -184,11 +184,11 @@ class ReviewController extends Controller
                 try {
                     if ($data['massaction-type'] == 'update') {
                         if ($data['update-options'] == 1) {
-                            Event::fire('customer.review.update.before', $value);
+                            Event::dispatch('customer.review.update.before', $value);
 
                             $review->update(['status' => 'approved']);
 
-                            Event::fire('customer.review.update.after', $review);
+                            Event::dispatch('customer.review.update.after', $review);
                         } else if ($data['update-options'] == 0) {
                             $review->update(['status' => 'pending']);
                         } else if ($data['update-options'] == 2) {

@@ -98,11 +98,11 @@ class ChannelController extends Controller
 
         unset($data['seo']);
 
-        Event::fire('core.channel.create.before');
+        Event::dispatch('core.channel.create.before');
 
         $channel = $this->channel->create($data);
 
-        Event::fire('core.channel.create.after', $channel);
+        Event::dispatch('core.channel.create.after', $channel);
 
         session()->flash('success', trans('admin::app.settings.channels.create-success'));
 
@@ -156,11 +156,11 @@ class ChannelController extends Controller
 
         $data['home_seo'] = json_encode($data['seo']);
 
-        Event::fire('core.channel.update.before', $id);
+        Event::dispatch('core.channel.update.before', $id);
 
         $channel = $this->channel->update($data, $id);
 
-        Event::fire('core.channel.update.after', $channel);
+        Event::dispatch('core.channel.update.after', $channel);
 
         session()->flash('success', trans('admin::app.settings.channels.update-success'));
 
@@ -181,11 +181,11 @@ class ChannelController extends Controller
             session()->flash('error', trans('admin::app.settings.channels.last-delete-error'));
         } else {
             try {
-                Event::fire('core.channel.delete.before', $id);
+                Event::dispatch('core.channel.delete.before', $id);
 
                 $this->channel->delete($id);
 
-                Event::fire('core.channel.delete.after', $id);
+                Event::dispatch('core.channel.delete.after', $id);
 
                 session()->flash('success', trans('admin::app.settings.channels.delete-success'));
 

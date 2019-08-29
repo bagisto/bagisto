@@ -93,11 +93,11 @@ class CartController extends Controller
     public function add($id)
     {
         try {
-            Event::fire('checkout.cart.add.before', $id);
+            Event::dispatch('checkout.cart.add.before', $id);
 
             $result = Cart::add($id, request()->except('_token'));
 
-            Event::fire('checkout.cart.add.after', $result);
+            Event::dispatch('checkout.cart.add.after', $result);
 
             Cart::collectTotals();
 
@@ -139,11 +139,11 @@ class CartController extends Controller
      */
     public function remove($itemId)
     {
-        Event::fire('checkout.cart.delete.before', $itemId);
+        Event::dispatch('checkout.cart.delete.before', $itemId);
 
         Cart::removeItem($itemId);
 
-        Event::fire('checkout.cart.delete.after', $itemId);
+        Event::dispatch('checkout.cart.delete.after', $itemId);
 
         Cart::collectTotals();
 
@@ -173,7 +173,7 @@ class CartController extends Controller
 
                 $data['quantity'] = $value;
 
-                Event::fire('checkout.cart.update.before', $item);
+                Event::dispatch('checkout.cart.update.before', $item);
 
                 $result = Cart::updateItem($item->product_id, $data, $key);
 
@@ -181,7 +181,7 @@ class CartController extends Controller
                     $this->suppressFlash = true;
                 }
 
-                Event::fire('checkout.cart.update.after', $item);
+                Event::dispatch('checkout.cart.update.after', $item);
 
                 unset($item);
                 unset($data);
@@ -216,11 +216,11 @@ class CartController extends Controller
     public function buyNow($id, $quantity = 1)
     {
         try {
-            Event::fire('checkout.cart.add.before', $id);
+            Event::dispatch('checkout.cart.add.before', $id);
 
             $result = Cart::proceedToBuyNow($id, $quantity);
 
-            Event::fire('checkout.cart.add.after', $result);
+            Event::dispatch('checkout.cart.add.after', $result);
 
             Cart::collectTotals();
 

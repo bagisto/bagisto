@@ -103,7 +103,7 @@ class ProductRepository extends Repository
     public function create(array $data)
     {
         //before store of the product
-        Event::fire('catalog.product.create.before');
+        Event::dispatch('catalog.product.create.before');
 
         $product = $this->model->create($data);
 
@@ -132,7 +132,7 @@ class ProductRepository extends Repository
         }
 
         //after store of the product
-        Event::fire('catalog.product.create.after', $product);
+        Event::dispatch('catalog.product.create.after', $product);
 
         return $product;
     }
@@ -145,7 +145,7 @@ class ProductRepository extends Repository
      */
     public function update(array $data, $id, $attribute = "id")
     {
-        Event::fire('catalog.product.update.before', $id);
+        Event::dispatch('catalog.product.update.before', $id);
 
         $product = $this->find($id);
 
@@ -264,7 +264,7 @@ class ProductRepository extends Repository
             $product['channels'] = $data['channels'];
         }
 
-        Event::fire('catalog.product.update.after', $product);
+        Event::dispatch('catalog.product.update.after', $product);
 
         return $product;
     }
@@ -275,11 +275,11 @@ class ProductRepository extends Repository
      */
     public function delete($id)
     {
-        Event::fire('catalog.product.delete.before', $id);
+        Event::dispatch('catalog.product.delete.before', $id);
 
         parent::delete($id);
 
-        Event::fire('catalog.product.delete.after', $id);
+        Event::dispatch('catalog.product.delete.after', $id);
     }
 
     /**

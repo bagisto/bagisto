@@ -64,7 +64,7 @@ class InvoiceRepository extends Repository
 
         parent::__construct($app);
     }
-    
+
     /**
      * Specify Model class name
      *
@@ -83,9 +83,9 @@ class InvoiceRepository extends Repository
     public function create(array $data)
     {
         DB::beginTransaction();
-        
+
         try {
-            Event::fire('sales.invoice.save.before', $data);
+            Event::dispatch('sales.invoice.save.before', $data);
 
             $order = $this->order->find($data['order_id']);
 
@@ -127,7 +127,7 @@ class InvoiceRepository extends Repository
                         'product_type' => $orderItem->product_type,
                         'additional' => $orderItem->additional,
                     ]);
-                
+
                 if ($orderItem->type == 'configurable' && $orderItem->child) {
                     $childOrderItem = $orderItem->child;
 
@@ -161,13 +161,13 @@ class InvoiceRepository extends Repository
 
             $this->order->updateOrderStatus($order);
 
-            Event::fire('sales.invoice.save.after', $invoice);
+            Event::dispatch('sales.invoice.save.after', $invoice);
         } catch (\Exception $e) {
             DB::rollBack();
 
             throw $e;
         }
-        
+
         DB::commit();
 
         return $invoice;

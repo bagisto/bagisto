@@ -77,11 +77,11 @@ class RoleController extends Controller
             'permission_type' => 'required',
         ]);
 
-        Event::fire('user.role.create.before');
+        Event::dispatch('user.role.create.before');
 
         $role = $this->role->create(request()->all());
 
-        Event::fire('user.role.create.after', $role);
+        Event::dispatch('user.role.create.after', $role);
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Role']));
 
@@ -115,11 +115,11 @@ class RoleController extends Controller
             'permission_type' => 'required',
         ]);
 
-        Event::fire('user.role.update.before', $id);
+        Event::dispatch('user.role.update.before', $id);
 
         $role = $this->role->update(request()->all(), $id);
 
-        Event::fire('user.role.update.after', $role);
+        Event::dispatch('user.role.update.after', $role);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Role']));
 
@@ -142,11 +142,11 @@ class RoleController extends Controller
             session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Role']));
         } else {
             try {
-                Event::fire('user.role.delete.before', $id);
+                Event::dispatch('user.role.delete.before', $id);
 
                 $this->role->delete($id);
 
-                Event::fire('user.role.delete.after', $id);
+                Event::dispatch('user.role.delete.after', $id);
 
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Role']));
 

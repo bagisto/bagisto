@@ -62,7 +62,7 @@ class OrderRepository extends Repository
         DB::beginTransaction();
 
         try {
-            Event::fire('checkout.order.save.before', $data);
+            Event::dispatch('checkout.order.save.before', $data);
 
             if (isset($data['customer']) && $data['customer']) {
                 $data['customer_id'] = $data['customer']->id;
@@ -99,7 +99,7 @@ class OrderRepository extends Repository
                 $this->orderItem->manageInventory($orderItem);
             }
 
-            Event::fire('checkout.order.save.after', $order);
+            Event::dispatch('checkout.order.save.after', $order);
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -122,7 +122,7 @@ class OrderRepository extends Repository
         if (! $order->canCancel())
             return false;
 
-        Event::fire('sales.order.cancel.before', $order);
+        Event::dispatch('sales.order.cancel.before', $order);
 
         foreach ($order->items as $item) {
             if ($item->qty_to_cancel) {
@@ -136,7 +136,7 @@ class OrderRepository extends Repository
 
         $this->updateOrderStatus($order);
 
-        Event::fire('sales.order.cancel.after', $order);
+        Event::dispatch('sales.order.cancel.after', $order);
 
         return true;
     }
@@ -173,7 +173,7 @@ class OrderRepository extends Repository
             $totalQtyCanceled += $item->qty_canceled;
         }
 
-        if ($totalQtyOrdered != ($totalQtyRefunded + $totalQtyCanceled) && 
+        if ($totalQtyOrdered != ($totalQtyRefunded + $totalQtyCanceled) &&
             $totalQtyOrdered == $totalQtyInvoiced + $totalQtyRefunded + $totalQtyCanceled &&
             $totalQtyOrdered == $totalQtyShipped + $totalQtyRefunded + $totalQtyCanceled)
             return true;

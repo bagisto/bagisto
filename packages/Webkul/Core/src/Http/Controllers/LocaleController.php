@@ -76,11 +76,11 @@ class LocaleController extends Controller
             'direction' => 'in:ltr,rtl'
         ]);
 
-        Event::fire('core.locale.create.before');
+        Event::dispatch('core.locale.create.before');
 
         $locale = $this->locale->create(request()->all());
 
-        Event::fire('core.locale.create.after', $locale);
+        Event::dispatch('core.locale.create.after', $locale);
 
         session()->flash('success', trans('admin::app.settings.locales.create-success'));
 
@@ -115,11 +115,11 @@ class LocaleController extends Controller
             'direction' => 'in:ltr,rtl'
         ]);
 
-        Event::fire('core.locale.update.before', $id);
+        Event::dispatch('core.locale.update.before', $id);
 
         $locale = $this->locale->update(request()->all(), $id);
 
-        Event::fire('core.locale.update.after', $locale);
+        Event::dispatch('core.locale.update.after', $locale);
 
         session()->flash('success', trans('admin::app.settings.locales.update-success'));
 
@@ -140,11 +140,11 @@ class LocaleController extends Controller
             session()->flash('error', trans('admin::app.settings.locales.last-delete-error'));
         } else {
             try {
-                Event::fire('core.locale.delete.before', $id);
+                Event::dispatch('core.locale.delete.before', $id);
 
                 $this->locale->delete($id);
 
-                Event::fire('core.locale.delete.after', $id);
+                Event::dispatch('core.locale.delete.after', $id);
 
                 session()->flash('success', trans('admin::app.settings.locales.delete-success'));
 

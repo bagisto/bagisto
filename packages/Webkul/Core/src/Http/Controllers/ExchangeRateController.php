@@ -85,11 +85,11 @@ class ExchangeRateController extends Controller
             'rate' => 'required|numeric'
         ]);
 
-        Event::fire('core.exchange_rate.create.before');
+        Event::dispatch('core.exchange_rate.create.before');
 
         $exchangeRate = $this->exchangeRate->create(request()->all());
 
-        Event::fire('core.exchange_rate.create.after', $exchangeRate);
+        Event::dispatch('core.exchange_rate.create.after', $exchangeRate);
 
         session()->flash('success', trans('admin::app.settings.exchange_rates.create-success'));
 
@@ -125,11 +125,11 @@ class ExchangeRateController extends Controller
             'rate' => 'required|numeric'
         ]);
 
-        Event::fire('core.exchange_rate.update.before', $id);
+        Event::dispatch('core.exchange_rate.update.before', $id);
 
         $exchangeRate = $this->exchangeRate->update(request()->all(), $id);
 
-        Event::fire('core.exchange_rate.update.after', $exchangeRate);
+        Event::dispatch('core.exchange_rate.update.after', $exchangeRate);
 
         session()->flash('success', trans('admin::app.settings.exchange_rates.update-success'));
 
@@ -186,13 +186,13 @@ class ExchangeRateController extends Controller
             session()->flash('error', trans('admin::app.settings.exchange_rates.last-delete-error'));
         } else {
             try {
-                Event::fire('core.exchange_rate.delete.before', $id);
+                Event::dispatch('core.exchange_rate.delete.before', $id);
 
                 $this->exchangeRate->delete($id);
 
                 session()->flash('success', trans('admin::app.settings.exchange_rates.delete-success'));
 
-                Event::fire('core.exchange_rate.delete.after', $id);
+                Event::dispatch('core.exchange_rate.delete.after', $id);
 
                 return response()->json(['message' => true], 200);
             } catch (\Exception $e) {
