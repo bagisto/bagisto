@@ -1000,7 +1000,7 @@ return [
             'url-key' => 'URL Key',
             'channel' => 'Channel',
             'locale' => 'Locale',
-            'create-btn-title' => 'Add Page',
+            'create-btn-title' => 'Save Page',
             'edit-title' => 'Edit Page',
             'edit-btn-title' => 'Save Page',
             'create-success' => 'Page created successfully',
