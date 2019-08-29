@@ -2,10 +2,11 @@
 
 namespace Webkul\Core\Repositories;
 
-use Illuminate\Container\Container as App;
-use Webkul\Core\Eloquent\Repository;
-use Webkul\Core\Repositories\ChannelRepository as Channel;
 use Storage;
+use Illuminate\Support\Arr;
+use Webkul\Core\Eloquent\Repository;
+use Illuminate\Container\Container as App;
+use Webkul\Core\Repositories\ChannelRepository as Channel;
 
 /**
  * Slider Repository
@@ -20,8 +21,7 @@ class SliderRepository extends Repository
     public function __construct(
         Channel $channel,
         App $app
-    )
-    {
+    ) {
         $this->channel = $channel;
 
         parent::__construct($app);
@@ -51,7 +51,7 @@ class SliderRepository extends Repository
         $image = false;
 
         if (isset($data['image'])) {
-            $image = $first = array_first($data['image'], function ($value, $key) {
+            $image = $first = Arr::first($data['image'], function ($value, $key) {
                 if ($value)
                     return $value;
                 else
@@ -88,7 +88,7 @@ class SliderRepository extends Repository
         $image = false;
 
         if (isset($data['image'])) {
-            $image = array_first($data['image'], function ($value) {
+            $image = Arr::first($data['image'], function ($value) {
                 if ($value)
                     return $value;
                 else
@@ -122,7 +122,8 @@ class SliderRepository extends Repository
      *
      * @return Boolean
      */
-    public function destroy($id) {
+    public function destroy($id)
+    {
 
         $sliderItem = $this->find($id);
 

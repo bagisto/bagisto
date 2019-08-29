@@ -2,11 +2,12 @@
 
 namespace Webkul\Discount\Helpers\Cart;
 
-use Webkul\Discount\Repositories\CartRuleRepository as CartRule;
-use Webkul\Checkout\Repositories\CartItemRepository as CartItem;
-use Webkul\Discount\Repositories\CartRuleCartRepository as CartRuleCart;
-use Carbon\Carbon;
 use Cart;
+use Carbon\Carbon;
+use Illuminate\Support\Arr;
+use Webkul\Checkout\Repositories\CartItemRepository as CartItem;
+use Webkul\Discount\Repositories\CartRuleRepository as CartRule;
+use Webkul\Discount\Repositories\CartRuleCartRepository as CartRuleCart;
 
 abstract class Discount
 {
@@ -206,7 +207,7 @@ abstract class Discount
 
                 return true;
             }
-        } else if ($alreadyApplied->count() && $alreadyApplied->first()->cart_rule->id != $rule->id && ! $alreadyApplied->first()->cart_rule->end_other_rules) {
+        } else if ($alreadyApplied->count() && $alreadyApplied->first()->cart_rule->id != $rule->id && !$alreadyApplied->first()->cart_rule->end_other_rules) {
             if ($rule->use_coupon) {
                 if ($alreadyApplied->first()->cart_rule->use_coupon) {
                     $rules = collect();
@@ -393,7 +394,7 @@ abstract class Discount
         if ($rule->conditions != null) {
             $conditions = json_decode(json_decode($rule->conditions));
 
-            $test_mode = array_last($conditions);
+            $test_mode = Arr::last($conditions);
 
             if ($test_mode->criteria == 'any_is_true') {
                 $conditionsBased = $this->testIfAnyConditionIsTrue($conditions, $cart);
@@ -520,7 +521,7 @@ abstract class Discount
             $actualShippingRate = $actualShippingRate->calculate();
 
             if (is_array($actualShippingRate)) {
-                foreach($actualShippingRate as $actualRate) {
+                foreach ($actualShippingRate as $actualRate) {
                     if ($actualRate->method == $cart->selected_shipping_rate->method) {
                         $actualShippingRate = $actualRate;
 
@@ -665,7 +666,7 @@ abstract class Discount
 
             $result = $this->validateRule($alreadyAppliedCartRule);
 
-            if (! $result) {
+            if (!$result) {
                 $this->clearDiscount();
 
                 $alreadyAppliedRule->delete();
@@ -748,28 +749,25 @@ abstract class Discount
         $result = true;
 
         foreach ($conditions as $condition) {
-            if (! isset($condition->attribute) || ! isset($condition->condition) || !isset($condition->value)) {
+            if (!isset($condition->attribute) || !isset($condition->condition) || !isset($condition->value)) {
                 continue;
             }
 
             if (isset($condition->attribute)) {
                 $actual_value = ${$condition->attribute};
-
             } else {
                 $result = false;
             }
 
             if (isset($condition->value)) {
                 $test_value = $condition->value;
-
             } else {
                 $result = false;
             }
 
             if (isset($condition->condition)) {
                 $test_condition = $condition->condition;
-            }
-            else {
+            } else {
                 $result = false;
             }
 
@@ -787,31 +785,31 @@ abstract class Discount
                         break;
                     }
                 } else if ($test_condition == '>=') {
-                    if (! ($actual_value >= $test_value)) {
+                    if (!($actual_value >= $test_value)) {
                         $result = false;
 
                         break;
                     }
                 } else if ($test_condition == '<=') {
-                    if (! ($actual_value <= $test_value)) {
+                    if (!($actual_value <= $test_value)) {
                         $result = false;
 
                         break;
                     }
                 } else if ($test_condition == '>') {
-                    if (! ($actual_value > $test_value)) {
+                    if (!($actual_value > $test_value)) {
                         $result = false;
 
                         break;
                     }
                 } else if ($test_condition == '<') {
-                    if (! ($actual_value < $test_value)) {
+                    if (!($actual_value < $test_value)) {
                         $result = false;
 
                         break;
                     }
                 } else if ($test_condition == '{}') {
-                    if (! str_contains($test_value, $actual_value)) {
+                    if (!str_contains($test_value, $actual_value)) {
                         $result = false;
 
                         break;
@@ -873,12 +871,12 @@ abstract class Discount
 
         $total_weight = 0;
 
-        foreach($cart->items as $item) {
+        foreach ($cart->items as $item) {
             $total_weight = $total_weight + $item->base_total_weight;
         }
 
         foreach ($conditions as $condition) {
-            if (!isset($condition->attribute) || ! isset($condition->condition) || !isset($condition->value)) {
+            if (!isset($condition->attribute) || !isset($condition->condition) || !isset($condition->value)) {
                 continue;
             }
 
@@ -890,15 +888,13 @@ abstract class Discount
 
             if (isset($condition->value)) {
                 $test_value = $condition->value;
-
             } else {
                 $result = false;
             }
 
             if (isset($condition->condition)) {
                 $test_condition = $condition->condition;
-            }
-            else {
+            } else {
                 $result = false;
             }
 
@@ -946,7 +942,7 @@ abstract class Discount
                         break;
                     }
                 } else if ($test_condition == '!{}') {
-                    if (! str_contains($test_value, $actual_value)) {
+                    if (!str_contains($test_value, $actual_value)) {
                         $result = true;
 
                         break;
