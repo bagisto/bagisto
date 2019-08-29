@@ -2,6 +2,7 @@
 
 namespace Webkul\Core;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Request;
 
 /**
@@ -10,42 +11,44 @@ use Illuminate\Support\Facades\Request;
  * @author    Jitendra Singh <jitendra@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class Tree {
+class Tree
+{
 
-    /**
-     * Contains tree item
-     *
-     * @var array
-     */
+	/**
+	 * Contains tree item
+	 *
+	 * @var array
+	 */
 	public $items = [];
 
-    /**
-     * Contains acl roles
-     *
-     * @var array
-     */
+	/**
+	 * Contains acl roles
+	 *
+	 * @var array
+	 */
 	public $roles = [];
 
-    /**
-     * Contains current item route
-     *
-     * @var string
-     */
+	/**
+	 * Contains current item route
+	 *
+	 * @var string
+	 */
 	public $current;
 
-    /**
-     * Contains current item key
-     *
-     * @var string
-     */
+	/**
+	 * Contains current item key
+	 *
+	 * @var string
+	 */
 	public $currentKey;
 
-    /**
-     * Create a new instance.
-     *
-     * @return void
-     */
-	public function __construct() {
+	/**
+	 * Create a new instance.
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
 		$this->current = Request::url();
 	}
 
@@ -56,7 +59,8 @@ class Tree {
 	 * @param  callable $callback Callback to use after the Config creation
 	 * @return object
 	 */
-	public static function create($callback = null) {
+	public static function create($callback = null)
+	{
 		$tree = new Tree();
 
 		if ($callback) {
@@ -73,13 +77,13 @@ class Tree {
 	 */
 	public function add($item, $type = '')
 	{
-        $item['children'] = [];
+		$item['children'] = [];
 
 		if ($type == 'menu') {
-            $item['url'] = route($item['route']);
+			$item['url'] = route($item['route']);
 
 			if (strpos($this->current, $item['url']) !== false) {
-                $this->currentKey = $item['key'];
+				$this->currentKey = $item['key'];
 			}
 		} else if ($type == 'acl') {
 			$item['name'] = trans($item['name']);
@@ -88,8 +92,7 @@ class Tree {
 
 		$children = str_replace('.', '.children.', $item['key']);
 
-		core()->array_set($this->items, $children, $item);
-
+		Arr::set($this->items, $children, $item);
 	}
 
 	/**
