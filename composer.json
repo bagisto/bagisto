@@ -26,7 +26,7 @@
         "intervention/imagecache": "^2.3",
         "kalnoy/nestedset": "^4.3",
         "konekt/concord": "^1.2",
-        "laravel/framework": "5.6.*",
+        "laravel/framework": "^5.8.0",
         "laravel/tinker": "^1.0",
         "maatwebsite/excel": "3.1.x-dev",
         "nwidart/laravel-modules": "^3.2",
@@ -37,7 +37,7 @@
         "barryvdh/laravel-debugbar": "^3.1",
         "filp/whoops": "^2.0",
         "fzaninotto/faker": "^1.4",
-        "laravel/dusk": "^4.0",
+        "laravel/dusk": "^5.0.0",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^2.0",
         "phpunit/phpunit": "^7.0"
@@ -68,7 +68,6 @@
             "database/seeds",
             "database/factories"
         ],
-
         "psr-4": {
             "App\\": "app/",
             "Webkul\\User\\": "packages/Webkul/User/src",
