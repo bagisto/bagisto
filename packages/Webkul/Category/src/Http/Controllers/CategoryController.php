@@ -2,9 +2,10 @@
 
 namespace Webkul\Category\Http\Controllers;
 
+use Illuminate\Support\Facades\Event;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Category\Models\CategoryTranslation;
-use Illuminate\Support\Facades\Event;
+use Webkul\Attribute\Repositories\AttributeRepository;
 
 /**
  * Catalog category controller

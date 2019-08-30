@@ -16,6 +16,7 @@ class CreateProductBundleOptionProductsTable extends Migration
         Schema::create('product_bundle_option_products', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('qty')->default(0);
+            $table->boolean('is_user_defined')->default(1);
             $table->boolean('is_default')->default(0);
             $table->integer('sort_order')->default(0);
 

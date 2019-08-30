@@ -437,6 +437,28 @@ class Core
     }
 
     /**
+    * Format and convert price with currency symbol
+    *
+    *  @return array
+    */
+    public function getAccountJsSymbols()
+    {
+        $formater = new \NumberFormatter( app()->getLocale(), \NumberFormatter::CURRENCY );
+
+        $pattern = $formater->getPattern();
+
+        $pattern = str_replace("¤", "%s", $pattern);
+
+        $pattern = str_replace("#,##0.00", "%v", $pattern);
+
+        return [
+            'symbol' => core()->currencySymbol(core()->getCurrentCurrencyCode()),
+            'decimal' => $formater->getSymbol(\NumberFormatter::DECIMAL_SEPARATOR_SYMBOL),
+            'format' => $pattern
+        ];
+    }
+
+    /**
     * Format price with base currency symbol
     *
     *  @param float $price

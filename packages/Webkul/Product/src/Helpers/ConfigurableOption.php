@@ -71,7 +71,7 @@ class ConfigurableOption extends AbstractProduct
      * Returns the allowed variants JSON
      *
      * @param Product $product
-     * @return float
+     * @return array
      */
     public function getConfigurationConfig($product)
     {

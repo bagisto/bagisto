@@ -657,10 +657,7 @@ class Cart {
             return false;
         } else {
             foreach ($cart->items as $item) {
-                if ($item->product_flat->getTypeInstance()->getMinimalPrice($item) == $item->price)
-                    continue;
-
-                $price = ! is_null($item->custom_price) ? $item->custom_price : $productFlat->getTypeInstance()->getMinimalPrice();
+                $price = ! is_null($item->custom_price) ? $item->custom_price : $item->base_price;
 
                 $this->cartItemRepository->update([
                     'price' => core()->convertPrice($price),
@@ -871,8 +868,10 @@ class Cart {
             'additional' => $data['additional'],
         ];
 
-        if (isset($data['child']) && $data['child']) {
-            $finalData['child'] = $this->prepareDataForOrderItem($data['child']);
+        if (isset($data['children']) && $data['children']) {
+            foreach ($data['children'] as $child) {
+                $finalData['children'][] = $this->prepareDataForOrderItem($child);
+            }
         }
 
         return $finalData;

@@ -14,7 +14,7 @@ class Cart extends Model implements CartContract
 
     protected $hidden = ['coupon_code'];
 
-    protected $with = ['items', 'items.child'];
+    protected $with = ['items', 'items.children'];
 
     /**
      * To get relevant associated items with the cart instance

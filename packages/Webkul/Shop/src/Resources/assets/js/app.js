@@ -4,6 +4,7 @@ window.VeeValidate = require("vee-validate");
 window.axios = require("axios");
 require("./bootstrap");
 require("ez-plus/src/jquery.ez-plus.js");
+var accounting = require('accounting');
 
 Vue.use(VeeValidate);
 Vue.prototype.$http = axios
@@ -12,6 +13,9 @@ window.eventBus = new Vue();
 
 Vue.component("image-slider", require("./components/image-slider.vue"));
 Vue.component("vue-slider", require("vue-slider-component"));
+Vue.filter('currency', function (value, argument) {
+    return accounting.formatMoney(value, argument);
+})
 
 $(document).ready(function () {
 

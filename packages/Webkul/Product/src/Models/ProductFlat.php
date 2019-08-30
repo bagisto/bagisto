@@ -176,6 +176,14 @@ class ProductFlat extends Model implements ProductFlatContract
     }
 
     /**
+     * Get the bundle options that owns the product.
+     */
+    public function bundle_options()
+    {
+        return $this->product->bundle_options();
+    }
+
+    /**
      * Retrieve product attributes
      *
      * @param Group $group

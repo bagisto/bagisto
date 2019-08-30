@@ -70,6 +70,41 @@ abstract class AbstractType
     protected $product;
 
     /**
+     * Is a composite product type
+     *
+     * @var boolean
+     */
+    protected $isComposite = false;
+
+    /**
+     * Is a stokable product type
+     *
+     * @var boolean
+     */
+    protected $isStockable = true;
+
+    /**
+     * Show quantity box
+     *
+     * @var boolean
+     */
+    protected $showQuantityBox = false;
+
+    /**
+     * Is product have sufficient quantity
+     *
+     * @var boolean
+     */
+    protected $haveSufficientQuantity = true;
+
+    /**
+     * Product can be moved from wishlist to cart or not
+     *
+     * @var boolean
+     */
+    protected $canBeMovedFromWishlistToCart = true;
+
+    /**
      * Create a new product type instance.
      *
      * @param  Webkul\Attribute\Repositories\AttributeRepository           $attributeRepository
@@ -213,7 +248,17 @@ abstract class AbstractType
      */
     public function isStockable()
     {
-        return true;
+        return $this->isStockable;
+    }
+
+    /**
+     * Return true if this product can have inventory
+     *
+     * @return boolean
+     */
+    public function isComposite()
+    {
+        return $this->isComposite;
     }
 
     /**
@@ -222,7 +267,7 @@ abstract class AbstractType
      */
     public function haveSufficientQuantity($qty)
     {
-        return true;
+        return $this->haveSufficientQuantity;
     }
     
     /**
@@ -232,7 +277,7 @@ abstract class AbstractType
      */
     public function showQuantityBox()
     {
-        return false;
+        return $this->showQuantityBox;
     }
 
     /**
@@ -251,7 +296,7 @@ abstract class AbstractType
      */
     public function canBeMovedFromWishlistToCart($item)
     {
-        return true;
+        return $this->canBeMovedFromWishlistToCart;
     }
 
     /**
@@ -316,6 +361,16 @@ abstract class AbstractType
     }
 
     /**
+     * Get product minimal price
+     *
+     * @return float
+     */
+    public function getFinalPrice()
+    {
+        return $this->getMinimalPrice();
+    }
+
+    /**
      * Returns the product's minimal price
      *
      * @return float
@@ -370,7 +425,7 @@ abstract class AbstractType
         if ($this->isStockable() && ! $this->haveSufficientQuantity($data['quantity']))
             return trans('shop::app.checkout.cart.quantity.inventory_warning');
 
-        $price = $this->getMinimalPrice();
+        $price = $this->getFinalPrice();
 
         $products = [
             [
@@ -406,16 +461,6 @@ abstract class AbstractType
             $data['quantity'] += $item->quantity;
 
         return $data;
-    }
-    
-    /**
-     * Check if product can be configured
-     * 
-     * @return boolean
-     */
-    public function canConfigure()
-    {
-        return false;
     }
     
     /**

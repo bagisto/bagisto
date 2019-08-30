@@ -221,11 +221,6 @@
 
             inject: ['$validator'],
 
-            data: function() {
-                return {
-                }
-            },
-
             computed: {
                 titleInputName: function () {
                     if (this.option.id)

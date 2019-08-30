@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Product\Repositories\ProductFlatRepository;
+use Webkul\Product\Models\ProductAttributeValue;
 
 /**
  * Product Repository
@@ -171,7 +172,7 @@ class ProductRepository extends Repository
                     foreach($aliases as $table => $alias) {
                         $query1 = $query1->orWhere(function($query2) use($qb, $table, $alias) {
 
-                            foreach ($this->attribute->getProductDefaultAttributes(array_keys(request()->input())) as $code => $attribute) {
+                            foreach ($this->attributeRepository->getProductDefaultAttributes(array_keys(request()->input())) as $code => $attribute) {
                                 $aliasTemp = $alias . $attribute->code;
 
                                 $qb = $qb->leftJoin('product_attribute_values as ' . $aliasTemp, $table . '.id', '=', $aliasTemp . '.product_id');

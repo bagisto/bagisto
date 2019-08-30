@@ -102,8 +102,10 @@ class OrderRepository extends Repository
             foreach ($data['items'] as $item) {
                 $orderItem = $this->orderItemRepository->create(array_merge($item, ['order_id' => $order->id]));
 
-                if (isset($item['child']) && $item['child']) {
-                    $orderItem->child = $this->orderItemRepository->create(array_merge($item['child'], ['order_id' => $order->id, 'parent_id' => $orderItem->id]));
+                if (isset($item['children']) && $item['children']) {
+                    foreach ($item['children'] as $child) {
+                        $this->orderItemRepository->create(array_merge($child, ['order_id' => $order->id, 'parent_id' => $orderItem->id]));
+                    }
                 }
 
                 $this->orderItemRepository->manageInventory($orderItem);

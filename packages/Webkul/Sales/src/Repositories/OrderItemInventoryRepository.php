@@ -38,9 +38,9 @@ class OrderItemInventoryRepository extends Repository
 
         $product = $orderItem->type == 'configurable' ? $orderItem->child->product : $orderItem->product;
 
-        if (!$product) {
+        if (! $product)
             return ;
-        }
+
         $inventories = $product->inventory_sources()->orderBy('priority', 'asc')->get();
 
         foreach ($inventories as $inventorySource) {

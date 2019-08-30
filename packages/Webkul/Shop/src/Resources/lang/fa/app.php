@@ -334,7 +334,11 @@ return [
         'view-all' => 'مشاهده همه',
         'select-above-options' => 'لطفا ابتدا گزینه های بالا را انتخاب کنید',
         'less-quantity' => 'کمیت نمی تواند کمتر از یک باشد.',
-        'starting-at' => 'Starting at'
+        'starting-at' => 'Starting at',
+        'customize-options' => 'Customize Options',
+        'choose-selection' => 'Choose a selection',
+        'your-customization' => 'Your Customization',
+        'total-amount' => 'Total Amount'
     ],
 
     'wishlist' => [

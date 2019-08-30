@@ -96,6 +96,13 @@ class Downloadable extends AbstractType
     ];
 
     /**
+     * Is a stokable product type
+     *
+     * @var boolean
+     */
+    protected $isStockable = false;
+
+    /**
      * Create a new product type instance.
      *
      * @param  Webkul\Attribute\Repositories\AttributeRepository               $attributeRepository
@@ -169,16 +176,6 @@ class Downloadable extends AbstractType
     }
 
     /**
-     * Return true if this product can have inventory
-     *
-     * @return boolean
-     */
-    public function isStockable()
-    {
-        return false;
-    }
-
-    /**
      * Returns validation rules
      *
      * @return array
@@ -208,16 +205,6 @@ class Downloadable extends AbstractType
             return trans('shop::app.checkout.cart.integrity.missing_links');
 
         return parent::prepareForCart($data);
-    }
-    
-    /**
-     * Check if product can be configured
-     * 
-     * @return boolean
-     */
-    public function canConfigure()
-    {
-        return true;
     }
     
     /**

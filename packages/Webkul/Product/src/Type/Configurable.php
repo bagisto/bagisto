@@ -33,6 +33,20 @@ class Configurable extends AbstractType
     ];
 
     /**
+     * Is a composite product type
+     *
+     * @var boolean
+     */
+    protected $isComposite = true;
+
+    /**
+     * Show quantity box
+     *
+     * @var boolean
+     */
+    protected $showQuantityBox = true;
+
+    /**
      * @param array $data
      * @return Product
      */
@@ -264,16 +278,6 @@ class Configurable extends AbstractType
     {
         return $cartItem->child->product->getTypeInstance()->haveSufficientQuantity($cartItem->quantity);
     }
-    
-    /**
-     * Return true if this product can have inventory
-     *
-     * @return boolean
-     */
-    public function showQuantityBox()
-    {
-        return true;
-    }
 
     /**
      * Returns validation rules
@@ -380,7 +384,7 @@ class Configurable extends AbstractType
         if (! $childProduct->haveSufficientQuantity($data['quantity']))
             return trans('shop::app.checkout.cart.quantity.inventory_warning');
 
-        $price = $this->getMinimalPrice();
+        $price = $this->getFinalPrice();
 
         $products = [
             [
@@ -408,16 +412,6 @@ class Configurable extends AbstractType
         ];
 
         return $products;
-    }
-    
-    /**
-     * Check if product can be configured
-     * 
-     * @return boolean
-     */
-    public function canConfigure()
-    {
-        return true;
     }
     
     /**

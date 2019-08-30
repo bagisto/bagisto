@@ -30,6 +30,13 @@ class Simple extends AbstractType
     ];
 
     /**
+     * Show quantity box
+     *
+     * @var boolean
+     */
+    protected $showQuantityBox = true;
+
+    /**
      * Return true if this product type is saleable
      *
      * @return boolean
@@ -53,16 +60,6 @@ class Simple extends AbstractType
     public function haveSufficientQuantity($qty)
     {
         return $qty <= $this->totalQuantity() ? true : (core()->getConfigData('catalog.inventory.stock_options.backorders') ? true : false);
-    }
-    
-    /**
-     * Return true if this product can have inventory
-     *
-     * @return boolean
-     */
-    public function showQuantityBox()
-    {
-        return true;
     }
 
     /**

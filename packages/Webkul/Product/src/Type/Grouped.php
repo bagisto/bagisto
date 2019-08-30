@@ -89,6 +89,13 @@ class Grouped extends AbstractType
     ];
 
     /**
+     * Is a composite product type
+     *
+     * @var boolean
+     */
+    protected $isComposite = true;
+
+    /**
      * Create a new product type instance.
      *
      * @param  Webkul\Attribute\Repositories\AttributeRepository           $attributeRepository

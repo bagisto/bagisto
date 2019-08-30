@@ -136,10 +136,8 @@ class InvoiceRepository extends Repository
                         'product_type' => $orderItem->product_type,
                         'additional' => $orderItem->additional,
                     ]);
-                
-                if ($orderItem->type == 'configurable' && $orderItem->child) {
-                    $childOrderItem = $orderItem->child;
 
+                foreach ($orderItem->children as $childOrderItem) {
                     $invoiceItem->child = $this->invoiceItemRepository->create([
                             'invoice_id' => $invoice->id,
                             'order_item_id' => $childOrderItem->id,

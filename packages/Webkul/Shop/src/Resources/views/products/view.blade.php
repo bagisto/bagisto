@@ -48,21 +48,11 @@
                         {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
 
                         @if ($product->getTypeInstance()->showQuantityBox())
-                            <div class="quantity control-group" :class="[errors.has('quantity') ? 'has-error' : '']">
-
-                                <label class="required">{{ __('shop::app.products.quantity') }}</label>
-
-                                <input class="control quantity-change" value="-" style="width: 35px; border-radius: 3px 0px 0px 3px;" onclick="updateQunatity('remove')" readonly>
-
-                                <input name="quantity" id="quantity" class="control quantity-change" value="1" v-validate="'required|numeric|min_value:1'" style="width: 60px; position: relative; margin-left: -4px; margin-right: -4px; border-right: none;border-left: none; border-radius: 0px;" data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;" readonly>
-
-                                <input class="control quantity-change" value="+" style="width: 35px; padding: 0 12px; border-radius: 0px 3px 3px 0px;" onclick=updateQunatity('add') readonly>
-
-                                <span class="control-error" v-if="errors.has('quantity')">@{{ errors.first('quantity') }}</span>
-                            </div>
+                            <quantity-changer></quantity-changer>
                         @else
                             <input type="hidden" name="quantity" value="1">
                         @endif
+                        
 
                         {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
 
@@ -71,6 +61,8 @@
                         @include ('shop::products.view.downloadable')
 
                         @include ('shop::products.view.grouped-products')
+
+                        @include ('shop::products.view.bundle-options')
                         
                         {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
 
@@ -118,6 +110,20 @@
         </form>
     </script>
 
+    <script type="text/x-template" id="quantity-changer-template">
+        <div class="quantity control-group" :class="[errors.has(controlName) ? 'has-error' : '']">
+            <label class="required">{{ __('shop::app.products.quantity') }}</label>
+
+            <button type="button" class="decrease" @click="decreaseQty()">-</button>
+
+            <input :name="controlName" class="control" :value="qty" v-validate="'required|numeric|min_value:1'" data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;" readonly>
+
+            <button type="button" class="increase" @click="increaseQty()">+</button>
+
+            <span class="control-error" v-if="errors.has(controlName)">@{{ errors.first(controlName) }}</span>
+        </div>
+    </script>
+
     <script>
 
         Vue.component('product-view', {
@@ -128,7 +134,7 @@
 
             data: function() {
                 return {
-                    is_buy_now: 0
+                    is_buy_now: 0,
                 }
             },
 
@@ -148,9 +154,55 @@
                             setTimeout(function() {
                                 document.getElementById('product-form').submit();
                             }, 0);
-
                         }
                     });
+                }
+            }
+        });
+
+        Vue.component('quantity-changer', {
+            template: '#quantity-changer-template',
+
+            inject: ['$validator'],
+
+            props: {
+                controlName: {
+                    type: String,
+                    default: 'quantity'
+                },
+
+                quantity: {
+                    type: [Number, String],
+                    default: 1
+                }
+            },
+
+            data: function() {
+                return {
+                    qty: this.quantity
+                }
+            },
+
+            watch: {
+                quantity: function (val) {
+                    this.qty = val;
+
+                    this.$emit('onQtyUpdated', this.qty)
+                }
+            },
+
+            methods: {
+                decreaseQty: function() {
+                    if (this.qty > 1)
+                        this.qty = parseInt(this.qty) - 1;
+
+                    this.$emit('onQtyUpdated', this.qty)
+                },
+
+                increaseQty: function() {
+                    this.qty = parseInt(this.qty) + 1;
+
+                    this.$emit('onQtyUpdated', this.qty)
                 }
             }
         });
@@ -196,23 +248,5 @@
                 }
             }
         };
-
-        function updateQunatity(operation) {
-            var quantity = document.getElementById('quantity').value;
-
-            if (operation == 'add') {
-                quantity = parseInt(quantity) + 1;
-            } else if (operation == 'remove') {
-                if (quantity > 1) {
-                    quantity = parseInt(quantity) - 1;
-                } else {
-                    alert('{{ __('shop::app.products.less-quantity') }}');
-                }
-            }
-            
-            document.getElementById("quantity").value = quantity;
-
-            event.preventDefault();
-        }
     </script>
 @endpush

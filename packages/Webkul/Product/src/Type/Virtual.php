@@ -29,12 +29,9 @@ class Virtual extends AbstractType
     ];
 
     /**
-     * Return true if this product can have inventory
+     * Is a stokable product type
      *
-     * @return boolean
+     * @var boolean
      */
-    public function isStockable()
-    {
-        return false;
-    }
+    protected $isStockable = false;
 }

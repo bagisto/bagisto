@@ -8,7 +8,7 @@ use Webkul\Product\Models\Product;
 
 class OrderItem extends Model implements OrderItemContract
 {
-    protected $guarded = ['id', 'child', 'created_at', 'updated_at'];
+    protected $guarded = ['id', 'child', 'children', 'created_at', 'updated_at'];
 
     protected $casts = [
         'additional' => 'array',
@@ -127,6 +127,14 @@ class OrderItem extends Model implements OrderItemContract
     public function child()
     {
         return $this->hasOne(OrderItemProxy::modelClass(), 'parent_id');
+    }
+
+    /**
+     * Get the children items.
+     */
+    public function children()
+    {
+        return $this->hasMany(self::class, 'parent_id');
     }
 
     /**

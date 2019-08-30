@@ -38,7 +38,7 @@ class OrderItemRepository extends Repository
             unset($data['product']);
         }
 
-        return $this->model->create($data);
+        return parent::create($data);
     }
 
     /**
@@ -88,26 +88,38 @@ class OrderItemRepository extends Repository
         if (! $orderedQuantity = $orderItem->qty_ordered)
             return;
 
-        $product = $orderItem->type == 'configurable' ? $orderItem->child->product : $orderItem->product;
+        $products = [];
 
-        if (! $product)
-            return;
-
-
-        $orderedInventory = $product->ordered_inventories()
-            ->where('channel_id', $orderItem->order->channel->id)
-            ->first();
-
-        if ($orderedInventory) {
-            $orderedInventory->update([
-                    'qty' => $orderedInventory->qty + $orderItem->qty_ordered
-                ]);
+        if ($orderItem->product->getTypeInstance()->isComposite()) {
+            foreach ($orderItem->children as $child) {
+                if (! $child->product)
+                    continue;
+                
+                $products[] = $child->product;
+            }
         } else {
-            $product->ordered_inventories()->create([
-                    'qty' => $orderItem->qty_ordered,
-                    'product_id' => $product->id,
-                    'channel_id' => $orderItem->order->channel->id,
-                ]);
+            if (! $orderItem->product)
+                return;
+
+            $products[] = $orderItem->product;
+        }
+
+        foreach ($products as $product) {
+            $orderedInventory = $product->ordered_inventories()
+                ->where('channel_id', $orderItem->order->channel->id)
+                ->first();
+
+            if ($orderedInventory) {
+                $orderedInventory->update([
+                        'qty' => $orderedInventory->qty + $orderItem->qty_ordered
+                    ]);
+            } else {
+                $product->ordered_inventories()->create([
+                        'qty' => $orderItem->qty_ordered,
+                        'product_id' => $product->id,
+                        'channel_id' => $orderItem->order->channel->id,
+                    ]);
+            }
         }
     }
 

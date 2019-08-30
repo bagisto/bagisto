@@ -329,7 +329,11 @@ return [
         'view-all' => 'Ver Tudo',
         'select-above-options' => 'Por favor, selecione as opções acima primeiro.',
         'less-quantity' => 'Quantity can not be less than one.',
-        'starting-at' => 'Starting at'
+        'starting-at' => 'Starting at',
+        'customize-options' => 'Customize Options',
+        'choose-selection' => 'Choose a selection',
+        'your-customization' => 'Your Customization',
+        'total-amount' => 'Total Amount'
     ],
 
     'wishlist' => [

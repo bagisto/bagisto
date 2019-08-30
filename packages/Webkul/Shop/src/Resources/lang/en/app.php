@@ -354,7 +354,11 @@ return [
         'sample' => 'Sample',
         'name' => 'Name',
         'qty' => 'Qty',
-        'starting-at' => 'Starting at'
+        'starting-at' => 'Starting at',
+        'customize-options' => 'Customize Options',
+        'choose-selection' => 'Choose a selection',
+        'your-customization' => 'Your Customization',
+        'total-amount' => 'Total Amount'
     ],
 
     'wishlist' => [
