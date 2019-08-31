@@ -53,11 +53,23 @@ class PercentOfProduct extends Action
                     if ($discQuantity > 1) {
                         if ($itemQuantity >= $discQuantity) {
                             $discount = round(($itemPrice * $rule->disc_amount) / 100, 4) * $discQuantity;
+
+                            if ($discount >= $itemPrice) {
+                                $discount = $itemPrice;
+                            }
                         } else if ($itemQuantity < $discQuantity) {
                             $discount = round(($itemPrice * $rule->disc_amount) / 100, 4) * $itemQuantity;
+
+                            if ($discount >= $itemPrice) {
+                                $discount = $itemPrice;
+                            }
                         }
                     } else {
                         $discount = round(($itemPrice * $rule->disc_amount) / 100, 4);
+
+                        if ($discount >= $itemPrice) {
+                            $discount = $itemPrice;
+                        }
                     }
 
                     if ($itemProductId == $productID) {
@@ -87,11 +99,23 @@ class PercentOfProduct extends Action
                 if ($discQuantity > 1) {
                     if ($itemQuantity >= $discQuantity) {
                         $discount = round(($itemPrice * $rule->disc_amount) / 100, 4) * $discQuantity;
+
+                        if ($discount >= $itemPrice) {
+                            $discount = $itemPrice;
+                        }
                     } else if ($itemQuantity < $discQuantity) {
                         $discount = round(($itemPrice * $rule->disc_amount) / 100, 4) * $itemQuantity;
+
+                        if ($discount >= $itemPrice) {
+                            $discount = $itemPrice;
+                        }
                     }
                 } else {
                     $discount = round(($itemPrice * $rule->disc_amount) / 100, 4);
+
+                    if ($discount >= $itemPrice) {
+                        $discount = $itemPrice;
+                    }
                 }
 
                 $totalDiscount = $totalDiscount + $discount;

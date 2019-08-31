@@ -36,20 +36,24 @@ class FixedAmount extends Action
 
                     if ($discQuantity > 1) {
                         if ($itemQuantity >= $discQuantity) {
-                            if ($rule->disc_amount > $itemPrice) {
-                                $discount = round($rule->disc_amount * $discQuantity, 4);
+                            if ($rule->disc_amount >= $itemPrice) {
+                                $discount = round($itemPrice * $discQuantity, 4);
                             } else {
-                                $discount = $itemPrice;
+                                $discount = $rule->disc_amount;
                             }
                         } else if ($itemQuantity < $discQuantity) {
-                            if ($rule->disc_amount > $itemPrice) {
-                                $discount = round($rule->disc_amount * $itemQuantity, 4);
+                            if ($rule->disc_amount >= $itemPrice) {
+                                $discount = round($itemPrice * $discQuantity, 4);
                             } else {
-                                $discount = $itemPrice;
+                                $discount = $rule->disc_amount;
                             }
                         }
                     } else {
-                        $discount = $rule->disc_amount;
+                        if ($rule->disc_amount >= $itemPrice) {
+                            $discount = round($itemPrice * $discQuantity, 4);
+                        } else {
+                            $discount = $rule->disc_amount;
+                        }
                     }
 
                     if ($itemProductId == $productID) {
@@ -78,20 +82,24 @@ class FixedAmount extends Action
 
                 if ($discQuantity > 1) {
                     if ($itemQuantity >= $discQuantity) {
-                        if ($rule->disc_amount > $itemPrice) {
-                            $discount = round($rule->disc_amount * $discQuantity, 4);
+                        if ($rule->disc_amount >= $itemPrice) {
+                            $discount = round($itemPrice * $discQuantity, 4);
                         } else {
-                            $discount = $itemPrice;
+                            $discount = $rule->disc_amount;
                         }
                     } else if ($itemQuantity < $discQuantity) {
-                        if ($rule->disc_amount > $itemPrice) {
-                            $discount = round($rule->disc_amount * $itemQuantity, 4);
+                        if ($rule->disc_amount >= $itemPrice) {
+                            $discount = round($itemPrice * $discQuantity, 4);
                         } else {
-                            $discount = $itemPrice;
+                            $discount = $rule->disc_amount;
                         }
                     }
                 } else {
-                    $discount = $rule->disc_amount;
+                    if ($rule->disc_amount >= $itemPrice) {
+                        $discount = round($itemPrice * $discQuantity, 4);
+                    } else {
+                        $discount = $rule->disc_amount;
+                    }
                 }
 
                 $totalDiscount = $totalDiscount + $discount;
