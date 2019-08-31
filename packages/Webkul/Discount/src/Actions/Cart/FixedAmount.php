@@ -49,7 +49,7 @@ class FixedAmount extends Action
                             }
                         }
                     } else {
-                        $discount = round(($itemPrice - $rule->disc_amount), 4);
+                        $discount = $rule->disc_amount;
                     }
 
                     if ($itemProductId == $productID) {
@@ -91,7 +91,7 @@ class FixedAmount extends Action
                         }
                     }
                 } else {
-                    $discount = round(($itemPrice - $rule->disc_amount), 4);
+                    $discount = $rule->disc_amount;
                 }
 
                 $totalDiscount = $totalDiscount + $discount;

@@ -668,7 +668,7 @@ abstract class Discount
             if (! $result) {
                 $this->clearDiscount();
 
-                $alreadyAppliedRule->delete();
+                $alreadyAppliedRule->first()->delete();
             } else {
                 $this->reassess($alreadyAppliedCartRule);
             }
