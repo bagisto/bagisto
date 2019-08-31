@@ -42,7 +42,7 @@ return [
         'key' => 'catalog.products',
         'name' => 'admin::app.layouts.products',
         'route' => 'admin.catalog.products.index',
-        'sort' => 4,
+        'sort' => 1,
         'icon-class' => ''
     ], [
         'key' => 'catalog.categories',
@@ -54,13 +54,13 @@ return [
         'key' => 'catalog.attributes',
         'name' => 'admin::app.layouts.attributes',
         'route' => 'admin.catalog.attributes.index',
-        'sort' => 1,
+        'sort' => 2,
         'icon-class' => ''
     ], [
         'key' => 'catalog.families',
         'name' => 'admin::app.layouts.attribute-families',
         'route' => 'admin.catalog.families.index',
-        'sort' => 2,
+        'sort' => 4,
         'icon-class' => ''
     ], [
         'key' => 'customers',
