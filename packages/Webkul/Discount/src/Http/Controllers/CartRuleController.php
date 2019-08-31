@@ -269,6 +269,7 @@ class CartRuleController extends Controller
         //     $coupons['limit'] = $data['usage_limit'];
         // }
 
+
         // create a cart rule
         $ruleCreated = $this->cartRule->create($data);
 
