@@ -1,0 +1,47 @@
+.window {
+    background: #222;
+    color: #fff;
+    overflow: hidden;
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+
+    &:before {
+        content: ' ';
+        display: block;
+        height: 48px;
+        background: #C6C6C6;
+    }
+
+    &:after {
+        content: '. . .';
+        position: absolute;
+        left: 12px;
+        right: 0;
+        top: -3px;
+        font-family: "Times New Roman", Times, serif;
+        font-size: 96px;
+        color: #fff;
+        line-height: 0;
+        letter-spacing: -12px;
+    }
+}
+
+.terminal {
+    margin: 20px;
+    font-family: monospace;
+    font-size: 16px;
+    color: #22da26;
+
+    .command {
+        width: 0%;
+        white-space: nowrap;
+        overflow: hidden;
+        animation: write-command 5s both;
+
+        &:before {
+            content: '$ ';
+            color: #22da26;
+        }
+    }
+}

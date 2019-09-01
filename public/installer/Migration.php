@@ -1,115 +1,53 @@
-<html>
+<div class="container migration" id="migration">
+    <div class="initial-display">
+        <p>Migration & Seed</p>
+        <div class="cp-spinner cp-round" id="loader"></div>
+        <div class="content" id="migration-result">
+            <div class="window" id="migrate"></div>
+            <div class="window" id="key"></div>
+            <div class="window" id="seed"></div>
+            <div class="window" id="publish"></div>
+            <div class="window" id="composer"></div>
 
-    <style>
-        .window {
-            background: #222;
-            color: #fff;
-            overflow: hidden;
-            position: relative;
-            margin: 0 auto;
-            width: 100%;
-
-            &:before {
-                content: ' ';
-                display: block;
-                height: 48px;
-                background: #C6C6C6;
-            }
-
-            &:after {
-                content: '. . .';
-                position: absolute;
-                left: 12px;
-                right: 0;
-                top: -3px;
-                font-family: "Times New Roman", Times, serif;
-                font-size: 96px;
-                color: #fff;
-                line-height: 0;
-                letter-spacing: -12px;
-            }
-        }
-
-        .terminal {
-            margin: 20px;
-            font-family: monospace;
-            font-size: 16px;
-            color: #22da26;
-
-        .command {
-            width: 0%;
-            white-space: nowrap;
-            overflow: hidden;
-            animation: write-command 5s both;
-
-            &:before {
-                content: '$ ';
-                color: #22da26;
-            }
-        }
-
-    </style>
-
-    <body>
-
-        <div class="container migration" id="migration">
-            <div class="initial-display">
-                <p>Migration & Seed</p>
-
-                <div class="cp-spinner cp-round" id="loader">
+            <div class="instructions" style="padding-top: 40px;" id="instructions">
+                <div style="text-align: center;">
+                    <span> Click the below button to run following : </span>
                 </div>
 
-                <div class="content" id="migration-result">
-                    <div class="window" id="migrate">
-                    </div>
-                    <div class="window" id="key">
-                    </div>
-                    <div class="window" id="seed">
-                    </div>
-                    <div class="window" id="publish">
-                    </div>
-                    <div class="window" id="composer">
-                    </div>
-
-                    <div class="instructions" style="padding-top: 40px;" id="instructions">
-                        <div style="text-align: center;">
-                            <span> Click the below button to run following : </span>
-                        </div>
-                        <div class="message">
-                            <span>Database Migartion </span>
-                        </div>
-                        <div class="message">
-                            <span> Database Seeder </span>
-                        </div>
-                        <div class="message">
-                            <span> Publishing Vendor </span>
-                        </div>
-                        <div class="message">
-                            <span> Generating Application Key </span>
-                        </div>
-                    </div>
-
-                    <span class="composer" id="comp" style="left: calc(50% - 135px);">Checking Composer Dependency</span>
-                    <span class="composer"  id="composer-migrate" style="left: calc(50% - 85px);">Migrating Database</span>
-                    <span class="composer"  id="composer-seed" style="left: calc(50% - 55px);">Seeding Data</span>
+                <div class="message">
+                    <span>Database Migartion </span>
                 </div>
 
-                <form method="POST" id="migration-form">
-                    <div>
-                        <button class="prepare-btn" id="migrate-seed">Migrate & Seed</button>
-                        <button class="prepare-btn" id="continue">Continue</button>
-                    </div>
-                    <div style="cursor: pointer; margin-top:10px">
-                        <span id="migration-back">back</span>
-                    </div>
-                </form>
+                <div class="message">
+                    <span> Database Seeder </span>
+                </div>
 
+                <div class="message">
+                    <span> Publishing Vendor </span>
+                </div>
+
+                <div class="message">
+                    <span> Generating Application Key </span>
+                </div>
             </div>
+
+            <span class="composer" id="comp" style="left: calc(50% - 135px);">Checking Composer Dependency</span>
+            <span class="composer"  id="composer-migrate" style="left: calc(50% - 85px);">Migrating Database</span>
+            <span class="composer"  id="composer-seed" style="left: calc(50% - 55px);">Seeding Data</span>
         </div>
 
-    </body>
+        <form method="POST" id="migration-form">
+            <div>
+                <button class="prepare-btn" id="migrate-seed">Migrate & Seed</button>
+                <button class="prepare-btn" id="continue">Continue</button>
+            </div>
 
-</html>
+            <div style="cursor: pointer; margin-top:10px">
+                <span id="migration-back">back</span>
+            </div>
+        </form>
+    </div>
+</div>
 
 <script>
     $(document).ready(function() {

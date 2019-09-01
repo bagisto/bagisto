@@ -1,24 +1,29 @@
+html {
+    height: 100%;
+}
+
 body {
     margin: 0;
     font-size: 16px;
     font-family: "Montserrat", sans-serif;
     color: #000311;
     text-align: center;
-    background: white;
+    background: #ffffff;
     position: relative;
     height: 100%;
 }
 
 .initial-display .logo {
+    padding-top: 20px;
     width: 150px;
 }
 
 .initial-display p {
-    font-size: 24px;
+    font-size: 23px;
     color: #333333;
     text-align: center;
     font-weight: 600;
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 .prepare-btn {
@@ -34,21 +39,34 @@ body {
     margin-top: 20px;
 }
 
+.back-btn {
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2), 0 0 8px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    font: inherit;
+    display: inline-block;
+    background: #c4c4c4;
+    color: #000;
+    padding: 10px 20px;
+    margin-top: 20px;
+}
+
 .footer {
     bottom: 0;
-    position: absolute;
+    position:fixed;
     width: 100%;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
 }
 
 .left-patern {
-    position: absolute;
+    position: fixed;
     left: 0;
     bottom: 0;
 }
 
 .right-patern {
-    position: absolute;
+    position: fixed;
     right: 0;
     bottom: 0;
 }
@@ -57,10 +75,10 @@ body {
     border: 1px solid #979797;
     border-radius: 3px;
     width: 600px;
-    height: 392px;
-    margin-left: calc(50% - 300px);
+    min-height: 400px;
+    margin-left: calc(50% - 280px);
     text-align: left;
-    overflow-x: scroll;
+    overflow-x: hidden;
 }
 
 .title {
@@ -68,8 +86,7 @@ body {
     color: #151515;
     line-height: 30px;
     text-align: left;
-    margin-top: 30px;
-    margin-bottom: 10px;
+    margin-top: 20px;
 }
 
 span {
@@ -82,9 +99,13 @@ span {
     display : none;
 }
 
+.control-group:before {
+   margin-top: 5px;
+}
+
 .control-group {
     display: block;
-    margin-bottom: 25px;
+    margin-bottom: 10px;
     font-size: 15px;
     color: #333333;
     width: 750px;
@@ -188,4 +209,48 @@ pre.bash {
 
 .message {
     padding-left: 140px;
+}
+
+/* Large devices (desktops, 62em and up) */
+@media screen and (max-width: 74.9em) {
+    .left-patern, .right-patern {
+      display: none;
+    }
+
+    .content {
+        max-width: 850px;
+        margin-left: calc(45% - 220px);
+    }
+}
+
+/* Large devices (desktops, 62em and up) */
+@media screen and (max-width: 61.9em) {
+  .content {
+   max-width: 850px;
+   margin-left: calc(27% - 100px);
+    }
+}
+
+/* Medium devices (tablets, 48em and up) */
+@media screen and (max-width: 47.9em) {
+  .left-patern, .right-patern {
+    display: none;
+  }
+
+  .content {
+   max-width: 400px;
+   margin-left: calc(50% - 210px);
+    }
+}
+
+/* Small devices (landscape phones, 34em and up) */
+@media screen and (max-width: 33.9em) {
+  .left-patern, .right-patern {
+    display: none;
+  }
+
+  .content {
+   max-width: 340px;
+   margin-left: calc(27% - 90px);
+    }
 }

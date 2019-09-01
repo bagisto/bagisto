@@ -28,10 +28,6 @@
             </div>
         </div>
 
-    </body>
-
-</html>
-
 
 
 

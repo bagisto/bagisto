@@ -1,92 +1,65 @@
-<html>
-
-    <body>
-
-        <div class="container environment" id="environment">
-            <div class="initial-display">
-                <p>Environment Configuration</p>
-
-                <form action="EnvConfig.php" method="POST" id="environment-form">
-                    <div class="content">
-                        <div class="databse-error" style="text-align: center; padding-top: 10px" id="database_error">
-                        </div>
-                        <div class="form-container" style="padding: 10%; padding-top: 35px">
-                            <div class="control-group" id="app_name">
-                                <label for="app_name" class="required">App Name</label>
-                                <input type = "text" name = "app_name" class = "control"
-                                value = "Bagisto_"
-                                data-validation="required length" data-validation-length="max50"
-                                >
-                            </div>
-
-                            <div class="control-group" id="app_url">
-                                <label for="app_url" class="required">App URL</label>
-                                <input type="text" name="app_url" class="control"
-                                placeholder="http://localhost"
-                                data-validation="required length" data-validation-length="max50">
-                            </div>
-
-                            <div class="control-group">
-                                <label for="database_connection" class="required">
-                                    Database Connection
-                                </label>
-                                <select name="database_connection" id="database_connection" class="control">
-                                    <option value="mysql" selected>Mysql</option>
-                                    <option value="sqlite">SQlite</option>
-                                    <option value="pgsql">pgSQL</option>
-                                    <option value="sqlsrv">SQLSRV</option>
-                                </select>
-                            </div>
-
-                            <div class="control-group" id="port_name">
-                                <label for="port_name" class="required">Database Port</label>
-                                <input type="text" name="port_name" class="control"
-                                placeholder="3306"
-                                data-validation="required alphanumeric number length" data-validation-length="max4">
-                            </div>
-
-                            <div class="control-group" id="host_name">
-                                <label for="host_name" class="required">Database Host</label>
-                                <input type="text" name="host_name" class="control"
-                                placeholder="127.0.0.1"
-                                data-validation="required length" data-validation-length="max50">
-                            </div>
-
-                            <div class="control-group" id="database_name">
-                                <label for="database_name" class="required">Database Name</label>
-                                <input type="text" name="database_name" class="control"
-                                placeholder="database name"
-                                data-validation="length required" data-validation-length="max50">
-                            </div>
-
-                            <div class="control-group" id="user_name">
-                                <label for="user_name" class="required">User Name</label>
-                                <input type="text" name="user_name" class="control"
-                                value = "bagisto_"
-                                data-validation="length required" data-validation-length="max50">
-                            </div>
-
-                            <div class="control-group" id="user_password">
-                                <label for="user_password" class="required">User Password</label>
-                                <input type="text" name="user_password" class="control"
-                                placeholder="database password">
-                            </div>
-                        </div>
+<div class="container environment" id="environment">
+    <div class="initial-display">
+        <p>Environment Configuration</p>
+        
+        <form action="EnvConfig.php" method="POST" id="environment-form">
+            <div class="content">
+                <div class="databse-error" style="text-align: center; padding-top: 10px" id="database_error"></div>
+                <div class="form-container" style="padding: 10%; padding-top: 15px">
+                    <div class="control-group" id="app_name">
+                        <label for="app_name" class="required">App Name</label>
+                        <input type = "text" name = "app_name" class = "control" value = "Bagisto_" data-validation="required length" data-validation-length="max50">
                     </div>
-                    <div>
-                        <button  class="prepare-btn" id="environment-check">Save & Continue</button>
-                        <div style="cursor: pointer; margin-top:10px">
-                            <span id="envronment-back">back</span>
-                        </div>
-                    </div>
-                </form>
 
+                    <div class="control-group" id="app_url">
+                        <label for="app_url" class="required">App URL</label>
+                        <input type="text" name="app_url" class="control" value="https://<?php echo $_SERVER['SERVER_NAME']; ?>" data-validation="required length" data-validation-length="max50">
+                    </div>
+
+                    <div class="control-group">
+                        <label for="database_connection" class="required">Database Connection</label>
+                        <select name="database_connection" id="database_connection" class="control">
+                            <option value="mysql" selected>Mysql</option>
+                            <option value="sqlite">SQlite</option>
+                            <option value="pgsql">pgSQL</option>
+                            <option value="sqlsrv">SQLSRV</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group" id="port_name">
+                        <label for="port_name" class="required">Database Port</label>
+                        <input type="text" name="port_name" class="control" value="3306" data-validation="required alphanumeric number length" data-validation-length="max4">
+                    </div>
+
+                    <div class="control-group" id="host_name">
+                        <label for="host_name" class="required">Database Host</label>
+                        <input type="text" name="host_name" class="control" value="127.0.0.1" data-validation="required length" data-validation-length="max50">
+                    </div>
+
+                    <div class="control-group" id="database_name">
+                        <label for="database_name" class="required">Database Name</label>
+                        <input type="text" name="database_name" class="control" placeholder="database name" data-validation="length required" data-validation-length="max50">
+                    </div>
+
+                    <div class="control-group" id="user_name">
+                        <label for="user_name" class="required">Database User Name</label>
+                        <input type="text" name="user_name" class="control" value = "bagisto_" data-validation="length required" data-validation-length="max50">
+                    </div>
+
+                    <div class="control-group" id="user_password">
+                        <label for="user_password" class="required">Database User Password</label>
+                        <input type="password" name="user_password" class="control" placeholder="database password">
+                    </div>
+                </div>
             </div>
-        </div>
+            <div>
 
-    </body>
-
-</html>
+                <button class="prepare-btn" id="environment-check">Save & Continue</button>
+                <button class="back-btn" id="envronment-back">Go back</button>
+            </div>
+        </form>
+    </div>
+</div>
 
 <script>
     $.validate({});
@@ -199,4 +172,3 @@
 
     });
 </script>
-
