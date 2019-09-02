@@ -144,6 +144,27 @@ abstract class Discount
     }
 
     /**
+     * To find the oldes rule
+     *
+     * @param Collection $rules
+     *
+     * @return CartRule $oldestRule
+     */
+    public function findOldestRule($rules)
+    {
+        $leastID = 999999999999;
+
+        foreach ($rules as $index => $rule) {
+            if ($rule->id < $leastID) {
+                $leastID = $rule->id;
+                $oldestRule = $rule;
+            }
+        }
+
+        return $oldestRule;
+    }
+
+    /**
      * To sort the rules by the least priority
      *
      * @param Collection $rules

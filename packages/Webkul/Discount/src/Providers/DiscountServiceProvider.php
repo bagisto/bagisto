@@ -7,10 +7,6 @@ use Illuminate\Routing\Router;
 
 class DiscountServiceProvider extends ServiceProvider
 {
-    protected $commands = [
-        'Webkul\Discount\Commands\Console\ActivateCatalogRule'
-    ];
-
     /**
      * Bootstrap services.
      *
@@ -29,8 +25,6 @@ class DiscountServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerConfig();
-
-        $this->commands($this->commands);
     }
 
     /**
