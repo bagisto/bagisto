@@ -51,16 +51,14 @@ $data    = array();
 //return a response
 // if there are any errors in our errors array, return a success boolean of false
 
-    if ( ! empty($errors)) {
+    if (!empty($errors)) {
 
         // if there are items in our errors array, return those errors
         $data['success'] = false;
         $data['errors']  = $errors;
 
     } else {
-
         // if there are no errors process our form, then return a message
-
         // getting env file location
         $location = str_replace('\\', '/', getcwd());
         $currentLocation = explode("/", $location);
@@ -95,14 +93,30 @@ $data    = array();
         }
 
         // inserting form data to empty array
+        $keyValueData['DB_CONNECTION'] = $_POST["database_connection"];
+        $keyValueData['DB_PORT'] = $_POST["port_name"];
         $keyValueData['DB_HOST'] = $_POST["host_name"];
+
         $keyValueData['DB_DATABASE'] = $_POST["database_name"];
         $keyValueData['DB_USERNAME'] = $_POST["user_name"];
         $keyValueData['DB_PASSWORD'] = $_POST["user_password"];
+
+        // Email Settings
+        // $keyValueData['MAIL_DRIVER'] = "smtp";
+        // $keyValueData['MAIL_HOST'] = $_POST["mail_hostname"];
+        // $keyValueData['MAIL_PORT'] = $_POST["mail_port"];
+        
+        // $keyValueData['MAIL_USERNAME'] = $_POST["mail_username"];
+        // $keyValueData['MAIL_PASSWORD'] = $_POST["mail_password"];
+        // $keyValueData['MAIL_ENCRYPTION'] = "null";
+
+        // $keyValueData['SHOP_MAIL_FROM'] = $_POST["mail_from"];
+        // $keyValueData['ADMIN_MAIL_TO'] = $_POST["mail_to"];
+
+        // Application settings
         $keyValueData['APP_NAME'] = $_POST["app_name"];
-        $keyValueData['APP_URL'] = $_POST["app_url"];
-        $keyValueData['DB_CONNECTION'] = $_POST["database_connection"];
-        $keyValueData['DB_PORT'] = $_POST["port_name"];
+        $keyValueData['APP_URL']  = $_POST["app_url"];
+
 
         // making key/value pair with form-data for env
         $changedData = [];

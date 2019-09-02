@@ -1,74 +1,116 @@
 <div class="container environment" id="environment">
-    <div class="initial-display">
-        <p>Environment Configuration</p>
-        
-        <form action="EnvConfig.php" method="POST" id="environment-form">
+    <form action="EnvConfig.php" method="POST" id="environment-form">
+        <div class="initial-display">
+            <p>Environment Configuration</p>
             <div class="content">
                 <div class="databse-error" style="text-align: center; padding-top: 10px" id="database_error"></div>
                 <div class="form-container" style="padding: 10%; padding-top: 15px">
                     <div class="control-group" id="app_name">
-                        <label for="app_name" class="required">App Name</label>
+                        <label for="app_name" class="required">Store Name</label>
                         <input type = "text" name = "app_name" class = "control" value = "Bagisto_" data-validation="required length" data-validation-length="max50">
                     </div>
 
                     <div class="control-group" id="app_url">
-                        <label for="app_url" class="required">App URL</label>
+                        <label for="app_url" class="required">Store URL</label>
                         <input type="text" name="app_url" class="control" value="https://<?php echo $_SERVER['SERVER_NAME']; ?>" data-validation="required length" data-validation-length="max50">
                     </div>
 
                     <div class="control-group">
                         <label for="database_connection" class="required">Database Connection</label>
-                        <select name="database_connection" id="database_connection" class="control">
-                            <option value="mysql" selected>Mysql</option>
-                            <option value="sqlite">SQlite</option>
-                            <option value="pgsql">pgSQL</option>
-                            <option value="sqlsrv">SQLSRV</option>
+                        <select name="database_connection" id="database_connection" class="control" data-validation="required length" data-validation-length="max50">
+                            <option value="" selected="">Please select a option</option>
+                            <option value="mysql">MySQL</option>
+                            <option value="pgsql">PostgreSQL</option>
+                            <option value="sqlite">SQLite</option>
+                            <option value="sqlsrv">SQL Server</option>
                         </select>
                     </div>
 
                     <div class="control-group" id="port_name">
                         <label for="port_name" class="required">Database Port</label>
-                        <input type="text" name="port_name" class="control" value="3306" data-validation="required alphanumeric number length" data-validation-length="max4">
+                        <input type="text" name="port_name" class="control" value="" data-validation="required alphanumeric number length" data-validation-length="max4">
                     </div>
 
                     <div class="control-group" id="host_name">
                         <label for="host_name" class="required">Database Host</label>
-                        <input type="text" name="host_name" class="control" value="127.0.0.1" data-validation="required length" data-validation-length="max50">
+                        <input type="text" name="host_name"  class="control" value="" data-validation="required length" data-validation-length="max50">
                     </div>
 
                     <div class="control-group" id="database_name">
                         <label for="database_name" class="required">Database Name</label>
-                        <input type="text" name="database_name" class="control" placeholder="database name" data-validation="length required" data-validation-length="max50">
+                        <input type="text" name="database_name" class="control" data-validation="length required" data-validation-length="max50">
+                        <div id="SQLiteHelp">After creating a new SQLite database you can point this newly created database by using the database's absolute path</div>
                     </div>
 
                     <div class="control-group" id="user_name">
                         <label for="user_name" class="required">Database User Name</label>
-                        <input type="text" name="user_name" class="control" value = "bagisto_" data-validation="length required" data-validation-length="max50">
+                        <input type="text" name="user_name" class="control" data-validation="length required" data-validation-length="max50">
                     </div>
 
                     <div class="control-group" id="user_password">
                         <label for="user_password" class="required">Database User Password</label>
-                        <input type="password" name="user_password" class="control" placeholder="database password">
+                        <input type="password" name="user_password" class="control">
                     </div>
                 </div>
             </div>
             <div>
-
-                <button class="prepare-btn" id="environment-check">Save & Continue</button>
+                <button type="submit" class="prepare-btn" id="environment-check">Save & Continue</button>
                 <button class="back-btn" id="envronment-back">Go back</button>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>
 
 <script>
-    $.validate({});
-</script>
-
-<script>
     $(document).ready(function() {
+        $.validate({});
 
+        $('#port_name').hide();
+        $('#host_name').hide();
+        $('#database_name').hide();
+        $('#user_name').hide();
+        $('#user_password').hide();
+        $('#SQLiteHelp').hide();
+
+        $('#database_connection').on('change', function() {
+            $('#port_name').show(); 
+            $('#host_name').show();
+            $('#database_name').show();
+            $('#user_name').show();
+            $('#user_password').show();
+            $('#SQLiteHelp').hide();
+
+            if($(this).val() == 'mysql') {
+                $('#port_name input').val('3306');
+                $('#host_name input').val('127.0.0.1');
+                $('#database_name input').val('');
+            } else if ($(this).val() == 'sqlsrv') {                
+                $('#port_name input').val('1433');
+                $('#database_name input').val('');
+            } else if ($(this).val() == 'pgsql') {
+                $('#port_name input').val('5432');
+                $('#host_name input').val('127.0.0.1');
+                $('#database_name input').val('');
+            } else if ($(this).val() == 'sqlite') {
+                $('#port_name').hide();
+                $('#host_name').hide();
+                $('#port_name input').val('3306');
+                $('#host_name input').val('127.0.0.1');
+                $('#database_name input').val('database/database.sqlite');
+                $('#SQLiteHelp').show();
+                $('#user_name').hide();
+                $('#user_password').hide();
+            } else {
+                //  block of code to be executed if the condition1 is false and condition2 is false
+                $('#port_name').hide();
+                $('#host_name').hide();
+                $('#database_name').hide();
+                $('#user_name').hide();
+                $('#user_password').hide();
+            }
+        });
         // process the form
+
         $('#environment-form').submit(function(event) {
             $('.control-group').removeClass('has-error'); // remove the error class
             $('.form-error').remove(); // remove the error text
@@ -88,18 +130,10 @@
             var target = window.location.href.concat('/EnvConfig.php');
 
             // process the form
-            $.ajax({
-                type        : 'POST',
-                url         : target,
-                data        : formData,
-                dataType    : 'json',
-                encode      : true
-            })
+            $.ajax({type: 'POST', url: target, data: formData, dataType: 'json', encode: true})
             // using the done promise callback
             .done(function(data) {
-
                 if (!data.success) {
-
                     // handle errors
                     if (data.errors.app_name) {
                         $('#app_name').addClass('has-error');
@@ -164,11 +198,10 @@
                     $('#environment').hide();
                     $('#migration').show();
                 }
-            });
+            })
 
             // stop the form from submitting the normal way and refreshing the page
             event.preventDefault();
         });
-
-    });
+});
 </script>

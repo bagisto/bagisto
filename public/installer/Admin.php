@@ -1,7 +1,6 @@
 <div class="container admin" id="admin">
     <div class="initial-display">
-        <p>Admin Details</p>
-
+        <p>Administrator account</p>
         <form action="AdminConfig.php"  method= "POST" id="admin-form">
             <div class="content">
                 <div class="form-container" style="padding: 10%; padding-top: 35px">
@@ -21,7 +20,7 @@
                     </div>
 
                     <div class="control-group" id="admin_re_password">
-                        <label for="admin_re_password" class="required">Re-Password</label>
+                        <label for="admin_re_password" class="required">Confirm Password</label>
                         <input type="password" name="admin_re_password" class="control" data-validation="length required" data-validation-length="min6">
                     </div>
                 </div>
@@ -34,11 +33,8 @@
 </div>
 
 <script>
-    $.validate({});
-</script>
-
-<script>
     $(document).ready(function() {
+         $.validate({});
         // process the form
         $('#admin-form').submit(function(event) {
             $('.control-group').removeClass('has-error'); // remove the error class

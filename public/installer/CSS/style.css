@@ -71,11 +71,18 @@ body {
     bottom: 0;
 }
 
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
 .content {
     border: 1px solid #979797;
     border-radius: 3px;
     width: 600px;
-    min-height: 400px;
+    min-height: 300px;
     margin-left: calc(50% - 280px);
     text-align: left;
     overflow-x: hidden;
@@ -105,7 +112,7 @@ span {
 
 .control-group {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     font-size: 15px;
     color: #333333;
     width: 750px;
@@ -171,7 +178,7 @@ pre.bash {
     border-bottom: solid 6px #bababa;
     border-left: solid 6px #bababa;
     position: absolute;
-    top: calc(50% - 24px);
+    top: calc(30% - 14px);
     left: calc(50% - 24px);
 }
 
@@ -191,7 +198,7 @@ pre.bash {
     border-bottom: solid 6px #bababa;
     border-left: solid 6px #bababa;
     position: absolute;
-    top: calc(50% - 24px);
+    top: calc(30% - 14px);
     left: calc(50% - 24px);
     animation: spin 1s ease-in-out infinite;
 }

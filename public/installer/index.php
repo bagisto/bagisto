@@ -98,6 +98,7 @@
             include __DIR__ . '/Classes/Requirement.php';
             // including php files
             include __DIR__ . '/Environment.php';
+            include __DIR__ . '/Mail.php';
             include __DIR__ . '/Migration.php';
             include __DIR__ . '/Admin.php';
             include __DIR__ . '/Finish.php';
