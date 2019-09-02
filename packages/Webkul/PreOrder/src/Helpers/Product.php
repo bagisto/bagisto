@@ -44,7 +44,7 @@ class Product
 
         foreach ($product->variants as $variant) {
             if ($variant->totalQuantity() < 1 && $variant->allow_preorder) {
-                $config[$variant->id] = [
+                $config[$variant->product_id] = [
                     'preorder_qty' => $variant->preorder_qty,
                     'availability_text' => $variant->preorder_availability && Carbon::parse($variant->preorder_availability) > Carbon::now()
                         ? trans('preorder::app.shop.products.available-on', [

@@ -46,6 +46,7 @@ class PreOrderDataPurger
             "is_configurable" => 0,
             "is_visible_on_front" => 0,
             "is_user_defined" => 1,
+            "use_in_flat" => 1,
             'company_id' => $id
         ]);
 
@@ -62,6 +63,7 @@ class PreOrderDataPurger
             "is_configurable" => 0,
             "is_visible_on_front" => 0,
             "is_user_defined" => 1,
+            "use_in_flat" => 1,
             'company_id' => $id
         ]);
 
@@ -78,6 +80,7 @@ class PreOrderDataPurger
             "is_configurable" => 0,
             "is_visible_on_front" => 0,
             "is_user_defined" => 1,
+            "use_in_flat" => 1,
             'company_id' => $id
         ]);
 

@@ -100,7 +100,7 @@ class Order extends DataGrid
             'sortable' => true,
             'searchable' => true,
             'closure' => true,
-            'filterable' => true,
+            'filterable' => false,
             'wrapper' => function ($value) {
                 if ($value->status == 'processing')
                     return '<span class="badge badge-md badge-success">Processing</span>';
