@@ -5,7 +5,6 @@ namespace Webkul\SAASCustomizer\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\PDOException;
-use Illuminate\Database\Eloquent\ErrorException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -29,7 +28,7 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         $path = 'saas';
-        dd($exception);
+
         if ($exception->getMessage() == 'domain_not_found') {
             return $this->response($path, 400, trans('saas::app.exceptions.domain-not-found'), 'domain_not_found');
         }
@@ -57,8 +56,6 @@ class Handler extends ExceptionHandler
         } else if ($exception instanceof ModelNotFoundException) {
             return $this->response($path, 404);
         } else if ($exception instanceof PDOException) {
-            return $this->response($path, 500);
-        } else {
             return $this->response($path, 500);
         }
 

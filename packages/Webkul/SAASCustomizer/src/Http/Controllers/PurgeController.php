@@ -36,8 +36,13 @@ class PurgeController extends Controller
         $channel = $this->dataSeed->prepareChannelData();
 
         // need to get executed only first time
-        if (Company::count() == 1)
-            $this->dataSeed->prepareCountryStateData();
+        if (Company::count() == 1) {
+            try {
+                $this->dataSeed->prepareCountryStateData();
+            } catch (\Exception $e) {
+
+            }
+        }
 
         $this->dataSeed->prepareCustomerGroupData();
 

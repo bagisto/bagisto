@@ -4,7 +4,7 @@ namespace Webkul\SAASCustomizer\Listeners;
 
 use Company;
 use Illuminate\Support\Facades\Mail;
-use Webkul\SAASCustomizer\Mail\NewCompanyNotification;
+use Webkul\SAASCustomizer\Notifications\NewCompanyNotification;
 
 /**
  * New company registered events handler
@@ -24,6 +24,10 @@ class CompanyRegistered
             $poolInstance->createPreOrderData($company->id);
         }
 
-        Mail::queue(new NewCompanyNotification($company));
+        try {
+            Mail::queue(new NewCompanyNotification($company));
+        } catch (\Exception $e) {
+
+        }
     }
 }

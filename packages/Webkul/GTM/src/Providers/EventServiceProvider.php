@@ -15,14 +15,12 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (core()->getConfigData('general.gtm.values.status')) {
-            Event::listen('bagisto.shop.layout.head', function($viewRenderEventManager) {
-                $viewRenderEventManager->addTemplate('gtm::head');
-            });
+        Event::listen('bagisto.shop.layout.head', function($viewRenderEventManager) {
+            $viewRenderEventManager->addTemplate('gtm::head');
+        });
 
-            Event::listen('bagisto.shop.layout.body.before', function($viewRenderEventManager) {
-                $viewRenderEventManager->addTemplate('gtm::body');
-            });
-        }
+        Event::listen('bagisto.shop.layout.body.before', function($viewRenderEventManager) {
+            $viewRenderEventManager->addTemplate('gtm::body');
+        });
     }
 }

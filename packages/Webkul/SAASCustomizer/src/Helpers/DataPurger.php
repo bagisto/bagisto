@@ -118,6 +118,7 @@ class DataPurger
             'code' => 'guest',
             'name' => 'Guest',
             'is_user_defined' => 0,
+            'company_id' => $this->company->id
         ];
 
         $customerGroup0 = $this->customerGroup->create($data);

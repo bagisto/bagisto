@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\SAASCustomizer\Mail;
+namespace Webkul\SAASCustomizer\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
