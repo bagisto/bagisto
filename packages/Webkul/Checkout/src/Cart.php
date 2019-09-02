@@ -313,6 +313,10 @@ class Cart {
 
         $weight = ($product->type == 'configurable' ? $childProduct->weight : $product->weight);
 
+        if (gettype($weight)) {
+            $weight = floatval($weight);
+        }
+
         $parentData = [
             'sku' => $product->sku,
             'quantity' => $data['quantity'],
