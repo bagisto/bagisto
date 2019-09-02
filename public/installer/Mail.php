@@ -1,6 +1,7 @@
-   <div class="container environment" id="email">
-        <div class="initial-display">
-            <p>Email Configuration</p>
+<div class="container mailsettings" id="mailsettings">
+    <div class="initial-display">
+        <p>Email configuration</p>
+        <form action="MailConfig.php" method= "POST" id="mail-form">
             <div class="content">
                 <div class="form-container" style="padding: 10%; padding-top: 25px">
                     <div class="control-group">
@@ -34,11 +35,51 @@
                         <label for="mail_to" class="required">Administrator email</label>
                         <input type="text" name="mail_to" id="mail_to" class="control" value="admin@bagsaas.com" data-validation="length required" data-validation-length="max50">
                     </div>
-                </div>
+                </div>              
             </div>
+
             <div>
-                <button type="submit" class="prepare-btn" id="environment-check">Save & Continue</button>
-                <button type="button" class="back-btn" id="envronment-back">Go back</button>
+                <button type="submit" class="prepare-btn" id="environment-mail-check">Save & Continue</button>
             </div>
-        </div>
+        </form>
     </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('.mailsettings').hide();
+        $.validate({});
+
+        // process the form
+        $('#mail-form').submit(function(event) {
+            console.log('Triggering the email environment settings.');
+            $('.control-group').removeClass('has-error'); // remove the error class
+            $('.form-error').remove(); // remove the error text
+            // get the form data
+            var formData = {
+                'mail_hostname'  : $('input[name=mail_hostname]').val(),
+                'mail_port'      : $('input[name=mail_port]').val(),
+                'mail_username'  : $('input[name=mail_username]').val(),
+                'mail_password'  : $('input[name=mail_password]').val(),
+            };
+
+            var mailTarget = window.location.href.concat('/MailConfig.php');
+            console.log('Saving email environment settings.');
+            // process the form
+            $.ajax({
+                type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                url         :  mailTarget, // the url where we want to POST
+                data        : formData, // our data object
+                dataType    : 'json', // what type of data do we expect back from the server
+                encode      : true
+            })
+                // using the done promise callback
+            .done(function(data) {
+                $('#mail-form').hide();
+                $('#migrate').show();
+            });
+            // stop the form from submitting the normal way and refreshing the page
+            event.preventDefault();
+        });
+    });
+</script>

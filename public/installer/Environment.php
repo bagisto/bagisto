@@ -196,7 +196,7 @@
                     }
                 } else {
                     $('#environment').hide();
-                    $('#migration').show();
+                    $('.mailsettings').show();
                 }
             })
 

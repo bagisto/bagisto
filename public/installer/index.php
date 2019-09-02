@@ -28,8 +28,8 @@
         </div>
 
         <div class="footer">
-            <img class="left-patern"  src= "<?php echo $leftIcon; ?>" >
-            <img class="right-patern"  src= "<?php echo $rightIcon; ?>" >
+            <img class="left-patern" src= "<?php echo $leftIcon; ?>" >
+            <img class="right-patern" src= "<?php echo $rightIcon; ?>" >
         </div>
     </div>
 
