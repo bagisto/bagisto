@@ -130,6 +130,14 @@ class OrderItem extends Model implements OrderItemContract
     }
 
     /**
+     * Get the parent item record associated with the order item.
+     */
+    public function parent()
+    {
+        return $this->belongsTo(self::class, 'parent_id');
+    }
+
+    /**
      * Get the children items.
      */
     public function children()

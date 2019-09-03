@@ -138,17 +138,21 @@ class InvoiceRepository extends Repository
                     ]);
 
                 foreach ($orderItem->children as $childOrderItem) {
-                    $invoiceItem->child = $this->invoiceItemRepository->create([
+                    $finalQty = $childOrderItem->qty_ordered
+                            ? ($childOrderItem->qty_ordered / $orderItem->qty_ordered) * $qty
+                            : $child->qty_ordered;
+
+                    $this->invoiceItemRepository->create([
                             'invoice_id' => $invoice->id,
                             'order_item_id' => $childOrderItem->id,
                             'parent_id' => $invoiceItem->id,
                             'name' => $childOrderItem->name,
                             'sku' => $childOrderItem->sku,
-                            'qty' => $qty,
+                            'qty' => $finalQty,
                             'price' => $childOrderItem->price,
                             'base_price' => $childOrderItem->base_price,
-                            'total' => $childOrderItem->price * $qty,
-                            'base_total' => $childOrderItem->base_price * $qty,
+                            'total' => $childOrderItem->price * $finalQty,
+                            'base_total' => $childOrderItem->base_price * $finalQty,
                             'tax_amount' => 0,
                             'base_tax_amount' => 0,
                             'discount_amount' => 0,
@@ -157,6 +161,8 @@ class InvoiceRepository extends Repository
                             'product_type' => $childOrderItem->product_type,
                             'additional' => $childOrderItem->additional,
                         ]);
+
+                    $this->orderItemRepository->collectTotals($childOrderItem);
                 }
 
                 $this->orderItemRepository->collectTotals($orderItem);

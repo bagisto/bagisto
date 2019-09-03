@@ -171,9 +171,8 @@ class Order extends Model implements OrderContract
             return false;
 
         foreach ($this->items as $item) {
-            if ($item->canShip()) {
+            if ($item->canShip())
                 return true;
-            }
         }
 
         return false;
@@ -188,9 +187,8 @@ class Order extends Model implements OrderContract
             return false;
             
         foreach ($this->items as $item) {
-            if ($item->canInvoice()) {
+            if ($item->canInvoice())
                 return true;
-            }
         }
         
         return false;
@@ -205,9 +203,8 @@ class Order extends Model implements OrderContract
             return false;
             
         foreach ($this->items as $item) {
-            if ($item->canCancel()) {
+            if ($item->canCancel())
                 return true;
-            }
         }
 
         return false;

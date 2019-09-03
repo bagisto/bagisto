@@ -232,7 +232,7 @@
                                                             <div class="item-options">
                                                                 
                                                                 @foreach ($item->additional['attributes'] as $attribute)
-                                                                    <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}
+                                                                    <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
                                                                 @endforeach
 
                                                             </div>

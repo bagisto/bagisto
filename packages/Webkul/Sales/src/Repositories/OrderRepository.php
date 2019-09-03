@@ -139,12 +139,37 @@ class OrderRepository extends Repository
         Event::fire('sales.order.cancel.before', $order);
 
         foreach ($order->items as $item) {
-            if ($item->qty_to_cancel) {
-                $this->orderItemRepository->returnQtyToProductInventory($item);
+            if (! $item->qty_to_cancel)
+                continue;
 
-                $item->qty_canceled += $item->qty_to_cancel;
+            $orderItems = [];
 
-                $item->save();
+            if ($item->product->getTypeInstance()->isComposite()) {
+                foreach ($item->children as $child) {
+                    $orderItems[] = $child;
+                }
+            } else {
+                $orderItems[] = $item;
+            }
+    
+            foreach ($orderItems as $orderItem) {
+                if (! $orderItem->product)
+                    continue;
+
+                $this->orderItemRepository->returnQtyToProductInventory($orderItem);
+    
+                if ($orderItem->qty_ordered) {
+                    $orderItem->qty_canceled += $orderItem->qty_to_cancel;
+                    $orderItem->save();
+
+                    if ($orderItem->parent && $orderItem->parent->qty_ordered) {
+                        $orderItem->parent->qty_canceled += $orderItem->parent->qty_to_cancel;
+                        $orderItem->parent->save();
+                    }
+                } else {
+                    $orderItem->parent->qty_canceled += $orderItem->parent->qty_to_cancel;
+                    $orderItem->parent->save();
+                }
             }
         }
 
@@ -156,7 +181,7 @@ class OrderRepository extends Repository
     }
 
     /**
-     * @inheritDoc
+     * @return integer
      */
     public function generateIncrementId()
     {

@@ -85,38 +85,34 @@ class OrderItemRepository extends Repository
      */
     public function manageInventory($orderItem)
     {
-        if (! $orderedQuantity = $orderItem->qty_ordered)
-            return;
-
-        $products = [];
+        $orderItems = [];
 
         if ($orderItem->product->getTypeInstance()->isComposite()) {
             foreach ($orderItem->children as $child) {
-                if (! $child->product)
-                    continue;
-                
-                $products[] = $child->product;
+                $orderItems[] = $child;
             }
         } else {
-            if (! $orderItem->product)
-                return;
-
-            $products[] = $orderItem->product;
+            $orderItems[] = $orderItem;
         }
 
-        foreach ($products as $product) {
-            $orderedInventory = $product->ordered_inventories()
-                ->where('channel_id', $orderItem->order->channel->id)
-                ->first();
+        foreach ($orderItems as $item) {
+            if (! $item->product)
+                continue;
+
+            $orderedInventory = $item->product->ordered_inventories()
+                    ->where('channel_id', $orderItem->order->channel->id)
+                    ->first();
+
+            $qty = $item->qty_ordered ?: $item->parent->qty_ordered;
 
             if ($orderedInventory) {
                 $orderedInventory->update([
-                        'qty' => $orderedInventory->qty + $orderItem->qty_ordered
+                        'qty' => $orderedInventory->qty + $qty
                     ]);
             } else {
-                $product->ordered_inventories()->create([
-                        'qty' => $orderItem->qty_ordered,
-                        'product_id' => $product->id,
+                $item->product->ordered_inventories()->create([
+                        'qty' => $qty,
+                        'product_id' => $item->product_id,
                         'channel_id' => $orderItem->order->channel->id,
                     ]);
             }
@@ -131,19 +127,15 @@ class OrderItemRepository extends Repository
      */
     public function returnQtyToProductInventory($orderItem)
     {
-        if (! $product = $orderItem->product)
-            return;
-
-        $orderedInventory = $product->ordered_inventories()
+        $orderedInventory = $orderItem->product->ordered_inventories()
                 ->where('channel_id', $orderItem->order->channel->id)
                 ->first();
 
         if (! $orderedInventory)
-            return ;
+            return;
 
-        if (($qty = $orderedInventory->qty - $orderItem->qty_to_cancel) < 0) {
+        if (($qty = $orderedInventory->qty - ($orderItem->qty_ordered ? $orderItem->qty_to_cancel : $orderItem->parent->qty_ordered)) < 0)
             $qty = 0;
-        }
 
         $orderedInventory->update([
                 'qty' => $qty

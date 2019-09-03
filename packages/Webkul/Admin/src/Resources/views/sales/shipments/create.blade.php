@@ -281,7 +281,7 @@
                                         <div class="item-options">
                                             
                                             @foreach ($item->additional['attributes'] as $attribute)
-                                                <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}
+                                                <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
                                             @endforeach
 
                                         </div>
@@ -308,24 +308,19 @@
                                                     </td>
 
                                                     <td>
-
-                                                        <?php
+                                                        @php
                                                             $product = $item->getTypeInstance()->getOrderedItem($item)->product;
 
-                                                            $sourceQty = $product->inventory_source_qty($inventorySource);
-
-                                                            foreach ($product->inventories as $inventory) {
-                                                                if ($inventory->inventory_source_id == $inventorySource->id) {
-                                                                    $sourceQty += $inventory->qty;
-                                                                }
-                                                            }
-                                                        ?>
+                                                            $sourceQty = $product->type == 'bundle' ? $item->qty_ordered : $product->inventory_source_qty($inventorySource->id);
+                                                        @endphp
 
                                                         {{ $sourceQty }}
                                                     </td>
 
                                                     <td>
-                                                        <?php $inputName = "shipment[items][$item->id][$inventorySource->id]"; ?>
+                                                        @php
+                                                            $inputName = "shipment[items][$item->id][$inventorySource->id]";
+                                                        @endphp
 
                                                         <div class="control-group" :class="[errors.has('{{ $inputName }}') ? 'has-error' : '']">
 

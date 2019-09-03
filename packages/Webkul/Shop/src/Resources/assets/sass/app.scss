@@ -947,7 +947,6 @@ section.slider-block {
                         }
 
                         .item-details .item-options {
-                            font-size: 16px;
                             margin-bottom: 8px;
                         }
 
@@ -4363,5 +4362,14 @@ section.review {
         display: grid;
         grid-template-columns: 30% 30% 30%;
         grid-column-gap: 4%;
+    }
+}
+
+.item-options {
+    font-size: 14px;
+    font-weight: 200;
+
+    b {
+        font-weight: 500;
     }
 }

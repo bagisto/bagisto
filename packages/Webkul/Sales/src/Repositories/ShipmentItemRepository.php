@@ -39,9 +39,8 @@ class ShipmentItemRepository extends Repository
                 ->first();
 
         if ($orderedInventory) {
-            if (($orderedQty = $orderedInventory->qty - $data['qty']) < 0) {
+            if (($orderedQty = $orderedInventory->qty - $data['qty']) < 0)
                 $orderedQty = 0;
-            }
 
             $orderedInventory->update([
                     'qty' => $orderedQty
@@ -59,12 +58,11 @@ class ShipmentItemRepository extends Repository
                 ->where('inventory_source_id', $data['shipment']->inventory_source_id)
                 ->first();
 
-        if (!$inventory)
+        if (! $inventory)
             return;
 
-        if (($qty = $inventory->qty - $data['qty']) < 0) {
+        if (($qty = $inventory->qty - $data['qty']) < 0)
             $qty = 0;
-        }
 
         $inventory->update([
                 'qty' => $qty

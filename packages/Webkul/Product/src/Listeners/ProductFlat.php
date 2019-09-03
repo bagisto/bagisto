@@ -273,9 +273,8 @@ class ProductFlat
                                 'locale' => $locale->code
                             ]);
 
-                        if ($parentProductFlat) {
+                        if ($parentProductFlat)
                             $productFlat->parent_id = $parentProductFlat->id;
-                        }
                     }
 
                     $productFlat->save();

@@ -870,6 +870,8 @@ class Cart {
 
         if (isset($data['children']) && $data['children']) {
             foreach ($data['children'] as $child) {
+                $child['quantity'] = $child['quantity'] ? $child['quantity'] * $data['quantity'] : $child['quantity'];
+
                 $finalData['children'][] = $this->prepareDataForOrderItem($child);
             }
         }

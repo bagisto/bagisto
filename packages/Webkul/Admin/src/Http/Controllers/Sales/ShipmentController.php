@@ -143,25 +143,41 @@ class ShipmentController extends Controller
      */
     public function isInventoryValidate(&$data)
     {
-        $valid = false;
-
         if (! isset($data['shipment']['items']))
             return ;
 
+        $valid = false;
+
+        $inventorySourceId = $data['shipment']['source'];
+
         foreach ($data['shipment']['items'] as $itemId => $inventorySource) {
-            if ($qty = $inventorySource[$data['shipment']['source']]) {
+            if ($qty = $inventorySource[$inventorySourceId]) {
                 $orderItem = $this->orderItemRepository->find($itemId);
 
-                $product = ($orderItem->type == 'configurable')
-                        ? $orderItem->child->product
-                        : $orderItem->product;
-
-                $availableQty = $product->inventories()
-                        ->where('inventory_source_id', $data['shipment']['source'])
-                        ->sum('qty');
-
-                if ($orderItem->qty_to_ship < $qty || $availableQty < $qty) {
+                if ($orderItem->qty_to_ship < $qty)
                     return false;
+
+                if ($orderItem->getTypeInstance()->isComposite()) {
+                    foreach ($orderItem->children as $child) {
+                        if (! $child->qty_ordered)
+                            continue;
+
+                        $finalQty = ($child->qty_ordered / $orderItem->qty_ordered) * $qty;
+
+                        $availableQty = $child->product->inventories()
+                            ->where('inventory_source_id', $inventorySourceId)
+                            ->sum('qty');
+
+                        if ($child->qty_to_ship < $finalQty || $availableQty < $finalQty)
+                            return false;
+                    }
+                } else {
+                    $availableQty = $orderItem->product->inventories()
+                            ->where('inventory_source_id', $inventorySourceId)
+                            ->sum('qty');
+
+                    if ($orderItem->qty_to_ship < $qty || $availableQty < $qty)
+                        return false;
                 }
 
                 $valid = true;
