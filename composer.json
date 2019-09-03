@@ -90,19 +90,7 @@
             "Webkul\\Tax\\": "packages/Webkul/Tax/src",
             "Webkul\\API\\": "packages/Webkul/API",
             "Webkul\\Discount\\": "packages/Webkul/Discount/src",
-            "Webkul\\CMS\\": "packages/Webkul/CMS/src",
-            "Webkul\\CustomerDocument\\": "packages/Webkul/CustomerDocument",
-            "Webkul\\BulkAddToCart\\": "packages/Webkul/BulkAddToCart",
-            "Webkul\\AdminAuthCheck\\": "packages/Webkul/AdminAuthCheck/src",
-            "Webkul\\StripeConnect\\": "packages/Webkul/StripeConnect/src",
-            "Webkul\\CustomerCreditMax\\": "packages/Webkul/CustomerCreditMax",
-            "Webkul\\CustomerGroupCatalog\\": "packages/Webkul/CustomerGroupCatalog",
-            "Webkul\\ShowPriceAfterLogin\\": "packages/Webkul/ShowPriceAfterLogin/src",
-            "Webkul\\PreOrder\\": "packages/Webkul/PreOrder/src",
-            "Webkul\\Webfont\\": "packages/Webkul/Webfont/src",
-            "Webkul\\GTM\\": "packages/Webkul/GTM/src",
-            "Webkul\\Custom\\": "packages/Webkul/Custom/src",
-            "Webkul\\SAASCustomizer\\": "packages/Webkul/SAASCustomizer/src"
+            "Webkul\\CMS\\": "packages/Webkul/CMS/src"
         }
     },
     "autoload-dev": {

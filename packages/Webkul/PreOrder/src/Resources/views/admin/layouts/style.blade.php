@@ -1,1 +1,0 @@
-<link rel="stylesheet" href="{{ asset('vendor/webkul/preorder/assets/css/preorder-admin.css') }}">

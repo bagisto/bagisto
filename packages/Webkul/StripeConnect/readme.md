@@ -1,1 +1,0 @@
-http://%%%%%.domain.com/admin/stripe/connect/retrieve/token
