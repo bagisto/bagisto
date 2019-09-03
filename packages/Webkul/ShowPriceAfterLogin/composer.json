@@ -1,0 +1,26 @@
+{
+    "name": "bagisto/showPriceAfterLogin",
+    "description": "show price and add to cart button after login ",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Prateek Srivastava",
+            "email": "prateek.srivastava781@webkul.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Webkul\\ShowPriceAfterLogin\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Webkul\\ShowPriceAfterLogin\\Providers\\ShowPriceAfterLoginServiceProvider"
+            ],
+            "aliases": {}
+        }
+    },
+    "minimum-stability": "dev"
+}

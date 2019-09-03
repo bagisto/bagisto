@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://bagsaas.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -245,7 +245,19 @@ return [
         Webkul\Tax\Providers\TaxServiceProvider::class,
         Webkul\API\Providers\APIServiceProvider::class,
         Webkul\Discount\Providers\DiscountServiceProvider::class,
-        Webkul\CMS\Providers\CMSServiceProvider::class
+        Webkul\CMS\Providers\CMSServiceProvider::class,
+        Webkul\CustomerDocument\Providers\CustomerDocumentServiceProvider::class,
+        Webkul\BulkAddToCart\Providers\BulkAddToCartServiceProvider::class,
+        Webkul\AdminAuthCheck\Providers\AdminAuthCheckServiceProvider::class,
+        Webkul\Webfont\Providers\WebfontServiceProvider::class,
+        Webkul\GTM\Providers\GTMServiceProvider::class,
+        Webkul\StripeConnect\Providers\StripeConnectServiceProvider::class,
+        Webkul\ShowPriceAfterLogin\Providers\ShowPriceAfterLoginServiceProvider::class,
+        Webkul\CustomerCreditMax\Providers\CustomerCreditMaxServiceProvider::class,
+        Webkul\PreOrder\Providers\PreOrderServiceProvider::class,
+        Webkul\CustomerGroupCatalog\Providers\CustomerGroupCatalogServiceProvider::class,
+        Webkul\SAASCustomizer\Providers\SAASCustomizerServiceProvider::class,
+        Webkul\Custom\Providers\CustomServiceProvider::class
     ],
 
     /*
@@ -304,5 +316,6 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Concord' => Konekt\Concord\Facades\Concord::class,
         'Helper'  => Konekt\Concord\Facades\Helper::class,
+        'Company' => Webkul\SAASCustomizer\Facades\Company::class
     ],
 ];

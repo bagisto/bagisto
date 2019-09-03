@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="70px" height="70px" viewBox="0 0 70 70" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+    <title>logo</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="logo" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle-9" fill="#2650EF" fill-rule="nonzero" x="2.27373675e-13" y="2.27373675e-13" width="70" height="70"></rect>
+        <path d="M50,17 L62,17 L62,43 L50,30 L50,17 Z M50,53 L35,31 L20,53 L8,53 L34,17 L36,17 L62,53 L50,53 Z M8,17 L20,17 L20,30 L8,43 L8,17 Z" id="Combined-Shape" fill="#FFFFFF" fill-rule="nonzero"></path>
+    </g>
+</svg>

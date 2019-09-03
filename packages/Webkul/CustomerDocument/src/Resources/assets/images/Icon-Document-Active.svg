@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+    <title>Icon-Document-Active</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icon-Document-Active" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Group-2" transform="translate(13.000000, 10.000000)" stroke="#0041FF" stroke-width="2">
+            <g id="Group">
+                <polygon id="Rectangle-15" points="0 0.0511538462 22 0 22 27.0677273 0 27.0165734"></polygon>
+            </g>
+            <path d="M4,0.5 L4,26.5" id="Path-27"></path>
+            <polyline id="Path-28" points="11 1 11 10.5 14.25 7.25 17.5 10.5 17.5 1"></polyline>
+        </g>
+    </g>
+</svg>

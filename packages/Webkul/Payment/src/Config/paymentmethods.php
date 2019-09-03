@@ -5,13 +5,13 @@ return [
         'title' => 'Cash On Delivery',
         'description' => 'shop::app.checkout.onepage.cash-desc',
         'class' => 'Webkul\Payment\Payment\CashOnDelivery',
-        'active' => true,
+        'active' => false,
         'sort' => 1
     ],
 
     'moneytransfer' => [
         'code' => 'moneytransfer',
-        'title' => 'Money Transfer',
+        'title' => 'Invoice',
         'description' => 'shop::app.checkout.onepage.money-desc',
         'class' => 'Webkul\Payment\Payment\MoneyTransfer',
         'active' => true,
@@ -24,7 +24,7 @@ return [
         'description' => 'shop::app.checkout.onepage.paypal-desc',
         'class' => 'Webkul\Paypal\Payment\Standard',
         'sandbox' => true,
-        'active' => true,
+        'active' => false,
         'business_account' => 'test@webkul.com',
         'sort' => 3
     ]

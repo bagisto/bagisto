@@ -71,7 +71,7 @@
                         <span class="control-error" v-if="errors.has('content')">@{{ errors.first('content') }}</span>
                     </div>
 
-                    {!! view_render_event('bagisto.admin.settings.slider.edit.after') !!}
+                    {!! view_render_event('bagisto.admin.settings.slider.edit.after', ['slider' => $slider]) !!}
                 </div>
             </div>
         </form>

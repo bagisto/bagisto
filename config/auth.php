@@ -27,6 +27,11 @@ return [
             'provider' => 'admins'
         ],
 
+        'super-admin' => [
+            'driver' => 'session',
+            'provider' => 'superadmins'
+        ],
+
         'admin-api' => [
             'driver' => 'token',
             'provider' => 'admins',
@@ -42,6 +47,11 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => Webkul\User\Models\Admin::class,
+        ],
+
+        'superadmins' => [
+            'driver' => 'eloquent',
+            'model' => Webkul\SAASCustomizer\Models\SuperAdmin::class
         ]
     ],
 

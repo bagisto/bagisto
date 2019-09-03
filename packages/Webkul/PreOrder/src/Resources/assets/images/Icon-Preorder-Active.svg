@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+    <title>Icon-Preorder-Active</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icon-Preorder-Active" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15.223162,12 L32.7765246,12 C33.7475499,12 34.5782793,12.6974754 34.7463413,13.6538463 L38.9638348,37.6538463 C39.1550102,38.741746 38.4280715,39.7786412 37.3401719,39.9698166 C37.2258814,39.9899008 37.1100599,40 36.9940181,40 L11.0056685,40 C9.90109902,40 9.00566852,39.1045695 9.00566852,38 C9.00566852,37.8839583 9.01576774,37.7681367 9.03585187,37.6538463 L13.2533454,13.6538463 C13.4214074,12.6974754 14.2521368,12 15.223162,12 Z" id="Rectangle-18" stroke="#0041FF" stroke-width="2" fill-rule="nonzero"></path>
+        <path d="M19,14 L19,9.30434783 C19,6.92712216 21.4624339,5 24.5,5 C27.5375661,5 30,6.92712216 30,9.30434783 L30,14" id="Rectangle-19" stroke="#0041FF" stroke-width="2" fill-rule="nonzero"></path>
+        <path d="M24.3535156,35.6328125 C29.1288371,35.6328125 33,31.7616496 33,26.9863281 C33,22.2110067 29.1288371,18.3398438 24.3535156,18.3398438 C19.5781942,18.3398438 15.7070312,22.2110067 15.7070312,26.9863281" id="Oval-13" stroke="#0041FF" stroke-width="2" fill-rule="nonzero"></path>
+        <polyline id="Path-14" stroke="#0041FF" stroke-width="2" fill-rule="nonzero" transform="translate(15.889087, 26.444544) rotate(-135.000000) translate(-15.889087, -26.444544) " points="14.238961 28.0946699 14.238961 24.7944174 17.5392136 24.7944174"></polyline>
+        <polyline id="Path-20" stroke="#0041FF" stroke-width="2" fill-rule="nonzero" points="24 22 24 28 28 28"></polyline>
+    </g>
+</svg>
