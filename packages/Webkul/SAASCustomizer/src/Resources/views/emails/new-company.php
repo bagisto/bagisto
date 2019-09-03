@@ -1,1 +1,0 @@
-New company is registered.
