@@ -17,7 +17,7 @@
                     </h1>
                 </div>
 
-                <div class="page-action fixed-action">
+                <div class="page-action">
                     <button type="submit" class="btn btn-lg btn-primary">
                         {{ __('admin::app.settings.currencies.save-btn-title') }}
                     </button>
@@ -28,8 +28,11 @@
                 <div class="form-container">
                     @csrf()
 
+                    {!! view_render_event('bagisto.admin.settings.currencies.create.before') !!}
+
                     <accordian :title="'{{ __('admin::app.settings.currencies.general') }}'" :active="true">
                         <div slot="body">
+
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                                 <label for="code" class="required">{{ __('admin::app.settings.currencies.code') }}</label>
                                 <input v-validate="'required|min:3|max:3'" class="control" id="code" name="code" value="{{ old('code') }}" data-vv-as="&quot;{{ __('admin::app.settings.currencies.code') }}&quot;" style="text-transform:uppercase" v-code/>
@@ -49,6 +52,7 @@
                         </div>
                     </accordian>
 
+                    {!! view_render_event('bagisto.admin.settings.currencies.create.after') !!}
                 </div>
             </div>
         </form>

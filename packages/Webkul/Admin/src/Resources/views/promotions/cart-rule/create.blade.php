@@ -24,7 +24,7 @@
                         </h1>
                     </div>
 
-                    <div class="page-action fixed-action">
+                    <div class="page-action">
                         <button type="submit" class="btn btn-lg btn-primary">
                             {{ __('admin::app.promotion.save-btn-title') }}
                         </button>
@@ -90,7 +90,7 @@
                                     <div class="control-group" :class="[errors.has('channels[]') ? 'has-error' : '']">
                                         <label for="channels" class="required">{{ __('admin::app.promotion.general-info.channels') }}</label>
 
-                                        <select type="text" class="control" name="channels[]" v-model="channels" v-validate="'required'" value="{{ old('channels') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.channels-req') }}&quot;" multiple="multiple">
+                                        <select type="text" class="control" name="channels[]" v-model="channels" v-validate="'required'" value="{{ old('channels[]') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.channels-req') }}&quot;" multiple="multiple">
                                             <option disabled="disabled">{{ __('admin::app.promotion.select-attribute', ['attribute' => 'Channels']) }}</option>
                                             @foreach(app('Webkul\Core\Repositories\ChannelRepository')->all() as $channel)
                                                 <option value="{{ $channel->id }}">{{ $channel->name }}</option>
@@ -104,7 +104,6 @@
                                         <label for="status" class="required">{{ __('admin::app.promotion.general-info.status') }}</label>
 
                                         <select type="text" class="control" name="status" v-model="status" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.status') }}&quot;">
-                                            <option disabled="disabled">{{ __('admin::app.promotion.select-attribtue', ['attribute' => 'Status']) }}</option>
                                             <option value="1">Yes</option>
                                             <option value="0">No</option>
                                         </select>
@@ -248,7 +247,7 @@
                                     <div class="control-group" :class="[errors.has('disc_amount') ? 'has-error' : '']">
                                         <label for="disc_amount" class="required">{{ __('admin::app.promotion.general-info.disc_amt') }}</label>
 
-                                        <input type="number" step="0.5000" class="control" name="disc_amount" v-model="disc_amount" v-validate="'required|min_value:0.0001'" value="{{ old('disc_amount') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_amt') }}&quot;">
+                                        <input type="number" step="0.0001" class="control" name="disc_amount" v-model="disc_amount" v-validate="'required|min_value:0.0001'" value="{{ old('disc_amount') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_amt') }}&quot;">
 
                                         <span class="control-error" v-if="errors.has('disc_amount')">@{{ errors.first('disc_amount') }}</span>
                                     </div>
@@ -598,12 +597,12 @@
                     },
 
                     onSubmit: function (e) {
-                        if (this.attribute_values.length > 0 || this.category_values.length > 0) {
+                        if (this.attribute_values != null || this.category_values != null) {
                             for (i in this.attribute_values) {
                                 delete this.attribute_values[i].options;
                             }
 
-                            if (this.category_values.length > 0) {
+                            if (this.category_values != null) {
                                 this.all_attributes.categories = this.category_values;
                             }
 

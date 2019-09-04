@@ -16,7 +16,7 @@
                     </h1>
                 </div>
 
-                <div class="page-action fixed-action">
+                <div class="page-action">
                     <button type="submit" class="btn btn-lg btn-primary">
                         {{ __('admin::app.settings.sliders.save-btn-title') }}
                     </button>
@@ -27,6 +27,8 @@
                 <div class="form-container">
 
                     @csrf()
+
+                    {!! view_render_event('bagisto.admin.settings.slider.edit.before') !!}
 
                     <div class="control-group" :class="[errors.has('title') ? 'has-error' : '']">
                         <label for="title" class="required">{{ __('admin::app.settings.sliders.title') }}</label>
@@ -48,7 +50,7 @@
                     </div>
 
                     <div class="control-group {!! $errors->has('image.*') ? 'has-error' : '' !!}">
-                        <label>{{ __('admin::app.catalog.categories.image') }}
+                        <label class="required">{{ __('admin::app.catalog.categories.image') }}</label>
 
                         <image-wrapper :button-label="'{{ __('admin::app.settings.sliders.image') }}'" input-name="image" :multiple="false" :images='"{{ url('storage/'.$slider->path) }}"' ></image-wrapper>
 
@@ -69,6 +71,7 @@
                         <span class="control-error" v-if="errors.has('content')">@{{ errors.first('content') }}</span>
                     </div>
 
+                    {!! view_render_event('bagisto.admin.settings.slider.edit.after', ['slider' => $slider]) !!}
                 </div>
             </div>
         </form>

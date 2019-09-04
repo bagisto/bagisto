@@ -63,6 +63,16 @@ abstract class Discount
                 'use_coupon' => 1,
                 'status' => 1
             ]);
+
+            foreach($rules as $rule) {
+                if ($rule->coupons->code == $code) {
+                    $rules = collect();
+
+                    $rules->push($rule);
+
+                    break;
+                }
+            }
         } else {
             $rules = $this->cartRule->findWhere([
                 'use_coupon' => 0,
@@ -144,6 +154,27 @@ abstract class Discount
     }
 
     /**
+     * To find the oldes rule
+     *
+     * @param Collection $rules
+     *
+     * @return CartRule $oldestRule
+     */
+    public function findOldestRule($rules)
+    {
+        $leastID = 999999999999;
+
+        foreach ($rules as $index => $rule) {
+            if ($rule->id < $leastID) {
+                $leastID = $rule->id;
+                $oldestRule = $rule;
+            }
+        }
+
+        return $oldestRule;
+    }
+
+    /**
      * To sort the rules by the least priority
      *
      * @param Collection $rules
@@ -198,6 +229,8 @@ abstract class Discount
 
         if ($alreadyApplied->count() && $alreadyApplied->first()->cart_rule->id == $rule->id) {
             if ($this->validateRule($alreadyApplied->first()->cart_rule)) {
+                $this->reassess($alreadyApplied->first()->cart_rule, $cart);
+
                 return false;
             } else {
                 $this->clearDiscount();
@@ -256,6 +289,20 @@ abstract class Discount
     }
 
     /**
+     * To reassess the discount in case no. of items gets changed
+     *
+     * @return Void
+     */
+    public function reassess($rule)
+    {
+        $rule->impact = $this->calculateImpact($rule);
+
+        $this->updateCartItemAndCart($rule);
+
+        return;
+    }
+
+    /**
      * To return cart rule which has the max impact
      *
      * @param Collection $rules
@@ -306,6 +353,8 @@ abstract class Discount
      */
     public function getActionInstance($rule)
     {
+        $this->rules = config('discount-rules');
+
         $actionType = new $this->rules['cart'][$rule->action_type];
 
         return $actionType;
@@ -643,12 +692,17 @@ abstract class Discount
         ]);
 
         if ($alreadyAppliedRule->count()) {
-            $alreadyAppliedRule = $alreadyAppliedRule->first()->cart_rule;
+            $alreadyAppliedCartRule = $alreadyAppliedRule->first()->cart_rule;
 
-            $result = $this->validateRule($alreadyAppliedRule);
+            $result = $this->validateRule($alreadyAppliedCartRule);
 
-            if (! $result)
+            if (! $result) {
                 $this->clearDiscount();
+
+                $alreadyAppliedRule->first()->delete();
+            } else {
+                $this->reassess($alreadyAppliedCartRule);
+            }
         }
     }
 
@@ -725,6 +779,10 @@ abstract class Discount
         $result = true;
 
         foreach ($conditions as $condition) {
+            if (! isset($condition->attribute) || ! isset($condition->condition) || !isset($condition->value)) {
+                continue;
+            }
+
             if (isset($condition->attribute)) {
                 $actual_value = ${$condition->attribute};
 
@@ -784,13 +842,13 @@ abstract class Discount
                         break;
                     }
                 } else if ($test_condition == '{}') {
-                    if (! str_contains($test_value, $actual_value)) {
+                    if (! str_contains($actual_value, $test_value)) {
                         $result = false;
 
                         break;
                     }
                 } else if ($test_condition == '!{}') {
-                    if (str_contains($test_value, $actual_value)) {
+                    if (str_contains($actual_value, $test_value)) {
                         $result = false;
 
                         break;
@@ -851,9 +909,12 @@ abstract class Discount
         }
 
         foreach ($conditions as $condition) {
+            if (!isset($condition->attribute) || ! isset($condition->condition) || !isset($condition->value)) {
+                continue;
+            }
+
             if (isset($condition->attribute)) {
                 $actual_value = ${$condition->attribute};
-
             } else {
                 $result = false;
             }
@@ -910,13 +971,13 @@ abstract class Discount
                         break;
                     }
                 } else if ($test_condition == '{}') {
-                    if (str_contains($test_value, $actual_value)) {
+                    if (str_contains($actual_value, $test_value)) {
                         $result = true;
 
                         break;
                     }
                 } else if ($test_condition == '!{}') {
-                    if (! str_contains($test_value, $actual_value)) {
+                    if (! str_contains($actual_value, $test_value)) {
                         $result = true;
 
                         break;

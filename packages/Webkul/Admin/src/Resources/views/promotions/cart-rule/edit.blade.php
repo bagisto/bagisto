@@ -24,7 +24,7 @@
                         </h1>
                     </div>
 
-                    <div class="page-action fixed-action">
+                    <div class="page-action">
                         <button type="submit" class="btn btn-lg btn-primary">
                             {{ __('admin::app.promotion.save') }}
                         </button>
@@ -106,7 +106,7 @@
                                         <label for="status" class="required">{{ __('admin::app.promotion.general-info.status') }}</label>
 
                                         <select type="text" class="control" name="status" v-model="status" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.status') }}&quot;">
-                                            <option disabled="disabled">{{ __('admin::app.promotion.select-attribute', ['attribute' => 'Status']) }}</option>
+                                            {{-- <option disabled="disabled">{{ __('admin::app.promotion.select-attribute', ['attribute' => 'Status']) }}</option> --}}
                                             <option value="1">{{ __('admin::app.promotion.yes') }}</option>
                                             <option value="0">{{ __('admin::app.promotion.no') }}</option>
                                         </select>
@@ -254,7 +254,7 @@
                                     <div class="control-group" :class="[errors.has('disc_amount') ? 'has-error' : '']">
                                         <label for="disc_amount" class="required">{{ __('admin::app.promotion.general-info.disc_amt') }}</label>
 
-                                        <input type="number" step="0.5000" class="control" name="disc_amount" v-model="disc_amount" v-validate="'required|decimal|min_value:0.0001'" value="{{ old('disc_amount') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_amt') }}&quot;">
+                                        <input type="number" step="0.0001" class="control" name="disc_amount" v-model="disc_amount" v-validate="'required|decimal|min_value:0.0001'" value="{{ old('disc_amount') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_amt') }}&quot;">
 
                                         <span class="control-error" v-if="errors.has('disc_amount')">@{{ errors.first('disc_amount') }}</span>
                                     </div>
@@ -505,23 +505,33 @@
                 mounted () {
                     data = @json($cart_rule[3]);
                     this.name = data.name;
+
                     this.description = data.description;
+
                     this.conditions_list = [];
+
                     this.channels = [];
+
                     for (i in data.channels) {
                         this.channels.push(data.channels[i].channel_id);
                     }
 
                     this.customer_groups = data.customer_groups;
+
                     for (i in data.customer_groups) {
                         this.customer_groups.push(data.customer_groups[i].customer_group_id);
                     }
 
                     this.ends_till = data.ends_till;
+
                     this.starts_from = data.starts_from;
+
                     this.priority = data.priority;
+
                     this.per_customer = data.per_customer;
+
                     this.status = data.status;
+
                     if (data.use_coupon == 0) {
                         // this.auto_generation = null;
                         this.use_coupon = 0;
@@ -539,24 +549,36 @@
                     }
 
                     this.usage_limit = data.usage_limit;
+
                     this.is_guest = data.is_guest;
 
                     this.action_type = data.action_type;
+
                     this.apply = null;
+
                     this.apply_amt = false;
+
                     this.apply_prct = false;
+
                     this.apply_to_shipping = data.apply_to_shipping;
+
                     this.disc_amount = data.disc_amount;
+
                     // this.disc_threshold = data.disc_threshold;
+
                     this.disc_quantity = data.disc_quantity;
+
                     this.end_other_rules = data.end_other_rules;
+
                     this.coupon_type = data.coupon_type;
+
                     this.free_shipping = data.free_shipping;
 
                     this.all_conditions = null;
 
                     if (data.conditions != null) {
                         this.conditions_list = JSON.parse(JSON.parse(data.conditions));
+
                         this.match_criteria = this.conditions_list.pop().criteria;
                     }
 
@@ -564,6 +586,16 @@
                         this.category_values = JSON.parse(JSON.parse(data.actions).attribute_conditions).categories;
 
                         this.attribute_values = JSON.parse(JSON.parse(data.actions).attribute_conditions).attributes;
+
+                        if (this.category_values == null) {
+                            this.category_values = [];
+                        }
+
+                        if (this.attribute_values == null) {
+                            this.attribute_values = [];
+                        }
+
+                        console.log(this.category_values);
 
                         // creating options and has option param on the frontend
                         for (i in this.attribute_values) {
@@ -684,14 +716,12 @@
                     },
 
                     onSubmit: function (e) {
-                        if (this.attribute_values.length != 0 || this.category_values.length != 0) {
+                        if (this.attribute_values != null || this.category_values != null) {
                             for (i in this.attribute_values) {
                                 delete this.attribute_values[i].options;
                             }
 
-                            if (this.category_values != null && this.category_values.length > 0) {
-                                this.all_attributes.categories = this.category_values;
-                            }
+                            this.all_attributes.categories = this.category_values;
 
                             this.all_attributes.attributes = this.attribute_values;
 
@@ -700,10 +730,12 @@
                             this.all_attributes = null;
                         }
 
-                        if (this.conditions_list.length != 0) {
+                        if (this.conditions_list != null) {
                             this.conditions_list.push({'criteria': this.match_criteria});
 
                             this.all_conditions = JSON.stringify(this.conditions_list);
+
+                            this.conditions_list.pop();
                         }
 
                         this.$validator.validateAll().then(result => {

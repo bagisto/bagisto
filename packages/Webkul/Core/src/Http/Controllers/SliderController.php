@@ -7,8 +7,8 @@ use Webkul\Core\Repositories\SliderRepository;
 /**
  * Slider controller for managing the slider controls.
  *
- * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ * @author  Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @copyright  2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class SliderController extends Controller
 {

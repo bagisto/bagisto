@@ -16,7 +16,7 @@
                     </h1>
                 </div>
 
-                <div class="page-action fixed-action-slight">
+                <div class="page-action">
                     <button type="submit" class="btn btn-lg btn-primary">
                         {{ __('admin::app.users.users.save-btn-title') }}
                     </button>

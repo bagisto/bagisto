@@ -17,7 +17,7 @@
                     </h1>
                 </div>
 
-                <div class="page-action fixed-action">
+                <div class="page-action">
                     <button type="submit" class="btn btn-lg btn-primary">
                         {{ __('admin::app.settings.channels.save-btn-title') }}
                     </button>
@@ -28,6 +28,8 @@
                 <div class="form-container">
                     @csrf()
                     <input name="_method" type="hidden" value="PUT">
+
+                    {!! view_render_event('bagisto.admin.settings.channel.edit.before') !!}
 
                     <accordian :title="'{{ __('admin::app.settings.channels.general') }}'" :active="true">
                         <div slot="body">
@@ -183,6 +185,37 @@
                         </div>
                     </accordian>
 
+                    @php
+                        $seo = json_decode($channel->home_seo);
+                    @endphp
+
+                    <accordian :title="'{{ __('admin::app.settings.channels.seo') }}'" :active="true">
+                        <div slot="body">
+                            <div class="control-group" :class="[errors.has('seo_title') ? 'has-error' : '']">
+                                <label for="seo_title" class="required">{{ __('admin::app.settings.channels.seo-title') }}</label>
+                                <input v-validate="'required'" class="control" id="seo_title" name="seo_title" data-vv-as="&quot;{{ __('admin::app.settings.channels.seo-title') }}&quot;" value="{{ $seo->meta_title ?? old('seo_title') }}"/>
+                                <span class="control-error" v-if="errors.has('seo_title')">@{{ errors.first('seo_title') }}</span>
+                            </div>
+
+                            <div class="control-group" :class="[errors.has('seo_description') ? 'has-error' : '']">
+                                <label for="seo_description" class="required">{{ __('admin::app.settings.channels.seo-description') }}</label>
+
+                                <textarea v-validate="'required'" class="control" id="seo_description" name="seo_description" data-vv-as="&quot;{{ __('admin::app.settings.channels.seo-description') }}&quot;">{{ $seo->meta_description ?? old('seo_description') }}</textarea>
+
+                                <span class="control-error" v-if="errors.has('seo_description')">@{{ errors.first('seo_description') }}</span>
+                            </div>
+
+                            <div class="control-group" :class="[errors.has('seo_keywords') ? 'has-error' : '']">
+                                <label for="seo_keywords" class="required">{{ __('admin::app.settings.channels.seo-keywords') }}</label>
+
+                                <textarea v-validate="'required'" class="control" id="seo_keywords" name="seo_keywords" data-vv-as="&quot;{{ __('admin::app.settings.channels.seo-keywords') }}&quot;">{{ $seo->meta_keywords ?? old('seo_keywords') }}</textarea>
+
+                                <span class="control-error" v-if="errors.has('seo_keywords')">@{{ errors.first('seo_keywords') }}</span>
+                            </div>
+                        </div>
+                    </accordian>
+
+                    {!! view_render_event('bagisto.admin.settings.channel.edit.after') !!}
                 </div>
             </div>
         </form>

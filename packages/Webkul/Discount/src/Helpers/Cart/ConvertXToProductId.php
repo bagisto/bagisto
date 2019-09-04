@@ -70,13 +70,20 @@ class ConvertXToProductId
         $this->conditionSymbols = config('pricerules.cart.conditions.symbols');
     }
 
+    /**
+     * Collects the attribute and category conditions
+     *
+     * @param Integer $ruleId
+     *
+     * @param Object $attrribute_conditions
+     */
     public function convertX($ruleId, $attribute_conditions)
     {
-        $attributeConditions = json_decode($attribute_conditions);
+        $attributeConditions = $attribute_conditions;
 
-        $categoryValues = $attributeConditions->categories;
+        $categoryValues = $attributeConditions->categories ?? null;
 
-        $attributeValues = $attributeConditions->attributes;
+        $attributeValues = $attributeConditions->attributes ?? null;
 
         if (!isset($categoryValues) && ! isset($attributeValues)) {
             return false;
@@ -89,6 +96,7 @@ class ConvertXToProductId
         }
 
         $attributeResult = collect();
+
         if (isset($attributeValues) && count($attributeValues)) {
             $attributeResult = $this->convertFromAttributes($attributeValues);
         }
