@@ -303,6 +303,6 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Concord' => Konekt\Concord\Facades\Concord::class,
-        'Helper'  => Konekt\Concord\Facades\Helper::class,
+        'Helper'  => Konekt\Concord\Facades\Helper::class
     ],
 ];

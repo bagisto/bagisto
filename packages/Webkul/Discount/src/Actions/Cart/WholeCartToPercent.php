@@ -47,6 +47,10 @@ class WholeCartToPercent extends Action
 
                         $discount = round(($itemPrice * $rule->disc_amount) / 100, 4);
 
+                        if ($discount >= $itemPrice) {
+                            $discount = $itemPrice;
+                        }
+
                         $totalDiscount = $totalDiscount + $discount;
 
                         if ($item->product_id == $productID) {
@@ -75,6 +79,10 @@ class WholeCartToPercent extends Action
                 $itemPrice = $item->base_price;
 
                 $discount = round(($itemPrice * $rule->disc_amount) / 100, 4);
+
+                if ($discount > $itemPrice) {
+                    $discount = $itemPrice;
+                }
 
                 $totalDiscount = $totalDiscount + $discount;
 
