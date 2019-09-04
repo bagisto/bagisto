@@ -395,6 +395,25 @@ abstract class AbstractType
     }
 
     /**
+     * Returns product prices
+     *
+     * @return array
+     */
+    public function getProductPrices()
+    {
+        return [
+            'regular_price' => [
+                'price' => core()->convertPrice($this->product->price),
+                'formated_price' => core()->currency($this->product->price)
+            ],
+            'final_price' => [
+                'price' => core()->convertPrice($this->getMinimalPrice()),
+                'formated_price' => core()->currency($this->getMinimalPrice())
+            ]
+        ];
+    }
+
+    /**
      * Get product minimal price
      *
      * @return string

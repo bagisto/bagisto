@@ -10,6 +10,7 @@ use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductBundleOptionRepository;
 use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
 use Webkul\Product\Helpers\ProductImage;
+use Webkul\Product\Helpers\BundleOption;
 
 /**
  * Class Bundle.
@@ -19,41 +20,6 @@ use Webkul\Product\Helpers\ProductImage;
  */
 class Bundle extends AbstractType
 {
-    /**
-     * AttributeRepository instance
-     *
-     * @var AttributeRepository
-     */
-    protected $attributeRepository;
-
-    /**
-     * ProductRepository instance
-     *
-     * @var ProductRepository
-     */
-    protected $productRepository;
-
-    /**
-     * ProductAttributeValueRepository instance
-     *
-     * @var ProductAttributeValueRepository
-     */
-    protected $attributeValueRepository;
-
-    /**
-     * ProductInventoryRepository instance
-     *
-     * @var ProductInventoryRepository
-     */
-    protected $productInventoryRepository;
-
-    /**
-     * ProductImageRepository instance
-     *
-     * @var ProductImageRepository
-     */
-    protected $productImageRepository;
-
     /**
      * ProductBundleOptionRepository instance
      *
@@ -69,11 +35,11 @@ class Bundle extends AbstractType
     protected $productBundleOptionProductRepository;
 
     /**
-     * Product Image helper instance
+     * Bundle Option helper instance
      * 
-     * @var ProductImage
+     * @var BundleOption
     */
-    protected $productImageHelper;
+    protected $bundleOptionHelper;
 
     /**
      * Skip attribute for Bundle product type
@@ -112,6 +78,7 @@ class Bundle extends AbstractType
      * @param  Webkul\Product\Repositories\ProductBundleOptionRepository        $productBundleOptionRepository
      * @param  Webkul\Product\Repositories\ProductBundleOptionProductRepository $productBundleOptionProductRepository
      * @param  Webkul\Product\Helpers\ProductImage                              $productImageHelper
+     * @param  Webkul\Product\Helpers\BundleOption                              $bundleOptionHelper
      * @return void
      */
     public function __construct(
@@ -122,7 +89,8 @@ class Bundle extends AbstractType
         productImageRepository $productImageRepository,
         ProductBundleOptionRepository $productBundleOptionRepository,
         ProductBundleOptionProductRepository $productBundleOptionProductRepository,
-        ProductImage $productImageHelper
+        ProductImage $productImageHelper,
+        BundleOption $bundleOptionHelper
     )
     {
         parent::__construct(
@@ -137,6 +105,8 @@ class Bundle extends AbstractType
         $this->productBundleOptionRepository = $productBundleOptionRepository;
 
         $this->productBundleOptionProductRepository = $productBundleOptionProductRepository;
+
+        $this->bundleOptionHelper = $bundleOptionHelper;
     }
 
     /**
@@ -162,7 +132,45 @@ class Bundle extends AbstractType
      */
     public function getMinimalPrice()
     {
-        return 0;
+        $optionPrices = [];
+
+        foreach ($this->product->bundle_options as $option) {
+            foreach ($option->bundle_option_products as $index => $bundleOptionProduct) {
+                $optionPrices[$option->id][] = $bundleOptionProduct->qty * $bundleOptionProduct->product->getTypeInstance()->getMinimalPrice();
+            }
+        }
+
+        $minPrice = 0;
+
+        foreach ($optionPrices as $key => $optionPrice) {
+            $minPrice += min($optionPrice);
+        }
+
+        return $minPrice;
+    }
+
+    /**
+     * Get product regular minimal price
+     *
+     * @return float
+     */
+    public function getRegularMinimalPrice()
+    {
+        $optionPrices = [];
+
+        foreach ($this->product->bundle_options as $option) {
+            foreach ($option->bundle_option_products as $index => $bundleOptionProduct) {
+                $optionPrices[$option->id][] = $bundleOptionProduct->qty * $bundleOptionProduct->product->price;
+            }
+        }
+
+        $minPrice = 0;
+
+        foreach ($optionPrices as $key => $optionPrice) {
+            $minPrice += min($optionPrice);
+        }
+
+        return $minPrice;
     }
 
     /**
@@ -172,7 +180,61 @@ class Bundle extends AbstractType
      */
     public function getMaximamPrice()
     {
-        return 0;
+        $optionPrices = [];
+
+        foreach ($this->product->bundle_options as $option) {
+            foreach ($option->bundle_option_products as $index => $bundleOptionProduct) {
+                if (in_array($option->type, ['multiselect', 'checkbox'])) {
+                    if (! isset($optionPrices[$option->id][0]))
+                        $optionPrices[$option->id][0] = 0;
+
+                    $optionPrices[$option->id][0] += $bundleOptionProduct->qty * $bundleOptionProduct->product->getTypeInstance()->getMinimalPrice();
+                } else {
+                    $optionPrices[$option->id][] = $bundleOptionProduct->qty * $bundleOptionProduct->product->getTypeInstance()->getMinimalPrice();
+                }
+
+            }
+        }
+
+        $maxPrice = 0;
+
+        foreach ($optionPrices as $key => $optionPrice) {
+            $maxPrice += max($optionPrice);
+        }
+
+        return $maxPrice;
+    }
+
+    /**
+     * Get product regular maximam price
+     *
+     * @return float
+     */
+    public function getRegularMaximamPrice()
+    {
+        $optionPrices = [];
+
+        foreach ($this->product->bundle_options as $option) {
+            foreach ($option->bundle_option_products as $index => $bundleOptionProduct) {
+                if (in_array($option->type, ['multiselect', 'checkbox'])) {
+                    if (! isset($optionPrices[$option->id][0]))
+                        $optionPrices[$option->id][0] = 0;
+
+                    $optionPrices[$option->id][0] += $bundleOptionProduct->qty * $bundleOptionProduct->product->price;
+                } else {
+                    $optionPrices[$option->id][] = $bundleOptionProduct->qty * $bundleOptionProduct->product->price;
+                }
+
+            }
+        }
+
+        $maxPrice = 0;
+
+        foreach ($optionPrices as $key => $optionPrice) {
+            $maxPrice += max($optionPrice);
+        }
+
+        return $maxPrice;
     }
 
     /**
@@ -186,12 +248,66 @@ class Bundle extends AbstractType
     }
 
     /**
+     * Returns product prices
+     *
+     * @return array
+     */
+    public function getProductPrices()
+    {
+        return [
+            'from' => [
+                'regular_price' => [
+                    'price' => core()->convertPrice($this->getRegularMinimalPrice()),
+                    'formated_price' => core()->currency($this->getRegularMinimalPrice())
+                ],
+                'final_price' => [
+                    'price' => core()->convertPrice($this->getMinimalPrice()),
+                    'formated_price' => core()->currency($this->getMinimalPrice())
+                ]
+            ],
+            'to' => [
+                'regular_price' => [
+                    'price' => core()->convertPrice($this->getRegularMaximamPrice()),
+                    'formated_price' => core()->currency($this->getRegularMaximamPrice())
+                ],
+                'final_price' => [
+                    'price' => core()->convertPrice($this->getMaximamPrice()),
+                    'formated_price' => core()->currency($this->getMaximamPrice())
+                ]
+            ]
+        ];
+    }
+
+    /**
      * Get product minimal price
      *
      * @return string
      */
     public function getPriceHtml()
     {
+        $prices = $this->getProductPrices();
+
+        $priceHtml = '<div class="price-from">';
+
+        if ($prices['from']['regular_price']['price'] != $prices['from']['final_price']['price']) {
+            $priceHtml .= '<span class="regular-price">' . $prices['from']['regular_price']['formated_price'] . '</span>'
+                        . '<span class="special-price">' . $prices['from']['final_price']['formated_price'] . '</span>';
+        } else {
+            $priceHtml .= '<span>' . $prices['from']['regular_price']['formated_price'] . '</span>';
+        }
+
+        $priceHtml .= '<span style="font-weight: 500;margin-top: 1px;margin-bottom: 1px;display: block;">To</span>';
+
+        if ($prices['to']['regular_price']['price'] != $prices['to']['final_price']['price']) {
+            $priceHtml .= '<span class="regular-price">' . $prices['to']['regular_price']['formated_price'] . '</span>'
+                        . '<span class="special-price">' . $prices['to']['final_price']['formated_price'] . '</span>';
+        } else {
+            $priceHtml .= '<span>' . $prices['to']['regular_price']['formated_price'] . '</span>';
+        }
+
+        $priceHtml .= '</div>';
+
+        return $priceHtml;
     }
 
     /**

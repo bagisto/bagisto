@@ -79,7 +79,7 @@ class BundleOption extends AbstractProduct
             $products[$bundleOptionProduct->id] = [
                 'id' => $bundleOptionProduct->id,
                 'qty' => $bundleOptionProduct->qty,
-                'price' => $this->getProductPrices($bundleOptionProduct->product),
+                'price' => $bundleOptionProduct->product->getTypeInstance()->getProductPrices(),
                 'name' => $bundleOptionProduct->product->name,
                 'product_id' => $bundleOptionProduct->product_id,
                 'is_default' => $bundleOptionProduct->is_default
@@ -87,25 +87,5 @@ class BundleOption extends AbstractProduct
         }
 
         return $products;
-    }
-
-    /**
-     * Returns bundle product prices
-     *
-     * @param Product $product
-     * @return array
-     */
-    public function getProductPrices($product)
-    {
-        return [
-            'regular_price' => [
-                'price' => core()->convertPrice($product->price),
-                'formated_price' => core()->currency($product->price)
-            ],
-            'final_price' => [
-                'price' => core()->convertPrice($product->getTypeInstance()->getMinimalPrice()),
-                'formated_price' => core()->currency($product->getTypeInstance()->getMinimalPrice())
-            ]
-        ];
     }
 }

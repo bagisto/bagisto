@@ -21,41 +21,6 @@ use Webkul\Checkout\Models\CartItem;
 class Downloadable extends AbstractType
 {
     /**
-     * AttributeRepository instance
-     *
-     * @var AttributeRepository
-     */
-    protected $attributeRepository;
-
-    /**
-     * ProductRepository instance
-     *
-     * @var ProductRepository
-     */
-    protected $productRepository;
-
-    /**
-     * ProductAttributeValueRepository instance
-     *
-     * @var ProductAttributeValueRepository
-     */
-    protected $attributeValueRepository;
-
-    /**
-     * ProductInventoryRepository instance
-     *
-     * @var ProductInventoryRepository
-     */
-    protected $productInventoryRepository;
-
-    /**
-     * ProductImageRepository instance
-     *
-     * @var ProductImageRepository
-     */
-    protected $productImageRepository;
-
-    /**
      * ProductDownloadableLinkRepository instance
      * 
      * @var ProductDownloadableLinkRepository
@@ -68,13 +33,6 @@ class Downloadable extends AbstractType
      * @var ProductDownloadableSampleRepository
     */
     protected $productDownloadableSampleRepository;
-
-    /**
-     * Product Image helper instance
-     * 
-     * @var ProductImage
-    */
-    protected $productImageHelper;
 
     /**
      * Skip attribute for downloadable product type

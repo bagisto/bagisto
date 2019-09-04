@@ -21,53 +21,11 @@ use Webkul\Product\Models\ProductFlat;
 class Grouped extends AbstractType
 {
     /**
-     * AttributeRepository instance
-     *
-     * @var AttributeRepository
-     */
-    protected $attributeRepository;
-
-    /**
-     * ProductRepository instance
-     *
-     * @var ProductRepository
-     */
-    protected $productRepository;
-
-    /**
-     * ProductAttributeValueRepository instance
-     *
-     * @var ProductAttributeValueRepository
-     */
-    protected $attributeValueRepository;
-
-    /**
-     * ProductInventoryRepository instance
-     *
-     * @var ProductInventoryRepository
-     */
-    protected $productInventoryRepository;
-
-    /**
-     * ProductImageRepository instance
-     *
-     * @var ProductImageRepository
-     */
-    protected $productImageRepository;
-
-    /**
      * ProductGroupedProductRepository instance
      *
      * @var ProductGroupedProductRepository
      */
     protected $productGroupedProductRepository;
-
-    /**
-     * Product Image helper instance
-     * 
-     * @var ProductImage
-    */
-    protected $productImageHelper;
     
     /**
      * Skip attribute for downloadable product type

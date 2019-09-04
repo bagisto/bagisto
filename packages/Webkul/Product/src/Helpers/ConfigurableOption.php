@@ -218,16 +218,7 @@ class ConfigurableOption extends AbstractProduct
                 $variantId = $variant->id;
             }
 
-            $prices[$variantId] = [
-                'regular_price' => [
-                    'formated_price' => core()->currency($variant->price),
-                    'price' => $variant->price
-                ],
-                'final_price' => [
-                    'formated_price' => core()->currency($variant->getTypeInstance()->getMinimalPrice()),
-                    'price' => $variant->getTypeInstance()->getMinimalPrice()
-                ]
-            ];
+            $prices[$variantId] = $variant->getTypeInstance()->getProductPrices();
         }
 
         return $prices;
