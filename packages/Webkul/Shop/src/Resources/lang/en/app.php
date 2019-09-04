@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'security-warning' => 'Suspicious Activity Found!!!',
+    'security-warning' => 'Suspicious activity found!!!',
     'nothing-to-delete' => 'Nothing to delete',
 
     'layouts' => [
@@ -22,7 +22,7 @@ return [
         'page-title' => 'Bagisto - Home',
         'featured-products' => 'Featured Products',
         'new-products' => 'New Products',
-        'verify-email' => 'Verify Your Email Account',
+        'verify-email' => 'Verify your email account',
         'resend-verify-email' => 'Resend Verification Email'
     ],
 
@@ -57,12 +57,12 @@ return [
     'subscription' => [
         'unsubscribe' => 'Unsubcribe',
         'subscribe' => 'Subscribe',
-        'subscribed' => 'You Are Now Subscribed To Subscription Emails',
-        'not-subscribed' => 'You Cannot Be Subscribed To Subscription Emails, Try Again After Some time',
-        'already' => 'You Are Already Subscribed To Our Subscription List',
-        'unsubscribed' => 'You Are Unsubscribed From Bagisto Subscription Mails',
-        'already-unsub' => 'You Are Already Unsubscribed',
-        'not-subscribed' => 'Error! Mail Cannot Be Sent Currently, Please Try Again Later'
+        'subscribed' => 'You are now subscribed to subscription emails.',
+        'not-subscribed' => 'You can not be subscribed to subscription emails, please try again later.',
+        'already' => 'You are already subscribed to our subscription list.',
+        'unsubscribed' => 'You are unsubscribed from subscription mails0',
+        'already-unsub' => 'You are already unsubscribed.',
+        'not-subscribed' => 'Error! Mail can not be sent currently, please try again later.'
     ],
 
     'search' => [
@@ -76,7 +76,7 @@ return [
         'title' => 'Title',
         'add-review-page-title' => 'Add Review',
         'write-review' => 'Write a review',
-        'review-title' => 'Give Your Review a Title',
+        'review-title' => 'Give your review a title',
         'product-review-page-title' => 'Product Review',
         'rating-reviews' => 'Rating & Reviews',
         'submit' => 'SUBMIT',
@@ -108,16 +108,16 @@ return [
             'conditions' => 'Conditions',
             'using' => 'by using this website',
             'agreement' => 'Agreement',
-            'success' => 'Account Created Successfully',
-            'success-verify' => 'Account Created Successfully, an e-mail has been sent for verification.',
-            'success-verify-email-unsent' => 'Account created successfully, but verification e-mail unsent',
-            'failed' => 'Error! Cannot Create Your Account, Try Again Later',
-            'already-verified' => 'Your Account is already verified Or Please Try Sending A New Verification Email Again',
-            'verification-not-sent' => 'Error! Problem In Sending Verification Email, Try Again Later',
-            'verification-sent' => 'Verification Email Sent',
-            'verified' => 'Your Account Has Been Verified, Try To Login Now',
-            'verify-failed' => 'We Cannot Verify Your Mail Account',
-            'dont-have-account' => 'You Do Not Have Account With Us',
+            'success' => 'Account created successfully.',
+            'success-verify' => 'Account created successfully, an e-mail has been sent for verification.',
+            'success-verify-email-unsent' => 'Account created successfully, but verification e-mail unsent.',
+            'failed' => 'Error! Can not create your account, pleae try again later.',
+            'already-verified' => 'Your account is already verified Or please try sending a new verification email again.',
+            'verification-not-sent' => 'Error! Problem in sending verification email, please try again later.',
+            'verification-sent' => 'Verification email sent',
+            'verified' => 'Your account has been verified, try to login now.',
+            'verify-failed' => 'We cannot verify your mail account.',
+            'dont-have-account' => 'You do not have account with us.',
         ],
 
         'login-text' => [
@@ -134,10 +134,10 @@ return [
             'button_title' => 'Sign In',
             'remember' => 'Remember Me',
             'footer' => '© Copyright :year Webkul Software, All rights reserved',
-            'invalid-creds' => 'Please Check Your Credentials And Try Again',
-            'verify-first' => 'Verify Your Email Account First',
+            'invalid-creds' => 'Please check your credentials and try again.',
+            'verify-first' => 'Verify your email account first.',
             'not-activated' => 'Your activation seeks admin approval',
-            'resend-verification' => 'Resend Verification Mail Again'
+            'resend-verification' => 'Resend verification mail again'
         ],
 
         'forgot-password' => [
@@ -167,9 +167,9 @@ return [
                     'edit' => 'Edit',
                 ],
 
-                'edit-success' => 'Profile Updated Successfully',
-                'edit-fail' => 'Error! Profile Cannot Be Updated, Please Try Again Later',
-                'unmatch' => 'The Old Password Does Not Match',
+                'edit-success' => 'Profile updated successfully.',
+                'edit-fail' => 'Error! Profile cannot be updated, please try again later.',
+                'unmatch' => 'The old password does not match.',
 
                 'fname' => 'First Name',
                 'lname' => 'Last Name',
@@ -201,7 +201,7 @@ return [
                     'default' => 'Default',
                     'contact' => 'Contact',
                     'confirm-delete' =>  'Do you really want to delete this address?',
-                    'default-delete' => 'Default Address Cannot Be Changed'
+                    'default-delete' => 'Default address cannot be changed.'
                 ],
 
                 'create' => [
@@ -224,11 +224,11 @@ return [
                     'title' => 'Edit Address',
                     'street-address' => 'Street Address',
                     'submit' => 'Save Address',
-                    'success' => 'Address Updated Successfully.',
+                    'success' => 'Address updated successfully.',
                 ],
                 'delete' => [
-                    'success' => 'Address Successfully Deleted',
-                    'failure' => 'Address Cannot Be Deleted'
+                    'success' => 'Address successfully deleted',
+                    'failure' => 'Address cannot be deleted'
                 ]
             ],
 
@@ -386,43 +386,43 @@ return [
     // ]
 
     'buynow' => [
-        'no-options' => 'Please Select Options Before Buying This Product'
+        'no-options' => 'Please select options before buying this product.'
     ],
 
 
     'checkout' => [
         'cart' => [
             'integrity' => [
-                'missing_fields' =>'Cart System Integrity Violation, Some Required Fields Missing',
-                'missing_options' =>'Cart System Integrity Violation, Options Are Missing For Configurable Product',
-                'missing_links' =>'Cart System Integrity Violation, Downloadable Links Are Missing For Product',
+                'missing_fields' =>'Some required fields missing for this product.',
+                'missing_options' =>'Options are missing for this product.',
+                'missing_links' =>'Downloadable links are missing for this product.',
             ],
-            'create-error' => 'Encountered Some Issue While Making Cart Instance',
+            'create-error' => 'Encountered some issue while making cart instance.',
             'title' => 'Shopping Cart',
-            'empty' => 'Your Shopping Cart Is Empty',
+            'empty' => 'Your shopping cart is empty',
             'update-cart' => 'Update Cart',
             'continue-shopping' => 'Continue Shopping',
             'proceed-to-checkout' => 'Proceed To Checkout',
             'remove' => 'Remove',
             'remove-link' => 'Remove',
             'move-to-wishlist' => 'Move to Wishlist',
-            'move-to-wishlist-success' => 'Item Moved To Wishlist',
-            'move-to-wishlist-error' => 'Cannot Move Item To Wishlist, Please Try Again Later',
-            'add-config-warning' => 'Please Select Option Before Adding To Cart',
+            'move-to-wishlist-success' => 'Item moved to wishlist.',
+            'move-to-wishlist-error' => 'Cannot move item to wishlist, please try again later.',
+            'add-config-warning' => 'Please select option before adding to cart.',
             'quantity' => [
                 'quantity' => 'Quantity',
-                'success' => 'Cart Item(s) Successfully Updated',
-                'illegal' => 'Quantity Cannot Be Lesser Than One',
-                'inventory_warning' => 'The Requested Quantity Is Not Available, Please Try Again Later',
-                'error' => 'Cannot Update The Item(s) At The Moment, Please Try Again Later'
+                'success' => 'Cart Item(s) successfully updated.',
+                'illegal' => 'Quantity cannot be lesser than one.',
+                'inventory_warning' => 'The requested quantity is not available, please try again later.',
+                'error' => 'Cannot update the item(s) at the moment, please try again later.'
             ],
             'item' => [
-                'error_remove' => 'No Items To Remove From The Cart',
-                'success' => 'Item Was Successfully Added To Cart',
-                'success-remove' => 'Item Was Removed Successfully From The Cart',
-                'error-add' => 'Item Cannot Be Added To Cart, Please Try Again Later',
+                'error_remove' => 'No items to remove from the cart.',
+                'success' => 'Item was successfully added to cart.',
+                'success-remove' => 'Item was removed successfully from the cart.',
+                'error-add' => 'Item cannot be added to cart, please try again later.',
             ],
-            'quantity-error' => 'Requested Quantity Is Not Available',
+            'quantity-error' => 'Requested quantity is not available.',
             'cart-subtotal' => 'Cart Subtotal',
             'cart-remove-action' => 'Do you really want to do this ?',
             'partial-cart-update' => 'Only some of the product(s) were updated',
@@ -527,19 +527,19 @@ return [
             'thanks' => 'Thanks!'
         ],
         'invoice' => [
-            'heading' => 'Your Invoice #:invoice_id for Order #:order_id',
+            'heading' => 'Your invoice #:invoice_id for Order #:order_id',
             'subject' => 'Invoice for your order #:order_id',
             'summary' => 'Summary of Invoice',
         ],
         'shipment' => [
             'heading' => 'Shipment #:shipment_id  has been generated for Order #:order_id',
-            'inventory-heading' => 'New Shipment #:shipment_id had been generated for Order #:order_id',
+            'inventory-heading' => 'New shipment #:shipment_id had been generated for Order #:order_id',
             'subject' => 'Shipment for your order #:order_id',
-            'inventory-subject' => 'New Shipment had been generated for Order #:order_id',
+            'inventory-subject' => 'New shipment had been generated for Order #:order_id',
             'summary' => 'Summary of Shipment',
             'carrier' => 'Carrier',
             'tracking-number' => 'Tracking Number',
-            'greeting' => 'An Order :order_id has been placed on :created_at',
+            'greeting' => 'An order :order_id has been placed on :created_at',
         ],
         'forget-password' => [
             'subject' => 'Customer Reset Password',

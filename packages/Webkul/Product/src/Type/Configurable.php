@@ -375,7 +375,7 @@ class Configurable extends AbstractType
     public function prepareForCart($data)
     {
         if (! isset($data['selected_configurable_option']) || ! $data['selected_configurable_option'])
-            return trans('shop::app.checkout.cart.item.error-add');
+            return trans('shop::app.checkout.cart.integrity.missing_options');
 
         $data = $this->getQtyRequest($data);
 

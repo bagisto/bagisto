@@ -150,6 +150,9 @@ class Grouped extends AbstractType
      */
     public function prepareForCart($data)
     {
+        if (! isset($data['qty']) || ! is_arrat($data['qty']))
+            return trans('shop::app.checkout.cart.integrity.missing_options');
+
         $products = [];
 
         foreach ($data['qty'] as $productId => $qty) {
