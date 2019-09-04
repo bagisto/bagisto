@@ -120,9 +120,6 @@ class ProductRepository extends Repository
 
                 $qb = $query->distinct()
                         ->addSelect('product_flat.*')
-                        ->addSelect(DB::raw('IF( product_flat.special_price_from IS NOT NULL
-                            AND product_flat.special_price_to IS NOT NULL , IF( NOW( ) >= product_flat.special_price_from
-                            AND NOW( ) <= product_flat.special_price_to, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) , IF( product_flat.special_price_from IS NULL , IF( product_flat.special_price_to IS NULL , IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , IF( NOW( ) <= product_flat.special_price_to, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) ) , IF( product_flat.special_price_to IS NULL , IF( NOW( ) >= product_flat.special_price_from, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) , product_flat.price ) ) ) AS final_price'))
                         ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
                         ->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id')
                         ->where('product_flat.channel', $channel)
@@ -152,7 +149,7 @@ class ProductRepository extends Repository
 
                     if ($params['sort'] == 'price') {
                         if ($attribute->code == 'price') {
-                            $qb->orderBy('final_price', $params['order']);
+                            $qb->orderBy('min_price', $params['order']);
                         } else {
                             $qb->orderBy($attribute->code, $params['order']);
                         }
@@ -191,9 +188,8 @@ class ProductRepository extends Repository
                                         }
                                     });
                                 } else {
-                                    $query2 = $query2->where($aliasTemp . '.' . $column, '>=', core()->convertToBasePrice(current($temp)))
-                                            ->where($aliasTemp . '.' . $column, '<=', core()->convertToBasePrice(end($temp)))
-                                            ->where($aliasTemp . '.attribute_id', $attribute->id);
+                                    $query2->where('product_flat.min_price', '>=', core()->convertToBasePrice(current($temp)))
+                                        ->where('product_flat.min_price', '<=', core()->convertToBasePrice(end($temp)));
                                 }
                             }
                         });

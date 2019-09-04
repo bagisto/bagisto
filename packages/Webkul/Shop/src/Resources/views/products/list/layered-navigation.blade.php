@@ -116,18 +116,13 @@
             data: function() {
                 return {
                     attributes: @json($filterAttributes),
+                    
                     appliedFilters: {}
                 }
             },
 
             created: function () {
                 var urlParams = new URLSearchParams(window.location.search);
-
-                //var entries = urlParams.entries();
-
-                //for (let pair of entries) {
-                    //this.appliedFilters[pair[0]] = pair[1].split(',');
-                //}
 
                 var this_this = this;
 
@@ -176,7 +171,7 @@
                             0,
                             0
                         ],
-                        max: {{ isset($category) ? core()->convertPrice($productFlatRepository->getCategoryProductMaximumPrice($category->id)) : core()->convertPrice($productFlatRepository->getProductMaximumPrice()) }},
+                        max: {{ core()->convertPrice($productFlatRepository->getCategoryProductMaximumPrice($category)) }},
                         processStyle: {
                             "backgroundColor": "#FF6472"
                         },

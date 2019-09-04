@@ -20,33 +20,24 @@ class ProductFlatRepository extends Repository
     /**
      * Maximum Price of Category Product
      *
-     * @param int  $categoryId
-     * return integer
+     * @param Category $category
+     * @return float
      */
-    public function getCategoryProductMaximumPrice($categoryId)
+    public function getCategoryProductMaximumPrice($category = null)
     {
-        // return $this->model
-        //     ->leftJoin('product_categories', 'product_flat.product_id', 'product_categories.product_id')
-        //     ->where('product_categories.category_id', $categoryId)
-        //     ->max('price');
+        if (! $category)
+            return $this->model->max('max_price');
 
-        return $this->model->max('price');
-    }
-
-     /**
-     * Maximum Price of Product
-     *
-     * return integer
-     */
-    public function getProductMaximumPrice()
-    {
-        return $this->model->max('price');
+        return $this->model
+            ->leftJoin('product_categories', 'product_flat.product_id', 'product_categories.product_id')
+            ->where('product_categories.category_id', $category->id)
+            ->max('max_price');
     }
 
     /**
      * get Category Product
      *
-     * return array
+     * @return array
      */
     public function getCategoryProductAttribute($categoryId)
     {
