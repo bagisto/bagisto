@@ -247,7 +247,7 @@
                                     <div class="control-group" :class="[errors.has('disc_amount') ? 'has-error' : '']">
                                         <label for="disc_amount" class="required">{{ __('admin::app.promotion.general-info.disc_amt') }}</label>
 
-                                        <input type="number" step="0.5000" class="control" name="disc_amount" v-model="disc_amount" v-validate="'required|min_value:0.0001'" value="{{ old('disc_amount') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_amt') }}&quot;">
+                                        <input type="number" step="0.0001" class="control" name="disc_amount" v-model="disc_amount" v-validate="'required|min_value:0.0001'" value="{{ old('disc_amount') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_amt') }}&quot;">
 
                                         <span class="control-error" v-if="errors.has('disc_amount')">@{{ errors.first('disc_amount') }}</span>
                                     </div>
