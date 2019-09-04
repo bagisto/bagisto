@@ -56,26 +56,18 @@ class InvoiceItem extends Model implements InvoiceItemContract
     }
 
     /**
+     * Get the children items.
+     */
+    public function children()
+    {
+        return $this->hasMany(self::class, 'parent_id');
+    }
+
+    /**
      * Get order item type
      */
     public function getTypeAttribute()
     {
         return $this->order_item->type;
-    }
-
-    /**
-     * Returns configurable option html
-     */
-    public function getOptionDetailHtml()
-    {
-        return $this->order_item->getOptionDetailHtml();
-    }
-
-    /**
-     * Returns configurable option html
-     */
-    public function getDownloadableDetailHtml()
-    {
-        return $this->order_item->getDownloadableDetailHtml();
     }
 }

@@ -168,42 +168,4 @@ class OrderItem extends Model implements OrderItemContract
     {
         return $this->hasMany(DownloadableLinkPurchasedProxy::modelClass());
     }
-
-    /**
-     * Returns configurable option html
-     */
-    public function getOptionDetailHtml()
-    {
-        if ($this->type != 'configurable')
-            return;
-
-        if (isset($this->additional['attributes'])) {
-            $labels = [];
-
-            foreach ($this->additional['attributes'] as $attribute) {
-                $labels[] = $attribute['attribute_name'] . ' : ' . $attribute['option_label'];
-            }
-
-            return implode(', ', $labels);
-        }
-    }
-
-    /**
-     * Returns configurable option html
-     */
-    public function getDownloadableDetailHtml()
-    {
-        $labels = [];
-
-        foreach ($this->downloadable_link_purchased as $link) {
-            if (! $link->download_bought) {
-                $labels[] = $link->name . ' (' . $link->download_used . ' / U)';
-            } else {
-                $labels[] = $link->name . ' (' . $link->download_used . ' / ' . $link->download_bought . ')';
-            }
-
-        }
-
-        return implode(', ', $labels);
-    }
 }

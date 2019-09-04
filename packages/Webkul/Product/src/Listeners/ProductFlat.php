@@ -266,6 +266,10 @@ class ProductFlat
 
                     $productFlat->updated_at = $product->updated_at;
 
+                    $productFlat->min_price = $product->getTypeInstance()->getMinimalPrice();
+
+                    $productFlat->max_price = $product->getTypeInstance()->getMaximamPrice();
+
                     if ($parentProduct) {
                         $parentProductFlat = $this->productFlatRepository->findOneWhere([
                                 'product_id' => $parentProduct->id,

@@ -206,7 +206,6 @@ class DashboardController extends Controller
             ->leftJoin('products', 'product_inventories.product_id', 'products.id')
             ->select(DB::raw('SUM(qty) as total_qty'))
             ->addSelect('product_inventories.product_id')
-            ->where('products.type', '!=', 'configurable')
             ->groupBy('product_id')
             ->orderBy('total_qty', 'ASC')
             ->limit(5)

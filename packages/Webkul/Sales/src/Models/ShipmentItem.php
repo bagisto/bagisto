@@ -62,20 +62,4 @@ class ShipmentItem extends Model implements ShipmentItemContract
     {
         return $this->order_item->type;
     }
-
-    /**
-     * Returns configurable option html
-     */
-    public function getOptionDetailHtml()
-    {
-        return $this->order_item->getOptionDetailHtml();
-    }
-
-    /**
-     * Returns configurable option html
-     */
-    public function getDownloadableDetailHtml()
-    {
-        return $this->order_item->getDownloadableDetailHtml();
-    }
 }
