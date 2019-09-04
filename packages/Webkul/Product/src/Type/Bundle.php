@@ -319,7 +319,7 @@ class Bundle extends AbstractType
     public function prepareForCart($data)
     {
         if (! isset($data['bundle_options']))
-            return trans('shop::app.checkout.cart.integrity.missing_fields');
+            return trans('shop::app.checkout.cart.integrity.missing_options');
         
         $products = parent::prepareForCart($data);
 
