@@ -82,19 +82,19 @@ abstract class Repository extends BaseRepository {
         return $this->parserResult($model);
     }
 
-    // /**
-    //  * @return mixed
-    //  */
-    // public function count()
-    // {
-    //     $this->applyCriteria();
-    //     $this->applyScope();
+    /**
+     * @return mixed
+     */
+    public function count()
+    {
+        $this->applyCriteria();
+        $this->applyScope();
 
-    //     $total = $this->model->count();
-    //     $this->resetModel();
+        $total = $this->model->count();
+        $this->resetModel();
 
-    //     return $total;
-    // }
+        return $total;
+    }
 
     /**
      * @return mixed
