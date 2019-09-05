@@ -3,6 +3,7 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Webkul\Customer\Repositories\WishlistRepository;
+use Webkul\Product\Repositories\ProductRepository;
 use Cart;
 
 /**
@@ -30,16 +31,29 @@ class CartController extends Controller
     protected $wishlistRepository;
 
     /**
+     * ProductRepository object
+     *
+     * @var Object
+     */
+    protected $productRepository;
+
+    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Customer\Repositories\CartItemRepository $wishlistRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository   $productRepository
      * @return void
      */
-    public function __construct(WishlistRepository $wishlistRepository)
+    public function __construct(
+        WishlistRepository $wishlistRepository,
+        ProductRepository $productRepository
+    )
     {
         $this->middleware('customer')->only(['moveToWishlist']);
 
         $this->wishlistRepository = $wishlistRepository;
+
+        $this->productRepository = $productRepository;
 
         $this->_config = request('_config');
     }
@@ -77,6 +91,10 @@ class CartController extends Controller
             }
         } catch(\Exception $e) {
             session()->flash('error', trans($e->getMessage()));
+
+            $product = $this->productRepository->find($id);
+
+            return redirect()->route('shop.products.index', ['slug' => $product->url_key]);
         }
 
         return redirect()->back();
