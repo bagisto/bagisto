@@ -63,6 +63,16 @@ abstract class Discount
                 'use_coupon' => 1,
                 'status' => 1
             ]);
+
+            foreach($rules as $rule) {
+                if ($rule->coupons->code == $code) {
+                    $rules = collect();
+
+                    $rules->push($rule);
+
+                    break;
+                }
+            }
         } else {
             $rules = $this->cartRule->findWhere([
                 'use_coupon' => 0,
@@ -141,6 +151,27 @@ abstract class Discount
         }
 
         return collect();
+    }
+
+    /**
+     * To find the oldes rule
+     *
+     * @param Collection $rules
+     *
+     * @return CartRule $oldestRule
+     */
+    public function findOldestRule($rules)
+    {
+        $leastID = 999999999999;
+
+        foreach ($rules as $index => $rule) {
+            if ($rule->id < $leastID) {
+                $leastID = $rule->id;
+                $oldestRule = $rule;
+            }
+        }
+
+        return $oldestRule;
     }
 
     /**
@@ -668,7 +699,7 @@ abstract class Discount
             if (! $result) {
                 $this->clearDiscount();
 
-                $alreadyAppliedRule->delete();
+                $alreadyAppliedRule->first()->delete();
             } else {
                 $this->reassess($alreadyAppliedCartRule);
             }
@@ -811,13 +842,13 @@ abstract class Discount
                         break;
                     }
                 } else if ($test_condition == '{}') {
-                    if (! str_contains($test_value, $actual_value)) {
+                    if (! str_contains($actual_value, $test_value)) {
                         $result = false;
 
                         break;
                     }
                 } else if ($test_condition == '!{}') {
-                    if (str_contains($test_value, $actual_value)) {
+                    if (str_contains($actual_value, $test_value)) {
                         $result = false;
 
                         break;
@@ -940,13 +971,13 @@ abstract class Discount
                         break;
                     }
                 } else if ($test_condition == '{}') {
-                    if (str_contains($test_value, $actual_value)) {
+                    if (str_contains($actual_value, $test_value)) {
                         $result = true;
 
                         break;
                     }
                 } else if ($test_condition == '!{}') {
-                    if (! str_contains($test_value, $actual_value)) {
+                    if (! str_contains($actual_value, $test_value)) {
                         $result = true;
 
                         break;
