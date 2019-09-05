@@ -89,6 +89,7 @@
                     <div class="section-content">
                         <bundle-product-list
                             :bundle-option-products="option.bundle_option_products"
+                            :bundle-option="option"
                             :control-name="inputName">
                         </bundle-product-list>
                     </div>
@@ -126,6 +127,7 @@
 
                     <thead>
                         <tr>
+                            <th class="name">{{ __('admin::app.catalog.products.is-default') }}</th>
                             <th class="name">{{ __('admin::app.catalog.products.name') }}</th>
                             <th class="sku">{{ __('admin::app.catalog.products.sku') }}</th>
                             <th class="qty">{{ __('admin::app.catalog.products.qty') }}</th>
@@ -138,6 +140,7 @@
 
                         <bundle-product-item
                             v-for='(product, index) in bundle_option_products'
+                            :bundle-option="bundleOption"
                             :product="product"
                             :key="index"
                             :index="index"
@@ -154,6 +157,22 @@
 
     <script type="text/x-template" id="bundle-product-item-template">
         <tr>
+            <td>
+                <div class="control-group" v-if="bundleOption.type == 'radio' || bundleOption.type == 'select'">
+                    <span class="radio">
+                        <input type="radio" :name="[inputName + '[is_default]']" :id="[inputName + '[is_default]']" value="0">
+                        <label class="radio-view" :for="[inputName + '[is_default]']"></label>
+                    </span>
+                </div>
+
+                <div class="control-group" v-else>
+                    <span class="checkbox">
+                        <input type="checkbox" :name="[inputName + '[is_default]']" :id="[inputName + '[is_default]']">
+                        <label class="checkbox-view" :for="[inputName + '[is_default]']"></label>
+                    </span>
+                </div>
+            </td>
+
             <td>
                 @{{ product.product.name }}
                 <input type="hidden" :name="[inputName + '[product_id]']" :value="product.product.id"/>
@@ -250,7 +269,7 @@
 
             inject: ['$validator'],
 
-            props: ['controlName', 'bundleOptionProducts'],
+            props: ['controlName', 'bundleOption', 'bundleOptionProducts'],
 
             data: function() {
                 return {
@@ -319,7 +338,7 @@
 
             template: '#bundle-product-item-template',
 
-            props: ['controlName', 'index', 'product'],
+            props: ['controlName', 'index', 'bundleOption', 'product'],
 
             inject: ['$validator'],
 

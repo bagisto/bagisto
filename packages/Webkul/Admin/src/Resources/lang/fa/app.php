@@ -408,7 +408,8 @@ return [
             'radio' => 'Radio',
             'checkbox' => 'Checkbox',
             'multiselect' => 'Multiselect',
-            'new-option' => 'New Option'
+            'new-option' => 'New Option',
+            'is-default' => 'Is Default'
         ],
 
         'attributes' => [
