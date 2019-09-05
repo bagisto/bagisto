@@ -2377,12 +2377,11 @@ section.cart {
                 flex-direction: row;
                 justify-content: flex-start;
                 align-items: flex-start;
-
+                margin-top: 10px;
+                
                 .control-group {
                     font-size: 16px !important;
-                    width: 220px;
                     margin: 0px;
-                    padding: 10px 0 0 0;
                     width: auto;
 
                     .wrap {
@@ -2403,7 +2402,7 @@ section.cart {
                 }
 
                 .remove, .towishlist {
-                    margin-top: 18px;
+                    line-height: 35px;
                     margin-left: 15px;
                 }
             }
