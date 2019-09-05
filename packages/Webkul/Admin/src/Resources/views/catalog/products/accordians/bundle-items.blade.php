@@ -145,7 +145,8 @@
                             :key="index"
                             :index="index"
                             :control-name="controlName"
-                            @onRemoveProduct="removeProduct($event)">
+                            @onRemoveProduct="removeProduct($event)"
+                            @onCheckProduct="checkProduct($event)">
                         </bundle-product-item>
 
                     </tbody>
@@ -160,14 +161,14 @@
             <td>
                 <div class="control-group" v-if="bundleOption.type == 'radio' || bundleOption.type == 'select'">
                     <span class="radio">
-                        <input type="radio" :name="[inputName + '[is_default]']" :id="[inputName + '[is_default]']" value="0">
+                        <input type="radio" :name="[inputName + '[is_default]']" :id="[inputName + '[is_default]']" :value="product.is_default" @click="checkProduct($event)" :checked="product.is_default">
                         <label class="radio-view" :for="[inputName + '[is_default]']"></label>
                     </span>
                 </div>
 
                 <div class="control-group" v-else>
                     <span class="checkbox">
-                        <input type="checkbox" :name="[inputName + '[is_default]']" :id="[inputName + '[is_default]']">
+                        <input type="checkbox" :name="[inputName + '[is_default]']" :id="[inputName + '[is_default]']" :value="product.is_default" @click="checkProduct($event)" :checked="product.is_default">
                         <label class="checkbox-view" :for="[inputName + '[is_default]']"></label>
                     </span>
                 </div>
@@ -330,6 +331,19 @@
                         .catch (function (error) {
                             this_this.is_searching = false;
                         })
+                },
+
+                checkProduct: function(productId) {
+                    var this_this = this;
+
+                    this.bundle_option_products.forEach(function(product) {
+                        if (this_this.bundleOption.type == 'radio' || this_this.bundleOption.type == 'select') {
+                            product.is_default = product.id == productId ? 1 : 0;
+                        } else {
+                            if (product.id == productId)
+                                product.is_default = product.is_default ? 0 : 1;
+                        }
+                    });
                 }
             }
         });
@@ -354,6 +368,10 @@
             methods: {
                 removeProduct: function () {
                     this.$emit('onRemoveProduct', this.product)
+                },
+
+                checkProduct: function($event) {
+                    this.$emit('onCheckProduct', this.product.id)
                 }
             }
         });

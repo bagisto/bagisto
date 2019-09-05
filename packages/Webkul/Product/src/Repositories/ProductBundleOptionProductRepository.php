@@ -27,6 +27,8 @@ class ProductBundleOptionProductRepository extends Repository
         $previousBundleOptionProductIds = $productBundleOption->bundle_option_products()->pluck('id');
 
         if (isset($data['products'])) {
+            $this->setIsDefaultFlag($data);
+            
             foreach ($data['products'] as $bundleOptionProductId => $bundleOptionProductInputs) {
                 if (str_contains($bundleOptionProductId, 'product_')) {
                     $this->create(array_merge([
@@ -44,5 +46,28 @@ class ProductBundleOptionProductRepository extends Repository
         foreach ($previousBundleOptionProductIds as $previousBundleOptionProductId) {
             $this->delete($previousBundleOptionProductId);
         }
+    }
+
+    /**
+     * @param array $data
+     * @return void
+     */
+    public function setIsDefaultFlag(&$data)
+    {
+        if (! count($data['products']))
+            return;
+        
+        $haveIsDefaulFlag = false;
+
+        foreach ($data['products'] as $key => $product) {
+            if (isset($product['is_default']) && $product['is_default']) {
+                $haveIsDefaulFlag = true;
+            } else {
+                $data['products'][$key]['is_default'] = 0;    
+            }
+        }
+
+        if (! $haveIsDefaulFlag)
+            $data['products'][key($data['products'])]['is_default'] = 1;
     }
 }
