@@ -442,19 +442,12 @@ input {
     }
 
     .product-card:hover {
-<<<<<<< HEAD
-        outline: 1px solid #eaeaec;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
-        -webkit-box-shadow: 0 2px 16px 4px rgba(40, 44, 63, .07);
-        box-shadow: 0 2px 16px 4px rgba(40, 44, 63, .07)
-=======
         box-shadow: 0 1px 2px rgba(0,0,0,0.05);
         -webkit-box-shadow: 0px 2px 16px 4px rgba(40, 44, 63, 0.07);
         -moz-box-shadow: 0px 2px 16px 4px rgba(40, 44, 63, 0.07);
         box-shadow: 0px 2px 16px 4px rgba(40, 44, 63, 0.07);
         transition: .3s;
         // outline: 1px solid $outline-hvr;
->>>>>>> f9580b077a856af56b51d8ffbbff524557b317ee
     }
 
     @media only screen and (max-width: 580px) {

@@ -139,11 +139,21 @@
 
             methods: {
                 addGroupedProduct: function(item, key) {
-                    this.grouped_products.push({
-                            associated_product: item,
-                            qty: 0,
-                            sort_order: 0
-                        });
+                    var alreadyAdded = false;
+                    
+                    this.grouped_products.forEach(function(groupProduct) {
+                        if (item.id == groupProduct.associated_product.id) {
+                            alreadyAdded = true;
+                        }
+                    });
+
+                    if (! alreadyAdded) {
+                        this.grouped_products.push({
+                                associated_product: item,
+                                qty: 0,
+                                sort_order: 0
+                            });
+                    }
 
                     this.search_term = '';
 

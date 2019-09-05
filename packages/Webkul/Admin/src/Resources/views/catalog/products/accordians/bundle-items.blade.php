@@ -292,11 +292,21 @@
 
             methods: {
                 addProduct: function(item, key) {
-                    this.bundle_option_products.push({
-                            product: item,
-                            qty: 0,
-                            sort_order: 0
-                        });
+                    var alreadyAdded = false;
+                    
+                    this.bundle_option_products.forEach(function(optionProduct) {
+                        if (item.id == optionProduct.product.id) {
+                            alreadyAdded = true;
+                        }
+                    });
+
+                    if (! alreadyAdded) {
+                        this.bundle_option_products.push({
+                                product: item,
+                                qty: 0,
+                                sort_order: 0
+                            });
+                    }
 
                     this.search_term = '';
 
