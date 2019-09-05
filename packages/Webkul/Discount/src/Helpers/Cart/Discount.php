@@ -63,6 +63,16 @@ abstract class Discount
                 'use_coupon' => 1,
                 'status' => 1
             ]);
+
+            foreach($rules as $rule) {
+                if ($rule->coupons->code == $code) {
+                    $rules = collect();
+
+                    $rules->push($rule);
+
+                    break;
+                }
+            }
         } else {
             $rules = $this->cartRule->findWhere([
                 'use_coupon' => 0,
