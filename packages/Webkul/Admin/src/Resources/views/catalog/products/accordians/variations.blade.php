@@ -111,7 +111,7 @@
 
             <td>
                 <div class="control-group" :class="[errors.has(variantInputName + '[name]') ? 'has-error' : '']">
-                    <input type="text" v-validate="'required'" v-model="variant.name"  :name="[variantInputName + '[name]']" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.name') }}&quot;"/>
+                    <input type="text" v-validate="'required'" v-model="variant.name"  :name="[variantInputName + '[name]']" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.name') }}&quot;" value="variant.name">
                     <span class="control-error" v-if="errors.has(variantInputName + '[name]')">@{{ errors.first(variantInputName + '[name]') }}</span>
                 </div>
             </td>
