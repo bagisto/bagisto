@@ -129,10 +129,11 @@ class ShipmentRepository extends Repository
 
                 if ($orderItem->getTypeInstance()->isComposite()) {
                     foreach ($orderItem->children as $child) {
-                        if (! $child->qty_ordered)
-                            continue;
-
-                        $finalQty = ($child->qty_ordered / $orderItem->qty_ordered) * $qty;
+                        if (! $child->qty_ordered) {
+                            $finalQty = $qty;
+                        } else {
+                            $finalQty = ($child->qty_ordered / $orderItem->qty_ordered) * $qty;
+                        }
 
                         $this->shipmentItemRepository->updateProductInventory([
                                 'shipment' => $shipment,
