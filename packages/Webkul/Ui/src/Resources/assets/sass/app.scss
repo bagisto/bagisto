@@ -941,6 +941,8 @@ modal {
     animation: fade-in-white 0.3s ease-in-out;
     animation: jelly 0.5s ease-in-out;
     @include border-radius(5px);
+    overflow-y: scroll;
+    max-height: 80%;
 
     .modal-header {
         padding: 20px;
