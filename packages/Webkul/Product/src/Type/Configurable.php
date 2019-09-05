@@ -69,6 +69,8 @@ class Configurable extends AbstractType
                 $this->createVariant($product, $permutation);
             }
         }
+
+        return $product;
     }
 
     /**
