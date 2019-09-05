@@ -155,11 +155,7 @@ class ChannelController extends Controller
 
         Event::fire('core.channel.update.before', $id);
 
-<<<<<<< HEAD
-        $channel = $this->channelRepository->update(request()->all(), $id);
-=======
-        $channel = $this->channel->update($data, $id);
->>>>>>> f9580b077a856af56b51d8ffbbff524557b317ee
+        $channel = $this->channelRepository->update($data, $id);
 
         Event::fire('core.channel.update.after', $channel);
 
