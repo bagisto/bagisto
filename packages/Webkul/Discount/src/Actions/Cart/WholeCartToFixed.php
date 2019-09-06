@@ -2,86 +2,23 @@
 
 namespace Webkul\Discount\Actions\Cart;
 
-use Webkul\Discount\Actions\Action;
+use Webkul\Discount\Actions\Cart\FixedAmount;
 
-class WholeCartToFixed extends Action
+class WholeCartToFixed
 {
+    /**
+     * To calculate impact of cart rule's action of current items of cart instance
+     *
+     * @param CartRule $rule
+     *
+     * @return boolean
+     */
     public function calculate($rule)
     {
-        $cart = \Cart::getCart();
-        $items = $cart->items;
+        $actualInstance = new FixedAmount();
 
-        $impact = collect();
+        $result = $actualInstance->calculate($rule);
 
-        $impact->discount = $rule->disc_amount;
-        $impact->formatted_discount = core()->currency($impact->discount);
-
-        if ($rule->uses_attribute_conditions) {
-            $productIDs = $rule->product_ids;
-
-            $productIDs = explode(',', $productIDs);
-
-            $matchCount = 0;
-
-            foreach ($productIDs as $productID) {
-                foreach ($items as $item) {
-                    if ($item->product_id == $productID) {
-                        $matchCount++;
-                    }
-                }
-            }
-
-            foreach ($productIDs as $productID) {
-                foreach ($items as $item) {
-                    $itemPrice = $item->base_price;
-
-                    if ($item->product->type == 'configurable') {
-                        $itemProductId = $item->child->product_id;
-                    } else {
-                        $itemProductId = $item->product_id;
-                    }
-
-                    $discount = round(($itemPrice * $impact->discount) / 100, 4);
-
-                    if ($itemProductId == $productID) {
-                        $report = array();
-
-                        $report['item_id'] = $item->id;
-                        $report['product_id'] = $item->product_id;
-                        $report['discount'] = $discount;
-                        $report['formatted_discount'] = core()->currency($discount);
-
-                        $impact->push($report);
-
-                        unset($report);
-                    }
-                }
-            }
-        } else {
-            foreach ($items as $item) {
-                $itemPrice = $item->base_price;
-
-                if ($item->product->type == 'configurable') {
-                    $itemProductId = $item->child->product_id;
-                } else {
-                    $itemProductId = $item->product_id;
-                }
-
-                $discount = round(($itemPrice * $impact->discount) / 100, 4);
-
-                $report = array();
-
-                $report['item_id'] = $item->id;
-                $report['product_id'] = $item->product_id;
-                $report['discount'] = $discount;
-                $report['formatted_discount'] = core()->currency($discount);
-
-                $impact->push($report);
-
-                unset($report);
-            }
-        }
-
-        return $impact;
+        return $result;
     }
 }
