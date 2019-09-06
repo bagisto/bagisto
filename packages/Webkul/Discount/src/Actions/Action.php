@@ -6,7 +6,7 @@ abstract class Action
 {
     abstract public function calculate($rule);
 
-    public function getProductIDs($rule)
+    public function getEligibleItems($rule)
     {
         $cart = \Cart::getCart();
         $items = $cart->items;
