@@ -264,7 +264,7 @@ class CartRuleController extends Controller
         $ruleCreated = $this->cartRule->create($data);
 
         // can execute convertX here after when the rule is updated
-        if (isset($attribute_conditions) && $attribute_conditions != "[]" && $attribute_conditions != "") {
+        if (isset($attribute_conditions) && $data['uses_attribute_conditions']) {
             $this->convertX->convertX($ruleCreated->id, $attribute_conditions);
         }
 
