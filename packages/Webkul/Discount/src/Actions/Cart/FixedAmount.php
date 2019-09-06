@@ -39,7 +39,7 @@ class FixedAmount extends Action
         if ($apply()) {
             if ($rule->action_type == 'whole_cart_to_fixed')
             {
-                $eligibleItems = \Cart::getItems();
+                \Cart::getCart()->items
             }
 
             foreach ($eligibleItems as $item) {
@@ -50,8 +50,6 @@ class FixedAmount extends Action
                 $discQuantity = $rule->disc_quantity;
 
                 $discQuantity = $itemQuantity <= $discQuantity ? $itemQuantity : $discQuantity;
-
-                $totalDiscount = $totalDiscount + $discount;
 
                 $report = array();
 
@@ -67,6 +65,8 @@ class FixedAmount extends Action
                 $report['formatted_discount'] = core()->currency($discount);
 
                 $impact->push($report);
+
+                $totalDiscount = $totalDiscount + $discount;
 
                 unset($report);
             }

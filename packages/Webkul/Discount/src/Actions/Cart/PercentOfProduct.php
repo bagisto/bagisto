@@ -46,7 +46,7 @@ class PercentOfProduct extends Action
         if ($apply()) {
             if ($rule->action_type == 'whole_cart_to_percent')
             {
-                $eligibleItems = \Cart::getItems();
+                $eligibleItems = \Cart::getCart()->items;
             }
 
             foreach ($eligibleItems as $item) {
