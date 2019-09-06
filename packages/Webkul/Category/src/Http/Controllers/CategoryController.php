@@ -150,8 +150,6 @@ class CategoryController extends Controller
                 'image.*' => 'mimes:jpeg,jpg,bmp,png'
             ]);
 
-            $category = $this->category->findorFail($id);
-
             $this->category->update(request()->all(), $id);
 
             session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Category']));
