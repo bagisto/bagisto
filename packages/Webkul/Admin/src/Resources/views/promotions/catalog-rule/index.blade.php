@@ -18,7 +18,7 @@
                 </a>
 
                 <a href="{{ route('admin.catalog-rule.apply') }}" class="btn btn-lg btn-primary">
-                    {{ __('Apply Rules') }}
+                    {{ __('admin::app.promotion.apply') }}
                 </a>
 
                 <a href="{{ route('admin.catalog-rule.declut') }}" class="btn btn-lg btn-primary">
