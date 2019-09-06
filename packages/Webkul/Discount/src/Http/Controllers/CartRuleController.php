@@ -545,7 +545,7 @@ class CartRuleController extends Controller
 
             return response()->json(['message' => true], 200);
         } else {
-            session()->flash('success', trans('admin::app.promotion.status.delete-failed'));
+            session()->flash('error', trans('admin::app.promotion.status.delete-failed'));
 
             return response()->json(['message' => false], 400);
         }
