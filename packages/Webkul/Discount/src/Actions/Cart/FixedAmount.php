@@ -39,7 +39,7 @@ class FixedAmount extends Action
         if ($apply()) {
             if ($rule->action_type == 'whole_cart_to_fixed')
             {
-                \Cart::getCart()->items;
+                $eligibleItems = \Cart::getCart()->items;
             }
 
             foreach ($eligibleItems as $item) {
