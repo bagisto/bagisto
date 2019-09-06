@@ -137,32 +137,50 @@ class InvoiceRepository extends Repository
                         'additional' => $orderItem->additional,
                     ]);
 
-                foreach ($orderItem->children as $childOrderItem) {
-                    $finalQty = $childOrderItem->qty_ordered
-                            ? ($childOrderItem->qty_ordered / $orderItem->qty_ordered) * $qty
-                            : $child->qty_ordered;
+                if ($orderItem->getTypeInstance()->isComposite()) {
+                    foreach ($orderItem->children as $childOrderItem) {
+                        $finalQty = $childOrderItem->qty_ordered
+                                ? ($childOrderItem->qty_ordered / $orderItem->qty_ordered) * $qty
+                                : $childOrderItem->qty_ordered;
 
-                    $this->invoiceItemRepository->create([
-                            'invoice_id' => $invoice->id,
-                            'order_item_id' => $childOrderItem->id,
-                            'parent_id' => $invoiceItem->id,
-                            'name' => $childOrderItem->name,
-                            'sku' => $childOrderItem->sku,
-                            'qty' => $finalQty,
-                            'price' => $childOrderItem->price,
-                            'base_price' => $childOrderItem->base_price,
-                            'total' => $childOrderItem->price * $finalQty,
-                            'base_total' => $childOrderItem->base_price * $finalQty,
-                            'tax_amount' => 0,
-                            'base_tax_amount' => 0,
-                            'discount_amount' => 0,
-                            'base_discount_amount' => 0,
-                            'product_id' => $childOrderItem->product_id,
-                            'product_type' => $childOrderItem->product_type,
-                            'additional' => $childOrderItem->additional,
+                        $this->invoiceItemRepository->create([
+                                'invoice_id' => $invoice->id,
+                                'order_item_id' => $childOrderItem->id,
+                                'parent_id' => $invoiceItem->id,
+                                'name' => $childOrderItem->name,
+                                'sku' => $childOrderItem->sku,
+                                'qty' => $finalQty,
+                                'price' => $childOrderItem->price,
+                                'base_price' => $childOrderItem->base_price,
+                                'total' => $childOrderItem->price * $finalQty,
+                                'base_total' => $childOrderItem->base_price * $finalQty,
+                                'tax_amount' => 0,
+                                'base_tax_amount' => 0,
+                                'discount_amount' => 0,
+                                'base_discount_amount' => 0,
+                                'product_id' => $childOrderItem->product_id,
+                                'product_type' => $childOrderItem->product_type,
+                                'additional' => $childOrderItem->additional,
+                            ]);
+                        
+                        if ($childOrderItem->product->getTypeInstance()->showQuantityBox()) {
+                            $this->invoiceItemRepository->updateProductInventory([
+                                    'invoice' => $invoice,
+                                    'product' => $childOrderItem->product,
+                                    'qty' => $finalQty,
+                                    'vendor_id' => isset($data['vendor_id']) ? $data['vendor_id'] : 0
+                                ]);
+                        }
+
+                        $this->orderItemRepository->collectTotals($childOrderItem);
+                    }
+                } elseif ($orderItem->product->getTypeInstance()->showQuantityBox()) {
+                    $this->invoiceItemRepository->updateProductInventory([
+                            'invoice' => $invoice,
+                            'product' => $orderItem->product,
+                            'qty' => $qty,
+                            'vendor_id' => isset($data['vendor_id']) ? $data['vendor_id'] : 0
                         ]);
-
-                    $this->orderItemRepository->collectTotals($childOrderItem);
                 }
 
                 $this->orderItemRepository->collectTotals($orderItem);

@@ -290,6 +290,34 @@ abstract class AbstractType
     }
 
     /**
+     * @return integer
+     */
+    public function totalQuantity()
+    {
+        $total = 0;
+
+        $channelInventorySourceIds = core()->getCurrentChannel()
+                ->inventory_sources()
+                ->where('status', 1)
+                ->pluck('id');
+
+        foreach ($this->product->inventories as $inventory) {
+            if (is_numeric($index = $channelInventorySourceIds->search($inventory->inventory_source_id)))
+                $total += $inventory->qty;
+        }
+
+        $orderedInventory = $this->product->ordered_inventories()
+                ->where('channel_id', core()->getCurrentChannel()->id)
+                ->first();
+
+        if ($orderedInventory) {
+            $total -= $orderedInventory->qty;
+        }
+
+        return $total;
+    }
+
+    /**
      * Return true if item can be moved to cart from wishlist
      *
      * @return boolean
@@ -441,7 +469,7 @@ abstract class AbstractType
     {
         $data = $this->getQtyRequest($data);
 
-        if ($this->isStockable() && ! $this->haveSufficientQuantity($data['quantity']))
+        if (! $this->haveSufficientQuantity($data['quantity']))
             return trans('shop::app.checkout.cart.quantity.inventory_warning');
 
         $price = $this->getFinalPrice();

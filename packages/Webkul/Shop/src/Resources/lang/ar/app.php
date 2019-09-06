@@ -364,6 +364,8 @@ return [
             'integrity' => [
                 'missing_fields' =>'إنتهاك سلامة نظام العربة ، بعض الحقول المطلوبة مفقودة',
                 'missing_options' =>'إنتهاك سلامة نظام العربة ، الخيارات مفقودة لمنتج قابل للتهيئة',
+                'missing_links' => 'Downloadable links are missing for this product.',
+                'qty_missing' => 'Atleast one product should have more than 1 quantity.'
             ],
             'create-error' => 'صادفت بعض القضايا أثناء صناعة السيارات',
             'title' => 'عربة التسوق',

@@ -227,9 +227,6 @@ class Product extends Model implements ProductContract
      */
     public function haveSufficientQuantity($qty)
     {
-        if (! $this->getTypeInstance()->isStockable())
-            return true;
-            
         return $this->getTypeInstance()->haveSufficientQuantity($qty);
     }
 

@@ -23,6 +23,7 @@ class Virtual extends AbstractType
      * @var array
      */
     protected $additionalViews = [
+        'admin::catalog.products.accordians.inventories',
         'admin::catalog.products.accordians.images',
         'admin::catalog.products.accordians.categories',
         'admin::catalog.products.accordians.product-links'
@@ -34,4 +35,20 @@ class Virtual extends AbstractType
      * @var boolean
      */
     protected $isStockable = false;
+
+    /**
+     * Show quantity box
+     *
+     * @var boolean
+     */
+    protected $showQuantityBox = true;
+
+    /**
+     * @param integer $qty
+     * @return bool
+     */
+    public function haveSufficientQuantity($qty)
+    {
+        return $qty <= $this->totalQuantity() ? true : false;
+    }
 }

@@ -369,6 +369,8 @@ return [
             'integrity' => [
                 'missing_fields' =>'Violação de integridade do sistema de carrinho, alguns campos obrigatórios ausentes',
                 'missing_options' =>'Violação de Integridade do Sistema de Carrinho, Faltam Opções para o Produto Configurável',
+                'missing_links' => 'Downloadable links are missing for this product.',
+                'qty_missing' => 'Atleast one product should have more than 1 quantity.'
             ],
             'create-error' => 'Encontrou algum problema ao fazer a instância do carrinho',
             'title' => 'Carrinho de Compras',

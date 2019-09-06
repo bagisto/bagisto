@@ -30,9 +30,6 @@ class ProductInventoryRepository extends Repository
      */
     public function saveInventories(array $data, $product)
     {
-        if (! $product->isStockable())
-            return;
-
         if (isset($data['inventories'])) {
             foreach ($data['inventories'] as $inventorySourceId => $qty) {
                 $qty = is_null($qty) ? 0 : $qty;

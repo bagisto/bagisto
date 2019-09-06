@@ -61,32 +61,4 @@ class Simple extends AbstractType
     {
         return $qty <= $this->totalQuantity() ? true : (core()->getConfigData('catalog.inventory.stock_options.backorders') ? true : false);
     }
-
-    /**
-     * @return integer
-     */
-    public function totalQuantity()
-    {
-        $total = 0;
-
-        $channelInventorySourceIds = core()->getCurrentChannel()
-                ->inventory_sources()
-                ->where('status', 1)
-                ->pluck('id');
-
-        foreach ($this->product->inventories as $inventory) {
-            if (is_numeric($index = $channelInventorySourceIds->search($inventory->inventory_source_id)))
-                $total += $inventory->qty;
-        }
-
-        $orderedInventory = $this->product->ordered_inventories()
-                ->where('channel_id', core()->getCurrentChannel()->id)
-                ->first();
-
-        if ($orderedInventory) {
-            $total -= $orderedInventory->qty;
-        }
-
-        return $total;
-    }
 }

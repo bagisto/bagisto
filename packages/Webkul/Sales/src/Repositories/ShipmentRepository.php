@@ -137,7 +137,6 @@ class ShipmentRepository extends Repository
 
                         $this->shipmentItemRepository->updateProductInventory([
                                 'shipment' => $shipment,
-                                'shipmentItem' => $shipmentItem,
                                 'product' => $child->product,
                                 'qty' => $finalQty,
                                 'vendor_id' => isset($data['vendor_id']) ? $data['vendor_id'] : 0
@@ -148,7 +147,6 @@ class ShipmentRepository extends Repository
                 } else {
                     $this->shipmentItemRepository->updateProductInventory([
                             'shipment' => $shipment,
-                            'shipmentItem' => $shipmentItem,
                             'product' => $orderItem->product,
                             'qty' => $qty,
                             'vendor_id' => isset($data['vendor_id']) ? $data['vendor_id'] : 0

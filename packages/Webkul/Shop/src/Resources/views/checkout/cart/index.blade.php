@@ -69,7 +69,8 @@
 
                                         <div class="misc">
                                             <quantity-changer
-                                                :control-name="'qty[{{$item->id}}]'">
+                                                :control-name="'qty[{{$item->id}}]'"
+                                                quantity="{{$item->quantity}}">
                                             </quantity-changer>
 
                                             <span class="remove">

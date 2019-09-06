@@ -156,6 +156,9 @@ class Grouped extends AbstractType
         $products = [];
 
         foreach ($data['qty'] as $productId => $qty) {
+            if (! $qty)
+                continue;
+
             $product = $this->productRepository->find($productId);
 
             $cartProducts = $product->getTypeInstance()->prepareForCart([
@@ -168,6 +171,9 @@ class Grouped extends AbstractType
                 
             $products = array_merge($products, $cartProducts);
         }
+
+        if (! count($products))
+            return trans('shop::app.checkout.cart.integrity.qty_missing');
 
         return $products;
     }
