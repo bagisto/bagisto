@@ -481,7 +481,6 @@
                         conditions: @json($cart_rule[0]).conditions,
                         cart_input: @json($cart_rule[0]).attributes,
                         actions: @json($cart_rule[0]).actions,
-                        conditions_list:[],
                         cart_object: {
                             attribute: [],
                             condition: [],
@@ -604,7 +603,7 @@
 
                         this.all_attributes = JSON.stringify(this.all_attributes);
 
-                        if (this.conditions_list.length != 0) {
+                        if (this.conditions_list != null && this.conditions_list.length != 0) {
                             this.conditions_list.push({'criteria': this.match_criteria});
 
                             this.all_conditions = JSON.stringify(this.conditions_list);

@@ -228,7 +228,7 @@
                                                     <option v-for="(condition, index) in conditions.numeric" :value="index" :key="index">@{{ condition }}</option>
                                                 </select>
 
-                                                <input class="control" type="number" step="0.1000" name="cart_attributes[]" v-model="conditions_list[index].value" placeholder="{{ __('admin::app.promotion.enter-attribtue', ['attrbibute' => 'Value']) }}">
+                                                <input class="control" type="number" step="0.1000" name="cart_attributes[]" v-model="conditions_list[index].value">
                                             </div>
 
                                             <span class="icon trash-icon" v-on:click="removeCartAttr(index)"></span>
@@ -663,13 +663,7 @@
                     },
 
                     detectApply() {
-                        if (this.apply == 'percent_of_product' || this.apply == 'buy_a_get_b') {
-                            this.apply_prct = true;
-                            this.apply_amt = false;
-                        } else if (this.apply == 'fixed_amount' || this.apply == 'fixed_amount_cart') {
-                            this.apply_prct = false;
-                            this.apply_amt = true;
-                        }
+                        return;
                     },
 
                     enableCondition(event, index) {
