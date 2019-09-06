@@ -116,9 +116,13 @@
                                     <p>{{ $invoice->order->billing_address->address1 }}</p>
                                     <p>{{ $invoice->order->billing_address->city }}</p>
                                     <p>{{ $invoice->order->billing_address->state }}</p>
-                                    <p>{{ core()->country_name($invoice->order->billing_address->country) }} {{ $invoice->order->billing_address->postcode }}</p>
+                                    <p>
+                                        {{ core()->country_name($invoice->order->billing_address->country) }}
+                                        {{ $invoice->order->billing_address->postcode }}
+                                    </p>
                                     {{ __('shop::app.customer.account.order.view.contact') }} : {{ $invoice->order->billing_address->phone }}
                                 </td>
+                                
                                 <td>
                                     <p>{{ $invoice->order->shipping_address->name }}</p>
                                     <p>{{ $invoice->order->shipping_address->address1 }}</p>
@@ -173,6 +177,7 @@
                             @foreach ($invoice->items as $item)
                                 <tr>
                                     <td>{{ $item->child ? $item->child->sku : $item->sku }}</td>
+
                                     <td>
                                         {{ $item->name }}
 
@@ -186,10 +191,15 @@
                                             </div>
                                         @endif
                                     </td>
+
                                     <td>{{ core()->formatPrice($item->price, $invoice->order->order_currency_code) }}</td>
+
                                     <td>{{ $item->qty }}</td>
+
                                     <td>{{ core()->formatPrice($item->total, $invoice->order->order_currency_code) }}</td>
+
                                     <td>{{ core()->formatPrice($item->tax_amount, $invoice->order->order_currency_code) }}</td>
+
                                     <td>{{ core()->formatPrice(($item->total + $item->tax_amount), $invoice->order->order_currency_code) }}</td>
                                 </tr>
                             @endforeach

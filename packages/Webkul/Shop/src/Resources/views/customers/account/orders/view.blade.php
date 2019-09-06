@@ -68,6 +68,7 @@
                                                     <td data-value="{{ __('shop::app.customer.account.order.view.SKU') }}">
                                                         {{ $item->getTypeInstance()->getOrderedItem($item)->sku }}
                                                     </td>
+
                                                     <td data-value="{{ __('shop::app.customer.account.order.view.product-name') }}">
                                                         {{ $item->name }}
                                     
@@ -81,7 +82,11 @@
                                                             </div>
                                                         @endif
                                                     </td>
-                                                    <td data-value="{{ __('shop::app.customer.account.order.view.price') }}">{{ core()->formatPrice($item->price, $order->order_currency_code) }}</td>
+
+                                                    <td data-value="{{ __('shop::app.customer.account.order.view.price') }}">
+                                                        {{ core()->formatPrice($item->price, $order->order_currency_code) }}
+                                                    </td>
+
                                                     <td data-value="{{ __('shop::app.customer.account.order.view.item-status') }}">
                                                         <span class="qty-row">
                                                             {{ __('shop::app.customer.account.order.view.item-ordered', ['qty_ordered' => $item->qty_ordered]) }}
@@ -99,10 +104,22 @@
                                                             {{ $item->qty_canceled ? __('shop::app.customer.account.order.view.item-canceled', ['qty_canceled' => $item->qty_canceled]) : '' }}
                                                         </span>
                                                     </td>
-                                                    <td data-value="{{ __('shop::app.customer.account.order.view.subtotal') }}">{{ core()->formatPrice($item->total, $order->order_currency_code) }}</td>
-                                                    <td data-value="{{ __('shop::app.customer.account.order.view.tax-percent') }}">{{ number_format($item->tax_percent, 2) }}%</td>
-                                                    <td data-value="{{ __('shop::app.customer.account.order.view.tax-amount') }}">{{ core()->formatPrice($item->tax_amount, $order->order_currency_code) }}</td>
-                                                    <td data-value="{{ __('shop::app.customer.account.order.view.grand-total') }}">{{ core()->formatPrice($item->total + $item->tax_amount, $order->order_currency_code) }}</td>
+
+                                                    <td data-value="{{ __('shop::app.customer.account.order.view.subtotal') }}">
+                                                        {{ core()->formatPrice($item->total, $order->order_currency_code) }}
+                                                    </td>
+
+                                                    <td data-value="{{ __('shop::app.customer.account.order.view.tax-percent') }}">
+                                                        {{ number_format($item->tax_percent, 2) }}%
+                                                    </td>
+
+                                                    <td data-value="{{ __('shop::app.customer.account.order.view.tax-amount') }}">
+                                                        {{ core()->formatPrice($item->tax_amount, $order->order_currency_code) }}
+                                                    </td>
+
+                                                    <td data-value="{{ __('shop::app.customer.account.order.view.grand-total') }}">
+                                                        {{ core()->formatPrice($item->total + $item->tax_amount, $order->order_currency_code) }}
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -204,13 +221,33 @@
 
                                                     @foreach ($invoice->items as $item)
                                                         <tr>
-                                                            <td data-value="{{ __('shop::app.customer.account.order.view.SKU') }}">{{ $item->getTypeInstance()->getOrderedItem($item)->sku }}</td>
-                                                            <td data-value="{{ __('shop::app.customer.account.order.view.product-name') }}">{{ $item->name }}</td>
-                                                            <td data-value="{{ __('shop::app.customer.account.order.view.price') }}">{{ core()->formatPrice($item->price, $order->order_currency_code) }}</td>
-                                                            <td data-value="{{ __('shop::app.customer.account.order.view.qty') }}">{{ $item->qty }}</td>
-                                                            <td data-value="{{ __('shop::app.customer.account.order.view.subtotal') }}">{{ core()->formatPrice($item->total, $order->order_currency_code) }}</td>
-                                                            <td data-value="{{ __('shop::app.customer.account.order.view.tax-amount') }}">{{ core()->formatPrice($item->tax_amount, $order->order_currency_code) }}</td>
-                                                            <td data-value="{{ __('shop::app.customer.account.order.view.grand-total') }}">{{ core()->formatPrice($item->total + $item->tax_amount, $order->order_currency_code) }}</td>
+                                                            <td data-value="{{ __('shop::app.customer.account.order.view.SKU') }}">
+                                                                {{ $item->getTypeInstance()->getOrderedItem($item)->sku }}
+                                                            </td>
+
+                                                            <td data-value="{{ __('shop::app.customer.account.order.view.product-name') }}">
+                                                                {{ $item->name }}
+                                                            </td>
+
+                                                            <td data-value="{{ __('shop::app.customer.account.order.view.price') }}">
+                                                                {{ core()->formatPrice($item->price, $order->order_currency_code) }}
+                                                            </td>
+
+                                                            <td data-value="{{ __('shop::app.customer.account.order.view.qty') }}">
+                                                                {{ $item->qty }}
+                                                            </td>
+
+                                                            <td data-value="{{ __('shop::app.customer.account.order.view.subtotal') }}">
+                                                                {{ core()->formatPrice($item->total, $order->order_currency_code) }}
+                                                            </td>
+
+                                                            <td data-value="{{ __('shop::app.customer.account.order.view.tax-amount') }}">
+                                                                {{ core()->formatPrice($item->tax_amount, $order->order_currency_code) }}
+                                                            </td>
+
+                                                            <td data-value="{{ __('shop::app.customer.account.order.view.grand-total') }}">
+                                                                {{ core()->formatPrice($item->total + $item->tax_amount, $order->order_currency_code) }}
+                                                            </td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
