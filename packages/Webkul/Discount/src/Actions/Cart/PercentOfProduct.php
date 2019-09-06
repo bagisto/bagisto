@@ -63,9 +63,17 @@ class PercentOfProduct extends Action
                 $report['item_id'] = $item->id;
                 $report['product_id'] = $item->child ? $item->child->product_id : $item->product_id;
 
-                $discount = round(($itemPrice * $rule->disc_amount) / 100, 4);
+                if ($rule->disc_amount > 100) {
+                    $discount_amount = 100;
+                } else {
+                    $discount_amount = 100;
+                }
 
-                $discount = $discount <= $itemPrice ? $discount : $itemPrice;
+                $discount = round(($itemPrice * $discount_amount) / 100, 4) * $discQuantity;
+
+                if ($rule->action_type == 'percent_of_product') {
+                    $discount = $discount <= $itemPrice ? $discount : $itemPrice;
+                }
 
                 $report['discount'] = $discount;
 
