@@ -192,7 +192,7 @@ class CartRuleController extends Controller
                 'action_type' => $data['action_type'],
                 'disc_amount' => $data['disc_amount'],
                 'disc_quantity' => $data['disc_quantity'],
-                'attribute_conditions' => json_encode($attribute_conditions)
+                'attribute_conditions' => $attribute_conditions
             ];
         }
 
