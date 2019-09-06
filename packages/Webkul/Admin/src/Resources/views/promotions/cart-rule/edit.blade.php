@@ -582,10 +582,10 @@
                         this.match_criteria = this.conditions_list.pop().criteria;
                     }
 
-                    if (JSON.parse(JSON.parse(data.actions).attribute_conditions)) {
-                        this.category_values = JSON.parse(JSON.parse(data.actions).attribute_conditions).categories;
+                    if (JSON.parse(data.actions).attribute_conditions) {
+                        this.category_values = JSON.parse(data.actions).attribute_conditions.categories;
 
-                        this.attribute_values = JSON.parse(JSON.parse(data.actions).attribute_conditions).attributes;
+                        this.attribute_values = JSON.parse(data.actions).attribute_conditions.attributes;
 
                         if (this.category_values == null) {
                             this.category_values = [];
@@ -594,8 +594,6 @@
                         if (this.attribute_values == null) {
                             this.attribute_values = [];
                         }
-
-                        console.log(this.category_values);
 
                         // creating options and has option param on the frontend
                         for (i in this.attribute_values) {

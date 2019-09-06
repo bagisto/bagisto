@@ -177,7 +177,7 @@ class CartRuleController extends Controller
 
         $attribute_conditions = json_decode($attribute_conditions);
 
-        if (! isset($attribute_conditions) || $attribute_conditions == "[]" || $attribute_conditions == "" || ! (count($attribute_conditions->categories) && count($attribute_conditions->attributes))) {
+        if (! isset($attribute_conditions) || ! (count($attribute_conditions->categories) && count($attribute_conditions->attributes))) {
             $data['uses_attribute_conditions'] = 0;
 
             $data['actions'] = [
@@ -192,7 +192,7 @@ class CartRuleController extends Controller
                 'action_type' => $data['action_type'],
                 'disc_amount' => $data['disc_amount'],
                 'disc_quantity' => $data['disc_quantity'],
-                'attribute_conditions' => $attribute_conditions
+                'attribute_conditions' => json_encode($attribute_conditions)
             ];
         }
 
@@ -545,7 +545,7 @@ class CartRuleController extends Controller
 
             return response()->json(['message' => true], 200);
         } else {
-            session()->flash('success', trans('admin::app.promotion.status.delete-failed'));
+            session()->flash('error', trans('admin::app.promotion.status.delete-failed'));
 
             return response()->json(['message' => false], 400);
         }
