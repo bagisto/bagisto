@@ -58,9 +58,7 @@ class FixedAmount extends Action
 
                 $discount = round($itemPrice * $discQuantity, 4) * $discQuantity;
 
-                if ($rule->action_type == 'fixed_amount') {
-                    $discount = $discount <= $itemPrice ? $discount : $itemPrice;
-                }
+                $discount = $discount <= $itemPrice * $discQuantity ? $discount : $itemPrice * $discQuantity;
 
                 $report['discount'] = $discount;
 

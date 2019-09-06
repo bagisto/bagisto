@@ -71,9 +71,7 @@ class PercentOfProduct extends Action
 
                 $discount = round(($itemPrice * $discount_amount) / 100, 4) * $discQuantity;
 
-                if ($rule->action_type == 'percent_of_product') {
-                    $discount = $discount <= $itemPrice ? $discount : $itemPrice;
-                }
+                $discount = $discount <= $itemPrice * $discQuantity ? $discount : $itemPrice * $discQuantity;
 
                 $report['discount'] = $discount;
 
