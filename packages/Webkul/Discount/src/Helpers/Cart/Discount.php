@@ -58,16 +58,16 @@ abstract class Discount
      */
     public function getApplicableRules($code = null)
     {
+        $rules = collect();
+
         if ($code != null) {
-            $rules = $this->cartRule->findWhere([
+            $eligibleRules = $this->cartRule->findWhere([
                 'use_coupon' => 1,
                 'status' => 1
             ]);
 
-            foreach($rules as $rule) {
+            foreach($eligibleRules as $rule) {
                 if ($rule->coupons->code == $code) {
-                    $rules = collect();
-
                     $rules->push($rule);
 
                     break;

@@ -56,9 +56,9 @@ class FixedAmount extends Action
                 $report['item_id'] = $item->id;
                 $report['product_id'] = $item->child ? $item->child->product_id : $item->product_id;
 
-                $discount = round($itemPrice * $discQuantity, 4);
+                $discount = round($itemPrice * $discQuantity, 4) * $discQuantity;
 
-                $discount = $discount <= $itemPrice ? $discount : $itemPrice;
+                $discount = $discount <= $itemPrice * $discQuantity ? $discount : $itemPrice * $discQuantity;
 
                 $report['discount'] = $discount;
 
