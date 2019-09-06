@@ -51,12 +51,6 @@ class FixedAmount extends Action
 
                 $discQuantity = $itemQuantity <= $discQuantity ? $itemQuantity : $discQuantity;
 
-                if ($rule->disc_amount >= $itemPrice) {
-                    $discount = round($itemPrice * $discQuantity, 4);
-                } else {
-                    $discount = $rule->disc_amount;
-                }
-
                 $totalDiscount = $totalDiscount + $discount;
 
                 $report = array();
@@ -64,11 +58,11 @@ class FixedAmount extends Action
                 $report['item_id'] = $item->id;
                 $report['product_id'] = $item->child ? $item->child->product_id : $item->product_id;
 
-                if ($discount <= $itemPrice) {
-                    $report['discount'] = $discount;
-                } else {
-                    $report['discount'] = $itemPrice;
-                }
+                $discount = round($itemPrice * $discQuantity, 4);
+
+                $discount = $discount <= $itemPrice ? $discount : $itemPrice;
+
+                $report['discount'] = $discount;
 
                 $report['formatted_discount'] = core()->currency($discount);
 
