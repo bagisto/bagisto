@@ -12,7 +12,7 @@ class FixedAmount extends Action
 
         $totalDiscount = 0;
 
-        $eligibleItems = $this->getProductIDs($rule);
+        $eligibleItems = $this->getEligibleItems($rule);
 
         $apply = function () use ($rule, $eligibleItems) {
             if ($rule->action_type == 'fixed_amount') {
@@ -37,6 +37,11 @@ class FixedAmount extends Action
         };
 
         if ($apply()) {
+            if ($rule->action_type == 'whole_cart_to_fixed')
+            {
+                $eligibleItems = \Cart::getItems();
+            }
+
             foreach ($eligibleItems as $item) {
                 $itemPrice = $item->base_price;
 

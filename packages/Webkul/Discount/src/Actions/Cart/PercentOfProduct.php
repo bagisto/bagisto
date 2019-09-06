@@ -19,7 +19,7 @@ class PercentOfProduct extends Action
 
         $totalDiscount = 0;
 
-        $eligibleItems = $this->getProductIDs($rule);
+        $eligibleItems = $this->getEligibleItems($rule);
 
         $apply = function () use($rule, $eligibleItems) {
             if ($rule->action_type == 'percent_of_product') {
@@ -44,6 +44,11 @@ class PercentOfProduct extends Action
         };
 
         if ($apply()) {
+            if ($rule->action_type == 'whole_cart_to_percent')
+            {
+                $eligibleItems = \Cart::getItems();
+            }
+
             foreach ($eligibleItems as $item) {
                 $itemPrice = $item->base_price;
 
