@@ -78,10 +78,12 @@ class DownloadableProductController extends Controller
 
         $remainingDownloads = $downloadableLinkPurchased->download_bought - ($downloadableLinkPurchased->download_used + 1);
         
-        $this->downloadableLinkPurchasedRepository->update([
-                'download_used' => $downloadableLinkPurchased->download_used + 1,
-                'status' => $remainingDownloads <= 0 ? 'expired' : $downloadableLinkPurchased->status
-            ], $downloadableLinkPurchased->id);
+        if ($downloadableLinkPurchased->download_bought) {
+            $this->downloadableLinkPurchasedRepository->update([
+                    'download_used' => $downloadableLinkPurchased->download_used + 1,
+                    'status' => $remainingDownloads <= 0 ? 'expired' : $downloadableLinkPurchased->status
+                ], $downloadableLinkPurchased->id);
+        }
 
         if ($downloadableLinkPurchased->type == 'file') {
             return Storage::download($downloadableLinkPurchased->file);
