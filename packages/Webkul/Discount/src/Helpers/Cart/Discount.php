@@ -299,7 +299,7 @@ abstract class Discount
 
         $this->updateCartItemAndCart($rule);
 
-        return;
+        return $rule;
     }
 
     /**

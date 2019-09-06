@@ -411,8 +411,10 @@ class Bundle extends AbstractType
 
             foreach ($optionProductIds as $optionProductId) {
                 $optionProduct = $this->productBundleOptionProductRepository->find($optionProductId);
+
+                $qty = $data['bundle_option_qty'][$optionId] ?? $optionProduct->qty;
                 
-                $labels[] = $optionProduct->product->name;
+                $labels[] = $qty . ' x ' . $optionProduct->product->name . ' ' . core()->currency($optionProduct->product->getTypeInstance()->getMinimalPrice());
             }
 
             $data['attributes'][$option->id] = [

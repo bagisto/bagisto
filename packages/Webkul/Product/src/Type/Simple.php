@@ -75,9 +75,8 @@ class Simple extends AbstractType
                 ->pluck('id');
 
         foreach ($this->product->inventories as $inventory) {
-            if (is_numeric($index = $channelInventorySourceIds->search($inventory->inventory_source_id))) {
+            if (is_numeric($index = $channelInventorySourceIds->search($inventory->inventory_source_id)))
                 $total += $inventory->qty;
-            }
         }
 
         $orderedInventory = $this->product->ordered_inventories()

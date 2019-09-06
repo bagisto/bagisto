@@ -16,9 +16,9 @@
       "ext-pdo": "*",
       "ext-pdo_mysql": "*",
       "ext-tokenizer": "*",
-      "barryvdh/laravel-dompdf": "^0.8.0@dev",
+      "barryvdh/laravel-dompdf": "0.8.3",
       "dimsav/laravel-translatable": "^9.0",
-      "doctrine/dbal": "^2.9@dev",
+      "doctrine/dbal": "2.9.2",
       "fideloper/proxy": "^4.0",
       "flynsarmy/db-blade-compiler": "*",
       "guzzlehttp/guzzle": "~6.0",
@@ -31,7 +31,7 @@
       "maatwebsite/excel": "3.1.11",
       "nwidart/laravel-modules": "^3.2",
       "prettus/l5-repository": "2.6.32",
-      "tymon/jwt-auth": "dev-develop"
+      "tymon/jwt-auth": "1.0.0-rc.4"
     },
     "require-dev": {
       "barryvdh/laravel-debugbar": "^3.1",
@@ -100,7 +100,8 @@
     "extra": {
       "laravel": {
         "dont-discover": [
-          "barryvdh/laravel-debugbar"
+          "barryvdh/laravel-debugbar",
+          "laravel/dusk"
         ]
       }
     },

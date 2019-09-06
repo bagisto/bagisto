@@ -857,6 +857,12 @@ h5 {
         }
     }
 
+    &.error {
+        .accordian-header {
+            color: #ff5656;
+        }
+    }
+
     .accordian-content, div[slot*="body"] {
         width: 100%;
         padding: 20px 15px;
@@ -976,6 +982,8 @@ modal {
     animation: fade-in-white 0.3s ease-in-out;
     animation: jelly 0.5s ease-in-out;
     @include border-radius(5px);
+    overflow-y: scroll;
+    max-height: 80%;
 
     .modal-header {
         padding: 20px;
