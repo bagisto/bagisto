@@ -68,7 +68,14 @@
                                                     <td data-value="{{ __('shop::app.customer.account.order.view.SKU') }}">
                                                         {{ $item->type == 'configurable' ? $item->child->sku : $item->sku }}
                                                     </td>
-                                                    <td data-value="{{ __('shop::app.customer.account.order.view.product-name') }}">{{ $item->name }}</td>
+                                                    <td data-value="{{ __('shop::app.customer.account.order.view.product-name') }}">
+                                                        {{ $item->name }} <br>
+                                                        @if (isset($item['additional']['attributes']))
+                                                            @foreach($item['additional']['attributes'] as  $attribute)
+                                                                <b>{{ $attribute['attribute_name']}}</b> : {{ $attribute['option_label']}} <br>
+                                                            @endforeach
+                                                        @endif
+                                                    </td>
                                                     <td data-value="{{ __('shop::app.customer.account.order.view.price') }}">{{ core()->formatPrice($item->price, $order->order_currency_code) }}</td>
                                                     <td data-value="{{ __('shop::app.customer.account.order.view.item-status') }}">
                                                         <span class="qty-row">
