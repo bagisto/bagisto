@@ -228,7 +228,7 @@
                                                     <option v-for="(condition, index) in conditions.numeric" :value="index" :key="index">@{{ condition }}</option>
                                                 </select>
 
-                                                <input class="control" type="number" step="0.1000" name="cart_attributes[]" v-model="conditions_list[index].value" placeholder="{{ __('admin::app.promotion.enter-attribtue', ['attrbibute' => 'Value']) }}">
+                                                <input class="control" type="number" step="0.1000" name="cart_attributes[]" v-model="conditions_list[index].value">
                                             </div>
 
                                             <span class="icon trash-icon" v-on:click="removeCartAttr(index)"></span>
@@ -489,9 +489,10 @@
                         country_and_states: @json($cart_rule[2]),
 
                         category_options: @json($cart_rule[1]),
-                        category_values: [],
 
+                        category_values: [],
                         attribute_values: [],
+
                         attr_object: {
                             attribute: null,
                             condition: null,
@@ -504,11 +505,10 @@
 
                 mounted () {
                     data = @json($cart_rule[3]);
+
                     this.name = data.name;
 
                     this.description = data.description;
-
-                    this.conditions_list = [];
 
                     this.channels = [];
 
@@ -576,22 +576,25 @@
 
                     this.all_conditions = null;
 
-                    if (data.conditions != null) {
+                    if (data.hasOwnProperty('conditions') && data.conditions != null) {
                         this.conditions_list = JSON.parse(JSON.parse(data.conditions));
 
                         this.match_criteria = this.conditions_list.pop().criteria;
                     }
 
-                    if (JSON.parse(data.actions).attribute_conditions) {
-                        this.category_values = JSON.parse(data.actions).attribute_conditions.categories;
+                    hasSubSelectionConditions = JSON.parse(data.actions).hasOwnProperty('attribute_conditions');
 
-                        this.attribute_values = JSON.parse(data.actions).attribute_conditions.attributes;
+                    if (hasSubSelectionConditions) {
 
-                        if (this.category_values == null) {
+                        if (JSON.parse(data.actions).attribute_conditions.hasOwnProperty('categories')) {
+                            this.category_values = JSON.parse(data.actions).attribute_conditions.categories;
+                        } else {
                             this.category_values = [];
                         }
 
-                        if (this.attribute_values == null) {
+                        if (JSON.parse(data.actions).attribute_conditions.hasOwnProperty('attributes')) {
+                            this.attribute_values = JSON.parse(data.actions).attribute_conditions.attributes;
+                        } else {
                             this.attribute_values = [];
                         }
 
@@ -660,13 +663,7 @@
                     },
 
                     detectApply() {
-                        if (this.apply == 'percent_of_product' || this.apply == 'buy_a_get_b') {
-                            this.apply_prct = true;
-                            this.apply_amt = false;
-                        } else if (this.apply == 'fixed_amount' || this.apply == 'fixed_amount_cart') {
-                            this.apply_prct = false;
-                            this.apply_amt = true;
-                        }
+                        return;
                     },
 
                     enableCondition(event, index) {
@@ -714,7 +711,7 @@
                     },
 
                     onSubmit: function (e) {
-                        if (this.attribute_values != null || this.category_values != null) {
+                        if (this.attribute_values.length != 0 || this.category_values.length != 0) {
                             for (i in this.attribute_values) {
                                 delete this.attribute_values[i].options;
                             }
@@ -728,7 +725,7 @@
                             this.all_attributes = null;
                         }
 
-                        if (this.conditions_list != null) {
+                        if (this.conditions_list.length != 0) {
                             this.conditions_list.push({'criteria': this.match_criteria});
 
                             this.all_conditions = JSON.stringify(this.conditions_list);
