@@ -66,10 +66,10 @@ class PercentOfProduct extends Action
                 if ($rule->disc_amount > 100) {
                     $discount_amount = 100;
                 } else {
-                    $discount_amount = 100;
+                    $discount_amount = $rule->disc_amount;
                 }
 
-                $discount = round(($itemPrice * $discount_amount) / 100, 4) * $discQuantity;
+                $discount = $itemPrice * ($discount_amount / 100) * $discQuantity;
 
                 $discount = $discount <= $itemPrice * $discQuantity ? $discount : $itemPrice * $discQuantity;
 

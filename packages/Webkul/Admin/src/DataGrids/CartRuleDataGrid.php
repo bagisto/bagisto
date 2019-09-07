@@ -90,7 +90,7 @@ class CartRuleDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'disc_amount',
-            'label' => 'Quantity',
+            'label' => 'Discount Amount',
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
