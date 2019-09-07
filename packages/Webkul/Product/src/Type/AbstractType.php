@@ -518,7 +518,23 @@ abstract class AbstractType
      */
     public function compareOptions($options1, $options2)
     {
-        return $this->product->id == $options2['product_id'];
+        if ($this->product->id != $options2['product_id']) {
+            return false;
+        } else {
+            if (isset($options1['parent_id']) && isset($options2['parent_id'])) {
+                if ($options1['parent_id'] == $options2['parent_id']) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else if (isset($options1['parent_id']) && ! isset($options2['parent_id'])) {
+                return false;
+            } else if (isset($options2['parent_id']) && ! isset($options1['parent_id'])) {
+                return false;
+            }
+        }
+
+        return true;
     }
     
     /**

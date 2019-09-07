@@ -326,13 +326,13 @@ class Bundle extends AbstractType
         foreach ($this->getCartChildProducts($data) as $productId => $data) {
             $product = $this->productRepository->find($productId);
 
-            $cartProduct = $product->getTypeInstance()->prepareForCart($data);
+            $cartProduct = $product->getTypeInstance()->prepareForCart(array_merge($data, ['parent_id' => $this->product->id]));
 
             if (is_string($cartProduct))
                 return $cartProduct;
 
             $cartProduct[0]['parent_id'] = $this->product->id;
-                
+
             $products = array_merge($products, $cartProduct);
 
             $products[0]['price'] += $cartProduct[0]['total'];
