@@ -457,8 +457,8 @@
                         match_criteria: 'all_are_true',
 
                         all_attributes: {
-                            'categories' : null,
-                            'attributes' : null
+                            'categories' : [],
+                            'attributes' : []
                         },
 
                         code: null,
@@ -481,7 +481,6 @@
                         conditions: @json($cart_rule[0]).conditions,
                         cart_input: @json($cart_rule[0]).attributes,
                         actions: @json($cart_rule[0]).actions,
-                        conditions_list:[],
                         cart_object: {
                             attribute: [],
                             condition: [],
@@ -547,13 +546,7 @@
                     },
 
                     detectApply() {
-                        if (this.apply == 'percent_of_product' || this.apply == 'buy_a_get_b') {
-                            this.apply_prct = true;
-                            this.apply_amt = false;
-                        } else if (this.apply == 'fixed_amount' || this.apply == 'fixed_amount_cart') {
-                            this.apply_prct = false;
-                            this.apply_amt = true;
-                        }
+                        return;
                     },
 
                     enableCondition(event, index) {
@@ -597,26 +590,25 @@
                     },
 
                     onSubmit: function (e) {
-                        if (this.attribute_values != null || this.category_values != null) {
+                        if (this.attribute_values.length != 0 || this.category_values.length != 0) {
                             for (i in this.attribute_values) {
                                 delete this.attribute_values[i].options;
                             }
 
-                            if (this.category_values != null) {
-                                this.all_attributes.categories = this.category_values;
-                            }
+                            this.all_attributes.categories = this.category_values;
 
                             this.all_attributes.attributes = this.attribute_values;
 
-                            this.all_attributes = JSON.stringify(this.all_attributes);
-                        } else {
-                            this.all_attributes = null;
                         }
 
-                        if (this.conditions_list.length != 0) {
+                        this.all_attributes = JSON.stringify(this.all_attributes);
+
+                        if (this.conditions_list != null && this.conditions_list.length != 0) {
                             this.conditions_list.push({'criteria': this.match_criteria});
 
                             this.all_conditions = JSON.stringify(this.conditions_list);
+
+                            this.conditions_list.pop();
                         }
 
                         this.$validator.validateAll().then(result => {

@@ -10,7 +10,7 @@ return [
         'actions' => [
             'fixed_amount' => 'Apply as fixed amount',
             'percent_of_product' => 'Percentage of product',
-            // 'whole_cart_to_fixed' => 'Adjust whole cart to fixed amount',
+            'whole_cart_to_fixed' => 'Adjust whole cart to fixed amount',
             'whole_cart_to_percent' => 'Adjust whole cart to percent'
         ],
 
