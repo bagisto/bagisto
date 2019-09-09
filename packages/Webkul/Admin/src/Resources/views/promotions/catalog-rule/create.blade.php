@@ -377,12 +377,13 @@
                                 this.all_attributes.categories = this.category_values;
                             }
 
-                            this.all_attributes.attributes = this.attribute_values;
+                            if (this.attribute_values.length > 0) {
+                                this.all_attributes.attributes = this.attribute_values;
+                            }
 
-                            this.all_conditions = JSON.stringify(this.all_attributes);
-                        } else {
-                            this.all_conditions = null;
                         }
+
+                        this.all_conditions = JSON.stringify(this.all_attributes);
 
                         // this.all_conditions = JSON.stringify(this.conditions_list);
 

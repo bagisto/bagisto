@@ -235,8 +235,8 @@
                         all_conditions: [],
 
                         all_attributes: {
-                            'categories' : null,
-                            'attributes' : null
+                            'categories' : [],
+                            'attributes' : []
                         },
 
                         criteria: 'cart',
@@ -365,12 +365,12 @@
                     },
 
                     onSubmit: function (e) {
-                        if (this.attribute_values != null || this.category_values != null) {
+                        if (this.attribute_values.length > 0 || this.category_values.length > 0) {
                             for (i in this.attribute_values) {
                                 delete this.attribute_values[i].options;
                             }
 
-                            if (this.category_values != null) {
+                            if (this.category_values.length > 0) {
                                 this.all_attributes.categories = this.category_values;
                             }
 
