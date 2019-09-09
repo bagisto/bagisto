@@ -19,7 +19,7 @@ class PercentOfProduct extends Action
 
         $totalDiscount = 0;
 
-        $eligibleItems = $this->getProductIDs($rule);
+        $eligibleItems = $this->getEligibleItems($rule);
 
         $apply = function () use($rule, $eligibleItems) {
             if ($rule->action_type == 'percent_of_product') {
@@ -44,6 +44,11 @@ class PercentOfProduct extends Action
         };
 
         if ($apply()) {
+            if ($rule->action_type == 'whole_cart_to_percent')
+            {
+                $eligibleItems = \Cart::getCart()->items;
+            }
+
             foreach ($eligibleItems as $item) {
                 $itemPrice = $item->base_price;
 
@@ -53,14 +58,20 @@ class PercentOfProduct extends Action
 
                 $discQuantity = $itemQuantity <= $discQuantity ? $itemQuantity : $discQuantity;
 
-                $discount = round(($itemPrice * $rule->disc_amount) / 100, 4);
-
                 $report = array();
 
                 $report['item_id'] = $item->id;
                 $report['product_id'] = $item->child ? $item->child->product_id : $item->product_id;
 
-                $discount = $discount <= $itemPrice ? $discount : $itemPrice;
+                if ($rule->disc_amount > 100) {
+                    $discount_amount = 100;
+                } else {
+                    $discount_amount = $rule->disc_amount;
+                }
+
+                $discount = $itemPrice * ($discount_amount / 100) * $discQuantity;
+
+                $discount = $discount <= $itemPrice * $discQuantity ? $discount : $itemPrice * $discQuantity;
 
                 $report['discount'] = $discount;
 

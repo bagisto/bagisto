@@ -12,7 +12,7 @@ class FixedAmount extends Action
 
         $totalDiscount = 0;
 
-        $eligibleItems = $this->getProductIDs($rule);
+        $eligibleItems = $this->getEligibleItems($rule);
 
         $apply = function () use ($rule, $eligibleItems) {
             if ($rule->action_type == 'fixed_amount') {
@@ -37,6 +37,11 @@ class FixedAmount extends Action
         };
 
         if ($apply()) {
+            if ($rule->action_type == 'whole_cart_to_fixed')
+            {
+                $eligibleItems = \Cart::getCart()->items;
+            }
+
             foreach ($eligibleItems as $item) {
                 $itemPrice = $item->base_price;
 
@@ -46,28 +51,22 @@ class FixedAmount extends Action
 
                 $discQuantity = $itemQuantity <= $discQuantity ? $itemQuantity : $discQuantity;
 
-                if ($rule->disc_amount >= $itemPrice) {
-                    $discount = round($itemPrice * $discQuantity, 4);
-                } else {
-                    $discount = $rule->disc_amount;
-                }
-
-                $totalDiscount = $totalDiscount + $discount;
-
                 $report = array();
 
                 $report['item_id'] = $item->id;
                 $report['product_id'] = $item->child ? $item->child->product_id : $item->product_id;
 
-                if ($discount <= $itemPrice) {
-                    $report['discount'] = $discount;
-                } else {
-                    $report['discount'] = $itemPrice;
-                }
+                $discount = round($rule->disc_amount, 4) * $discQuantity;
+
+                $discount = $discount <= $itemPrice * $discQuantity ? $discount : $itemPrice * $discQuantity;
+
+                $report['discount'] = $discount;
 
                 $report['formatted_discount'] = core()->currency($discount);
 
                 $impact->push($report);
+
+                $totalDiscount = $totalDiscount + $discount;
 
                 unset($report);
             }
