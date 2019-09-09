@@ -206,6 +206,14 @@
                         <td>{{ core()->formatPrice($invoice->shipping_amount, $invoice->order->order_currency_code) }}</td>
                     </tr>
 
+                    @if ($invoice->base_discount_amount > 0)
+                        <tr>
+                            <td>{{ __('shop::app.customer.account.order.view.discount') }}</td>
+                            <td>-</td>
+                            <td>{{ core()->formatPrice($invoice->discount_amount, $invoice->order_currency_code) }}</td>
+                        </tr>
+                    @endif
+
                     <tr>
                         <td>{{ __('shop::app.customer.account.order.view.tax') }}</td>
                         <td>-</td>

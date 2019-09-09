@@ -235,7 +235,7 @@
                             <accordian :active="false" title="{{ __('admin::app.promotion.actions') }}">
                                 <div slot="body">
                                     <div class="control-group" :class="[errors.has('action_type') ? 'has-error' : '']">
-                                        <label for="action_type" class="required">{{ __('admin::app.promotion.general-info.apply') }}</label>
+                                        <label for="action_type" class="required">{{ __('admin::app.action') }}</label>
 
                                         <select class="control" name="action_type" v-model="action_type" v-validate="'required'" value="{{ old('action_type') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.apply') }}&quot;" v-on:change="detectApply">
                                             <option v-for="(action, index) in actions" :value="index">@{{ action }}</option>
@@ -402,7 +402,7 @@
                                     @foreach(core()->getAllChannels() as $channel)
                                         @foreach($channel->locales as $locale)
                                             <div class="control-group" :class="[errors.has('label') ? 'has-error' : '']">
-                                                <label for="code"><span class="locale">[{{ $channel->code }} - {{ $locale->code }}]</span></label>
+                                                <label for="code">{{ __('admin::app.label') }}<span class="locale">[{{ $channel->code }} - {{ $locale->code }}]</span></label>
 
                                                 <input type="text" class="control" name="label[{{ $channel->code }}][{{ $locale->code }}]" v-model="label.{{ $channel->code }}.{{ $locale->code }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.label') }}&quot;">
 
@@ -430,25 +430,23 @@
                         name: null,
                         description: null,
                         conditions_list: [],
-                        channels: [],
-                        customer_groups: [],
+                        channels: ['{{ core()->getCurrentChannel()->id }}'],
+                        customer_groups: ['{{ app('Webkul\Customer\Repositories\CustomerGroupRepository')->findOneWhere(["code" => "general"])->id }}'],
                         ends_till: null,
                         starts_from: null,
                         priority: 0,
                         per_customer: 0,
-                        status: null,
-                        use_coupon: null,
+                        status: 0,
+                        use_coupon: 0,
                         auto_generation: false,
                         usage_limit: 0,
 
                         action_type: null,
                         apply: null,
-                        apply_amt: false,
-                        apply_prct: false,
                         apply_to_shipping: 0,
-                        disc_amount: null,
+                        disc_amount: 1,
                         // disc_threshold: null,
-                        disc_quantity: null,
+                        disc_quantity: 1,
                         end_other_rules: 0,
                         coupon_type: null,
                         free_shipping: 0,
