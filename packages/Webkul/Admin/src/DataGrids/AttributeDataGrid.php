@@ -28,6 +28,8 @@ class AttributeDataGrid extends DataGrid
 
     public function addColumns()
     {
+        $this->setInvoker($this);
+
         $this->addColumn([
             'index' => 'id',
             'label' => trans('admin::app.datagrid.id'),
@@ -64,19 +66,19 @@ class AttributeDataGrid extends DataGrid
             'filterable' => true
         ]);
 
-        $this->addColumn([
-            'index' => 'is_required',
-            'label' => trans('admin::app.datagrid.required'),
-            'type' => 'boolean',
-            'sortable' => true,
-            'searchable' => false,
-            'wrapper' => function($value) {
-                if ($value->is_required == 1)
-                    return 'True';
-                else
-                    return 'False';
-            }
-        ]);
+        // $this->addColumn([
+        //     'index' => 'is_required',
+        //     'label' => trans('admin::app.datagrid.required'),
+        //     'type' => 'boolean',
+        //     'sortable' => true,
+        //     'searchable' => false,
+        //     'wrapper' => function($value) {
+        //         if ($value->is_required == 1)
+        //             return 'True';
+        //         else
+        //             return 'False';
+        //     }
+        // ]);
 
         $this->addColumn([
             'index' => 'is_unique',
