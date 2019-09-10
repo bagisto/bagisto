@@ -30,6 +30,7 @@ return [
     'locale-based' => 'Locale based',
     'channel-based' => 'Channel based',
     'status' => 'Status',
+    'select-option' => 'Select option',
 
     'common' => [
         'no-result-found' => 'We could not find any records.',
