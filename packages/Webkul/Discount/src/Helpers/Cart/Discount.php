@@ -781,7 +781,7 @@ abstract class Discount
         foreach ($conditions as $condition) {
             $result = true;
 
-            if (! isset($condition->attribute) || ! isset($condition->condition) || ! isset($condition->value) || ! isset($condition->type) || $condition->value != []) {
+            if (! isset($condition->attribute) || ! isset($condition->condition) || ! isset($condition->value) || ! isset($condition->type) || ! $condition->value != []) {
                 $result = false;
 
                 continue;
@@ -911,7 +911,7 @@ abstract class Discount
         }
 
         foreach ($conditions as $condition) {
-            if (!isset($condition->attribute) || ! isset($condition->condition) || !isset($condition->value)) {
+            if (! isset($condition->attribute) || ! isset($condition->condition) || ! isset($condition->value)) {
                 continue;
             }
 
