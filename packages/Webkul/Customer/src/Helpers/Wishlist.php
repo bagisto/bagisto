@@ -32,11 +32,15 @@ class Wishlist
      */
     public function getWishlistProduct($product)
     {
-        $wishlist = $this->wishlistRepository->findOneWhere([
-            'channel_id' => core()->getCurrentChannel()->id,
-            'product_id' => $product->product_id,
-            'customer_id' => auth()->guard('customer')->user()->id
-        ]);
+        $wishlist = false;
+
+        if (auth()->guard('customer')->user()) {
+            $wishlist = $this->wishlistRepository->findOneWhere([
+                'channel_id' => core()->getCurrentChannel()->id,
+                'product_id' => $product->product_id,
+                'customer_id' => auth()->guard('customer')->user()->id
+            ]);
+        }
 
         if ($wishlist)
             return true;
