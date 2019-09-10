@@ -30,7 +30,7 @@
                                 {{ $link->title }}
                             </span>
 
-                            @if ($link->sample_file)
+                            @if ($link->sample_file || $link->sample_url)
                                 <a href="{{ route('shop.downloadable.download_sample', ['type' => 'link', 'id' => $link->id]) }}" target="_blank">{{ __('shop::app.products.sample') }}</a>
                             @endif
                         </li>
