@@ -170,13 +170,13 @@ abstract class DataGrid
 
     public function addColumn($column)
     {
-        // $this->fireEvent('before.add.column.'.$column['index']);
+        $this->fireEvent('add.column.before.'.$column['index']);
 
         array_push($this->columns, $column);
 
         $this->setCompleteColumnDetails($column);
 
-        // $this->fireEvent('after.add.column.'.$column['index']);
+        $this->fireEvent('add.column.after.'.$column['index']);
     }
 
     public function setCompleteColumnDetails($column)
@@ -199,7 +199,7 @@ abstract class DataGrid
             $eventName = null;
         }
 
-        // $this->fireEvent('action.before.'.$eventName);
+        $this->fireEvent('action.before.'.$eventName);
 
         array_push($this->actions, $action);
 
