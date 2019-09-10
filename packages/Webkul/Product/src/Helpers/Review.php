@@ -14,7 +14,7 @@ class Review extends AbstractProduct
     public function getReviews($product)
     {
         static $reviews = [];
-        
+
         if(array_key_exists($product->id, $reviews))
             return $reviews[$product->id];
 
