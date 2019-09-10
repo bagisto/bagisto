@@ -5,6 +5,7 @@ namespace Webkul\Product\Providers;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Product\Models\ProductProxy;
 use Webkul\Product\Observers\ProductObserver;
+use Webkul\Product\Console\Commands\PriceUpdate;
 
 class ProductServiceProvider extends ServiceProvider
 {
@@ -34,11 +35,22 @@ class ProductServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerConfig();
+
+        $this->registerCommands();
     }
 
     public function registerConfig() {
         $this->mergeConfigFrom(
             dirname(__DIR__) . '/Config/product_types.php', 'product_types'
         );
+    }
+
+    /**
+     * Register the console commands of this package
+     */
+    protected function registerCommands()
+    {
+        if ($this->app->runningInConsole())
+            $this->commands([PriceUpdate::class,]);
     }
 }

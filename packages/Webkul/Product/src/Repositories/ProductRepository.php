@@ -83,9 +83,8 @@ class ProductRepository extends Repository
 
         $product = $product->getTypeInstance()->update($data, $id, $attribute);
 
-        if (isset($data['channels'])) {
+        if (isset($data['channels']))
             $product['channels'] = $data['channels'];
-        }
 
         Event::fire('catalog.product.update.after', $product);
 

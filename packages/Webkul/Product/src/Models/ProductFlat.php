@@ -48,6 +48,14 @@ class ProductFlat extends Model implements ProductFlatContract
     }
 
     /**
+     * Get the product that owns the product.
+     */
+    public function parent()
+    {
+        return $this->belongsTo(self::class, 'parent_id');
+    }
+
+    /**
      * Get product type value from base product
      */
     public function getTypeAttribute()
