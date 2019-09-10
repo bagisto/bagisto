@@ -73,7 +73,7 @@ class InvoiceRepository extends Repository
 
         parent::__construct($app);
     }
-    
+
     /**
      * Specify Model class name
      *
@@ -92,7 +92,7 @@ class InvoiceRepository extends Repository
     public function create(array $data)
     {
         DB::beginTransaction();
-        
+
         try {
             Event::fire('sales.invoice.save.before', $data);
 
@@ -108,6 +108,8 @@ class InvoiceRepository extends Repository
                     'channel_currency_code' => $order->channel_currency_code,
                     'order_currency_code' => $order->order_currency_code,
                     'order_address_id' => $order->billing_address->id,
+                    "discount_amount" => $order->discount_amount,
+                    "base_discount_amount" => $order->base_discount_amount,
                 ]);
 
             foreach ($data['invoice']['items'] as $itemId => $qty) {
@@ -200,7 +202,7 @@ class InvoiceRepository extends Repository
 
             throw $e;
         }
-        
+
         DB::commit();
 
         return $invoice;

@@ -74,7 +74,7 @@
                 color: #000;
                 font-weight: 600;
             }
-            
+
         </style>
     </head>
 
@@ -115,7 +115,7 @@
                                     <p>{{ $invoice->order->billing_address->city }}</p>
                                     <p>{{ $invoice->order->billing_address->state }}</p>
                                     <p>{{ core()->country_name($invoice->order->billing_address->country) }} {{ $invoice->order->billing_address->postcode }}</p>
-                                    {{ __('shop::app.checkout.onepage.contact') }} : {{ $invoice->order->billing_address->phone }} 
+                                    {{ __('shop::app.checkout.onepage.contact') }} : {{ $invoice->order->billing_address->phone }}
                                 </td>
 
                                 @if ($invoice->order->shipping_address)
@@ -155,7 +155,7 @@
                         </tbody>
                     </table>
                 </div>
-                
+
                 <div class="table items">
                     <table>
                         <thead>
@@ -220,6 +220,12 @@
                         <td>{{ core()->formatBasePrice($invoice->base_tax_amount) }}</td>
                     </tr>
 
+                    <tr>
+                        <td>{{ __('admin::app.sales.orders.discount') }}</td>
+                        <td>-</td>
+                        <td>{{ core()->formatBasePrice($invoice->base_discount_amount) }}</td>
+                    </tr>
+
                     <tr class="bold">
                         <td>{{ __('admin::app.sales.orders.grand-total') }}</td>
                         <td>-</td>
@@ -232,4 +238,3 @@
         </div>
     </body>
 </html>
-    

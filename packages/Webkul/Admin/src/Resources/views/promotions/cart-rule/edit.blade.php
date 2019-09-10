@@ -242,7 +242,7 @@
                             <accordian :active="false" title="{{ __('admin::app.promotion.actions') }}">
                                 <div slot="body">
                                     <div class="control-group" :class="[errors.has('action_type') ? 'has-error' : '']">
-                                        <label for="action_type" class="required">{{ __('admin::app.promotion.general-info.apply') }}</label>
+                                        <label for="action_type" class="required">{{ __('admin::app.action') }}</label>
 
                                         <select class="control" name="action_type" v-model="action_type" v-validate="'required'" value="{{ old('action_type') }}" data-vv-as="&quot;Apply As&quot;" v-on:change="detectApply">
                                             <option v-for="(action, index) in actions" :value="index">@{{ action }}</option>
@@ -258,14 +258,6 @@
 
                                         <span class="control-error" v-if="errors.has('disc_amount')">@{{ errors.first('disc_amount') }}</span>
                                     </div>
-
-                                    {{-- <div class="control-group" :class="[errors.has('disc_threshold') ? 'has-error' : '']">
-                                        <label for="disc_threshold" class="required">{{ __('admin::app.promotion.cart.buy-atleast') }}</label>
-
-                                        <input type="number" step="1" class="control" name="disc_threshold" v-model="disc_threshold" v-validate="'required|numeric|min_value:1'" value="{{ old('disc_threshold') }}" data-vv-as="&quot;{{ __('admin::app.promotion.cart.buy-atleast') }}&quot;">
-
-                                        <span class="control-error" v-if="errors.has('disc_threshold')">@{{ errors.first('disc_threshold') }}</span>
-                                    </div> --}}
 
                                     <div class="control-group" :class="[errors.has('disc_quantity') ? 'has-error' : '']">
                                         <label for="disc_quantity" class="required">{{ __('admin::app.promotion.general-info.disc_qty') }}</label>
@@ -403,9 +395,10 @@
                             <accordian :active="false" :title="'{{ __('admin::app.promotion.general-info.labels') }}'">
                                 <div slot="body">
                                     @foreach($cart_rule[3]->labels as $label)
-                                        <span>[{{ $label->channel->code }}]</span>
                                         <div class="control-group" :class="[errors.has('label') ? 'has-error' : '']">
-                                            <label for="code">{{ $label->locale->code }}</label>
+                                            <label for="code">{{ __('admin::app.label') }}
+                                                <span class="locale">[{{ $label->channel->code }} - {{ $label->locale->code }}]</span>
+                                            </label>
 
                                             <input type="text" class="control" name="label[{{ $label->channel->code }}][{{ $label->locale->code }}]" value="{{ $label->label }}" data-vv-as="&quot;Label&quot;">
 
@@ -443,11 +436,8 @@
 
                         action_type: null,
                         apply: null,
-                        apply_amt: false,
-                        apply_prct: false,
                         apply_to_shipping: null,
                         disc_amount: null,
-                        // disc_threshold: null,
                         disc_quantity: null,
                         end_other_rules: null,
                         coupon_type: null,
@@ -555,10 +545,6 @@
                     this.action_type = data.action_type;
 
                     this.apply = null;
-
-                    this.apply_amt = false;
-
-                    this.apply_prct = false;
 
                     this.apply_to_shipping = data.apply_to_shipping;
 

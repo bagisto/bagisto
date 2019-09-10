@@ -185,7 +185,7 @@
 
             created: function () {
                 if (!this.index)
-                    this.active = true;
+                    this.active = false;
 
                 if (this.appliedFilterValues && this.appliedFilterValues.length) {
                     this.appliedFilters = this.appliedFilterValues;

@@ -257,7 +257,7 @@
                                                 <td>{{ core()->formatBasePrice($item->base_discount_amount) }}</td>
                                             @endif
 
-                                            <td>{{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_total + $item->base_tax_amount) }}</td>
+                                            <td>{{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount) }}</td>
                                         </tr>
                                     @endforeach
 

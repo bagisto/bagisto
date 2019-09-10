@@ -407,11 +407,11 @@ class CatalogRuleController extends Controller
         $catalogRule = $this->catalogRule->findOrFail($id);
 
         if ($catalogRule->delete()) {
-            session()->flash('success', trans('admin::app.promotion.delete-success'));
+            session()->flash('success', trans('admin::app.promotion.status.delete-success'));
 
             return response()->json(['message' => true], 200);
         } else {
-            session()->flash('success', trans('admin::app.promotion.delete-failed'));
+            session()->flash('error', trans('admin::app.promotion.status.delete-failed'));
 
             return response()->json(['message' => false], 400);
         }

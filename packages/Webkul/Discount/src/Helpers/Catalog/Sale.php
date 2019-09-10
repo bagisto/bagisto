@@ -70,6 +70,10 @@ abstract class Sale
         if ($rule->conditions) {
             $conditions = $rule->conditions;
 
+            while(gettype($conditions) == 'string') {
+                $conditions = json_decode($conditions);
+            }
+
             $productIDs = $this->convertX->convertX($conditions);
         } else {
             $productIDs = '*';

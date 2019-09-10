@@ -1,6 +1,24 @@
 <?php
 
 return [
+    'save' => 'Save',
+    'create' => 'Create',
+    'update' => 'Update',
+    'delete' => 'Delete',
+    'failed' => 'Failed',
+    'store' => 'Store',
+    'image' => 'Image',
+    'no result' => 'No result',
+    'product' => 'Product',
+    'attribute' => 'Attribute',
+    'yes' => 'Yes',
+    'no' => 'No',
+    'true' => 'True',
+    'false' => 'False',
+    'apply' => 'Apply',
+    'action' => 'Action',
+    'label' => 'Label',
+
     'common' => [
         'no-result-found' => 'We could not find any records.',
         'country' => 'Country',

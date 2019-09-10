@@ -20,7 +20,7 @@
 
                 <div class="page-action">
                     <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.catalog.categories.save-btn-title') }}
+                        {{ __('admin::app.catalog.categories.-btn-title') }}
                     </button>
                 </div>
             </div>

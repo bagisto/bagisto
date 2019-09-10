@@ -16,7 +16,7 @@
 
                 <div class="page-action">
                     <button type="submi t" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.account.save-btn-title') }}
+                        {{ __('admin::app.save') }}
                     </button>
                 </div>
             </div>
