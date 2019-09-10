@@ -42,6 +42,8 @@ class OrderShipmentsDataGrid extends DataGrid
 
     public function addColumns()
     {
+        $this->setInvoker($this);
+
         $this->addColumn([
             'index' => 'shipment_id',
             'label' => trans('admin::app.datagrid.id'),
@@ -108,7 +110,7 @@ class OrderShipmentsDataGrid extends DataGrid
 
     public function prepareActions() {
         $this->addAction([
-            'type' => 'View',
+            'title' => 'Order Shipment View',
             'method' => 'GET', // use GET request only for redirect purposes
             'route' => 'admin.sales.shipments.view',
             'icon' => 'icon eye-icon'

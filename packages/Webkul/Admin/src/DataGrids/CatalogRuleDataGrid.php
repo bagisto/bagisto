@@ -28,6 +28,8 @@ class CatalogRuleDataGrid extends DataGrid
 
     public function addColumns()
     {
+        $this->setInvoker($this);
+
         $this->addColumn([
             'index' => 'id',
             'label' => trans('admin::app.datagrid.id'),
@@ -107,14 +109,14 @@ class CatalogRuleDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'type' => 'Edit',
+            'title' => 'Edit CatalogRule',
             'method' => 'GET', //use post only for redirects only
             'route' => 'admin.catalog-rule.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
-            'type' => 'Delete',
+            'title' => 'Delete CatalogRule',
             'method' => 'POST', //use post only for requests other than redirects
             'route' => 'admin.catalog-rule.delete',
             'icon' => 'icon trash-icon'

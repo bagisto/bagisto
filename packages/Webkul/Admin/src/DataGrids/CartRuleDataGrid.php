@@ -28,9 +28,11 @@ class CartRuleDataGrid extends DataGrid
 
     public function addColumns()
     {
+        $this->setInvoker($this);
+
         $this->addColumn([
             'index' => 'id',
-            'label' => trans('admin::app.datagrid.id'),
+            'label' => trans('admin::app.id'),
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
@@ -39,7 +41,7 @@ class CartRuleDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'name',
-            'label' => trans('admin::app.datagrid.name'),
+            'label' => trans('admin::app.name'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -48,7 +50,7 @@ class CartRuleDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'status',
-            'label' => trans('admin::app.datagrid.status'),
+            'label' => trans('admin::app.status'),
             'type' => 'boolean',
             'searchable' => true,
             'sortable' => true,
@@ -117,14 +119,14 @@ class CartRuleDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'type' => 'Edit',
+            'title' => 'Edit CartRule',
             'method' => 'GET', //use post only for redirects only
             'route' => 'admin.cart-rule.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
-            'type' => 'Delete',
+            'title' => 'Delete CartRule',
             'method' => 'POST', //use post only for requests other than redirects
             'route' => 'admin.cart-rule.delete',
             'icon' => 'icon trash-icon'

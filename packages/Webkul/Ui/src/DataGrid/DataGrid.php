@@ -170,13 +170,13 @@ abstract class DataGrid
 
     public function addColumn($column)
     {
-        $this->fireEvent('before.add.column.'.$column['index']);
+        // $this->fireEvent('before.add.column.'.$column['index']);
 
         array_push($this->columns, $column);
 
         $this->setCompleteColumnDetails($column);
 
-        $this->fireEvent('after.add.column.'.$column['index']);
+        // $this->fireEvent('after.add.column.'.$column['index']);
     }
 
     public function setCompleteColumnDetails($column)
@@ -191,16 +191,40 @@ abstract class DataGrid
 
     public function addAction($action)
     {
+        if (isset($action['title'])) {
+            $eventName = strtolower($action['title']);
+            $eventName = explode(' ', $eventName);
+            $eventName = implode('.', $eventName);
+        } else {
+            $eventName = null;
+        }
+
+        // $this->fireEvent('action.before.'.$eventName);
+
         array_push($this->actions, $action);
 
         $this->enableAction = true;
+
+        $this->fireEvent('action.after.' . $eventName);
     }
 
     public function addMassAction($massAction)
     {
+        if (isset($massAction['label'])) {
+            $eventName = strtolower($massAction['label']);
+            $eventName = explode(' ', $eventName);
+            $eventName = implode('.', $eventName);
+        } else {
+            $eventName = null;
+        }
+
+        $this->fireEvent('mass.action.before.' . $eventName);
+
         array_push($this->massActions, $massAction);
 
         $this->enableMassAction = true;
+
+        $this->fireEvent('mass.action.after.' . $eventName);
     }
 
     public function getCollection()
@@ -377,15 +401,17 @@ abstract class DataGrid
 
     protected function fireEvent($name)
     {
-        $className = get_class($this->invoker);
+        if (isset($name)) {
+            $className = get_class($this->invoker);
 
-        $className = last(explode("\\", $className));
+            $className = last(explode("\\", $className));
 
-        $className = strtolower($className);
+            $className = strtolower($className);
 
-        $eventName = $className.'.'.$name;
+            $eventName = $className . '.' . $name;
 
-        Event::fire($eventName, $this->invoker);
+            Event::fire($eventName, $this->invoker);
+        }
     }
 
     public function prepareMassActions() {
@@ -394,13 +420,9 @@ abstract class DataGrid
     public function prepareActions() {
     }
 
-    public function setInvoker($class)
+    public function setInvoker($object)
     {
-        $this->invoker = $class;
-
-        // $this->invoker = last(explode("\\", $class));
-
-        // $this->invoker = strtolower($this->invoker);
+        $this->invoker = $object;
     }
 
     public function render()

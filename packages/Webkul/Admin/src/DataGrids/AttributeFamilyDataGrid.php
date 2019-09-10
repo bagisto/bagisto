@@ -26,9 +26,11 @@ class AttributeFamilyDataGrid extends DataGrid
 
     public function addColumns()
     {
+        $this->setInvoker($this);
+
         $this->addColumn([
             'index' => 'id',
-            'label' => trans('admin::app.datagrid.id'),
+            'label' => trans('admin::app.id'),
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
@@ -37,7 +39,7 @@ class AttributeFamilyDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'code',
-            'label' => trans('admin::app.datagrid.code'),
+            'label' => trans('admin::app.code'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -46,7 +48,7 @@ class AttributeFamilyDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'name',
-            'label' => trans('admin::app.datagrid.name'),
+            'label' => trans('admin::app.name'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -56,14 +58,14 @@ class AttributeFamilyDataGrid extends DataGrid
 
     public function prepareActions() {
         $this->addAction([
-            'type' => 'Edit',
+            'title' => 'Edit Attribute Family',
             'method' => 'GET', // use GET request only for redirect purposes
             'route' => 'admin.catalog.families.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
-            'type' => 'Delete',
+            'title' => 'Delete Attribute Family',
             'method' => 'POST', // use GET request only for redirect purposes and POST for rest
             'route' => 'admin.catalog.families.delete',
             // 'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
