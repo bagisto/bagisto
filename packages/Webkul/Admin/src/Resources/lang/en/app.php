@@ -18,6 +18,7 @@ return [
     'apply' => 'Apply',
     'action' => 'Action',
     'label' => 'Label',
+    'select-option' => 'Select option',
 
     'common' => [
         'no-result-found' => 'We could not find any records.',
