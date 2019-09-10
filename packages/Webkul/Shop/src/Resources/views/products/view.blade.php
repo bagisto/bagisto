@@ -116,7 +116,7 @@
 
             <button type="button" class="decrease" @click="decreaseQty()">-</button>
 
-            <input :name="controlName" class="control" :value="qty" v-validate="'required|numeric|min_value:1'" data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;" readonly>
+            <input :name="controlName" class="control" :value="qty" :v-validate="validations" data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;" readonly>
 
             <button type="button" class="increase" @click="increaseQty()">+</button>
 
@@ -174,6 +174,11 @@
                 quantity: {
                     type: [Number, String],
                     default: 1
+                },
+
+                validations: {
+                    type: String,
+                    default: 'required|numeric|min_value:1'
                 }
             },
 

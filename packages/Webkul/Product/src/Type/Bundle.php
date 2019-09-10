@@ -135,6 +135,9 @@ class Bundle extends AbstractType
         $optionPrices = [];
 
         foreach ($this->product->bundle_options as $option) {
+            if(! $option->is_required)
+                continue;
+
             foreach ($option->bundle_option_products as $index => $bundleOptionProduct) {
                 $optionPrices[$option->id][] = $bundleOptionProduct->qty * $bundleOptionProduct->product->getTypeInstance()->getMinimalPrice();
             }
@@ -159,6 +162,9 @@ class Bundle extends AbstractType
         $optionPrices = [];
 
         foreach ($this->product->bundle_options as $option) {
+            if(! $option->is_required)
+                continue;
+
             foreach ($option->bundle_option_products as $index => $bundleOptionProduct) {
                 $optionPrices[$option->id][] = $bundleOptionProduct->qty * $bundleOptionProduct->product->price;
             }
@@ -359,6 +365,9 @@ class Bundle extends AbstractType
 
         foreach ($data['bundle_options'] as $optionId => $optionProductIds) {
             foreach ($optionProductIds as $optionProductId) {
+                if (! $optionProductId)
+                    continue;
+
                 $optionProduct = $this->productBundleOptionProductRepository->findOneWhere([
                         'id' => $optionProductId,
                         'product_bundle_option_id' => $optionId
@@ -410,6 +419,9 @@ class Bundle extends AbstractType
             $labels = [];
 
             foreach ($optionProductIds as $optionProductId) {
+                if (! $optionProductId)
+                    continue;
+
                 $optionProduct = $this->productBundleOptionProductRepository->find($optionProductId);
 
                 $qty = $data['bundle_option_qty'][$optionId] ?? $optionProduct->qty;
@@ -417,11 +429,13 @@ class Bundle extends AbstractType
                 $labels[] = $qty . ' x ' . $optionProduct->product->name . ' ' . core()->currency($optionProduct->product->getTypeInstance()->getMinimalPrice());
             }
 
-            $data['attributes'][$option->id] = [
-                'attribute_name' => $option->label,
-                'option_id' => $option->id,
-                'option_label' => implode(', ', $labels),
-            ];
+            if (count($labels)) {
+                $data['attributes'][$option->id] = [
+                    'attribute_name' => $option->label,
+                    'option_id' => $option->id,
+                    'option_label' => implode(', ', $labels),
+                ];
+            }
         }
 
         return $data;

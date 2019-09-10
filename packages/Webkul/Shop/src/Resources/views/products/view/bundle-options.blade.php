@@ -52,10 +52,10 @@
         <script type="text/x-template" id="bundle-option-item-template">
             <div class="bundle-option-item">
                 <div class="control-group" :class="[errors.has('bundle_options[' + option.id + '][]') ? 'has-error' : '']">
-                    <label class="required">@{{ option.label }}</label>
+                    <label :class="[option.is_required ? 'required' : '']">@{{ option.label }}</label>
 
                     <div v-if="option.type == 'select'">
-                        <select class="control" :name="'bundle_options[' + option.id + '][]'" v-model="selected_product" v-validate="'required'" :data-vv-as="option.label + '&quot;'">
+                        <select class="control" :name="'bundle_options[' + option.id + '][]'" v-model="selected_product" v-validate="option.is_required ? 'required' : ''" :data-vv-as="option.label + '&quot;'">
                             <option value="">{{ __('shop::app.products.choose-selection') }}</option>
                             <option v-for="(product, index2) in option.products" :value="product.id">
                                 @{{ product.name + ' + ' + product.price.final_price.formated_price }}
@@ -64,8 +64,15 @@
                     </div>
 
                     <div v-if="option.type == 'radio'">
+                        <span class="radio" v-if="! option.is_required">
+                            <input type="radio" :name="'bundle_options[' + option.id + '][]'" v-model="selected_product" value="0" :id="'bundle_options[' + option.id + '][]'">
+                            <label class="radio-view" :for="'bundle_options[' + option.id + '][]'"></label>
+
+                            {{ __('shop::app.products.none') }}
+                        </span>
+
                         <span class="radio" v-for="(product, index2) in option.products">
-                            <input type="radio" :name="'bundle_options[' + option.id + '][]'" v-model="selected_product" v-validate="'required'" :data-vv-as="'&quot;' + option.label + '&quot;'" :value="product.id" :id="'bundle_options[' + option.id + '][]'">
+                            <input type="radio" :name="'bundle_options[' + option.id + '][]'" v-model="selected_product" v-validate="option.is_required ? 'required' : ''" :data-vv-as="'&quot;' + option.label + '&quot;'" :value="product.id" :id="'bundle_options[' + option.id + '][]'">
                             <label class="radio-view" :for="'bundle_options[' + option.id + '][]'"></label>
 
                             @{{ product.name }}
@@ -78,7 +85,7 @@
 
                     <div v-if="option.type == 'checkbox'">
                         <span class="checkbox" v-for="(product, index2) in option.products">
-                            <input type="checkbox" :name="'bundle_options[' + option.id + '][]'" :value="product.id" v-model="selected_product" v-validate="'required'" :data-vv-as="'&quot;' + option.label + '&quot;'" :id="'bundle_options[' + option.id + '][]'">
+                            <input type="checkbox" :name="'bundle_options[' + option.id + '][]'" :value="product.id" v-model="selected_product" v-validate="option.is_required ? 'required' : ''" :data-vv-as="'&quot;' + option.label + '&quot;'" :id="'bundle_options[' + option.id + '][]'">
                             <label class="checkbox-view" :for="'bundle_options[' + option.id + '][]'"></label>
 
                             @{{ product.name }}
@@ -90,7 +97,7 @@
                     </div>
 
                     <div v-if="option.type == 'multiselect'">
-                        <select class="control" :name="'bundle_options[' + option.id + '][]'" v-model="selected_product" v-validate="'required'" :data-vv-as="'&quot;' + option.label + '&quot;'" multiple>
+                        <select class="control" :name="'bundle_options[' + option.id + '][]'" v-model="selected_product" v-validate="option.is_required ? 'required' : ''" :data-vv-as="'&quot;' + option.label + '&quot;'" multiple>
                             <option v-for="(product, index2) in option.products" :value="product.id">
                                 @{{ product.name + ' + ' + product.price.final_price.formated_price }}
                             </option>
@@ -105,6 +112,7 @@
                 <div v-if="option.type == 'select' || option.type == 'radio'">
                     <quantity-changer
                         :control-name="'bundle_option_qty[' + option.id + ']'"
+                        :validations="parseInt(selected_product) ? 'required|numeric|min_value:1' : ''"
                         :quantity="product_qty"
                         @onQtyUpdated="qtyUpdated($event)">
                     </quantity-changer>
@@ -172,7 +180,9 @@
 
                 data: function() {
                     return {
-                        selected_product: (this.option.type == 'checkbox' || this.option.type == 'multiselect')  ? [] : null
+                        selected_product: (this.option.type == 'checkbox' || this.option.type == 'multiselect')  ? [] : null,
+                        
+                        qty_validations: ''
                     }
                 },
 
@@ -186,6 +196,8 @@
 
                 watch: {
                     selected_product: function (value) {
+                        this.qty_validations = this.selected_product ? 'required|numeric|min_value:1' : '';
+
                         this.$emit('onProductSelected', value)
                     }
                 },

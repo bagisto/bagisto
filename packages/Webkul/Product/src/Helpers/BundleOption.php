@@ -60,6 +60,7 @@ class BundleOption extends AbstractProduct
             'id' => $option->id,
             'label' => $option->label,
             'type' => $option->type,
+            'is_required' => $option->is_required,
             'products' => $this->getOptionProducts($option),
             'sort_order' => $option->sort_order
         ];

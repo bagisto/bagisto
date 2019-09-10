@@ -338,7 +338,8 @@ return [
         'customize-options' => 'Customize Options',
         'choose-selection' => 'Choose a selection',
         'your-customization' => 'Your Customization',
-        'total-amount' => 'Total Amount'
+        'total-amount' => 'Total Amount',
+        'none' => 'None'
     ],
 
     'wishlist' => [
