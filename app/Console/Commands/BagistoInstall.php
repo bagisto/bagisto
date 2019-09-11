@@ -136,17 +136,25 @@ class BagistoInstall extends Command
 
         \Artisan::call('config:cache');
 
+        $this->info('Running migrations...');
+
         \Artisan::call('migrate');
 
-        $this->info('Migrations complete');
+        $this->info('Migration completed.');
+
+        $this->info('Running seeders...');
 
         \Artisan::call('db:seed', ['--force' => true]);
 
-        $this->info('Seeding complete');
+        $this->info('Seeders finished.');
 
         \Artisan::call('storage:link');
 
+        $this->info('Storage link created...');
+
         \Artisan::call('vendor:publish', [0]);
+
+        $this->info('All provider tags are published...');
 
         $this->info('Installation completed.');
 
