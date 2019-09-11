@@ -2,7 +2,7 @@
 
 namespace Webkul\Ui\DataGrid;
 
-use Illuminate\Http\Request;
+use Event;
 
 /**
  * DataGrid class
@@ -12,22 +12,87 @@ use Illuminate\Http\Request;
  */
 abstract class DataGrid
 {
+    /**
+     * set index columns, ex: id.
+     */
     protected $index = null;
+
+    /**
+     * To know the class of datagrid calling parent methods, to be set by the extending class.
+     */
+    protected $invoker = null;
+
+    /**
+     * Default sort order of datagrid
+     */
     protected $sortOrder = 'asc';
+
+    /**
+     * Situation handling property when working with custom columns in datagrid, helps abstaining
+     * aliases on custom column.
+     */
     protected $enableFilterMap = false;
+
+    /**
+     * This is array where aliases and custom column's name are passed
+     */
     protected $filterMap = [];
+
+    /**
+     * array to hold all the columns which will be displayed on frontend.
+     */
     protected $columns = [];
+
     protected $completeColumnDetails = [];
+
+    /**
+     * Hold query builder instance of the query prepared by executing datagrid
+     * class method setQueryBuilder
+     */
     protected $queryBuilder = [];
+
+    /**
+     * Final result of the datagrid program that is collection object.
+     */
     protected $collection = [];
+
+    /**
+     * Set of handly click tools which you could be using for various operations.
+     * ex: dyanmic and static redirects, deleting, etc.
+     */
     protected $actions = [];
+
+    /**
+     * Works on selection of values index column as comma separated list as response
+     * to your endpoint set as route.
+     */
     protected $massActions = [];
-    protected $request;
+
+    /**
+     * Parsed value of the url parameters
+     */
     protected $parse;
+
+    /**
+     * To show mass action or not.
+     */
     protected $enableMassAction = false;
+
+    /**
+     * To enable actions or not.
+     */
     protected $enableAction = false;
+
+    /**
+     * paginate the collection or not
+     */
     protected $paginate = true;
+
+    /**
+     * If paginated then value of pagination.
+     */
     protected $itemsPerPage = 15;
+
     protected $operators = [
         'eq' => "=",
         'lt' => "<",
@@ -105,9 +170,13 @@ abstract class DataGrid
 
     public function addColumn($column)
     {
+        $this->fireEvent('add.column.before.'.$column['index']);
+
         array_push($this->columns, $column);
 
         $this->setCompleteColumnDetails($column);
+
+        $this->fireEvent('add.column.after.'.$column['index']);
     }
 
     public function setCompleteColumnDetails($column)
@@ -122,16 +191,40 @@ abstract class DataGrid
 
     public function addAction($action)
     {
+        if (isset($action['title'])) {
+            $eventName = strtolower($action['title']);
+            $eventName = explode(' ', $eventName);
+            $eventName = implode('.', $eventName);
+        } else {
+            $eventName = null;
+        }
+
+        $this->fireEvent('action.before.'.$eventName);
+
         array_push($this->actions, $action);
 
         $this->enableAction = true;
+
+        $this->fireEvent('action.after.' . $eventName);
     }
 
     public function addMassAction($massAction)
     {
+        if (isset($massAction['label'])) {
+            $eventName = strtolower($massAction['label']);
+            $eventName = explode(' ', $eventName);
+            $eventName = implode('.', $eventName);
+        } else {
+            $eventName = null;
+        }
+
+        $this->fireEvent('mass.action.before.' . $eventName);
+
         array_push($this->massActions, $massAction);
 
         $this->enableMassAction = true;
+
+        $this->fireEvent('mass.action.after.' . $eventName);
     }
 
     public function getCollection()
@@ -306,10 +399,30 @@ abstract class DataGrid
         return $collection;
     }
 
+    protected function fireEvent($name)
+    {
+        if (isset($name)) {
+            $className = get_class($this->invoker);
+
+            $className = last(explode("\\", $className));
+
+            $className = strtolower($className);
+
+            $eventName = $className . '.' . $name;
+
+            Event::fire($eventName, $this->invoker);
+        }
+    }
+
     public function prepareMassActions() {
     }
 
     public function prepareActions() {
+    }
+
+    public function setInvoker($object)
+    {
+        $this->invoker = $object;
     }
 
     public function render()

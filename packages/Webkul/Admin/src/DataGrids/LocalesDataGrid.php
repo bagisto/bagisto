@@ -26,6 +26,8 @@ class LocalesDataGrid extends DataGrid
 
     public function addColumns()
     {
+        $this->setInvoker($this);
+
         $this->addColumn([
             'index' => 'id',
             'label' => trans('admin::app.datagrid.id'),
@@ -65,14 +67,14 @@ class LocalesDataGrid extends DataGrid
 
     public function prepareActions() {
         $this->addAction([
-            'type' => 'Edit',
+            'title' => 'Edit Locales',
             'method' => 'GET', // use GET request only for redirect purposes
             'route' => 'admin.locales.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
-            'type' => 'Delete',
+            'title' => 'Delete Locales',
             'method' => 'POST', // use GET request only for redirect purposes
             'route' => 'admin.locales.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'Exchange Rate']),

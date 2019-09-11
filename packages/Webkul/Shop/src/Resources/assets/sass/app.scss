@@ -201,6 +201,14 @@ input {
     }
 }
 
+.add-to-wishlist.already {
+    pointer-events: none;
+
+    .wishlist-icon {
+        background-image: url('../images/wishlist-added.svg') !important;
+    }
+}
+
 //product page price styles
 .product-price {
     margin-bottom: 14px;
@@ -1727,6 +1735,9 @@ section.product-detail {
                             }
                         }
 
+                        .add-to-wishlist.already {
+                            background-image: url('../images/wishlist-added.svg') !important;
+                        }
 
                         .share {
                             position: absolute;

@@ -30,6 +30,8 @@ class SliderDataGrid extends DataGrid
 
     public function addColumns()
     {
+        $this->setInvoker($this);
+
         $this->addColumn([
             'index' => 'slider_id',
             'label' => trans('admin::app.datagrid.id'),
@@ -60,14 +62,14 @@ class SliderDataGrid extends DataGrid
 
     public function prepareActions() {
         $this->addAction([
-            'type' => 'Edit',
+            'title' => 'Edit Slider',
             'method' => 'GET', // use GET request only for redirect purposes
             'route' => 'admin.sliders.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
-            'type' => 'Delete',
+            'title' => 'Delete Slider',
             'method' => 'POST', // use GET request only for redirect purposes
             'route' => 'admin.sliders.delete',
             'icon' => 'icon trash-icon'

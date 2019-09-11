@@ -284,13 +284,15 @@ class ProductFlat
                     $productFlat->save();
                 }
             } else {
-                $productFlat = $this->productFlatRepository->findOneWhere([
-                    'product_id' => $product->id,
-                    'channel' => $channel->code,
-                ]);
+                if (request()->route()->getName() == 'admin.catalog.products.update') {
+                    $productFlat = $this->productFlatRepository->findOneWhere([
+                        'product_id' => $product->id,
+                        'channel' => $channel->code,
+                    ]);
 
-                if ($productFlat) {
-                    $this->productFlatRepository->delete($productFlat->id);
+                    if ($productFlat) {
+                        $this->productFlatRepository->delete($productFlat->id);
+                    }
                 }
             }
         }

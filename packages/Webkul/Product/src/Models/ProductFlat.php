@@ -44,7 +44,7 @@ class ProductFlat extends Model implements ProductFlatContract
      */
     public function variants()
     {
-        return $this->hasMany(self::class, 'parent_id');
+        return $this->hasMany(static::class, 'parent_id');
     }
 
     /**

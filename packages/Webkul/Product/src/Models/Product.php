@@ -40,7 +40,7 @@ class Product extends Model implements ProductContract
      */
     public function variants()
     {
-        return $this->hasMany(self::class, 'parent_id');
+        return $this->hasMany(static::class, 'parent_id');
     }
 
     /**
@@ -56,7 +56,7 @@ class Product extends Model implements ProductContract
      */
     public function parent()
     {
-        return $this->belongsTo(self::class, 'parent_id');
+        return $this->belongsTo(static::class, 'parent_id');
     }
 
     /**
@@ -122,7 +122,7 @@ class Product extends Model implements ProductContract
      */
     public function related_products()
     {
-        return $this->belongsToMany(self::class, 'product_relations', 'parent_id', 'child_id')->limit(4);
+        return $this->belongsToMany(static::class, 'product_relations', 'parent_id', 'child_id')->limit(4);
     }
 
     /**
@@ -130,7 +130,7 @@ class Product extends Model implements ProductContract
      */
     public function up_sells()
     {
-        return $this->belongsToMany(self::class, 'product_up_sells', 'parent_id', 'child_id')->limit(4);
+        return $this->belongsToMany(static::class, 'product_up_sells', 'parent_id', 'child_id')->limit(4);
     }
 
     /**
@@ -138,7 +138,7 @@ class Product extends Model implements ProductContract
      */
     public function cross_sells()
     {
-        return $this->belongsToMany(self::class, 'product_cross_sells', 'parent_id', 'child_id')->limit(4);
+        return $this->belongsToMany(static::class, 'product_cross_sells', 'parent_id', 'child_id')->limit(4);
     }
 
     /**
@@ -258,7 +258,7 @@ class Product extends Model implements ProductContract
      */
     public function getAttribute($key)
     {
-        if (! method_exists(self::class, $key) && ! in_array($key, ['parent_id', 'attribute_family_id']) && ! isset($this->attributes[$key])) {
+        if (! method_exists(static::class, $key) && ! in_array($key, ['parent_id', 'attribute_family_id']) && ! isset($this->attributes[$key])) {
             if (isset($this->id)) {
                 $this->attributes[$key] = '';
 

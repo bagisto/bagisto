@@ -188,7 +188,7 @@
                                         <!-- Cart Attributes -->
                                         <div class="control-container mt-20" v-for="(condition, index) in conditions_list" :key="index">
                                             <select class="control" name="cart_attributes[]" v-model="conditions_list[index].attribute" title="You Can Make Multiple Selections Here" style="margin-right: 15px; width: 30%;" v-on:change="enableCondition($event, index)">
-                                                <option disabled="disabled">{{ __('admin::app.promotion.select-attribtue', ['attrbibute' => 'Option']) }}</option>
+                                                <option disabled="disabled">{{ __('admin::app.select-option') }}</option>
                                                 <option v-for="(cart_ip, index1) in cart_input" :value="cart_ip.code" :key="index1">@{{ cart_ip.name }}</option>
                                             </select>
 
@@ -199,7 +199,7 @@
 
                                                 <div v-if='conditions_list[index].attribute == "shipping_state"'>
                                                     <select class="control" v-model="conditions_list[index].value">
-                                                        <option disabled="disabled">{{ __('admin::app.promotion.select-attribtue', ['attrbibute' => 'State']) }}</option>
+                                                        <option disabled="disabled">{{ __('admin::app.select-option') }}</option>
                                                         <optgroup v-for='(state, code) in country_and_states.states' :label="code">
                                                             <option v-for="(stateObj, index) in state" :value="stateObj.code">@{{ stateObj.default_name }}</option>
                                                         </optgroup>
@@ -208,7 +208,7 @@
 
                                                 <div v-if='conditions_list[index].attribute == "shipping_country"'>
                                                     <select class="control" v-model="conditions_list[index].value">
-                                                        <option disabled="disabled">{{ __('admin::app.promotion.select-attribtue', ['attrbibute' => 'Country']) }}</option>
+                                                        <option disabled="disabled">{{ __('admin::app.select-option']) }}</option>
                                                         <option v-for="(country, index) in country_and_states.countries" :value="country.code">@{{ country.name }}</option>
                                                     </select>
                                                 </div>

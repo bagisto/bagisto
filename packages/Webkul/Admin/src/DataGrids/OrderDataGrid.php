@@ -42,6 +42,8 @@ class OrderDataGrid extends DataGrid
 
     public function addColumns()
     {
+        $this->setInvoker($this);
+
         $this->addColumn([
             'index' => 'id',
             'label' => trans('admin::app.datagrid.id'),
@@ -134,7 +136,7 @@ class OrderDataGrid extends DataGrid
 
     public function prepareActions() {
         $this->addAction([
-            'type' => 'View',
+            'title' => 'Order View',
             'method' => 'GET', // use GET request only for redirect purposes
             'route' => 'admin.sales.orders.view',
             'icon' => 'icon eye-icon'

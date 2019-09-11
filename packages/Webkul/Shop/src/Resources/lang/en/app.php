@@ -526,7 +526,27 @@ return [
             'grand-total' => 'Grand Total',
             'final-summary' => 'Thanks for showing your interest in our store we will send you tracking number once it shipped',
             'help' => 'If you need any kind of help please contact us at :support_email',
-            'thanks' => 'Thanks!'
+            'thanks' => 'Thanks!',
+            'cancel' => [
+                'subject' => 'Order Cancel Confirmation',
+                'heading' => 'Order Cancelled',
+                'dear' => 'Dear :customer_name',
+                'greeting' => 'You Order with order id #:order_id placed on :created_at has been cancelled',
+                'summary' => 'Summary of Order',
+                'shipping-address' => 'Shipping Address',
+                'billing-address' => 'Billing Address',
+                'contact' => 'Contact',
+                'shipping' => 'Shipping Method',
+                'payment' => 'Payment Method',
+                'subtotal' => 'Subtotal',
+                'shipping-handling' => 'Shipping & Handling',
+                'tax' => 'Tax',
+                'discount' => 'Discount',
+                'grand-total' => 'Grand Total',
+                'final-summary' => 'Thanks for showing your interest in our store',
+                'help' => 'If you need any kind of help please contact us at :support_email',
+                'thanks' => 'Thanks!',
+            ]
         ],
         'invoice' => [
             'heading' => 'Your invoice #:invoice_id for Order #:order_id',

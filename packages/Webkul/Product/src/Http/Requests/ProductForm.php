@@ -108,4 +108,16 @@ class ProductForm extends FormRequest
 
         return $this->rules;
     }
+
+    /**
+     * Custom message for validation
+     *
+     * @return array
+    */
+    public function messages()
+    {
+        return [
+            'variants.*.sku.unique' => 'The sku has already been taken.',
+        ];
+    }
 }

@@ -53,7 +53,7 @@ class CartItem extends Model implements CartItemContract
      */
     public function child()
     {
-        return $this->belongsTo(self::class, 'id', 'parent_id');
+        return $this->belongsTo(static::class, 'id', 'parent_id');
     }
 
     /**
