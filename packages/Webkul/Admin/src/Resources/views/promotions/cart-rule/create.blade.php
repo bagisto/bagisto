@@ -208,7 +208,7 @@
 
                                                 <div v-if='conditions_list[index].attribute == "shipping_country"'>
                                                     <select class="control" v-model="conditions_list[index].value">
-                                                        <option disabled="disabled">{{ __('admin::app.select-option']) }}</option>
+                                                        <option disabled="disabled">{{ __('admin::app.select-option') }}</option>
                                                         <option v-for="(country, index) in country_and_states.countries" :value="country.code">@{{ country.name }}</option>
                                                     </select>
                                                 </div>
