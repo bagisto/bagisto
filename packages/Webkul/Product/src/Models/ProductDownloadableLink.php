@@ -10,7 +10,7 @@ class ProductDownloadableLink extends TranslatableModel implements ProductDownlo
 {
     public $translatedAttributes = ['title'];
 
-    protected $fillable = ['title', 'url', 'file', 'file_name', 'type', 'sample_url', 'sample_file', 'sample_file_name', 'sample_type', 'sort_order', 'product_id', 'downloads'];
+    protected $fillable = ['title', 'price', 'url', 'file', 'file_name', 'type', 'sample_url', 'sample_file', 'sample_file_name', 'sample_type', 'sort_order', 'product_id', 'downloads'];
 
     protected $with = ['translations'];
 

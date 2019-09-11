@@ -162,7 +162,19 @@ class Downloadable extends AbstractType
         if(! isset($data['links']) || ! count($data['links']))
             return trans('shop::app.checkout.cart.integrity.missing_links');
 
-        return parent::prepareForCart($data);
+        $products = parent::prepareForCart($data);
+
+        foreach ($this->product->downloadable_links as $link) {
+            if (! in_array($link->id, $data['links']))
+                continue;
+
+            $products[0]['price'] += core()->convertPrice($link->price);
+            $products[0]['base_price'] += $link->price;
+            $products[0]['total'] += (core()->convertPrice($link->price) * $products[0]['quantity']);
+            $products[0]['base_total'] += ($link->price * $products[0]['quantity']);
+        }
+
+        return $products;
     }
     
     /**

@@ -45,6 +45,7 @@
                 <thead>
                     <tr>
                         <th>{{ __('admin::app.catalog.products.name') }}</th>
+                        <th>{{ __('admin::app.catalog.products.price') }}</th>
                         <th>{{ __('admin::app.catalog.products.file') }}</th>
                         <th>{{ __('admin::app.catalog.products.sample') }}</th>
                         <th>{{ __('admin::app.catalog.products.downloads') }}</th>
@@ -85,6 +86,14 @@
             </td>
 
             <td>
+                <div class="control-group" :class="[errors.has(linkInputName + '[price]') ? 'has-error' : '']">
+                    <input type="text" v-validate="'min_value:0'" v-model="link.price" :name="[linkInputName + '[price]']" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.price') }}&quot;"/>
+
+                    <span class="control-error" v-if="errors.has(linkInputName + '[price]')">@{{ errors.first(linkInputName + '[price]') }}</span>
+                </div>
+            </td>
+
+            <td>
                 <div class="control-group" style="margin-bottom: 10px;">
                     <select v-model="link.type" :name="[linkInputName + '[type]']" class="control">
                         <option value="file">{{ __('admin::app.catalog.products.upload-file') }}</option>
@@ -115,7 +124,7 @@
                 <div class="control-group" :class="[errors.has(linkInputName + '[url]') ? 'has-error' : '']" v-if="link.type == 'url'">
                     <input type="text" v-validate="'required'" v-model="link.url" :name="[linkInputName + '[url]']" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.url') }}&quot;"/>
 
-                    <span class="control-error" v-if="errors.has(linkInputName + '[url]')">@{{ errors.first(linkInputName + '[downloads]') }}</span>
+                    <span class="control-error" v-if="errors.has(linkInputName + '[url]')">@{{ errors.first(linkInputName + '[url]') }}</span>
                 </div>
             </td>
 

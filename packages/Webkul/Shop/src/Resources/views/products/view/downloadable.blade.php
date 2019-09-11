@@ -10,7 +10,9 @@
                 <ul>
                     @foreach ($product->downloadable_samples as $sample)
                         <li>
-                            <a href="{{ route('shop.downloadable.download_sample', ['type' => 'sample', 'id' => $sample->id]) }}" target="_blank">{{ $sample->title }}</a>
+                            <a href="{{ route('shop.downloadable.download_sample', ['type' => 'sample', 'id' => $sample->id]) }}" target="_blank">
+                                {{ $sample->title }}
+                            </a>
                         </li>
                     @endforeach
                 </ul>
@@ -27,11 +29,13 @@
                             <span class="checkbox">
                                 <input type="checkbox" name="links[]" v-validate="'required'" value="{{ $link->id }}" id="{{ $link->id }}" data-vv-as="&quot;{{ __('shop::app.products.links') }}&quot;"/>
                                 <label class="checkbox-view" for="{{ $link->id }}"></label>
-                                {{ $link->title }}
+                                {{ $link->title . ' + ' . core()->currency($link->price) }}
                             </span>
 
                             @if ($link->sample_file || $link->sample_url)
-                                <a href="{{ route('shop.downloadable.download_sample', ['type' => 'link', 'id' => $link->id]) }}" target="_blank">{{ __('shop::app.products.sample') }}</a>
+                                <a href="{{ route('shop.downloadable.download_sample', ['type' => 'link', 'id' => $link->id]) }}" target="_blank">
+                                    {{ __('shop::app.products.sample') }}
+                                </a>
                             @endif
                         </li>
                     @endforeach

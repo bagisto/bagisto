@@ -19,7 +19,7 @@ class CreateProductDownloadableLinksTable extends Migration
             $table->string('file')->nullable();
             $table->string('file_name')->nullable();
             $table->string('type');
-            $table->decimal('price', 12, 4)->nullable();
+            $table->decimal('price', 12, 4)->default(0);
             $table->string('sample_url')->nullable();
             $table->string('sample_file')->nullable();
             $table->string('sample_file_name')->nullable();
