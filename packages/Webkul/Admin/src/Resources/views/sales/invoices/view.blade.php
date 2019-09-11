@@ -280,7 +280,7 @@
                                 <tr>
                                     <td>{{ __('admin::app.sales.orders.discount') }}</td>
                                     <td>-</td>
-                                    <td>-{{ core()->formatBasePrice($invoice->base_discount_amount) }}</td>
+                                    <td>{{ core()->formatBasePrice($invoice->base_discount_amount) }}</td>
                                 </tr>
                             @endif
 
