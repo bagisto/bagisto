@@ -76,7 +76,7 @@
                 <div class="control-group" :class="[errors.has(inputName + '[sort_order]') ? 'has-error' : '']">
                     <label class="required">{{ __('admin::app.catalog.products.sort-order') }}</label>
 
-                    <input type="text" v-validate="'required'" :name="inputName + '[sort_order]'" v-model="option.sort_order" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.sort-order') }}&quot;"/>
+                    <input type="text" v-validate="'required|numeric|min_value:0'" :name="inputName + '[sort_order]'" v-model="option.sort_order" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.sort-order') }}&quot;"/>
                     
                     <span class="control-error" v-if="errors.has(inputName + '[sort_order]')">@{{ errors.first(inputName + '[sort_order]') }}</span>
                 </div>

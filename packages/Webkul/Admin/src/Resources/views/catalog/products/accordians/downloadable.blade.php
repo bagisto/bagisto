@@ -158,7 +158,7 @@
 
             <td>
                 <div class="control-group" :class="[errors.has(linkInputName + '[sort_order]') ? 'has-error' : '']">
-                    <input type="number" v-validate="'required'" v-model="link.sort_order" :name="[linkInputName + '[sort_order]']" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.sort-order') }}&quot;"/>
+                    <input type="number" v-validate="'required|numeric|min_value:0'" v-model="link.sort_order" :name="[linkInputName + '[sort_order]']" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.sort-order') }}&quot;"/>
                     
                     <span class="control-error" v-if="errors.has(linkInputName + '[sort_order]')">@{{ errors.first(linkInputName + '[sort_order]') }}</span>
                 </div>
@@ -250,7 +250,7 @@
 
             <td>
                 <div class="control-group" :class="[errors.has(sampleInputName + '[sort_order]') ? 'has-error' : '']">
-                    <input type="number" v-validate="'required'" v-model="sample.sort_order" :name="[sampleInputName + '[sort_order]']" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.sort-order') }}&quot;"/>
+                    <input type="number" v-validate="'required|numeric|min_value:0'" v-model="sample.sort_order" :name="[sampleInputName + '[sort_order]']" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.sort-order') }}&quot;"/>
                     
                     <span class="control-error" v-if="errors.has(sampleInputName + '[sort_order]')">@{{ errors.first(sampleInputName + '[sort_order]') }}</span>
                 </div>

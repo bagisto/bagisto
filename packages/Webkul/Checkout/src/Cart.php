@@ -331,14 +331,16 @@ class Cart {
             }
 
             foreach ($guestCart->items as $key => $guestCartItem) {
+
                 $found = false;
+                
                 foreach ($cart->items as $cartItem) {
                     if (! $cartItem->product->getTypeInstance()->compareOptions($cartItem->additional, $guestCartItem->additional))
                         continue;
 
                     $cartItem->quantity = $newQuantity = $cartItem->quantity + $guestCartItem->quantity;
 
-                    if ($this->isItemHaveQuantity($cartItem)) {
+                    if (! $this->isItemHaveQuantity($cartItem)) {
                         $this->cartItemRepository->delete($guestCartItem->id);
 
                         continue;
@@ -681,7 +683,7 @@ class Cart {
         if (! $cart = $this->getCart())
             return false;
 
-        if (! $shippingAddress = $cart->shipping_address)
+        if (! $address = $cart->shipping_address)
             return;
 
         foreach ($cart->items()->get() as $item) {
@@ -691,8 +693,8 @@ class Cart {
                 continue;
 
             $taxRates = $taxCategory->tax_rates()->where([
-                    'state' => $shippingAddress->state,
-                    'country' => $shippingAddress->country,
+                    'state' => $address->state,
+                    'country' => $address->country,
                 ])->orderBy('tax_rate', 'desc')->get();
 
             if (count( $taxRates) > 0) {
@@ -700,11 +702,11 @@ class Cart {
                     $haveTaxRate = false;
 
                     if (! $rate->is_zip) {
-                        if ($rate->zip_code == '*' || $rate->zip_code == $shippingAddress->postcode) {
+                        if ($rate->zip_code == '*' || $rate->zip_code == $address->postcode) {
                             $haveTaxRate = true;
                         }
                     } else {
-                        if ($shippingAddress->postcode >= $rate->zip_from && $shippingAddress->postcode <= $rate->zip_to) {
+                        if ($address->postcode >= $rate->zip_from && $address->postcode <= $rate->zip_to) {
                             $haveTaxRate = true;
                         }
                     }
