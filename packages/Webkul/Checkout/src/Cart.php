@@ -683,7 +683,7 @@ class Cart {
         if (! $cart = $this->getCart())
             return false;
 
-        if (! $address = $cart->shipping_address)
+        if (! $cart->shipping_address && ! $cart->billing_address)
             return;
 
         foreach ($cart->items()->get() as $item) {
@@ -691,6 +691,13 @@ class Cart {
 
             if (! $taxCategory)
                 continue;
+            
+            if ($item->product->getTypeInstance()->isStockable()) {
+                $address = $cart->shipping_address;
+            } else {
+                $address = $cart->billing_address;
+            }
+
 
             $taxRates = $taxCategory->tax_rates()->where([
                     'state' => $address->state,
