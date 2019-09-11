@@ -139,6 +139,11 @@ abstract class DataGrid
     abstract public function prepareQueryBuilder();
     abstract public function addColumns();
 
+    public function __construct()
+    {
+        $this->invoker = $this;
+    }
+
     /**
      * Parse the URL and get it ready to be used.
      */
@@ -418,11 +423,6 @@ abstract class DataGrid
     }
 
     public function prepareActions() {
-    }
-
-    public function setInvoker($object)
-    {
-        $this->invoker = $object;
     }
 
     public function render()

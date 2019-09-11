@@ -26,8 +26,6 @@ class AttributeFamilyDataGrid extends DataGrid
 
     public function addColumns()
     {
-        $this->setInvoker($this);
-
         $this->addColumn([
             'index' => 'id',
             'label' => trans('admin::app.id'),
