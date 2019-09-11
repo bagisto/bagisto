@@ -30,6 +30,8 @@ class CMSPageDataGrid extends DataGrid
 
         $locales = app('Webkul\Core\Repositories\LocaleRepository');
 
+        $this->setInvoker($this);
+
         $this->addColumn([
             'index' => 'id',
             'label' => trans('admin::app.datagrid.id'),
@@ -88,14 +90,14 @@ class CMSPageDataGrid extends DataGrid
 
     public function prepareActions() {
         $this->addAction([
-            'type' => 'Edit',
+            'title' => 'Edit CMSPage',
             'method' => 'GET', // use GET request only for redirect purposes
             'route' => 'admin.cms.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
-            'type' => 'Delete',
+            'title' => 'Delete CMSPage',
             'method' => 'POST', // use GET request only for redirect purposes
             'route' => 'admin.cms.delete',
             'icon' => 'icon trash-icon'
