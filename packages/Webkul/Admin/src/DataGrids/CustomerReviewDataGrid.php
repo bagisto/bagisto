@@ -34,8 +34,6 @@ class CustomerReviewDataGrid extends DataGrid
 
     public function addColumns()
     {
-        $this->setInvoker($this);
-
         $this->addColumn([
             'index' => 'product_review_id',
             'label' => trans('admin::app.datagrid.id'),

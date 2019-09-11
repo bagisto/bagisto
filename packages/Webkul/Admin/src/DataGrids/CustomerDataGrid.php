@@ -34,8 +34,6 @@ class CustomerDataGrid extends DataGrid
 
     public function addColumns()
     {
-        $this->setInvoker($this);
-
         $this->addColumn([
             'index' => 'customer_id',
             'label' => trans('admin::app.datagrid.id'),

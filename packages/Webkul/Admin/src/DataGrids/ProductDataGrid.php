@@ -42,8 +42,6 @@ class ProductDataGrid extends DataGrid
 
     public function addColumns()
     {
-        $this->setInvoker($this);
-
         $this->addColumn([
             'index' => 'product_id',
             'label' => trans('admin::app.datagrid.id'),

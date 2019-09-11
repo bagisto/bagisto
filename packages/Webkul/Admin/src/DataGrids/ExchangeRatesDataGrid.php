@@ -28,8 +28,6 @@ class ExchangeRatesDataGrid extends DataGrid
 
     public function addColumns()
     {
-        $this->setInvoker($this);
-
         $this->addColumn([
             'index' => 'currency_exch_id',
             'label' => trans('admin::app.datagrid.id'),
