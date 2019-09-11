@@ -85,14 +85,14 @@ class UserDataGrid extends DataGrid
 
     public function prepareActions() {
         $this->addAction([
-            'type' => 'Edit',
+            'title' => 'Edit User',
             'method' => 'GET', // use GET request only for redirect purposes
             'route' => 'admin.users.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
-            'type' => 'Delete',
+            'title' => 'Delete User',
             'method' => 'POST', // use GET request only for redirect purposes
             'route' => 'admin.users.delete',
             'icon' => 'icon trash-icon'

@@ -56,14 +56,14 @@ class TaxCategoryDataGrid extends DataGrid
 
     public function prepareActions() {
         $this->addAction([
-            'type' => 'Edit',
+            'title' => 'Edit Tax Category',
             'method' => 'GET', // use GET request only for redirect purposes
             'route' => 'admin.tax-categories.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
-            'type' => 'Delete',
+            'title' => 'Delete Tax Category',
             'method' => 'POST', // use GET request only for redirect purposes
             'route' => 'admin.tax-categories.delete',
             'icon' => 'icon trash-icon'

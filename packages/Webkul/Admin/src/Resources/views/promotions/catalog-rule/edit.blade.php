@@ -235,8 +235,8 @@
                         all_conditions: [],
 
                         all_attributes: {
-                            'categories' : null,
-                            'attributes' : null
+                            'categories' : [],
+                            'attributes' : []
                         },
 
                         criteria: 'cart',
@@ -365,21 +365,19 @@
                     },
 
                     onSubmit: function (e) {
-                        if (this.attribute_values != null || this.category_values != null) {
+                        if (this.attribute_values.length > 0 || this.category_values.length > 0) {
                             for (i in this.attribute_values) {
                                 delete this.attribute_values[i].options;
                             }
 
-                            if (this.category_values != null) {
+                            if (this.category_values.length > 0) {
                                 this.all_attributes.categories = this.category_values;
                             }
 
                             this.all_attributes.attributes = this.attribute_values;
-
-                            this.all_conditions = JSON.stringify(this.all_attributes);
-                        } else {
-                            this.all_conditions = null;
                         }
+
+                        this.all_conditions = JSON.stringify(this.all_attributes);
 
                         // this.all_conditions = JSON.stringify(this.conditions_list);
 

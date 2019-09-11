@@ -65,7 +65,7 @@ class OrderInvoicesDataGrid extends DataGrid
 
     public function prepareActions() {
         $this->addAction([
-            'type' => 'View',
+            'title' => 'Order Invoice View',
             'method' => 'GET', // use GET request only for redirect purposes
             'route' => 'admin.sales.invoices.view',
             'icon' => 'icon eye-icon'

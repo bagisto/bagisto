@@ -20,7 +20,7 @@ class OrderDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('orders as order')
-                ->addSelect('order.id', 'order.status', 'order.created_at', 'order.grand_total', 'order.order_currency_code')
+                ->addSelect('order.id','order.increment_id', 'order.status', 'order.created_at', 'order.grand_total', 'order.order_currency_code')
                 ->where('customer_id', auth()->guard('customer')->user()->id);
 
         $this->setQueryBuilder($queryBuilder);
@@ -29,9 +29,9 @@ class OrderDataGrid extends DataGrid
     public function addColumns()
     {
         $this->addColumn([
-            'index' => 'id',
+            'index' => 'increment_id',
             'label' => trans('shop::app.customer.account.order.index.order_id'),
-            'type' => 'number',
+            'type' => 'text',
             'searchable' => false,
             'sortable' => true,
             'filterable' => true

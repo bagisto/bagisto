@@ -101,14 +101,14 @@ class TaxRateDataGrid extends DataGrid
 
     public function prepareActions() {
         $this->addAction([
-            'type' => 'Edit',
+            'title' => 'Edit Tax Rate',
             'method' => 'GET', // use GET request only for redirect purposes
             'route' => 'admin.tax-rates.store',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
-            'type' => 'Delete',
+            'title' => 'Delete Tax Rate',
             'method' => 'POST', // use GET request only for redirect purposes
             'route' => 'admin.tax-rates.delete',
             'icon' => 'icon trash-icon'

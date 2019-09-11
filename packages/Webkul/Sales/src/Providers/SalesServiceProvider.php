@@ -20,5 +20,8 @@ class SalesServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->mergeConfigFrom(
+            dirname(__DIR__) . '/Config/system.php', 'core'
+        );
     }
 }

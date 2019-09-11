@@ -8,7 +8,7 @@ use Webkul\Admin\Mail\NewAdminNotification;
 use Webkul\Admin\Mail\NewInvoiceNotification;
 use Webkul\Admin\Mail\NewShipmentNotification;
 use Webkul\Admin\Mail\NewInventorySourceNotification;
-
+use Webkul\Admin\Mail\CancelOrderNotification;
 /**
  * Order event handler
  *
@@ -26,7 +26,7 @@ class Order {
     {
         try {
             Mail::queue(new NewOrderNotification($order));
-          
+
             Mail::queue(new NewAdminNotification($order));
         } catch (\Exception $e) {
 
@@ -77,5 +77,16 @@ class Order {
      */
     public function updateProductInventory($order)
     {
+    }
+
+     /*
+     * @param mixed $order
+     * */
+    public function sendCancelOrderMail($order){
+        try{
+            Mail::queue(new CancelOrderNotification($order));
+        }catch (\Exception $e){
+            \Log::error('Error occured when sending email '.$e->getMessage());
+        }
     }
 }

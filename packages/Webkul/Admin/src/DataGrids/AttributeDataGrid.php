@@ -48,7 +48,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'admin_name',
-            'label' => trans('admin::app.datagrid.admin-name'),
+            'label' => trans('admin::app.name'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -57,7 +57,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'type',
-            'label' => trans('admin::app.datagrid.type'),
+            'label' => trans('admin::app.type'),
             'type' => 'string',
             'sortable' => true,
             'searchable' => true,
@@ -66,7 +66,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'is_required',
-            'label' => trans('admin::app.datagrid.required'),
+            'label' => trans('admin::app.required'),
             'type' => 'boolean',
             'sortable' => true,
             'searchable' => false,
@@ -80,7 +80,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'is_unique',
-            'label' => trans('admin::app.datagrid.unique'),
+            'label' => trans('admin::app.unique'),
             'type' => 'boolean',
             'sortable' => true,
             'searchable' => false,
@@ -95,7 +95,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'value_per_locale',
-            'label' => trans('admin::app.datagrid.per-locale'),
+            'label' => trans('admin::app.locale-based'),
             'type' => 'boolean',
             'sortable' => true,
             'searchable' => false,
@@ -110,7 +110,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'value_per_channel',
-            'label' => trans('admin::app.datagrid.per-channel'),
+            'label' => trans('admin::app.channel-based'),
             'type' => 'boolean',
             'sortable' => true,
             'searchable' => false,
@@ -127,15 +127,15 @@ class AttributeDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'type' => 'Edit',
-            'method' => 'GET', //use post only for redirects only
+            'title' => 'Edit Attribute',
+            'method' => 'GET', //use get for redirects only
             'route' => 'admin.catalog.attributes.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
-            'type' => 'Delete',
-            'method' => 'POST', //use post only for requests other than redirects
+            'title' => 'Delete Attribute',
+            'method' => 'POST', // other than get request it fires ajax and self refreshes datagrid
             'route' => 'admin.catalog.attributes.delete',
             'icon' => 'icon trash-icon'
         ]);

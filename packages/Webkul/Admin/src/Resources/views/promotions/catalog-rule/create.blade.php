@@ -223,23 +223,18 @@
                         starts_from: null,
                         per_customer: 0,
                         status: 1,
-                        use_coupon: null,
-                        auto_generation: false,
-                        usage_limit: 0,
 
                         action_type: null,
                         apply: null,
                         apply_amt: false,
-                        apply_prct: false,
-                        apply_to_shipping: 0,
                         disc_amount: null,
                         end_other_rules: 0,
 
                         all_conditions: [],
 
                         all_attributes: {
-                            'categories' : null,
-                            'attributes' : null
+                            'categories' : [],
+                            'attributes' : []
                         },
 
                         criteria: 'cart',
@@ -377,12 +372,13 @@
                                 this.all_attributes.categories = this.category_values;
                             }
 
-                            this.all_attributes.attributes = this.attribute_values;
+                            if (this.attribute_values.length > 0) {
+                                this.all_attributes.attributes = this.attribute_values;
+                            }
 
-                            this.all_conditions = JSON.stringify(this.all_attributes);
-                        } else {
-                            this.all_conditions = null;
                         }
+
+                        this.all_conditions = JSON.stringify(this.all_attributes);
 
                         // this.all_conditions = JSON.stringify(this.conditions_list);
 

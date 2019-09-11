@@ -108,7 +108,7 @@ class OrderShipmentsDataGrid extends DataGrid
 
     public function prepareActions() {
         $this->addAction([
-            'type' => 'View',
+            'title' => 'Order Shipment View',
             'method' => 'GET', // use GET request only for redirect purposes
             'route' => 'admin.sales.shipments.view',
             'icon' => 'icon eye-icon'

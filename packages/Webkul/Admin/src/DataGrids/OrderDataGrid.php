@@ -28,7 +28,7 @@ class OrderDataGrid extends DataGrid
                     $leftJoin->on('order_address_billing.order_id', '=', 'orders.id')
                         ->where('order_address_billing.address_type', 'billing');
                 })
-                ->addSelect('orders.id', 'orders.base_sub_total', 'orders.base_grand_total', 'orders.created_at', 'channel_name', 'status')
+                ->addSelect('orders.id','orders.increment_id', 'orders.base_sub_total', 'orders.base_grand_total', 'orders.created_at', 'channel_name', 'status')
                 ->addSelect(DB::raw('CONCAT(order_address_billing.first_name, " ", order_address_billing.last_name) as billed_to'))
                 ->addSelect(DB::raw('CONCAT(order_address_shipping.first_name, " ", order_address_shipping.last_name) as shipped_to'));
 
@@ -43,7 +43,7 @@ class OrderDataGrid extends DataGrid
     public function addColumns()
     {
         $this->addColumn([
-            'index' => 'id',
+            'index' => 'increment_id',
             'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
@@ -134,7 +134,7 @@ class OrderDataGrid extends DataGrid
 
     public function prepareActions() {
         $this->addAction([
-            'type' => 'View',
+            'title' => 'Order View',
             'method' => 'GET', // use GET request only for redirect purposes
             'route' => 'admin.sales.orders.view',
             'icon' => 'icon eye-icon'

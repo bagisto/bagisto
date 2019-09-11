@@ -56,14 +56,14 @@ class CurrencyDataGrid extends DataGrid
 
     public function prepareActions() {
         $this->addAction([
-            'type' => 'Edit',
+            'title' => 'Edit Currency',
             'method' => 'GET', // use GET request only for redirect purposes
             'route' => 'admin.currencies.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
-            'type' => 'Delete',
+            'title' => 'Delete Currency',
             'method' => 'POST', // use GET request only for redirect purposes
             'route' => 'admin.currencies.delete',
             'icon' => 'icon trash-icon'
