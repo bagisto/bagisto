@@ -28,8 +28,6 @@ class CatalogRuleDataGrid extends DataGrid
 
     public function addColumns()
     {
-        $this->setInvoker($this);
-
         $this->addColumn([
             'index' => 'id',
             'label' => trans('admin::app.datagrid.id'),

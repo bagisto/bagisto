@@ -26,7 +26,7 @@ class Order {
     {
         try {
             Mail::queue(new NewOrderNotification($order));
-          
+
             Mail::queue(new NewAdminNotification($order));
         } catch (\Exception $e) {
 
@@ -77,7 +77,7 @@ class Order {
         try{
             Mail::queue(new CancelOrderNotification($order));
         }catch (\Exception $e){
-            Log::error('Error occured when sending email '.$e->getMessage());
+            \Log::error('Error occured when sending email '.$e->getMessage());
         }
     }
 }

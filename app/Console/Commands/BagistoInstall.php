@@ -85,6 +85,8 @@ class BagistoInstall extends Command
 
         $this->changeEnvironmentVariable('DB_DATABASE', $DB_DATABASE);
 
+        $DB_USERNAME = null;
+
         while(! isset($DB_USERNAME)) {
             $DB_USERNAME = $this->ask('Enter database username?');
             $this->comment($DB_USERNAME ?? 'root');
