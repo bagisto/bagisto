@@ -28,7 +28,7 @@ class OrderDataGrid extends DataGrid
                     $leftJoin->on('order_address_billing.order_id', '=', 'orders.id')
                         ->where('order_address_billing.address_type', 'billing');
                 })
-                ->addSelect('orders.id', 'orders.base_sub_total', 'orders.base_grand_total', 'orders.created_at', 'channel_name', 'status')
+                ->addSelect('orders.id','orders.increment_id', 'orders.base_sub_total', 'orders.base_grand_total', 'orders.created_at', 'channel_name', 'status')
                 ->addSelect(DB::raw('CONCAT(order_address_billing.first_name, " ", order_address_billing.last_name) as billed_to'))
                 ->addSelect(DB::raw('CONCAT(order_address_shipping.first_name, " ", order_address_shipping.last_name) as shipped_to'));
 
@@ -50,7 +50,14 @@ class OrderDataGrid extends DataGrid
             'sortable' => true,
             'filterable' => true
         ]);
-
+        $this->addColumn([
+            'index' => 'increment_id',
+            'label' => trans('admin::app.datagrid.order_number'),
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'filterable' => true
+        ]);
         $this->addColumn([
             'index' => 'base_sub_total',
             'label' => trans('admin::app.datagrid.sub-total'),
