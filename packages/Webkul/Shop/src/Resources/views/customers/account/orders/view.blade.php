@@ -1,7 +1,7 @@
 @extends('shop::layouts.master')
 
 @section('page_title')
-    {{ __('shop::app.customer.account.order.view.page-tile', ['order_id' => $order->id]) }}
+    {{ __('shop::app.customer.account.order.view.page-tile', ['order_id' => $order->increment_id]) }}
 @endsection
 
 @section('content-wrapper')
@@ -14,7 +14,7 @@
             <div class="account-head">
                 <span class="back-icon"><a href="{{ route('customer.account.index') }}"><i class="icon icon-menu-back"></i></a></span>
                 <span class="account-heading">
-                    {{ __('shop::app.customer.account.order.view.page-tile', ['order_id' => $order->id]) }}
+                    {{ __('shop::app.customer.account.order.view.page-tile', ['order_id' => $order->increment_id]) }}
                 </span>
                 <span></span>
             </div>
