@@ -238,7 +238,8 @@ return [
                     'order_id' => 'Order ID',
                     'date' => 'Date',
                     'status' => 'Status',
-                    'total' => 'Total'
+                    'total' => 'Total',
+                    'order_number' => 'Order Number'
                 ],
 
                 'view' => [
