@@ -126,7 +126,7 @@ class ConvertXToProductId
         foreach ($attributeOptions as $attributeOption) {
             $selectedOptions = $attributeOption->value;
 
-            if ($attributeOption->type == 'select' || $attributeOption->type == 'multiselect') {
+            if (isset($attributeOption->type) && ($attributeOption->type == 'select' || $attributeOption->type == 'multiselect')) {
                 $attribute = $this->attribute->findWhere([
                     'code' => $attributeOption->attribute
                 ]);
@@ -163,6 +163,8 @@ class ConvertXToProductId
                 $pavValues = $attribute->first();
 
                 $selectedAttributeValues = collect();
+
+                $foundProducts = collect();
 
                 if ($attributeOption->attribute == 'sku') {
                     $testValue = $attributeOption->value;
