@@ -31,7 +31,7 @@ class OrderDataGrid extends DataGrid
         $this->addColumn([
             'index' => 'increment_id',
             'label' => trans('shop::app.customer.account.order.index.order_id'),
-            'type' => 'text',
+            'type' => 'string',
             'searchable' => false,
             'sortable' => true,
             'filterable' => true
