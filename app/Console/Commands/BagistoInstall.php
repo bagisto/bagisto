@@ -62,41 +62,41 @@ class BagistoInstall extends Command
 
         $APP_URL = $this->ask('[KEY = "APP_URL"] Please enter application URL (Optional, default = localhost)?');
         $this->comment($APP_URL ?? 'localhost');
-        $this->changeEnvironmentVariable('APP_URL', $APP_URL);
+        $this->changeEnvironmentVariable('APP_URL', $APP_URL ?? 'http://localhost');
 
         $DB_CONNECTION = $this->ask('[KEY = "DB_CONNECTION"] Enter database connection (Optional, default = mysql)?');
         $this->comment($DB_CONNECTION ?? 'mysql');
-        $this->changeEnvironmentVariable('DB_CONNECTION', $DB_CONNECTION);
+        $this->changeEnvironmentVariable('DB_CONNECTION', $DB_CONNECTION ?? 'mysql');
 
         $DB_HOST = $this->ask('[KEY = "DB_HOST"] Enter database host (Optional, default = 127.0.0.1)?');
         $this->comment($DB_HOST ?? '127.0.0.1');
-        $this->changeEnvironmentVariable('DB_HOST', $DB_HOST);
+        $this->changeEnvironmentVariable('DB_HOST', $DB_HOST ?? '127.0.0.1');
 
         $DB_PORT = $this->ask('[KEY = "DB_PORT"] Enter database port (Optional, default = 3306)?');
         $this->comment($DB_PORT ?? '3306');
-        $this->changeEnvironmentVariable('DB_PORT', $DB_PORT);
+        $this->changeEnvironmentVariable('DB_PORT', $DB_PORT ?? '3306');
 
         $DB_DATABASE = null;
 
-        while(! isset($DB_DATABASE)) {
+        while (!isset($DB_DATABASE)) {
             $DB_DATABASE = $this->ask('[KEY = "DB_DATABASE"] Enter name of database?');
             $this->comment($DB_DATABASE ?? 'forge');
         }
 
-        $this->changeEnvironmentVariable('DB_DATABASE', $DB_DATABASE);
+        $this->changeEnvironmentVariable('DB_DATABASE', $DB_DATABASE ?? 'forge');
 
         $DB_USERNAME = null;
 
-        while(! isset($DB_USERNAME)) {
+        while (!isset($DB_USERNAME)) {
             $DB_USERNAME = $this->ask('Enter database username?');
             $this->comment($DB_USERNAME ?? 'root');
         }
 
-        $this->changeEnvironmentVariable('[KEY = "DB_USERNAME"] DB_USERNAME', $DB_USERNAME);
+        $this->changeEnvironmentVariable('DB_USERNAME', $DB_USERNAME ?? root);
 
         $DB_PASSWORD = $this->ask('Please enter database password?');
         $this->comment($DB_PASSWORD);
-        $this->changeEnvironmentVariable('[KEY = "DB_PASSWORD"] DB_PASSWORD', $DB_PASSWORD);
+        $this->changeEnvironmentVariable('DB_PASSWORD', $DB_PASSWORD);
 
         $this->info('We are done with application and database params, good job!');
 
@@ -116,11 +116,11 @@ class BagistoInstall extends Command
 
         $MAIL_USERNAME = $this->ask('[KEY = "MAIL_USERNAME"] Enter MAIL_USERNAME?');
         $this->comment($MAIL_USERNAME ?? null);
-        $this->changeEnvironmentVariable('MAIL_USERNAME', $MAIL_USERNAME);
+        $this->changeEnvironmentVariable('MAIL_USERNAME', $MAIL_USERNAME ?? null);
 
         $MAIL_PASSWORD = $this->ask('[KEY = "MAIL_PASSWORD"] Enter MAIL_PASSWORD?');
         $this->comment($MAIL_PASSWORD ?? null);
-        $this->changeEnvironmentVariable('MAIL_PASSWORD', $MAIL_PASSWORD);
+        $this->changeEnvironmentVariable('MAIL_PASSWORD', $MAIL_PASSWORD ?? null);
 
         $MAIL_ENCRYPTION = $this->ask('[KEY = "MAIL_ENCRYPTION"] Enter MAIL_ENCRYPTION (default = tls)?');
         $this->comment($MAIL_ENCRYPTION ?? 'tls');
@@ -128,17 +128,17 @@ class BagistoInstall extends Command
 
         $SHOP_MAIL_FROM = $this->ask('[KEY = "SHOP_MAIL_FROM"] Enter SHOP_MAIL_FROM?');
         $this->comment($SHOP_MAIL_FROM ?? null);
-        $this->changeEnvironmentVariable('SHOP_MAIL_FROM', $SHOP_MAIL_FROM);
+        $this->changeEnvironmentVariable('SHOP_MAIL_FROM', $SHOP_MAIL_FROM ?? null);
 
         $ADMIN_MAIL_TO = $this->ask('[KEY = "ADMIN_MAIL_TO"] Enter ADMIN_MAIL_TO?');
         $this->comment($ADMIN_MAIL_TO ?? null);
-        $this->changeEnvironmentVariable('ADMIN_MAIL_TO', $ADMIN_MAIL_TO);
+        $this->changeEnvironmentVariable('ADMIN_MAIL_TO', $ADMIN_MAIL_TO ?? null);
 
-        $this->info('We are done setting all the configuration in the env file, now we will proceed by running the commands necessary for Bagisto');
-
-        \Artisan::call('config:cache');
+        $this->line('We are done setting all the configuration in the env file, now we will proceed by running the commands necessary for Bagisto');
 
         $this->info('Running migrations...');
+
+        \Artisan::call('key:generate');
 
         \Artisan::call('migrate');
 
@@ -160,13 +160,16 @@ class BagistoInstall extends Command
 
         $this->info('Installation completed.');
 
-        $this->info('Please write us: SUPPORT@BAGISTO.COM');
+        $this->Line('Please write us: SUPPORT@BAGISTO.COM');
 
-        $this->info('Thank you!!!');
+        $this->Line('Thank you!!!');
     }
 
     public static function changeEnvironmentVariable($key, $value)
     {
+
+        \Artisan::call('config:cache');
+
         $path = base_path('.env');
 
         if (file_exists($path)) {
@@ -177,5 +180,7 @@ class BagistoInstall extends Command
                 file_get_contents($path)
             ));
         }
+
+        \Artisan::call('config:cache');
     }
 }
