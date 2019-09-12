@@ -34,7 +34,7 @@ class OrderDataGrid extends DataGrid
 
         $this->addFilter('billed_to', DB::raw('CONCAT(order_address_billing.first_name, " ", order_address_billing.last_name)'));
         $this->addFilter('shipped_to', DB::raw('CONCAT(order_address_shipping.first_name, " ", order_address_shipping.last_name)'));
-        $this->addFilter('id', 'orders.id');
+        $this->addFilter('increment_id', 'orders.increment_id');
         $this->addFilter('created_at', 'orders.created_at');
 
         $this->setQueryBuilder($queryBuilder);
@@ -45,7 +45,7 @@ class OrderDataGrid extends DataGrid
         $this->addColumn([
             'index' => 'increment_id',
             'label' => trans('admin::app.datagrid.id'),
-            'type' => 'number',
+            'type' => 'string',
             'searchable' => false,
             'sortable' => true,
             'filterable' => true
