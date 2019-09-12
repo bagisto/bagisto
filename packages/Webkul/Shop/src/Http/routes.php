@@ -210,6 +210,12 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
                 Route::post('profile/edit', 'Webkul\Customer\Http\Controllers\CustomerController@update')->defaults('_config', [
                     'redirect' => 'customer.profile.index'
                 ])->name('customer.profile.edit');
+
+                //Customer Profile Delete Form Store
+                Route::post('profile/destroy', 'Webkul\Customer\Http\Controllers\CustomerController@destroy')->defaults('_config', [
+                    'redirect' => 'customer.profile.index'
+                ])->name('customer.profile.destroy');
+
                 /*  Profile Routes Ends Here  */
 
                 /*    Routes for Addresses   */

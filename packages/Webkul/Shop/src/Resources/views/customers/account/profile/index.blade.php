@@ -67,6 +67,18 @@
             </table>
         </div>
 
+        <accordian :title="'{{ __('shop::app.customer.account.profile.index.title') }}'" :active="true">
+            <div slot="body">
+                <div class="page-action">
+                    <form method="POST" action="{{ route('customer.profile.destroy') }}">
+                        @csrf
+                        <input type="submit" class="btn btn-lg btn-primary mt-10" value="Delete">
+                    </form>
+                </div>
+
+            </div>
+        </accordian>
+
          {!! view_render_event('bagisto.shop.customers.account.profile.view.after', ['customer' => $customer]) !!}
     </div>
 </div>
