@@ -113,10 +113,20 @@ abstract class Payment
     /**
      * Returns payment method sort order
      *
-     * @return array
+     * @return int
      */
     public function getSortOrder()
     {
         return $this->getConfigData('sort');
+    }
+
+    /**
+     * Returns default payment method.
+     *
+     * @return boolean
+     */
+    public function getDefaultMethod()
+    {
+        return $this->getConfigData('default');
     }
 }

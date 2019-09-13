@@ -103,6 +103,8 @@
         var reviewHtml = '';
         var summaryHtml = '';
         var customerAddress = '';
+        var shippingMethods = '';
+        var paymentMethods = '';
 
         @auth('customer')
             @if(auth('customer')->user()->addresses)
@@ -230,6 +232,7 @@
 
                             if (response.data.jump_to_section == 'shipping') {
                                 shippingHtml = Vue.compile(response.data.html)
+                                shippingMethods = response.data.shippingMethods;
                                 this_this.completedStep = 1;
                                 this_this.currentStep = 2;
 
@@ -254,6 +257,7 @@
 
                             if (response.data.jump_to_section == 'payment') {
                                 paymentHtml = Vue.compile(response.data.html)
+                                paymentMethods = response.data.paymentMethods;
                                 this_this.completedStep = 2;
                                 this_this.currentStep = 3;
 
@@ -368,6 +372,16 @@
             staticRenderFns: shippingTemplateRenderFns,
 
             mounted: function() {
+                for (method in shippingMethods) {
+                    if (shippingMethods[method]['default'] == 'yes' || shippingMethods[method]['default'] == 1) {
+                        for (rate in shippingMethods[method]['rates']) {
+                            this.selected_shipping_method = shippingMethods[method]['rates'][rate]['method'];
+
+                            this.methodSelected();
+                        }
+                    }
+                }
+
                 this.templateRender = shippingHtml.render;
                 for (var i in shippingHtml.staticRenderFns) {
                     shippingTemplateRenderFns.push(shippingHtml.staticRenderFns[i]);
@@ -411,8 +425,15 @@
             staticRenderFns: paymentTemplateRenderFns,
 
             mounted: function() {
-                this.templateRender = paymentHtml.render;
+                for (method in paymentMethods) {
+                    if (paymentMethods[method]['default'] == 'yes' || paymentMethods[method]['default'] == 1) {
+                        this.payment.method = paymentMethods[method]['method'];
 
+                        this.methodSelected();
+                    }
+                }
+
+                this.templateRender = paymentHtml.render;
                 for (var i in paymentHtml.staticRenderFns) {
                     paymentTemplateRenderFns.push(paymentHtml.staticRenderFns[i]);
                 }
