@@ -1137,7 +1137,7 @@ return [
             'invoice number prefix' => 'Invoice Number Prefix',
             'invoice number length' => 'Invoice Number Length',
             'invoice number suffix' => 'Invoice Number Suffix',
-
+            'default' => 'Default',
         ]
     ]
 ];
