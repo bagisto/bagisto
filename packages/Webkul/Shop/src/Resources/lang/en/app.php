@@ -117,6 +117,7 @@ return [
             'verified' => 'Your Account Has Been Verified, Try To Login Now',
             'verify-failed' => 'We Cannot Verify Your Mail Account',
             'dont-have-account' => 'You Do Not Have Account With Us',
+            'customer-registration' => 'Customer Registered Successfully'
         ],
 
         'login-text' => [

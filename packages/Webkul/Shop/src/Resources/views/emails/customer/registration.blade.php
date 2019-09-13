@@ -7,20 +7,16 @@
             </a>
         </div>
 
-        <div  style="font-size:16px; color:#242424; font-weight:600; margin-top: 60px; margin-bottom: 15px">
-            Welcome to Bagisto,
-        </div>
-
         <div>
-            Hi {{ $data['first_name'] }},
+            Hi {{ $data['first_name'] }}, <br><br>
 
-            Welcome and thank you for registering at Bagisto!
+            Welcome and thank you for registering at Bagisto!<br><br>
 
-            Your account has now been created successfully and you can login using your email address and password credentials.
+            Your account has now been created successfully and you can login using your email address and password credentials.<br>
 
-            Upon logging in, you will be able to access other services including reviewing past orders, printing invoices and editing your account information.
+            Upon logging in, you will be able to access other services including reviewing past orders, wishlists and editing your account information.<br><br>
 
-            Thanks,
+            Thanks,<br>
             Bagisto
 
         </div>
