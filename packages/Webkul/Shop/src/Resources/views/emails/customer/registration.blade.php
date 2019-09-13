@@ -7,22 +7,25 @@
             </a>
         </div>
 
-        <div>
-            Hi {{ $data['first_name'] }}, <br><br>
 
-            Welcome and thank you for registering at Bagisto!<br><br>
+        <div style="padding: 30px;">
+            <div style="font-size: 20px;color: #242424;line-height: 30px;margin-bottom: 34px;">
+                <p style="font-weight: bold;font-size: 20px;color: #242424;line-height: 24px;">
+                    {{ __('shop::app.mail.customer.registration.dear', ['customer_name' => $data['first_name']. ' ' .$data['last_name']]) }},
+                </p>
 
-            Your account has now been created successfully and you can login using your email address and password credentials.<br>
+                <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
+                    {!! __('shop::app.mail.customer.registration.greeting') !!}
+                </p>
+            </div>
 
-            Upon logging in, you will be able to access other services including reviewing past orders, wishlists and editing your account information.<br><br>
+            <div style="font-size: 16px;color: #5E5E5E;line-height: 30px;margin-bottom: 20px !important;">
+                {{ __('shop::app.mail.customer.registration.summary') }}
+            </div>
 
-            Thanks,<br>
-            Bagisto
-
-        </div>
-
-        <div  style="margin-top: 40px; text-align: center">
-
+            <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
+                {{ __('shop::app.mail.customer.registration.thanks') }}
+            </p>
         </div>
     </div>
 

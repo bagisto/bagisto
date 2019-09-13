@@ -32,7 +32,7 @@ class RegistrationEmail extends Mailable
     {
        return $this->to($this->data['email'])
                 ->from(env('SHOP_MAIL_FROM'))
-                ->subject(trans('shop::app.customer.signup-form.customer-registration'))
+                ->subject(trans('shop::app.mail.customer.registration.customer-registration'))
                 ->view('shop::emails.customer.registration')->with('data', $this->data);
     }
 }

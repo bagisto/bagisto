@@ -8,15 +8,23 @@
         </div>
 
         <div  style="font-size:16px; color:#242424; font-weight:600; margin-top: 60px; margin-bottom: 15px">
-            Hi {{ $customer['name'] }}, your new account has been created in bagisto.
-            Your account details are below
+            {{ __('shop::app.mail.customer.new.dear', ['customer_name' => $customer['name']]) }},
+
         </div>
 
         <div>
-            <b>UserName/Email</b> - {{ $customer['email'] }} <br>
-            <b>Password</b> - {{ $password}}
+            {!! __('shop::app.mail.customer.new.summary') !!}
+
         </div>
 
+        <div>
+            <b> {!! __('shop::app.mail.customer.new.username-email') !!} </b> - {{ $customer['email'] }} <br>
+            <b> {!! __('shop::app.mail.customer.new.password') !!} </b> - {{ $password}}
+        </div>
+
+        <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
+            {{ __('shop::app.mail.customer.new.thanks') }}
+        </p>
     </div>
 
 @endcomponent
