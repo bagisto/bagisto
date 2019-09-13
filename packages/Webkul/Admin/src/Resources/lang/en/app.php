@@ -31,6 +31,7 @@ return [
     'channel-based' => 'Channel based',
     'status' => 'Status',
     'select-option' => 'Select option',
+    'category' => 'Category',
 
     'common' => [
         'no-result-found' => 'We could not find any records.',

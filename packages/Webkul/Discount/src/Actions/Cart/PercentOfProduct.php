@@ -30,7 +30,7 @@ class PercentOfProduct extends Action
 
                     foreach ($matchIDs as $matchID) {
                         foreach ($eligibleItems as $item) {
-                            if ($item->child ? $item->child->product_id : $item->product_id == $matchID) {
+                            if (($item->child ? $item->child->product_id : $item->product_id) == $matchID) {
                                 return true;
                             }
                         }
