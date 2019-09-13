@@ -20,7 +20,7 @@
 
                 <div class="page-action">
                     <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.save') }} {{ __('admin::app.attribute') }}
+                        {{ __('admin::app.save') }} {{ __('admin::app.category') }}
                     </button>
                 </div>
             </div>

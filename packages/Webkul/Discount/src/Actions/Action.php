@@ -26,7 +26,7 @@ abstract class Action
 
             foreach ($items as $item) {
                 foreach ($matchingIDs as $matchingID) {
-                    if ($matchingID == $item->child ? $item->child->product_id : $item->product_id) {
+                    if ($matchingID == ($item->child ? $item->child->product_id : $item->product_id)) {
                         $matchedItems->push($item);
                     }
                 }
