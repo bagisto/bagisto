@@ -1,12 +1,17 @@
+---
+name: "🐛 Bug Report"
+about: 'Report a general library issue.'
+---
+
 # Bug report
 
 ### Title
-    **Title is a vital part of bug report for developer and triager to quickly identify a unique issue.**
+    **Just a quick sentence to brief your trouble with Bagisto or something associated with it.**
 
-    A well written title should contain a clear, brief explanation of the issue, making emphasis on the most important points.
+    Please be calm, short and emaphasize on points.
 
 ### Issue Description
-    **Bug description helps the developer to understand the bug.It describes the problem encountered.**
+    **Description helps the developers to understand the bug. It describes the problem encountered or some after effect of some kind.**
 
 ### Preconditions
     **Please provide as detailed information about your environment as possible.**

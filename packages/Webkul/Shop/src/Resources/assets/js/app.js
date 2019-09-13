@@ -14,7 +14,6 @@ Vue.component("image-slider", require("./components/image-slider.vue"));
 Vue.component("vue-slider", require("vue-slider-component"));
 
 $(document).ready(function () {
-
     const app = new Vue({
         el: "#app",
 

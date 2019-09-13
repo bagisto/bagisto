@@ -152,6 +152,10 @@
                     this.new_shipping_address = true;
                     this.new_billing_address = true;
                 } else {
+                    this.address.billing.first_name = this.address.shipping.first_name = customerAddress.first_name;
+                    this.address.billing.last_name = this.address.shipping.last_name = customerAddress.last_name;
+                    this.address.billing.email = this.address.shipping.email = customerAddress.email;
+
                     if (customerAddress.length < 1) {
                         this.new_shipping_address = true;
                         this.new_billing_address = true;

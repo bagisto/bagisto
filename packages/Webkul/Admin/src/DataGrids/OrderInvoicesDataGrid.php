@@ -19,7 +19,14 @@ class OrderInvoicesDataGrid extends DataGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('invoices')->select('id', 'order_id', 'state', 'base_grand_total', 'created_at');
+        $queryBuilder = DB::table('invoices')
+                        ->leftJoin('orders as ors', 'invoices.order_id', '=', 'ors.id')
+                        ->select('invoices.id as id', 'ors.increment_id as order_id', 'invoices.state as state', 'invoices.base_grand_total as base_grand_total', 'invoices.created_at as created_at');
+
+        $this->addFilter('id', 'invoices.id');
+        $this->addFilter('order_id', 'ors.increment_id');
+        $this->addFilter('base_grand_total', 'invoices.base_grand_total');
+        $this->addFilter('invoices.created_at', 'invoices.created_at');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -38,7 +45,7 @@ class OrderInvoicesDataGrid extends DataGrid
         $this->addColumn([
             'index' => 'order_id',
             'label' => trans('admin::app.datagrid.order-id'),
-            'type' => 'number',
+            'type' => 'string',
             'searchable' => true,
             'sortable' => true,
             'filterable' => true

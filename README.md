@@ -16,7 +16,8 @@
 3. [Requirements](#requirements)
 4. [Installation & Configuration](#installation-and-configuration)
 5. [License](#license)
-6. [Miscellaneous](#miscellaneous)
+6. [Security Vulnerabilities](#security-vulnerabilities)
+7. [Miscellaneous](#miscellaneous)
 
 ### Introduction
 
@@ -176,6 +177,8 @@ password:admin123
 ### License
 Bagisto is a truly opensource E-Commerce framework which will always be free under the [MIT License](https://github.com/bagisto/bagisto/blob/master/LICENSE).
 
+### Security Vulnerabilities
+Please don't disclose security vulnerabilities publicly. If you find any security vulnerability in Bagisto then please write us mail: mailto:support@bagisto.com.
 
 ### Miscellaneous
 
