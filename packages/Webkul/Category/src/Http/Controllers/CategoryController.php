@@ -97,7 +97,7 @@ class CategoryController extends Controller
 
             $result = $categoryTransalation->where('name', request()->input('name'))->get();
 
-            if(count($result) > 0) {
+            if (count($result) > 0) {
                 session()->flash('error', trans('admin::app.response.create-root-failure'));
 
                 return redirect()->back();
@@ -142,7 +142,7 @@ class CategoryController extends Controller
 
             $this->validate(request(), [
                 $locale . '.slug' => ['required', new \Webkul\Core\Contracts\Validations\Slug, function ($attribute, $value, $fail) use ($id) {
-                    if (! $this->category->isSlugUnique($id, $value)) {
+                    if (!$this->category->isSlugUnique($id, $value)) {
                         $fail(trans('admin::app.response.already-taken', ['name' => 'Category']));
                     }
                 }],
@@ -155,7 +155,7 @@ class CategoryController extends Controller
             session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Category']));
 
             return redirect()->route($this->_config['redirect']);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             session()->flash('error', trans($e->getMessage()));
 
             return redirect()->back();
@@ -172,11 +172,11 @@ class CategoryController extends Controller
     {
         $category = $this->category->findOrFail($id);
 
-        if(strtolower($category->name) == "root") {
+        if (strtolower($category->name) == "root") {
             session()->flash('warning', trans('admin::app.response.delete-category-root', ['name' => 'Category']));
         } else {
             try {
-                Event:: fire('catalog.category.delete.before', $id);
+                Event::dispatch('catalog.category.delete.before', $id);
 
                 $this->category->delete($id);
 
@@ -185,7 +185,7 @@ class CategoryController extends Controller
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Category']));
 
                 return response()->json(['message' => true], 200);
-            } catch(\Exception $e) {
+            } catch (\Exception $e) {
                 session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Category']));
             }
         }
@@ -198,7 +198,8 @@ class CategoryController extends Controller
      *
      * @return response \Illuminate\Http\Response
      */
-    public function massDestroy() {
+    public function massDestroy()
+    {
         $suppressFlash = false;
 
         if (request()->isMethod('delete') || request()->isMethod('post')) {
@@ -211,14 +212,14 @@ class CategoryController extends Controller
                     $this->category->delete($value);
 
                     Event::dispatch('catalog.category.delete.after', $value);
-                } catch(\Exception $e) {
+                } catch (\Exception $e) {
                     $suppressFlash = true;
 
                     continue;
                 }
             }
 
-            if (! $suppressFlash)
+            if (!$suppressFlash)
                 session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success'));
             else
                 session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'Attribute Family']));
