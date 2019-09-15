@@ -117,8 +117,8 @@ $data    = array();
         // checking database connection(mysql only)
         if ($_POST["database_connection"] == 'mysql') {
             // Create connection
-            @$conn = new mysqli($_POST["host_name"], $_POST["user_name"], $_POST["user_password"], $_POST["database_name"]);
-
+            @$conn = new mysqli($_POST["host_name"], $_POST["user_name"], $_POST["user_password"], $_POST["database_name"], $_POST['port_name']);
+            
             // check connection
             if ($conn->connect_error) {
                 $errors['database_error'] = $conn->connect_error;

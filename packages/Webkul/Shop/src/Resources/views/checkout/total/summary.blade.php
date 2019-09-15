@@ -25,13 +25,13 @@
     @endif
 
 
-    <div class="item-detail" id="discount-detail" @if ($cart->discount_amount && $cart->discount_amount > 0) style="display: block;" @else style="display: none;" @endif>
+    <div class="item-detail" id="discount-detail" @if ($cart->base_discount_amount && $cart->base_discount_amount > 0) style="display: block;" @else style="display: none;" @endif>
         <label>
             <b>{{ __('shop::app.checkout.total.disc-amount') }}</b>
         </label>
         <label class="right">
             <b id="discount-detail-discount-amount">
-                {{ core()->currency($cart->discount_amount) }}
+                {{ core()->currency($cart->base_discount_amount) }}
             </b>
         </label>
     </div>

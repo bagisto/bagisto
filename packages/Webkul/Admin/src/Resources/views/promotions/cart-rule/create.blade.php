@@ -188,7 +188,7 @@
                                         <!-- Cart Attributes -->
                                         <div class="control-container mt-20" v-for="(condition, index) in conditions_list" :key="index">
                                             <select class="control" name="cart_attributes[]" v-model="conditions_list[index].attribute" title="You Can Make Multiple Selections Here" style="margin-right: 15px; width: 30%;" v-on:change="enableCondition($event, index)">
-                                                <option disabled="disabled">{{ __('admin::app.promotion.select-attribtue', ['attrbibute' => 'Option']) }}</option>
+                                                <option disabled="disabled">{{ __('admin::app.select-option') }}</option>
                                                 <option v-for="(cart_ip, index1) in cart_input" :value="cart_ip.code" :key="index1">@{{ cart_ip.name }}</option>
                                             </select>
 
@@ -199,7 +199,7 @@
 
                                                 <div v-if='conditions_list[index].attribute == "shipping_state"'>
                                                     <select class="control" v-model="conditions_list[index].value">
-                                                        <option disabled="disabled">{{ __('admin::app.promotion.select-attribtue', ['attrbibute' => 'State']) }}</option>
+                                                        <option disabled="disabled">{{ __('admin::app.select-option') }}</option>
                                                         <optgroup v-for='(state, code) in country_and_states.states' :label="code">
                                                             <option v-for="(stateObj, index) in state" :value="stateObj.code">@{{ stateObj.default_name }}</option>
                                                         </optgroup>
@@ -208,7 +208,7 @@
 
                                                 <div v-if='conditions_list[index].attribute == "shipping_country"'>
                                                     <select class="control" v-model="conditions_list[index].value">
-                                                        <option disabled="disabled">{{ __('admin::app.promotion.select-attribtue', ['attrbibute' => 'Country']) }}</option>
+                                                        <option disabled="disabled">{{ __('admin::app.select-option') }}</option>
                                                         <option v-for="(country, index) in country_and_states.countries" :value="country.code">@{{ country.name }}</option>
                                                     </select>
                                                 </div>
@@ -235,7 +235,7 @@
                             <accordian :active="false" title="{{ __('admin::app.promotion.actions') }}">
                                 <div slot="body">
                                     <div class="control-group" :class="[errors.has('action_type') ? 'has-error' : '']">
-                                        <label for="action_type" class="required">{{ __('admin::app.promotion.general-info.apply') }}</label>
+                                        <label for="action_type" class="required">{{ __('admin::app.action') }}</label>
 
                                         <select class="control" name="action_type" v-model="action_type" v-validate="'required'" value="{{ old('action_type') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.apply') }}&quot;" v-on:change="detectApply">
                                             <option v-for="(action, index) in actions" :value="index">@{{ action }}</option>
@@ -247,7 +247,7 @@
                                     <div class="control-group" :class="[errors.has('disc_amount') ? 'has-error' : '']">
                                         <label for="disc_amount" class="required">{{ __('admin::app.promotion.general-info.disc_amt') }}</label>
 
-                                        <input type="number" step="0.5000" class="control" name="disc_amount" v-model="disc_amount" v-validate="'required|min_value:0.0001'" value="{{ old('disc_amount') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_amt') }}&quot;">
+                                        <input type="number" step="0.0001" class="control" name="disc_amount" v-model="disc_amount" v-validate="'required|min_value:0.0001'" value="{{ old('disc_amount') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_amt') }}&quot;">
 
                                         <span class="control-error" v-if="errors.has('disc_amount')">@{{ errors.first('disc_amount') }}</span>
                                     </div>
@@ -402,7 +402,7 @@
                                     @foreach(core()->getAllChannels() as $channel)
                                         @foreach($channel->locales as $locale)
                                             <div class="control-group" :class="[errors.has('label') ? 'has-error' : '']">
-                                                <label for="code"><span class="locale">[{{ $channel->code }} - {{ $locale->code }}]</span></label>
+                                                <label for="code">{{ __('admin::app.label') }}<span class="locale">[{{ $channel->code }} - {{ $locale->code }}]</span></label>
 
                                                 <input type="text" class="control" name="label[{{ $channel->code }}][{{ $locale->code }}]" v-model="label.{{ $channel->code }}.{{ $locale->code }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.label') }}&quot;">
 
@@ -430,25 +430,23 @@
                         name: null,
                         description: null,
                         conditions_list: [],
-                        channels: [],
-                        customer_groups: [],
+                        channels: ['{{ core()->getCurrentChannel()->id }}'],
+                        customer_groups: ['{{ app('Webkul\Customer\Repositories\CustomerGroupRepository')->findOneWhere(["code" => "general"])->id }}'],
                         ends_till: null,
                         starts_from: null,
                         priority: 0,
                         per_customer: 0,
-                        status: null,
-                        use_coupon: null,
+                        status: 0,
+                        use_coupon: 0,
                         auto_generation: false,
                         usage_limit: 0,
 
                         action_type: null,
                         apply: null,
-                        apply_amt: false,
-                        apply_prct: false,
                         apply_to_shipping: 0,
-                        disc_amount: null,
+                        disc_amount: 1,
                         // disc_threshold: null,
-                        disc_quantity: null,
+                        disc_quantity: 1,
                         end_other_rules: 0,
                         coupon_type: null,
                         free_shipping: 0,
@@ -457,8 +455,8 @@
                         match_criteria: 'all_are_true',
 
                         all_attributes: {
-                            'categories' : null,
-                            'attributes' : null
+                            'categories' : [],
+                            'attributes' : []
                         },
 
                         code: null,
@@ -481,7 +479,6 @@
                         conditions: @json($cart_rule[0]).conditions,
                         cart_input: @json($cart_rule[0]).attributes,
                         actions: @json($cart_rule[0]).actions,
-                        conditions_list:[],
                         cart_object: {
                             attribute: [],
                             condition: [],
@@ -547,13 +544,7 @@
                     },
 
                     detectApply() {
-                        if (this.apply == 'percent_of_product' || this.apply == 'buy_a_get_b') {
-                            this.apply_prct = true;
-                            this.apply_amt = false;
-                        } else if (this.apply == 'fixed_amount' || this.apply == 'fixed_amount_cart') {
-                            this.apply_prct = false;
-                            this.apply_amt = true;
-                        }
+                        return;
                     },
 
                     enableCondition(event, index) {
@@ -597,26 +588,25 @@
                     },
 
                     onSubmit: function (e) {
-                        if (this.attribute_values != null || this.category_values != null) {
+                        if (this.attribute_values.length != 0 || this.category_values.length != 0) {
                             for (i in this.attribute_values) {
                                 delete this.attribute_values[i].options;
                             }
 
-                            if (this.category_values != null) {
-                                this.all_attributes.categories = this.category_values;
-                            }
+                            this.all_attributes.categories = this.category_values;
 
                             this.all_attributes.attributes = this.attribute_values;
 
-                            this.all_attributes = JSON.stringify(this.all_attributes);
-                        } else {
-                            this.all_attributes = null;
                         }
 
-                        if (this.conditions_list.length != 0) {
+                        this.all_attributes = JSON.stringify(this.all_attributes);
+
+                        if (this.conditions_list != null && this.conditions_list.length != 0) {
                             this.conditions_list.push({'criteria': this.match_criteria});
 
                             this.all_conditions = JSON.stringify(this.conditions_list);
+
+                            this.conditions_list.pop();
                         }
 
                         this.$validator.validateAll().then(result => {

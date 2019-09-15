@@ -1,6 +1,38 @@
 <?php
 
 return [
+    'save' => 'Save',
+    'create' => 'Create',
+    'update' => 'Update',
+    'delete' => 'Delete',
+    'failed' => 'Failed',
+    'store' => 'Store',
+    'image' => 'Image',
+    'no result' => 'No result',
+    'product' => 'Product',
+    'attribute' => 'Attribute',
+    'actions' => 'Actions',
+    'id' => 'ID',
+    'action' => 'action',
+    'yes' => 'Yes',
+    'no' => 'No',
+    'true' => 'True',
+    'false' => 'False',
+    'apply' => 'Apply',
+    'action' => 'Action',
+    'label' => 'Label',
+    'name' => 'Name',
+    'title' => 'Title',
+    'code' => 'Code',
+    'type' => 'Type',
+    'required' => 'Required',
+    'unique' => 'Unique',
+    'locale-based' => 'Locale based',
+    'channel-based' => 'Channel based',
+    'status' => 'Status',
+    'select-option' => 'Select option',
+    'category' => 'Category',
+
     'common' => [
         'no-result-found' => 'We could not find any records.',
         'country' => 'Country',
@@ -165,7 +197,8 @@ return [
         'ends-till' => 'Ends Till',
         'per-cust' => 'Per Customer',
         'usage-throttle' => 'Usage Times',
-        'for-guest' => 'For Guest'
+        'for-guest' => 'For Guest',
+        'order_number' => 'Order Number'
     ],
 
     'account' => [
@@ -686,12 +719,12 @@ return [
             'image' => 'Image',
             'content' => 'Content',
             'channels' => 'Channel',
-            'created-success' => 'Slider Item Created Successfully',
-            'created-fault' => 'Error In Creating Slider Item',
-            'update-success' => 'Slider Item Successfully Updated',
-            'update-fail' => 'Slider Cannot Be Updated',
-            'delete-success' => 'Cannot Delete The Last Slider Item',
-            'delete-fail' => 'Slider Item Successfully Deleted'
+            'created-success' => 'Slider item created successfully',
+            'created-fault' => 'Error in creating slider item',
+            'update-success' => 'Slider item successfully updated',
+            'update-fail' => 'Slider cannot be updated',
+            'delete-success' => 'Cannot delete last llider item',
+            'delete-fail' => 'Slider item successfully deleted'
         ],
 
         'tax-categories' => [
@@ -827,7 +860,7 @@ return [
         'zero-unlimited' => 'Zero denotes unlimited usage here',
         'catalog-rule' => 'Catalog Rules',
         'cart-rule' => 'Cart Rules',
-        'add-catalog-rule' => 'Add Catalog Rule',
+        'add-catalog-rule' => 'Add Rule',
         'add-cart-rule' => 'Add Cart Rule',
         'edit-cart-rule' => 'Edit Cart Rule',
         'edit-catalog-rule' => 'Edit Catalog Rule',
@@ -850,10 +883,11 @@ return [
         'yes' => 'Yes',
         'no' => 'No',
         'note' => 'Note',
+        'apply' => 'Apply',
         'rule-name' => 'Enter Rule Name',
         'rule-desc' => 'Enter Rule Description',
         'convert-x-note' => 'If this section is left empty, then rule will get applied to all the products in the cart.',
-        'declut' => 'Declutter Rules',
+        'declut' => 'Declutter',
         'processing-done' => 'Rules processing done',
         'declut-success' => 'Catalog rules decluttering successful',
         'declut-failure' => 'Catalog rules decluttering failed',
@@ -914,7 +948,7 @@ return [
             'update-success' => 'Success! rule updated',
             'update-coupon-success' => 'Success! rule updated along with coupon',
             'update-failed' => 'Error! cannot update',
-            'delete-success' => 'Sucess! rule deleted',
+            'delete-success' => 'Success! rule deleted',
             'delete-failed' => 'Error! cannot delete',
             'coupon-applied' => 'Coupon used',
             'coupon-failed' => 'Coupon failed to apply',
@@ -1098,7 +1132,13 @@ return [
             'logo-image' => 'Logo Image',
             'credit-max' => 'Customer Credit Max',
             'credit-max-value' => 'Credit Max Value',
-            'use-credit-max' => 'Use Credit Max'
+            'use-credit-max' => 'Use Credit Max',
+            'invoice-settings' => 'Invoice Settings',
+            'invoiceNumber' => 'Invoice Number Settings',
+            'invoice number prefix' => 'Invoice Number Prefix',
+            'invoice number length' => 'Invoice Number Length',
+            'invoice number suffix' => 'Invoice Number Suffix',
+            'default' => 'Default',
         ]
     ]
 ];

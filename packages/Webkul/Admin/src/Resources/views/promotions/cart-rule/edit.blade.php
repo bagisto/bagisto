@@ -228,7 +228,7 @@
                                                     <option v-for="(condition, index) in conditions.numeric" :value="index" :key="index">@{{ condition }}</option>
                                                 </select>
 
-                                                <input class="control" type="number" step="0.1000" name="cart_attributes[]" v-model="conditions_list[index].value" placeholder="{{ __('admin::app.promotion.enter-attribtue', ['attrbibute' => 'Value']) }}">
+                                                <input class="control" type="number" step="0.1000" name="cart_attributes[]" v-model="conditions_list[index].value">
                                             </div>
 
                                             <span class="icon trash-icon" v-on:click="removeCartAttr(index)"></span>
@@ -242,7 +242,7 @@
                             <accordian :active="false" title="{{ __('admin::app.promotion.actions') }}">
                                 <div slot="body">
                                     <div class="control-group" :class="[errors.has('action_type') ? 'has-error' : '']">
-                                        <label for="action_type" class="required">{{ __('admin::app.promotion.general-info.apply') }}</label>
+                                        <label for="action_type" class="required">{{ __('admin::app.action') }}</label>
 
                                         <select class="control" name="action_type" v-model="action_type" v-validate="'required'" value="{{ old('action_type') }}" data-vv-as="&quot;Apply As&quot;" v-on:change="detectApply">
                                             <option v-for="(action, index) in actions" :value="index">@{{ action }}</option>
@@ -254,21 +254,13 @@
                                     <div class="control-group" :class="[errors.has('disc_amount') ? 'has-error' : '']">
                                         <label for="disc_amount" class="required">{{ __('admin::app.promotion.general-info.disc_amt') }}</label>
 
-                                        <input type="number" step="0.5000" class="control" name="disc_amount" v-model="disc_amount" v-validate="'required|decimal|min_value:0.0001'" value="{{ old('disc_amount') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_amt') }}&quot;">
+                                        <input type="number" step="0.0001" class="control" name="disc_amount" v-model="disc_amount" v-validate="'required|decimal|min_value:0.0001'" value="{{ old('disc_amount') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_amt') }}&quot;">
 
                                         <span class="control-error" v-if="errors.has('disc_amount')">@{{ errors.first('disc_amount') }}</span>
                                     </div>
 
-                                    {{-- <div class="control-group" :class="[errors.has('disc_threshold') ? 'has-error' : '']">
-                                        <label for="disc_threshold" class="required">{{ __('admin::app.promotion.cart.buy-atleast') }}</label>
-
-                                        <input type="number" step="1" class="control" name="disc_threshold" v-model="disc_threshold" v-validate="'required|numeric|min_value:1'" value="{{ old('disc_threshold') }}" data-vv-as="&quot;{{ __('admin::app.promotion.cart.buy-atleast') }}&quot;">
-
-                                        <span class="control-error" v-if="errors.has('disc_threshold')">@{{ errors.first('disc_threshold') }}</span>
-                                    </div> --}}
-
                                     <div class="control-group" :class="[errors.has('disc_quantity') ? 'has-error' : '']">
-                                        <label for="disc_amount" class="required">{{ __('admin::app.promotion.general-info.disc_qty') }}</label>
+                                        <label for="disc_quantity" class="required">{{ __('admin::app.promotion.general-info.disc_qty') }}</label>
 
                                         <input type="number" step="1" class="control" name="disc_quantity" v-model="disc_quantity" v-validate="'required|decimal|min_value:1'" value="{{ old('disc_quantity') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_qty') }}&quot;">
 
@@ -403,9 +395,10 @@
                             <accordian :active="false" :title="'{{ __('admin::app.promotion.general-info.labels') }}'">
                                 <div slot="body">
                                     @foreach($cart_rule[3]->labels as $label)
-                                        <span>[{{ $label->channel->code }}]</span>
                                         <div class="control-group" :class="[errors.has('label') ? 'has-error' : '']">
-                                            <label for="code">{{ $label->locale->code }}</label>
+                                            <label for="code">{{ __('admin::app.label') }}
+                                                <span class="locale">[{{ $label->channel->code }} - {{ $label->locale->code }}]</span>
+                                            </label>
 
                                             <input type="text" class="control" name="label[{{ $label->channel->code }}][{{ $label->locale->code }}]" value="{{ $label->label }}" data-vv-as="&quot;Label&quot;">
 
@@ -443,11 +436,8 @@
 
                         action_type: null,
                         apply: null,
-                        apply_amt: false,
-                        apply_prct: false,
                         apply_to_shipping: null,
                         disc_amount: null,
-                        // disc_threshold: null,
                         disc_quantity: null,
                         end_other_rules: null,
                         coupon_type: null,
@@ -489,9 +479,10 @@
                         country_and_states: @json($cart_rule[2]),
 
                         category_options: @json($cart_rule[1]),
-                        category_values: [],
 
+                        category_values: [],
                         attribute_values: [],
+
                         attr_object: {
                             attribute: null,
                             condition: null,
@@ -504,11 +495,10 @@
 
                 mounted () {
                     data = @json($cart_rule[3]);
+
                     this.name = data.name;
 
                     this.description = data.description;
-
-                    this.conditions_list = [];
 
                     this.channels = [];
 
@@ -556,10 +546,6 @@
 
                     this.apply = null;
 
-                    this.apply_amt = false;
-
-                    this.apply_prct = false;
-
                     this.apply_to_shipping = data.apply_to_shipping;
 
                     this.disc_amount = data.disc_amount;
@@ -576,26 +562,27 @@
 
                     this.all_conditions = null;
 
-                    if (data.conditions != null) {
+                    if (data.hasOwnProperty('conditions') && data.conditions != null) {
                         this.conditions_list = JSON.parse(JSON.parse(data.conditions));
 
                         this.match_criteria = this.conditions_list.pop().criteria;
                     }
 
-                    if (JSON.parse(JSON.parse(data.actions).attribute_conditions)) {
-                        this.category_values = JSON.parse(JSON.parse(data.actions).attribute_conditions).categories;
+                    hasSubSelectionConditions = JSON.parse(data.actions).hasOwnProperty('attribute_conditions');
 
-                        this.attribute_values = JSON.parse(JSON.parse(data.actions).attribute_conditions).attributes;
+                    if (hasSubSelectionConditions) {
 
-                        if (this.category_values == null) {
+                        if (JSON.parse(data.actions).attribute_conditions.hasOwnProperty('categories')) {
+                            this.category_values = JSON.parse(data.actions).attribute_conditions.categories;
+                        } else {
                             this.category_values = [];
                         }
 
-                        if (this.attribute_values == null) {
+                        if (JSON.parse(data.actions).attribute_conditions.hasOwnProperty('attributes')) {
+                            this.attribute_values = JSON.parse(data.actions).attribute_conditions.attributes;
+                        } else {
                             this.attribute_values = [];
                         }
-
-                        console.log(this.category_values);
 
                         // creating options and has option param on the frontend
                         for (i in this.attribute_values) {
@@ -662,13 +649,7 @@
                     },
 
                     detectApply() {
-                        if (this.apply == 'percent_of_product' || this.apply == 'buy_a_get_b') {
-                            this.apply_prct = true;
-                            this.apply_amt = false;
-                        } else if (this.apply == 'fixed_amount' || this.apply == 'fixed_amount_cart') {
-                            this.apply_prct = false;
-                            this.apply_amt = true;
-                        }
+                        return;
                     },
 
                     enableCondition(event, index) {
@@ -716,7 +697,7 @@
                     },
 
                     onSubmit: function (e) {
-                        if (this.attribute_values != null || this.category_values != null) {
+                        if (this.attribute_values.length != 0 || this.category_values.length != 0) {
                             for (i in this.attribute_values) {
                                 delete this.attribute_values[i].options;
                             }
@@ -730,7 +711,7 @@
                             this.all_attributes = null;
                         }
 
-                        if (this.conditions_list != null) {
+                        if (this.conditions_list.length != 0) {
                             this.conditions_list.push({'criteria': this.match_criteria});
 
                             this.all_conditions = JSON.stringify(this.conditions_list);

@@ -26,7 +26,7 @@ abstract class Repository extends BaseRepository {
     public function findOneByField($field, $value = null, $columns = ['*'])
     {
         $model = parent::findByField($field, $value, $columns = ['*']);
-        
+
         return $model->first();
     }
 
@@ -42,7 +42,7 @@ abstract class Repository extends BaseRepository {
     public function findOneWhere(array $where, $columns = ['*'])
     {
         $model = parent::findWhere($where, $columns);
-        
+
         return $model->first();
     }
 

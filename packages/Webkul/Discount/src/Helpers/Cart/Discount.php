@@ -58,11 +58,21 @@ abstract class Discount
      */
     public function getApplicableRules($code = null)
     {
+        $rules = collect();
+
         if ($code != null) {
-            $rules = $this->cartRule->findWhere([
+            $eligibleRules = $this->cartRule->findWhere([
                 'use_coupon' => 1,
                 'status' => 1
             ]);
+
+            foreach($eligibleRules as $rule) {
+                if ($rule->coupons->code == $code) {
+                    $rules->push($rule);
+
+                    break;
+                }
+            }
         } else {
             $rules = $this->cartRule->findWhere([
                 'use_coupon' => 0,
@@ -289,7 +299,7 @@ abstract class Discount
 
         $this->updateCartItemAndCart($rule);
 
-        return;
+        return $rule;
     }
 
     /**
@@ -769,7 +779,11 @@ abstract class Discount
         $result = true;
 
         foreach ($conditions as $condition) {
-            if (! isset($condition->attribute) || ! isset($condition->condition) || !isset($condition->value)) {
+            $result = true;
+
+            if (! isset($condition->attribute) || ! isset($condition->condition) || ! isset($condition->value) || ! isset($condition->type) || ! $condition->value != []) {
+                $result = false;
+
                 continue;
             }
 
@@ -794,55 +808,53 @@ abstract class Discount
                 $result = false;
             }
 
-            if (isset($condition->type) && ($condition->type == 'numeric' || $condition->type == 'string' || $condition->type == 'text')) {
-                if ($condition->type == 'string') {
-                    $actual_value = strtolower($actual_value);
+            if ($condition->type == 'string') {
+                $actual_value = strtolower($actual_value);
 
-                    $test_value = strtolower($test_value);
+                $test_value = strtolower($test_value);
+            }
+
+            if ($test_condition == '=') {
+                if ($actual_value != $test_value) {
+                    $result = false;
+
+                    break;
                 }
+            } else if ($test_condition == '>=') {
+                if (! ($actual_value >= $test_value)) {
+                    $result = false;
 
-                if ($test_condition == '=') {
-                    if ($actual_value != $test_value) {
-                        $result = false;
+                    break;
+                }
+            } else if ($test_condition == '<=') {
+                if (! ($actual_value <= $test_value)) {
+                    $result = false;
 
-                        break;
-                    }
-                } else if ($test_condition == '>=') {
-                    if (! ($actual_value >= $test_value)) {
-                        $result = false;
+                    break;
+                }
+            } else if ($test_condition == '>') {
+                if (! ($actual_value > $test_value)) {
+                    $result = false;
 
-                        break;
-                    }
-                } else if ($test_condition == '<=') {
-                    if (! ($actual_value <= $test_value)) {
-                        $result = false;
+                    break;
+                }
+            } else if ($test_condition == '<') {
+                if (! ($actual_value < $test_value)) {
+                    $result = false;
 
-                        break;
-                    }
-                } else if ($test_condition == '>') {
-                    if (! ($actual_value > $test_value)) {
-                        $result = false;
+                    break;
+                }
+            } else if ($test_condition == '{}') {
+                if (! str_contains($actual_value, $test_value)) {
+                    $result = false;
 
-                        break;
-                    }
-                } else if ($test_condition == '<') {
-                    if (! ($actual_value < $test_value)) {
-                        $result = false;
+                    break;
+                }
+            } else if ($test_condition == '!{}') {
+                if (str_contains($actual_value, $test_value)) {
+                    $result = false;
 
-                        break;
-                    }
-                } else if ($test_condition == '{}') {
-                    if (! str_contains($actual_value, $test_value)) {
-                        $result = false;
-
-                        break;
-                    }
-                } else if ($test_condition == '!{}') {
-                    if (str_contains($actual_value, $test_value)) {
-                        $result = false;
-
-                        break;
-                    }
+                    break;
                 }
             }
         }
@@ -899,7 +911,7 @@ abstract class Discount
         }
 
         foreach ($conditions as $condition) {
-            if (!isset($condition->attribute) || ! isset($condition->condition) || !isset($condition->value)) {
+            if (! isset($condition->attribute) || ! isset($condition->condition) || ! isset($condition->value)) {
                 continue;
             }
 

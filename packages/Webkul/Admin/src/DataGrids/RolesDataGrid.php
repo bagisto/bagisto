@@ -57,14 +57,14 @@ class RolesDataGrid extends DataGrid
 
     public function prepareActions() {
         $this->addAction([
-            'type' => 'Edit',
+            'title' => 'Edit',
             'method' => 'GET', // use GET request only for redirect purposes
             'route' => 'admin.roles.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
-            'type' => 'Delete',
+            'title' => 'Delete',
             'method' => 'POST', // use GET request only for redirect purposes
             'route' => 'admin.roles.delete',
             'icon' => 'icon trash-icon'

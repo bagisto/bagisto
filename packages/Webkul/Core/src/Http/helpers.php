@@ -1,6 +1,6 @@
 <?php
     use Webkul\Core\Core;
-    
+
     if (! function_exists('core')) {
         function core()
         {
@@ -41,7 +41,7 @@
                     $results = array_merge($results, $append);
                 }
             }
-            
+
             return $results;
         }
     }

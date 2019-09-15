@@ -65,14 +65,14 @@ class ChannelDataGrid extends DataGrid
 
     public function prepareActions() {
         $this->addAction([
-            'type' => 'Edit',
+            'title' => 'Edit Channel',
             'method' => 'GET', // use GET request only for redirect purposes
             'route' => 'admin.channels.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
-            'type' => 'Delete',
+            'title' => 'Delete Channel',
             'method' => 'POST', // use GET request only for redirect purposes
             'route' => 'admin.channels.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),

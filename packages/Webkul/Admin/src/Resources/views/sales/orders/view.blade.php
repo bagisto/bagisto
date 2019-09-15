@@ -1,7 +1,7 @@
 @extends('admin::layouts.master')
 
 @section('page_title')
-    {{ __('admin::app.sales.orders.view-title', ['order_id' => $order->id]) }}
+    {{ __('admin::app.sales.orders.view-title', ['order_id' => $order->increment_id]) }}
 @stop
 
 @section('content-wrapper')
@@ -14,7 +14,7 @@
                 <h1>
                     <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
 
-                    {{ __('admin::app.sales.orders.view-title', ['order_id' => $order->id]) }}
+                    {{ __('admin::app.sales.orders.view-title', ['order_id' => $order->increment_id]) }}
                 </h1>
             </div>
 
@@ -312,7 +312,7 @@
                                         <tr>
                                             <td>{{ __('admin::app.sales.orders.discount') }}</td>
                                             <td>-</td>
-                                            <td>-{{ core()->formatBasePrice($order->base_discount_amount) }}</td>
+                                            <td>{{ core()->formatBasePrice($order->base_discount_amount) }}</td>
                                         </tr>
                                     @endif
 
@@ -375,7 +375,7 @@
                                     <tr>
                                         <td>#{{ $invoice->id }}</td>
                                         <td>{{ $invoice->created_at }}</td>
-                                        <td>#{{ $invoice->order->id }}</td>
+                                        <td>#{{ $invoice->order->increment_id }}</td>
                                         <td>{{ $invoice->address->name }}</td>
                                         <td>{{ $invoice->status_label }}</td>
                                         <td>{{ core()->formatBasePrice($invoice->base_grand_total) }}</td>
@@ -419,7 +419,7 @@
                                     <tr>
                                         <td>#{{ $shipment->id }}</td>
                                         <td>{{ $shipment->created_at }}</td>
-                                        <td>#{{ $shipment->order->id }}</td>
+                                        <td>#{{ $shipment->order->increment_id }}</td>
                                         <td>{{ $shipment->order->created_at }}</td>
                                         <td>{{ $shipment->address->name }}</td>
                                         <td>{{ $shipment->total_qty }}</td>

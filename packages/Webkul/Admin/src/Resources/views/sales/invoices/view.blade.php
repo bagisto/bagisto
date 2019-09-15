@@ -43,7 +43,7 @@
                                     </span>
 
                                     <span class="value">
-                                        <a href="{{ route('admin.sales.orders.view', $order->id) }}">#{{ $order->id }}</a>
+                                        <a href="{{ route('admin.sales.orders.view', $order->id) }}">#{{ $order->increment_id }}</a>
                                     </span>
                                 </div>
 
@@ -249,7 +249,7 @@
                                                 <td>{{ core()->formatBasePrice($item->base_discount_amount) }}</td>
                                             @endif
 
-                                            <td>{{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_total + $item->base_tax_amount) }}</td>
+                                            <td>{{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount) }}</td>
                                         </tr>
                                     @endforeach
 
@@ -280,7 +280,7 @@
                                 <tr>
                                     <td>{{ __('admin::app.sales.orders.discount') }}</td>
                                     <td>-</td>
-                                    <td>-{{ core()->formatBasePrice($invoice->base_discount_amount) }}</td>
+                                    <td>{{ core()->formatBasePrice($invoice->base_discount_amount) }}</td>
                                 </tr>
                             @endif
 

@@ -21,7 +21,7 @@ class CartRuleDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('cart_rules')
                 ->select('id')
-                ->addSelect('id', 'name', 'starts_from', 'ends_till', 'priority', 'status', 'end_other_rules', 'action_type', 'disc_quantity', 'disc_threshold', 'use_coupon');
+                ->addSelect('id', 'name', 'status', 'end_other_rules', 'action_type', 'disc_amount', 'use_coupon');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -30,7 +30,7 @@ class CartRuleDataGrid extends DataGrid
     {
         $this->addColumn([
             'index' => 'id',
-            'label' => trans('admin::app.datagrid.id'),
+            'label' => trans('admin::app.id'),
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
@@ -39,7 +39,7 @@ class CartRuleDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'name',
-            'label' => trans('admin::app.datagrid.name'),
+            'label' => trans('admin::app.name'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -47,17 +47,8 @@ class CartRuleDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'priority',
-            'label' => trans('admin::app.datagrid.priority'),
-            'type' => 'number',
-            'searchable' => false,
-            'sortable' => true,
-            'filterable' => true,
-        ]);
-
-        $this->addColumn([
             'index' => 'status',
-            'label' => trans('admin::app.datagrid.status'),
+            'label' => trans('admin::app.status'),
             'type' => 'boolean',
             'searchable' => true,
             'sortable' => true,
@@ -98,17 +89,8 @@ class CartRuleDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'disc_quantity',
-            'label' => 'Quantity',
-            'type' => 'number',
-            'searchable' => false,
-            'sortable' => true,
-            'filterable' => true
-        ]);
-
-        $this->addColumn([
-            'index' => 'disc_threshold',
-            'label' => 'Threshold',
+            'index' => 'disc_amount',
+            'label' => 'Discount Amount',
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
@@ -135,14 +117,14 @@ class CartRuleDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'type' => 'Edit',
+            'title' => 'Edit CartRule',
             'method' => 'GET', //use post only for redirects only
             'route' => 'admin.cart-rule.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
-            'type' => 'Delete',
+            'title' => 'Delete CartRule',
             'method' => 'POST', //use post only for requests other than redirects
             'route' => 'admin.cart-rule.delete',
             'icon' => 'icon trash-icon'

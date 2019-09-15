@@ -1,7 +1,7 @@
 @extends('shop::layouts.master')
 
 @section('page_title')
-    {{ __('shop::app.customer.account.order.view.page-tile', ['order_id' => $order->id]) }}
+    {{ __('shop::app.customer.account.order.view.page-tile', ['order_id' => $order->increment_id]) }}
 @endsection
 
 @section('content-wrapper')
@@ -14,7 +14,7 @@
             <div class="account-head">
                 <span class="back-icon"><a href="{{ route('customer.account.index') }}"><i class="icon icon-menu-back"></i></a></span>
                 <span class="account-heading">
-                    {{ __('shop::app.customer.account.order.view.page-tile', ['order_id' => $order->id]) }}
+                    {{ __('shop::app.customer.account.order.view.page-tile', ['order_id' => $order->increment_id]) }}
                 </span>
                 <span></span>
             </div>
@@ -68,7 +68,14 @@
                                                     <td data-value="{{ __('shop::app.customer.account.order.view.SKU') }}">
                                                         {{ $item->type == 'configurable' ? $item->child->sku : $item->sku }}
                                                     </td>
-                                                    <td data-value="{{ __('shop::app.customer.account.order.view.product-name') }}">{{ $item->name }}</td>
+                                                    <td data-value="{{ __('shop::app.customer.account.order.view.product-name') }}">
+                                                        {{ $item->name }} <br>
+                                                        @if (isset($item['additional']['attributes']))
+                                                            @foreach($item['additional']['attributes'] as  $attribute)
+                                                                <b>{{ $attribute['attribute_name']}}</b> : {{ $attribute['option_label']}} <br>
+                                                            @endforeach
+                                                        @endif
+                                                    </td>
                                                     <td data-value="{{ __('shop::app.customer.account.order.view.price') }}">{{ core()->formatPrice($item->price, $order->order_currency_code) }}</td>
                                                     <td data-value="{{ __('shop::app.customer.account.order.view.item-status') }}">
                                                         <span class="qty-row">
@@ -216,6 +223,14 @@
                                                     <td>-</td>
                                                     <td>{{ core()->formatPrice($invoice->shipping_amount, $order->order_currency_code) }}</td>
                                                 </tr>
+
+                                                @if ($order->base_discount_amount > 0)
+                                                    <tr>
+                                                        <td>{{ __('shop::app.customer.account.order.view.discount') }}</td>
+                                                        <td>-</td>
+                                                        <td>{{ core()->formatPrice($order->discount_amount, $order->order_currency_code) }}</td>
+                                                    </tr>
+                                                @endif
 
                                                 <tr>
                                                     <td>{{ __('shop::app.customer.account.order.view.tax') }}</td>

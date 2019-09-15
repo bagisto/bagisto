@@ -2,7 +2,7 @@
 
 Route::group(['middleware' => ['web']], function () {
     Route::prefix('paypal/standard')->group(function () {
-        
+
         Route::get('/redirect', 'Webkul\Paypal\Http\Controllers\StandardController@redirect')->name('paypal.standard.redirect');
 
         Route::get('/success', 'Webkul\Paypal\Http\Controllers\StandardController@success')->name('paypal.standard.success');

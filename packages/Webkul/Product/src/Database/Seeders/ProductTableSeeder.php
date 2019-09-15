@@ -9,5 +9,6 @@ class ProductTableSeeder extends Seeder
 {
     public function run()
     {
+        dd('running');
     }
 }

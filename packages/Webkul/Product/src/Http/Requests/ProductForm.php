@@ -79,6 +79,12 @@ class ProductForm extends FormRequest
 
         $inputs = $this->all();
 
+        if (isset($inputs['variants'])) {
+            foreach ($inputs['variants'] as $key => $variant) {
+                $this->rules['variants'.'.'.$key.'.'.'sku'] = ['unique:products,sku,' . $key, new \Webkul\Core\Contracts\Validations\Slug];
+            }
+        }
+
         $product = $this->product->find($this->id);
 
         $attributes = $product->attribute_family->custom_attributes;
@@ -130,5 +136,17 @@ class ProductForm extends FormRequest
         }
 
         return $this->rules;
+    }
+
+    /**
+     * Custom message for validation
+     *
+     * @return array
+    */
+    public function messages()
+    {
+        return [
+            'variants.*.sku.unique' => 'The sku has already been taken.',
+        ];
     }
 }

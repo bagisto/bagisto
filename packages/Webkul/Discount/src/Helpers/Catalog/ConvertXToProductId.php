@@ -75,15 +75,13 @@ class ConvertXToProductId
         $this->conditionSymbols = config('pricerules.cart.conditions.symbols');
     }
 
-    public function convertX($attribute_conditions)
+    public function convertX($attributeConditions)
     {
-        $attributeConditions = json_decode(json_decode($attribute_conditions));
+        $categoryValues = $attributeConditions->categories;
 
-        $categoryValues = $attributeConditions->categories ?? null;
+        $attributeValues = $attributeConditions->attributes;
 
-        $attributeValues = $attributeConditions->attributes ?? null;
-
-        if (!isset($categoryValues) && !isset($attributeValues)) {
+        if (! isset($categoryValues) && ! isset($attributeValues)) {
             return false;
         }
 
@@ -115,71 +113,73 @@ class ConvertXToProductId
         $products = collect();
 
         foreach ($attributeOptions as $attributeOption) {
-            $selectedOptions = $attributeOption->value;
+            if (isset($attributeOption->type) && $attributeOption->name != null && $attributeOption->condition != null && $attributeOption->value != [] && $attributeOption->type != null) {
+                $selectedOptions = $attributeOption->value;
 
-            if ($attributeOption->type == 'select' || $attributeOption->type == 'multiselect') {
-                $attribute = $this->attribute->findWhere([
-                    'code' => $attributeOption->attribute
-                ]);
+                if ($attributeOption->type == 'select' || $attributeOption->type == 'multiselect') {
+                    $attribute = $this->attribute->findWhere([
+                        'code' => $attributeOption->attribute
+                    ]);
 
-                $attributeOptions = $attribute->first()->options;
+                    $attributeOptions = $attribute->first()->options;
 
-                $selectedAttributeOptions = collect();
+                    $selectedAttributeOptions = collect();
 
-                foreach ($attributeOptions as $attributeOption) {
-                    foreach ($selectedOptions as $key => $value) {
-                        if ($attributeOption->id == $value) {
-                            $selectedAttributeOptions->push($attributeOption);
+                    foreach ($attributeOptions as $attributeOption) {
+                        foreach ($selectedOptions as $key => $value) {
+                            if ($attributeOption->id == $value) {
+                                $selectedAttributeOptions->push($attributeOption);
+                            }
                         }
                     }
-                }
 
-                foreach ($selectedAttributeOptions as $selectedAttributeOption) {
-                    $typeColumn = $this->pav::$attributeTypeFields[$attribute->first()->type];
+                    foreach ($selectedAttributeOptions as $selectedAttributeOption) {
+                        $typeColumn = $this->pav::$attributeTypeFields[$attribute->first()->type];
 
-                    $pavResults = $this->pav->where(
-                        "{$typeColumn}",
-                        $selectedAttributeOption->id
-                    )->get();
+                        $pavResults = $this->pav->where(
+                            "{$typeColumn}",
+                            $selectedAttributeOption->id
+                        )->get();
 
-                    foreach ($pavResults as $pavResult) {
-                        if ($pavResult->product->type == 'simple')
-                            $products->push($pavResult->product);
+                        foreach ($pavResults as $pavResult) {
+                            if ($pavResult->product->type == 'simple')
+                                $products->push($pavResult->product);
+                        }
                     }
-                }
-            } else {
-                $attribute = $this->attribute->findWhere([
-                    'code' => $attributeOption->attribute
-                ]);
+                } else {
+                    $attribute = $this->attribute->findWhere([
+                        'code' => $attributeOption->attribute
+                    ]);
 
-                $pavValues = $attribute->first();
+                    $pavValues = $attribute->first();
 
-                $selectedAttributeValues = collect();
+                    $selectedAttributeValues = collect();
 
-                if ($attributeOption->attribute == 'sku') {
-                    $testValue = $attributeOption->value;
-                    $testCondition = $attributeOption->condition;
+                    if ($attributeOption->attribute == 'sku') {
+                        $testValue = $attributeOption->value;
+                        $testCondition = $attributeOption->condition;
 
-                    if ($testCondition == '{}') {
-                        $foundProducts = $this->product->findWhere([
-                            ['sku', 'like', '%' . $testValue . '%'],
-                            ['type', '!=', 'configurable']
-                        ])->flatten()->all();
-                    } else if ($testCondition == '!{}') {
-                        $foundProducts = $this->product->findWhere([
-                            ['sku', 'not like', '%' . $testValue . '%'],
-                            ['type', '!=', 'configurable']
-                        ])->flatten()->all();
-                    } else if ($testCondition == '=') {
-                        $foundProducts = $this->product->findWhere([
-                            ['sku', '=', '%' . $testValue . '%'],
-                            ['type', '!=', 'configurable']
-                        ])->flatten()->all();
+                        if ($testCondition == '{}') {
+                            $foundProducts = $this->product->findWhere([
+                                ['sku', 'like', '%' . $testValue . '%'],
+                                ['type', '!=', 'configurable']
+                            ])->flatten()->all();
+                        } else if ($testCondition == '!{}') {
+                            $foundProducts = $this->product->findWhere([
+                                ['sku', 'not like', '%' . $testValue . '%'],
+                                ['type', '!=', 'configurable']
+                            ])->flatten()->all();
+                        } else if ($testCondition == '=') {
+                            $foundProducts = $this->product->findWhere([
+                                ['sku', '=', '%' . $testValue . '%'],
+                                ['type', '!=', 'configurable']
+                            ])->flatten()->all();
+                        }
                     }
-                }
 
-                foreach ($foundProducts as $foundProduct) {
-                    $products->push($foundProduct);
+                    foreach ($foundProducts as $foundProduct) {
+                        $products->push($foundProduct);
+                    }
                 }
             }
         }

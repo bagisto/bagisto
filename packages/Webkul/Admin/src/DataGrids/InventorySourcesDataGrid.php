@@ -56,7 +56,7 @@ class InventorySourcesDataGrid extends DataGrid
         $this->addColumn([
             'index' => 'priority',
             'label' => trans('admin::app.datagrid.priority'),
-            'type' => 'string',
+            'type' => 'number',
             'searchable' => true,
             'sortable' => true,
             'filterable' => true
@@ -80,14 +80,14 @@ class InventorySourcesDataGrid extends DataGrid
 
     public function prepareActions() {
         $this->addAction([
-            'type' => 'Edit',
+            'title' => 'Edit Inventory Source',
             'method' => 'GET', // use GET request only for redirect purposes
             'route' => 'admin.inventory_sources.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
-            'type' => 'Delete',
+            'title' => 'Delete Inventory Source',
             'method' => 'POST', // use GET request only for redirect purposes
             'route' => 'admin.inventory_sources.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'Exchange Rate']),

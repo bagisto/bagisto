@@ -92,14 +92,14 @@ class CustomerReviewDataGrid extends DataGrid
 
     public function prepareActions() {
         $this->addAction([
-            'type' => 'Edit',
+            'title' => 'Edit Customer Review',
             'method' => 'GET', // use GET request only for redirect purposes
             'route' => 'admin.customer.review.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
-            'type' => 'Delete',
+            'title' => 'Delete Customer Review',
             'method' => 'POST', // use GET request only for redirect purposes
             'route' => 'admin.customer.review.delete',
             'icon' => 'icon trash-icon'

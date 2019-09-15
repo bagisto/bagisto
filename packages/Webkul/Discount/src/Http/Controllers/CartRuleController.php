@@ -175,34 +175,27 @@ class CartRuleController extends Controller
         // unset labels
         unset($data['label']);
 
-        // prepare json object from actions
-        if (isset($data['disc_amount']) && $data['action_type'] == config('pricerules.cart.validations.2')) {
+        while (gettype($attribute_conditions) == 'string') {
+            $attribute_conditions = json_decode($attribute_conditions);
+        }
+
+        if (! isset($attribute_conditions) || ! (count($attribute_conditions->categories) || count($attribute_conditions->attributes))) {
+            $data['uses_attribute_conditions'] = 0;
+
             $data['actions'] = [
                 'action_type' => $data['action_type'],
                 'disc_amount' => $data['disc_amount'],
-                'disc_threshold' => $data['disc_threshold']
+                'disc_quantity' => $data['disc_quantity']
             ];
-
-            $data['disc_quantity'] = $data['disc_amount'];
         } else {
-            if (! isset($attribute_conditions) || $attribute_conditions == "[]" || $attribute_conditions == "") {
-                $data['uses_attribute_conditions'] = 0;
+            $data['uses_attribute_conditions'] = 1;
 
-                $data['actions'] = [
-                    'action_type' => $data['action_type'],
-                    'disc_amount' => $data['disc_amount'],
-                    'disc_quantity' => $data['disc_quantity']
-                ];
-            } else {
-                $data['uses_attribute_conditions'] = 1;
-
-                $data['actions'] = [
-                    'action_type' => $data['action_type'],
-                    'disc_amount' => $data['disc_amount'],
-                    'disc_quantity' => $data['disc_quantity'],
-                    'attribute_conditions' => $attribute_conditions
-                ];
-            }
+            $data['actions'] = [
+                'action_type' => $data['action_type'],
+                'disc_amount' => $data['disc_amount'],
+                'disc_quantity' => $data['disc_quantity'],
+                'attribute_conditions' => $attribute_conditions
+            ];
         }
 
         // prepare json object from conditions
@@ -269,12 +262,11 @@ class CartRuleController extends Controller
         //     $coupons['limit'] = $data['usage_limit'];
         // }
 
-
         // create a cart rule
         $ruleCreated = $this->cartRule->create($data);
 
         // can execute convertX here after when the rule is updated
-        if (isset($attribute_conditions) && $attribute_conditions != "[]" && $attribute_conditions != "") {
+        if (isset($attribute_conditions) && $data['uses_attribute_conditions']) {
             $this->convertX->convertX($ruleCreated->id, $attribute_conditions);
         }
 
@@ -413,34 +405,29 @@ class CartRuleController extends Controller
         unset($data['attributes']);
 
         // prepare actions from data for json action
-        if (isset($data['disc_amount']) && $data['action_type'] == config('pricerules.cart.validations.2')) {
+        $attribute_conditions = json_decode($attribute_conditions);
+
+        while (gettype($attribute_conditions) == 'string') {
+            $attribute_conditions = json_decode($attribute_conditions);
+        }
+
+        if (! isset($attribute_conditions) || ! (count($attribute_conditions->categories) || count($attribute_conditions->attributes))) {
+            $data['uses_attribute_conditions'] = 0;
+
             $data['actions'] = [
                 'action_type' => $data['action_type'],
                 'disc_amount' => $data['disc_amount'],
+                'disc_quantity' => $data['disc_quantity']
             ];
-
-            $data['disc_quantity'] = $data['disc_amount'];
         } else {
-            $attribute_conditions = json_decode($attribute_conditions);
+            $data['uses_attribute_conditions'] = 1;
 
-            if (! (isset($attribute_conditions->categories) && count($attribute_conditions->categories)) && ! (isset($attribute_conditions->attributes) && count($attribute_conditions->attributes))) {
-                $data['uses_attribute_conditions'] = 0;
-
-                $data['actions'] = [
-                    'action_type' => $data['action_type'],
-                    'disc_amount' => $data['disc_amount'],
-                    'disc_quantity' => $data['disc_quantity']
-                ];
-            } else {
-                $data['uses_attribute_conditions'] = 1;
-
-                $data['actions'] = [
-                    'action_type' => $data['action_type'],
-                    'disc_amount' => $data['disc_amount'],
-                    'disc_quantity' => $data['disc_quantity'],
-                    'attribute_conditions' => json_encode($attribute_conditions)
-                ];
-            }
+            $data['actions'] = [
+                'action_type' => $data['action_type'],
+                'disc_amount' => $data['disc_amount'],
+                'disc_quantity' => $data['disc_quantity'],
+                'attribute_conditions' => $attribute_conditions
+            ];
         }
 
         // encode php array to json for actions
@@ -564,7 +551,7 @@ class CartRuleController extends Controller
 
             return response()->json(['message' => true], 200);
         } else {
-            session()->flash('success', trans('admin::app.promotion.status.delete-failed'));
+            session()->flash('error', trans('admin::app.promotion.status.delete-failed'));
 
             return response()->json(['message' => false], 400);
         }
