@@ -30,7 +30,7 @@ $(document).ready(function () {
         el: "#app",
 
         data: {
-            modalIds: {},
+            modalIds: {}
         },
 
         mounted: function () {
