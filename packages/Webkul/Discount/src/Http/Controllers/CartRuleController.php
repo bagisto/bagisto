@@ -171,7 +171,9 @@ class CartRuleController extends Controller
         // unset labels
         unset($data['label']);
 
-        $attribute_conditions = json_decode($attribute_conditions);
+        while (gettype($attribute_conditions) == 'string') {
+            $attribute_conditions = json_decode($attribute_conditions);
+        }
 
         if (! isset($attribute_conditions) || ! (count($attribute_conditions->categories) || count($attribute_conditions->attributes))) {
             $data['uses_attribute_conditions'] = 0;
@@ -398,6 +400,10 @@ class CartRuleController extends Controller
 
         // prepare actions from data for json action
         $attribute_conditions = json_decode($attribute_conditions);
+
+        while (gettype($attribute_conditions) == 'string') {
+            $attribute_conditions = json_decode($attribute_conditions);
+        }
 
         if (! isset($attribute_conditions) || ! (count($attribute_conditions->categories) || count($attribute_conditions->attributes))) {
             $data['uses_attribute_conditions'] = 0;

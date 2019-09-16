@@ -587,23 +587,50 @@ abstract class Discount
         foreach ($itemImpacts as $itemImpact) {
             $item = $this->cartItem->findOneWhere(['id' => $itemImpact['item_id']]);
 
-            $item->update([
-                'discount_amount' => core()->convertPrice($itemImpact['discount'], $cart->cart_currency_code),
-                'base_discount_amount' => $itemImpact['discount']
-            ]);
+            if (isset($itemImpact['child_items']) && $itemImpact['child_items']->count()) {
+                foreach ($itemImpact['child_items'] as $child) {
+                    $discount = $child->discount;
 
-            if ($rule->action_type == 'percent_of_product') {
+                    unset($child->discount);
+
+                    $child->update([
+                        'discount_amount' => core()->convertPrice($discount, $cart->cart_currency_code),
+                        'base_discount_amount' => $discount
+                    ]);
+
+                    if ($rule->action_type == 'percent_of_product') {
+                        $child->update([
+                            'discount_percent' => $rule->discount_amount
+                        ]);
+                    }
+
+                    if ($rule->use_coupon) {
+                        $coupon = $rule->coupons->code;
+
+                        $child->update([
+                            'coupon_code' => $coupon
+                        ]);
+                    }
+                }
+            } else {
                 $item->update([
-                    'discount_percent' => $rule->discount_amount
+                    'discount_amount' => core()->convertPrice($itemImpact['discount'], $cart->cart_currency_code),
+                    'base_discount_amount' => $itemImpact['discount']
                 ]);
-            }
 
-            if ($rule->use_coupon) {
-                $coupon = $rule->coupons->code;
+                if ($rule->action_type == 'percent_of_product') {
+                    $item->update([
+                        'discount_percent' => $rule->discount_amount
+                    ]);
+                }
 
-                $item->update([
-                    'coupon_code' => $coupon
-                ]);
+                if ($rule->use_coupon) {
+                    $coupon = $rule->coupons->code;
+
+                    $item->update([
+                        'coupon_code' => $coupon
+                    ]);
+                }
             }
         }
 
