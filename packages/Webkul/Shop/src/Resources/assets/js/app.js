@@ -5,7 +5,19 @@ window.axios = require("axios");
 require("./bootstrap");
 require("ez-plus/src/jquery.ez-plus.js");
 
-Vue.use(VeeValidate);
+const dictionary = {
+    ar: {
+        required: (field) => 'حقل' + field + ' مطلوب',
+        email: (field) => + field + 'يجب ان يكون بريدا اليكتروني صحيح',
+    }
+};
+
+Vue.use(VeeValidate, {
+    dictionary: {
+        ar: { messages: dictionary.ar}
+    }
+});
+
 Vue.prototype.$http = axios
 
 window.eventBus = new Vue();
@@ -18,12 +30,14 @@ $(document).ready(function () {
         el: "#app",
 
         data: {
-            modalIds: {}
+            modalIds: {},
         },
 
         mounted: function () {
             this.addServerErrors();
             this.addFlashMessages();
+
+            this.$validator.localize(document.documentElement.lang);
         },
 
         methods: {
