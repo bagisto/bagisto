@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
+use Webkul\Customer\Mail\RegistrationEmail;
 use Webkul\Customer\Mail\VerificationEmail;
 use Illuminate\Routing\Controller;
 use Webkul\Customer\Repositories\CustomerRepository;
@@ -97,6 +98,15 @@ class RegistrationController extends Controller
                     session()->flash('info', trans('shop::app.customer.signup-form.success-verify-email-unsent'));
                 }
             } else {
+                 try {
+                    Mail::queue(new RegistrationEmail(request()->all()));
+
+                    session()->flash('success', trans('shop::app.customer.signup-form.success-verify')); //customer registered successfully
+                } catch (\Exception $e) {
+                    session()->flash('info', trans('shop::app.customer.signup-form.success-verify-email-unsent'));
+                }
+
+
                 session()->flash('success', trans('shop::app.customer.signup-form.success'));
             }
 
