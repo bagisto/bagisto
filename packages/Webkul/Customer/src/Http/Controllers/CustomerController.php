@@ -134,6 +134,32 @@ class CustomerController extends Controller
     }
 
     /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $id = auth()->guard('customer')->user()->id;
+
+        $customer = $this->customer->findorFail($id);
+
+        try {
+            $this->customer->delete($id);
+
+            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
+
+            return redirect()->route($this->_config['redirect']);
+        } catch(\Exception $e) {
+            session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Customer']));
+
+            return redirect()->route($this->_config['redirect']);
+        }
+    }
+
+
+    /**
      * Load the view for the customer account panel, showing approved reviews.
      *
      * @return Mixed

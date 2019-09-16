@@ -71,9 +71,11 @@
             @endguest
 
             @auth('customer')
-                <a class="btn btn-lg btn-primary" @click = backToSavedBillingAddress()>
-                    {{ __('shop::app.checkout.onepage.back') }}
-                </a>
+                @if(count(auth('customer')->user()->addresses))
+                    <a class="btn btn-lg btn-primary" @click = backToSavedBillingAddress()>
+                        {{ __('shop::app.checkout.onepage.back') }}
+                    </a>
+                @endif
             @endauth
         </div>
 
@@ -293,9 +295,11 @@
             <h1>{{ __('shop::app.checkout.onepage.shipping-address') }}</h1>
 
             @auth('customer')
-                <a class="btn btn-lg btn-primary" @click = backToSavedShippingAddress()>
-                    {{ __('shop::app.checkout.onepage.back') }}
-                </a>
+                @if(count(auth('customer')->user()->addresses))
+                    <a class="btn btn-lg btn-primary" @click = backToSavedShippingAddress()>
+                        {{ __('shop::app.checkout.onepage.back') }}
+                    </a>
+                @endif
             @endauth
         </div>
 
