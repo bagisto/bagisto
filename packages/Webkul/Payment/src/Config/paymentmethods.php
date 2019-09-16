@@ -7,7 +7,7 @@ return [
         'class' => 'Webkul\Payment\Payment\CashOnDelivery',
         'active' => true,
         'sort' => 1,
-        'default' => 'no'
+        'default' => 'yes'
     ],
 
     'moneytransfer' => [
@@ -17,7 +17,7 @@ return [
         'class' => 'Webkul\Payment\Payment\MoneyTransfer',
         'active' => true,
         'sort' => 2,
-        'default' => 'yes'
+        'default' => 'no'
     ],
 
     'paypal_standard' => [
