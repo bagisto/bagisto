@@ -182,7 +182,7 @@ class ConvertXToProductId
                         ])->flatten()->all();
                     } else if ($testCondition == '=') {
                         $foundProducts = $this->product->findWhere([
-                            ['sku', '=', '%'.$testValue.'%'],
+                            ['sku', '=', $testValue],
                             ['type', '!=', 'configurable']
                         ])->flatten()->all();
                     }
