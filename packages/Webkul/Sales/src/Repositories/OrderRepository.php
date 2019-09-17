@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Sales\Contracts\Order;
 use Webkul\Sales\Repositories\OrderItemRepository;
+use Webkul\Core\Models\CoreConfig;
 
 /**
  * Order Reposotory
@@ -143,14 +144,29 @@ class OrderRepository extends Repository
 
     /**
      * @inheritDoc
+     * @return int|string
      */
     public function generateIncrementId()
     {
-        $lastOrder = $this->model->orderBy('id', 'desc')->limit(1)->first();
+        $config = new CoreConfig();
 
+        $invoiceNumberPrefix = $config->where('code','=',"sales.invoiceSettings.invoice_number.invoice_number_prefix")->first()
+            ? $config->where('code','=',"sales.invoiceSettings.invoice_number.invoice_number_prefix")->first()->value : false;
+        $invoiceNumberLength = $config->where('code','=',"sales.invoiceSettings.invoice_number.invoice_number_length")->first()
+            ? $config->where('code','=',"sales.invoiceSettings.invoice_number.invoice_number_length")->first()->value : false;
+        $invoiceNumberSuffix = $config->where('code','=',"sales.invoiceSettings.invoice_number.invoice_number_suffix")->first()
+            ? $config->where('code','=',"sales.invoiceSettings.invoice_number.invoice_number_suffix")->first()->value: false;
+
+        $lastOrder = $this->model->orderBy('id', 'desc')->limit(1)->first();
         $lastId = $lastOrder ? $lastOrder->id : 0;
 
-        return $lastId + 1;
+        if ($invoiceNumberLength && ( $invoiceNumberPrefix || $invoiceNumberSuffix) ) {
+            $invoiceNumber = $invoiceNumberPrefix . sprintf("%0{$invoiceNumberLength}d", 0) . ($lastId + 1) . $invoiceNumberSuffix;
+        } else {
+            $invoiceNumber = $lastId + 1;
+        }
+
+        return $invoiceNumber;
     }
 
     /**

@@ -43,7 +43,14 @@ return [
                 'validation' => 'required',
                 'channel_based' => false,
                 'locale_based' => true
-            ]
+            ], [
+                'name' => 'default',
+                'title' => 'admin::app.admin.system.default',
+                'type' => 'boolean',
+                'validation' => 'required',
+                'channel_based' => false,
+                'locale_based' => true
+            ],
         ]
     ], [
         'key' => 'sales.carriers.flatrate',
@@ -99,7 +106,14 @@ return [
                 'validation' => 'required',
                 'channel_based' => false,
                 'locale_based' => true
-            ]
+            ], [
+                'name' => 'default',
+                'title' => 'admin::app.admin.system.default',
+                'type' => 'boolean',
+                'validation' => 'required',
+                'channel_based' => false,
+                'locale_based' => true
+            ],
         ]
     ], [
         'key' => 'sales.shipping',

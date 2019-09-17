@@ -32,7 +32,7 @@ class SubscriptionEmail extends Mailable
     {
         return $this->to($this->subscriptionData['email'])
                 ->from(env('SHOP_MAIL_FROM'))
-                ->subject('subscription email')
+                ->subject(trans('shop::app.mail.customer.subscription.subject'))
                 ->view('shop::emails.customer.subscription-email')->with('data', ['content' => 'You Are Subscribed', 'token' => $this->subscriptionData['token']]);
     }
 }

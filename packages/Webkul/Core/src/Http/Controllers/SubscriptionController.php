@@ -91,7 +91,7 @@ class SubscriptionController extends Controller
         $subscriber = $this->subscribers->findOrFail($id);
 
         try {
-            $this->subscriber->delete($id);
+            $this->subscribers->delete($id);
 
             session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Subscriber']));
 

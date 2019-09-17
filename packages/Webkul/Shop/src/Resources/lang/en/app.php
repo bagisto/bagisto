@@ -117,6 +117,7 @@ return [
             'verified' => 'Your Account Has Been Verified, Try To Login Now',
             'verify-failed' => 'We Cannot Verify Your Mail Account',
             'dont-have-account' => 'You Do Not Have Account With Us',
+            'customer-registration' => 'Customer Registered Successfully'
         ],
 
         'login-text' => [
@@ -238,7 +239,8 @@ return [
                     'order_id' => 'Order ID',
                     'date' => 'Date',
                     'status' => 'Status',
-                    'total' => 'Total'
+                    'total' => 'Total',
+                    'order_number' => 'Order Number'
                 ],
 
                 'view' => [
@@ -496,7 +498,27 @@ return [
             'grand-total' => 'Grand Total',
             'final-summary' => 'Thanks for showing your interest in our store we will send you tracking number once it shipped',
             'help' => 'If you need any kind of help please contact us at :support_email',
-            'thanks' => 'Thanks!'
+            'thanks' => 'Thanks!',
+            'cancel' => [
+                'subject' => 'Order Cancel Confirmation',
+                'heading' => 'Order Cancelled',
+                'dear' => 'Dear :customer_name',
+                'greeting' => 'You Order with order id #:order_id placed on :created_at has been cancelled',
+                'summary' => 'Summary of Order',
+                'shipping-address' => 'Shipping Address',
+                'billing-address' => 'Billing Address',
+                'contact' => 'Contact',
+                'shipping' => 'Shipping Method',
+                'payment' => 'Payment Method',
+                'subtotal' => 'Subtotal',
+                'shipping-handling' => 'Shipping & Handling',
+                'tax' => 'Tax',
+                'discount' => 'Discount',
+                'grand-total' => 'Grand Total',
+                'final-summary' => 'Thanks for showing your interest in our store',
+                'help' => 'If you need any kind of help please contact us at :support_email',
+                'thanks' => 'Thanks!',
+            ]
         ],
         'invoice' => [
             'heading' => 'Your Invoice #:invoice_id for Order #:order_id',
@@ -522,7 +544,40 @@ return [
             'thanks' => 'Thanks!'
         ],
         'customer' => [
-            'subject' => 'New Customer Registration'
+            'new' => [
+                'dear' => 'Dear :customer_name',
+                'username-email' => 'UserName/Email',
+                'subject' => 'New Customer Registration',
+                'password' => 'Password',
+                'summary' => 'Your account has been created in bagisto.
+                Your account details are below: ',
+                'thanks' => 'Thanks!',
+            ],
+
+            'registration' => [
+                'subject' => 'New Customer Registration',
+                'customer-registration' => 'Customer Registered Successfully',
+                'dear' => 'Dear :customer_name',
+                'greeting' => 'Welcome and thank you for registering at Bagisto!',
+                'summary' => 'Your account has now been created successfully and you can login using your email address and password credentials. Upon logging in, you will be able to access other services including reviewing past orders, wishlists and editing your account information.',
+                'thanks' => 'Thanks!',
+            ],
+
+            'verification' => [
+                'heading' => 'Bagisto - Email Verification',
+                'subject' => 'Verification Mail',
+                'verify' => 'Verify Your Account',
+                'summary' => 'This is the mail to verify that the email address you entered is yours.
+                Kindly click the Verify Your Account button below to verify your account.'
+            ],
+
+            'subscription' => [
+                'subject' => 'Subscription Email',
+                'greeting' => ' Welcome to Bagisto - Email Subscription',
+                'unsubscribe' => 'Unsubscribe',
+                'summary' => 'Thanks for putting me into your inbox. It’s been a while since you’ve read Bagisto email, and we don’t want to overwhelm your inbox. If you still do not want to receive
+                the latest email marketing news then for sure click the button below.'
+            ]
         ]
     ],
 

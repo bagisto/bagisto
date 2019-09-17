@@ -90,7 +90,7 @@
 
                 <div class="row">
                     <span class="label">{{ __('admin::app.sales.invoices.order-id') }} -</span>
-                    <span class="value">#{{ $invoice->order_id }}</span>
+                    <span class="value">#{{ $invoice->order->increment_id }}</span>
                 </div>
 
                 <div class="row">
