@@ -105,9 +105,9 @@ class Ipn
      */
     protected function processOrder()
     {
-        if ($this->post['payment_status'] == 'completed') {
+        if ($this->post['payment_status'] == 'Completed') {
             if ($this->post['mc_gross'] != $this->order->grand_total) {
-                
+
             } else {
                 $this->orderRepository->update(['status' => 'processing'], $this->order->id);
 
