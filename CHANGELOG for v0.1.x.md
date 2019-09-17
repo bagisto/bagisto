@@ -2,6 +2,116 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
+## **v0.1.7(17th of September, 2019)** - *Release*
+
+* [feature] - Added New Product Type - Virtual, Downloadable, Group and Bundle.
+
+* [feature] - Fiterable Attribute for category.
+
+* [feature] - New module CMS added for adding static pages.
+
+* [feature] - Dyanamic event firing in datagrid.
+
+* [enhancement] - Customer should get an email after registration.
+
+* [enhancement] - Customer should receive cancellation mail if his/her order is cancelled by admin.
+
+* [enhancement] - SEO not available for home page.
+
+* [enhancement] - If account is created for customer by admin then customer should received an email that his/her account is created with create password link.
+
+* [enhancement] - Product Flat will not scale.
+
+* #1258 [fixed] - If payment is done through paypal then invoice should generate automatically and status of Order should be processing.
+
+* #1320 [fixed] - Catalog rule is not working according to selected attributes, if category is not selected.
+
+* #1260 [fixed] - Getting broken image link in email.
+
+* #1434 [fixed] - Incorrect discount amount in case of multicurrency.
+
+* #1288 [fixed] - Getting exception while creating cart rules if any of the dropdown field left blank.
+
+* #1381 [fixed] - Filter is not working properly for action type column in cart rule.
+
+* #1348 [fixed] - Showing incorrect grandtotal in invoice section of admin, if order is placed in currency other than base currency.
+
+* #1259 [fixed] - Getting exception if using same sku for variants..
+
+* #1380 [fixed] - Getting error after refreshing the page.
+
+* #1256 [fixed] - Discounted amount is not displaying in invoice and invoice pdf at both customer end and admin end.
+
+* #1411 [fixed] - Getting exception on updating cart rule.
+
+* #1284 [fixed] - Updated price for variant is not reflected on store.
+
+* #1286 [fixed] - Incorrect discount is showing in cart.
+
+* #1382 [fixed] - In case of "Adjust whole cart to percent" discount amount is getting calculated according to price of one product.
+
+* #1415 [fixed] - Wrong discount applies if Action "Adjust whole cart to percent" is selected.
+
+* #1417 [fixed] - Discount amount is showing in "Quantity" column.
+
+* #973 [fixed] - Edit Slider, get wrong with: An invalid form control with name='image[image_0]' is not focusable.
+
+* #1263 [fixed] - For forgot password Submit button should get disabled if user has already clicked on submit button.
+
+* #1379 [fixed] - Cart rule not working in case of non-coupon if any condition is given.
+
+* #1239 [fixed] - Filterable attributes should not display in layered navigation if there are no product in that particular category.
+
+* #1351 [fixed] - Getting exception when assigning the root category to another category.
+
+* #1372 [fixed] - Getting exception if while updating cart rule , if any option is selected from "How to Choose Products?".
+
+* #1375 [fixed] - Wrong discount applied on cart in case of fixed discount.
+
+* #1226 [fixed] - Product variation that has been ordered should display in customer order section in case of configurable product.
+
+* #1391 [fixed] - By default attribute condition gets saved as 1 in db, because of which cart rule not getting applied.
+
+* #1277 [fixed] - Getting exception on creating cart rules.
+
+* #1334 [fixed] - On editing catalog rule data gets removed from Discount Amount field.
+
+* #778 [fixed] - Error when add item to cart.
+
+* #1253 [fixed] - Selected Channel for products get deselected after saving the product.
+
+* #1319 [fixed] - Getting exception when click on Apply rules if conditions are left empty while creating catalog rule.
+
+* #1295 [fixed] - Getting exception on changing the locale from cms page.
+
+* #1233 [fixed] - Got exception on front-end when first time changes the locale ,the changed locale have rtl direction.
+
+* #1235 [fixed] - Attributes are not visible in category page to select as filterable attribute if attributes name are not provided in particular locales.
+
+* #1177 [fixed] - Getting exception when trying to recover password.
+
+* #1228 [fixed] - Getting issue when entering direct url for customer account profile.
+
+* #1229 [fixed] - Issue with currency in customer order section, currency code doesn't get converted at orders page of customer.
+
+* #1234 [fixed] - After selecting direction to filter locale acc to direction no other field appears to select format.
+
+* #1015 [fixed] - Adjust Paginator Number of Elements.
+
+* #968 [fixed] - sorting is not working (price).
+
+* #1190 [fixed] - After printing invoice at customer end, price is not getting change according to currency in invoice.
+
+* #1209 [fixed] - There is an image issue while ordering any variant of configurable product.
+
+* #1217 [fixed] - Layered navigation for price is not working, when click on bar it shifts to rightmost end.Getting this issue in case of configurable product only.
+
+* #1216 [fixed] - Price filter of layered navigation not working properly in case of Multi Currency.
+
+* #1130 [fixed] - If "does not contain" is used in case of Shipping method, then discount amount get implemented before selecting any shipping method.
+
+* #1129 [fixed] - Discount not getting applied if "does not contain" condition is used from Actions for Payment Methods.
+
 ## **v0.1.6(28th of June, 2019)** - *Release*
 
 * [feature] - Cart rules for providing discount with coupons and without coupons.
