@@ -149,6 +149,7 @@ class OrderRepository extends Repository
     public function generateIncrementId()
     {
         $config = new CoreConfig();
+
         $invoiceNumberPrefix = $config->where('code','=',"sales.invoiceSettings.invoice_number.invoice_number_prefix")->first()
             ? $config->where('code','=',"sales.invoiceSettings.invoice_number.invoice_number_prefix")->first()->value : false;
         $invoiceNumberLength = $config->where('code','=',"sales.invoiceSettings.invoice_number.invoice_number_length")->first()
@@ -159,11 +160,9 @@ class OrderRepository extends Repository
         $lastOrder = $this->model->orderBy('id', 'desc')->limit(1)->first();
         $lastId = $lastOrder ? $lastOrder->id : 0;
 
-        if($invoiceNumberLength && ( $invoiceNumberPrefix || $invoiceNumberSuffix) ){
-
-            $invoiceNumber = $invoiceNumberPrefix . sprintf("%0{$invoiceNumberLength}d", $lastId + 1) . $invoiceNumberSuffix;
-        }
-        else{
+        if ($invoiceNumberLength && ( $invoiceNumberPrefix || $invoiceNumberSuffix) ) {
+            $invoiceNumber = $invoiceNumberPrefix . sprintf("%0{$invoiceNumberLength}d", 0) . ($lastId + 1) . $invoiceNumberSuffix;
+        } else {
             $invoiceNumber = $lastId + 1;
         }
 
