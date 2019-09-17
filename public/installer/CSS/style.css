@@ -57,7 +57,8 @@ body {
     border: 1px solid #979797;
     border-radius: 3px;
     width: 600px;
-    height: 392px;
+    min-height: 392px;
+    max-height: 600px;
     margin-left: calc(50% - 300px);
     text-align: left;
     overflow-x: scroll;

@@ -68,8 +68,7 @@
 
                             <div class="control-group" id="user_password">
                                 <label for="user_password" class="required">User Password</label>
-                                <input type="text" name="user_password" class="control"
-                                placeholder="database password">
+                                <input type="password" name="user_password" class="control" placeholder="database password">
                             </div>
                         </div>
                     </div>
@@ -188,7 +187,7 @@
                         $('#database_error').append('<div class="form-error">' + data.errors.database_error + '</div>');
                     }
                 } else {
-                    $('#environment').hide();
+                    $('#environment').hide();                    
                     $('#migration').show();
                 }
             });

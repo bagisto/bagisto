@@ -1,12 +1,10 @@
 <html>
-
     <body>
-
         <div class="container admin" id="admin">
             <div class="initial-display">
                 <p>Admin Details</p>
 
-                <form action="AdminConfig.php"  method= "POST" id="admin-form">
+                <form action="AdminConfig.php" method= "POST" id="admin-form">
                     <div class="content">
                         <div class="form-container" style="padding: 10%; padding-top: 35px">
                             <div class="control-group" id="admin_name">
@@ -41,9 +39,7 @@
 
             </div>
         </div>
-
     </body>
-
 </html>
 
 <script>
@@ -114,12 +110,12 @@
                         result = confirm(data['support_error']);
                         if (result) {
                             $('#admin').hide();
-                            $('#finish').show();
+                            $('#email').show();
                         }
                     }
                     if (!data['connection'] && !data['insert_fail'] && !data['support_error']) {
                         $('#admin').hide();
-                        $('#finish').show();
+                        $('#email').show();
                     }
                 }
             });

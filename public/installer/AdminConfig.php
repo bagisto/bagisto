@@ -42,7 +42,7 @@ $data    = array();
 
         // reading env content
         $data = file($envFile);
-        $databaseArray = ['DB_HOST', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD', 'DB_CONNECTION'];
+        $databaseArray = ['DB_HOST', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD', 'DB_CONNECTION', 'DB_PORT'];
         $key = $value = [];
 
         if ($data) {
@@ -67,10 +67,11 @@ $data    = array();
         $password   = $databaseData['DB_PASSWORD'];
         $dbname     = $databaseData['DB_DATABASE'];
         $connection = $databaseData['DB_CONNECTION'];
+        $port       = $databaseData['DB_PORT'];
 
         if ($connection == 'mysql' ) {
             // Create connection
-            @$conn = new mysqli($servername, $username, $password, $dbname);
+            @$conn = new mysqli($servername, $username, $password, $dbname, (int)$port);
 
             // check connection
             if ($conn->connect_error) {

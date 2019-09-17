@@ -4,11 +4,12 @@
 
         <div class="container finish" id="finish">
             <div class="initial-display">
-                <p>Finish Installment</p>
+                <p>Installation completed</p>
                 <div class="content">
                     <div class="content-container" style="padding: 20px">
                         <span>
-                            Bagisto is successfully installed on your system. Click the below button to launch Admin Panel.
+                            Bagisto is successfully installed on your system.<br>
+                            Click the button below to enter the administrator interface.
                         </span>
                     </div>
                 </div>
