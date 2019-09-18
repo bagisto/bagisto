@@ -201,10 +201,8 @@ class InvoiceRepository extends Repository
 
         if ($invoice->order->shipping_amount) {
             foreach ($invoice->order->invoices as $prevInvoice) {
-                if ((float) $prevInvoice->shipping_amount) {
-                    $shippingAmount = 0;
-                    $baseShippingAmount = 0;
-                }
+                if ((float) $prevInvoice->shipping_amount)
+                    $shippingAmount = $baseShippingAmount = 0;
             }
         }
 

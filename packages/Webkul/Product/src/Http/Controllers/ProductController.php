@@ -129,7 +129,7 @@ class ProductController extends Controller
      */
     public function store()
     {
-        if (!request()->get('family') && request()->input('type') == 'configurable' && request()->input('sku') != '') {
+        if (! request()->get('family') && request()->input('type') == 'configurable' && request()->input('sku') != '') {
             return redirect(url()->current() . '?family=' . request()->input('attribute_family_id') . '&sku=' . request()->input('sku'));
         }
 

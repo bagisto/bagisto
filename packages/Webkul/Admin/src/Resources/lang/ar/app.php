@@ -146,6 +146,7 @@ return [
         'role' => 'الدور',
         'sub-total' => 'المجموع الفرعي',
         'no-of-products' => 'عدد المنتجات',
+        'refunded' => 'Refunded'
     ],
     'account' => [
         'title' => 'حسابي',
@@ -262,6 +263,7 @@ return [
             'item-invoice' => '3-الفواتير (:qty_invoiced)',
             'item-shipped' => 'شحنت (:qty_shipped)',
             'item-canceled' => 'ملغاة (:qty_canceled)',
+            'item-refunded' => 'Refunded (:qty_refunded)',
             'price' => 'Price',
             'total' => 'المجموع',
             'subtotal' => 'المجموع الفرعي',
@@ -276,7 +278,9 @@ return [
             'total-paid' => 'المجموع المدفوع',
             'total-refunded' => 'مجموع المبالغ المستردة',
             'total-due' => 'المجموع المستحق',
-            'cancel-confirm-msg' => 'هل أنت متأكد من أنك تريد إلغاء هذا الطلب ؟'
+            'cancel-confirm-msg' => 'هل أنت متأكد من أنك تريد إلغاء هذا الطلب ؟',
+            'refunds' => 'Refunds',
+            'refunded' => 'Refunded'
         ],
         'invoices' => [
             'title' => 'الفواتير',
@@ -301,6 +305,7 @@ return [
             'creation-error' => 'لا يسمح بإنشاء الفواتير.',
             'product-error' => 'ولا يمكن إعداد الفاتورة بدون منتجات.'
         ],
+
         'shipments' => [
             'title' => 'الشحنات',
             'id' => 'Id',
@@ -325,6 +330,27 @@ return [
             'creation-error' => 'لا يمكن إنشاء الشحنة لهذا الطلب.',
             'order-error' => 'لا يسمح بإنشاء شحنة الطلب.',
             'quantity-invalid' => 'الكمية المطلوبة غير صالحة أو غير متاحة.',
+        ],
+
+        'refunds' => [
+            'title' => 'Refunds',
+            'id' => 'Id',
+            'add-title' => 'Create Refund',
+            'save-btn-title' => 'Refund',
+            'order-id' => 'Order Id',
+            'qty-ordered' => 'Qty Ordered',
+            'qty-to-refund' => 'Qty To Refund',
+            'refund-shipping' => 'Refund Shipping',
+            'adjustment-refund' => 'Adjustment Refund',
+            'adjustment-fee' => 'Adjustment Fee',
+            'update-qty' => 'Update Quantities',
+            'invalid-qty' => 'Found invalid quantity for return items.',
+            'refund-limit-error' => 'The most money available to refund is :amount.',
+            'refunded' => 'Refunded',
+            'date' => 'Refund Date',
+            'customer-name' => 'Customer Name',
+            'status' => 'Status',
+            'action' => 'Action'
         ]
     ],
     'catalog' => [
