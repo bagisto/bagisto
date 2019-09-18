@@ -275,7 +275,11 @@ return [
                     'order-date' => 'تاريخ الطلب',
                     'bill-to' => 'بيل إلى',
                     'ship-to' => 'السفينة إلى',
-                    'contact' => 'Contact'
+                    'contact' => 'Contact',
+                    'refunds' => 'Refunds',
+                    'individual-refund' => 'Refund #:refund_id',
+                    'adjustment-refund' => 'Adjustment Refund',
+                    'adjustment-fee' => 'Adjustment Fee',
                 ]
             ],
 
