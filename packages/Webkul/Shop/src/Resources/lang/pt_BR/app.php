@@ -11,7 +11,8 @@ return [
     ],
 
     'common' => [
-        'error' => 'Algo deu errado, por favor, tente novamente mais tarde.'
+        'error' => 'Algo deu errado, por favor, tente novamente mais tarde.',
+        'no-result-found' => 'We could not find any records.'
     ],
 
     'home' => [

@@ -475,7 +475,7 @@
                                         <td>{{ $refund->created_at }}</td>
                                         <td>#{{ $refund->order->id }}</td>
                                         <td>{{ $refund->order->customer_full_name }}</td>
-                                        <td>{{ $refund->status_label }}</td>
+                                        <td>{{ __('admin::app.sales.refunds.refunded') }}</td>
                                         <td>{{ core()->formatBasePrice($refund->base_grand_total) }}</td>
                                         <td class="action">
                                             <a href="{{ route('admin.sales.refunds.view', $refund->id) }}">

@@ -14,7 +14,8 @@ return [
     ],
 
     'common' => [
-        'error' => 'Something went wrong, please try again later.'
+        'error' => 'Something went wrong, please try again later.',
+        'no-result-found' => 'We could not find any records.'
     ],
 
     'home' => [

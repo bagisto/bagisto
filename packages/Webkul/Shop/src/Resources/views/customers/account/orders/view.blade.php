@@ -340,6 +340,12 @@
                                                             <td data-value="{{ __('shop::app.customer.account.order.view.grand-total') }}">{{ core()->formatPrice($item->total + $item->tax_amount, $order->order_currency_code) }}</td>
                                                         </tr>
                                                     @endforeach
+
+                                                    @if (! $refund->items->count())
+                                                        <tr>
+                                                            <td class="empty" colspan="7">{{ __('admin::app.common.no-result-found') }}</td>
+                                                        <tr>
+                                                    @endif
                                                 </tbody>
                                             </table>
                                         </div>

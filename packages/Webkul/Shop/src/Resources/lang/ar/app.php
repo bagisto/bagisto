@@ -11,7 +11,8 @@ return [
     ],
 
     'common' => [
-        'error' => 'حدث شيء خاطئ ، رجاء حاول ثانية لاحقا.'
+        'error' => 'حدث شيء خاطئ ، رجاء حاول ثانية لاحقا.',
+        'no-result-found' => 'We could not find any records.'
     ],
 
     'home' => [
