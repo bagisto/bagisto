@@ -4,8 +4,6 @@
 
 ## **v0.1.7(17th of September, 2019)** - *Release*
 
-* [feature] - Added New Product Type - Virtual, Downloadable, Group and Bundle.
-
 * [feature] - Fiterable Attribute for category.
 
 * [feature] - New module CMS added for adding static pages.
