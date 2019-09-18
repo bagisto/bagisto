@@ -277,7 +277,11 @@ return [
                     'order-date' => 'Pedido Date',
                     'bill-to' => 'Cobrança de',
                     'ship-to' => 'Enviar para',
-                    'contact' => 'Contato'
+                    'contact' => 'Contato',
+                    'refunds' => 'Refunds',
+                    'individual-refund' => 'Refund #:refund_id',
+                    'adjustment-refund' => 'Adjustment Refund',
+                    'adjustment-fee' => 'Adjustment Fee',
                 ]
             ],
 
