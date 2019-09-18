@@ -14,7 +14,8 @@ return [
     ],
 
     'common' => [
-        'error' => 'مشکلی رخ داده است. لطفا بعدا دوباره امتحان کنید.'
+        'error' => 'مشکلی رخ داده است. لطفا بعدا دوباره امتحان کنید.',
+        'no-result-found' => 'We could not find any records.'
     ],
 
     'home' => [
