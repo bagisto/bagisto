@@ -11,7 +11,8 @@ return [
     ],
 
     'common' => [
-        'error' => 'Algo deu errado, por favor, tente novamente mais tarde.'
+        'error' => 'Algo deu errado, por favor, tente novamente mais tarde.',
+        'no-result-found' => 'We could not find any records.'
     ],
 
     'home' => [
@@ -251,6 +252,7 @@ return [
                     'item-invoice' => 'Faturados (:qty_invoiced)',
                     'item-shipped' => 'enviados (:qty_shipped)',
                     'item-canceled' => 'Cancelados (:qty_canceled)',
+                    'item-refunded' => 'Refunded (:qty_refunded)',
                     'price' => 'Preço',
                     'total' => 'Total',
                     'subtotal' => 'Subtotal',
@@ -276,7 +278,11 @@ return [
                     'order-date' => 'Pedido Date',
                     'bill-to' => 'Cobrança de',
                     'ship-to' => 'Enviar para',
-                    'contact' => 'Contato'
+                    'contact' => 'Contato',
+                    'refunds' => 'Refunds',
+                    'individual-refund' => 'Refund #:refund_id',
+                    'adjustment-refund' => 'Adjustment Refund',
+                    'adjustment-fee' => 'Adjustment Fee',
                 ]
             ],
 

@@ -14,7 +14,8 @@ return [
     ],
 
     'common' => [
-        'error' => 'Something went wrong, please try again later.'
+        'error' => 'Something went wrong, please try again later.',
+        'no-result-found' => 'We could not find any records.'
     ],
 
     'home' => [
@@ -117,6 +118,7 @@ return [
             'verified' => 'Your Account Has Been Verified, Try To Login Now',
             'verify-failed' => 'We Cannot Verify Your Mail Account',
             'dont-have-account' => 'You Do Not Have Account With Us',
+            'customer-registration' => 'Customer Registered Successfully'
         ],
 
         'login-text' => [
@@ -257,6 +259,7 @@ return [
                     'item-invoice' => 'Invoiced (:qty_invoiced)',
                     'item-shipped' => 'shipped (:qty_shipped)',
                     'item-canceled' => 'Canceled (:qty_canceled)',
+                    'item-refunded' => 'Refunded (:qty_refunded)',
                     'price' => 'Price',
                     'total' => 'Total',
                     'subtotal' => 'Subtotal',
@@ -282,7 +285,11 @@ return [
                     'order-date' => 'Order Date',
                     'bill-to' => 'Bill to',
                     'ship-to' => 'Ship to',
-                    'contact' => 'Contact'
+                    'contact' => 'Contact',
+                    'refunds' => 'Refunds',
+                    'individual-refund' => 'Refund #:refund_id',
+                    'adjustment-refund' => 'Adjustment Refund',
+                    'adjustment-fee' => 'Adjustment Fee',
                 ]
             ],
 
@@ -543,7 +550,40 @@ return [
             'thanks' => 'Thanks!'
         ],
         'customer' => [
-            'subject' => 'New Customer Registration'
+            'new' => [
+                'dear' => 'Dear :customer_name',
+                'username-email' => 'UserName/Email',
+                'subject' => 'New Customer Registration',
+                'password' => 'Password',
+                'summary' => 'Your account has been created in bagisto.
+                Your account details are below: ',
+                'thanks' => 'Thanks!',
+            ],
+
+            'registration' => [
+                'subject' => 'New Customer Registration',
+                'customer-registration' => 'Customer Registered Successfully',
+                'dear' => 'Dear :customer_name',
+                'greeting' => 'Welcome and thank you for registering at Bagisto!',
+                'summary' => 'Your account has now been created successfully and you can login using your email address and password credentials. Upon logging in, you will be able to access other services including reviewing past orders, wishlists and editing your account information.',
+                'thanks' => 'Thanks!',
+            ],
+
+            'verification' => [
+                'heading' => 'Bagisto - Email Verification',
+                'subject' => 'Verification Mail',
+                'verify' => 'Verify Your Account',
+                'summary' => 'This is the mail to verify that the email address you entered is yours.
+                Kindly click the Verify Your Account button below to verify your account.'
+            ],
+
+            'subscription' => [
+                'subject' => 'Subscription Email',
+                'greeting' => ' Welcome to Bagisto - Email Subscription',
+                'unsubscribe' => 'Unsubscribe',
+                'summary' => 'Thanks for putting me into your inbox. It’s been a while since you’ve read Bagisto email, and we don’t want to overwhelm your inbox. If you still do not want to receive
+                the latest email marketing news then for sure click the button below.'
+            ]
         ]
     ],
 
