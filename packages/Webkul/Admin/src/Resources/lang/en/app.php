@@ -49,6 +49,7 @@ return [
         'orders' => 'Orders',
         'shipments' => 'Shipments',
         'invoices' => 'Invoices',
+        'refunds' => 'Refunds',
         'catalog' => 'Catalog',
         'products' => 'Products',
         'categories' => 'Categories',
@@ -130,7 +131,7 @@ return [
         'order-count' => ':count Orders',
         'revenue' => 'Revenue :total',
         'stock-threshold' => 'Stock Threshold',
-        'qty-left' => ':qty Left',
+        'qty-left' => ':qty Left'
     ],
 
     'datagrid' => [
@@ -197,7 +198,9 @@ return [
         'per-cust' => 'Per Customer',
         'usage-throttle' => 'Usage Times',
         'for-guest' => 'For Guest',
-        'order_number' => 'Order Number'
+        'order_number' => 'Order Number',
+        'refund-date' => 'Refund Date',
+        'refunded' => 'Refunded'
     ],
 
     'account' => [
@@ -320,6 +323,7 @@ return [
             'item-invoice' => 'Invoiced (:qty_invoiced)',
             'item-shipped' => 'shipped (:qty_shipped)',
             'item-canceled' => 'Canceled (:qty_canceled)',
+            'item-refunded' => 'Refunded (:qty_refunded)',
             'price' => 'Price',
             'total' => 'Total',
             'subtotal' => 'Subtotal',
@@ -334,7 +338,9 @@ return [
             'total-paid' => 'Total Paid',
             'total-refunded' => 'Total Refunded',
             'total-due' => 'Total Due',
-            'cancel-confirm-msg' => 'Are you sure you want to cancel this order ?'
+            'cancel-confirm-msg' => 'Are you sure you want to cancel this order ?',
+            'refund-btn-title' => 'Refund',
+            'refunds' => 'Refunds'
         ],
 
         'invoices' => [
@@ -385,6 +391,28 @@ return [
             'creation-error' => 'Shipment can not be created for this order.',
             'order-error' => 'Order shipment creation is not allowed.',
             'quantity-invalid' => 'Requested quantity is invalid or not available.',
+        ],
+
+        'refunds' => [
+            'title' => 'Refunds',
+            'id' => 'Id',
+            'add-title' => 'Create Refund',
+            'save-btn-title' => 'Refund',
+            'order-id' => 'Order Id',
+            'qty-ordered' => 'Qty Ordered',
+            'qty-to-refund' => 'Qty To Refund',
+            'refund-shipping' => 'Refund Shipping',
+            'adjustment-refund' => 'Adjustment Refund',
+            'adjustment-fee' => 'Adjustment Fee',
+            'update-qty' => 'Update Quantities',
+            'invalid-qty' => 'Found invalid quantity for return items.',
+            'refund-limit-error' => 'The most money available to refund is :amount.',
+            'refunded' => 'Refunded',
+            'date' => 'Refund Date',
+            'customer-name' => 'Customer Name',
+            'status' => 'Status',
+            'action' => 'Action',
+            'view-title' => 'Refund #:refund_id',
         ]
     ],
 

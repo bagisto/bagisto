@@ -251,6 +251,7 @@ return [
                     'item-invoice' => 'Faturados (:qty_invoiced)',
                     'item-shipped' => 'enviados (:qty_shipped)',
                     'item-canceled' => 'Cancelados (:qty_canceled)',
+                    'item-refunded' => 'Refunded (:qty_refunded)',
                     'price' => 'Preço',
                     'total' => 'Total',
                     'subtotal' => 'Subtotal',

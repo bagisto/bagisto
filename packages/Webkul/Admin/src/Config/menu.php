@@ -31,8 +31,13 @@ return [
         'route' => 'admin.sales.invoices.index',
         'sort' => 3,
         'icon-class' => ''
-    ],
-    [
+    ], [
+        'key' => 'sales.refunds',
+        'name' => 'admin::app.layouts.refunds',
+        'route' => 'admin.sales.refunds.index',
+        'sort' => 4,
+        'icon-class' => ''
+    ], [
         'key' => 'catalog',
         'name' => 'admin::app.layouts.catalog',
         'route' => 'admin.catalog.products.index',

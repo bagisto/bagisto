@@ -256,6 +256,7 @@ return [
                     'item-invoice' => 'صورتحساب (:qty_invoiced)',
                     'item-shipped' => 'حمل شده (:qty_shipped)',
                     'item-canceled' => 'لغو شد (:qty_canceled)',
+                    'item-refunded' => 'Refunded (:qty_refunded)',
                     'price' => 'قیمت',
                     'total' => 'جمع',
                     'subtotal' => 'فرعی',

@@ -47,9 +47,13 @@ class OrderItemRepository extends Repository
      */
     public function collectTotals($orderItem)
     {
-        $qtyShipped = $qtyInvoiced = 0;
+        $qtyShipped = $qtyInvoiced = $qtyRefunded = 0;
+
         $totalInvoiced = $baseTotalInvoiced = 0;
         $taxInvoiced = $baseTaxInvoiced = 0;
+        
+        $totalRefunded = $baseTotalRefunded = 0;
+        $taxRefunded = $baseTaxRefunded = 0;
 
         foreach ($orderItem->invoice_items as $invoiceItem) {
             $qtyInvoiced += $invoiceItem->qty;
@@ -65,14 +69,31 @@ class OrderItemRepository extends Repository
             $qtyShipped += $shipmentItem->qty;
         }
 
+        foreach ($orderItem->refund_items as $refundItem) {
+            $qtyRefunded += $refundItem->qty;
+
+            $totalRefunded += $refundItem->total;
+            $baseTotalRefunded += $refundItem->base_total;
+
+            $taxRefunded += $refundItem->tax_amount;
+            $baseTaxRefunded += $refundItem->base_tax_amount;
+        }
+
         $orderItem->qty_shipped = $qtyShipped;
         $orderItem->qty_invoiced = $qtyInvoiced;
+        $orderItem->qty_refunded = $qtyRefunded;
 
         $orderItem->total_invoiced = $totalInvoiced;
         $orderItem->base_total_invoiced = $baseTotalInvoiced;
 
         $orderItem->tax_amount_invoiced = $taxInvoiced;
         $orderItem->base_tax_amount_invoiced = $baseTaxInvoiced;
+
+        $orderItem->amount_refunded = $totalRefunded;
+        $orderItem->base_amount_refunded = $baseTotalRefunded;
+
+        $orderItem->tax_amount_refunded = $taxRefunded;
+        $orderItem->base_tax_amount_refunded = $baseTaxRefunded;
 
         $orderItem->save();
 

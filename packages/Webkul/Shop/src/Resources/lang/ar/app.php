@@ -249,6 +249,7 @@ return [
                     'item-invoice' => '3-الفواتير(:qty_invoiced)',
                     'item-shipped' => 'شحنت(:qty_shipped)',
                     'item-canceled' => 'ملغاة(:qty_canceled)',
+                    'item-refunded' => 'Refunded (:qty_refunded)',
                     'price' => 'السعر',
                     'total' => 'المجموع',
                     'subtotal' => 'المجموع الفرعي',

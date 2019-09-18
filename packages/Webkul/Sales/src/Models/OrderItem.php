@@ -39,6 +39,14 @@ class OrderItem extends Model implements OrderItemContract
     }
 
     /**
+     * Get remaining qty for refund.
+     */
+    public function getQtyToRefundAttribute()
+    {
+        return $this->qty_invoiced - $this->qty_refunded;
+    }
+
+    /**
      * Get the order record associated with the order item.
      */
     public function order()
@@ -79,6 +87,14 @@ class OrderItem extends Model implements OrderItemContract
     }
 
     /**
+     * Get the refund items record associated with the order item.
+     */
+    public function refund_items()
+    {
+        return $this->hasMany(RefundItemProxy::modelClass());
+    }
+
+    /**
      * Returns configurable option html
      */
     public function getOptionDetailHtml()
@@ -93,5 +109,23 @@ class OrderItem extends Model implements OrderItemContract
 
             return implode(', ', $labels);
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        $array = parent::toArray();
+
+        $array['qty_to_ship'] = $this->qty_to_ship;
+
+        $array['qty_to_invoice'] = $this->qty_to_invoice;
+
+        $array['qty_to_cancel'] = $this->qty_to_cancel;
+
+        $array['qty_to_refund'] = $this->qty_to_refund;
+
+        return $array;
     }
 }
