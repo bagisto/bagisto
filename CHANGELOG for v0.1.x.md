@@ -2,25 +2,25 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
-## **v0.1.7(17th of September, 2019)** - *Release*
+## **v0.1.7 (17th of September, 2019)** - *Release*
 
-* [feature] - Added New Product Type - Virtual, Downloadable, Group and Bundle.
+* [feature] - New product types added - Virtual, Downloadable, Group and Bundle.
 
-* [feature] - Fiterable Attribute for category.
+* [feature] - Fiterable attributes according to category.
 
 * [feature] - New module CMS added for adding static pages.
 
-* [feature] - Dyanamic event firing in datagrid.
+* [feature] - Dyanamic event firing in datagrid while adding columns, actions and mass actions as well.
 
-* [enhancement] - Customer should get an email after registration.
+* [enhancement] - Customer gets an email after registration.
 
-* [enhancement] - Customer should receive cancellation mail if his/her order is cancelled by admin.
+* [enhancement] - Customer receives cancellation mail if his/her order is cancelled by admin.
 
-* [enhancement] - SEO not available for home page.
+* [enhancement] - SEO is now available for home page.
 
 * [enhancement] - If account is created for customer by admin then customer should received an email that his/her account is created with create password link.
 
-* [enhancement] - Product Flat will not scale.
+* [enhancement] - product_flat will is now scalable according to choice of attributes to be used in it.
 
 * #1258 [fixed] - If payment is done through paypal then invoice should generate automatically and status of Order should be processing.
 
