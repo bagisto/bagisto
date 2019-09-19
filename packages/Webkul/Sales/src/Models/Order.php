@@ -40,7 +40,7 @@ class Order extends Model implements OrderContract
      */
     public function getBaseTotalDueAttribute()
     {
-        return $this->base_grand_total - $this->base_grand_total_invoiced;
+        return $this->base_grand_total - $this->base_grand_total_invoiced - $this->base_discount_amount;
     }
 
     /**
@@ -48,7 +48,7 @@ class Order extends Model implements OrderContract
      */
     public function getTotalDueAttribute()
     {
-        return $this->grand_total - $this->grand_total_invoiced;
+        return $this->grand_total - $this->grand_total_invoiced - $this->discount_amount;
     }
 
     /**
@@ -208,7 +208,7 @@ class Order extends Model implements OrderContract
                 return true;
         }
 
-        if ($this->base_grand_total_invoiced - $this->base_grand_total_refunded > 0)
+        if ($this->base_grand_total_invoiced - $this->base_grand_total_refunded - $this->refunds()->sum('base_adjustment_fee') > 0)
             return true;
 
         return false;

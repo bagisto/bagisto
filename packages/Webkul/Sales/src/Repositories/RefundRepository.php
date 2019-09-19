@@ -180,29 +180,23 @@ class RefundRepository extends Repository
      */
     public function collectTotals($refund)
     {
-        $subTotal = $baseSubTotal = 0;
-        $taxAmount = $baseTaxAmount = 0;
-        $discountAmount = $baseDiscountAmount = 0;
+        $refund->sub_total = $refund->base_sub_total = 0;
+        $refund->tax_amount = $refund->base_tax_amount = 0;
+        $refund->discount_amount = $refund->base_discount_amount = 0;
 
         foreach ($refund->items as $refundItem) {
-            $subTotal += $refundItem->total;
-            $baseSubTotal += $refundItem->base_total;
+            $refund->sub_total += $refundItem->total;
+            $refund->base_sub_total += $refundItem->base_total;
 
-            $taxAmount += $refundItem->tax_amount;
-            $baseTaxAmount += $refundItem->base_tax_amount;
+            $refund->tax_amount += $refundItem->tax_amount;
+            $refund->base_tax_amount += $refundItem->base_tax_amount;
 
-            $discountAmount += $refundItem->discount_amount;
-            $baseDiscountAmount += $refundItem->base_discount_amount;
+            $refund->discount_amount += $refundItem->discount_amount;
+            $refund->base_discount_amount += $refundItem->base_discount_amount;
         }
 
-        $refund->sub_total = $subTotal;
-        $refund->base_sub_total = $baseSubTotal;
-
-        $refund->tax_amount = $taxAmount;
-        $refund->base_tax_amount = $baseTaxAmount;
-
-        $refund->grand_total = $subTotal + $taxAmount + $refund->shipping_amount + $refund->adjustment_refund - $refund->adjustment_fee - $discountAmount;
-        $refund->base_grand_total = $baseSubTotal + $baseTaxAmount + $refund->base_shipping_amount + $refund->base_adjustment_refund - $refund->adjustment_fee - $baseDiscountAmount;
+        $refund->grand_total = $refund->sub_total + $refund->tax_amount + $refund->shipping_amount + $refund->adjustment_refund - $refund->adjustment_fee - $refund->discount_amount;
+        $refund->base_grand_total = $refund->base_sub_total + $refund->base_tax_amount + $refund->base_shipping_amount + $refund->base_adjustment_refund - $refund->adjustment_fee - $refund->base_discount_amount;
 
         $refund->save();
 
