@@ -135,7 +135,7 @@ class OrderItemRepository extends Repository
     /**
      * Returns qty to product inventory after order cancelation
      *
-     * @param mixed $orderItem
+     * @param OrderItem $orderItem
      * @return void
      */
     public function returnQtyToProductInventory($orderItem)
@@ -150,9 +150,8 @@ class OrderItemRepository extends Repository
         if (! $orderedInventory)
             return ;
 
-        if (($qty = $orderedInventory->qty - $orderItem->qty_to_cancel) < 0) {
+        if (($qty = $orderedInventory->qty - $quantity) < 0)
             $qty = 0;
-        }
 
         $orderedInventory->update([
                 'qty' => $qty
