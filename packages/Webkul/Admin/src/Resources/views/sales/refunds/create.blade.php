@@ -303,7 +303,7 @@
                     <td>-</td>
                     <td>
                         <div class="control-group" :class="[errors.has('refund[shipping]') ? 'has-error' : '']" style="width: 100px; margin-bottom: 0;">
-                            <input type="text" v-validate="'required|min_value:0|max_value:{{$order->base_shipping_invoiced - $order->base_shipping_refunded}}'" class="control" id="refund[shipping]" name="refund[shipping]" :value="refund.summary.shipping.price" data-vv-as="&quot;{{ __('admin::app.sales.refunds.refund-shipping') }}&quot;" style="width: 100%; margin: 0"/>
+                            <input type="text" v-validate="'required|min_value:0|max_value:{{$order->base_shipping_invoiced - $order->base_shipping_refunded}}'" class="control" id="refund[shipping]" name="refund[shipping]" v-model="refund.summary.shipping.price" data-vv-as="&quot;{{ __('admin::app.sales.refunds.refund-shipping') }}&quot;" style="width: 100%; margin: 0"/>
 
                             <span class="control-error" v-if="errors.has('refund[shipping]')">
                                 @{{ errors.first('refund[shipping]') }}

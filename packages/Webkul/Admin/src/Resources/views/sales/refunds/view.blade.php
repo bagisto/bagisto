@@ -213,9 +213,7 @@
                                         <th>{{ __('admin::app.sales.orders.qty') }}</th>
                                         <th>{{ __('admin::app.sales.orders.subtotal') }}</th>
                                         <th>{{ __('admin::app.sales.orders.tax-amount') }}</th>
-                                        @if ($refund->base_discount_amount > 0)
-                                            <th>{{ __('admin::app.sales.orders.discount-amount') }}</th>
-                                        @endif
+                                        <th>{{ __('admin::app.sales.orders.discount-amount') }}</th>
                                         <th>{{ __('admin::app.sales.orders.grand-total') }}</th>
                                     </tr>
                                 </thead>
@@ -242,13 +240,17 @@
 
                                             <td>{{ core()->formatBasePrice($item->base_tax_amount) }}</td>
 
-                                            @if ($refund->base_discount_amount > 0)
-                                                <td>{{ core()->formatBasePrice($item->base_discount_amount) }}</td>
-                                            @endif
+                                            <td>{{ core()->formatBasePrice($item->base_discount_amount) }}</td>
 
                                             <td>{{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount) }}</td>
                                         </tr>
                                     @endforeach
+
+                                    @if (! $refund->items->count())
+                                        <tr>
+                                            <td class="empty" colspan="7">{{ __('admin::app.common.no-result-found') }}</td>
+                                        <tr>
+                                    @endif
 
                                 </tbody>
                             </table>
