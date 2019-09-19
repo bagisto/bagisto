@@ -151,6 +151,10 @@ class RefundRepository extends Repository
                             'product_type' => $childOrderItem->product_type,
                             'additional' => $childOrderItem->additional
                         ]);
+
+                    $this->refundItemRepository->returnQtyToProductInventory($childOrderItem);
+                } else {
+                    $this->refundItemRepository->returnQtyToProductInventory($childOrderItem);
                 }
 
                 $this->orderItemRepository->collectTotals($orderItem);
