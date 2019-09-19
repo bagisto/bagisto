@@ -30,20 +30,30 @@ class RefundItemRepository extends Repository
      * Returns qty to product inventory after order refund
      *
      * @param RefundItem $refundItem
+     * @param integer $quantity
      * @return void
      */
-    public function returnQtyToProductInventory($refundItem)
+    public function returnQtyToProductInventory($refundItem, $quantity)
     {
         return;
-        if (! $product = $orderItem->product)
+        if (! $product = $refundItem->product)
             return;
 
+        if ($qtyShipped = $refundItem->order_item->qty_shipped) {
+
+        } else {
+
+        }
+
         $orderedInventory = $product->ordered_inventories()
-                ->where('channel_id', $orderItem->order->channel->id)
+                ->where('channel_id', $refundItem->order->channel->id)
                 ->first();
 
-        if (! $orderedInventory)
-            return ;
+        if ($orderedInventory) {
+
+        } else {
+
+        }
 
         if (($qty = $orderedInventory->qty - $quantity) < 0)
             $qty = 0;
