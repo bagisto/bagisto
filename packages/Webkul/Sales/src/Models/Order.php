@@ -208,7 +208,7 @@ class Order extends Model implements OrderContract
                 return true;
         }
 
-        if ($this->base_grand_total_invoiced - $this->base_grand_total_refunded > 0)
+        if ($this->base_grand_total_invoiced - $this->base_grand_total_refunded - $this->refunds()->sum('base_adjustment_fee') > 0)
             return true;
 
         return false;

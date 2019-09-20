@@ -414,6 +414,8 @@ return [
             'status' => 'Status',
             'action' => 'Action',
             'view-title' => 'Refund #:refund_id',
+            'invalid-refund-amount-error' => 'Refund amount should be non zero.'
+
         ]
     ],
 

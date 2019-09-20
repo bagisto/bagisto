@@ -377,7 +377,9 @@ return [
             'date' => 'Refund Date',
             'customer-name' => 'Customer Name',
             'status' => 'Status',
-            'action' => 'Action'
+            'action' => 'Action',
+            'view-title' => 'Refund #:refund_id',
+            'invalid-refund-amount-error' => 'Refund amount should be non zero.'
         ]
     ],
 
