@@ -49,7 +49,7 @@ class ProductFlatRepository extends Repository
         //     ->where('product_categories.category_id', $categoryId)
         //     ->max('price');
 
-        return $this->model->max('price');
+        return $this->model->max('product_flat.price');
     }
 
      /**
@@ -59,7 +59,7 @@ class ProductFlatRepository extends Repository
      */
     public function getProductMaximumPrice()
     {
-        return $this->model->max('price');
+        return $this->model->max('product_flat.price');
     }
 
     /**
