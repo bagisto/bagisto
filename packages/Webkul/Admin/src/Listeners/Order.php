@@ -58,11 +58,11 @@ class Order {
      */
     public function sendNewRefundMail($refund)
     {
-        // try {
+        try {
             Mail::queue(new NewRefundNotification($refund));
-        // } catch (\Exception $e) {
+        } catch (\Exception $e) {
 
-        // }
+        }
     }
 
     /**
