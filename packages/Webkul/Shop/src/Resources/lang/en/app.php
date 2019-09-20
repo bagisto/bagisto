@@ -371,7 +371,6 @@ return [
         'no-options' => 'Please Select Options Before Buying This Product'
     ],
 
-
     'checkout' => [
         'cart' => [
             'integrity' => [
@@ -397,12 +396,14 @@ return [
                 'inventory_warning' => 'The Requested Quantity Is Not Available, Please Try Again Later',
                 'error' => 'Cannot Update The Item(s) At The Moment, Please Try Again Later'
             ],
+
             'item' => [
                 'error_remove' => 'No Items To Remove From The Cart',
                 'success' => 'Item Was Successfully Added To Cart',
                 'success-remove' => 'Item Was Removed Successfully From The Cart',
                 'error-add' => 'Item Cannot Be Added To Cart, Please Try Again Later',
             ],
+
             'quantity-error' => 'Requested Quantity Is Not Available',
             'cart-subtotal' => 'Cart Subtotal',
             'cart-remove-action' => 'Do you really want to do this ?',
@@ -526,11 +527,13 @@ return [
                 'thanks' => 'Thanks!',
             ]
         ],
+
         'invoice' => [
             'heading' => 'Your Invoice #:invoice_id for Order #:order_id',
             'subject' => 'Invoice for your order #:order_id',
             'summary' => 'Summary of Invoice',
         ],
+
         'shipment' => [
             'heading' => 'Shipment #:shipment_id  has been generated for Order #:order_id',
             'inventory-heading' => 'New Shipment #:shipment_id had been generated for Order #:order_id',
@@ -541,6 +544,15 @@ return [
             'tracking-number' => 'Tracking Number',
             'greeting' => 'An Order :order_id has been placed on :created_at',
         ],
+
+        'refund' => [
+            'heading' => 'Your Refund #:refund_id for Order #:order_id',
+            'subject' => 'Refund for your order #:order_id',
+            'summary' => 'Summary of Refund',
+            'adjustment-refund' => 'Adjustment Refund',
+            'adjustment-fee' => 'Adjustment Fee'
+        ],
+
         'forget-password' => [
             'subject' => 'Customer Reset Password',
             'dear' => 'Dear :name',
@@ -549,6 +561,7 @@ return [
             'final-summary' => 'If you did not request a password reset, no further action is required',
             'thanks' => 'Thanks!'
         ],
+
         'customer' => [
             'new' => [
                 'dear' => 'Dear :customer_name',
