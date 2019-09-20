@@ -9,6 +9,7 @@ use Webkul\Admin\Mail\NewInvoiceNotification;
 use Webkul\Admin\Mail\NewShipmentNotification;
 use Webkul\Admin\Mail\NewInventorySourceNotification;
 use Webkul\Admin\Mail\CancelOrderNotification;
+use Webkul\Admin\Mail\NewRefundNotification;
 /**
  * Order event handler
  *
@@ -33,7 +34,6 @@ class Order {
         }
     }
 
-
     /**
      * @param mixed $invoice
      *
@@ -49,6 +49,20 @@ class Order {
         } catch (\Exception $e) {
 
         }
+    }
+
+    /**
+     * @param mixed $refund
+     *
+     * Send new refund mail to the customer
+     */
+    public function sendNewRefundMail($refund)
+    {
+        // try {
+            Mail::queue(new NewRefundNotification($refund));
+        // } catch (\Exception $e) {
+
+        // }
     }
 
     /**

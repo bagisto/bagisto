@@ -472,11 +472,13 @@ return [
             'help' => 'إذا كنت بحاجة إلى أي نوع من المساعدة يرجى الاتصال بنا على: support_email',
             'thanks' => 'شكرا!'
         ],
+
         'invoice' => [
             'heading' => 'فاتورتك #:invoice_id for Order #:order_id',
             'subject' => 'فاتورة لطلبك #:order_id',
             'summary' => 'موجز الفاتورة',
         ],
+
         'shipment' => [
             'heading' => 'شحنتك #:shipment_id for Order #:order_id',
             'subject' => 'شحنة لطلبك #:order_id',
@@ -484,6 +486,15 @@ return [
             'carrier' => 'ناقل',
             'tracking-number' => 'رقم التتبع'
         ],
+
+        'refund' => [
+            'heading' => 'Your Refund #:refund_id for Order #:order_id',
+            'subject' => 'Refund for your order #:order_id',
+            'summary' => 'Summary of Refund',
+            'adjustment-refund' => 'Adjustment Refund',
+            'adjustment-fee' => 'Adjustment Fee'
+        ],
+        
         'forget-password' => [
             'dear' => 'عزيزي :name',
             'info' => 'أنت تستلم هذا البريد الإلكتروني لأننا تلقينا طلب إعادة ضبط كلمة السر لحسابك',
