@@ -20,7 +20,6 @@ class RefundItemRepository extends Repository
      *
      * @return Mixed
      */
-
     function model()
     {
         return RefundItem::class;
@@ -29,37 +28,54 @@ class RefundItemRepository extends Repository
     /**
      * Returns qty to product inventory after order refund
      *
-     * @param RefundItem $refundItem
-     * @param integer $quantity
+     * @param OrdreItem $orderItem
+     * @param integer    $quantity
      * @return void
      */
-    public function returnQtyToProductInventory($refundItem, $quantity)
+    public function returnQtyToProductInventory($orderItem, $quantity)
     {
-        return;
-        if (! $product = $refundItem->product)
+        if (! $product = $orderItem->product)
             return;
 
-        if ($qtyShipped = $refundItem->order_item->qty_shipped) {
+        if ($orderItem->qty_shipped && $quantity > $orderItem->qty_ordered - $orderItem->qty_shipped) {
+            $nonShippedQty = $orderItem->qty_ordered - $orderItem->qty_shipped;
 
-        } else {
+            if  (($totalShippedQtyToRefund = $quantity - $nonShippedQty) > 0) {
+                foreach ($orderItem->shipment_items as $shipmentItem) {
+                    if (! $totalShippedQtyToRefund)
+                        break;
 
+                    if (! $shipmentItem->shipment->inventory_source_id)
+                        continue;
+
+                    $shippedQtyToRefund = $totalShippedQtyToRefund > $shipmentItem->qty ? $shipmentItem->qty : $totalShippedQtyToRefund;
+
+                    $totalShippedQtyToRefund = $totalShippedQtyToRefund > $shipmentItem->qty ? $totalShippedQtyToRefund - $shipmentItem->qty : 0;
+
+                    $inventory = $product->inventories()
+                            // ->where('vendor_id', $data['vendor_id'])
+                            ->where('inventory_source_id', $shipmentItem->shipment->inventory_source_id)
+                            ->first();
+            
+                    $inventory->update(['qty' => $inventory->qty + $shippedQtyToRefund]);
+                }
+
+                $quantity -= $totalShippedQtyToRefund;
+            }
         }
 
-        $orderedInventory = $product->ordered_inventories()
-                ->where('channel_id', $refundItem->order->channel->id)
-                ->first();
+        if ($quantity) {
+            $orderedInventory = $product->ordered_inventories()
+                    ->where('channel_id', $orderItem->order->channel->id)
+                    ->first();
 
-        if ($orderedInventory) {
+            if (! $orderedInventory)
+                return;
 
-        } else {
+            if (($qty = $orderedInventory->qty - $quantity) < 0)
+                $qty = 0;
 
+            $orderedInventory->update(['qty' => $qty]);
         }
-
-        if (($qty = $orderedInventory->qty - $quantity) < 0)
-            $qty = 0;
-
-        $orderedInventory->update([
-                'qty' => $qty
-            ]);
     }
 }
