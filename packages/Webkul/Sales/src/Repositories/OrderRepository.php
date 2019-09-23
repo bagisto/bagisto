@@ -175,11 +175,7 @@ class OrderRepository extends Repository
      */
     public function isInCompletedState($order)
     {
-        $totalQtyOrdered = 0;
-        $totalQtyInvoiced = 0;
-        $totalQtyShipped = 0;
-        $totalQtyRefunded = 0;
-        $totalQtyCanceled = 0;
+        $totalQtyOrdered = $totalQtyInvoiced = $totalQtyShipped = $totalQtyRefunded = $totalQtyCanceled = 0;
 
         foreach ($order->items  as $item) {
             $totalQtyOrdered += $item->qty_ordered;
@@ -190,7 +186,7 @@ class OrderRepository extends Repository
         }
 
         if ($totalQtyOrdered != ($totalQtyRefunded + $totalQtyCanceled) &&
-            $totalQtyOrdered == $totalQtyInvoiced + $totalQtyRefunded + $totalQtyCanceled &&
+            $totalQtyOrdered == $totalQtyInvoiced + $totalQtyCanceled &&
             $totalQtyOrdered == $totalQtyShipped + $totalQtyRefunded + $totalQtyCanceled)
             return true;
 
