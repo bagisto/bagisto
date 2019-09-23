@@ -473,7 +473,7 @@
                                     <tr>
                                         <td>#{{ $refund->id }}</td>
                                         <td>{{ $refund->created_at }}</td>
-                                        <td>#{{ $refund->order->id }}</td>
+                                        <td>#{{ $refund->order->increment_id }}</td>
                                         <td>{{ $refund->order->customer_full_name }}</td>
                                         <td>{{ __('admin::app.sales.refunds.refunded') }}</td>
                                         <td>{{ core()->formatBasePrice($refund->base_grand_total) }}</td>
