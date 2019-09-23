@@ -164,7 +164,7 @@
                                                 <div class="info">
                                                     {{ __('admin::app.dashboard.product-count', ['count' => $item->total_products]) }}
                                                     &nbsp;.&nbsp;
-                                                    {{ __('admin::app.dashboard.sale-count', ['count' => $item->total_qty_ordered]) }}
+                                                    {{ __('admin::app.dashboard.sale-count', ['count' => $item->total_qty_invoiced]) }}
                                                 </div>
                                             </div>
 
@@ -221,7 +221,7 @@
                                             </div>
 
                                             <div class="info">
-                                                {{ __('admin::app.dashboard.sale-count', ['count' => $item->total_qty_ordered]) }}
+                                                {{ __('admin::app.dashboard.sale-count', ['count' => $item->total_qty_invoiced]) }}
                                             </div>
                                         </div>
 
@@ -274,7 +274,7 @@
                                                 {{ __('admin::app.dashboard.order-count', ['count' => $item->total_orders]) }}
                                                     &nbsp;.&nbsp;
                                                 {{ __('admin::app.dashboard.revenue', [
-                                                    'total' => core()->formatBasePrice($item->total_base_grand_total)
+                                                    'total' => core()->formatBasePrice($item->total_base_grand_total_invoiced)
                                                     ])
                                                 }}
                                             </div>
