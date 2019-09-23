@@ -26,7 +26,7 @@ class OrderInvoicesDataGrid extends DataGrid
         $this->addFilter('id', 'invoices.id');
         $this->addFilter('order_id', 'ors.increment_id');
         $this->addFilter('base_grand_total', 'invoices.base_grand_total');
-        $this->addFilter('invoices.created_at', 'invoices.created_at');
+        $this->addFilter('created_at', 'invoices.created_at');
 
         $this->setQueryBuilder($queryBuilder);
     }
