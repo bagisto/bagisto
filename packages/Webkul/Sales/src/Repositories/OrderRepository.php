@@ -292,6 +292,7 @@ class OrderRepository extends Repository
         $order->sub_total_refunded = $order->base_sub_total_refunded = 0;
         $order->shipping_refunded = $order->base_shipping_refunded = 0;
         $order->tax_amount_refunded = $order->base_tax_amount_refunded = 0;
+        $order->discount_refunded = $order->base_discount_refunded = 0;
         $order->grand_total_refunded = $order->base_grand_total_refunded = 0;
 
         foreach ($order->refunds as $refund) {
