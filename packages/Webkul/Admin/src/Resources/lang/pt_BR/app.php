@@ -1000,7 +1000,12 @@ return [
             'logo-image' => 'Logo Imagem',
             'credit-max' => 'Máximo de crédito do cliente',
             'credit-max-value' => 'Valor Máximo de Crédito',
-            'use-credit-max' => 'Use o máximo de crédito'
+            'use-credit-max' => 'Use o máximo de crédito',
+            'order-settings' => 'Order Settings',
+            'orderNumber' => 'Order Number Settings',
+            'order-number-prefix' => 'Order Number Prefix',
+            'order-number-length' => 'Order Number Length',
+            'order-number-suffix' => 'Order Number Suffix',
         ]
     ]
 ];
