@@ -8,6 +8,7 @@ return [
         'true' => 'صحيح',
         'false' => 'خطأ'
     ],
+
     'layouts' => [
         'my-account' => 'حسابي',
         'logout' => 'خروج',
@@ -40,6 +41,7 @@ return [
         'tax-categories' => 'فئات الضرائب',
         'tax-rates' => 'المعدلات الضريبية'
     ],
+
     'acl' => [
         'dashboard' => 'لوحة العدادات',
         'sales' => 'المبيعات',
@@ -72,6 +74,7 @@ return [
         'create' => 'Add',
         'delete' => 'Delete',
     ],
+
     'dashboard' => [
         'title' => 'لوحة العدادات',
         'from' => 'من',
@@ -93,6 +96,7 @@ return [
         'stock-threshold' => 'عتبة المخزون',
         'qty-left' => ':qty يسار',
     ],
+
     'datagrid' => [
         'mass-ops' => [
             'method-error' => 'خطأ! تم اكتشاف طريقة خاطئة ، الرجاء التحقق من تشكيل حركة الكتلة',
@@ -148,6 +152,7 @@ return [
         'no-of-products' => 'عدد المنتجات',
         'refunded' => 'Refunded'
     ],
+
     'account' => [
         'title' => 'حسابي',
         'save-btn-title' => 'احفظ',
@@ -159,6 +164,7 @@ return [
         'change-password' => 'غير كلمة سر الحساب',
         'current-password' => 'Current Password'
     ],
+
     'users' => [
         'forget-password' => [
             'title' => 'انس كلمة السر',
@@ -225,6 +231,7 @@ return [
             'submit-btn-title' => 'وقع هنا'
         ]
     ],
+
     'sales' => [
         'orders' => [
             'title' => 'الأوامر',
@@ -355,6 +362,7 @@ return [
             'invalid-refund-amount-error' => 'Refund amount should be non zero.'
         ]
     ],
+
     'catalog' => [
         'products' => [
             'title' => 'المنتجات',
@@ -471,6 +479,7 @@ return [
             'image' => 'Image',
         ]
     ],
+
     'configuration' => [
         'title' => 'إعدادات',
         'save-btn-title' => 'احفظ',
@@ -525,6 +534,7 @@ return [
             ]
         ]
     ],
+
     'settings' => [
         'locales' => [
             'title' => 'Locales',
@@ -680,6 +690,7 @@ return [
             'atleast-one' => 'لا يستطيع حذف الأخير ضريبة معدل'
         ]
     ],
+
     'customers' => [
         'groups' =>[
             'add-title' => 'أضف المجموعة',
@@ -735,6 +746,7 @@ return [
             'delete-failed' => 'خطأ! المشترك لا يمكن حذفه'
         ]
     ],
+
     'error' => [
         'go-to-home' => 'إذهب إلى البيت',
         'in-maitainace' => 'In Maintenance',
@@ -765,6 +777,7 @@ return [
             'message' => 'ولم يطبق الطلب لأنه يفتقر إلى وثائق إثبات صحيحة للمورد المستهدف.'
         ],
     ],
+
     'export' => [
         'export' => 'صدر',
         'import' => 'استيراد',
@@ -777,6 +790,7 @@ return [
         'upload-error' => 'الملف يجب أن يكون ملف من نوع: xls, xlsx, csv.',
         'duplicate-error' => 'معرف يجب أن يكون فريد ، معرف مكرر :identifier at row :position.'
     ],
+
     'response' => [
         'create-success' => ':name created successfully.',
         'update-success' => ':name updated successfully.',
@@ -794,7 +808,68 @@ return [
         'cancel-error' => ':name can not be canceled.',
         'already-taken' => 'The :name has already been taken.'
     ],
+
     'footer' => [
         'copy-right' => '© Copyright 2018 Webkul Software, All rights reserved.'
     ],
+
+    'admin' => [
+        'system' => [
+            'catalog' => 'Catalog',
+            'products' => 'Products',
+            'review' => 'Review',
+            'allow-guest-review' => 'Allow Guest Review',
+            'inventory' => 'Inventory',
+            'stock-options' => 'Stock Options',
+            'allow-backorders' => 'Allow Backorders',
+            'customer' => 'Customer',
+            'settings' => 'Settings',
+            'address' => 'Address',
+            'street-lines' => 'Lines in a Street Address',
+            'sales' => 'Sales',
+            'shipping-methods' => 'Shipping Methods',
+            'free-shipping' => 'Free Shipping',
+            'flate-rate-shipping' => 'Flat Rate Shipping',
+            'shipping' => 'Shipping',
+            'origin' => 'Origin',
+            'country' => 'Country',
+            'state' => 'State',
+            'zip' => 'Zip',
+            'city' => 'City',
+            'street-address' => 'Street Address',
+            'title' => 'Title',
+            'description' => 'Description',
+            'rate' => 'Rate',
+            'status' => 'Status',
+            'type' => 'Type',
+            'payment-methods' => 'Payment Methods',
+            'cash-on-delivery' => 'Cash On Delivery',
+            'money-transfer' => 'Money Transfer',
+            'paypal-standard' => 'Paypal Standard',
+            'business-account' => 'Business Account',
+            'newsletter' => 'NewsLetter Subscription',
+            'newsletter-subscription' => 'Allow NewsLetter Subscription',
+            'email' => 'Email Verification',
+            'email-verification' => 'Allow Email Verification',
+            'sort_order' => 'Sort Order',
+            'general' => 'General',
+            'footer' => 'Footer',
+            'content' => 'Content',
+            'footer-content' => 'Footer Text',
+            'locale-options' => 'Unit Options',
+            'weight-unit' => 'Weight Unit',
+            'design' => 'Design',
+            'admin-logo' => 'Admin Logo',
+            'logo-image' => 'Logo Image',
+            'credit-max' => 'Customer Credit Max',
+            'credit-max-value' => 'Credit Max Value',
+            'use-credit-max' => 'Use Credit Max',
+            'order-settings' => 'Order Settings',
+            'orderNumber' => 'Order Number Settings',
+            'order-number-prefix' => 'Order Number Prefix',
+            'order-number-length' => 'Order Number Length',
+            'order-number-suffix' => 'Order Number Suffix',
+            'default' => 'Default',
+        ]
+    ]
 ];
