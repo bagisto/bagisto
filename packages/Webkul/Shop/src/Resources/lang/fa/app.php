@@ -376,6 +376,7 @@ return [
                 'missing_fields' =>'نقض یکپارچگی سیستم سبد خرید ، برخی از زمینه های لازم وجود ندارد',
                 'missing_options' =>'نقض یکپارچگی سیستم سبد خرید ، گزینه هایی برای محصول قابل تنظیم وجود ندارد',
             ],
+
             'create-error' => 'هنگام تهیه نمونه سبد خرید ، با برخی از شماره ها روبرو شد',
             'title' => 'سبد خرید',
             'empty' => 'سبد خرید شما خالی است',
@@ -395,12 +396,14 @@ return [
                 'inventory_warning' => 'مقدار درخواستی در دسترس نیست ، لطفا بعداً دوباره امتحان کنید',
                 'error' => 'در حال حاضر نمی توانید موارد (های) را به روز کنید ، لطفا بعداً دوباره امتحان کنید'
             ],
+
             'item' => [
                 'error_remove' => 'هیچ موردی برای حذف از سبد خرید وجود ندارد',
                 'success' => 'مورد با موفقیت به سبد خرید اضافه شد',
                 'success-remove' => 'مورد با موفقیت از سبد خرید حذف شد',
                 'error-add' => 'لطفاً موردی را به سبد خرید اضافه نکرد ، لطفا بعداً دوباره امتحان کنید',
             ],
+
             'quantity-error' => 'مقدار درخواستی در دسترس نیست',
             'cart-subtotal' => 'سبد فرعی',
             'cart-remove-action' => 'آیا واقعاً می خواهید این کار را انجام دهید؟',
@@ -499,11 +502,13 @@ return [
             'help' => 'در صورت نیاز به هر نوع کمک ، لطفا با ما تماس بگیرید :support_email',
             'thanks' => 'با تشکر!'
         ],
+
         'invoice' => [
             'heading' => 'صورت حساب شما #:invoice_id برای سفارش #:order_id',
             'subject' => 'فاکتور سفارش شما #:order_id',
             'summary' => 'خلاصه فاکتور',
         ],
+
         'shipment' => [
             'heading' => 'حمل و نقل #:shipment_id  برای سفارش تولید شده است #:order_id',
             'inventory-heading' => 'حمل و نقل جدید #:shipment_id برای سفارش تولید شده است #:order_id',
@@ -514,6 +519,15 @@ return [
             'tracking-number' => 'شماره پیگیری',
             'greeting' => 'یک سفارش :order_id قرار داده شده است :created_at',
         ],
+
+        'refund' => [
+            'heading' => 'Your Refund #:refund_id for Order #:order_id',
+            'subject' => 'Refund for your order #:order_id',
+            'summary' => 'Summary of Refund',
+            'adjustment-refund' => 'Adjustment Refund',
+            'adjustment-fee' => 'Adjustment Fee'
+        ],
+        
         'forget-password' => [
             'dear' => 'عزیز :name',
             'info' => 'شما این ایمیل را دریافت می کنید زیرا ما درخواست بازنشانی رمزعبور را برای حساب شما دریافت کردیم',

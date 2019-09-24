@@ -20,7 +20,7 @@ class OrderRefundDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('refunds')
-                ->select('refunds.id', 'refunds.order_id', 'refunds.state', 'refunds.base_grand_total', 'refunds.created_at')
+                ->select('refunds.id', 'orders.increment_id', 'refunds.state', 'refunds.base_grand_total', 'refunds.created_at')
                 ->leftJoin('orders', 'refunds.order_id', '=', 'orders.id')
                 ->leftJoin('order_address as order_address_billing', function($leftJoin) {
                     $leftJoin->on('order_address_billing.order_id', '=', 'orders.id')
@@ -30,7 +30,7 @@ class OrderRefundDataGrid extends DataGrid
 
         $this->addFilter('billed_to', DB::raw('CONCAT(order_address_billing.first_name, " ", order_address_billing.last_name)'));
         $this->addFilter('id', 'refunds.id');
-        $this->addFilter('order_id', 'refunds.order_id');
+        $this->addFilter('increment_id', 'orders.increment_id');
         $this->addFilter('state', 'refunds.state');
         $this->addFilter('base_grand_total', 'refunds.base_grand_total');
         $this->addFilter('created_at', 'refunds.created_at');
@@ -50,7 +50,7 @@ class OrderRefundDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'order_id',
+            'index' => 'increment_id',
             'label' => trans('admin::app.datagrid.order-id'),
             'type' => 'number',
             'searchable' => true,

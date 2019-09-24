@@ -226,6 +226,7 @@
                         <tr>
                             <th>{{ __('admin::app.sales.orders.SKU') }}</th>
                             <th>{{ __('admin::app.sales.orders.product-name') }}</th>
+                            <th>{{ __('admin::app.sales.orders.item-status') }}</th>
                             <th>{{ __('admin::app.sales.orders.subtotal') }}</th>
                             <th>{{ __('admin::app.sales.orders.tax-amount') }}</th>
                             @if ($order->base_discount_amount > 0)
@@ -248,6 +249,28 @@
                                     @if ($html = $item->getOptionDetailHtml())
                                         <p>{{ $html }}</p>
                                     @endif
+                                </td>
+
+                                <td>
+                                    <span class="qty-row">
+                                        {{ $item->qty_ordered ? __('admin::app.sales.orders.item-ordered', ['qty_ordered' => $item->qty_ordered]) : '' }}
+                                    </span>
+
+                                    <span class="qty-row">
+                                        {{ $item->qty_invoiced ? __('admin::app.sales.orders.item-invoice', ['qty_invoiced' => $item->qty_invoiced]) : '' }}
+                                    </span>
+
+                                    <span class="qty-row">
+                                        {{ $item->qty_shipped ? __('admin::app.sales.orders.item-shipped', ['qty_shipped' => $item->qty_shipped]) : '' }}
+                                    </span>
+
+                                    <span class="qty-row">
+                                        {{ $item->qty_refunded ? __('admin::app.sales.orders.item-refunded', ['qty_refunded' => $item->qty_refunded]) : '' }}
+                                    </span>
+
+                                    <span class="qty-row">
+                                        {{ $item->qty_canceled ? __('admin::app.sales.orders.item-canceled', ['qty_canceled' => $item->qty_canceled]) : '' }}
+                                    </span>
                                 </td>
 
                                 <td>{{ core()->formatBasePrice($item->base_price) }}</td>

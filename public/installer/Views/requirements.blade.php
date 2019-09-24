@@ -11,7 +11,7 @@
 
         <div class="container requirement" id="requirement">
             <div class="initial-display">
-                <p>Requirement</p>
+                <p>Requirements</p>
 
                 <div class="content">
                     <div class="title" style="text-align: center; margin-top: 10px">

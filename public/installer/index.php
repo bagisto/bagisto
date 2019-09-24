@@ -112,6 +112,7 @@
                 include __DIR__ . '/Environment.php';
                 include __DIR__ . '/Migration.php';
                 include __DIR__ . '/Admin.php';
+                include __DIR__ . '/Email.php';
                 include __DIR__ . '/Finish.php';
 
                 // including js

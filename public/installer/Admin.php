@@ -114,12 +114,12 @@
                         result = confirm(data['support_error']);
                         if (result) {
                             $('#admin').hide();
-                            $('#finish').show();
+                            $('#email').show();
                         }
                     }
                     if (!data['connection'] && !data['insert_fail'] && !data['support_error']) {
                         $('#admin').hide();
-                        $('#finish').show();
+                        $('#email').show();
                     }
                 }
             });

@@ -141,13 +141,13 @@ class DashboardController extends Controller
                 'progress' => $this->getPercentageChange($previous, $current)
             ],
             'total_sales' =>  [
-                'previous' => $previous = $this->previousOrders()->sum('base_grand_total'),
-                'current' => $current = $this->currentOrders()->sum('base_grand_total'),
+                'previous' => $previous = $this->previousOrders()->sum('base_grand_total_invoiced') - $this->previousOrders()->sum('base_grand_total_refunded'),
+                'current' => $current = $this->currentOrders()->sum('base_grand_total_invoiced') - $this->currentOrders()->sum('base_grand_total_refunded'),
                 'progress' => $this->getPercentageChange($previous, $current)
             ],
             'avg_sales' =>  [
-                'previous' => $previous = $this->previousOrders()->avg('base_grand_total'),
-                'current' => $current = $this->currentOrders()->avg('base_grand_total'),
+                'previous' => $previous = $this->previousOrders()->avg('base_grand_total_invoiced') - $this->previousOrders()->sum('base_grand_total_refunded'),
+                'current' => $current = $this->currentOrders()->avg('base_grand_total_invoiced') - $this->currentOrders()->sum('base_grand_total_refunded'),
                 'progress' => $this->getPercentageChange($previous, $current)
             ],
             'top_selling_categories' => $this->getTopSellingCategories(),
@@ -159,7 +159,7 @@ class DashboardController extends Controller
         foreach (core()->getTimeInterval($this->startDate, $this->endDate) as $interval) {
             $statistics['sale_graph']['label'][] = $interval['start']->format('d M');
 
-            $total = $this->getOrdersBetweenDate($interval['start'], $interval['end'])->sum('base_grand_total');
+            $total = $this->getOrdersBetweenDate($interval['start'], $interval['end'])->sum('base_grand_total_invoiced') - $this->getOrdersBetweenDate($interval['start'], $interval['end'])->sum('base_grand_total_refunded');
 
             $statistics['sale_graph']['total'][] = $total;
             $statistics['sale_graph']['formated_total'][] = core()->formatBasePrice($total);
@@ -183,12 +183,12 @@ class DashboardController extends Controller
             ->where('category_translations.locale', app()->getLocale())
             ->where('order_items.created_at', '>=', $this->startDate)
             ->where('order_items.created_at', '<=', $this->endDate)
-            ->where('order_items.qty_ordered', '>', 0)
-            ->addSelect(DB::raw('SUM(qty_ordered) as total_qty_ordered'))
+            ->addSelect(DB::raw('SUM(qty_invoiced - qty_refunded) as total_qty_invoiced'))
             ->addSelect(DB::raw('COUNT(products.id) as total_products'))
             ->addSelect('order_items.id', 'categories.id as category_id', 'category_translations.name')
             ->groupBy('categories.id')
-            ->orderBy('total_qty_ordered', 'DESC')
+            ->havingRaw('SUM(qty_invoiced - qty_refunded) > 0')
+            ->orderBy('total_qty_invoiced', 'DESC')
             ->limit(5)
             ->get();
     }
@@ -218,15 +218,16 @@ class DashboardController extends Controller
     public function getTopSellingProducts()
     {
         return $this->orderItem->getModel()
-            ->select(DB::raw('SUM(qty_ordered) as total_qty_ordered'))
-            ->addSelect('id', 'product_id', 'product_type', 'name')
-            ->where('order_items.created_at', '>=', $this->startDate)
-            ->where('order_items.created_at', '<=', $this->endDate)
-            ->whereNull('parent_id')
-            ->groupBy('product_id')
-            ->orderBy('total_qty_ordered', 'DESC')
-            ->limit(5)
-            ->get();
+                ->select(DB::raw('SUM(qty_invoiced - qty_refunded) as total_qty_invoiced'))
+                ->addSelect('id', 'product_id', 'product_type', 'name')
+                ->where('order_items.created_at', '>=', $this->startDate)
+                ->where('order_items.created_at', '<=', $this->endDate)
+                ->whereNull('parent_id')
+                ->groupBy('product_id')
+                ->havingRaw('SUM(qty_invoiced - qty_refunded) > 0')
+                ->orderBy('total_qty_invoiced', 'DESC')
+                ->limit(5)
+                ->get();
     }
 
     /**
@@ -236,16 +237,20 @@ class DashboardController extends Controller
      */
     public function getCustomerWithMostSales()
     {
+        //Change here
         return $this->order->getModel()
-            ->select(DB::raw('SUM(base_grand_total) as total_base_grand_total'))
-            ->addSelect(DB::raw('COUNT(id) as total_orders'))
-            ->addSelect('id', 'customer_id', 'customer_email', 'customer_first_name', 'customer_last_name')
-            ->where('orders.created_at', '>=', $this->startDate)
-            ->where('orders.created_at', '<=', $this->endDate)
-            ->groupBy('customer_email')
-            ->orderBy('total_base_grand_total', 'DESC')
-            ->limit(5)
-            ->get();
+                ->leftJoin('order_items', 'orders.id', 'order_items.order_id')
+                ->select(DB::raw('SUM(qty_invoiced - qty_refunded) as total_qty_invoiced'))
+                ->select(DB::raw('SUM(base_grand_total_invoiced - base_grand_total_refunded) as total_base_grand_total_invoiced'))
+                ->addSelect(DB::raw('COUNT(orders.id) as total_orders'))
+                ->addSelect('orders.id', 'customer_id', 'customer_email', 'customer_first_name', 'customer_last_name')
+                ->where('orders.created_at', '>=', $this->startDate)
+                ->where('orders.created_at', '<=', $this->endDate)
+                ->groupBy('customer_email')
+                ->havingRaw('SUM(qty_invoiced - qty_refunded) > 0')
+                ->orderBy('total_base_grand_total_invoiced', 'DESC')
+                ->limit(5)
+                ->get();
     }
 
     /**
@@ -287,7 +292,7 @@ class DashboardController extends Controller
     {
         return $this->order->scopeQuery(function ($query) use ($start, $end) {
             return $query->where('orders.created_at', '>=', $start)->where('orders.created_at', '<=', $end)
-            ->where('orders.status', '<>', 'canceled');
+                ->where('orders.status', '<>', 'canceled');
         });
     }
 
