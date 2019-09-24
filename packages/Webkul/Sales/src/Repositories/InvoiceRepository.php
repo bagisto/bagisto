@@ -98,9 +98,7 @@ class InvoiceRepository extends Repository
                     'base_currency_code' => $order->base_currency_code,
                     'channel_currency_code' => $order->channel_currency_code,
                     'order_currency_code' => $order->order_currency_code,
-                    'order_address_id' => $order->billing_address->id,
-                    "discount_amount" => $order->discount_amount,
-                    "base_discount_amount" => $order->base_discount_amount,
+                    'order_address_id' => $order->billing_address->id
                 ]);
 
             foreach ($data['invoice']['items'] as $itemId => $qty) {
@@ -174,51 +172,40 @@ class InvoiceRepository extends Repository
 
         return $invoice;
     }
-
+    
     /**
      * @param mixed $invoice
      * @return mixed
      */
     public function collectTotals($invoice)
     {
-        $subTotal = $baseSubTotal = 0;
-        $taxAmount = $baseTaxAmount = 0;
-        $discountAmount = $baseDiscountAmount = 0;
+        $invoice->sub_total = $invoice->base_sub_total = 0;
+        $invoice->tax_amount = $invoice->base_tax_amount = 0;
+        $invoice->discount_amount = $invoice->base_discount_amount = 0;
 
         foreach ($invoice->items as $invoiceItem) {
-            $subTotal += $invoiceItem->total;
-            $baseSubTotal += $invoiceItem->base_total;
+            $invoice->sub_total += $invoiceItem->total;
+            $invoice->base_sub_total += $invoiceItem->base_total;
 
-            $taxAmount += $invoiceItem->tax_amount;
-            $baseTaxAmount += $invoiceItem->base_tax_amount;
+            $invoice->tax_amount += $invoiceItem->tax_amount;
+            $invoice->base_tax_amount += $invoiceItem->base_tax_amount;
 
-            $discountAmount += $invoiceItem->discount_amount;
-            $baseDiscountAmount += $invoiceItem->base_discount_amount;
+            $invoice->discount_amount += $invoiceItem->discount_amount;
+            $invoice->base_discount_amount += $invoiceItem->base_discount_amount;
         }
 
-        $shippingAmount = $invoice->order->shipping_amount;
-        $baseShippingAmount = $invoice->order->base_shipping_amount;
+        $invoice->shipping_amount = $invoice->order->shipping_amount;
+        $invoice->base_shipping_amount = $invoice->order->base_shipping_amount;
 
         if ($invoice->order->shipping_amount) {
             foreach ($invoice->order->invoices as $prevInvoice) {
-                if ((float) $prevInvoice->shipping_amount) {
-                    $shippingAmount = 0;
-                    $baseShippingAmount = 0;
-                }
+                if ((float) $prevInvoice->shipping_amount)
+                    $invoice->shipping_amount = $invoice->base_shipping_amount = 0;
             }
         }
 
-        $invoice->sub_total = $subTotal;
-        $invoice->base_sub_total = $baseSubTotal;
-
-        $invoice->shipping_amount = $shippingAmount;
-        $invoice->base_shipping_amount = $baseShippingAmount;
-
-        $invoice->tax_amount = $taxAmount;
-        $invoice->base_tax_amount = $baseTaxAmount;
-
-        $invoice->grand_total = $subTotal + $taxAmount + $shippingAmount - $discountAmount;
-        $invoice->base_grand_total = $baseSubTotal + $baseTaxAmount + $baseShippingAmount - $baseDiscountAmount;
+        $invoice->grand_total = $invoice->sub_total + $invoice->tax_amount + $invoice->shipping_amount - $invoice->discount_amount;
+        $invoice->base_grand_total = $invoice->base_sub_total + $invoice->base_tax_amount + $invoice->base_shipping_amount - $invoice->base_discount_amount;
 
         $invoice->save();
 

@@ -11,7 +11,8 @@ return [
     ],
 
     'common' => [
-        'error' => 'حدث شيء خاطئ ، رجاء حاول ثانية لاحقا.'
+        'error' => 'حدث شيء خاطئ ، رجاء حاول ثانية لاحقا.',
+        'no-result-found' => 'We could not find any records.'
     ],
 
     'home' => [
@@ -249,6 +250,7 @@ return [
                     'item-invoice' => '3-الفواتير(:qty_invoiced)',
                     'item-shipped' => 'شحنت(:qty_shipped)',
                     'item-canceled' => 'ملغاة(:qty_canceled)',
+                    'item-refunded' => 'Refunded (:qty_refunded)',
                     'price' => 'السعر',
                     'total' => 'المجموع',
                     'subtotal' => 'المجموع الفرعي',
@@ -274,7 +276,11 @@ return [
                     'order-date' => 'تاريخ الطلب',
                     'bill-to' => 'بيل إلى',
                     'ship-to' => 'السفينة إلى',
-                    'contact' => 'Contact'
+                    'contact' => 'Contact',
+                    'refunds' => 'Refunds',
+                    'individual-refund' => 'Refund #:refund_id',
+                    'adjustment-refund' => 'Adjustment Refund',
+                    'adjustment-fee' => 'Adjustment Fee',
                 ]
             ],
 

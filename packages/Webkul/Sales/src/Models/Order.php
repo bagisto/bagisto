@@ -74,6 +74,14 @@ class Order extends Model implements OrderContract
     {
         return $this->hasMany(InvoiceProxy::modelClass());
     }
+
+    /**
+     * Get the order refunds record associated with the order.
+     */
+    public function refunds()
+    {
+        return $this->hasMany(RefundProxy::modelClass());
+    }
     
     /**
      * Get the customer record associated with the order.
@@ -148,9 +156,8 @@ class Order extends Model implements OrderContract
             return false;
 
         foreach ($this->items as $item) {
-            if ($item->qty_to_ship > 0) {
+            if ($item->qty_to_ship > 0)
                 return true;
-            }
         }
 
         return false;
@@ -165,16 +172,15 @@ class Order extends Model implements OrderContract
             return false;
             
         foreach ($this->items as $item) {
-            if ($item->qty_to_invoice > 0) {
+            if ($item->qty_to_invoice > 0)
                 return true;
-            }
         }
         
         return false;
     }
 
     /**
-     * Checks if order could can canceled on not
+     * Checks if order can be canceled or not
      */
     public function canCancel()
     {
@@ -182,10 +188,28 @@ class Order extends Model implements OrderContract
             return false;
             
         foreach ($this->items as $item) {
-            if ($item->qty_to_cancel > 0) {
+            if ($item->qty_to_cancel > 0)
                 return true;
-            }
         }
+
+        return false;
+    }
+
+    /**
+     * Checks if order can be refunded or not
+     */
+    public function canRefund()
+    {
+        if ($this->status == 'fraud')
+            return false;
+            
+        foreach ($this->items as $item) {
+            if ($item->qty_to_refund > 0)
+                return true;
+        }
+
+        if ($this->base_grand_total_invoiced - $this->base_grand_total_refunded - $this->refunds()->sum('base_adjustment_fee') > 0)
+            return true;
 
         return false;
     }

@@ -154,7 +154,8 @@ return [
         'ends-till' => 'Termina Até',
         'per-cust' => 'Por cliente',
         'usage-throttle' => 'Tempos de uso',
-        'for-guest' => 'Para convidados'
+        'for-guest' => 'Para convidados',
+        'refunded' => 'Refunded'
     ],
     'account' => [
         'title' => 'Minha Conta',
@@ -270,6 +271,7 @@ return [
             'item-invoice' => 'Faturado(s) (:qty_invoiced)',
             'item-shipped' => 'Enviado(s) (:qty_shipped)',
             'item-canceled' => 'Cancelado(s) (:qty_canceled)',
+            'item-refunded' => 'Refunded (:qty_refunded)',
             'price' => 'Preço',
             'total' => 'Total',
             'subtotal' => 'Subtotal',
@@ -284,7 +286,9 @@ return [
             'total-paid' => 'Total Pago',
             'total-refunded' => 'Total Estornado',
             'total-due' => 'Total Devido',
-            'cancel-confirm-msg' => 'Tem certeza que deseja cancelar esse pedido ?'
+            'cancel-confirm-msg' => 'Tem certeza que deseja cancelar esse pedido ?',
+            'refunds' => 'Refunds',
+            'refunded' => 'Refunded'
         ],
         'invoices' => [
             'title' => 'Faturas',
@@ -309,6 +313,7 @@ return [
             'creation-error' => 'A criação de fatura de pedido não é permitida.',
             'product-error' => 'A fatura não pode ser criada sem produtos.'
         ],
+
         'shipments' => [
             'title' => 'Entregas',
             'id' => 'Id',
@@ -333,6 +338,29 @@ return [
             'creation-error' => 'A expedição não pode ser criada para este pedido.',
             'order-error' => 'A criação de remessa de pedidos não é permitida.',
             'quantity-invalid' => 'A quantidade solicitada é inválida ou não está disponível.'
+        ],
+
+        'refunds' => [
+            'title' => 'Refunds',
+            'id' => 'Id',
+            'add-title' => 'Create Refund',
+            'save-btn-title' => 'Refund',
+            'order-id' => 'Order Id',
+            'qty-ordered' => 'Qty Ordered',
+            'qty-to-refund' => 'Qty To Refund',
+            'refund-shipping' => 'Refund Shipping',
+            'adjustment-refund' => 'Adjustment Refund',
+            'adjustment-fee' => 'Adjustment Fee',
+            'update-qty' => 'Update Quantities',
+            'invalid-qty' => 'Found invalid quantity for return items.',
+            'refund-limit-error' => 'The most money available to refund is :amount.',
+            'refunded' => 'Refunded',
+            'date' => 'Refund Date',
+            'customer-name' => 'Customer Name',
+            'status' => 'Status',
+            'action' => 'Action',
+            'view-title' => 'Refund #:refund_id',
+            'invalid-refund-amount-error' => 'Refund amount should be non zero.'
         ]
     ],
     'catalog' => [

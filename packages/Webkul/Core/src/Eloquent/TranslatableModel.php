@@ -3,7 +3,7 @@
 namespace Webkul\Core\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
-use Dimsav\Translatable\Translatable;
+use Astrotomic\Translatable\Translatable;
 use Webkul\Core\Models\Locale;
 
 class TranslatableModel extends Model

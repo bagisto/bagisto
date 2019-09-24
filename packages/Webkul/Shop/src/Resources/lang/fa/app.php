@@ -14,7 +14,8 @@ return [
     ],
 
     'common' => [
-        'error' => 'مشکلی رخ داده است. لطفا بعدا دوباره امتحان کنید.'
+        'error' => 'مشکلی رخ داده است. لطفا بعدا دوباره امتحان کنید.',
+        'no-result-found' => 'We could not find any records.'
     ],
 
     'home' => [
@@ -256,6 +257,7 @@ return [
                     'item-invoice' => 'صورتحساب (:qty_invoiced)',
                     'item-shipped' => 'حمل شده (:qty_shipped)',
                     'item-canceled' => 'لغو شد (:qty_canceled)',
+                    'item-refunded' => 'Refunded (:qty_refunded)',
                     'price' => 'قیمت',
                     'total' => 'جمع',
                     'subtotal' => 'فرعی',
@@ -281,7 +283,11 @@ return [
                     'order-date' => 'تاریخ سفارش',
                     'bill-to' => 'بیل به',
                     'ship-to' => 'حمل به',
-                    'contact' => 'تماس'
+                    'contact' => 'تماس',
+                    'refunds' => 'Refunds',
+                    'individual-refund' => 'Refund #:refund_id',
+                    'adjustment-refund' => 'Adjustment Refund',
+                    'adjustment-fee' => 'Adjustment Fee',
                 ]
             ],
 
