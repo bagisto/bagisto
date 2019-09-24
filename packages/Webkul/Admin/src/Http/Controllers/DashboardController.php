@@ -146,8 +146,8 @@ class DashboardController extends Controller
                 'progress' => $this->getPercentageChange($previous, $current)
             ],
             'avg_sales' =>  [
-                'previous' => $previous = $this->previousOrders()->avg('base_grand_total_invoiced') - $this->previousOrders()->sum('base_grand_total_refunded'),
-                'current' => $current = $this->currentOrders()->avg('base_grand_total_invoiced') - $this->currentOrders()->sum('base_grand_total_refunded'),
+                'previous' => $previous = $this->previousOrders()->avg('base_grand_total_invoiced') - $this->previousOrders()->avg('base_grand_total_refunded'),
+                'current' => $current = $this->currentOrders()->avg('base_grand_total_invoiced') - $this->currentOrders()->avg('base_grand_total_refunded'),
                 'progress' => $this->getPercentageChange($previous, $current)
             ],
             'top_selling_categories' => $this->getTopSellingCategories(),
