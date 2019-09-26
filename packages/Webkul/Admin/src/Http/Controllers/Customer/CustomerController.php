@@ -100,7 +100,6 @@ class CustomerController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'channel_id' => 'required',
             'first_name' => 'string|required',
             'last_name' => 'string|required',
             'gender' => 'required',
@@ -156,7 +155,6 @@ class CustomerController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(), [
-            'channel_id' => 'required',
             'first_name' => 'string|required',
             'last_name' => 'string|required',
             'gender' => 'required',

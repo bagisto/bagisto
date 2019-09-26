@@ -68,8 +68,6 @@ class RegistrationController extends Controller
 
         $data['password'] = bcrypt($data['password']);
 
-        $data['channel_id'] = core()->getCurrentChannel()->id;
-
         if (core()->getConfigData('customer.settings.email.verification')) {
             $data['is_verified'] = 0;
         } else {
