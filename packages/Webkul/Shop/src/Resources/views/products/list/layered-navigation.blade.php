@@ -151,7 +151,9 @@
                     var params = [];
 
                     for(key in this.appliedFilters) {
-                        params.push(key + '=' + this.appliedFilters[key].join(','))
+                        if (key != 'page') {
+                            params.push(key + '=' + this.appliedFilters[key].join(','))
+                        }
                     }
 
                     window.location.href = "?" + params.join('&');
