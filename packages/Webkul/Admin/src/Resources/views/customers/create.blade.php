@@ -78,17 +78,6 @@
                         @endforeach
                         </select>
                     </div>
-
-                    <div class="control-group" :class="[errors.has('channel_id') ? 'has-error' : '']">
-                        <label for="channel" >{{ __('admin::app.customers.customers.channel_name') }}</label>
-                        <select  class="control" name="channel_id" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customers.customers.channel_name') }}&quot;">
-                        @foreach ($channelName as $channel)
-                            <option value="{{ $channel->id }}"> {{ $channel->name}} </>
-                        @endforeach
-                        </select>
-                        <span class="control-error" v-if="errors.has('channel_id')">@{{ errors.first('channel_id') }}</span>
-                    </div>
-
                 </div>
             </div>
         </form>
