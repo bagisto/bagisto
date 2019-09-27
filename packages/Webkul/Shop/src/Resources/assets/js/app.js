@@ -4,17 +4,11 @@ window.VeeValidate = require("vee-validate");
 window.axios = require("axios");
 require("./bootstrap");
 require("ez-plus/src/jquery.ez-plus.js");
-
-const dictionary = {
-    ar: {
-        required: (field) => 'حقل' + field + ' مطلوب',
-        email: (field) => + field + 'يجب ان يكون بريدا اليكتروني صحيح',
-    }
-};
+locales = require("./lang/locales.js");
 
 Vue.use(VeeValidate, {
     dictionary: {
-        ar: { messages: dictionary.ar}
+        ar: { messages: locales.messages.ar }
     }
 });
 
