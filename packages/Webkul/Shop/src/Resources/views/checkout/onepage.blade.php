@@ -372,11 +372,13 @@
             staticRenderFns: shippingTemplateRenderFns,
 
             mounted: function() {
+                var first_iteration = true;
+
                 for (method in shippingMethods) {
-                    if (shippingMethods[method]['default'] == 'yes' || shippingMethods[method]['default'] == 1) {
+                    if (first_iteration) {
                         for (rate in shippingMethods[method]['rates']) {
                             this.selected_shipping_method = shippingMethods[method]['rates'][rate]['method'];
-
+                            first_iteration = false;
                             this.methodSelected();
                         }
                     }
@@ -425,10 +427,12 @@
             staticRenderFns: paymentTemplateRenderFns,
 
             mounted: function() {
-                for (method in paymentMethods) {
-                    if (paymentMethods[method]['default'] == 'yes' || paymentMethods[method]['default'] == 1) {
-                        this.payment.method = paymentMethods[method]['method'];
+                var first_iteration = true;
 
+                for (method in paymentMethods) {
+                    if (first_iteration) {
+                        this.payment.method = paymentMethods[method]['method'];
+                        first_iteration = false;
                         this.methodSelected();
                     }
                 }

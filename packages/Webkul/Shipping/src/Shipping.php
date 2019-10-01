@@ -98,7 +98,6 @@ class Shipping
             if (! isset($rates[$rate->carrier])) {
                 $rates[$rate->carrier] = [
                     'carrier_title' => $rate->carrier_title,
-                    'default' => core()->getConfigData('sales.carriers.' . $rate->carrier. '.default'),
                     'rates' => []
                 ];
             }

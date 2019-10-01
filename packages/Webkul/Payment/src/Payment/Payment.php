@@ -119,14 +119,4 @@ abstract class Payment
     {
         return $this->getConfigData('sort');
     }
-
-    /**
-     * Returns default payment method.
-     *
-     * @return boolean
-     */
-    public function getDefaultMethod()
-    {
-        return $this->getConfigData('default');
-    }
 }

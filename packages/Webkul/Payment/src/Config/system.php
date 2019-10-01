@@ -62,14 +62,7 @@ return [
                         'value' => 4
                     ]
                 ],
-            ],  [
-                'name' => 'default',
-                'title' => 'admin::app.admin.system.default',
-                'type' => 'boolean',
-                'validation' => 'required',
-                'channel_based' => false,
-                'locale_based' => true
-            ],
+            ]
         ]
     ], [
         'key' => 'sales.paymentmethods.moneytransfer',
@@ -124,14 +117,7 @@ return [
                         'value' => 4
                     ]
                 ],
-            ],  [
-                'name' => 'default',
-                'title' => 'admin::app.admin.system.default',
-                'type' => 'boolean',
-                'validation' => 'required',
-                'channel_based' => false,
-                'locale_based' => true
-            ],
+            ]
         ]
     ], [
         'key' => 'sales.paymentmethods.paypal_standard',
@@ -192,14 +178,7 @@ return [
                         'value' => 4
                     ]
                 ],
-            ],  [
-                'name' => 'default',
-                'title' => 'admin::app.admin.system.default',
-                'type' => 'boolean',
-                'validation' => 'required',
-                'channel_based' => false,
-                'locale_based' => true
-            ],
+            ]
         ]
     ]
 ];
