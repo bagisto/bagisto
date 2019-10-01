@@ -201,7 +201,9 @@ class ProductRepository extends Repository
             }
         }
 
-        if (request()->route()->getName() != 'admin.catalog.products.massupdate') {
+        $route = request()->route() ? request()->route()->getName() : ""; 
+
+        if ($route != 'admin.catalog.products.massupdate') {
             if  (isset($data['categories'])) {
                 $product->categories()->sync($data['categories']);
             }
