@@ -6,8 +6,7 @@ return [
         'description' => 'shop::app.checkout.onepage.cash-desc',
         'class' => 'Webkul\Payment\Payment\CashOnDelivery',
         'active' => true,
-        'sort' => 1,
-        'default' => 'yes'
+        'sort' => 1
     ],
 
     'moneytransfer' => [
@@ -16,8 +15,7 @@ return [
         'description' => 'shop::app.checkout.onepage.money-desc',
         'class' => 'Webkul\Payment\Payment\MoneyTransfer',
         'active' => true,
-        'sort' => 2,
-        'default' => 'no'
+        'sort' => 2
     ],
 
     'paypal_standard' => [
@@ -28,7 +26,6 @@ return [
         'sandbox' => true,
         'active' => true,
         'business_account' => 'test@webkul.com',
-        'sort' => 3,
-        'default' => 'no'
+        'sort' => 3
     ]
 ];

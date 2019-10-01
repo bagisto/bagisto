@@ -366,6 +366,8 @@
                     templateRender: null,
 
                     selected_shipping_method: '',
+
+                    first_iteration : true,
                 }
             },
 
@@ -373,10 +375,10 @@
 
             mounted: function() {
                 for (method in shippingMethods) {
-                    if (shippingMethods[method]['default'] == 'yes' || shippingMethods[method]['default'] == 1) {
+                    if (this.first_iteration) {
                         for (rate in shippingMethods[method]['rates']) {
                             this.selected_shipping_method = shippingMethods[method]['rates'][rate]['method'];
-
+                            this.first_iteration = false;
                             this.methodSelected();
                         }
                     }
@@ -419,6 +421,8 @@
                     payment: {
                         method: ""
                     },
+
+                    first_iteration : true,
                 }
             },
 
@@ -426,9 +430,9 @@
 
             mounted: function() {
                 for (method in paymentMethods) {
-                    if (paymentMethods[method]['default'] == 'yes' || paymentMethods[method]['default'] == 1) {
+                    if (this.first_iteration) {
                         this.payment.method = paymentMethods[method]['method'];
-
+                        this.first_iteration = false;
                         this.methodSelected();
                     }
                 }

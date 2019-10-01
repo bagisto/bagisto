@@ -41,7 +41,6 @@ class Payment
                     'method_title' => $object->getTitle(),
                     'description' => $object->getDescription(),
                     'sort' => $object->getSortOrder(),
-                    'default' => $object->getDefaultMethod(),
                 ];
             }
         }
