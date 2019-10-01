@@ -37,9 +37,13 @@ class GenerateProduct
     {
         $attributes = $this->getDefaultFamilyAttributes();
 
+        $attributeFamily = $this->attributeFamily->findWhere([
+            'code' => 'default'
+        ]);
+
         $sku = str_random(10);
         $data['sku'] = strtolower($sku);
-        $data['attribute_family_id'] = 1;
+        $data['attribute_family_id'] = $attributeFamily->first()->id;
         $data['type'] = 'simple';
 
         $product = $this->product->create($data);
