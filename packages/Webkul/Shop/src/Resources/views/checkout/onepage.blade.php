@@ -366,19 +366,19 @@
                     templateRender: null,
 
                     selected_shipping_method: '',
+
+                    first_iteration : true,
                 }
             },
 
             staticRenderFns: shippingTemplateRenderFns,
 
             mounted: function() {
-                var first_iteration = true;
-
                 for (method in shippingMethods) {
-                    if (first_iteration) {
+                    if (this.first_iteration) {
                         for (rate in shippingMethods[method]['rates']) {
                             this.selected_shipping_method = shippingMethods[method]['rates'][rate]['method'];
-                            first_iteration = false;
+                            this.first_iteration = false;
                             this.methodSelected();
                         }
                     }
@@ -421,18 +421,18 @@
                     payment: {
                         method: ""
                     },
+
+                    first_iteration : true,
                 }
             },
 
             staticRenderFns: paymentTemplateRenderFns,
 
             mounted: function() {
-                var first_iteration = true;
-
                 for (method in paymentMethods) {
-                    if (first_iteration) {
+                    if (this.first_iteration) {
                         this.payment.method = paymentMethods[method]['method'];
-                        first_iteration = false;
+                        this.first_iteration = false;
                         this.methodSelected();
                     }
                 }
