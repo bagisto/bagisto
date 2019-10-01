@@ -73,7 +73,7 @@
             :validations = "'{{ $validations }}'"
             :depend = "'{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $dependField }}]'"
             :value = "'{{ $dependValue }}'"
-            :field_name = "'{{ $field['title'] }}'"
+            :field_name = "'{{ trans($field['title']) }}'"
             :channel_locale = "'{{ $channel_locale }}'"
             :result = "'{{ $selectedOption }}'"
         ></depends>

@@ -150,12 +150,14 @@ class OrderRepository extends Repository
     {
         $config = new CoreConfig();
 
-        $invoiceNumberPrefix = $config->where('code','=',"sales.invoiceSettings.invoice_number.invoice_number_prefix")->first()
-            ? $config->where('code','=',"sales.invoiceSettings.invoice_number.invoice_number_prefix")->first()->value : false;
-        $invoiceNumberLength = $config->where('code','=',"sales.invoiceSettings.invoice_number.invoice_number_length")->first()
-            ? $config->where('code','=',"sales.invoiceSettings.invoice_number.invoice_number_length")->first()->value : false;
-        $invoiceNumberSuffix = $config->where('code','=',"sales.invoiceSettings.invoice_number.invoice_number_suffix")->first()
-            ? $config->where('code','=',"sales.invoiceSettings.invoice_number.invoice_number_suffix")->first()->value: false;
+        $invoiceNumberPrefix = $config->where('code','=',"sales.orderSettings.order_number.order_number_prefix")->first()
+            ? $config->where('code','=',"sales.orderSettings.order_number.order_number_prefix")->first()->value : false;
+
+        $invoiceNumberLength = $config->where('code','=',"sales.orderSettings.order_number.order_number_length")->first()
+            ? $config->where('code','=',"sales.orderSettings.order_number.order_number_length")->first()->value : false;
+
+        $invoiceNumberSuffix = $config->where('code','=',"sales.orderSettings.order_number.order_number_suffix")->first()
+            ? $config->where('code','=',"sales.orderSettings.order_number.order_number_suffix")->first()->value: false;
 
         $lastOrder = $this->model->orderBy('id', 'desc')->limit(1)->first();
         $lastId = $lastOrder ? $lastOrder->id : 0;

@@ -1164,11 +1164,11 @@ return [
             'credit-max' => 'Customer Credit Max',
             'credit-max-value' => 'Credit Max Value',
             'use-credit-max' => 'Use Credit Max',
-            'invoice-settings' => 'Invoice Settings',
-            'invoiceNumber' => 'Invoice Number Settings',
-            'invoice number prefix' => 'Invoice Number Prefix',
-            'invoice number length' => 'Invoice Number Length',
-            'invoice number suffix' => 'Invoice Number Suffix',
+            'order-settings' => 'Order Settings',
+            'orderNumber' => 'Order Number Settings',
+            'order-number-prefix' => 'Order Number Prefix',
+            'order-number-length' => 'Order Number Length',
+            'order-number-suffix' => 'Order Number Suffix',
             'default' => 'Default',
         ]
     ]
