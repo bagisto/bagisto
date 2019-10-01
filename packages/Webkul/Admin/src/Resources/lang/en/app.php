@@ -1155,6 +1155,7 @@ return [
             'footer' => 'Footer',
             'content' => 'Content',
             'footer-content' => 'Footer Text',
+            'footer-toggle' => 'Toggle footer',
             'locale-options' => 'Unit Options',
             'weight-unit' => 'Weight Unit',
             'design' => 'Design',
