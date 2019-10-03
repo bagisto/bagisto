@@ -50,7 +50,7 @@ class GenerateProducts extends Command
      * @return mixed
      */
     public function handle()
-    {        
+    {
         if (! is_string($this->argument('value')) || ! is_numeric($this->argument('quantity'))) {
             $this->info('Illegal parameters or value of parameters are passed');
         } else {
@@ -63,10 +63,10 @@ class GenerateProducts extends Command
                     } catch (\Exception $e) {
                         continue;
                     }
-                    
+
                     $quantity--;
-                } 
-    
+                }
+
                 if ($result)
                     $this->info('Product(s) created successfully.');
                 else
