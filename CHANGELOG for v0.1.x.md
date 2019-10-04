@@ -2,6 +2,36 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
+## **v0.1.8 (4th of October, 2019)** - *Release*
+
+* [feature] - Refund is added for orders.
+
+* #1338 [fixed] - Fixed the complete header ,header should not scroll on scrolling the page.
+
+* #1442 [fixed] - Customer should get an email after registration.
+
+* #1490 [fixed] - Getting Incorrect paid amount and due amount if order contains more than one product.
+
+* #1492 [fixed] - Not showing orderid with prefix and suffix in Refund section.
+
+* #1504 [fixed] - Getting Exception when applying filter in Invoices grid through Invoice Date.
+
+* #1489 [fixed] - Quantity of Product doesn't get updated after creating a refund.
+
+* #1486 [fixed] - Getting incorrect Total Due Amount if discount is applied.
+
+* #1484 [fixed] - Unable to edit data of Refund Shipping field.
+
+* #1483 [fixed] - Refund option should not be available if refund is already created.
+
+* #1461 [fixed] - Invoice number length should be number of zeros that appears before invoice id.
+
+* #1447 [fixed] - Order ID is not matching after printing invoice.
+
+* #1460 [fixed] - Getting error on deleting Newsletter.
+
+* #1172 [fixed] - Default shipping and payment should be selected, currently no shipping method and payment method is selected by default.
+
 ## **v0.1.7 (17th of September, 2019)** - *Release*
 
 * [feature] - Fiterable attributes according to category.
