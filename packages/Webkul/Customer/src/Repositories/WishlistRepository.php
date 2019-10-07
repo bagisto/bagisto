@@ -61,4 +61,17 @@ class WishlistRepository extends Repository
     public function getItemsWithProducts($id) {
         return $this->model->find($id)->item_wishlist;
     }
+
+
+     /**
+     * get customer wishlist Items.
+     *
+     * @return mixed
+     */
+    public function getCustomerWhishlist() {
+        return $this->model->where([
+            'channel_id' => core()->getCurrentChannel()->id,
+            'customer_id' => auth()->guard('customer')->user()->id
+        ])->paginate(5);
+    }
 }

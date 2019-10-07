@@ -65,6 +65,10 @@
                         </div>
                         <div class="horizontal-rule mb-10 mt-10"></div>
                     @endforeach
+
+                    <div class="bottom-toolbar">
+                        {{ $reviews->links()  }}
+                    </div>
                 @else
                     <div class="empty mt-15">
                         {{ __('customer::app.reviews.empty') }}
