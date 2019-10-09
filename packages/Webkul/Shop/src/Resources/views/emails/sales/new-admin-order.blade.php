@@ -110,11 +110,13 @@
                     <tbody>
                         @foreach ($order->items as $item)
                             <tr>
-                                <td data-value="{{ __('shop::app.customer.account.order.view.SKU') }}" style="text-align: left;padding: 8px">{{ $item->getTypeInstance()->getOrderedItem($item)->sku }}</td>
+                                <td data-value="{{ __('shop::app.customer.account.order.view.SKU') }}" style="text-align: left;padding: 8px">
+                                    {{ $item->getTypeInstance()->getOrderedItem($item)->sku }}
+                                </td>
 
                                 <td data-value="{{ __('shop::app.customer.account.order.view.product-name') }}" style="text-align: left;padding: 8px">
                                     {{ $item->name }}
-                                    
+
                                     @if (isset($item->additional['attributes']))
                                         <div class="item-options">
                                             
@@ -126,10 +128,13 @@
                                     @endif
                                 </td>
 
-                                <td data-value="{{ __('shop::app.customer.account.order.view.price') }}" style="text-align: left;padding: 8px">{{ core()->formatPrice($item->price, $order->order_currency_code) }}
+                                <td data-value="{{ __('shop::app.customer.account.order.view.price') }}" style="text-align: left;padding: 8px">
+                                    {{ core()->formatPrice($item->price, $order->order_currency_code) }}
                                 </td>
 
-                                <td data-value="{{ __('shop::app.customer.account.order.view.qty') }}" style="text-align: left;padding: 8px">{{ $item->qty_ordered }}</td>
+                                <td data-value="{{ __('shop::app.customer.account.order.view.qty') }}" style="text-align: left;padding: 8px">
+                                    {{ $item->qty_ordered }}
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
