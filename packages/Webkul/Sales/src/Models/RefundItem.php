@@ -44,21 +44,4 @@ class RefundItem extends Model implements RefundItemContract
     {
         return $this->hasOne(RefundItemProxy::modelClass(), 'parent_id');
     }
-
-    /**
-     * Returns configurable option html
-     */
-    public function getOptionDetailHtml()
-    {
-
-        if ($this->type == 'configurable' && isset($this->additional['attributes'])) {
-            $labels = [];
-
-            foreach ($this->additional['attributes'] as $attribute) {
-                $labels[] = $attribute['attribute_name'] . ' : ' . $attribute['option_label'];
-            }
-
-            return implode(', ', $labels);
-        }
-    }
 }
