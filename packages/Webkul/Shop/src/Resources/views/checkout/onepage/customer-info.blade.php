@@ -307,12 +307,11 @@
                 @endauth
             </div>
 
-                @auth('customer')
-                    <a class="btn btn-lg btn-primary" @click = backToSavedShippingAddress()>
-                        {{ __('shop::app.checkout.onepage.back') }}
-                    </a>
-                @endauth
-            </div>
+            @auth('customer')
+                <a class="btn btn-lg btn-primary" @click = backToSavedShippingAddress()>
+                    {{ __('shop::app.checkout.onepage.back') }}
+                </a>
+            @endauth
 
             <div class="control-group" :class="[errors.has('address-form.shipping[first_name]') ? 'has-error' : '']">
                 <label for="shipping[first_name]" class="required">
