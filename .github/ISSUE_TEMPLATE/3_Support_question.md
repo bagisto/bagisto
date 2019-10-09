@@ -10,6 +10,6 @@ This repository is only for reporting bugs or issues. If you need support, pleas
 
 2. Create support ticket on https://bagisto.uvdesk.com
 
-3. Visit forums to get support from our community (https://forms.bagisto.com)
+3. Visit forums to get support from our community (https://forums.bagisto.com)
 
 Thanks!
