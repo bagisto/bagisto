@@ -166,7 +166,7 @@ class CustomerController extends Controller
      */
     public function reviews()
     {
-        $reviews = auth()->guard('customer')->user()->all_reviews;
+        $reviews = $this->productReview->getCustomerReview();
 
         return view($this->_config['view'], compact('reviews'));
     }
