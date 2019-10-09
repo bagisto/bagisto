@@ -327,6 +327,13 @@ return [
         'in-stock' => 'متوفر',
         'out-of-stock' => 'غير متوفر',
         'view-all' => 'عرض الكل',
+        'less-quantity' => 'Quantity can not be less than one.',
+        'starting-at' => 'Starting at',
+        'customize-options' => 'Customize Options',
+        'choose-selection' => 'Choose a selection',
+        'your-customization' => 'Your Customization',
+        'total-amount' => 'Total Amount',
+        'none' => 'None',
         'less-quantity' => 'الكمية لايمكن ان تكون أقل من واحد.'
     ],
 
@@ -363,6 +370,8 @@ return [
             'integrity' => [
                 'missing_fields' =>'إنتهاك سلامة نظام العربة ، بعض الحقول المطلوبة مفقودة',
                 'missing_options' =>'إنتهاك سلامة نظام العربة ، الخيارات مفقودة لمنتج قابل للتهيئة',
+                'missing_links' => 'Downloadable links are missing for this product.',
+                'qty_missing' => 'Atleast one product should have more than 1 quantity.'
             ],
             'create-error' => 'صادفت بعض القضايا أثناء صناعة السيارات',
             'title' => 'عربة التسوق',

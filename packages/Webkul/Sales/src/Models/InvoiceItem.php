@@ -12,6 +12,16 @@ class InvoiceItem extends Model implements InvoiceItemContract
     protected $casts = [
         'additional' => 'array',
     ];
+
+    /**
+     * Retrieve type instance
+     *
+     * @return AbstractType
+     */
+    public function getTypeInstance()
+    {
+        return $this->order_item->getTypeInstance();
+    }
     
     /**
      * Get the invoice record associated with the invoice item.
@@ -46,19 +56,18 @@ class InvoiceItem extends Model implements InvoiceItemContract
     }
 
     /**
-     * Returns configurable option html
+     * Get the children items.
      */
-    public function getOptionDetailHtml()
+    public function children()
     {
+        return $this->hasMany(self::class, 'parent_id');
+    }
 
-        if ($this->type == 'configurable' && isset($this->additional['attributes'])) {
-            $labels = [];
-
-            foreach ($this->additional['attributes'] as $attribute) {
-                $labels[] = $attribute['attribute_name'] . ' : ' . $attribute['option_label'];
-            }
-
-            return implode(', ', $labels);
-        }
+    /**
+     * Get order item type
+     */
+    public function getTypeAttribute()
+    {
+        return $this->order_item->type;
     }
 }

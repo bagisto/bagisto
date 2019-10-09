@@ -2,13 +2,8 @@
 
 namespace Webkul\Customer\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Webkul\Customer\Repositories\CustomerRepository;
-use Webkul\Product\Repositories\ProductReviewRepository as ProductReview;
-use Webkul\Customer\Models\Customer;
-use Auth;
 use Hash;
+use Webkul\Customer\Repositories\CustomerRepository;
 
 /**
  * Customer controlller for the customer basically for the tasks of customers which will be
@@ -20,55 +15,42 @@ use Hash;
 class CustomerController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Contains route related configuration
      *
-     * @return \Illuminate\Http\Response
+     * @var array
      */
     protected $_config;
 
     /**
      * CustomerRepository object
      *
-     * @var array
+     * @var Object
     */
-    protected $customer;
+    protected $customerRepository;
 
     /**
-     * ProductReviewRepository object
+     * Create a new controller instance.
      *
-     * @var array
-    */
-    protected $productReview;
-
-    /**
-     * Create a new Repository instance.
-     *
-     * @param  \Webkul\Customer\Repositories\CustomerRepository     $customer
-     * @param  \Webkul\Product\Repositories\ProductReviewRepository $productReview
+     * @param  \Webkul\Customer\Repositories\CustomerRepository $customer
      * @return void
     */
-    public function __construct(
-        CustomerRepository $customer,
-        ProductReview $productReview
-    )
+    public function __construct(CustomerRepository $customerRepository)
     {
         $this->middleware('customer');
 
         $this->_config = request('_config');
 
-        $this->customer = $customer;
-
-        $this->productReview = $productReview;
+        $this->customerRepository = $customerRepository;
     }
 
     /**
      * Taking the customer to profile details page
      *
-     * @return View
+     * @return \Illuminate\View\View
      */
     public function index()
     {
-        $customer = $this->customer->find(auth()->guard('customer')->user()->id);
+        $customer = $this->customerRepository->find(auth()->guard('customer')->user()->id);
 
         return view($this->_config['view'], compact('customer'));
     }
@@ -76,11 +58,11 @@ class CustomerController extends Controller
     /**
      * For loading the edit form page.
      *
-     * @return View
+     * @return \Illuminate\View\View
      */
     public function edit()
     {
-        $customer = $this->customer->find(auth()->guard('customer')->user()->id);
+        $customer = $this->customerRepository->find(auth()->guard('customer')->user()->id);
 
         return view($this->_config['view'], compact('customer'));
     }
@@ -88,7 +70,7 @@ class CustomerController extends Controller
     /**
      * Edit function for editing customer profile.
      *
-     * @return Redirect.
+     * @return response
      */
     public function update()
     {
@@ -106,9 +88,8 @@ class CustomerController extends Controller
 
         $data = collect(request()->input())->except('_token')->toArray();
 
-        if ($data['date_of_birth'] == "") {
+        if ($data['date_of_birth'] == "")
             unset($data['date_of_birth']);
-        }
 
         if ($data['oldpassword'] != "" || $data['oldpassword'] != null) {
             if(Hash::check($data['oldpassword'], auth()->guard('customer')->user()->password)) {
@@ -122,7 +103,7 @@ class CustomerController extends Controller
             unset($data['password']);
         }
 
-        if ($this->customer->update($data, $id)) {
+        if ($this->customerRepository->update($data, $id)) {
             Session()->flash('success', trans('shop::app.customer.account.profile.edit-success'));
 
             return redirect()->route($this->_config['redirect']);
@@ -162,7 +143,7 @@ class CustomerController extends Controller
     /**
      * Load the view for the customer account panel, showing approved reviews.
      *
-     * @return Mixed
+     * @return \Illuminate\View\View
      */
     public function reviews()
     {

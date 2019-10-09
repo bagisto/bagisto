@@ -3,8 +3,7 @@
 namespace Webkul\Admin\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\Facades\Configuration;
-use Webkul\Core\Repositories\CoreConfigRepository as CoreConfig;
+use Webkul\Core\Repositories\CoreConfigRepository;
 use Webkul\Core\Tree;
 use Illuminate\Support\Facades\Storage;
 
@@ -28,7 +27,7 @@ class ConfigurationController extends Controller
      *
      * @var array
      */
-    protected $coreConfig;
+    protected $coreConfigRepository;
 
     /**
      *
@@ -39,14 +38,14 @@ class ConfigurationController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\CoreConfigRepository  $coreConfig
+     * @param  \Webkul\Core\Repositories\CoreConfigRepository $coreConfigRepository
      * @return void
      */
-    public function __construct(CoreConfig $coreConfig)
+    public function __construct(CoreConfigRepository $coreConfigRepository)
     {
         $this->middleware('admin');
 
-        $this->coreConfig = $coreConfig;
+        $this->coreConfigRepository = $coreConfigRepository;
 
         $this->_config = request('_config');
 
@@ -75,7 +74,7 @@ class ConfigurationController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -121,7 +120,7 @@ class ConfigurationController extends Controller
     {
         Event::fire('core.configuration.save.before');
 
-        $this->coreConfig->create(request()->all());
+        $this->coreConfigRepository->create(request()->all());
 
         Event::fire('core.configuration.save.after');
 
@@ -141,7 +140,7 @@ class ConfigurationController extends Controller
 
         $fileName = 'configuration/'. $path;
 
-        $config = $this->coreConfig->findOneByField('value', $fileName);
+        $config = $this->coreConfigRepository->findOneByField('value', $fileName);
 
         return Storage::download($config['value']);
     }

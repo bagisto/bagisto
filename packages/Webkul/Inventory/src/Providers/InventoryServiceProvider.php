@@ -3,8 +3,6 @@
 namespace Webkul\Inventory\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Foundation\AliasLoader;
-use Illuminate\Routing\Router;
 
 class InventoryServiceProvider extends ServiceProvider
 {
@@ -13,7 +11,7 @@ class InventoryServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(Router $router)
+    public function boot()
     {
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }

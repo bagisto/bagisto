@@ -19,29 +19,33 @@ class AttributeFamilyRepository extends Repository
     /**
      * AttributeRepository object
      *
-     * @var array
+     * @var Object
      */
-    protected $attribute;
+    protected $attributeRepository;
 
     /**
      * AttributeGroupRepository object
      *
-     * @var array
+     * @var Object
      */
-    protected $attributeGroup;
+    protected $attributeGroupRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeRepository      $attribute
-     * @param  Webkul\Attribute\Repositories\AttributeGroupRepository $attributeGroup
+     * @param  Webkul\Attribute\Repositories\AttributeRepository      $attributeRepository
+     * @param  Webkul\Attribute\Repositories\AttributeGroupRepository $attributeGroupRepository
      * @return void
      */
-    public function __construct(AttributeRepository $attribute, AttributeGroupRepository $attributeGroup, App $app)
+    public function __construct(
+        AttributeRepository $attributeRepository,
+        AttributeGroupRepository $attributeGroupRepository,
+        App $app
+    )
     {
-        $this->attribute = $attribute;
+        $this->attributeRepository = $attributeRepository;
 
-        $this->attributeGroup = $attributeGroup;
+        $this->attributeGroupRepository = $attributeGroupRepository;
 
         parent::__construct($app);
     }
@@ -75,9 +79,9 @@ class AttributeFamilyRepository extends Repository
 
             foreach ($custom_attributes as $key => $attribute) {
                 if (isset($attribute['id'])) {
-                    $attributeModel = $this->attribute->find($attribute['id']);
+                    $attributeModel = $this->attributeRepository->find($attribute['id']);
                 } else {
-                    $attributeModel = $this->attribute->findOneByField('code', $attribute['code']);
+                    $attributeModel = $this->attributeRepository->findOneByField('code', $attribute['code']);
                 }
 
                 $attributeGroup->custom_attributes()->save($attributeModel, ['position' => $key + 1]);
@@ -112,7 +116,7 @@ class AttributeFamilyRepository extends Repository
 
                     if (isset($attributeGroupInputs['custom_attributes'])) {
                         foreach ($attributeGroupInputs['custom_attributes'] as $key => $attribute) {
-                            $attributeModel = $this->attribute->find($attribute['id']);
+                            $attributeModel = $this->attributeRepository->find($attribute['id']);
                             $attributeGroup->custom_attributes()->save($attributeModel, ['position' => $key + 1]);
                         }
                     }
@@ -121,7 +125,7 @@ class AttributeFamilyRepository extends Repository
                         $previousAttributeGroupIds->forget($index);
                     }
 
-                    $attributeGroup = $this->attributeGroup->find($attributeGroupId);
+                    $attributeGroup = $this->attributeGroupRepository->find($attributeGroupId);
                     $attributeGroup->update($attributeGroupInputs);
 
                     $attributeIds = $attributeGroup->custom_attributes()->get()->pluck('id');
@@ -131,7 +135,7 @@ class AttributeFamilyRepository extends Repository
                             if (is_numeric($index = $attributeIds->search($attribute['id']))) {
                                 $attributeIds->forget($index);
                             } else {
-                                $attributeModel = $this->attribute->find($attribute['id']);
+                                $attributeModel = $this->attributeRepository->find($attribute['id']);
                                 $attributeGroup->custom_attributes()->save($attributeModel, ['position' => $key + 1]);
                             }
                         }
@@ -145,7 +149,7 @@ class AttributeFamilyRepository extends Repository
         }
 
         foreach ($previousAttributeGroupIds as $attributeGroupId) {
-            $this->attributeGroup->delete($attributeGroupId);
+            $this->attributeGroupRepository->delete($attributeGroupId);
         }
 
         Event::fire('catalog.attribute_family.update.after', $family);
@@ -158,7 +162,7 @@ class AttributeFamilyRepository extends Repository
         $attributeFamilies = $this->model->all();
         $trimmed = array();
 
-        foreach($attributeFamilies as $key => $attributeFamily) {
+        foreach ($attributeFamilies as $key => $attributeFamily) {
             if ($attributeFamily->name != null || $attributeFamily->name != "") {
                 $trimmed[$key] = [
                     'id' => $attributeFamily->id,

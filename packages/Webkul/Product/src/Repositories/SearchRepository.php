@@ -4,7 +4,7 @@ namespace Webkul\Product\Repositories;
 
 use Illuminate\Container\Container as App;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Product\Repositories\ProductRepository as Product;
+use Webkul\Product\Repositories\ProductRepository;
 
 /**
  * Search Reposotory
@@ -15,17 +15,26 @@ use Webkul\Product\Repositories\ProductRepository as Product;
 class SearchRepository extends Repository
 {
     /**
-     * Specify Model class name
+     * ProductRepository object
      *
-     * @return mixed
+     * @return Object
      */
-    protected $product;
+    protected $productRepository;
 
-
-    public function __construct(App $app, Product $product) {
+    /**
+     * Create a new repository instance.
+     *
+     * @param  Webkul\Product\Repositories\ProductRepository $productRepository
+     * @return void
+     */
+    public function __construct(
+        ProductRepository $productRepository,
+        App $app
+    )
+    {
         parent::__construct($app);
 
-        $this->product = $product;
+        $this->productRepository = $productRepository;
     }
 
     function model()
@@ -33,12 +42,9 @@ class SearchRepository extends Repository
         return 'Webkul\Product\Contracts\Product';
     }
 
-    public function searchAttributes()
+    public function search($data)
     {
-    }
-
-    public function search($data) {
-        $products = $this->product->searchProductByAttribute($data['term']);
+        $products = $this->productRepository->searchProductByAttribute($data['term']);
 
         return $products;
     }

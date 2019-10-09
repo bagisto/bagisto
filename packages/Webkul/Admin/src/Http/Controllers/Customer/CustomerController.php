@@ -2,12 +2,10 @@
 
 namespace Webkul\Admin\Http\Controllers\Customer;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Customer\Repositories\CustomerRepository as Customer;
-use Webkul\Customer\Repositories\CustomerGroupRepository as CustomerGroup;
-use Webkul\Core\Repositories\ChannelRepository as Channel;
+use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Customer\Repositories\CustomerGroupRepository;
+use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Admin\Mail\NewCustomerNotification;
 use Mail;
 
@@ -31,47 +29,51 @@ class CustomerController extends Controller
      *
      * @var array
      */
-    protected $customer;
+    protected $customerRepository;
 
      /**
      * CustomerGroupRepository object
      *
      * @var array
      */
-    protected $customerGroup;
+    protected $customerGroupRepository;
 
      /**
      * ChannelRepository object
      *
      * @var array
      */
-    protected $channel;
+    protected $channelRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param \Webkul\Customer\Repositories\CustomerRepository $customer
-     * @param \Webkul\Customer\Repositories\CustomerGroupRepository $customerGroup
-     * @param \Webkul\Core\Repositories\ChannelRepository $channel
+     * @param \Webkul\Customer\Repositories\CustomerRepository      $customerRepository
+     * @param \Webkul\Customer\Repositories\CustomerGroupRepository $customerGroupRepository
+     * @param \Webkul\Core\Repositories\ChannelRepository           $channelRepository
      */
-    public function __construct(Customer $customer, CustomerGroup $customerGroup, Channel $channel)
+    public function __construct(
+        CustomerRepository $customerRepository,
+        CustomerGroupRepository $customerGroupRepository,
+        ChannelRepository $channelRepository
+    )
     {
         $this->_config = request('_config');
 
         $this->middleware('admin');
 
-        $this->customer = $customer;
+        $this->customerRepository = $customerRepository;
 
-        $this->customerGroup = $customerGroup;
+        $this->customerGroupRepository = $customerGroupRepository;
 
-        $this->channel = $channel;
+        $this->channelRepository = $channelRepository;
 
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
     */
     public function index()
     {
@@ -81,13 +83,13 @@ class CustomerController extends Controller
      /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
-        $customerGroup = $this->customerGroup->findWhere([['code', '<>', 'guest']]);
+        $customerGroup = $this->customerGroupRepository->findWhere([['code', '<>', 'guest']]);
 
-        $channelName = $this->channel->all();
+        $channelName = $this->channelRepository->all();
 
         return view($this->_config['view'], compact('customerGroup','channelName'));
     }
@@ -115,7 +117,7 @@ class CustomerController extends Controller
 
         $data['is_verified'] = 1;
 
-        $customer = $this->customer->create($data);
+        $customer = $this->customerRepository->create($data);
 
         try {
             Mail::queue(new NewCustomerNotification($customer, $password));
@@ -132,15 +134,15 @@ class CustomerController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
-        $customer = $this->customer->findOrFail($id);
+        $customer = $this->customerRepository->findOrFail($id);
 
-        $customerGroup = $this->customerGroup->findWhere([['code', '<>', 'guest']]);
+        $customerGroup = $this->customerGroupRepository->findWhere([['code', '<>', 'guest']]);
 
-        $channelName = $this->channel->all();
+        $channelName = $this->channelRepository->all();
 
         return view($this->_config['view'], compact('customer', 'customerGroup', 'channelName'));
     }
@@ -148,11 +150,10 @@ class CustomerController extends Controller
      /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
         $this->validate(request(), [
             'first_name' => 'string|required',
@@ -162,7 +163,7 @@ class CustomerController extends Controller
             'date_of_birth' => 'date|before:today'
         ]);
 
-        $this->customer->update(request()->all(), $id);
+        $this->customerRepository->update(request()->all(), $id);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Customer']));
 
@@ -177,10 +178,10 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        $customer = $this->customer->findorFail($id);
+        $customer = $this->customerRepository->findorFail($id);
 
         try {
-            $this->customer->delete($id);
+            $this->customerRepository->delete($id);
 
             session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
 
@@ -195,11 +196,11 @@ class CustomerController extends Controller
     /**
      * To load the note taking screen for the customers
      *
-     * @return view
+     * @return \Illuminate\View\View
      */
     public function createNote($id)
     {
-        $customer = $this->customer->find($id);
+        $customer = $this->customerRepository->find($id);
 
         return view($this->_config['view'])->with('customer', $customer);
     }
@@ -215,7 +216,7 @@ class CustomerController extends Controller
             'notes' => 'string|nullable'
         ]);
 
-        $customer = $this->customer->find(request()->input('_customer'));
+        $customer = $this->customerRepository->find(request()->input('_customer'));
 
         $noteTaken = $customer->update([
             'notes' => request()->input('notes')
@@ -241,7 +242,7 @@ class CustomerController extends Controller
         $updateOption = request()->input('update-options');
 
         foreach ($customerIds as $customerId) {
-            $customer = $this->customer->find($customerId);
+            $customer = $this->customerRepository->find($customerId);
 
             $customer->update([
                 'status' => $updateOption
@@ -263,7 +264,7 @@ class CustomerController extends Controller
         $customerIds = explode(',', request()->input('indexes'));
 
         foreach ($customerIds as $customerId) {
-            $this->customer->deleteWhere([
+            $this->customerRepository->deleteWhere([
                 'id' => $customerId
             ]);
         }

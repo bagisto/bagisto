@@ -2,12 +2,10 @@
 
 namespace Webkul\Category\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Webkul\Category\Repositories\CategoryRepository as Category;
-use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
-use Webkul\Category\Models\CategoryTranslation;
 use Illuminate\Support\Facades\Event;
+use Webkul\Category\Repositories\CategoryRepository;
+use Webkul\Category\Models\CategoryTranslation;
+use Webkul\Attribute\Repositories\AttributeRepository;
 
 /**
  * Catalog category controller
@@ -27,29 +25,32 @@ class CategoryController extends Controller
     /**
      * CategoryRepository object
      *
-     * @var array
+     * @var Object
      */
-    protected $category;
+    protected $categoryRepository;
 
     /**
      * AttributeRepository object
      *
-     * @var array
+     * @var Object
      */
-    protected $attribute;
+    protected $attributeRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Category\Repositories\CategoryRepository       $category
-     * @param  use Webkul\Attribute\Repositories\AttributeRepository  $attribute
+     * @param  \Webkul\Category\Repositories\CategoryRepository   $categoryRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository $attributeRepository
      * @return void
      */
-    public function __construct(Category $category, Attribute $attribute)
+    public function __construct(
+        CategoryRepository $categoryRepository,
+        AttributeRepository $attributeRepository
+    )
     {
-        $this->category = $category;
+        $this->categoryRepository = $categoryRepository;
 
-        $this->attribute = $attribute;
+        $this->attributeRepository = $attributeRepository;
 
         $this->_config = request('_config');
     }
@@ -57,7 +58,7 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -67,13 +68,13 @@ class CategoryController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
-        $categories = $this->category->getCategoryTree(null, ['id']);
+        $categories = $this->categoryRepository->getCategoryTree(null, ['id']);
 
-        $attributes = $this->attribute->findWhere(['is_filterable' =>  1]);
+        $attributes = $this->attributeRepository->findWhere(['is_filterable' =>  1]);
 
         return view($this->_config['view'], compact('categories', 'attributes'));
     }
@@ -104,7 +105,7 @@ class CategoryController extends Controller
             }
         }
 
-        $category = $this->category->create(request()->all());
+        $category = $this->categoryRepository->create(request()->all());
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Category']));
 
@@ -115,15 +116,15 @@ class CategoryController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
-        $categories = $this->category->getCategoryTree($id);
+        $categories = $this->categoryRepository->getCategoryTree($id);
 
-        $category = $this->category->findOrFail($id);
+        $category = $this->categoryRepository->findOrFail($id);
 
-        $attributes = $this->attribute->findWhere(['is_filterable' =>  1]);
+        $attributes = $this->attributeRepository->findWhere(['is_filterable' =>  1]);
 
         return view($this->_config['view'], compact('category', 'categories', 'attributes'));
     }
@@ -131,11 +132,10 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
         try {
             $locale = request()->get('locale') ?: app()->getLocale();
@@ -170,7 +170,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = $this->category->findOrFail($id);
+        $category = $this->categoryRepository->findOrFail($id);
 
         if(strtolower($category->name) == "root") {
             session()->flash('warning', trans('admin::app.response.delete-category-root', ['name' => 'Category']));
@@ -178,7 +178,7 @@ class CategoryController extends Controller
             try {
                 Event:: fire('catalog.category.delete.before', $id);
 
-                $this->category->delete($id);
+                $this->categoryRepository->delete($id);
 
                 Event::fire('catalog.category.delete.after', $id);
 
@@ -208,7 +208,7 @@ class CategoryController extends Controller
                 try {
                     Event::fire('catalog.category.delete.before', $value);
 
-                    $this->category->delete($value);
+                    $this->categoryRepository->delete($value);
 
                     Event::fire('catalog.category.delete.after', $value);
                 } catch(\Exception $e) {

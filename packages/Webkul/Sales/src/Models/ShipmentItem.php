@@ -12,6 +12,16 @@ class ShipmentItem extends Model implements ShipmentItemContract
     protected $casts = [
         'additional' => 'array',
     ];
+
+    /**
+     * Retrieve type instance
+     *
+     * @return AbstractType
+     */
+    public function getTypeInstance()
+    {
+        return $this->order_item->getTypeInstance();
+    }
     
     /**
      * Get the shipment record associated with the shipment item.
@@ -46,19 +56,10 @@ class ShipmentItem extends Model implements ShipmentItemContract
     }
 
     /**
-     * Returns configurable option html
+     * Get order item type
      */
-    public function getOptionDetailHtml()
+    public function getTypeAttribute()
     {
-
-        if ($this->type == 'configurable' && isset($this->additional['attributes'])) {
-            $labels = [];
-
-            foreach ($this->additional['attributes'] as $attribute) {
-                $labels[] = $attribute['attribute_name'] . ' : ' . $attribute['option_label'];
-            }
-
-            return implode(', ', $labels);
-        }
+        return $this->order_item->type;
     }
 }

@@ -39,19 +39,10 @@ class ShipmentItemRepository extends Repository
                 ->first();
 
         if ($orderedInventory) {
-            if (($orderedQty = $orderedInventory->qty - $data['qty']) < 0) {
+            if (($orderedQty = $orderedInventory->qty - $data['qty']) < 0)
                 $orderedQty = 0;
-            }
 
-            $orderedInventory->update([
-                    'qty' => $orderedQty
-                ]);
-        } else {
-            $data['product']->ordered_inventories()->create([
-                    'qty' => $data['qty'],
-                    'product_id' => $data['product']->id,
-                    'channel_id' => $data['shipment']->order->channel->id
-                ]);
+            $orderedInventory->update(['qty' => $orderedQty]);
         }
 
         $inventory = $data['product']->inventories()
@@ -59,16 +50,13 @@ class ShipmentItemRepository extends Repository
                 ->where('inventory_source_id', $data['shipment']->inventory_source_id)
                 ->first();
 
-        if (!$inventory)
+        if (! $inventory)
             return;
 
-        if (($qty = $inventory->qty - $data['qty']) < 0) {
+        if (($qty = $inventory->qty - $data['qty']) < 0)
             $qty = 0;
-        }
 
-        $inventory->update([
-                'qty' => $qty
-            ]);
+        $inventory->update(['qty' => $qty]);
 
         Event::fire('catalog.product.update.after', $data['product']);
     }

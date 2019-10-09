@@ -90,9 +90,7 @@ class CartRuleController extends Controller
     }
 
     /**
-     * Loads the cart rule index page
-     *
-     * @return view
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -100,9 +98,7 @@ class CartRuleController extends Controller
     }
 
     /**
-     * Loads the cart rule create page
-     *
-     * @return view
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -318,9 +314,7 @@ class CartRuleController extends Controller
     }
 
     /**
-     * Loads the cart rule edit page
-     *
-     * @return view
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {

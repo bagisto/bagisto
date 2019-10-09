@@ -22,7 +22,8 @@ class TaxCategoryRepository extends Repository
         return 'Webkul\Tax\Contracts\TaxCategory';
     }
 
-    public function attachOrDetach($taxCategory, $data) {
+    public function attachOrDetach($taxCategory, $data)
+    {
         $taxRates = $taxCategory->tax_rates;
 
         $this->model->findOrFail($taxCategory->id)->tax_rates()->sync($data);

@@ -20,16 +20,17 @@
                 <div class="horizontal-rule"></div>
             </div>
 
-            {!! view_render_event('bagisto.shop.customers.account.orders.list.before', ['orders' => $orders]) !!}
+            {!! view_render_event('bagisto.shop.customers.account.orders.list.before') !!}
 
             <div class="account-items-list">
                 <div class="account-table-content">
-                    @inject('order','Webkul\Shop\DataGrids\OrderDataGrid')
-                    {!! $order->render() !!}
+
+                    {!! app('Webkul\Shop\DataGrids\OrderDataGrid')->render() !!}
+                    
                 </div>
             </div>
 
-            {!! view_render_event('bagisto.shop.customers.account.orders.list.after', ['orders' => $orders]) !!}
+            {!! view_render_event('bagisto.shop.customers.account.orders.list.after') !!}
 
         </div>
 

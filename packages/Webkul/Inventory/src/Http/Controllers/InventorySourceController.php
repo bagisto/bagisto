@@ -2,10 +2,8 @@
 
 namespace Webkul\Inventory\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
-use Webkul\Inventory\Repositories\InventorySourceRepository as InventorySource;
+use Webkul\Inventory\Repositories\InventorySourceRepository;
 
 /**
  * Inventory source controller
@@ -27,17 +25,17 @@ class InventorySourceController extends Controller
      *
      * @var array
      */
-    protected $inventorySource;
+    protected $inventorySourceRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Inventory\Repositories\InventorySourceRepository  $inventorySource
+     * @param  \Webkul\Inventory\Repositories\InventorySourceRepository  $inventorySourceRepository
      * @return void
      */
-    public function __construct(InventorySource $inventorySource)
+    public function __construct(InventorySourceRepository $inventorySourceRepository)
     {
-        $this->inventorySource = $inventorySource;
+        $this->inventorySourceRepository = $inventorySourceRepository;
 
         $this->_config = request('_config');
     }
@@ -45,7 +43,7 @@ class InventorySourceController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -55,7 +53,7 @@ class InventorySourceController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -88,7 +86,7 @@ class InventorySourceController extends Controller
 
         Event::fire('inventory.inventory_source.create.before');
 
-        $inventorySource = $this->inventorySource->create($data);
+        $inventorySource = $this->inventorySourceRepository->create($data);
 
         Event::fire('inventory.inventory_source.create.after', $inventorySource);
 
@@ -101,11 +99,11 @@ class InventorySourceController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
-        $inventorySource = $this->inventorySource->findOrFail($id);
+        $inventorySource = $this->inventorySourceRepository->findOrFail($id);
 
         return view($this->_config['view'], compact('inventorySource'));
     }
@@ -113,11 +111,10 @@ class InventorySourceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
         $this->validate(request(), [
             'code'           => ['required', 'unique:inventory_sources,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
@@ -138,7 +135,7 @@ class InventorySourceController extends Controller
 
         Event::fire('inventory.inventory_source.update.before', $id);
 
-        $inventorySource = $this->inventorySource->update($data, $id);
+        $inventorySource = $this->inventorySourceRepository->update($data, $id);
 
         Event::fire('inventory.inventory_source.update.after', $inventorySource);
 
@@ -155,15 +152,15 @@ class InventorySourceController extends Controller
      */
     public function destroy($id)
     {
-        $inventorySource = $this->inventorySource->findOrFail($id);
+        $inventorySource = $this->inventorySourceRepository->findOrFail($id);
 
-        if ($this->inventorySource->count() == 1) {
+        if ($this->inventorySourceRepository->count() == 1) {
             session()->flash('error', trans('admin::app.settings.inventory_sources.last-delete-error'));
         } else {
             try {
                 Event::fire('inventory.inventory_source.delete.before', $id);
 
-                $this->inventorySource->delete($id);
+                $this->inventorySourceRepository->delete($id);
 
                 Event::fire('inventory.inventory_source.delete.after', $id);
 

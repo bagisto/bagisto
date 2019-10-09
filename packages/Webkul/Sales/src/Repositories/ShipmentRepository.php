@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\DB;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Sales\Contracts\Shipment;
-use Webkul\Sales\Repositories\OrderRepository as Order;
-use Webkul\Sales\Repositories\OrderItemRepository as OrderItem;
-use Webkul\Sales\Repositories\ShipmentItemRepository as ShipmentItem;
+use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Repositories\OrderItemRepository;
+use Webkul\Sales\Repositories\ShipmentItemRepository;
 
 /**
  * Shipment Reposotory
@@ -17,7 +17,6 @@ use Webkul\Sales\Repositories\ShipmentItemRepository as ShipmentItem;
  * @author    Jitendra Singh <jitendra@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class ShipmentRepository extends Repository
 {
     /**
@@ -25,42 +24,42 @@ class ShipmentRepository extends Repository
      *
      * @var Object
      */
-    protected $order;
+    protected $orderRepository;
 
     /**
      * OrderItemRepository object
      *
      * @var Object
      */
-    protected $orderItem;
+    protected $orderItemRepository;
 
     /**
      * ShipmentItemRepository object
      *
      * @var Object
      */
-    protected $shipmentItem;
+    protected $shipmentItemRepository;
 
     /**
      * Create a new repository instance.
      *
-     * @param  Webkul\Sales\Repositories\OrderRepository        $order
-     * @param  Webkul\Sales\Repositories\OrderItemRepository    $orderItem
-     * @param  Webkul\Sales\Repositories\ShipmentItemRepository $orderItem
+     * @param  Webkul\Sales\Repositories\OrderRepository        $orderRepository
+     * @param  Webkul\Sales\Repositories\OrderItemRepository    $orderItemRepository
+     * @param  Webkul\Sales\Repositories\ShipmentItemRepository $orderItemRepository
      * @return void
      */
     public function __construct(
-        Order $order,
-        OrderItem $orderItem,
-        ShipmentItem $shipmentItem,
+        OrderRepository $orderRepository,
+        OrderItemRepository $orderItemRepository,
+        ShipmentItemRepository $shipmentItemRepository,
         App $app
     )
     {
-        $this->order = $order;
+        $this->orderRepository = $orderRepository;
 
-        $this->orderItem = $orderItem;
+        $this->orderItemRepository = $orderItemRepository;
 
-        $this->shipmentItem = $shipmentItem;
+        $this->shipmentItemRepository = $shipmentItemRepository;
 
         parent::__construct($app);
     }
@@ -87,7 +86,7 @@ class ShipmentRepository extends Repository
         try {
             Event::fire('sales.shipment.save.before', $data);
 
-            $order = $this->order->find($data['order_id']);
+            $order = $this->orderRepository->find($data['order_id']);
 
             $shipment = $this->model->create([
                     'order_id' => $order->id,
@@ -105,20 +104,18 @@ class ShipmentRepository extends Repository
             foreach ($data['shipment']['items'] as $itemId => $inventorySource) {
                 $qty = $inventorySource[$data['shipment']['source']];
 
-                $orderItem = $this->orderItem->find($itemId);
+                $orderItem = $this->orderItemRepository->find($itemId);
 
                 if ($qty > $orderItem->qty_to_ship)
                     $qty = $orderItem->qty_to_ship;
 
                 $totalQty += $qty;
 
-                $shipmentItem = $this->shipmentItem->create([
+                $shipmentItem = $this->shipmentItemRepository->create([
                         'shipment_id' => $shipment->id,
                         'order_item_id' => $orderItem->id,
                         'name' => $orderItem->name,
-                        'sku' => ($orderItem->type == 'configurable')
-                                ? $orderItem->child->sku
-                                : $orderItem->sku,
+                        'sku' => $orderItem->getTypeInstance()->getOrderedItem($orderItem)->sku,
                         'qty' => $qty,
                         'weight' => $orderItem->weight * $qty,
                         'price' => $orderItem->price,
@@ -130,26 +127,40 @@ class ShipmentRepository extends Repository
                         'additional' => $orderItem->additional,
                     ]);
 
-                $product = ($orderItem->type == 'configurable')
-                        ? $orderItem->child->product
-                        : $orderItem->product;
+                if ($orderItem->getTypeInstance()->isComposite()) {
+                    foreach ($orderItem->children as $child) {
+                        if (! $child->qty_ordered) {
+                            $finalQty = $qty;
+                        } else {
+                            $finalQty = ($child->qty_ordered / $orderItem->qty_ordered) * $qty;
+                        }
 
-                $this->shipmentItem->updateProductInventory([
-                        'shipment' => $shipment,
-                        'shipmentItem' => $shipmentItem,
-                        'product' => $product,
-                        'qty' => $qty,
-                        'vendor_id' => isset($data['vendor_id']) ? $data['vendor_id'] : 0
-                    ]);
+                        $this->shipmentItemRepository->updateProductInventory([
+                                'shipment' => $shipment,
+                                'product' => $child->product,
+                                'qty' => $finalQty,
+                                'vendor_id' => isset($data['vendor_id']) ? $data['vendor_id'] : 0
+                            ]);
+                        
+                        $this->orderItemRepository->update(['qty_shipped' => $child->qty_shipped + $finalQty], $child->id);
+                    }
+                } else {
+                    $this->shipmentItemRepository->updateProductInventory([
+                            'shipment' => $shipment,
+                            'product' => $orderItem->product,
+                            'qty' => $qty,
+                            'vendor_id' => isset($data['vendor_id']) ? $data['vendor_id'] : 0
+                        ]);
+                }
 
-                $this->orderItem->update(['qty_shipped' => $orderItem->qty_shipped + $qty], $orderItem->id);
+                $this->orderItemRepository->update(['qty_shipped' => $orderItem->qty_shipped + $qty], $orderItem->id);
             }
 
             $shipment->update([
                     'total_qty' => $totalQty
                 ]);
 
-            $this->order->updateOrderStatus($order);
+            $this->orderRepository->updateOrderStatus($order);
 
             Event::fire('sales.shipment.save.after', $shipment);
         } catch (\Exception $e) {

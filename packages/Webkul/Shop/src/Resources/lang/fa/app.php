@@ -339,7 +339,13 @@ return [
         'out-of-stock' => 'تمام شده',
         'view-all' => 'مشاهده همه',
         'select-above-options' => 'لطفا ابتدا گزینه های بالا را انتخاب کنید',
-        'less-quantity' => 'کمیت نمی تواند کمتر از یک باشد.'
+        'less-quantity' => 'کمیت نمی تواند کمتر از یک باشد.',
+        'starting-at' => 'Starting at',
+        'customize-options' => 'Customize Options',
+        'choose-selection' => 'Choose a selection',
+        'your-customization' => 'Your Customization',
+        'total-amount' => 'Total Amount',
+        'none' => 'None'
     ],
 
     'wishlist' => [
@@ -375,6 +381,8 @@ return [
             'integrity' => [
                 'missing_fields' =>'نقض یکپارچگی سیستم سبد خرید ، برخی از زمینه های لازم وجود ندارد',
                 'missing_options' =>'نقض یکپارچگی سیستم سبد خرید ، گزینه هایی برای محصول قابل تنظیم وجود ندارد',
+                'missing_links' => 'Downloadable links are missing for this product.',
+                'qty_missing' => 'Atleast one product should have more than 1 quantity.'
             ],
 
             'create-error' => 'هنگام تهیه نمونه سبد خرید ، با برخی از شماره ها روبرو شد',

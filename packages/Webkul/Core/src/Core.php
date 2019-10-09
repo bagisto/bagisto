@@ -366,7 +366,7 @@ class Core
     */
     public function convertToBasePrice($amount, $targetCurrencyCode = null)
     {
-        $targetCurrency = !$targetCurrencyCode
+        $targetCurrency = ! $targetCurrencyCode
                         ? $this->getCurrentCurrency()
                         : $this->currencyRepository->findOneByField('code', $targetCurrencyCode);
 
@@ -394,9 +394,7 @@ class Core
         if (is_null($amount))
             $amount = 0;
 
-        $formatter = new \NumberFormatter( app()->getLocale(), \NumberFormatter::CURRENCY );
-
-        return $formatter->formatCurrency($this->convertPrice($amount), $this->getCurrentCurrency()->code);
+        return $this->formatPrice($this->convertPrice($amount), $this->getCurrentCurrency()->code);
     }
 
     /**
@@ -407,7 +405,6 @@ class Core
     */
     public function currencySymbol($code)
     {
-
         $formatter = new \NumberFormatter(app()->getLocale() . '@currency=' . $code, \NumberFormatter::CURRENCY);
 
         return $formatter->getSymbol(\NumberFormatter::CURRENCY_SYMBOL);
@@ -416,7 +413,7 @@ class Core
     /**
     * Format and convert price with currency symbol
     *
-    * @param float $price
+    *  @param float $price
     *  @return string
     */
     public function formatPrice($price, $currencyCode)
@@ -424,15 +421,47 @@ class Core
         if (is_null($price))
             $price = 0;
 
-        $formatter = new \NumberFormatter( app()->getLocale(), \NumberFormatter::CURRENCY );
+        $formater = new \NumberFormatter( app()->getLocale(), \NumberFormatter::CURRENCY );
 
-        return $formatter->formatCurrency($price, $currencyCode);
+        if ($symbol = $this->getCurrentCurrency()->symbol) {
+            if ($this->currencySymbol($currencyCode) == $symbol) {
+                return $formater->formatCurrency($price, $currencyCode);
+            } else {
+                $formater->setSymbol(\NumberFormatter::CURRENCY_SYMBOL, $symbol);
+
+                return $formater->format($this->convertPrice($price));
+            }
+        } else {
+            return $formater->formatCurrency($price, $currencyCode);
+        }
+    }
+
+    /**
+    * Format and convert price with currency symbol
+    *
+    *  @return array
+    */
+    public function getAccountJsSymbols()
+    {
+        $formater = new \NumberFormatter( app()->getLocale(), \NumberFormatter::CURRENCY );
+
+        $pattern = $formater->getPattern();
+
+        $pattern = str_replace("¤", "%s", $pattern);
+
+        $pattern = str_replace("#,##0.00", "%v", $pattern);
+
+        return [
+            'symbol' => core()->currencySymbol(core()->getCurrentCurrencyCode()),
+            'decimal' => $formater->getSymbol(\NumberFormatter::DECIMAL_SEPARATOR_SYMBOL),
+            'format' => $pattern
+        ];
     }
 
     /**
     * Format price with base currency symbol
     *
-    * @param float $price
+    *  @param float $price
     *  @return string
     */
     public function formatBasePrice($price)
@@ -440,9 +469,19 @@ class Core
         if (is_null($price))
             $price = 0;
 
-        $formatter = new \NumberFormatter( app()->getLocale(), \NumberFormatter::CURRENCY );
+        $formater = new \NumberFormatter( app()->getLocale(), \NumberFormatter::CURRENCY );
 
-        return $formatter->formatCurrency($price, $this->getBaseCurrencyCode());
+        if ($symbol = $this->getBaseCurrency()->symbol) {
+            if ($this->currencySymbol($this->getBaseCurrencyCode()) == $symbol) {
+                return $formater->formatCurrency($price, $this->getBaseCurrencyCode());
+            } else {
+                $formater->setSymbol(\NumberFormatter::CURRENCY_SYMBOL, $symbol);
+
+                return $formater->format($this->convertPrice($price));
+            }
+        } else {
+            return $formater->formatCurrency($price, $this->getBaseCurrencyCode());
+        }
     }
 
     /**
@@ -669,7 +708,7 @@ class Core
 
         $collection = $this->countryStateRepository->findByField(['country_code' => $countryCode, 'code' => $stateCode]);
 
-        if(count($collection)) {
+        if (count($collection)) {
             return $collection->first();
         } else {
             return false;
@@ -864,8 +903,8 @@ class Core
 
     public function convertEmptyStringsToNull($array)
     {
-        foreach($array as $key => $value) {
-            if($value == "" || $value == "null") {
+        foreach ($array as $key => $value) {
+            if ($value == "" || $value == "null") {
                 $array[$key] = null;
             }
         }

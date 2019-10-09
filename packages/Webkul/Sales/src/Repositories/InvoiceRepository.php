@@ -7,9 +7,6 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\DB;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Sales\Contracts\Invoice;
-use Webkul\Sales\Repositories\OrderRepository as Order;
-use Webkul\Sales\Repositories\OrderItemRepository as OrderItem;
-use Webkul\Sales\Repositories\InvoiceItemRepository as InvoiceItem;
 
 /**
  * Invoice Reposotory
@@ -17,7 +14,6 @@ use Webkul\Sales\Repositories\InvoiceItemRepository as InvoiceItem;
  * @author    Jitendra Singh <jitendra@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class InvoiceRepository extends Repository
 {
     /**
@@ -25,42 +21,55 @@ class InvoiceRepository extends Repository
      *
      * @var Object
      */
-    protected $order;
+    protected $orderRepository;
 
     /**
      * OrderItemRepository object
      *
      * @var Object
      */
-    protected $orderItem;
+    protected $orderItemRepository;
 
     /**
      * InvoiceItemRepository object
      *
      * @var Object
      */
-    protected $invoiceItem;
+    protected $invoiceItemRepository;
+
+    /**
+     * DownloadableLinkPurchasedRepository object
+     *
+     * @var Object
+     */
+    protected $downloadableLinkPurchasedRepository;
 
     /**
      * Create a new repository instance.
      *
-     * @param \Webkul\Sales\Repositories\OrderRepository $order
-     * @param \Webkul\Sales\Repositories\OrderItemRepository $orderItem
-     * @param \Webkul\Sales\Repositories\InvoiceItemRepository $invoiceItem
-     * @param \Illuminate\Container\Container $app
+     * @param \Webkul\Sales\Repositories\OrderRepository                     $orderRepository
+     * @param \Webkul\Sales\Repositories\OrderItemRepository                 $orderItemRepository
+     * @param \Webkul\Sales\Repositories\InvoiceItemRepository               $invoiceItemRepository
+     * @param \Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository
+     * @param \Illuminate\Container\Container                                $app
      */
     public function __construct(
-        Order $order,
-        OrderItem $orderItem,
-        InvoiceItem $invoiceItem,
+        OrderRepository $orderRepository,
+        OrderItemRepository $orderItemRepository,
+        InvoiceItemRepository $invoiceItemRepository,
+        DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository,
         App $app
     )
     {
-        $this->order = $order;
+        $this->orderRepository = $orderRepository;
 
-        $this->orderItem = $orderItem;
+        $this->orderItemRepository = $orderItemRepository;
 
-        $this->invoiceItem = $invoiceItem;
+        $this->invoiceItemRepository = $invoiceItemRepository;
+
+        $this->invoiceItemRepository = $invoiceItemRepository;
+
+        $this->downloadableLinkPurchasedRepository = $downloadableLinkPurchasedRepository;
 
         parent::__construct($app);
     }
@@ -87,7 +96,7 @@ class InvoiceRepository extends Repository
         try {
             Event::fire('sales.invoice.save.before', $data);
 
-            $order = $this->order->find($data['order_id']);
+            $order = $this->orderRepository->find($data['order_id']);
 
             $totalQty = array_sum($data['invoice']['items']);
 
@@ -104,12 +113,12 @@ class InvoiceRepository extends Repository
             foreach ($data['invoice']['items'] as $itemId => $qty) {
                 if (! $qty) continue;
 
-                $orderItem = $this->orderItem->find($itemId);
+                $orderItem = $this->orderItemRepository->find($itemId);
 
                 if ($qty > $orderItem->qty_to_invoice)
                     $qty = $orderItem->qty_to_invoice;
 
-                $invoiceItem = $this->invoiceItem->create([
+                $invoiceItem = $this->invoiceItemRepository->create([
                         'invoice_id' => $invoice->id,
                         'order_item_id' => $orderItem->id,
                         'name' => $orderItem->name,
@@ -128,38 +137,62 @@ class InvoiceRepository extends Repository
                         'additional' => $orderItem->additional,
                     ]);
 
-                if ($orderItem->type == 'configurable' && $orderItem->child) {
-                    $childOrderItem = $orderItem->child;
+                if ($orderItem->getTypeInstance()->isComposite()) {
+                    foreach ($orderItem->children as $childOrderItem) {
+                        $finalQty = $childOrderItem->qty_ordered
+                                ? ($childOrderItem->qty_ordered / $orderItem->qty_ordered) * $qty
+                                : $childOrderItem->qty_ordered;
 
-                    $invoiceItem->child = $this->invoiceItem->create([
-                            'invoice_id' => $invoice->id,
-                            'order_item_id' => $childOrderItem->id,
-                            'parent_id' => $invoiceItem->id,
-                            'name' => $childOrderItem->name,
-                            'sku' => $childOrderItem->sku,
+                        $this->invoiceItemRepository->create([
+                                'invoice_id' => $invoice->id,
+                                'order_item_id' => $childOrderItem->id,
+                                'parent_id' => $invoiceItem->id,
+                                'name' => $childOrderItem->name,
+                                'sku' => $childOrderItem->sku,
+                                'qty' => $finalQty,
+                                'price' => $childOrderItem->price,
+                                'base_price' => $childOrderItem->base_price,
+                                'total' => $childOrderItem->price * $finalQty,
+                                'base_total' => $childOrderItem->base_price * $finalQty,
+                                'tax_amount' => 0,
+                                'base_tax_amount' => 0,
+                                'discount_amount' => 0,
+                                'base_discount_amount' => 0,
+                                'product_id' => $childOrderItem->product_id,
+                                'product_type' => $childOrderItem->product_type,
+                                'additional' => $childOrderItem->additional,
+                            ]);
+                        
+                        if ($childOrderItem->product->getTypeInstance()->showQuantityBox()) {
+                            $this->invoiceItemRepository->updateProductInventory([
+                                    'invoice' => $invoice,
+                                    'product' => $childOrderItem->product,
+                                    'qty' => $finalQty,
+                                    'vendor_id' => isset($data['vendor_id']) ? $data['vendor_id'] : 0
+                                ]);
+                        }
+
+                        $this->orderItemRepository->collectTotals($childOrderItem);
+                    }
+                } elseif ($orderItem->product->getTypeInstance()->showQuantityBox()) {
+                    $this->invoiceItemRepository->updateProductInventory([
+                            'invoice' => $invoice,
+                            'product' => $orderItem->product,
                             'qty' => $qty,
-                            'price' => $childOrderItem->price,
-                            'base_price' => $childOrderItem->base_price,
-                            'total' => $childOrderItem->price * $qty,
-                            'base_total' => $childOrderItem->base_price * $qty,
-                            'tax_amount' => 0,
-                            'base_tax_amount' => 0,
-                            'discount_amount' => 0,
-                            'base_discount_amount' => 0,
-                            'product_id' => $childOrderItem->product_id,
-                            'product_type' => $childOrderItem->product_type,
-                            'additional' => $childOrderItem->additional,
+                            'vendor_id' => isset($data['vendor_id']) ? $data['vendor_id'] : 0
                         ]);
                 }
 
-                $this->orderItem->collectTotals($orderItem);
+                $this->orderItemRepository->collectTotals($orderItem);
+
+                $this->downloadableLinkPurchasedRepository->updateStatus($orderItem);
             }
 
             $this->collectTotals($invoice);
 
-            $this->order->collectTotals($order);
+            $this->orderRepository->collectTotals($order);
 
-            $this->order->updateOrderStatus($order);
+            $this->orderRepository->updateOrderStatus($order);
 
             Event::fire('sales.invoice.save.after', $invoice);
         } catch (\Exception $e) {

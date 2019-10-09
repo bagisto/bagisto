@@ -13,6 +13,8 @@ class Product extends Model implements ProductContract
 {
     protected $fillable = ['type', 'attribute_family_id', 'sku', 'parent_id'];
 
+    protected $typeInstance;
+
     // protected $with = ['attribute_family', 'inventories'];
 
     // protected $table = 'products';
@@ -140,19 +142,35 @@ class Product extends Model implements ProductContract
     }
 
     /**
-     * @param string $key
-     *
-     * @return bool
+     * The images that belong to the product.
      */
-    public function isSaleable()
+    public function downloadable_samples()
     {
-        if (! $this->status)
-            return false;
+        return $this->hasMany(ProductDownloadableSampleProxy::modelClass());
+    }
 
-        if ($this->haveSufficientQuantity(1))
-            return true;
+    /**
+     * The images that belong to the product.
+     */
+    public function downloadable_links()
+    {
+        return $this->hasMany(ProductDownloadableLinkProxy::modelClass());
+    }
 
-        return false;
+    /**
+     * Get the grouped products that owns the product.
+     */
+    public function grouped_products()
+    {
+        return $this->hasMany(ProductGroupedProductProxy::modelClass());
+    }
+
+    /**
+     * Get the bundle options that owns the product.
+     */
+    public function bundle_options()
+    {
+        return $this->hasMany(ProductBundleOptionProxy::modelClass());
     }
 
     /**
@@ -168,32 +186,38 @@ class Product extends Model implements ProductContract
     }
 
     /**
+     * Retrieve type instance
+     *
+     * @return AbstractType
+     */
+    public function getTypeInstance()
+    {
+        if ($this->typeInstance)
+            return $this->typeInstance;
+
+        $this->typeInstance = app(config('product_types.' . $this->type . '.class'));
+
+        $this->typeInstance->setProduct($this);
+
+        return $this->typeInstance;
+    }
+
+    /**
+     * @param string $key
+     *
+     * @return bool
+     */
+    public function isSaleable()
+    {
+        return $this->getTypeInstance()->isSaleable();
+    }
+
+    /**
      * @return integer
      */
     public function totalQuantity()
     {
-        $total = 0;
-
-        $channelInventorySourceIds = core()->getCurrentChannel()
-                ->inventory_sources()
-                ->where('status', 1)
-                ->pluck('id');
-
-        foreach ($this->inventories as $inventory) {
-            if (is_numeric($index = $channelInventorySourceIds->search($inventory->inventory_source_id))) {
-                $total += $inventory->qty;
-            }
-        }
-
-        $orderedInventory = $this->ordered_inventories()
-                ->where('channel_id', core()->getCurrentChannel()->id)
-                ->first();
-
-        if ($orderedInventory) {
-            $total -= $orderedInventory->qty;
-        }
-
-        return $total;
+        return $this->getTypeInstance()->totalQuantity();
     }
 
     /**
@@ -203,7 +227,27 @@ class Product extends Model implements ProductContract
      */
     public function haveSufficientQuantity($qty)
     {
-        return $qty <= $this->totalQuantity() ? true : (core()->getConfigData('catalog.inventory.stock_options.backorders') ? true : false);
+        return $this->getTypeInstance()->haveSufficientQuantity($qty);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isStockable()
+    {
+        return $this->getTypeInstance()->isStockable();
+    }
+
+    /**
+     * Retrieve product attributes
+     *
+     * @param Group $group
+     * @param bool  $skipSuperAttribute
+     * @return Collection
+     */
+    public function getEditableAttributes($group = null, $skipSuperAttribute = true)
+    {
+        return $this->getTypeInstance()->getEditableAttributes($group, $skipSuperAttribute);
     }
 
     /**

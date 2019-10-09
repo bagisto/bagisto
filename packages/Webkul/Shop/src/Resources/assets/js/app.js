@@ -4,6 +4,7 @@ window.VeeValidate = require("vee-validate");
 window.axios = require("axios");
 require("./bootstrap");
 require("ez-plus/src/jquery.ez-plus.js");
+var accounting = require('accounting');
 locales = require("./lang/locales.js");
 
 Vue.use(VeeValidate, {
@@ -18,6 +19,9 @@ window.eventBus = new Vue();
 
 Vue.component("image-slider", require("./components/image-slider.vue"));
 Vue.component("vue-slider", require("vue-slider-component"));
+Vue.filter('currency', function (value, argument) {
+    return accounting.formatMoney(value, argument);
+})
 
 $(document).ready(function () {
     const app = new Vue({
@@ -46,6 +50,8 @@ $(document).ready(function () {
                         e.target.submit();
                     } else {
                         this.toggleButtonDisable(false);
+
+                        eventBus.$emit('onFormError')
                     }
                 });
             },

@@ -39,6 +39,8 @@ $(document).ready(function () {
                         e.target.submit();
                     } else {
                         this.toggleButtonDisable(false);
+
+                        eventBus.$emit('onFormError')
                     }
                 });
             },

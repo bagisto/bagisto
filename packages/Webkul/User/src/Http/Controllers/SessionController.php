@@ -2,8 +2,6 @@
 
 namespace Webkul\User\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Auth;
 
 /**
@@ -38,7 +36,7 @@ class SessionController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View 
      */
     public function create()
     {

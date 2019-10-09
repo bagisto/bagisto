@@ -32,7 +32,7 @@
             </div>
         @endif
 
-        @if ($shippingAddress = $cart->shipping_address)
+        @if ($cart->haveStockableItems() && $shippingAddress = $cart->shipping_address)
             <div class="shipping-address">
                 <div class="card-title mb-20">
                     <b>{{ __('shop::app.checkout.onepage.shipping-address') }}</b>
@@ -66,15 +66,9 @@
 
     <div class="cart-item-list mt-20">
         @foreach ($cart->items as $item)
-
-            <?php
-                $product = $item->product;
-
-                if ($product->type == "configurable")
-                    $productBaseImage = $productImageHelper->getProductBaseImage($item->child->product);
-                else
-                    $productBaseImage = $productImageHelper->getProductBaseImage($item->product);
-            ?>
+            @php
+                $productBaseImage = $item->product->getTypeInstance()->getBaseImage($item);
+            @endphp
 
             <div class="item mb-5" style="margin-bottom: 5px;">
                 <div class="item-image">
@@ -86,7 +80,7 @@
                     {!! view_render_event('bagisto.shop.checkout.name.before', ['item' => $item]) !!}
 
                     <div class="item-title">
-                        {{ $product->name }}
+                        {{ $item->product->name }}
                     </div>
 
                     {!! view_render_event('bagisto.shop.checkout.name.after', ['item' => $item]) !!}
@@ -115,15 +109,19 @@
 
                     {!! view_render_event('bagisto.shop.checkout.quantity.after', ['item' => $item]) !!}
 
-                    @if ($product->type == 'configurable')
-                        {!! view_render_event('bagisto.shop.checkout.options.after', ['item' => $item]) !!}
+                    {!! view_render_event('bagisto.shop.checkout.options.before', ['item' => $item]) !!}
 
-                        <div class="summary" >
-                            {{ Cart::getProductAttributeOptionDetails($item->child->product)['html'] }}
+                    @if (isset($item->additional['attributes']))
+                        <div class="item-options">
+                            
+                            @foreach ($item->additional['attributes'] as $attribute)
+                                <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
+                            @endforeach
+
                         </div>
-
-                        {!! view_render_event('bagisto.shop.checkout.options.after', ['item' => $item]) !!}
                     @endif
+
+                    {!! view_render_event('bagisto.shop.checkout.options.after', ['item' => $item]) !!}
                 </div>
             </div>
         @endforeach
@@ -131,19 +129,21 @@
 
     <div class="order-description mt-20">
         <div class="pull-left" style="width: 60%; float: left;">
-            <div class="shipping">
-                <div class="decorator">
-                    <i class="icon shipping-icon"></i>
-                </div>
+            @if ($cart->haveStockableItems())
+                <div class="shipping">
+                    <div class="decorator">
+                        <i class="icon shipping-icon"></i>
+                    </div>
 
-                <div class="text">
-                    {{ core()->currency($cart->selected_shipping_rate->base_price) }}
+                    <div class="text">
+                        {{ core()->currency($cart->selected_shipping_rate->base_price) }}
 
-                    <div class="info">
-                        {{ $cart->selected_shipping_rate->method_title }}
+                        <div class="info">
+                            {{ $cart->selected_shipping_rate->method_title }}
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endif
 
             <div class="payment">
                 <div class="decorator">

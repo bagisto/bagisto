@@ -245,6 +245,10 @@ Route::group(['middleware' => ['web']], function () {
                     'redirect' => 'admin.catalog.products.index'
                 ])->name('admin.catalog.products.update');
 
+                Route::post('/products/upload-file/{id}', 'Webkul\Product\Http\Controllers\ProductController@uploadLink')->name('admin.catalog.products.upload_link');
+
+                Route::post('/products/upload-sample/{id}', 'Webkul\Product\Http\Controllers\ProductController@uploadSample')->name('admin.catalog.products.upload_sample');
+                
                 //product delete
                 Route::post('/products/delete/{id}', 'Webkul\Product\Http\Controllers\ProductController@destroy')->name('admin.catalog.products.delete');
 
@@ -265,6 +269,8 @@ Route::group(['middleware' => ['web']], function () {
                 Route::get('products/search', 'Webkul\Product\Http\Controllers\ProductController@productLinkSearch')->defaults('_config', [
                     'view' => 'admin::catalog.products.edit'
                 ])->name('admin.catalog.products.productlinksearch');
+
+                Route::get('products/search-simple-products', 'Webkul\Product\Http\Controllers\ProductController@searchSimpleProducts')->name('admin.catalog.products.search_simple_product');
 
                 Route::get('/products/{id}/{attribute_id}', 'Webkul\Product\Http\Controllers\ProductController@download')->defaults('_config', [
                     'view' => 'admin.catalog.products.edit'

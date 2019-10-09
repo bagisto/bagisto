@@ -2,10 +2,8 @@
 
 namespace Webkul\Admin\Http\Controllers\Sales;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Sales\Repositories\OrderRepository as Order;
+use Webkul\Sales\Repositories\OrderRepository;
 
 /**
  * Sales Order controller
@@ -27,28 +25,28 @@ class OrderController extends Controller
      *
      * @var array
      */
-    protected $order;
+    protected $orderRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Sales\Repositories\OrderRepository  $order
+     * @param  \Webkul\Sales\Repositories\OrderRepository $orderRepository
      * @return void
      */
-    public function __construct(Order $order)
+    public function __construct(OrderRepository $orderRepository)
     {
         $this->middleware('admin');
 
         $this->_config = request('_config');
 
-        $this->order = $order;
+        $this->orderRepository = $orderRepository;
 
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -59,11 +57,11 @@ class OrderController extends Controller
      * Show the view for the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function view($id)
     {
-        $order = $this->order->findOrFail($id);
+        $order = $this->orderRepository->findOrFail($id);
 
         return view($this->_config['view'], compact('order'));
     }
@@ -76,7 +74,7 @@ class OrderController extends Controller
      */
     public function cancel($id)
     {
-        $result = $this->order->cancel($id);
+        $result = $this->orderRepository->cancel($id);
 
         if ($result) {
             session()->flash('success', trans('admin::app.response.cancel-success', ['name' => 'Order']));

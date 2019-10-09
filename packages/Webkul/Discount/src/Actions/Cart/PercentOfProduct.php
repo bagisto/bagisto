@@ -44,8 +44,7 @@ class PercentOfProduct extends Action
         };
 
         if ($apply()) {
-            if ($rule->action_type == 'whole_cart_to_percent')
-            {
+            if ($rule->action_type == 'whole_cart_to_percent') {
                 $eligibleItems = \Cart::getCart()->items;
             }
 
@@ -61,7 +60,38 @@ class PercentOfProduct extends Action
                 $report = array();
 
                 $report['item_id'] = $item->id;
-                $report['product_id'] = $item->child ? $item->child->product_id : $item->product_id;
+
+                if ($item->product->getTypeInstance()->isComposite()) {
+                    $isQtyZero = true;
+
+                    foreach ($item->children as $children) {
+                        if ($children->quantity > 0) {
+                            $isQtyZero = false;
+                        }
+                    }
+
+                    if ($isQtyZero) {
+                        $report['product_id'] = $item->children->first()->product_id;
+
+                        $report['child_items'] = collect();
+                    } else {
+                        $report['product_id'] = $item->product_id;
+
+                        $report['child_items'] = collect();
+
+                        foreach ($item->children as $children) {
+                            $children->discount = $children->base_total * ($rule->disc_amount / 100);
+
+                            $children->discount = $children->base_total > $children->discount ? $children->discount : $children->base_total;
+
+                            $report['child_items']->push($children);
+                        }
+                    }
+                } else {
+                    $report['product_id'] = $item->product_id;
+
+                    $report['child_items'] = collect();
+                }
 
                 if ($rule->disc_amount > 100) {
                     $discount_amount = 100;

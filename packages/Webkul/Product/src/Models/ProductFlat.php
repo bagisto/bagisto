@@ -14,6 +14,16 @@ class ProductFlat extends Model implements ProductFlatContract
     public $timestamps = false;
 
     /**
+     * Retrieve type instance
+     *
+     * @return AbstractType
+     */
+    public function getTypeInstance()
+    {
+        return $this->product->getTypeInstance();
+    }
+
+    /**
      * Get the product attribute family that owns the product.
      */
     public function getAttributeFamilyAttribute()
@@ -38,6 +48,14 @@ class ProductFlat extends Model implements ProductFlatContract
     }
 
     /**
+     * Get the product that owns the product.
+     */
+    public function parent()
+    {
+        return $this->belongsTo(self::class, 'parent_id');
+    }
+
+    /**
      * Get product type value from base product
      */
     public function getTypeAttribute()
@@ -52,13 +70,7 @@ class ProductFlat extends Model implements ProductFlatContract
      */
     public function isSaleable()
     {
-        if (! $this->status)
-            return false;
-
-        if ($this->haveSufficientQuantity(1))
-            return true;
-
-        return false;
+        return $this->product->isSaleable();
     }
 
     /**
@@ -77,6 +89,14 @@ class ProductFlat extends Model implements ProductFlatContract
     public function haveSufficientQuantity($qty)
     {
         return $this->product->haveSufficientQuantity($qty);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isStockable()
+    {
+        return $this->product->isStockable();
     }
 
     /**
@@ -137,5 +157,49 @@ class ProductFlat extends Model implements ProductFlatContract
     public function cross_sells()
     {
         return $this->product->cross_sells();
+    }
+
+    /**
+     * The images that belong to the product.
+     */
+    public function downloadable_samples()
+    {
+        return $this->product->downloadable_samples();
+    }
+
+    /**
+     * The images that belong to the product.
+     */
+    public function downloadable_links()
+    {
+        return $this->product->downloadable_links();
+    }
+
+    /**
+     * Get the grouped products that owns the product.
+     */
+    public function grouped_products()
+    {
+        return $this->product->grouped_products();
+    }
+
+    /**
+     * Get the bundle options that owns the product.
+     */
+    public function bundle_options()
+    {
+        return $this->product->bundle_options();
+    }
+
+    /**
+     * Retrieve product attributes
+     *
+     * @param Group $group
+     * @param bool  $skipSuperAttribute
+     * @return Collection
+     */
+    public function getEditableAttributes($group = null, $skipSuperAttribute = true)
+    {
+        return $this->product->getEditableAttributes($groupId, $skipSuperAttribute);
     }
 }

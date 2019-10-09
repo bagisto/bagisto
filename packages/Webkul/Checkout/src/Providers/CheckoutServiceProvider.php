@@ -3,17 +3,13 @@
 namespace Webkul\Checkout\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Routing\Router;
 use Illuminate\Foundation\AliasLoader;
-use Webkul\Customer\Http\Middleware\RedirectIfNotCustomer;
 use Webkul\Checkout\Facades\Cart;
-use Webkul\Checkout\Providers\ComposerServiceProvider;
 
 class CheckoutServiceProvider extends ServiceProvider
 {
 
-    public function boot(Router $router)
+    public function boot()
     {
         include __DIR__ . '/../Http/helpers.php';
 

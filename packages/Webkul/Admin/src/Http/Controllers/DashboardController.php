@@ -2,15 +2,12 @@
 
 namespace Webkul\Admin\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-use Webkul\Sales\Repositories\OrderRepository as Order;
-use Webkul\Sales\Repositories\OrderItemRepository as OrderItem;
-use Webkul\Customer\Repositories\CustomerRepository as Customer;
-use Webkul\Product\Repositories\ProductInventoryRepository as ProductInventory;
+use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Repositories\OrderItemRepository;
+use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Product\Repositories\ProductInventoryRepository;
 
 /**
  * Dashboard controller
@@ -30,88 +27,93 @@ class DashboardController extends Controller
     /**
      * OrderRepository object
      *
-     * @var array
+     * @var Object
      */
-    protected $order;
+    protected $orderRepository;
 
     /**
      * OrderItemRepository object
      *
-     * @var array
+     * @var Object
      */
-    protected $orderItem;
+    protected $orderItemRepository;
 
     /**
      * CustomerRepository object
      *
-     * @var array
+     * @var Object
      */
-    protected $customer;
+    protected $customerRepository;
 
     /**
      * ProductInventoryRepository object
      *
-     * @var array
+     * @var Object
      */
-    protected $productInventory;
+    protected $productInventoryRepository;
 
     /**
      * string object
      *
-     * @var array
+     * @var Object
      */
     protected $startDate;
 
     /**
      * string object
      *
-     * @var array
+     * @var Object
      */
     protected $lastStartDate;
 
     /**
      * string object
      *
-     * @var array
+     * @var Object
      */
     protected $endDate;
 
     /**
      * string object
      *
-     * @var array
+     * @var Object
      */
     protected $lastEndDate;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Sales\Repositories\OrderRepository              $order
-     * @param  \Webkul\Sales\Repositories\OrderItemRepository          $orderItem
-     * @param  \Webkul\Customer\Repositories\CustomerRepository        $customer
-     * @param  \Webkul\Product\Repositories\ProductInventoryRepository $productInventory
+     * @param  \Webkul\Sales\Repositories\OrderRepository              $orderRepository
+     * @param  \Webkul\Sales\Repositories\OrderItemRepository          $orderItemRepository
+     * @param  \Webkul\Customer\Repositories\CustomerRepository        $customerRepository
+     * @param  \Webkul\Product\Repositories\ProductInventoryRepository $productInventoryRepository
      * @return void
      */
     public function __construct(
-        Order $order,
-        OrderItem $orderItem,
-        Customer $customer,
-        ProductInventory $productInventory
+        OrderRepository $orderRepository,
+        OrderItemRepository $orderItemRepository,
+        CustomerRepository $customerRepository,
+        ProductInventoryRepository $productInventoryRepository
     )
     {
         $this->_config = request('_config');
 
         $this->middleware('admin');
 
-        $this->order = $order;
+        $this->orderRepository = $orderRepository;
 
-        $this->orderItem = $orderItem;
+        $this->orderItemRepository = $orderItemRepository;
 
-        $this->customer = $customer;
+        $this->customerRepository = $customerRepository;
 
-        $this->productInventory = $productInventory;
+        $this->productInventoryRepository = $productInventoryRepository;
     }
 
+    /**
+     * Returns percentage difference
+     *
+     * @return integer
+     */
     public function getPercentageChange($previous, $current)
     {
         if (! $previous)
@@ -123,7 +125,7 @@ class DashboardController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -171,11 +173,11 @@ class DashboardController extends Controller
     /**
      * Returns the list of top selling categories
      *
-     * @return mixed
+     * @return Collection
      */
     public function getTopSellingCategories()
     {
-        return $this->orderItem->getModel()
+        return $this->orderItemRepository->getModel()
             ->leftJoin('products', 'order_items.product_id', 'products.id')
             ->leftJoin('product_categories', 'products.id', 'product_categories.product_id')
             ->leftJoin('categories', 'product_categories.category_id', 'categories.id')
@@ -196,15 +198,14 @@ class DashboardController extends Controller
     /**
      * Return stock threshold.
      *
-     * @return mixed
+     * @return Collection
      */
     public function getStockThreshold()
     {
-        return $this->productInventory->getModel()
+        return $this->productInventoryRepository->getModel()
             ->leftJoin('products', 'product_inventories.product_id', 'products.id')
             ->select(DB::raw('SUM(qty) as total_qty'))
             ->addSelect('product_inventories.product_id')
-            ->where('products.type', '!=', 'configurable')
             ->groupBy('product_id')
             ->orderBy('total_qty', 'ASC')
             ->limit(5)
@@ -213,44 +214,39 @@ class DashboardController extends Controller
 
     /**
      * Returns top selling products
-     * @return mixed
+     * @return Collection
      */
     public function getTopSellingProducts()
     {
-        return $this->orderItem->getModel()
-                ->select(DB::raw('SUM(qty_invoiced - qty_refunded) as total_qty_invoiced'))
-                ->addSelect('id', 'product_id', 'product_type', 'name')
-                ->where('order_items.created_at', '>=', $this->startDate)
-                ->where('order_items.created_at', '<=', $this->endDate)
-                ->whereNull('parent_id')
-                ->groupBy('product_id')
-                ->havingRaw('SUM(qty_invoiced - qty_refunded) > 0')
-                ->orderBy('total_qty_invoiced', 'DESC')
-                ->limit(5)
-                ->get();
+        return $this->orderItemRepository->getModel()
+            ->select(DB::raw('SUM(qty_ordered) as total_qty_ordered'))
+            ->addSelect('id', 'product_id', 'product_type', 'name')
+            ->where('order_items.created_at', '>=', $this->startDate)
+            ->where('order_items.created_at', '<=', $this->endDate)
+            ->whereNull('parent_id')
+            ->groupBy('product_id')
+            ->orderBy('total_qty_ordered', 'DESC')
+            ->limit(5)
+            ->get();
     }
 
     /**
      * Returns top selling products
      *
-     * @return mixed
+     * @return Collection
      */
     public function getCustomerWithMostSales()
     {
-        //Change here
-        return $this->order->getModel()
-                ->leftJoin('order_items', 'orders.id', 'order_items.order_id')
-                ->select(DB::raw('SUM(qty_invoiced - qty_refunded) as total_qty_invoiced'))
-                ->select(DB::raw('SUM(base_grand_total_invoiced - base_grand_total_refunded) as total_base_grand_total_invoiced'))
-                ->addSelect(DB::raw('COUNT(orders.id) as total_orders'))
-                ->addSelect('orders.id', 'customer_id', 'customer_email', 'customer_first_name', 'customer_last_name')
-                ->where('orders.created_at', '>=', $this->startDate)
-                ->where('orders.created_at', '<=', $this->endDate)
-                ->groupBy('customer_email')
-                ->havingRaw('SUM(qty_invoiced - qty_refunded) > 0')
-                ->orderBy('total_base_grand_total_invoiced', 'DESC')
-                ->limit(5)
-                ->get();
+        return $this->orderRepository->getModel()
+            ->select(DB::raw('SUM(base_grand_total) as total_base_grand_total'))
+            ->addSelect(DB::raw('COUNT(id) as total_orders'))
+            ->addSelect('id', 'customer_id', 'customer_email', 'customer_first_name', 'customer_last_name')
+            ->where('orders.created_at', '>=', $this->startDate)
+            ->where('orders.created_at', '<=', $this->endDate)
+            ->groupBy('customer_email')
+            ->orderBy('total_base_grand_total', 'DESC')
+            ->limit(5)
+            ->get();
     }
 
     /**
@@ -278,27 +274,46 @@ class DashboardController extends Controller
         // $this->lastEndDate->subDays($this->lastStartDate->diffInDays($this->lastEndDate));
     }
 
+    /**
+     * Returns previous order query
+     *
+     * @return mixed
+     */
     private function previousOrders()
     {
         return $this->getOrdersBetweenDate($this->lastStartDate, $this->lastEndDate);
     }
 
+    /**
+     * Returns current order query
+     *
+     * @return mixed
+     */
     private function currentOrders()
     {
         return $this->getOrdersBetweenDate($this->startDate, $this->endDate);
     }
 
+    /**
+     * Returns orders between two dates
+     *
+     * @return mixed
+     */
     private function getOrdersBetweenDate($start, $end)
     {
-        return $this->order->scopeQuery(function ($query) use ($start, $end) {
-            return $query->where('orders.created_at', '>=', $start)->where('orders.created_at', '<=', $end)
-                ->where('orders.status', '<>', 'canceled');
+        return $this->orderRepository->scopeQuery(function ($query) use ($start, $end) {
+            return $query->where('orders.created_at', '>=', $start)->where('orders.created_at', '<=', $end);
         });
     }
 
+    /**
+     * Returns customers between two dates
+     *
+     * @return mixed
+     */
     private function getCustomersBetweenDates($start, $end)
     {
-        return $this->customer->scopeQuery(function ($query) use ($start, $end) {
+        return $this->customerRepository->scopeQuery(function ($query) use ($start, $end) {
             return $query->where('customers.created_at', '>=', $start)->where('customers.created_at', '<=', $end);
         });
     }

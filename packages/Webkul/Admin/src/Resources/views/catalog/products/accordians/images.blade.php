@@ -1,10 +1,12 @@
-<accordian :title="'{{ __('admin::app.catalog.products.images') }}'" :active="true">
+{!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.images.before', ['product' => $product]) !!}
+
+<accordian :title="'{{ __('admin::app.catalog.products.images') }}'" :active="false">
     <div slot="body">
 
         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.images.controls.before', ['product' => $product]) !!}
 
         <div class="control-group {!! $errors->has('images.*') ? 'has-error' : '' !!}">
-            <label>{{ __('admin::app.catalog.categories.image') }}
+            <label>{{ __('admin::app.catalog.categories.image') }}</label>
 
             <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="images" :images='@json($product->images)'></image-wrapper>
 
@@ -20,3 +22,5 @@
 
     </div>
 </accordian>
+
+{!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.images.after', ['product' => $product]) !!}

@@ -2,6 +2,6 @@
 
 namespace Webkul\Sales\Contracts;
 
-interface OrderItemInventory
+interface DownloadableLinkPurchased
 {
 }

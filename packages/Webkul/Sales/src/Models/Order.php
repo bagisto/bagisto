@@ -60,6 +60,14 @@ class Order extends Model implements OrderContract
     }
 
     /**
+     * Get the order items record associated with the order.
+     */
+    public function all_items()
+    {
+        return $this->hasMany(OrderItemProxy::modelClass());
+    }
+
+    /**
      * Get the order shipments record associated with the order.
      */
     public function shipments()
@@ -148,6 +156,21 @@ class Order extends Model implements OrderContract
     }
 
     /**
+     * Checks if cart have stockable items
+     *
+     * @return boolean
+     */
+    public function haveStockableItems()
+    {
+        foreach ($this->items as $item) {
+            if ($item->getTypeInstance()->isStockable())
+                return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Checks if new shipment is allow or not
      */
     public function canShip()
@@ -156,7 +179,7 @@ class Order extends Model implements OrderContract
             return false;
 
         foreach ($this->items as $item) {
-            if ($item->qty_to_ship > 0)
+            if ($item->canShip())
                 return true;
         }
 
@@ -172,7 +195,7 @@ class Order extends Model implements OrderContract
             return false;
             
         foreach ($this->items as $item) {
-            if ($item->qty_to_invoice > 0)
+            if ($item->canInvoice())
                 return true;
         }
         
@@ -188,7 +211,7 @@ class Order extends Model implements OrderContract
             return false;
             
         foreach ($this->items as $item) {
-            if ($item->qty_to_cancel > 0)
+            if ($item->canCancel())
                 return true;
         }
 

@@ -1,15 +1,14 @@
 <template>
-    <div class="accordian" :class="[isActive ? 'active' : '', className]" :id="id">
-        <div class="accordian-header" @click="toggleAccordion()">
+    <div class="accordian" :class="[isActive ? 'active' : '', className, ! isActive && hasError ? 'error' : '']" :id="id">
+        <div class="accordian-header" @click="toggleAccordian()">
             <slot name="header">
                 {{ title }}
                 <i class="icon" :class="iconClass"></i>
             </slot>
         </div>
 
-        <div class="accordian-content">
-            <slot name="body">
-            </slot>
+        <div class="accordian-content" ref="controls">
+            <slot name="body"></slot>
         </div>
     </div>
 </template>
@@ -28,17 +27,29 @@
         data: function() {
             return {
                 isActive: false,
+
                 imageData: '',
+
+                hasError: false
             }
         },
 
         mounted: function() {
+            var this_this = this;
+
+            eventBus.$on('onFormError', function() {
+                $(this_this.$el).find('.control-group').each(function(index, element) {
+                    if ($(element).hasClass('has-error'))
+                        this_this.hasError = true;
+                });
+            })
+
             this.isActive = this.active;
         },
 
         methods: {
-            toggleAccordion: function() {
-                this.isActive = !this.isActive;
+            toggleAccordian: function() {
+                this.isActive = ! this.isActive;
             }
         },
 

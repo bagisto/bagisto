@@ -2,9 +2,7 @@
 
 namespace Webkul\Core\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Webkul\Core\Repositories\SliderRepository as Slider;
+use Webkul\Core\Repositories\SliderRepository;
 
 /**
  * Slider controller for managing the slider controls.
@@ -22,10 +20,11 @@ class SliderController extends Controller
     protected $_config;
 
     /**
-     * SliderRepository object
-     * Object
+     * SliderRepository
+     *
+     * @var Object
      */
-    protected $slider;
+    protected $sliderRepository;
 
     /**
      * @var array
@@ -35,12 +34,12 @@ class SliderController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\SliderRepository $slider
+     * @param  \Webkul\Core\Repositories\SliderRepository $sliderRepository
      * @return void
      */
-    public function __construct(Slider $slider)
+    public function __construct(SliderRepository $sliderRepository)
     {
-        $this->slider = $slider;
+        $this->sliderRepository = $sliderRepository;
 
         $this->_config = request('_config');
     }
@@ -48,7 +47,7 @@ class SliderController extends Controller
     /**
      * Loads the index for the sliders settings.
      *
-     * @return mixed
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -58,7 +57,7 @@ class SliderController extends Controller
     /**
      * Loads the form for creating slider.
      *
-     * @return mixed
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -80,7 +79,7 @@ class SliderController extends Controller
             'image.*'  => 'required|mimes:jpeg,bmp,png,jpg'
         ]);
 
-        $result = $this->slider->save(request()->all());
+        $result = $this->sliderRepository->save(request()->all());
 
         if ($result)
             session()->flash('success', trans('admin::app.settings.sliders.created-success'));
@@ -93,11 +92,11 @@ class SliderController extends Controller
     /**
      * Edit the previously created slider item.
      *
-     * @return mixed
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
-        $slider = $this->slider->findOrFail($id);
+        $slider = $this->sliderRepository->findOrFail($id);
 
         return view($this->_config['view'])->with('slider', $slider);
     }
@@ -115,7 +114,7 @@ class SliderController extends Controller
             'image.*'  => 'sometimes|mimes:jpeg,bmp,png,jpg'
         ]);
 
-        $result = $this->slider->updateItem(request()->all(), $id);
+        $result = $this->sliderRepository->updateItem(request()->all(), $id);
 
         if ($result) {
             session()->flash('success', trans('admin::app.settings.sliders.update-success'));
@@ -133,20 +132,16 @@ class SliderController extends Controller
      */
     public function destroy($id)
     {
-        $slider = $this->slider->findOrFail($id);
+        $slider = $this->sliderRepository->findOrFail($id);
 
-        if ($this->slider->findWhere(['channel_id' => core()->getCurrentChannel()->id])->count() == 1 && ($slider->channel_id == core()->getCurrentChannel()->id)) {
-            session()->flash('warning', trans('admin::app.settings.sliders.delete-success'));
-        } else {
-            try {
-                $this->slider->delete($id);
+        try {
+            $this->sliderRepository->delete($id);
 
-                session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Slider']));
+            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Slider']));
 
-                return response()->json(['message' => true], 200);
-            } catch(\Exception $e) {
-                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Slider']));
-            }
+            return response()->json(['message' => true], 200);
+        } catch(\Exception $e) {
+            session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Slider']));
         }
 
         return response()->json(['message' => false], 400);

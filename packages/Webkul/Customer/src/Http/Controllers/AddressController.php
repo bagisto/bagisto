@@ -4,7 +4,6 @@ namespace Webkul\Customer\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
 use Auth;
 
@@ -18,34 +17,35 @@ use Auth;
 class AddressController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Contains route related configuration
      *
-     * @return \Illuminate\Http\Response
+     * @var array
      */
     protected $_config;
 
-    protected $customer;
+    /**
+     * CustomerAddressRepository object
+     *
+     * @param  \Webkul\Customer\Repositories\CustomerAddressRepository $customerAddressRepository
+     * @var Object
+     */
+    protected $customerAddressRepository;
 
-    protected $address;
-
-    public function __construct(
-        CustomerRepository $customer,
-        CustomerAddressRepository $address
-    )
+    public function __construct(CustomerAddressRepository $customerAddressRepository)
     {
         $this->middleware('customer');
 
         $this->_config = request('_config');
 
-        $this->customer = auth()->guard('customer')->user();
+        $this->customerAddressRepository = $customerAddressRepository;
 
-        $this->address = $address;
+        $this->customer = auth()->guard('customer')->user();
     }
 
     /**
      * Address Route index page
      *
-     * @return view
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -55,7 +55,7 @@ class AddressController extends Controller
     /**
      * Show the address create form
      *
-     * @return view
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -89,7 +89,7 @@ class AddressController extends Controller
             $data['default_address'] = 1;
         }
 
-        if ($this->address->create($data)) {
+        if ($this->customerAddressRepository->create($data)) {
             session()->flash('success', trans('shop::app.customer.account.address.create.success'));
 
             return redirect()->route($this->_config['redirect']);
@@ -103,11 +103,11 @@ class AddressController extends Controller
     /**
      * For editing the existing addresses of current logged in customer
      *
-     * @return view
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
-        $address = $this->address->findOneWhere([
+        $address = $this->customerAddressRepository->findOneWhere([
             'id' => $id,
             'customer_id' => auth()->guard('customer')->user()->id
         ]);
@@ -145,7 +145,7 @@ class AddressController extends Controller
             if ($id == $address->id) {
                 session()->flash('success', trans('shop::app.customer.account.address.edit.success'));
 
-                $this->address->update($data, $id);
+                $this->customerAddressRepository->update($data, $id);
 
                 return redirect()->route('customer.address.index');
             }
@@ -163,11 +163,10 @@ class AddressController extends Controller
      */
     public function makeDefault($id)
     {
-        if ($default = $this->customer->default_address) {
-            $this->address->find($default->id)->update(['default_address' => 0]);
-        }
+        if ($default = $this->customer->default_address)
+            $this->customerAddressRepository->find($default->id)->update(['default_address' => 0]);
 
-        if ($address = $this->address->find($id)) {
+        if ($address = $this->customerAddressRepository->find($id)) {
             $address->update(['default_address' => 1]);
         } else {
             session()->flash('success', trans('shop::app.customer.account.address.index.default-delete'));
@@ -185,7 +184,7 @@ class AddressController extends Controller
      */
     public function destroy($id)
     {
-        $address = $this->address->findOneWhere([
+        $address = $this->customerAddressRepository->findOneWhere([
             'id' => $id,
             'customer_id' => auth()->guard('customer')->user()->id
         ]);
@@ -193,7 +192,7 @@ class AddressController extends Controller
         if (! $address)
             abort(404);
 
-        $this->address->delete($id);
+        $this->customerAddressRepository->delete($id);
 
         session()->flash('success', trans('shop::app.customer.account.address.delete.success'));
 

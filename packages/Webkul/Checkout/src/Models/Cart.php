@@ -14,7 +14,7 @@ class Cart extends Model implements CartContract
 
     protected $hidden = ['coupon_code'];
 
-    protected $with = ['items', 'items.child'];
+    protected $with = ['items', 'items.children'];
 
     /**
      * To get relevant associated items with the cart instance
@@ -100,5 +100,35 @@ class Cart extends Model implements CartContract
     public function payment()
     {
         return $this->hasOne(CartPaymentProxy::modelClass());
+    }
+
+    /**
+     * Checks if cart have stockable items
+     *
+     * @return boolean
+     */
+    public function haveStockableItems()
+    {
+        foreach ($this->items as $item) {
+            if ($item->product->isStockable())
+                return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Checks if cart have downloadable items
+     *
+     * @return boolean
+     */
+    public function haveDownloadableItems()
+    {
+        foreach ($this->items as $item) {
+            if ($item->type == 'downloadable')
+                return true;
+        }
+
+        return false;
     }
 }

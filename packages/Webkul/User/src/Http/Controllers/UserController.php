@@ -2,11 +2,11 @@
 
 namespace Webkul\User\Http\Controllers;
 
-use Exception;
+use Illuminate\Support\Facades\Event;
+use Webkul\User\Repositories\AdminRepository;
+use Webkul\User\Repositories\RoleRepository;
 use Webkul\User\Http\Requests\UserForm;
-use Illuminate\Support\Facades\{ Event, Hash };
-use Webkul\User\Repositories\AdminRepository as Admin;
-use Webkul\User\Repositories\RoleRepository as Role;
+use Hash;
 
 /**
  * Admin user controller
@@ -26,29 +26,32 @@ class UserController extends Controller
     /**
      * AdminRepository object
      *
-     * @var array
+     * @var Object
      */
-    protected $admin;
+    protected $adminRepository;
 
     /**
      * RoleRepository object
      *
-     * @var array
+     * @var Object
      */
-    protected $role;
+    protected $roleRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\User\Repositories\AdminRepository  $admin
-     * @param  \Webkul\User\Repositories\RoleRepository  $role
+     * @param  \Webkul\User\Repositories\AdminRepository $adminRepository
+     * @param  \Webkul\User\Repositories\RoleRepository $roleRepository
      * @return void
      */
-    public function __construct(Admin $admin, Role $role)
+    public function __construct(
+        AdminRepository $adminRepository,
+        RoleRepository $roleRepository
+    )
     {
-        $this->admin = $admin;
+        $this->adminRepository = $adminRepository;
 
-        $this->role = $role;
+        $this->roleRepository = $roleRepository;
 
         $this->_config = request('_config');
 
@@ -58,7 +61,7 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\View\View 
      */
     public function index()
     {
@@ -68,11 +71,11 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\View\View 
      */
     public function create()
     {
-        $roles = $this->role->all();
+        $roles = $this->roleRepository->all();
 
         return view($this->_config['view'], compact('roles'));
     }
@@ -92,7 +95,7 @@ class UserController extends Controller
 
         Event::fire('user.admin.create.before');
 
-        $admin = $this->admin->create($data);
+        $admin = $this->adminRepository->create($data);
 
         Event::fire('user.admin.create.after', $admin);
 
@@ -104,14 +107,14 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\View\View
+     * @param integer $id
+     * @return \Illuminate\View\View 
      */
     public function edit($id)
     {
-        $user = $this->admin->findOrFail($id);
+        $user = $this->adminRepository->findOrFail($id);
 
-        $roles = $this->role->all();
+        $roles = $this->roleRepository->all();
 
         return view($this->_config['view'], compact('user', 'roles'));
     }
@@ -140,7 +143,7 @@ class UserController extends Controller
 
         Event::fire('user.admin.update.before', $id);
 
-        $admin = $this->admin->update($data, $id);
+        $admin = $this->adminRepository->update($data, $id);
 
         Event::fire('user.admin.update.after', $admin);
 
@@ -153,13 +156,13 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View 
      */
     public function destroy($id)
     {
-        $user = $this->admin->findOrFail($id);
+        $user = $this->adminRepository->findOrFail($id);
 
-        if ($this->admin->count() == 1) {
+        if ($this->adminRepository->count() == 1) {
             session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Admin']));
         } else {
             Event::fire('user.admin.delete.before', $id);
@@ -169,7 +172,7 @@ class UserController extends Controller
             }
 
             try {
-                $this->admin->delete($id);
+                $this->adminRepository->delete($id);
 
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Admin']));
 
@@ -194,14 +197,14 @@ class UserController extends Controller
         $password = request()->input('password');
 
         if (Hash::check($password, auth()->guard('admin')->user()->password)) {
-            if ($this->admin->count() == 1) {
+            if ($this->adminRepository->count() == 1) {
                 session()->flash('error', trans('admin::app.users.users.delete-last'));
             } else {
                 $id = auth()->guard('admin')->user()->id;
 
                 Event::fire('user.admin.delete.before', $id);
 
-                $this->admin->delete($id);
+                $this->adminRepository->delete($id);
 
                 Event::fire('user.admin.delete.after', $id);
 

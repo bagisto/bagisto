@@ -2,9 +2,7 @@
 
 namespace Webkul\Product\Repositories;
 
-use Illuminate\Container\Container as App;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Product\Repositories\ProductRepository as Product;
 
 /**
  * Product Repository
@@ -14,23 +12,6 @@ use Webkul\Product\Repositories\ProductRepository as Product;
  */
 class ProductFlatRepository extends Repository
 {
-    protected $product;
-
-    /**
-     * Price Object
-     *
-     * @var array
-     */
-    protected $price;
-
-    public function __construct(
-        Product $product,
-        App $app
-    ) {
-        $this->product = $product;
-        parent::__construct($app);
-    }
-
     public function model()
     {
         return 'Webkul\Product\Contracts\ProductFlat';
@@ -39,33 +20,24 @@ class ProductFlatRepository extends Repository
     /**
      * Maximum Price of Category Product
      *
-     * @param int  $categoryId
-     * return integer
+     * @param Category $category
+     * @return float
      */
-    public function getCategoryProductMaximumPrice($categoryId)
+    public function getCategoryProductMaximumPrice($category = null)
     {
-        // return $this->model
-        //     ->leftJoin('product_categories', 'product_flat.product_id', 'product_categories.product_id')
-        //     ->where('product_categories.category_id', $categoryId)
-        //     ->max('price');
+        if (! $category)
+            return $this->model->max('max_price');
 
-        return $this->model->max('product_flat.price');
-    }
-
-     /**
-     * Maximum Price of Product
-     *
-     * return integer
-     */
-    public function getProductMaximumPrice()
-    {
-        return $this->model->max('product_flat.price');
+        return $this->model
+            ->leftJoin('product_categories', 'product_flat.product_id', 'product_categories.product_id')
+            ->where('product_categories.category_id', $category->id)
+            ->max('max_price');
     }
 
     /**
      * get Category Product
      *
-     * return array
+     * @return array
      */
     public function getCategoryProductAttribute($categoryId)
     {

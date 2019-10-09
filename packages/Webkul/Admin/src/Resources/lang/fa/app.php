@@ -425,7 +425,18 @@ return [
             'related-products' => 'محصولات مرتبط',
             'product-search-hint' => 'شروع به تایپ نام محصول کنید',
             'no-result-found' => 'محصولاتی با همین نام یافت نشد',
-            'searching' => 'جست و جو ...'
+            'searching' => 'جست و جو ...',
+            'bundle-items' => 'Bundle Items',
+            'add-option-btn-title' => 'Add Option',
+            'option-title' => 'Option Title',
+            'input-type' => 'Input Type',
+            'is-required' => 'Is Required',
+            'select' => 'Select',
+            'radio' => 'Radio',
+            'checkbox' => 'Checkbox',
+            'multiselect' => 'Multiselect',
+            'new-option' => 'New Option',
+            'is-default' => 'Is Default'
         ],
 
         'attributes' => [

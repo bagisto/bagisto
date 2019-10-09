@@ -391,6 +391,40 @@ h5 {
     }
 }
 
+.section {
+    // font-size: 16px;
+
+    .secton-title {
+        font-size: 18px;
+        color: #8E8E8E;
+        padding: 15px 0;
+        border-bottom: 1px solid $border-color;
+    }
+
+    .section-content {
+        display: block;
+        padding: 20px 0;
+
+        .row {
+            display: block;
+            padding: 7px 0;
+
+            .title {
+                width: 200px;
+                color: $font-color;
+                letter-spacing: -0.26px;
+                display: inline-block;
+            }
+
+            .value {
+                color: $font-color;
+                letter-spacing: -0.26px;
+                display: inline-block;
+            }
+        }
+    }
+}
+
 .table {
     width: 100%;
     overflow-x: auto !important;
@@ -810,6 +844,7 @@ h5 {
         h1 {
             margin: 0;
             font-size: 20px;
+            font-weight: 500;
             display: inline-block;
         }
 
@@ -819,6 +854,12 @@ h5 {
             &.left {
                 float: left;
             }
+        }
+    }
+
+    &.error {
+        .accordian-header {
+            color: #ff5656;
         }
     }
 
@@ -1060,6 +1101,7 @@ modal {
         background-repeat: no-repeat;
         background-position: center;
         margin-bottom: 20px;
+        float: left;
 
         img.preview {
             width: 100%;

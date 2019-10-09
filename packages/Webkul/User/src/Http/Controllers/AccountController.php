@@ -2,9 +2,6 @@
 
 namespace Webkul\User\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Webkul\User\Http\Controllers\Controller;
 use Hash;
 
 /**
@@ -35,7 +32,7 @@ class AccountController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View 
      */
     public function edit()
     {

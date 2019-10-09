@@ -84,15 +84,6 @@ class Order {
         }
     }
 
-    /**
-     * @param mixed $shipment
-     *
-     * Send new shipment mail to the customer
-     */
-    public function updateProductInventory($order)
-    {
-    }
-
      /*
      * @param mixed $order
      * */

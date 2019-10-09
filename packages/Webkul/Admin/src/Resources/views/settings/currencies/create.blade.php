@@ -45,6 +45,10 @@
                                 <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
                             </div>
 
+                            <div class="control-group">
+                                <label for="symbol">{{ __('admin::app.settings.currencies.symbol') }}</label>
+                                <input class="control" id="symbol" name="symbol" value="{{ old('symbol') }}"/>
+                            </div>
                         </div>
                     </accordian>
 

@@ -33,14 +33,15 @@ class CartItemRepository extends Repository
 
     public function update(array $data, $id, $attribute = "id")
     {
-        $cartitems = $this->find($id);
+        $item = $this->find($id);
 
-        $cartitems->update($data);
+        $item->update($data);
 
-        return $cartitems;
+        return $item;
     }
 
-    public function getProduct($cartItemId) {
+    public function getProduct($cartItemId)
+    {
         return $this->model->find($cartItemId)->product->id;
     }
 }

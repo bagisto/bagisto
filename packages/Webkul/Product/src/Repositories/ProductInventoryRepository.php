@@ -30,21 +30,15 @@ class ProductInventoryRepository extends Repository
      */
     public function saveInventories(array $data, $product)
     {
-        if ($product->type == 'configurable')
-            return;
-
         if (isset($data['inventories'])) {
             foreach ($data['inventories'] as $inventorySourceId => $qty) {
-                if (is_null($qty)) {
-                    $qty = 0;
-                }
+                $qty = is_null($qty) ? 0 : $qty;
 
                 $productInventory = $this->findOneWhere([
                         'product_id' => $product->id,
                         'inventory_source_id' => $inventorySourceId,
                         'vendor_id' => isset($data['vendor_id']) ? $data['vendor_id'] : 0
                     ]);
-
 
                 if ($productInventory) {
                     $productInventory->qty = $qty;

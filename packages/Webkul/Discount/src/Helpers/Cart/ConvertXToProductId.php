@@ -42,6 +42,11 @@ class ConvertXToProductId
     protected $pav;
 
     /**
+     * Ignorable type from convertX
+     */
+    protected $ignorables;
+
+    /**
      * Condition symbols for matching the criteria with attributes selected
      */
     protected $symbols;
@@ -66,6 +71,8 @@ class ConvertXToProductId
         $this->cartRule = $cartRule;
 
         $this->pav = $pav;
+
+        $this->ignorable = ['configurable', 'group'];
 
         $this->conditionSymbols = config('pricerules.cart.conditions.symbols');
     }
@@ -173,12 +180,14 @@ class ConvertXToProductId
                     if ($testCondition == '{}') {
                         $foundProducts = $this->product->findWhere([
                             ['sku', 'like', '%'.$testValue.'%'],
-                            ['type', '!=', 'configurable']
+                            ['type', '!=', 'configurable'],
+                            ['type', '!=', 'group']
                         ])->flatten()->all();
                     } else if ($testCondition == '!{}') {
                         $foundProducts = $this->product->findWhere([
                             ['sku', 'not like', '%'.$testValue.'%'],
-                            ['type', '!=', 'configurable']
+                            ['type', '!=', 'configurable'],
+                            ['type', '!=', 'group']
                         ])->flatten()->all();
                     } else if ($testCondition == '=') {
                         $foundProducts = $this->product->findWhere([
@@ -287,6 +296,7 @@ class ConvertXToProductId
                     ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
                     ->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id')
                     ->where('products.type', '!=', 'configurable')
+                    ->where('products.type', '!=', 'group')
                     ->whereNotNull('product_flat.url_key');
 
             if ($categoryId) {

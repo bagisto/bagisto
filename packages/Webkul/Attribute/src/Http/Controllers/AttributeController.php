@@ -2,10 +2,8 @@
 
 namespace Webkul\Attribute\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
-use Event;
+use Illuminate\Support\Facades\Event;
+use Webkul\Attribute\Repositories\AttributeRepository;
 
 /**
  * Catalog attribute controller
@@ -27,17 +25,17 @@ class AttributeController extends Controller
      *
      * @var array
      */
-    protected $attribute;
+    protected $attributeRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attribute
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository $attributeRepository
      * @return void
      */
-    public function __construct(Attribute $attribute)
+    public function __construct(AttributeRepository $attributeRepository)
     {
-        $this->attribute = $attribute;
+        $this->attributeRepository = $attributeRepository;
 
         $this->_config = request('_config');
     }
@@ -45,7 +43,7 @@ class AttributeController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -55,7 +53,7 @@ class AttributeController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -79,7 +77,7 @@ class AttributeController extends Controller
 
         $data['is_user_defined'] = 1;
 
-        $attribute = $this->attribute->create($data);
+        $attribute = $this->attributeRepository->create($data);
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Attribute']));
 
@@ -90,11 +88,11 @@ class AttributeController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
-        $attribute = $this->attribute->findOrFail($id);
+        $attribute = $this->attributeRepository->findOrFail($id);
 
         return view($this->_config['view'], compact('attribute'));
     }
@@ -102,11 +100,10 @@ class AttributeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
         $this->validate(request(), [
             'code' => ['required', 'unique:attributes,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
@@ -114,7 +111,7 @@ class AttributeController extends Controller
             'type' => 'required'
         ]);
 
-        $attribute = $this->attribute->update(request()->all(), $id);
+        $attribute = $this->attributeRepository->update(request()->all(), $id);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Attribute']));
 
@@ -129,13 +126,13 @@ class AttributeController extends Controller
      */
     public function destroy($id)
     {
-        $attribute = $this->attribute->findOrFail($id);
+        $attribute = $this->attributeRepository->findOrFail($id);
 
         if (! $attribute->is_user_defined) {
             session()->flash('error', trans('admin::app.response.user-define-error', ['name' => 'Attribute']));
         } else {
             try {
-                $this->attribute->delete($id);
+                $this->attributeRepository->delete($id);
 
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Attribute']));
 
@@ -161,13 +158,13 @@ class AttributeController extends Controller
             $indexes = explode(',', request()->input('indexes'));
 
             foreach ($indexes as $key => $value) {
-                $attribute = $this->attribute->find($value);
+                $attribute = $this->attributeRepository->find($value);
 
                 try {
                     if (! $attribute->is_user_defined) {
                         continue;
                     } else {
-                        $this->attribute->delete($value);
+                        $this->attributeRepository->delete($value);
                     }
                 } catch (\Exception $e) {
                     $suppressFlash = true;

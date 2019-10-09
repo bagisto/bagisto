@@ -4,8 +4,6 @@ namespace Webkul\Shipping\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
-use Illuminate\Routing\Router;
-use Webkul\Customer\Http\Middleware\RedirectIfNotCustomer;
 use Webkul\Shipping\Shipping;
 use Webkul\Shipping\Facades\Shipping as ShippingFacade;
 
@@ -16,7 +14,7 @@ class ShippingServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(Router $router)
+    public function boot()
     {
         include __DIR__ . '/../Http/helpers.php';
     }

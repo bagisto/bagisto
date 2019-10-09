@@ -3,7 +3,6 @@
 namespace Webkul\Discount\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Routing\Router;
 
 class DiscountServiceProvider extends ServiceProvider
 {
@@ -12,7 +11,7 @@ class DiscountServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(Router $router)
+    public function boot()
     {
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }

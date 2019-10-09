@@ -79,25 +79,29 @@ class OnepageController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View 
     */
     public function index()
     {
         if (Cart::hasError())
             return redirect()->route('shop.checkout.cart.index');
 
-        // $this->nonCoupon->apply();
-        $this->nonCoupon->apply();
+        $cart = Cart::getCart();
+
+        if (! auth()->guard('customer')->check() && $cart->haveDownloadableItems())
+            return redirect()->route('customer.session.index');
+
+        //$this->nonCoupon->apply();
 
         Cart::collectTotals();
 
-        return view($this->_config['view'])->with('cart', Cart::getCart());
+        return view($this->_config['view'], compact('cart'));
     }
 
     /**
      * Return order short summary
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View 
     */
     public function summary()
     {
@@ -121,14 +125,24 @@ class OnepageController extends Controller
         $data['billing']['address1'] = implode(PHP_EOL, array_filter($data['billing']['address1']));
         $data['shipping']['address1'] = implode(PHP_EOL, array_filter($data['shipping']['address1']));
 
-        if (Cart::hasError() || !Cart::saveCustomerAddress($data) || ! $rates = Shipping::collectRates())
+        if (Cart::hasError() || ! Cart::saveCustomerAddress($data)) {
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
+        } else {
+            $cart = Cart::getCart();
 
-        $this->nonCoupon->apply();
+            $this->nonCoupon->apply();
 
-        Cart::collectTotals();
+            Cart::collectTotals();
 
-        return response()->json($rates);
+            if ($cart->haveStockableItems()) {
+                if (! $rates = Shipping::collectRates())
+                    return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
+                else
+                    return response()->json($rates);
+            } else {
+                return response()->json(Payment::getSupportedPaymentMethods());
+            }
+        }
     }
 
     /**
@@ -153,13 +167,13 @@ class OnepageController extends Controller
     /**
      * Saves payment method.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
     */
     public function savePayment()
     {
         $payment = request()->get('payment');
 
-        if (Cart::hasError() || !$payment || !Cart::savePaymentMethod($payment))
+        if (Cart::hasError() || ! $payment || ! Cart::savePaymentMethod($payment))
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
 
         $this->nonCoupon->apply();
@@ -170,7 +184,7 @@ class OnepageController extends Controller
 
         return response()->json([
             'jump_to_section' => 'review',
-            'html' => view('shop::checkout.onepage.review', compact('cart'))->render()
+            'html' => view('shop::checkout.onepage.review', compact('cart', 'rule'))->render()
         ]);
     }
 
@@ -232,7 +246,7 @@ class OnepageController extends Controller
 
         $this->validatesDiscount->validate();
 
-        if (! $cart->shipping_address) {
+        if ($cart->haveStockableItems() && ! $cart->shipping_address) {
             throw new \Exception(trans('Please check shipping address.'));
         }
 
@@ -240,7 +254,7 @@ class OnepageController extends Controller
             throw new \Exception(trans('Please check billing address.'));
         }
 
-        if (! $cart->selected_shipping_rate) {
+        if ($cart->haveStockableItems() && ! $cart->selected_shipping_rate) {
             throw new \Exception(trans('Please specify shipping method.'));
         }
 

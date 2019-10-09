@@ -47,7 +47,7 @@ class StandardController extends Controller
     /**
      * Redirects to the paypal.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function redirect()
     {

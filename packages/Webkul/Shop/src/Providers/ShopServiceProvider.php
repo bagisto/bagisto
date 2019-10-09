@@ -4,7 +4,6 @@ namespace Webkul\Shop\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Routing\Router;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Pagination\Paginator;
 use Webkul\Shop\Http\Middleware\Locale;
 use Webkul\Shop\Http\Middleware\Theme;

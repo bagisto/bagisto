@@ -229,11 +229,7 @@ class ProductFlat
                             }
                         }
 
-                        if ($product->type == 'configurable' && $attribute->code == 'price') {
-                            $productFlat->{$attribute->code} = app('Webkul\Product\Helpers\Price')->getVariantMinPrice($product);
-                        } else {
-                            $productFlat->{$attribute->code} = $productAttributeValue[ProductAttributeValue::$attributeTypeFields[$attribute->type]];
-                        }
+                        $productFlat->{$attribute->code} = $productAttributeValue[ProductAttributeValue::$attributeTypeFields[$attribute->type]];
 
                         if ($attribute->type == 'select') {
                             $attributeOption = $this->attributeOptionRepository->find($product->{$attribute->code});
@@ -270,6 +266,10 @@ class ProductFlat
 
                     $productFlat->updated_at = $product->updated_at;
 
+                    $productFlat->min_price = $product->getTypeInstance()->getMinimalPrice();
+
+                    $productFlat->max_price = $product->getTypeInstance()->getMaximamPrice();
+
                     if ($parentProduct) {
                         $parentProductFlat = $this->productFlatRepository->findOneWhere([
                                 'product_id' => $parentProduct->id,
@@ -277,9 +277,8 @@ class ProductFlat
                                 'locale' => $locale->code
                             ]);
 
-                        if ($parentProductFlat) {
+                        if ($parentProductFlat)
                             $productFlat->parent_id = $parentProductFlat->id;
-                        }
                     }
 
                     $productFlat->save();

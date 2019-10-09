@@ -2,11 +2,11 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Webkul\Product\Repositories\ProductRepository as Product;
-use Webkul\Product\Repositories\ProductAttributeValueRepository as ProductAttributeValue;
 use Illuminate\Support\Facades\Storage;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
+use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
 
 /**
  * Product controller
@@ -29,27 +29,52 @@ class ProductController extends Controller
      *
      * @var array
      */
-    protected $product;
+    protected $productRepository;
 
     /**
      * ProductAttributeValueRepository object
      *
      * @var array
      */
-    protected $productAttributeValue;
+    protected $productAttributeValueRepository;
+
+    /**
+     * ProductDownloadableSampleRepository object
+     *
+     * @var array
+     */
+    protected $productDownloadableSampleRepository;
+
+    /**
+     * ProductDownloadableLinkRepository object
+     *
+     * @var array
+     */
+    protected $productDownloadableLinkRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Product\Repositories\ProductRepository      $product
-     * @param  \Webkul\Product\Repositories\ProductAttributeValue  $productAttributeValue
+     * @param  \Webkul\Product\Repositories\ProductRepository                   $productRepository
+     * @param  \Webkul\Product\Repositories\productAttributeValueRepository     $productAttributeValueRepository
+     * @param  \Webkul\Product\Repositories\ProductDownloadableSampleRepository $productDownloadableSampleRepository
+     * @param  \Webkul\Product\Repositories\ProductDownloadableLinkRepository   $productDownloadableLinkRepository
      * @return void
      */
-    public function __construct(Product $product, ProductAttributeValue $productAttributeValue)
+    public function __construct(
+        ProductRepository $productRepository,
+        ProductAttributeValueRepository $productAttributeValueRepository,
+        ProductDownloadableSampleRepository $productDownloadableSampleRepository,
+        ProductDownloadableLinkRepository $productDownloadableLinkRepository
+    )
     {
-        $this->product = $product;
+        $this->productRepository = $productRepository;
 
-        $this->productAttributeValue = $productAttributeValue;
+        $this->productAttributeValueRepository = $productAttributeValueRepository;
+
+        $this->productDownloadableSampleRepository = $productDownloadableSampleRepository;
+
+        $this->productDownloadableLinkRepository = $productDownloadableLinkRepository;
 
         $this->_config = request('_config');
     }
@@ -58,15 +83,15 @@ class ProductController extends Controller
      * Display a listing of the resource.
      *
      * @param  string $slug
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View 
      */
     public function index($slug)
     {
-        $product = $this->product->findBySlugOrFail($slug);
+        $product = $this->productRepository->findBySlugOrFail($slug);
 
         $customer = auth()->guard('customer')->user();
 
-        return view($this->_config['view'], compact('product','customer'));
+        return view($this->_config['view'], compact('product', 'customer'));
     }
 
     /**
@@ -77,11 +102,49 @@ class ProductController extends Controller
      */
     public function download($productId, $attributeId)
     {
-        $productAttribute = $this->productAttributeValue->findOneWhere([
+        $productAttribute = $this->productAttributeValueRepository->findOneWhere([
             'product_id'   => $productId,
             'attribute_id' => $attributeId
         ]);
 
         return Storage::download($productAttribute['text_value']);
+    }
+
+    /**
+     * Download the for the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function downloadSample()
+    {
+        if (request('type') == 'link') {
+            $productDownloadableLink = $this->productDownloadableLinkRepository->findOrFail(request('id'));
+
+            if ($productDownloadableLink->sample_type == 'file')
+                return Storage::download($productDownloadableLink->sample_file);
+            else {
+                $fileName = $name = substr($productDownloadableLink->sample_url, strrpos($productDownloadableLink->sample_url, '/') + 1);
+
+                $tempImage = tempnam(sys_get_temp_dir(), $fileName);
+
+                copy($productDownloadableLink->sample_url, $tempImage);
+
+                return response()->download($tempImage, $fileName);
+            }
+        } else {
+            $productDownloadableSample = $this->productDownloadableSampleRepository->findOrFail(request('id'));
+
+            if ($productDownloadableSample->type == 'file')
+                return Storage::download($productDownloadableSample->file);
+            else {
+                $fileName = $name = substr($productDownloadableSample->url, strrpos($productDownloadableSample->url, '/') + 1);
+
+                $tempImage = tempnam(sys_get_temp_dir(), $fileName);
+
+                copy($productDownloadableSample->url, $tempImage);
+
+                return response()->download($tempImage, $fileName);
+            }
+        }
     }
 }

@@ -140,24 +140,6 @@
                             } else {
                                 this.selectedProductId = this.simpleProduct;
                             }
-
-                            //buy now anchor href changer with options
-                            var buyNowLink = $('.btn.buynow').attr('data-href');
-                            var quantity = document.getElementById('quantity').value;
-
-                            if (this.selectedProductId != '' && buyNowLink) {
-                                var splitted = buyNowLink.split("/");
-
-                                splitted.pop();
-
-                                lastItem = this.selectedProductId;
-
-                                var joined = splitted.join('/');
-
-                                var newBuyNowUrl = joined + '/' + lastItem;
-
-                                $('.btn.buynow').attr('data-href', newBuyNowUrl);
-                            }
                         } else {
                             attribute.selectedIndex = 0;
 

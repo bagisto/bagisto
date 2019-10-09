@@ -203,7 +203,7 @@ return [
         'key' => 'cms',
         'name' => 'admin::app.layouts.cms',
         'route' => 'admin.cms.index',
-        'sort' => 6,
+        'sort' => 5,
         'icon-class' => 'cms-icon'
     ], [
         'key' => 'cms.pages',

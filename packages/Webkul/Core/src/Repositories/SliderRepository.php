@@ -4,7 +4,7 @@ namespace Webkul\Core\Repositories;
 
 use Illuminate\Container\Container as App;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Core\Repositories\ChannelRepository as Channel;
+use Webkul\Core\Repositories\ChannelRepository;
 use Storage;
 
 /**
@@ -15,14 +15,25 @@ use Storage;
  */
 class SliderRepository extends Repository
 {
-    protected $channel;
+    /**
+     * ChannelRepository object
+     *
+     * @var Object
+     */
+    protected $channelRepository;
 
+    /**
+     * Create a new repository instance.
+     *
+     * @param  \Webkul\Core\Repositories\ChannelRepository $channelRepository
+     * @return void
+     */
     public function __construct(
-        Channel $channel,
+        ChannelRepository $channelRepository,
         App $app
     )
     {
-        $this->channel = $channel;
+        $this->channelRepository = $channelRepository;
 
         parent::__construct($app);
     }
@@ -43,7 +54,7 @@ class SliderRepository extends Repository
      */
     public function save(array $data)
     {
-        $channelName = $this->channel->find($data['channel_id'])->name;
+        $channelName = $this->channelRepository->find($data['channel_id'])->name;
 
         $dir = 'slider_images/' . $channelName;
 
@@ -80,19 +91,15 @@ class SliderRepository extends Repository
      */
     public function updateItem(array $data, $id)
     {
-        $channelName = $this->channel->find($data['channel_id'])->name;
+        $channelName = $this->channelRepository->find($data['channel_id'])->name;
 
         $dir = 'slider_images/' . $channelName;
 
-        $uploaded = false;
-        $image = false;
+        $uploaded = $image = false;
 
         if (isset($data['image'])) {
-            $image = array_first($data['image'], function ($value) {
-                if ($value)
-                    return $value;
-                else
-                    return false;
+            $image = $first = array_first($data['image'], function ($value, $key) {
+                return $value ? $value : false;
             });
         }
 
@@ -122,8 +129,8 @@ class SliderRepository extends Repository
      *
      * @return Boolean
      */
-    public function destroy($id) {
-
+    public function destroy($id)
+    {
         $sliderItem = $this->find($id);
 
         $sliderItemImage = $sliderItem->path;

@@ -68,71 +68,42 @@ class ProductForm extends FormRequest
      */
     public function rules()
     {
-        $this->rules = [
-            'sku' => ['required', 'unique:products,sku,' . $this->id, new \Webkul\Core\Contracts\Validations\Slug],
-            'variants.*.name' => 'required',
-            'variants.*.sku' => 'required',
-            'variants.*.price' => 'required',
-            'variants.*.weight' => 'required',
-            'images.*' => 'mimes:jpeg,jpg,bmp,png'
-        ];
-
-        $inputs = $this->all();
-
-        if (isset($inputs['variants'])) {
-            foreach ($inputs['variants'] as $key => $variant) {
-                $this->rules['variants'.'.'.$key.'.'.'sku'] = ['unique:products,sku,' . $key, new \Webkul\Core\Contracts\Validations\Slug];
-            }
-        }
-
         $product = $this->product->find($this->id);
+        
+        $this->rules = array_merge($product->getTypeInstance()->getTypeValidationRules(), [
+            'sku' => ['required', 'unique:products,sku,' . $this->id, new \Webkul\Core\Contracts\Validations\Slug],
+            'images.*' => 'mimes:jpeg,jpg,bmp,png',
+        ]);
 
-        $attributes = $product->attribute_family->custom_attributes;
+        foreach ($product->getEditableAttributes() as $attribute) {
+            if ($attribute->code == 'sku')
+                continue;
 
-        $productSuperAttributes = $product->super_attributes;
+            $validations = [];
 
-        foreach ($attributes as $attribute) {
-            if (! $productSuperAttributes->contains($attribute)) {
-                if ($attribute->code == 'sku') {
-                    continue;
-                }
+            array_push($validations, $attribute->is_required ? 'required' : 'nullable');
 
-                if ($product->type == 'configurable' && in_array($attribute->code, ['price', 'cost', 'special_price', 'special_price_from', 'special_price_to', 'width', 'height', 'depth', 'weight'])) {
-                    continue;
-                }
-
-                $validations = [];
-
-                if ($attribute->is_required) {
-                    array_push($validations, 'required');
-                } else {
-                    array_push($validations, 'nullable');
-                }
-
-                if ($attribute->type == 'text' && $attribute->validation) {
-                    if ($attribute->validation == 'decimal') {
-                        array_push($validations, new \Webkul\Core\Contracts\Validations\Decimal);
-                    } else {
-                        array_push($validations, $attribute->validation);
-                    }
-                }
-
-                if ($attribute->type == 'price') {
-                    array_push($validations, new \Webkul\Core\Contracts\Validations\Decimal);
-                }
-
-                if ($attribute->is_unique) {
-                    array_push($validations, function ($field, $value, $fail) use ($inputs, $attribute) {
-                        $column = ProductAttributeValue::$attributeTypeFields[$attribute->type];
-
-                        if (! $this->attributeValue->isValueUnique($this->id, $attribute->id, $column, $inputs[$attribute->code])) {
-                            $fail('The :attribute has already been taken.');
-                        }
-                    });
-                }
-
-                $this->rules[$attribute->code] = $validations;
+            if ($attribute->type == 'text' && $attribute->validation) {
+                array_push($validations, 
+                        $attribute->validation == 'decimal'
+                        ? new \Webkul\Core\Contracts\Validations\Decimal
+                        : $attribute->validation
+                    );
             }
+
+            if ($attribute->type == 'price')
+                array_push($validations, new \Webkul\Core\Contracts\Validations\Decimal);
+
+            if ($attribute->is_unique) {
+                array_push($validations, function ($field, $value, $fail) use ($attribute) {
+                    $column = ProductAttributeValue::$attributeTypeFields[$attribute->type];
+
+                    if (! $this->attributeValue->isValueUnique($this->id, $attribute->id, $column, request($attribute->code)))
+                        $fail('The :attribute has already been taken.');
+                });
+            }
+
+            $this->rules[$attribute->code] = $validations;
         }
 
         return $this->rules;
