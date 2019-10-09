@@ -5,8 +5,14 @@ window.axios = require("axios");
 require("./bootstrap");
 require("ez-plus/src/jquery.ez-plus.js");
 var accounting = require('accounting');
+locales = require("./lang/locales.js");
 
-Vue.use(VeeValidate);
+Vue.use(VeeValidate, {
+    dictionary: {
+        ar: { messages: locales.messages.ar }
+    }
+});
+
 Vue.prototype.$http = axios
 
 window.eventBus = new Vue();
@@ -18,7 +24,6 @@ Vue.filter('currency', function (value, argument) {
 })
 
 $(document).ready(function () {
-
     const app = new Vue({
         el: "#app",
 
@@ -29,6 +34,8 @@ $(document).ready(function () {
         mounted: function () {
             this.addServerErrors();
             this.addFlashMessages();
+
+            this.$validator.localize(document.documentElement.lang);
         },
 
         methods: {

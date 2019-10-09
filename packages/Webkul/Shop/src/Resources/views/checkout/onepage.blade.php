@@ -105,6 +105,8 @@
         var reviewHtml = '';
         var summaryHtml = '';
         var customerAddress = '';
+        var shippingMethods = '';
+        var paymentMethods = '';
 
         @auth('customer')
             @if(auth('customer')->user()->addresses)
@@ -173,6 +175,10 @@
                     this.new_shipping_address = true;
                     this.new_billing_address = true;
                 } else {
+                    this.address.billing.first_name = this.address.shipping.first_name = customerAddress.first_name;
+                    this.address.billing.last_name = this.address.shipping.last_name = customerAddress.last_name;
+                    this.address.billing.email = this.address.shipping.email = customerAddress.email;
+
                     if (customerAddress.length < 1) {
                         this.new_shipping_address = true;
                         this.new_billing_address = true;
@@ -271,9 +277,17 @@
                         .then(function(response) {
                             this_this.disable_button = false;
 
+<<<<<<< HEAD
                             paymentHtml = Vue.compile(response.data.html)
                             this_this.completed_step = this_this.step_numbers[response.data.jump_to_section] + 1;
                             this_this.current_step = this_this.step_numbers[response.data.jump_to_section];
+=======
+                            if (response.data.jump_to_section == 'payment') {
+                                paymentHtml = Vue.compile(response.data.html)
+                                paymentMethods = response.data.paymentMethods;
+                                this_this.completedStep = 2;
+                                this_this.currentStep = 3;
+>>>>>>> fc920e14c53a3398cf3baf28ecf83bcb6e410d67
 
                             this_this.getOrderSummary();
                         })
@@ -377,12 +391,24 @@
                     templateRender: null,
 
                     selected_shipping_method: '',
+
+                    first_iteration : true,
                 }
             },
 
             staticRenderFns: shippingTemplateRenderFns,
 
             mounted: function() {
+                for (method in shippingMethods) {
+                    if (this.first_iteration) {
+                        for (rate in shippingMethods[method]['rates']) {
+                            this.selected_shipping_method = shippingMethods[method]['rates'][rate]['method'];
+                            this.first_iteration = false;
+                            this.methodSelected();
+                        }
+                    }
+                }
+
                 this.templateRender = shippingHtml.render;
                 for (var i in shippingHtml.staticRenderFns) {
                     shippingTemplateRenderFns.push(shippingHtml.staticRenderFns[i]);
@@ -420,14 +446,23 @@
                     payment: {
                         method: ""
                     },
+
+                    first_iteration : true,
                 }
             },
 
             staticRenderFns: paymentTemplateRenderFns,
 
             mounted: function() {
-                this.templateRender = paymentHtml.render;
+                for (method in paymentMethods) {
+                    if (this.first_iteration) {
+                        this.payment.method = paymentMethods[method]['method'];
+                        this.first_iteration = false;
+                        this.methodSelected();
+                    }
+                }
 
+                this.templateRender = paymentHtml.render;
                 for (var i in paymentHtml.staticRenderFns) {
                     paymentTemplateRenderFns.push(paymentHtml.staticRenderFns[i]);
                 }

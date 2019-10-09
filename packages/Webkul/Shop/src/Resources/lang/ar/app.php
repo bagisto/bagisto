@@ -3,81 +3,80 @@
 return [
     'layouts' => [
         'my-account' => 'حسابي',
-        'profile' => 'التوصيف',
+        'profile' => 'الملف الشخصي',
         'address' => 'العنوان',
-        'reviews' => 'باء-الاستعراضات',
-        'wishlist' => 'قائمة الأماني',
-        'orders' => 'الأوامر',
+        'reviews' => 'المراجعات',
+        'wishlist' => 'قائمة الأمنيات',
+        'orders' => 'الطبات',
     ],
 
     'common' => [
-        'error' => 'حدث شيء خاطئ ، رجاء حاول ثانية لاحقا.'
+        'error' => 'حدث خطأ. الرجاء المحاولة لاحقاً.',
+        'no-result-found' => 'لا توجد نتائج.'
     ],
 
     'home' => [
-        'page-title' => 'الحقائب إلى البيت',
-        'featured-products' => 'المنتجات البارزة',
+        'page-title' => 'عنوان الصفحة',
+        'featured-products' => 'المنتجات المميزة',
         'new-products' => 'المنتجات الجديدة',
         'verify-email' => 'تحقق من حساب بريدك الإلكتروني',
-        'resend-verify-email' => 'إعادة إرسال البريد الإلكتروني للتحقق'
+        'resend-verify-email' => 'إعادة التحقق من البريد الإلكتروني'
     ],
 
     'header' => [
         'title' => 'الحساب',
-        'dropdown-text' => 'إدارة العربة ، الطلبات قائمة الأمنيات',
-        'sign-in' => 'وقع هنا',
-        'sign-up' => 'سجل',
+        'dropdown-text' => 'إدارة عربة التسوق ، الطلبات قائمة الأمنيات',
+        'sign-in' => 'تسجيل الدخول',
+        'sign-up' => 'حساب جديد',
         'account' => 'الحساب',
-        'cart' => 'عربة',
-        'profile' => 'التوصيف',
-        'wishlist' => 'قائمة الأماني',
-        'cart' => 'عربة',
-        'logout' => 'خروج',
-        'search-text' => 'ابحث عن المنتجات هنا'
+        'cart' => 'عربة التسوق',
+        'profile' => 'الملف الشخصي',
+        'wishlist' => 'قائمة الأمنيات',
+        'logout' => 'تسجيل الخروج',
+        'search-text' => 'ابحث عن منتج'
     ],
 
     'minicart' => [
         'view-cart' => 'عرض عربة التسوق',
-        'checkout' => 'خروج',
-        'cart' => 'عربة',
+        'checkout' => 'الدفع',
+        'cart' => 'عربة التسوق',
         'zero' => '0'
     ],
 
     'footer' => [
-        'subscribe-newsletter' => 'اشترك في الرسالة الإخبارية',
+        'subscribe-newsletter' => 'اشترك في الرسائل الدورية.',
         'subscribe' => 'اشترك',
-        'locale' => 'locale',
+        'locale' => 'اللغة',
         'currency' => 'العملة',
     ],
 
     'subscription' => [
         'unsubscribe' => 'الإلغاء',
         'subscribe' => 'اشترك',
-        'subscribed' => 'أنت مشترك الآن إلى الإشتراك بريد إلكتروني',
-        'not-subscribed' => 'لا يمكنك الاشتراك في البريد الإلكتروني ، حاول مرة أخرى بعد بعض الوقت',
+        'subscribed' => 'تم الاشتراك بنجاح',
+        'not-subscribed' => 'لا يمكنك الاشتراك ، حاول مرة أخرى لاحقاً',
         'already' => 'أنت مشترك بالفعل في قائمة اشتراكاتنا',
-        'unsubscribed' => 'أنت غير مرتبط من بريد باجيستو الإشتراك',
-        'already-unsub' => 'أنت بالفعل غير مرتبط',
-        'not-subscribed' => 'خطأ! البريد لا يمكن إرساله حاليا ، الرجاء المحاولة لاحقا'
+        'unsubscribed' => 'تم إلغاء الاشتراك.',
+        'already-unsub' => 'أنت بالفعل غير مشترك',
     ],
 
     'search' => [
         'no-results' => 'لا توجد نتائج',
-        'page-title' => 'Bagisto - Search',
+        'page-title' => 'بحث',
         'found-results' => 'تم العثور على نتائج البحث',
         'found-result' => 'تم العثور على نتيجة البحث'
     ],
 
     'reviews' => [
-        'title' => 'العنوان',
-        'add-review-page-title' => 'إضافة استعراض',
-        'write-review' => 'اكتب مراجعة',
-        'review-title' => 'أعطي مراجعتك عنوان',
+        'title' => 'المراجعات',
+        'add-review-page-title' => 'إضافة مراجعة/تقييم',
+        'write-review' => 'اكتب مراجعة/تقييم',
+        'review-title' => 'عنوان المراجعة',
         'product-review-page-title' => 'استعراض المنتجات',
         'rating-reviews' => 'التقييم والمراجعات',
-        'submit' => 'قدم',
-        'delete-all' => 'كل الاستعراضات حذفت بنجاح',
-        'ratingreviews' => ':rating التقديرات & :review باء-الاستعراضات',
+        'submit' => 'إرسال',
+        'delete-all' => 'حذف كل المراجعات',
+        'ratingreviews' => ':rating تقيمات & :review باء-الاستعراضات',
         'star' => 'نجم',
         'percentage' => ':percentage %',
         'id-star' => 'نجم'
@@ -85,19 +84,19 @@ return [
 
     'customer' => [
         'signup-text' => [
-            'account_exists' => 'لدي حساب بالفعل',
-            'title' => 'وقع هنا'
+            'account_exists' => 'لديك حساب؟',
+            'title' => 'تسجيل الدخول'
         ],
 
         'signup-form' => [
-            'page-title' => 'استمارة تسجيل العملاء',
-            'title' => 'سجل',
+            'page-title' => 'حساب جديد',
+            'title' => 'حساب جديد',
             'firstname' => 'الاسم الأول',
             'lastname' => 'الاسم الأخير',
             'email' => 'البريد الإلكتروني',
-            'password' => 'كلمة السر',
-            'confirm_pass' => 'تأكيد كلمة السر',
-            'button_title' => 'سجل',
+            'password' => 'كلمة الدخول',
+            'confirm_pass' => 'تأكيد كلمة الدخول',
+            'button_title' => 'تسجيل حساب جديد',
             'agree' => 'موافق',
             'terms' => 'الشروط',
             'conditions' => 'الشروط',
@@ -108,76 +107,76 @@ return [
             'failed' => 'خطأ! لا يمكن إنشاء حسابك ، حاول مرة أخرى لاحقا',
             'already-verified' => 'حسابك تم التحقق منه بالفعل أو الرجاء محاولة إرسال بريد إلكتروني جديد للتحقق مرة أخرى',
             'verification-not-sent' => 'خطأ! مشكلة في إرسال البريد الإلكتروني للتحقق ، حاول مرة أخرى في وقت لاحق',
-            'verification-sent' => 'التحقق البريد الإلكتروني المرسل',
-            'verified' => 'تم التحقق من حسابك حاول الدخول الآن',
-            'verify-failed' => 'لا يمكننا التحقق من حساب بريدك',
-            'dont-have-account' => 'ليس لديك حساب معنا',
+            'verification-sent' => 'تم ارسال معلومات التحقق إلى برديك الالكتروني.',
+            'verified' => 'تم التحقق من حسابك قم بتسجيل الدخول الآن',
+            'verify-failed' => 'لا يمكننا التحقق من بريدك الإلكتروني',
+            'dont-have-account' => 'ليس لديك حساب',
         ],
 
         'login-text' => [
             'no_account' => 'ليس لديك حساب',
-            'title' => 'سجل',
+            'title' => 'إنشاء حساب جديد',
         ],
 
         'login-form' => [
-            'page-title' => 'دخول العملاء',
-            'title' => 'وقع هنا',
+            'page-title' => 'تسجيل الدخول',
+            'title' => 'تسجيل الدخول',
             'email' => 'البريد الإلكتروني',
-            'password' => 'كلمة السر',
-            'forgot_pass' => 'نسيت كلمة السر؟',
-            'button_title' => 'وقع هنا',
+            'password' => 'كلمة الدخول',
+            'forgot_pass' => 'نسيت كلمة الدخول؟',
+            'button_title' => 'تسجيل الدخول',
             'remember' => 'تذكريني',
-            'footer' => '© Copyright 2018 Webkul Software, جميع الحقوق محفوظة',
-            'invalid-creds' => 'الرجاء التحقق من أوراق اعتمادك ومحاولة مرة أخرى',
-            'verify-first' => 'تحقق من حساب بريدك الإلكتروني أولا',
+            'footer' => '© 2019  جميع الحقوق محفوظة',
+            'invalid-creds' => 'الرجاء التحقق من معلومات الدخول',
+            'verify-first' => 'الرجاء قم بتفعيل حسابك.',
             'resend-verification' => 'إعادة إرسال البريد الإلكتروني للتحقق مرة أخرى'
         ],
 
         'forgot-password' => [
-            'title' => 'استرجع كلمة السر',
+            'title' => 'استرجع كلمة الدخول',
             'email' => 'البريد الإلكتروني',
-            'submit' => 'قدم',
-            'page_title' => 'العميل-نسى استمارة كلمة السر'
+            'submit' => 'إسترجاع',
+            'page_title' => 'استرجع كلمة الدخول'
         ],
 
         'reset-password' => [
-            'title' => 'أعد ضبط كلمة السر',
-            'email' => 'البريد الإلكتروني المسجل',
-            'password' => 'كلمة السر',
-            'confirm-password' => 'تأكيد كلمة السر',
-            'back-link-title' => 'العودة للتوقيع',
-            'submit-btn-title' => 'أعد ضبط كلمة السر'
+            'title' => 'تعيين كلمة الدخول',
+            'email' => 'البريد الإلكتروني ',
+            'password' => 'كلمة الدخول',
+            'confirm-password' => 'تأكيد كلمة الدخول',
+            'back-link-title' => 'تسجيل الدخول',
+            'submit-btn-title' => 'تعيين كلمة الدخول'
         ],
 
         'account' => [
-            'dashboard' => 'الزبون تحرير التوصيف',
+            'dashboard' => 'الملف الشخصي',
             'menu' => 'القائمة',
 
             'profile' => [
                 'index' => [
-                    'page-title' => 'ملف الزبون',
-                    'title' => 'التوصيف',
-                    'edit' => 'حرر',
+                    'page-title' => 'الملف الشخصي',
+                    'title' => 'الملف الشخصي',
+                    'edit' => 'تعديل',
                 ],
 
                 'edit-success' => 'جاري تحديث الملف بنجاح',
                 'edit-fail' => 'خطأ! الملف الشخصي لا يمكن تحديثه ، رجاء حاول مرة أخرى لاحقا',
-                'unmatch' => 'كلمة السر القديمة لا تتطابق',
+                'unmatch' => 'كلمة الدخول القديمة لا تتطابق',
 
                 'fname' => 'الاسم الأول',
                 'lname' => 'الاسم الأخير',
-                'gender' => 'باء-نوع الجنس',
+                'gender' => 'نوع الجنس',
                 'dob' => 'تاريخ الميلاد',
                 'phone' => 'الهاتف',
                 'email' => 'البريد الإلكتروني',
-                'opassword' => 'كلمة السر القديمة',
-                'password' => 'كلمة السر',
-                'cpassword' => 'تأكيد كلمة السر',
-                'submit' => 'تحديث التوصيف',
+                'opassword' => 'كلمة الدخول القديمة',
+                'password' => 'كلمة الدخول',
+                'cpassword' => 'تأكيد كلمة الدخول',
+                'submit' => 'تحديث الملف الشخصي',
 
                 'edit-profile' => [
-                    'title' => 'تحرير التوصيف',
-                    'page-title' => 'الزبون تحرير التوصيف استمارة'
+                    'title' => 'تعديل الملف الشخصي',
+                    'page-title' => 'تعديل الملف الشخصي'
                 ]
             ],
 
@@ -186,25 +185,25 @@ return [
                     'page-title' => 'عنوان العميل',
                     'title' => 'العنوان',
                     'add' => 'أضف العنوان',
-                    'edit' => 'حرر',
-                    'empty' => 'ليس لديك أي عناوين محفوظة هنا ، من فضلك حاول أن تنشئها بالنقر على الرابط بالأسفل',
-                    'create' => 'أنشئ العنوان',
+                    'edit' => 'تعديل',
+                    'empty' => 'ليس لديك أي عناوين محفوظة هنا ، من فضلك حاول أن تنشئها بالضغط على الرابط بالأسفل',
+                    'create' => 'عنوان جديد',
                     'delete' => 'احذف',
                     'make-default' => 'افتراضي',
                     'default' => 'افتراضي',
-                    'contact' => 'Contact',
+                    'contact' => 'معلومات الإتصال',
                     'confirm-delete' =>  'هل تريد حقا حذف هذا العنوان؟',
                     'default-delete' => 'لا يمكن تغيير العنوان الافتراضي'
                 ],
 
                 'create' => [
-                    'page-title' => 'زبون اضف استمارة',
+                    'page-title' => 'إضاف عنوان',
                     'title' => 'أضف العنوان',
                     'address1' => 'العنوان سطر 1',
                     'country' => 'البلد',
-                    'state' => 'الحالة',
-                    'select-state' => 'انتق a منطقة أو ولاية أو مقاطعة',
-                    'city' => 'مدينة',
+                    'city' => 'المدينة',
+                    'state' => 'المنطقة/الولاية',
+                    'select-state' => 'اختر منطقة أو ولاية أو مقاطعة',
                     'postcode' => 'الرمز البريدي',
                     'phone' => 'الهاتف',
                     'submit' => 'احفظ العنوان',
@@ -213,22 +212,22 @@ return [
                 ],
 
                 'edit' => [
-                    'page-title' => 'عنوان تحرير الزبون',
-                    'title' => 'حرر العنوان',
+                    'page-title' => 'تعديل العنوان',
+                    'title' => 'تعديل العنوان',
                     'submit' => 'احفظ العنوان',
                     'success' => 'العنوان تم تحديثه بنجاح.'
                 ],
                 'delete' => [
-                    'success' => 'العنوان محذوف بنجاح',
+                    'success' => 'تم حذف العنوان بنجاح.',
                     'failure' => 'لا يمكن حذف العنوان'
                 ]
             ],
 
             'order' => [
                 'index' => [
-                    'page-title' => 'طلبات الزبائن',
-                    'title' => 'الأوامر',
-                    'order_id' => 'ترتيب الهوية',
+                    'page-title' => 'طلبات العملاء',
+                    'title' => 'الطلبات',
+                    'order_id' => 'ترتيب',
                     'date' => 'التاريخ',
                     'status' => 'الحالة',
                     'total' => 'المجموع'
@@ -243,18 +242,19 @@ return [
                     'shipments' => 'الشحنات',
                     'SKU' => 'SKU',
                     'product-name' => 'الاسم',
-                    'qty' => 'Qty',
+                    'qty' => 'الكمية',
                     'item-status' => 'حالة البند',
                     'item-ordered' => 'أمر(:qty_ordered)',
                     'item-invoice' => '3-الفواتير(:qty_invoiced)',
                     'item-shipped' => 'شحنت(:qty_shipped)',
                     'item-canceled' => 'ملغاة(:qty_canceled)',
+                    'item-refunded' => 'Refunded (:qty_refunded)',
                     'price' => 'السعر',
                     'total' => 'المجموع',
                     'subtotal' => 'المجموع الفرعي',
-                    'shipping-handling' => 'الشحن والمناولة',
+                    'shipping-handling' => 'الشحن والتوصيل',
                     'tax' => 'الضرائب',
-                    'discount' => 'Discount',
+                    'discount' => 'تخفيض',
                     'tax-percent' => 'نسبة الضرائب',
                     'tax-amount' => 'المبلغ الضريبي',
                     'discount-amount' => 'مبلغ الخصم',
@@ -269,30 +269,34 @@ return [
                     'individual-invoice' => 'فاتورة #:invoice_id',
                     'individual-shipment' => 'الشحن #:shipment_id',
                     'print' => 'اطبع',
-                    'invoice-id' => 'فاتورة الهوية',
-                    'order-id' => 'ترتيب الهوية',
+                    'invoice-id' => 'رقم الفاتورة',
+                    'order-id' => 'ترتيب ',
                     'order-date' => 'تاريخ الطلب',
-                    'bill-to' => 'بيل إلى',
-                    'ship-to' => 'السفينة إلى',
-                    'contact' => 'Contact'
+                    'bill-to' => 'الفاتورة إلى',
+                    'ship-to' => 'يشحن إلى',
+                    'contact' => 'معلومات الإتصال',
+                    'refunds' => 'المسترجع',
+                    'individual-refund' => 'مسترجع #:refund_id',
+                    'adjustment-refund' => 'تعديلات عملية الإسترجاع',
+                    'adjustment-fee' => 'تكلفة تعديلات عملية الإسترجاع'
                 ]
             ],
 
             'review' => [
                 'index' => [
-                    'title' => 'باء-الاستعراضات',
+                    'title' => 'المراجعات',
                     'page-title' => 'مراجعات العملاء'
                 ],
 
                 'view' => [
-                    'page-tile' => 'باء-الاستعراض #:id',
+                    'page-tile' => 'مراجعة #:id',
                 ]
             ]
         ]
     ],
 
     'products' => [
-        'layered-nav-title' => 'تسوق من قبل',
+        'layered-nav-title' => 'المنتجات',
         'price-label' => 'أقل من',
         'remove-filter-link-title' => 'امسح الكل',
         'sort-by' => 'افرز حسب',
@@ -300,28 +304,28 @@ return [
         'from-z-a' => 'من ز-أ',
         'newest-first' => 'الأحدث أولا',
         'oldest-first' => 'الأكبر أولا',
-        'cheapest-first' => 'أرخص أولا',
-        'expensive-first' => 'مكلفة أولا',
+        'cheapest-first' => 'الأرخص أولا',
+        'expensive-first' => 'الأغلى أولا',
         'show' => 'اعرض',
         'pager-info' => 'عرض :showing of :total Items',
         'description' => 'الوصف',
         'specification' => 'مواصفات',
-        'total-reviews' => ':total Reviews',
-        'total-rating' => ':total_rating Ratings & :total_reviews Reviews',
+        'total-reviews' => ':total المراجعات',
+        'total-rating' => ':total_rating تقييمات & :total_reviews مراجعات',
         'by' => 'من قبل :name',
         'up-sell-title' => 'وجدنا منتجات أخرى قد ترغب!',
-        'reviews-title' => 'التقديرات& باء-الاستعراضات',
+        'reviews-title' => 'المراجعات',
         'write-review-btn' => 'اكتب مراجعة',
-        'choose-option' => 'اختر خيارا',
+        'choose-option' => 'اختر ',
         'sale' => 'بيع',
         'new' => 'جديد',
         'empty' => 'لا توجد منتجات متاحة في هذه الفئة',
         'add-to-cart' => 'أضف إلى العربة',
         'buy-now' => 'اشتر الآن',
-        'whoops' => 'ووبس!',
+        'whoops' => 'خطأ!',
         'quantity' => 'الكمية',
-        'in-stock' => 'في الأسهم',
-        'out-of-stock' => 'خارج الأسهم',
+        'in-stock' => 'متوفر',
+        'out-of-stock' => 'غير متوفر',
         'view-all' => 'عرض الكل',
         'less-quantity' => 'Quantity can not be less than one.',
         'starting-at' => 'Starting at',
@@ -329,17 +333,18 @@ return [
         'choose-selection' => 'Choose a selection',
         'your-customization' => 'Your Customization',
         'total-amount' => 'Total Amount',
-        'none' => 'None'
+        'none' => 'None',
+        'less-quantity' => 'الكمية لايمكن ان تكون أقل من واحد.'
     ],
 
     'wishlist' => [
-        'title' => 'قائمة الأماني',
+        'title' => 'قائمة الأمنيات',
         'deleteall' => 'احذف الكل',
-        'moveall' => 'نقل الكل منتوجات إلى عربة',
-        'move-to-cart' => 'نقل إلى عربة',
-        'error' => 'لا يمكن إضافة المنتج إلى قائمة الأمنيات بسبب مشاكل مجهولة ، الرجاء التحقق لاحقا',
-        'add' => 'البند مضاف بنجاح إلى قائمة الأمنيات',
-        'remove' => 'البند حذف بنجاح من قائمة الأمنيات',
+        'moveall' => 'نقل الكل إلى عربة التوسق',
+        'move-to-cart' => 'نقل إلى عربة التسوق',
+        'error' => 'لا يمكن إضافة المنتج إلى قائمة الأمنيات ، الرجاء المحاولة لاحقا',
+        'add' => 'تم إضافة العنصر بنجاح إلى قائمة الأمنيات',
+        'remove' => 'تم حذف العنصر بنجاح من قائمة الأمنيات',
         'moved' => 'تم نقل البند بنجاح إلى قائمة الأمنيات',
         'move-error' => 'لا يمكن نقل العنصر إلى قائمة الأمنيات ، رجاء حاول مرة أخرى لاحقا',
         'success' => 'البند مضاف بنجاح إلى قائمة الأمنيات',
@@ -382,71 +387,69 @@ return [
             'add-config-warning' => 'الرجاء اختيار الخيار قبل إضافة إلى العربة',
             'quantity' => [
                 'quantity' => 'الكمية',
-                'success' => 'البند(ق) من العربة تم تحديثه بنجاح',
+                'success' => 'العنصر(ق) من العربة تم تحديثه بنجاح',
                 'illegal' => 'الكمية لا يمكن أن تكون أقل من واحد',
                 'inventory_warning' => 'الكمية المطلوبة غير متوفرة ، الرجاء المحاولة لاحقا',
                 'error' => 'لا يستطيع تحديث عنصر s في الوقت الحالي رجاء حاول ثانية لاحقا'
             ],
             'item' => [
                 'error_remove' => 'لا عناصر لإزالتها من العربة',
-                'success' => 'تم بنجاح إضافة البند إلى العربة',
+                'success' => 'تم بنجاح إضافة العنصر إلى العربة',
                 'success-remove' => 'تم إزالة العنصر بنجاح من العربة',
-                'error-add' => 'لا يمكن إضافة العنصر إلى العربة ، رجاء حاول مرة أخرى لاحقا',
+                'error-add' => 'لا يمكن إضافة العنصر إلى العربة ، رجاء حاول مرة أخرى ',
             ],
             'quantity-error' => 'الكمية المطلوبة غير متوفرة',
-            'cart-subtotal' => 'المجموع الفرعي للعربات',
-            'cart-remove-action' => 'هل تريد حقا أن تفعل هذا ؟',
-            'partial-cart-update' => 'Only some of the product(s) were updated'
+            'cart-subtotal' => 'المجموع الفرعي للمشتريات',
+            'cart-remove-action' => 'هل تريد حقا أن تسمح هذا ؟',
+            'partial-cart-update' => 'تم تحديث بعض المنتجات.'
         ],
 
         'onepage' => [
-            'title' => 'خروج',
+            'title' => 'الدفع',
             'information' => 'معلومات',
             'shipping' => 'الشحن',
             'payment' => 'الدفع',
             'complete' => 'اكتمل',
             'billing-address' => 'عنوان الفواتير',
-            'sign-in' => 'وقع هنا',
+            'sign-in' => 'تسجيل الدخول',
             'first-name' => 'الاسم الأول',
             'last-name' => 'الاسم الأخير',
             'email' => 'البريد الإلكتروني',
             'address1' => 'العنوان',
-            'city' => 'مدينة',
-            'state' => 'الحالة',
-            'select-state' => 'انتق a منطقة أو ولاية أو مقاطعة',
-            'postcode' => 'الرمز البريدي / الرمز البريدي',
+            'city' => 'المدينة',
+            'state' => 'المنطقة/الولاية',
+            'select-state' => 'اختر منطقة أو ولاية أو مقاطعة',
+            'postcode' => 'الرمز البريدي ',
             'phone' => 'الهاتف',
             'country' => 'البلد',
-            'order-summary' => 'أمر ملخص',
+            'order-summary' => 'معلومات الطلب',
             'shipping-address' => 'عنوان الشحن',
-            'use_for_shipping' => 'السفينة إلى هذا العنوان',
-            'continue' => 'تابع',
+            'use_for_shipping' => 'إشحن إلى هذا العنوان',
+            'continue' => 'إستمرار',
             'shipping-method' => 'طريقة الشحن',
             'payment-information' => 'معلومات الدفع',
             'payment-method' => 'طريقة الدفع',
-            'summary' => 'موجز النظام',
+            'summary' => 'المعلومات',
             'price' => 'السعر',
             'quantity' => 'الكمية',
-            'billing-address' => 'عنوان الفواتير',
-            'shipping-address' => 'عنوان الشحن',
-            'contact' => 'Contact',
-            'place-order' => 'ترتيب المكان'
+            'contact' => 'معلومات الإتصال',
+            'place-order' => 'إكمال الطلب'
         ],
 
         'total' => [
-            'order-summary' => 'أمر ملخص',
-            'sub-total' => 'البنود',
+            'order-summary' => 'معلومات الطلب',
+            'sub-total' => 'العناصر',
             'grand-total' => 'المجموع الكلي',
             'delivery-charges' => 'رسوم التسليم',
             'tax' => 'الضرائب',
-            'discount' => 'Discount',
-            'price' => 'السعر            '
+            'discount' => 'التخفيض',
+            'price' => 'السعر '
         ],
 
         'success' => [
-            'title' => 'ترتيب الموضع بنجاح',
+            'title' => 'تم الدفع بنجاح',
             'thanks' => 'شكرا على طلبك!',
-            'order-id-info' => 'Your order id is #:order_id',
+            'order-id-info' => 'رقم الطلب هو #:order_id',
             'info' => 'سنرسل لك بريدا الكترونيا ، تفاصيل طلباتك و معلومات التعقب'
         ]
     ],
@@ -457,52 +460,63 @@ return [
             'heading' => 'تأكيد الطلب!',
             'dear' => 'عزيزي :customer_name',
             'greeting' => 'شكرا على طلبك :order_id placed on :created_at',
-            'summary' => 'موجز النظام',
+            'summary' => 'معلومات الطلب',
             'shipping-address' => 'عنوان الشحن',
             'billing-address' => 'عنوان الفواتير',
-            'contact' => 'Contact',
+            'contact' => 'معلومات الإتصال',
             'shipping' => 'الشحن',
             'payment' => 'الدفع',
             'price' => 'السعر',
             'quantity' => 'الكمية',
             'subtotal' => 'المجموع الفرعي',
-            'shipping-handling' => 'الشحن والمناولة',
+            'shipping-handling' => 'الشحن والتوصيل',
             'tax' => 'الضرائب',
-            'discount' => 'Discount',
+            'discount' => 'التخفيض',
             'grand-total' => 'المجموع الكلي',
             'final-summary' => 'شكرا لإظهارك إهتمامك بمتجرنا سنرسل لك رقم التتبع بمجرد شحنه',
             'help' => 'إذا كنت بحاجة إلى أي نوع من المساعدة يرجى الاتصال بنا على: support_email',
             'thanks' => 'شكرا!'
         ],
+
         'invoice' => [
-            'heading' => 'فاتورتك #:invoice_id for Order #:order_id',
+            'heading' => 'فاتورتك #:invoice_id لطلبك #:order_id',
             'subject' => 'فاتورة لطلبك #:order_id',
             'summary' => 'موجز الفاتورة',
         ],
+
         'shipment' => [
-            'heading' => 'شحنتك #:shipment_id for Order #:order_id',
+            'heading' => 'شحنتك #:shipment_id لطلبك #:order_id',
             'subject' => 'شحنة لطلبك #:order_id',
             'summary' => 'موجز الشحن',
-            'carrier' => 'ناقل',
+            'carrier' => 'الناقل',
             'tracking-number' => 'رقم التتبع'
         ],
+
+        'refund' => [
+            'heading' => 'المسترجع #:refund_id لطبلك #:order_id',
+            'subject' => 'المسترجع لطلبك #:order_id',
+            'summary' => 'تفاصيل المسترجع',
+            'adjustment-refund' => 'تعديلات عملية الإسترجاع',
+            'adjustment-fee' => 'تكلفة تعديلات عملية الإسترجاع'
+        ],
+        
         'forget-password' => [
             'dear' => 'عزيزي :name',
-            'info' => 'أنت تستلم هذا البريد الإلكتروني لأننا تلقينا طلب إعادة ضبط كلمة السر لحسابك',
-            'reset-password' => 'أعد ضبط كلمة السر',
-            'final-summary' => 'إذا لم تطلب إعادة تعيين كلمة السر ، لا إجراء آخر مطلوب',
+            'info' => 'أنت تستلم هذا البريد الإلكتروني لأننا تلقينا طلب إعادة ضبط كلمة الدخول لحسابك',
+            'reset-password' => 'أعد ضبط كلمة الدخول',
+            'final-summary' => 'إذا لم تطلب إعادة تعيين كلمة الدخول ، لا إجراء آخر مطلوب',
             'thanks' => 'شكرا!'
         ]
     ],
 
     'webkul' => [
-        'copy-right' => '© Copyright 2018 Webkul Software, All rights reserved'
+        'copy-right' => 'حقوق الملكية محفوظة 2019'
     ],
 
     'response' => [
-        'create-success' => ':name created successfully.',
-        'update-success' => ':name updated successfully.',
-        'delete-success' => ':name deleted successfully.',
-        'submit-success' => ':name submitted successfully.'
+        'create-success' => ':name إنشء بنجاح.',
+        'update-success' => ':name تم تعديله بنحاح.',
+        'delete-success' => ':name تم مسحه بنجاح.',
+        'submit-success' => ':name تم الإرسال بنجاح.'
     ],
 ];

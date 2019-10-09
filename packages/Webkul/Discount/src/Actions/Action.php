@@ -26,28 +26,8 @@ abstract class Action
 
             foreach ($items as $item) {
                 foreach ($matchingIDs as $matchingID) {
-                    if (isset($item->children)) {
-                        $isQtyZero = true;
-
-                        foreach ($item->children as $children) {
-                            if ($children->quantity > 0) {
-                                $isQtyZero = false;
-                            }
-                        }
-
-                        if ($isQtyZero) {
-                            if ($matchingID == ($item->child ? $item->child->product_id : $item->product_id)) {
-                                $matchedItems->push($item);
-                            }
-                        } else {
-                            if ($matchingID == $item->product_id) {
-                                $matchedItems->push($item);
-                            }
-                        }
-                    } else {
-                        if ($matchingID == $item->product_id) {
-                            $matchedItems->push($item);
-                        }
+                    if ($matchingID == ($item->child ? $item->child->product_id : $item->product_id)) {
+                        $matchedItems->push($item);
                     }
                 }
             }

@@ -58,6 +58,7 @@
                                     </span>
                                 </div>
                             </div>
+                        </div>
 
                             <div class="operations">
                                 <a class="mb-50" href="{{ route('customer.wishlist.remove', $item->id) }}">

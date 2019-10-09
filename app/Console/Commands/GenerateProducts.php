@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Webkul\Product\Repositories\ProductRepository as Product;
+use Webkul\Product\Helpers\GenerateProduct;
 
 class GenerateProducts extends Command
 {
@@ -12,7 +13,7 @@ class GenerateProducts extends Command
      *
      * @var string
      */
-    protected $signature = 'bagisto:generate {value}';
+    protected $signature = 'bagisto:generate {value} {quantity}';
 
     /**
      * The console command description.
@@ -20,6 +21,11 @@ class GenerateProducts extends Command
      * @var string
      */
     protected $description = 'Generates product with random attribute values.';
+
+    /**
+     * GenerateProduct instance
+     */
+    protected $generateProduct;
 
     /**
      * ProductRepository instance
@@ -31,11 +37,11 @@ class GenerateProducts extends Command
      *
      * @return void
      */
-    public function __construct(Product $product)
+    public function __construct(GenerateProduct $generateProduct)
     {
         parent::__construct();
 
-        $this->product = $product;
+        $this->generateProduct = $generateProduct;
     }
 
     /**
@@ -45,10 +51,29 @@ class GenerateProducts extends Command
      */
     public function handle()
     {
-        if ($this->argument('value') == 'products') {
-            $this->comment('Under development.');
+        if (! is_string($this->argument('value')) || ! is_numeric($this->argument('quantity'))) {
+            $this->info('Illegal parameters or value of parameters are passed');
         } else {
-            $this->line('Sorry, generate option is either invalid or does not exist.');
+            if (strtolower($this->argument('value')) == 'product'  || strtolower($this->argument('value')) == 'products') {
+                $quantity = intval($this->argument('quantity'));
+
+                while ($quantity > 0) {
+                    try {
+                        $result = $this->generateProduct->create();
+                    } catch (\Exception $e) {
+                        continue;
+                    }
+
+                    $quantity--;
+                }
+
+                if ($result)
+                    $this->info('Product(s) created successfully.');
+                else
+                    $this->info('Product(s) cannot be created successfully.');
+            } else {
+                $this->line('Sorry, this generate option is invalid.');
+            }
         }
     }
 }

@@ -32,7 +32,7 @@ class ProductReviewRepository extends Repository
     {
         $customerId = auth()->guard('customer')->user()->id;
 
-        $reviews = $this->model->where(['customer_id'=> $customerId])->with('product')->get();
+        $reviews = $this->model->where(['customer_id'=> $customerId])->with('product')->paginate(5);
 
         return $reviews;
     }

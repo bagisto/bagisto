@@ -1,9 +1,5 @@
 @extends('shop::layouts.master')
 
-@section('page_title')
-    {{ __('shop::app.home.page-title') }}
-@endsection
-
 @php
     $channel = core()->getCurrentChannel();
 
@@ -19,6 +15,10 @@
         $metaKeywords = $homeSEO->meta_keywords;
     }
 @endphp
+
+@section('page_title')
+    {{ isset($metaTitle) ? $metaTitle : "" }}
+@endsection
 
 @section('head')
 

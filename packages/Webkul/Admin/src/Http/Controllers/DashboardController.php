@@ -143,13 +143,13 @@ class DashboardController extends Controller
                 'progress' => $this->getPercentageChange($previous, $current)
             ],
             'total_sales' =>  [
-                'previous' => $previous = $this->previousOrders()->sum('base_grand_total'),
-                'current' => $current = $this->currentOrders()->sum('base_grand_total'),
+                'previous' => $previous = $this->previousOrders()->sum('base_grand_total_invoiced') - $this->previousOrders()->sum('base_grand_total_refunded'),
+                'current' => $current = $this->currentOrders()->sum('base_grand_total_invoiced') - $this->currentOrders()->sum('base_grand_total_refunded'),
                 'progress' => $this->getPercentageChange($previous, $current)
             ],
             'avg_sales' =>  [
-                'previous' => $previous = $this->previousOrders()->avg('base_grand_total'),
-                'current' => $current = $this->currentOrders()->avg('base_grand_total'),
+                'previous' => $previous = $this->previousOrders()->avg('base_grand_total_invoiced') - $this->previousOrders()->avg('base_grand_total_refunded'),
+                'current' => $current = $this->currentOrders()->avg('base_grand_total_invoiced') - $this->currentOrders()->avg('base_grand_total_refunded'),
                 'progress' => $this->getPercentageChange($previous, $current)
             ],
             'top_selling_categories' => $this->getTopSellingCategories(),
@@ -161,7 +161,7 @@ class DashboardController extends Controller
         foreach (core()->getTimeInterval($this->startDate, $this->endDate) as $interval) {
             $statistics['sale_graph']['label'][] = $interval['start']->format('d M');
 
-            $total = $this->getOrdersBetweenDate($interval['start'], $interval['end'])->sum('base_grand_total');
+            $total = $this->getOrdersBetweenDate($interval['start'], $interval['end'])->sum('base_grand_total_invoiced') - $this->getOrdersBetweenDate($interval['start'], $interval['end'])->sum('base_grand_total_refunded');
 
             $statistics['sale_graph']['total'][] = $total;
             $statistics['sale_graph']['formated_total'][] = core()->formatBasePrice($total);
@@ -185,12 +185,12 @@ class DashboardController extends Controller
             ->where('category_translations.locale', app()->getLocale())
             ->where('order_items.created_at', '>=', $this->startDate)
             ->where('order_items.created_at', '<=', $this->endDate)
-            ->where('order_items.qty_ordered', '>', 0)
-            ->addSelect(DB::raw('SUM(qty_ordered) as total_qty_ordered'))
+            ->addSelect(DB::raw('SUM(qty_invoiced - qty_refunded) as total_qty_invoiced'))
             ->addSelect(DB::raw('COUNT(products.id) as total_products'))
             ->addSelect('order_items.id', 'categories.id as category_id', 'category_translations.name')
             ->groupBy('categories.id')
-            ->orderBy('total_qty_ordered', 'DESC')
+            ->havingRaw('SUM(qty_invoiced - qty_refunded) > 0')
+            ->orderBy('total_qty_invoiced', 'DESC')
             ->limit(5)
             ->get();
     }

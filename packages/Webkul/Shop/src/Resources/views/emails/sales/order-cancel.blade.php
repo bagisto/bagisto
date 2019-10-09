@@ -1,7 +1,7 @@
 @component('shop::emails.layouts.master')
     <div style="text-align: center;">
         <a href="{{ config('app.url') }}">
-            <img src="{{ bagisto_asset('images/logo.svg') }}">
+            @include ('shop::emails.layouts.logo')
         </a>
     </div>
 
@@ -17,7 +17,7 @@
 
             <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
                 {!! __('shop::app.mail.order.cancel.greeting', [
-                    'order_id' => '<a href="' . route('customer.orders.view', $order->id) . '" style="color: #0041FF; font-weight: bold;">#' . $order->id . '</a>',
+                    'order_id' => '<a href="' . route('customer.orders.view', $order->id) . '" style="color: #0041FF; font-weight: bold;">#' . $order->increment_id . '</a>',
                     'created_at' => $order->created_at
                     ])
                 !!}

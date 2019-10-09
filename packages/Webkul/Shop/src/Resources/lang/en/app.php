@@ -15,7 +15,8 @@ return [
     ],
 
     'common' => [
-        'error' => 'Something went wrong, please try again later.'
+        'error' => 'Something went wrong, please try again later.',
+        'no-result-found' => 'We could not find any records.'
     ],
 
     'home' => [
@@ -118,6 +119,17 @@ return [
             'verified' => 'Your account has been verified, try to login now.',
             'verify-failed' => 'We cannot verify your mail account.',
             'dont-have-account' => 'You do not have account with us.',
+            'success' => 'Account Created Successfully',
+            'success-verify' => 'Account Created Successfully, an e-mail has been sent for verification.',
+            'success-verify-email-unsent' => 'Account created successfully, but verification e-mail unsent',
+            'failed' => 'Error! Cannot Create Your Account, Try Again Later',
+            'already-verified' => 'Your Account is already verified Or Please Try Sending A New Verification Email Again',
+            'verification-not-sent' => 'Error! Problem In Sending Verification Email, Try Again Later',
+            'verification-sent' => 'Verification Email Sent',
+            'verified' => 'Your Account Has Been Verified, Try To Login Now',
+            'verify-failed' => 'We Cannot Verify Your Mail Account',
+            'dont-have-account' => 'You Do Not Have Account With Us',
+            'customer-registration' => 'Customer Registered Successfully'
         ],
 
         'login-text' => [
@@ -239,7 +251,8 @@ return [
                     'order_id' => 'Order ID',
                     'date' => 'Date',
                     'status' => 'Status',
-                    'total' => 'Total'
+                    'total' => 'Total',
+                    'order_number' => 'Order Number'
                 ],
 
                 'view' => [
@@ -257,6 +270,7 @@ return [
                     'item-invoice' => 'Invoiced (:qty_invoiced)',
                     'item-shipped' => 'shipped (:qty_shipped)',
                     'item-canceled' => 'Canceled (:qty_canceled)',
+                    'item-refunded' => 'Refunded (:qty_refunded)',
                     'price' => 'Price',
                     'total' => 'Total',
                     'subtotal' => 'Subtotal',
@@ -282,7 +296,11 @@ return [
                     'order-date' => 'Order Date',
                     'bill-to' => 'Bill to',
                     'ship-to' => 'Ship to',
-                    'contact' => 'Contact'
+                    'contact' => 'Contact',
+                    'refunds' => 'Refunds',
+                    'individual-refund' => 'Refund #:refund_id',
+                    'adjustment-refund' => 'Adjustment Refund',
+                    'adjustment-fee' => 'Adjustment Fee',
                 ]
             ],
 
@@ -390,7 +408,6 @@ return [
         'no-options' => 'Please select options before buying this product.'
     ],
 
-
     'checkout' => [
         'cart' => [
             'integrity' => [
@@ -418,6 +435,7 @@ return [
                 'inventory_warning' => 'The requested quantity is not available, please try again later.',
                 'error' => 'Cannot update the item(s) at the moment, please try again later.'
             ],
+
             'item' => [
                 'error_remove' => 'No items to remove from the cart.',
                 'success' => 'Item was successfully added to cart.',
@@ -548,11 +566,13 @@ return [
                 'thanks' => 'Thanks!',
             ]
         ],
+
         'invoice' => [
             'heading' => 'Your invoice #:invoice_id for Order #:order_id',
             'subject' => 'Invoice for your order #:order_id',
             'summary' => 'Summary of Invoice',
         ],
+
         'shipment' => [
             'heading' => 'Shipment #:shipment_id  has been generated for Order #:order_id',
             'inventory-heading' => 'New shipment #:shipment_id had been generated for Order #:order_id',
@@ -563,6 +583,15 @@ return [
             'tracking-number' => 'Tracking Number',
             'greeting' => 'An order :order_id has been placed on :created_at',
         ],
+
+        'refund' => [
+            'heading' => 'Your Refund #:refund_id for Order #:order_id',
+            'subject' => 'Refund for your order #:order_id',
+            'summary' => 'Summary of Refund',
+            'adjustment-refund' => 'Adjustment Refund',
+            'adjustment-fee' => 'Adjustment Fee'
+        ],
+
         'forget-password' => [
             'subject' => 'Customer Reset Password',
             'dear' => 'Dear :name',
@@ -571,8 +600,42 @@ return [
             'final-summary' => 'If you did not request a password reset, no further action is required',
             'thanks' => 'Thanks!'
         ],
+
         'customer' => [
-            'subject' => 'New Customer Registration'
+            'new' => [
+                'dear' => 'Dear :customer_name',
+                'username-email' => 'UserName/Email',
+                'subject' => 'New Customer Registration',
+                'password' => 'Password',
+                'summary' => 'Your account has been created in bagisto.
+                Your account details are below: ',
+                'thanks' => 'Thanks!',
+            ],
+
+            'registration' => [
+                'subject' => 'New Customer Registration',
+                'customer-registration' => 'Customer Registered Successfully',
+                'dear' => 'Dear :customer_name',
+                'greeting' => 'Welcome and thank you for registering at Bagisto!',
+                'summary' => 'Your account has now been created successfully and you can login using your email address and password credentials. Upon logging in, you will be able to access other services including reviewing past orders, wishlists and editing your account information.',
+                'thanks' => 'Thanks!',
+            ],
+
+            'verification' => [
+                'heading' => 'Bagisto - Email Verification',
+                'subject' => 'Verification Mail',
+                'verify' => 'Verify Your Account',
+                'summary' => 'This is the mail to verify that the email address you entered is yours.
+                Kindly click the Verify Your Account button below to verify your account.'
+            ],
+
+            'subscription' => [
+                'subject' => 'Subscription Email',
+                'greeting' => ' Welcome to Bagisto - Email Subscription',
+                'unsubscribe' => 'Unsubscribe',
+                'summary' => 'Thanks for putting me into your inbox. It’s been a while since you’ve read Bagisto email, and we don’t want to overwhelm your inbox. If you still do not want to receive
+                the latest email marketing news then for sure click the button below.'
+            ]
         ]
     ],
 

@@ -46,7 +46,7 @@ class NewInventorySourceNotification extends Mailable
         $inventory = $this->shipment->inventory_source;
 
         return $this->to($inventory->contact_email, $inventory->name)
-                ->subject(trans('shop::app.mail.shipment.subject', ['order_id' => $order->id]))
+                ->subject(trans('shop::app.mail.shipment.subject', ['order_id' => $order->increment_id]))
                 ->view('shop::emails.sales.new-inventorysource-shipment');
     }
 }

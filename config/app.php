@@ -202,7 +202,7 @@ return [
          * Package Service Providers...
          */
 
-        Dimsav\Translatable\TranslatableServiceProvider::class,
+        Astrotomic\Translatable\TranslatableServiceProvider::class,
 
         /*
          * Application Service Providers...

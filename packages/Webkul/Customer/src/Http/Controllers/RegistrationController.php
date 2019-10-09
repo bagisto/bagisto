@@ -4,6 +4,7 @@ namespace Webkul\Customer\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
+use Webkul\Customer\Mail\RegistrationEmail;
 use Webkul\Customer\Mail\VerificationEmail;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
@@ -85,8 +86,6 @@ class RegistrationController extends Controller
 
         $data['password'] = bcrypt($data['password']);
 
-        $data['channel_id'] = core()->getCurrentChannel()->id;
-
         if (core()->getConfigData('customer.settings.email.verification')) {
             $data['is_verified'] = 0;
         } else {
@@ -115,6 +114,15 @@ class RegistrationController extends Controller
                     session()->flash('info', trans('shop::app.customer.signup-form.success-verify-email-unsent'));
                 }
             } else {
+                 try {
+                    Mail::queue(new RegistrationEmail(request()->all()));
+
+                    session()->flash('success', trans('shop::app.customer.signup-form.success-verify')); //customer registered successfully
+                } catch (\Exception $e) {
+                    session()->flash('info', trans('shop::app.customer.signup-form.success-verify-email-unsent'));
+                }
+
+
                 session()->flash('success', trans('shop::app.customer.signup-form.success'));
             }
 

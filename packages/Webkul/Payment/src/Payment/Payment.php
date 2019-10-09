@@ -113,7 +113,7 @@ abstract class Payment
     /**
      * Returns payment method sort order
      *
-     * @return array
+     * @return int
      */
     public function getSortOrder()
     {

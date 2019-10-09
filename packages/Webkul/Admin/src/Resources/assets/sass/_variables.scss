@@ -1,9 +1,26 @@
-// Body
-$brand-color: #0041FF;
-$border-color: rgba(162, 162, 162, 0.2);
+$body-background: $white;
 $background-color: #f8f9fa;
+$border-color: rgba(162, 162, 162, 0.2);
+$navbar-top-background: $white;
+
+// Accordion
+$accordian-header: #fbfbfb;
+
+// Buttons
+$btn-primary: $white;
+$btn-primary-bg: #0041FF;
+
+// Cards
+$card-title: #a2a2a2;
+$card-background: $white;
+
+// Dashboard
+$dashboard-stats-data: #0041ff;
 
 // Typography
 $font-family: 'Montserrat', sans-serif;
 $font-size-base: 14px;
 $font-color: #3A3A3A;
+
+$link-color: #a2a2a2;
+$link-active-color: #a2a2a2;

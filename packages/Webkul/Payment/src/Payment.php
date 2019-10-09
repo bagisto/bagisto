@@ -18,6 +18,7 @@ class Payment
 
         return [
                 'jump_to_section' => 'payment',
+                'paymentMethods' => $this->getPaymentMethods(),
                 'html' => view('shop::checkout.onepage.payment', compact('paymentMethods'))->render()
             ];
     }

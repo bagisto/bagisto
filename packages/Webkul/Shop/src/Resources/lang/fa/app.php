@@ -14,7 +14,8 @@ return [
     ],
 
     'common' => [
-        'error' => 'مشکلی رخ داده است. لطفا بعدا دوباره امتحان کنید.'
+        'error' => 'مشکلی رخ داده است. لطفا بعدا دوباره امتحان کنید.',
+        'no-result-found' => 'We could not find any records.'
     ],
 
     'home' => [
@@ -256,6 +257,7 @@ return [
                     'item-invoice' => 'صورتحساب (:qty_invoiced)',
                     'item-shipped' => 'حمل شده (:qty_shipped)',
                     'item-canceled' => 'لغو شد (:qty_canceled)',
+                    'item-refunded' => 'Refunded (:qty_refunded)',
                     'price' => 'قیمت',
                     'total' => 'جمع',
                     'subtotal' => 'فرعی',
@@ -281,7 +283,11 @@ return [
                     'order-date' => 'تاریخ سفارش',
                     'bill-to' => 'بیل به',
                     'ship-to' => 'حمل به',
-                    'contact' => 'تماس'
+                    'contact' => 'تماس',
+                    'refunds' => 'Refunds',
+                    'individual-refund' => 'Refund #:refund_id',
+                    'adjustment-refund' => 'Adjustment Refund',
+                    'adjustment-fee' => 'Adjustment Fee',
                 ]
             ],
 
@@ -378,6 +384,7 @@ return [
                 'missing_links' => 'Downloadable links are missing for this product.',
                 'qty_missing' => 'Atleast one product should have more than 1 quantity.'
             ],
+
             'create-error' => 'هنگام تهیه نمونه سبد خرید ، با برخی از شماره ها روبرو شد',
             'title' => 'سبد خرید',
             'empty' => 'سبد خرید شما خالی است',
@@ -397,12 +404,14 @@ return [
                 'inventory_warning' => 'مقدار درخواستی در دسترس نیست ، لطفا بعداً دوباره امتحان کنید',
                 'error' => 'در حال حاضر نمی توانید موارد (های) را به روز کنید ، لطفا بعداً دوباره امتحان کنید'
             ],
+
             'item' => [
                 'error_remove' => 'هیچ موردی برای حذف از سبد خرید وجود ندارد',
                 'success' => 'مورد با موفقیت به سبد خرید اضافه شد',
                 'success-remove' => 'مورد با موفقیت از سبد خرید حذف شد',
                 'error-add' => 'لطفاً موردی را به سبد خرید اضافه نکرد ، لطفا بعداً دوباره امتحان کنید',
             ],
+
             'quantity-error' => 'مقدار درخواستی در دسترس نیست',
             'cart-subtotal' => 'سبد فرعی',
             'cart-remove-action' => 'آیا واقعاً می خواهید این کار را انجام دهید؟',
@@ -501,11 +510,13 @@ return [
             'help' => 'در صورت نیاز به هر نوع کمک ، لطفا با ما تماس بگیرید :support_email',
             'thanks' => 'با تشکر!'
         ],
+
         'invoice' => [
             'heading' => 'صورت حساب شما #:invoice_id برای سفارش #:order_id',
             'subject' => 'فاکتور سفارش شما #:order_id',
             'summary' => 'خلاصه فاکتور',
         ],
+
         'shipment' => [
             'heading' => 'حمل و نقل #:shipment_id  برای سفارش تولید شده است #:order_id',
             'inventory-heading' => 'حمل و نقل جدید #:shipment_id برای سفارش تولید شده است #:order_id',
@@ -516,6 +527,15 @@ return [
             'tracking-number' => 'شماره پیگیری',
             'greeting' => 'یک سفارش :order_id قرار داده شده است :created_at',
         ],
+
+        'refund' => [
+            'heading' => 'Your Refund #:refund_id for Order #:order_id',
+            'subject' => 'Refund for your order #:order_id',
+            'summary' => 'Summary of Refund',
+            'adjustment-refund' => 'Adjustment Refund',
+            'adjustment-fee' => 'Adjustment Fee'
+        ],
+        
         'forget-password' => [
             'dear' => 'عزیز :name',
             'info' => 'شما این ایمیل را دریافت می کنید زیرا ما درخواست بازنشانی رمزعبور را برای حساب شما دریافت کردیم',

@@ -46,6 +46,7 @@ class Shipping
 
         return [
                 'jump_to_section' => 'shipping',
+                'shippingMethods' => $this->getGroupedAllShippingRates(),
                 'html' => view('shop::checkout.onepage.shipping', ['shippingRateGroups' => $this->getGroupedAllShippingRates()])->render()
             ];
     }

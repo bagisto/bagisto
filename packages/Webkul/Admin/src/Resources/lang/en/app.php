@@ -31,6 +31,7 @@ return [
     'channel-based' => 'Channel based',
     'status' => 'Status',
     'select-option' => 'Select option',
+    'category' => 'Category',
 
     'common' => [
         'no-result-found' => 'We could not find any records.',
@@ -49,6 +50,7 @@ return [
         'orders' => 'Orders',
         'shipments' => 'Shipments',
         'invoices' => 'Invoices',
+        'refunds' => 'Refunds',
         'catalog' => 'Catalog',
         'products' => 'Products',
         'categories' => 'Categories',
@@ -130,7 +132,7 @@ return [
         'order-count' => ':count Orders',
         'revenue' => 'Revenue :total',
         'stock-threshold' => 'Stock Threshold',
-        'qty-left' => ':qty Left',
+        'qty-left' => ':qty Left'
     ],
 
     'datagrid' => [
@@ -196,7 +198,10 @@ return [
         'ends-till' => 'Ends Till',
         'per-cust' => 'Per Customer',
         'usage-throttle' => 'Usage Times',
-        'for-guest' => 'For Guest'
+        'for-guest' => 'For Guest',
+        'order_number' => 'Order Number',
+        'refund-date' => 'Refund Date',
+        'refunded' => 'Refunded'
     ],
 
     'account' => [
@@ -319,6 +324,7 @@ return [
             'item-invoice' => 'Invoiced (:qty_invoiced)',
             'item-shipped' => 'shipped (:qty_shipped)',
             'item-canceled' => 'Canceled (:qty_canceled)',
+            'item-refunded' => 'Refunded (:qty_refunded)',
             'price' => 'Price',
             'total' => 'Total',
             'subtotal' => 'Subtotal',
@@ -333,7 +339,9 @@ return [
             'total-paid' => 'Total Paid',
             'total-refunded' => 'Total Refunded',
             'total-due' => 'Total Due',
-            'cancel-confirm-msg' => 'Are you sure you want to cancel this order ?'
+            'cancel-confirm-msg' => 'Are you sure you want to cancel this order ?',
+            'refund-btn-title' => 'Refund',
+            'refunds' => 'Refunds'
         ],
 
         'invoices' => [
@@ -384,6 +392,30 @@ return [
             'creation-error' => 'Shipment can not be created for this order.',
             'order-error' => 'Order shipment creation is not allowed.',
             'quantity-invalid' => 'Requested quantity is invalid or not available.',
+        ],
+
+        'refunds' => [
+            'title' => 'Refunds',
+            'id' => 'Id',
+            'add-title' => 'Create Refund',
+            'save-btn-title' => 'Refund',
+            'order-id' => 'Order Id',
+            'qty-ordered' => 'Qty Ordered',
+            'qty-to-refund' => 'Qty To Refund',
+            'refund-shipping' => 'Refund Shipping',
+            'adjustment-refund' => 'Adjustment Refund',
+            'adjustment-fee' => 'Adjustment Fee',
+            'update-qty' => 'Update Quantities',
+            'invalid-qty' => 'Found invalid quantity for return items.',
+            'refund-limit-error' => 'The most money available to refund is :amount.',
+            'refunded' => 'Refunded',
+            'date' => 'Refund Date',
+            'customer-name' => 'Customer Name',
+            'status' => 'Status',
+            'action' => 'Action',
+            'view-title' => 'Refund #:refund_id',
+            'invalid-refund-amount-error' => 'Refund amount should be non zero.'
+
         ]
     ],
 
@@ -1149,6 +1181,7 @@ return [
             'footer' => 'Footer',
             'content' => 'Content',
             'footer-content' => 'Footer Text',
+            'footer-toggle' => 'Toggle footer',
             'locale-options' => 'Unit Options',
             'weight-unit' => 'Weight Unit',
             'design' => 'Design',
@@ -1156,7 +1189,13 @@ return [
             'logo-image' => 'Logo Image',
             'credit-max' => 'Customer Credit Max',
             'credit-max-value' => 'Credit Max Value',
-            'use-credit-max' => 'Use Credit Max'
+            'use-credit-max' => 'Use Credit Max',
+            'order-settings' => 'Order Settings',
+            'orderNumber' => 'Order Number Settings',
+            'order-number-prefix' => 'Order Number Prefix',
+            'order-number-length' => 'Order Number Length',
+            'order-number-suffix' => 'Order Number Suffix',
+            'default' => 'Default',
         ]
     ]
 ];

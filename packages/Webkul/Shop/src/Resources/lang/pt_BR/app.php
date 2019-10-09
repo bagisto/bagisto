@@ -11,7 +11,8 @@ return [
     ],
 
     'common' => [
-        'error' => 'Algo deu errado, por favor, tente novamente mais tarde.'
+        'error' => 'Algo deu errado, por favor, tente novamente mais tarde.',
+        'no-result-found' => 'We could not find any records.'
     ],
 
     'home' => [
@@ -251,6 +252,7 @@ return [
                     'item-invoice' => 'Faturados (:qty_invoiced)',
                     'item-shipped' => 'enviados (:qty_shipped)',
                     'item-canceled' => 'Cancelados (:qty_canceled)',
+                    'item-refunded' => 'Refunded (:qty_refunded)',
                     'price' => 'Preço',
                     'total' => 'Total',
                     'subtotal' => 'Subtotal',
@@ -276,7 +278,11 @@ return [
                     'order-date' => 'Pedido Date',
                     'bill-to' => 'Cobrança de',
                     'ship-to' => 'Enviar para',
-                    'contact' => 'Contato'
+                    'contact' => 'Contato',
+                    'refunds' => 'Refunds',
+                    'individual-refund' => 'Refund #:refund_id',
+                    'adjustment-refund' => 'Adjustment Refund',
+                    'adjustment-fee' => 'Adjustment Fee',
                 ]
             ],
 
@@ -373,6 +379,7 @@ return [
                 'missing_links' => 'Downloadable links are missing for this product.',
                 'qty_missing' => 'Atleast one product should have more than 1 quantity.'
             ],
+
             'create-error' => 'Encontrou algum problema ao fazer a instância do carrinho',
             'title' => 'Carrinho de Compras',
             'empty' => 'Seu carrinho de compras está vazio',
@@ -392,12 +399,14 @@ return [
                 'inventory_warning' => 'A quantidade solicitada não está disponível, por favor, tente novamente mais tarde',
                 'error' => 'Não é possível atualizar o item(s) no momento, por favor, tente novamente mais tarde'
             ],
+
             'item' => [
                 'error_remove' => 'Nenhum item para remover do carrinho',
                 'success' => 'Item foi adicionado com sucesso ao carrinho',
                 'success-remove' => 'Item foi removido com sucesso do carrinho',
                 'error-add' => 'Item não pode ser adicionado ao carrinho, por favor, tente novamente mais tarde',
             ],
+
             'quantity-error' => 'Quantidade solicitada não está disponível',
             'cart-subtotal' => 'Subtotal do carrinho',
             'cart-remove-action' => 'Você realmente quer fazer isso ?',
@@ -482,11 +491,21 @@ return [
             'help' => 'Se você precisar de algum tipo de ajuda, por favor entre em contato conosco :support_email',
             'thanks' => 'Muito Obrigado!'
         ],
+
         'invoice' => [
             'heading' => 'Sua Fatura #:invoice_id do Pedido #:order_id',
             'subject' => 'Fatura do seu pedido #:order_id',
             'summary' => 'Resumo da Fatura',
         ],
+
+        'refund' => [
+            'heading' => 'Your Refund #:refund_id for Order #:order_id',
+            'subject' => 'Refund for your order #:order_id',
+            'summary' => 'Summary of Refund',
+            'adjustment-refund' => 'Adjustment Refund',
+            'adjustment-fee' => 'Adjustment Fee'
+        ],
+
         'shipment' => [
             'heading' => 'Sua Entrega #:shipment_id do Pedido #:order_id',
             'subject' => 'Entrega do seu pedido #:order_id',
@@ -494,6 +513,7 @@ return [
             'carrier' => 'Transportadora',
             'tracking-number' => 'Código de Rastreio'
         ],
+        
         'forget-password' => [
             'dear' => 'Caro :name',
             'info' => 'Você está recebendo este e-mail porque recebemos uma solicitação de redefinição de senha para sua conta',

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Sales\Contracts\Order;
 use Webkul\Sales\Repositories\OrderItemRepository;
+use Webkul\Core\Models\CoreConfig;
 
 /**
  * Order Reposotory
@@ -185,11 +186,27 @@ class OrderRepository extends Repository
      */
     public function generateIncrementId()
     {
-        $lastOrder = $this->model->orderBy('id', 'desc')->limit(1)->first();
+        $config = new CoreConfig();
 
+        $invoiceNumberPrefix = $config->where('code','=',"sales.orderSettings.order_number.order_number_prefix")->first()
+            ? $config->where('code','=',"sales.orderSettings.order_number.order_number_prefix")->first()->value : false;
+
+        $invoiceNumberLength = $config->where('code','=',"sales.orderSettings.order_number.order_number_length")->first()
+            ? $config->where('code','=',"sales.orderSettings.order_number.order_number_length")->first()->value : false;
+
+        $invoiceNumberSuffix = $config->where('code','=',"sales.orderSettings.order_number.order_number_suffix")->first()
+            ? $config->where('code','=',"sales.orderSettings.order_number.order_number_suffix")->first()->value: false;
+
+        $lastOrder = $this->model->orderBy('id', 'desc')->limit(1)->first();
         $lastId = $lastOrder ? $lastOrder->id : 0;
 
-        return $lastId + 1;
+        if ($invoiceNumberLength && ( $invoiceNumberPrefix || $invoiceNumberSuffix) ) {
+            $invoiceNumber = $invoiceNumberPrefix . sprintf("%0{$invoiceNumberLength}d", 0) . ($lastId + 1) . $invoiceNumberSuffix;
+        } else {
+            $invoiceNumber = $lastId + 1;
+        }
+
+        return $invoiceNumber;
     }
 
     /**
@@ -198,11 +215,7 @@ class OrderRepository extends Repository
      */
     public function isInCompletedState($order)
     {
-        $totalQtyOrdered = 0;
-        $totalQtyInvoiced = 0;
-        $totalQtyShipped = 0;
-        $totalQtyRefunded = 0;
-        $totalQtyCanceled = 0;
+        $totalQtyOrdered = $totalQtyInvoiced = $totalQtyShipped = $totalQtyRefunded = $totalQtyCanceled = 0;
 
         foreach ($order->items  as $item) {
             $totalQtyOrdered += $item->qty_ordered;
@@ -294,9 +307,11 @@ class OrderRepository extends Repository
      */
     public function collectTotals($order)
     {
+        //Order invoice total
         $order->sub_total_invoiced = $order->base_sub_total_invoiced = 0;
         $order->shipping_invoiced = $order->base_shipping_invoiced = 0;
         $order->tax_amount_invoiced = $order->base_tax_amount_invoiced = 0;
+        $order->discount_invoiced = $order->base_discount_invoiced = 0;
 
         foreach ($order->invoices as $invoice) {
             $order->sub_total_invoiced += $invoice->sub_total;
@@ -314,6 +329,33 @@ class OrderRepository extends Repository
 
         $order->grand_total_invoiced = $order->sub_total_invoiced + $order->shipping_invoiced + $order->tax_amount_invoiced - $order->discount_invoiced;
         $order->base_grand_total_invoiced = $order->base_sub_total_invoiced + $order->base_shipping_invoiced + $order->base_tax_amount_invoiced - $order->base_discount_invoiced;
+
+        //Order refund total
+        $order->sub_total_refunded = $order->base_sub_total_refunded = 0;
+        $order->shipping_refunded = $order->base_shipping_refunded = 0;
+        $order->tax_amount_refunded = $order->base_tax_amount_refunded = 0;
+        $order->discount_refunded = $order->base_discount_refunded = 0;
+        $order->grand_total_refunded = $order->base_grand_total_refunded = 0;
+
+        foreach ($order->refunds as $refund) {
+            $order->sub_total_refunded += $refund->sub_total;
+            $order->base_sub_total_refunded += $refund->base_sub_total;
+
+            $order->shipping_refunded += $refund->shipping_amount;
+            $order->base_shipping_refunded += $refund->base_shipping_amount;
+
+            $order->tax_amount_refunded += $refund->tax_amount;
+            $order->base_tax_amount_refunded += $refund->base_tax_amount;
+
+            $order->discount_refunded += $refund->discount_amount;
+            $order->base_discount_refunded += $refund->base_discount_amount;
+
+            $order->grand_total_refunded += $refund->adjustment_refund - $refund->adjustment_fee;
+            $order->base_grand_total_refunded += $refund->base_adjustment_refund - $refund->base_adjustment_fee;
+        }
+
+        $order->grand_total_refunded += $order->sub_total_refunded + $order->shipping_refunded + $order->tax_amount_refunded - $order->discount_refunded;
+        $order->base_grand_total_refunded += $order->base_sub_total_refunded + $order->base_shipping_refunded + $order->base_tax_amount_refunded - $order->base_discount_refunded;
 
         $order->save();
 
