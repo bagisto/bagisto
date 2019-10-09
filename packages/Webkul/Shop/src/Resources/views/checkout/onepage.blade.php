@@ -277,17 +277,9 @@
                         .then(function(response) {
                             this_this.disable_button = false;
 
-<<<<<<< HEAD
                             paymentHtml = Vue.compile(response.data.html)
                             this_this.completed_step = this_this.step_numbers[response.data.jump_to_section] + 1;
                             this_this.current_step = this_this.step_numbers[response.data.jump_to_section];
-=======
-                            if (response.data.jump_to_section == 'payment') {
-                                paymentHtml = Vue.compile(response.data.html)
-                                paymentMethods = response.data.paymentMethods;
-                                this_this.completedStep = 2;
-                                this_this.currentStep = 3;
->>>>>>> fc920e14c53a3398cf3baf28ecf83bcb6e410d67
 
                             this_this.getOrderSummary();
                         })
