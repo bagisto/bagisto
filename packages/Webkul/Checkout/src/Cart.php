@@ -898,7 +898,10 @@ class Cart {
     {
         if (! $wishlistItem->product->getTypeInstance()->canBeMovedFromWishlistToCart($wishlistItem))
             return false;
-
+    
+        if (! $wishlistItem->additional)
+            $wishlistItem->additional = ['product_id' => $wishlistItem->product_id];
+        
         $result = $this->addProduct($wishlistItem->product_id, $wishlistItem->additional);
 
         if ($result) {
