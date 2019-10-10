@@ -699,6 +699,7 @@ return [
         ],
         'sliders' => [
             'title' => 'عنوان',
+            'name' => 'Name',
             'add-title' => 'افزودن اسلاید',
             'edit-title' => 'ویرایش اسلایدر',
             'save-btn-title' => 'ذخیره اسلایدر',
