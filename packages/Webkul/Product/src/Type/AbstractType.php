@@ -469,6 +469,8 @@ abstract class AbstractType
      */
     public function prepareForCart($data)
     {
+        $data['quantity'] = $data['quantity'] ?? 1;
+
         $data = $this->getQtyRequest($data);
 
         if (! $this->haveSufficientQuantity($data['quantity']))
