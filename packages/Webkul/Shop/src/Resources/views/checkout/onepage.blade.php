@@ -155,7 +155,7 @@
                     new_shipping_address: false,
 
                     new_billing_address: false,
-                    
+
                     allAddress: {},
 
                     countryStates: @json(core()->groupedStatesByCountries()),
@@ -251,7 +251,7 @@
                         .then(function(response) {
                             this_this.disable_button = false;
 
-                            if (this_this.step_numbers[response.data.jump_to_section] == 2) 
+                            if (this_this.step_numbers[response.data.jump_to_section] == 2)
                                 shippingHtml = Vue.compile(response.data.html)
                             else
                                 paymentHtml = Vue.compile(response.data.html)
