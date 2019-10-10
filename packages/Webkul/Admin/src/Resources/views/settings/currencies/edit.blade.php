@@ -48,7 +48,7 @@
                             </div>
 
                             <div class="control-group">
-                                <label for="symbol" class="required">{{ __('admin::app.settings.currencies.symbol') }}</label>
+                                <label for="symbol">{{ __('admin::app.settings.currencies.symbol') }}</label>
                                 <input class="control" id="symbol" name="symbol" value="{{ old('symbol') ?: $currency->symbol }}"/>
                             </div>
                         </div>
