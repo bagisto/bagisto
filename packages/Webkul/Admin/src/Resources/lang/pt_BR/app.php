@@ -690,6 +690,7 @@ return [
         ],
         'sliders' => [
             'title' => 'Sliders',
+            'name' => 'Name',
             'add-title' => 'Criar Slider',
             'edit-title' => 'Editar Slider',
             'save-btn-title' => 'Salvar Slider',

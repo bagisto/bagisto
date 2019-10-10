@@ -663,6 +663,7 @@ return [
         ],
         'sliders' => [
             'title' => 'المنزلقون',
+            'name' => 'Name',
             'add-title' => 'أنشئ مزلق',
             'edit-title' => 'حرر المزلق',
             'save-btn-title' => 'احفظ المنزلق',

@@ -768,6 +768,7 @@ return [
 
         'sliders' => [
             'title' => 'Sliders',
+            'name' => 'Name',
             'add-title' => 'Create Slider',
             'edit-title' => 'Edit Slider',
             'save-btn-title' => 'Save Slider',
