@@ -129,30 +129,38 @@ class RefundRepository extends Repository
                         'additional' => $orderItem->additional
                     ]);
 
-                if ($orderItem->type == 'configurable' && $orderItem->child) {
-                    $childOrderItem = $orderItem->child;
+                if ($orderItem->getTypeInstance()->isComposite()) {
+                    foreach ($orderItem->children as $childOrderItem) {
+                        $finalQty = $childOrderItem->qty_ordered
+                                ? ($childOrderItem->qty_ordered / $orderItem->qty_ordered) * $qty
+                                : $childOrderItem->qty_ordered;
 
-                    $refundItem->child = $this->refundItemRepository->create([
-                            'refund_id' => $refund->id,
-                            'order_item_id' => $childOrderItem->id,
-                            'parent_id' => $refundItem->id,
-                            'name' => $childOrderItem->name,
-                            'sku' => $childOrderItem->sku,
-                            'qty' => $qty,
-                            'price' => $childOrderItem->price,
-                            'base_price' => $childOrderItem->base_price,
-                            'total' => $childOrderItem->price * $qty,
-                            'base_total' => $childOrderItem->base_price * $qty,
-                            'tax_amount' => 0,
-                            'base_tax_amount' => 0,
-                            'discount_amount' => 0,
-                            'base_discount_amount' => 0,
-                            'product_id' => $childOrderItem->product_id,
-                            'product_type' => $childOrderItem->product_type,
-                            'additional' => $childOrderItem->additional
-                        ]);
+                        $refundItem->child = $this->refundItemRepository->create([
+                                'refund_id' => $refund->id,
+                                'order_item_id' => $childOrderItem->id,
+                                'parent_id' => $refundItem->id,
+                                'name' => $childOrderItem->name,
+                                'sku' => $childOrderItem->sku,
+                                'qty' => $finalQty,
+                                'price' => $childOrderItem->price,
+                                'base_price' => $childOrderItem->base_price,
+                                'total' => $childOrderItem->price * $finalQty,
+                                'base_total' => $childOrderItem->base_price * $finalQty,
+                                'tax_amount' => 0,
+                                'base_tax_amount' => 0,
+                                'discount_amount' => 0,
+                                'base_discount_amount' => 0,
+                                'product_id' => $childOrderItem->product_id,
+                                'product_type' => $childOrderItem->product_type,
+                                'additional' => $childOrderItem->additional
+                            ]);
+                        
+                        if ($childOrderItem->product->getTypeInstance()->showQuantityBox())
+                            $this->refundItemRepository->returnQtyToProductInventory($childOrderItem, $finalQty);
 
-                    $this->refundItemRepository->returnQtyToProductInventory($childOrderItem, $qty);
+                        $this->orderItemRepository->collectTotals($childOrderItem);
+                    }
+
                 } else {
                     $this->refundItemRepository->returnQtyToProductInventory($orderItem, $qty);
                 }
