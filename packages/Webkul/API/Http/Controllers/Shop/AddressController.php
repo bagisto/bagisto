@@ -48,10 +48,23 @@ class AddressController extends Controller
         auth()->setDefaultDriver($this->guard);
 
         $this->middleware('auth:' . $this->guard);
-        
+
         $this->_config = request('_config');
 
         $this->customerAddressRepository = $customerAddressRepository;
+    }
+
+    /**
+     * Get user address.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function get()
+    {
+        $customer = auth($this->guard)->user();
+        $addresses = $customer->addresses()->get();
+
+        return CustomerAddressResource::collection($addresses);
     }
 
     /**
@@ -84,7 +97,7 @@ class AddressController extends Controller
                 'data' => new CustomerAddressResource($customerAddress)
             ]);
     }
-    
+
     /**
      * Update the specified resource in storage.
      *
