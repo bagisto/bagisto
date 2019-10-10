@@ -105,7 +105,9 @@
                         <thead>
                             <tr>
                                 <th style="width: 50%">{{ __('shop::app.customer.account.order.view.bill-to') }}</th>
-                                <th>{{ __('shop::app.customer.account.order.view.ship-to') }}</th>
+                                @if ($invoice->order->shipping_address)
+                                    <th>{{ __('shop::app.customer.account.order.view.ship-to') }}</th>
+                                @endif
                             </tr>
                         </thead>
 
@@ -123,14 +125,16 @@
                                     {{ __('shop::app.customer.account.order.view.contact') }} : {{ $invoice->order->billing_address->phone }}
                                 </td>
                                 
-                                <td>
-                                    <p>{{ $invoice->order->shipping_address->name }}</p>
-                                    <p>{{ $invoice->order->shipping_address->address1 }}</p>
-                                    <p>{{ $invoice->order->shipping_address->city }}</p>
-                                    <p>{{ $invoice->order->shipping_address->state }}</p>
-                                    <p>{{ core()->country_name($invoice->order->shipping_address->country) }} {{ $invoice->order->shipping_address->postcode }}</p>
-                                    {{ __('shop::app.customer.account.order.view.contact') }} : {{ $invoice->order->shipping_address->phone }}
-                                </td>
+                                @if ($invoice->order->shipping_address)
+                                    <td>
+                                        <p>{{ $invoice->order->shipping_address->name }}</p>
+                                        <p>{{ $invoice->order->shipping_address->address1 }}</p>
+                                        <p>{{ $invoice->order->shipping_address->city }}</p>
+                                        <p>{{ $invoice->order->shipping_address->state }}</p>
+                                        <p>{{ core()->country_name($invoice->order->shipping_address->country) }} {{ $invoice->order->shipping_address->postcode }}</p>
+                                        {{ __('shop::app.customer.account.order.view.contact') }} : {{ $invoice->order->shipping_address->phone }}
+                                    </td>
+                                @endif
                             </tr>
                         </tbody>
                     </table>
@@ -141,7 +145,10 @@
                         <thead>
                             <tr>
                                 <th style="width: 50%">{{ __('shop::app.customer.account.order.view.payment-method') }}</th>
-                                <th>{{ __('shop::app.customer.account.order.view.shipping-method') }}</th>
+
+                                @if ($invoice->order->shipping_address)
+                                    <th>{{ __('shop::app.customer.account.order.view.shipping-method') }}</th>
+                                @endif
                             </tr>
                         </thead>
 
@@ -150,9 +157,12 @@
                                 <td>
                                     {{ core()->getConfigData('sales.paymentmethods.' . $invoice->order->payment->method . '.title') }}
                                 </td>
-                                <td>
-                                    {{ $invoice->order->shipping_title }}
-                                </td>
+
+                                @if ($invoice->order->shipping_address)
+                                    <td>
+                                        {{ $invoice->order->shipping_title }}
+                                    </td>
+                                @endif
                             </tr>
                         </tbody>
                     </table>

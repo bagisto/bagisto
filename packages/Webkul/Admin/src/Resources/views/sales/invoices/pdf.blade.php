@@ -103,7 +103,9 @@
                         <thead>
                             <tr>
                                 <th style="width: 50%">{{ __('admin::app.sales.invoices.bill-to') }}</th>
-                                <th>{{ __('admin::app.sales.invoices.ship-to') }}</th>
+                                @if ($invoice->order->shipping_address)
+                                    <th>{{ __('admin::app.sales.invoices.ship-to') }}</th>
+                                @endif
                             </tr>
                         </thead>
 
@@ -138,7 +140,10 @@
                         <thead>
                             <tr>
                                 <th style="width: 50%">{{ __('admin::app.sales.orders.payment-method') }}</th>
-                                <th>{{ __('admin::app.sales.orders.shipping-method') }}</th>
+
+                                @if ($invoice->order->shipping_address)
+                                    <th>{{ __('admin::app.sales.orders.shipping-method') }}</th>
+                                @endif
                             </tr>
                         </thead>
 
@@ -148,9 +153,11 @@
                                     {{ core()->getConfigData('sales.paymentmethods.' . $invoice->order->payment->method . '.title') }}
                                 </td>
 
-                                <td>
-                                    {{ $invoice->order->shipping_title }}
-                                </td>
+                                @if ($invoice->order->shipping_address)
+                                    <td>
+                                        {{ $invoice->order->shipping_title }}
+                                    </td>
+                                @endif
                             </tr>
                         </tbody>
                     </table>
