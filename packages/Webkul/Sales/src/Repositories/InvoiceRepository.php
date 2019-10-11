@@ -185,7 +185,7 @@ class InvoiceRepository extends Repository
 
                 $this->orderItemRepository->collectTotals($orderItem);
 
-                $this->downloadableLinkPurchasedRepository->updateStatus($orderItem);
+                $this->downloadableLinkPurchasedRepository->updateStatus($orderItem, 'available');
             }
 
             $this->collectTotals($invoice);
