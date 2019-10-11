@@ -111,7 +111,7 @@ class OrderRepository extends Repository
 
                 $this->orderItemRepository->manageInventory($orderItem);
 
-                $this->downloadableLinkPurchasedRepository->saveLinks($orderItem);
+                $this->downloadableLinkPurchasedRepository->saveLinks($orderItem, 'available');
             }
 
             Event::fire('checkout.order.save.after', $order);
@@ -172,6 +172,8 @@ class OrderRepository extends Repository
                     $orderItem->parent->save();
                 }
             }
+
+            $this->downloadableLinkPurchasedRepository->updateStatus($item, 'expired');
         }
 
         $this->updateOrderStatus($order);
