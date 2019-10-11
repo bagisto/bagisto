@@ -88,7 +88,7 @@ class CartController extends Controller
     {
         Event::fire('checkout.cart.item.add.before', $id);
 
-        $result = Cart::add($id, request()->except('_token'));
+        $result = Cart::addProduct($id, request()->except('_token'));
 
         if (! $result) {
             $message = session()->get('warning') ?? session()->get('error');
