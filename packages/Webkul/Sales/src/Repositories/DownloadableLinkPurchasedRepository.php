@@ -79,16 +79,17 @@ class DownloadableLinkPurchasedRepository extends Repository
     }
 
     /**
-     * @param mixed $orderItem
+     * @param OrderItem $orderItem
+     * @param string    $status
      * @return void
      */
-    public function updateStatus($orderItem)
+    public function updateStatus($orderItem, $status)
     {
         $purchasedLinks = $this->findByField('order_item_id', $orderItem->id);
 
         foreach ($purchasedLinks as $purchasedLink) {
             $this->update([
-                'status' => 'available'
+                'status' => $status
             ], $purchasedLink->id);
         }
     }
