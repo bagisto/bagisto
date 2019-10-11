@@ -117,34 +117,38 @@ class ProductController extends Controller
      */
     public function downloadSample()
     {
-        if (request('type') == 'link') {
-            $productDownloadableLink = $this->productDownloadableLinkRepository->findOrFail(request('id'));
+        try {
+            if (request('type') == 'link') {
+                $productDownloadableLink = $this->productDownloadableLinkRepository->findOrFail(request('id'));
 
-            if ($productDownloadableLink->sample_type == 'file')
-                return Storage::download($productDownloadableLink->sample_file);
-            else {
-                $fileName = $name = substr($productDownloadableLink->sample_url, strrpos($productDownloadableLink->sample_url, '/') + 1);
+                if ($productDownloadableLink->sample_type == 'file')
+                    return Storage::download($productDownloadableLink->sample_file);
+                else {
+                    $fileName = $name = substr($productDownloadableLink->sample_url, strrpos($productDownloadableLink->sample_url, '/') + 1);
 
-                $tempImage = tempnam(sys_get_temp_dir(), $fileName);
+                    $tempImage = tempnam(sys_get_temp_dir(), $fileName);
 
-                copy($productDownloadableLink->sample_url, $tempImage);
+                    copy($productDownloadableLink->sample_url, $tempImage);
 
-                return response()->download($tempImage, $fileName);
+                    return response()->download($tempImage, $fileName);
+                }
+            } else {
+                $productDownloadableSample = $this->productDownloadableSampleRepository->findOrFail(request('id'));
+
+                if ($productDownloadableSample->type == 'file')
+                    return Storage::download($productDownloadableSample->file);
+                else {
+                    $fileName = $name = substr($productDownloadableSample->url, strrpos($productDownloadableSample->url, '/') + 1);
+
+                    $tempImage = tempnam(sys_get_temp_dir(), $fileName);
+
+                    copy($productDownloadableSample->url, $tempImage);
+
+                    return response()->download($tempImage, $fileName);
+                }
             }
-        } else {
-            $productDownloadableSample = $this->productDownloadableSampleRepository->findOrFail(request('id'));
-
-            if ($productDownloadableSample->type == 'file')
-                return Storage::download($productDownloadableSample->file);
-            else {
-                $fileName = $name = substr($productDownloadableSample->url, strrpos($productDownloadableSample->url, '/') + 1);
-
-                $tempImage = tempnam(sys_get_temp_dir(), $fileName);
-
-                copy($productDownloadableSample->url, $tempImage);
-
-                return response()->download($tempImage, $fileName);
-            }
+        } catch(\Exception $e) {
+            abort(404);
         }
     }
 }
