@@ -142,7 +142,7 @@ class CategoryController extends Controller
 
             $this->validate(request(), [
                 $locale . '.slug' => ['required', new \Webkul\Core\Contracts\Validations\Slug, function ($attribute, $value, $fail) use ($id) {
-                    if (! $this->category->isSlugUnique($id, $value)) {
+                    if (! $this->categoryRepository->isSlugUnique($id, $value)) {
                         $fail(trans('admin::app.response.already-taken', ['name' => 'Category']));
                     }
                 }],
@@ -150,7 +150,7 @@ class CategoryController extends Controller
                 'image.*' => 'mimes:jpeg,jpg,bmp,png'
             ]);
 
-            $this->category->update(request()->all(), $id);
+            $this->categoryRepository->update(request()->all(), $id);
 
             session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Category']));
 
