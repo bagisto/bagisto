@@ -159,7 +159,7 @@
 
             <td>
                 <div class="control-group" :class="[errors.has(linkInputName + '[downloads]') ? 'has-error' : '']">
-                    <input type="number" v-validate="'required'" v-model="link.downloads" :name="[linkInputName + '[downloads]']" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.downloads') }}&quot;"/>
+                    <input type="number" v-validate="'required|min_value:0'" v-model="link.downloads" :name="[linkInputName + '[downloads]']" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.downloads') }}&quot;"/>
 
                     <span class="control-error" v-if="errors.has(linkInputName + '[downloads]')">@{{ errors.first(linkInputName + '[downloads]') }}</span>
                 </div>
