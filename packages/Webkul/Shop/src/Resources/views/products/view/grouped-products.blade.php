@@ -16,10 +16,14 @@
 
                                 @include ('shop::products.price', ['product' => $groupedProduct->associated_product])
                             </span>
+
                             <span class="qty">
-                                <div class="control-group">
-                                    <input name="qty[{{$groupedProduct->associated_product_id}}]" class="control" value="{{ $groupedProduct->qty }}"/>
-                                </div>
+                                <quantity-changer
+                                    :control-name="'qty[{{$groupedProduct->associated_product_id}}]'"
+                                    :validations="'required|numeric|min_value:0'"
+                                    quantity="{{ $groupedProduct->qty }}"
+                                    min-quantity="0">
+                                </quantity-changer>
                             </span>
                         </li>
                     @endforeach
