@@ -219,7 +219,7 @@ class OrderRepository extends Repository
     {
         $totalQtyOrdered = $totalQtyInvoiced = $totalQtyShipped = $totalQtyRefunded = $totalQtyCanceled = 0;
 
-        foreach ($order->items  as $item) {
+        foreach ($order->items()->get()  as $item) {
             $totalQtyOrdered += $item->qty_ordered;
             $totalQtyInvoiced += $item->qty_invoiced;
 
@@ -247,18 +247,14 @@ class OrderRepository extends Repository
      */
     public function isInCanceledState($order)
     {
-        $totalQtyOrdered = 0;
-        $totalQtyCanceled = 0;
+        $totalQtyOrdered = $totalQtyCanceled = 0;
 
-        foreach ($order->items as $item) {
+        foreach ($order->items()->get() as $item) {
             $totalQtyOrdered += $item->qty_ordered;
             $totalQtyCanceled += $item->qty_canceled;
         }
 
-        if ($totalQtyOrdered == $totalQtyCanceled)
-            return true;
-
-        return false;
+        return $totalQtyOrdered == $totalQtyCanceled;
     }
 
     /**
@@ -267,20 +263,15 @@ class OrderRepository extends Repository
      */
     public function isInClosedState($order)
     {
-        $totalQtyOrdered = 0;
-        $totalQtyRefunded = 0;
-        $totalQtyCanceled = 0;
+        $totalQtyOrdered = $totalQtyRefunded = $totalQtyCanceled = 0;
 
-        foreach ($order->items  as $item) {
+        foreach ($order->items()->get()  as $item) {
             $totalQtyOrdered += $item->qty_ordered;
             $totalQtyRefunded += $item->qty_refunded;
             $totalQtyCanceled += $item->qty_canceled;
         }
 
-        if ($totalQtyOrdered == $totalQtyRefunded + $totalQtyCanceled)
-            return true;
-
-        return false;
+        return $totalQtyOrdered == $totalQtyRefunded + $totalQtyCanceled;
     }
 
     /**
