@@ -143,6 +143,8 @@ class Cart {
         $cartProducts = $product->getTypeInstance()->prepareForCart($data);
 
         if (is_string($cartProducts)) {
+            $this->collectTotals();
+
             throw new \Exception($cartProducts);
         } else {
             $parentCartItem = null;
@@ -168,7 +170,7 @@ class Cart {
 
         $this->collectTotals();
 
-        return $cart;
+        return $this->getCart();
     }
 
     /**
