@@ -176,6 +176,11 @@
                     default: 1
                 },
 
+                minQuantity: {
+                    type: [Number, String],
+                    default: 1
+                },
+
                 validations: {
                     type: String,
                     default: 'required|numeric|min_value:1'
@@ -198,7 +203,7 @@
 
             methods: {
                 decreaseQty: function() {
-                    if (this.qty > 1)
+                    if (this.qty > this.minQuantity)
                         this.qty = parseInt(this.qty) - 1;
 
                     this.$emit('onQtyUpdated', this.qty)
