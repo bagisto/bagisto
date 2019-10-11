@@ -60,7 +60,7 @@ class Standard extends Paypal
             'item_name'       => core()->getCurrentChannel()->name,
             'amount'          => $cart->sub_total,
             'tax'             => $cart->tax_total,
-            'shipping'        => $cart->selected_shipping_rate->price,
+            'shipping'        => $cart->selected_shipping_rate ? $cart->selected_shipping_rate->price : 0,
             'discount_amount' => $cart->discount
         ];
 
@@ -72,7 +72,8 @@ class Standard extends Paypal
 
             $this->addLineItemsFields($fields);
 
-            $this->addShippingAsLineItems($fields, $cart->items()->count() + 1);
+            if ($cart->selected_shipping_rate)
+                $this->addShippingAsLineItems($fields, $cart->items()->count() + 1);
 
             if (isset($fields['tax'])) {
                 $fields['tax_cart'] = $fields['tax'];
