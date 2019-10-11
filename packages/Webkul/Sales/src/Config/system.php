@@ -22,7 +22,7 @@ return [
                 'name' => 'order_number_length',
                 'title' => 'admin::app.admin.system.order-number-length',
                 'type' => 'text',
-                'validation' => false,
+                'validation' => 'numeric',
                 'channel_based' => true,
                 'locale_based' => true
             ],
