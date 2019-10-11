@@ -20,7 +20,7 @@ class OrderDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('orders as order')
-                ->addSelect('order.id','order.increment_id', 'order.status', 'order.created_at', 'order.grand_total', 'order.order_currency_code')
+                ->addSelect('order.id', 'order.increment_id', 'order.status', 'order.created_at', 'order.grand_total', 'order.order_currency_code')
                 ->where('customer_id', auth()->guard('customer')->user()->id);
 
         $this->setQueryBuilder($queryBuilder);
