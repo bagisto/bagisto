@@ -38,17 +38,26 @@ class RefundRepository extends Repository
     protected $refundItemRepository;
 
     /**
+     * DownloadableLinkPurchasedRepository object
+     *
+     * @var Object
+     */
+    protected $downloadableLinkPurchasedRepository;
+
+    /**
      * Create a new repository instance.
      *
-     * @param \Webkul\Sales\Repositories\OrderRepository      $orderRepository
-     * @param \Webkul\Sales\Repositories\OrderItemRepository  $orderItemRepository
-     * @param \Webkul\Sales\Repositories\RefundItemRepository $refundItemRepository
-     * @param \Illuminate\Container\Container                 $app
+     * @param \Webkul\Sales\Repositories\OrderRepository                     $orderRepository
+     * @param \Webkul\Sales\Repositories\OrderItemRepository                 $orderItemRepository
+     * @param \Webkul\Sales\Repositories\RefundItemRepository                $refundItemRepository
+     * @param \Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository
+     * @param \Illuminate\Container\Container                                $app
      */
     public function __construct(
         OrderRepository $orderRepository,
         OrderItemRepository $orderItemRepository,
         RefundItemRepository $refundItemRepository,
+        DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository,
         App $app
     )
     {
@@ -57,6 +66,8 @@ class RefundRepository extends Repository
         $this->orderItemRepository = $orderItemRepository;
 
         $this->refundItemRepository = $refundItemRepository;
+
+        $this->downloadableLinkPurchasedRepository = $downloadableLinkPurchasedRepository;
 
         parent::__construct($app);
     }
@@ -166,6 +177,9 @@ class RefundRepository extends Repository
                 }
 
                 $this->orderItemRepository->collectTotals($orderItem);
+
+                if ($orderItem->qty_ordered == $orderItem->qty_refunded + $orderItem->qty_canceled)
+                    $this->downloadableLinkPurchasedRepository->updateStatus($orderItem, 'expired');
             }
 
             $this->collectTotals($refund);
