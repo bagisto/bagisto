@@ -26,6 +26,7 @@ class DownloadableProductDataGrid extends DataGrid
                 ->where('downloadable_link_purchased.customer_id', auth()->guard('customer')->user()->id);
 
         $this->addFilter('status', 'downloadable_link_purchased.status');
+        $this->addFilter('created_at', 'downloadable_link_purchased.created_at');
 
         $this->setQueryBuilder($queryBuilder);
     }
