@@ -150,14 +150,19 @@
 
                     <accordian :title="'{{ __('admin::app.catalog.categories.filterable-attributes') }}'" :active="true">
                         <div slot="body">
+
+                            <?php $selectedaAtributes = old('attributes') ?? $category->filterableAttributes->pluck('id')->toArray() ?>
+
                             <div class="control-group" :class="[errors.has('attributes[]') ? 'has-error' : '']">
                                 <label for="attributes" class="required">{{ __('admin::app.catalog.categories.attributes') }}</label>
                                 <select class="control" name="attributes[]" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.catalog.categories.attributes') }}&quot;" multiple>
+
                                     @foreach ($attributes as $attribute)
-                                        <option value="{{ $attribute->id }}" {{ in_array($attribute->id, $category->filterableAttributes->pluck('id')->toArray()) ? 'selected' : ''}}>
+                                        <option value="{{ $attribute->id }}" {{ in_array($attribute->id, $selectedaAtributes) ? 'selected' : ''}}>
                                             {{ $attribute->name ? $attribute->name : $attribute->admin_name }}
                                         </option>
                                     @endforeach
+
                                 </select>
                                 <span class="control-error" v-if="errors.has('attributes[]')">
                                     @{{ errors.first('attributes[]') }}
