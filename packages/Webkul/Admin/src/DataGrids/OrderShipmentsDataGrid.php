@@ -30,7 +30,7 @@ class OrderShipmentsDataGrid extends DataGrid
                 ->addSelect(DB::raw('CONCAT(order_address_shipping.first_name, " ", order_address_shipping.last_name) as shipped_to'));
 
         $this->addFilter('shipment_id', 'shipments.id');
-        $this->addFilter('shipment_order_id', 'shipments.order_id');
+        $this->addFilter('shipment_order_id', 'ors.increment_id');
         $this->addFilter('shipment_total_qty', 'shipments.total_qty');
         $this->addFilter('inventory_source_name', 'is.name');
         $this->addFilter('order_date', 'ors.created_at');
