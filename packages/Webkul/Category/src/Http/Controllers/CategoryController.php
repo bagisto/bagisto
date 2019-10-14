@@ -137,29 +137,23 @@ class CategoryController extends Controller
      */
     public function update($id)
     {
-        try {
-            $locale = request()->get('locale') ?: app()->getLocale();
+        $locale = request()->get('locale') ?: app()->getLocale();
 
-            $this->validate(request(), [
-                $locale . '.slug' => ['required', new \Webkul\Core\Contracts\Validations\Slug, function ($attribute, $value, $fail) use ($id) {
-                    if (! $this->categoryRepository->isSlugUnique($id, $value)) {
-                        $fail(trans('admin::app.response.already-taken', ['name' => 'Category']));
-                    }
-                }],
-                $locale . '.name' => 'required',
-                'image.*' => 'mimes:jpeg,jpg,bmp,png'
-            ]);
+        $this->validate(request(), [
+            $locale . '.slug' => ['required', new \Webkul\Core\Contracts\Validations\Slug, function ($attribute, $value, $fail) use ($id) {
+                if (! $this->categoryRepository->isSlugUnique($id, $value)) {
+                    $fail(trans('admin::app.response.already-taken', ['name' => 'Category']));
+                }
+            }],
+            $locale . '.name' => 'required',
+            'image.*' => 'mimes:jpeg,jpg,bmp,png'
+        ]);
 
-            $this->categoryRepository->update(request()->all(), $id);
+        $this->categoryRepository->update(request()->all(), $id);
 
-            session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Category']));
+        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Category']));
 
-            return redirect()->route($this->_config['redirect']);
-        } catch(\Exception $e) {
-            session()->flash('error', trans($e->getMessage()));
-
-            return redirect()->back();
-        }
+        return redirect()->route($this->_config['redirect']);
     }
 
     /**
