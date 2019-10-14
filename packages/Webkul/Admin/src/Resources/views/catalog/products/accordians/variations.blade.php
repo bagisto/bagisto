@@ -72,7 +72,7 @@
     </script>
 
     <script type="text/x-template" id="variant-list-template">
-        <div class="table" style="margin-top: 20px; overflow-x: unset;">
+        <div class="table" style="margin-top: 20px; overflow-x: auto;">
             <table>
 
                 <thead>
