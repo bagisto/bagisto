@@ -1,14 +1,14 @@
 <?php
 
 Route::group(['prefix' => 'api'], function ($router) {
-    
+
     Route::group(['namespace' => 'Webkul\API\Http\Controllers\Shop', 'middleware' => ['locale', 'theme', 'currency']], function ($router) {
         //Currency and Locale switcher
         Route::get('switch-currency', 'CoreController@switchCurrency');
 
         Route::get('switch-locale', 'CoreController@switchLocale');
-        
-        
+
+
         //Category routes
         Route::get('categories', 'ResourceController@index')->defaults('_config', [
             'repository' => 'Webkul\Category\Repositories\CategoryRepository',
@@ -156,9 +156,7 @@ Route::group(['prefix' => 'api'], function ($router) {
 
 
         //Customer Address routes
-        Route::get('addresses', 'ResourceController@index')->defaults('_config', [
-            'repository' => 'Webkul\Customer\Repositories\CustomerAddressRepository',
-            'resource' => 'Webkul\API\Http\Resources\Customer\CustomerAddress',
+        Route::get('addresses', 'AddressController@get')->defaults('_config', [
             'authorization_required' => true
         ]);
 

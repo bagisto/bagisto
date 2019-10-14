@@ -2,7 +2,7 @@
 
 namespace Webkul\Ui\DataGrid;
 
-use Event;
+use Illuminate\Support\Facades\Event;
 
 /**
  * DataGrid class

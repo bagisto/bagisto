@@ -4,6 +4,7 @@ namespace Webkul\Customer\Http\Controllers;
 
 use Hash;
 use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Product\Repositories\ProductReviewRepository;
 
 /**
  * Customer controlller for the customer basically for the tasks of customers which will be
@@ -29,18 +30,28 @@ class CustomerController extends Controller
     protected $customerRepository;
 
     /**
+     * ProductReviewRepository object
+     *
+     * @var array
+    */
+    protected $productReviewRepository;
+
+    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Customer\Repositories\CustomerRepository $customer
+     * @param  \Webkul\Product\Repositories\ProductReviewRepository $productReview
      * @return void
     */
-    public function __construct(CustomerRepository $customerRepository)
+    public function __construct(CustomerRepository $customerRepository, ProductReviewRepository $productReviewRepository)
     {
         $this->middleware('customer');
 
         $this->_config = request('_config');
 
         $this->customerRepository = $customerRepository;
+
+        $this->productReviewRepository = $productReviewRepository;
     }
 
     /**
@@ -147,7 +158,7 @@ class CustomerController extends Controller
      */
     public function reviews()
     {
-        $reviews = $this->productReview->getCustomerReview();
+        $reviews = $this->productReviewRepository->getCustomerReview();
 
         return view($this->_config['view'], compact('reviews'));
     }

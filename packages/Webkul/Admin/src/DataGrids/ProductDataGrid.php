@@ -130,6 +130,9 @@ class ProductDataGrid extends DataGrid
     public function prepareActions() {
         $this->addAction([
             'title' => 'Edit Product',
+            'condition' => function() {
+                return true;
+            },
             'method' => 'GET', // use GET request only for redirect purposes
             'route' => 'admin.catalog.products.edit',
             'icon' => 'icon pencil-lg-icon'
@@ -149,7 +152,7 @@ class ProductDataGrid extends DataGrid
     public function prepareMassActions() {
         $this->addMassAction([
             'type' => 'delete',
-            'label' => 'Delete',
+            'label' => 'Delete',            
             'action' => route('admin.catalog.products.massdelete'),
             'method' => 'DELETE'
         ]);
