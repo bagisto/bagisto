@@ -40,7 +40,7 @@ class RefundItemRepository extends Repository
         if ($orderItem->qty_shipped && $quantity > $orderItem->qty_ordered - $orderItem->qty_shipped) {
             $nonShippedQty = $orderItem->qty_ordered - $orderItem->qty_shipped;
 
-            if  (($totalShippedQtyToRefund = $quantity - $nonShippedQty) > 0) {
+            if (($totalShippedQtyToRefund = $quantity - $nonShippedQty) > 0) {
                 foreach ($orderItem->shipment_items as $shipmentItem) {
                     if (! $totalShippedQtyToRefund)
                         break;
