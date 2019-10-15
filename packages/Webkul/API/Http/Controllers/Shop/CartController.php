@@ -129,7 +129,7 @@ class CartController extends Controller
 
             Event::fire('checkout.cart.item.update.before', $itemId);
 
-            Cart::updateItem(['quantity' => $qty], $itemId);
+            Cart::updateItems(request()->all());
 
             Event::fire('checkout.cart.item.update.after', $item);
         }
