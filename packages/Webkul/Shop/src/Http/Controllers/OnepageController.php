@@ -79,7 +79,7 @@ class OnepageController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View 
+     * @return \Illuminate\View\View
     */
     public function index()
     {
@@ -101,7 +101,7 @@ class OnepageController extends Controller
     /**
      * Return order short summary
      *
-     * @return \Illuminate\View\View 
+     * @return \Illuminate\View\View
     */
     public function summary()
     {
