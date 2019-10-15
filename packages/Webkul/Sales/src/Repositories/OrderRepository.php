@@ -234,7 +234,7 @@ class OrderRepository extends Repository
         }
 
         if ($totalQtyOrdered != ($totalQtyRefunded + $totalQtyCanceled)
-            && $totalQtyOrdered == $totalQtyInvoiced + $totalQtyRefunded + $totalQtyCanceled
+            && $totalQtyOrdered == $totalQtyInvoiced + $totalQtyCanceled
             && $totalQtyOrdered == $totalQtyShipped + $totalQtyRefunded + $totalQtyCanceled)
             return true;
 
@@ -254,7 +254,7 @@ class OrderRepository extends Repository
             $totalQtyCanceled += $item->qty_canceled;
         }
 
-        return $totalQtyOrdered == $totalQtyCanceled;
+        return $totalQtyOrdered === $totalQtyCanceled;
     }
 
     /**
@@ -271,7 +271,7 @@ class OrderRepository extends Repository
             $totalQtyCanceled += $item->qty_canceled;
         }
 
-        return $totalQtyOrdered == $totalQtyRefunded + $totalQtyCanceled;
+        return $totalQtyOrdered === $totalQtyRefunded + $totalQtyCanceled;
     }
 
     /**

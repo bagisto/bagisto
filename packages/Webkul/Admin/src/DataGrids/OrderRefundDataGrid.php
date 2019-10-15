@@ -52,7 +52,7 @@ class OrderRefundDataGrid extends DataGrid
         $this->addColumn([
             'index' => 'increment_id',
             'label' => trans('admin::app.datagrid.order-id'),
-            'type' => 'number',
+            'type' => 'string',
             'searchable' => true,
             'sortable' => true,
             'filterable' => true

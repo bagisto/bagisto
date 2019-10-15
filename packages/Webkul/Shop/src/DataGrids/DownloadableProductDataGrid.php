@@ -25,6 +25,9 @@ class DownloadableProductDataGrid extends DataGrid
                 ->addSelect(DB::raw('(downloadable_link_purchased.download_bought - downloadable_link_purchased.download_used) as remaining_downloads'))
                 ->where('downloadable_link_purchased.customer_id', auth()->guard('customer')->user()->id);
 
+        $this->addFilter('status', 'downloadable_link_purchased.status');
+        $this->addFilter('created_at', 'downloadable_link_purchased.created_at');
+
         $this->setQueryBuilder($queryBuilder);
     }
 
@@ -33,7 +36,7 @@ class DownloadableProductDataGrid extends DataGrid
         $this->addColumn([
             'index' => 'increment_id',
             'label' => trans('shop::app.customer.account.downloadable_products.order-id'),
-            'type' => 'number',
+            'type' => 'string',
             'searchable' => false,
             'sortable' => true,
             'filterable' => true
