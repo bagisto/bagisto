@@ -91,7 +91,7 @@ class DownloadableProductDataGrid extends DataGrid
             'label' => trans('shop::app.customer.account.downloadable_products.remaining-downloads'),
             'type' => 'datetime',
             'searchable' => false,
-            'sortable' => false,
+            'sortable' => true,
             'filterable' => false,
             'closure' => true,
             'wrapper' => function ($value) {
