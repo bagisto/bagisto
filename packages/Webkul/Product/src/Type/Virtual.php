@@ -44,6 +44,22 @@ class Virtual extends AbstractType
     protected $showQuantityBox = true;
 
     /**
+     * Return true if this product type is saleable
+     *
+     * @return boolean
+     */
+    public function isSaleable()
+    {
+        if (! $this->product->status)
+            return false;
+
+        if ($this->haveSufficientQuantity(1))
+            return true;
+
+        return false;
+    }
+
+    /**
      * @param integer $qty
      * @return bool
      */

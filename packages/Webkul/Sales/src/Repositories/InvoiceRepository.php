@@ -134,7 +134,7 @@ class InvoiceRepository extends Repository
                         'base_discount_amount' => ( ($orderItem->base_discount_amount / $orderItem->qty_ordered) * $qty ),
                         'product_id' => $orderItem->product_id,
                         'product_type' => $orderItem->product_type,
-                        'additional' => $orderItem->additional,
+                        'additional' => $orderItem->additional
                     ]);
 
                 if ($orderItem->getTypeInstance()->isComposite()) {
@@ -160,7 +160,7 @@ class InvoiceRepository extends Repository
                                 'base_discount_amount' => 0,
                                 'product_id' => $childOrderItem->product_id,
                                 'product_type' => $childOrderItem->product_type,
-                                'additional' => $childOrderItem->additional,
+                                'additional' => $childOrderItem->additional
                             ]);
                         
                         if (! $childOrderItem->product->getTypeInstance()->isStockable() && $childOrderItem->product->getTypeInstance()->showQuantityBox()) {
