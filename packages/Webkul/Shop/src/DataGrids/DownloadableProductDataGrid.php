@@ -36,7 +36,7 @@ class DownloadableProductDataGrid extends DataGrid
         $this->addColumn([
             'index' => 'increment_id',
             'label' => trans('shop::app.customer.account.downloadable_products.order-id'),
-            'type' => 'number',
+            'type' => 'string',
             'searchable' => false,
             'sortable' => true,
             'filterable' => true
