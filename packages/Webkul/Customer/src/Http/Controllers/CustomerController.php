@@ -145,6 +145,8 @@ class CustomerController extends Controller
                 $this->customerRepository->delete($id);
 
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
+
+                return redirect()->route('customer.session.index');
             } else {
                 session()->flash('error', trans('shop::app.customer.account.address.delete.wrong-password'));
             }
