@@ -1132,7 +1132,8 @@ return [
         'create-root-failure' => 'Category with name root already exists',
         'cancel-success' => ':name canceled successfully.',
         'cancel-error' => ':name can not be canceled.',
-        'already-taken' => 'The :name has already been taken.'
+        'already-taken' => 'The :name has already been taken.',
+        'order-pending' => 'Cannot delete account because some Order(s) are pending or processing state.'
     ],
 
     'footer' => [
