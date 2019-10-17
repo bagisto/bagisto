@@ -140,7 +140,7 @@ class CustomerController extends Controller
         $customer = $this->customerRepository->findorFail($id);
 
         try {
-            if (hash::check($data['password'], $customer->password)) {
+            if (Hash::check($data['password'], $customer->password)) {
 
                 $this->customerRepository->delete($id);
 
