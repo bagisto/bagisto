@@ -240,7 +240,8 @@ return [
                 ],
                 'delete' => [
                     'success' => 'Address successfully deleted',
-                    'failure' => 'Address cannot be deleted'
+                    'failure' => 'Address cannot be deleted',
+                    'wrong-password' => 'Wrong Password !'
                 ]
             ],
 

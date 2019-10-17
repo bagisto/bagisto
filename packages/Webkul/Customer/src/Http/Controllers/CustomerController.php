@@ -135,18 +135,25 @@ class CustomerController extends Controller
     {
         $id = auth()->guard('customer')->user()->id;
 
-        $customer = $this->customer->findorFail($id);
+        $data = request()->all();
+
+        $customer = $this->customerRepository->findorFail($id);
 
         try {
-            $this->customer->delete($id);
+            if (hash::check($data['password'], $customer->password)) {
 
-            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
+                $this->customerRepository->delete($id);
+
+                session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
+            } else {
+                session()->flash('error', trans('shop::app.customer.account.address.delete.wrong-password'));
+            }
 
             return redirect()->route($this->_config['redirect']);
         } catch(\Exception $e) {
-            session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Customer']));
+        session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Customer']));
 
-            return redirect()->route($this->_config['redirect']);
+        return redirect()->route($this->_config['redirect']);
         }
     }
 
