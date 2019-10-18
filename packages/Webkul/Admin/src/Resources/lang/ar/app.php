@@ -896,6 +896,7 @@ return [
             'footer-content' => 'Footer Text',
             'locale-options' => 'Unit Options',
             'weight-unit' => 'Weight Unit',
+            'admin-page-limit' => 'العناصر الافتراضية لكل صفحة (المشرف)',
             'design' => 'Design',
             'admin-logo' => 'Admin Logo',
             'logo-image' => 'Logo Image',

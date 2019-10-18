@@ -1185,6 +1185,7 @@ return [
             'footer-toggle' => 'Toggle footer',
             'locale-options' => 'Unit Options',
             'weight-unit' => 'Weight Unit',
+            'admin-page-limit' => 'Default Items Per Page (Admin)',
             'design' => 'Design',
             'admin-logo' => 'Admin Logo',
             'logo-image' => 'Logo Image',
