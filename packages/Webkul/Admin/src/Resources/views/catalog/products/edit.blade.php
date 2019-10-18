@@ -171,6 +171,18 @@
                 toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent  | removeformat | code',
                 image_advtab: true
             });
+
+
+            $('#url_key').attr('disabled','disabled'); 
+            $('#name').bind('keyup keypress blur', function() 
+            {  
+                var productName = $(this).val()
+                productName=productName.toLowerCase();
+                productName=productName.replace(/(^\s+|[^a-zA-Z0-9 ]+|\s+$)/g,"");
+                productName=productName.replace(/\s+/g, "-");
+                $('#url_key').val(productName); 
+            });
+
         });
     </script>
 @endpush

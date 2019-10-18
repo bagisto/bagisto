@@ -135,10 +135,10 @@ class CustomerController extends Controller
     {
         $id = auth()->guard('customer')->user()->id;
 
-        $customer = $this->customer->findorFail($id);
+        $customer = $this->customerRepository->findorFail($id);
 
         try {
-            $this->customer->delete($id);
+            $this->customerRepository->delete($id);
 
             session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
 
