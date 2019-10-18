@@ -137,10 +137,19 @@ class CustomerController extends Controller
 
         $data = request()->all();
 
-        $customer = $this->customerRepository->findorFail($id);
+        $customerRepository = $this->customerRepository->findorFail($id);
+
+        $orders = $customerRepository->all_orders->whereIn('status', ['pending', 'processing'])->first();
+
+        if ( $orders ) {
+
+            session()->flash('error', trans('admin::app.response.order-pending'));
+
+            return redirect()->route($this->_config['redirect']);
+        }
 
         try {
-            if (Hash::check($data['password'], $customer->password)) {
+            if ( Hash::check($data['password'], $customerRepository->password) ) {
 
                 $this->customerRepository->delete($id);
 
@@ -153,12 +162,11 @@ class CustomerController extends Controller
 
             return redirect()->route($this->_config['redirect']);
         } catch(\Exception $e) {
-        session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Customer']));
+            session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Customer']));
 
-        return redirect()->route($this->_config['redirect']);
+            return redirect()->route($this->_config['redirect']);
         }
     }
-
 
     /**
      * Load the view for the customer account panel, showing approved reviews.
