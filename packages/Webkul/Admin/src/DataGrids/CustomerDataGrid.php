@@ -9,6 +9,7 @@ use DB;
  * CustomerDataGrid class
  *
  * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @author Vivek Sharma <viveksh047@webkul.com> @viveksh-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class CustomerDataGrid extends DataGrid
@@ -28,7 +29,8 @@ class CustomerDataGrid extends DataGrid
 
         $this->addFilter('customer_id', 'customers.id');
         $this->addFilter('full_name', DB::raw('CONCAT(customers.first_name, " ", customers.last_name)'));
-        $this->addFilter('date_of_birth', 'customers.date_of_birth');
+        $this->addFilter('phone', 'customers.phone');
+        $this->addFilter('gender', 'customers.gender');
 
         $this->setQueryBuilder($queryBuilder);
     }
