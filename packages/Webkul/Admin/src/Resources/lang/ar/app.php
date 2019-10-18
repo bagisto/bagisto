@@ -844,7 +844,8 @@ return [
         'create-root-failure' => 'الفئة مع الاسم الجذر موجود',
         'cancel-success' => ':name canceled successfully.',
         'cancel-error' => ':name can not be canceled.',
-        'already-taken' => 'The :name has already been taken.'
+        'already-taken' => 'The :name has already been taken.',
+        'order-pending' => 'لا يمكن حذف الحساب لأن بعض الطلبات (الطلبات) معلقة أو قيد المعالجة.'
     ],
 
     'footer' => [
