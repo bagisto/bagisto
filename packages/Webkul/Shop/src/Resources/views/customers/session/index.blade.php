@@ -28,7 +28,7 @@
 
                 <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
                     <label for="password" class="required">{{ __('shop::app.customer.login-form.password') }}</label>
-                    <input type="password" v-validate="'required|min:6'" class="control" id="password" name="password" data-vv-as="&quot;{{ __('admin::app.users.sessions.password') }}&quot;" value="" onblur="hidePassword()" onfocus="showPassword()"/>
+                    <input type="password" v-validate="'required|min:6'" class="control" id="password" name="password" data-vv-as="&quot;{{ __('admin::app.users.sessions.password') }}&quot;" value=""/>
                     <span class="control-error" v-if="errors.has('password')">@{{ errors.first('password') }}</span>
                 </div>
 
@@ -54,36 +54,4 @@
     </div>
 
 @stop
-@push('scripts')
-    <script>
-        //default value of password
-        password = '';
 
-        //call the showPass function
-        function setPasswordBack(){
-            showPassword();
-        }
-
-        //hide password from user inspection
-        function hidePassword(){
-            var givenValue = "";
-            var i;
-            p = document.getElementById('password');
-            password = p.value;
-            passwordLength = password.length;
-
-            for (i = 0; i < passwordLength; i++) {
-                givenValue += "*";
-            }
-
-            p.value  = givenValue;
-        }
-
-        //show the given password
-        function showPassword(){
-            p = document.getElementById('password');
-            p.type= "password";
-            p.value = password;
-        }
-    </script>
-@endpush
