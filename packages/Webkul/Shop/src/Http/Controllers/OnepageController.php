@@ -88,10 +88,10 @@ class OnepageController extends Controller
 
         $cart = Cart::getCart();
 
+        Cart::saveShippingMethod('');
+
         if (! auth()->guard('customer')->check() && $cart->haveDownloadableItems())
             return redirect()->route('customer.session.index');
-
-        //$this->nonCoupon->apply();
 
         Cart::collectTotals();
 
