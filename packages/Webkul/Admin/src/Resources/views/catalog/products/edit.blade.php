@@ -173,7 +173,6 @@
             });
 
 
-            $('#url_key').attr('disabled','disabled'); 
             $('#name').bind('keyup keypress blur', function() 
             {  
                 var productName = $(this).val()
