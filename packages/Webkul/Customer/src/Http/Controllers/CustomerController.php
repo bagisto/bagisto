@@ -142,7 +142,7 @@ class CustomerController extends Controller
 
             session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
 
-            return redirect()->route($this->_config['redirect']);
+            return redirect()->route('customer.session.index');
         } catch(\Exception $e) {
             session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Customer']));
 
