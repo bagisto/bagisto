@@ -106,6 +106,12 @@ return [
                     ]
                 ],
                 'channel_based' => true,
+            ],  [
+                'name' => 'admin_page_limit',
+                'title' => 'admin::app.admin.system.admin-page-limit',
+                'type' => 'text',
+                'validation' => 'required|numeric|max:2',
+                'channel_based' => true,
             ]
         ]
     ], [
