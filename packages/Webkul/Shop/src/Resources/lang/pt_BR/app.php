@@ -457,7 +457,8 @@ return [
             'delivery-charges' => 'Taxas de Entrega',
             'tax' => 'Imposto',
             'discount' => 'Discount',
-            'price' => 'preço'
+            'price' => 'preço',
+            'coupon-error' => 'Coupon code is required.',
         ],
 
         'success' => [

@@ -443,7 +443,8 @@ return [
             'delivery-charges' => 'رسوم التسليم',
             'tax' => 'الضرائب',
             'discount' => 'التخفيض',
-            'price' => 'السعر '
+            'price' => 'السعر ',
+            'coupon-error' => 'Coupon code is required.',
         ],
 
         'success' => [

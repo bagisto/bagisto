@@ -474,7 +474,8 @@ return [
             'coupon' => 'کوپن',
             'coupon-applied' => 'کوپن کاربردی',
             'remove-coupon' => 'کوپن را بردارید',
-            'cannot-apply-coupon' => 'کوپن قابل اعمال نیست'
+            'cannot-apply-coupon' => 'کوپن قابل اعمال نیست',
+            'coupon-error' => 'Coupon code is required.',
         ],
 
         'success' => [

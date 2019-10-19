@@ -184,7 +184,7 @@ class OnepageController extends Controller
 
         return response()->json([
             'jump_to_section' => 'review',
-            'html' => view('shop::checkout.onepage.review', compact('cart', 'rule'))->render()
+            'html' => view('shop::checkout.onepage.review', compact('cart'))->render()
         ]);
     }
 
@@ -269,13 +269,13 @@ class OnepageController extends Controller
      * @return JSON
      */
     public function applyCoupon()
-    {
+    {   
         $this->validate(request(), [
             'code' => 'string|required'
         ]);
 
         $code = request()->input('code');
-
+        
         $result = $this->coupon->apply($code);
 
         if ($result) {

@@ -54,7 +54,7 @@
                                 <input type="text" class="control" value="" v-model="coupon_code" name="code" placeholder="Enter Coupon Code" v-validate="'required'" style="width: 100%" @change="changeCoupon">
                             </div>
 
-                            <div class="control-error mb-10" v-if="error_message != null" style="color: #FF6472">* @{{ error_message }}</div>
+                            <div class="control-error mb-10" v-if="error_message != null" style="color: #FF6472">{{ __('shop::app.checkout.total.coupon-error') }}</div>
 
                             <button class="btn btn-lg btn-black" :disabled="couponChanged">{{ __('shop::app.checkout.onepage.apply-coupon') }}</button>
                         </form>

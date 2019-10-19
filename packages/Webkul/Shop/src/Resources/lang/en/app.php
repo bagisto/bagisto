@@ -510,7 +510,8 @@ return [
             'coupon' => 'Coupon',
             'coupon-applied' => 'Coupon Applied',
             'remove-coupon' => 'Remove Coupon',
-            'cannot-apply-coupon' => 'Cannot Apply Coupon'
+            'cannot-apply-coupon' => 'Cannot Apply Coupon',
+            'coupon-error' => 'Coupon code is required.',
         ],
 
         'success' => [

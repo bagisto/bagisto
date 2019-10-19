@@ -463,7 +463,8 @@ return [
             'coupon' => 'Cupón',
             'coupon-applied' => 'Cupón aplicado',
             'remove-coupon' => 'Eliminar cupón',
-            'cannot-apply-coupon' => 'No se puede aplicar cupón'
+            'cannot-apply-coupon' => 'No se puede aplicar cupón',
+            'coupon-error' => 'Coupon code is required.',
         ],
 
         'success' => [
