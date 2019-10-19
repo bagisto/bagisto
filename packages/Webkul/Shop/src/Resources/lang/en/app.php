@@ -68,7 +68,7 @@ return [
 
     'search' => [
         'no-results' => 'No Results Found',
-        'page-title' => congig('app.name') . ' - Search',
+        'page-title' => config('app.name') . ' - Search',
         'found-results' => 'Search Results Found',
         'found-result' => 'Search Result Found'
     ],
@@ -622,7 +622,7 @@ return [
             ],
 
             'verification' => [
-                'heading' => congig('app.name') . ' - Email Verification',
+                'heading' => config('app.name') . ' - Email Verification',
                 'subject' => 'Verification Mail',
                 'verify' => 'Verify Your Account',
                 'summary' => 'This is the mail to verify that the email address you entered is yours.
