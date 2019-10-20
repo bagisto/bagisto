@@ -7,6 +7,7 @@ use Webkul\User\Repositories\AdminRepository;
 use Webkul\User\Repositories\RoleRepository;
 use Webkul\User\Http\Requests\UserForm;
 use Hash;
+use Illuminate\Http\Request;
 
 /**
  * Admin user controller
@@ -158,9 +159,15 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View 
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
         $user = $this->adminRepository->findOrFail($id);
+
+        // checking is given password is same as admin password
+        if (! Hash::check($request->password, auth()->guard('admin')->user()->password)) {
+            session()->flash('error', trans('admin::app.error.401.message'));
+            return response()->json(['message' => false], 401);
+        }
 
         if ($this->adminRepository->count() == 1) {
             session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Admin']));
