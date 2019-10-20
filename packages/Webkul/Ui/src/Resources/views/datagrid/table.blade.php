@@ -707,11 +707,16 @@
 
                     doAction: function(e) {
                         var element = e.currentTarget;
-
+                        var password = null;
                         if (confirm('{{__('ui::app.datagrid.massaction.delete') }}')) {
+                            // prompting user to enter password
+                            password = prompt('Enter password');
+                            if(! password) {return}
+
                             axios.post(element.getAttribute('data-action'), {
                                 _token : element.getAttribute('data-token'),
-                                _method : element.getAttribute('data-method')
+                                _method : element.getAttribute('data-method'),
+                                password: password
                             }).then(function(response) {
                                 this.result = response;
                                 location.reload();
