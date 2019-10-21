@@ -75,7 +75,7 @@
                     </button>
                 </div>
 
-                <form method="POST" action="{{ route('customer.profile.destroy') }}">
+                <form method="POST" action="{{ route('customer.profile.destroy') }}" @submit.prevent="onSubmit">
                     @csrf
                     <modal id="deleteProfile" :is-open="modalIds.deleteProfile">
                         <h3 slot="header">{{ __('shop::app.customer.account.address.index.enter-password') }}</h3>

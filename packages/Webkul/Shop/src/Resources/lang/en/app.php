@@ -213,7 +213,8 @@ return [
                     'default' => 'Default',
                     'contact' => 'Contact',
                     'confirm-delete' =>  'Do you really want to delete this address?',
-                    'default-delete' => 'Default address cannot be changed.'
+                    'default-delete' => 'Default address cannot be changed.',
+                    'enter-password' => 'Enter Your Password.',
                 ],
 
                 'create' => [

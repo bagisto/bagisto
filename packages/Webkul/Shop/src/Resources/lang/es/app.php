@@ -200,7 +200,8 @@ return [
                     'default' => 'Por defecto',
                     'contact' => 'Contacto',
                     'confirm-delete' =>  '¿Quieres eleminar esta dirección?',
-                    'default-delete' => 'La dirección por defecto no puede ser cambiada'
+                    'default-delete' => 'La dirección por defecto no puede ser cambiada',
+                    'enter-password' => 'Enter Your Password.',
                 ],
 
                 'create' => [
@@ -227,7 +228,8 @@ return [
                 ],
                 'delete' => [
                     'success' => 'Dirección eliminada correctamente',
-                    'failure' => 'La dirección no puede ser eliminada'
+                    'failure' => 'La dirección no puede ser eliminada',
+                    'wrong-password' => 'Wrong Password !'
                 ]
             ],
 

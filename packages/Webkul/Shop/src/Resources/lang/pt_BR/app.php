@@ -196,7 +196,8 @@ return [
                     'default' => 'Padrão',
                     'contact' => 'Contato',
                     'confirm-delete' =>  'Você realmente deseja excluir este endereço?',
-                    'default-delete' => 'O endereço padrão não pode ser alterado'
+                    'default-delete' => 'O endereço padrão não pode ser alterado',
+                    'enter-password' => 'Enter Your Password.',
                 ],
 
                 'create' => [
@@ -223,7 +224,8 @@ return [
                 ],
                 'delete' => [
                     'success' => 'Endereço Excluído com sucesso',
-                    'failure' => 'Endereço não pode ser adicionado'
+                    'failure' => 'Endereço não pode ser adicionado',
+                    'wrong-password' => 'Wrong Password !'
                 ]
             ],
 
@@ -513,7 +515,7 @@ return [
             'carrier' => 'Transportadora',
             'tracking-number' => 'Código de Rastreio'
         ],
-        
+
         'forget-password' => [
             'dear' => 'Caro :name',
             'info' => 'Você está recebendo este e-mail porque recebemos uma solicitação de redefinição de senha para sua conta',
