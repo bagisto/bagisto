@@ -16,7 +16,7 @@ return [
     ],
 
     'home' => [
-        'page-title' => 'Bagisto - Home',
+        'page-title' => config('app.name') . ' - Home',
         'featured-products' => 'Produtos em Destaque',
         'new-products' => 'Novos Produtos',
         'verify-email' => 'Verifique sua Conta de E-mail',
