@@ -448,7 +448,11 @@ h5 {
             vertical-align: top;
 
             &.actions {
-
+                
+                .action {
+                    display: inline-flex;
+                }
+                
                 .icon {
                     cursor: pointer;
                     vertical-align: middle;

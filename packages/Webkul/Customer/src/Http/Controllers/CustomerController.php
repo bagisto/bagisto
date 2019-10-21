@@ -142,7 +142,6 @@ class CustomerController extends Controller
         $orders = $customerRepository->all_orders->whereIn('status', ['pending', 'processing'])->first();
 
         if ( $orders ) {
-
             session()->flash('error', trans('admin::app.response.order-pending'));
 
             return redirect()->route($this->_config['redirect']);
@@ -160,7 +159,7 @@ class CustomerController extends Controller
                 session()->flash('error', trans('shop::app.customer.account.address.delete.wrong-password'));
             }
 
-            return redirect()->route($this->_config['redirect']);
+            return redirect()->route('customer.session.index');
         } catch(\Exception $e) {
             session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Customer']));
 

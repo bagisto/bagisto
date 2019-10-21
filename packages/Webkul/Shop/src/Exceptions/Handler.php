@@ -61,7 +61,7 @@ class Handler extends ExceptionHandler
 
     private function isSopUri()
     {
-        return strpos($_SERVER['REQUEST_URI'], 'shop') !== false ? true : false;
+        return strpos(\Illuminate\Support\Facades\Request::path(), 'shop') !== false ? true : false;
     }
 
     private function response($path, $statusCode)

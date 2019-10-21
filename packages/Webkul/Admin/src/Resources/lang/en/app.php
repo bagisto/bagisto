@@ -161,6 +161,8 @@ return [
         'hostname' => 'Hostname',
         'email' => 'Email',
         'group' => 'Group',
+        'phone' => 'Phone',
+        'gender' => 'Gender',
         'title' => 'Title',
         'layout' => 'Layout',
         'url-key' => 'URL Key',
@@ -849,6 +851,35 @@ return [
             'yes' => 'Yes'
         ],
 
+        'addresses' => [
+            'title' => ':customer_name\'s Addresses List',
+            'create-title' => 'Create Customer\'s Address',
+            'edit-title' => 'Update Customer\'s Address',
+            'title-orders' => ':customer_name\'s Orders List',
+            'address-list' => 'Address\'s List',
+            'order-list' => 'Order\'s List',
+            'address-id' => 'Address ID',
+            'address-1' => 'Address 1',
+            'city' => 'City',
+            'state-name' => 'State',
+            'country-name' => 'Country',
+            'postcode' => 'Post Code',
+            'default-address' => 'Default Address',
+            'yes' => 'Yes',
+            'not-approved' => 'Not Approved',
+            'no' => 'No',
+            'dash' => '-',
+            'delete' => 'Delete',
+            'create-btn-title' => 'Add Address',
+            'save-btn-title' => 'Save Address',
+            'general' => 'General',
+            'success-create' => 'Success: Customer address created successfully.',
+            'success-update' => 'Success: Customer address updated successfully.',
+            'success-delete' => 'Success: Customer address deleted successfully.',
+            'success-mass-delete' => 'Success: selected addresses deleted successfully.',
+            'error-create' => 'Error: Customer address not created.',
+        ],
+
         'note' => [
             'title' => 'Add Note',
             'save-note' => 'Save Note',
@@ -1132,7 +1163,8 @@ return [
         'create-root-failure' => 'Category with name root already exists',
         'cancel-success' => ':name canceled successfully.',
         'cancel-error' => ':name can not be canceled.',
-        'already-taken' => 'The :name has already been taken.'
+        'already-taken' => 'The :name has already been taken.',
+        'order-pending' => 'Cannot delete account because some Order(s) are pending or processing state.'
     ],
 
     'footer' => [
@@ -1185,6 +1217,7 @@ return [
             'footer-toggle' => 'Toggle footer',
             'locale-options' => 'Unit Options',
             'weight-unit' => 'Weight Unit',
+            'admin-page-limit' => 'Default Items Per Page (Admin)',
             'design' => 'Design',
             'admin-logo' => 'Admin Logo',
             'logo-image' => 'Logo Image',

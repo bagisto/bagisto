@@ -142,6 +142,8 @@ abstract class DataGrid
     public function __construct()
     {
         $this->invoker = $this;
+
+        $this->itemsPerPage = core()->getConfigData('general.general.locale_options.admin_page_limit') ?: $this->itemsPerPage;
     }
 
     /**
