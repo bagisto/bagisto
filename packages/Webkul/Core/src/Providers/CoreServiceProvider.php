@@ -36,6 +36,8 @@ class CoreServiceProvider extends ServiceProvider
         ]);
 
         SliderProxy::observe(SliderObserver::class);
+
+        config(['translatable.locales' => core()->getAllLocales()->pluck('code')->toArray()]);
     }
 
     /**
