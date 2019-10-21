@@ -495,7 +495,8 @@ return [
             'paypal-desc' => 'Paypal Standard',
             'free-desc' => 'This is a free shipping',
             'flat-desc' => 'This is a flat rate',
-            'password' => 'Password'
+            'password' => 'Password',
+            'login-exist-message' => 'You already have an account with us, Sign in or continue as guest.'
         ],
 
         'total' => [

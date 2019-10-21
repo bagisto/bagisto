@@ -76,6 +76,23 @@
             @endauth
         </div>
 
+        <div class="control-group" :class="[errors.has('address-form.billing[email]') ? 'has-error' : '']">
+            <label for="billing[email]" class="required">
+                {{ __('shop::app.checkout.onepage.email') }}
+            </label>
+
+            <input type="text" v-validate="'required|email'" class="control" id="billing[email]" name="billing[email]" v-model="address.billing.email" data-vv-as="&quot;{{ __('shop::app.checkout.onepage.email') }}&quot;"/>
+
+            <span class="control-error" v-if="errors.has('address-form.billing[email]')">
+                @{{ errors.first('address-form.billing[email]') }}
+            </span>
+        </div>
+
+        {{--  for customer login checkout   --}}
+        @if (! auth()->guard('customer')->check())
+            @include('shop::checkout.onepage.customer-checkout')
+        @endif
+
         <div class="control-group" :class="[errors.has('address-form.billing[first_name]') ? 'has-error' : '']">
             <label for="billing[first_name]" class="required">
                 {{ __('shop::app.checkout.onepage.first-name') }}
@@ -99,23 +116,6 @@
                 @{{ errors.first('address-form.billing[last_name]') }}
             </span>
         </div>
-
-        <div class="control-group" :class="[errors.has('address-form.billing[email]') ? 'has-error' : '']">
-            <label for="billing[email]" class="required">
-                {{ __('shop::app.checkout.onepage.email') }}
-            </label>
-
-            <input type="text" v-validate="'required|email'" class="control" id="billing[email]" name="billing[email]" v-model="address.billing.email" data-vv-as="&quot;{{ __('shop::app.checkout.onepage.email') }}&quot;"/>
-
-            <span class="control-error" v-if="errors.has('address-form.billing[email]')">
-                @{{ errors.first('address-form.billing[email]') }}
-            </span>
-        </div>
-
-        {{--  for customer login checkout   --}}
-        @if (! auth()->guard('customer')->check())
-            @include('shop::checkout.onepage.customer-checkout')
-        @endif
 
         <div class="control-group" :class="[errors.has('address-form.billing[address1][]') ? 'has-error' : '']">
             <label for="billing_address_0" class="required">
@@ -480,7 +480,10 @@
                         if (data == true) {
                             $("#password").show();
                             $('#login-and-forgot-btn').show();
-                        }
+                        } else {
+                            $("#password").hide();
+                            $('#login-and-forgot-btn').hide();
+                            }
                     }
                 });
             });

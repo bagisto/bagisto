@@ -166,7 +166,7 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
         Route::get('/resend/verification/{email}', 'Webkul\Customer\Http\Controllers\RegistrationController@resendVerificationEmail')->name('customer.resend.verification-email');
 
         // for customer login checkout
-        Route::post('/custome/exist', 'Webkul\Shop\Http\Controllers\OnepageController@checkExistCustomer')->name('customer.checkout.exist');
+        Route::post('/customer/exist', 'Webkul\Shop\Http\Controllers\OnepageController@checkExistCustomer')->name('customer.checkout.exist');
 
         // Auth Routes
         Route::group(['middleware' => ['customer']], function () {

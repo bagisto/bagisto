@@ -7,11 +7,13 @@
 
     <span class="control-error" v-if="errors.has('address-form.password')">
         @{{ errors.first('address-form.password') }}
-    </span>
+    </span> <br>
+    <span>{{ __('shop::app.checkout.onepage.login-exist-message') }}</span>
 </div>
 
-<div class="control-group" id="login-and-forgot-btn" style="display:inline-block;">
-    <div class="forgot-password-link">
+
+<div class="control-group" id="login-and-forgot-btn">
+    <div class="forgot-password-link"  style="float: right;margin-right: 503px; margin-top: 11px;">
         <a href="{{ route('customer.forgot-password.create') }}">{{ __('shop::app.customer.login-form.forgot_pass') }}</a>
         <div class="mt-10">
             @if (Cookie::has('enable-resend'))
