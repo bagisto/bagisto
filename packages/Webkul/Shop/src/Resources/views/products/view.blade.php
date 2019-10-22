@@ -79,7 +79,7 @@
                             </div>
                         </accordian>
 
-                        {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
+                        {!! view_render_event('bagisto.shop.products.view.description.after', ['product' => $product]) !!}
 
                         @include ('shop::products.view.attributes')
 
