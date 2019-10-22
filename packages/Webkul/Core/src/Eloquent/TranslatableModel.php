@@ -5,10 +5,16 @@ namespace Webkul\Core\Eloquent;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
 use Webkul\Core\Models\Locale;
+use Webkul\Core\Helpers\Locales;
 
 class TranslatableModel extends Model
 {
     use Translatable;
+
+    protected function getLocalesHelper(): Locales
+    {
+        return app(Locales::class);
+    }
 
     /**
      * @param string $key
