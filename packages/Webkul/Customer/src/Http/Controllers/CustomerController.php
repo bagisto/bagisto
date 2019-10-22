@@ -135,6 +135,8 @@ class CustomerController extends Controller
     {
         $id = auth()->guard('customer')->user()->id;
 
+        $data = request()->all();
+
         $customerRepository = $this->customerRepository->findorFail($id);
 
         $orders = $customerRepository->all_orders->whereIn('status', ['pending', 'processing'])->first();
@@ -146,9 +148,16 @@ class CustomerController extends Controller
         }
 
         try {
-            $this->customerRepository->delete($id);
+            if ( Hash::check($data['password'], $customerRepository->password) ) {
 
-            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
+                $this->customerRepository->delete($id);
+
+                session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
+
+                return redirect()->route('customer.session.index');
+            } else {
+                session()->flash('error', trans('shop::app.customer.account.address.delete.wrong-password'));
+            }
 
             return redirect()->route('customer.session.index');
         } catch(\Exception $e) {
@@ -157,7 +166,6 @@ class CustomerController extends Controller
             return redirect()->route($this->_config['redirect']);
         }
     }
-
 
     /**
      * Load the view for the customer account panel, showing approved reviews.
