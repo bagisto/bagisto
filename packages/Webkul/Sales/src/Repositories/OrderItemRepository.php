@@ -108,7 +108,7 @@ class OrderItemRepository extends Repository
     {
         $orderItems = [];
 
-        if ($orderItem->product->getTypeInstance()->isComposite()) {
+        if ($orderItem->getTypeInstance()->isComposite()) {
             foreach ($orderItem->children as $child) {
                 $orderItems[] = $child;
             }
