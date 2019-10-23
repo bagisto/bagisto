@@ -28,27 +28,27 @@ class CountryStateController extends Controller
     protected $countryRepository;
 
     /**
-     * StateRepository object
+     * CountryStateRepository object
      *
      * @var array
      */
-    protected $stateRepository;
+    protected $countryStateRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\CountryRepository $countryRepository
-     * @param  \Webkul\Core\Repositories\StateRepository   $stateRepository
+     * @param  \Webkul\Core\Repositories\CountryRepository      $countryRepository
+     * @param  \Webkul\Core\Repositories\CountryStateRepository $countryStateRepository
      * @return void
      */
     public function __construct(
         CountryRepository $countryRepository,
-        StateRepository $stateRepository
+        CountryStateRepository $countryStateRepository
     )
     {
         $this->countryRepository = $countryRepository;
 
-        $this->stateRepository = $stateRepository;
+        $this->countryStateRepository = $countryStateRepository;
 
         $this->_config = request('_config');
     }
@@ -62,7 +62,7 @@ class CountryStateController extends Controller
     {
         $countries = $this->countryRepository->all();
 
-        $states = $this->stateRepository->all();
+        $states = $this->countryStateRepository->all();
 
         $nestedArray = [];
 
@@ -81,7 +81,7 @@ class CountryStateController extends Controller
     {
         $countries = $this->countryRepository->all();
         
-        $states = $this->stateRepository->all();
+        $states = $this->countryStateRepository->all();
 
         $nestedArray = [];
 

@@ -293,8 +293,6 @@ class Bundle extends AbstractType
     {
         $prices = $this->getProductPrices();
 
-        // dd($prices);
-
         $priceHtml = '<div class="price-from">';
 
         if ($prices['from']['regular_price']['price'] != $prices['from']['final_price']['price']) {
