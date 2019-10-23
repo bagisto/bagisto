@@ -38,12 +38,12 @@ class CountryStateController extends Controller
      * Create a new controller instance.
      *
      * @param  \Webkul\Core\Repositories\CountryRepository $countryRepository
-     * @param  \Webkul\Core\Repositories\StateRepository   $stateRepository
+     * @param  \Webkul\Core\Repositories\StateRepository   $CountryStateRepository
      * @return void
      */
     public function __construct(
         CountryRepository $countryRepository,
-        StateRepository $stateRepository
+        CountryStateRepository $stateRepository
     )
     {
         $this->countryRepository = $countryRepository;
@@ -80,7 +80,7 @@ class CountryStateController extends Controller
     public function getStates($country)
     {
         $countries = $this->countryRepository->all();
-        
+
         $states = $this->stateRepository->all();
 
         $nestedArray = [];
