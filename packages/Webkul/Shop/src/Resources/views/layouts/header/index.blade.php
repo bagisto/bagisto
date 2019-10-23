@@ -29,7 +29,7 @@
         </div>
 
         <?php
-            $query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
+            $query = parse_url(\Illuminate\Support\Facades\Request::path(), PHP_URL_QUERY);
             $searchTerm = explode("&", $query);
 
             foreach($searchTerm as $term){

@@ -60,7 +60,7 @@ return [
         'subscribed' => 'شما هم اکنون در ایمیل های اشتراک مشترک شده اید',
         'not-subscribed' => 'شما نمی توانید به عضویت در ایمیل مشترک شوید ، پس از مدتی دوباره امتحان کنید',
         'already' => 'شما قبلاً در لیست اشتراک های ما مشترک شده اید',
-        'unsubscribed' => 'شما از نامه های اشتراک Bagisto مشترک نیستید',
+        'unsubscribed' => 'شما از نامه های اشتراک مشترکاً مشترک نیستید',
         'already-unsub' => 'شما قبلاً لغو اشتراک شده اید',
         'not-subscribed' => 'خطا! نامه ارسال نمی شود در حال حاضر ، لطفا بعدا دوباره امتحان کنید'
     ],
@@ -201,7 +201,8 @@ return [
                     'default' => 'پیش فرض',
                     'contact' => 'تماس',
                     'confirm-delete' =>  'آیا واقعاً می خواهید این آدرس را حذف کنید؟',
-                    'default-delete' => 'آدرس پیش فرض تغییر نمی کند'
+                    'default-delete' => 'آدرس پیش فرض تغییر نمی کند',
+                    'enter-password' => 'Enter Your Password.',
                 ],
 
                 'create' => [
@@ -228,7 +229,8 @@ return [
                 ],
                 'delete' => [
                     'success' => 'آدرس با موفقیت حذف شد',
-                    'failure' => 'آدرس حذف نمی شود'
+                    'failure' => 'آدرس حذف نمی شود',
+                    'wrong-password' => 'Wrong Password !'
                 ]
             ],
 
@@ -535,7 +537,7 @@ return [
             'adjustment-refund' => 'Adjustment Refund',
             'adjustment-fee' => 'Adjustment Fee'
         ],
-        
+
         'forget-password' => [
             'dear' => 'عزیز :name',
             'info' => 'شما این ایمیل را دریافت می کنید زیرا ما درخواست بازنشانی رمزعبور را برای حساب شما دریافت کردیم',
