@@ -29,7 +29,7 @@ class RefundItemRepository extends Repository
      * Returns qty to product inventory after order refund
      *
      * @param OrdreItem $orderItem
-     * @param integer    $quantity
+     * @param integer   $quantity
      * @return void
      */
     public function returnQtyToProductInventory($orderItem, $quantity)
@@ -41,16 +41,27 @@ class RefundItemRepository extends Repository
             $nonShippedQty = $orderItem->qty_ordered - $orderItem->qty_shipped;
 
             if (($totalShippedQtyToRefund = $quantity - $nonShippedQty) > 0) {
-                foreach ($orderItem->shipment_items as $shipmentItem) {
+                $shipmentItems = $orderItem->parent ? $orderItem->parent->shipment_items : $orderItem->shipment_items;
+
+                foreach ($shipmentItems as $shipmentItem) {
                     if (! $totalShippedQtyToRefund)
                         break;
 
                     if (! $shipmentItem->shipment->inventory_source_id)
                         continue;
 
-                    $shippedQtyToRefund = $totalShippedQtyToRefund > $shipmentItem->qty ? $shipmentItem->qty : $totalShippedQtyToRefund;
 
-                    $totalShippedQtyToRefund = $totalShippedQtyToRefund > $shipmentItem->qty ? $totalShippedQtyToRefund - $shipmentItem->qty : 0;
+                    if ($orderItem->parent) {
+                        $shippedQty = $orderItem->qty_ordered
+                                ? ($orderItem->qty_ordered / $orderItem->parent->qty_ordered) * $shipmentItem->qty
+                                : $orderItem->parent->qty_ordered;
+                    } else {
+                        $shippedQty = $shipmentItem->qty;
+                    }
+                    
+                    $shippedQtyToRefund = $totalShippedQtyToRefund > $shippedQty ? $shippedQty : $totalShippedQtyToRefund;
+
+                    $totalShippedQtyToRefund = $totalShippedQtyToRefund > $shippedQty ? $totalShippedQtyToRefund - $shippedQty : 0;
 
                     $inventory = $product->inventories()
                             // ->where('vendor_id', $data['vendor_id'])

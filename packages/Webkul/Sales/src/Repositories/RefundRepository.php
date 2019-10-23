@@ -144,7 +144,7 @@ class RefundRepository extends Repository
                     foreach ($orderItem->children as $childOrderItem) {
                         $finalQty = $childOrderItem->qty_ordered
                                 ? ($childOrderItem->qty_ordered / $orderItem->qty_ordered) * $qty
-                                : $childOrderItem->qty_ordered;
+                                : $orderItem->qty_ordered;
 
                         $refundItem->child = $this->refundItemRepository->create([
                                 'refund_id' => $refund->id,
