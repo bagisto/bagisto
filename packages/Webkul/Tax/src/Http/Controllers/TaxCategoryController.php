@@ -76,8 +76,8 @@ class TaxCategoryController extends Controller
 
         $this->validate(request(), [
             'channel_id' => 'required|numeric',
-            'code' => 'required|string|unique:tax_categories,id',
-            'name' => 'required|string|unique:tax_categories,name',
+            'code' => 'required|string|unique:tax_categories,code',
+            'name' => 'required|string',
             'description' => 'required|string',
             'taxrates' => 'array|required'
         ]);
@@ -119,8 +119,8 @@ class TaxCategoryController extends Controller
     {
         $this->validate(request(), [
             'channel_id' => 'required|numeric',
-            'code' => 'required|string|unique:tax_categories,code,'.$id,
-            'name' => 'required|string|unique:tax_categories,name,'.$id,
+            'code' => 'required|string|unique:tax_categories,code,' . $id,
+            'name' => 'required|string',
             'description' => 'required|string',
             'taxrates' => 'array|required'
         ]);
