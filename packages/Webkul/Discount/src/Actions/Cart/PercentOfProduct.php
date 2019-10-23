@@ -2,7 +2,7 @@
 
 namespace Webkul\Discount\Actions\Cart;
 
-use Webkul\Discount\Actions\Action;
+use Webkul\Discount\Actions\Cart\Action;
 
 class PercentOfProduct extends Action
 {
@@ -15,51 +15,49 @@ class PercentOfProduct extends Action
      */
     public function calculate($rule)
     {
+         /**
+         * Setting the rule getting applied
+         */
+        $this->rule = $rule;
+
         $impact = collect();
 
         $totalDiscount = 0;
 
-        $eligibleItems = $this->getEligibleItems($rule);
+        $applicability = $this->checkApplicability();
 
-        $apply = function () use($rule, $eligibleItems) {
-            if ($rule->action_type == 'percent_of_product') {
-                return true;
-            } else {
-                if ($rule->action_type == 'whole_cart_to_percent' && $rule->uses_attribute_condition) {
-                    $matchIDs = explode(',', $rule->product_ids);
-
-                    foreach ($matchIDs as $matchID) {
-                        foreach ($eligibleItems as $item) {
-                            if (($item->child ? $item->child->product_id : $item->product_id) == $matchID) {
-                                return true;
-                            }
-                        }
-                    }
-
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-        };
-
-        if ($apply()) {
-            if ($rule->action_type == 'whole_cart_to_percent') {
+        if ($applicability) {
+            if ($this->rule->action_type == 'whole_cart_to_percent') {
                 $eligibleItems = \Cart::getCart()->items;
             }
 
+            $cart = \Cart::getCart();
+
+            $eligibleItems = $cart->items;
+
             foreach ($eligibleItems as $item) {
+                $report = array();
+
+                $report['item_id'] = $item->id;
+                $report['child_items'] = collect();
+
                 $itemPrice = $item->base_price;
 
                 $itemQuantity = $item->quantity;
 
-                $discQuantity = $rule->disc_quantity;
+                $discQuantity = $this->rule->disc_quantity;
 
                 $discQuantity = $itemQuantity <= $discQuantity ? $itemQuantity : $discQuantity;
 
-                $report = array();
+                if ($this->rule->disc_amount > 100) {
+                    $discount_amount = 100;
+                } else {
+                    $discount_amount = $this->rule->disc_amount;
+                }
 
-                $report['item_id'] = $item->id;
+                $discount = $itemPrice * ($discount_amount / 100) * $discQuantity;
+
+                $discount = $discount <= $itemPrice * $discQuantity ? $discount : $itemPrice * $discQuantity;
 
                 if ($item->product->getTypeInstance()->isComposite()) {
                     $isQtyZero = true;
@@ -71,16 +69,18 @@ class PercentOfProduct extends Action
                     }
 
                     if ($isQtyZero) {
+                        // case for configurable products
                         $report['product_id'] = $item->children->first()->product_id;
-
-                        $report['child_items'] = collect();
                     } else {
+                        // composites other than configurable
                         $report['product_id'] = $item->product_id;
 
-                        $report['child_items'] = collect();
-
                         foreach ($item->children as $children) {
-                            $children->discount = $children->base_total * ($rule->disc_amount / 100);
+                            $childBaseTotal = $children->base_total;
+
+                            $itemDiscount = $childBaseTotal / (\Cart::getCart()->base_sub_total / 100);
+
+                            $children->discount = ($itemDiscount / 100) * ($cart->base_sub_total * ($this->rule->disc_amount / 100));
 
                             $children->discount = $children->base_total > $children->discount ? $children->discount : $children->base_total;
 
@@ -89,19 +89,7 @@ class PercentOfProduct extends Action
                     }
                 } else {
                     $report['product_id'] = $item->product_id;
-
-                    $report['child_items'] = collect();
                 }
-
-                if ($rule->disc_amount > 100) {
-                    $discount_amount = 100;
-                } else {
-                    $discount_amount = $rule->disc_amount;
-                }
-
-                $discount = $itemPrice * ($discount_amount / 100) * $discQuantity;
-
-                $discount = $discount <= $itemPrice * $discQuantity ? $discount : $itemPrice * $discQuantity;
 
                 $report['discount'] = $discount;
 

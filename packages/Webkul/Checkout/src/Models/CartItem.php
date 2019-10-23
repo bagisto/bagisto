@@ -57,7 +57,7 @@ class CartItem extends Model implements CartItemContract
     }
 
     /**
-     * Get the children items.
+     * Get the item childrens.
      */
     public function children()
     {
