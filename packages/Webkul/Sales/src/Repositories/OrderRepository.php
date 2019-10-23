@@ -154,10 +154,8 @@ class OrderRepository extends Repository
             }
     
             foreach ($orderItems as $orderItem) {
-                if (! $orderItem->product)
-                    continue;
-
-                $this->orderItemRepository->returnQtyToProductInventory($orderItem);
+                if ($orderItem->product)
+                    $this->orderItemRepository->returnQtyToProductInventory($orderItem);
     
                 if ($orderItem->qty_ordered) {
                     $orderItem->qty_canceled += $orderItem->qty_to_cancel;
