@@ -352,4 +352,22 @@ class OnepageController extends Controller
        }
        return 'false';
     }
+
+    //login for checkout
+    public function loginForCheckout()
+    {
+        $this->validate(request(), [
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        if (! auth()->guard('customer')->attempt(request(['email', 'password']))) {
+            return response()->json(['error' => trans('shop::app.customer.login-form.invalid-creds')]);
+        }
+
+        //Event passed to prepare cart after login
+        Cart::mergeCart();
+
+        return response()->json(['success' => 'Login successfully']);
+    }
 }

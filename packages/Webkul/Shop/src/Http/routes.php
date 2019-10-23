@@ -168,6 +168,9 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
         // for customer login checkout
         Route::post('/customer/exist', 'Webkul\Shop\Http\Controllers\OnepageController@checkExistCustomer')->name('customer.checkout.exist');
 
+        // for customer login checkout
+        Route::post('/customer/checkout/login', 'Webkul\Shop\Http\Controllers\OnepageController@loginForCheckout')->name('customer.checkout.login');
+
         // Auth Routes
         Route::group(['middleware' => ['customer']], function () {
 

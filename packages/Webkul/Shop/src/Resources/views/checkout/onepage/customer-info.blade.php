@@ -456,6 +456,7 @@
 
 @push('scripts')
     <script>
+
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
         $(document).ready(function() {
@@ -489,47 +490,43 @@
             });
         });
 
+        $(document).ready(function() {
+            $('.btn-login').click(function(e) {
+                var email = $("[name='billing[email]']").val();
+                var password = $("[name='password']").val();
+                event.preventDefault();
+                $.ajax({
 
-            $(document).ready(function() {
-                $('.btn-login').click(function(e) {
-                    var email = $("[name='billing[email]']").val();
-                    var password = $("[name='password']").val();
-                    event.preventDefault();
-                    $.ajax({
+                    /* the route pointing to the post function */
+                    url: '{{ route('customer.checkout.login') }}',
+                    type: 'POST',
 
-                        /* the route pointing to the post function */
-                        url: '{{ url('/api/customer/login') }}',
-                        type: 'POST',
-
-                        /* send the csrf-token and the input to the controller with data */
-                        data: {'_token': CSRF_TOKEN,
-                                'email': email,
-                                'password': password
-                            },
-                        dataType: 'JSON',
-
-                        /* remind that 'data' is the response of the OnePageController */
-                        success: function (response) {
-
-                            if (response.data.email != '') {
-                                window.location.href = "{{ route('shop.checkout.onepage.index') }}";
-                            }
+                    /* send the csrf-token and the input to the controller with data */
+                    data: {'_token': CSRF_TOKEN,
+                            'email': email,
+                            'password': password
                         },
+                    dataType: 'JSON',
 
-                        error: function (textStatus, err) {
+                    /* remind that 'data' is the response of the OnePageController */
+                    success: function (response) {
 
-                            var appendData =  '<div class="alert alert-error"><span class="icon white-cross-sm-icon"></span><p>Please check your credentials and try again.</p></div>';
+                        if (response.success) {
+                            window.location.href = "{{ route('shop.checkout.onepage.index') }}";
+                        } else {
+                            var appendData =  '<div class="alert alert-error"><span class="icon white-cross-sm-icon"></span><p>'+response.error+'</p></div>';
                             $('.alert-wrapper').html('');
                             $('.alert-wrapper').append(appendData);
 
                             setTimeout(function () {
                                 $('.alert-error').hide();
                             }, 5000);
-                            Success = false;//doesnt goes here
+                            Success = false;
                         }
-                    });
+                    },
                 });
             });
+        });
     </script>
 
 @endpush
