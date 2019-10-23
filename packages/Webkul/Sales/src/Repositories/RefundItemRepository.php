@@ -73,6 +73,15 @@ class RefundItemRepository extends Repository
 
                 $quantity -= $totalShippedQtyToRefund;
             }
+        } elseif ($orderItem->getTypeInstance()->showQuantityBox()) {
+            $inventory = $orderItem->product->inventories()
+                    // ->where('vendor_id', $data['vendor_id'])
+                    ->whereIn('inventory_source_id', $orderItem->order->channel->inventory_sources()->pluck('id'))
+                    ->orderBy('qty', 'desc')
+                    ->first();
+
+            if ($inventory)
+                $inventory->update(['qty' => $inventory->qty + $quantity]);
         }
 
         if ($quantity) {
