@@ -166,13 +166,15 @@ class RefundRepository extends Repository
                                 'additional' => $childOrderItem->additional
                             ]);
                         
-                        $this->refundItemRepository->returnQtyToProductInventory($childOrderItem, $finalQty);
+                        if ($childOrderItem->getTypeInstance()->isStockable() || $childOrderItem->getTypeInstance()->showQuantityBox())
+                            $this->refundItemRepository->returnQtyToProductInventory($childOrderItem, $finalQty);
 
                         $this->orderItemRepository->collectTotals($childOrderItem);
                     }
 
                 } else {
-                    $this->refundItemRepository->returnQtyToProductInventory($orderItem, $qty);
+                    if ($orderItem->getTypeInstance()->isStockable() || $orderItem->getTypeInstance()->showQuantityBox())
+                        $this->refundItemRepository->returnQtyToProductInventory($orderItem, $qty);
                 }
 
                 $this->orderItemRepository->collectTotals($orderItem);
