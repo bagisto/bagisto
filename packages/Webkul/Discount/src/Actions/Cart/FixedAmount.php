@@ -20,9 +20,9 @@ class FixedAmount extends Action
         $applicability = $this->checkApplicability();
 
         if ($applicability) {
-            // if ($rule->action_type == 'whole_cart_to_fixed') {
-            //     $eligibleItems = \Cart::getCart()->items;
-            // }
+            if ($rule->action_type == 'whole_cart_to_fixed') {
+                $eligibleItems = \Cart::getCart()->items;
+            }
 
             $eligibleItems = \Cart::getCart()->items;
 
