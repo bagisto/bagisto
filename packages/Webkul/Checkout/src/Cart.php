@@ -158,7 +158,11 @@ class Cart {
                 if (! $cartItem) {
                     $cartItem = $this->cartItemRepository->create(array_merge($cartProduct, ['cart_id' => $cart->id]));
                 } else {
-                    $cartItem = $this->cartItemRepository->update($cartProduct, $cartItem->id);
+                    if (isset($cartProduct['parent_id']) && $cartItem->parent_id != $parentCartItem->id) {
+                        $cartItem = $this->cartItemRepository->create(array_merge($cartProduct, ['cart_id' => $cart->id]));
+                    } else {
+                        $cartItem = $this->cartItemRepository->update($cartProduct, $cartItem->id);
+                    }
                 }
 
                 if (! $parentCartItem)
@@ -261,7 +265,7 @@ class Cart {
     /**
      * Get cart item by product
      *
-     * @param array   $data
+     * @param array $data
      * @return CartItem|void
      */
     public function getItemByProduct($data)
@@ -269,8 +273,14 @@ class Cart {
         $items = $this->getCart()->all_items;
 
         foreach ($items as $item) {
-            if ($item->product->getTypeInstance()->compareOptions($item->additional, $data['additional']))
-                return $item;
+            if ($item->product->getTypeInstance()->compareOptions($item->additional, $data['additional'])) {
+                if (isset($data['additional']['parent_id'])) {
+                    if ($item->parent->product->getTypeInstance()->compareOptions($item->parent->additional, request()->all()))
+                        return $item;
+                } else {
+                    return $item;
+                }
+            }
         }
     }
 
