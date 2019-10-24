@@ -158,7 +158,7 @@ class WishlistController extends Controller
         if (! $wishlistItem)
             abort(404);
 
-        // try {
+        try {
             $result = Cart::moveToCart($wishlistItem);
 
             if ($result) {
@@ -170,11 +170,11 @@ class WishlistController extends Controller
             }
 
             return redirect()->back();
-        // } catch (\Exception $e) {
-        //     session()->flash('warning', $e->getMessage());
+        } catch (\Exception $e) {
+            session()->flash('warning', $e->getMessage());
 
-        //     return redirect()->route('shop.products.index', ['slug' => $wishlistItem->product->url_key]);
-        // }
+            return redirect()->route('shop.products.index', ['slug' => $wishlistItem->product->url_key]);
+        }
     }
 
     /**
