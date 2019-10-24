@@ -305,7 +305,7 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
     });
     //customer routes end here
 
-    Route::get('pages/{slug}', 'Webkul\CMS\Http\Controllers\Shop\PagePresenterController@presenter')->name('shop.cms.page');
+    Route::get('page/{slug}', 'Webkul\CMS\Http\Controllers\Shop\PagePresenterController@presenter')->name('shop.cms.page');
 
     Route::fallback('Webkul\Shop\Http\Controllers\HomeController@notFound');
 });
