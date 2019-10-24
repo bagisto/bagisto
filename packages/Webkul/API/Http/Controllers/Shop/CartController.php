@@ -109,8 +109,9 @@ class CartController extends Controller
                 ], 400);
         }
 
+        if ($customer = auth()->guard('customer')->user())
         $this->wishlistRepository->deleteWhere(['product_id' => $id]);
-        
+
         Event::fire('checkout.cart.item.add.after', $result);
 
         Cart::collectTotals();
