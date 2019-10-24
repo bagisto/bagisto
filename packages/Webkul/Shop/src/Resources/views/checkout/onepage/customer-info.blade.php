@@ -43,7 +43,7 @@
                     </ul>
                 </div>
             </div>
-
+            <div id="message"></div>
             <div class="control-group" :class="[errors.has('address-form.billing[address_id]') ? 'has-error' : '']">
                 <span class="control-error" v-if="errors.has('address-form.billing[address_id]')">
                     @{{ errors.first('address-form.billing[address_id]') }}
@@ -67,12 +67,6 @@
         <div class="form-header">
             <h1>{{ __('shop::app.checkout.onepage.billing-address') }}</h1>
 
-            @guest('customer')
-                <a class="btn btn-lg btn-primary" href="{{ route('customer.session.index') }}">
-                    {{ __('shop::app.checkout.onepage.sign-in') }}
-                </a>
-            @endguest
-
             @auth('customer')
                 @if(count(auth('customer')->user()->addresses))
                     <a class="btn btn-lg btn-primary" @click = backToSavedBillingAddress()>
@@ -81,6 +75,23 @@
                 @endif
             @endauth
         </div>
+
+        <div class="control-group" :class="[errors.has('address-form.billing[email]') ? 'has-error' : '']">
+            <label for="billing[email]" class="required">
+                {{ __('shop::app.checkout.onepage.email') }}
+            </label>
+
+            <input type="text" v-validate="'required|email'" class="control" id="billing[email]" name="billing[email]" v-model="address.billing.email" data-vv-as="&quot;{{ __('shop::app.checkout.onepage.email') }}&quot;"/>
+
+            <span class="control-error" v-if="errors.has('address-form.billing[email]')">
+                @{{ errors.first('address-form.billing[email]') }}
+            </span>
+        </div>
+
+        {{--  for customer login checkout   --}}
+        @if (! auth()->guard('customer')->check())
+            @include('shop::checkout.onepage.customer-checkout')
+        @endif
 
         <div class="control-group" :class="[errors.has('address-form.billing[first_name]') ? 'has-error' : '']">
             <label for="billing[first_name]" class="required">
@@ -103,18 +114,6 @@
 
             <span class="control-error" v-if="errors.has('address-form.billing[last_name]')">
                 @{{ errors.first('address-form.billing[last_name]') }}
-            </span>
-        </div>
-
-        <div class="control-group" :class="[errors.has('address-form.billing[email]') ? 'has-error' : '']">
-            <label for="billing[email]" class="required">
-                {{ __('shop::app.checkout.onepage.email') }}
-            </label>
-
-            <input type="text" v-validate="'required|email'" class="control" id="billing[email]" name="billing[email]" v-model="address.billing.email" data-vv-as="&quot;{{ __('shop::app.checkout.onepage.email') }}&quot;"/>
-
-            <span class="control-error" v-if="errors.has('address-form.billing[email]')">
-                @{{ errors.first('address-form.billing[email]') }}
             </span>
         </div>
 
@@ -454,3 +453,80 @@
     @endif
 
 </form>
+
+@push('scripts')
+    <script>
+
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+        $(document).ready(function() {
+            $("#password").hide();
+            $('#login-and-forgot-btn').hide();
+            $("[name='billing[email]']").on('blur', function() {
+                //get the given emai
+                var email = $("[name='billing[email]']").val();
+
+                $.ajax({
+                    /* the route pointing to the post function */
+                    url: '{{ route('customer.checkout.exist') }}',
+                    type: 'POST',
+
+                    /* send the csrf-token and the input to the controller with data */
+                    data: {'_token': CSRF_TOKEN,
+                            'email': email },
+                    dataType: 'JSON',
+
+                    /* remind that 'data' is the response of the OnePageController */
+                    success: function (data) {
+                        if (data == true) {
+                            $("#password").show();
+                            $('#login-and-forgot-btn').show();
+                        } else {
+                            $("#password").hide();
+                            $('#login-and-forgot-btn').hide();
+                            }
+                    }
+                });
+            });
+        });
+
+        $(document).ready(function() {
+            $('.btn-login').click(function(e) {
+                var email = $("[name='billing[email]']").val();
+                var password = $("[name='password']").val();
+                event.preventDefault();
+                $.ajax({
+
+                    /* the route pointing to the post function */
+                    url: '{{ route('customer.checkout.login') }}',
+                    type: 'POST',
+
+                    /* send the csrf-token and the input to the controller with data */
+                    data: {'_token': CSRF_TOKEN,
+                            'email': email,
+                            'password': password
+                        },
+                    dataType: 'JSON',
+
+                    /* remind that 'data' is the response of the OnePageController */
+                    success: function (response) {
+
+                        if (response.success) {
+                            window.location.href = "{{ route('shop.checkout.onepage.index') }}";
+                        } else {
+                            var appendData =  '<div class="alert alert-error"><span class="icon white-cross-sm-icon"></span><p>'+response.error+'</p></div>';
+                            $('.alert-wrapper').html('');
+                            $('.alert-wrapper').append(appendData);
+
+                            setTimeout(function () {
+                                $('.alert-error').hide();
+                            }, 5000);
+                            Success = false;
+                        }
+                    },
+                });
+            });
+        });
+    </script>
+
+@endpush

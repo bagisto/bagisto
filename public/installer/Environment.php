@@ -42,7 +42,7 @@
                                 <label for="port_name" class="required">Database Port</label>
                                 <input type="text" name="port_name" class="control"
                                 placeholder="3306"
-                                data-validation="required alphanumeric number length" data-validation-length="max4">
+                                data-validation="required alphanumeric number length" data-validation-length="max5">
                             </div>
 
                             <div class="control-group" id="host_name">

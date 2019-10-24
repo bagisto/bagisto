@@ -449,6 +449,10 @@ h5 {
 
             &.actions {
 
+                .action {
+                    display: inline-flex;
+                }
+
                 .icon {
                     cursor: pointer;
                     vertical-align: middle;
@@ -982,7 +986,7 @@ modal {
     animation: fade-in-white 0.3s ease-in-out;
     animation: jelly 0.5s ease-in-out;
     @include border-radius(5px);
-    overflow-y: scroll;
+    overflow-y: auto;
     max-height: 80%;
 
     .modal-header {

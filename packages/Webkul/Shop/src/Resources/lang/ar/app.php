@@ -193,7 +193,8 @@ return [
                     'default' => 'افتراضي',
                     'contact' => 'معلومات الإتصال',
                     'confirm-delete' =>  'هل تريد حقا حذف هذا العنوان؟',
-                    'default-delete' => 'لا يمكن تغيير العنوان الافتراضي'
+                    'default-delete' => 'لا يمكن تغيير العنوان الافتراضي',
+                    'enter-password' => 'Enter Your Password.',
                 ],
 
                 'create' => [
@@ -219,7 +220,8 @@ return [
                 ],
                 'delete' => [
                     'success' => 'تم حذف العنوان بنجاح.',
-                    'failure' => 'لا يمكن حذف العنوان'
+                    'failure' => 'لا يمكن حذف العنوان',
+                    'wrong-password' => 'Wrong Password !'
                 ]
             ],
 
@@ -499,7 +501,7 @@ return [
             'adjustment-refund' => 'تعديلات عملية الإسترجاع',
             'adjustment-fee' => 'تكلفة تعديلات عملية الإسترجاع'
         ],
-        
+
         'forget-password' => [
             'dear' => 'عزيزي :name',
             'info' => 'أنت تستلم هذا البريد الإلكتروني لأننا تلقينا طلب إعادة ضبط كلمة الدخول لحسابك',

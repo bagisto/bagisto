@@ -135,21 +135,37 @@ class CustomerController extends Controller
     {
         $id = auth()->guard('customer')->user()->id;
 
-        $customer = $this->customer->findorFail($id);
+        $data = request()->all();
 
-        try {
-            $this->customer->delete($id);
+        $customerRepository = $this->customerRepository->findorFail($id);
 
-            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
+        $orders = $customerRepository->all_orders->whereIn('status', ['pending', 'processing'])->first();
+
+        if ( $orders ) {
+            session()->flash('error', trans('admin::app.response.order-pending'));
 
             return redirect()->route($this->_config['redirect']);
+        }
+
+        try {
+            if ( Hash::check($data['password'], $customerRepository->password) ) {
+
+                $this->customerRepository->delete($id);
+
+                session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
+
+                return redirect()->route('customer.session.index');
+            } else {
+                session()->flash('error', trans('shop::app.customer.account.address.delete.wrong-password'));
+            }
+
+            return redirect()->route('customer.session.index');
         } catch(\Exception $e) {
             session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Customer']));
 
             return redirect()->route($this->_config['redirect']);
         }
     }
-
 
     /**
      * Load the view for the customer account panel, showing approved reviews.

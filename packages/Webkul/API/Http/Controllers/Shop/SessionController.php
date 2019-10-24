@@ -40,7 +40,7 @@ class SessionController extends Controller
         auth()->setDefaultDriver($this->guard);
 
         $this->middleware('auth:' . $this->guard, ['only' => ['get', 'update', 'destroy']]);
-        
+
         $this->_config = request('_config');
 
         $this->customerRepository = $customerRepository;
@@ -69,7 +69,7 @@ class SessionController extends Controller
         Event::fire('customer.after.login', request()->input('email'));
 
         $customer = auth($this->guard)->user();
- 
+
         return response()->json([
             'token' => $jwtToken,
             'message' => 'Logged in successfully.',

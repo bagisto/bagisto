@@ -2,7 +2,7 @@
 
 namespace Webkul\Discount\Actions\Cart;
 
-use Webkul\Discount\Actions\Cart\FixedAmount;
+use Webkul\Discount\Actions\Cart\Cart\FixedAmount;
 
 class WholeCartToFixed
 {

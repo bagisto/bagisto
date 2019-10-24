@@ -20,7 +20,7 @@ return [
     ],
 
     'home' => [
-        'page-title' => 'Bagisto - Home',
+        'page-title' => config('app.name') . ' - Home',
         'featured-products' => 'Featured Products',
         'new-products' => 'New Products',
         'verify-email' => 'Verify your email account',
@@ -61,14 +61,14 @@ return [
         'subscribed' => 'You are now subscribed to subscription emails.',
         'not-subscribed' => 'You can not be subscribed to subscription emails, please try again later.',
         'already' => 'You are already subscribed to our subscription list.',
-        'unsubscribed' => 'You are unsubscribed from subscription mails0',
+        'unsubscribed' => 'You are unsubscribed from subscription mails.',
         'already-unsub' => 'You are already unsubscribed.',
         'not-subscribed' => 'Error! Mail can not be sent currently, please try again later.'
     ],
 
     'search' => [
         'no-results' => 'No Results Found',
-        'page-title' => 'Bagisto - Search',
+        'page-title' => config('app.name') . ' - Search',
         'found-results' => 'Search Results Found',
         'found-result' => 'Search Result Found'
     ],
@@ -213,7 +213,8 @@ return [
                     'default' => 'Default',
                     'contact' => 'Contact',
                     'confirm-delete' =>  'Do you really want to delete this address?',
-                    'default-delete' => 'Default address cannot be changed.'
+                    'default-delete' => 'Default address cannot be changed.',
+                    'enter-password' => 'Enter Your Password.',
                 ],
 
                 'create' => [
@@ -240,7 +241,8 @@ return [
                 ],
                 'delete' => [
                     'success' => 'Address successfully deleted',
-                    'failure' => 'Address cannot be deleted'
+                    'failure' => 'Address cannot be deleted',
+                    'wrong-password' => 'Wrong Password !'
                 ]
             ],
 
@@ -494,7 +496,9 @@ return [
             'money-desc' => 'Money Transfer',
             'paypal-desc' => 'Paypal Standard',
             'free-desc' => 'This is a free shipping',
-            'flat-desc' => 'This is a flat rate'
+            'flat-desc' => 'This is a flat rate',
+            'password' => 'Password',
+            'login-exist-message' => 'You already have an account with us, Sign in or continue as guest.'
         ],
 
         'total' => [
@@ -607,7 +611,7 @@ return [
                 'username-email' => 'UserName/Email',
                 'subject' => 'New Customer Registration',
                 'password' => 'Password',
-                'summary' => 'Your account has been created in bagisto.
+                'summary' => 'Your account has been created.
                 Your account details are below: ',
                 'thanks' => 'Thanks!',
             ],
@@ -616,13 +620,13 @@ return [
                 'subject' => 'New Customer Registration',
                 'customer-registration' => 'Customer Registered Successfully',
                 'dear' => 'Dear :customer_name',
-                'greeting' => 'Welcome and thank you for registering at Bagisto!',
+                'greeting' => 'Welcome and thank you for registering with us!',
                 'summary' => 'Your account has now been created successfully and you can login using your email address and password credentials. Upon logging in, you will be able to access other services including reviewing past orders, wishlists and editing your account information.',
                 'thanks' => 'Thanks!',
             ],
 
             'verification' => [
-                'heading' => 'Bagisto - Email Verification',
+                'heading' => config('app.name') . ' - Email Verification',
                 'subject' => 'Verification Mail',
                 'verify' => 'Verify Your Account',
                 'summary' => 'This is the mail to verify that the email address you entered is yours.
@@ -631,9 +635,9 @@ return [
 
             'subscription' => [
                 'subject' => 'Subscription Email',
-                'greeting' => ' Welcome to Bagisto - Email Subscription',
+                'greeting' => ' Welcome to ' . config('app.name') . ' - Email Subscription',
                 'unsubscribe' => 'Unsubscribe',
-                'summary' => 'Thanks for putting me into your inbox. It’s been a while since you’ve read Bagisto email, and we don’t want to overwhelm your inbox. If you still do not want to receive
+                'summary' => 'Thanks for putting me into your inbox. It’s been a while since you’ve read ' . config('app.name') . ' email, and we don’t want to overwhelm your inbox. If you still do not want to receive
                 the latest email marketing news then for sure click the button below.'
             ]
         ]

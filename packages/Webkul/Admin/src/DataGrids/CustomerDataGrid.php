@@ -9,6 +9,7 @@ use DB;
  * CustomerDataGrid class
  *
  * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @author Vivek Sharma <viveksh047@webkul.com> @viveksh-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class CustomerDataGrid extends DataGrid
@@ -23,11 +24,13 @@ class CustomerDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('customers')
                 ->leftJoin('customer_groups', 'customers.customer_group_id', '=', 'customer_groups.id')
-                ->addSelect('customers.id as customer_id', 'customers.email', 'customer_groups.name', 'status')
+                ->addSelect('customers.id as customer_id', 'customers.email', 'customer_groups.name', 'customers.phone', 'customers.gender', 'status')
                 ->addSelect(DB::raw('CONCAT(customers.first_name, " ", customers.last_name) as full_name'));
 
         $this->addFilter('customer_id', 'customers.id');
         $this->addFilter('full_name', DB::raw('CONCAT(customers.first_name, " ", customers.last_name)'));
+        $this->addFilter('phone', 'customers.phone');
+        $this->addFilter('gender', 'customers.gender');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -71,17 +74,50 @@ class CustomerDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
+            'index' => 'phone',
+            'label' => trans('admin::app.datagrid.phone'),
+            'type' => 'number',
+            'searchable' => true,
+            'sortable' => true,
+            'filterable' => false,
+            'closure' => true,
+            'wrapper' => function ($row) {
+                if (! $row->phone)
+                    return '-';
+                else
+                    return $row->phone;
+            }
+        ]);
+
+        $this->addColumn([
+            'index' => 'gender',
+            'label' => trans('admin::app.datagrid.gender'),
+            'type' => 'string',
+            'searchable' => false,
+            'sortable' => true,
+            'filterable' => false,
+            'closure' => true,
+            'wrapper' => function ($row) {
+                if (! $row->gender)
+                    return '-';
+                else
+                    return $row->gender;
+            }
+        ]);
+
+        $this->addColumn([
             'index' => 'status',
             'label' => trans('admin::app.datagrid.status'),
             'type' => 'boolean',
             'searchable' => false,
             'sortable' => true,
             'filterable' => true,
+            'closure' => true,
             'wrapper' => function ($row) {
                 if ($row->status == 1) {
-                    return 'Activated';
+                    return '<span class="badge badge-md badge-success">Activated</span>';
                 } else {
-                    return 'Blocked';
+                    return '<span class="badge badge-md badge-danger">Blocked</span>';
                 }
             }
         ]);
@@ -93,6 +129,13 @@ class CustomerDataGrid extends DataGrid
             'route' => 'admin.customer.edit',
             'icon' => 'icon pencil-lg-icon',
             'title' => trans('admin::app.customers.customers.edit-help-title')
+        ]);
+
+        $this->addAction([
+            'type' => 'Edit',
+            'method' => 'GET', //use post only for redirects only
+            'route' => 'admin.customer.addresses.index',
+            'icon' => 'icon list-icon'
         ]);
 
         $this->addAction([

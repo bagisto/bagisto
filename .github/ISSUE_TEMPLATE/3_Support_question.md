@@ -6,10 +6,6 @@ about: 'This repository is only for reporting bugs or problems. If you need help
 
 This repository is only for reporting bugs or issues. If you need support, please use:
 
-1. Write an email - mailto:support@bagisto.com
-
-2. Create support ticket on https://bagisto.uvdesk.com
-
-3. Visit forums to get support from our community (https://forums.bagisto.com)
+1. Create support ticket on https://bagisto.uvdesk.com
 
 Thanks!

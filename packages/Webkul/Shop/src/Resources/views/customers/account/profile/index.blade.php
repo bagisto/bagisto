@@ -70,12 +70,31 @@
         <accordian :title="'{{ __('shop::app.customer.account.profile.index.title') }}'" :active="true">
             <div slot="body">
                 <div class="page-action">
-                    <form method="POST" action="{{ route('customer.profile.destroy') }}">
-                        @csrf
-                        <input type="submit" class="btn btn-lg btn-primary mt-10" value="Delete">
-                    </form>
+                    <button type="submit" @click="showModal('deleteProfile')" class="btn btn-lg btn-primary mt-10">
+                        {{ __('shop::app.customer.account.address.index.delete') }}
+                    </button>
                 </div>
 
+                <form method="POST" action="{{ route('customer.profile.destroy') }}" @submit.prevent="onSubmit">
+                    @csrf
+                    <modal id="deleteProfile" :is-open="modalIds.deleteProfile">
+                        <h3 slot="header">{{ __('shop::app.customer.account.address.index.enter-password') }}</h3>
+
+                        <div slot="body">
+                            <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
+                                <label for="password" class="required">{{ __('admin::app.users.users.password') }}</label>
+                                <input type="password" v-validate="'required|min:6|max:18'" class="control" id="password" name="password" data-vv-as="&quot;{{ __('admin::app.users.users.password') }}&quot;"/>
+                                <span class="control-error" v-if="errors.has('password')">@{{ errors.first('password') }}</span>
+                            </div>
+
+                            <div class="page-action">
+                                <button type="submit"  class="btn btn-lg btn-primary mt-10">
+                                {{ __('shop::app.customer.account.address.index.delete') }}
+                                </button>
+                            </div>
+                        </div>
+                    </modal>
+                </form>
             </div>
         </accordian>
 
