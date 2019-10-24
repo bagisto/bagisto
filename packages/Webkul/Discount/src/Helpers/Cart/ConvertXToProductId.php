@@ -3,11 +3,11 @@
 namespace Webkul\Discount\Helpers\Cart;
 
 use Webkul\Discount\Repositories\CartRuleRepository as CartRule;
-use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
-use Webkul\Attribute\Repositories\AttributeOptionRepository as AttributeOption;
+use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Category\Repositories\CategoryRepository as Category;
 use Webkul\Product\Repositories\ProductRepository as Product;
-use Webkul\Product\Models\ProductAttributeValue as ProductAttributeValue;
+use Webkul\Product\Models\ProductAttributeValue;
 
 class ConvertXToProductId
 {
@@ -29,7 +29,7 @@ class ConvertXToProductId
      /**
       * AttributeOptionRepository instance
       */
-    protected $attributeOption;
+    protected $attributeOptionRepository;
 
     /**
      * CartRuleRepository instance
@@ -42,37 +42,30 @@ class ConvertXToProductId
     protected $pav;
 
     /**
-     * Ignorable type from convertX
-     */
-    protected $ignorables;
-
-    /**
      * Condition symbols for matching the criteria with attributes selected
      */
     protected $symbols;
 
     public function __construct(
         Category $category,
-        Attribute $attribute,
+        AttributeRepository $attributeRepository,
         Product $product,
-        AttributeOption $attributeOption,
+        AttributeOptionRepository $attributeOptionRepository,
         CartRule $cartRule,
         ProductAttributeValue $pav
     )
     {
         $this->category = $category;
 
-        $this->attribute = $attribute;
+        $this->attribute = $attributeRepository;
 
         $this->product = $product;
 
-        $this->attributeOption = $attributeOption;
+        $this->attributeOptionRepository = $attributeOptionRepository;
 
         $this->cartRule = $cartRule;
 
         $this->pav = $pav;
-
-        $this->ignorable = ['configurable', 'group'];
 
         $this->conditionSymbols = config('pricerules.cart.conditions.symbols');
     }
@@ -133,7 +126,7 @@ class ConvertXToProductId
         foreach ($attributeOptions as $attributeOption) {
             $selectedOptions = $attributeOption->value;
 
-            if (isset($attributeOption->type) && ($attributeOption->type == 'select' || $attributeOption->type == 'multiselect')) {
+            if ($attributeOption->type == 'select' || $attributeOption->type == 'multiselect') {
                 $attribute = $this->attribute->findWhere([
                     'code' => $attributeOption->attribute
                 ]);
@@ -180,19 +173,14 @@ class ConvertXToProductId
                     if ($testCondition == '{}') {
                         $foundProducts = $this->product->findWhere([
                             ['sku', 'like', '%'.$testValue.'%'],
-                            ['type', '!=', 'configurable'],
-                            ['type', '!=', 'group']
                         ])->flatten()->all();
                     } else if ($testCondition == '!{}') {
                         $foundProducts = $this->product->findWhere([
                             ['sku', 'not like', '%'.$testValue.'%'],
-                            ['type', '!=', 'configurable'],
-                            ['type', '!=', 'group']
                         ])->flatten()->all();
                     } else if ($testCondition == '=') {
                         $foundProducts = $this->product->findWhere([
                             ['sku', '=', $testValue],
-                            ['type', '!=', 'configurable']
                         ])->flatten()->all();
                     }
                 }
@@ -284,32 +272,33 @@ class ConvertXToProductId
      */
     public function getAll($categoryId = null)
     {
-
-        $results = app('Webkul\Product\Repositories\ProductFlatRepository')->scopeQuery(function($query) use ($categoryId) {
-
+        $results = app('Webkul\Product\Repositories\ProductFlatRepository')->scopeQuery(function($query) use($categoryId) {
             $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
             $locale = request()->get('locale') ?: app()->getLocale();
 
             $qb = $query->distinct()
-                    ->select('products.id')
+                    ->addSelect('product_flat.*')
                     ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
                     ->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id')
-                    ->where('products.type', '!=', 'configurable')
-                    ->where('products.type', '!=', 'group')
+                    ->where('product_flat.channel', $channel)
+                    ->where('product_flat.locale', $locale)
                     ->whereNotNull('product_flat.url_key');
 
-            if ($categoryId) {
+            if ($categoryId)
                 $qb->where('product_categories.category_id', $categoryId);
-            }
 
-            $qb->where('product_flat.status', 1);
+                $qb->where('product_flat.status', 1);
 
-            $qb->where('product_flat.visible_individually', 1);
+                $qb->where('product_flat.visible_individually', 1);
 
             $queryBuilder = $qb->leftJoin('product_flat as flat_variants', function($qb) use($channel, $locale) {
-                $qb->on('product_flat.id', '=', 'flat_variants.parent_id');
+                $qb->on('product_flat.id', '=', 'flat_variants.parent_id')
+                    ->where('flat_variants.channel', $channel)
+                    ->where('flat_variants.locale', $locale);
             });
+
+            $qb = $qb->leftJoin('products as variants', 'products.id', '=', 'variants.parent_id');
 
             return $qb->groupBy('product_flat.id');
         })->get();

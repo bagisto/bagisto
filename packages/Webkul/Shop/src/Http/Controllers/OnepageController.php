@@ -91,7 +91,7 @@ class OnepageController extends Controller
         if (! auth()->guard('customer')->check() && $cart->haveDownloadableItems())
             return redirect()->route('customer.session.index');
 
-        //$this->nonCoupon->apply();
+        $this->nonCoupon->apply();
 
         Cart::collectTotals();
 

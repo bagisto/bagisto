@@ -2,7 +2,7 @@
 
 namespace Webkul\Discount\Actions\Cart;
 
-use Webkul\Discount\Actions\Cart\PercentOfProduct;
+use Webkul\Discount\Actions\Cart\Cart\PercentOfProduct;
 
 class WholeCartToPercent
 {

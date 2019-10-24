@@ -24,8 +24,8 @@ class NonCouponAbleRule extends Discount
 
             $canApply = $this->canApply($rule);
 
-            if ($canApply) {
-                $this->save($rule);
+            if ($canApply && isset($rule->impact)) {
+                $result = $this->save($rule);
 
                 $this->updateCartItemAndCart($rule);
             }

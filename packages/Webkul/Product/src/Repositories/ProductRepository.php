@@ -166,7 +166,7 @@ class ProductRepository extends Repository
                         ];
 
                     foreach($aliases as $table => $alias) {
-                        $query1 = $query1->orWhere(function($query2) use($qb, $table, $alias) {
+                        $query1 = $query1->orWhere(function($query2) use ($qb, $table, $alias) {
 
                             foreach ($this->attributeRepository->getProductDefaultAttributes(array_keys(request()->input())) as $code => $attribute) {
                                 $aliasTemp = $alias . $attribute->code;
