@@ -710,7 +710,6 @@ class Cart {
                 $address = $cart->billing_address;
             }
 
-
             $taxRates = $taxCategory->tax_rates()->where([
                     'state' => $address->state,
                     'country' => $address->country,
@@ -913,7 +912,9 @@ class Cart {
     
         if (! $wishlistItem->additional)
             $wishlistItem->additional = ['product_id' => $wishlistItem->product_id];
-        
+
+        request()->merge($wishlistItem->additional);
+
         $result = $this->addProduct($wishlistItem->product_id, $wishlistItem->additional);
 
         if ($result) {
