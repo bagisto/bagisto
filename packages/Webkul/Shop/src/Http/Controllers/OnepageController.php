@@ -11,6 +11,7 @@ use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Discount\Helpers\Cart\CouponAbleRule as Coupon;
 use Webkul\Discount\Helpers\Cart\NonCouponAbleRule as NonCoupon;
 use Webkul\Discount\Helpers\Cart\ValidatesDiscount;
+use Webkul\Customer\Repositories\CustomerRepository;
 
 /**
  * Chekout controller for the customer and guest for placing order
@@ -52,6 +53,11 @@ class OnepageController extends Controller
      */
     protected $validatesDiscount;
 
+     /**
+     * customerRepository instance object
+     */
+    protected $customerRepository;
+
     /**
      * Create a new controller instance.
      *
@@ -62,7 +68,8 @@ class OnepageController extends Controller
         OrderRepository $orderRepository,
         Coupon $coupon,
         NonCoupon $nonCoupon,
-        ValidatesDiscount $validatesDiscount
+        ValidatesDiscount $validatesDiscount,
+        CustomerRepository $customerRepository
     )
     {
         $this->coupon = $coupon;
@@ -72,6 +79,8 @@ class OnepageController extends Controller
         $this->orderRepository = $orderRepository;
 
         $this->validatesDiscount = $validatesDiscount;
+
+        $this->customerRepository = $customerRepository;
 
         $this->_config = request('_config');
     }
@@ -323,5 +332,42 @@ class OnepageController extends Controller
                     'data' => null
                 ], 422);
         }
+    }
+
+    /**
+     * Check Customer is exist or not
+     *
+     * @return Response
+     */
+    public function checkExistCustomer()
+    {
+       //check customer is exist or not
+       $customer = $this->customerRepository->findOneWhere([
+        'email' => request()->email
+       ]);
+
+        //if customer is exist
+       if (! is_null($customer)) {
+           return 'true';
+       }
+       return 'false';
+    }
+
+    //login for checkout
+    public function loginForCheckout()
+    {
+        $this->validate(request(), [
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        if (! auth()->guard('customer')->attempt(request(['email', 'password']))) {
+            return response()->json(['error' => trans('shop::app.customer.login-form.invalid-creds')]);
+        }
+
+        //Event passed to prepare cart after login
+        Cart::mergeCart();
+
+        return response()->json(['success' => 'Login successfully']);
     }
 }
