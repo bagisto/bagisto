@@ -7,6 +7,7 @@ use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Checkout\Repositories\CartItemRepository;
 use Webkul\API\Http\Resources\Checkout\Cart as CartResource;
 use Cart;
+use Webkul\Customer\Repositories\WishlistRepository;
 
 /**
  * Cart controller
@@ -38,14 +39,23 @@ class CartController extends Controller
     protected $cartItemRepository;
 
     /**
+     * WishlistRepository object
+     *
+     * @var Object
+     */
+    protected $wishlistRepository;
+
+    /**
      * Controller instance
      *
      * @param Webkul\Checkout\Repositories\CartRepository     $cartRepository
      * @param Webkul\Checkout\Repositories\CartItemRepository $cartItemRepository
+     * @param Webkul\Checkout\Repositories\WishlistRepository $wishlistRepository
      */
     public function __construct(
         CartRepository $cartRepository,
-        CartItemRepository $cartItemRepository
+        CartItemRepository $cartItemRepository,
+        WishlistRepository $wishlistRepository
     )
     {
         $this->guard = request()->has('token') ? 'api' : 'customer';
@@ -59,6 +69,8 @@ class CartController extends Controller
         $this->cartRepository = $cartRepository;
 
         $this->cartItemRepository = $cartItemRepository;
+
+        $this->wishlistRepository = $wishlistRepository;
     }
 
     /**
@@ -96,6 +108,9 @@ class CartController extends Controller
                     'error' => session()->get('warning')
                 ], 400);
         }
+
+        if ($customer = auth()->guard('customer')->user())
+        $this->wishlistRepository->deleteWhere(['product_id' => $id]);
 
         Event::dispatch('checkout.cart.item.add.after', $result);
 

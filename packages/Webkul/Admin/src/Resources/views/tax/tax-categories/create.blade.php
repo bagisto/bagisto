@@ -66,12 +66,16 @@
                         <span class="control-error" v-if="errors.has('description')">@{{ errors.first('description') }}</span>
                     </div>
 
+                    <?php $selectedOptions = old('taxrates') ?: [] ?>
+                    
                     <div class="control-group" :class="[errors.has('taxrates[]') ? 'has-error' : '']">
                         <label for="taxrates" class="required">{{ __('admin::app.configuration.tax-categories.select-taxrates') }}</label>
 
-                        <select multiple="multiple" v-validate="'required'" class="control" id="taxrates" name="taxrates[]" data-vv-as="&quot;{{ __('admin::app.configuration.tax-categories.select-taxrates') }}&quot;" value="{{ old('taxrates') }}">
+                        <select multiple="multiple" v-validate="'required'" class="control" id="taxrates" name="taxrates[]" data-vv-as="&quot;{{ __('admin::app.configuration.tax-categories.select-taxrates') }}&quot;">
                             @foreach ($taxRates as $taxRate)
-                                <option value="{{ $taxRate['id'] }}">{{ $taxRate['identifier'] }}</option>
+                                <option value="{{ $taxRate->id }}" {{ in_array($taxRate['id'], $selectedOptions) ? 'selected' : '' }}>
+                                    {{ $taxRate['identifier'] }}
+                                </option>
                             @endforeach
                         </select>
 

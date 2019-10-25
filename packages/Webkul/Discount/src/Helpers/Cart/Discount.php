@@ -36,6 +36,11 @@ abstract class Discount
      */
     protected $cartItem;
 
+    /**
+     * To set the percentage columns or not
+     */
+    protected $setPercentages;
+
     public function __construct(CartRule $cartRule, CartRuleCart $cartRuleCart, CartItem $cartItem)
     {
         $this->cartRule = $cartRule;
@@ -589,8 +594,12 @@ abstract class Discount
             $item = $this->cartItem->findOneWhere(['id' => $itemImpact['item_id']]);
 
             if (isset($itemImpact['child_items']) && $itemImpact['child_items']->count()) {
+                $totalItemDiscount = 0.0000;
+
                 foreach ($itemImpact['child_items'] as $child) {
                     $discount = $child->discount;
+
+                    $totalItemDiscount = $totalItemDiscount + $discount;
 
                     unset($child->discount);
 
@@ -612,6 +621,8 @@ abstract class Discount
                             'coupon_code' => $coupon
                         ]);
                     }
+
+                    $this->updateParent($child, $totalItemDiscount, $cartCurrencyCode = $cart->cart_currency_code);
                 }
             } else {
                 $item->update([
@@ -648,6 +659,19 @@ abstract class Discount
         Cart::collectTotals();
 
         return true;
+    }
+
+    /**
+     * To update the discount on parent CartItem
+     */
+    private function updateParent($item, $discount, $currencyCode)
+    {
+        $parentItem = $this->cartItem->findOneWhere(['id' => $item->parent_id]);
+
+        $parentItem->update([
+            'base_discount_amount' => $discount,
+            'discount_amount' => core()->convertPrice($discount, $currencyCode)
+        ]);
     }
 
     /**

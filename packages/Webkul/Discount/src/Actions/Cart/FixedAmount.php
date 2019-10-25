@@ -2,47 +2,36 @@
 
 namespace Webkul\Discount\Actions\Cart;
 
-use Webkul\Discount\Actions\Action;
+use Webkul\Discount\Actions\Cart\Action;
 
 class FixedAmount extends Action
 {
     public function calculate($rule)
     {
+        /**
+         * Setting the rule getting applied
+         */
+        $this->rule = $rule;
+
         $impact = collect();
 
         $totalDiscount = 0;
 
-        $eligibleItems = $this->getEligibleItems($rule);
+        $applicability = $this->checkApplicability();
 
-        $apply = function () use ($rule, $eligibleItems) {
-            if ($rule->action_type == 'fixed_amount') {
-                return true;
-            } else {
-                if ($rule->action_type == 'whole_cart_to_fixed' && $rule->uses_attribute_condition) {
-                    $matchIDs = explode(',', $rule->product_ids);
-
-                    foreach ($matchIDs as $matchID) {
-                        foreach ($eligibleItems as $item) {
-                            if (($item->child ? $item->child->product_id : $item->product_id) == $matchID) {
-                                return true;
-                            }
-                        }
-                    }
-
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-        };
-
-        if ($apply()) {
-            if ($rule->action_type == 'whole_cart_to_fixed')
-            {
+        if ($applicability) {
+            if ($rule->action_type == 'whole_cart_to_fixed') {
                 $eligibleItems = \Cart::getCart()->items;
             }
 
+            $eligibleItems = \Cart::getCart()->items;
+
             foreach ($eligibleItems as $item) {
+                $report = array();
+
+                $report['item_id'] = $item->id;
+                $report['child_items'] = collect();
+
                 $itemPrice = $item->base_price;
 
                 $itemQuantity = $item->quantity;
@@ -50,10 +39,6 @@ class FixedAmount extends Action
                 $discQuantity = $rule->disc_quantity;
 
                 $discQuantity = $itemQuantity <= $discQuantity ? $itemQuantity : $discQuantity;
-
-                $report = array();
-
-                $report['item_id'] = $item->id;
 
                 if ($item->product->getTypeInstance()->isComposite()) {
                     $isQtyZero = true;
@@ -65,24 +50,26 @@ class FixedAmount extends Action
                     }
 
                     if ($isQtyZero) {
+                        // case for configurable products
                         $report['product_id'] = $item->children->first()->product_id;
-
-                        $report['child_items'] = collect();
                     } else {
+                        // composites other than configurable
                         $report['product_id'] = $item->product_id;
 
-                        $report['child_items'] = collect();
-
                         foreach ($item->children as $children) {
-                            $children->discount = $rule->disc_amount;
+                            $childBaseTotal = $children->base_total;
+
+                            $itemDiscount = $childBaseTotal / (\Cart::getCart()->base_sub_total / 100);
+
+                            $children->discount = ($itemDiscount / 100) * $rule->disc_amount;
+
+                            $children->discount = $children->base_total > $children->discount ? $children->discount : $children->base_total;
 
                             $report['child_items']->push($children);
                         }
                     }
                 } else {
                     $report['product_id'] = $item->product_id;
-
-                    $report['child_items'] = collect();
                 }
 
                 $discount = round($rule->disc_amount, 4) * $discQuantity;

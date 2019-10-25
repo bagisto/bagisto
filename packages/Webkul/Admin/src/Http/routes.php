@@ -82,6 +82,36 @@ Route::group(['middleware' => ['web']], function () {
                 'view' => 'admin::customers.reviews.index'
             ])->name('admin.customer.review.index');
 
+            //Customer's addresses routes
+            Route::get('customers/{id}/addresses', 'Webkul\Admin\Http\Controllers\Customer\AddressController@index')->defaults('_config', [
+                'view' => 'admin::customers.addresses.index'
+            ])->name('admin.customer.addresses.index');
+
+            Route::get('customers/{id}/addresses/create', 'Webkul\Admin\Http\Controllers\Customer\AddressController@create')->defaults('_config',[
+                'view' => 'admin::customers.addresses.create'
+            ])->name('admin.customer.addresses.create');
+
+            Route::post('customers/{id}/addresses/create', 'Webkul\Admin\Http\Controllers\Customer\AddressController@store')->defaults('_config',[
+                'redirect' => 'admin.customer.addresses.index'
+            ])->name('admin.customer.addresses.store');
+
+            Route::get('customers/addresses/edit/{id}', 'Webkul\Admin\Http\Controllers\Customer\AddressController@edit')->defaults('_config',[
+                'view' => 'admin::customers.addresses.edit'
+            ])->name('admin.customer.addresses.edit');
+
+            Route::put('customers/addresses/edit/{id}', 'Webkul\Admin\Http\Controllers\Customer\AddressController@update')->defaults('_config', [
+                'redirect' => 'admin.customer.addresses.index'
+            ])->name('admin.customer.addresses.update');
+
+            Route::post('customers/addresses/delete/{id}', 'Webkul\Admin\Http\Controllers\Customer\AddressController@destroy')->defaults('_config', [
+                'redirect' => 'admin.customer.addresses.index'
+            ])->name('admin.customer.addresses.delete');
+
+            //mass destroy
+            Route::post('customers/{id}/addresses', 'Webkul\Admin\Http\Controllers\Customer\AddressController@massDestroy')->defaults('_config', [
+                'redirect' => 'admin.customer.addresses.index'
+            ])->name('admin.customer.addresses.massdelete');
+
             // Configuration routes
             Route::get('configuration/{slug?}/{slug2?}', 'Webkul\Admin\Http\Controllers\ConfigurationController@index')->defaults('_config', [
                 'view' => 'admin::configuration.index'

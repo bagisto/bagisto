@@ -55,6 +55,9 @@
                     <div class="control-group" :class="[errors.has('description') ? 'has-error' : '']">
                         <label for="description" class="required">{{ __('admin::app.settings.tax-categories.description') }}</label>
                         <textarea v-validate="'required'" class="control" id="description" name="description" data-vv-as="&quot;{{ __('admin::app.configuration.tax-categories.description') }}&quot;">{{ $taxCategory->description }}</textarea>
+                    </div>
+
+                    <?php $selectedOptions = old('taxrates') ?: $taxCategory->tax_rates()->pluck('id')->toArray() ?>
 
                     <div class="control-group" :class="[errors.has('taxrates[]') ? 'has-error' : '']">
                         <label for="taxrates" class="required">{{ __('admin::app.settings.tax-categories.select-taxrates') }}</label>
@@ -62,7 +65,9 @@
                         @inject('taxRates', 'Webkul\Tax\Repositories\TaxRateRepository')
                         <select multiple="multiple" class="control" id="taxrates" name="taxrates[]" data-vv-as="&quot;{{ __('admin::app.settings.tax-categories.select-taxrates') }}&quot;" v-validate="'required'">
                             @foreach ($taxRates->all() as $taxRate)
-                                <option value="{{ $taxRate->id }}" {{ is_numeric($taxCategory->tax_rates->pluck('id')->search($taxRate->id)) ? 'selected' : '' }}>{{ $taxRate->identifier }}</option>
+                                <option value="{{ $taxRate->id }}"  {{ in_array($taxRate->id, $selectedOptions) ? 'selected' : '' }}>
+                                    {{ $taxRate->identifier }}
+                                </option>
                             @endforeach
                         </select>
 

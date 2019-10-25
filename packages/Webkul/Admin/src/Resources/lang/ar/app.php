@@ -844,7 +844,8 @@ return [
         'create-root-failure' => 'الفئة مع الاسم الجذر موجود',
         'cancel-success' => ':name canceled successfully.',
         'cancel-error' => ':name can not be canceled.',
-        'already-taken' => 'The :name has already been taken.'
+        'already-taken' => 'The :name has already been taken.',
+        'order-pending' => 'لا يمكن حذف الحساب لأن بعض الطلبات (الطلبات) معلقة أو قيد المعالجة.'
     ],
 
     'footer' => [
@@ -896,6 +897,7 @@ return [
             'footer-content' => 'Footer Text',
             'locale-options' => 'Unit Options',
             'weight-unit' => 'Weight Unit',
+            'admin-page-limit' => 'العناصر الافتراضية لكل صفحة (المشرف)',
             'design' => 'Design',
             'admin-logo' => 'Admin Logo',
             'logo-image' => 'Logo Image',

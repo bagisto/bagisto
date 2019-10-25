@@ -76,7 +76,7 @@
                             <span> Click the below button to run following : </span>
                         </div>
                         <div class="message">
-                            <span>Database Migartion </span>
+                            <span>Database Migration </span>
                         </div>
                         <div class="message">
                             <span> Database Seeder </span>

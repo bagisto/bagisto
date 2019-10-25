@@ -144,7 +144,7 @@ class RefundRepository extends Repository
                     foreach ($orderItem->children as $childOrderItem) {
                         $finalQty = $childOrderItem->qty_ordered
                                 ? ($childOrderItem->qty_ordered / $orderItem->qty_ordered) * $qty
-                                : $childOrderItem->qty_ordered;
+                                : $orderItem->qty_ordered;
 
                         $refundItem->child = $this->refundItemRepository->create([
                                 'refund_id' => $refund->id,
@@ -166,13 +166,15 @@ class RefundRepository extends Repository
                                 'additional' => $childOrderItem->additional
                             ]);
 
-                        $this->refundItemRepository->returnQtyToProductInventory($childOrderItem, $finalQty);
+                        if ($childOrderItem->getTypeInstance()->isStockable() || $childOrderItem->getTypeInstance()->showQuantityBox())
+                            $this->refundItemRepository->returnQtyToProductInventory($childOrderItem, $finalQty);
 
                         $this->orderItemRepository->collectTotals($childOrderItem);
                     }
 
                 } else {
-                    $this->refundItemRepository->returnQtyToProductInventory($orderItem, $qty);
+                    if ($orderItem->getTypeInstance()->isStockable() || $orderItem->getTypeInstance()->showQuantityBox())
+                        $this->refundItemRepository->returnQtyToProductInventory($orderItem, $qty);
                 }
 
                 $this->orderItemRepository->collectTotals($orderItem);
