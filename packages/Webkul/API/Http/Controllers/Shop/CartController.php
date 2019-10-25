@@ -86,7 +86,7 @@ class CartController extends Controller
      */
     public function store($id)
     {
-        Event::fire('checkout.cart.item.add.before', $id);
+        Event::dispatch('checkout.cart.item.add.before', $id);
 
         $result = Cart::addProduct($id, request()->except('_token'));
 
@@ -97,7 +97,7 @@ class CartController extends Controller
                 ], 400);
         }
 
-        Event::fire('checkout.cart.item.add.after', $result);
+        Event::dispatch('checkout.cart.item.add.after', $result);
 
         Cart::collectTotals();
 
@@ -127,11 +127,11 @@ class CartController extends Controller
         foreach (request()->get('qty') as $itemId => $qty) {
             $item = $this->cartItemRepository->findOneByField('id', $itemId);
 
-            Event::fire('checkout.cart.item.update.before', $itemId);
+            Event::dispatch('checkout.cart.item.update.before', $itemId);
 
             Cart::updateItems(request()->all());
 
-            Event::fire('checkout.cart.item.update.after', $item);
+            Event::dispatch('checkout.cart.item.update.after', $item);
         }
 
         Cart::collectTotals();
@@ -151,11 +151,11 @@ class CartController extends Controller
      */
     public function destroy()
     {
-        Event::fire('checkout.cart.delete.before');
+        Event::dispatch('checkout.cart.delete.before');
 
         Cart::deActivateCart();
 
-        Event::fire('checkout.cart.delete.after');
+        Event::dispatch('checkout.cart.delete.after');
 
         $cart = Cart::getCart();
 
@@ -173,11 +173,11 @@ class CartController extends Controller
      */
     public function destroyItem($id)
     {
-        Event::fire('checkout.cart.item.delete.before', $id);
+        Event::dispatch('checkout.cart.item.delete.before', $id);
 
         Cart::removeItem($id);
 
-        Event::fire('checkout.cart.item.delete.after', $id);
+        Event::dispatch('checkout.cart.item.delete.after', $id);
 
         Cart::collectTotals();
 
@@ -197,11 +197,11 @@ class CartController extends Controller
      */
     public function moveToWishlist($id)
     {
-        Event::fire('checkout.cart.item.move-to-wishlist.before', $id);
+        Event::dispatch('checkout.cart.item.move-to-wishlist.before', $id);
 
         Cart::moveToWishlist($id);
 
-        Event::fire('checkout.cart.item.move-to-wishlist.after', $id);
+        Event::dispatch('checkout.cart.item.move-to-wishlist.after', $id);
 
         Cart::collectTotals();
 

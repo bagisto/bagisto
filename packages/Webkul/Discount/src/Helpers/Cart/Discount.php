@@ -2,6 +2,7 @@
 
 namespace Webkul\Discount\Helpers\Cart;
 
+use Illuminate\Support\Str;
 use Webkul\Discount\Repositories\CartRuleRepository as CartRule;
 use Webkul\Checkout\Repositories\CartItemRepository as CartItem;
 use Webkul\Discount\Repositories\CartRuleCartRepository as CartRuleCart;
@@ -872,13 +873,13 @@ abstract class Discount
                     break;
                 }
             } else if ($test_condition == '{}') {
-                if (! str_contains($actual_value, $test_value)) {
+                if (! Str::contains($actual_value, $test_value)) {
                     $result = false;
 
                     break;
                 }
             } else if ($test_condition == '!{}') {
-                if (str_contains($actual_value, $test_value)) {
+                if (Str::contains($actual_value, $test_value)) {
                     $result = false;
 
                     break;
@@ -1000,13 +1001,13 @@ abstract class Discount
                         break;
                     }
                 } else if ($test_condition == '{}') {
-                    if (str_contains($actual_value, $test_value)) {
+                    if (Str::contains($actual_value, $test_value)) {
                         $result = true;
 
                         break;
                     }
                 } else if ($test_condition == '!{}') {
-                    if (! str_contains($actual_value, $test_value)) {
+                    if (! Str::contains($actual_value, $test_value)) {
                         $result = true;
 
                         break;

@@ -118,11 +118,11 @@ class ConfigurationController extends Controller
      */
     public function store()
     {
-        Event::fire('core.configuration.save.before');
+        Event::dispatch('core.configuration.save.before');
 
         $this->coreConfigRepository->create(request()->all());
 
-        Event::fire('core.configuration.save.after');
+        Event::dispatch('core.configuration.save.after');
 
         session()->flash('success', trans('admin::app.configuration.save-message'));
 

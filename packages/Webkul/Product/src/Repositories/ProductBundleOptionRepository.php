@@ -2,6 +2,7 @@
 
 namespace Webkul\Product\Repositories;
 
+use Illuminate\Support\Str;
 use Illuminate\Container\Container as App;
 use Webkul\Core\Eloquent\Repository;
 
@@ -52,7 +53,7 @@ class ProductBundleOptionRepository extends Repository
 
         if (isset($data['bundle_options'])) {
             foreach ($data['bundle_options'] as $bundleOptionId => $bundleOptionInputs) {
-                if (str_contains($bundleOptionId, 'option_')) {
+                if (Str::contains($bundleOptionId, 'option_')) {
                     $productBundleOption = $this->create(array_merge([
                             'product_id' => $product->id,
                         ], $bundleOptionInputs));

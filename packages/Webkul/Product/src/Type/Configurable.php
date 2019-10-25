@@ -2,6 +2,7 @@
 
 namespace Webkul\Product\Type;
 
+use Illuminate\Support\Str;
 use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Models\ProductFlat;
 
@@ -22,7 +23,7 @@ class Configurable extends AbstractType
 
     /**
      * These blade files will be included in product edit page
-     * 
+     *
      * @var array
      */
     protected $additionalViews = [
@@ -88,7 +89,7 @@ class Configurable extends AbstractType
 
             if (isset($data['variants'])) {
                 foreach ($data['variants'] as $variantId => $variantData) {
-                    if (str_contains($variantId, 'variant_')) {
+                    if (Str::contains($variantId, 'variant_')) {
                         $permutation = [];
 
                         foreach ($product->super_attributes as $superAttribute) {
@@ -415,7 +416,7 @@ class Configurable extends AbstractType
 
         return $products;
     }
-    
+
     /**
      *
      * @param array $options1
@@ -450,7 +451,7 @@ class Configurable extends AbstractType
             ];
         }
 
-        return $data;        
+        return $data;
     }
 
     /**

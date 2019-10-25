@@ -415,7 +415,7 @@ abstract class DataGrid
 
             $eventName = $className . '.' . $name;
 
-            Event::fire($eventName, $this->invoker);
+            Event::dispatch($eventName, $this->invoker);
         }
     }
 

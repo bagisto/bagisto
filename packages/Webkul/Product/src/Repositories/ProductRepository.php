@@ -58,13 +58,13 @@ class ProductRepository extends Repository
      */
     public function create(array $data)
     {
-        Event::fire('catalog.product.create.before');
+        Event::dispatch('catalog.product.create.before');
 
         $typeInstance = app(config('product_types.' . $data['type'] . '.class'));
 
         $product = $typeInstance->create($data);
 
-        Event::fire('catalog.product.create.after', $product);
+        Event::dispatch('catalog.product.create.after', $product);
 
         return $product;
     }
@@ -77,7 +77,7 @@ class ProductRepository extends Repository
      */
     public function update(array $data, $id, $attribute = "id")
     {
-        Event::fire('catalog.product.update.before', $id);
+        Event::dispatch('catalog.product.update.before', $id);
 
         $product = $this->find($id);
 
@@ -86,7 +86,7 @@ class ProductRepository extends Repository
         if (isset($data['channels']))
             $product['channels'] = $data['channels'];
 
-        Event::fire('catalog.product.update.after', $product);
+        Event::dispatch('catalog.product.update.after', $product);
 
         return $product;
     }
@@ -97,11 +97,11 @@ class ProductRepository extends Repository
      */
     public function delete($id)
     {
-        Event::fire('catalog.product.delete.before', $id);
+        Event::dispatch('catalog.product.delete.before', $id);
 
         parent::delete($id);
 
-        Event::fire('catalog.product.delete.after', $id);
+        Event::dispatch('catalog.product.delete.after', $id);
     }
 
     /**

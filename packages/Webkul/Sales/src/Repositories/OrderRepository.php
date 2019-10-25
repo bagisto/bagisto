@@ -72,7 +72,7 @@ class OrderRepository extends Repository
         DB::beginTransaction();
 
         try {
-            Event::fire('checkout.order.save.before', $data);
+            Event::dispatch('checkout.order.save.before', $data);
 
             if (isset($data['customer']) && $data['customer']) {
                 $data['customer_id'] = $data['customer']->id;
@@ -114,7 +114,7 @@ class OrderRepository extends Repository
                 $this->downloadableLinkPurchasedRepository->saveLinks($orderItem, 'available');
             }
 
-            Event::fire('checkout.order.save.after', $order);
+            Event::dispatch('checkout.order.save.after', $order);
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -137,7 +137,7 @@ class OrderRepository extends Repository
         if (! $order->canCancel())
             return false;
 
-        Event::fire('sales.order.cancel.before', $order);
+        Event::dispatch('sales.order.cancel.before', $order);
 
         foreach ($order->items as $item) {
             if (! $item->qty_to_cancel)
@@ -152,13 +152,13 @@ class OrderRepository extends Repository
             } else {
                 $orderItems[] = $item;
             }
-    
+
             foreach ($orderItems as $orderItem) {
                 if (! $orderItem->product)
                     continue;
 
                 $this->orderItemRepository->returnQtyToProductInventory($orderItem);
-    
+
                 if ($orderItem->qty_ordered) {
                     $orderItem->qty_canceled += $orderItem->qty_to_cancel;
                     $orderItem->save();
@@ -178,7 +178,7 @@ class OrderRepository extends Repository
 
         $this->updateOrderStatus($order);
 
-        Event::fire('sales.order.cancel.after', $order);
+        Event::dispatch('sales.order.cancel.after', $order);
 
         return true;
     }

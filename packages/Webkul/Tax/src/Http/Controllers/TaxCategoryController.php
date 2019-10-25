@@ -57,7 +57,7 @@ class TaxCategoryController extends Controller
     /**
      * Function to show the tax category form
      *
-     * @return \Illuminate\View\View 
+     * @return \Illuminate\View\View
      */
     public function show()
     {
@@ -82,14 +82,14 @@ class TaxCategoryController extends Controller
             'taxrates' => 'array|required'
         ]);
 
-        Event::fire('tax.tax_category.create.before');
+        Event::dispatch('tax.tax_category.create.before');
 
         $taxCategory = $this->taxCategoryRepository->create($data);
 
         //attach the categories in the tax map table
         $this->taxCategoryRepository->attachOrDetach($taxCategory, $data['taxrates']);
 
-        Event::fire('tax.tax_category.create.after', $taxCategory);
+        Event::dispatch('tax.tax_category.create.after', $taxCategory);
 
         session()->flash('success', trans('admin::app.settings.tax-categories.create-success'));
 
@@ -100,7 +100,7 @@ class TaxCategoryController extends Controller
      * To show the edit form form the tax category
      *
      * @param int $id
-     * @return \Illuminate\View\View 
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
@@ -127,11 +127,11 @@ class TaxCategoryController extends Controller
 
         $data = request()->input();
 
-        Event::fire('tax.tax_category.update.before', $id);
+        Event::dispatch('tax.tax_category.update.before', $id);
 
         $taxCategory = $this->taxCategoryRepository->update($data, $id);
 
-        Event::fire('tax.tax_category.update.after', $taxCategory);
+        Event::dispatch('tax.tax_category.update.after', $taxCategory);
 
         if (! $taxCategory) {
             session()->flash('error', trans('admin::app.settings.tax-categories.update-error'));
@@ -160,11 +160,11 @@ class TaxCategoryController extends Controller
         $taxCategory = $this->taxCategoryRepository->findOrFail($id);
 
         try {
-            Event::fire('tax.tax_category.delete.before', $id);
+            Event::dispatch('tax.tax_category.delete.before', $id);
 
             $this->taxCategoryRepository->delete($id);
 
-            Event::fire('tax.tax_category.delete.after', $id);
+            Event::dispatch('tax.tax_category.delete.after', $id);
 
             session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Tax Category']));
 

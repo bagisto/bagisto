@@ -2,6 +2,7 @@
 
 namespace Webkul\API\Http\Controllers\Shop;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Event;
 use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Checkout\Repositories\CartItemRepository;
@@ -60,9 +61,9 @@ class CheckoutController extends Controller
 
         auth()->setDefaultDriver($this->guard);
 
-        
+
         // $this->middleware('auth:' . $this->guard);
-        
+
         $this->_config = request('_config');
 
         $this->cartRepository = $cartRepository;
@@ -85,12 +86,12 @@ class CheckoutController extends Controller
         $data['billing']['address1'] = implode(PHP_EOL, array_filter($data['billing']['address1']));
         $data['shipping']['address1'] = implode(PHP_EOL, array_filter($data['shipping']['address1']));
 
-        if (isset($data['billing']['id']) && str_contains($data['billing']['id'], 'address_')) {
+        if (isset($data['billing']['id']) && Str::contains($data['billing']['id'], 'address_')) {
             unset($data['billing']['id']);
             unset($data['billing']['address_id']);
         }
 
-        if (isset($data['shipping']['id']) && str_contains($data['shipping']['id'], 'address_')) {
+        if (isset($data['shipping']['id']) && Str::contains($data['shipping']['id'], 'address_')) {
             unset($data['shipping']['id']);
             unset($data['shipping']['address_id']);
         }
