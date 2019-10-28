@@ -688,8 +688,8 @@ section.slider-block {
             }
 
             li img {
-                height: 500px;
-                width:100%;
+                max-height: 500px;
+                max-width: 100%;
             }
         }
 
@@ -1488,8 +1488,8 @@ section.slider-block {
                 width: 100%;
 
                 img {
-                    height: 400px;
-                    width:100%;
+                    max-height: 400px;
+                    max-width: 100%;
                 }
             }
         }
@@ -4316,17 +4316,15 @@ section.review {
         float: left;
 
         img {
-            width: 100%;
+            max-width: 100%;
 
             &:first-child {
                 padding-bottom: 20px;
-                height: 50%;
                 display: block;
             }
 
             &:last-child {
                 padding-top: 20px;
-                height: 50%;
                 display: block;
             }
         }

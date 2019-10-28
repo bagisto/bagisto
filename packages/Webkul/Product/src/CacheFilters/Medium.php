@@ -9,6 +9,12 @@ class Medium implements FilterInterface
 {
     public function applyFilter(Image $image)
     {
-        return $image->resize(280, 350);
+        $width = 280;
+        $height = 280;
+        $image->resize($width, $height, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+
+        return $image->resizeCanvas($width, $height, 'center', false, '#fff');
     }
 }
