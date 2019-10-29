@@ -9,6 +9,12 @@ class Small implements FilterInterface
 {
     public function applyFilter(Image $image)
     {
-        return $image->resize(120, 120);
+        $width = 120;
+        $height = 120;
+        $image->resize($width, $height, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+
+        return $image->resizeCanvas($width, $height, 'center', false, '#fff');
     }
 }
