@@ -1,5 +1,9 @@
 @extends('shop::layouts.master')
 
+@section('page_title')
+    {{ __('shop::app.customer.account.wishlist.page-title') }}
+@endsection
+
 @section('content-wrapper')
     <div class="account-content">
         @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
@@ -11,11 +15,11 @@
         <div class="account-layout">
 
             <div class="account-head mb-15">
-                <span class="account-heading">{{ __('shop::app.wishlist.title') }}</span>
+                <span class="account-heading">{{ __('shop::app.customer.account.wishlist.title') }}</span>
 
                 @if (count($items))
                     <div class="account-action">
-                        <a href="{{ route('customer.wishlist.removeall') }}">{{ __('shop::app.wishlist.deleteall') }}</a>
+                        <a href="{{ route('customer.wishlist.removeall') }}">{{ __('shop::app.customer.account.wishlist.deleteall') }}</a>
                     </div>
                 @endif
                 
@@ -65,7 +69,7 @@
                                 </a>
 
                                 <a href="{{ route('customer.wishlist.move', $item->id) }}" class="btn btn-primary btn-md">
-                                    {{ __('shop::app.wishlist.move-to-cart') }}
+                                    {{ __('shop::app.customer.account.wishlist.move-to-cart') }}
                                 </a>
                             </div>
                         </div>

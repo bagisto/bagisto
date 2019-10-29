@@ -288,6 +288,40 @@ return [
                 ]
             ],
 
+            'wishlist' => [
+                'page-title' => 'Customer - Wishlist',
+                'title' => 'Lista de deseos',
+                'deleteall' => 'Eliminar todo',
+                'moveall' => 'Mover todos los productos a la cesta',
+                'move-to-cart' => 'Mover a la cesta',
+                'error' => 'No se puede agregar el producto a la lista de deseos por problemas desconocidos, inténtelo más tarde.',
+                'add' => 'Artículo añadido a la lista de deseos',
+                'remove' => 'Artículo eliminado de la lista de deseos',
+                'moved' => 'Artículo movido a la cesta exitosamente',
+                'move-error' => 'El artículo no se puede añadir a la lista de deseos, por favor inténtalo más tarde',
+                'success' => 'Artículo añadido a la lista de deseos',
+                'failure' => 'El artículo no se puede añadir a la lista de deseos, por favor inténtalo más tarde',
+                'already' => 'Este artículo ya está en tu lista de deseos.',
+                'removed' => 'Artículo eliminado de la lista de deseos',
+                'remove-fail' => 'El artículo no se puede eliminar de la lista de deseos, por favor inténtalo más tarde',
+                'empty' => 'No tiene ningún producto en su lista de deseos',
+                'remove-all-success' => 'Todos los artículos de su lista de deseos han sido eliminados',
+            ],
+
+            'downloadable_products' => [
+                'title' => 'Downloadable Products',
+                'order-id' => 'Order Id',
+                'date' => 'Date',
+                'name' => 'Title',
+                'status' => 'Status',
+                'pending' => 'Pending',
+                'available' => 'Available',
+                'expired' => 'Expired',
+                'remaining-downloads' => 'Remaining Downloads',
+                'unlimited' => 'Unlimited',
+                'download-error' => 'Download link has been expired.'
+            ],
+
             'review' => [
                 'index' => [
                     'title' => 'Opiniones',
@@ -337,25 +371,6 @@ return [
         'view-all' => 'Ver todo',
         'select-above-options' => 'Primero selecciona las opciones de arriba.',
         'less-quantity' => 'La cantidad no debe ser inferior a uno.'
-    ],
-
-    'wishlist' => [
-        'title' => 'Lista de deseos',
-        'deleteall' => 'Eliminar todo',
-        'moveall' => 'Mover todos los productos a la cesta',
-        'move-to-cart' => 'Mover a la cesta',
-        'error' => 'No se puede agregar el producto a la lista de deseos por problemas desconocidos, inténtelo más tarde.',
-        'add' => 'Artículo añadido a la lista de deseos',
-        'remove' => 'Artículo eliminado de la lista de deseos',
-        'moved' => 'Artículo movido a la cesta exitosamente',
-        'move-error' => 'El artículo no se puede añadir a la lista de deseos, por favor inténtalo más tarde',
-        'success' => 'Artículo añadido a la lista de deseos',
-        'failure' => 'El artículo no se puede añadir a la lista de deseos, por favor inténtalo más tarde',
-        'already' => 'Este artículo ya está en tu lista de deseos.',
-        'removed' => 'Artículo eliminado de la lista de deseos',
-        'remove-fail' => 'El artículo no se puede eliminar de la lista de deseos, por favor inténtalo más tarde',
-        'empty' => 'No tiene ningún producto en su lista de deseos',
-        'remove-all-success' => 'Todos los artículos de su lista de deseos han sido eliminados',
     ],
 
     // 'reviews' => [

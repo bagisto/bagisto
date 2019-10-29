@@ -284,6 +284,40 @@ return [
                 ]
             ],
 
+            'wishlist' => [
+                'page-title' => 'Customer - Wishlist',
+                'title' => 'قائمة الأمنيات',
+                'deleteall' => 'احذف الكل',
+                'moveall' => 'نقل الكل إلى عربة التوسق',
+                'move-to-cart' => 'نقل إلى عربة التسوق',
+                'error' => 'لا يمكن إضافة المنتج إلى قائمة الأمنيات ، الرجاء المحاولة لاحقا',
+                'add' => 'تم إضافة العنصر بنجاح إلى قائمة الأمنيات',
+                'remove' => 'تم حذف العنصر بنجاح من قائمة الأمنيات',
+                'moved' => 'تم نقل البند بنجاح إلى قائمة الأمنيات',
+                'move-error' => 'لا يمكن نقل العنصر إلى قائمة الأمنيات ، رجاء حاول مرة أخرى لاحقا',
+                'success' => 'البند مضاف بنجاح إلى قائمة الأمنيات',
+                'failure' => 'لا يمكن إضافة العنصر إلى قائمة الأمنيات ، رجاء حاول مرة أخرى لاحقا',
+                'already' => 'العنصر موجود بالفعل في قائمة أمنياتك',
+                'removed' => 'البند حذف بنجاح من قائمة الأمنيات',
+                'remove-fail' => 'لا يمكن حذف العنصر من قائمة الأماني ، الرجاء المحاولة لاحقا',
+                'empty' => 'You do not have any items in your Wishlist',
+                'remove-all-success' => 'كل الأشياء من قائمة أمانيك قد أزيلت',
+            ],
+
+            'downloadable_products' => [
+                'title' => 'Downloadable Products',
+                'order-id' => 'Order Id',
+                'date' => 'Date',
+                'name' => 'Title',
+                'status' => 'Status',
+                'pending' => 'Pending',
+                'available' => 'Available',
+                'expired' => 'Expired',
+                'remaining-downloads' => 'Remaining Downloads',
+                'unlimited' => 'Unlimited',
+                'download-error' => 'Download link has been expired.'
+            ],
+
             'review' => [
                 'index' => [
                     'title' => 'المراجعات',
@@ -337,25 +371,6 @@ return [
         'total-amount' => 'Total Amount',
         'none' => 'None',
         'less-quantity' => 'الكمية لايمكن ان تكون أقل من واحد.'
-    ],
-
-    'wishlist' => [
-        'title' => 'قائمة الأمنيات',
-        'deleteall' => 'احذف الكل',
-        'moveall' => 'نقل الكل إلى عربة التوسق',
-        'move-to-cart' => 'نقل إلى عربة التسوق',
-        'error' => 'لا يمكن إضافة المنتج إلى قائمة الأمنيات ، الرجاء المحاولة لاحقا',
-        'add' => 'تم إضافة العنصر بنجاح إلى قائمة الأمنيات',
-        'remove' => 'تم حذف العنصر بنجاح من قائمة الأمنيات',
-        'moved' => 'تم نقل البند بنجاح إلى قائمة الأمنيات',
-        'move-error' => 'لا يمكن نقل العنصر إلى قائمة الأمنيات ، رجاء حاول مرة أخرى لاحقا',
-        'success' => 'البند مضاف بنجاح إلى قائمة الأمنيات',
-        'failure' => 'لا يمكن إضافة العنصر إلى قائمة الأمنيات ، رجاء حاول مرة أخرى لاحقا',
-        'already' => 'العنصر موجود بالفعل في قائمة أمنياتك',
-        'removed' => 'البند حذف بنجاح من قائمة الأمنيات',
-        'remove-fail' => 'لا يمكن حذف العنصر من قائمة الأماني ، الرجاء المحاولة لاحقا',
-        'empty' => 'You do not have any items in your Wishlist',
-        'remove-all-success' => 'كل الأشياء من قائمة أمانيك قد أزيلت',
     ],
 
     // 'reviews' => [
