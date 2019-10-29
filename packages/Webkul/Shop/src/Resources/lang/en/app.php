@@ -306,6 +306,27 @@ return [
                 ]
             ],
 
+            'wishlist' => [
+                'page-title' => 'Customer - Wishlist',
+                'title' => 'Wishlist',
+                'deleteall' => 'Delete All',
+                'moveall' => 'Move All Products To Cart',
+                'move-to-cart' => 'Move To Cart',
+                'error' => 'Cannot add product to wishlist due to unknown problems, please checkback later',
+                'add' => 'Item successfully added to wishlist',
+                'remove' => 'Item successfully removed from wishlist',
+                'moved' => 'Item successfully moved To cart',
+                'option-missing' => 'Product options are missing, so item can not be moved to the wishlist.',
+                'move-error' => 'Item cannot be moved to wishlist, Please try again later',
+                'success' => 'Item successfully added to wishlist',
+                'failure' => 'Item cannot be added to wishlist, Please try again later',
+                'already' => 'Item already present in your wishlist',
+                'removed' => 'Item successfully removed from wishlist',
+                'remove-fail' => 'Item cannot Be removed from wishlist, Please try again later',
+                'empty' => 'You do not have any items in your wishlist',
+                'remove-all-success' => 'All the items from your wishlist have been removed',
+            ],
+
             'downloadable_products' => [
                 'title' => 'Downloadable Products',
                 'order-id' => 'Order Id',
@@ -380,26 +401,6 @@ return [
         'your-customization' => 'Your Customization',
         'total-amount' => 'Total Amount',
         'none' => 'None'
-    ],
-
-    'wishlist' => [
-        'title' => 'Wishlist',
-        'deleteall' => 'Delete All',
-        'moveall' => 'Move All Products To Cart',
-        'move-to-cart' => 'Move To Cart',
-        'error' => 'Cannot add product to wishlist due to unknown problems, please checkback later',
-        'add' => 'Item successfully added to wishlist',
-        'remove' => 'Item successfully removed from wishlist',
-        'moved' => 'Item successfully moved To cart',
-        'option-missing' => 'Product options are missing, so item can not be moved to the wishlist.',
-        'move-error' => 'Item cannot be moved to wishlist, Please try again later',
-        'success' => 'Item successfully added to wishlist',
-        'failure' => 'Item cannot be added to wishlist, Please try again later',
-        'already' => 'Item already present in your wishlist',
-        'removed' => 'Item successfully removed from wishlist',
-        'remove-fail' => 'Item cannot Be removed from wishlist, Please try again later',
-        'empty' => 'You do not have any items in your wishlist',
-        'remove-all-success' => 'All the items from your wishlist have been removed',
     ],
 
     // 'reviews' => [

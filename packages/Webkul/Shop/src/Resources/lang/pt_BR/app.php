@@ -288,6 +288,40 @@ return [
                 ]
             ],
 
+            'wishlist' => [
+                'page-title' => 'Customer - Wishlist',
+                'title' => 'Lista de Desejos',
+                'deleteall' => 'Excluir Tudo',
+                'moveall' => 'Adicionar todos ao Carrinho',
+                'move-to-cart' => 'Adicionar ao Carrinho',
+                'error' => 'Não é possível adicionar o produto a lista de Desejos devido a problemas desconhecidos, por favor tente mais tarde',
+                'add' => 'Item adicionado com sucesso a Lista de Desejos',
+                'remove' => 'Item removido com sucesso da Lista de Desejos',
+                'moved' => 'Item movido com sucesso para Lista de Desejos',
+                'move-error' => 'Item não pode ser movido para Lista de Desejos, por favor, tente novamente mais tarde',
+                'success' => 'Item adicionado com sucesso a Lista de Desejos',
+                'failure' => 'Item não pode ser adicionado à Lista de Desejos, por favor, tente novamente mais tarde',
+                'already' => 'Item já presente em sua lista de desejos',
+                'removed' => 'Item removido com sucesso da Lista de Desejos',
+                'remove-fail' => 'Item não pode ser removido da lista de desejos, por favor, tente novamente mais tarde',
+                'empty' => 'Você não tem nenhum item em sua Lista de Desejos',
+                'remove-all-success' => 'Todos os itens da sua lista de desejos foram removidos',
+            ],
+
+            'downloadable_products' => [
+                'title' => 'Downloadable Products',
+                'order-id' => 'Order Id',
+                'date' => 'Date',
+                'name' => 'Title',
+                'status' => 'Status',
+                'pending' => 'Pending',
+                'available' => 'Available',
+                'expired' => 'Expired',
+                'remaining-downloads' => 'Remaining Downloads',
+                'unlimited' => 'Unlimited',
+                'download-error' => 'Download link has been expired.'
+            ],
+
             'review' => [
                 'index' => [
                     'title' => 'Avaliação',
@@ -343,25 +377,6 @@ return [
         'your-customization' => 'Your Customization',
         'total-amount' => 'Total Amount',
         'none' => 'None'
-    ],
-
-    'wishlist' => [
-        'title' => 'Lista de Desejos',
-        'deleteall' => 'Excluir Tudo',
-        'moveall' => 'Adicionar todos ao Carrinho',
-        'move-to-cart' => 'Adicionar ao Carrinho',
-        'error' => 'Não é possível adicionar o produto a lista de Desejos devido a problemas desconhecidos, por favor tente mais tarde',
-        'add' => 'Item adicionado com sucesso a Lista de Desejos',
-        'remove' => 'Item removido com sucesso da Lista de Desejos',
-        'moved' => 'Item movido com sucesso para Lista de Desejos',
-        'move-error' => 'Item não pode ser movido para Lista de Desejos, por favor, tente novamente mais tarde',
-        'success' => 'Item adicionado com sucesso a Lista de Desejos',
-        'failure' => 'Item não pode ser adicionado à Lista de Desejos, por favor, tente novamente mais tarde',
-        'already' => 'Item já presente em sua lista de desejos',
-        'removed' => 'Item removido com sucesso da Lista de Desejos',
-        'remove-fail' => 'Item não pode ser removido da lista de desejos, por favor, tente novamente mais tarde',
-        'empty' => 'Você não tem nenhum item em sua Lista de Desejos',
-        'remove-all-success' => 'Todos os itens da sua lista de desejos foram removidos',
     ],
 
     // 'reviews' => [
