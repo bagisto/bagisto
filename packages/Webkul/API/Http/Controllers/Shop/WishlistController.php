@@ -107,19 +107,12 @@ class WishlistController extends Controller
         $result = Cart::moveToCart($wishlistItem);
 
         if ($result) {
-            if ($wishlistItem->delete()) {
-                Cart::collectTotals();
+            Cart::collectTotals();
 
-                return response()->json([
-                        'data' => 1,
-                        'message' => trans('shop::app.wishlist.moved')
-                    ]);
-            } else {
-                return response()->json([
-                        'data' => 1,
-                        'error' => trans('shop::app.wishlist.move-error')
-                    ], 400);
-            }
+            return response()->json([
+                    'data' => 1,
+                    'message' => trans('shop::app.wishlist.moved')
+                ]);
         } else {
             return response()->json([
                     'data' => -1,
