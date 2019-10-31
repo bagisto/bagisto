@@ -39,7 +39,7 @@
                 @endforeach
 
                 @if ($enableActions)
-                    <td class="actions" style="width: 100px;" data-value="{{ __('ui::app.datagrid.actions') }}">
+                    <td class="actions" style="white-space: nowrap; width: 100px;" data-value="{{ __('ui::app.datagrid.actions') }}">
                         <div class="action">
                             @foreach ($actions as $action)
                                 @php
