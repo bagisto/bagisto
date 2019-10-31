@@ -8,7 +8,6 @@ use Webkul\Checkout\Facades\Cart;
 
 class CheckoutServiceProvider extends ServiceProvider
 {
-
     public function boot()
     {
         include __DIR__ . '/../Http/helpers.php';
@@ -16,6 +15,8 @@ class CheckoutServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
         $this->app->register(ModuleServiceProvider::class);
+
+        $this->app->register(EventServiceProvider::class);
     }
 
     /**
