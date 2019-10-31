@@ -82,7 +82,7 @@ class CartController extends Controller
                 session()->flash('success', trans('shop::app.checkout.cart.item.success'));
 
                 if ($customer = auth()->guard('customer')->user())
-                    $this->wishlistRepository->deleteWhere(['product_id' => $id]);
+                    $this->wishlistRepository->deleteWhere(['product_id' => $id, 'customer_id' => $customer->id]);
 
                 if (request()->get('is_buy_now'))
                     return redirect()->route('shop.checkout.onepage.index');

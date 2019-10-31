@@ -104,14 +104,15 @@ class CartController extends Controller
 
         if (! $result) {
             $message = session()->get('warning') ?? session()->get('error');
+
             return response()->json([
                     'error' => session()->get('warning')
                 ], 400);
         }
 
-        if ($customer = auth()->guard('customer')->user())
-        $this->wishlistRepository->deleteWhere(['product_id' => $id]);
-
+        if ($customer = auth($this->guard)->user())
+            $this->wishlistRepository->deleteWhere(['product_id' => $id, 'customer_id' => $customer->id]);
+        
         Event::fire('checkout.cart.item.add.after', $result);
 
         Cart::collectTotals();
