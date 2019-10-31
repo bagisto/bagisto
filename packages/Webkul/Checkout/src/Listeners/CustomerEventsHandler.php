@@ -1,7 +1,6 @@
 <?php
 
-namespace Webkul\Customer\Http\Listeners;
-use Cookie;
+namespace Webkul\Checkout\Listeners;
 use Cart;
 
 class CustomerEventsHandler {
@@ -28,6 +27,6 @@ class CustomerEventsHandler {
      */
     public function subscribe($events)
     {
-        $events->listen('customer.after.login', 'Webkul\Customer\Http\Listeners\CustomerEventsHandler@onCustomerLogin');
+        $events->listen('customer.after.login', 'Webkul\Checkout\Listeners\CustomerEventsHandler@onCustomerLogin');
     }
 }

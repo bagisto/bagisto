@@ -66,7 +66,7 @@ class SessionController extends Controller
             ], 401);
         }
 
-        Event::fire('customer.after.login', request()->input('email'));
+        Event::fire('customer.after.login', request('email'));
 
         $customer = auth($this->guard)->user();
 
