@@ -104,7 +104,7 @@ class CartController extends Controller
 
         if (! $result) {
             $message = session()->get('warning') ?? session()->get('error');
-            
+
             return response()->json([
                     'error' => session()->get('warning')
                 ], 400);

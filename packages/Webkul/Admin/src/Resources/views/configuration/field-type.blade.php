@@ -178,7 +178,7 @@
                             ?>
 
                             <option value="{{ $value }}" {{ in_array($option['value'], explode(',', $selectedOption)) ? 'selected' : ''}}>
-                                {{ $option['title'] }}
+                                {{ trans($option['title']) }}
                             </option>
                         @endforeach
                     @endif
