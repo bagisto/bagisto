@@ -10,7 +10,7 @@ use Webkul\Core\Contracts\Channel as ChannelContract;
 
 class Channel extends Model implements ChannelContract
 {
-    protected $fillable = ['code', 'name', 'description', 'theme', 'home_page_content', 'footer_content', 'hostname', 'default_locale_id', 'base_currency_id', 'root_category_id', 'home_seo'];
+    protected $fillable = ['code', 'name', 'description', 'theme', 'home_page_content', 'footer_content', 'hostname', 'default_locale_id', 'base_currency_id', 'root_category_id', 'home_seo', 'logo', 'favicon'];
 
     /**
      * Get the channel locales.
