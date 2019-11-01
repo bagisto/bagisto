@@ -30,6 +30,6 @@ class CreateCartRuleCartTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cart_rule_order');
+        Schema::dropIfExists('cart_rule_cart');
     }
 }

@@ -37,6 +37,6 @@ class CreateCatalogRuleProductsPriceTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('catalog_rule_product_price');
+        Schema::dropIfExists('catalog_rule_products_price');
     }
 }

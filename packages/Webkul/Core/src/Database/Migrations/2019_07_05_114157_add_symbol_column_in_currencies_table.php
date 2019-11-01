@@ -26,7 +26,7 @@ class AddSymbolColumnInCurrenciesTable extends Migration
     public function down()
     {
         Schema::table('currencies', function (Blueprint $table) {
-            //
+            $table->dropColumn('symbol');
         });
     }
 }

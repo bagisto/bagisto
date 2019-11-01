@@ -360,7 +360,7 @@ abstract class Discount
     {
         $this->rules = config('discount-rules');
 
-        $actionType = new $this->rules['cart'][$rule->action_type];
+        $actionType = new $this->rules['cart'][$rule->action_type]($rule);
 
         return $actionType;
     }

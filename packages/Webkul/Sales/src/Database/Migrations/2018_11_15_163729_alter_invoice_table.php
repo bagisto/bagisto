@@ -25,6 +25,8 @@ class AlterInvoiceTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('invoices', function (Blueprint $table) {
+            $table->dropColumn('transaction_id');
+        });
     }
 }

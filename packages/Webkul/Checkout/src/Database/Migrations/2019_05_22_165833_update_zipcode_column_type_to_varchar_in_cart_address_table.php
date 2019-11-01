@@ -26,7 +26,7 @@ class UpdateZipcodeColumnTypeToVarcharInCartAddressTable extends Migration
     public function down()
     {
         Schema::table('cart_address', function (Blueprint $table) {
-            //
+            $table->integer('postcode')->change();
         });
     }
 }

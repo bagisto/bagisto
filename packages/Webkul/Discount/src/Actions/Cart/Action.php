@@ -31,38 +31,38 @@ abstract class Action
      *
      * @return Collection $matchedItems
      */
-    public function getEligibleItems($rule)
+    public function getEligibleItems()
     {
+        $rule = $this->rule;
+
         $cart = \Cart::getCart();
 
         $items = $cart->items()->get();
 
-        $productIDs = $rule->product_ids;
+        if ($this->rule->action_type == 'whole_cart_to_percent' || $this->rule->action_type == 'whole_cart_to_fixed_amount') {
+            $this->matchedItems = $items;
+        }
 
-        $productIDs = explode(',', $productIDs);
-
-        $matchCriteria = $rule->uses_attribute_conditions ? $rule->product_ids : '*';
-
-        if ($matchCriteria == '*') {
+        if (! $rule->uses_attribute_conditions) {
             $this->matchedItems = $items;
 
             return $this->matchedItems;
         } else {
-            $matchingIDs = explode(',', $matchCriteria);
+            $productIDs = explode(',', $rule->product_ids);
 
             foreach ($items as $item) {
-                foreach ($matchingIDs as $matchingID) {
+                foreach ($productIDs as $productID) {
                     $childrens = collect();
                     $childrens = $item->children;
 
                     foreach ($childrens as $children) {
-                        if ($children->product_id == $matchingID) {
-                            $this->pushItem($children);
+                        if ($children->product_id == $productID) {
+                            $this->matchedItems->push($children);
                         }
                     }
 
-                    if ($item->product_id == $matchingID) {
-                        $this->pushItem($item);
+                    if ($item->product_id == $productID) {
+                        $this->matchedItems->push($item);
                     }
                 }
             }
@@ -85,11 +85,11 @@ abstract class Action
                 return true;
             } else {
                 if ($rule->action_type == 'whole_cart_to_percent' && $rule->uses_attribute_condition) {
-                    $matchIDs = explode(',', $rule->product_ids);
+                    $matchingIDs = explode(',', $rule->product_ids);
 
-                    foreach ($matchIDs as $matchID) {
+                    foreach ($matchingIDs as $matchingID) {
                         foreach ($eligibleItems as $item) {
-                            if (($item->child ? $item->child->product_id : $item->product_id) == $matchID) {
+                            if (($item->child ? $item->child->product_id : $item->product_id) == $matchingID) {
                                 return true;
                             }
                         }
@@ -103,10 +103,5 @@ abstract class Action
         };
 
         return $apply();
-    }
-
-
-    private function pushItem($item) {
-        $this->matchedItems->push($item);
     }
 }

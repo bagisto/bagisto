@@ -28,7 +28,8 @@ class AddMinPriceAndMaxPriceColumnInProductFlatTable extends Migration
     public function down()
     {
         Schema::table('product_flat', function (Blueprint $table) {
-            //
+            $table->dropColumn('min_price');
+            $table->dropColumn('max_price');
         });
     }
 }
