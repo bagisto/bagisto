@@ -676,8 +676,8 @@ class Cart {
                 $this->cartItemRepository->update([
                     'price' => core()->convertPrice($price),
                     'base_price' => $price,
-                    'total' => core()->convertPrice($price * ($item->quantity)),
-                    'base_total' => $price * ($item->quantity),
+                    'total' => core()->convertPrice($price * $item->quantity),
+                    'base_total' => $price * $item->quantity,
                 ], $item->id);
             }
 
@@ -689,7 +689,7 @@ class Cart {
      * Calculates cart items tax
      *
      * @return void
-    */
+     */
     public function calculateItemsTax()
     {
         if (! $cart = $this->getCart())
