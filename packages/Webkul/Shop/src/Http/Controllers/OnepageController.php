@@ -193,7 +193,7 @@ class OnepageController extends Controller
 
         return response()->json([
             'jump_to_section' => 'review',
-            'html' => view('shop::checkout.onepage.review', compact('cart', 'rule'))->render()
+            'html' => view('shop::checkout.onepage.review', compact('cart'))->render()
         ]);
     }
 
