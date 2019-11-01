@@ -8,6 +8,8 @@ class FixedAmount extends Action
 {
     public function __construct($rule)
     {
+        parent::__construct();
+
         /**
          * Setting the rule getting applied
          */
