@@ -35,6 +35,6 @@ class CreateCartruleCouponsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cartrule_coupons');
+        Schema::dropIfExists('cart_rule_coupons');
     }
 }

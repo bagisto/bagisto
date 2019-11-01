@@ -26,7 +26,7 @@ class AddAdditionalCloumnInWishlistTable extends Migration
     public function down()
     {
         Schema::table('wishlist', function (Blueprint $table) {
-            //
+            $table->dropColumn('additional');
         });
     }
 }

@@ -56,6 +56,6 @@ class CreateCartRuleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cart_rule');
+        Schema::dropIfExists('cart_rules');
     }
 }

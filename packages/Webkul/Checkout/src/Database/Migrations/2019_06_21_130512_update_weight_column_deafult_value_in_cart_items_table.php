@@ -26,7 +26,7 @@ class UpdateWeightColumnDeafultValueInCartItemsTable extends Migration
     public function down()
     {
         Schema::table('cart_items', function (Blueprint $table) {
-            //
+            $table->decimal('weight', 12,4)->default(1)->change();
         });
     }
 }

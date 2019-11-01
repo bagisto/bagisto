@@ -26,8 +26,6 @@ class AddVendorIdColumnInProductInventoriesTable extends Migration
      */
     public function down()
     {
-        Schema::table('product_inventories', function (Blueprint $table) {
-            //
-        });
+        //
     }
 }

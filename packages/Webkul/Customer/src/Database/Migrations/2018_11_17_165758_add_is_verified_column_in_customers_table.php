@@ -14,8 +14,8 @@ class AddIsVerifiedColumnInCustomersTable extends Migration
     public function up()
     {
         Schema::table('customers', function (Blueprint $table) {
-            $table->boolean('is_verified')->default(0)->after('subscribed_to_news_letter');
-            $table->string('token')->nullable()->after('is_verified');
+            $table->boolean('is_verified')->default(0);
+            $table->string('token')->nullable();
             $table->dropColumn('gender');
         });
     }
