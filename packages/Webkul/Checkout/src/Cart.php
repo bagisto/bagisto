@@ -423,7 +423,6 @@ class Cart {
                 'customer_id' => $this->getCurrentCustomer()->user()->id,
                 'is_active' => 1
             ]);
-
         } elseif (session()->has('cart')) {
             $cart = $this->cartRepository->find(session()->get('cart')->id);
         }
@@ -671,6 +670,8 @@ class Cart {
             return false;
         } else {
             foreach ($cart->items as $item) {
+                $item->product->getTypeInstance()->validateCartItem($item);
+
                 $price = ! is_null($item->custom_price) ? $item->custom_price : $item->base_price;
 
                 $this->cartItemRepository->update([
