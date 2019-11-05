@@ -441,4 +441,34 @@ class Bundle extends AbstractType
 
         return $data;
     }
+
+    /**
+     * Validate cart item product price
+     *
+     * @param CartItem $item
+     * @return void
+     */
+    public function validateCartItem($item)
+    {
+        $price = 0;
+
+        foreach ($item->children as $childItem) {
+            $childItem->product->getTypeInstance()->validateCartItem($childItem);
+
+            $price += $childItem->base_price * $childItem->quantity;
+        }
+
+        if ($price == $item->base_price)
+            return;
+
+        $item->base_price = $price;
+        $item->price = core()->convertPrice($price);
+
+        $item->base_total = $price * $item->quantity;
+        $item->total = core()->convertPrice($price * $item->quantity);
+
+        $item->additional = $this->getAdditionalOptions($item->additional);
+
+        $item->save();
+    }
 }

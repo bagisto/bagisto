@@ -215,4 +215,33 @@ class Downloadable extends AbstractType
 
         return $data;
     }
+
+    /**
+     * Validate cart item product price
+     *
+     * @param CartItem $item
+     * @return float
+     */
+    public function validateCartItem($item)
+    {
+        $price = $item->product->getTypeInstance()->getFinalPrice();
+
+        foreach ($item->product->downloadable_links as $link) {
+            if (! in_array($link->id, $item->additional['links']))
+                continue;
+
+            $price += $link->price;
+        }
+
+        if ($price == $item->base_price)
+            return;
+
+        $item->base_price = $price;
+        $item->price = core()->convertPrice($price);
+
+        $item->base_total = $price * $item->quantity;
+        $item->total = core()->convertPrice($price * $item->quantity);
+
+        $item->save();
+    }
 }
