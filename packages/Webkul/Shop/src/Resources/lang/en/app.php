@@ -155,7 +155,7 @@ return [
         'forgot-password' => [
             'title' => 'Recover Password',
             'email' => 'Email',
-            'submit' => 'Submit',
+            'submit' => 'Send Password Reset Email',
             'page_title' => 'Customer - Forgot Password Form'
         ],
 
