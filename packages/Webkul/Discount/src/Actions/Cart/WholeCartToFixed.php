@@ -15,7 +15,7 @@ class WholeCartToFixed
      */
     public function calculate($rule)
     {
-        $actualInstance = new FixedAmount();
+        $actualInstance = new FixedAmount($rule);
 
         $result = $actualInstance->calculate($rule);
 
