@@ -41,6 +41,8 @@ class Currency
             }
         }
 
+        unset($request['currency']);
+
         return $next($request);
     }
 }

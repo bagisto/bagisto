@@ -45,6 +45,8 @@ class Locale
             }
         }
 
+        unset($request['locale']);
+
         return $next($request);
     }
 }
