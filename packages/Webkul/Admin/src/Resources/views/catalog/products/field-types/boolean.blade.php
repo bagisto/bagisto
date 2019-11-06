@@ -1,12 +1,6 @@
-<select v-validate="'{{$validations}}'" class="control" id="{{ $attribute->code }}" name="{{ $attribute->code }}" data-vv-as="&quot;{{ $attribute->admin_name }}&quot;">
+<?php $selectedOption = old($attribute->code) ?: $product[$attribute->code] ?>
 
-    <?php $selectedOption = old($attribute->code) ?: $product[$attribute->code] ?>
-
-    <option value="0" {{ $selectedOption ? '' : 'selected'}}>
-        {{ $attribute->code == 'status' ? __('admin::app.catalog.products.disabled') : __('admin::app.catalog.products.no') }}
-    </option>
-    <option value="1" {{ $selectedOption ? 'selected' : ''}}>
-        {{ $attribute->code == 'status' ? __('admin::app.catalog.products.enabled') : __('admin::app.catalog.products.yes') }}
-    </option>
-    
-</select>
+<label class="switch">
+    <input type="checkbox" v-validate="'{{$validations}}'" class="control" id="{{ $attribute->code }}" name="{{ $attribute->code }}" data-vv-as="&quot;{{ $attribute->admin_name }}&quot;" {{ $selectedOption ? 'checked' : ''}}>
+    <span class="slider round"></span>
+</label>

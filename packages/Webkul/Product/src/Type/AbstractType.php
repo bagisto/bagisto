@@ -159,6 +159,10 @@ abstract class AbstractType
         $product->update($data);
 
         foreach ($product->attribute_family->custom_attributes as $attribute) {
+            if ($attribute->type == 'boolean') {
+                $data[$attribute->code] = isset($data[$attribute->code]) ? 1 : 0;
+            }
+
             if (! isset($data[$attribute->code]) || (in_array($attribute->type, ['date', 'datetime']) && ! $data[$attribute->code]))
                 continue;
 
