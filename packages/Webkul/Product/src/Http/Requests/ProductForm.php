@@ -76,7 +76,7 @@ class ProductForm extends FormRequest
         ]);
 
         foreach ($product->getEditableAttributes() as $attribute) {
-            if ($attribute->code == 'sku')
+            if ($attribute->code == 'sku' || $attribute->type == 'boolean')
                 continue;
 
             $validations = [];
