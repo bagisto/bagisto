@@ -1,5 +1,5 @@
 <script type="text/x-template" id="export-form-template">
-    <form method="POST" action="{{ route('admin.datagrid.export') }}">
+    <form method="POST" action="{{ route('admin.datagrid.export') }}" @submit.prevent="onSubmit">
 
         <div class="page-content">
             <div class="form-container">
@@ -29,8 +29,14 @@
 
 <script>
     Vue.component('export-form', {
-
         template: '#export-form-template',
 
+        methods: {
+            onSubmit: function(e) {
+                e.target.submit();
+
+                this.$root.$set(this.$root.modalIds, 'downloadDataGrid', false);
+            }
+        }
     });
 </script>
