@@ -121,6 +121,8 @@ class CatalogRuleController extends Controller
         $this->validate(request(), [
             'name' => 'required|string|unique:catalog_rules,name',
             'description' => 'string',
+            'starts_from' => 'nullable|date',
+            'ends_till' => 'nullable|date|after_or_equal:starts_from',
             'starts_from' => 'present|nullable|date',
             'ends_till' => 'present|nullable|date',
             'customer_groups' => 'required',
@@ -273,8 +275,8 @@ class CatalogRuleController extends Controller
         $this->validate(request(), [
             'name' => 'required|string|unique:catalog_rules,name,'.$id,
             // 'name' => 'required|string',
-            'starts_from' => 'present|nullable|date',
-            'ends_till' => 'present|nullable|date',
+            'starts_from' => 'nullable|date',
+            'ends_till' => 'nullable|date|after_or_equal:starts_from',
             'description' => 'string',
             'customer_groups' => 'required',
             'channels' => 'required',

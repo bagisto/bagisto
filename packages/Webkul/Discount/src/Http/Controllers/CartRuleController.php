@@ -115,6 +115,8 @@ class CartRuleController extends Controller
         $this->validate(request(), [
             'name' => 'required|string|unique:cart_rules,name',
             'description' => 'string',
+            'starts_from' => 'nullable|date',
+            'ends_till' => 'nullable|date|after_or_equal:starts_from',
             'customer_groups' => 'required|array',
             'channels' => 'required|array',
             'status' => 'required|boolean',
@@ -339,6 +341,8 @@ class CartRuleController extends Controller
         $this->validate(request(), [
             'name' => 'required|string|unique:cart_rules,name,'.$id,
             'description' => 'string',
+            'starts_from' => 'nullable|date',
+            'ends_till' => 'nullable|date|after_or_equal:starts_from',
             'customer_groups' => 'required|array',
             'channels' => 'required|array',
             'status' => 'required|boolean',
