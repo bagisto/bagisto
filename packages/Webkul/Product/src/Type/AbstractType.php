@@ -162,8 +162,11 @@ abstract class AbstractType
             if ($attribute->type == 'boolean')
                 $data[$attribute->code] = isset($data[$attribute->code]) && $data[$attribute->code] ? 1 : 0;
 
-            if (! isset($data[$attribute->code]) || (in_array($attribute->type, ['date', 'datetime']) && ! $data[$attribute->code]))
+            if (! isset($data[$attribute->code]))
                 continue;
+
+            if ($attribute->type == 'date' && $data[$attribute->code] == '')
+                $data[$attribute->code] = null;
 
             if ($attribute->type == 'multiselect' || $attribute->type == 'checkbox')
                 $data[$attribute->code] = implode(",", $data[$attribute->code]);
