@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+    <title>Icon-CMS-Active</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icon-CMS-Active" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" stroke="#0041FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" x="9" y="10" width="31" height="24"></rect>
+        <circle id="Oval" fill="#0041FF" fill-rule="nonzero" cx="25" cy="13" r="1"></circle>
+        <path d="M13,33.9210526 L13,29.0789474 L16.3772216,29.0789474 C16.5449412,28.5154007 16.7697085,27.9764233 17.0448264,27.4687119 L14.6563293,25.0802147 L18.0802147,21.6563293 L20.4687119,24.0448264 C20.9764233,23.7697085 21.5154007,23.5449412 22.0789474,23.3772216 L22.0789474,20 L26.9210526,20 L26.9210526,23.3772216 C27.4845993,23.5449412 28.0235767,23.7697085 28.5312881,24.0448264 L30.9197853,21.6563293 L34.3436707,25.0802147 L31.9551736,27.4687119 C32.2302915,27.9764233 32.4550588,28.5154007 32.6227784,29.0789474 L36,29.0789474 L36,33.9210526" id="Combined-Shape" stroke="#0041FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M27.0855784,33.8590133 C27.6535802,33.2368113 28,32.408861 28,31.5 C28,29.5670034 26.4329966,28 24.5,28 C22.5670034,28 21,29.5670034 21,31.5 C21,32.4467397 21.3758971,33.3056839 21.9865853,33.9357268" id="Oval-6" stroke="#0041FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M15,38 L33,38" id="Path-35" stroke="#0041FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M24.5,34.5 L24.5,37.5" id="Path-36" stroke="#0041FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+    </g>
+</svg>

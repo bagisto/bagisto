@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="160px" height="114px" viewBox="0 0 160 114" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50 (54983) - http://www.bohemiancoding.com/sketch -->
+    <title>placeholder-icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Catalog-Product-New-Variable-Product" transform="translate(-144.000000, -1457.000000)" stroke="#C7C7C7" stroke-width="2">
+            <g id="2" transform="translate(104.000000, 860.000000)">
+                <g id="Image" transform="translate(20.000000, 528.000000)">
+                    <g id="Images" transform="translate(0.000000, 26.000000)">
+                        <g id="Block">
+                            <g id="Image-Icon">
+                                <g id="placeholder-icon" transform="translate(20.000000, 43.333333)">
+                                    <rect id="Rectangle-3" x="1" y="1" width="158" height="111.333333"></rect>
+                                    <rect id="Rectangle-3" x="17.6666667" y="17.6666667" width="121.333333" height="78"></rect>
+                                    <polyline id="Path-2" points="17.9238281 78.6588542 47.7115392 48.4681532 97.1757812 95.7462565"></polyline>
+                                    <polyline id="Path-3" points="73.7011719 72.7286606 110.238697 37.3952908 139.06543 66.2701823"></polyline>
+                                    <circle id="Oval-3" cx="75" cy="41.6666667" r="8.33333333"></circle>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

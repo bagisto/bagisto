@@ -1,0 +1,34 @@
+{
+    "name": "webkul/laravel-api",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Prashant Singh",
+            "email": "prashant.singh852@webkul.com"
+        }
+    ],
+    "require": {
+        "webkul/laravel-user": "dev-master",
+        "webkul/laravel-core": "dev-master",
+        "webkul/laravel-product": "dev-master",
+        "webkul/laravel-shop": "dev-master",
+        "webkul/laravel-category": "dev-master",
+        "webkul/laravel-tax": "dev-master",
+        "webkul/laravel-inventory": "dev-master",
+        "webkul/laravel-checkout": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Webkul\\API\\": "/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Webkul\\API\\AdminServiceProvider"
+            ],
+            "aliases": {}
+        }
+    },
+    "minimum-stability": "dev"
+}

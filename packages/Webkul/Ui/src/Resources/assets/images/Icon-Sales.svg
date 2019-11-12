@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50 (54983) - http://www.bohemiancoding.com/sketch -->
+    <title>Icon-Sales</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icon-Sales" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g transform="translate(10.000000, 10.000000)" id="Rectangle-2" stroke="#8E8E8E" stroke-width="2">
+            <rect x="0" y="16" width="6" height="12"></rect>
+            <rect x="11" y="8" width="6" height="20"></rect>
+            <rect x="22" y="0" width="6" height="28"></rect>
+        </g>
+    </g>
+</svg>

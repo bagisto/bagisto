@@ -1,0 +1,24 @@
+{
+    "name": "bagisto/laravel-checkout",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Prashant Singh",
+            "email": "prashant.singh852@webkul.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Webkul\\Checkout\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Webkul\\Checkout\\CheckoutServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev"
+}

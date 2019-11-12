@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Icon-Dashboard-Active</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icon-Dashboard-Active" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(10.000000, 1.000000)">
+            <rect id="Rectangle-2" stroke="#0041FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" x="0" y="9" width="28" height="28"></rect>
+            <circle id="Oval" fill="#FFFFFF" cx="28" cy="9" r="9"></circle>
+            <circle id="Oval" stroke="#0041FF" stroke-width="2" cx="28" cy="9" r="4"></circle>
+            <polyline id="Path-5" stroke="#0041FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="7 26.8225098 10.6303711 22.1315918 15.5270996 25.3210449 21.5498047 18"></polyline>
+        </g>
+    </g>
+</svg>
