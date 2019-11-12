@@ -2,12 +2,6 @@
 
 namespace Webkul\Admin\Http\Controllers\Development;
 
-use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
-use Webkul\Sales\Repositories\OrderRepository;
-use Webkul\Sales\Repositories\OrderItemRepository;
-use Webkul\Customer\Repositories\CustomerRepository;
-use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Admin\Http\Controllers\Controller;
 
 /**
