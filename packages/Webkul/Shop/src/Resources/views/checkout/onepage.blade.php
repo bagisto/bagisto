@@ -164,7 +164,9 @@
 
                     summeryComponentKey: 0,
 
-                    reviewComponentKey: 0
+                    reviewComponentKey: 0,
+
+                    is_customer_exist: 0
                 }
             },
 
@@ -227,6 +229,44 @@
                             }
                         }
                     });
+                },
+
+                isCustomerExist: function() {
+                    this.$validator.attach('email', 'required|email');
+
+                    var this_this = this;
+
+                    this.$validator.validate('email', this.address.billing.email)
+                        .then(function(isValid) {
+                            if (! isValid)
+                                return;
+
+                            this_this.$http.post("{{ route('customer.checkout.exist') }}", {email: this_this.address.billing.email})
+                                .then(function(response) {
+                                    this_this.is_customer_exist = response.data ? 1 : 0;
+                                })
+                                .catch(function (error) {})
+
+                        })
+                },
+
+                loginCustomer: function() {
+                    var this_this = this;
+
+                    this_this.$http.post("{{ route('customer.checkout.login') }}", {
+                            email: this_this.address.billing.email,
+                            password: this_this.address.billing.password
+                        })
+                        .then(function(response) {
+                            if (response.data.success) {
+                                window.location.href = "{{ route('shop.checkout.onepage.index') }}";
+                            } else {
+                                window.flashMessages = [{'type': 'alert-error', 'message': response.data.error }];
+
+                                this_this.$root.addFlashMessages()
+                            }
+                        })
+                        .catch(function (error) {})
                 },
 
                 getOrderSummary () {
