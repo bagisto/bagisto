@@ -9,8 +9,6 @@ abstract class Action
      */
     protected $rule;
 
-    abstract public function calculate($rule);
-
     /**
      * Empty collection instance for keeping final list of items
      */
@@ -18,17 +16,15 @@ abstract class Action
 
     public function __construct()
     {
-        /**
-         * Making $matchedItems property empty collection instance.
-         */
         $this->matchedItems = collect();
     }
+
+    abstract public function calculate($rule);
 
     /**
      * To find the eligble items for the current rule,
      *
      * @param CartRule $rule
-     *
      * @return Collection $matchedItems
      */
     public function getEligibleItems()
@@ -39,9 +35,8 @@ abstract class Action
 
         $items = $cart->items()->get();
 
-        if ($this->rule->action_type == 'whole_cart_to_percent' || $this->rule->action_type == 'whole_cart_to_fixed_amount') {
+        if ($this->rule->action_type == 'whole_cart_to_percent' || $this->rule->action_type == 'whole_cart_to_fixed_amount')
             $this->matchedItems = $items;
-        }
 
         if (! $rule->uses_attribute_conditions) {
             $this->matchedItems = $items;
@@ -52,18 +47,15 @@ abstract class Action
 
             foreach ($items as $item) {
                 foreach ($productIDs as $productID) {
-                    $childrens = collect();
                     $childrens = $item->children;
 
                     foreach ($childrens as $children) {
-                        if ($children->product_id == $productID) {
+                        if ($children->product_id == $productID)
                             $this->matchedItems->push($children);
-                        }
                     }
 
-                    if ($item->product_id == $productID) {
+                    if ($item->product_id == $productID)
                         $this->matchedItems->push($item);
-                    }
                 }
             }
 
@@ -85,13 +77,12 @@ abstract class Action
                 return true;
             } else {
                 if ($rule->action_type == 'whole_cart_to_percent' && $rule->uses_attribute_condition) {
-                    $matchingIDs = explode(',', $rule->product_ids);
+                    $matchingIds = explode(',', $rule->product_ids);
 
-                    foreach ($matchingIDs as $matchingID) {
+                    foreach ($matchingIds as $matchingId) {
                         foreach ($eligibleItems as $item) {
-                            if (($item->child ? $item->child->product_id : $item->product_id) == $matchingID) {
+                            if (($item->child ? $item->child->product_id : $item->product_id) == $matchingId)
                                 return true;
-                            }
                         }
                     }
 

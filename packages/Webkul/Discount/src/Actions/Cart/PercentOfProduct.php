@@ -46,18 +46,17 @@ class PercentOfProduct extends Action
                 $discQuantity = $this->rule->disc_quantity;
                 $discQuantity = $itemQuantity <= $discQuantity ? $itemQuantity : $discQuantity;
 
-                $discount_amount = ($this->rule->disc_amount > 100) ? 100 : $this->rule->disc_amount;
+                $discountAmount = ($this->rule->disc_amount > 100) ? 100 : $this->rule->disc_amount;
 
-                $discount = $itemPrice * ($discount_amount / 100) * $discQuantity;
+                $discount = $itemPrice * ($discountAmount / 100) * $discQuantity;
                 $discount = $discount <= $itemPrice * $discQuantity ? $discount : $itemPrice * $discQuantity;
 
                 if ($item->product->getTypeInstance()->isComposite()) {
                     $isQtyZero = true;
 
                     foreach ($item->children as $children) {
-                        if ($children->quantity > 0) {
+                        if ($children->quantity > 0)
                             $isQtyZero = false;
-                        }
                     }
 
                     if ($isQtyZero) {

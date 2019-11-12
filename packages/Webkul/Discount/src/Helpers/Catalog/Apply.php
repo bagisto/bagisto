@@ -102,8 +102,6 @@ class Apply extends Sale
                 $this->activeRules->push($rule);
             } else {
                 $this->deceased->push($rule->id);
-
-                // Job execution for deceased rules
             }
         }
 
@@ -521,13 +519,9 @@ class Apply extends Sale
             $count = 0;
 
             foreach ($this->deceased as $deceased)  {
-                $cartRuleProducts = $this->catalogRuleProduct->findWhere([
-                    'catalog_rule_id' => $deceased
-                ]);
+                $cartRuleProducts = $this->catalogRuleProduct->findWhere(['catalog_rule_id' => $deceased]);
 
-                $cartRuleProductsPrice = $this->catalogRuleProductPrice->findWhere([
-                    'catalog_rule_id' => $deceased
-                ]);
+                $cartRuleProductsPrice = $this->catalogRuleProductPrice->findWhere(['catalog_rule_id' => $deceased]);
 
                 // obvious logic for removing entries as entries in both storage needs to be exactly equal for a product
                 foreach ($cartRuleProducts as $cartRuleProduct) {
