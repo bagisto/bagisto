@@ -10,9 +10,6 @@ class FixedAmount extends Action
     {
         parent::__construct();
 
-        /**
-         * Setting the rule getting applied
-         */
         $this->rule = $rule;
     }
 
@@ -41,9 +38,8 @@ class FixedAmount extends Action
                     $isQtyZero = true;
 
                     foreach ($item->children as $children) {
-                        if ($children->quantity > 0) {
+                        if ($children->quantity > 0)
                             $isQtyZero = false;
-                        }
                     }
 
                     if ($isQtyZero) {
