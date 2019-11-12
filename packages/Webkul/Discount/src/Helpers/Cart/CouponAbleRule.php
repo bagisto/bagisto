@@ -48,9 +48,7 @@ class CouponAbleRule extends Discount
     {
         $cart = Cart::getCart();
 
-        $existingRule = $this->cartRuleCart->findWhere([
-            'cart_id' => $cart->id
-        ]);
+        $existingRule = $this->cartRuleCart->findWhere(['cart_id' => $cart->id]);
 
         $this->clearDiscount();
 

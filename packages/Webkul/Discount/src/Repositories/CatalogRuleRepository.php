@@ -66,10 +66,10 @@ class CatalogRuleRepository extends Repository
 
         foreach ($oldCustomerGroups as $key => $oldCustomerGroup) {
             $found = 0;
+
             foreach($newCustomerGroups as $newCustomerGroup) {
-                if ($oldCustomerGroup['customer_group_id'] == $newCustomerGroup) {
+                if ($oldCustomerGroup['customer_group_id'] == $newCustomerGroup)
                     $found = 1;
-                }
             }
 
             if ($found == 0) {
@@ -83,10 +83,10 @@ class CatalogRuleRepository extends Repository
         if (count($newCustomerGroups) && count($oldCustomerGroups)) {
             foreach ($oldCustomerGroups as $oldCustomerGroup) {
                 $found = 0;
+
                 foreach ($newCustomerGroups as $key => $newCustomerGroup) {
-                    if ($oldCustomerGroup['customer_group_id'] == $newCustomerGroup) {
+                    if ($oldCustomerGroup['customer_group_id'] == $newCustomerGroup)
                         unset($newCustomerGroups[$key]);
-                    }
                 }
             }
         }
@@ -120,9 +120,8 @@ class CatalogRuleRepository extends Repository
         foreach ($oldChannels as $key => $oldChannel) {
             $found = 0;
             foreach($newChannels as $newChannel) {
-                if ($oldChannel['channel_id'] == $newChannel) {
+                if ($oldChannel['channel_id'] == $newChannel)
                     $found = 1;
-                }
             }
 
             if ($found == 0) {
@@ -136,10 +135,10 @@ class CatalogRuleRepository extends Repository
         if (count($newChannels) && count($oldChannels)) {
             foreach ($oldChannels as $oldChannel) {
                 $found = 0;
+
                 foreach ($newChannels as $key => $newChannel) {
-                    if ($oldChannel['channel_id'] == $newChannel) {
+                    if ($oldChannel['channel_id'] == $newChannel)
                         unset($newChannels[$key]);
-                    }
                 }
             }
         }
