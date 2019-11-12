@@ -185,7 +185,7 @@ return [
         'key' => 'settings.development',
         'name' => 'admin::app.settings.development.title',
         'route' => 'admin.development.index',
-        'sort' => 7,
+        'sort' => 8,
         'icon-class' => ''
     ],[
         'key' => 'promotions',
