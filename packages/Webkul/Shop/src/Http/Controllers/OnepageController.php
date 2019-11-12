@@ -357,8 +357,7 @@ class OnepageController extends Controller
     public function loginForCheckout()
     {
         $this->validate(request(), [
-            'email' => 'required|email',
-            'password' => 'required'
+            'email' => 'required|email'
         ]);
 
         if (! auth()->guard('customer')->attempt(request(['email', 'password']))) {
