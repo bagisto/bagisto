@@ -608,7 +608,7 @@
             methods: {
                 onSubmit: function() {
                     var this_this = this;
-
+                    const emptyCouponErrorText = "Please enter a coupon code";
                     axios.post('{{ route('shop.checkout.check.coupons') }}', {code: this_this.coupon_code})
                         .then(function(response) {
                             this_this.$emit('onApplyCoupon');
@@ -618,7 +618,10 @@
                         .catch(function(error) {
                             this_this.couponChanged = true;
 
-                            this_this.error_message = error.response.data.message;
+                            this_this.error_message = (error.response.data.message === "The given data was invalid.")?
+                                emptyCouponErrorText :
+                                    (error.response.data.message === "Cannot Apply Coupon")?
+                                        "Sorry, this Coupon code is invalid":error.response.data.message;
                         });
                 },
 
