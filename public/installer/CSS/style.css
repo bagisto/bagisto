@@ -1,0 +1,191 @@
+body {
+    margin: 0;
+    font-size: 16px;
+    font-family: "Montserrat", sans-serif;
+    color: #000311;
+    text-align: center;
+    background: white;
+    position: relative;
+    height: 100%;
+}
+
+.initial-display .logo {
+    width: 150px;
+}
+
+.initial-display p {
+    font-size: 24px;
+    color: #333333;
+    text-align: center;
+    font-weight: 600;
+    margin-top: 50px;
+}
+
+.prepare-btn {
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2), 0 0 8px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    font: inherit;
+    display: inline-block;
+    background: #0041FF;
+    color: #ffffff;
+    padding: 10px 20px;
+    margin-top: 20px;
+}
+
+.footer {
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+.left-patern {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.right-patern {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.content {
+    border: 1px solid #979797;
+    border-radius: 3px;
+    width: 600px;
+    height: 392px;
+    margin-left: calc(50% - 300px);
+    text-align: left;
+    overflow-x: scroll;
+}
+
+.title {
+    font-size: 16px;
+    color: #151515;
+    line-height: 30px;
+    text-align: left;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+span {
+    font-size: 16px;
+    color: #333333;
+    line-height: 30px;
+}
+
+.welcome, .environment, .migration, .permission, .admin, .finish {
+    display : none;
+}
+
+.control-group {
+    display: block;
+    margin-bottom: 25px;
+    font-size: 15px;
+    color: #333333;
+    width: 750px;
+    max-width: 100%;
+    position: relative;
+}
+
+.control-group label {
+    display: block;
+    color: #3a3a3a;
+}
+
+.control-group .control {
+    background: #fff;
+    border: 2px solid #C7C7C7;
+    border-radius: 3px;
+    width: 100%;
+    height: 36px;
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0px 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.control-group label.required::after {
+    content: "*";
+    color: #FC6868;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.form-error {
+    color: #ff5656 !important;
+}
+
+.control-group.has-error .control {
+    border-color: #FC6868 !important;
+}
+
+pre.bash {
+    background-color: black;
+    color: white;
+    font-size: medium ;
+    font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
+    width: 100%;
+    display: inline-block;
+    height: 100%;
+}
+
+.cp-round:before {
+    border-radius: 50%;
+    content: " ";
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+    box-sizing: border-box;
+    border-top: solid 6px #bababa;
+    border-right: solid 6px #bababa;
+    border-bottom: solid 6px #bababa;
+    border-left: solid 6px #bababa;
+    position: absolute;
+    top: calc(50% - 24px);
+    left: calc(50% - 24px);
+}
+
+.check {
+    line-height: 40px;
+}
+
+.cp-round:after {
+    border-radius: 50%;
+    content: " ";
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+    box-sizing: border-box;
+    border-top: solid 6px #0041FF;
+    border-right: solid 6px #bababa;
+    border-bottom: solid 6px #bababa;
+    border-left: solid 6px #bababa;
+    position: absolute;
+    top: calc(50% - 24px);
+    left: calc(50% - 24px);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.composer {
+    position: absolute;
+    top: calc(50% + 24px);
+    display: none;
+}
+
+.message {
+    padding-left: 140px;
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50 (54983) - http://www.bohemiancoding.com/sketch -->
+    <title>tab/heading/icon/shipping</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="tab/heading/icon/shipping" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(6.000000, 8.000000)">
+            <rect id="Rectangle-10" stroke="#242424" stroke-width="3" x="1.5" y="1.5" width="12" height="11"></rect>
+            <path d="M13.5,4.5 L13.5,12.5 L19.5,12.5 L19.5,8 C19.5,6.06700338 17.9329966,4.5 16,4.5 L13.5,4.5 Z" id="Rectangle-10" stroke="#242424" stroke-width="3"></path>
+            <rect id="Rectangle-11" fill="#242424" x="2" y="11" width="6" height="6" rx="3"></rect>
+            <rect id="Rectangle-11-Copy" fill="#242424" x="12" y="11" width="6" height="6" rx="3"></rect>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,16 @@
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500");
+
+// Variables
+@import "colors";
+@import "variables";
+@import "mixins";
+
+@import "partials/default";
+
+@import "partials/dashboard";
+@import "partials/configuration";
+@import "partials/sales";
+@import "partials/rtl";
+
+@import "partials/ui/components";
