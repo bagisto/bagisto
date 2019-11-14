@@ -3,7 +3,6 @@
 namespace Webkul\Customer\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Customer\Http\Listeners\CustomerEventsHandler;
 use Cookie;
 
 /**
@@ -31,10 +30,6 @@ class SessionController extends Controller
         $this->middleware('customer')->except(['show','create']);
 
         $this->_config = request('_config');
-
-        $subscriber = new CustomerEventsHandler;
-
-        Event::subscribe($subscriber);
     }
 
     /**

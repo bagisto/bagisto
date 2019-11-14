@@ -40,8 +40,8 @@ class CreateAttributeGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attribute_groups');
-
         Schema::dropIfExists('attribute_group_mappings');
+
+        Schema::dropIfExists('attribute_groups');
     }
 }

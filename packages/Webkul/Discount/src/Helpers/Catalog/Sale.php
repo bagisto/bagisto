@@ -32,24 +32,20 @@ abstract class Sale
 
         // time based constraints
         if ($rule->starts_from != null && $rule->ends_till == null) {
-            if (Carbon::parse($rule->starts_from) < now()) {
+            if (Carbon::parse($rule->starts_from) < now())
                 $timeBased = true;
-            }
         } else if ($rule->starts_from == null && $rule->ends_till != null) {
-            if (Carbon::parse($rule->ends_till) > now()) {
+            if (Carbon::parse($rule->ends_till) > now())
                 $timeBased = true;
-            }
         } else if ($rule->starts_from != null && $rule->ends_till != null) {
-            if (Carbon::parse($rule->starts_from) < now() && now() < Carbon::parse($rule->ends_till)) {
+            if (Carbon::parse($rule->starts_from) < now() && now() < Carbon::parse($rule->ends_till))
                 $timeBased = true;
-            }
         } else {
             $timeBased = true;
         }
 
-        if ($rule->status) {
+        if ($rule->status)
             $status = true;
-        }
 
         if ($timeBased && $status) {
             return true;

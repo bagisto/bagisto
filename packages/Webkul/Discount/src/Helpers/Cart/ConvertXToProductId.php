@@ -85,33 +85,24 @@ class ConvertXToProductId
 
         $attributeValues = $attributeConditions->attributes ?? null;
 
-        if (!isset($categoryValues) && ! isset($attributeValues)) {
+        if (! isset($categoryValues) && ! isset($attributeValues))
             return false;
-        }
 
         $categoryResult = collect();
 
-        if (isset($categoryValues) && count($categoryValues)) {
+        if (isset($categoryValues) && count($categoryValues))
             $categoryResult = $this->convertFromCategories($categoryValues);
-        }
 
         $attributeResult = collect();
 
-        if (isset($attributeValues) && count($attributeValues)) {
+        if (isset($attributeValues) && count($attributeValues))
             $attributeResult = $this->convertFromAttributes($attributeValues);
-        }
 
         // now call the function that will find all the unique product ids
         $productIDs = $this->findAllUniqueIds($attributeResult, $categoryResult);
 
         // save the product ids against the cart rules
-        $result = $this->saveIDs($ruleId, $productIDs);
-
-        if ($result) {
-            return true;
-        } else {
-            return false;
-        }
+        return $this->saveIDs($ruleId, $productIDs) ? true : false;
     }
 
     /**
@@ -127,9 +118,7 @@ class ConvertXToProductId
             $selectedOptions = $attributeOption->value;
 
             if ($attributeOption->type == 'select' || $attributeOption->type == 'multiselect') {
-                $attribute = $this->attribute->findWhere([
-                    'code' => $attributeOption->attribute
-                ]);
+                $attribute = $this->attribute->findWhere(['code' => $attributeOption->attribute]);
 
                 $attributeOptions = $attribute->first()->options;
 
@@ -137,9 +126,8 @@ class ConvertXToProductId
 
                 foreach ($attributeOptions as $attributeOption) {
                     foreach ($selectedOptions as $key => $value) {
-                        if ($attributeOption->id == $value) {
+                        if ($attributeOption->id == $value)
                             $selectedAttributeOptions->push($attributeOption);
-                        }
                     }
                 }
 
@@ -207,6 +195,7 @@ class ConvertXToProductId
 
         foreach ($categories as $category) {
             $data = $this->getAll($category->id);
+
             if ($data->count()) {
                 $products->push($data);
 
@@ -233,14 +222,13 @@ class ConvertXToProductId
         $mergedCollection = $attributeResult->merge($categoryResult);
 
         $productIDs = collect();
+
         foreach ($mergedCollection as $merged) {
             $productIDs->push($merged->id);
         }
 
         // find all the unique product ids
-        $productIDs = $productIDs->unique();
-
-        return $productIDs->flatten()->all();
+        return $productIDs->unique()->flatten()->all();
     }
 
     /**
@@ -258,9 +246,7 @@ class ConvertXToProductId
 
         $productIDs = implode(',', $productIDs);
 
-        return $cartRule->update([
-            'product_ids' => $productIDs
-        ]);
+        return $cartRule->update(['product_ids' => $productIDs]);
     }
 
     /**
@@ -272,7 +258,7 @@ class ConvertXToProductId
      */
     public function getAll($categoryId = null)
     {
-        $results = app('Webkul\Product\Repositories\ProductFlatRepository')->scopeQuery(function($query) use($categoryId) {
+        return app('Webkul\Product\Repositories\ProductFlatRepository')->scopeQuery(function($query) use($categoryId) {
             $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
             $locale = request()->get('locale') ?: app()->getLocale();
@@ -302,7 +288,5 @@ class ConvertXToProductId
 
             return $qb->groupBy('product_flat.id');
         })->get();
-
-        return $results;
     }
 }

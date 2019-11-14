@@ -26,9 +26,6 @@ class DropForeignKeyCoreConfigTable extends Migration
      */
     public function down()
     {
-        Schema::table('core_config', function (Blueprint $table) {
-            $table->dropForeign('core_config_channel_id_foreign');
-            $table->renameColumn('channel_id', 'channel_code');
-        });
+        //
     }
 }

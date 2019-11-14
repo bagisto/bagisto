@@ -50,6 +50,7 @@ class Downloadable extends AbstractType
         'admin::catalog.products.accordians.images',
         'admin::catalog.products.accordians.categories',
         'admin::catalog.products.accordians.downloadable',
+        'admin::catalog.products.accordians.channels',
         'admin::catalog.products.accordians.product-links'
     ];
 
@@ -159,7 +160,7 @@ class Downloadable extends AbstractType
      */
     public function prepareForCart($data)
     {
-        if(! isset($data['links']) || ! count($data['links']))
+        if (! isset($data['links']) || ! count($data['links']))
             return trans('shop::app.checkout.cart.integrity.missing_links');
 
         $products = parent::prepareForCart($data);
@@ -213,5 +214,34 @@ class Downloadable extends AbstractType
         ];
 
         return $data;
+    }
+
+    /**
+     * Validate cart item product price
+     *
+     * @param CartItem $item
+     * @return float
+     */
+    public function validateCartItem($item)
+    {
+        $price = $item->product->getTypeInstance()->getFinalPrice();
+
+        foreach ($item->product->downloadable_links as $link) {
+            if (! in_array($link->id, $item->additional['links']))
+                continue;
+
+            $price += $link->price;
+        }
+
+        if ($price == $item->base_price)
+            return;
+
+        $item->base_price = $price;
+        $item->price = core()->convertPrice($price);
+
+        $item->base_total = $price * $item->quantity;
+        $item->total = core()->convertPrice($price * $item->quantity);
+
+        $item->save();
     }
 }

@@ -25,6 +25,8 @@ class AlterLocalesTable extends Migration
      */
     public function down()
     {
-        
+        Schema::table('locales', function (Blueprint $table) {
+            $table->dropColumn('direction');
+        });
     }
 }

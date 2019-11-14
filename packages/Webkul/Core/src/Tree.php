@@ -76,7 +76,7 @@ class Tree {
         $item['children'] = [];
 
 		if ($type == 'menu') {
-            $item['url'] = route($item['route']);
+            $item['url'] = route($item['route'], $item['params'] ?? []);
 
 			if (strpos($this->current, $item['url']) !== false) {
                 $this->currentKey = $item['key'];

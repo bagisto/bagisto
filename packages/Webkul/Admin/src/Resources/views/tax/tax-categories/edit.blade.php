@@ -57,7 +57,7 @@
                         <textarea v-validate="'required'" class="control" id="description" name="description" data-vv-as="&quot;{{ __('admin::app.configuration.tax-categories.description') }}&quot;">{{ $taxCategory->description }}</textarea>
                     </div>
 
-                    <?php $selectedOptions = old('taxrates') ?: $taxCategory->tax_rates()->pluck('id')->toArray() ?>
+                    <?php $selectedOptions = old('taxrates') ?: $taxCategory->tax_rates()->pluck('tax_rates.id')->toArray() ?>
 
                     <div class="control-group" :class="[errors.has('taxrates[]') ? 'has-error' : '']">
                         <label for="taxrates" class="required">{{ __('admin::app.settings.tax-categories.select-taxrates') }}</label>

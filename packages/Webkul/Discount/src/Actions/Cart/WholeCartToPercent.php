@@ -2,7 +2,7 @@
 
 namespace Webkul\Discount\Actions\Cart;
 
-use Webkul\Discount\Actions\Cart\Cart\PercentOfProduct;
+use Webkul\Discount\Actions\Cart\PercentOfProduct;
 
 class WholeCartToPercent
 {
@@ -15,7 +15,7 @@ class WholeCartToPercent
      */
     public function calculate($rule)
     {
-        $actualInstance = new PercentOfProduct();
+        $actualInstance = new PercentOfProduct($rule);
 
         $result = $actualInstance->calculate($rule);
 

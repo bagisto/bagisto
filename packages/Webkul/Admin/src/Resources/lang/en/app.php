@@ -226,7 +226,7 @@ return [
             'password' => 'Password',
             'confirm-password' => 'Confirm Password',
             'back-link-title' => 'Back to Sign In',
-            'submit-btn-title' => 'Email Password Reset Link'
+            'submit-btn-title' => 'Send Password Reset Email'
         ],
 
         'reset-password' => [
@@ -749,7 +749,7 @@ return [
             'locales' => 'Locales',
             'default-locale' => 'Default Locale',
             'currencies' => 'Currencies',
-            'base-currency' => 'Base Currency',
+            'base-currency' => 'Default Currency',
             'root-category' => 'Root Category',
             'inventory_sources' => 'Inventory Sources',
             'design' => 'Design',

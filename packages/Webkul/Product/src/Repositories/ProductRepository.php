@@ -182,6 +182,9 @@ class ProductRepository extends Repository
 
                                     $query2 = $query2->where(function($query3) use($aliasTemp, $column, $temp) {
                                         foreach($temp as $code => $filterValue) {
+                                            if (! is_numeric($filterValue))
+                                                continue;
+
                                             $columns = $aliasTemp . '.' . $column;
                                             $query3 = $query3->orwhereRaw("find_in_set($filterValue, $columns)");
                                         }

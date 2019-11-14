@@ -41,7 +41,11 @@ abstract class Discount
      */
     protected $setPercentages;
 
-    public function __construct(CartRule $cartRule, CartRuleCart $cartRuleCart, CartItem $cartItem)
+    public function __construct(
+        CartRule $cartRule,
+        CartRuleCart $cartRuleCart,
+        CartItem $cartItem
+    )
     {
         $this->cartRule = $cartRule;
 
@@ -67,10 +71,7 @@ abstract class Discount
         $rules = collect();
 
         if ($code != null) {
-            $eligibleRules = $this->cartRule->findWhere([
-                'use_coupon' => 1,
-                'status' => 1
-            ]);
+            $eligibleRules = $this->cartRule->findWhere(['use_coupon' => 1, 'status' => 1]);
 
             foreach($eligibleRules as $rule) {
                 if ($rule->coupons->code == $code) {
@@ -80,10 +81,7 @@ abstract class Discount
                 }
             }
         } else {
-            $rules = $this->cartRule->findWhere([
-                'use_coupon' => 0,
-                'status' => 1
-            ]);
+            $rules = $this->cartRule->findWhere(['use_coupon' => 0, 'status' => 1]);
         }
 
         $filteredRules = collect();
@@ -194,9 +192,8 @@ abstract class Discount
         $minPriority = $rules->min('priority');
 
         foreach ($rules as $rule) {
-            if ($rule->priority == $minPriority) {
+            if ($rule->priority == $minPriority)
                 $sortedRules->push($rule);
-            }
         }
 
         return $sortedRules;
@@ -229,9 +226,7 @@ abstract class Discount
     {
         $cart = \Cart::getCart();
 
-        $alreadyApplied = $this->cartRuleCart->findWhere([
-            'cart_id' => $cart->id
-        ]);
+        $alreadyApplied = $this->cartRuleCart->findWhere(['cart_id' => $cart->id]);
 
         if ($alreadyApplied->count() && $alreadyApplied->first()->cart_rule->id == $rule->id) {
             if ($this->validateRule($alreadyApplied->first()->cart_rule)) {
@@ -325,9 +320,8 @@ abstract class Discount
             $maxDiscount = $rules->max('impact.discount');
 
             foreach ($rules as $rule) {
-                if ($rule->impact->discount == $maxDiscount) {
+                if ($rule->impact->discount == $maxDiscount)
                     $maxImpact = $maxImpact->push($rule);
-                }
             }
         } else {
             return collect();
@@ -361,7 +355,7 @@ abstract class Discount
     {
         $this->rules = config('discount-rules');
 
-        $actionType = new $this->rules['cart'][$rule->action_type];
+        $actionType = new $this->rules['cart'][$rule->action_type]($rule);
 
         return $actionType;
     }
@@ -383,26 +377,22 @@ abstract class Discount
 
         // time based constraints
         if ($rule->starts_from != null && $rule->ends_till == null) {
-            if (Carbon::parse($rule->starts_from) < now()) {
+            if (Carbon::parse($rule->starts_from) < now())
                 $timeBased = true;
-            }
         } else if ($rule->starts_from == null && $rule->ends_till != null) {
-            if (Carbon::parse($rule->ends_till) > now()) {
+            if (Carbon::parse($rule->ends_till) > now())
                 $timeBased = true;
-            }
         } else if ($rule->starts_from != null && $rule->ends_till != null) {
-            if (Carbon::parse($rule->starts_from) < now() && now() < Carbon::parse($rule->ends_till)) {
+            if (Carbon::parse($rule->starts_from) < now() && now() < Carbon::parse($rule->ends_till))
                 $timeBased = true;
-            }
         } else {
             $timeBased = true;
         }
 
         // channel based constraints
         foreach ($rule->channels as $channel) {
-            if ($channel->channel_id == core()->getCurrentChannel()->id) {
+            if ($channel->channel_id == core()->getCurrentChannel()->id)
                 $channelBased = true;
-            }
         }
 
         $customerGroupBased = false;
@@ -411,16 +401,14 @@ abstract class Discount
         if (auth()->guard('customer')->check()) {
             foreach ($rule->customer_groups as $customer_group) {
                 if (auth()->guard('customer')->user()->group->exists()) {
-                    if ($customer_group->customer_group_id == auth()->guard('customer')->user()->group->id) {
+                    if ($customer_group->customer_group_id == auth()->guard('customer')->user()->group->id)
                         $customerGroupBased = true;
-                    }
                 }
             }
         } else {
             foreach ($rule->customer_groups as $customer_group) {
-                if ($customer_group->customer_group->code == 'guest') {
+                if ($customer_group->customer_group->code == 'guest')
                     $customerGroupBased = true;
-                }
             }
         }
 
@@ -432,13 +420,11 @@ abstract class Discount
 
             $test_mode = array_last($conditions);
 
-            if ($test_mode->criteria == 'any_is_true') {
+            if ($test_mode->criteria == 'any_is_true')
                 $conditionsBased = $this->testIfAnyConditionIsTrue($conditions, $cart);
-            }
 
-            if ($test_mode->criteria == 'all_are_true') {
+            if ($test_mode->criteria == 'all_are_true')
                 $conditionsBased = $this->testIfAllConditionAreTrue($conditions, $cart);
-            }
         }
 
         $partialMatch = 0;
@@ -448,9 +434,8 @@ abstract class Discount
 
             foreach ($productIDs as $productID) {
                 foreach ($cart->items as $item) {
-                    if ($item->product_id == $productID) {
+                    if ($item->product_id == $productID)
                         $partialMatch = 1;
-                    }
                 }
             }
         }
@@ -479,26 +464,15 @@ abstract class Discount
     {
         $cart = \Cart::getCart();
 
-        $alreadyApplied = $this->cartRuleCart->findWhere([
-            'cart_id' => $cart->id
-        ]);
+        $alreadyApplied = $this->cartRuleCart->findWhere(['cart_id' => $cart->id]);
 
         if ($alreadyApplied->count()) {
-            $result = $alreadyApplied->first()->update([
-                'cart_rule_id' => $rule->id
-            ]);
+            $result = $alreadyApplied->first()->update(['cart_rule_id' => $rule->id]);
         } else {
-            $result = $this->cartRuleCart->create([
-                'cart_id' => $cart->id,
-                'cart_rule_id' => $rule->id
-            ]);
+            $result = $this->cartRuleCart->create(['cart_id' => $cart->id, 'cart_rule_id' => $rule->id]);
         }
 
-        if ($result) {
-            return true;
-        } else {
-            return false;
-        }
+        return $result ? true : false;
     }
 
     /**
@@ -516,10 +490,7 @@ abstract class Discount
 
         if (isset($cart->selected_shipping_rate)) {
             if ($appliedRule->free_shipping && $cart->selected_shipping_rate->base_price > 0) {
-                $cart->selected_shipping_rate->update([
-                    'price' => 0,
-                    'base_price' => 0
-                ]);
+                $cart->selected_shipping_rate->update(['price' => 0, 'base_price' => 0]);
             } else if ($appliedRule->free_shipping == 0 && $appliedRule->apply_to_shipping && $cart->selected_shipping_rate->base_price > 0) {
                 $actionType = config('discount-rules')[$appliedRule->action_type];
 
@@ -570,10 +541,7 @@ abstract class Discount
             $actualShippingBasePrice = $actualShippingRate->base_price;
             $cartShippingRate = $cart->selected_shipping_rate;
 
-            $cartShippingRate->update([
-                'price' => $actualShippingPrice,
-                'base_price' => $actualShippingBasePrice
-            ]);
+            $cartShippingRate->update(['price' => $actualShippingPrice, 'base_price' => $actualShippingBasePrice]);
         }
     }
 
@@ -609,17 +577,13 @@ abstract class Discount
                     ]);
 
                     if ($rule->action_type == 'percent_of_product') {
-                        $child->update([
-                            'discount_percent' => $rule->discount_amount
-                        ]);
+                        $child->update(['discount_percent' => $rule->discount_amount]);
                     }
 
                     if ($rule->use_coupon) {
                         $coupon = $rule->coupons->code;
 
-                        $child->update([
-                            'coupon_code' => $coupon
-                        ]);
+                        $child->update(['coupon_code' => $coupon]);
                     }
 
                     $this->updateParent($child, $totalItemDiscount, $cartCurrencyCode = $cart->cart_currency_code);
@@ -631,25 +595,19 @@ abstract class Discount
                 ]);
 
                 if ($rule->action_type == 'percent_of_product') {
-                    $item->update([
-                        'discount_percent' => $rule->discount_amount
-                    ]);
+                    $item->update(['discount_percent' => $rule->discount_amount]);
                 }
 
                 if ($rule->use_coupon) {
                     $coupon = $rule->coupons->code;
 
-                    $item->update([
-                        'coupon_code' => $coupon
-                    ]);
+                    $item->update(['coupon_code' => $coupon]);
                 }
             }
         }
 
         if ($rule->use_coupon) {
-            $cart->update([
-                'coupon_code' => $rule->coupons->code
-            ]);
+            $cart->update(['coupon_code' => $rule->coupons->code]);
         }
 
         // if ($rule->free_shipping || $rule->apply_on_shipping) {
@@ -703,9 +661,7 @@ abstract class Discount
         ]);
 
         // find & remove cart rule from cart rule cart resource
-        $cartRuleCart = $this->cartRuleCart->findWhere([
-            'cart_id' => $cart->id
-        ]);
+        $cartRuleCart = $this->cartRuleCart->findWhere(['cart_id' => $cart->id]);
 
         $cartRuleCart->first()->delete();
 
@@ -739,9 +695,7 @@ abstract class Discount
     {
         $cart = \Cart::getCart();
 
-        $alreadyAppliedRule = $this->cartRuleCart->findWhere([
-            'cart_id' => $cart->id
-        ]);
+        $alreadyAppliedRule = $this->cartRuleCart->findWhere(['cart_id' => $cart->id]);
 
         if ($alreadyAppliedRule->count()) {
             $alreadyAppliedCartRule = $alreadyAppliedRule->first()->cart_rule;
@@ -812,11 +766,7 @@ abstract class Discount
 
         $shipping_city = $shipping_address->city ?? null;
 
-        if (isset($cart->payment)) {
-            $payment_method = $paymentMethods[$cart->payment->method]['title'];
-        } else {
-            $payment_method = null;
-        }
+        $payment_method = isset($cart->payment) ? $paymentMethods[$cart->payment->method]['title'] : null;
 
         $sub_total = $cart->base_sub_total;
 
@@ -841,7 +791,6 @@ abstract class Discount
 
             if (isset($condition->attribute)) {
                 $actual_value = ${$condition->attribute};
-
             } else {
                 $result = false;
             }
@@ -946,11 +895,7 @@ abstract class Discount
 
         $shipping_city = $shipping_address->city ?? null;
 
-        if (isset($cart->payment)) {
-            $payment_method = $paymentMethods[$cart->payment->method]['title'];
-        } else {
-            $payment_method = null;
-        }
+        $payment_method = isset($cart->payment) ? $paymentMethods[$cart->payment->method]['title'] : null;
 
         $sub_total = $cart->base_sub_total;
 
@@ -975,15 +920,13 @@ abstract class Discount
 
             if (isset($condition->value)) {
                 $test_value = $condition->value;
-
             } else {
                 $result = false;
             }
 
             if (isset($condition->condition)) {
                 $test_condition = $condition->condition;
-            }
-            else {
+            } else {
                 $result = false;
             }
 

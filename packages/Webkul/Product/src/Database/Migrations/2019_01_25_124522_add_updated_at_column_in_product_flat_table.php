@@ -32,18 +32,13 @@ class AddUpdatedAtColumnInProductFlatTable extends Migration
      */
     public function down()
     {
-        Schema::disableForeignKeyConstraints();
-
-        Schema::table('product_flat', function (Blueprint $table) {
-            $table->dropColumn('created_at');
-            $table->dropColumn('size_label');
-            $table->dropColumn('updated_at');
-            $table->dropColumn('parent_id');
-            $table->dropColumn('visible_individually');
-            $table->dropForeign('parent_id');
-            $table->dropIndex('product_flat_unique_index');
-        });
-
-        Schema::enableForeignKeyConstraints();
+        // Schema::table('product_flat', function (Blueprint $table) {
+        //     $table->dropColumn('created_at');
+        //     $table->dropColumn('size_label');
+        //     $table->dropColumn('updated_at');
+        //     $table->dropColumn('parent_id');
+        //     $table->dropColumn('visible_individually');
+        //     $table->dropIndex('product_flat_unique_index');
+        // });
     }
 }

@@ -159,8 +159,14 @@ abstract class AbstractType
         $product->update($data);
 
         foreach ($product->attribute_family->custom_attributes as $attribute) {
-            if (! isset($data[$attribute->code]) || (in_array($attribute->type, ['date', 'datetime']) && ! $data[$attribute->code]))
+            if ($attribute->type == 'boolean')
+                $data[$attribute->code] = isset($data[$attribute->code]) && $data[$attribute->code] ? 1 : 0;
+
+            if (! isset($data[$attribute->code]))
                 continue;
+
+            if ($attribute->type == 'date' && $data[$attribute->code] == '')
+                $data[$attribute->code] = null;
 
             if ($attribute->type == 'multiselect' || $attribute->type == 'checkbox')
                 $data[$attribute->code] = implode(",", $data[$attribute->code]);
@@ -572,5 +578,27 @@ abstract class AbstractType
     public function getBaseImage($item)
     {
         return $this->productImageHelper->getProductBaseImage($item->product);
+    }
+
+    /**
+     * Validate cart item product price
+     *
+     * @param CartItem $item
+     * @return void
+     */
+    public function validateCartItem($item)
+    {
+        $price = $item->product->getTypeInstance()->getFinalPrice();
+
+        if ($price == $item->base_price)
+            return;
+
+        $item->base_price = $price;
+        $item->price = core()->convertPrice($price);
+
+        $item->base_total = $price * $item->quantity;
+        $item->total = core()->convertPrice($price * $item->quantity);
+
+        $item->save();
     }
 }

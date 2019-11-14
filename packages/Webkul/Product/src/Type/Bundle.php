@@ -57,6 +57,7 @@ class Bundle extends AbstractType
         'admin::catalog.products.accordians.images',
         'admin::catalog.products.accordians.categories',
         'admin::catalog.products.accordians.bundle-items',
+        'admin::catalog.products.accordians.channels',
         'admin::catalog.products.accordians.product-links'
     ];
 
@@ -292,7 +293,7 @@ class Bundle extends AbstractType
     public function getPriceHtml()
     {
         $prices = $this->getProductPrices();
-
+            
         $priceHtml = '<div class="price-from">';
 
         if ($prices['from']['regular_price']['price'] != $prices['from']['final_price']['price']) {
@@ -302,13 +303,18 @@ class Bundle extends AbstractType
             $priceHtml .= '<span>' . $prices['from']['regular_price']['formated_price'] . '</span>';
         }
 
-        $priceHtml .= '<span style="font-weight: 500;margin-top: 1px;margin-bottom: 1px;display: block;">To</span>';
 
-        if ($prices['to']['regular_price']['price'] != $prices['to']['final_price']['price']) {
-            $priceHtml .= '<span class="regular-price">' . $prices['to']['regular_price']['formated_price'] . '</span>'
-                        . '<span class="special-price">' . $prices['to']['final_price']['formated_price'] . '</span>';
-        } else {
-            $priceHtml .= '<span>' . $prices['to']['regular_price']['formated_price'] . '</span>';
+        if ($prices['from']['regular_price']['price'] != $prices['to']['regular_price']['price'] 
+            || $prices['from']['final_price']['price'] != $prices['to']['final_price']['price']) {
+
+            $priceHtml .= '<span style="font-weight: 500;margin-top: 1px;margin-bottom: 1px;display: block;">To</span>';
+
+            if ($prices['to']['regular_price']['price'] != $prices['to']['final_price']['price']) {
+                $priceHtml .= '<span class="regular-price">' . $prices['to']['regular_price']['formated_price'] . '</span>'
+                            . '<span class="special-price">' . $prices['to']['final_price']['formated_price'] . '</span>';
+            } else {
+                $priceHtml .= '<span>' . $prices['to']['regular_price']['formated_price'] . '</span>';
+            }
         }
 
         $priceHtml .= '</div>';
@@ -439,5 +445,35 @@ class Bundle extends AbstractType
         }
 
         return $data;
+    }
+
+    /**
+     * Validate cart item product price
+     *
+     * @param CartItem $item
+     * @return void
+     */
+    public function validateCartItem($item)
+    {
+        $price = 0;
+
+        foreach ($item->children as $childItem) {
+            $childItem->product->getTypeInstance()->validateCartItem($childItem);
+
+            $price += $childItem->base_price * $childItem->quantity;
+        }
+
+        if ($price == $item->base_price)
+            return;
+
+        $item->base_price = $price;
+        $item->price = core()->convertPrice($price);
+
+        $item->base_total = $price * $item->quantity;
+        $item->total = core()->convertPrice($price * $item->quantity);
+
+        $item->additional = $this->getAdditionalOptions($item->additional);
+
+        $item->save();
     }
 }

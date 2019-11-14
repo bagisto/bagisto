@@ -73,15 +73,20 @@ class ProductForm extends FormRequest
         $this->rules = array_merge($product->getTypeInstance()->getTypeValidationRules(), [
             'sku' => ['required', 'unique:products,sku,' . $this->id, new \Webkul\Core\Contracts\Validations\Slug],
             'images.*' => 'mimes:jpeg,jpg,bmp,png',
+            'special_price_from' => 'nullable|date',
+            'special_price_to' => 'nullable|date|after_or_equal:special_price_from'
         ]);
 
         foreach ($product->getEditableAttributes() as $attribute) {
-            if ($attribute->code == 'sku')
+            if ($attribute->code == 'sku' || $attribute->type == 'boolean')
                 continue;
 
             $validations = [];
 
-            array_push($validations, $attribute->is_required ? 'required' : 'nullable');
+            if (! isset($this->rules[$attribute->code]))
+                array_push($validations, $attribute->is_required ? 'required' : 'nullable');
+            else
+                $validations = $this->rules[$attribute->code];
 
             if ($attribute->type == 'text' && $attribute->validation) {
                 array_push($validations, 

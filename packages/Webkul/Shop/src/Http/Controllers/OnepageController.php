@@ -193,7 +193,7 @@ class OnepageController extends Controller
 
         return response()->json([
             'jump_to_section' => 'review',
-            'html' => view('shop::checkout.onepage.review', compact('cart', 'rule'))->render()
+            'html' => view('shop::checkout.onepage.review', compact('cart'))->render()
         ]);
     }
 
@@ -357,8 +357,7 @@ class OnepageController extends Controller
     public function loginForCheckout()
     {
         $this->validate(request(), [
-            'email' => 'required|email',
-            'password' => 'required'
+            'email' => 'required|email'
         ]);
 
         if (! auth()->guard('customer')->attempt(request(['email', 'password']))) {

@@ -2,7 +2,7 @@
 
 namespace Webkul\Discount\Actions\Cart;
 
-use Webkul\Discount\Actions\Cart\Cart\FixedAmount;
+use Webkul\Discount\Actions\Cart\FixedAmount;
 
 class WholeCartToFixed
 {
@@ -15,7 +15,7 @@ class WholeCartToFixed
      */
     public function calculate($rule)
     {
-        $actualInstance = new FixedAmount();
+        $actualInstance = new FixedAmount($rule);
 
         $result = $actualInstance->calculate($rule);
 
