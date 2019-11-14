@@ -8,8 +8,6 @@ class FixedAmount extends Action
 {
     public function __construct($rule)
     {
-        parent::__construct();
-
         $this->rule = $rule;
     }
 
@@ -24,8 +22,11 @@ class FixedAmount extends Action
 
             foreach ($eligibleItems as $item) {
                 $report = array();
+
                 $report['item_id'] = $item->id;
                 $report['child_items'] = collect();
+
+                $perItemDiscount = $rule->disc_amount / $eligibleItems->count();
 
                 $itemPrice = $item->base_price;
 
@@ -54,7 +55,7 @@ class FixedAmount extends Action
 
                             $itemDiscount = $childBaseTotal / ($item->base_total / 100);
 
-                            $children->discount = ($itemDiscount / 100) * $rule->disc_amount;
+                            $children->discount = ($itemDiscount / 100) * $perItemDiscount;
 
                             $children->discount = $children->base_total > $children->discount ? $children->discount : $children->base_total;
 
@@ -65,7 +66,7 @@ class FixedAmount extends Action
                     $report['product_id'] = $item->product_id;
                 }
 
-                $discount = round($rule->disc_amount, 4) * $discQuantity;
+                $discount = round($perItemDiscount, 4) * $discQuantity;
                 $discount = $discount <= $itemPrice * $discQuantity ? $discount : $itemPrice * $discQuantity;
 
                 $report['discount'] = $discount;
