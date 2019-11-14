@@ -32,7 +32,15 @@ class PercentOfProduct extends Action
         if ($applicability) {
             $eligibleItems = $this->getEligibleItems();
 
-            $applicableDiscount = \Cart::getCart()->base_sub_total * ($rule->disc_amount / 100);
+            $applicableDiscount = function () use ($eligibleItems) {
+                $total = 0;
+
+                foreach ($eligibleItems as $item) {
+                    $total = $total + $item->base_total;
+                }
+
+                return $total;
+            };
 
             foreach ($eligibleItems as $item) {
                 $report = array();
@@ -40,7 +48,7 @@ class PercentOfProduct extends Action
                 $report['item_id'] = $item->id;
                 $report['child_items'] = collect();
 
-                $perItemDiscount = $applicableDiscount / $eligibleItems->count();
+                $perItemDiscount = $applicableDiscount()  * ($rule->disc_amount / 100) / $eligibleItems->count();
 
                 $itemPrice = $item->base_price;
 
