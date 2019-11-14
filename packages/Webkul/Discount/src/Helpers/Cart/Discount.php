@@ -433,12 +433,15 @@ abstract class Discount
 
             foreach ($productIDs as $productID) {
                 foreach ($cart->items as $item) {
-                    $childrens = $item->children;
+                    if ($item->product_id == $productID)
+                        $partialMatch = 1;
+                }
 
-                    foreach ($childrens as $children) {
-                        if ($children->product_id == $productID)
-                            $partialMatch = 1;
-                    }
+                $childrens = $item->children;
+
+                foreach ($childrens as $children) {
+                    if ($children->product_id == $productID)
+                        $partialMatch = 1;
                 }
             }
         }
