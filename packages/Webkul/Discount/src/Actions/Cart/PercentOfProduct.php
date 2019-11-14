@@ -8,8 +8,6 @@ class PercentOfProduct extends Action
 {
     public function __construct($rule)
     {
-        parent::__construct();
-
         /**
          * Setting the rule getting applied
          */
@@ -34,22 +32,30 @@ class PercentOfProduct extends Action
         if ($applicability) {
             $eligibleItems = $this->getEligibleItems();
 
+            $applicableDiscount = function () use ($eligibleItems) {
+                $total = 0;
+
+                foreach ($eligibleItems as $item) {
+                    $total = $total + $item->base_total;
+                }
+
+                return $total;
+            };
+
             foreach ($eligibleItems as $item) {
                 $report = array();
 
                 $report['item_id'] = $item->id;
                 $report['child_items'] = collect();
 
+                $perItemDiscount = $applicableDiscount()  * ($rule->disc_amount / 100) / $eligibleItems->count();
+
                 $itemPrice = $item->base_price;
+
                 $itemQuantity = $item->quantity;
 
-                $discQuantity = $this->rule->disc_quantity;
+                $discQuantity = $rule->disc_quantity;
                 $discQuantity = $itemQuantity <= $discQuantity ? $itemQuantity : $discQuantity;
-
-                $discountAmount = ($this->rule->disc_amount > 100) ? 100 : $this->rule->disc_amount;
-
-                $discount = $itemPrice * ($discountAmount / 100) * $discQuantity;
-                $discount = $discount <= $itemPrice * $discQuantity ? $discount : $itemPrice * $discQuantity;
 
                 if ($item->product->getTypeInstance()->isComposite()) {
                     $isQtyZero = true;
@@ -71,7 +77,7 @@ class PercentOfProduct extends Action
 
                             $itemDiscount = $childBaseTotal / ($item->base_total / 100);
 
-                            $children->discount = ($itemDiscount / 100) * ($item->base_total * ($this->rule->disc_amount / 100));
+                            $children->discount = ($itemDiscount / 100) * $perItemDiscount;
 
                             $children->discount = $children->base_total > $children->discount ? $children->discount : $children->base_total;
 
@@ -82,8 +88,10 @@ class PercentOfProduct extends Action
                     $report['product_id'] = $item->product_id;
                 }
 
-                $report['discount'] = $discount;
+                $discount = round($perItemDiscount, 4) * $discQuantity;
+                $discount = $discount <= $itemPrice * $discQuantity ? $discount : $itemPrice * $discQuantity;
 
+                $report['discount'] = $discount;
                 $report['formatted_discount'] = core()->currency($discount);
 
                 $impact->push($report);

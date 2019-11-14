@@ -436,6 +436,13 @@ abstract class Discount
                     if ($item->product_id == $productID)
                         $partialMatch = 1;
                 }
+
+                $childrens = $item->children;
+
+                foreach ($childrens as $children) {
+                    if ($children->product_id == $productID)
+                        $partialMatch = 1;
+                }
             }
         }
 

@@ -9,23 +9,13 @@ abstract class Action
      */
     protected $rule;
 
-    /**
-     * Empty collection instance for keeping final list of items
-     */
-    protected $matchedItems;
-
-    public function __construct()
-    {
-        $this->matchedItems = collect();
-    }
-
     abstract public function calculate($rule);
 
     /**
      * To find the eligble items for the current rule,
      *
      * @param CartRule $rule
-     * @return Collection $matchedItems
+     * @return Collection $eligibleItems
      */
     public function getEligibleItems()
     {
@@ -35,13 +25,13 @@ abstract class Action
 
         $items = $cart->items()->get();
 
+        $eligibleItems = collect();
+
         if ($this->rule->action_type == 'whole_cart_to_percent' || $this->rule->action_type == 'whole_cart_to_fixed_amount')
-            $this->matchedItems = $items;
+            $this->eligibleItems = $items;
 
         if (! $rule->uses_attribute_conditions) {
-            $this->matchedItems = $items;
-
-            return $this->matchedItems;
+            return $items;
         } else {
             $productIDs = explode(',', $rule->product_ids);
 
@@ -51,15 +41,15 @@ abstract class Action
 
                     foreach ($childrens as $children) {
                         if ($children->product_id == $productID)
-                            $this->matchedItems->push($children);
+                            $eligibleItems->push($item);
                     }
 
                     if ($item->product_id == $productID)
-                        $this->matchedItems->push($item);
+                        $eligibleItems->push($item);
                 }
             }
 
-            return $this->matchedItems;
+            return $eligibleItems;
         }
     }
 
