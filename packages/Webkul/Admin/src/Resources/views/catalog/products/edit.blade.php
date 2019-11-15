@@ -17,7 +17,8 @@
 
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                        <i class="icon angle-left-icon back-link"
+                           onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
 
                         {{ __('admin::app.catalog.products.edit-title') }}
                     </h1>
@@ -26,7 +27,8 @@
                         <select class="control" id="channel-switcher" name="channel">
                             @foreach (core()->getAllChannels() as $channelModel)
 
-                                <option value="{{ $channelModel->code }}" {{ ($channelModel->code) == $channel ? 'selected' : '' }}>
+                                <option
+                                    value="{{ $channelModel->code }}" {{ ($channelModel->code) == $channel ? 'selected' : '' }}>
                                     {{ $channelModel->name }}
                                 </option>
 
@@ -38,7 +40,8 @@
                         <select class="control" id="locale-switcher" name="locale">
                             @foreach (core()->getAllLocales() as $localeModel)
 
-                                <option value="{{ $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
+                                <option
+                                    value="{{ $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
                                     {{ $localeModel->name }}
                                 </option>
 
@@ -66,31 +69,37 @@
 
                         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.' . $attributeGroup->name . '.before', ['product' => $product]) !!}
 
-                        <accordian :title="'{{ __($attributeGroup->name) }}'" :active="{{$index == 0 ? 'true' : 'false'}}">
+                        <accordian :title="'{{ __($attributeGroup->name) }}'"
+                                   :active="{{$index == 0 ? 'true' : 'false'}}">
                             <div slot="body">
                                 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.' . $attributeGroup->name . '.controls.before', ['product' => $product]) !!}
 
                                 @foreach ($customAttributes as $attribute)
 
                                     <?php
-                                        $validations = [];
+                                    $validations = [];
 
-                                        if ($attribute->is_required)
-                                            array_push($validations, 'required');
+                                    if ($attribute->is_required) {
+                                        array_push($validations, 'required');
+                                    }
 
-                                        if ($attribute->type == 'price')
-                                            array_push($validations, 'decimal');
+                                    if ($attribute->type == 'price') {
+                                        array_push($validations, 'decimal');
+                                    }
 
-                                        array_push($validations, $attribute->validation);
+                                    array_push($validations, $attribute->validation);
 
-                                        $validations = implode('|', array_filter($validations));
+                                    $validations = implode('|', array_filter($validations));
                                     ?>
 
                                     @if (view()->exists($typeView = 'admin::catalog.products.field-types.' . $attribute->type))
 
-                                        <div class="control-group {{ $attribute->type }}" @if ($attribute->type == 'multiselect') :class="[errors.has('{{ $attribute->code }}[]') ? 'has-error' : '']" @else :class="[errors.has('{{ $attribute->code }}') ? 'has-error' : '']" @endif>
+                                        <div class="control-group {{ $attribute->type }}"
+                                             @if ($attribute->type == 'multiselect') :class="[errors.has('{{ $attribute->code }}[]') ? 'has-error' : '']"
+                                             @else :class="[errors.has('{{ $attribute->code }}') ? 'has-error' : '']" @endif>
 
-                                            <label for="{{ $attribute->code }}" {{ $attribute->is_required ? 'class=required' : '' }}>
+                                            <label
+                                                for="{{ $attribute->code }}" {{ $attribute->is_required ? 'class=required' : '' }}>
                                                 {{ $attribute->admin_name }}
 
                                                 @if ($attribute->type == 'price')
@@ -98,13 +107,15 @@
                                                 @endif
 
                                                 <?php
-                                                    $channel_locale = [];
+                                                $channel_locale = [];
 
-                                                    if ($attribute->value_per_channel)
-                                                        array_push($channel_locale, $channel);
+                                                if ($attribute->value_per_channel) {
+                                                    array_push($channel_locale, $channel);
+                                                }
 
-                                                    if ($attribute->value_per_locale)
-                                                        array_push($channel_locale, $locale);
+                                                if ($attribute->value_per_locale) {
+                                                    array_push($channel_locale, $locale);
+                                                }
                                                 ?>
 
                                                 @if (count($channel_locale))
@@ -114,7 +125,9 @@
 
                                             @include ($typeView)
 
-                                            <span class="control-error"  @if ($attribute->type == 'multiselect') v-if="errors.has('{{ $attribute->code }}[]')" @else  v-if="errors.has('{{ $attribute->code }}')"  @endif>
+                                            <span class="control-error"
+                                                  @if ($attribute->type == 'multiselect') v-if="errors.has('{{ $attribute->code }}[]')"
+                                                  @else  v-if="errors.has('{{ $attribute->code }}')"  @endif>
                                                 @if ($attribute->type == 'multiselect')
                                                     @{{ errors.first('{!! $attribute->code !!}[]') }}
                                                 @else
@@ -137,16 +150,20 @@
 
                 @endforeach
 
-                {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.additional_views.before') !!}
-
+                {!! view_render_event(
+                  'bagisto.admin.catalog.product.edit_form_accordian.additional_views.before',
+                   ['product' => $product])
+                !!}
                 @foreach ($product->getTypeInstance()->getAdditionalViews() as $view)
 
                     @include ($view)
 
                 @endforeach
 
-                {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.additional_views.after') !!}
-
+                {!! view_render_event(
+                  'bagisto.admin.catalog.product.edit_form_accordian.additional_views.after',
+                   ['product' => $product])
+                !!}
             </div>
 
         </form>
