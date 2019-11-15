@@ -137,12 +137,16 @@
 
                 @endforeach
 
+                {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.additional_views.before') !!}
+
                 @foreach ($product->getTypeInstance()->getAdditionalViews() as $view)
 
                     @include ($view)
 
                 @endforeach
-                
+
+                {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.additional_views.after') !!}
+
             </div>
 
         </form>
