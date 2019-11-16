@@ -60,9 +60,9 @@ class CheckoutController extends Controller
 
         auth()->setDefaultDriver($this->guard);
 
-        
+
         // $this->middleware('auth:' . $this->guard);
-        
+
         $this->_config = request('_config');
 
         $this->cartRepository = $cartRepository;

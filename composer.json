@@ -90,7 +90,9 @@
             "Webkul\\API\\": "packages/Webkul/API",
             "Webkul\\Discount\\": "packages/Webkul/Discount/src",
             "Webkul\\CMS\\": "packages/Webkul/CMS/src",
-            "CNetic\\Payment\\": "packages/CNetic/Payment/src"
+            "CNetic\\Payment\\": "packages/CNetic/Payment/src",
+            "CNetic\\Przelewy24\\": "packages/CNetic/Przelewy24/src"
+
         }
     },
     "autoload-dev": {

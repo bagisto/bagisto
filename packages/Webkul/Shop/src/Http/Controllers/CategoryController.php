@@ -43,7 +43,7 @@ class CategoryController extends Controller
      * Display a listing of the resource.
      *
      * @param  string $slug
-     * @return \Illuminate\View\View 
+     * @return \Illuminate\View\View
      */
     public function index($slug)
     {
