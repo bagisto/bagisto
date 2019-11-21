@@ -1,10 +1,7 @@
 <?php
 
-namespace tests\sales\order;
-
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Repositories\OrderRepository;
-use Mockery;
 
 class OrderRepositoryCest
 {
@@ -12,17 +9,21 @@ class OrderRepositoryCest
 
     public function _before()
     {
-        $this->repository = Mockery::mock(OrderRepository::class);
-        $this->repository
-            ->shouldReceive('generateIncrementId')
-            ->andSet('model', new Order);
+        // @see https://stackoverflow.com/a/8457580
+        $reflection = new ReflectionClass(OrderRepository::class);
+
+        $property = $reflection->getProperty('model');
+        $property->setAccessible(true);
+
+        $this->repository = $reflection->newInstanceWithoutConstructor();
+        $property->setValue($this->repository, new Order());
     }
 
     public function testGenerateIncrementIdOnEmptyDatabase(UnitTester $I)
     {
         $result = $this->repository->generateIncrementId();
 
-        $I->expect(1, $result);
+        $I->assertEquals(1, $result);
     }
 
     public function testGenerateIncrementIdOnFilledDatabase(UnitTester $I)
@@ -32,6 +33,6 @@ class OrderRepositoryCest
 
         $result = $this->repository->generateIncrementId();
 
-        $I->expect($order->id + 1, $result);
+        $I->assertEquals($order->id + 1, $result);
     }
 }
