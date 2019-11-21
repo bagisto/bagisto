@@ -6,6 +6,7 @@ use Webkul\Discount\Repositories\CatalogRuleRepository as CatalogRule;
 use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
 use Webkul\Attribute\Repositories\AttributeOptionRepository as AttributeOption;
 use Webkul\Category\Repositories\CategoryRepository as Category;
+use Webkul\Product\Helpers\ProductType;
 use Webkul\Product\Repositories\ProductRepository as Product;
 use Webkul\Product\Models\ProductAttributeValue as ProductAttributeValue;
 
@@ -113,7 +114,7 @@ class ConvertXToProductId
         $products = collect();
 
         foreach ($attributeOptions as $attributeOption) {
-            if (isset($attributeOption->type) && $attributeOption->name != null && $attributeOption->condition != null && $attributeOption->value != [] && $attributeOption->type != null) {
+            if (isset($attributeOption->type) && $attributeOption->attribute != null && $attributeOption->condition != null && $attributeOption->value != [] && $attributeOption->type != null) {
                 $selectedOptions = $attributeOption->value;
 
                 if ($attributeOption->type == 'select' || $attributeOption->type == 'multiselect') {
@@ -162,17 +163,17 @@ class ConvertXToProductId
                         if ($testCondition == '{}') {
                             $foundProducts = $this->product->findWhere([
                                 ['sku', 'like', '%' . $testValue . '%'],
-                                ['type', '!=', 'configurable']
-                            ])->flatten()->all();
+                                ['type', 'NOT IN', ProductType::getAllTypesHavingVariants()]
+                                ])->flatten()->all();
                         } else if ($testCondition == '!{}') {
                             $foundProducts = $this->product->findWhere([
                                 ['sku', 'not like', '%' . $testValue . '%'],
-                                ['type', '!=', 'configurable']
+                                ['type', 'NOT IN', ProductType::getAllTypesHavingVariants()]
                             ])->flatten()->all();
                         } else if ($testCondition == '=') {
                             $foundProducts = $this->product->findWhere([
                                 ['sku', '=', $testValue],
-                                ['type', '!=', 'configurable']
+                                ['type', 'NOT IN', ProductType::getAllTypesHavingVariants()]
                             ])->flatten()->all();
                         }
                     }
