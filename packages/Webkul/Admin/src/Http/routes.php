@@ -1,5 +1,4 @@
 <?php
-
 Route::group(['middleware' => ['web']], function () {
     Route::prefix('admin')->group(function () {
 
@@ -112,7 +111,6 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.customer.addresses.index'
             ])->name('admin.customer.addresses.massdelete');
 
-            // Configuration routes
             Route::get('configuration/{slug?}/{slug2?}', 'Webkul\Admin\Http\Controllers\ConfigurationController@index')->defaults('_config', [
                 'view' => 'admin::configuration.index'
             ])->name('admin.configuration.index');
@@ -278,7 +276,7 @@ Route::group(['middleware' => ['web']], function () {
                 Route::post('/products/upload-file/{id}', 'Webkul\Product\Http\Controllers\ProductController@uploadLink')->name('admin.catalog.products.upload_link');
 
                 Route::post('/products/upload-sample/{id}', 'Webkul\Product\Http\Controllers\ProductController@uploadSample')->name('admin.catalog.products.upload_sample');
-                
+
                 //product delete
                 Route::post('/products/delete/{id}', 'Webkul\Product\Http\Controllers\ProductController@destroy')->name('admin.catalog.products.delete');
 
