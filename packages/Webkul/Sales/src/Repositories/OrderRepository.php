@@ -206,7 +206,7 @@ class OrderRepository extends Repository
                 ->first() ?: false;
         }
 
-        $lastOrder = $this->order->orderBy('id', 'desc')->limit(1)->first();
+        $lastOrder = $this->model->orderBy('id', 'desc')->limit(1)->first();
         $lastId = $lastOrder ? $lastOrder->id : 0;
 
         if ($invoiceNumberLength && ($invoiceNumberPrefix || $invoiceNumberSuffix)) {

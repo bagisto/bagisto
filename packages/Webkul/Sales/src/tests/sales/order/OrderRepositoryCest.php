@@ -15,7 +15,7 @@ class OrderRepositoryCest
         $this->repository = Mockery::mock(OrderRepository::class);
         $this->repository
             ->shouldReceive('generateIncrementId')
-            ->andSet('order', new Order);
+            ->andSet('model', new Order);
     }
 
     public function testGenerateIncrementIdOnEmptyDatabase(UnitTester $I)
