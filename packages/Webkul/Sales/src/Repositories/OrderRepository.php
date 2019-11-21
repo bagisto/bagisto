@@ -141,13 +141,13 @@ class OrderRepository extends Repository
     {
         $order = $this->findOrFail($orderId);
 
-        if (!$order->canCancel())
+        if (! $order->canCancel())
             return false;
 
         Event::fire('sales.order.cancel.before', $order);
 
         foreach ($order->items as $item) {
-            if (!$item->qty_to_cancel)
+            if (! $item->qty_to_cancel)
                 continue;
 
             $orderItems = [];
@@ -231,7 +231,7 @@ class OrderRepository extends Repository
             $totalQtyOrdered += $item->qty_ordered;
             $totalQtyInvoiced += $item->qty_invoiced;
 
-            if (!$item->isStockable()) {
+            if (! $item->isStockable()) {
                 $totalQtyShipped += $item->qty_ordered;
             } else {
                 $totalQtyShipped += $item->qty_shipped;
