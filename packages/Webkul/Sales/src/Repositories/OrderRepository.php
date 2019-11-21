@@ -8,9 +8,10 @@ use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Core\Models\CoreConfig;
 use Webkul\Sales\Contracts\Order;
+use Webkul\Sales\Models\Order as OrderModel;
 
 /**
- * Order Reposotory
+ * Order Repository
  *
  * @author    Jitendra Singh <jitendra@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
@@ -58,7 +59,7 @@ class OrderRepository extends Repository
      * @return Mixed
      */
 
-    function model()
+    public function model()
     {
         return Order::class;
     }
@@ -140,13 +141,13 @@ class OrderRepository extends Repository
     {
         $order = $this->findOrFail($orderId);
 
-        if (! $order->canCancel())
+        if (!$order->canCancel())
             return false;
 
         Event::fire('sales.order.cancel.before', $order);
 
         foreach ($order->items as $item) {
-            if (! $item->qty_to_cancel)
+            if (!$item->qty_to_cancel)
                 continue;
 
             $orderItems = [];
@@ -190,7 +191,7 @@ class OrderRepository extends Repository
     /**
      * @return integer
      */
-    public function generateIncrementId()
+    public function generateIncrementId(): int
     {
         $config = new CoreConfig();
 
@@ -201,11 +202,11 @@ class OrderRepository extends Repository
                  ] as $varSuffix => $confKey) {
             $var = "invoiceNumber{$varSuffix}";
             $$var = $config
-                ->where('code', '=', "sales.orderSettings.order_number.{$confKey}")
+                ->where('code', '=', "sales.orderSettings.order_number.order_number_{$confKey}")
                 ->first() ?: false;
         }
 
-        $lastOrder = $this->model->orderBy('id', 'desc')->limit(1)->first();
+        $lastOrder = $this->order->orderBy('id', 'desc')->limit(1)->first();
         $lastId = $lastOrder ? $lastOrder->id : 0;
 
         if ($invoiceNumberLength && ($invoiceNumberPrefix || $invoiceNumberSuffix)) {
@@ -230,7 +231,7 @@ class OrderRepository extends Repository
             $totalQtyOrdered += $item->qty_ordered;
             $totalQtyInvoiced += $item->qty_invoiced;
 
-            if (! $item->isStockable()) {
+            if (!$item->isStockable()) {
                 $totalQtyShipped += $item->qty_ordered;
             } else {
                 $totalQtyShipped += $item->qty_shipped;
