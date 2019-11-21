@@ -166,14 +166,14 @@ class WishlistController extends Controller
             } else {
                 session()->flash('info', trans('shop::app.wishlist.option-missing'));
 
-                return redirect()->route('shop.products.index', $wishlistItem->product->url_key);
+                return redirect()->route('shop.productOrCategory.index', $wishlistItem->product->url_key);
             }
 
             return redirect()->back();
         } catch (\Exception $e) {
             session()->flash('warning', $e->getMessage());
 
-            return redirect()->route('shop.products.index', ['slug' => $wishlistItem->product->url_key]);
+            return redirect()->route('shop.productOrCategory.index', ['slug' => $wishlistItem->product->url_key]);
         }
     }
 

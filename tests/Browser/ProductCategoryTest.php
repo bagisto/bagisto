@@ -41,7 +41,7 @@ class ProductCategoryTest extends DuskTestCase
         }
 
         $this->browse(function (Browser $browser) use($testSlug, $testProduct) {
-            $browser->visit(route('shop.categories.index', $testSlug));
+            $browser->visit(route('shop.productOrCategory.index', $testSlug));
             $browser->assertSeeLink($testProduct[0]['name']);
             $browser->pause(5000);
         });

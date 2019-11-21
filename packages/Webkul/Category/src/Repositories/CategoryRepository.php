@@ -152,6 +152,24 @@ class CategoryRepository extends Repository
     }
 
     /**
+     * @param string $urlPath
+     *
+     * @return mixed
+     */
+    public function findByPathOrFail(string $urlPath)
+    {
+        $category = $this->model->whereTranslation('url_path', $urlPath)->first();
+
+        if ($category) {
+            return $category;
+        }
+
+        throw (new ModelNotFoundException)->setModel(
+            get_class($this->model), $urlPath
+        );
+    }
+
+    /**
      * @param array $data
      * @param $id
      * @param string $attribute

@@ -13,11 +13,6 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
     //unsubscribe
     Route::get('/unsubscribe/{token}', 'Webkul\Shop\Http\Controllers\SubscriptionController@unsubscribe')->name('shop.unsubscribe');
 
-    //Store front header nav-menu fetch
-    Route::get('/categories/{slug}', 'Webkul\Shop\Http\Controllers\CategoryController@index')->defaults('_config', [
-        'view' => 'shop::products.index'
-    ])->name('shop.categories.index');
-
     //Store front search
     Route::get('/search', 'Webkul\Shop\Http\Controllers\SearchController@index')->defaults('_config', [
         'view' => 'shop::search.search'
@@ -88,11 +83,6 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
 
     //Shop buynow button action
     Route::get('move/wishlist/{id}', 'Webkul\Shop\Http\Controllers\CartController@moveToWishlist')->name('shop.movetowishlist');
-
-    //Show Product Details Page(For individually Viewable Product)
-    Route::get('/products/{slug}', 'Webkul\Shop\Http\Controllers\ProductController@index')->defaults('_config', [
-        'view' => 'shop::products.view'
-    ])->name('shop.products.index');
 
     Route::get('/downloadable/download-sample/{type}/{id}', 'Webkul\Shop\Http\Controllers\ProductController@downloadSample')->name('shop.downloadable.download_sample');
 
@@ -306,6 +296,14 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
     //customer routes end here
 
     Route::get('page/{slug}', 'Webkul\CMS\Http\Controllers\Shop\PagePresenterController@presenter')->name('shop.cms.page');
+
+    Route::get('{slug}', \Webkul\Shop\Http\Controllers\ProductsCategoriesProxyController::class . '@index')
+        ->defaults('_config', [
+            'product_view' => 'shop::products.view',
+            'category_view' => 'shop::products.index'
+        ])
+        ->where('slug', '^([a-z-]+\/?)+$')
+        ->name('shop.productOrCategory.index');
 
     Route::fallback('Webkul\Shop\Http\Controllers\HomeController@notFound');
 });
