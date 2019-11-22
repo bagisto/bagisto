@@ -17,6 +17,7 @@ class ProductType extends AbstractProduct
     {
         /** @var AbstractType $type */
         $type = app(config('product_types.' . $typeKey . '.class'));
+
         return $type->hasVariants();
     }
 
@@ -27,10 +28,8 @@ class ProductType extends AbstractProduct
      */
     public static function getAllTypesHavingVariants(): array
     {
-        foreach (config('product_types') as $type)
-        {
-            if (self::hasVariants($type['key']))
-            {
+        foreach (config('product_types') as $type) {
+            if (self::hasVariants($type['key'])) {
                 array_push($havingVariants, $type['key']);
             }
         }
