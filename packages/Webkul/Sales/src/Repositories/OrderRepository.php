@@ -44,8 +44,7 @@ class OrderRepository extends Repository
         OrderItemRepository $orderItemRepository,
         DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository,
         App $app
-    )
-    {
+    ) {
         $this->orderItemRepository = $orderItemRepository;
 
         $this->downloadableLinkPurchasedRepository = $downloadableLinkPurchasedRepository;
@@ -97,8 +96,9 @@ class OrderRepository extends Repository
 
             $order->payment()->create($data['payment']);
 
-            if (isset($data['shipping_address']))
+            if (isset($data['shipping_address'])) {
                 $order->addresses()->create($data['shipping_address']);
+            }
 
             $order->addresses()->create($data['billing_address']);
 
@@ -141,14 +141,16 @@ class OrderRepository extends Repository
     {
         $order = $this->findOrFail($orderId);
 
-        if (! $order->canCancel())
+        if (! $order->canCancel()) {
             return false;
+        }
 
         Event::fire('sales.order.cancel.before', $order);
 
         foreach ($order->items as $item) {
-            if (! $item->qty_to_cancel)
+            if (! $item->qty_to_cancel) {
                 continue;
+            }
 
             $orderItems = [];
 
@@ -161,8 +163,9 @@ class OrderRepository extends Repository
             }
 
             foreach ($orderItems as $orderItem) {
-                if ($orderItem->product)
+                if ($orderItem->product) {
                     $this->orderItemRepository->returnQtyToProductInventory($orderItem);
+                }
 
                 if ($orderItem->qty_ordered) {
                     $orderItem->qty_canceled += $orderItem->qty_to_cancel;
@@ -191,7 +194,7 @@ class OrderRepository extends Repository
     /**
      * @return integer
      */
-    public function generateIncrementId(): int
+    public function generateIncrementId()
     {
         $config = new CoreConfig();
 
@@ -243,8 +246,9 @@ class OrderRepository extends Repository
 
         if ($totalQtyOrdered != ($totalQtyRefunded + $totalQtyCanceled)
             && $totalQtyOrdered == $totalQtyInvoiced + $totalQtyCanceled
-            && $totalQtyOrdered == $totalQtyShipped + $totalQtyRefunded + $totalQtyCanceled)
+            && $totalQtyOrdered == $totalQtyShipped + $totalQtyRefunded + $totalQtyCanceled) {
             return true;
+        }
 
         return false;
     }
@@ -293,13 +297,15 @@ class OrderRepository extends Repository
     {
         $status = 'processing';
 
-        if ($this->isInCompletedState($order))
+        if ($this->isInCompletedState($order)) {
             $status = 'completed';
+        }
 
-        if ($this->isInCanceledState($order))
+        if ($this->isInCanceledState($order)) {
             $status = 'canceled';
-        else if ($this->isInClosedState($order))
+        } elseif ($this->isInClosedState($order)) {
             $status = 'closed';
+        }
 
         $order->status = $status;
         $order->save();
