@@ -229,6 +229,7 @@ return [
         //Webkul packages
         Webkul\Theme\Providers\ThemeServiceProvider::class,
         Webkul\User\Providers\UserServiceProvider::class,
+        CNetic\Payment\Providers\PaymentServiceProvider::class,
         Webkul\Admin\Providers\AdminServiceProvider::class,
         Webkul\Ui\Providers\UiServiceProvider::class,
         Webkul\Category\Providers\CategoryServiceProvider::class,
@@ -247,8 +248,7 @@ return [
         Webkul\API\Providers\APIServiceProvider::class,
         Webkul\Discount\Providers\DiscountServiceProvider::class,
         Webkul\CMS\Providers\CMSServiceProvider::class,
-        CNetic\Payment\Providers\PaymentServiceProvider::class
-
+        CNetic\Przelewy24\Providers\Przelewy24ServiceProvider::class,
     ],
 
     /*
