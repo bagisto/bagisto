@@ -22,7 +22,7 @@ class Configurable extends AbstractType
 
     /**
      * These blade files will be included in product edit page
-     * 
+     *
      * @var array
      */
     protected $additionalViews = [
@@ -46,6 +46,13 @@ class Configurable extends AbstractType
      * @var boolean
      */
     protected $showQuantityBox = true;
+
+    /**
+     * Has child products aka variants
+     *
+     * @var boolean
+     */
+    protected $hasVariants = true;
 
     /**
      * @param array $data
@@ -416,7 +423,7 @@ class Configurable extends AbstractType
 
         return $products;
     }
-    
+
     /**
      *
      * @param array $options1
@@ -451,7 +458,7 @@ class Configurable extends AbstractType
             ];
         }
 
-        return $data;        
+        return $data;
     }
 
     /**
