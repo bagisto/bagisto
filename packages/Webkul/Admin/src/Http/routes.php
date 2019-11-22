@@ -1,4 +1,5 @@
 <?php
+
 Route::group(['middleware' => ['web']], function () {
     Route::prefix('admin')->group(function () {
 
@@ -111,6 +112,7 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.customer.addresses.index'
             ])->name('admin.customer.addresses.massdelete');
 
+            // Configuration routes
             Route::get('configuration/{slug?}/{slug2?}', 'Webkul\Admin\Http\Controllers\ConfigurationController@index')->defaults('_config', [
                 'view' => 'admin::configuration.index'
             ])->name('admin.configuration.index');
@@ -757,6 +759,15 @@ Route::group(['middleware' => ['web']], function () {
                 // Route::post('/delete/{id}', 'Webkul\CMS\Http\Controllers\Admin\PageController@delete')->defaults('_config', [
                 //     'redirect' => 'admin.cms.index'
                 // ])->name('admin.cms.delete');
+            });
+
+            // Development settings
+            Route::prefix('development')->group(function () {
+                Route::get('/', 'Webkul\Admin\Http\Controllers\Development\DashboardController@index')
+                    ->name('admin.development.index');
+
+                Route::get('webconsole', 'Webkul\Admin\Http\Controllers\Development\WebConsoleController@index')
+                    ->name('admin.development.webconsole');
             });
         });
     });
