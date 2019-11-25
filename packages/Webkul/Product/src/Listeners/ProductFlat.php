@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
+use Webkul\Product\Helpers\ProductType;
 use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Models\ProductAttributeValue;
@@ -148,7 +149,7 @@ class ProductFlat
     {
         $this->createFlat($product);
 
-        if ($product->type == 'configurable') {
+        if (ProductType::hasVariants($product->type)) {
             foreach ($product->variants()->get() as $variant) {
                 $this->createFlat($variant, $product);
             }

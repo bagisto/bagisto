@@ -584,7 +584,6 @@ return [
             'title' => 'Idiomas',
             'add-title' => 'Add Idioma',
             'edit-title' => 'Editar Idioma',
-            'add-title' => 'Add Idioma',
             'save-btn-title' => 'Salvar Idioma',
             'general' => 'Geral',
             'code' => 'Código',
@@ -753,6 +752,10 @@ return [
             'update-error' => 'Erro! Taxas de Impostos Não Poderam ser Atualizadas',
             'delete' => 'Taxas de Impostos Excluídas com Sucesso',
             'atleast-one' => 'Não é Possível Excluir a Última Taxa de Impostos'
+        ],
+        'development' => [
+            'title' => 'Desenvolvimento',
+            'webconsole' => 'Console da Web',
         ]
     ],
     'customers' => [
