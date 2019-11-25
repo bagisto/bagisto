@@ -302,7 +302,7 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
             'product_view' => 'shop::products.view',
             'category_view' => 'shop::products.index'
         ])
-        ->where('slug', '^([a-z-]+\/?)+$')
+        ->where('slug', '^([a-z0-9-]+\/?)+$')
         ->name('shop.productOrCategory.index');
 
     Route::fallback('Webkul\Shop\Http\Controllers\HomeController@notFound');

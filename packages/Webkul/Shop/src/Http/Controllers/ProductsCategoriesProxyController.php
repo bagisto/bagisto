@@ -62,7 +62,7 @@ class ProductsCategoriesProxyController extends Controller
     {
         $slug = rtrim($slug, '/ ');
 
-        if (preg_match('/^([a-z-]+\/?)+$/', $slug)) {
+        if (preg_match('/^([a-z0-9-]+\/?)+$/', $slug)) {
 
             if (DB::table(app(CategoryTranslation::class)->getTable())
                 ->where('url_path', '=', $slug)
@@ -84,9 +84,8 @@ class ProductsCategoriesProxyController extends Controller
 
                 return view($this->_config['product_view'], compact('product', 'customer'));
             }
-
-        } else {
-            throw new NotFoundHttpException();
         }
+
+        abort(404);
     }
 }
