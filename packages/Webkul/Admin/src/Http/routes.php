@@ -642,7 +642,7 @@ Route::group(['middleware' => ['web']], function () {
                     'view' => 'admin::promotions.cart-rules.create'
                 ])->name('admin.cart-rules.create');
 
-                Route::post('cart-rules/store', 'Webkul\CartRule\Http\Controllers\CartRuleController@store')->defaults('_config', [
+                Route::post('cart-rules/create', 'Webkul\CartRule\Http\Controllers\CartRuleController@store')->defaults('_config', [
                     'redirect' => 'admin.cart-rules.index'
                 ])->name('admin.cart-rules.store');
 
@@ -650,11 +650,16 @@ Route::group(['middleware' => ['web']], function () {
                     'view' => 'admin::promotions.cart-rules.edit'
                 ])->name('admin.cart-rules.edit');
 
-                Route::post('cart-rules/update/{id}', 'Webkul\CartRule\Http\Controllers\CartRuleController@update')->defaults('_config', [
+                Route::post('cart-rules/edit/{id}', 'Webkul\CartRule\Http\Controllers\CartRuleController@update')->defaults('_config', [
                     'redirect' => 'admin.cart-rules.index'
                 ])->name('admin.cart-rules.update');
 
                 Route::post('cart-rules/delete/{id}', 'Webkul\CartRule\Http\Controllers\CartRuleController@destroy')->name('admin.cart-rules.delete');
+
+                Route::post('cart-rules/generate-coupons/{id?}', 'Webkul\CartRule\Http\Controllers\CartRuleController@generateCoupons')->name('admin.cart-rules.generate-coupons');
+
+                Route::post('/massdelete', 'Webkul\CartRule\Http\Controllers\CartRuleCouponController@massDelete')->name('admin.cart-rule-coupons.mass-delete');
+
 
                 // Route::get('/catalog-rules', 'Webkul\Discount\Http\Controllers\CatalogRuleController@index')->defaults('_config', [
                 //     'view' => 'admin::promotions.catalog-rule.index'

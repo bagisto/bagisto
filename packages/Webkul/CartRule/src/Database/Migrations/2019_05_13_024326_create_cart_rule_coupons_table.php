@@ -18,8 +18,10 @@ class CreateCartruleCouponsTable extends Migration
             $table->string('code')->nullable();
             $table->integer('usage_limit')->unsigned()->default(0);
             $table->integer('usage_per_customer')->unsigned()->default(0);
-            $table->integer('usage_throttle')->unsigned()->default(0);
+            $table->integer('times_used')->unsigned()->default(0);
             $table->integer('type')->unsigned()->default(0);
+            $table->boolean('is_primary')->default(0);
+            $table->date('expired_at')->nullable();
             
             $table->integer('cart_rule_id')->unsigned();
             $table->foreign('cart_rule_id')->references('id')->on('cart_rules')->onDelete('cascade');

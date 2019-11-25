@@ -183,13 +183,13 @@ return [
         'icon-class' => ''
     ], [
         'key' => 'promotions',
-        'name' => 'admin::app.layouts.promotion',
+        'name' => 'admin::app.layouts.promotions',
         'route' => 'admin.cart-rules.index',
         'sort' => 5,
         'icon-class' => 'promotion-icon'
     ], [
         'key' => 'promotions.cart-rules',
-        'name' => 'admin::app.promotion.cart-rules',
+        'name' => 'admin::app.promotions.cart-rules.title',
         'route' => 'admin.cart-rules.index',
         'sort' => 1,
         'icon-class' => ''

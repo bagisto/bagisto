@@ -41,7 +41,7 @@ return [
         'taxes' => 'مالیات',
         'tax-categories' => 'دسته بندی مالیات',
         'tax-rates' => 'نرخ مالیات',
-        'promotion' => 'تبلیغات',
+        'promotions' => 'تبلیغات',
         'discount' => 'تخفیف'
     ],
 
@@ -76,7 +76,7 @@ return [
         'edit' => 'ویاریش',
         'create' => 'افزودن',
         'delete' => 'حذف',
-        'promotion' => 'تبلیغات',
+        'promotions' => 'تبلیغات',
         'cart-rules' => 'قوانین سبد خرید'
     ],
 
@@ -823,9 +823,9 @@ return [
         ]
     ],
 
-    'promotion' => [
+    'promotions' => [
         'catalog-rule' => 'قوانین کاتالوگ',
-        'cart-rule' => 'قوانین سبد خرید',
+        'cart-rules' => 'قوانین سبد خرید',
         'add-catalog-rule' => 'افزودن قانون کاتالوگ',
         'add-cart-rule' => 'افزودن قانون سبد خرید',
         'edit-cart-rule' => 'ویرایش قانون کاتالوگ',

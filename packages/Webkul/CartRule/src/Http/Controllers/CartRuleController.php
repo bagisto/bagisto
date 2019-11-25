@@ -2,9 +2,10 @@
 
 namespace Webkul\CartRule\Http\Controllers;
 
-use Webkul\Category\Repositories\CategoryRepository;
-use Webkul\Attribute\Repositories\AttributeRepository;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Event;
 use Webkul\CartRule\Repositories\CartRuleRepository;
+use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 
 /**
  * Cart Rule controller
@@ -29,40 +30,29 @@ class CartRuleController extends Controller
     protected $cartRuleRepository;
 
     /**
-     * To hold category repository instance
+     * To hold CartRuleCouponRepository repository instance
      * 
-     * @var CategoryRepository
+     * @var CartRuleCouponRepository
      */
-    protected $categoryRepository;
-
-    /**
-     * To hold attribute repository instance
-     * 
-     * @var AttributeRepository
-     */
-    protected $attributeRepository;
+    protected $cartRuleCouponRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\CartRule\Repositories\CartRuleRepository   $cartRuleRepository
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository $attributeRepository
-     * @param  \Webkul\Category\Repositories\CategoryRepository   $categoryRepository
+     * @param  \Webkul\CartRule\Repositories\CartRuleRepository       $cartRuleRepository
+     * @param  \Webkul\CartRule\Repositories\CartRuleCouponRepository $cartRuleCouponRepository
      * @return void
      */
     public function __construct(
         CartRuleRepository $cartRuleRepository,
-        AttributeRepository $attributeRepository,
-        CategoryRepository $categoryRepository
+        CartRuleCouponRepository $cartRuleCouponRepository
     )
     {
         $this->_config = request('_config');
 
         $this->cartRuleRepository = $cartRuleRepository;
 
-        $this->attributeRepository = $attributeRepository;
-
-        $this->categoryRepository = $categoryRepository;
+        $this->cartRuleCouponRepository = $cartRuleCouponRepository;
     }
 
     /**
@@ -93,18 +83,27 @@ class CartRuleController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:attributes,code', new \Webkul\Core\Contracts\Validations\Code],
-            'admin_name' => 'required',
-            'type' => 'required'
+            'name' => 'required',
+            'channels' => 'required|array|min:1',
+            'customer_groups' => 'required|array|min:1',
+            'coupon_type' => 'required',
+            'use_auto_generation' => 'required_if:coupon_type,==,1',
+            'coupon_code' => 'required_if:use_auto_generation,==,0',
+            'starts_from' => 'nullable|date',
+            'ends_till' => 'nullable|date|after_or_equal:starts_from',
+            'action_type' => 'required',
+            'discount_amount' => ['required', new \Webkul\Core\Contracts\Validations\Decimal]
         ]);
 
         $data = request()->all();
 
-        $data['is_user_defined'] = 1;
+        Event::fire('promotions.cart_rule.create.before');
 
-        $attribute = $this->attribute->create($data);
+        $cartRule = $this->cartRuleRepository->create($data);
 
-        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Attribute']));
+        Event::fire('promotions.cart_rule.create.after', $cartRule);
+
+        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Cart Rule']));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -112,14 +111,14 @@ class CartRuleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $attribute = $this->attribute->findOrFail($id);
+        $cartRule = $this->cartRuleRepository->findOrFail($id);
 
-        return view($this->_config['view'], compact('attribute'));
+        return view($this->_config['view'], compact('cartRule'));
     }
 
     /**
@@ -132,14 +131,27 @@ class CartRuleController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:attributes,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
-            'admin_name' => 'required',
-            'type' => 'required'
+            'name' => 'required',
+            'channels' => 'required|array|min:1',
+            'customer_groups' => 'required|array|min:1',
+            'coupon_type' => 'required',
+            'use_auto_generation' => 'required_if:coupon_type,==,1',
+            'coupon_code' => 'required_if:use_auto_generation,==,0',
+            'starts_from' => 'nullable|date',
+            'ends_till' => 'nullable|date|after_or_equal:starts_from',
+            'action_type' => 'required',
+            'discount_amount' => ['required', new \Webkul\Core\Contracts\Validations\Decimal]
         ]);
 
-        $attribute = $this->attribute->update(request()->all(), $id);
+        $cartRule = $this->cartRuleRepository->findOrFail($id);
 
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Attribute']));
+        Event::fire('promotions.cart_rule.update.before', $cartRule);
+
+        $cartRule = $this->cartRuleRepository->update(request()->all(), $id);
+
+        Event::fire('promotions.cart_rule.update.after', $cartRule);
+
+        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Cart Rule']));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -152,63 +164,43 @@ class CartRuleController extends Controller
      */
     public function destroy($id)
     {
-        $attribute = $this->attribute->findOrFail($id);
+        $cartRule = $this->cartRuleRepository->findOrFail($id);
 
-        if (! $attribute->is_user_defined) {
-            session()->flash('error', trans('admin::app.response.user-define-error', ['name' => 'Attribute']));
-        } else {
-            try {
-                $this->attribute->delete($id);
+        try {
+            Event::fire('promotions.cart_rule.delete.before', $id);
 
-                session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Attribute']));
+            $this->cartRuleRepository->delete($id);
 
-                return response()->json(['message' => true], 200);
-            } catch(\Exception $e) {
-                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Attribute']));
-            }
+            Event::fire('promotions.cart_rule.delete.after', $id);
+
+            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Cart Rule']));
+
+            return response()->json(['message' => true], 200);
+        } catch(\Exception $e) {
+            session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Cart Rule']));
         }
 
         return response()->json(['message' => false], 400);
     }
 
     /**
-     * Remove the specified resources from database
+     * Generate coupon code for cart rule
      *
-     * @return response \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function massDestroy()
+    public function generateCoupons()
     {
-        $suppressFlash = false;
+        $this->validate(request(), [
+            'coupon_qty' => 'required|integer|min:1',
+            'code_length' => 'required|integer|min:10',
+            'code_format' => 'required'
+        ]);
+        
+        if (! request('id'))
+            return response()->json(['message' => trans('admin::app.promotions.cart-rules.cart-rule-not-defind-error')], 400);
 
-        if (request()->isMethod('post')) {
-            $indexes = explode(',', request()->input('indexes'));
+        $this->cartRuleCouponRepository->generateCoupons(request()->all(), request('id'));
 
-            foreach ($indexes as $key => $value) {
-                $attribute = $this->attribute->find($value);
-
-                try {
-                    if (! $attribute->is_user_defined) {
-                        continue;
-                    } else {
-                        $this->attribute->delete($value);
-                    }
-                } catch (\Exception $e) {
-                    $suppressFlash = true;
-
-                    continue;
-                }
-            }
-
-            if (! $suppressFlash)
-                session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'attributes']));
-            else
-                session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'attributes']));
-
-            return redirect()->back();
-        } else {
-            session()->flash('error', trans('admin::app.datagrid.mass-ops.method-error'));
-
-            return redirect()->back();
-        }
+        return response()->json(['message' => trans('admin::app.response.create-success', ['name' => 'Cart rule coupons'])]);
     }
 }

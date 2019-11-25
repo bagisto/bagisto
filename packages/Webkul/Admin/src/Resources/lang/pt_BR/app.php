@@ -38,7 +38,7 @@ return [
         'taxes' => 'Impostos',
         'tax-categories' => 'Categorias de Impostos',
         'tax-rates' => 'Impostos de Impostos',
-        'promotion' => 'Promoções',
+        'promotions' => 'Promoções',
         'discount' => 'Desconto'
     ],
     'acl' => [
@@ -796,9 +796,9 @@ return [
             'delete-failed' => 'Erro! Você não pode excluir a inscrição desse usuário',
         ]
     ],
-    'promotion' => [
+    'promotions' => [
         'catalog-rule' => 'Regras de Catálogo',
-        'cart-rule' => 'Regras do Carrinho',
+        'cart-rules' => 'Regras do Carrinho',
         'add-catalog-rule' => 'Adicionar regra de catálogo',
         'add-cart-rule' => 'Adicionar Regra do Carrinho',
         'edit-cart-rule' => 'Editar regra do carrinho',

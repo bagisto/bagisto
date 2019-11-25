@@ -5,7 +5,6 @@ namespace Webkul\Product\Helpers;
 use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductFlat;
-use Webkul\Discount\Repositories\CatalogRuleProductsRepository as CatalogRuleProduct;
 use Webkul\Customer\Repositories\CustomerGroupRepository as CustomerGroup;
 
 class Price extends AbstractProduct
@@ -16,12 +15,6 @@ class Price extends AbstractProduct
      * @var array
      */
     protected $attribute;
-
-    /**
-     * CatalogRuleProductsRepository object
-     *
-     */
-    protected $catalogRuleProduct;
 
     /**
      * CustomerGroupRepository object
@@ -36,12 +29,9 @@ class Price extends AbstractProduct
      */
     public function __construct(
         Attribute $attribute,
-        CatalogRuleProduct $catalogRuleProduct,
         CustomerGroup $customerGroup
     ) {
         $this->attribute = $attribute;
-
-        $this->catalogRuleProduct = $catalogRuleProduct;
 
         $this->customerGroup = $customerGroup;
     }
@@ -79,6 +69,7 @@ class Price extends AbstractProduct
     public function getVariantMinPrice($product)
     {
         static $price = [];
+
         $finalPrice = [];
 
         if (array_key_exists($product->id, $price))
@@ -101,23 +92,6 @@ class Price extends AbstractProduct
             ->where('product_flat.channel', core()->getCurrentChannelCode())
             ->where('product_flat.locale', app()->getLocale())
             ->get();
-
-
-        if (! auth()->guard('customer')->check()) {
-            $groupID = $this->customerGroup->findOneWhere([
-                            'code' => 'guest'
-                        ])->id;
-        } else {
-            $groupID = auth()->guard('customer')->user()->customer_group_id;
-        }
-
-        if ($groupID) {
-            $something = $this->catalogRuleProduct->findWhere([
-                'product_id' => $productId,
-                'channel_id' => core()->getCurrentChannel()->id,
-                'customer_group_id' => $groupID
-            ]);
-        }
 
         foreach ($result as $price) {
             $finalPrice[] = $price->final_price;

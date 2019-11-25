@@ -89,6 +89,10 @@ $(document).ready(function () {
 
             showModal(id) {
                 this.$set(this.modalIds, id, true);
+            },
+
+            redirectBack(fallbackUrl) {
+                history.length > 1 ? history.go(-1) : window.location = fallbackUrl;
             }
         }
     });

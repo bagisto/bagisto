@@ -1,7 +1,7 @@
 @extends('admin::layouts.content')
 
 @section('page_title')
-    {{ __('admin::app.promotion.cart-rule') }}
+    {{ __('admin::app.promotions.cart-rules.title') }}
 @stop
 
 @section('content')
@@ -9,12 +9,12 @@
     <div class="content">
         <div class="page-header">
             <div class="page-title">
-                <h1>{{ __('admin::app.promotion.cart-rule') }}</h1>
+                <h1>{{ __('admin::app.promotions.cart-rules.title') }}</h1>
             </div>
 
             <div class="page-action">
-                <a href="{{ route('admin.cart-rule.create') }}" class="btn btn-lg btn-primary">
-                    {{ __('admin::app.promotion.add-cart-rule') }}
+                <a href="{{ route('admin.cart-rules.create') }}" class="btn btn-lg btn-primary">
+                    {{ __('admin::app.promotions.cart-rules.add-title') }}
                 </a>
             </div>
         </div>
