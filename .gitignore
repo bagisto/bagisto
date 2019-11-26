@@ -5,6 +5,7 @@
 /public/js
 /public/vendor
 /public/themes
+/packages/CNetic
 /storage/*.key
 /vendor
 /.idea
