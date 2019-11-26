@@ -143,9 +143,16 @@ class Configurable extends AbstractType
                 ];
         }
 
+        $typeOfVariants = 'simple';
+        $productInstance = app(config('product_types.' . $product->type . '.class'));
+        if ($productInstance->variantsType && !in_array($productInstance->variantsType , ['bundle', 'configurable', 'grouped']))
+        {
+            $typeOfVariants = $productInstance->variantsType;
+        }
+
         $variant = $this->productRepository->getModel()->create([
                 'parent_id' => $product->id,
-                'type' => 'simple',
+                'type' => $typeOfVariants,
                 'attribute_family_id' => $product->attribute_family_id,
                 'sku' => $data['sku'],
             ]);
