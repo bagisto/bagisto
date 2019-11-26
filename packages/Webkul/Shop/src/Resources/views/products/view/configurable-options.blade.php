@@ -13,52 +13,63 @@
         <script type="text/x-template" id="product-options-template">
             <div class="attributes">
 
-                <input type="hidden" id="selected_configurable_option" name="selected_configurable_option" :value="selectedProductId">
+                <input type="hidden" id="selected_configurable_option" name="selected_configurable_option"
+                       :value="selectedProductId">
 
-                <div v-for='(attribute, index) in childAttributes' class="attribute control-group" :class="[errors.has('super_attribute[' + attribute.id + ']') ? 'has-error' : '']">
+                <div v-for='(attribute, index) in childAttributes' class="attribute control-group"
+                     :class="[errors.has('super_attribute[' + attribute.id + ']') ? 'has-error' : '']">
                     <label class="required">@{{ attribute.label }}</label>
 
                     <span v-if="! attribute.swatch_type || attribute.swatch_type == '' || attribute.swatch_type == 'dropdown'">
                         <select
-                            class="control"
-                            v-validate="'required'"
-                            :name="['super_attribute[' + attribute.id + ']']"
-                            :disabled="attribute.disabled"
-                            @change="configure(attribute, $event.target.value)"
-                            :id="['attribute_' + attribute.id]"
-                            :data-vv-as="'&quot;' + attribute.label + '&quot;'">
+                                class="control"
+                                v-validate="'required'"
+                                :name="['super_attribute[' + attribute.id + ']']"
+                                :disabled="attribute.disabled"
+                                @change="configure(attribute, $event.target.value)"
+                                :id="['attribute_' + attribute.id]"
+                                :data-vv-as="'&quot;' + attribute.label + '&quot;'"
+                                :data-attribute-label="attribute.label.toLowerCase()"
+                        >
 
-                            <option v-for='(option, index) in attribute.options' :value="option.id">@{{ option.label }}</option>
+                            <option v-for='(option, index) in attribute.options'
+                                    :value="option.id">@{{ option.label }}</option>
 
                         </select>
                     </span>
 
                     <span class="swatch-container" v-else>
                         <label class="swatch"
-                            v-for='(option, index) in attribute.options'
-                            v-if="option.id"
-                            :data-id="option.id"
-                            :for="['attribute_' + attribute.id + '_option_' + option.id]">
+                               v-for='(option, index) in attribute.options'
+                               v-if="option.id"
+                               :data-id="option.id"
+                               :data-attribute-label="attribute.label.toLowerCase()"
+                               :for="['attribute_' + attribute.id + '_option_' + option.id]">
 
                             <input type="radio"
-                                v-validate="'required'"
-                                :name="['super_attribute[' + attribute.id + ']']"
-                                :id="['attribute_' + attribute.id + '_option_' + option.id]"
-                                :value="option.id"
-                                :data-vv-as="'&quot;' + attribute.label + '&quot;'"
-                                @change="configure(attribute, $event.target.value)"/>
+                                   v-validate="'required'"
+                                   :data-attribute-value="option.label.toLowerCase()"
+                                   :name="['super_attribute[' + attribute.id + ']']"
+                                   :id="['attribute_' + attribute.id + '_option_' + option.id]"
+                                   :value="option.id"
+                                   :data-vv-as="'&quot;' + attribute.label + '&quot;'"
+                                   @change="configure(attribute, $event.target.value)"/>
 
-                            <span v-if="attribute.swatch_type == 'color'" :style="{ background: option.swatch_value }"></span>
+                            <span v-if="attribute.swatch_type == 'color'"
+                                  :style="{ background: option.swatch_value }"></span>
 
-                            <img v-if="attribute.swatch_type == 'image'" :src="option.swatch_value" />
+                            <img v-if="attribute.swatch_type == 'image'" :src="option.swatch_value"/>
 
-                            <span v-if="attribute.swatch_type == 'text'">
+                            <span
+                                    :data-attribute-value="option.label.toLowerCase()"
+                                    v-if="attribute.swatch_type == 'text'">
                                 @{{ option.label }}
                             </span>
 
                         </label>
 
-                        <span v-if="! attribute.options.length" class="no-options">{{ __('shop::app.products.select-above-options') }}</span>
+                        <span v-if="! attribute.options.length"
+                              class="no-options">{{ __('shop::app.products.select-above-options') }}</span>
                     </span>
 
                     <span class="control-error" v-if="errors.has('super_attribute[' + attribute.id + ']')">
@@ -79,7 +90,7 @@
 
                 inject: ['$validator'],
 
-                data: function() {
+                data: function () {
                     return {
                         config: @json($config),
 
@@ -93,7 +104,7 @@
                     }
                 },
 
-                created: function() {
+                created: function () {
                     this.galleryImages = galleryImages.slice(0)
 
                     var config = @json($config);
@@ -125,7 +136,7 @@
                 },
 
                 methods: {
-                    configure: function(attribute, value) {
+                    configure: function (attribute, value) {
                         this.simpleProduct = this.getSelectedProductId(attribute, value);
 
                         if (value) {
@@ -153,10 +164,10 @@
                         this.changeStock(this.simpleProduct);
                     },
 
-                    getSelectedIndex: function(attribute, value) {
+                    getSelectedIndex: function (attribute, value) {
                         var selectedIndex = 0;
 
-                        attribute.options.forEach(function(option, index) {
+                        attribute.options.forEach(function (option, index) {
                             if (option.id == value) {
                                 selectedIndex = index;
                             }
@@ -165,7 +176,7 @@
                         return selectedIndex;
                     },
 
-                    getSelectedProductId: function(attribute, value) {
+                    getSelectedProductId: function (attribute, value) {
                         var options = attribute.options,
                             matchedOptions;
 
@@ -180,7 +191,7 @@
                         return undefined;
                     },
 
-                    fillSelect: function(attribute) {
+                    fillSelect: function (attribute) {
                         var options = this.getAttributeOptions(attribute.id),
                             prevOption,
                             index = 1,
@@ -221,7 +232,7 @@
                         }
                     },
 
-                    resetChildren: function(attribute) {
+                    resetChildren: function (attribute) {
                         if (attribute.childAttributes) {
                             attribute.childAttributes.forEach(function (set) {
                                 set.selectedIndex = 0;
@@ -231,10 +242,10 @@
                     },
 
                     clearSelect: function (attribute) {
-                        if (! attribute)
+                        if (!attribute)
                             return;
 
-                        if (! attribute.swatch_type || attribute.swatch_type == '' || attribute.swatch_type == 'dropdown') {
+                        if (!attribute.swatch_type || attribute.swatch_type == '' || attribute.swatch_type == 'dropdown') {
                             var element = document.getElementById("attribute_" + attribute.id);
 
                             if (element) {
@@ -245,7 +256,7 @@
 
                             var this_this = this;
 
-                            elements.forEach(function(element) {
+                            elements.forEach(function (element) {
                                 element.checked = false;
                             })
                         }
@@ -255,7 +266,7 @@
                         var this_this = this,
                             options;
 
-                        this.config.attributes.forEach(function(attribute, index) {
+                        this.config.attributes.forEach(function (attribute, index) {
                             if (attribute.id == attributeId) {
                                 options = attribute.options;
                             }
@@ -267,7 +278,7 @@
                     reloadPrice: function () {
                         var selectedOptionCount = 0;
 
-                        this.childAttributes.forEach(function(attribute) {
+                        this.childAttributes.forEach(function (attribute) {
                             if (attribute.selectedIndex) {
                                 selectedOptionCount++;
                             }
@@ -294,12 +305,12 @@
                     changeProductImages: function () {
                         galleryImages.splice(0, galleryImages.length)
 
-                        this.galleryImages.forEach(function(image) {
+                        this.galleryImages.forEach(function (image) {
                             galleryImages.push(image)
                         });
 
                         if (this.simpleProduct) {
-                            this.config.variant_images[this.simpleProduct].forEach(function(image) {
+                            this.config.variant_images[this.simpleProduct].forEach(function (image) {
                                 galleryImages.unshift(image)
                             });
                         }
@@ -309,15 +320,45 @@
                         var inStockElement = document.getElementById('in-stock');
 
                         if (productId) {
-                            inStockElement.style.display= "block";
+                            inStockElement.style.display = "block";
                         } else {
-                            inStockElement.style.display= "none";
+                            inStockElement.style.display = "none";
                         }
                     },
                 }
 
             });
 
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                    var url = new URL(window.location.href);
+
+                    for (const [key, value] of url.searchParams.entries()) {
+                        // handle the case of <select>:
+                        element = document.querySelectorAll('select[data-attribute-label="' + key + '"]');
+                        if (element.length > 0) {
+                            element = element[0];
+                            for (var i = 0; i < element.options.length; i++) {
+                                if (element.options[i].text.toLowerCase() == value) {
+                                    element.selectedIndex = i;
+                                    break;
+                                }
+                            }
+                        }
+
+
+                        // handle the case of swatch:
+                        element = document.querySelectorAll(
+                            'span[data-attribute-value="' + value + '"]');
+                        if (element.length > 0) {
+                            element = element[0];
+                            element.click();
+                        }
+                    }
+                }
+            );
         </script>
     @endpush
 

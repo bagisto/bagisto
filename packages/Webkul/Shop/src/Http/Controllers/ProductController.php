@@ -80,12 +80,12 @@ class ProductController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display the detailed view of a product.
      *
      * @param  string $slug
-     * @return \Illuminate\View\View 
+     * @return \Illuminate\View\View
      */
-    public function index($slug)
+    public function index(string $slug)
     {
         $product = $this->productRepository->findBySlugOrFail($slug);
 
