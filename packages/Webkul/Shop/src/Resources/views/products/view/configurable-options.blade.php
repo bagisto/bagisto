@@ -132,6 +132,33 @@
                         });
 
                         childAttributes.unshift(attribute);
+
+                    }
+                },
+
+                mounted: function () {
+                    // preselect items with values from url (e.g. GET params like ?color=green&size=xs)
+                    url = new URL(window.location.href);
+
+                    for (const [key, value] of url.searchParams.entries()) {
+                        // handle the case of <select>:
+                        element = document.querySelectorAll('select[data-attribute-label="' + key + '"]');
+                        if (element.length > 0) {
+                            element = element[0];
+                            for (var i = 0; i < element.options.length; i++) {
+                                if (element.options[i].text.toLowerCase() == value) {
+                                    element.selectedIndex = i;
+                                    break;
+                                }
+                            }
+                        }
+
+                        // handle the case of swatch:
+                        element = document.querySelectorAll('input[data-attribute-value="' + value + '"]');
+                        if (element.length > 0) {
+                            element = element[0];
+                            element.click();
+                        }
                     }
                 },
 
@@ -329,36 +356,6 @@
 
             });
 
-        </script>
-
-        <script>
-            $(document).ready(function () {
-                    var url = new URL(window.location.href);
-
-                    for (const [key, value] of url.searchParams.entries()) {
-                        // handle the case of <select>:
-                        element = document.querySelectorAll('select[data-attribute-label="' + key + '"]');
-                        if (element.length > 0) {
-                            element = element[0];
-                            for (var i = 0; i < element.options.length; i++) {
-                                if (element.options[i].text.toLowerCase() == value) {
-                                    element.selectedIndex = i;
-                                    break;
-                                }
-                            }
-                        }
-
-
-                        // handle the case of swatch:
-                        element = document.querySelectorAll(
-                            'span[data-attribute-value="' + value + '"]');
-                        if (element.length > 0) {
-                            element = element[0];
-                            element.click();
-                        }
-                    }
-                }
-            );
         </script>
     @endpush
 
