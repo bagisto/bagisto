@@ -835,6 +835,10 @@ return [
             'update-error' => 'Error! Tax Rate Cannot Be Updated',
             'delete' => 'Tax Rate Deleted Successfully',
             'atleast-one' => 'Cannot Delete Last Tax Rate'
+        ],
+        'development' => [
+            'title' => 'Development',
+            'webconsole' => 'Web Console',
         ]
     ],
 

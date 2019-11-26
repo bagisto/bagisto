@@ -3,6 +3,7 @@
 namespace Webkul\Product\Type;
 
 use Illuminate\Support\Facades\Storage;
+use phpDocumentor\Reflection\Types\Boolean;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
@@ -57,7 +58,7 @@ abstract class AbstractType
 
     /**
      * Product Image helper instance
-     * 
+     *
      * @var ProductImage
     */
     protected $productImageHelper;
@@ -103,6 +104,13 @@ abstract class AbstractType
      * @var boolean
      */
     protected $canBeMovedFromWishlistToCart = true;
+
+    /**
+     * Has child products aka variants
+     *
+     * @var boolean
+     */
+    protected $hasVariants = false;
 
     /**
      * Create a new product type instance.
@@ -159,17 +167,21 @@ abstract class AbstractType
         $product->update($data);
 
         foreach ($product->attribute_family->custom_attributes as $attribute) {
-            if ($attribute->type == 'boolean')
+            if ($attribute->type == 'boolean') {
                 $data[$attribute->code] = isset($data[$attribute->code]) && $data[$attribute->code] ? 1 : 0;
+            }
 
-            if (! isset($data[$attribute->code]))
+            if (! isset($data[$attribute->code])) {
                 continue;
+            }
 
-            if ($attribute->type == 'date' && $data[$attribute->code] == '')
+            if ($attribute->type == 'date' && $data[$attribute->code] == '') {
                 $data[$attribute->code] = null;
+            }
 
-            if ($attribute->type == 'multiselect' || $attribute->type == 'checkbox')
+            if ($attribute->type == 'multiselect' || $attribute->type == 'checkbox') {
                 $data[$attribute->code] = implode(",", $data[$attribute->code]);
+            }
 
             if ($attribute->type == 'image' || $attribute->type == 'file') {
                 $data[$attribute->code] = gettype($data[$attribute->code]) == 'object'
@@ -198,16 +210,18 @@ abstract class AbstractType
                     ], $attributeValue->id
                 );
 
-                if ($attribute->type == 'image' || $attribute->type == 'file')
+                if ($attribute->type == 'image' || $attribute->type == 'file') {
                     Storage::delete($attributeValue->text_value);
+                }
             }
         }
 
-        $route = request()->route() ? request()->route()->getName() : ""; 
+        $route = request()->route() ? request()->route()->getName() : "";
 
         if ($route != 'admin.catalog.products.massupdate') {
-            if  (isset($data['categories']))
+            if  (isset($data['categories'])) {
                 $product->categories()->sync($data['categories']);
+            }
 
             $product->up_sells()->sync($data['up_sell'] ?? []);
 
@@ -243,9 +257,10 @@ abstract class AbstractType
      */
     public function isSaleable()
     {
-        if (! $this->product->status)
+        if (! $this->product->status) {
             return false;
-            
+        }
+
         return true;
     }
 
@@ -260,13 +275,23 @@ abstract class AbstractType
     }
 
     /**
-     * Return true if this product can have inventory
+     * Return true if this product can be composite
      *
      * @return boolean
      */
     public function isComposite()
     {
         return $this->isComposite;
+    }
+
+    /**
+     * Return true if this product can have variants
+     *
+     * @return bool
+     */
+    public function hasVariants(): bool
+    {
+        return $this->hasVariants;
     }
 
     /**
@@ -277,7 +302,7 @@ abstract class AbstractType
     {
         return $this->haveSufficientQuantity;
     }
-    
+
     /**
      * Return true if this product can have inventory
      *
@@ -310,8 +335,9 @@ abstract class AbstractType
                 ->pluck('id');
 
         foreach ($this->product->inventories as $inventory) {
-            if (is_numeric($index = $channelInventorySourceIds->search($inventory->inventory_source_id)))
+            if (is_numeric($index = $channelInventorySourceIds->search($inventory->inventory_source_id))) {
                 $total += $inventory->qty;
+            }
         }
 
         $orderedInventory = $this->product->ordered_inventories()
@@ -344,11 +370,13 @@ abstract class AbstractType
      */
     public function getEditableAttributes($group = null, $skipSuperAttribute = true)
     {
-        if ($skipSuperAttribute)
+        if ($skipSuperAttribute) {
             $this->skipAttributes = array_merge($this->product->super_attributes->pluck('code')->toArray(), $this->skipAttributes);
+        }
 
-        if (! $group)
+        if (! $group) {
             return $this->product->attribute_family->custom_attributes()->whereNotIn('attributes.code', $this->skipAttributes)->get();
+        }
 
         return $group->custom_attributes()->whereNotIn('code', $this->skipAttributes)->get();
     }
@@ -380,8 +408,9 @@ abstract class AbstractType
      */
     public function getMinimalPrice()
     {
-        if ($this->haveSpecialPrice())
+        if ($this->haveSpecialPrice()) {
             return $this->product->special_price;
+        }
 
         return $this->product->price;
     }
@@ -421,11 +450,13 @@ abstract class AbstractType
      */
     public function haveSpecialPrice()
     {
-        if (is_null($this->product->special_price) || ! (float) $this->product->special_price)
+        if (is_null($this->product->special_price) || ! (float) $this->product->special_price) {
             return false;
+        }
 
-        if (core()->isChannelDateInInterval($this->product->special_price_from, $this->product->special_price_to))
+        if (core()->isChannelDateInInterval($this->product->special_price_from, $this->product->special_price_to)) {
             return true;
+        }
 
         return false;
     }
@@ -479,8 +510,9 @@ abstract class AbstractType
 
         $data = $this->getQtyRequest($data);
 
-        if (! $this->haveSufficientQuantity($data['quantity']))
+        if (! $this->haveSufficientQuantity($data['quantity'])) {
             return trans('shop::app.checkout.cart.quantity.inventory_warning');
+        }
 
         $price = $this->getFinalPrice();
 
@@ -514,12 +546,13 @@ abstract class AbstractType
      */
     public function getQtyRequest($data)
     {
-        if ($item = Cart::getItemByProduct(['additional' => $data]))
+        if ($item = Cart::getItemByProduct(['additional' => $data])) {
             $data['quantity'] += $item->quantity;
+        }
 
         return $data;
     }
-    
+
     /**
      *
      * @param array $options1
@@ -546,7 +579,7 @@ abstract class AbstractType
 
         return true;
     }
-    
+
     /**
      * Returns additional information for items
      *
@@ -590,8 +623,9 @@ abstract class AbstractType
     {
         $price = $item->product->getTypeInstance()->getFinalPrice();
 
-        if ($price == $item->base_price)
+        if ($price == $item->base_price) {
             return;
+        }
 
         $item->base_price = $price;
         $item->price = core()->convertPrice($price);
