@@ -82,6 +82,10 @@ $(document).ready(function () {
             },
 
             addFlashMessages() {
+                if (typeof flashMessages !== 'undefined') {
+                    return;
+                };
+                
                 const flashes = this.$refs.flashes;
 
                 flashMessages.forEach(function(flash) {
