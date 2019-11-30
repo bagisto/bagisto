@@ -128,7 +128,7 @@ class CartRuleRepository extends Repository
         $data['ends_till'] = $data['ends_till'] ?: null;
 
         $data['status'] = ! isset($data['status']) ? 0 : 1;
-        
+
         $cartRule = $this->find($id);
 
         parent::update($data, $id, $attribute);
@@ -175,17 +175,13 @@ class CartRuleRepository extends Repository
                 'label' => trans('admin::app.promotions.cart-rules.cart-attribute'),
                 'children' => [
                     [
-                        'key' => 'cart|subtotal',
+                        'key' => 'cart|base_sub_total',
                         'type' => 'price',
                         'label' => trans('admin::app.promotions.cart-rules.subtotal')
                     ], [
                         'key' => 'cart|items_qty',
                         'type' => 'integer',
                         'label' => trans('admin::app.promotions.cart-rules.total-items-qty')
-                    ], [
-                        'key' => 'cart|items_weight',
-                        'type' => 'decimal',
-                        'label' => trans('admin::app.promotions.cart-rules.total-weight')
                     ], [
                         'key' => 'cart|payment_method',
                         'type' => 'select',
@@ -217,7 +213,7 @@ class CartRuleRepository extends Repository
                 'label' => trans('admin::app.promotions.cart-rules.cart-item-attribute'),
                 'children' => [
                     [
-                        'key' => 'cart_item|price',
+                        'key' => 'cart_item|base_price',
                         'type' => 'price',
                         'label' => trans('admin::app.promotions.cart-rules.price-in-cart')
                     ], [
@@ -225,7 +221,11 @@ class CartRuleRepository extends Repository
                         'type' => 'integer',
                         'label' => trans('admin::app.promotions.cart-rules.qty-in-cart')
                     ], [
-                        'key' => 'cart_item|subtotal',
+                        'key' => 'cart_item|base_total_weight',
+                        'type' => 'decimal',
+                        'label' => trans('admin::app.promotions.cart-rules.total-weight')
+                    ], [
+                        'key' => 'cart_item|base_total',
                         'type' => 'price',
                         'label' => trans('admin::app.promotions.cart-rules.subtotal')
                     ]

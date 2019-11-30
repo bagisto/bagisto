@@ -9,6 +9,8 @@
 @endsection
 
 @push('scripts')
+    @include('shop::checkout.cart.coupon')
+
     <script type="text/x-template" id="checkout-template">
         <div id="checkout" class="checkout-process">
             <div class="col-main">
@@ -74,12 +76,12 @@
                 <div class="step-content review" v-show="currentStep == 4" id="summary-section">
                     <review-section v-if="currentStep == 4" :key="reviewComponentKey">
                         <div slot="summary-section">
-                            <summary-section
-                                discount="1"
-                                :key="summeryComponentKey"
+                            <summary-section :key="summeryComponentKey"></summary-section>
+
+                            <coupon-component
                                 @onApplyCoupon="getOrderSummary"
-                                @onRemoveCoupon="getOrderSummary"
-                            ></summary-section>
+                                @onRemoveCoupon="getOrderSummary">
+                            </coupon-component>
                         </div>
                     </review-section>
 
@@ -216,7 +218,7 @@
                             summaryHtml = Vue.compile(response.data.html)
 
                             this_this.summeryComponentKey++;
-                            this_this.reviewComponentKey++;
+                            // this_this.reviewComponentKey++;
                         })
                         .catch(function (error) {})
                 },
@@ -499,27 +501,10 @@
         var summaryTemplateRenderFns = [];
 
         Vue.component('summary-section', {
-            inject: ['$validator'],
-
-            props: {
-                discount: {
-                    type: [String, Number],
-
-                    default: 0,
-                }
-            },
 
             data: function() {
                 return {
-                    templateRender: null,
-
-                    coupon_code: null,
-
-                    error_message: null,
-
-                    couponChanged: false,
-
-                    changeCount: 0
+                    templateRender: null
                 }
             },
 
@@ -529,7 +514,6 @@
                 this.templateRender = summaryHtml.render;
 
                 for (var i in summaryHtml.staticRenderFns) {
-                    // summaryTemplateRenderFns.push(summaryHtml.staticRenderFns[i]);
                     summaryTemplateRenderFns[i] = summaryHtml.staticRenderFns[i];
                 }
 
@@ -542,50 +526,6 @@
                         this.templateRender() :
                         '')
                     ]);
-            },
-
-            methods: {
-                onSubmit: function() {
-                    var this_this = this;
-
-                    axios.post('{{ route('shop.checkout.check.coupons') }}', {code: this_this.coupon_code})
-                        .then(function(response) {
-                            this_this.$emit('onApplyCoupon');
-
-                            this_this.couponChanged = true;
-                        })
-                        .catch(function(error) {
-                            this_this.couponChanged = true;
-
-                            this_this.error_message = error.response.data.message;
-                        });
-                },
-
-                changeCoupon: function() {
-                    if (this.couponChanged == true && this.changeCount == 0) {
-                        this.changeCount++;
-
-                        this.error_message = null;
-
-                        this.couponChanged = false;
-                    } else {
-                        this.changeCount = 0;
-                    }
-                },
-
-                removeCoupon: function () {
-                    var this_this = this;
-
-                    axios.post('{{ route('shop.checkout.remove.coupon') }}')
-                        .then(function(response) {
-                            this_this.$emit('onRemoveCoupon')
-                        })
-                        .catch(function(error) {
-                            window.flashMessages = [{'type' : 'alert-error', 'message' : error.response.data.message}];
-
-                            this_this.$root.addFlashMessages();
-                        });
-                }
             }
         })
     </script>

@@ -32,7 +32,7 @@ class CreateCartRulesTable extends Migration
             $table->string('action_type')->nullable();
             $table->decimal('discount_amount', 12, 4)->default(0);
             $table->integer('discount_quantity')->default(1);
-            $table->string('discount_threshold')->default(1);
+            $table->string('discount_step')->default(1);
             $table->boolean('apply_to_shipping')->default(0);
             $table->boolean('free_shipping')->default(0);
             $table->integer('sort_order')->unsigned()->default(0);
