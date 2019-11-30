@@ -801,6 +801,8 @@ class Cart {
 
         $this->calculateItemsTax();
 
+        app('Webkul\CartRule\Helpers\CartRule')->collect();
+
         $cart->grand_total = $cart->base_grand_total = 0;
         $cart->sub_total = $cart->base_sub_total = 0;
         $cart->tax_total = $cart->base_tax_total = 0;
@@ -1071,6 +1073,7 @@ class Cart {
             'base_sub_total' => $data['base_sub_total'],
             'tax_amount' => $data['tax_total'],
             'base_tax_amount' => $data['base_tax_total'],
+            'coupon_code' => $data['coupon_code'],
             'discount_amount' => $data['discount_amount'],
             'base_discount_amount' => $data['base_discount_amount'],
 
@@ -1237,5 +1240,38 @@ class Cart {
                 return $result;
             }
         }
+    }
+
+    /**
+     * Set coupon code to the cart
+     *
+     * @param string $code
+     * @return Cart
+     */
+    public function setCouponCode($code)
+    {
+        $cart = $this->getCart();
+
+        $cart->coupon_code = $code;
+
+        $cart->save();
+
+        return $this;
+    }
+
+    /**
+     * Remove coupon code from cart
+     *
+     * @return Cart
+     */
+    public function removeCouponCode()
+    {
+        $cart = $this->getCart();
+
+        $cart->coupon_code = null;
+
+        $cart->save();
+
+        return $this;
     }
 }

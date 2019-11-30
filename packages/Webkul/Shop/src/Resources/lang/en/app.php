@@ -455,7 +455,8 @@ return [
             'money-desc' => 'Money Transfer',
             'paypal-desc' => 'Paypal Standard',
             'free-desc' => 'This is a free shipping',
-            'flat-desc' => 'This is a flat rate'
+            'flat-desc' => 'This is a flat rate',
+            'enter-coupon-code' => 'Enter Coupon Code'
         ],
 
         'total' => [
@@ -466,12 +467,16 @@ return [
             'tax' => 'Tax',
             'discount' => 'Discount',
             'price' => 'price',
-            'disc-amount' => 'Amount discounted',
+            'disc-amount' => 'Discount',
             'new-grand-total' => 'New Grand Total',
             'coupon' => 'Coupon',
-            'coupon-applied' => 'Coupon Applied',
+            'coupon-applied' => 'Applied Coupon',
             'remove-coupon' => 'Remove Coupon',
-            'cannot-apply-coupon' => 'Cannot Apply Coupon'
+            'cannot-apply-coupon' => 'Cannot Apply Coupon',
+            'invalid-coupon' => 'Coupon code is invalid.',
+            'success-coupon' => 'Coupon code applied successfully.',
+            'remove-coupon' => 'Coupon code removed successfully.',
+            'coupon-apply-issue' => 'Coupon code can\'t be applied.'
         ],
 
         'success' => [

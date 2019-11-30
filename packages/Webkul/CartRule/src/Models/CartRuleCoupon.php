@@ -16,12 +16,4 @@ class CartRuleCoupon extends Model implements CartRuleCouponContract
     {
         return $this->belongsTo(CartRuleProxy::modelClass());
     }
-
-    /**
-     * Get the cart rule coupon usage that owns the cart rule coupon.
-     */
-    public function coupon_usage()
-    {
-        return $this->hasOne(CartRuleCouponUsage::modelClass());
-    }
 }

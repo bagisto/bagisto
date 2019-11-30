@@ -237,6 +237,11 @@
                                 </div>
 
                                 <div class="control-group">
+                                    <label for="discount_step">{{ __('admin::app.promotions.cart-rules.discount-step') }}</label>
+                                    <input class="control" id="discount_step" name="discount_step" value="{{ old('discount_step') ?: $cartRule->discount_step }}"/>
+                                </div>
+
+                                <div class="control-group">
                                     <label for="apply_to_shipping">{{ __('admin::app.promotions.cart-rules.apply-to-shipping') }}</label>
                                     
                                     <?php $selectedOption = old('apply_to_shipping') ?: $cartRule->apply_to_shipping ?>
@@ -329,6 +334,8 @@
 
             <td class="value">
                 <div v-if="matchedAttribute">
+                    <input type="hidden" :name="['conditions[' + index + '][attribute_type]']" v-model="condition.attribute_type">
+
                     <div class="control-group" v-if="matchedAttribute.type == 'text' || matchedAttribute.type == 'price' || matchedAttribute.type == 'decimal' || matchedAttribute.type == 'integer'">
                         <input class="control" :name="['conditions[' + index + '][value]']" v-model="condition.value"/>
                     </div>
@@ -352,7 +359,7 @@
                         </select>
                     </div>
 
-                    <div class="control-group" v-if="matchedAttribute.type == 'select' || matchedAttribute.type == 'multiselect' || matchedAttribute.type == 'checkbox' || matchedAttribute.type == 'radio'">
+                    <div class="control-group" v-if="matchedAttribute.type == 'select' || matchedAttribute.type == 'radio'">
                         <select :name="['conditions[' + index + '][value]']" class="control" v-model="condition.value" v-if="matchedAttribute.key != 'cart|state'">
                             <option v-for='option in matchedAttribute.options' :value="option.id">
                                 @{{ option.admin_name }}
@@ -365,6 +372,14 @@
                                     @{{ state.admin_name }}
                                 </option>
                             </optgroup>
+                        </select>
+                    </div>
+
+                    <div class="control-group" v-if="matchedAttribute.type == 'multiselect' || matchedAttribute.type == 'checkbox'">
+                        <select :name="['conditions[' + index + '][value][]']" class="control" v-model="condition.value" multiple>
+                            <option v-for='option in matchedAttribute.options' :value="option.id">
+                                @{{ option.admin_name }}
+                            </option>
                         </select>
                     </div>
                 </div>
@@ -451,7 +466,7 @@
 
                     condition_type: {{ old('condition_type') ?: $cartRule->condition_type }},
 
-                    conditions: @json($cartRule->conditions)
+                    conditions: @json($cartRule->conditions ?: [])
                 }
             },
 
@@ -459,6 +474,7 @@
                 addCondition: function() {
                     this.conditions.push({
                         'attribute': '',
+                        'attribute_type': '',
                         'operator': '==',
                         'value': '',
                     });
@@ -490,7 +506,7 @@
                 return {
                     condition_attributes: @json(app('\Webkul\CartRule\Repositories\CartRuleRepository')->getConditionAttributes()),
 
-                    attribute_indexes: {
+                    attribute_type_indexes: {
                         'cart': 0,
                         
                         'cart_item': 1,
@@ -623,26 +639,26 @@
                                 'operator': '!=',
                                 'label': '{{ __('admin::app.promotions.cart-rules.is-not-equal-to') }}'
                             }],
-                        'multiselect': [{
-                                'operator': '==',
-                                'label': '{{ __('admin::app.promotions.cart-rules.is-equal-to') }}'
-                            }, {
-                                'operator': '!=',
-                                'label': '{{ __('admin::app.promotions.cart-rules.is-not-equal-to') }}'
-                            }],
-                        'checkbox': [{
-                                'operator': '==',
-                                'label': '{{ __('admin::app.promotions.cart-rules.is-equal-to') }}'
-                            }, {
-                                'operator': '!=',
-                                'label': '{{ __('admin::app.promotions.cart-rules.is-not-equal-to') }}'
-                            }],
                         'radio': [{
                                 'operator': '==',
                                 'label': '{{ __('admin::app.promotions.cart-rules.is-equal-to') }}'
                             }, {
                                 'operator': '!=',
                                 'label': '{{ __('admin::app.promotions.cart-rules.is-not-equal-to') }}'
+                            }],
+                        'multiselect': [{
+                                'operator': '{}',
+                                'label': '{{ __('admin::app.promotions.cart-rules.contains') }}'
+                            }, {
+                                'operator': '!{}',
+                                'label': '{{ __('admin::app.promotions.cart-rules.does-not-contain') }}'
+                            }],
+                        'checkbox': [{
+                                'operator': '{}',
+                                'label': '{{ __('admin::app.promotions.cart-rules.contains') }}'
+                            }, {
+                                'operator': '!{}',
+                                'label': '{{ __('admin::app.promotions.cart-rules.does-not-contain') }}'
                             }]
                     }
                 }
@@ -654,7 +670,7 @@
 
                 var this_this = this;
 
-                var attributeIndex = this.attribute_indexes[this.condition.attribute.split("|")[0]];
+                var attributeIndex = this.attribute_type_indexes[this.condition.attribute.split("|")[0]];
 
                 matchedAttribute = this.condition_attributes[attributeIndex]['children'].filter(function (attribute) {
                     return attribute.key == this_this.condition.attribute;
@@ -675,11 +691,17 @@
                         return;
                     }
 
-                    var attributeIndex = this.attribute_indexes[value.split("|")[0]];
+                    var attributeIndex = this.attribute_type_indexes[value.split("|")[0]];
 
                     matchedAttribute = this.condition_attributes[attributeIndex]['children'].filter(function (attribute) {
                         return attribute.key == value;
                     });
+                    
+                    if (matchedAttribute[0]['type'] == 'multiselect' || matchedAttribute[0]['type'] == 'checkbox') {
+                        this.condition.attribute_type = matchedAttribute[0]['type'];
+                        this.condition.operator = '{}';
+                        this.condition.value = [];
+                    }
 
                     this.matchedAttribute = matchedAttribute[0];
                 }

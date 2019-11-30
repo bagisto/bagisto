@@ -6,6 +6,7 @@
 
 @section('content-wrapper')
     @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
+
     <section class="cart">
         @if ($cart)
             <div class="title">
@@ -139,6 +140,8 @@
 
                     @include('shop::checkout.total.summary', ['cart' => $cart])
 
+                    <coupon-component></coupon-component>
+
                     {!! view_render_event('bagisto.shop.checkout.cart.summary.after', ['cart' => $cart]) !!}
                 </div>
             </div>
@@ -167,6 +170,8 @@
 @endsection
 
 @push('scripts')
+    @include('shop::checkout.cart.coupon')
+
     <script>
         function removeLink(message) {
             if (!confirm(message))
