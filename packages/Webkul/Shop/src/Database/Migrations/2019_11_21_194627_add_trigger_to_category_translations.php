@@ -15,23 +15,22 @@ class AddTriggerToCategoryTranslations extends Migration
      */
     public function up()
     {
-        $insertTriggerBody = $this->getTriggerBody('insert');
+        $triggerBody = $this->getTriggerBody();
         $insertTrigger = <<< SQL
             CREATE TRIGGER %s
             BEFORE INSERT ON category_translations
             FOR EACH ROW 
             BEGIN
-                $insertTriggerBody
+                $triggerBody
             END;
 SQL;
 
-        $updateTriggerBody = $this->getTriggerBody();
         $updateTrigger = <<< SQL
             CREATE TRIGGER %s
             BEFORE UPDATE ON category_translations
             FOR EACH ROW 
             BEGIN
-                $updateTriggerBody
+                $triggerBody
             END;
 SQL;
 
@@ -54,26 +53,21 @@ SQL;
     }
 
     /**
-     * Returns trigger body as string based on type ('update' or 'insert').
-     *
-     * @param string $type
+     * Returns trigger body as string
      *
      * @return string
      */
-    private function getTriggerBody(string $type = 'update'): string
+    private function getTriggerBody()
     {
-        $addOnInsert = ($type === 'update') ? '' : <<< SQL
-            ELSE
-                SELECT CONCAT(urlPath, '/', NEW.slug) INTO urlPath;
-SQL;
-
-        return <<< SQL
+        return <<<SQL
+            DECLARE parentUrlPath varchar(255);
             DECLARE urlPath varchar(255);
-
+            
             IF NEW.category_id != 1
             THEN
+                
                 SELECT
-                    GROUP_CONCAT(parent_translations.slug SEPARATOR '/') INTO urlPath
+                    GROUP_CONCAT(parent_translations.slug SEPARATOR '/') INTO parentUrlPath
                 FROM
                     categories AS node,
                     categories AS parent
@@ -81,19 +75,23 @@ SQL;
                 WHERE
                     node._lft >= parent._lft
                     AND node._rgt <= parent._rgt
-                    AND node.id = NEW.category_id
+                    AND node.id = (SELECT parent_id FROM categories WHERE id = NEW.category_id)
                     AND parent.id <> 1
+                    AND parent_translations.locale = NEW.locale
                 GROUP BY
                     node.id;
-                    
-                IF urlPath IS NULL 
+                
+                IF parentUrlPath IS NULL 
                 THEN
                     SET urlPath = NEW.slug;
-                    $addOnInsert
+                ELSE
+                    SET urlPath = concat(parentUrlPath, '/', NEW.slug);
                 END IF;
                 
                 SET NEW.url_path = urlPath;
+                
             END IF;
-SQL;
+        SQL;
+
     }
 }

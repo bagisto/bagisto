@@ -13,27 +13,18 @@ class AddUrlPathToExistingCategoryTranslations extends Migration
      */
     public function up()
     {
-        $sql = <<< SQL
-            SELECT
-                GROUP_CONCAT(parent_translations.slug SEPARATOR '/') AS url_path
-            FROM
-                categories AS node,
-                categories AS parent
-                JOIN category_translations AS parent_translations ON parent.id = parent_translations.category_id
-            WHERE
-                node._lft >= parent._lft
-                AND node._rgt <= parent._rgt
-                AND node.id = :category_id
-                AND node.id <> 1
-                AND parent.id <> 1
-            GROUP BY
-                node.id
-SQL;
+        $sqlStoredFunction = <<< SQL
+            SELECT get_url_path_of_category(:category_id, :locale_code) AS url_path;
+        SQL;
+
 
         $categoryTranslationsTableName = app(CategoryTranslation::class)->getTable();
 
         foreach (DB::table($categoryTranslationsTableName)->get() as $categoryTranslation) {
-            $urlPathQueryResult = DB::selectOne($sql, ['category_id' => $categoryTranslation->category_id]);
+            $urlPathQueryResult = DB::selectOne($sqlStoredFunction, [
+                'category_id' => $categoryTranslation->category_id,
+                'locale_code' => $categoryTranslation->locale,
+            ]);
             $url_path = $urlPathQueryResult ? $urlPathQueryResult->url_path : '';
 
             DB::table($categoryTranslationsTableName)

@@ -15,13 +15,14 @@ class AddStoredFunctionToGetUrlPathOfCategory extends Migration
         $functionSQL = <<< SQL
             DROP FUNCTION IF EXISTS `get_url_path_of_category`;
             CREATE FUNCTION get_url_path_of_category(
-                categoryId INT
+                categoryId INT,
+                localeCode VARCHAR(255)
             )
             RETURNS VARCHAR(255)
             DETERMINISTIC
             BEGIN
             
-            DECLARE urlPath VARCHAR(255);
+                DECLARE urlPath VARCHAR(255);
                 IF categoryId != 1
                 THEN
                     SELECT
@@ -35,6 +36,7 @@ class AddStoredFunctionToGetUrlPathOfCategory extends Migration
                         AND node._rgt <= parent._rgt
                         AND node.id = categoryId
                         AND parent.id <> 1
+                        AND parent_translations.locale = localeCode
                     GROUP BY
                         node.id;
                         
