@@ -10,18 +10,18 @@
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
   "devDependencies": {
-    "axios": "^0.18",
-    "cross-env": "^5.1.4",
-    "laravel-mix": "^2.1",
-    "laravel-mix-merge-manifest": "^0.1.1",
-    "jquery": "^3.2",
-    "vue": "^2.1.10"
+    "axios": "^0.19.0",
+    "cross-env": "^6.0.3",
+    "jquery": "^3.4.1",
+    "laravel-mix": "^5.0.0",
+    "laravel-mix-merge-manifest": "^0.1.2",
+    "vue": "^2.6.10"
   },
   "dependencies": {
     "accounting": "^0.4.1",
     "ez-plus": "^1.2.1",
-    "vee-validate": "2.0.0-rc.26",
+    "vee-validate": "^2.2.15",
     "vue-flatpickr": "^2.3.0",
-    "vue-slider-component": "^2.7.5"
+    "vue-slider-component": "^3.0.44"
   }
 }
