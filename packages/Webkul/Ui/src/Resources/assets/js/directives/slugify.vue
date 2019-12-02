@@ -7,11 +7,15 @@
                         .toString()
                         .toLowerCase()
                         .replace(/[^\w- ]+/g, '')
+
+                        // replace whitespaces with dashes
                         .replace(/ +/g, '-')
+
+                        // avoid having multiple dashes (---- translates into -)
                         .replace('![-\s]+!u', '-')
                         .trim();
                 }, 100);
-            }
+            };
 
             el.addEventListener('input', handler);
         }
