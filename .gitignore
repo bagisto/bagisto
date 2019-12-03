@@ -21,3 +21,4 @@ package-lock.json
 yarn.lock
 storage/
 storage/*.key
+.php_cs.cache
