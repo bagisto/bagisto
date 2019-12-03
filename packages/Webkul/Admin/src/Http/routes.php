@@ -765,9 +765,6 @@ Route::group(['middleware' => ['web']], function () {
             Route::prefix('development')->group(function () {
                 Route::get('/', 'Webkul\Admin\Http\Controllers\Development\DashboardController@index')
                     ->name('admin.development.index');
-
-                Route::get('webconsole', 'Webkul\Admin\Http\Controllers\Development\WebConsoleController@index')
-                    ->name('admin.development.webconsole');
             });
         });
     });
