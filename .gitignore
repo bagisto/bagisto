@@ -20,3 +20,4 @@ composer.lock
 yarn.lock
 package-lock.json
 yarn.lock
+.php_cs.cache
