@@ -82,8 +82,6 @@ class CartController extends Controller
      */
     public function index()
     {
-        Cart::collectTotals();
-        
         return view($this->_config['view'])->with('cart', Cart::getCart());
     }
 

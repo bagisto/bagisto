@@ -332,7 +332,7 @@ class CartRule
         foreach (explode(',', $cart->applied_cart_rule_ids) as $ruleId) {
             $rule = $this->cartRuleRepository->resetScope()->find($ruleId);
 
-            if (! $rule->apply_to_shipping)
+            if (! $rule || ! $rule->apply_to_shipping)
                 continue;
 
             $discountAmount = $baseDiscountAmount = 0;
@@ -389,7 +389,7 @@ class CartRule
         foreach (explode(',', $cart->applied_cart_rule_ids) as $ruleId) {
             $rule = $this->cartRuleRepository->resetScope()->find($ruleId);
 
-            if (! $rule->free_shipping)
+            if (! $rule || ! $rule->free_shipping)
                 continue;
 
             $selectedShipping->price = 0;
