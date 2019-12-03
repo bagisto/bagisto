@@ -211,7 +211,13 @@ class Core
         if ($locale)
             return $locale;
 
-        return $locale = $this->localeRepository->findOneByField('code', app()->getLocale());
+        $locale = $this->localeRepository->findOneByField('code', app()->getLocale());
+
+        if(!$locale) {
+            $locale = $this->localeRepository->findOneByField('code', config('app.fallback_locale'));
+        }
+
+        return $locale;
     }
 
     /**
