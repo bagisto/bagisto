@@ -15,7 +15,7 @@ class AddUrlPathToExistingCategoryTranslations extends Migration
     {
         $sqlStoredFunction = <<< SQL
             SELECT get_url_path_of_category(:category_id, :locale_code) AS url_path;
-        SQL;
+SQL;
 
 
         $categoryTranslationsTableName = app(CategoryTranslation::class)->getTable();

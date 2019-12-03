@@ -49,7 +49,7 @@ class AddTriggerToCategories extends Migration
                 CLOSE curs;
                 
             END IF;
-        SQL;
+SQL;
 
         $insertTrigger = <<< SQL
             CREATE TRIGGER %s 
@@ -58,7 +58,7 @@ class AddTriggerToCategories extends Migration
             BEGIN
                 $triggerBody
             END;
-        SQL;
+SQL;
 
         $updateTrigger = <<< SQL
             CREATE TRIGGER %s 
@@ -67,7 +67,7 @@ class AddTriggerToCategories extends Migration
             BEGIN
                 $triggerBody
             END;
-        SQL;
+SQL;
 
         DB::unprepared(sprintf('DROP TRIGGER IF EXISTS %s;', self::TRIGGER_NAME_INSERT));
         DB::unprepared(sprintf($insertTrigger, self::TRIGGER_NAME_INSERT));

@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\Storage;
 use Webkul\Category\Contracts\Category as CategoryContract;
 use Webkul\Attribute\Models\AttributeProxy;
 
+/**
+ * Class Category
+ *
+ * @package Webkul\Category\Models
+ *
+ * @property-read string $url_path maintained by database triggers
+ */
 class Category extends TranslatableModel implements CategoryContract
 {
     use NodeTrait;

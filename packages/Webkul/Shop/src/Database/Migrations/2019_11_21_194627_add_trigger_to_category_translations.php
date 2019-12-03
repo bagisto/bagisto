@@ -91,7 +91,7 @@ SQL;
                 SET NEW.url_path = urlPath;
                 
             END IF;
-        SQL;
+SQL;
 
     }
 }
