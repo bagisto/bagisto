@@ -137,8 +137,8 @@
                                 </div>
 
                                 <div class="control-group">
-                                    <label for="uses_per_customer">{{ __('admin::app.promotions.cart-rules.uses-per-customer') }}</label>
-                                    <input class="control" id="uses_per_customer" name="uses_per_customer" value="{{ old('uses_per_customer') ?: $cartRule->uses_per_customer }}"/>
+                                    <label for="usage_per_customer">{{ __('admin::app.promotions.cart-rules.uses-per-customer') }}</label>
+                                    <input class="control" id="usage_per_customer" name="usage_per_customer" value="{{ old('usage_per_customer') ?: $cartRule->usage_per_customer }}"/>
                                     <span class="control-info">{{ __('admin::app.promotions.cart-rules.uses-per-customer-control-info') }}</span>
                                 </div>
 

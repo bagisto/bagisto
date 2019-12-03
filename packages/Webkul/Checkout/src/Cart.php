@@ -823,11 +823,15 @@ class Cart {
         }
 
         if ($shipping = $cart->selected_shipping_rate) {
-            $cart->grand_total = (float) $cart->grand_total + $shipping->price;
-            $cart->base_grand_total = (float) $cart->base_grand_total + $shipping->base_price;
+            $cart->grand_total = (float) $cart->grand_total + $shipping->price - $shipping->discount_amount;
+            $cart->base_grand_total = (float) $cart->base_grand_total + $shipping->base_price - $shipping->base_discount_amount;
+
+            $cart->discount_amount += $shipping->discount_amount;
+            $cart->base_discount_amount += $shipping->base_discount_amount;
         }
 
         $quantities = 0;
+        
         foreach ($cart->items as $item) {
             $quantities = $quantities + $item->quantity;
         }
@@ -1074,6 +1078,7 @@ class Cart {
             'tax_amount' => $data['tax_total'],
             'base_tax_amount' => $data['base_tax_total'],
             'coupon_code' => $data['coupon_code'],
+            'applied_cart_rule_ids' => $data['applied_cart_rule_ids'],
             'discount_amount' => $data['discount_amount'],
             'base_discount_amount' => $data['base_discount_amount'],
 
