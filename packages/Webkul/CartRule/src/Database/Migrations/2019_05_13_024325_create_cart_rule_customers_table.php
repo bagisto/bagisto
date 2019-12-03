@@ -15,7 +15,7 @@ class CreateCartruleCustomersTable extends Migration
     {
         Schema::create('cart_rule_customers', function (Blueprint $table) {
             $table->increments('id');
-            $table->bigInteger('usage_throttle')->unsigned()->default(0);
+            $table->bigInteger('times_used')->unsigned()->default(0);
 
             $table->integer('cart_rule_id')->unsigned();
             $table->foreign('cart_rule_id')->references('id')->on('cart_rules')->onDelete('cascade');

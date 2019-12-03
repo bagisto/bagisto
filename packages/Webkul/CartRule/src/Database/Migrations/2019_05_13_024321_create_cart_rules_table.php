@@ -22,7 +22,7 @@ class CreateCartRulesTable extends Migration
             $table->boolean('status')->default(0);
             $table->integer('coupon_type')->default(1);
             $table->boolean('use_auto_generation')->default(0);
-            $table->integer('uses_per_customer')->default(0);
+            $table->integer('usage_per_customer')->default(0);
             $table->integer('uses_per_coupon')->default(0);
             $table->integer('times_used')->unsigned()->default(0);
             $table->boolean('condition_type')->default(1);
