@@ -194,6 +194,12 @@ return [
         'sort' => 1,
         'icon-class' => ''
     ], [
+        'key' => 'promotions.catalog-rules',
+        'name' => 'admin::app.promotions.catalog-rules.title',
+        'route' => 'admin.catalog-rules.index',
+        'sort' => 2,
+        'icon-class' => ''
+    ], [
         'key' => 'cms',
         'name' => 'admin::app.layouts.cms',
         'route' => 'admin.cms.index',
