@@ -92,7 +92,7 @@ class CartRuleController extends Controller
             'starts_from' => 'nullable|date',
             'ends_till' => 'nullable|date|after_or_equal:starts_from',
             'action_type' => 'required',
-            'discount_amount' => ['required', new \Webkul\Core\Contracts\Validations\Decimal]
+            'discount_amount' => 'required|numeric'
         ]);
 
         $data = request()->all();
@@ -140,7 +140,7 @@ class CartRuleController extends Controller
             'starts_from' => 'nullable|date',
             'ends_till' => 'nullable|date|after_or_equal:starts_from',
             'action_type' => 'required',
-            'discount_amount' => ['required', new \Webkul\Core\Contracts\Validations\Decimal]
+            'discount_amount' => 'required|numeric'
         ]);
 
         $cartRule = $this->cartRuleRepository->findOrFail($id);

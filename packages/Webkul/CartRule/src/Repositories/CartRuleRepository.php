@@ -129,6 +129,8 @@ class CartRuleRepository extends Repository
 
         $data['status'] = ! isset($data['status']) ? 0 : 1;
 
+        $data['conditions'] = $data['conditions'] ?? [];
+
         $cartRule = $this->find($id);
 
         parent::update($data, $id, $attribute);
@@ -144,7 +146,7 @@ class CartRuleRepository extends Repository
                 if ($cartRuleCoupon) {
                     $this->cartRuleCouponRepository->update([
                             'code' => $data['coupon_code'],
-                            'usage_limit' => $data['usage_per_customer'] ?? 0,
+                            'usage_limit' => $data['uses_per_coupon'] ?? 0,
                             'usage_per_customer' => $data['usage_per_customer'] ?? 0,
                             'expired_at' => $data['ends_till'] ?: null
                         ], $cartRuleCoupon->id);
@@ -152,7 +154,7 @@ class CartRuleRepository extends Repository
                     $this->cartRuleCouponRepository->create([
                             'cart_rule_id' => $cartRule->id,
                             'code' => $data['coupon_code'],
-                            'usage_limit' => $data['usage_per_customer'] ?? 0,
+                            'usage_limit' => $data['uses_per_coupon'] ?? 0,
                             'usage_per_customer' => $data['usage_per_customer'] ?? 0,
                             'is_primary' => 1,
                             'expired_at' => $data['ends_till'] ?: null
@@ -162,7 +164,7 @@ class CartRuleRepository extends Repository
                 $this->cartRuleCouponRepository->deleteWhere(['is_primary' => 1, 'cart_rule_id' => $cartRule->id]);
 
                 $this->cartRuleCouponRepository->getModel()->where('cart_rule_id', $cartRule->id)->update([
-                        'usage_limit' => $data['usage_per_customer'] ?? 0,
+                        'usage_limit' => $data['uses_per_coupon'] ?? 0,
                         'usage_per_customer' => $data['usage_per_customer'] ?? 0,
                         'expired_at' => $data['ends_till'] ?: null
                     ]);

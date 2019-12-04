@@ -71,6 +71,13 @@ class Validator
                         return;
 
                     return $cart->shipping_address->{$attributeCode};
+                } else if ($attributeCode == 'shipping_method') {
+                    if (! $cart->shipping_method)
+                        return;
+
+                    $shippingChunks = explode('_', $cart->shipping_method);
+
+                    return current($shippingChunks);
                 } else if ($attributeCode == 'payment_method') {
                     if (! $cart->payment)
                         return;
