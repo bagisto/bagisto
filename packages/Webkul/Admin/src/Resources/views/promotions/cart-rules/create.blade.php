@@ -272,14 +272,6 @@
                     </div>
                 </div>
             </form>
-
-            <accordian :title="'{{ __('admin::app.promotions.cart-rules.coupon-codes') }}'" :active="false">
-                <div slot="body">
-
-                    <create-coupon-form></create-coupon-form>
-
-                </div>
-            </accordian>
         </div>
     </script>
 
@@ -365,60 +357,6 @@
                 <i class="icon trash-icon" @click="removeCondition"></i>
             </td>
         </tr>
-    </script>
-
-    <script type="text/x-template" id="create-coupon-form-template">
-        <form method="POST" data-vv-scope="create-coupun-form" @submit.prevent="generateCopuns('create-coupun-form')">
-
-            <div class="control-group" :class="[errors.has('create-coupun-form.coupon_qty') ? 'has-error' : '']">
-                <label for="coupon_qty" class="required">{{ __('admin::app.promotions.cart-rules.coupon-qty') }}</label>
-                
-                <input v-validate="'required'" class="control" id="coupon_qty" name="coupon_qty" v-model="coupon_format.coupon_qty" data-vv-as="&quot;{{ __('admin::app.promotions.cart-rules.coupon-qty') }}&quot;"/>
-
-                <span class="control-error" v-if="errors.has('create-coupun-form.coupon_qty')">
-                    @{{ errors.first('create-coupun-form.coupon_qty') }}
-                </span>
-            </div>
-
-            <div class="control-group" :class="[errors.has('create-coupun-form.code_length') ? 'has-error' : '']">
-                <label for="code_length" class="required">{{ __('admin::app.promotions.cart-rules.code-length') }}</label>
-
-                <input v-validate="'required'" class="control" id="code_length" name="code_length" v-model="coupon_format.code_length" data-vv-as="&quot;{{ __('admin::app.promotions.cart-rules.code-length') }}&quot;"/>
-
-                <span class="control-error" v-if="errors.has('create-coupun-form.code_length')">
-                    @{{ errors.first('create-coupun-form.code_length') }}
-                </span>
-            </div>
-
-            <div class="control-group" :class="[errors.has('create-coupun-form.code_format') ? 'has-error' : '']">
-                <label for="code_format" class="required">{{ __('admin::app.promotions.cart-rules.code-format') }}</label>
-
-                <select class="control" id="code_format" name="code_format" v-model="coupon_format.code_format" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotions.cart-rules.code-format') }}&quot;">
-                    <option value="alphanumeric">{{ __('admin::app.promotions.cart-rules.alphanumeric') }}</option>
-                    <option value="alphabetical">{{ __('admin::app.promotions.cart-rules.alphabetical') }}</option>
-                    <option value="numeric">{{ __('admin::app.promotions.cart-rules.numeric') }}</option>
-                </select>
-
-                <span class="control-error" v-if="errors.has('create-coupun-form.code_format')">
-                    @{{ errors.first('create-coupun-form.code_format') }}
-                </span>
-            </div>
-
-            <div class="control-group">
-                <label for="code_prefix">{{ __('admin::app.promotions.cart-rules.code-prefix') }}</label>
-                <input class="control" id="code_prefix" name="code_prefix" v-model="coupon_format.code_prefix"/>
-            </div>
-
-            <div class="control-group">
-                <label for="code_suffix">{{ __('admin::app.promotions.cart-rules.code-suffix') }}</label>
-                <input class="control" id="code_suffix" name="code_suffix" v-model="coupon_format.code_suffix"/>
-            </div>
-
-            <div class="button-group">
-                <button class="btn btn-xl btn-primary">{{ __('admin::app.promotions.cart-rules.generate') }}</button>
-            </div>
-
-        </form>
     </script>
 
     <script>
@@ -661,52 +599,6 @@
             methods: {
                 removeCondition: function() {
                     this.$emit('onRemoveCondition', this.condition)
-                }
-            }
-        });
-
-        Vue.component('create-coupon-form', {
-
-            template: '#create-coupon-form-template',
-
-            inject: ['$validator'],
-
-            data: function() {
-                return {
-                    coupon_format: {
-                        coupon_qty: '',
-
-                        code_length: 12,
-
-                        code_format: 'alphanumeric',
-
-                        code_prefix: '',
-
-                        code_suffix: ''
-                    }
-                }
-            },
-
-            methods: {
-                generateCopuns: function(formScope) {
-                    var this_this = this;
-
-                    this.$validator.validateAll(formScope).then(function (result) {
-                        if (result) {
-                            this_this.$http.post("{{ route('admin.cart-rules.generate-coupons') }}", this_this.coupon_format)
-                                .then(function(response) {
-                                    
-                                })
-                                .catch(function (error) {
-                                    window.flashMessages = [{
-                                        'type': 'alert-error',
-                                        'message': error.response.data.message
-                                    }];
-
-                                    this_this.$root.addFlashMessages()
-                                })
-                        }
-                    });
                 }
             }
         });
