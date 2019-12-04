@@ -158,13 +158,13 @@
 
                                 <div class="control-group">
                                     <label for="sort_order">{{ __('admin::app.promotions.cart-rules.priority') }}</label>
-                                    <input type="text" class="control" id="sort_order" name="sort_order" value="{{ $cartRule->status }}" {{ $cartRule->status ? 'checked' : '' }}/>
+                                    <input type="text" class="control" id="sort_order" name="sort_order" value="{{ $cartRule->sort_order }}" {{ $cartRule->sort_order ? 'checked' : '' }}/>
                                 </div>
 
                             </div>
                         </accordian>
 
-                        <accordian :title="'{{ __('admin::app.promotions.cart-rules.conditions') }}'" :active="false">
+                        <accordian :title="'{{ __('admin::app.promotions.cart-rules.conditions') }}'" :active="true">
                             <div slot="body">
 
                                 <div class="control-group">
@@ -311,10 +311,10 @@
         <tr>
             <td class="attribute">
                 <div class="control-group">
-                    <select :name="['conditions[' + index + '][attribute]']" class="control" v-model="condition.attribute" @change="attributeSelected($event.target.value)">
+                    <select :name="['conditions[' + index + '][attribute]']" class="control" v-model="condition.attribute">
                         <option value="">{{ __('admin::app.promotions.cart-rules.choose-condition-to-add') }}</option>
-                        <optgroup v-for='(conditionAttribute, index) in condition_attributes' :label="conditionAttribute.label">
-                            <option v-for='(childAttribute, index) in conditionAttribute.children' :value="childAttribute.key">
+                        <optgroup v-for='conditionAttribute in condition_attributes' :label="conditionAttribute.label">
+                            <option v-for='childAttribute in conditionAttribute.children' :value="childAttribute.key">
                                 @{{ childAttribute.label }}
                             </option>
                         </optgroup>
@@ -334,7 +334,7 @@
 
             <td class="value">
                 <div v-if="matchedAttribute">
-                    <input type="hidden" :name="['conditions[' + index + '][attribute_type]']" v-model="condition.attribute_type">
+                    <input type="hidden" :name="['conditions[' + index + '][attribute_type]']" v-model="matchedAttribute.type">
 
                     <div class="control-group" v-if="matchedAttribute.type == 'text' || matchedAttribute.type == 'price' || matchedAttribute.type == 'decimal' || matchedAttribute.type == 'integer'">
                         <input class="control" :name="['conditions[' + index + '][value]']" v-model="condition.value"/>
@@ -474,7 +474,6 @@
                 addCondition: function() {
                     this.conditions.push({
                         'attribute': '',
-                        'attribute_type': '',
                         'operator': '==',
                         'value': '',
                     });
@@ -513,8 +512,6 @@
 
                         'product': 2
                     }, 
-
-                    matchedAttribute: null,
 
                     condition_operators: {
                         'price': [{
@@ -664,46 +661,32 @@
                 }
             },
 
-            created: function() {
-                if (this.condition.attribute == '')
-                    return;
+            computed: {
+                matchedAttribute: function () {
+                    if (this.condition.attribute == '')
+                        return;
 
-                var this_this = this;
+                    var this_this = this;
 
-                var attributeIndex = this.attribute_type_indexes[this.condition.attribute.split("|")[0]];
+                    var attributeIndex = this.attribute_type_indexes[this.condition.attribute.split("|")[0]];
 
-                matchedAttribute = this.condition_attributes[attributeIndex]['children'].filter(function (attribute) {
-                    return attribute.key == this_this.condition.attribute;
-                });
+                    matchedAttribute = this.condition_attributes[attributeIndex]['children'].filter(function (attribute) {
+                        return attribute.key == this_this.condition.attribute;
+                    });
 
-                this.matchedAttribute = matchedAttribute[0];
+                    if (matchedAttribute[0]['type'] == 'multiselect' || matchedAttribute[0]['type'] == 'checkbox') {
+                        this.condition.operator = '{}';
+
+                        this.condition.value = [];
+                    }
+
+                    return matchedAttribute[0];
+                }
             },
 
             methods: {
                 removeCondition: function() {
                     this.$emit('onRemoveCondition', this.condition)
-                },
-
-                attributeSelected(value) {
-                    if (! value) {
-                        this.matchedAttribute = null;
-
-                        return;
-                    }
-
-                    var attributeIndex = this.attribute_type_indexes[value.split("|")[0]];
-
-                    matchedAttribute = this.condition_attributes[attributeIndex]['children'].filter(function (attribute) {
-                        return attribute.key == value;
-                    });
-                    
-                    if (matchedAttribute[0]['type'] == 'multiselect' || matchedAttribute[0]['type'] == 'checkbox') {
-                        this.condition.attribute_type = matchedAttribute[0]['type'];
-                        this.condition.operator = '{}';
-                        this.condition.value = [];
-                    }
-
-                    this.matchedAttribute = matchedAttribute[0];
                 }
             }
         });

@@ -28,6 +28,9 @@ class Validator
         $validConditionCount = 0;
 
         foreach ($rule->conditions as $condition) {
+            if (! $condition['attribute'] || ! $condition['value'])
+                continue;
+
             $attributeValue = $this->getAttributeValue($condition, $item);
 
             if ($rule->condition_type == 1) {
@@ -71,6 +74,13 @@ class Validator
                         return;
 
                     return $cart->shipping_address->{$attributeCode};
+                } else if ($attributeCode == 'shipping_method') {
+                    if (! $cart->shipping_method)
+                        return;
+
+                    $shippingChunks = explode('_', $cart->shipping_method);
+
+                    return current($shippingChunks);
                 } else if ($attributeCode == 'payment_method') {
                     if (! $cart->payment)
                         return;
