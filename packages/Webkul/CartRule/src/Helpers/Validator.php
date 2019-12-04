@@ -28,6 +28,9 @@ class Validator
         $validConditionCount = 0;
 
         foreach ($rule->conditions as $condition) {
+            if (! $condition['attribute'] || ! $condition['value'])
+                continue;
+
             $attributeValue = $this->getAttributeValue($condition, $item);
 
             if ($rule->condition_type == 1) {
