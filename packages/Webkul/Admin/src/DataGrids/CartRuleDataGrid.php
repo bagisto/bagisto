@@ -26,6 +26,8 @@ class CartRuleDataGrid extends DataGrid
                 })
                 ->addSelect('cart_rules.id', 'name', 'cart_rule_coupons.code as coupon_code', 'status', 'starts_from', 'ends_till', 'sort_order');
 
+        $this->addFilter('id', 'cart_rules.id');
+
         $this->addFilter('coupon_code', 'cart_rule_coupons.code');
 
         $this->setQueryBuilder($queryBuilder);
