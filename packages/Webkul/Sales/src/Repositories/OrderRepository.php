@@ -3,15 +3,15 @@
 namespace Webkul\Sales\Repositories;
 
 use Illuminate\Container\Container as App;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Sales\Contracts\Order;
-use Webkul\Sales\Repositories\OrderItemRepository;
 use Webkul\Core\Models\CoreConfig;
+use Webkul\Sales\Contracts\Order;
+use Webkul\Sales\Models\Order as OrderModel;
 
 /**
- * Order Reposotory
+ * Order Repository
  *
  * @author    Jitendra Singh <jitendra@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
@@ -35,16 +35,16 @@ class OrderRepository extends Repository
     /**
      * Create a new repository instance.
      *
-     * @param  Webkul\Sales\Repositories\OrderItemRepository                 $orderItemRepository
-     * @param  Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository
+     * @param Webkul\Sales\Repositories\OrderItemRepository                 $orderItemRepository
+     * @param Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository
+     *
      * @return void
      */
     public function __construct(
         OrderItemRepository $orderItemRepository,
         DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository,
         App $app
-    )
-    {
+    ) {
         $this->orderItemRepository = $orderItemRepository;
 
         $this->downloadableLinkPurchasedRepository = $downloadableLinkPurchasedRepository;
@@ -58,13 +58,14 @@ class OrderRepository extends Repository
      * @return Mixed
      */
 
-    function model()
+    public function model()
     {
         return Order::class;
     }
 
     /**
      * @param array $data
+     *
      * @return mixed
      */
     public function create(array $data)
@@ -95,12 +96,15 @@ class OrderRepository extends Repository
 
             $order->payment()->create($data['payment']);
 
-            if (isset($data['shipping_address']))
+            if (isset($data['shipping_address'])) {
                 $order->addresses()->create($data['shipping_address']);
+            }
 
             $order->addresses()->create($data['billing_address']);
 
             foreach ($data['items'] as $item) {
+                Event::fire('checkout.order.orderitem.save.before', $data);
+
                 $orderItem = $this->orderItemRepository->create(array_merge($item, ['order_id' => $order->id]));
 
                 if (isset($item['children']) && $item['children']) {
@@ -112,6 +116,8 @@ class OrderRepository extends Repository
                 $this->orderItemRepository->manageInventory($orderItem);
 
                 $this->downloadableLinkPurchasedRepository->saveLinks($orderItem, 'available');
+
+                Event::fire('checkout.order.orderitem.save.after', $data);
             }
 
             Event::fire('checkout.order.save.after', $order);
@@ -128,20 +134,23 @@ class OrderRepository extends Repository
 
     /**
      * @param int $orderId
+     *
      * @return mixed
      */
     public function cancel($orderId)
     {
         $order = $this->findOrFail($orderId);
 
-        if (! $order->canCancel())
+        if (! $order->canCancel()) {
             return false;
+        }
 
         Event::fire('sales.order.cancel.before', $order);
 
         foreach ($order->items as $item) {
-            if (! $item->qty_to_cancel)
+            if (! $item->qty_to_cancel) {
                 continue;
+            }
 
             $orderItems = [];
 
@@ -152,11 +161,12 @@ class OrderRepository extends Repository
             } else {
                 $orderItems[] = $item;
             }
-    
+
             foreach ($orderItems as $orderItem) {
-                if ($orderItem->product)
+                if ($orderItem->product) {
                     $this->orderItemRepository->returnQtyToProductInventory($orderItem);
-    
+                }
+
                 if ($orderItem->qty_ordered) {
                     $orderItem->qty_canceled += $orderItem->qty_to_cancel;
                     $orderItem->save();
@@ -188,19 +198,21 @@ class OrderRepository extends Repository
     {
         $config = new CoreConfig();
 
-        $invoiceNumberPrefix = $config->where('code','=',"sales.orderSettings.order_number.order_number_prefix")->first()
-            ? $config->where('code','=',"sales.orderSettings.order_number.order_number_prefix")->first()->value : false;
-
-        $invoiceNumberLength = $config->where('code','=',"sales.orderSettings.order_number.order_number_length")->first()
-            ? $config->where('code','=',"sales.orderSettings.order_number.order_number_length")->first()->value : false;
-
-        $invoiceNumberSuffix = $config->where('code','=',"sales.orderSettings.order_number.order_number_suffix")->first()
-            ? $config->where('code','=',"sales.orderSettings.order_number.order_number_suffix")->first()->value: false;
+        foreach ([
+                     'Prefix' => 'prefix',
+                     'Length' => 'length',
+                     'Suffix' => 'suffix',
+                 ] as $varSuffix => $confKey) {
+            $var = "invoiceNumber{$varSuffix}";
+            $$var = $config
+                ->where('code', '=', "sales.orderSettings.order_number.order_number_{$confKey}")
+                ->first() ?: false;
+        }
 
         $lastOrder = $this->model->orderBy('id', 'desc')->limit(1)->first();
         $lastId = $lastOrder ? $lastOrder->id : 0;
 
-        if ($invoiceNumberLength && ( $invoiceNumberPrefix || $invoiceNumberSuffix) ) {
+        if ($invoiceNumberLength && ($invoiceNumberPrefix || $invoiceNumberSuffix)) {
             $invoiceNumber = $invoiceNumberPrefix . sprintf("%0{$invoiceNumberLength}d", 0) . ($lastId + 1) . $invoiceNumberSuffix;
         } else {
             $invoiceNumber = $lastId + 1;
@@ -211,13 +223,14 @@ class OrderRepository extends Repository
 
     /**
      * @param mixed $order
+     *
      * @return void
      */
     public function isInCompletedState($order)
     {
         $totalQtyOrdered = $totalQtyInvoiced = $totalQtyShipped = $totalQtyRefunded = $totalQtyCanceled = 0;
 
-        foreach ($order->items()->get()  as $item) {
+        foreach ($order->items()->get() as $item) {
             $totalQtyOrdered += $item->qty_ordered;
             $totalQtyInvoiced += $item->qty_invoiced;
 
@@ -233,14 +246,16 @@ class OrderRepository extends Repository
 
         if ($totalQtyOrdered != ($totalQtyRefunded + $totalQtyCanceled)
             && $totalQtyOrdered == $totalQtyInvoiced + $totalQtyCanceled
-            && $totalQtyOrdered == $totalQtyShipped + $totalQtyRefunded + $totalQtyCanceled)
+            && $totalQtyOrdered == $totalQtyShipped + $totalQtyRefunded + $totalQtyCanceled) {
             return true;
+        }
 
         return false;
     }
 
     /**
      * @param mixed $order
+     *
      * @return void
      */
     public function isInCanceledState($order)
@@ -257,13 +272,14 @@ class OrderRepository extends Repository
 
     /**
      * @param mixed $order
+     *
      * @return void
      */
     public function isInClosedState($order)
     {
         $totalQtyOrdered = $totalQtyRefunded = $totalQtyCanceled = 0;
 
-        foreach ($order->items()->get()  as $item) {
+        foreach ($order->items()->get() as $item) {
             $totalQtyOrdered += $item->qty_ordered;
             $totalQtyRefunded += $item->qty_refunded;
             $totalQtyCanceled += $item->qty_canceled;
@@ -274,19 +290,22 @@ class OrderRepository extends Repository
 
     /**
      * @param mixed $order
+     *
      * @return void
      */
     public function updateOrderStatus($order)
     {
         $status = 'processing';
 
-        if ($this->isInCompletedState($order))
+        if ($this->isInCompletedState($order)) {
             $status = 'completed';
+        }
 
-        if ($this->isInCanceledState($order))
+        if ($this->isInCanceledState($order)) {
             $status = 'canceled';
-        else if ($this->isInClosedState($order))
+        } elseif ($this->isInClosedState($order)) {
             $status = 'closed';
+        }
 
         $order->status = $status;
         $order->save();
@@ -294,6 +313,7 @@ class OrderRepository extends Repository
 
     /**
      * @param mixed $order
+     *
      * @return mixed
      */
     public function collectTotals($order)
