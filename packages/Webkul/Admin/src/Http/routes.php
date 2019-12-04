@@ -658,6 +658,8 @@ Route::group(['middleware' => ['web']], function () {
 
                 Route::post('cart-rules/generate-coupons/{id?}', 'Webkul\CartRule\Http\Controllers\CartRuleController@generateCoupons')->name('admin.cart-rules.generate-coupons');
 
+                Route::post('/massdelete', 'Webkul\CartRule\Http\Controllers\CartRuleCouponController@massDelete')->name('admin.cart-rule-coupons.mass-delete');
+
 
                 //Catalog rules
                 Route::get('catalog-rules', 'Webkul\CatalogRule\Http\Controllers\CatalogRuleController@index')->defaults('_config', [
