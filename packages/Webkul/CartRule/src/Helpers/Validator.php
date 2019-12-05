@@ -95,7 +95,7 @@ class Validator
 
             case 'product':
                 $value = $attributeScope == 'children'
-                        ? $item->child->product->{$attributeCode}
+                        ? ($item->child ? $item->child->product->{$attributeCode} : null)
                         : $item->product->{$attributeCode};
 
                 if (! in_array($condition['attribute_type'], ['multiselect', 'checkbox']))
