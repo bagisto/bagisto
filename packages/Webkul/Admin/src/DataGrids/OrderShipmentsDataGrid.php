@@ -27,7 +27,7 @@ class OrderShipmentsDataGrid extends DataGrid
                 ->leftJoin('orders as ors', 'shipments.order_id', '=', 'ors.id')
                 ->leftJoin('inventory_sources as is', 'shipments.inventory_source_id', '=', 'is.id')
                 ->select('shipments.id as shipment_id', 'ors.increment_id as shipment_order_id', 'shipments.total_qty as shipment_total_qty', 'is.name as inventory_source_name', 'ors.created_at as order_date', 'shipments.created_at as shipment_created_at')
-                ->addSelect(DB::raw('CONCAT(order_address_shipping.first_name, " ", order_address_shipping.last_name) as shipped_to'));
+                ->addSelect(DB::raw('CONCAT('.DB::getTablePrefix().'order_address_shipping.first_name, " ", '.DB::getTablePrefix().'order_address_shipping.last_name) as shipped_to'));
 
         $this->addFilter('shipment_id', 'shipments.id');
         $this->addFilter('shipment_order_id', 'ors.increment_id');
@@ -35,7 +35,7 @@ class OrderShipmentsDataGrid extends DataGrid
         $this->addFilter('inventory_source_name', 'is.name');
         $this->addFilter('order_date', 'ors.created_at');
         $this->addFilter('shipment_created_at', 'shipments.created_at');
-        $this->addFilter('shipped_to', DB::raw('CONCAT(order_address_shipping.first_name, " ", order_address_shipping.last_name)'));
+        $this->addFilter('shipped_to', DB::raw(''.DB::getTablePrefix().'CONCAT(order_address_shipping.first_name, " ", '.DB::getTablePrefix().'order_address_shipping.last_name)'));
 
         $this->setQueryBuilder($queryBuilder);
     }

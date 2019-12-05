@@ -28,19 +28,19 @@ class AddressDataGrid extends DataGrid
      * @var object
     */
     protected $customer;
-    
+
     /**
      * Create a new controller instance.
      *
      * @param  Webkul\Customer\Repositories\CustomerRepository  $customer
      * @return void
      */
-    public function __construct(        
+    public function __construct(
         Customer $customer
     )
     {
         parent::__construct();
-        
+
         $this->customer = $customer;
     }
 
@@ -52,7 +52,7 @@ class AddressDataGrid extends DataGrid
         $queryBuilder = DB::table('customer_addresses as ca')
                 ->leftJoin('countries', 'ca.country', '=', 'countries.code')
                 ->leftJoin('customers as c', 'ca.customer_id', '=', 'c.id')
-                ->addSelect('ca.id as address_id', 'ca.address1', 'ca.country', DB::raw('countries.name as country_name'), 'ca.state', 'ca.city', 'ca.postcode', 'ca.phone', 'ca.default_address')
+                ->addSelect('ca.id as address_id', 'ca.address1', 'ca.country', DB::raw(''.DB::getTablePrefix().'countries.name as country_name'), 'ca.state', 'ca.city', 'ca.postcode', 'ca.phone', 'ca.default_address')
                 ->where('c.id', $customer->id);
 
         $queryBuilder = $queryBuilder->leftJoin('country_states', function($qb) {
@@ -62,13 +62,13 @@ class AddressDataGrid extends DataGrid
 
         $queryBuilder
             ->groupBy('ca.id')
-            ->addSelect(DB::raw('country_states.default_name as state_name'));
+            ->addSelect(DB::raw(''.DB::getTablePrefix().'country_states.default_name as state_name'));
 
         $this->addFilter('address_id', 'ca.id');
         $this->addFilter('address1', 'ca.address1');
         $this->addFilter('city', 'ca.city');
-        $this->addFilter('state_name', DB::raw('country_states.default_name'));
-        $this->addFilter('country_name', DB::raw('countries.name'));
+        $this->addFilter('state_name', DB::raw(''.DB::getTablePrefix().'country_states.default_name'));
+        $this->addFilter('country_name', DB::raw(''.DB::getTablePrefix().'countries.name'));
         $this->addFilter('postcode', 'ca.postcode');
         $this->addFilter('default_address', 'ca.default_address');
 
