@@ -109,6 +109,8 @@ class CartRule
         $this->processShippingDiscount($cart);
 
         $this->processFreeShippingDiscount($cart);
+
+        $this->validateCouponCode();
     }
 
     /**
@@ -156,36 +158,27 @@ class CartRule
     {
         $cart = Cart::getCart();
 
-
         if ($rule->coupon_type) {
-            $isCouponValid = true;
-
             if (strlen($cart->coupon_code)) {
                 $coupon = $this->cartRuleCouponRepository->findOneByField('code', $cart->coupon_code);
 
                 if ($coupon) {
                     if ($coupon->usage_limit && $coupon->times_used >= $coupon->usage_limit)
-                        $isCouponValid = false;
+                        return false;
                     
                     if ($cart->customer_id && $coupon->usage_per_customer) {
                         $couponUsage = $this->cartRuleCouponUsageRepository->findOneWhere([
                                 'cart_rule_coupon_id' => $coupon->id,
-                                'customer_id' => $cart->customer_id,
+                                'customer_id' => $cart->customer_id
                             ]);
 
                         if ($couponUsage && $couponUsage->times_used >= $coupon->usage_per_customer)
-                            $isCouponValid = false;
+                            return false;
                     }
                 } else {
-                    $isCouponValid = false;
+                    return false;
                 }
             } else {
-                $isCouponValid = false;
-            }
-
-            if (! $isCouponValid) {
-                Cart::removeCouponCode();
-
                 return false;
             }
         }
@@ -200,12 +193,8 @@ class CartRule
                 return false;
         }
 
-        if (! $this->validator->validate($rule, $item)) {
-            if ($isCouponValid)
-                Cart::removeCouponCode();
-                
+        if (! $this->validator->validate($rule, $item))
             return false;
-        }
 
         return true;
     }
@@ -223,6 +212,8 @@ class CartRule
         $item->base_discount_amount = 0;
 
         $cart = $item->cart;
+
+        $cart->applied_cart_rule_ids = null;
 
         $appliedRuleIds = [];
 
@@ -437,5 +428,23 @@ class CartRule
                 ];
             }
         }
+    }
+
+    /**
+     * Check if coupon code is valid or not, if not remove from cart
+     *
+     * @return void
+     */
+    public function validateCouponCode()
+    {
+        $cart = Cart::getCart();
+
+        if (! $cart->coupon_code)
+            return;
+
+        $coupon = $this->cartRuleCouponRepository->findOneByField('code', $cart->coupon_code);
+
+        if (! in_array($coupon->cart_rule_id, explode(',', $cart->applied_cart_rule_ids)))
+            Cart::removeCouponCode();
     }
 }
