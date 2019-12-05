@@ -83,6 +83,8 @@ class CatalogRuleRepository extends Repository
 
         $data['status'] = ! isset($data['status']) ? 0 : 1;
 
+        $data['conditions'] = $data['conditions'] ?? [];
+
         $catalogRule = $this->find($id);
 
         parent::update($data, $id, $attribute);

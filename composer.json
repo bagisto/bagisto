@@ -88,6 +88,7 @@
         "Webkul\\Sales\\": "packages/Webkul/Sales/src",
         "Webkul\\Tax\\": "packages/Webkul/Tax/src",
         "Webkul\\API\\": "packages/Webkul/API",
+        "Webkul\\Rule\\": "packages/Webkul/Rule/src",
         "Webkul\\CartRule\\": "packages/Webkul/CartRule/src",
         "Webkul\\CatalogRule\\": "packages/Webkul/CatalogRule/src",
         "Webkul\\CMS\\": "packages/Webkul/CMS/src"

@@ -218,7 +218,7 @@
         <tr>
             <td class="attribute">
                 <div class="control-group">
-                    <select :name="['conditions[' + index + '][attribute]']" class="control" v-model="condition.attribute" @change="attributeSelected($event.target.value)">
+                    <select :name="['conditions[' + index + '][attribute]']" class="control" v-model="condition.attribute">
                         <option value="">{{ __('admin::app.promotions.catalog-rules.choose-condition-to-add') }}</option>
                         <optgroup v-for='(conditionAttribute, index) in condition_attributes' :label="conditionAttribute.label">
                             <option v-for='(childAttribute, index) in conditionAttribute.children' :value="childAttribute.key">
@@ -241,7 +241,7 @@
 
             <td class="value">
                 <div v-if="matchedAttribute">
-                    <input type="hidden" :name="['conditions[' + index + '][attribute_type]']" v-model="condition.attribute_type">
+                    <input type="hidden" :name="['conditions[' + index + '][attribute_type]']" v-model="matchedAttribute.type">
 
                     <div class="control-group" v-if="matchedAttribute.type == 'text' || matchedAttribute.type == 'price' || matchedAttribute.type == 'decimal' || matchedAttribute.type == 'integer'">
                         <input class="control" :name="['conditions[' + index + '][value]']" v-model="condition.value"/>
@@ -317,7 +317,6 @@
                 addCondition: function() {
                     this.conditions.push({
                         'attribute': '',
-                        'attribute_type': '',
                         'operator': '==',
                         'value': '',
                     });
@@ -352,8 +351,6 @@
                     attribute_type_indexes: {
                         'product': 0
                     }, 
-
-                    matchedAttribute: null,
 
                     condition_operators: {
                         'price': [{
@@ -518,31 +515,32 @@
                 this.matchedAttribute = matchedAttribute[0];
             },
 
-            methods: {
-                removeCondition: function() {
-                    this.$emit('onRemoveCondition', this.condition)
-                },
-
-                attributeSelected(value) {
-                    if (! value) {
-                        this.matchedAttribute = null;
-
+            computed: {
+                matchedAttribute: function () {
+                    if (this.condition.attribute == '')
                         return;
-                    }
 
-                    var attributeIndex = this.attribute_type_indexes[value.split("|")[0]];
+                    var this_this = this;
+
+                    var attributeIndex = this.attribute_type_indexes[this.condition.attribute.split("|")[0]];
 
                     matchedAttribute = this.condition_attributes[attributeIndex]['children'].filter(function (attribute) {
-                        return attribute.key == value;
+                        return attribute.key == this_this.condition.attribute;
                     });
-                    
+
                     if (matchedAttribute[0]['type'] == 'multiselect' || matchedAttribute[0]['type'] == 'checkbox') {
-                        this.condition.attribute_type = matchedAttribute[0]['type'];
                         this.condition.operator = '{}';
+
                         this.condition.value = [];
                     }
 
-                    this.matchedAttribute = matchedAttribute[0];
+                    return matchedAttribute[0];
+                }
+            },
+
+            methods: {
+                removeCondition: function() {
+                    this.$emit('onRemoveCondition', this.condition)
                 }
             }
         });

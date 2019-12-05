@@ -1,22 +1,15 @@
 <?php
 
-namespace Webkul\CartRule\Helpers;
+namespace Webkul\Rule\Helpers;
 
 use Webkul\Checkout\Facades\Cart;
 
 class Validator
 {
     /**
-     * AttributeRepository object
-     *
-     * @var AttributeRepository
-     */
-    protected $attributeRepository;
-
-    /**
      * Validate cart rule for condition
      *
-     * @param CartRule $rule
+     * @param CartRule|CatalogRule $rule
      * @param CartItem $item
      * @return boolean
      */
