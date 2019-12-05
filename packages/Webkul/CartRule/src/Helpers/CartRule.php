@@ -156,6 +156,7 @@ class CartRule
     {
         $cart = Cart::getCart();
 
+
         if ($rule->coupon_type) {
             $isCouponValid = true;
 
@@ -199,8 +200,12 @@ class CartRule
                 return false;
         }
 
-        if (! $this->validator->validate($rule, $item))
+        if (! $this->validator->validate($rule, $item)) {
+            if ($isCouponValid)
+                Cart::removeCouponCode();
+                
             return false;
+        }
 
         return true;
     }
