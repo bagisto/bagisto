@@ -57,7 +57,7 @@ class CartRuleCouponDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'expired_at',
-            'label' => trans('admin::app.datagrid.created-date'),
+            'label' => trans('admin::app.datagrid.expiration-date'),
             'type' => 'datetime',
             'sortable' => true,
             'searchable' => false,

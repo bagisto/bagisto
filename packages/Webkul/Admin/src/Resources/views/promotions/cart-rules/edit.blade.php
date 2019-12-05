@@ -297,7 +297,7 @@
                 </div>
             </form>
 
-            <accordian :title="'{{ __('admin::app.promotions.cart-rules.coupon-codes') }}'" :active="false">
+            <accordian :title="'{{ __('admin::app.promotions.cart-rules.coupon-codes') }}'" :active="false" v-if="coupon_type && use_auto_generation">
                 <div slot="body">
 
                     <create-coupon-form></create-coupon-form>
