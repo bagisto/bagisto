@@ -50,8 +50,6 @@ class Validator
      */
     public function getAttributeValue($condition, $item)
     {
-        $cart = $item->cart;
-
         $chunks = explode('|', $condition['attribute']);
 
         $attributeNameChunks = explode('::', $chunks[1]);
@@ -62,6 +60,8 @@ class Validator
 
         switch (current($chunks)) {
             case 'cart':
+                $cart = $item->cart;
+
                 if (in_array($attributeCode, ['postcode', 'state', 'country'])) {
                     if (! $cart->shipping_address)
                         return;

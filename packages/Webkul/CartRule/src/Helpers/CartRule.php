@@ -148,9 +148,7 @@ class CartRule
                         $query2->where('cart_rules.ends_till', '>=', Carbon::now()->format('Y-m-d'))->orWhereNull('cart_rules.ends_till');
                     })
                     ->orderBy('sort_order', 'asc');
-        })->findWhere([
-            'status' => 1
-        ]);
+        })->findWhere(['status' => 1]);
 
         return $cartRules;
     }
