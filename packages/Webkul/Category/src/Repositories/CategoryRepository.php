@@ -156,17 +156,9 @@ class CategoryRepository extends Repository
      *
      * @return mixed
      */
-    public function findByPathOrFail(string $urlPath)
+    public function findByPath(string $urlPath)
     {
-        $category = $this->model->whereTranslation('url_path', $urlPath)->first();
-
-        if ($category) {
-            return $category;
-        }
-
-        throw (new ModelNotFoundException)->setModel(
-            get_class($this->model), $urlPath
-        );
+        return $this->model->whereTranslation('url_path', $urlPath)->first();
     }
 
     /**

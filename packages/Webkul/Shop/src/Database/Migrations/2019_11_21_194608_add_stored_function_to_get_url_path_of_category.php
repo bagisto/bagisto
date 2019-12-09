@@ -23,7 +23,8 @@ class AddStoredFunctionToGetUrlPathOfCategory extends Migration
             BEGIN
             
                 DECLARE urlPath VARCHAR(255);
-                IF categoryId != 1
+                -- Category with id 1 is root by default
+                IF categoryId <> 1
                 THEN
                     SELECT
                         GROUP_CONCAT(parent_translations.slug SEPARATOR '/') INTO urlPath

@@ -228,6 +228,22 @@ class ProductRepository extends Repository
     }
 
     /**
+     * Retrieve product from slug without throwing an exception (might return null)
+     *
+     * @param $slug
+     *
+     * @return mixed
+     */
+    public function findBySlug($slug)
+    {
+        return app('Webkul\Product\Repositories\ProductFlatRepository')->findOneWhere([
+            'url_key' => $slug,
+            'locale' => app()->getLocale(),
+            'channel' => core()->getCurrentChannelCode(),
+        ]);
+    }
+
+    /**
      * Returns newly added product
      *
      * @return Collection

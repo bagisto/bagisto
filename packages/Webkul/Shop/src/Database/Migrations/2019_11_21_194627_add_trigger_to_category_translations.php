@@ -63,7 +63,8 @@ SQL;
             DECLARE parentUrlPath varchar(255);
             DECLARE urlPath varchar(255);
             
-            IF NEW.category_id != 1
+            -- Category with id 1 is root by default
+            IF NEW.category_id <> 1
             THEN
                 
                 SELECT

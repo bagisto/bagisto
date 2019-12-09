@@ -54,36 +54,23 @@ class ProductsCategoriesProxyController extends Controller
      * Display a listing of the resource which can be a category or a product.
      *
      *
-     * @param string $slug
+     * @param string $slugOrPath
      *
      * @return \Illuminate\View\View
      */
-    public function index(string $slug)
+    public function index(string $slugOrPath)
     {
-        $slug = rtrim($slug, '/ ');
 
-        if (preg_match('/^([a-z0-9-]+\/?)+$/', $slug)) {
+        if ($category = $this->categoryRepository->findByPath($slugOrPath)) {
 
-            if (DB::table(app(CategoryTranslation::class)->getTable())
-                ->where('url_path', '=', $slug)
-                ->exists()
-            ) {
+            return view($this->_config['category_view'], compact('category'));
+        }
 
-                $category = $this->categoryRepository->findByPathOrFail($slug);
+        if ($product = $this->productRepository->findBySlug($slugOrPath)) {
 
-                return view($this->_config['category_view'], compact('category'));
-            }
+            $customer = auth()->guard('customer')->user();
 
-            if (DB::table(app(ProductFlat::class)->getTable())
-                ->where('url_key', '=', $slug)
-                ->exists()
-            ) {
-                $product = $this->productRepository->findBySlugOrFail($slug);
-
-                $customer = auth()->guard('customer')->user();
-
-                return view($this->_config['product_view'], compact('product', 'customer'));
-            }
+            return view($this->_config['product_view'], compact('product', 'customer'));
         }
 
         abort(404);

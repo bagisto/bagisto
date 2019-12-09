@@ -15,41 +15,7 @@ class AddTriggerToCategories extends Migration
      */
     public function up()
     {
-        $triggerBody = <<< SQL
-            DECLARE urlPath VARCHAR(255);
-            DECLARE localeCode VARCHAR(255);
-            DECLARE done INT;
-            DECLARE curs CURSOR FOR (SELECT category_translations.locale
-                    FROM category_translations 
-                    WHERE category_id = NEW.id);
-            DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
-
-            
-            IF EXISTS (
-                SELECT *
-                FROM category_translations 
-                WHERE category_id = NEW.id
-            )
-            THEN
-            
-                OPEN curs;
-            
-            	SET done = 0;
-                REPEAT 
-                	FETCH curs INTO localeCode;
-                    
-                    SELECT get_url_path_of_category(NEW.id, localeCode) INTO urlPath;
-                    
-                    UPDATE category_translations 
-                    SET url_path = urlPath 
-                    WHERE category_translations.category_id = NEW.id;
-                
-                UNTIL done END REPEAT;
-                
-                CLOSE curs;
-                
-            END IF;
-SQL;
+        $triggerBody = $this->getTriggerBody();
 
         $insertTrigger = <<< SQL
             CREATE TRIGGER %s 
@@ -85,5 +51,49 @@ SQL;
     {
         DB::unprepared(sprintf('DROP TRIGGER IF EXISTS %s;', self::TRIGGER_NAME_INSERT));
         DB::unprepared(sprintf('DROP TRIGGER IF EXISTS %s;', self::TRIGGER_NAME_UPDATE));
+    }
+
+    /**
+     * Returns trigger body as string
+     *
+     * @return string
+     */
+    private function getTriggerBody(): string
+    {
+        return <<< SQL
+            DECLARE urlPath VARCHAR(255);
+            DECLARE localeCode VARCHAR(255);
+            DECLARE done INT;
+            DECLARE curs CURSOR FOR (SELECT category_translations.locale
+                    FROM category_translations 
+                    WHERE category_id = NEW.id);
+            DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+
+            
+            IF EXISTS (
+                SELECT *
+                FROM category_translations 
+                WHERE category_id = NEW.id
+            )
+            THEN
+            
+                OPEN curs;
+            
+            	SET done = 0;
+                REPEAT 
+                	FETCH curs INTO localeCode;
+                    
+                    SELECT get_url_path_of_category(NEW.id, localeCode) INTO urlPath;
+                    
+                    UPDATE category_translations 
+                    SET url_path = urlPath 
+                    WHERE category_translations.category_id = NEW.id;
+                
+                UNTIL done END REPEAT;
+                
+                CLOSE curs;
+                
+            END IF;
+SQL;
     }
 }
