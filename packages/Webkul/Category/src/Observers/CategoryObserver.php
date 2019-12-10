@@ -26,12 +26,8 @@ class CategoryObserver
      */
     public function saved($category)
     {
-        foreach($category->children as $child) {
-            // Hacky trick to make this method unit-testable (instead of $child->touch()
-            // as the unit test is too fast)
-            $child->setUpdatedAt(Carbon::now()->addSecond());
-
-            $child->save();
+        foreach ($category->children as $child) {
+            $child->touch();
         }
     }
 }
