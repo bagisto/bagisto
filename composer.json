@@ -18,7 +18,6 @@
         "ext-pdo_mysql": "*",
         "ext-tokenizer": "*",
         "astrotomic/laravel-translatable": "^11.0.0",
-        "alkhachatryan/laravel-web-console": "1.5.1",
         "barryvdh/laravel-dompdf": "0.8.3",
         "doctrine/dbal": "2.9.2",
         "fideloper/proxy": "^4.0",
