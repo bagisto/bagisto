@@ -3,9 +3,7 @@
 namespace Webkul\CatalogRule\Console\Commands;
 
 use Illuminate\Console\Command;
-use Webkul\Product\Repositories\ProductFlatRepository;
-use Webkul\CatalogRule\Repositories\CatalogRuleRepository;
-use Webkul\CatalogRule\Repositories\CatalogRuleProductPriceRepository;
+use Webkul\CatalogRule\Helpers\CatalogRule;
 
 class PriceRuleIndex extends Command
 {
@@ -24,45 +22,21 @@ class PriceRuleIndex extends Command
     protected $description = 'Automatically updates catalog rule price index information (eg. rule_price)';
 
     /**
-     * ProductFlatRepository object
+     * CatalogRule object
      *
      * @var Object
     */
-    protected $productFlatRepository;
-
-    /**
-     * CatalogRuleRepository object
-     *
-     * @var Object
-    */
-    protected $catalogRuleRepository;
-
-    /**
-     * CatalogRuleProductPriceRepository object
-     *
-     * @var Object
-    */
-    protected $catalogRuleProductPriceRepository;
+    protected $catalogRuleHelper;
 
     /**
      * Create a new command instance.
      *
-     * @param  Webkul\Product\Repositories\ProductFlatRepository                 $productFlatRepository
-     * @param  Webkul\CatalogRule\Repositories\CatalogRuleRepository             $catalogRuleRepository
-     * @param  Webkul\CatalogRule\Repositories\CatalogRuleProductPriceRepository $catalogRuleProductPriceRepository
+     * @param  Webkul\CatalogRule\Helpers\CatalogRule $catalogRuleHelper
      * @return void
      */
-    public function __construct(
-        ProductFlatRepository $productFlatRepository,
-        CatalogRuleRepository $catalogRuleRepository,
-        CatalogRuleProductPriceRepository $catalogRuleProductPriceRepository
-    )
+    public function __construct(CatalogRule $catalogRuleHelper)
     {
-        $this->productFlatRepository = $productFlatRepository;
-
-        $this->catalogRuleRepository = $catalogRuleRepository;
-
-        $this->catalogRuleProductPriceRepository = $catalogRuleProductPriceRepository;
+        $this->catalogRuleHelper = $catalogRuleHelper;
 
         parent::__construct();
     }
@@ -74,6 +48,6 @@ class PriceRuleIndex extends Command
      */
     public function handle()
     {
-
+        $this->catalogRuleHelper->applyAll();
     }
 }
