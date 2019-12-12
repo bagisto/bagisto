@@ -13,16 +13,7 @@
         </div>
 
         <div class="page-content">
-            <a href="{{ route('admin.development.webconsole') }}" target="_blank">
-                <div class="rad-info-box">
-                    <p>
-                        <span class="heading">{{ __('admin::app.settings.development.webconsole') }}</span>
-                    </p>
-                    <p>
-                        <i class="icon cms-icon"></i>
-                    </p>
-                </div>
-            </a>
+
         </div>
     </div>
 @stop

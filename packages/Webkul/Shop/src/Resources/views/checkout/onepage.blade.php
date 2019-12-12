@@ -296,7 +296,7 @@
                             else
                                 paymentHtml = Vue.compile(response.data.html)
 
-                            this_this.completed_step = this_this.step_numbers[response.data.jump_to_section] + 1;
+                            this_this.completed_step = this_this.step_numbers[response.data.jump_to_section] - 1;
                             this_this.current_step = this_this.step_numbers[response.data.jump_to_section];
 
                             shippingMethods = response.data.shippingMethods;
@@ -320,7 +320,7 @@
                             this_this.disable_button = false;
 
                             paymentHtml = Vue.compile(response.data.html)
-                            this_this.completed_step = this_this.step_numbers[response.data.jump_to_section] + 1;
+                            this_this.completed_step = this_this.step_numbers[response.data.jump_to_section] - 1;
                             this_this.current_step = this_this.step_numbers[response.data.jump_to_section];
 
                             paymentMethods = response.data.paymentMethods;
@@ -344,7 +344,7 @@
                         this_this.disable_button = false;
 
                         reviewHtml = Vue.compile(response.data.html)
-                        this_this.completed_step = this_this.step_numbers[response.data.jump_to_section] + 1;
+                        this_this.completed_step = this_this.step_numbers[response.data.jump_to_section] - 1;
                         this_this.current_step = this_this.step_numbers[response.data.jump_to_section];
 
                         this_this.getOrderSummary();

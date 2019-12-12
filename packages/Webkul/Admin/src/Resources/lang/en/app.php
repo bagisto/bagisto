@@ -838,7 +838,6 @@ return [
         ],
         'development' => [
             'title' => 'Development',
-            'webconsole' => 'Web Console',
         ]
     ],
 

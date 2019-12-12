@@ -154,6 +154,12 @@ abstract class DataGrid
         $parsedUrl = [];
         $unparsed = url()->full();
 
+        $route = request()->route() ? request()->route()->getName() : "";
+
+        if ($route == 'admin.datagrid.export') {
+            $unparsed = url()->previous();
+        }
+
         if (count(explode('?', $unparsed)) > 1) {
             $to_be_parsed = explode('?', $unparsed)[1];
 
