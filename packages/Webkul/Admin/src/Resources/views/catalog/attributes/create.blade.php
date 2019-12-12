@@ -252,6 +252,15 @@
                 </select>
             </div>
 
+            <div class="control-group">
+                <span class="checkbox">
+                    <input type="checkbox" class="control" id="default-null-option" name="default-null-option" v-model="isNullOptionChecked" >
+
+                    <label class="checkbox-view" for="default-null-option"></label>
+                    {{ __('admin::app.catalog.attributes.default_null_option') }}
+                </span>
+            </div>
+
             <div class="table">
                 <table>
                     <thead>
@@ -292,7 +301,7 @@
                             @foreach (app('Webkul\Core\Repositories\LocaleRepository')->all() as $locale)
                                 <td>
                                     <div class="control-group" :class="[errors.has(localeInputName(row, '{{ $locale->code }}')) ? 'has-error' : '']">
-                                        <input type="text" v-validate="'{{ app()->getLocale() }}' == '{{ $locale->code }}' ? 'required': ''"  v-model="row['{{ $locale->code }}']" :name="localeInputName(row, '{{ $locale->code }}')" class="control" data-vv-as="&quot;{{ $locale->name . ' (' . $locale->code . ')' }}&quot;"/>
+                                        <input type="text" v-validate="getOptionValidation(row, '{{ $locale->code }}')"  v-model="row['{{ $locale->code }}']" :name="localeInputName(row, '{{ $locale->code }}')" class="control" data-vv-as="&quot;{{ $locale->name . ' (' . $locale->code . ')' }}&quot;"/>
                                         <span class="control-error" v-if="errors.has(localeInputName(row, '{{ $locale->code }}'))">@{{ errors.first(localeInputName(row, '{!! $locale->code !!}')) }}</span>
                                     </div>
                                 </td>
@@ -313,7 +322,7 @@
                 </table>
             </div>
 
-            <button type="button" class="btn btn-lg btn-primary mt-20" id="add-option-btn" @click="addOptionRow()">
+            <button type="button" class="btn btn-lg btn-primary mt-20" id="add-option-btn" @click="addOptionRow(false)">
                 {{ __('admin::app.catalog.attributes.add-option-btn-title') }}
             </button>
         </div>
@@ -339,14 +348,17 @@
 
             data: function() {
                 return {
-                    optionRowCount: 0,
+                    optionRowCount: 1,
                     optionRows: [],
                     show_swatch: false,
-                    swatch_type: ''
+                    swatch_type: '',
+                    isNullOptionChecked: false,
+                    idNullOption: null
                 }
             },
 
             created: function () {
+                console.log(this.optionRows);
                 var this_this = this;
 
                 $(document).ready(function () {
@@ -361,19 +373,31 @@
             },
 
             methods: {
-                addOptionRow: function () {
+                addOptionRow: function (isNullOptionRow) {
                     var rowCount = this.optionRowCount++;
-                    var row = {'id': 'option_' + rowCount};
+                    let id = 'option_' + rowCount;
+                    var row = {'id': id};
 
                     @foreach (app('Webkul\Core\Repositories\LocaleRepository')->all() as $locale)
                         row['{{ $locale->code }}'] = '';
                     @endforeach
 
+                    row['notRequired'] = '';
+
+                    if (isNullOptionRow) {
+                        this.idNullOption = id;
+                        row['notRequired'] = true;
+                    }
+
                     this.optionRows.push(row);
                 },
 
                 removeRow: function (row) {
-                    var index = this.optionRows.indexOf(row)
+                    if (row.id === this.idNullOption) {
+                        this.idNullOption = null;
+                    }
+
+                    var index = this.optionRows.indexOf(row);
                     Vue.delete(this.optionRows, index);
                 },
 
@@ -387,6 +411,26 @@
 
                 sortOrderName: function (row) {
                     return 'options[' + row.id + '][sort_order]';
+                },
+
+                getOptionValidation: (row, localeCode) => {
+                    if (row.notRequired === true) {
+                        return '';
+                    }
+
+                    return ('{{ app()->getLocale() }}' === localeCode) ? 'required' : '';
+                }
+            },
+
+
+            watch: {
+                isNullOptionChecked: function (val) {
+                    if (val) {
+                        this.addOptionRow(true);
+                    } else {
+                        let row = this.optionRows.find(optionRow => optionRow.id === this.idNullOption);
+                        this.removeRow(row);
+                    }
                 }
             }
         })

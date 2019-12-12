@@ -545,6 +545,7 @@ return [
             'file' => 'File',
             'checkbox' => 'Checkbox',
             'use_in_flat' => "Create in Product Flat Table",
+            'default_null_option' => 'Create default empty option',
         ],
         'families' => [
             'title' => 'Families',
