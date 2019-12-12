@@ -601,10 +601,12 @@
                     select: function() {
                         this.allSelected = false;
 
-                        if(this.dataIds.length == 0)
+                        if (this.dataIds.length == 0) {
                             this.massActionsToggle = false;
-                        else
+                            this.massActionType = null;
+                        } else {
                             this.massActionsToggle = true;
+                        }
                     },
 
                     //triggered when master checkbox is clicked
@@ -672,6 +674,8 @@
                         this.massActionsToggle = false;
 
                         this.allSelected = false;
+
+                        this.massActionType = null;
                     }
                 }
             });
