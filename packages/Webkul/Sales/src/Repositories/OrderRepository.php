@@ -198,22 +198,20 @@ class OrderRepository extends Repository
     {
         $config = new CoreConfig();
 
-        foreach ([
-                     'Prefix' => 'prefix',
-                     'Length' => 'length',
-                     'Suffix' => 'suffix',
-                 ] as $varSuffix => $confKey) {
-            $var = "invoiceNumber{$varSuffix}";
-            $$var = $config
-                ->where('code', '=', "sales.orderSettings.order_number.order_number_{$confKey}")
-                ->first() ?: false;
-        }
+        foreach ([  'Prefix' => 'prefix',
+                    'Length' => 'length',
+                    'Suffix' => 'suffix', ] as
+                    $varSuffix => $confKey)
+                {
+                    $var = "invoiceNumber{$varSuffix}";
+                    $$var = $config->where('code', '=', "sales.orderSettings.order_number.order_number_{$confKey}")->first() ?: false;
+                }
 
         $lastOrder = $this->model->orderBy('id', 'desc')->limit(1)->first();
         $lastId = $lastOrder ? $lastOrder->id : 0;
 
         if ($invoiceNumberLength && ($invoiceNumberPrefix || $invoiceNumberSuffix)) {
-            $invoiceNumber = $invoiceNumberPrefix . sprintf("%0{$invoiceNumberLength}d", 0) . ($lastId + 1) . $invoiceNumberSuffix;
+            $invoiceNumber = ($invoiceNumberPrefix->value) . sprintf("%0{$invoiceNumberLength->value}d", 0) . ($lastId + 1) . ($invoiceNumberSuffix->value);
         } else {
             $invoiceNumber = $lastId + 1;
         }
