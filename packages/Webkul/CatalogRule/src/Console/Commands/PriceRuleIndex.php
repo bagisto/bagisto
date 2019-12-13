@@ -3,7 +3,7 @@
 namespace Webkul\CatalogRule\Console\Commands;
 
 use Illuminate\Console\Command;
-use Webkul\CatalogRule\Helpers\CatalogRule;
+use Webkul\CatalogRule\Helpers\CatalogRuleIndex;
 
 class PriceRuleIndex extends Command
 {
@@ -22,21 +22,21 @@ class PriceRuleIndex extends Command
     protected $description = 'Automatically updates catalog rule price index information (eg. rule_price)';
 
     /**
-     * CatalogRule object
+     * CatalogRuleIndex object
      *
      * @var Object
     */
-    protected $catalogRuleHelper;
+    protected $catalogRuleIndexHelper;
 
     /**
      * Create a new command instance.
      *
-     * @param  Webkul\CatalogRule\Helpers\CatalogRule $catalogRuleHelper
+     * @param  Webkul\CatalogRuleProduct\Helpers\CatalogRuleIndex $catalogRuleIndexHelper
      * @return void
      */
-    public function __construct(CatalogRule $catalogRuleHelper)
+    public function __construct(CatalogRuleIndex $catalogRuleIndexHelper)
     {
-        $this->catalogRuleHelper = $catalogRuleHelper;
+        $this->catalogRuleIndexHelper = $catalogRuleIndexHelper;
 
         parent::__construct();
     }
@@ -48,6 +48,6 @@ class PriceRuleIndex extends Command
      */
     public function handle()
     {
-        $this->catalogRuleHelper->applyAll();
+        $this->catalogRuleIndexHelper->reindexComplete();
     }
 }
