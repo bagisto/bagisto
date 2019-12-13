@@ -2,38 +2,26 @@
 
 namespace Webkul\Product\Helpers;
 
-use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductFlat;
-use Webkul\Customer\Repositories\CustomerGroupRepository as CustomerGroup;
+use Webkul\CatalogRule\Helpers\CatalogRuleProductPrice;
 
 class Price extends AbstractProduct
 {
     /**
-     * AttributeRepository object
-     *
-     * @var array
+     * CatalogRuleProductPrice object
      */
-    protected $attribute;
+    protected $catalogRuleProductPriceHelper;
 
     /**
-     * CustomerGroupRepository object
-     */
-    protected $customerGroup;
-
-    /**
-     * Create a new controller instance.
+     * Create a new helper instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeRepository $attribute
+     * @param  Webkul\Customer\Repositories\CatalogRuleProductPrice $catalogRuleProductPriceHelper
      * @return void
      */
-    public function __construct(
-        Attribute $attribute,
-        CustomerGroup $customerGroup
-    ) {
-        $this->attribute = $attribute;
-
-        $this->customerGroup = $customerGroup;
+    public function __construct(CatalogRuleProductPrice $catalogRuleProductPriceHelper)
+    {
+        $this->catalogRuleProductPriceHelper = $catalogRuleProductPriceHelper;
     }
 
     /**
@@ -52,9 +40,8 @@ class Price extends AbstractProduct
         if ($product->type == 'configurable') {
             return $price[$product->id] = $this->getVariantMinPrice($product);
         } else {
-            if ($this->haveSpecialPrice($product)) {
+            if ($this->haveSpecialPrice($product))
                 return $price[$product->id] = $product->special_price;
-            }
 
             return $price[$product->id] = $product->price;
         }
@@ -129,11 +116,26 @@ class Price extends AbstractProduct
      */
     public function haveSpecialPrice($product)
     {
-        if (is_null($product->special_price) || ! (float) $product->special_price)
+        $rulePrice = $this->catalogRuleProductPriceHelper->getRulePrice($product);
+
+        if ((is_null($product->special_price) || ! (float) $product->special_price) && ! $rulePrice)
             return false;
 
-        if (core()->isChannelDateInInterval($product->special_price_from, $product->special_price_to)) {
-            return true;
+        if (! (float) $product->special_price) {
+            if ($rulePrice) {
+                $product->special_price = $rulePrice->price;
+
+                return true;
+            }
+        } else {
+            if ($rulePrice && $rulePrice->price < $product->special_price) {
+                $product->special_price = $rulePrice->price;
+
+                return true;
+            } else {
+                if (core()->isChannelDateInInterval($product->special_price_from, $product->special_price_to))
+                    return true;
+            }
         }
 
         return false;
