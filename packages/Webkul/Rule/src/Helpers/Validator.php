@@ -10,7 +10,7 @@ class Validator
      * Validate cart rule for condition
      *
      * @param CartRule|CatalogRule $rule
-     * @param CartItem $item
+     * @param CartItem|Product     $item
      * @return boolean
      */
     public function validate($rule, $item)
