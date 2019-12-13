@@ -164,4 +164,17 @@ class CatalogRuleProductPrice
             ]);
         }
     }
+
+    /**
+     * Get catalog rules product price for specific date, channel and customer group
+     *
+     * @param Product $product
+     * @return void
+     */
+    public function getRulePrice($product)
+    {
+        return $this->catalogRuleProductPriceRepository->findOneWhere([
+                'product_id' => $product->id
+            ]);
+    }
 }
