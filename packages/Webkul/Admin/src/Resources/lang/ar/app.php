@@ -729,7 +729,6 @@ return [
         ],
         'development' => [
             'title' => 'تطوير',
-            'webconsole' => 'وحدة تحكم الويب',
         ]
     ],
 

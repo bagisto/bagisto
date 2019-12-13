@@ -764,7 +764,6 @@ return [
         ],
         'development' => [
             'title' => 'توسعه',
-            'webconsole' => 'کنسول وب',
         ]
     ],
 

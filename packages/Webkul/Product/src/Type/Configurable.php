@@ -22,7 +22,7 @@ class Configurable extends AbstractType
 
     /**
      * These blade files will be included in product edit page
-     * 
+     *
      * @var array
      */
     protected $additionalViews = [
@@ -46,6 +46,13 @@ class Configurable extends AbstractType
      * @var boolean
      */
     protected $showQuantityBox = true;
+
+    /**
+     * Has child products aka variants
+     *
+     * @var boolean
+     */
+    protected $hasVariants = true;
 
     /**
      * @param array $data
@@ -136,9 +143,15 @@ class Configurable extends AbstractType
                 ];
         }
 
+        $typeOfVariants = 'simple';
+        $productInstance = app(config('product_types.' . $product->type . '.class'));
+        if (isset($productInstance->variantsType) && ! in_array($productInstance->variantsType , ['bundle', 'configurable', 'grouped'])) {
+            $typeOfVariants = $productInstance->variantsType;
+        }
+
         $variant = $this->productRepository->getModel()->create([
                 'parent_id' => $product->id,
-                'type' => 'simple',
+                'type' => $typeOfVariants,
                 'attribute_family_id' => $product->attribute_family_id,
                 'sku' => $data['sku'],
             ]);
@@ -416,7 +429,7 @@ class Configurable extends AbstractType
 
         return $products;
     }
-    
+
     /**
      *
      * @param array $options1
@@ -451,7 +464,7 @@ class Configurable extends AbstractType
             ];
         }
 
-        return $data;        
+        return $data;
     }
 
     /**

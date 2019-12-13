@@ -32,7 +32,7 @@
                     @if ($product->getTypeInstance()->haveSpecialPrice())
                         <span class="pro-price">{{ core()->currency($product->getTypeInstance()->getSpecialPrice()) }}</span>
                     @else
-                        <span class="pro-price">{{ core()->currency($product->price) }}</span>
+                        <span class="pro-price">{{ core()->currency($product->getTypeInstance()->getMinimalPrice()) }}</span>
                     @endif
                 </div>
             </div>

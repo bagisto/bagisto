@@ -48,6 +48,8 @@
         <div class="page-content">
 
             <tabs>
+                {!! view_render_event('sales.order.tabs.before', ['order' => $order]) !!}
+
                 <tab name="{{ __('admin::app.sales.orders.info') }}" :selected="true">
                     <div class="sale-container">
 
@@ -506,6 +508,8 @@
                     </div>
 
                 </tab>
+
+                {!! view_render_event('sales.order.tabs.after', ['order' => $order]) !!}
             </tabs>
         </div>
 
