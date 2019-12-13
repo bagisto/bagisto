@@ -513,6 +513,14 @@
                         newParams = '';
 
                         for(i = 0; i < this.filters.length; i++) {
+                            if (this.filters[i].column == 'status') {
+                                if (this.filters[i].val.includes("True")) {
+                                    this.filters[i].val = 1;
+                                } else if (this.filters[i].val.includes("False")) {
+                                    this.filters[i].val = 0;
+                                }
+                            }
+
                             if (i == 0) {
                                 newParams = '?' + this.filters[i].column + '[' + this.filters[i].cond + ']' + '=' + this.filters[i].val;
                             } else {
