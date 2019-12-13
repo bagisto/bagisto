@@ -755,7 +755,6 @@ return [
         ],
         'development' => [
             'title' => 'Desenvolvimento',
-            'webconsole' => 'Console da Web',
         ]
     ],
     'customers' => [

@@ -35,6 +35,7 @@ return [
         'true' => 'True / Active',
         'false' => 'False / Inactive',
         'between' => 'Is between',
-        'apply' => 'Apply'
+        'apply' => 'Apply',
+        'items-per-page' => 'Items Per Page',
     ]
 ];

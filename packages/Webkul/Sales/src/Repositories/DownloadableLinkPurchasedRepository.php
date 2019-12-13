@@ -55,7 +55,7 @@ class DownloadableLinkPurchasedRepository extends Repository
      */
     public function saveLinks($orderItem)
     {
-        if ($orderItem->type != 'downloadable' || ! isset($orderItem->additional['links']))
+        if (stristr($orderItem->type,'downloadable') === false || ! isset($orderItem->additional['links']))
             return;
 
         foreach ($orderItem->additional['links'] as $linkId) {
