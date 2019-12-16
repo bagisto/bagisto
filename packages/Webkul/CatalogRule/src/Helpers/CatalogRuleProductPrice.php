@@ -5,6 +5,7 @@ namespace Webkul\CatalogRule\Helpers;
 use Carbon\Carbon;
 use Webkul\CatalogRule\Helpers\CatalogRuleProduct;
 use Webkul\CatalogRule\Repositories\CatalogRuleProductPriceRepository;
+use Webkul\Customer\Repositories\CustomerGroupRepository;
 
 class CatalogRuleProductPrice
 {
@@ -23,20 +24,43 @@ class CatalogRuleProductPrice
     protected $catalogRuleProductHelper;
 
     /**
+     * CustomerGroupRepository object
+     *
+     * @var CustomerGroupRepository
+     */
+    protected $customerGroupRepository;
+
+    /**
      * Create a new helper instance.
      *
      * @param  Webkul\Attribute\Repositories\CatalogRuleProductPriceRepository $catalogRuleProductPriceRepository
      * @param  Webkul\CatalogRule\Repositories\CatalogRuleProduct              $catalogRuleProductHelper
+     * @param  Webkul\Customer\Repositories\CustomerGroupRepository            $customerGroupRepository
      * @return void
      */
     public function __construct(
         CatalogRuleProductPriceRepository $catalogRuleProductPriceRepository,
-        CatalogRuleProduct $catalogRuleProductHelper
+        CatalogRuleProduct $catalogRuleProductHelper,
+        CustomerGroupRepository $customerGroupRepository
     )
     {
         $this->catalogRuleProductPriceRepository = $catalogRuleProductPriceRepository;
 
         $this->catalogRuleProductHelper = $catalogRuleProductHelper;
+
+        $this->customerGroupRepository = $customerGroupRepository;
+    }
+
+    /**
+     * Return current logged in customer
+     *
+     * @return Customer | Boolean
+     */
+    public function getCurrentCustomer()
+    {
+        $guard = request()->has('token') ? 'api' : 'customer';
+
+        return auth()->guard($guard);
     }
 
     /**
@@ -173,8 +197,22 @@ class CatalogRuleProductPrice
      */
     public function getRulePrice($product)
     {
+        if ($this->getCurrentCustomer()->check()) {
+            $customerGroupId = $this->getCurrentCustomer()->user()->customer_group_id;
+        } else {
+            $customerGroup = $this->customerGroupRepository->findOneByField('code', 'guest');
+
+            if (! $customerGroup)
+                return;
+
+            $customerGroupId = $customerGroup->id;
+        }
+
         return $this->catalogRuleProductPriceRepository->findOneWhere([
-                'product_id' => $product->id
+                'product_id' => $product->id,
+                'channel_id' => core()->getCurrentChannel()->id,
+                'customer_group_id' => $customerGroupId,
+                'rule_date' => Carbon::now()->format('Y-m-d'),
             ]);
     }
 }

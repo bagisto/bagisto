@@ -184,19 +184,19 @@ return [
     ], [
         'key' => 'promotions',
         'name' => 'admin::app.layouts.promotions',
-        'route' => 'admin.cart-rules.index',
+        'route' => 'admin.catalog-rules.index',
         'sort' => 5,
         'icon-class' => 'promotion-icon'
-    ], [
-        'key' => 'promotions.cart-rules',
-        'name' => 'admin::app.promotions.cart-rules.title',
-        'route' => 'admin.cart-rules.index',
-        'sort' => 1,
-        'icon-class' => ''
     ], [
         'key' => 'promotions.catalog-rules',
         'name' => 'admin::app.promotions.catalog-rules.title',
         'route' => 'admin.catalog-rules.index',
+        'sort' => 1,
+        'icon-class' => ''
+    ], [
+        'key' => 'promotions.cart-rules',
+        'name' => 'admin::app.promotions.cart-rules.title',
+        'route' => 'admin.cart-rules.index',
         'sort' => 2,
         'icon-class' => ''
     ], [
