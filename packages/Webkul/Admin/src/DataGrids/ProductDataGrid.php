@@ -17,7 +17,7 @@ class ProductDataGrid extends DataGrid
 
     protected $index = 'product_id';
 
-    protected $itemsPerPage = 20;
+    protected $itemsPerPage = 10;
 
     public function prepareQueryBuilder()
     {

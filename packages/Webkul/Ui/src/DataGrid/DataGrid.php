@@ -91,7 +91,7 @@ abstract class DataGrid
     /**
      * If paginated then value of pagination.
      */
-    protected $itemsPerPage = 15;
+    protected $itemsPerPage = 10;
 
     protected $operators = [
         'eq' => "=",
