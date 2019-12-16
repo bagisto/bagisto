@@ -16,6 +16,17 @@
         position: absolute;
         right: 25px;
     }
+
+    .per-page {
+        right: 250px;
+
+        .per-page-label {
+            position: absolute;
+            right: 120px;
+            width: 100%;
+            top: 8px;
+        }
+    }
 }
 
 .filter-row-two {

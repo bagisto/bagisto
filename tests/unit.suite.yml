@@ -1,0 +1,17 @@
+# Codeception Test Suite Configuration
+#
+# Suite for unit or integration tests.
+
+actor: UnitTester
+modules:
+  enabled:
+    - Asserts
+    - Filesystem
+    - \Helper\Unit
+    - Laravel5:
+        environment_file: .env.testing
+        run_database_migrations: true
+        run_database_seeder: true
+        database_seeder_class: DatabaseSeeder
+
+  step_decorators: ~
