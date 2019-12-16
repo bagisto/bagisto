@@ -451,9 +451,9 @@
 
             methods: {
                 addOptionRow: function (isNullOptionRow) {
-                    var rowCount = this.optionRowCount++;
-                    let id = 'option_' + rowCount;
-                    var row = {'id': id};
+                    const rowCount = this.optionRowCount++;
+                    const id = 'option_' + rowCount;
+                    let row = {'id': id};
 
                     @foreach (app('Webkul\Core\Repositories\LocaleRepository')->all() as $locale)
                         row['{{ $locale->code }}'] = '';
@@ -472,9 +472,10 @@
                 removeRow: function (row) {
                     if (row.id === this.idNullOption) {
                         this.idNullOption = null;
+                        this.isNullOptionChecked = false;
                     }
 
-                    var index = this.optionRows.indexOf(row)
+                    const index = this.optionRows.indexOf(row)
                     Vue.delete(this.optionRows, index);
                 },
 
@@ -505,8 +506,8 @@
                         if (! this.idNullOption) {
                             this.addOptionRow(true);
                         }
-                    } else {
-                        let row = this.optionRows.find(optionRow => optionRow.id === this.idNullOption);
+                    } else if(this.idNullOption !== null && typeof this.idNullOption !== 'undefined') {
+                        const row = this.optionRows.find(optionRow => optionRow.id === this.idNullOption);
                         this.removeRow(row);
                     }
                 }
