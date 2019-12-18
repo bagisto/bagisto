@@ -71,9 +71,9 @@ class CatalogRuleProduct
      * @param integer     $batchCount
      * @return void
      */
-    public function insertRuleProduct($rule, $batchCount = 1000)
+    public function insertRuleProduct($rule, $batchCount = 1000, $product)
     {
-        $productIds = $this->getMatchingProductIds($rule);
+        $productIds = $this->getMatchingProductIds($rule, $product);
 
         $rows = [];
 
@@ -114,17 +114,21 @@ class CatalogRuleProduct
      * Get array of product ids which are matched by rule
      *
      * @param CatalogRule $rule
+     * @param Product     $product
      * @return array
      */
-    public function getMatchingProductIds($rule)
+    public function getMatchingProductIds($rule, $product = null)
     {
-        $qb = $this->productRepository->scopeQuery(function($query) use($rule) {
+        $qb = $this->productRepository->scopeQuery(function($query) use($rule, $product) {
             $qb = $query->distinct()
                     ->addSelect('products.*')
                     ->leftJoin('product_flat', 'products.id', '=', 'product_flat.product_id')
                     ->leftJoin('channels', 'product_flat.channel', '=', 'channels.code')
                     ->where('product_flat.status', 1)
                     ->whereIn('channels.id', $rule->channels()->pluck('id')->toArray());
+
+            if ($product)
+                $qb->where('products.id', $product->id);
 
             foreach ($rule->conditions as $condition) {
                 if (! $condition['attribute'] || ! $condition['value'])

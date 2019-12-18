@@ -157,10 +157,9 @@ class CartRule
      * Check if cart rule can be applied
      *
      * @param CartRule $rule
-     * @param CartItem $item
      * @return boolean
      */
-    public function canProcessRule($rule, $item)
+    public function canProcessRule($rule)
     {
         $cart = Cart::getCart();
 
@@ -199,9 +198,6 @@ class CartRule
                 return false;
         }
 
-        if (! $this->validator->validate($rule, $item))
-            return false;
-
         return true;
     }
 
@@ -224,7 +220,10 @@ class CartRule
         $appliedRuleIds = [];
 
         foreach ($this->getCartRules() as $rule) {
-            if (! $this->canProcessRule($rule, $item))
+            if (! $this->canProcessRule($rule))
+                continue;
+
+            if (! $this->validator->validate($rule, $item))
                 continue;
 
             $quantity = $rule->discount_quantity ? min($item->quantity, $rule->discount_quantity) : $item->quantity;
@@ -331,8 +330,14 @@ class CartRule
         $selectedShipping->discount_amount = 0;
         $selectedShipping->base_discount_amount = 0;
 
-        foreach (explode(',', $cart->applied_cart_rule_ids) as $ruleId) {
-            $rule = $this->cartRuleRepository->resetScope()->find($ruleId);
+        $appliedRuleIds = [];
+
+        foreach ($this->getCartRules() as $rule) {
+            if (! $this->canProcessRule($rule))
+                continue;
+
+            if (! $this->validator->validateCart($rule, $cart))
+                continue;
 
             if (! $rule || ! $rule->apply_to_shipping)
                 continue;
@@ -366,9 +371,21 @@ class CartRule
 
             $selectedShipping->save();
 
+            $appliedRuleIds[$rule->id] = $rule->id;
+
             if ($rule->end_other_rules)
                 break;
         }
+
+        $cartAppliedCartRuleIds = array_merge(explode(',', $cart->applied_cart_rule_ids), $appliedRuleIds);
+
+        $cartAppliedCartRuleIds = array_filter($cartAppliedCartRuleIds);
+
+        $cartAppliedCartRuleIds = array_unique($cartAppliedCartRuleIds);
+
+        $cart->applied_cart_rule_ids = join(',', $cartAppliedCartRuleIds);
+
+        $cart->save();
 
         return $this;
     }
@@ -387,9 +404,15 @@ class CartRule
         $selectedShipping->discount_amount = 0;
 
         $selectedShipping->base_discount_amount = 0;
-        
-        foreach (explode(',', $cart->applied_cart_rule_ids) as $ruleId) {
-            $rule = $this->cartRuleRepository->resetScope()->find($ruleId);
+
+        $appliedRuleIds = [];
+
+        foreach ($this->getCartRules() as $rule) {
+            if (! $this->canProcessRule($rule))
+                continue;
+
+            if (! $this->validator->validateCart($rule, $cart))
+                continue;
 
             if (! $rule || ! $rule->free_shipping)
                 continue;
@@ -400,9 +423,21 @@ class CartRule
 
             $selectedShipping->save();
 
+            $appliedRuleIds[$rule->id] = $rule->id;
+
             if ($rule->end_other_rules)
                 break;
         }
+
+        $cartAppliedCartRuleIds = array_merge(explode(',', $cart->applied_cart_rule_ids), $appliedRuleIds);
+
+        $cartAppliedCartRuleIds = array_filter($cartAppliedCartRuleIds);
+
+        $cartAppliedCartRuleIds = array_unique($cartAppliedCartRuleIds);
+
+        $cart->applied_cart_rule_ids = join(',', $cartAppliedCartRuleIds);
+
+        $cart->save();
     }
 
     /**
