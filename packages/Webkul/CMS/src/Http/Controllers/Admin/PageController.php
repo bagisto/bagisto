@@ -40,7 +40,9 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
         /**
          * Pass the class instance through admin middleware
          */
-        $this->middleware('auth:admin');
+       // $this->middleware('auth:admin');
+
+        $this->middleware('admin');
 
         /**
          * Channel repository instance

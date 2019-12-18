@@ -130,12 +130,29 @@
                             </ul>
                         </div>
                     </div>
+
+                    <div class="dropdown-filters per-page">
+                        <div class="control-group">
+                            <label class="per-page-label" for="perPage">
+                                {{ __('ui::app.datagrid.items-per-page') }}
+                            </label>
+
+                            <select id="perPage" name="perPage" class="control" v-model="perPage" v-on:change="paginate">
+                                <option value="10"> 10 </option>
+                                <option value="20"> 20 </option>
+                                <option value="30"> 30 </option>
+                                <option value="40"> 40 </option>
+                                <option value="50"> 50 </option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="filter-row-two">
                     <span class="filter-tag" v-if="filters.length > 0" v-for="filter in filters" style="text-transform: capitalize;">
                         <span v-if="filter.column == 'sort'">@{{ filter.label }}</span>
                         <span v-else-if="filter.column == 'search'">Search</span>
+                        <span v-else-if="filter.column == 'perPage'">perPage</span>
                         <span v-else>@{{ filter.label }}</span>
 
                         <span class="wrapper">
@@ -198,12 +215,21 @@
                         stringConditionSelect: false,
                         booleanConditionSelect: false,
                         numberConditionSelect: false,
-                        datetimeConditionSelect: false
+                        datetimeConditionSelect: false,
+                        perPage: 10,
                     }
                 },
 
                 mounted: function() {
                     this.setParamsAndUrl();
+
+                    if (this.filters.length) {
+                        for (let i = 0; i < this.filters.length; i++) {
+                            if (this.filters[i].column == 'perPage') {
+                                this.perPage = this.filters[i].val;
+                            }
+                        }
+                    }
                 },
 
                 methods: {
@@ -513,6 +539,14 @@
                         newParams = '';
 
                         for(i = 0; i < this.filters.length; i++) {
+                            if (this.filters[i].column == 'status') {
+                                if (this.filters[i].val.includes("True")) {
+                                    this.filters[i].val = 1;
+                                } else if (this.filters[i].val.includes("False")) {
+                                    this.filters[i].val = 0;
+                                }
+                            }
+
                             if (i == 0) {
                                 newParams = '?' + this.filters[i].column + '[' + this.filters[i].cond + ']' + '=' + this.filters[i].val;
                             } else {
@@ -601,10 +635,12 @@
                     select: function() {
                         this.allSelected = false;
 
-                        if(this.dataIds.length == 0)
+                        if (this.dataIds.length == 0) {
                             this.massActionsToggle = false;
-                        else
+                            this.massActionType = null;
+                        } else {
                             this.massActionsToggle = true;
+                        }
                     },
 
                     //triggered when master checkbox is clicked
@@ -672,6 +708,20 @@
                         this.massActionsToggle = false;
 
                         this.allSelected = false;
+
+                        this.massActionType = null;
+                    },
+
+                    paginate: function(e) {
+                        for (let i = 0; i < this.filters.length; i++) {
+                            if (this.filters[i].column == 'perPage') {
+                                this.filters.splice(i, 1);
+                            }
+                        }
+
+                        this.filters.push({"column":"perPage","cond":"eq","val": e.target.value});
+
+                        this.makeURL();
                     }
                 }
             });

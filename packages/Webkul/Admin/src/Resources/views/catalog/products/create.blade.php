@@ -64,7 +64,7 @@
                             </select>
 
                             @if ($familyId)
-                                <input type="hidden" name="type" value="configurable"/>
+                                <input type="hidden" name="type" value="{{ app('request')->input('type') }}"/>
                             @endif
                             <span class="control-error" v-if="errors.has('type')">@{{ errors.first('type') }}</span>
                         </div>

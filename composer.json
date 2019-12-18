@@ -36,6 +36,7 @@
     },
 
     "require-dev": {
+        "codeception/codeception": "3.1.*",
         "barryvdh/laravel-debugbar": "^3.1",
         "filp/whoops": "^2.0",
         "fzaninotto/faker": "^1.4",
@@ -125,6 +126,12 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
+        ],
+        "test": [
+            "set -e",
+            "@php artisan migrate:fresh --env=testing",
+            "vendor/bin/codecept run unit",
+            "vendor/bin/codecept run functional"
         ]
     },
     "config": {
@@ -132,5 +139,6 @@
         "sort-packages": true,
         "optimize-autoloader": true
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "prefer-stable": true
   }

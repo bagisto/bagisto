@@ -17,13 +17,13 @@
 
             <div class="product-info">
                 <div class="product-image">
-                    <a href="{{ route('shop.products.index', $product->url_key) }}" title="{{ $product->name }}">
+                    <a href="{{ route('shop.productOrCategory.index', $product->url_key) }}" title="{{ $product->name }}">
                         <img src="{{ $productBaseImage['medium_image_url'] }}" />
                     </a>
                 </div>
 
                 <div class="product-name mt-20">
-                    <a href="{{ url()->to('/').'/products/'.$product->url_key }}" title="{{ $product->name }}">
+                    <a href="{{ ('shop.productOrCategory.index', $product->url_key) }}" title="{{ $product->name }}">
                         <span>{{ $product->name }}</span>
                     </a>
                 </div>
@@ -32,7 +32,7 @@
                     @if ($product->getTypeInstance()->haveSpecialPrice())
                         <span class="pro-price">{{ core()->currency($product->getTypeInstance()->getSpecialPrice()) }}</span>
                     @else
-                        <span class="pro-price">{{ core()->currency($product->price) }}</span>
+                        <span class="pro-price">{{ core()->currency($product->getTypeInstance()->getMinimalPrice()) }}</span>
                     @endif
                 </div>
             </div>

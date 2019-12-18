@@ -186,7 +186,7 @@ class DashboardController extends Controller
             ->where('order_items.created_at', '>=', $this->startDate)
             ->where('order_items.created_at', '<=', $this->endDate)
             ->addSelect(DB::raw('SUM(qty_invoiced - qty_refunded) as total_qty_invoiced'))
-            ->addSelect(DB::raw('COUNT(products.id) as total_products'))
+            ->addSelect(DB::raw('COUNT('.DB::getTablePrefix().'products.id) as total_products'))
             ->addSelect('order_items.id', 'categories.id as category_id', 'category_translations.name')
             ->groupBy('categories.id')
             ->havingRaw('SUM(qty_invoiced - qty_refunded) > 0')

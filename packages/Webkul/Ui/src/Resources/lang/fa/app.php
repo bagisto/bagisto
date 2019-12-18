@@ -31,6 +31,7 @@ return [
         'true' => 'صحیح / فعال',
         'false' => 'غلط / غیرفعال',
         'between' => 'ما بین',
-        'apply' => 'درخواست'
+        'apply' => 'درخواست',
+        'items-per-page' => 'Items Per Page',
     ]
 ];
