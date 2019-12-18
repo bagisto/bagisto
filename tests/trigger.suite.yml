@@ -1,8 +1,8 @@
 # Codeception Test Suite Configuration
 #
-# Suite for unit or integration tests.
+# Suite for unit or integration tests that test database logic (e.g. triggers).
 
-actor: UnitTester
+actor: TriggerTester
 modules:
   enabled:
     - Asserts

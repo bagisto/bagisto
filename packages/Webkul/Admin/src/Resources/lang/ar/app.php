@@ -913,6 +913,7 @@ return [
             'order-number-length' => 'Order Number Length',
             'order-number-suffix' => 'Order Number Suffix',
             'default' => 'Default',
+            'sandbox' => 'Sandbox'
         ]
     ]
 ];
