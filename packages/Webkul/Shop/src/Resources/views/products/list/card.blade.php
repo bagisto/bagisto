@@ -13,7 +13,7 @@
     @endif
 
     <div class="product-image">
-        <a href="{{ route('shop.products.index', $product->url_key) }}" title="{{ $product->name }}">
+        <a href="{{ route('shop.productOrCategory.index', $product->url_key) }}" title="{{ $product->name }}">
             <img src="{{ $productBaseImage['medium_image_url'] }}" onerror="this.src='{{ asset('vendor/webkul/ui/assets/images/product/meduim-product-placeholder.png') }}'"/>
         </a>
     </div>
@@ -21,7 +21,7 @@
     <div class="product-information">
 
         <div class="product-name">
-            <a href="{{ url()->to('/').'/products/' . $product->url_key }}" title="{{ $product->name }}">
+            <a href="{{ route('shop.productOrCategory.index', $product->url_key) }}" title="{{ $product->name }}">
                 <span>
                     {{ $product->name }}
                 </span>

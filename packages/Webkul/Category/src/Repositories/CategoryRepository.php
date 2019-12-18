@@ -152,6 +152,16 @@ class CategoryRepository extends Repository
     }
 
     /**
+     * @param string $urlPath
+     *
+     * @return mixed
+     */
+    public function findByPath(string $urlPath)
+    {
+        return $this->model->whereTranslation('url_path', $urlPath)->first();
+    }
+
+    /**
      * @param array $data
      * @param $id
      * @param string $attribute
