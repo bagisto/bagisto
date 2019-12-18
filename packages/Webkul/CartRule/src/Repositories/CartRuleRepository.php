@@ -5,6 +5,7 @@ namespace Webkul\CartRule\Repositories;
 use Illuminate\Container\Container as App;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Tax\Repositories\TaxCategoryRepository;
 use Webkul\Core\Repositories\CountryRepository;
 use Webkul\Core\Repositories\CountryStateRepository;
 
@@ -31,6 +32,13 @@ class CartRuleRepository extends Repository
     protected $cartRuleCouponRepository;
 
     /**
+     * TaxCategoryRepository class
+     *
+     * @var TaxCategoryRepository
+     */
+    protected $taxCategoryRepository;
+
+    /**
      * CountryRepository class
      *
      * @var CountryRepository
@@ -49,6 +57,7 @@ class CartRuleRepository extends Repository
      *
      * @param  Webkul\Attribute\Repositories\AttributeRepository     $attributeRepository
      * @param  Webkul\CartRule\Repositories\CartRuleCouponRepository $cartRuleCouponRepository
+     * @param  Webkul\Tax\Repositories\TaxCategoryRepository         $taxCategoryRepository
      * @param  Webkul\Core\Repositories\CountryRepository            $countryRepository
      * @param  Webkul\Core\Repositories\CountryStateRepository       $countryStateRepository
      * @param  Illuminate\Container\Container                        $app
@@ -57,6 +66,7 @@ class CartRuleRepository extends Repository
     public function __construct(
         AttributeRepository $attributeRepository,
         CartRuleCouponRepository $cartRuleCouponRepository,
+        TaxCategoryRepository $taxCategoryRepository,
         CountryRepository $countryRepository,
         CountryStateRepository $countryStateRepository,
         App $app
@@ -65,6 +75,8 @@ class CartRuleRepository extends Repository
         $this->attributeRepository = $attributeRepository;
 
         $this->cartRuleCouponRepository = $cartRuleCouponRepository;
+
+        $this->taxCategoryRepository = $taxCategoryRepository;
 
         $this->countryRepository = $countryRepository;
 
@@ -252,9 +264,13 @@ class CartRuleRepository extends Repository
         ];
 
         foreach ($this->attributeRepository->findWhereNotIn('type', ['textarea', 'image', 'file']) as $attribute) {
-            $options = $attribute->options;
-
             $attributeType = $attribute->type;
+
+            if ($attribute->code == 'tax_category_id') {
+                $options = $this->getTaxCategories();
+            } else {
+                $options = $attribute->options;
+            }
 
             if ($attribute->validation == 'decimal')
                 $attributeType = 'decimal';
@@ -329,6 +345,24 @@ class CartRuleRepository extends Repository
         return $methods;
     }
 
+    /**
+     * Returns all countries
+     *
+     * @return array
+     */
+    public function getTaxCategories()
+    {
+        $taxCategories = [];
+
+        foreach ($this->taxCategoryRepository->all() as $taxCategory) {
+            $taxCategories[] = [
+                'id' => $taxCategory->id,
+                'admin_name' => $taxCategory->name,
+            ];
+        }
+
+        return $taxCategories;
+    }
 
     /**
      * Returns all countries
