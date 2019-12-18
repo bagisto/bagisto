@@ -72,15 +72,37 @@ class CatalogRuleIndex
     }
 
     /**
-     * Deletes catalog rule product and catalog rule product price indexes
+     * Full reindex
      *
+     * @param Product $product
      * @return void
      */
-    public function cleanIndexes()
+    public function reindexProduct($product)
     {
-        $this->catalogRuleProductHelper->cleanProductIndex();
+        try {
+            $this->cleanIndexes([$product->id]);
 
-        $this->catalogRuleProductPriceHelper->cleanProductPriceIndex();
+            foreach ($this->getCatalogRules() as $rule) {
+                $this->catalogRuleProductHelper->insertRuleProduct($rule, 1000, $product);
+            }
+
+            $this->catalogRuleProductPriceHelper->indexRuleProductPrice(1000, $product);
+        } catch (\Exception $e) {
+
+        }
+    }
+
+    /**
+     * Deletes catalog rule product and catalog rule product price indexes
+     *
+     * @param array $productIds
+     * @return void
+     */
+    public function cleanIndexes($productIds = [])
+    {
+        $this->catalogRuleProductHelper->cleanProductIndex($productIds);
+
+        $this->catalogRuleProductPriceHelper->cleanProductPriceIndex($productIds);
     }
 
     /**

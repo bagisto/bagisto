@@ -9,22 +9,24 @@ class Validator
     /**
      * Validate cart rule for condition
      *
-     * @param CartRule|CatalogRule $rule
-     * @param CartItem|Product     $item
+     * @param CartRule|CatalogRule  $rule
+     * @param Cart|CartItem|Product $entity
      * @return boolean
      */
-    public function validate($rule, $item)
+    public function validate($rule, $entity)
     {
         if (! $rule->conditions)
             return true;
 
-        $validConditionCount = 0;
+        $validConditionCount = $totalConditionCount = 0;
 
         foreach ($rule->conditions as $condition) {
             if (! $condition['attribute'] || ! $condition['value'])
                 continue;
 
-            $attributeValue = $this->getAttributeValue($condition, $item);
+            $totalConditionCount++;
+
+            $attributeValue = $this->getAttributeValue($condition, $entity);
 
             if ($rule->condition_type == 1) {
                 if (! $this->validateAttribute($condition['operator'], $attributeValue, $condition['value'])) {
@@ -38,17 +40,54 @@ class Validator
             }
         }
 
-        return $validConditionCount == count($rule->conditions) ? true : false;
+        return $validConditionCount == $totalConditionCount ? true : false;
+    }
+
+    /**
+     * Validate cart rule for condition
+     *
+     * @param CartRule $rule
+     * @param Cart     $cart
+     * @return boolean
+     */
+    public function validateCart($rule, $cart)
+    {
+        if (! $rule->conditions)
+            return true;
+
+        $validConditionCount = $totalConditionCount = 0;
+
+        foreach ($rule->conditions as $condition) {
+            if (! $condition['attribute'] || ! $condition['value'] || strpos($condition['attribute'], 'cart|') == false)
+                continue;
+
+            $totalConditionCount++;
+
+            $attributeValue = $this->getAttributeValue($condition, $cart);
+
+            if ($rule->condition_type == 1) {
+                if (! $this->validateAttribute($condition['operator'], $attributeValue, $condition['value'])) {
+                    return false;
+                } else {
+                    $validConditionCount++;
+                }
+            } else {
+                if ($this->validateAttribute($condition['operator'], $attributeValue, $condition['value']))
+                    return true;
+            }
+        }
+
+        return $validConditionCount == $totalConditionCount ? true : false;
     }
 
     /**
      * Return value for the attribute
      *
-     * @param array    $condition
-     * @param CartItem $item
+     * @param array                 $condition
+     * @param Cart|CartItem|Product $entity
      * @return boolean
      */
-    public function getAttributeValue($condition, $item)
+    public function getAttributeValue($condition, $entity)
     {
         $chunks = explode('|', $condition['attribute']);
 
@@ -60,7 +99,7 @@ class Validator
 
         switch (current($chunks)) {
             case 'cart':
-                $cart = $item->cart;
+                $cart = $entity instanceof Webkul\Checkout\Models\Cart ? $entity : $entity->cart;
 
                 if (in_array($attributeCode, ['postcode', 'state', 'country'])) {
                     if (! $cart->shipping_address)
@@ -84,12 +123,12 @@ class Validator
                 }
 
             case 'cart_item':
-                return $item->{$attributeCode};
+                return $entity->{$attributeCode};
 
             case 'product':
                 $value = $attributeScope == 'children'
-                        ? ($item->child ? $item->child->product->{$attributeCode} : null)
-                        : $item->product->{$attributeCode};
+                        ? ($entity->child ? $entity->child->product->{$attributeCode} : null)
+                        : $entity->product->{$attributeCode};
 
                 if (! in_array($condition['attribute_type'], ['multiselect', 'checkbox']))
                     return $value;
