@@ -24,46 +24,14 @@ class Validator
             if (! $condition['attribute'] || ! $condition['value'])
                 continue;
 
-            $totalConditionCount++;
-
-            $attributeValue = $this->getAttributeValue($condition, $entity);
-
-            if ($rule->condition_type == 1) {
-                if (! $this->validateAttribute($condition['operator'], $attributeValue, $condition['value'])) {
-                    return false;
-                } else {
-                    $validConditionCount++;
-                }
-            } else {
-                if ($this->validateAttribute($condition['operator'], $attributeValue, $condition['value']))
-                    return true;
-            }
-        }
-
-        return $validConditionCount == $totalConditionCount ? true : false;
-    }
-
-    /**
-     * Validate cart rule for condition
-     *
-     * @param CartRule $rule
-     * @param Cart     $cart
-     * @return boolean
-     */
-    public function validateCart($rule, $cart)
-    {
-        if (! $rule->conditions)
-            return true;
-
-        $validConditionCount = $totalConditionCount = 0;
-
-        foreach ($rule->conditions as $condition) {
-            if (! $condition['attribute'] || ! $condition['value'] || strpos($condition['attribute'], 'cart|') == false)
+            if ($entity instanceof \Webkul\Checkout\Contracts\Cart && strpos($condition['attribute'], 'cart|') === false)
                 continue;
 
             $totalConditionCount++;
 
-            $attributeValue = $this->getAttributeValue($condition, $cart);
+            $attributeValue = $this->getAttributeValue($condition, $entity);
+
+            // dd($attributeValue);
 
             if ($rule->condition_type == 1) {
                 if (! $this->validateAttribute($condition['operator'], $attributeValue, $condition['value'])) {
@@ -99,7 +67,7 @@ class Validator
 
         switch (current($chunks)) {
             case 'cart':
-                $cart = $entity instanceof Webkul\Checkout\Models\Cart ? $entity : $entity->cart;
+                $cart = $entity instanceof \Webkul\Checkout\Contracts\Cart ? $entity : $entity->cart;
 
                 if (in_array($attributeCode, ['postcode', 'state', 'country'])) {
                     if (! $cart->shipping_address)
