@@ -1051,7 +1051,8 @@ return [
             'logo-image' => 'تصویر لوگو',
             'credit-max' => 'اعتبار مشتری حداکثر',
             'credit-max-value' => 'حداکثر میزان اعتبار',
-            'use-credit-max' => 'استفاده از حداکثر اعتبار'
+            'use-credit-max' => 'استفاده از حداکثر اعتبار',
+            'sandbox' => 'Sandbox'
         ]
     ]
 ];
