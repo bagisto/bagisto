@@ -31,8 +31,6 @@ class Validator
 
             $attributeValue = $this->getAttributeValue($condition, $entity);
 
-            // dd($attributeValue);
-
             if ($rule->condition_type == 1) {
                 if (! $this->validateAttribute($condition['operator'], $attributeValue, $condition['value'])) {
                     return false;
