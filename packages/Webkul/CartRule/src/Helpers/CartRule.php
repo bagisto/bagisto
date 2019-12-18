@@ -336,7 +336,7 @@ class CartRule
             if (! $this->canProcessRule($rule))
                 continue;
 
-            if (! $this->validator->validateCart($rule, $cart))
+            if (! $this->validator->validate($rule, $cart))
                 continue;
 
             if (! $rule || ! $rule->apply_to_shipping)
@@ -411,7 +411,7 @@ class CartRule
             if (! $this->canProcessRule($rule))
                 continue;
 
-            if (! $this->validator->validateCart($rule, $cart))
+            if (! $this->validator->validate($rule, $cart))
                 continue;
 
             if (! $rule || ! $rule->free_shipping)
