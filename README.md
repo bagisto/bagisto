@@ -116,25 +116,30 @@ Find file **.env** inside **bagisto** directory and set the environment variable
 
 Although, mailer environment variables are also required to be set up as **Bagisto** requires emails to send to customers and admins for various functionalities that are built in.
 
+
 ~~~
-2. php artisan migrate
+2. php artisan key:generate
 ~~~
 
 ~~~
-3. php artisan db:seed
+3. php artisan migrate
 ~~~
 
 ~~~
-4. php artisan vendor:publish
+4. php artisan db:seed
+~~~
+
+~~~
+5. php artisan vendor:publish
 -> Press 0 and then press enter to publish all assets and configurations.
 ~~~
 
 ~~~
-5. php artisan storage:link
+6. php artisan storage:link
 ~~~
 
 ~~~
-6. composer dump-autoload
+7. composer dump-autoload
 ~~~
 
 
