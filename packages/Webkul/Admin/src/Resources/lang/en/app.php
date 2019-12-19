@@ -970,7 +970,11 @@ return [
             'generate' => 'Generate',
             'cart-rule-not-defind-error' => 'Cart rule is not defined',
             'mass-delete-success' => 'All the selected index of coupons have been deleted successfully.',
-            'end-other-rules' => 'End Other Rules'
+            'end-other-rules' => 'End Other Rules',
+            'children-categories' => 'Categories (Children Only)',
+            'parent-categories' => 'Categories (Parent Only)',
+            'categories' => 'Categories',
+            'attribute_family' => 'Attribute Family'
         ],
 
         'catalog-rules' => [
@@ -1016,7 +1020,9 @@ return [
             'buy-x-get-y-free' => 'Buy X Get Y Free',
             'discount-amount' => 'Discount Amount',
             'mass-delete-success' => 'All the selected index of coupons have been deleted successfully.',
-            'end-other-rules' => 'End Other Rules'
+            'end-other-rules' => 'End Other Rules',
+            'categories' => 'Categories',
+            'attribute_family' => 'Attribute Family'
         ]
     ],
 

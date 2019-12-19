@@ -4,7 +4,9 @@ namespace Webkul\CartRule\Repositories;
 
 use Illuminate\Container\Container as App;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
 use Webkul\Core\Repositories\CountryRepository;
 use Webkul\Core\Repositories\CountryStateRepository;
@@ -18,11 +20,25 @@ use Webkul\Core\Repositories\CountryStateRepository;
 class CartRuleRepository extends Repository
 {
     /**
+     * AttributeFamilyRepository object
+     *
+     * @var AttributeFamilyRepository
+     */
+    protected $attributeFamilyRepository;
+
+    /**
      * AttributeRepository object
      *
      * @var AttributeRepository
      */
     protected $attributeRepository;
+
+    /**
+     * CategoryRepository class
+     *
+     * @var CategoryRepository
+     */
+    protected $categoryRepository;
 
     /**
      * CartRuleCouponRepository object
@@ -55,16 +71,20 @@ class CartRuleRepository extends Repository
     /**
      * Create a new repository instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeRepository     $attributeRepository
-     * @param  Webkul\CartRule\Repositories\CartRuleCouponRepository $cartRuleCouponRepository
-     * @param  Webkul\Tax\Repositories\TaxCategoryRepository         $taxCategoryRepository
-     * @param  Webkul\Core\Repositories\CountryRepository            $countryRepository
-     * @param  Webkul\Core\Repositories\CountryStateRepository       $countryStateRepository
-     * @param  Illuminate\Container\Container                        $app
+     * @param  Webkul\Attribute\Repositories\AttributeFamilyRepository $attributeFamilyRepository
+     * @param  Webkul\Attribute\Repositories\AttributeRepository       $attributeRepository
+     * @param  Webkul\Category\Repositories\CategoryRepository         $categoryRepository
+     * @param  Webkul\CartRule\Repositories\CartRuleCouponRepository   $cartRuleCouponRepository
+     * @param  Webkul\Tax\Repositories\TaxCategoryRepository           $taxCategoryRepository
+     * @param  Webkul\Core\Repositories\CountryRepository              $countryRepository
+     * @param  Webkul\Core\Repositories\CountryStateRepository         $countryStateRepository
+     * @param  Illuminate\Container\Container                          $app
      * @return void
      */
     public function __construct(
+        AttributeFamilyRepository $attributeFamilyRepository,
         AttributeRepository $attributeRepository,
+        CategoryRepository $categoryRepository,
         CartRuleCouponRepository $cartRuleCouponRepository,
         TaxCategoryRepository $taxCategoryRepository,
         CountryRepository $countryRepository,
@@ -72,7 +92,11 @@ class CartRuleRepository extends Repository
         App $app
     )
     {
+        $this->attributeFamilyRepository = $attributeFamilyRepository;
+
         $this->attributeRepository = $attributeRepository;
+
+        $this->categoryRepository = $categoryRepository;
 
         $this->cartRuleCouponRepository = $cartRuleCouponRepository;
 
@@ -259,7 +283,29 @@ class CartRuleRepository extends Repository
             ], [
                 'key' => 'product',
                 'label' => trans('admin::app.promotions.cart-rules.product-attribute'),
-                'children' => []
+                'children' => [
+                    [
+                        'key' => 'product|category_ids',
+                        'type' => 'multiselect',
+                        'label' => trans('admin::app.promotions.cart-rules.categories'),
+                        'options' => $this->categoryRepository->getCategoryTree()
+                    ], [
+                        'key' => 'product|children::category_ids',
+                        'type' => 'multiselect',
+                        'label' => trans('admin::app.promotions.cart-rules.children-categories'),
+                        'options' => $this->categoryRepository->getCategoryTree()
+                    ], [
+                        'key' => 'product|parent::category_ids',
+                        'type' => 'multiselect',
+                        'label' => trans('admin::app.promotions.cart-rules.parent-categories'),
+                        'options' => $this->categoryRepository->getCategoryTree()
+                    ], [
+                        'key' => 'product|attribute_family_id',
+                        'type' => 'select',
+                        'label' => trans('admin::app.promotions.cart-rules.attribute_family'),
+                        'options' => $this->getAttributeFamilies()
+                    ]
+                ]
             ]
         ];
 
@@ -362,6 +408,25 @@ class CartRuleRepository extends Repository
         }
 
         return $taxCategories;
+    }
+
+    /**
+     * Returns all attribute families
+     *
+     * @return array
+     */
+    public function getAttributeFamilies()
+    {
+        $attributeFamilies = [];
+
+        foreach ($this->attributeFamilyRepository->all() as $attributeFamily) {
+            $attributeFamilies[] = [
+                'id' => $attributeFamily->id,
+                'admin_name' => $attributeFamily->name,
+            ];
+        }
+
+        return $attributeFamilies;
     }
 
     /**

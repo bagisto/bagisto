@@ -4,7 +4,9 @@ namespace Webkul\CatalogRule\Repositories;
 
 use Illuminate\Container\Container as App;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
 
 /**
@@ -16,11 +18,25 @@ use Webkul\Tax\Repositories\TaxCategoryRepository;
 class CatalogRuleRepository extends Repository
 {
     /**
+     * AttributeFamilyRepository object
+     *
+     * @var AttributeFamilyRepository
+     */
+    protected $attributeFamilyRepository;
+
+    /**
      * AttributeRepository object
      *
      * @var AttributeRepository
      */
     protected $attributeRepository;
+
+    /**
+     * CategoryRepository class
+     *
+     * @var CategoryRepository
+     */
+    protected $categoryRepository;
 
     /**
      * TaxCategoryRepository class
@@ -32,18 +48,26 @@ class CatalogRuleRepository extends Repository
     /**
      * Create a new repository instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeRepository $attributeRepository
-     * @param  Webkul\Tax\Repositories\TaxCategoryRepository     $taxCategoryRepository
-     * @param  Illuminate\Container\Container                    $app
+     * @param  Webkul\Attribute\Repositories\AttributeFamilyRepository $attributeFamilyRepository
+     * @param  Webkul\Attribute\Repositories\AttributeRepository       $attributeRepository
+     * @param  Webkul\Category\Repositories\CategoryRepository         $categoryRepository
+     * @param  Webkul\Tax\Repositories\TaxCategoryRepository           $taxCategoryRepository
+     * @param  Illuminate\Container\Container                          $app
      * @return void
      */
     public function __construct(
+        AttributeFamilyRepository $attributeFamilyRepository,
         AttributeRepository $attributeRepository,
+        CategoryRepository $categoryRepository,
         TaxCategoryRepository $taxCategoryRepository,
         App $app
     )
     {
+        $this->attributeFamilyRepository = $attributeFamilyRepository;
+
         $this->attributeRepository = $attributeRepository;
+
+        $this->categoryRepository = $categoryRepository;
 
         $this->taxCategoryRepository = $taxCategoryRepository;
 
@@ -119,7 +143,19 @@ class CatalogRuleRepository extends Repository
             [
                 'key' => 'product',
                 'label' => trans('admin::app.promotions.catalog-rules.product-attribute'),
-                'children' => []
+                'children' => [
+                    [
+                        'key' => 'product|category_ids',
+                        'type' => 'multiselect',
+                        'label' => trans('admin::app.promotions.catalog-rules.categories'),
+                        'options' => $this->categoryRepository->getCategoryTree()
+                    ], [
+                        'key' => 'product|attribute_family_id',
+                        'type' => 'select',
+                        'label' => trans('admin::app.promotions.catalog-rules.attribute_family'),
+                        'options' => $this->getAttributeFamilies()
+                    ]
+                ]
             ]
         ];
 
@@ -150,7 +186,7 @@ class CatalogRuleRepository extends Repository
     }
 
     /**
-     * Returns all countries
+     * Returns all tax categories
      *
      * @return array
      */
@@ -166,5 +202,24 @@ class CatalogRuleRepository extends Repository
         }
 
         return $taxCategories;
+    }
+
+    /**
+     * Returns all attribute families
+     *
+     * @return array
+     */
+    public function getAttributeFamilies()
+    {
+        $attributeFamilies = [];
+
+        foreach ($this->attributeFamilyRepository->all() as $attributeFamily) {
+            $attributeFamilies[] = [
+                'id' => $attributeFamily->id,
+                'admin_name' => $attributeFamily->name,
+            ];
+        }
+
+        return $attributeFamilies;
     }
 }

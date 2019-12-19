@@ -44,7 +44,8 @@
         },
 
         created () {
-            let index = this.savedValues.indexOf(this.items[this.valueField])
+            let index = this.savedValues.indexOf(this.items[this.valueField].toString())
+
             if(index !== -1) {
                 this.value.push(this.items);
             }
