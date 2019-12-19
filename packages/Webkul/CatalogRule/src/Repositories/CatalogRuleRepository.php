@@ -5,6 +5,7 @@ namespace Webkul\CatalogRule\Repositories;
 use Illuminate\Container\Container as App;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Tax\Repositories\TaxCategoryRepository;
 
 /**
  * CatalogRule Reposotory
@@ -22,18 +23,29 @@ class CatalogRuleRepository extends Repository
     protected $attributeRepository;
 
     /**
+     * TaxCategoryRepository class
+     *
+     * @var TaxCategoryRepository
+     */
+    protected $taxCategoryRepository;
+
+    /**
      * Create a new repository instance.
      *
      * @param  Webkul\Attribute\Repositories\AttributeRepository $attributeRepository
+     * @param  Webkul\Tax\Repositories\TaxCategoryRepository     $taxCategoryRepository
      * @param  Illuminate\Container\Container                    $app
      * @return void
      */
     public function __construct(
         AttributeRepository $attributeRepository,
+        TaxCategoryRepository $taxCategoryRepository,
         App $app
     )
     {
         $this->attributeRepository = $attributeRepository;
+
+        $this->taxCategoryRepository = $taxCategoryRepository;
 
         parent::__construct($app);
     }
@@ -112,9 +124,13 @@ class CatalogRuleRepository extends Repository
         ];
 
         foreach ($this->attributeRepository->findWhereNotIn('type', ['textarea', 'image', 'file']) as $attribute) {
-            $options = $attribute->options;
-
             $attributeType = $attribute->type;
+
+            if ($attribute->code == 'tax_category_id') {
+                $options = $this->getTaxCategories();
+            } else {
+                $options = $attribute->options;
+            }
 
             if ($attribute->validation == 'decimal')
                 $attributeType = 'decimal';
@@ -131,5 +147,24 @@ class CatalogRuleRepository extends Repository
         }
 
         return $attributes;
+    }
+
+    /**
+     * Returns all countries
+     *
+     * @return array
+     */
+    public function getTaxCategories()
+    {
+        $taxCategories = [];
+
+        foreach ($this->taxCategoryRepository->all() as $taxCategory) {
+            $taxCategories[] = [
+                'id' => $taxCategory->id,
+                'admin_name' => $taxCategory->name,
+            ];
+        }
+
+        return $taxCategories;
     }
 }
