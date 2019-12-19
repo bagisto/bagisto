@@ -92,14 +92,25 @@ class Validator
                 return $entity->{$attributeCode};
 
             case 'product':
-                $value = $attributeScope == 'children'
-                        ? ($entity->child ? $entity->child->product->{$attributeCode} : null)
-                        : ($entity->product ? $entity->product->{$attributeCode} : $entity->{$attributeCode});
-
-                if (! in_array($condition['attribute_type'], ['multiselect', 'checkbox']))
+                if ($attributeCode == 'category_ids') {
+                    $value = $attributeScope == 'children'
+                            ? ($entity->child ? $entity->child->product->categories()->pluck('id')->toArray() : [])
+                            : ($entity->product
+                                ? $entity->product->categories()->pluck('id')->toArray()
+                                : $entity->categories()->pluck('id')->toArray()
+                            );
+                    
                     return $value;
+                } else {
+                    $value = $attributeScope == 'children'
+                            ? ($entity->child ? $entity->child->product->{$attributeCode} : null)
+                            : ($entity->product ? $entity->product->{$attributeCode} : $entity->{$attributeCode});
 
-                return $value ? explode(',', $value) : [];
+                    if (! in_array($condition['attribute_type'], ['multiselect', 'checkbox']))
+                        return $value;
+    
+                    return $value ? explode(',', $value) : [];
+                }
         }
     }
 
