@@ -71,7 +71,7 @@ class CatalogRuleProduct
      * @param integer     $batchCount
      * @return void
      */
-    public function insertRuleProduct($rule, $batchCount = 1000, $product)
+    public function insertRuleProduct($rule, $batchCount = 1000, $product = null)
     {
         $productIds = $this->getMatchingProductIds($rule, $product);
 
@@ -145,11 +145,16 @@ class CatalogRuleProduct
         $validatedProductIds = [];
 
         foreach ($qb->get() as $product) {
-            if ($this->validator->validate($rule, $product))
-                $validatedProductIds[] = $product->id;
+            if ($this->validator->validate($rule, $product)) {
+                if ($product->type == 'configurable') {
+                    $validatedProductIds = array_merge($validatedProductIds, $product->variants()->pluck('id')->toArray());
+                } else {
+                    $validatedProductIds[] = $product->id;
+                }
+            }
         }
 
-        return $validatedProductIds;
+        return array_unique($validatedProductIds);
     }
     
     /**
@@ -195,8 +200,13 @@ class CatalogRuleProduct
                     ->addSelect('product_flat.price')
                     ->orderBy('sort_order', 'asc');
 
-            if ($product)
-                $qb->where('catalog_rule_products.product_id', $product->id);
+            if ($product) {
+                if ($product->type == 'configurable') {
+                    $qb->whereIn('catalog_rule_products.product_id', $product->variants()->pluck('id')->toArray());
+                } else {
+                    $qb->where('catalog_rule_products.product_id', $product->id);
+                }
+            }
 
             return $qb;
         })->get();

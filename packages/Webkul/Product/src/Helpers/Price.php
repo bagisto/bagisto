@@ -102,22 +102,25 @@ class Price extends AbstractProduct
             $finalPrice[] = $price->final_price;
         }
 
+        $rulePrice =  null;
 
-        $rulePrice = $this->catalogRuleProductPriceRepository->scopeQuery(function($query) use($product) {
-            return $query->selectRaw('min(price) as price')
-                        ->whereIn('product_id', $product->variants()->pluck('product_id')->toArray())
-                        ->where('channel_id', core()->getCurrentChannel()->id)
-                        ->where('customer_group_id', $this->getCurrentCustomerGroupId())
-                        ->where('rule_date', Carbon::now()->format('Y-m-d'));
-        })->first();
+        if (request()->route()->getPrefix() != 'admin/catalog') {
+            $rulePrice = $this->catalogRuleProductPriceRepository->scopeQuery(function($query) use($product) {
+                return $query->selectRaw('min(price) as price')
+                            ->whereIn('product_id', $product->variants()->pluck('product_id')->toArray())
+                            ->where('channel_id', core()->getCurrentChannel()->id)
+                            ->where('customer_group_id', $this->getCurrentCustomerGroupId())
+                            ->where('rule_date', Carbon::now()->format('Y-m-d'));
+            })->first();
+        }
 
         if (empty($finalPrice) && ! $rulePrice)
-            return $price[$product->id] = 0;
+            return $price[$productId] = 0;
 
         if ($rulePrice && $rulePrice->price && min($finalPrice) > $rulePrice->price)
-            return $price[$product->id] = $rulePrice->price;
+            return $price[$productId] = $rulePrice->price;
 
-        return $price[$product->id] = min($finalPrice);
+        return $price[$productId] = min($finalPrice);
     }
 
     /**

@@ -5,6 +5,7 @@ namespace Webkul\CatalogRule\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
 use Webkul\CatalogRule\Repositories\CatalogRuleRepository;
+use Webkul\CatalogRule\Helpers\CatalogRuleIndex;
 
 /**
  * Catalog Rule controller
@@ -29,16 +30,29 @@ class CatalogRuleController extends Controller
     protected $catalogRuleRepository;
 
     /**
+     * CatalogRuleIndex
+     * 
+     * @var CatalogRuleIndex
+     */
+    protected $catalogRuleIndexHelper;
+
+    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\CatalogRule\Repositories\CatalogRuleRepository $catalogRuleRepository
+     * @param  \Webkul\CatalogRule\Helpers\CatalogRuleIndex           $catalogRuleIndexHelper
      * @return void
      */
-    public function __construct(CatalogRuleRepository $catalogRuleRepository)
+    public function __construct(
+        CatalogRuleRepository $catalogRuleRepository,
+        CatalogRuleIndex $catalogRuleIndexHelper
+    )
     {
         $this->_config = request('_config');
 
         $this->catalogRuleRepository = $catalogRuleRepository;
+
+        $this->catalogRuleIndexHelper = $catalogRuleIndexHelper;
     }
 
     /**
@@ -86,6 +100,8 @@ class CatalogRuleController extends Controller
 
         Event::fire('promotions.catalog_rule.create.after', $catalogRule);
 
+        $this->catalogRuleIndexHelper->reindexComplete();
+
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Catalog Rule']));
 
         return redirect()->route($this->_config['redirect']);
@@ -130,6 +146,8 @@ class CatalogRuleController extends Controller
         $catalogRule = $this->catalogRuleRepository->update(request()->all(), $id);
 
         Event::fire('promotions.catalog_rule.update.after', $catalogRule);
+
+        $this->catalogRuleIndexHelper->reindexComplete();
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Catalog Rule']));
 
