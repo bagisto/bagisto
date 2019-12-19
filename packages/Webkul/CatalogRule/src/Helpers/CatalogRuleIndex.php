@@ -80,7 +80,15 @@ class CatalogRuleIndex
     public function reindexProduct($product)
     {
         try {
-            $this->cleanIndexes([$product->id]);
+            $productIds = [];
+
+            if ($product->type == 'configurable') {
+                $productIds = $product->variants()->pluck('id')->toArray();
+            } else {
+                $productIds[] = $product->id;
+            }
+
+            $this->cleanIndexes($productIds);
 
             foreach ($this->getCatalogRules() as $rule) {
                 $this->catalogRuleProductHelper->insertRuleProduct($rule, 1000, $product);
