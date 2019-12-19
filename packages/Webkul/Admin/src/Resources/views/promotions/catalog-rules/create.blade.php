@@ -164,12 +164,6 @@
                                         <option value="by_fixed" {{ old('action_type') == 'by_fixed' ? 'selected' : '' }}>
                                             {{ __('admin::app.promotions.catalog-rules.fixed-amount') }}
                                         </option>
-                                        <option value="catalog_fixed" {{ old('action_type') == 'catalog_fixed' ? 'selected' : '' }}>
-                                            {{ __('admin::app.promotions.catalog-rules.fixed-amount-whole-catalog') }}
-                                        </option>
-                                        <option value="buy_x_get_y" {{ old('action_type') == 'buy_x_get_y' ? 'selected' : '' }}>
-                                            {{ __('admin::app.promotions.catalog-rules.buy-x-get-y-free') }}
-                                        </option>
                                     </select>
 
                                     <span class="control-error" v-if="errors.has('action_type')">@{{ errors.first('action_type') }}</span>

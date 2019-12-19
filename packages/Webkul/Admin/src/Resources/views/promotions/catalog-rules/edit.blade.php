@@ -169,12 +169,6 @@
                                         <option value="by_fixed" {{ $selectedOption == 'by_fixed' ? 'selected' : '' }}>
                                             {{ __('admin::app.promotions.catalog-rules.fixed-amount') }}
                                         </option>
-                                        <option value="catalog_fixed" {{ $selectedOption == 'catalog_fixed' ? 'selected' : '' }}>
-                                            {{ __('admin::app.promotions.catalog-rules.fixed-amount-whole-catalog') }}
-                                        </option>
-                                        <option value="buy_x_get_y" {{ $selectedOption == 'buy_x_get_y' ? 'selected' : '' }}>
-                                            {{ __('admin::app.promotions.catalog-rules.buy-x-get-y-free') }}
-                                        </option>
                                     </select>
 
                                     <span class="control-error" v-if="errors.has('action_type')">@{{ errors.first('action_type') }}</span>
@@ -498,21 +492,6 @@
                             }]
                     }
                 }
-            },
-
-            created: function() {
-                if (this.condition.attribute == '')
-                    return;
-
-                var this_this = this;
-
-                var attributeIndex = this.attribute_type_indexes[this.condition.attribute.split("|")[0]];
-
-                matchedAttribute = this.condition_attributes[attributeIndex]['children'].filter(function (attribute) {
-                    return attribute.key == this_this.condition.attribute;
-                });
-
-                this.matchedAttribute = matchedAttribute[0];
             },
 
             computed: {
