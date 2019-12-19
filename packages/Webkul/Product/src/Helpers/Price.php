@@ -102,6 +102,7 @@ class Price extends AbstractProduct
             $finalPrice[] = $price->final_price;
         }
 
+
         $rulePrice = $this->catalogRuleProductPriceRepository->scopeQuery(function($query) use($product) {
             return $query->selectRaw('min(price) as price')
                         ->whereIn('product_id', $product->variants()->pluck('product_id')->toArray())
@@ -113,7 +114,7 @@ class Price extends AbstractProduct
         if (empty($finalPrice) && ! $rulePrice)
             return $price[$product->id] = 0;
 
-        if ($rulePrice && min($finalPrice) > $rulePrice->price)
+        if ($rulePrice && $rulePrice->price && min($finalPrice) > $rulePrice->price)
             return $price[$product->id] = $rulePrice->price;
 
         return $price[$product->id] = min($finalPrice);
