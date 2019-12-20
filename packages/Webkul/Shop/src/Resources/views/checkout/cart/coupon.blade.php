@@ -9,7 +9,7 @@
                         <div class="control-error">@{{ error_message }}</div>
                     </div>
 
-                    <button class="btn btn-lg btn-black">{{ __('shop::app.checkout.onepage.apply-coupon') }}</button>
+                    <button class="btn btn-lg btn-black" :disabled="disable_button">{{ __('shop::app.checkout.onepage.apply-coupon') }}</button>
                 </form>
             </div>
 
@@ -39,7 +39,9 @@
 
                     error_message: '',
 
-                    route_name: "{{ request()->route()->getName() }}"
+                    route_name: "{{ request()->route()->getName() }}",
+
+                    disable_button: false
                 }
             },
             
@@ -51,6 +53,8 @@
                         return;
 
                     self.error_message = null;
+
+                    self.disable_button = true;
 
                     axios.post('{{ route('shop.checkout.cart.coupon.apply') }}', {code: self.coupon_code})
                         .then(function(response) {
@@ -69,9 +73,13 @@
                             } else {
                                 self.error_message = response.data.message;
                             }
+
+                            self.disable_button = false;
                         })
                         .catch(function(error) {
                             self.error_message = error.response.data.message;
+
+                            self.disable_button = false;
                         });
                 },
 
