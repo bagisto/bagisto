@@ -164,7 +164,7 @@
                             </div>
                         </accordian>
 
-                        <accordian :title="'{{ __('admin::app.promotions.cart-rules.conditions') }}'" :active="true">
+                        <accordian :title="'{{ __('admin::app.promotions.cart-rules.conditions') }}'" :active="false">
                             <div slot="body">
 
                                 <div class="control-group">

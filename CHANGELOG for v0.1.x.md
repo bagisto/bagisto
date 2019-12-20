@@ -50,11 +50,20 @@
 
 * #1823 [fixed] - Getting exception after clicking on developement.
 
-* #1931 [fixed] - Catalog rule not applying if in condition type"Any Condition is true" is selected, and some of the condition doesn't match the product.
-
 * #1929 [fixed] - Actual product amount and discounted amount both should display on product page for configurable product
 
 * #1928 [fixed] - Catalog rule should not apply if any of the condition doesn't match, if condition type"All Condition are true"
+
+* #1931 [fixed] - Catalog rule not applying if in condition type"Any Condition is true" is selected, and some of the condition doesn't match the product.
+
+* #1935 [fixed] - Categories are not displaying if in condition Categories(children only) or Categories(Parent Only) is selected.
+
+* #1938 [fixed] - multiple cart rules are getting applied by using only single coupon.
+
+* #1939 [fixed] - Invalid coupon gets applied, if clicking on apply coupon multiple time, although there is no discount amount but its displaying message that coupon code applied successfully.
+
+* #1942 [fixed] - When editing the cart rule, selected category is not checked.
+
 
 
 ## **v0.1.9-BETA1 (18th of December, 2019)** - *Release*
