@@ -79,7 +79,7 @@ class CatalogRuleIndex
      */
     public function reindexProduct($product)
     {
-        try {
+        // try {
             $productIds = [];
 
             if ($product->type == 'configurable') {
@@ -95,9 +95,9 @@ class CatalogRuleIndex
             }
 
             $this->catalogRuleProductPriceHelper->indexRuleProductPrice(1000, $product);
-        } catch (\Exception $e) {
+        // } catch (\Exception $e) {
 
-        }
+        // }
     }
 
     /**

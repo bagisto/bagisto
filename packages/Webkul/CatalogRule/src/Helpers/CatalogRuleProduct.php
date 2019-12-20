@@ -198,7 +198,10 @@ class CatalogRuleProduct
                     ->leftJoin('product_flat', 'catalog_rule_products.product_id', '=', 'product_flat.product_id')
                     ->where('product_flat.status', 1)
                     ->addSelect('product_flat.price')
-                    ->orderBy('sort_order', 'asc');
+                    ->orderBy('channel_id', 'asc')
+                    ->orderBy('customer_group_id', 'asc')
+                    ->orderBy('product_id', 'asc')
+                    ->orderBy('catalog_rule_id', 'asc');
 
             if ($product) {
                 if ($product->type == 'configurable') {
