@@ -336,7 +336,7 @@
                 <div v-if="matchedAttribute">
                     <input type="hidden" :name="['conditions[' + index + '][attribute_type]']" v-model="matchedAttribute.type">
 
-                    <div v-if="matchedAttribute.key == 'product|category_ids'">
+                    <div v-if="matchedAttribute.key == 'product|children::category_ids' || matchedAttribute.key == 'product|category_ids' || matchedAttribute.key == 'product|parent::category_ids'">
                         <tree-view value-field="id" id-field="id" :name-field="'conditions[' + index + '][value]'" input-type="checkbox" :items='matchedAttribute.options' :value='condition.value' :behavior="'no'"></tree-view>
                     </div>
 
