@@ -115,7 +115,7 @@
 
                                 <div class="control-group">
                                     <label for="sort_order">{{ __('admin::app.promotions.catalog-rules.priority') }}</label>
-                                    <input type="text" class="control" id="sort_order" name="sort_order" value="{{ $catalogRule->status }}" {{ $catalogRule->status ? 'checked' : '' }}/>
+                                    <input type="text" class="control" id="sort_order" name="sort_order" value="{{ $catalogRule->sort_order }}" {{ $catalogRule->status ? 'checked' : '' }}/>
                                 </div>
 
                             </div>
