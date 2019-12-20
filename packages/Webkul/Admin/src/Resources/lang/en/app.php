@@ -110,7 +110,8 @@ return [
         'create' => 'Add',
         'delete' => 'Delete',
         'promotions' => 'Promotions',
-        'cart-rules' => 'Cart Rules'
+        'cart-rules' => 'Cart Rules',
+        'catalog-rules' => 'Catalog Rules',
     ],
 
     'dashboard' => [

@@ -165,7 +165,10 @@ class CartRule
 
         if ($rule->coupon_type) {
             if (strlen($cart->coupon_code)) {
-                $coupon = $this->cartRuleCouponRepository->findOneByField('code', $cart->coupon_code);
+                $coupon = $this->cartRuleCouponRepository->findOneWhere([
+                        'cart_rule_id' => $rule->id,
+                        'code' => $cart->coupon_code,
+                    ]);
 
                 if ($coupon) {
                     if ($coupon->usage_limit && $coupon->times_used >= $coupon->usage_limit)
