@@ -288,17 +288,17 @@ class CartRuleRepository extends Repository
                         'key' => 'product|category_ids',
                         'type' => 'multiselect',
                         'label' => trans('admin::app.promotions.cart-rules.categories'),
-                        'options' => $this->categoryRepository->getCategoryTree()
+                        'options' => $categories = $this->categoryRepository->getCategoryTree()
                     ], [
                         'key' => 'product|children::category_ids',
                         'type' => 'multiselect',
                         'label' => trans('admin::app.promotions.cart-rules.children-categories'),
-                        'options' => $this->categoryRepository->getCategoryTree()
+                        'options' => $categories
                     ], [
                         'key' => 'product|parent::category_ids',
                         'type' => 'multiselect',
                         'label' => trans('admin::app.promotions.cart-rules.parent-categories'),
-                        'options' => $this->categoryRepository->getCategoryTree()
+                        'options' => $categories
                     ], [
                         'key' => 'product|attribute_family_id',
                         'type' => 'select',
