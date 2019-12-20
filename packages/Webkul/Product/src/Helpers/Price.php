@@ -165,7 +165,7 @@ class Price extends AbstractProduct
                 return true;
             }
         } else {
-            if ($rulePrice && $rulePrice->price < $product->special_price) {
+            if ($rulePrice && $rulePrice->price <= $product->special_price) {
                 $product->special_price = $rulePrice->price;
 
                 return true;
