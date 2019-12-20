@@ -149,7 +149,11 @@ class Price extends AbstractProduct
      */
     public function haveSpecialPrice($product)
     {
-        $rulePrice = $this->catalogRuleProductPriceHelper->getRulePrice($product);
+        if ($product instanceof ProductFlat) {
+            $rulePrice = $this->catalogRuleProductPriceHelper->getRulePrice($product->product);
+        } else {
+            $rulePrice = $this->catalogRuleProductPriceHelper->getRulePrice($product);
+        }
 
         if ((is_null($product->special_price) || ! (float) $product->special_price) && ! $rulePrice)
             return false;
