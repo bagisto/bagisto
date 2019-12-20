@@ -50,6 +50,12 @@
 
 * #1823 [fixed] - Getting exception after clicking on developement.
 
+* #1931 [fixed] - Catalog rule not applying if in condition type"Any Condition is true" is selected, and some of the condition doesn't match the product.
+
+* #1929 [fixed] - Actual product amount and discounted amount both should display on product page for configurable product
+
+* #1928 [fixed] - Catalog rule should not apply if any of the condition doesn't match, if condition type"All Condition are true"
+
 
 ## **v0.1.9-BETA1 (18th of December, 2019)** - *Release*
 
