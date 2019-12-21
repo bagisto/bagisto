@@ -130,6 +130,9 @@ class CatalogRuleProduct
             if ($product)
                 $qb->where('products.id', $product->id);
 
+            if (! $rule->conditions)
+                return $qb;
+
             foreach ($rule->conditions as $condition) {
                 if (! $condition['attribute'] || ! $condition['value'])
                     continue;

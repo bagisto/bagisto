@@ -638,11 +638,15 @@ class Cart {
         }
 
         if ($shipping = $cart->selected_shipping_rate) {
-            $cart->grand_total = (float) $cart->grand_total + $shipping->price;
-            $cart->base_grand_total = (float) $cart->base_grand_total + $shipping->base_price;
+            $cart->grand_total = (float) $cart->grand_total + $shipping->price - $shipping->discount_amount;
+            $cart->base_grand_total = (float) $cart->base_grand_total + $shipping->base_price - $shipping->base_discount_amount;
+
+            $cart->discount_amount += $shipping->discount_amount;
+            $cart->base_discount_amount += $shipping->base_discount_amount;
         }
 
         $quantities = 0;
+        
         foreach ($cart->items as $item) {
             $quantities = $quantities + $item->quantity;
         }
@@ -839,6 +843,8 @@ class Cart {
             'base_sub_total' => $data['base_sub_total'],
             'tax_amount' => $data['tax_total'],
             'base_tax_amount' => $data['base_tax_total'],
+            'coupon_code' => $data['coupon_code'],
+            'applied_cart_rule_ids' => $data['applied_cart_rule_ids'],
             'discount_amount' => $data['discount_amount'],
             'base_discount_amount' => $data['base_discount_amount'],
             'billing_address' => array_except($data['billing_address'], ['id', 'cart_id']),
@@ -975,5 +981,38 @@ class Cart {
         $this->collectTotals();
 
         return true;
+    }
+
+    /**
+     * Set coupon code to the cart
+     *
+     * @param string $code
+     * @return Cart
+     */
+    public function setCouponCode($code)
+    {
+        $cart = $this->getCart();
+
+        $cart->coupon_code = $code;
+
+        $cart->save();
+
+        return $this;
+    }
+
+    /**
+     * Remove coupon code from cart
+     *
+     * @return Cart
+     */
+    public function removeCouponCode()
+    {
+        $cart = $this->getCart();
+
+        $cart->coupon_code = null;
+
+        $cart->save();
+
+        return $this;
     }
 }
