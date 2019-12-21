@@ -296,10 +296,11 @@
                             else
                                 paymentHtml = Vue.compile(response.data.html)
 
-                            this_this.completed_step = this_this.step_numbers[response.data.jump_to_section] + 1;
+                            this_this.completed_step = this_this.step_numbers[response.data.jump_to_section] - 1;
                             this_this.current_step = this_this.step_numbers[response.data.jump_to_section];
 
                             shippingMethods = response.data.shippingMethods;
+                            paymentMethods  = response.data.paymentMethods;
 
                             this_this.getOrderSummary();
                         })
@@ -320,7 +321,7 @@
                             this_this.disable_button = false;
 
                             paymentHtml = Vue.compile(response.data.html)
-                            this_this.completed_step = this_this.step_numbers[response.data.jump_to_section] + 1;
+                            this_this.completed_step = this_this.step_numbers[response.data.jump_to_section] - 1;
                             this_this.current_step = this_this.step_numbers[response.data.jump_to_section];
 
                             paymentMethods = response.data.paymentMethods;
@@ -344,7 +345,7 @@
                         this_this.disable_button = false;
 
                         reviewHtml = Vue.compile(response.data.html)
-                        this_this.completed_step = this_this.step_numbers[response.data.jump_to_section] + 1;
+                        this_this.completed_step = this_this.step_numbers[response.data.jump_to_section] - 1;
                         this_this.current_step = this_this.step_numbers[response.data.jump_to_section];
 
                         this_this.getOrderSummary();
@@ -608,7 +609,7 @@
             methods: {
                 onSubmit: function() {
                     var this_this = this;
-
+                    const emptyCouponErrorText = "Please enter a coupon code";
                     axios.post('{{ route('shop.checkout.check.coupons') }}', {code: this_this.coupon_code})
                         .then(function(response) {
                             this_this.$emit('onApplyCoupon');
@@ -618,7 +619,10 @@
                         .catch(function(error) {
                             this_this.couponChanged = true;
 
-                            this_this.error_message = error.response.data.message;
+                            this_this.error_message = (error.response.data.message === "The given data was invalid.")?
+                                emptyCouponErrorText :
+                                    (error.response.data.message === "Cannot Apply Coupon")?
+                                        "Sorry, this Coupon code is invalid":error.response.data.message;
                         });
                 },
 

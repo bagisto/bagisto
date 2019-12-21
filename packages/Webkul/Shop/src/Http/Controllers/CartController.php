@@ -96,7 +96,7 @@ class CartController extends Controller
 
             $product = $this->productRepository->find($id);
 
-            return redirect()->route('shop.products.index', ['slug' => $product->url_key]);
+            return redirect()->route('shop.productOrCategory.index', ['slug' => $product->url_key]);
         }
 
         return redirect()->back();

@@ -278,7 +278,7 @@ Route::group(['middleware' => ['web']], function () {
                 Route::post('/products/upload-file/{id}', 'Webkul\Product\Http\Controllers\ProductController@uploadLink')->name('admin.catalog.products.upload_link');
 
                 Route::post('/products/upload-sample/{id}', 'Webkul\Product\Http\Controllers\ProductController@uploadSample')->name('admin.catalog.products.upload_sample');
-                
+
                 //product delete
                 Route::post('/products/delete/{id}', 'Webkul\Product\Http\Controllers\ProductController@destroy')->name('admin.catalog.products.delete');
 
@@ -755,6 +755,12 @@ Route::group(['middleware' => ['web']], function () {
                 // Route::post('/delete/{id}', 'Webkul\CMS\Http\Controllers\Admin\PageController@delete')->defaults('_config', [
                 //     'redirect' => 'admin.cms.index'
                 // ])->name('admin.cms.delete');
+            });
+
+            // Development settings
+            Route::prefix('development')->group(function () {
+                Route::get('/', 'Webkul\Admin\Http\Controllers\Development\DashboardController@index')
+                    ->name('admin.development.index');
             });
         });
     });

@@ -584,7 +584,6 @@ return [
             'title' => 'Idiomas',
             'add-title' => 'Add Idioma',
             'edit-title' => 'Editar Idioma',
-            'add-title' => 'Add Idioma',
             'save-btn-title' => 'Salvar Idioma',
             'general' => 'Geral',
             'code' => 'Código',
@@ -753,6 +752,9 @@ return [
             'update-error' => 'Erro! Taxas de Impostos Não Poderam ser Atualizadas',
             'delete' => 'Taxas de Impostos Excluídas com Sucesso',
             'atleast-one' => 'Não é Possível Excluir a Última Taxa de Impostos'
+        ],
+        'development' => [
+            'title' => 'Desenvolvimento',
         ]
     ],
     'customers' => [
@@ -1033,6 +1035,7 @@ return [
             'order-number-prefix' => 'Order Number Prefix',
             'order-number-length' => 'Order Number Length',
             'order-number-suffix' => 'Order Number Suffix',
+            'sandbox' => 'Sandbox'
         ]
     ]
 ];

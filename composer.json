@@ -2,9 +2,10 @@
     "name": "bagisto/bagisto",
     "description": "Bagisto Laravel ECommerce",
     "keywords": [
-      "framework",
-      "laravel"
+        "framework",
+        "laravel"
     ],
+
     "license": "MIT",
     "type": "project",
     "require": {
@@ -33,36 +34,40 @@
         "prettus/l5-repository": "2.6.32",
         "tymon/jwt-auth": "1.0.0-rc.4"
     },
+
     "require-dev": {
-      "barryvdh/laravel-debugbar": "^3.1",
-      "filp/whoops": "^2.0",
-      "fzaninotto/faker": "^1.4",
-      "laravel/dusk": "^4.0",
-      "mockery/mockery": "^1.0",
-      "nunomaduro/collision": "^2.0",
-      "phpunit/phpunit": "^7.0"
+        "codeception/codeception": "3.1.*",
+        "barryvdh/laravel-debugbar": "^3.1",
+        "filp/whoops": "^2.0",
+        "fzaninotto/faker": "^1.4",
+        "laravel/dusk": "^4.0",
+        "mockery/mockery": "^1.0",
+        "nunomaduro/collision": "^2.0",
+        "phpunit/phpunit": "^7.0"
     },
+
     "replace": {
-      "bagisto/laravel-user": "v0.1.0",
-      "bagisto/laravel-admin": "v0.1.0",
-      "bagisto/laravel-ui": "v0.1.0",
-      "bagisto/laravel-core": "v0.1.0",
-      "bagisto/laravel-attribute": "v0.1.0",
-      "bagisto/laravel-checkout": "v0.1.0",
-      "bagisto/laravel-customer": "v0.1.0",
-      "bagisto/laravel-inventory": "v0.1.0",
-      "bagisto/laravel-category": "v0.1.0",
-      "bagisto/laravel-product": "v0.1.0",
-      "bagisto/laravel-shop": "v0.1.0",
-      "bagisto/laravel-theme": "v0.1.0",
-      "bagisto/laravel-shipping": "v0.1.0",
-      "bagisto/laravel-payment": "v0.1.0",
-      "bagisto/laravel-sales": "v0.1.0",
-      "bagisto/laravel-tax": "v0.1.0",
-      "bagisto/laravel-api": "v0.1.0",
-      "bagisto/laravel-paypal": "v0.1.0",
-      "bagisto/laravel-discount": "v0.1.0"
+        "bagisto/laravel-user": "v0.1.0",
+        "bagisto/laravel-admin": "v0.1.0",
+        "bagisto/laravel-ui": "v0.1.0",
+        "bagisto/laravel-core": "v0.1.0",
+        "bagisto/laravel-attribute": "v0.1.0",
+        "bagisto/laravel-checkout": "v0.1.0",
+        "bagisto/laravel-customer": "v0.1.0",
+        "bagisto/laravel-inventory": "v0.1.0",
+        "bagisto/laravel-category": "v0.1.0",
+        "bagisto/laravel-product": "v0.1.0",
+        "bagisto/laravel-shop": "v0.1.0",
+        "bagisto/laravel-theme": "v0.1.0",
+        "bagisto/laravel-shipping": "v0.1.0",
+        "bagisto/laravel-payment": "v0.1.0",
+        "bagisto/laravel-sales": "v0.1.0",
+        "bagisto/laravel-tax": "v0.1.0",
+        "bagisto/laravel-api": "v0.1.0",
+        "bagisto/laravel-paypal": "v0.1.0",
+        "bagisto/laravel-discount": "v0.1.0"
     },
+
     "autoload": {
       "classmap": [
         "database/seeds",
@@ -94,35 +99,48 @@
         "Webkul\\CMS\\": "packages/Webkul/CMS/src"
       }
     },
+
     "autoload-dev": {
-      "psr-4": {
-        "Tests\\": "tests/"
-      }
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
     },
+
     "extra": {
-      "laravel": {
-        "dont-discover": [
-          "barryvdh/laravel-debugbar",
-          "laravel/dusk"
-        ]
-      }
+        "laravel": {
+            "dont-discover": [
+                "barryvdh/laravel-debugbar",
+                "laravel/dusk"
+            ]
+        }
     },
+
     "scripts": {
-      "post-root-package-install": [
-        "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-      ],
-      "post-create-project-cmd": [
-        "@php artisan key:generate"
-      ],
-      "post-autoload-dump": [
-        "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-        "@php artisan package:discover"
-      ]
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+
+        "post-create-project-cmd": [
+            "@php artisan key:generate",
+            "Webkul\\Core\\Events\\ComposerEvents::postCreateProject"
+        ],
+
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover"
+        ],
+        "test": [
+            "set -e",
+            "@php artisan migrate:fresh --env=testing",
+            "vendor/bin/codecept run unit",
+            "vendor/bin/codecept run functional"
+        ]
     },
     "config": {
-      "preferred-install": "stable",
-      "sort-packages": true,
-      "optimize-autoloader": true
+        "preferred-install": "stable",
+        "sort-packages": true,
+        "optimize-autoloader": true
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "prefer-stable": true
   }

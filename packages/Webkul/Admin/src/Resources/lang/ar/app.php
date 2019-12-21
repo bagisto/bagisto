@@ -726,6 +726,9 @@ return [
             'update-error' => 'خطأ! معدل الضرائب لا يمكن تحديثه',
             'delete' => 'معدل الضريبة محذوف بنجاح',
             'atleast-one' => 'لا يستطيع حذف الأخير ضريبة معدل'
+        ],
+        'development' => [
+            'title' => 'تطوير',
         ]
     ],
 
@@ -910,6 +913,7 @@ return [
             'order-number-length' => 'Order Number Length',
             'order-number-suffix' => 'Order Number Suffix',
             'default' => 'Default',
+            'sandbox' => 'Sandbox'
         ]
     ]
 ];

@@ -59,15 +59,12 @@ class WishlistController extends Controller
 
     /**
      * Displays the listing resources if the customer having items in wishlist.
-     * 
+     *
      * @return \Illuminate\View\View
      */
     public function index()
     {
-        $wishlistItems = $this->wishlistRepository->findWhere([
-            'channel_id' => core()->getCurrentChannel()->id,
-            'customer_id' => auth()->guard('customer')->user()->id]
-        );
+        $wishlistItems = $this->wishlistRepository->getCustomerWhishlist();
 
         return view($this->_config['view'])->with('items', $wishlistItems);
     }
@@ -166,14 +163,14 @@ class WishlistController extends Controller
             } else {
                 session()->flash('info', trans('shop::app.wishlist.option-missing'));
 
-                return redirect()->route('shop.products.index', $wishlistItem->product->url_key);
+                return redirect()->route('shop.productOrCategory.index', $wishlistItem->product->url_key);
             }
 
             return redirect()->back();
         } catch (\Exception $e) {
             session()->flash('warning', $e->getMessage());
 
-            return redirect()->route('shop.products.index', ['slug' => $wishlistItem->product->url_key]);
+            return redirect()->route('shop.productOrCategory.index', ['slug' => $wishlistItem->product->url_key]);
         }
     }
 

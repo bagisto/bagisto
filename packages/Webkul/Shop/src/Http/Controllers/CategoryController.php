@@ -38,17 +38,4 @@ class CategoryController extends Controller
 
         $this->_config = request('_config');
     }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @param  string $slug
-     * @return \Illuminate\View\View 
-     */
-    public function index($slug)
-    {
-        $category = $this->categoryRepository->findBySlugOrFail($slug);
-
-        return view($this->_config['view'], compact('category'));
-    }
 }
