@@ -56,7 +56,7 @@ class CatalogRuleIndex
      */
     public function reindexComplete()
     {
-        try {
+        // try {
             $this->cleanIndexes();
 
             foreach ($this->getCatalogRules() as $rule) {
@@ -64,9 +64,9 @@ class CatalogRuleIndex
             }
 
             $this->catalogRuleProductPriceHelper->indexRuleProductPrice(1000);
-        } catch (\Exception $e) {
+        // } catch (\Exception $e) {
 
-        }
+        // }
     }
 
     /**

@@ -130,13 +130,15 @@ class CatalogRuleProduct
             if ($product)
                 $qb->where('products.id', $product->id);
 
-            foreach ($rule->conditions as $condition) {
-                if (! $condition['attribute'] || ! $condition['value'])
-                    continue;
+            if ($rule->conditions) {
+                foreach ($rule->conditions as $condition) {
+                    if (! $condition['attribute'] || ! $condition['value'])
+                        continue;
 
-                $chunks = explode('|', $condition['attribute']);
+                    $chunks = explode('|', $condition['attribute']);
 
-                $qb = $this->addAttributeToSelect(end($chunks), $qb);
+                    $qb = $this->addAttributeToSelect(end($chunks), $qb);
+                }
             }
 
             return $qb;
