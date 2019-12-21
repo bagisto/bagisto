@@ -380,6 +380,8 @@ class CartRule
                 break;
         }
 
+        $selectedShipping->save();
+
         $cartAppliedCartRuleIds = array_merge(explode(',', $cart->applied_cart_rule_ids), $appliedRuleIds);
 
         $cartAppliedCartRuleIds = array_filter($cartAppliedCartRuleIds);

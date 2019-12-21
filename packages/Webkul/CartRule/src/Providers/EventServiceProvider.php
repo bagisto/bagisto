@@ -15,5 +15,7 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         Event::listen('checkout.order.save.after', 'Webkul\CartRule\Listeners\Order@manageCartRule');
+
+        Event::listen('checkout.cart.collect.totals.before', 'Webkul\CartRule\Listeners\Cart@applyCartRules');
     }
 }

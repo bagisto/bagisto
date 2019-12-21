@@ -127,6 +127,8 @@
 
                     @include('shop::checkout.total.summary', ['cart' => $cart])
 
+                    <coupon-component></coupon-component>
+
                     {!! view_render_event('bagisto.shop.checkout.cart.summary.after', ['cart' => $cart]) !!}
                 </div>
             </div>
@@ -155,6 +157,7 @@
 @endsection
 
 @push('scripts')
+    @include('shop::checkout.cart.coupon')
 
     <script type="text/x-template" id="quantity-changer-template">
         <div class="quantity control-group" :class="[errors.has(controlName) ? 'has-error' : '']">

@@ -134,7 +134,7 @@ class CatalogRuleProduct
                 return $qb;
 
             foreach ($rule->conditions as $condition) {
-                if (! $condition['attribute'] || ! $condition['value'])
+                if (! $condition['attribute'] || ! isset($condition['value']) || is_null($condition['value']) ||  $condition['value'] == '')
                     continue;
 
                 $chunks = explode('|', $condition['attribute']);
@@ -204,6 +204,7 @@ class CatalogRuleProduct
                     ->orderBy('channel_id', 'asc')
                     ->orderBy('customer_group_id', 'asc')
                     ->orderBy('product_id', 'asc')
+                    ->orderBy('sort_order', 'asc')
                     ->orderBy('catalog_rule_id', 'asc');
 
             if ($product) {
