@@ -8,20 +8,19 @@ use DB;
 /**
  * Catalog Rule DataGrid class
  *
- * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @author Jitendra Singh <jitendra@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class CatalogRuleDataGrid extends DataGrid
 {
-    protected $index = 'id'; //the column that needs to be treated as index column
+    protected $index = 'id';
 
-    protected $sortOrder = 'desc'; //asc or desc
+    protected $sortOrder = 'desc';
 
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('catalog_rules')
-                ->select('id')
-                ->addSelect('id', 'name', 'starts_from', 'ends_till', 'status', 'end_other_rules', 'action_code');
+                ->addSelect('catalog_rules.id', 'name', 'status', 'starts_from', 'ends_till', 'sort_order');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -48,56 +47,41 @@ class CatalogRuleDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'starts_from',
-            'label' => trans('admin::app.datagrid.starts-from'),
+            'label' => trans('admin::app.datagrid.start'),
             'type' => 'datetime',
-            'searchable' => false,
             'sortable' => true,
+            'searchable' => false,
             'filterable' => true
         ]);
 
         $this->addColumn([
             'index' => 'ends_till',
-            'label' => trans('admin::app.datagrid.ends-till'),
+            'label' => trans('admin::app.datagrid.end'),
             'type' => 'datetime',
-            'searchable' => false,
             'sortable' => true,
+            'searchable' => false,
             'filterable' => true
         ]);
 
         $this->addColumn([
             'index' => 'status',
-            'label' => trans('admin::app.datagrid.status'),
+            'label' => trans('admin::app.status'),
             'type' => 'boolean',
-            'searchable' => false,
+            'searchable' => true,
             'sortable' => true,
             'filterable' => true,
-            'wrapper' => function ($value) {
+            'wrapper' => function($value) {
                 if ($value->status == 1)
-                    return 'True';
+                    return trans('admin::app.datagrid.active');
                 else
-                    return 'False';
+                    return trans('admin::app.datagrid.inactive');
             }
         ]);
 
         $this->addColumn([
-            'index' => 'end_other_rules',
-            'label' => 'End Other Rules',
-            'type' => 'boolean',
-            'searchable' => false,
-            'sortable' => true,
-            'filterable' => true,
-            'wrapper' => function ($value) {
-                if ($value->end_other_rules == 1)
-                    return 'True';
-                else
-                    return 'False';
-            }
-        ]);
-
-        $this->addColumn([
-            'index' => 'action_code',
-            'label' => 'Action Type',
-            'type' => 'string',
+            'index' => 'sort_order',
+            'label' => trans('admin::app.datagrid.priority'),
+            'type' => 'number',
             'searchable' => true,
             'sortable' => true,
             'filterable' => true
@@ -107,27 +91,17 @@ class CatalogRuleDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'title' => 'Edit CatalogRule',
-            'method' => 'GET', //use post only for redirects only
-            'route' => 'admin.catalog-rule.edit',
+            'title' => 'Edit Catalog Rule',
+            'method' => 'GET',
+            'route' => 'admin.catalog-rules.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
-            'title' => 'Delete CatalogRule',
-            'method' => 'POST', //use post only for requests other than redirects
-            'route' => 'admin.catalog-rule.delete',
+            'title' => 'Delete Catalog Rule',
+            'method' => 'POST',
+            'route' => 'admin.catalog-rules.delete',
             'icon' => 'icon trash-icon'
         ]);
-    }
-
-    public function prepareMassActions()
-    {
-        // $this->addMassAction([
-        //     'type' => 'delete',
-        //     'action' => route('admin.catalog.attributes.massdelete'),
-        //     'label' => 'Delete',
-        //     'method' => 'DELETE'
-        // ]);
     }
 }

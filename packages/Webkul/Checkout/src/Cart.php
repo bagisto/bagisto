@@ -614,6 +614,8 @@ class Cart {
         if (! $cart = $this->getCart())
             return false;
 
+        Event::fire('checkout.cart.collect.totals.before', $cart);
+
         $this->calculateItemsTax();
 
         $cart->grand_total = $cart->base_grand_total = 0;
@@ -650,6 +652,8 @@ class Cart {
         $cart->items_qty = $quantities;
 
         $cart->save();
+
+        Event::fire('checkout.cart.collect.totals.after', $cart);
     }
 
     /**
