@@ -204,6 +204,7 @@ class CatalogRuleProduct
                     ->orderBy('channel_id', 'asc')
                     ->orderBy('customer_group_id', 'asc')
                     ->orderBy('product_id', 'asc')
+                    ->orderBy('sort_order', 'asc')
                     ->orderBy('catalog_rule_id', 'asc');
 
             if ($product) {
