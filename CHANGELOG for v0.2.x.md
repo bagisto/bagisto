@@ -4,6 +4,7 @@
 
 ## **v0.2.0 (23th of December, 2019)** - *Release*
 
+
 * #1955 [fixed] - Message need to be changed on mouse hover on cross symbol next to applied coupon.
 
 * #1959 [fixed] - if admin has set the same condition twice, then catalog rule is not getting apply
