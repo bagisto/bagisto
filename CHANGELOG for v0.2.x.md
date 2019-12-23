@@ -2,6 +2,12 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
+## **v0.2.1 (23th of December, 2019)** - *Release*
+
+* Version updated in .env file
+
+
+
 ## **v0.2.0 (23th of December, 2019)** - *Release*
 
 
