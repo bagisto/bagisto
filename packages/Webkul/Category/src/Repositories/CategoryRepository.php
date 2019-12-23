@@ -9,6 +9,7 @@ use Webkul\Core\Eloquent\Repository;
 use Webkul\Category\Models\Category;
 use Webkul\Category\Models\CategoryTranslation;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Category Reposotory
@@ -126,7 +127,7 @@ class CategoryRepository extends Repository
         $exists = CategoryTranslation::where('category_id', '<>', $id)
             ->where('slug', $slug)
             ->limit(1)
-            ->select(\DB::raw(1))
+            ->select(DB::raw(1))
             ->exists();
 
         return $exists ? false : true;
