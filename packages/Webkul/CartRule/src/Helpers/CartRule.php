@@ -231,6 +231,8 @@ class CartRule
 
             $quantity = $rule->discount_quantity ? min($item->quantity, $rule->discount_quantity) : $item->quantity;
 
+            $discountAmount = $baseDiscountAmount = 0;
+
             switch ($rule->action_type) {
                 case 'by_percent':
                     $rulePercent = min(100, $rule->discount_amount);
