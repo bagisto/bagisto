@@ -133,9 +133,17 @@ class CatalogRuleProduct
             if (! $rule->conditions)
                 return $qb;
 
+            $appliedAttributes = [];
+
             foreach ($rule->conditions as $condition) {
-                if (! $condition['attribute'] || ! isset($condition['value']) || is_null($condition['value']) ||  $condition['value'] == '')
+                if (! $condition['attribute']
+                    || ! isset($condition['value'])
+                    || is_null($condition['value'])
+                    || $condition['value'] == ''
+                    || in_array($condition['attribute'], $appliedAttributes))
                     continue;
+                
+                $appliedAttributes[] = $condition['attribute'];
 
                 $chunks = explode('|', $condition['attribute']);
 
