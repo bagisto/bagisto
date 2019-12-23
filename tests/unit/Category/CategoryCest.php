@@ -138,5 +138,18 @@ class CategoryCest
             'locale' => $this->localeEn->code,
             'url_path' => $expectedUrlPath,
         ]);
+
+        // test if the url_path attribute is available in the model
+        $this->grandChildCategory->refresh();
+        $I->assertEquals($expectedUrlPath, $this->grandChildCategory->url_path);
+    }
+
+    public function testGetPathCategories(UnitTester $I)
+    {
+        $pathCategories = $this->grandChildCategory->getPathCategories();
+        $I->assertCount(3, $pathCategories);
+        $I->assertEquals($pathCategories[0]->id, $this->category->id);
+        $I->assertEquals($pathCategories[1]->id, $this->childCategory->id);
+        $I->assertEquals($pathCategories[2]->id, $this->grandChildCategory->id);
     }
 }
