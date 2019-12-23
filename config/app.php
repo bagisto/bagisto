@@ -95,6 +95,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Default Country
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify the default country by country code.
+    | Ensure it is uppercase and reflects the 'code' column of the
+    | countries table.
+    |
+    */
+
+    'default_country' => null,
+
+    /*
+    |--------------------------------------------------------------------------
     | Base Currency Code
     |--------------------------------------------------------------------------
     |
