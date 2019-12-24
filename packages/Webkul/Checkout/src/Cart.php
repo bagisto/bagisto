@@ -131,7 +131,7 @@ class Cart {
      */
     public function addProduct($productId, $data)
     {
-        Event::fire('checkout.cart.add.before', $productId);
+        Event::dispatch('checkout.cart.add.before', $productId);
 
         $cart = $this->getCart();
 
@@ -170,7 +170,7 @@ class Cart {
             }
         }
 
-        Event::fire('checkout.cart.add.after', $cart);
+        Event::dispatch('checkout.cart.add.after', $cart);
 
         $this->collectTotals();
 
@@ -229,7 +229,7 @@ class Cart {
     {
         foreach ($data['qty'] as $itemId => $quantity) {
             $item = $this->cartItemRepository->findOneByField('id', $itemId);
-        
+
             if (! $item)
                 continue;
 
@@ -244,7 +244,7 @@ class Cart {
             if (! $this->isItemHaveQuantity($item))
                 throw new \Exception(trans('shop::app.checkout.cart.quantity.inventory_warning'));
 
-            Event::fire('checkout.cart.update.before', $item);
+            Event::dispatch('checkout.cart.update.before', $item);
 
             $this->cartItemRepository->update([
                     'quantity' => $quantity,
@@ -254,7 +254,7 @@ class Cart {
                     'base_total_weight' => $item->weight * $quantity
                 ], $itemId);
 
-            Event::fire('checkout.cart.update.after', $item);
+            Event::dispatch('checkout.cart.update.after', $item);
         }
 
         $this->collectTotals();
@@ -292,7 +292,7 @@ class Cart {
      */
     public function removeItem($itemId)
     {
-        Event::fire('checkout.cart.delete.before', $itemId);
+        Event::dispatch('checkout.cart.delete.before', $itemId);
 
         if (! $cart = $this->getCart())
             return false;
@@ -308,7 +308,7 @@ class Cart {
             }
         }
 
-        Event::fire('checkout.cart.delete.after', $itemId);
+        Event::dispatch('checkout.cart.delete.after', $itemId);
 
         $this->collectTotals();
 
@@ -345,7 +345,7 @@ class Cart {
             foreach ($guestCart->items as $key => $guestCartItem) {
 
                 $found = false;
-                
+
                 foreach ($cart->items as $cartItem) {
                     if (! $cartItem->product->getTypeInstance()->compareOptions($cartItem->additional, $guestCartItem->additional))
                         continue;
@@ -492,7 +492,7 @@ class Cart {
         if ($cart->haveStockableItems()) {
             $shippingAddress = $data['shipping'];
             $shippingAddress['cart_id'] = $cart->id;
-            
+
             if (isset($data['shipping']['address_id']) && $data['shipping']['address_id']) {
                 $address = $this->customerAddressRepository->findOneWhere(['id'=> $data['shipping']['address_id']])->toArray();
 
@@ -666,7 +666,7 @@ class Cart {
         //rare case of accident-->used when there are no items.
         if (count($cart->items) == 0) {
             $this->cartRepository->delete($cart->id);
-            
+
             return false;
         } else {
             foreach ($cart->items as $item) {
@@ -704,7 +704,7 @@ class Cart {
 
             if (! $taxCategory)
                 continue;
-            
+
             if ($item->product->getTypeInstance()->isStockable()) {
                 $address = $cart->shipping_address;
             } else {
@@ -902,7 +902,7 @@ class Cart {
 
     /**
      * Move a wishlist item to cart
-     * 
+     *
      * @param WishlistItem $wishlistItem
      * @return boolean
      */
@@ -910,7 +910,7 @@ class Cart {
     {
         if (! $wishlistItem->product->getTypeInstance()->canBeMovedFromWishlistToCart($wishlistItem))
             return false;
-    
+
         if (! $wishlistItem->additional)
             $wishlistItem->additional = ['product_id' => $wishlistItem->product_id];
 

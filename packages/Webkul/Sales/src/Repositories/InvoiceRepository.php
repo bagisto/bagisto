@@ -94,7 +94,7 @@ class InvoiceRepository extends Repository
         DB::beginTransaction();
 
         try {
-            Event::fire('sales.invoice.save.before', $data);
+            Event::dispatch('sales.invoice.save.before', $data);
 
             $order = $this->orderRepository->find($data['order_id']);
 
@@ -162,7 +162,7 @@ class InvoiceRepository extends Repository
                                 'product_type' => $childOrderItem->product_type,
                                 'additional' => $childOrderItem->additional
                             ]);
-                        
+
                         if ($childOrderItem->product && ! $childOrderItem->getTypeInstance()->isStockable() && $childOrderItem->getTypeInstance()->showQuantityBox()) {
                             $this->invoiceItemRepository->updateProductInventory([
                                     'invoice' => $invoice,
@@ -194,7 +194,7 @@ class InvoiceRepository extends Repository
 
             $this->orderRepository->updateOrderStatus($order);
 
-            Event::fire('sales.invoice.save.after', $invoice);
+            Event::dispatch('sales.invoice.save.after', $invoice);
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -205,7 +205,7 @@ class InvoiceRepository extends Repository
 
         return $invoice;
     }
-    
+
     /**
      * @param mixed $invoice
      * @return mixed

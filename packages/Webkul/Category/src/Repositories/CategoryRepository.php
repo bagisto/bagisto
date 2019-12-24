@@ -44,7 +44,7 @@ class CategoryRepository extends Repository
      */
     public function create(array $data)
     {
-        Event::fire('catalog.category.create.before');
+        Event::dispatch('catalog.category.create.before');
 
         if (isset($data['locale']) && $data['locale'] == 'all') {
             $model = app()->make($this->model());
@@ -67,7 +67,7 @@ class CategoryRepository extends Repository
             $category->filterableAttributes()->sync($data['attributes']);
         }
 
-        Event::fire('catalog.category.create.after', $category);
+        Event::dispatch('catalog.category.create.after', $category);
 
         return $category;
     }
@@ -171,7 +171,7 @@ class CategoryRepository extends Repository
     {
         $category = $this->find($id);
 
-        Event::fire('catalog.category.update.before', $id);
+        Event::dispatch('catalog.category.update.before', $id);
 
         $category->update($data);
 
@@ -181,7 +181,7 @@ class CategoryRepository extends Repository
             $category->filterableAttributes()->sync($data['attributes']);
         }
 
-        Event::fire('catalog.category.update.after', $id);
+        Event::dispatch('catalog.category.update.after', $id);
 
         return $category;
     }
@@ -192,11 +192,11 @@ class CategoryRepository extends Repository
      */
     public function delete($id)
     {
-        Event::fire('catalog.category.delete.before', $id);
+        Event::dispatch('catalog.category.delete.before', $id);
 
         parent::delete($id);
 
-        Event::fire('catalog.category.delete.after', $id);
+        Event::dispatch('catalog.category.delete.after', $id);
     }
 
     /**

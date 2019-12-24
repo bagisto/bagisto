@@ -66,7 +66,7 @@ class AttributeFamilyRepository extends Repository
      */
     public function create(array $data)
     {
-        Event::fire('catalog.attribute_family.create.before');
+        Event::dispatch('catalog.attribute_family.create.before');
 
         $attributeGroups = isset($data['attribute_groups']) ? $data['attribute_groups'] : [];
         unset($data['attribute_groups']);
@@ -88,7 +88,7 @@ class AttributeFamilyRepository extends Repository
             }
         }
 
-        Event::fire('catalog.attribute_family.create.after', $family);
+        Event::dispatch('catalog.attribute_family.create.after', $family);
 
         return $family;
     }
@@ -103,7 +103,7 @@ class AttributeFamilyRepository extends Repository
     {
         $family = $this->find($id);
 
-        Event::fire('catalog.attribute_family.update.before', $id);
+        Event::dispatch('catalog.attribute_family.update.before', $id);
 
         $family->update($data);
 
@@ -152,7 +152,7 @@ class AttributeFamilyRepository extends Repository
             $this->attributeGroupRepository->delete($attributeGroupId);
         }
 
-        Event::fire('catalog.attribute_family.update.after', $family);
+        Event::dispatch('catalog.attribute_family.update.after', $family);
 
         return $family;
     }
@@ -181,10 +181,10 @@ class AttributeFamilyRepository extends Repository
      */
     public function delete($id)
     {
-        Event::fire('catalog.attribute_family.delete.before', $id);
+        Event::dispatch('catalog.attribute_family.delete.before', $id);
 
         parent::delete($id);
 
-        Event::fire('catalog.attribute_family.delete.after', $id);
+        Event::dispatch('catalog.attribute_family.delete.after', $id);
     }
 }

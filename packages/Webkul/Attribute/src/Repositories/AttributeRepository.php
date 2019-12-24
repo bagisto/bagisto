@@ -54,7 +54,7 @@ class AttributeRepository extends Repository
      */
     public function create(array $data)
     {
-        Event::fire('catalog.attribute.create.before');
+        Event::dispatch('catalog.attribute.create.before');
 
         $data = $this->validateUserInput($data);
 
@@ -70,7 +70,7 @@ class AttributeRepository extends Repository
             }
         }
 
-        Event::fire('catalog.attribute.create.after', $attribute);
+        Event::dispatch('catalog.attribute.create.after', $attribute);
 
         return $attribute;
     }
@@ -87,7 +87,7 @@ class AttributeRepository extends Repository
 
         $attribute = $this->find($id);
 
-        Event::fire('catalog.attribute.update.before', $id);
+        Event::dispatch('catalog.attribute.update.before', $id);
 
         $attribute->update($data);
 
@@ -115,7 +115,7 @@ class AttributeRepository extends Repository
             $this->attributeOptionRepository->delete($optionId);
         }
 
-        Event::fire('catalog.attribute.update.after', $attribute);
+        Event::dispatch('catalog.attribute.update.after', $attribute);
 
         return $attribute;
     }
@@ -126,11 +126,11 @@ class AttributeRepository extends Repository
      */
     public function delete($id)
     {
-        Event::fire('catalog.attribute.delete.before', $id);
+        Event::dispatch('catalog.attribute.delete.before', $id);
 
         parent::delete($id);
 
-        Event::fire('catalog.attribute.delete.after', $id);
+        Event::dispatch('catalog.attribute.delete.after', $id);
     }
 
     /**
