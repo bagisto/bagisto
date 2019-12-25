@@ -105,6 +105,16 @@ class Grouped extends AbstractType
     }
 
     /**
+     * Returns children ids
+     *
+     * @return array
+     */
+    public function getChildrenIds()
+    {
+        return array_unique($this->product->grouped_products()->pluck('product_id')->toArray());
+    }
+
+    /**
      * Get product minimal price
      *
      * @return float

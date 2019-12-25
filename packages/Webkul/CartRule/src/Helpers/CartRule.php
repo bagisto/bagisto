@@ -106,6 +106,9 @@ class CartRule
 
         foreach ($cart->items()->get() as $item) {
             $this->process($item);
+
+            if ($item->children()->count() && $item->product->getTypeInstance()->isChildrenCalculated())
+                $this->devideDiscount($item);
         }
 
         $this->processShippingDiscount($cart);
@@ -230,6 +233,8 @@ class CartRule
                 continue;
 
             $quantity = $rule->discount_quantity ? min($item->quantity, $rule->discount_quantity) : $item->quantity;
+
+            $discountAmount = $baseDiscountAmount = 0;
 
             switch ($rule->action_type) {
                 case 'by_percent':
@@ -492,5 +497,27 @@ class CartRule
 
         if (! $coupon || ! in_array($coupon->cart_rule_id, explode(',', $cart->applied_cart_rule_ids)))
             Cart::removeCouponCode();
+    }
+
+    /**
+     * Devide discount amount to children
+     *
+     * @param CartItem $item
+     * @return void
+     */
+    protected function devideDiscount($item)
+    {
+        foreach ($item->children as $child) {
+            $ratio = $item->base_total != 0 ? $child->base_total / $item->base_total : 0;
+
+            foreach (['discount_amount', 'base_discount_amount'] as $column) {
+                if (! $item->{$column})
+                    continue;
+
+                $child->{$column} = round(($item->{$column} * $ratio), 4);
+
+                $child->save();
+            }
+        }
     }
 }

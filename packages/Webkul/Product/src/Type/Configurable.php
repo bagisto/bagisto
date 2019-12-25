@@ -287,6 +287,16 @@ class Configurable extends AbstractType
     }
 
     /**
+     * Returns children ids
+     *
+     * @return array
+     */
+    public function getChildrenIds()
+    {
+        return $this->product->variants()->pluck('id')->toArray();
+    }
+
+    /**
      * @param CartItem $cartItem
      * @return bool
      */

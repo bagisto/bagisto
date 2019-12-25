@@ -164,7 +164,7 @@
                             </div>
                         </accordian>
 
-                        <accordian :title="'{{ __('admin::app.promotions.cart-rules.conditions') }}'" :active="true">
+                        <accordian :title="'{{ __('admin::app.promotions.cart-rules.conditions') }}'" :active="false">
                             <div slot="body">
 
                                 <div class="control-group">
@@ -205,7 +205,7 @@
 
                                     <?php $selectedOption = old('action_type') ?: $cartRule->action_type ?>
 
-                                    <select class="control" id="action_type" name="action_type" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotions.cart-rules.action-type') }}&quot;">
+                                    <select class="control" id="action_type" name="action_type" v-validate="'required'" v-model="action_type" data-vv-as="&quot;{{ __('admin::app.promotions.cart-rules.action-type') }}&quot;">
                                         <option value="by_percent" {{ $selectedOption == 'by_percent' ? 'selected' : '' }}>
                                             {{ __('admin::app.promotions.cart-rules.percentage-product-price') }}
                                         </option>
@@ -246,7 +246,7 @@
                                     
                                     <?php $selectedOption = old('apply_to_shipping') ?: $cartRule->apply_to_shipping ?>
 
-                                    <select class="control" id="apply_to_shipping" name="apply_to_shipping">
+                                    <select class="control" id="apply_to_shipping" name="apply_to_shipping" :disabled="action_type == 'cart_fixed'">
                                         <option value="0" {{ ! $selectedOption ? 'selected' : '' }}>
                                             {{ __('admin::app.promotions.cart-rules.no') }}
                                         </option>
@@ -472,7 +472,9 @@
 
                     condition_type: {{ old('condition_type') ?: $cartRule->condition_type }},
 
-                    conditions: @json($cartRule->conditions ?: [])
+                    conditions: @json($cartRule->conditions ?: []),
+
+                    action_type: "{{ old('action_type') ?: $cartRule->action_type }}"
                 }
             },
 

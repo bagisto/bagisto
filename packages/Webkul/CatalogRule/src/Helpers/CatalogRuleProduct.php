@@ -133,9 +133,17 @@ class CatalogRuleProduct
             if (! $rule->conditions)
                 return $qb;
 
+            $appliedAttributes = [];
+
             foreach ($rule->conditions as $condition) {
-                if (! $condition['attribute'] || ! isset($condition['value']) || is_null($condition['value']) ||  $condition['value'] == '')
+                if (! $condition['attribute']
+                    || ! isset($condition['value'])
+                    || is_null($condition['value'])
+                    || $condition['value'] == ''
+                    || in_array($condition['attribute'], $appliedAttributes))
                     continue;
+                
+                $appliedAttributes[] = $condition['attribute'];
 
                 $chunks = explode('|', $condition['attribute']);
 
@@ -148,9 +156,12 @@ class CatalogRuleProduct
         $validatedProductIds = [];
 
         foreach ($qb->get() as $product) {
+            if (! $product->getTypeInstance()->priceRuleCanBeApplied())
+                continue;
+
             if ($this->validator->validate($rule, $product)) {
-                if ($product->type == 'configurable') {
-                    $validatedProductIds = array_merge($validatedProductIds, $product->variants()->pluck('id')->toArray());
+                if ($product->getTypeInstance()->isComposite()) {
+                    $validatedProductIds = array_merge($validatedProductIds, $product->getTypeInstance()->getChildrenIds());
                 } else {
                     $validatedProductIds[] = $product->id;
                 }
@@ -208,8 +219,12 @@ class CatalogRuleProduct
                     ->orderBy('catalog_rule_id', 'asc');
 
             if ($product) {
-                if ($product->type == 'configurable') {
-                    $qb->whereIn('catalog_rule_products.product_id', $product->variants()->pluck('id')->toArray());
+
+                if (! $product->getTypeInstance()->priceRuleCanBeApplied())
+                    return $qb;
+
+                if ($product->getTypeInstance()->isComposite()) {
+                    $qb->whereIn('catalog_rule_products.product_id', $product->getTypeInstance()->getChildrenIds());
                 } else {
                     $qb->where('catalog_rule_products.product_id', $product->id);
                 }

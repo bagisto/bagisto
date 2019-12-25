@@ -113,6 +113,13 @@ abstract class AbstractType
     protected $hasVariants = false;
 
     /**
+     * Product children price can be calculated or not
+     *
+     * @var boolean
+     */
+    protected $isChildrenCalculated = false;
+
+    /**
      * Create a new product type instance.
      *
      * @param  Webkul\Attribute\Repositories\AttributeRepository           $attributeRepository
@@ -251,6 +258,26 @@ abstract class AbstractType
     }
 
     /**
+     * Returns children ids
+     *
+     * @return array
+     */
+    public function getChildrenIds()
+    {
+        return [];
+    }
+
+    /**
+     * Check if catalog rule can be applied
+     *
+     * @return bool
+     */
+    public function priceRuleCanBeApplied()
+    {
+        return true;
+    }
+
+    /**
      * Return true if this product type is saleable
      *
      * @return boolean
@@ -289,9 +316,19 @@ abstract class AbstractType
      *
      * @return bool
      */
-    public function hasVariants(): bool
+    public function hasVariants()
     {
         return $this->hasVariants;
+    }
+
+    /**
+     * Product children price can be calculated or not
+     *
+     * @return bool
+     */
+    public function isChildrenCalculated()
+    {
+        return $this->isChildrenCalculated;
     }
 
     /**

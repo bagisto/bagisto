@@ -78,13 +78,12 @@ class CatalogRuleIndex
     public function reindexProduct($product)
     {
         try {
-            $productIds = [];
-
-            if ($product->type == 'configurable') {
-                $productIds = $product->variants()->pluck('id')->toArray();
-            } else {
-                $productIds[] = $product->id;
-            }
+            if (! $product->getTypeInstance()->priceRuleCanBeApplied())
+                return;
+                
+            $productIds = $product->getTypeInstance()->isComposite()
+                            ? $product->getTypeInstance()->getChildrenIds()
+                            : [$product->id];
 
             $this->cleanIndexes($productIds);
 

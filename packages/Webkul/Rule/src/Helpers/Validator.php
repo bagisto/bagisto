@@ -29,16 +29,14 @@ class Validator
             
             $totalConditionCount++;
 
-            $attributeValue = $this->getAttributeValue($condition, $entity);
-
             if ($rule->condition_type == 1) {
-                if (! $this->validateAttribute($condition['operator'], $attributeValue, $condition['value'])) {
+                if (! $this->validateObject($condition, $entity)) {
                     return false;
                 } else {
                     $validConditionCount++;
                 }
             } else {
-                if ($this->validateAttribute($condition['operator'], $attributeValue, $condition['value']))
+                if ($this->validateObject($condition, $entity))
                     return true;
             }
         }
@@ -49,8 +47,8 @@ class Validator
     /**
      * Return value for the attribute
      *
-     * @param array                 $condition
-     * @param Cart|CartItem|Product $entity
+     * @param array            $condition
+     * @param CartItem|Product $entity
      * @return boolean
      */
     public function getAttributeValue($condition, $entity)
@@ -60,8 +58,6 @@ class Validator
         $attributeNameChunks = explode('::', $chunks[1]);
 
         $attributeCode = $attributeNameChunks[count($attributeNameChunks) - 1];
-
-        $attributeScope = count($attributeNameChunks) == 2 ? $attributeNameChunks[0] : null;
 
         switch (current($chunks)) {
             case 'cart':
@@ -93,18 +89,15 @@ class Validator
 
             case 'product':
                 if ($attributeCode == 'category_ids') {
-                    $value = $attributeScope == 'children'
-                            ? ($entity->child ? $entity->child->product->categories()->pluck('id')->toArray() : [])
-                            : ($entity->product
+                    $value = $entity->product
                                 ? $entity->product->categories()->pluck('id')->toArray()
-                                : $entity->categories()->pluck('id')->toArray()
-                            );
+                                : $entity->categories()->pluck('id')->toArray();
                     
                     return $value;
                 } else {
-                    $value = $attributeScope == 'children'
-                            ? ($entity->child ? $entity->child->product->{$attributeCode} : null)
-                            : ($entity->product ? $entity->product->{$attributeCode} : $entity->{$attributeCode});
+                    $value = $entity->product
+                                ? $entity->product->{$attributeCode}
+                                : $entity->{$attributeCode};
 
                     if (! in_array($condition['attribute_type'], ['multiselect', 'checkbox']))
                         return $value;
@@ -115,27 +108,84 @@ class Validator
     }
 
     /**
+     * Validate object
+     *
+     * @param array    $condition
+     * @param CartItem $entity
+     * @return bool
+     */
+    private function validateObject($condition, $entity)
+    {
+        $validated = false;
+
+        foreach ($this->getAllItems($this->getAttributeScope($condition), $entity) as $item) {
+            $attributeValue = $this->getAttributeValue($condition, $item);
+
+            if ($validated = $this->validateAttribute($condition, $attributeValue))
+                break;
+        }
+
+        return $validated;
+    }
+
+    /**
+     * Return all cart items
+     *
+     * @param string                $attributeScope
+     * @param Cart|CartItem|Product $item
+     * @return array
+     */
+    private function getAllItems($attributeScope, $item)
+    {
+        if ($attributeScope === 'parent') {
+            return [$item];
+        } elseif ($attributeScope === 'children') {
+            return $item->children ?: [$item];
+        } else {
+            $items = $item->children ?: [];
+
+            $items[] = $item;
+        }
+
+        return $items;
+    }
+
+    /**
+     * Validate object
+     *
+     * @param array $condition
+     * @return string
+     */
+    private function getAttributeScope($condition)
+    {
+        $chunks = explode('|', $condition['attribute']);
+
+        $attributeNameChunks = explode('::', $chunks[1]);
+
+        return count($attributeNameChunks) == 2 ? $attributeNameChunks[0] : null;
+    }
+
+    /**
      * Validate attribute value for condition
      *
-     * @param string $operator
-     * @param mixed  $attributeValue
-     * @param mixed  $conditionValue
+     * @param array $condition
+     * @param mixed $attributeValue
      * @return boolean
      */
-    public function validateAttribute($operator, $attributeValue, $conditionValue)
+    public function validateAttribute($condition, $attributeValue)
     {
-        switch ($operator) {
+        switch ($condition['operator']) {
             case '==': case '!=':
-                if (is_array($conditionValue)) {
+                if (is_array($condition['value'])) {
                     if (! is_array($attributeValue))
                         return false;
 
-                    $result = ! empty(array_intersect($conditionValue, $attributeValue));
+                    $result = ! empty(array_intersect($condition['value'], $attributeValue));
                 } else {
                     if (is_array($attributeValue)) {
-                        $result = count($attributeValue) == 1 && array_shift($attributeValue) == $conditionValue;
+                        $result = count($attributeValue) == 1 && array_shift($attributeValue) == $condition['value'];
                     } else {
-                        $result = $attributeValue == $conditionValue;
+                        $result = $attributeValue == $condition['value'];
                     }
                 }
 
@@ -145,7 +195,7 @@ class Validator
                 if (! is_scalar($attributeValue))
                     return false;
 
-                $result = $attributeValue <= $conditionValue;
+                $result = $attributeValue <= $condition['value'];
 
                 break;
 
@@ -153,36 +203,36 @@ class Validator
                 if (! is_scalar($attributeValue))
                     return false;
 
-                $result = $attributeValue >= $conditionValue;
+                $result = $attributeValue >= $condition['value'];
 
                 break;
 
             case '{}': case '!{}':
-                if (is_scalar($attributeValue) && is_array($conditionValue)) {
-                    foreach ($conditionValue as $item) {
+                if (is_scalar($attributeValue) && is_array($condition['value'])) {
+                    foreach ($condition['value'] as $item) {
                         if (stripos($attributeValue, $item) !== false) {
                             $result = true;
 
                             break;
                         }
                     }
-                } else if (is_array($conditionValue)) {
+                } else if (is_array($condition['value'])) {
                     if (! is_array($attributeValue))
                         return false;
 
-                    $result = ! empty(array_intersect($conditionValue, $attributeValue));
+                    $result = ! empty(array_intersect($condition['value'], $attributeValue));
                 } else {
                     if (is_array($attributeValue)) {
-                        $result = in_array($conditionValue, $attributeValue);
+                        $result = in_array($condition['value'], $attributeValue);
                     } else {
-                        $result = (strpos($attributeValue, $conditionValue) !== false) ? true : false;
+                        $result = (strpos($attributeValue, $condition['value']) !== false) ? true : false;
                     }
                 }
 
                 break;
         }
 
-        if (in_array($operator, ['!=', '>', '<', '!{}']))
+        if (in_array($condition['operator'], ['!=', '>', '<', '!{}']))
             $result = ! $result;
 
         return $result;

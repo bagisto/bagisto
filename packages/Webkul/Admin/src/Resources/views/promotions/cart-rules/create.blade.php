@@ -199,7 +199,7 @@
                                 <div class="control-group" :class="[errors.has('action_type') ? 'has-error' : '']">
                                     <label for="action_type" class="required">{{ __('admin::app.promotions.cart-rules.action-type') }}</label>
 
-                                    <select class="control" id="action_type" name="action_type" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotions.cart-rules.action-type') }}&quot;">
+                                    <select class="control" id="action_type" name="action_type" v-validate="'required'" v-model="action_type" data-vv-as="&quot;{{ __('admin::app.promotions.cart-rules.action-type') }}&quot;">
                                         <option value="by_percent" {{ old('action_type') == 'by_percent' ? 'selected' : '' }}>
                                             {{ __('admin::app.promotions.cart-rules.percentage-product-price') }}
                                         </option>
@@ -236,7 +236,7 @@
                                 <div class="control-group">
                                     <label for="apply_to_shipping">{{ __('admin::app.promotions.cart-rules.apply-to-shipping') }}</label>
 
-                                    <select class="control" id="apply_to_shipping" name="apply_to_shipping">
+                                    <select class="control" id="apply_to_shipping" name="apply_to_shipping" :disabled="action_type == 'cart_fixed'">
                                         <option value="0" {{ ! old('apply_to_shipping') ? 'selected' : '' }}>{{ __('admin::app.promotions.cart-rules.no') }}</option>
                                         <option value="1" {{ old('apply_to_shipping') ? 'selected' : '' }}>{{ __('admin::app.promotions.cart-rules.yes') }}</option>
                                     </select>
@@ -380,7 +380,9 @@
 
                     condition_type: 1,
 
-                    conditions: []
+                    conditions: [],
+
+                    action_type: "{{ old('action_type') ?: 'by_percent' }}"
                 }
             },
 
