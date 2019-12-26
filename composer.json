@@ -94,7 +94,8 @@
                 "Webkul\\Tax\\": "packages/Webkul/Tax/src",
                 "Webkul\\API\\": "packages/Webkul/API",
                 "Webkul\\Discount\\": "packages/Webkul/Discount/src",
-                "Webkul\\CMS\\": "packages/Webkul/CMS/src"
+                "Webkul\\CMS\\": "packages/Webkul/CMS/src",
+                "Webkul\\Velocity\\": "packages/Webkul/Velocity/src"
         }
     },
 

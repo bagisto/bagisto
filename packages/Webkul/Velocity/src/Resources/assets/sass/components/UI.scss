@@ -1,0 +1,94 @@
+.qty-btn {
+    height: 36px;
+    display: inline-block;
+
+    > * {
+        height: 36px;
+        padding: 0px 10px;
+        border: 1px solid $border-common;
+        vertical-align: top;
+        line-height: 3.5rem;
+        display: inline-block;
+    }
+
+    > *:not(:first-child) {
+        border-left: none;
+        position: relative;
+    }
+
+    > *:not(:nth-child(2)) {
+        @extend .cursor-pointer;
+    }
+
+    > *:nth-child(2) {
+        left: -4px;
+    }
+
+    > *:nth-child(3) {
+        left: -7px;
+    }
+}
+
+.btn-add-to-cart {
+    padding: 8px;
+    color: #fff !important;
+    border-color: #26A37C !important;
+    background-color: #26A37C !important;
+
+    &.large {
+        padding: 12px 18px;
+    }
+
+    .rango-cart-1 {
+        padding-right: 5px;
+    }
+}
+
+.accordian {
+    .accordian-header {
+        i.rango-arrow {
+            float: right;
+            font-size: 24px;
+        }
+
+        i.rango-arrow::before {
+            content: "\E908";
+        }
+    }
+
+    &.active {
+        .accordian-header {
+            i.rango-arrow::before {
+                content: "\E906";
+            }
+        }
+    }
+}
+
+.accordian {
+    .accordian-header {
+        width: 100%;
+        font-size: 18px;
+        cursor: pointer;
+        color: #3a3a3a;
+        margin-top: -1px;
+        padding-bottom: 20px;
+        display: inline-block;
+    }
+
+    .accordian-content {
+        width: 100%;
+        display: none;
+        padding-bottom: 10px;
+    }
+
+    &.active {
+        .accordian-header {
+            padding-bottom: 10px;
+        }
+
+        .accordian-content {
+            display: inline-block;
+        }
+    }
+}
