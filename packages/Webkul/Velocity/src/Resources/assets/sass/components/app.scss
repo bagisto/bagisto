@@ -996,11 +996,6 @@
     justify-content: center;
 }
 
-.slides-container {
-    // top: -70px;
-    // position: relative;
-}
-
 #address-section {
     .form-header {
         h3 {
@@ -1016,5 +1011,30 @@
 #related-products-carousel {
     #product-card-new:first-child {
         margin-left: 0px !important;
+    }
+}
+
+.product-price {
+    .sticker {
+        top: 0;
+        border: none;
+        color: white;
+        font-size: 14px;
+        padding: 3px 10px;
+        position: absolute;
+        border-radius: 12px;
+
+        &.sale {
+            background-color: $theme-color;
+        }
+    }
+
+    .regular-price {
+        font-weight: 600;
+        margin-right: 10px;
+    }
+
+    .special-price {
+        text-decoration: line-through;
     }
 }

@@ -1720,6 +1720,29 @@
   margin-left: 0px !important;
 }
 
+.product-price .sticker {
+  top: 0;
+  border: none;
+  color: white;
+  font-size: 14px;
+  padding: 3px 10px;
+  position: absolute;
+  border-radius: 12px;
+}
+
+.product-price .sticker.sale {
+  background-color: #26A37C;
+}
+
+.product-price .regular-price {
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+.product-price .special-price {
+  text-decoration: line-through;
+}
+
 /* @author Shubham Mehrotra */
 body {
   overflow-x: hidden;
@@ -3024,6 +3047,10 @@ body::after {
   width: 50%;
   display: inline-block;
   padding: 10px 0 !important;
+}
+
+.small-card-container .product-price .sticker {
+  display: none;
 }
 
 .small-card-container:hover {

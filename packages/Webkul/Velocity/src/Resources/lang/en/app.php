@@ -167,6 +167,7 @@ return [
             'registered-user' => 'Registered User',
             'form-login-text' => 'If you have an account, sign in with your email address.',
             'new-customer' => 'New Customer',
+            'your-email-address' => 'Your email address',
         ],
         'signup-form' => [
             'user-registration' => 'User Registration',
