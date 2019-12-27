@@ -35325,11 +35325,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['slidesCount', 'slidesPerPage', 'navigationEnabled', 'paginationEnabled', 'addClass'],
-
-    data: function data() {
-        return {};
-    }
+    props: ['slidesCount', 'slidesPerPage', 'navigationEnabled', 'paginationEnabled', 'addClass']
 });
 
 /***/ }),
@@ -36708,6 +36704,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['heading', 'headerContent', 'isEnabled']
@@ -36731,7 +36730,11 @@ var render = function() {
             "rango-view-list " +
             (_vm.isEnabled == "0" ? "" : "cursor-pointer") +
             " align-vertical-top",
-          on: { click: _vm.toggleSidebar }
+          on: {
+            click: function($event) {
+              _vm.isEnabled == "0" ? "" : _vm.toggleSidebar()
+            }
+          }
         }),
         _vm._v(" "),
         _c("span", {

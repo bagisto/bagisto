@@ -78,31 +78,34 @@
                         ></content-header>
 
                         <div class="container">
-                            <sidebar-component
-                                main-sidebar=true
-                                url="{{ url()->to('/') }}"
-                                add-class="col-2 category-list-container pt10"
-                                :categories="{{ json_encode($categories) }}"
-                            ></sidebar-component>
+                            <div class="row col-12">
+                                <sidebar-component
+                                    main-sidebar=true
+                                    url="{{ url()->to('/') }}"
+                                    add-class="col-2 category-list-container pt10"
+                                    :categories="{{ json_encode($categories) }}"
+                                ></sidebar-component>
 
-                            <child-sidebar
-                                url="{{ url()->to('/') }}">
-                            </child-sidebar>
+                                <child-sidebar
+                                    url="{{ url()->to('/') }}">
+                                </child-sidebar>
 
-                            <div class="col-10 no-padding content" id="home-right-bar-container">
-                                <div class="container-right row no-margin col-12 no-padding">
+                                <div
+                                    class="col-10 no-padding content" id="home-right-bar-container">
 
-                                    {!! view_render_event('bagisto.shop.layout.content.before') !!}
+                                    <div class="container-right row no-margin col-12 no-padding">
 
-                                    @yield('content-wrapper')
+                                        {!! view_render_event('bagisto.shop.layout.content.before') !!}
 
-                                    {!! view_render_event('bagisto.shop.layout.content.after') !!}
+                                        @yield('content-wrapper')
+
+                                        {!! view_render_event('bagisto.shop.layout.content.after') !!}
+                                    </div>
+
                                 </div>
-
                             </div>
                         </div>
                     </div>
-
                 @show
 
                 <div class="container">

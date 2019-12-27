@@ -1,3 +1,5 @@
+@inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
+
 <div class="form-container review-checkout-conainer">
     <div class="form-header mb-30">
         <h3 class="fw6 display-inbl">
@@ -59,8 +61,6 @@
         @endif
 
     </div>
-
-    @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
     <div class="cart-item-list">
         <h4 class="fw6">{{ __('velocity::app.checkout.items') }}</h4>

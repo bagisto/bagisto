@@ -11,7 +11,7 @@
 
     <carousel-component
         :slides-count="{{ sizeof($relatedProducts) }}"
-        slides-per-page="6"
+        slides-per-page="5"
         id="related-products-carousel"
         navigation-enabled="hide"
         pagination-enabled="hide">

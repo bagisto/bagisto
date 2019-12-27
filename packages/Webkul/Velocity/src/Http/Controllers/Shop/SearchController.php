@@ -8,8 +8,8 @@ use Webkul\Velocity\Http\Shop\Controllers;
 /**
  * Search controller
  *
- * @author  Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ * @author  Shubham Mehrotra <shubhammehrotra.symfony@webkul.com> @shubhwebkul
+ * @copyright 2019 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
  class SearchController extends Controller
 {

@@ -215,6 +215,7 @@ return [
             'enter-current-password' => 'Enter your current password',
             'new-password' => 'New password',
             'confirm-new-password' => 'Confirm new password',
+            'top-brands' => 'Top Brands',
         ],
     ],
 ]

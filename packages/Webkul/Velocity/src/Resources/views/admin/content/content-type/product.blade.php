@@ -33,25 +33,6 @@
 
     </script>
 
-    <script>
-        Vue.component('catalog-product', {
-            template: '#catalog-product-template',
-
-            inject: ['$validator'],
-
-            data() {
-                return {
-                    catalog_type: '',
-                }
-            },
-            methods: {
-                loadCatalogType(event) {
-                    this.content_type = event.target.value;
-                }
-            }
-        });
-    </script>
-
     <script type="text/x-template" id="field-autocomplete-template">
         <div>
             <div class="control-group">
@@ -180,5 +161,21 @@
             }
         });
 
+        Vue.component('catalog-product', {
+            template: '#catalog-product-template',
+
+            inject: ['$validator'],
+
+            data() {
+                return {
+                    catalog_type: '',
+                }
+            },
+            methods: {
+                loadCatalogType(event) {
+                    this.content_type = event.target.value;
+                }
+            }
+        });
     </script>
 @endpush

@@ -36,7 +36,7 @@
                 @endif
             </div>
 
-            <a class="row" href="{{ route('shop.home.index') }}">
+            <a class="row remove-decoration" href="{{ route('shop.home.index') }}">
                 <div class="col-12">
                     <span class="custom-circle">></span>
                 </div>

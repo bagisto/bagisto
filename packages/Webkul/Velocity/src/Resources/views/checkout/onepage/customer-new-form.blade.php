@@ -165,13 +165,13 @@
 
         <input
             type="text"
-            v-validate="'required|email'"
             class="control"
             id="billing[email]"
             name="billing[email]"
+            @blur="isCustomerExist"
+            v-validate="'required|email'"
             v-model="address.billing.email"
-            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.email') }}&quot;"
-            @blur="isCustomerExist" />
+            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.email') }}&quot;" />
 
         <span class="control-error" v-if="errors.has('address-form.billing[email]')">
             @{{ errors.first('address-form.billing[email]') }}
@@ -190,8 +190,8 @@
 
         <input
             type="text"
-            v-validate="'required'"
             class="control"
+            v-validate="'required'"
             id="billing[first_name]"
             name="billing[first_name]"
             v-model="address.billing.first_name"
@@ -228,8 +228,8 @@
 
         <input
             type="text"
-            v-validate="'required'"
             class="control"
+            v-validate="'required'"
             id="billing_address_0"
             name="billing[address1][]"
             v-model="address.billing.address1[0]"
@@ -243,7 +243,12 @@
     @if (core()->getConfigData('customer.settings.address.street_lines') && core()->getConfigData('customer.settings.address.street_lines') > 1)
         <div class="row col-12" style="margin-top: -25px;">
             @for ($i = 1; $i < core()->getConfigData('customer.settings.address.street_lines'); $i++)
-                <input type="text" class="control" name="billing[address1][{{ $i }}]" id="billing_address_{{ $i }}" v-model="address.billing.address1[{{$i}}]">
+                <input
+                    type="text"
+                    class="control"
+                    id="billing_address_{{ $i }}"
+                    name="billing[address1][{{ $i }}]"
+                    v-model="address.billing.address1[{{$i}}]" />
             @endfor
         </div>
     @endif
@@ -255,15 +260,43 @@
 
         <input
             type="text"
-            v-validate="'required'"
             class="control"
             id="billing[city]"
             name="billing[city]"
+            v-validate="'required'"
             v-model="address.billing.city"
             data-vv-as="&quot;{{ __('shop::app.checkout.onepage.city') }}&quot;" />
 
         <span class="control-error" v-if="errors.has('address-form.billing[city]')">
             @{{ errors.first('address-form.billing[city]') }}
+        </span>
+    </div>
+
+    <div :class="`row col-12 ${errors.has('address-form.billing[country]') ? 'has-error' : ''}`">
+        <label for="billing[country]" class="required">
+            {{ __('shop::app.checkout.onepage.country') }}
+        </label>
+
+        <select
+            type="text"
+            class="control"
+            id="billing[country]"
+            name="billing[country]"
+            v-validate="'required'"
+            v-model="address.billing.country"
+            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.country') }}&quot;">
+
+            <option value=""></option>
+
+            @foreach (core()->countries() as $country)
+
+                <option value="{{ $country->code }}">{{ $country->name }}</option>
+
+            @endforeach
+        </select>
+
+        <span class="control-error" v-if="errors.has('address-form.billing[country]')">
+            @{{ errors.first('address-form.billing[country]') }}
         </span>
     </div>
 
@@ -274,14 +307,22 @@
 
         <input
             type="text"
-            v-validate="'required'"
             class="control"
             id="billing[state]"
             name="billing[state]"
+            v-validate="'required'"
+            v-if="!haveStates('billing')"
             v-model="address.billing.state"
-            v-if="!haveStates('billing')" data-vv-as="&quot;{{ __('shop::app.checkout.onepage.state') }}&quot;" />
+            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.state') }}&quot;" />
 
-        <select v-validate="'required'" class="control" id="billing[state]" name="billing[state]" v-model="address.billing.state" v-if="haveStates('billing')" data-vv-as="&quot;{{ __('shop::app.checkout.onepage.state') }}&quot;">
+        <select
+            class="control"
+            id="billing[state]"
+            name="billing[state]"
+            v-validate="'required'"
+            v-if="haveStates('billing')"
+            v-model="address.billing.state"
+            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.state') }}&quot;">
 
             <option value="">{{ __('shop::app.checkout.onepage.select-state') }}</option>
 
@@ -303,43 +344,15 @@
 
         <input
             type="text"
-            v-validate="'required'"
             class="control"
             id="billing[postcode]"
+            v-validate="'required'"
             name="billing[postcode]"
             v-model="address.billing.postcode"
             data-vv-as="&quot;{{ __('shop::app.checkout.onepage.postcode') }}&quot;" />
 
         <span class="control-error" v-if="errors.has('address-form.billing[postcode]')">
             @{{ errors.first('address-form.billing[postcode]') }}
-        </span>
-    </div>
-
-    <div :class="`row col-12 ${errors.has('address-form.billing[country]') ? 'has-error' : ''}`">
-        <label for="billing[country]" class="required">
-            {{ __('shop::app.checkout.onepage.country') }}
-        </label>
-
-        <select
-            type="text"
-            v-validate="'required'"
-            class="control"
-            id="billing[country]"
-            name="billing[country]"
-            v-model="address.billing.country"
-            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.country') }}&quot;">
-
-            <option value=""></option>
-
-            @foreach (core()->countries() as $country)
-
-                <option value="{{ $country->code }}">{{ $country->name }}</option>
-
-            @endforeach
-        </select>
-
-        <span class="control-error" v-if="errors.has('address-form.billing[country]')">
-            @{{ errors.first('address-form.billing[country]') }}
         </span>
     </div>
 
@@ -350,11 +363,12 @@
 
         <input
             type="text"
-            v-validate="'required'"
             class="control"
             id="billing[phone]"
             name="billing[phone]"
+            v-validate="'required'"
             v-model="address.billing.phone"
+            @change="validateForm('address-form')"
             data-vv-as="&quot;{{ __('shop::app.checkout.onepage.phone') }}&quot;" />
 
         <span class="control-error" v-if="errors.has('address-form.billing[phone]')">
@@ -366,8 +380,9 @@
         <div class="mb10">
             <span class="checkbox fs16 display-inbl no-margin">
                 <input
-                    type="checkbox"
                     class="ml0"
+                    type="checkbox"
+                    @change="validateForm('address-form')"
                     id="billing[use_for_shipping]"
                     name="billing[use_for_shipping]"
                     v-model="address.billing.use_for_shipping" />
@@ -383,8 +398,8 @@
         <div class="mb10">
             <span class="checkbox fs16 display-inbl no-margin">
                 <input
-                    type="checkbox"
                     class="ml0"
+                    type="checkbox"
                     id="billing[save_as_address]"
                     name="billing[save_as_address]" v-model="address.billing.save_as_address"/>
 
@@ -396,7 +411,4 @@
         @php
         @endphp
     @endauth
-
-    @guest('customer')
-    @endguest
 @endif

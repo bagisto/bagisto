@@ -76,13 +76,13 @@
 
     <script type="text/javascript">
         (() => {
-            var shippingHtml = '';
-            var paymentHtml = '';
             var reviewHtml = '';
+            var paymentHtml = '';
             var summaryHtml = '';
+            var shippingHtml = '';
+            var paymentMethods = '';
             var customerAddress = '';
             var shippingMethods = '';
-            var paymentMethods = '';
 
             var shippingTemplateRenderFns = [];
             var paymentTemplateRenderFns = [];
@@ -297,6 +297,10 @@
 
                                 paymentMethods = response.data.paymentMethods;
 
+                                if (this.selected_payment_method) {
+                                    this.savePayment();
+                                }
+
                                 this.getOrderSummary();
                             })
                             .catch(error => {
@@ -498,22 +502,21 @@
             })
 
             Vue.component('review-section', {
-                data: function() {
+                data: function () {
                     return {
+                        error_message: '',
                         templateRender: null,
-
-                        error_message: ''
                     }
                 },
 
                 staticRenderFns: reviewTemplateRenderFns,
 
-                render: function(h) {
-                    return h('div', [
-                        (this.templateRender ?
-                            this.templateRender() :
-                            '')
-                        ]);
+                render: function (h) {
+                    return h(
+                        'div', [
+                            this.templateRender ? this.templateRender() : ''
+                        ]
+                    );
                 },
 
                 mounted: function() {
@@ -530,29 +533,24 @@
             Vue.component('summary-section', {
                 inject: ['$validator'],
 
+                staticRenderFns: summaryTemplateRenderFns,
+
                 props: {
                     discount: {
-                        type: [String, Number],
-
                         default: 0,
+                        type: [String, Number],
                     }
                 },
 
                 data: function() {
                     return {
-                        templateRender: null,
-
+                        changeCount: 0,
                         coupon_code: null,
-
                         error_message: null,
-
+                        templateRender: null,
                         couponChanged: false,
-
-                        changeCount: 0
                     }
                 },
-
-                staticRenderFns: summaryTemplateRenderFns,
 
                 mounted: function() {
                     this.templateRender = summaryHtml.render;

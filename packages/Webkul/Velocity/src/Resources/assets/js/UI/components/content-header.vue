@@ -2,7 +2,10 @@
     <div :class="`row ${isEnabled == '0' ? 'disabled' : ''}`">
         <div
             class="main-category fs20 pt10 col-2 pl30">
-            <i :class="`rango-view-list ${isEnabled == '0' ? '' : 'cursor-pointer'} align-vertical-top`" @click="toggleSidebar"></i>
+            <i
+                :class="`rango-view-list ${isEnabled == '0' ? '' : 'cursor-pointer'} align-vertical-top`"
+                @click="(isEnabled == '0') ? '' : toggleSidebar()">
+            </i>
             <span class="text-up" v-text="heading"></span>
         </div>
 
@@ -13,8 +16,8 @@
                         v-if="(content['content_type'] == 'link')"
                         href="content['page_link']"
                         :target="content['link_target'] ? '_blank' : '_self'"
-                        v-text="content.title"
-                    ></a>
+                        v-text="content.title">
+                    </a>
 
                     <a href="#" v-else v-text="content.title"></a>
                 </li>

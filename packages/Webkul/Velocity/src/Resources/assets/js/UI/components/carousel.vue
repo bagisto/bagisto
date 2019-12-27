@@ -26,9 +26,5 @@
             'paginationEnabled',
             'addClass'
         ],
-
-        data: function () {
-            return {}
-        }
     }
 </script>

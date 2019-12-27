@@ -1708,11 +1708,6 @@
           justify-content: center;
 }
 
-.slides-container {
-  top: -70px;
-  position: relative;
-}
-
 #address-section .form-header h3 {
   margin-bottom: 20px;
 }

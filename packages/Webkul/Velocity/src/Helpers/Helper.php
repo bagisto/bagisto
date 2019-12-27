@@ -8,6 +8,13 @@ use Webkul\Velocity\Repositories\OrderBrandsRepository;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Product\Repositories\ProductRepository as ProductRepository;
 
+/**
+ * Search controller
+ *
+ * @author  Shubham Mehrotra <shubhammehrotra.symfony@webkul.com> @shubhwebkul
+ * @copyright 2019 Webkul Software Pvt Ltd (http://www.webkul.com)
+ */
+
 class Helper extends Review
 {
 
@@ -37,29 +44,28 @@ class Helper extends Review
      *
      * @var object
      */
-    protected $AttributeOption;
+    protected $attributeOption;
 
     public function __construct(
-        OrderBrandsRepository $OrderBrandsRepository,
+        OrderBrandsRepository $orderBrandsRepository,
         ProductRepository $productRepository,
         ProductModel $productModel,
-        AttributeOptionRepository $AttributeOption
+        AttributeOptionRepository $attributeOption
     ) {
-        $this->OrderBrandsRepository = $OrderBrandsRepository;
-
-        $this->productRepository = $productRepository;
-
         $this->productModel =  $productModel;
-
-        $this->AttributeOption =  $AttributeOption;
+        $this->attributeOption =  $attributeOption;
+        $this->productRepository = $productRepository;
+        $this->orderBrandsRepository = $orderBrandsRepository;
     }
 
     public function topBrand($order)
     {
         $orderItems = $order->items;
+
         foreach ($orderItems as $key => $orderItem) {
-                $products[]= $orderItem->product;
-                $this->OrderBrandsRepository->create([
+            $products[] = $orderItem->product;
+
+            $this->orderBrandsRepository->create([
                 'order_id' => $orderItem->order_id,
                 'order_item_id' => $orderItem->id,
                 'product_id' => $orderItem->product_id,
@@ -72,51 +78,51 @@ class Helper extends Review
     public function getBrandsWithCategories()
     {
         try {
-            $orderBrand = $this->OrderBrandsRepository->get()->toArray();
-            // $orderBrand = $this->arrangeWithMaxBrandOrder($orderBrandData);
+            $orderBrand = $this->orderBrandsRepository->get()->toArray();
 
-            foreach ($orderBrand as $product) {
-                $product_id[] = $product['product_id'];
+            if (isset($orderBrand) && ! empty($orderBrand)) {
+                foreach ($orderBrand as $product) {
+                    $product_id[] = $product['product_id'];
 
-                $product_categories = $this->productRepository->with('categories')->findWhereIn('id', $product_id)->toArray();
-            }
+                    $product_categories = $this->productRepository->with('categories')->findWhereIn('id', $product_id)->toArray();
+                }
 
-            foreach($product_categories as $totalData) {
-                $brand = $this->AttributeOption->findOneWhere(['id' => $totalData['brand']]);
+                $categoryName = $brandName = $brandImplode = [];
+                foreach($product_categories as $totalData) {
+                    $brand = $this->attributeOption->findOneWhere(['id' => $totalData['brand']]);
 
-                foreach ($totalData['categories'] as $categories) {
-                    foreach($categories['translations'] as $catName) {
-                        $brandData[$brand->admin_name][] = $catName['name'];
-                        $categoryName[] = $catName['name'];
+                    foreach ($totalData['categories'] as $categories) {
+                        foreach($categories['translations'] as $catName) {
+                            $brandData[$brand->admin_name][] = $catName['name'];
+                            $categoryName[] = $catName['name'];
+                        }
                     }
                 }
-            }
 
-            $uniqueCategoryName = array_unique($categoryName);
+                $uniqueCategoryName = array_unique($categoryName);
 
-            foreach($uniqueCategoryName as $key => $categoryNameValue) {
-                foreach($brandData as $brandDataKey => $brandDataValue) {
-                    if(in_array($categoryNameValue,$brandDataValue)) {
-                        $brandName[$categoryNameValue][] = $brandDataKey;
+                foreach($uniqueCategoryName as $key => $categoryNameValue) {
+                    foreach($brandData as $brandDataKey => $brandDataValue) {
+                        if(in_array($categoryNameValue,$brandDataValue)) {
+                            $brandName[$categoryNameValue][] = $brandDataKey;
+                        }
                     }
                 }
-            }
 
-            foreach($brandName as $brandKey => $brandvalue) {
-                $brandImplode[$brandKey][] = implode(' | ',array_map("ucfirst", $brandvalue));
-            }
+                foreach($brandName as $brandKey => $brandvalue) {
+                    $brandImplode[$brandKey][] = implode(' | ',array_map("ucfirst", $brandvalue));
+                }
 
-            return $brandImplode;
-        } catch (Exception $e){
-            throw $e;
+                return $brandImplode;
+            }
+        } catch (Exception $exception){
+            throw $exception;
         }
     }
-
 
     public function arrangeWithMaxBrandOrder($orderBrandData)
     {
     }
-
 
     /**
      * Returns the count rating of the product
@@ -127,10 +133,10 @@ class Helper extends Review
     public function getCountRating($product)
     {
         $reviews = $product->reviews()->where('status', 'approved')
-                    ->select('rating', \DB::raw('count(*) as total'))
-                    ->groupBy('rating')
-                    ->orderBy('rating','desc')
-                    ->get();
+            ->select('rating', \DB::raw('count(*) as total'))
+            ->groupBy('rating')
+            ->orderBy('rating','desc')
+            ->get();
 
         $totalReviews = $this->getTotalReviews($product);
 

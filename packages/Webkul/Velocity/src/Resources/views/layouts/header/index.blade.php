@@ -39,16 +39,6 @@
                             @endforeach
                         </select>
 
-                        {{-- <input
-                            type="search"
-                            name="term"
-                            class="form-control search col-md-7"
-                            placeholder="{{ __('velocity::app.header.search-text') }}"
-                            required />
-
-                        <button class="btn col-md-1" id="header-search-icon">
-                            <i class="material-icons">search</i>
-                        </button> --}}
                         <div class="input-group col-md-8 rows">
                             <input
                                 required

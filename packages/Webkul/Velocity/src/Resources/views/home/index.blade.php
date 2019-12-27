@@ -39,6 +39,10 @@
     @endif
 @endsection
 
+@section('content-wrapper')
+    @include('shop::home.slider')
+@endsection
+
 @section('full-content-wrapper')
 
     {!! view_render_event('bagisto.shop.home.content.before') !!}
