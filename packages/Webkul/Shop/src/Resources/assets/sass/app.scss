@@ -1840,7 +1840,7 @@ section.product-detail {
                     .sample-list {
                         padding: 15px 0;
                         border-top: solid 1px rgba(162, 162, 162, 0.2);
-                            
+
                         h3 {
                             font-size: 16px;
                             margin-top: 0;
@@ -1933,7 +1933,7 @@ section.product-detail {
                                 .qty {
                                     float: right;
 
-                                    .control-group {    
+                                    .control-group {
                                         max-width: initial;
                                         width: auto;
                                         text-align: center;
@@ -1983,7 +1983,7 @@ section.product-detail {
                             .control-group {
                                 margin-bottom: 0;
                                 color: #5E5E5E;
-                                
+
                                 label {
                                     color: #242424;
                                 }
@@ -2398,10 +2398,10 @@ section.cart {
                 justify-content: flex-start;
                 align-items: flex-start;
                 margin-top: 10px;
-                
+
                 .control-group {
                     font-size: 16px !important;
-                    margin: 0px;
+                    margin: 0 15px 0 0;
                     width: auto;
 
                     .wrap {
@@ -2423,7 +2423,7 @@ section.cart {
 
                 .remove, .towishlist {
                     line-height: 35px;
-                    margin-left: 15px;
+                    margin-right: 15px;
                 }
             }
         }
@@ -2945,7 +2945,7 @@ section.review {
 
             .product-price {
                 margin-top: 10px;
-                
+
                 .pro-price {
                     color: $disc-price;
                 }

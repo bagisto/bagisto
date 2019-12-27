@@ -417,7 +417,8 @@ return [
                 'missing_fields' => 'Some required fields missing for this product.',
                 'missing_options' => 'Options are missing for this product.',
                 'missing_links' => 'Downloadable links are missing for this product.',
-                'qty_missing' => 'Atleast one product should have more than 1 quantity.'
+                'qty_missing' => 'Atleast one product should have more than 1 quantity.',
+                'qty_impossible' => 'Cannot add more than one of these products to cart.'
             ],
             'create-error' => 'Encountered some issue while making cart instance.',
             'title' => 'Shopping Cart',

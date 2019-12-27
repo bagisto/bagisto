@@ -127,7 +127,7 @@ class Cart {
      *
      * @param integer $productId
      * @param array   $data
-     * @return Cart
+     * @return Mixed  Cart on success, array with warning otherwise
      */
     public function addProduct($productId, $data)
     {
@@ -135,8 +135,9 @@ class Cart {
 
         $cart = $this->getCart();
 
-        if (! $cart && ! $cart = $this->create($data))
-            return;
+        if (! $cart && ! $cart = $this->create($data)) {
+            return ['warning' => __('shop::app.checkout.cart.item.error-add')];
+        }
 
         $product = $this->productRepository->findOneByField('id', $productId);
 
@@ -152,8 +153,9 @@ class Cart {
             foreach ($cartProducts as $cartProduct) {
                 $cartItem = $this->getItemByProduct($cartProduct);
 
-                if (isset($cartProduct['parent_id']))
+                if (isset($cartProduct['parent_id'])) {
                     $cartProduct['parent_id'] = $parentCartItem->id;
+                }
 
                 if (! $cartItem) {
                     $cartItem = $this->cartItemRepository->create(array_merge($cartProduct, ['cart_id' => $cart->id]));
@@ -161,6 +163,9 @@ class Cart {
                     if (isset($cartProduct['parent_id']) && $cartItem->parent_id != $parentCartItem->id) {
                         $cartItem = $this->cartItemRepository->create(array_merge($cartProduct, ['cart_id' => $cart->id]));
                     } else {
+                        if ($product->getTypeInstance()->showQuantityBox() === false) {
+                            return ['warning' => __('shop::app.checkout.cart.integrity.qty_impossible')];
+                        }
                         $cartItem = $this->cartItemRepository->update($cartProduct, $cartItem->id);
                     }
                 }
@@ -229,7 +234,7 @@ class Cart {
     {
         foreach ($data['qty'] as $itemId => $quantity) {
             $item = $this->cartItemRepository->findOneByField('id', $itemId);
-        
+
             if (! $item)
                 continue;
 
@@ -345,7 +350,7 @@ class Cart {
             foreach ($guestCart->items as $key => $guestCartItem) {
 
                 $found = false;
-                
+
                 foreach ($cart->items as $cartItem) {
                     if (! $cartItem->product->getTypeInstance()->compareOptions($cartItem->additional, $guestCartItem->additional))
                         continue;
@@ -492,7 +497,7 @@ class Cart {
         if ($cart->haveStockableItems()) {
             $shippingAddress = $data['shipping'];
             $shippingAddress['cart_id'] = $cart->id;
-            
+
             if (isset($data['shipping']['address_id']) && $data['shipping']['address_id']) {
                 $address = $this->customerAddressRepository->findOneWhere(['id'=> $data['shipping']['address_id']])->toArray();
 
@@ -666,7 +671,7 @@ class Cart {
         //rare case of accident-->used when there are no items.
         if (count($cart->items) == 0) {
             $this->cartRepository->delete($cart->id);
-            
+
             return false;
         } else {
             foreach ($cart->items as $item) {
@@ -704,7 +709,7 @@ class Cart {
 
             if (! $taxCategory)
                 continue;
-            
+
             if ($item->product->getTypeInstance()->isStockable()) {
                 $address = $cart->shipping_address;
             } else {
@@ -902,7 +907,7 @@ class Cart {
 
     /**
      * Move a wishlist item to cart
-     * 
+     *
      * @param WishlistItem $wishlistItem
      * @return boolean
      */
@@ -910,7 +915,7 @@ class Cart {
     {
         if (! $wishlistItem->product->getTypeInstance()->canBeMovedFromWishlistToCart($wishlistItem))
             return false;
-    
+
         if (! $wishlistItem->additional)
             $wishlistItem->additional = ['product_id' => $wishlistItem->product_id];
 

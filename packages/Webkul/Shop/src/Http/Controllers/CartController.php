@@ -61,7 +61,7 @@ class CartController extends Controller
     /**
      * Method to populate the cart page which will be populated before the checkout process.
      *
-     * @return \Illuminate\View\View 
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -80,7 +80,9 @@ class CartController extends Controller
         try {
             $result = Cart::addProduct($id, request()->all());
 
-            if ($result) {
+            if (is_array($result) && isset($result['warning'])) {
+                session()->flash('warning', $result['warning']);
+            } else {
                 session()->flash('success', trans('shop::app.checkout.cart.item.success'));
 
                 if ($customer = auth()->guard('customer')->user())
@@ -88,15 +90,13 @@ class CartController extends Controller
 
                 if (request()->get('is_buy_now'))
                     return redirect()->route('shop.checkout.onepage.index');
-            } else {
-                session()->flash('warning', trans('shop::app.checkout.cart.item.error-add'));
             }
         } catch(\Exception $e) {
             session()->flash('error', trans($e->getMessage()));
 
             $product = $this->productRepository->find($id);
 
-            return redirect()->route('shop.productOrCategory.index', ['slug' => $product->url_key]);
+            return redirect()->route('shop.products.index', ['slug' => $product->url_key]);
         }
 
         return redirect()->back();
