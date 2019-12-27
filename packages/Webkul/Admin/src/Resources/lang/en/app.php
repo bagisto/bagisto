@@ -545,6 +545,7 @@ return [
             'file' => 'File',
             'checkbox' => 'Checkbox',
             'use_in_flat' => "Create in Product Flat Table",
+            'default_null_option' => 'Create default empty option',
         ],
         'families' => [
             'title' => 'Families',
@@ -1233,6 +1234,7 @@ return [
             'order-number-length' => 'Order Number Length',
             'order-number-suffix' => 'Order Number Suffix',
             'default' => 'Default',
+            'sandbox' => 'Sandbox'
         ]
     ]
 ];

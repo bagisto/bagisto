@@ -13,7 +13,7 @@ class View extends AbstractProduct
     /**
      * Returns the visible custom attributes
      *
-     * @param Product $product
+     * @param Webkul\Product\Models\Product $product
      * @return integer
      */
     public function getAdditionalData($product)
@@ -36,15 +36,23 @@ class View extends AbstractProduct
             } else if($value) {
                 if ($attribute->type == 'select') {
                     $attributeOption = $attributeOptionReposotory->find($value);
-                    if ($attributeOption)
-                        $value = $attributeOption->label ?? $attributeOption->admin_name;
+
+                    if ($attributeOption) {
+                        $value = $attributeOption->label ?? null;
+
+                        if (! $value) {
+                            continue;
+                        }
+                    }
                 } else if ($attribute->type == 'multiselect' || $attribute->type == 'checkbox') {
                     $lables = [];
 
                     $attributeOptions = $attributeOptionReposotory->findWhereIn('id', explode(",", $value));
 
                     foreach ($attributeOptions as $attributeOption) {
-                        $lables[] = $attributeOption->label ?? $attributeOption->admin_name;
+                        if ($label = $attributeOption->label) {
+                            $lables[] = $label;
+                        }
                     }
 
                     $value = implode(", ", $lables);

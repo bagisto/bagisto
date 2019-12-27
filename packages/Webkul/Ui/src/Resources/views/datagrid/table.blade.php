@@ -152,6 +152,7 @@
                     <span class="filter-tag" v-if="filters.length > 0" v-for="filter in filters" style="text-transform: capitalize;">
                         <span v-if="filter.column == 'sort'">@{{ filter.label }}</span>
                         <span v-else-if="filter.column == 'search'">Search</span>
+                        <span v-else-if="filter.column == 'perPage'">perPage</span>
                         <span v-else>@{{ filter.label }}</span>
 
                         <span class="wrapper">

@@ -52,7 +52,7 @@
                     <div class="control-group {!! $errors->has('image.*') ? 'has-error' : '' !!}">
                         <label class="required">{{ __('admin::app.catalog.categories.image') }}</label>
 
-                        <image-wrapper :button-label="'{{ __('admin::app.settings.sliders.image') }}'" input-name="image" :multiple="false" :images='"{{ url('storage/'.$slider->path) }}"' ></image-wrapper>
+                        <image-wrapper :button-label="'{{ __('admin::app.settings.sliders.image') }}'" input-name="image" :multiple="false" :images='"{{ Storage::url($slider->path) }}"'></image-wrapper>
 
                         <span class="control-error" v-if="{!! $errors->has('image.*') !!}">
                             @foreach ($errors->get('image.*') as $key => $message)

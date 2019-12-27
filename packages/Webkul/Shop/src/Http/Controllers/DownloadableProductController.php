@@ -47,7 +47,7 @@ class DownloadableProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View 
+     * @return \Illuminate\View\View
     */
     public function index() {
         return view($this->_config['view']);
@@ -77,7 +77,7 @@ class DownloadableProductController extends Controller
         }
 
         $remainingDownloads = $downloadableLinkPurchased->download_bought - ($downloadableLinkPurchased->download_used + 1);
-        
+
         if ($downloadableLinkPurchased->download_bought) {
             $this->downloadableLinkPurchasedRepository->update([
                     'download_used' => $downloadableLinkPurchased->download_used + 1,

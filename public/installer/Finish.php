@@ -20,9 +20,7 @@
 
 <script>
     function finish() {
-        lastIndex = window.location.href.lastIndexOf("/");
-        secondlast = window.location.href.slice(0, lastIndex).lastIndexOf("/");
-        next = window.location.href.slice(0, secondlast);
+        next = window.location.href.split("/installer")[0];
         next = next.concat('/admin/login');
         window.location.href = next;
     }

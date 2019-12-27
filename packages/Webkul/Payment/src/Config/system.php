@@ -159,7 +159,23 @@ return [
                 'validation' => 'required',
                 'channel_based' => false,
                 'locale_based' => true
-            ],  [
+            ], [
+                'name' => 'sandbox',
+                'title' => 'admin::app.admin.system.sandbox',
+                'type' => 'select',
+                'options' => [
+                    [
+                        'title' => 'Active',
+                        'value' => true
+                    ], [
+                        'title' => 'Inactive',
+                        'value' => false
+                    ]
+                ],
+                'validation' => 'required',
+                'channel_based' => false,
+                'locale_based' => true
+            ], [
                 'name' => 'sort',
                 'title' => 'admin::app.admin.system.sort_order',
                 'type' => 'select',

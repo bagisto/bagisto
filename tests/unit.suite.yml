@@ -13,5 +13,6 @@ modules:
         run_database_migrations: true
         run_database_seeder: true
         database_seeder_class: DatabaseSeeder
+        packages: packages
 
   step_decorators: ~
