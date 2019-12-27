@@ -55,7 +55,7 @@ class DownloadableLinkPurchasedRepository extends Repository
      */
     public function saveLinks($orderItem)
     {
-        if (! $this->isDownloadableProduct($orderItem)) {
+        if (! $this->isValidDownloadableProduct($orderItem)) {
             return;
         }
 
@@ -85,7 +85,7 @@ class DownloadableLinkPurchasedRepository extends Repository
      * @param mixed $orderItem Webkul\Sales\Models\OrderItem;
      * @return bool
      */
-    private function isDownloadableProduct($orderItem) : bool {
+    private function isValidDownloadableProduct($orderItem) : bool {
         if (stristr($orderItem->type,'downloadable') !== false && isset($orderItem->additional['links'])) {
             return true;
         }
