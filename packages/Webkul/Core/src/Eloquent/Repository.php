@@ -82,18 +82,28 @@ abstract class Repository extends BaseRepository {
         return $this->parserResult($model);
     }
 
-    /**
-     * @return mixed
+     /**
+     * Count results of repository
+     *
+     * @param array $where
+     * @param string $columns
+     *
+     * @return int
      */
-    public function count()
+    public function count(array $where = [], $columns = '*')
     {
         $this->applyCriteria();
         $this->applyScope();
 
-        $total = $this->model->count();
-        $this->resetModel();
+        if ($where) {
+            $this->applyConditions($where);
+        }
 
-        return $total;
+        $result = $this->model->count($columns);
+        $this->resetModel();
+        $this->resetScope();
+
+        return $result;
     }
 
     /**
