@@ -42,12 +42,14 @@ $(document).ready(function () {
                 let rightBarContainer = document.getElementById('home-right-bar-container');
                 let categoryListContainer = document.getElementById('sidebar');
 
-                categoryListContainer.classList.toggle('hide');
+                if (categoryListContainer) {
+                    categoryListContainer.classList.toggle('hide');
 
-                if (rightBarContainer.className.search('col-10') > -1) {
-                    rightBarContainer.className = rightBarContainer.className.replace('col-10', 'col-12');
-                } else {
-                    rightBarContainer.className = rightBarContainer.className.replace('col-12', 'col-10');
+                    if (rightBarContainer.className.search('col-10') > -1) {
+                        rightBarContainer.className = rightBarContainer.className.replace('col-10', 'col-12');
+                    } else {
+                        rightBarContainer.className = rightBarContainer.className.replace('col-12', 'col-10');
+                    }
                 }
             },
 

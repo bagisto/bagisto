@@ -1691,6 +1691,28 @@
   padding: 10px;
 }
 
+.search-result-status {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.slides-container {
+  top: -70px;
+  position: relative;
+}
+
 /* @author Shubham Mehrotra */
 body {
   overflow-x: hidden;
@@ -2112,6 +2134,10 @@ header #search-form > *:focus {
   margin: 0;
   margin-bottom: 60px;
   display: inline-block;
+}
+
+.categories-sidebar-container > .row.disabled {
+  cursor: not-allowed;
 }
 
 .categories-sidebar-container .main-category {

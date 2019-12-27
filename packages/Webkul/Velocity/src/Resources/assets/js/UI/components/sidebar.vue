@@ -2,7 +2,8 @@
     <!-- categories list -->
     <nav
         :class="`${addClass ? addClass : ''}`"
-        id="sidebar">
+        id="sidebar"
+        v-if="categories && categories.length > 0">
 
         <ul type="none">
             <li

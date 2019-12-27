@@ -74,6 +74,7 @@
                             :header-content="{{ json_encode(
                                 app('Webkul\Velocity\Repositories\ContentRepository')->getAllContents()
                             ) }}"
+                            is-enabled="{{ sizeof($categories) }}"
                         ></content-header>
 
                         <div class="container">

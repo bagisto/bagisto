@@ -39,18 +39,11 @@
     @endif
 @endsection
 
-@section('content-wrapper')
-    @parent
-
-    <img class="col-12 no-padding banner-icon" src="{{ asset('themes/velocity/assets/images/banner.png') }}"></div>
-
-@endsection
-
 @section('full-content-wrapper')
 
     {!! view_render_event('bagisto.shop.home.content.before') !!}
 
-    {!! DbView::make($channel)->field('home_page_content')->with(['sliderData' => $sliderData])->render() !!}
+    {!! DbView::make($channel)->field('home_page_content')->with(['sliderData' => []])->render() !!}
 
     {{ view_render_event('bagisto.shop.home.content.after') }}
 

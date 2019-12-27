@@ -986,10 +986,17 @@
     .badge {
         padding: 10px;
     }
+}
+
 .search-result-status {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.slides-container {
+    top: -70px;
+    position: relative;
 }

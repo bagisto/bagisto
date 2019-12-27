@@ -486,6 +486,12 @@ header #search-form > *:focus {
     margin-bottom: 60px;
     display: inline-block;
 
+    > .row {
+        &.disabled {
+            cursor: not-allowed;
+        }
+    }
+
     .main-category {
         border-bottom: 1px solid $border-common;
     }
