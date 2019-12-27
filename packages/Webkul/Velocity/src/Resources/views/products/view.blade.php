@@ -8,6 +8,8 @@
 
     $avgRatings = $reviewHelper->getAverageRating($product);
     $avgStarRating = ceil($avgRatings);
+
+    $showRecentlyViewed = false;
 @endphp
 
 @section('page_title')
@@ -23,101 +25,106 @@
 
     {!! view_render_event('bagisto.shop.products.view.before', ['product' => $product]) !!}
 
-    <section class="col-9 product-detail">
+    @if ($showRecentlyViewed)
+        <section class="col-7 offset-1 product-detail">
+    @else
+        <section class="col-10 offset-1 product-detail">
+    @endif
+            <div class="layouter">
+                <product-view>
+                    <div class="form-container">
+                        @csrf()
 
-        <div class="layouter">
-            <product-view>
-                <div class="form-container">
-                    @csrf()
+                        <input type="hidden" name="product_id" value="{{ $product->product_id }}">
 
-                    <input type="hidden" name="product_id" value="{{ $product->product_id }}">
+                        {{-- product-gallery --}}
+                        <div class="left col-lg-5">
+                            @include ('shop::products.view.gallery')
+                        </div>
 
-                    {{-- product-gallery --}}
-                    <div class="left col-lg-5">
-                        @include ('shop::products.view.gallery')
-                    </div>
+                        {{-- right-section --}}
+                        <div class="right col-lg-7 scrollable">
+                            {{-- product-info-section --}}
+                            <div class="row info">
+                                <h2 class="col-lg-12">{{ $product->name }}</h2>
 
-                    {{-- right-section --}}
-                    <div class="right col-lg-7 scrollable">
-                        {{-- product-info-section --}}
-                        <div class="row info">
-                            <h2 class="col-lg-12">{{ $product->name }}</h2>
+                                @if ($total)
+                                    <div class="reviews col-lg-12">
+                                        <star-ratings
+                                            :ratings="{{ $avgStarRating }}"
+                                            push-class="mr5"
+                                        ></star-ratings>
 
-                            @if ($total)
-                                <div class="reviews col-lg-12">
-                                    <star-ratings
-                                        :ratings="{{ $avgStarRating }}"
-                                        push-class="mr5"
-                                    ></star-ratings>
-
-                                    <div class="reviews">
-                                        <span>{{ $avgRatings }} Ratings and {{ $total }} Reviews</span>
+                                        <div class="reviews">
+                                            <span>{{ $avgRatings }} Ratings and {{ $total }} Reviews</span>
+                                        </div>
                                     </div>
+                                @endif
+
+                                @include ('shop::products.view.stock', ['product' => $product])
+
+                                <div class="col-12 price">
+                                    @include ('shop::products.price', ['product' => $product])
                                 </div>
-                            @endif
 
-                            @include ('shop::products.view.stock', ['product' => $product])
-
-                            <div class="col-12 price">
-                                @include ('shop::products.price', ['product' => $product])
+                                @include ('shop::products.add-to-cart', [
+                                    'product' => $product,
+                                    'showCartIcon' => false
+                                ])
                             </div>
 
-                            @include ('shop::products.add-to-cart', [
-                                'product' => $product,
-                                'showCartIcon' => false
+                            {!! view_render_event('bagisto.shop.products.view.short_description.before', ['product' => $product]) !!}
+
+                            <div class="description">
+                                <h3 class="col-lg-12">{{ __('velocity::app.products.short-description') }}</h3>
+
+                                {!! $product->short_description !!}
+                            </div>
+
+                            {!! view_render_event('bagisto.shop.products.view.short_description.after', ['product' => $product]) !!}
+
+
+                            {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
+
+                            @if ($product->getTypeInstance()->showQuantityBox())
+                                <quantity-changer></quantity-changer>
+                            @else
+                                <input type="hidden" name="quantity" value="1">
+                            @endif
+
+                            {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
+
+                            @include ('shop::products.view.configurable-options')
+
+                            @include ('shop::products.view.downloadable')
+
+                            @include ('shop::products.view.grouped-products')
+
+                            @include ('shop::products.view.bundle-options')
+
+                            @include ('shop::products.view.attributes', [
+                                'active' => true
                             ])
+
+                            {{-- product long description --}}
+                            @include ('shop::products.view.description')
+
+                            {{-- reviews count --}}
+                            @include ('shop::products.view.reviews', ['accordian' => true])
                         </div>
-
-                        {!! view_render_event('bagisto.shop.products.view.short_description.before', ['product' => $product]) !!}
-
-                        <div class="description">
-                            <h3 class="col-lg-12">{{ __('velocity::app.products.short-description') }}</h3>
-
-                            {!! $product->short_description !!}
-                        </div>
-
-                        {!! view_render_event('bagisto.shop.products.view.short_description.after', ['product' => $product]) !!}
-
-
-                        {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
-
-                        @if ($product->getTypeInstance()->showQuantityBox())
-                            <quantity-changer></quantity-changer>
-                        @else
-                            <input type="hidden" name="quantity" value="1">
-                        @endif
-
-                        {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
-
-                        @include ('shop::products.view.configurable-options')
-
-                        @include ('shop::products.view.downloadable')
-
-                        @include ('shop::products.view.grouped-products')
-
-                        @include ('shop::products.view.bundle-options')
-
-                        @include ('shop::products.view.attributes', [
-                            'active' => true
-                        ])
-
-                        {{-- product long description --}}
-                        @include ('shop::products.view.description')
-
-                        {{-- reviews count --}}
-                        @include ('shop::products.view.reviews', ['accordian' => true])
                     </div>
-                </div>
-            </product-view>
-        </div>
+                </product-view>
+            </div>
 
-        @include ('shop::products.view.related-products')
+            @include ('shop::products.view.related-products')
 
-        @include ('shop::products.view.up-sells')
+            @include ('shop::products.view.up-sells')
 
     </section>
 
-    @include ('shop::products.list.recently-viewed')
+    @if ($showRecentlyViewed)
+        @include ('shop::products.list.recently-viewed')
+    @endif
 
     {!! view_render_event('bagisto.shop.products.view.after', ['product' => $product]) !!}
 @endsection

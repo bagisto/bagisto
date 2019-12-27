@@ -14,8 +14,8 @@
                         :key="index"
                         @click="switchTab"
                         class="col-lg-2 no-padding"
-                        v-for="(tab, index) in tabs.slice(0, 3)"
-                    >
+                        v-for="(tab, index) in tabs.slice(0, 3)">
+
                         <h2 class="fs14 fw6 cursor-pointer tab" :class="index == 0 ? 'active' : ''">{{ tab }}</h2>
                     </div>
                 </template>

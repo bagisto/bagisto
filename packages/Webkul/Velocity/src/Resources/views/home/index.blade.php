@@ -43,7 +43,7 @@
 
     {!! view_render_event('bagisto.shop.home.content.before') !!}
 
-    {!! DbView::make($channel)->field('home_page_content')->with(['sliderData' => []])->render() !!}
+    {!! DbView::make($channel)->field('home_page_content')->with(['sliderData' => $sliderData])->render() !!}
 
     {{ view_render_event('bagisto.shop.home.content.after') }}
 

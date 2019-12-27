@@ -1713,6 +1713,18 @@
   position: relative;
 }
 
+#address-section .form-header h3 {
+  margin-bottom: 20px;
+}
+
+.attached-products-wrapper {
+  margin-top: 20px;
+}
+
+#related-products-carousel #product-card-new:first-child {
+  margin-left: 0px !important;
+}
+
 /* @author Shubham Mehrotra */
 body {
   overflow-x: hidden;
