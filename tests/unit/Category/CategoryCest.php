@@ -48,7 +48,6 @@ class CategoryCest
 
         $this->category = $I->have(Category::class, $this->categoryAttributes);
         $I->assertNotNull($this->category);
-        //return true;
 
         $I->seeRecord(CategoryTranslation::class, [
            'category_id' => $this->category->id,
@@ -104,7 +103,6 @@ class CategoryCest
 
     public function testChildUrlPathIsUpdatedOnParentUpdate(UnitTester $I)
     {
-        //return true;
         $newCategorySlug = $this->faker->slug;
 
         $this->categoryAttributes[$this->localeEn->code]['slug'] = $newCategorySlug;
@@ -146,7 +144,10 @@ class CategoryCest
 
     public function testGetPathCategories(UnitTester $I)
     {
+        $I->wantTo('test getPathCategories is returning the correct categories in the correct order');
+        $I->amGoingTo('get all categories wihin the path of the grand child category');
         $pathCategories = $this->grandChildCategory->getPathCategories();
+
         $I->assertCount(3, $pathCategories);
         $I->assertEquals($pathCategories[0]->id, $this->category->id);
         $I->assertEquals($pathCategories[1]->id, $this->childCategory->id);
