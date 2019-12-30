@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Webkul\Category\Contracts\Category as CategoryContract;
 use Webkul\Attribute\Models\AttributeProxy;
+use Webkul\Category\Repositories\CategoryRepository;
 
 /**
  * Class Category
@@ -84,7 +85,7 @@ class Category extends TranslatableModel implements CategoryContract
     {
         if (! $categoryTree) {
             $rootCategoryId = core()->getCurrentChannel()->root_category_id;
-            $categoryTree = app('Webkul\Category\Repositories\CategoryRepository')->getVisibleCategoryTree($rootCategoryId);
+            $categoryTree = app(CategoryRepository::class)->getVisibleCategoryTree($rootCategoryId);
         }
 
         foreach ($categoryTree as $category) {
