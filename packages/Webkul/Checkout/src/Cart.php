@@ -12,6 +12,7 @@ use Webkul\Checkout\Models\CartPayment;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Arr;
 
 /**
  * Facades handler for all the methods to be implemented in Cart.
@@ -837,8 +838,8 @@ class Cart {
             'base_tax_amount' => $data['base_tax_total'],
             'discount_amount' => $data['discount_amount'],
             'base_discount_amount' => $data['base_discount_amount'],
-            'billing_address' => array_except($data['billing_address'], ['id', 'cart_id']),
-            'payment' => array_except($data['payment'], ['id', 'cart_id']),
+            'billing_address' => Arr::except($data['billing_address'], ['id', 'cart_id']),
+            'payment' => Arr::except($data['payment'], ['id', 'cart_id']),
             'channel' => core()->getCurrentChannel(),
         ];
 
@@ -849,7 +850,7 @@ class Cart {
                 'shipping_description' => $data['selected_shipping_rate']['method_description'],
                 'shipping_amount' => $data['selected_shipping_rate']['price'],
                 'base_shipping_amount' => $data['selected_shipping_rate']['base_price'],
-                'shipping_address' => array_except($data['shipping_address'], ['id', 'cart_id']),
+                'shipping_address' => Arr::except($data['shipping_address'], ['id', 'cart_id']),
             ]);
         }
 

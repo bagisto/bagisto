@@ -6,6 +6,7 @@ use Illuminate\Container\Container as App;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Core\Repositories\ChannelRepository;
 use Storage;
+use Illuminate\Support\Arr;
 
 /**
  * Slider Repository
@@ -62,7 +63,7 @@ class SliderRepository extends Repository
         $image = false;
 
         if (isset($data['image'])) {
-            $image = $first = array_first($data['image'], function ($value, $key) {
+            $image = $first = Arr::first($data['image'], function ($value, $key) {
                 if ($value)
                     return $value;
                 else
@@ -98,7 +99,7 @@ class SliderRepository extends Repository
         $uploaded = $image = false;
 
         if (isset($data['image'])) {
-            $image = $first = array_first($data['image'], function ($value, $key) {
+            $image = $first = Arr::first($data['image'], function ($value, $key) {
                 return $value ? $value : false;
             });
         }

@@ -4,7 +4,7 @@
             <?php $keys = explode('.', $menu->currentKey);  ?>
 
             @if(isset($keys) && strlen($keys[0]))
-            @foreach (array_get($menu->items, current($keys) . '.children') as $item)
+            @foreach (\Illuminate\Support\Arr::get($menu->items, current($keys) . '.children') as $item)
                 <li class="{{ $menu->getActive($item) }}">
                     <a href="{{ $item['url'] }}">
                         {{ trans($item['name']) }}
