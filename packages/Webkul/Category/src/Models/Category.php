@@ -82,7 +82,7 @@ class Category extends TranslatableModel implements CategoryContract
      */
     private function findInTree($categoryTree = null): Category
     {
-        if (!$categoryTree) {
+        if (! $categoryTree) {
             $rootCategoryId = core()->getCurrentChannel()->root_category_id;
             $categoryTree = app('Webkul\Category\Repositories\CategoryRepository')->getVisibleCategoryTree($rootCategoryId);
         }
