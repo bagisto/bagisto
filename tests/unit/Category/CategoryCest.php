@@ -137,7 +137,7 @@ class CategoryCest
             'url_path' => $expectedUrlPath,
         ]);
 
-        // test if the url_path attribute is available in the model
+        $I->amGoingTo('test if the url_path attribute is available in the model');
         $this->grandChildCategory->refresh();
         $I->assertEquals($expectedUrlPath, $this->grandChildCategory->url_path);
     }
