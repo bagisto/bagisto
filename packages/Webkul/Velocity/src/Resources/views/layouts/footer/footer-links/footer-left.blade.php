@@ -15,6 +15,6 @@
     </div>
 
     <p class="clr-dark fs14">
-        We love to craft softwares and solve the real world problems with the binaries. We are highly committed to our goals. We invest our resources to create world class easy to use softwares and applications for the enterprise business with the top notch, on the edge technology expertise.
+        {{ $velocityMetaData->footer_left_content }}
     </p>
 </div>

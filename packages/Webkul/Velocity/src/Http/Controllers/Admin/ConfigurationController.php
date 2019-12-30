@@ -2,6 +2,9 @@
 
 namespace Webkul\Velocity\Http\Controllers\Admin;
 
+use DB;
+use Webkul\Velocity\Repositories\MetadataRepository;
+
 /**
  * Category Controller
  *
@@ -11,13 +14,32 @@ namespace Webkul\Velocity\Http\Controllers\Admin;
 
 class ConfigurationController extends Controller
 {
-    public function __contruct()
+    /**
+     * MetadataRepository object
+     *
+     * @var Object
+     */
+    protected $metaDataRepository;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @param  \Webkul\Velocity\Repositories\MetadataRepository $metaDataRepository
+     */
+
+    public function __construct ()
     {
-        dd("called");
+        $this->_config = request('_config');
     }
 
     public function storeMetaData()
     {
-        dd("called");
+        $metaData = DB::table('velocity_meta_data')->get();
+
+        if (! ($metaData && ($metaData = $metaData[0]))) {
+            $metaData = null;
+        }
+
+        return view($this->_config['view'], compact('metaData'));
     }
 }

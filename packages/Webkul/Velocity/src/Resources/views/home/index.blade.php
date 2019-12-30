@@ -40,14 +40,16 @@
 @endsection
 
 @section('content-wrapper')
-    @include('shop::home.slider')
+    @if ($velocityMetaData->slider)
+        @include('shop::home.slider')
+    @endif
 @endsection
 
 @section('full-content-wrapper')
 
     {!! view_render_event('bagisto.shop.home.content.before') !!}
 
-    {!! DbView::make($channel)->field('home_page_content')->with(['sliderData' => $sliderData])->render() !!}
+        {!! DbView::make($velocityMetaData)->field('home_page_content')->render() !!}
 
     {{ view_render_event('bagisto.shop.home.content.after') }}
 

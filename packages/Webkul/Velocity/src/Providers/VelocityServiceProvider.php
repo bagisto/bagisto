@@ -26,13 +26,11 @@ class VelocityServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
         include __DIR__ . '/../Http/helpers.php';
-
         include __DIR__ . '/../Http/admin-routes.php';
 
         $this->app->register(EventServiceProvider::class);
 
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
-
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'velocity');
 
         $this->publishes([
@@ -40,14 +38,17 @@ class VelocityServiceProvider extends ServiceProvider
         ], 'public');
 
         $this->publishes([
+            __DIR__ . '/../Resources/views/' => resource_path('themes/velocity/views'),
+
             dirname(__DIR__) . '/Resources/views/admin/settings/channels/edit.blade.php' => base_path('resources/views/vendor/admin/settings/channels/edit.blade.php')
         ]);
 
-        $this->publishes([
-            __DIR__ . '/../Resources/views/' => resource_path('themes/velocity/views'),
-        ]);
-
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'velocity');
+
+        $velocityHelper = app('Webkul\Velocity\Helpers\Helper');
+        $velocityMetaData = $velocityHelper->getVelocityMetaData();
+
+        view()->share('velocityMetaData', $velocityMetaData);
     }
 
     /**

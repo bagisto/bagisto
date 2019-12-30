@@ -273,7 +273,7 @@ class ProductRepository extends Repository
      *
      * @return Collection
      */
-    public function getFeaturedProducts()
+    public function getFeaturedProducts($count = 4)
     {
         $results = app(ProductFlatRepository::class)->scopeQuery(function($query) {
                 $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
@@ -288,7 +288,7 @@ class ProductRepository extends Repository
                         ->where('product_flat.channel', $channel)
                         ->where('product_flat.locale', $locale)
                         ->orderBy('product_id', 'desc');
-            })->paginate(4);
+            })->paginate($count);
 
         return $results;
     }
