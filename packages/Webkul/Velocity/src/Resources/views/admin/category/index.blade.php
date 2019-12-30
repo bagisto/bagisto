@@ -1,4 +1,4 @@
-@extends('velocity::admin.layouts.content')
+@extends('admin::layouts.content')
 
 @section('page_title')
     {{ __('velocity::app.admin.category.title') }}

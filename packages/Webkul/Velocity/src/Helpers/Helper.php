@@ -2,9 +2,11 @@
 
 namespace Webkul\Velocity\Helpers;
 
+use DB;
 use Webkul\Product\Helpers\Review;
 use Webkul\Product\Models\Product as ProductModel;
 use Webkul\Velocity\Repositories\OrderBrandsRepository;
+use Webkul\Velocity\Repositories\VelocityMetadataRepository;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Product\Repositories\ProductRepository as ProductRepository;
 
@@ -46,12 +48,21 @@ class Helper extends Review
      */
     protected $attributeOption;
 
+    /**
+     * VelocityMetadata object
+     *
+     * @var object
+     */
+    protected $velocityMetadata;
+
     public function __construct(
+        VelocityMetadataRepository $velocityMetadata,
         OrderBrandsRepository $orderBrandsRepository,
         ProductRepository $productRepository,
         ProductModel $productModel,
         AttributeOptionRepository $attributeOption
     ) {
+        $this->velocityMetadata =  $velocityMetadata;
         $this->productModel =  $productModel;
         $this->attributeOption =  $attributeOption;
         $this->productRepository = $productRepository;
@@ -133,7 +144,7 @@ class Helper extends Review
     public function getCountRating($product)
     {
         $reviews = $product->reviews()->where('status', 'approved')
-            ->select('rating', \DB::raw('count(*) as total'))
+            ->select('rating', DB::raw('count(*) as total'))
             ->groupBy('rating')
             ->orderBy('rating','desc')
             ->get();
@@ -157,6 +168,17 @@ class Helper extends Review
         }
 
         return $percentage;
+    }
+
+    public function getVelocityMetaData()
+    {
+        $metaData = $this->velocityMetadata->get();
+
+        if (! ($metaData && ($metaData = $metaData[0]))) {
+            $metaData = null;
+        }
+
+        return $metaData;
     }
 }
 

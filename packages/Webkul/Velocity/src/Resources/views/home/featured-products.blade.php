@@ -1,5 +1,5 @@
 @php
-    $featuredProducts = app('Webkul\Product\Repositories\ProductRepository')->getFeaturedProducts();
+    $featuredProducts = app('Webkul\Product\Repositories\ProductRepository')->getFeaturedProducts(6);
 
     $featuredProductsCount = $featuredProducts->count();
 

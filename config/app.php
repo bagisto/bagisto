@@ -227,6 +227,7 @@ return [
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
         //Webkul packages
+        Webkul\Velocity\Providers\VelocityServiceProvider::class,
         Webkul\Theme\Providers\ThemeServiceProvider::class,
         Webkul\User\Providers\UserServiceProvider::class,
         Webkul\Admin\Providers\AdminServiceProvider::class,
@@ -246,8 +247,7 @@ return [
         Webkul\Tax\Providers\TaxServiceProvider::class,
         Webkul\API\Providers\APIServiceProvider::class,
         Webkul\Discount\Providers\DiscountServiceProvider::class,
-        Webkul\CMS\Providers\CMSServiceProvider::class,
-        Webkul\Velocity\Providers\VelocityServiceProvider::class
+        Webkul\CMS\Providers\CMSServiceProvider::class
     ],
 
     /*
