@@ -1722,6 +1722,7 @@
 
 .product-price .sticker {
   top: 0;
+  left: 0;
   border: none;
   color: white;
   font-size: 14px;

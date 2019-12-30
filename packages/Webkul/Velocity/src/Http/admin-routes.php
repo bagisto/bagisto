@@ -4,10 +4,9 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::prefix('admin/velocity')->group(function () {
 
-        Route::group(['namespace' => 'Webkul\Velocity\Http\Controllers\Admin', 'middleware' => ['admin']], function ($router) {
-
+        Route::group(['middleware' => ['admin']], function () {
             // Content Pages Route
-            Route::get('/content', 'ContentController@index')->defaults('_config', [
+            Route::get('/content', 'ContentControlleradsasdasd@index')->defaults('_config', [
                 'view' => 'velocity::admin.content.index'
             ])->name('velocity.admin.content.index');
 
@@ -62,8 +61,10 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'velocity.admin.category.index'
             ])->name('velocity.admin.category.mass-delete');
 
+            Route::post('/meta-data', 'ConfigurationController@storeMetaData')->defaults('_config', [
+                'view' => 'velocity.admin.meta-data'
+            ])->name('velocity.admin.category.mass-delete');
         });
-
     });
 
     Route::group(['middleware' => ['theme']], function () {

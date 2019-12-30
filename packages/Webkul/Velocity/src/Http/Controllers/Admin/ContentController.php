@@ -39,8 +39,7 @@ class ContentController extends Controller
     public function __construct(
         ProductRepository $productRepository,
         ContentRepository $content
-    )
-    {
+    ) {
         $this->productRepository = $productRepository;
 
         $this->content = $content;
