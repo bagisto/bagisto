@@ -20,7 +20,8 @@ return [
             'general' => [
                 'status' => 'Status',
                 'active' => 'Active',
-                'inactive' => 'Inactive'
+                'inactive' => 'Inactive',
+                'featured-product' => 'Featured Product'
             ],
             'category' => [
                 'icon-status' => 'Category Icon Status',

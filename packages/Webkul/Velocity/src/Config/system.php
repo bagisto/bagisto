@@ -27,6 +27,10 @@ return [
                         'value' => false
                     ]
                 ]
+            ], [
+                'name' => 'featured_product',
+                'title' => 'velocity::app.admin.system.general.featured-product',
+                'type' => 'text',
             ]
         ]
     ],  [
