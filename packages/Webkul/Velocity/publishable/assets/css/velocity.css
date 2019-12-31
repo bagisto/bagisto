@@ -1197,6 +1197,7 @@
   z-index: 100;
   width: 350px;
   left: -230px;
+  display: none;
   position: absolute;
 }
 
@@ -1728,6 +1729,10 @@
   margin-left: 0px !important;
 }
 
+.product-price .price-label {
+  margin-right: 6px;
+}
+
 .product-price .sticker {
   top: 0;
   left: 0;
@@ -1760,6 +1765,12 @@
 
 .search-container :first-child {
   margin-left: 0px;
+}
+
+.method-sticker {
+  background-color: grey;
+  display: block;
+  color: white;
 }
 
 /* @author Shubham Mehrotra */
@@ -3370,6 +3381,10 @@ button[disabled] {
 
 .product-detail .right .add-to-cart-btn button span {
   font-size: 16px;
+}
+
+.product-detail .right .product-price .sticker {
+  display: none;
 }
 
 .product-detail .thumb-list {

@@ -20,13 +20,13 @@
         @endif
 
         @if ($product->downloadable_links->count())
-            <div class="link-list control-group" :class="[errors.has('links[]') ? 'has-error' : '']">
+            <div class=" link-list control-group" :class="[errors.has('links[]') ? 'has-error' : '']">
                 <h3>{{ __('shop::app.products.links') }}</h3>
 
-                <ul>
+                <ul type="none">
                     @foreach ($product->downloadable_links as $link)
                         <li>
-                            <span class="checkbox">
+                            <span class="checkbox col-12 ml5">
                                 <input type="checkbox" name="links[]" v-validate="'required'" value="{{ $link->id }}" id="{{ $link->id }}" data-vv-as="&quot;{{ __('shop::app.products.links') }}&quot;"/>
                                 <label class="checkbox-view" for="{{ $link->id }}"></label>
                                 {{ $link->title . ' + ' . core()->currency($link->price) }}

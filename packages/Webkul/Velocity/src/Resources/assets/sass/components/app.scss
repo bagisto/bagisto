@@ -1028,6 +1028,10 @@
 }
 
 .product-price {
+    .price-label {
+        margin-right: 6px;
+    }
+
     .sticker {
         top: 0;
         left: 0;
@@ -1063,4 +1067,9 @@
     :first-child {
         margin-left: 0px;
     }
+}
+.method-sticker {
+    background-color: grey;
+    display: block;
+    color: white;
 }

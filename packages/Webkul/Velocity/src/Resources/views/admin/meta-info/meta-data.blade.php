@@ -39,6 +39,19 @@
 
             <div class="control-group">
                 <label for="footer_content">
+                    {{ __('velocity::app.admin.meta-data.subscription-content') }}
+                </label>
+
+                <textarea
+                    class="control"
+                    id="subscription-content"
+                    name="subscription-content">
+                    {{ $metaData->subscription_bar_content}}
+                </textarea>
+            </div>
+
+            <div class="control-group">
+                <label for="footer_content">
                     {{ __('velocity::app.admin.meta-data.home-page-content') }}
                 </label>
 
@@ -94,7 +107,7 @@
                 width: "100%",
                 image_advtab: true,
                 valid_elements : '*[*]',
-                selector: 'textarea#home_page_content,textarea#footer_left_content,textarea#footer_middle_content',
+                selector: 'textarea#home_page_content,textarea#footer_left_content,textarea#subscription-content,textarea#footer_middle_content',
                 plugins: 'image imagetools media wordcount save fullscreen code',
                 toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | code',
             });

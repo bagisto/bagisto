@@ -39,8 +39,6 @@ class VelocityServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__ . '/../Resources/views/' => resource_path('themes/velocity/views'),
-
-            dirname(__DIR__) . '/Resources/views/admin/settings/channels/edit.blade.php' => base_path('resources/views/vendor/admin/settings/channels/edit.blade.php')
         ]);
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'velocity');

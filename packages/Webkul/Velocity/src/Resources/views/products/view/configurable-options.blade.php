@@ -4,8 +4,6 @@
 
     {!! view_render_event('bagisto.shop.products.view.configurable-options.before', ['product' => $product]) !!}
 
-    <h1>xcvxcf</h1>
-
     <product-options></product-options>
 
     {!! view_render_event('bagisto.shop.products.view.configurable-options.after', ['product' => $product]) !!}
@@ -20,7 +18,7 @@
                 <div v-for='(attribute, index) in childAttributes' class="attribute control-group" :class="[errors.has('super_attribute[' + attribute.id + ']') ? 'has-error' : '']">
                     <label class="required">@{{ attribute.label }}</label>
 
-                    <span v-if="! attribute.swatch_type || attribute.swatch_type == '' || attribute.swatch_type == 'dropdown'">
+                    <span class="custom-form" v-if="! attribute.swatch_type || attribute.swatch_type == '' || attribute.swatch_type == 'dropdown'">
                         <select
                             class="control"
                             v-validate="'required'"
@@ -96,7 +94,7 @@
                 },
 
                 created: function() {
-                    this.galleryImages = galleryImages.slice(0)
+                    // this.galleryImages = galleryImages.slice(0)
 
                     var config = @json($config);
 

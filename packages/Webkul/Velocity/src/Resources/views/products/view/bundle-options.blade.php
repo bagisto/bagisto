@@ -34,7 +34,7 @@
                         </div>
                     </div>
 
-                    <ul class="bundle-items">
+                    <ul type="none" class="bundle-items">
                         <li v-for="(option, index) in options">
                             @{{ option.label }}
 
@@ -71,7 +71,7 @@
                             {{ __('shop::app.products.none') }}
                         </span>
 
-                        <span class="radio" v-for="(product, index2) in option.products">
+                        <span class="radio col-12 ml5" v-for="(product, index2) in option.products">
                             <input type="radio" :name="'bundle_options[' + option.id + '][]'" v-model="selected_product" v-validate="option.is_required ? 'required' : ''" :data-vv-as="'&quot;' + option.label + '&quot;'" :value="product.id" :id="'bundle_options[' + option.id + '][]'">
                             <label class="radio-view" :for="'bundle_options[' + option.id + '][]'"></label>
 
@@ -181,7 +181,7 @@
                 data: function() {
                     return {
                         selected_product: (this.option.type == 'checkbox' || this.option.type == 'multiselect')  ? [] : null,
-                        
+
                         qty_validations: ''
                     }
                 },
