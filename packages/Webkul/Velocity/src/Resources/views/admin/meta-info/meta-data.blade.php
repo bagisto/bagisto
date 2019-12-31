@@ -45,7 +45,7 @@
                 <textarea
                     class="control"
                     id="subscription-content"
-                    name="subscription-content">
+                    name="subscription_bar_content">
                     {{ $metaData->subscription_bar_content}}
                 </textarea>
             </div>

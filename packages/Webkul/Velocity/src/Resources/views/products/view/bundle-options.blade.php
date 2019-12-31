@@ -73,7 +73,6 @@
 
                         <span class="radio col-12 ml5" v-for="(product, index2) in option.products">
                             <input type="radio" :name="'bundle_options[' + option.id + '][]'" v-model="selected_product" v-validate="option.is_required ? 'required' : ''" :data-vv-as="'&quot;' + option.label + '&quot;'" :value="product.id" :id="'bundle_options[' + option.id + '][]'">
-                            <label class="radio-view" :for="'bundle_options[' + option.id + '][]'"></label>
 
                             @{{ product.name }}
 
@@ -86,7 +85,6 @@
                     <div v-if="option.type == 'checkbox'">
                         <span class="checkbox" v-for="(product, index2) in option.products">
                             <input type="checkbox" :name="'bundle_options[' + option.id + '][]'" :value="product.id" v-model="selected_product" v-validate="option.is_required ? 'required' : ''" :data-vv-as="'&quot;' + option.label + '&quot;'" :id="'bundle_options[' + option.id + '][]'">
-                            <label class="checkbox-view" :for="'bundle_options[' + option.id + '][]'"></label>
 
                             @{{ product.name }}
 
