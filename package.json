@@ -21,8 +21,9 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "opencollective": "^1.0.3",
         "opencollective-postinstall": "^2.0.1",
-        "opencollective": "^1.0.3"
+        "vue-carousel": "^0.18.0"
     },
     "collective": {
         "type": "opencollective",

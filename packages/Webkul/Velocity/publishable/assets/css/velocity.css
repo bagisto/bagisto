@@ -1720,6 +1720,10 @@
   margin-left: 0px !important;
 }
 
+.product-price .price-label {
+  margin-right: 6px;
+}
+
 .product-price .sticker {
   top: 0;
   left: 0;
@@ -1743,6 +1747,12 @@
 
 .product-price .special-price {
   text-decoration: line-through;
+}
+
+.method-sticker {
+  background-color: grey;
+  display: block;
+  color: white;
 }
 
 /* @author Shubham Mehrotra */
@@ -2709,7 +2719,7 @@ body::after {
 }
 
 .ml15, .advertisement-two-container .ad-2-rt {
-  margin-left: 15px;
+  margin-left: 15px !important;
 }
 
 .body-blur {

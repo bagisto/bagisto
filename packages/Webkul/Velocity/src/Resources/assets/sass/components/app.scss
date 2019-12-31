@@ -1015,6 +1015,10 @@
 }
 
 .product-price {
+    .price-label {
+        margin-right: 6px;
+    }
+
     .sticker {
         top: 0;
         left: 0;
@@ -1039,4 +1043,10 @@
     .special-price {
         text-decoration: line-through;
     }
+}
+
+.method-sticker {
+    background-color: grey;
+    display: block;
+    color: white;
 }
