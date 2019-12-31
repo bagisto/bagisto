@@ -1496,11 +1496,16 @@
   right: 15px !important;
   top: 50px !important;
   z-index: 100 !important;
-  font-size: 14px !important;
+  font-size: 16px !important;
   position: fixed !important;
   max-width: 400px !important;
-  min-height: 40px !important;
+  min-height: 45px !important;
   max-height: 100px !important;
+}
+
+.alert.alert-dismissible .close {
+  font-size: 23px;
+  padding: .3rem 1.25rem;
 }
 
 #home-right-bar-container.col-12 .category-container {
@@ -1721,7 +1726,6 @@
 }
 
 .product-price .sticker {
-  display: none;
   top: 0;
   left: 0;
   border: none;
@@ -1930,8 +1934,8 @@ header #search-form > *:focus {
   font-size: 14px;
 }
 
-.container-fluid > .row:first-child {
-  margin-bottom: 20px;
+.container > .container-fluid {
+  margin-bottom: 60px;
 }
 
 /* advertisement-one */
@@ -2617,7 +2621,7 @@ body::after {
   padding-left: 40px !important;
 }
 
-.pr0 {
+.pr0, .container > .container-fluid > .row {
   padding-right: 0px !important;
 }
 
@@ -2710,7 +2714,7 @@ body::after {
 }
 
 .ml15, .advertisement-two-container .ad-2-rt {
-  margin-left: 15px;
+  margin-left: 15px !important;
 }
 
 .body-blur {
@@ -3358,6 +3362,10 @@ button[disabled] {
 
 .product-detail .right .add-to-cart-btn button span {
   font-size: 16px;
+}
+
+.product-detail .right .product-price .sticker {
+  display: none;
 }
 
 .product-detail .thumb-list {

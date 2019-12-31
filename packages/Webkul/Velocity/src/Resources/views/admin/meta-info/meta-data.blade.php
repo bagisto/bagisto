@@ -13,9 +13,9 @@
         </div>
 
         <form
-            action="{{ route('velocity.admin.store.meta-data', ['id' => $metaData->id]) }}"
             method="POST"
-            @submit.prevent="onSubmit">
+            @submit.prevent="onSubmit"
+            action="{{ route('velocity.admin.store.meta-data', ['id' => $metaData->id]) }}">
 
             @csrf
 
@@ -28,11 +28,11 @@
                     <input
                         type="checkbox"
                         class="control"
-                        id="slider"
-                        name="slider"
+                        id="slides"
+                        name="slides"
                         data-vv-as="&quot;slides&quot;"
-                        {{ $metaData->slider ? 'checked' : ''}}
-                        value="{{ $metaData->slider }}" />
+                        {{ $metaData->slider ? 'checked' : ''}} />
+
                     <span class="slider round"></span>
                 </label>
             </div>

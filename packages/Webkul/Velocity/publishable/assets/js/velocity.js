@@ -36724,24 +36724,28 @@ var render = function() {
     "div",
     { class: "row " + (_vm.isEnabled == "0" ? "disabled" : "") },
     [
-      _c("div", { staticClass: "main-category fs20 pt10 col-2 pl30" }, [
-        _c("i", {
-          class:
-            "rango-view-list " +
-            (_vm.isEnabled == "0" ? "" : "cursor-pointer") +
-            " align-vertical-top",
-          on: {
-            click: function($event) {
-              _vm.isEnabled == "0" ? "" : _vm.toggleSidebar()
+      _c(
+        "div",
+        { staticClass: "main-category fs20 pt10 col-2 pl30 unselectable" },
+        [
+          _c("i", {
+            class:
+              "rango-view-list " +
+              (_vm.isEnabled == "0" ? "" : "cursor-pointer") +
+              " align-vertical-top",
+            on: {
+              click: function($event) {
+                _vm.isEnabled == "0" ? "" : _vm.toggleSidebar()
+              }
             }
-          }
-        }),
-        _vm._v(" "),
-        _c("span", {
-          staticClass: "text-up",
-          domProps: { textContent: _vm._s(_vm.heading) }
-        })
-      ]),
+          }),
+          _vm._v(" "),
+          _c("span", {
+            staticClass: "text-up",
+            domProps: { textContent: _vm._s(_vm.heading) }
+          })
+        ]
+      ),
       _vm._v(" "),
       _c("div", { staticClass: "content-list row no-margin col-10" }, [
         _c(

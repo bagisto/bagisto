@@ -48,13 +48,17 @@ class ConfigurationController extends Controller
 
     public function storeMetaData($id)
     {
-        if (! request()->get('slider')) {
+        if (request()->get('slides') == "on") {
+            $params = request()->all() + [
+                'slider' => 1
+            ];
+        } else {
             $params = request()->all() + [
                 'slider' => 0
             ];
-        } else {
-            $params = request()->all();
         }
+
+        unset($params['slides']);
 
         $product = $this->velocityMetaDataRepository->update($params, $id);
 

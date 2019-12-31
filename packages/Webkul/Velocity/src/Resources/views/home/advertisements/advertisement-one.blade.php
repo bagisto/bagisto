@@ -1,6 +1,6 @@
 <div class="container-fluid advertisement-one no-padding">
 
-    <div class="row">
+    <div class="row col-12">
         <div class="col offers-lt-panel bg-image"></div>
 
         <div class="col offers-ct-panel">
