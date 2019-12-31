@@ -53,7 +53,7 @@
                                     <a href="{{ route('customer.session.index') }}">
                                         <button
                                             type="button"
-                                            class="theme-btn fs16">
+                                            class="theme-btn fs15">
 
                                             {{ __('velocity::app.header.sign-in') }}
                                         </button>

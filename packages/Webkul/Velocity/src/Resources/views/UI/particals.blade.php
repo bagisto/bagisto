@@ -98,7 +98,8 @@
             methods: {
                 toggleMiniCart: function () {
                     let modal = $('#cart-modal-content')[0];
-                    modal.classList.toggle('hide');
+                    if (modal)
+                        modal.classList.toggle('hide');
 
                     event.stopPropagation();
                 }

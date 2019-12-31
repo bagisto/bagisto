@@ -78,7 +78,7 @@
 
                                         <div class="row col-12 cursor-pointer">
                                             <a href="{{ route('shop.checkout.cart.remove', ['id' => $item->id]) }}" class="unset">
-                                                <span class="rango-delete fs24 mr10"></span>
+                                                <span class="rango-delete fs24"></span>
                                                 <span class="align-vertical-top">{{ __('shop::app.checkout.cart.remove') }}</span>
                                             </a>
                                         </div>

@@ -126,11 +126,6 @@
 
     <card-list-header
         heading="Plants"
-        view-all="{{
-            (sizeof($products) > $cardCount)
-            ? 'http://localhost/PHP/laravel/Bagisto/bagisto-clone/public/categories/category1'
-            : false
-        }}"
     ></card-list-header>
 
     {!! view_render_event('bagisto.shop.new-products.before') !!}

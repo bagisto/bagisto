@@ -36,6 +36,7 @@
 
             .social-icons {
                 padding: 20px 0;
+                color: $light-color;
 
                 i {
                     margin: 0;
@@ -133,6 +134,16 @@
                 h3 {
                     font-size: 14px;
                     color: rgba(255,255,255,0.52);
+                }
+            }
+        }
+
+        .footer-statics {
+            .software-description {
+                p {
+                    @extend .clr-dark;
+
+                    font-size: 14px;
                 }
             }
         }

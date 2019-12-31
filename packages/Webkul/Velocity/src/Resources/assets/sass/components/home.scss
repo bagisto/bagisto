@@ -16,6 +16,16 @@ body {
     z-index: 100;
     width: 350px !important;
     position: absolute !important;
+
+    .theme-btn {
+        padding: .375rem .75rem;
+    }
+
+    .modal-footer {
+        .text-left {
+            padding-left: 5px;
+        }
+    }
 }
 
 .category-list-container {
@@ -68,7 +78,7 @@ body {
     width: 22px;
     height: 20px;
     float: right;
-    margin-right: 11px;
+    margin-right: 10px;
     background-image: url("../images/Icon-Arrow-Right.svg");
 }
 
@@ -524,17 +534,20 @@ header #search-form > *:focus {
     display: inline-block;
     background-color: #4D7EA8;
 
-    li {
-        a {
-            display: block;
-            cursor: pointer;
-            font-size: 16px;
-            color: #FFFFFF;
-            letter-spacing: 0;
-            position: relative;
-            text-decoration: none;
-            font-family: SourceSansPro-Semibold;
-            padding: 5px 20px 5px 5px;
+    ul {
+        display: inline-flex;
+
+        li {
+            a {
+                display: block;
+                cursor: pointer;
+                font-size: 16px;
+                color: #FFFFFF;
+                letter-spacing: 0;
+                position: relative;
+                text-decoration: none;
+                padding: 5px 20px 5px 5px;
+            }
         }
     }
 }

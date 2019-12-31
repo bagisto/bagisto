@@ -30,26 +30,28 @@
 
 
             <div class="product-information">
-                <div class="product-name">
-                    <a
-                        href="{{ route('shop.productOrCategory.index', $product->url_key) }}"
-                        title="T-Shirt" class="unset">
+                <div>
+                    <div class="product-name">
+                        <a
+                            href="{{ route('shop.productOrCategory.index', $product->url_key) }}"
+                            title="T-Shirt" class="unset">
 
-                        <span class="fs16">{{ $product->name }}</span>
-                    </a>
-                </div>
+                            <span class="fs16">{{ $product->name }}</span>
+                        </a>
+                    </div>
 
-                <div class="product-price">
-                    @include ('shop::products.price', ['product' => $product])
-                </div>
+                    <div class="product-price">
+                        @include ('shop::products.price', ['product' => $product])
+                    </div>
 
-                <div class="product-rating">
-                    <star-ratings ratings="3"></star-ratings>
-                    <span>{{ $totalReviews }} Ratings</span>
-                </div>
+                    <div class="product-rating">
+                        <star-ratings ratings="3"></star-ratings>
+                        <span>{{ $totalReviews }} Ratings</span>
+                    </div>
 
-                <div class="cart-wish-wrap row">
-                    @include ('shop::products.add-to-cart', ['product' => $product])
+                    <div class="cart-wish-wrap row mt5">
+                        @include ('shop::products.add-to-cart', ['product' => $product])
+                    </div>
                 </div>
             </div>
         </div>

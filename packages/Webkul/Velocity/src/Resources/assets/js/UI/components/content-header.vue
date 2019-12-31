@@ -1,7 +1,6 @@
 <template>
-    <div :class="`row ${isEnabled == '0' ? 'disabled' : ''}`">
-        <div
-            class="main-category fs20 pt10 col-2 pl30 unselectable">
+    <div class="row">
+        <div class="main-category fs20 pt10 col-2 pl30 unselectable">
             <i
                 :class="`rango-view-list ${isEnabled == '0' ? '' : 'cursor-pointer'} align-vertical-top`"
                 @click="(isEnabled == '0') ? '' : toggleSidebar()">
@@ -14,7 +13,7 @@
                 <li v-for="(content, index) in headerContent" :key="index">
                     <a
                         v-if="(content['content_type'] == 'link')"
-                        href="content['page_link']"
+                        :href="content['page_link']"
                         :target="content['link_target'] ? '_blank' : '_self'"
                         v-text="content.title">
                     </a>

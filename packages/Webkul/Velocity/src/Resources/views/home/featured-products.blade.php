@@ -18,13 +18,6 @@
 
         <card-list-header
             heading="{{ __('shop::app.home.featured-products') }}"
-
-            view-all="{{
-                $featuredProductsCount > (isset($cardCount) ? $cardCount : 6)
-                ? 'http://localhost/PHP/laravel/Bagisto/bagisto-clone/public/categories/category1'
-                : false
-            }}"
-
             scrollable="{{
                 ($featuredProductsCount > (isset($cardCount) ? $cardCount : 6))
                 ? 'fearured-products-carousel'

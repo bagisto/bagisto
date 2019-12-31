@@ -35585,6 +35585,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['categories', 'url', 'addClass', 'mainSidebar'],
 
+    data: function data() {
+        var slicedCategories = this.categories;
+
+        if (slicedCategories && slicedCategories.length > 9) {
+            slicedCategories = this.categories.slice(0, 9);
+        }
+
+        return {
+            slicedCategories: slicedCategories
+        };
+    },
+
     mounted: function mounted() {
         if (window.location.href !== this.url + '/' && this.mainSidebar || this.categories && this.categories.length == 0) {
             this.toggleSidebar();
@@ -35633,7 +35645,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.categories && _vm.categories.length > 0
+  return _vm.slicedCategories && _vm.slicedCategories.length > 0
     ? _c(
         "nav",
         {
@@ -35643,11 +35655,15 @@ var render = function() {
         [
           _c(
             "ul",
-            { attrs: { type: "none" } },
-            _vm._l(_vm.categories, function(category, index) {
+            { staticClass: "pl15", attrs: { type: "none" } },
+            _vm._l(_vm.slicedCategories, function(category, index) {
               return _c(
                 "li",
-                { key: index, attrs: { id: "category-" + category.id } },
+                {
+                  key: index,
+                  staticClass: "category-content",
+                  attrs: { id: "category-" + category.id }
+                },
                 [
                   _c(
                     "a",
@@ -35655,10 +35671,7 @@ var render = function() {
                       staticClass: "category unset",
                       class: category.children.length > 0 ? "fw6" : "",
                       attrs: {
-                        href:
-                          _vm.url +
-                          "/categories/" +
-                          category["translations"][0].slug
+                        href: _vm.url + "/" + category["translations"][0].slug
                       },
                       on: {
                         mouseover: function($event) {
@@ -35670,18 +35683,18 @@ var render = function() {
                       }
                     },
                     [
-                      _c("span", [_vm._v(_vm._s(category["name"]))]),
+                      _c("span", { staticClass: "category-title" }, [
+                        _vm._v(_vm._s(category["name"]))
+                      ]),
                       _vm._v(" "),
-                      category.children.length > 0
-                        ? _c("i", {
-                            staticClass: "angle-right-icon text-down-3",
-                            on: {
-                              click: function($event) {
-                                return _vm.toggleSubCategory(index)
-                              }
-                            }
-                          })
-                        : _vm._e()
+                      _c("i", {
+                        staticClass: "angle-right-icon",
+                        on: {
+                          click: function($event) {
+                            return _vm.toggleSubCategory(index)
+                          }
+                        }
+                      })
                     ]
                   ),
                   _vm._v(" "),
@@ -36706,7 +36719,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['heading', 'headerContent', 'isEnabled']
@@ -36720,58 +36732,54 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { class: "row " + (_vm.isEnabled == "0" ? "disabled" : "") },
-    [
-      _c(
-        "div",
-        { staticClass: "main-category fs20 pt10 col-2 pl30 unselectable" },
-        [
-          _c("i", {
-            class:
-              "rango-view-list " +
-              (_vm.isEnabled == "0" ? "" : "cursor-pointer") +
-              " align-vertical-top",
-            on: {
-              click: function($event) {
-                _vm.isEnabled == "0" ? "" : _vm.toggleSidebar()
-              }
+  return _c("div", { staticClass: "row" }, [
+    _c(
+      "div",
+      { staticClass: "main-category fs20 pt10 col-2 pl30 unselectable" },
+      [
+        _c("i", {
+          class:
+            "rango-view-list " +
+            (_vm.isEnabled == "0" ? "" : "cursor-pointer") +
+            " align-vertical-top",
+          on: {
+            click: function($event) {
+              _vm.isEnabled == "0" ? "" : _vm.toggleSidebar()
             }
-          }),
-          _vm._v(" "),
-          _c("span", {
-            staticClass: "text-up",
-            domProps: { textContent: _vm._s(_vm.heading) }
-          })
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "content-list row no-margin col-10" }, [
-        _c(
-          "ul",
-          { staticClass: "no-margin", attrs: { type: "none" } },
-          _vm._l(_vm.headerContent, function(content, index) {
-            return _c("li", { key: index }, [
-              content["content_type"] == "link"
-                ? _c("a", {
-                    attrs: {
-                      href: "content['page_link']",
-                      target: content["link_target"] ? "_blank" : "_self"
-                    },
-                    domProps: { textContent: _vm._s(content.title) }
-                  })
-                : _c("a", {
-                    attrs: { href: "#" },
-                    domProps: { textContent: _vm._s(content.title) }
-                  })
-            ])
-          }),
-          0
-        )
-      ])
-    ]
-  )
+          }
+        }),
+        _vm._v(" "),
+        _c("span", {
+          staticClass: "text-up",
+          domProps: { textContent: _vm._s(_vm.heading) }
+        })
+      ]
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "content-list row no-margin col-10" }, [
+      _c(
+        "ul",
+        { staticClass: "no-margin", attrs: { type: "none" } },
+        _vm._l(_vm.headerContent, function(content, index) {
+          return _c("li", { key: index }, [
+            content["content_type"] == "link"
+              ? _c("a", {
+                  attrs: {
+                    href: content["page_link"],
+                    target: content["link_target"] ? "_blank" : "_self"
+                  },
+                  domProps: { textContent: _vm._s(content.title) }
+                })
+              : _c("a", {
+                  attrs: { href: "#" },
+                  domProps: { textContent: _vm._s(content.title) }
+                })
+          ])
+        }),
+        0
+      )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

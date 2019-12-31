@@ -1,12 +1,3 @@
-@php
-    $categories = [];
-
-    foreach (app('Webkul\Category\Repositories\CategoryRepository')->getVisibleCategoryTree(core()->getCurrentChannel()->root_category_id) as $category){
-        if ($category->slug)
-            array_push($categories, $category);
-    }
-@endphp
-
 <div class="footer">
     <div class="footer-content">
 

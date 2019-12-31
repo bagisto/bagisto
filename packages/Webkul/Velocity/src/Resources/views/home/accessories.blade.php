@@ -9,11 +9,6 @@
 <div class="container-fluid accessories">
     <card-list-header
         heading="Accessories"
-        view-all="{{
-            (isset($cardCount) && (sizeof($products) > $cardCount))
-            ? 'http://localhost/PHP/laravel/Bagisto/bagisto-clone/public/categories/category1'
-            : false
-        }}"
         scrollable="accessories-carousel"
     ></card-list-header>
 

@@ -22,8 +22,7 @@ class VelocityMetaDataSeeder extends Seeder
 
                 'slider' => 1,
 
-                'subscription_bar_content' => '<div class="social-icons wk-icon xyz"><i class="within-circle rango-facebook" title="facebook"></i><i class="within-circle rango-twitter" title="twitter"></i><i class="within-circle rango-linked-in" title="linkedin"></i>
-                <i class="within-circle rango-pintrest" title="Pinterest"></i><i class="within-circle rango-youtube" title="Youtube"></i><i class="within-circle rango-instagram" title="instagram"></i></div>'
+                'subscription_bar_content' => '<div class="social-icons wk-icon"><i class="fs24 within-circle rango-facebook" title="facebook"></i> <i class="fs24 within-circle rango-twitter" title="twitter"></i> <i class="fs24 within-circle rango-linked-in" title="linkedin"></i> <i class="fs24 within-circle rango-pintrest" title="Pinterest"></i> <i class="fs24 within-circle rango-youtube" title="Youtube"></i> <i class="fs24 within-circle rango-instagram" title="instagram"></i></div>'
             ]);
     }
 }

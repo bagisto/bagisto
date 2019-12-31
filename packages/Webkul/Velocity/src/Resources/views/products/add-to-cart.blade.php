@@ -9,7 +9,11 @@
 
     <input type="hidden" name="product_id" value="{{ $product->product_id }}">
     <input type="hidden" name="quantity" value="1">
-    <button type="submit" class="btn btn-add-to-cart" {{ ! $product->isSaleable() ? 'disabled' : '' }}>
+    <button
+        type="submit"
+        class="btn btn-add-to-cart"
+        {{ ! $product->isSaleable() ? 'disabled' : '' }}>
+
         @if (! (isset($showCartIcon) && !$showCartIcon))
             <span class="rango-cart-1 fs20"></span>
         @endif

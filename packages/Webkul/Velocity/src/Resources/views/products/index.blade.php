@@ -1,3 +1,5 @@
+@inject ('productRepository', 'Webkul\Product\Repositories\ProductRepository')
+
 @extends('shop::layouts.master')
 
 @section('page_title')
@@ -10,12 +12,11 @@
 @stop
 
 @section('content-wrapper')
-    @inject ('productRepository', 'Webkul\Product\Repositories\ProductRepository')
 
-    <div class="main">
+    <section class="cart-details row offset-1">
         {!! view_render_event('bagisto.shop.productOrCategory.index.before', ['category' => $category]) !!}
 
-        <div class="category-container">
+        <div class="category-container col-12">
 
             @php
                 $isDisplayMode = in_array(
@@ -29,7 +30,7 @@
                 $products = $productRepository->getAll($category->id);
             @endphp
 
-            <h1 class="fw6">{{ $category->name }}</h1>
+            <h1 class="fw6 mb10">{{ $category->name }}</h1>
 
             @if ($isDisplayMode && $products->count())
                 @if ($category->description)
@@ -108,7 +109,7 @@
         </div>
 
         {!! view_render_event('bagisto.shop.productOrCategory.index.after', ['category' => $category]) !!}
-    </div>
+    </section>
 @stop
 
 @push('scripts')

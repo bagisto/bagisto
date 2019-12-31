@@ -1,8 +1,6 @@
 @php
     $newProducts = app('Webkul\Product\Repositories\ProductRepository')->getNewProducts(6)->items();
 
-    // $newProducts = array_merge(array_merge($newProducts, $newProducts), $newProducts);
-
     $showRecentlyViewed = false;
 @endphp
 
@@ -11,11 +9,6 @@
 
         <card-list-header
             heading="{{ __('shop::app.home.new-products') }}"
-            view-all="{{
-                (sizeof($newProducts) > (isset($cardCount) ? $cardCount : 6))
-                ? 'http://localhost/PHP/laravel/Bagisto/bagisto-clone/public/categories/category1'
-                : false
-            }}"
             scrollable="new-products-carousel"
         ></card-list-header>
 

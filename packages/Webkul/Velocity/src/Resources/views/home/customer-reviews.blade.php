@@ -53,12 +53,6 @@
 
     <card-list-header
         heading="Customer Reviews"
-        view-all="{{
-            (isset($cardCount) && (sizeof($reviews) > $cardCount))
-            ? 'http://localhost/PHP/laravel/Bagisto/bagisto-clone/public/categories/category1'
-            : false
-        }}"
-        {{-- scrollable="true" --}}
     ></card-list-header>
 
     <div class="row">

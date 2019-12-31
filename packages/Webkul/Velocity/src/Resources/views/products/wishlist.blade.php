@@ -8,23 +8,10 @@
     @endphp
 
     <a
-        href="
-            @if ($isWished)
-                {{ route('customer.wishlist.remove', $product->product_id) }}
-            @else
-                {{ route('customer.wishlist.add', $product->product_id) }}
-            @endif
-        "
-        class="unset wishlist-icon col-4 offset-4 text-right">
+        class="unset wishlist-icon col-4 offset-4 text-right"
+        href="{{ route('customer.wishlist.' . ($isWished ? 'remove' : 'add'), $product->product_id) }}">
 
-        <i
-            class="fs24
-            @if ($isWished)
-                rango-heart-fill
-            @else
-                rango-heart
-            @endif
-        "></i>
+        <i class="fs24 {{ $isWished ? 'rango-heart-fill' : 'rango-heart'}}"></i>
     </a>
 
     {!! view_render_event('bagisto.shop.products.wishlist.after') !!}

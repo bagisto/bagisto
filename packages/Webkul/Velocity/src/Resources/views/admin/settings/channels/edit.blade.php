@@ -7,11 +7,22 @@
 @section('content')
     <div class="content">
 
-        <form method="POST" action="{{ route('admin.channels.update', $channel->id) }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
+        <form
+            method="POST"
+            action="{{ route('admin.channels.update', $channel->id) }}"
+            @submit.prevent="onSubmit"
+            enctype="multipart/form-data">
+
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                        <i
+                            class="icon angle-left-icon back-link"
+                            onclick="history.length > 1
+                                ? history.go(-1)
+                                : window.location = '{{ url('/admin/dashboard') }}';
+                            ">
+                        </i>
 
                         {{ __('admin::app.settings.channels.edit-title') }}
                     </h1>
@@ -31,13 +42,35 @@
 
                     {!! view_render_event('bagisto.admin.settings.channel.edit.before') !!}
 
-                    <accordian :title="'{{ __('admin::app.settings.channels.general') }}'" :active="true">
+                    <accordian
+                        :title="'{{ __('admin::app.settings.channels.general') }}'"
+                        :active="true">
+
                         <div slot="body">
 
-                            <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
-                                <label for="code" class="required">{{ __('admin::app.settings.channels.code') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="code" name="code" data-vv-as="&quot;{{ __('admin::app.settings.channels.code') }}&quot;" value="{{ $channel->code }}" disabled="disabled"/>
-                                <input type="hidden" name="code" value="{{ $channel->code }}"/>
+                            <div
+                                class="control-group"
+                                :class="[errors.has('code') ? 'has-error' : '']">
+
+                                <label for="code" class="required">
+                                    {{ __('admin::app.settings.channels.code') }}
+                                </label>
+
+                                <input
+                                    id="code"
+                                    name="code"
+                                    type="text"
+                                    class="control"
+                                    disabled="disabled"
+                                    v-validate="'required'"
+                                    value="{{ $channel->code }}"
+                                    data-vv-as="&quot;{{ __('admin::app.settings.channels.code') }}&quot;" />
+
+                                <input
+                                    name="code"
+                                    type="hidden"
+                                    value="{{ $channel->code }}" />
+
                                 <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
                             </div>
 

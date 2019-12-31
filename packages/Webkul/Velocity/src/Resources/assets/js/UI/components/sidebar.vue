@@ -3,25 +3,25 @@
     <nav
         :class="`${addClass ? addClass : ''}`"
         id="sidebar"
-        v-if="categories && categories.length > 0">
+        v-if="slicedCategories && slicedCategories.length > 0">
 
-        <ul type="none">
+        <ul type="none" class="pl15">
             <li
                 :key="index"
+                class="category-content"
                 :id="`category-${category.id}`"
-                v-for="(category, index) in categories">
+                v-for="(category, index) in slicedCategories">
 
                 <a
                     class="category unset"
-                    :class="(category.children.length > 0) ? 'fw6' : ''"
-                    :href="`${url}/categories/${category['translations'][0].slug}`"
                     @mouseover="hover(index, 'mouseover')"
-                    @mouseleave="hover(index, 'mouseleave')">
+                    @mouseleave="hover(index, 'mouseleave')"
+                    :class="(category.children.length > 0) ? 'fw6' : ''"
+                    :href="`${url}/${category['translations'][0].slug}`">
 
-                    <span>{{ category['name'] }}</span>
+                    <span class="category-title">{{ category['name'] }}</span>
                     <i
-                        class="angle-right-icon text-down-3"
-                        v-if="category.children.length > 0"
+                        class="angle-right-icon"
                         @click="toggleSubCategory(index)">
                     </i>
                 </a>
@@ -43,6 +43,18 @@
 <script type="text/javascript">
     export default {
         props: ['categories', 'url', 'addClass', 'mainSidebar'],
+
+        data: function () {
+            let slicedCategories = this.categories;
+
+            if (slicedCategories && slicedCategories.length > 9) {
+                slicedCategories = this.categories.slice(0, 9);
+            }
+
+            return {
+                slicedCategories
+            }
+        },
 
         mounted: function () {
             if (

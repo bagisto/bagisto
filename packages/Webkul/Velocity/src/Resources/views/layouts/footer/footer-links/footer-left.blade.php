@@ -14,7 +14,5 @@
         </a>
     </div>
 
-    <p class="clr-dark fs14">
-        {{ $velocityMetaData->footer_left_content }}
-    </p>
+    {!! $velocityMetaData->footer_left_content !!}
 </div>

@@ -44,8 +44,8 @@
 
                 <textarea
                     class="control"
-                    id="subscription-content"
-                    name="subscription-content">
+                    id="subscription_bar_content"
+                    name="subscription_bar_content">
                     {{ $metaData->subscription_bar_content}}
                 </textarea>
             </div>
@@ -107,7 +107,7 @@
                 width: "100%",
                 image_advtab: true,
                 valid_elements : '*[*]',
-                selector: 'textarea#home_page_content,textarea#footer_left_content,textarea#subscription-content,textarea#footer_middle_content',
+                selector: 'textarea#home_page_content,textarea#footer_left_content,textarea#subscription_bar_content,textarea#footer_middle_content',
                 plugins: 'image imagetools media wordcount save fullscreen code',
                 toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | code',
             });

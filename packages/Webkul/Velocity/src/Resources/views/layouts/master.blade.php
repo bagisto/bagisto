@@ -69,20 +69,22 @@
 
                     <div class="categories-sidebar-container col-12 no-padding">
 
+                        @php
+                            $velocityContent = app('Webkul\Velocity\Repositories\ContentRepository')->getAllContents();
+                        @endphp
+
                         <content-header
                             heading= "{{ __('velocity::app.menu-navbar.text-category') }}"
-                            :header-content="{{ json_encode(
-                                app('Webkul\Velocity\Repositories\ContentRepository')->getAllContents()
-                            ) }}"
+                            :header-content="{{ json_encode($velocityContent) }}"
                             is-enabled="{{ sizeof($categories) }}"
                         ></content-header>
 
-                        <div class="container">
-                            <div class="row col-12 pr0">
+                        <div class="container no-padding">
+                            <div class="row pr0">
                                 <sidebar-component
                                     main-sidebar=true
                                     url="{{ url()->to('/') }}"
-                                    add-class="col-2 category-list-container pt10"
+                                    add-class="col-2 category-list-container pt10 no-padding mt15"
                                     :categories="{{ json_encode($categories) }}"
                                 ></sidebar-component>
 
