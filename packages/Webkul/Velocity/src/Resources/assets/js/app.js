@@ -90,7 +90,7 @@ $(document).ready(function () {
 
         created: function () {
             window.addEventListener('click', () => {
-                let modals = document.getElementsByClassName('account-modal');
+                let modals = document.getElementsByClassName('sensitive-modal');
 
                 Array.from(modals).forEach(modal => {
                     modal.classList.add('hide');

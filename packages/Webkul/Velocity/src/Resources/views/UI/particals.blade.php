@@ -97,7 +97,10 @@
 
             methods: {
                 toggleMiniCart: function () {
-                    $('#cart-modal-content').toggle();
+                    let modal = $('#cart-modal-content')[0];
+                    modal.classList.toggle('hide');
+
+                    event.stopPropagation();
                 }
             }
         })

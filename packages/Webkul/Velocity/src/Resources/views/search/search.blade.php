@@ -5,7 +5,7 @@
 @endsection
 
 @section('content-wrapper')
-    <section class="cart-details row offset-1">
+    <section class="search-container cart-details row offset-1">
         @if (! $results)
             <h1 class="fw6 row col-12">{{  __('shop::app.search.no-results') }}</h1>
         @else

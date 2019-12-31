@@ -29,7 +29,7 @@
                 </div>
             </button>
 
-            <div class="account-modal hide mt5" role="document">
+            <div class="account-modal sensitive-modal hide mt5">
                 <!--Content-->
                     @guest('customer')
                         <div class="modal-content">

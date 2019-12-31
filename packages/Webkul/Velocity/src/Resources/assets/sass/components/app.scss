@@ -244,6 +244,12 @@
             margin-bottom: 5px;
         }
     }
+
+    .product-price {
+        .sticker {
+            display: block;
+        }
+    }
 }
 
 .quantity {
@@ -1027,6 +1033,7 @@
         left: 0;
         border: none;
         color: white;
+        display: none;
         font-size: 14px;
         font-weight: 600;
         padding: 6px 14px;
@@ -1045,5 +1052,15 @@
 
     .special-price {
         text-decoration: line-through;
+    }
+}
+
+#app {
+    min-height: 65vh;
+}
+
+.search-container {
+    :first-child {
+        margin-left: 0px;
     }
 }

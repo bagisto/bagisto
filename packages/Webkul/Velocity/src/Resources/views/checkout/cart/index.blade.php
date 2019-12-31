@@ -19,11 +19,11 @@
                         {{ __('velocity::app.checkout.items') }}
                     </span>
 
-                    <span class="col-1 fw6 fs16 no-padding">
+                    <span class="col-2 fw6 fs16 no-padding text-center">
                         {{ __('velocity::app.checkout.qty') }}
                     </span>
 
-                    <span class="col-1 fw6 fs16 pr0 ml5">
+                    <span class="col-2 fw6 fs16 text-right pr0">
                         {{ __('velocity::app.checkout.subtotal') }}
                     </span>
                 </div>
@@ -84,7 +84,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="product-quantity col-2 no-padding">
+                                    <div class="product-quantity col-3 no-padding">
                                         <quantity-changer
                                             :control-name="'qty[{{$item->id}}]'"
                                             quantity="{{ $item->quantity }}">

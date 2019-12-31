@@ -14,8 +14,7 @@
         <div class="dropdown">
             <cart-btn item-count="{{ $cart->items->count() }}"></cart-btn>
 
-            <div class="modal-content" id="cart-modal-content">
-
+            <div class="modal-content sensitive-modal cart-modal-content hide" id="cart-modal-content">
                 <!--Body-->
                 <div class="pl20 pt10 pr15 fs14">
                     @foreach ($items as $item)

@@ -78,7 +78,7 @@
                         ></content-header>
 
                         <div class="container">
-                            <div class="row col-12">
+                            <div class="row col-12 pr0">
                                 <sidebar-component
                                     main-sidebar=true
                                     url="{{ url()->to('/') }}"

@@ -1015,6 +1015,10 @@
   margin-bottom: 5px;
 }
 
+#product-card-new .product-price .sticker {
+  display: block;
+}
+
 .quantity {
   width: 100%;
   padding-bottom: 10px;
@@ -1193,7 +1197,6 @@
   z-index: 100;
   width: 350px;
   left: -230px;
-  display: none;
   position: absolute;
 }
 
@@ -1730,6 +1733,7 @@
   left: 0;
   border: none;
   color: white;
+  display: none;
   font-size: 14px;
   font-weight: 600;
   padding: 6px 14px;
@@ -1748,6 +1752,14 @@
 
 .product-price .special-price {
   text-decoration: line-through;
+}
+
+#app {
+  min-height: 65vh;
+}
+
+.search-container :first-child {
+  margin-left: 0px;
 }
 
 /* @author Shubham Mehrotra */
@@ -3056,10 +3068,6 @@ body::after {
   padding: 10px 0 !important;
 }
 
-.small-card-container .product-price .sticker {
-  display: none;
-}
-
 .small-card-container:hover {
   -webkit-box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.14);
           box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.14);
@@ -3362,10 +3370,6 @@ button[disabled] {
 
 .product-detail .right .add-to-cart-btn button span {
   font-size: 16px;
-}
-
-.product-detail .right .product-price .sticker {
-  display: none;
 }
 
 .product-detail .thumb-list {
