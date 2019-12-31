@@ -13,16 +13,29 @@
         </div>
 
         <form
-            action=""
             method="POST"
-            @submit.prevent="onSubmit">
+            @submit.prevent="onSubmit"
+            action="{{ route('velocity.admin.store.meta-data', ['id' => $metaData->id]) }}">
 
+            @csrf
 
-            @php
-                $typeView = 'admin::catalog.products.field-types.boolean';
-            @endphp
+            <div class="control-group">
+                <label for="footer_content">
+                    {{ __('velocity::app.admin.meta-data.activate-slider') }}
+                </label>
 
-            {{-- @include ($typeView) --}}
+                <label class="switch">
+                    <input
+                        type="checkbox"
+                        class="control"
+                        id="slides"
+                        name="slides"
+                        data-vv-as="&quot;slides&quot;"
+                        {{ $metaData->slider ? 'checked' : ''}} />
+
+                    <span class="slider round"></span>
+                </label>
+            </div>
 
             <div class="control-group">
                 <label for="footer_content">

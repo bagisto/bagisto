@@ -1,10 +1,9 @@
 @php
+    $count = 4;
     $config = core()->getConfigData('velocity.configuration.general.featured_product');
 
     if ($config > 4)
         $count = $config;
-    else
-        $count = 4;
 
     $featuredProducts = app('Webkul\Velocity\Repositories\Product\ProductRepository')->getFeaturedProducts($count);
 

@@ -4,6 +4,7 @@ namespace Webkul\Velocity\Http\Controllers\Admin;
 
 use DB;
 use Webkul\Velocity\Repositories\MetadataRepository;
+use Webkul\Velocity\Repositories\VelocityMetadataRepository;
 
 /**
  * Category Controller
@@ -15,11 +16,11 @@ use Webkul\Velocity\Repositories\MetadataRepository;
 class ConfigurationController extends Controller
 {
     /**
-     * MetadataRepository object
+     * VelocityMetadataRepository object
      *
      * @var Object
      */
-    protected $metaDataRepository;
+    protected $velocityMetaDataRepository;
 
     /**
      * Create a new controller instance.
@@ -27,19 +28,42 @@ class ConfigurationController extends Controller
      * @param  \Webkul\Velocity\Repositories\MetadataRepository $metaDataRepository
      */
 
-    public function __construct ()
-    {
+    public function __construct (
+        VelocityMetadataRepository $velocityMetadataRepository
+    ) {
         $this->_config = request('_config');
+
+        $this->velocityMetaDataRepository = $velocityMetadataRepository;
     }
 
-    public function storeMetaData()
+    public function renderMetaData()
     {
-        $metaData = DB::table('velocity_meta_data')->get();
+        $velocityHelper = app('Webkul\Velocity\Helpers\Helper');
+        $velocityMetaData = $velocityHelper->getVelocityMetaData();
 
-        if (! ($metaData && ($metaData = $metaData[0]))) {
-            $metaData = null;
+        return view($this->_config['view'], [
+            'metaData' => $velocityMetaData
+        ]);
+    }
+
+    public function storeMetaData($id)
+    {
+        if (request()->get('slides') == "on") {
+            $params = request()->all() + [
+                'slider' => 1
+            ];
+        } else {
+            $params = request()->all() + [
+                'slider' => 0
+            ];
         }
 
-        return view($this->_config['view'], compact('metaData'));
+        unset($params['slides']);
+
+        $product = $this->velocityMetaDataRepository->update($params, $id);
+
+        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Velocity Theme']));
+
+        return redirect()->route($this->_config['redirect']);
     }
 }

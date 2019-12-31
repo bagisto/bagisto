@@ -187,8 +187,14 @@ header #search-form > *:focus {
     font-size: 14px;
 }
 
-.container-fluid > .row:first-child() {
-    margin-bottom: 20px;
+.container {
+    > .container-fluid {
+        margin-bottom: 60px;
+
+        > .row {
+            @extend .pr0;
+        }
+    }
 }
 
 /* advertisement-one */

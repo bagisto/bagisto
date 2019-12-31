@@ -21,7 +21,6 @@ return [
                 'status' => 'Status',
                 'active' => 'Active',
                 'inactive' => 'Inactive',
-                'featured-product' => 'Featured Product'
             ],
             'category' => [
                 'icon-status' => 'Category Icon Status',
@@ -94,6 +93,7 @@ return [
             'home-page-content' => 'Home Page Content',
             'footer-left-content' => 'Footer Left Content',
             'subscription-content' => 'Subscription bar Content',
+            'activate-slider' => 'Activate Slider',
             'footer-left-raw-content' => 'We love to craft softwares and solve the real world problems with the binaries. We are highly committed to our goals. We invest our resources to create world class easy to use softwares and applications for the enterprise business with the top notch, on the edge technology expertise.',
             'footer-middle-content' => 'Footer Middle Content',
             'update-meta-data' => 'Update Meta Data',

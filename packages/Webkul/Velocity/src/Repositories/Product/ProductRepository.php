@@ -2,46 +2,11 @@
 
 namespace Webkul\Velocity\Repositories\Product;
 
-use DB;
-use Illuminate\Container\Container as App;
-use Illuminate\Support\Facades\Event;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Product\Repositories\ProductFlatRepository;
-use Webkul\Product\Models\ProductAttributeValue;
 
-/**
- * Product Repository
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ProductRepository extends Repository
 {
-    /**
-     * AttributeRepository object
-     *
-     * @var array
-     */
-    protected $attributeRepository;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @param  Webkul\Attribute\Repositories\AttributeRepository $attributeRepository
-     * @return void
-     */
-    public function __construct(
-        AttributeRepository $attributeRepository,
-        App $app
-    )
-    {
-        $this->attributeRepository = $attributeRepository;
-
-        parent::__construct($app);
-    }
-
     /**
      * Specify Model class name
      *

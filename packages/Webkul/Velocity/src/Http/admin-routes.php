@@ -63,9 +63,13 @@ Route::group(['middleware' => ['web']], function () {
                     'redirect' => 'velocity.admin.category.index'
                 ])->name('velocity.admin.category.mass-delete');
 
-                Route::get('/meta-data', 'ConfigurationController@storeMetaData')->defaults('_config', [
+                Route::get('/meta-data', 'ConfigurationController@renderMetaData')->defaults('_config', [
                     'view' => 'velocity::admin.meta-info.meta-data'
                 ])->name('velocity.admin.meta-data');
+
+                Route::post('/meta-data/{id}', 'ConfigurationController@storeMetaData')->defaults('_config', [
+                    'redirect' => 'velocity.admin.meta-data'
+                ])->name('velocity.admin.store.meta-data');
             });
         });
     });

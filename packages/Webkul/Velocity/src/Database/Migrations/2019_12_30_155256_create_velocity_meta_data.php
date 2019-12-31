@@ -19,7 +19,7 @@ class CreateVelocityMetaData extends Migration
             $table->text('home_page_content');
             $table->text('footer_left_content');
             $table->text('footer_middle_content');
-            $table->boolean('slider');
+            $table->boolean('slider')->default(0);
 
             $table->timestamps();
         });
