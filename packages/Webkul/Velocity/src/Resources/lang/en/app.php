@@ -21,7 +21,6 @@ return [
                 'status' => 'Status',
                 'active' => 'Active',
                 'inactive' => 'Inactive',
-                'featured-product' => 'Featured Product'
             ],
             'category' => [
                 'icon-status' => 'Category Icon Status',
