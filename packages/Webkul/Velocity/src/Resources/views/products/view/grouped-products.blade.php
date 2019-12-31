@@ -4,7 +4,7 @@
     <div class="grouped-product-container">
         @if ($product->grouped_products->count())
             <div class="grouped-product-list">
-                <ul>
+                <ul type="none">
                     <li>
                         <span>{{ __('shop::app.products.name') }}</span>
                         <span>{{ __('shop::app.products.qty') }}</span>

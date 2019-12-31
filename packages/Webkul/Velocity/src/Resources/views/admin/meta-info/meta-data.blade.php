@@ -13,9 +13,9 @@
         </div>
 
         <form
-            action="{{ route('velocity.admin.store.meta-data', ['id' => $metaData->id]) }}"
             method="POST"
-            @submit.prevent="onSubmit">
+            @submit.prevent="onSubmit"
+            action="{{ route('velocity.admin.store.meta-data', ['id' => $metaData->id]) }}">
 
             @csrf
 
@@ -28,13 +28,26 @@
                     <input
                         type="checkbox"
                         class="control"
-                        id="slider"
-                        name="slider"
+                        id="slides"
+                        name="slides"
                         data-vv-as="&quot;slides&quot;"
-                        {{ $metaData->slider ? 'checked' : ''}}
-                        value="{{ $metaData->slider }}" />
+                        {{ $metaData->slider ? 'checked' : ''}} />
+
                     <span class="slider round"></span>
                 </label>
+            </div>
+
+            <div class="control-group">
+                <label for="footer_content">
+                    {{ __('velocity::app.admin.meta-data.subscription-content') }}
+                </label>
+
+                <textarea
+                    class="control"
+                    id="subscription-content"
+                    name="subscription-content">
+                    {{ $metaData->subscription_bar_content}}
+                </textarea>
             </div>
 
             <div class="control-group">
@@ -94,7 +107,7 @@
                 width: "100%",
                 image_advtab: true,
                 valid_elements : '*[*]',
-                selector: 'textarea#home_page_content,textarea#footer_left_content,textarea#footer_middle_content',
+                selector: 'textarea#home_page_content,textarea#footer_left_content,textarea#subscription-content,textarea#footer_middle_content',
                 plugins: 'image imagetools media wordcount save fullscreen code',
                 toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | code',
             });

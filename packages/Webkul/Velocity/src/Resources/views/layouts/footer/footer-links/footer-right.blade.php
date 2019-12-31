@@ -1,3 +1,25 @@
+@php
+    $activeShippings = [];
+    $activePayments = [];
+
+    $shippings = core()->getConfigData('sales.carriers');
+    $payments = core()->getConfigData('sales.paymentmethods');
+
+    foreach($shippings as $ship)
+    {
+        if ($ship['active'] == "true") {
+            array_push($activeShippings, $ship['title']);
+        }
+    }
+
+    foreach($payments as $payment)
+    {
+        if ($payment['active'] == "true") {
+            array_push($activePayments, $payment['title']);
+        }
+    }
+@endphp
+
 <div class="col-4 footer-rt-content">
 
     <div class="row">
@@ -6,12 +28,11 @@
         </div>
 
         <div class="payment-methods">
-            <div class="cash bg-image"></div>
-            <div class="cheque bg-image"></div>
-            <div class="visa bg-image"></div>
-            <div class="master-card bg-image"></div>
-            <div class="paypal bg-image"></div>
-            <div class="discover bg-image"></div>
+            @foreach($activePayments as $paymentMethod)
+                <div class="method-sticker">
+                    {{ $paymentMethod}}
+                </div>
+            @endforeach
         </div>
     </div>
 
@@ -21,7 +42,11 @@
         </div>
 
         <div class="shipping-methods">
-            <div class="master-card bg-image"></div>
+            @foreach($activeShippings as $shippingMethod)
+                <div class="method-sticker">
+                    {{ $shippingMethod}}
+                </div>
+            @endforeach
         </div>
     </div>
 

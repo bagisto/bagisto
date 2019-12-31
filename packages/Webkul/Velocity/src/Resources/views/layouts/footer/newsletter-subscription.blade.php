@@ -1,7 +1,7 @@
 @if (core()->getConfigData('customer.settings.newsletter.subscription'))
     <div class="newsletter-subscription">
         <div class="newsletter-wrapper">
-                {!! DbView::make(core()->getCurrentChannel())->field('subscription_bar_content')->render() !!}
+                {!! $velocityMetaData->subscription_bar_content !!}
 
                 <div class="subscribe-newsletter">
 

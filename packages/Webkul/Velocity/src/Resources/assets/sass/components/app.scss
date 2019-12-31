@@ -783,11 +783,18 @@
     right: 15px !important;
     top: 50px !important;
     z-index: 100 !important;
-    font-size: 14px !important;
+    font-size: 16px !important;
     position: fixed !important;
     max-width: 400px !important;
-    min-height: 40px !important;
+    min-height: 45px !important;
     max-height: 100px !important;
+
+    &.alert-dismissible {
+        .close {
+            font-size: 23px;
+            padding: .3rem 1.25rem;
+        }
+    }
 }
 
 #home-right-bar-container {
@@ -1015,8 +1022,11 @@
 }
 
 .product-price {
+    .price-label {
+        margin-right: 6px;
+    }
+
     .sticker {
-        display: none;
         top: 0;
         left: 0;
         border: none;
@@ -1040,4 +1050,10 @@
     .special-price {
         text-decoration: line-through;
     }
+}
+
+.method-sticker {
+    background-color: grey;
+    display: block;
+    color: white;
 }
