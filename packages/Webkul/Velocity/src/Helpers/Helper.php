@@ -53,20 +53,20 @@ class Helper extends Review
      *
      * @var object
      */
-    protected $velocityMetadata;
+    protected $velocityMetadataRepository;
 
     public function __construct(
-        VelocityMetadataRepository $velocityMetadata,
+        VelocityMetadataRepository $velocityMetadataRepository,
         OrderBrandsRepository $orderBrandsRepository,
         ProductRepository $productRepository,
         ProductModel $productModel,
         AttributeOptionRepository $attributeOption
     ) {
-        $this->velocityMetadata =  $velocityMetadata;
         $this->productModel =  $productModel;
         $this->attributeOption =  $attributeOption;
         $this->productRepository = $productRepository;
         $this->orderBrandsRepository = $orderBrandsRepository;
+        $this->velocityMetadataRepository =  $velocityMetadataRepository;
     }
 
     public function topBrand($order)
@@ -172,13 +172,16 @@ class Helper extends Review
 
     public function getVelocityMetaData()
     {
-        $metaData = $this->velocityMetadata->get();
+        try {
+            $metaData = $this->velocityMetadataRepository->get();
 
-        if (! ($metaData && ($metaData = $metaData[0]))) {
-            $metaData = null;
+            if (! ($metaData && isset($metaData[0]) && $metaData = $metaData[0])) {
+                $metaData = null;
+            }
+
+            return $metaData;
+        } catch (\Exception $exception) {
         }
-
-        return $metaData;
     }
 }
 

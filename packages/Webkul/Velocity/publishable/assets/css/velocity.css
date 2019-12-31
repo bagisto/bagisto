@@ -1721,6 +1721,7 @@
 }
 
 .product-price .sticker {
+  display: none;
   top: 0;
   left: 0;
   border: none;
