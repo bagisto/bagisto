@@ -2710,7 +2710,7 @@ body::after {
 }
 
 .ml15, .advertisement-two-container .ad-2-rt {
-  margin-left: 15px;
+  margin-left: 15px !important;
 }
 
 .body-blur {
