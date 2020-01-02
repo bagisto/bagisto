@@ -11,28 +11,27 @@
     <meta name="keywords" content="{{ $category->meta_keywords }}" />
 @stop
 
+@php
+    $isDisplayMode = in_array(
+        $category->display_mode, [
+            null,
+            'products_only',
+            'products_and_description'
+        ]
+    );
+
+    $products = $productRepository->getAll($category->id);
+@endphp
+
 @section('content-wrapper')
-    <section class="cart-details row offset-1">
+    <section class="row col-12">
         {!! view_render_event('bagisto.shop.productOrCategory.index.before', ['category' => $category]) !!}
 
-        <div class="category-container col-12">
+        @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description']))
+            @include ('shop::products.list.layered-navigation')
+        @endif
 
-            @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description']))
-                @include ('shop::products.list.layered-navigation')
-            @endif
-
-            @php
-                $isDisplayMode = in_array(
-                    $category->display_mode, [
-                        null,
-                        'products_only',
-                        'products_and_description'
-                    ]
-                );
-
-                $products = $productRepository->getAll($category->id);
-            @endphp
-
+        <div class="category-container col-10">
             <div class="row">
                 <div class="col-6">
                     <h1 class="fw6 mb10">{{ $category->name }}</h1>

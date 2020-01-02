@@ -18,10 +18,11 @@ window.Vue = Vue;
 window.Carousel = VueCarousel;
 
 // UI components
+Vue.component("vue-slider", require("vue-slider-component"));
 Vue.component('modal-component', require('./UI/components/modal'));
-Vue.component('carousel-component', require('./UI/components/carousel'));
 Vue.component('quantity-btn', require('./UI/components/quantity-btn'));
 Vue.component('sidebar-component', require('./UI/components/sidebar'));
+Vue.component('carousel-component', require('./UI/components/carousel'));
 Vue.component('child-sidebar', require('./UI/components/child-sidebar'));
 Vue.component('card-list-content', require('./UI/components/card-list'));
 Vue.component('card-list-header', require('./UI/components/card-header'));

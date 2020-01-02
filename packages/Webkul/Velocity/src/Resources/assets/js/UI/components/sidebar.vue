@@ -5,7 +5,7 @@
         id="sidebar"
         v-if="slicedCategories && slicedCategories.length > 0">
 
-        <ul type="none" class="pl15">
+        <ul type="none">
             <li
                 :key="index"
                 class="category-content"
