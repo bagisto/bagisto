@@ -80,7 +80,7 @@
                         ></content-header>
 
                         <div class="container no-padding">
-                            <div class="row pr0">
+                            <div class="row col-12 remove-padding-margin">
                                 <sidebar-component
                                     main-sidebar=true
                                     url="{{ url()->to('/') }}"

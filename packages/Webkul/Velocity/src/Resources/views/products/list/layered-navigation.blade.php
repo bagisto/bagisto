@@ -30,7 +30,7 @@
     }
 @endphp
 
-<div class="layered-filter-wrapper">
+<div class="layered-filter-wrapper col-2 pt20">
 
     {!! view_render_event('bagisto.shop.products.list.layered-nagigation.before') !!}
 
@@ -43,16 +43,19 @@
 @push('scripts')
     <script type="text/x-template" id="layered-navigation-template">
         <div>
-
-            <div class="filter-title">
+            <h3 class="fw6 mb20">
                 {{ __('shop::app.products.layered-nav-title') }}
-            </div>
+            </h3>
 
             <div class="filter-content">
-
                 <div class="filter-attributes">
-
-                    <filter-attribute-item v-for='(attribute, index) in attributes' :attribute="attribute" :key="index" :index="index" @onFilterAdded="addFilters(attribute.code, $event)" :appliedFilterValues="appliedFilters[attribute.code]">
+                    <filter-attribute-item
+                        v-for='(attribute, index) in attributes'
+                        :attribute="attribute"
+                        :key="index"
+                        :index="index"
+                        @onFilterAdded="addFilters(attribute.code, $event)"
+                        :appliedFilterValues="appliedFilters[attribute.code]">
                     </filter-attribute-item>
 
                 </div>
@@ -61,10 +64,10 @@
     </script>
 
     <script type="text/x-template" id="filter-attribute-item-template">
-        <div class="filter-attributes-item" :class="[active ? 'active' : '']">
+        <div :class="`filter-attributes-item ${active ? 'active' : ''}`">
 
             <div class="filter-attributes-title" @click="active = !active">
-                @{{ attribute.name ? attribute.name : attribute.admin_name }}
+                <h4 class="fw6">@{{ attribute.name ? attribute.name : attribute.admin_name }}</h4>
 
                 <div class="pull-right">
                     <span class="remove-filter-link" v-if="appliedFilters.length" @click.stop="clearFilters()">
@@ -92,13 +95,13 @@
                 <div class="price-range-wrapper" v-if="attribute.type == 'price'">
                     <vue-slider
                         ref="slider"
+                        :lazy="true"
+                        :max="sliderConfig.max"
                         v-model="sliderConfig.value"
                         :process-style="sliderConfig.processStyle"
                         :tooltip-style="sliderConfig.tooltipStyle"
-                        :max="sliderConfig.max"
-                        :lazy="true"
-                        @callback="priceRangeUpdated($event)"
-                    ></vue-slider>
+                        @callback="priceRangeUpdated($event)">
+                    </vue-slider>
                 </div>
 
             </div>
@@ -162,10 +165,8 @@
 
             data: function() {
                 return {
-                    appliedFilters: [],
-
                     active: false,
-
+                    appliedFilters: [],
                     sliderConfig: {
                         value: [
                             0,
@@ -204,8 +205,8 @@
                 },
 
                 priceRangeUpdated: function (value) {
+                    debugger
                     this.appliedFilters = value;
-
                     this.$emit('onFilterAdded', this.appliedFilters)
                 },
 

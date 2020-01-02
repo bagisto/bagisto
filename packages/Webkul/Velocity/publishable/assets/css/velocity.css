@@ -1991,6 +1991,10 @@
   margin-top: 3px;
 }
 
+.category-container {
+  padding: 40px 15px !important;
+}
+
 .category-container .hero-image {
   height: 100%;
   max-width: 500px;
@@ -2001,6 +2005,55 @@
 .category-container .hero-image img {
   width: 100%;
   height: 100%;
+}
+
+.vue-slider .vue-slider-rail {
+  background-color: #ccc;
+}
+
+.vue-slider .vue-slider-dot-handle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  -webkit-box-shadow: 0.5px 0.5px 2px 1px rgba(0, 0, 0, 0.32);
+          box-shadow: 0.5px 0.5px 2px 1px rgba(0, 0, 0, 0.32);
+}
+
+.vue-slider .vue-slider-dot-tooltip-inner {
+  border-color: #26A37C !important;
+  background-color: #26A37C !important;
+}
+
+.vue-slider .vue-slider-dot-tooltip-text {
+  display: block;
+  font-size: 14px;
+  min-width: 20px;
+  padding: 2px 5px;
+  text-align: center;
+  border-radius: 5px;
+  white-space: nowrap;
+  color: #FFFFFF;
+  border-color: #26A37C !important;
+  background-color: #26A37C !important;
+}
+
+.vue-slider .vue-slider-dot-tooltip-text::before {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border: 5px solid transparent;
+  border: 6px solid transparent\0;
+  border-top-color: inherit;
+  -webkit-transform: translate(-50%);
+          transform: translate(-50%);
+}
+
+.vue-slider .vue-slider-process {
+  background-color: #26A37C !important;
 }
 
 /* @author Shubham Mehrotra */
@@ -2603,6 +2656,12 @@ body::after {
 
 .container {
   max-width: 1440px !important;
+}
+
+.remove-padding-margin {
+  width: 100% !important;
+  margin: 0px !important;
+  padding: 0px !important;
 }
 
 .footer {
