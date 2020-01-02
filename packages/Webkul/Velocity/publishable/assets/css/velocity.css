@@ -2965,6 +2965,10 @@ body::after {
   padding-top: 20px !important;
 }
 
+.pt42 {
+  padding-top: 42px !important;
+}
+
 .pl0 {
   padding-left: 0px !important;
 }

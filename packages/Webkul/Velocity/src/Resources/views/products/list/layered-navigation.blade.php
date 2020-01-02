@@ -1,8 +1,10 @@
-@inject ('productRepository', 'Webkul\Product\Repositories\ProductRepository')
 @inject ('attributeRepository', 'Webkul\Attribute\Repositories\AttributeRepository')
+
 @inject ('productFlatRepository', 'Webkul\Product\Repositories\ProductFlatRepository')
 
-@php
+@inject ('productRepository', 'Webkul\Product\Repositories\ProductRepository')
+
+<?php
     $filterAttributes = [];
 
     if (isset($category)) {
@@ -28,9 +30,9 @@
     } else {
         $filterAttributes = $attributeRepository->getFilterAttributes();
     }
-@endphp
+?>
 
-<div class="layered-filter-wrapper col-2 pt20">
+<div class="layered-filter-wrapper col-2 pt42">
 
     {!! view_render_event('bagisto.shop.products.list.layered-nagigation.before') !!}
 
@@ -43,19 +45,14 @@
 @push('scripts')
     <script type="text/x-template" id="layered-navigation-template">
         <div>
-            <h3 class="fw6 mb20">
+
+            <h3 class="filter-title fw6 mb20">
                 {{ __('shop::app.products.layered-nav-title') }}
             </h3>
 
             <div class="filter-content">
                 <div class="filter-attributes">
-                    <filter-attribute-item
-                        v-for='(attribute, index) in attributes'
-                        :attribute="attribute"
-                        :key="index"
-                        :index="index"
-                        @onFilterAdded="addFilters(attribute.code, $event)"
-                        :appliedFilterValues="appliedFilters[attribute.code]">
+                    <filter-attribute-item v-for='(attribute, index) in attributes' :attribute="attribute" :key="index" :index="index" @onFilterAdded="addFilters(attribute.code, $event)" :appliedFilterValues="appliedFilters[attribute.code]">
                     </filter-attribute-item>
 
                 </div>
@@ -64,10 +61,10 @@
     </script>
 
     <script type="text/x-template" id="filter-attribute-item-template">
-        <div :class="`filter-attributes-item ${active ? 'active' : ''}`">
+        <div class="pb15" :class="`filter-attributes-item ${active ? 'active' : ''}`">
 
             <div class="filter-attributes-title" @click="active = !active">
-                <h4 class="fw6">@{{ attribute.name ? attribute.name : attribute.admin_name }}</h4>
+                <h4 class="fw6 display-inbl">@{{ attribute.name ? attribute.name : attribute.admin_name }}</h4>
 
                 <div class="pull-right">
                     <span class="remove-filter-link" v-if="appliedFilters.length" @click.stop="clearFilters()">
@@ -80,17 +77,16 @@
 
             <div class="filter-attributes-content">
 
-                <ol class="items" v-if="attribute.type != 'price'">
+                <ul type="none" class="items ml15" v-if="attribute.type != 'price'">
                     <li class="item" v-for='(option, index) in attribute.options'>
 
                         <span class="checkbox">
                             <input type="checkbox" :id="option.id" v-bind:value="option.id" v-model="appliedFilters" @change="addFilter($event)"/>
-                            <label class="checkbox-view" :for="option.id"></label>
                             @{{ option.label ? option.label : option.admin_name }}
                         </span>
 
                     </li>
-                </ol>
+                </ul>
 
                 <div class="price-range-wrapper" v-if="attribute.type == 'price'">
                     <vue-slider
@@ -100,8 +96,10 @@
                         v-model="sliderConfig.value"
                         :process-style="sliderConfig.processStyle"
                         :tooltip-style="sliderConfig.tooltipStyle"
-                        @callback="priceRangeUpdated($event)">
-                    </vue-slider>
+                        :max="sliderConfig.max"
+                        :lazy="true"
+                        @change="priceRangeUpdated($event)"
+                    ></vue-slider>
                 </div>
 
             </div>
@@ -161,7 +159,12 @@
 
             template: '#filter-attribute-item-template',
 
-            props: ['index', 'attribute', 'appliedFilterValues'],
+            props: [
+                'index',
+                'attribute',
+                'addFilters',
+                'appliedFilterValues',
+            ],
 
             data: function() {
                 return {
@@ -190,7 +193,6 @@
 
                 if (this.appliedFilterValues && this.appliedFilterValues.length) {
                     this.appliedFilters = this.appliedFilterValues;
-
                     if (this.attribute.type == 'price') {
                         this.sliderConfig.value = this.appliedFilterValues;
                     }
@@ -201,11 +203,11 @@
 
             methods: {
                 addFilter: function (e) {
+
                     this.$emit('onFilterAdded', this.appliedFilters)
                 },
 
                 priceRangeUpdated: function (value) {
-                    debugger
                     this.appliedFilters = value;
                     this.$emit('onFilterAdded', this.appliedFilters)
                 },
