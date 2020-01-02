@@ -15,7 +15,7 @@
 
                 <input type="hidden" id="selected_configurable_option" name="selected_configurable_option" :value="selectedProductId">
 
-                <div v-for='(attribute, index) in childAttributes' class="attribute control-group" :class="[errors.has('super_attribute[' + attribute.id + ']') ? 'has-error' : '']">
+                <div v-for='(attribute, index) in childAttributes' class="attribute control-group mb20" :class="[errors.has('super_attribute[' + attribute.id + ']') ? 'has-error' : '']">
                     <label class="required">@{{ attribute.label }}</label>
 
                     <span class="custom-form" v-if="! attribute.swatch_type || attribute.swatch_type == '' || attribute.swatch_type == 'dropdown'">

@@ -1069,9 +1069,13 @@
 }
 
 .method-sticker {
-    background-color: grey;
-    display: block;
-    color: white;
+    background-color: #0e0e0e;
+    padding: 4px 8px;
+    text-align: center;
+    border-radius: 1px;
+    display: inline-block;
+    color: #919192;
+    font-size: 13px;
 }
 
 #sidebar {
