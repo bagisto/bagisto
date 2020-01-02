@@ -97,6 +97,10 @@ return [
             'footer-left-raw-content' => 'We love to craft softwares and solve the real world problems with the binaries. We are highly committed to our goals. We invest our resources to create world class easy to use softwares and applications for the enterprise business with the top notch, on the edge technology expertise.',
             'footer-middle-content' => 'Footer Middle Content',
             'update-meta-data' => 'Update Meta Data',
+            'advertisement-one' => 'Advertisement One',
+            'advertisement-two' => 'Advertisement Two',
+            'advertisement-three' => 'Advertisement Three',
+            'footer' => 'Footer',
         ],
         'category' => [
             'title' => 'Category Menu List',

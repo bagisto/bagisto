@@ -15,13 +15,13 @@ class CreateVelocityMetaData extends Migration
     {
         Schema::create('velocity_meta_data', function (Blueprint $table) {
             $table->increments('id');
-
             $table->text('home_page_content');
             $table->text('footer_left_content');
             $table->text('footer_middle_content');
             $table->boolean('slider')->default(0);
+            $table->json('advertisement')->nullable();
+            $table->integer('sidebar_category_count')->default(9);
             $table->text('subscription_bar_content')->nullable();
-
             $table->timestamps();
         });
     }

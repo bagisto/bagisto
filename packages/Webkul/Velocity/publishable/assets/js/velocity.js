@@ -1192,6 +1192,20 @@ $(document).ready(function () {
             });
         },
 
+        mounted: function mounted() {
+            var sliderContainer = $('.slides-container');
+            if (sliderContainer && sliderContainer.length) {
+                sliderContainer = sliderContainer[0];
+
+                console.log(sliderContainer);
+
+                // setInterval(() => {
+                //     debugger
+                //     sliderContainer.scrollTo(500, 0);
+                // }, 1000);
+            }
+        },
+
         methods: {
             onSubmit: function onSubmit(event) {
                 var _this2 = this;
@@ -35479,13 +35493,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['categories', 'url', 'addClass', 'mainSidebar'],
+    props: ['url', 'addClass', 'categories', 'mainSidebar', 'categoryCount'],
 
     data: function data() {
         var slicedCategories = this.categories;
+        var categoryCount = this.categoryCount ? this.categoryCount : 9;
 
-        if (slicedCategories && slicedCategories.length > 9) {
-            slicedCategories = this.categories.slice(0, 9);
+        if (slicedCategories && slicedCategories.length > categoryCount) {
+            slicedCategories = this.categories.slice(0, categoryCount);
         }
 
         return {
@@ -35494,7 +35509,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     mounted: function mounted() {
-        if (window.location.href !== this.url + '/' && this.mainSidebar || this.categories && this.categories.length == 0) {
+        var checkLocale = window.location.href.slice(0, (this.url + '/?locale=').length);
+        var checkCurrency = window.location.href.slice(0, (this.url + '/?currency=').length);
+
+        if (checkLocale == this.url + '/?locale=' || checkCurrency == this.url + '/?currency=') {} else if (window.location.href !== this.url + '/' && this.mainSidebar || this.categories && this.categories.length == 0) {
             this.toggleSidebar();
         }
     },
@@ -36746,7 +36764,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row col-12 remove-padding-margin" }, [
-    _c("div", { staticClass: "main-category fs20 pt10 col-2" }, [
+    _c("div", { staticClass: "main-category fs20 pt10 col-2 unselectable" }, [
       _c("i", {
         class:
           "rango-view-list " +

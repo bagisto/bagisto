@@ -304,16 +304,49 @@ header {
         margin: 5px 0px;
         background: $white-color;
 
-        select {
+        .selectdiv {
             width: 30%;
+            font-family: 'Webkul Rango' !important;
+            speak: none;
+            font-style: normal;
+            font-weight: normal;
+            font-variant: normal;
+            text-transform: none;
+            line-height: 1;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .selectdiv:before {
+            top: 13px;
+            left: 160px;
+            z-index: 10;
+            font-size: 16px;
+            content: "\E906";
+            position: absolute;
+        }
+
+        select {
+            @include border-radius(0px);
+
+            width: 100%;
             height: 100%;
             cursor: pointer;
-            border: 1px solid #269c77;
             border-right: none;
-            @include border-radius(0px);
+            border: 1px solid $theme-color;
+            font-family:"Source Sans Pro", sans-serif;
+
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        select::-ms-expand {
+            display: none;
         }
 
         input {
+            @include border-radius(0px);
+
             width: 70%;
             height: 100%;
             font-size: 14px;
@@ -322,8 +355,7 @@ header {
             border-left: none;
             line-height: 20px;
             letter-spacing: 0;
-            border: 1px solid #269c77;
-            @include border-radius(0px);
+            border: 1px solid $theme-color;
         }
         .btn {
             height: 40px;

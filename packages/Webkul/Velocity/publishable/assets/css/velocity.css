@@ -981,7 +981,6 @@
 
 #product-card-new {
   border: none;
-  height: 95%;
   margin: 0 5px 10px 10px;
   padding-bottom: 10px;
 }
@@ -1771,12 +1770,12 @@
 
 .method-sticker {
   font-size: 13px;
-  color: #919192;
   padding: 4px 8px;
   text-align: center;
   border-radius: 1px;
   display: inline-block;
-  background-color: rgba(0, 0, 0, 0.53);
+  color: #cfcfd0;
+  background-color: #141516;
 }
 
 #sidebar .category-content {
@@ -1787,6 +1786,10 @@
   top: -1px;
   font-weight: 600;
   position: relative;
+}
+
+#sidebar li:hover {
+  color: #4D7EA8;
 }
 
 .grouped-product-container .grouped-product-list {
@@ -2060,6 +2063,32 @@
   background-color: #26A37C !important;
 }
 
+.full-content-wrapper > .container-fluid {
+  margin-bottom: 60px;
+  padding: 0 !important;
+}
+
+.full-content-wrapper > .container-fluid > .row {
+  padding: 0 15px !important;
+}
+
+.slides-container .VueCarousel-pagination {
+  bottom: 10px;
+  position: absolute;
+}
+
+.slides-container .VueCarousel-pagination button {
+  width: 15px !important;
+  height: 15px !important;
+}
+
+.slides-container .VueCarousel-pagination button:focus,
+.slides-container .VueCarousel-pagination button:active {
+  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
 /* @author Shubham Mehrotra */
 body {
   overflow-x: hidden;
@@ -2250,10 +2279,6 @@ header #search-form > *:focus {
 
 .star-rating > * {
   font-size: 14px;
-}
-
-.container > .container-fluid {
-  margin-bottom: 60px;
 }
 
 /* advertisement-one */
@@ -2964,7 +2989,7 @@ body::after {
   padding-left: 40px !important;
 }
 
-.pr0, .container > .container-fluid > .row {
+.pr0 {
   padding-right: 0px !important;
 }
 
@@ -3143,7 +3168,6 @@ body::after {
 .theme-btn, .cart-details .continue-shopping-btn, .account-content .account-layout .bottom-toolbar .pagination .page-item {
   border: none;
   cursor: pointer;
-  border-radius: 2px;
   padding: 10px 20px;
   vertical-align: top;
   color: #FFFFFF !important;
@@ -3540,6 +3564,21 @@ button[disabled] {
 .max-width {
   width: 1440px !important;
   margin: 0 auto !important;
+}
+
+.styled-select {
+  appearance: none;
+  -moz-appearance: none;
+  /* Firefox */
+  -webkit-appearance: none;
+  /* Safari and Chrome */
+}
+
+.select-icon {
+  top: 1px;
+  left: -7px;
+  font-size: 16px;
+  position: relative;
 }
 
 .product-view {
@@ -12029,16 +12068,46 @@ header #search-form {
   background: #FFFFFF;
 }
 
-header #search-form select {
+header #search-form .selectdiv {
   width: 30%;
+  font-family: 'Webkul Rango' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+header #search-form .selectdiv:before {
+  top: 13px;
+  left: 160px;
+  z-index: 10;
+  font-size: 16px;
+  content: "\E906";
+  position: absolute;
+}
+
+header #search-form select {
+  border-radius: 0px;
+  width: 100%;
   height: 100%;
   cursor: pointer;
-  border: 1px solid #269c77;
   border-right: none;
-  border-radius: 0px;
+  border: 1px solid #26A37C;
+  font-family: "Source Sans Pro", sans-serif;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+header #search-form select::-ms-expand {
+  display: none;
 }
 
 header #search-form input {
+  border-radius: 0px;
   width: 70%;
   height: 100%;
   font-size: 14px;
@@ -12047,8 +12116,7 @@ header #search-form input {
   border-left: none;
   line-height: 20px;
   letter-spacing: 0;
-  border: 1px solid #269c77;
-  border-radius: 0px;
+  border: 1px solid #26A37C;
 }
 
 header #search-form .btn, header #search-form .quantity button, .quantity header #search-form button,

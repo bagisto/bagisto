@@ -97,7 +97,21 @@ $(document).ready(function () {
                     modal.classList.add('hide');
                 });
 
-            })
+            });
+        },
+
+        mounted: function () {
+            let sliderContainer = $('.slides-container');
+            if (sliderContainer && sliderContainer.length) {
+                sliderContainer = sliderContainer[0];
+
+                console.log(sliderContainer);
+
+                // setInterval(() => {
+                //     debugger
+                //     sliderContainer.scrollTo(500, 0);
+                // }, 1000);
+            }
         },
 
         methods: {

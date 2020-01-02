@@ -1,18 +1,59 @@
-<div class="container-fluid advertisement-two-container">
+@php
+    $isRendered = false;
+    $advertisementTwo = null;
+@endphp
 
-    <div class="row max-width-100">
-        <div class="col ad-2-lt"></div>
+@if ($velocityMetaData->advertisement)
+    @php
+        $advertisement = json_decode($velocityMetaData->advertisement, true);
+        if (isset($advertisement[2])) {
+            $advertisementTwo = $advertisement[2];
+        }
+    @endphp
 
-        <div class="col ad-2-rt">
+    @if ($advertisementTwo)
+        @php
+            $isRendered = true;
+        @endphp
 
-            <div class="row top-container">
-                <div class="col"></div>
+        <div class="container-fluid advertisement-two-container">
+
+            <div class="row">
+                <div class="col ad-2-lt"></div>
+
+                <div class="col ad-2-rt">
+
+                    <div class="row top-container">
+                        <div class="col"></div>
+                    </div>
+
+                    <div class="row bottom-container">
+                        <div class="col"></div>
+                    </div>
+
+                </div>
             </div>
+        </div>
+    @endif
+@endif
 
-            <div class="row bottom-container">
-                <div class="col"></div>
+@if (! $isRendered)
+    <div class="container-fluid advertisement-two-container">
+
+        <div class="row">
+            <div class="col ad-2-lt"></div>
+
+            <div class="col ad-2-rt">
+
+                <div class="row top-container">
+                    <div class="col"></div>
+                </div>
+
+                <div class="row bottom-container">
+                    <div class="col"></div>
+                </div>
+
             </div>
-
         </div>
     </div>
-</div>
+@endif

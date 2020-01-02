@@ -232,7 +232,6 @@
 .theme-btn {
     border: none;
     cursor: pointer;
-    border-radius: 2px;
     padding: 10px 20px;
     vertical-align: top;
     color: $light-color !important;
@@ -651,3 +650,15 @@ button[disabled] {
     margin: 0 auto !important;
 }
 
+.styled-select {
+    appearance:none;
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+}
+
+.select-icon {
+    top: 1px;
+    left: -7px;
+    font-size: 16px;
+    position: relative;
+}

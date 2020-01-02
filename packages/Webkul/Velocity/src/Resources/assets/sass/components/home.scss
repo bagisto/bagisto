@@ -197,16 +197,6 @@ header #search-form > *:focus {
     font-size: 14px;
 }
 
-.container {
-    > .container-fluid {
-        margin-bottom: 60px;
-
-        > .row {
-            @extend .pr0;
-        }
-    }
-}
-
 /* advertisement-one */
 .advertisement-one {
     .offers-lt-panel {

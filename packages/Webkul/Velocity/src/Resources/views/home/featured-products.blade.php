@@ -14,7 +14,7 @@
 
 @if ($featuredProductsCount)
 
-    <div class="container-fluid popular-products no-padding">
+    <div class="container-fluid popular-products">
 
         <card-list-header
             heading="{{ __('shop::app.home.featured-products') }}"

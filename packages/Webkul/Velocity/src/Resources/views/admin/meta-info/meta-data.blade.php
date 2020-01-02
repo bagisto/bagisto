@@ -15,81 +15,123 @@
         <form
             method="POST"
             @submit.prevent="onSubmit"
+            enctype="multipart/form-data"
             action="{{ route('velocity.admin.store.meta-data', ['id' => $metaData->id]) }}">
 
             @csrf
 
-            <div class="control-group">
-                <label for="footer_content">
-                    {{ __('velocity::app.admin.meta-data.activate-slider') }}
-                </label>
+            <accordian :title="'{{ __('admin::app.catalog.attributes.general') }}'" :active="false">
+                <div slot="body">
+                    <div class="control-group">
+                        <label>{{ __('velocity::app.admin.meta-data.activate-slider') }}</label>
 
-                <label class="switch">
-                    <input
-                        type="checkbox"
-                        class="control"
-                        id="slides"
-                        name="slides"
-                        data-vv-as="&quot;slides&quot;"
-                        {{ $metaData->slider ? 'checked' : ''}} />
+                        <label class="switch">
+                            <input
+                                type="checkbox"
+                                class="control"
+                                id="slides"
+                                name="slides"
+                                data-vv-as="&quot;slides&quot;"
+                                {{ $metaData->slider ? 'checked' : ''}} />
 
-                    <span class="slider round"></span>
-                </label>
-            </div>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
 
-            <div class="control-group">
-                <label for="footer_content">
-                    {{ __('velocity::app.admin.meta-data.subscription-content') }}
-                </label>
+                    <div class="control-group">
+                        <label>{{ __('velocity::app.admin.meta-data.activate-slider') }}</label>
 
-                <textarea
-                    class="control"
-                    id="subscription_bar_content"
-                    name="subscription_bar_content">
-                    {{ $metaData->subscription_bar_content}}
-                </textarea>
-            </div>
+                        <input
+                            type="text"
+                            class="control"
+                            id="sidebar_category_count"
+                            name="sidebar_category_count"
+                            value="{{ $metaData->sidebar_category_count }}" />
+                    </div>
 
-            <div class="control-group">
-                <label for="footer_content">
-                    {{ __('velocity::app.admin.meta-data.home-page-content') }}
-                </label>
+                    <div class="control-group">
+                        <label>{{ __('velocity::app.admin.meta-data.home-page-content') }}</label>
 
-                <textarea
-                    class="control"
-                    id="home_page_content"
-                    name="home_page_content">
-                    {{ $metaData->home_page_content}}
-                </textarea>
-            </div>
+                        <textarea
+                            class="control"
+                            id="home_page_content"
+                            name="home_page_content">
+                            {{ $metaData->home_page_content}}
+                        </textarea>
+                    </div>
+                </div>
+            </accordian>
 
-            <div class="control-group">
-                <label for="footer_content">
-                    {{ __('velocity::app.admin.meta-data.footer-left-content') }}
-                </label>
+            <accordian :title="'{{ __('admin::app.catalog.products.images') }}'" :active="false">
+                <div slot="body">
+                    <div class="control-group">
+                        <label>{{ __('velocity::app.admin.meta-data.advertisement-one') }}</label>
 
-                <textarea
-                    class="control"
-                    id="footer_left_content"
-                    name="footer_left_content">
-                    {{ $metaData->footer_left_content}}
-                </textarea>
-            </div>
+                        <image-wrapper
+                            :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'"
+                            input-name="images[1]">
+                            {{-- :images='@json($metaData->advertisement[1])'> --}}
+                        </image-wrapper>
+                    </div>
 
-            <div class="control-group">
-                <label for="footer_content">
-                    {{ __('velocity::app.admin.meta-data.footer-middle-content') }}
-                </label>
+                    <div class="control-group">
+                        <label>{{ __('velocity::app.admin.meta-data.advertisement-two') }}</label>
 
-                <textarea
-                    class="control"
-                    id="footer_middle_content"
-                    name="footer_middle_content">
-                    {{ $metaData->footer_middle_content}}
-                </textarea>
-            </div>
+                        <image-wrapper
+                            :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'"
+                            input-name="images[2]">
+                        </image-wrapper>
+                    </div>
 
-            <button class="btn btn-lg btn-primary">
+                    <div class="control-group">
+                        <label>{{ __('velocity::app.admin.meta-data.advertisement-three') }}</label>
+
+                        <image-wrapper
+                            :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'"
+                            input-name="images[3]">
+                        </image-wrapper>
+                    </div>
+                </div>
+            </accordian>
+
+            <accordian :title="'{{ __('velocity::app.admin.meta-data.footer') }}'" :active="false">
+                <div slot="body">
+                    <div class="control-group">
+                        <label>{{ __('velocity::app.admin.meta-data.subscription-content') }}</label>
+
+                        <textarea
+                            class="control"
+                            id="subscription_bar_content"
+                            name="subscription_bar_content">
+                            {{ $metaData->subscription_bar_content}}
+                        </textarea>
+                    </div>
+
+                    <div class="control-group">
+                        <label>{{ __('velocity::app.admin.meta-data.footer-left-content') }}</label>
+
+                        <textarea
+                            class="control"
+                            id="footer_left_content"
+                            name="footer_left_content">
+                            {{ $metaData->footer_left_content}}
+                        </textarea>
+                    </div>
+
+                    <div class="control-group">
+                        <label>{{ __('velocity::app.admin.meta-data.footer-middle-content') }}</label>
+
+                        <textarea
+                            class="control"
+                            id="footer_middle_content"
+                            name="footer_middle_content">
+                            {{ $metaData->footer_middle_content}}
+                        </textarea>
+                    </div>
+                </div>
+            </accordian>
+
+            <button class="btn btn-lg btn-primary" style="margin-top: 20px">
                 {{ __('velocity::app.admin.meta-data.update-meta-data') }}
             </button>
         </form>
@@ -97,8 +139,7 @@
 @stop
 
 @push('scripts')
-    <script src="{{ asset('vendor/webkul/admin/assets/js/tinyMCE/tinymce.min.js') }}">
-    </script>
+    <script src="{{ asset('vendor/webkul/admin/assets/js/tinyMCE/tinymce.min.js') }}"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {

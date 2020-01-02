@@ -205,7 +205,6 @@
 
 #product-card-new {
     border: none;
-    height: 95%;
     margin: 0 5px 10px 10px;
     padding-bottom: 10px;
 
@@ -1070,12 +1069,12 @@
 
 .method-sticker {
     font-size: 13px;
-    color: #919192;
     padding: 4px 8px;
     text-align: center;
     border-radius: 1px;
     display: inline-block;
-    background-color: $grey-clr;
+    color: $light2-black;
+    background-color: $light1-black;
 }
 
 #sidebar {
@@ -1087,6 +1086,11 @@
             font-weight: 600;
             position: relative;
         }
+    }
+}
+#sidebar {
+    li:hover {
+        color: $link-color;
     }
 }
 
@@ -1382,5 +1386,34 @@
 
     .vue-slider-process {
         background-color: $theme-color !important;
+    }
+}
+
+.full-content-wrapper {
+    > .container-fluid {
+        margin-bottom: 60px;
+        padding: 0 !important;
+
+        > .row {
+            padding: 0 15px !important;
+        }
+    }
+}
+
+.slides-container {
+    .VueCarousel-pagination {
+        bottom: 10px;
+        position: absolute;
+
+        button {
+            width: 15px !important;
+            height: 15px !important;
+        }
+
+        button:focus,
+        button:active, {
+            outline: none;
+            box-shadow: none;
+        }
     }
 }

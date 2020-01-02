@@ -74,9 +74,9 @@
                         @endphp
 
                         <content-header
-                            heading= "{{ __('velocity::app.menu-navbar.text-category') }}"
-                            :header-content="{{ json_encode($velocityContent) }}"
                             is-enabled="{{ sizeof($categories) }}"
+                            :header-content="{{ json_encode($velocityContent) }}"
+                            heading= "{{ __('velocity::app.menu-navbar.text-category') }}"
                         ></content-header>
 
                         <div class="container no-padding">
@@ -84,9 +84,10 @@
                                 <sidebar-component
                                     main-sidebar=true
                                     url="{{ url()->to('/') }}"
-                                    add-class="col-2 category-list-container pt10 no-padding mt15"
                                     :categories="{{ json_encode($categories) }}"
-                                ></sidebar-component>
+                                    category-count="{{ $velocityMetaData->sidebar_category_count }}"
+                                    add-class="col-2 category-list-container pt10 no-padding mt15">
+                                </sidebar-component>
 
                                 <child-sidebar
                                     url="{{ url()->to('/') }}">

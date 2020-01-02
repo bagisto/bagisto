@@ -29,7 +29,7 @@ return [
                 ]
             ], [
                 'name' => 'featured_product',
-                'title' => 'velocity::app.admin.system.general.featured-product',
+                'title' => 'shop::app.home.featured-products',
                 'type' => 'text',
             ]
         ]

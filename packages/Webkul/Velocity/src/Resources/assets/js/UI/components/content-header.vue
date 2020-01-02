@@ -1,6 +1,6 @@
 <template>
     <div class="row col-12 remove-padding-margin">
-        <div class="main-category fs20 pt10 col-2">
+        <div class="main-category fs20 pt10 col-2 unselectable">
             <i
                 :class="`rango-view-list ${isEnabled == '0' ? '' : 'cursor-pointer'} align-vertical-top`"
                 @click="(isEnabled == '0') ? '' : toggleSidebar()">

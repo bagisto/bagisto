@@ -2,8 +2,7 @@
     <carousel-component
         :slides-count="{{ ! empty($sliderData) ? sizeof($sliderData) : 1 }}"
         slides-per-page="1"
-        navigation-enabled="hide"
-        pagination-enabled="hide">
+        navigation-enabled="hide">
 
         @if (! empty($sliderData))
             @foreach ($sliderData as $index => $slider)

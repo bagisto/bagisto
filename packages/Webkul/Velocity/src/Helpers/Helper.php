@@ -104,8 +104,10 @@ class Helper extends Review
 
                     foreach ($totalData['categories'] as $categories) {
                         foreach($categories['translations'] as $catName) {
-                            $brandData[$brand->admin_name][] = $catName['name'];
-                            $categoryName[] = $catName['name'];
+                            if (isset($brand->admin_name)) {
+                                $brandData[$brand->admin_name][] = $catName['name'];
+                                $categoryName[] = $catName['name'];
+                            }
                         }
                     }
                 }

@@ -1,4 +1,4 @@
-<div class="container-fluid popular-products no-padding">
+<div class="container-fluid popular-products">
 
     <card-list-header :show-tabs="true"></card-list-header>
 
