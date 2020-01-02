@@ -91,6 +91,8 @@
                 <div class="price-range-wrapper" v-if="attribute.type == 'price'">
                     <vue-slider
                         ref="slider"
+                        :lazy="true"
+                        :max="sliderConfig.max"
                         v-model="sliderConfig.value"
                         :process-style="sliderConfig.processStyle"
                         :tooltip-style="sliderConfig.tooltipStyle"
@@ -130,8 +132,6 @@
 
             methods: {
                 addFilters: function (attributeCode, filters) {
-                    debugger
-                    console.log(attributeCode, filters);
                     if (filters.length) {
                         this.appliedFilters[attributeCode] = filters;
                     } else {
@@ -168,10 +168,8 @@
 
             data: function() {
                 return {
-                    appliedFilters: [],
-
                     active: false,
-
+                    appliedFilters: [],
                     sliderConfig: {
                         value: [
                             0,
@@ -210,9 +208,7 @@
                 },
 
                 priceRangeUpdated: function (value) {
-                    console.log(value);
                     this.appliedFilters = value;
-
                     this.$emit('onFilterAdded', this.appliedFilters)
                 },
 
