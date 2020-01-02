@@ -1770,9 +1770,13 @@
 }
 
 .method-sticker {
-  background-color: grey;
-  display: block;
-  color: white;
+  font-size: 13px;
+  color: #919192;
+  padding: 4px 8px;
+  text-align: center;
+  border-radius: 1px;
+  display: inline-block;
+  background-color: rgba(0, 0, 0, 0.53);
 }
 
 #sidebar .category-content {
