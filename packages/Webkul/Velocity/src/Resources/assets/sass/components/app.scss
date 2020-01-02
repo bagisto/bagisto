@@ -1315,3 +1315,17 @@
         }
     }
 }
+
+.category-container {
+    .hero-image {
+        height: 100%;
+        max-width: 500px;
+        max-height: 400px;
+        display: inline-block;
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}

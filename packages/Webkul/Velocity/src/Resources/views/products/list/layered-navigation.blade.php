@@ -1,10 +1,8 @@
+@inject ('productRepository', 'Webkul\Product\Repositories\ProductRepository')
 @inject ('attributeRepository', 'Webkul\Attribute\Repositories\AttributeRepository')
-
 @inject ('productFlatRepository', 'Webkul\Product\Repositories\ProductFlatRepository')
 
-@inject ('productRepository', 'Webkul\Product\Repositories\ProductRepository')
-
-<?php
+@php
     $filterAttributes = [];
 
     if (isset($category)) {
@@ -30,13 +28,13 @@
     } else {
         $filterAttributes = $attributeRepository->getFilterAttributes();
     }
-?>
+@endphp
 
 <div class="layered-filter-wrapper">
 
     {!! view_render_event('bagisto.shop.products.list.layered-nagigation.before') !!}
 
-    {{-- <layered-navigation></layered-navigation> --}}
+        <layered-navigation></layered-navigation>
 
     {!! view_render_event('bagisto.shop.products.list.layered-nagigation.after') !!}
 
@@ -46,7 +44,9 @@
     <script type="text/x-template" id="layered-navigation-template">
         <div>
 
-            <label>{{ __('shop::app.products.layered-nav-title') }}</label>
+            <div class="filter-title">
+                {{ __('shop::app.products.layered-nav-title') }}
+            </div>
 
             <div class="filter-content">
 
@@ -171,7 +171,7 @@
                             0,
                             0
                         ],
-                        max: '{{ core()->convertPrice($productFlatRepository->getCategoryProductMaximumPrice($category)) }}',
+                        max: {{ core()->convertPrice($productFlatRepository->getCategoryProductMaximumPrice($category)) }},
                         processStyle: {
                             "backgroundColor": "#FF6472"
                         },
