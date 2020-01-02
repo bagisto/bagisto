@@ -25,7 +25,7 @@
 
                                 <div class="item mt-5">
                                     <div class="item-image" style="margin-right: 15px;">
-                                        <a href="{{ url()->to('/').'/products/'.$item->product->url_key }}"><img src="{{ $productBaseImage['medium_image_url'] }}" /></a>
+                                        <a href="{{ route('shop.productOrCategory.index', $item->product->url_key) }}"><img src="{{ $productBaseImage['medium_image_url'] }}" /></a>
                                     </div>
 
                                     <div class="item-details">
@@ -33,7 +33,7 @@
                                         {!! view_render_event('bagisto.shop.checkout.cart.item.name.before', ['item' => $item]) !!}
 
                                         <div class="item-title">
-                                            <a href="{{ url()->to('/').'/products/'.$item->product->url_key }}">
+                                            <a href="{{ route('shop.productOrCategory.index', $item->product->url_key) }}">
                                                 {{ $item->product->name }}
                                             </a>
                                         </div>
