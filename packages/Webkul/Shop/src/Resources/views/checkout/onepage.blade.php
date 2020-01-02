@@ -300,6 +300,7 @@
                             this_this.current_step = this_this.step_numbers[response.data.jump_to_section];
 
                             shippingMethods = response.data.shippingMethods;
+                            paymentMethods  = response.data.paymentMethods;
 
                             this_this.getOrderSummary();
                         })

@@ -30,6 +30,9 @@
         <div class="account-table-content" style="width: 50%;">
             <table style="color: #5E5E5E;">
                 <tbody>
+                    {!! view_render_event(
+                    'bagisto.shop.customers.account.profile.view.table.before', ['customer' => $customer])
+                    !!}
                     <tr>
                         <td>{{ __('shop::app.customer.account.profile.fname') }}</td>
                         <td>{{ $customer->first_name }}</td>
@@ -54,6 +57,9 @@
                         <td>{{ __('shop::app.customer.account.profile.email') }}</td>
                         <td>{{ $customer->email }}</td>
                     </tr>
+                    {!! view_render_event(
+                    'bagisto.shop.customers.account.profile.view.table.after', ['customer' => $customer])
+                    !!}
 
                     {{-- @if ($customer->subscribed_to_news_letter == 1)
                         <tr>
