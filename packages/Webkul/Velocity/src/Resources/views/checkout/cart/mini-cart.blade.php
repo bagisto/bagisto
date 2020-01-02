@@ -53,7 +53,7 @@
 
                                             {!! view_render_event('bagisto.shop.checkout.cart-mini.item.quantity.before', ['item' => $item]) !!}
 
-                                            <input type="text" value="{{ $item->quantity }}" class="ml5" />
+                                            <input type="text" disabled value="{{ $item->quantity }}" class="ml5" />
 
                                             {!! view_render_event('bagisto.shop.checkout.cart-mini.item.quantity.after', ['item' => $item]) !!}
                                         </div>

@@ -93,3 +93,32 @@
         }
     }
 }
+
+.grid-container {
+    display: block;
+    width: 100%;
+}
+
+.filter-row-one {
+    display: inline-flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .dropdown-filters {
+        position: absolute;
+        right: 25px;
+    }
+
+    .per-page {
+        right: 250px;
+
+        .per-page-label {
+            position: absolute;
+            right: 120px;
+            width: 100%;
+            top: 8px;
+        }
+    }
+}
