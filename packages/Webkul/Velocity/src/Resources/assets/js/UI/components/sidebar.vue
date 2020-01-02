@@ -1,11 +1,11 @@
 <template>
     <!-- categories list -->
     <nav
-        :class="`${addClass ? addClass : ''}`"
         id="sidebar"
+        :class="`${addClass ? addClass : ''}`"
         v-if="slicedCategories && slicedCategories.length > 0">
 
-        <ul type="none" class="pl15">
+        <ul type="none">
             <li
                 :key="index"
                 class="category-content"
@@ -42,13 +42,22 @@
 
 <script type="text/javascript">
     export default {
-        props: ['categories', 'url', 'addClass', 'mainSidebar'],
+        props: [
+            'url',
+            'addClass',
+            'categories',
+            'mainSidebar',
+            'categoryCount'
+        ],
 
         data: function () {
             let slicedCategories = this.categories;
+            let categoryCount = this.categoryCount ? this.categoryCount : 9;
 
-            if (slicedCategories && slicedCategories.length > 9) {
-                slicedCategories = this.categories.slice(0, 9);
+            if (slicedCategories
+                && slicedCategories.length > categoryCount
+            ) {
+                slicedCategories = this.categories.slice(0, categoryCount);
             }
 
             return {
@@ -57,7 +66,14 @@
         },
 
         mounted: function () {
+            let checkLocale = window.location.href.slice(0, `${this.url}/?locale=`.length);
+            let checkCurrency = window.location.href.slice(0, `${this.url}/?currency=`.length);
+
             if (
+                checkLocale == `${this.url}/?locale=`
+                || checkCurrency == `${this.url}/?currency=`
+            ) {
+            } else if (
                 (window.location.href !== `${this.url}/` && this.mainSidebar)
                 || (this.categories && this.categories.length == 0)
             ) {

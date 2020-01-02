@@ -122,7 +122,7 @@
     $cardCount = 5;
 @endphp
 
-<div class="container-fluid popular-products no-padding">
+<div class="container-fluid popular-products">
 
     <card-list-header
         heading="Plants"

@@ -197,16 +197,6 @@ header #search-form > *:focus {
     font-size: 14px;
 }
 
-.container {
-    > .container-fluid {
-        margin-bottom: 60px;
-
-        > .row {
-            @extend .pr0;
-        }
-    }
-}
-
 /* advertisement-one */
 .advertisement-one {
     .offers-lt-panel {
@@ -680,5 +670,11 @@ body::after {
 
 .container {
     max-width: 1440px !important;
+}
+
+.remove-padding-margin {
+    width: 100% !important;
+    margin: 0px !important;
+    padding: 0px !important;
 }
 

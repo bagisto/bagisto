@@ -1,7 +1,7 @@
 @extends('shop::layouts.master')
 
 @section('content-wrapper')
-    <div class="account-content row col-12">
+    <div class="account-content row no-margin">
         <div class="sidebar col-2">
             @include('shop::customers.account.partials.sidemenu')
         </div>

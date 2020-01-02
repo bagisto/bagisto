@@ -12,7 +12,7 @@
         <ul type="none" class="navigation">
             @foreach ($menuItem['children'] as $subMenuItem)
                 <li class="{{ $menu->getActive($subMenuItem) }}">
-                    <a class="unset fw6" href="{{ $subMenuItem['url'] }}">
+                    <a class="unset fw6 full-width" href="{{ $subMenuItem['url'] }}">
                         {{ trans($subMenuItem['name']) }}
                     </a>
                 </li>

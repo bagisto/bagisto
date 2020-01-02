@@ -47,11 +47,13 @@
 
 @section('full-content-wrapper')
 
-    {!! view_render_event('bagisto.shop.home.content.before') !!}
+    <div class="full-content-wrapper">
+        {!! view_render_event('bagisto.shop.home.content.before') !!}
 
-        {!! DbView::make($velocityMetaData)->field('home_page_content')->render() !!}
+            {!! DbView::make($velocityMetaData)->field('home_page_content')->render() !!}
 
-    {{ view_render_event('bagisto.shop.home.content.after') }}
+        {{ view_render_event('bagisto.shop.home.content.after') }}
+    </div>
 
 @endsection
 

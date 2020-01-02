@@ -24,20 +24,20 @@
                     class="btn-toolbar full-width"
                     role="toolbar">
 
-                    <div
-                        class="btn-group mr-2 full-width row"
-                        role="group"
-                        aria-label="First group">
+                    <div class="btn-group mr-2 full-width row">
 
-                        <select class="form-control col-4 fs13" name="category">
-                            <option value="">
-                                {{ __('velocity::app.header.all-categories') }}
-                            </option>
+                        <div class="selectdiv">
+                            <select class="form-control fs13" name="category">
+                                <option value="">
+                                    {{ __('velocity::app.header.all-categories') }}
+                                </option>
 
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach
-                        </select>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                                <span class="select-icon rango-arrow-down"></span>
+                            </select>
+                        </div>
 
                         <div class="input-group col-md-8 rows">
                             <input
@@ -48,7 +48,7 @@
                                 placeholder="{{ __('velocity::app.header.search-text') }}" />
 
                             <div class="input-group-append">
-                                <button class="btn btn-secondary" type="submit" id="header-search-icon">
+                                <button class="btn" type="submit" id="header-search-icon">
                                     <i class="fs14 rango-search"></i>
                                 </button>
                             </div>

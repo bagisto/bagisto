@@ -5,7 +5,7 @@
 @endphp
 
 @if (! empty($newProducts))
-    <div class="container-fluid popular-products no-padding">
+    <div class="container-fluid popular-products">
 
         <card-list-header
             heading="{{ __('shop::app.home.new-products') }}"

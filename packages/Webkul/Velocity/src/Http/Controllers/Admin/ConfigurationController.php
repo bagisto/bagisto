@@ -3,6 +3,7 @@
 namespace Webkul\Velocity\Http\Controllers\Admin;
 
 use DB;
+use Illuminate\Support\Facades\Storage;
 use Webkul\Velocity\Repositories\MetadataRepository;
 use Webkul\Velocity\Repositories\VelocityMetadataRepository;
 
@@ -48,6 +49,7 @@ class ConfigurationController extends Controller
 
     public function storeMetaData($id)
     {
+        // check if radio button value
         if (request()->get('slides') == "on") {
             $params = request()->all() + [
                 'slider' => 1
@@ -58,12 +60,43 @@ class ConfigurationController extends Controller
             ];
         }
 
+        $params['advertisement'] = [];
+
+        foreach ($params['images'] as $index => $advertisement) {
+            if ($advertisement['image_1'] !== "") {
+                $params['advertisement'][$index] = $this->uploadImages($advertisement, $index);
+            }
+        }
+
+        $params['advertisement'] = json_encode($params['advertisement']);
+
+        unset($params['images']);
         unset($params['slides']);
 
+        // update row
         $product = $this->velocityMetaDataRepository->update($params, $id);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Velocity Theme']));
 
         return redirect()->route($this->_config['redirect']);
+    }
+
+    public function uploadImages($data, $index)
+    {
+        $type = 'images';
+        $request = request();
+
+        foreach ($data as $imageId => $image) {
+            $file = $type . '.' . $index . '.' . $imageId;
+            $dir = "velocity/$type";
+
+            if ($request->hasFile($file)) {
+                Storage::delete($dir . $file);
+
+                $advertisement[$imageId] = $request->file($file)->store($dir);
+            }
+        }
+
+        return $advertisement;
     }
 }
