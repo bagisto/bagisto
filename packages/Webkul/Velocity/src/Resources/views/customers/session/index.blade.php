@@ -55,7 +55,6 @@
                             value="{{ old('email') }}"
                             data-vv-as="&quot;{{ __('shop::app.customer.login-form.email') }}&quot;" />
 
-                            @{{errors.has('email')}}
                         <span class="control-error" v-if="errors.has('email')">
                             @{{ errors.first('email') }}
                         </span>
