@@ -50,6 +50,28 @@
                     </div>
 
                     <div class="control-group">
+                        <label>{{ __('shop::app.home.featured-products') }}</label>
+
+                        <input
+                            type="text"
+                            class="control"
+                            id="featured_product_count"
+                            name="featured_product_count"
+                            value="{{ $metaData->featured_product_count }}" />
+                    </div>
+
+                    <div class="control-group">
+                        <label>{{ __('shop::app.home.new-products') }}</label>
+
+                        <input
+                            type="text"
+                            class="control"
+                            id="new_products_count"
+                            name="new_products_count"
+                            value="{{ $metaData->new_products_count }}" />
+                    </div>
+
+                    <div class="control-group">
                         <label>{{ __('velocity::app.admin.meta-data.home-page-content') }}</label>
 
                         <textarea

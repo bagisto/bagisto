@@ -1,5 +1,7 @@
 @php
-    $newProducts = app('Webkul\Product\Repositories\ProductRepository')->getNewProducts(6)->items();
+    $count = $velocityMetaData->new_products_count;
+
+    $newProducts = app('Webkul\Velocity\Repositories\Product\ProductRepository')->getNewProducts($count);
 
     $showRecentlyViewed = false;
 @endphp
