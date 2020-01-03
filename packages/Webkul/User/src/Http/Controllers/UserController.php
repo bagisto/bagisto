@@ -2,6 +2,7 @@
 
 namespace Webkul\User\Http\Controllers;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Event;
 use Webkul\User\Repositories\AdminRepository;
 use Webkul\User\Repositories\RoleRepository;
@@ -61,7 +62,7 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View 
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -71,7 +72,7 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\View\View 
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -90,8 +91,10 @@ class UserController extends Controller
     {
         $data = $request->all();
 
-        if (isset($data['password']) && $data['password'])
+        if (isset($data['password']) && $data['password']) {
             $data['password'] = bcrypt($data['password']);
+            $data['api_token'] = Str::random(80);
+        }
 
         Event::fire('user.admin.create.before');
 
@@ -108,7 +111,7 @@ class UserController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param integer $id
-     * @return \Illuminate\View\View 
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
@@ -130,10 +133,11 @@ class UserController extends Controller
     {
         $data = $request->all();
 
-        if (! $data['password'])
+        if (! $data['password']) {
             unset($data['password']);
-        else
+        } else {
             $data['password'] = bcrypt($data['password']);
+        }
 
         if (isset($data['status'])) {
             $data['status'] = 1;
@@ -156,7 +160,7 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View 
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View
      */
     public function destroy($id)
     {

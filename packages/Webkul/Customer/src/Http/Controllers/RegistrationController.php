@@ -2,6 +2,8 @@
 
 namespace Webkul\Customer\Http\Controllers;
 
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
 use Webkul\Customer\Mail\RegistrationEmail;
@@ -85,6 +87,7 @@ class RegistrationController extends Controller
         $data = request()->input();
 
         $data['password'] = bcrypt($data['password']);
+        $data['api_token'] = Str::random(80);
 
         if (core()->getConfigData('customer.settings.email.verification')) {
             $data['is_verified'] = 0;
