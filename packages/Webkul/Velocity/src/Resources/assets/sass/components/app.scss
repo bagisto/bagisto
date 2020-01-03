@@ -1056,12 +1056,12 @@
     }
 
     .regular-price {
-        font-weight: 600;
         margin-right: 10px;
+        text-decoration: line-through;
     }
 
     .special-price {
-        text-decoration: line-through;
+        font-weight: 600;
     }
 }
 
