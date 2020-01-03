@@ -983,7 +983,7 @@ return [
     ],
 
     'footer' => [
-        'copy-right' => '© کپی رایت 2019 کلیه حقوق محفوظ است.'
+        'copy-right' => 'مدعوم من <a href="https://bagisto.com/" target="_blank">Bagisto</a> ، مشروع مجتمع بواسطة <a href="https://webkul.com/" target="_blank">Webkul</a>'
     ],
 
     'admin' => [
