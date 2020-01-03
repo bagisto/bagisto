@@ -1273,7 +1273,7 @@
 #cart-modal-content .small-card-container .rango-close {
   top: -10px;
   left: -10px;
-  padding: 4px;
+  padding: 3px 4px 3px 3px;
   font-size: 10px;
   max-height: 17px;
   line-height: 1.3rem;
@@ -2130,21 +2130,36 @@
           box-shadow: none;
 }
 
-.price-range {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+.filter-attributes-item {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #CCCCCC;
 }
 
-.price-range .price-from {
-  border: 1px solid #26A37C;
+.filter-attributes-item.active .filter-attributes-content {
+  display: block;
 }
 
-.price-range .price-to {
+.filter-attributes-item .filter-input {
+  margin: 10px 15px 13px -4px;
+}
+
+.filter-attributes-item .filter-input input[type=text] {
+  text-align: center;
   border: 1px solid #26A37C;
+  width: 30%;
+  background-color: white;
+}
+
+.filter-attributes-item .checkbox input[type=checkbox] {
+  width: 14px;
+  height: 14px;
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
+}
+
+.filter-attributes-item .filter-attributes-content {
+  display: none;
+  margin-left: 7px;
 }
 
 /* @author Shubham Mehrotra */
