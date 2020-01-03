@@ -76,7 +76,6 @@
             </div>
 
             <div class="filter-attributes-content">
-
                 <ul type="none" class="items ml15" v-if="attribute.type != 'price'">
                     <li class="item" v-for='(option, index) in attribute.options'>
 
@@ -91,8 +90,6 @@
                 <div class="price-range-wrapper" v-if="attribute.type == 'price'">
                     <vue-slider
                         ref="slider"
-                        :lazy="true"
-                        :max="sliderConfig.max"
                         v-model="sliderConfig.value"
                         :process-style="sliderConfig.processStyle"
                         :tooltip-style="sliderConfig.tooltipStyle"
@@ -100,6 +97,23 @@
                         :lazy="true"
                         @change="priceRangeUpdated($event)"
                     ></vue-slider>
+
+                    <div class="row col-12 no-margin no-padding">
+                        <input
+                            class="col"
+                            type="text"
+                            name="price_from"
+                            :value="`{{ core()->currencySymbol(core()->getBaseCurrencyCode()) }}${sliderConfig.priceFrom}`"
+                            id="price_from" />
+
+                        <label class="col text-center" for="to">to</label>
+                        <input
+                        class="col"
+                        type="text"
+                        name="price_to"
+                        :value="`{{ core()->currencySymbol(core()->getBaseCurrencyCode()) }}${sliderConfig.priceTo}`"
+                        id="price_to">
+                    </div>
                 </div>
 
             </div>
@@ -176,13 +190,16 @@
                             0
                         ],
                         max: {{ core()->convertPrice($productFlatRepository->getCategoryProductMaximumPrice($category)) }},
+
                         processStyle: {
                             "backgroundColor": "#FF6472"
                         },
                         tooltipStyle: {
                             "backgroundColor": "#FF6472",
                             "borderColor": "#FF6472"
-                        }
+                        },
+                        priceFrom: 0,
+                        priceTo: 0,
                     }
                 }
             },
@@ -195,6 +212,8 @@
                     this.appliedFilters = this.appliedFilterValues;
                     if (this.attribute.type == 'price') {
                         this.sliderConfig.value = this.appliedFilterValues;
+                        this.sliderConfig.priceFrom = this.appliedFilterValues[0];
+                        this.sliderConfig.priceTo = this.appliedFilterValues[1];
                     }
 
                     this.active = true;
