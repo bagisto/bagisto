@@ -61,8 +61,7 @@
     </script>
 
     <script type="text/x-template" id="filter-attribute-item-template">
-        <div class="pb15" :class="`filter-attributes-item ${active ? 'active' : ''}`">
-
+        <div :class="`cursor-pointer filter-attributes-item ${active ? 'active' : ''}`">
             <div class="filter-attributes-title" @click="active = !active">
                 <h4 class="fw6 display-inbl">@{{ attribute.name ? attribute.name : attribute.admin_name }}</h4>
 
@@ -98,20 +97,20 @@
                         @change="priceRangeUpdated($event)"
                     ></vue-slider>
 
-                    <div class="row col-12 no-margin no-padding">
+                    <div class="filter-input row col-12 no-padding">
                         <input
-                            class="col"
                             type="text"
+                            disabled
                             name="price_from"
-                            :value="`{{ core()->currencySymbol(core()->getBaseCurrencyCode()) }}${sliderConfig.priceFrom}`"
+                            :value="sliderConfig.priceFrom"
                             id="price_from" />
 
                         <label class="col text-center" for="to">to</label>
                         <input
-                        class="col"
                         type="text"
+                        disabled
                         name="price_to"
-                        :value="`{{ core()->currencySymbol(core()->getBaseCurrencyCode()) }}${sliderConfig.priceTo}`"
+                        :value="sliderConfig.priceTo"
                         id="price_to">
                     </div>
                 </div>

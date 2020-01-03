@@ -27,10 +27,6 @@ return [
                         'value' => false
                     ]
                 ]
-            ], [
-                'name' => 'featured_product',
-                'title' => 'shop::app.home.featured-products',
-                'type' => 'text',
             ]
         ]
     ],  [

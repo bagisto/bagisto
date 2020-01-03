@@ -487,7 +487,7 @@
         .rango-close {
             top: -10px;
             left: -10px;
-            padding: 4px;
+            padding: 3px 4px 3px 3px;
             font-size: 10px;
             max-height: 17px;
             line-height: 1.3rem;
@@ -1424,14 +1424,36 @@
     }
 }
 
-.price-range {
-    display: flex;
-    justify-content: space-evenly;
+.filter-attributes-item {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #CCCCCC;
+        &.active {
+            .filter-attributes-content {
+                display: block;
+            }
+        }
 
-    .price-from {
-        border: 1px solid $theme-color;
+    .filter-input {
+        margin:  10px 15px 13px -4px;
+
+        input[type=text] {
+            text-align: center;
+            border: 1px solid $theme-color;
+            width: 30%;
+            background-color: white;
+        }
     }
-    .price-to {
-        border: 1px solid $theme-color;
+
+    .checkbox {
+        input[type=checkbox] {
+            width: 14px;
+            height: 14px;
+            transform: scale(0.9);
+        }
+    }
+
+    .filter-attributes-content {
+        display: none ;
+        margin-left: 7px;
     }
 }
