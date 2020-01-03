@@ -69,6 +69,7 @@ class ConfigurationController extends Controller
         }
 
         $params['advertisement'] = json_encode($params['advertisement']);
+        $params['home_page_content'] = str_replace('=&gt;', '=>', $params['home_page_content']);
 
         unset($params['images']);
         unset($params['slides']);

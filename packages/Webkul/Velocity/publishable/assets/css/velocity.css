@@ -1795,12 +1795,12 @@
 }
 
 .product-price .regular-price {
-  font-weight: 600;
   margin-right: 10px;
+  text-decoration: line-through;
 }
 
 .product-price .special-price {
-  text-decoration: line-through;
+  font-weight: 600;
 }
 
 #app {
@@ -2899,10 +2899,6 @@ body::after {
   padding: 40px;
   padding-left: 10%;
   padding-right: 10%;
-}
-
-.footer .top-brands .top-brands-body {
-  padding: 15px;
 }
 
 .footer .top-brands .top-brands-body ul {

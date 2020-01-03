@@ -39,7 +39,7 @@
                     </div>
                 </template>
 
-                <template v-if="(! (viewAll == 'false' || viewAll == '')) && false">
+                <template v-if="(! (viewAll == 'false' || viewAll == ''))">
                     <div class="mr15">
                         <a :href="viewAll" :title="`View all ${headerHeading}`" class="default">
                             <h2 class="fs14 fw6 cursor-pointer tab">View All</h2>
