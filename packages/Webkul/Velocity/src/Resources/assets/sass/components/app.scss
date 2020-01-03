@@ -1423,3 +1423,15 @@
         }
     }
 }
+
+.price-range {
+    display: flex;
+    justify-content: space-evenly;
+
+    .price-from {
+        border: 1px solid $theme-color;
+    }
+    .price-to {
+        border: 1px solid $theme-color;
+    }
+}

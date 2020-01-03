@@ -2130,6 +2130,23 @@
           box-shadow: none;
 }
 
+.price-range {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.price-range .price-from {
+  border: 1px solid #26A37C;
+}
+
+.price-range .price-to {
+  border: 1px solid #26A37C;
+}
+
 /* @author Shubham Mehrotra */
 body {
   overflow-x: hidden;
