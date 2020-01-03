@@ -852,7 +852,7 @@ return [
     ],
 
     'footer' => [
-        'copy-right' => 'Powered by <a href="https://bagisto.com/" target="_blank">Bagisto</a>, A Community Project by <a href="https://webkul.com/" target="_blank">Webkul</a>',
+        'copy-right' => ' مدعوم من <a href="https://bagisto.com/" target="_blank"> Bagisto </a> ، مشروع مجتمع بواسطة <a href="https://webkul.com/" target="_blank">Webkul</a>'
     ],
 
     'admin' => [
