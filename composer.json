@@ -131,7 +131,8 @@
             "set -e",
             "@php artisan migrate:fresh --env=testing",
             "vendor/bin/codecept run unit",
-            "vendor/bin/codecept run functional"
+            "vendor/bin/codecept run functional",
+            "vendor/bin/codecept run trigger"
         ]
     },
     "config": {
