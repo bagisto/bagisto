@@ -67,11 +67,11 @@
                 <h4 class="fw6 display-inbl">@{{ attribute.name ? attribute.name : attribute.admin_name }}</h4>
 
                 <div class="pull-right">
-                    <span class="remove-filter-link" v-if="appliedFilters.length" @click.stop="clearFilters()">
+                    <span class="link-color cursor-pointer" v-if="appliedFilters.length" @click.stop="clearFilters()">
                         {{ __('shop::app.products.remove-filter-link-title') }}
                     </span>
 
-                    <i class="icon" :class="[active ? 'arrow-up-icon' : 'arrow-down-icon']"></i>
+                    <i :class="`icon fs16 ${active ? 'rango-arrow-up' : 'rango-arrow-down'}`"></i>
                 </div>
             </div>
 
@@ -91,8 +91,6 @@
                 <div class="price-range-wrapper" v-if="attribute.type == 'price'">
                     <vue-slider
                         ref="slider"
-                        :lazy="true"
-                        :max="sliderConfig.max"
                         v-model="sliderConfig.value"
                         :process-style="sliderConfig.processStyle"
                         :tooltip-style="sliderConfig.tooltipStyle"

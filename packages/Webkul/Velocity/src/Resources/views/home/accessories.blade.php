@@ -2,8 +2,6 @@
     $newProducts = app('Webkul\Product\Repositories\ProductRepository')->getNewProducts(6)->items();
 
     $products = array_merge(array_merge($newProducts, $newProducts), $newProducts);
-
-    $showRecentlyViewed = true;
 @endphp
 
 <div class="container-fluid accessories">

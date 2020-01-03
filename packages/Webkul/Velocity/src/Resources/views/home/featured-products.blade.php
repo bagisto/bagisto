@@ -8,8 +8,6 @@
     $featuredProducts = app('Webkul\Velocity\Repositories\Product\ProductRepository')->getFeaturedProducts($count);
 
     $featuredProductsCount = $featuredProducts->count();
-
-    $showRecentlyViewed = true;
 @endphp
 
 @if ($featuredProductsCount)

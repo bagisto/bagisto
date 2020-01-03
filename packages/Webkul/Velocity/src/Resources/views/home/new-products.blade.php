@@ -1,7 +1,5 @@
 @php
     $newProducts = app('Webkul\Product\Repositories\ProductRepository')->getNewProducts(6)->items();
-
-    $showRecentlyViewed = false;
 @endphp
 
 @if (! empty($newProducts))
