@@ -8,8 +8,6 @@
 
     $avgRatings = $reviewHelper->getAverageRating($product);
     $avgStarRating = ceil($avgRatings);
-
-    $showRecentlyViewed = false;
 @endphp
 
 @section('page_title')

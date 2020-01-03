@@ -30,7 +30,7 @@
                         <label>{{ __('shop::app.products.total-amount') }}</label>
 
                         <div class="bundle-price">
-                            @{{ formated_total_price | currency(currency_options) }}
+                            @{{ formated_total_price }}
                         </div>
                     </div>
 
@@ -51,7 +51,7 @@
 
         <script type="text/x-template" id="bundle-option-item-template">
             <div class="bundle-option-item">
-                <div class="control-group" :class="[errors.has('bundle_options[' + option.id + '][]') ? 'has-error' : '']">
+                <div :class="`control-group ${errors.has('bundle_options[' + option.id + '][]') ? 'has-error' : ''}`">
                     <label :class="[option.is_required ? 'required' : '']">@{{ option.label }}</label>
 
                     <div v-if="option.type == 'select'">
@@ -65,14 +65,25 @@
 
                     <div v-if="option.type == 'radio'">
                         <span class="radio" v-if="! option.is_required">
-                            <input type="radio" :name="'bundle_options[' + option.id + '][]'" v-model="selected_product" value="0" :id="'bundle_options[' + option.id + '][]'">
+                            <input
+                                type="radio"
+                                :name="'bundle_options[' + option.id + '][]'"
+                                v-model="selected_product"
+                                value="0" />
+
                             <label class="radio-view" :for="'bundle_options[' + option.id + '][]'"></label>
 
                             {{ __('shop::app.products.none') }}
                         </span>
 
                         <span class="radio col-12 ml5" v-for="(product, index2) in option.products">
-                            <input type="radio" :name="'bundle_options[' + option.id + '][]'" v-model="selected_product" v-validate="option.is_required ? 'required' : ''" :data-vv-as="'&quot;' + option.label + '&quot;'" :value="product.id" :id="'bundle_options[' + option.id + '][]'">
+                            <input
+                                type="radio"
+                                :name="'bundle_options[' + option.id + '][]'"
+                                v-model="selected_product"
+                                v-validate="option.is_required ? 'required' : ''"
+                                :data-vv-as="'&quot;' + option.label + '&quot;'"
+                                :value="product.id" />
 
                             @{{ product.name }}
 
@@ -118,7 +129,7 @@
             </div>
         </script>
 
-        <script>
+        <script type="text/javascript">
             Vue.component('bundle-option-list', {
 
                 template: '#bundle-option-list-template',
@@ -127,11 +138,9 @@
 
                 data: function() {
                     return {
-                        config: @json(app('Webkul\Product\Helpers\BundleOption')->getBundleConfig($product)),
-
                         options: [],
-
-                        currency_options: @json(core()->getAccountJsSymbols())
+                        currency_options: @json(core()->getAccountJsSymbols()),
+                        config: @json(app('Webkul\Product\Helpers\BundleOption')->getBundleConfig($product)),
                     }
                 },
 

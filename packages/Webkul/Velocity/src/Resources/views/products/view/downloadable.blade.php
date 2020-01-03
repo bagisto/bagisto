@@ -10,7 +10,7 @@
                 <ul type="none">
                     @foreach ($product->downloadable_samples as $sample)
                         <li>
-                            <a href="{{ route('shop.downloadable.download_sample', ['type' => 'sample', 'id' => $sample->id]) }}" target="_blank">
+                            <a class="remove-decoration" href="{{ route('shop.downloadable.download_sample', ['type' => 'sample', 'id' => $sample->id]) }}" target="_blank">
                                 {{ $sample->title }}
                             </a>
                         </li>
@@ -26,16 +26,30 @@
                 <ul type="none" class="mt15">
                     @foreach ($product->downloadable_links as $link)
                         <li>
-                            <span class="checkbox col-12 ml10">
-                                <input type="checkbox" name="links[]" v-validate="'required'" value="{{ $link->id }}" id="{{ $link->id }}" data-vv-as="&quot;{{ __('shop::app.products.links') }}&quot;"/>
-                                <label class="checkbox-view" for="{{ $link->id }}"></label>
-                                {{ $link->title . ' + ' . core()->currency($link->price) }}
-                            </span>
+                            <div class="checkbox col-12 ml10">
+                                <input
+                                    name="links[]"
+                                    type="checkbox"
+                                    id="{{ $link->id }}"
+                                    v-validate="'required'"
+                                    value="{{ $link->id }}"
+                                    data-vv-as="&quot;{{ __('shop::app.products.links') }}&quot;" />
 
-                            @if ($link->sample_file || $link->sample_url)
-                                <a href="{{ route('shop.downloadable.download_sample', ['type' => 'link', 'id' => $link->id]) }}" target="_blank">
-                                    {{ __('shop::app.products.sample') }}
-                                </a>
+                                <span>{{ $link->title . ' + ' . core()->currency($link->price) }}</span>
+
+                                @if ($link->sample_file || $link->sample_url)
+                                    <a
+                                        target="_blank"
+                                        class="remove-decoration"
+                                        href="{{ route('shop.downloadable.download_sample', [
+                                            'type' => 'link',
+                                            'id' => $link->id
+                                        ]) }}">
+
+                                        {{ __('shop::app.products.sample') }}
+                                    </a>
+                            </div>
+
                             @endif
                         </li>
                     @endforeach

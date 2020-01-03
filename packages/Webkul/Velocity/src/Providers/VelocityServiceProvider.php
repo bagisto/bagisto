@@ -46,6 +46,7 @@ class VelocityServiceProvider extends ServiceProvider
         $velocityHelper = app('Webkul\Velocity\Helpers\Helper');
         $velocityMetaData = $velocityHelper->getVelocityMetaData();
 
+        view()->share('showRecentlyViewed', false);
         view()->share('velocityMetaData', $velocityMetaData);
     }
 

@@ -381,6 +381,7 @@
 
     &.list-card {
         margin-left: 0px;
+        padding-left: 0px;
 
         .background-image-group {
             height: 100%;
@@ -424,6 +425,16 @@
         .product-price {
             .sticker {
                 display: block;
+            }
+        }
+
+        .wishlist-icon {
+            height: 34px;
+            display: table;
+
+            i {
+                display: table-cell;
+                vertical-align: middle;
             }
         }
     }

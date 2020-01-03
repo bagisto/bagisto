@@ -50,7 +50,9 @@
                 </div>
             </div>
 
-            @include ('shop::products.list.recently-viewed')
+            @if ($showRecentlyViewed)
+                @include ('shop::products.list.recently-viewed')
+            @endif
         </div>
     </script>
 

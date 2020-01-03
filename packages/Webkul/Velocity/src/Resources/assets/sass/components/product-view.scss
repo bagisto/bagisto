@@ -343,4 +343,14 @@
             }
         }
     }
+
+    .wishlist-icon {
+        height: 46px;
+        display: table;
+
+        i {
+            display: table-cell;
+            vertical-align: middle;
+        }
+    }
 }

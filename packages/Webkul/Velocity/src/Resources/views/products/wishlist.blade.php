@@ -9,7 +9,12 @@
 
     <a
         class="unset wishlist-icon col-4 offset-4 text-right"
-        href="{{ route('customer.wishlist.' . ($isWished ? 'remove' : 'add'), $product->product_id) }}">
+        @if (! $isWished)
+            href="{{ route('customer.wishlist.add', $product->product_id) }}"
+        @elseif (isset($itemId) && $itemId)
+            href="{{ route('customer.wishlist.remove', $itemId) }}"
+        @endif
+        >
 
         <i class="fs24 {{ $isWished ? 'rango-heart-fill' : 'rango-heart'}}"></i>
     </a>

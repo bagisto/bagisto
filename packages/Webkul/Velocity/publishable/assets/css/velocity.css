@@ -780,6 +780,41 @@
   display: inline-block;
 }
 
+.grid-container {
+  display: block;
+  width: 100%;
+}
+
+.filter-row-one {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  width: 100%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 20px;
+}
+
+.filter-row-one .dropdown-filters {
+  position: absolute;
+  right: 25px;
+}
+
+.filter-row-one .per-page {
+  right: 250px;
+}
+
+.filter-row-one .per-page .per-page-label {
+  position: absolute;
+  right: 120px;
+  width: 100%;
+  top: 8px;
+}
+
 .review-page-container {
   padding: 20px;
 }
@@ -1440,6 +1475,7 @@
 
 .account-content .account-layout .account-items-list.wishlist-container .col-3 #product-card-new {
   margin: 0;
+  width: 22rem;
 }
 
 .account-content .account-layout .max-sm-img-dimention {
@@ -1499,6 +1535,13 @@
 
 .account-content .account-layout .bottom-toolbar .pagination .page-item.previous .angle-left-icon::before {
   content: "\E907";
+}
+
+.account-content .select-icon {
+  left: 95%;
+  top: -28px;
+  font-size: 22px;
+  position: relative;
 }
 
 .alert {
@@ -1952,8 +1995,7 @@
 }
 
 .downloadable-container .sample-list {
-  padding: 15px 0;
-  border-top: solid 1px rgba(162, 162, 162, 0.2);
+  padding: 5px 0;
 }
 
 .downloadable-container .sample-list h3 {
@@ -1970,8 +2012,7 @@
 }
 
 .downloadable-container .link-list {
-  padding: 15px 0;
-  border-top: solid 1px rgba(162, 162, 162, 0.2);
+  padding: 5px 0;
 }
 
 .downloadable-container .link-list h3 {
@@ -2087,6 +2128,23 @@
   outline: none;
   -webkit-box-shadow: none;
           box-shadow: none;
+}
+
+.price-range {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.price-range .price-from {
+  border: 1px solid #26A37C;
+}
+
+.price-range .price-to {
+  border: 1px solid #26A37C;
 }
 
 /* @author Shubham Mehrotra */
@@ -3311,6 +3369,7 @@ body::after {
 
 .lg-card-container.list-card {
   margin-left: 0px;
+  padding-left: 0px;
 }
 
 .lg-card-container.list-card .background-image-group {
@@ -3352,6 +3411,16 @@ body::after {
 
 .lg-card-container.list-card .product-price .sticker {
   display: block;
+}
+
+.lg-card-container.list-card .wishlist-icon {
+  height: 34px;
+  display: table;
+}
+
+.lg-card-container.list-card .wishlist-icon i {
+  display: table-cell;
+  vertical-align: middle;
 }
 
 .lg-card-container.grid-card {
@@ -3782,6 +3851,16 @@ button[disabled] {
   height: 110px;
   background-size: 100% 100%;
   background-position-y: center;
+}
+
+.product-detail .wishlist-icon {
+  height: 46px;
+  display: table;
+}
+
+.product-detail .wishlist-icon i {
+  display: table-cell;
+  vertical-align: middle;
 }
 
 /*!

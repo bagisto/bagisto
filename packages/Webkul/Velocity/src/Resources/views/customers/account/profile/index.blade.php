@@ -23,9 +23,9 @@
 
         <form
             method="POST"
+            @submit.prevent="onSubmit"
             class="account-table-content"
-            action="{{ route('customer.profile.edit') }}"
-            @submit.prevent="onSubmit">
+            action="{{ route('customer.profile.edit') }}">
 
             @csrf
 
@@ -49,7 +49,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row mb-0">
                 <label class="col-12">
                     {{ __('shop::app.customer.account.profile.gender') }}
                 </label>
@@ -57,7 +57,7 @@
                 <div class="col-12">
                     <select
                         name="gender"
-                        class="control"
+                        class="control styled-select"
                         v-validate="'required'"
                         data-vv-as="&quot;{{ __('shop::app.customer.account.profile.gender') }}&quot;">
 
@@ -86,7 +86,10 @@
                             {{ __('velocity::app.shop.gender.female') }}
                         </option>
                     </select>
+
+                    <span class="select-icon rango-arrow-down"></span>
                 </div>
+
             </div>
 
             <div class="row">
@@ -95,7 +98,11 @@
                 </label>
 
                 <div class="col-12">
-                    <input value="{{ $customer->date_of_birth }}" name="date_of_birth" type="text" placeholder="dd/mm/yyyy" />
+                    <input
+                        type="date"
+                        name="date_of_birth"
+                        placeholder="dd/mm/yyyy"
+                        value="{{ $customer->date_of_birth }}" />
                 </div>
             </div>
 

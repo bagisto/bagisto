@@ -40,7 +40,9 @@
                 @endif
                     @include ('shop::products.list.card', [
                         'checkmode' => true,
-                        'product' => $item->product
+                        'itemId' => $item->id,
+                        'removeWishlist' => true,
+                        'product' => $item->product,
                     ])
                 @if ($currentMode == "grid")
                     </div>
