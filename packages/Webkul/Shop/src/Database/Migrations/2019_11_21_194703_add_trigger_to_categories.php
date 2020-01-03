@@ -69,7 +69,6 @@ SQL;
                     WHERE category_id = NEW.id);
             DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
 
-            
             IF EXISTS (
                 SELECT *
                 FROM category_translations 
@@ -79,21 +78,29 @@ SQL;
             
                 OPEN curs;
             
-            	SET done = 0;
+                SET done = 0;
                 REPEAT 
-                	FETCH curs INTO localeCode;
+                    FETCH curs INTO localeCode;
                     
                     SELECT get_url_path_of_category(NEW.id, localeCode) INTO urlPath;
                     
+                    IF NEW.parent_id IS NULL 
+                    THEN
+                        SET urlPath = '';
+                    END IF;
+                    
                     UPDATE category_translations 
-                    SET url_path = urlPath 
-                    WHERE category_translations.category_id = NEW.id;
+                    SET url_path = urlPath
+                    WHERE 
+                        category_translations.category_id = NEW.id 
+                        AND category_translations.locale = localeCode;
                 
                 UNTIL done END REPEAT;
                 
                 CLOSE curs;
                 
             END IF;
+  
 SQL;
     }
 }

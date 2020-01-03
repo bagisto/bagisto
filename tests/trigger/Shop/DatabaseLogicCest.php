@@ -6,6 +6,7 @@ use UnitTester;
 use Webkul\Category\Models\Category;
 use Faker\Factory;
 use Illuminate\Support\Facades\DB;
+use Webkul\Category\Models\CategoryTranslation;
 use Webkul\Core\Models\Locale;
 
 class DatabaseLogicCest
@@ -35,10 +36,18 @@ class DatabaseLogicCest
 
     public function testGetUrlPathOfCategory(UnitTester $I)
     {
+        $rootCategoryTranslation = $I->grabRecord(CategoryTranslation::class, [
+            'slug' => 'root',
+            'locale' => 'en',
+        ]);
+        $rootCategory = $I->grabRecord(Category::class, [
+            'id' => $rootCategoryTranslation->category_id,
+        ]);
+
         $parentCategoryName = $this->faker->word;
         
         $parentCategoryAttributes = [
-            'parent_id'           => 1,
+            'parent_id'           => $rootCategory->id,
             'position'            => 1,
             'status'              => 1,
             $this->localeEn->code => [
@@ -55,7 +64,8 @@ class DatabaseLogicCest
             ],
         ];
 
-        $parentCategory = $I->have(Category::class, $parentCategoryAttributes);
+        $parentCategory = $I->make(Category::class, $parentCategoryAttributes)->first();
+        $rootCategory->prependNode($parentCategory);
         $I->assertNotNull($parentCategory);
 
         $categoryName = $this->faker->word; 
@@ -77,7 +87,8 @@ class DatabaseLogicCest
             ],
         ];
 
-        $category = $I->have(Category::class, $categoryAttributes);
+        $category = $I->make(Category::class, $categoryAttributes)->first();
+        $parentCategory->prependNode($category);
         $I->assertNotNull($category);
 
         $sqlStoredFunction = 'SELECT get_url_path_of_category(:category_id, :locale_code) AS url_path;';
@@ -97,5 +108,25 @@ class DatabaseLogicCest
 
         $expectedUrlPath = strtolower($parentCategoryName) . '/' . strtolower($categoryName);
         $I->assertEquals($expectedUrlPath, $urlPathQueryResult->url_path);
+
+        $root2Category = $I->make(Category::class, [
+            'position'            => 1,
+            'status'              => 1,
+            'parent_id'           => null,
+            $this->localeEn->code => [
+                'name' => $this->faker->word,
+                'slug' => strtolower($this->faker->word),
+                'description' => $this->faker->word,
+                'locale_id' => $this->localeEn->id,
+            ],
+        ])->first();
+        $root2Category->save();
+
+        $urlPathQueryResult = DB::selectOne($sqlStoredFunction, [
+            'category_id' => $root2Category->id,
+            'locale_code' => $this->localeEn->code,
+        ]);
+        $I->assertNotNull($urlPathQueryResult->url_path);
+        $I->assertEquals('', $urlPathQueryResult->url_path);
     }
 }

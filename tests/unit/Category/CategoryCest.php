@@ -34,8 +34,16 @@ class CategoryCest
             'code' => 'en',
         ]);
 
+        $rootCategoryTranslation = $I->grabRecord(CategoryTranslation::class, [
+            'slug' => 'root',
+            'locale' => 'en',
+        ]);
+        $rootCategory = $I->grabRecord(Category::class, [
+            'id' => $rootCategoryTranslation->category_id,
+        ]);
+
         $this->categoryAttributes = [
-            'parent_id' => 1,
+            'parent_id' => $rootCategory->id,
             'position' => 0,
             'status' => 1,
             $this->localeEn->code => [
@@ -46,9 +54,9 @@ class CategoryCest
             ],
         ];
 
-        $this->category = $I->have(Category::class, $this->categoryAttributes);
+        $this->category = $I->make(Category::class, $this->categoryAttributes)->first();
+        $rootCategory->prependNode($this->category);
         $I->assertNotNull($this->category);
-        //return true;
 
         $I->seeRecord(CategoryTranslation::class, [
            'category_id' => $this->category->id,
@@ -67,7 +75,8 @@ class CategoryCest
                 'locale_id' => $this->localeEn->id,
             ],
         ];
-        $this->childCategory = $I->have(Category::class, $this->childCategoryAttributes);
+        $this->childCategory = $I->make(Category::class, $this->childCategoryAttributes)->first();
+        $this->category->prependNode($this->childCategory);
         $I->assertNotNull($this->childCategory);
 
         $expectedUrlPath = $this->category->slug . '/' . $this->childCategory->slug;
@@ -88,7 +97,8 @@ class CategoryCest
                 'locale_id' => $this->localeEn->id,
             ],
         ];
-        $this->grandChildCategory = $I->have(Category::class, $this->grandChildCategoryAttributes);
+        $this->grandChildCategory = $I->make(Category::class, $this->grandChildCategoryAttributes);
+        $this->childCategory->prependNode($this->grandChildCategory);
         $I->assertNotNull($this->grandChildCategory);
 
         $expectedUrlPath .= '/' . $this->grandChildCategory->slug;
@@ -104,7 +114,6 @@ class CategoryCest
 
     public function testChildUrlPathIsUpdatedOnParentUpdate(UnitTester $I)
     {
-        //return true;
         $newCategorySlug = $this->faker->slug;
 
         $this->categoryAttributes[$this->localeEn->code]['slug'] = $newCategorySlug;

@@ -63,8 +63,9 @@ SQL;
             DECLARE parentUrlPath varchar(255);
             DECLARE urlPath varchar(255);
             
-            -- Category with id 1 is root by default
-            IF NEW.category_id <> 1
+            CREATE TEMPORARY TABLE IF NOT EXISTS root_categories AS (SELECT id FROM categories where parent_id IS NULL);
+            
+            IF NEW.category_id NOT IN (SELECT id FROM root_categories)
             THEN
                 
                 SELECT
@@ -77,7 +78,8 @@ SQL;
                     node._lft >= parent._lft
                     AND node._rgt <= parent._rgt
                     AND node.id = (SELECT parent_id FROM categories WHERE id = NEW.category_id)
-                    AND parent.id <> 1
+                    AND node.parent_id IS NOT NULL 
+                    AND parent.parent_id IS NOT NULL
                     AND parent_translations.locale = NEW.locale
                 GROUP BY
                     node.id;

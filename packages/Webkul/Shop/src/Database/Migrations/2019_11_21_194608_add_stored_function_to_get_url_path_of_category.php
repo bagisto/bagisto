@@ -23,8 +23,9 @@ class AddStoredFunctionToGetUrlPathOfCategory extends Migration
             BEGIN
             
                 DECLARE urlPath VARCHAR(255);
-                -- Category with id 1 is root by default
-                IF categoryId <> 1
+                CREATE TEMPORARY TABLE IF NOT EXISTS root_categories AS (SELECT id FROM categories where parent_id IS NULL);
+
+                IF categoryId NOT IN (SELECT id FROM root_categories)
                 THEN
                     SELECT
                         GROUP_CONCAT(parent_translations.slug SEPARATOR '/') INTO urlPath
@@ -36,14 +37,20 @@ class AddStoredFunctionToGetUrlPathOfCategory extends Migration
                         node._lft >= parent._lft
                         AND node._rgt <= parent._rgt
                         AND node.id = categoryId
-                        AND parent.id <> 1
+                        AND parent.id NOT IN (SELECT id FROM root_categories)
                         AND parent_translations.locale = localeCode
                     GROUP BY
                         node.id;
                         
                     IF urlPath IS NULL
-                    THEN
-                        SET urlPath = (SELECT slug FROM category_translations WHERE category_translations.category_id = categoryId);
+                    THEN                    
+                        SET urlPath = (
+                                    SELECT slug 
+                                    FROM category_translations 
+                                    WHERE 
+                                        category_translations.category_id = categoryId
+                                        AND category_translations.locale = localeCode
+                                    );
                     END IF;
                  ELSE
                     SET urlPath = '';
