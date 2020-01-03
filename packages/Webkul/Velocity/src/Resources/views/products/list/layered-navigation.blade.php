@@ -100,15 +100,17 @@
                     <div class="filter-input row col-12 no-padding">
                         <input
                             type="text"
+                            disabled
                             name="price_from"
-                            :value="`{{ core()->currencySymbol(core()->getBaseCurrencyCode()) }}${sliderConfig.priceFrom}`"
+                            :value="sliderConfig.priceFrom"
                             id="price_from" />
 
                         <label class="col text-center" for="to">to</label>
                         <input
                         type="text"
+                        disabled
                         name="price_to"
-                        :value="`{{ core()->currencySymbol(core()->getBaseCurrencyCode()) }}${sliderConfig.priceTo}`"
+                        :value="sliderConfig.priceTo"
                         id="price_to">
                     </div>
                 </div>
