@@ -206,14 +206,14 @@ class CatalogRuleProduct
         $results = $this->catalogRuleProductRepository->scopeQuery(function($query) use($product) {
             $qb = $query->distinct()
                     ->select('catalog_rule_products.*')
-                    ->leftJoin('product_flat', 'catalog_rule_products.product_id', '=', 'product_flat.product_id')
-                    ->where('product_flat.status', 1)
-                    ->addSelect('product_flat.price')
+                    ->leftJoin('products', 'catalog_rule_products.product_id', '=', 'products.id')
                     ->orderBy('channel_id', 'asc')
                     ->orderBy('customer_group_id', 'asc')
                     ->orderBy('product_id', 'asc')
                     ->orderBy('sort_order', 'asc')
                     ->orderBy('catalog_rule_id', 'asc');
+
+            $qb = $this->addAttributeToSelect('price', $qb);
 
             if ($product) {
                 if ($product->type == 'configurable') {

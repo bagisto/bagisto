@@ -501,7 +501,7 @@ return [
     ],
 
     'webkul' => [
-        'copy-right' => 'حقوق الملكية محفوظة 2019'
+        'copy-right' => 'مدعوم من <a href="https://bagisto.com/" target="_blank">Bagisto</a> ، مشروع مجتمع بواسطة <a href="https://webkul.com/" target="_blank">Webkul</a>'
     ],
 
     'response' => [

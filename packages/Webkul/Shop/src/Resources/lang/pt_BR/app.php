@@ -516,7 +516,7 @@ return [
     ],
 
     'webkul' => [
-        'copy-right' => '© Copyright :year Webkul Software, Todos os Direitos Reservados',
+        'copy-right' => 'Desenvolvido por <a href="https://bagisto.com/" target="_blank">Bagisto</a>, um projeto comunitário da <a href="https://webkul.com/" target="_blank">Webkul</a>'
     ],
 
     'response' => [

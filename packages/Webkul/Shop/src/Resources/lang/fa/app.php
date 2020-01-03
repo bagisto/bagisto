@@ -538,7 +538,7 @@ return [
     ],
 
     'webkul' => [
-        'copy-right' => '© کپی رایت: نرم افزار Webkul سال ، کلیه حقوق محفوظ است',
+        'copy-right' => 'طراحی شده توسط <a href="https://bagisto.com/" target="_blank">Bagisto</a> ، یک پروژه عمومی توسط <a href="https://webkul.com/" target="_blank">Webkul</a>',
     ],
 
     'response' => [
