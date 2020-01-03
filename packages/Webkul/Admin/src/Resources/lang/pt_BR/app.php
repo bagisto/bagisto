@@ -976,7 +976,11 @@ return [
     ],
 
     'footer' => [
-        'copy-right' => '© Copyright '.date('Y').' Webkul Software, Todos os direitos reservados.'
+        'copy-right' => '© Copyright '.date('Y').' Webkul Software, Todos os direitos reservados.',
+        'powered-by' => 'Powered by',
+        'community-by' => 'Community Project by',
+        'bagisto' => 'Bagisto',
+        'webkul' => 'Webkul'
     ],
 
     'admin' => [

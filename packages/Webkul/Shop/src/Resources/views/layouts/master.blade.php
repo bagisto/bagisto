@@ -76,7 +76,17 @@
                     @if (core()->getConfigData('general.content.footer.footer_content'))
                         {{ core()->getConfigData('general.content.footer.footer_content') }}
                     @else
-                        {{ trans('admin::app.footer.copy-right') }}
+                        {{ trans('admin::app.footer.powered-by') }}
+
+                        <a href="https://bagisto.com/" target="_blank">
+                            {{ trans('admin::app.footer.bagisto') }}
+                        </a>,
+
+                        {{ trans('admin::app.footer.community-by') }}
+
+                        <a href="https://webkul.com/" target="_blank">
+                            {{ trans('admin::app.footer.webkul') }}
+                        </a>
                     @endif
                 </p>
             </div>

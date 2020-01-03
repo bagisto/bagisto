@@ -1171,7 +1171,11 @@ return [
     ],
 
     'footer' => [
-        'copy-right' => '© Copyright 2018 Webkul Software, All rights reserved.'
+        'copy-right' => '© Copyright 2018 Webkul Software, All rights reserved.',
+        'powered-by' => 'Powered by',
+        'community-by' => 'Community Project by',
+        'bagisto' => 'Bagisto',
+        'webkul' => 'Webkul'
     ],
 
     'admin' => [

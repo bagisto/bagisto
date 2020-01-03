@@ -998,7 +998,11 @@ return [
     ],
 
     'footer' => [
-        'copy-right' => '© کپی رایت 2019 کلیه حقوق محفوظ است.'
+        'copy-right' => '© کپی رایت 2019 کلیه حقوق محفوظ است.',
+        'powered-by' => 'Powered by',
+        'community-by' => 'Community Project by',
+        'bagisto' => 'Bagisto',
+        'webkul' => 'Webkul'
     ],
 
     'admin' => [
