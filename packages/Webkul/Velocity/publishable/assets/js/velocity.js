@@ -1197,12 +1197,13 @@ $(document).ready(function () {
             if (sliderContainer && sliderContainer.length) {
                 sliderContainer = sliderContainer[0];
 
-                console.log(sliderContainer);
+                var carouselImg = sliderContainer.querySelector('.VueCarousel-inner img');
 
-                // setInterval(() => {
-                //     debugger
-                //     sliderContainer.scrollTo(500, 0);
-                // }, 1000);
+                setTimeout(function () {
+                    // debugger
+                    carouselImg.scrollTo(0, 500);
+                    // carouselImg.scrollTo(500, 0);
+                }, 1000);
             }
         },
 

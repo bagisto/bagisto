@@ -96,7 +96,6 @@ $(document).ready(function () {
                 Array.from(modals).forEach(modal => {
                     modal.classList.add('hide');
                 });
-
             });
         },
 
@@ -105,12 +104,13 @@ $(document).ready(function () {
             if (sliderContainer && sliderContainer.length) {
                 sliderContainer = sliderContainer[0];
 
-                console.log(sliderContainer);
+                let carouselImg = sliderContainer.querySelector('.VueCarousel-inner img');
 
-                // setInterval(() => {
-                //     debugger
-                //     sliderContainer.scrollTo(500, 0);
-                // }, 1000);
+                setTimeout(() => {
+                    // debugger
+                    carouselImg.scrollTo(0, 500);
+                    // carouselImg.scrollTo(500, 0);
+                }, 1000);
             }
         },
 

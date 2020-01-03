@@ -19,17 +19,5 @@ return [
         'route' => 'velocity.admin.meta-data',
         'sort' => 2,
         'icon-class' => '',
-    ], [
-        'key' => 'velocity.header.content',
-        'name' => 'velocity::app.admin.layouts.cms-pages',
-        'route' => 'velocity.admin.content.index',
-        'sort' => 1,
-        'icon-class' => '',
-    ], [
-        'key' => 'velocity.header.category',
-        'name' => 'velocity::app.admin.layouts.category-menu',
-        'route' => 'velocity.admin.category.index',
-        'sort' => 2,
-        'icon-class' => '',
     ]
 ];

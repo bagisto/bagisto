@@ -58,9 +58,6 @@ class CategoryController extends Controller
 
             return redirect()->route('admin.configuration.index', ['slug' => 'velocity', 'slug2' => 'configuration']);
         }
-
-
-
         return view($this->_config['view']);
     }
 

@@ -1,11 +1,8 @@
 <?php
 
 Route::group(['middleware' => ['web']], function () {
-
     Route::prefix('admin/velocity')->group(function () {
-
         Route::group(['middleware' => ['admin']], function () {
-
             Route::namespace('Webkul\Velocity\Http\Controllers\Admin')->group(function () {
                 // Content Pages Route
                 Route::get('/content', 'ContentController@index')->defaults('_config', [
@@ -35,33 +32,6 @@ Route::group(['middleware' => ['web']], function () {
                 Route::post('/content/masssdelete', 'ContentController@massDestroy')->defaults('_config', [
                     'redirect' => 'velocity.admin.content.index'
                 ])->name('velocity.admin.content.mass-delete');
-
-                // Main Category Route
-                Route::get('/category', 'CategoryController@index')->defaults('_config', [
-                    'view' => 'velocity::admin.category.index'
-                ])->name('velocity.admin.category.index');
-
-                Route::get('/category/create', 'CategoryController@create')->defaults('_config',[
-                    'view' => 'velocity::admin.category.create'
-                ])->name('velocity.admin.category.create');
-
-                Route::post('/category/create', 'CategoryController@store')->defaults('_config',[
-                    'redirect' => 'velocity.admin.category.index'
-                ])->name('velocity.admin.category.store');
-
-                Route::get('/category/edit/{id}', 'CategoryController@edit')->defaults('_config',[
-                    'view' => 'velocity::admin.category.edit'
-                ])->name('velocity.admin.category.edit');
-
-                Route::put('/category/edit/{id}', 'CategoryController@update')->defaults('_config', [
-                    'redirect' => 'velocity.admin.category.index'
-                ])->name('velocity.admin.category.update');
-
-                Route::post('/category/delete/{id}', 'CategoryController@destroy')->name('velocity.admin.category.delete');
-
-                Route::post('/category/masssdelete', 'CategoryController@massDestroy')->defaults('_config', [
-                    'redirect' => 'velocity.admin.category.index'
-                ])->name('velocity.admin.category.mass-delete');
 
                 Route::get('/meta-data', 'ConfigurationController@renderMetaData')->defaults('_config', [
                     'view' => 'velocity::admin.meta-info.meta-data'
