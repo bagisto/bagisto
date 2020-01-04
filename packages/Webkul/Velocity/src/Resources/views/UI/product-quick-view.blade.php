@@ -1,26 +1,34 @@
 @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
+@inject ('reviewHelper', 'Webkul\Product\Helpers\Review')
 
 @php
     $productBaseImage = $productImageHelper->getProductBaseImage($product);
     $productPrice = $product->getTypeInstance()->getProductPrices();
-
+    $totalReviews = $product->reviews;
+    $avgRatings = ceil($reviewHelper->getAverageRating($product));
 @endphp
+
+<?php
+    foreach ($totalReviews as $review) {
+        $productReview = $review;
+    }
+?>
 
 <script type="text/x-template" id="quick-view-btn-template">
 
     <div
         class="quick-view-btn-container"
         id="quick-view-btn-container"
+        :name="details"
         @click="openQuickView({details: details, event: $event})">
-
-        {{-- <product-quick-view
+        <product-quick-view
             v-if="quickViewDetails"
             :quick-view-details="quickViewDetails"
         ></product-quick-view>
 
         <span class="rango-zoom-plus"></span>
 
-        <button type="button">Quick View</button> --}}
+        <button type="button">Quick View</button>
     </div>
 </script>
 
@@ -42,28 +50,36 @@
             </ul>
         </div>
 
-        <div class="col-lg-6 cd-item-info fs14">
-            <h2 class="text-nowrap fw6" v-text="quickViewDetails['name']"></h2>
+        <div class="col-lg-6 cd-item-info fs16">
+            <h2 class="text-nowrap fw6">{{ $product->name }}</h2>
 
-            <h2 class="text-nowrap fw6">{{ $productPrice['final_price']['formated_price'] }}</h2>
+            <div class="product-price fs14">
+                <h2 class="text-nowrap fw6">{{ $product->price }}</h2>
+            </div>
 
-            <star-ratings :ratings="quickViewDetails['star-rating']" push-class="display-inbl"></star-ratings>
-
-            <span class="align-vertical-top"> 25 ratings</span>
+            @if ($totalReviews)
+                <div class="">
+                    {{ $productReview['rating'] }} Ratings
+                </div>
+            @else
+                <div class="">
+                    <a href="">{{ __('velocity::app.products.be-first-review') }}</a>
+                </div>
+            @endif
 
             <p class="pt20">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                {!! $product->description !!}
             </p>
 
-            <div class="close-btn rango-close fs18 cursor-pointer" @click="closeQuickView"></div>
-
             <div class="action-buttons">
-                <add-to-cart-btn></add-to-cart-btn>
-                <span class="rango-exchange fs24"></span>
-                <span class="rango-heart fs24"></span>
+
+                <div style="display: inline-block;" class="rango-exchange fs24"></div>
+                <div style="display: inline-block;" class="rango-heart fs24"></div>
             </div>
 
         </div>
+
+        <div class="close-btn rango-close fs18 cursor-pointer" @click="closeQuickView"></div>
     </div>
 </script>
 
@@ -101,7 +117,7 @@
                         //     'left': '200px',
                         // }, 3000, 'ease');
 
-                        this.quickViewDetails = details;
+                        this.quickViewDetails = true;
                     }
                 }
             })
@@ -114,8 +130,6 @@
                     // backgroud blur
 
                     let body = $('body');
-                    // body.addClass('body-blur');
-
                     return {
                         body: body,
                         currentlyActiveImage: 0,
@@ -124,13 +138,13 @@
                 },
 
                 mounted: function () {
+                    // console.log(this.quickViewDetails, this.quickView);
                 },
 
                 methods: {
                     closeQuickView: function () {
-                        // this.body.removeClass('body-blur');
                         this.quickView = false;
-                        this.$parent.quickViewDetails = false;
+                        this.quickViewDetails = false;
                     },
 
                     changeImage: function (imageIndex) {

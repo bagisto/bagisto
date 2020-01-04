@@ -578,13 +578,13 @@ header #search-form > *:focus {
 }
 
 .quick-view-btn-container {
-    display: none;
     position: relative;
+    margin: 48px 1px 0px -18px;
 
     span {
         left: 32%;
         top: -26px;
-        z-index: 1000;
+        z-index: 1;
         font-size: 16px;
         color: #FFFFFF;
         position: absolute;
@@ -598,6 +598,7 @@ header #search-form > *:focus {
         font-size: 16px;
         padding: 5px 10px 7px 24px;
         position: absolute;
+        opacity: 0.8;
         background-color: #0D2438;
     }
 }
@@ -678,3 +679,6 @@ body::after {
     padding: 0px !important;
 }
 
+.demo {
+    border: 1px solid red;
+}
