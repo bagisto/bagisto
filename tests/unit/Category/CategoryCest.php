@@ -37,29 +37,16 @@ class CategoryCest
             'code' => 'en',
         ]);
 
-        $this->rootCategoryAttributes = [
-            'parent_id' => null,
-            'position' => 0,
-            'status' => 1,
-            $this->localeEn->code => [
-                'name' => $this->faker->word,
-                'slug' => $this->faker->slug,
-                'description' => $this->faker->sentence(),
-                'locale_id' => $this->localeEn->id,
-            ],
-        ];
-
-        $this->rootCategory = $I->have(Category::class, $this->rootCategoryAttributes);
-        $I->assertNotNull($this->rootCategory);
-
-        $I->seeRecord(CategoryTranslation::class, [
-           'category_id' => $this->rootCategory->id,
-           'locale' => $this->localeEn->code,
-           'url_path' => null,
+        $rootCategoryTranslation = $I->grabRecord(CategoryTranslation::class, [
+            'slug' => 'root',
+            'locale' => 'en',
+        ]);
+        $rootCategory = $I->grabRecord(Category::class, [
+            'id' => $rootCategoryTranslation->category_id,
         ]);
 
         $this->categoryAttributes = [
-            'parent_id' => $this->rootCategory->id,
+            'parent_id' => $rootCategory->id,
             'position' => 0,
             'status' => 1,
             $this->localeEn->code => [
@@ -70,7 +57,8 @@ class CategoryCest
             ],
         ];
 
-        $this->category = $I->have(Category::class, $this->categoryAttributes);
+        $this->category = $I->make(Category::class, $this->categoryAttributes)->first();
+        $rootCategory->prependNode($this->category);
         $I->assertNotNull($this->category);
 
         $I->seeRecord(CategoryTranslation::class, [
@@ -90,7 +78,8 @@ class CategoryCest
                 'locale_id' => $this->localeEn->id,
             ],
         ];
-        $this->childCategory = $I->have(Category::class, $this->childCategoryAttributes);
+        $this->childCategory = $I->make(Category::class, $this->childCategoryAttributes)->first();
+        $this->category->prependNode($this->childCategory);
         $I->assertNotNull($this->childCategory);
 
         $expectedUrlPath = $this->category->slug . '/' . $this->childCategory->slug;
@@ -111,7 +100,8 @@ class CategoryCest
                 'locale_id' => $this->localeEn->id,
             ],
         ];
-        $this->grandChildCategory = $I->have(Category::class, $this->grandChildCategoryAttributes);
+        $this->grandChildCategory = $I->make(Category::class, $this->grandChildCategoryAttributes)->first();
+        $this->childCategory->prependNode($this->grandChildCategory);
         $I->assertNotNull($this->grandChildCategory);
 
         $expectedUrlPath .= '/' . $this->grandChildCategory->slug;
