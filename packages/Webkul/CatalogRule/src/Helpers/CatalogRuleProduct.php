@@ -124,7 +124,6 @@ class CatalogRuleProduct
                     ->addSelect('products.*')
                     ->leftJoin('product_flat', 'products.id', '=', 'product_flat.product_id')
                     ->leftJoin('channels', 'product_flat.channel', '=', 'channels.code')
-                    ->where('product_flat.status', 1)
                     ->whereIn('channels.id', $rule->channels()->pluck('id')->toArray());
 
             if ($product)
@@ -209,17 +208,16 @@ class CatalogRuleProduct
         $results = $this->catalogRuleProductRepository->scopeQuery(function($query) use($product) {
             $qb = $query->distinct()
                     ->select('catalog_rule_products.*')
-                    ->leftJoin('product_flat', 'catalog_rule_products.product_id', '=', 'product_flat.product_id')
-                    ->where('product_flat.status', 1)
-                    ->addSelect('product_flat.price')
+                    ->leftJoin('products', 'catalog_rule_products.product_id', '=', 'products.id')
                     ->orderBy('channel_id', 'asc')
                     ->orderBy('customer_group_id', 'asc')
                     ->orderBy('product_id', 'asc')
                     ->orderBy('sort_order', 'asc')
                     ->orderBy('catalog_rule_id', 'asc');
 
-            if ($product) {
+            $qb = $this->addAttributeToSelect('price', $qb);
 
+            if ($product) {
                 if (! $product->getTypeInstance()->priceRuleCanBeApplied())
                     return $qb;
 

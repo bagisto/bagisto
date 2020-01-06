@@ -115,6 +115,16 @@ class Grouped extends AbstractType
     }
 
     /**
+     * Check if catalog rule can be applied
+     *
+     * @return bool
+     */
+    public function priceRuleCanBeApplied()
+    {
+        return false;
+    }
+
+    /**
      * Get product minimal price
      *
      * @return float

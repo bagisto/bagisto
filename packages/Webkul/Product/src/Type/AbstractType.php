@@ -487,12 +487,26 @@ abstract class AbstractType
      */
     public function haveSpecialPrice()
     {
-        if (is_null($this->product->special_price) || ! (float) $this->product->special_price) {
-            return false;
-        }
+        $rulePrice = app('Webkul\CatalogRule\Helpers\CatalogRuleProductPrice')->getRulePrice($this->product);
 
-        if (core()->isChannelDateInInterval($this->product->special_price_from, $this->product->special_price_to)) {
-            return true;
+        if ((is_null($this->product->special_price) || ! (float) $this->product->special_price) && ! $rulePrice)
+            return false;
+
+        if (! (float) $this->product->special_price) {
+            if ($rulePrice) {
+                $this->product->special_price = $rulePrice->price;
+
+                return true;
+            }
+        } else {
+            if ($rulePrice && $rulePrice->price <= $this->product->special_price) {
+                $this->product->special_price = $rulePrice->price;
+
+                return true;
+            } else {
+                if (core()->isChannelDateInInterval($this->product->special_price_from, $this->product->special_price_to))
+                    return true;
+            }
         }
 
         return false;
