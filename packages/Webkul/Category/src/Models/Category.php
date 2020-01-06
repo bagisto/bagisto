@@ -55,14 +55,15 @@ class Category extends TranslatableModel implements CategoryContract
     }
 
     /**
+     * Getting the root category of a category
      * 
+     * @return Category
      */
-    public function rootCategory(): Category
+    public function getRootCategory(): Category
     {
-        return $this->hasOne(Category::modelClass())
-            ->where('parent_id', null)
-            ->andWhere('_lft', '<=', $this->_lft)
-            ->andWhere('_rgt', '>=', $this->_rgt)
+        return Category::whereNull('parent_id')
+            ->where('_lft', '<=', $this->_lft)
+            ->where('_rgt', '>=', $this->_rgt)
             ->first();
     }
 
@@ -95,8 +96,7 @@ class Category extends TranslatableModel implements CategoryContract
     private function findInTree($categoryTree = null): Category
     {
         if (! $categoryTree) {
-            $rootCategoryId = core()->getCurrentChannel()->rootCategory->id;
-            $categoryTree = app(CategoryRepository::class)->getVisibleCategoryTree($rootCategoryId);
+            $categoryTree = app(CategoryRepository::class)->getVisibleCategoryTree($this->getRootCategory()->id);
         }
 
         foreach ($categoryTree as $category) {

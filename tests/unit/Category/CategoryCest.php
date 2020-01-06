@@ -41,12 +41,12 @@ class CategoryCest
             'slug' => 'root',
             'locale' => 'en',
         ]);
-        $rootCategory = $I->grabRecord(Category::class, [
+        $this->rootCategory = $I->grabRecord(Category::class, [
             'id' => $rootCategoryTranslation->category_id,
         ]);
 
         $this->categoryAttributes = [
-            'parent_id' => $rootCategory->id,
+            'parent_id' => $this->rootCategory->id,
             'position' => 0,
             'status' => 1,
             $this->localeEn->code => [
@@ -58,7 +58,7 @@ class CategoryCest
         ];
 
         $this->category = $I->make(Category::class, $this->categoryAttributes)->first();
-        $rootCategory->prependNode($this->category);
+        $this->rootCategory->prependNode($this->category);
         $I->assertNotNull($this->category);
 
         $I->seeRecord(CategoryTranslation::class, [
@@ -159,7 +159,7 @@ class CategoryCest
     public function testGetRootCategory(UnitTester $I)
     {
         $I->wantTo('test rootCategory attribute of a category');
-        $rootCategory = $this->grandChildCategory->rootCategory;
+        $rootCategory = $this->grandChildCategory->getRootCategory();
 
         $I->assertNotNull($rootCategory);
         $I->assertEquals($rootCategory->id, $this->rootCategory->id);
