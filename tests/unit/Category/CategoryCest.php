@@ -97,7 +97,7 @@ class CategoryCest
                 'locale_id' => $this->localeEn->id,
             ],
         ];
-        $this->grandChildCategory = $I->make(Category::class, $this->grandChildCategoryAttributes);
+        $this->grandChildCategory = $I->make(Category::class, $this->grandChildCategoryAttributes)->first();
         $this->childCategory->prependNode($this->grandChildCategory);
         $I->assertNotNull($this->grandChildCategory);
 

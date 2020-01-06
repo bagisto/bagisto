@@ -1,9 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddTriggerToCategories extends Migration
+class AlterTriggerOnCategories extends Migration
 {
     private const TRIGGER_NAME_INSERT = 'trig_categories_insert';
     private const TRIGGER_NAME_UPDATE = 'trig_categories_update';
@@ -35,10 +37,10 @@ SQL;
             END;
 SQL;
 
-        DB::unprepared(sprintf('DROP TRIGGER IF EXISTS %s;', self::TRIGGER_NAME_INSERT));
+        $this->dropTriggers();
+
         DB::unprepared(sprintf($insertTrigger, self::TRIGGER_NAME_INSERT));
 
-        DB::unprepared(sprintf('DROP TRIGGER IF EXISTS %s;', self::TRIGGER_NAME_UPDATE));
         DB::unprepared(sprintf($updateTrigger, self::TRIGGER_NAME_UPDATE));
     }
 
@@ -49,9 +51,15 @@ SQL;
      */
     public function down()
     {
+        $this->dropTriggers();
+    }
+
+    private function dropTriggers()
+    {
         DB::unprepared(sprintf('DROP TRIGGER IF EXISTS %s;', self::TRIGGER_NAME_INSERT));
         DB::unprepared(sprintf('DROP TRIGGER IF EXISTS %s;', self::TRIGGER_NAME_UPDATE));
     }
+
 
     /**
      * Returns trigger body as string
@@ -85,9 +93,16 @@ SQL;
                     
                     SELECT get_url_path_of_category(NEW.id, localeCode) INTO urlPath;
                     
+                    IF NEW.parent_id IS NULL 
+                    THEN
+                        SET urlPath = '';
+                    END IF;
+                    
                     UPDATE category_translations 
                     SET url_path = urlPath 
-                    WHERE category_translations.category_id = NEW.id;
+                    WHERE 
+                        category_translations.category_id = NEW.id
+                        AND category_translations.locale = localeCode;
                 
                 UNTIL done END REPEAT;
                 

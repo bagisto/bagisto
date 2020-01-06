@@ -122,6 +122,8 @@ class DatabaseLogicCest
         ])->first();
         $root2Category->save();
 
+        $I->assertNull($root2Category->refresh()->parent_id);
+
         $urlPathQueryResult = DB::selectOne($sqlStoredFunction, [
             'category_id' => $root2Category->id,
             'locale_code' => $this->localeEn->code,

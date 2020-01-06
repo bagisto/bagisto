@@ -179,7 +179,6 @@ class TriggerCest
             'locale' => $this->localeDe->code,
             'url_path' => strtolower($this->parentCategoryName) . '/' . strtolower($this->categoryName)
         ]);
-        //eval(\psy\sh()); // TODO REMOVE
         $I->seeRecord(CategoryTranslation::class, [
             'category_id' => $this->root2Category->id,
             'name' => $this->root2CategoryName,

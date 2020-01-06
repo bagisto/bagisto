@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Migrations\Migration;
 
-class AddStoredFunctionToGetUrlPathOfCategory extends Migration
+class AlterStoredFunctionUrlPathCategory extends Migration
 {
     /**
      * Run the migrations.
@@ -23,8 +23,14 @@ class AddStoredFunctionToGetUrlPathOfCategory extends Migration
             BEGIN
             
                 DECLARE urlPath VARCHAR(255);
-                -- Category with id 1 is root by default
-                IF categoryId <> 1
+                
+                IF NOT EXISTS (
+                    SELECT id 
+                    FROM categories
+                    WHERE
+                        id = categoryId
+                        AND parent_id IS NULL
+                )
                 THEN
                     SELECT
                         GROUP_CONCAT(parent_translations.slug SEPARATOR '/') INTO urlPath
@@ -36,7 +42,8 @@ class AddStoredFunctionToGetUrlPathOfCategory extends Migration
                         node._lft >= parent._lft
                         AND node._rgt <= parent._rgt
                         AND node.id = categoryId
-                        AND parent.id <> 1
+                        AND node.parent_id IS NOT NULL
+                        AND parent.parent_id IS NOT NULL
                         AND parent_translations.locale = localeCode
                     GROUP BY
                         node.id;

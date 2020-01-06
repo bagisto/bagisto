@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Migrations\Migration;
 
-class AddTriggerToCategoryTranslations extends Migration
+class AlterTriggerCategoryTranslations extends Migration
 {
     private const TRIGGER_NAME_INSERT = 'trig_category_translations_insert';
     private const TRIGGER_NAME_UPDATE = 'trig_category_translations_update';
@@ -34,10 +34,9 @@ SQL;
             END;
 SQL;
 
-        DB::unprepared(sprintf('DROP TRIGGER IF EXISTS %s;', self::TRIGGER_NAME_INSERT));
-        DB::unprepared(sprintf($insertTrigger, self::TRIGGER_NAME_INSERT));
+        $this->dropTriggers();
 
-        DB::unprepared(sprintf('DROP TRIGGER IF EXISTS %s;', self::TRIGGER_NAME_UPDATE));
+        DB::unprepared(sprintf($insertTrigger, self::TRIGGER_NAME_INSERT));
         DB::unprepared(sprintf($updateTrigger, self::TRIGGER_NAME_UPDATE));
     }
 
@@ -47,6 +46,14 @@ SQL;
      * @return void
      */
     public function down()
+    {
+        $this->dropTriggers();
+    }
+
+    /**
+     * Drop the triggers
+     */
+    private function dropTriggers()
     {
         DB::unprepared(sprintf('DROP TRIGGER IF EXISTS %s;', self::TRIGGER_NAME_INSERT));
         DB::unprepared(sprintf('DROP TRIGGER IF EXISTS %s;', self::TRIGGER_NAME_UPDATE));
@@ -63,8 +70,13 @@ SQL;
             DECLARE parentUrlPath varchar(255);
             DECLARE urlPath varchar(255);
             
-            -- Category with id 1 is root by default
-            IF NEW.category_id <> 1
+            IF NOT EXISTS (
+                SELECT id
+                FROM categories
+                WHERE
+                    id = NEW.category_id
+                    AND parent_id IS NULL
+            )
             THEN
                 
                 SELECT
@@ -77,7 +89,8 @@ SQL;
                     node._lft >= parent._lft
                     AND node._rgt <= parent._rgt
                     AND node.id = (SELECT parent_id FROM categories WHERE id = NEW.category_id)
-                    AND parent.id <> 1
+                    AND node.parent_id IS NOT NULL 
+                    AND parent.parent_id IS NOT NULL
                     AND parent_translations.locale = NEW.locale
                 GROUP BY
                     node.id;
