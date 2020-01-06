@@ -8,20 +8,27 @@ use DB;
 /**
  * Cart Rule DataGrid class
  *
- * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @author Jitendra Singh <jitendra@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class CartRuleDataGrid extends DataGrid
 {
-    protected $index = 'id'; //the column that needs to be treated as index column
+    protected $index = 'id';
 
-    protected $sortOrder = 'desc'; //asc or desc
+    protected $sortOrder = 'desc';
 
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('cart_rules')
-                ->select('id')
-                ->addSelect('id', 'name', 'status', 'end_other_rules', 'action_type', 'disc_amount', 'use_coupon');
+                ->leftJoin('cart_rule_coupons', function($leftJoin) {
+                    $leftJoin->on('cart_rule_coupons.cart_rule_id', '=', 'cart_rules.id')
+                        ->where('cart_rule_coupons.is_primary', 1);
+                })
+                ->addSelect('cart_rules.id', 'name', 'cart_rule_coupons.code as coupon_code', 'status', 'starts_from', 'ends_till', 'sort_order');
+
+        $this->addFilter('id', 'cart_rules.id');
+
+        $this->addFilter('coupon_code', 'cart_rule_coupons.code');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -30,7 +37,7 @@ class CartRuleDataGrid extends DataGrid
     {
         $this->addColumn([
             'index' => 'id',
-            'label' => trans('admin::app.id'),
+            'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
@@ -39,10 +46,37 @@ class CartRuleDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'name',
-            'label' => trans('admin::app.name'),
+            'label' => trans('admin::app.datagrid.name'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
+        ]);
+
+        $this->addColumn([
+            'index' => 'coupon_code',
+            'label' => trans('admin::app.datagrid.coupon-code'),
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'filterable' => true
+        ]);
+
+        $this->addColumn([
+            'index' => 'starts_from',
+            'label' => trans('admin::app.datagrid.start'),
+            'type' => 'datetime',
+            'sortable' => true,
+            'searchable' => false,
+            'filterable' => true
+        ]);
+
+        $this->addColumn([
+            'index' => 'ends_till',
+            'label' => trans('admin::app.datagrid.end'),
+            'type' => 'datetime',
+            'sortable' => true,
+            'searchable' => false,
             'filterable' => true
         ]);
 
@@ -55,89 +89,36 @@ class CartRuleDataGrid extends DataGrid
             'filterable' => true,
             'wrapper' => function($value) {
                 if ($value->status == 1)
-                    return 'Active';
+                    return trans('admin::app.datagrid.active');
                 else
-                    return 'In Active';
+                    return trans('admin::app.datagrid.inactive');
             }
         ]);
 
         $this->addColumn([
-            'index' => 'end_other_rules',
-            'label' => 'End Other Rules',
-            'type' => 'boolean',
-            'searchable' => false,
-            'sortable' => true,
-            'filterable' => true,
-            'wrapper' => function($value) {
-                if ($value->end_other_rules == 1)
-                    return 'True';
-                else
-                    return 'False';
-            }
-        ]);
-
-        $this->addColumn([
-            'index' => 'action_type',
-            'label' => 'Action Type',
-            'type' => 'string',
-            'searchable' => true,
-            'sortable' => true,
-            'filterable' => true,
-            'wrapper' => function($value) {
-                return config('pricerules.cart.actions')[$value->action_type];
-            }
-        ]);
-
-        $this->addColumn([
-            'index' => 'disc_amount',
-            'label' => 'Discount Amount',
+            'index' => 'sort_order',
+            'label' => trans('admin::app.datagrid.priority'),
             'type' => 'number',
-            'searchable' => false,
+            'searchable' => true,
             'sortable' => true,
             'filterable' => true
-        ]);
-
-        $this->addColumn([
-            'index' => 'use_coupon',
-            'label' => 'Use Coupon',
-            'type' => 'boolean',
-            'searchable' => true,
-            'sortable' => true,
-            'filterable' => true,
-            'wrapper' => function($value) {
-                if ($value->use_coupon == 1) {
-                    return 'True';
-                } else {
-                    return 'False';
-                }
-            }
         ]);
     }
 
     public function prepareActions()
     {
         $this->addAction([
-            'title' => 'Edit CartRule',
-            'method' => 'GET', //use post only for redirects only
-            'route' => 'admin.cart-rule.edit',
+            'title' => 'Edit Cart Rule',
+            'method' => 'GET',
+            'route' => 'admin.cart-rules.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
-            'title' => 'Delete CartRule',
-            'method' => 'POST', //use post only for requests other than redirects
-            'route' => 'admin.cart-rule.delete',
+            'title' => 'Delete Cart Rule',
+            'method' => 'POST',
+            'route' => 'admin.cart-rules.delete',
             'icon' => 'icon trash-icon'
         ]);
-    }
-
-    public function prepareMassActions()
-    {
-        // $this->addMassAction([
-        //     'type' => 'delete',
-        //     'action' => route('admin.catalog.attributes.massdelete'),
-        //     'label' => 'Delete',
-        //     'method' => 'DELETE'
-        // ]);
     }
 }

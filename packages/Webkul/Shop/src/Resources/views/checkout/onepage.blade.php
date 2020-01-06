@@ -9,6 +9,8 @@
 @endsection
 
 @push('scripts')
+    @include('shop::checkout.cart.coupon')
+    
     <script type="text/x-template" id="checkout-template">
         <div id="checkout" class="checkout-process">
             <div class="col-main">
@@ -76,12 +78,12 @@
                 <div class="step-content review" v-show="current_step == 4" id="summary-section">
                     <review-section v-if="current_step == 4" :key="reviewComponentKey">
                         <div slot="summary-section">
-                            <summary-section
-                                discount="1"
-                                :key="summeryComponentKey"
+                            <summary-section :key="summeryComponentKey"></summary-section>
+
+                            <coupon-component
                                 @onApplyCoupon="getOrderSummary"
-                                @onRemoveCoupon="getOrderSummary"
-                            ></summary-section>
+                                @onRemoveCoupon="getOrderSummary">
+                            </coupon-component>
                         </div>
                     </review-section>
 
@@ -563,25 +565,9 @@
         Vue.component('summary-section', {
             inject: ['$validator'],
 
-            props: {
-                discount: {
-                    type: [String, Number],
-
-                    default: 0,
-                }
-            },
-
             data: function() {
                 return {
-                    templateRender: null,
-
-                    coupon_code: null,
-
-                    error_message: null,
-
-                    couponChanged: false,
-
-                    changeCount: 0
+                    templateRender: null
                 }
             },
 
@@ -604,53 +590,6 @@
                         this.templateRender() :
                         '')
                     ]);
-            },
-
-            methods: {
-                onSubmit: function() {
-                    var this_this = this;
-                    const emptyCouponErrorText = "Please enter a coupon code";
-                    axios.post('{{ route('shop.checkout.check.coupons') }}', {code: this_this.coupon_code})
-                        .then(function(response) {
-                            this_this.$emit('onApplyCoupon');
-
-                            this_this.couponChanged = true;
-                        })
-                        .catch(function(error) {
-                            this_this.couponChanged = true;
-
-                            this_this.error_message = (error.response.data.message === "The given data was invalid.")?
-                                emptyCouponErrorText :
-                                    (error.response.data.message === "Cannot Apply Coupon")?
-                                        "Sorry, this Coupon code is invalid":error.response.data.message;
-                        });
-                },
-
-                changeCoupon: function() {
-                    if (this.couponChanged == true && this.changeCount == 0) {
-                        this.changeCount++;
-
-                        this.error_message = null;
-
-                        this.couponChanged = false;
-                    } else {
-                        this.changeCount = 0;
-                    }
-                },
-
-                removeCoupon: function () {
-                    var this_this = this;
-
-                    axios.post('{{ route('shop.checkout.remove.coupon') }}')
-                        .then(function(response) {
-                            this_this.$emit('onRemoveCoupon')
-                        })
-                        .catch(function(error) {
-                            window.flashMessages = [{'type' : 'alert-error', 'message' : error.response.data.message}];
-
-                            this_this.$root.addFlashMessages();
-                        });
-                }
             }
         })
     </script>
