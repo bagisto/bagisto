@@ -44,8 +44,7 @@ class ReviewController extends Controller
     public function __construct(
         ProductRepository $productRepository,
         ProductReviewRepository $productReviewRepository
-    )
-    {
+    ) {
         $this->productRepository = $productRepository;
 
         $this->productReviewRepository = $productReviewRepository;
@@ -57,15 +56,17 @@ class ReviewController extends Controller
      * Show the form for creating a new resource.
      *
      * @param  string $slug
-     * @return \Illuminate\View\View 
+     * @return \Illuminate\View\View
      */
     public function create($slug)
     {
-        $product = $this->productRepository->findBySlugOrFail($slug);
+        if (auth()->guard('customer')->check() || core()->getConfigData('catalog.products.review.guest_review')) {
+            $product = $this->productRepository->findBySlugOrFail($slug);
 
-        $guest_review = core()->getConfigData('catalog.products.review.guest_review');
+            return view($this->_config['view'], compact('product', 'guest_review'));
+        }
 
-        return view($this->_config['view'], compact('product', 'guest_review'));
+        abort(404);
     }
 
     /**
@@ -103,7 +104,7 @@ class ReviewController extends Controller
      * Display reviews of particular product.
      *
      * @param  string $slug
-     * @return \Illuminate\View\View 
+     * @return \Illuminate\View\View
     */
     public function show($slug)
     {

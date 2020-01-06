@@ -112,7 +112,7 @@ class ProductRepository extends Repository
     {
         $params = request()->input();
 
-        $results = app('Webkul\Product\Repositories\ProductFlatRepository')->scopeQuery(function($query) use($params, $categoryId) {
+        $results = app(ProductFlatRepository::class)->scopeQuery(function($query) use($params, $categoryId) {
                 $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
                 $locale = request()->get('locale') ?: app()->getLocale();
@@ -212,7 +212,7 @@ class ProductRepository extends Repository
      */
     public function findBySlugOrFail($slug, $columns = null)
     {
-        $product = app('Webkul\Product\Repositories\ProductFlatRepository')->findOneWhere([
+        $product = app(ProductFlatRepository::class)->findOneWhere([
                 'url_key' => $slug,
                 'locale' => app()->getLocale(),
                 'channel' => core()->getCurrentChannelCode(),
@@ -236,7 +236,7 @@ class ProductRepository extends Repository
      */
     public function findBySlug($slug)
     {
-        return app('Webkul\Product\Repositories\ProductFlatRepository')->findOneWhere([
+        return app(ProductFlatRepository::class)->findOneWhere([
             'url_key' => $slug,
             'locale' => app()->getLocale(),
             'channel' => core()->getCurrentChannelCode(),
@@ -250,7 +250,7 @@ class ProductRepository extends Repository
      */
     public function getNewProducts()
     {
-        $results = app('Webkul\Product\Repositories\ProductFlatRepository')->scopeQuery(function($query) {
+        $results = app(ProductFlatRepository::class)->scopeQuery(function($query) {
                 $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
                 $locale = request()->get('locale') ?: app()->getLocale();
@@ -275,7 +275,7 @@ class ProductRepository extends Repository
      */
     public function getFeaturedProducts()
     {
-        $results = app('Webkul\Product\Repositories\ProductFlatRepository')->scopeQuery(function($query) {
+        $results = app(ProductFlatRepository::class)->scopeQuery(function($query) {
                 $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
                 $locale = request()->get('locale') ?: app()->getLocale();
@@ -300,7 +300,7 @@ class ProductRepository extends Repository
      */
     public function searchProductByAttribute($term)
     {
-        $results = app('Webkul\Product\Repositories\ProductFlatRepository')->scopeQuery(function($query) use($term) {
+        $results = app(ProductFlatRepository::class)->scopeQuery(function($query) use($term) {
                 $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
                 $locale = request()->get('locale') ?: app()->getLocale();

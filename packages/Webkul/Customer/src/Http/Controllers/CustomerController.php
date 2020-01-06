@@ -93,8 +93,9 @@ class CustomerController extends Controller
             'gender' => 'required',
             'date_of_birth' => 'date|before:today',
             'email' => 'email|unique:customers,email,'.$id,
+            'password' => 'confirmed|min:6|required_with:oldpassword',
             'oldpassword' => 'required_with:password',
-            'password' => 'confirmed|min:6'
+            'password_confirmation' => 'required_with:password',
         ]);
 
         $data = collect(request()->input())->except('_token')->toArray();
@@ -139,27 +140,26 @@ class CustomerController extends Controller
 
         $customerRepository = $this->customerRepository->findorFail($id);
 
-        $orders = $customerRepository->all_orders->whereIn('status', ['pending', 'processing'])->first();
-
-        if ( $orders ) {
-            session()->flash('error', trans('admin::app.response.order-pending'));
-
-            return redirect()->route($this->_config['redirect']);
-        }
-
         try {
-            if ( Hash::check($data['password'], $customerRepository->password) ) {
+            if (Hash::check($data['password'], $customerRepository->password)) {
+                $orders = $customerRepository->all_orders->whereIn('status', ['pending', 'processing'])->first();
 
-                $this->customerRepository->delete($id);
+                if ($orders) {
+                    session()->flash('error', trans('admin::app.response.order-pending'));
 
-                session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
+                    return redirect()->route($this->_config['redirect']);
+                } else {
+                    $this->customerRepository->delete($id);
 
-                return redirect()->route('customer.session.index');
+                    session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
+
+                    return redirect()->route('customer.session.index');
+                }
             } else {
                 session()->flash('error', trans('shop::app.customer.account.address.delete.wrong-password'));
-            }
 
-            return redirect()->route('customer.session.index');
+                return redirect()->back();
+            }
         } catch(\Exception $e) {
             session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Customer']));
 
