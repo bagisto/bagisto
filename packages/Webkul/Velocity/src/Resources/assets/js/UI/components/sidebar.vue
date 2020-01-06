@@ -1,39 +1,54 @@
 <template>
     <!-- categories list -->
     <nav
-        id="sidebar"
-        :class="`${addClass ? addClass : ''}`"
+        :id="id"
+        @mouseover="remainBar(id)"
+        :class="`sidebar ${addClass ? addClass : ''}`"
         v-if="slicedCategories && slicedCategories.length > 0">
 
         <ul type="none">
             <li
                 :key="index"
-                class="category-content"
                 :id="`category-${category.id}`"
-                v-for="(category, index) in slicedCategories">
+                class="category-content cursor-pointer"
+                v-for="(category, index) in slicedCategories"
+                @mouseout="toggleSidebar(id, $event, 'mouseout')"
+                @mouseover="toggleSidebar(id, $event, 'mouseover')">
 
                 <a
                     class="category unset"
-                    @mouseover="hover(index, 'mouseover')"
-                    @mouseleave="hover(index, 'mouseleave')"
                     :class="(category.children.length > 0) ? 'fw6' : ''"
                     :href="`${url}/${category['translations'][0].slug}`">
 
+                    <div
+                        class="category-icon"
+                        @mouseout="toggleSidebar(id, $event, 'mouseout')"
+                        @mouseover="toggleSidebar(id, $event, 'mouseover')">
+
+                        <img
+                            v-if="category.image"
+                            :src="`${url}/storage/${category.image}`" />
+                    </div>
                     <span class="category-title">{{ category['name'] }}</span>
                     <i
-                        class="angle-right-icon"
-                        @click="toggleSubCategory(index)">
+                        class="rango-arrow-right pr15"
+                        @mouseout="toggleSidebar(id, $event, 'mouseout')"
+                        @mouseover="toggleSidebar(id, $event, 'mouseover')">
+                        <!-- v-if="category.children.length && category.children.length > 0"> -->
                     </i>
                 </a>
 
                 <div
-                    class="sub-categories"
+                    class="sub-category-container"
                     v-if="category.children.length && category.children.length > 0">
 
-                    <sidebar-component
-                        :url="url"
-                        :categories="category.children">
-                    </sidebar-component>
+                    <div class="sub-categories">
+                        <sidebar-component
+                            :url="url"
+                            :id="`sidebar-level-${Math.random()}`"
+                            :categories="category.children">
+                        </sidebar-component>
+                    </div>
                 </div>
             </li>
         </ul>
@@ -43,6 +58,7 @@
 <script type="text/javascript">
     export default {
         props: [
+            'id',
             'url',
             'addClass',
             'categories',
@@ -65,23 +81,14 @@
             }
         },
 
-        mounted: function () {
-            let checkLocale = window.location.href.slice(0, `${this.url}/?locale=`.length);
-            let checkCurrency = window.location.href.slice(0, `${this.url}/?currency=`.length);
-
-            if (
-                checkLocale == `${this.url}/?locale=`
-                || checkCurrency == `${this.url}/?currency=`
-            ) {
-            } else if (
-                (window.location.href !== `${this.url}/` && this.mainSidebar)
-                || (this.categories && this.categories.length == 0)
-            ) {
-                this.toggleSidebar();
-            }
-        },
-
         methods: {
+            remainBar: function (id) {
+                let sidebar = $(`#${id}`);
+                if (sidebar && sidebar.length > 0) {
+                    sidebar.show();
+                }
+            },
+
             hover: function (index, actionType) {
                 let category = this.categories[index];
 

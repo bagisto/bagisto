@@ -10,7 +10,7 @@
     @endphp
 
     @if ($products->count())
-        <div class="container-fluid accessories">
+        <div class="container-fluid">
             <card-list-header
                 view-all="{{ route('shop.productOrCategory.index', ['slug' => $categoryDetails->slug]) }}"
                 heading="{{ $categoryDetails->name }}">
@@ -20,7 +20,7 @@
                 <carousel-component
                     :slides-count="{{ sizeof($products) }}"
                     slides-per-page="6"
-                    id="accessories-carousel">
+                    id="{{ $categoryDetails->name }}-carousel">
 
                     @foreach ($products as $index => $product)
 

@@ -39,7 +39,7 @@
                     </div>
 
                     <div class="control-group">
-                        <label>{{ __('velocity::app.admin.meta-data.activate-slider') }}</label>
+                        <label>{{ __('velocity::app.admin.meta-data.sidebar-categories') }}</label>
 
                         <input
                             type="text"
@@ -87,12 +87,20 @@
             <accordian :title="'{{ __('admin::app.catalog.products.images') }}'" :active="false">
                 <div slot="body">
                     <div class="control-group">
-                        <label>{{ __('velocity::app.admin.meta-data.advertisement-one') }}</label>
+                        <label>{{ __('velocity::app.admin.meta-data.advertisement-four') }}</label>
 
                         <image-wrapper
                             :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'"
-                            input-name="images[1]">
-                            {{-- :images='@json($metaData->advertisement[1])'> --}}
+                            input-name="images[4]">
+                        </image-wrapper>
+                    </div>
+
+                    <div class="control-group">
+                        <label>{{ __('velocity::app.admin.meta-data.advertisement-three') }}</label>
+
+                        <image-wrapper
+                            :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'"
+                            input-name="images[3]">
                         </image-wrapper>
                     </div>
 
@@ -106,11 +114,11 @@
                     </div>
 
                     <div class="control-group">
-                        <label>{{ __('velocity::app.admin.meta-data.advertisement-three') }}</label>
+                        <label>{{ __('velocity::app.admin.meta-data.advertisement-one') }}</label>
 
                         <image-wrapper
                             :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'"
-                            input-name="images[3]">
+                            input-name="images[1]">
                         </image-wrapper>
                     </div>
                 </div>

@@ -1,8 +1,6 @@
-@inject ('attributeRepository', 'Webkul\Attribute\Repositories\AttributeRepository')
-
-@inject ('productFlatRepository', 'Webkul\Product\Repositories\ProductFlatRepository')
-
 @inject ('productRepository', 'Webkul\Product\Repositories\ProductRepository')
+@inject ('attributeRepository', 'Webkul\Attribute\Repositories\AttributeRepository')
+@inject ('productFlatRepository', 'Webkul\Product\Repositories\ProductFlatRepository')
 
 <?php
     $filterAttributes = [];
@@ -32,7 +30,7 @@
     }
 ?>
 
-<div class="layered-filter-wrapper col-2 pt42">
+<div class="layered-filter-wrapper left">
 
     {!! view_render_event('bagisto.shop.products.list.layered-nagigation.before') !!}
 
@@ -65,12 +63,12 @@
             <div class="filter-attributes-title" @click="active = !active">
                 <h4 class="fw6 display-inbl">@{{ attribute.name ? attribute.name : attribute.admin_name }}</h4>
 
-                <div class="pull-right">
+                <div class="pull-right display-table">
                     <span class="link-color cursor-pointer" v-if="appliedFilters.length" @click.stop="clearFilters()">
                         {{ __('shop::app.products.remove-filter-link-title') }}
                     </span>
 
-                    <i :class="`icon fs16 ${active ? 'rango-arrow-up' : 'rango-arrow-down'}`"></i>
+                    <i :class="`icon fs16 cell ${active ? 'rango-arrow-up' : 'rango-arrow-down'}`"></i>
                 </div>
             </div>
 

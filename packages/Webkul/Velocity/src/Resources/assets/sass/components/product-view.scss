@@ -330,6 +330,7 @@
 
         .thumb-frame {
             padding: 1px;
+            border: 1px solid transparent;
 
             &.active {
                 border: 1px solid $theme-color;

@@ -10,15 +10,8 @@
 
     <div class="container-fluid popular-products">
 
-        <card-list-header
-            heading="{{ __('shop::app.home.featured-products') }}"
-            scrollable="{{
-                ($featuredProductsCount > (isset($cardCount) ? $cardCount : 6))
-                ? 'fearured-products-carousel'
-                : false
-            }}"
-
-        ></card-list-header>
+        <card-list-header heading="{{ __('shop::app.home.featured-products') }}">
+        </card-list-header>
 
         <div class="row flex-nowrap">
 
