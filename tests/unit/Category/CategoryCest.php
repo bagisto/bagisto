@@ -15,6 +15,8 @@ class CategoryCest
     /** @var Locale $localeEn */
     private $localeEn;
 
+    /** @var Category $rootCategory */
+    private $rootCategory;
     /** @var Category $category */
     private $category;
     /** @var Category $childCategory */
@@ -22,6 +24,7 @@ class CategoryCest
     /** @var Category $grandChildCategory */
     private $grandChildCategory;
 
+    private $rootCategoryAttributes;
     private $categoryAttributes;
     private $childCategoryAttributes;
     private $grandChildCategoryAttributes;
@@ -34,8 +37,29 @@ class CategoryCest
             'code' => 'en',
         ]);
 
+        $this->rootCategoryAttributes = [
+            'parent_id' => null,
+            'position' => 0,
+            'status' => 1,
+            $this->localeEn->code => [
+                'name' => $this->faker->word,
+                'slug' => $this->faker->slug,
+                'description' => $this->faker->sentence(),
+                'locale_id' => $this->localeEn->id,
+            ],
+        ];
+
+        $this->rootCategory = $I->have(Category::class, $this->rootCategoryAttributes);
+        $I->assertNotNull($this->rootCategory);
+
+        $I->seeRecord(CategoryTranslation::class, [
+           'category_id' => $this->rootCategory->id,
+           'locale' => $this->localeEn->code,
+           'url_path' => null,
+        ]);
+
         $this->categoryAttributes = [
-            'parent_id' => 1,
+            'parent_id' => $this->rootCategory->id,
             'position' => 0,
             'status' => 1,
             $this->localeEn->code => [
@@ -142,15 +166,25 @@ class CategoryCest
         $I->assertEquals($expectedUrlPath, $this->grandChildCategory->url_path);
     }
 
+    public function testGetRootCategory(UnitTester $I)
+    {
+        $I->wantTo('test rootCategory attribute of a category');
+        $rootCategory = $this->grandChildCategory->rootCategory;
+
+        $I->assertNotNull($rootCategory);
+        $I->assertEquals($rootCategory->id, $this->rootCategory->id);
+    }
+
     public function testGetPathCategories(UnitTester $I)
     {
         $I->wantTo('test getPathCategories is returning the correct categories in the correct order');
         $I->amGoingTo('get all categories wihin the path of the grand child category');
         $pathCategories = $this->grandChildCategory->getPathCategories();
 
-        $I->assertCount(3, $pathCategories);
-        $I->assertEquals($pathCategories[0]->id, $this->category->id);
-        $I->assertEquals($pathCategories[1]->id, $this->childCategory->id);
-        $I->assertEquals($pathCategories[2]->id, $this->grandChildCategory->id);
+        $I->assertCount(4, $pathCategories);
+        $I->assertEquals($pathCategories[0]->id, $this->rootCategory->id);
+        $I->assertEquals($pathCategories[1]->id, $this->category->id);
+        $I->assertEquals($pathCategories[2]->id, $this->childCategory->id);
+        $I->assertEquals($pathCategories[3]->id, $this->grandChildCategory->id);
     }
 }

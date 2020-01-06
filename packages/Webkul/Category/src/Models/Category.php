@@ -55,6 +55,18 @@ class Category extends TranslatableModel implements CategoryContract
     }
 
     /**
+     * 
+     */
+    public function rootCategory(): Category
+    {
+        return $this->hasOne(Category::modelClass())
+            ->where('parent_id', null)
+            ->andWhere('_lft', '<=', $this->_lft)
+            ->andWhere('_rgt', '>=', $this->_rgt)
+            ->first();
+    }
+
+    /**
      * Returns all categories within the category's path
      *
      * @return Category[]
@@ -70,7 +82,6 @@ class Category extends TranslatableModel implements CategoryContract
             $categories[] = $category;
         }
 
-        array_pop($categories);
         return array_reverse($categories);
     }
 
@@ -84,7 +95,7 @@ class Category extends TranslatableModel implements CategoryContract
     private function findInTree($categoryTree = null): Category
     {
         if (! $categoryTree) {
-            $rootCategoryId = core()->getCurrentChannel()->root_category_id;
+            $rootCategoryId = core()->getCurrentChannel()->rootCategory->id;
             $categoryTree = app(CategoryRepository::class)->getVisibleCategoryTree($rootCategoryId);
         }
 
