@@ -1,6 +1,7 @@
 @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 @inject ('reviewHelper', 'Webkul\Product\Helpers\Review')
 @inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar')
+@include('shop::UI.product-quick-view')
 
 @php
     if (isset($checkmode) && $checkmode && $toolbarHelper->getCurrentMode() == "list") {
@@ -68,6 +69,8 @@
                     alt="{{ $product->name }}">
             </a>
 
+            <quick-view-btn details="{{ $product }}"></quick-view-btn>
+
             <div class="card-body">
                 <div class="product-name">
                     <a
@@ -100,6 +103,5 @@
             </div>
         </div>
     @endif
-
 
 {!! view_render_event('bagisto.shop.products.list.card.after', ['product' => $product]) !!}
