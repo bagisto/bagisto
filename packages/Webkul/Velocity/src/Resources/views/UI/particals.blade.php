@@ -33,7 +33,7 @@
         @click="toggleMiniCart">
 
         <div class="mini-cart-content">
-            <i class="rango-cart-1 fs24"></i>
+            <i class="rango-cart-1 fs24 text-down-3"></i>
             <span class="badge" v-text="itemCount"></span>
             <span class="fs18 fw6 cart-text">{{ __('velocity::app.minicart.cart') }}</span>
         </div>

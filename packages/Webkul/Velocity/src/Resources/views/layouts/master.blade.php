@@ -11,17 +11,13 @@
         <meta http-equiv="content-language" content="{{ app()->getLocale() }}">
 
         <link rel="stylesheet" href="{{ asset('themes/velocity/assets/css/velocity.css') }}" />
-
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
-
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700&display=swap" rel="stylesheet">
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
         <script type="text/javascript" src="{{ asset('themes/velocity/assets/js/velocity.js') }}"></script>
-
         <script type="text/javascript"
             src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.6/src/jquery.ez-plus.js"
         ></script>
@@ -79,22 +75,19 @@
                             heading= "{{ __('velocity::app.menu-navbar.text-category') }}"
                         ></content-header>
 
-                        <div class="container no-padding">
+                        <div class="">
                             <div class="row col-12 remove-padding-margin">
                                 <sidebar-component
                                     main-sidebar=true
+                                    id="sidebar-level-0"
                                     url="{{ url()->to('/') }}"
                                     :categories="{{ json_encode($categories) }}"
                                     category-count="{{ $velocityMetaData->sidebar_category_count }}"
-                                    add-class="col-2 category-list-container pt10 no-padding mt15">
+                                    add-class="category-list-container pt10">
                                 </sidebar-component>
 
-                                <child-sidebar
-                                    url="{{ url()->to('/') }}">
-                                </child-sidebar>
-
                                 <div
-                                    class="col-10 no-padding content" id="home-right-bar-container">
+                                    class="col-12 no-padding content" id="home-right-bar-container">
 
                                     <div class="container-right row no-margin col-12 no-padding">
 

@@ -17,21 +17,14 @@
         @endphp
 
         <div class="container-fluid advertisement-two-container">
-
             <div class="row">
-                <div class="col ad-2-lt"></div>
+                <a class="col-8 no-padding">
+                    <img src="{{ asset('/storage/' . $advertisementTwo['image_1']) }}" />
+                </a>
 
-                <div class="col ad-2-rt">
-
-                    <div class="row top-container">
-                        <div class="col"></div>
-                    </div>
-
-                    <div class="row bottom-container">
-                        <div class="col"></div>
-                    </div>
-
-                </div>
+                <a class="col-4 pr0">
+                    <img src="{{ asset('/storage/' . $advertisementTwo['image_2']) }}" />
+                </a>
             </div>
         </div>
     @endif
@@ -39,21 +32,14 @@
 
 @if (! $isRendered)
     <div class="container-fluid advertisement-two-container">
-
         <div class="row">
-            <div class="col ad-2-lt"></div>
+            <a class="col-8 no-padding">
+                <img src="{{ asset('/themes/velocity/assets/images/toster.png') }}" />
+            </a>
 
-            <div class="col ad-2-rt">
-
-                <div class="row top-container">
-                    <div class="col"></div>
-                </div>
-
-                <div class="row bottom-container">
-                    <div class="col"></div>
-                </div>
-
-            </div>
+            <a class="col-4 pr0">
+                <img src="{{ asset('/themes/velocity/assets/images/trimmer.png') }}" />
+            </a>
         </div>
     </div>
 @endif

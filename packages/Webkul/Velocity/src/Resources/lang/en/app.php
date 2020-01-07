@@ -94,12 +94,14 @@ return [
             'footer-left-content' => 'Footer Left Content',
             'subscription-content' => 'Subscription bar Content',
             'activate-slider' => 'Activate Slider',
+            'sidebar-categories' => 'Sidebar Categories',
             'footer-left-raw-content' => 'We love to craft softwares and solve the real world problems with the binaries. We are highly committed to our goals. We invest our resources to create world class easy to use softwares and applications for the enterprise business with the top notch, on the edge technology expertise.',
             'footer-middle-content' => 'Footer Middle Content',
             'update-meta-data' => 'Update Meta Data',
-            'advertisement-one' => 'Advertisement One',
-            'advertisement-two' => 'Advertisement Two',
-            'advertisement-three' => 'Advertisement Three',
+            'advertisement-four' => 'Advertisement Four Images',
+            'advertisement-three' => 'Advertisement Three Images',
+            'advertisement-two' => 'Advertisement Two Images',
+            'advertisement-one' => 'Advertisement One Images',
             'footer' => 'Footer',
         ],
         'category' => [
@@ -131,6 +133,8 @@ return [
     'home' => [
         'page-title' => 'Velocity-Home',
         'add-to-cart' => 'Add To Cart',
+        'hot-categories' => 'Hot Categories',
+        'popular-categories' => 'Popular Categories',
     ],
 
     'header' => [
@@ -150,7 +154,7 @@ return [
     ],
 
     'menu-navbar' => [
-        'text-category' => 'Shop By Category',
+        'text-category' => 'Shop by Category',
         'text-more' => 'More',
     ],
 

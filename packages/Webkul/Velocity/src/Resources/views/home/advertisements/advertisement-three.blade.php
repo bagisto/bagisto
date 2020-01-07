@@ -17,12 +17,18 @@
         @endphp
 
         <div class="container-fluid advertisement-three-container">
-
             <div class="row">
-                <div class="col-8 ad-3-lt bg-image no-padding"></div>
+                <a @if (isset($one)) href="{{ $one }}" @endif class="col-6 no-padding">
+                    <img src="{{ asset('/storage/' . $advertisementThree['image_1']) }}" class="full-width" />
+                </a>
 
-                <div class="col-4 pr0">
-                    <div class="ad-3-rt bg-image no-padding"></div>
+                <div class="col-6">
+                    <a @if (isset($two)) href="{{ $two }}" @endif class="row top-container">
+                        <img src="{{ asset('/storage/' . $advertisementThree['image_2']) }}" class="col-12 pr0" />
+                    </a>
+                    <a @if (isset($three)) href="{{ $three }}" @endif class="row bottom-container">
+                        <img src="{{ asset('/storage/' . $advertisementThree['image_3']) }}" class="col-12 pr0" />
+                    </a>
                 </div>
             </div>
         </div>
@@ -31,12 +37,18 @@
 
 @if (! $isRendered)
     <div class="container-fluid advertisement-three-container">
-
         <div class="row">
-            <div class="col-8 ad-3-lt bg-image no-padding"></div>
+            <a @if (isset($one)) href="{{ $one }}" @endif class="col-6 no-padding">
+                <img src="{{ asset('/themes/velocity/assets/images/headphones.png') }}" class="full-width" />
+            </a>
 
-            <div class="col-4 pr0">
-                <div class="ad-3-rt bg-image no-padding"></div>
+            <div class="col-6">
+                <a @if (isset($two)) href="{{ $two }}" @endif class="row top-container">
+                    <img src="{{ asset('/themes/velocity/assets/images/watch.png') }}" class="col-12 pr0" />
+                </a>
+                <a @if (isset($three)) href="{{ $three }}" @endif class="row bottom-container">
+                    <img src="{{ asset('/themes/velocity/assets/images/kids-2.png') }}" class="col-12 pr0" />
+                </a>
             </div>
         </div>
     </div>

@@ -9,10 +9,8 @@
 @if (! empty($newProducts))
     <div class="container-fluid popular-products">
 
-        <card-list-header
-            heading="{{ __('shop::app.home.new-products') }}"
-            scrollable="new-products-carousel"
-        ></card-list-header>
+        <card-list-header heading="{{ __('shop::app.home.new-products') }}">
+        </card-list-header>
 
         {!! view_render_event('bagisto.shop.new-products.before') !!}
 
