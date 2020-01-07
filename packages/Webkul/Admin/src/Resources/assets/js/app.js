@@ -1,7 +1,10 @@
-require("./bootstrap");
+import Vue from 'vue';
+import VeeValidate from 'vee-validate';
 
-window.Vue = require("vue");
-window.VeeValidate = require("vee-validate");
+import './bootstrap';
+
+window.Vue = Vue;
+window.VeeValidate = VeeValidate;
 
 Vue.use(VeeValidate);
 Vue.prototype.$http = axios
@@ -82,6 +85,10 @@ $(document).ready(function () {
             },
 
             addFlashMessages() {
+                if (typeof flashMessages !== 'undefined') {
+                    return;
+                };
+                
                 const flashes = this.$refs.flashes;
 
                 flashMessages.forEach(function(flash) {
