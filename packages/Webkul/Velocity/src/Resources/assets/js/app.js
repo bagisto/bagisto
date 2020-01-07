@@ -39,19 +39,53 @@ $(document).ready(function () {
                 route ? window.location.href = route : '';
             },
 
-            toggleSidebar: function () {
-                let rightBarContainer = document.getElementById('home-right-bar-container');
-                let categoryListContainer = document.getElementById('sidebar');
+            toggleSidebar: function (id, {target}, type) {
+                if (
+                    Array.from(target.classList)[0] == "main-category"
+                    || Array.from(target.parentElement.classList)[0] == "main-category"
+                ) {
+                    let sidebar = $(`#sidebar-level-${id}`);
+                    if (sidebar && sidebar.length > 0) {
+                        if (type == "mouseover") {
+                            this.show(sidebar);
+                        } else if (type == "mouseout") {
+                            this.hide(sidebar);
+                        }
+                    }
+                } else if (
+                    Array.from(target.classList)[0] == "category"
+                    || Array.from(target.classList)[0] == "category-icon"
+                    || Array.from(target.classList)[0] == "category-title"
+                    || Array.from(target.classList)[0] == "category-content"
+                    || Array.from(target.classList)[0] == "rango-arrow-right"
+                ) {
+                    let parentItem = target.closest('li');
+                    if (target.id || parentItem.id.match('category-')) {
+                        let subCategories = $(`#${target.id ? target.id : parentItem.id} .sub-categories`);
 
-                if (categoryListContainer) {
-                    categoryListContainer.classList.toggle('hide');
-                }
+                        if (subCategories && subCategories.length > 0) {
+                            let subCategories1 = Array.from(subCategories)[0];
+                            subCategories1 = $(subCategories1);
 
-                if (rightBarContainer.className.search('col-10') > -1) {
-                    rightBarContainer.className = rightBarContainer.className.replace('col-10', 'col-12');
-                } else {
-                    rightBarContainer.className = rightBarContainer.className.replace('col-12', 'col-10');
+                            if (type == "mouseover") {
+                                // this.show(subCategories1);
+                            } else if (type == "mouseout") {
+                                this.hide(subCategories1);
+                            }
+                        }
+                    }
                 }
+            },
+
+            show: function (element) {
+                element.show();
+                element.mouseleave(({target}) => {
+                    $(target.closest('.sidebar')).hide();
+                });
+            },
+
+            hide: function (element) {
+                element.hide();
             },
 
             toggleButtonDisability ({event, actionType}) {

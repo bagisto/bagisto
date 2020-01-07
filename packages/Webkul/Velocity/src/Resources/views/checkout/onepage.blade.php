@@ -174,7 +174,6 @@
 
                 methods: {
                     navigateToStep: function(step) {
-                        debugger
                         if (step <= this.completed_step) {
                             this.current_step = step
                             this.completed_step = step - 1;

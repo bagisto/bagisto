@@ -412,8 +412,8 @@
         .badge {
             @include border-radius(50%);
 
-            top: -15px;
-            left: -10px;
+            top: -7px;
+            left: -13px;
             padding: 4px;
             min-width: 20px;
             position: relative;
@@ -421,8 +421,8 @@
         }
 
         .cart-text {
-            top: -2px;
-            left: -10px;
+            top: 0px;
+            left: -14px;
             position: relative;
         }
     }
@@ -1085,7 +1085,9 @@
     background-color: $light1-black;
 }
 
-#sidebar {
+.sidebar {
+    width: $sidebar-width;
+
     .category-content {
         margin-bottom: 10px;
 
@@ -1094,12 +1096,43 @@
             font-weight: 600;
             position: relative;
         }
+
+        .rango-arrow-right {
+            top: 4px;
+            float: right;
+            position: relative;
+        }
+
+        .category-icon {
+            width: 18px;
+            height: 18px;
+            padding-right: 5px;
+            display: inline-block;
+
+            img {
+                width: 100%;
+                height: 100%;
+                vertical-align: text-top;
+            }
+        }
+    }
+
+    li:hover {
+        > a  {
+            > span {
+                color: $light-link-color;
+            }
+        }
+    }
+
+    .sub-categories {
+        display: none;
     }
 }
-#sidebar {
-    li:hover {
-        color: $link-color;
-    }
+
+#sidebar-level-0 {
+    display: none;
+    border-top: 1px solid $border-common;
 }
 
 .grouped-product-container {
@@ -1148,22 +1181,26 @@
                     float: right;
 
                     .control-group {
-                        max-width: initial;
+                        height: 45px;
                         width: auto;
-                        text-align: center;
-                        margin-bottom: 0;
                         border-top: 0;
                         padding-top: 0;
+                        margin-bottom: 0;
+                        max-width: initial;
+                        text-align: center;
 
                         label {
                             display: none;
                         }
 
                         .control {
-                            height: 38px;
                             width: 60px;
                             text-align: center;
                             line-height: 38px;
+                        }
+
+                        > * {
+                            height: 100%;
                         }
                     }
                 }
@@ -1331,6 +1368,7 @@
 }
 
 .category-container {
+    margin-left: 15px;
     padding: 40px 15px !important;
 
     .hero-image {
@@ -1411,16 +1449,15 @@
         bottom: 10px;
         position: absolute;
 
-        button {
-            width: 15px !important;
-            height: 15px !important;
-        }
-
         button:focus,
         button:active {
             outline: none;
             box-shadow: none;
         }
+    }
+
+    .VueCarousel-dot--active {
+        background-color: $theme-color !important;
     }
 }
 
@@ -1456,4 +1493,8 @@
         display: none ;
         margin-left: 7px;
     }
+}
+
+.layered-filter-wrapper {
+    padding: 42px 10px 0 10px;
 }
