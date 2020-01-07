@@ -2478,6 +2478,32 @@ section.cart {
     }
 }
 
+.coupon-container {
+    .discount-control {
+        .control-group {
+            margin-top: 20px;
+
+            .control {
+                width: 100%;
+            }
+        }
+    }
+
+    .applied-coupon-details {
+        margin-top: 30px;
+
+        .right {
+            float: right;
+
+            .icon {
+                vertical-align: text-bottom;
+                margin-bottom: 1px;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
 .order-summary {
     h3 {
         font-size: 16px;

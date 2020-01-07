@@ -669,60 +669,56 @@ Route::group(['middleware' => ['web']], function () {
             //DataGrid Export
             Route::post('admin/export', 'Webkul\Admin\Http\Controllers\ExportController@export')->name('admin.datagrid.export');
 
-            Route::prefix('promotion')->group(function () {
-                Route::get('/catalog-rules', 'Webkul\Discount\Http\Controllers\CatalogRuleController@index')->defaults('_config', [
-                    'view' => 'admin::promotions.catalog-rule.index'
-                ])->name('admin.catalog-rule.index');
+            Route::prefix('promotions')->group(function () {
+                Route::get('cart-rules', 'Webkul\CartRule\Http\Controllers\CartRuleController@index')->defaults('_config', [
+                    'view' => 'admin::promotions.cart-rules.index'
+                ])->name('admin.cart-rules.index');
 
-                Route::get('/catalog-rules/create', 'Webkul\Discount\Http\Controllers\CatalogRuleController@create')->defaults('_config', [
-                    'view' => 'admin::promotions.catalog-rule.create'
-                ])->name('admin.catalog-rule.create');
+                Route::get('cart-rules/create', 'Webkul\CartRule\Http\Controllers\CartRuleController@create')->defaults('_config', [
+                    'view' => 'admin::promotions.cart-rules.create'
+                ])->name('admin.cart-rules.create');
 
-                Route::post('/catalog-rules/create', 'Webkul\Discount\Http\Controllers\CatalogRuleController@store')->defaults('_config', [
-                    'redirect' => 'admin.catalog-rule.index'
-                ])->name('admin.catalog-rule.store');
+                Route::post('cart-rules/create', 'Webkul\CartRule\Http\Controllers\CartRuleController@store')->defaults('_config', [
+                    'redirect' => 'admin.cart-rules.index'
+                ])->name('admin.cart-rules.store');
 
-                Route::get('/catalog-rules/edit/{id}', 'Webkul\Discount\Http\Controllers\CatalogRuleController@edit')->defaults('_config', [
-                    'view' => 'admin::promotions.catalog-rule.edit'
-                ])->name('admin.catalog-rule.edit');
+                Route::get('cart-rules/edit/{id}', 'Webkul\CartRule\Http\Controllers\CartRuleController@edit')->defaults('_config', [
+                    'view' => 'admin::promotions.cart-rules.edit'
+                ])->name('admin.cart-rules.edit');
 
-                Route::post('/catalog-rules/edit/{id}', 'Webkul\Discount\Http\Controllers\CatalogRuleController@update')->defaults('_config', [
-                    'redirect' => 'admin.catalog-rule.index'
-                ])->name('admin.catalog-rule.update');
+                Route::post('cart-rules/edit/{id}', 'Webkul\CartRule\Http\Controllers\CartRuleController@update')->defaults('_config', [
+                    'redirect' => 'admin.cart-rules.index'
+                ])->name('admin.cart-rules.update');
 
-                Route::get('/catalog-rules/apply', 'Webkul\Discount\Http\Controllers\CatalogRuleController@applyRules')->defaults('_config', [
-                    'view' => 'admin::promotions.catalog-rule.index'
-                ])->name('admin.catalog-rule.apply');
+                Route::post('cart-rules/delete/{id}', 'Webkul\CartRule\Http\Controllers\CartRuleController@destroy')->name('admin.cart-rules.delete');
 
-                Route::post('/catalog-rules/delete/{id}', 'Webkul\Discount\Http\Controllers\CatalogRuleController@destroy')->name('admin.catalog-rule.delete');
+                Route::post('cart-rules/generate-coupons/{id?}', 'Webkul\CartRule\Http\Controllers\CartRuleController@generateCoupons')->name('admin.cart-rules.generate-coupons');
 
-                Route::get('/catalog-rules/declutter', 'Webkul\Discount\Http\Controllers\CatalogRuleController@deClutter')->defaults('_config', [
-                    'redirect' => 'admin.catalog-rule.index'
-                ])->name('admin.catalog-rule.declut');
+                Route::post('/massdelete', 'Webkul\CartRule\Http\Controllers\CartRuleCouponController@massDelete')->name('admin.cart-rule-coupons.mass-delete');
 
-                Route::post('fetch/options', 'Webkul\Discount\Http\Controllers\CatalogRuleController@fetchAttributeOptions')->name('admin.catalog-rule.options');
 
-                Route::get('cart-rules', 'Webkul\Discount\Http\Controllers\CartRuleController@index')->defaults('_config', [
-                    'view' => 'admin::promotions.cart-rule.index'
-                ])->name('admin.cart-rule.index');
+                //Catalog rules
+                Route::get('catalog-rules', 'Webkul\CatalogRule\Http\Controllers\CatalogRuleController@index')->defaults('_config', [
+                    'view' => 'admin::promotions.catalog-rules.index'
+                ])->name('admin.catalog-rules.index');
 
-                Route::get('cart-rules/create', 'Webkul\Discount\Http\Controllers\CartRuleController@create')->defaults('_config', [
-                    'view' => 'admin::promotions.cart-rule.create'
-                ])->name('admin.cart-rule.create');
+                Route::get('catalog-rules/create', 'Webkul\CatalogRule\Http\Controllers\CatalogRuleController@create')->defaults('_config', [
+                    'view' => 'admin::promotions.catalog-rules.create'
+                ])->name('admin.catalog-rules.create');
 
-                Route::post('cart-rules/store', 'Webkul\Discount\Http\Controllers\CartRuleController@store')->defaults('_config', [
-                    'redirect' => 'admin.cart-rule.index'
-                ])->name('admin.cart-rule.store');
+                Route::post('catalog-rules/create', 'Webkul\CatalogRule\Http\Controllers\CatalogRuleController@store')->defaults('_config', [
+                    'redirect' => 'admin.catalog-rules.index'
+                ])->name('admin.catalog-rules.store');
 
-                Route::get('cart-rules/edit/{id}', 'Webkul\Discount\Http\Controllers\CartRuleController@edit')->defaults('_config', [
-                    'view' => 'admin::promotions.cart-rule.edit'
-                ])->name('admin.cart-rule.edit');
+                Route::get('catalog-rules/edit/{id}', 'Webkul\CatalogRule\Http\Controllers\CatalogRuleController@edit')->defaults('_config', [
+                    'view' => 'admin::promotions.catalog-rules.edit'
+                ])->name('admin.catalog-rules.edit');
 
-                Route::post('cart-rules/update/{id}', 'Webkul\Discount\Http\Controllers\CartRuleController@update')->defaults('_config', [
-                    'redirect' => 'admin.cart-rule.index'
-                ])->name('admin.cart-rule.update');
+                Route::post('catalog-rules/edit/{id}', 'Webkul\CatalogRule\Http\Controllers\CatalogRuleController@update')->defaults('_config', [
+                    'redirect' => 'admin.catalog-rules.index'
+                ])->name('admin.catalog-rules.update');
 
-                Route::post('cart-rules/delete/{id}', 'Webkul\Discount\Http\Controllers\CartRuleController@destroy')->name('admin.cart-rule.delete');
+                Route::post('catalog-rules/delete/{id}', 'Webkul\CatalogRule\Http\Controllers\CatalogRuleController@destroy')->name('admin.catalog-rules.delete');
             });
 
             Route::prefix('cms')->group(function () {
