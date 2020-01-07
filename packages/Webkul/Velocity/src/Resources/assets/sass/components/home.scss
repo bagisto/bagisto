@@ -614,39 +614,6 @@ header #search-form > *:focus {
     font: 18px "josefin sans", arial;
 }
 
-.quick-view-btn-container {
-    position: relative;
-    margin: 48px 1px 0px -18px;
-
-    span {
-        left: 32%;
-        top: -26px;
-        z-index: 1;
-        font-size: 16px;
-        color: #FFFFFF;
-        position: absolute;
-    }
-
-    button {
-        left: 30%;
-        top: -36px;
-        border: none;
-        color: white;
-        font-size: 16px;
-        padding: 5px 10px 7px 24px;
-        position: absolute;
-        opacity: 0.8;
-        background-color: #0D2438;
-    }
-}
-
-
-
-
-
-
-
-
 body::after {
     /* dark overlay layer - visible when we fire .cd-quick-view */
     position: fixed;

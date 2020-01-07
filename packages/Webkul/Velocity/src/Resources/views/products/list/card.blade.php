@@ -67,9 +67,9 @@
                     src="{{ $productBaseImage['medium_image_url'] }}"
                     class="card-img-top"
                     alt="{{ $product->name }}">
-            </a>
 
-            <quick-view-btn details="{{ $product }}"></quick-view-btn>
+                <quick-view-btn details="{{ $product }}"></quick-view-btn>
+            </a>
 
             <div class="card-body">
                 <div class="product-name">

@@ -6,13 +6,12 @@
     $productPrice = $product->getTypeInstance()->getProductPrices();
     $totalReviews = $product->reviews;
     $avgRatings = ceil($reviewHelper->getAverageRating($product));
-@endphp
 
-<?php
-    foreach ($totalReviews as $review) {
-        $productReview = $review;
-    }
-?>
+    // @TODO
+    // foreach ($totalReviews as $review) {
+    //     $productReview = $review;
+    // }
+@endphp
 
 <script type="text/x-template" id="quick-view-btn-template">
 
@@ -57,7 +56,8 @@
                 <h2 class="text-nowrap fw6">{{ $product->price }}</h2>
             </div>
 
-            @if ($totalReviews)
+            {{-- @TODO --}}
+            {{-- @if ($totalReviews)
                 <div class="">
                     {{ $productReview['rating'] }} Ratings
                 </div>
@@ -65,7 +65,7 @@
                 <div class="">
                     <a href="">{{ __('velocity::app.products.be-first-review') }}</a>
                 </div>
-            @endif
+            @endif --}}
 
             <p class="pt20">
                 {!! $product->description !!}
@@ -102,20 +102,6 @@
                             event.preventDefault();
                             event.stopPropagation();
                         }
-
-                        // this.quickView
-
-                        // .velocity({
-
-                        //     'width': '734px',
-                        //     'left': '200px',
-                        //     'top': '50px',
-                        // }, 1000, [ 500, 20 ])
-
-                        // .velocity({
-                        //     'width': '734px',
-                        //     'left': '200px',
-                        // }, 3000, 'ease');
 
                         this.quickViewDetails = true;
                     }
