@@ -61,10 +61,11 @@ class Category extends TranslatableModel implements CategoryContract
      */
     public function getRootCategory(): Category
     {
-        return Category::whereNull('parent_id')
-            ->where('_lft', '<=', $this->_lft)
-            ->where('_rgt', '>=', $this->_rgt)
-            ->first();
+        return Category::where([
+            ['parent_id', '=', null],
+            ['_lft', '<=', $this->_lft],
+            ['_rgt', '>=', $this->_rgt],
+        ])->first();
     }
 
     /**
@@ -89,22 +90,26 @@ class Category extends TranslatableModel implements CategoryContract
     /**
      * Finds and returns the category within a nested category tree
      * will search in root category by default
+     * is used to minimize the numbers of sql queries for it only uses the already cached tree
      *
      * @param Category[] $categoryTree
      * @return Category
      */
-    private function findInTree($categoryTree = null): Category
+    public function findInTree($categoryTree = null): Category
     {
         if (! $categoryTree) {
             $categoryTree = app(CategoryRepository::class)->getVisibleCategoryTree($this->getRootCategory()->id);
         }
 
-        foreach ($categoryTree as $category) {
-            if ($category->id === $this->id) {
-                return $category;
-            }
-            return $this->findInTree($category->children);
+        $category = $categoryTree->first();
+
+        if (! $category) {
+            throw new NotFoundHttpException('category not found in tree');
         }
-        throw new NotFoundHttpException('category not found in tree');
+
+        if ($category->id === $this->id) {
+            return $category;
+        }
+        return $this->findInTree($category->children);
     }
 }
