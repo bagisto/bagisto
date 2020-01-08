@@ -27,10 +27,10 @@
 
 <script type="text/x-template" id="cart-btn-template">
     <button
-        :class="`btn btn-link disable-box-shadow ${parseInt(itemCount) ? 'dropdown-icon-custom' : ''}`"
         type="button"
         id="mini-cart"
-        @click="toggleMiniCart">
+        @click="toggleMiniCart"
+        class="btn btn-link disable-box-shadow">
 
         <div class="mini-cart-content">
             <i class="rango-cart-1 fs24 text-down-3"></i>

@@ -405,6 +405,7 @@
 }
 
 .customer-options{
+    top: 40px;
     float: right;
     padding: 20px;
     height: 150px;
@@ -422,6 +423,7 @@
 
     li {
         padding: 3px 0;
+        height: unset !important;
     }
 
     a {

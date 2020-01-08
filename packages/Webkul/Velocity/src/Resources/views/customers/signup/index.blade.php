@@ -7,7 +7,6 @@
 @section('content-wrapper')
     <div class="auth-content form-container">
         <div class="container">
-
             <div class="heading">
                 <h2 class="fs24 fw6">
                     {{ __('velocity::app.customer.signup-form.user-registration')}}

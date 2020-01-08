@@ -7,31 +7,11 @@
   background-image: url("../images/Icon-Velocity.svg");
 }
 
-.router-link-active .velocity-icon,
-.active .velocity-icon {
+.router-link-active .velocity-icon, .active .velocity-icon {
   background-image: url("../images/Icon-Velocity-Active.svg");
 }
 
-.router-link-active.velocity-icon,
-.active.velocity-icon {
-  background-image: url("../images/Icon-Velocity-Active.svg");
-}
-
-.velocity-icon {
-  width: 60px;
-  height: 55px;
-  display: inline-block;
-  background-size: cover;
-  background-image: url("../images/Icon-Velocity.svg");
-}
-
-.router-link-active .velocity-icon,
-.active .velocity-icon {
-  background-image: url("../images/Icon-Velocity-Active.svg");
-}
-
-.router-link-active.velocity-icon,
-.active.velocity-icon {
+.router-link-active.velocity-icon, .active.velocity-icon {
   background-image: url("../images/Icon-Velocity-Active.svg");
 }
 
@@ -700,6 +680,22 @@
   content: "\E99F";
 }
 
+.velocity-icon {
+  width: 60px;
+  height: 55px;
+  display: inline-block;
+  background-size: cover;
+  background-image: url("../images/Icon-Velocity.svg");
+}
+
+.router-link-active .velocity-icon, .active .velocity-icon {
+  background-image: url("../images/Icon-Velocity-Active.svg");
+}
+
+.router-link-active.velocity-icon, .active.velocity-icon {
+  background-image: url("../images/Icon-Velocity-Active.svg");
+}
+
 .qty-btn {
   height: 36px;
   display: inline-block;
@@ -1191,6 +1187,7 @@
 }
 
 .customer-options {
+  top: 40px;
   float: right;
   padding: 20px;
   height: 150px;
@@ -1206,6 +1203,7 @@
 
 .customer-options li {
   padding: 3px 0;
+  height: unset !important;
 }
 
 .customer-options a {
@@ -2632,8 +2630,6 @@ header #search-form > *:focus {
   height: 100%;
   padding: 20px;
   border: none;
-  box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.14);
-  -webkit-box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.14);
 }
 
 .hot-categories-container .hot-category-wrapper .velocity-divide-page .left {
@@ -2955,22 +2951,25 @@ body::after {
 
 .footer .footer-content .newsletter-subscription .newsletter-wrapper input.subscribe-field {
   width: 300px;
-  height: 38px;
   border: none;
+  height: 38px;
   font-size: 18px;
+  max-width: 250px;
   padding: 10px 20px;
   color: rgba(0, 0, 0, 0.83);
 }
 
 .footer .footer-content .newsletter-subscription .newsletter-wrapper button.subscribe-btn {
-  left: -1px;
+  left: -2px;
   height: 38px;
   font-size: 18px;
+  max-width: 110px;
   line-height: 10px;
   position: relative;
 }
 
 .footer .footer-content .newsletter-subscription .newsletter-wrapper .social-icons {
+  height: 100%;
   padding: 20px 0;
   color: #FFFFFF;
 }
@@ -2993,7 +2992,7 @@ body::after {
 }
 
 .footer .footer-content .newsletter-subscription .newsletter-wrapper .subscribe-newsletter {
-  padding: 30px 0;
+  padding: 25px 0 30px 0;
 }
 
 .footer .footer-content > .row {
@@ -3013,7 +3012,15 @@ body::after {
   line-height: 2.5rem;
 }
 
-.footer .footer-content > .row .footer-ct-content > div li a {
+.footer .footer-content > .row .footer-ct-content > div ul {
+  margin-bottom: 0px;
+}
+
+.footer .footer-content > .row .footer-ct-content > div ul li {
+  margin-bottom: 5px;
+}
+
+.footer .footer-content > .row .footer-ct-content > div ul li a {
   color: rgba(255, 255, 255, 0.83);
 }
 
@@ -4003,6 +4010,21 @@ button[disabled] {
 .product-detail .wishlist-icon i {
   display: table-cell;
   vertical-align: middle;
+}
+
+@media only screen and (max-width: 1100px) {
+  .footer .footer-content .newsletter-subscription .newsletter-wrapper .social-icons {
+    width: 100%;
+    padding: 5px 0;
+  }
+  .footer .footer-content .newsletter-subscription .newsletter-wrapper .subscribe-newsletter {
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+  }
+  .footer .footer-content .footer-statics > div:not(:last-child) {
+    margin-bottom: 30px;
+  }
 }
 
 /*!
@@ -12173,13 +12195,21 @@ body {
 
 #top #account .select-icon {
   top: 0px;
-  left: -3px;
+  left: 0px;
+  padding-left: 5px;
 }
 
 #top #account .welcome-content {
-  width: 150px;
+  float: right;
+  display: table;
+  min-width: 150px;
   cursor: pointer;
   text-align: right;
+}
+
+#top #account .welcome-content * {
+  display: table-cell;
+  vertical-align: middle;
 }
 
 #top #account + .account-modal {
@@ -12192,16 +12222,6 @@ body {
 
 #top > div:last-child * {
   height: 100%;
-}
-
-#top > div:last-child .welcome-content {
-  float: right;
-  display: table;
-}
-
-#top > div:last-child .welcome-content * {
-  display: table-cell;
-  vertical-align: middle;
 }
 
 .dropdown-menu {
@@ -12315,9 +12335,13 @@ header .logo {
 }
 
 header #search-form {
-  height: 35px;
+  height: 40px;
   margin: 5px 0px;
   background: #FFFFFF;
+}
+
+header #search-form * {
+  height: 100%;
 }
 
 header #search-form .btn-group, header #search-form .quantity {
@@ -12330,7 +12354,7 @@ header #search-form .btn-group .selectdiv, header #search-form .quantity .select
 
 header #search-form .btn-group .selectdiv:before, header #search-form .quantity .selectdiv:before {
   top: 13px;
-  left: 100px;
+  left: 108px;
   z-index: 10;
   font-size: 16px;
   content: "\E906";
@@ -12364,11 +12388,6 @@ header #search-form input {
   letter-spacing: 0;
   border: 1px solid #26A37C;
   border-left: 1px solid #CCCCCC;
-}
-
-header #search-form .btn, header #search-form .quantity button, .quantity header #search-form button,
-header #search-form .quantity input, .quantity header #search-form input {
-  height: 40px;
 }
 
 header #search-form .btn:hover, header #search-form .quantity button:hover, .quantity header #search-form button:hover,
@@ -12643,15 +12662,15 @@ header .dropdown-menu-large .dropdown-footer .checkout-link {
 }
 
 #nav-menu .secondary-navbar li a {
-  padding: 5px 20px 5px 5px;
-  font-family: SourceSansPro-Semibold;
-  font-size: 16px;
-  color: #FFFFFF;
-  letter-spacing: 0;
   display: block;
-  position: relative;
-  text-decoration: none;
   cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0;
+  position: relative;
+  color: #FFFFFF;
+  text-decoration: none;
+  padding: 5px 20px 5px 5px;
 }
 
 .viewed-products .viewed-products-listing {
@@ -12778,10 +12797,6 @@ i.within-circle {
   margin: 15px 0px 15px 0px;
   width: 50px;
   height: 50px;
-}
-
-.mb60 {
-  margin-bottom: 60px;
 }
 
 .center_div {

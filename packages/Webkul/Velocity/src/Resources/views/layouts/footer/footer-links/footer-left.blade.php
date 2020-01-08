@@ -1,4 +1,4 @@
-<div class="col-4 software-description">
+<div class="col-lg-4 col-md-12 col-sm-12 software-description">
     <div class="logo">
         <a href="{{ route('shop.home.index') }}">
             @if ($logo = core()->getCurrentChannel()->logo_url)
