@@ -2,11 +2,13 @@
 
 namespace Webkul\Core\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Webkul\Core\Eloquent\TranslatableModel;
 use Webkul\Core\Contracts\CountryState as CountryStateContract;
 
 
-class CountryState extends Model implements CountryStateContract
+class CountryState extends TranslatableModel implements CountryStateContract
 {
+    public $translatedAttributes = ['name'];
+    
     public $timestamps = false;
 }
