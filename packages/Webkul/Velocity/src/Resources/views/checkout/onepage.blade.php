@@ -11,7 +11,7 @@
 @push('scripts')
     <script type="text/x-template" id="checkout-template">
         <div id="checkout" class="checkout-process offset-1 row col-11">
-            <h1 class="row col-12">Checkout</h1>
+            <h1 class="row col-12">{{ __('velocity::app.checkout.checkout') }}</h1>
 
             <div class="row col-7">
 

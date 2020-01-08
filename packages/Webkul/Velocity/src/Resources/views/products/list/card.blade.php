@@ -57,7 +57,7 @@
             </div>
         </div>
     @else
-        <div class="card grid-card" id="product-card-new">
+        <div class="card grid-card product-card-new">
             <a
                 href="{{ route('shop.productOrCategory.index', ['slug' => $product->url_key]) }}"
                 title="{{ $product->name }}"

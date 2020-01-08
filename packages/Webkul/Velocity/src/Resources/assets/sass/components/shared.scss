@@ -478,7 +478,7 @@
         border: none;
     }
 }
-#product-card-new:hover,
+.product-card-new:hover,
 .lg-card-container:hover,
 .general-container:hover {
     box-shadow: 0 6px 14px 0 rgba(0,0,0,0.14);
@@ -634,7 +634,7 @@ a {
     cursor: pointer;
 
     .VueCarousel-slide:nth-of-type(1) {
-        #product-card-new {
+        .product-card-new {
             margin-left: 0px;
         }
     }

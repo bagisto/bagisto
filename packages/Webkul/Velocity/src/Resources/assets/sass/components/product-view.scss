@@ -67,6 +67,7 @@
                     border: none;
                     color: white;
                     font-weight: 600;
+                    cursor: default;
                     padding: 2px 11px;
                     background: $button-danger;
 
@@ -137,7 +138,7 @@
             padding: 0px;
 
             button {
-                padding: 10px 15px;
+                padding: 9px 15px;
                 text-transform: uppercase;
 
                 span {
