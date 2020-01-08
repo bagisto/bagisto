@@ -230,7 +230,7 @@ class ProductFlat
                             }
                         }
 
-                        $productFlat->{$attribute->code} = $productAttributeValue[ProductAttributeValue::$attributeTypeFields[$attribute->type]];
+                        $productFlat->{$attribute->code} = $productAttributeValue[ProductAttributeValue::$attributeTypeFields[$attribute->type]] ?? null;
 
                         if ($attribute->type == 'select') {
                             $attributeOption = $this->attributeOptionRepository->find($product->{$attribute->code});
