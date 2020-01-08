@@ -334,59 +334,56 @@ header {
         margin: 5px 0px;
         background: $white-color;
 
-        .selectdiv {
-            width: 30%;
-            font-family: 'Webkul Rango' !important;
-            speak: none;
-            font-style: normal;
-            font-weight: normal;
-            font-variant: normal;
-            text-transform: none;
-            line-height: 1;
-            -webkit-font-smoothing: antialiased;
-        }
+        .btn-group {
+            max-width: 550px;
 
-        .selectdiv:before {
-            top: 13px;
-            right: 72%;
-            z-index: 10;
-            font-size: 16px;
-            content: "\E906";
-            position: absolute;
-        }
+            .selectdiv {
+                @extend .rango-default;
 
-        select {
-            @include border-radius(0px);
+                width: 170px;
+            }
 
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
-            border-right: none;
-            border: 1px solid $theme-color;
-            font-family:"Source Sans Pro", sans-serif;
+            .selectdiv:before {
+                top: 13px;
+                left: 100px;
+                z-index: 10;
+                font-size: 16px;
+                content: "\E906";
+                position: absolute;
+            }
 
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-        }
+            select {
+                width: 100%;
+                height: 100%;
+                cursor: pointer;
+                border-radius: 2px 0px 0px 2px;
+                border: 1px solid $theme-color;
+                border-right: none;
+                font-family:"Source Sans Pro", sans-serif;
 
-        select::-ms-expand {
-            display: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+            }
+
+            select::-ms-expand {
+                display: none;
+            }
         }
 
         input {
             @include border-radius(0px);
 
-            width: 70%;
+            width: 380px;
             height: 100%;
             font-size: 14px;
             padding: 0 10px;
-            border-left: 0px;
-            border-left: none;
             line-height: 20px;
             letter-spacing: 0;
             border: 1px solid $theme-color;
+            border-left: 1px solid $border-common;
         }
+
         .btn {
             height: 40px;
 
@@ -402,6 +399,16 @@ header {
             &:active:hover {
                 outline: none;
                 outline-offset: 0px;
+            }
+        }
+
+        #header-search-icon {
+            min-width: 40px;
+            border-radius: 0px 2px 2px 0px;
+            background-color: $theme-color;
+
+            i {
+                color: $btn-text-color;
             }
         }
     }
@@ -567,8 +574,8 @@ header {
             .main-category {
                 width: 100%;
                 overflow: hidden;
-                display: inline-block;
                 position: relative;
+                display: inline-block;
                 padding: 5px 5px 5px 35px;
 
                 .material-icons{

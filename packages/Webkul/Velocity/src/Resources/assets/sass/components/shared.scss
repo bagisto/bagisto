@@ -134,6 +134,9 @@
 .mr20 {
     margin-right: 20px;
 }
+.mb5 {
+    margin-bottom: 5px !important;
+}
 .mb10 {
     margin-bottom: 10px !important;
 }
@@ -193,6 +196,9 @@
 }
 .clr-dark {
     color: rgba(255,255,255,0.52);
+}
+.font-clr {
+    color: $font-color;
 }
 
 .display-inbl {
@@ -581,7 +587,9 @@ a {
         text-decoration: none;
     }
 
-    &.remove-decoration:hover {
+    &.remove-decoration:hover,
+    &.remove-decoration:active,
+    &.remove-decoration:focus {
         text-decoration: none;
     }
 }
@@ -697,4 +705,16 @@ button[disabled] {
         display: table-cell;
         vertical-align: middle;
     }
+}
+
+.rango-default {
+    speak: none;
+    line-height: 1;
+    font-style: normal;
+    font-weight: normal;
+    text-transform: none;
+    font-variant: normal;
+    -webkit-font-smoothing: antialiased;
+    font-family: 'Webkul Rango' !important;
+
 }

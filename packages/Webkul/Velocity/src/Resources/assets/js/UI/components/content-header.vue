@@ -5,7 +5,7 @@
             @mouseover="toggleSidebar('0', $event, 'mouseover')"
             class="main-category fs16 unselectable fw6 cursor-pointer left">
 
-            <i :class="`rango-view-list text-down-4 align-vertical-top`">
+            <i class="rango-view-list text-down-4 align-vertical-top fs18">
             </i>
             <span
                 class="pl5"

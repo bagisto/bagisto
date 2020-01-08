@@ -18,7 +18,7 @@
                         <div class="card-description">
                             <h3 class="fs20">{{ $categoryDetails->name }}</h3>
 
-                            <ul class="clr-light pl40">
+                            <ul class="font-clr pl30">
                                 @foreach ($categoryDetails->children as $subCategory)
                                     <li>
                                         <a href="{{ $subCategory->slug }}" class="unset">

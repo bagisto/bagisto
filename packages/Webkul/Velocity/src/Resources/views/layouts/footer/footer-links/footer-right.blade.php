@@ -23,8 +23,8 @@
 <div class="col-4 footer-rt-content">
 
     <div class="row">
-        <div class="mb10">
-            <h3>Payment Methods</h3>
+        <div class="mb5">
+            <h3>{{ __('velocity::app.home.payment-methods') }}</h3>
         </div>
 
         <div class="payment-methods">
@@ -37,8 +37,8 @@
     </div>
 
     <div class="row">
-        <div class="mb10">
-            <h3>Shipping Methods</h3>
+        <div class="mb5">
+            <h3>{{ __('velocity::app.home.payment-methods') }}</h3>
         </div>
 
         <div class="shipping-methods">

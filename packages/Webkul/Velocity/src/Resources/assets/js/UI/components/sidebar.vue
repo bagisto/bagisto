@@ -33,8 +33,8 @@
                     <i
                         class="rango-arrow-right pr15"
                         @mouseout="toggleSidebar(id, $event, 'mouseout')"
-                        @mouseover="toggleSidebar(id, $event, 'mouseover')">
-                        <!-- v-if="category.children.length && category.children.length > 0"> -->
+                        @mouseover="toggleSidebar(id, $event, 'mouseover')"
+                        v-if="category.children.length && category.children.length > 0">
                     </i>
                 </a>
 
@@ -42,10 +42,10 @@
                     class="sub-category-container"
                     v-if="category.children.length && category.children.length > 0">
 
-                    <div class="sub-categories">
+                    <div :class="`sub-categories sub-category-${sidebarLevel+index}`">
                         <sidebar-component
                             :url="url"
-                            :id="`sidebar-level-${Math.random()}`"
+                            :id="`sidebar-level-${sidebarLevel+index}`"
                             :categories="category.children">
                         </sidebar-component>
                     </div>
@@ -77,7 +77,8 @@
             }
 
             return {
-                slicedCategories
+                slicedCategories,
+                sidebarLevel: Math.floor(Math.random() * 1000),
             }
         },
 
@@ -86,40 +87,16 @@
                 let sidebar = $(`#${id}`);
                 if (sidebar && sidebar.length > 0) {
                     sidebar.show();
-                }
-            },
 
-            hover: function (index, actionType) {
-                let category = this.categories[index];
+                    let actualId = id.replace('sidebar-level-', '');
 
-                if (category.children.length > 0) {
-                    let categoryElement = document.getElementById(`category-${category.id}`);
-                    let subCategories = categoryElement.querySelector('.sub-categories');
-
-                    if (subCategories.style.display == "" || subCategories.style.display == "none") {
-                        subCategories.style.display = "block";
-                    } else {
-                        subCategories.style.display = "none";
+                    let sidebarContainer = sidebar.closest(`.sub-category-${actualId}`)
+                    if (sidebarContainer && sidebarContainer.length > 0) {
+                        sidebarContainer.show();
                     }
 
                 }
             },
-
-            toggleSubCategory: function (index) {
-                // let category = this.categories[index];
-
-                // if (category.children.length > 0) {
-                //     let categoryElement = document.getElementById(`category-${category.id}`);
-                //     let subCategories = categoryElement.querySelector('.sub-categories');
-
-                //     if (subCategories.style.display == "" || subCategories.style.display == "none") {
-                //         subCategories.style.display = "block";
-                //     } else {
-                //         subCategories.style.display = "none";
-                //     }
-
-                // }
-            }
         }
     }
 </script>

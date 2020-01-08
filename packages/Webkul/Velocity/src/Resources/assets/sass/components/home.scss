@@ -63,7 +63,7 @@ body {
     }
 
     .sub-categories {
-        top: -50px;
+        top: -40px;
         left: 100%;
         z-index: 100;
         padding-top: 10px;
@@ -143,19 +143,6 @@ body {
     margin-top: 8px;
     cursor: pointer;
     font-size: 20px;
-}
-
-#header-search-icon {
-    min-width: 40px;
-    background-color: $theme-color;
-
-    i {
-        color: $btn-text-color;
-    }
-}
-#header-search-icon .material-icons {
-    color: white;
-    padding-top: 5px;
 }
 
 header #search-form > *:focus {
@@ -365,7 +352,7 @@ header #search-form > *:focus {
 
 .hot-categories-container {
     .hot-category-wrapper {
-        padding: 15px 10px 15px 0;
+        padding: 0 10px 15px 0;
 
         .card {
             height: 100%;
@@ -420,8 +407,8 @@ header #search-form > *:focus {
         .card {
             height: 100%;
             border: none;
-            box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.14);
-            -webkit-box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.14);
+            // box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.14);
+            // -webkit-box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.14);
 
             .category-image {
                 height: 180px;
@@ -519,6 +506,7 @@ header #search-form > *:focus {
 
     .main-category {
         padding: 8px 15px;
+        border-top: 1px solid $border-common;
         border-bottom: 1px solid $border-common;
     }
 
@@ -543,9 +531,10 @@ header #search-form > *:focus {
                     display: block;
                     cursor: pointer;
                     font-size: 16px;
-                    color: #FFFFFF;
+                    font-weight: 600;
                     letter-spacing: 0;
                     position: relative;
+                    color: $white-color;
                     text-decoration: none;
                     padding: 8px 20px 8px 5px;
                 }

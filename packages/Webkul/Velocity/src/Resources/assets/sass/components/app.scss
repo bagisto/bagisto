@@ -197,16 +197,16 @@
 // responsive css for modal
 @media only screen and (max-width: 770px) {
     .modal-container {
-        max-width: 80%;
         left: 10%;
+        max-width: 80%;
         margin-left: 0px;
     }
 }
 
 #product-card-new {
     border: none;
+    width: 22.5rem;
     margin: 0 5px 10px 10px;
-    padding-bottom: 10px;
 
     .product-image-container {
         height: 220px;
@@ -304,20 +304,40 @@
 
     label {
         float: left;
-        padding: 5px 10px 10px 0;
+        padding: 5px 15px 10px 0;
     }
 
     button,
     input {
         @extend .btn;
 
-        font-size: 16px !important;
-        background-color: white;
+        height: 35px;
+        border-radius: 0px;
+        vertical-align: top;
+        padding: 0 10px !important;
+        font-size: 24px !important;
+        font-weight: 600 !important;
         border: 1px solid $border-common !important;
+        color: $dark-color !important;
+        background-color: $white-color;
+    }
+
+    button:nth-of-type(1) {
+        border-right: 0px !important;
     }
 
     input {
         width: 50px;
+        cursor: default;
+        font-size: 16px !important;
+        border-left: 0px !important;
+        border-right: 0px !important;
+        text-align: center;
+    }
+
+    button:nth-last-of-type(1) {
+        border-radius: 0px;
+        border-left: 0px !important;
     }
 
     button:active,
@@ -624,12 +644,13 @@
 
 .account-content {
     .sidebar {
+        height: 100%;
         border-right: 1px solid $border-general;
 
         .customer-sidebar {
             .account-details {
                 text-align: center;
-                padding: 15px 20px;
+                padding: 25px 20px;
 
                 .customer-name {
                     width: 60px;
@@ -651,20 +672,54 @@
 
             .navigation {
                 width: 100%;
-                margin-top: 25px;
 
                 li {
-                    width: 99%;
-                    padding: 15px 20px;
+                    width: 100%;
+                    padding: 10px 15px;
+                    margin-bottom: 10px;
 
-                    &:hover {
-                        color: $link-color;
-                    }
-
+                    &:hover,
                     &.active {
-                        color: $link-color;
+                        color: $light-link-color;
                         background-color: $light-background;
                     }
+
+                    i {
+                        &.icon {
+                            @extend .rango-default;
+
+                            font-size: 18px;
+                            padding-right: 5px;
+
+                            &.profile::before {
+                                content: "\E995";
+                            }
+
+                            &.address::before {
+                                content: "\e949";
+                            }
+
+                            &.reviews::before {
+                                content: "\e97d";
+                            }
+
+                            &.wishlist::before {
+                                content: "\e93e";
+                            }
+
+                            &.orders::before {
+                                content: "\e931";
+                            }
+
+                            &.downloadables::before {
+                                content: "\e926";
+                            }
+                        }
+                    }
+                }
+
+                li:last-child {
+                    margin-bottom: 0;
                 }
             }
         }
@@ -674,6 +729,10 @@
         color: $font-color;
         padding: 15px 20px;
         padding-bottom: 60px;
+
+        &.right {
+            padding-left: $sidebar-width + 20px !important;
+        }
 
         .account-head {
             margin-bottom: 20px;
@@ -734,9 +793,29 @@
             .account-items-list {
                 margin-bottom: 40px;
             }
+
+            #datagrid-filters {
+                .dropdown-filters {
+                    right: 0;
+                    width: 220px;
+                    position: relative;
+                    padding: 10px 15px;
+                    border: 1px solid $border-common;
+
+                    .grid-dropdown-header {
+                        display: inline-block;
+                    }
+
+                    .dropdown-list {
+                        li {
+                            list-style: none;
+                        }
+                    }
+                }
+            }
         }
 
-        .account-items-list{
+        .account-items-list {
             &.wishlist-container {
                 .col-3 {
                     padding-left: 0;
@@ -796,18 +875,12 @@
                     &.previous {
                         .angle-right-icon,
                         .angle-left-icon {
+                            @extend .rango-default;
+
                             margin: 0;
-                            speak: none;
-                            line-height: 1;
                             font-size: 24px;
                             background: unset;
                             text-align: center;
-                            font-style: normal;
-                            font-weight: normal;
-                            font-variant: normal;
-                            text-transform: none;
-                            -webkit-font-smoothing: antialiased;
-                            font-family: 'Webkul Rango' !important;
                         }
                     }
 
@@ -998,7 +1071,8 @@
 }
 
 .order-summary-container {
-    padding-top: 3%;
+    padding-top: 25px;
+    max-width: 500px !important;
 
     > div {
         width: 100%;

@@ -1,11 +1,11 @@
 <template>
 
-    <div class="row mb20 unselectable col-12" :class="rowClass">
+    <div class="row mb15 col-12" :class="rowClass">
         <div class="col-lg-4 no-padding">
-            <h2 class="fs20">{{ headerHeading }}</h2>
+            <h2 class="fs20 fw6">{{ headerHeading }}</h2>
         </div>
 
-        <div class="col-lg-8 no-padding popular-product-categories">
+        <div class="col-lg-8 no-padding">
             <div class="row justify-content-end text-right">
 
                 <template v-if="tabs">

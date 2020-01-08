@@ -11,7 +11,7 @@
     <section class="cart-details row offset-1">
         <h1 class="fw6 row col-12">{{ __('shop::app.checkout.cart.title') }}</h1>
 
-        <div class="cart-details-header row col-7">
+        <div class="cart-details-header row col-6">
             {{-- TODO:- USE table insted of column --}}
             @if ($cart)
                 <div class="row cart-header col-12 no-padding">

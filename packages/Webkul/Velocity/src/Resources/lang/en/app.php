@@ -135,6 +135,8 @@ return [
         'add-to-cart' => 'Add To Cart',
         'hot-categories' => 'Hot Categories',
         'popular-categories' => 'Popular Categories',
+        'payment-methods' => 'Payment Methods',
+        'shipping-methods' => 'Shipping Methods',
     ],
 
     'header' => [
