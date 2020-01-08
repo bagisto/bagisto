@@ -115,10 +115,14 @@ class AddressController extends Controller
             'customer_id' => auth()->guard('customer')->user()->id,
         ]);
 
-        if (! $address)
+        if (! $address) {
             abort(404);
+        }
 
-        return view($this->_config['view'], compact('address'));
+        return view($this->_config['view'], array_merge(
+            compact('address'),
+            ['defaultCountry' => config('app.default_country')]
+        ));
     }
 
     /**
