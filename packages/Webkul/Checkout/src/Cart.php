@@ -720,22 +720,22 @@ class Cart {
             }
 
             $taxRates = $taxCategory->tax_rates()->where([
-                    'state' => $address->state,
                     'country' => $address->country,
                 ])->orderBy('tax_rate', 'desc')->get();
 
-            if (count( $taxRates) > 0) {
+            if ($taxRates->count()) {
                 foreach ($taxRates as $rate) {
                     $haveTaxRate = false;
 
+                    if ($rate->state != '' && $rate->state != $address->state)
+                        break;
+
                     if (! $rate->is_zip) {
-                        if ($rate->zip_code == '*' || $rate->zip_code == $address->postcode) {
+                        if ($rate->zip_code == '*' || $rate->zip_code == $address->postcode)
                             $haveTaxRate = true;
-                        }
                     } else {
-                        if ($address->postcode >= $rate->zip_from && $address->postcode <= $rate->zip_to) {
+                        if ($address->postcode >= $rate->zip_from && $address->postcode <= $rate->zip_to)
                             $haveTaxRate = true;
-                        }
                     }
 
                     if ($haveTaxRate) {
