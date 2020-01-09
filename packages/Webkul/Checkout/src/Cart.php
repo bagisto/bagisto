@@ -859,6 +859,8 @@ class Cart {
                 'shipping_description' => $data['selected_shipping_rate']['method_description'],
                 'shipping_amount' => $data['selected_shipping_rate']['price'],
                 'base_shipping_amount' => $data['selected_shipping_rate']['base_price'],
+                'shipping_discount_amount' => $data['selected_shipping_rate']['discount_amount'],
+                'base_shipping_discount_amount' => $data['selected_shipping_rate']['base_discount_amount'],
                 'shipping_address' => array_except($data['shipping_address'], ['id', 'cart_id']),
             ]);
         }
