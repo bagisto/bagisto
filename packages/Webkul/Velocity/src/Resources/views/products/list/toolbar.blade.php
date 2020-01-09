@@ -41,24 +41,24 @@
 
     <div class="sorter">
         <label>{{ __('shop::app.products.sort-by') }}</label>
+        <i class="icon fs16 cell rango-arrow-down select-icon-margin down-icon-position"></i>
+            <select class="selective-div" onchange="window.location.href = this.value">
 
-        <select onchange="window.location.href = this.value">
+                @foreach ($toolbarHelper->getAvailableOrders() as $key => $order)
 
-            @foreach ($toolbarHelper->getAvailableOrders() as $key => $order)
+                    <option value="{{ $toolbarHelper->getOrderUrl($key) }}" {{ $toolbarHelper->isOrderCurrent($key) ? 'selected' : '' }}>
+                        {{ __('shop::app.products.' . $order) }}
+                    </option>
 
-                <option value="{{ $toolbarHelper->getOrderUrl($key) }}" {{ $toolbarHelper->isOrderCurrent($key) ? 'selected' : '' }}>
-                    {{ __('shop::app.products.' . $order) }}
-                </option>
+                @endforeach
 
-            @endforeach
-
-        </select>
+            </select>
     </div>
 
     <div class="limiter">
         <label>{{ __('shop::app.products.show') }}</label>
-
-        <select onchange="window.location.href = this.value">
+        <i class="icon fs16 cell rango-arrow-down select-icon-show-margin down-icon-position"></i>
+        <select class="selective-div" onchange="window.location.href = this.value" style="width: 57px;">
 
             @foreach ($toolbarHelper->getAvailableLimits() as $limit)
 

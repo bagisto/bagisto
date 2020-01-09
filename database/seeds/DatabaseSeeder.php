@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Webkul\Admin\Database\Seeders\DatabaseSeeder as BagistoDatabaseSeeder;
-use Webkul\Velocity\Database\Seeders\DatabaseSeeder as VelocityDatabaseSeeder;
+use Webkul\Velocity\Database\Seeders\VelocityMetaDataSeeder as VelocityDatabaseSeeder;
 
 class DatabaseSeeder extends Seeder
 {

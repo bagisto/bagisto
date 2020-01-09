@@ -1090,6 +1090,10 @@
   background-color: #0D2438;
 }
 
+.product-card-new:hover #quick-view-btn-container {
+  display: block;
+}
+
 .quantity {
   width: 100%;
   padding-bottom: 10px;
@@ -2301,6 +2305,29 @@
   padding: 42px 10px 0 10px;
 }
 
+.selective-div {
+  -webkit-appearance: none;
+}
+
+.select-icon-margin {
+  margin-top: 10px;
+  margin-left: 96px;
+}
+
+.down-icon-position {
+  position: absolute;
+}
+
+.select-icon-show-margin {
+  margin-left: 35px;
+  margin-top: 10px;
+}
+
+.down-arrow-margin {
+  margin-left: 75px;
+  margin-top: 8px;
+}
+
 /* @author Shubham Mehrotra */
 body {
   overflow-x: hidden;
@@ -2780,7 +2807,7 @@ header #search-form > *:focus {
 
 .categories-sidebar-container .content-list ul {
   width: 100%;
-  height: 100%;
+  height: 104%;
   padding-left: 10px;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -2862,7 +2889,7 @@ header #search-form > *:focus {
 
 body::after {
   /* dark overlay layer - visible when we fire .cd-quick-view */
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -2910,7 +2937,8 @@ body::after {
 }
 
 .cd-quick-view .action-buttons {
-  padding-top: 20px;
+  padding-top: 10px;
+  margin-left: 118px;
 }
 
 .cd-quick-view .action-buttons > span {
@@ -2930,6 +2958,16 @@ body::after {
 
 .demo {
   border: 1px solid red;
+}
+
+.ul-shadow {
+  -webkit-box-shadow: 1px 2px 8px #888888;
+          box-shadow: 1px 2px 8px #888888;
+}
+
+.quick-addtocart-btn {
+  margin-top: 329px;
+  margin-left: -82px;
 }
 
 .footer {

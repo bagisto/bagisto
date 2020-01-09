@@ -36873,7 +36873,7 @@ var render = function() {
       _c("div", { staticClass: "content-list right" }, [
         _c(
           "ul",
-          { staticClass: "no-margin", attrs: { type: "none" } },
+          { staticClass: "no-margin ul-shadow", attrs: { type: "none" } },
           _vm._l(_vm.headerContent, function(content, index) {
             return _c("li", { key: index }, [
               content["content_type"] == "link"

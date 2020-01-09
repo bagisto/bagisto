@@ -27,12 +27,13 @@
 
 <script type="text/x-template" id="cart-btn-template">
     <button
-        :class="`btn btn-link disable-box-shadow ${parseInt(itemCount) ? 'dropdown-icon-custom' : ''}`"
+        :class="`btn btn-link disable-box-shadow ${parseInt(itemCount)}`"
         type="button"
         id="mini-cart"
         @click="toggleMiniCart">
 
         <div class="mini-cart-content">
+            <i class="icon fs16 cell rango-arrow-down down-icon-position down-arrow-margin"></i>
             <i class="rango-cart-1 fs24 text-down-3"></i>
             <span class="badge" v-text="itemCount"></span>
             <span class="fs18 fw6 cart-text">{{ __('velocity::app.minicart.cart') }}</span>

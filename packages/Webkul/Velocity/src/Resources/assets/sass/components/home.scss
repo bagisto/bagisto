@@ -521,7 +521,7 @@ header #search-form > *:focus {
 
         ul {
             width: 100%;
-            height: 100%;
+            height: 104%;
             padding-left: 10px;
             display: inline-flex;
             background-color: $link-color;
@@ -605,7 +605,7 @@ header #search-form > *:focus {
 
 body::after {
     /* dark overlay layer - visible when we fire .cd-quick-view */
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -653,7 +653,8 @@ body::after {
     }
 
     .action-buttons {
-        padding-top: 20px;
+        padding-top: 10px;
+        margin-left: 118px;
 
         > span {
             font-size: 24px;
@@ -675,3 +676,13 @@ body::after {
 .demo {
     border: 1px solid red;
 }
+
+.ul-shadow {
+    box-shadow: 1px 2px 8px #888888;
+}
+
+.quick-addtocart-btn {
+    margin-top: 329px;
+    margin-left: -82px;
+}
+

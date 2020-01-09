@@ -50,10 +50,10 @@
         </div>
 
         <div class="col-lg-6 cd-item-info fs16">
-            <h2 class="text-nowrap fw6">{{ $product->name }}</h2>
+            <h2 class="text-nowrap fw6" style="color: #555555; font-size: 24px;">{{ $product->name }}</h2>
 
             <div class="product-price fs14">
-                <h2 class="text-nowrap fw6">{{ $product->price }}</h2>
+                <h2 class="text-nowrap fw6" style="color: #555555; font-size: 30px;">{{ $product->price }}</h2>
             </div>
 
             {{-- @TODO --}}
@@ -67,12 +67,15 @@
                 </div>
             @endif --}}
 
-            <p class="pt20">
+            <p class="pt20" style="font-size: 14px;">
                 {!! $product->description !!}
             </p>
+            <button class="btn btn-add-to-cart quick-addtocart-btn">
+                <span class="rango-cart-1 fs20"></span>
+                Submit
+            </button>
 
             <div class="action-buttons">
-
                 <div style="display: inline-block;" class="rango-exchange fs24"></div>
                 <div style="display: inline-block;" class="rango-heart fs24"></div>
             </div>
