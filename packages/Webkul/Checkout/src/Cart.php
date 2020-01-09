@@ -229,7 +229,7 @@ class Cart {
     {
         foreach ($data['qty'] as $itemId => $quantity) {
             $item = $this->cartItemRepository->findOneByField('id', $itemId);
-        
+
             if (! $item)
                 continue;
 
@@ -345,7 +345,7 @@ class Cart {
             foreach ($guestCart->items as $key => $guestCartItem) {
 
                 $found = false;
-                
+
                 foreach ($cart->items as $cartItem) {
                     if (! $cartItem->product->getTypeInstance()->compareOptions($cartItem->additional, $guestCartItem->additional))
                         continue;
@@ -492,7 +492,7 @@ class Cart {
         if ($cart->haveStockableItems()) {
             $shippingAddress = $data['shipping'];
             $shippingAddress['cart_id'] = $cart->id;
-            
+
             if (isset($data['shipping']['address_id']) && $data['shipping']['address_id']) {
                 $address = $this->customerAddressRepository->findOneWhere(['id'=> $data['shipping']['address_id']])->toArray();
 
@@ -646,7 +646,7 @@ class Cart {
         }
 
         $quantities = 0;
-        
+
         foreach ($cart->items as $item) {
             $quantities = $quantities + $item->quantity;
         }
@@ -674,7 +674,7 @@ class Cart {
         //rare case of accident-->used when there are no items.
         if (count($cart->items) == 0) {
             $this->cartRepository->delete($cart->id);
-            
+
             return false;
         } else {
             foreach ($cart->items as $item) {
@@ -712,7 +712,7 @@ class Cart {
 
             if (! $taxCategory)
                 continue;
-            
+
             if ($item->product->getTypeInstance()->isStockable()) {
                 $address = $cart->shipping_address;
             } else {
@@ -728,7 +728,7 @@ class Cart {
                     $haveTaxRate = false;
 
                     if ($rate->state != '' && $rate->state != $address->state)
-                        break;
+                        continue;
 
                     if (! $rate->is_zip) {
                         if ($rate->zip_code == '*' || $rate->zip_code == $address->postcode)
@@ -912,7 +912,7 @@ class Cart {
 
     /**
      * Move a wishlist item to cart
-     * 
+     *
      * @param WishlistItem $wishlistItem
      * @return boolean
      */
@@ -920,7 +920,7 @@ class Cart {
     {
         if (! $wishlistItem->product->getTypeInstance()->canBeMovedFromWishlistToCart($wishlistItem))
             return false;
-    
+
         if (! $wishlistItem->additional)
             $wishlistItem->additional = ['product_id' => $wishlistItem->product_id];
 
