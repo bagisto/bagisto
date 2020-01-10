@@ -80,8 +80,8 @@ class CustomerCest
         $I->seeInSource('Address have been successfully added.');
 
         $I->seeRecord(CustomerAddress::class, [
-            'company_name' => $fields['company'],
-            'address1'     => $fields['address1'],
+            'company_name' => $fields['company_name'],
+            'address1'     => $fields['address1[]'],
             'country'      => $fields['country'],
             'state'        => $fields['state'],
             'city'         => $fields['city'],
