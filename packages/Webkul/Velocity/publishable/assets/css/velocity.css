@@ -1086,10 +1086,6 @@
   background-color: #0D2438;
 }
 
-.product-card-new:hover #quick-view-btn-container {
-  display: block;
-}
-
 .quantity {
   width: 100%;
   padding-bottom: 10px;
