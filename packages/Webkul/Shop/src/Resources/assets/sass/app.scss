@@ -2955,8 +2955,11 @@ section.review {
         display: flex;
 
         .product-info {
-            font-size: 24px;
             max-width: 25%;
+
+            .product-name {
+                font-size: 24px;
+            }
 
             .product-image {
                 img {
