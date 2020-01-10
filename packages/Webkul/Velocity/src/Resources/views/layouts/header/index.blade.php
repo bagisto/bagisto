@@ -9,12 +9,11 @@
         </a>
 
         <div class="row no-margin right">
-            <div class="col-8 no-padding">
+            <div class="col-8 no-padding input-group">
                 <form
                     method="GET"
                     role="search"
                     id="search-form"
-                    class="input-group"
                     action="{{ route('shop.search.index') }}">
 
                     <div

@@ -9,71 +9,6 @@ body {
     }
 }
 
-.account-modal {
-    @extend .modal-dialog;
-
-    right: 10px;
-    z-index: 100;
-    width: 350px !important;
-    position: absolute !important;
-
-    .theme-btn {
-        padding: .5rem .9rem;
-    }
-
-    .modal-footer {
-        .text-left {
-            padding-left: 5px;
-        }
-    }
-}
-
-.category-list-container {
-    z-index: 10;
-    padding: 0px !important;
-    background: $white-color;
-    position: absolute !important;
-    box-shadow: inset -1px 0 0 0 $border-light;
-
-    .category {
-        @extend .cursor-pointer;
-
-        width: 100%;
-        line-height: 2.5rem;
-        display: inline-block;
-
-        span {
-            top: -4px;
-            position: relative;
-        }
-    }
-}
-
-.category-list-container li {
-    padding: 7px 0 5px 15px;
-}
-
-.category-list-container li:hover {
-    background: $border-light;
-}
-
-.category-list-container {
-    .sub-category-container {
-        position: relative;
-    }
-
-    .sub-categories {
-        top: -40px;
-        left: 100%;
-        z-index: 100;
-        padding-top: 10px;
-        position: absolute;
-        background: $light-color;
-        border-left: 1px solid $border-common;
-        box-shadow: inset -1px 0 0 0 $border-light;
-    }
-}
-
 .root-category-menu {
     border-bottom: solid 1px #d8e6ed;
 }
@@ -352,14 +287,14 @@ header #search-form > *:focus {
 
 .hot-categories-container {
     .hot-category-wrapper {
-        padding: 0 10px 15px 0;
+        padding: 0 10px 0 0;
 
         .card {
             height: 100%;
             padding: 20px;
             border: none;
-            box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.14);
-            -webkit-box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.14);
+            // box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.14);
+            // -webkit-box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.14);
         }
 
         .velocity-divide-page {
@@ -381,11 +316,11 @@ header #search-form > *:focus {
     }
 
     .hot-category-wrapper:nth-last-child(2) {
-        padding: 15px 0 15px 0px;
+        padding: 0 0 0 0px;
     }
 
     .hot-category-wrapper:last-child {
-        padding: 15px 0 15px 10px;
+        padding: 0 0 0 10px;
     }
 }
 
@@ -427,8 +362,7 @@ header #search-form > *:focus {
         }
 
         .card-description {
-            padding: 25px;
-            margin-top: 15px;
+            padding: 10px 20px;
         }
     }
 
@@ -513,6 +447,7 @@ header #search-form > *:focus {
     .content-list {
         margin: 0;
         width: 100%;
+        height: 42px;
         text-align: left;
         list-style: none;
         position: relative;
@@ -521,8 +456,7 @@ header #search-form > *:focus {
 
         ul {
             width: 100%;
-            height: 104%;
-            padding-left: 10px;
+            height: 100%;
             display: inline-flex;
             background-color: $link-color;
 
@@ -532,12 +466,16 @@ header #search-form > *:focus {
                     cursor: pointer;
                     font-size: 16px;
                     font-weight: 600;
+                    padding: 8px 15px;
                     letter-spacing: 0;
                     position: relative;
                     color: $white-color;
                     text-decoration: none;
-                    padding: 8px 20px 8px 5px;
                 }
+            }
+
+            li:hover {
+                background-color: #42719a;
             }
         }
     }

@@ -19,22 +19,25 @@
 
                 input.subscribe-field {
                     width: 300px;
-                    height: 38px;
                     border: none;
+                    height: 38px;
                     font-size: 18px;
+                    max-width: 250px;
                     padding: 10px 20px;
                     color: rgba(0,0,0,0.83);
                 }
 
                 button.subscribe-btn {
-                    left: -1px;
+                    left: -2px;
                     height: 38px;
                     font-size: 18px;
+                    max-width: 110px;
                     line-height: 10px;
                     position: relative;
                 }
 
                 .social-icons {
+                    height: 100%;
                     padding: 20px 0;
                     color: $light-color;
 
@@ -57,7 +60,7 @@
                 }
 
                 .subscribe-newsletter {
-                    padding: 30px 0;
+                    padding: 25px 0 30px 0;
                 }
             }
         }
@@ -78,8 +81,16 @@
                     font-size: 14px;
                     line-height: 2.5rem;
 
-                    li a {
-                        color: rgba(255,255,255,0.83);
+                    ul {
+                        margin-bottom: 0px;
+
+                        li {
+                            margin-bottom: 5px;
+
+                            a {
+                                color: rgba(255,255,255,0.83);
+                            }
+                        }
                     }
                 }
             }

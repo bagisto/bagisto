@@ -27,6 +27,7 @@ class VelocityServiceProvider extends ServiceProvider
     {
         include __DIR__ . '/../Http/helpers.php';
         include __DIR__ . '/../Http/admin-routes.php';
+        include __DIR__ . '/../Http/front-routes.php';
 
         $this->app->register(EventServiceProvider::class);
 
@@ -46,7 +47,7 @@ class VelocityServiceProvider extends ServiceProvider
         $velocityHelper = app('Webkul\Velocity\Helpers\Helper');
         $velocityMetaData = $velocityHelper->getVelocityMetaData();
 
-        view()->share('showRecentlyViewed', false);
+        view()->share('showRecentlyViewed', true);
         view()->share('velocityMetaData', $velocityMetaData);
     }
 

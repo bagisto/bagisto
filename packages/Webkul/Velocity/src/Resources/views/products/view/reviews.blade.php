@@ -182,11 +182,13 @@
                         </div>
 
                         <div class="col-lg-12 review-date-time">
-                            <span>{{ __('velocity::app.products.review-by') }} -</span>
+                            @if ("{{ $review->name }}")
+                                <span>{{ __('velocity::app.products.review-by') }} -</span>
 
-                            <label>
-                                {{ $review->name }},
-                            </label>
+                                <label>
+                                    {{ $review->name }},
+                                </label>
+                            @endif
 
                             <span>{{ core()->formatDate($review->created_at, 'F d, Y') }}
                             </span>

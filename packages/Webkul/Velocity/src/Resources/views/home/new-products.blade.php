@@ -2,8 +2,6 @@
     $count = $velocityMetaData->new_products_count;
 
     $newProducts = app('Webkul\Velocity\Repositories\Product\ProductRepository')->getNewProducts($count);
-
-    $showRecentlyViewed = false;
 @endphp
 
 @if (! empty($newProducts))
@@ -26,11 +24,11 @@
 
                 <div class="col-9 no-padding">
                     <carousel-component
-                        :slides-count="{{ sizeof($newProducts) }}"
                         slides-per-page="5"
-                        id="new-products-carousel"
                         navigation-enabled="hide"
-                        pagination-enabled="hide">
+                        pagination-enabled="hide"
+                        id="new-products-carousel"
+                        :slides-count="{{ sizeof($newProducts) }}">
 
                         @foreach ($newProducts as $index => $product)
 
@@ -43,12 +41,17 @@
                     </carousel-component>
                 </div>
 
-                @include ('shop::products.list.recently-viewed')
+                @include ('shop::products.list.recently-viewed', [
+                    'addClass' => 'col-3',
+                    'addClassWrapper' => 'scrollable max-height-350',
+                ])
             @else
                 <carousel-component
-                    :slides-count="{{ sizeof($newProducts) }}"
                     slides-per-page="6"
-                    id="new-products-carousel">
+                    navigation-enabled="hide"
+                    pagination-enabled="hide"
+                    id="new-products-carousel"
+                    :slides-count="{{ sizeof($newProducts) }}">
 
                     @foreach ($newProducts as $index => $product)
 

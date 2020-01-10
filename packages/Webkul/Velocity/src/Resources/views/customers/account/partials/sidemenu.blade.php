@@ -14,6 +14,7 @@
                     <a class="unset fw6 full-width" href="{{ $subMenuItem['url'] }}">
                         <i class="icon {{ $index }} text-down-3"></i>
                         <span>{{ trans($subMenuItem['name']) }}<span>
+                        <i class="rango-arrow-right pull-right text-down-3"></i>
                     </a>
                 </li>
             @endforeach

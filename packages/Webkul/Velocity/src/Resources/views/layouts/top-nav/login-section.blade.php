@@ -41,22 +41,22 @@
 
                         <!--Footer-->
                         <div class="modal-footer">
-                            <div class="col-6 text-left">
+                            <div>
                                 <a href="{{ route('customer.session.index') }}">
                                     <button
                                         type="button"
-                                        class="theme-btn fs15">
+                                        class="theme-btn fs14 fw6">
 
                                         {{ __('velocity::app.header.sign-in') }}
                                     </button>
                                 </a>
                             </div>
 
-                            <div class="col-6 text-right">
+                            <div>
                                 <a href="{{ route('customer.register.index') }}">
                                     <button
                                         type="button"
-                                        class="theme-btn fs15">
+                                        class="theme-btn fs14 fw6">
                                         {{ __('velocity::app.header.sign-up') }}
                                     </button>
                                 </a>

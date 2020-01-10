@@ -1,13 +1,14 @@
-@import "icons";
-@import "variables";
-@import "mixins";
 @import "rango";
+@import "icons";
+@import "mixins";
+@import "variables";
 @import "components/UI";
 @import "components/app";
 @import "components/home";
 @import "components/footer";
 @import "components/shared";
 @import "components/product-view";
+@import "components/media";
 
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
@@ -179,19 +180,42 @@ body {
 
         .select-icon {
             top: 0px;
-            left: -3px;
+            left: 0px;
+            padding-left: 5px;
         }
 
         .welcome-content {
             @extend .unselectable;
 
-            width: 150px;
+
+            float: right;
+            display: table;
+            min-width: 150px;
             cursor: pointer;
             text-align: right;
+
+            * {
+                display: table-cell;
+                vertical-align: middle;
+            }
         }
 
         + .account-modal {
-            height: 135px;
+            @extend .modal-dialog;
+
+            right: 10px;
+            z-index: 100;
+            height: max-content;
+            width: 290px !important;
+            position: absolute !important;
+
+            .theme-btn {
+                padding: .5rem .9rem;
+            }
+
+            .modal-footer {
+                justify-content: unset;
+            }
         }
     }
 
@@ -200,16 +224,6 @@ body {
 
         * {
             height: 100%;
-        }
-
-        .welcome-content {
-            float: right;
-            display: table;
-
-            * {
-                display: table-cell;
-                vertical-align: middle;
-            }
         }
     }
 }
@@ -330,9 +344,14 @@ header {
     }
 
     #search-form {
-        height: 35px;
+        height: 40px;
         margin: 5px 0px;
         background: $white-color;
+        padding: 4px 1px 0px 0px;
+
+        * {
+            height: 100%;
+        }
 
         .btn-group {
             max-width: 550px;
@@ -345,7 +364,7 @@ header {
 
             .selectdiv:before {
                 top: 13px;
-                left: 100px;
+                left: 108px;
                 z-index: 10;
                 font-size: 16px;
                 content: "\E906";
@@ -385,8 +404,6 @@ header {
         }
 
         .btn {
-            height: 40px;
-
             &:hover {
                 text-decoration: none;
             }
@@ -631,10 +648,6 @@ header {
                     left: 283px;
                     width: 250px;
                     height: 350px;
-
-                    .child-category {
-
-                    }
                 }
             }
         }
@@ -656,15 +669,15 @@ header {
             float: left;
 
             a {
-                padding: 5px 20px 5px 5px;
-                font-family: SourceSansPro-Semibold;
-                font-size: 16px;
-                color: #FFFFFF;
-                letter-spacing: 0;
                 display: block;
-                position: relative;
-                text-decoration: none;
                 cursor: pointer;
+                font-size: 16px;
+                font-weight: 600;
+                letter-spacing: 0;
+                position: relative;
+                color: $white-color;
+                text-decoration: none;
+                padding: 5px 20px 5px 5px;
             }
         }
     }
@@ -793,10 +806,6 @@ i.within-circle {
     margin: 15px 0px 15px 0px;
     width: 50px;
     height: 50px;
-}
-
-.mb60 {
-    margin-bottom: 60px;
 }
 
 .center_div {
