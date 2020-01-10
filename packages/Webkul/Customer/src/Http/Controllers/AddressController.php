@@ -138,6 +138,7 @@ class AddressController extends Controller
             'city'     => 'string|required',
             'postcode' => 'required',
             'phone'    => 'required',
+            'vat_id'   => new VatIdRule(),
         ]);
 
         $data = collect(request()->input())->except('_token')->toArray();
