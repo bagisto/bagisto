@@ -20,10 +20,7 @@
         id="quick-view-btn-container"
         :name="details"
         @click="openQuickView({details: details, event: $event})">
-        <product-quick-view
-            v-if="quickViewDetails"
-            :quick-view-details="quickViewDetails"
-        ></product-quick-view>
+        <product-quick-view v-if="quickViewDetails" :quick-view-details="quickViewDetails"></product-quick-view>
 
         <span class="rango-zoom-plus"></span>
 
@@ -33,7 +30,7 @@
 
 <script type="text/x-template" id="product-quick-view-template">
     <div class="cd-quick-view" v-if="quickView">
-        <div class="col-lg-6 cd-slider-wrapper">
+        <div class="col-lg-6 cd-slider-wrapper model-animation">
             <ul class="cd-slider" type="none">
                 <li class="selected">
                     <img src="{{ $productBaseImage['medium_image_url'] }}" :alt="quickViewDetails.name" />
@@ -50,10 +47,10 @@
         </div>
 
         <div class="col-lg-6 cd-item-info fs16">
-            <h2 class="text-nowrap fw6">{{ $product->name }}</h2>
+            <h2 class="text-nowrap fw6 quick-view-name">{{ $product->name }}</h2>
 
             <div class="product-price fs14">
-                <h2 class="text-nowrap fw6">{{ $product->price }}</h2>
+                <h2 class="text-nowrap fw6 quick-view-price">{{ $product->price }}</h2>
             </div>
 
             {{-- @TODO --}}
@@ -67,12 +64,15 @@
                 </div>
             @endif --}}
 
-            <p class="pt20">
+            <p class="pt14 description-text">
                 {!! $product->description !!}
             </p>
+            <button type="submit" class="btn btn-add-to-cart quick-addtocart-btn">
+                <span class="rango-cart-1 fs20"></span>
+                    Add To Cart
+            </button>
 
             <div class="action-buttons">
-
                 <div style="display: inline-block;" class="rango-exchange fs24"></div>
                 <div style="display: inline-block;" class="rango-heart fs24"></div>
             </div>
@@ -98,6 +98,7 @@
 
                 methods: {
                     openQuickView: function ({details, event}) {
+                        document.getElementById('quick-view-btn-container').style.display = "block";
                         if (event) {
                             event.preventDefault();
                             event.stopPropagation();
@@ -131,6 +132,9 @@
                     closeQuickView: function () {
                         this.quickView = false;
                         this.quickViewDetails = false;
+                        document.getElementById('quick-view-btn-container').style.display = "none";
+                        window.location.reload();
+
                     },
 
                     changeImage: function (imageIndex) {

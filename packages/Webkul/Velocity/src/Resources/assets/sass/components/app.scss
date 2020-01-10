@@ -291,7 +291,7 @@
 
 .product-card-new:hover {
     #quick-view-btn-container {
-        // display: block;
+        display: block;
     }
 }
 
@@ -1680,4 +1680,27 @@
 
 .layered-filter-wrapper {
     padding: 42px 10px 0 10px;
+}
+
+.selective-div {
+    -webkit-appearance: none;
+}
+
+.select-icon-margin {
+    margin-top: 10px;
+    margin-left: 96px;
+
+}
+.down-icon-position {
+    position: absolute;
+}
+
+.select-icon-show-margin {
+    margin-left: 35px;
+    margin-top: 10px;
+}
+
+.down-arrow-margin {
+    margin-left: 75px;
+    margin-top: 8px;
 }

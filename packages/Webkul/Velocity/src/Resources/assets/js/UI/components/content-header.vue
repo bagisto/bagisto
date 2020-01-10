@@ -15,7 +15,7 @@
         </div>
 
         <div class="content-list right">
-            <ul type="none" class="no-margin">
+            <ul type="none" class="no-margin ul-shadow">
                 <li v-for="(content, index) in headerContent" :key="index">
                     <a
                         v-text="content.title"
