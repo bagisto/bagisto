@@ -33,6 +33,12 @@
                         <span class="control-error" v-if="errors.has('company_name')">@{{ errors.first('company_name') }}</span>
                     </div>
 
+                    <div class="control-group" :class="[errors.has('vat_id') ? 'has-error' : '']">
+                        <label for="vat_id" class="required">{{ __('shop::app.customer.account.address.edit.vat_id') }}</label>
+                        <input type="text" class="control" name="vat_id" data-vv-as="&quot;{{ __('shop::app.customer.account.address.edit.vat_id') }}&quot;">
+                        <span class="control-error" v-if="errors.has('vat_id')">@{{ errors.first('vat_id') }}</span>
+                    </div>
+
                     <?php $addresses = explode(PHP_EOL, $address->address1); ?>
 
                     <div class="control-group" :class="[errors.has('address1[]') ? 'has-error' : '']">

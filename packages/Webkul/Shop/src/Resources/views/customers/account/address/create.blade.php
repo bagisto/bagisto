@@ -32,6 +32,12 @@
                         <span class="control-error" v-if="errors.has('company_name')">@{{ errors.first('company_name') }}</span>
                     </div>
 
+                    <div class="control-group" :class="[errors.has('vat_id') ? 'has-error' : '']">
+                        <label for="vat_id" class="required">{{ __('shop::app.customer.account.address.create.vat_id') }}</label>
+                        <input type="text" class="control" name="vat_id" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.vat_id') }}&quot;">
+                        <span class="control-error" v-if="errors.has('vat_id')">@{{ errors.first('vat_id') }}</span>
+                    </div>
+
                     <div class="control-group" :class="[errors.has('address1[]') ? 'has-error' : '']">
                         <label for="address_0" class="required">{{ __('shop::app.customer.account.address.create.street-address') }}</label>
                         <input type="text" class="control" name="address1[]" id="address_0" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.street-address') }}&quot;">

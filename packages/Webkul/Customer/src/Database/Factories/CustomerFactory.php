@@ -28,8 +28,7 @@ $factory->define(Customer::class, function (Faker $faker) {
 $factory->state(Customer::class, 'male', [
     'gender' => 'Male',
 ]);
+
 $factory->state(Customer::class, 'female', [
     'gender' => 'Female',
 ]);
-
-
