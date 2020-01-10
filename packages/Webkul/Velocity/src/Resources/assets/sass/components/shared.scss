@@ -494,6 +494,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    color: #555555;
 }
 
 .small-card-container {
@@ -716,5 +717,16 @@ button[disabled] {
     font-variant: normal;
     -webkit-font-smoothing: antialiased;
     font-family: 'Webkul Rango' !important;
+}
 
+.quick-view-name {
+    font-size: 24px;
+}
+
+.quick-view-price {
+    font-size: 30px;
+}
+
+.description-text {
+    font-size: 14px;
 }
