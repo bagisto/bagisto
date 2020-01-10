@@ -7,7 +7,9 @@ use Webkul\Core\Contracts\Country as CountryContract;
 
 class Country extends TranslatableModel implements CountryContract
 {
+    public $timestamps = false;
+
     public $translatedAttributes = ['name'];
 
-    public $timestamps = false;
+    protected $with = ['translations'];
 }
