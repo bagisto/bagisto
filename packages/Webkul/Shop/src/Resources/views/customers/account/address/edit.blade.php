@@ -18,7 +18,7 @@
             </div>
 
             {!! view_render_event('bagisto.shop.customers.account.address.edit.before', ['address' => $address]) !!}
-            
+
             <form method="post" action="{{ route('customer.address.edit', $address->id) }}" @submit.prevent="onSubmit">
 
                 <div class="account-table-content">
@@ -27,6 +27,11 @@
 
                     {!! view_render_event('bagisto.shop.customers.account.address.edit_form_controls.before', ['address' => $address]) !!}
 
+                    <div class="control-group" :class="[errors.has('company_name') ? 'has-error' : '']">
+                        <label for="company_name" class="required">{{ __('shop::app.customer.account.address.edit.company_name') }}</label>
+                        <input type="text" class="control" name="company_name" data-vv-as="&quot;{{ __('shop::app.customer.account.address.edit.company_name') }}&quot;">
+                        <span class="control-error" v-if="errors.has('company_name')">@{{ errors.first('company_name') }}</span>
+                    </div>
 
                     <?php $addresses = explode(PHP_EOL, $address->address1); ?>
 
