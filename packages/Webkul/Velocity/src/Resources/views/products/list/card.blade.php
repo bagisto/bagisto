@@ -46,7 +46,7 @@
                     </div>
 
                     <div class="product-rating">
-                        <star-ratings ratings="3"></star-ratings>
+                        <star-ratings ratings="{{ $avgRatings }}"></star-ratings>
                         <span>{{ $totalReviews }} Ratings</span>
                     </div>
 

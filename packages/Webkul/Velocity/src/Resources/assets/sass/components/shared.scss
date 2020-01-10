@@ -187,6 +187,9 @@
 .cursor-pointer {
     cursor: pointer;
 }
+.cursor-default {
+    cursor: default;
+}
 
 .grey {
     color: rgb(158, 158, 158);
@@ -499,6 +502,12 @@
 .small-card-container {
     cursor: pointer;
     margin-bottom: 10px;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+
+    .material-icons {
+        font-size: 16px;
+    }
 
     .product-image-container {
         padding: 0;
@@ -515,6 +524,11 @@
         width: 50%;
         display: inline-block;
         padding: 10px 0 !important;
+    }
+
+    .sticker,
+    .regular-price {
+        display: none;
     }
 }
 
@@ -655,6 +669,8 @@ a {
 .scrollable {
     max-height: 100vh;
     overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 .scrollable::-webkit-scrollbar {
@@ -716,5 +732,8 @@ button[disabled] {
     font-variant: normal;
     -webkit-font-smoothing: antialiased;
     font-family: 'Webkul Rango' !important;
+}
 
+.max-height-350 {
+    max-height: 350px;
 }

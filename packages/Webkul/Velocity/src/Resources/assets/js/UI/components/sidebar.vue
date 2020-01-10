@@ -15,10 +15,11 @@
                 @mouseout="toggleSidebar(id, $event, 'mouseout')"
                 @mouseover="toggleSidebar(id, $event, 'mouseover')">
 
+
                 <a
                     class="category unset"
                     :class="(category.children.length > 0) ? 'fw6' : ''"
-                    :href="`${url}/${category['translations'][0].slug}`">
+                    :href="`${url}/${slicedCategories.parentSlug ? slicedCategories.parentSlug + '/' : ''}${category['translations'][0].slug}`">
 
                     <div
                         class="category-icon"
@@ -45,8 +46,9 @@
                     <div :class="`sub-categories sub-category-${sidebarLevel+index}`">
                         <sidebar-component
                             :url="url"
+                            :categories="category.children"
                             :id="`sidebar-level-${sidebarLevel+index}`"
-                            :categories="category.children">
+                            :parent-slug="category.parentSlug ? category.parentSlug : category['translations'][0].slug">
                         </sidebar-component>
                     </div>
                 </div>
@@ -61,6 +63,7 @@
             'id',
             'url',
             'addClass',
+            'parentSlug',
             'categories',
             'mainSidebar',
             'categoryCount'
@@ -75,6 +78,9 @@
             ) {
                 slicedCategories = this.categories.slice(0, categoryCount);
             }
+
+            if (this.parentSlug)
+                slicedCategories['parentSlug'] = this.parentSlug;
 
             return {
                 slicedCategories,

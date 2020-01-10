@@ -1,5 +1,5 @@
 <script type="text/x-template" id="star-ratings-template">
-    <div :class="`stars mr10 fs${size ? size : '16'} ${pushClass ? pushClass : ''}`">
+    <div :class="`stars mr5 fs${size ? size : '16'} ${pushClass ? pushClass : ''}`">
         <input
             v-if="editable"
             type="number"
@@ -7,21 +7,26 @@
             name="rating"
             class="hidden" />
 
-        <span
-            :class="`rango-star-fill ${editable ? 'cursor-pointer' : ''}`"
+        <i
+            :class="`material-icons ${editable ? 'cursor-pointer' : ''}`"
             v-for="(rating, index) in parseInt(showFilled ? showFilled : 3)"
             :key="`${index}${Math.random()}`"
             @click="updateRating(index + 1)">
-        </span>
+            star
+        </i>
 
         <template v-if="!hideBlank">
-            <span
-                :class="`rango-star ${editable ? 'cursor-pointer' : ''}`"
+            <i
+                :class="`material-icons ${editable ? 'cursor-pointer' : ''}`"
                 v-for="(blankStar, index) in (5 - (showFilled ? showFilled : 3))"
                 :key="`${index}${Math.random()}`"
                 @click="updateRating(showFilled + index + 1)">
-            </span>
+                star_border
+            </i>
         </template>
+
+        {{-- <i class="material-icons">star_border</i>
+        <i class="material-icons">star</i> --}}
     </div>
 </script>
 

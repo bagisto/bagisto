@@ -35539,9 +35539,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['id', 'url', 'addClass', 'categories', 'mainSidebar', 'categoryCount'],
+    props: ['id', 'url', 'addClass', 'parentSlug', 'categories', 'mainSidebar', 'categoryCount'],
 
     data: function data() {
         var slicedCategories = this.categories;
@@ -35550,6 +35552,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         if (slicedCategories && slicedCategories.length > categoryCount) {
             slicedCategories = this.categories.slice(0, categoryCount);
         }
+
+        if (this.parentSlug) slicedCategories['parentSlug'] = this.parentSlug;
 
         return {
             slicedCategories: slicedCategories,
@@ -35621,7 +35625,13 @@ var render = function() {
                       staticClass: "category unset",
                       class: category.children.length > 0 ? "fw6" : "",
                       attrs: {
-                        href: _vm.url + "/" + category["translations"][0].slug
+                        href:
+                          _vm.url +
+                          "/" +
+                          (_vm.slicedCategories.parentSlug
+                            ? _vm.slicedCategories.parentSlug + "/"
+                            : "") +
+                          category["translations"][0].slug
                       }
                     },
                     [
@@ -35698,9 +35708,12 @@ var render = function() {
                             _c("sidebar-component", {
                               attrs: {
                                 url: _vm.url,
+                                categories: category.children,
                                 id:
                                   "sidebar-level-" + (_vm.sidebarLevel + index),
-                                categories: category.children
+                                "parent-slug": category.parentSlug
+                                  ? category.parentSlug
+                                  : category["translations"][0].slug
                               }
                             })
                           ],
@@ -35801,7 +35814,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['slidesCount', 'slidesPerPage', 'navigationEnabled', 'paginationEnabled', 'addClass']
+    props: ['id', 'addClass', 'slidesCount', 'slidesPerPage', 'navigationEnabled', 'paginationEnabled'],
+
+    data: function data() {
+        return {};
+    }
 });
 
 /***/ }),

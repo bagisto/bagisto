@@ -20,11 +20,16 @@
 <script type="text/javascript">
     export default {
         props: [
+            'id',
+            'addClass',
             'slidesCount',
             'slidesPerPage',
             'navigationEnabled',
             'paginationEnabled',
-            'addClass'
         ],
+
+        data: function () {
+            return {}
+        }
     }
 </script>

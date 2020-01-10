@@ -9,7 +9,7 @@
             @endif
 
             @if (core()->getConfigData('customer.settings.newsletter.subscription'))
-                <div class="subscribe-newsletter">
+                <div class="subscribe-newsletter col-lg-6 text-right">
                     <div class="form-container">
                         <form action="{{ route('shop.subscribe') }}">
                             <div class="subscriber-form-div">

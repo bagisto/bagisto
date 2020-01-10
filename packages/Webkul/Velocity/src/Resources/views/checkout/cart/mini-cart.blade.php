@@ -16,7 +16,7 @@
 
             <div class="modal-content sensitive-modal cart-modal-content hide" id="cart-modal-content">
                 <!--Body-->
-                <div class="pl20 pt10 pr15 fs14">
+                <div class="mini-cart-container">
                     @foreach ($items as $item)
                         @php
                             $images = $item->product->getTypeInstance()->getBaseImage($item);

@@ -201,7 +201,21 @@ body {
         }
 
         + .account-modal {
-            height: 135px;
+            @extend .modal-dialog;
+
+            right: 10px;
+            z-index: 100;
+            height: max-content;
+            width: 290px !important;
+            position: absolute !important;
+
+            .theme-btn {
+                padding: .5rem .9rem;
+            }
+
+            .modal-footer {
+                justify-content: unset;
+            }
         }
     }
 
@@ -333,6 +347,7 @@ header {
         height: 40px;
         margin: 5px 0px;
         background: $white-color;
+        padding: 4px 1px 0px 0px;
 
         * {
             height: 100%;

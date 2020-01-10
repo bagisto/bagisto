@@ -64,11 +64,18 @@ class ConfigurationController extends Controller
 
         foreach ($params['images'] as $index => $advertisement) {
             if ($advertisement['image_1'] !== "") {
-                $params['advertisement'][$index] = $this->uploadImages($advertisement, $index);
+                $params['advertisement'][$index] = $this->uploadAdvertisementImages($advertisement, $index);
+            }
+        }
+
+        foreach ($params['product_view_images'] as $index => $productViewImage) {
+            if ($productViewImage !== "") {
+                $params['product_view_images'][$index] = $this->uploadImage($productViewImage, $index);
             }
         }
 
         $params['advertisement'] = json_encode($params['advertisement']);
+        $params['product_view_images'] = json_encode($params['product_view_images']);
         $params['home_page_content'] = str_replace('=&gt;', '=>', $params['home_page_content']);
 
         unset($params['images']);
@@ -82,11 +89,12 @@ class ConfigurationController extends Controller
         return redirect()->route($this->_config['redirect']);
     }
 
-    public function uploadImages($data, $index)
+    public function uploadAdvertisementImages($data, $index)
     {
         $type = 'images';
         $request = request();
 
+        $advertisement = [];
         foreach ($data as $imageId => $image) {
             $file = $type . '.' . $index . '.' . $imageId;
             $dir = "velocity/$type";
@@ -99,5 +107,23 @@ class ConfigurationController extends Controller
         }
 
         return $advertisement;
+    }
+
+    public function uploadImage($data, $index)
+    {
+        $type = 'product_view_images';
+        $request = request();
+
+        $image = '';
+        $file = $type . '.' . $index;
+        $dir = "velocity/$type";
+
+        if ($request->hasFile($file)) {
+            Storage::delete($dir . $file);
+
+            $image = $request->file($file)->store($dir);
+        }
+
+        return $image;
     }
 }

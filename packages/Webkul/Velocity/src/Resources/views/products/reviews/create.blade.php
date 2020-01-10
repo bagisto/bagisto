@@ -39,7 +39,7 @@
                         </div>
 
                         <div class="comment">
-                            <label>Rating*</label>
+                            <label>Description*</label>
                             <textarea rows="4" placeholder="Your Comment" name="comment"></textarea>
                         </div>
 

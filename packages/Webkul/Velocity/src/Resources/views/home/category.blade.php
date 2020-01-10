@@ -18,8 +18,10 @@
 
             <div class="row flex-nowrap">
                 <carousel-component
-                    :slides-count="{{ sizeof($products) }}"
                     slides-per-page="6"
+                    navigation-enabled="hide"
+                    pagination-enabled="hide"
+                    :slides-count="{{ sizeof($products) }}"
                     id="{{ $categoryDetails->name }}-carousel">
 
                     @foreach ($products as $index => $product)
