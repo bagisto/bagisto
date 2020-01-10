@@ -17,6 +17,16 @@
                 <span></span>
             </div>
 
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             {!! view_render_event('bagisto.shop.customers.account.address.edit.before', ['address' => $address]) !!}
 
             <form method="post" action="{{ route('customer.address.edit', $address->id) }}" @submit.prevent="onSubmit">
@@ -35,7 +45,7 @@
 
                     <div class="control-group" :class="[errors.has('vat_id') ? 'has-error' : '']">
                         <label for="vat_id">{{ __('shop::app.customer.account.address.edit.vat_id') }}</label>
-                        <input type="text" value="{{ $address->vat_id }}"  class="control" name="vat_id" data-vv-as="&quot;{{ __('shop::app.customer.account.address.edit.vat_id') }}&quot;">
+                        <input type="text" value="{{ $address->vat_id }}" class="control" name="vat_id" data-vv-as="&quot;{{ __('shop::app.customer.account.address.edit.vat_id') }}&quot;">
                         <span class="control-error" v-if="errors.has('vat_id')">@{{ errors.first('vat_id') }}</span>
                     </div>
 
