@@ -3,9 +3,8 @@
 namespace Webkul\CMS\Http\Controllers\Shop;
 
 use Webkul\CMS\Http\Controllers\Controller;
-use Webkul\CMS\Repositories\CMSRepository as CMS;
-use Webkul\Core\Repositories\ChannelRepository as Channel;
-use Webkul\Core\Repositories\LocaleRepository as Locale;
+use Webkul\CMS\Repositories\CMSRepository;
+use Webkul\Core\Repositories\LocaleRepository;
 
 /**
  * PagePresenter controller
@@ -13,73 +12,58 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
  * @author  Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
- class PagePresenterController extends Controller
+class PagePresenterController extends Controller
 {
     /**
-     * To hold the request variables from route file
+     * CMSRepository object
+     *
+     * @var Object
      */
-    protected $_config;
+    protected $cmsRepository;
 
     /**
-     * To hold the channel reposotry instance
+     * LocaleRepository object
+     *
+     * @var Object
      */
-    protected $channel;
+    protected $localeRepository;
 
     /**
-     * To hold the locale reposotry instance
+     * Create a new controller instance.
+     *
+     * @param  \Webkul\CMS\Repositories\CMSRepository     $cmsRepository
+     * @param  \Webkul\Core\Repositories\LocaleRepository $localeRepository
+     * @return void
      */
-    protected $locale;
-
-    /**
-     * To hold the CMSRepository instance
-     */
-    protected $cms;
-
-    public function __construct(Channel $channel, Locale $locale, CMS $cms)
+    public function __construct(
+        CMSRepository $cmsRepository,
+        LocaleRepository $localeRepository
+    )
     {
-        /**
-         * Channel repository instance
-         */
-        $this->channel = $channel;
+        $this->cmsRepository = $cmsRepository;
 
-        /**
-         * Locale repository instance
-         */
-        $this->locale = $locale;
-
-        /**
-         * CMS repository instance
-         */
-        $this->cms = $cms;
-
-        $this->_config = request('_config');
+        $this->localeRepository = $localeRepository;
     }
 
     /**
-     * To extract the page content and load it in the respective view file\
+     * To extract the page content and load it in the respective view file
      *
-     * @return view
+     * @param string $slug
+     * @return \Illuminate\View\View
      */
     public function presenter($slug)
     {
-        $currentChannel = core()->getCurrentChannel();
-        $currentLocale = app()->getLocale();
+        $currentLocale = $this->localeRepository->findOneByField('code', app()->getLocale());
 
-        $currentLocale = $this->locale->findOneWhere([
-            'code' => $currentLocale
-        ]);
+        $page = $this->cmsRepository->findOneWhere([
+                'url_key' => $slug,
+                'locale_id' => $currentLocale->id,
+                'channel_id' => core()->getCurrentChannel()->id
+            ]);
 
-        $page = $this->cms->findOneWhere([
-            'url_key' => $slug,
-            'locale_id' => $currentLocale->id,
-            'channel_id' => $currentChannel->id
-        ]);
-
-        if ($page) {
-            return view('shop::cms.page')->with('page', $page);
-        } else {
+        if (! $page)
             abort(404);
-        }
 
+        return view('shop::cms.page')->with('page', $page);
     }
 }
