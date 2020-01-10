@@ -295,8 +295,8 @@ abstract class DataGrid
     public function sortOrFilterCollection($collection, $parseInfo)
     {
         foreach ($parseInfo as $key => $info)  {
-            $columnType = $this->findColumnType($key)[0];
-            $columnName = $this->findColumnType($key)[1];
+            $columnType = $this->findColumnType($key)[0] ?? null;
+            $columnName = $this->findColumnType($key)[1] ?? null;
 
             if ($key == "sort") {
                 $count_keys = count(array_keys($info));

@@ -157,7 +157,8 @@ class ShipmentRepository extends Repository
             }
 
             $shipment->update([
-                    'total_qty' => $totalQty
+                    'total_qty' => $totalQty,
+                    'inventory_source_name' => $shipment->inventory_source->name
                 ]);
 
             $this->orderRepository->updateOrderStatus($order);
