@@ -77,6 +77,14 @@ class CustomerCest
         // we need to use this css selector to hit the correct <form>. There is another one at the
         // page header (search)
         $I->submitForm($formCssSelector, $fields);
+        $I->seeInSource('The given vat id has a wrong format');
+
+        // valid vat id:
+        $fields['vat_id'] = 'DE123456789';
+
+        $I->submitForm($formCssSelector, $fields);
+
+        $I->seeInSource('Address have been successfully added.');
 
         $I->seeInSource('Address have been successfully added.');
 
