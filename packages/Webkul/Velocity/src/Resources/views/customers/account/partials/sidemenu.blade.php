@@ -24,7 +24,7 @@
 
 @push('css')
     <style type="text/css">
-        .categories-sidebar-container {
+        .general-container {
             margin-bottom: 0px;
             min-height: 100vh;
         }

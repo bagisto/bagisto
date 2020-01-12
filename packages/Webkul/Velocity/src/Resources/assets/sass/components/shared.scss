@@ -355,7 +355,7 @@
 
     #quick-view-btn-container {
         :hover {
-            color: white !important;
+            color: $white-color !important;
         }
     }
 
@@ -420,12 +420,12 @@
             }
 
             span {
-                vertical-align: middle;
+                vertical-align: top;
             }
         }
 
         .product-information {
-            height: 150px;
+            height: 200px;
             display: table;
 
             > div {
@@ -441,13 +441,17 @@
         }
 
         .wishlist-icon {
-            height: 34px;
+            height: 40px;
             display: table;
 
             i {
                 display: table-cell;
                 vertical-align: middle;
             }
+        }
+
+        .add-to-cart-btn {
+            max-width: 140px;
         }
     }
 
@@ -484,7 +488,7 @@
 .product-card-new:hover,
 .lg-card-container:hover,
 .general-container:hover {
-    box-shadow: 0 6px 14px 0 rgba(0,0,0,0.14);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 .lg-card-container:hover {
@@ -519,6 +523,7 @@
         @extend .bg-image;
 
         height: 100%;
+        background-position: center;
     }
 
     .card-body {
@@ -648,9 +653,13 @@ a {
     width: 100%;
     cursor: pointer;
 
+    .VueCarousel-inner {
+        padding-top: 5px;
+    }
+
     .VueCarousel-slide:nth-of-type(1) {
         .product-card-new {
-            margin-left: 0px;
+            margin-left: 5px;
         }
     }
 }
@@ -749,4 +758,8 @@ button[disabled] {
 
 .max-height-350 {
     max-height: 350px;
+}
+
+.border-normal {
+    border: $border-normal;
 }

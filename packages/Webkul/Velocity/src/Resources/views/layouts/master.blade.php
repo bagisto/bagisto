@@ -63,7 +63,7 @@
                     @include('shop::layouts.top-nav.index')
                     @include('shop::layouts.header.index', ['categories' => $categories])
 
-                    <div class="categories-sidebar-container col-12 no-padding">
+                    <div class="general-container col-12 no-padding">
 
                         @php
                             $velocityContent = app('Webkul\Velocity\Repositories\ContentRepository')->getAllContents();

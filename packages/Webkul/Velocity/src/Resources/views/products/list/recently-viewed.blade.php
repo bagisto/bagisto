@@ -46,6 +46,12 @@
                         </a>
                     </div>
                 </div>
+
+                <span
+                    class="fs16"
+                    v-if="!recentlyViewed"
+                    v-text="'Not available'">
+                </span>
             </div>
         </div>
     </script>
@@ -60,19 +66,24 @@
                     return {
                         baseURL: '{{ url()->to('/') }}',
                         recentlyViewed: (() => {
-                            let slugs = JSON.parse(window.localStorage.recentlyViewed);
-                            let updatedSlugs = {};
+                            let storedRecentlyViewed = window.localStorage.recentlyViewed;
+                            if (storedRecentlyViewed) {
+                                var slugs = JSON.parse(storedRecentlyViewed);
+                                var updatedSlugs = {};
 
-                            slugs.forEach(slug => {
-                                updatedSlugs[slug] = {};
-                            });
+                                slugs.forEach(slug => {
+                                    updatedSlugs[slug] = {};
+                                });
 
-                            return updatedSlugs;
+                                return updatedSlugs;
+                            }
                         })(),
                     }
                 },
 
                 created: function () {
+                    // @TODO:- current product and recentlyViewed
+
                     for (slug in this.recentlyViewed) {
                         if (slug) {
                             this.$http(`${this.baseURL}/product-details/${slug}`)

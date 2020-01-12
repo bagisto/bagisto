@@ -29,7 +29,7 @@
             margin-top: 0px;
         }
 
-        .categories-sidebar-container {
+        .general-container {
             margin-bottom: 0px;
         }
     </style>
@@ -84,7 +84,7 @@
 
                                         @include ('shop::products.add-to-cart', [
                                             'product' => $product,
-                                            'showCartIcon' => false
+                                            'showCartIcon' => false,
                                         ])
                                     </div>
 
@@ -201,7 +201,7 @@
                 if (existingViewed.indexOf(currentProductId) == -1) {
                     existingViewed.push(currentProductId);
 
-                    if (existingViewed.length >= 4)
+                    if (existingViewed.length > 4)
                         existingViewed = existingViewed.slice(Math.max(existingViewed.length - 4, 1));
 
                     window.localStorage.setItem('recentlyViewed', JSON.stringify(existingViewed));

@@ -17,7 +17,7 @@
                             </div>
 
                             <div class="right">
-                                <h3 class="fs20 clr-light">{{ $categoryDetails->name }}</h3>
+                                <h3 class="fs20 clr-light text-uppercase">{{ $categoryDetails->name }}</h3>
 
                                 <ul type="none">
                                     @foreach ($categoryDetails->children as $subCategory)

@@ -75,6 +75,11 @@ $(document).ready(function () {
                             } else if (type == "mouseout") {
                                 this.hide(subCategories1);
                             }
+                        } else {
+                            if (type == "mouseout") {
+                                let sidebar = $(`#${id}`);
+                                sidebar.hide();
+                            }
                         }
                     }
                 }

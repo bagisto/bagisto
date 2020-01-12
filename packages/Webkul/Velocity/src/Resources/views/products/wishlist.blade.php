@@ -7,7 +7,7 @@
         @endphp
 
         <a
-            class="unset wishlist-icon col-4 offset-4 text-right"
+            class="unset wishlist-icon text-right {{ $addWishlistClass ?? '' }}"
             @if (! $isWished)
                 href="{{ route('customer.wishlist.add', $product->product_id) }}"
             @elseif (isset($itemId) && $itemId)
@@ -15,15 +15,41 @@
             @endif
             >
 
-            <i class="fs24 {{ $isWished ? 'rango-heart-fill' : 'rango-heart'}}"></i>
+            <wishlist-component active="{{ !$isWished }}"></wishlist-component>
         </a>
     @endauth
 
     @guest('customer')
         <a
             href="{{ route('customer.session.index') }}"
-            class="unset wishlist-icon col-4 offset-4 text-right">
-            <i class="fs24 rango-heart"></i>
+            class="unset wishlist-icon text-right {{ $addWishlistClass ?? '' }}">
+            <wishlist-component active="false"></wishlist-component>
         </a>
     @endauth
 {!! view_render_event('bagisto.shop.products.wishlist.after') !!}
+
+@push('scripts')
+    <script type="text/x-template" id="wishlist-template">
+        <i
+            :class="`material-icons ${isActive} ${active}`"
+            @mouseover="isActive ? isActive = !isActive : ''"
+            @mouseout="active !== '' && !isActive ? isActive = !isActive : ''">
+
+            @{{ isActive ? 'favorite_border' : 'favorite' }}
+        </i>
+    </script>
+
+    <script type="text/javascript">
+        (() => {
+            Vue.component('wishlist-component', {
+                props: ['active'],
+                template: '#wishlist-template',
+                data: function () {
+                    return {
+                        isActive: this.active
+                    }
+                },
+            });
+        })()
+    </script>
+@endpush

@@ -89,7 +89,7 @@
                 @if ($totalReviews)
                     <div class="product-rating">
                         <star-ratings ratings="{{ $avgRatings }}"></star-ratings>
-                        <span>{{ $totalReviews }} Ratings</span>
+                        <span class="align-top">{{ $totalReviews }} Ratings</span>
                     </div>
                 @else
                     <div class="product-rating">
@@ -98,7 +98,10 @@
                 @endif
 
                 <div class="cart-wish-wrap row">
-                    @include ('shop::products.add-to-cart', ['product' => $product])
+                    @include ('shop::products.add-to-cart', [
+                        'product' => $product,
+                        'addWishlistClass' => 'col-4 offset-4'
+                    ])
                 </div>
             </div>
         </div>

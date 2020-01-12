@@ -1,12 +1,6 @@
 <header>
     <div class="row col-12 remove-padding-margin velocity-divide-page">
-        <a id="logo" class="left" href="{{ route('shop.home.index') }}">
-            @if ($logo = core()->getCurrentChannel()->logo_url)
-                <img class="logo" src="{{ $logo }}" class="img-responsive" title="" alt="" />
-            @else
-                <img class="logo" src="{{ asset('themes/velocity/assets/images/logo-text.png') }}" class="img-responsive" />
-            @endif
-        </a>
+        <logo-component></logo-component>
 
         <div class="row no-margin right">
             <div class="col-8 no-padding input-group">

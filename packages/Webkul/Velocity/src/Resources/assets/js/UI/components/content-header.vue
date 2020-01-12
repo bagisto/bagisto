@@ -1,5 +1,19 @@
 <template>
-    <div class="row velocity-divide-page remove-padding-margin">
+    <div class="row velocity-divide-page remove-padding-margin vc-header">
+        <div class="velocity-small-screen container">
+            <div class="row">
+                <div class="col-8">
+                    <div class="row">
+                        <logo-component add-class="col-8 offset-3"></logo-component>
+                    </div>
+                </div>
+                <div class="col-4 right-vc-header">
+                    <i class="fs16 fw6 rango-search"></i>
+                    <i class="material-icons text-down-3">shopping_cart</i>
+                </div>
+            </div>
+        </div>
+
         <div
             @mouseout="toggleSidebar('0', $event, 'mouseout')"
             @mouseover="toggleSidebar('0', $event, 'mouseover')"

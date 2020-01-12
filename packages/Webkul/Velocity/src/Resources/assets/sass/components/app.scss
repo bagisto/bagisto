@@ -50,11 +50,12 @@
         top: 12px;
         height: 5px;
         position: relative;
+        background-color: $light-background;
 
         > div {
             width: 0px;
             height: 100%;
-            background-color: black;
+            background-color: $black-color;
         }
     }
 
@@ -115,6 +116,11 @@
 
     > div:not(:first-child) {
         vertical-align: super;
+    }
+
+    .limiter::after {
+        margin-left: 10px;
+        content: 'per page';
     }
 }
 
@@ -204,7 +210,7 @@
 }
 
 .product-card-new {
-    width: 22.5rem;
+    // width: 19rem;
     border: none !important;
     margin: 0 5px 10px 10px;
 
@@ -232,6 +238,10 @@
         span {
             font-size: 14px;
             vertical-align: middle;
+        }
+
+        .material-icons {
+            font-size: 16px;
         }
     }
 
@@ -941,11 +951,11 @@
     vertical-align: middle;
 
     i {
-        color: $button-danger;
+        color: $black-color;
     }
 
     i:hover::before {
-        content: "\E93D";
+        // content: "\E93D";
     }
 }
 
@@ -1160,6 +1170,10 @@
 }
 
 .product-price {
+    span:nth-child(1) {
+        font-weight: 600;
+    }
+
     .price-label {
         margin-right: 6px;
     }
@@ -1197,8 +1211,16 @@
 }
 
 .search-container {
+    padding: 30px 20px;
+
+    .lg-card-container {
+        &.list-card {
+            margin: 0 15px;
+        }
+    }
+
     :first-child {
-        margin-left: 0px;
+        margin-top: 0px;
     }
 }
 
@@ -1311,7 +1333,6 @@
 #sidebar-level-0 {
     display: none;
     z-index: 100000;
-    border-top: 1px solid $border-common;
 }
 
 .grouped-product-container {
@@ -1547,6 +1568,7 @@
 }
 
 .category-container {
+    min-height: 670px;
     margin-left: 15px;
     padding: 40px 15px !important;
 
@@ -1642,6 +1664,11 @@
     .VueCarousel-dot--active {
         background-color: $theme-color !important;
     }
+    .VueCarousel {
+        .VueCarousel-inner {
+            padding-top: 0;
+        }
+    }
 }
 
 .filter-attributes-item {
@@ -1679,7 +1706,19 @@
 }
 
 .layered-filter-wrapper {
+    @extend .scrollable;
+
+    max-height: 670px;
+    margin-bottom: 42px;
     padding: 42px 10px 0 10px;
+
+    .recently-viewed {
+        margin-top: 20px;
+
+        h2 {
+            font-size: 18px;
+        }
+    }
 }
 
 .selective-div {

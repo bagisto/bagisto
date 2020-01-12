@@ -10,10 +10,9 @@
 @import "components/product-view";
 @import "components/media";
 
+@import "static/material-icons";
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-
-$material-icons-font-path: "../material-icons/iconfont/" !default;
-@import '../../../../publishable/assets/material-icons/iconfont/material-icons.scss';
+// @import '../../../../publishable/assets/material-icons/iconfont/material-icons.scss';
 
 * {
     margin: 0;
@@ -363,7 +362,7 @@ header {
             }
 
             .selectdiv:before {
-                top: 13px;
+                top: 10px;
                 left: 108px;
                 z-index: 10;
                 font-size: 16px;
@@ -439,7 +438,7 @@ header {
                 position: relative;
                 width: 75px;
                 text-align: right;
-                font-family: $font-family-semibold;
+                font-weight: 600;
                 font-size: 16px;
                 color: $font-color;
                 letter-spacing: 0;
@@ -488,7 +487,7 @@ header {
                 }
 
                 .item-name {
-                    font-family: $font-family-semibold;
+                    font-weight: 600;
                     font-size: 18px;
                     color: $font-color;
                     letter-spacing: 0;
@@ -510,14 +509,13 @@ header {
                         display: inline-block;
 
                         .item-qty {
-                            font-family: $font-family-regular;
                             font-size: 16px;
                             color: $font-color;
                             letter-spacing: 0;
                             text-align: left;
                         }
                         .item-price {
-                            font-family: $font-family-semibold;
+                            font-weight: 600;
                             font-size: 16px;
                             color: $font-color;
                             letter-spacing: 0;
@@ -532,14 +530,14 @@ header {
             border-top: 1px solid $border-common;
 
             .sub-total-text {
-                font-family: $font-family-semibold;
+                font-weight: 600;
                 font-size: 16px;
                 color: $font-color;
                 letter-spacing: 0;
             }
 
             .cart-sub-total {
-                font-family: $font-family-bold;
+                font-weight: 700;
                 font-size: 16px;
                 color: $font-color;
                 letter-spacing: 0;
@@ -549,7 +547,7 @@ header {
         .dropdown-footer {
             padding: 10px 10px 0px 10px;
             border-top: 1px solid $border-common;
-            font-family: $font-family-bold;
+            font-weight: 700;
             font-size: 16px;
             color: $font-color;
             letter-spacing: 0;
@@ -621,7 +619,7 @@ header {
                 a {
                     padding: 10px 0px;
                     position: relative;
-                    font-family: $font-family-semibold;
+                    font-weight: 600;
                     font-size: 14px;
                     color: rgba(0,0,0,0.83);
                     letter-spacing: 0;

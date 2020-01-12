@@ -15,10 +15,11 @@
             {{ ! $product->isSaleable() ? 'disabled' : '' }}>
 
             @if (! (isset($showCartIcon) && !$showCartIcon))
-                <span class="rango-cart-1 fs20"></span>
+                {{-- <span class="rango-cart-1 fs20"></span> --}}
+                <i class="material-icons text-down-3">shopping_cart</i>
             @endif
 
-            <span class="fs14 align-vertical-top fw6">
+            <span class="fs14 fw6 text-uppercase text-up-4">
                 {{ __('shop::app.products.add-to-cart') }}
             </span>
         </button>
@@ -26,7 +27,9 @@
 </div>
 
 @if (! (isset($showWishlist) && !$showWishlist))
-    @include('shop::products.wishlist')
+    @include('shop::products.wishlist', [
+        'addClass' => $addWishlistClass ?? ''
+    ])
 @endif
 
 {!! view_render_event('bagisto.shop.products.add_to_cart.after', ['product' => $product]) !!}

@@ -39,7 +39,7 @@
 
         <div class="mini-cart-content">
             <i class="icon fs16 cell rango-arrow-down down-icon-position down-arrow-margin"></i>
-            <i class="rango-cart-1 fs24 text-down-3"></i>
+            <i class="material-icons-outlined text-down-3">shopping_cart</i>
             <span class="badge" v-text="itemCount"></span>
             <span class="fs18 fw6 cart-text">{{ __('velocity::app.minicart.cart') }}</span>
         </div>
@@ -64,6 +64,19 @@
 
         <span class="control-error" v-if="errors.has(controlName)">@{{ errors.first(controlName) }}</span>
     </div>
+</script>
+
+<script type="text/x-template" id="logo-template">
+    <a
+        :class="`left ${addClass}`"
+        href="{{ route('shop.home.index') }}">
+
+        @if ($logo = core()->getCurrentChannel()->logo_url)
+            <img class="logo" src="{{ $logo }}" />
+        @else
+            <img class="logo" src="{{ asset('themes/velocity/assets/images/logo-text.png') }}" />
+        @endif
+    </a>
 </script>
 
 <script type="text/javascript">
@@ -177,6 +190,11 @@
                     this.$emit('onQtyUpdated', this.qty)
                 }
             }
+        });
+
+        Vue.component('logo-component', {
+            template: '#logo-template',
+            props: ['addClass'],
         });
     })()
 </script>

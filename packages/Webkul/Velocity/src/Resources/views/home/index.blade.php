@@ -50,7 +50,7 @@
     <div class="full-content-wrapper">
         {!! view_render_event('bagisto.shop.home.content.before') !!}
 
-            {!! DbView::make($velocityMetaData)->field('home_page_content')->render() !!}
+            {{-- {!! DbView::make($velocityMetaData)->field('home_page_content')->render() !!} --}}
 
         {{ view_render_event('bagisto.shop.home.content.after') }}
     </div>
@@ -63,8 +63,7 @@
     <!-- Show Product Policy -->
     {{-- @include('shop::home.product-policy') --}}
 
-    <!-- trending products -->
-    {{-- @include('shop::home.category-with-custom-option') --}}
+
 
     <!-- advertisement two -->
     {{-- @include('shop::home.advertisements.advertisement-two') --}}

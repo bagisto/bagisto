@@ -1,3 +1,4 @@
+@inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar')
 @inject ('productRepository', 'Webkul\Product\Repositories\ProductRepository')
 
 @extends('shop::layouts.master')
@@ -54,7 +55,6 @@
                 </div>
             </div>
 
-
             @if ($products->count())
                 <div class="filters-container">
                     @include ('shop::products.list.toolbar')
@@ -74,17 +74,11 @@
                 </div>
 
                 @if ($isDisplayMode)
-
                     @if ($products->count())
-
-                        @inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar')
-
                         @if ($toolbarHelper->getCurrentMode() == 'grid')
                             <div class="row">
                                 @foreach ($products as $productFlat)
-
                                     @include ('shop::products.list.card', ['product' => $productFlat])
-
                                 @endforeach
                             </div>
                         @else

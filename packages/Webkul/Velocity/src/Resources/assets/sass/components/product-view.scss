@@ -139,12 +139,14 @@
 
         .add-to-cart-btn {
             padding: 0px;
+            max-width: 130px;
 
             button {
-                padding: 9px 15px;
                 text-transform: uppercase;
+                padding: 9px 15px !important;
 
                 span {
+                    top: 0;
                     font-size: 16px;
                 }
             }
@@ -203,6 +205,7 @@
     .wishlist-icon {
         height: 46px;
         display: table;
+        padding-left: 10px;
 
         i {
             display: table-cell;
