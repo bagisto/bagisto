@@ -44,7 +44,8 @@ class OrderRepository extends Repository
         OrderItemRepository $orderItemRepository,
         DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository,
         App $app
-    ) {
+    )
+    {
         $this->orderItemRepository = $orderItemRepository;
 
         $this->downloadableLinkPurchasedRepository = $downloadableLinkPurchasedRepository;
@@ -73,26 +74,13 @@ class OrderRepository extends Repository
         DB::beginTransaction();
 
         try {
+            // first prepare all data, then send the 'before' event so hooked in business logic
+            // gets all prepared data:
+            $data = $this->prepareOrderData($data);
+
             Event::fire('checkout.order.save.before', $data);
 
-            if (isset($data['customer']) && $data['customer']) {
-                $data['customer_id'] = $data['customer']->id;
-                $data['customer_type'] = get_class($data['customer']);
-            } else {
-                unset($data['customer']);
-            }
-
-            if (isset($data['channel']) && $data['channel']) {
-                $data['channel_id'] = $data['channel']->id;
-                $data['channel_type'] = get_class($data['channel']);
-                $data['channel_name'] = $data['channel']->name;
-            } else {
-                unset($data['channel']);
-            }
-
-            $data['status'] = 'pending';
-
-            $order = $this->model->create(array_merge($data, ['increment_id' => $this->generateIncrementId()]));
+            $order = $this->model->create($data);
 
             $order->payment()->create($data['payment']);
 
@@ -102,23 +90,7 @@ class OrderRepository extends Repository
 
             $order->addresses()->create($data['billing_address']);
 
-            foreach ($data['items'] as $item) {
-                Event::fire('checkout.order.orderitem.save.before', $data);
-
-                $orderItem = $this->orderItemRepository->create(array_merge($item, ['order_id' => $order->id]));
-
-                if (isset($item['children']) && $item['children']) {
-                    foreach ($item['children'] as $child) {
-                        $this->orderItemRepository->create(array_merge($child, ['order_id' => $order->id, 'parent_id' => $orderItem->id]));
-                    }
-                }
-
-                $this->orderItemRepository->manageInventory($orderItem);
-
-                $this->downloadableLinkPurchasedRepository->saveLinks($orderItem, 'available');
-
-                Event::fire('checkout.order.orderitem.save.after', $data);
-            }
+            $this->handleOrderItems($order, $data);
 
             Event::fire('checkout.order.save.after', $order);
         } catch (\Exception $e) {
@@ -192,26 +164,29 @@ class OrderRepository extends Repository
     }
 
     /**
-     * @return integer
+     * @return string
      */
-    public function generateIncrementId()
+    public function generateIncrementId(): string
     {
         $config = new CoreConfig();
 
-        foreach ([  'Prefix' => 'prefix',
-                    'Length' => 'length',
-                    'Suffix' => 'suffix', ] as
-                    $varSuffix => $confKey)
-                {
-                    $var = "invoiceNumber{$varSuffix}";
-                    $$var = $config->where('code', '=', "sales.orderSettings.order_number.order_number_{$confKey}")->first() ?: false;
-                }
+        foreach (['Prefix' => 'prefix',
+                  'Length' => 'length',
+                  'Suffix' => 'suffix',] as
+                 $varSuffix => $confKey) {
+            $var = "invoiceNumber{$varSuffix}";
+
+            $codeNeedle = "sales.orderSettings.order_number.order_number_{$confKey}";
+
+            $$var = $config->where('code', '=', $codeNeedle)->first() ?: false;
+        }
 
         $lastOrder = $this->model->orderBy('id', 'desc')->limit(1)->first();
         $lastId = $lastOrder ? $lastOrder->id : 0;
 
         if ($invoiceNumberLength && ($invoiceNumberPrefix || $invoiceNumberSuffix)) {
-            $invoiceNumber = ($invoiceNumberPrefix->value) . sprintf("%0{$invoiceNumberLength->value}d", 0) . ($lastId + 1) . ($invoiceNumberSuffix->value);
+            $format = "%0{$invoiceNumberLength->value}d";
+            $invoiceNumber = ($invoiceNumberPrefix->value) . sprintf($format, 0) . ($lastId + 1) . ($invoiceNumberSuffix->value);
         } else {
             $invoiceNumber = $lastId + 1;
         }
@@ -369,5 +344,59 @@ class OrderRepository extends Repository
         $order->save();
 
         return $order;
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return array
+     */
+    private function prepareOrderData(array $data): array
+    {
+        if (isset($data['customer']) && $data['customer']) {
+            $data['customer_id'] = $data['customer']->id;
+            $data['customer_type'] = get_class($data['customer']);
+        } else {
+            unset($data['customer']);
+        }
+
+        if (isset($data['channel']) && $data['channel']) {
+            $data['channel_id'] = $data['channel']->id;
+            $data['channel_type'] = get_class($data['channel']);
+            $data['channel_name'] = $data['channel']->name;
+        } else {
+            unset($data['channel']);
+        }
+
+        $data['increment_id'] = $this->generateIncrementId();
+
+        $data['status'] = 'pending';
+
+        return $data;
+    }
+
+    /**
+     * @param array $data
+     * @param       $order
+     */
+    private function handleOrderItems(Order $order, array $data): void
+    {
+        foreach ($data['items'] as $item) {
+            Event::fire('checkout.order.orderitem.save.before', $data);
+
+            $orderItem = $this->orderItemRepository->create(array_merge($item, ['order_id' => $order->id]));
+
+            if (isset($item['children']) && $item['children']) {
+                foreach ($item['children'] as $child) {
+                    $this->orderItemRepository->create(array_merge($child, ['order_id' => $order->id, 'parent_id' => $orderItem->id]));
+                }
+            }
+
+            $this->orderItemRepository->manageInventory($orderItem);
+
+            $this->downloadableLinkPurchasedRepository->saveLinks($orderItem, 'available');
+
+            Event::fire('checkout.order.orderitem.save.after', $data);
+        }
     }
 }
