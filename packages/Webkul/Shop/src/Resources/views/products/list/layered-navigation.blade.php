@@ -173,7 +173,7 @@
                             0,
                             0
                         ],
-                        max: {{ core()->convertPrice($productFlatRepository->getCategoryProductMaximumPrice($category)) }},
+                        max: {{ core()->convertPrice($productFlatRepository->getCategoryProductMaximumPrice($category)) ?? 0 }},
                         processStyle: {
                             "backgroundColor": "#FF6472"
                         },

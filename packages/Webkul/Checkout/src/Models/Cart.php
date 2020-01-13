@@ -12,8 +12,6 @@ class Cart extends Model implements CartContract
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    protected $hidden = ['coupon_code'];
-
     protected $with = ['items', 'items.children'];
 
     /**

@@ -77,7 +77,6 @@ class TaxRateController extends Controller
             'zip_code' => 'sometimes|required_without:is_zip',
             'zip_from' => 'nullable|required_with:is_zip',
             'zip_to' => 'nullable|required_with:is_zip,zip_from',
-            'state' => 'required|string',
             'country' => 'required|string',
             'tax_rate' => 'required|numeric|min:0.0001'
         ]);
@@ -125,7 +124,6 @@ class TaxRateController extends Controller
             'is_zip' => 'sometimes',
             'zip_from' => 'nullable|required_with:is_zip',
             'zip_to' => 'nullable|required_with:is_zip,zip_from',
-            'state' => 'required|string',
             'country' => 'required|string',
             'tax_rate' => 'required|numeric|min:0.0001'
         ]);

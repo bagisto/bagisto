@@ -120,9 +120,11 @@ class ConfigurationController extends Controller
     {
         Event::fire('core.configuration.save.before');
 
-        $this->validate(request(), [
-            'general.design.admin_logo.logo_image'  => 'mimes:jpeg,bmp,png,jpg'
-        ]);
+        if (request()->hasFile('general.design.admin_logo.logo_image')) {
+            $this->validate(request(), [
+                'general.design.admin_logo.logo_image'  => 'required|mimes:jpeg,bmp,png,jpg'
+            ]);
+        }
 
         $this->coreConfigRepository->create(request()->all());
 

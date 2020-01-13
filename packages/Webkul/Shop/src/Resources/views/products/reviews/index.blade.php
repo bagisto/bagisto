@@ -23,7 +23,7 @@
                 </div>
 
                 <div class="product-name mt-20">
-                    <a href="{{ ('shop.productOrCategory.index', $product->url_key) }}" title="{{ $product->name }}">
+                    <a href="{{ route('shop.productOrCategory.index', $product->url_key) }}" title="{{ $product->name }}">
                         <span>{{ $product->name }}</span>
                     </a>
                 </div>

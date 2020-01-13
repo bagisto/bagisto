@@ -49,3 +49,28 @@
         cursor: pointer;
     }
 }
+
+.cart-rule-conditions,
+.catalog-rule-conditions {
+    table {
+        td {
+            &.attribute {
+                width: 250px;
+                padding-left: 0;
+            }
+            
+            &.operator,
+            &.value {
+                width: 260px;
+            }
+
+            &.actions {
+                width: 44px;
+
+                .icon {
+                    margin-top: 6px;
+                }
+            }
+        }
+    }
+}

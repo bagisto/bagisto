@@ -64,7 +64,7 @@
                         <span class="control-error" v-if="errors.has('title')">@{{ errors.first('title') }}</span>
                     </div>
 
-                    @if ($guest_review && ! auth()->guard('customer')->user())
+                    @if (core()->getConfigData('catalog.products.review.guest_review') && ! auth()->guard('customer')->user())
                         <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                             <label for="title" class="required">
                                 {{ __('shop::app.reviews.name') }}

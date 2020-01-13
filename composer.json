@@ -30,7 +30,6 @@
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
         "maatwebsite/excel": "3.1.11",
-        "nwidart/laravel-modules": "^3.2",
         "prettus/l5-repository": "2.6.32",
         "tymon/jwt-auth": "1.0.0-rc.4"
     },
@@ -69,33 +68,35 @@
     },
 
     "autoload": {
-        "classmap": [
-            "database/seeds",
-            "database/factories"
-        ],
-        "psr-4": {
-                "App\\": "app/",
-                "Webkul\\User\\": "packages/Webkul/User/src",
-                "Webkul\\Admin\\": "packages/Webkul/Admin/src",
-                "Webkul\\Ui\\": "packages/Webkul/Ui/src",
-                "Webkul\\Category\\": "packages/Webkul/Category/src",
-                "Webkul\\Checkout\\": "packages/Webkul/Checkout/src",
-                "Webkul\\Attribute\\": "packages/Webkul/Attribute/src",
-                "Webkul\\Shop\\": "packages/Webkul/Shop/src",
-                "Webkul\\Core\\": "packages/Webkul/Core/src",
-                "Webkul\\Customer\\": "packages/Webkul/Customer/src",
-                "Webkul\\Inventory\\": "packages/Webkul/Inventory/src",
-                "Webkul\\Product\\": "packages/Webkul/Product/src",
-                "Webkul\\Theme\\": "packages/Webkul/Theme/src",
-                "Webkul\\Shipping\\": "packages/Webkul/Shipping/src",
-                "Webkul\\Payment\\": "packages/Webkul/Payment/src",
-                "Webkul\\Paypal\\": "packages/Webkul/Paypal/src",
-                "Webkul\\Sales\\": "packages/Webkul/Sales/src",
-                "Webkul\\Tax\\": "packages/Webkul/Tax/src",
-                "Webkul\\API\\": "packages/Webkul/API",
-                "Webkul\\Discount\\": "packages/Webkul/Discount/src",
-                "Webkul\\CMS\\": "packages/Webkul/CMS/src"
-        }
+      "classmap": [
+        "database/seeds",
+        "database/factories"
+      ],
+      "psr-4": {
+        "App\\": "app/",
+        "Webkul\\User\\": "packages/Webkul/User/src",
+        "Webkul\\Admin\\": "packages/Webkul/Admin/src",
+        "Webkul\\Ui\\": "packages/Webkul/Ui/src",
+        "Webkul\\Category\\": "packages/Webkul/Category/src",
+        "Webkul\\Checkout\\": "packages/Webkul/Checkout/src",
+        "Webkul\\Attribute\\": "packages/Webkul/Attribute/src",
+        "Webkul\\Shop\\": "packages/Webkul/Shop/src",
+        "Webkul\\Core\\": "packages/Webkul/Core/src",
+        "Webkul\\Customer\\": "packages/Webkul/Customer/src",
+        "Webkul\\Inventory\\": "packages/Webkul/Inventory/src",
+        "Webkul\\Product\\": "packages/Webkul/Product/src",
+        "Webkul\\Theme\\": "packages/Webkul/Theme/src",
+        "Webkul\\Shipping\\": "packages/Webkul/Shipping/src",
+        "Webkul\\Payment\\": "packages/Webkul/Payment/src",
+        "Webkul\\Paypal\\": "packages/Webkul/Paypal/src",
+        "Webkul\\Sales\\": "packages/Webkul/Sales/src",
+        "Webkul\\Tax\\": "packages/Webkul/Tax/src",
+        "Webkul\\API\\": "packages/Webkul/API",
+        "Webkul\\CatalogRule\\": "packages/Webkul/CatalogRule/src",
+        "Webkul\\CartRule\\": "packages/Webkul/CartRule/src",
+        "Webkul\\Rule\\": "packages/Webkul/Rule/src",
+        "Webkul\\CMS\\": "packages/Webkul/CMS/src"
+      }
     },
 
     "autoload-dev": {
@@ -131,7 +132,8 @@
             "set -e",
             "@php artisan migrate:fresh --env=testing",
             "vendor/bin/codecept run unit",
-            "vendor/bin/codecept run functional"
+            "vendor/bin/codecept run functional",
+            "vendor/bin/codecept run trigger"
         ]
     },
     "config": {

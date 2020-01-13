@@ -2,6 +2,70 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
+## **v0.1.9 (20th of December, 2019)** - *Release*
+
+* #1875 [fixed] - Discount gets applied on cart if condition is "Visible Individually" is set to yes and product added in cart is not visible individually.
+
+* #1868 [fixed] - Getting exception on checkout if action Buy X Get Y free is selected in cart rule. 
+
+* #1838 [fixed] - Cart rule not working for condition sku(children only) and sku(parent only).
+
+* #1835 [fixed] - Getting exception if condition value remains blank.
+
+* #1831 [fixed] - Negative sign is not required in discount amount.
+
+* #1830 [fixed] - If Coupon type is selected as "No Coupon" then coupon code should not generate for that particular cart rule.
+
+* #1904 [fixed] - Existing tax should display as list on creating catalog rule if in condition "Tax Category" is selected.
+
+* #1903 [fixed] - UI issue in condition field
+
+* #1895 [fixed] - Translation issue Action Type field while creating catalog rule.
+
+* #1883 [fixed] - Free shipping not applied on cart, if from action "Free Shipping" is selected and discount amount is given as zero.
+
+* #1882 [fixed] - If from Action "Apply on shipping " is selected as yes then the discounted amount is applying on both product and shipping charge.
+
+* #1861 [fixed] - Getting exception on checkout if applying invalid coupon code and proceed for checkout.
+
+* #1857 [fixed] - Getting exception when creating cart rule with condition URL KEY(children only).
+
+* #1856 [fixed] - Getting exception on creating cart rule with condition Name(children only).
+
+* #1847 [fixed] - If cart rule condition does not match the cart then on applying coupon it should display message "Coupon cannot be applied".
+
+* #1839 [fixed] - Getting exception on filtering cart rule through id.
+
+* #1836 [fixed] - Back button on Edit cart rule page doesn't work.
+
+* #1834 [fixed] - On editing any cart rule, its priority updates to 1.
+
+* #1833 [fixed] - Discount not applied if "Payment Method", "Shipping Method", "Shipping State" or "Shipping Country" is selected in condition.
+
+* #1832 [fixed] - Able to use coupon irrespective of the number given in "Uses per coupon" field.
+
+* #1828 [fixed] - Updated changes are not saved on editing cart rule.
+
+* #1825 [fixed] - Not able to generate coupon code while creating cart rule.
+
+* #1823 [fixed] - Getting exception after clicking on developement.
+
+* #1929 [fixed] - Actual product amount and discounted amount both should display on product page for configurable product
+
+* #1928 [fixed] - Catalog rule should not apply if any of the condition doesn't match, if condition type"All Condition are true"
+
+* #1931 [fixed] - Catalog rule not applying if in condition type"Any Condition is true" is selected, and some of the condition doesn't match the product.
+
+* #1935 [fixed] - Categories are not displaying if in condition Categories(children only) or Categories(Parent Only) is selected.
+
+* #1938 [fixed] - multiple cart rules are getting applied by using only single coupon.
+
+* #1939 [fixed] - Invalid coupon gets applied, if clicking on apply coupon multiple time, although there is no discount amount but its displaying message that coupon code applied successfully.
+
+* #1942 [fixed] - When editing the cart rule, selected category is not checked.
+
+
+
 ## **v0.1.8 (4th of October, 2019)** - *Release*
 
 * [feature] - Refund is added for orders.

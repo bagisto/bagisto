@@ -113,6 +113,13 @@ abstract class AbstractType
     protected $hasVariants = false;
 
     /**
+     * Product children price can be calculated or not
+     *
+     * @var boolean
+     */
+    protected $isChildrenCalculated = false;
+
+    /**
      * Create a new product type instance.
      *
      * @param  Webkul\Attribute\Repositories\AttributeRepository           $attributeRepository
@@ -175,6 +182,10 @@ abstract class AbstractType
 
             if (! isset($data[$attribute->code])) {
                 continue;
+            }
+
+            if ($attribute->type == 'price' && isset($data[$attribute->code]) && $data[$attribute->code] == '') {
+                $data[$attribute->code] = null;
             }
 
             if ($attribute->type == 'date' && $data[$attribute->code] == '' && $route != 'admin.catalog.products.massupdate') {
@@ -253,6 +264,26 @@ abstract class AbstractType
     }
 
     /**
+     * Returns children ids
+     *
+     * @return array
+     */
+    public function getChildrenIds()
+    {
+        return [];
+    }
+
+    /**
+     * Check if catalog rule can be applied
+     *
+     * @return bool
+     */
+    public function priceRuleCanBeApplied()
+    {
+        return true;
+    }
+
+    /**
      * Return true if this product type is saleable
      *
      * @return boolean
@@ -291,9 +322,19 @@ abstract class AbstractType
      *
      * @return bool
      */
-    public function hasVariants(): bool
+    public function hasVariants()
     {
         return $this->hasVariants;
+    }
+
+    /**
+     * Product children price can be calculated or not
+     *
+     * @return bool
+     */
+    public function isChildrenCalculated()
+    {
+        return $this->isChildrenCalculated;
     }
 
     /**
@@ -452,12 +493,26 @@ abstract class AbstractType
      */
     public function haveSpecialPrice()
     {
-        if (is_null($this->product->special_price) || ! (float) $this->product->special_price) {
-            return false;
-        }
+        $rulePrice = app('Webkul\CatalogRule\Helpers\CatalogRuleProductPrice')->getRulePrice($this->product);
 
-        if (core()->isChannelDateInInterval($this->product->special_price_from, $this->product->special_price_to)) {
-            return true;
+        if ((is_null($this->product->special_price) || ! (float) $this->product->special_price) && ! $rulePrice)
+            return false;
+
+        if (! (float) $this->product->special_price) {
+            if ($rulePrice) {
+                $this->product->special_price = $rulePrice->price;
+
+                return true;
+            }
+        } else {
+            if ($rulePrice && $rulePrice->price <= $this->product->special_price) {
+                $this->product->special_price = $rulePrice->price;
+
+                return true;
+            } else {
+                if (core()->isChannelDateInInterval($this->product->special_price_from, $this->product->special_price_to))
+                    return true;
+            }
         }
 
         return false;

@@ -8,9 +8,6 @@ use Webkul\Shipping\Facades\Shipping;
 use Webkul\Payment\Facades\Payment;
 use Webkul\Checkout\Http\Requests\CustomerAddressForm;
 use Webkul\Sales\Repositories\OrderRepository;
-use Webkul\Discount\Helpers\Cart\CouponAbleRule as Coupon;
-use Webkul\Discount\Helpers\Cart\NonCouponAbleRule as NonCoupon;
-use Webkul\Discount\Helpers\Cart\ValidatesDiscount;
 use Webkul\Customer\Repositories\CustomerRepository;
 
 /**
@@ -23,13 +20,6 @@ use Webkul\Customer\Repositories\CustomerRepository;
 class OnepageController extends Controller
 {
     /**
-     * OrderRepository object
-     *
-     * @var array
-     */
-    protected $orderRepository;
-
-    /**
      * Contains route related configuration
      *
      * @var array
@@ -37,21 +27,11 @@ class OnepageController extends Controller
     protected $_config;
 
     /**
-     * CouponAbleRule instance object
+     * OrderRepository object
      *
+     * @var array
      */
-    protected $coupon;
-
-    /**
-     * NoncouponAbleRule instance object
-     *
-     */
-    protected $nonCoupon;
-
-    /**
-     * ValidatesDiscount instance object
-     */
-    protected $validatesDiscount;
+    protected $orderRepository;
 
      /**
      * customerRepository instance object
@@ -61,24 +41,16 @@ class OnepageController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Attribute\Repositories\OrderRepository  $orderRepository
+     * @param  \Webkul\Attribute\Repositories\OrderRepository   $orderRepository
+     * @param  \Webkul\Customer\Repositories\CustomerRepository $customerRepository
      * @return void
      */
     public function __construct(
         OrderRepository $orderRepository,
-        Coupon $coupon,
-        NonCoupon $nonCoupon,
-        ValidatesDiscount $validatesDiscount,
         CustomerRepository $customerRepository
     )
     {
-        $this->coupon = $coupon;
-
-        $this->nonCoupon = $nonCoupon;
-
         $this->orderRepository = $orderRepository;
-
-        $this->validatesDiscount = $validatesDiscount;
 
         $this->customerRepository = $customerRepository;
 
@@ -99,8 +71,6 @@ class OnepageController extends Controller
 
         if (! auth()->guard('customer')->check() && $cart->haveDownloadableItems())
             return redirect()->route('customer.session.index');
-
-        $this->nonCoupon->apply();
 
         Cart::collectTotals();
 
@@ -139,8 +109,6 @@ class OnepageController extends Controller
         } else {
             $cart = Cart::getCart();
 
-            $this->nonCoupon->apply();
-
             Cart::collectTotals();
 
             if ($cart->haveStockableItems()) {
@@ -166,8 +134,6 @@ class OnepageController extends Controller
         if (Cart::hasError() || !$shippingMethod || !Cart::saveShippingMethod($shippingMethod))
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
 
-        $this->nonCoupon->apply();
-
         Cart::collectTotals();
 
         return response()->json(Payment::getSupportedPaymentMethods());
@@ -184,8 +150,6 @@ class OnepageController extends Controller
 
         if (Cart::hasError() || ! $payment || ! Cart::savePaymentMethod($payment))
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
-
-        $this->nonCoupon->apply();
 
         Cart::collectTotals();
 
@@ -253,23 +217,53 @@ class OnepageController extends Controller
     {
         $cart = Cart::getCart();
 
-        $this->validatesDiscount->validate();
-
-        if ($cart->haveStockableItems() && ! $cart->shipping_address) {
+        if ($cart->haveStockableItems() && ! $cart->shipping_address)
             throw new \Exception(trans('Please check shipping address.'));
-        }
 
-        if (! $cart->billing_address) {
+        if (! $cart->billing_address)
             throw new \Exception(trans('Please check billing address.'));
-        }
 
-        if ($cart->haveStockableItems() && ! $cart->selected_shipping_rate) {
+        if ($cart->haveStockableItems() && ! $cart->selected_shipping_rate)
             throw new \Exception(trans('Please specify shipping method.'));
-        }
 
-        if (! $cart->payment) {
+        if (! $cart->payment)
             throw new \Exception(trans('Please specify payment method.'));
-        }
+    }
+
+    /**
+     * Check Customer is exist or not
+     *
+     * @return Response
+     */
+    public function checkExistCustomer()
+    {
+       $customer = $this->customerRepository->findOneWhere([
+            'email' => request()->email
+       ]);
+
+       if (! is_null($customer))
+           return 'true';
+
+       return 'false';
+    }
+
+    /**
+     * Login for checkout
+     *
+     * @return Response
+     */
+    public function loginForCheckout()
+    {
+        $this->validate(request(), [
+            'email' => 'required|email'
+        ]);
+
+        if (! auth()->guard('customer')->attempt(request(['email', 'password'])))
+            return response()->json(['error' => trans('shop::app.customer.login-form.invalid-creds')]);
+
+        Cart::mergeCart();
+
+        return response()->json(['success' => 'Login successfully']);
     }
 
     /**
@@ -332,41 +326,5 @@ class OnepageController extends Controller
                     'data' => null
                 ], 422);
         }
-    }
-
-    /**
-     * Check Customer is exist or not
-     *
-     * @return Response
-     */
-    public function checkExistCustomer()
-    {
-       //check customer is exist or not
-       $customer = $this->customerRepository->findOneWhere([
-        'email' => request()->email
-       ]);
-
-        //if customer is exist
-       if (! is_null($customer)) {
-           return 'true';
-       }
-       return 'false';
-    }
-
-    //login for checkout
-    public function loginForCheckout()
-    {
-        $this->validate(request(), [
-            'email' => 'required|email'
-        ]);
-
-        if (! auth()->guard('customer')->attempt(request(['email', 'password']))) {
-            return response()->json(['error' => trans('shop::app.customer.login-form.invalid-creds')]);
-        }
-
-        //Event passed to prepare cart after login
-        Cart::mergeCart();
-
-        return response()->json(['success' => 'Login successfully']);
     }
 }
