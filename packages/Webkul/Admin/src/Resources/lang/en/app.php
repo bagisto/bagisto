@@ -776,7 +776,8 @@ return [
             'seo' => 'Home page SEO',
             'seo-title' => 'Meta title',
             'seo-description' => 'Meta description',
-            'seo-keywords' => 'Meta keywords'
+            'seo-keywords' => 'Meta keywords',
+
         ],
 
         'sliders' => [
@@ -1257,7 +1258,9 @@ return [
             'order-number-length' => 'Order Number Length',
             'order-number-suffix' => 'Order Number Suffix',
             'default' => 'Default',
-            'sandbox' => 'Sandbox'
+            'sandbox' => 'Sandbox',
+            'all-channels' => 'All',
+            'all-locales' => 'All'
         ]
     ]
 ];

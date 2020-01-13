@@ -19,16 +19,35 @@ class ProductDataGrid extends DataGrid
 
     protected $itemsPerPage = 10;
 
+    protected $locale = 'all';
+
+    protected $channel = 'all';
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->locale = request()->get('locale') ?? 'all';
+        $this->channel = request()->get('channel') ?? 'all';
+    }
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('product_flat')
         ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
         ->leftJoin('attribute_families', 'products.attribute_family_id', '=', 'attribute_families.id')
         ->leftJoin('product_inventories', 'product_flat.product_id', '=', 'product_inventories.product_id')
-        ->select('product_flat.product_id as product_id', 'product_flat.sku as product_sku', 'product_flat.name as product_name', 'products.type as product_type', 'product_flat.status', 'product_flat.price', 'attribute_families.name as attribute_family', DB::raw('SUM(' . DB::getTablePrefix() . 'product_inventories.qty) as quantity'))
-        ->where('channel', core()->getCurrentChannelCode())
-        ->where('locale', app()->getLocale())
-        ->groupBy('product_flat.product_id');
+        ->select('product_flat.product_id as product_id', 'product_flat.sku as product_sku', 'product_flat.name as product_name', 'products.type as product_type', 'product_flat.status', 'product_flat.price', 'attribute_families.name as attribute_family', DB::raw('SUM(' . DB::getTablePrefix() . 'product_inventories.qty) as quantity'));
+
+        if ($this->locale !== 'all') {
+            $queryBuilder->where('locale', $this->locale);
+        }
+
+        if ($this->channel !== 'all') {
+            $queryBuilder->where('channel', $this->channel);
+        }
+
+        $queryBuilder->groupBy('product_flat.product_id');
 
         $this->addFilter('product_id', 'product_flat.product_id');
         $this->addFilter('product_name', 'product_flat.name');
