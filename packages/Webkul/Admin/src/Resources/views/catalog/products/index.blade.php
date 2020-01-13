@@ -83,10 +83,13 @@
 @push('scripts')
     @include('admin::export.export', ['gridName' => $products])
     <script>
+
         function reloadPage(getVar, getVal) {
             let url = new URL(window.location.href);
             url.searchParams.set(getVar, getVal);
+
             window.location.href = url.href;
         }
+        
     </script>
 @endpush
