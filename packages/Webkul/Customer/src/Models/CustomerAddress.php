@@ -12,6 +12,8 @@ class CustomerAddress extends Model implements CustomerAddressContract
     protected $fillable = [
         'customer_id',
         'company_name',
+        'first_name',
+        'last_name',
         'vat_id',
         'address1',
         'address2',

@@ -221,6 +221,8 @@ return [
                 'create' => [
                     'page-title' => 'Add Address Form',
                     'company_name' => 'Company name',
+                    'first_name' => 'First name',
+                    'last_name' => 'Last name',
                     'vat_id' => 'Vat id',
                     'title' => 'Add Address',
                     'street-address' => 'Street Address',
@@ -238,6 +240,8 @@ return [
                 'edit' => [
                     'page-title' => 'Edit Address',
                     'company_name' => 'Company name',
+                    'first_name' => 'First name',
+                    'last_name' => 'Last name',
                     'vat_id' => 'Vat id',
                     'title' => 'Edit Address',
                     'street-address' => 'Street Address',

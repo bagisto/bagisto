@@ -29,7 +29,7 @@
 
             {!! view_render_event('bagisto.shop.customers.account.address.create.before') !!}
 
-            <form method="post" action="{{ route('customer.address.create') }}" @submit.prevent="onSubmit">
+            <form id="customer-address-form" method="post" action="{{ route('customer.address.create') }}" @submit.prevent="onSubmit">
 
                 <div class="account-table-content">
                     @csrf
@@ -40,6 +40,18 @@
                         <label for="company_name">{{ __('shop::app.customer.account.address.create.company_name') }}</label>
                         <input type="text" class="control" name="company_name" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.company_name') }}&quot;">
                         <span class="control-error" v-if="errors.has('company_name')">@{{ errors.first('company_name') }}</span>
+                    </div>
+
+                    <div class="control-group" :class="[errors.has('first_name') ? 'has-error' : '']">
+                        <label for="first_name" class="required">{{ __('shop::app.customer.account.address.edit.first_name') }}</label>
+                        <input type="text" v-validate="'required'" class="control" name="first_name" data-vv-as="&quot;{{ __('shop::app.customer.account.address.edit.first_name') }}&quot;">
+                        <span class="control-error" v-if="errors.has('first_name')">@{{ errors.first('first_name') }}</span>
+                    </div>
+
+                    <div class="control-group" :class="[errors.has('last_name') ? 'has-error' : '']">
+                        <label for="last_name" class="required">{{ __('shop::app.customer.account.address.edit.last_name') }}</label>
+                        <input type="text" v-validate="'required'" class="control" name="last_name" data-vv-as="&quot;{{ __('shop::app.customer.account.address.edit.last_name') }}&quot;">
+                        <span class="control-error" v-if="errors.has('last_name')">@{{ errors.first('last_name') }}</span>
                     </div>
 
                     <div class="control-group" :class="[errors.has('vat_id') ? 'has-error' : '']">
