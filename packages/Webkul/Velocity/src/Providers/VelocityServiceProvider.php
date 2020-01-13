@@ -3,6 +3,7 @@
 namespace Webkul\Velocity\Providers;
 
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 
@@ -41,6 +42,26 @@ class VelocityServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../Resources/views/' => resource_path('themes/velocity/views'),
         ]);
+
+        Event::listen([
+            'bagisto.admin.settings.locale.edit.after',
+            'bagisto.admin.settings.locale.create.after',
+        ], function($viewRenderEventManager) {
+                $viewRenderEventManager->addTemplate(
+                    'velocity::admin.settings.locales.locale-logo'
+                );
+            }
+        );
+
+        Event::listen([
+            'bagisto.admin.catalog.category.edit_form_accordian.general.after',
+            'bagisto.admin.catalog.category.create_form_accordian.general.after',
+        ], function($viewRenderEventManager) {
+                $viewRenderEventManager->addTemplate(
+                    'velocity::admin.catelog.categories.category-icon'
+                );
+            }
+        );
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'velocity');
 

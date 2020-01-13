@@ -247,6 +247,7 @@
 .theme-btn {
     border: none;
     cursor: pointer;
+    font-weight: 600;
     padding: 10px 20px;
     vertical-align: top;
     color: $light-color !important;
@@ -451,7 +452,7 @@
         }
 
         .add-to-cart-btn {
-            max-width: 140px;
+            max-width: 150px;
         }
     }
 
@@ -474,6 +475,14 @@
     &.list-card:not(:first-child) {
         margin-top: 20px;
     }
+}
+
+.small-padding {
+    padding: 3px 4px !important;
+}
+
+.medium-padding {
+    padding: 3px 10px !important;
 }
 
 .general-container {

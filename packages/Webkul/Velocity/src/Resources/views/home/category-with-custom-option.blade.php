@@ -1,11 +1,11 @@
-<div class="container-fluid category-with-custom-options">
-    @php
-        $category[0] = app('Webkul\Category\Repositories\CategoryRepository')->findByPath($category[0]);
-        $category[1] = app('Webkul\Category\Repositories\CategoryRepository')->findByPath($category[1]);
-        $category[2] = app('Webkul\Category\Repositories\CategoryRepository')->findByPath($category[2]);
-        $category[3] = app('Webkul\Category\Repositories\CategoryRepository')->findByPath($category[3]);
-    @endphp
+@php
+    $category[0] = app('Webkul\Category\Repositories\CategoryRepository')->findByPath($category[0]);
+    $category[1] = app('Webkul\Category\Repositories\CategoryRepository')->findByPath($category[1]);
+    $category[2] = app('Webkul\Category\Repositories\CategoryRepository')->findByPath($category[2]);
+    $category[3] = app('Webkul\Category\Repositories\CategoryRepository')->findByPath($category[3]);
+@endphp
 
+<div class="container-fluid category-with-custom-options">
     <div class="row">
         <div class="col pr15">
             <img src="{{ asset ('/storage/' . $category['2']->image) }}" />
@@ -18,11 +18,15 @@
 
             <div class="categories-collection">
                 <div class="category-text-content">
-                    <h2 class="text-uppercase">{{ $category[0]->name }}</h2>
+                    <h2 class="text-uppercase">
+                        <a href="{{ $category[0]->slug }}" class="unset">
+                            {{ $category[0]->name }}
+                        </a>
+                    </h2>
                     <ul type="none" class="fs14">
                         @foreach ($category[0]->children as $subCategory)
                             <li>
-                                <a href="{{ $subCategory->slug }}" class="unset">
+                                <a href="{{ $category[0]->slug . '/' . $subCategory->slug }}" class="unset">
                                     {{ $subCategory->name }}
                                 </a>
                             </li>
@@ -43,11 +47,15 @@
 
             <div class="categories-collection">
                 <div class="category-text-content">
-                    <h2 class="text-uppercase">{{ $category[1]->name }}</h2>
+                    <h2 class="text-uppercase">
+                        <a href="{{ $category[1]->slug }}" class="unset">
+                            {{ $category[1]->name }}
+                        </a>
+                    </h2>
                     <ul type="none" class="fs14">
                         @foreach ($category[1]->children as $subCategory)
                             <li>
-                                <a href="{{ $subCategory->slug }}" class="unset">
+                                <a href="{{ $category[1]->slug . '/' . $subCategory->slug }}" class="unset">
                                     {{ $subCategory->name }}
                                 </a>
                             </li>
@@ -66,11 +74,15 @@
 
             <div class="categories-collection">
                 <div class="category-text-content">
-                    <h2 class="text-uppercase">{{ $category[2]->name }}</h2>
+                    <h2 class="text-uppercase">
+                        <a href="{{ $category[2]->slug }}" class="unset">
+                            {{ $category[2]->name }}
+                        </a>
+                    </h2>
                     <ul type="none" class="fs14">
                         @foreach ($category[2]->children as $subCategory)
                             <li>
-                                <a href="{{ $subCategory->slug }}" class="unset">
+                                <a href="{{ $category[2]->slug . '/' . $subCategory->slug }}" class="unset">
                                     {{ $subCategory->name }}
                                 </a>
                             </li>
@@ -90,11 +102,15 @@
 
             <div class="categories-collection">
                 <div class="category-text-content">
-                    <h2 class="text-uppercase">{{ $category[3]->name }}</h2>
+                    <h2 class="text-uppercase">
+                        <a href="{{ $category[3]->slug }}" class="unset">
+                            {{ $category[3]->name }}
+                        </a>
+                    </h2>
                     <ul type="none" class="fs14">
                         @foreach ($category[3]->children as $subCategory)
                             <li>
-                                <a href="{{ $subCategory->slug }}" class="unset">
+                                <a href="{{ $category[3]->slug . '/' . $subCategory->slug }}" class="unset">
                                     {{ $subCategory->name }}
                                 </a>
                             </li>
@@ -110,3 +126,39 @@
 
     </div>
 </div>
+
+<div class="container-fluid category-with-custom-options vc-small-screen">
+    @foreach ($category as $categoryItem)
+        <div class="smart-category-container">
+            <div class="col-12">
+                <img src="{{ asset ('/storage/' . $categoryItem->image) }}" />
+            </div>
+
+            <div class="col-12">
+                <div class="card-arrow-container">
+                    <div class="card-arrow card-arrow-tp"></div>
+                </div>
+
+                <div class="categories-collection">
+                    <div class="category-text-content">
+                        <h2 class="text-uppercase">
+                            <a href="{{ $categoryItem->slug }}" class="unset">
+                                {{ $categoryItem->name }}
+                            </a>
+                        </h2>
+                        <ul type="none" class="fs14">
+                            @foreach ($categoryItem->children as $subCategory)
+                                <li>
+                                    <a href="{{ $categoryItem->slug . '/' . $subCategory->slug }}" class="unset">
+                                        {{ $subCategory->name }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+</div>
+

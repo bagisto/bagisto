@@ -24,7 +24,7 @@
 
 @push('css')
     <style type="text/css">
-        .general-container {
+        .main-content-wrapper {
             margin-bottom: 0px;
             min-height: 100vh;
         }

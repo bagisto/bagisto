@@ -11,11 +11,10 @@
         <input type="hidden" name="quantity" value="1">
         <button
             type="submit"
-            class="btn btn-add-to-cart"
-            {{ ! $product->isSaleable() ? 'disabled' : '' }}>
+            {{ ! $product->isSaleable() ? 'disabled' : '' }}
+            class="btn btn-add-to-cart {{ $addToCartBtnClass ?? '' }}">
 
             @if (! (isset($showCartIcon) && !$showCartIcon))
-                {{-- <span class="rango-cart-1 fs20"></span> --}}
                 <i class="material-icons text-down-3">shopping_cart</i>
             @endif
 

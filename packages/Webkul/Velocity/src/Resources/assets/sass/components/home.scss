@@ -22,7 +22,7 @@ body {
 }
 
 .banner-icon {
-    height: 525px;
+    height: unset;
     display: inline-block;
 }
 
@@ -130,6 +130,10 @@ header #search-form > *:focus {
             padding: 0 10px;
         }
 
+        a:first-child {
+            padding-bottom: 15px !important;
+        }
+
         .offers-ct-top {
             height: 180px;
         }
@@ -168,10 +172,8 @@ header #search-form > *:focus {
 }
 
 .advertisement-three-container {
-    .col-6:first-child {
-        img {
-            height: 100%;
-        }
+    img {
+        height: 100%;
     }
 
     .top-container,
@@ -426,7 +428,7 @@ header #search-form > *:focus {
 /* Customer Reviews */
 
 /* sidebar */
-.general-container {
+.main-content-wrapper {
     @extend .fs14;
 
     margin: 0;

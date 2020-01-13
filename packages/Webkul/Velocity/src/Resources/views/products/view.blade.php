@@ -29,7 +29,7 @@
             margin-top: 0px;
         }
 
-        .general-container {
+        .main-content-wrapper {
             margin-bottom: 0px;
         }
     </style>
@@ -53,12 +53,12 @@
                                 <input type="hidden" name="product_id" value="{{ $product->product_id }}">
 
                                 {{-- product-gallery --}}
-                                <div class="left col-lg-5">
+                                <div class="left col-lg-6">
                                     @include ('shop::products.view.gallery')
                                 </div>
 
                                 {{-- right-section --}}
-                                <div class="right col-lg-7 scrollable">
+                                <div class="right col-lg-6 scrollable">
                                     {{-- product-info-section --}}
                                     <div class="row info">
                                         <h2 class="col-lg-12">{{ $product->name }}</h2>

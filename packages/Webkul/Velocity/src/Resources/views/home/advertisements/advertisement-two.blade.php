@@ -18,11 +18,11 @@
 
         <div class="container-fluid advertisement-two-container">
             <div class="row">
-                <a class="col-9 no-padding">
+                <a class="col-lg-9 col-md-12 no-padding">
                     <img src="{{ asset('/storage/' . $advertisementTwo['image_1']) }}" />
                 </a>
 
-                <a class="col-3 pr0">
+                <a class="col-lg-3 col-md-12 pr0">
                     <img src="{{ asset('/storage/' . $advertisementTwo['image_2']) }}" />
                 </a>
             </div>
@@ -33,11 +33,11 @@
 @if (! $isRendered)
     <div class="container-fluid advertisement-two-container">
         <div class="row">
-            <a class="col-9 no-padding">
+            <a class="col-lg-9 col-md-12 no-padding">
                 <img src="{{ asset('/themes/velocity/assets/images/toster.png') }}" />
             </a>
 
-            <a class="col-3 pr0">
+            <a class="col-lg-3 col-md-12 pr0">
                 <img src="{{ asset('/themes/velocity/assets/images/trimmer.png') }}" />
             </a>
         </div>

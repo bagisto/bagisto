@@ -10,16 +10,8 @@ use Webkul\Velocity\Repositories\VelocityMetadataRepository;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Product\Repositories\ProductRepository as ProductRepository;
 
-/**
- * Search controller
- *
- * @author  Shubham Mehrotra <shubhammehrotra.symfony@webkul.com> @shubhwebkul
- * @copyright 2019 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
-
 class Helper extends Review
 {
-
     /**
      * orderBrands object
      *

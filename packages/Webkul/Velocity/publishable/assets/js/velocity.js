@@ -35662,10 +35662,13 @@ var render = function() {
                           }
                         },
                         [
-                          category.image
+                          category.category_icon_path
                             ? _c("img", {
                                 attrs: {
-                                  src: _vm.url + "/storage/" + category.image
+                                  src:
+                                    _vm.url +
+                                    "/storage/" +
+                                    category.category_icon_path
                                 }
                               })
                             : _vm._e()
@@ -36508,11 +36511,11 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row mb15 col-12", class: _vm.rowClass }, [
-    _c("div", { staticClass: "col-lg-4 no-padding" }, [
+    _c("div", { staticClass: "col-4 no-padding" }, [
       _c("h2", { staticClass: "fs20 fw6" }, [_vm._v(_vm._s(_vm.headerHeading))])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-lg-8 no-padding" }, [
+    _c("div", { staticClass: "col-8 no-padding" }, [
       _c(
         "div",
         { staticClass: "row justify-content-end text-right" },
@@ -36858,6 +36861,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['heading', 'headerContent', 'isEnabled']
@@ -36875,22 +36881,22 @@ var render = function() {
     "div",
     { staticClass: "row velocity-divide-page remove-padding-margin vc-header" },
     [
-      _c("div", { staticClass: "velocity-small-screen container" }, [
+      _c("div", { staticClass: "vc-small-screen container" }, [
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-8" }, [
             _c(
               "div",
-              { staticClass: "row" },
+              { staticClass: "row col-12" },
               [
-                _c("logo-component", {
-                  attrs: { "add-class": "col-8 offset-3" }
-                })
+                _vm._m(0),
+                _vm._v(" "),
+                _c("logo-component", { attrs: { "add-class": "pl10" } })
               ],
               1
             )
           ]),
           _vm._v(" "),
-          _vm._m(0)
+          _vm._m(1)
         ])
       ]),
       _vm._v(" "),
@@ -36956,7 +36962,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-4 right-vc-header" }, [
+    return _c("div", { staticClass: "hamburger-wrapper" }, [
+      _c("i", { staticClass: "rango-toggle hamburger" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row col-4 right-vc-header" }, [
       _c("i", { staticClass: "fs16 fw6 rango-search" }),
       _vm._v(" "),
       _c("i", { staticClass: "material-icons text-down-3" }, [

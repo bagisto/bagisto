@@ -27,6 +27,14 @@
             }
         }
     }
+
+    .submit-btn {
+        font-weight: 600;
+
+        button {
+            padding: 10px 15px;
+        }
+    }
 }
 
 .customer-rating {
@@ -200,15 +208,6 @@
     }
 }
 
-// responsive css for modal
-@media only screen and (max-width: 770px) {
-    .modal-container {
-        left: 10%;
-        max-width: 80%;
-        margin-left: 0px;
-    }
-}
-
 .product-card-new {
     // width: 19rem;
     border: none !important;
@@ -261,6 +260,7 @@
         .wishlist-icon {
             height: 32px;
             display: table;
+            text-align: right;
 
             > i {
                 display: table-cell;
@@ -301,7 +301,7 @@
 
 .product-card-new:hover {
     #quick-view-btn-container {
-        // display: block;
+        display: block;
     }
 }
 

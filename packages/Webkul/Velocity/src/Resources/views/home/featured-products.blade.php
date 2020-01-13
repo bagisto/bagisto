@@ -8,7 +8,7 @@
 
 @if ($featuredProductsCount)
 
-    <div class="container-fluid popular-products">
+    <div class="container-fluid featured-products">
 
         <card-list-header heading="{{ __('shop::app.home.featured-products') }}">
         </card-list-header>

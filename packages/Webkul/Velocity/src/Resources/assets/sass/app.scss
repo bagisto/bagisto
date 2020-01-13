@@ -225,6 +225,19 @@ body {
             height: 100%;
         }
     }
+
+    .locale-icon {
+        width: 20px;
+        display: inline-block;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .locale-switcher {
+        padding-left: 5px;
+    }
 }
 
 

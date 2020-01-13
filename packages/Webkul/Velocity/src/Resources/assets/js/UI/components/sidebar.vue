@@ -27,8 +27,8 @@
                         @mouseover="toggleSidebar(id, $event, 'mouseover')">
 
                         <img
-                            v-if="category.image"
-                            :src="`${url}/storage/${category.image}`" />
+                            v-if="category.category_icon_path"
+                            :src="`${url}/storage/${category.category_icon_path}`" />
                     </div>
                     <span class="category-title">{{ category['name'] }}</span>
                     <i

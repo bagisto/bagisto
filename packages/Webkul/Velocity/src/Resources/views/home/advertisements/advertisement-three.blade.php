@@ -18,11 +18,11 @@
 
         <div class="container-fluid advertisement-three-container">
             <div class="row">
-                <a @if (isset($one)) href="{{ $one }}" @endif class="col-6 no-padding">
+                <a @if (isset($one)) href="{{ $one }}" @endif class="col-lg-6 col-md-12 no-padding">
                     <img src="{{ asset('/storage/' . $advertisementThree['image_1']) }}" class="full-width" />
                 </a>
 
-                <div class="col-6">
+                <div class="col-lg-6 col-md-12 second-panel">
                     <a @if (isset($two)) href="{{ $two }}" @endif class="row top-container">
                         <img src="{{ asset('/storage/' . $advertisementThree['image_2']) }}" class="col-12 pr0" />
                     </a>
@@ -38,11 +38,11 @@
 @if (! $isRendered)
     <div class="container-fluid advertisement-three-container">
         <div class="row">
-            <a @if (isset($one)) href="{{ $one }}" @endif class="col-6 no-padding">
+            <a @if (isset($one)) href="{{ $one }}" @endif class="col-lg-6 col-md-12 no-padding">
                 <img src="{{ asset('/themes/velocity/assets/images/headphones.png') }}" class="full-width" />
             </a>
 
-            <div class="col-6">
+            <div class="col-lg-6 col-md-12 second-panel">
                 <a @if (isset($two)) href="{{ $two }}" @endif class="row top-container">
                     <img src="{{ asset('/themes/velocity/assets/images/watch.png') }}" class="col-12 pr0" />
                 </a>

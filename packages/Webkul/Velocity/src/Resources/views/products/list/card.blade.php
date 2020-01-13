@@ -51,7 +51,10 @@
                     </div>
 
                     <div class="cart-wish-wrap row mt5">
-                        @include ('shop::products.add-to-cart', ['product' => $product])
+                        @include ('shop::products.add-to-cart', [
+                            'product' => $product,
+                            'addToCartBtnClass' => 'medium-padding'
+                        ])
                     </div>
                 </div>
             </div>
@@ -100,7 +103,8 @@
                 <div class="cart-wish-wrap row">
                     @include ('shop::products.add-to-cart', [
                         'product' => $product,
-                        'addWishlistClass' => 'col-4 offset-4'
+                        'addWishlistClass' => 'col-lg-4 col-md-4 col-sm-12 offset-lg-4',
+                        'addToCartBtnClass' => $addToCartBtnClass ?? ''
                     ])
                 </div>
             </div>

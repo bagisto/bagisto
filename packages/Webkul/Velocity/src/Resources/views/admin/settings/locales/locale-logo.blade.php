@@ -1,0 +1,1 @@
+<input type="file" name="locale_image" />

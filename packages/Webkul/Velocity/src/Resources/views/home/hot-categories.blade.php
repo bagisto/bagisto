@@ -9,7 +9,7 @@
             @endphp
 
             @if ($categoryDetails)
-                <div class="col hot-category-wrapper">
+                <div class="col-lg-3 col-md-12 hot-category-wrapper">
                     <div class="card">
                         <div class="row velocity-divide-page">
                             <div class="left">
@@ -17,12 +17,16 @@
                             </div>
 
                             <div class="right">
-                                <h3 class="fs20 clr-light text-uppercase">{{ $categoryDetails->name }}</h3>
+                                <h3 class="fs20 clr-light text-uppercase">
+                                    <a href="{{ $slug }}" class="unset">
+                                        {{ $categoryDetails->name }}
+                                    </a>
+                                </h3>
 
                                 <ul type="none">
                                     @foreach ($categoryDetails->children as $subCategory)
                                         <li>
-                                            <a href="{{ $subCategory->slug }}" class="unset">
+                                            <a href="{{ $slug . '/' . $subCategory->slug }}" class="unset">
                                                 {{ $subCategory->name }}
                                             </a>
                                         </li>

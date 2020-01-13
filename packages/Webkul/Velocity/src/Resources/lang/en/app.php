@@ -188,6 +188,7 @@ return [
             'customer-login' => 'Customer Login',
             'registered-user' => 'Registered User',
             'form-login-text' => 'If you have an account, sign in with your email address.',
+            'sign-up' => 'Sign up',
             'new-customer' => 'New Customer',
             'your-email-address' => 'Your email address',
         ],

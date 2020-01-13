@@ -7,7 +7,7 @@
         @endphp
 
         <a
-            class="unset wishlist-icon text-right {{ $addWishlistClass ?? '' }}"
+            class="unset wishlist-icon {{ $addWishlistClass ?? '' }}"
             @if (! $isWished)
                 href="{{ route('customer.wishlist.add', $product->product_id) }}"
             @elseif (isset($itemId) && $itemId)
@@ -22,7 +22,7 @@
     @guest('customer')
         <a
             href="{{ route('customer.session.index') }}"
-            class="unset wishlist-icon text-right {{ $addWishlistClass ?? '' }}">
+            class="unset wishlist-icon {{ $addWishlistClass ?? '' }}">
             <wishlist-component active="false"></wishlist-component>
         </a>
     @endauth
@@ -31,7 +31,7 @@
 @push('scripts')
     <script type="text/x-template" id="wishlist-template">
         <i
-            :class="`material-icons ${isActive} ${active}`"
+            :class="`material-icons`"
             @mouseover="isActive ? isActive = !isActive : ''"
             @mouseout="active !== '' && !isActive ? isActive = !isActive : ''">
 

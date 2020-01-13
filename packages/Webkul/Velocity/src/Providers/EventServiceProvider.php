@@ -24,7 +24,16 @@ class EventServiceProvider extends ServiceProvider
             $viewRenderEventManager->addTemplate('velocity::admin.layouts.style');
         });
 
-        Event::listen('checkout.order.save.after', 'Webkul\Velocity\Helpers\Helper@topBrand');
+        Event::listen([
+            'core.locale.create.after',
+            'core.locale.update.after',
+        ], 'Webkul\Velocity\Helpers\AdminHelper@saveLocaleImg');
 
+        Event::listen([
+            'catalog.category.create.after',
+            'catalog.category.update.after',
+        ], 'Webkul\Velocity\Helpers\AdminHelper@storeCategoryIcon');
+
+        Event::listen('checkout.order.save.after', 'Webkul\Velocity\Helpers\Helper@topBrand');
     }
 }

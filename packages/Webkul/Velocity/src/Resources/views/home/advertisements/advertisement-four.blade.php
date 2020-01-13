@@ -18,12 +18,12 @@
 
         <div class="container-fluid advertisement-four-container">
             <div class="row">
-                <a @if (isset($one)) href="{{ $one }}" @endif class="col-4 no-padding">
+                <a @if (isset($one)) href="{{ $one }}" @endif class="col-lg-4 col-12 no-padding">
                     <img class="col-12" src="{{ asset('/storage/' . $advertisementFour['image_1']) }}" />
                 </a>
 
-                <div class="col-4 offers-ct-panel">
-                    <a @if (isset($two)) href="{{ $two }}" @endif class="row pb15 col-12 remove-padding-margin">
+                <div class="col-lg-4 col-12 offers-ct-panel">
+                    <a @if (isset($two)) href="{{ $two }}" @endif class="row col-12 remove-padding-margin">
                         <img class="col-12 offers-ct-top" src="{{ asset('/storage/' . $advertisementFour['image_2']) }}" />
                     </a>
                     <a @if (isset($three)) href="{{ $three }}" @endif class="row col-12 remove-padding-margin">
@@ -31,7 +31,7 @@
                     </a>
                 </div>
 
-                <a @if (isset($four)) href="{{ $four }}" @endif class="col-4 no-padding">
+                <a @if (isset($four)) href="{{ $four }}" @endif class="col-lg-4 col-12 no-padding">
                     <img class="col-12" src="{{ asset('/storage/' . $advertisementFour['image_4']) }}" />
                 </a>
             </div>
@@ -42,12 +42,12 @@
 @if (! $isRendered)
     <div class="container-fluid advertisement-four-container">
         <div class="row">
-            <a @if (isset($one)) href="{{ $one }}" @endif class="col-4 no-padding">
+            <a @if (isset($one)) href="{{ $one }}" @endif class="col-lg-4 col-12 no-padding">
                 <img class="col-12" src="{{ asset('/themes/velocity/assets/images/big-sale-banner.png') }}" />
             </a>
 
-            <div class="col-4 offers-ct-panel">
-                <a @if (isset($two)) href="{{ $two }}" @endif class="row pb15 col-12 remove-padding-margin">
+            <div class="col-lg-4 col-12 offers-ct-panel">
+                <a @if (isset($two)) href="{{ $two }}" @endif class="row col-12 remove-padding-margin">
                     <img class="col-12 offers-ct-top" src="{{ asset('/themes/velocity/assets/images/seasons.png') }}" />
                 </a>
                 <a @if (isset($three)) href="{{ $three }}" @endif class="row col-12 remove-padding-margin">
@@ -55,7 +55,7 @@
                 </a>
             </div>
 
-            <a @if (isset($four)) href="{{ $four }}" @endif class="col-4 no-padding">
+            <a @if (isset($four)) href="{{ $four }}" @endif class="col-lg-4 col-12 no-padding">
                 <img class="col-12" src="{{ asset('/themes/velocity/assets/images/kids.png') }}" />
             </a>
         </div>

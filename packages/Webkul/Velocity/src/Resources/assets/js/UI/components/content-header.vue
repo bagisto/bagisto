@@ -1,13 +1,16 @@
 <template>
     <div class="row velocity-divide-page remove-padding-margin vc-header">
-        <div class="velocity-small-screen container">
+        <div class="vc-small-screen container">
             <div class="row">
                 <div class="col-8">
-                    <div class="row">
-                        <logo-component add-class="col-8 offset-3"></logo-component>
+                    <div class="row col-12">
+                        <div class="hamburger-wrapper">
+                            <i class="rango-toggle hamburger"></i>
+                        </div>
+                        <logo-component add-class="pl10"></logo-component>
                     </div>
                 </div>
-                <div class="col-4 right-vc-header">
+                <div class="row col-4 right-vc-header">
                     <i class="fs16 fw6 rango-search"></i>
                     <i class="material-icons text-down-3">shopping_cart</i>
                 </div>
