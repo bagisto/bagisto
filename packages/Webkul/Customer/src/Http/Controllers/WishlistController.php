@@ -159,7 +159,7 @@ class WishlistController extends Controller
             $result = Cart::moveToCart($wishlistItem);
 
             if ($result) {
-                session()->flash('success', trans('shop::app.wishlist.moved'));
+                session()->flash('success', trans('shop::app.customer.account.wishlist.moved'));
             } else {
                 session()->flash('info', trans('shop::app.checkout.cart.integrity.missing_options'));
 
