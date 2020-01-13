@@ -15,7 +15,6 @@ class CustomerAddress extends Model implements CustomerAddressContract
         'vat_id',
         'address1',
         'address2',
-        'address3',
         'country',
         'state',
         'city',
