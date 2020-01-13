@@ -161,7 +161,7 @@ class WishlistController extends Controller
             if ($result) {
                 session()->flash('success', trans('shop::app.wishlist.moved'));
             } else {
-                session()->flash('info', trans('shop::app.wishlist.option-missing'));
+                session()->flash('info', trans('shop::app.checkout.cart.integrity.missing_options'));
 
                 return redirect()->route('shop.productOrCategory.index', $wishlistItem->product->url_key);
             }
