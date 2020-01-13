@@ -428,7 +428,7 @@ return [
             'remove' => 'Remove',
             'remove-link' => 'Remove',
             'move-to-wishlist' => 'Move to Wishlist',
-            'move-to-wishlist-success' => 'Item moved to wishlist.',
+            'move-to-wishlist-success' => 'Item moved to wishlist successfully.',
             'move-to-wishlist-error' => 'Cannot move item to wishlist, please try again later.',
             'add-config-warning' => 'Please select option before adding to cart.',
             'quantity' => [
