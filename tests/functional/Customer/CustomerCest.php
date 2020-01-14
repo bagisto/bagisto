@@ -5,13 +5,11 @@ use Webkul\Customer\Models\CustomerAddress;
 
 class CustomerCest
 {
-    public function _before(FunctionalTester $I)
-    {
-    }
+    public $fields = [];
 
     public function updateCustomerProfile(FunctionalTester $I)
     {
-        $I->loginAsCustomer();
+        $customer = $I->loginAsCustomer();
 
         $I->amOnPage('/');
 
@@ -49,7 +47,7 @@ class CustomerCest
 
         $I->click('Add Address');
 
-        $fields = [
+        $this->fields = [
             'company_name' => $faker->company,
             'vat_id'       => $faker->randomNumber(9),
             'address1[]'   => $faker->streetAddress,
@@ -60,7 +58,7 @@ class CustomerCest
             'phone'        => $faker->phoneNumber,
         ];
 
-        foreach ($fields as $key => $value) {
+        foreach ($this->fields as $key => $value) {
             // the following fields are being rendered via javascript so we ignore them:
             if (! in_array($key, [
                 'country',
@@ -76,37 +74,26 @@ class CustomerCest
 
         // we need to use this css selector to hit the correct <form>. There is another one at the
         // page header (search)
-        $I->submitForm($formCssSelector, $fields);
+        $I->submitForm($formCssSelector, $this->fields);
         $I->seeInSource('The given vat id has a wrong format');
 
         // valid vat id:
-        $fields['vat_id'] = 'DE123456789';
+        $this->fields['vat_id'] = 'DE123456789';
 
-        $I->submitForm($formCssSelector, $fields);
-
-        $I->seeInSource('Address have been successfully added.');
+        $I->submitForm($formCssSelector, $this->fields);
 
         $I->seeInSource('Address have been successfully added.');
 
-        $I->seeRecord(CustomerAddress::class, [
-            'company_name' => $fields['company_name'],
-            'vat_id'       => $fields['vat_id'],
-            'address1'     => $fields['address1[]'],
-            'country'      => $fields['country'],
-            'state'        => $fields['state'],
-            'city'         => $fields['city'],
-            'phone'        => $fields['phone'],
-            'postcode'     => $fields['postcode'],
-        ]);
+        $this->assertCustomerAddress($I);
 
         $I->wantTo('Update the created customer address again');
 
         $I->click('Edit');
 
-        $oldcompany = $fields['company_name'];
-        $fields['company_name'] = $faker->company;
+        $oldcompany = $this->fields['company_name'];
+        $this->fields['company_name'] = $faker->company;
 
-        $I->submitForm($formCssSelector, $fields);
+        $I->submitForm($formCssSelector, $this->fields);
 
         $I->seeInSource('Address updated successfully.');
 
@@ -114,9 +101,24 @@ class CustomerCest
             'company_name' => $oldcompany,
         ]);
 
+        $this->assertCustomerAddress($I);
+    }
+
+    /**
+     * @param \FunctionalTester $I
+     * @param array             $fields
+     */
+    private function assertCustomerAddress(FunctionalTester $I): void
+    {
         $I->seeRecord(CustomerAddress::class, [
-            'company_name' => $fields['company_name'],
-            'postcode'     => $fields['postcode'],
+            'company_name' => $this->fields['company_name'],
+            'vat_id'       => $this->fields['vat_id'],
+            'address1'     => $this->fields['address1[]'],
+            'country'      => $this->fields['country'],
+            'state'        => $this->fields['state'],
+            'city'         => $this->fields['city'],
+            'phone'        => $this->fields['phone'],
+            'postcode'     => $this->fields['postcode'],
         ]);
     }
 }

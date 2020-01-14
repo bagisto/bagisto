@@ -76,8 +76,6 @@ class AddressController extends Controller
         $data = collect(request()->input())->except('_token')->toArray();
 
         $this->validate(request(), [
-            'first_name' => 'string|required',
-            'last_name'  => 'string|required',
             'address1'   => 'string|required',
             'country'    => 'string|required',
             'state'      => 'string|required',
@@ -134,8 +132,6 @@ class AddressController extends Controller
         request()->merge(['address1' => implode(PHP_EOL, array_filter(request()->input('address1')))]);
 
         $this->validate(request(), [
-            'first_name' => 'string|required',
-            'last_name'  => 'string|required',
             'address1'   => 'string|required',
             'country'    => 'string|required',
             'state'      => 'string|required',

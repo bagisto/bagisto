@@ -21,15 +21,6 @@ class CustomerServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register services.
-     *
-     * @return  void
-     */
-    public function register(): void
-    {
-    }
-
-    /**
      * Register factories.
      *
      * @param  string  $path

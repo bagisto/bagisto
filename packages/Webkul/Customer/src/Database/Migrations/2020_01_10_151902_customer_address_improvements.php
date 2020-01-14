@@ -14,12 +14,13 @@ class CustomerAddressImprovements extends Migration
     public function up()
     {
         Schema::table('customer_addresses', function (Blueprint $table) {
-            $table->string('company_name')->nullable()->after('company_id');
+            $table->string('company_name')->nullable()->after('customer_id');
             $table->string('vat_id')->nullable()->after('company_name');
         });
 
         Schema::table('orders', function (Blueprint $table) {
-            $table->string('customer_vat_id')->nullable()->after('customer_last_name');
+            $table->string('customer_company_name')->nullable()->after('customer_last_name');
+            $table->string('customer_vat_id')->nullable()->after('customer_company_name');
         });
     }
 
@@ -36,6 +37,7 @@ class CustomerAddressImprovements extends Migration
         });
 
         Schema::table('orders', function (Blueprint $table) {
+            $table->dropColumn('customer_company_name');
             $table->dropColumn('customer_vat_id');
         });
     }
