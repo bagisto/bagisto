@@ -32,7 +32,7 @@ class ProductDownloadableSampleRepository extends Repository
     {
         if (request()->hasFile('file')) {
             return [
-                'file' => $path = request()->file('file')->store('product/' . $productId),
+                'file' => $path = request()->file('file')->store('product_downloadable_links/' . $productId),
                 'file_name' => request()->file('file')->getClientOriginalName(),
                 'file_url' => Storage::url($path)
             ];

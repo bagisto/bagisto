@@ -184,6 +184,10 @@ abstract class AbstractType
                 continue;
             }
 
+            if ($attribute->type == 'price' && isset($data[$attribute->code]) && $data[$attribute->code] == '') {
+                $data[$attribute->code] = null;
+            }
+
             if ($attribute->type == 'date' && $data[$attribute->code] == '' && $route != 'admin.catalog.products.massupdate') {
                 $data[$attribute->code] = null;
             }
