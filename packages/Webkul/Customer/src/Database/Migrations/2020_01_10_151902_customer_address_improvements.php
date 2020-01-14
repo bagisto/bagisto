@@ -16,13 +16,6 @@ class CustomerAddressImprovements extends Migration
         Schema::table('customer_addresses', function (Blueprint $table) {
             $table->string('company_name')->nullable()->after('company_id');
             $table->string('vat_id')->nullable()->after('company_name');
-
-            $table->string('first_name')->after('company_name');
-            $table->string('last_name')->after('first_name');
-
-            // split 'name' column into first_name and last_name
-            $table->dropColumn('name');
-
         });
 
         Schema::table('orders', function (Blueprint $table) {
@@ -40,9 +33,6 @@ class CustomerAddressImprovements extends Migration
         Schema::table('customer_addresses', function (Blueprint $table) {
             $table->dropColumn('company_name');
             $table->dropColumn('vat_id');
-            $table->dropColumn('first_name');
-            $table->dropColumn('last_name');
-            $table->string('name');
         });
 
         Schema::table('orders', function (Blueprint $table) {

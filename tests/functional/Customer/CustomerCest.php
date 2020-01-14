@@ -51,8 +51,6 @@ class CustomerCest
 
         $fields = [
             'company_name' => $faker->company,
-            'first_name'   => $faker->firstName,
-            'last_name'    => $faker->lastName,
             'vat_id'       => $faker->randomNumber(9),
             'address1[]'   => $faker->streetAddress,
             'country'      => $faker->countryCode,
@@ -92,8 +90,6 @@ class CustomerCest
 
         $I->seeRecord(CustomerAddress::class, [
             'company_name' => $fields['company_name'],
-            'first_name'   => $fields['first_name'],
-            'last_name'    => $fields['last_name'],
             'vat_id'       => $fields['vat_id'],
             'address1'     => $fields['address1[]'],
             'country'      => $fields['country'],
