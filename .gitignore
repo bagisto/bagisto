@@ -15,7 +15,6 @@ npm-debug.log
 yarn-error.log
 .env
 /ignorables/*
-composer.lock
 yarn.lock
 package-lock.json
 yarn.lock
