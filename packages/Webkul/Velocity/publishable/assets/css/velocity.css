@@ -232,7 +232,7 @@
   content: "\E92E";
 }
 
-.rango-eye-visible:before {
+.rango-eye-visible:before, .table .action .eye-icon:before {
   content: "\E92F";
 }
 
@@ -1861,6 +1861,11 @@
 
 .table .badge {
   padding: 10px;
+}
+
+.table .action .eye-icon {
+  font-size: 24px;
+  padding-left: 10px;
 }
 
 .search-result-status {
@@ -3845,7 +3850,7 @@ ul.circle-list li.circle:not(:last-child) {
   color: #4D7EA8;
 }
 
-a.unset, .account-content .account-layout .bottom-toolbar .pagination a.page-item {
+a.unset, .account-content .account-layout .bottom-toolbar .pagination a.page-item, .table .action a {
   color: unset !important;
   text-decoration: none !important;
 }
@@ -3972,7 +3977,7 @@ button[disabled] {
 
 .rango-default, .account-content .sidebar .customer-sidebar .navigation li i.icon, .account-content .account-layout .bottom-toolbar .pagination .page-item.next .angle-right-icon,
 .account-content .account-layout .bottom-toolbar .pagination .page-item.next .angle-left-icon, .account-content .account-layout .bottom-toolbar .pagination .page-item.previous .angle-right-icon,
-.account-content .account-layout .bottom-toolbar .pagination .page-item.previous .angle-left-icon, header #search-form .btn-group .selectdiv, header #search-form .quantity .selectdiv {
+.account-content .account-layout .bottom-toolbar .pagination .page-item.previous .angle-left-icon, .table .action .eye-icon, header #search-form .btn-group .selectdiv, header #search-form .quantity .selectdiv {
   speak: none;
   line-height: 1;
   font-style: normal;

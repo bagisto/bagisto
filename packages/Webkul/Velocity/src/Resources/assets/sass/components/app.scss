@@ -1141,6 +1141,20 @@
     .badge {
         padding: 10px;
     }
+
+    .action {
+        a {
+            @extend .unset;
+        }
+
+        .eye-icon {
+            @extend .rango-default;
+            @extend .rango-eye-visible;
+
+            font-size: 24px;
+            padding-left: 10px;
+        }
+    }
 }
 
 .search-result-status {
