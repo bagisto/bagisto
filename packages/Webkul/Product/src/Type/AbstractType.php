@@ -597,9 +597,8 @@ abstract class AbstractType
     /**
      * Get request quantity
      *
-     * @param Product $product
-     * @param array   $data
-     * @return CartItem|void
+     * @param array $data
+     * @return array
      */
     public function getQtyRequest($data)
     {
