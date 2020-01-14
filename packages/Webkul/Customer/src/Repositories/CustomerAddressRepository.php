@@ -6,7 +6,7 @@ use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Facades\Event;
 
 /**
- * Customer Reposotory
+ * Customer Repository
  *
  * @author    Prashant Singh <prashant.singh852@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
@@ -62,11 +62,7 @@ class CustomerAddressRepository extends Repository
 
         Event::fire('customer.addresses.update.before', $id);
 
-        if (isset($data['default_address'])) {
-            $data['default_address'] = 1;
-        } else {
-            $data['default_address'] = 0;
-        }
+        $data['default_address'] = isset($data['default_address']) ? 1 : 0;
 
         $default_address = $this
             ->findWhere(['customer_id' => $address->customer_id, 'default_address' => 1])
