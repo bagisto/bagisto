@@ -483,7 +483,7 @@ class Bundle extends AbstractType
         if ($this->product->id != $options2['product_id'])
             return false;
 
-        return $options1['bundle_options'] == $options2['bundle_options'];
+        return $options1['bundle_options'] == $options2['bundle_options'] && $options1['bundle_option_qty'] == $options2['bundle_option_qty'];
     }
 
     /**
