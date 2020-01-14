@@ -49,14 +49,7 @@
     }
 }
 
-@media only screen
-    and (max-width: 576px)
-    and (max-width: 768px)
-    and (max-width: 992px) {
-    // body {
-    //     display: block;
-    // }
-
+@media only screen and (max-width: 992px) {
     $header-height: 50px;
 
     .main-content-wrapper {
@@ -89,11 +82,10 @@
                     text-align: right;
                     height: $header-height;
 
-                    * {
-                        top: 13px;
+                    > a {
                         width: 24px;
-                        position: relative;
-                        padding-right: 10px;
+                        margin-top: 13px;
+                        margin-right: 10px;
                     }
                 }
             }
@@ -135,6 +127,7 @@
         .bottom-container {
             img {
                 padding: 0px;
+                height: unset;
             }
         }
 
@@ -170,17 +163,40 @@
     .footer {
         .footer-content {
             .newsletter-subscription {
+                padding: 10px 20px;
+
                 .newsletter-wrapper {
                     input.subscribe-field {
                         width: 200px;
                     }
+
+                    .subscribe-newsletter {
+                        text-align: left;
+
+                        .subscriber-form-div {
+                            text-align: center;
+                        }
+                    }
                 }
+            }
+
+            .footer-statics {
+                padding: 30px 50px;
             }
         }
     }
 
-    .popular-category-wrapper {
-        padding: 0px;
+    .popular-categories-container {
+
+        .popular-category-wrapper {
+            padding: 0px;
+
+            .card {
+                .category-image {
+                    height: 100%;
+                }
+            }
+        }
     }
 
     .main-content-wrapper {
@@ -199,6 +215,28 @@
                     padding: 2px !important;
                 }
             }
+        }
+    }
+
+    .account-content {
+        .sidebar {
+            display: none;
+        }
+
+        .account-layout {
+            &.right {
+                padding-left: 20px !important;
+            }
+        }
+    }
+
+    .mini-cart-container {
+        display: none;
+    }
+
+    .vc-small-screen {
+        .searchbar {
+            padding-left: 100px !important;
         }
     }
 }

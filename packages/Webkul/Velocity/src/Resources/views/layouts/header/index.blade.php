@@ -2,7 +2,9 @@
     <div class="row col-12 remove-padding-margin velocity-divide-page">
         <logo-component></logo-component>
 
-        <div class="row no-margin right">
+        <searchbar-component></searchbar-component>
+
+        {{-- <div class="row no-margin right">
             <div class="col-8 no-padding input-group">
                 <form
                     method="GET"
@@ -55,7 +57,6 @@
 
                 {!! view_render_event('bagisto.shop.layout.header.cart-item.after') !!}
             </div>
-        </div>
-
+        </div> --}}
     </div>
 </header>

@@ -1,6 +1,6 @@
 <template>
 
-    <div class="row mb15 col-12" :class="rowClass">
+    <div :class="`row mb15 col-12 ${rowClass}`">
         <div class="col-4 no-padding">
             <h2 class="fs20 fw6">{{ headerHeading }}</h2>
         </div>
@@ -41,7 +41,7 @@
 
                 <template v-if="(! (viewAll == 'false' || viewAll == '')) && viewAll">
                     <div class="mr15">
-                        <a :href="viewAll" :title="`View all ${headerHeading} products`" class="remove-decoration normal-text">
+                        <a :href="viewAll" :title="`View all ${headerHeading} products`" class="remove-decoration link-color">
                             <h2 class="fs14 fw6 cursor-pointer tab">View All</h2>
                         </a>
                     </div>

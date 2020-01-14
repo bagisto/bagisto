@@ -27,7 +27,6 @@ Vue.component('child-sidebar', require('./UI/components/child-sidebar'));
 Vue.component('card-list-content', require('./UI/components/card-list'));
 Vue.component('card-list-header', require('./UI/components/card-header'));
 Vue.component('magnify-image', require('./UI/components/image-magnifier'));
-Vue.component('content-header', require('./UI/components/content-header'));
 
 window.eventBus = new Vue();
 

@@ -37,7 +37,7 @@
                         @endphp
 
                         <a
-                            href="{{ url()->to('/').'/products/'.$review->product->url_key }}"
+                            href="{{ url()->to('/').'/'.$review->product->url_key }}"
                             title="{{ $review->product->name }}"
                             class="col-2 max-sm-img-dimention no-padding">
                             <img class="media" src="{{ $image['small_image_url'] }}"/>
@@ -47,7 +47,7 @@
                             <div class="product-name">
                                 <a
                                     class="remove-decoration"
-                                    href="{{ url()->to('/').'/products/'.$review->product->url_key }}"
+                                    href="{{ url()->to('/').'/'.$review->product->url_key }}"
                                     title="{{ $review->product->name }}">
                                     {{$review->product->name}}
                                 </a>

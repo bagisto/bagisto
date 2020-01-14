@@ -5,27 +5,28 @@
 @stop
 
 @section('content-wrapper')
+    <div class="container">
+        <div class="order-success-content row col-12 offset-1">
+            <h1 class="row col-12">{{ __('shop::app.checkout.success.thanks') }}</h1>
 
-    <div class="order-success-content row col-12 offset-1">
-        <h1 class="row col-12">{{ __('shop::app.checkout.success.thanks') }}</h1>
+            <p class="row col-12">
+                {{ __('shop::app.checkout.success.order-id-info', ['order_id' => $order->increment_id]) }}
+            </p>
 
-        <p class="row col-12">
-            {{ __('shop::app.checkout.success.order-id-info', ['order_id' => $order->increment_id]) }}
-        </p>
+            <p class="row col-12">
+                {{ __('shop::app.checkout.success.info') }}
+            </p>
 
-        <p class="row col-12">
-            {{ __('shop::app.checkout.success.info') }}
-        </p>
+            {{ view_render_event('bagisto.shop.checkout.continue-shopping.before', ['order' => $order]) }}
 
-        {{ view_render_event('bagisto.shop.checkout.continue-shopping.before', ['order' => $order]) }}
+            <div class="mt15 row-col-12">
+                <a href="{{ route('shop.home.index') }}" class="theme-btn remove-decoration">
+                    {{ __('shop::app.checkout.cart.continue-shopping') }}
+                </a>
+            </div>
 
-        <div class="mt15 row-col-12">
-            <a href="{{ route('shop.home.index') }}" class="theme-btn remove-decoration">
-                {{ __('shop::app.checkout.cart.continue-shopping') }}
-            </a>
+            {{ view_render_event('bagisto.shop.checkout.continue-shopping.after', ['order' => $order]) }}
+
         </div>
-
-        {{ view_render_event('bagisto.shop.checkout.continue-shopping.after', ['order' => $order]) }}
-
     </div>
 @endsection

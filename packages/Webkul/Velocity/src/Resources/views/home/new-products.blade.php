@@ -42,8 +42,8 @@
                     </div>
 
                     @include ('shop::products.list.recently-viewed', [
-                        'addClass' => 'col-3',
-                        'addClassWrapper' => 'scrollable max-height-350',
+                        'addClass' => 'col-3 new-products-recent',
+                        'addClassWrapper' => 'scrollable max-height-300',
                     ])
                 @else
                     <carousel-component
