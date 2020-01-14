@@ -15,7 +15,7 @@ $factory->define(CustomerAddress::class, function (Faker $faker) {
         },
         'company_name'    => $faker->company,
         'name'            => $faker->name,
-        'vat_id'          => $faker->randomNumber(9),
+        'vat_id'          => $faker->vat,
         'address1'        => $faker->streetAddress,
         'country'         => $faker->countryCode,
         'state'           => $faker->state,
