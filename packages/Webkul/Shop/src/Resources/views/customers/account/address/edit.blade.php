@@ -94,7 +94,7 @@
                     </div>
                 </div>
 
-            </formi>
+            </form>
 
             {!! view_render_event('bagisto.shop.customers.account.address.edit.after', ['address' => $address]) !!}
 
