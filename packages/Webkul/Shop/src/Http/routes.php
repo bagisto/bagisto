@@ -34,10 +34,10 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
         'view' => 'shop::checkout.cart.index'
     ])->name('shop.checkout.cart.index');
 
-        Route::post('checkout/check/coupons', 'Webkul\Shop\Http\Controllers\OnepageController@applyCoupon')->name('shop.checkout.check.coupons');
+    Route::post('checkout/cart/coupon', 'Webkul\Shop\Http\Controllers\CartController@applyCoupon')->name('shop.checkout.cart.coupon.apply');
 
-        Route::post('checkout/remove/coupon', 'Webkul\Shop\Http\Controllers\OnepageController@removeCoupon')->name('shop.checkout.remove.coupon');
-
+    Route::delete('checkout/cart/coupon', 'Webkul\Shop\Http\Controllers\CartController@removeCoupon')->name('shop.checkout.coupon.remove.coupon');
+    
     //Cart Items Add
     Route::post('checkout/cart/add/{id}', 'Webkul\Shop\Http\Controllers\CartController@add')->defaults('_config', [
         'redirect' => 'shop.checkout.cart.index'
@@ -297,13 +297,10 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
 
     Route::get('page/{slug}', 'Webkul\CMS\Http\Controllers\Shop\PagePresenterController@presenter')->name('shop.cms.page');
 
-    Route::get('{slugOrPath}', \Webkul\Shop\Http\Controllers\ProductsCategoriesProxyController::class . '@index')
+    Route::fallback(\Webkul\Shop\Http\Controllers\ProductsCategoriesProxyController::class . '@index')
         ->defaults('_config', [
             'product_view' => 'shop::products.view',
             'category_view' => 'shop::products.index'
         ])
-        ->where('slugOrPath', '^([a-z0-9-]+\/?)+$')
         ->name('shop.productOrCategory.index');
-
-    Route::fallback('Webkul\Shop\Http\Controllers\HomeController@notFound');
 });

@@ -155,4 +155,52 @@ class CartController extends Controller
 
         return redirect()->back();
     }
+
+    /**
+     * Apply coupon to the cart
+     *
+     * @return \Illuminate\Http\JsonResponse
+    */
+    public function applyCoupon()
+    {
+        $couponCode = request()->get('code');
+
+        try {
+            if (strlen($couponCode)) {
+                Cart::setCouponCode($couponCode)->collectTotals();
+
+                if (Cart::getCart()->coupon_code == $couponCode) {
+                    return response()->json([
+                        'success' => true,
+                        'message' => trans('shop::app.checkout.total.success-coupon')
+                    ]);
+                }
+            }
+
+            return response()->json([
+                'success' => false,
+                'message' => trans('shop::app.checkout.total.invalid-coupon')
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => trans('shop::app.checkout.total.coupon-apply-issue')
+            ]);
+        }
+    }
+
+    /**
+     * Apply coupon to the cart
+     *
+     * @return \Illuminate\Http\JsonResponse
+    */
+    public function removeCoupon()
+    {
+        Cart::removeCouponCode()->collectTotals();
+
+        return response()->json([
+            'success' => true,
+            'message' => trans('shop::app.checkout.total.remove-coupon')
+        ]);
+    }
 }

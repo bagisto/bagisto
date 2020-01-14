@@ -1,5 +1,4 @@
-<div class="customer-sidebar row">
-
+<div class="customer-sidebar row no-margin no-padding">
     <div class="account-details col-12">
         <div class="customer-name col-12 text-uppercase">
             {{ substr(auth('customer')->user()->first_name, 0, 1) }}
@@ -10,10 +9,12 @@
 
     @foreach ($menu->items as $menuItem)
         <ul type="none" class="navigation">
-            @foreach ($menuItem['children'] as $subMenuItem)
+            @foreach ($menuItem['children'] as $index => $subMenuItem)
                 <li class="{{ $menu->getActive($subMenuItem) }}">
                     <a class="unset fw6 full-width" href="{{ $subMenuItem['url'] }}">
-                        {{ trans($subMenuItem['name']) }}
+                        <i class="icon {{ $index }} text-down-3"></i>
+                        <span>{{ trans($subMenuItem['name']) }}<span>
+                        <i class="rango-arrow-right pull-right text-down-3"></i>
                     </a>
                 </li>
             @endforeach
@@ -23,7 +24,7 @@
 
 @push('css')
     <style type="text/css">
-        .categories-sidebar-container {
+        .main-content-wrapper {
             margin-bottom: 0px;
             min-height: 100vh;
         }

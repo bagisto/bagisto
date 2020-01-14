@@ -8,7 +8,7 @@
 
 @if ($featuredProductsCount)
 
-    <div class="container-fluid popular-products">
+    <div class="container-fluid featured-products">
 
         <card-list-header heading="{{ __('shop::app.home.featured-products') }}">
         </card-list-header>
@@ -16,9 +16,11 @@
         <div class="row flex-nowrap">
 
             <carousel-component
-                :slides-count="{{ $featuredProductsCount }}"
                 slides-per-page="6"
-                id="fearured-products-carousel">
+                navigation-enabled="hide"
+                pagination-enabled="hide"
+                id="fearured-products-carousel"
+                :slides-count="{{ $featuredProductsCount }}">
 
                 @foreach ($featuredProducts as $index => $product)
 

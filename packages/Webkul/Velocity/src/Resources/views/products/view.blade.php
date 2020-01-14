@@ -19,116 +19,142 @@
     <meta name="keywords" content="{{ $product->meta_keywords }}"/>
 @stop
 
-@section('content-wrapper')
+@push('css')
+    <style type="text/css">
+        .recently-viewed {
+            margin-top: 20px;
+        }
 
+        .store-meta-images > .recently-viewed:first-child {
+            margin-top: 0px;
+        }
+
+        .main-content-wrapper {
+            margin-bottom: 0px;
+        }
+    </style>
+
+@endpush
+
+@section('full-content-wrapper')
     {!! view_render_event('bagisto.shop.products.view.before', ['product' => $product]) !!}
 
-    @if ($showRecentlyViewed)
-        <section class="col-7 offset-1 product-detail">
-    @else
-        <section class="col-10 offset-1 product-detail">
-    @endif
-            <div class="layouter">
-                <product-view>
-                    <div class="form-container">
-                        @csrf()
+        <div class="row no-margin">
+            @if ($showRecentlyViewed)
+                <section class="col-9 product-detail">
+            @else
+                <section class="col-12 product-detail">
+            @endif
+                    <div class="layouter">
+                        <product-view>
+                            <div class="form-container">
+                                @csrf()
 
-                        <input type="hidden" name="product_id" value="{{ $product->product_id }}">
+                                <input type="hidden" name="product_id" value="{{ $product->product_id }}">
 
-                        {{-- product-gallery --}}
-                        <div class="left col-lg-5">
-                            @include ('shop::products.view.gallery')
-                        </div>
-
-                        {{-- right-section --}}
-                        <div class="right col-lg-7 scrollable">
-                            {{-- product-info-section --}}
-                            <div class="row info">
-                                <h2 class="col-lg-12">{{ $product->name }}</h2>
-
-                                @if ($total)
-                                    <div class="reviews col-lg-12">
-                                        <star-ratings
-                                            :ratings="{{ $avgStarRating }}"
-                                            push-class="mr5"
-                                        ></star-ratings>
-
-                                        <div class="reviews">
-                                            <span>{{ $avgRatings }} Ratings and {{ $total }} Reviews</span>
-                                        </div>
-                                    </div>
-                                @endif
-
-                                @include ('shop::products.view.stock', ['product' => $product])
-
-                                <div class="col-12 price">
-                                    @include ('shop::products.price', ['product' => $product])
+                                {{-- product-gallery --}}
+                                <div class="left col-lg-6">
+                                    @include ('shop::products.view.gallery')
                                 </div>
 
-                                @include ('shop::products.add-to-cart', [
-                                    'product' => $product,
-                                    'showCartIcon' => false
-                                ])
+                                {{-- right-section --}}
+                                <div class="right col-lg-6 scrollable">
+                                    {{-- product-info-section --}}
+                                    <div class="row info">
+                                        <h2 class="col-lg-12">{{ $product->name }}</h2>
+
+                                        @if ($total)
+                                            <div class="reviews col-lg-12">
+                                                <star-ratings
+                                                    :ratings="{{ $avgStarRating }}"
+                                                    push-class="mr5"
+                                                ></star-ratings>
+
+                                                <div class="reviews">
+                                                    <span>{{ $avgRatings }} Ratings and {{ $total }} Reviews</span>
+                                                </div>
+                                            </div>
+                                        @endif
+
+                                        @include ('shop::products.view.stock', ['product' => $product])
+
+                                        <div class="col-12 price">
+                                            @include ('shop::products.price', ['product' => $product])
+                                        </div>
+
+                                        @include ('shop::products.add-to-cart', [
+                                            'product' => $product,
+                                            'showCartIcon' => false,
+                                        ])
+                                    </div>
+
+                                    {!! view_render_event('bagisto.shop.products.view.short_description.before', ['product' => $product]) !!}
+
+                                    <div class="description">
+                                        <h3 class="col-lg-12">{{ __('velocity::app.products.short-description') }}</h3>
+
+                                        {!! $product->short_description !!}
+                                    </div>
+
+                                    {!! view_render_event('bagisto.shop.products.view.short_description.after', ['product' => $product]) !!}
+
+
+                                    {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
+
+                                    @if ($product->getTypeInstance()->showQuantityBox())
+                                        <quantity-changer></quantity-changer>
+                                    @else
+                                        <input type="hidden" name="quantity" value="1">
+                                    @endif
+
+                                    {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
+
+                                    @include ('shop::products.view.configurable-options')
+
+                                    @include ('shop::products.view.downloadable')
+
+                                    @include ('shop::products.view.grouped-products')
+
+                                    @include ('shop::products.view.bundle-options')
+
+                                    @include ('shop::products.view.attributes', [
+                                        'active' => true
+                                    ])
+
+                                    {{-- product long description --}}
+                                    @include ('shop::products.view.description')
+
+                                    {{-- reviews count --}}
+                                    @include ('shop::products.view.reviews', ['accordian' => true])
+                                </div>
                             </div>
-
-                            {!! view_render_event('bagisto.shop.products.view.short_description.before', ['product' => $product]) !!}
-
-                            <div class="description">
-                                <h3 class="col-lg-12">{{ __('velocity::app.products.short-description') }}</h3>
-
-                                {!! $product->short_description !!}
-                            </div>
-
-                            {!! view_render_event('bagisto.shop.products.view.short_description.after', ['product' => $product]) !!}
-
-
-                            {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
-
-                            @if ($product->getTypeInstance()->showQuantityBox())
-                                <quantity-changer></quantity-changer>
-                            @else
-                                <input type="hidden" name="quantity" value="1">
-                            @endif
-
-                            {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
-
-                            @include ('shop::products.view.configurable-options')
-
-                            @include ('shop::products.view.downloadable')
-
-                            @include ('shop::products.view.grouped-products')
-
-                            @include ('shop::products.view.bundle-options')
-
-                            @include ('shop::products.view.attributes', [
-                                'active' => true
-                            ])
-
-                            {{-- product long description --}}
-                            @include ('shop::products.view.description')
-
-                            {{-- reviews count --}}
-                            @include ('shop::products.view.reviews', ['accordian' => true])
-                        </div>
+                        </product-view>
                     </div>
-                </product-view>
+
+                    @include ('shop::products.view.related-products')
+
+                    @include ('shop::products.view.up-sells')
+
+            </section>
+
+            <div class="store-meta-images col-3">
+                @foreach (json_decode($velocityMetaData['product_view_images'], true) as $image)
+                    @if ($image && $image !== '')
+                        <img src="{{ url()->to('/') }}/storage/{{ $image }}" />
+                    @endif
+                @endforeach
+
+                @if ($showRecentlyViewed)
+                    @include ('shop::products.list.recently-viewed')
+                @endif
             </div>
 
-            @include ('shop::products.view.related-products')
-
-            @include ('shop::products.view.up-sells')
-
-    </section>
-
-    @if ($showRecentlyViewed)
-        @include ('shop::products.list.recently-viewed')
-    @endif
+        </div>
 
     {!! view_render_event('bagisto.shop.products.view.after', ['product' => $product]) !!}
 @endsection
 
 @push('scripts')
-
     <script type="text/x-template" id="product-view-template">
         <form method="POST" id="product-form" action="{{ route('cart.add', $product->product_id) }}" @click="onSubmit($event)">
 
@@ -155,14 +181,30 @@
 
     <script type="text/javascript">
         Vue.component('product-view', {
-
-            template: '#product-view-template',
-
             inject: ['$validator'],
-
+            template: '#product-view-template',
             data: function() {
                 return {
                     is_buy_now: 0,
+                }
+            },
+
+            mounted: function () {
+                let currentProductId = '{{ $product->url_key }}';
+                let existingViewed = window.localStorage.getItem('recentlyViewed');
+                if (! existingViewed) {
+                    existingViewed = [];
+                } else {
+                    existingViewed = JSON.parse(existingViewed);
+                }
+
+                if (existingViewed.indexOf(currentProductId) == -1) {
+                    existingViewed.push(currentProductId);
+
+                    if (existingViewed.length > 4)
+                        existingViewed = existingViewed.slice(Math.max(existingViewed.length - 4, 1));
+
+                    window.localStorage.setItem('recentlyViewed', JSON.stringify(existingViewed));
                 }
             },
 
@@ -189,9 +231,8 @@
         });
 
         Vue.component('quantity-changer', {
-            template: '#quantity-changer-template',
-
             inject: ['$validator'],
+            template: '#quantity-changer-template',
 
             props: {
                 controlName: {
@@ -257,8 +298,7 @@
             var productHeroImage = document.getElementsByClassName('product-hero-image')[0];
 
             if (thumbList && productHeroImage) {
-
-                for(let i=0; i < thumbFrame.length ; i++) {
+                for (let i=0; i < thumbFrame.length ; i++) {
                     thumbFrame[i].style.height = (productHeroImage.offsetHeight/4) + "px";
                     thumbFrame[i].style.width = (productHeroImage.offsetHeight/4)+ "px";
                 }

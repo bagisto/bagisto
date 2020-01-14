@@ -63,9 +63,6 @@
     <!-- Show Product Policy -->
     {{-- @include('shop::home.product-policy') --}}
 
-    <!-- trending products -->
-    {{-- @include('shop::home.category-with-custom-option') --}}
-
     <!-- advertisement two -->
     {{-- @include('shop::home.advertisements.advertisement-two') --}}
 

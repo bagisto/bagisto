@@ -2,7 +2,23 @@
 
     <div class="pull-left">
         <div class="dropdown">
-           <select
+
+            @php
+                $localeImage = null;
+            @endphp
+            @foreach (core()->getCurrentChannel()->locales as $locale)
+                @if ($locale->code == app()->getLocale())
+                    @php
+                        $localeImage = $locale->locale_image;
+                    @endphp
+                @endif
+            @endforeach
+
+            <div class="locale-icon">
+                <img src="{{ asset('/storage/' . $localeImage) }}" />
+            </div>
+
+            <select
                 class="btn btn-link dropdown-toggle control locale-switcher styled-select"
                 onchange="window.location.href = this.value"
                 @if (count(core()->getCurrentChannel()->locales) == 1)
@@ -11,7 +27,11 @@
 
                 @foreach (core()->getCurrentChannel()->locales as $locale)
                     @if (isset($serachQuery))
-                        <option value="?{{ $serachQuery }}&locale={{ $locale->code }}" {{ $locale->code == app()->getLocale() ? 'selected' : '' }}>{{ $locale->name }}</option>
+                        <option
+                            value="?{{ $serachQuery }}&locale={{ $locale->code }}"
+                            {{ $locale->code == app()->getLocale() ? 'selected' : '' }}>
+                            {{ $locale->name }}
+                        </option>
                     @else
                         <option value="?locale={{ $locale->code }}" {{ $locale->code == app()->getLocale() ? 'selected' : '' }}>{{ $locale->name }}</option>
                     @endif

@@ -121,6 +121,14 @@
                             input-name="images[1]">
                         </image-wrapper>
                     </div>
+
+                    <div class="control-group product-view-image">
+                        <label>{{ __('velocity::app.admin.meta-data.product-view-image') }}</label>
+
+                        <image-wrapper
+                            input-name="product_view_images">
+                        </image-wrapper>
+                    </div>
                 </div>
             </accordian>
 

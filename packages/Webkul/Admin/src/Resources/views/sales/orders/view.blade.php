@@ -332,7 +332,13 @@
 
                                     @if ($order->base_discount_amount > 0)
                                         <tr>
-                                            <td>{{ __('admin::app.sales.orders.discount') }}</td>
+                                            <td>
+                                                {{ __('admin::app.sales.orders.discount') }}
+
+                                                @if ($order->coupon_code)
+                                                    ({{ $order->coupon_code }})
+                                                @endif
+                                            </td>
                                             <td>-</td>
                                             <td>{{ core()->formatBasePrice($order->base_discount_amount) }}</td>
                                         </tr>

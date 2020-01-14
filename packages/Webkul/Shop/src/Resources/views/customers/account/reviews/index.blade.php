@@ -36,13 +36,13 @@
                             <div class="media-info">
                                 <?php $image = $productImageHelper->getProductBaseImage($review->product); ?>
 
-                                <a href="{{ url()->to('/').'/products/'.$review->product->url_key }}" title="{{ $review->product->name }}">
+                                <a href="{{ route('shop.productOrCategory.index', $review->product->url_key) }}" title="{{ $review->product->name }}">
                                     <img class="media" src="{{ $image['small_image_url'] }}"/>
                                 </a>
 
                                 <div class="info">
                                     <div class="product-name">
-                                        <a href="{{ url()->to('/').'/products/'.$review->product->url_key }}" title="{{ $review->product->name }}">
+                                        <a href="{{ route('shop.productOrCategory.index', $review->product->url_key) }}" title="{{ $review->product->name }}">
                                             {{$review->product->name}}
                                         </a>
                                     </div>

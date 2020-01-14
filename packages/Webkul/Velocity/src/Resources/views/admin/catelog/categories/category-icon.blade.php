@@ -1,0 +1,1 @@
+<input type="file" name="category_icon_path" />

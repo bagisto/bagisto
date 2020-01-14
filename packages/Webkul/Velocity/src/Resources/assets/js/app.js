@@ -68,9 +68,17 @@ $(document).ready(function () {
                             subCategories1 = $(subCategories1);
 
                             if (type == "mouseover") {
-                                // this.show(subCategories1);
+                                this.show(subCategories1);
+
+                                let sidebarChild = subCategories1.find('.sidebar');
+                                this.show(sidebarChild);
                             } else if (type == "mouseout") {
                                 this.hide(subCategories1);
+                            }
+                        } else {
+                            if (type == "mouseout") {
+                                let sidebar = $(`#${id}`);
+                                sidebar.hide();
                             }
                         }
                     }

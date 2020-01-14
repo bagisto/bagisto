@@ -20,14 +20,13 @@
     }
 @endphp
 
-<div class="col-4 footer-rt-content">
-
+<div class="col-lg-4 col-md-12 col-sm-12 footer-rt-content">
     <div class="row">
-        <div class="mb10">
-            <h3>Payment Methods</h3>
+        <div class="mb5 col-12">
+            <h3>{{ __('velocity::app.home.payment-methods') }}</h3>
         </div>
 
-        <div class="payment-methods">
+        <div class="payment-methods col-12">
             @foreach($activePayments as $paymentMethod)
                 <div class="method-sticker">
                     {{ $paymentMethod}}
@@ -37,11 +36,11 @@
     </div>
 
     <div class="row">
-        <div class="mb10">
-            <h3>Shipping Methods</h3>
+        <div class="mb5 col-12">
+            <h3>{{ __('velocity::app.home.shipping-methods') }}</h3>
         </div>
 
-        <div class="shipping-methods">
+        <div class="shipping-methods col-12">
             @foreach($activeShippings as $shippingMethod)
                 <div class="method-sticker">
                     {{ $shippingMethod}}
@@ -49,5 +48,4 @@
             @endforeach
         </div>
     </div>
-
 </div>

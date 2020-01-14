@@ -30,11 +30,11 @@
 }
 
 .btn-add-to-cart {
-    padding: 8px;
-    color: #fff !important;
+    padding: 3px 14px !important;
     border-radius: 0px !important;
-    border-color: #26A37C !important;
-    background-color: #26A37C !important;
+    color: $white-color !important;
+    border-color: $theme-color !important;
+    background-color: $theme-color !important;
 
     &.large {
         padding: 12px 18px;

@@ -12,24 +12,20 @@
                     </div>
 
                     <ul class="list-group">
-                        <div class="row fs16 pb15">
-                            <span>
-                                @foreach($topBrandsCollection as $categoryName => $brandsCollection)
-                                    <div class="row fs16 pb15">
-                                        <label class="mr10">{{ $categoryName }} : </label>
+                        @foreach($topBrandsCollection as $categoryName => $brandsCollection)
+                            <li class="row col-12">
+                                <label class="mr10">{{ $categoryName }} : </label>
 
-                                        <span>
-                                            @foreach ($brandsCollection as $brandIndex => $brand )
-                                                {{$brand}}
-                                                @if ($brandIndex + 1 !== sizeof($brandsCollection))
-                                                    |
-                                                @endif
-                                            @endforeach
-                                        </span>
-                                    </div>
-                                @endforeach
-                            </span>
-                        </div>
+                                <span>
+                                    @foreach ($brandsCollection as $brandIndex => $brand )
+                                        {{$brand}}
+                                        @if ($brandIndex + 1 !== sizeof($brandsCollection))
+                                            |
+                                        @endif
+                                    @endforeach
+                                </span>
+                            </li>
+                        @endforeach
                     </ul>
                 @endif
         </div>

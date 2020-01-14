@@ -95,13 +95,14 @@ return [
             'subscription-content' => 'Subscription bar Content',
             'activate-slider' => 'Activate Slider',
             'sidebar-categories' => 'Sidebar Categories',
-            'footer-left-raw-content' => 'We love to craft softwares and solve the real world problems with the binaries. We are highly committed to our goals. We invest our resources to create world class easy to use softwares and applications for the enterprise business with the top notch, on the edge technology expertise.',
+            'footer-left-raw-content' => '<p>We love to craft softwares and solve the real world problems with the binaries. We are highly committed to our goals. We invest our resources to create world class easy to use softwares and applications for the enterprise business with the top notch, on the edge technology expertise.</p>',
             'footer-middle-content' => 'Footer Middle Content',
             'update-meta-data' => 'Update Meta Data',
             'advertisement-four' => 'Advertisement Four Images',
             'advertisement-three' => 'Advertisement Three Images',
             'advertisement-two' => 'Advertisement Two Images',
             'advertisement-one' => 'Advertisement One Images',
+            'product-view-image' => 'Product View Image',
             'footer' => 'Footer',
         ],
         'category' => [
@@ -135,6 +136,8 @@ return [
         'add-to-cart' => 'Add To Cart',
         'hot-categories' => 'Hot Categories',
         'popular-categories' => 'Popular Categories',
+        'payment-methods' => 'Payment Methods',
+        'shipping-methods' => 'Shipping Methods',
     ],
 
     'header' => [
@@ -185,6 +188,7 @@ return [
             'customer-login' => 'Customer Login',
             'registered-user' => 'Registered User',
             'form-login-text' => 'If you have an account, sign in with your email address.',
+            'sign-up' => 'Sign up',
             'new-customer' => 'New Customer',
             'your-email-address' => 'Your email address',
         ],

@@ -69,6 +69,13 @@ class Bundle extends AbstractType
     protected $isComposite = true;
 
     /**
+     * Product children price can be calculated or not
+     *
+     * @var boolean
+     */
+    protected $isChildrenCalculated = true;
+
+    /**
      * Create a new product type instance.
      *
      * @param  Webkul\Attribute\Repositories\AttributeRepository                $attributeRepository
@@ -124,6 +131,26 @@ class Bundle extends AbstractType
             $this->productBundleOptionRepository->saveBundleOptons($data, $product);
 
         return $product;
+    }
+
+    /**
+     * Returns children ids
+     *
+     * @return array
+     */
+    public function getChildrenIds()
+    {
+        return array_unique($this->product->bundle_options()->pluck('product_id')->toArray());
+    }
+
+    /**
+     * Check if catalog rule can be applied
+     *
+     * @return bool
+     */
+    public function priceRuleCanBeApplied()
+    {
+        return false;
     }
 
     /**

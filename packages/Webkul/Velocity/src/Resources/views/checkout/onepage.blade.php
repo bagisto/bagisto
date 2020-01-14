@@ -11,7 +11,7 @@
 @push('scripts')
     <script type="text/x-template" id="checkout-template">
         <div id="checkout" class="checkout-process offset-1 row col-11">
-            <h1 class="row col-12">Checkout</h1>
+            <h1 class="row col-12">{{ __('velocity::app.checkout.checkout') }}</h1>
 
             <div class="row col-7">
 
@@ -573,20 +573,6 @@
                     onSubmit: function() {
                         var this_this = this;
                         const emptyCouponErrorText = "Please enter a coupon code";
-                        axios.post('{{ route('shop.checkout.check.coupons') }}', {code: this_this.coupon_code})
-                            .then(function(response) {
-                                this_this.$emit('onApplyCoupon');
-
-                                this_this.couponChanged = true;
-                            })
-                            .catch(function(error) {
-                                this_this.couponChanged = true;
-
-                                this_this.error_message = (error.response.data.message === "The given data was invalid.")?
-                                    emptyCouponErrorText :
-                                        (error.response.data.message === "Cannot Apply Coupon")?
-                                            "Sorry, this Coupon code is invalid":error.response.data.message;
-                            });
                     },
 
                     changeCoupon: function() {
@@ -603,16 +589,6 @@
 
                     removeCoupon: function () {
                         var this_this = this;
-
-                        axios.post('{{ route('shop.checkout.remove.coupon') }}')
-                            .then(function(response) {
-                                this_this.$emit('onRemoveCoupon')
-                            })
-                            .catch(function(error) {
-                                window.flashMessages = [{'type' : 'alert-error', 'message' : error.response.data.message}];
-
-                                this_this.$root.addFlashMessages();
-                            });
                     }
                 }
             });

@@ -3,6 +3,7 @@
 namespace Webkul\Velocity\Providers;
 
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 
@@ -27,6 +28,7 @@ class VelocityServiceProvider extends ServiceProvider
     {
         include __DIR__ . '/../Http/helpers.php';
         include __DIR__ . '/../Http/admin-routes.php';
+        include __DIR__ . '/../Http/front-routes.php';
 
         $this->app->register(EventServiceProvider::class);
 
@@ -41,12 +43,32 @@ class VelocityServiceProvider extends ServiceProvider
             __DIR__ . '/../Resources/views/' => resource_path('themes/velocity/views'),
         ]);
 
+        Event::listen([
+            'bagisto.admin.settings.locale.edit.after',
+            'bagisto.admin.settings.locale.create.after',
+        ], function($viewRenderEventManager) {
+                $viewRenderEventManager->addTemplate(
+                    'velocity::admin.settings.locales.locale-logo'
+                );
+            }
+        );
+
+        Event::listen([
+            'bagisto.admin.catalog.category.edit_form_accordian.general.after',
+            'bagisto.admin.catalog.category.create_form_accordian.general.after',
+        ], function($viewRenderEventManager) {
+                $viewRenderEventManager->addTemplate(
+                    'velocity::admin.catelog.categories.category-icon'
+                );
+            }
+        );
+
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'velocity');
 
         $velocityHelper = app('Webkul\Velocity\Helpers\Helper');
         $velocityMetaData = $velocityHelper->getVelocityMetaData();
 
-        view()->share('showRecentlyViewed', false);
+        view()->share('showRecentlyViewed', true);
         view()->share('velocityMetaData', $velocityMetaData);
     }
 

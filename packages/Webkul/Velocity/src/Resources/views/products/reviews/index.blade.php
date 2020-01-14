@@ -27,13 +27,15 @@
 @endpush
 
 @section('content-wrapper')
-    <div class="row review-page-container">
-        @include ('shop::products.view.small-view', ['product' => $product])
+    <div class="container">
+        <div class="row review-page-container">
+            @include ('shop::products.view.small-view', ['product' => $product])
 
-        <div class="col-7 scrollable fs16">
-            <h2 class="full-width mb30">Rating and Reviews</h2>
+            <div class="col-7 scrollable fs16">
+                <h2 class="full-width mb30">Rating and Reviews</h2>
 
-            @include ('shop::products.view.reviews')
+                @include ('shop::products.view.reviews')
+            </div>
         </div>
     </div>
 @endsection

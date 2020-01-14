@@ -1,5 +1,5 @@
 <script type="text/x-template" id="star-ratings-template">
-    <div :class="`stars mr10 fs${size ? size : '16'} ${pushClass ? pushClass : ''}`">
+    <div :class="`stars mr5 fs${size ? size : '16'} ${pushClass ? pushClass : ''}`">
         <input
             v-if="editable"
             type="number"
@@ -7,33 +7,39 @@
             name="rating"
             class="hidden" />
 
-        <span
-            :class="`rango-star-fill ${editable ? 'cursor-pointer' : ''}`"
+        <i
+            :class="`material-icons ${editable ? 'cursor-pointer' : ''}`"
             v-for="(rating, index) in parseInt(showFilled ? showFilled : 3)"
             :key="`${index}${Math.random()}`"
             @click="updateRating(index + 1)">
-        </span>
+            star
+        </i>
 
         <template v-if="!hideBlank">
-            <span
-                :class="`rango-star ${editable ? 'cursor-pointer' : ''}`"
+            <i
+                :class="`material-icons ${editable ? 'cursor-pointer' : ''}`"
                 v-for="(blankStar, index) in (5 - (showFilled ? showFilled : 3))"
                 :key="`${index}${Math.random()}`"
                 @click="updateRating(showFilled + index + 1)">
-            </span>
+                star_border
+            </i>
         </template>
+
+        {{-- <i class="material-icons">star_border</i>
+        <i class="material-icons">star</i> --}}
     </div>
 </script>
 
 <script type="text/x-template" id="cart-btn-template">
     <button
-        :class="`btn btn-link disable-box-shadow ${parseInt(itemCount) ? 'dropdown-icon-custom' : ''}`"
         type="button"
         id="mini-cart"
-        @click="toggleMiniCart">
+        @click="toggleMiniCart"
+        class="btn btn-link disable-box-shadow">
 
         <div class="mini-cart-content">
-            <i class="rango-cart-1 fs24 text-down-3"></i>
+            <i class="icon fs16 cell rango-arrow-down down-icon-position down-arrow-margin"></i>
+            <i class="material-icons-outlined text-down-3">shopping_cart</i>
             <span class="badge" v-text="itemCount"></span>
             <span class="fs18 fw6 cart-text">{{ __('velocity::app.minicart.cart') }}</span>
         </div>
@@ -58,6 +64,19 @@
 
         <span class="control-error" v-if="errors.has(controlName)">@{{ errors.first(controlName) }}</span>
     </div>
+</script>
+
+<script type="text/x-template" id="logo-template">
+    <a
+        :class="`left ${addClass}`"
+        href="{{ route('shop.home.index') }}">
+
+        @if ($logo = core()->getCurrentChannel()->logo_url)
+            <img class="logo" src="{{ $logo }}" />
+        @else
+            <img class="logo" src="{{ asset('themes/velocity/assets/images/logo-text.png') }}" />
+        @endif
+    </a>
 </script>
 
 <script type="text/javascript">
@@ -171,6 +190,11 @@
                     this.$emit('onQtyUpdated', this.qty)
                 }
             }
+        });
+
+        Vue.component('logo-component', {
+            template: '#logo-template',
+            props: ['addClass'],
         });
     })()
 </script>

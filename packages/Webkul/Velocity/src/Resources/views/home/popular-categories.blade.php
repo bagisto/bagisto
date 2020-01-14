@@ -9,7 +9,7 @@
             @endphp
 
             @if ($categoryDetails)
-                <div class="col popular-category-wrapper">
+                <div class="col-lg-3 col-md-12 popular-category-wrapper">
                     <div class="card col-12 no-padding">
                         <div class="category-image">
                             <img src="{{ asset('/storage/' . $categoryDetails->image) }}" />
@@ -18,7 +18,7 @@
                         <div class="card-description">
                             <h3 class="fs20">{{ $categoryDetails->name }}</h3>
 
-                            <ul class="clr-light pl40">
+                            <ul class="font-clr pl30">
                                 @foreach ($categoryDetails->children as $subCategory)
                                     <li>
                                         <a href="{{ $subCategory->slug }}" class="unset">

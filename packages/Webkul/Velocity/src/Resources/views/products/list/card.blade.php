@@ -46,18 +46,21 @@
                     </div>
 
                     <div class="product-rating">
-                        <star-ratings ratings="3"></star-ratings>
+                        <star-ratings ratings="{{ $avgRatings }}"></star-ratings>
                         <span>{{ $totalReviews }} Ratings</span>
                     </div>
 
                     <div class="cart-wish-wrap row mt5">
-                        @include ('shop::products.add-to-cart', ['product' => $product])
+                        @include ('shop::products.add-to-cart', [
+                            'product' => $product,
+                            'addToCartBtnClass' => 'medium-padding'
+                        ])
                     </div>
                 </div>
             </div>
         </div>
     @else
-        <div class="card grid-card" id="product-card-new">
+        <div class="card grid-card product-card-new">
             <a
                 href="{{ route('shop.productOrCategory.index', ['slug' => $product->url_key]) }}"
                 title="{{ $product->name }}"
@@ -67,9 +70,9 @@
                     src="{{ $productBaseImage['medium_image_url'] }}"
                     class="card-img-top"
                     alt="{{ $product->name }}">
-            </a>
 
-            <quick-view-btn details="{{ $product }}"></quick-view-btn>
+                <quick-view-btn details="{{ $product }}"></quick-view-btn>
+            </a>
 
             <div class="card-body">
                 <div class="product-name">
@@ -89,7 +92,7 @@
                 @if ($totalReviews)
                     <div class="product-rating">
                         <star-ratings ratings="{{ $avgRatings }}"></star-ratings>
-                        <span>{{ $totalReviews }} Ratings</span>
+                        <span class="align-top">{{ $totalReviews }} Ratings</span>
                     </div>
                 @else
                     <div class="product-rating">
@@ -98,7 +101,11 @@
                 @endif
 
                 <div class="cart-wish-wrap row">
-                    @include ('shop::products.add-to-cart', ['product' => $product])
+                    @include ('shop::products.add-to-cart', [
+                        'product' => $product,
+                        'addWishlistClass' => 'col-lg-4 col-md-4 col-sm-12 offset-lg-4',
+                        'addToCartBtnClass' => $addToCartBtnClass ?? ''
+                    ])
                 </div>
             </div>
         </div>

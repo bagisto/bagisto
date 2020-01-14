@@ -24,15 +24,12 @@
         </div>
     @endif
 
-
     <div class="item-detail" id="discount-detail" @if ($cart->base_discount_amount && $cart->base_discount_amount > 0) style="display: block;" @else style="display: none;" @endif>
         <label>
-            <b>{{ __('shop::app.checkout.total.disc-amount') }}</b>
+            {{ __('shop::app.checkout.total.disc-amount') }}
         </label>
         <label class="right">
-            <b id="discount-detail-discount-amount">
-                {{ core()->currency($cart->base_discount_amount) }}
-            </b>
+            -{{ core()->currency($cart->base_discount_amount) }}
         </label>
     </div>
 
@@ -42,37 +39,5 @@
         <label class="right" id="grand-total-amount-detail">
             {{ core()->currency($cart->base_grand_total) }}
         </label>
-    </div>
-
-    <div @if (! request()->is('checkout/cart')) v-if="parseInt(discount)" @endif>
-        @if (! request()->is('checkout/cart'))
-            @if (! $cart->coupon_code)
-                <div class="discount">
-                    <div class="discount-group">
-                        <form class="coupon-form" method="post" @submit.prevent="onSubmit">
-                            <div class="control-group mt-20" :class="[errors.has('code') ? 'has-error' : '']" style="margin-bottom: 10px">
-                                <input type="text" class="control" value="" v-model="coupon_code" name="code" placeholder="Enter Coupon Code" v-validate="'required'" style="width: 100%" @change="changeCoupon">
-                            </div>
-
-                            <div class="control-error mb-10" v-if="error_message != null" style="color: #FF6472">* @{{ error_message }}</div>
-
-                            <button class="btn btn-lg btn-black" :disabled="couponChanged">{{ __('shop::app.checkout.onepage.apply-coupon') }}</button>
-                        </form>
-                    </div>
-                </div>
-            @else
-                <div class="discount-details-group">
-                    <div class="item-detail">
-                        <label>{{ __('shop::app.checkout.total.coupon-applied') }}</label>
-
-                        <label class="right" style="display: inline-flex; align-items: center;">
-                            <b>{{ $cart->coupon_code }}</b>
-
-                            <span class="icon cross-icon" title="{{ __('shop::app.checkout.total.remove-coupon') }}" v-on:click="removeCoupon"></span>
-                        </label>
-                    </div>
-                </div>
-            @endif
-        @endif
     </div>
 </div>

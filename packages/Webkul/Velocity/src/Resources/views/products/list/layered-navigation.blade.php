@@ -36,6 +36,10 @@
 
         <layered-navigation></layered-navigation>
 
+        @if ($showRecentlyViewed)
+            @include ('shop::products.list.recently-viewed')
+        @endif
+
     {!! view_render_event('bagisto.shop.products.list.layered-nagigation.after') !!}
 
 </div>
@@ -50,7 +54,13 @@
 
             <div class="filter-content">
                 <div class="filter-attributes">
-                    <filter-attribute-item v-for='(attribute, index) in attributes' :attribute="attribute" :key="index" :index="index" @onFilterAdded="addFilters(attribute.code, $event)" :appliedFilterValues="appliedFilters[attribute.code]">
+                    <filter-attribute-item
+                        :key="index"
+                        :index="index"
+                        :attribute="attribute"
+                        v-for='(attribute, index) in attributes'
+                        @onFilterAdded="addFilters(attribute.code, $event)"
+                        :appliedFilterValues="appliedFilters[attribute.code]">
                     </filter-attribute-item>
 
                 </div>
@@ -74,13 +84,21 @@
 
             <div class="filter-attributes-content">
                 <ul type="none" class="items ml15" v-if="attribute.type != 'price'">
-                    <li class="item" v-for='(option, index) in attribute.options'>
+                    <li
+                        class="item"
+                        v-for='(option, index) in attribute.options'>
 
-                        <span class="checkbox">
-                            <input type="checkbox" :id="option.id" v-bind:value="option.id" v-model="appliedFilters" @change="addFilter($event)"/>
-                            @{{ option.label ? option.label : option.admin_name }}
-                        </span>
-
+                        <div
+                            class="checkbox"
+                            @click="optionClicked(option.id, $event)">
+                            <input
+                                type="checkbox"
+                                :id="option.id"
+                                v-bind:value="option.id"
+                                v-model="appliedFilters"
+                                @change="addFilter($event)" />
+                            <span>@{{ option.label ? option.label : option.admin_name }}</span>
+                        </div>
                     </li>
                 </ul>
 
@@ -112,32 +130,25 @@
                         id="price_to">
                     </div>
                 </div>
-
             </div>
-
         </div>
     </script>
 
-    <script>
+    <script type="text/javascript">
         Vue.component('layered-navigation', {
-
             template: '#layered-navigation-template',
-
             data: function() {
                 return {
+                    appliedFilters: {},
                     attributes: @json($filterAttributes),
-
-                    appliedFilters: {}
                 }
             },
 
             created: function () {
-                var urlParams = new URLSearchParams(window.location.search);
+                let urlParams = new URLSearchParams(window.location.search);
 
-                var this_this = this;
-
-                urlParams.forEach(function (value, index) {
-                    this_this.appliedFilters[index] = value.split(',');
+                urlParams.forEach((value, index) => {
+                    this.appliedFilters[index] = value.split(',');
                 });
             },
 
@@ -162,14 +173,12 @@
                     }
 
                     window.location.href = "?" + params.join('&');
-                }
+                },
             }
         });
 
         Vue.component('filter-attribute-item', {
-
             template: '#filter-attribute-item-template',
-
             props: [
                 'index',
                 'attribute',
@@ -219,7 +228,6 @@
 
             methods: {
                 addFilter: function (e) {
-
                     this.$emit('onFilterAdded', this.appliedFilters)
                 },
 
@@ -236,10 +244,28 @@
                     this.appliedFilters = [];
 
                     this.$emit('onFilterAdded', this.appliedFilters)
+                },
+
+                optionClicked: function (id, {target}) {
+                    let checkbox = $(`#${id}`);
+                    if (checkbox && checkbox.length > 0 && target.type != "checkbox") {
+                        checkbox = checkbox[0];
+                        checkbox.checked = !checkbox.checked;
+
+                        if (checkbox.checked) {
+                            this.appliedFilters.push(id);
+                        } else {
+                            let idPosition = this.appliedFilters.indexOf(id);
+                            if (idPosition == -1)
+                                idPosition = this.appliedFilters.indexOf(id.toString());
+
+                            this.appliedFilters.splice(idPosition, 1);
+                        }
+
+                        this.addFilter(event);
+                    }
                 }
             }
-
         });
-
     </script>
 @endpush

@@ -1149,9 +1149,17 @@ $(document).ready(function () {
                             subCategories1 = $(subCategories1);
 
                             if (type == "mouseover") {
-                                // this.show(subCategories1);
+                                this.show(subCategories1);
+
+                                var sidebarChild = subCategories1.find('.sidebar');
+                                this.show(sidebarChild);
                             } else if (type == "mouseout") {
                                 this.hide(subCategories1);
+                            }
+                        } else {
+                            if (type == "mouseout") {
+                                var _sidebar = $('#' + id);
+                                _sidebar.hide();
                             }
                         }
                     }
@@ -35536,9 +35544,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['id', 'url', 'addClass', 'categories', 'mainSidebar', 'categoryCount'],
+    props: ['id', 'url', 'addClass', 'parentSlug', 'categories', 'mainSidebar', 'categoryCount'],
 
     data: function data() {
         var slicedCategories = this.categories;
@@ -35548,8 +35558,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             slicedCategories = this.categories.slice(0, categoryCount);
         }
 
+        if (this.parentSlug) slicedCategories['parentSlug'] = this.parentSlug;
+
         return {
-            slicedCategories: slicedCategories
+            slicedCategories: slicedCategories,
+            sidebarLevel: Math.floor(Math.random() * 1000)
         };
     },
 
@@ -35558,38 +35571,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var sidebar = $('#' + id);
             if (sidebar && sidebar.length > 0) {
                 sidebar.show();
-            }
-        },
 
-        hover: function hover(index, actionType) {
-            var category = this.categories[index];
+                var actualId = id.replace('sidebar-level-', '');
 
-            if (category.children.length > 0) {
-                var categoryElement = document.getElementById('category-' + category.id);
-                var subCategories = categoryElement.querySelector('.sub-categories');
-
-                if (subCategories.style.display == "" || subCategories.style.display == "none") {
-                    subCategories.style.display = "block";
-                } else {
-                    subCategories.style.display = "none";
+                var sidebarContainer = sidebar.closest('.sub-category-' + actualId);
+                if (sidebarContainer && sidebarContainer.length > 0) {
+                    sidebarContainer.show();
                 }
             }
-        },
-
-        toggleSubCategory: function toggleSubCategory(index) {
-            // let category = this.categories[index];
-
-            // if (category.children.length > 0) {
-            //     let categoryElement = document.getElementById(`category-${category.id}`);
-            //     let subCategories = categoryElement.querySelector('.sub-categories');
-
-            //     if (subCategories.style.display == "" || subCategories.style.display == "none") {
-            //         subCategories.style.display = "block";
-            //     } else {
-            //         subCategories.style.display = "none";
-            //     }
-
-            // }
         }
     }
 });
@@ -35641,7 +35630,13 @@ var render = function() {
                       staticClass: "category unset",
                       class: category.children.length > 0 ? "fw6" : "",
                       attrs: {
-                        href: _vm.url + "/" + category["translations"][0].slug
+                        href:
+                          _vm.url +
+                          "/" +
+                          (_vm.slicedCategories.parentSlug
+                            ? _vm.slicedCategories.parentSlug + "/"
+                            : "") +
+                          category["translations"][0].slug
                       }
                     },
                     [
@@ -35667,10 +35662,13 @@ var render = function() {
                           }
                         },
                         [
-                          category.image
+                          category.category_icon_path
                             ? _c("img", {
                                 attrs: {
-                                  src: _vm.url + "/storage/" + category.image
+                                  src:
+                                    _vm.url +
+                                    "/storage/" +
+                                    category.category_icon_path
                                 }
                               })
                             : _vm._e()
@@ -35681,21 +35679,27 @@ var render = function() {
                         _vm._v(_vm._s(category["name"]))
                       ]),
                       _vm._v(" "),
-                      _c("i", {
-                        staticClass: "rango-arrow-right pr15",
-                        on: {
-                          mouseout: function($event) {
-                            return _vm.toggleSidebar(_vm.id, $event, "mouseout")
-                          },
-                          mouseover: function($event) {
-                            return _vm.toggleSidebar(
-                              _vm.id,
-                              $event,
-                              "mouseover"
-                            )
-                          }
-                        }
-                      })
+                      category.children.length && category.children.length > 0
+                        ? _c("i", {
+                            staticClass: "rango-arrow-right pr15",
+                            on: {
+                              mouseout: function($event) {
+                                return _vm.toggleSidebar(
+                                  _vm.id,
+                                  $event,
+                                  "mouseout"
+                                )
+                              },
+                              mouseover: function($event) {
+                                return _vm.toggleSidebar(
+                                  _vm.id,
+                                  $event,
+                                  "mouseover"
+                                )
+                              }
+                            }
+                          })
+                        : _vm._e()
                     ]
                   ),
                   _vm._v(" "),
@@ -35703,13 +35707,21 @@ var render = function() {
                     ? _c("div", { staticClass: "sub-category-container" }, [
                         _c(
                           "div",
-                          { staticClass: "sub-categories" },
+                          {
+                            class:
+                              "sub-categories sub-category-" +
+                              (_vm.sidebarLevel + index)
+                          },
                           [
                             _c("sidebar-component", {
                               attrs: {
                                 url: _vm.url,
-                                id: "sidebar-level-" + Math.random(),
-                                categories: category.children
+                                categories: category.children,
+                                id:
+                                  "sidebar-level-" + (_vm.sidebarLevel + index),
+                                "parent-slug": category.parentSlug
+                                  ? category.parentSlug
+                                  : category["translations"][0].slug
                               }
                             })
                           ],
@@ -35810,7 +35822,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['slidesCount', 'slidesPerPage', 'navigationEnabled', 'paginationEnabled', 'addClass']
+    props: ['id', 'addClass', 'slidesCount', 'slidesPerPage', 'navigationEnabled', 'paginationEnabled'],
+
+    data: function data() {
+        return {};
+    }
 });
 
 /***/ }),
@@ -36494,119 +36510,104 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "row mb20 unselectable col-12", class: _vm.rowClass },
-    [
-      _c("div", { staticClass: "col-lg-4 no-padding" }, [
-        _c("h2", { staticClass: "fs20" }, [_vm._v(_vm._s(_vm.headerHeading))])
-      ]),
-      _vm._v(" "),
+  return _c("div", { staticClass: "row mb15 col-12", class: _vm.rowClass }, [
+    _c("div", { staticClass: "col-4 no-padding" }, [
+      _c("h2", { staticClass: "fs20 fw6" }, [_vm._v(_vm._s(_vm.headerHeading))])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-8 no-padding" }, [
       _c(
         "div",
-        { staticClass: "col-lg-8 no-padding popular-product-categories" },
+        { staticClass: "row justify-content-end text-right" },
         [
-          _c(
-            "div",
-            { staticClass: "row justify-content-end text-right" },
-            [
-              _vm.tabs
-                ? _vm._l(_vm.tabs.slice(0, 3), function(tab, index) {
-                    return _c(
-                      "div",
-                      {
-                        key: index,
-                        staticClass: "col-lg-2 no-padding",
-                        attrs: { title: tab },
-                        on: { click: _vm.switchTab }
-                      },
-                      [
-                        _c(
-                          "h2",
-                          {
-                            staticClass: "fs14 fw6 cursor-pointer tab",
-                            class: index == 0 ? "active" : ""
-                          },
-                          [_vm._v(_vm._s(tab))]
-                        )
-                      ]
-                    )
-                  })
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.scrollable && !(_vm.scrollable == "")
-                ? [
+          _vm.tabs
+            ? _vm._l(_vm.tabs.slice(0, 3), function(tab, index) {
+                return _c(
+                  "div",
+                  {
+                    key: index,
+                    staticClass: "col-lg-2 no-padding",
+                    attrs: { title: tab },
+                    on: { click: _vm.switchTab }
+                  },
+                  [
                     _c(
-                      "div",
-                      { staticClass: "col-lg-2 no-padding switch-buttons" },
-                      [
-                        _c(
-                          "div",
-                          { staticClass: "row justify-content-center" },
-                          [
-                            _c("h2", {
-                              staticClass:
-                                "col-lg-1 no-padding v-mr-20 fw6 cursor-pointer",
-                              attrs: { title: "previous" },
-                              domProps: { innerHTML: _vm._s("<") },
-                              on: {
-                                click: function($event) {
-                                  return _vm.navigation("prev")
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "h2",
-                              {
-                                staticClass:
-                                  "col-lg-1 no-padding fw6 cursor-pointer",
-                                attrs: { title: "next" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.navigation("next")
-                                  }
-                                }
-                              },
-                              [_vm._v(">")]
-                            )
-                          ]
-                        )
-                      ]
+                      "h2",
+                      {
+                        staticClass: "fs14 fw6 cursor-pointer tab",
+                        class: index == 0 ? "active" : ""
+                      },
+                      [_vm._v(_vm._s(tab))]
                     )
                   ]
-                : _vm._e(),
-              _vm._v(" "),
-              !(_vm.viewAll == "false" || _vm.viewAll == "") && _vm.viewAll
-                ? [
-                    _c("div", { staticClass: "mr15" }, [
+                )
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.scrollable && !(_vm.scrollable == "")
+            ? [
+                _c(
+                  "div",
+                  { staticClass: "col-lg-2 no-padding switch-buttons" },
+                  [
+                    _c("div", { staticClass: "row justify-content-center" }, [
+                      _c("h2", {
+                        staticClass:
+                          "col-lg-1 no-padding v-mr-20 fw6 cursor-pointer",
+                        attrs: { title: "previous" },
+                        domProps: { innerHTML: _vm._s("<") },
+                        on: {
+                          click: function($event) {
+                            return _vm.navigation("prev")
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
                       _c(
-                        "a",
+                        "h2",
                         {
-                          staticClass: "remove-decoration normal-text",
-                          attrs: {
-                            href: _vm.viewAll,
-                            title: "View all " + _vm.headerHeading + " products"
+                          staticClass: "col-lg-1 no-padding fw6 cursor-pointer",
+                          attrs: { title: "next" },
+                          on: {
+                            click: function($event) {
+                              return _vm.navigation("next")
+                            }
                           }
                         },
-                        [
-                          _c(
-                            "h2",
-                            { staticClass: "fs14 fw6 cursor-pointer tab" },
-                            [_vm._v("View All")]
-                          )
-                        ]
+                        [_vm._v(">")]
                       )
                     ])
                   ]
-                : _vm._e()
-            ],
-            2
-          )
-        ]
+                )
+              ]
+            : _vm._e(),
+          _vm._v(" "),
+          !(_vm.viewAll == "false" || _vm.viewAll == "") && _vm.viewAll
+            ? [
+                _c("div", { staticClass: "mr15" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "remove-decoration normal-text",
+                      attrs: {
+                        href: _vm.viewAll,
+                        title: "View all " + _vm.headerHeading + " products"
+                      }
+                    },
+                    [
+                      _c("h2", { staticClass: "fs14 fw6 cursor-pointer tab" }, [
+                        _vm._v("View All")
+                      ])
+                    ]
+                  )
+                ])
+              ]
+            : _vm._e()
+        ],
+        2
       )
-    ]
-  )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -36846,6 +36847,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['heading', 'headerContent', 'isEnabled']
@@ -36861,8 +36879,27 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "row velocity-divide-page remove-padding-margin" },
+    { staticClass: "row velocity-divide-page remove-padding-margin vc-header" },
     [
+      _c("div", { staticClass: "vc-small-screen container" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-8" }, [
+            _c(
+              "div",
+              { staticClass: "row col-12" },
+              [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("logo-component", { attrs: { "add-class": "pl10" } })
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _vm._m(1)
+        ])
+      ]),
+      _vm._v(" "),
       _c(
         "div",
         {
@@ -36878,7 +36915,9 @@ var render = function() {
           }
         },
         [
-          _c("i", { class: "rango-view-list text-down-4 align-vertical-top" }),
+          _c("i", {
+            staticClass: "rango-view-list text-down-4 align-vertical-top fs18"
+          }),
           _vm._v(" "),
           _c("span", {
             staticClass: "pl5",
@@ -36895,7 +36934,7 @@ var render = function() {
       _c("div", { staticClass: "content-list right" }, [
         _c(
           "ul",
-          { staticClass: "no-margin", attrs: { type: "none" } },
+          { staticClass: "no-margin ul-shadow", attrs: { type: "none" } },
           _vm._l(_vm.headerContent, function(content, index) {
             return _c("li", { key: index }, [
               content["content_type"] == "link"
@@ -36918,7 +36957,28 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "hamburger-wrapper" }, [
+      _c("i", { staticClass: "rango-toggle hamburger" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row col-4 right-vc-header" }, [
+      _c("i", { staticClass: "fs16 fw6 rango-search" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "material-icons text-down-3" }, [
+        _vm._v("shopping_cart")
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

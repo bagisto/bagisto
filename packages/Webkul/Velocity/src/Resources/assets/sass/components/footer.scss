@@ -3,68 +3,66 @@
     background-color: #ffffff;
     display: inline-block;
 
-    .newsletter-subscription {
-        padding: 10px 130px;
-        background-color: #4d7ea8;
-
-        .newsletter-wrapper {
-            display: flex;
-            display: -webkit-box;
-            display: -ms-flexbox;
-            -ms-flex-pack: justify;
-            -webkit-box-pack: justify;
-            justify-content: space-between;
-
-            input.subscribe-field {
-                width: 300px;
-                height: 38px;
-                border: none;
-                font-size: 18px;
-                padding: 10px 20px;
-                color: rgba(0,0,0,0.83);
-                border-radius: 5px 0px 0px 5px;
-            }
-
-            button.subscribe-btn {
-                left: -1px;
-                height: 38px;
-                font-size: 18px;
-                line-height: 10px;
-                position: relative;
-                border-radius: 0px 5px 5px 0px;
-            }
-
-            .social-icons {
-                padding: 20px 0;
-                color: $light-color;
-
-                i {
-                    margin: 0;
-                    cursor: pointer;
-                }
-
-                .within-circle {
-                    background: #4d7ea8;
-                    border: 1px solid rgba(255, 255, 255, 0.52);
-                }
-
-                img {
-                    background: #4d7ea8;
-                    border: 1px solid rgba(255, 255, 255, 0.52);
-                    padding-left: 15px;
-                    padding-right: 15px;
-                }
-            }
-
-            .subscribe-newsletter {
-                padding: 30px 0;
-            }
-        }
-    }
-
     .footer-content {
         .newsletter-subscription {
             color: white;
+            padding: 10px 130px;
+            background-color: #4d7ea8;
+
+            .newsletter-wrapper {
+                display: flex;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                -ms-flex-pack: justify;
+                -webkit-box-pack: justify;
+                justify-content: space-between;
+
+                input.subscribe-field {
+                    width: 300px;
+                    border: none;
+                    height: 38px;
+                    font-size: 18px;
+                    max-width: 250px;
+                    padding: 10px 20px;
+                    color: rgba(0,0,0,0.83);
+                }
+
+                button.subscribe-btn {
+                    left: -2px;
+                    height: 38px;
+                    font-size: 18px;
+                    max-width: 110px;
+                    line-height: 10px;
+                    position: relative;
+                }
+
+                .social-icons {
+                    height: 100%;
+                    padding: 20px 0;
+                    color: $light-color;
+
+                    i {
+                        margin: 0;
+                        cursor: pointer;
+                    }
+
+                    .within-circle {
+                        background: #4d7ea8;
+                        border: 1px solid rgba(255, 255, 255, 0.52);
+                    }
+
+                    img {
+                        background: #4d7ea8;
+                        border: 1px solid rgba(255, 255, 255, 0.52);
+                        padding-left: 15px;
+                        padding-right: 15px;
+                    }
+                }
+
+                .subscribe-newsletter {
+                    padding: 25px 0 30px 0;
+                }
+            }
         }
 
         > .row {
@@ -83,8 +81,16 @@
                     font-size: 14px;
                     line-height: 2.5rem;
 
-                    li a {
-                        color: rgba(255,255,255,0.83);
+                    ul {
+                        margin-bottom: 0px;
+
+                        li {
+                            margin-bottom: 5px;
+
+                            a {
+                                color: rgba(255,255,255,0.83);
+                            }
+                        }
                     }
                 }
             }
@@ -151,9 +157,7 @@
     }
 
     .top-brands {
-        padding: 40px;
-        padding-left: 10%;
-        padding-right: 10%;
+        padding: 30px 130px;
 
         .top-brands-body {
             ul {
@@ -161,6 +165,9 @@
                 display: inline-block;
 
                 li {
+                    margin-left: 0;
+                    font-size: 16px;
+                    padding: 15px 0 0 0;
                     display: inline-block;
                 }
             }
@@ -180,16 +187,4 @@
         }
     }
 
-}
-
-@media all and (max-width: 720px) {
-    .footer {
-        padding-left: 15px;
-    }
-    .footer .footer-list-container {
-        padding-left: 0px !important;
-    }
-    .footer .currency {
-        display: block !important;
-    }
 }

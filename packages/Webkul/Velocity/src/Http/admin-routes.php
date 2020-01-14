@@ -43,10 +43,4 @@ Route::group(['middleware' => ['web']], function () {
             });
         });
     });
-
-    Route::group(['middleware' => ['theme']], function () {
-        Route::get('/search', 'Webkul\Velocity\Http\Controllers\Shop\SearchController@index')->defaults('_config', [
-            'view' => 'velocity::search.search'
-        ])->name('shop.search.index');
-    });
 });

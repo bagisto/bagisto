@@ -15,10 +15,11 @@
                 @mouseout="toggleSidebar(id, $event, 'mouseout')"
                 @mouseover="toggleSidebar(id, $event, 'mouseover')">
 
+
                 <a
                     class="category unset"
                     :class="(category.children.length > 0) ? 'fw6' : ''"
-                    :href="`${url}/${category['translations'][0].slug}`">
+                    :href="`${url}/${slicedCategories.parentSlug ? slicedCategories.parentSlug + '/' : ''}${category['translations'][0].slug}`">
 
                     <div
                         class="category-icon"
@@ -26,15 +27,15 @@
                         @mouseover="toggleSidebar(id, $event, 'mouseover')">
 
                         <img
-                            v-if="category.image"
-                            :src="`${url}/storage/${category.image}`" />
+                            v-if="category.category_icon_path"
+                            :src="`${url}/storage/${category.category_icon_path}`" />
                     </div>
                     <span class="category-title">{{ category['name'] }}</span>
                     <i
                         class="rango-arrow-right pr15"
                         @mouseout="toggleSidebar(id, $event, 'mouseout')"
-                        @mouseover="toggleSidebar(id, $event, 'mouseover')">
-                        <!-- v-if="category.children.length && category.children.length > 0"> -->
+                        @mouseover="toggleSidebar(id, $event, 'mouseover')"
+                        v-if="category.children.length && category.children.length > 0">
                     </i>
                 </a>
 
@@ -42,11 +43,12 @@
                     class="sub-category-container"
                     v-if="category.children.length && category.children.length > 0">
 
-                    <div class="sub-categories">
+                    <div :class="`sub-categories sub-category-${sidebarLevel+index}`">
                         <sidebar-component
                             :url="url"
-                            :id="`sidebar-level-${Math.random()}`"
-                            :categories="category.children">
+                            :categories="category.children"
+                            :id="`sidebar-level-${sidebarLevel+index}`"
+                            :parent-slug="category.parentSlug ? category.parentSlug : category['translations'][0].slug">
                         </sidebar-component>
                     </div>
                 </div>
@@ -61,6 +63,7 @@
             'id',
             'url',
             'addClass',
+            'parentSlug',
             'categories',
             'mainSidebar',
             'categoryCount'
@@ -76,8 +79,12 @@
                 slicedCategories = this.categories.slice(0, categoryCount);
             }
 
+            if (this.parentSlug)
+                slicedCategories['parentSlug'] = this.parentSlug;
+
             return {
-                slicedCategories
+                slicedCategories,
+                sidebarLevel: Math.floor(Math.random() * 1000),
             }
         },
 
@@ -86,40 +93,16 @@
                 let sidebar = $(`#${id}`);
                 if (sidebar && sidebar.length > 0) {
                     sidebar.show();
-                }
-            },
 
-            hover: function (index, actionType) {
-                let category = this.categories[index];
+                    let actualId = id.replace('sidebar-level-', '');
 
-                if (category.children.length > 0) {
-                    let categoryElement = document.getElementById(`category-${category.id}`);
-                    let subCategories = categoryElement.querySelector('.sub-categories');
-
-                    if (subCategories.style.display == "" || subCategories.style.display == "none") {
-                        subCategories.style.display = "block";
-                    } else {
-                        subCategories.style.display = "none";
+                    let sidebarContainer = sidebar.closest(`.sub-category-${actualId}`)
+                    if (sidebarContainer && sidebarContainer.length > 0) {
+                        sidebarContainer.show();
                     }
 
                 }
             },
-
-            toggleSubCategory: function (index) {
-                // let category = this.categories[index];
-
-                // if (category.children.length > 0) {
-                //     let categoryElement = document.getElementById(`category-${category.id}`);
-                //     let subCategories = categoryElement.querySelector('.sub-categories');
-
-                //     if (subCategories.style.display == "" || subCategories.style.display == "none") {
-                //         subCategories.style.display = "block";
-                //     } else {
-                //         subCategories.style.display = "none";
-                //     }
-
-                // }
-            }
         }
     }
 </script>

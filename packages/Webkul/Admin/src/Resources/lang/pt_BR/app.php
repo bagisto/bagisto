@@ -976,7 +976,7 @@ return [
     ],
 
     'footer' => [
-        'copy-right' => '© Copyright '.date('Y').' Webkul Software, Todos os direitos reservados.'
+        'copy-right' => 'Desenvolvido por <a href="https://bagisto.com/" target="_blank">Bagisto</a>, um projeto comunitário da <a href="https://webkul.com/" target="_blank">Webkul</a>'
     ],
 
     'admin' => [

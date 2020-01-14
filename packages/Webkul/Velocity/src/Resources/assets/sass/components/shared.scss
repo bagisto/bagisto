@@ -134,6 +134,9 @@
 .mr20 {
     margin-right: 20px;
 }
+.mb5 {
+    margin-bottom: 5px !important;
+}
 .mb10 {
     margin-bottom: 10px !important;
 }
@@ -184,6 +187,9 @@
 .cursor-pointer {
     cursor: pointer;
 }
+.cursor-default {
+    cursor: default;
+}
 
 .grey {
     color: rgb(158, 158, 158);
@@ -193,6 +199,9 @@
 }
 .clr-dark {
     color: rgba(255,255,255,0.52);
+}
+.font-clr {
+    color: $font-color;
 }
 
 .display-inbl {
@@ -238,6 +247,7 @@
 .theme-btn {
     border: none;
     cursor: pointer;
+    font-weight: 600;
     padding: 10px 20px;
     vertical-align: top;
     color: $light-color !important;
@@ -346,7 +356,7 @@
 
     #quick-view-btn-container {
         :hover {
-            color: white !important;
+            color: $white-color !important;
         }
     }
 
@@ -411,12 +421,12 @@
             }
 
             span {
-                vertical-align: middle;
+                vertical-align: top;
             }
         }
 
         .product-information {
-            height: 150px;
+            height: 200px;
             display: table;
 
             > div {
@@ -432,13 +442,17 @@
         }
 
         .wishlist-icon {
-            height: 34px;
+            height: 40px;
             display: table;
 
             i {
                 display: table-cell;
                 vertical-align: middle;
             }
+        }
+
+        .add-to-cart-btn {
+            max-width: 150px;
         }
     }
 
@@ -463,6 +477,14 @@
     }
 }
 
+.small-padding {
+    padding: 3px 4px !important;
+}
+
+.medium-padding {
+    padding: 3px 10px !important;
+}
+
 .general-container {
     cursor: pointer;
 }
@@ -472,10 +494,10 @@
         border: none;
     }
 }
-#product-card-new:hover,
+.product-card-new:hover,
 .lg-card-container:hover,
 .general-container:hover {
-    box-shadow: 0 6px 14px 0 rgba(0,0,0,0.14);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 .lg-card-container:hover {
@@ -488,11 +510,18 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    color: #555555;
 }
 
 .small-card-container {
     cursor: pointer;
     margin-bottom: 10px;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+
+    .material-icons {
+        font-size: 16px;
+    }
 
     .product-image-container {
         padding: 0;
@@ -503,12 +532,18 @@
         @extend .bg-image;
 
         height: 100%;
+        background-position: center;
     }
 
     .card-body {
         width: 50%;
         display: inline-block;
         padding: 10px 0 !important;
+    }
+
+    .sticker,
+    .regular-price {
+        display: none;
     }
 }
 
@@ -581,7 +616,9 @@ a {
         text-decoration: none;
     }
 
-    &.remove-decoration:hover {
+    &.remove-decoration:hover,
+    &.remove-decoration:active,
+    &.remove-decoration:focus {
         text-decoration: none;
     }
 }
@@ -625,9 +662,13 @@ a {
     width: 100%;
     cursor: pointer;
 
+    .VueCarousel-inner {
+        padding-top: 5px;
+    }
+
     .VueCarousel-slide:nth-of-type(1) {
-        #product-card-new {
-            margin-left: 0px;
+        .product-card-new {
+            margin-left: 5px;
         }
     }
 }
@@ -647,6 +688,8 @@ a {
 .scrollable {
     max-height: 100vh;
     overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 .scrollable::-webkit-scrollbar {
@@ -697,4 +740,35 @@ button[disabled] {
         display: table-cell;
         vertical-align: middle;
     }
+}
+
+.rango-default {
+    speak: none;
+    line-height: 1;
+    font-style: normal;
+    font-weight: normal;
+    text-transform: none;
+    font-variant: normal;
+    -webkit-font-smoothing: antialiased;
+    font-family: 'Webkul Rango' !important;
+}
+
+.quick-view-name {
+    font-size: 24px;
+}
+
+.quick-view-price {
+    font-size: 30px;
+}
+
+.description-text {
+    font-size: 14px;
+}
+
+.max-height-350 {
+    max-height: 350px;
+}
+
+.border-normal {
+    border: $border-normal;
 }
