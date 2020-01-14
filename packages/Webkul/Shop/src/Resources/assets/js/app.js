@@ -18,7 +18,8 @@ require("ez-plus/src/jquery.ez-plus.js");
 Vue.use(VeeValidate, {
     dictionary: {
         ar: { messages: localeMessages.ar }
-    }
+    },
+    events: 'input|change|blur',
 });
 
 Vue.prototype.$http = axios
