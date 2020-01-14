@@ -33,7 +33,8 @@ class CustomerCest
 
     public function updateCustomerAddress(FunctionalTester $I)
     {
-        $faker = Faker\Factory::create();
+        $I->wantTo('Instantiate a european faker factory to have the vat provider available');
+        $faker = Faker\Factory::create('at_AT');
 
         $formCssSelector = '#customer-address-form';
 
@@ -49,7 +50,7 @@ class CustomerCest
 
         $this->fields = [
             'company_name' => $faker->company,
-            'vat_id'       => $faker->randomNumber(9),
+            'vat_id'       => 'INVALIDVAT',
             'address1[]'   => $faker->streetAddress,
             'country'      => $faker->countryCode,
             'state'        => $faker->state,
@@ -77,8 +78,8 @@ class CustomerCest
         $I->submitForm($formCssSelector, $this->fields);
         $I->seeInSource('The given vat id has a wrong format');
 
-        // valid vat id:
-        $this->fields['vat_id'] = 'DE123456789';
+        $I->wantTo('enter a valid vat id');
+        $this->fields['vat_id'] = $faker->vat(false);
 
         $I->submitForm($formCssSelector, $this->fields);
 
