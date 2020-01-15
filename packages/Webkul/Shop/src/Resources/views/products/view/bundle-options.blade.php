@@ -98,7 +98,7 @@
 
                     <div v-if="option.type == 'multiselect'">
                         <select class="control" :name="'bundle_options[' + option.id + '][]'" v-model="selected_product" v-validate="option.is_required ? 'required' : ''" :data-vv-as="'&quot;' + option.label + '&quot;'" multiple>
-                            <option value="0">{{ __('shop::app.products.none') }}</option>
+                            <option value="0" v-if="! option.is_required">{{ __('shop::app.products.none') }}</option>
                             <option v-for="(product, index2) in option.products" :value="product.id">
                                 @{{ product.name + ' + ' + product.price.final_price.formated_price }}
                             </option>
