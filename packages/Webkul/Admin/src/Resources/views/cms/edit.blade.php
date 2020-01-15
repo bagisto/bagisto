@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="page-action">
-                    @if ($page->translate($locale)))
+                    @if ($page->translate($locale))
                         <a href="{{ route('shop.cms.page', $page->translate($locale)['url_key']) }}" class="btn btn-lg btn-primary" target="_blank">
                             {{ __('admin::app.cms.pages.preview') }}
                         </a>
