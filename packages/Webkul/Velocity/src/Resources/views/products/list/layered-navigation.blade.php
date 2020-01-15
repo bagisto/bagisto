@@ -97,6 +97,8 @@
                                 v-bind:value="option.id"
                                 v-model="appliedFilters"
                                 @change="addFilter($event)" />
+
+                                <label for="checkbox"></label>
                             <span>@{{ option.label ? option.label : option.admin_name }}</span>
                         </div>
                     </li>
