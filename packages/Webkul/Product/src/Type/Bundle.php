@@ -405,7 +405,9 @@ class Bundle extends AbstractType
      */
     public function prepareForCart($data)
     {
-        if (! isset($data['bundle_options']))
+        $data['bundle_options'] = array_filter($this->validateBundleOptionForCart($data['bundle_options']));
+
+        if (! isset($data['bundle_options']) || ! count($data['bundle_options']))
             return trans('shop::app.checkout.cart.integrity.missing_options');
         
         $products = parent::prepareForCart($data);
@@ -488,6 +490,27 @@ class Bundle extends AbstractType
 
         return $options1['bundle_options'] == $options2['bundle_options']
                 && $options1['bundle_option_qty'] == $this->getOptionQuantities($options2);
+    }
+
+    /**
+     * Remove invalid options from add to cart request
+     *
+     * @param array $data
+     * @return array
+     */
+    public function validateBundleOptionForCart($data)
+    {
+        foreach ($data as $key => $value) {
+            if (is_array($value)) {
+                $data[$key] = $this->validateBundleOptionForCart($value);
+            } elseif ($value && $value) {
+                $data[$key] = (int)$value;
+            } else {
+                unset($data[$key]);
+            }
+        }
+
+        return $data;
     }
 
     /**
