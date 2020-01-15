@@ -54,4 +54,12 @@ class AdminHelper
 
         return $image;
     }
+
+    public function storeSliderDetails($slider)
+    {
+        $slider->slider_path = request()->get('slider_path');
+        $slider->save();
+
+        return true;
+    }
 }

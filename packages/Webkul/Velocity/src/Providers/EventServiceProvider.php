@@ -34,6 +34,11 @@ class EventServiceProvider extends ServiceProvider
             'catalog.category.update.after',
         ], 'Webkul\Velocity\Helpers\AdminHelper@storeCategoryIcon');
 
+        Event::listen([
+            'core.settings.slider.create.after',
+            'core.settings.slider.update.after',
+        ], 'Webkul\Velocity\Helpers\AdminHelper@storeSliderDetails');
+
         Event::listen('checkout.order.save.after', 'Webkul\Velocity\Helpers\Helper@topBrand');
     }
 }

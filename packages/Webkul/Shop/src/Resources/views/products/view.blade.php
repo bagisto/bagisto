@@ -52,7 +52,7 @@
                         @else
                             <input type="hidden" name="quantity" value="1">
                         @endif
-                        
+
 
                         {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
 
@@ -63,7 +63,7 @@
                         @include ('shop::products.view.grouped-products')
 
                         @include ('shop::products.view.bundle-options')
-                        
+
                         {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
 
                         <accordian :title="'{{ __('shop::app.products.description') }}'" :active="true">

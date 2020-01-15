@@ -197,8 +197,9 @@ header #search-form > *:focus {
 .product-policy-container {
     .card {
         border: none;
-        padding: 20px;
-        background: #FFFFFF;
+        padding: 20px 10px;
+        background: $white-color;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 
         .col-sm-10 {
             line-height: 3.5rem;
@@ -386,12 +387,26 @@ header #search-form > *:focus {
 
 /* Customer Reviews */
 .reviews-container {
+    .review-wrapper:nth-of-type(1) {
+        padding: 0 8px 0 0;
+    }
+    .review-wrapper {
+        padding: 0 8px;
+    }
+    .review-wrapper:nth-last-of-type(2) {
+        padding: 0 0 0 8px;
+    }
+    .review-wrapper:nth-last-of-type(1) {
+        padding: 0 0 0 16px;
+    }
+
     .card {
         border: none;
         height: 100%;
         padding: 20px;
         padding-left: 15px;
         padding-right: 15px;
+        box-shadow: 0 4px 17px 0 rgba(0,0,0,0.11);
 
         .customer-info {
             > div {
@@ -411,8 +426,8 @@ header #search-form > *:focus {
 
         .review-info {
             height: 100%;
-            padding: 20px 25px;
-            box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.14);
+            padding: 20px 15px;
+            box-shadow: 0 4px 17px 0 rgba(0,0,0,0.11);
 
             > div:not(:last-child) {
                 margin-bottom: 15px;

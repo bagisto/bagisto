@@ -104,6 +104,8 @@ return [
             'advertisement-one' => 'Advertisement One Images',
             'product-view-image' => 'Product View Image',
             'footer' => 'Footer',
+            'product-policy' => 'Product Policy',
+            'slider-path' => 'Slider Path',
         ],
         'category' => [
             'title' => 'Category Menu List',

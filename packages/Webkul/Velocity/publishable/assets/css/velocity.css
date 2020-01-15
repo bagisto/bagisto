@@ -2618,8 +2618,10 @@ header #search-form > *:focus {
 /* product policy section */
 .product-policy-container .card {
   border: none;
-  padding: 20px;
+  padding: 20px 10px;
   background: #FFFFFF;
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .product-policy-container .card .col-sm-10 {
@@ -2785,12 +2787,30 @@ header #search-form > *:focus {
 
 /* hot & popular categories */
 /* Customer Reviews */
+.reviews-container .review-wrapper:nth-of-type(1) {
+  padding: 0 8px 0 0;
+}
+
+.reviews-container .review-wrapper {
+  padding: 0 8px;
+}
+
+.reviews-container .review-wrapper:nth-last-of-type(2) {
+  padding: 0 0 0 8px;
+}
+
+.reviews-container .review-wrapper:nth-last-of-type(1) {
+  padding: 0 0 0 16px;
+}
+
 .reviews-container .card {
   border: none;
   height: 100%;
   padding: 20px;
   padding-left: 15px;
   padding-right: 15px;
+  -webkit-box-shadow: 0 4px 17px 0 rgba(0, 0, 0, 0.11);
+          box-shadow: 0 4px 17px 0 rgba(0, 0, 0, 0.11);
 }
 
 .reviews-container .card .customer-info > div {
@@ -2809,9 +2829,9 @@ header #search-form > *:focus {
 
 .reviews-container .card .review-info {
   height: 100%;
-  padding: 20px 25px;
-  -webkit-box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.14);
-          box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.14);
+  padding: 20px 15px;
+  -webkit-box-shadow: 0 4px 17px 0 rgba(0, 0, 0, 0.11);
+          box-shadow: 0 4px 17px 0 rgba(0, 0, 0, 0.11);
 }
 
 .reviews-container .card .review-info > div:not(:last-child) {
@@ -4119,6 +4139,11 @@ button[disabled] {
 
 .product-detail .right .product-price .sticker {
   display: none;
+}
+
+.product-detail .right .product-price span:nth-child(1),
+.product-detail .right .product-price .special-price {
+  font-size: 24px;
 }
 
 .product-detail .thumb-list {

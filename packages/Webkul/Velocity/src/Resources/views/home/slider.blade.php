@@ -8,9 +8,11 @@
             @foreach ($sliderData as $index => $slider)
 
                 <slide slot="slide-{{ $index }}">
-                    <img
-                        class="col-12 no-padding banner-icon"
-                        src="{{ url()->to('/') . '/storage/' . $slider['path'] }}" />
+                    <a @if($slider['slider_path']) href="{{ $slider['slider_path'] }}" @endif>
+                        <img
+                            class="col-12 no-padding banner-icon"
+                            src="{{ url()->to('/') . '/storage/' . $slider['path'] }}" />
+                    </a>
                 </slide>
 
             @endforeach

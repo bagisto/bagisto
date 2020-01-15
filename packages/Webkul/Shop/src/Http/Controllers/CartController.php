@@ -61,7 +61,7 @@ class CartController extends Controller
     /**
      * Method to populate the cart page which will be populated before the checkout process.
      *
-     * @return \Illuminate\View\View 
+     * @return \Illuminate\View\View
      */
     public function index()
     {
