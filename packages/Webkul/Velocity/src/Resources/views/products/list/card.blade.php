@@ -67,8 +67,9 @@
                 class="product-image-container">
 
                 <img
-                    src="{{ $productBaseImage['medium_image_url'] }}"
+					loading="lazy"
                     class="card-img-top"
+                    src="{{ $productBaseImage['medium_image_url'] }}"
                     alt="{{ $product->name }}">
 
                 <quick-view-btn details="{{ $product }}"></quick-view-btn>

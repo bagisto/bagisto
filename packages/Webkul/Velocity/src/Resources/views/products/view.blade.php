@@ -40,11 +40,7 @@
     {!! view_render_event('bagisto.shop.products.view.before', ['product' => $product]) !!}
 
         <div class="row no-margin">
-            @if ($showRecentlyViewed)
-                <section class="col-9 product-detail">
-            @else
                 <section class="col-12 product-detail">
-            @endif
                     <div class="layouter">
                         <product-view>
                             <div class="form-container">
@@ -53,24 +49,12 @@
                                 <input type="hidden" name="product_id" value="{{ $product->product_id }}">
 
                                 {{-- product-gallery --}}
-                                <div class="left
-                                    @if ($showRecentlyViewed)
-                                        col-lg-6
-                                    @else
-                                        col-lg-5
-                                    @endif
-                                ">
+                                <div class="left col-lg-5">
                                     @include ('shop::products.view.gallery')
                                 </div>
 
                                 {{-- right-section --}}
-                                <div class="right
-                                    @if ($showRecentlyViewed)
-                                        col-lg-6
-                                    @else
-                                        col-lg-7
-                                    @endif
-                                ">
+                                <div class="right col-lg-7">
                                     {{-- product-info-section --}}
                                     <div class="row info">
                                         <h2 class="col-lg-12">{{ $product->name }}</h2>
@@ -95,6 +79,7 @@
                                         </div>
 
                                         @include ('shop::products.add-to-cart', [
+                                            'form' => false,
                                             'product' => $product,
                                             'showCartIcon' => false,
                                         ])
@@ -155,10 +140,6 @@
                         <img src="{{ url()->to('/') }}/storage/{{ $image }}" />
                     @endif
                 @endforeach
-
-                @if ($showRecentlyViewed)
-                    @include ('shop::products.list.recently-viewed')
-                @endif
             </div>
 
         </div>

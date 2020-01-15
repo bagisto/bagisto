@@ -6,6 +6,7 @@ use DB;
 use Webkul\Product\Helpers\Review;
 use Webkul\Product\Models\Product as ProductModel;
 use Webkul\Velocity\Repositories\OrderBrandsRepository;
+use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Velocity\Repositories\VelocityMetadataRepository;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Product\Repositories\ProductRepository as ProductRepository;
@@ -41,6 +42,13 @@ class Helper extends Review
     protected $attributeOption;
 
     /**
+     * ProductReviewRepository object
+     *
+     * @var object
+     */
+    protected $productReviewRepository;
+
+    /**
      * VelocityMetadata object
      *
      * @var object
@@ -48,16 +56,18 @@ class Helper extends Review
     protected $velocityMetadataRepository;
 
     public function __construct(
-        VelocityMetadataRepository $velocityMetadataRepository,
-        OrderBrandsRepository $orderBrandsRepository,
-        ProductRepository $productRepository,
         ProductModel $productModel,
-        AttributeOptionRepository $attributeOption
+        ProductRepository $productRepository,
+        AttributeOptionRepository $attributeOption,
+        OrderBrandsRepository $orderBrandsRepository,
+        ProductReviewRepository $productReviewRepository,
+        VelocityMetadataRepository $velocityMetadataRepository
     ) {
         $this->productModel =  $productModel;
         $this->attributeOption =  $attributeOption;
         $this->productRepository = $productRepository;
         $this->orderBrandsRepository = $orderBrandsRepository;
+        $this->productReviewRepository =  $productReviewRepository;
         $this->velocityMetadataRepository =  $velocityMetadataRepository;
     }
 
@@ -125,10 +135,6 @@ class Helper extends Review
         }
     }
 
-    public function arrangeWithMaxBrandOrder($orderBrandData)
-    {
-    }
-
     /**
      * Returns the count rating of the product
      *
@@ -176,6 +182,16 @@ class Helper extends Review
             return $metaData;
         } catch (\Exception $exception) {
         }
+    }
+
+    public function getShopRecentReviews($reviewCount = 4)
+    {
+        $reviews = $this->productReviewRepository->getModel()
+                ->orderBy('id', 'desc')
+                ->where('status', 'approved')
+                ->take($reviewCount)->get();
+
+        return $reviews;
     }
 }
 

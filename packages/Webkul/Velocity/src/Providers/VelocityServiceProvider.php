@@ -63,6 +63,16 @@ class VelocityServiceProvider extends ServiceProvider
             }
         );
 
+        Event::listen([
+            'bagisto.admin.settings.slider.edit.after',
+            'bagisto.admin.settings.slider.create.after',
+        ], function($viewRenderEventManager) {
+                $viewRenderEventManager->addTemplate(
+                    'velocity::admin.settings.sliders.velocity-slider'
+                );
+            }
+        );
+
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'velocity');
 
         $velocityHelper = app('Webkul\Velocity\Helpers\Helper');

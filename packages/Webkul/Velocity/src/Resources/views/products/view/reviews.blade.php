@@ -37,7 +37,7 @@
                                 :ratings="{{ $avgStarRating }}"
                             ></star-ratings>
 
-                            <span class="fs16 fw6">{{ $avgRatings }} Ratings and {{ $total }} Reviews</span>
+                            <span class="fs16 fw6 display-block">{{ $avgRatings }} Ratings and {{ $total }} Reviews</span>
 
                             @if (core()->getConfigData('catalog.products.review.guest_review') || auth()->guard('customer')->check())
                                 <a href="{{ route('shop.reviews.create', ['slug' => $product->url_key ]) }}">

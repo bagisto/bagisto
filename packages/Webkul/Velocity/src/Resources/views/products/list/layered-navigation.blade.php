@@ -36,10 +36,6 @@
 
         <layered-navigation></layered-navigation>
 
-        @if ($showRecentlyViewed)
-            @include ('shop::products.list.recently-viewed')
-        @endif
-
     {!! view_render_event('bagisto.shop.products.list.layered-nagigation.after') !!}
 
 </div>

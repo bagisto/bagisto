@@ -100,7 +100,16 @@
                                 </option>
 
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">
+                                    <option
+                                        selected="selected"
+                                        value="{{ $category->id }}"
+                                        v-if="({{ $category->id }} == searchedQuery.category)">
+                                        {{ $category->name }}
+                                    </option>
+
+                                    <option
+                                        v-else
+                                        value="{{ $category->id }}">
                                         {{ $category->name }}
                                     </option>
                                 @endforeach
@@ -109,11 +118,13 @@
                         </div>
 
                         <div class="full-width">
+
                             <input
                                 required
                                 name="term"
                                 type="search"
                                 class="form-control"
+                                :value="searchedQuery.term"
                                 placeholder="{{ __('velocity::app.header.search-text') }}" />
 
                             <button class="btn" type="submit" id="header-search-icon">
@@ -316,7 +327,26 @@
         });
 
         Vue.component('searchbar-component', {
-            template: '#searchbar-template'
+            template: '#searchbar-template',
+            data: function () {
+                return {
+                    searchedQuery: []
+                }
+            },
+
+            created: function () {
+                let searchedItem = window.location.search.replace("?", "");
+                searchedItem = searchedItem.split('&');
+
+                let updatedSearchedCollection = {};
+
+                searchedItem.forEach(item => {
+                    let splitedItem = item.split('=');
+                    updatedSearchedCollection[splitedItem[0]] = splitedItem[1];
+                });
+
+                this.searchedQuery = updatedSearchedCollection;
+            }
         })
 
         Vue.component('content-header', {

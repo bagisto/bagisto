@@ -156,6 +156,11 @@
             .sticker {
                 display: none;
             }
+
+            span:nth-child(1),
+            .special-price {
+                font-size: 24px;
+            }
         }
     }
 
