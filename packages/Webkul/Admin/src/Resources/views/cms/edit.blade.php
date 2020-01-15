@@ -6,21 +6,35 @@
 
 @section('content')
     <div class="content">
-        <form method="POST" id="page-form" action="{{ route('admin.cms.edit', $page->id) }}" @submit.prevent="onSubmit">
+        <?php $locale = request()->get('locale') ?: app()->getLocale(); ?>
+
+        <form method="POST" id="page-form" action="" @submit.prevent="onSubmit">
 
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                        <i class="icon angle-left-icon back-link" @click="redirectBack('{{ url('/admin/dashboard') }}')"></i>
 
-                        {{ __('admin::app.cms.pages.pages') }}
+                        {{ __('admin::app.cms.pages.edit-title') }}
                     </h1>
+
+                    <div class="control-group">
+                        <select class="control" id="locale-switcher" onChange="window.location.href = this.value">
+                            @foreach (core()->getAllLocales() as $localeModel)
+
+                                <option value="{{ route('admin.cms.edit', $page->id) . '?locale=' . $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
+                                    {{ $localeModel->name }}
+                                </option>
+
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
 
                 <div class="page-action">
-                    <button id="preview" class="btn btn-lg btn-primary">
+                    <a href="{{ route('shop.cms.page', $page->translate($locale)['url_key']) }}" class="btn btn-lg btn-primary" target="_blank">
                         {{ __('admin::app.cms.pages.preview') }}
-                    </button>
+                    </a>
 
                     <button type="submit" class="btn btn-lg btn-primary">
                         {{ __('admin::app.cms.pages.edit-btn-title') }}
@@ -34,66 +48,72 @@
                     @csrf()
                     <accordian :title="'{{ __('admin::app.cms.pages.general') }}'" :active="true">
                         <div slot="body">
-                            <div class="control-group" :class="[errors.has('page_title') ? 'has-error' : '']">
+                            <div class="control-group" :class="[errors.has('{{$locale}}[page_title]') ? 'has-error' : '']">
                                 <label for="page_title" class="required">{{ __('admin::app.cms.pages.page-title') }}</label>
 
-                                <input type="text" class="control" name="page_title" v-validate="'required'" value="{{ $page->page_title ?? old('page_title') }}" data-vv-as="&quot;{{ __('admin::app.cms.pages.page-title') }}&quot;">
+                                <input type="text" class="control" name="{{$locale}}[page_title]" v-validate="'required'" value="{{ old($locale)['page_title'] ?? $page->translate($locale)['page_title'] }}" data-vv-as="&quot;{{ __('admin::app.cms.pages.page-title') }}&quot;">
 
-                                <span class="control-error" v-if="errors.has('page_title')">@{{ errors.first('page_title') }}</span>
+                                <span class="control-error" v-if="errors.has('{{$locale}}[page_title]')">@{{ errors.first('{!!$locale!!}[page_title]') }}</span>
                             </div>
 
-                            <div class="control-group" :class="[errors.has('url_key') ? 'has-error' : '']">
-                                <label for="url-key" class="required">{{ __('admin::app.cms.pages.url-key') }}</label>
+                            <div class="control-group" :class="[errors.has('channels[]') ? 'has-error' : '']">
+                                <label for="url-key" class="required">{{ __('admin::app.cms.pages.channel') }}</label>
 
-                                <input type="text" class="control" name="url_key" v-validate="'required'" value="{{ $page->url_key ?? old('url_key') }}" data-vv-as="&quot;{{ __('admin::app.cms.pages.url-key') }}&quot;" disabled>
+                                <?php $selectedOptionIds = old('inventory_sources') ?: $page->channels->pluck('id')->toArray() ?>
 
-                                <span class="control-error" v-if="errors.has('url_key')">@{{ errors.first('url_key') }}</span>
+                                <select type="text" class="control" name="channels[]" v-validate="'required'" value="{{ old('channel[]') }}" data-vv-as="&quot;{{ __('admin::app.cms.pages.channel') }}&quot;" multiple="multiple">
+                                    @foreach(app('Webkul\Core\Repositories\ChannelRepository')->all() as $channel)
+                                        <option value="{{ $channel->id }}" {{ in_array($channel->id, $selectedOptionIds) ? 'selected' : '' }}>
+                                            {{ $channel->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
+                                <span class="control-error" v-if="errors.has('channels[]')">@{{ errors.first('channels[]') }}</span>
                             </div>
 
-                            <div class="control-group" :class="[errors.has('html_content') ? 'has-error' : '']">
+                            <div class="control-group" :class="[errors.has('{{$locale}}[html_content]') ? 'has-error' : '']">
                                 <label for="html_content" class="required">{{ __('admin::app.cms.pages.content') }}</label>
 
-                                <textarea type="text" class="control" id="content" name="html_content" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.cms.pages.content') }}&quot;">{{ $page->html_content ?? old('html_content') }}</textarea>
+                                <textarea type="text" class="control" id="content" name="{{$locale}}[html_content]" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.cms.pages.content') }}&quot;">
+                                    {{ old($locale)['html_content'] ?? $page->translate($locale)['html_content'] }}
+                                </textarea>
 
-                                {!! __('admin::app.cms.pages.one-col') !!}
-                                {!! __('admin::app.cms.pages.two-col') !!}
-                                {!! __('admin::app.cms.pages.three-col') !!}
-
-                                <div class="mt-10 mb-10">
-                                    <a target="_blank" href="{{ route('ui.helper.classes') }}" class="btn btn-sm btn-primary">
-                                        {{ __('admin::app.cms.pages.helper-classes') }}
-                                    </a>
-                                </div>
-
-                                <span class="control-error" v-if="errors.has('html_content')">@{{ errors.first('html_content') }}</span>
+                                <span class="control-error" v-if="errors.has('{{$locale}}[html_content]')">@{{ errors.first('{!!$locale!!}[html_content]') }}</span>
                             </div>
                         </div>
                     </accordian>
 
                     <accordian :title="'{{ __('admin::app.cms.pages.seo') }}'" :active="true">
                         <div slot="body">
-                            <div class="control-group" :class="[errors.has('meta_title') ? 'has-error' : '']">
-                                <label for="meta_title" class="required">{{ __('admin::app.cms.pages.meta_title') }}</label>
+                            <div class="control-group">
+                                <label for="meta_title">{{ __('admin::app.cms.pages.meta_title') }}</label>
 
-                                <input type="text" class="control" name="meta_title" v-validate="'required'" value="{{ $page->meta_title ?? old('meta_title') }}" data-vv-as="&quot;{{ __('admin::app.cms.pages.meta_title') }}&quot;">
-
-                                <span class="control-error" v-if="errors.has('meta_title')">@{{ errors.first('meta_title') }}</span>
+                                <input type="text" class="control" name="{{$locale}}[meta_title]" value="{{ old($locale)['meta_title'] ?? $page->translate($locale)['meta_title'] }}">
                             </div>
 
-                            <div class="control-group" :class="[errors.has('meta_keywords') ? 'has-error' : '']">
-                                <label for="meta_keywords" class="required">{{ __('admin::app.cms.pages.meta_keywords') }}</label>
+                            <div class="control-group" :class="[errors.has('{{$locale}}[url_key]') ? 'has-error' : '']">
+                                <label for="url-key" class="required">{{ __('admin::app.cms.pages.url-key') }}</label>
 
-                                <textarea type="text" class="control" name="meta_keywords" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.cms.pages.meta_keywords') }}&quot;">{{ $page->meta_keywords ?? old('meta_keywords') }}</textarea>
+                                <input type="text" class="control" name="{{$locale}}[url_key]" v-validate="'required'" value="{{ old($locale)['url_key'] ?? $page->translate($locale)['url_key'] }}" data-vv-as="&quot;{{ __('admin::app.cms.pages.url-key') }}&quot;">
 
-                                <span class="control-error" v-if="errors.has('meta_keywords')">@{{ errors.first('meta_keywords') }}</span>
+                                <span class="control-error" v-if="errors.has('{{$locale}}[url_key]')">@{{ errors.first('{!!$locale!!}[url_key]') }}</span>
                             </div>
 
-                            <div class="control-group" :class="[errors.has('meta_description') ? 'has-error' : '']">
+                            <div class="control-group">
+                                <label for="meta_keywords">{{ __('admin::app.cms.pages.meta_keywords') }}</label>
+
+                                <textarea type="text" class="control" name="{{$locale}}[meta_keywords]">
+                                    {{ old($locale)['meta_keywords'] ?? $page->translate($locale)['meta_keywords'] }}
+                                </textarea>
+                            </div>
+
+                            <div class="control-group">
                                 <label for="meta_description">{{ __('admin::app.cms.pages.meta_description') }}</label>
 
-                                <textarea type="text" class="control" name="meta_description" data-vv-as="&quot;{{ __('admin::app.cms.pages.meta_description') }}&quot;">{{ $page->meta_description ?? old('meta_description') }}</textarea>
-
-                                <span class="control-error" v-if="errors.has('meta_description')">@{{ errors.first('meta_description') }}</span>
+                                <textarea type="text" class="control" name="{{$locale}}[meta_description]">
+                                    {{ old($locale)['meta_description'] ?? $page->translate($locale)['meta_description'] }}
+                                </textarea>
                             </div>
                         </div>
                     </accordian>
@@ -108,27 +128,10 @@
 
     <script>
         $(document).ready(function () {
-            $('#preview').on('click', function(e) {
-                var form = $('#page-form').serialize();
-                // var url = '{{ route('admin.cms.preview', $page->id) }}' + '?' + form;
-                var url = '{{ route('admin.cms.preview', $page->id) }}';
-
-                window.open(url, '_blank').focus();
-
-                return false;
-            });
-
-            $('#channel-switcher, #locale-switcher').on('change', function (e) {
-                $('#channel-switcher').val()
-                var query = '?channel=' + $('#channel-switcher').val() + '&locale=' + $('#locale-switcher').val();
-
-                window.location.href = "{{ route('admin.cms.edit', $page->id)  }}" + query;
-            });
-
             tinymce.init({
                 selector: 'textarea#content',
                 height: 200,
-                width: "70%",
+                width: "100%",
                 plugins: 'image imagetools media wordcount save fullscreen code',
                 toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent  | removeformat | code',
                 image_advtab: true,
