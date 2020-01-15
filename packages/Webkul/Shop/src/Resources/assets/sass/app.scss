@@ -214,6 +214,7 @@ input {
     margin-bottom: 14px;
     width: 100%;
     font-weight: 600;
+    word-break: break-all;
 
     .price-label {
         font-size: 14px;
@@ -690,7 +691,7 @@ section.slider-block {
 
             li img {
                 max-height: 500px;
-                max-width: 100%;
+                width: 100%;
             }
         }
 
@@ -1778,6 +1779,7 @@ section.product-detail {
 
                 .product-price {
                     margin-bottom: 14px;
+                    word-break: break-all;
 
                     .sticker {
                         display: none;
@@ -1806,6 +1808,7 @@ section.product-detail {
 
                 .product-price {
                     margin-bottom: 15px;
+                    word-break: break-all;
 
                     .special-price {
                         font-size: 24px;
@@ -1923,6 +1926,7 @@ section.product-detail {
                                         margin-top: 5px;
                                         margin-bottom: 0;
                                         font-size: 14px;
+                                        word-break: break-all;
 
                                         .special-price {
                                             font-size: 16px;
@@ -2478,6 +2482,32 @@ section.cart {
     }
 }
 
+.coupon-container {
+    .discount-control {
+        .control-group {
+            margin-top: 20px;
+
+            .control {
+                width: 100%;
+            }
+        }
+    }
+
+    .applied-coupon-details {
+        margin-top: 30px;
+
+        .right {
+            float: right;
+
+            .icon {
+                vertical-align: text-bottom;
+                margin-bottom: 1px;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
 .order-summary {
     h3 {
         font-size: 16px;
@@ -2929,8 +2959,11 @@ section.review {
         display: flex;
 
         .product-info {
-            font-size: 24px;
             max-width: 25%;
+
+            .product-name {
+                font-size: 24px;
+            }
 
             .product-image {
                 img {
@@ -2945,7 +2978,7 @@ section.review {
 
             .product-price {
                 margin-top: 10px;
-
+                word-break: break-all;
                 .pro-price {
                     color: $disc-price;
                 }
@@ -3104,6 +3137,7 @@ section.review {
                     max-width: 280px;
                     margin-left: auto;
                     margin-right: auto;
+                    word-break: break-all;
                 }
             }
 

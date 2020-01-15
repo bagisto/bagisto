@@ -394,27 +394,27 @@ return [
     ], [
         'key' => 'promotions',
         'name' => 'admin::app.acl.promotions',
-        'route' => 'admin.cart-rule.index',
+        'route' => 'admin.cart-rules.index',
         'sort' => 7
     ], [
-        'key' => 'promotions.cart-rule',
+        'key' => 'promotions.cart-rules',
         'name' => 'admin::app.acl.cart-rules',
-        'route' => 'admin.cart-rule.index',
+        'route' => 'admin.cart-rules.index',
         'sort' => 1
     ], [
-        'key' => 'promotions.cart-rule.create',
+        'key' => 'promotions.cart-rules.create',
         'name' => 'admin::app.acl.create',
-        'route' => 'admin.cart-rule.create',
+        'route' => 'admin.cart-rules.create',
         'sort' => 1
     ], [
-        'key' => 'promotions.cart-rule.edit',
+        'key' => 'promotions.cart-rules.edit',
         'name' => 'admin::app.acl.edit',
-        'route' => 'admin.cart-rule.edit',
+        'route' => 'admin.cart-rules.edit',
         'sort' => 2
     ], [
-        'key' => 'promotions.cart-rule.delete',
+        'key' => 'promotions.cart-rules.delete',
         'name' => 'admin::app.acl.delete',
-        'route' => 'admin.cart-rule.delete',
+        'route' => 'admin.cart-rules.delete',
         'sort' => 3
     ],
 ];

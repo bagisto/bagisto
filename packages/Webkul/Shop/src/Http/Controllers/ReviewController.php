@@ -63,7 +63,7 @@ class ReviewController extends Controller
         if (auth()->guard('customer')->check() || core()->getConfigData('catalog.products.review.guest_review')) {
             $product = $this->productRepository->findBySlugOrFail($slug);
 
-            return view($this->_config['view'], compact('product', 'guest_review'));
+            return view($this->_config['view'], compact('product'));
         }
 
         abort(404);

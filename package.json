@@ -13,12 +13,16 @@
     "devDependencies": {
         "axios": "^0.18",
         "bootstrap": "^4.0.0",
-        "popper.js": "^1.12",
         "cross-env": "^5.1",
         "jquery": "^3.2",
-        "laravel-mix": "^2.0",
+        "laravel-mix": "^5.0.1",
         "lodash": "^4.17.4",
-        "vue": "^2.5.7"
+        "popper.js": "^1.12",
+        "resolve-url-loader": "^3.1.0",
+        "sass": "^1.24.4",
+        "sass-loader": "^8.0.2",
+        "vue": "^2.5.7",
+        "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
         "opencollective-postinstall": "^2.0.1",

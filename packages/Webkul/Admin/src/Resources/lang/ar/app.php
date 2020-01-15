@@ -852,7 +852,7 @@ return [
     ],
 
     'footer' => [
-        'copy-right' => '© Copyright 2018 Webkul Software, All rights reserved.'
+        'copy-right' => ' مدعوم من <a href="https://bagisto.com/" target="_blank"> Bagisto </a> ، مشروع مجتمع بواسطة <a href="https://webkul.com/" target="_blank">Webkul</a>'
     ],
 
     'admin' => [

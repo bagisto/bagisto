@@ -96,7 +96,7 @@ return [
         ],
 
         'signup-form' => [
-            'page-title' => 'Customer - Registration Form',
+            'page-title' => 'Create New Customer Account',
             'title' => 'Sign Up',
             'firstname' => 'First Name',
             'lastname' => 'Last Name',
@@ -138,7 +138,7 @@ return [
         ],
 
         'login-form' => [
-            'page-title' => 'Customer - Login',
+            'page-title' => 'Customer Login',
             'title' => 'Sign In',
             'email' => 'Email',
             'password' => 'Password',
@@ -156,7 +156,7 @@ return [
             'title' => 'Recover Password',
             'email' => 'Email',
             'submit' => 'Send Password Reset Email',
-            'page_title' => 'Customer - Forgot Password Form'
+            'page_title' => 'Forgot your password ?'
         ],
 
         'reset-password' => [
@@ -169,12 +169,12 @@ return [
         ],
 
         'account' => [
-            'dashboard' => 'Customer - Edit Profile',
+            'dashboard' => 'Edit Profile',
             'menu' => 'Menu',
 
             'profile' => [
                 'index' => [
-                    'page-title' => 'Customer - Profile',
+                    'page-title' => 'Profile',
                     'title' => 'Profile',
                     'edit' => 'Edit',
                 ],
@@ -196,13 +196,13 @@ return [
 
                 'edit-profile' => [
                     'title' => 'Edit Profile',
-                    'page-title' => 'Customer - Edit Profile Form'
+                    'page-title' => 'Edit Profile Form'
                 ]
             ],
 
             'address' => [
                 'index' => [
-                    'page-title' => 'Customer - Address',
+                    'page-title' => 'Address',
                     'title' => 'Address',
                     'add' => 'Add Address',
                     'edit' => 'Edit',
@@ -218,7 +218,7 @@ return [
                 ],
 
                 'create' => [
-                    'page-title' => 'Customer - Add Address Form',
+                    'page-title' => 'Add Address Form',
                     'title' => 'Add Address',
                     'street-address' => 'Street Address',
                     'country' => 'Country',
@@ -233,7 +233,7 @@ return [
                 ],
 
                 'edit' => [
-                    'page-title' => 'Customer - Edit Address',
+                    'page-title' => 'Edit Address',
                     'title' => 'Edit Address',
                     'street-address' => 'Street Address',
                     'submit' => 'Save Address',
@@ -248,7 +248,7 @@ return [
 
             'order' => [
                 'index' => [
-                    'page-title' => 'Customer - Orders',
+                    'page-title' => 'Orders',
                     'title' => 'Orders',
                     'order_id' => 'Order ID',
                     'date' => 'Date',
@@ -307,7 +307,7 @@ return [
             ],
 
             'wishlist' => [
-                'page-title' => 'Customer - Wishlist',
+                'page-title' => 'Wishlist',
                 'title' => 'Wishlist',
                 'deleteall' => 'Delete All',
                 'moveall' => 'Move All Products To Cart',
@@ -344,7 +344,7 @@ return [
             'review' => [
                 'index' => [
                     'title' => 'Reviews',
-                    'page-title' => 'Customer - Reviews'
+                    'page-title' => 'Reviews'
                 ],
 
                 'view' => [
@@ -429,7 +429,7 @@ return [
             'remove' => 'Remove',
             'remove-link' => 'Remove',
             'move-to-wishlist' => 'Move to Wishlist',
-            'move-to-wishlist-success' => 'Item moved to wishlist.',
+            'move-to-wishlist-success' => 'Item moved to wishlist successfully.',
             'move-to-wishlist-error' => 'Cannot move item to wishlist, please try again later.',
             'add-config-warning' => 'Please select option before adding to cart.',
             'quantity' => [
@@ -500,7 +500,8 @@ return [
             'free-desc' => 'This is a free shipping',
             'flat-desc' => 'This is a flat rate',
             'password' => 'Password',
-            'login-exist-message' => 'You already have an account with us, Sign in or continue as guest.'
+            'login-exist-message' => 'You already have an account with us, Sign in or continue as guest.',
+            'enter-coupon-code' => 'Enter Coupon Code'
         ],
 
         'total' => [
@@ -514,9 +515,12 @@ return [
             'disc-amount' => 'Amount discounted',
             'new-grand-total' => 'New Grand Total',
             'coupon' => 'Coupon',
-            'coupon-applied' => 'Coupon Applied',
+            'coupon-applied' => 'Applied Coupon',
             'remove-coupon' => 'Remove Coupon',
-            'cannot-apply-coupon' => 'Cannot Apply Coupon'
+            'cannot-apply-coupon' => 'Cannot Apply Coupon',
+            'invalid-coupon' => 'Coupon code is invalid.',
+            'success-coupon' => 'Coupon code applied successfully.',
+            'coupon-apply-issue' => 'Coupon code can\'t be applied.'
         ],
 
         'success' => [
