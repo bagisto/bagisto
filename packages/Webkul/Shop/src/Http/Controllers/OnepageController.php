@@ -69,7 +69,7 @@ class OnepageController extends Controller
 
         $cart = Cart::getCart();
 
-        if (! auth()->guard('customer')->check() && $cart->haveDownloadableItems())
+        if (! auth()->guard('customer')->check() && $cart->hasDownloadableItems())
             return redirect()->route('customer.session.index');
 
         Cart::collectTotals();

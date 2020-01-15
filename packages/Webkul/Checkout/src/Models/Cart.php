@@ -120,7 +120,7 @@ class Cart extends Model implements CartContract
      *
      * @return boolean
      */
-    public function haveDownloadableItems()
+    public function hasDownloadableItems()
     {
         foreach ($this->items as $item) {
             if (stristr($item->type,'downloadable') !== false) {
