@@ -148,12 +148,14 @@
 </script>
 
 <script type="text/x-template" id="content-header-template">
-    <header class="row velocity-divide-page remove-padding-margin vc-header">
+
+    <header class="row velocity-divide-page remove-padding-margin vc-header active">
         <div class="vc-small-screen container">
             <div class="row">
                 <div class="col-8">
                     <div class="row col-12">
-                        <div class="hamburger-wrapper">
+                    @include('shop::UI.shared.responsive-header')
+                        <div class="hamburger-wrapper active" v-on:click="toggleHamburger">
                             <i class="rango-toggle hamburger"></i>
                         </div>
                         <logo-component add-class="ml30"></logo-component>
@@ -378,6 +380,11 @@
                         footer[0].style.opacity = '1';
                         homeContent[0].style.opacity = '1';
                     }
+                },
+
+                toggleHamburger: function () {
+                    alert("dfsdsf");
+                    // element.classList.add("active");
                 }
             }
         })

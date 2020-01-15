@@ -1593,6 +1593,7 @@
                     input[type=checkbox] {
                         width: 15px !important;
                         height: 15px !important;
+                        border: 1px solid red !important;
                         margin-left: -24px;
                     }
                 }
@@ -1729,12 +1730,28 @@
             background-color: white;
         }
     }
-
     .checkbox {
-        input[type=checkbox] {
-            width: 14px;
-            height: 14px;
-            transform: scale(0.9);
+        label {
+            padding-left: 0px !important;
+        }
+        input[type=checkbox]{
+            display: none;
+        }
+
+        input[type=checkbox] + label{
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            border-radius: 2px;
+            // background-color: white;
+            border: 1px solid rgba(0,0,0,0.53);
+            margin: 4px 5px -6px -3px;
+        }
+
+        input[type=checkbox]:checked {
+            color: #f00;
+            font-style: normal;
         }
     }
 
