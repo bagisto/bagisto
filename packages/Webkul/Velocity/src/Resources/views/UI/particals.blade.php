@@ -154,7 +154,9 @@
             <div class="row">
                 <div class="col-8">
                     <div class="row col-12">
-                    @include('shop::UI.shared.responsive-header')
+
+                        {{-- @include('shop::UI.shared.responsive-sidebar') --}}
+
                         <div class="hamburger-wrapper active" v-on:click="toggleHamburger">
                             <i class="rango-toggle hamburger"></i>
                         </div>
@@ -383,7 +385,6 @@
                 },
 
                 toggleHamburger: function () {
-                    alert("dfsdsf");
                     // element.classList.add("active");
                 }
             }
