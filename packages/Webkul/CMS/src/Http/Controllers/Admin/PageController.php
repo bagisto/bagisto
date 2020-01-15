@@ -3,67 +3,49 @@
 namespace Webkul\CMS\Http\Controllers\Admin;
 
 use Webkul\CMS\Http\Controllers\Controller;
-use Webkul\CMS\Repositories\CMSRepository as CMS;
-use Webkul\Core\Repositories\ChannelRepository as Channel;
-use Webkul\Core\Repositories\LocaleRepository as Locale;
+use Webkul\CMS\Repositories\CmsRepository;
 
 /**
  * CMS controller
  *
- * @author  Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @author  Jitendra Singh <jitendra@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
  class PageController extends Controller
 {
     /**
      * To hold the request variables from route file
+     * 
+     * @var array
      */
     protected $_config;
 
     /**
-     * To hold the channel reposotry instance
-     */
-    protected $channel;
-
-    /**
-     * To hold the locale reposotry instance
-     */
-    protected $locale;
-
-    /**
      * To hold the CMSRepository instance
+     * 
+     * @var Object
      */
-    protected $cms;
+    protected $cmsRepository;
 
-    public function __construct(Channel $channel, Locale $locale, CMS $cms)
+    /**
+     * Create a new controller instance.
+     *
+     * @param  \Webkul\CMS\Repositories\CmsRepository $cmsRepository
+     * @return void
+     */
+    public function __construct(CmsRepository $cmsRepository)
     {
-        /**
-         * Pass the class instance through admin middleware
-         */
-       // $this->middleware('auth:admin');
-
         $this->middleware('admin');
 
-        /**
-         * Channel repository instance
-         */
-        $this->channel = $channel;
-
-        /**
-         * Locale repository instance
-         */
-        $this->locale = $locale;
-
-        /**
-         * CMS repository instance
-         */
-        $this->cms = $cms;
+        $this->cmsRepository = $cmsRepository;
 
         $this->_config = request('_config');
     }
 
     /**
      * Loads the index page showing the static pages resources
+     * 
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -73,7 +55,7 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
     /**
      * To create a new CMS page
      *
-     * @return view
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -83,74 +65,22 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
     /**
      * To store a new CMS page in storage
      *
-     * @return view
+     * @return \Illuminate\Http\Response
      */
     public function store()
     {
         $data = request()->all();
 
-        // part one of the validation in case partials pages were generated or generating partial pages
         $this->validate(request(), [
+            'url_key' => ['required', 'unique:cms_page_translations,url_key', new \Webkul\Core\Contracts\Validations\Slug],
+            'page_title' => 'required',
             'channels' => 'required',
-            'locales' => 'required',
-            'url_key' => 'required'
+            'html_content' => 'required'
         ]);
+        
+        $page = $this->cmsRepository->create(request()->all());
 
-        $channels = $data['channels'];
-        $locales = $data['locales'];
-
-        $this->validate(request(), [
-            'html_content' => 'required|string',
-            'page_title' => 'required|string',
-            'meta_title' => 'required|string',
-            'meta_description' => 'string',
-            'meta_keywords' => 'required|string'
-        ]);
-
-        $data['content']['html'] = $data['html_content'];
-        $data['content']['page_title'] = $data['page_title'];
-        $data['content']['meta_keywords'] = $data['meta_keywords'];
-        $data['content']['meta_title'] = $data['meta_title'];
-        $data['content']['meta_description'] = $data['meta_description'];
-
-        $data['content'] = json_encode($data['content']);
-
-        $totalCount = 0;
-        $actualCount = 0;
-
-        foreach ($channels as $channel) {
-            foreach ($locales as $locale) {
-                $pageFound = $this->cms->findOneWhere([
-                    'channel_id' => $channel,
-                    'locale_id' => $locale,
-                    'url_key' => $data['url_key']
-                ]);
-
-                $totalCount++;
-
-                $data['channel_id'] = $channel;
-
-                $data['locale_id'] = $locale;
-
-                if (! $pageFound) {
-                    $result = $this->cms->create($data);
-
-                    if ($result) {
-                        $actualCount++;
-                    }
-                }
-
-                unset($pageFound);
-            }
-        }
-
-        if (($actualCount != 0 && $totalCount != 0) && ($actualCount == $totalCount)) {
-            session()->flash('success', trans('admin::app.cms.pages.create-success'));
-        } else if (($actualCount != 0 && $totalCount != 0) && ($actualCount != $totalCount)) {
-            session()->flash('warning', trans('admin::app.cms.pages.create-partial'));
-        } else {
-            session()->flash('error', trans('admin::app.cms.pages.create-failure'));
-        }
+        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'page']));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -158,105 +88,53 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
     /**
      * To edit a previously created CMS page
      *
-     * @return view
+     * @param integer $id
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
-        $page = $this->cms->findOrFail($id);
+        $page = $this->cmsRepository->findOrFail($id);
 
-        if (request()->has('channel') && request()->has('locale')) {
-            $channel = $this->channel->findOneWhere([
-                'code' => request()->input('channel')
-            ]);
-
-            $locale = $this->locale->findOneWhere([
-                'code' => request()->input('locale')
-            ]);
-
-            $page = $this->cms->findOneWhere([
-                'channel_id' => $channel->id,
-                'locale_id' => $locale->id,
-                'url_key' => $page->url_key
-            ]);
-
-            if (! $page) {
-                $page  = $this->cms->create([
-                    'url_key' => str_random(8),
-                    'channel' => $channel->code,
-                    'locale' => $locale->code
-                ]);
-
-                return redirect()->route('admin.cms.edit', $page->id);
-            }
-        } else {
-            $page = $this->cms->findOrFail($id);
-        }
-
-        return view($this->_config['view'])->with('page', $page);
+        return view($this->_config['view'], compact('page'));
     }
 
     /**
      * To update the previously created CMS page in storage
      *
-     * @param Integer $id
-     *
-     * @return View
+     * @param integer $id
+     * @return \Illuminate\Http\Response
      */
     public function update($id)
     {
-        $page = $this->cms->findOrFail($id);
-
-        $data = request()->all();
+        $locale = request()->get('locale') ?: app()->getLocale();
 
         $this->validate(request(), [
-            'page_title' => 'required|string',
-            'html_content' => 'required|string',
-            'meta_title' => 'required|string',
-            'meta_description' => 'string',
-            'meta_keywords' => 'required|string'
+            $locale . '.url_key' => ['required', new \Webkul\Core\Contracts\Validations\Slug, function ($attribute, $value, $fail) use ($id) {
+                if (! $this->cmsRepository->isUrlKeyUnique($id, $value))
+                    $fail(trans('admin::app.response.already-taken', ['name' => 'Page']));
+            }],
+            $locale . '.page_title' => 'required',
+            $locale . '.html_content' => 'required',
+            'channels' => 'required'
         ]);
 
-        $data['content']['html'] = $data['html_content'];
-        $data['content']['page_title'] = $data['page_title'];
-        $data['content']['meta_keywords'] = $data['meta_keywords'];
-        $data['content']['meta_title'] = $data['meta_title'];
-        $data['content']['meta_description'] = $data['meta_description'];
-        $data['content'] = json_encode($data['content']);
+        $this->cmsRepository->update(request()->all(), $id);
 
-        $result = $this->cms->update($data, $id);
+        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Page']));
 
-        if ($result) {
-            session()->flash('success', trans('admin::app.cms.pages.update-success'));
-        } else {
-            session()->flash('success', trans('admin::app.cms.pages.update-failure'));
-        }
         return redirect()->route($this->_config['redirect']);
-    }
-
-    /**
-     * To preview the content of the currently creating page or previously creating page
-     *
-     * @param Integer $id
-     *
-     * @return mixed
-     */
-    public function preview($id)
-    {
-        $page = $this->cms->findOrFail($id);
-
-        return view('shop::cms.page')->with('page', $page);
     }
 
     /**
      * To delete the previously create CMS page
      *
-     * @param Integer $id
+     * @param integer $id
      *
-     * @return Response JSON
+     * @return \Illuminate\Http\Response
      */
     public function delete($id)
     {
-        $page = $this->cms->findOrFail($id);
+        $page = $this->cmsRepository->findOrFail($id);
 
         if ($page->delete()) {
             session()->flash('success', trans('admin::app.cms.pages.delete-success'));
@@ -272,7 +150,7 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
     /**
      * To mass delete the CMS resource from storage
      *
-     * @return Response redirect
+     * @return \Illuminate\Http\Response
      */
     public function massDelete()
     {
@@ -281,13 +159,10 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
         if ($data['indexes']) {
             $pageIDs = explode(',', $data['indexes']);
 
-            $actualCount = count($pageIDs);
-
             $count = 0;
 
             foreach ($pageIDs as $pageId) {
-
-                $page = $this->cms->find($pageId);
+                $page = $this->cmsRepository->find($pageId);
 
                 if ($page) {
                     $page->delete();
@@ -296,7 +171,7 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
                 }
             }
 
-            if ($actualCount == $count) {
+            if (count($pageIDs) == $count) {
                 session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', [
                     'resource' => 'CMS Pages'
                 ]));
