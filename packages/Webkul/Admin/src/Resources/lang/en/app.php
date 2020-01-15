@@ -867,6 +867,7 @@ return [
 
         'addresses' => [
             'title' => ':customer_name\'s Addresses List',
+            'vat_id' => 'Vat id',
             'create-title' => 'Create Customer\'s Address',
             'edit-title' => 'Update Customer\'s Address',
             'title-orders' => ':customer_name\'s Orders List',
