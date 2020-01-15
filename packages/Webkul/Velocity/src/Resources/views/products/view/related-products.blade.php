@@ -19,7 +19,10 @@
         @foreach ($relatedProducts as $index => $relatedProduct)
 
             <slide slot="slide-{{ $index }}">
-                @include ('shop::products.list.card', ['product' => $relatedProduct])
+                @include ('shop::products.list.card', [
+                    'product' => $relatedProduct,
+                    'addToCartBtnClass' => 'small-padding',
+                ])
             </slide>
 
         @endforeach

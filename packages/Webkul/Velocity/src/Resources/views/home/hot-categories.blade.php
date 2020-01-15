@@ -13,7 +13,7 @@
                     <div class="card">
                         <div class="row velocity-divide-page">
                             <div class="left">
-                                <img src="{{ asset('/storage/' . $categoryDetails->image) }}" />
+                                <img src="{{ asset('/storage/' . $categoryDetails->category_icon_path) }}" />
                             </div>
 
                             <div class="right">

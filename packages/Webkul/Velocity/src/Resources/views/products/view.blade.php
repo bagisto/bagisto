@@ -53,12 +53,24 @@
                                 <input type="hidden" name="product_id" value="{{ $product->product_id }}">
 
                                 {{-- product-gallery --}}
-                                <div class="left col-lg-6">
+                                <div class="left
+                                    @if ($showRecentlyViewed)
+                                        col-lg-6
+                                    @else
+                                        col-lg-5
+                                    @endif
+                                ">
                                     @include ('shop::products.view.gallery')
                                 </div>
 
                                 {{-- right-section --}}
-                                <div class="right col-lg-6 scrollable">
+                                <div class="right
+                                    @if ($showRecentlyViewed)
+                                        col-lg-6
+                                    @else
+                                        col-lg-7
+                                    @endif
+                                ">
                                     {{-- product-info-section --}}
                                     <div class="row info">
                                         <h2 class="col-lg-12">{{ $product->name }}</h2>

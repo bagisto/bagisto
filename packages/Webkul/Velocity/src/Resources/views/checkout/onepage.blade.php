@@ -10,66 +10,68 @@
 
 @push('scripts')
     <script type="text/x-template" id="checkout-template">
-        <div id="checkout" class="checkout-process offset-1 row col-11">
-            <h1 class="row col-12">{{ __('velocity::app.checkout.checkout') }}</h1>
+        <div class="container">
+            <div id="checkout" class="checkout-process offset-1 row col-11">
+                <h1 class="row col-12">{{ __('velocity::app.checkout.checkout') }}</h1>
 
-            <div class="row col-7">
+                <div class="row col-7">
 
-                <div class="step-content information" id="address-section">
-                    @include('shop::checkout.onepage.customer-info')
-                </div>
+                    <div class="step-content information" id="address-section">
+                        @include('shop::checkout.onepage.customer-info')
+                    </div>
 
-                <div
-                    class="step-content shipping"
-                    id="shipping-section"
-                    v-if="showShippingSection">
+                    <div
+                        class="step-content shipping"
+                        id="shipping-section"
+                        v-if="showShippingSection">
 
-                    <shipping-section @onShippingMethodSelected="shippingMethodSelected($event)">
-                    </shipping-section>
-                </div>
+                        <shipping-section @onShippingMethodSelected="shippingMethodSelected($event)">
+                        </shipping-section>
+                    </div>
 
-                <div
-                    class="step-content payment"
-                    v-if="showPaymentSection"
-                    id="payment-section">
+                    <div
+                        class="step-content payment"
+                        v-if="showPaymentSection"
+                        id="payment-section">
 
-                    <payment-section @onPaymentMethodSelected="paymentMethodSelected($event)">
-                    </payment-section>
-                </div>
+                        <payment-section @onPaymentMethodSelected="paymentMethodSelected($event)">
+                        </payment-section>
+                    </div>
 
-                <div
-                    class="step-content review"
-                    v-if="showSummarySection"
-                    id="summary-section">
+                    <div
+                        class="step-content review"
+                        v-if="showSummarySection"
+                        id="summary-section">
 
-                    <review-section :key="reviewComponentKey">
-                        <div slot="summary-section">
-                            <summary-section
-                                discount="1"
-                                :key="summeryComponentKey"
-                                @onApplyCoupon="getOrderSummary"
-                                @onRemoveCoupon="getOrderSummary"
-                            ></summary-section>
-                        </div>
-
-                        <div slot="place-order-btn">
-                            <div class="mb20">
-                                <button
-                                    type="button"
-                                    class="theme-btn"
-                                    @click="placeOrder()"
-                                    :disabled="disable_button"
-                                    id="checkout-place-order-button">
-                                    {{ __('shop::app.checkout.onepage.place-order') }}
-                                </button>
+                        <review-section :key="reviewComponentKey">
+                            <div slot="summary-section">
+                                <summary-section
+                                    discount="1"
+                                    :key="summeryComponentKey"
+                                    @onApplyCoupon="getOrderSummary"
+                                    @onRemoveCoupon="getOrderSummary"
+                                ></summary-section>
                             </div>
-                        </div>
-                    </review-section>
-                </div>
-            </div>
 
-            <div class="col-4 offset-1 row order-summary-container top pt0">
-                <summary-section :key="summeryComponentKey"></summary-section>
+                            <div slot="place-order-btn">
+                                <div class="mb20">
+                                    <button
+                                        type="button"
+                                        class="theme-btn"
+                                        @click="placeOrder()"
+                                        :disabled="disable_button"
+                                        id="checkout-place-order-button">
+                                        {{ __('shop::app.checkout.onepage.place-order') }}
+                                    </button>
+                                </div>
+                            </div>
+                        </review-section>
+                    </div>
+                </div>
+
+                <div class="col-4 offset-1 row order-summary-container top pt0">
+                    <summary-section :key="summeryComponentKey"></summary-section>
+                </div>
             </div>
         </div>
     </script>

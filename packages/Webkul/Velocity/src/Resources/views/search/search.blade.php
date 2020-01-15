@@ -8,7 +8,7 @@
 
 @section('content-wrapper')
     <section class="search-container cart-details row">
-        @if ($results->count())
+        @if ($results && $results->count())
             <div class="filters-container col-12">
                 @include ('shop::products.list.toolbar')
             </div>

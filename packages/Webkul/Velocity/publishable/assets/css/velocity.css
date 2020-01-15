@@ -1022,7 +1022,6 @@
 }
 
 .product-card-new .product-image-container {
-  height: 220px;
   position: relative;
 }
 
@@ -1048,8 +1047,8 @@
   font-size: 16px;
 }
 
-.product-card-new .card-body > div:not(:last-child) {
-  margin-bottom: 5px;
+.product-card-new .card-body > div:last-child {
+  margin-top: 10px;
 }
 
 .product-card-new .product-price .sticker {
@@ -1094,10 +1093,6 @@
   position: absolute;
   opacity: 0.8;
   background-color: #0D2438;
-}
-
-.product-card-new:hover #quick-view-btn-container {
-  display: block;
 }
 
 .quantity {
@@ -1897,7 +1892,9 @@
   margin-left: 0px !important;
 }
 
-.product-price span:nth-child(1) {
+.product-price span:nth-child(1),
+.product-price .special-price {
+  font-size: 20px;
   font-weight: 600;
 }
 
@@ -1906,8 +1903,8 @@
 }
 
 .product-price .sticker {
-  top: 0;
-  left: 0;
+  top: 8px;
+  left: 8px;
   border: none;
   color: white;
   display: none;
@@ -1926,10 +1923,6 @@
   font-weight: 500;
   margin-right: 10px;
   text-decoration: line-through;
-}
-
-.product-price .special-price {
-  font-weight: 600;
 }
 
 #app {
@@ -1978,8 +1971,8 @@
 }
 
 .sidebar .category-content .category-icon {
-  width: 18px;
-  height: 18px;
+  width: 25px;
+  height: 20px;
   padding-right: 5px;
   display: inline-block;
 }
@@ -2424,6 +2417,21 @@
   margin-top: 8px;
 }
 
+.vc-header {
+  z-index: 99;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23);
+}
+
+.new-products-recent {
+  top: -44px;
+  position: relative;
+}
+
+.recetly-viewed-products-wrapper {
+  padding: 10px;
+}
+
 /* @author Shubham Mehrotra */
 body {
   overflow-x: hidden;
@@ -2586,7 +2594,6 @@ header #search-form > *:focus {
 
 .advertisement-two-container img {
   width: 100%;
-  height: 500px;
 }
 
 .advertisement-three-container img {
@@ -3002,11 +3009,6 @@ body::after {
   border: 1px solid red;
 }
 
-.ul-shadow {
-  -webkit-box-shadow: 1px 2px 8px #888888;
-          box-shadow: 1px 2px 8px #888888;
-}
-
 .quick-addtocart-btn {
   margin-top: 306px;
   margin-left: -82px;
@@ -3080,6 +3082,7 @@ body::after {
 }
 
 .footer .footer-content .newsletter-subscription .newsletter-wrapper .subscribe-newsletter {
+  text-align: right;
   padding: 25px 0 30px 0;
 }
 
@@ -3415,6 +3418,10 @@ body::after {
   margin-left: 15px !important;
 }
 
+.ml30 {
+  margin-left: 30px !important;
+}
+
 .body-blur {
   filter: blur(4px);
   -webkit-filter: blur(4px);
@@ -3515,6 +3522,22 @@ body::after {
   -webkit-box-shadow: 0 1px 0 0 #CFCFCF;
           box-shadow: 0 1px 0 0 #CFCFCF;
   border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.theme-btn.light:hover, .cart-details .light.continue-shopping-btn:hover, .account-content .account-layout .bottom-toolbar .pagination .page-item:hover {
+  background-color: #f5f5f5 !important;
+}
+
+.theme-btn:hover, .cart-details .continue-shopping-btn:hover, .account-content .account-layout .bottom-toolbar .pagination .page-item:hover,
+.btn-add-to-cart:hover {
+  border-color: #247959 !important;
+  background-color: #247959 !important;
+}
+
+.theme-btn:hover.light, .cart-details .continue-shopping-btn:hover.light, .account-content .account-layout .bottom-toolbar .pagination .page-item:hover,
+.btn-add-to-cart:hover.light,
+.account-content .account-layout .bottom-toolbar .pagination .btn-add-to-cart.page-item:hover {
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
 }
 
 .norm-btn {
@@ -3787,8 +3810,8 @@ body::after {
 }
 
 .small-card-container:hover {
-  -webkit-box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.14);
-          box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.14);
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .text-down-3 {
@@ -4000,8 +4023,8 @@ button[disabled] {
   font-size: 14px;
 }
 
-.max-height-350 {
-  max-height: 350px;
+.max-height-300 {
+  max-height: 300px;
 }
 
 .border-normal {
@@ -4196,7 +4219,7 @@ button[disabled] {
   }
 }
 
-@media only screen and (max-width: 576px) and (max-width: 768px) and (max-width: 992px) {
+@media only screen and (max-width: 992px) {
   .main-content-wrapper .vc-header > div {
     display: none;
   }
@@ -4221,11 +4244,10 @@ button[disabled] {
     text-align: right;
     height: 50px;
   }
-  .main-content-wrapper .vc-header > div.vc-small-screen .right-vc-header * {
-    top: 13px;
+  .main-content-wrapper .vc-header > div.vc-small-screen .right-vc-header > a {
     width: 24px;
-    position: relative;
-    padding-right: 10px;
+    margin-top: 13px;
+    margin-right: 10px;
   }
   #top {
     display: none;
@@ -4245,6 +4267,7 @@ button[disabled] {
   .advertisement-three-container .top-container img,
   .advertisement-three-container .bottom-container img {
     padding: 0px;
+    height: unset;
   }
   .advertisement-three-container .second-panel {
     padding-top: 10px;
@@ -4264,11 +4287,26 @@ button[disabled] {
   .category-with-custom-options.vc-small-screen .smart-category-container:not(:first-child) {
     padding-top: 20px;
   }
+  .footer .footer-content .newsletter-subscription {
+    padding: 10px 20px;
+  }
   .footer .footer-content .newsletter-subscription .newsletter-wrapper input.subscribe-field {
     width: 200px;
   }
-  .popular-category-wrapper {
+  .footer .footer-content .newsletter-subscription .newsletter-wrapper .subscribe-newsletter {
+    text-align: left;
+  }
+  .footer .footer-content .newsletter-subscription .newsletter-wrapper .subscribe-newsletter .subscriber-form-div {
+    text-align: center;
+  }
+  .footer .footer-content .footer-statics {
+    padding: 30px 50px;
+  }
+  .popular-categories-container .popular-category-wrapper {
     padding: 0px;
+  }
+  .popular-categories-container .popular-category-wrapper .card .category-image {
+    height: 100%;
   }
   .main-content-wrapper {
     margin-bottom: 25px;
@@ -4279,6 +4317,18 @@ button[disabled] {
   }
   .slides-container .VueCarousel .VueCarousel-pagination .VueCarousel-dot {
     padding: 2px !important;
+  }
+  .account-content .sidebar {
+    display: none;
+  }
+  .account-content .account-layout.right {
+    padding-left: 20px !important;
+  }
+  .mini-cart-container {
+    display: none;
+  }
+  .vc-small-screen .searchbar {
+    padding-left: 100px !important;
   }
 }
 

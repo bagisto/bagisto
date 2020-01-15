@@ -61,15 +61,17 @@
 
                 @section('body-header')
                     @include('shop::layouts.top-nav.index')
-                    @include('shop::layouts.header.index', ['categories' => $categories])
+                    @include('shop::layouts.header.index', [
+                        'categories' => $categories
+                    ])
 
                     <div class="main-content-wrapper col-12 no-padding">
-
                         @php
                             $velocityContent = app('Webkul\Velocity\Repositories\ContentRepository')->getAllContents();
                         @endphp
 
                         <content-header
+                            url="{{ url()->to('/') }}"
                             is-enabled="{{ sizeof($categories) }}"
                             :header-content="{{ json_encode($velocityContent) }}"
                             heading= "{{ __('velocity::app.menu-navbar.text-category') }}"

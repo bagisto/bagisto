@@ -167,6 +167,9 @@
 .ml15 {
     margin-left: 15px !important;
 }
+.ml30 {
+    margin-left: 30px !important;
+}
 .body-blur {
     filter: blur(4px);
     -webkit-filter: blur(4px);
@@ -259,7 +262,22 @@
         box-shadow: 0 1px 0 0 #CFCFCF;
         border: 1px solid rgba(0,0,0,0.12);
     }
+
+    &.light:hover {
+        background-color: #f5f5f5 !important;
+    }
 }
+
+.theme-btn:hover,
+.btn-add-to-cart:hover {
+    border-color: $theme-dark-color !important;
+    background-color: $theme-dark-color !important;
+
+    &.light {
+        border: 1px solid rgba(0,0,0,0.12) !important;
+    }
+}
+
 .norm-btn {
     border: 1px solid $border-common;
     font-size: 14px;
@@ -548,7 +566,8 @@
 }
 
 .small-card-container:hover {
-    box-shadow: 0 6px 14px 0 rgba(0,0,0,0.14);
+    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .text-down-3 {
@@ -765,8 +784,8 @@ button[disabled] {
     font-size: 14px;
 }
 
-.max-height-350 {
-    max-height: 350px;
+.max-height-300 {
+    max-height: 300px;
 }
 
 .border-normal {

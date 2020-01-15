@@ -79,6 +79,124 @@
     </a>
 </script>
 
+<script type="text/x-template" id="searchbar-template">
+    <div class="row no-margin right searchbar">
+        <div class="col-8 no-padding input-group">
+            <form
+                method="GET"
+                role="search"
+                id="search-form"
+                action="{{ route('shop.search.index') }}">
+
+                <div
+                    class="btn-toolbar full-width"
+                    role="toolbar">
+
+                    <div class="btn-group full-width">
+                        <div class="selectdiv">
+                            <select class="form-control fs13 border-right-0" name="category">
+                                <option value="">
+                                    {{ __('velocity::app.header.all-categories') }}
+                                </option>
+
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">
+                                        {{ $category->name }}
+                                    </option>
+                                @endforeach
+                                <span class="select-icon rango-arrow-down"></span>
+                            </select>
+                        </div>
+
+                        <div class="full-width">
+                            <input
+                                required
+                                name="term"
+                                type="search"
+                                class="form-control"
+                                placeholder="{{ __('velocity::app.header.search-text') }}" />
+
+                            <button class="btn" type="submit" id="header-search-icon">
+                                <i class="fs16 fw6 rango-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+        <div class="col-4">
+            {!! view_render_event('bagisto.shop.layout.header.cart-item.before') !!}
+
+                @include('shop::checkout.cart.mini-cart')
+
+            {!! view_render_event('bagisto.shop.layout.header.cart-item.after') !!}
+        </div>
+    </div>
+</script>
+
+<script type="text/x-template" id="content-header-template">
+    <header class="row velocity-divide-page remove-padding-margin vc-header">
+        <div class="vc-small-screen container">
+            <div class="row">
+                <div class="col-8">
+                    <div class="row col-12">
+                        <div class="hamburger-wrapper">
+                            <i class="rango-toggle hamburger"></i>
+                        </div>
+                        <logo-component add-class="ml30"></logo-component>
+                    </div>
+                </div>
+                <div class="row right-vc-header col-4">
+                    <a :href="`${url}/customer/account/wishlist`" class="unset">
+                        <i class="material-icons">favorite_border</i>
+                    </a>
+
+                    <a class="unset cursor-pointer" @click="openSearchBar">
+                        <i class="material-icons">search</i>
+                    </a>
+
+                    <a href="" class="unset">
+                        <i class="material-icons text-down-3">shopping_cart</i>
+                    </a>
+                </div>
+
+                <searchbar-component v-if="isSearchbar"></searchbar-component>
+            </div>
+        </div>
+
+        <div
+            @mouseout="toggleSidebar('0', $event, 'mouseout')"
+            @mouseover="toggleSidebar('0', $event, 'mouseover')"
+            class="main-category fs16 unselectable fw6 cursor-pointer left">
+
+            <i class="rango-view-list text-down-4 align-vertical-top fs18">
+            </i>
+            <span
+                class="pl5"
+                v-text="heading"
+                @mouseover="toggleSidebar('0', $event, 'mouseover')">
+            </span>
+        </div>
+
+        <div class="content-list right">
+            <ul type="none" class="no-margin">
+                <li v-for="(content, index) in headerContent" :key="index">
+                    <a
+                        v-text="content.title"
+                        :href="content['page_link']"
+                        v-if="(content['content_type'] == 'link')"
+                        :target="content['link_target'] ? '_blank' : '_self'">
+                    </a>
+
+                    <a href="#" v-else v-text="content.title"></a>
+                </li>
+            </ul>
+        </div>
+    </header>
+</script>
+
 <script type="text/javascript">
     (() => {
         Vue.component('star-ratings', {
@@ -196,5 +314,42 @@
             template: '#logo-template',
             props: ['addClass'],
         });
+
+        Vue.component('searchbar-component', {
+            template: '#searchbar-template'
+        })
+
+        Vue.component('content-header', {
+            template: '#content-header-template',
+            props: [
+                'url',
+                'heading',
+                'isEnabled',
+                'headerContent',
+            ],
+
+            data: function () {
+                return {
+                    'isSearchbar': false
+                }
+            },
+
+            methods: {
+                'openSearchBar': function () {
+                    this.isSearchbar = !this.isSearchbar;
+
+                    let footer = $('.footer');
+                    let homeContent = $('#home-right-bar-container');
+
+                    if (this.isSearchbar) {
+                        footer[0].style.opacity = '.3';
+                        homeContent[0].style.opacity = '.3';
+                    } else {
+                        footer[0].style.opacity = '1';
+                        homeContent[0].style.opacity = '1';
+                    }
+                }
+            }
+        })
     })()
 </script>

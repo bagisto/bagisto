@@ -16,19 +16,6 @@
 {!! view_render_event('bagisto.shop.products.review.before', ['product' => $product]) !!}
 
     @if ($total)
-
-        {{-- reviews count --}}
-        <div class="row reviews pb15">
-            <star-ratings
-                :size="24"
-                :ratings="{{ $avgStarRating }}"
-            ></star-ratings>
-
-            <div class="reviews-text">
-                <span>{{ $avgRatings }} Ratings and {{ $total }} Reviews</span>
-            </div>
-        </div>
-
         @if (isset($accordian) && $accordian)
             <accordian :active="true">
                 {{-- customer ratings --}}
@@ -43,14 +30,14 @@
                 <div class="row customer-rating" slot="body">
                     <div class="row full-width text-center mb30">
                         <div class="col-lg-12 col-xl-6">
-                            <h4 class="col-lg-12">{{ $avgRatings }} Star</h4>
+                            <h4 class="col-lg-12 fs16">{{ $avgRatings }} Star</h4>
 
                             <star-ratings
                                 :size="24"
                                 :ratings="{{ $avgStarRating }}"
                             ></star-ratings>
 
-                            <span>{{ $avgRatings }} Ratings and {{ $total }} Reviews</span>
+                            <span class="fs16 fw6">{{ $avgRatings }} Ratings and {{ $total }} Reviews</span>
 
                             @if (core()->getConfigData('catalog.products.review.guest_review') || auth()->guard('customer')->check())
                                 <a href="{{ route('shop.reviews.create', ['slug' => $product->url_key ]) }}">

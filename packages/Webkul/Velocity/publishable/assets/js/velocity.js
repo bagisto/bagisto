@@ -1115,7 +1115,6 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('child-sidebar', __webpack
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('card-list-content', __webpack_require__(60));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('card-list-header', __webpack_require__(63));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('magnify-image', __webpack_require__(66));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('content-header', __webpack_require__(69));
 
 window.eventBus = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
 
@@ -36510,7 +36509,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row mb15 col-12", class: _vm.rowClass }, [
+  return _c("div", { class: "row mb15 col-12 " + _vm.rowClass }, [
     _c("div", { staticClass: "col-4 no-padding" }, [
       _c("h2", { staticClass: "fs20 fw6" }, [_vm._v(_vm._s(_vm.headerHeading))])
     ]),
@@ -36588,7 +36587,7 @@ var render = function() {
                   _c(
                     "a",
                     {
-                      staticClass: "remove-decoration normal-text",
+                      staticClass: "remove-decoration link-color",
                       attrs: {
                         href: _vm.viewAll,
                         title: "View all " + _vm.headerHeading + " products"
@@ -36762,233 +36761,9 @@ if (false) {
 }
 
 /***/ }),
-/* 69 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(70)
-/* template */
-var __vue_template__ = __webpack_require__(71)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "src/Resources/assets/js/UI/components/content-header.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1dfc78dc", Component.options)
-  } else {
-    hotAPI.reload("data-v-1dfc78dc", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 70 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['heading', 'headerContent', 'isEnabled']
-});
-
-/***/ }),
-/* 71 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "row velocity-divide-page remove-padding-margin vc-header" },
-    [
-      _c("div", { staticClass: "vc-small-screen container" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-8" }, [
-            _c(
-              "div",
-              { staticClass: "row col-12" },
-              [
-                _vm._m(0),
-                _vm._v(" "),
-                _c("logo-component", { attrs: { "add-class": "pl10" } })
-              ],
-              1
-            )
-          ]),
-          _vm._v(" "),
-          _vm._m(1)
-        ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            "main-category fs16 unselectable fw6 cursor-pointer left",
-          on: {
-            mouseout: function($event) {
-              return _vm.toggleSidebar("0", $event, "mouseout")
-            },
-            mouseover: function($event) {
-              return _vm.toggleSidebar("0", $event, "mouseover")
-            }
-          }
-        },
-        [
-          _c("i", {
-            staticClass: "rango-view-list text-down-4 align-vertical-top fs18"
-          }),
-          _vm._v(" "),
-          _c("span", {
-            staticClass: "pl5",
-            domProps: { textContent: _vm._s(_vm.heading) },
-            on: {
-              mouseover: function($event) {
-                return _vm.toggleSidebar("0", $event, "mouseover")
-              }
-            }
-          })
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "content-list right" }, [
-        _c(
-          "ul",
-          { staticClass: "no-margin ul-shadow", attrs: { type: "none" } },
-          _vm._l(_vm.headerContent, function(content, index) {
-            return _c("li", { key: index }, [
-              content["content_type"] == "link"
-                ? _c("a", {
-                    attrs: {
-                      href: content["page_link"],
-                      target: content["link_target"] ? "_blank" : "_self"
-                    },
-                    domProps: { textContent: _vm._s(content.title) }
-                  })
-                : _c("a", {
-                    attrs: { href: "#" },
-                    domProps: { textContent: _vm._s(content.title) }
-                  })
-            ])
-          }),
-          0
-        )
-      ])
-    ]
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "hamburger-wrapper" }, [
-      _c("i", { staticClass: "rango-toggle hamburger" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row col-4 right-vc-header" }, [
-      _c("i", { staticClass: "fs16 fw6 rango-search" }),
-      _vm._v(" "),
-      _c("i", { staticClass: "material-icons text-down-3" }, [
-        _vm._v("shopping_cart")
-      ])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-1dfc78dc", module.exports)
-  }
-}
-
-/***/ }),
+/* 69 */,
+/* 70 */,
+/* 71 */,
 /* 72 */
 /***/ (function(module, exports) {
 
