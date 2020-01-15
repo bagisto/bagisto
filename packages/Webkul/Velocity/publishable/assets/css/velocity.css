@@ -1718,6 +1718,28 @@
   position: absolute;
 }
 
+.checkout-process .coupon-container input {
+  max-width: 200px;
+}
+
+.checkout-process .coupon-container button {
+  margin: 20px 0;
+}
+
+.checkout-process .coupon-container .applied-coupon-details {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.checkout-process .coupon-container .applied-coupon-details label:nth-of-type(1) {
+  color: #26A37C;
+}
+
+.checkout-process .coupon-container .rango-close {
+  cursor: pointer;
+  margin-left: 5px;
+}
+
 .address-container .address-holder {
   margin-top: 15px;
 }
@@ -1729,6 +1751,10 @@
 
 .address-container .address-holder .card {
   height: 100%;
+}
+
+.address-container .address-holder .card h5 {
+  font-size: 14px;
 }
 
 .address-container .address-holder .card ul li {

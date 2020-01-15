@@ -4,7 +4,7 @@
     $newProducts = app('Webkul\Velocity\Repositories\Product\ProductRepository')->getNewProducts($count);
 @endphp
 
-@if (! empty($newProducts))
+@if (! empty($newProducts) && $newProducts->total())
     <div class="container-fluid">
         <card-list-header heading="{{ __('shop::app.home.new-products') }}">
         </card-list-header>

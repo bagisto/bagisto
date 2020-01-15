@@ -1004,6 +1004,30 @@
             position: absolute;
         }
     }
+
+    .coupon-container {
+        input {
+            max-width: 200px;
+        }
+
+        button {
+            margin: 20px 0;
+        }
+
+        .applied-coupon-details {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .applied-coupon-details label:nth-of-type(1) {
+            color: $theme-color;
+        }
+
+        .rango-close {
+            cursor: pointer;
+            margin-left: 5px;
+        }
+    }
 }
 
 .address-container {
@@ -1017,6 +1041,10 @@
 
         .card {
             height: 100%;
+
+            h5 {
+                font-size: 14px;
+            }
 
             ul {
                 li {
