@@ -811,6 +811,42 @@
   top: 8px;
 }
 
+.nav-container {
+  position: absolute;
+  height: 100vh;
+  background-color: white;
+  display: inline-block;
+  border: 1px solid red;
+  margin-left: -16px;
+  z-index: 2;
+}
+
+.nav-container .wrapper {
+  width: 250px !important;
+  margin-left: 13px;
+}
+
+.nav-container .wrapper .offers {
+  color: rgba(0, 0, 0, 0.83);
+  line-height: 20px;
+  font-weight: 530;
+  border-top: 1px solid rgba(0, 0, 0, 0.24);
+}
+
+.nav-container .wrapper .offers li {
+  font-size: 16px;
+  margin: 13px 13px 0px 13px;
+}
+
+.nav-container .wrapper .layered-category {
+  border-top: 1px solid rgba(0, 0, 0, 0.24);
+}
+
+.nav-container .wrapper .layered-category li {
+  font-size: 14px;
+  margin: 13px 13px 0px 13px;
+}
+
 .review-page-container {
   padding: 20px;
 }
