@@ -24,6 +24,8 @@
     box-sizing: inherit;
 }
 
+
+
 ::-webkit-scrollbar {
     width: 3px;
 }
@@ -43,6 +45,12 @@
 
 *::-webkit-input-placeholder {
     font-family: $font-family-pro;
+}
+
+input[type=checkbox] {
+    width: 24px;
+    height: 15px;
+    margin-right: 10px;
 }
 
 .form-control {

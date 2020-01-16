@@ -1745,14 +1745,8 @@
         }
     }
 
-        input[type=checkbox] + label{
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-            border-radius: 2px;
-            border: 1px solid rgba(0,0,0,0.53);
-            margin: 4px 5px -6px -3px;
+        input[type=checkbox] + span{
+            margin-left: 10px !important;
         }
     }
 
