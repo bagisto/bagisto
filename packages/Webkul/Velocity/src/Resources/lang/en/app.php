@@ -244,6 +244,12 @@ return [
             'top-brands' => 'Top Brands',
         ],
     ],
+
+    'responsive' => [
+        'header' => [
+            'greeting' => 'Welcome, :customer !',
+        ]
+    ]
 ]
 
 ?>

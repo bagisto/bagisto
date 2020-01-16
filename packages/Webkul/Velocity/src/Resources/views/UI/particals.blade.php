@@ -154,8 +154,11 @@
             <div class="row">
                 <div class="col-8">
                     <div class="row col-12">
-                    @include('shop::UI.shared.responsive-header')
-                        <div class="hamburger-wrapper active" v-on:click="toggleHamburger">
+                        <div v-if="hamburger">
+                            @include('shop::UI.shared.responsive-header')
+                        </div>
+
+                        <div class="hamburger-wrapper" v-on:click="toggleHamburger">
                             <i class="rango-toggle hamburger"></i>
                         </div>
                         <logo-component add-class="ml30"></logo-component>
@@ -362,7 +365,8 @@
 
             data: function () {
                 return {
-                    'isSearchbar': false
+                    'isSearchbar': false,
+                    'hamburger': false
                 }
             },
 
@@ -383,8 +387,12 @@
                 },
 
                 toggleHamburger: function () {
-                    alert("dfsdsf");
-                    // element.classList.add("active");
+                    this.hamburger = true;
+                },
+
+                closeDrawer: function() {
+                    $('.nav-container').hide();
+                    this.hamburger = false;
                 }
             }
         })
