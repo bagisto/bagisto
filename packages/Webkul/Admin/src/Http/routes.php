@@ -726,7 +726,6 @@ Route::group(['middleware' => ['web']], function () {
                     'view' => 'admin::cms.index'
                 ])->name('admin.cms.index');
 
-                Route::get('preview/{url_key}', 'Webkul\CMS\Http\Controllers\Admin\PageController@preview')->name('admin.cms.preview');
 
                 Route::get('create', 'Webkul\CMS\Http\Controllers\Admin\PageController@create')->defaults('_config', [
                     'view' => 'admin::cms.create'
@@ -736,11 +735,11 @@ Route::group(['middleware' => ['web']], function () {
                     'redirect' => 'admin.cms.index'
                 ])->name('admin.cms.store');
 
-                Route::get('update/{id}', 'Webkul\CMS\Http\Controllers\Admin\PageController@edit')->defaults('_config', [
+                Route::get('edit/{id}', 'Webkul\CMS\Http\Controllers\Admin\PageController@edit')->defaults('_config', [
                     'view' => 'admin::cms.edit'
                 ])->name('admin.cms.edit');
 
-                Route::post('update/{id}', 'Webkul\CMS\Http\Controllers\Admin\PageController@update')->defaults('_config', [
+                Route::post('edit/{id}', 'Webkul\CMS\Http\Controllers\Admin\PageController@update')->defaults('_config', [
                     'redirect' => 'admin.cms.index'
                 ])->name('admin.cms.update');
 

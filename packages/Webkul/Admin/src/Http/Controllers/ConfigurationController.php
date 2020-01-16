@@ -120,7 +120,7 @@ class ConfigurationController extends Controller
     {
         Event::fire('core.configuration.save.before');
 
-        if (request()->hasFile('general.design.admin_logo.logo_image')) {
+        if (request()->has('general.design.admin_logo.logo_image') && ! request()->input('general.design.admin_logo.logo_image.delete')) {
             $this->validate(request(), [
                 'general.design.admin_logo.logo_image'  => 'required|mimes:jpeg,bmp,png,jpg'
             ]);

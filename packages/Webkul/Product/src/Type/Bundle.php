@@ -405,7 +405,9 @@ class Bundle extends AbstractType
      */
     public function prepareForCart($data)
     {
-        if (! isset($data['bundle_options']))
+        $data['bundle_options'] = array_filter($this->validateBundleOptionForCart($data['bundle_options']));
+
+        if (! isset($data['bundle_options']) || ! count($data['bundle_options']))
             return trans('shop::app.checkout.cart.integrity.missing_options');
         
         $products = parent::prepareForCart($data);
@@ -419,6 +421,9 @@ class Bundle extends AbstractType
                 return $cartProduct;
 
             $cartProduct[0]['parent_id'] = $this->product->id;
+            $cartProduct[0]['quantity'] = $data['quantity'];
+            $cartProduct[0]['total_weight'] = $cartProduct[0]['weight'] * $data['quantity'];
+            $cartProduct[0]['base_total_weight'] = $cartProduct[0]['weight'] * $data['quantity'];
 
             $products = array_merge($products, $cartProduct);
 
@@ -426,9 +431,9 @@ class Bundle extends AbstractType
             $products[0]['base_price'] += $cartProduct[0]['base_total'];
             $products[0]['total'] += $cartProduct[0]['total'];
             $products[0]['base_total'] += $cartProduct[0]['base_total'];
-            $products[0]['weight'] += $cartProduct[0]['weight'];
-            $products[0]['total_weight'] += $cartProduct[0]['total_weight'];
-            $products[0]['base_total_weight'] += $cartProduct[0]['base_total_weight'];
+            $products[0]['weight'] += ($cartProduct[0]['weight'] * $products[0]['quantity']);
+            $products[0]['total_weight'] += ($cartProduct[0]['total_weight'] * $products[0]['quantity']);
+            $products[0]['base_total_weight'] += ($cartProduct[0]['base_total_weight'] * $products[0]['quantity']);
         }
 
         return $products;
@@ -483,7 +488,29 @@ class Bundle extends AbstractType
         if ($this->product->id != $options2['product_id'])
             return false;
 
-        return $options1['bundle_options'] == $options2['bundle_options'];
+        return $options1['bundle_options'] == $options2['bundle_options']
+                && $options1['bundle_option_qty'] == $this->getOptionQuantities($options2);
+    }
+
+    /**
+     * Remove invalid options from add to cart request
+     *
+     * @param array $data
+     * @return array
+     */
+    public function validateBundleOptionForCart($data)
+    {
+        foreach ($data as $key => $value) {
+            if (is_array($value)) {
+                $data[$key] = $this->validateBundleOptionForCart($value);
+            } elseif ($value && $value) {
+                $data[$key] = (int)$value;
+            } else {
+                unset($data[$key]);
+            }
+        }
+
+        return $data;
     }
 
     /**
@@ -506,6 +533,9 @@ class Bundle extends AbstractType
                 $optionProduct = $this->productBundleOptionProductRepository->find($optionProductId);
 
                 $qty = $data['bundle_option_qty'][$optionId] ?? $optionProduct->qty;
+
+                if (! isset($data['bundle_option_qty'][$optionId]))
+                    $data['bundle_option_qty'][$optionId] = $qty;
                 
                 $labels[] = $qty . ' x ' . $optionProduct->product->name . ' ' . core()->currency($optionProduct->product->getTypeInstance()->getMinimalPrice());
             }
@@ -520,6 +550,36 @@ class Bundle extends AbstractType
         }
 
         return $data;
+    }
+
+    /**
+     * Returns additional information for items
+     *
+     * @param array $data
+     * @return array
+     */
+    public function getOptionQuantities($data)
+    {
+        $optionQuantities = [];
+
+        foreach ($data['bundle_options'] as $optionId => $optionProductIds) {
+            foreach ($optionProductIds as $optionProductId) {
+                if (! $optionProductId)
+                    continue;
+
+                if (isset($data['bundle_option_qty'][$optionId])) {
+                    $optionQuantities[$optionId] = $data['bundle_option_qty'][$optionId];
+
+                    continue;
+                }
+
+                $optionProduct = $this->productBundleOptionProductRepository->find($optionProductId);
+
+                $optionQuantities[$optionId] = $optionProduct->qty;
+            }
+        }
+
+        return $optionQuantities;
     }
 
     /**

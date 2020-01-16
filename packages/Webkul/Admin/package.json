@@ -15,7 +15,10 @@
     "jquery": "^3.4.1",
     "laravel-mix": "^5.0.0",
     "laravel-mix-merge-manifest": "^0.1.2",
-    "vue": "^2.6.10"
+    "sass": "^1.24.4",
+    "sass-loader": "^8.0.2",
+    "vue": "^2.6.10",
+    "vue-template-compiler": "^2.6.11"
   },
   "dependencies": {
     "vee-validate": "^2.2.15"
