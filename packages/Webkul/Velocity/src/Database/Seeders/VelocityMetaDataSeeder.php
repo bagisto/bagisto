@@ -14,7 +14,7 @@ class VelocityMetaDataSeeder extends Seeder
         DB::table('velocity_meta_data')->insert([
             'id' => 1,
 
-            'home_page_content' => "<p>@include('shop::home.advertisements.advertisement-one')@include('shop::home.featured-products') @include('shop::home.advertisements.advertisement-two') @include('shop::home.new-products') @include('shop::home.advertisements.advertisement-three')</p>",
+            'home_page_content' => "<p>@include('shop::home.advertisements.advertisement-four')@include('shop::home.featured-products') @include('shop::home.advertisements.advertisement-three') @include('shop::home.new-products') @include('shop::home.advertisements.advertisement-two')</p>",
 
             'footer_left_content' => trans('velocity::app.admin.meta-data.footer-left-raw-content'),
 
