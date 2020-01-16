@@ -2422,6 +2422,10 @@
   padding-top: 0;
 }
 
+.slides-container .VueCarousel .VueCarousel-slide:not(:nth-of-type(1)) img {
+  display: none;
+}
+
 .filter-attributes-item {
   margin-bottom: 10px;
   border-bottom: 1px solid #CCCCCC;
@@ -2526,11 +2530,6 @@ body .container-margin {
   float: right;
   margin-right: 10px;
   background-image: url("../images/Icon-Arrow-Right.svg");
-}
-
-.banner-icon {
-  height: unset;
-  display: inline-block;
 }
 
 .card-product-image-container {
@@ -3305,6 +3304,14 @@ body::after {
 
 .footer .footer-copy-right p {
   padding: 0px 20px;
+}
+
+.footer .footer-copy-right a {
+  color: unset;
+}
+
+.footer .footer-copy-right a:hover {
+  color: #4D7EA8;
 }
 
 .padding-15 {

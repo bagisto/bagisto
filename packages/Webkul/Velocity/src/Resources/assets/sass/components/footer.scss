@@ -186,6 +186,14 @@
         p {
             padding: 0px 20px;
         }
+
+        a {
+            color: unset;
+        }
+
+        a:hover {
+            color: $link-color;
+        }
     }
 
 }

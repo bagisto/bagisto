@@ -1,13 +1,17 @@
 <template>
     <carousel
-        :perPage="parseInt(slidesPerPage)"
         :navigationEnabled="true"
         :paginationEnabled="true"
-        :class="
-            [(navigationEnabled == 'hide') ? 'navigation-hide' : '',
+        :perPage="parseInt(slidesPerPage)"
+        :loop="loop == 'true' ? true : false"
+        :autoplay="autoplay == 'true' ? true : false"
+        :autoplayTimeout="timeout ? parseInt(timeout) : 2000"
+        :class="[
+            (navigationEnabled == 'hide') ? 'navigation-hide' : '',
             (paginationEnabled == 'hide') ? 'pagination-hide' : '',
-            addClass]
-        ">
+            addClass
+        ]"
+        slide-click="slideClicked">
 
         <slot
             v-for="index in slidesCount"
@@ -20,6 +24,9 @@
     export default {
         props: [
             'id',
+            'loop',
+            'timeout',
+            'autoplay',
             'addClass',
             'slidesCount',
             'slidesPerPage',
@@ -29,6 +36,12 @@
 
         data: function () {
             return {}
+        },
+
+        methods: {
+            slideClicked: function () {
+                debugger
+            }
         }
     }
 </script>

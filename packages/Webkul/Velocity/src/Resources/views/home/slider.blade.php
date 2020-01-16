@@ -1,28 +1,53 @@
-<div class="slides-container">
-    <carousel-component
-        :slides-count="{{ ! empty($sliderData) ? sizeof($sliderData) : 1 }}"
-        slides-per-page="1"
-        navigation-enabled="hide">
+<slider-component></slider-component>
 
-        @if (! empty($sliderData))
-            @foreach ($sliderData as $index => $slider)
+@push('scripts')
+    <script type="text/x-template" id="slider-template">
+        <div class="slides-container">
+            <carousel-component
+                loop="true"
+                timeout="5000"
+                autoplay="true"
+                slides-per-page="1"
+                navigation-enabled="hide"
+                :slides-count="{{ ! empty($sliderData) ? sizeof($sliderData) : 1 }}">
 
-                <slide slot="slide-{{ $index }}">
-                    <a @if($slider['slider_path']) href="{{ $slider['slider_path'] }}" @endif>
+                @if (! empty($sliderData))
+                    @foreach ($sliderData as $index => $slider)
+
+                        <slide slot="slide-{{ $index }}">
+                            <a @if($slider['slider_path']) href="{{ $slider['slider_path'] }}" @endif>
+                                <img
+                                    class="col-12 no-padding banner-icon"
+                                    src="{{ url()->to('/') . '/storage/' . $slider['path'] }}" />
+                            </a>
+                        </slide>
+
+                    @endforeach
+                @else
+                    <slide slot="slide-0">
                         <img
+                            loading="lazy"
                             class="col-12 no-padding banner-icon"
-                            src="{{ url()->to('/') . '/storage/' . $slider['path'] }}" />
-                    </a>
-                </slide>
+                            src="{{ asset('/themes/velocity/assets/images/banner.png') }}" />
+                    </slide>
+                @endif
 
-            @endforeach
-        @else
-            <slide slot="slide-0">
-                <img
-                    class="col-12 no-padding banner-icon"
-                    src="{{ asset('themes/velocity/assets/images/banner.png') }}" />
-            </slide>
-        @endif
+            </carousel-component>
+        </div>
+    </script>
 
-    </carousel-component>
-</div>
+    <script type='text/javascript'>
+        (() => {
+            Vue.component('slider-component', {
+                template: '#slider-template',
+
+                mounted: function () {
+                    let banners = this.$el.querySelectorAll('img');
+                    banners.forEach(banner => {
+                        banner.style.display = 'block';
+                    });
+                }
+            })
+        })()
+    </script>
+@endpush
