@@ -218,6 +218,34 @@
         }
     }
 
+    .layouter,
+    #product-form {
+        height: 100%;
+    }
+
+    #product-form {
+        .form-container {
+            height: 100%;
+            position: relative;
+
+            .left {
+                top: 60px;
+                position: sticky;
+            }
+        }
+    }
+
+    .accordian {
+        &.active {
+            .accordian-header {
+                padding-bottom: 0px;
+            }
+        }
+    }
+
+    .full-description {
+        font-size: 14px;
+    }
 }
 
 .store-meta-images {

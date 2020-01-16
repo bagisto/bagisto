@@ -21,7 +21,7 @@
                             <ul class="font-clr pl30">
                                 @foreach ($categoryDetails->children as $subCategory)
                                     <li>
-                                        <a href="{{ $subCategory->slug }}" class="unset">
+                                        <a href="{{ $subCategory->slug }}" class="remove-decoration normal-text">
                                             {{ $subCategory->name }}
                                         </a>
                                     </li>

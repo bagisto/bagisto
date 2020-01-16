@@ -41,7 +41,7 @@
 
                             @if (core()->getConfigData('catalog.products.review.guest_review') || auth()->guard('customer')->check())
                                 <a href="{{ route('shop.reviews.create', ['slug' => $product->url_key ]) }}">
-                                    <button type="button" class="btn-write-review">{{ __('velocity::app.products.write-your-review') }}</button>
+                                    <button type="button" class="theme-btn light">{{ __('velocity::app.products.write-your-review') }}</button>
                                 </a>
                             @endif
                         </div>
@@ -51,13 +51,13 @@
                             @for ($i = 5; $i >= 1; $i--)
 
                                 <div class="row">
-                                    <span class="col-lg-3 no-padding fs16 fw6">{{ $i }} Star</span>
+                                    <span class="col-3 no-padding fs16 fw6">{{ $i }} Star</span>
 
-                                    <div class="col-lg-7 rating-bar" title="{{ $percentageRatings[$i] }}%">
+                                    <div class="col-7 rating-bar" title="{{ $percentageRatings[$i] }}%">
                                         <div style="width: {{ $percentageRatings[$i] }}%"></div>
                                     </div>
 
-                                    <span class="col-lg-2 fs16">{{ $countRatings[$i] }}</span>
+                                    <span class="col-2 fs16">{{ $countRatings[$i] }}</span>
                                 </div>
                             @endfor
 
@@ -80,7 +80,7 @@
 
                         @if (core()->getConfigData('catalog.products.review.guest_review') || auth()->guard('customer')->check())
                             <a href="{{ route('shop.reviews.create', ['slug' => $product->url_key ]) }}">
-                                <button type="button" class="btn-write-review">{{ __('velocity::app.products.write-your-review') }}</button>
+                                <button type="button" class="theme-btn light">{{ __('velocity::app.products.write-your-review') }}</button>
                             </a>
                         @endif
                     </div>
@@ -119,7 +119,7 @@
                 <div class="customer-reviews" slot="body">
                     @foreach ($reviewHelper->getReviews($product)->paginate(10) as $review)
                         <div class="row">
-                            <h4 class="col-lg-12">{{ $review->title }}</h4>
+                            <h4 class="col-lg-12 fs18">{{ $review->title }}</h4>
 
                             <star-ratings
                                 :ratings="{{ $review->rating }}"
@@ -130,7 +130,7 @@
                                 <span>{{ $review->comment }}</span>
                             </div>
 
-                            <div class="col-lg-12 review-date-time">
+                            <div class="col-lg-12 mt5">
                                 <span>{{ __('velocity::app.products.review-by') }} -</span>
 
                                 <label>
@@ -145,7 +145,7 @@
 
                     <a
                         href="{{ route('shop.reviews.index', ['slug' => $product->url_key ]) }}"
-                        class="mb20"
+                        class="mb20 link-color"
                     >{{ __('velocity::app.products.view-all-reviews') }}</a>
                 </div>
             </accordian>
@@ -157,7 +157,7 @@
             <div class="customer-reviews">
                 @foreach ($reviewHelper->getReviews($product)->paginate(10) as $review)
                     <div class="row">
-                        <h4 class="col-lg-12">{{ $review->title }}</h4>
+                        <h4 class="col-lg-12 fs18">{{ $review->title }}</h4>
 
                         <star-ratings
                             :ratings="{{ $review->rating }}"
@@ -168,7 +168,7 @@
                             <span>{{ $review->comment }}</span>
                         </div>
 
-                        <div class="col-lg-12 review-date-time">
+                        <div class="col-lg-12 mt5">
                             @if ("{{ $review->name }}")
                                 <span>{{ __('velocity::app.products.review-by') }} -</span>
 
@@ -189,7 +189,7 @@
         @if (core()->getConfigData('catalog.products.review.guest_review') || auth()->guard('customer')->check())
             <div class="customer-rating" style="border: none">
                 <a href="{{ route('shop.reviews.create', ['slug' => $product->url_key ]) }}">
-                    <button type="button" class="btn-write-review">{{ __('velocity::app.products.write-your-review') }}</button>
+                    <button type="button" class="theme-btn light">{{ __('velocity::app.products.write-your-review') }}</button>
                 </a>
             </div>
         @endif

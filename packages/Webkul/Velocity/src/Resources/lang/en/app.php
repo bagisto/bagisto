@@ -106,6 +106,7 @@ return [
             'footer' => 'Footer',
             'product-policy' => 'Product Policy',
             'slider-path' => 'Slider Path',
+            'category-logo' => 'Category logo',
         ],
         'category' => [
             'title' => 'Category Menu List',

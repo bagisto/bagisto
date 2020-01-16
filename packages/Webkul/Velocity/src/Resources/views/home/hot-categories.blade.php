@@ -26,7 +26,7 @@
                                 <ul type="none">
                                     @foreach ($categoryDetails->children as $subCategory)
                                         <li>
-                                            <a href="{{ $slug . '/' . $subCategory->slug }}" class="unset">
+                                            <a href="{{ $slug . '/' . $subCategory->slug }}" class="remove-decoration normal-text">
                                                 {{ $subCategory->name }}
                                             </a>
                                         </li>

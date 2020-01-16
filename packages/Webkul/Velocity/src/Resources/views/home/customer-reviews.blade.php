@@ -22,12 +22,12 @@
                                 </div>
 
                                 <div>
-                                    <label class="fs20 no-margin display-block">
+                                    <h4 class="fs20 fw6 no-margin display-block">
                                         {{ $review['name'] }}
-                                    </label>
+                                    </h4>
 
                                     <div class="product-info fs16">
-                                        <span>Reviewed- <a class="remove-decoration link-color" href="{{ route('shop.productOrCategory.index', ['slug' => $review->product->url_key]) }}">{{$review['title']}}</a></span>
+                                        <span>Reviewed- <a class="remove-decoration link-color" href="{{ route('shop.productOrCategory.index', ['slug' => $review->product->url_key]) }}">{{$review->product->name}}</a></span>
                                     </div>
                                 </div>
                             </div>

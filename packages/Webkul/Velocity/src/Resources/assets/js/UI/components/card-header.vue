@@ -16,7 +16,7 @@
                         class="col-lg-2 no-padding"
                         v-for="(tab, index) in tabs.slice(0, 3)">
 
-                        <h2 class="fs14 fw6 cursor-pointer tab" :class="index == 0 ? 'active' : ''">{{ tab }}</h2>
+                        <h2 class="fs16 fw6 cursor-pointer tab" :class="index == 0 ? 'active' : ''">{{ tab }}</h2>
                     </div>
                 </template>
 
@@ -40,9 +40,9 @@
                 </template>
 
                 <template v-if="(! (viewAll == 'false' || viewAll == '')) && viewAll">
-                    <div class="mr15">
+                    <div>
                         <a :href="viewAll" :title="`View all ${headerHeading} products`" class="remove-decoration link-color">
-                            <h2 class="fs14 fw6 cursor-pointer tab">View All</h2>
+                            <h2 class="fs16 fw6 cursor-pointer tab">View All</h2>
                         </a>
                     </div>
                 </template>

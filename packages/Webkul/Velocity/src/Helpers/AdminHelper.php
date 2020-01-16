@@ -22,8 +22,12 @@ class AdminHelper
 
     public function saveLocaleImg($locale)
     {
-        $locale->locale_image = $this->uploadImage('locale_image');
-        $locale->save();
+        $uploadedImagePath = $this->uploadImage('locale_image.image_0');
+
+        if ($uploadedImagePath) {
+            $locale->locale_image = $uploadedImagePath;
+            $locale->save();
+        }
 
         return $locale;
     }
@@ -32,8 +36,12 @@ class AdminHelper
     {
         $category = $this->categoryRepository->findOrFail($categoryId);
 
-        $category->category_icon_path = $this->uploadImage('category_icon_path');
-        $category->save();
+        $uploadedImagePath = $this->uploadImage('category_icon_path.image_0');
+
+        if ($uploadedImagePath) {
+            $category->category_icon_path = $uploadedImagePath;
+            $category->save();
+        }
 
         return $category;
     }
@@ -50,9 +58,11 @@ class AdminHelper
             Storage::delete($dir . $file);
 
             $image = $request->file($file)->store($dir);
+
+            return $image;
         }
 
-        return $image;
+        return false;
     }
 
     public function storeSliderDetails($slider)

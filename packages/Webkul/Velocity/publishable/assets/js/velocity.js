@@ -36532,7 +36532,7 @@ var render = function() {
                     _c(
                       "h2",
                       {
-                        staticClass: "fs14 fw6 cursor-pointer tab",
+                        staticClass: "fs16 fw6 cursor-pointer tab",
                         class: index == 0 ? "active" : ""
                       },
                       [_vm._v(_vm._s(tab))]
@@ -36582,7 +36582,7 @@ var render = function() {
           _vm._v(" "),
           !(_vm.viewAll == "false" || _vm.viewAll == "") && _vm.viewAll
             ? [
-                _c("div", { staticClass: "mr15" }, [
+                _c("div", [
                   _c(
                     "a",
                     {
@@ -36593,7 +36593,7 @@ var render = function() {
                       }
                     },
                     [
-                      _c("h2", { staticClass: "fs14 fw6 cursor-pointer tab" }, [
+                      _c("h2", { staticClass: "fs16 fw6 cursor-pointer tab" }, [
                         _vm._v("View All")
                       ])
                     ]
