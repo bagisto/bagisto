@@ -55,7 +55,7 @@ class SliderRepository extends Repository
      */
     public function save(array $data)
     {
-        Event::fire('core.settings.slider.create.before', $id);
+        Event::fire('core.settings.slider.create.before', $data);
 
         $channelName = $this->channelRepository->find($data['channel_id'])->name;
 
