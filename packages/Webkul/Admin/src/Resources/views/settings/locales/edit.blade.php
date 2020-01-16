@@ -7,7 +7,7 @@
 @section('content')
     <div class="content">
 
-        <form method="POST" action="{{ route('admin.locales.update', $locale->id) }}" @submit.prevent="onSubmit">
+        <form method="POST" action="{{ route('admin.locales.update', $locale->id) }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
             <div class="page-header">
                 <div class="page-title">
                     <h1>
@@ -28,7 +28,7 @@
                 <div class="form-container">
                     @csrf()
 
-                    {!! view_render_event('bagisto.admin.settings.locale.edit.before') !!}
+                    {!! view_render_event('bagisto.admin.settings.locale.edit.before', ['locale' => $locale]) !!}
 
                     <input name="_method" type="hidden" value="PUT">
 
@@ -60,7 +60,7 @@
                         </div>
                     </accordian>
 
-                    {!! view_render_event('bagisto.admin.settings.locale.edit.after') !!}
+                    {!! view_render_event('bagisto.admin.settings.locale.edit.after', ['locale' => $locale]) !!}
                 </div>
             </div>
         </form>

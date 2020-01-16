@@ -42,7 +42,7 @@
         <div class="sorter">
             <label>{{ __('shop::app.products.sort-by') }}</label>
 
-            <select onchange="window.location.href = this.value">
+            <select style="-webkit-appearance: none;" onchange="window.location.href = this.value">
 
                 @foreach ($toolbarHelper->getAvailableOrders() as $key => $order)
 
