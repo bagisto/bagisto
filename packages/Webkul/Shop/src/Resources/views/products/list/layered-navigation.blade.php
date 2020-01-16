@@ -116,7 +116,7 @@
             data: function() {
                 return {
                     attributes: @json($filterAttributes),
-
+                    
                     appliedFilters: {}
                 }
             },
