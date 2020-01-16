@@ -9,6 +9,8 @@
 @endsection
 
 @push('scripts')
+    @include('shop::checkout.cart.coupon')
+
     <script type="text/x-template" id="checkout-template">
         <div class="container">
             <div id="checkout" class="checkout-process offset-1 row col-11">
@@ -36,6 +38,11 @@
 
                         <payment-section @onPaymentMethodSelected="paymentMethodSelected($event)">
                         </payment-section>
+
+                        <coupon-component
+                            @onApplyCoupon="getOrderSummary"
+                            @onRemoveCoupon="getOrderSummary">
+                        </coupon-component>
                     </div>
 
                     <div

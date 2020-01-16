@@ -54,8 +54,8 @@ class VelocityServiceProvider extends ServiceProvider
         );
 
         Event::listen([
-            'bagisto.admin.catalog.category.edit_form_accordian.general.after',
-            'bagisto.admin.catalog.category.create_form_accordian.general.after',
+            'bagisto.admin.catalog.category.edit_form_accordian.description_images.controls.after',
+            'bagisto.admin.catalog.category.create_form_accordian.description_images.controls.after',
         ], function($viewRenderEventManager) {
                 $viewRenderEventManager->addTemplate(
                     'velocity::admin.catelog.categories.category-icon'

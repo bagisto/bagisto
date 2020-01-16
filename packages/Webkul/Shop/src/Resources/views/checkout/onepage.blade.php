@@ -10,7 +10,7 @@
 
 @push('scripts')
     @include('shop::checkout.cart.coupon')
-    
+
     <script type="text/x-template" id="checkout-template">
         <div id="checkout" class="checkout-process">
             <div class="col-main">

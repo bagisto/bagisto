@@ -56,6 +56,7 @@
 
     .rating-bar {
         top: 12px;
+        padding: 0px;
         height: 5px;
         position: relative;
         background-color: $light-background;
@@ -67,14 +68,10 @@
         }
     }
 
-    .btn-write-review {
-        margin-top: 10px;
-        color: #26A37C;
-        font-weight: 600;
-        padding: 8px 11px;
-        background-color: white;
-        box-shadow: 0 1px 0 0 #CFCFCF;
-        border: 1px solid rgba(0,0,0,0.12);
+    .theme-btn {
+        &.light {
+            margin-top: 10px;
+        }
     }
 }
 
@@ -326,9 +323,9 @@
         padding: 0 10px !important;
         font-size: 24px !important;
         font-weight: 600 !important;
-        border: 1px solid $border-common !important;
         color: $dark-color !important;
         background-color: $white-color;
+        border: 1px solid $border-common !important;
     }
 
     button:nth-of-type(1) {
@@ -336,12 +333,16 @@
     }
 
     input {
-        width: 50px;
+        max-width: 28px;
         cursor: default;
         font-size: 16px !important;
         border-left: 0px !important;
         border-right: 0px !important;
         text-align: center;
+    }
+
+    button:hover {
+        background-color: #f5f5f5 !important;
     }
 
     button:nth-last-of-type(1) {
@@ -1004,6 +1005,30 @@
             position: absolute;
         }
     }
+
+    .coupon-container {
+        input {
+            max-width: 200px;
+        }
+
+        button {
+            margin: 20px 0;
+        }
+
+        .applied-coupon-details {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .applied-coupon-details label:nth-of-type(1) {
+            color: $theme-color;
+        }
+
+        .rango-close {
+            cursor: pointer;
+            margin-left: 5px;
+        }
+    }
 }
 
 .address-container {
@@ -1017,6 +1042,10 @@
 
         .card {
             height: 100%;
+
+            h5 {
+                font-size: 14px;
+            }
 
             ul {
                 li {
@@ -1219,7 +1248,21 @@
 
 #app {
     min-height: 65vh;
+    position: relative;
 }
+.main-container-wrapper {
+    .sticky-header {
+        top: 0px;
+        z-index: 1100;
+        position: sticky;
+        background: white;
+
+        &.header-shadow {
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        }
+    }
+}
+
 
 .search-container {
     padding: 30px 20px;
@@ -1682,7 +1725,7 @@
     }
 }
 
-.filter-attributes-item {
+    .filter-attributes-item {
     margin-bottom: 10px;
     border-bottom: 1px solid #CCCCCC;
         &.active {
@@ -1701,13 +1744,6 @@
             background-color: white;
         }
     }
-    .checkbox {
-        label {
-            padding-left: 0px !important;
-        }
-        input[type=checkbox]{
-            display: none;
-        }
 
         input[type=checkbox] + label{
             display: inline-block;
@@ -1715,7 +1751,6 @@
             height: 20px;
             cursor: pointer;
             border-radius: 2px;
-            // background-color: white;
             border: 1px solid rgba(0,0,0,0.53);
             margin: 4px 5px -6px -3px;
         }
@@ -1725,7 +1760,7 @@
         display: none ;
         margin-left: 7px;
     }
-}
+
 
 .layered-filter-wrapper {
     @extend .scrollable;

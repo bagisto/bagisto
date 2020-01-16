@@ -15,7 +15,7 @@
             @endforeach
 
             <div class="locale-icon">
-                <img src="{{ asset('/storage/' . $localeImage) }}" />
+                <img src="{{ asset('/storage/' . $localeImage) }}" onerror="this.src = '{{ asset($localeImage) }}'" />
             </div>
 
             <select

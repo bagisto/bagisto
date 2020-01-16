@@ -33,7 +33,6 @@
             margin-bottom: 0px;
         }
     </style>
-
 @endpush
 
 @section('full-content-wrapper')

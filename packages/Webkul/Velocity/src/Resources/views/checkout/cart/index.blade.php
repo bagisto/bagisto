@@ -128,6 +128,8 @@
                 @if ($cart)
                     <div class="col-4 offset-1 row order-summary-container">
                         @include('shop::checkout.total.summary', ['cart' => $cart])
+
+                        <coupon-component></coupon-component>
                     </div>
                 @else
                     <div class="fs16 row col-12">
@@ -151,6 +153,8 @@
 @endsection
 
 @push('scripts')
+    @include('shop::checkout.cart.coupon')
+
     <script type="text/javascript">
         function removeLink(message) {
             if (!confirm(message))

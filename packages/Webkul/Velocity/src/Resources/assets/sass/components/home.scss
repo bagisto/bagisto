@@ -201,8 +201,19 @@ header #search-form > *:focus {
         background: $white-color;
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 
-        .col-sm-10 {
-            line-height: 3.5rem;
+        .policy {
+            display: table;
+            padding: 0 10px;
+
+            .left {
+                margin-right: 10px;
+                display: inline-block;
+            }
+
+            .right {
+                display: table-cell;
+                vertical-align: middle;
+            }
         }
     }
 }
@@ -430,7 +441,11 @@ header #search-form > *:focus {
             box-shadow: 0 4px 17px 0 rgba(0,0,0,0.11);
 
             > div:not(:last-child) {
-                margin-bottom: 15px;
+                margin-bottom: 10px;
+            }
+
+            .star-ratings {
+                margin-bottom: 5px !important;
             }
         }
     }
