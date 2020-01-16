@@ -37,8 +37,6 @@ class CoreServiceProvider extends ServiceProvider
         ]);
 
         SliderProxy::observe(SliderObserver::class);
-
-        $this->registerEloquentFactoriesFrom(__DIR__ . '/../Database/Factories');
     }
 
     /**
@@ -63,16 +61,5 @@ class CoreServiceProvider extends ServiceProvider
         $this->app->singleton('core', function () {
             return app()->make(Core::class);
         });
-    }
-
-    /**
-     * Register factories.
-     *
-     * @param  string  $path
-     * @return void
-     */
-    protected function registerEloquentFactoriesFrom($path): void
-    {
-        $this->app->make(EloquentFactory::class)->load($path);
     }
 }
