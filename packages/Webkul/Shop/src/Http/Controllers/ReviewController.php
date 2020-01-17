@@ -87,7 +87,7 @@ class ReviewController extends Controller
 
         if (auth()->guard('customer')->user()) {
             $data['customer_id'] = auth()->guard('customer')->user()->id;
-            $data['name'] = auth()->guard('customer')->user()->first_name .' ' . auth()->guard('customer')->user()->last_name;
+            $data['name'] = auth()->guard('customer')->user()->first_name . ' ' . auth()->guard('customer')->user()->last_name;
         }
 
         $data['status'] = 'pending';
@@ -110,7 +110,7 @@ class ReviewController extends Controller
     {
         $product = $this->productRepository->findBySlugOrFail($slug);
 
-        return view($this->_config['view'],compact('product'));
+        return view($this->_config['view'], compact('product'));
     }
 
     /**
