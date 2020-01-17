@@ -17,16 +17,6 @@
                 <span></span>
             </div>
 
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
             {!! view_render_event('bagisto.shop.customers.account.address.edit.before', ['address' => $address]) !!}
 
             <form id="customer-address-form" method="post" action="{{ route('customer.address.edit', $address->id) }}" @submit.prevent="onSubmit">
@@ -43,10 +33,17 @@
                         <span class="control-error" v-if="errors.has('company_name')">@{{ errors.first('company_name') }}</span>
                     </div>
 
-                    <div class="control-group" :class="[errors.has('vat_id') ? 'has-error' : '']">
-                        <label for="vat_id">{{ __('shop::app.customer.account.address.edit.vat_id') }}</label>
-                        <input type="text" value="{{ $address->vat_id }}" class="control" name="vat_id" data-vv-as="&quot;{{ __('shop::app.customer.account.address.edit.vat_id') }}&quot;">
-                        <span class="control-error" v-if="errors.has('vat_id')">@{{ errors.first('vat_id') }}</span>
+                    <div class="control-group {!! $errors->has('vat_id') ? 'has-error' : '' !!}">
+                        <label for="vat_id">{{ __('shop::app.customer.account.address.create.vat_id') }}</label>
+                        <input type="text" class="control" name="vat_id"
+                               value="{{ $address->vat_id }}"
+                               data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.vat_id') }}&quot;">
+
+                        <span class="control-error" v-if="{!! $errors->has('vat_id') !!}">
+                            @foreach ($errors->get('vat_id') as $message)
+                                {{ $message }}
+                            @endforeach
+                        </span>
                     </div>
 
                     <?php $addresses = explode(PHP_EOL, $address->address1); ?>
