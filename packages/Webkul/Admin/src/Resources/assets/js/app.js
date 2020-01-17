@@ -87,7 +87,7 @@ $(document).ready(function () {
             },
 
             addFlashMessages() {
-                if (typeof flashMessages !== 'undefined') {
+                if (typeof flashMessages == 'undefined') {
                     return;
                 };
                 
