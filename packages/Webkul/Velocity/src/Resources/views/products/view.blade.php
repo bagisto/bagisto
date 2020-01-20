@@ -134,11 +134,14 @@
             </section>
 
             <div class="store-meta-images col-3">
-                @foreach (json_decode($velocityMetaData['product_view_images'], true) as $image)
-                    @if ($image && $image !== '')
-                        <img src="{{ url()->to('/') }}/storage/{{ $image }}" />
-                    @endif
-                @endforeach
+                @isset($velocityMetaData['product_view_images'])
+                    @foreach (json_decode($velocityMetaData['product_view_images'], true) as $image)
+                        @if ($image && $image !== '')
+                            <img src="{{ url()->to('/') }}/storage/{{ $image }}" />
+                        @endif
+                    @endforeach
+                @endisset
+
             </div>
 
         </div>
