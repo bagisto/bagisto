@@ -2,9 +2,12 @@ const { mix } = require("laravel-mix");
 require("laravel-mix-merge-manifest");
 
 var publicPath = "../../../resources/themes/velocity/assets";
+
 if (mix.inProduction()) {
     publicPath = 'publishable/assets';
 }
+
+publicPath = 'publishable/assets';
 
 mix.setPublicPath(publicPath).mergeManifest();
 mix.disableNotifications();
@@ -15,8 +18,6 @@ mix
         "js/velocity.js"
     )
 
-    .copy(path.resolve('src/Resources/assets/images'), publicPath + '/images')
-    .copy(path.resolve('src/Resources/assets/fonts'), publicPath + '/fonts')
     .sass(
         __dirname + '/src/Resources/assets/sass/admin.scss',
         __dirname + '/' + publicPath + '/css/velocity-admin.css'
