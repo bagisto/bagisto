@@ -1209,7 +1209,7 @@ $(document).ready(function () {
         }
     });
 
-    var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
+    new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         el: "#app",
         VueToast: __WEBPACK_IMPORTED_MODULE_2_vue_toast_notification___default.a,
 

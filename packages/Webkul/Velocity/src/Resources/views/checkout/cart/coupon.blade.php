@@ -48,40 +48,34 @@
 
             methods: {
                 applyCoupon: function() {
-                    var self = this;
-
-                    if (! self.coupon_code.length)
+                    if (! this.coupon_code.length)
                         return;
 
-                    self.error_message = null;
+                    this.error_message = null;
+                    this.disable_button = true;
 
-                    self.disable_button = true;
+                    let code = this.coupon_code;
+                    axios.post(
+                        '{{ route('shop.checkout.cart.coupon.apply') }}', {code}
+                    ).then(response => {
+                        if (response.data.success) {
+                            this.$emit('onApplyCoupon');
+                            this.applied_coupon = this.coupon_code;
+                            this.coupon_code = '';
+                            this.$root.addFlashMessages();
 
-                    axios.post('{{ route('shop.checkout.cart.coupon.apply') }}', {code: self.coupon_code})
-                        .then(function(response) {
-                            if (response.data.success) {
-                                self.$emit('onApplyCoupon');
+                            this.redirectIfCartPage();
+                        } else {
+                            this.error_message = response.data.message;
+                        }
 
-                                self.applied_coupon = self.coupon_code;
+                        this.disable_button = false;
+                    }).catch(error => {
+                        debugger
+                        this.error_message = error.response.data.message;
 
-                                self.coupon_code = '';
-
-                                window.flashMessages = [{'type': 'alert-success', 'message': response.data.message}];
-
-                                self.$root.addFlashMessages();
-
-                                self.redirectIfCartPage();
-                            } else {
-                                self.error_message = response.data.message;
-                            }
-
-                            self.disable_button = false;
-                        })
-                        .catch(function(error) {
-                            self.error_message = error.response.data.message;
-
-                            self.disable_button = false;
-                        });
+                        this.disable_button = false;
+                    });
                 },
 
                 removeCoupon: function () {

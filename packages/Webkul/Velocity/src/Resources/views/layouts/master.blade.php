@@ -130,44 +130,53 @@
         {!! view_render_event('bagisto.shop.layout.body.after') !!}
 
         <script type="text/javascript">
-            let messageType = 'alert-success';
-            let messageLabel = 'dsfghjkl';
+            (() => {
+                var showAlert = (messageType, messageLabel, message) => {
+                    debugger
+                    if (messageType && message !== '') {
+                        let html = `<div class="alert ${messageType} alert-dismissible" id="alert">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>${messageLabel} !</strong> ${message}.
+                        </div>`;
 
-            @if ($message = session('success'))
-                messageType = 'alert-success';
-                messageLabel = 'Success';
-            @elseif ($message = session('warning'))
-                messageType = 'alert-warning';
-                messageLabel = 'Warning';
-            @elseif ($message = session('error'))
-                messageType = 'alert-danger';
-                messageLabel = 'Error';
-            @elseif ($message = session('info'))
-                messageType = 'alert-info';
-                messageLabel = 'Info';
-            @endif
+                        document.body.innerHTML += html;
 
-            if (messageType && '{{ $message }}' !== '') {
-                let html = `<div class="alert ${messageType} alert-dismissible" id="alert">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <strong>${messageLabel} !</strong> {{ $message }}.
-                </div>`;
+                        window.setTimeout(() => {
+                            $(".alert").fadeTo(500, 0).slideUp(500, () => {
+                                $(this).remove();
+                            });
+                        }, 5000);
+                    }
+                }
 
-                document.body.innerHTML += html;
+                let messageType = 'alert-success';
+                let messageLabel = 'dsfghjkl';
 
-                window.setTimeout(() => {
-                    $(".alert").fadeTo(500, 0).slideUp(500, () => {
-                        $(this).remove();
-                    });
-                }, 5000);
-            }
-
-            window.serverErrors = [];
-            @if(isset($errors))
-                @if (count($errors))
-                    window.serverErrors = @json($errors->getMessages());
+                @if ($message = session('success'))
+                    messageType = 'alert-success';
+                    messageLabel = 'Success';
+                @elseif ($message = session('warning'))
+                    messageType = 'alert-warning';
+                    messageLabel = 'Warning';
+                @elseif ($message = session('error'))
+                    messageType = 'alert-danger';
+                    messageLabel = 'Error';
+                @elseif ($message = session('info'))
+                    messageType = 'alert-info';
+                    messageLabel = 'Info';
                 @endif
-            @endif
+
+                if (messageType && '{{ $message }}' !== '') {
+                    showAlert(messageType, messageLabel, '{{ $message }}');
+                }
+
+                window.serverErrors = [];
+                @if(isset($errors))
+                    @if (count($errors))
+                        window.serverErrors = @json($errors->getMessages());
+                    @endif
+                @endif
+            })()
         </script>
 
         <script type="text/javascript" src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}"></script>

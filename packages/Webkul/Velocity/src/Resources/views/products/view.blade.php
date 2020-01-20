@@ -134,16 +134,17 @@
             </section>
 
             <div class="store-meta-images col-3">
-                @isset($velocityMetaData['product_view_images'])
+                @if(
+                    isset($velocityMetaData['product_view_images'])
+                    && $velocityMetaData['product_view_images']
+                )
                     @foreach (json_decode($velocityMetaData['product_view_images'], true) as $image)
                         @if ($image && $image !== '')
                             <img src="{{ url()->to('/') }}/storage/{{ $image }}" />
                         @endif
                     @endforeach
-                @endisset
-
+                @endif
             </div>
-
         </div>
 
     {!! view_render_event('bagisto.shop.products.view.after', ['product' => $product]) !!}

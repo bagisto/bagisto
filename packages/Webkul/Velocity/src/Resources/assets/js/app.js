@@ -120,7 +120,7 @@ $(document).ready(function () {
         }
     });
 
-    const app = new Vue({
+    new Vue({
         el: "#app",
         VueToast,
 
