@@ -2,7 +2,6 @@
     $isCustomer = auth()->guard('customer')->check();
 @endphp
 
-<form>
     @if (isset($shipping) && $shipping)
         <div :class="`row col-12 ${errors.has('address-form.shipping[first_name]') ? 'has-error' : ''}`">
             <label for="shipping[first_name]" class="required">
@@ -495,4 +494,3 @@
             @endphp
         @endauth
     @endif
-</form>
