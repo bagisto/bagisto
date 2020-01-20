@@ -208,6 +208,7 @@ body {
         + .account-modal {
             @extend .modal-dialog;
 
+            top: 40px;
             right: 10px;
             z-index: 100;
             height: max-content;
