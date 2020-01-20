@@ -101,19 +101,22 @@ class CustomerController extends Controller
 
         $data = collect(request()->input())->except('_token')->toArray();
 
-        if ($data['date_of_birth'] == "")
+        if (isset ($data['date_of_birth']) && $data['date_of_birth'] == "") {
             unset($data['date_of_birth']);
+        }
 
-        if ($data['oldpassword'] != "" || $data['oldpassword'] != null) {
-            if (Hash::check($data['oldpassword'], auth()->guard('customer')->user()->password)) {
-                $data['password'] = bcrypt($data['password']);
+        if (isset ($data['oldpassword'])) {
+            if ($data['oldpassword'] != "" || $data['oldpassword'] != null) {
+                if (Hash::check($data['oldpassword'], auth()->guard('customer')->user()->password)) {
+                    $data['password'] = bcrypt($data['password']);
+                } else {
+                    session()->flash('warning', trans('shop::app.customer.account.profile.unmatch'));
+
+                    return redirect()->back();
+                }
             } else {
-                session()->flash('warning', trans('shop::app.customer.account.profile.unmatch'));
-
-                return redirect()->back();
+                unset($data['password']);
             }
-        } else {
-            unset($data['password']);
         }
 
         if ($this->customerRepository->update($data, $id)) {
