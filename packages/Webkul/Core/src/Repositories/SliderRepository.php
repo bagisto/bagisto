@@ -2,10 +2,11 @@
 
 namespace Webkul\Core\Repositories;
 
-use Illuminate\Container\Container as App;
-use Webkul\Core\Eloquent\Repository;
-use Webkul\Core\Repositories\ChannelRepository;
 use Storage;
+use Webkul\Core\Eloquent\Repository;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Container\Container as App;
+use Webkul\Core\Repositories\ChannelRepository;
 
 /**
  * Slider Repository
@@ -54,6 +55,8 @@ class SliderRepository extends Repository
      */
     public function save(array $data)
     {
+        Event::fire('core.settings.slider.create.before', $data);
+
         $channelName = $this->channelRepository->find($data['channel_id'])->name;
 
         $dir = 'slider_images/' . $channelName;
@@ -82,7 +85,11 @@ class SliderRepository extends Repository
             unset($data['image']);
         }
 
-        return $this->create($data);
+        $slider = $this->create($data);
+
+        Event::fire('core.settings.slider.create.after', $slider);
+
+        return true;
     }
 
     /**
@@ -91,6 +98,8 @@ class SliderRepository extends Repository
      */
     public function updateItem(array $data, $id)
     {
+        Event::fire('core.settings.slider.update.before', $id);
+
         $channelName = $this->channelRepository->find($data['channel_id'])->name;
 
         $dir = 'slider_images/' . $channelName;
@@ -119,7 +128,9 @@ class SliderRepository extends Repository
             unset($data['image']);
         }
 
-        $this->update($data, $id);
+        $slider = $this->update($data, $id);
+
+        Event::fire('core.settings.slider.update.after', $slider);
 
         return true;
     }
