@@ -61,7 +61,7 @@ class CartController extends Controller
     /**
      * Method to populate the cart page which will be populated before the checkout process.
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\View\View 
      */
     public function index()
     {
@@ -148,9 +148,9 @@ class CartController extends Controller
         $result = Cart::moveToWishlist($id);
 
         if ($result) {
-            session()->flash('success', trans('shop::app.wishlist.moved'));
+            session()->flash('success', trans('shop::app.checkout.cart.move-to-wishlist-success'));
         } else {
-            session()->flash('warning', trans('shop::app.wishlist.move-error'));
+            session()->flash('warning', trans('shop::app.checkout.cart.move-to-wishlist-error'));
         }
 
         return redirect()->back();

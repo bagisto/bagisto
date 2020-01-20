@@ -184,6 +184,10 @@ abstract class AbstractType
                 continue;
             }
 
+            if ($attribute->type == 'price' && isset($data[$attribute->code]) && $data[$attribute->code] == '') {
+                $data[$attribute->code] = null;
+            }
+
             if ($attribute->type == 'date' && $data[$attribute->code] == '' && $route != 'admin.catalog.products.massupdate') {
                 $data[$attribute->code] = null;
             }
@@ -593,9 +597,8 @@ abstract class AbstractType
     /**
      * Get request quantity
      *
-     * @param Product $product
-     * @param array   $data
-     * @return CartItem|void
+     * @param array $data
+     * @return array
      */
     public function getQtyRequest($data)
     {

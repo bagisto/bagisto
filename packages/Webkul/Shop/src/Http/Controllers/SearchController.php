@@ -41,8 +41,8 @@ use Webkul\Product\Repositories\SearchRepository;
 
     /**
      * Index to handle the view loaded with the search results
-     *
-     * @return \Illuminate\View\View
+     * 
+     * @return \Illuminate\View\View 
      */
     public function index()
     {

@@ -35818,12 +35818,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['id', 'addClass', 'slidesCount', 'slidesPerPage', 'navigationEnabled', 'paginationEnabled'],
+    props: ['id', 'loop', 'timeout', 'autoplay', 'addClass', 'slidesCount', 'slidesPerPage', 'navigationEnabled', 'paginationEnabled'],
 
     data: function data() {
         return {};
+    },
+
+    methods: {
+        slideClicked: function slideClicked() {
+            debugger;
+        }
     }
 });
 
@@ -35844,9 +35854,13 @@ var render = function() {
         _vm.addClass
       ],
       attrs: {
-        perPage: parseInt(_vm.slidesPerPage),
         navigationEnabled: true,
-        paginationEnabled: true
+        paginationEnabled: true,
+        perPage: parseInt(_vm.slidesPerPage),
+        loop: _vm.loop == "true" ? true : false,
+        autoplay: _vm.autoplay == "true" ? true : false,
+        autoplayTimeout: _vm.timeout ? parseInt(_vm.timeout) : 2000,
+        "slide-click": "slideClicked"
       }
     },
     [

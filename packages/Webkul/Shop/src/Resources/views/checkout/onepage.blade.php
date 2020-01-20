@@ -234,7 +234,7 @@
                 },
 
                 isCustomerExist: function() {
-                    this.$validator.attach('email', 'required|email');
+                    this.$validator.attach({ name: "email", rules: "required|email" });
 
                     var this_this = this;
 

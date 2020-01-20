@@ -195,14 +195,14 @@
                                     </span>
                                 </div>
 
-                                @if ($shipment->inventory_source)
+                                @if ($shipment->inventory_source || $shipment->inventory_source_name)
                                     <div class="row">
                                         <span class="title">
                                             {{ __('admin::app.sales.shipments.inventory-source') }}
                                         </span>
 
                                         <span class="value">
-                                            {{ $shipment->inventory_source->name }}
+                                            {{ $shipment->inventory_source ? $shipment->inventory_source->name : $shipment->inventory_source_name }}
                                         </span>
                                     </div>
                                 @endif

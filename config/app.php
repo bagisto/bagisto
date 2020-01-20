@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => 'Asia/Kolkata',
+    'timezone' => env('APP_TIMEZONE','Asia/Kolkata'),
 
     /*
     |--------------------------------------------------------------------------
@@ -102,7 +102,7 @@ return [
     |
     */
 
-    'currency' => 'USD',
+    'currency' => env('APP_CURRENCY','USD'),
 
     /*
     |--------------------------------------------------------------------------
@@ -218,6 +218,8 @@ return [
 
         //Laravel Maatwebsite
         Maatwebsite\Excel\ExcelServiceProvider::class,
+
+        Barryvdh\Debugbar\ServiceProvider::class,
 
         //Repository
         Prettus\Repository\Providers\RepositoryServiceProvider::class,

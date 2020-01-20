@@ -67,6 +67,7 @@ return [
                 'name' => 'default_rate',
                 'title' => 'admin::app.admin.system.rate',
                 'type' => 'text',
+                'validation' => 'required',
                 'channel_based' => true,
                 'locale_based' => false
             ], [
