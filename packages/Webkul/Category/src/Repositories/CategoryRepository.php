@@ -75,7 +75,6 @@ class CategoryRepository extends Repository
             : $this->model::orderBy('position', 'ASC')->get()->toTree();
     }
 
-
     /**
      * Get root categories
      *
