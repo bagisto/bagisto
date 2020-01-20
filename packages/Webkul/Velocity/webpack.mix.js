@@ -19,6 +19,10 @@ mix
     )
 
     .sass(
+        __dirname + '/src/Resources/assets/sass/admin.scss',
+        __dirname + '/' + publicPath + '/css/velocity-admin.css'
+    )
+    .sass(
         __dirname + '/src/Resources/assets/sass/app.scss',
         __dirname + '/' + publicPath + '/css/velocity.css', {
             includePaths: ['node_modules/bootstrap-sass/assets/stylesheets/'],

@@ -1,7 +1,7 @@
 @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 @inject ('reviewHelper', 'Webkul\Product\Helpers\Review')
 @inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar')
-@include('shop::UI.product-quick-view')
+{{--  @include('shop::UI.product-quick-view')  --}}
 
 @php
     if (isset($checkmode) && $checkmode && $toolbarHelper->getCurrentMode() == "list") {
@@ -72,7 +72,7 @@
                     src="{{ $productBaseImage['medium_image_url'] }}"
                     alt="{{ $product->name }}">
 
-                <quick-view-btn details="{{ $product }}"></quick-view-btn>
+                {{--  <quick-view-btn details="{{ $product }}"></quick-view-btn>  --}}
             </a>
 
             <div class="card-body">

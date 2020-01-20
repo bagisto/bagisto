@@ -666,7 +666,10 @@
 .account-content {
     .sidebar {
         height: 100%;
-        border-right: 1px solid $border-general;
+
+        .customer-sidebar {
+            border-right: 1px solid $border-general;
+        }
 
         .customer-sidebar {
             .account-details {

@@ -1463,6 +1463,9 @@
 
 .account-content .sidebar {
   height: 100%;
+}
+
+.account-content .sidebar .customer-sidebar {
   border-right: 1px solid #E5E5E5;
 }
 
@@ -12755,6 +12758,7 @@ body {
 }
 
 #top #account + .account-modal {
+  top: 40px;
   right: 10px;
   z-index: 100;
   height: -webkit-max-content;

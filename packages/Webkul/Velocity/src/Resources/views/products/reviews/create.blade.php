@@ -14,13 +14,15 @@
 
             <div class="col-6">
                 <div class="row customer-rating">
-                    <h2 class="full-width">{{ __('shop::app.reviews.write-review') }}</h2>
+                    <h2 class="full-width">
+                        {{ __('shop::app.reviews.write-review') }}
+                    </h2>
 
                     <form
                         method="POST"
                         class="review-form"
-                        action="{{ route('shop.reviews.store', $product->product_id ) }}"
-                        @submit.prevent="onSubmit">
+                        @submit.prevent="onSubmit"
+                        action="{{ route('shop.reviews.store', $product->product_id ) }}">
 
                         @csrf
 
@@ -29,7 +31,7 @@
                                 {{ __('admin::app.customers.reviews.rating') }}
                             </label>
                             <star-ratings ratings="5" size="24" editable="true"></star-ratings>
-                            <span class="control-error" v-if="errors.has('rating')">
+                            <span :class="`control-error ${errors.has('rating') ? '' : 'hide'}`" v-if="errors.has('rating')">
                                 @{{ errors.first('rating') }}
                             </span>
                         </div>
@@ -45,7 +47,9 @@
                                 v-validate="'required'"
                                 value="{{ old('title') }}" />
 
-                            <span class="control-error" v-if="errors.has('title')">@{{ errors.first('title') }}</span>
+                            <span :class="`control-error ${errors.has('title') ? '' : 'hide'}`">
+                                @{{ errors.first('title') }}
+                            </span>
                         </div>
 
                         @if (core()->getConfigData('catalog.products.review.guest_review') && ! auth()->guard('customer')->user())
@@ -54,7 +58,9 @@
                                     {{ __('shop::app.reviews.name') }}
                                 </label>
                                 <input  type="text" class="control" name="name" v-validate="'required'" value="{{ old('name') }}">
-                                <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
+                                <span :class="`control-error ${errors.has('name') ? '' : 'hide'}`">
+                                    @{{ errors.first('name') }}
+                                </span>
                             </div>
                         @endif
 
@@ -69,7 +75,7 @@
                                 v-validate="'required'"
                                 value="{{ old('comment') }}">
                             </textarea>
-                            <span class="control-error" v-if="errors.has('comment')">
+                            <span :class="`control-error ${errors.has('comment') ? '' : 'hide'}`">
                                 @{{ errors.first('comment') }}
                             </span>
                         </div>
