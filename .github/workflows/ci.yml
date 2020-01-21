@@ -8,9 +8,9 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Setup PHP
-      uses: shivammathur/setup-php@v1
-      with:
-      php-version: '7.4'
+    uses: shivammathur/setup-php@v1
+    with:
+      php-version: 7.4
       extensions: curl, intl, mbstring, openssl, pdo, pdo_mysql, tokenizer
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.ci', '.env');"
