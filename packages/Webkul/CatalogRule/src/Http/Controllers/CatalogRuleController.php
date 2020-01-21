@@ -94,11 +94,11 @@ class CatalogRuleController extends Controller
 
         $data = request()->all();
 
-        Event::fire('promotions.catalog_rule.create.before');
+        Event::dispatch('promotions.catalog_rule.create.before');
 
         $catalogRule = $this->catalogRuleRepository->create($data);
 
-        Event::fire('promotions.catalog_rule.create.after', $catalogRule);
+        Event::dispatch('promotions.catalog_rule.create.after', $catalogRule);
 
         $this->catalogRuleIndexHelper->reindexComplete();
 
@@ -141,11 +141,11 @@ class CatalogRuleController extends Controller
 
         $catalogRule = $this->catalogRuleRepository->findOrFail($id);
 
-        Event::fire('promotions.catalog_rule.update.before', $catalogRule);
+        Event::dispatch('promotions.catalog_rule.update.before', $catalogRule);
 
         $catalogRule = $this->catalogRuleRepository->update(request()->all(), $id);
 
-        Event::fire('promotions.catalog_rule.update.after', $catalogRule);
+        Event::dispatch('promotions.catalog_rule.update.after', $catalogRule);
 
         $this->catalogRuleIndexHelper->reindexComplete();
 
@@ -165,11 +165,11 @@ class CatalogRuleController extends Controller
         $catalogRule = $this->catalogRuleRepository->findOrFail($id);
 
         try {
-            Event::fire('promotions.catalog_rule.delete.before', $id);
+            Event::dispatch('promotions.catalog_rule.delete.before', $id);
 
             $this->catalogRuleRepository->delete($id);
 
-            Event::fire('promotions.catalog_rule.delete.after', $id);
+            Event::dispatch('promotions.catalog_rule.delete.after', $id);
 
             session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Catalog Rule']));
 

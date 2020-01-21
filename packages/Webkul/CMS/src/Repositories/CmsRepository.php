@@ -31,7 +31,7 @@ class CmsRepository extends Repository
      */
     public function create(array $data)
     {
-        Event::fire('cms.pages.create.before');
+        Event::dispatch('cms.pages.create.before');
 
         $model = $this->getModel();
 
@@ -46,7 +46,7 @@ class CmsRepository extends Repository
 
         $page->channels()->sync($data['channels']);
 
-        Event::fire('cms.pages.create.after', $page);
+        Event::dispatch('cms.pages.create.after', $page);
 
         return $page;
     }
@@ -61,13 +61,13 @@ class CmsRepository extends Repository
     {
         $page = $this->find($id);
 
-        Event::fire('cms.pages.update.before', $id);
+        Event::dispatch('cms.pages.update.before', $id);
 
         parent::update($data, $id, $attribute);
 
         $page->channels()->sync($data['channels']);
 
-        Event::fire('cms.pages.update.after', $id);
+        Event::dispatch('cms.pages.update.after', $id);
 
         return $page;
     }

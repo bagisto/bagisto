@@ -615,7 +615,7 @@ class Cart {
         if (! $cart = $this->getCart())
             return false;
 
-        Event::fire('checkout.cart.collect.totals.before', $cart);
+        Event::dispatch('checkout.cart.collect.totals.before', $cart);
 
         $this->calculateItemsTax();
 
@@ -658,7 +658,7 @@ class Cart {
 
         $cart->save();
 
-        Event::fire('checkout.cart.collect.totals.after', $cart);
+        Event::dispatch('checkout.cart.collect.totals.after', $cart);
     }
 
     /**

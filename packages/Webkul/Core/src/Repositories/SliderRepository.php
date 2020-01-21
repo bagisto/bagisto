@@ -56,7 +56,7 @@ class SliderRepository extends Repository
      */
     public function save(array $data)
     {
-        Event::fire('core.settings.slider.create.before', $data);
+        Event::dispatch('core.settings.slider.create.before', $data);
 
         $channelName = $this->channelRepository->find($data['channel_id'])->name;
 
@@ -88,7 +88,7 @@ class SliderRepository extends Repository
 
         $slider = $this->create($data);
 
-        Event::fire('core.settings.slider.create.after', $slider);
+        Event::dispatch('core.settings.slider.create.after', $slider);
 
         return true;
     }
@@ -99,7 +99,7 @@ class SliderRepository extends Repository
      */
     public function updateItem(array $data, $id)
     {
-        Event::fire('core.settings.slider.update.before', $id);
+        Event::dispatch('core.settings.slider.update.before', $id);
 
         $channelName = $this->channelRepository->find($data['channel_id'])->name;
 
@@ -131,7 +131,7 @@ class SliderRepository extends Repository
 
         $slider = $this->update($data, $id);
 
-        Event::fire('core.settings.slider.update.after', $slider);
+        Event::dispatch('core.settings.slider.update.after', $slider);
 
         return true;
     }
