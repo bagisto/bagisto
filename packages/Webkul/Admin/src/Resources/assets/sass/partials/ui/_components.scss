@@ -1,0 +1,27 @@
+// Accordion
+.accordian-header {
+	background-color: $accordian-header;
+}
+
+// buttons
+.btn.btn-primary{
+    background: $btn-primary-bg;
+}
+
+.fixed-action {
+    position: fixed;
+    top: 108px;
+    right: 32px;
+    z-index: 20;
+}
+
+.fixed-action-slight {
+    position: fixed;
+    top: 94px;
+    right: 32px;
+    z-index: 20;
+}
+
+.pagination {
+    margin-top: 30px;
+}

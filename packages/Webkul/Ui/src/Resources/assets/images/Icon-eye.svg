@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+    <title>Icon-Delete</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icon-Delete" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12.5,18 C15.9978034,18 19.1644701,16 22,12 C19.1644701,8 15.9978034,6 12.5,6 C9.00219658,6 5.83552992,8 3,12 C5.83552992,16 9.00219658,18 12.5,18 Z" id="Oval" stroke="#979797" stroke-width="2"></path>
+        <circle id="Oval-13" stroke="#979797" stroke-width="2" cx="12.1389974" cy="12.1389974" r="2.1389974"></circle>
+    </g>
+</svg>
