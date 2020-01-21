@@ -7,6 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
+    - name: Setup PHP
+    uses: shivammathur/setup-php@master
+    with:
+      php-version: 7.2.0
+      extension-csv: curl, intl, mbstring, openssl, pdo, pdo_mysql, tokenizer
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.ci', '.env');"
     - name: Install Dependencies
@@ -23,7 +28,7 @@ jobs:
         DB_DATABASE: database/database.sqlite
       run: |
         set -e
-        @php artisan migrate:fresh --env=testing
+        @php artisan migrate:fresh --env=ci
         vendor/bin/codecept run unit
         vendor/bin/codecept run functional
         vendor/bin/codecept run trigger
