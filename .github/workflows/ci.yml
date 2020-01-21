@@ -8,10 +8,10 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Setup PHP
-    uses: shivammathur/setup-php@master
-    with:
-      php-version: 7.2.0
-      extension-csv: curl, intl, mbstring, openssl, pdo, pdo_mysql, tokenizer
+      uses: shivammathur/setup-php@v1
+      with:
+      php-version: '7.4'
+      extensions: curl, intl, mbstring, openssl, pdo, pdo_mysql, tokenizer
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.ci', '.env');"
     - name: Install Dependencies
