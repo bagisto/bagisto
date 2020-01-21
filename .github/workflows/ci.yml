@@ -10,8 +10,8 @@ jobs:
     - name: Setup PHP
     uses: shivammathur/setup-php@v1
     with:
-      php-version: 7.4
-      extensions: intl, mbstring
+      php-version: '7.4'
+			extensions: intl
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.ci', '.env');"
     - name: Install Dependencies
