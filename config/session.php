@@ -124,7 +124,11 @@ return [
 
     'cookie' => env(
         'SESSION_COOKIE',
+<<<<<<< HEAD
         str_slug(env('APP_NAME', 'laravel'), '_').'_session'
+=======
+        \Illuminate\Support\Str::slug(env('APP_NAME', 'laravel'), '_').'_session'
+>>>>>>> debf060b03516ba67c103e0e9d8382c84a9271f6
     ),
 
     /*
