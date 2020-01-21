@@ -122,7 +122,7 @@ class CategoryController extends Controller
     {
         $category = $this->categoryRepository->findOrFail($id);
 
-        $categories = $this->categoryRepository->getCategoryTree($id);
+        $categories = $this->categoryRepository->getCategoryTreeWithoutDescendant($id);
 
         $attributes = $this->attributeRepository->findWhere(['is_filterable' =>  1]);
 

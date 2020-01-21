@@ -77,6 +77,19 @@ class CategoryRepository extends Repository
     }
 
     /**
+     * Specify category tree
+     *
+     * @param integer $id
+     * @return mixed
+     */
+    public function getCategoryTreeWithoutDescendant($id = null)
+    {
+        return $id
+            ? $this->model::orderBy('position', 'ASC')->where('id', '!=', $id)->whereNotDescendantOf($id)->get()->toTree()
+            : $this->model::orderBy('position', 'ASC')->get()->toTree();
+    }
+
+    /**
      * Get root categories
      *
      * @return mixed
