@@ -133,9 +133,9 @@
                             <div class="col-lg-12 mt5">
                                 <span>{{ __('velocity::app.products.review-by') }} -</span>
 
-                                <label>
+                                <span class="fs16 fw6">
                                     {{ $review->name }},
-                                </label>
+                                </span>
 
                                 <span>{{ core()->formatDate($review->created_at, 'F d, Y') }}
                                 </span>

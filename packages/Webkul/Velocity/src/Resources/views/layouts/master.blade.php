@@ -73,6 +73,7 @@
                         <content-header
                             url="{{ url()->to('/') }}"
                             is-enabled="{{ sizeof($categories) }}"
+                            categories="{{ json_encode($categories) }}"
                             :header-content="{{ json_encode($velocityContent) }}"
                             heading= "{{ __('velocity::app.menu-navbar.text-category') }}"
                         ></content-header>
@@ -132,7 +133,6 @@
         <script type="text/javascript">
             (() => {
                 var showAlert = (messageType, messageLabel, message) => {
-                    debugger
                     if (messageType && message !== '') {
                         let html = `<div class="alert ${messageType} alert-dismissible" id="alert">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>

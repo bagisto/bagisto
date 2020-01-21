@@ -30,7 +30,9 @@
 
                     <div class="col-8 no-padding card-body align-vertical-top">
                         <a :href="`${baseURL}/${product.urlKey}`" class="unset no-padding">
-                            <span class="fs16 text-nowrap">@{{ product.name }}</span>
+                            <div class="product-name">
+                                <span class="fs16 text-nowrap">@{{ product.name }}</span>
+                            </div>
 
                             <div
                                 v-html="product.priceHTML"

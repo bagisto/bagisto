@@ -244,6 +244,14 @@
         > div:last-child {
             margin-top: 10px;
         }
+
+        .product-name,
+        .product-rating {
+            width: 15rem;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
     }
 
     .product-price {
@@ -705,7 +713,7 @@
                     &:hover,
                     &.active {
                         color: $light-link-color;
-                        background-color: $light-background;
+                        background-color: $border-light;
                     }
 
                     i {
@@ -1816,5 +1824,5 @@
 }
 
 .recetly-viewed-products-wrapper {
-    padding: 10px;
+    padding: 2px;
 }

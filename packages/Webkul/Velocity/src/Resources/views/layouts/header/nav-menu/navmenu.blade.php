@@ -23,15 +23,15 @@
         <li
             class="category-list"
             v-if="parent < 10"
-            @mouseover="showOrHide(true)"
-            @mouseleave="showOrHide(false)"
-        >
+            @mouseover="isShow = true"
+            @mouseleave="isShow = false">
+
             <a :href="url+'/categories/'+this.item['translations'][0].slug">
                 @{{ name }}&emsp;
                 <i class="material-icons" v-if="haveChildren && item.parent_id != null">chevron_right</i>
             </a>
 
-            <div class="child-container" v-if="haveChildren && show">
+            <div class="child-container" v-if="haveChildren && isShow">
                 <ul class="child-category" v-for="(child, index) in item.children">
                     <li class="category-list">
 
@@ -105,8 +105,8 @@
 
             data: function() {
                 return {
+                    isShow: false,
                     items_count:0,
-                    show: false,
                 };
             },
 
@@ -130,16 +130,6 @@
                     return this.item.name;
                 }
             },
-
-            methods: {
-                showOrHide: function(status) {
-                    if (status) {
-                        this.show = true;
-                    } else {
-                        this.show = false;
-                    }
-                }
-            }
         });
 
         //Hide show category dropdown

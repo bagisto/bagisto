@@ -11,7 +11,7 @@
 
         <div class="row">
             @foreach ($reviews as $key => $review)
-                <div class="col-3 review-wrapper">
+                <div class="col-lg-3 col-md-12 review-wrapper">
                     <div class="card no-padding">
                         <div class="review-info">
                             <div class="customer-info">

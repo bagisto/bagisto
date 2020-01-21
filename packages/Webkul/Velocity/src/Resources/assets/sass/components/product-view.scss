@@ -1,6 +1,8 @@
 .product-detail {
     padding-top: 20px;
-    margin-bottom: 60px;
+    margin-bottom: 20px;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 
     .magnifier {
         > img {
@@ -230,7 +232,15 @@
 
             .left {
                 top: 60px;
+                padding: 0px;
                 position: sticky;
+
+                .product-image-group {
+                    > div {
+                        margin: 0;
+                        padding: 0;
+                    }
+                }
             }
 
             .right {
@@ -303,5 +313,9 @@
         height: 100%;
         max-height: 300px;
     }
+}
+
+.related-products {
+    margin-bottom: 60px;
 }
 

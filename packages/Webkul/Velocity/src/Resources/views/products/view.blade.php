@@ -37,101 +37,100 @@
 
 @section('full-content-wrapper')
     {!! view_render_event('bagisto.shop.products.view.before', ['product' => $product]) !!}
-
         <div class="row no-margin">
-                <section class="col-12 product-detail">
-                    <div class="layouter">
-                        <product-view>
-                            <div class="form-container">
-                                @csrf()
+            <section class="col-12 product-detail">
+                <div class="layouter">
+                    <product-view>
+                        <div class="form-container">
+                            @csrf()
 
-                                <input type="hidden" name="product_id" value="{{ $product->product_id }}">
+                            <input type="hidden" name="product_id" value="{{ $product->product_id }}">
 
-                                {{-- product-gallery --}}
-                                <div class="left col-lg-5">
-                                    @include ('shop::products.view.gallery')
-                                </div>
+                            {{-- product-gallery --}}
+                            <div class="left col-lg-5">
+                                @include ('shop::products.view.gallery')
+                            </div>
 
-                                {{-- right-section --}}
-                                <div class="right col-lg-7">
-                                    {{-- product-info-section --}}
-                                    <div class="row info">
-                                        <h2 class="col-lg-12">{{ $product->name }}</h2>
+                            {{-- right-section --}}
+                            <div class="right col-lg-7">
+                                {{-- product-info-section --}}
+                                <div class="row info">
+                                    <h2 class="col-lg-12">{{ $product->name }}</h2>
 
-                                        @if ($total)
-                                            <div class="reviews col-lg-12">
-                                                <star-ratings
-                                                    :ratings="{{ $avgStarRating }}"
-                                                    push-class="mr5"
-                                                ></star-ratings>
+                                    @if ($total)
+                                        <div class="reviews col-lg-12">
+                                            <star-ratings
+                                                :ratings="{{ $avgStarRating }}"
+                                                push-class="mr5"
+                                            ></star-ratings>
 
-                                                <div class="reviews">
-                                                    <span>{{ $avgRatings }} Ratings and {{ $total }} Reviews</span>
-                                                </div>
+                                            <div class="reviews">
+                                                <span>{{ $avgRatings }} Ratings and {{ $total }} Reviews</span>
                                             </div>
-                                        @endif
-
-                                        @include ('shop::products.view.stock', ['product' => $product])
-
-                                        <div class="col-12 price">
-                                            @include ('shop::products.price', ['product' => $product])
                                         </div>
-
-                                        @include ('shop::products.add-to-cart', [
-                                            'form' => false,
-                                            'product' => $product,
-                                            'showCartIcon' => false,
-                                        ])
-                                    </div>
-
-                                    {!! view_render_event('bagisto.shop.products.view.short_description.before', ['product' => $product]) !!}
-
-                                    <div class="description">
-                                        <h3 class="col-lg-12">{{ __('velocity::app.products.short-description') }}</h3>
-
-                                        {!! $product->short_description !!}
-                                    </div>
-
-                                    {!! view_render_event('bagisto.shop.products.view.short_description.after', ['product' => $product]) !!}
-
-
-                                    {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
-
-                                    @if ($product->getTypeInstance()->showQuantityBox())
-                                        <quantity-changer></quantity-changer>
-                                    @else
-                                        <input type="hidden" name="quantity" value="1">
                                     @endif
 
-                                    {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
+                                    @include ('shop::products.view.stock', ['product' => $product])
 
-                                    @include ('shop::products.view.configurable-options')
+                                    <div class="col-12 price">
+                                        @include ('shop::products.price', ['product' => $product])
+                                    </div>
 
-                                    @include ('shop::products.view.downloadable')
-
-                                    @include ('shop::products.view.grouped-products')
-
-                                    @include ('shop::products.view.bundle-options')
-
-                                    @include ('shop::products.view.attributes', [
-                                        'active' => true
+                                    @include ('shop::products.add-to-cart', [
+                                        'form' => false,
+                                        'product' => $product,
+                                        'showCartIcon' => false,
                                     ])
-
-                                    {{-- product long description --}}
-                                    @include ('shop::products.view.description')
-
-                                    {{-- reviews count --}}
-                                    @include ('shop::products.view.reviews', ['accordian' => true])
                                 </div>
+
+                                {!! view_render_event('bagisto.shop.products.view.short_description.before', ['product' => $product]) !!}
+
+                                <div class="description">
+                                    <h3 class="col-lg-12">{{ __('velocity::app.products.short-description') }}</h3>
+
+                                    {!! $product->short_description !!}
+                                </div>
+
+                                {!! view_render_event('bagisto.shop.products.view.short_description.after', ['product' => $product]) !!}
+
+
+                                {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
+
+                                @if ($product->getTypeInstance()->showQuantityBox())
+                                    <quantity-changer></quantity-changer>
+                                @else
+                                    <input type="hidden" name="quantity" value="1">
+                                @endif
+
+                                {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
+
+                                @include ('shop::products.view.configurable-options')
+
+                                @include ('shop::products.view.downloadable')
+
+                                @include ('shop::products.view.grouped-products')
+
+                                @include ('shop::products.view.bundle-options')
+
+                                @include ('shop::products.view.attributes', [
+                                    'active' => true
+                                ])
+
+                                {{-- product long description --}}
+                                @include ('shop::products.view.description')
+
+                                {{-- reviews count --}}
+                                @include ('shop::products.view.reviews', ['accordian' => true])
                             </div>
-                        </product-view>
-                    </div>
-
-                    @include ('shop::products.view.related-products')
-
-                    @include ('shop::products.view.up-sells')
-
+                        </div>
+                    </product-view>
+                </div>
             </section>
+
+            <div class="related-products">
+                @include('shop::products.view.related-products')
+                @include('shop::products.view.up-sells')
+            </div>
 
             <div class="store-meta-images col-3">
                 @if(
@@ -146,32 +145,34 @@
                 @endif
             </div>
         </div>
-
     {!! view_render_event('bagisto.shop.products.view.after', ['product' => $product]) !!}
 @endsection
 
 @push('scripts')
     <script type="text/x-template" id="product-view-template">
         <form method="POST" id="product-form" action="{{ route('cart.add', $product->product_id) }}" @click="onSubmit($event)">
-
             <input type="hidden" name="is_buy_now" v-model="is_buy_now">
-
             <slot></slot>
-
         </form>
     </script>
 
     <script type="text/x-template" id="quantity-changer-template">
-        <div class="quantity control-group" :class="[errors.has(controlName) ? 'has-error' : '']">
+        <div :class="`quantity control-group ${errors.has(controlName) ? 'has-error' : ''}`">
             <label class="required">{{ __('shop::app.products.quantity') }}</label>
-
             <button type="button" class="decrease" @click="decreaseQty()">-</button>
 
-            <input :name="controlName" class="control" :value="qty" :v-validate="validations" data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;" readonly>
+            <input
+                :value="qty"
+                class="control"
+                :name="controlName"
+                :v-validate="validations"
+                data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;" readonly>
 
             <button type="button" class="increase" @click="increaseQty()">+</button>
 
-            <span class="control-error" v-if="errors.has(controlName)">@{{ errors.first(controlName) }}</span>
+            <span class="control-error" v-if="errors.has(controlName)">
+                @{{ errors.first(controlName) }}
+            </span>
         </div>
     </script>
 

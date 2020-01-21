@@ -12,8 +12,8 @@
         <section class="row review-page-container">
             @include ('shop::products.view.small-view', ['product' => $product])
 
-            <div class="col-6">
-                <div class="row customer-rating">
+            <div class="col-lg-6 col-md-12">
+                <div class="row customer-rating col-12 remove-padding-margin">
                     <h2 class="full-width">
                         {{ __('shop::app.reviews.write-review') }}
                     </h2>
@@ -92,7 +92,7 @@
             </div>
             @if ($showRecentlyViewed)
                 @include ('shop::products.list.recently-viewed', [
-                    'addClass' => 'col-3'
+                    'addClass' => 'col-lg-3 col-md-12'
                 ])
             @endif
         </section>

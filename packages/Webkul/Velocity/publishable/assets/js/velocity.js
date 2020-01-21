@@ -1111,6 +1111,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component("vue-slider", __webpack_re
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('modal-component', __webpack_require__(45));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('quantity-btn', __webpack_require__(48));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('sidebar-component', __webpack_require__(51));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component("wishlist-component", __webpack_require__(73));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('carousel-component', __webpack_require__(54));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('child-sidebar', __webpack_require__(57));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('card-list-content', __webpack_require__(60));
@@ -1205,6 +1206,14 @@ $(document).ready(function () {
                         eventBus.$emit('onFormError');
                     }
                 });
+            },
+
+            isMobile: function isMobile() {
+                if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
         }
     });
@@ -35822,7 +35831,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['id', 'loop', 'timeout', 'autoplay', 'addClass', 'slidesCount', 'slidesPerPage', 'navigationEnabled', 'paginationEnabled'],
@@ -35860,8 +35868,7 @@ var render = function() {
         perPage: parseInt(_vm.slidesPerPage),
         loop: _vm.loop == "true" ? true : false,
         autoplay: _vm.autoplay == "true" ? true : false,
-        autoplayTimeout: _vm.timeout ? parseInt(_vm.timeout) : 2000,
-        "slide-click": "slideClicked"
+        autoplayTimeout: _vm.timeout ? parseInt(_vm.timeout) : 2000
       }
     },
     [
@@ -36758,8 +36765,8 @@ var render = function() {
       staticClass: "main-product-image",
       attrs: {
         src: _vm.src,
-        id: "active-product-image",
-        "data-zoom-image": _vm.src
+        "data-zoom-image": _vm.src,
+        id: "active-product-image"
       }
     })
   ])
@@ -36785,6 +36792,123 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 71 */,
+/* 72 */,
+/* 73 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(74)
+/* template */
+var __vue_template__ = __webpack_require__(75)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "src/Resources/assets/js/UI/components/wishlist.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-ac965700", Component.options)
+  } else {
+    hotAPI.reload("data-v-ac965700", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 74 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['active'],
+    data: function data() {
+        return {
+            isActive: this.active
+        };
+    }
+});
+
+/***/ }),
+/* 75 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "i",
+    {
+      class: "material-icons",
+      on: {
+        mouseover: function($event) {
+          _vm.isActive ? (_vm.isActive = !_vm.isActive) : ""
+        },
+        mouseout: function($event) {
+          _vm.active !== "" && !_vm.isActive
+            ? (_vm.isActive = !_vm.isActive)
+            : ""
+        }
+      }
+    },
+    [
+      _vm._v(
+        "\n\n    " +
+          _vm._s(_vm.isActive ? "favorite_border" : "favorite") +
+          "\n"
+      )
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-ac965700", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

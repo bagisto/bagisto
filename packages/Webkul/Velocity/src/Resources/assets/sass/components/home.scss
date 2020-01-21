@@ -211,6 +211,13 @@ header #search-form > *:focus {
             }
         }
     }
+
+    .product-policy-wrapper:nth-of-type(1) {
+        padding-left: 0px;
+    }
+    .product-policy-wrapper:nth-last-of-type(1) {
+        padding-right: 0px;
+    }
 }
 /* product policy section */
 
@@ -468,7 +475,6 @@ header #search-form > *:focus {
     .main-category {
         padding: 8px 15px;
         border-top: 1px solid $border-common;
-        border-bottom: 1px solid $border-common;
     }
 
     .content-list {

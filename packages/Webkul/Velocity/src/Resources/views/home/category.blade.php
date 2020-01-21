@@ -16,7 +16,7 @@
                 heading="{{ $categoryDetails->name }}">
             </card-list-header>
 
-            <div class="row flex-nowrap">
+            <div class="carousel-products vc-full-screen">
                 <carousel-component
                     slides-per-page="6"
                     navigation-enabled="hide"
@@ -25,13 +25,26 @@
                     id="{{ $categoryDetails->name }}-carousel">
 
                     @foreach ($products as $index => $product)
-
                         <slide slot="slide-{{ $index }}">
                             @include ('shop::products.list.card', ['product' => $product])
                         </slide>
-
                     @endforeach
+                </carousel-component>
+            </div>
 
+            <div class="carousel-products vc-small-screen">
+                <carousel-component
+                    slides-per-page="3"
+                    navigation-enabled="hide"
+                    pagination-enabled="hide"
+                    :slides-count="{{ sizeof($products) }}"
+                    id="{{ $categoryDetails->name }}-carousel">
+
+                    @foreach ($products as $index => $product)
+                        <slide slot="slide-{{ $index }}">
+                            @include ('shop::products.list.card', ['product' => $product])
+                        </slide>
+                    @endforeach
                 </carousel-component>
             </div>
         </div>

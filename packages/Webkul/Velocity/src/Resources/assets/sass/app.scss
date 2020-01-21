@@ -210,7 +210,7 @@ body {
 
             top: 40px;
             right: 10px;
-            z-index: 100;
+            z-index: 101;
             height: max-content;
             width: 290px !important;
             position: absolute !important;
@@ -653,9 +653,9 @@ header {
                     }
 
                     &:hover {
-                        background-color: #F7F7F9;
                         color: #28557B;
                         text-decoration: none;
+                        background-color: $light-background;
                     }
                 }
 

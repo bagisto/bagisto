@@ -3,7 +3,7 @@
     || core()->getConfigData('customer.settings.newsletter.subscription')
 )
     <div class="newsletter-subscription">
-        <div class="newsletter-wrapper row">
+        <div class="newsletter-wrapper row col-12">
             @if ($velocityMetaData->subscription_bar_content)
                 {!! $velocityMetaData->subscription_bar_content !!}
             @endif

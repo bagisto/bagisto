@@ -8,11 +8,17 @@
 {!! view_render_event('bagisto.shop.products.view.gallery.before', ['product' => $product]) !!}
 
     <div class="product-image-group">
-        <div class="row">
-            <magnify-image src="{{ $images[0]['large_image_url'] }}"></magnify-image>
+        <div class="row col-12">
+            <magnify-image src="{{ $images[0]['large_image_url'] }}" v-if="!isMobile()">
+            </magnify-image>
+
+            <img
+                v-else
+                class="vc-small-product-image"
+                src="{{ $images[0]['large_image_url'] }}" />
         </div>
 
-        <div class="row">
+        <div class="row col-12">
             <product-gallery></product-gallery>
         </div>
 
@@ -22,7 +28,6 @@
 
 <script type="text/x-template" id="product-gallery-template">
     <ul class="thumb-list col-12 row" type="none">
-
         @if (sizeof($images) > 4)
             <li class="arrow left" @click="scroll('prev')">
                 <i class="rango-arrow-left fs24"></i>
@@ -30,12 +35,12 @@
         @endif
 
         <carousel-component
-            :slides-count="{{ sizeof($images) }}"
             slides-per-page="4"
             :id="galleryCarouselId"
-            add-class="product-gallary"
             pagination-enabled="hide"
-            navigation-enabled="hide">
+            navigation-enabled="hide"
+            add-class="product-gallary"
+            :slides-count="{{ sizeof($images) }}">
 
             @foreach ($images as $index => $thumb)
                 <slide slot="slide-{{ $index }}">
@@ -65,7 +70,6 @@
                 <i class="rango-arrow-right fs24"></i>
             </li>
         @endif
-
     </ul>
 </script>
 
@@ -75,9 +79,7 @@
             var galleryImages = @json($images);
 
             Vue.component('product-gallery', {
-
                 template: '#product-gallery-template',
-
                 data: function() {
                     return {
                         images: galleryImages,
@@ -129,6 +131,13 @@
                         this.$root.$emit('changeMagnifiedImage', {
                             smallImageUrl: this.currentOriginalImageUrl
                         });
+
+                        let productImage = $('.vc-small-product-image');
+                        if (productImage && productImage[0]) {
+                            productImage = productImage[0];
+
+                            productImage.src = this.currentOriginalImageUrl;
+                        }
                     },
 
                     scroll: function (navigateTo) {

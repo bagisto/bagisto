@@ -48,7 +48,12 @@
 
                     .within-circle {
                         background: #4d7ea8;
+                        margin-right: 2px;
                         border: 1px solid rgba(255, 255, 255, 0.52);
+                    }
+
+                    .within-circle:hover {
+                        opacity: 0.5;
                     }
 
                     img {
@@ -97,6 +102,8 @@
             }
 
             .footer-rt-content {
+                padding-right: 0px;
+
                 .row {
                     > div {
                         width: 100%;
@@ -148,6 +155,8 @@
 
         .footer-statics {
             .software-description {
+                padding-left: 0px;
+
                 p {
                     @extend .clr-dark;
 

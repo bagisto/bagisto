@@ -11,17 +11,17 @@
 
         {!! view_render_event('bagisto.shop.new-products.before') !!}
 
-            <div class="row flex-nowrap">
-                @if ($showRecentlyViewed)
-                    @push('css')
-                        <style>
-                            .recently-viewed {
-                                padding-right: 0px;
-                            }
-                        </style>
-                    @endpush
+            @if ($showRecentlyViewed)
+                @push('css')
+                    <style>
+                        .recently-viewed {
+                            padding-right: 0px;
+                        }
+                    </style>
+                @endpush
 
-                    <div class="col-9 no-padding">
+                <div class="row">
+                    <div class="col-9 no-padding carousel-products vc-full-screen">
                         <carousel-component
                             slides-per-page="5"
                             navigation-enabled="hide"
@@ -41,11 +41,33 @@
                         </carousel-component>
                     </div>
 
+                    <div class="col-9 no-padding carousel-products vc-small-screen">
+                        <carousel-component
+                            slides-per-page="2"
+                            navigation-enabled="hide"
+                            pagination-enabled="hide"
+                            id="new-products-carousel"
+                            :slides-count="{{ sizeof($newProducts) }}">
+
+                            @foreach ($newProducts as $index => $product)
+                                <slide slot="slide-{{ $index }}">
+                                    @include ('shop::products.list.card', [
+                                        'product' => $product,
+                                        'addToCartBtnClass' => 'small-padding'
+                                    ])
+                                </slide>
+                            @endforeach
+
+                        </carousel-component>
+                    </div>
+
                     @include ('shop::products.list.recently-viewed', [
                         'addClass' => 'col-3 new-products-recent',
-                        'addClassWrapper' => 'scrollable max-height-300',
+                        'addClassWrapper' => 'scrollable max-height-350',
                     ])
-                @else
+                </div>
+            @else
+                <div class="carousel-products vc-full-screen">
                     <carousel-component
                         slides-per-page="6"
                         navigation-enabled="hide"
@@ -62,8 +84,27 @@
                         @endforeach
 
                     </carousel-component>
-                @endif
-            </div>
+                </div>
+
+                <div class="carousel-products vc-small-screen">
+                    <carousel-component
+                        slides-per-page="2"
+                        navigation-enabled="hide"
+                        pagination-enabled="hide"
+                        id="new-products-carousel"
+                        :slides-count="{{ sizeof($newProducts) }}">
+
+                        @foreach ($newProducts as $index => $product)
+                            <slide slot="slide-{{ $index }}">
+                                @include ('shop::products.list.card', [
+                                    'product' => $product,
+                                    'addToCartBtnClass' => 'small-padding'
+                                ])
+                            </slide>
+                        @endforeach
+                    </carousel-component>
+                </div>
+            @endif
 
         {!! view_render_event('bagisto.shop.new-products.after') !!}
     </div>

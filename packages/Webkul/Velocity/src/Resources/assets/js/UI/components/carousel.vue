@@ -10,8 +10,7 @@
             (navigationEnabled == 'hide') ? 'navigation-hide' : '',
             (paginationEnabled == 'hide') ? 'pagination-hide' : '',
             addClass
-        ]"
-        slide-click="slideClicked">
+        ]">
 
         <slot
             v-for="index in slidesCount"

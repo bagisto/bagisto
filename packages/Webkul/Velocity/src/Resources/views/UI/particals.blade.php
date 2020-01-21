@@ -24,9 +24,6 @@
                 star_border
             </i>
         </template>
-
-        {{-- <i class="material-icons">star_border</i>
-        <i class="material-icons">star</i> --}}
     </div>
 </script>
 
@@ -139,31 +136,78 @@
 
         <div class="col-4">
             {!! view_render_event('bagisto.shop.layout.header.cart-item.before') !!}
-
                 @include('shop::checkout.cart.mini-cart')
-
             {!! view_render_event('bagisto.shop.layout.header.cart-item.after') !!}
         </div>
     </div>
 </script>
 
 <script type="text/x-template" id="content-header-template">
-
-    <header class="row velocity-divide-page remove-padding-margin vc-header active">
-        <div class="vc-small-screen container">
+    <header class="row velocity-divide-page vc-header header-shadow active">
+        <div class="vc-small-screen container" v-if="isMobile()">
             <div class="row">
                 <div class="col-8">
-                    <div class="row col-12">
-                        <div v-if="hamburger">
-                            @include('shop::UI.shared.responsive-header')
+                    <div v-if="hamburger" class="nav-container scrollable">
+                        <div class="wrapper" v-if="rootCategories">
+                            <div class="greeting drawer-section">
+                                <i class="material-icons">perm_identity</i>
+                                <span>
+                                    @guest('customer')
+                                        {{ __('velocity::app.responsive.header.greeting', ['customer' => 'Guest']) }}
+                                    @endguest
+
+                                    @auth('customer')
+                                        {{ __('velocity::app.responsive.header.greeting', ['customer' => auth()->guard('customer')->user()->first_name]) }}
+                                    @endauth
+                                    <i class="material-icons pull-right" v-on:click="closeDrawer()">cancel</i>
+                                </span>
+                            </div>
+
+                            <ul type="none">
+                                <li
+                                    :key="index"
+                                    v-text="content.title"
+                                    v-for="(content, index) in headerContent">
+                                </li>
+                            </ul>
+
+                            <ul type="none">
+                                <li v-for="(category, index) in JSON.parse(categories)">
+                                    <div class="category-logo">
+                                        <img
+                                            class="category-icon"
+                                            v-if="category.category_icon_path"
+                                            :src="`${url}/storage/${category.category_icon_path}`" />
+                                    </div>
+
+                                    <a
+                                        class="unset"
+                                        :href="`${url}/${category['translations'][0].url_path}`">
+                                        <span>@{{ category.name }}</span>
+                                    </a>
+                                    <i class="rango-arrow-right" @click="toggleSubcategories(index, $event)"></i>
+                                </li>
+                            </ul>
                         </div>
 
-                        <div class="hamburger-wrapper" v-on:click="toggleHamburger">
-                            <i class="rango-toggle hamburger"></i>
+                        <div class="wrapper" v-else-if="subCategory">
+                            <div class="drawer-section">
+                                <i class="rango-arrow-left fs24 text-down-4" @click="toggleSubcategories('root')"></i>
+                                <h4 class="display-inbl">@{{ subCategory.name }}</h4>
+                            </div>
+
+                            <ul>
+                                <li v-for="(subCategory, index) in subCategory.children">@{{ subCategory.name }}</li>
+                            </ul>
                         </div>
-                        <logo-component add-class="ml30"></logo-component>
                     </div>
+
+                    <div class="hamburger-wrapper" @click="toggleHamburger">
+                        <i class="rango-toggle hamburger"></i>
+                    </div>
+                    <logo-component></logo-component>
                 </div>
+
                 <div class="row right-vc-header col-4">
                     <a :href="`${url}/customer/account/wishlist`" class="unset">
                         <i class="material-icons">favorite_border</i>
@@ -183,6 +227,7 @@
         </div>
 
         <div
+            v-else
             @mouseout="toggleSidebar('0', $event, 'mouseout')"
             @mouseover="toggleSidebar('0', $event, 'mouseover')"
             class="main-category fs16 unselectable fw6 cursor-pointer left">
@@ -235,10 +280,7 @@
             methods: {
                 updateRating: function (index) {
                     index = Math.abs(index);
-
                     this.editable ? this.showFilled = index : '';
-
-                    this.showFilled
                 }
             },
         })
@@ -360,18 +402,21 @@
                 'url',
                 'heading',
                 'isEnabled',
+                'categories',
                 'headerContent',
             ],
 
             data: function () {
                 return {
+                    'hamburger': true,
+                    'subCategory': null,
                     'isSearchbar': false,
-                    'hamburger': false
+                    'rootCategories': true,
                 }
             },
 
             methods: {
-                'openSearchBar': function () {
+                openSearchBar: function () {
                     this.isSearchbar = !this.isSearchbar;
 
                     let footer = $('.footer');
@@ -393,6 +438,18 @@
                 closeDrawer: function() {
                     $('.nav-container').hide();
                     this.hamburger = false;
+                },
+
+                toggleSubcategories: function (index, event) {
+                    if (index == "root") {
+                        this.rootCategories = true;
+                    } else {
+                        event.preventDefault();
+
+                        let categories = JSON.parse(this.categories);
+                        this.rootCategories = false;
+                        this.subCategory = categories[0];
+                    }
                 }
             }
         })

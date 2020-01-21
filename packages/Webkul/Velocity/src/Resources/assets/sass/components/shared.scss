@@ -557,6 +557,13 @@
         width: 50%;
         display: inline-block;
         padding: 10px 0 !important;
+
+        .product-name {
+            width: 17rem;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
     }
 
     .sticker,
@@ -787,8 +794,8 @@ button[disabled] {
     font-size: 14px;
 }
 
-.max-height-300 {
-    max-height: 300px;
+.max-height-350 {
+    max-height: 350px;
 }
 
 .border-normal {

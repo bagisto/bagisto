@@ -9,24 +9,41 @@
         row-class="pt20"
     ></card-list-header>
 
-    <carousel-component
-        :slides-count="{{ sizeof($relatedProducts) }}"
-        slides-per-page="5"
-        id="related-products-carousel"
-        navigation-enabled="hide"
-        pagination-enabled="hide">
+    <div class="carousel-products vc-full-screen">
+        <carousel-component
+            slides-per-page="6"
+            navigation-enabled="hide"
+            pagination-enabled="hide"
+            id="related-products-carousel"
+            :slides-count="{{ sizeof($relatedProducts) }}">
 
-        @foreach ($relatedProducts as $index => $relatedProduct)
+            @foreach ($relatedProducts as $index => $relatedProduct)
+                <slide slot="slide-{{ $index }}">
+                    @include ('shop::products.list.card', [
+                        'product' => $relatedProduct,
+                        'addToCartBtnClass' => 'small-padding',
+                    ])
+                </slide>
+            @endforeach
+        </carousel-component>
+    </div>
 
-            <slide slot="slide-{{ $index }}">
-                @include ('shop::products.list.card', [
-                    'product' => $relatedProduct,
-                    'addToCartBtnClass' => 'small-padding',
-                ])
-            </slide>
+    <div class="carousel-products vc-small-screen">
+        <carousel-component
+            :slides-count="{{ sizeof($relatedProducts) }}"
+            slides-per-page="2"
+            id="related-products-carousel"
+            navigation-enabled="hide"
+            pagination-enabled="hide">
 
-        @endforeach
-
-    </carousel-component>
-
+            @foreach ($relatedProducts as $index => $relatedProduct)
+                <slide slot="slide-{{ $index }}">
+                    @include ('shop::products.list.card', [
+                        'product' => $relatedProduct,
+                        'addToCartBtnClass' => 'small-padding',
+                    ])
+                </slide>
+            @endforeach
+        </carousel-component>
+    </div>
 @endif
