@@ -615,6 +615,8 @@ class Cart {
         if (! $cart = $this->getCart())
             return false;
 
+        Event::fire('checkout.cart.collect.totals.before', $cart);
+
         $this->calculateItemsTax();
 
         $cart->grand_total = $cart->base_grand_total = 0;
@@ -637,11 +639,15 @@ class Cart {
         }
 
         if ($shipping = $cart->selected_shipping_rate) {
-            $cart->grand_total = (float) $cart->grand_total + $shipping->price;
-            $cart->base_grand_total = (float) $cart->base_grand_total + $shipping->base_price;
+            $cart->grand_total = (float) $cart->grand_total + $shipping->price - $shipping->discount_amount;
+            $cart->base_grand_total = (float) $cart->base_grand_total + $shipping->base_price - $shipping->base_discount_amount;
+
+            $cart->discount_amount += $shipping->discount_amount;
+            $cart->base_discount_amount += $shipping->base_discount_amount;
         }
 
         $quantities = 0;
+
         foreach ($cart->items as $item) {
             $quantities = $quantities + $item->quantity;
         }
@@ -651,6 +657,8 @@ class Cart {
         $cart->items_qty = $quantities;
 
         $cart->save();
+
+        Event::fire('checkout.cart.collect.totals.after', $cart);
     }
 
     /**
@@ -713,22 +721,22 @@ class Cart {
             }
 
             $taxRates = $taxCategory->tax_rates()->where([
-                    'state' => $address->state,
                     'country' => $address->country,
                 ])->orderBy('tax_rate', 'desc')->get();
 
-            if (count( $taxRates) > 0) {
+            if ($taxRates->count()) {
                 foreach ($taxRates as $rate) {
                     $haveTaxRate = false;
 
+                    if ($rate->state != '' && $rate->state != $address->state)
+                        continue;
+
                     if (! $rate->is_zip) {
-                        if ($rate->zip_code == '*' || $rate->zip_code == $address->postcode) {
+                        if ($rate->zip_code == '*' || $rate->zip_code == $address->postcode)
                             $haveTaxRate = true;
-                        }
                     } else {
-                        if ($address->postcode >= $rate->zip_from && $address->postcode <= $rate->zip_to) {
+                        if ($address->postcode >= $rate->zip_from && $address->postcode <= $rate->zip_to)
                             $haveTaxRate = true;
-                        }
                     }
 
                     if ($haveTaxRate) {
@@ -836,6 +844,8 @@ class Cart {
             'base_sub_total' => $data['base_sub_total'],
             'tax_amount' => $data['tax_total'],
             'base_tax_amount' => $data['base_tax_total'],
+            'coupon_code' => $data['coupon_code'],
+            'applied_cart_rule_ids' => $data['applied_cart_rule_ids'],
             'discount_amount' => $data['discount_amount'],
             'base_discount_amount' => $data['base_discount_amount'],
             'billing_address' => Arr::except($data['billing_address'], ['id', 'cart_id']),
@@ -851,6 +861,8 @@ class Cart {
                 'shipping_amount' => $data['selected_shipping_rate']['price'],
                 'base_shipping_amount' => $data['selected_shipping_rate']['base_price'],
                 'shipping_address' => Arr::except($data['shipping_address'], ['id', 'cart_id']),
+                'shipping_discount_amount' => $data['selected_shipping_rate']['discount_amount'],
+                'base_shipping_discount_amount' => $data['selected_shipping_rate']['base_discount_amount'],
             ]);
         }
 
@@ -972,5 +984,38 @@ class Cart {
         $this->collectTotals();
 
         return true;
+    }
+
+    /**
+     * Set coupon code to the cart
+     *
+     * @param string $code
+     * @return Cart
+     */
+    public function setCouponCode($code)
+    {
+        $cart = $this->getCart();
+
+        $cart->coupon_code = $code;
+
+        $cart->save();
+
+        return $this;
+    }
+
+    /**
+     * Remove coupon code from cart
+     *
+     * @return Cart
+     */
+    public function removeCouponCode()
+    {
+        $cart = $this->getCart();
+
+        $cart->coupon_code = null;
+
+        $cart->save();
+
+        return $this;
     }
 }

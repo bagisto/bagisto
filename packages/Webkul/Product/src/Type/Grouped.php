@@ -105,6 +105,26 @@ class Grouped extends AbstractType
     }
 
     /**
+     * Returns children ids
+     *
+     * @return array
+     */
+    public function getChildrenIds()
+    {
+        return array_unique($this->product->grouped_products()->pluck('product_id')->toArray());
+    }
+
+    /**
+     * Check if catalog rule can be applied
+     *
+     * @return bool
+     */
+    public function priceRuleCanBeApplied()
+    {
+        return false;
+    }
+
+    /**
      * Get product minimal price
      *
      * @return float
@@ -113,17 +133,8 @@ class Grouped extends AbstractType
     {
         $minPrices = [];
 
-        $result = $this->product->grouped_products()
-            ->join('product_flat', 'product_grouped_products.associated_product_id', '=', 'product_flat.product_id')
-            ->selectRaw('IF( product_flat.special_price_from IS NOT NULL
-            AND product_flat.special_price_to IS NOT NULL , IF( NOW( ) >= product_flat.special_price_from
-            AND NOW( ) <= product_flat.special_price_to, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) , IF( product_flat.special_price_from IS NULL , IF( product_flat.special_price_to IS NULL , IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , IF( NOW( ) <= product_flat.special_price_to, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) ) , IF( product_flat.special_price_to IS NULL , IF( NOW( ) >= product_flat.special_price_from, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) , product_flat.price ) ) ) AS min_price')
-            ->where('product_flat.channel', core()->getCurrentChannelCode())
-            ->where('product_flat.locale', app()->getLocale())
-            ->get();
-
-        foreach ($result as $price) {
-            $minPrices[] = $price->min_price;
+        foreach ($this->product->grouped_products as $groupOptionProduct) {
+            $minPrices[] = $groupOptionProduct->associated_product->getTypeInstance()->getMinimalPrice();
         }
 
         if (empty($minPrices))

@@ -1,9 +1,14 @@
-require("./bootstrap");
+import Vue from 'vue';
+import VeeValidate from 'vee-validate';
 
-window.Vue = require("vue");
-window.VeeValidate = require("vee-validate");
+import './bootstrap';
 
-Vue.use(VeeValidate);
+window.Vue = Vue;
+window.VeeValidate = VeeValidate;
+
+Vue.use(VeeValidate, {
+    events: 'input|change|blur',
+});
 Vue.prototype.$http = axios
 
 window.eventBus = new Vue();
@@ -82,6 +87,10 @@ $(document).ready(function () {
             },
 
             addFlashMessages() {
+                if (typeof flashMessages == 'undefined') {
+                    return;
+                };
+                
                 const flashes = this.$refs.flashes;
 
                 flashMessages.forEach(function(flash) {

@@ -50,7 +50,13 @@ class TaxRateDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
-            'filterable' => true
+            'filterable' => true,
+            'wrapper' => function($value) {
+                if (empty($value->state))
+                    return '*';
+                else
+                    return $value->state;
+            }
         ]);
 
         $this->addColumn([

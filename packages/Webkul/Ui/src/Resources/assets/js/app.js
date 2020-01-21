@@ -1,23 +1,46 @@
-Vue.component("flash-wrapper", require("./components/flash-wrapper"));
-Vue.component("flash", require("./components/flash"));
-Vue.component("tabs", require("./components/tabs/tabs"));
-Vue.component("tab", require("./components/tabs/tab"));
-Vue.component("accordian", require("./components/accordian"));
-Vue.component("tree-view", require("./components/tree-view/tree-view"));
-Vue.component("tree-item", require("./components/tree-view/tree-item"));
-Vue.component("tree-checkbox", require("./components/tree-view/tree-checkbox"));
-Vue.component("tree-radio", require("./components/tree-view/tree-radio"));
-Vue.component("modal", require("./components/modal"));
-Vue.component("image-upload", require("./components/image/image-upload"));
-Vue.component("image-wrapper", require("./components/image/image-wrapper"));
-Vue.component("image-item", require("./components/image/image-item"));
-Vue.directive("slugify", require("./directives/slugify"));
-Vue.directive("code", require("./directives/code"));
-Vue.directive("alert", require("./directives/alert"));
-Vue.component("datetime", require("./components/datetime"));
-Vue.component("date", require("./components/date"));
-Vue.component("swatch-picker", require("./components/swatch-picker"));
-Vue.directive("debounce", require("./directives/debounce"));
+import { Multiselect } from 'vue-multiselect';
+
+import FlashWrapper from './components/flash-wrapper';
+import Flash from './components/flash';
+import Tabs from './components/tabs/tabs';
+import Tab from './components/tabs/tab';
+import Accordian from './components/accordian';
+import TreeView from './components/tree-view/tree-view';
+import TreeItem from './components/tree-view/tree-item';
+import TreeCheckbox from './components/tree-view/tree-checkbox';
+import TreeRadio from './components/tree-view/tree-radio';
+import Modal from './components/modal';
+import ImageUpload from './components/image/image-upload';
+import ImageWrapper from './components/image/image-wrapper';
+import ImageItem from './components/image/image-item';
+import Slugify from './directives/slugify';
+import Code from './directives/code';
+import Alert from './directives/alert';
+import DatetimeComponent from './components/datetime';
+import DateComponent from './components/date';
+import SwatchPicker from './components/swatch-picker';
+import Debounce from './directives/debounce';
+
+Vue.component('flash-wrapper', FlashWrapper);
+Vue.component('flash', Flash);
+Vue.component('tabs', Tabs);
+Vue.component('tab', Tab);
+Vue.component('accordian', Accordian);
+Vue.component('tree-view', TreeView);
+Vue.component('tree-item', TreeItem);
+Vue.component('tree-checkbox', TreeCheckbox);
+Vue.component('tree-radio', TreeRadio);
+Vue.component('modal', Modal);
+Vue.component('image-upload', ImageUpload);
+Vue.component('image-wrapper', ImageWrapper);
+Vue.component('image-item', ImageItem);
+Vue.directive('slugify', Slugify);
+Vue.directive('code', Code);
+Vue.directive('alert', Alert);
+Vue.component('datetime', DatetimeComponent);
+Vue.component('date', DateComponent);
+Vue.component('swatch-picker', SwatchPicker);
+Vue.directive('debounce', Debounce);
 Vue.filter('truncate', function (value, limit, trail) {
 	if (! value)
         value = '';
@@ -28,8 +51,6 @@ Vue.filter('truncate', function (value, limit, trail) {
 	return value.length > limit ? value.substring(0, limit) + trail : value;
 });
 
-import { Multiselect } from 'vue-multiselect';
-
 Vue.component('multiselect', Multiselect);
 
 require('flatpickr/dist/flatpickr.css');
@@ -38,7 +59,7 @@ require('vue-swatches/dist/vue-swatches.min.css');
 
 require('vue-multiselect/dist/vue-multiselect.min.css');
 
-require("@babel/polyfill");
+require('@babel/polyfill');
 
 require('url-search-params-polyfill');
 

@@ -3,11 +3,7 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Support\Facades\DB;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Webkul\Category\Models\CategoryTranslation;
-use Webkul\Product\Models\ProductFlat;
+use Illuminate\Http\Request;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Product\Repositories\ProductRepository;
 
@@ -51,26 +47,31 @@ class ProductsCategoriesProxyController extends Controller
     }
 
     /**
-     * Display a listing of the resource which can be a category or a product.
+     * Show product or category view. If neither category nor product matches,
+     * abort with code 404.
      *
-     *
-     * @param string $slugOrPath
+     * @param Request $request
      *
      * @return \Illuminate\View\View
      */
-    public function index(string $slugOrPath)
+    public function index(Request $request)
     {
+        $slugOrPath = trim($request->getPathInfo(), '/');
 
-        if ($category = $this->categoryRepository->findByPath($slugOrPath)) {
+        if (preg_match('/^([a-z0-9-]+\/?)+$/', $slugOrPath)) {
 
-            return view($this->_config['category_view'], compact('category'));
-        }
+            if ($category = $this->categoryRepository->findByPath($slugOrPath)) {
 
-        if ($product = $this->productRepository->findBySlug($slugOrPath)) {
+                return view($this->_config['category_view'], compact('category'));
+            }
 
-            $customer = auth()->guard('customer')->user();
+            if ($product = $this->productRepository->findBySlug($slugOrPath)) {
 
-            return view($this->_config['product_view'], compact('product', 'customer'));
+                $customer = auth()->guard('customer')->user();
+
+                return view($this->_config['product_view'], compact('product', 'customer'));
+            }
+
         }
 
         abort(404);

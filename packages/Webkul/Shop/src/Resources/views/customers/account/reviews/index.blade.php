@@ -42,7 +42,7 @@
                                 <div class="info">
                                     <div class="product-name">
                                         <a href="{{ route('shop.productOrCategory.index', $review->product->url_key) }}" title="{{ $review->product->name }}">
-                                            <span>{{ $review->product->name }}</span>
+                                            {{$review->product->name}}
                                         </a>
                                     </div>
 

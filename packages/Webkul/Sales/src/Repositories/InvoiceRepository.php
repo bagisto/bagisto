@@ -230,10 +230,18 @@ class InvoiceRepository extends Repository
         $invoice->shipping_amount = $invoice->order->shipping_amount;
         $invoice->base_shipping_amount = $invoice->order->base_shipping_amount;
 
+        $invoice->discount_amount += $invoice->order->shipping_discount_amount;
+        $invoice->base_discount_amount += $invoice->order->base_shipping_discount_amount;
+
         if ($invoice->order->shipping_amount) {
             foreach ($invoice->order->invoices as $prevInvoice) {
                 if ((float) $prevInvoice->shipping_amount)
                     $invoice->shipping_amount = $invoice->base_shipping_amount = 0;
+
+                if ($prevInvoice->id != $invoice->id) {
+                    $invoice->discount_amount -= $invoice->order->shipping_discount_amount;
+                    $invoice->base_discount_amount -= $invoice->order->base_shipping_discount_amount;
+                }
             }
         }
 

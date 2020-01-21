@@ -115,14 +115,14 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\View\View
      */
     public function edit($id)
     {
-        $categories = $this->categoryRepository->getCategoryTree($id);
-
         $category = $this->categoryRepository->findOrFail($id);
+
+        $categories = $this->categoryRepository->getCategoryTreeWithoutDescendant($id);
 
         $attributes = $this->attributeRepository->findWhere(['is_filterable' =>  1]);
 

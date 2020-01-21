@@ -9,6 +9,7 @@ use Webkul\Core\Eloquent\Repository;
 use Webkul\Category\Models\Category;
 use Webkul\Category\Models\CategoryTranslation;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Category Reposotory
@@ -18,16 +19,6 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
  */
 class CategoryRepository extends Repository
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct(App $app)
-    {
-        parent::__construct($app);
-    }
-
     /**
      * Specify Model class name
      *
@@ -85,6 +76,18 @@ class CategoryRepository extends Repository
             : $this->model::orderBy('position', 'ASC')->get()->toTree();
     }
 
+    /**
+     * Specify category tree
+     *
+     * @param integer $id
+     * @return mixed
+     */
+    public function getCategoryTreeWithoutDescendant($id = null)
+    {
+        return $id
+            ? $this->model::orderBy('position', 'ASC')->where('id', '!=', $id)->whereNotDescendantOf($id)->get()->toTree()
+            : $this->model::orderBy('position', 'ASC')->get()->toTree();
+    }
 
     /**
      * Get root categories
@@ -126,7 +129,7 @@ class CategoryRepository extends Repository
         $exists = CategoryTranslation::where('category_id', '<>', $id)
             ->where('slug', $slug)
             ->limit(1)
-            ->select(\DB::raw(1))
+            ->select(DB::raw(1))
             ->exists();
 
         return $exists ? false : true;

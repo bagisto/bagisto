@@ -182,29 +182,23 @@ return [
         'sort' => 2,
         'icon-class' => ''
     ], [
-        'key' => 'settings.development',
-        'name' => 'admin::app.settings.development.title',
-        'route' => 'admin.development.index',
-        'sort' => 8,
-        'icon-class' => ''
-    ],[
         'key' => 'promotions',
-        'name' => 'admin::app.layouts.promotion',
-        'route' => 'admin.cart-rule.index',
+        'name' => 'admin::app.layouts.promotions',
+        'route' => 'admin.catalog-rules.index',
         'sort' => 5,
         'icon-class' => 'promotion-icon'
     ], [
-        'key' => 'promotions.cart-rule',
-        'name' => 'admin::app.promotion.cart-rule',
-        'route' => 'admin.cart-rule.index',
+        'key' => 'promotions.catalog-rules',
+        'name' => 'admin::app.promotions.catalog-rules.title',
+        'route' => 'admin.catalog-rules.index',
         'sort' => 1,
         'icon-class' => ''
     ], [
-        'key' => 'promotions.catalog-rule',
-        'name' => 'admin::app.promotion.catalog-rule',
-        'route' => 'admin.catalog-rule.index',
-        'sort' => 1,
-        'icon-class' => '',
+        'key' => 'promotions.cart-rules',
+        'name' => 'admin::app.promotions.cart-rules.title',
+        'route' => 'admin.cart-rules.index',
+        'sort' => 2,
+        'icon-class' => ''
     ], [
         'key' => 'cms',
         'name' => 'admin::app.layouts.cms',

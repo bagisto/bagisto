@@ -998,7 +998,7 @@ return [
     ],
 
     'footer' => [
-        'copy-right' => '© کپی رایت 2019 کلیه حقوق محفوظ است.'
+        'copy-right' => 'طراحی شده توسط <a href="https://bagisto.com/" target="_blank">Bagisto</a> ، یک پروژه عمومی توسط <a href="https://webkul.com/" target="_blank">Webkul</a>'
     ],
 
     'admin' => [

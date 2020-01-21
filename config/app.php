@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => 'Asia/Kolkata',
+    'timezone' => env('APP_TIMEZONE','Asia/Kolkata'),
 
     /*
     |--------------------------------------------------------------------------
@@ -102,7 +102,7 @@ return [
     |
     */
 
-    'currency' => 'USD',
+    'currency' => env('APP_CURRENCY','USD'),
 
     /*
     |--------------------------------------------------------------------------
@@ -219,6 +219,8 @@ return [
         //Laravel Maatwebsite
         Maatwebsite\Excel\ExcelServiceProvider::class,
 
+        Barryvdh\Debugbar\ServiceProvider::class,
+
         //Repository
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         Konekt\Concord\ConcordServiceProvider::class,
@@ -245,7 +247,9 @@ return [
         Webkul\Sales\Providers\SalesServiceProvider::class,
         Webkul\Tax\Providers\TaxServiceProvider::class,
         Webkul\API\Providers\APIServiceProvider::class,
-        Webkul\Discount\Providers\DiscountServiceProvider::class,
+        Webkul\CatalogRule\Providers\CatalogRuleServiceProvider::class,
+        Webkul\CartRule\Providers\CartRuleServiceProvider::class,
+        Webkul\Rule\Providers\RuleServiceProvider::class,
         Webkul\CMS\Providers\CMSServiceProvider::class
     ],
 

@@ -45,7 +45,7 @@
                 <span class="control-error" v-if="errors.has('identifier')">@{{ errors.first('identifier') }}</span>
             </div>
 
-            @include ('admin::customers.country-state', ['countryCode' => old('country'), 'stateCode' => old('state')])
+            <country-state></country-state>
 
             <div class="control-group">
                 <span class="checkbox">
@@ -83,6 +83,50 @@
         </div>
     </script>
 
+    <script type="text/x-template" id="country-state-template">
+        <div>
+            <div class="control-group" :class="[errors.has('country') ? 'has-error' : '']">
+                <label for="country" class="required">
+                    {{ __('admin::app.customers.customers.country') }}
+                </label>
+
+                <select type="text" v-validate="'required'" class="control" id="country" name="country" v-model="country" data-vv-as="&quot;{{ __('admin::app.customers.customers.country') }}&quot;">
+                    <option value=""></option>
+
+                    @foreach (core()->countries() as $country)
+
+                        <option value="{{ $country->code }}">{{ $country->name }}</option>
+
+                    @endforeach
+                </select>
+
+                <span class="control-error" v-if="errors.has('country')">
+                    @{{ errors.first('country') }}
+                </span>
+            </div>
+
+            <div class="control-group" :class="[errors.has('state') ? 'has-error' : '']">
+                <label for="state">
+                    {{ __('admin::app.customers.customers.state') }}
+                </label>
+
+                <select class="control" id="state" name="state" v-model="state">
+
+                    <option value="" :selected="! haveStates()">*</option>
+
+                    <option v-for='(state, index) in countryStates[country]' :value="state.code">
+                        @{{ state.default_name }}
+                    </option>
+
+                </select>
+
+                <span class="control-error" v-if="errors.has('state')">
+                    @{{ errors.first('state') }}
+                </span>
+            </div>
+        </div>
+    </script>
+
     <script>
         Vue.component('tax-rate-form', {
 
@@ -95,6 +139,32 @@
                     is_zip: false
                 }
             },
+        });
+
+        Vue.component('country-state', {
+
+            template: '#country-state-template',
+
+            inject: ['$validator'],
+
+            data: function () {
+                return {
+                    country: "{{ old('country')  }}",
+
+                    state: "{{ old('state')  }}",
+
+                    countryStates: @json(core()->groupedStatesByCountries())
+                }
+            },
+
+            methods: {
+                haveStates: function () {
+                    if (this.countryStates[this.country] && this.countryStates[this.country].length)
+                        return true;
+
+                    return false;
+                },
+            }
         });
     </script>
 @endpush
