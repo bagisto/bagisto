@@ -12,7 +12,6 @@ jobs:
     - uses: shivammathur/setup-php@v1
     with:
       extensions: intl
-
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.ci', '.env');"
     - name: Install Dependencies
