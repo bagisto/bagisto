@@ -60,11 +60,11 @@ class CustomerController extends Controller
                 'customer_group_id' => 1
             ]);
 
-        Event::fire('customer.registration.before');
+        Event::dispatch('customer.registration.before');
 
         $customer = $this->customerRepository->create($data);
 
-        Event::fire('customer.registration.after', $customer);
+        Event::dispatch('customer.registration.after', $customer);
 
         return response()->json([
                 'message' => 'Your account has been created successfully.'

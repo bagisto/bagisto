@@ -74,11 +74,7 @@ class OrderRepository extends Repository
         DB::beginTransaction();
 
         try {
-            // first prepare all data, then send the 'before' event so hooked in business logic
-            // gets all prepared data:
-            $data = $this->prepareOrderData($data);
-
-            Event::fire('checkout.order.save.before', $data);
+            Event::dispatch('checkout.order.save.before', $data);
 
             $order = $this->model->create($data);
 
@@ -90,9 +86,25 @@ class OrderRepository extends Repository
 
             $order->addresses()->create($data['billing_address']);
 
-            $this->handleOrderItems($order, $data);
+            foreach ($data['items'] as $item) {
+                Event::dispatch('checkout.order.orderitem.save.before', $data);
 
-            Event::fire('checkout.order.save.after', $order);
+                $orderItem = $this->orderItemRepository->create(array_merge($item, ['order_id' => $order->id]));
+
+                if (isset($item['children']) && $item['children']) {
+                    foreach ($item['children'] as $child) {
+                        $this->orderItemRepository->create(array_merge($child, ['order_id' => $order->id, 'parent_id' => $orderItem->id]));
+                    }
+                }
+
+                $this->orderItemRepository->manageInventory($orderItem);
+
+                $this->downloadableLinkPurchasedRepository->saveLinks($orderItem, 'available');
+
+                Event::dispatch('checkout.order.orderitem.save.after', $data);
+            }
+
+            Event::dispatch('checkout.order.save.after', $order);
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -117,7 +129,7 @@ class OrderRepository extends Repository
             return false;
         }
 
-        Event::fire('sales.order.cancel.before', $order);
+        Event::dispatch('sales.order.cancel.before', $order);
 
         foreach ($order->items as $item) {
             if (! $item->qty_to_cancel) {
@@ -158,7 +170,7 @@ class OrderRepository extends Repository
 
         $this->updateOrderStatus($order);
 
-        Event::fire('sales.order.cancel.after', $order);
+        Event::dispatch('sales.order.cancel.after', $order);
 
         return true;
     }
@@ -344,59 +356,5 @@ class OrderRepository extends Repository
         $order->save();
 
         return $order;
-    }
-
-    /**
-     * @param array $data
-     *
-     * @return array
-     */
-    private function prepareOrderData(array $data): array
-    {
-        if (isset($data['customer']) && $data['customer']) {
-            $data['customer_id'] = $data['customer']->id;
-            $data['customer_type'] = get_class($data['customer']);
-        } else {
-            unset($data['customer']);
-        }
-
-        if (isset($data['channel']) && $data['channel']) {
-            $data['channel_id'] = $data['channel']->id;
-            $data['channel_type'] = get_class($data['channel']);
-            $data['channel_name'] = $data['channel']->name;
-        } else {
-            unset($data['channel']);
-        }
-
-        $data['increment_id'] = $this->generateIncrementId();
-
-        $data['status'] = 'pending';
-
-        return $data;
-    }
-
-    /**
-     * @param array $data
-     * @param       $order
-     */
-    private function handleOrderItems(Order $order, array $data): void
-    {
-        foreach ($data['items'] as $item) {
-            Event::fire('checkout.order.orderitem.save.before', $data);
-
-            $orderItem = $this->orderItemRepository->create(array_merge($item, ['order_id' => $order->id]));
-
-            if (isset($item['children']) && $item['children']) {
-                foreach ($item['children'] as $child) {
-                    $this->orderItemRepository->create(array_merge($child, ['order_id' => $order->id, 'parent_id' => $orderItem->id]));
-                }
-            }
-
-            $this->orderItemRepository->manageInventory($orderItem);
-
-            $this->downloadableLinkPurchasedRepository->saveLinks($orderItem, 'available');
-
-            Event::fire('checkout.order.orderitem.save.after', $data);
-        }
     }
 }

@@ -45,7 +45,7 @@ class RoleController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View 
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -55,7 +55,7 @@ class RoleController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\View\View 
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -74,11 +74,11 @@ class RoleController extends Controller
             'permission_type' => 'required',
         ]);
 
-        Event::fire('user.role.create.before');
+        Event::dispatch('user.role.create.before');
 
         $role = $this->roleRepository->create(request()->all());
 
-        Event::fire('user.role.create.after', $role);
+        Event::dispatch('user.role.create.after', $role);
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Role']));
 
@@ -89,7 +89,7 @@ class RoleController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\View\View 
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
@@ -111,11 +111,11 @@ class RoleController extends Controller
             'permission_type' => 'required',
         ]);
 
-        Event::fire('user.role.update.before', $id);
+        Event::dispatch('user.role.update.before', $id);
 
         $role = $this->roleRepository->update(request()->all(), $id);
 
-        Event::fire('user.role.update.after', $role);
+        Event::dispatch('user.role.update.after', $role);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Role']));
 
@@ -138,11 +138,11 @@ class RoleController extends Controller
             session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Role']));
         } else {
             try {
-                Event::fire('user.role.delete.before', $id);
+                Event::dispatch('user.role.delete.before', $id);
 
                 $this->roleRepository->delete($id);
 
-                Event::fire('user.role.delete.after', $id);
+                Event::dispatch('user.role.delete.after', $id);
 
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Role']));
 

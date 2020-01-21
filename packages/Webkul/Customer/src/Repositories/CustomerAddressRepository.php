@@ -31,7 +31,7 @@ class CustomerAddressRepository extends Repository
      */
     public function create(array $data)
     {
-        Event::fire('customer.addresses.create.before');
+        Event::dispatch('customer.addresses.create.before');
 
         $data['default_address'] = isset($data['default_address']) ? 1 : 0;
 
@@ -45,7 +45,7 @@ class CustomerAddressRepository extends Repository
 
         $address = $this->model->create($data);
 
-        Event::fire('customer.addresses.create.after', $address);
+        Event::dispatch('customer.addresses.create.after', $address);
 
         return $address;
     }
@@ -60,7 +60,7 @@ class CustomerAddressRepository extends Repository
     {
         $address = $this->find($id);
 
-        Event::fire('customer.addresses.update.before', $id);
+        Event::dispatch('customer.addresses.update.before', $id);
 
         $data['default_address'] = isset($data['default_address']) ? 1 : 0;
 
@@ -77,7 +77,7 @@ class CustomerAddressRepository extends Repository
             $address->update($data);
         }
 
-        Event::fire('customer.addresses.update.after', $id);
+        Event::dispatch('customer.addresses.update.after', $id);
 
         return $address;
     }
