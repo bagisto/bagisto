@@ -4,6 +4,7 @@ namespace Webkul\Product\Helpers;
 
 use Webkul\Product\Repositories\ProductRepository as Product;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
+use Illuminate\Support\Str;
 
 class GenerateProduct
 {
@@ -41,7 +42,7 @@ class GenerateProduct
             'code' => 'default'
         ]);
 
-        $sku = str_random(10);
+        $sku = Str::random(10);
         $data['sku'] = strtolower($sku);
         $data['attribute_family_id'] = $attributeFamily->first()->id;
         $data['type'] = 'simple';
@@ -51,23 +52,22 @@ class GenerateProduct
         unset($data);
 
         $faker = \Faker\Factory::create();
-        
         $date = date('Y-m-d');
         $date = \Carbon\Carbon::parse($date);
         $specialFrom = $date->toDateString();
         $specialTo = $date->addDays(7)->toDateString();
 
-        foreach ($attributes as $attribute) {            
-            if ($attribute->type == 'text') {                
-                if ($attribute->code == 'width' || $attribute->code == 'height' || $attribute->code == 'depth' || $attribute->code == 'weight') {            
+        foreach ($attributes as $attribute) {
+            if ($attribute->type == 'text') {
+                if ($attribute->code == 'width' || $attribute->code == 'height' || $attribute->code == 'depth' || $attribute->code == 'weight') {
                     $data[$attribute->code] = $faker->randomNumber(3);
-                } else if ($attribute->code == 'url_key') {                    
+                } else if ($attribute->code == 'url_key') {
                     $data[$attribute->code] = strtolower($sku);
                 } else if ($attribute->code != 'sku') {
                     $data[$attribute->code] = $faker->name;
                 } else {
-                    $data[$attribute->code] = $sku;                    
-                }                
+                    $data[$attribute->code] = $sku;
+                }
             } else if ($attribute->type == 'textarea') {
                 $data[$attribute->code] = $faker->text;
 
@@ -99,7 +99,7 @@ class GenerateProduct
                     } else {
                         $data[$attribute->code] = "";
                     }
-                } else if ($attribute->type == 'multiselect') {            
+                } else if ($attribute->type == 'multiselect') {
                     if ($options->count()) {
                         $option = $options->first()->id;
 
@@ -152,7 +152,7 @@ class GenerateProduct
         ];
 
         $updated = $this->product->update($data, $product->id);
-        
+
         return $updated;
     }
 

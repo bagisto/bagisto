@@ -54,7 +54,7 @@
                 <div class="form-container">
                     @csrf()
 
-                    @if ($groups = array_get($config->items, request()->route('slug') . '.children.' . request()->route('slug2') . '.children'))
+                    @if ($groups = \Illuminate\Support\Arr::get($config->items, request()->route('slug') . '.children.' . request()->route('slug2') . '.children'))
 
                         @foreach ($groups as $key => $item)
 

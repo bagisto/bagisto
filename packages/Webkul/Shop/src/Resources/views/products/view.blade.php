@@ -5,7 +5,7 @@
 @stop
 
 @section('seo')
-    <meta name="description" content="{{ trim($product->meta_description) != "" ? $product->meta_description : str_limit(strip_tags($product->description), 120, '') }}"/>
+    <meta name="description" content="{{ trim($product->meta_description) != "" ? $product->meta_description : \Illuminate\Support\Str::limit(strip_tags($product->description), 120, '') }}"/>
     <meta name="keywords" content="{{ $product->meta_keywords }}"/>
 @stop
 
@@ -52,7 +52,6 @@
                         @else
                             <input type="hidden" name="quantity" value="1">
                         @endif
-                        
 
                         {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
 
@@ -63,7 +62,7 @@
                         @include ('shop::products.view.grouped-products')
 
                         @include ('shop::products.view.bundle-options')
-                        
+
                         {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
 
                         <accordian :title="'{{ __('shop::app.products.description') }}'" :active="true">

@@ -72,11 +72,11 @@ class CurrencyController extends Controller
             'name' => 'required'
         ]);
 
-        Event::fire('core.channel.create.before');
+        Event::dispatch('core.channel.create.before');
 
         $currency = $this->currencyRepository->create(request()->all());
 
-        Event::fire('core.currency.create.after', $currency);
+        Event::dispatch('core.currency.create.after', $currency);
 
         session()->flash('success', trans('admin::app.settings.currencies.create-success'));
 
@@ -109,11 +109,11 @@ class CurrencyController extends Controller
             'name' => 'required'
         ]);
 
-        Event::fire('core.currency.update.before', $id);
+        Event::dispatch('core.currency.update.before', $id);
 
         $currency = $this->currencyRepository->update(request()->all(), $id);
 
-        Event::fire('core.currency.update.after', $currency);
+        Event::dispatch('core.currency.update.after', $currency);
 
         session()->flash('success', trans('admin::app.settings.currencies.update-success'));
 
@@ -134,11 +134,11 @@ class CurrencyController extends Controller
             session()->flash('warning', trans('admin::app.settings.currencies.last-delete-error'));
         } else {
             try {
-                Event::fire('core.currency.delete.before', $id);
+                Event::dispatch('core.currency.delete.before', $id);
 
                 $this->currencyRepository->delete($id);
 
-                Event::fire('core.currency.delete.after', $id);
+                Event::dispatch('core.currency.delete.after', $id);
 
                 session()->flash('success', trans('admin::app.settings.currencies.delete-success'));
 
@@ -164,11 +164,11 @@ class CurrencyController extends Controller
 
             foreach ($indexes as $key => $value) {
                 try {
-                    Event::fire('core.currency.delete.before', $value);
+                    Event::dispatch('core.currency.delete.before', $value);
 
                     $this->currencyRepository->delete($value);
 
-                    Event::fire('core.currency.delete.after', $value);
+                    Event::dispatch('core.currency.delete.after', $value);
                 } catch(\Exception $e) {
                     $suppressFlash = true;
 
