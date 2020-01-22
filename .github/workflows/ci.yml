@@ -54,3 +54,10 @@ jobs:
 
       - name: Execute trigger tests
         run: set -e && vendor/bin/codecept run trigger
+
+      - name: Persist test artifacts
+        uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: test_artifacts
+          path: tests/_output
