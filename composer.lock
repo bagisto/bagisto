@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c3640c1ee1912fd52af7f7321113a3de",
+    "content-hash": "6b5675ddb7cd173f6d023056babe71d9",
     "packages": [
         {
             "name": "astrotomic/laravel-translatable",
@@ -5522,6 +5522,57 @@
                 "codeception"
             ],
             "time": "2019-11-13T17:32:27+00:00"
+        },
+        {
+            "name": "codeception/module-filesystem",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Codeception/module-filesystem.git",
+                "reference": "fe3c352479924ec0aaf6a6c3d6825dc14242b81e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Codeception/module-filesystem/zipball/fe3c352479924ec0aaf6a6c3d6825dc14242b81e",
+                "reference": "fe3c352479924ec0aaf6a6c3d6825dc14242b81e",
+                "shasum": ""
+            },
+            "require": {
+                "codeception/codeception": "*@dev",
+                "php": ">=5.6.0 <8.0",
+                "symfony/finder": ">=2.7 <6.0"
+            },
+            "conflict": {
+                "codeception/codeception": "<4.0"
+            },
+            "require-dev": {
+                "codeception/util-robohelpers": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Bodnarchuk"
+                },
+                {
+                    "name": "Gintautas Miselis"
+                }
+            ],
+            "description": "Codeception module for testing local filesystem",
+            "homepage": "http://codeception.com/",
+            "keywords": [
+                "codeception",
+                "filesystem"
+            ],
+            "time": "2019-12-04T17:13:39+00:00"
         },
         {
             "name": "codeception/phpunit-wrapper",
