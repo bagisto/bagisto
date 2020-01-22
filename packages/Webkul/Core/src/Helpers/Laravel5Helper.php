@@ -74,7 +74,7 @@ class Laravel5Helper extends Laravel5
             'product_id'          => $product->id,
             'inventory_source_id' => 1,
         ]));
-        Event::fire('catalog.product.create.after', $product);
+        Event::dispatch('catalog.product.create.after', $product);
         return $product;
     }
     private function createAttributeValues($id, array $attributeValues = [])
