@@ -70,7 +70,7 @@ class ProductCest
 
         $I->selectOption('select#attribute_family_id', $attributeFamily->id);
 
-        $sku = $this->faker->uuid;
+        $sku = $this->faker->randomNumber(3);
 
         $I->fillField('sku', $sku);
         $I->click(__('admin::app.catalog.products.save-btn-title'));

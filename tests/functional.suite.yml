@@ -11,10 +11,8 @@ modules:
     # add a framework module here
     - \Helper\Functional
     - Asserts
-    - Webkul\Core\Helpers\Laravel5Helper:
+    - Laravel5:
         environment_file: .env.testing
-        packages: packages
-        cleanup: false
         run_database_migrations: true
         run_database_seeder: true
         database_seeder_class: DatabaseSeeder
