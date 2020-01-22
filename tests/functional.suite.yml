@@ -11,7 +11,7 @@ modules:
     # add a framework module here
     - \Helper\Functional
     - Asserts
-    - Webkul\Core\Helpers\Laravel5Helper:
+    - Webkul\Core\Helpers\Laravel6Helper:
         environment_file: .env.testing
         packages: packages
         cleanup: false
