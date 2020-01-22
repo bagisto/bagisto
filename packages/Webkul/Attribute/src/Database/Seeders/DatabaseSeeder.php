@@ -13,9 +13,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(AttributeFamilyTableSeeder::class);
-        $this->call(AttributeGroupTableSeeder::class);
         $this->call(AttributeTableSeeder::class);
         $this->call(AttributeOptionTableSeeder::class);
+        $this->call(AttributeFamilyTableSeeder::class);
+        $this->call(AttributeGroupTableSeeder::class);
     }
 }

@@ -3,17 +3,12 @@
 namespace Webkul\Attribute\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use DB;
 
 class AttributeGroupTableSeeder extends Seeder
 {
     public function run()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-
-        DB::table('attribute_groups')->delete();
-        DB::table('attribute_group_mappings')->delete();
-
         DB::table('attribute_groups')->delete();
 
         DB::table('attribute_groups')->insert([
@@ -47,12 +42,9 @@ class AttributeGroupTableSeeder extends Seeder
             ['attribute_id' => '20','attribute_group_id' => '5','position' => '2'],
             ['attribute_id' => '21','attribute_group_id' => '5','position' => '3'],
             ['attribute_id' => '22','attribute_group_id' => '5','position' => '4'],
-            ['attribute_id' => '23','attribute_group_id' => '1','position' => '10'],
-            ['attribute_id' => '24','attribute_group_id' => '1','position' => '11'],
-            ['attribute_id' => '25','attribute_group_id' => '1','position' => '12'],
-            ['attribute_id' => '26','attribute_group_id' => '1','position' => '9']
+            ['attribute_id' => '23','attribute_group_id' => '1','position' => '9'],
+            ['attribute_id' => '24','attribute_group_id' => '1','position' => '10'],
+            ['attribute_id' => '25','attribute_group_id' => '1','position' => '11']
         ]);
-
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
     }
 }
