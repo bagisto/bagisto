@@ -1,14 +1,5 @@
 #!/bin/bash
 
-PROGRESS_REPORTER="--ext Codeception\\ProgressReporter\\ProgressReporter"
-
- while getopts ":c" arg; do
-    case $arg in
-        # c)lassic reporter
-        c) PROGRESS_REPORTER="";;
-    esac
- done
-
 printf "### start preparation ###\n"
 
     WORKPATH=$(dirname ${0})
@@ -31,7 +22,6 @@ printf "### start tests ###\n"
     SUCCESS=1
     execSuite() {
         ${WORKPATH}/../vendor/bin/codecept run ${1} \
-		${PROGRESS_REPORTER} \
      	--xml report_${1}.xml ${CODECEPT_OPTIONS} | tee ${LOG_DIR}/tests_${1}.log
         if [[ ${PIPESTATUS[0]} -ne 0 ]]
         then
