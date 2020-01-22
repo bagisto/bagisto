@@ -65,11 +65,6 @@
 
                                         @include ('admin::configuration.field-type', ['field' => $field])
 
-                                        @php ($hint = $field['title'] . '-hint')
-                                        @if ($hint !== __($hint))
-                                            {{ __($hint) }}
-                                        @endif
-
                                     @endforeach
 
                                 </div>
