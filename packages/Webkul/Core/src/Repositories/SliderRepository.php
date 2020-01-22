@@ -7,6 +7,7 @@ use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Container\Container as App;
 use Webkul\Core\Repositories\ChannelRepository;
+use Illuminate\Support\Arr;
 
 /**
  * Slider Repository
@@ -55,7 +56,7 @@ class SliderRepository extends Repository
      */
     public function save(array $data)
     {
-        Event::fire('core.settings.slider.create.before', $data);
+        Event::dispatch('core.settings.slider.create.before', $data);
 
         $channelName = $this->channelRepository->find($data['channel_id'])->name;
 
@@ -65,7 +66,7 @@ class SliderRepository extends Repository
         $image = false;
 
         if (isset($data['image'])) {
-            $image = $first = array_first($data['image'], function ($value, $key) {
+            $image = $first = Arr::first($data['image'], function ($value, $key) {
                 if ($value)
                     return $value;
                 else
@@ -87,7 +88,7 @@ class SliderRepository extends Repository
 
         $slider = $this->create($data);
 
-        Event::fire('core.settings.slider.create.after', $slider);
+        Event::dispatch('core.settings.slider.create.after', $slider);
 
         return true;
     }
@@ -98,7 +99,7 @@ class SliderRepository extends Repository
      */
     public function updateItem(array $data, $id)
     {
-        Event::fire('core.settings.slider.update.before', $id);
+        Event::dispatch('core.settings.slider.update.before', $id);
 
         $channelName = $this->channelRepository->find($data['channel_id'])->name;
 
@@ -107,7 +108,7 @@ class SliderRepository extends Repository
         $uploaded = $image = false;
 
         if (isset($data['image'])) {
-            $image = $first = array_first($data['image'], function ($value, $key) {
+            $image = $first = Arr::first($data['image'], function ($value, $key) {
                 return $value ? $value : false;
             });
         }
@@ -130,7 +131,7 @@ class SliderRepository extends Repository
 
         $slider = $this->update($data, $id);
 
-        Event::fire('core.settings.slider.update.after', $slider);
+        Event::dispatch('core.settings.slider.update.after', $slider);
 
         return true;
     }

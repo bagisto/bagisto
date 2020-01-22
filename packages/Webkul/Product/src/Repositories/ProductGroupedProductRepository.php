@@ -4,6 +4,7 @@ namespace Webkul\Product\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Product\Repositories\ProductRepository;
+use Illuminate\Support\Str;
 
 /**
  * Product Grouped Product Repository
@@ -29,7 +30,7 @@ class ProductGroupedProductRepository extends Repository
 
         if (isset($data['links'])) {
             foreach ($data['links'] as $linkId => $linkInputs) {
-                if (str_contains($linkId, 'link_')) {
+                if (Str::contains($linkId, 'link_')) {
                     $this->create(array_merge([
                             'product_id' => $product->id,
                         ], $linkInputs));

@@ -52,7 +52,7 @@ class InvoiceItemRepository extends Repository
                 ->whereIn('inventory_source_id', $data['invoice']->order->channel->inventory_sources()->pluck('id'))
                 ->orderBy('qty', 'desc')
                 ->get();
-            
+
         foreach ($inventories as $key => $inventory) {
             if ($inventory->qty >= $data['qty']) {
                 $inventory->update(['qty' => $inventory->qty - $data['qty']]);
@@ -65,6 +65,6 @@ class InvoiceItemRepository extends Repository
             }
         }
 
-        Event::fire('catalog.product.update.after', $data['product']);
+        Event::dispatch('catalog.product.update.after', $data['product']);
     }
 }
