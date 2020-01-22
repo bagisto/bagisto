@@ -4,6 +4,7 @@
 
 <recently-viewed
     add-class="{{ isset($addClass) ? $addClass : '' }}"
+    quantity="{{ isset($quantity) ? $quantity : null }}"
     add-class-wrapper="{{ isset($addClassWrapper) ? $addClassWrapper : '' }}">
 </recently-viewed>
 
@@ -62,7 +63,7 @@
         (() => {
             Vue.component('recently-viewed', {
                 template: '#recently-viewed-template',
-                props: ['addClass', 'addClassWrapper'],
+                props: ['quantity', 'addClass', 'addClassWrapper'],
 
                 data: function () {
                     return {
@@ -72,6 +73,10 @@
                             if (storedRecentlyViewed) {
                                 var slugs = JSON.parse(storedRecentlyViewed);
                                 var updatedSlugs = {};
+
+                                if (this.quantity) {
+                                    slugs = slugs.slice(0, this.quantity);
+                                }
 
                                 slugs.forEach(slug => {
                                     updatedSlugs[slug] = {};

@@ -25,7 +25,7 @@
 @endphp
 
 @section('content-wrapper')
-    <section class="row col-12 velocity-divide-page">
+    <section class="row col-12 velocity-divide-page category-page-wrapper">
         {!! view_render_event('bagisto.shop.productOrCategory.index.before', ['category' => $category]) !!}
 
         @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description']))
@@ -34,7 +34,7 @@
 
         <div class="category-container right">
             <div class="row">
-                <div class="col-6">
+                <div class="col-12">
                     <h1 class="fw6 mb10">{{ $category->name }}</h1>
 
                     @if ($isDisplayMode && $products->count())
@@ -46,13 +46,13 @@
                     @endif
                 </div>
 
-                <div class="col-6">
-                    {{-- <div class="hero-image mb-35">
+                {{-- <div class="col-6">
+                    <div class="hero-image mb-35">
                         @if (!is_null($category->image))
                             <img class="logo" src="{{ $category->image_url }}" />
                         @endif
-                    </div> --}}
-                </div>
+                    </div>
+                </div> --}}
             </div>
 
             @if ($products->count())

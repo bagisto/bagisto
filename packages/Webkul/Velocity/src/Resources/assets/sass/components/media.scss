@@ -52,20 +52,24 @@
 @media only screen and (max-width: 992px) {
     $header-height: 50px;
 
+    .main-container-wrapper {
+        // position: relative;
+    }
+
     .vc-small-screen {
         display: block !important;
     }
 
     .main-content-wrapper {
-        position: relative;
+        // top: 0;
+        z-index: 100;
+        margin-bottom: 25px;
+        // position: sticky !important;
+        background-color: $white-color;
 
         .vc-header {
-            top: 0;
             margin: 0;
             padding: 0;
-            z-index: 100;
-            position: sticky;
-            background-color: $white-color;
             box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 
             > div {
@@ -93,13 +97,13 @@
                 }
 
                 .right-vc-header {
+                    display: table;
                     text-align: right;
                     height: $header-height;
 
                     > a {
-                        width: 24px;
-                        margin-top: 13px;
-                        margin-right: 10px;
+                        display: table-cell;
+                        vertical-align: middle;
                     }
                 }
             }
@@ -204,10 +208,6 @@
         }
     }
 
-    .main-content-wrapper {
-        margin-bottom: 25px;
-    }
-
     .slides-container {
         .VueCarousel {
             .VueCarousel-pagination {
@@ -306,8 +306,21 @@
     }
 
     .review-page-container {
+        > div {
+            padding: 0;
+        }
+
         > div:not(:last-child) {
-            margin-bottom: 20px;
+            position: relative;
+            margin-bottom: 60px;
+        }
+    }
+
+    .customer-rating {
+        > .row {
+            > div:not(:last-child) {
+                margin-bottom: 20px;
+            }
         }
     }
 
@@ -389,12 +402,72 @@
                         float: right;
                         padding-right: 15px;
                     }
+
+                    .nested-category {
+                        border-top: unset;
+
+                        li:last-child {
+                            padding-bottom: 0;
+                        }
+                    }
                 }
             }
         }
 
         .drawer-section {
             padding: 15px;
+        }
+    }
+
+    .auth-content {
+        > .container {
+            margin: 0;
+            width: 100%;
+        }
+    }
+
+    .category-page-wrapper {
+        .layered-filter-wrapper {
+            display: none;
+        }
+
+        .category-container {
+            margin: 0;
+            padding-left: 0px !important;
+            padding-right: 0px !important;
+
+            > div {
+                padding: 0 10px;
+            }
+
+            .filters-container {
+                padding: 0;
+
+                .toolbar-wrapper {
+                    > div.col-4 {
+                        margin: 0;
+                        padding: 0;
+                        display: table;
+                        text-align: center;
+
+                        i {
+                            left: 20px;
+                            position: relative;
+                        }
+
+                        * {
+                            display: table-cell;
+                            vertical-align: middle;
+                        }
+                    }
+
+                    > div.col-4:nth-of-type(2) {
+                        i {
+                            left: 15px;
+                        }
+                    }
+                }
+            }
         }
     }
 }

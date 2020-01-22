@@ -62,8 +62,9 @@
                     </div>
 
                     @include ('shop::products.list.recently-viewed', [
-                        'addClass' => 'col-3 new-products-recent',
-                        'addClassWrapper' => 'scrollable max-height-350',
+                        'quantity'          => 3,
+                        'addClass'          => 'col-3 new-products-recent',
+                        'addClassWrapper'   => 'scrollable max-height-350',
                     ])
                 </div>
             @else

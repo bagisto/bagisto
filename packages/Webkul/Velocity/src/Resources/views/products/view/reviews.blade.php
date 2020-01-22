@@ -90,13 +90,13 @@
                         @for ($i = 5; $i >= 1; $i--)
 
                             <div class="row">
-                                <span class="col-lg-3 no-padding fs16 fw6">{{ $i }} Star</span>
+                                <span class="col-3 no-padding fs16 fw6">{{ $i }} Star</span>
 
-                                <div class="col-lg-7 rating-bar" title="{{ $percentageRatings[$i] }}%">
+                                <div class="col-7 rating-bar" title="{{ $percentageRatings[$i] }}%">
                                     <div style="width: {{ $percentageRatings[$i] }}%"></div>
                                 </div>
 
-                                <span class="col-lg-2 fs16">{{ $countRatings[$i] }}</span>
+                                <span class="col-2 fs16">{{ $countRatings[$i] }}</span>
                             </div>
                         @endfor
 

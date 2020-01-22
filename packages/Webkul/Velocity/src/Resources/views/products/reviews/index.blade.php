@@ -31,7 +31,7 @@
         <div class="row review-page-container">
             @include ('shop::products.view.small-view', ['product' => $product])
 
-            <div class="col-7 scrollable fs16">
+            <div class="col-lg-7 col-md-12 fs16">
                 <h2 class="full-width mb30">Rating and Reviews</h2>
 
                 @include ('shop::products.view.reviews')

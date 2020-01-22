@@ -159,7 +159,11 @@
                                     @auth('customer')
                                         {{ __('velocity::app.responsive.header.greeting', ['customer' => auth()->guard('customer')->user()->first_name]) }}
                                     @endauth
-                                    <i class="material-icons pull-right" v-on:click="closeDrawer()">cancel</i>
+                                    <i
+                                        class="material-icons pull-right"
+                                        @click="closeDrawer()">
+                                        cancel
+                                    </i>
                                 </span>
                             </div>
 
@@ -185,7 +189,11 @@
                                         :href="`${url}/${category['translations'][0].url_path}`">
                                         <span>@{{ category.name }}</span>
                                     </a>
-                                    <i class="rango-arrow-right" @click="toggleSubcategories(index, $event)"></i>
+
+                                    <i
+                                        class="rango-arrow-right"
+                                        @click="toggleSubcategories(index, $event)">
+                                    </i>
                                 </li>
                             </ul>
                         </div>
@@ -193,11 +201,55 @@
                         <div class="wrapper" v-else-if="subCategory">
                             <div class="drawer-section">
                                 <i class="rango-arrow-left fs24 text-down-4" @click="toggleSubcategories('root')"></i>
+
                                 <h4 class="display-inbl">@{{ subCategory.name }}</h4>
+
+                                <i class="material-icons pull-right" @click="closeDrawer()">
+                                    cancel
+                                </i>
                             </div>
 
-                            <ul>
-                                <li v-for="(subCategory, index) in subCategory.children">@{{ subCategory.name }}</li>
+                            <ul type="none">
+                                <li
+                                    :key="index"
+                                    v-for="(nestedSubCategory, index) in subCategory.children">
+
+                                    <div class="category-logo">
+                                        <img
+                                            class="category-icon"
+                                            v-if="nestedSubCategory.category_icon_path"
+                                            :src="`${url}/storage/${nestedSubCategory.category_icon_path}`" />
+                                    </div>
+
+                                    <a
+                                        class="unset"
+                                        :href="`${url}/${nestedSubCategory['translations'][0].url_path}`">
+                                        <span>@{{ nestedSubCategory.name }}</span>
+                                    </a>
+
+                                    <ul
+                                        type="none"
+                                        class="nested-category"
+                                        v-if="nestedSubCategory.children && nestedSubCategory.children.length > 0">
+
+                                        <li
+                                            :key="`index-${Math.random()}`"
+                                            v-for="(thirdLevelCategory, index) in nestedSubCategory.children">
+                                            <div class="category-logo">
+                                                <img
+                                                    class="category-icon"
+                                                    v-if="thirdLevelCategory.category_icon_path"
+                                                    :src="`${url}/storage/${thirdLevelCategory.category_icon_path}`" />
+                                            </div>
+
+                                            <a
+                                                class="unset"
+                                                :href="`${url}/${nestedSubCategory['translations'][0].url_path}`">
+                                                <span>@{{ thirdLevelCategory.name }}</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -208,7 +260,7 @@
                     <logo-component></logo-component>
                 </div>
 
-                <div class="row right-vc-header col-4">
+                <div class="right-vc-header col-4">
                     <a :href="`${url}/customer/account/wishlist`" class="unset">
                         <i class="material-icons">favorite_border</i>
                     </a>
@@ -408,7 +460,7 @@
 
             data: function () {
                 return {
-                    'hamburger': true,
+                    'hamburger': false,
                     'subCategory': null,
                     'isSearchbar': false,
                     'rootCategories': true,
@@ -437,7 +489,9 @@
 
                 closeDrawer: function() {
                     $('.nav-container').hide();
+
                     this.hamburger = false;
+                    this.rootCategories = true;
                 },
 
                 toggleSubcategories: function (index, event) {
@@ -448,7 +502,7 @@
 
                         let categories = JSON.parse(this.categories);
                         this.rootCategories = false;
-                        this.subCategory = categories[0];
+                        this.subCategory = categories[index];
                     }
                 }
             }

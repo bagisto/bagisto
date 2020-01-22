@@ -1,5 +1,12 @@
 .review-page-container {
     padding: 20px;
+    position: relative;
+
+    > div:first-child {
+        top: 40px;
+        position: sticky;
+        height: max-content;
+    }
 
     .category-breadcrumb {
         margin-bottom: 30px;
@@ -102,30 +109,32 @@
 .filters-container {
     margin: 20px 0;
 
-    > div {
-        margin: 0 20px 0 0;
-        display: inline-block;
+    .toolbar-wrapper {
+        > div {
+            margin: 0 20px 0 0;
+            display: inline-block;
 
-        label {
-            font-weight: 500;
-            margin-right: 10px;
+            label {
+                font-weight: 500;
+                margin-right: 10px;
+            }
+
+            select {
+                cursor: pointer;
+                padding: 6px 16px;
+                color: $font-color;
+                background-color: white;
+            }
         }
 
-        select {
-            cursor: pointer;
-            padding: 6px 16px;
-            color: $font-color;
-            background-color: white;
+        > div:not(:first-child) {
+            vertical-align: super;
         }
-    }
 
-    > div:not(:first-child) {
-        vertical-align: super;
-    }
-
-    .limiter::after {
-        margin-left: 10px;
-        content: 'per page';
+        .limiter::after {
+            margin-left: 10px;
+            content: 'per page';
+        }
     }
 }
 
@@ -1814,7 +1823,9 @@
 }
 
 .vc-header {
-    z-index: 99;
+    z-index: 10;
+    margin: 0 !important;
+    padding: 0 !important;
     box-shadow: 0 1px 3px rgba(0,0,0,0.16), 0 1px 3px rgba(0,0,0,0.23);
 }
 
@@ -1825,4 +1836,8 @@
 
 .recetly-viewed-products-wrapper {
     padding: 2px;
+}
+
+.category-page-wrapper {
+    @extend .remove-padding-margin;
 }
