@@ -39,6 +39,7 @@
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",
         "codeception/codeception": "^4.0",
+        "codeception/module-asserts": "^1.1",
         "filp/whoops": "^2.0",
         "fzaninotto/faker": "^1.4",
         "laravel/dusk": "^5.7.0",
