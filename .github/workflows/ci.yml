@@ -57,6 +57,7 @@ jobs:
 
       - name: Persist test artifacts
         uses: actions/upload-artifact@v1
+        if: always()
         with:
           name: test_artifacts
           path: tests/_output
