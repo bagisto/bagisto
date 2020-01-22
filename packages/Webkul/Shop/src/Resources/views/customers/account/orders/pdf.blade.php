@@ -45,7 +45,7 @@
                 padding: 5px 10px;
                 border-bottom: solid 1px #d3d3d3;
                 border-left: solid 1px #d3d3d3;
-                color: $font-color;
+                color: #3A3A3A;
                 vertical-align: middle;
                 font-family: DejaVu Sans; sans-serif;
             }
@@ -87,12 +87,12 @@
 
                 <div class="row">
                     <span class="label">{{ __('shop::app.customer.account.order.view.invoice-id') }} -</span>
-                    <span class="value">#{{ $invoice->id }}</span>
+                    <span class="value">{{ $invoice->id }}</span>
                 </div>
 
                 <div class="row">
                     <span class="label">{{ __('shop::app.customer.account.order.view.order-id') }} -</span>
-                    <span class="value">#{{ $invoice->order->increment_id }}</span>
+                    <span class="value">{{ $invoice->order->increment_id }}</span>
                 </div>
 
                 <div class="row">
@@ -124,7 +124,7 @@
                                     </p>
                                     {{ __('shop::app.customer.account.order.view.contact') }} : {{ $invoice->order->billing_address->phone }}
                                 </td>
-                                
+
                                 @if ($invoice->order->shipping_address)
                                     <td>
                                         <p>{{ $invoice->order->shipping_address->name }}</p>
@@ -193,7 +193,7 @@
 
                                         @if (isset($item->additional['attributes']))
                                             <div class="item-options">
-                                                
+
                                                 @foreach ($item->additional['attributes'] as $attribute)
                                                     <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
                                                 @endforeach
