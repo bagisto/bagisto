@@ -70,7 +70,7 @@ class ForgetPasswordController extends Controller
                     ['email' => trans($response)]
                 );
         } catch(\Exception $e) {
-            session()->flash('success', trans($e->getMessage()));
+            session()->flash('error', trans($e->getMessage()));
 
             return redirect()->back();
         }
