@@ -110,7 +110,11 @@ class WishlistController extends Controller
                 return redirect()->back();
             }
         } else {
-            session()->flash('warning', trans('customer::app.wishlist.already'));
+            $this->wishlistRepository->findOneWhere([
+                'product_id' => $data['product_id']
+            ])->delete();
+
+            session()->flash('success', trans('customer::app.wishlist.removed'));
 
             return redirect()->back();
         }
