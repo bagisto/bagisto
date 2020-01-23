@@ -170,7 +170,7 @@ class WishlistController extends Controller
         } catch (\Exception $e) {
             session()->flash('warning', $e->getMessage());
 
-            return redirect()->route('shop.productOrCategory.index', ['slugOrPath' => $wishlistItem->product->url_key]);
+            return redirect()->route('shop.productOrCategory.index',  $wishlistItem->product->url_key);
         }
     }
 
