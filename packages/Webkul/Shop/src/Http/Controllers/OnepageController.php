@@ -64,13 +64,22 @@ class OnepageController extends Controller
     */
     public function index()
     {
+        if (! auth()->guard('customer')->check() && ! core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout')) {
+            return redirect()->route('customer.session.index');
+        }
+
         if (Cart::hasError())
             return redirect()->route('shop.checkout.cart.index');
 
         $cart = Cart::getCart();
 
-        if (! auth()->guard('customer')->check() && $cart->haveDownloadableItems())
+        if (! auth()->guard('customer')->check() && $cart->hasDownloadableItems()) {
             return redirect()->route('customer.session.index');
+        }
+
+        if (! auth()->guard('customer')->check() && ! $cart->hasGuestCheckoutItems()) {
+            return redirect()->route('customer.session.index');
+        }
 
         Cart::collectTotals();
 
