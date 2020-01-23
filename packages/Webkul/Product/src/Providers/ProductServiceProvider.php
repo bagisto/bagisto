@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Webkul\Product\Models\ProductProxy;
 use Webkul\Product\Observers\ProductObserver;
 use Webkul\Product\Console\Commands\PriceUpdate;
+use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 
 class ProductServiceProvider extends ServiceProvider
 {
@@ -17,6 +18,8 @@ class ProductServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+
+        $this->app->make(EloquentFactory::class)->load(__DIR__ . '/../Database/Factories');
 
         $this->app->register(EventServiceProvider::class);
 
