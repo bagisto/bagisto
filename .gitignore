@@ -1,3 +1,5 @@
+/docker-compose-collection
+/bin
 /node_modules
 /public/hot
 /public/storage

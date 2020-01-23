@@ -110,7 +110,11 @@ class WishlistController extends Controller
                 return redirect()->back();
             }
         } else {
-            session()->flash('warning', trans('customer::app.wishlist.already'));
+            $this->wishlistRepository->findOneWhere([
+                'product_id' => $data['product_id']
+            ])->delete();
+
+            session()->flash('success', trans('customer::app.wishlist.removed'));
 
             return redirect()->back();
         }
@@ -170,7 +174,7 @@ class WishlistController extends Controller
         } catch (\Exception $e) {
             session()->flash('warning', $e->getMessage());
 
-            return redirect()->route('shop.productOrCategory.index', ['slugOrPath' => $wishlistItem->product->url_key]);
+            return redirect()->route('shop.productOrCategory.index',  $wishlistItem->product->url_key);
         }
     }
 

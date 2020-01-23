@@ -116,11 +116,11 @@ class Cart extends Model implements CartContract
     }
 
     /**
-     * Checks if cart have downloadable items
+     * Checks if cart has downloadable items
      *
      * @return boolean
      */
-    public function haveDownloadableItems()
+    public function hasDownloadableItems()
     {
         foreach ($this->items as $item) {
             if ($item->type == 'downloadable')
@@ -128,5 +128,21 @@ class Cart extends Model implements CartContract
         }
 
         return false;
+    }
+
+    /**
+     * Checks if cart has items that allow guest checkout
+     *
+     * @return boolean
+     */
+    public function hasGuestCheckoutItems()
+    {
+        foreach ($this->items as $item) {
+            if ($item->product->getAttribute('guest_checkout') === 0) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

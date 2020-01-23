@@ -1203,6 +1203,9 @@ return [
         'system' => [
             'catalog' => 'Catalog',
             'products' => 'Products',
+            'guest-checkout' => 'Guest Checkout',
+            'allow-guest-checkout' => 'Allow Guest Checkout',
+            'allow-guest-checkout-hint' => 'Hint: If turned on, this option can be configured for each product specifically.',
             'review' => 'Review',
             'allow-guest-review' => 'Allow Guest Review',
             'inventory' => 'Inventory',
