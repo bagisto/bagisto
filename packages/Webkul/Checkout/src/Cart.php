@@ -146,6 +146,10 @@ class Cart {
         if (is_string($cartProducts)) {
             $this->collectTotals();
 
+            if (! count($cart->all_items) > 0) {
+                session()->forget('cart');
+            }
+
             throw new \Exception($cartProducts);
         } else {
             $parentCartItem = null;
@@ -327,6 +331,8 @@ class Cart {
             $cart = $this->cartRepository->findOneWhere(['customer_id' => $this->getCurrentCustomer()->user()->id, 'is_active' => 1]);
 
             $guestCart = session()->get('cart');
+
+            dd($guestCart);
 
             //when the logged in customer is not having any of the cart instance previously and are active.
             if (! $cart) {
