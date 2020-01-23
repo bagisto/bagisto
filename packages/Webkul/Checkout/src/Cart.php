@@ -146,6 +146,10 @@ class Cart {
         if (is_string($cartProducts)) {
             $this->collectTotals();
 
+            if (! count($cart->all_items) > 0) {
+                session()->forget('cart');
+            }
+
             throw new \Exception($cartProducts);
         } else {
             $parentCartItem = null;
