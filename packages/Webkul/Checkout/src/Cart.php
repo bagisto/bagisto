@@ -332,8 +332,6 @@ class Cart {
 
             $guestCart = session()->get('cart');
 
-            dd($guestCart);
-
             //when the logged in customer is not having any of the cart instance previously and are active.
             if (! $cart) {
                 $this->cartRepository->update([
