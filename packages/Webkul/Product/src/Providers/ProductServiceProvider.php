@@ -7,7 +7,6 @@ use Illuminate\Support\ServiceProvider;
 use Webkul\Product\Models\ProductProxy;
 use Webkul\Product\Observers\ProductObserver;
 use Webkul\Product\Console\Commands\PriceUpdate;
-use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 
 class ProductServiceProvider extends ServiceProvider
 {
