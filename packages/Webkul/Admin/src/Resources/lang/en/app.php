@@ -334,7 +334,7 @@ return [
             'item-status' => 'Item Status',
             'item-ordered' => 'Ordered (:qty_ordered)',
             'item-invoice' => 'Invoiced (:qty_invoiced)',
-            'item-shipped' => 'shipped (:qty_shipped)',
+            'item-shipped' => 'Shipped (:qty_shipped)',
             'item-canceled' => 'Canceled (:qty_canceled)',
             'item-refunded' => 'Refunded (:qty_refunded)',
             'price' => 'Price',
