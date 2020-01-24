@@ -7,7 +7,23 @@
 actor: AcceptanceTester
 modules:
     enabled:
-        - PhpBrowser:
-            url: http://localhost
-        - \Helper\Acceptance
-    step_decorators: ~
+      - \Helper\Acceptance
+      - Asserts
+      - WebDriver:
+          url: http://nginx/
+          host: selenium-chrome
+          browser: chrome
+          window_size: 1920x1080
+          restart: true
+          wait: 20
+          pageload_timeout: 10
+          connection_timeout: 60
+          request_timeout: 60
+          log_js_errors: true
+      - Laravel5:
+          part: ORM
+          cleanup: false
+          environment_file: .env
+          database_seeder_class: DatabaseSeeder
+          url: http://nginx
+step_decorators: ~

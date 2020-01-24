@@ -58,6 +58,6 @@ class ShipmentItemRepository extends Repository
 
         $inventory->update(['qty' => $qty]);
 
-        Event::fire('catalog.product.update.after', $data['product']);
+        Event::dispatch('catalog.product.update.after', $data['product']);
     }
 }

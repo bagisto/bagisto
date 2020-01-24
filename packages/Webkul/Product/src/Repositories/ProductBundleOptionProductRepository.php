@@ -3,6 +3,7 @@
 namespace Webkul\Product\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
+use Illuminate\Support\Str;
 
 /**
  * ProductBundleOptionProduct Repository
@@ -28,9 +29,9 @@ class ProductBundleOptionProductRepository extends Repository
 
         if (isset($data['products'])) {
             $this->setIsDefaultFlag($data);
-            
+
             foreach ($data['products'] as $bundleOptionProductId => $bundleOptionProductInputs) {
-                if (str_contains($bundleOptionProductId, 'product_')) {
+                if (Str::contains($bundleOptionProductId, 'product_')) {
                     $this->create(array_merge([
                             'product_bundle_option_id' => $productBundleOption->id,
                         ], $bundleOptionProductInputs));
@@ -56,14 +57,14 @@ class ProductBundleOptionProductRepository extends Repository
     {
         if (! count($data['products']))
             return;
-        
+
         $haveIsDefaulFlag = false;
 
         foreach ($data['products'] as $key => $product) {
             if (isset($product['is_default']) && $product['is_default']) {
                 $haveIsDefaulFlag = true;
             } else {
-                $data['products'][$key]['is_default'] = 0;    
+                $data['products'][$key]['is_default'] = 0;
             }
         }
 

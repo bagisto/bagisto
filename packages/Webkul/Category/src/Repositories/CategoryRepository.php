@@ -9,6 +9,7 @@ use Webkul\Core\Eloquent\Repository;
 use Webkul\Category\Models\Category;
 use Webkul\Category\Models\CategoryTranslation;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Category Reposotory
@@ -18,16 +19,6 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
  */
 class CategoryRepository extends Repository
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct(App $app)
-    {
-        parent::__construct($app);
-    }
-
     /**
      * Specify Model class name
      *
@@ -44,7 +35,7 @@ class CategoryRepository extends Repository
      */
     public function create(array $data)
     {
-        Event::fire('catalog.category.create.before');
+        Event::dispatch('catalog.category.create.before');
 
         if (isset($data['locale']) && $data['locale'] == 'all') {
             $model = app()->make($this->model());
@@ -67,7 +58,7 @@ class CategoryRepository extends Repository
             $category->filterableAttributes()->sync($data['attributes']);
         }
 
-        Event::fire('catalog.category.create.after', $category);
+        Event::dispatch('catalog.category.create.after', $category);
 
         return $category;
     }
@@ -85,6 +76,18 @@ class CategoryRepository extends Repository
             : $this->model::orderBy('position', 'ASC')->get()->toTree();
     }
 
+    /**
+     * Specify category tree
+     *
+     * @param integer $id
+     * @return mixed
+     */
+    public function getCategoryTreeWithoutDescendant($id = null)
+    {
+        return $id
+            ? $this->model::orderBy('position', 'ASC')->where('id', '!=', $id)->whereNotDescendantOf($id)->get()->toTree()
+            : $this->model::orderBy('position', 'ASC')->get()->toTree();
+    }
 
     /**
      * Get root categories
@@ -126,7 +129,7 @@ class CategoryRepository extends Repository
         $exists = CategoryTranslation::where('category_id', '<>', $id)
             ->where('slug', $slug)
             ->limit(1)
-            ->select(\DB::raw(1))
+            ->select(DB::raw(1))
             ->exists();
 
         return $exists ? false : true;
@@ -171,7 +174,7 @@ class CategoryRepository extends Repository
     {
         $category = $this->find($id);
 
-        Event::fire('catalog.category.update.before', $id);
+        Event::dispatch('catalog.category.update.before', $id);
 
         $category->update($data);
 
@@ -181,7 +184,7 @@ class CategoryRepository extends Repository
             $category->filterableAttributes()->sync($data['attributes']);
         }
 
-        Event::fire('catalog.category.update.after', $id);
+        Event::dispatch('catalog.category.update.after', $id);
 
         return $category;
     }
@@ -192,11 +195,11 @@ class CategoryRepository extends Repository
      */
     public function delete($id)
     {
-        Event::fire('catalog.category.delete.before', $id);
+        Event::dispatch('catalog.category.delete.before', $id);
 
         parent::delete($id);
 
-        Event::fire('catalog.category.delete.after', $id);
+        Event::dispatch('catalog.category.delete.after', $id);
     }
 
     /**

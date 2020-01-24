@@ -76,6 +76,7 @@ return [
                 'title' => 'admin::app.admin.system.logo-image',
                 'type' => 'image',
                 'channel_based' => true,
+                'validation' => 'mimes:jpeg,bmp,png,jpg'
             ]
         ]
     ], [
@@ -87,9 +88,20 @@ return [
         'name' => 'admin::app.admin.system.products',
         'sort' => 2
     ], [
+        'key' => 'catalog.products.guest-checkout',
+        'name' => 'admin::app.admin.system.guest-checkout',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'allow-guest-checkout',
+                'title' => 'admin::app.admin.system.allow-guest-checkout',
+                'type' => 'boolean'
+            ]
+        ]
+    ], [
         'key' => 'catalog.products.review',
         'name' => 'admin::app.admin.system.review',
-        'sort' => 1,
+        'sort' => 2,
         'fields' => [
             [
                 'name' => 'guest_review',
@@ -156,5 +168,5 @@ return [
                 'type' => 'boolean'
             ]
         ],
-    ], 
+    ],
 ];

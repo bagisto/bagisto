@@ -4,6 +4,7 @@ namespace Webkul\Product\Type;
 
 use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Models\ProductFlat;
+use Illuminate\Support\Str;
 
 /**
  * Class Configurable.
@@ -96,7 +97,7 @@ class Configurable extends AbstractType
 
             if (isset($data['variants'])) {
                 foreach ($data['variants'] as $variantId => $variantData) {
-                    if (str_contains($variantId, 'variant_')) {
+                    if (Str::contains($variantId, 'variant_')) {
                         $permutation = [];
 
                         foreach ($product->super_attributes as $superAttribute) {

@@ -6,7 +6,9 @@ import './bootstrap';
 window.Vue = Vue;
 window.VeeValidate = VeeValidate;
 
-Vue.use(VeeValidate);
+Vue.use(VeeValidate, {
+    events: 'input|change|blur',
+});
 Vue.prototype.$http = axios
 
 window.eventBus = new Vue();
@@ -85,7 +87,7 @@ $(document).ready(function () {
             },
 
             addFlashMessages() {
-                if (typeof flashMessages !== 'undefined') {
+                if (typeof flashMessages == 'undefined') {
                     return;
                 };
                 

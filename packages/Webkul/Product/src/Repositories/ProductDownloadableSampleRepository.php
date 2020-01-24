@@ -4,6 +4,7 @@ namespace Webkul\Product\Repositories;
 
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Eloquent\Repository;
+use Illuminate\Support\Str;
 
 /**
  * Product Downloadable Sample Reposotory
@@ -52,7 +53,7 @@ class ProductDownloadableSampleRepository extends Repository
 
         if (isset($data['downloadable_samples'])) {
             foreach ($data['downloadable_samples'] as $sampleId => $data) {
-                if (str_contains($sampleId, 'sample_')) {
+                if (Str::contains($sampleId, 'sample_')) {
                     $this->create(array_merge([
                             'product_id' => $product->id,
                         ], $data));

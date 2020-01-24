@@ -118,9 +118,9 @@ class ConfigurationController extends Controller
      */
     public function store()
     {
-        Event::fire('core.configuration.save.before');
+        Event::dispatch('core.configuration.save.before');
 
-        if (request()->hasFile('general.design.admin_logo.logo_image')) {
+        if (request()->has('general.design.admin_logo.logo_image') && ! request()->input('general.design.admin_logo.logo_image.delete')) {
             $this->validate(request(), [
                 'general.design.admin_logo.logo_image'  => 'required|mimes:jpeg,bmp,png,jpg'
             ]);
@@ -128,7 +128,7 @@ class ConfigurationController extends Controller
 
         $this->coreConfigRepository->create(request()->all());
 
-        Event::fire('core.configuration.save.after');
+        Event::dispatch('core.configuration.save.after');
 
         session()->flash('success', trans('admin::app.configuration.save-message'));
 

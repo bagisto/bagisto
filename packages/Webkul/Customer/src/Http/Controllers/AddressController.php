@@ -26,7 +26,8 @@ class AddressController extends Controller
     /**
      * CustomerAddressRepository object
      *
-     * @param  \Webkul\Customer\Repositories\CustomerAddressRepository $customerAddressRepository
+     * @param \Webkul\Customer\Repositories\CustomerAddressRepository $customerAddressRepository
+     *
      * @var Object
      */
     protected $customerAddressRepository;
@@ -59,7 +60,9 @@ class AddressController extends Controller
      */
     public function create()
     {
-        return view($this->_config['view']);
+        return view($this->_config['view'], [
+            'defaultCountry' => config('app.default_country'),
+        ]);
     }
 
     /**
@@ -75,11 +78,11 @@ class AddressController extends Controller
 
         $this->validate(request(), [
             'address1' => 'string|required',
-            'country' => 'string|required',
-            'state' => 'string|required',
-            'city' => 'string|required',
+            'country'  => 'string|required',
+            'state'    => 'string|required',
+            'city'     => 'string|required',
             'postcode' => 'required',
-            'phone' => 'required'
+            'phone'    => 'required',
         ]);
 
         $cust_id['customer_id'] = $this->customer->id;
@@ -108,14 +111,18 @@ class AddressController extends Controller
     public function edit($id)
     {
         $address = $this->customerAddressRepository->findOneWhere([
-            'id' => $id,
-            'customer_id' => auth()->guard('customer')->user()->id
+            'id'          => $id,
+            'customer_id' => auth()->guard('customer')->user()->id,
         ]);
 
-        if (! $address)
+        if (! $address) {
             abort(404);
+        }
 
-        return view($this->_config['view'], compact('address'));
+        return view($this->_config['view'], array_merge(
+            compact('address'),
+            ['defaultCountry' => config('app.default_country')]
+        ));
     }
 
     /**
@@ -130,18 +137,18 @@ class AddressController extends Controller
 
         $this->validate(request(), [
             'address1' => 'string|required',
-            'country' => 'string|required',
-            'state' => 'string|required',
-            'city' => 'string|required',
+            'country'  => 'string|required',
+            'state'    => 'string|required',
+            'city'     => 'string|required',
             'postcode' => 'required',
-            'phone' => 'required'
+            'phone'    => 'required',
         ]);
 
         $data = collect(request()->input())->except('_token')->toArray();
 
         $addresses = $this->customer->addresses;
 
-        foreach($addresses as $address) {
+        foreach ($addresses as $address) {
             if ($id == $address->id) {
                 session()->flash('success', trans('shop::app.customer.account.address.edit.success'));
 
@@ -157,7 +164,8 @@ class AddressController extends Controller
     }
 
     /**
-     * To change the default address or make the default address, by default when first address is created will be the default address
+     * To change the default address or make the default address, by default when first address is
+     * created will be the default address
      *
      * @return Response
      */
@@ -185,8 +193,8 @@ class AddressController extends Controller
     public function destroy($id)
     {
         $address = $this->customerAddressRepository->findOneWhere([
-            'id' => $id,
-            'customer_id' => auth()->guard('customer')->user()->id
+            'id'          => $id,
+            'customer_id' => auth()->guard('customer')->user()->id,
         ]);
 
         if (! $address)

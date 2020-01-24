@@ -47,7 +47,7 @@ class TaxRateController extends Controller
     /**
      * Display a listing resource for the available tax rates.
      *
-     * @return \Illuminate\View\View 
+     * @return \Illuminate\View\View
      */
 
     public function index() {
@@ -57,7 +57,7 @@ class TaxRateController extends Controller
     /**
      * Display a create form for tax rate
      *
-     * @return \Illuminate\View\View 
+     * @return \Illuminate\View\View
      */
     public function show()
     {
@@ -88,11 +88,11 @@ class TaxRateController extends Controller
             unset($data['zip_code']);
         }
 
-        Event::fire('tax.tax_rate.create.before');
+        Event::dispatch('tax.tax_rate.create.before');
 
         $taxRate = $this->taxRateRepository->create($data);
 
-        Event::fire('tax.tax_rate.create.after', $taxRate);
+        Event::dispatch('tax.tax_rate.create.after', $taxRate);
 
         session()->flash('success', trans('admin::app.settings.tax-rates.create-success'));
 
@@ -102,7 +102,7 @@ class TaxRateController extends Controller
     /**
      * Show the edit form for the previously created tax rates.
      *
-     * @return \Illuminate\View\View 
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
@@ -128,11 +128,11 @@ class TaxRateController extends Controller
             'tax_rate' => 'required|numeric|min:0.0001'
         ]);
 
-        Event::fire('tax.tax_rate.update.before', $id);
+        Event::dispatch('tax.tax_rate.update.before', $id);
 
         $taxRate = $this->taxRateRepository->update(request()->input(), $id);
 
-        Event::fire('tax.tax_rate.update.after', $taxRate);
+        Event::dispatch('tax.tax_rate.update.after', $taxRate);
 
         session()->flash('success', trans('admin::app.settings.tax-rates.update-success'));
 
@@ -150,11 +150,11 @@ class TaxRateController extends Controller
         $taxRate = $this->taxRateRepository->findOrFail($id);
 
         try {
-            Event::fire('tax.tax_rate.delete.before', $id);
+            Event::dispatch('tax.tax_rate.delete.before', $id);
 
             $this->taxRateRepository->delete($id);
 
-            Event::fire('tax.tax_rate.delete.after', $id);
+            Event::dispatch('tax.tax_rate.delete.after', $id);
 
             session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Tax Rate']));
 
@@ -217,7 +217,7 @@ class TaxRateController extends Controller
                     foreach ($filtered as $position => $identifier) {
                         $message[] = trans('admin::app.export.duplicate-error', ['identifier' => $identifier, 'position' => $position]);
                     }
-                    
+
                     $finalMsg = implode(" ", $message);
 
                     session()->flash('error', $finalMsg);

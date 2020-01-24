@@ -15,6 +15,8 @@ class CategoryCest
     /** @var Locale $localeEn */
     private $localeEn;
 
+    /** @var Category $rootCategory */
+    private $rootCategory;
     /** @var Category $category */
     private $category;
     /** @var Category $childCategory */
@@ -22,6 +24,7 @@ class CategoryCest
     /** @var Category $grandChildCategory */
     private $grandChildCategory;
 
+    private $rootCategoryAttributes;
     private $categoryAttributes;
     private $childCategoryAttributes;
     private $grandChildCategoryAttributes;
@@ -34,8 +37,16 @@ class CategoryCest
             'code' => 'en',
         ]);
 
+        $rootCategoryTranslation = $I->grabRecord(CategoryTranslation::class, [
+            'slug' => 'root',
+            'locale' => 'en',
+        ]);
+        $this->rootCategory = $I->grabRecord(Category::class, [
+            'id' => $rootCategoryTranslation->category_id,
+        ]);
+
         $this->categoryAttributes = [
-            'parent_id' => 1,
+            'parent_id' => $this->rootCategory->id,
             'position' => 0,
             'status' => 1,
             $this->localeEn->code => [
@@ -46,9 +57,9 @@ class CategoryCest
             ],
         ];
 
-        $this->category = $I->have(Category::class, $this->categoryAttributes);
+        $this->category = $I->make(Category::class, $this->categoryAttributes)->first();
+        $this->rootCategory->prependNode($this->category);
         $I->assertNotNull($this->category);
-        //return true;
 
         $I->seeRecord(CategoryTranslation::class, [
            'category_id' => $this->category->id,
@@ -67,7 +78,8 @@ class CategoryCest
                 'locale_id' => $this->localeEn->id,
             ],
         ];
-        $this->childCategory = $I->have(Category::class, $this->childCategoryAttributes);
+        $this->childCategory = $I->make(Category::class, $this->childCategoryAttributes)->first();
+        $this->category->prependNode($this->childCategory);
         $I->assertNotNull($this->childCategory);
 
         $expectedUrlPath = $this->category->slug . '/' . $this->childCategory->slug;
@@ -88,7 +100,8 @@ class CategoryCest
                 'locale_id' => $this->localeEn->id,
             ],
         ];
-        $this->grandChildCategory = $I->have(Category::class, $this->grandChildCategoryAttributes);
+        $this->grandChildCategory = $I->make(Category::class, $this->grandChildCategoryAttributes)->first();
+        $this->childCategory->prependNode($this->grandChildCategory);
         $I->assertNotNull($this->grandChildCategory);
 
         $expectedUrlPath .= '/' . $this->grandChildCategory->slug;
@@ -104,7 +117,6 @@ class CategoryCest
 
     public function testChildUrlPathIsUpdatedOnParentUpdate(UnitTester $I)
     {
-        //return true;
         $newCategorySlug = $this->faker->slug;
 
         $this->categoryAttributes[$this->localeEn->code]['slug'] = $newCategorySlug;
@@ -138,5 +150,31 @@ class CategoryCest
             'locale' => $this->localeEn->code,
             'url_path' => $expectedUrlPath,
         ]);
+
+        $I->amGoingTo('test if the url_path attribute is available in the model');
+        $this->grandChildCategory->refresh();
+        $I->assertEquals($expectedUrlPath, $this->grandChildCategory->url_path);
+    }
+
+    public function testGetRootCategory(UnitTester $I)
+    {
+        $I->wantTo('test rootCategory attribute of a category');
+        $rootCategory = $this->grandChildCategory->getRootCategory();
+
+        $I->assertNotNull($rootCategory);
+        $I->assertEquals($rootCategory->id, $this->rootCategory->id);
+    }
+
+    public function testGetPathCategories(UnitTester $I)
+    {
+        $I->wantTo('test getPathCategories is returning the correct categories in the correct order');
+        $I->amGoingTo('get all categories wihin the path of the grand child category');
+        $pathCategories = $this->grandChildCategory->getPathCategories();
+
+        $I->assertCount(4, $pathCategories);
+        $I->assertEquals($pathCategories[0]->id, $this->rootCategory->id);
+        $I->assertEquals($pathCategories[1]->id, $this->category->id);
+        $I->assertEquals($pathCategories[2]->id, $this->childCategory->id);
+        $I->assertEquals($pathCategories[3]->id, $this->grandChildCategory->id);
     }
 }

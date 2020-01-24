@@ -1,17 +1,23 @@
 <?php
 
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+
 use Faker\Generator as Faker;
 use Webkul\Product\Models\Product;
-use Webkul\Attribute\Models\AttributeFamily;
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(Product::class, function (Faker $faker, array $attributes) {
-
-    $attributeFamilyId = AttributeFamily::pluck('id')->first();
-
+$factory->define(Product::class, function (Faker $faker) {
+    $now = date("Y-m-d H:i:s");
     return [
-        'sku'        => $faker->uuid,
-        'type' => 'simple',
-        'attribute_family_id' => $attributeFamilyId,
+        'sku'                 => $faker->uuid,
+        'created_at'          => $now,
+        'updated_at'          => $now,
+        'attribute_family_id' => 1,
     ];
 });
+
+$factory->state(Product::class, 'simple', [
+    'type' => 'simple',
+]);
+$factory->state(Product::class, 'downloadable_with_stock', [
+    'type' => 'downloadable',
+]);
