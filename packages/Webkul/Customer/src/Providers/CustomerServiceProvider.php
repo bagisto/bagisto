@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Routing\Router;
 use Webkul\Customer\Http\Middleware\RedirectIfNotCustomer;
-use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 
 class CustomerServiceProvider extends ServiceProvider
 {
@@ -24,7 +23,8 @@ class CustomerServiceProvider extends ServiceProvider
     /**
      * Register factories.
      *
-     * @param  string  $path
+     * @param string $path
+     *
      * @return void
      */
     protected function registerEloquentFactoriesFrom($path): void
