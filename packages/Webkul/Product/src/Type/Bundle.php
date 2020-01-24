@@ -36,7 +36,7 @@ class Bundle extends AbstractType
 
     /**
      * Bundle Option helper instance
-     * 
+     *
      * @var BundleOption
     */
     protected $bundleOptionHelper;
@@ -50,7 +50,7 @@ class Bundle extends AbstractType
 
     /**
      * These blade files will be included in product edit page
-     * 
+     *
      * @var array
      */
     protected $additionalViews = [
@@ -181,7 +181,7 @@ class Bundle extends AbstractType
         }
 
         if (! $haveRequiredOptions)
-            $minPrice = min($minPrices);
+            $minPrice = count($minPrices) ? min($minPrices) : 0;
 
         return $minPrice;
     }
@@ -379,7 +379,7 @@ class Bundle extends AbstractType
         }
 
 
-        if ($prices['from']['regular_price']['price'] != $prices['to']['regular_price']['price'] 
+        if ($prices['from']['regular_price']['price'] != $prices['to']['regular_price']['price']
             || $prices['from']['final_price']['price'] != $prices['to']['final_price']['price']) {
 
             $priceHtml .= '<span style="font-weight: 500;margin-top: 1px;margin-bottom: 1px;display: block;">To</span>';
@@ -405,11 +405,13 @@ class Bundle extends AbstractType
      */
     public function prepareForCart($data)
     {
-        $data['bundle_options'] = array_filter($this->validateBundleOptionForCart($data['bundle_options']));
+
+        if (isset($data['bundle_options']))
+            $data['bundle_options'] = array_filter($this->validateBundleOptionForCart($data['bundle_options']));
 
         if (! isset($data['bundle_options']) || ! count($data['bundle_options']))
             return trans('shop::app.checkout.cart.integrity.missing_options');
-        
+
         $products = parent::prepareForCart($data);
 
         foreach ($this->getCartChildProducts($data) as $productId => $data) {
@@ -476,7 +478,7 @@ class Bundle extends AbstractType
 
         return $products;
     }
-    
+
     /**
      *
      * @param array $options1
@@ -521,6 +523,8 @@ class Bundle extends AbstractType
      */
     public function getAdditionalOptions($data)
     {
+        $bundleOptionQuantities = $data['bundle_option_qty'];
+
         foreach ($data['bundle_options'] as $optionId => $optionProductIds) {
             $option = $this->productBundleOptionRepository->find($optionId);
 
@@ -531,11 +535,11 @@ class Bundle extends AbstractType
                     continue;
 
                 $optionProduct = $this->productBundleOptionProductRepository->find($optionProductId);
-
+                
                 $qty = $data['bundle_option_qty'][$optionId] ?? $optionProduct->qty;
 
                 if (! isset($data['bundle_option_qty'][$optionId]))
-                    $data['bundle_option_qty'][$optionId] = $qty;
+                    $bundleOptionQuantities[$optionId] = $qty;
                 
                 $labels[] = $qty . ' x ' . $optionProduct->product->name . ' ' . core()->currency($optionProduct->product->getTypeInstance()->getMinimalPrice());
             }
@@ -548,6 +552,8 @@ class Bundle extends AbstractType
                 ];
             }
         }
+
+        $data['bundle_option_qty'] = $bundleOptionQuantities;
 
         return $data;
     }

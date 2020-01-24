@@ -182,12 +182,6 @@ return [
         'sort' => 2,
         'icon-class' => ''
     ], [
-        'key' => 'settings.development',
-        'name' => 'admin::app.settings.development.title',
-        'route' => 'admin.development.index',
-        'sort' => 8,
-        'icon-class' => ''
-    ],[
         'key' => 'promotions',
         'name' => 'admin::app.layouts.promotions',
         'route' => 'admin.catalog-rules.index',

@@ -4,6 +4,7 @@ namespace Webkul\Product\Repositories;
 
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Eloquent\Repository;
+use Illuminate\Support\Str;
 
 /**
  * Product Downloadable Link Reposotory
@@ -54,7 +55,7 @@ class ProductDownloadableLinkRepository extends Repository
 
         if (isset($data['downloadable_links'])) {
             foreach ($data['downloadable_links'] as $linkId => $data) {
-                if (str_contains($linkId, 'link_')) {
+                if (Str::contains($linkId, 'link_')) {
                     $this->create(array_merge([
                             'product_id' => $product->id,
                         ], $data));

@@ -45,7 +45,6 @@ class NewInvoiceNotification extends Mailable
         $order = $this->invoice->order;
 
         return $this->to($order->customer_email, $order->customer_full_name)
-                ->from(config('mail.from'))
                 ->subject(trans('shop::app.mail.invoice.subject', ['order_id' => $order->increment_id]))
                 ->view('shop::emails.sales.new-invoice');
     }

@@ -115,14 +115,14 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\View\View
      */
     public function edit($id)
     {
-        $categories = $this->categoryRepository->getCategoryTree($id);
-
         $category = $this->categoryRepository->findOrFail($id);
+
+        $categories = $this->categoryRepository->getCategoryTreeWithoutDescendant($id);
 
         $attributes = $this->attributeRepository->findWhere(['is_filterable' =>  1]);
 
@@ -174,7 +174,7 @@ class CategoryController extends Controller
 
                 $this->categoryRepository->delete($id);
 
-                Event::fire('catalog.category.delete.after', $id);
+                Event::dispatch('catalog.category.delete.after', $id);
 
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Category']));
 
@@ -200,11 +200,11 @@ class CategoryController extends Controller
 
             foreach ($indexes as $key => $value) {
                 try {
-                    Event::fire('catalog.category.delete.before', $value);
+                    Event::dispatch('catalog.category.delete.before', $value);
 
                     $this->categoryRepository->delete($value);
 
-                    Event::fire('catalog.category.delete.after', $value);
+                    Event::dispatch('catalog.category.delete.after', $value);
                 } catch(\Exception $e) {
                     $suppressFlash = true;
 

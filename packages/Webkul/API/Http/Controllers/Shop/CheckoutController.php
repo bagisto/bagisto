@@ -12,6 +12,7 @@ use Webkul\API\Http\Resources\Checkout\CartShippingRate as CartShippingRateResou
 use Webkul\API\Http\Resources\Sales\Order as OrderResource;
 use Webkul\Checkout\Http\Requests\CustomerAddressForm;
 use Webkul\Sales\Repositories\OrderRepository;
+use Illuminate\Support\Str;
 use Cart;
 
 /**
@@ -60,9 +61,9 @@ class CheckoutController extends Controller
 
         auth()->setDefaultDriver($this->guard);
 
-        
+
         // $this->middleware('auth:' . $this->guard);
-        
+
         $this->_config = request('_config');
 
         $this->cartRepository = $cartRepository;
@@ -90,7 +91,7 @@ class CheckoutController extends Controller
             unset($data['billing']['address_id']);
         }
 
-        if (isset($data['shipping']['id']) && str_contains($data['shipping']['id'], 'address_')) {
+        if (isset($data['shipping']['id']) && Str::contains($data['shipping']['id'], 'address_')) {
             unset($data['shipping']['id']);
             unset($data['shipping']['address_id']);
         }

@@ -755,12 +755,6 @@ Route::group(['middleware' => ['web']], function () {
                 //     'redirect' => 'admin.cms.index'
                 // ])->name('admin.cms.delete');
             });
-
-            // Development settings
-            Route::prefix('development')->group(function () {
-                Route::get('/', 'Webkul\Admin\Http\Controllers\Development\DashboardController@index')
-                    ->name('admin.development.index');
-            });
         });
     });
 });

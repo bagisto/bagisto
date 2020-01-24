@@ -304,6 +304,7 @@
                         this.bundle_option_products.push({
                                 product: item,
                                 qty: 0,
+                                is_default: 0,
                                 sort_order: 0
                             });
                     }
@@ -348,9 +349,9 @@
 
                     this.bundle_option_products.forEach(function(product) {
                         if (this_this.bundleOption.type == 'radio' || this_this.bundleOption.type == 'select') {
-                            product.is_default = product.id == productId ? 1 : 0;
+                            product.is_default = product.product.id == productId ? 1 : 0;
                         } else {
-                            if (product.id == productId)
+                            if (product.product.id == productId)
                                 product.is_default = product.is_default ? 0 : 1;
                         }
                     });
@@ -381,7 +382,7 @@
                 },
 
                 checkProduct: function($event) {
-                    this.$emit('onCheckProduct', this.product.id)
+                    this.$emit('onCheckProduct', this.product.product.id)
                 }
             }
         });
