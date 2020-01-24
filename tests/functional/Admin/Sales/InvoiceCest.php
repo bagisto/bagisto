@@ -2,7 +2,6 @@
 
 namespace Tests\Functional\Admin\Sales;
 
-
 use FunctionalTester;
 use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Models\OrderAddress;
@@ -16,7 +15,7 @@ class InvoiceCest
         $invoice = $I->have(Invoice::class,
             [
                 'order_id'         => $orderAddress->order_id,
-                'order_address_id' => $orderAddress->id
+                'order_address_id' => $orderAddress->id,
             ]);
 
         $I->loginAsAdmin();
