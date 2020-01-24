@@ -91,7 +91,7 @@ class RefundRepository extends Repository
         DB::beginTransaction();
 
         try {
-            Event::fire('sales.refund.save.before', $data);
+            Event::dispatch('sales.refund.save.before', $data);
 
             $order = $this->orderRepository->find($data['order_id']);
 
@@ -165,7 +165,7 @@ class RefundRepository extends Repository
                                 'product_type' => $childOrderItem->product_type,
                                 'additional' => $childOrderItem->additional
                             ]);
-                        
+
                         if ($childOrderItem->getTypeInstance()->isStockable() || $childOrderItem->getTypeInstance()->showQuantityBox())
                             $this->refundItemRepository->returnQtyToProductInventory($childOrderItem, $finalQty);
 
@@ -189,7 +189,7 @@ class RefundRepository extends Repository
 
             $this->orderRepository->updateOrderStatus($order);
 
-            Event::fire('sales.refund.save.after', $refund);
+            Event::dispatch('sales.refund.save.after', $refund);
         } catch (\Exception $e) {
             DB::rollBack();
 

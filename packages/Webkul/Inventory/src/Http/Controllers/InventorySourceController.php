@@ -84,11 +84,11 @@ class InventorySourceController extends Controller
 
         $data['status'] = !isset($data['status']) ? 0 : 1;
 
-        Event::fire('inventory.inventory_source.create.before');
+        Event::dispatch('inventory.inventory_source.create.before');
 
         $inventorySource = $this->inventorySourceRepository->create($data);
 
-        Event::fire('inventory.inventory_source.create.after', $inventorySource);
+        Event::dispatch('inventory.inventory_source.create.after', $inventorySource);
 
         session()->flash('success', trans('admin::app.settings.inventory_sources.create-success'));
 
@@ -133,11 +133,11 @@ class InventorySourceController extends Controller
 
         $data['status'] = !isset($data['status']) ? 0 : 1;
 
-        Event::fire('inventory.inventory_source.update.before', $id);
+        Event::dispatch('inventory.inventory_source.update.before', $id);
 
         $inventorySource = $this->inventorySourceRepository->update($data, $id);
 
-        Event::fire('inventory.inventory_source.update.after', $inventorySource);
+        Event::dispatch('inventory.inventory_source.update.after', $inventorySource);
 
         session()->flash('success', trans('admin::app.settings.inventory_sources.update-success'));
 
@@ -158,11 +158,11 @@ class InventorySourceController extends Controller
             session()->flash('error', trans('admin::app.settings.inventory_sources.last-delete-error'));
         } else {
             try {
-                Event::fire('inventory.inventory_source.delete.before', $id);
+                Event::dispatch('inventory.inventory_source.delete.before', $id);
 
                 $this->inventorySourceRepository->delete($id);
 
-                Event::fire('inventory.inventory_source.delete.after', $id);
+                Event::dispatch('inventory.inventory_source.delete.after', $id);
 
                 session()->flash('success', trans('admin::app.settings.inventory_sources.delete-success'));
 

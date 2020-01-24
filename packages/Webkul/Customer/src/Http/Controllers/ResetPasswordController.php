@@ -57,27 +57,33 @@ class ResetPasswordController extends Controller
      */
     public function store()
     {
-        $this->validate(request(), [
-            'token' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|confirmed|min:6',
-        ]);
-
-        $response = $this->broker()->reset(
-            request(['email', 'password', 'password_confirmation', 'token']), function ($customer, $password) {
-                $this->resetPassword($customer, $password);
-            }
-        );
-
-        if ($response == Password::PASSWORD_RESET) {
-            return redirect()->route($this->_config['redirect']);
-        }
-
-        return back()
-            ->withInput(request(['email']))
-            ->withErrors([
-                'email' => trans($response)
+        try {
+            $this->validate(request(), [
+                'token' => 'required',
+                'email' => 'required|email',
+                'password' => 'required|confirmed|min:6',
             ]);
+
+            $response = $this->broker()->reset(
+                request(['email', 'password', 'password_confirmation', 'token']), function ($customer, $password) {
+                    $this->resetPassword($customer, $password);
+                }
+            );
+
+            if ($response == Password::PASSWORD_RESET) {
+                return redirect()->route($this->_config['redirect']);
+            }
+
+            return back()
+                ->withInput(request(['email']))
+                ->withErrors([
+                    'email' => trans($response)
+                ]);
+        } catch(\Exception $e) {
+            session()->flash('error', trans($e->getMessage()));
+
+            return redirect()->back();
+        }
     }
 
     /**

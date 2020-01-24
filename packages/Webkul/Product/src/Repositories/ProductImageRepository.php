@@ -4,6 +4,7 @@ namespace Webkul\Product\Repositories;
 
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Eloquent\Repository;
+use Illuminate\Support\Str;
 
 /**
  * Product Image Reposotory
@@ -37,7 +38,7 @@ class ProductImageRepository extends Repository
                 $file = 'images.' . $imageId;
                 $dir = 'product/' . $product->id;
 
-                if (str_contains($imageId, 'image_')) {
+                if (Str::contains($imageId, 'image_')) {
                     if (request()->hasFile($file)) {
                         $this->create([
                                 'path' => request()->file($file)->store($dir),

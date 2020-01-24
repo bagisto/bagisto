@@ -98,11 +98,11 @@ class RegistrationController extends Controller
         $verificationData['token'] = md5(uniqid(rand(), true));
         $data['token'] = $verificationData['token'];
 
-        Event::fire('customer.registration.before');
+        Event::dispatch('customer.registration.before');
 
         $customer = $this->customerRepository->create($data);
 
-        Event::fire('customer.registration.after', $customer);
+        Event::dispatch('customer.registration.after', $customer);
 
         if ($customer) {
             if (core()->getConfigData('customer.settings.email.verification')) {

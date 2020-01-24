@@ -45,7 +45,7 @@ class ReviewController extends Controller
      /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View 
+     * @return \Illuminate\View\View
     */
     public function index()
     {
@@ -56,7 +56,7 @@ class ReviewController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\View\View 
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
@@ -73,11 +73,11 @@ class ReviewController extends Controller
      */
     public function update($id)
     {
-        Event::fire('customer.review.update.before', $id);
+        Event::dispatch('customer.review.update.before', $id);
 
         $this->productReviewRepository->update(request()->all(), $id);
 
-        Event::fire('customer.review.update.after', $id);
+        Event::dispatch('customer.review.update.after', $id);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Review']));
 
@@ -95,11 +95,11 @@ class ReviewController extends Controller
         $productReview = $this->productReviewRepository->findOrFail($id);
 
         try {
-            Event::fire('customer.review.delete.before', $id);
+            Event::dispatch('customer.review.delete.before', $id);
 
             $this->productReviewRepository->delete($id);
 
-            Event::fire('customer.review.delete.after', $id);
+            Event::dispatch('customer.review.delete.after', $id);
 
             session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Review']));
 
@@ -127,11 +127,11 @@ class ReviewController extends Controller
 
             foreach ($indexes as $key => $value) {
                 try {
-                    Event::fire('customer.review.delete.before', $value);
+                    Event::dispatch('customer.review.delete.before', $value);
 
                     $this->productReviewRepository->delete($value);
 
-                    Event::fire('customer.review.delete.after', $value);
+                    Event::dispatch('customer.review.delete.after', $value);
                 } catch(\Exception $e) {
                     $suppressFlash = true;
 
@@ -173,11 +173,11 @@ class ReviewController extends Controller
                 try {
                     if ($data['massaction-type'] == 'update') {
                         if ($data['update-options'] == 1) {
-                            Event::fire('customer.review.update.before', $value);
+                            Event::dispatch('customer.review.update.before', $value);
 
                             $review->update(['status' => 'approved']);
 
-                            Event::fire('customer.review.update.after', $review);
+                            Event::dispatch('customer.review.update.after', $review);
                         } else if ($data['update-options'] == 0) {
                             $review->update(['status' => 'pending']);
                         } else if ($data['update-options'] == 2) {

@@ -61,7 +61,7 @@ class CartController extends Controller
     /**
      * Method to populate the cart page which will be populated before the checkout process.
      *
-     * @return \Illuminate\View\View 
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -96,7 +96,7 @@ class CartController extends Controller
 
             $product = $this->productRepository->find($id);
 
-            return redirect()->route('shop.productOrCategory.index', ['slug' => $product->url_key]);
+            return redirect()->route('shop.productOrCategory.index', $product->url_key);
         }
 
         return redirect()->back();

@@ -45,7 +45,7 @@
                 padding: 5px 10px;
                 border-bottom: solid 1px #d3d3d3;
                 border-left: solid 1px #d3d3d3;
-                color: $font-color;
+                color: #3A3A3A;
                 vertical-align: middle;
             }
 
@@ -127,7 +127,7 @@
                                         <p>{{ $invoice->order->shipping_address->city }}</p>
                                         <p>{{ $invoice->order->shipping_address->state }}</p>
                                         <p>{{ core()->country_name($invoice->order->shipping_address->country) }} {{ $invoice->order->shipping_address->postcode }}</p>
-                                        {{ __('shop::app.checkout.onepage.contact') }} : {{ $invoice->order->shipping_address->phone }} 
+                                        {{ __('shop::app.checkout.onepage.contact') }} : {{ $invoice->order->shipping_address->phone }}
                                     </td>
                                 @endif
                             </tr>
@@ -187,7 +187,7 @@
 
                                         @if (isset($item->additional['attributes']))
                                             <div class="item-options">
-                                                
+
                                                 @foreach ($item->additional['attributes'] as $attribute)
                                                     <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
                                                 @endforeach
