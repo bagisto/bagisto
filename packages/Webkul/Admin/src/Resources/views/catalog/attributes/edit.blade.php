@@ -432,7 +432,7 @@
                     @endif
 
                     @foreach (app('Webkul\Core\Repositories\LocaleRepository')->all() as $locale)
-                        row['{{ $locale->code }}'] = "{{ $option->translate($locale->code)['label'] }}";
+                        row['{{ $locale->code }}'] = "{{ $option->translate($locale->code)['label'] ?? '' }}";
                     @endforeach
 
                     this.optionRows.push(row);
