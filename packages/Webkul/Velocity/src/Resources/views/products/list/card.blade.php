@@ -62,7 +62,7 @@
     @else
         <div class="card grid-card product-card-new">
             <a
-                href="{{ route('shop.productOrCategory.index', ['slug' => $product->url_key]) }}"
+                href="{{ route('shop.productOrCategory.index', $product->url_key) }}"
                 title="{{ $product->name }}"
                 class="product-image-container">
 
@@ -78,7 +78,7 @@
             <div class="card-body">
                 <div class="product-name col-12 no-padding">
                     <a
-                        href="{{ route('shop.productOrCategory.index', ['slug' => $product->url_key]) }}"
+                        href="{{ route('shop.productOrCategory.index', $product->url_key) }}"
                         title="{{ $product->name }}"
                         class="unset">
 
