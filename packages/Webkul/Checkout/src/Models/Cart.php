@@ -130,4 +130,20 @@ class Cart extends Model implements CartContract
 
         return false;
     }
+
+    /**
+     * Returns true if cart contains one or many products with quantity box.
+     * f.e. simple, configurable, virtual
+     * @return bool
+     */
+    public function hasProductsWithQuantityBox(): bool
+    {
+        $result = true;
+        foreach ($this->items as $item) {
+            if ($item->product->getTypeInstance()->showQuantityBox() === true) {
+                $result = false;
+            }
+        }
+        return $result;
+    }
 }

@@ -108,9 +108,11 @@
                             <a href="{{ route('shop.home.index') }}" class="link">{{ __('shop::app.checkout.cart.continue-shopping') }}</a>
 
                             <div>
-                                <button type="submit" class="btn btn-lg btn-primary">
+                                @if (! $cart->hasProductsWithQuantityBox())
+                                <button type="submit" class="btn btn-lg btn-primary" id="update_cart_button">
                                     {{ __('shop::app.checkout.cart.update-cart') }}
                                 </button>
+                                @endif
 
                                 @if (! cart()->hasError())
                                     <a href="{{ route('shop.checkout.onepage.index') }}" class="btn btn-lg btn-primary">

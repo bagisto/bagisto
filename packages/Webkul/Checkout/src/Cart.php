@@ -321,6 +321,25 @@ class Cart {
     }
 
     /**
+     * Clear cart
+     * @return bool
+     */
+    public function clear(): bool
+    {
+        if (! $cart = $this->getCart()) {
+            return false;
+        }
+
+        $this->cartRepository->delete($cart->id);
+
+        if (session()->has('cart')) {
+            session()->forget('cart');
+        }
+
+        return true;
+    }
+
+    /**
      * This function handles when guest has some of cart products and then logs in.
      *
      * @return boolean

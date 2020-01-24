@@ -80,9 +80,12 @@ class CartController extends Controller
         try {
             $result = Cart::addProduct($id, request()->all());
 
-            if (is_array($result) && isset($result['warning'])) {
+            if ($this->onWarningAddingToCart($result)) {
                 session()->flash('warning', $result['warning']);
-            } else {
+                return redirect()->back();
+            }
+
+            if ($result instanceof Cart) {
                 session()->flash('success', trans('shop::app.checkout.cart.item.success'));
 
                 if ($customer = auth()->guard('customer')->user())
@@ -202,5 +205,17 @@ class CartController extends Controller
             'success' => true,
             'message' => trans('shop::app.checkout.total.remove-coupon')
         ]);
+    }
+
+    /**
+     * Returns true, if result of adding product to cart
+     * is an array and contains a key "warning"
+     *
+     * @param $result
+     *
+     * @return bool
+     */
+    private function onWarningAddingToCart($result): bool {
+        return is_array($result) && isset($result['warning']);
     }
 }
