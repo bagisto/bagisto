@@ -271,7 +271,7 @@
 
     .cart-wish-wrap {
         .wishlist-icon {
-            height: 32px;
+            height: 38px;
             display: table;
             text-align: right;
 
@@ -678,6 +678,14 @@
         margin-top: 20px;
         margin-left: 15px;
     }
+
+    .coupon-container {
+        margin-top: 20px;
+
+        .control-error {
+            padding: 10px 0;
+        }
+    }
 }
 
 .account-content {
@@ -1077,7 +1085,8 @@
 }
 
 .custom-form {
-    .row {
+    .form-field {
+        padding: 0;
         margin-bottom: 30px;
     }
 
@@ -1840,4 +1849,36 @@
 
 .category-page-wrapper {
     @extend .remove-padding-margin;
+}
+
+.bottom-toolbar {
+    .pagination {
+        .page-item {
+            padding: 0 10px;
+        }
+
+        a {
+            color: unset !important;
+            text-decoration: none !important;
+
+            i {
+                top: 2px;
+                font-size: 18px;
+                position: relative;
+            }
+        }
+
+        .angle-left-icon,
+        .angle-right-icon {
+            @include rango-default;
+
+            background: unset;
+        }
+        .angle-right-icon::before {
+            content: "\E908";
+        }
+        .angle-left-icon::before {
+            content: "\E907";
+        }
+    }
 }

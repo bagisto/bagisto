@@ -78,20 +78,56 @@
         </div>
 
         <div class="toolbar-wrapper row" v-else>
-            <div class="col-4">
-                <i class="material-icons">filter_list</i>
-                <span>Filter</span>
+            <div v-if="layeredNavigation" class="nav-container scrollable">
+                <div class="header drawer-section">
+                    <i class="material-icons" @click="layeredNavigation = false">keyboard_backspace</i>
+
+                    <span class="fs24 fw6">{{ __('velocity::app.shop.general.filter') }}</span>
+                    {{-- <span class="pull-right link-color" @click="layeredNavigation = false">Done</span> --}}
+                </div>
+
+                @include ('shop::products.list.layered-navigation')
+            </div>
+
+            <div class="col-4" @click="toggleLayeredNavigation({event: $event, actionType: 'open'})">
+                <a class="unset">
+                    <i class="material-icons">filter_list</i>
+                    <span>{{ __('velocity::app.shop.general.filter') }}</span>
+                </a>
             </div>
 
             <div class="col-4">
-                <i class="material-icons">sort_by_alpha</i>
-                <span>Sort By</span>
+                <a
+                    class="unset"
+                    href="{{
+                        $toolbarHelper->isOrderCurrent('name-asc')
+                        ? $toolbarHelper->getOrderUrl('name-asc')
+                        : $toolbarHelper->getOrderUrl('name-desc')
+                    }}">
+
+                    <i class="material-icons">sort_by_alpha</i>
+                    <span>{{ __('shop::app.products.sort-by') }}</span>
+                </a>
             </div>
 
             <div class="col-4">
-                <i class="material-icons">view_module
-                </i>
-                <span>View</span>
+                @php
+                    $isList = $toolbarHelper->isModeActive('list');
+                @endphp
+
+                <a
+                    class="unset"
+                    href="{{
+                        $isList
+                        ? $toolbarHelper->getModeUrl('grid')
+                        : $toolbarHelper->getModeUrl('list')
+                    }}">
+
+                    <i class="material-icons">
+                        @if ($isList) list @else view_module @endif
+                    </i>
+                    <span>{{ __('velocity::app.shop.general.view') }}</span>
+                </a>
             </div>
         </div>
     </script>
@@ -99,7 +135,22 @@
     <script type="text/javascript">
         (() => {
             Vue.component('toolbar-component', {
-                template: '#toolbar-template'
+                template: '#toolbar-template',
+                data: function () {
+                    return {
+                        'layeredNavigation': false,
+                    }
+                },
+
+                methods: {
+                    toggleLayeredNavigation: function ({event, actionType}) {
+                        // this.$root.navContainer = true;
+                        // this.$root.responsiveSidebarTemplate = `<div slot="sidebar-body">
+                        //     Hello World
+                        // </div>`;
+                        this.layeredNavigation = true;
+                    }
+                }
             })
         })()
     </script>

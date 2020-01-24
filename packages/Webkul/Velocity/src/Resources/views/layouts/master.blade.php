@@ -57,6 +57,8 @@
         @include('shop::UI.particals')
 
         <div id="app">
+            {{-- <responsive-sidebar v-html="responsiveSidebarTemplate"></responsive-sidebar> --}}
+
             <div class="main-container-wrapper">
 
                 @section('body-header')
@@ -179,7 +181,10 @@
             })()
         </script>
 
-        <script type="text/javascript" src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}"></script>
+        <script
+            type="text/javascript"
+            src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}">
+        </script>
 
         @stack('scripts')
 

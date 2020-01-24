@@ -12,7 +12,7 @@
         <div slot="body">
             <div class="address-summary row">
                 @if ($billingAddress = $cart->billing_address)
-                    <div class="billing-address col-6">
+                    <div class="billing-address col-lg-6 col-md-12">
                         <div class="card-title mb-20">
                             <b>{{ __('shop::app.checkout.onepage.billing-address') }}</b>
                         </div>
@@ -127,7 +127,7 @@
             </div>
 
             <div class="order-description row fs16 cart-details">
-                <div class="col-4">
+                <div class="col-lg-4 col-md-12">
                     @if ($cart->haveStockableItems())
                         <div class="shipping mb20">
                             <div class="decorator">
@@ -163,7 +163,7 @@
                     <slot name="place-order-btn"></slot>
                 </div>
 
-                <div class="col-6 order-summary-container bottom pt0 offset-2">
+                <div class="col-lg-6 col-md-12 order-summary-container bottom pt0 offset-lg-2">
                     <slot name="summary-section"></slot>
                 </div>
             </div>

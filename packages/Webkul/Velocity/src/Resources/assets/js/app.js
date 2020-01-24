@@ -28,12 +28,21 @@ Vue.component('child-sidebar', require('./UI/components/child-sidebar'));
 Vue.component('card-list-content', require('./UI/components/card-list'));
 Vue.component('card-list-header', require('./UI/components/card-header'));
 Vue.component('magnify-image', require('./UI/components/image-magnifier'));
+Vue.component('responsive-sidebar', require('./UI/components/responsive-sidebar'));
 
 window.eventBus = new Vue();
 
 $(document).ready(function () {
     // define a mixin object
     Vue.mixin({
+        data: function () {
+            return {
+                'navContainer': false,
+                'responsiveSidebarTemplate': '',
+                'responsiveSidebarKey': Math.random(),
+            }
+        },
+
         methods: {
             redirect: function (route) {
                 route ? window.location.href = route : '';
@@ -125,7 +134,7 @@ $(document).ready(function () {
                 } else {
                   return false
                 }
-              }
+            },
         }
     });
 
@@ -150,6 +159,8 @@ $(document).ready(function () {
         },
 
         mounted: function () {
+            document.body.style.display = "block";
+
             let sliderContainer = $('.slides-container');
             if (sliderContainer && sliderContainer.length) {
                 sliderContainer = sliderContainer[0];

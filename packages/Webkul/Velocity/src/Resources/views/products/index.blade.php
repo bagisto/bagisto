@@ -12,6 +12,16 @@
     <meta name="keywords" content="{{ $category->meta_keywords }}" />
 @stop
 
+@push('css')
+    <style type="text/css">
+        @media only screen and (max-width: 992px) {
+            .main-content-wrapper .vc-header {
+                box-shadow: unset;
+            }
+        }
+    </style>
+@endpush
+
 @php
     $isDisplayMode = in_array(
         $category->display_mode, [
@@ -33,7 +43,7 @@
         @endif
 
         <div class="category-container right">
-            <div class="row">
+            <div class="row remove-padding-margin">
                 <div class="col-12">
                     <h1 class="fw6 mb10">{{ $category->name }}</h1>
 
@@ -76,7 +86,7 @@
                 @if ($isDisplayMode)
                     @if ($products->count())
                         @if ($toolbarHelper->getCurrentMode() == 'grid')
-                            <div class="row">
+                            <div class="row col-12 remove-padding-margin">
                                 @foreach ($products as $productFlat)
                                     @include ('shop::products.list.card', ['product' => $productFlat])
                                 @endforeach
@@ -84,12 +94,10 @@
                         @else
                             <div class="product-list">
                                 @foreach ($products as $productFlat)
-
                                     @include ('shop::products.list.card', [
                                         'list' => true,
                                         'product' => $productFlat
                                     ])
-
                                 @endforeach
                             </div>
                         @endif
@@ -120,40 +128,3 @@
         {!! view_render_event('bagisto.shop.productOrCategory.index.after', ['category' => $category]) !!}
     </section>
 @stop
-
-@push('scripts')
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('.responsive-layred-filter').css('display','none');
-            $(".sort-icon, .filter-icon").on('click', function(e){
-                var currentElement = $(e.currentTarget);
-                if (currentElement.hasClass('sort-icon')) {
-                    currentElement.removeClass('sort-icon');
-                    currentElement.addClass('icon-menu-close-adj');
-                    currentElement.next().removeClass();
-                    currentElement.next().addClass('icon filter-icon');
-                    $('.responsive-layred-filter').css('display','none');
-                    $('.pager').css('display','flex');
-                    $('.pager').css('justify-content','space-between');
-                } else if (currentElement.hasClass('filter-icon')) {
-                    currentElement.removeClass('filter-icon');
-                    currentElement.addClass('icon-menu-close-adj');
-                    currentElement.prev().removeClass();
-                    currentElement.prev().addClass('icon sort-icon');
-                    $('.pager').css('display','none');
-                    $('.responsive-layred-filter').css('display','block');
-                    $('.responsive-layred-filter').css('margin-top','10px');
-                } else {
-                    currentElement.removeClass('icon-menu-close-adj');
-                    $('.responsive-layred-filter').css('display','none');
-                    $('.pager').css('display','none');
-                    if ($(this).index() == 0) {
-                        currentElement.addClass('sort-icon');
-                    } else {
-                        currentElement.addClass('filter-icon');
-                    }
-                }
-            });
-        });
-    </script>
-@endpush

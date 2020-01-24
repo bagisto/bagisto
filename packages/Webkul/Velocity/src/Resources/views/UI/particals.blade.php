@@ -148,8 +148,8 @@
             <div class="row">
                 <div class="col-8">
                     <div v-if="hamburger" class="nav-container scrollable">
-                        <div class="wrapper" v-if="rootCategories">
-                            <div class="greeting drawer-section">
+                        <div class="wrapper" v-if="this.rootCategories">
+                            <div class="greeting drawer-section fw6">
                                 <i class="material-icons">perm_identity</i>
                                 <span>
                                     @guest('customer')
@@ -167,15 +167,41 @@
                                 </span>
                             </div>
 
-                            <ul type="none">
+                            @php
+                                $currency = $locale = null;
+
+                                $currentLocale = app()->getLocale();
+                                $currentCurrency = core()->getCurrentCurrencyCode();
+
+                                $allLocales = core()->getCurrentChannel()->locales;
+                                $allCurrency = core()->getCurrentChannel()->currencies;
+                            @endphp
+
+                            @foreach ($allLocales as $appLocale)
+                                @if ($appLocale->code == $currentLocale)
+                                    @php
+                                        $locale = $appLocale;
+                                    @endphp
+                                @endif
+                            @endforeach
+
+                            @foreach ($allCurrency as $appCurrency)
+                                @if ($appCurrency->code == $currentCurrency)
+                                    @php
+                                        $currency = $appCurrency;
+                                    @endphp
+                                @endif
+                            @endforeach
+
+                            <ul type="none" class="velocity-content">
                                 <li
                                     :key="index"
-                                    v-text="content.title"
                                     v-for="(content, index) in headerContent">
+                                    <a :href="`${url}/${content.page_link}`" class="unset" v-text="content.title"></a>
                                 </li>
                             </ul>
 
-                            <ul type="none">
+                            <ul type="none" class="category-wrapper">
                                 <li v-for="(category, index) in JSON.parse(categories)">
                                     <div class="category-logo">
                                         <img
@@ -187,12 +213,89 @@
                                     <a
                                         class="unset"
                                         :href="`${url}/${category['translations'][0].url_path}`">
-                                        <span>@{{ category.name }}</span>
+                                        <span v-text="category.name"></span>
                                     </a>
 
                                     <i
                                         class="rango-arrow-right"
                                         @click="toggleSubcategories(index, $event)">
+                                    </i>
+                                </li>
+                            </ul>
+
+                            @auth('customer')
+                                <ul type="none" class="vc-customer-options">
+                                    <li>
+                                        <a href="{{ route('customer.profile.index') }}" class="unset">
+                                            <i class="icon profile text-down-3"></i>
+                                            <span>{{ __('shop::app.header.profile') }}</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="{{ route('customer.address.index') }}" class="unset">
+                                            <i class="icon address text-down-3"></i>
+                                            <span>{{ __('velocity::app.shop.general.addresses') }}</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="{{ route('customer.reviews.index') }}" class="unset">
+                                            <i class="icon reviews text-down-3"></i>
+                                            <span>{{ __('velocity::app.shop.general.reviews') }}</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="{{ route('customer.wishlist.index') }}" class="unset">
+                                            <i class="icon wishlist text-down-3"></i>
+                                            <span>{{ __('shop::app.header.wishlist') }}</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="{{ route('customer.orders.index') }}" class="unset">
+                                            <i class="icon orders text-down-3"></i>
+                                            <span>{{ __('velocity::app.shop.general.orders') }}</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="{{ route('customer.downloadable_products.index') }}" class="unset">
+                                            <i class="icon downloadables text-down-3"></i>
+                                            <span>{{ __('velocity::app.shop.general.downloadables') }}</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            @endauth
+
+                            <ul type="none" class="meta-wrapper">
+                                <li>
+                                    <div class="language-logo-wrapper">
+                                        @if ($locale->locale_image)
+                                            <img
+                                                class="language-logo"
+                                                src="{{ asset('/storage/' . $locale->locale_image) }}" />
+                                        @else
+                                            <img
+                                                class="language-logo"
+                                                src="{{ asset($locale->locale_image) }}" />
+                                        @endif
+                                    </div>
+                                    <span>{{ $locale->name }}</span>
+
+                                    <i
+                                        class="rango-arrow-right"
+                                        @click="toggleMetaInfo('languages')">
+                                    </i>
+                                </li>
+
+                                <li>
+                                    <span>{{ $currency->code }}</span>
+
+                                    <i
+                                        class="rango-arrow-right"
+                                        @click="toggleMetaInfo('currencies')">
                                     </i>
                                 </li>
                             </ul>
@@ -252,11 +355,74 @@
                                 </li>
                             </ul>
                         </div>
+
+                        <div class="wrapper" v-else-if="languages">
+                            <div class="drawer-section">
+                                <i class="rango-arrow-left fs24 text-down-4" @click="toggleSubcategories('root')"></i>
+                                <h4 class="display-inbl">Languages</h4>
+                                <i class="material-icons pull-right" @click="closeDrawer()">cancel</i>
+                            </div>
+
+                            <ul type="none">
+                                @foreach ($allLocales as $locale)
+                                    <li>
+                                        <div class="category-logo">
+                                            <img
+                                                class="category-icon"
+                                                src="{{ asset('/storage/' . $locale->locale_image) }}" />
+                                        </div>
+
+                                        @if (isset($serachQuery))
+                                            <a
+                                                class="unset"
+                                                href="?{{ $serachQuery }}&locale={{ $locale->code }}">
+                                                <span>{{ $locale->title }}</span>
+                                            </a>
+                                        @else
+                                            <a
+                                                class="unset"
+                                                href="locale={{ $locale->code }}">
+                                                <span>{{ $locale->name }}</span>
+                                            </a>
+                                        @endif
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+
+                        <div class="wrapper" v-else-if="currencies">
+                            <div class="drawer-section">
+                                <i class="rango-arrow-left fs24 text-down-4" @click="toggleSubcategories('root')"></i>
+                                <h4 class="display-inbl">Currencies</h4>
+                                <i class="material-icons pull-right" @click="closeDrawer()">cancel</i>
+                            </div>
+
+                            <ul type="none">
+                                @foreach ($allCurrency as $currency)
+                                    <li>
+                                        @if (isset($serachQuery))
+                                            <a
+                                                class="unset"
+                                                href="?{{ $serachQuery }}&locale={{ $currency->code }}">
+                                                <span>{{ $currency->code }}</span>
+                                            </a>
+                                        @else
+                                            <a
+                                                class="unset"
+                                                href="?locale={{ $currency->code }}">
+                                                <span>{{ $currency->code }}</span>
+                                            </a>
+                                        @endif
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
 
                     <div class="hamburger-wrapper" @click="toggleHamburger">
                         <i class="rango-toggle hamburger"></i>
                     </div>
+
                     <logo-component></logo-component>
                 </div>
 
@@ -269,7 +435,19 @@
                         <i class="material-icons">search</i>
                     </a>
 
-                    <a href="" class="unset">
+                    @php
+                        $cart = cart()->getCart();
+
+                        $cartItemsCount = trans('shop::app.minicart.zero');
+                        if ($cart) {
+                            $cartItemsCount = $cart->items->count();
+                        }
+                    @endphp
+
+                    <a href="{{ route('shop.checkout.cart.index') }}" class="unset">
+                        <div class="badge-wrapper">
+                            <span class="badge">{{ $cartItemsCount }}</span>
+                        </div>
                         <i class="material-icons text-down-3">shopping_cart</i>
                     </a>
                 </div>
@@ -308,6 +486,16 @@
             </ul>
         </div>
     </header>
+</script>
+
+<script type="text/x-template" id="sidebar-categories-template">
+    <div class="wrapper" v-if="rootCategories">
+        Hello World
+    </div>
+
+    <div class="wrapper" v-else-if="subCategory">
+        Hello World 2
+    </div>
 </script>
 
 <script type="text/javascript">
@@ -460,6 +648,8 @@
 
             data: function () {
                 return {
+                    'currencies': false,
+                    'languages': false,
                     'hamburger': false,
                     'subCategory': null,
                     'isSearchbar': false,
@@ -485,6 +675,13 @@
 
                 toggleHamburger: function () {
                     this.hamburger = true;
+
+                    // let html = $('#sidebar-categories-template').html();
+
+                    // this.$root.navContainer = true;
+                    // this.$root.responsiveSidebarKey = Math.random();
+
+                    // this.$root.responsiveSidebarTemplate = Vue.compile(html);
                 },
 
                 closeDrawer: function() {
@@ -504,8 +701,13 @@
                         this.rootCategories = false;
                         this.subCategory = categories[index];
                     }
+                },
+
+                toggleMetaInfo: function (metaKey) {
+                    this.rootCategories = false;
+                    this[metaKey] = !this[metaKey];
                 }
-            }
+            },
         })
     })()
 </script>

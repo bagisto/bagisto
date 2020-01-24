@@ -243,6 +243,12 @@ return [
             'new-password' => 'New password',
             'confirm-new-password' => 'Confirm new password',
             'top-brands' => 'Top Brands',
+            'filter' => 'Filter',
+            'view' => 'View',
+            'addresses' => 'Addresses',
+            'reviews' => 'Reviews',
+            'orders' => 'Orders',
+            'downloadables' => 'Downloadable Products',
         ],
     ],
 
@@ -250,7 +256,7 @@ return [
         'header' => [
             'greeting' => 'Welcome, :customer !',
         ]
-    ]
+    ],
 ]
 
 ?>

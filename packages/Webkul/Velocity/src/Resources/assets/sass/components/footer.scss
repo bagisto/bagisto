@@ -10,13 +10,6 @@
             background-color: #4d7ea8;
 
             .newsletter-wrapper {
-                display: flex;
-                display: -webkit-box;
-                display: -ms-flexbox;
-                -ms-flex-pack: justify;
-                -webkit-box-pack: justify;
-                justify-content: space-between;
-
                 input.subscribe-field {
                     width: 300px;
                     border: none;

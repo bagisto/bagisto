@@ -76,7 +76,7 @@
             </a>
 
             <div class="card-body">
-                <div class="product-name">
+                <div class="product-name col-12 no-padding">
                     <a
                         href="{{ route('shop.productOrCategory.index', ['slug' => $product->url_key]) }}"
                         title="{{ $product->name }}"
@@ -91,20 +91,20 @@
                 </div>
 
                 @if ($totalReviews)
-                    <div class="product-rating">
+                    <div class="product-rating col-12 no-padding">
                         <star-ratings ratings="{{ $avgRatings }}"></star-ratings>
                         <span class="align-top">{{ $totalReviews }} Ratings</span>
                     </div>
                 @else
-                    <div class="product-rating">
+                    <div class="product-rating col-12 no-padding">
                         <span class="fs14">{{ __('velocity::app.products.be-first-review') }}</span>
                     </div>
                 @endif
 
-                <div class="cart-wish-wrap row">
+                <div class="cart-wish-wrap row col-12 no-padding ml0">
                     @include ('shop::products.add-to-cart', [
                         'product' => $product,
-                        'addWishlistClass' => 'col-lg-4 col-md-4 col-sm-12 offset-lg-4',
+                        'addWishlistClass' => 'col-lg-4 col-md-4 col-sm-12 offset-lg-4 pr0',
                         'addToCartBtnClass' => $addToCartBtnClass ?? ''
                     ])
                 </div>

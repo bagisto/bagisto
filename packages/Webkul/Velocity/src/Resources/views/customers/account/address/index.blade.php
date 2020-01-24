@@ -29,9 +29,9 @@
                     {{ __('shop::app.customer.account.address.index.add') }}
                 </a>
             @else
-                <div class="address-holder row col-12">
+                <div class="address-holder col-12 no-padding">
                     @foreach ($addresses as $address)
-                        <div class="col-4">
+                        <div class="col-lg-4 col-md-12">
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title fw6">{{ auth()->guard('customer')->user()->name }} {{ $address->name }}</h5>

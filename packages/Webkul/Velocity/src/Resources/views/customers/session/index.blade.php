@@ -10,7 +10,7 @@
         {!! view_render_event('bagisto.shop.customers.login.before') !!}
 
             <div class="container">
-                <div class="row col-10 offset-1">
+                <div class="col-lg-10 col-md-12 offset-lg-1">
                     <div class="heading">
                         <h2 class="fs24 fw6">
                             {{ __('velocity::app.customer.login-form.customer-login')}}

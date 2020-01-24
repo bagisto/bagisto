@@ -3,7 +3,7 @@
 @extends('shop::customers.account.index')
 
 @section('page_title')
-    {{ __('shop::app.customer.account.review.index.page-title') }}
+    {{ __('shop::app.customer.account.wishlist.page-title') }}
 @endsection
 
 @section('page-detail-wrapper')
@@ -23,11 +23,7 @@
 
     {!! view_render_event('bagisto.shop.customers.account.wishlist.list.before', ['wishlist' => $items]) !!}
 
-    <div class="filters-container">
-        @include ('shop::products.list.toolbar')
-    </div>
-
-    <div class="account-items-list row col-12 wishlist-container">
+    <div class="account-items-list row wishlist-container">
 
         @if ($items->count())
             @foreach ($items as $item)
@@ -36,7 +32,7 @@
                 @endphp
 
                 @if ($currentMode == "grid")
-                    <div class="col-3">
+                    <div class="col-6 no-padding">
                 @endif
                     @include ('shop::products.list.card', [
                         'checkmode' => true,
@@ -48,6 +44,10 @@
                     </div>
                 @endif
             @endforeach
+
+            <div class="bottom-toolbar">
+                {{ $items->links()  }}
+            </div>
         @else
             <div class="empty">
                 {{ __('customer::app.wishlist.empty') }}
