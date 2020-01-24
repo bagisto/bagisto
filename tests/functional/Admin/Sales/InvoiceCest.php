@@ -6,7 +6,6 @@ use FunctionalTester;
 use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Models\OrderAddress;
 
-
 class InvoiceCest
 {
     public function testIndex(FunctionalTester $I): void

@@ -10,7 +10,7 @@ $factory->define(CustomerAddress::class, function (Faker $faker) {
     $now = date("Y-m-d H:i:s");
 
     // use an locale from a country in europe so the vat id can be generated
-    $fakerIt = \Faker\Factory('it_IT');
+    $fakerIt = \Faker\Factory::create('it_IT');
 
     return [
         'customer_id'     => function () {
