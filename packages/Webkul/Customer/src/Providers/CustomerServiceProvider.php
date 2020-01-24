@@ -21,18 +21,6 @@ class CustomerServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register factories.
-     *
-     * @param string $path
-     *
-     * @return void
-     */
-    protected function registerEloquentFactoriesFrom($path): void
-    {
-        $this->app->make(EloquentFactory::class)->load($path);
-    }
-
-    /**
      * Register services.
      *
      * @return void
