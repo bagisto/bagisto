@@ -16,12 +16,5 @@ return [
         //     'name' => 'Bliss',
         //     'parent' => 'default'
         // ]
-
-        'velocity' => [
-            'views_path' => 'resources/themes/velocity/views',
-            'assets_path' => 'public/themes/velocity/assets',
-            'name' => 'Velocity',
-            'parent' => 'default'
-        ],
     ]
 ];
