@@ -100,8 +100,7 @@
         "Webkul\\CatalogRule\\": "packages/Webkul/CatalogRule/src",
         "Webkul\\CartRule\\": "packages/Webkul/CartRule/src",
         "Webkul\\Rule\\": "packages/Webkul/Rule/src",
-        "Webkul\\CMS\\": "packages/Webkul/CMS/src",
-        "Webkul\\Velocity\\": "packages/Webkul/Velocity/src"
+        "Webkul\\CMS\\": "packages/Webkul/CMS/src"
       }
     },
 
