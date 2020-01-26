@@ -23,3 +23,6 @@ yarn.lock
 .php_cs.cache
 storage/
 storage/*.key
+
+/resources/themes/velocity/*
+

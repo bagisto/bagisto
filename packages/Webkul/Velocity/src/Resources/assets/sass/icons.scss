@@ -1,0 +1,19 @@
+.velocity-icon {
+    width: 60px;
+    height: 55px;
+    display: inline-block;
+    background-size: cover;
+    background-image: url("../images/Icon-Velocity.svg");
+}
+
+.router-link-active,
+.active {
+    .velocity-icon {
+        background-image: url("../images/Icon-Velocity-Active.svg");
+    }
+
+    &.velocity-icon {
+        background-image: url("../images/Icon-Velocity-Active.svg");
+    }
+}
+
