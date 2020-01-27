@@ -19,16 +19,6 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class CategoryRepository extends Repository
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct(App $app)
-    {
-        parent::__construct($app);
-    }
-
-    /**
      * Specify Model class name
      *
      * @return mixed
