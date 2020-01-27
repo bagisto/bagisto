@@ -25,15 +25,7 @@
                 <img class="logo" src= "<?php echo $logo; ?>" >
             </div>
 
-            <div class="footer">
-                <img class="left-patern"  src= "<?php echo $leftIcon; ?>" >
-                <img class="right-patern"  src= "<?php echo $rightIcon; ?>" >
 
-                <div>
-                    Powered by <a href="https://bagisto.com/" target="_blank" style="color: blue">Bagisto</a>, A Community Project by
-                    <a href="https://webkul.com/" target="_blank" style="color: blue">Webkul</a>
-                </div>
-            </div>
         </div>
 
         <?php
@@ -141,6 +133,11 @@
                 header("Location: $url");
             }
         ?>
+
+        <div style="margin-bottom: 10px; margin-top: 10px;">
+            Powered by <a href="https://bagisto.com/" target="_blank" style="color: blue">Bagisto</a>, A Community Project by
+            <a href="https://webkul.com/" target="_blank" style="color: blue">Webkul</a>
+        </div>
 
     </body>
 </html>
