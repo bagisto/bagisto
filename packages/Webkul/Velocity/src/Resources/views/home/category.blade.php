@@ -34,7 +34,7 @@
 
             <div class="carousel-products vc-small-screen">
                 <carousel-component
-                    slides-per-page="3"
+                    slides-per-page="2"
                     navigation-enabled="hide"
                     pagination-enabled="hide"
                     :slides-count="{{ sizeof($products) }}"
