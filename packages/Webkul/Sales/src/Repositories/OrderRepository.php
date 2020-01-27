@@ -6,7 +6,6 @@ use Illuminate\Container\Container as App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Core\Models\CoreConfig;
 use Webkul\Sales\Contracts\Order;
 use Webkul\Sales\Models\Order as OrderModel;
 
@@ -44,8 +43,7 @@ class OrderRepository extends Repository
         OrderItemRepository $orderItemRepository,
         DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository,
         App $app
-    )
-    {
+    ) {
         $this->orderItemRepository = $orderItemRepository;
 
         $this->downloadableLinkPurchasedRepository = $downloadableLinkPurchasedRepository;
@@ -76,7 +74,24 @@ class OrderRepository extends Repository
         try {
             Event::dispatch('checkout.order.save.before', $data);
 
-            $order = $this->model->create($data);
+            if (isset($data['customer']) && $data['customer']) {
+                $data['customer_id'] = $data['customer']->id;
+                $data['customer_type'] = get_class($data['customer']);
+            } else {
+                unset($data['customer']);
+            }
+
+            if (isset($data['channel']) && $data['channel']) {
+                $data['channel_id'] = $data['channel']->id;
+                $data['channel_type'] = get_class($data['channel']);
+                $data['channel_name'] = $data['channel']->name;
+            } else {
+                unset($data['channel']);
+            }
+
+            $data['status'] = 'pending';
+
+            $order = $this->model->create(array_merge($data, ['increment_id' => $this->generateIncrementId()]));
 
             $order->payment()->create($data['payment']);
 
@@ -176,29 +191,24 @@ class OrderRepository extends Repository
     }
 
     /**
-     * @return string
+     * @return integer
      */
-    public function generateIncrementId(): string
+    public function generateIncrementId()
     {
-        $config = new CoreConfig();
-
-        foreach (['Prefix' => 'prefix',
-                  'Length' => 'length',
-                  'Suffix' => 'suffix',] as
-                 $varSuffix => $confKey) {
-            $var = "invoiceNumber{$varSuffix}";
-
-            $codeNeedle = "sales.orderSettings.order_number.order_number_{$confKey}";
-
-            $$var = $config->where('code', '=', $codeNeedle)->first() ?: false;
-        }
+        foreach ([  'Prefix' => 'prefix',
+                    'Length' => 'length',
+                    'Suffix' => 'suffix', ] as
+                    $varSuffix => $confKey)
+                {
+                    $var = "invoiceNumber{$varSuffix}";
+                    $$var = core()->getConfigData('sales.orderSettings.order_number.order_number_'.$confKey) ?: false;
+                }
 
         $lastOrder = $this->model->orderBy('id', 'desc')->limit(1)->first();
         $lastId = $lastOrder ? $lastOrder->id : 0;
 
         if ($invoiceNumberLength && ($invoiceNumberPrefix || $invoiceNumberSuffix)) {
-            $format = "%0{$invoiceNumberLength->value}d";
-            $invoiceNumber = ($invoiceNumberPrefix->value) . sprintf($format, 0) . ($lastId + 1) . ($invoiceNumberSuffix->value);
+            $invoiceNumber = ($invoiceNumberPrefix) . sprintf("%0{$invoiceNumberLength}d", 0) . ($lastId + 1) . ($invoiceNumberSuffix);
         } else {
             $invoiceNumber = $lastId + 1;
         }

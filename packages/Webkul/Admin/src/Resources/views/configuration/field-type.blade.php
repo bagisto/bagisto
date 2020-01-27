@@ -301,6 +301,8 @@
 
 @push('scripts')
 
+<?php if ($field['type'] == 'country'): ?>
+
 <script type="text/x-template" id="country-template">
 
     <div>
@@ -403,6 +405,8 @@
         }
     });
 </script>
+
+<?php endif; ?>
 
 <script type="text/x-template" id="depends-template">
 
