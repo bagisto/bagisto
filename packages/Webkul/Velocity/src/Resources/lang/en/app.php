@@ -131,7 +131,10 @@ return [
             'active' => 'Active',
             'inactive' => 'Inactive',
             'mass-delete-success' => 'Success: Selected categories menu deleted successfully.',
-        ]
+        ],
+        'general' => [
+            'locale_logo' => 'Locale Logo',
+        ],
     ],
 
     'home' => [

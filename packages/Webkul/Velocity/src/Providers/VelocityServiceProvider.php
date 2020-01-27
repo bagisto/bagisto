@@ -40,7 +40,7 @@ class VelocityServiceProvider extends ServiceProvider
         ], 'public');
 
         $this->publishes([
-            __DIR__ . '/../Resources/views/' => resource_path('themes/velocity/views'),
+            __DIR__ . '/../Resources/views/shop' => resource_path('themes/velocity/views'),
         ]);
 
         Event::listen([

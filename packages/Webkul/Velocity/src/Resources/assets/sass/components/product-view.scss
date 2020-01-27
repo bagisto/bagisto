@@ -303,6 +303,14 @@
     .full-description {
         font-size: 14px;
     }
+
+    .full-specifications {
+        tr {
+            td:first-child() {
+                width: 100px;
+            }
+        }
+    }
 }
 
 .store-meta-images {

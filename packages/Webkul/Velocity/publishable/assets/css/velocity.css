@@ -4426,6 +4426,10 @@ button[disabled] {
   font-size: 14px;
 }
 
+.product-detail .full-specifications tr td:first-child {
+  width: 100px;
+}
+
 .store-meta-images {
   margin-top: 20px;
 }
