@@ -213,7 +213,7 @@ class Bundle extends AbstractType
             }
         }
 
-        if (! $haveRequiredOptions)
+        if (! $haveRequiredOptions && count($minPrices))
             $minPrice = min($minPrices);
 
         return $minPrice;
