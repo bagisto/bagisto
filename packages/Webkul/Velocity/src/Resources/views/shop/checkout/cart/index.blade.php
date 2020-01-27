@@ -81,8 +81,46 @@
                                                     @include ('shop::products.price', ['product' => $product])
                                                 </div>
 
-                                                <div class="row col-12 cursor-pointer">
-                                                    <a href="{{ route('shop.checkout.cart.remove', ['id' => $item->id]) }}" class="unset">
+                                                <div class="no-padding col-12 cursor-pointer fs16">
+                                                    @auth('customer')
+                                                        @if ($item->parent_id != 'null' ||$item->parent_id != null)
+                                                            <a
+                                                                class="unset"
+                                                                href="{{ route('shop.movetowishlist', $item->id) }}"
+                                                                onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">
+
+                                                                <wishlist-component
+                                                                    active="false"
+                                                                    add-class="align-vertical-top">
+                                                                </wishlist-component>
+
+                                                                <span class="align-vertical-top">
+                                                                    {{ __('shop::app.layouts.wishlist') }}
+                                                                </span>
+                                                            </a>
+                                                        @else
+                                                            <a
+                                                                class="unset"
+                                                                href="{{ route('shop.movetowishlist', $item->child->id) }}"
+                                                                onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">
+
+                                                                <wishlist-component
+                                                                    active="false"
+                                                                    add-class="align-vertical-top">
+                                                                </wishlist-component>
+
+                                                                <span class="align-vertical-top">
+                                                                    {{ __('shop::app.layouts.wishlist') }}
+                                                                </span>
+                                                            </a>
+                                                        @endif
+                                                    @endauth
+
+                                                    <a
+                                                        class="unset ml30"
+                                                        href="{{ route('shop.checkout.cart.remove', ['id' => $item->id]) }}"
+                                                        onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">
+
                                                         <span class="rango-delete fs24"></span>
                                                         <span class="align-vertical-top">{{ __('shop::app.checkout.cart.remove') }}</span>
                                                     </a>
@@ -179,12 +217,12 @@
                             <coupon-component></coupon-component>
                         </div>
                     @else
-                        <div class="fs16 row col-12">
+                        <div class="fs16 col-12">
                             {{ __('shop::app.checkout.cart.empty') }}
                         </div>
 
                         <a
-                            class="fs16 mt15 col-12 row remove-decoration"
+                            class="fs16 mt15 col-12 remove-decoration"
                             href="{{ route('shop.home.index') }}">
 
                             <button type="button" class="theme-btn remove-decoration">
@@ -209,6 +247,11 @@
                     }
                 }
             })
+
+            function removeLink(message) {
+                if (!confirm(message))
+                event.preventDefault();
+            }
         })()
     </script>
 @endpush

@@ -1,7 +1,7 @@
 @extends('shop::customers.account.index')
 
 @section('page_title')
-    {{ __('shop::app.customer.account.review.index.page-title') }}
+    {{ __('shop::app.customer.account.order.index.page-title') }}
 @endsection
 
 @section('page-detail-wrapper')

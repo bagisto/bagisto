@@ -22,15 +22,15 @@
                 </div>
 
                 <div class="bundle-summary">
-                    <h3>{{ __('shop::app.products.your-customization') }}</h3>
+                    <h3 class="mb10">{{ __('shop::app.products.your-customization') }}</h3>
 
                     <quantity-changer></quantity-changer>
 
                     <div class="control-group">
                         <label>{{ __('shop::app.products.total-amount') }}</label>
 
-                        <div class="bundle-price">
-                            @{{ formated_total_price }}
+                        <div class="bundle-price no-margin">
+                            @{{ formated_total_price | currency(currency_options) }}
                         </div>
                     </div>
 
@@ -131,9 +131,7 @@
 
         <script type="text/javascript">
             Vue.component('bundle-option-list', {
-
                 template: '#bundle-option-list-template',
-
                 inject: ['$validator'],
 
                 data: function() {

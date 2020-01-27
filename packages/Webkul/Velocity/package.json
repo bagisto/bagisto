@@ -19,6 +19,7 @@
     "vue-carousel": "^0.18.0"
   },
   "dependencies": {
+    "accounting": "^0.4.1",
     "bootstrap-sass": "^3.4.1",
     "font-awesome": "^4.7.0",
     "material-icons": "^0.3.1",

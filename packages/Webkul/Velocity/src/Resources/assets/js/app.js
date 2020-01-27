@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import accounting from 'accounting';
 import VueCarousel from 'vue-carousel';
 import VueToast from 'vue-toast-notification';
 import 'vue-toast-notification/dist/index.css';
@@ -13,6 +14,10 @@ Vue.use(VeeValidate);
 Vue.use(VueCarousel);
 Vue.use(BootstrapSass);
 Vue.prototype.$http = axios;
+
+Vue.filter('currency', function (value, argument) {
+    return accounting.formatMoney(value, argument);
+})
 
 window.Vue = Vue;
 window.Carousel = VueCarousel;
@@ -230,11 +235,14 @@ $(document).ready(function () {
             },
 
             addFlashMessages: function () {
-                const flashes = this.$refs.flashes;
+                // const flashes = this.$refs.flashes;
 
-                flashMessages.forEach(function (flash) {
-                    flashes.addFlash(flash);
-                }, this);
+                // flashMessages.forEach(function (flash) {
+                //     flashes.addFlash(flash);
+                // }, this);
+
+                if (window.flashMessages.alertMessage)
+                    window.alert(window.flashMessages.alertMessage);
             },
 
             showModal: function (id) {

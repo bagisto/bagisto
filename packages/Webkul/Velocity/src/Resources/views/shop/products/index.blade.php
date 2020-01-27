@@ -44,7 +44,7 @@
 
         <div class="category-container right">
             <div class="row remove-padding-margin">
-                <div class="col-12">
+                <div class="pl0 col-12">
                     <h1 class="fw6 mb10">{{ $category->name }}</h1>
 
                     @if ($isDisplayMode && $products->count())

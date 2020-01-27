@@ -1,6 +1,6 @@
 <template>
     <i
-        :class="`material-icons`"
+        :class="`material-icons ${addClass}`"
         @mouseover="isActive ? isActive = !isActive : ''"
         @mouseout="active !== '' && !isActive ? isActive = !isActive : ''">
 
@@ -10,7 +10,7 @@
 
 <script type="text/javascript">
     export default {
-        props: ['active'],
+        props: ['active', 'addClass'],
         data: function () {
             return {
                 isActive: this.active

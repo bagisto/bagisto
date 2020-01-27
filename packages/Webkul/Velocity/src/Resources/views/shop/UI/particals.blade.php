@@ -50,12 +50,17 @@
 </script>
 
 <script type="text/x-template" id="quantity-changer-template">
-    <div class="quantity control-group" :class="[errors.has(controlName) ? 'has-error' : '']">
+    <div :class="`quantity control-group ${errors.has(controlName) ? 'has-error' : ''}`">
         <label class="required">{{ __('shop::app.products.quantity') }}</label>
-
         <button type="button" class="decrease" @click="decreaseQty()">-</button>
 
-        <input :name="controlName" class="control" :value="qty" :v-validate="validations" data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;" readonly>
+        <input
+            :value="qty"
+            class="control"
+            :name="controlName"
+            :v-validate="validations"
+            data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;"
+            readonly />
 
         <button type="button" class="increase" @click="increaseQty()">+</button>
 
@@ -476,7 +481,7 @@
                 <li v-for="(content, index) in headerContent" :key="index">
                     <a
                         v-text="content.title"
-                        :href="content['page_link']"
+                        :href="`${url}/${content['page_link']}`"
                         v-if="(content['content_type'] == 'link')"
                         :target="content['link_target'] ? '_blank' : '_self'">
                     </a>
@@ -553,9 +558,7 @@
 
         Vue.component('quantity-changer', {
             template: '#quantity-changer-template',
-
             inject: ['$validator'],
-
             props: {
                 controlName: {
                     type: String,

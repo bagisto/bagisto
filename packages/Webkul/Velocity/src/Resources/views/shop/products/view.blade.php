@@ -156,26 +156,6 @@
         </form>
     </script>
 
-    <script type="text/x-template" id="quantity-changer-template">
-        <div :class="`quantity control-group ${errors.has(controlName) ? 'has-error' : ''}`">
-            <label class="required">{{ __('shop::app.products.quantity') }}</label>
-            <button type="button" class="decrease" @click="decreaseQty()">-</button>
-
-            <input
-                :value="qty"
-                class="control"
-                :name="controlName"
-                :v-validate="validations"
-                data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;" readonly>
-
-            <button type="button" class="increase" @click="increaseQty()">+</button>
-
-            <span class="control-error" v-if="errors.has(controlName)">
-                @{{ errors.first(controlName) }}
-            </span>
-        </div>
-    </script>
-
     <script type="text/javascript">
         Vue.component('product-view', {
             inject: ['$validator'],
@@ -223,62 +203,6 @@
                             }, 0);
                         }
                     });
-                }
-            }
-        });
-
-        Vue.component('quantity-changer', {
-            inject: ['$validator'],
-            template: '#quantity-changer-template',
-
-            props: {
-                controlName: {
-                    type: String,
-                    default: 'quantity'
-                },
-
-                quantity: {
-                    type: [Number, String],
-                    default: 1
-                },
-
-                minQuantity: {
-                    type: [Number, String],
-                    default: 1
-                },
-
-                validations: {
-                    type: String,
-                    default: 'required|numeric|min_value:1'
-                }
-            },
-
-            data: function() {
-                return {
-                    qty: this.quantity
-                }
-            },
-
-            watch: {
-                quantity: function (val) {
-                    this.qty = val;
-
-                    this.$emit('onQtyUpdated', this.qty)
-                }
-            },
-
-            methods: {
-                decreaseQty: function() {
-                    if (this.qty > this.minQuantity)
-                        this.qty = parseInt(this.qty) - 1;
-
-                    this.$emit('onQtyUpdated', this.qty)
-                },
-
-                increaseQty: function() {
-                    this.qty = parseInt(this.qty) + 1;
-
-                    this.$emit('onQtyUpdated', this.qty)
                 }
             }
         });

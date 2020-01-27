@@ -31,18 +31,12 @@
                     $currentMode = $toolbarHelper->getCurrentMode();
                 @endphp
 
-                @if ($currentMode == "grid")
-                    <div class="col-6 no-padding">
-                @endif
-                    @include ('shop::products.list.card', [
-                        'checkmode' => true,
-                        'itemId' => $item->id,
-                        'removeWishlist' => true,
-                        'product' => $item->product,
-                    ])
-                @if ($currentMode == "grid")
-                    </div>
-                @endif
+                @include ('shop::products.list.card', [
+                    'checkmode' => true,
+                    'itemId' => $item->id,
+                    'removeWishlist' => true,
+                    'product' => $item->product,
+                ])
             @endforeach
 
             <div class="bottom-toolbar">

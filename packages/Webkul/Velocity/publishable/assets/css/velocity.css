@@ -232,7 +232,7 @@
   content: "\E92E";
 }
 
-.rango-eye-visible:before, .table .action .eye-icon:before {
+.rango-eye-visible:before, .account-content .account-layout .account-table-content #datagrid-filters ~ table.table tbody tr .action .eye-icon:before {
   content: "\E92F";
 }
 
@@ -886,7 +886,7 @@
   background-color: #111111;
 }
 
-.customer-rating .theme-btn.light, .customer-rating .cart-details .light.continue-shopping-btn, .cart-details .customer-rating .light.continue-shopping-btn, .customer-rating .account-content .account-layout .bottom-toolbar .pagination .page-item, .account-content .account-layout .bottom-toolbar .pagination .customer-rating .page-item {
+.customer-rating .theme-btn.light, .customer-rating .cart-details .light.continue-shopping-btn, .cart-details .customer-rating .light.continue-shopping-btn, .customer-rating .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container button.light.btn, .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .customer-rating button.light.btn, .customer-rating .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .quantity button.light, .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .quantity .customer-rating button.light, .customer-rating .quantity .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container button.light, .quantity .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .customer-rating button.light, .customer-rating .quantity .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .bottom-toolbar .pagination button.page-item, .quantity .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .bottom-toolbar .pagination .customer-rating button.page-item, .customer-rating .quantity .account-content .account-layout .bottom-toolbar .pagination .account-table-content #datagrid-filters .dropdown-filters .dropdown-container button.page-item, .quantity .account-content .account-layout .bottom-toolbar .pagination .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .customer-rating button.page-item, .customer-rating .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .bottom-toolbar .pagination .quantity button.page-item, .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .bottom-toolbar .pagination .quantity .customer-rating button.page-item, .customer-rating .account-content .account-layout .bottom-toolbar .pagination .quantity .account-table-content #datagrid-filters .dropdown-filters .dropdown-container button.page-item, .account-content .account-layout .bottom-toolbar .pagination .quantity .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .customer-rating button.page-item, .customer-rating .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .bottom-toolbar .pagination button.btn.page-item, .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .bottom-toolbar .pagination .customer-rating button.btn.page-item, .customer-rating .account-content .account-layout .bottom-toolbar .pagination .account-table-content #datagrid-filters .dropdown-filters .dropdown-container button.btn.page-item, .account-content .account-layout .bottom-toolbar .pagination .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .customer-rating button.btn.page-item, .customer-rating .account-content .account-layout .bottom-toolbar .pagination .page-item, .account-content .account-layout .bottom-toolbar .pagination .customer-rating .page-item {
   margin-top: 10px;
 }
 
@@ -1026,12 +1026,12 @@
 }
 
 .product-card-new .product-image-container {
+  height: 225px;
   position: relative;
 }
 
 .product-card-new .product-image-container img {
   width: 100%;
-  height: 100%;
 }
 
 .product-card-new .card-current-price {
@@ -1123,7 +1123,7 @@
   height: 35px;
   border-radius: 0px;
   vertical-align: top;
-  padding: 0 10px !important;
+  padding: 0 6px !important;
   font-size: 24px !important;
   font-weight: 600 !important;
   color: #000000 !important;
@@ -1136,7 +1136,7 @@
 }
 
 .quantity input {
-  max-width: 28px;
+  max-width: 40px;
   cursor: default;
   font-size: 16px !important;
   border-left: 0px !important;
@@ -1488,7 +1488,6 @@
 .account-content .sidebar .customer-sidebar .navigation li {
   width: 100%;
   padding: 10px 15px;
-  margin-bottom: 10px;
 }
 
 .account-content .sidebar .customer-sidebar .navigation li:hover, .account-content .sidebar .customer-sidebar .navigation li.active {
@@ -1598,10 +1597,10 @@
 
 .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters {
   right: 0;
+  padding: 0;
   width: 220px;
+  border: unset;
   position: relative;
-  padding: 10px 15px;
-  border: 1px solid #CCCCCC;
 }
 
 .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .grid-dropdown-header {
@@ -1612,13 +1611,73 @@
   list-style: none;
 }
 
-.account-content .account-layout .account-items-list.wishlist-container .col-3 {
-  padding-left: 0;
+.account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-toggle {
+  margin-right: 13px;
+  vertical-align: top;
+  display: inline-block;
 }
 
-.account-content .account-layout .account-items-list.wishlist-container .col-3 .product-card-new {
-  margin: 0;
-  width: 22rem;
+.account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-toggle:after {
+  border: unset;
+}
+
+.account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container {
+  display: inline-block !important;
+}
+
+.account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container button.btn, .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .quantity button, .quantity .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container button {
+  display: block;
+  font-size: 14px;
+  margin-top: 10px;
+  font-weight: 600;
+  padding: 5px 10px;
+}
+
+.account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container li:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .control-group {
+  margin-bottom: 0;
+}
+
+.account-content .account-layout .account-table-content #datagrid-filters ~ table.table tbody tr .badge {
+  padding: 10px;
+  font-size: 12px;
+}
+
+.account-content .account-layout .account-table-content #datagrid-filters ~ table.table tbody tr .action .eye-icon {
+  font-size: 24px;
+  padding-left: 10px;
+}
+
+.account-content .account-layout .account-table-content #datagrid-filters ~ table.table tbody tr .action .eye-icon:hover {
+  color: #4D7EA8;
+}
+
+.account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters:nth-child(2) {
+  top: 25px;
+  width: 100%;
+  display: block;
+  padding-left: 30px;
+}
+
+.account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters:nth-child(2) .dropdown-container {
+  width: 100%;
+}
+
+.account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters:nth-child(2) .dropdown-container li {
+  width: 150px;
+  display: inline-block;
+}
+
+.account-content .account-layout .account-items-list.wishlist-container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.account-content .account-layout .account-items-list.wishlist-container .product-card-new {
+  width: 19rem;
 }
 
 .account-content .account-layout .max-sm-img-dimention {
@@ -1672,6 +1731,69 @@
   content: "\E907";
 }
 
+.account-content .account-layout .sale-container {
+  font-size: 16px;
+}
+
+.account-content .account-layout .sale-container .tabs ul {
+  font-weight: 600;
+  font-size: 20px;
+  list-style-type: none;
+}
+
+.account-content .account-layout .sale-container .tabs ul li {
+  padding: 10px 15px;
+  display: inline-block;
+  border-bottom: 2px solid transparent;
+}
+
+.account-content .account-layout .sale-container .tabs ul li.active {
+  border-bottom: 2px solid #26A37C;
+}
+
+.account-content .account-layout .sale-container .tabs-content .sale-section {
+  padding: 20px 0 10px 0;
+  border-bottom: 1px solid #CCCCCC;
+}
+
+.account-content .account-layout .sale-container .tabs-content .sale-section .section-title {
+  font-size: 18px;
+  font-weight: 600;
+  padding-bottom: 10px;
+  color: #9e9e9e;
+}
+
+.account-content .account-layout .sale-container .tabs-content .sale-section .section-content label + span {
+  font-weight: 600;
+  color: #9e9e9e;
+}
+
+.account-content .account-layout .sale-container .tabs-content .sale-section .section-content .totals {
+  width: 100%;
+  display: inline-block;
+}
+
+.account-content .account-layout .sale-container .tabs-content .sale-section .section-content .totals .sale-summary {
+  float: right;
+}
+
+.account-content .account-layout .sale-container .order-box-container {
+  padding: 10px 0;
+}
+
+.account-content .account-layout .sale-container .order-box-container .box {
+  width: 24%;
+  vertical-align: top;
+  display: inline-block;
+}
+
+.account-content .account-layout .sale-container .order-box-container .box .box-title {
+  font-size: 18px;
+  padding: 10px 0;
+  font-weight: 600;
+  color: #9e9e9e;
+}
+
 .account-content .select-icon {
   left: 95%;
   top: -28px;
@@ -1720,7 +1842,7 @@
   padding-top: 25px;
 }
 
-.checkout-process .order-summary-container .theme-btn, .checkout-process .order-summary-container .cart-details .continue-shopping-btn, .cart-details .checkout-process .order-summary-container .continue-shopping-btn, .checkout-process .order-summary-container .account-content .account-layout .bottom-toolbar .pagination .page-item, .account-content .account-layout .bottom-toolbar .pagination .checkout-process .order-summary-container .page-item {
+.checkout-process .order-summary-container .theme-btn, .checkout-process .order-summary-container .cart-details .continue-shopping-btn, .cart-details .checkout-process .order-summary-container .continue-shopping-btn, .checkout-process .order-summary-container .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container button.btn, .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .checkout-process .order-summary-container button.btn, .checkout-process .order-summary-container .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .quantity button, .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .quantity .checkout-process .order-summary-container button, .checkout-process .order-summary-container .quantity .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container button, .quantity .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .checkout-process .order-summary-container button, .checkout-process .order-summary-container .account-content .account-layout .bottom-toolbar .pagination .page-item, .account-content .account-layout .bottom-toolbar .pagination .checkout-process .order-summary-container .page-item {
   display: none;
 }
 
@@ -1906,15 +2028,6 @@
 .order-success-content {
   padding: 40px 20px;
   font-size: 16px;
-}
-
-.table .badge {
-  padding: 10px;
-}
-
-.table .action .eye-icon {
-  font-size: 24px;
-  padding-left: 10px;
 }
 
 .search-result-status {
@@ -3664,7 +3777,7 @@ body::after {
   background-position: right;
 }
 
-.theme-btn, .cart-details .continue-shopping-btn, .account-content .account-layout .bottom-toolbar .pagination .page-item {
+.theme-btn, .cart-details .continue-shopping-btn, .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container button.btn, .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .quantity button, .quantity .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container button, .account-content .account-layout .bottom-toolbar .pagination .page-item {
   border: none;
   cursor: pointer;
   font-weight: 600;
@@ -3674,7 +3787,7 @@ body::after {
   background-color: #26A37C !important;
 }
 
-.theme-btn.light, .cart-details .light.continue-shopping-btn, .account-content .account-layout .bottom-toolbar .pagination .page-item {
+.theme-btn.light, .cart-details .light.continue-shopping-btn, .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container button.light.btn, .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .quantity button.light, .quantity .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container button.light, .quantity .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .bottom-toolbar .pagination button.page-item, .quantity .account-content .account-layout .bottom-toolbar .pagination .account-table-content #datagrid-filters .dropdown-filters .dropdown-container button.page-item, .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .bottom-toolbar .pagination .quantity button.page-item, .account-content .account-layout .bottom-toolbar .pagination .quantity .account-table-content #datagrid-filters .dropdown-filters .dropdown-container button.page-item, .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .bottom-toolbar .pagination button.btn.page-item, .account-content .account-layout .bottom-toolbar .pagination .account-table-content #datagrid-filters .dropdown-filters .dropdown-container button.btn.page-item, .account-content .account-layout .bottom-toolbar .pagination .page-item {
   color: #26A37C !important;
   background-color: #FFFFFF !important;
   -webkit-box-shadow: 0 1px 0 0 #CFCFCF;
@@ -3682,17 +3795,17 @@ body::after {
   border: 1px solid rgba(0, 0, 0, 0.12);
 }
 
-.theme-btn.light:hover, .cart-details .light.continue-shopping-btn:hover, .account-content .account-layout .bottom-toolbar .pagination .page-item:hover {
+.theme-btn.light:hover, .cart-details .light.continue-shopping-btn:hover, .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container button.light.btn:hover, .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .quantity button.light:hover, .quantity .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container button.light:hover, .quantity .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .bottom-toolbar .pagination button.page-item:hover, .quantity .account-content .account-layout .bottom-toolbar .pagination .account-table-content #datagrid-filters .dropdown-filters .dropdown-container button.page-item:hover, .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .bottom-toolbar .pagination .quantity button.page-item:hover, .account-content .account-layout .bottom-toolbar .pagination .quantity .account-table-content #datagrid-filters .dropdown-filters .dropdown-container button.page-item:hover, .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .bottom-toolbar .pagination button.btn.page-item:hover, .account-content .account-layout .bottom-toolbar .pagination .account-table-content #datagrid-filters .dropdown-filters .dropdown-container button.btn.page-item:hover, .account-content .account-layout .bottom-toolbar .pagination .page-item:hover {
   background-color: #f5f5f5 !important;
 }
 
-.theme-btn:hover, .cart-details .continue-shopping-btn:hover, .account-content .account-layout .bottom-toolbar .pagination .page-item:hover,
+.theme-btn:hover, .cart-details .continue-shopping-btn:hover, .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container button.btn:hover, .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .quantity button:hover, .quantity .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container button:hover, .account-content .account-layout .bottom-toolbar .pagination .page-item:hover,
 .btn-add-to-cart:hover {
   border-color: #247959 !important;
   background-color: #247959 !important;
 }
 
-.theme-btn:hover.light, .cart-details .continue-shopping-btn:hover.light, .account-content .account-layout .bottom-toolbar .pagination .page-item:hover,
+.theme-btn:hover.light, .cart-details .continue-shopping-btn:hover.light, .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container button.btn:hover.light, .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .quantity button:hover.light, .quantity .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container button:hover.light, .quantity .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .bottom-toolbar .pagination button.page-item:hover, .quantity .account-content .account-layout .bottom-toolbar .pagination .account-table-content #datagrid-filters .dropdown-filters .dropdown-container button.page-item:hover, .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .bottom-toolbar .pagination .quantity button.page-item:hover, .account-content .account-layout .bottom-toolbar .pagination .quantity .account-table-content #datagrid-filters .dropdown-filters .dropdown-container button.page-item:hover, .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .bottom-toolbar .pagination button.btn.page-item:hover, .account-content .account-layout .bottom-toolbar .pagination .account-table-content #datagrid-filters .dropdown-filters .dropdown-container button.btn.page-item:hover, .account-content .account-layout .bottom-toolbar .pagination .page-item:hover,
 .btn-add-to-cart:hover.light,
 .account-content .account-layout .bottom-toolbar .pagination .btn-add-to-cart.page-item:hover {
   border: 1px solid rgba(0, 0, 0, 0.12) !important;
@@ -4038,7 +4151,7 @@ ul.circle-list li.circle:not(:last-child) {
   color: #4D7EA8;
 }
 
-a.unset, .account-content .account-layout .bottom-toolbar .pagination a.page-item, .table .action a {
+a.unset, .account-content .account-layout .account-table-content #datagrid-filters ~ table.table tbody tr .action a, .account-content .account-layout .bottom-toolbar .pagination a.page-item {
   color: unset !important;
   text-decoration: none !important;
 }
@@ -4167,9 +4280,9 @@ button[disabled] {
   vertical-align: middle;
 }
 
-.rango-default, .account-content .sidebar .customer-sidebar .navigation li i.icon, .account-content .account-layout .bottom-toolbar .pagination .page-item.next .angle-right-icon,
+.rango-default, .account-content .sidebar .customer-sidebar .navigation li i.icon, .account-content .account-layout .account-table-content #datagrid-filters ~ table.table tbody tr .action .eye-icon, .account-content .account-layout .bottom-toolbar .pagination .page-item.next .angle-right-icon,
 .account-content .account-layout .bottom-toolbar .pagination .page-item.next .angle-left-icon, .account-content .account-layout .bottom-toolbar .pagination .page-item.previous .angle-right-icon,
-.account-content .account-layout .bottom-toolbar .pagination .page-item.previous .angle-left-icon, .table .action .eye-icon, header #search-form .btn-group .selectdiv, header #search-form .quantity .selectdiv {
+.account-content .account-layout .bottom-toolbar .pagination .page-item.previous .angle-left-icon, header #search-form .btn-group .selectdiv, header #search-form .quantity .selectdiv {
   speak: none;
   line-height: 1;
   font-style: normal;
@@ -13241,7 +13354,7 @@ body {
   position: absolute !important;
 }
 
-#top #account + .account-modal .theme-btn, #top #account + .account-modal .cart-details .continue-shopping-btn, .cart-details #top #account + .account-modal .continue-shopping-btn, #top #account + .account-modal .account-content .account-layout .bottom-toolbar .pagination .page-item, .account-content .account-layout .bottom-toolbar .pagination #top #account + .account-modal .page-item {
+#top #account + .account-modal .theme-btn, #top #account + .account-modal .cart-details .continue-shopping-btn, .cart-details #top #account + .account-modal .continue-shopping-btn, #top #account + .account-modal .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container button.btn, .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container #top #account + .account-modal button.btn, #top #account + .account-modal .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .quantity button, .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container .quantity #top #account + .account-modal button, #top #account + .account-modal .quantity .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container button, .quantity .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container #top #account + .account-modal button, #top #account + .account-modal .account-content .account-layout .bottom-toolbar .pagination .page-item, .account-content .account-layout .bottom-toolbar .pagination #top #account + .account-modal .page-item {
   padding: .5rem .9rem;
 }
 

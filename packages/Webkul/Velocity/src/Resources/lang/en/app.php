@@ -253,6 +253,10 @@ return [
             'orders' => 'Orders',
             'downloadables' => 'Downloadable Products',
         ],
+        'wishlist' => [
+            'add-wishlist-text' => 'Add product to wishlist',
+            'remove-wishlist-text' => 'Remove product from wishlist'
+        ]
     ],
 
     'responsive' => [

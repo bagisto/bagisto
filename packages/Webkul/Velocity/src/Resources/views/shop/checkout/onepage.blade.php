@@ -199,6 +199,8 @@
                         this.$validator.validateAll(scope)
                         .then(result => {
                             if (result) {
+                                document.body.style.cursor = 'wait';
+
                                 if (scope == 'address-form') {
                                     this.saveAddress();
                                 } else if (scope == 'shipping-form') {
@@ -329,6 +331,8 @@
                             reviewHtml = Vue.compile(response.data.html)
                             this.completed_step = this.step_numbers[response.data.jump_to_section] + 1;
                             this.current_step = this.step_numbers[response.data.jump_to_section];
+
+                            document.body.style.cursor = 'auto';
 
                             this.getOrderSummary();
                         })

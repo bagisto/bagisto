@@ -29,7 +29,7 @@
                                 </a>
 
                                 <a
-                                    href="{{ route('shop.productOrCategory.index', $item->url_key) }}"
+                                    href="{{ route('shop.productOrCategory.index', $item->product->url_key) }}"
                                     class="unset">
 
                                     <div class="product-image"
