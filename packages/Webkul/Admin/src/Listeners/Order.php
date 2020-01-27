@@ -2,7 +2,6 @@
 
 namespace Webkul\Admin\Listeners;
 
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Webkul\Admin\Mail\NewOrderNotification;
 use Webkul\Admin\Mail\NewAdminNotification;
