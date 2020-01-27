@@ -535,12 +535,12 @@ class Bundle extends AbstractType
                     continue;
 
                 $optionProduct = $this->productBundleOptionProductRepository->find($optionProductId);
-                
+
                 $qty = $data['bundle_option_qty'][$optionId] ?? $optionProduct->qty;
 
                 if (! isset($data['bundle_option_qty'][$optionId]))
                     $bundleOptionQuantities[$optionId] = $qty;
-                
+
                 $labels[] = $qty . ' x ' . $optionProduct->product->name . ' ' . core()->currency($optionProduct->product->getTypeInstance()->getMinimalPrice());
             }
 
