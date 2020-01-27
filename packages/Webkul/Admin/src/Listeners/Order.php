@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Listeners;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Webkul\Admin\Mail\NewOrderNotification;
 use Webkul\Admin\Mail\NewAdminNotification;
@@ -10,13 +11,15 @@ use Webkul\Admin\Mail\NewShipmentNotification;
 use Webkul\Admin\Mail\NewInventorySourceNotification;
 use Webkul\Admin\Mail\CancelOrderNotification;
 use Webkul\Admin\Mail\NewRefundNotification;
+
 /**
  * Order event handler
  *
  * @author    Jitendra Singh <jitendra@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class Order {
+class Order
+{
 
     /**
      * @param mixed $order
@@ -30,7 +33,7 @@ class Order {
 
             Mail::queue(new NewAdminNotification($order));
         } catch (\Exception $e) {
-
+            report($e);
         }
     }
 
@@ -42,12 +45,13 @@ class Order {
     public function sendNewInvoiceMail($invoice)
     {
         try {
-            if ($invoice->email_sent)
+            if ($invoice->email_sent) {
                 return;
+            }
 
             Mail::queue(new NewInvoiceNotification($invoice));
         } catch (\Exception $e) {
-
+            report($e);
         }
     }
 
@@ -61,7 +65,7 @@ class Order {
         try {
             Mail::queue(new NewRefundNotification($refund));
         } catch (\Exception $e) {
-
+            report($e);
         }
     }
 
@@ -73,25 +77,28 @@ class Order {
     public function sendNewShipmentMail($shipment)
     {
         try {
-            if ($shipment->email_sent)
+            if ($shipment->email_sent) {
                 return;
+            }
 
             Mail::queue(new NewShipmentNotification($shipment));
 
             Mail::queue(new NewInventorySourceNotification($shipment));
         } catch (\Exception $e) {
-
+            report($e);
         }
     }
 
-     /*
+    /**
      * @param mixed $order
-     * */
-    public function sendCancelOrderMail($order){
-        try{
+     *
+     */
+    public function sendCancelOrderMail($order)
+    {
+        try {
             Mail::queue(new CancelOrderNotification($order));
-        }catch (\Exception $e){
-            \Log::error('Error occured when sending email '.$e->getMessage());
+        } catch (\Exception $e) {
+            report($e);
         }
     }
 }
