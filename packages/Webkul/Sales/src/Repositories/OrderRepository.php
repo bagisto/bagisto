@@ -6,7 +6,6 @@ use Illuminate\Container\Container as App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Core\Models\CoreConfig;
 use Webkul\Sales\Contracts\Order;
 use Webkul\Sales\Models\Order as OrderModel;
 
@@ -196,22 +195,20 @@ class OrderRepository extends Repository
      */
     public function generateIncrementId()
     {
-        $config = new CoreConfig();
-
         foreach ([  'Prefix' => 'prefix',
                     'Length' => 'length',
                     'Suffix' => 'suffix', ] as
                     $varSuffix => $confKey)
                 {
                     $var = "invoiceNumber{$varSuffix}";
-                    $$var = $config->where('code', '=', "sales.orderSettings.order_number.order_number_{$confKey}")->first() ?: false;
+                    $$var = core()->getConfigData('sales.orderSettings.order_number.order_number_'.$confKey) ?: false;
                 }
 
         $lastOrder = $this->model->orderBy('id', 'desc')->limit(1)->first();
         $lastId = $lastOrder ? $lastOrder->id : 0;
 
         if ($invoiceNumberLength && ($invoiceNumberPrefix || $invoiceNumberSuffix)) {
-            $invoiceNumber = ($invoiceNumberPrefix->value) . sprintf("%0{$invoiceNumberLength->value}d", 0) . ($lastId + 1) . ($invoiceNumberSuffix->value);
+            $invoiceNumber = ($invoiceNumberPrefix) . sprintf("%0{$invoiceNumberLength}d", 0) . ($lastId + 1) . ($invoiceNumberSuffix);
         } else {
             $invoiceNumber = $lastId + 1;
         }
