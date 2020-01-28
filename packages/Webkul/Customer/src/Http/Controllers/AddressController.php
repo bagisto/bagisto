@@ -86,6 +86,8 @@ class AddressController extends Controller
         ]);
 
         $cust_id['customer_id'] = $this->customer->id;
+        $cust_id['first_name'] = $this->customer->first_name;
+        $cust_id['last_name'] = $this->customer->last_name;
         $data = array_merge($cust_id, $data);
 
         if ($this->customer->addresses->count() == 0) {
