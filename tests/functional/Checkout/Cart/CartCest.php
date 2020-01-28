@@ -31,8 +31,7 @@ class CartCest
     {
         Cart::addProduct($this->productWithQuantityBox->id, [
             '_token'     => session('_token'),
-            'product_id' => $this->productWithoutQuantityBox->id,
-            'links'      => $this->productWithoutQuantityBox->downloadable_links->pluck('id')->all(),
+            'product_id' => $this->productWithQuantityBox->id,
             'quantity'   => 1,
         ]);
 
