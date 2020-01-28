@@ -65,7 +65,7 @@ class CatalogRuleIndex
 
             $this->catalogRuleProductPriceHelper->indexRuleProductPrice(1000);
         } catch (\Exception $e) {
-
+            report($e);
         }
     }
 
@@ -80,7 +80,7 @@ class CatalogRuleIndex
         try {
             if (! $product->getTypeInstance()->priceRuleCanBeApplied())
                 return;
-                
+
             $productIds = $product->getTypeInstance()->isComposite()
                             ? $product->getTypeInstance()->getChildrenIds()
                             : [$product->id];
@@ -93,7 +93,7 @@ class CatalogRuleIndex
 
             $this->catalogRuleProductPriceHelper->indexRuleProductPrice(1000, $product);
         } catch (\Exception $e) {
-
+            report($e);
         }
     }
 

@@ -282,6 +282,7 @@ class TaxRateController extends Controller
                     }
                 }
             } catch (\Exception $e) {
+                report($e);
                 $failure = new Failure(1, 'rows', [0 => trans('admin::app.export.enough-row-error')]);
 
                 session()->flash('error', $failure->errors()[0]);

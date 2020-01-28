@@ -168,6 +168,7 @@ class InventorySourceController extends Controller
 
                 return response()->json(['message' => true], 200);
             } catch (\Exception $e) {
+                report($e);
                 session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Inventory source']));
             }
         }
