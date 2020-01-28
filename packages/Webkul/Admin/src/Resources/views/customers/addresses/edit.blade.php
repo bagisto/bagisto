@@ -15,17 +15,17 @@
                     <div class="page-title">
                         <h1>{{ __('admin::app.customers.addresses.edit-title') }}</h1>
                     </div>
-                    
+
                     <div class="page-action">
                         <button type="submit" class="btn btn-primary btn-lg">
                             {{ __('admin::app.customers.addresses.save-btn-title') }}
                         </button>
                     </div>
                 </div>
-    
+
                 <div class="page-content">
                     @csrf()
-    
+
                     <input type="hidden" name="_method" value="PUT">
 
                     <input type="hidden" name="customer_id" value="{{ $address->customer_id }}">
@@ -55,7 +55,7 @@
                                 <span class="control-error" v-if="errors.has('city')">@{{ errors.first('city') }}</span>
                             </div>
 
-                            @include ('shop::customers.account.address.country-state', ['countryCode' => old('country') ?? $address->country, 'stateCode' => old('state') ?? $address->state])
+                            @include ('admin::customers.country-state', ['countryCode' => old('country') ?? $address->country, 'stateCode' => old('state') ?? $address->state])
 
                             <div class="control-group" :class="[errors.has('postcode') ? 'has-error' : '']">
                                 <label for="postcode" class="required">{{ __('shop::app.customer.account.address.create.postcode') }}</label>
