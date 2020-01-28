@@ -144,7 +144,7 @@ class AttributeRepository extends Repository
             $data['value_per_channel'] = $data['value_per_locale'] = 0;
         }
 
-        if (! in_array($data['type'], ['select', 'multiselect', 'price'])) {
+        if (! in_array($data['type'], ['select', 'multiselect', 'price', 'checkbox'])) {
             $data['is_filterable'] = 0;
         }
 

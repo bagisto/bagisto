@@ -2,6 +2,7 @@
 
 namespace Webkul\User\Http\Controllers;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Event;
 use Webkul\User\Repositories\AdminRepository;
 use Webkul\User\Repositories\RoleRepository;
@@ -90,8 +91,10 @@ class UserController extends Controller
     {
         $data = $request->all();
 
-        if (isset($data['password']) && $data['password'])
+        if (isset($data['password']) && $data['password']) {
             $data['password'] = bcrypt($data['password']);
+            $data['api_token'] = Str::random(80);
+        }
 
         Event::dispatch('user.admin.create.before');
 
@@ -130,10 +133,11 @@ class UserController extends Controller
     {
         $data = $request->all();
 
-        if (! $data['password'])
+        if (! $data['password']) {
             unset($data['password']);
-        else
+        } else {
             $data['password'] = bcrypt($data['password']);
+        }
 
         if (isset($data['status'])) {
             $data['status'] = 1;

@@ -213,7 +213,7 @@ class Bundle extends AbstractType
             }
         }
 
-        if (! $haveRequiredOptions)
+        if (! $haveRequiredOptions && count($minPrices))
             $minPrice = min($minPrices);
 
         return $minPrice;
@@ -523,6 +523,8 @@ class Bundle extends AbstractType
      */
     public function getAdditionalOptions($data)
     {
+        $bundleOptionQuantities = $data['bundle_option_qty'] ?? [];
+
         foreach ($data['bundle_options'] as $optionId => $optionProductIds) {
             $option = $this->productBundleOptionRepository->find($optionId);
 
@@ -537,7 +539,7 @@ class Bundle extends AbstractType
                 $qty = $data['bundle_option_qty'][$optionId] ?? $optionProduct->qty;
 
                 if (! isset($data['bundle_option_qty'][$optionId]))
-                    $data['bundle_option_qty'][$optionId] = $qty;
+                    $bundleOptionQuantities[$optionId] = $qty;
 
                 $labels[] = $qty . ' x ' . $optionProduct->product->name . ' ' . core()->currency($optionProduct->product->getTypeInstance()->getMinimalPrice());
             }
@@ -550,6 +552,8 @@ class Bundle extends AbstractType
                 ];
             }
         }
+
+        $data['bundle_option_qty'] = $bundleOptionQuantities;
 
         return $data;
     }

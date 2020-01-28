@@ -52,7 +52,7 @@ class AddressDataGrid extends DataGrid
         $queryBuilder = DB::table('customer_addresses as ca')
                 ->leftJoin('countries', 'ca.country', '=', 'countries.code')
                 ->leftJoin('customers as c', 'ca.customer_id', '=', 'c.id')
-                ->addSelect('ca.id as address_id', 'ca.address1', 'ca.country', DB::raw('' . DB::getTablePrefix() . 'countries.name as country_name'), 'ca.state', 'ca.city', 'ca.postcode', 'ca.phone', 'ca.default_address')
+                ->addSelect('ca.id as address_id', 'ca.company_name', 'ca.vat_id', 'ca.address1', 'ca.country', DB::raw('' . DB::getTablePrefix() . 'countries.name as country_name'), 'ca.state', 'ca.city', 'ca.postcode', 'ca.phone', 'ca.default_address')
                 ->where('c.id', $customer->id);
 
         $queryBuilder = $queryBuilder->leftJoin('country_states', function($qb) {
@@ -65,6 +65,8 @@ class AddressDataGrid extends DataGrid
             ->addSelect(DB::raw(DB::getTablePrefix() . 'country_states.default_name as state_name'));
 
         $this->addFilter('address_id', 'ca.id');
+        $this->addFilter('company_name', 'ca.company_name');
+        $this->addFilter('vat_id', 'ca.vat_id');
         $this->addFilter('address1', 'ca.address1');
         $this->addFilter('city', 'ca.city');
         $this->addFilter('state_name', DB::raw(DB::getTablePrefix() . 'country_states.default_name'));
@@ -77,6 +79,7 @@ class AddressDataGrid extends DataGrid
 
     public function addColumns()
     {
+
         $this->addColumn([
             'index' => 'address_id',
             'label' => trans('admin::app.customers.addresses.address-id'),
@@ -125,6 +128,15 @@ class AddressDataGrid extends DataGrid
         $this->addColumn([
             'index' => 'postcode',
             'label' => trans('admin::app.customers.addresses.postcode'),
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'filterable' => true
+        ]);
+
+        $this->addColumn([
+            'index' => 'vat_id',
+            'label' => trans('admin::app.customers.addresses.vat_id'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,

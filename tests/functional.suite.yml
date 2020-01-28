@@ -10,6 +10,7 @@ modules:
   enabled:
     # add a framework module here
     - \Helper\Functional
+    - \Helper\DataMocker
     - Asserts
     - Webkul\Core\Helpers\Laravel5Helper:
         environment_file: .env.testing
