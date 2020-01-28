@@ -16,7 +16,7 @@
 
 @push('scripts')
     <script type="text/x-template" id="category-products-template">
-        <div class="container-fluid">
+        <div class="container-fluid remove-padding-margin">
             <card-list-header
                 view-all="{{ route('shop.productOrCategory.index', $categoryDetails->slug) }}"
                 heading="{{ $categoryDetails->name }}">

@@ -256,15 +256,27 @@
     color: $light-color !important;
     background-color: $theme-color !important;
 
+    &:hover,
+    &:focus {
+        outline: none;
+        box-shadow: none;
+        border: 1px solid $theme-dark-color;
+        background-color: $theme-color !important;
+    }
+
     &.light {
         color: $theme-color !important;
         background-color: $light-color !important;
         box-shadow: 0 1px 0 0 #CFCFCF;
         border: 1px solid rgba(0,0,0,0.12);
-    }
 
-    &.light:hover {
-        background-color: #f5f5f5 !important;
+        &:hover,
+        &:focus {
+            outline: none;
+            box-shadow: none;
+            border: 1px solid $theme-dark-color;
+            background-color: #f5f5f5 !important;
+        }
     }
 }
 

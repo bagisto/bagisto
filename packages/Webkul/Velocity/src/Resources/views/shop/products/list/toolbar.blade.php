@@ -80,10 +80,12 @@
         <div class="toolbar-wrapper row col-12 remove-padding-margin" v-else>
             <div v-if="layeredNavigation" class="nav-container scrollable">
                 <div class="header drawer-section">
-                    <i class="material-icons" @click="layeredNavigation = false">keyboard_backspace</i>
+                    <i class="material-icons" @click="toggleLayeredNavigation">keyboard_backspace</i>
 
-                    <span class="fs24 fw6">{{ __('velocity::app.shop.general.filter') }}</span>
-                    {{-- <span class="pull-right link-color" @click="layeredNavigation = false">Done</span> --}}
+                    <span class="fs24 fw6">
+                        {{ __('velocity::app.shop.general.filter') }}
+                    </span>
+                    {{-- <span class="pull-right link-color" @click="toggleLayeredNavigation">Done</span> --}}
                 </div>
 
                 @include ('shop::products.list.layered-navigation')
@@ -142,13 +144,23 @@
                     }
                 },
 
+                watch: {
+                    layeredNavigation: function (value) {
+                        if (value) {
+                            document.body.classList.add('open-hamburger');
+                        } else {
+                            document.body.classList.remove('open-hamburger');
+                        }
+                    }
+                },
+
                 methods: {
                     toggleLayeredNavigation: function ({event, actionType}) {
                         // this.$root.navContainer = true;
                         // this.$root.responsiveSidebarTemplate = `<div slot="sidebar-body">
                         //     Hello World
                         // </div>`;
-                        this.layeredNavigation = true;
+                        this.layeredNavigation = !this.layeredNavigation;
                     }
                 }
             })

@@ -52,6 +52,14 @@
 @media only screen and (max-width: 992px) {
     $header-height: 50px;
 
+    body {
+        &.open-hamburger {
+            color: #7f7f7f;
+            opacity: 0.8;
+            overflow: hidden;
+        }
+    }
+
     .main-container-wrapper {
         // position: relative;
     }
@@ -61,16 +69,23 @@
     }
 
     .main-content-wrapper {
-        // top: 0;
         z-index: 100;
         margin-bottom: 25px;
-        // position: sticky !important;
         background-color: $white-color;
 
         .vc-header {
+            top: 0;
             margin: 0;
             padding: 0;
+            width: 100%;
+            height: $header-height;
+            position: fixed;
+            background-color: $white-color;
             box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+
+            + div {
+                margin-top: $header-height;
+            }
 
             > div {
                 display: none;
@@ -362,31 +377,31 @@
                 }
             }
 
-            .sale-section {
-                .section-content {
-                    .table {
-                        table {
-                            thead {
-                                display: none;
+            .table {
+                table {
+                    thead {
+                        display: none;
+                    }
+
+                    tr {
+                        margin-bottom: 20px;
+                        border: 1px solid $border-common;
+
+                        td {
+                            width: 100%;
+                            display: block;
+                            border-top: none;
+
+                            &:before {
+                                content: attr(data-value);
+                                font-size: 15px;
+                                font-weight: 600;
+                                display: inline-block;
+                                width: 120px;
                             }
 
-                            tr {
-                                margin-bottom: 20px;
-                                border: 1px solid $border-common;
-
-                                td {
-                                    width: 100%;
-                                    display: block;
-                                    border-top: none;
-
-                                    &:before {
-                                        content: attr(data-value);
-                                        font-size: 15px;
-                                        font-weight: 600;
-                                        display: inline-block;
-                                        width: 120px;
-                                    }
-                                }
+                            .action {
+                                display: inline-block;
                             }
                         }
                     }
@@ -540,11 +555,13 @@
 
             .filters-container {
                 left: 0px;
-                top: -15px;
+                top: 40px;
                 padding: 0;
                 width: 100%;
-                position: absolute;
+                z-index: 9;
+                position: fixed;
                 padding-bottom: 10px;
+                background-color: $white-color;
                 box-shadow: 0 2px 4px 0 rgba(0,0,0,0.21);
 
                 .toolbar-wrapper {
@@ -578,6 +595,7 @@
         top: 0px;
         left: 0px;
         width: 75%;
+        opacity: 1;
         z-index: 9999;
         height: 100vh;
         position: fixed;
@@ -619,6 +637,7 @@
                 width: 100%;
                 display: table;
                 position: sticky;
+                color: $black-color;
                 background-color: $white-color;
                 border-bottom: 1px solid $border-common;
 

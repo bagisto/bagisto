@@ -303,6 +303,24 @@
                                         @click="toggleMetaInfo('currencies')">
                                     </i>
                                 </li>
+
+                                <li>
+                                    @auth('customer')
+                                        <a
+                                            class="unset"
+                                            href="{{ route('customer.session.destroy') }}">
+                                            <span>{{ __('shop::app.header.logout') }}</span>
+                                        </a>
+                                    @endauth
+
+                                    @guest('customer')
+                                        <a
+                                            class="unset"
+                                            href="{{ route('customer.session.create') }}">
+                                            <span>{{ __('shop::app.customer.login-form.title') }}</span>
+                                        </a>
+                                    @endguest
+                                </li>
                             </ul>
                         </div>
 
@@ -660,6 +678,16 @@
                 }
             },
 
+            watch: {
+                hamburger: function (value) {
+                    if (value) {
+                        document.body.classList.add('open-hamburger');
+                    } else {
+                        document.body.classList.remove('open-hamburger');
+                    }
+                }
+            },
+
             methods: {
                 openSearchBar: function () {
                     this.isSearchbar = !this.isSearchbar;
@@ -677,20 +705,13 @@
                 },
 
                 toggleHamburger: function () {
-                    this.hamburger = true;
-
-                    // let html = $('#sidebar-categories-template').html();
-
-                    // this.$root.navContainer = true;
-                    // this.$root.responsiveSidebarKey = Math.random();
-
-                    // this.$root.responsiveSidebarTemplate = Vue.compile(html);
+                    this.hamburger = !this.hamburger;
                 },
 
                 closeDrawer: function() {
                     $('.nav-container').hide();
 
-                    this.hamburger = false;
+                    this.toggleHamburger();
                     this.rootCategories = true;
                 },
 

@@ -150,7 +150,7 @@
 
             <button
                 type="submit"
-                class="theme-btn">
+                class="theme-btn mb20">
                 {{ __('velocity::app.shop.general.update') }}
             </button>
         </form>

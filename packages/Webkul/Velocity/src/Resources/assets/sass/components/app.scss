@@ -878,6 +878,11 @@
                     }
                 }
 
+                .filter-tag {
+                    font-size: 18px;
+                    font-weight: 600;
+                }
+
                 .dropdown-filters {
                     .grid-dropdown-header {
                         display: inline-block;
@@ -926,8 +931,20 @@
 
                 ~ table {
                     &.table {
+                        thead {
+                            font-size: 18px;
+                        }
+
                         tbody {
+                            font-size: 16px;
+
                             tr {
+                                td {
+                                    a {
+                                        display: block;
+                                    }
+                                }
+
                                 .badge {
                                     padding: 10px;
                                     font-size: 12px;
@@ -1883,6 +1900,17 @@
 
         > .row {
             padding: 0 15px !important;
+        }
+    }
+
+    p {
+        > .container-fluid {
+            margin-bottom: 60px;
+            padding: 0 !important;
+
+            > .row {
+                padding: 0 15px !important;
+            }
         }
     }
 }

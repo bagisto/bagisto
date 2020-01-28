@@ -62,26 +62,3 @@
     </div>
 
 @endsection
-
-    <!-- offers and sale logos -->
-    {{-- @include('shop::home.advertisements.advertisement-one') --}}
-
-    <!-- Show Product Policy -->
-    {{-- @include('shop::home.product-policy') --}}
-
-    <!-- advertisement two -->
-    {{-- @include('shop::home.advertisements.advertisement-two') --}}
-
-    <!-- hot categories -->
-    {{-- @include('shop::home.hot-categories') --}}
-
-    <!-- Advertisement three -->
-    {{-- @include('shop::home.advertisements.advertisement-three') --}}
-
-    {{-- currently no customer reviews for the shop --}}
-
-    <!-- show customer reviews -->
-    {{-- @include('shop::home.customer-reviews') --}}
-
-    <!-- show popular categories -->
-    {{-- @include('shop::home.popular-categories') --}}
