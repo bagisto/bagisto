@@ -917,6 +917,7 @@ return [
             'state' => 'State',
             'select-state' => 'Select a region, state or province.',
             'country' => 'Country',
+            'other' => 'Other',
             'male' => 'Male',
             'female' => 'Female',
             'phone' => 'Phone',

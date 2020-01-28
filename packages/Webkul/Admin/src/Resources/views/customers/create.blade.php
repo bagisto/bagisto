@@ -52,6 +52,7 @@
                     <div class="control-group" :class="[errors.has('gender') ? 'has-error' : '']">
                         <label for="gender" class="required">{{ __('admin::app.customers.customers.gender') }}</label>
                         <select name="gender" class="control" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customers.customers.gender') }}&quot;">
+                            <option value="Other">{{ __('admin::app.customers.customers.other') }}</option>
                             <option value="Male">{{ __('admin::app.customers.customers.male') }}</option>
                             <option value="Female">{{ __('admin::app.customers.customers.female') }}</option>
                         </select>

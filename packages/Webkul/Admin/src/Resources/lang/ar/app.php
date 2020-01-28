@@ -760,6 +760,7 @@ return [
             'state' => 'State',
             'select-state' => 'اختر منطقة أو ولاية أو مقاطعة.',
             'country' => 'Country',
+            'other' => 'Other',
             'male' => 'Male',
             'female' => 'Female',
             'phone' => 'Phone',
