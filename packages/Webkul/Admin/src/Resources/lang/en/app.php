@@ -867,6 +867,7 @@ return [
 
         'addresses' => [
             'title' => ':customer_name\'s Addresses List',
+            'vat_id' => 'Vat id',
             'create-title' => 'Create Customer\'s Address',
             'edit-title' => 'Update Customer\'s Address',
             'title-orders' => ':customer_name\'s Orders List',
@@ -917,12 +918,14 @@ return [
             'state' => 'State',
             'select-state' => 'Select a region, state or province.',
             'country' => 'Country',
+            'other' => 'Other',
             'male' => 'Male',
             'female' => 'Female',
             'phone' => 'Phone',
             'group-default' => 'Cannot delete the default group.',
             'edit-help-title' => 'Edit Customer',
             'delete-help-title' => 'Delete Customer',
+            'addresses' => 'Addresses',
             'mass-destroy-success' => 'Customers deleted successfully',
             'mass-update-success' => 'Customers updated successfully',
             'status' => 'Status',
