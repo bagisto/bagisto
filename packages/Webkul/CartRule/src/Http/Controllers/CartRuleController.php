@@ -97,11 +97,11 @@ class CartRuleController extends Controller
 
         $data = request()->all();
 
-        Event::fire('promotions.cart_rule.create.before');
+        Event::dispatch('promotions.cart_rule.create.before');
 
         $cartRule = $this->cartRuleRepository->create($data);
 
-        Event::fire('promotions.cart_rule.create.after', $cartRule);
+        Event::dispatch('promotions.cart_rule.create.after', $cartRule);
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Cart Rule']));
 
@@ -145,11 +145,11 @@ class CartRuleController extends Controller
 
         $cartRule = $this->cartRuleRepository->findOrFail($id);
 
-        Event::fire('promotions.cart_rule.update.before', $cartRule);
+        Event::dispatch('promotions.cart_rule.update.before', $cartRule);
 
         $cartRule = $this->cartRuleRepository->update(request()->all(), $id);
 
-        Event::fire('promotions.cart_rule.update.after', $cartRule);
+        Event::dispatch('promotions.cart_rule.update.after', $cartRule);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Cart Rule']));
 
@@ -167,11 +167,11 @@ class CartRuleController extends Controller
         $cartRule = $this->cartRuleRepository->findOrFail($id);
 
         try {
-            Event::fire('promotions.cart_rule.delete.before', $id);
+            Event::dispatch('promotions.cart_rule.delete.before', $id);
 
             $this->cartRuleRepository->delete($id);
 
-            Event::fire('promotions.cart_rule.delete.after', $id);
+            Event::dispatch('promotions.cart_rule.delete.after', $id);
 
             session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Cart Rule']));
 

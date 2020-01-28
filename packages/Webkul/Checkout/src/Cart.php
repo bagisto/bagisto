@@ -12,6 +12,7 @@ use Webkul\Checkout\Models\CartPayment;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Arr;
 
 /**
  * Facades handler for all the methods to be implemented in Cart.
@@ -131,7 +132,7 @@ class Cart {
      */
     public function addProduct($productId, $data)
     {
-        Event::fire('checkout.cart.add.before', $productId);
+        Event::dispatch('checkout.cart.add.before', $productId);
 
         $cart = $this->getCart();
 
@@ -145,6 +146,10 @@ class Cart {
 
         if (is_string($cartProducts)) {
             $this->collectTotals();
+
+            if (! count($cart->all_items) > 0) {
+                session()->forget('cart');
+            }
 
             throw new \Exception($cartProducts);
         } else {
@@ -175,7 +180,7 @@ class Cart {
             }
         }
 
-        Event::fire('checkout.cart.add.after', $cart);
+        Event::dispatch('checkout.cart.add.after', $cart);
 
         $this->collectTotals();
 
@@ -249,7 +254,7 @@ class Cart {
             if (! $this->isItemHaveQuantity($item))
                 throw new \Exception(trans('shop::app.checkout.cart.quantity.inventory_warning'));
 
-            Event::fire('checkout.cart.update.before', $item);
+            Event::dispatch('checkout.cart.update.before', $item);
 
             $this->cartItemRepository->update([
                     'quantity' => $quantity,
@@ -259,7 +264,7 @@ class Cart {
                     'base_total_weight' => $item->weight * $quantity
                 ], $itemId);
 
-            Event::fire('checkout.cart.update.after', $item);
+            Event::dispatch('checkout.cart.update.after', $item);
         }
 
         $this->collectTotals();
@@ -297,7 +302,7 @@ class Cart {
      */
     public function removeItem($itemId)
     {
-        Event::fire('checkout.cart.delete.before', $itemId);
+        Event::dispatch('checkout.cart.delete.before', $itemId);
 
         if (! $cart = $this->getCart())
             return false;
@@ -313,28 +318,9 @@ class Cart {
             }
         }
 
-        Event::fire('checkout.cart.delete.after', $itemId);
+        Event::dispatch('checkout.cart.delete.after', $itemId);
 
         $this->collectTotals();
-
-        return true;
-    }
-
-    /**
-     * Clear cart
-     * @return bool
-     */
-    public function clear(): bool
-    {
-        if (! $cart = $this->getCart()) {
-            return false;
-        }
-
-        $this->cartRepository->delete($cart->id);
-
-        if (session()->has('cart')) {
-            session()->forget('cart');
-        }
 
         return true;
     }
@@ -638,7 +624,7 @@ class Cart {
         if (! $cart = $this->getCart())
             return false;
 
-        Event::fire('checkout.cart.collect.totals.before', $cart);
+        Event::dispatch('checkout.cart.collect.totals.before', $cart);
 
         $this->calculateItemsTax();
 
@@ -681,7 +667,7 @@ class Cart {
 
         $cart->save();
 
-        Event::fire('checkout.cart.collect.totals.after', $cart);
+        Event::dispatch('checkout.cart.collect.totals.after', $cart);
     }
 
     /**
@@ -871,8 +857,8 @@ class Cart {
             'applied_cart_rule_ids' => $data['applied_cart_rule_ids'],
             'discount_amount' => $data['discount_amount'],
             'base_discount_amount' => $data['base_discount_amount'],
-            'billing_address' => array_except($data['billing_address'], ['id', 'cart_id']),
-            'payment' => array_except($data['payment'], ['id', 'cart_id']),
+            'billing_address' => Arr::except($data['billing_address'], ['id', 'cart_id']),
+            'payment' => Arr::except($data['payment'], ['id', 'cart_id']),
             'channel' => core()->getCurrentChannel(),
         ];
 
@@ -883,9 +869,9 @@ class Cart {
                 'shipping_description' => $data['selected_shipping_rate']['method_description'],
                 'shipping_amount' => $data['selected_shipping_rate']['price'],
                 'base_shipping_amount' => $data['selected_shipping_rate']['base_price'],
+                'shipping_address' => Arr::except($data['shipping_address'], ['id', 'cart_id']),
                 'shipping_discount_amount' => $data['selected_shipping_rate']['discount_amount'],
                 'base_shipping_discount_amount' => $data['selected_shipping_rate']['base_discount_amount'],
-                'shipping_address' => array_except($data['shipping_address'], ['id', 'cart_id']),
             ]);
         }
 

@@ -22,14 +22,14 @@ class Downloadable extends AbstractType
 {
     /**
      * ProductDownloadableLinkRepository instance
-     * 
+     *
      * @var ProductDownloadableLinkRepository
     */
     protected $productDownloadableLinkRepository;
 
     /**
      * ProductDownloadableSampleRepository instance
-     * 
+     *
      * @var ProductDownloadableSampleRepository
     */
     protected $productDownloadableSampleRepository;
@@ -39,11 +39,11 @@ class Downloadable extends AbstractType
      *
      * @var array
      */
-    protected $skipAttributes = ['width', 'height', 'depth', 'weight'];
+    protected $skipAttributes = ['width', 'height', 'depth', 'weight', 'guest_checkout'];
 
     /**
      * These blade files will be included in product edit page
-     * 
+     *
      * @var array
      */
     protected $additionalViews = [
@@ -111,7 +111,7 @@ class Downloadable extends AbstractType
 
         if (request()->route()->getName() != 'admin.catalog.products.massupdate') {
             $this->productDownloadableLinkRepository->saveLinks($data, $product);
-            
+
             $this->productDownloadableSampleRepository->saveSamples($data, $product);
         }
 
@@ -127,11 +127,11 @@ class Downloadable extends AbstractType
     {
         if (! $this->product->status)
             return false;
-        
+
         if ($this->product->downloadable_links()->count())
             return true;
 
-        return false;            
+        return false;
     }
 
     /**
@@ -177,7 +177,7 @@ class Downloadable extends AbstractType
 
         return $products;
     }
-    
+
     /**
      *
      * @param array $options1

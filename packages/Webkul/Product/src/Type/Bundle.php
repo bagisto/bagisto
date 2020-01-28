@@ -181,7 +181,7 @@ class Bundle extends AbstractType
         }
 
         if (! $haveRequiredOptions)
-            $minPrice = min($minPrices);
+            $minPrice = count($minPrices) ? min($minPrices) : 0;
 
         return $minPrice;
     }
@@ -405,7 +405,9 @@ class Bundle extends AbstractType
      */
     public function prepareForCart($data)
     {
-        $data['bundle_options'] = array_filter($this->validateBundleOptionForCart($data['bundle_options']));
+
+        if (isset($data['bundle_options']))
+            $data['bundle_options'] = array_filter($this->validateBundleOptionForCart($data['bundle_options']));
 
         if (! isset($data['bundle_options']) || ! count($data['bundle_options']))
             return trans('shop::app.checkout.cart.integrity.missing_options');

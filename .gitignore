@@ -1,3 +1,5 @@
+/docker-compose-collection
+/bin
 /node_modules
 /public/hot
 /public/storage
@@ -15,7 +17,6 @@ npm-debug.log
 yarn-error.log
 .env
 /ignorables/*
-composer.lock
 yarn.lock
 package-lock.json
 yarn.lock

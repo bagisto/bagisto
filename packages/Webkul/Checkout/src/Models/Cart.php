@@ -138,12 +138,27 @@ class Cart extends Model implements CartContract
      */
     public function hasProductsWithQuantityBox(): bool
     {
-        $result = true;
         foreach ($this->items as $item) {
             if ($item->product->getTypeInstance()->showQuantityBox() === true) {
-                $result = false;
+                return true;
             }
         }
-        return $result;
+        return false;
+    }
+
+    /**
+     * Checks if cart has items that allow guest checkout
+     *
+     * @return boolean
+     */
+    public function hasGuestCheckoutItems()
+    {
+        foreach ($this->items as $item) {
+            if ($item->product->getAttribute('guest_checkout') === 0) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

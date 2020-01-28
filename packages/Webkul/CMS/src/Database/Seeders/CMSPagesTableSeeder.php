@@ -2,15 +2,16 @@
 
 namespace Webkul\CMS\Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use DB;
 use Carbon\Carbon;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class CMSPagesTableSeeder extends Seeder
 {
     public function run()
     {
         DB::table('cms_pages')->delete();
+        DB::table('cms_page_translations')->delete();
 
         DB::table('cms_pages')->insert([
             [

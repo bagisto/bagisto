@@ -202,8 +202,6 @@ input {
 }
 
 .add-to-wishlist.already {
-    pointer-events: none;
-
     .wishlist-icon {
         background-image: url('../images/wishlist-added.svg') !important;
     }
@@ -2979,6 +2977,7 @@ section.review {
             .product-price {
                 margin-top: 10px;
                 word-break: break-all;
+
                 .pro-price {
                     color: $disc-price;
                 }
