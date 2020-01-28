@@ -11,7 +11,7 @@ class CustomerAddress extends Model implements CustomerAddressContract
     protected $fillable = ['customer_id' ,'address1', 'country', 'state', 'city', 'postcode', 'phone', 'default_address', 'first_name', 'last_name'];
 
     /**
-     * Get the customer full name.
+     * Get the customer address full name.
      */
     public function getNameAttribute()
     {
