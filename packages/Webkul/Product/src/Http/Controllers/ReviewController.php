@@ -105,6 +105,7 @@ class ReviewController extends Controller
 
             return response()->json(['message' => true], 200);
         } catch (\Exception $e) {
+            report($e);
             session()->flash('success', trans('admin::app.response.delete-failed', ['name' => 'Review']));
         }
 

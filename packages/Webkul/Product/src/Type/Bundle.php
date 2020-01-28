@@ -523,7 +523,7 @@ class Bundle extends AbstractType
      */
     public function getAdditionalOptions($data)
     {
-        $bundleOptionQuantities = $data['bundle_option_qty'];
+        $bundleOptionQuantities = $data['bundle_option_qty'] ?? [];
 
         foreach ($data['bundle_options'] as $optionId => $optionProductIds) {
             $option = $this->productBundleOptionRepository->find($optionId);

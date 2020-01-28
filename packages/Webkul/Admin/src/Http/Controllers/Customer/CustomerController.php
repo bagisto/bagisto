@@ -122,7 +122,7 @@ class CustomerController extends Controller
         try {
             Mail::queue(new NewCustomerNotification($customer, $password));
         } catch (\Exception $e) {
-
+            report($e);
         }
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Customer']));

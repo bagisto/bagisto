@@ -75,6 +75,7 @@ class SubscriptionController extends Controller
 
                 session()->flash('success', trans('shop::app.subscription.subscribed'));
             } catch (\Exception $e) {
+                report($e);
                 session()->flash('error', trans('shop::app.subscription.not-subscribed'));
 
                 $mailSent = false;

@@ -61,6 +61,7 @@ class GenerateProducts extends Command
                     try {
                         $result = $this->generateProduct->create();
                     } catch (\Exception $e) {
+                        report($e);
                         continue;
                     }
 

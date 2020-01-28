@@ -20,6 +20,16 @@ class CustomerAddress extends Model implements CustomerAddressContract
         'city',
         'postcode',
         'phone',
-        'default_address',
+	'default_address',
+	'first_name',
+	'last_name',
     ];
+
+    /**
+     * Get the customer address full name.
+     */
+    public function getNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
 }
