@@ -52,7 +52,7 @@
 
                             <div class="control-group" :class="[errors.has('{{$locale}}[name]') ? 'has-error' : '']">
                                 <label for="name" class="required">{{ __('admin::app.catalog.categories.name') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="name" name="{{$locale}}[name]" value="{{ old($locale)['name'] ?? $category->translate($locale)['name'] }}" data-vv-as="&quot;{{ __('admin::app.catalog.categories.name') }}&quot;"/>
+                                <input type="text" v-validate="'required'" class="control" id="name" name="{{$locale}}[name]" value="{{ old($locale)['name'] ?? $category->translate($locale)['name'] }}" data-vv-as="&quot;{{ __('admin::app.catalog.categories.name') }}&quot;" v-slugify-target="'slug'"/>
                                 <span class="control-error" v-if="errors.has('{{$locale}}[name]')">@{{ errors.first('{!!$locale!!}[name]') }}</span>
                             </div>
 
