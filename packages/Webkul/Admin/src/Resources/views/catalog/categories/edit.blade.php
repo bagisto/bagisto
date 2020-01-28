@@ -109,7 +109,7 @@
                             <description></description>
 
                             <div class="control-group {!! $errors->has('image.*') ? 'has-error' : '' !!}">
-                                <label>{{ __('admin::app.catalog.categories.image') }}
+                                <label>{{ __('admin::app.catalog.categories.image') }}</label>
 
                                 <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="image" :multiple="false"  :images='"{{ $category->image_url }}"'></image-wrapper>
 
