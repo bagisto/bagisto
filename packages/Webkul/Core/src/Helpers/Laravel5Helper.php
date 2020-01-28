@@ -130,7 +130,7 @@ class Laravel5Helper extends Laravel5
     private function haveVirtualProduct(array $configs = [], array $productStates = []): Product
     {
         $I = $this;
-        if (!in_array('simple', $productStates)) {
+        if (!in_array('virtual', $productStates)) {
             $productStates = array_merge($productStates, ['virtual']);
         }
 
