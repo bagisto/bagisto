@@ -797,6 +797,7 @@ return [
             'group-default' => 'Não possível excluir o grupo de cliente.',
             'edit-help-title' => 'Editar cliente',
             'delete-help-title' => 'Excluir cliente',
+            'addresses' => 'Addresses',
             'mass-destroy-success' => 'Clientes excluídos com sucesso',
             'mass-update-success' => 'Clientes atualizados com sucesso',
             'status' => 'Status',

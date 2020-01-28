@@ -924,6 +924,7 @@ return [
             'group-default' => 'Cannot delete the default group.',
             'edit-help-title' => 'Edit Customer',
             'delete-help-title' => 'Delete Customer',
+            'addresses' => 'Addresses',
             'mass-destroy-success' => 'Customers deleted successfully',
             'mass-update-success' => 'Customers updated successfully',
             'status' => 'Status',
