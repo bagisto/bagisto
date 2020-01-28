@@ -791,6 +791,7 @@ return [
             'state' => 'Estado',
             'select-state' => 'Selecione uma região, estado ou província.',
             'country' => 'País',
+            'other' => 'Other',
             'male' => 'Masculino',
             'female' => 'Feminino',
             'phone' => 'Telefone',
