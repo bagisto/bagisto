@@ -45,6 +45,14 @@ class BundleOption extends AbstractProduct
             $options[$option->id] = $this->getOptionItemData($option);
         }
 
+        usort ($options, function($a, $b) {
+            if ($a['sort_order'] == $b['sort_order']) {
+                return 0;
+            }
+
+            return ($a['sort_order'] < $b['sort_order']) ? -1 : 1;
+        });
+
         return $options;
     }
 
@@ -68,7 +76,7 @@ class BundleOption extends AbstractProduct
 
     /**
      * Get formed data from bundle option product
-     * 
+     *
      * @param ProductBundleOption $option
      * @return array
      */
@@ -83,9 +91,18 @@ class BundleOption extends AbstractProduct
                 'price' => $bundleOptionProduct->product->getTypeInstance()->getProductPrices(),
                 'name' => $bundleOptionProduct->product->name,
                 'product_id' => $bundleOptionProduct->product_id,
-                'is_default' => $bundleOptionProduct->is_default
+                'is_default' => $bundleOptionProduct->is_default,
+                'sort_order' => $bundleOptionProduct->sort_order
             ];
         }
+
+        usort ($products, function($a, $b) {
+            if ($a['sort_order'] == $b['sort_order']) {
+                return 0;
+            }
+
+            return ($a['sort_order'] < $b['sort_order']) ? -1 : 1;
+        });
 
         return $products;
     }

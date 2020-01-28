@@ -167,6 +167,7 @@ class AttributeController extends Controller
                         $this->attributeRepository->delete($value);
                     }
                 } catch (\Exception $e) {
+                    report($e);
                     $suppressFlash = true;
 
                     continue;

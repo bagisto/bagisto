@@ -51,8 +51,8 @@
                             <div class="control-group" :class="[errors.has('direction') ? 'has-error' : '']">
                                 <label for="direction" class="required">{{ __('admin::app.settings.locales.direction') }}</label>
                                 <select v-validate="'required'" class="control" id="direction" name="direction" data-vv-as="&quot;{{ __('admin::app.settings.locales.direction') }}&quot;">
-                                    <option value="ltr" {{ old('direction') == 'ltr' ? 'selected' : '' }} title="Text direction left to right">ltr</option>
-                                    <option value="rtl" {{ old('direction') == 'rtl' ? 'selected' : '' }} title="Text direction right to left">rtl</option>
+                                    <option value="ltr" {{ (old('direction') ?: $locale->direction) == 'ltr' ? 'selected' : '' }}>LTR</option>
+                                    <option value="rtl" {{ (old('direction') ?: $locale->direction) == 'rtl' ? 'selected' : '' }}>RTL</option>
                                 </select>
                                 <span class="control-error" v-if="errors.has('direction')">@{{ errors.first('direction') }}</span>
                             </div>
