@@ -10,6 +10,12 @@
     @endphp
 
     @if ($products->count())
+        <category-products></category-products>
+    @endif
+@endif
+
+@push('scripts')
+    <script type="text/x-template" id="category-products-template">
         <div class="container-fluid">
             <card-list-header
                 view-all="{{ route('shop.productOrCategory.index', $categoryDetails->slug) }}"
@@ -48,5 +54,13 @@
                 </carousel-component>
             </div>
         </div>
-    @endif
-@endif
+    </script>
+
+    <script type="text/javascript">
+        (() => {
+            Vue.component('category-products', {
+                template: '#category-products-template',
+            })
+        })()
+    </script>
+@endpush

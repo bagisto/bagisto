@@ -746,6 +746,18 @@ button[disabled] {
     appearance:none;
     -moz-appearance:none; /* Firefox */
     -webkit-appearance:none; /* Safari and Chrome */
+
+    + .select-icon-contanier {
+        position: relative;
+
+        .select-icon {
+            top: -24px;
+            left: unset;
+            right: 10px;
+            font-size: 16px;
+            position: absolute;
+        }
+    }
 }
 
 .select-icon {

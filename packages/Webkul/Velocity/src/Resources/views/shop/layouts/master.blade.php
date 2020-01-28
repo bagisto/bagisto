@@ -134,6 +134,8 @@
 
         <script type="text/javascript">
             (() => {
+                var baseURL = '{{ url()->to('/') }}';
+
                 var showAlert = (messageType, messageLabel, message) => {
                     if (messageType && message !== '') {
                         let html = `<div class="alert ${messageType} alert-dismissible" id="alert">

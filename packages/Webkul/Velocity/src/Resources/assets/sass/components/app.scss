@@ -724,7 +724,6 @@
 
                 li {
                     width: 100%;
-                    padding: 10px 15px;
 
                     &:hover,
                     &.active {
@@ -763,6 +762,10 @@
                                 content: "\e926";
                             }
                         }
+                    }
+
+                    a {
+                        padding: 10px 15px;
                     }
                 }
 
@@ -843,13 +846,39 @@
             }
 
             #datagrid-filters {
-                .dropdown-filters {
-                    right: 0;
-                    padding: 0;
-                    width: 220px;
-                    border: unset;
-                    position: relative;
+                margin-bottom: 20px;
 
+                > * {
+                    display: inline-block;
+                    vertical-align: top;
+
+                    &.search-filter {
+                        top: 20px;
+                        max-width: 200px;
+                        margin-right: 20px;
+                        position: relative;
+                    }
+
+                    &:nth-of-type(2) {
+                        width: calc(50% - 10px);
+                    }
+
+                    &:nth-of-type(3) {
+                        width: calc(50% - 220px);
+
+                        .control-group {
+                            float: right;
+                            max-width: 200px;
+                        }
+                    }
+
+                    input,
+                    select {
+                        height: 38px;
+                    }
+                }
+
+                .dropdown-filters {
                     .grid-dropdown-header {
                         display: inline-block;
                     }
@@ -860,17 +889,12 @@
                         }
                     }
 
-                    .dropdown-toggle {
-                        margin-right: 13px;
-                        vertical-align: top;
-                        display: inline-block;
-                    }
-
                     .dropdown-toggle:after {
                         border: unset;
                     }
 
                     .dropdown-container {
+                        width: 100%;
                         display: inline-block !important;
 
                         button {
@@ -887,6 +911,11 @@
 
                         li:not(:last-child) {
                             margin-bottom: 10px;
+                        }
+
+                        li {
+                            width: 150px;
+                            display: inline-block;
                         }
                     }
 
@@ -922,22 +951,6 @@
                                     }
                                 }
                             }
-                        }
-                    }
-                }
-
-                .dropdown-filters:nth-child(2) {
-                    top: 25px;
-                    width: 100%;
-                    display: block;
-                    padding-left: 30px;
-
-                    .dropdown-container {
-                        width: 100%;
-
-                        li {
-                            width: 150px;
-                            display: inline-block;
                         }
                     }
                 }
@@ -1036,11 +1049,13 @@
                     list-style-type: none;
 
                     li {
+                        cursor: pointer;
                         padding: 10px 15px;
                         display: inline-block;
                         border-bottom: 2px solid transparent;
 
                         &.active {
+                            cursor: default;
                             border-bottom: 2px solid $theme-color;
                         }
                     }
@@ -1071,6 +1086,20 @@
 
                             .sale-summary {
                                 float: right;
+
+                                tbody {
+                                    tr {
+                                        td:first-child {
+                                            width: 200px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        .table {
+                            table {
+                                width: 100%;
                             }
                         }
                     }
@@ -1081,7 +1110,7 @@
                 padding: 10px 0;
 
                 .box {
-                    width: 24%;
+                    width: calc(25% - 5px);
                     vertical-align: top;
                     display: inline-block;
 
@@ -1400,6 +1429,16 @@
         margin-right: 10px;
         text-decoration: line-through;
     }
+
+    span {
+        &.price-label {
+            font-size: 16px;
+        }
+
+        &.final-price {
+            font-size: 24px;
+        }
+    }
 }
 
 #app {
@@ -1553,8 +1592,9 @@
 
         ul {
             li {
-                margin-bottom: 15px;
                 width: 100%;
+                font-size: 18px;
+                margin-bottom: 10px;
                 display: inline-block;
 
                 &:last-child {
@@ -1574,18 +1614,9 @@
                 }
 
                 .name {
+                    font-size: 16px;
                     vertical-align: middle;
                     display: inline-block;
-
-                    .product-price {
-                        margin-top: 5px;
-                        margin-bottom: 0;
-                        font-size: 14px;
-
-                        .special-price {
-                            font-size: 16px;
-                        }
-                    }
                 }
 
                 .qty {

@@ -65,7 +65,6 @@
                                         </thead>
 
                                         <tbody>
-
                                             @foreach ($order->items as $item)
                                                 <tr>
                                                     <td data-value="{{ __('shop::app.customer.account.order.view.SKU') }}">
@@ -139,14 +138,12 @@
                                         <tbody>
                                             <tr>
                                                 <td>{{ __('shop::app.customer.account.order.view.subtotal') }}</td>
-                                                <td>-</td>
                                                 <td>{{ core()->formatPrice($order->sub_total, $order->order_currency_code) }}</td>
                                             </tr>
 
                                             @if ($order->haveStockableItems())
                                                 <tr>
                                                     <td>{{ __('shop::app.customer.account.order.view.shipping-handling') }}</td>
-                                                    <td>-</td>
                                                     <td>{{ core()->formatPrice($order->shipping_amount, $order->order_currency_code) }}</td>
                                                 </tr>
                                             @endif
@@ -154,38 +151,32 @@
                                             @if ($order->base_discount_amount > 0)
                                                 <tr>
                                                     <td>{{ __('shop::app.customer.account.order.view.discount') }}</td>
-                                                    <td>-</td>
                                                     <td>{{ core()->formatPrice($order->discount_amount, $order->order_currency_code) }}</td>
                                                 </tr>
                                             @endif
 
                                             <tr class="border-bottom">
                                                 <td>{{ __('shop::app.customer.account.order.view.tax') }}</td>
-                                                <td>-</td>
                                                 <td>{{ core()->formatPrice($order->tax_amount, $order->order_currency_code) }}</td>
                                             </tr>
 
                                             <tr class="fw6">
                                                 <td>{{ __('shop::app.customer.account.order.view.grand-total') }}</td>
-                                                <td>-</td>
                                                 <td>{{ core()->formatPrice($order->grand_total, $order->order_currency_code) }}</td>
                                             </tr>
 
                                             <tr class="fw6">
                                                 <td>{{ __('shop::app.customer.account.order.view.total-paid') }}</td>
-                                                <td>-</td>
                                                 <td>{{ core()->formatPrice($order->grand_total_invoiced, $order->order_currency_code) }}</td>
                                             </tr>
 
                                             <tr class="fw6">
                                                 <td>{{ __('shop::app.customer.account.order.view.total-refunded') }}</td>
-                                                <td>-</td>
                                                 <td>{{ core()->formatPrice($order->grand_total_refunded, $order->order_currency_code) }}</td>
                                             </tr>
 
                                             <tr class="fw6">
                                                 <td>{{ __('shop::app.customer.account.order.view.total-due') }}</td>
-                                                <td>-</td>
                                                 <td>{{ core()->formatPrice($order->total_due, $order->order_currency_code) }}</td>
                                             </tr>
                                         <tbody>
@@ -201,7 +192,7 @@
                             @foreach ($order->invoices as $invoice)
 
                                 <div class="sale-section">
-                                    <div class="secton-title">
+                                    <div class="section-title">
                                         <span>{{ __('shop::app.customer.account.order.view.individual-invoice', ['invoice_id' => $invoice->id]) }}</span>
 
                                         <a href="{{ route('customer.orders.print', $invoice->id) }}" class="pull-right">
@@ -310,7 +301,7 @@
                             @foreach ($order->shipments as $shipment)
 
                                 <div class="sale-section">
-                                    <div class="secton-title">
+                                    <div class="section-title">
                                         <span>{{ __('shop::app.customer.account.order.view.individual-shipment', ['shipment_id' => $shipment->id]) }}</span>
                                     </div>
 
@@ -355,7 +346,7 @@
                             @foreach ($order->refunds as $refund)
 
                                 <div class="sale-section">
-                                    <div class="secton-title">
+                                    <div class="section-title">
                                         <span>{{ __('shop::app.customer.account.order.view.individual-refund', ['refund_id' => $refund->id]) }}</span>
                                     </div>
 

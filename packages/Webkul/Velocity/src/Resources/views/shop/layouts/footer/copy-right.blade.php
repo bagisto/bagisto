@@ -1,5 +1,5 @@
 <div class="footer-copy-right">
-    <span class="fs16">
+    <span>
         @if (core()->getConfigData('general.content.footer.footer_content'))
             {!! core()->getConfigData('general.content.footer.footer_content') !!}
         @else

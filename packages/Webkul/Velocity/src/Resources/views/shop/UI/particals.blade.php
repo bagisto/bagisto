@@ -83,7 +83,7 @@
 
 <script type="text/x-template" id="searchbar-template">
     <div class="row no-margin right searchbar">
-        <div class="col-8 no-padding input-group">
+        <div class="col-lg-8 col-md-12 no-padding input-group">
             <form
                 method="GET"
                 role="search"

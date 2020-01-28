@@ -21,16 +21,16 @@
                     <div class="control-group">
                         <select class="control" id="locale-switcher" onChange="window.location.href = this.value">
                             @foreach (core()->getAllLocales() as $localeModel)
-    
+
                                 <option value="{{ route('velocity.admin.content.update', $content->id) . '?locale=' . $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
                                     {{ $localeModel->name }}
                                 </option>
-    
+
                             @endforeach
                         </select>
                     </div>
                 </div>
-                
+
                 <div class="page-action">
                     <button type="submit" class="btn btn-lg btn-primary">
                         {{ __('velocity::app.admin.contents.save-btn-title') }}
@@ -57,7 +57,7 @@
                                 <span class="locale">[{{ $locale }}]</span>
                             </label>
                             <input type="text" v-validate="'required|max:100'" class="control" id="title" name="{{$locale}}[title]" value="{{ old($locale)['title'] ?: $content->translate($locale)['title'] }}" data-vv-as="&quot;{{ __('velocity::app.admin.contents.page.title') }}&quot;"/>
-                            
+
                             <span class="control-error" v-if="errors.has('{{$locale}}[title]')">@{{ errors.first('{!!$locale!!}[title]') }}</span>
                         </div>
 
@@ -123,35 +123,35 @@
                     <span class="locale">[{{ $locale }}]</span>
                 </label>
                 <input type="text" v-validate="'max:100'" class="control" id="custom_title" name="{{$locale}}[custom_title]" value="{{ old($locale)['custom_title'] ?: $content->translate($locale)['custom_title'] }}" data-vv-as="&quot;{{ __('velocity::app.admin.contents.content.custom-title') }}&quot;"/>
-            
+
                 <span class="control-error" v-if="errors.has('{{$locale}}[custom_title]')">@{{ errors.first('{!!$locale!!}[custom_title]') }}</span>
             </div>
-            
+
             <div class="control-group" :class="[errors.has('{{$locale}}[custom_heading]') ? 'has-error' : '']">
                 <label for="custom_heading">
                     {{ __('velocity::app.admin.contents.content.custom-heading') }}
                     <span class="locale">[{{ $locale }}]</span>
                 </label>
                 <input type="text" v-validate="'max:100'" class="control" id="custom_heading" name="{{$locale}}[custom_heading]" value="{{ old($locale)['custom_heading'] ?: $content->translate($locale)['custom_title'] }}" data-vv-as="&quot;{{ __('velocity::app.admin.contents.content.custom-heading') }}&quot;"/>
-            
+
                 <span class="control-error" v-if="errors.has('{{$locale}}[custom_heading]')">@{{ errors.first('{!!$locale!!}[custom_heading]') }}</span>
             </div>
-        
+
             <div class="control-group" :class="[errors.has('content_type') ? 'has-error' : '']">
                 <label for="content_type" class="required">{{ __('velocity::app.admin.contents.content.content-type') }}</label>
 
                 <?php $contentType = $content->content_type; ?>
-                
+
                 <select class="control" v-model="content_type" v-validate="'required'" id="content_type" name="content_type" data-vv-as="&quot;{{ __('velocity::app.admin.contents.content.content-type') }}&quot;" @change="loadFields($event)">
                     <option value="">{{ __('velocity::app.admin.contents.select') }}</option>
 
                     @foreach (velocity()->getContentType() as $key => $content_type)
-                    
+
                         <option value="{{ $key }}" {{ $contentType == $key ? 'selected' : '' }}>{{ $content_type }}</option>
-                        
+
                     @endforeach
                 </select>
-                
+
                 <span class="control-error" v-if="errors.has('content_type')">@{{ errors.first('content_type') }}</span>
             </div>
 
@@ -161,13 +161,13 @@
                 <div class="control-group" :class="[errors.has('{{$locale}}[page_link]') ? 'has-error' : '']">
                     <label for="page_link" class="required">{{ __('velocity::app.admin.contents.content.page-link') }}</label>
                     <input type="text" v-validate="'required|max:150'" class="control" id="page_link" name="{{$locale}}[page_link]" value="{{ old($locale)['page_link'] ?: $content->translate($locale)['page_link'] }}" data-vv-as="&quot;{{ __('velocity::app.admin.contents.content.page-link') }}&quot;"/>
-            
+
                     <span class="control-error" v-if="errors.has('{{$locale}}[page_link]')">@{{ errors.first('{!!$locale!!}[page_link]') }}</span>
                 </div>
-            
+
                 <div class="control-group">
                     <label for="link_target">{{ __('velocity::app.admin.contents.content.link-target') }}</label>
-                    
+
                     <select class="control" id="link_target" name="link_target" value="">
                         <option value="0" {{ !$content->link_target ? 'selected' : '' }}>
                             {{ __('velocity::app.admin.contents.self') }}
@@ -177,7 +177,7 @@
                         </option>
                     </select>
                 </div>
-                
+
                 {!! view_render_event('bagisto.admin.content.edit_form_accordian.content.link.after', ['content' => $content]) !!}
             </div>
             <div v-else-if="content_type == 'product'">
@@ -185,20 +185,20 @@
             </div>
             <div v-else-if="content_type == 'static'">
                 {!! view_render_event('bagisto.admin.content.edit_form_accordian.content.static.before', ['content' => $content]) !!}
-                
+
                 <div class="control-group" :class="[errors.has('{{$locale}}[description]') ? 'has-error' : '']">
                     <label for="description" class="required">{{ __('velocity::app.admin.contents.content.static-description') }}</label>
-                    
-                    <textarea v-validate="'required'" class="control" id="description" name="{{$locale}}[description]" data-vv-as="&quot;{{ __('velocity::app.admin.contents.content.static-description') }}&quot;">{{ old($locale)['description'] ?: $content->translate($locale)['description'] }}</textarea> 
-            
+
+                    <textarea v-validate="'required'" class="control" id="description" name="{{$locale}}[description]" data-vv-as="&quot;{{ __('velocity::app.admin.contents.content.static-description') }}&quot;">{{ old($locale)['description'] ?: $content->translate($locale)['description'] }}</textarea>
+
                     <span class="control-error" v-if="errors.has('{{$locale}}[description]')">@{{ errors.first('{!!$locale!!}[description]') }}</span>
                 </div>
 
                 {!! view_render_event('bagisto.admin.content.edit_form_accordian.content.static.after', ['content' => $content]) !!}
             </div>
-            
+
         </div>
-        
+
     </script>
 
     <script>

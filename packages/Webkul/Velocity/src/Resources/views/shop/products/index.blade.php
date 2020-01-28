@@ -65,11 +65,9 @@
                 </div> --}}
             </div>
 
-            @if ($products->count())
-                <div class="filters-container">
-                    @include ('shop::products.list.toolbar')
-                </div>
-            @endif
+            <div class="filters-container" v-if="isMobile()">
+                @include ('shop::products.list.toolbar')
+            </div>
 
             <div
                 class="category-block"
@@ -111,7 +109,6 @@
                         {!! view_render_event('bagisto.shop.productOrCategory.index.pagination.after', ['category' => $category]) !!}
 
                     @else
-
                         <div class="product-list empty">
                             <h2>{{ __('shop::app.products.whoops') }}</h2>
 

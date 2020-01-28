@@ -77,7 +77,7 @@
             </div>
         </div>
 
-        <div class="toolbar-wrapper row" v-else>
+        <div class="toolbar-wrapper row col-12 remove-padding-margin" v-else>
             <div v-if="layeredNavigation" class="nav-container scrollable">
                 <div class="header drawer-section">
                     <i class="material-icons" @click="layeredNavigation = false">keyboard_backspace</i>

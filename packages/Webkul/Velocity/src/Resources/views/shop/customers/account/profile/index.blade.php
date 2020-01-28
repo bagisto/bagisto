@@ -49,7 +49,7 @@
                 </div>
             </div>
 
-            <div class="row mb-0">
+            <div class="row">
                 <label class="col-12">
                     {{ __('shop::app.customer.account.profile.gender') }}
                 </label>
@@ -87,7 +87,9 @@
                         </option>
                     </select>
 
-                    <span class="select-icon rango-arrow-down"></span>
+                    <div class="select-icon-contanier">
+                        <span class="select-icon rango-arrow-down"></span>
+                    </div>
                 </div>
 
             </div>

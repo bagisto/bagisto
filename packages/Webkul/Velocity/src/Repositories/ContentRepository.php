@@ -14,7 +14,7 @@ use Webkul\Product\Repositories\ProductRepository;
  * @copyright 2019 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class ContentRepository extends Repository
-{   
+{
    /**
     * Product Repository object
     *
@@ -51,7 +51,7 @@ class ContentRepository extends Repository
     public function create(array $data)
     {
         //before store of the Content
-        Event::fire('velocity.content.create.before');
+        // Event::fire('velocity.content.create.before');
 
         if (isset($data['locale']) && $data['locale'] == 'all') {
             $model = app()->make($this->model());
@@ -64,47 +64,47 @@ class ContentRepository extends Repository
                 }
             }
         }
-        
+
         $content = $this->model->create($data);
 
         //after store of the content
-        Event::fire('velocity.content.create.after', $content);
-        
+        // Event::fire('velocity.content.create.after', $content);
+
         return $content;
     }
 
     public function update(array $data, $id)
     {
         $content = $this->find($id);
-        
+
         //before store of the Content
-        Event::fire('velocity.content.update.before', $id);
+        // Event::fire('velocity.content.update.before', $id);
 
         $content->update($data);
 
         //after store of the content
-        Event::fire('velocity.content.update.after', $id);
-        
+        // Event::fire('velocity.content.update.after', $id);
+
         return $content;
     }
 
     public function getProducts($id)
     {
         $results = [];
-        
+
         $locale = request()->get('locale') ?: app()->getLocale();
-                
+
         $content = $this->model->find($id);
-        
+
         if ($content->content_type == 'product') {
             $contentLocale = $content->translate($locale);
-            
+
             $products = json_decode($contentLocale->products, true);
 
             if (!empty($products)) {
                 foreach ($products as $product_id) {
                     $product = $this->productRepository->find($product_id);
-    
+
                     if ( isset($product->id)) {
                         $results[] = [
                             'id' => $product->id,

@@ -781,36 +781,6 @@
   width: 100%;
 }
 
-.filter-row-one {
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  width: 100%;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  margin-bottom: 20px;
-}
-
-.filter-row-one .dropdown-filters {
-  position: absolute;
-  right: 25px;
-}
-
-.filter-row-one .per-page {
-  right: 250px;
-}
-
-.filter-row-one .per-page .per-page-label {
-  position: absolute;
-  right: 120px;
-  width: 100%;
-  top: 8px;
-}
-
 .review-page-container {
   padding: 20px;
   position: relative;
@@ -1487,7 +1457,6 @@
 
 .account-content .sidebar .customer-sidebar .navigation li {
   width: 100%;
-  padding: 10px 15px;
 }
 
 .account-content .sidebar .customer-sidebar .navigation li:hover, .account-content .sidebar .customer-sidebar .navigation li.active {
@@ -1522,6 +1491,10 @@
 
 .account-content .sidebar .customer-sidebar .navigation li i.icon.downloadables::before {
   content: "\E926";
+}
+
+.account-content .sidebar .customer-sidebar .navigation li a {
+  padding: 10px 15px;
 }
 
 .account-content .sidebar .customer-sidebar .navigation li:last-child {
@@ -1595,12 +1568,38 @@
   margin-bottom: 40px;
 }
 
-.account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters {
-  right: 0;
-  padding: 0;
-  width: 220px;
-  border: unset;
+.account-content .account-layout .account-table-content #datagrid-filters {
+  margin-bottom: 20px;
+}
+
+.account-content .account-layout .account-table-content #datagrid-filters > * {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.account-content .account-layout .account-table-content #datagrid-filters > *.search-filter {
+  top: 20px;
+  max-width: 200px;
+  margin-right: 20px;
   position: relative;
+}
+
+.account-content .account-layout .account-table-content #datagrid-filters > *:nth-of-type(2) {
+  width: calc(50% - 10px);
+}
+
+.account-content .account-layout .account-table-content #datagrid-filters > *:nth-of-type(3) {
+  width: calc(50% - 220px);
+}
+
+.account-content .account-layout .account-table-content #datagrid-filters > *:nth-of-type(3) .control-group {
+  float: right;
+  max-width: 200px;
+}
+
+.account-content .account-layout .account-table-content #datagrid-filters > * input,
+.account-content .account-layout .account-table-content #datagrid-filters > * select {
+  height: 38px;
 }
 
 .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .grid-dropdown-header {
@@ -1611,17 +1610,12 @@
   list-style: none;
 }
 
-.account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-toggle {
-  margin-right: 13px;
-  vertical-align: top;
-  display: inline-block;
-}
-
 .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-toggle:after {
   border: unset;
 }
 
 .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container {
+  width: 100%;
   display: inline-block !important;
 }
 
@@ -1635,6 +1629,11 @@
 
 .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container li:not(:last-child) {
   margin-bottom: 10px;
+}
+
+.account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .dropdown-container li {
+  width: 150px;
+  display: inline-block;
 }
 
 .account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters .control-group {
@@ -1653,22 +1652,6 @@
 
 .account-content .account-layout .account-table-content #datagrid-filters ~ table.table tbody tr .action .eye-icon:hover {
   color: #4D7EA8;
-}
-
-.account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters:nth-child(2) {
-  top: 25px;
-  width: 100%;
-  display: block;
-  padding-left: 30px;
-}
-
-.account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters:nth-child(2) .dropdown-container {
-  width: 100%;
-}
-
-.account-content .account-layout .account-table-content #datagrid-filters .dropdown-filters:nth-child(2) .dropdown-container li {
-  width: 150px;
-  display: inline-block;
 }
 
 .account-content .account-layout .account-items-list.wishlist-container {
@@ -1742,12 +1725,14 @@
 }
 
 .account-content .account-layout .sale-container .tabs ul li {
+  cursor: pointer;
   padding: 10px 15px;
   display: inline-block;
   border-bottom: 2px solid transparent;
 }
 
 .account-content .account-layout .sale-container .tabs ul li.active {
+  cursor: default;
   border-bottom: 2px solid #26A37C;
 }
 
@@ -1777,12 +1762,20 @@
   float: right;
 }
 
+.account-content .account-layout .sale-container .tabs-content .sale-section .section-content .totals .sale-summary tbody tr td:first-child {
+  width: 200px;
+}
+
+.account-content .account-layout .sale-container .tabs-content .sale-section .section-content .table table {
+  width: 100%;
+}
+
 .account-content .account-layout .sale-container .order-box-container {
   padding: 10px 0;
 }
 
 .account-content .account-layout .sale-container .order-box-container .box {
-  width: 24%;
+  width: calc(25% - 5px);
   vertical-align: top;
   display: inline-block;
 }
@@ -2092,6 +2085,14 @@
   text-decoration: line-through;
 }
 
+.product-price span.price-label {
+  font-size: 16px;
+}
+
+.product-price span.final-price {
+  font-size: 24px;
+}
+
 #app {
   min-height: 65vh;
   position: relative;
@@ -2228,8 +2229,9 @@
 }
 
 .grouped-product-container .grouped-product-list ul li {
-  margin-bottom: 15px;
   width: 100%;
+  font-size: 18px;
+  margin-bottom: 10px;
   display: inline-block;
 }
 
@@ -2248,18 +2250,9 @@
 }
 
 .grouped-product-container .grouped-product-list ul li .name {
+  font-size: 16px;
   vertical-align: middle;
   display: inline-block;
-}
-
-.grouped-product-container .grouped-product-list ul li .name .product-price {
-  margin-top: 5px;
-  margin-bottom: 0;
-  font-size: 14px;
-}
-
-.grouped-product-container .grouped-product-list ul li .name .product-price .special-price {
-  font-size: 16px;
 }
 
 .grouped-product-container .grouped-product-list ul li .qty {
@@ -3451,6 +3444,7 @@ body::after {
 .footer .footer-copy-right {
   width: 100%;
   height: 60px;
+  font-size: 16px;
   line-height: 6rem;
   text-align: center;
   background: #30383F;
@@ -4256,6 +4250,18 @@ button[disabled] {
   /* Safari and Chrome */
 }
 
+.styled-select + .select-icon-contanier {
+  position: relative;
+}
+
+.styled-select + .select-icon-contanier .select-icon {
+  top: -24px;
+  left: unset;
+  right: 10px;
+  font-size: 16px;
+  position: absolute;
+}
+
 .select-icon {
   top: 5px;
   left: -7px;
@@ -4333,6 +4339,14 @@ button[disabled] {
   border-bottom: 1px solid #CCCCCC;
 }
 
+.product-detail .right > div.attributes .attribute {
+  margin-bottom: 20px;
+}
+
+.product-detail .right > div.attributes .attribute:last-child {
+  margin-bottom: 30px;
+}
+
 .product-detail .right .category-breadcrumb {
   margin-left: 0;
   padding: 0 15px;
@@ -4403,11 +4417,6 @@ button[disabled] {
 
 .product-detail .right .product-price .sticker {
   display: none;
-}
-
-.product-detail .right .product-price span:nth-child(1),
-.product-detail .right .product-price .special-price {
-  font-size: 24px;
 }
 
 .product-detail .thumb-list {
@@ -4541,6 +4550,12 @@ button[disabled] {
 
 .product-detail .full-specifications tr td:first-child {
   width: 100px;
+}
+
+.product-detail select[disabled=disabled] {
+  cursor: not-allowed;
+  border-color: #DCDCDC;
+  background-color: #DCDCDC;
 }
 
 .store-meta-images {
@@ -4717,6 +4732,9 @@ button[disabled] {
   .footer .footer-content .footer-statics {
     padding: 30px 50px;
   }
+  .footer .footer-content .footer-copy-right {
+    font-size: 14px;
+  }
   .popular-categories-container .popular-category-wrapper {
     padding: 0px;
   }
@@ -4733,19 +4751,86 @@ button[disabled] {
   .account-content .sidebar {
     display: none;
   }
+  .account-content .account-layout {
+    padding: 0;
+  }
   .account-content .account-layout.right {
+    padding-right: 20px !important;
     padding-left: 20px !important;
+  }
+  .account-content .account-layout .account-items-list.wishlist-container .product-card-new {
+    width: calc(50% - 5px);
+  }
+  .account-content .account-layout .account-table-content #datagrid-filters > *.search-filter {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 0 10px 0;
+  }
+  .account-content .account-layout .account-table-content #datagrid-filters > *.dropdown-filters {
+    width: 100%;
+  }
+  .account-content .account-layout .account-table-content #datagrid-filters > *.dropdown-filters .control-group {
+    width: 100%;
+    max-width: 100%;
+  }
+  .account-content .account-layout .account-table-content #datagrid-filters > *.dropdown-filters .dropdown-container li {
+    width: 100%;
+  }
+  .account-content .account-layout .account-table-content #datagrid-filters > *.dropdown-filters:nth-of-type(2) {
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+  .account-content .account-layout .sale-container .tabs-content .totals .sale-summary {
+    width: 100%;
+    font-size: 17px;
+  }
+  .account-content .account-layout .sale-container .tabs-content .totals .sale-summary tbody tr td {
+    width: 50% !important;
+  }
+  .account-content .account-layout .sale-container .tabs-content .totals .sale-summary tbody tr td:last-child {
+    text-align: right;
+  }
+  .account-content .account-layout .sale-container .order-box-container .box {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .account-content .account-layout .sale-container .order-box-container .box .box-title {
+    padding-bottom: 0;
+  }
+  .account-content .account-layout .sale-section .section-content .table table thead {
+    display: none;
+  }
+  .account-content .account-layout .sale-section .section-content .table table tr {
+    margin-bottom: 20px;
+    border: 1px solid #CCCCCC;
+  }
+  .account-content .account-layout .sale-section .section-content .table table tr td {
+    width: 100%;
+    display: block;
+    border-top: none;
+  }
+  .account-content .account-layout .sale-section .section-content .table table tr td:before {
+    content: attr(data-value);
+    font-size: 15px;
+    font-weight: 600;
+    display: inline-block;
+    width: 120px;
   }
   .mini-cart-container {
     display: none;
   }
-  header #search-form input header .vc-small-screen .searchbar {
+  header .vc-small-screen .searchbar {
     padding-left: 20px !important;
+    padding-right: 20px !important;
   }
-  header #search-form input header .vc-small-screen .selectdiv {
+  header .vc-small-screen #search-form {
+    width: 100%;
+  }
+  header .vc-small-screen #search-form .selectdiv {
     display: none;
   }
-  header #search-form input header .vc-small-screen .selectdiv + div input {
+  header .vc-small-screen #search-form .selectdiv + div input {
+    width: calc(100% - 40px);
     border: 1px solid #26A37C;
   }
   .carousel-products.vc-full-screen {
@@ -4816,6 +4901,9 @@ button[disabled] {
   .category-page-wrapper .category-container > div {
     padding: 0 10px;
   }
+  .category-page-wrapper .category-container > div:first-child {
+    padding: 0 10px !important;
+  }
   .category-page-wrapper .category-container .filters-container {
     left: 0px;
     top: -15px;
@@ -4847,13 +4935,12 @@ button[disabled] {
   .nav-container {
     top: 0px;
     left: 0px;
-    width: 100%;
+    width: 75%;
     z-index: 9999;
     height: 100vh;
     position: fixed;
     font-size: 16px;
     overflow-y: scroll;
-    padding-right: 15px;
     -webkit-box-shadow: 0 2px 8px 0;
             box-shadow: 0 2px 8px 0;
     background-color: #FFFFFF;
@@ -4929,6 +5016,9 @@ button[disabled] {
   }
   .nav-container .wrapper ul li .nested-category li:last-child {
     padding-bottom: 0;
+  }
+  .nav-container .wrapper ul:nth-of-type(1) {
+    border-top: unset;
   }
   .nav-container .wrapper .vc-customer-options li,
   .nav-container .wrapper .category-wrapper li {

@@ -17,7 +17,7 @@
                         {{ __('velocity::app.admin.contents.add-title') }}
                     </h1>
                 </div>
-                
+
                 <div class="page-action">
                     <button type="submit" class="btn btn-lg btn-primary">
                         {{ __('velocity::app.admin.contents.save-btn-title') }}
@@ -105,22 +105,22 @@
                     {{ __('velocity::app.admin.contents.content.custom-title') }}
                 </label>
                 <input type="text" v-validate="'max:100'" class="control" id="custom_title" name="custom_title" value="" data-vv-as="&quot;{{ __('velocity::app.admin.contents.content.custom-title') }}&quot;"/>
-            
+
                 <span class="control-error" v-if="errors.has('custom_title')">@{{ errors.first('custom_title') }}</span>
             </div>
-            
+
             <div class="control-group" :class="[errors.has('custom_heading') ? 'has-error' : '']">
                 <label for="custom_heading">
                     {{ __('velocity::app.admin.contents.content.custom-heading') }}
                 </label>
                 <input type="text" v-validate="'max:100'" class="control" id="custom_heading" name="custom_heading" value="" data-vv-as="&quot;{{ __('velocity::app.admin.contents.content.custom-heading') }}&quot;"/>
-            
+
                 <span class="control-error" v-if="errors.has('custom_heading')">@{{ errors.first('custom_heading') }}</span>
             </div>
-        
+
             <div class="control-group" :class="[errors.has('content_type') ? 'has-error' : '']">
                 <label for="content_type" class="required">{{ __('velocity::app.admin.contents.content.content-type') }}</label>
-                
+
                 <select class="control" v-model="content_type" v-validate="'required'" id="content_type" name="content_type" data-vv-as="&quot;{{ __('velocity::app.admin.contents.content.content-type') }}&quot;" @change="loadFields($event)">
                     <option value="">{{ __('velocity::app.admin.contents.select') }}</option>
 
@@ -128,7 +128,7 @@
                         <option value="{{ $key }}">{{ $content_type }}</option>
                     @endforeach
                 </select>
-                
+
                 <span class="control-error" v-if="errors.has('content_type')">@{{ errors.first('content_type') }}</span>
             </div>
 
@@ -142,7 +142,7 @@
                 @include ('velocity::admin.content.content-type.static')
             </div>
         </div>
-        
+
     </script>
 
     <script>
