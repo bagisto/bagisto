@@ -114,17 +114,18 @@ class RegistrationController extends Controller
 
                     session()->flash('success', trans('shop::app.customer.signup-form.success-verify'));
                 } catch (\Exception $e) {
+                    report($e);
                     session()->flash('info', trans('shop::app.customer.signup-form.success-verify-email-unsent'));
                 }
             } else {
-                 try {
+                try {
                     Mail::queue(new RegistrationEmail(request()->all()));
 
                     session()->flash('success', trans('shop::app.customer.signup-form.success-verify')); //customer registered successfully
                 } catch (\Exception $e) {
+                    report($e);
                     session()->flash('info', trans('shop::app.customer.signup-form.success-verify-email-unsent'));
                 }
-
 
                 session()->flash('success', trans('shop::app.customer.signup-form.success'));
             }
@@ -177,6 +178,7 @@ class RegistrationController extends Controller
                 \Cookie::queue(\Cookie::forget('email-for-resend'));
             }
         } catch (\Exception $e) {
+            report($e);
             session()->flash('error', trans('shop::app.customer.signup-form.verification-not-sent'));
 
             return redirect()->back();
