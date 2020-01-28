@@ -807,6 +807,7 @@ return [
             'group-default' => 'نمی توان گروه پیش فرض را حذف کرد.',
             'edit-help-title' => 'ویرایش مشتری',
             'delete-help-title' => 'حذف مشتری',
+            'addresses' => 'Addresses',
             'mass-destroy-success' => 'مشتریان با موفقیت حذف شدند',
             'mass-update-success' => 'مشتریان با موفقیت به روز شدند',
             'status' => 'وضعیت',
