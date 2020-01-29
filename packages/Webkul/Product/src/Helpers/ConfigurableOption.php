@@ -191,7 +191,7 @@ class ConfigurableOption extends AbstractProduct
             if (isset($options[$attribute->id][$optionId])) {
                 $attributeOptionsData[] = [
                     'id' => $optionId,
-                    'label' => $attributeOption->label,
+                    'label' => $attributeOption->label ? $attributeOption->label : $attributeOption->admin_name,
                     'swatch_value' => $attribute->swatch_type == 'image' ? $attributeOption->swatch_value_url : $attributeOption->swatch_value,
                     'products' => $options[$attribute->id][$optionId]
                 ];
