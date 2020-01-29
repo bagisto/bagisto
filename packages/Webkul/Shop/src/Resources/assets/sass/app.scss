@@ -927,7 +927,6 @@ section.slider-block {
 
                         .dropdown-content {
                             padding-top: 8px;
-                            margin-bottom: 55px;
                             width: 100%;
                             max-height: 329px;
                             overflow-y: auto;
@@ -975,11 +974,9 @@ section.slider-block {
                             justify-content: space-between;
                             align-items: center;
                             padding: 8px 16px;
-                            position: absolute;
                             bottom: 0;
                             width: 100%;
                             background: #fff;
-                            border-top: 1px solid $border-color;
 
                             .btn {
                                 margin: 0;

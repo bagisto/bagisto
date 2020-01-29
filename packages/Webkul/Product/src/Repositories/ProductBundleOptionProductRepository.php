@@ -68,7 +68,7 @@ class ProductBundleOptionProductRepository extends Repository
             }
         }
 
-        if (! $haveIsDefaulFlag)
+        if (! $haveIsDefaulFlag && $data['is_required'])
             $data['products'][key($data['products'])]['is_default'] = 1;
     }
 }

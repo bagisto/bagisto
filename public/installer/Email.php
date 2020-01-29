@@ -28,15 +28,15 @@
                         <label for="mail_from" class="required">Store email address</label>
                         <input type="text" name="mail_from" class="control" placeholder="store@example.com" data-validation="required">
                     </div>
-                    
+
                     <div class="control-group" id="mail_username">
                         <label for="mail_username" class="required">Username</label>
                         <input type="text" name="mail_username" class="control" placeholder="store@example.com" data-validation="required">
                     </div>
-                    
+
                     <div class="control-group" id="mail_password">
                         <label for="mail_password" class="required">Password</label>
-                        <input type="password" name="mail_password" class="control" data-validation="length required" data-validation-length="min6">
+                        <input type="password" name="mail_password" class="control">
                     </div>
                 </div>
             </div>
@@ -71,7 +71,7 @@
 
             var EmailTarget = window.location.href.concat('/EmailConfig.php');
 
-            $.ajax({type : 'POST', url :  EmailTarget, data : mailformData, dataType : 'json', encode : true})            
+            $.ajax({type : 'POST', url :  EmailTarget, data : mailformData, dataType : 'json', encode : true})
             .done(function(data) {
                 if (!data.success) {
                     // handle errors
@@ -112,7 +112,7 @@
                 } else {
                     $('#admin').hide();
                     $('#email').hide();
-                    $('#finish').show();                    
+                    $('#finish').show();
                 }
             });
             // stop the form from submitting the normal way and refreshing the page

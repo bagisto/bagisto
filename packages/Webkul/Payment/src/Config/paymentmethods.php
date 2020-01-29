@@ -3,7 +3,7 @@ return [
     'cashondelivery' => [
         'code' => 'cashondelivery',
         'title' => 'Cash On Delivery',
-        'description' => 'shop::app.checkout.onepage.cash-desc',
+        'description' => 'Cash On Delivery',
         'class' => 'Webkul\Payment\Payment\CashOnDelivery',
         'active' => true,
         'sort' => 1
@@ -12,7 +12,7 @@ return [
     'moneytransfer' => [
         'code' => 'moneytransfer',
         'title' => 'Money Transfer',
-        'description' => 'shop::app.checkout.onepage.money-desc',
+        'description' => 'Money Transfer',
         'class' => 'Webkul\Payment\Payment\MoneyTransfer',
         'active' => true,
         'sort' => 2
@@ -21,7 +21,7 @@ return [
     'paypal_standard' => [
         'code' => 'paypal_standard',
         'title' => 'Paypal Standard',
-        'description' => 'shop::app.checkout.onepage.paypal-desc',
+        'description' => 'Paypal Standard',
         'class' => 'Webkul\Paypal\Payment\Standard',
         'sandbox' => true,
         'active' => true,

@@ -263,7 +263,7 @@ class RefundRepository extends Repository
             $summary['tax']['price'] += ($orderItem->tax_amount / $orderItem->qty_ordered) * $qty;
         }
 
-        $summary['shipping']['price'] += $order->base_shipping_invoiced - $order->base_shipping_refunded;
+        $summary['shipping']['price'] += $order->base_shipping_invoiced - $order->base_shipping_refunded - $order->base_shipping_discount_amount;
 
         $summary['grand_total']['price'] += $summary['subtotal']['price'] + $summary['tax']['price'] + $summary['shipping']['price'] - $summary['discount']['price'];
 

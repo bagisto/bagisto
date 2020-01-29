@@ -9,5 +9,5 @@ class CountryStateTranslation extends Model implements CountryStateTranslationCo
 {
     public $timestamps = false;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['default_name'];
 }

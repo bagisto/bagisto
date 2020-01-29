@@ -18,10 +18,11 @@ class AlterTriggerOnCategories extends Migration
     public function up()
     {
         $triggerBody = $this->getTriggerBody();
+        $dbPrefix = DB::getTablePrefix();
 
         $insertTrigger = <<< SQL
-            CREATE TRIGGER %s 
-            AFTER INSERT ON categories 
+            CREATE TRIGGER %s
+            AFTER INSERT ON ${dbPrefix}categories
             FOR EACH ROW
             BEGIN
                 $triggerBody
@@ -29,8 +30,8 @@ class AlterTriggerOnCategories extends Migration
 SQL;
 
         $updateTrigger = <<< SQL
-            CREATE TRIGGER %s 
-            AFTER UPDATE ON categories 
+            CREATE TRIGGER %s
+            AFTER UPDATE ON ${dbPrefix}categories
             FOR EACH ROW
             BEGIN
                 $triggerBody
@@ -68,46 +69,48 @@ SQL;
      */
     private function getTriggerBody(): string
     {
+        $dbPrefix = DB::getTablePrefix();
+
         return <<< SQL
             DECLARE urlPath VARCHAR(255);
             DECLARE localeCode VARCHAR(255);
             DECLARE done INT;
-            DECLARE curs CURSOR FOR (SELECT category_translations.locale
-                    FROM category_translations 
+            DECLARE curs CURSOR FOR (SELECT ${dbPrefix}category_translations.locale
+                    FROM ${dbPrefix}category_translations
                     WHERE category_id = NEW.id);
             DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
 
-            
+
             IF EXISTS (
                 SELECT *
-                FROM category_translations 
+                FROM ${dbPrefix}category_translations
                 WHERE category_id = NEW.id
             )
             THEN
-            
+
                 OPEN curs;
-            
+
             	SET done = 0;
-                REPEAT 
+                REPEAT
                 	FETCH curs INTO localeCode;
-                    
+
                     SELECT get_url_path_of_category(NEW.id, localeCode) INTO urlPath;
-                    
-                    IF NEW.parent_id IS NULL 
+
+                    IF NEW.parent_id IS NULL
                     THEN
                         SET urlPath = '';
                     END IF;
-                    
-                    UPDATE category_translations 
-                    SET url_path = urlPath 
-                    WHERE 
-                        category_translations.category_id = NEW.id
-                        AND category_translations.locale = localeCode;
-                
+
+                    UPDATE ${dbPrefix}category_translations
+                    SET url_path = urlPath
+                    WHERE
+                        ${dbPrefix}category_translations.category_id = NEW.id
+                        AND ${dbPrefix}category_translations.locale = localeCode;
+
                 UNTIL done END REPEAT;
-                
+
                 CLOSE curs;
-                
+
             END IF;
 SQL;
     }

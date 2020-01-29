@@ -154,7 +154,8 @@ class AttributeFamilyController extends Controller
 
                 return response()->json(['message' => true], 200);
             } catch (\Exception $e) {
-                session()->flash('error', trans( 'admin::app.response.delete-failed', ['name' => 'Family']));
+                report($e);
+                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Family']));
             }
         }
 
@@ -177,16 +178,18 @@ class AttributeFamilyController extends Controller
                 try {
                     $this->attributeFamilyRepository->delete($value);
                 } catch (\Exception $e) {
+                    report($e);
                     $suppressFlash = true;
 
                     continue;
                 }
             }
 
-            if (! $suppressFlash)
+            if (!$suppressFlash) {
                 session()->flash('success', ('admin::app.datagrid.mass-ops.delete-success'));
-            else
+            } else {
                 session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'Attribute Family']));
+            }
 
             return redirect()->back();
         } else {
