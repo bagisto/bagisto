@@ -5,7 +5,8 @@ namespace Webkul\Velocity\Http\Controllers\Shop;
 use Webkul\Velocity\Helpers\Helper;
 use Webkul\Velocity\Http\Shop\Controllers;
 use Webkul\Product\Repositories\SearchRepository;
-use Webkul\Velocity\Repositories\Product\ProductRepository;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRepository;
 
 /**
  * Search controller
@@ -36,6 +37,12 @@ use Webkul\Velocity\Repositories\Product\ProductRepository;
      */
     protected $productRepository;
 
+    /**
+     * ProductRepository object of velocity package
+     *
+     * @var ProductRepository
+     */
+    protected $velocityProductRepository;
 
     /**
      * Create a new controller instance.
@@ -45,12 +52,14 @@ use Webkul\Velocity\Repositories\Product\ProductRepository;
     */
     public function __construct(
         SearchRepository $searchRepository,
-        ProductRepository $productRepository
+        ProductRepository $productRepository,
+        VelocityProductRepository $velocityProductRepository
     ) {
         $this->_config = request('_config');
 
         $this->searchRepository = $searchRepository;
         $this->productRepository = $productRepository;
+        $this->velocityProductRepository = $velocityProductRepository;
     }
 
     /**
@@ -60,7 +69,7 @@ use Webkul\Velocity\Repositories\Product\ProductRepository;
      */
     public function search()
     {
-        $results = $this->productRepository->searchProductsFromCategory(request()->all());
+        $results = $this->velocityProductRepository->searchProductsFromCategory(request()->all());
 
         return view($this->_config['view'])->with('results', $results ? $results : null);
     }
