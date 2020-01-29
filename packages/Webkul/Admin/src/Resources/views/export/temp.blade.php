@@ -2,6 +2,9 @@
     <thead>
         <tr>
             @foreach ($columns as $key => $value)
+                <?php
+                    $value == 'increment_id' ? $value : 'increment_id';
+                ?>
                 <th>{{ $value }}</th>
             @endforeach
         </tr>
