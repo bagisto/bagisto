@@ -88,7 +88,7 @@
                 method="GET"
                 role="search"
                 id="search-form"
-                action="{{ route('shop.search.index') }}">
+                action="{{ route('velocity.search.index') }}">
 
                 <div
                     class="btn-toolbar full-width"
@@ -654,7 +654,7 @@
                 });
 
                 this.searchedQuery = updatedSearchedCollection;
-            }
+            },
         })
 
         Vue.component('content-header', {

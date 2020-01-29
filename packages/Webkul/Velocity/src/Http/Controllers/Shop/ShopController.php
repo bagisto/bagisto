@@ -5,7 +5,7 @@ namespace Webkul\Velocity\Http\Controllers\Shop;
 use Webkul\Velocity\Helpers\Helper;
 use Webkul\Velocity\Http\Shop\Controllers;
 use Webkul\Product\Repositories\SearchRepository;
-use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Velocity\Repositories\Product\ProductRepository;
 
 /**
  * Search controller
@@ -60,7 +60,7 @@ use Webkul\Product\Repositories\ProductRepository;
      */
     public function search()
     {
-        $results = $this->searchRepository->search(request()->all());
+        $results = $this->productRepository->searchProductsFromCategory(request()->all());
 
         return view($this->_config['view'])->with('results', $results ? $results : null);
     }

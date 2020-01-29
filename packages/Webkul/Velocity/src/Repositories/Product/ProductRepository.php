@@ -67,4 +67,42 @@ class ProductRepository extends Repository
         return $results;
     }
 
+
+    /**
+     * Search Product by Attribute
+     *
+     * @return Collection
+     */
+    public function searchProductsFromCategory($params)
+    {
+        $term = $params['term'];
+        $categoryId = $params['category'];
+
+        $results = app(ProductFlatRepository::class)->scopeQuery(function($query) use($term, $categoryId) {
+            $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
+
+            $locale = request()->get('locale') ?: app()->getLocale();
+
+            $query = $query->distinct()
+                    ->addSelect('product_flat.*')
+                    ->where('product_flat.status', 1)
+                    ->where('product_flat.visible_individually', 1)
+                    ->where('product_flat.channel', $channel)
+                    ->where('product_flat.locale', $locale)
+                    ->whereNotNull('product_flat.url_key')
+                    ->where('product_flat.name', 'like', '%' . urldecode($term) . '%')
+                    ->orderBy('product_id', 'desc');
+
+            if ($categoryId && $categoryId !== "") {
+                $query = $query
+                        ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
+                        ->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id')
+                        ->where('product_categories.category_id', $categoryId);
+            }
+
+            return $query;
+        })->paginate(16);
+
+        return $results;
+    }
 }

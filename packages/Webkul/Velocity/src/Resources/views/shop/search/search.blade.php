@@ -8,7 +8,7 @@
 
 @section('content-wrapper')
     <div class="container">
-        <section class="search-container cart-details row">
+        <section class="search-container row">
             @if ($results && $results->count())
                 <div class="filters-container col-12">
                     @include ('shop::products.list.toolbar')
@@ -20,7 +20,7 @@
             @else
                 @if ($results->isEmpty())
                     <h1 class="fw6 col-12">{{ __('shop::app.products.whoops') }}</h1>
-                    <span>{{ __('shop::app.search.no-results') }}</span>
+                    <span class="col-12">{{ __('shop::app.search.no-results') }}</span>
                 @else
                     @if ($results->total() == 1)
                         <h2 class="fw6 col-12 mb20">

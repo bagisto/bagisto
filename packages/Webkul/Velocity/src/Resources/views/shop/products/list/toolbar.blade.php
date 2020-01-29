@@ -88,7 +88,7 @@
                     {{-- <span class="pull-right link-color" @click="toggleLayeredNavigation">Done</span> --}}
                 </div>
 
-                @include ('shop::products.list.layered-navigation')
+                {{-- @include ('shop::products.list.layered-navigation') --}}
             </div>
 
             <div class="col-4" @click="toggleLayeredNavigation({event: $event, actionType: 'open'})">
