@@ -133,7 +133,7 @@ class Cart extends Model implements CartContract
 
     /**
      * Returns true if cart contains one or many products with quantity box.
-     * f.e. simple, configurable, virtual
+     * (for example: simple, configurable, virtual)
      * @return bool
      */
     public function hasProductsWithQuantityBox(): bool
