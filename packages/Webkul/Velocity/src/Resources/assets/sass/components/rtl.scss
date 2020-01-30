@@ -1,0 +1,103 @@
+body {
+    &.rtl {
+        text-align: right;
+
+        .velocity-divide-page {
+            .right {
+                padding-right: 230px;
+                padding-left: 0 !important;
+            }
+        }
+
+        header {
+            #search-form {
+                .btn-group {
+                    select {
+                        border-left: 0;
+                        border-right: 1px solid $theme-color;
+                    }
+
+                    .selectdiv {
+                        .select-icon {
+                            left: 8px;
+                        }
+                    }
+                }
+            }
+
+            &.sticky-header {
+                img {
+                    float: right;
+                }
+            }
+        }
+
+        .main-content-wrapper {
+            .main-category {
+                text-align: right;
+
+                i {
+                    float: right;
+                    margin-left: 10px;
+                }
+            }
+        }
+
+        .mini-cart-container {
+            #mini-cart {
+                .badge {
+                    top: -14px;
+                    right: -38px;
+                }
+
+                .cart-text {
+                    left: 24px;
+                    vertical-align: top;
+                }
+            }
+        }
+
+        .form-container {
+            .container {
+                .heading {
+                    h2 {
+                        float: right;
+                    }
+
+                    a {
+                        float: left;
+                    }
+                }
+            }
+        }
+
+        .subscriber-form-div {
+            text-align: left;
+        }
+
+        .footer {
+            .footer-content {
+                .newsletter-subscription {
+                    .newsletter-wrapper {
+                        input {
+                            &.subscribe-field {
+                                left: -4px;
+                                position: relative;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        #top {
+            #account {
+                .welcome-content {
+                    i {
+                        text-align: left;
+                    }
+                }
+            }
+        }
+    }
+}

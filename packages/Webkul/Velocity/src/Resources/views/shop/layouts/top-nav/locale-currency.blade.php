@@ -42,7 +42,9 @@
                 @endforeach
             </select>
 
-            <span class="select-icon rango-arrow-down"></span>
+            <div class="select-icon-container">
+                <span class="select-icon rango-arrow-down"></span>
+            </div>
         </div>
     </div>
 
@@ -65,7 +67,10 @@
                     @endforeach
 
                 </select>
-                <span class="select-icon rango-arrow-down"></span>
+
+                <div class="select-icon-container">
+                    <span class="select-icon rango-arrow-down"></span>
+                </div>
             </div>
         </div>
     @endif

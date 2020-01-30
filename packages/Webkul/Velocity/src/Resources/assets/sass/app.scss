@@ -9,10 +9,10 @@
 @import "components/shared";
 @import "components/product-view";
 @import "components/media";
+@import "components/rtl";
 
 @import "static/material-icons";
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-// @import '../../../../publishable/assets/material-icons/iconfont/material-icons.scss';
 
 * {
     margin: 0;
@@ -192,8 +192,6 @@ body {
         .welcome-content {
             @extend .unselectable;
 
-
-            float: right;
             display: table;
             min-width: 150px;
             cursor: pointer;
@@ -244,6 +242,16 @@ body {
 
     .locale-switcher {
         padding-left: 5px;
+    }
+
+    .dropdown {
+        margin-right: 15px;
+
+        .select-icon-container {
+            .select-icon {
+                right: -8px;
+            }
+        }
     }
 }
 
@@ -376,18 +384,14 @@ header {
             max-width: 550px;
 
             .selectdiv {
-                @extend .rango-default;
-
                 width: 170px;
-            }
 
-            .selectdiv:before {
-                top: 10px;
-                left: 108px;
-                z-index: 10;
-                font-size: 16px;
-                content: "\E906";
-                position: absolute;
+                .select-icon {
+                    top: 9px;
+                    right: 8px;
+                    z-index: 10;
+                    font-size: 18px;
+                }
             }
 
             select {
@@ -396,7 +400,7 @@ header {
                 cursor: pointer;
                 border-radius: 2px 0px 0px 2px;
                 border: 1px solid $theme-color;
-                border-right: none;
+                border-right: 0;
                 font-family:"Source Sans Pro", sans-serif;
 
                 -webkit-appearance: none;
@@ -451,23 +455,24 @@ header {
 
     .mini-cart-container {
         height: 50px;
-        padding: 5px 0px;
+        padding: 5px 22px;
 
         #mini-cart {
             .mini-cart-content {
-                position: relative;
                 width: 75px;
-                text-align: right;
-                font-weight: 600;
                 font-size: 16px;
-                color: $font-color;
+                font-weight: 600;
+                text-align: right;
                 letter-spacing: 0;
+                position: relative;
+                color: $font-color;
+                display: inline-block;
 
                 .material-icons {
-                    position: absolute;
                     left: 0px;
                     top: 0px;
                     font-size: 26px;
+                    position: absolute;
                 }
             }
         }

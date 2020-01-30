@@ -36668,9 +36668,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['id', 'loop', 'timeout', 'autoplay', 'addClass', 'slidesCount', 'slidesPerPage', 'navigationEnabled', 'paginationEnabled'],
+    props: ['id', 'loop', 'timeout', 'autoplay', 'addClass', 'slidesCount', 'slidesPerPage', 'sliderDirection', 'navigationEnabled', 'paginationEnabled'],
 
     data: function data() {
         return {};
@@ -36705,7 +36706,8 @@ var render = function() {
         perPage: parseInt(_vm.slidesPerPage),
         loop: _vm.loop == "true" ? true : false,
         autoplay: _vm.autoplay == "true" ? true : false,
-        autoplayTimeout: _vm.timeout ? parseInt(_vm.timeout) : 2000
+        autoplayTimeout: _vm.timeout ? parseInt(_vm.timeout) : 2000,
+        autoplayDirection: _vm.sliderDirection ? _vm.sliderDirection : "forward"
       }
     },
     [

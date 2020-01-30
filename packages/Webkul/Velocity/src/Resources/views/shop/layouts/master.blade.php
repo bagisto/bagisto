@@ -11,22 +11,24 @@
         <meta http-equiv="content-language" content="{{ app()->getLocale() }}">
 
         <link rel="stylesheet" href="{{ asset('themes/velocity/assets/css/velocity.css') }}" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('themes/velocity/assets/css/bootstrap.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('themes/velocity/assets/css/google-font.css') }}" />
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="{{ asset('themes/velocity/assets/js/velocity.js') }}"></script>
-        <script type="text/javascript"
-            src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.6/src/jquery.ez-plus.js"
-        ></script>
+        @if (core()->getCurrentLocale()->direction == 'rtl')
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-flipped.css" rel="stylesheet">
+
+        @endif
 
         @if ($favicon = core()->getCurrentChannel()->favicon_url)
             <link rel="icon" sizes="16x16" href="{{ $favicon }}" />
         @else
             <link rel="icon" sizes="16x16" href="{{ asset('themes/velocity/assets/images/favicon.png') }}" />
         @endif
+
+        <script src="{{ asset('themes/velocity/assets/js/jquery.min.js') }}"></script>
+        {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> --}}
+        <script type="text/javascript" src="{{ asset('themes/velocity/assets/js/velocity.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('themes/velocity/assets/js/jquery.ez-plus.js') }}"></script>
 
         @yield('head')
 
@@ -40,8 +42,7 @@
 
     </head>
 
-    <body @if (app()->getLocale() == 'ar') class="rtl" @endif>
-
+    <body @if (core()->getCurrentLocale()->direction == 'rtl') class="rtl" @endif>
         {!! view_render_event('bagisto.shop.layout.body.before') !!}
 
         @php

@@ -35,10 +35,12 @@
         class="btn btn-link disable-box-shadow">
 
         <div class="mini-cart-content">
-            <i class="icon fs16 cell rango-arrow-down down-icon-position down-arrow-margin"></i>
             <i class="material-icons-outlined text-down-3">shopping_cart</i>
             <span class="badge" v-text="itemCount"></span>
             <span class="fs18 fw6 cart-text">{{ __('velocity::app.minicart.cart') }}</span>
+        </div>
+        <div class="down-arrow-container">
+            <span class="rango-arrow-down"></span>
         </div>
     </button>
 </script>
@@ -96,7 +98,7 @@
 
                     <div class="btn-group full-width">
                         <div class="selectdiv">
-                            <select class="form-control fs13 border-right-0" name="category">
+                            <select class="form-control fs13 styled-select" name="category">
                                 <option value="">
                                     {{ __('velocity::app.header.all-categories') }}
                                 </option>
@@ -115,8 +117,11 @@
                                         {{ $category->name }}
                                     </option>
                                 @endforeach
-                                <span class="select-icon rango-arrow-down"></span>
                             </select>
+
+                            <div class="select-icon-container">
+                                <span class="select-icon rango-arrow-down"></span>
+                            </div>
                         </div>
 
                         <div class="full-width">
@@ -208,16 +213,16 @@
 
                             <ul type="none" class="category-wrapper">
                                 <li v-for="(category, index) in JSON.parse(categories)">
-                                    <div class="category-logo">
-                                        <img
-                                            class="category-icon"
-                                            v-if="category.category_icon_path"
-                                            :src="`${url}/storage/${category.category_icon_path}`" />
-                                    </div>
-
                                     <a
                                         class="unset"
                                         :href="`${url}/${category['translations'][0].url_path}`">
+
+                                        <div class="category-logo">
+                                            <img
+                                                class="category-icon"
+                                                v-if="category.category_icon_path"
+                                                :src="`${url}/storage/${category.category_icon_path}`" />
+                                        </div>
                                         <span v-text="category.name"></span>
                                     </a>
 
@@ -340,16 +345,16 @@
                                     :key="index"
                                     v-for="(nestedSubCategory, index) in subCategory.children">
 
-                                    <div class="category-logo">
-                                        <img
-                                            class="category-icon"
-                                            v-if="nestedSubCategory.category_icon_path"
-                                            :src="`${url}/storage/${nestedSubCategory.category_icon_path}`" />
-                                    </div>
-
                                     <a
                                         class="unset"
                                         :href="`${url}/${nestedSubCategory['translations'][0].url_path}`">
+
+                                        <div class="category-logo">
+                                            <img
+                                                class="category-icon"
+                                                v-if="nestedSubCategory.category_icon_path"
+                                                :src="`${url}/storage/${nestedSubCategory.category_icon_path}`" />
+                                        </div>
                                         <span>@{{ nestedSubCategory.name }}</span>
                                     </a>
 
@@ -361,16 +366,16 @@
                                         <li
                                             :key="`index-${Math.random()}`"
                                             v-for="(thirdLevelCategory, index) in nestedSubCategory.children">
-                                            <div class="category-logo">
-                                                <img
-                                                    class="category-icon"
-                                                    v-if="thirdLevelCategory.category_icon_path"
-                                                    :src="`${url}/storage/${thirdLevelCategory.category_icon_path}`" />
-                                            </div>
-
                                             <a
                                                 class="unset"
                                                 :href="`${url}/${nestedSubCategory['translations'][0].url_path}`">
+
+                                                <div class="category-logo">
+                                                    <img
+                                                        class="category-icon"
+                                                        v-if="thirdLevelCategory.category_icon_path"
+                                                        :src="`${url}/storage/${thirdLevelCategory.category_icon_path}`" />
+                                                </div>
                                                 <span>@{{ thirdLevelCategory.name }}</span>
                                             </a>
                                         </li>
@@ -389,25 +394,24 @@
                             <ul type="none">
                                 @foreach ($allLocales as $locale)
                                     <li>
-                                        <div class="category-logo">
-                                            <img
-                                                class="category-icon"
-                                                src="{{ asset('/storage/' . $locale->locale_image) }}" />
-                                        </div>
+                                        <a
+                                            class="unset"
+                                            @if (isset($serachQuery))
+                                                href="?{{ $serachQuery }}&locale={{ $locale->code }}"
+                                            @else
+                                                href="?locale={{ $locale->code }}"
+                                            @endif>
 
-                                        @if (isset($serachQuery))
-                                            <a
-                                                class="unset"
-                                                href="?{{ $serachQuery }}&locale={{ $locale->code }}">
-                                                <span>{{ $locale->title }}</span>
-                                            </a>
-                                        @else
-                                            <a
-                                                class="unset"
-                                                href="locale={{ $locale->code }}">
-                                                <span>{{ $locale->name }}</span>
-                                            </a>
-                                        @endif
+                                            <div class="category-logo">
+                                                <img
+                                                    class="category-icon"
+                                                    src="{{ asset('/storage/' . $locale->locale_image) }}" />
+                                            </div>
+
+                                            <span>
+                                                {{ isset($serachQuery) ? $locale->title : $locale->name }}
+                                            </span>
+                                        </a>
                                     </li>
                                 @endforeach
                             </ul>
@@ -498,13 +502,11 @@
             <ul type="none" class="no-margin">
                 <li v-for="(content, index) in headerContent" :key="index">
                     <a
-                        v-text="content.title"
+                        v-text="content.custom_title"
                         :href="`${url}/${content['page_link']}`"
                         v-if="(content['content_type'] == 'link')"
                         :target="content['link_target'] ? '_blank' : '_self'">
                     </a>
-
-                    <a href="#" v-else v-text="content.title"></a>
                 </li>
             </ul>
         </div>

@@ -6,11 +6,11 @@
     <div class="dropdown">
         <div id="account">
 
-            <div class="welcome-content" @click="togglePopup">
+            <div class="welcome-content pull-right" @click="togglePopup">
                 <i class="material-icons align-vertical-top">perm_identity</i>
                 <span class="text-center">
                     @guest('customer')
-                        {{ __('velocity::app.header.welcome-message', ['customer_name' => 'Guest']) }}!
+                        {{ __('velocity::app.header.welcome-message', ['customer_name' => trans('velocity::app.header.guest')]) }}!
                     @endguest
 
                     @auth('customer')

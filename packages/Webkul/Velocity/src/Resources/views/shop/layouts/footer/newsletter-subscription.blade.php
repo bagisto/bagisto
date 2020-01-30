@@ -14,7 +14,7 @@
                     <div class="form-container">
                         <form action="{{ route('shop.subscribe') }}">
                             <div class="subscriber-form-div">
-                                <div :class="`control-group ${errors.has('subscriber_email') ? 'has-error' : ''}`">
+                                <div class="control-group">
                                     <input
                                         type="email"
                                         name="subscriber_email"

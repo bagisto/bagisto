@@ -1,3 +1,10 @@
+.ltr {
+    direction: ltr;
+}
+.rtl {
+    direction: rtl;
+}
+
 .padding-15 {
     padding: 15px;
 }
@@ -253,6 +260,7 @@
     font-weight: 600;
     padding: 10px 20px;
     vertical-align: top;
+    border: 1px solid transparent;
     color: $light-color !important;
     background-color: $theme-color !important;
 
@@ -759,7 +767,7 @@ button[disabled] {
     -moz-appearance:none; /* Firefox */
     -webkit-appearance:none; /* Safari and Chrome */
 
-    + .select-icon-contanier {
+    + .select-icon-container {
         position: relative;
 
         .select-icon {
@@ -769,6 +777,20 @@ button[disabled] {
             font-size: 16px;
             position: absolute;
         }
+    }
+}
+
+.down-arrow-container {
+    position: relative;
+    color: $font-color;
+    vertical-align: top;
+    display: inline-block;
+
+    .rango-arrow-down {
+        top: 10px;
+        left: -5px;
+        font-size: 16px;
+        position: absolute;
     }
 }
 

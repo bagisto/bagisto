@@ -661,7 +661,10 @@
 
                 li {
                     font-size: 16px;
-                    padding: 10px 0px 10px 20px;
+
+                    a {
+                        padding: 10px 0px 10px 20px;
+                    }
 
                     &:hover {
                         background-color: $border-light;

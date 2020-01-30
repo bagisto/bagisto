@@ -1,14 +1,19 @@
-<slider-component></slider-component>
+@php
+    $direction = core()->getCurrentLocale()->direction;
+@endphp
+
+<slider-component direction="{{ $direction }}"></slider-component>
 
 @push('scripts')
     <script type="text/x-template" id="slider-template">
-        <div class="slides-container">
+        <div class="slides-container ltr">
             <carousel-component
                 loop="true"
                 timeout="5000"
                 autoplay="true"
                 slides-per-page="1"
                 navigation-enabled="hide"
+                :slider-direction="direction == 'rtl' ? 'backward' : 'forward'"
                 :slides-count="{{ ! empty($sliderData) ? sizeof($sliderData) : 1 }}">
 
                 @if (! empty($sliderData))
@@ -40,6 +45,7 @@
         (() => {
             Vue.component('slider-component', {
                 template: '#slider-template',
+                props: ['direction'],
 
                 mounted: function () {
                     let banners = this.$el.querySelectorAll('img');

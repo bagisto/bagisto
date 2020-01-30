@@ -6,6 +6,7 @@
         :loop="loop == 'true' ? true : false"
         :autoplay="autoplay == 'true' ? true : false"
         :autoplayTimeout="timeout ? parseInt(timeout) : 2000"
+        :autoplayDirection="sliderDirection ? sliderDirection : 'forward'"
         :class="[
             (navigationEnabled == 'hide') ? 'navigation-hide' : '',
             (paginationEnabled == 'hide') ? 'pagination-hide' : '',
@@ -29,6 +30,7 @@
             'addClass',
             'slidesCount',
             'slidesPerPage',
+            'sliderDirection',
             'navigationEnabled',
             'paginationEnabled',
         ],

@@ -55,7 +55,7 @@
                             </option>
 
                         </select>
-                        <div class="select-icon-contanier">
+                        <div class="select-icon-container">
                             <span class="select-icon rango-arrow-down"></span>
                         </div>
                     </span>

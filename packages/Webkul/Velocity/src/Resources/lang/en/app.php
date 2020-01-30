@@ -157,6 +157,7 @@ return [
         'profile' => 'Profile',
         'wishlist' => 'Wishlist',
         'cart' => 'Cart',
+        'guest' => 'Guest',
         'logout' => 'Logout',
         'search-text' => 'Search products here',
         'all-categories' => 'All Categories'
@@ -171,7 +172,6 @@ return [
         'view-cart' => 'View Cart',
         'checkout' => 'Checkout',
         'cart' => 'Cart',
-        'zero' => '0'
     ],
 
     'checkout' => [
