@@ -182,7 +182,7 @@
                 data: function() {
                     return {
                         selected_product: (this.option.type == 'checkbox' || this.option.type == 'multiselect')  ? [] : null,
-                        
+
                         qty_validations: ''
                     }
                 },

@@ -160,13 +160,13 @@
                             </div>
 
                             <div class="control-group">
-                                <label>{{ __('admin::app.settings.channels.logo') }}
+                                <label>{{ __('admin::app.settings.channels.logo') }}</label>
 
                                 <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="logo" :multiple="false"></image-wrapper>
                             </div>
 
                             <div class="control-group">
-                                <label>{{ __('admin::app.settings.channels.favicon') }}
+                                <label>{{ __('admin::app.settings.channels.favicon') }}</label>
 
                                 <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="logo" :multiple="false"></image-wrapper>
                             </div>

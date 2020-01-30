@@ -58,6 +58,7 @@
                             <div class="control-group">
                                 <label for="gender" class="required">{{ __('admin::app.customers.customers.gender') }}</label>
                                 <select name="gender" class="control" value="{{ $customer->gender }}" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customers.customers.gender') }}&quot;">
+                                    <option value="Other" {{ $customer->gender == "Other" ? 'selected' : '' }}>{{ __('admin::app.customers.customers.other') }}</option>
                                     <option value="Male" {{ $customer->gender == "Male" ? 'selected' : '' }}>{{ __('admin::app.customers.customers.male') }}</option>
                                     <option value="Female" {{ $customer->gender == "Female" ? 'selected' : '' }}>{{ __('admin::app.customers.customers.female') }}</option>
                                 </select>

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Migrations\Migration;
+use Webkul\Category\Models\CategoryTranslation;
 
 class AddTriggerToCategoryTranslations extends Migration
 {
@@ -15,11 +16,13 @@ class AddTriggerToCategoryTranslations extends Migration
      */
     public function up()
     {
+        $dbPrefix = DB::getTablePrefix();
+
         $triggerBody = $this->getTriggerBody();
         $insertTrigger = <<< SQL
             CREATE TRIGGER %s
-            BEFORE INSERT ON category_translations
-            FOR EACH ROW 
+            BEFORE INSERT ON ${dbPrefix}category_translations
+            FOR EACH ROW
             BEGIN
                 $triggerBody
             END;
@@ -27,8 +30,8 @@ SQL;
 
         $updateTrigger = <<< SQL
             CREATE TRIGGER %s
-            BEFORE UPDATE ON category_translations
-            FOR EACH ROW 
+            BEFORE UPDATE ON ${dbPrefix}category_translations
+            FOR EACH ROW
             BEGIN
                 $triggerBody
             END;
@@ -59,20 +62,22 @@ SQL;
      */
     private function getTriggerBody()
     {
+        $dbPrefix = DB::getTablePrefix();
+
         return <<<SQL
             DECLARE parentUrlPath varchar(255);
             DECLARE urlPath varchar(255);
-            
+
             -- Category with id 1 is root by default
             IF NEW.category_id <> 1
             THEN
-                
+
                 SELECT
                     GROUP_CONCAT(parent_translations.slug SEPARATOR '/') INTO parentUrlPath
                 FROM
-                    categories AS node,
-                    categories AS parent
-                    JOIN category_translations AS parent_translations ON parent.id = parent_translations.category_id
+                    ${dbPrefix}categories AS node,
+                    ${dbPrefix}categories AS parent
+                    JOIN ${dbPrefix}category_translations AS parent_translations ON parent.id = parent_translations.category_id
                 WHERE
                     node._lft >= parent._lft
                     AND node._rgt <= parent._rgt
@@ -81,16 +86,16 @@ SQL;
                     AND parent_translations.locale = NEW.locale
                 GROUP BY
                     node.id;
-                
-                IF parentUrlPath IS NULL 
+
+                IF parentUrlPath IS NULL
                 THEN
                     SET urlPath = NEW.slug;
                 ELSE
                     SET urlPath = concat(parentUrlPath, '/', NEW.slug);
                 END IF;
-                
+
                 SET NEW.url_path = urlPath;
-                
+
             END IF;
 SQL;
 

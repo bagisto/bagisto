@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'invalid_vat_format' => 'The given vat id has a wrong format',
     'security-warning' => 'Suspicious activity found!!!',
     'nothing-to-delete' => 'Nothing to delete',
 
@@ -219,6 +220,10 @@ return [
 
                 'create' => [
                     'page-title' => 'Add Address Form',
+                    'company_name' => 'Company name',
+                    'first_name' => 'First name',
+                    'last_name' => 'Last name',
+                    'vat_id' => 'Vat id',
                     'title' => 'Add Address',
                     'street-address' => 'Street Address',
                     'country' => 'Country',
@@ -234,6 +239,10 @@ return [
 
                 'edit' => [
                     'page-title' => 'Edit Address',
+                    'company_name' => 'Company name',
+                    'first_name' => 'First name',
+                    'last_name' => 'Last name',
+                    'vat_id' => 'Vat id',
                     'title' => 'Edit Address',
                     'street-address' => 'Street Address',
                     'submit' => 'Save Address',

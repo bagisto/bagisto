@@ -5,6 +5,7 @@ namespace Webkul\Customer\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
+use Webkul\Customer\Rules\VatIdRule;
 use Auth;
 
 /**
@@ -77,15 +78,19 @@ class AddressController extends Controller
         $data = collect(request()->input())->except('_token')->toArray();
 
         $this->validate(request(), [
-            'address1' => 'string|required',
-            'country'  => 'string|required',
-            'state'    => 'string|required',
-            'city'     => 'string|required',
-            'postcode' => 'required',
-            'phone'    => 'required',
+            'company_name' => 'string',
+            'address1'     => 'string|required',
+            'country'      => 'string|required',
+            'state'        => 'string|required',
+            'city'         => 'string|required',
+            'postcode'     => 'required',
+            'phone'        => 'required',
+            'vat_id'       => new VatIdRule(),
         ]);
 
         $cust_id['customer_id'] = $this->customer->id;
+        $cust_id['first_name'] = $this->customer->first_name;
+        $cust_id['last_name'] = $this->customer->last_name;
         $data = array_merge($cust_id, $data);
 
         if ($this->customer->addresses->count() == 0) {
@@ -136,12 +141,14 @@ class AddressController extends Controller
         request()->merge(['address1' => implode(PHP_EOL, array_filter(request()->input('address1')))]);
 
         $this->validate(request(), [
-            'address1' => 'string|required',
-            'country'  => 'string|required',
-            'state'    => 'string|required',
-            'city'     => 'string|required',
-            'postcode' => 'required',
-            'phone'    => 'required',
+            'company_name' => 'string',
+            'address1'     => 'string|required',
+            'country'      => 'string|required',
+            'state'        => 'string|required',
+            'city'         => 'string|required',
+            'postcode'     => 'required',
+            'phone'        => 'required',
+            'vat_id'       => new VatIdRule(),
         ]);
 
         $data = collect(request()->input())->except('_token')->toArray();

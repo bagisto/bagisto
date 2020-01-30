@@ -2,6 +2,8 @@
 
 namespace Webkul\Customer\Http\Controllers;
 
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
 use Webkul\Customer\Mail\RegistrationEmail;
@@ -85,6 +87,7 @@ class RegistrationController extends Controller
         $data = request()->input();
 
         $data['password'] = bcrypt($data['password']);
+        $data['api_token'] = Str::random(80);
 
         if (core()->getConfigData('customer.settings.email.verification')) {
             $data['is_verified'] = 0;
@@ -111,17 +114,18 @@ class RegistrationController extends Controller
 
                     session()->flash('success', trans('shop::app.customer.signup-form.success-verify'));
                 } catch (\Exception $e) {
+                    report($e);
                     session()->flash('info', trans('shop::app.customer.signup-form.success-verify-email-unsent'));
                 }
             } else {
-                 try {
+                try {
                     Mail::queue(new RegistrationEmail(request()->all()));
 
                     session()->flash('success', trans('shop::app.customer.signup-form.success-verify')); //customer registered successfully
                 } catch (\Exception $e) {
+                    report($e);
                     session()->flash('info', trans('shop::app.customer.signup-form.success-verify-email-unsent'));
                 }
-
 
                 session()->flash('success', trans('shop::app.customer.signup-form.success'));
             }
@@ -174,6 +178,7 @@ class RegistrationController extends Controller
                 \Cookie::queue(\Cookie::forget('email-for-resend'));
             }
         } catch (\Exception $e) {
+            report($e);
             session()->flash('error', trans('shop::app.customer.signup-form.verification-not-sent'));
 
             return redirect()->back();

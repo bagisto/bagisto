@@ -42,13 +42,10 @@
                 @endif
 
                 <?php
-                    $query = parse_url(\Illuminate\Support\Facades\Request::path(), PHP_URL_QUERY);
-                    $searchTerm = explode("&", $query);
+                    $term = request()->input('term');
 
-                    foreach($searchTerm as $term){
-                        if (strpos($term, 'term') !== false) {
-                            $serachQuery = $term;
-                        }
+                    if (! is_null($term)) {
+                        $serachQuery = 'term='.request()->input('term');
                     }
                 ?>
 
