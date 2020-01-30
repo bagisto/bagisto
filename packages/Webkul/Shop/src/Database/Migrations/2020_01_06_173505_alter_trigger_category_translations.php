@@ -16,10 +16,12 @@ class AlterTriggerCategoryTranslations extends Migration
     public function up()
     {
         $triggerBody = $this->getTriggerBody();
+        $dbPrefix = DB::getTablePrefix();
+
         $insertTrigger = <<< SQL
             CREATE TRIGGER %s
-            BEFORE INSERT ON category_translations
-            FOR EACH ROW 
+            BEFORE INSERT ON ${dbPrefix}category_translations
+            FOR EACH ROW
             BEGIN
                 $triggerBody
             END;
@@ -27,8 +29,8 @@ SQL;
 
         $updateTrigger = <<< SQL
             CREATE TRIGGER %s
-            BEFORE UPDATE ON category_translations
-            FOR EACH ROW 
+            BEFORE UPDATE ON ${dbPrefix}category_translations
+            FOR EACH ROW
             BEGIN
                 $triggerBody
             END;
@@ -66,44 +68,46 @@ SQL;
      */
     private function getTriggerBody()
     {
+        $dbPrefix = DB::getTablePrefix();
+
         return <<<SQL
             DECLARE parentUrlPath varchar(255);
             DECLARE urlPath varchar(255);
-            
+
             IF NOT EXISTS (
                 SELECT id
-                FROM categories
+                FROM ${dbPrefix}categories
                 WHERE
                     id = NEW.category_id
                     AND parent_id IS NULL
             )
             THEN
-                
+
                 SELECT
                     GROUP_CONCAT(parent_translations.slug SEPARATOR '/') INTO parentUrlPath
                 FROM
-                    categories AS node,
-                    categories AS parent
-                    JOIN category_translations AS parent_translations ON parent.id = parent_translations.category_id
+                    ${dbPrefix}categories AS node,
+                    ${dbPrefix}categories AS parent
+                    JOIN ${dbPrefix}category_translations AS parent_translations ON parent.id = parent_translations.category_id
                 WHERE
                     node._lft >= parent._lft
                     AND node._rgt <= parent._rgt
-                    AND node.id = (SELECT parent_id FROM categories WHERE id = NEW.category_id)
-                    AND node.parent_id IS NOT NULL 
+                    AND node.id = (SELECT parent_id FROM ${dbPrefix}categories WHERE id = NEW.category_id)
+                    AND node.parent_id IS NOT NULL
                     AND parent.parent_id IS NOT NULL
                     AND parent_translations.locale = NEW.locale
                 GROUP BY
                     node.id;
-                
-                IF parentUrlPath IS NULL 
+
+                IF parentUrlPath IS NULL
                 THEN
                     SET urlPath = NEW.slug;
                 ELSE
                     SET urlPath = concat(parentUrlPath, '/', NEW.slug);
                 END IF;
-                
+
                 SET NEW.url_path = urlPath;
-                
+
             END IF;
 SQL;
 

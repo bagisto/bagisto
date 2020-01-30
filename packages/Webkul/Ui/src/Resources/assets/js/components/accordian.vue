@@ -35,14 +35,9 @@
         },
 
         mounted: function() {
-            var this_this = this;
+            this.addHasErrorClass()
 
-            eventBus.$on('onFormError', function() {
-                $(this_this.$el).find('.control-group').each(function(index, element) {
-                    if ($(element).hasClass('has-error'))
-                        this_this.hasError = true;
-                });
-            })
+            eventBus.$on('onFormError', this.addHasErrorClass);
 
             this.isActive = this.active;
         },
@@ -50,6 +45,18 @@
         methods: {
             toggleAccordian: function() {
                 this.isActive = ! this.isActive;
+            },
+
+            addHasErrorClass: function() {
+                var this_this = this;
+
+                setTimeout(function() {
+                    $(this_this.$el).find('.control-group').each(function(index, element) {
+                        if ($(element).hasClass('has-error')) {
+                            this_this.hasError = true;
+                        }
+                    });
+                }, 0);
             }
         },
 

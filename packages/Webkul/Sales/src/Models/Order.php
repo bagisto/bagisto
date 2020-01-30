@@ -7,16 +7,26 @@ use Webkul\Sales\Contracts\Order as OrderContract;
 
 class Order extends Model implements OrderContract
 {
-    protected $guarded = ['id', 'items', 'shipping_address', 'billing_address', 'customer', 'channel', 'payment', 'created_at', 'updated_at'];
+    protected $guarded = [
+        'id',
+        'items',
+        'shipping_address',
+        'billing_address',
+        'customer',
+        'channel',
+        'payment',
+        'created_at',
+        'updated_at',
+    ];
 
     protected $statusLabel = [
-        'pending' => 'Pending',
+        'pending'         => 'Pending',
         'pending_payment' => 'Pending Payment',
-        'processing' => 'Processing',
-        'completed' => 'Completed',
-        'canceled' => 'Canceled',
-        'closed' => 'Closed',
-        'fraud' => 'Fraud'
+        'processing'      => 'Processing',
+        'completed'       => 'Completed',
+        'canceled'        => 'Canceled',
+        'closed'          => 'Closed',
+        'fraud'           => 'Fraud',
     ];
 
     /**
@@ -90,7 +100,7 @@ class Order extends Model implements OrderContract
     {
         return $this->hasMany(RefundProxy::modelClass());
     }
-    
+
     /**
      * Get the customer record associated with the order.
      */
@@ -193,12 +203,12 @@ class Order extends Model implements OrderContract
     {
         if ($this->status == 'fraud')
             return false;
-            
+
         foreach ($this->items as $item) {
             if ($item->canInvoice())
                 return true;
         }
-        
+
         return false;
     }
 
@@ -209,7 +219,7 @@ class Order extends Model implements OrderContract
     {
         if ($this->status == 'fraud')
             return false;
-            
+
         foreach ($this->items as $item) {
             if ($item->canCancel())
                 return true;
@@ -225,7 +235,7 @@ class Order extends Model implements OrderContract
     {
         if ($this->status == 'fraud')
             return false;
-            
+
         foreach ($this->items as $item) {
             if ($item->qty_to_refund > 0)
                 return true;

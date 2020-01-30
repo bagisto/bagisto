@@ -471,7 +471,7 @@ class Configurable extends AbstractType
             $data['attributes'][$attribute->code] = [
                 'attribute_name' => $attribute->name ?  $attribute->name : $attribute->admin_name,
                 'option_id' => $option->id,
-                'option_label' => $option->label,
+                'option_label' => $option->label ? $option->label : $option->admin_name,
             ];
         }
 

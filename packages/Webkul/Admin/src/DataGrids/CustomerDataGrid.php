@@ -135,7 +135,8 @@ class CustomerDataGrid extends DataGrid
             'type' => 'Edit',
             'method' => 'GET', //use post only for redirects only
             'route' => 'admin.customer.addresses.index',
-            'icon' => 'icon list-icon'
+            'icon' => 'icon list-icon',
+            'title' => trans('admin::app.customers.customers.addresses')
         ]);
 
         $this->addAction([

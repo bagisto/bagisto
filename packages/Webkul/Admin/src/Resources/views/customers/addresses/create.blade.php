@@ -36,6 +36,18 @@
                     <accordian :title="'{{ __('admin::app.customers.addresses.general') }}'" :active="true">
                         <div slot="body">
 
+                            <div class="control-group" :class="[errors.has('company_name') ? 'has-error' : '']">
+                                <label for="company_name">{{ __('shop::app.customer.account.address.create.company_name') }}</label>
+                                <input type="text" class="control" name="company_name" value="{{ old('company_name') }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.company_name') }}&quot;">
+                                <span class="control-error" v-if="errors.has('company_name')">@{{ errors.first('company_name') }}</span>
+                            </div>
+
+                            <div class="control-group" :class="[errors.has('vat_id') ? 'has-error' : '']">
+                                <label for="vat_id">{{ __('shop::app.customer.account.address.create.vat_id') }}</label>
+                                <input type="text" class="control" name="vat_id" value="{{ old('vat_id') }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.vat_id') }}&quot;">
+                                <span class="control-error" v-if="errors.has('vat_id')">@{{ errors.first('vat_id') }}</span>
+                            </div>
+
                             <div class="control-group" :class="[errors.has('address1[]') ? 'has-error' : '']">
                                 <label for="address_0" class="required">{{ __('shop::app.customer.account.address.edit.street-address') }}</label>
                                 <input type="text" class="control" name="address1[]" id="address_0" v-validate="'required'" value="{{ old('address1') }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.street-address') }}&quot;">
@@ -56,7 +68,7 @@
                                 <span class="control-error" v-if="errors.has('city')">@{{ errors.first('city') }}</span>
                             </div>
 
-                            @include ('shop::customers.account.address.country-state', ['countryCode' => old('country') ?? '', 'stateCode' => old('state') ?? ''])
+                            @include ('admin::customers.country-state', ['countryCode' => old('country') ?? config('app.default_country'), 'stateCode' => old('state') ?? ''])
 
                             <div class="control-group" :class="[errors.has('postcode') ? 'has-error' : '']">
                                 <label for="postcode" class="required">{{ __('shop::app.customer.account.address.create.postcode') }}</label>
