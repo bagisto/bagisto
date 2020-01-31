@@ -519,8 +519,6 @@
                         this.condition.value = this.condition.value == '' && this.condition.value != undefined ? [] : [ this.condition.value ];
                     }
 
-                    console.log(this.condition.value);
-
                     return matchedAttribute[0];
                 }
             },
