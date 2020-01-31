@@ -167,7 +167,9 @@ return [
         'disc_quantity' => 'مقدار استفاده نشده',
         'disc_threshold' => 'آستانه استفاده نشده',
         'use_coupon' => 'استافده از کوپن',
-        'refunded' => 'Refunded'
+        'refunded' => 'Refunded',
+        'rtl' => 'RTL',
+        'ltr' => 'LTR',
     ],
 
     'account' => [

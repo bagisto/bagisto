@@ -213,7 +213,9 @@ return [
         'times-used' => 'Times Used',
         'created-date' => 'Created Date',
         'expiration-date' => 'Expiration Date',
-        'delete' => 'Delete'
+        'delete' => 'Delete',
+        'rtl' => 'RTL',
+        'ltr' => 'LTR',
     ],
 
     'account' => [
