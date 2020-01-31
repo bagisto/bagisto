@@ -1,10 +1,9 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
-
 use Faker\Generator as Faker;
 use Webkul\Core\Models\Locale;
 
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(Locale::class, function (Faker $faker, array $attributes) {
 
     return [

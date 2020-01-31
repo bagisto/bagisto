@@ -2,7 +2,6 @@
 
 namespace Tests\Functional\Admin\Catalog;
 
-
 use FunctionalTester;
 use Webkul\Attribute\Models\Attribute;
 
@@ -76,7 +75,7 @@ class AttributeCest
     private function fillForm(FunctionalTester $I, bool $skipType = false): array
     {
         $testData = [
-            'code'       => $I->fake()->word,
+            'code'       => $I->fake()->firstName,
             'type'       => $I->fake()->randomElement([
                 'text',
                 'textarea',
@@ -85,7 +84,7 @@ class AttributeCest
                 'select',
                 'multiselect'
             ]),
-            'admin_name' => $I->fake()->word,
+            'admin_name' => $I->fake()->firstName,
         ];
 
         $I->fillField('code', $testData['code']);
