@@ -19,6 +19,8 @@ class ProductServiceProvider extends ServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
+        $this->app->make(EloquentFactory::class)->load(__DIR__ . '/../Database/Factories');
+
         $this->app->register(EventServiceProvider::class);
 
         $this->publishes([
