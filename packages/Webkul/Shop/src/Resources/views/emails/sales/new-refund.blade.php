@@ -115,10 +115,10 @@
                             <tr>
                                 <td data-value="{{ __('shop::app.customer.account.order.view.product-name') }}" style="text-align: left;padding: 8px">
                                     {{ $item->name }}
-                                    
+
                                     @if (isset($item->additional['attributes']))
                                         <div class="item-options">
-                                            
+
                                             @foreach ($item->additional['attributes'] as $attribute)
                                                 <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
                                             @endforeach
@@ -158,7 +158,7 @@
                     </span>
                 </div>
             @endif
-
+@php(//ToDo: taxes)
             @if ($refund->tax_amount > 0)
                 <div>
                     <span>{{ __('shop::app.mail.order.tax') }}</span>

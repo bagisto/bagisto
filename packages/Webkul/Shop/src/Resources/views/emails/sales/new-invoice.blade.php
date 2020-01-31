@@ -115,10 +115,10 @@
                             <tr>
                                 <td data-value="{{ __('shop::app.customer.account.order.view.product-name') }}" style="text-align: left;padding: 8px">
                                     {{ $item->name }}
-                                    
+
                                     @if (isset($item->additional['attributes']))
                                         <div class="item-options">
-                                            
+
                                             @foreach ($item->additional['attributes'] as $attribute)
                                                 <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
                                             @endforeach
@@ -146,7 +146,7 @@
                     {{ core()->formatPrice($invoice->sub_total, $invoice->order_currency_code) }}
                 </span>
             </div>
-            
+
             @if ($order->shipping_address)
                 <div>
                     <span>{{ __('shop::app.mail.order.shipping-handling') }}</span>
@@ -156,12 +156,14 @@
                 </div>
             @endif
 
-            <div>
-                <span>{{ __('shop::app.mail.order.tax') }}</span>
-                <span style="float: right;">
-                    {{ core()->formatPrice($invoice->tax_amount, $invoice->order_currency_code) }}
+            @foreach ($order->getTaxRatesWithAmount(false) as $taxRate => $taxAmount)
+                <div>
+                    <span id="taxrate-{{ $taxRate }}">{{ __('shop::app.mail.order.tax') }} {{ $taxRate }} %</span>
+                    <span id="taxamount-{{ $taxRate }}" style="float: right;">
+                    {{ core()->formatPrice($taxAmount, $order->order_currency_code) }}
                 </span>
-            </div>
+                </div>
+            @endforeach
 
             @if ($invoice->discount_amount > 0)
                 <div>

@@ -116,10 +116,10 @@
 
                                 <td data-value="{{ __('shop::app.customer.account.order.view.product-name') }}" style="text-align: left;padding: 8px">
                                     {{ $item->name }}
-                                    
+
                                     @if (isset($item->additional['attributes']))
                                         <div class="item-options">
-                                            
+
                                             @foreach ($item->additional['attributes'] as $attribute)
                                                 <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
                                             @endforeach
@@ -156,12 +156,14 @@
                 </div>
             @endif
 
+            @foreach (Webkul\Checkout\Helpers\Tax::getTaxRatesWithAmount($order, false) as $taxRate => $taxAmount )
             <div>
-                <span>{{ __('shop::app.mail.order.tax') }}</span>
-                <span style="float: right;">
-                    {{ core()->formatPrice($order->tax_amount, $order->order_currency_code) }}
+                <span id="taxrate-{{ $taxRate }}">{{ __('shop::app.mail.order.tax') }} {{ $taxRate }} %</span>
+                <span id="taxamount-{{ $taxRate }}" style="float: right;">
+                    {{ core()->formatPrice($taxAmount, $order->order_currency_code) }}
                 </span>
             </div>
+            @endforeach
 
             @if ($order->discount_amount > 0)
                 <div>
