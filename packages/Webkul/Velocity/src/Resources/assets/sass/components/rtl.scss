@@ -98,6 +98,12 @@ body {
                     }
                 }
             }
+
+            .locale-icon {
+                ~ .select-icon-container {
+                    right: 20px;
+                }
+            }
         }
     }
 }

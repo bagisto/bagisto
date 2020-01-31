@@ -6,8 +6,6 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
-
-use Webkul\Velocity\Velocity;
 use Webkul\Velocity\Facades\Velocity as VelocityFacade;
 
 /**
@@ -42,36 +40,6 @@ class VelocityServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../Resources/views/shop' => resource_path('themes/velocity/views'),
         ]);
-
-        Event::listen([
-            'bagisto.admin.settings.locale.edit.after',
-            'bagisto.admin.settings.locale.create.after',
-        ], function($viewRenderEventManager) {
-                $viewRenderEventManager->addTemplate(
-                    'velocity::admin.settings.locales.locale-logo'
-                );
-            }
-        );
-
-        Event::listen([
-            'bagisto.admin.catalog.category.edit_form_accordian.description_images.controls.after',
-            'bagisto.admin.catalog.category.create_form_accordian.description_images.controls.after',
-        ], function($viewRenderEventManager) {
-                $viewRenderEventManager->addTemplate(
-                    'velocity::admin.catelog.categories.category-icon'
-                );
-            }
-        );
-
-        Event::listen([
-            'bagisto.admin.settings.slider.edit.after',
-            'bagisto.admin.settings.slider.create.after',
-        ], function($viewRenderEventManager) {
-                $viewRenderEventManager->addTemplate(
-                    'velocity::admin.settings.sliders.velocity-slider'
-                );
-            }
-        );
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'velocity');
 
@@ -120,9 +88,5 @@ class VelocityServiceProvider extends ServiceProvider
     {
         $loader = AliasLoader::getInstance();
         $loader->alias('velocity', VelocityFacade::class);
-
-        $this->app->singleton('velocity', function () {
-            return app()->make(Velocity::class);
-        });
     }
 }

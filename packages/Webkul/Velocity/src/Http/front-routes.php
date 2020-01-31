@@ -5,7 +5,7 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
         Route::get('/product-details/{slug}', 'ShopController@fetchProductDetails')
         ->name('velocity.shop.product');
 
-        Route::get('/search', 'ShopController@search')->defaults('_config', [
+        Route::get('/categorysearch', 'ShopController@search')->defaults('_config', [
             'view' => 'shop::search.search'
         ])->name('velocity.search.index');
     });

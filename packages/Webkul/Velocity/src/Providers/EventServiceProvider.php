@@ -20,6 +20,36 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Event::listen([
+            'bagisto.admin.settings.locale.edit.after',
+            'bagisto.admin.settings.locale.create.after',
+        ], function($viewRenderEventManager) {
+                $viewRenderEventManager->addTemplate(
+                    'velocity::admin.settings.locales.locale-logo'
+                );
+            }
+        );
+
+        Event::listen([
+            'bagisto.admin.catalog.category.edit_form_accordian.description_images.controls.after',
+            'bagisto.admin.catalog.category.create_form_accordian.description_images.controls.after',
+        ], function($viewRenderEventManager) {
+                $viewRenderEventManager->addTemplate(
+                    'velocity::admin.catelog.categories.category-icon'
+                );
+            }
+        );
+
+        Event::listen([
+            'bagisto.admin.settings.slider.edit.after',
+            'bagisto.admin.settings.slider.create.after',
+        ], function($viewRenderEventManager) {
+                $viewRenderEventManager->addTemplate(
+                    'velocity::admin.settings.sliders.velocity-slider'
+                );
+            }
+        );
+
         Event::listen('bagisto.admin.layout.head', function($viewRenderEventManager) {
             $viewRenderEventManager->addTemplate('velocity::admin.layouts.style');
         });

@@ -3,6 +3,7 @@ import accounting from 'accounting';
 import VueCarousel from 'vue-carousel';
 import VueToast from 'vue-toast-notification';
 import 'vue-toast-notification/dist/index.css';
+import messagesAr from 'vee-validate/dist/locale/ar';
 
 window.axios = require("axios");
 window.VeeValidate = require("vee-validate");
@@ -14,6 +15,12 @@ Vue.use(VeeValidate);
 Vue.use(VueCarousel);
 Vue.use(BootstrapSass);
 Vue.prototype.$http = axios;
+
+Vue.use(VeeValidate, {
+    dictionary: {
+        ar: { messages: messagesAr }
+    }
+});
 
 Vue.filter('currency', function (value, argument) {
     return accounting.formatMoney(value, argument);
@@ -167,18 +174,7 @@ $(document).ready(function () {
         mounted: function () {
             document.body.style.display = "block";
 
-            let sliderContainer = $('.slides-container');
-            if (sliderContainer && sliderContainer.length) {
-                sliderContainer = sliderContainer[0];
-
-                let carouselImg = sliderContainer.querySelector('.VueCarousel-inner img');
-
-                setTimeout(() => {
-                    // debugger
-                    carouselImg.scrollTo(0, 500);
-                    // carouselImg.scrollTo(500, 0);
-                }, 1000);
-            }
+            this.$validator.localize(document.documentElement.lang);
         },
 
         methods: {
