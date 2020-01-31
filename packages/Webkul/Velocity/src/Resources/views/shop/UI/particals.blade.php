@@ -103,20 +103,21 @@
                                     {{ __('velocity::app.header.all-categories') }}
                                 </option>
 
-                                @foreach ($categories as $category)
-                                    <option
-                                        selected="selected"
-                                        value="{{ $category->id }}"
-                                        v-if="({{ $category->id }} == searchedQuery.category)">
-                                        {{ $category->name }}
-                                    </option>
+                                <template
+                                    :key="index"
+                                    v-for="(category, index) in $root.sharedRootCategories">
 
                                     <option
-                                        v-else
-                                        value="{{ $category->id }}">
-                                        {{ $category->name }}
+                                        selected="selected"
+                                        :value="category.id"
+                                        v-if="(category.id == searchedQuery.category)">
+                                        @{{ category.name }}
                                     </option>
-                                @endforeach
+
+                                    <option :value="category.id" v-else>
+                                        @{{ category.name }}
+                                    </option>
+                                </template>
                             </select>
 
                             <div class="select-icon-container">
@@ -207,7 +208,7 @@
                                 <li
                                     :key="index"
                                     v-for="(content, index) in headerContent">
-                                    <a :href="`${url}/${content.page_link}`" class="unset" v-text="content.title"></a>
+                                    <a :href="`${$root.baseUrl}/${content.page_link}`" class="unset" v-text="content.title"></a>
                                 </li>
                             </ul>
 
@@ -215,13 +216,13 @@
                                 <li v-for="(category, index) in JSON.parse(categories)">
                                     <a
                                         class="unset"
-                                        :href="`${url}/${category['translations'][0].url_path}`">
+                                        :href="`${$root.baseUrl}/${category.slug}`">
 
                                         <div class="category-logo">
                                             <img
                                                 class="category-icon"
                                                 v-if="category.category_icon_path"
-                                                :src="`${url}/storage/${category.category_icon_path}`" />
+                                                :src="`${$root.baseUrl}/storage/${category.category_icon_path}`" />
                                         </div>
                                         <span v-text="category.name"></span>
                                     </a>
@@ -347,13 +348,13 @@
 
                                     <a
                                         class="unset"
-                                        :href="`${url}/${nestedSubCategory['translations'][0].url_path}`">
+                                        :href="`${$root.baseUrl}/${nestedSubCategory.slug}`">
 
                                         <div class="category-logo">
                                             <img
                                                 class="category-icon"
                                                 v-if="nestedSubCategory.category_icon_path"
-                                                :src="`${url}/storage/${nestedSubCategory.category_icon_path}`" />
+                                                :src="`${$root.baseUrl}/storage/${nestedSubCategory.category_icon_path}`" />
                                         </div>
                                         <span>@{{ nestedSubCategory.name }}</span>
                                     </a>
@@ -368,13 +369,13 @@
                                             v-for="(thirdLevelCategory, index) in nestedSubCategory.children">
                                             <a
                                                 class="unset"
-                                                :href="`${url}/${nestedSubCategory['translations'][0].url_path}`">
+                                                :href="`${$root.baseUrl}/${nestedSubCategory.slug}`">
 
                                                 <div class="category-logo">
                                                     <img
                                                         class="category-icon"
                                                         v-if="thirdLevelCategory.category_icon_path"
-                                                        :src="`${url}/storage/${thirdLevelCategory.category_icon_path}`" />
+                                                        :src="`${$root.baseUrl}/storage/${thirdLevelCategory.category_icon_path}`" />
                                                 </div>
                                                 <span>@{{ thirdLevelCategory.name }}</span>
                                             </a>
@@ -454,7 +455,7 @@
                 </div>
 
                 <div class="right-vc-header col-4">
-                    <a :href="`${url}/customer/account/wishlist`" class="unset">
+                    <a :href="`${$root.baseUrl}/customer/account/wishlist`" class="unset">
                         <i class="material-icons">favorite_border</i>
                     </a>
 
@@ -502,8 +503,8 @@
             <ul type="none" class="no-margin">
                 <li v-for="(content, index) in headerContent" :key="index">
                     <a
-                        v-text="content.custom_title"
-                        :href="`${url}/${content['page_link']}`"
+                        v-text="content.title"
+                        :href="`${$root.baseUrl}/${content['page_link']}`"
                         v-if="(content['content_type'] == 'link')"
                         :target="content['link_target'] ? '_blank' : '_self'">
                     </a>
@@ -662,10 +663,7 @@
         Vue.component('content-header', {
             template: '#content-header-template',
             props: [
-                'url',
                 'heading',
-                'isEnabled',
-                'categories',
                 'headerContent',
             ],
 
@@ -723,7 +721,7 @@
                     } else {
                         event.preventDefault();
 
-                        let categories = JSON.parse(this.categories);
+                        let categories = this.sharedRootCategories;
                         this.rootCategories = false;
                         this.subCategory = categories[index];
                     }

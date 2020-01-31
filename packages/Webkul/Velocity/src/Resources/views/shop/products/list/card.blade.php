@@ -16,24 +16,6 @@
 @endphp
 
 {!! view_render_event('bagisto.shop.products.list.card.before', ['product' => $product]) !!}
-
-    {{-- @TODO:- make product card a vue component and get all the details through xhr --}}
-    {{-- <product-card
-        price-html="{{ view('shop::products.price', ['product' => $product])->render() }}"
-        add-to-cart-html="{{ view('shop::products.add-to-cart', [
-            'product' => $product,
-            'addWishlistClass' => !(isset($list) && $list) ? 'col-lg-4 col-md-4 col-sm-12 offset-lg-4 pr0' : '',
-            'addToCartBtnClass' => !(isset($list) && $list) ? $addToCartBtnClass ?? '' : ''
-        ])->render() }}"
-        total-reviews="{{ $totalReviews }}"
-        avg-rating="{{ $avgRatings }}"
-        list="{{ (isset($list) && $list) }}"
-        product-name="{{ $product->name }}"
-        first-review-text="{{ __('velocity::app.products.be-first-review') }}"
-        product-img="{{ $productBaseImage['medium_image_url'] }}"
-        product-url="{{ route('shop.productOrCategory.index', $product->url_key) }}">
-    </product-card> --}}
-
     @if (isset($list) && $list)
         <div class="col-12 lg-card-container list-card product-card row">
             <div class="product-image">

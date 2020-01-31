@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="{{ asset('themes/velocity/assets/css/google-font.css') }}" />
 
         @if (core()->getCurrentLocale()->direction == 'rtl')
-            <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-flipped.css" rel="stylesheet">
+            <link href="{{ asset('themes/velocity/assets/css/bootstrap-flipped.css') }}" rel="stylesheet">
 
         @endif
 
@@ -25,10 +25,21 @@
             <link rel="icon" sizes="16x16" href="{{ asset('themes/velocity/assets/images/favicon.png') }}" />
         @endif
 
-        <script src="{{ asset('themes/velocity/assets/js/jquery.min.js') }}"></script>
-        {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> --}}
-        <script type="text/javascript" src="{{ asset('themes/velocity/assets/js/velocity.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('themes/velocity/assets/js/jquery.ez-plus.js') }}"></script>
+        <script
+            type="text/javascript"
+            src="{{ asset('themes/velocity/assets/js/jquery.min.js') }}">
+        </script>
+
+        <script
+            type="text/javascript"
+            baseUrl='{{ url()->to('/') }}'
+            src="{{ asset('themes/velocity/assets/js/velocity.js') }}">
+        </script>
+
+        <script
+            type="text/javascript"
+            src="{{ asset('themes/velocity/assets/js/jquery.ez-plus.js') }}">
+        </script>
 
         @yield('head')
 
@@ -45,16 +56,6 @@
     <body @if (core()->getCurrentLocale()->direction == 'rtl') class="rtl" @endif>
         {!! view_render_event('bagisto.shop.layout.body.before') !!}
 
-        @php
-            $categories = [];
-
-            foreach (app('Webkul\Category\Repositories\CategoryRepository')->getVisibleCategoryTree(core()->getCurrentChannel()->root_category_id) as $category) {
-
-                if ($category->slug)
-                    array_push($categories, $category);
-            }
-        @endphp
-
         @include('shop::UI.particals')
 
         <div id="app">
@@ -64,9 +65,7 @@
 
                 @section('body-header')
                     @include('shop::layouts.top-nav.index')
-                    @include('shop::layouts.header.index', [
-                        'categories' => $categories
-                    ])
+                    @include('shop::layouts.header.index')
 
                     <div class="main-content-wrapper col-12 no-padding">
                         @php
@@ -75,8 +74,6 @@
 
                         <content-header
                             url="{{ url()->to('/') }}"
-                            is-enabled="{{ sizeof($categories) }}"
-                            categories="{{ json_encode($categories) }}"
                             :header-content="{{ json_encode($velocityContent) }}"
                             heading= "{{ __('velocity::app.menu-navbar.text-category') }}"
                         ></content-header>
@@ -87,7 +84,6 @@
                                     main-sidebar=true
                                     id="sidebar-level-0"
                                     url="{{ url()->to('/') }}"
-                                    :categories="{{ json_encode($categories) }}"
                                     category-count="{{ $velocityMetaData ? $velocityMetaData->sidebar_category_count : 10 }}"
                                     add-class="category-list-container pt10">
                                 </sidebar-component>

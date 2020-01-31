@@ -24,13 +24,13 @@
                     v-for="(product, index) in recentlyViewed">
 
                     <div class="col-4 product-image-container mr15">
-                        <a :href="`${baseURL}/${product.urlKey}`" class="unset">
+                        <a :href="`${baseUrl}/${product.urlKey}`" class="unset">
                             <div class="product-image" :style="`background-image: url(${product.image})`"></div>
                         </a>
                     </div>
 
                     <div class="col-8 no-padding card-body align-vertical-top">
-                        <a :href="`${baseURL}/${product.urlKey}`" class="unset no-padding">
+                        <a :href="`${baseUrl}/${product.urlKey}`" class="unset no-padding">
                             <div class="product-name">
                                 <span class="fs16 text-nowrap">@{{ product.name }}</span>
                             </div>
@@ -67,7 +67,6 @@
 
                 data: function () {
                     return {
-                        baseURL: '{{ url()->to('/') }}',
                         recentlyViewed: (() => {
                             let storedRecentlyViewed = window.localStorage.recentlyViewed;
                             if (storedRecentlyViewed) {
@@ -89,11 +88,9 @@
                 },
 
                 created: function () {
-                    // @TODO:- current product and recentlyViewed
-
                     for (slug in this.recentlyViewed) {
                         if (slug) {
-                            this.$http(`${this.baseURL}/product-details/${slug}`)
+                            this.$http(`${this.baseUrl}/product-details/${slug}`)
                             .then(response => {
                                 if (response.data.status) {
                                     this.$set(this.recentlyViewed, response.data.details.urlKey, response.data.details);

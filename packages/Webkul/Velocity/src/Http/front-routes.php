@@ -8,5 +8,9 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
         Route::get('/categorysearch', 'ShopController@search')->defaults('_config', [
             'view' => 'shop::search.search'
         ])->name('velocity.search.index');
+
+        Route::get('/categories', 'ShopController@fetchCategories')->name('velocity.categoriest');
+
+        Route::get('/category-details', 'ShopController@categoryDetails')->name('velocity.category.details');
     });
 });

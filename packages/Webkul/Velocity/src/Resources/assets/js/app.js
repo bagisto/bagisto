@@ -50,9 +50,11 @@ $(document).ready(function () {
     Vue.mixin({
         data: function () {
             return {
+                'baseUrl': document.querySelector("script[src$='velocity.js']").getAttribute('baseurl'),
                 'navContainer': false,
                 'responsiveSidebarTemplate': '',
                 'responsiveSidebarKey': Math.random(),
+                'sharedRootCategories': [],
             }
         },
 
@@ -141,7 +143,7 @@ $(document).ready(function () {
                 });
             },
 
-            isMobile() {
+            isMobile: function () {
                 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
                   return true
                 } else {
@@ -157,7 +159,7 @@ $(document).ready(function () {
 
         data: function () {
             return {
-                modalIds: {}
+                modalIds: {},
             }
         },
 
@@ -173,8 +175,9 @@ $(document).ready(function () {
 
         mounted: function () {
             document.body.style.display = "block";
-
             this.$validator.localize(document.documentElement.lang);
+
+            this.loadCategories();
         },
 
         methods: {
@@ -245,6 +248,16 @@ $(document).ready(function () {
             showModal: function (id) {
                 this.$set(this.modalIds, id, true);
             },
+
+            loadCategories: function () {
+                this.$http.get(`${this.baseUrl}/categories`)
+                .then(response => {
+                    this.sharedRootCategories = response.data.categories;
+                })
+                .catch(error => {
+                    console.log('failed to load categories');
+                })
+            }
         }
     });
 });

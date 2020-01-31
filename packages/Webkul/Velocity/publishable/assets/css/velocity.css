@@ -2181,6 +2181,27 @@
   display: none;
 }
 
+.sidebar .sub-categories .category {
+  padding: 5px 0 4px 15px;
+}
+
+.sidebar .sub-categories .category + .nested {
+  color: rgba(0, 0, 0, 0.83);
+}
+
+.sidebar .sub-categories .category + .nested li a {
+  padding-top: 0;
+}
+
+.sidebar .sub-categories .category + .nested li a .category-title {
+  font-weight: 500;
+  padding-left: 28px;
+}
+
+.sidebar .sub-categories .category .category-title {
+  vertical-align: top;
+}
+
 .category-list-container {
   z-index: 10;
   padding: 0px !important;
@@ -2201,11 +2222,11 @@
   position: relative;
 }
 
-.category-list-container li {
+.category-list-container li a {
   padding: 7px 0 5px 15px;
 }
 
-.category-list-container li:hover {
+.category-list-container li:hover > a {
   background: #ECECEC;
 }
 
@@ -2508,8 +2529,8 @@
 }
 
 .full-content-wrapper p > .container-fluid {
-  margin-bottom: 60px;
   padding: 0 !important;
+  margin-bottom: 60px !important;
 }
 
 .full-content-wrapper p > .container-fluid > .row {
@@ -2661,6 +2682,11 @@
 
 .bottom-toolbar .pagination .angle-left-icon::before {
   content: "\E907";
+}
+
+.carousel-products + .recently-viewed {
+  top: -40px;
+  position: relative;
 }
 
 /* @author Shubham Mehrotra */

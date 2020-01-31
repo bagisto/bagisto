@@ -1143,9 +1143,11 @@ $(document).ready(function () {
     __WEBPACK_IMPORTED_MODULE_0_vue___default.a.mixin({
         data: function data() {
             return {
+                'baseUrl': document.querySelector("script[src$='velocity.js']").getAttribute('baseurl'),
                 'navContainer': false,
                 'responsiveSidebarTemplate': '',
-                'responsiveSidebarKey': Math.random()
+                'responsiveSidebarKey': Math.random(),
+                'sharedRootCategories': []
             };
         },
 
@@ -1266,8 +1268,9 @@ $(document).ready(function () {
 
         mounted: function mounted() {
             document.body.style.display = "block";
-
             this.$validator.localize(document.documentElement.lang);
+
+            this.loadCategories();
         },
 
         methods: {
@@ -1340,6 +1343,16 @@ $(document).ready(function () {
 
             showModal: function showModal(id) {
                 this.$set(this.modalIds, id, true);
+            },
+
+            loadCategories: function loadCategories() {
+                var _this3 = this;
+
+                this.$http.get(this.baseUrl + '/categories').then(function (response) {
+                    _this3.sharedRootCategories = response.data.categories;
+                }).catch(function (error) {
+                    console.log('failed to load categories');
+                });
             }
         }
     });
@@ -35993,24 +36006,53 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['id', 'url', 'addClass', 'parentSlug', 'categories', 'mainSidebar', 'categoryCount'],
+    props: ['id', 'addClass', 'parentSlug', 'mainSidebar', 'categoryCount'],
 
     data: function data() {
-        var slicedCategories = this.categories;
-        var categoryCount = this.categoryCount ? this.categoryCount : 9;
-
-        if (slicedCategories && slicedCategories.length > categoryCount) {
-            slicedCategories = this.categories.slice(0, categoryCount);
-        }
-
-        if (this.parentSlug) slicedCategories['parentSlug'] = this.parentSlug;
-
         return {
-            slicedCategories: slicedCategories,
+            slicedCategories: [],
             sidebarLevel: Math.floor(Math.random() * 1000)
         };
+    },
+
+    watch: {
+        '$root.sharedRootCategories': function $rootSharedRootCategories(categories) {
+            this.formatCategories(categories);
+        }
     },
 
     methods: {
@@ -36026,6 +36068,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     sidebarContainer.show();
                 }
             }
+        },
+
+        formatCategories: function formatCategories(categories) {
+            var slicedCategories = categories;
+            var categoryCount = this.categoryCount ? this.categoryCount : 9;
+
+            if (slicedCategories && slicedCategories.length > categoryCount) {
+                slicedCategories = categories.slice(0, categoryCount);
+            }
+
+            if (this.parentSlug) slicedCategories['parentSlug'] = this.parentSlug;
+
+            this.slicedCategories = slicedCategories;
         }
     }
 });
@@ -36054,11 +36109,11 @@ var render = function() {
           _c(
             "ul",
             { attrs: { type: "none" } },
-            _vm._l(_vm.slicedCategories, function(category, index) {
+            _vm._l(_vm.slicedCategories, function(category, categoryIndex) {
               return _c(
                 "li",
                 {
-                  key: index,
+                  key: categoryIndex,
                   staticClass: "category-content cursor-pointer",
                   attrs: { id: "category-" + category.id },
                   on: {
@@ -36074,17 +36129,10 @@ var render = function() {
                   _c(
                     "a",
                     {
-                      staticClass: "category unset",
-                      class: category.children.length > 0 ? "fw6" : "",
-                      attrs: {
-                        href:
-                          _vm.url +
-                          "/" +
-                          (_vm.slicedCategories.parentSlug
-                            ? _vm.slicedCategories.parentSlug + "/"
-                            : "") +
-                          category["translations"][0].slug
-                      }
+                      class:
+                        "category unset " +
+                        (category.children.length > 0 ? "fw6" : ""),
+                      attrs: { href: _vm.$root.baseUrl + "/" + category.slug }
                     },
                     [
                       _c(
@@ -36113,7 +36161,7 @@ var render = function() {
                             ? _c("img", {
                                 attrs: {
                                   src:
-                                    _vm.url +
+                                    _vm.$root.baseUrl +
                                     "/storage/" +
                                     category.category_icon_path
                                 }
@@ -36157,22 +36205,178 @@ var render = function() {
                           {
                             class:
                               "sub-categories sub-category-" +
-                              (_vm.sidebarLevel + index)
+                              (_vm.sidebarLevel + categoryIndex)
                           },
                           [
-                            _c("sidebar-component", {
-                              attrs: {
-                                url: _vm.url,
-                                categories: category.children,
-                                id:
-                                  "sidebar-level-" + (_vm.sidebarLevel + index),
-                                "parent-slug": category.parentSlug
-                                  ? category.parentSlug
-                                  : category["translations"][0].slug
-                              }
-                            })
-                          ],
-                          1
+                            _c(
+                              "nav",
+                              {
+                                staticClass: "sidebar",
+                                attrs: {
+                                  id:
+                                    "sidebar-level-" +
+                                    (_vm.sidebarLevel + categoryIndex)
+                                },
+                                on: {
+                                  mouseover: function($event) {
+                                    return _vm.remainBar(
+                                      "sidebar-level-" +
+                                        (_vm.sidebarLevel + categoryIndex)
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _c(
+                                  "ul",
+                                  { attrs: { type: "none" } },
+                                  _vm._l(category.children, function(
+                                    subCategory,
+                                    subCategoryIndex
+                                  ) {
+                                    return _c(
+                                      "li",
+                                      {
+                                        key:
+                                          subCategoryIndex + "-" + categoryIndex
+                                      },
+                                      [
+                                        _c(
+                                          "a",
+                                          {
+                                            class:
+                                              "category unset " +
+                                              (subCategory.children.length > 0
+                                                ? "fw6"
+                                                : ""),
+                                            attrs: {
+                                              href:
+                                                _vm.$root.baseUrl +
+                                                "/" +
+                                                category.slug +
+                                                "/" +
+                                                subCategory.slug
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass: "category-icon",
+                                                on: {
+                                                  mouseout: function($event) {
+                                                    return _vm.toggleSidebar(
+                                                      _vm.id,
+                                                      $event,
+                                                      "mouseout"
+                                                    )
+                                                  },
+                                                  mouseover: function($event) {
+                                                    return _vm.toggleSidebar(
+                                                      _vm.id,
+                                                      $event,
+                                                      "mouseover"
+                                                    )
+                                                  }
+                                                }
+                                              },
+                                              [
+                                                subCategory.category_icon_path
+                                                  ? _c("img", {
+                                                      attrs: {
+                                                        src:
+                                                          _vm.$root.baseUrl +
+                                                          "/storage/" +
+                                                          subCategory.category_icon_path
+                                                      }
+                                                    })
+                                                  : _vm._e()
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "span",
+                                              { staticClass: "category-title" },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(subCategory["name"])
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "ul",
+                                          {
+                                            staticClass: "nested",
+                                            attrs: { type: "none" }
+                                          },
+                                          _vm._l(subCategory.children, function(
+                                            childSubCategory,
+                                            childSubCategoryIndex
+                                          ) {
+                                            return _c(
+                                              "li",
+                                              {
+                                                key:
+                                                  childSubCategoryIndex +
+                                                  "-" +
+                                                  subCategoryIndex +
+                                                  "-" +
+                                                  categoryIndex
+                                              },
+                                              [
+                                                _c(
+                                                  "a",
+                                                  {
+                                                    class:
+                                                      "category unset " +
+                                                      (subCategory.children
+                                                        .length > 0
+                                                        ? "fw6"
+                                                        : ""),
+                                                    attrs: {
+                                                      href:
+                                                        _vm.$root.baseUrl +
+                                                        "/" +
+                                                        category.slug +
+                                                        "/" +
+                                                        subCategory.slug +
+                                                        "/" +
+                                                        childSubCategory.slug
+                                                    }
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        staticClass:
+                                                          "category-title"
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            childSubCategory.name
+                                                          )
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          }),
+                                          0
+                                        )
+                                      ]
+                                    )
+                                  }),
+                                  0
+                                )
+                              ]
+                            )
+                          ]
                         )
                       ])
                     : _vm._e()
@@ -36318,15 +36522,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 // compile add to cart html (it contains wishlist component)
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['list', 'productImg', 'productUrl', 'priceHtml', 'addToCartHtml', 'productName', 'totalReviews', 'avgRating', 'firstReviewText'],
-
-    data: function data() {
-        return {};
-    }
+    props: ['list', 'product']
 });
 
 /***/ }),
@@ -36345,8 +36544,13 @@ var render = function() {
           _c("div", { staticClass: "product-image" }, [
             _c(
               "a",
-              { attrs: { title: _vm.productName, href: _vm.productUrl } },
-              [_c("img", { attrs: { src: _vm.productImg } })]
+              {
+                attrs: {
+                  title: _vm.product.name,
+                  href: _vm.baseUrl + "/" + _vm.product.slug
+                }
+              },
+              [_c("img", { attrs: { src: _vm.product.image } })]
             )
           ]),
           _vm._v(" "),
@@ -36357,11 +36561,14 @@ var render = function() {
                   "a",
                   {
                     staticClass: "unset",
-                    attrs: { href: _vm.productUrl, title: _vm.productName }
+                    attrs: {
+                      href: _vm.baseUrl + "/" + _vm.product.slug,
+                      title: _vm.product.name
+                    }
                   },
                   [
                     _c("span", { staticClass: "fs16" }, [
-                      _vm._v(_vm._s(_vm.productName))
+                      _vm._v(_vm._s(_vm.product.name))
                     ])
                   ]
                 )
@@ -36369,18 +36576,20 @@ var render = function() {
               _vm._v(" "),
               _c("div", {
                 staticClass: "product-price",
-                domProps: { innerHTML: _vm._s(_vm.priceHtml) }
+                domProps: { innerHTML: _vm._s(_vm.product.priceHTML) }
               }),
               _vm._v(" "),
-              _vm.totalReviews && _vm.totalReviews > 0
+              _vm.product.totalReviews && _vm.product.totalReviews > 0
                 ? _c(
                     "div",
                     { staticClass: "product-rating" },
                     [
-                      _c("star-ratings", { attrs: { ratings: _vm.avgRating } }),
+                      _c("star-ratings", {
+                        attrs: { ratings: _vm.product.avgRating }
+                      }),
                       _vm._v(" "),
                       _c("span", [
-                        _vm._v(_vm._s(_vm.totalReviews) + " Ratings")
+                        _vm._v(_vm._s(_vm.product.totalReviews) + " Ratings")
                       ])
                     ],
                     1
@@ -36388,13 +36597,15 @@ var render = function() {
                 : _c("div", { staticClass: "product-rating" }, [
                     _c("span", {
                       staticClass: "fs14",
-                      domProps: { textContent: _vm._s(_vm.firstReviewText) }
+                      domProps: {
+                        textContent: _vm._s(_vm.product.firstReviewText)
+                      }
                     })
                   ]),
               _vm._v(" "),
               _c("div", {
                 staticClass: "cart-wish-wrap row mt5",
-                domProps: { innerHTML: _vm._s(_vm.addToCartHtml) }
+                domProps: { innerHTML: _vm._s(_vm.product.addToCartHtml) }
               })
             ])
           ])
@@ -36405,15 +36616,18 @@ var render = function() {
           "a",
           {
             staticClass: "product-image-container",
-            attrs: { href: _vm.productUrl, title: _vm.productName }
+            attrs: {
+              href: _vm.baseUrl + "/" + _vm.product.slug,
+              title: _vm.product.name
+            }
           },
           [
             _c("img", {
               staticClass: "card-img-top",
               attrs: {
                 loading: "lazy",
-                src: _vm.productImg,
-                alt: _vm.productName
+                src: _vm.product.image,
+                alt: _vm.product.name
               }
             })
           ]
@@ -36425,11 +36639,14 @@ var render = function() {
               "a",
               {
                 staticClass: "unset",
-                attrs: { href: _vm.productUrl, title: _vm.productName }
+                attrs: {
+                  title: _vm.product.name,
+                  href: _vm.baseUrl + "/" + _vm.product.slug
+                }
               },
               [
                 _c("span", { staticClass: "fs16" }, [
-                  _vm._v(_vm._s(_vm.productName))
+                  _vm._v(_vm._s(_vm.product.name))
                 ])
               ]
             )
@@ -36437,18 +36654,20 @@ var render = function() {
           _vm._v(" "),
           _c("div", {
             staticClass: "product-price fs16",
-            domProps: { innerHTML: _vm._s(_vm.priceHtml) }
+            domProps: { innerHTML: _vm._s(_vm.product.priceHTML) }
           }),
           _vm._v(" "),
-          _vm.totalReviews && _vm.totalReviews > 0
+          _vm.product.totalReviews && _vm.product.totalReviews > 0
             ? _c(
                 "div",
                 { staticClass: "product-rating col-12 no-padding" },
                 [
-                  _c("star-ratings", { attrs: { ratings: _vm.avgRating } }),
+                  _c("star-ratings", {
+                    attrs: { ratings: _vm.product.avgRating }
+                  }),
                   _vm._v(" "),
                   _c("span", { staticClass: "align-top" }, [
-                    _vm._v(_vm._s(_vm.totalReviews) + " Ratings")
+                    _vm._v(_vm._s(_vm.product.totalReviews) + " Ratings")
                   ])
                 ],
                 1
@@ -36456,13 +36675,13 @@ var render = function() {
             : _c("div", { staticClass: "product-rating col-12 no-padding" }, [
                 _c("span", {
                   staticClass: "fs14",
-                  domProps: { textContent: _vm._s(_vm.firstReviewText) }
+                  domProps: { textContent: _vm._s(_vm.product.firstReviewText) }
                 })
               ]),
           _vm._v(" "),
           _c("div", {
             staticClass: "cart-wish-wrap row col-12 no-padding ml0",
-            domProps: { innerHTML: _vm._s(_vm.addToCartHtml) }
+            domProps: { innerHTML: _vm._s(_vm.product.addToCartHtml) }
           })
         ])
       ])
