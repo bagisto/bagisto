@@ -69,7 +69,7 @@
 
         computed: {
             savedValues () {
-                if(!this.value)
+                if(! this.value)
                     return [];
 
                 if(this.inputType == 'radio')
