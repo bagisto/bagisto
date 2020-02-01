@@ -103,18 +103,16 @@
                                     {{ __('velocity::app.header.all-categories') }}
                                 </option>
 
-                                <template
-                                    :key="index"
-                                    v-for="(category, index) in $root.sharedRootCategories">
-
+                                <template v-for="(category, index) in $root.sharedRootCategories">
                                     <option
+                                        :key="index"
                                         selected="selected"
                                         :value="category.id"
                                         v-if="(category.id == searchedQuery.category)">
                                         @{{ category.name }}
                                     </option>
 
-                                    <option :value="category.id" v-else>
+                                    <option :key="index" :value="category.id" v-else>
                                         @{{ category.name }}
                                     </option>
                                 </template>

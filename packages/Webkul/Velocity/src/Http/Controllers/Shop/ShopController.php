@@ -150,6 +150,13 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
         ];
     }
 
+    public function newOrFeaturedProducts($slug, $count = 10)
+    {
+        $products = app('Webkul\Velocity\Repositories\Product\ProductRepository')->getNewProducts($count);
+
+        return $products;
+    }
+
     public function fetchCategories()
     {
         $formattedCategories = [];
