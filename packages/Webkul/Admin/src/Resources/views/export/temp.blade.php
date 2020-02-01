@@ -3,9 +3,9 @@
         <tr>
             @foreach ($columns as $key => $value)
                 <?php
-                    $value == 'increment_id' ? $value : 'order_id';
+                   $title =  $value == 'increment_id' ? 'order_id' : $value;
                 ?>
-                <th>{{ $value }}</th>
+                <th>{{ $title }}</th>
             @endforeach
         </tr>
     </thead>
