@@ -104,57 +104,61 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
 
     public function categoryDetails()
     {
-        $categoryDetails = app('Webkul\Category\Repositories\CategoryRepository')->findByPath(request()->get('category-slug'));
+        $slug = request()->get('category-slug');
 
-        if ($categoryDetails) {
-            $list = false;
-            $customizedProducts = [];
-            $products = $this->productRepository->getAll($categoryDetails->id);
+        switch ($slug) {
+            case 'new-products':
+            case 'featured-products':
+                $formattedProducts = [];
+                $count = request()->get('count');
 
-            foreach ($products as $product) {
+                $productRepository = app('Webkul\Velocity\Repositories\Product\ProductRepository');
 
-                $productImage = app('Webkul\Product\Helpers\ProductImage')->getProductBaseImage($product)['medium_image_url'];
+                if ($slug == "new-products") {
+                    $products = $productRepository->getNewProducts($count);
+                } else if ($slug == "featured-products") {
+                    $products = $productRepository->getFeaturedProducts($count);
+                }
 
-                $reviewHelper = app('Webkul\Product\Helpers\Review');
+                foreach ($products as $product) {
+                    array_push($formattedProducts, $this->formatProduct($product));
+                }
 
-                $totalReviews = $reviewHelper->getTotalReviews($product);
-                $avgRatings = ceil($reviewHelper->getAverageRating($product));
+                $response = [
+                    'status' => true,
+                    'products' => $formattedProducts,
+                ];
 
-                array_push($customizedProducts, [
-                    'list' => false,
-                    'name' => $product->name,
-                    'image' => $productImage,
-                    'slug' => $product->url_key,
-                    'priceHTML' => view('shop::products.price', ['product' => $product])->render(),
-                    'totalReviews' => $totalReviews,
-                    'avgRating' => $avgRatings,
-                    'firstReviewText' => trans('velocity::app.products.be-first-review'),
-                    'addToCartHtml' => view('shop::products.add-to-cart', [
-                        'product' => $product,
-                        'addWishlistClass' => !(isset($list) && $list) ? 'col-lg-4 col-md-4 col-sm-12 offset-lg-4 pr0' : '',
-                        'addToCartBtnClass' => !(isset($list) && $list) ? $addToCartBtnClass ?? '' : ''
-                    ])->render(),
-                ]);
-            }
+                break;
+            default:
+                $categoryDetails = app('Webkul\Category\Repositories\CategoryRepository')->findByPath($slug);
 
-            $response = [
-                'status' => true,
-                'list' => $list,
-                'categoryDetails' => $categoryDetails,
-                'categoryProducts' => $customizedProducts,
-            ];
+                if ($categoryDetails) {
+                    $list = false;
+                    $customizedProducts = [];
+                    $products = $this->productRepository->getAll($categoryDetails->id);
+
+                    foreach ($products as $product) {
+                        $productDetails = [];
+
+                        array_push($productDetails, $this->formatProduct($product));
+                        array_push($customizedProducts, $productDetails);
+                    }
+
+                    $response = [
+                        'status' => true,
+                        'list' => $list,
+                        'categoryDetails' => $categoryDetails,
+                        'categoryProducts' => $customizedProducts,
+                    ];
+                }
+
+                break;
         }
 
         return $response ?? [
             'status' => false,
         ];
-    }
-
-    public function newOrFeaturedProducts($slug, $count = 10)
-    {
-        $products = app('Webkul\Velocity\Repositories\Product\ProductRepository')->getNewProducts($count);
-
-        return $products;
     }
 
     public function fetchCategories()
@@ -185,6 +189,29 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
             'name' => $category->name,
             'children' => $formattedChildCategory,
             'category_icon_path' => $category->category_icon_path,
+        ];
+    }
+
+    private function formatProduct($product, $list = false)
+    {
+        $reviewHelper = app('Webkul\Product\Helpers\Review');
+        $totalReviews = $reviewHelper->getTotalReviews($product);
+        $avgRatings = ceil($reviewHelper->getAverageRating($product));
+        $productImage = app('Webkul\Product\Helpers\ProductImage')->getProductBaseImage($product)['medium_image_url'];
+
+        return [
+            'name' => $product->name,
+            'image' => $productImage,
+            'slug' => $product->url_key,
+            'priceHTML' => view('shop::products.price', ['product' => $product])->render(),
+            'totalReviews' => $totalReviews,
+            'avgRating' => $avgRatings,
+            'firstReviewText' => trans('velocity::app.products.be-first-review'),
+            'addToCartHtml' => view('shop::products.add-to-cart', [
+                'product' => $product,
+                'addWishlistClass' => !(isset($list) && $list) ? 'col-lg-4 col-md-4 col-sm-12 offset-lg-4 pr0' : '',
+                'addToCartBtnClass' => !(isset($list) && $list) ? $addToCartBtnClass ?? '' : ''
+            ])->render(),
         ];
     }
 }

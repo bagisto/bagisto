@@ -3761,6 +3761,10 @@ body::after {
   cursor: pointer;
 }
 
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
+
 .cursor-default {
   cursor: default;
 }
