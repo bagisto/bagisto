@@ -63,7 +63,7 @@
                 <span class="fs14" v-text="product.firstReviewText"></span>
             </div>
 
-            <div class="cart-wish-wrap row col-12 no-padding ml0" v-html="product.addToCartHtml"></div>
+            <vnode-injector :nodes="getAddToCartHtml()"></vnode-injector>
         </div>
     </div>
 </template>
@@ -75,5 +75,31 @@
             'list',
             'product',
         ],
+
+        data: function () {
+            return {
+                'addToCart': 0,
+                'addToCartHtml': '',
+                'message' : "Hello there",
+                'showTestClass': 'sdfsdf',
+            }
+        },
+
+        methods: {
+            getAddToCartHtml: function () {
+                const { render, staticRenderFns } = Vue.compile(this.product.addToCartHtml);
+                const _staticRenderFns = this.$options.staticRenderFns = staticRenderFns;
+
+                try {
+                    var output = render.call(this, this.$createElement)
+                } catch (exception) {
+                    debugger
+                }
+
+                this.$options.staticRenderFns = _staticRenderFns
+
+                return output
+            }
+        },
     }
 </script>

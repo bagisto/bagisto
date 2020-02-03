@@ -260,4 +260,12 @@ $(document).ready(function () {
             }
         }
     });
+
+    Vue.component('vnode-injector', {
+        functional: true,
+        props: ['nodes'],
+        render(h, {props}) {
+            return props.nodes;
+        }
+    })
 });

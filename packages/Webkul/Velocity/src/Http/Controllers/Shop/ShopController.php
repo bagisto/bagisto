@@ -141,7 +141,7 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
                     foreach ($products as $product) {
                         $productDetails = [];
 
-                        array_push($productDetails, $this->formatProduct($product));
+                        $productDetails = array_merge($productDetails, $this->formatProduct($product));
                         array_push($customizedProducts, $productDetails);
                     }
 

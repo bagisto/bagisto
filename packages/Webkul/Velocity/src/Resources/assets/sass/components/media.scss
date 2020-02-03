@@ -272,6 +272,10 @@
                     height: 100%;
                 }
             }
+
+            &:last-child {
+                padding-left: 0;
+            }
         }
     }
 

@@ -1921,7 +1921,8 @@
         }
     }
 
-    p {
+    p,
+    div {
         > .container-fluid {
             padding: 0 !important;
             margin-bottom: 60px !important;
@@ -2092,5 +2093,11 @@
     + .recently-viewed {
         top: -40px;
         position: relative;
+    }
+
+    &.with-recent-viewed {
+        .btn-add-to-cart {
+            @extend .small-padding;
+        }
     }
 }

@@ -1356,6 +1356,16 @@ $(document).ready(function () {
             }
         }
     });
+
+    __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('vnode-injector', {
+        functional: true,
+        props: ['nodes'],
+        render: function render(h, _ref4) {
+            var props = _ref4.props;
+
+            return props.nodes;
+        }
+    });
 });
 
 /***/ }),
@@ -36531,7 +36541,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 // compile add to cart html (it contains wishlist component)
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['list', 'product']
+    props: ['list', 'product'],
+
+    data: function data() {
+        return {
+            'addToCart': 0,
+            'addToCartHtml': '',
+            'message': "Hello there",
+            'showTestClass': 'sdfsdf'
+        };
+    },
+
+    methods: {
+        getAddToCartHtml: function getAddToCartHtml() {
+            var _Vue$compile = Vue.compile(this.product.addToCartHtml),
+                render = _Vue$compile.render,
+                staticRenderFns = _Vue$compile.staticRenderFns;
+
+            var _staticRenderFns = this.$options.staticRenderFns = staticRenderFns;
+
+            try {
+                var output = render.call(this, this.$createElement);
+            } catch (exception) {
+                debugger;
+            }
+
+            this.$options.staticRenderFns = _staticRenderFns;
+
+            return output;
+        }
+    }
 });
 
 /***/ }),
@@ -36639,57 +36678,61 @@ var render = function() {
           ]
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c("div", { staticClass: "product-name col-12 no-padding" }, [
-            _c(
-              "a",
-              {
-                staticClass: "unset",
-                attrs: {
-                  title: _vm.product.name,
-                  href: _vm.baseUrl + "/" + _vm.product.slug
-                }
-              },
-              [
-                _c("span", { staticClass: "fs16" }, [
-                  _vm._v(_vm._s(_vm.product.name))
-                ])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", {
-            staticClass: "product-price fs16",
-            domProps: { innerHTML: _vm._s(_vm.product.priceHTML) }
-          }),
-          _vm._v(" "),
-          _vm.product.totalReviews && _vm.product.totalReviews > 0
-            ? _c(
-                "div",
-                { staticClass: "product-rating col-12 no-padding" },
+        _c(
+          "div",
+          { staticClass: "card-body" },
+          [
+            _c("div", { staticClass: "product-name col-12 no-padding" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "unset",
+                  attrs: {
+                    title: _vm.product.name,
+                    href: _vm.baseUrl + "/" + _vm.product.slug
+                  }
+                },
                 [
-                  _c("star-ratings", {
-                    attrs: { ratings: _vm.product.avgRating }
-                  }),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "align-top" }, [
-                    _vm._v(_vm._s(_vm.product.totalReviews) + " Ratings")
+                  _c("span", { staticClass: "fs16" }, [
+                    _vm._v(_vm._s(_vm.product.name))
                   ])
-                ],
-                1
+                ]
               )
-            : _c("div", { staticClass: "product-rating col-12 no-padding" }, [
-                _c("span", {
-                  staticClass: "fs14",
-                  domProps: { textContent: _vm._s(_vm.product.firstReviewText) }
-                })
-              ]),
-          _vm._v(" "),
-          _c("div", {
-            staticClass: "cart-wish-wrap row col-12 no-padding ml0",
-            domProps: { innerHTML: _vm._s(_vm.product.addToCartHtml) }
-          })
-        ])
+            ]),
+            _vm._v(" "),
+            _c("div", {
+              staticClass: "product-price fs16",
+              domProps: { innerHTML: _vm._s(_vm.product.priceHTML) }
+            }),
+            _vm._v(" "),
+            _vm.product.totalReviews && _vm.product.totalReviews > 0
+              ? _c(
+                  "div",
+                  { staticClass: "product-rating col-12 no-padding" },
+                  [
+                    _c("star-ratings", {
+                      attrs: { ratings: _vm.product.avgRating }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "align-top" }, [
+                      _vm._v(_vm._s(_vm.product.totalReviews) + " Ratings")
+                    ])
+                  ],
+                  1
+                )
+              : _c("div", { staticClass: "product-rating col-12 no-padding" }, [
+                  _c("span", {
+                    staticClass: "fs14",
+                    domProps: {
+                      textContent: _vm._s(_vm.product.firstReviewText)
+                    }
+                  })
+                ]),
+            _vm._v(" "),
+            _c("vnode-injector", { attrs: { nodes: _vm.getAddToCartHtml() } })
+          ],
+          1
+        )
       ])
 }
 var staticRenderFns = []
@@ -36786,7 +36829,7 @@ var render = function() {
   return _c(
     "i",
     {
-      class: "material-icons " + _vm.addClass,
+      class: "material-icons " + (_vm.addClass ? _vm.addClass : ""),
       on: {
         mouseover: function($event) {
           _vm.isActive ? (_vm.isActive = !_vm.isActive) : ""

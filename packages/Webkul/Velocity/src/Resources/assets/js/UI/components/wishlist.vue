@@ -1,6 +1,6 @@
 <template>
     <i
-        :class="`material-icons ${addClass}`"
+        :class="`material-icons ${addClass ? addClass : ''}`"
         @mouseover="isActive ? isActive = !isActive : ''"
         @mouseout="active !== '' && !isActive ? isActive = !isActive : ''">
 

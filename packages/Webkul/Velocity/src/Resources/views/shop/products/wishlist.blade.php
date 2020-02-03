@@ -7,7 +7,7 @@
         @endphp
 
         <a
-            class="unset wishlist-icon {{ $addWishlistClass ?? '' }}"
+            class="unset wishlist-icon {{ $addWishlistClass ?? '' }} text-right"
             @if (! $isWished)
                 href="{{ route('customer.wishlist.add', $product->product_id) }}"
                 title="{{ __('velocity::app.shop.wishlist.add-wishlist-text') }}"
@@ -16,15 +16,15 @@
                 title="{{ __('velocity::app.shop.wishlist.remove-wishlist-text') }}"
             @endif>
 
-            <wishlist-component active="{{ !$isWished }}"></wishlist-component>
+            <wishlist-component active="{{ !$isWished }}" add-class="text-down-6"></wishlist-component>
         </a>
     @endauth
 
     @guest('customer')
         <a
             href="{{ route('customer.session.index') }}"
-            class="unset wishlist-icon {{ $addWishlistClass ?? '' }}">
-            <wishlist-component active="false"></wishlist-component>
+            class="unset wishlist-icon {{ $addWishlistClass ?? '' }} text-right">
+            <wishlist-component active="false" add-class="text-down-6"></wishlist-component>
         </a>
     @endauth
 {!! view_render_event('bagisto.shop.products.wishlist.after') !!}
