@@ -346,6 +346,9 @@ class Core
     */
     public function convertPrice($amount, $targetCurrencyCode = null)
     {
+      if (! isset($this->lastCurrencyCode))
+         $this->lastCurrencyCode = $this->getBaseCurrency()->code ;
+
         $targetCurrency = ! $targetCurrencyCode
                         ? $this->getCurrentCurrency()
                         : $this->currencyRepository->findOneByField('code', $targetCurrencyCode);
@@ -360,7 +363,12 @@ class Core
         if (null === $exchangeRate || ! $exchangeRate->rate)
             return $amount;
 
-        return (float) $amount * $exchangeRate->rate;
+        $result = (float) $amount * (float) ($this->lastCurrencyCode == $targetCurrency->code ? 1.0 : $exchangeRate->rate);
+
+        if ($this->lastCurrencyCode != $targetCurrency->code)
+           $this->lastCurrencyCode = $targetCurrency->code;
+
+        return $result;
     }
 
     /**
