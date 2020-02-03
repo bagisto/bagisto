@@ -19,7 +19,7 @@ class Simple extends AbstractType
 
     /**
      * These blade files will be included in product edit page
-     * 
+     *
      * @var array
      */
     protected $additionalViews = [
@@ -27,7 +27,7 @@ class Simple extends AbstractType
         'admin::catalog.products.accordians.images',
         'admin::catalog.products.accordians.categories',
         'admin::catalog.products.accordians.channels',
-        'admin::catalog.products.accordians.product-links'
+        'admin::catalog.products.accordians.product-links',
     ];
 
     /**
@@ -60,6 +60,7 @@ class Simple extends AbstractType
      */
     public function haveSufficientQuantity($qty)
     {
-        return $qty <= $this->totalQuantity() ? true : (core()->getConfigData('catalog.inventory.stock_options.backorders') ? true : false);
+        $backorders = core()->getConfigData('catalog.inventory.stock_options.backorders');
+        return $qty <= $this->totalQuantity() ? true : $backorders;
     }
 }
