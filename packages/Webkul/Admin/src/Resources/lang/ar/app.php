@@ -150,7 +150,9 @@ return [
         'role' => 'الدور',
         'sub-total' => 'المجموع الفرعي',
         'no-of-products' => 'عدد المنتجات',
-        'refunded' => 'Refunded'
+        'refunded' => 'Refunded',
+        'rtl' => 'RTL',
+        'ltr' => 'LTR',
     ],
 
     'account' => [

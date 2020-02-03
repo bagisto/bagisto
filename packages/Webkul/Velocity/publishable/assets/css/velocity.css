@@ -997,6 +997,7 @@
 
 .product-card-new .product-image-container img {
   width: 100%;
+  height: 100%;
 }
 
 .product-card-new .card-current-price {
@@ -3758,6 +3759,10 @@ body::after {
 
 .cursor-pointer, .qty-btn > *:not(:nth-child(2)), .category-list-container .category {
   cursor: pointer;
+}
+
+.cursor-not-allowed {
+  cursor: not-allowed;
 }
 
 .cursor-default {

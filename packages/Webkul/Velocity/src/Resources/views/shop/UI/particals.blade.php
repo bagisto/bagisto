@@ -103,18 +103,16 @@
                                     {{ __('velocity::app.header.all-categories') }}
                                 </option>
 
-                                <template
-                                    :key="index"
-                                    v-for="(category, index) in $root.sharedRootCategories">
-
+                                <template v-for="(category, index) in $root.sharedRootCategories">
                                     <option
+                                        :key="index"
                                         selected="selected"
                                         :value="category.id"
                                         v-if="(category.id == searchedQuery.category)">
                                         @{{ category.name }}
                                     </option>
 
-                                    <option :value="category.id" v-else>
+                                    <option :key="index" :value="category.id" v-else>
                                         @{{ category.name }}
                                     </option>
                                 </template>
@@ -488,7 +486,7 @@
             v-else
             @mouseout="toggleSidebar('0', $event, 'mouseout')"
             @mouseover="toggleSidebar('0', $event, 'mouseover')"
-            class="main-category fs16 unselectable fw6 cursor-pointer left">
+            :class="`main-category fs16 unselectable fw6 ${(sharedRootCategories.length > 0) ? 'cursor-pointer' : 'cursor-not-allowed'} left`">
 
             <i class="rango-view-list text-down-4 align-vertical-top fs18">
             </i>
@@ -669,9 +667,9 @@
 
             data: function () {
                 return {
-                    'currencies': false,
                     'languages': false,
                     'hamburger': false,
+                    'currencies': false,
                     'subCategory': null,
                     'isSearchbar': false,
                     'rootCategories': true,
