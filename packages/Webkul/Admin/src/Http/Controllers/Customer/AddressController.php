@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Customer;
 
+use Webkul\Customer\Rules\VatIdRule;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Customer\Repositories\CustomerRepository as Customer;
 use Webkul\Customer\Repositories\CustomerAddressRepository as CustomerAddress;
@@ -20,25 +21,26 @@ class AddressController extends Controller
      * @var array
      */
     protected $_config;
-        
+
     /**
      * Customer Repository object
      *
      * @var object
-    */
+     */
     protected $customer;
-    
+
     /**
      * CustomerAddress Repository object
      *
      * @var object
-    */
+     */
     protected $customerAddress;
-    
+
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Customer\Repositories\CustomerAddressRepository $customerAddress
+     * @param Webkul\Customer\Repositories\CustomerAddressRepository $customerAddress
+     *
      * @return void
      */
     public function __construct(
@@ -59,7 +61,7 @@ class AddressController extends Controller
      * @return Mixed
      */
     public function index($id)
-    {   
+    {
         $customer = $this->customer->find($id);
 
         return view($this->_config['view'], compact('customer'));
@@ -84,20 +86,24 @@ class AddressController extends Controller
      */
     public function store()
     {
-       request()->merge(['address1' => implode(PHP_EOL, array_filter(request()->input('address1')))]);
+        request()->merge([
+            'address1' => implode(PHP_EOL, array_filter(request()->input('address1'))),
+        ]);
 
         $data = collect(request()->input())->except('_token')->toArray();
 
         $this->validate(request(), [
-            'address1' => 'string|required',
-            'country' => 'string|required',
-            'state' => 'string|required',
-            'city' => 'string|required',
-            'postcode' => 'required',
-            'phone' => 'required'
+            'company_name' => 'string',
+            'address1'     => 'string|required',
+            'country'      => 'string|required',
+            'state'        => 'string|required',
+            'city'         => 'string|required',
+            'postcode'     => 'required',
+            'phone'        => 'required',
+            'vat_id'       => new VatIdRule(),
         ]);
 
-        if ( $this->customerAddress->create($data) ) {
+        if ($this->customerAddress->create($data)) {
             session()->flash('success', trans('admin::app.customers.addresses.success-create'));
 
             return redirect()->route('admin.customer.addresses.index', ['id' => $data['customer_id']]);
@@ -131,19 +137,21 @@ class AddressController extends Controller
         request()->merge(['address1' => implode(PHP_EOL, array_filter(request()->input('address1')))]);
 
         $this->validate(request(), [
-            'address1' => 'string|required',
-            'country' => 'string|required',
-            'state' => 'string|required',
-            'city' => 'string|required',
-            'postcode' => 'required',
-            'phone' => 'required'
+            'company_name' => 'string',
+            'address1'     => 'string|required',
+            'country'      => 'string|required',
+            'state'        => 'string|required',
+            'city'         => 'string|required',
+            'postcode'     => 'required',
+            'phone'        => 'required',
+            'vat_id'       => new VatIdRule(),
         ]);
 
         $data = collect(request()->input())->except('_token')->toArray();
 
         $address = $this->customerAddress->find($id);
 
-        if ( $address ) {
+        if ($address) {
 
             $this->customerAddress->update($data, $id);
 
@@ -157,7 +165,8 @@ class AddressController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

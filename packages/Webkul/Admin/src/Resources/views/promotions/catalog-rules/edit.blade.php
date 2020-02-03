@@ -350,7 +350,7 @@
 
                     attribute_type_indexes: {
                         'product': 0
-                    }, 
+                    },
 
                     condition_operators: {
                         'price': [{

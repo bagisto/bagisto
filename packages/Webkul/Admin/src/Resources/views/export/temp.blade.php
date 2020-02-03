@@ -2,7 +2,10 @@
     <thead>
         <tr>
             @foreach ($columns as $key => $value)
-                <th>{{ $value }}</th>
+                <?php
+                   $title =  $value == 'increment_id' ? 'order_id' : $value;
+                ?>
+                <th>{{ $title }}</th>
             @endforeach
         </tr>
     </thead>

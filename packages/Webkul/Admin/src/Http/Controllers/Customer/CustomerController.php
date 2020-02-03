@@ -31,14 +31,14 @@ class CustomerController extends Controller
      */
     protected $customerRepository;
 
-     /**
+    /**
      * CustomerGroupRepository object
      *
      * @var array
      */
     protected $customerGroupRepository;
 
-     /**
+    /**
      * ChannelRepository object
      *
      * @var array
@@ -74,13 +74,13 @@ class CustomerController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\View\View
-    */
+     */
     public function index()
     {
         return view($this->_config['view']);
     }
 
-     /**
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\View\View
@@ -91,10 +91,10 @@ class CustomerController extends Controller
 
         $channelName = $this->channelRepository->all();
 
-        return view($this->_config['view'], compact('customerGroup','channelName'));
+        return view($this->_config['view'], compact('customerGroup', 'channelName'));
     }
 
-     /**
+    /**
      * Store a newly created resource in storage.
      *
      * @return \Illuminate\Http\Response
@@ -102,16 +102,16 @@ class CustomerController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'first_name' => 'string|required',
-            'last_name' => 'string|required',
-            'gender' => 'required',
-            'email' => 'required|unique:customers,email',
-            'date_of_birth' => 'date|before:today'
+            'first_name'    => 'string|required',
+            'last_name'     => 'string|required',
+            'gender'        => 'required',
+            'email'         => 'required|unique:customers,email',
+            'date_of_birth' => 'date|before:today',
         ]);
 
         $data = request()->all();
 
-        $password = rand(100000,10000000);
+        $password = rand(100000, 10000000);
 
         $data['password'] = bcrypt($password);
 
@@ -122,7 +122,7 @@ class CustomerController extends Controller
         try {
             Mail::queue(new NewCustomerNotification($customer, $password));
         } catch (\Exception $e) {
-
+            report($e);
         }
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Customer']));
@@ -133,7 +133,8 @@ class CustomerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\View\View
      */
     public function edit($id)
@@ -147,20 +148,21 @@ class CustomerController extends Controller
         return view($this->_config['view'], compact('customer', 'customerGroup', 'channelName'));
     }
 
-     /**
+    /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update($id)
     {
         $this->validate(request(), [
-            'first_name' => 'string|required',
-            'last_name' => 'string|required',
-            'gender' => 'required',
-            'email' => 'required|unique:customers,email,'. $id,
-            'date_of_birth' => 'date|before:today'
+            'first_name'    => 'string|required',
+            'last_name'     => 'string|required',
+            'gender'        => 'required',
+            'email'         => 'required|unique:customers,email,' . $id,
+            'date_of_birth' => 'date|before:today',
         ]);
 
         $this->customerRepository->update(request()->all(), $id);
@@ -173,7 +175,8 @@ class CustomerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -186,7 +189,7 @@ class CustomerController extends Controller
             session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
 
             return response()->json(['message' => true], 200);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Customer']));
         }
 
@@ -213,13 +216,13 @@ class CustomerController extends Controller
     public function storeNote()
     {
         $this->validate(request(), [
-            'notes' => 'string|nullable'
+            'notes' => 'string|nullable',
         ]);
 
         $customer = $this->customerRepository->find(request()->input('_customer'));
 
         $noteTaken = $customer->update([
-            'notes' => request()->input('notes')
+            'notes' => request()->input('notes'),
         ]);
 
         if ($noteTaken) {
@@ -245,7 +248,7 @@ class CustomerController extends Controller
             $customer = $this->customerRepository->find($customerId);
 
             $customer->update([
-                'status' => $updateOption
+                'status' => $updateOption,
             ]);
         }
 
@@ -265,7 +268,7 @@ class CustomerController extends Controller
 
         foreach ($customerIds as $customerId) {
             $this->customerRepository->deleteWhere([
-                'id' => $customerId
+                'id' => $customerId,
             ]);
         }
 

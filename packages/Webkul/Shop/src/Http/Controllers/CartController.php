@@ -182,6 +182,8 @@ class CartController extends Controller
                 'message' => trans('shop::app.checkout.total.invalid-coupon')
             ]);
         } catch (\Exception $e) {
+            report($e);
+
             return response()->json([
                 'success' => false,
                 'message' => trans('shop::app.checkout.total.coupon-apply-issue')

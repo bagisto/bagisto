@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Webkul\User\Models\Admin;
-
+use Webkul\Customer\Models\Customer;
 
 /**
  * Inherited Methods
@@ -31,26 +31,65 @@ class FunctionalTester extends \Codeception\Actor
      */
 
     /**
-     * Login as default administrator
+     * Set the logged in user to the admin identity.
+     *
+     * @param \Webkul\User\Models\Admin|null $admin
+     *
+     * @throws \Exception
+     * @returns Admin
      */
-    public function loginAsAdmin(): void
+    public function loginAsAdmin(Admin $admin = null): Admin
     {
         $I = $this;
 
-        Auth::guard('admin')->login($I->grabRecord(Admin::class, ['email' => 'admin@example.com']));
+        if (! $admin) {
+            $admin = $I->grabRecord(Admin::class, ['email' => 'admin@example.com']);
+        }
+
+        if (! $admin) {
+            throw new \Exception(
+                'Admin user not found in database. Please ensure Seeders are executed');
+        }
+
+        Auth::guard('admin')
+            ->login($admin);
+
         $I->seeAuthentication('admin');
+
+        return $admin;
     }
 
     /**
-     * Go to a specific route and check if admin guard is applied on it
+     * Set the logged in user to the customer identity.
      *
-     * @param string     $name name of the route
-     * @param array|null $params params the route will be created with
+     * @param \Webkul\User\Models\Customer|null $customer
+     *
+     * @throws \Exception
+     * @returns Customer
      */
-    public function amOnAdminRoute(string $name, array $params = null): void
+    public function loginAsCustomer(Customer $customer = null): Customer
     {
         $I = $this;
-        $I->amOnRoute($name, $params);
+
+        if (! $customer) {
+            $customer = $I->have(Customer::class);
+        }
+
+        Auth::guard('customer')
+            ->login($customer);
+
+        $I->seeAuthentication('customer');
+
+        return $customer;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function amOnAdminRoute(string $name)
+    {
+        $I = $this;
+        $I->amOnRoute($name);
         $I->seeCurrentRouteIs($name);
 
         /** @var RouteCollection $routes */

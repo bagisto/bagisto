@@ -32,5 +32,3 @@ $factory->state(Customer::class, 'male', [
 $factory->state(Customer::class, 'female', [
     'gender' => 'Female',
 ]);
-
-

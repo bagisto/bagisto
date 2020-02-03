@@ -213,7 +213,9 @@ return [
         'times-used' => 'Times Used',
         'created-date' => 'Created Date',
         'expiration-date' => 'Expiration Date',
-        'delete' => 'Delete'
+        'delete' => 'Delete',
+        'rtl' => 'RTL',
+        'ltr' => 'LTR',
     ],
 
     'account' => [
@@ -776,7 +778,8 @@ return [
             'seo' => 'Home page SEO',
             'seo-title' => 'Meta title',
             'seo-description' => 'Meta description',
-            'seo-keywords' => 'Meta keywords'
+            'seo-keywords' => 'Meta keywords',
+
         ],
 
         'sliders' => [
@@ -867,6 +870,7 @@ return [
 
         'addresses' => [
             'title' => ':customer_name\'s Addresses List',
+            'vat_id' => 'Vat id',
             'create-title' => 'Create Customer\'s Address',
             'edit-title' => 'Update Customer\'s Address',
             'title-orders' => ':customer_name\'s Orders List',
@@ -1262,7 +1266,9 @@ return [
             'order-number-length' => 'Order Number Length',
             'order-number-suffix' => 'Order Number Suffix',
             'default' => 'Default',
-            'sandbox' => 'Sandbox'
+            'sandbox' => 'Sandbox',
+            'all-channels' => 'All',
+            'all-locales' => 'All'
         ]
     ]
 ];
