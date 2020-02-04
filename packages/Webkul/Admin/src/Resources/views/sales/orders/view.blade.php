@@ -347,9 +347,9 @@
                                     @php ($taxRates = Webkul\Tax\Helpers\Tax::getTaxRatesWithAmount($order, true))
                                     @foreach ($taxRates as $taxRate => $baseTaxAmount)
                                     <tr {{ $loop->last ? 'class=border' : ''}}>
-                                        <td id="taxrate-{{ $taxRate }}">{{ __('admin::app.sales.orders.tax') }} {{ $taxRate }} %</td>
+                                        <td id="taxrate-{{ core()->taxRateAsIdentifier($taxRate) }}">{{ __('admin::app.sales.orders.tax') }} {{ $taxRate }} %</td>
                                         <td>-</td>
-                                        <td id="basetaxamount-{{ $taxRate }}">{{ core()->formatBasePrice($baseTaxAmount) }}</td>
+                                        <td id="basetaxamount-{{ core()->taxRateAsIdentifier($taxRate) }}">{{ core()->formatBasePrice($baseTaxAmount) }}</td>
                                     </tr>
                                     @endforeach
 

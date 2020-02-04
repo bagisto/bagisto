@@ -20,8 +20,8 @@
     @if ($cart->base_tax_total)
         @foreach (Webkul\Tax\Helpers\Tax::getTaxRatesWithAmount($cart, true) as $taxRate => $baseTaxAmount )
         <div class="item-detail">
-            <label id="taxrate-{{ $taxRate }}">{{ __('shop::app.checkout.total.tax') }} {{ $taxRate }} %</label>
-            <label class="right" id="basetaxamount-{{ $taxRate }}">{{ core()->currency($baseTaxAmount) }}</label>
+            <label id="taxrate-{{ core()->taxRateAsIdentifier($taxRate) }}">{{ __('shop::app.checkout.total.tax') }} {{ $taxRate }} %</label>
+            <label class="right" id="basetaxamount-{{ core()->taxRateAsIdentifier($taxRate) }}">{{ core()->currency($baseTaxAmount) }}</label>
         </div>
         @endforeach
     @endif

@@ -29,6 +29,13 @@ class Tax
         return $taxes;
     }
 
+    /**
+     * Returns the total tax amount
+     * @param object $that
+     * @param bool   $asBase
+     *
+     * @return float
+     */
     public static function getTaxTotal(object $that, bool $asBase = false): float
     {
         $taxes = self::getTaxRatesWithAmount($that, $asBase);

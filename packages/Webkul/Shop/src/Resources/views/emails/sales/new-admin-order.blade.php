@@ -163,8 +163,8 @@
 
             @foreach (Webkul\Tax\Helpers\Tax::getTaxRatesWithAmount($order, true) as $taxRate => $baseTaxAmount )
             <div>
-                <span id="taxrate-{{ $taxRate }}">{{ __('shop::app.mail.order.tax') }} {{ $taxRate }} %</span>
-                <span id="basetaxamount-{{ $taxRate }}" style="float: right;">
+                <span id="taxrate-{{ core()->taxRateAsIdentifier($taxRate) }}">{{ __('shop::app.mail.order.tax') }} {{ $taxRate }} %</span>
+                <span id="basetaxamount-{{ core()->taxRateAsIdentifier($taxRate) }}" style="float: right;">
                     {{ core()->formatBasePrice($baseTaxAmount) }}
                 </span>
             </div>

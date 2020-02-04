@@ -4,6 +4,7 @@ namespace Tests\Functional\Cart;
 
 use FunctionalTester;
 use Faker\Factory;
+use Illuminate\Support\Facades\Config;
 use Webkul\Tax\Models\TaxMap;
 use Webkul\Tax\Models\TaxRate;
 use Webkul\Tax\Models\TaxCategory;
@@ -21,15 +22,27 @@ class CartCest
     {
         $this->faker = Factory::create();
 
-        $this->country = 'DE'; //$this->faker->countryCode;
+        $this->country = Config::get('app.default_country');
 
-        $this->tax1 = $I->have(TaxRate::class, ['tax_rate' => 7.00, 'country' => $this->country]);
+        $this->tax1 = $I->have(TaxRate::class, [
+            //'tax_rate' => 7.00,
+            'country' => $this->country
+        ]);
         $taxCategorie1 = $I->have(TaxCategory::class, []);
-        $I->have(TaxMap::class, ['tax_rate_id' => $this->tax1->id, 'tax_category_id' => $taxCategorie1->id]);
+        $I->have(TaxMap::class, [
+            'tax_rate_id' => $this->tax1->id,
+            'tax_category_id' => $taxCategorie1->id
+        ]);
 
-        $this->tax2 = $I->have(TaxRate::class, ['tax_rate' => 19.00, 'country' => $this->country]);
+        $this->tax2 = $I->have(TaxRate::class, [
+            //'tax_rate' => 19.00,
+            'country' => $this->country
+        ]);
         $taxCategorie2 = $I->have(TaxCategory::class, []);
-        $I->have(TaxMap::class, ['tax_rate_id' => $this->tax2->id, 'tax_category_id' => $taxCategorie2->id]);
+        $I->have(TaxMap::class, [
+            'tax_rate_id' => $this->tax2->id,
+            'tax_category_id' => $taxCategorie2->id
+        ]);
 
         $config1 = [
             'productInventory' => ['qty' => 100],
@@ -54,7 +67,6 @@ class CartCest
 
     public function checkCartWithMultipleTaxRates(FunctionalTester $I)
     {
-        $I->setConfigData(['default_country' => $this->country]);
 
         $prod1Quantity = $this->faker->numberBetween(9, 30);
         if ($prod1Quantity % 2 !== 0) {
@@ -73,9 +85,9 @@ class CartCest
         ]);
 
         $I->amOnPage('/checkout/cart');
-        $I->see('Tax ' . $this->tax1->tax_rate . ' %', '#taxrate-' . $this->tax1->tax_rate);
-        $I->see(round($this->product1->price * $this->tax1->tax_rate / 100, 2),
-            '#basetaxamount-' . $this->tax1->tax_rate);
+        $I->see('Tax ' . $this->tax1->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($this->tax1->tax_rate));
+        $I->see(core()->currency(round($this->product1->price * $this->tax1->tax_rate / 100, 2)),
+            '#basetaxamount-' . core()->taxRateAsIdentifier($this->tax1->tax_rate));
 
         Cart::addProduct($this->product1->id, [
             '_token'     => session('_token'),
@@ -84,9 +96,9 @@ class CartCest
         ]);
 
         $I->amOnPage('/checkout/cart');
-        $I->see('Tax ' . $this->tax1->tax_rate . ' %', '#taxrate-' . $this->tax1->tax_rate);
-        $I->see(round(($prod1Quantity + 1) * $this->product1->price * $this->tax1->tax_rate / 100, 2),
-            '#basetaxamount-' . $this->tax1->tax_rate);
+        $I->see('Tax ' . $this->tax1->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($this->tax1->tax_rate));
+        $I->see(core()->currency(round(($prod1Quantity + 1) * $this->product1->price * $this->tax1->tax_rate / 100, 2)),
+            '#basetaxamount-' . core()->taxRateAsIdentifier($this->tax1->tax_rate));
 
         Cart::addProduct($this->product2->id, [
             '_token'     => session('_token'),
@@ -95,20 +107,18 @@ class CartCest
         ]);
 
         $I->amOnPage('/checkout/cart');
-        $I->see('Tax ' . $this->tax1->tax_rate . ' %', '#taxrate-' . $this->tax1->tax_rate);
+        $I->see('Tax ' . $this->tax1->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($this->tax1->tax_rate));
         $taxAmount1 = round(($prod1Quantity + 1) * $this->product1->price * $this->tax1->tax_rate / 100, 2);
-        $I->see(core()->currency($taxAmount1),'#basetaxamount-' . $this->tax1->tax_rate);
+        $I->see(core()->currency($taxAmount1),'#basetaxamount-' . core()->taxRateAsIdentifier($this->tax1->tax_rate));
 
-        $I->see('Tax ' . $this->tax2->tax_rate . ' %', '#taxrate-' . $this->tax2->tax_rate);
+        $I->see('Tax ' . $this->tax2->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($this->tax2->tax_rate));
         $taxAmount2 = round($prod2Quantity * $this->product2->price * $this->tax2->tax_rate / 100, 2);
-        $I->see(core()->currency($taxAmount2),'#basetaxamount-' . $this->tax2->tax_rate);
+        $I->see(core()->currency($taxAmount2),'#basetaxamount-' . core()->taxRateAsIdentifier($this->tax2->tax_rate));
 
         $cart = Cart::getCart();
 
         $I->assertEquals(2, $cart->items_count);
         $I->assertEquals((float)($prod1Quantity + 1 + $prod2Quantity), $cart->items_qty);
         $I->assertEquals($taxAmount1 + $taxAmount2, $cart->tax_total);
-
-
     }
 }
