@@ -70,6 +70,12 @@ Route::group(['prefix' => 'api'], function ($router) {
 
         Route::post('reviews/{id}/create', 'ReviewController@store');
 
+        Route::delete('reviews/{id}', 'ResourceController@destroy')->defaults('_config', [
+            'repository' => 'Webkul\Product\Repositories\ProductReviewRepository',
+            'resource' => 'Webkul\API\Http\Resources\Catalog\ProductReview',
+            'authorization_required' => true
+        ]);
+        
 
         //Channel routes
         Route::get('channels', 'ResourceController@index')->defaults('_config', [

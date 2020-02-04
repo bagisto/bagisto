@@ -279,7 +279,7 @@
                             summaryHtml = Vue.compile(response.data.html)
 
                             this_this.summeryComponentKey++;
-                            this_this.reviewComponentKey++;
+                            //this_this.reviewComponentKey++;
                         })
                         .catch(function (error) {})
                 },

@@ -33,6 +33,18 @@
                         <span class="control-error" v-if="errors.has('company_name')">@{{ errors.first('company_name') }}</span>
                     </div>
 
+                    <div class="control-group" :class="[errors.has('first_name') ? 'has-error' : '']">
+                        <label for="first_name" class="required">{{ __('shop::app.customer.account.address.create.first_name') }}</label>
+                        <input type="text" class="control" name="first_name" v-validate="'required'" value="{{ $address->first_name }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.first_name') }}&quot;">
+                        <span class="control-error" v-if="errors.has('first_name')">@{{ errors.first('first_name') }}</span>
+                    </div>
+
+                    <div class="control-group" :class="[errors.has('last_name') ? 'has-error' : '']">
+                        <label for="last_name" class="required">{{ __('shop::app.customer.account.address.create.last_name') }}</label>
+                        <input type="text" class="control" name="last_name" v-validate="'required'" value="{{ $address->last_name }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.last_name') }}&quot;">
+                        <span class="control-error" v-if="errors.has('last_name')">@{{ errors.first('last_name') }}</span>
+                    </div>
+
                     <div class="control-group {!! $errors->has('vat_id') ? 'has-error' : '' !!}">
                         <label for="vat_id">{{ __('shop::app.customer.account.address.create.vat_id') }}</label>
                         <input type="text" class="control" name="vat_id"

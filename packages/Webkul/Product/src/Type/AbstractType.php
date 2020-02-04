@@ -510,8 +510,13 @@ abstract class AbstractType
 
                 return true;
             } else {
-                if (core()->isChannelDateInInterval($this->product->special_price_from, $this->product->special_price_to))
+                if (core()->isChannelDateInInterval($this->product->special_price_from, $this->product->special_price_to)) {
                     return true;
+                } else if ($rulePrice) {
+                    $this->product->special_price = $rulePrice->price;
+
+                    return true;
+                }
             }
         }
 
