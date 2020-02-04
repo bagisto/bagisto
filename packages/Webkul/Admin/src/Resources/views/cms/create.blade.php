@@ -96,6 +96,7 @@
                                 <label for="meta_description">{{ __('admin::app.cms.pages.meta_description') }}</label>
 
                                 <textarea type="text" class="control" name="meta_description">{{ old('meta_description') }}</textarea>
+
                             </div>
                         </div>
                     </accordian>
