@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Webkul\Unit\Shop;
+namespace Tests\Functional\Shop;
 
 use Codeception\Example;
 use FunctionalTester;

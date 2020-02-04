@@ -344,12 +344,12 @@
                                         </tr>
                                     @endif
 
-                                    @php ($taxRates = Webkul\Checkout\Helpers\Tax::getTaxRatesWithAmount($order, true))
+                                    @php ($taxRates = Webkul\Tax\Helpers\Tax::getTaxRatesWithAmount($order, true))
                                     @foreach ($taxRates as $taxRate => $baseTaxAmount)
                                     <tr {{ $loop->last ? 'class=border' : ''}}>
                                         <td id="taxrate-{{ $taxRate }}">{{ __('admin::app.sales.orders.tax') }} {{ $taxRate }} %</td>
                                         <td>-</td>
-                                        <td id="taxamount-{{ $taxRate }}">{{ core()->formatBasePrice($baseTaxAmount) }}</td>
+                                        <td id="basetaxamount-{{ $taxRate }}">{{ core()->formatBasePrice($baseTaxAmount) }}</td>
                                     </tr>
                                     @endforeach
 

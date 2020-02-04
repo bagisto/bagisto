@@ -2,6 +2,7 @@
 namespace Webkul\Tax\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 
 class TaxServiceProvider extends ServiceProvider
 {
@@ -22,5 +23,17 @@ class TaxServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->registerEloquentFactoriesFrom(__DIR__ . '/../Database/Factories');
+    }
+
+    /**
+     * Register factories.
+     *
+     * @param  string  $path
+     * @return void
+     */
+    protected function registerEloquentFactoriesFrom($path): void
+    {
+        $this->app->make(EloquentFactory::class)->load($path);
     }
 }

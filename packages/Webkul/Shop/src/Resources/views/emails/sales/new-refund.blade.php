@@ -158,14 +158,16 @@
                     </span>
                 </div>
             @endif
-@php(//ToDo: taxes)
+
             @if ($refund->tax_amount > 0)
+                @foreach (Webkul\Tax\Helpers\Tax::getTaxRatesWithAmount($refund, false) as $taxRate => $taxAmount)
                 <div>
                     <span>{{ __('shop::app.mail.order.tax') }}</span>
                     <span style="float: right;">
                         {{ core()->formatPrice($refund->tax_amount, $refund->order_currency_code) }}
                     </span>
                 </div>
+                @endforeach
             @endif
 
             @if ($refund->discount_amount > 0)

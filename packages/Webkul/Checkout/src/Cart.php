@@ -7,6 +7,7 @@ use Webkul\Checkout\Repositories\CartItemRepository;
 use Webkul\Checkout\Repositories\CartAddressRepository;
 use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Tax\Helpers\Tax;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Checkout\Models\CartPayment;
@@ -675,15 +676,15 @@ class Cart
             $cart->discount_amount += $item->discount_amount;
             $cart->base_discount_amount += $item->base_discount_amount;
 
-            $cart->grand_total = (float)$cart->grand_total + $item->total + $item->tax_amount - $item->discount_amount;
-            $cart->base_grand_total = (float)$cart->base_grand_total + $item->base_total + $item->base_tax_amount - $item->base_discount_amount;
-
             $cart->sub_total = (float)$cart->sub_total + $item->total;
             $cart->base_sub_total = (float)$cart->base_sub_total + $item->base_total;
-
-            $cart->tax_total = (float)$cart->tax_total + $item->tax_amount;
-            $cart->base_tax_total = (float)$cart->base_tax_total + $item->base_tax_amount;
         }
+
+        $cart->tax_total = Tax::getTaxTotal($cart, false);
+        $cart->base_tax_total = Tax::getTaxTotal($cart, true);
+
+        $cart->grand_total = $cart->sub_total + $cart->tax_total + $cart->discount_amount;
+        $cart->base_grand_total = $cart->base_sub_total + $cart->base_tax_total - $cart->base_discount_amount;
 
         if ($shipping = $cart->selected_shipping_rate) {
             $cart->grand_total = (float)$cart->grand_total + $shipping->price - $shipping->discount_amount;

@@ -1,19 +1,19 @@
 <?php
 
-namespace Webkul\Checkout\Helpers;
+namespace Webkul\Tax\Helpers;
 
 class Tax
 {
     private const TAX_PRECISION = 4;
 
     /**
-     * Returns an array with tax rates and tax amounts
+     * Returns an array with tax rates and tax amount
      * @param object $that
      * @param bool   $asBase
      *
      * @return array
      */
-    public static function getTaxRatesWithAmount(object $that, bool $asBase): array
+    public static function getTaxRatesWithAmount(object $that, bool $asBase = false): array
     {
         $taxes = [];
         foreach ($that->items as $item) {
@@ -27,5 +27,16 @@ class Tax
         }
 
         return $taxes;
+    }
+
+    public static function getTaxTotal(object $that, bool $asBase = false): float
+    {
+        $taxes = self::getTaxRatesWithAmount($that, $asBase);
+
+        $result = 0;
+        foreach ($taxes as $taxRate => $taxAmount) {
+            $result += round($taxAmount, 2);
+        }
+        return $result;
     }
 }

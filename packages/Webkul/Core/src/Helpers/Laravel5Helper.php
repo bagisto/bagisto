@@ -68,7 +68,7 @@ class Laravel5Helper extends Laravel5
     ): Product {
         $I = $this;
         /** @var Product $product */
-        $product = factory(Product::class)->states($productStates)->create($configs['productAttributes'] ?? []);;
+        $product = factory(Product::class)->states($productStates)->create($configs['productAttributes'] ?? []);
         $I->createAttributeValues($product->id,$configs['attributeValues'] ?? []);
         $I->have(ProductInventory::class, array_merge($configs['productInventory'] ?? [], [
             'product_id'          => $product->id,

@@ -156,7 +156,7 @@
                 </div>
             @endif
 
-            @foreach ($order->getTaxRatesWithAmount(false) as $taxRate => $taxAmount)
+            @foreach (Webkul\Tax\Helpers\Tax::getTaxRatesWithAmount($refund, false) as $taxRate => $taxAmount)
                 <div>
                     <span id="taxrate-{{ $taxRate }}">{{ __('shop::app.mail.order.tax') }} {{ $taxRate }} %</span>
                     <span id="taxamount-{{ $taxRate }}" style="float: right;">
