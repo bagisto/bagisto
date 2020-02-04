@@ -61,9 +61,7 @@
                         {{ __('shop::app.customer.account.address.create.submit') }}
                     </button>
                 </div>
-
             </div>
-
         </form>
 
     {!! view_render_event('bagisto.shop.customers.account.address.create.after') !!}

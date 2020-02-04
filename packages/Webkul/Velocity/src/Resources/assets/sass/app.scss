@@ -220,6 +220,26 @@ body {
             .modal-footer {
                 justify-content: unset;
             }
+
+            .modal-content {
+                padding: 0;
+
+                ul {
+                    li {
+                        &:hover {
+                            background-color: $border-light;
+                        }
+
+                        a {
+                            padding: 10px 20px;
+                        }
+
+                        &:last-child {
+                            margin-bottom: 5px;
+                        }
+                    }
+                }
+            }
         }
     }
 

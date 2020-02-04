@@ -130,7 +130,7 @@
                                 name="term"
                                 type="search"
                                 class="form-control"
-                                :value="searchedQuery.term"
+                                :value="searchedQuery.term ? searchedQuery.term.split('+').join(' ') : ''"
                                 placeholder="{{ __('velocity::app.header.search-text') }}" />
 
                             <button class="btn" type="submit" id="header-search-icon">

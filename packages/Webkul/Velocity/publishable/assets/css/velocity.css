@@ -1186,6 +1186,10 @@
   width: 200px !important;
 }
 
+.customer-options .customer-session {
+  padding: 10px 20px 0 20px;
+}
+
 .customer-options .customer-session label {
   font-size: 18px;
   color: #9e9e9e;
@@ -1661,6 +1665,13 @@
 
 .account-content .account-layout .account-table-content #datagrid-filters ~ table.table tbody tr .action .eye-icon:hover {
   color: #4D7EA8;
+}
+
+.account-content .account-layout .account-table-content .filter-row-two .filter-tag .cross-icon::before {
+  top: 1px;
+  content: "\E91F";
+  margin-left: 4px;
+  position: relative;
 }
 
 .account-content .account-layout .account-items-list.wishlist-container {
@@ -4383,7 +4394,7 @@ button[disabled] {
   vertical-align: middle;
 }
 
-.rango-default, .account-content .sidebar .customer-sidebar .navigation li i.icon, .account-content .account-layout .account-table-content #datagrid-filters ~ table.table tbody tr .action .eye-icon, .account-content .account-layout .bottom-toolbar .pagination .page-item.next .angle-right-icon,
+.rango-default, .account-content .sidebar .customer-sidebar .navigation li i.icon, .account-content .account-layout .account-table-content #datagrid-filters ~ table.table tbody tr .action .eye-icon, .account-content .account-layout .account-table-content .filter-row-two .filter-tag .cross-icon, .account-content .account-layout .bottom-toolbar .pagination .page-item.next .angle-right-icon,
 .account-content .account-layout .bottom-toolbar .pagination .page-item.next .angle-left-icon, .account-content .account-layout .bottom-toolbar .pagination .page-item.previous .angle-right-icon,
 .account-content .account-layout .bottom-toolbar .pagination .page-item.previous .angle-left-icon {
   speak: none;
@@ -13639,6 +13650,22 @@ body {
   -webkit-box-pack: unset;
       -ms-flex-pack: unset;
           justify-content: unset;
+}
+
+#top #account + .account-modal .modal-content {
+  padding: 0;
+}
+
+#top #account + .account-modal .modal-content ul li:hover {
+  background-color: #ECECEC;
+}
+
+#top #account + .account-modal .modal-content ul li a {
+  padding: 10px 20px;
+}
+
+#top #account + .account-modal .modal-content ul li:last-child {
+  margin-bottom: 5px;
 }
 
 #top > div:last-child {
