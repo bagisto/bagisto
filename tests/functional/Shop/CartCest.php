@@ -14,15 +14,12 @@ use Cart;
 class CartCest
 {
     private $country;
-    private $faker;
     private $product1, $product2;
     private $tax1, $tax2;
 
     function _before(FunctionalTester $I)
     {
-
-
-        $this->country = Config::get('app.default_country');
+        $this->country = Config::get('app.default_country') ?? 'DE';
 
         $this->tax1 = $I->have(TaxRate::class, [
             'country' => $this->country
