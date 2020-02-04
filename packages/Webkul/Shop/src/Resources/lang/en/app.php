@@ -469,6 +469,7 @@ return [
             'complete' => 'Complete',
             'billing-address' => 'Billing Address',
             'sign-in' => 'Sign In',
+            'company-name' => 'Company Name',
             'first-name' => 'First Name',
             'last-name' => 'Last Name',
             'email' => 'Email',

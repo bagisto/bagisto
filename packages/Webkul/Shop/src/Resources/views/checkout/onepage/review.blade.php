@@ -13,7 +13,7 @@
                 <div class="card-content">
                     <ul>
                         <li class="mb-10">
-                            {{ $billingAddress->name }}
+                            {{ $billingAddress->first_name }} {{ $billingAddress->last_name }}
                         </li>
                         <li class="mb-10">
                             {{ $billingAddress->address1 }},<br/> {{ $billingAddress->state }}
@@ -41,7 +41,7 @@
                 <div class="card-content">
                     <ul>
                         <li class="mb-10">
-                            {{ $shippingAddress->name }}
+                            {{ $shippingAddress->first_name }} {{ $shippingAddress->last_name }}
                         </li>
                         <li class="mb-10">
                             {{ $shippingAddress->address1 }},<br/> {{ $shippingAddress->state }}
@@ -113,7 +113,7 @@
 
                     @if (isset($item->additional['attributes']))
                         <div class="item-options">
-                            
+
                             @foreach ($item->additional['attributes'] as $attribute)
                                 <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
                             @endforeach
