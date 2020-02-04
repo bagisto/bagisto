@@ -7,6 +7,7 @@ use Faker\Factory;
 use Webkul\Attribute\Models\Attribute;
 use Webkul\Attribute\Models\AttributeFamily;
 use Webkul\Attribute\Models\AttributeOption;
+use Webkul\Core\Helpers\Laravel5Helper;
 use Webkul\Core\Models\Locale;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductAttributeValue;
@@ -56,7 +57,7 @@ class ProductCest
 
     public function testIndex(FunctionalTester $I): void
     {
-        $product = $I->haveProduct([], ['simple']);
+        $product = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT, [], ['simple']);
 
         $I->loginAsAdmin();
         $I->amOnAdminRoute('admin.dashboard.index');
