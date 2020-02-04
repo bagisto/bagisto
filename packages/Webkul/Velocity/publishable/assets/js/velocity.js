@@ -36553,6 +36553,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 // compile add to cart html (it contains wishlist component)
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -36686,9 +36687,9 @@ var render = function() {
               staticClass: "card-img-top lzy_img",
               attrs: {
                 loading: "lazy",
+                alt: _vm.product.name,
                 src: _vm.product.image,
-                "data-src": _vm.product.image,
-                alt: _vm.product.name
+                "data-src": _vm.product.image
               }
             })
           ]

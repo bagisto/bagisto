@@ -75,6 +75,7 @@ return [
                 'custom-title' => 'Custom Title',
                 'custom-heading' => 'Custom Heading',
                 'page-link' => 'Page Link [e.g. http://example.com/../../]',
+                'category-slug' => 'Category Slug',
                 'link-target' => 'Page Link Target',
                 'catalog-type' => 'Product Catalog Type',
                 'custom-product' => 'Store Products',

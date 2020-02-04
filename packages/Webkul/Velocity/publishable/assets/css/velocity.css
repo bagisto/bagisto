@@ -4261,6 +4261,13 @@ select:focus,
   color: #F05153;
 }
 
+.mandatory::after {
+  content: "*";
+  font-size: 16px;
+  margin-left: -1px;
+  color: #F05153;
+}
+
 a.default {
   color: rgba(0, 0, 0, 0.83) !important;
   text-decoration: none !important;
@@ -13777,7 +13784,6 @@ header #search-form {
   height: 40px;
   margin: 5px 0px;
   background: #FFFFFF;
-  padding: 4px 1px 0px 0px;
 }
 
 header #search-form * {
@@ -13857,7 +13863,7 @@ header #search-form #header-search-icon i {
 
 header .mini-cart-container {
   height: 50px;
-  padding: 5px 22px;
+  padding: 5px 17px;
 }
 
 header .mini-cart-container #mini-cart .mini-cart-content {

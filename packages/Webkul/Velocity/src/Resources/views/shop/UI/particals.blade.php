@@ -503,7 +503,7 @@
                     <a
                         v-text="content.title"
                         :href="`${$root.baseUrl}/${content['page_link']}`"
-                        v-if="(content['content_type'] == 'link')"
+                        v-if="(content['content_type'] == 'link' || content['content_type'] == 'category')"
                         :target="content['link_target'] ? '_blank' : '_self'">
                     </a>
                 </li>
