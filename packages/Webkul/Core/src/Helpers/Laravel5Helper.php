@@ -135,7 +135,6 @@ class Laravel5Helper extends Laravel5
         }
 
         /** @var Product $product */
-
         $product = $I->createProduct($configs['productAttributes'] ?? [], $productStates);
 
         $I->createAttributeValues($product->id, $configs['attributeValues'] ?? []);
