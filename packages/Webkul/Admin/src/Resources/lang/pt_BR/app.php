@@ -155,7 +155,9 @@ return [
         'per-cust' => 'Por cliente',
         'usage-throttle' => 'Tempos de uso',
         'for-guest' => 'Para convidados',
-        'refunded' => 'Refunded'
+        'refunded' => 'Refunded',
+        'rtl' => 'RTL',
+        'ltr' => 'LTR',
     ],
     'account' => [
         'title' => 'Minha Conta',
