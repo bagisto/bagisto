@@ -176,6 +176,22 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
         ];
     }
 
+    public function fetchFancyCategoryDetails($slug)
+    {
+        $categoryDetails = app('Webkul\Category\Repositories\CategoryRepository')->findByPath($slug);
+
+        if ($categoryDetails) {
+            $response = [
+                'status' => true,
+                'categoryDetails' => $this->getCategoryFilteredData($categoryDetails)
+            ];
+        }
+
+        return $response ?? [
+            'status' => false,
+        ];
+    }
+
     private function getCategoryFilteredData($category)
     {
         $formattedChildCategory = [];

@@ -1147,7 +1147,8 @@ $(document).ready(function () {
                 'navContainer': false,
                 'responsiveSidebarTemplate': '',
                 'responsiveSidebarKey': Math.random(),
-                'sharedRootCategories': []
+                'sharedRootCategories': [],
+                'imageObserver': null
             };
         },
 
@@ -1271,6 +1272,7 @@ $(document).ready(function () {
             this.$validator.localize(document.documentElement.lang);
 
             this.loadCategories();
+            this.addIntersectionObserver();
         },
 
         methods: {
@@ -1353,10 +1355,22 @@ $(document).ready(function () {
                 }).catch(function (error) {
                     console.log('failed to load categories');
                 });
+            },
+
+            addIntersectionObserver: function addIntersectionObserver() {
+                this.imageObserver = new IntersectionObserver(function (entries, imgObserver) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            var lazyImage = entry.target;
+                            lazyImage.src = lazyImage.dataset.src;
+                        }
+                    });
+                });
             }
         }
     });
 
+    // for compilation of html coming from server
     __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('vnode-injector', {
         functional: true,
         props: ['nodes'],
@@ -36538,6 +36552,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 // compile add to cart html (it contains wishlist component)
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -36668,10 +36683,11 @@ var render = function() {
           },
           [
             _c("img", {
-              staticClass: "card-img-top",
+              staticClass: "card-img-top lzy_img",
               attrs: {
                 loading: "lazy",
                 src: _vm.product.image,
+                "data-src": _vm.product.image,
                 alt: _vm.product.name
               }
             })

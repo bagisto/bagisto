@@ -32,11 +32,20 @@ class AdminHelper
         return $locale;
     }
 
-    public function storeCategoryIcon($categoryId)
+    public function storeCategoryIcon($category)
     {
-        $category = $this->categoryRepository->findOrFail($categoryId);
+        $oldPath = null;
+        $iconName = 'category_icon_path.image_1';
 
-        $uploadedImagePath = $this->uploadImage($category, 'category_icon_path.image_1');
+        if (gettype($category) !== "object") {
+            // getting id on update
+            $iconName = 'category_icon_path.image_0';
+            $category = $this->categoryRepository->findOrFail($category);
+
+            $oldPath = $category->category_icon_path;
+        }
+
+        $uploadedImagePath = $this->uploadImage($category, $iconName, $oldPath);
 
         if ($uploadedImagePath) {
             $category->category_icon_path = $uploadedImagePath;
@@ -46,7 +55,7 @@ class AdminHelper
         return $category;
     }
 
-    public function uploadImage($record, $type)
+    public function uploadImage($record, $type, $oldPath = null)
     {
         $request = request();
 
@@ -55,11 +64,8 @@ class AdminHelper
         $dir = 'velocity/' . $type;
 
         if ($request->hasFile($file)) {
-            if ($type == 'locale_image.image_0' && $record->locale_image) {
-                Storage::delete($record->locale_image);
-            }
-            if ($type == 'category_icon_path.image_1' && $record->category_icon_path) {
-                Storage::delete($record->category_icon_path);
+            if ($oldPath) {
+                Storage::delete($oldPath);
             }
 
             $image = $request->file($file)->store($dir);
