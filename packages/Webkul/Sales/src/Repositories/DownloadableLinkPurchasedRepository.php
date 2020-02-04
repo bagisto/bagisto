@@ -55,8 +55,9 @@ class DownloadableLinkPurchasedRepository extends Repository
      */
     public function saveLinks($orderItem)
     {
-        if (stristr($orderItem->type,'downloadable') === false || ! isset($orderItem->additional['links']))
+        if (! $this->isValidDownloadableProduct($orderItem)) {
             return;
+        }
 
         foreach ($orderItem->additional['links'] as $linkId) {
             if (! $productDownloadableLink = $this->productDownloadableLinkRepository->find($linkId))
@@ -76,6 +77,19 @@ class DownloadableLinkPurchasedRepository extends Repository
                 'order_item_id' => $orderItem->id
             ]);
         }
+    }
+
+    /**
+     * Return true, if ordered item is valid downloadable product with links
+     *
+     * @param mixed $orderItem Webkul\Sales\Models\OrderItem;
+     * @return bool
+     */
+    private function isValidDownloadableProduct($orderItem) : bool {
+        if (stristr($orderItem->type,'downloadable') !== false && isset($orderItem->additional['links'])) {
+            return true;
+        }
+        return false;
     }
 
     /**

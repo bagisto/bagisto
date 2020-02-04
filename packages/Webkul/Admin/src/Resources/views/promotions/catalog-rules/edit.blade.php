@@ -350,7 +350,7 @@
 
                     attribute_type_indexes: {
                         'product': 0
-                    }, 
+                    },
 
                     condition_operators: {
                         'price': [{
@@ -516,7 +516,9 @@
                     if (matchedAttribute[0]['type'] == 'multiselect' || matchedAttribute[0]['type'] == 'checkbox') {
                         this.condition.operator = '{}';
 
-                        this.condition.value = this.condition.value == '' && this.condition.value != undefined ? [] : this.condition.value;
+                        this.condition.value = this.condition.value == '' && this.condition.value != undefined
+                                ? []
+                                : Array.isArray(this.condition.value) ? this.condition.value : [];
                     }
 
                     return matchedAttribute[0];

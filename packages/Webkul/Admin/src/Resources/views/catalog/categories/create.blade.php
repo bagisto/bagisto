@@ -139,7 +139,7 @@
                     <accordian :title="'{{ __('admin::app.catalog.categories.filterable-attributes') }}'" :active="true">
                         <div slot="body">
 
-                            <?php $selectedaAtributes = old('attributes') ?? [] ?>
+                            <?php $selectedaAtributes = old('attributes') ? old('attributes') : ['11']  ?>
 
                             <div class="control-group" :class="[errors.has('attributes[]') ? 'has-error' : '']">
                                 <label for="attributes" class="required">{{ __('admin::app.catalog.categories.attributes') }}</label>

@@ -21,9 +21,9 @@ class UnitTester extends \Codeception\Actor
 {
     use _generated\UnitTesterActions;
 
-    /**
-     * Define custom actions here
-     */
+   /**
+    * Define custom actions here
+    */
 
     /**
      * execute any function of a class (also private/protected) and return its return

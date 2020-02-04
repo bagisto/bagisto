@@ -170,7 +170,7 @@ class CategoryController extends Controller
             session()->flash('warning', trans('admin::app.response.delete-category-root', ['name' => 'Category']));
         } else {
             try {
-                Event:: fire('catalog.category.delete.before', $id);
+                Event::dispatch('catalog.category.delete.before', $id);
 
                 $this->categoryRepository->delete($id);
 

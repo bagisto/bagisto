@@ -68,10 +68,12 @@
                                         {!! view_render_event('bagisto.shop.checkout.cart.item.quantity.before', ['item' => $item]) !!}
 
                                         <div class="misc">
-                                            <quantity-changer
-                                                :control-name="'qty[{{$item->id}}]'"
-                                                quantity="{{$item->quantity}}">
-                                            </quantity-changer>
+                                            @if ($item->product->getTypeInstance()->showQuantityBox() === true)
+                                                <quantity-changer
+                                                    :control-name="'qty[{{$item->id}}]'"
+                                                    quantity="{{$item->quantity}}">
+                                                </quantity-changer>
+                                            @endif
 
                                             <span class="remove">
                                                 <a href="{{ route('shop.checkout.cart.remove', $item->id) }}" onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">{{ __('shop::app.checkout.cart.remove-link') }}</a></span>
@@ -106,9 +108,11 @@
                             <a href="{{ route('shop.home.index') }}" class="link">{{ __('shop::app.checkout.cart.continue-shopping') }}</a>
 
                             <div>
-                                <button type="submit" class="btn btn-lg btn-primary">
+                                @if ($cart->hasProductsWithQuantityBox())
+                                <button type="submit" class="btn btn-lg btn-primary" id="update_cart_button">
                                     {{ __('shop::app.checkout.cart.update-cart') }}
                                 </button>
+                                @endif
 
                                 @if (! cart()->hasError())
                                     <a href="{{ route('shop.checkout.onepage.index') }}" class="btn btn-lg btn-primary">

@@ -79,6 +79,8 @@ class AddressController extends Controller
 
         $this->validate(request(), [
             'company_name' => 'string',
+            'first_name'   => 'string|required',
+            'last_name'    => 'string|required',
             'address1'     => 'string|required',
             'country'      => 'string|required',
             'state'        => 'string|required',
@@ -142,6 +144,8 @@ class AddressController extends Controller
 
         $this->validate(request(), [
             'company_name' => 'string',
+            'first_name'   => 'string|required',
+            'last_name'    => 'string|required',
             'address1'     => 'string|required',
             'country'      => 'string|required',
             'state'        => 'string|required',
