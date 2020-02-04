@@ -44,7 +44,7 @@ class TaxCest
                 'tax_category_id' => $taxCategorie1->id,
             ],
         ];
-        $product1 = $I->haveProduct($config1, ['simple']);
+        $product1 = $I->haveProduct(\Webkul\Core\Helpers\Laravel5Helper::SIMPLE_PRODUCT, $config1);
 
         $config2 = [
             'productInventory' => ['qty' => 100],
@@ -54,7 +54,7 @@ class TaxCest
                 'tax_category_id' => $taxCategorie2->id,
             ],
         ];
-        $product2 = $I->haveProduct($config2, ['simple']);
+        $product2 = $I->haveProduct(\Webkul\Core\Helpers\Laravel5Helper::SIMPLE_PRODUCT, $config2);
 
         Cart::addProduct($product1->id, [
             '_token'     => session('_token'),

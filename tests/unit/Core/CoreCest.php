@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Core;
 
-use Codeception\Example;
 use UnitTester;
+use Codeception\Example;
 
 class CoreCest
 {
@@ -20,7 +20,11 @@ class CoreCest
     {
         $I->assertEquals(
             $scenario['expected'],
-            $I->executeFunction(\Webkul\Core\Core::class, 'taxRateAsIdentifier', [$scenario['input']])
+            $I->executeFunction(
+                \Webkul\Core\Core::class,
+                'taxRateAsIdentifier',
+                [$scenario['input']]
+            )
         );
     }
 

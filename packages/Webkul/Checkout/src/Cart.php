@@ -132,7 +132,7 @@ class Cart
      * @param integer $productId
      * @param array   $data
      *
-     * @return Cart
+     * @return Mixed  Cart on success, array with warning otherwise
      */
     public function addProduct($productId, $data)
     {
@@ -140,8 +140,8 @@ class Cart
 
         $cart = $this->getCart();
 
-        if (!$cart && !$cart = $this->create($data)) {
-            return;
+        if (! $cart && ! $cart = $this->create($data)) {
+            return ['warning' => __('shop::app.checkout.cart.item.error-add')];
         }
 
         $product = $this->productRepository->findOneByField('id', $productId);
@@ -173,6 +173,9 @@ class Cart
                         $cartItem = $this->cartItemRepository->create(array_merge($cartProduct,
                             ['cart_id' => $cart->id]));
                     } else {
+                        if ($product->getTypeInstance()->showQuantityBox() === false) {
+                            return ['warning' => __('shop::app.checkout.cart.integrity.qty_impossible')];
+                        }
                         $cartItem = $this->cartItemRepository->update($cartProduct, $cartItem->id);
                     }
                 }

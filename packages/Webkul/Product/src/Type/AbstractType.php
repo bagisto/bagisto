@@ -514,7 +514,7 @@ abstract class AbstractType
                     return true;
                 } else if ($rulePrice) {
                     $this->product->special_price = $rulePrice->price;
-                    
+
                     return true;
                 }
             }

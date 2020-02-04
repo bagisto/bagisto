@@ -265,7 +265,8 @@ return [
         Webkul\CatalogRule\Providers\CatalogRuleServiceProvider::class,
         Webkul\CartRule\Providers\CartRuleServiceProvider::class,
         Webkul\Rule\Providers\RuleServiceProvider::class,
-        Webkul\CMS\Providers\CMSServiceProvider::class
+        Webkul\CMS\Providers\CMSServiceProvider::class,
+        Webkul\Velocity\Providers\VelocityServiceProvider::class,
     ],
 
     /*

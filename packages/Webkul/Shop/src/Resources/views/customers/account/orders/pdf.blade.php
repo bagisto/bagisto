@@ -26,6 +26,7 @@
                 width: 100%;
                 border-collapse: collapse;
                 text-align: left;
+                table-layout: fixed;
             }
 
             .table thead th {
@@ -69,7 +70,8 @@
             }
 
             .sale-summary tr.bold {
-                font-weight: 600;
+                font-family: DejaVu Sans; sans-serif;
+                font-weight: 700;
             }
 
             .label {

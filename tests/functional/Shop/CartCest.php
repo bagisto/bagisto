@@ -47,7 +47,7 @@ class CartCest
                 'tax_category_id' => $taxCategorie1->id,
             ],
         ];
-        $this->product1 = $I->haveProduct($config1, ['simple']);
+        $this->product1 = $I->haveProduct(\Webkul\Core\Helpers\Laravel5Helper::SIMPLE_PRODUCT, $config1);
 
         $config2 = [
             'productInventory' => ['qty' => 100],
@@ -57,7 +57,7 @@ class CartCest
                 'tax_category_id' => $taxCategorie2->id,
             ],
         ];
-        $this->product2 = $I->haveProduct($config2, ['simple']);
+        $this->product2 = $I->haveProduct(\Webkul\Core\Helpers\Laravel5Helper::SIMPLE_PRODUCT, $config2);
     }
 
     public function checkCartWithMultipleTaxRates(FunctionalTester $I)
