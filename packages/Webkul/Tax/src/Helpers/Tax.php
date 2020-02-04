@@ -4,7 +4,7 @@ namespace Webkul\Tax\Helpers;
 
 class Tax
 {
-    private const TAX_PRECISION = 4;
+    public const TAX_PRECISION = 4;
 
     /**
      * Returns an array with tax rates and tax amount
