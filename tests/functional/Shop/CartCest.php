@@ -19,7 +19,7 @@ class CartCest
 
     function _before(FunctionalTester $I)
     {
-        $this->country = Config::get('app.default_country') ?? 'DE';
+        $this->country = strtoupper(Config::get('app.default_country')) ?? 'DE';
 
         $this->tax1 = $I->have(TaxRate::class, [
             'country' => $this->country
