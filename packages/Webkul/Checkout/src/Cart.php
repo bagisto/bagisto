@@ -764,7 +764,7 @@ class Cart
 
                     function __construct()
                     {
-                        $this->country = config('app.default_country');
+                        $this->country = strtoupper(config('app.default_country'));
                     }
                 };
             }

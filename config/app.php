@@ -102,6 +102,8 @@ return [
     | Ensure it is uppercase and reflects the 'code' column of the
     | countries table.
     |
+    | for example: DE EN FR
+    | (use capital letters!)
     */
 
     'default_country' => null,
