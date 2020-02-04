@@ -23,17 +23,6 @@ class TaxServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerEloquentFactoriesFrom(__DIR__ . '/../Database/Factories');
-    }
-
-    /**
-     * Register factories.
-     *
-     * @param  string  $path
-     * @return void
-     */
-    protected function registerEloquentFactoriesFrom($path): void
-    {
-        $this->app->make(EloquentFactory::class)->load($path);
+        $this->loadFactoriesFrom(__DIR__ . '/../Database/Factories');
     }
 }

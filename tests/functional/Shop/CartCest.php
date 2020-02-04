@@ -20,25 +20,23 @@ class CartCest
 
     function _before(FunctionalTester $I)
     {
-        $this->faker = Factory::create();
+
 
         $this->country = Config::get('app.default_country');
 
         $this->tax1 = $I->have(TaxRate::class, [
-            //'tax_rate' => 7.00,
             'country' => $this->country
         ]);
-        $taxCategorie1 = $I->have(TaxCategory::class, []);
+        $taxCategorie1 = $I->have(TaxCategory::class);
         $I->have(TaxMap::class, [
             'tax_rate_id' => $this->tax1->id,
             'tax_category_id' => $taxCategorie1->id
         ]);
 
         $this->tax2 = $I->have(TaxRate::class, [
-            //'tax_rate' => 19.00,
             'country' => $this->country
         ]);
-        $taxCategorie2 = $I->have(TaxCategory::class, []);
+        $taxCategorie2 = $I->have(TaxCategory::class);
         $I->have(TaxMap::class, [
             'tax_rate_id' => $this->tax2->id,
             'tax_category_id' => $taxCategorie2->id
@@ -67,13 +65,14 @@ class CartCest
 
     public function checkCartWithMultipleTaxRates(FunctionalTester $I)
     {
-
-        $prod1Quantity = $this->faker->numberBetween(9, 30);
+        $prod1Quantity = $I->fake()->numberBetween(9, 30);
+        // quantity of product1 should be not even
         if ($prod1Quantity % 2 !== 0) {
             $prod1Quantity -= 1;
         }
 
-        $prod2Quantity = $this->faker->numberBetween(9, 30);
+        $prod2Quantity = $I->fake()->numberBetween(9, 30);
+        // quantity of product2 should be even
         if ($prod2Quantity % 2 == 0) {
             $prod2Quantity -= 1;
         }
@@ -86,8 +85,10 @@ class CartCest
 
         $I->amOnPage('/checkout/cart');
         $I->see('Tax ' . $this->tax1->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($this->tax1->tax_rate));
-        $I->see(core()->currency(round($this->product1->price * $this->tax1->tax_rate / 100, 2)),
-            '#basetaxamount-' . core()->taxRateAsIdentifier($this->tax1->tax_rate));
+        $I->see(
+            core()->currency(round($this->product1->price * $this->tax1->tax_rate / 100, 2)),
+            '#basetaxamount-' . core()->taxRateAsIdentifier($this->tax1->tax_rate)
+        );
 
         Cart::addProduct($this->product1->id, [
             '_token'     => session('_token'),
@@ -97,8 +98,10 @@ class CartCest
 
         $I->amOnPage('/checkout/cart');
         $I->see('Tax ' . $this->tax1->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($this->tax1->tax_rate));
-        $I->see(core()->currency(round(($prod1Quantity + 1) * $this->product1->price * $this->tax1->tax_rate / 100, 2)),
-            '#basetaxamount-' . core()->taxRateAsIdentifier($this->tax1->tax_rate));
+        $I->see(
+            core()->currency(round(($prod1Quantity + 1) * $this->product1->price * $this->tax1->tax_rate / 100, 2)),
+            '#basetaxamount-' . core()->taxRateAsIdentifier($this->tax1->tax_rate)
+        );
 
         Cart::addProduct($this->product2->id, [
             '_token'     => session('_token'),

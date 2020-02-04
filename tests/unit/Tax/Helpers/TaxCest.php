@@ -16,14 +16,12 @@ class TaxCest
 
     public function _before(UnitTester $I)
     {
-        $faker = Factory::create();
-
         $country = Config::get('app.default_country');
 
         $tax1 = $I->have(TaxRate::class, [
             'country' => $country,
         ]);
-        $taxCategorie1 = $I->have(TaxCategory::class, []);
+        $taxCategorie1 = $I->have(TaxCategory::class);
         $I->have(TaxMap::class, [
             'tax_rate_id'     => $tax1->id,
             'tax_category_id' => $taxCategorie1->id,
@@ -32,7 +30,7 @@ class TaxCest
         $tax2 = $I->have(TaxRate::class, [
             'country' => $country,
         ]);
-        $taxCategorie2 = $I->have(TaxCategory::class, []);
+        $taxCategorie2 = $I->have(TaxCategory::class);
         $I->have(TaxMap::class, [
             'tax_rate_id'     => $tax2->id,
             'tax_category_id' => $taxCategorie2->id,
@@ -90,8 +88,11 @@ class TaxCest
 
     public function testGetTaxRatesWithAmount(UnitTester $I)
     {
-        $result = $I->executeFunction(\Webkul\Tax\Helpers\Tax::class, 'getTaxRatesWithAmount',
-            [$this->scenario['object'], false]);
+        $result = $I->executeFunction(
+            \Webkul\Tax\Helpers\Tax::class,
+            'getTaxRatesWithAmount',
+            [$this->scenario['object'], false]
+        );
 
         foreach ($result as $taxRate => $taxAmount) {
             $I->assertTrue(array_key_exists($taxRate, $result));
@@ -101,8 +102,11 @@ class TaxCest
 
     public function testGetTaxTotal(UnitTester $I)
     {
-        $result = $I->executeFunction(\Webkul\Tax\Helpers\Tax::class, 'getTaxTotal',
-            [$this->scenario['object'], false]);
+        $result = $I->executeFunction(
+            \Webkul\Tax\Helpers\Tax::class,
+            'getTaxTotal',
+            [$this->scenario['object'], false]
+        );
 
         $I->assertEquals($this->scenario['expectedTaxTotal'], $result);
     }

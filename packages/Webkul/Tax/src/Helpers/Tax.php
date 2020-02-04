@@ -19,11 +19,10 @@ class Tax
         foreach ($that->items as $item) {
             $taxRate = (string)round((float)$item->tax_percent, self::TAX_PRECISION);
 
-            if (array_key_exists($taxRate, $taxes)) {
-                $taxes[$taxRate] += $asBase ? $item->base_tax_amount : $item->tax_amount;
-            } else {
-                $taxes += [$taxRate => $asBase ? $item->base_tax_amount : $item->tax_amount];
+            if (!array_key_exists($taxRate, $taxes)) {
+                $taxes[$taxRate] = 0;
             }
+            $taxes[$taxRate] += $asBase ? $item->base_tax_amount : $item->tax_amount;
         }
 
         return $taxes;

@@ -16,17 +16,6 @@ use Webkul\Customer\Repositories\CustomerAddressRepository;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Arr;
 
-class addressHelper
-{
-    public $country;
-    public $postcode;
-
-    function __construct()
-    {
-        $this->country = config('app.default_country');
-    }
-}
-
 /**
  * Facades handler for all the methods to be implemented in Cart.
  *
@@ -755,9 +744,6 @@ class Cart
             return false;
         }
 
-//        if (! $cart->shipping_address && ! $cart->billing_address)
-//            return;
-
         foreach ($cart->items()->get() as $item) {
             $taxCategory = $this->taxCategoryRepository->find($item->product->tax_category_id);
 
@@ -772,7 +758,15 @@ class Cart
             }
 
             if ($address === null) {
-                $address = new addressHelper();
+                $address = new class() {
+                    public $country;
+                    public $postcode;
+
+                    function __construct()
+                    {
+                        $this->country = config('app.default_country');
+                    }
+                };
             }
 
             $taxRates = $taxCategory->tax_rates()->where([
