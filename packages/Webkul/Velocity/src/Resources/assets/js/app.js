@@ -175,6 +175,8 @@ $(document).ready(function () {
         },
 
         mounted: function () {
+            this.addServerErrors();
+
             document.body.style.display = "block";
             this.$validator.localize(document.documentElement.lang);
 
