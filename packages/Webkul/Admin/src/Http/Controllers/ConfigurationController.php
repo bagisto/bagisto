@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Event;
 use Webkul\Core\Repositories\CoreConfigRepository;
 use Webkul\Core\Tree;
 use Illuminate\Support\Facades\Storage;
+use Webkul\Admin\Http\Requests\ConfigurationForm;
 
 /**
  * Configuration controller
@@ -116,15 +117,9 @@ class ConfigurationController extends Controller
      * @param  \Webkul\Admin\Http\Requests\ConfigurationForm $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(ConfigurationForm $request)
     {
         Event::dispatch('core.configuration.save.before');
-
-        if (request()->has('general.design.admin_logo.logo_image') && ! request()->input('general.design.admin_logo.logo_image.delete')) {
-            $this->validate(request(), [
-                'general.design.admin_logo.logo_image'  => 'required|mimes:jpeg,bmp,png,jpg'
-            ]);
-        }
 
         $this->coreConfigRepository->create(request()->all());
 

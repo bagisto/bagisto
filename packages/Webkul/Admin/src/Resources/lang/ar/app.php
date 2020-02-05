@@ -153,6 +153,7 @@ return [
         'refunded' => 'Refunded',
         'rtl' => 'RTL',
         'ltr' => 'LTR',
+        'update-status' => 'Update Status'
     ],
 
     'account' => [

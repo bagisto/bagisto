@@ -109,14 +109,14 @@ class CustomerReviewDataGrid extends DataGrid
     public function prepareMassActions() {
         $this->addMassAction([
             'type' => 'delete',
-            'label' => 'Delete',
+            'label' => trans('admin::app.datagrid.delete'),
             'action' => route('admin.customer.review.massdelete'),
             'method' => 'DELETE'
         ]);
 
         $this->addMassAction([
             'type' => 'update',
-            'label' => 'Update Status',
+            'label' => trans('admin::app.datagrid.update-status'),
             'action' => route('admin.customer.review.massupdate'),
             'method' => 'PUT',
             'options' => [

@@ -58,7 +58,7 @@
                                 {{-- Response fields based on the type of columns to be filtered --}}
                                 <li v-if='stringCondition != null'>
                                     <div class="control-group">
-                                        <input type="text" class="control response-string" placeholder="Value here" v-model="stringValue" />
+                                        <input type="text" class="control response-string" placeholder="{{ __('ui::app.datagrid.value-here') }}" v-model="stringValue" />
                                     </div>
                                 </li>
 
@@ -79,7 +79,7 @@
 
                                 <li v-if='numberCondition != null'>
                                     <div class="control-group">
-                                        <input type="number" class="control response-number" placeholder="Numeric Value here"  v-model="numberValue"/>
+                                        <input type="number" class="control response-number" placeholder="{{ __('ui::app.datagrid.numeric-value-here') }}"  v-model="numberValue"/>
                                     </div>
                                 </li>
 
