@@ -146,7 +146,7 @@ class AttributeDataGrid extends DataGrid
         $this->addMassAction([
             'type' => 'delete',
             'action' => route('admin.catalog.attributes.massdelete'),
-            'label' => 'Delete',
+            'label' => trans('admin::app.datagrid.delete'),
             'index' => 'admin_name',
             'method' => 'DELETE'
         ]);

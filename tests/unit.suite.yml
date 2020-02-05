@@ -8,7 +8,7 @@ modules:
     - Asserts
     - Filesystem
     - \Helper\Unit
-    - Laravel5:
+    - Webkul\Core\Helpers\Laravel5Helper:
         environment_file: .env.testing
         run_database_migrations: true
         run_database_seeder: true

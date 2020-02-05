@@ -18,6 +18,11 @@ $factory->define(Product::class, function (Faker $faker) {
 $factory->state(Product::class, 'simple', [
     'type' => 'simple',
 ]);
-$factory->state(Product::class, 'downloadable_with_stock', [
+
+$factory->state(Product::class, 'virtual', [
+    'type' => 'virtual',
+]);
+
+$factory->state(Product::class, 'downloadable', [
     'type' => 'downloadable',
 ]);
