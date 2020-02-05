@@ -83,11 +83,11 @@
                 </div>
 
                 <div class="modal-footer">
-                    <a class="col-6 text-left fs16 link-color remove-decoration" href="{{ route('shop.checkout.cart.index') }}">
+                    <a class="col-4 text-left fs16 link-color remove-decoration" href="{{ route('shop.checkout.cart.index') }}">
                         {{ __('velocity::app.checkout.cart.view-cart') }}
                     </a>
 
-                    <div class="col-6 text-right no-padding">
+                    <div class="col-8 text-right no-padding">
                         <a href="{{ route('shop.checkout.onepage.index') }}">
                             <button
                                 type="button"
