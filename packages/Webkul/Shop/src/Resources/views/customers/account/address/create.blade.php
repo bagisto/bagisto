@@ -87,7 +87,7 @@
 
                     <div class="control-group" :class="[errors.has('phone') ? 'has-error' : '']">
                         <label for="phone" class="required">{{ __('shop::app.customer.account.address.create.phone') }}</label>
-                        <input value="<?= old('phone'); ?>" type="text" class="control" name="phone" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.phone') }}&quot;">
+                        <input value="<?= old('phone'); ?>" type="text" class="control" name="phone" v-validate="'required|numeric'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.phone') }}&quot;">
                         <span class="control-error" v-if="errors.has('phone')">@{{ errors.first('phone') }}</span>
                     </div>
 
