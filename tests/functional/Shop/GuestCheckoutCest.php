@@ -6,6 +6,7 @@ use Codeception\Example;
 use FunctionalTester;
 use Faker\Factory;
 use Cart;
+use Webkul\Core\Helpers\Laravel5Helper;
 
 class GuestCheckoutCest
 {
@@ -34,10 +35,10 @@ class GuestCheckoutCest
             ],
         ];
 
-        $this->productNoGuestCheckout = $I->haveProduct($pConfigDefault, ['simple']);
+        $this->productNoGuestCheckout = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT, $pConfigDefault, ['simple']);
         $this->productNoGuestCheckout->refresh();
 
-        $this->productGuestCheckout = $I->haveProduct($pConfigGuestCheckout, ['simple']);
+        $this->productGuestCheckout = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT, $pConfigGuestCheckout, ['simple']);
         $this->productGuestCheckout->refresh();
     }
 
@@ -61,7 +62,7 @@ class GuestCheckoutCest
         $I->see($product->name, '//div[@class="product-information"]/div[@class="product-name"]');
         $I->click(__('shop::app.products.add-to-cart'),
             '//form[input[@name="product_id"][@value="' . $product->id . '"]]/button');
-        $I->seeInSource(__('shop::app.checkout.cart.item.success'));
+
         $I->amOnRoute('shop.checkout.cart.index');
         $I->see('Shopping Cart', '//div[@class="title"]');
         $I->makeHtmlSnapshot('guestCheckout_' . $example['globalConfig'] . '_' . $product->getAttribute('guest_checkout'));

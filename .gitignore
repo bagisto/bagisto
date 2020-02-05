@@ -24,3 +24,5 @@ yarn.lock
 .php_cs.cache
 storage/
 storage/*.key
+/docker-compose-collection/
+/resources/themes/velocity/*

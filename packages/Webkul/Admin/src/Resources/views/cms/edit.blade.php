@@ -104,12 +104,14 @@
                                 <label for="meta_keywords">{{ __('admin::app.cms.pages.meta_keywords') }}</label>
 
                                 <textarea type="text" class="control" name="{{$locale}}[meta_keywords]">{{ old($locale)['meta_keywords'] ?? ($page->translate($locale)['meta_keywords'] ?? '') }}</textarea>
+
                             </div>
 
                             <div class="control-group">
                                 <label for="meta_description">{{ __('admin::app.cms.pages.meta_description') }}</label>
 
                                 <textarea type="text" class="control" name="{{$locale}}[meta_description]">{{ old($locale)['meta_description'] ?? ($page->translate($locale)['meta_description'] ?? '') }}</textarea>
+
                             </div>
                         </div>
                     </accordian>

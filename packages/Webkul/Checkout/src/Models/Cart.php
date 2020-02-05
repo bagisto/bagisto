@@ -123,10 +123,26 @@ class Cart extends Model implements CartContract
     public function hasDownloadableItems()
     {
         foreach ($this->items as $item) {
-            if ($item->type == 'downloadable')
+            if (stristr($item->type,'downloadable') !== false) {
                 return true;
+            }
         }
 
+        return false;
+    }
+
+    /**
+     * Returns true if cart contains one or many products with quantity box.
+     * (for example: simple, configurable, virtual)
+     * @return bool
+     */
+    public function hasProductsWithQuantityBox(): bool
+    {
+        foreach ($this->items as $item) {
+            if ($item->product->getTypeInstance()->showQuantityBox() === true) {
+                return true;
+            }
+        }
         return false;
     }
 
