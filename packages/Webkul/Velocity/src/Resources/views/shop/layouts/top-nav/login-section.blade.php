@@ -106,6 +106,10 @@
             methods: {
                 togglePopup: function (event) {
                     let accountModal = this.$el.querySelector('.account-modal');
+                    let modal = $('#cart-modal-content')[0];
+                    if (modal)
+                        modal.classList.toggle('hide');
+
                     accountModal.classList.toggle('hide');
 
                     event.stopPropagation();
