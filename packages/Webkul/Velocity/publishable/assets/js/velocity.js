@@ -36952,6 +36952,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['id', 'loop', 'timeout', 'autoplay', 'addClass', 'slidesCount', 'slidesPerPage', 'sliderDirection', 'navigationEnabled', 'paginationEnabled'],
@@ -36984,6 +36985,7 @@ var render = function() {
         _vm.addClass
       ],
       attrs: {
+        id: _vm.id,
         navigationEnabled: true,
         paginationEnabled: true,
         perPage: parseInt(_vm.slidesPerPage),
