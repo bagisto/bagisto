@@ -981,6 +981,10 @@
                             margin-left: 4px;
                             position: relative;
                         }
+
+                        &:hover {
+                            cursor: pointer;
+                        }
                     }
                 }
             }
