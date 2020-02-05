@@ -130,7 +130,7 @@
                                 name="term"
                                 type="search"
                                 class="form-control"
-                                :value="searchedQuery.term"
+                                :value="searchedQuery.term ? searchedQuery.term.split('+').join(' ') : ''"
                                 placeholder="{{ __('velocity::app.header.search-text') }}" />
 
                             <button class="btn" type="submit" id="header-search-icon">
@@ -503,7 +503,7 @@
                     <a
                         v-text="content.title"
                         :href="`${$root.baseUrl}/${content['page_link']}`"
-                        v-if="(content['content_type'] == 'link')"
+                        v-if="(content['content_type'] == 'link' || content['content_type'] == 'category')"
                         :target="content['link_target'] ? '_blank' : '_self'">
                     </a>
                 </li>

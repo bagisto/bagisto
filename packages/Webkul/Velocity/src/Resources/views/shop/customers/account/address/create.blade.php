@@ -20,6 +20,24 @@
 
                 {!! view_render_event('bagisto.shop.customers.account.address.create_form_controls.before') !!}
 
+                <div class="control-group" :class="[errors.has('company_name') ? 'has-error' : '']">
+                    <label for="company_name">{{ __('shop::app.customer.account.address.create.company_name') }}</label>
+                    <input value="<?= old('company_name'); ?>" type="text" class="control" name="company_name" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.company_name') }}&quot;">
+                    <span class="control-error" v-if="errors.has('company_name')">@{{ errors.first('company_name') }}</span>
+                </div>
+
+                <div class="control-group" :class="[errors.has('first_name') ? 'has-error' : '']">
+                    <label for="first_name" class="required">{{ __('shop::app.customer.account.address.create.first_name') }}</label>
+                    <input value="<?= old('first_name'); ?>" type="text" class="control" name="first_name" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.first_name') }}&quot;">
+                    <span class="control-error" v-if="errors.has('first_name')">@{{ errors.first('first_name') }}</span>
+                </div>
+
+                <div class="control-group" :class="[errors.has('last_name') ? 'has-error' : '']">
+                    <label for="last_name" class="required">{{ __('shop::app.customer.account.address.create.last_name') }}</label>
+                    <input value="<?= old('last_name'); ?>" type="text" class="control" name="last_name" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.last_name') }}&quot;">
+                    <span class="control-error" v-if="errors.has('last_name')">@{{ errors.first('last_name') }}</span>
+                </div>
+
                 <div class="control-group" :class="[errors.has('address1[]') ? 'has-error' : '']">
                     <label for="address_0" class="required">{{ __('shop::app.customer.account.address.create.street-address') }}</label>
                     <input type="text" class="control" name="address1[]" id="address_0" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.street-address') }}&quot;">
@@ -61,9 +79,7 @@
                         {{ __('shop::app.customer.account.address.create.submit') }}
                     </button>
                 </div>
-
             </div>
-
         </form>
 
     {!! view_render_event('bagisto.shop.customers.account.address.create.after') !!}

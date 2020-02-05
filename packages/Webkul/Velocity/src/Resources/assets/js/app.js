@@ -55,6 +55,7 @@ $(document).ready(function () {
                 'responsiveSidebarTemplate': '',
                 'responsiveSidebarKey': Math.random(),
                 'sharedRootCategories': [],
+                'imageObserver': null,
             }
         },
 
@@ -178,6 +179,7 @@ $(document).ready(function () {
             this.$validator.localize(document.documentElement.lang);
 
             this.loadCategories();
+            this.addIntersectionObserver();
         },
 
         methods: {
@@ -257,10 +259,22 @@ $(document).ready(function () {
                 .catch(error => {
                     console.log('failed to load categories');
                 })
+            },
+
+            addIntersectionObserver: function () {
+                this.imageObserver = new IntersectionObserver((entries, imgObserver) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            const lazyImage = entry.target
+                            lazyImage.src = lazyImage.dataset.src
+                        }
+                    })
+                });
             }
         }
     });
 
+    // for compilation of html coming from server
     Vue.component('vnode-injector', {
         functional: true,
         props: ['nodes'],

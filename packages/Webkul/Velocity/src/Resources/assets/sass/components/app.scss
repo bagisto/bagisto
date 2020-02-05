@@ -442,6 +442,8 @@
 
 
     .customer-session {
+        padding: 10px 20px 0 20px;
+
         label {
             font-size: 18px;
             color: $light-grey-clr;
@@ -963,6 +965,21 @@
                                     }
                                 }
                             }
+                        }
+                    }
+                }
+            }
+
+            .filter-row-two {
+                .filter-tag {
+                    .cross-icon {
+                        @extend .rango-default;
+
+                        &::before {
+                            top: 1px;
+                            content: "\e91f";
+                            margin-left: 4px;
+                            position: relative;
                         }
                     }
                 }
