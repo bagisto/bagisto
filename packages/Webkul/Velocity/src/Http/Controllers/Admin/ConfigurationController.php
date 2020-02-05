@@ -68,14 +68,17 @@ class ConfigurationController extends Controller
             }
         }
 
-        foreach ($params['product_view_images'] as $index => $productViewImage) {
-            if ($productViewImage !== "") {
-                $params['product_view_images'][$index] = $this->uploadImage($productViewImage, $index);
+        if (isset($params['product_view_images'])) {
+            foreach ($params['product_view_images'] as $index => $productViewImage) {
+                if ($productViewImage !== "") {
+                    $params['product_view_images'][$index] = $this->uploadImage($productViewImage, $index);
+                }
             }
+
+            $params['product_view_images'] = json_encode($params['product_view_images']);
         }
 
         $params['advertisement'] = json_encode($params['advertisement']);
-        $params['product_view_images'] = json_encode($params['product_view_images']);
         $params['home_page_content'] = str_replace('=&gt;', '=>', $params['home_page_content']);
 
         unset($params['images']);

@@ -130,22 +130,22 @@
                         </image-wrapper>
                     </div>
 
-                    <div class="control-group">
+                    {{-- <div class="control-group">
                         <label>{{ __('velocity::app.admin.meta-data.advertisement-one') }}</label>
 
                         <image-wrapper
                             :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'"
                             input-name="images[1]">
                         </image-wrapper>
-                    </div>
+                    </div> --}}
 
-                    <div class="control-group product-view-image">
+                    {{-- <div class="control-group product-view-image">
                         <label>{{ __('velocity::app.admin.meta-data.product-view-image') }}</label>
 
                         <image-wrapper
                             input-name="product_view_images">
                         </image-wrapper>
-                    </div>
+                    </div> --}}
                 </div>
             </accordian>
 

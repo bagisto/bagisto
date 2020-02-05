@@ -12,9 +12,10 @@ class Velocity
      * @var mixed
      */
 	protected $content_type = [
-        'link' => 'Link CMS Page',
-        'product' => 'Catalog Products',
-        'static' => 'Static Content',
+        // 'link' => 'Link CMS Page',
+        // 'product' => 'Catalog Products',
+        // 'static' => 'Static Content',
+        'category' => 'Category Slug',
     ];
 
     /**

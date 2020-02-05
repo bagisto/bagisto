@@ -83,6 +83,13 @@
                                 this.categoryProducts = response.data.categoryProducts;
 
                                 this.isCategory = true;
+
+                                // setTimeout(() => {
+                                //     let imagesCollection = document.querySelectorAll('img.lzy_img');
+                                //     imagesCollection.forEach((image) => {
+                                //         this.$root.imageObserver.observe(image);
+                                //     });
+                                // }, 0);
                             }
                         })
                         .catch(error => {});

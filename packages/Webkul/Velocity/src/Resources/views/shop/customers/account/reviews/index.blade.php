@@ -43,7 +43,7 @@
                             <img class="media" src="{{ $image['small_image_url'] }}"/>
                         </a>
 
-                        <div class="col-10">
+                        <div class="col-8">
                             <div class="product-name">
                                 <a
                                     class="remove-decoration"
@@ -59,13 +59,14 @@
 
                             <p>{{ $review->comment }}</p>
                         </div>
-                    </div>
 
-                    {{-- <div class="">
-                        <a href="{{ route('customer.review.delete', $review->id) }}">
-                            <span class="icon trash-icon"></span>
-                        </a>
-                    </div> --}}
+                        <div class="col-2">
+                            <a class="unset" href="{{ route('customer.review.delete', $review->id) }}">
+                                <span class="rango-delete fs24"></span>
+                                <span class="align-vertical-top">{{ __('shop::app.checkout.cart.remove') }}</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             @endforeach
 
