@@ -4,7 +4,7 @@
     <accordian :title="'{{ __('shop::app.checkout.onepage.summary') }}'" :active="true">
         <div class="form-header mb-30" slot="header">
             <h3 class="fw6 display-inbl">
-                4. {{ __('shop::app.checkout.onepage.summary') }}
+                {{ __('shop::app.checkout.onepage.summary') }}
             </h3>
             <i class="rango-arrow"></i>
         </div>

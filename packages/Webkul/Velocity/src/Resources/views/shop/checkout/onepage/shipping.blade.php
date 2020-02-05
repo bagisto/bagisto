@@ -3,7 +3,7 @@
         <accordian :title="'{{ __('shop::app.checkout.onepage.shipping-method') }}'" :active="true">
             <div class="form-header" slot="header">
                 <h3 class="fw6 display-inbl">
-                    2. {{ __('shop::app.checkout.onepage.shipping-method') }}
+                 {{ __('shop::app.checkout.onepage.shipping-method') }}
                 </h3>
                 <i class="rango-arrow"></i>
             </div>
