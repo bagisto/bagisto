@@ -32,7 +32,7 @@
 
         <script
             type="text/javascript"
-            baseUrl='{{ url()->to('/') }}'
+            baseUrl="{{ url()->to('/') }}"
             src="{{ asset('themes/velocity/assets/js/velocity.js') }}">
         </script>
 
@@ -131,8 +131,6 @@
 
         <script type="text/javascript">
             (() => {
-                var baseURL = '{{ url()->to('/') }}';
-
                 var showAlert = (messageType, messageLabel, message) => {
                     if (messageType && message !== '') {
                         let html = `<div class="alert ${messageType} alert-dismissible" id="alert">

@@ -1143,7 +1143,7 @@ $(document).ready(function () {
     __WEBPACK_IMPORTED_MODULE_0_vue___default.a.mixin({
         data: function data() {
             return {
-                'baseUrl': document.querySelector("script[src$='velocity.js']").getAttribute('baseurl'),
+                'baseUrl': document.querySelector("script[src$='velocity.js']").getAttribute('baseUrl'),
                 'navContainer': false,
                 'responsiveSidebarTemplate': '',
                 'responsiveSidebarKey': Math.random(),

@@ -1950,6 +1950,8 @@
 }
 
 .slides-container {
+    position: relative;
+
     .VueCarousel-pagination {
         bottom: 10px;
         position: absolute;
@@ -1972,6 +1974,16 @@
     .VueCarousel {
         .VueCarousel-inner {
             padding-top: 0;
+        }
+
+        .VueCarousel-slide {
+            position: relative;
+
+            .show-content {
+                top: 50%;
+                left: 50%;
+                position: absolute;
+            }
         }
 
         .VueCarousel-slide:not(:nth-of-type(1)) {

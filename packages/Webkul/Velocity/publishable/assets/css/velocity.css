@@ -2549,6 +2549,10 @@
   padding: 0 15px !important;
 }
 
+.slides-container {
+  position: relative;
+}
+
 .slides-container .VueCarousel-pagination {
   bottom: 10px;
   position: absolute;
@@ -2571,6 +2575,16 @@
 
 .slides-container .VueCarousel .VueCarousel-inner {
   padding-top: 0;
+}
+
+.slides-container .VueCarousel .VueCarousel-slide {
+  position: relative;
+}
+
+.slides-container .VueCarousel .VueCarousel-slide .show-content {
+  top: 50%;
+  left: 50%;
+  position: absolute;
 }
 
 .slides-container .VueCarousel .VueCarousel-slide:not(:nth-of-type(1)) img {
