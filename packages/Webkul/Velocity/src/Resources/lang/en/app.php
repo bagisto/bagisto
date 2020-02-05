@@ -230,6 +230,7 @@ return [
         'write-your-review' => 'Write Your Review',
         'quick-view' => 'Quick View',
         'recently-viewed' => 'Recently Viewed Products',
+        'not-available' => 'Not Available',
         'review-by' => 'Review by',
         'be-first-review' => 'Be the first to write a review',
         'submit-review' => 'Submit Review',

@@ -95,7 +95,8 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
             ];
         } else {
             $response = [
-                'status' => false
+                'status' => false,
+                'slug' => $slug,
             ];
         }
 

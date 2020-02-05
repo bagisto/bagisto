@@ -24,6 +24,24 @@
 
             <?php $addresses = explode(PHP_EOL, $address->address1); ?>
 
+            <div class="control-group" :class="[errors.has('company_name') ? 'has-error' : '']">
+                <label for="company_name">{{ __('shop::app.customer.account.address.edit.company_name') }}</label>
+                <input type="text" value="{{ $address->company_name }}"  class="control" name="company_name" data-vv-as="&quot;{{ __('shop::app.customer.account.address.edit.company_name') }}&quot;">
+                <span class="control-error" v-if="errors.has('company_name')">@{{ errors.first('company_name') }}</span>
+            </div>
+
+            <div class="control-group" :class="[errors.has('first_name') ? 'has-error' : '']">
+                <label for="first_name" class="required">{{ __('shop::app.customer.account.address.create.first_name') }}</label>
+                <input type="text" class="control" name="first_name" v-validate="'required'" value="{{ $address->first_name }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.first_name') }}&quot;">
+                <span class="control-error" v-if="errors.has('first_name')">@{{ errors.first('first_name') }}</span>
+            </div>
+
+            <div class="control-group" :class="[errors.has('last_name') ? 'has-error' : '']">
+                <label for="last_name" class="required">{{ __('shop::app.customer.account.address.create.last_name') }}</label>
+                <input type="text" class="control" name="last_name" v-validate="'required'" value="{{ $address->last_name }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.last_name') }}&quot;">
+                <span class="control-error" v-if="errors.has('last_name')">@{{ errors.first('last_name') }}</span>
+            </div>
+
             <div class="control-group" :class="[errors.has('address1[]') ? 'has-error' : '']">
                 <label for="address_0" class="required">{{ __('shop::app.customer.account.address.edit.street-address') }}</label>
                 <input type="text" class="control" name="address1[]" id="address_0" v-validate="'required'" value="{{ isset($addresses[0]) ? $addresses[0] : '' }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.street-address') }}&quot;">
