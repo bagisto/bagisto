@@ -70,9 +70,9 @@ class VelocityServiceProvider extends ServiceProvider
      */
     protected function registerConfig()
     {
-        $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/system.php', 'core'
-        );
+        // $this->mergeConfigFrom(
+        //     dirname(__DIR__) . '/Config/system.php', 'core'
+        // );
 
         $this->mergeConfigFrom(
             dirname(__DIR__) . '/Config/admin-menu.php', 'menu.admin'

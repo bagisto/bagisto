@@ -703,6 +703,12 @@ select:focus,
 .control-error {
     color: $color-danger;
 }
+.mandatory::after {
+    content: "*";
+    font-size: 16px;
+    margin-left: -1px;
+    color: $color-danger;
+}
 
 a {
     &.default {

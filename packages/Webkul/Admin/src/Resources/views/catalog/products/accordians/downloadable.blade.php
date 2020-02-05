@@ -5,7 +5,7 @@
 
         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.downloadable.links.controls.before', ['product' => $product]) !!}
 
-        <div class="section">
+        <div id="downloadable-link-list-section" class="section">
             <div class="secton-title">
                 <span>{{ __('admin::app.catalog.products.links') }}</span>
             </div>
@@ -19,7 +19,7 @@
 
         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.downloadable.samples.controls.before', ['product' => $product]) !!}
 
-        <div class="section">
+        <div id="downloadable-sample-list-section" class="section">
             <div class="secton-title">
                 <span>{{ __('admin::app.catalog.products.samples') }}</span>
             </div>

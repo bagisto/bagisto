@@ -2,7 +2,7 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
-## **v0.1.0(28th of January 2020)** - *Release*
+## **v1.0.0-BETA1(5th of February 2020)** - *Release*
 
 * [feature] Updated to laravel version 6.
 

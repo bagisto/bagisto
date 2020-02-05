@@ -30,12 +30,13 @@
             @csrf
 
             <div class="row">
-                <label class="col-12">
+                <label class="col-12 mandatory">
                     {{ __('shop::app.customer.account.profile.fname') }}
                 </label>
 
                 <div class="col-12">
-                    <input value="{{ $customer->first_name }}" name="first_name" type="text" />
+                    <input value="{{ $customer->first_name }}" name="first_name" type="text" v-validate="'required'" />
+                    <span class="control-error" v-if="errors.has('first_name')">@{{ errors.first('first_name') }}</span>
                 </div>
             </div>
 
@@ -109,12 +110,13 @@
             </div>
 
             <div class="row">
-                <label class="col-12">
+                <label class="col-12 mandatory">
                     {{ __('shop::app.customer.account.profile.email') }}
                 </label>
 
                 <div class="col-12">
-                    <input value="{{ $customer->email }}" name="email" type="text" />
+                    <input value="{{ $customer->email }}" name="email" type="text" v-validate="'required'" />
+                    <span class="control-error" v-if="errors.has('email')">@{{ errors.first('email') }}</span>
                 </div>
             </div>
 

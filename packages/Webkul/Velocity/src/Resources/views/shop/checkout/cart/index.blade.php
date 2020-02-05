@@ -117,7 +117,11 @@
                                                     @endauth
 
                                                     <a
-                                                        class="unset ml30"
+                                                        class="unset
+                                                            @auth('customer')
+                                                                ml30
+                                                            @endauth
+                                                        "
                                                         href="{{ route('shop.checkout.cart.remove', ['id' => $item->id]) }}"
                                                         onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">
 

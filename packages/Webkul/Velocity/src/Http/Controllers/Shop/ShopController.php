@@ -95,7 +95,8 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
             ];
         } else {
             $response = [
-                'status' => false
+                'status' => false,
+                'slug' => $slug,
             ];
         }
 
@@ -173,6 +174,22 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
         return [
             'status' => true,
             'categories' => $formattedCategories,
+        ];
+    }
+
+    public function fetchFancyCategoryDetails($slug)
+    {
+        $categoryDetails = app('Webkul\Category\Repositories\CategoryRepository')->findByPath($slug);
+
+        if ($categoryDetails) {
+            $response = [
+                'status' => true,
+                'categoryDetails' => $this->getCategoryFilteredData($categoryDetails)
+            ];
+        }
+
+        return $response ?? [
+            'status' => false,
         ];
     }
 

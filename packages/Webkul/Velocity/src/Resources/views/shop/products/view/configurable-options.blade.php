@@ -49,7 +49,6 @@
 
                             <option
                                 :value="option.id"
-                                :key="`index-${Math.random()}`"
                                 v-for='(option, index) in attribute.options'>
                                 @{{ option.label }}
                             </option>
