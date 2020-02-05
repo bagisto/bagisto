@@ -21,6 +21,6 @@ class CustomerCest
 
         $I->seeCurrentRouteIs('admin.customer.index');
         $I->see($customer->id, '//script[@type="text/x-template"]');
-        $I->see($customer->name, '//script[@type="text/x-template"]');
+        $I->see($customer->last_name, '//script[@type="text/x-template"]');
     }
 }
