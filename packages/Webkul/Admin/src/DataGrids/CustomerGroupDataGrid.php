@@ -28,7 +28,7 @@ class CustomerGroupDataGrid extends DataGrid
     {
         $this->addColumn([
             'index' => 'id',
-            'label' => 'ID',
+            'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
@@ -37,7 +37,7 @@ class CustomerGroupDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'code',
-            'label' => 'Code',
+            'label' => trans('admin::app.datagrid.code'),
             'type' => 'string',
             'searchable' => false,
             'sortable' => true,
@@ -46,7 +46,7 @@ class CustomerGroupDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'name',
-            'label' => 'Name',
+            'label' => trans('admin::app.datagrid.name'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,

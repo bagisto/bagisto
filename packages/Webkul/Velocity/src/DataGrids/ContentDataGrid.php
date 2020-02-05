@@ -116,7 +116,7 @@ class ContentDataGrid extends DataGrid
         $this->addMassAction([
             'type' => 'delete',
             'action' => route('velocity.admin.content.mass-delete'),
-            'label' => 'Delete',
+            'label' => trans('admin::app.datagrid.delete'),
             'method' => 'DELETE'
         ]);
     }

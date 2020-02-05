@@ -216,6 +216,7 @@ return [
         'delete' => 'Delete',
         'rtl' => 'RTL',
         'ltr' => 'LTR',
+        'update-status' => 'Update Status'
     ],
 
     'account' => [

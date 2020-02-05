@@ -79,7 +79,8 @@ class ChannelController extends Controller
             'favicon.*' => 'mimes:jpeg,jpg,bmp,png',
             'seo_title' => 'required|string',
             'seo_description' => 'required|string',
-            'seo_keywords' => 'required|string'
+            'seo_keywords' => 'required|string',
+            'hostname' => 'unique:channels,hostname',
         ]);
 
         $data = request()->all();
@@ -138,7 +139,8 @@ class ChannelController extends Controller
             'base_currency_id' => 'required',
             'root_category_id' => 'required',
             'logo.*' => 'mimes:jpeg,jpg,bmp,png',
-            'favicon.*' => 'mimes:jpeg,jpg,bmp,png'
+            'favicon.*' => 'mimes:jpeg,jpg,bmp,png',
+            'hostname' => 'unique:channels,hostname,' . $id,
         ]);
 
         $data = request()->all();
