@@ -590,6 +590,8 @@ class Cart
 
         $cart->save();
 
+        $this->collectTotals();
+
         return true;
     }
 

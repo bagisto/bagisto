@@ -3,12 +3,10 @@
 namespace Tests\Functional\Cart;
 
 use FunctionalTester;
-use Faker\Factory;
 use Illuminate\Support\Facades\Config;
 use Webkul\Tax\Models\TaxMap;
 use Webkul\Tax\Models\TaxRate;
 use Webkul\Tax\Models\TaxCategory;
-use Webkul\Checkout\Models\Cart as CartModel;
 use Cart;
 
 class CartCest
