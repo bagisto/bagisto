@@ -10,13 +10,6 @@ use Webkul\Product\Repositories\ProductRepository;
 class ProductsCategoriesProxyController extends Controller
 {
     /**
-     * Contains route related configuration
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * CategoryRepository object
      *
      * @var CategoryRepository
@@ -33,17 +26,21 @@ class ProductsCategoriesProxyController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param CategoryRepository $categoryRepository
-     * @param ProductRepository  $productRepository
+     * @param Webkul\Category\Repositories\CategoryRepository $categoryRepository
+     * @param Webkul\Product\Repositories\ProductRepository   $productRepository
      *
      * @return void
      */
-    public function __construct(CategoryRepository $categoryRepository, ProductRepository $productRepository)
+    public function __construct(
+        CategoryRepository $categoryRepository,
+        ProductRepository $productRepository
+    )
     {
         $this->categoryRepository = $categoryRepository;
+
         $this->productRepository = $productRepository;
 
-        $this->_config = request('_config');
+        parent::__construct();
     }
 
     /**
