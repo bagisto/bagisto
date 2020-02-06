@@ -13,8 +13,6 @@ use Webkul\Core\Repositories\SliderRepository;
  */
  class HomeController extends Controller
 {
-    protected $_config;
-
     /**
      * SliderRepository object
      *
@@ -30,9 +28,9 @@ use Webkul\Core\Repositories\SliderRepository;
     */
     public function __construct(SliderRepository $sliderRepository)
     {
-        $this->_config = request('_config');
-
         $this->sliderRepository = $sliderRepository;
+
+        parent::__construct();
     }
 
     /**

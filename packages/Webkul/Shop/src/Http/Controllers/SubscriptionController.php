@@ -15,13 +15,6 @@ use Webkul\Core\Repositories\SubscribersListRepository;
 class SubscriptionController extends Controller
 {
     /**
-     * Contains route related configuration
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * SubscribersListRepository
      *
      * @var Object
@@ -38,7 +31,7 @@ class SubscriptionController extends Controller
     {
         $this->subscriptionRepository = $subscriptionRepository;
 
-        $this->_config = request('_config');
+        parent::__construct();
     }
 
     /**
