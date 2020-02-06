@@ -36,7 +36,7 @@
 
                             <div class="control-group">
                                 <label for="name" > {{ __('admin::app.customers.reviews.title') }}</label>
-                                <input type="text"  class="control" id="name" name="name" value="{{$review->title}}" disabled/>
+                                <input type="text"  class="control" id="name" name="name" value="{{old('name') ?: $review->title}}" disabled/>
                             </div>
 
                             <div class="control-group">

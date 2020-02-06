@@ -32,13 +32,13 @@
                         <div slot="body">
                             <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                                 <label for="name" class="required">{{ __('admin::app.account.name') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="name" name="name" value="{{ $user->name }}"  data-vv-as="&quot;{{ __('admin::app.account.name') }}&quot;"/>
+                                <input type="text" v-validate="'required'" class="control" id="name" name="name" value="{{ old('name') ?: $user->name }}"  data-vv-as="&quot;{{ __('admin::app.account.name') }}&quot;"/>
                                 <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
                             </div>
 
                             <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
                                 <label for="email" class="required">{{ __('admin::app.account.email') }}</label>
-                                <input type="text" v-validate="'required|email'" class="control" id="email" name="email" value="{{ $user->email }}"  data-vv-as="&quot;{{ __('admin::app.account.email') }}&quot;"/>
+                                <input type="text" v-validate="'required|email'" class="control" id="email" name="email" value="{{ old('email') ?: $user->email }}"  data-vv-as="&quot;{{ __('admin::app.account.email') }}&quot;"/>
                                 <span class="control-error" v-if="errors.has('email')">@{{ errors.first('email') }}</span>
                             </div>
                         </div>
