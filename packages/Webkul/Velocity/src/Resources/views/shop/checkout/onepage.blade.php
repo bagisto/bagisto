@@ -203,12 +203,9 @@
 
                                 if (scope == 'address-form') {
                                     this.saveAddress();
-                                    document.body.style.cursor = 'default';
                                 } else if (scope == 'shipping-form') {
-                                    document.body.style.cursor = 'wait';
                                     this.saveShipping();
                                 } else if (scope == 'payment-form') {
-                                    document.body.style.cursor = 'wait';
                                     this.savePayment();
                                 }
                             }
@@ -228,9 +225,6 @@
                                 this_this.$http.post("{{ route('customer.checkout.exist') }}", {email: this_this.address.billing.email})
                                     .then(function(response) {
                                         this_this.is_customer_exist = response.data ? 1 : 0;
-
-                                        if (response.data)
-                                            document.body.style.cursor = 'default';
                                     })
                                     .catch(function (error) {})
 
@@ -283,6 +277,11 @@
 
                                 this.completed_step = this.step_numbers[response.data.jump_to_section] + 1;
                                 this.current_step = this.step_numbers[response.data.jump_to_section];
+
+                                if (response.data.jump_to_section == "payment") {
+                                    this.showPaymentSection = true;
+                                    paymentMethods  = response.data.paymentMethods;
+                                }
 
                                 shippingMethods = response.data.shippingMethods;
 
