@@ -40,12 +40,12 @@
                                 class="fs18 card-current-price fw6">
                             </div>
 
-                            <star-ratings
+                            <star-ratings v-if="product.rating > 0"
                                 push-class="display-inbl"
                                 :ratings="product.rating">
                             </star-ratings>
 
-                            <span class="fs16 text-nowrap align-text-bottom">@{{ product.totalReviews }} Reviews</span>
+                            <span class="fs16 text-nowrap align-text-bottom" v-if="product.rating > 0">@{{ product.totalReviews }} Reviews</span>
                         </a>
                     </div>
                 </div>
