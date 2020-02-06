@@ -789,6 +789,7 @@ button[disabled] {
             right: 10px;
             font-size: 16px;
             position: absolute;
+            pointer-events: none;
         }
     }
 }
