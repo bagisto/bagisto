@@ -17,13 +17,6 @@ use Cart;
 class CartController extends Controller
 {
     /**
-     * Contains route related configuration
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * WishlistRepository Repository object
      *
      * @var Object
@@ -55,7 +48,7 @@ class CartController extends Controller
 
         $this->productRepository = $productRepository;
 
-        $this->_config = request('_config');
+        parent::__construct();
     }
 
     /**

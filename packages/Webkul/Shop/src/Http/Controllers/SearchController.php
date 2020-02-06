@@ -13,13 +13,6 @@ use Webkul\Product\Repositories\SearchRepository;
  class SearchController extends Controller
 {
     /**
-     * Contains route related configuration
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * SearchRepository object
      *
      * @var Object
@@ -34,9 +27,9 @@ use Webkul\Product\Repositories\SearchRepository;
     */
     public function __construct(SearchRepository $searchRepository)
     {
-        $this->_config = request('_config');
-
         $this->searchRepository = $searchRepository;
+
+        parent::__construct();
     }
 
     /**

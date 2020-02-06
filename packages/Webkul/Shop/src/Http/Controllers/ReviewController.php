@@ -14,13 +14,6 @@ use Webkul\Product\Repositories\ProductReviewRepository;
 class ReviewController extends Controller
 {
     /**
-     * Contains route related configuration
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * ProductRepository object
      *
      * @var Object
@@ -49,7 +42,7 @@ class ReviewController extends Controller
 
         $this->productReviewRepository = $productReviewRepository;
 
-        $this->_config = request('_config');
+        parent::__construct();
     }
 
     /**
