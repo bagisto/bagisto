@@ -32,7 +32,7 @@
                     <div class="control-group" :class="[errors.has('identifier') ? 'has-error' : '']">
                         <label for="identifier" class="required">{{ __('admin::app.configuration.tax-rates.identifier') }}</label>
                         <input v-validate="'required'" class="control" id="identifier" name="identifier" data-vv-as="&quot;{{ __('admin::app.configuration.tax-rates.identifier') }}&quot;" value="{{ old('identifier') ?: $taxRate->identifier }}" disabled="disabled"/>
-                        <input type="hidden" name="identifier" value="{{ value="{{ old('identifier') ?: $taxRate->identifier }}"/>
+                        <input type="hidden" name="identifier" value="{{ $taxRate->identifier }}"/>
                         <span class="control-error" v-if="errors.has('identifier')">@{{ errors.first('identifier') }}</span>
                     </div>
 

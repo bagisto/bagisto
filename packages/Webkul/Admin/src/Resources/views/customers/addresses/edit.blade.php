@@ -28,7 +28,7 @@
 
                     <input type="hidden" name="_method" value="PUT">
 
-                    <input type="hidden" name="customer_id" value="{{ old('customer_id') ?: $address->customer_id }}">
+                    <input type="hidden" name="customer_id" value="{{ $address->customer_id }}">
 
                     <accordian :title="'{{ __('admin::app.customers.addresses.general') }}'" :active="true">
                         <div slot="body">

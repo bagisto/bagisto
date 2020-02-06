@@ -37,7 +37,7 @@
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                                 <label for="code" class="required">{{ __('admin::app.settings.currencies.code') }}</label>
                                 <input type="text" v-validate="'required'" class="control" id="code" name="code" data-vv-as="&quot;{{ __('admin::app.settings.currencies.code') }}&quot;" value="{{ old('code') ?: $currency->code }}" disabled="disabled"/>
-                                <input type="hidden" name="code" value="{{ old('code') ?: $currency->code }}"/>
+                                <input type="hidden" name="code" value="{{ $currency->code }}"/>
                                 <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
                             </div>
 
@@ -49,7 +49,7 @@
 
                             <div class="control-group">
                                 <label for="symbol">{{ __('admin::app.settings.currencies.symbol') }}</label>
-                                <input class="control" id="symbol" name="symbol" value="{{ old('symbol') ?: old('symbol') ?: $currency->symbol }}"/>
+                                <input class="control" id="symbol" name="symbol" value="{{ old('symbol') ?: $currency->symbol }}"/>
                             </div>
                         </div>
                     </accordian>
