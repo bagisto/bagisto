@@ -40,21 +40,15 @@
 
                     <div class="control-group" :class="[errors.has('last_name') ? 'has-error' : '']">
                         <label for="last_name" class="required">{{ __('shop::app.customer.account.address.create.last_name') }}</label>
-                        <input value="<?= old('last_name'); ?>" type="text" class="control" name="last_name" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.last_name') }}&quot;">
+                        <input value="{{ old('last_name') }}" type="text" class="control" name="last_name" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.last_name') }}&quot;">
                         <span class="control-error" v-if="errors.has('last_name')">@{{ errors.first('last_name') }}</span>
                     </div>
 
-                    <div class="control-group {!! $errors->has('vat_id') ? 'has-error' : '' !!}">
+                    <div class="control-group" :class="[errors.has('vat_id') ? 'has-error' : '']">
                         <label for="vat_id">{{ __('shop::app.customer.account.address.create.vat_id') }}</label>
-                        <input type="text" class="control" name="vat_id"
-                               value="<?= old('vat_id'); ?>"
-                               data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.vat_id') }}&quot;">
-
-                        <span class="control-error" v-if="{!! $errors->has('vat_id') !!}">
-                            @foreach ($errors->get('vat_id') as $message)
-                                {{ $message }}
-                            @endforeach
-                        </span>
+                        <input type="text" class="control" name="vat_id" value="{{ old('vat_id') }}"
+                        v-validate="''" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.vat_id') }}&quot;">
+                        <span class="control-error" v-if="errors.has('vat_id')">@{{ errors.first('vat_id') }}</span>
                     </div>
 
                     <div class="control-group" :class="[errors.has('address1[]') ? 'has-error' : '']">
