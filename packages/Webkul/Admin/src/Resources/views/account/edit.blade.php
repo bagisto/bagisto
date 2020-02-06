@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="page-action">
-                    <button type="submi t" class="btn btn-lg btn-primary">
+                    <button type="submit" class="btn btn-lg btn-primary">
                         {{ __('admin::app.save') }}
                     </button>
                 </div>
