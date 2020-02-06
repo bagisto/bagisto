@@ -16,7 +16,7 @@
 
     <script type="text/x-template" id="cart-template">
         <div class="container">
-            <section class="cart-details row offset-1 col-12">
+            <section class="cart-details row no-margin col-12">
                 <h1 class="fw6 col-12">{{ __('shop::app.checkout.cart.title') }}</h1>
 
                 @if ($cart)
@@ -215,7 +215,7 @@
                 {!! view_render_event('bagisto.shop.checkout.cart.summary.after', ['cart' => $cart]) !!}
 
                     @if ($cart)
-                        <div class="col-lg-4 col-md-12 offset-1 row order-summary-container">
+                        <div class="col-lg-4 col-md-12 offset-2 row order-summary-container">
                             @include('shop::checkout.total.summary', ['cart' => $cart])
 
                             <coupon-component></coupon-component>
