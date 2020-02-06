@@ -68,6 +68,8 @@ body {
 
             .dropdown-list {
                 top: 63px;
+                right: 0px !important;
+                bottom: inherit !important;
             }
 
             .name {
@@ -309,9 +311,4 @@ body {
         margin-top: 10px;
         margin-bottom: 5px;
     }
-}
-
-.container-shadow {
-    background-color: #fff;
-    box-shadow: 0 3px 6px 0 #bbb;
 }

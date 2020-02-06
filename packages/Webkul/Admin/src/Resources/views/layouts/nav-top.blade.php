@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="dropdown-list bottom-right">
-                    <div class="dropdown-container container-shadow">
+                    <div class="dropdown-container">
                         <label>Account</label>
                         <ul>
                             <li>
