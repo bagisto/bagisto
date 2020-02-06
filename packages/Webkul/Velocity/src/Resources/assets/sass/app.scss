@@ -310,6 +310,7 @@ body {
 
 .no-padding {
     padding: 0px !important;
+    cursor: default;
 }
 
 .btn-normal {
@@ -410,6 +411,8 @@ header {
                     right: 8px;
                     z-index: 10;
                     font-size: 18px;
+                    background-color: $white-color;
+                    height: 20px;
                 }
             }
 

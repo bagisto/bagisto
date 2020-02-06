@@ -188,7 +188,7 @@
 
             &.left {
                 left: 0px;
-                line-height: 10em;
+                line-height: 13em;
             }
 
             &.right {
@@ -235,7 +235,7 @@
             height: 100%;
             position: relative;
 
-            .left {
+            > .left {
                 top: 60px;
                 padding: 0px;
                 position: sticky;

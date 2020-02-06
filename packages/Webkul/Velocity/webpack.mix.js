@@ -1,10 +1,10 @@
 const { mix } = require("laravel-mix");
 require("laravel-mix-merge-manifest");
 
+var publicPath = "../../../public/themes/velocity/assets";
+
 if (mix.inProduction()) {
-    var publicPath = 'publishable/assets';
-} else {
-    var publicPath = "../../../public/themes/velocity/assets";
+    publicPath = 'publishable/assets';
 }
 
 mix.setPublicPath(publicPath).mergeManifest();
