@@ -1618,10 +1618,8 @@
     li {
         a {
             padding: 7px 0 5px 15px;
-        }
 
-        &:hover {
-            > a {
+            &:hover {
                 background: $border-light;
             }
         }
