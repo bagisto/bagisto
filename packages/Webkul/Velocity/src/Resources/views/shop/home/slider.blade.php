@@ -26,6 +26,11 @@
                                 <img
                                     class="col-12 no-padding banner-icon"
                                     src="{{ url()->to('/') . '/storage/' . $slider['path'] }}" />
+
+                                <div class="show-content">
+                                    <div class="show-content" v-text="'{{ $slider['content'] }}'">
+                                    </div>
+                                </div>
                             </a>
                         </slide>
 
