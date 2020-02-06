@@ -972,7 +972,12 @@ class Cart {
         $found = false;
 
         foreach ($wishlistItems as $wishlistItem) {
-            if ($cartItem->product->getTypeInstance()->compareOptions($cartItem->additional, $wishlistItem->item_options))
+            $options = $wishlistItem->item_options;
+
+            if (! $options)
+                $options = ['product_id' => $wishlistItem->product_id];
+
+            if ($cartItem->product->getTypeInstance()->compareOptions($cartItem->additional, $options))
                 $found = true;
         }
 
