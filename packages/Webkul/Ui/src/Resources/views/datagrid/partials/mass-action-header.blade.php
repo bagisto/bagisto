@@ -25,7 +25,9 @@
                             </select>
                         </div>
 
-                        <input type="submit" class="btn btn-sm btn-primary" style="margin-left: 10px;">
+                        <button type="submit" class="btn btn-sm btn-primary" style="margin-left: 10px;">
+                            {{ __('ui::app.datagrid.submit') }}
+                        </button>
                     </form>
                 </div>
             </th>

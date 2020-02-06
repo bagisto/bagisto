@@ -4,6 +4,7 @@ namespace Webkul\Shop\Http\Controllers;
 
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Checkout\Contracts\Cart as CartModel;
 use Cart;
 
 /**
@@ -78,7 +79,7 @@ class CartController extends Controller
                 return redirect()->back();
             }
 
-            if ($result instanceof Cart) {
+            if ($result instanceof CartModel) {
                 session()->flash('success', trans('shop::app.checkout.cart.item.success'));
 
                 if ($customer = auth()->guard('customer')->user())
