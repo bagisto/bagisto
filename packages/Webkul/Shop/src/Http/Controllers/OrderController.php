@@ -16,13 +16,6 @@ use PDF;
 class OrderController extends Controller
 {
     /**
-     * Contains route related configuration
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * OrderrRepository object
      *
      * @var Object
@@ -50,11 +43,11 @@ class OrderController extends Controller
     {
         $this->middleware('customer');
 
-        $this->_config = request('_config');
-
         $this->orderRepository = $orderRepository;
 
         $this->invoiceRepository = $invoiceRepository;
+
+        parent::__construct();
     }
 
     /**

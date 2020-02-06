@@ -421,7 +421,7 @@ return [
             'adjustment-refund' => 'Adjustment Refund',
             'adjustment-fee' => 'Adjustment Fee',
             'update-qty' => 'Update Quantities',
-            'invalid-qty' => 'Found invalid quantity for return items.',
+            'invalid-qty' => 'We found an invalid quantity to refund items.',
             'refund-limit-error' => 'The most money available to refund is :amount.',
             'refunded' => 'Refunded',
             'date' => 'Refund Date',
