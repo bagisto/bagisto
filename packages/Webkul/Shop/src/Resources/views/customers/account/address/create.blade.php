@@ -58,8 +58,8 @@
                     </div>
 
                     <div class="control-group" :class="[errors.has('address1[]') ? 'has-error' : '']">
-                        <label for="address_0" class="required">{{ __('shop::app.customer.account.address.create.street-address') }}</label>
-                        <input type="text" class="control" name="address1[]" id="address_0" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.street-address') }}&quot;">
+                        <label for="address1" class="required">{{ __('shop::app.customer.account.address.create.street-address') }}</label>
+                        <input type="text" class="control" name="address1[]" value="<?= old('address1'); ?>" id="address1" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.street-address') }}&quot;">
                         <span class="control-error" v-if="errors.has('address1[]')">@{{ errors.first('address1[]') }}</span>
                     </div>
 

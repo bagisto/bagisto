@@ -10,6 +10,7 @@ namespace Webkul\Customer\Rules;
  * @see     https://raw.githubusercontent.com/danielebarbaro/laravel-vat-eu-validator
  *
  * @package Danielebarbaro\LaravelVatEuValidator
+ * @author  Vivek Sharma <viveksh047@webkul.com> @vivek-webkul
  */
 class VatValidator
 {
@@ -36,6 +37,7 @@ class VatValidator
         'HR' => '\d{11}',
         'HU' => '\d{8}',
         'IE' => '[A-Z\d]{8}|[A-Z\d]{9}',
+        'IN' => 'V\d{11}',
         'IT' => '\d{11}',
         'LT' => '(\d{9}|\d{12})',
         'LU' => '\d{8}',
@@ -59,14 +61,14 @@ class VatValidator
      */
     public function validate(string $vatNumber): bool
     {
+        $country = request()->input('country');
         $vatNumber = $this->vatCleaner($vatNumber);
-        list($country, $number) = $this->splitVat($vatNumber);
 
         if (! isset(self::$pattern_expression[$country])) {
             return false;
         }
-
-        return preg_match('/^' . self::$pattern_expression[$country] . '$/', $number) > 0;
+        
+        return preg_match('/^' . self::$pattern_expression[$country] . '$/', $vatNumber) > 0;
     }
 
     /**
@@ -78,18 +80,5 @@ class VatValidator
     {
         $vatNumber_no_spaces = trim($vatNumber);
         return strtoupper($vatNumber_no_spaces);
-    }
-
-    /**
-     * @param string $vatNumber
-     *
-     * @return array
-     */
-    private function splitVat(string $vatNumber): array
-    {
-        return [
-            substr($vatNumber, 0, 2),
-            substr($vatNumber, 2),
-        ];
     }
 }
