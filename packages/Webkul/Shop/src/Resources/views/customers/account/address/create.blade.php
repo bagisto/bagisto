@@ -40,7 +40,7 @@
 
                     <div class="control-group" :class="[errors.has('last_name') ? 'has-error' : '']">
                         <label for="last_name" class="required">{{ __('shop::app.customer.account.address.create.last_name') }}</label>
-                        <input value="<?= old('last_name'); ?>" type="text" class="control" name="last_name" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.last_name') }}&quot;">
+                        <input value="{{ old('last_name') }}" type="text" class="control" name="last_name" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.last_name') }}&quot;">
                         <span class="control-error" v-if="errors.has('last_name')">@{{ errors.first('last_name') }}</span>
                     </div>
 
