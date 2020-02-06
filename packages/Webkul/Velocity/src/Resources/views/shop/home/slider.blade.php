@@ -28,7 +28,7 @@
                                     src="{{ url()->to('/') . '/storage/' . $slider['path'] }}" />
 
                                 <div class="show-content">
-                                    <div class="show-content" v-text="'{{ $slider['content'] }}'">
+                                    <div class="show-content" v-html="'{{ $slider['content'] }}'">
                                     </div>
                                 </div>
                             </a>
