@@ -366,6 +366,7 @@
                 v-validate="'required'"
                 class="control styled-select"
                 v-model="address.billing.country"
+                @change="validateForm('address-form')"
                 data-vv-as="&quot;{{ __('shop::app.checkout.onepage.country') }}&quot;">
 
                 <option value=""></option>

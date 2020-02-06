@@ -284,6 +284,11 @@
                                 this.completed_step = this.step_numbers[response.data.jump_to_section] + 1;
                                 this.current_step = this.step_numbers[response.data.jump_to_section];
 
+                                if (response.data.jump_to_section == "payment") {
+                                    this.showPaymentSection = true;
+                                    paymentMethods  = response.data.paymentMethods;
+                                }
+
                                 shippingMethods = response.data.shippingMethods;
 
                                 this.getOrderSummary();
