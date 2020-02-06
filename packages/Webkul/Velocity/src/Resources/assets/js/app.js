@@ -50,7 +50,7 @@ $(document).ready(function () {
     Vue.mixin({
         data: function () {
             return {
-                'baseUrl': document.querySelector("script[src$='velocity.js']").getAttribute('baseurl'),
+                'baseUrl': document.querySelector("script[src$='velocity.js']").getAttribute('baseUrl'),
                 'navContainer': false,
                 'responsiveSidebarTemplate': '',
                 'responsiveSidebarKey': Math.random(),
@@ -175,6 +175,8 @@ $(document).ready(function () {
         },
 
         mounted: function () {
+            this.addServerErrors();
+
             document.body.style.display = "block";
             this.$validator.localize(document.documentElement.lang);
 

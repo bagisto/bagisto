@@ -56,7 +56,7 @@
 
                             <div class="control-group" :class="[errors.has('vat_id') ? 'has-error' : '']">
                                 <label for="vat_id">{{ __('shop::app.customer.account.address.create.vat_id') }}</label>
-                                <input type="text" class="control" name="vat_id" value="{{ old('vat_id') }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.vat_id') }}&quot;">
+                                <input type="text" class="control" name="vat_id" v-validate="" value="{{ old('vat_id') }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.vat_id') }}&quot;">
                                 <span class="control-error" v-if="errors.has('vat_id')">@{{ errors.first('vat_id') }}</span>
                             </div>
 
