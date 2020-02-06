@@ -125,6 +125,10 @@
                 color: $font-color;
                 background-color: white;
             }
+            .down-icon-position {
+                pointer-events: none;
+                background-color: $white-color;
+            }
         }
 
         > div:not(:first-child) {

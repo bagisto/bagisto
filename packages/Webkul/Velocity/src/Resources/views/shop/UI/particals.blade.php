@@ -560,6 +560,10 @@
                     if (modal)
                         modal.classList.toggle('hide');
 
+                    let accountModal = $('.account-modal')[0];
+                    if (accountModal)
+                        accountModal.classList.add('hide');
+
                     event.stopPropagation();
                 }
             }

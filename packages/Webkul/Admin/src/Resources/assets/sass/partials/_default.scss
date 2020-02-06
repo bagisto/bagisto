@@ -68,6 +68,8 @@ body {
 
             .dropdown-list {
                 top: 63px;
+                right: 0px !important;
+                bottom: inherit !important;
             }
 
             .name {
@@ -89,7 +91,7 @@ body {
     }
 }
 
-.navbar-left {    
+.navbar-left {
     position: fixed;
     left: 0;
     top: 60px;
@@ -98,10 +100,10 @@ body {
     border-right: 1px solid rgba(162, 162, 162, 0.2);
     height: auto;
     bottom: 0;
-    z-index: 2;  
+    z-index: 2;
     background-color: $white;
 
-    ul.menubar {        
+    ul.menubar {
         // padding-bottom: 60px;
         li.menu-item {
             padding: 10px 5px;

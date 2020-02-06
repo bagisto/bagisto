@@ -67,7 +67,7 @@
                                             </a>
 
                                             <div class="product-details-content col-6">
-                                                <div class="row">
+                                                <div class="row item-title">
                                                     <a
                                                         href="{{ route('shop.productOrCategory.index', $product->url_key) }}"
                                                         title="{{ $product->name }}"
@@ -157,7 +157,7 @@
                                                     alt="{{ $product->name }}">
                                             </a>
 
-                                            <div class="col-10 pr0">
+                                            <div class="col-10 pr0 item-title">
                                                 <a
                                                     href="{{ route('shop.productOrCategory.index', $product->url_key) }}"
                                                     title="{{ $product->name }}"
