@@ -28,7 +28,7 @@ body {
     height: 60px;
     background-color: $navbar-top-background;
     font-size: 0;
-    @include box-shadow(0 3px 6px 0 rgba(0, 0, 0, 0.05));
+    @include box-shadow(0 3px 6px 0 #0000000d);
     border-bottom: 1px solid $border-color;
     position: fixed;
     left: 0;
@@ -89,7 +89,7 @@ body {
     }
 }
 
-.navbar-left {    
+.navbar-left {
     position: fixed;
     left: 0;
     top: 60px;
@@ -98,10 +98,10 @@ body {
     border-right: 1px solid rgba(162, 162, 162, 0.2);
     height: auto;
     bottom: 0;
-    z-index: 2;  
+    z-index: 2;
     background-color: $white;
 
-    ul.menubar {        
+    ul.menubar {
         // padding-bottom: 60px;
         li.menu-item {
             padding: 10px 5px;
@@ -309,4 +309,9 @@ body {
         margin-top: 10px;
         margin-bottom: 5px;
     }
+}
+
+.container-shadow {
+    background-color: #fff;
+    box-shadow: 0 3px 6px 0 #bbb;
 }
