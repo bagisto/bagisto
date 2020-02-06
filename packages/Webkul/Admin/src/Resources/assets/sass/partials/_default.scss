@@ -28,7 +28,7 @@ body {
     height: 60px;
     background-color: $navbar-top-background;
     font-size: 0;
-    @include box-shadow(0 3px 6px 0 #0000000d);
+    @include box-shadow(0 3px 6px 0 rgba(0, 0, 0, 0.05));
     border-bottom: 1px solid $border-color;
     position: fixed;
     left: 0;
