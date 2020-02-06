@@ -67,7 +67,7 @@
                                             </a>
 
                                             <div class="product-details-content col-6">
-                                                <div class="row">
+                                                <div class="row item-title">
                                                     <a
                                                         href="{{ route('shop.productOrCategory.index', $product->url_key) }}"
                                                         title="{{ $product->name }}"
@@ -117,7 +117,11 @@
                                                     @endauth
 
                                                     <a
-                                                        class="unset ml30"
+                                                        class="unset
+                                                            @auth('customer')
+                                                                ml30
+                                                            @endauth
+                                                        "
                                                         href="{{ route('shop.checkout.cart.remove', ['id' => $item->id]) }}"
                                                         onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">
 
@@ -153,7 +157,7 @@
                                                     alt="{{ $product->name }}">
                                             </a>
 
-                                            <div class="col-10 pr0">
+                                            <div class="col-10 pr0 item-title">
                                                 <a
                                                     href="{{ route('shop.productOrCategory.index', $product->url_key) }}"
                                                     title="{{ $product->name }}"

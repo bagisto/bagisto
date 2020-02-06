@@ -29,7 +29,7 @@
                         </a>
                     </div>
 
-                    <div class="col-8 no-padding card-body align-vertical-top">
+                    <div class="col-8 no-padding card-body align-vertical-top" v-if="product.name">
                         <a :href="`${baseUrl}/${product.urlKey}`" class="unset no-padding">
                             <div class="product-name">
                                 <span class="fs16 text-nowrap">@{{ product.name }}</span>
@@ -40,20 +40,20 @@
                                 class="fs18 card-current-price fw6">
                             </div>
 
-                            <star-ratings
+                            <star-ratings v-if="product.rating > 0"
                                 push-class="display-inbl"
                                 :ratings="product.rating">
                             </star-ratings>
 
-                            <span class="fs16 text-nowrap align-text-bottom">@{{ product.totalReviews }} Reviews</span>
+                            <span class="fs16 text-nowrap align-text-bottom" v-if="product.rating > 0">@{{ product.totalReviews }} Reviews</span>
                         </a>
                     </div>
                 </div>
 
                 <span
                     class="fs16"
-                    v-if="!recentlyViewed"
-                    v-text="'Not available'">
+                    v-if="!recentlyViewed ||(recentlyViewed && Object.keys(recentlyViewed).length == 0)"
+                    v-text="'{{ __('velocity::app.products.not-available') }}'">
                 </span>
             </div>
         </div>
@@ -94,6 +94,11 @@
                             .then(response => {
                                 if (response.data.status) {
                                     this.$set(this.recentlyViewed, response.data.details.urlKey, response.data.details);
+                                } else {
+                                    delete this.recentlyViewed[response.data.slug];
+                                    this.$set(this, 'recentlyViewed', this.recentlyViewed);
+
+                                    this.$forceUpdate();
                                 }
                             })
                             .catch(error => {})

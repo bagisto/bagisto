@@ -56,11 +56,11 @@
                         <div class="control-group" :class="[errors.has('status') ? 'has-error' : '']">
                             <label for="status" class="required">{{ __('velocity::app.admin.contents.page.status') }}</label>
                             <select class="control" v-validate="'required'" id="status" name="status" data-vv-as="&quot;{{ __('velocity::app.admin.contents.page.status') }}&quot;">
-                                <option value="0">
-                                    {{ __('velocity::app.admin.contents.inactive') }}
-                                </option>
                                 <option value="1">
                                     {{ __('velocity::app.admin.contents.active') }}
+                                </option>
+                                <option value="0">
+                                    {{ __('velocity::app.admin.contents.inactive') }}
                                 </option>
                             </select>
                             <span class="control-error" v-if="errors.has('status')">@{{ errors.first('status') }}</span>
@@ -141,11 +141,14 @@
             <div v-else-if="content_type == 'static'">
                 @include ('velocity::admin.content.content-type.static')
             </div>
+            <div v-else-if="content_type == 'category'">
+                @include ('velocity::admin.content.content-type.category')
+            </div>
         </div>
 
     </script>
 
-    <script>
+    <script type="text/javascript">
         Vue.component('content-type', {
             template: '#content-type-template',
 
@@ -158,10 +161,9 @@
             },
             methods: {
                 loadFields(event) {
-                    var thisthis = this;
-                    thisthis.content_type = event.target.value;
+                    this.content_type = event.target.value;
 
-                    if ( thisthis.content_type == 'static') {
+                    if (this.content_type == 'static') {
                         $(document).ready(function () {
                             tinymce.init({
                                 selector: 'textarea#description',

@@ -268,7 +268,44 @@
             data: function() {
                 return {
                     variants: variants,
+
+                    old_variants: @json(old('variants')),
+
                     superAttributes: super_attributes
+                }
+            },
+
+            created: function () {
+                var index = 0;
+
+                for (var key in this.old_variants) {
+                    var variant = this.old_variants[key];
+
+                    if (key.indexOf('variant_') !== -1) {
+                        var inventories = [];
+
+                        for (var inventorySourceId in variant['inventories']) {
+                            inventories.push({'qty': variant['inventories'][inventorySourceId], 'inventory_source_id': inventorySourceId})
+                        }
+
+                        variant['inventories'] = inventories;
+
+                        variants.push(variant);
+                    } else {
+                        for (var code in variant) {
+                            if (code != 'inventories') {
+                                variants[index][code] = variant[code];
+                            } else {
+                                variants[index][code] = [];
+
+                                for (var inventorySourceId in variant[code]) {
+                                    variants[index][code].push({'qty': variant[code][inventorySourceId], 'inventory_source_id': inventorySourceId})
+                                }
+                            }
+                        }
+                    }
+
+                    index++;
                 }
             },
 
@@ -301,6 +338,7 @@
 
             created: function () {
                 var this_this = this;
+
                 this.inventorySources.forEach(function(inventorySource) {
                     this_this.inventories[inventorySource.id] = this_this.sourceInventoryQty(inventorySource.id)
                     this_this.totalQty += parseInt(this_this.inventories[inventorySource.id]);
@@ -336,8 +374,11 @@
                 },
 
                 sourceInventoryQty: function (inventorySourceId) {
+                    if (! Array.isArray(this.variant.inventories))
+                        return 0;
+
                     var inventories = this.variant.inventories.filter(function(inventory) {
-                        return inventorySourceId === inventory.inventory_source_id;
+                        return inventorySourceId === parseInt(inventory.inventory_source_id);
                     })
 
                     if (inventories.length)
@@ -348,6 +389,7 @@
 
                 updateTotalQty: function () {
                     this.totalQty = 0;
+
                     for (var key in this.inventories) {
                         this.totalQty += parseInt(this.inventories[key]);
                     }

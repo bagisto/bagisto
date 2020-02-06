@@ -122,7 +122,7 @@ class ContentRepository extends Repository
     {
         $query = $this->model::orderBy('position', 'ASC');
 
-        $content = $query
+        $contentCollection = $query
                 ->select('velocity_contents.*', 'velocity_contents_translations.*')
                 ->where('velocity_contents.status', 1)
                 ->leftJoin('velocity_contents_translations', 'velocity_contents.id', 'velocity_contents_translations.content_id')
@@ -131,6 +131,16 @@ class ContentRepository extends Repository
                 ->limit(5)
                 ->get();
 
-        return $content;
+        $formattedContent = [];
+        foreach ($contentCollection as $content) {
+            array_push($formattedContent, [
+                'title' => $content->title,
+                'page_link' => $content->page_link,
+                'link_target' => $content->link_target,
+                'content_type' => $content->content_type,
+            ]);
+        }
+
+        return $formattedContent;
     }
 }

@@ -276,6 +276,10 @@
 
                 {!! view_render_event('bagisto.admin.content.edit_form_accordian.content.static.after', ['content' => $content]) !!}
             </div>
+
+            <div v-else-if="content_type == 'category'">
+                @include ('velocity::admin.content.content-type.category')
+            </div>
         </div>
     </script>
 

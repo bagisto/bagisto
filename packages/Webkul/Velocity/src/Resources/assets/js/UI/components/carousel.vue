@@ -1,5 +1,6 @@
 <template>
     <carousel
+        :id="id"
         :navigationEnabled="true"
         :paginationEnabled="true"
         :perPage="parseInt(slidesPerPage)"

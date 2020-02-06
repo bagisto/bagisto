@@ -34,9 +34,11 @@
         <a :href="`${baseUrl}/${product.slug}`" :title="product.name" class="product-image-container">
             <img
                 loading="lazy"
-                :src="product.image"
                 :alt="product.name"
-                class="card-img-top">
+                :src="product.image"
+                :data-src="product.image"
+                class="card-img-top lzy_img" />
+                <!-- :src="`${$root.baseUrl}/vendor/webkul/ui/assets/images/product/meduim-product-placeholder.png`" /> -->
 
             <!-- <quick-view-btn details="{{ $product }}"></quick-view-btn> -->
         </a>

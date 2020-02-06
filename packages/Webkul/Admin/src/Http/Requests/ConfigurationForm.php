@@ -24,12 +24,20 @@ class ConfigurationForm extends FormRequest
      */
     public function rules()
     {
-        $this->rules = [
-            'sales.*.*.title'  => 'required',
-            'sales.*.*.active'  => 'required',
-            'sales.*.*.order_status' => 'required',
-            'sales.*.*.file' => 'max:2048',
-        ];
+        $this->rules = [];
+
+        // if (request()->has('sales.orderSettings.order_number')) {
+        //     $this->rules = [
+        //         'sales.orderSettings.order_number.order_number_prefix' => 'required|regex:/^[a-zA-Z0-9$%^&*@]+$/u',
+        //         'sales.orderSettings.order_number.order_number_suffix' => 'required|regex:/^[a-zA-Z0-9$%^&*@]+$/u',
+        //     ];
+        // }
+
+        if (request()->has('general.design.admin_logo.logo_image') && ! request()->input('general.design.admin_logo.logo_image.delete')) {
+            $this->rules = [
+                'general.design.admin_logo.logo_image'  => 'required|mimes:jpeg,bmp,png,jpg'
+            ];
+        }
 
         return $this->rules;
     }
@@ -42,9 +50,9 @@ class ConfigurationForm extends FormRequest
     public function messages()
     {
         return [
-            'sales.*.*.title.required' => 'The title field is required.',
-            'sales.*.*.active.required' => 'The status field is required.',
-            'sales.*.*.order_status.required' => 'Order Status field is required',
+            // 'sales.orderSettings.order_number.order_number_prefix.regex' => 'Invalid format. Can not use #.',
+            // 'sales.orderSettings.order_number.order_number_suffix.regex' => 'Invalid format. Can not use #.',
+            'general.design.admin_logo.logo_image.mimes' => 'Invalid file format. Use only jpeg, bmp, png, jpg.'
         ];
     }
 }

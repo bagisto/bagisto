@@ -34,10 +34,10 @@
                         <div class="col-lg-4 col-md-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title fw6">{{ auth()->guard('customer')->user()->name }} {{ $address->name }}</h5>
+                                    <h5 class="card-title fw6">{{ $address->first_name }} {{ $address->last_name }}</h5>
 
                                     <ul type="none">
-                                        {{-- <li>{{ $address->name }}</li> --}}
+                                        {{-- <li>{{ $address->company_name }}</li> --}}
                                         <li>{{ $address->address1 }},</li>
                                         <li>{{ $address->city }},</li>
                                         <li>{{ $address->state }},</li>
