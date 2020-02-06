@@ -6,7 +6,7 @@
 @push('scripts')
     <script type="text/x-template" id="catalog-product-template">
         <div>
-            <?php $catalogType =  old($locale)['catalog_type'] ?: $content->translate($locale)['catalog_type']; ?>
+            <?php $catalogType =  old($locale)['catalog_type'] ?? $content->translate($locale)['catalog_type']; ?>
 
             <div class="control-group" :class="[errors.has('{{$locale}}[catalog_type]') ? 'has-error' : '']">
                 <label for="catalog_type" class="required">
