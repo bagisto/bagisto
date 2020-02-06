@@ -59,7 +59,7 @@ return [
             'autocomplete' => '[Autocomplete]',
             'search-hint' => 'Search product here...',
             'no-result-found' => 'No record found.',
-            'mass-delete-success' => 'Success: Selected conent(s) deleted successfully.',
+            'mass-delete-success' => 'Selected content deleted successfully.',
             'tab' => [
                 'page' => 'Page Setting',
                 'content' => 'Content Setting',
@@ -131,7 +131,7 @@ return [
             'status' => 'Status',
             'active' => 'Active',
             'inactive' => 'Inactive',
-            'mass-delete-success' => 'Success: Selected categories menu deleted successfully.',
+            'mass-delete-success' => 'Selected categories menu deleted successfully.',
         ],
         'general' => [
             'locale_logo' => 'Locale Logo',
