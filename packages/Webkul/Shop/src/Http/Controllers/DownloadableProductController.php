@@ -14,13 +14,6 @@ use Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository;
 class DownloadableProductController extends Controller
 {
     /**
-     * Contains route related configuration
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * DownloadableLinkPurchasedRepository object
      *
      * @var array
@@ -39,9 +32,9 @@ class DownloadableProductController extends Controller
     {
         $this->middleware('customer');
 
-        $this->_config = request('_config');
-
         $this->downloadableLinkPurchasedRepository = $downloadableLinkPurchasedRepository;
+
+        parent::__construct();
     }
 
     /**

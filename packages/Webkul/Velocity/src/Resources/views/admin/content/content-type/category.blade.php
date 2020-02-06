@@ -12,7 +12,7 @@
         class="control"
         name="page_link"
         v-validate="'required|max:150'"
-        value="{{ isset($locale) ? (old($locale)['page_link'] ?: $content->translate($locale)['page_link']) : '' }}"
+        value="{{ isset($locale) ? (old($locale)['page_link'] ?? $content->translate($locale)['page_link']) : '' }}"
         data-vv-as="&quot;{{ __('velocity::app.admin.contents.content.page-link') }}&quot;" />
 
     <span class="control-error" v-if="errors.has('page_link')">

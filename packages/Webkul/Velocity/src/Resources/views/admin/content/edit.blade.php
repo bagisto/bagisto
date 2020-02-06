@@ -59,7 +59,7 @@
                                 {{ __('velocity::app.admin.contents.page.title') }}
                                 <span class="locale">[{{ $locale }}]</span>
                             </label>
-                            <input type="text" v-validate="'required|max:100'" class="control" id="title" name="{{$locale}}[title]" value="{{ old($locale)['title'] ?: $content->translate($locale)['title'] }}" data-vv-as="&quot;{{ __('velocity::app.admin.contents.page.title') }}&quot;"/>
+                            <input type="text" v-validate="'required|max:100'" class="control" id="title" name="{{$locale}}[title]" value="{{ old($locale)['title'] ?? $content->translate($locale)['title'] }}" data-vv-as="&quot;{{ __('velocity::app.admin.contents.page.title') }}&quot;"/>
 
                             <span class="control-error" v-if="errors.has('{{$locale}}[title]')">@{{ errors.first('{!!$locale!!}[title]') }}</span>
                         </div>
@@ -68,7 +68,7 @@
                             <label for="position" class="required">
                                 {{ __('velocity::app.admin.contents.page.position') }}</span>
                             </label>
-                            <input type="text" v-validate="'required|numeric|max:2'" class="control" id="position" name="position" value="{{ old('position') ?: $content->position }}" data-vv-as="&quot;{{ __('velocity::app.admin.contents.page.position') }}&quot;"/>
+                            <input type="text" v-validate="'required|numeric|max:2'" class="control" id="position" name="position" value="{{ old('position') ?? $content->position }}" data-vv-as="&quot;{{ __('velocity::app.admin.contents.page.position') }}&quot;"/>
                             <span class="control-error" v-if="errors.has('position')">@{{ errors.first('position') }}</span>
                         </div>
 
@@ -132,7 +132,7 @@
                     id="custom_title"
                     v-validate="'max:100'"
                     name="{{$locale}}[custom_title]"
-                    value="{{ old($locale)['custom_title'] ?: $content->translate($locale)['custom_title'] }}"
+                    value="{{ old($locale)['custom_title'] ?? ($content->translate($locale)['custom_title'] ?? '') }}"
                     data-vv-as="&quot;{{ __('velocity::app.admin.contents.content.custom-title') }}&quot;" />
 
                 <span
@@ -154,7 +154,7 @@
                     id="custom_heading"
                     v-validate="'max:100'"
                     name="{{$locale}}[custom_heading]"
-                    value="{{ old($locale)['custom_heading'] ?: $content->translate($locale)['custom_title'] }}" data-vv-as="&quot;{{ __('velocity::app.admin.contents.content.custom-heading') }}&quot;" />
+                    value="{{ old($locale)['custom_heading'] ?? $content->translate($locale)['custom_title'] }}" data-vv-as="&quot;{{ __('velocity::app.admin.contents.content.custom-heading') }}&quot;" />
 
                 <span
                     class="control-error"
@@ -217,7 +217,7 @@
                         class="control"
                         name="{{$locale}}[page_link]"
                         v-validate="'required|max:150'"
-                        value="{{ old($locale)['page_link'] ?: $content->translate($locale)['page_link'] }}"
+                        value="{{ old($locale)['page_link'] ?? $content->translate($locale)['page_link'] }}"
                         data-vv-as="&quot;{{ __('velocity::app.admin.contents.content.page-link') }}&quot;" />
 
                     <span
@@ -264,7 +264,7 @@
                         v-validate="'required'"
                         name="{{$locale}}[description]"
                         data-vv-as="&quot;{{ __('velocity::app.admin.contents.content.static-description') }}&quot;">
-                        {{ old($locale)['description'] ?: $content->translate($locale)['description'] }}
+                        {{ old($locale)['description'] ?? $content->translate($locale)['description'] }}
                     </textarea>
 
                     <span

@@ -16,14 +16,6 @@ use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
  */
 class ProductController extends Controller
 {
-
-    /**
-     * Contains route related configuration
-     *
-     * @var array
-     */
-    protected $_config;
-
     /**
      * ProductRepository object
      *
@@ -76,7 +68,7 @@ class ProductController extends Controller
 
         $this->productDownloadableLinkRepository = $productDownloadableLinkRepository;
 
-        $this->_config = request('_config');
+        parent::__construct();
     }
 
     /**
