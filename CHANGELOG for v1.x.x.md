@@ -139,3 +139,117 @@
 * #2227 [fixed] - Grand total column is not visible in invoice pdf, also getting incorrect currency symbol for grand total.
 
 * #2237 [fixed] - Error when trying to login with app.php locale set to ja
+
+* #2239 [fixed] - User should not be able to create multiple channel with same hostname.
+
+* #2241 [fixed] - Getting exception when save a category with category logo
+
+* #2242 [fixed] - Velocity Header content status should be enabled by default
+
+* #2243 [fixed] - Remove Image's Height [in Pixel], Image's Width [in Pixel] ,Image Alignment and Number of Subcategory from Configure->velocity theme.
+
+* #2245 [fixed] - slider content is not showing in velocity theme
+
+* #2246 [fixed] - slider disable functionality is not working
+
+* #2248 [fixed] - Provide an option to remove filter in velocity theme.
+
+* #2251 [fixed] - configurable product options could not get select
+
+* #2252 [fixed] - Customer is not able to save his/her address in velocity theme.
+
+* #2253 [fixed] - Customer is not able to update his/her profile in velocity theme.
+
+* #2254 [fixed] - Fix layout for remove button in cart page for guest customer
+
+* #2255 [fixed] - Theme page search bar passing string value
+
+* #2256 [fixed] - close previous popup if clicks on another item
+
+* #2257 [fixed] - User profile drop down option should be highlighted on mouse hover
+
+* #2258 [fixed] - Need space between highlighted text.
+
+* #2259 [fixed] - Not getting category image on category page in velocity theme.
+
+* #2260 [fixed] - Not getting the header content.
+
+* #2261 [fixed] - Not getting option to delete review if customer has reviewed only single product.
+
+* #2262 [fixed] - Issue with multiple images of same product
+
+* #2263 [fixed] - Fix issue at review page
+
+* #2264 [fixed] - Getting internal server error when place an order
+
+* #2265 [fixed] - Migrate issues with Velocity
+
+* #2271 [fixed] - When clicking on dropdown icon of all categories, category list didn't get open.
+
+* #2273 [fixed] - Not getting password reset email for velocity theme
+
+* #2274 [fixed] - Not able to proceed for checkout after checkout/onepage in case of downloadable product.
+
+* #2275 [fixed] - Not able to place order for virtual product.
+
+* #2279 [fixed] - Sort By functionality is not working in velocity theme.
+
+* #2280 [fixed] - Getting small checkbox on refreshing the product page.
+
+* #2282 [fixed] - Not getting any validation error message if current date of birth is selected in customer profile.
+
+* #2285 [fixed] - Layout issue if category length is large.
+
+* #2288 [fixed] - Getting exception on mass delete of review from admin end.
+
+* #2293 [fixed] - On mouse hover, remove filter should be display as clickable.
+
+* #2295 [fixed] - Admin not able to add address for customer if he add data in Vat id field.
+
+* #2297 [fixed] - Always showing 0 review for product in recently viewed product even if multiple reviews are given to that product.
+
+* #2299 [fixed] - Vat Id field is not given is customer address form.
+
+* #2300 [fixed] - Alignment issue on Billing Information page if user enter an email that already exist.
+
+* #2317 [fixed] - Multiple pop-up opens at a time if product is added in cart and customer click on Welcome Guest to sign-up or login.
+
+* #2318 [fixed] - Slider content is not showing properly on slider in velocity theme.
+
+* #2319 [fixed] - UI issue when customer redirect to reset password page through received email.
+
+* #2320 [fixed] - UI issue in sort by functionality.
+
+* #2325 [fixed] - Left arrow should be out of the image area.
+
+* #2328 [fixed] - Only first three viewed product display in recently viewed section, when customer view 4th product it doesn't get updated.
+
+* #2330 [fixed] - different route found for customer profile edit page for velocity theme
+
+* #2335 [fixed] - Success alert should be shown while adding product into cart
+
+* #2336 [fixed] - Issue with multi level category.
+
+* #2337 [fixed] - Not getting category logo for 3rd level category.
+
+* #2339 [fixed] - Selected content type is not showing in Content Pages List
+
+* #2340 [fixed] - Correct the success message on deleting content.
+
+* #2341 [fixed] - wish listed items should be labeled by move to cart instead of add to cart if product already added in cart
+
+* #2346 [fixed] - Exception when search product based on selected category from search bar
+
+* #2355 [fixed] - UI issue when update product policy
+
+* #2357 [fixed] - Broken image link for locale logo.
+
+* #2362 [fixed] - Page Link Target of header content always save with self option.
+
+* #2366 [fixed] - Not able to add logo for category, after saving the category logo gets removed.
+
+* #2371 [fixed] - Getting exception on updating Category.
+
+* #2280 [fixed] - In minicart, whole minicart container is showing clickable but only image section gets clicked to redirect to product page.
+
+* #2281 [fixed] - In minicart, whole minicart container is showing clickable but only image section gets clicked to redirect to product page.

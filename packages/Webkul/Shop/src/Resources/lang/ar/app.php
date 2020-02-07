@@ -8,6 +8,7 @@ return [
         'reviews' => 'المراجعات',
         'wishlist' => 'قائمة الأمنيات',
         'orders' => 'الطبات',
+        'downloadable-products' => 'المنتجات القابلة للتحميل',
     ],
 
     'common' => [
@@ -166,6 +167,9 @@ return [
                 'fname' => 'الاسم الأول',
                 'lname' => 'الاسم الأخير',
                 'gender' => 'نوع الجنس',
+                'other' => 'آخر',
+                'male' => 'الذكر',
+                'female' => 'أنثى',
                 'dob' => 'تاريخ الميلاد',
                 'phone' => 'الهاتف',
                 'email' => 'البريد الإلكتروني',
@@ -194,7 +198,7 @@ return [
                     'contact' => 'معلومات الإتصال',
                     'confirm-delete' =>  'هل تريد حقا حذف هذا العنوان؟',
                     'default-delete' => 'لا يمكن تغيير العنوان الافتراضي',
-                    'enter-password' => 'Enter Your Password.',
+                    'enter-password' => 'ادخل رقمك السري.',
                 ],
 
                 'create' => [
@@ -221,7 +225,7 @@ return [
                 'delete' => [
                     'success' => 'تم حذف العنوان بنجاح.',
                     'failure' => 'لا يمكن حذف العنوان',
-                    'wrong-password' => 'Wrong Password !'
+                    'wrong-password' => 'كلمة مرور خاطئة !'
                 ]
             ],
 
@@ -250,7 +254,7 @@ return [
                     'item-invoice' => '3-الفواتير(:qty_invoiced)',
                     'item-shipped' => 'شحنت(:qty_shipped)',
                     'item-canceled' => 'ملغاة(:qty_canceled)',
-                    'item-refunded' => 'Refunded (:qty_refunded)',
+                    'item-refunded' => 'ردها (:qty_refunded)',
                     'price' => 'السعر',
                     'total' => 'المجموع',
                     'subtotal' => 'المجموع الفرعي',
@@ -285,7 +289,7 @@ return [
             ],
 
             'wishlist' => [
-                'page-title' => 'Customer - Wishlist',
+                'page-title' => 'العملاء - قائمة الامنيات',
                 'title' => 'قائمة الأمنيات',
                 'deleteall' => 'احذف الكل',
                 'moveall' => 'نقل الكل إلى عربة التوسق',
@@ -300,22 +304,22 @@ return [
                 'already' => 'العنصر موجود بالفعل في قائمة أمنياتك',
                 'removed' => 'البند حذف بنجاح من قائمة الأمنيات',
                 'remove-fail' => 'لا يمكن حذف العنصر من قائمة الأماني ، الرجاء المحاولة لاحقا',
-                'empty' => 'You do not have any items in your Wishlist',
+                'empty' => 'ليس لديك أي عناصر في قائمة الأمنيات',
                 'remove-all-success' => 'كل الأشياء من قائمة أمانيك قد أزيلت',
             ],
 
             'downloadable_products' => [
-                'title' => 'Downloadable Products',
-                'order-id' => 'Order Id',
-                'date' => 'Date',
-                'name' => 'Title',
-                'status' => 'Status',
-                'pending' => 'Pending',
-                'available' => 'Available',
-                'expired' => 'Expired',
-                'remaining-downloads' => 'Remaining Downloads',
-                'unlimited' => 'Unlimited',
-                'download-error' => 'Download link has been expired.'
+                'title' => 'المنتجات القابلة للتحميل',
+                'order-id' => 'رقم التعريف الخاص بالطلب',
+                'date' => 'تاريخ',
+                'name' => 'عنوان',
+                'status' => 'الحالة',
+                'pending' => 'قيد الانتظار',
+                'available' => 'متاح',
+                'expired' => 'منتهية الصلاحية',
+                'remaining-downloads' => 'التنزيلات المتبقية',
+                'unlimited' => 'غير محدود',
+                'download-error' => 'انتهت صلاحية رابط التنزيل.'
             ],
 
             'review' => [
@@ -363,13 +367,13 @@ return [
         'in-stock' => 'متوفر',
         'out-of-stock' => 'غير متوفر',
         'view-all' => 'عرض الكل',
-        'less-quantity' => 'Quantity can not be less than one.',
-        'starting-at' => 'Starting at',
-        'customize-options' => 'Customize Options',
-        'choose-selection' => 'Choose a selection',
-        'your-customization' => 'Your Customization',
-        'total-amount' => 'Total Amount',
-        'none' => 'None',
+        'less-quantity' => 'لا يمكن أن تكون الكمية أقل من واحدة.',
+        'starting-at' => 'يبدأ من',
+        'customize-options' => 'تخصيص الخيارات',
+        'choose-selection' => 'اختيار اختيار',
+        'your-customization' => 'التخصيص الخاص بك',
+        'total-amount' => 'المبلغ الإجمالي',
+        'none' => 'لا شيء',
         'less-quantity' => 'الكمية لايمكن ان تكون أقل من واحد.'
     ],
 
@@ -387,8 +391,8 @@ return [
             'integrity' => [
                 'missing_fields' =>'إنتهاك سلامة نظام العربة ، بعض الحقول المطلوبة مفقودة',
                 'missing_options' =>'إنتهاك سلامة نظام العربة ، الخيارات مفقودة لمنتج قابل للتهيئة',
-                'missing_links' => 'Downloadable links are missing for this product.',
-                'qty_missing' => 'Atleast one product should have more than 1 quantity.'
+                'missing_links' => 'الروابط القابلة للتنزيل مفقودة لهذا المنتج.',
+                'qty_missing' => 'يجب أن يحتوي منتج واحد على الأقل على كمية واحدة.'
             ],
             'create-error' => 'صادفت بعض القضايا أثناء صناعة السيارات',
             'title' => 'عربة التسوق',

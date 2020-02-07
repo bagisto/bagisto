@@ -153,7 +153,6 @@ class AttributeController extends Controller
     public function massDestroy()
     {
         $suppressFlash = false;
-
         if (request()->isMethod('post')) {
             $indexes = explode(',', request()->input('indexes'));
 
@@ -161,10 +160,12 @@ class AttributeController extends Controller
                 $attribute = $this->attributeRepository->find($value);
 
                 try {
-                    if (! $attribute->is_user_defined) {
-                        continue;
-                    } else {
+                    if ($attribute->is_user_defined) {
+                        $suppressFlash = true;
                         $this->attributeRepository->delete($value);
+                       
+                    } else {
+                        session()->flash('error', trans('admin::app.response.user-define-error', ['name' => 'Attribute']));
                     }
                 } catch (\Exception $e) {
                     report($e);
@@ -174,7 +175,7 @@ class AttributeController extends Controller
                 }
             }
 
-            if (! $suppressFlash)
+            if ($suppressFlash)
                 session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'attributes']));
             else
                 session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'attributes']));

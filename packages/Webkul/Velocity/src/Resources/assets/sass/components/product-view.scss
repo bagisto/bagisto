@@ -175,24 +175,24 @@
         left: 15px;
         z-index: 99;
         padding: 0px;
+        overflow: hidden;
         margin-top: 10px;
         position: relative;
 
         .arrow {
+            left: 0px;
             height: 100%;
             z-index: 1001;
             opacity: 0.50;
+            margin-top: 5px;
             cursor: pointer;
             position: absolute;
+            line-height: 13em;
             background: $border-dark;
 
-            &.left {
-                left: 0px;
-                line-height: 13em;
-            }
-
             &.right {
-                right: 0px;
+                right: 0;
+                left: unset;
                 line-height: 13rem;
             }
         }

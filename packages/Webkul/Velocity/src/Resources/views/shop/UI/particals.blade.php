@@ -98,7 +98,7 @@
 
                     <div class="btn-group full-width">
                         <div class="selectdiv">
-                            <select class="form-control fs13 styled-select" name="category">
+                            <select class="form-control fs13 styled-select" name="category" @change="focusInput($event)">
                                 <option value="">
                                     {{ __('velocity::app.header.all-categories') }}
                                 </option>
@@ -660,6 +660,12 @@
 
                 this.searchedQuery = updatedSearchedCollection;
             },
+
+            methods: {
+                'focusInput': function (event) {
+                    $(event.target.parentElement.parentElement).find('input').focus();
+                }
+            }
         })
 
         Vue.component('content-header', {

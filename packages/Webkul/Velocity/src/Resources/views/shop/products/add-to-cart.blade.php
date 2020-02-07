@@ -1,7 +1,7 @@
 {!! view_render_event('bagisto.shop.products.add_to_cart.before', ['product' => $product]) !!}
 
 <div class="row mx-0">
-    <div class="col-4 add-to-cart-btn pl0">
+    <div class="add-to-cart-btn pl0">
         @if (isset($form) && !$form)
             <button
                 type="submit"
@@ -35,7 +35,7 @@
                     @endif
 
                     <span class="fs14 fw6 text-uppercase text-up-4">
-                        {{ __('shop::app.products.add-to-cart') }}
+                        {{ $btnText ?? __('shop::app.products.add-to-cart') }}
                     </span>
                 </button>
             </form>

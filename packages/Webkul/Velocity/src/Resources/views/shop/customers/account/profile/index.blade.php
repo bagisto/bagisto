@@ -51,7 +51,7 @@
             </div>
 
             <div class="row">
-                <label class="col-12">
+                <label class="col-12 mandatory">
                     {{ __('shop::app.customer.account.profile.gender') }}
                 </label>
 
@@ -91,8 +91,9 @@
                     <div class="select-icon-container">
                         <span class="select-icon rango-arrow-down"></span>
                     </div>
-                </div>
 
+                    <span class="control-error" v-if="errors.has('gender')">@{{ errors.first('gender') }}</span>
+                </div>
             </div>
 
             <div :class="`row ${errors.has('date_of_birth') ? 'has-error' : ''}`">
@@ -130,7 +131,7 @@
                     {{ __('velocity::app.shop.general.enter-current-password') }}
                 </label>
 
-                <div class="col-12">
+                <div :class="`col-12 ${errors.has('oldpassword') ? 'has-error' : ''}`">
                     <input value="" name="oldpassword" type="password" />
                 </div>
             </div>
@@ -140,8 +141,16 @@
                     {{ __('velocity::app.shop.general.new-password') }}
                 </label>
 
-                <div class="col-12">
-                    <input value="" name="password" type="password" />
+                <div :class="`col-12 ${errors.has('password') ? 'has-error' : ''}`">
+                    <input
+                        value=""
+                        name="password"
+                        type="password"
+                        v-validate="'min:6|max:18'" />
+
+                    <span class="control-error" v-if="errors.has('password')">
+                        @{{ errors.first('password') }}
+                    </span>
                 </div>
             </div>
 
@@ -150,8 +159,13 @@
                     {{ __('velocity::app.shop.general.confirm-new-password') }}
                 </label>
 
-                <div class="col-12">
-                    <input value="" name="password_confirmation" type="password" />
+                <div :class="`col-12 ${errors.has('password_confirmation') ? 'has-error' : ''}`">
+                    <input value="" name="password_confirmation" type="password"
+                    v-validate="'min:6|confirmed:password'" data-vv-as="confirm password" />
+
+                    <span class="control-error" v-if="errors.has('password_confirmation')">
+                        @{{ errors.first('password_confirmation') }}
+                    </span>
                 </div>
             </div>
 
