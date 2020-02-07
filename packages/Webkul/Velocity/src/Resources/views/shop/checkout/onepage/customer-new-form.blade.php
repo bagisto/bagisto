@@ -485,9 +485,9 @@
                     <input
                         class="ml0"
                         type="checkbox"
+                        @change="validateForm('address-form')"
                         id="billing[save_as_address]"
                         name="billing[save_as_address]" v-model="address.billing.save_as_address"/>
-
                     <span class="ml-5">
                         {{ __('shop::app.checkout.onepage.save_as_address') }}
                     </span>
