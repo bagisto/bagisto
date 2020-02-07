@@ -17,7 +17,7 @@
 
             <div slot="body">
                 <div class="address-container row full-width">
-                    <div class="col address-holder" v-for='(addresses, index) in this.allAddress'>
+                    <div class="col-lg-6 col-md-12 address-holder" v-for='(addresses, index) in this.allAddress'>
                         <div class="card">
                             <div class="card-body row">
 

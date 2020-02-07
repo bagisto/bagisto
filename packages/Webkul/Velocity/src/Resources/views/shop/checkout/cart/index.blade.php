@@ -95,7 +95,7 @@
                                                                 </wishlist-component>
 
                                                                 <span class="align-vertical-top">
-                                                                    {{ __('shop::app.layouts.wishlist') }}
+                                                                    {{ __('shop::app.checkout.cart.move-to-wishlist') }}
                                                                 </span>
                                                             </a>
                                                         @else
@@ -119,7 +119,7 @@
                                                     <a
                                                         class="unset
                                                             @auth('customer')
-                                                                ml30
+                                                                ml10
                                                             @endauth
                                                         "
                                                         href="{{ route('shop.checkout.cart.remove', ['id' => $item->id]) }}"

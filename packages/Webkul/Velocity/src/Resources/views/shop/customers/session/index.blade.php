@@ -44,8 +44,8 @@
                             {!! view_render_event('bagisto.shop.customers.login_form_controls.before') !!}
 
                             <div class="form-group" :class="[errors.has('email') ? 'has-error' : '']">
-                                <label for="email" class="required label-style">
-                                    {{ __('shop::app.customer.login-form.email') }}*
+                                <label for="email" class="mandatory label-style">
+                                    {{ __('shop::app.customer.login-form.email') }}
                                 </label>
 
                                 <input
@@ -62,8 +62,8 @@
                             </div>
 
                             <div class="form-group" :class="[errors.has('password') ? 'has-error' : '']">
-                                <label for="password" class="required label-style">
-                                    {{ __('shop::app.customer.login-form.password') }}*
+                                <label for="password" class="mandatory label-style">
+                                    {{ __('shop::app.customer.login-form.password') }}
                                 </label>
 
                                 <input

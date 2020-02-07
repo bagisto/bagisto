@@ -28,6 +28,8 @@
 
                             {{ csrf_field() }}
 
+                            <input type="hidden" name="token" value="{{ $token }}">
+
                             {!! view_render_event('bagisto.shop.customers.forget_password_form_controls.before') !!}
 
                             <div :class="`form-group ${errors.has('email') ? 'has-error' : ''}`">
@@ -73,7 +75,7 @@
                                 <input
                                     type="password"
                                     class="form-style"
-                                    name="confirm_password"
+                                    name="password_confirmation"
                                     v-validate="'required|min:6|confirmed:password'" />
 
                                 <span class="control-error" v-if="errors.has('confirm_password')">
