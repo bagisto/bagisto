@@ -354,6 +354,30 @@
                 }
             },
 
+            created: function() {
+                var index = 0;
+
+                for (var key in this.old_links) {
+                    var link = this.old_links[key];
+
+                    if (key.indexOf('link_') !== -1) {
+                        link['title'] = link["{{$locale}}"]['title'];
+
+                        downloadableLinks.push(link);
+                    } else {
+                        for (var code in link) {
+                            if (code === "{{$locale}}") {
+                                downloadableLinks[index]['title'] = link[code]['title'];
+                            } else {
+                                downloadableLinks[index][code] = link[code];
+                            }
+                        }
+                    }
+
+                    index++;
+                }
+            },
+
             computed: {
                 linkInputTitleName: function () {
                     if (this.link.id)
@@ -402,7 +426,33 @@
 
             data: function() {
                 return {
-                    samples: downloadableSamples
+                    samples: downloadableSamples,
+
+                    old_samples: @json(old('downloadable_samples'))
+                }
+            },
+
+            created: function() {
+                var index = 0;
+
+                for (var key in this.old_samples) {
+                    var sample = this.old_samples[key];
+
+                    if (key.indexOf('sample_') !== -1) {
+                        sample['title'] = sample["{{$locale}}"]['title'];
+
+                        downloadableSamples.push(sample);
+                    } else {
+                        for (var code in sample) {
+                            if (code === "{{$locale}}") {
+                                downloadableSamples[index]['title'] = sample[code]['title'];
+                            } else {
+                                downloadableSamples[index][code] = sample[code];
+                            }
+                        }
+                    }
+
+                    index++;
                 }
             },
 
