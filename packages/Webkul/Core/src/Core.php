@@ -136,6 +136,9 @@ class Core
         ])->first();
 
         if (! $channel)
+            $channel = $this->channelRepository->findOneByField('code', config('app.channel'));
+
+        if (! $channel)
             $channel = $this->channelRepository->first();
 
         return $channel;
