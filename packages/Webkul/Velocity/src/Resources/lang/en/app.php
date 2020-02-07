@@ -47,9 +47,9 @@ return [
             'category-menu' => 'Category Menu',
         ],
         'contents' => [
-            'title' => 'Content Pages List',
+            'title' => 'Content List',
             'add-title' => 'Add Content',
-            'btn-add-content' => 'Add New Content',
+            'btn-add-content' => 'Add Content',
             'save-btn-title' => 'Save Content',
             'active' => 'Active',
             'inactive' => 'Inactive',
@@ -82,7 +82,7 @@ return [
                 'static-description' => 'Content Description',
             ],
             'datagrid' => [
-                'id' => 'Content Id',
+                'id' => 'Id',
                 'title' => 'Title',
                 'position' => 'Position',
                 'status' => 'Status',

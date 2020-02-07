@@ -6,12 +6,6 @@
 
 @section('content')
     <div class="content">
-        <div class="page-header">
-            <div class="page-title">
-                <h1>{{ __('velocity::app.admin.meta-data.title') }}</h1>
-            </div>
-        </div>
-
         <form
             method="POST"
             @submit.prevent="onSubmit"
@@ -24,6 +18,17 @@
             >
 
             @csrf
+
+            <div class="page-header">
+                <div class="page-title">
+                    <h1>{{ __('velocity::app.admin.meta-data.title') }}</h1>
+                </div>
+                <div class="page-action">
+                    <button type="submit" class="btn btn-lg btn-primary">
+                        {{ __('velocity::app.admin.meta-data.update-meta-data') }}
+                    </button>
+                </div>
+            </div>
 
             <accordian :title="'{{ __('admin::app.catalog.attributes.general') }}'" :active="false">
                 <div slot="body">
@@ -185,10 +190,6 @@
                     </div>
                 </div>
             </accordian>
-
-            <button class="btn btn-lg btn-primary" style="margin-top: 20px">
-                {{ __('velocity::app.admin.meta-data.update-meta-data') }}
-            </button>
         </form>
     </div>
 @stop
