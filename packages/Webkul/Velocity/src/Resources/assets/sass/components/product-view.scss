@@ -175,6 +175,7 @@
         left: 15px;
         z-index: 99;
         padding: 0px;
+        overflow: hidden;
         margin-top: 10px;
         position: relative;
 
@@ -188,6 +189,12 @@
             position: absolute;
             line-height: 13em;
             background: $border-dark;
+
+            &.right {
+                right: 0;
+                left: unset;
+                line-height: 13rem;
+            }
         }
 
         .thumb-frame {

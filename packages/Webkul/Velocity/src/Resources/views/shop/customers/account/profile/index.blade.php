@@ -51,7 +51,7 @@
             </div>
 
             <div class="row">
-                <label class="col-12">
+                <label class="col-12 mandatory">
                     {{ __('shop::app.customer.account.profile.gender') }}
                 </label>
 
@@ -91,8 +91,9 @@
                     <div class="select-icon-container">
                         <span class="select-icon rango-arrow-down"></span>
                     </div>
-                </div>
 
+                    <span class="control-error" v-if="errors.has('gender')">@{{ errors.first('gender') }}</span>
+                </div>
             </div>
 
             <div :class="`row ${errors.has('date_of_birth') ? 'has-error' : ''}`">

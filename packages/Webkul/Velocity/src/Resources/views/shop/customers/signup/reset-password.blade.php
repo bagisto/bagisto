@@ -24,14 +24,14 @@
                         <form
                             method="POST"
                             @submit.prevent="onSubmit"
-                            action="{{ route('customer.forgot-password.store') }}">
+                            action="{{ route('customer.reset-password.store') }}">
 
                             {{ csrf_field() }}
 
                             {!! view_render_event('bagisto.shop.customers.forget_password_form_controls.before') !!}
 
                             <div :class="`form-group ${errors.has('email') ? 'has-error' : ''}`">
-                                <label for="email">
+                                <label for="email" class="required label-style mandatory">
                                     {{ __('shop::app.customer.reset-password.email') }}
                                 </label>
 
@@ -49,7 +49,7 @@
                             </div>
 
                             <div :class="`form-group ${errors.has('password') ? 'has-error' : ''}`">
-                                <label for="password">
+                                <label for="password" class="required label-style mandatory">
                                     {{ __('shop::app.customer.reset-password.password') }}
                                 </label>
 
@@ -66,14 +66,14 @@
                             </div>
 
                             <div :class="`form-group ${errors.has('confirm_password') ? 'has-error' : ''}`">
-                                <label for="confirm_password">
+                                <label for="confirm_password" class="required label-style mandatory">
                                     {{ __('shop::app.customer.reset-password.confirm-password') }}
                                 </label>
 
                                 <input
                                     type="password"
                                     class="form-style"
-                                    name="password_confirmation"
+                                    name="confirm_password"
                                     v-validate="'required|min:6|confirmed:password'" />
 
                                 <span class="control-error" v-if="errors.has('confirm_password')">
@@ -84,7 +84,7 @@
                             {!! view_render_event('bagisto.shop.customers.forget_password_form_controls.after') !!}
 
                             <button class="theme-btn" type="submit">
-                                {{ __('shop::app.customer.forgot-password.submit') }}
+                                {{ __('shop::app.customer.reset-password.submit-btn-title') }}
                             </button>
                         </form>
 
