@@ -25,53 +25,18 @@ class AdminHelper
         $data = request()->all();
         $type = 'locale_image';
 
-        if (isset($data['locale_image'])) {
-            $request = request();
-
-            foreach ($data['locale_image'] as $imageId => $image) {
-                $file = $type . '.' . $imageId;
-                $dir = 'velocity/locale_image/' . $locale->id;
-
-                if ($request->hasFile($file)) {
-                    if ($locale->{$type}) {
-                        Storage::delete($locale->{$type});
-                    }
-
-                    $locale->{$type} = $request->file($file)->store($dir);
-                    $locale->save();
-                }
-            }
-        } else {
-            if ($locale->{$type}) {
-                Storage::delete($locale->{$type});
-            }
-
-            $locale->{$type} = null;
-            $locale->save();
-        }
+        $locale = $this->uploadImage($locale, $data, $type);
 
         return $locale;
     }
 
     public function storeCategoryIcon($category)
     {
-        $oldPath = null;
-        $iconName = 'category_icon_path.image_1';
+        $data = request()->all();
+        $type = 'category_icon_path';
+        $category = $this->categoryRepository->findOrFail($category);
 
-        if (gettype($category) !== "object") {
-            // getting id on update
-            $iconName = 'category_icon_path.image_0';
-            $category = $this->categoryRepository->findOrFail($category);
-
-            $oldPath = $category->category_icon_path;
-        }
-
-        $uploadedImagePath = $this->uploadImage($category, $iconName, $oldPath);
-
-        if ($uploadedImagePath) {
-            $category->category_icon_path = $uploadedImagePath;
-            $category->save();
-        }
+        $category = $this->uploadImage($category, $data, $type);
 
         return $category;
     }
@@ -82,5 +47,34 @@ class AdminHelper
         $slider->save();
 
         return true;
+    }
+
+    public function uploadImage($model, $data, $type) {
+        if (isset($data[$type])) {
+            $request = request();
+
+            foreach ($data[$type] as $imageId => $image) {
+                $file = $type . '.' . $imageId;
+                $dir = 'velocity/' . $type . '/' . $model->id;
+
+                if ($request->hasFile($file)) {
+                    if ($model->{$type}) {
+                        Storage::delete($model->{$type});
+                    }
+
+                    $model->{$type} = $request->file($file)->store($dir);
+                    $model->save();
+                }
+            }
+        } else {
+            if ($model->{$type}) {
+                Storage::delete($model->{$type});
+            }
+
+            $model->{$type} = null;
+            $model->save();
+        }
+
+        return $model;
     }
 }
