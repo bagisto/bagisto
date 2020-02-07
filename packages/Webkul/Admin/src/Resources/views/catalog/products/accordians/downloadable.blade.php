@@ -283,7 +283,33 @@
 
             data: function() {
                 return {
-                    links: downloadableLinks
+                    links: downloadableLinks,
+
+                    old_links: @json(old('downloadable_links'))
+                }
+            },
+
+            created: function() {
+                var index = 0;
+
+                for (var key in this.old_links) {
+                    var link = this.old_links[key];
+
+                    if (key.indexOf('link_') !== -1) {
+                        link['title'] = link["{{$locale}}"]['title'];
+
+                        downloadableLinks.push(link);
+                    } else {
+                        for (var code in link) {
+                            if (code === "{{$locale}}") {
+                                downloadableLinks[index]['title'] = link[code]['title'];
+                            } else {
+                                downloadableLinks[index][code] = link[code];
+                            }
+                        }
+                    }
+
+                    index++;
                 }
             },
 
