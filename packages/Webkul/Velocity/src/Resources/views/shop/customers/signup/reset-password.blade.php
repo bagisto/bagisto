@@ -24,7 +24,7 @@
                         <form
                             method="POST"
                             @submit.prevent="onSubmit"
-                            action="{{ route('customer.forgot-password.store') }}">
+                            action="{{ route('customer.reset-password.store') }}">
 
                             {{ csrf_field() }}
 
@@ -84,7 +84,7 @@
                             {!! view_render_event('bagisto.shop.customers.forget_password_form_controls.after') !!}
 
                             <button class="theme-btn" type="submit">
-                                {{ __('shop::app.customer.forgot-password.submit') }}
+                                {{ __('shop::app.customer.reset-password.submit-btn-title') }}
                             </button>
                         </form>
 
