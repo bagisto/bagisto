@@ -11,6 +11,7 @@ return [
         'reviews' => 'Opiniones',
         'wishlist' => 'Lista de deseos',
         'orders' => 'Pedidos',
+        'downloadable-products' => 'Productos descargables'
     ],
 
     'common' => [
@@ -173,6 +174,9 @@ return [
                 'fname' => 'Nombre',
                 'lname' => 'Apellido',
                 'gender' => 'Género',
+                'other' => 'Otro',
+                'male' => 'Masculino',
+                'female' => 'Hembra',
                 'dob' => 'Fecha de nacimiento',
                 'phone' => 'Móvil',
                 'email' => 'Correo electrónico',
@@ -261,7 +265,7 @@ return [
                     'item-canceled' => 'Cancelado (:qty_canceled)',
                     'price' => 'Precio',
                     'total' => 'Total',
-                    'subtotal' => 'Subtotal',
+                    'subtotal' => 'Total parcial',
                     'shipping-handling' => 'Envío y Manipulación',
                     'tax' => 'Impuesto',
                     'discount' => 'Descuento',
@@ -289,7 +293,7 @@ return [
             ],
 
             'wishlist' => [
-                'page-title' => 'Customer - Wishlist',
+                'page-title' => 'Cliente - Lista de deseos',
                 'title' => 'Lista de deseos',
                 'deleteall' => 'Eliminar todo',
                 'moveall' => 'Mover todos los productos a la cesta',
@@ -309,17 +313,17 @@ return [
             ],
 
             'downloadable_products' => [
-                'title' => 'Downloadable Products',
-                'order-id' => 'Order Id',
-                'date' => 'Date',
-                'name' => 'Title',
-                'status' => 'Status',
-                'pending' => 'Pending',
-                'available' => 'Available',
-                'expired' => 'Expired',
-                'remaining-downloads' => 'Remaining Downloads',
-                'unlimited' => 'Unlimited',
-                'download-error' => 'Download link has been expired.'
+                'title' => 'Productos descargables',
+                'order-id' => 'Solicitar ID',
+                'date' => 'Fecha',
+                'name' => 'Título',
+                'status' => 'Estado',
+                'pending' => 'Pendiente',
+                'available' => 'Disponible',
+                'expired' => 'Caducado',
+                'remaining-downloads' => 'Descargas restantes',
+                'unlimited' => 'Ilimitado',
+                'download-error' => 'El enlace de descarga ha caducado.'
             ],
 
             'review' => [
@@ -414,7 +418,7 @@ return [
                 'error-add' => 'El artículo no se puede añadir a la cesta, inténtelo más tarde',
             ],
             'quantity-error' => 'La cantidad solicitada no está disponible',
-            'cart-subtotal' => 'Subtotal',
+            'cart-subtotal' => 'Total parcial',
             'cart-remove-action' => '¿Realmente quieres hacer esto?',
             'partial-cart-update' => 'Solo algunos de los productos se han actualizado',
         ],

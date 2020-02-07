@@ -8,6 +8,7 @@ return [
         'reviews' => 'Avaliação',
         'wishlist' => 'Lista de Desejos',
         'orders' => 'Pedidos',
+        'downloadable-products' => 'Produtos para download'
     ],
 
     'common' => [
@@ -169,6 +170,9 @@ return [
                 'fname' => 'Nome',
                 'lname' => 'Sobrenome',
                 'gender' => 'Gênero',
+                'other' => 'De outros',
+                'male' => 'Masculino',
+                'female' => 'Fêmeo',
                 'dob' => 'Data de Nascimento',
                 'phone' => 'Telefone',
                 'email' => 'Email',
@@ -309,17 +313,17 @@ return [
             ],
 
             'downloadable_products' => [
-                'title' => 'Downloadable Products',
-                'order-id' => 'Order Id',
-                'date' => 'Date',
-                'name' => 'Title',
+                'title' => 'Produtos para download',
+                'order-id' => 'ID do pedido',
+                'date' => 'Encontro',
+                'name' => 'Título',
                 'status' => 'Status',
-                'pending' => 'Pending',
-                'available' => 'Available',
-                'expired' => 'Expired',
-                'remaining-downloads' => 'Remaining Downloads',
-                'unlimited' => 'Unlimited',
-                'download-error' => 'Download link has been expired.'
+                'pending' => 'Pendente',
+                'available' => 'acessível',
+                'expired' => 'Expirado',
+                'remaining-downloads' => 'Downloads restantes',
+                'unlimited' => 'Ilimitado',
+                'download-error' => 'O link para download expirou.'
             ],
 
             'review' => [
@@ -370,13 +374,13 @@ return [
         'out-of-stock' => 'Fora de Estoque',
         'view-all' => 'Ver Tudo',
         'select-above-options' => 'Por favor, selecione as opções acima primeiro.',
-        'less-quantity' => 'Quantity can not be less than one.',
-        'starting-at' => 'Starting at',
-        'customize-options' => 'Customize Options',
-        'choose-selection' => 'Choose a selection',
-        'your-customization' => 'Your Customization',
-        'total-amount' => 'Total Amount',
-        'none' => 'None'
+        'less-quantity' => 'A quantidade não pode ser menor que um.',
+        'starting-at' => 'Começando às',
+        'customize-options' => 'Personalizar opções',
+        'choose-selection' => 'Escolha uma seleção',
+        'your-customization' => 'Sua personalização',
+        'total-amount' => 'Valor total',
+        'none' => 'Nenhum'
     ],
 
     // 'reviews' => [
@@ -518,9 +522,9 @@ return [
         'refund' => [
             'heading' => 'Your Refund #:refund_id for Order #:order_id',
             'subject' => 'Refund for your order #:order_id',
-            'summary' => 'Summary of Refund',
-            'adjustment-refund' => 'Adjustment Refund',
-            'adjustment-fee' => 'Adjustment Fee'
+            'summary' => 'Resumo do reembolso',
+            'adjustment-refund' => 'Reembolso de ajuste',
+            'adjustment-fee' => 'Taxa de ajuste'
         ],
 
         'shipment' => [
