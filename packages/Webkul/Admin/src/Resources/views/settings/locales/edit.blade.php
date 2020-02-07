@@ -37,7 +37,7 @@
 
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                                 <label for="code" class="required">{{ __('admin::app.settings.locales.code') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="code" name="code" data-vv-as="&quot;{{ __('admin::app.settings.locales.code') }}&quot;" value="{{ $locale->code }}" disabled="disabled"/>
+                                <input type="text" v-validate="'required'" class="control" id="code" name="code" data-vv-as="&quot;{{ __('admin::app.settings.locales.code') }}&quot;" value="{{ old('code') ?: $locale->code }}" disabled="disabled"/>
                                 <input type="hidden" name="code" value="{{ $locale->code }}"/>
                                 <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
                             </div>
