@@ -22,10 +22,31 @@ class AdminHelper
 
     public function saveLocaleImg($locale)
     {
-        $uploadedImagePath = $this->uploadImage($locale, 'locale_image.image_0');
+        $data = request()->all();
+        $type = 'locale_image';
 
-        if ($uploadedImagePath) {
-            $locale->locale_image = $uploadedImagePath;
+        if (isset($data['locale_image'])) {
+            $request = request();
+
+            foreach ($data['locale_image'] as $imageId => $image) {
+                $file = $type . '.' . $imageId;
+                $dir = 'velocity/locale_image/' . $locale->id;
+
+                if ($request->hasFile($file)) {
+                    if ($locale->{$type}) {
+                        Storage::delete($locale->{$type});
+                    }
+
+                    $locale->{$type} = $request->file($file)->store($dir);
+                    $locale->save();
+                }
+            }
+        } else {
+            if ($locale->{$type}) {
+                Storage::delete($locale->{$type});
+            }
+
+            $locale->{$type} = null;
             $locale->save();
         }
 
@@ -53,26 +74,6 @@ class AdminHelper
         }
 
         return $category;
-    }
-
-    public function uploadImage($record, $type, $oldPath = null)
-    {
-        $request = request();
-
-        $image = '';
-        $file = $type;
-        $dir = 'velocity/' . $type;
-
-        if ($request->hasFile($file)) {
-            if ($oldPath) {
-                Storage::delete($oldPath);
-            }
-
-            $image = $request->file($file)->store($dir);
-
-            return $image;
-        }
-        return false;
     }
 
     public function storeSliderDetails($slider)
