@@ -762,7 +762,6 @@ class Cart
                 $address = $cart->billing_address;
             }
 
-
             if ($address === null && auth()->guard('customer')->check()) {
                 $address = auth()->guard('customer')->user()->addresses()
                     ->where('default_address',1)->first();

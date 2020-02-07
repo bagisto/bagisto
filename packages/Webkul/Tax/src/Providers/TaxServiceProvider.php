@@ -2,7 +2,6 @@
 namespace Webkul\Tax\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 
 class TaxServiceProvider extends ServiceProvider
 {
