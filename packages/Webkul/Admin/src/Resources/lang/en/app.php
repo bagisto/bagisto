@@ -139,9 +139,9 @@ return [
     'datagrid' => [
         'mass-ops' => [
             'method-error' => 'Error! Wrong method detected, please check mass action configuration',
-            'delete-success' => 'Selected index of :resource were successfully deleted',
+            'delete-success' => 'System :resource were successfully deleted',
             'partial-action' => 'Some actions were not performed due restricted system constraints on :resource',
-            'update-success' => 'Selected index of :resource were successfully updated',
+            'update-success' => 'System :resource were successfully updated',
             'no-resource' => 'The resource provided for insufficient for the action'
         ],
 
@@ -465,8 +465,8 @@ return [
             'add-variant-title' => 'Add Variant',
             'variant-already-exist-message' => 'Variant with same attribute options already exists.',
             'add-image-btn-title' => 'Add Image',
-            'mass-delete-success' => 'All the selected index of products have been deleted successfully',
-            'mass-update-success' => 'All the selected index of products have been updated successfully',
+            'mass-delete-success' => 'All the selected products have been deleted successfully',
+            'mass-update-success' => 'All the selected products have been updated successfully',
             'configurable-error' => 'Please select atleast one configurable attribute.',
             'categories' => 'Categories',
             'images' => 'Images',
@@ -1039,7 +1039,7 @@ return [
             'code-suffix' => 'Code Suffix',
             'generate' => 'Generate',
             'cart-rule-not-defind-error' => 'Cart rule is not defined',
-            'mass-delete-success' => 'All the selected index of coupons have been deleted successfully.',
+            'mass-delete-success' => 'All the selected coupons have been deleted successfully.',
             'end-other-rules' => 'End Other Rules',
             'children-categories' => 'Categories (Children Only)',
             'parent-categories' => 'Categories (Parent Only)',
