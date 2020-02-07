@@ -139,9 +139,9 @@ return [
     'datagrid' => [
         'mass-ops' => [
             'method-error' => 'Error! Wrong method detected, please check mass action configuration',
-            'delete-success' => 'System :resource were successfully deleted',
+            'delete-success' => 'Selected :resource were successfully deleted',
             'partial-action' => 'Some actions were not performed due restricted system constraints on :resource',
-            'update-success' => 'System :resource were successfully updated',
+            'update-success' => 'Selected :resource were successfully updated',
             'no-resource' => 'The resource provided for insufficient for the action'
         ],
 
