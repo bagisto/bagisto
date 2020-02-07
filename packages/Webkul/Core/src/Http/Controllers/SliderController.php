@@ -114,6 +114,11 @@ class SliderController extends Controller
             'image.*'  => 'sometimes|mimes:jpeg,bmp,png,jpg'
         ]);
 
+        if ( is_null(request()->image)) {
+            session()->flash('error', trans('admin::app.settings.sliders.update-fail'));
+            return redirect()->back();
+        }
+
         $result = $this->sliderRepository->updateItem(request()->all(), $id);
 
         if ($result) {
