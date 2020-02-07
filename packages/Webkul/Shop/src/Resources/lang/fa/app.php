@@ -11,11 +11,12 @@ return [
         'reviews' => 'بررسی ها',
         'wishlist' => 'لیست دلخواه',
         'orders' => 'سفارشات',
+        'downloadable-products' => 'محصولات دانلودی'
     ],
 
     'common' => [
         'error' => 'مشکلی رخ داده است. لطفا بعدا دوباره امتحان کنید.',
-        'no-result-found' => 'We could not find any records.'
+        'no-result-found' => 'ما هیچ سابقه ای پیدا نکردیم.'
     ],
 
     'home' => [
@@ -174,6 +175,9 @@ return [
                 'fname' => 'نام کوچک',
                 'lname' => 'نام خانوادگی',
                 'gender' => 'جنسیت',
+                'other' => 'دیگر',
+                'male' => 'نر',
+                'female' => 'زن',
                 'dob' => 'تاریخ تولد',
                 'phone' => 'تلفن',
                 'email' => 'پست الکترونیک',
@@ -202,7 +206,7 @@ return [
                     'contact' => 'تماس',
                     'confirm-delete' =>  'آیا واقعاً می خواهید این آدرس را حذف کنید؟',
                     'default-delete' => 'آدرس پیش فرض تغییر نمی کند',
-                    'enter-password' => 'Enter Your Password.',
+                    'enter-password' => 'رمز ورود خود را وارد کنید',
                 ],
 
                 'create' => [
@@ -230,7 +234,7 @@ return [
                 'delete' => [
                     'success' => 'آدرس با موفقیت حذف شد',
                     'failure' => 'آدرس حذف نمی شود',
-                    'wrong-password' => 'Wrong Password !'
+                    'wrong-password' => 'گذرواژه اشتباه!'
                 ]
             ],
 
@@ -259,7 +263,7 @@ return [
                     'item-invoice' => 'صورتحساب (:qty_invoiced)',
                     'item-shipped' => 'حمل شده (:qty_shipped)',
                     'item-canceled' => 'لغو شد (:qty_canceled)',
-                    'item-refunded' => 'Refunded (:qty_refunded)',
+                    'item-refunded' => 'بازپرداخت (:qty_refunded)',
                     'price' => 'قیمت',
                     'total' => 'جمع',
                     'subtotal' => 'فرعی',
@@ -287,14 +291,14 @@ return [
                     'ship-to' => 'حمل به',
                     'contact' => 'تماس',
                     'refunds' => 'Refunds',
-                    'individual-refund' => 'Refund #:refund_id',
-                    'adjustment-refund' => 'Adjustment Refund',
-                    'adjustment-fee' => 'Adjustment Fee',
+                    'individual-refund' => 'بازپرداخت #:refund_id',
+                    'adjustment-refund' => 'بازپرداخت تنظیم',
+                    'adjustment-fee' => 'هزینه تنظیم',
                 ]
             ],
 
             'wishlist' => [
-                'page-title' => 'Customer - Wishlist',
+                'page-title' => 'مشتری - لیست دلخواه',
                 'title' => 'لیست دلخواه',
                 'deleteall' => 'حذف همه',
                 'moveall' => 'انتقال همه محصولات به سبد خرید',
@@ -314,17 +318,17 @@ return [
             ],
 
             'downloadable_products' => [
-                'title' => 'Downloadable Products',
-                'order-id' => 'Order Id',
-                'date' => 'Date',
-                'name' => 'Title',
-                'status' => 'Status',
-                'pending' => 'Pending',
-                'available' => 'Available',
-                'expired' => 'Expired',
-                'remaining-downloads' => 'Remaining Downloads',
-                'unlimited' => 'Unlimited',
-                'download-error' => 'Download link has been expired.'
+                'title' => 'محصولات دانلودی',
+                'order-id' => 'شماره سفارش',
+                'date' => 'تاریخ',
+                'name' => 'عنوان',
+                'status' => 'وضعیت',
+                'pending' => 'در انتظار',
+                'available' => 'در دسترس',
+                'expired' => 'منقضی شده',
+                'remaining-downloads' => 'بارگیری های باقی مانده',
+                'unlimited' => 'نامحدود',
+                'download-error' => 'لینک دانلود منقضی شده است'
             ],
 
             'review' => [
@@ -376,12 +380,12 @@ return [
         'view-all' => 'مشاهده همه',
         'select-above-options' => 'لطفا ابتدا گزینه های بالا را انتخاب کنید',
         'less-quantity' => 'کمیت نمی تواند کمتر از یک باشد.',
-        'starting-at' => 'Starting at',
-        'customize-options' => 'Customize Options',
-        'choose-selection' => 'Choose a selection',
-        'your-customization' => 'Your Customization',
-        'total-amount' => 'Total Amount',
-        'none' => 'None'
+        'starting-at' => 'شروع از',
+        'customize-options' => 'گزینه ها را سفارشی کنید',
+        'choose-selection' => 'انتخابی را انتخاب کنید',
+        'your-customization' => 'شخصی سازی شما',
+        'total-amount' => 'مقدار کل',
+        'none' => 'هیچ یک'
     ],
 
     // 'reviews' => [
@@ -398,8 +402,8 @@ return [
             'integrity' => [
                 'missing_fields' =>'نقض یکپارچگی سیستم سبد خرید ، برخی از زمینه های لازم وجود ندارد',
                 'missing_options' =>'نقض یکپارچگی سیستم سبد خرید ، گزینه هایی برای محصول قابل تنظیم وجود ندارد',
-                'missing_links' => 'Downloadable links are missing for this product.',
-                'qty_missing' => 'Atleast one product should have more than 1 quantity.'
+                'missing_links' => 'لینک های قابل بارگیری برای این محصول وجود ندارد',
+                'qty_missing' => 'حداقل یک محصول باید بیش از 1 مقدار داشته باشد.'
             ],
 
             'create-error' => 'هنگام تهیه نمونه سبد خرید ، با برخی از شماره ها روبرو شد',
@@ -548,9 +552,9 @@ return [
         'refund' => [
             'heading' => 'Your Refund #:refund_id for Order #:order_id',
             'subject' => 'Refund for your order #:order_id',
-            'summary' => 'Summary of Refund',
-            'adjustment-refund' => 'Adjustment Refund',
-            'adjustment-fee' => 'Adjustment Fee'
+            'summary' => 'خلاصه بازپرداخت',
+            'adjustment-refund' => 'بازپرداخت تنظیم',
+            'adjustment-fee' => 'هزینه تنظیم'
         ],
 
         'forget-password' => [
