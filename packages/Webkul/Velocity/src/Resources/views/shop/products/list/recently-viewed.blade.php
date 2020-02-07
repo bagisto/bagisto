@@ -73,10 +73,6 @@
                                 var slugs = JSON.parse(storedRecentlyViewed);
                                 var updatedSlugs = {};
 
-                                if (slugs.length > 3) {
-                                    slugs = slugs.slice(Math.max(slugs.length - 3, 1));
-                                }
-
                                 slugs = slugs.reverse();
 
                                 slugs.forEach(slug => {
