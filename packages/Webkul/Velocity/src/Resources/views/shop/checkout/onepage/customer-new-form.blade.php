@@ -4,8 +4,8 @@
 
     @if (isset($shipping) && $shipping)
         <div :class="`col-12 form-field ${errors.has('address-form.shipping[first_name]') ? 'has-error' : ''}`">
-            <label for="shipping[first_name]" class="required">
-                {{ __('shop::app.checkout.onepage.first-name') }}*
+            <label for="shipping[first_name]" class="mandatory">
+                {{ __('shop::app.checkout.onepage.first-name') }}
             </label>
 
             <input
@@ -23,8 +23,8 @@
         </div>
 
         <div :class="`col-12 form-field ${errors.has('address-form.shipping[last_name]') ? 'has-error' : ''}`">
-            <label for="shipping[last_name]" class="required">
-                {{ __('shop::app.checkout.onepage.last-name') }}*
+            <label for="shipping[last_name]" class="mandatory">
+                {{ __('shop::app.checkout.onepage.last-name') }}
             </label>
 
             <input
@@ -42,8 +42,8 @@
         </div>
 
         <div :class="`col-12 form-field ${errors.has('address-form.shipping[email]') ? 'has-error' : ''}`">
-            <label for="shipping[email]" class="required">
-                {{ __('shop::app.checkout.onepage.email') }}*
+            <label for="shipping[email]" class="mandatory">
+                {{ __('shop::app.checkout.onepage.email') }}
             </label>
 
             <input
@@ -61,8 +61,8 @@
         </div>
 
         <div :class="`col-12 form-field ${errors.has('address-form.shipping[address1][]') ? 'has-error' : ''}`">
-            <label for="shipping_address_0" class="required">
-                {{ __('shop::app.checkout.onepage.address1') }}*
+            <label for="shipping_address_0" class="mandatory">
+                {{ __('shop::app.checkout.onepage.address1') }}
             </label>
 
             <input
@@ -96,8 +96,8 @@
         @endif
 
         <div :class="`col-12 form-field ${errors.has('address-form.shipping[city]') ? 'has-error' : ''}`">
-            <label for="shipping[city]" class="required">
-                {{ __('shop::app.checkout.onepage.city') }}*
+            <label for="shipping[city]" class="mandatory">
+                {{ __('shop::app.checkout.onepage.city') }}
             </label>
 
             <input
@@ -115,8 +115,8 @@
         </div>
 
         <div :class="`col-12 form-field ${errors.has('address-form.shipping[country]') ? 'has-error' : ''}`">
-            <label for="shipping[country]" class="required">
-                {{ __('shop::app.checkout.onepage.country') }}*
+            <label for="shipping[country]" class="mandatory">
+                {{ __('shop::app.checkout.onepage.country') }}
             </label>
 
             <select
@@ -143,8 +143,8 @@
 
 
         <div :class="`col-12 form-field ${errors.has('address-form.shipping[state]') ? 'has-error' : ''}`">
-            <label for="shipping[state]" class="required">
-                {{ __('shop::app.checkout.onepage.state') }}*
+            <label for="shipping[state]" class="mandatory">
+                {{ __('shop::app.checkout.onepage.state') }}
             </label>
 
 
@@ -181,8 +181,8 @@
         </div>
 
         <div :class="`col-12 form-field ${errors.has('address-form.shipping[postcode]') ? 'has-error' : ''}`">
-            <label for="shipping[postcode]" class="required">
-                {{ __('shop::app.checkout.onepage.postcode') }}*
+            <label for="shipping[postcode]" class="mandatory">
+                {{ __('shop::app.checkout.onepage.postcode') }}
             </label>
 
             <input
@@ -200,8 +200,8 @@
         </div>
 
         <div :class="`col-12 form-field ${errors.has('address-form.shipping[phone]') ? 'has-error' : ''}`">
-            <label for="shipping[phone]" class="required">
-                {{ __('shop::app.checkout.onepage.phone') }}*
+            <label for="shipping[phone]" class="mandatory">
+                {{ __('shop::app.checkout.onepage.phone') }}
             </label>
 
             <input
@@ -237,8 +237,8 @@
 
     @elseif (isset($billing) && $billing)
         <div :class="`col-12 form-field ${errors.has('address-form.billing[email]') ? 'has-error' : ''}`">
-            <label for="billing[email]" class="required">
-                {{ __('shop::app.checkout.onepage.email') }}*
+            <label for="billing[email]" class="mandatory">
+                {{ __('shop::app.checkout.onepage.email') }}
             </label>
 
             <input
@@ -263,8 +263,8 @@
         @endif
 
         <div :class="`col-12 form-field ${errors.has('address-form.billing[first_name]') ? 'has-error' : ''}`">
-            <label for="billing[first_name]" class="required">
-                {{ __('shop::app.checkout.onepage.first-name') }}*
+            <label for="billing[first_name]" class="mandatory">
+                {{ __('shop::app.checkout.onepage.first-name') }}
             </label>
 
             <input
@@ -282,8 +282,8 @@
         </div>
 
         <div :class="`col-12 form-field ${errors.has('address-form.billing[last_name]') ? 'has-error' : ''}`">
-            <label for="billing[last_name]" class="required">
-                {{ __('shop::app.checkout.onepage.last-name') }}*
+            <label for="billing[last_name]" class="mandatory">
+                {{ __('shop::app.checkout.onepage.last-name') }}
             </label>
 
             <input
@@ -301,8 +301,8 @@
         </div>
 
         <div :class="`col-12 form-field ${errors.has('address-form.billing[address1][]') ? 'has-error' : ''}`">
-            <label for="billing_address_0" class="required">
-                {{ __('shop::app.checkout.onepage.address1') }}*
+            <label for="billing_address_0" class="mandatory">
+                {{ __('shop::app.checkout.onepage.address1') }}
             </label>
 
             <input
@@ -336,8 +336,8 @@
         @endif
 
         <div :class="`col-12 form-field ${errors.has('address-form.billing[city]') ? 'has-error' : ''}`">
-            <label for="billing[city]" class="required">
-                {{ __('shop::app.checkout.onepage.city') }}*
+            <label for="billing[city]" class="mandatory">
+                {{ __('shop::app.checkout.onepage.city') }}
             </label>
 
             <input
@@ -355,8 +355,8 @@
         </div>
 
         <div :class="`col-12 form-field ${errors.has('address-form.billing[country]') ? 'has-error' : ''}`">
-            <label for="billing[country]" class="required">
-                {{ __('shop::app.checkout.onepage.country') }}*
+            <label for="billing[country]" class="mandatory">
+                {{ __('shop::app.checkout.onepage.country') }}
             </label>
 
             <select
@@ -383,8 +383,8 @@
         </div>
 
         <div :class="`col-12 form-field ${errors.has('address-form.billing[state]') ? 'has-error' : ''}`">
-            <label for="billing[state]" class="required">
-                {{ __('shop::app.checkout.onepage.state') }}*
+            <label for="billing[state]" class="mandatory">
+                {{ __('shop::app.checkout.onepage.state') }}
             </label>
 
             <input
@@ -413,7 +413,9 @@
                     @{{ state.default_name }}
                 </option>
             </select>
-            <i v-if="haveStates('billing')" class="select-icon rango-arrow-down"></i>
+            <div class="select-icon-container" v-if="haveStates('billing')">
+                <i class="select-icon rango-arrow-down"></i>
+            </div>
 
             <span class="control-error" v-if="errors.has('address-form.billing[state]')">
                 @{{ errors.first('address-form.billing[state]') }}
@@ -421,8 +423,8 @@
         </div>
 
         <div :class="`col-12 form-field ${errors.has('address-form.billing[postcode]') ? 'has-error' : ''}`">
-            <label for="billing[postcode]" class="required">
-                {{ __('shop::app.checkout.onepage.postcode') }}*
+            <label for="billing[postcode]" class="mandatory">
+                {{ __('shop::app.checkout.onepage.postcode') }}
             </label>
 
             <input
@@ -440,8 +442,8 @@
         </div>
 
         <div :class="`col-12 form-field ${errors.has('address-form.billing[phone]') ? 'has-error' : ''}`">
-            <label for="billing[phone]" class="required">
-                {{ __('shop::app.checkout.onepage.phone') }}*
+            <label for="billing[phone]" class="mandatory">
+                {{ __('shop::app.checkout.onepage.phone') }}
             </label>
 
             <input

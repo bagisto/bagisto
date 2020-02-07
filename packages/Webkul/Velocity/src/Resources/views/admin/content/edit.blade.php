@@ -6,7 +6,9 @@
 
 @section('content')
     <div class="content">
-        <?php $locale = request()->get('locale') ?: app()->getLocale(); ?>
+        @php
+            $locale = request()->get('locale') ?: app()->getLocale();
+        @endphp
 
         <form
             method="POST"
