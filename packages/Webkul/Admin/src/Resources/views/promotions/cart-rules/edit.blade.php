@@ -57,7 +57,7 @@
                                 <div class="control-group">
                                     <label for="status">{{ __('admin::app.promotions.cart-rules.status') }}</label>
                                     <span class="checkbox">
-                                        <input type="checkbox" id="status" name="status" value="{{ $cartRule->status }}" {{ $cartRule->status ? 'checked' : '' }}>
+                                        <input type="checkbox" id="status" name="status" value="{{ old('status') ?: $cartRule->status }}" {{ $cartRule->status ? 'checked' : '' }}>
                                         <label class="checkbox-view" for="status"></label>
                                         {{ __('admin::app.promotions.cart-rules.is-active') }}
                                     </span>
@@ -243,7 +243,7 @@
 
                                 <div class="control-group">
                                     <label for="apply_to_shipping">{{ __('admin::app.promotions.cart-rules.apply-to-shipping') }}</label>
-                                    
+
                                     <?php $selectedOption = old('apply_to_shipping') ?: $cartRule->apply_to_shipping ?>
 
                                     <select class="control" id="apply_to_shipping" name="apply_to_shipping" :disabled="action_type == 'cart_fixed'">
@@ -403,7 +403,7 @@
 
                 <div class="control-group" :class="[errors.has('create-coupun-form.coupon_qty') ? 'has-error' : '']">
                     <label for="coupon_qty" class="required">{{ __('admin::app.promotions.cart-rules.coupon-qty') }}</label>
-                    
+
                     <input v-validate="'required|min_value:1'" class="control" id="coupon_qty" name="coupon_qty" v-model="coupon_format.coupon_qty" data-vv-as="&quot;{{ __('admin::app.promotions.cart-rules.coupon-qty') }}&quot;"/>
 
                     <span class="control-error" v-if="errors.has('create-coupun-form.coupon_qty')">
@@ -515,11 +515,11 @@
 
                     attribute_type_indexes: {
                         'cart': 0,
-                        
+
                         'cart_item': 1,
 
                         'product': 2
-                    }, 
+                    },
 
                     condition_operators: {
                         'price': [{
