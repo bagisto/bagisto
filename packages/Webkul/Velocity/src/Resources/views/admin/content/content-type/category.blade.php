@@ -25,11 +25,15 @@
         {{ __('velocity::app.admin.contents.content.link-target') }}
     </label>
 
-    <select class="control" id="link_target" name="link_target" value="">
+    @php
+       $linkTarget = isset($locale) ? (old($locale)['link_target'] ?? $content->translate($locale)['link_target']) : '';
+    @endphp
+
+    <select class="control" id="link_target" name="{{$locale}}[link_target]" value="">
         <option value="0">
             {{ __('velocity::app.admin.contents.self') }}
         </option>
-        <option value="1">
+        <option value="1" @if ($linkTarget == 1) selected="selected" @endif>
             {{ __('velocity::app.admin.contents.new-tab') }}
         </option>
     </select>
