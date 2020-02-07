@@ -9,7 +9,7 @@ use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRepository;
 
 /**
- * Search controller
+ * Shop controller
  *
  * @author  Shubham Mehrotra <shubhammehrotra.symfony@webkul.com> @shubhwebkul
  * @copyright 2019 Webkul Software Pvt Ltd (http://www.webkul.com)
@@ -226,7 +226,7 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
             'firstReviewText' => trans('velocity::app.products.be-first-review'),
             'addToCartHtml' => view('shop::products.add-to-cart', [
                 'product' => $product,
-                'addWishlistClass' => !(isset($list) && $list) ? 'col-lg-4 col-md-4 col-sm-12 offset-lg-4 pr0' : '',
+                'addWishlistClass' => !(isset($list) && $list) ? '' : '',
                 'addToCartBtnClass' => !(isset($list) && $list) ? $addToCartBtnClass ?? '' : ''
             ])->render(),
         ];

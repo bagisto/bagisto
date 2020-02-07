@@ -274,16 +274,33 @@
         }
     }
 
-    .cart-wish-wrap {
-        .wishlist-icon {
-            height: 38px;
-            display: table;
-            text-align: right;
+    .wishlist-icon {
+        height: 38px;
+        display: table;
+        text-align: right;
 
-            > i {
-                display: table-cell;
-                vertical-align: middle;
+        > i {
+            display: table-cell;
+            vertical-align: middle;
+        }
+    }
+
+    .add-to-cart-btn {
+        width: 100%;
+        position: relative;
+        padding-right: 35px;
+
+        .btn-add-to-cart {
+            max-width: 140px;
+
+            &.small-padding {
+                max-width: 130px;
             }
+        }
+
+        ~ .wishlist-icon {
+            right: 10px;
+            position: absolute;
         }
     }
 }
@@ -1618,10 +1635,8 @@
     li {
         a {
             padding: 7px 0 5px 15px;
-        }
 
-        &:hover {
-            > a {
+            &:hover {
                 background: $border-light;
             }
         }

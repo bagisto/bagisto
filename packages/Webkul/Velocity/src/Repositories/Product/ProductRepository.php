@@ -122,10 +122,7 @@ class ProductRepository extends Repository
                 $query->where('product_flat.name', 'like', '%' . urldecode($term) . '%');
 
             if ($categoryId && $categoryId !== "") {
-                $query = $query
-                        ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
-                        ->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id')
-                        ->where('product_categories.category_id', $categoryId);
+                $query = $query->where('product_categories.category_id', $categoryId);
             }
 
             if (isset($params['sort'])) {

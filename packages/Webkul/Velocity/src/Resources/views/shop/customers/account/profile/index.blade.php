@@ -51,7 +51,7 @@
             </div>
 
             <div class="row">
-                <label class="col-12">
+                <label class="col-12 mandatory">
                     {{ __('shop::app.customer.account.profile.gender') }}
                 </label>
 
@@ -91,11 +91,12 @@
                     <div class="select-icon-container">
                         <span class="select-icon rango-arrow-down"></span>
                     </div>
-                </div>
 
+                    <span class="control-error" v-if="errors.has('gender')">@{{ errors.first('gender') }}</span>
+                </div>
             </div>
 
-            <div class="row">
+            <div :class="`row ${errors.has('date_of_birth') ? 'has-error' : ''}`">
                 <label class="col-12">
                     {{ __('shop::app.customer.account.profile.dob') }}
                 </label>
@@ -105,7 +106,12 @@
                         type="date"
                         name="date_of_birth"
                         placeholder="dd/mm/yyyy"
-                        value="{{ $customer->date_of_birth }}" />
+                        value="{{ old('date_of_birth') ?? $customer->date_of_birth }}"
+                        v-validate="" data-vv-as="&quot;{{ __('shop::app.customer.account.profile.dob') }}&quot;" />
+
+                        <span class="control-error" v-if="errors.has('date_of_birth')">
+                            @{{ errors.first('date_of_birth') }}
+                        </span>
                 </div>
             </div>
 
