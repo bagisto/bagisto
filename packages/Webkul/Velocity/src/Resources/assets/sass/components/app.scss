@@ -125,6 +125,10 @@
                 color: $font-color;
                 background-color: white;
             }
+            .down-icon-position {
+                pointer-events: none;
+                background-color: $white-color;
+            }
         }
 
         > div:not(:first-child) {
@@ -270,16 +274,33 @@
         }
     }
 
-    .cart-wish-wrap {
-        .wishlist-icon {
-            height: 38px;
-            display: table;
-            text-align: right;
+    .wishlist-icon {
+        height: 38px;
+        display: table;
+        text-align: right;
 
-            > i {
-                display: table-cell;
-                vertical-align: middle;
+        > i {
+            display: table-cell;
+            vertical-align: middle;
+        }
+    }
+
+    .add-to-cart-btn {
+        width: 100%;
+        position: relative;
+        padding-right: 35px;
+
+        .btn-add-to-cart {
+            max-width: 140px;
+
+            &.small-padding {
+                max-width: 130px;
             }
+        }
+
+        ~ .wishlist-icon {
+            right: 10px;
+            position: absolute;
         }
     }
 }
@@ -442,6 +463,8 @@
 
 
     .customer-session {
+        padding: 10px 20px 0 20px;
+
         label {
             font-size: 18px;
             color: $light-grey-clr;
@@ -967,6 +990,25 @@
                     }
                 }
             }
+
+            .filter-row-two {
+                .filter-tag {
+                    .cross-icon {
+                        @extend .rango-default;
+
+                        &::before {
+                            top: 1px;
+                            content: "\e91f";
+                            margin-left: 4px;
+                            position: relative;
+                        }
+
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
         }
 
         .account-items-list {
@@ -1194,6 +1236,8 @@
     }
 
     .order-summary-container {
+        top: 75px;
+
         .theme-btn {
             display: none;
         }
@@ -1348,8 +1392,10 @@
 }
 
 .order-summary-container {
+    top: 50px;
     padding-top: 25px;
     height: max-content;
+    position: sticky !important;
     max-width: 500px !important;
 
     > div {
@@ -1589,10 +1635,8 @@
     li {
         a {
             padding: 7px 0 5px 15px;
-        }
 
-        &:hover {
-            > a {
+            &:hover {
                 background: $border-light;
             }
         }
@@ -1850,14 +1894,12 @@
     padding: 40px 15px !important;
 
     .hero-image {
-        height: 100%;
-        max-width: 500px;
-        max-height: 400px;
         display: inline-block;
 
         img {
             width: 100%;
             height: 100%;
+            margin-bottom: 30px;
         }
     }
 }
@@ -1935,6 +1977,8 @@
 }
 
 .slides-container {
+    position: relative;
+
     .VueCarousel-pagination {
         bottom: 10px;
         position: absolute;
@@ -1957,6 +2001,25 @@
     .VueCarousel {
         .VueCarousel-inner {
             padding-top: 0;
+        }
+
+        .VueCarousel-slide {
+            position: relative;
+
+            .show-content {
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                display: table;
+                text-align: center;
+                position: absolute;
+
+                p {
+                    display: table-cell;
+                    vertical-align: middle;
+                }
+            }
         }
 
         .VueCarousel-slide:not(:nth-of-type(1)) {

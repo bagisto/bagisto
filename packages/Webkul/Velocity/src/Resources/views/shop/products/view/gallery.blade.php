@@ -59,7 +59,6 @@
                             class="bg-image"
                             style="background-image: url( {{ $thumb['small_image_url'] }} )">
                         </div>
-
                     </li>
                 </slide>
             @endforeach

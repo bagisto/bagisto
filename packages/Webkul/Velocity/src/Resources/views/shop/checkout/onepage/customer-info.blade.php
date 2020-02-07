@@ -3,7 +3,7 @@
         <accordian :title="'{{ __('shop::app.checkout.onepage.billing-address') }}'" :active="true">
             <div class="form-header mb-30" slot="header">
                 <h3 class="fw6 display-inbl">
-                    1. {{ __('shop::app.checkout.onepage.billing-address') }}
+                    {{ __('shop::app.checkout.onepage.billing-address') }}
                 </h3>
 
                 <a
@@ -92,7 +92,7 @@
         <accordian :title="'{{ __('shop::app.checkout.onepage.billing-address') }}'" :active="true">
             <div class="form-header" slot="header">
                 <h3 class="fw6 display-inbl">
-                    1. {{ __('shop::app.checkout.onepage.billing-address') }}
+                   {{ __('shop::app.checkout.onepage.billing-address') }}
                 </h3>
 
                 @auth('customer')

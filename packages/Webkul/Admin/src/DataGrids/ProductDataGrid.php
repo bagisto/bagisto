@@ -180,14 +180,14 @@ class ProductDataGrid extends DataGrid
     public function prepareMassActions() {
         $this->addMassAction([
             'type' => 'delete',
-            'label' => 'Delete',
+            'label' => trans('admin::app.datagrid.delete'),
             'action' => route('admin.catalog.products.massdelete'),
             'method' => 'DELETE'
         ]);
 
         $this->addMassAction([
             'type' => 'update',
-            'label' => 'Update Status',
+            'label' => trans('admin::app.datagrid.update-status'),
             'action' => route('admin.catalog.products.massupdate'),
             'method' => 'PUT',
             'options' => [

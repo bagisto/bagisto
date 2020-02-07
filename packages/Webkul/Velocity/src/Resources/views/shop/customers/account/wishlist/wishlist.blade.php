@@ -29,6 +29,7 @@
             @foreach ($items as $item)
                 @php
                     $currentMode = $toolbarHelper->getCurrentMode();
+                    $moveToCartText = __('shop::app.customer.account.wishlist.move-to-cart');
                 @endphp
 
                 @include ('shop::products.list.card', [
@@ -36,6 +37,8 @@
                     'itemId' => $item->id,
                     'removeWishlist' => true,
                     'product' => $item->product,
+                    'btnText' => $moveToCartText,
+                    'addToCartBtnClass' => 'small-padding',
                 ])
             @endforeach
 

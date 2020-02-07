@@ -20,7 +20,7 @@ class CategoryDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $defaultChannel = core()->getCurrentChannel();
-        
+
         $queryBuilder = DB::table('velocity_category as v_cat')
                 ->select('v_cat.id as category_menu_id', 'v_cat.category_id', 'ct.name', 'v_cat.icon', 'v_cat.tooltip', 'v_cat.status')
                 ->leftJoin('categories as c', 'c.id', '=', 'v_cat.category_id')
@@ -109,7 +109,7 @@ class CategoryDataGrid extends DataGrid
         $this->addMassAction([
             'type' => 'delete',
             'action' => route('velocity.admin.category.mass-delete'),
-            'label' => 'Delete',
+            'label' => trans('admin::app.datagrid.delete'),
             'method' => 'DELETE'
         ]);
     }

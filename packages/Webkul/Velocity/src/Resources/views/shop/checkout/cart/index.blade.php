@@ -16,7 +16,7 @@
 
     <script type="text/x-template" id="cart-template">
         <div class="container">
-            <section class="cart-details row offset-1 col-12">
+            <section class="cart-details row no-margin col-12">
                 <h1 class="fw6 col-12">{{ __('shop::app.checkout.cart.title') }}</h1>
 
                 @if ($cart)
@@ -67,7 +67,7 @@
                                             </a>
 
                                             <div class="product-details-content col-6">
-                                                <div class="row">
+                                                <div class="row item-title">
                                                     <a
                                                         href="{{ route('shop.productOrCategory.index', $product->url_key) }}"
                                                         title="{{ $product->name }}"
@@ -117,7 +117,11 @@
                                                     @endauth
 
                                                     <a
-                                                        class="unset ml30"
+                                                        class="unset
+                                                            @auth('customer')
+                                                                ml30
+                                                            @endauth
+                                                        "
                                                         href="{{ route('shop.checkout.cart.remove', ['id' => $item->id]) }}"
                                                         onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">
 
@@ -153,7 +157,7 @@
                                                     alt="{{ $product->name }}">
                                             </a>
 
-                                            <div class="col-10 pr0">
+                                            <div class="col-10 pr0 item-title">
                                                 <a
                                                     href="{{ route('shop.productOrCategory.index', $product->url_key) }}"
                                                     title="{{ $product->name }}"
@@ -211,7 +215,7 @@
                 {!! view_render_event('bagisto.shop.checkout.cart.summary.after', ['cart' => $cart]) !!}
 
                     @if ($cart)
-                        <div class="col-lg-4 col-md-12 offset-1 row order-summary-container">
+                        <div class="col-lg-4 col-md-12 offset-2 row order-summary-container">
                             @include('shop::checkout.total.summary', ['cart' => $cart])
 
                             <coupon-component></coupon-component>

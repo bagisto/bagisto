@@ -16,13 +16,12 @@
 
         @if (core()->getCurrentLocale()->direction == 'rtl')
             <link href="{{ asset('themes/velocity/assets/css/bootstrap-flipped.css') }}" rel="stylesheet">
-
         @endif
 
         @if ($favicon = core()->getCurrentChannel()->favicon_url)
             <link rel="icon" sizes="16x16" href="{{ $favicon }}" />
         @else
-            <link rel="icon" sizes="16x16" href="{{ asset('themes/velocity/assets/images/favicon.png') }}" />
+            <link rel="icon" sizes="16x16" href="{{ asset('/themes/velocity/assets/images/static/v-icon.png') }}" />
         @endif
 
         <script
@@ -32,7 +31,7 @@
 
         <script
             type="text/javascript"
-            baseUrl='{{ url()->to('/') }}'
+            baseUrl="{{ url()->to('/') }}"
             src="{{ asset('themes/velocity/assets/js/velocity.js') }}">
         </script>
 
@@ -131,8 +130,6 @@
 
         <script type="text/javascript">
             (() => {
-                var baseURL = '{{ url()->to('/') }}';
-
                 var showAlert = (messageType, messageLabel, message) => {
                     if (messageType && message !== '') {
                         let html = `<div class="alert ${messageType} alert-dismissible" id="alert">

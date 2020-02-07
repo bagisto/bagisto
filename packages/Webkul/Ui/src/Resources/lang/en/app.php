@@ -1,9 +1,5 @@
 <?php
 return [
-    'one-col' => '<div class="mt-10">Use class: <b>"static-container one-column"</b> for one column layout.</div>',
-    'two-col' => '<div class="mt-10">Use class: <b>"static-container two-column"</b> for two column layout.</div>',
-    'three-col' => '<div class="mt-10">Use class: <b>"static-container three-column"</b> for three column layout.</div>',
-    'helper-classes' => 'Helper Classes',
     'datagrid' => [
         'actions' => 'Actions',
         'id' => 'Index columns have value greater than zero only',
@@ -37,5 +33,8 @@ return [
         'between' => 'Is between',
         'apply' => 'Apply',
         'items-per-page' => 'Items Per Page',
+        'value-here' => 'Value here',
+        'numeric-value-here' => 'Numeric Value here',
+        'submit' => 'Submit'
     ]
 ];

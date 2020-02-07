@@ -12,5 +12,7 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
         Route::get('/categories', 'ShopController@fetchCategories')->name('velocity.categoriest');
 
         Route::get('/category-details', 'ShopController@categoryDetails')->name('velocity.category.details');
+
+        Route::get('/fancy-category-details/{slug}', 'ShopController@fetchFancyCategoryDetails')->name('velocity.fancy.category.details');
     });
 });

@@ -2,7 +2,9 @@
     $direction = core()->getCurrentLocale()->direction;
 @endphp
 
-<slider-component direction="{{ $direction }}"></slider-component>
+@if ($velocityMetaData->slider)
+    <slider-component direction="{{ $direction }}"></slider-component>
+@endif
 
 @push('scripts')
     <script type="text/x-template" id="slider-template">
@@ -24,6 +26,9 @@
                                 <img
                                     class="col-12 no-padding banner-icon"
                                     src="{{ url()->to('/') . '/storage/' . $slider['path'] }}" />
+
+                                <div class="show-content" v-html="'{{ $slider['content'] }}'">
+                                </div>
                             </a>
                         </slide>
 

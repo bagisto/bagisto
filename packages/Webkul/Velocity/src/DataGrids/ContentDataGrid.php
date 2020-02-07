@@ -84,12 +84,14 @@ class ContentDataGrid extends DataGrid
             'searchable' => true,
             'filterable' => true,
             'wrapper' => function($value) {
-                if ($value->content_type == 'link')
+                if ($value->content_type == 'category')
+                    return 'Category Slug';
+                else if ($value->content_type == 'link')
                     return 'Link';
                 else if ($value->content_type == 'product')
                     return 'Product';
                 else if ($value->content_type == 'static')
-                return 'Static';
+                    return 'Static';
             }
         ]);
     }
@@ -116,7 +118,7 @@ class ContentDataGrid extends DataGrid
         $this->addMassAction([
             'type' => 'delete',
             'action' => route('velocity.admin.content.mass-delete'),
-            'label' => 'Delete',
+            'label' => trans('admin::app.datagrid.delete'),
             'method' => 'DELETE'
         ]);
     }

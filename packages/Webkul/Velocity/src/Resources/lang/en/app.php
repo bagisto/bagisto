@@ -59,7 +59,7 @@ return [
             'autocomplete' => '[Autocomplete]',
             'search-hint' => 'Search product here...',
             'no-result-found' => 'No record found.',
-            'mass-delete-success' => 'Success: Selected conent(s) deleted successfully.',
+            'mass-delete-success' => 'Selected content deleted successfully.',
             'tab' => [
                 'page' => 'Page Setting',
                 'content' => 'Content Setting',
@@ -75,6 +75,7 @@ return [
                 'custom-title' => 'Custom Title',
                 'custom-heading' => 'Custom Heading',
                 'page-link' => 'Page Link [e.g. http://example.com/../../]',
+                'category-slug' => 'Category Slug',
                 'link-target' => 'Page Link Target',
                 'catalog-type' => 'Product Catalog Type',
                 'custom-product' => 'Store Products',
@@ -130,7 +131,7 @@ return [
             'status' => 'Status',
             'active' => 'Active',
             'inactive' => 'Inactive',
-            'mass-delete-success' => 'Success: Selected categories menu deleted successfully.',
+            'mass-delete-success' => 'Selected categories menu deleted successfully.',
         ],
         'general' => [
             'locale_logo' => 'Locale Logo',
@@ -229,6 +230,7 @@ return [
         'write-your-review' => 'Write Your Review',
         'quick-view' => 'Quick View',
         'recently-viewed' => 'Recently Viewed Products',
+        'not-available' => 'Not Available',
         'review-by' => 'Review by',
         'be-first-review' => 'Be the first to write a review',
         'submit-review' => 'Submit Review',
