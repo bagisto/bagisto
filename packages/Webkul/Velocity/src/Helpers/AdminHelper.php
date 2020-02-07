@@ -35,11 +35,8 @@ class AdminHelper
         $data = request()->all();
         $type = 'category_icon_path';
 
-        if ($category instanceof \Webkul\Category\Models\Category) {
-            $category = $category;
-        } else {
+        if (! $category instanceof \Webkul\Category\Models\Category)
             $category = $this->categoryRepository->findOrFail($category);
-        }
 
         $category = $this->uploadImage($category, $data, $type);
 
