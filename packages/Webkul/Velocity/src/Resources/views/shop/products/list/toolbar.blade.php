@@ -156,10 +156,6 @@
 
                 methods: {
                     toggleLayeredNavigation: function ({event, actionType}) {
-                        // this.$root.navContainer = true;
-                        // this.$root.responsiveSidebarTemplate = `<div slot="sidebar-body">
-                        //     Hello World
-                        // </div>`;
                         this.layeredNavigation = !this.layeredNavigation;
                     }
                 }
