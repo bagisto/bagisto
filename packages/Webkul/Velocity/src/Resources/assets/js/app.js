@@ -175,7 +175,9 @@ $(document).ready(function () {
         },
 
         mounted: function () {
-            // this.addServerErrors();
+            setTimeout(() => {
+                this.addServerErrors();
+            }, 0);
 
             document.body.style.display = "block";
             this.$validator.localize(document.documentElement.lang);
@@ -227,6 +229,7 @@ $(document).ready(function () {
                         name: inputName,
                         scope: scope
                     });
+
                     if (field) {
                         this.$validator.errors.add({
                             id: field.id,

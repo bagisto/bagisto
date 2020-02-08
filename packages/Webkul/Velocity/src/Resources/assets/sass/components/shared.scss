@@ -861,3 +861,10 @@ button[disabled] {
 .border-normal {
     border: $border-normal;
 }
+
+.has-error {
+    input,
+    select {
+        border-color: $border-danger !important;
+    }
+}

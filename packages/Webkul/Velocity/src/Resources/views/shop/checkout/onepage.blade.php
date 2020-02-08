@@ -196,23 +196,41 @@
                     },
 
                     validateForm: function(scope) {
-                        this.$validator.validateAll(scope)
-                        .then(result => {
-                            if (result) {
-                                document.body.style.cursor = 'wait';
+                        var isManualValidationFail = false;
 
-                                if (scope == 'address-form') {
-                                    this.saveAddress();
-                                    document.body.style.cursor = 'default';
-                                } else if (scope == 'shipping-form') {
-                                    document.body.style.cursor = 'wait';
-                                    this.saveShipping();
-                                } else if (scope == 'payment-form') {
-                                    document.body.style.cursor = 'wait';
-                                    this.savePayment();
-                                }
+                        if (scope == 'address-form') {
+                            let form = $(document).find('form[data-vv-scope=address-form]');
+
+                            if (form) {
+                                form.find(':input').each((index, element) => {
+                                    let value = $(element).val();
+
+                                    if (value == "") {
+                                        isManualValidationFail = true;
+                                    }
+                                });
                             }
-                        });
+                        }
+
+                        if (!isManualValidationFail) {
+                            this.$validator.validateAll(scope)
+                            .then(result => {
+                                if (result) {
+                                    document.body.style.cursor = 'wait';
+
+                                    if (scope == 'address-form') {
+                                        this.saveAddress();
+                                        document.body.style.cursor = 'default';
+                                    } else if (scope == 'shipping-form') {
+                                        document.body.style.cursor = 'wait';
+                                        this.saveShipping();
+                                    } else if (scope == 'payment-form') {
+                                        document.body.style.cursor = 'wait';
+                                        this.savePayment();
+                                    }
+                                }
+                            });
+                        }
                     },
 
                     isCustomerExist: function() {
@@ -354,8 +372,6 @@
                     },
 
                     placeOrder: function() {
-                        var this_this = this;
-
                         this.disable_button = true;
 
                         this.$http.post("{{ route('shop.checkout.save-order') }}", {'_token': "{{ csrf_token() }}"})
@@ -368,12 +384,12 @@
                                 }
                             }
                         })
-                        .catch(function (error) {
-                            this_this.disable_button = true;
+                        .catch(error => {
+                            this.disable_button = true;
 
                             window.flashMessages = [{'type': 'alert-error', 'message': "{{ __('shop::app.common.error') }}" }];
 
-                            this_this.$root.addFlashMessages()
+                            this.$root.addFlashMessages();
                         })
                     },
 

@@ -34,6 +34,22 @@ return [
         'payment-methods' => 'طرق الدفع',
         'shipping-methods' => 'طرق الشحن',
     ],
+
+    'products' => [
+        'short-description' => 'أوصاف قصيرة',
+        'more-infomation' => 'معلومات اكثر',
+        'details' => 'تفاصيل',
+        'customer-rating' => 'تقييم العملاء',
+        'reviews' => 'التعليقات',
+        'view-all-reviews' => 'عرض جميع التقييمات',
+        'write-your-review' => 'اكتب مراجعتك',
+        'quick-view' => 'نظرة سريعة',
+        'recently-viewed' => 'المنتجات المعروضة مؤخرا',
+        'not-available' => 'غير متوفر',
+        'review-by' => 'روجع من قبل',
+        'be-first-review' => 'كن أول من يكتب نقد',
+        'submit-review' => 'إرسال المراجعة',
+    ]
 ]
 
 ?>

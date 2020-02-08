@@ -12,7 +12,7 @@ return [
         'reviews' => 'Reviews',
         'wishlist' => 'Wishlist',
         'orders' => 'Orders',
-        'downloadable-products' => 'Downloadable Products',
+        'downloadable-products' => 'Downloadable Products'
     ],
 
     'common' => [
@@ -187,6 +187,9 @@ return [
                 'fname' => 'First Name',
                 'lname' => 'Last Name',
                 'gender' => 'Gender',
+                'other' => 'Other',
+                'male' => 'Male',
+                'female' => 'Female',
                 'dob' => 'Date Of Birth',
                 'phone' => 'Phone',
                 'email' => 'Email',

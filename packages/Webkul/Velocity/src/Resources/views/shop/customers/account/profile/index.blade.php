@@ -131,7 +131,7 @@
                     {{ __('velocity::app.shop.general.enter-current-password') }}
                 </label>
 
-                <div class="col-12">
+                <div :class="`col-12 ${errors.has('oldpassword') ? 'has-error' : ''}`">
                     <input value="" name="oldpassword" type="password" />
                 </div>
             </div>
@@ -141,8 +141,16 @@
                     {{ __('velocity::app.shop.general.new-password') }}
                 </label>
 
-                <div class="col-12">
-                    <input value="" name="password" type="password" />
+                <div :class="`col-12 ${errors.has('password') ? 'has-error' : ''}`">
+                    <input
+                        value=""
+                        name="password"
+                        type="password"
+                        v-validate="'min:6|max:18'" />
+
+                    <span class="control-error" v-if="errors.has('password')">
+                        @{{ errors.first('password') }}
+                    </span>
                 </div>
             </div>
 
@@ -151,8 +159,13 @@
                     {{ __('velocity::app.shop.general.confirm-new-password') }}
                 </label>
 
-                <div class="col-12">
-                    <input value="" name="password_confirmation" type="password" />
+                <div :class="`col-12 ${errors.has('password_confirmation') ? 'has-error' : ''}`">
+                    <input value="" name="password_confirmation" type="password"
+                    v-validate="'min:6|confirmed:password'" data-vv-as="confirm password" />
+
+                    <span class="control-error" v-if="errors.has('password_confirmation')">
+                        @{{ errors.first('password_confirmation') }}
+                    </span>
                 </div>
             </div>
 

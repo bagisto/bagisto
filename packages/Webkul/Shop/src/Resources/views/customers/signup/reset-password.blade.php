@@ -18,7 +18,7 @@
 
             <div class="login-text">{{ __('shop::app.customer.reset-password.title') }}</div>
 
-            <input type="hidden" name="token" value="{{ $token }}">
+            <input type="hidden" name="token" value="{{ old('token') ?: $token }}">
 
             {!! view_render_event('bagisto.shop.customers.reset_password_form_controls.before') !!}
 
