@@ -72,7 +72,7 @@
                 <!--Footer-->
                 <div class="modal-footer">
                     <h2 class="col-6 text-left fw6">
-                        {{ __('velocity::app.checkout.cart.cart-subtotal') }}
+                        {{ __('shop::app.checkout.cart.cart-subtotal') }}
                     </h2>
 
                     {!! view_render_event('bagisto.shop.checkout.cart-mini.subtotal.before', ['cart' => $cart]) !!}
@@ -83,16 +83,16 @@
                 </div>
 
                 <div class="modal-footer">
-                    <a class="col-4 text-left fs16 link-color remove-decoration" href="{{ route('shop.checkout.cart.index') }}">
-                        {{ __('velocity::app.checkout.cart.view-cart') }}
+                    <a class="col text-left fs16 link-color remove-decoration" href="{{ route('shop.checkout.cart.index') }}">
+                        {{ __('shop::app.minicart.view-cart') }}
                     </a>
 
-                    <div class="col-8 text-right no-padding">
+                    <div class="col text-right no-padding">
                         <a href="{{ route('shop.checkout.onepage.index') }}">
                             <button
                                 type="button"
                                 class="theme-btn fs16 fw6">
-                                {{ __('velocity::app.checkout.checkout') }}
+                                {{ __('shop::app.minicart.checkout') }}
                             </button>
                         </a>
                     </div>

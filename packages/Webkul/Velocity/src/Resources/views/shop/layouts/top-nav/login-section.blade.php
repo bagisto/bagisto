@@ -47,7 +47,7 @@
                                         type="button"
                                         class="theme-btn fs14 fw6">
 
-                                        {{ __('velocity::app.header.sign-in') }}
+                                        {{ __('shop::app.header.sign-in') }}
                                     </button>
                                 </a>
                             </div>
@@ -57,7 +57,7 @@
                                     <button
                                         type="button"
                                         class="theme-btn fs14 fw6">
-                                        {{ __('velocity::app.header.sign-up') }}
+                                        {{ __('shop::app.header.sign-up') }}
                                     </button>
                                 </a>
                             </div>

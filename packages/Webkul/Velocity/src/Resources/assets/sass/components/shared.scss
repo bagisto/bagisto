@@ -703,11 +703,15 @@ select:focus,
 .control-error {
     color: $color-danger;
 }
-.mandatory::after {
-    content: "*";
-    font-size: 16px;
-    margin-left: -1px;
-    color: $color-danger;
+.mandatory {
+    width: 100%;
+
+    &::after {
+        content: "*";
+        font-size: 16px;
+        margin-left: -1px;
+        color: $color-danger;
+    }
 }
 
 a {
@@ -864,7 +868,8 @@ button[disabled] {
 
 .has-error {
     input,
-    select {
+    select,
+    textarea {
         border-color: $border-danger !important;
     }
 }

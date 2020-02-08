@@ -30,7 +30,7 @@
                     </div>
                     <span class="category-title">{{ category['name'] }}</span>
                     <i
-                        class="rango-arrow-right pr15"
+                        class="rango-arrow-right pr15 pull-right"
                         @mouseout="toggleSidebar(id, $event, 'mouseout')"
                         @mouseover="toggleSidebar(id, $event, 'mouseover')"
                         v-if="category.children.length && category.children.length > 0">

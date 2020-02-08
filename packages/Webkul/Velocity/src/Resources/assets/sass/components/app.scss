@@ -137,7 +137,6 @@
 
         .limiter::after {
             margin-left: 10px;
-            content: 'per page';
         }
     }
 }
@@ -299,7 +298,9 @@
         }
 
         ~ .wishlist-icon {
-            right: 10px;
+            right: 0;
+            margin: 0;
+            padding: 0;
             position: absolute;
         }
     }
@@ -1558,7 +1559,6 @@
 
         .rango-arrow-right {
             top: 4px;
-            float: right;
             position: relative;
         }
 
@@ -2163,4 +2163,8 @@
             @extend .small-padding;
         }
     }
+}
+
+.vue-slider {
+    max-width: 97%;
 }

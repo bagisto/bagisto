@@ -29,7 +29,7 @@
 
             @csrf
 
-            <div class="row">
+            <div :class="`row ${errors.has('first_name') ? 'has-error' : ''}`">
                 <label class="col-12 mandatory">
                     {{ __('shop::app.customer.account.profile.fname') }}
                 </label>
@@ -50,7 +50,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div :class="`row ${errors.has('gender') ? 'has-error' : ''}`">
                 <label class="col-12 mandatory">
                     {{ __('shop::app.customer.account.profile.gender') }}
                 </label>
@@ -58,8 +58,8 @@
                 <div class="col-12">
                     <select
                         name="gender"
-                        class="control styled-select"
                         v-validate="'required'"
+                        class="control styled-select"
                         data-vv-as="&quot;{{ __('shop::app.customer.account.profile.gender') }}&quot;">
 
                         <option value=""  @if ($customer->gender == "") selected @endif></option>

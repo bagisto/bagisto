@@ -6,13 +6,13 @@
 
 @push('scripts')
     <script type="text/x-template" id="category-products-template">
-        <div class="container-fluid remove-padding-margin" v-if="isCategory">
+        <div class="container-fluid remove-padding-margin" v-if="isCategory && categoryProducts.length > 0">
             <card-list-header
                 :view-all="`${this.baseUrl}/${categoryDetails.slug}`"
                 :heading="categoryDetails.name">
             </card-list-header>
 
-            <div class="carousel-products vc-full-screen" v-if="!isMobile()">
+            <div class="carousel-products vc-full-screen ltr" v-if="!isMobile()">
                 <carousel-component
                     slides-per-page="6"
                     navigation-enabled="hide"
