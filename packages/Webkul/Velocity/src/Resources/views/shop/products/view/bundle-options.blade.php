@@ -1,4 +1,11 @@
 @if ($product->type == 'bundle')
+    @push('css')
+        <style type="text/css">
+            .bundle-options-wrapper .bundle-option-list {
+                border: unset;
+            }
+        </style>
+    @endpush
 
     {!! view_render_event('bagisto.shop.products.view.bundle-options.before', ['product' => $product]) !!}
 
