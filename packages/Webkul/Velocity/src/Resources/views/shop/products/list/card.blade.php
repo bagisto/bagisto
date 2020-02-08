@@ -3,6 +3,14 @@
 @inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar')
 {{--  @include('shop::UI.product-quick-view')  --}}
 
+@push('css')
+    <style type="text/css">
+        .list-card .wishlist-icon i {
+            padding-left: 10px;
+        }
+    </style>
+@endpush
+
 @php
     if (isset($checkmode) && $checkmode && $toolbarHelper->getCurrentMode() == "list") {
         $list = true;
