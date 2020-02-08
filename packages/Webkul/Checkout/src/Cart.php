@@ -743,10 +743,10 @@ class Cart
      *
      * @return void
      */
-    public function calculateItemsTax()
+    public function calculateItemsTax(): void
     {
         if (!$cart = $this->getCart()) {
-            return false;
+            return;
         }
 
         foreach ($cart->items()->get() as $item) {
@@ -783,6 +783,10 @@ class Cart
                 'country' => $address->country,
             ])->orderBy('tax_rate', 'desc')->get();
 
+            $item->tax_percent = 0;
+            $item->tax_amount = 0;
+            $item->base_tax_amount = 0;
+
             if ($taxRates->count()) {
                 foreach ($taxRates as $rate) {
                     $haveTaxRate = false;
@@ -804,17 +808,12 @@ class Cart
                         $item->tax_amount = ($item->total * $rate->tax_rate) / 100;
                         $item->base_tax_amount = ($item->base_total * $rate->tax_rate) / 100;
 
-                        $item->save();
                         break;
                     }
                 }
-            } else {
-                $item->tax_percent = 0;
-                $item->tax_amount = 0;
-                $item->base_tax_amount = 0;
-
-                $item->save();
             }
+
+            $item->save();
         }
     }
 
