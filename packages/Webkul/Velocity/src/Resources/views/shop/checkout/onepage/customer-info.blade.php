@@ -5,19 +5,15 @@
                 <h3 class="fw6 display-inbl">
                     {{ __('shop::app.checkout.onepage.billing-address') }}
                 </h3>
-
-                <a
-                    class="theme-btn light pull-right text-up-14"
-                    @click="newBillingAddress()">
-                    {{ __('shop::app.checkout.onepage.new-address') }}
-                </a>
-
                 <i class="rango-arrow"></i>
             </div>
 
             <div slot="body">
-                <div class="address-container row full-width">
-                    <div class="col-lg-6 col-md-12 address-holder" v-for='(addresses, index) in this.allAddress'>
+                <div class="address-container row full-width no-margin">
+                    <div
+                        :key="index"
+                        class="col-lg-6 col-md-12 address-holder pl0"
+                        v-for='(addresses, index) in this.allAddress'>
                         <div class="card">
                             <div class="card-body row">
 
@@ -49,6 +45,19 @@
                                             {{ __('shop::app.customer.account.address.index.contact') }} : @{{ addresses.phone }}
                                         </li>
                                     </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12 address-holder pl0">
+                        <div class="card">
+                            <div class="card-body add-address-button">
+                                <div class="cursor-pointer" @click="newBillingAddress()">
+                                    <i class="material-icons">
+                                        add_circle_outline
+                                    </i>
+                                    <span>Add new Address</span>
                                 </div>
                             </div>
                         </div>
@@ -95,6 +104,8 @@
                    {{ __('shop::app.checkout.onepage.billing-address') }}
                 </h3>
 
+                <i class="rango-arrow"></i>
+
                 @auth('customer')
                     @if(count(auth('customer')->user()->addresses))
                         <a
@@ -105,8 +116,6 @@
                         </a>
                     @endif
                 @endauth
-
-                <i class="rango-arrow"></i>
             </div>
 
             <div class="col-12 no-padding" slot="body">

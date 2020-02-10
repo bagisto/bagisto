@@ -490,11 +490,11 @@ header {
                 color: $font-color;
                 display: inline-block;
 
-                .material-icons {
-                    left: 0px;
-                    top: 0px;
-                    font-size: 26px;
-                    position: absolute;
+                i {
+                    ~ span {
+                        top: -2px;
+                        left: -4px;
+                    }
                 }
             }
         }

@@ -46,7 +46,9 @@
                     <span class="control-error" v-if="errors.has('vat_id')">@{{ errors.first('vat_id') }}</span>
                 </div>
 
-                <?php $addresses = explode(PHP_EOL, (old('address1') ?? '')); ?>
+                @php
+                    $addresses = explode(PHP_EOL, (old('address1') ?? ''));
+                @endphp
 
                 <div class="control-group" :class="[errors.has('address1[]') ? 'has-error' : '']">
                     <label for="address_0" class="mandatory">{{ __('shop::app.customer.account.address.create.street-address') }}</label>
