@@ -22,6 +22,7 @@ class VatValidator
      */
     protected static $pattern_expression = array(
         'AT' => 'U[A-Z\d]{8}',
+        'AE' => '\d{15}',
         'BE' => '(0\d{9}|\d{10})',
         'BG' => '\d{9,10}',
         'CY' => '\d{8}[A-Z]',
@@ -50,6 +51,7 @@ class VatValidator
         'SE' => '\d{12}',
         'SI' => '\d{8}',
         'SK' => '\d{10}',
+        'JP' => '\d{12}|\d{13}',
     );
 
     /**
@@ -61,14 +63,14 @@ class VatValidator
      */
     public function validate(string $vatNumber): bool
     {
-        $country = request()->input('country');
         $vatNumber = $this->vatCleaner($vatNumber);
+        list($country, $number) = $this->splitVat($vatNumber);
 
         if (! isset(self::$pattern_expression[$country])) {
             return false;
         }
         
-        return preg_match('/^' . self::$pattern_expression[$country] . '$/', $vatNumber) > 0;
+        return preg_match('/^' . self::$pattern_expression[$country] . '$/', $number) > 0;
     }
 
     /**
@@ -80,5 +82,18 @@ class VatValidator
     {
         $vatNumber_no_spaces = trim($vatNumber);
         return strtoupper($vatNumber_no_spaces);
+    }
+
+    /**
+     * @param string $vatNumber
+     *
+     * @return array
+     */
+    private function splitVat(string $vatNumber): array
+    {
+        return [
+            substr($vatNumber, 0, 2),
+            substr($vatNumber, 2),
+        ];
     }
 }
