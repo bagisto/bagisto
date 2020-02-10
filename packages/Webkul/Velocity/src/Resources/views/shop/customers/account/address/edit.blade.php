@@ -43,7 +43,9 @@
             </div>
 
             <div class="control-group" :class="[errors.has('vat_id') ? 'has-error' : '']">
-                <label for="vat_id" class="required">{{ __('shop::app.customer.account.address.create.vat_id') }}</label>
+                <label for="vat_id" class="required">{{ __('shop::app.customer.account.address.create.vat_id') }}
+                    <span class="help-note">{{ __('shop::app.customer.account.address.create.vat_help_note') }}</span>
+                </label>
                 <input type="text" class="control" name="vat_id" value="{{ old('vat_id') ?? $address->vat_id }}" v-validate="" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.vat_id') }}&quot;">
                 <span class="control-error" v-if="errors.has('vat_id')">@{{ errors.first('vat_id') }}</span>
             </div>

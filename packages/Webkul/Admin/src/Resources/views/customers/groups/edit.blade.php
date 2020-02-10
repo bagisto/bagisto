@@ -12,7 +12,7 @@
                 <div class="page-title">
                     <h1>
                         <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
-                        
+
                         {{ __('admin::app.customers.groups.edit-title') }}
                     </h1>
                 </div>
@@ -33,7 +33,7 @@
 
                     <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                         <label for="code" class="required">{{ __('admin::app.customers.groups.code') }}</label>
-                        <input type="text" v-validate="'required'" class="control" id="code" name="code" data-vv-as="&quot;{{ __('admin::app.customers.groups.code') }}&quot;" value="{{ $group->code }}" disabled="disabled"/>
+                        <input type="text" v-validate="'required'" class="control" id="code" name="code" data-vv-as="&quot;{{ __('admin::app.customers.groups.code') }}&quot;" value="{{ old('code') ?: $group->code }}" disabled="disabled"/>
                         <input type="hidden" name="code" value="{{ $group->code }}"/>
                         <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
                     </div>
@@ -42,7 +42,7 @@
                         <label for="name" class="required">
                             {{ __('admin::app.customers.groups.name') }}
                         </label>
-                        <input type="text" class="control" name="name" v-validate="'required'" value="{{ $group->name }}" data-vv-as="&quot;{{ __('admin::app.customers.groups.name') }}&quot;">
+                        <input type="text" class="control" name="name" v-validate="'required'" value="{{ old('name') ?: $group->name }}" data-vv-as="&quot;{{ __('admin::app.customers.groups.name') }}&quot;">
                         <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
                     </div>
                 </div>
