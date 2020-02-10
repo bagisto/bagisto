@@ -6,9 +6,6 @@
 
 @section('content')
     <div class="content">
-        <?php $locale = request()->get('locale') ?: app()->getLocale(); ?>
-        <?php $channel = request()->get('channel') ?: core()->getDefaultChannelCode(); ?>
-
         {!! view_render_event('bagisto.admin.catalog.product.edit.before', ['product' => $product]) !!}
 
         <form method="POST" action="" @submit.prevent="onSubmit" enctype="multipart/form-data">
@@ -28,7 +25,7 @@
                             @foreach (core()->getAllChannels() as $channelModel)
 
                                 <option
-                                    value="{{ $channelModel->code }}" {{ ($channelModel->code) == $channel ? 'selected' : '' }}>
+                                    value="{{ $channelModel->code }}" {{ ($channelModel->code) == $channelCode ? 'selected' : '' }}>
                                     {{ $channelModel->name }}
                                 </option>
 
@@ -41,7 +38,7 @@
                             @foreach (core()->getAllLocales() as $localeModel)
 
                                 <option
-                                    value="{{ $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
+                                    value="{{ $localeModel->code }}" {{ ($localeModel->code) == $localeCode ? 'selected' : '' }}>
                                     {{ $localeModel->name }}
                                 </option>
 
@@ -114,11 +111,11 @@
                                                 $channel_locale = [];
 
                                                 if ($attribute->value_per_channel) {
-                                                    array_push($channel_locale, $channel);
+                                                    array_push($channel_locale, $channelCode);
                                                 }
 
                                                 if ($attribute->value_per_locale) {
-                                                    array_push($channel_locale, $locale);
+                                                    array_push($channel_locale, $localeCode);
                                                 }
                                                 ?>
 
@@ -181,9 +178,9 @@
 
     <script>
         $(document).ready(function () {
-            $('#channel-switcher, #locale-switcher').on('change', function (e) {
+            $('#channel-switcher, #localeCode-switcher').on('change', function (e) {
                 $('#channel-switcher').val()
-                var query = '?channel=' + $('#channel-switcher').val() + '&locale=' + $('#locale-switcher').val();
+                var query = '?channel=' + $('#channel-switcher').val() + '&localeCode=' + $('#localeCode-switcher').val();
 
                 window.location.href = "{{ route('admin.catalog.products.edit', $product->id)  }}" + query;
             })
