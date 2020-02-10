@@ -178,9 +178,9 @@
 
     <script>
         $(document).ready(function () {
-            $('#channel-switcher, #localeCode-switcher').on('change', function (e) {
+            $('#channel-switcher, #locale-switcher').on('change', function (e) {
                 $('#channel-switcher').val()
-                var query = '?channel=' + $('#channel-switcher').val() + '&localeCode=' + $('#localeCode-switcher').val();
+                var query = '?channel=' + $('#channel-switcher').val() + '&locale=' + $('#locale-switcher').val();
 
                 window.location.href = "{{ route('admin.catalog.products.edit', $product->id)  }}" + query;
             })
