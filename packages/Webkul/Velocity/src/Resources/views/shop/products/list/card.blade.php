@@ -8,6 +8,14 @@
         .list-card .wishlist-icon i {
             padding-left: 10px;
         }
+<<<<<<< HEAD
+=======
+        
+        .product-price span:first-child, .product-price span:last-child {
+            font-size: 18px;
+            font-weight: 600;
+        }
+>>>>>>> upstream/master
     </style>
 @endpush
 
@@ -50,10 +58,19 @@
                         @include ('shop::products.price', ['product' => $product])
                     </div>
 
+<<<<<<< HEAD
                     <div class="product-rating">
                         <star-ratings ratings="{{ $avgRatings }}"></star-ratings>
                         <span>{{ __('velocity::app.products.ratings', ['totalRatings' => $totalReviews ]) }}</span>
                     </div>
+=======
+                    @if( $totalReviews )
+                        <div class="product-rating">
+                            <star-ratings ratings="{{ $avgRatings }}"></star-ratings>
+                            <span>{{ $totalReviews }} Ratings</span>
+                        </div>
+                    @endif
+>>>>>>> upstream/master
 
                     <div class="cart-wish-wrap mt5">
                         @include ('shop::products.add-to-cart', [

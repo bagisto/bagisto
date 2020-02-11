@@ -6,14 +6,23 @@
         {{ __('velocity::app.admin.contents.content.category-slug') }}
     </label>
 
+    @php
+       $pageTarget = isset($locale) ? (old($locale)['page_link'] ?? (isset($content) ? $content->translate($locale)['page_link'] : '')) : '';
+    @endphp
+
     <input
         type="text"
         id="page_link"
         class="control"
-        name="page_link"
+        name="{{$locale}}[page_link]"
         v-validate="'required|max:150'"
+<<<<<<< HEAD
         value="{{ isset($locale) ? (old($locale)['page_link'] ?? $content->translate($locale)['page_link']) : '' }}"
         data-vv-as="&quot;{{ __('velocity::app.admin.contents.content.category-slug') }}&quot;" />
+=======
+        value="{{ $pageTarget }}"
+        data-vv-as="&quot;{{ __('velocity::app.admin.contents.content.page-link') }}&quot;" />
+>>>>>>> upstream/master
 
     <span class="control-error" v-if="errors.has('page_link')">
         @{{ errors.first('page_link') }}
@@ -26,7 +35,7 @@
     </label>
 
     @php
-       $linkTarget = isset($locale) ? (old($locale)['link_target'] ?? $content->translate($locale)['link_target']) : '';
+       $linkTarget = isset($locale) ? (old($locale)['link_target'] ?? (isset($content) ? $content->translate($locale)['link_target'] : '')) : '';
     @endphp
 
     <select
