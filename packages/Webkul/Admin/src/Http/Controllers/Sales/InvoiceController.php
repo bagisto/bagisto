@@ -55,7 +55,6 @@ class InvoiceController extends Controller
         $this->orderRepository = $orderRepository;
 
         $this->invoiceRepository = $invoiceRepository;
-
     }
 
     /**
