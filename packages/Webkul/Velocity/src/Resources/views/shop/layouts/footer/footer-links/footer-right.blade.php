@@ -5,15 +5,13 @@
     $shippings = core()->getConfigData('sales.carriers');
     $payments = core()->getConfigData('sales.paymentmethods');
 
-    foreach($shippings as $ship)
-    {
+    foreach($shippings as $ship) {
         if ($ship['active'] == "true") {
             array_push($activeShippings, $ship['title']);
         }
     }
 
-    foreach($payments as $payment)
-    {
+    foreach($payments as $payment) {
         if ($payment['active'] == "true") {
             array_push($activePayments, $payment['title']);
         }

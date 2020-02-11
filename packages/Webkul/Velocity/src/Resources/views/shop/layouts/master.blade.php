@@ -152,16 +152,16 @@
 
                 @if ($message = session('success'))
                     messageType = 'alert-success';
-                    messageLabel = 'Success';
+                    messageLabel = "{{ __('velocity::app.shop.general.alert.success') }}";
                 @elseif ($message = session('warning'))
                     messageType = 'alert-warning';
-                    messageLabel = 'Warning';
+                    messageLabel = "{{ __('velocity::app.shop.general.alert.warning') }}";
                 @elseif ($message = session('error'))
                     messageType = 'alert-danger';
-                    messageLabel = 'Error';
+                    messageLabel = "{{ __('velocity::app.shop.general.alert.error') }}";
                 @elseif ($message = session('info'))
                     messageType = 'alert-info';
-                    messageLabel = 'Info';
+                    messageLabel = "{{ __('velocity::app.shop.general.alert.info') }}";
                 @endif
 
                 if (messageType && '{{ $message }}' !== '') {
@@ -169,12 +169,14 @@
                 }
 
                 window.serverErrors = [];
-                @if(isset($errors))
+                @if (isset($errors))
                     @if (count($errors))
                         window.serverErrors = @json($errors->getMessages());
                     @endif
                 @endif
-            })()
+
+                window._translations = @json(app('Webkul\Velocity\Helpers\Helper')->jsonTranslations());
+            })();
         </script>
 
         <script

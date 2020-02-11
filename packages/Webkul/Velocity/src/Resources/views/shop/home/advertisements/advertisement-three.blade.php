@@ -18,17 +18,23 @@
 
         <div class="container-fluid advertisement-three-container">
             <div class="row">
-                <a @if (isset($one)) href="{{ $one }}" @endif class="col-lg-6 col-md-12 no-padding">
-                    <img src="{{ asset('/storage/' . $advertisementThree['image_1']) }}" class="full-width" />
-                </a>
+                @if ( isset($advertisementThree[1]))
+                    <a @if (isset($one)) href="{{ $one }}" @endif class="col-lg-6 col-md-12 no-padding">
+                        <img src="{{ asset('/storage/' . $advertisementThree[1]) }}" class="full-width" />
+                    </a>
+                @endif
 
                 <div class="col-lg-6 col-md-12 second-panel">
-                    <a @if (isset($two)) href="{{ $two }}" @endif class="row top-container">
-                        <img src="{{ asset('/storage/' . $advertisementThree['image_2']) }}" class="col-12 pr0" />
-                    </a>
-                    <a @if (isset($three)) href="{{ $three }}" @endif class="row bottom-container">
-                        <img src="{{ asset('/storage/' . $advertisementThree['image_3']) }}" class="col-12 pr0" />
-                    </a>
+                    @if ( isset($advertisementThree[2]))
+                        <a @if (isset($two)) href="{{ $two }}" @endif class="row top-container">
+                            <img src="{{ asset('/storage/' . $advertisementThree[2]) }}" class="col-12 pr0" />
+                        </a>
+                    @endif
+                    @if ( isset($advertisementThree[3]))
+                        <a @if (isset($three)) href="{{ $three }}" @endif class="row bottom-container">
+                            <img src="{{ asset('/storage/' . $advertisementThree[3]) }}" class="col-12 pr0" />
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>

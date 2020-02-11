@@ -207,6 +207,10 @@ return [
                 'create' => [
                     'page-title' => 'Cliente - Adicionar Endereço',
                     'title' => 'Novo Endereço',
+                    'company_name' => 'Nome da empresa',
+                    'first_name' => 'Primeiro nome',
+                    'last_name' => 'Último nome',
+                    'vat_id' => 'ID do IVA',
                     'address1' => 'Endereço Linha 1',
                     'street-address' => 'Endereço',
                     'country' => 'País',
