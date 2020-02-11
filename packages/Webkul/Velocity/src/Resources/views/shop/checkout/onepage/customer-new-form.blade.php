@@ -274,6 +274,7 @@
                 id="billing[first_name]"
                 name="billing[first_name]"
                 v-model="address.billing.first_name"
+                @change="validateForm('address-form')"
                 data-vv-as="&quot;{{ __('shop::app.checkout.onepage.first-name') }}&quot;" />
 
             <span class="control-error" v-if="errors.has('address-form.billing[first_name]')">
@@ -293,6 +294,7 @@
                 id="billing[last_name]"
                 name="billing[last_name]"
                 v-model="address.billing.last_name"
+                @change="validateForm('address-form')"
                 data-vv-as="&quot;{{ __('shop::app.checkout.onepage.last-name') }}&quot;" />
 
             <span class="control-error" v-if="errors.has('address-form.billing[last_name]')">
@@ -312,6 +314,7 @@
                 id="billing_address_0"
                 name="billing[address1][]"
                 v-model="address.billing.address1[0]"
+                @change="validateForm('address-form')"
                 data-vv-as="&quot;{{ __('shop::app.checkout.onepage.address1') }}&quot;" />
 
             <span class="control-error" v-if="errors.has('address-form.billing[address1][]')">
@@ -347,6 +350,7 @@
                 name="billing[city]"
                 v-validate="'required'"
                 v-model="address.billing.city"
+                @change="validateForm('address-form')"
                 data-vv-as="&quot;{{ __('shop::app.checkout.onepage.city') }}&quot;" />
 
             <span class="control-error" v-if="errors.has('address-form.billing[city]')">
@@ -395,6 +399,7 @@
                 v-validate="'required'"
                 v-if="!haveStates('billing')"
                 v-model="address.billing.state"
+                @change="validateForm('address-form')"
                 data-vv-as="&quot;{{ __('shop::app.checkout.onepage.state') }}&quot;" />
 
             <select
@@ -434,6 +439,7 @@
                 v-validate="'required'"
                 name="billing[postcode]"
                 v-model="address.billing.postcode"
+                @change="validateForm('address-form')"
                 data-vv-as="&quot;{{ __('shop::app.checkout.onepage.postcode') }}&quot;" />
 
             <span class="control-error" v-if="errors.has('address-form.billing[postcode]')">

@@ -87,7 +87,7 @@ return [
         'star' => 'Star',
         'percentage' => ':percentage %',
         'id-star' => 'star',
-        'name' => 'Name'
+        'name' => 'Name',
     ],
 
     'customer' => [

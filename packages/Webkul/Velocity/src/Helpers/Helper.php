@@ -193,5 +193,18 @@ class Helper extends Review
 
         return $reviews;
     }
+
+    public function jsonTranslations()
+    {
+        $currentLocale = app()->getLocale();
+
+        $path = __DIR__ . "/../Resources/lang/$currentLocale/app.php";
+
+        if (is_string($path) && is_readable($path)) {
+            return include $path;
+        }
+
+        return [];
+    }
 }
 

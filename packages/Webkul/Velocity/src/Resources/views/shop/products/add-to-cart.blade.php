@@ -1,6 +1,6 @@
 {!! view_render_event('bagisto.shop.products.add_to_cart.before', ['product' => $product]) !!}
 
-<div class="row mx-0">
+<div class="row mx-0 col-12 no-padding">
     <div class="add-to-cart-btn pl0">
         @if (isset($form) && !$form)
             <button

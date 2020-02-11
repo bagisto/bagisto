@@ -42,7 +42,7 @@
                 <template v-if="(! (viewAll == 'false' || viewAll == '')) && viewAll">
                     <div>
                         <a :href="viewAll" :title="`View all ${headerHeading} products`" class="remove-decoration link-color">
-                            <h2 class="fs16 fw6 cursor-pointer tab">View All</h2>
+                            <h2 class="fs16 fw6 cursor-pointer tab">{{ __('home.view-all') }}</h2>
                         </a>
                     </div>
                 </template>
@@ -78,7 +78,7 @@
 
             return {
                 tabs: tabs,
-                headerHeading: this.heading ? this.heading : 'Products',
+                headerHeading: this.heading ? this.heading : this.__('products.text'),
             }
         },
 
