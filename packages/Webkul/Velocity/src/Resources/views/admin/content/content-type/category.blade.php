@@ -16,13 +16,8 @@
         class="control"
         name="{{$locale}}[page_link]"
         v-validate="'required|max:150'"
-<<<<<<< HEAD
-        value="{{ isset($locale) ? (old($locale)['page_link'] ?? $content->translate($locale)['page_link']) : '' }}"
-        data-vv-as="&quot;{{ __('velocity::app.admin.contents.content.category-slug') }}&quot;" />
-=======
         value="{{ $pageTarget }}"
         data-vv-as="&quot;{{ __('velocity::app.admin.contents.content.page-link') }}&quot;" />
->>>>>>> upstream/master
 
     <span class="control-error" v-if="errors.has('page_link')">
         @{{ errors.first('page_link') }}
