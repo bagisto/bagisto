@@ -3,6 +3,19 @@
 @inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar')
 {{--  @include('shop::UI.product-quick-view')  --}}
 
+@push('css')
+    <style type="text/css">
+        .list-card .wishlist-icon i {
+            padding-left: 10px;
+        }
+        
+        .product-price span:first-child, .product-price span:last-child {
+            font-size: 18px;
+            font-weight: 600;
+        }
+    </style>
+@endpush
+
 @php
     if (isset($checkmode) && $checkmode && $toolbarHelper->getCurrentMode() == "list") {
         $list = true;
@@ -42,10 +55,12 @@
                         @include ('shop::products.price', ['product' => $product])
                     </div>
 
-                    <div class="product-rating">
-                        <star-ratings ratings="{{ $avgRatings }}"></star-ratings>
-                        <span>{{ __('velocity::app.products.ratings', ['totalRatings' => $totalReviews ]) }}</span>
-                    </div>
+                    @if( $totalReviews )
+                        <div class="product-rating">
+                            <star-ratings ratings="{{ $avgRatings }}"></star-ratings>
+                            <span>{{ $totalReviews }} Ratings</span>
+                        </div>
+                    @endif
 
                     <div class="cart-wish-wrap mt5">
                         @include ('shop::products.add-to-cart', [
