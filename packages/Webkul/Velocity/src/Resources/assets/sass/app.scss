@@ -481,19 +481,29 @@ header {
 
         #mini-cart {
             .mini-cart-content {
-                width: 75px;
                 font-size: 16px;
                 font-weight: 600;
                 text-align: right;
+                margin-right: 7px;
                 letter-spacing: 0;
                 position: relative;
                 color: $font-color;
                 display: inline-block;
 
                 i {
-                    ~ span {
-                        top: -2px;
-                        left: -4px;
+                    + span.cart-text {
+                        padding-left: 0px;
+                        vertical-align: text-bottom;
+                    }
+                }
+
+                .cart-text {
+                    padding-left: 5px;
+                }
+
+                + .down-arrow-container {
+                    .rango-arrow-down {
+                        top: 8px;
                     }
                 }
             }

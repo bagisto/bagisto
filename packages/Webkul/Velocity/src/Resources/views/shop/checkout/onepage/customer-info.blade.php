@@ -105,7 +105,10 @@
                 </h3>
 
                 <i class="rango-arrow"></i>
+            </div>
 
+
+            <div class="col-12 no-padding" slot="body">
                 @auth('customer')
                     @if(count(auth('customer')->user()->addresses))
                         <a
@@ -116,9 +119,7 @@
                         </a>
                     @endif
                 @endauth
-            </div>
 
-            <div class="col-12 no-padding" slot="body">
                 @include('shop::checkout.onepage.customer-new-form', [
                     'billing' => true
                 ])

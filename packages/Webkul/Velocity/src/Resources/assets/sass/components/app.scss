@@ -523,18 +523,12 @@
         .badge {
             @include border-radius(50%);
 
-            top: -7px;
-            left: -13px;
+            top: -2px;
+            left: 15px;
             padding: 4px;
             min-width: 20px;
-            position: relative;
+            position: absolute;
             background: $button-primary-bg;
-        }
-
-        .cart-text {
-            top: 0px;
-            left: -14px;
-            position: relative;
         }
     }
 }
