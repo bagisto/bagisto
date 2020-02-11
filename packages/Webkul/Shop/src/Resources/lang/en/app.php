@@ -87,7 +87,7 @@ return [
         'star' => 'Star',
         'percentage' => ':percentage %',
         'id-star' => 'star',
-        'name' => 'Name'
+        'name' => 'Name',
     ],
 
     'customer' => [
@@ -227,6 +227,7 @@ return [
                     'first_name' => 'First name',
                     'last_name' => 'Last name',
                     'vat_id' => 'Vat id',
+                    'vat_help_note' => '[Note: Use Country Code with VAT Id. Eg. INV01234567891]',
                     'title' => 'Add Address',
                     'street-address' => 'Street Address',
                     'country' => 'Country',

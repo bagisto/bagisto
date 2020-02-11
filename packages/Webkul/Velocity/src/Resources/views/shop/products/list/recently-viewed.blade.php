@@ -45,7 +45,7 @@
                                 :ratings="product.rating">
                             </star-ratings>
 
-                            <span class="fs16 text-nowrap align-text-bottom" v-if="product.rating > 0">@{{ product.totalReviews }} Reviews</span>
+                            <span class="fs16 text-nowrap align-text-bottom" v-if="product.rating > 0">@{{ product.totalReviews }} {{ __('velocity::app.products.reviews') }}</span>
                         </a>
                     </div>
                 </div>

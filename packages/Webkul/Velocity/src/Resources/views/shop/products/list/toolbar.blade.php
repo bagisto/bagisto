@@ -46,24 +46,24 @@
 
             <div class="sorter">
                 <label>{{ __('shop::app.products.sort-by') }}</label>
-                <i class="icon fs16 cell rango-arrow-down select-icon-margin down-icon-position"></i>
-                <select class="selective-div border-normal" onchange="window.location.href = this.value">
 
+                <select class="selective-div border-normal styled-select" onchange="window.location.href = this.value">
                     @foreach ($toolbarHelper->getAvailableOrders() as $key => $order)
-
                         <option value="{{ $toolbarHelper->getOrderUrl($key) }}" {{ $toolbarHelper->isOrderCurrent($key) ? 'selected' : '' }}>
                             {{ __('shop::app.products.' . $order) }}
                         </option>
-
                     @endforeach
-
                 </select>
+
+                <div class="select-icon-container">
+                    <span class="select-icon rango-arrow-down"></span>
+                </div>
             </div>
 
             <div class="limiter">
                 <label>{{ __('shop::app.products.show') }}</label>
-                <i class="icon fs16 cell rango-arrow-down select-icon-show-margin down-icon-position"></i>
-                <select class="selective-div border-normal" onchange="window.location.href = this.value" style="width: 57px;">
+
+                <select class="selective-div border-normal styled-select" onchange="window.location.href = this.value" style="width: 57px;">
 
                     @foreach ($toolbarHelper->getAvailableLimits() as $limit)
 
@@ -74,6 +74,10 @@
                     @endforeach
 
                 </select>
+
+                <div class="select-icon-container">
+                    <span class="select-icon rango-arrow-down"></span>
+                </div>
             </div>
         </div>
 
@@ -156,10 +160,6 @@
 
                 methods: {
                     toggleLayeredNavigation: function ({event, actionType}) {
-                        // this.$root.navContainer = true;
-                        // this.$root.responsiveSidebarTemplate = `<div slot="sidebar-body">
-                        //     Hello World
-                        // </div>`;
                         this.layeredNavigation = !this.layeredNavigation;
                     }
                 }

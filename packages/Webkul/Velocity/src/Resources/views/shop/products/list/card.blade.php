@@ -5,6 +5,10 @@
 
 @push('css')
     <style type="text/css">
+        .list-card .wishlist-icon i {
+            padding-left: 10px;
+        }
+        
         .product-price span:first-child, .product-price span:last-child {
             font-size: 18px;
             font-weight: 600;
@@ -51,14 +55,17 @@
                         @include ('shop::products.price', ['product' => $product])
                     </div>
 
-                    <div class="product-rating">
-                        <star-ratings ratings="{{ $avgRatings }}"></star-ratings>
-                        <span>{{ $totalReviews }} Ratings</span>
-                    </div>
+                    @if( $totalReviews )
+                        <div class="product-rating">
+                            <star-ratings ratings="{{ $avgRatings }}"></star-ratings>
+                            <span>{{ $totalReviews }} Ratings</span>
+                        </div>
+                    @endif
 
                     <div class="cart-wish-wrap mt5">
                         @include ('shop::products.add-to-cart', [
                             'product' => $product,
+                            'addWishlistClass' => 'pl10',
                             'addToCartBtnClass' => 'medium-padding'
                         ])
                     </div>
@@ -99,7 +106,9 @@
                 @if ($totalReviews)
                     <div class="product-rating col-12 no-padding">
                         <star-ratings ratings="{{ $avgRatings }}"></star-ratings>
-                        <span class="align-top">{{ $totalReviews }} Ratings</span>
+                        <span class="align-top">
+                            {{ __('velocity::app.products.ratings', ['totalRatings' => $totalReviews ]) }}
+                        </span>
                     </div>
                 @else
                     <div class="product-rating col-12 no-padding">

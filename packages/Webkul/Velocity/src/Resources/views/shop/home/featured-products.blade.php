@@ -9,15 +9,15 @@
         <div class="container-fluid featured-products" v-if="featuredProducts.length > 0">
             <card-list-header heading="{{ __('shop::app.home.featured-products') }}">
             </card-list-header>
-    
-            <div class="carousel-products vc-full-screen">
+
+            <div class="carousel-products vc-full-screen ltr">
                 <carousel-component
                     slides-per-page="6"
                     navigation-enabled="hide"
                     pagination-enabled="hide"
                     id="fearured-products-carousel"
                     :slides-count="featuredProducts.length">
-    
+
                     <slide
                         :key="index"
                         :slot="`slide-${index}`"
@@ -29,7 +29,7 @@
                     </slide>
                 </carousel-component>
             </div>
-    
+
             <div class="carousel-products vc-small-screen">
                 <carousel-component
                     slides-per-page="2"
@@ -37,7 +37,7 @@
                     pagination-enabled="hide"
                     id="fearured-products-carousel"
                     :slides-count="featuredProducts.length">
-    
+
                     <slide
                         :key="index"
                         :slot="`slide-${index}`"

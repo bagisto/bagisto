@@ -11,6 +11,15 @@
     <cart-component></cart-component>
 @endsection
 
+@push('css')
+    <style type="text/css">
+        .quantity {
+            width: unset;
+            float: right;
+        }
+    </style>
+@endpush
+
 @push('scripts')
     @include('shop::checkout.cart.coupon')
 
@@ -26,7 +35,7 @@
                                 {{ __('velocity::app.checkout.items') }}
                             </span>
 
-                            <span class="col-2 fw6 fs16 no-padding text-center">
+                            <span class="col-2 fw6 fs16 no-padding text-right">
                                 {{ __('velocity::app.checkout.qty') }}
                             </span>
 
@@ -67,17 +76,27 @@
                                             </a>
 
                                             <div class="product-details-content col-6">
-                                                <div class="row item-title">
+                                                <div class="row item-title no-margin">
                                                     <a
                                                         href="{{ route('shop.productOrCategory.index', $product->url_key) }}"
                                                         title="{{ $product->name }}"
-                                                        class="unset col-12">
+                                                        class="unset col-12 no-padding">
 
                                                         <span class="fs20 fw6 link-color">{{ $product->name }}</span>
                                                     </a>
                                                 </div>
 
-                                                <div class="row col-12">
+                                                @if (isset($item->additional['attributes']))
+                                                    <div class="row col-12 no-padding no-margin">
+
+                                                        @foreach ($item->additional['attributes'] as $attribute)
+                                                            <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
+                                                        @endforeach
+
+                                                    </div>
+                                                @endif
+
+                                                <div class="row col-12 no-padding no-margin">
                                                     @include ('shop::products.price', ['product' => $product])
                                                 </div>
 
@@ -130,7 +149,7 @@
                                                     </a>
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="product-quantity col-3 no-padding">
                                                 <quantity-changer
                                                     :control-name="'qty[{{$item->id}}]'"
@@ -165,6 +184,16 @@
 
                                                     <span class="fs20 fw6 link-color">{{ $product->name }}</span>
                                                 </a>
+
+                                                @if (isset($item->additional['attributes']))
+                                                    <div class="row col-12 no-padding no-margin">
+
+                                                        @foreach ($item->additional['attributes'] as $attribute)
+                                                            <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
+                                                        @endforeach
+
+                                                    </div>
+                                                @endif
 
                                                 <div class="col-12 no-padding">
                                                     @include ('shop::products.price', ['product' => $product])

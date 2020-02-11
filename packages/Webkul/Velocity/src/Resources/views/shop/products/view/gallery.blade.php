@@ -27,7 +27,7 @@
 {!! view_render_event('bagisto.shop.products.view.gallery.after', ['product' => $product]) !!}
 
 <script type="text/x-template" id="product-gallery-template">
-    <ul class="thumb-list col-12 row" type="none">
+    <ul class="thumb-list col-12 row ltr" type="none">
         @if (sizeof($images) > 4)
             <li class="arrow left" @click="scroll('prev')">
                 <i class="rango-arrow-left fs24"></i>
