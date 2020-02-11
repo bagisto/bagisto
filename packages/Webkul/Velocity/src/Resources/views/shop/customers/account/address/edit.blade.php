@@ -31,19 +31,19 @@
             </div>
 
             <div class="control-group" :class="[errors.has('first_name') ? 'has-error' : '']">
-                <label for="first_name" class="required">{{ __('shop::app.customer.account.address.create.first_name') }}</label>
+                <label for="first_name" class="mandatory">{{ __('shop::app.customer.account.address.create.first_name') }}</label>
                 <input type="text" class="control" name="first_name" value="{{ old('first_name') ?? $address->first_name }}" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.first_name') }}&quot;">
                 <span class="control-error" v-if="errors.has('first_name')">@{{ errors.first('first_name') }}</span>
             </div>
 
             <div class="control-group" :class="[errors.has('last_name') ? 'has-error' : '']">
-                <label for="last_name" class="required">{{ __('shop::app.customer.account.address.create.last_name') }}</label>
+                <label for="last_name" class="mandatory">{{ __('shop::app.customer.account.address.create.last_name') }}</label>
                 <input type="text" class="control" name="last_name" value="{{ old('last_name') ?? $address->last_name }}" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.last_name') }}&quot;">
                 <span class="control-error" v-if="errors.has('last_name')">@{{ errors.first('last_name') }}</span>
             </div>
 
             <div class="control-group" :class="[errors.has('vat_id') ? 'has-error' : '']">
-                <label for="vat_id" class="required">{{ __('shop::app.customer.account.address.create.vat_id') }}
+                <label for="vat_id">{{ __('shop::app.customer.account.address.create.vat_id') }}
                     <span class="help-note">{{ __('shop::app.customer.account.address.create.vat_help_note') }}</span>
                 </label>
                 <input type="text" class="control" name="vat_id" value="{{ old('vat_id') ?? $address->vat_id }}" v-validate="" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.vat_id') }}&quot;">
@@ -51,35 +51,35 @@
             </div>
 
             <div class="control-group" :class="[errors.has('address1[]') ? 'has-error' : '']">
-                <label for="address_0" class="required">{{ __('shop::app.customer.account.address.edit.street-address') }}</label>
+                <label for="address_0" class="mandatory">{{ __('shop::app.customer.account.address.edit.street-address') }}</label>
                 <input type="text" class="control" name="address1[]" value="{{ isset($addresses[0]) ? $addresses[0] : '' }}" id="address_0" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.street-address') }}&quot;">
                 <span class="control-error" v-if="errors.has('address1[]')">@{{ errors.first('address1[]') }}</span>
             </div>
 
             @if (core()->getConfigData('customer.settings.address.street_lines') && core()->getConfigData('customer.settings.address.street_lines') > 1)
-                <div class="control-group" style="margin-top: -25px;">
-                    @for ($i = 1; $i < core()->getConfigData('customer.settings.address.street_lines'); $i++)
+                @for ($i = 1; $i < core()->getConfigData('customer.settings.address.street_lines'); $i++)
+                    <div class="control-group" style="margin-top: -25px;">
                         <input type="text" class="control" name="address1[{{ $i }}]" id="address_{{ $i }}" value="{{ $addresses[$i] ?? '' }}">
-                    @endfor
-                </div>
+                    </div>
+                @endfor
             @endif
 
             @include ('shop::customers.account.address.country-state', ['countryCode' => old('country') ?? $address->country, 'stateCode' => old('state') ?? $address->state])
 
             <div class="control-group" :class="[errors.has('city') ? 'has-error' : '']">
-                <label for="city" class="required">{{ __('shop::app.customer.account.address.create.city') }}</label>
+                <label for="city" class="mandatory">{{ __('shop::app.customer.account.address.create.city') }}</label>
                 <input type="text" class="control" name="city" value="{{ old('city') ?? $address->city }}" v-validate="'required|alpha_spaces'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.city') }}&quot;">
                 <span class="control-error" v-if="errors.has('city')">@{{ errors.first('city') }}</span>
             </div>
 
             <div class="control-group" :class="[errors.has('postcode') ? 'has-error' : '']">
-                <label for="postcode" class="required">{{ __('shop::app.customer.account.address.create.postcode') }}</label>
+                <label for="postcode" class="mandatory">{{ __('shop::app.customer.account.address.create.postcode') }}</label>
                 <input type="text" class="control" name="postcode" value="{{ old('postcode') ?? $address->postcode }}" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.postcode') }}&quot;">
                 <span class="control-error" v-if="errors.has('postcode')">@{{ errors.first('postcode') }}</span>
             </div>
 
             <div class="control-group" :class="[errors.has('phone') ? 'has-error' : '']">
-                <label for="phone" class="required">{{ __('shop::app.customer.account.address.create.phone') }}</label>
+                <label for="phone" class="mandatory">{{ __('shop::app.customer.account.address.create.phone') }}</label>
                 <input type="text" class="control" name="phone" value="{{ old('phone') ?? $address->phone }}" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.phone') }}&quot;">
                 <span class="control-error" v-if="errors.has('phone')">@{{ errors.first('phone') }}</span>
             </div>
