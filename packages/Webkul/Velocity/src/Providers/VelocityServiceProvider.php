@@ -81,13 +81,13 @@ class VelocityServiceProvider extends ServiceProvider
     // this function will provide global variables shared by view (blade files)
     private function loadPublishableAssets()
     {
-        // $this->publishes([
-        //     __DIR__ . '/../../publishable/assets/' => public_path('themes/velocity/assets'),
-        // ], 'public');
+        $this->publishes([
+            __DIR__ . '/../../publishable/assets/' => public_path('themes/velocity/assets'),
+        ], 'public');
 
-        // $this->publishes([
-        //     __DIR__ . '/../Resources/views/shop' => resource_path('themes/velocity/views'),
-        // ]);
+        $this->publishes([
+            __DIR__ . '/../Resources/views/shop' => resource_path('themes/velocity/views'),
+        ]);
 
         return true;
     }
