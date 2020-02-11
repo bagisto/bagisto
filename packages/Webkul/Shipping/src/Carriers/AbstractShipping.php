@@ -54,7 +54,7 @@ abstract class AbstractShipping
      *
      * @return array
      */
-    public function getDecription()
+    public function getDescription()
     {
         return $this->getConfigData('decription');
     }
