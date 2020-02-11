@@ -57,11 +57,11 @@
                 </div>
 
                 @if (core()->getConfigData('customer.settings.address.street_lines') && core()->getConfigData('customer.settings.address.street_lines') > 1)
-                    <div class="control-group" style="margin-top: -25px;">
-                        @for ($i = 1; $i < core()->getConfigData('customer.settings.address.street_lines'); $i++)
+                    @for ($i = 1; $i < core()->getConfigData('customer.settings.address.street_lines'); $i++)
+                        <div class="control-group" style="margin-top: -25px;">
                             <input type="text" class="control" name="address1[{{ $i }}]" id="address_{{ $i }}" value="{{ $addresses[$i] ?? '' }}">
-                        @endfor
-                    </div>
+                        </div>
+                    @endfor
                 @endif
 
                 @include ('shop::customers.account.address.country-state', ['countryCode' => old('country'), 'stateCode' => old('state')])
