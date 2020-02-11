@@ -6,12 +6,6 @@
 
 @section('content')
     <div class="content">
-        <div class="page-header">
-            <div class="page-title">
-                <h1>{{ __('velocity::app.admin.meta-data.title') }}</h1>
-            </div>
-        </div>
-
         <form
             method="POST"
             @submit.prevent="onSubmit"
@@ -24,6 +18,17 @@
             >
 
             @csrf
+
+            <div class="page-header">
+                <div class="page-title">
+                    <h1>{{ __('velocity::app.admin.meta-data.title') }}</h1>
+                </div>
+                <div class="page-action">
+                    <button type="submit" class="btn btn-lg btn-primary">
+                        {{ __('velocity::app.admin.meta-data.update-meta-data') }}
+                    </button>
+                </div>
+            </div>
 
             <accordian :title="'{{ __('admin::app.catalog.attributes.general') }}'" :active="false">
                 <div slot="body">
@@ -106,28 +111,48 @@
                     <div class="control-group">
                         <label>{{ __('velocity::app.admin.meta-data.advertisement-four') }}</label>
 
-                        <image-wrapper
-                            :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'"
-                            input-name="images[4]">
-                        </image-wrapper>
+                        @if(! isset($metaData->advertisement[4]))
+                            <image-wrapper
+                                :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'"
+                                input-name="images[4]">
+                            </image-wrapper>
+                        @else
+                            <image-wrapper
+                                :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'"
+                                input-name="images[4]" :images='@json($metaData->advertisement[4])'>
+                            </image-wrapper>
+                        @endif
                     </div>
 
                     <div class="control-group">
                         <label>{{ __('velocity::app.admin.meta-data.advertisement-three') }}</label>
-
-                        <image-wrapper
-                            :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'"
-                            input-name="images[3]">
-                        </image-wrapper>
+                        @if(! isset($metaData->advertisement[3]))
+                            <image-wrapper
+                                :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'"
+                                input-name="images[3]">
+                            </image-wrapper>
+                        @else
+                            <image-wrapper
+                                :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'"
+                                input-name="images[3]" :images='@json($metaData->advertisement[3])'>
+                            </image-wrapper>
+                        @endif
                     </div>
 
                     <div class="control-group">
                         <label>{{ __('velocity::app.admin.meta-data.advertisement-two') }}</label>
 
-                        <image-wrapper
-                            :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'"
-                            input-name="images[2]">
-                        </image-wrapper>
+                        @if(! isset($metaData->advertisement[2]))
+                            <image-wrapper
+                                :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'"
+                                input-name="images[2]">
+                            </image-wrapper>
+                        @else
+                            <image-wrapper
+                                :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'"
+                                input-name="images[2]" :images='@json($metaData->advertisement[2])'>
+                            </image-wrapper>
+                        @endif
                     </div>
 
                     {{-- <div class="control-group">
@@ -185,10 +210,6 @@
                     </div>
                 </div>
             </accordian>
-
-            <button class="btn btn-lg btn-primary" style="margin-top: 20px">
-                {{ __('velocity::app.admin.meta-data.update-meta-data') }}
-            </button>
         </form>
     </div>
 @stop

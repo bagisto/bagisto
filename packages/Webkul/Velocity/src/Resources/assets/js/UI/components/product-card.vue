@@ -18,7 +18,7 @@
 
                 <div class="product-rating" v-if="product.totalReviews && product.totalReviews > 0">
                     <star-ratings :ratings="product.avgRating"></star-ratings>
-                    <span>{{ product.totalReviews }} Ratings</span>
+                    <span>{{ product.totalReviews }}</span>
                 </div>
 
                 <div class="product-rating" v-else>

@@ -9,6 +9,10 @@
         .account-content .account-layout .account-head {
             margin-bottom: 0px;
         }
+        .sale-summary .dash-icon {
+            margin-right: 30px;
+            float: right;
+        }
     </style>
 @endpush
 
@@ -137,46 +141,62 @@
                                     <table class="sale-summary">
                                         <tbody>
                                             <tr>
-                                                <td>{{ __('shop::app.customer.account.order.view.subtotal') }}</td>
+                                                <td>{{ __('shop::app.customer.account.order.view.subtotal') }}
+                                                    <span class="dash-icon">-</span>
+                                                </td>
                                                 <td>{{ core()->formatPrice($order->sub_total, $order->order_currency_code) }}</td>
                                             </tr>
 
                                             @if ($order->haveStockableItems())
                                                 <tr>
-                                                    <td>{{ __('shop::app.customer.account.order.view.shipping-handling') }}</td>
+                                                    <td>{{ __('shop::app.customer.account.order.view.shipping-handling') }}
+                                                        <span class="dash-icon">-</span>
+                                                    </td>
                                                     <td>{{ core()->formatPrice($order->shipping_amount, $order->order_currency_code) }}</td>
                                                 </tr>
                                             @endif
 
                                             @if ($order->base_discount_amount > 0)
                                                 <tr>
-                                                    <td>{{ __('shop::app.customer.account.order.view.discount') }}</td>
+                                                    <td>{{ __('shop::app.customer.account.order.view.discount') }}
+                                                        <span class="dash-icon">-</span>
+                                                    </td>
                                                     <td>{{ core()->formatPrice($order->discount_amount, $order->order_currency_code) }}</td>
                                                 </tr>
                                             @endif
 
                                             <tr class="border-bottom">
-                                                <td>{{ __('shop::app.customer.account.order.view.tax') }}</td>
+                                                <td>{{ __('shop::app.customer.account.order.view.tax') }}
+                                                    <span class="dash-icon">-</span>
+                                                </td>
                                                 <td>{{ core()->formatPrice($order->tax_amount, $order->order_currency_code) }}</td>
                                             </tr>
 
                                             <tr class="fw6">
-                                                <td>{{ __('shop::app.customer.account.order.view.grand-total') }}</td>
+                                                <td>{{ __('shop::app.customer.account.order.view.grand-total') }}
+                                                    <span class="dash-icon">-</span>
+                                                </td>
                                                 <td>{{ core()->formatPrice($order->grand_total, $order->order_currency_code) }}</td>
                                             </tr>
 
                                             <tr class="fw6">
-                                                <td>{{ __('shop::app.customer.account.order.view.total-paid') }}</td>
+                                                <td>{{ __('shop::app.customer.account.order.view.total-paid') }}
+                                                    <span class="dash-icon">-</span>
+                                                </td>
                                                 <td>{{ core()->formatPrice($order->grand_total_invoiced, $order->order_currency_code) }}</td>
                                             </tr>
 
                                             <tr class="fw6">
-                                                <td>{{ __('shop::app.customer.account.order.view.total-refunded') }}</td>
+                                                <td>{{ __('shop::app.customer.account.order.view.total-refunded') }}
+                                                    <span class="dash-icon">-</span>
+                                                </td>
                                                 <td>{{ core()->formatPrice($order->grand_total_refunded, $order->order_currency_code) }}</td>
                                             </tr>
 
                                             <tr class="fw6">
-                                                <td>{{ __('shop::app.customer.account.order.view.total-due') }}</td>
+                                                <td>{{ __('shop::app.customer.account.order.view.total-due') }}
+                                                    <span class="dash-icon">-</span>
+                                                </td>
                                                 <td>{{ core()->formatPrice($order->total_due, $order->order_currency_code) }}</td>
                                             </tr>
                                         <tbody>
@@ -255,34 +275,39 @@
                                         <div class="totals">
                                             <table class="sale-summary">
                                                 <tr>
-                                                    <td>{{ __('shop::app.customer.account.order.view.subtotal') }}</td>
-                                                    <td>-</td>
+                                                    <td>{{ __('shop::app.customer.account.order.view.subtotal') }}
+                                                        <span class="dash-icon">-</span>
+                                                    </td>
                                                     <td>{{ core()->formatPrice($invoice->sub_total, $order->order_currency_code) }}</td>
                                                 </tr>
 
                                                 <tr>
-                                                    <td>{{ __('shop::app.customer.account.order.view.shipping-handling') }}</td>
-                                                    <td>-</td>
+                                                    <td>{{ __('shop::app.customer.account.order.view.shipping-handling') }}
+                                                        <span class="dash-icon">-</span>
+                                                    </td>
                                                     <td>{{ core()->formatPrice($invoice->shipping_amount, $order->order_currency_code) }}</td>
                                                 </tr>
 
                                                 @if ($order->base_discount_amount > 0)
                                                     <tr>
-                                                        <td>{{ __('shop::app.customer.account.order.view.discount') }}</td>
-                                                        <td>-</td>
+                                                        <td>{{ __('shop::app.customer.account.order.view.discount') }}
+                                                            <span class="dash-icon">-</span>
+                                                        </td>
                                                         <td>{{ core()->formatPrice($order->discount_amount, $order->order_currency_code) }}</td>
                                                     </tr>
                                                 @endif
 
                                                 <tr>
-                                                    <td>{{ __('shop::app.customer.account.order.view.tax') }}</td>
-                                                    <td>-</td>
+                                                    <td>{{ __('shop::app.customer.account.order.view.tax') }}
+                                                        <span class="dash-icon">-</span>
+                                                    </td>
                                                     <td>{{ core()->formatPrice($invoice->tax_amount, $order->order_currency_code) }}</td>
                                                 </tr>
 
                                                 <tr class="fw6">
-                                                    <td>{{ __('shop::app.customer.account.order.view.grand-total') }}</td>
-                                                    <td>-</td>
+                                                    <td>{{ __('shop::app.customer.account.order.view.grand-total') }}
+                                                        <span class="dash-icon">-</span>
+                                                    </td>
                                                     <td>{{ core()->formatPrice($invoice->grand_total, $order->order_currency_code) }}</td>
                                                 </tr>
                                             </table>
@@ -391,50 +416,57 @@
                                         <div class="totals">
                                             <table class="sale-summary">
                                                 <tr>
-                                                    <td>{{ __('shop::app.customer.account.order.view.subtotal') }}</td>
-                                                    <td>-</td>
+                                                    <td>{{ __('shop::app.customer.account.order.view.subtotal') }}
+                                                        <span class="dash-icon">-</span>
+                                                    </td>
                                                     <td>{{ core()->formatPrice($refund->sub_total, $order->order_currency_code) }}</td>
                                                 </tr>
 
                                                 @if ($refund->shipping_amount > 0)
                                                     <tr>
-                                                        <td>{{ __('shop::app.customer.account.order.view.shipping-handling') }}</td>
-                                                        <td>-</td>
+                                                        <td>{{ __('shop::app.customer.account.order.view.shipping-handling') }}
+                                                            <span class="dash-icon">-</span>
+                                                        </td>
                                                         <td>{{ core()->formatPrice($refund->shipping_amount, $order->order_currency_code) }}</td>
                                                     </tr>
                                                 @endif
 
                                                 @if ($refund->discount_amount > 0)
                                                     <tr>
-                                                        <td>{{ __('shop::app.customer.account.order.view.discount') }}</td>
-                                                        <td>-</td>
+                                                        <td>{{ __('shop::app.customer.account.order.view.discount') }}
+                                                            <span class="dash-icon">-</span>
+                                                        </td>
                                                         <td>{{ core()->formatPrice($order->discount_amount, $order->order_currency_code) }}</td>
                                                     </tr>
                                                 @endif
 
                                                 @if ($refund->tax_amount > 0)
                                                     <tr>
-                                                        <td>{{ __('shop::app.customer.account.order.view.tax') }}</td>
-                                                        <td>-</td>
+                                                        <td>{{ __('shop::app.customer.account.order.view.tax') }}
+                                                            <span class="dash-icon">-</span>
+                                                        </td>
                                                         <td>{{ core()->formatPrice($refund->tax_amount, $order->order_currency_code) }}</td>
                                                     </tr>
                                                 @endif
 
                                                 <tr>
-                                                    <td>{{ __('shop::app.customer.account.order.view.adjustment-refund') }}</td>
-                                                    <td>-</td>
+                                                    <td>{{ __('shop::app.customer.account.order.view.adjustment-refund') }}
+                                                        <span class="dash-icon">-</span>
+                                                    </td>
                                                     <td>{{ core()->formatPrice($refund->adjustment_refund, $order->order_currency_code) }}</td>
                                                 </tr>
 
                                                 <tr>
-                                                    <td>{{ __('shop::app.customer.account.order.view.adjustment-fee') }}</td>
-                                                    <td>-</td>
+                                                    <td>{{ __('shop::app.customer.account.order.view.adjustment-fee') }}
+                                                        <span class="dash-icon">-</span>
+                                                    </td>
                                                     <td>{{ core()->formatPrice($refund->adjustment_fee, $order->order_currency_code) }}</td>
                                                 </tr>
 
                                                 <tr class="fw6">
-                                                    <td>{{ __('shop::app.customer.account.order.view.grand-total') }}</td>
-                                                    <td>-</td>
+                                                    <td>{{ __('shop::app.customer.account.order.view.grand-total') }}
+                                                        <span class="dash-icon">-</span>
+                                                    </td>
                                                     <td>{{ core()->formatPrice($refund->grand_total, $order->order_currency_code) }}</td>
                                                 </tr>
                                             </table>

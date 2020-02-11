@@ -14,6 +14,7 @@
     <script type="text/x-template" id="checkout-template">
         <div class="container">
             <div id="checkout" class="checkout-process row offset-lg-1 col-lg-11 col-md-12">
+
                 <h1 class="col-12">{{ __('velocity::app.checkout.checkout') }}</h1>
 
                 <div class="col-lg-7 col-md-12">
@@ -65,7 +66,7 @@
                                         type="button"
                                         class="theme-btn"
                                         @click="placeOrder()"
-                                        :disabled="disable_button"
+                                        :disabled="!isPlaceOrderEnabled"
                                         id="checkout-place-order-button">
                                         {{ __('shop::app.checkout.onepage.place-order') }}
                                     </button>
@@ -119,6 +120,7 @@
                         disable_button: false,
                         reviewComponentKey: 0,
                         summeryComponentKey: 0,
+                        isPlaceOrderEnabled: false,
                         new_billing_address: false,
                         showShippingSection: false,
                         showPaymentSection: false,
@@ -228,8 +230,14 @@
                                         document.body.style.cursor = 'wait';
                                         this.savePayment();
                                     }
+
+                                    this.isPlaceOrderEnabled = true;
+                                } else {
+                                    this.isPlaceOrderEnabled = false;
                                 }
                             });
+                        } else {
+                            this.isPlaceOrderEnabled = false;
                         }
                     },
 
@@ -372,25 +380,30 @@
                     },
 
                     placeOrder: function() {
-                        this.disable_button = true;
+                        if (this.isPlaceOrderEnabled) {
+                            this.disable_button = false;
+                            this.isPlaceOrderEnabled = false;
 
-                        this.$http.post("{{ route('shop.checkout.save-order') }}", {'_token': "{{ csrf_token() }}"})
-                        .then(function(response) {
-                            if (response.data.success) {
-                                if (response.data.redirect_url) {
-                                    window.location.href = response.data.redirect_url;
-                                } else {
-                                    window.location.href = "{{ route('shop.checkout.success') }}";
+                            this.$http.post("{{ route('shop.checkout.save-order') }}", {'_token': "{{ csrf_token() }}"})
+                            .then(function(response) {
+                                if (response.data.success) {
+                                    if (response.data.redirect_url) {
+                                        window.location.href = response.data.redirect_url;
+                                    } else {
+                                        window.location.href = "{{ route('shop.checkout.success') }}";
+                                    }
                                 }
-                            }
-                        })
-                        .catch(error => {
+                            })
+                            .catch(error => {
+                                this.disable_button = true;
+
+                                window.flashMessages = [{'type': 'alert-error', 'message': "{{ __('shop::app.common.error') }}" }];
+
+                                this.$root.addFlashMessages();
+                            })
+                        } else {
                             this.disable_button = true;
-
-                            window.flashMessages = [{'type': 'alert-error', 'message': "{{ __('shop::app.common.error') }}" }];
-
-                            this.$root.addFlashMessages();
-                        })
+                        }
                     },
 
                     handleErrorResponse: function(response, scope) {

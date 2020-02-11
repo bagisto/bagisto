@@ -6,7 +6,7 @@
 <div class="container-fluid reviews-container">
     @if ($reviewCount)
         <card-list-header
-            heading="Customer Reviews"
+            heading="{{ __('velocity::app.home.customer-reviews') }}"
         ></card-list-header>
 
         <div class="row">
@@ -27,7 +27,7 @@
                                     </h4>
 
                                     <div class="product-info fs16">
-                                        <span>Reviewed- <a class="remove-decoration link-color" href="{{ route('shop.productOrCategory.index', $review->product->url_key) }}">{{$review->product->name}}</a></span>
+                                        <span>{{ __('velocity::app.products.reviewed') }}- <a class="remove-decoration link-color" href="{{ route('shop.productOrCategory.index', $review->product->url_key) }}">{{$review->product->name}}</a></span>
                                     </div>
                                 </div>
                             </div>
