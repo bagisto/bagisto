@@ -48,14 +48,15 @@
             <country-state></country-state>
 
             <div class="control-group">
-                <span class="checkbox">
+                <label for="zip_code">{{ __('admin::app.configuration.tax-rates.is_zip') }}</label>
+
+                <label class="switch">
                     <input type="checkbox" id="is_zip" name="is_zip" v-model="is_zip">
-                    <label class="checkbox-view" for="is_zip"></label>
-                    {{ __('admin::app.settings.tax-rates.is_zip') }}
-                </span>
+                    <span class="slider round"></span>
+                </label>
             </div>
 
-            <div v-if="!is_zip" class="control-group" :class="[errors.has('zip_code') ? 'has-error' : '']" id="zip_code">
+            <div v-if="! is_zip" class="control-group" :class="[errors.has('zip_code') ? 'has-error' : '']" id="zip_code">
                 <label for="zip_code" class="required">{{ __('admin::app.configuration.tax-rates.zip_code') }}</label>
                 <input v-validate="'required'" class="control" id="zip_code" name="zip_code" data-vv-as="&quot;{{ __('admin::app.configuration.tax-rates.zip_code') }}&quot;" value="{{ old('zip_code') }}"/>
                 <span class="control-error" v-if="errors.has('zip_code')">@{{ errors.first('zip_code') }}</span>

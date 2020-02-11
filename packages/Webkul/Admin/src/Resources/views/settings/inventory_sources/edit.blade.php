@@ -69,11 +69,11 @@
 
                             <div class="control-group">
                                 <label for="status">{{ __('admin::app.settings.inventory_sources.status') }}</label>
-                                <span class="checkbox">
+
+                                <label class="switch">
                                     <input type="checkbox" id="status" name="status" value="{{ $inventorySource->status }}" {{ $inventorySource->status ? 'checked' : '' }}>
-                                    <label class="checkbox-view" for="status"></label>
-                                    {{ __('admin::app.settings.inventory_sources.source-is-active') }}
-                                </span>
+                                    <span class="slider round"></span>
+                                </label>
                             </div>
 
                         </div>

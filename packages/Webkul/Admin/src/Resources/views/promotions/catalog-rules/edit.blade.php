@@ -56,11 +56,11 @@
 
                                 <div class="control-group">
                                     <label for="status">{{ __('admin::app.promotions.catalog-rules.status') }}</label>
-                                    <span class="checkbox">
+                                    
+                                    <label class="switch">
                                         <input type="checkbox" id="status" name="status" value="{{ $catalogRule->status }}" {{ $catalogRule->status ? 'checked' : '' }}>
-                                        <label class="checkbox-view" for="status"></label>
-                                        {{ __('admin::app.promotions.catalog-rules.is-active') }}
-                                    </span>
+                                        <span class="slider round"></span>
+                                    </label>
                                 </div>
 
                                 <div class="control-group" :class="[errors.has('channels[]') ? 'has-error' : '']">
