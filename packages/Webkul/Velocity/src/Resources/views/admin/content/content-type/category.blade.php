@@ -33,10 +33,7 @@
        $linkTarget = isset($locale) ? (old($locale)['link_target'] ?? (isset($content) ? $content->translate($locale)['link_target'] : '')) : '';
     @endphp
 
-    <select
-        class="control"
-        id="link_target"
-        name="{{ isset($locale) ? $locale . '[link_target]': 'link_target' }}">
+    <select class="control" id="link_target" name="{{$locale}}[link_target]" value="">
         <option value="0">
             {{ __('velocity::app.admin.contents.self') }}
         </option>
