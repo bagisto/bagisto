@@ -34,6 +34,7 @@ class CoreConfigRepository extends Repository
         if ($data['locale'] || $data['channel']) {
            $locale = $data['locale'];
            $channel = $data['channel'];
+
            unset($data['locale']);
            unset($data['channel']);
         }
@@ -45,21 +46,12 @@ class CoreConfigRepository extends Repository
             foreach ($recurssiveData as $fieldName => $value) {
                 $field = core()->getConfigField($fieldName);
 
-                $channel_based = false;
-                $locale_based = false;
+                $channelBased = isset($field['channel_based']) && $field['channel_based'] ? true : false;
 
-                if (isset($field['channel_based']) && $field['channel_based']) {
-                    $channel_based = true;
-                }
+                $localeBased = isset($field['locale_based']) && $field['locale_based'] ? true : false;
 
-                if (isset($field['locale_based']) && $field['locale_based']) {
-                    $locale_based = true;
-                }
-
-                if (getType($value) == 'array') {
-                    if(! isset($value['delete'])) {
-                        $value = implode(",", $value);
-                    }
+                if (getType($value) == 'array' && ! isset($value['delete'])) {
+                    $value = implode(",", $value);
                 }
 
                 if (isset($field['channel_based']) && $field['channel_based']) {
@@ -69,8 +61,7 @@ class CoreConfigRepository extends Repository
                             ->where('locale_code', $locale)
                             ->where('channel_code', $channel)
                             ->get();
-                    }
-                    else {
+                    } else {
                         $coreConfigValue = $this->model
                             ->where('code', $fieldName)
                             ->where('channel_code', $channel)
@@ -90,30 +81,29 @@ class CoreConfigRepository extends Repository
                 }
 
                 if (request()->hasFile($fieldName)) {
-                    $dir = 'configuration';
-                    $value = request()->file($fieldName)->store($dir);
+                    $value = request()->file($fieldName)->store('configuration');
                 }
 
                 if (! count($coreConfigValue)) {
                     $this->model->create([
-                        'code' => $fieldName,
-                        'value' => $value,
-                        'locale_code' => $locale_based ? $locale : null,
-                        'channel_code' => $channel_based ? $channel : null
-                    ]);
+                            'code' => $fieldName,
+                            'value' => $value,
+                            'locale_code' => $localeBased ? $locale : null,
+                            'channel_code' => $channelBased ? $channel : null
+                        ]);
                 } else {
-                    $updataData['code'] = $fieldName;
-                    $updataData['value'] = $value;
-                    $updataData['locale_code'] = $locale_based ? $locale : null;
-                    $updataData['channel_code'] = $channel_based ? $channel : null;
-
                     foreach ($coreConfigValue as $coreConfig) {
                         Storage::delete($coreConfig['value']);
 
                         if(isset($value['delete'])) {
                             $this->model->destroy($coreConfig['id']);
                         } else {
-                            $coreConfig->update($updataData);
+                            $coreConfig->update([
+                                    'code' => $fieldName,
+                                    'value' => $value,
+                                    'locale_code' => $localeBased ? $locale : null,
+                                    'channel_code' => $channelBased ? $channel : null
+                                ]);
                         }
                     }
                 }
@@ -127,13 +117,15 @@ class CoreConfigRepository extends Repository
      * @return array
      */
     public function recuressiveArray(array $formData, $method) {
-        static $data =[];
-        static $recuressiveArrayData =[];
+        static $data = [];
+        static $recuressiveArrayData = [];
 
         foreach ($formData as $form => $formValue) {
             $value = $method . '.' . $form;
+
             if (is_array($formValue)) {
                 $dim = $this->countDim($formValue);
+                
                 if ($dim > 1) {
                     $this->recuressiveArray($formValue, $value);
                 } else if ($dim == 1) {
@@ -166,8 +158,7 @@ class CoreConfigRepository extends Repository
     {
         if (is_array(reset($array))) {
             $return = $this->countDim(reset($array)) + 1;
-        }
-        else {
+        } else {
             $return = 1;
         }
 
