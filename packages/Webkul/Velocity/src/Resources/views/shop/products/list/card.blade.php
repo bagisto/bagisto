@@ -8,11 +8,6 @@
         .list-card .wishlist-icon i {
             padding-left: 10px;
         }
-        
-        .product-price span:first-child, .product-price span:last-child {
-            font-size: 18px;
-            font-weight: 600;
-        }
     </style>
 @endpush
 
