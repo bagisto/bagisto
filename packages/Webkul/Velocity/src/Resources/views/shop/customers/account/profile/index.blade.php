@@ -21,6 +21,7 @@
         .table td {
             padding: 5px;
             border: unset;
+            display: table-cell !important;
         }
         .remove-icon {
             right: 15px;
@@ -105,7 +106,7 @@
 
         <button
             type="submit"
-            class="theme-btn mb20" @click="showModal('deleteProfile')" >
+            class="theme-btn ml10 mb20" @click="showModal('deleteProfile')" >
             {{ __('shop::app.customer.account.address.index.delete') }}
         </button>
 
