@@ -47,6 +47,7 @@ window.eventBus = new Vue();
 
 $(document).ready(function () {
     // define a mixin object
+    Vue.mixin(require('./UI/components/trans'));
     Vue.mixin({
         data: function () {
             return {

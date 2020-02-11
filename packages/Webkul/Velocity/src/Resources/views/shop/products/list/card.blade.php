@@ -3,6 +3,14 @@
 @inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar')
 {{--  @include('shop::UI.product-quick-view')  --}}
 
+@push('css')
+    <style type="text/css">
+        .list-card .wishlist-icon i {
+            padding-left: 10px;
+        }
+    </style>
+@endpush
+
 @php
     if (isset($checkmode) && $checkmode && $toolbarHelper->getCurrentMode() == "list") {
         $list = true;
@@ -42,16 +50,15 @@
                         @include ('shop::products.price', ['product' => $product])
                     </div>
 
-                    @if( $totalReviews )
-                        <div class="product-rating">
-                            <star-ratings ratings="{{ $avgRatings }}"></star-ratings>
-                            <span>{{ $totalReviews }} Ratings</span>
-                        </div>
-                    @endif
+                    <div class="product-rating">
+                        <star-ratings ratings="{{ $avgRatings }}"></star-ratings>
+                        <span>{{ __('velocity::app.products.ratings', ['totalRatings' => $totalReviews ]) }}</span>
+                    </div>
 
                     <div class="cart-wish-wrap mt5">
                         @include ('shop::products.add-to-cart', [
                             'product' => $product,
+                            'addWishlistClass' => 'pl10',
                             'addToCartBtnClass' => 'medium-padding'
                         ])
                     </div>
@@ -92,7 +99,9 @@
                 @if ($totalReviews)
                     <div class="product-rating col-12 no-padding">
                         <star-ratings ratings="{{ $avgRatings }}"></star-ratings>
-                        <span class="align-top">{{ $totalReviews }} Ratings</span>
+                        <span class="align-top">
+                            {{ __('velocity::app.products.ratings', ['totalRatings' => $totalReviews ]) }}
+                        </span>
                     </div>
                 @else
                     <div class="product-rating col-12 no-padding">

@@ -221,7 +221,7 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
             'image' => $productImage,
             'slug' => $product->url_key,
             'priceHTML' => view('shop::products.price', ['product' => $product])->render(),
-            'totalReviews' => $totalReviews,
+            'totalReviews' => trans('velocity::app.products.ratings', [ 'totalRatings' => $totalReviews]),
             'avgRating' => $avgRatings,
             'firstReviewText' => trans('velocity::app.products.be-first-review'),
             'addToCartHtml' => view('shop::products.add-to-cart', [

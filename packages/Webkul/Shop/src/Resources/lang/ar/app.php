@@ -80,7 +80,8 @@ return [
         'ratingreviews' => ':rating تقيمات & :review باء-الاستعراضات',
         'star' => 'نجم',
         'percentage' => ':percentage %',
-        'id-star' => 'نجم'
+        'id-star' => 'نجم',
+        'name' => 'اسم',
     ],
 
     'customer' => [
@@ -203,6 +204,12 @@ return [
 
                 'create' => [
                     'page-title' => 'إضاف عنوان',
+                    'company_name' => 'اسم الشركة',
+                    'first_name' => 'الاسم الاول',
+                    'last_name' => 'الكنية',
+                    // Vat Id num
+                    'vat_id' => 'رقم تعريف الضريبة على القيمة المضافة',
+                    'street-address' => 'عنوان الشارع',
                     'title' => 'أضف العنوان',
                     'address1' => 'العنوان سطر 1',
                     'country' => 'البلد',

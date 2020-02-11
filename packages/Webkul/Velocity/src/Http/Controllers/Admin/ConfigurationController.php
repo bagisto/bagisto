@@ -2,15 +2,15 @@
 
 namespace Webkul\Velocity\Http\Controllers\Admin;
 
-use DB;
 use Illuminate\Support\Facades\Storage;
-use Webkul\Velocity\Repositories\MetadataRepository;
+use Illuminate\Support\Str;
 use Webkul\Velocity\Repositories\VelocityMetadataRepository;
 
 /**
  * Category Controller
  *
  * @author    Shubham Mehrotra <shubhammehrotra.symfony@webkul.com> @shubhwebkul
+ * @author    Vivek Sharma <viveksh047@webkul.com> @vivek-webkul
  * @copyright 2019 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 
@@ -33,14 +33,17 @@ class ConfigurationController extends Controller
         VelocityMetadataRepository $velocityMetadataRepository
     ) {
         $this->_config = request('_config');
+        
+        $this->velocityHelper = app('Webkul\Velocity\Helpers\Helper');
 
         $this->velocityMetaDataRepository = $velocityMetadataRepository;
     }
 
     public function renderMetaData()
     {
-        $velocityHelper = app('Webkul\Velocity\Helpers\Helper');
-        $velocityMetaData = $velocityHelper->getVelocityMetaData();
+        $velocityMetaData = $this->velocityHelper->getVelocityMetaData();
+
+        $velocityMetaData->advertisement = $this->manageAddImages(json_decode($velocityMetaData->advertisement, true));
 
         return view($this->_config['view'], [
             'metaData' => $velocityMetaData
@@ -60,11 +63,15 @@ class ConfigurationController extends Controller
             ];
         }
 
+        $velocityMetaData = $this->velocityMetaDataRepository->findorFail($id);
+
+        $advertisement = json_decode($velocityMetaData->advertisement, true);
+
         $params['advertisement'] = [];
 
-        foreach ($params['images'] as $index => $advertisement) {
-            if ($advertisement['image_1'] !== "") {
-                $params['advertisement'][$index] = $this->uploadAdvertisementImages($advertisement, $index);
+        if ( isset($params['images'])) {
+            foreach ($params['images'] as $index => $images) {
+                $params['advertisement'][$index] =  $this->uploadAdvertisementImages($images, $index, $advertisement);
             }
         }
 
@@ -92,24 +99,42 @@ class ConfigurationController extends Controller
         return redirect()->route($this->_config['redirect']);
     }
 
-    public function uploadAdvertisementImages($data, $index)
+    public function uploadAdvertisementImages($data, $index, $advertisement)
     {
-        $type = 'images';
-        $request = request();
+        $save_image = [];
 
-        $advertisement = [];
         foreach ($data as $imageId => $image) {
-            $file = $type . '.' . $index . '.' . $imageId;
-            $dir = "velocity/$type";
+            $file = 'images.' . $index . '.' . $imageId;
+            $dir = 'velocity/images';
 
-            if ($request->hasFile($file)) {
-                Storage::delete($dir . $file);
+            if (Str::contains($imageId, 'image_')) {
+                if (request()->hasFile($file) && $image) {
+                    Storage::delete($dir . $file);
 
-                $advertisement[$imageId] = $request->file($file)->store($dir);
+                    $save_image[substr($imageId, 6, 1)] = request()->file($file)->store($dir);
+                }
+            } else {
+                if ( isset($advertisement[$index][$imageId]) && $advertisement[$index][$imageId]) {
+                    $save_image[$imageId] = $advertisement[$index][$imageId];
+                    unset($advertisement[$index][$imageId]);
+                }
+                
+                if (request()->hasFile($file) && isset($advertisement[$index][$imageId])) {
+                    Storage::delete($advertisement[$index][$imageId]);
+
+                    $save_image[$imageId] = request()->file($file)->store($dir);
+                }
             }
         }
 
-        return $advertisement;
+        if ( isset($advertisement[$index]) && $advertisement[$index]) {
+            foreach ($advertisement[$index] as $imageId) {
+                Storage::delete($imageId);
+                $save_image[$imageId] = '';
+            }
+        }
+
+        return $save_image;
     }
 
     public function uploadImage($data, $index)
@@ -128,5 +153,24 @@ class ConfigurationController extends Controller
         }
 
         return $image;
+    }
+
+    public function manageAddImages($add_images)
+    {
+        $images_path = [];
+        foreach ($add_images as $add_id => $images) {
+            foreach ($images as $key => $image) {
+                if ( $image ) {
+                    $images_path[$add_id][] = [
+                        'id' => $key,
+                        'type' => null,
+                        'path' => $image,
+                        'url' => Storage::url($image)
+                    ];
+                }
+            }
+        }
+        
+        return $images_path;
     }
 }

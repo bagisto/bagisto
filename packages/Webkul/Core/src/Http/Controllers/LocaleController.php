@@ -133,7 +133,7 @@ class LocaleController extends Controller
         $locale = $this->localeRepository->findOrFail($id);
 
         if ($this->localeRepository->count() == 1) {
-            session()->flash('error', trans('admin::app.settings.locales.last-delete-error'));
+            session()->flash('warning', trans('admin::app.settings.locales.last-delete-error'));
         } else {
             try {
                 Event::dispatch('core.locale.delete.before', $id);

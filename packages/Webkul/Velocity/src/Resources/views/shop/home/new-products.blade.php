@@ -21,7 +21,7 @@
                         </style>
                     @endpush
 
-                    <div class="row">
+                    <div class="row ltr">
                         <div class="col-9 no-padding carousel-products vc-full-screen with-recent-viewed" v-if="!isMobileDevice">
                             <carousel-component
                                 slides-per-page="5"

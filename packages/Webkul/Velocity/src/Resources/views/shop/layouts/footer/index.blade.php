@@ -8,7 +8,9 @@
             @include('shop::layouts.footer.top-brands')
         @endif --}}
 
-        @include('shop::layouts.footer.copy-right')
+        @if (core()->getConfigData('general.content.footer.footer_toggle'))
+            @include('shop::layouts.footer.copy-right')
+        @endif
     </div>
 </div>
 
