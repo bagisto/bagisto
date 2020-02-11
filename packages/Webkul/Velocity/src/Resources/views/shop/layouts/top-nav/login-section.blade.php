@@ -75,15 +75,15 @@
 
                         <ul type="none">
                             <li>
+                                <a href="{{ route('customer.profile.index') }}" class="unset">{{ __('shop::app.header.profile') }}</a>
+                            </li>
+
+                            <li>
                                 <a href="{{ route('customer.orders.index') }}" class="unset">{{ __('velocity::app.shop.general.orders') }}</a>
                             </li>
 
                             <li>
                                 <a href="{{ route('customer.wishlist.index') }}" class="unset">{{ __('shop::app.header.wishlist') }}</a>
-                            </li>
-
-                            <li>
-                                <a href="{{ route('customer.profile.index') }}" class="unset">{{ __('shop::app.header.profile') }}</a>
                             </li>
 
                             <li>

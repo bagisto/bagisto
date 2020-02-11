@@ -14,12 +14,12 @@
                 $subMenuCollection = [];
 
                 try {
+                    $subMenuCollection['profile'] = $menuItem['children']['profile'];
                     $subMenuCollection['orders'] = $menuItem['children']['orders'];
                     $subMenuCollection['downloadables'] = $menuItem['children']['downloadables'];
                     $subMenuCollection['wishlist'] = $menuItem['children']['wishlist'];
                     $subMenuCollection['reviews'] = $menuItem['children']['reviews'];
                     $subMenuCollection['address'] = $menuItem['children']['address'];
-                    $subMenuCollection['profile'] = $menuItem['children']['profile'];
                 } catch (\Exception $exception) {
                     $subMenuCollection = $menuItem['children'];
                 }
