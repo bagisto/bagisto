@@ -165,7 +165,11 @@ class CustomerController extends Controller
             'date_of_birth' => 'date|before:today',
         ]);
 
-        $this->customerRepository->update(request()->all(), $id);
+        $data = request()->all();
+
+        $data['status'] = ! isset($data['status']) ? 0 : 1;
+
+        $this->customerRepository->update($data, $id);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Customer']));
 
