@@ -1,23 +1,3 @@
-@php
-    $activeShippings = [];
-    $activePayments = [];
-
-    $shippings = core()->getConfigData('sales.carriers');
-    $payments = core()->getConfigData('sales.paymentmethods');
-
-    foreach($shippings as $ship) {
-        if ($ship['active'] == "true") {
-            array_push($activeShippings, $ship['title']);
-        }
-    }
-
-    foreach($payments as $payment) {
-        if ($payment['active'] == "true") {
-            array_push($activePayments, $payment['title']);
-        }
-    }
-@endphp
-
 <div class="col-lg-4 col-md-12 col-sm-12 footer-rt-content">
     <div class="row">
         <div class="mb5 col-12">
@@ -25,9 +5,9 @@
         </div>
 
         <div class="payment-methods col-12">
-            @foreach($activePayments as $paymentMethod)
+            @foreach(\Webkul\Payment\Facades\Payment::getPaymentMethods() as $method)
                 <div class="method-sticker">
-                    {{ $paymentMethod}}
+                    {{ $method['method_title'] }}
                 </div>
             @endforeach
         </div>
@@ -39,9 +19,9 @@
         </div>
 
         <div class="shipping-methods col-12">
-            @foreach($activeShippings as $shippingMethod)
+            @foreach(\Webkul\Shipping\Facades\Shipping::getShippingMethods() as $method)
                 <div class="method-sticker">
-                    {{ $shippingMethod}}
+                    {{ $method['method_title'] }}
                 </div>
             @endforeach
         </div>
