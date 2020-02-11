@@ -107,4 +107,29 @@ class Shipping
 
         return $rates;
     }
+
+    /**
+     * Returns active shipping methods
+     *
+     * @return array
+     */
+    public function getShippingMethods()
+    {
+        $methods = [];
+
+        foreach (Config::get('carriers') as $shippingMethod) {
+            $object = new $shippingMethod['class'];
+
+            if (! $object->isAvailable())
+                continue;
+
+            $methods[] = [
+                'method' => $object->getCode(),
+                'method_title' => $object->getTitle(),
+                'description' => $object->getDescription()
+            ];
+        }
+
+        return $methods;
+    }
 }
