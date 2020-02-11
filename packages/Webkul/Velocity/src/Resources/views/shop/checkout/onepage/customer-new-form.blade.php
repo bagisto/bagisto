@@ -60,7 +60,7 @@
             </span>
         </div>
 
-        <div :class="`col-12 form-field ${errors.has('address-form.shipping[address1][]') ? 'has-error' : ''}`">
+        <div :class="`col-12 form-field ${errors.has('address-form.shipping[address1][]') ? 'has-error' : ''}`" style="margin-bottom: 0;">
             <label for="shipping_address_0" class="mandatory">
                 {{ __('shop::app.checkout.onepage.address1') }}
             </label>
@@ -83,19 +83,19 @@
             core()->getConfigData('customer.settings.address.street_lines')
             && core()->getConfigData('customer.settings.address.street_lines') > 1
         )
-            <div class="col-12 form-field">
-                @for ($i = 1; $i < core()->getConfigData('customer.settings.address.street_lines'); $i++)
+            @for ($i = 1; $i < core()->getConfigData('customer.settings.address.street_lines'); $i++)
+                <div class="col-12 form-field" style="margin-top: 10px; margin-bottom: 0">
                     <input
                         type="text"
                         class="control"
                         id="shipping_address_{{ $i }}"
                         name="shipping[address1][{{ $i }}]"
                         v-model="address.shipping.address1[{{$i}}]" />
-                @endfor
-            </div>
+                </div>
+            @endfor
         @endif
 
-        <div :class="`col-12 form-field ${errors.has('address-form.shipping[city]') ? 'has-error' : ''}`">
+        <div :class="`col-12 form-field ${errors.has('address-form.shipping[city]') ? 'has-error' : ''}`" style="margin-top: 15px;">
             <label for="shipping[city]" class="mandatory">
                 {{ __('shop::app.checkout.onepage.city') }}
             </label>
@@ -321,7 +321,7 @@
             </span>
         </div>
 
-        <div :class="`col-12 form-field ${errors.has('address-form.billing[address1][]') ? 'has-error' : ''}`">
+        <div :class="`col-12 form-field ${errors.has('address-form.billing[address1][]') ? 'has-error' : ''}`" style="margin-bottom: 0;">
             <label for="billing_address_0" class="mandatory">
                 {{ __('shop::app.checkout.onepage.address1') }}
             </label>
@@ -345,19 +345,19 @@
             core()->getConfigData('customer.settings.address.street_lines')
             && core()->getConfigData('customer.settings.address.street_lines') > 1
         )
-            <div class="col-12 form-field" style="margin-top: -25px;">
-                @for ($i = 1; $i < core()->getConfigData('customer.settings.address.street_lines'); $i++)
-                    <input
-                        type="text"
-                        class="control"
-                        id="billing_address_{{ $i }}"
-                        name="billing[address1][{{ $i }}]"
-                        v-model="address.billing.address1[{{$i}}]" />
-                @endfor
-            </div>
+            @for ($i = 1; $i < core()->getConfigData('customer.settings.address.street_lines'); $i++)
+                <div class="col-12 form-field" style="margin-top: 10px; margin-bottom: 0">
+                        <input
+                            type="text"
+                            class="control"
+                            id="billing_address_{{ $i }}"
+                            name="billing[address1][{{ $i }}]"
+                            v-model="address.billing.address1[{{$i}}]" />
+                </div>
+            @endfor
         @endif
 
-        <div :class="`col-12 form-field ${errors.has('address-form.billing[city]') ? 'has-error' : ''}`">
+        <div :class="`col-12 form-field ${errors.has('address-form.billing[city]') ? 'has-error' : ''}`" style="margin-top: 15px;">
             <label for="billing[city]" class="mandatory">
                 {{ __('shop::app.checkout.onepage.city') }}
             </label>
