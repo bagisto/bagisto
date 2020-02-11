@@ -50,10 +50,12 @@
                         @include ('shop::products.price', ['product' => $product])
                     </div>
 
-                    <div class="product-rating">
-                        <star-ratings ratings="{{ $avgRatings }}"></star-ratings>
-                        <span>{{ __('velocity::app.products.ratings', ['totalRatings' => $totalReviews ]) }}</span>
-                    </div>
+                    @if( $totalReviews )
+                        <div class="product-rating">
+                            <star-ratings ratings="{{ $avgRatings }}"></star-ratings>
+                            <span>{{ $totalReviews }} Ratings</span>
+                        </div>
+                    @endif
 
                     <div class="cart-wish-wrap mt5">
                         @include ('shop::products.add-to-cart', [
