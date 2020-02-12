@@ -30,16 +30,7 @@ return [
             ], [
                 'name' => 'active',
                 'title' => 'admin::app.admin.system.status',
-                'type' => 'select',
-                'options' => [
-                    [
-                        'title' => 'Active',
-                        'value' => true
-                    ], [
-                        'title' => 'Inactive',
-                        'value' => false
-                    ]
-                ],
+                'type' => 'boolean',
                 'validation' => 'required',
                 'channel_based' => false,
                 'locale_based' => true
@@ -85,16 +76,7 @@ return [
             ], [
                 'name' => 'active',
                 'title' => 'admin::app.admin.system.status',
-                'type' => 'select',
-                'options' => [
-                    [
-                        'title' => 'Active',
-                        'value' => true
-                    ], [
-                        'title' => 'Inactive',
-                        'value' => false
-                    ]
-                ],
+                'type' => 'boolean',
                 'validation' => 'required',
                 'channel_based' => false,
                 'locale_based' => true
@@ -146,32 +128,14 @@ return [
             ],  [
                 'name' => 'active',
                 'title' => 'admin::app.admin.system.status',
-                'type' => 'select',
-                'options' => [
-                    [
-                        'title' => 'Active',
-                        'value' => true
-                    ], [
-                        'title' => 'Inactive',
-                        'value' => false
-                    ]
-                ],
+                'type' => 'boolean',
                 'validation' => 'required',
                 'channel_based' => false,
                 'locale_based' => true
             ], [
                 'name' => 'sandbox',
                 'title' => 'admin::app.admin.system.sandbox',
-                'type' => 'select',
-                'options' => [
-                    [
-                        'title' => 'Active',
-                        'value' => true
-                    ], [
-                        'title' => 'Inactive',
-                        'value' => false
-                    ]
-                ],
+                'type' => 'boolean',
                 'validation' => 'required',
                 'channel_based' => false,
                 'locale_based' => true
