@@ -6,12 +6,14 @@ use Faker\Generator as Faker;
 use Illuminate\Support\Facades\DB;
 use Webkul\Sales\Models\OrderPayment;
 
-$factory->define(OrderPayment::class, function (Faker $faker) {
-    $now = date("Y-m-d H:i:s");
+$factory->define(OrderPayment::class, function (Faker $faker, array $attributes) {
+
+    if (!array_key_exists('order_id', $attributes)) {
+        throw new InvalidArgumentException('order_id must be provided.');
+    }
 
     return [
-        'created_at' => $now,
-        'updated_at' => $now,
+        'method' => 'cashondelivery',
     ];
 });
 

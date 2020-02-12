@@ -49,6 +49,8 @@ $factory->define(Order::class, function (Faker $faker) {
         'channel_id'                => 1,
         'channel_type'              => Channel::class,
         'cart_id'                   => 0,
+        'shipping_method' => 'free_free',
+        'shipping_title' => 'Free Shipping',
     ];
 });
 
