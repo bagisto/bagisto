@@ -102,7 +102,7 @@
 
     <script type="text/x-template" id="content-type-template">
         <div>
-            <div class="control-group" :class="[errors.has('custom_title') ? 'has-error' : '']">
+            {{-- <div class="control-group" :class="[errors.has('custom_title') ? 'has-error' : '']">
                 <label for="custom_title">
                     {{ __('velocity::app.admin.contents.content.custom-title') }}
                 </label>
@@ -118,7 +118,7 @@
                 <input type="text" v-validate="'max:100'" class="control" id="custom_heading" name="custom_heading" value="" data-vv-as="&quot;{{ __('velocity::app.admin.contents.content.custom-heading') }}&quot;"/>
 
                 <span class="control-error" v-if="errors.has('custom_heading')">@{{ errors.first('custom_heading') }}</span>
-            </div>
+            </div> --}}
 
             <div class="control-group" :class="[errors.has('content_type') ? 'has-error' : '']">
                 <label for="content_type" class="required">{{ __('velocity::app.admin.contents.content.content-type') }}</label>

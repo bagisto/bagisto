@@ -203,14 +203,22 @@
                         if (scope == 'address-form') {
                             let form = $(document).find('form[data-vv-scope=address-form]');
 
+                            // validate that if all the field contains some value
                             if (form) {
                                 form.find(':input').each((index, element) => {
                                     let value = $(element).val();
 
-                                    if (value == "") {
+                                    if (value == "" && element.id != 'billing[company_name]' && element.id != 'shipping[company_name]') {
                                         isManualValidationFail = true;
                                     }
                                 });
+                            }
+
+                            // validate that if customer wants to use different shipping address
+                            if (this.address.billing.use_for_shipping) {
+                                if (this.address.shipping.address_id) {
+                                    isManualValidationFail = true;
+                                }
                             }
                         }
 
@@ -317,6 +325,7 @@
 
                                 shippingMethods = response.data.shippingMethods;
 
+                                this.validateForm('shipping-form');
                                 this.getOrderSummary();
                             })
                             .catch(error => {
@@ -347,6 +356,7 @@
                                     this.savePayment();
                                 }
 
+                                this.validateForm('payment-form');
                                 this.getOrderSummary();
                             })
                             .catch(error => {
@@ -427,17 +437,21 @@
 
                     newBillingAddress: function() {
                         this.new_billing_address = true;
+                        this.isPlaceOrderEnabled = false;
                     },
 
                     newShippingAddress: function() {
                         this.new_shipping_address = true;
+                        this.isPlaceOrderEnabled = false;
                     },
 
                     backToSavedBillingAddress: function() {
+                        this.isPlaceOrderEnabled = true;
                         this.new_billing_address = false;
                     },
 
                     backToSavedShippingAddress: function() {
+                        this.isPlaceOrderEnabled = true;
                         this.new_shipping_address = false;
                     },
                 }

@@ -263,6 +263,8 @@ body {
 
     .locale-switcher {
         padding-left: 5px;
+        position: relative;
+        padding-right: 15px;
     }
 
     .dropdown {
@@ -270,7 +272,7 @@ body {
 
         .select-icon-container {
             .select-icon {
-                right: -8px;
+                right: 0;
             }
         }
     }
