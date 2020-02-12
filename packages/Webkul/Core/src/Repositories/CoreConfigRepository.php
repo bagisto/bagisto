@@ -40,7 +40,6 @@ class CoreConfigRepository extends Repository
         }
 
         foreach ($data as $method => $fieldData) {
-
             $recurssiveData = $this->recuressiveArray($fieldData , $method);
 
             foreach ($recurssiveData as $fieldName => $value) {
