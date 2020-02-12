@@ -43,9 +43,7 @@ class ConfigurationController extends Controller
     {
         $velocityMetaData = $this->velocityHelper->getVelocityMetaData();
 
-        if ( $velocityMetaData->advertisement ) {
-            $velocityMetaData->advertisement = $this->manageAddImages(json_decode($velocityMetaData->advertisement, true));    
-        }
+        $velocityMetaData->advertisement = $this->manageAddImages(json_decode($velocityMetaData->advertisement, true));
 
         return view($this->_config['view'], [
             'metaData' => $velocityMetaData
