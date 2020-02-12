@@ -204,22 +204,23 @@
                             let form = $(document).find('form[data-vv-scope=address-form]');
 
                             // validate that if all the field contains some value
-                            if (form) {
-                                form.find(':input').each((index, element) => {
-                                    let value = $(element).val();
+                            var requiredField = ['first_name', 'last_name', 'email', 'address1', 'city', 'state', 'postcode', 'phone', 'country'];
 
-                                    if (value == "" && element.id != 'billing[company_name]' && element.id != 'shipping[company_name]') {
-                                        isManualValidationFail = true;
-                                    }
-                                });
-                            }
-
-                            // validate that if customer wants to use different shipping address
-                            if (this.address.billing.use_for_shipping) {
-                                if (this.address.shipping.address_id) {
+                            requiredField.forEach(field => {
+                                if (! this.address.billing[field]) {
                                     isManualValidationFail = true;
                                 }
-                            }
+
+                                if (this.address.billing.use_for_shipping) {
+                                    if (this.address.shipping.address_id) {
+                                        isManualValidationFail = true;
+                                    }
+                                } else {
+                                    if (! this.address.shipping[field]) {
+                                        isManualValidationFail = true;
+                                    }
+                                }
+                            });
                         }
 
                         if (!isManualValidationFail) {

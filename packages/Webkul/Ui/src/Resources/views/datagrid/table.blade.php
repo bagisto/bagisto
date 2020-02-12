@@ -297,7 +297,7 @@
                         }
 
                         if (this.type == 'string') {
-                            this.formURL(this.columnOrAlias, this.stringCondition, this.stringValue, label)
+                            this.formURL(this.columnOrAlias, this.stringCondition, encodeURIComponent(this.stringValue), label)
                         } else if (this.type == 'number') {
                             indexConditions = true;
 

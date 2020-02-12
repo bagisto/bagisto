@@ -73,11 +73,11 @@
 
                             <div class="control-group">
                                 <label for="status">{{ __('admin::app.users.users.status') }}</label>
-                                <span class="checkbox">
-                                    <input type="checkbox" id="status" name="status" value="1">
-                                    <label class="checkbox-view" for="status"></label>
-                                    {{ __('admin::app.users.users.account-is-active') }}
-                                </span>
+                               
+                                <label class="switch">
+                                    <input type="checkbox" id="status" name="status" value="1" {{ old('status') ? 'checked' : '' }}>
+                                    <span class="slider round"></span>
+                                </label>
                             </div>
                         </div>
                     </accordian>

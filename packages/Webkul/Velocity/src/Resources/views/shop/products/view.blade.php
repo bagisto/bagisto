@@ -21,6 +21,10 @@
 
 @push('css')
     <style type="text/css">
+        .related-products {
+            width: 100%;
+        }
+        
         .recently-viewed {
             margin-top: 20px;
         }
