@@ -14,5 +14,7 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
         Route::get('/category-details', 'ShopController@categoryDetails')->name('velocity.category.details');
 
         Route::get('/fancy-category-details/{slug}', 'ShopController@fetchFancyCategoryDetails')->name('velocity.fancy.category.details');
+
+        Route::post('/cart/add', 'ShopController@addProductToCart')->name('velocity.cart.add.product');
     });
 });

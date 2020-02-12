@@ -9,19 +9,6 @@
         .account-head {
             height: 50px;
         }
-        .table {
-            width: 70%;
-            padding: 10px;
-        }
-        .table > table {
-            color: #5E5E5E;
-            width:100%;
-            border: 1px solid rgba(0,0,0,.125);
-        }
-        .table td {
-            padding: 5px;
-            border: unset;
-        }
         .remove-icon {
             right: 15px;
             font-size: 22px;
@@ -42,7 +29,7 @@
 
 
 @section('page-detail-wrapper')
-    <div class="account-head">
+    <div class="account-head mb-0">
         <span class="back-icon">
             <a href="{{ route('customer.account.index') }}">
                 <i class="icon icon-menu-back"></i>
@@ -63,7 +50,7 @@
 
     {!! view_render_event('bagisto.shop.customers.account.profile.view.before', ['customer' => $customer]) !!}
 
-    <div class="account-table-content">
+    <div class="account-table-content profile-page-content">
         <div class="table">
             <table>
                 <tbody>
@@ -131,7 +118,7 @@
                     </div>
                 </div>
             </modal>
-        </form>        
+        </form>
     </div>
 
     {!! view_render_event('bagisto.shop.customers.account.profile.view.after', ['customer' => $customer]) !!}

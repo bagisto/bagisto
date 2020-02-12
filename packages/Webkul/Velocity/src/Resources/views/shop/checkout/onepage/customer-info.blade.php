@@ -140,7 +140,7 @@
                 :title="'{{ __('shop::app.checkout.onepage.shipping-address') }}'">
 
                 <div class="form-header mb-30" slot="header">
-                    <h3 class="fw6 display-inbl mb-0">
+                    <h3 class="fw6 display-inbl">
                         {{ __('shop::app.checkout.onepage.shipping-address') }}
                     </h3>
                     <i class="rango-arrow"></i>
@@ -219,7 +219,7 @@
                 :title="'{{ __('shop::app.checkout.onepage.shipping-address') }}'">
 
                 <div class="form-header" slot="header">
-                    <h3 class="fw6 display-inbl mb-0">
+                    <h3 class="fw6 display-inbl">
                         {{ __('shop::app.checkout.onepage.shipping-address') }}
                     </h3>
                     <i class="rango-arrow"></i>

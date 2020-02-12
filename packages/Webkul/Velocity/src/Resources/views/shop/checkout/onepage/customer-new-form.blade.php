@@ -11,6 +11,7 @@
             <input
                 type="text"
                 class="control"
+                style="width: unset;"
                 v-validate="'required'"
                 id="shipping[first_name]"
                 name="shipping[first_name]"

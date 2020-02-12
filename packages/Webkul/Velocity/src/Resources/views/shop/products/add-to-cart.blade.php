@@ -39,6 +39,16 @@
                     </span>
                 </button>
             </form>
+
+            {{-- <add-to-cart
+                form="true"
+                csrf-token='{{ csrf_token() }}'
+                product-id="{{ $product->product_id }}"
+                add-class-to-btn="{{ $addToCartBtnClass ?? '' }}"
+                is-enable={{ ! $product->isSaleable() ? 'false' : 'true' }}
+                show-cart-icon={{ !(isset($showCartIcon) && !$showCartIcon) }}
+                btn-text="{{ $btnText ?? __('shop::app.products.add-to-cart') }}">
+            </add-to-cart> --}}
         @endif
     </div>
 
