@@ -201,35 +201,7 @@
                         var isManualValidationFail = false;
 
                         if (scope == 'address-form') {
-                            let form = $(document).find('form[data-vv-scope=address-form]');
-
-                            // validate that if all the field contains some value
-                            if (form) {
-                                form.find(':input').each((index, element) => {
-                                    let value = $(element).val();
-                                    let elementId = element.id;
-
-                                    if (value == ""
-                                        && element.id != 'billing[company_name]'
-                                        && element.id != 'shipping[company_name]'
-                                    ) {
-                                        if (elementId.match('address_field_')) {
-                                            if (elementId == 'address_field_0') {
-                                                isManualValidationFail = true;
-                                            }
-                                        } else {
-                                            isManualValidationFail = true;
-                                        }
-                                    }
-                                });
-                            }
-
-                            // validate that if customer wants to use different shipping address
-                            if (! this.address.billing.use_for_shipping) {
-                                if (! this.address.shipping.address_id && ! this.new_shipping_address) {
-                                    isManualValidationFail = true;
-                                }
-                            }
+                            isManualValidationFail = this.validateAddressForm();
                         }
 
                         if (!isManualValidationFail) {
@@ -237,17 +209,29 @@
                             .then(result => {
                                 if (result) {
                                     document.body.style.cursor = 'wait';
-                                    if (scope == 'address-form') {
-                                        this.saveAddress();
-                                        document.body.style.cursor = 'default';
-                                    } else if (scope == 'shipping-form') {
-                                        document.body.style.cursor = 'wait';
-                                        this.saveShipping();
-                                    } else if (scope == 'payment-form') {
-                                        document.body.style.cursor = 'wait';
-                                        this.savePayment();
+
+                                    switch (scope) {
+                                        case 'address-form':
+                                            this.saveAddress();
+                                            document.body.style.cursor = 'default';
+                                            break;
+
+                                        case 'shipping-form':
+                                            document.body.style.cursor = 'wait';
+                                            this.saveShipping();
+                                            break;
+
+                                        case 'payment-form':
+                                            document.body.style.cursor = 'wait';
+                                            this.savePayment();
+
+                                            this.isPlaceOrderEnabled = ! this.validateAddressForm();
+                                            break;
+
+                                        default:
+                                            break;
                                     }
-                                    this.isPlaceOrderEnabled = true;
+
                                 } else {
                                     this.isPlaceOrderEnabled = false;
                                 }
@@ -255,6 +239,48 @@
                         } else {
                             this.isPlaceOrderEnabled = false;
                         }
+                    },
+
+                    validateAddressForm: function () {
+                        var isManualValidationFail = false;
+
+                        let form = $(document).find('form[data-vv-scope=address-form]');
+
+                        // validate that if all the field contains some value
+                        if (form) {
+                            form.find(':input').each((index, element) => {
+                                let value = $(element).val();
+                                let elementId = element.id;
+
+                                if (value == ""
+                                    && element.id != 'billing[company_name]'
+                                    && element.id != 'shipping[company_name]'
+                                ) {
+                                    // check for multiple line address
+                                    if (elementId.match('billing_address_')
+                                        || elementId.match('shipping_address_')
+                                    ) {
+                                        // only first line address is required
+                                        if (elementId == 'billing_address_0'
+                                            || elementId == 'shipping_address_0'
+                                        ) {
+                                            isManualValidationFail = true;
+                                        }
+                                    } else {
+                                        isManualValidationFail = true;
+                                    }
+                                }
+                            });
+                        }
+
+                        // validate that if customer wants to use different shipping address
+                        if (! this.address.billing.use_for_shipping) {
+                            if (! this.address.shipping.address_id && ! this.new_shipping_address) {
+                                isManualValidationFail = true;
+                            }
+                        }
+
+                        return isManualValidationFail;
                     },
 
                     isCustomerExist: function() {
