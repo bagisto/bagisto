@@ -53,10 +53,10 @@
 
 
                                 {!! view_render_event('bagisto.shop.checkout.cart-mini.item.options.before', ['item' => $item]) !!}
-                                
+
                                 @if (isset($item->additional['attributes']))
                                     <div class="item-options">
-                                        
+
                                         @foreach ($item->additional['attributes'] as $attribute)
                                             <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
                                         @endforeach
@@ -96,7 +96,7 @@
 
 @else
 
-    <div class="dropdown-toggle">
+    <div class="dropdown-toggle" style="pointer-events: none;">
         <div style="display: inline-block; cursor: pointer;">
             <span class="icon cart-icon"></span>
             <span class="name">{{ __('shop::app.minicart.cart') }}<span class="count"> ({{ __('shop::app.minicart.zero') }}) </span></span>

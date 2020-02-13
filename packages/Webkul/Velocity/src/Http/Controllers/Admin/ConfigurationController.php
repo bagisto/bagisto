@@ -75,6 +75,16 @@ class ConfigurationController extends Controller
             foreach ($params['images'] as $index => $images) {
                 $params['advertisement'][$index] =  $this->uploadAdvertisementImages($images, $index, $advertisement);
             }
+
+            if ( $advertisement ) {
+                foreach ($advertisement as $key => $image_array) {
+                    if (! isset($params['images'][$key])) {
+                        foreach ($advertisement[$key] as $image) {
+                            Storage::delete($image);
+                        }
+                    }
+                }
+            }
         }
 
         if (isset($params['product_view_images'])) {
@@ -104,21 +114,28 @@ class ConfigurationController extends Controller
     public function uploadAdvertisementImages($data, $index, $advertisement)
     {
         $save_image = [];
-
+        $save_data = $advertisement;
+        
         foreach ($data as $imageId => $image) {
             $file = 'images.' . $index . '.' . $imageId;
             $dir = 'velocity/images';
 
-            if (Str::contains($imageId, 'image_')) {
+            if ( Str::contains($imageId, 'image_') ) {
                 if (request()->hasFile($file) && $image) {
-                    Storage::delete($dir . $file);
-
-                    $save_image[substr($imageId, 6, 1)] = request()->file($file)->store($dir);
+                    $filter_index = substr($imageId, 6, 1);
+                    if ( isset($data[$filter_index]) ) {
+                        $size = array_key_last($save_data[$index]);
+                        
+                        $save_image[$size + 1] = request()->file($file)->store($dir);
+                    } else {
+                        $save_image[substr($imageId, 6, 1)] = request()->file($file)->store($dir);
+                    }
                 }
             } else {
-                if ( isset($advertisement[$index][$imageId]) && $advertisement[$index][$imageId]) {
+                if ( isset($advertisement[$index][$imageId]) && $advertisement[$index][$imageId] && !request()->hasFile($file)) {
                     $save_image[$imageId] = $advertisement[$index][$imageId];
-                    unset($advertisement[$index][$imageId]);
+
+                    unset($advertisement[$index][$imageId]); 
                 }
                 
                 if (request()->hasFile($file) && isset($advertisement[$index][$imageId])) {
@@ -132,7 +149,6 @@ class ConfigurationController extends Controller
         if ( isset($advertisement[$index]) && $advertisement[$index]) {
             foreach ($advertisement[$index] as $imageId) {
                 Storage::delete($imageId);
-                $save_image[$imageId] = '';
             }
         }
 
