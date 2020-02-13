@@ -116,6 +116,7 @@
                         allAddress: {},
                         current_step: 1,
                         completed_step: 0,
+                        isCheckPayment: true,
                         is_customer_exist: 0,
                         disable_button: false,
                         reviewComponentKey: 0,
@@ -403,24 +404,29 @@
                     savePayment: function() {
                         this.disable_button = true;
 
-                        this.$http.post("{{ route('shop.checkout.save-payment') }}", {'payment': this.selected_payment_method})
-                        .then(response => {
-                            this.disable_button = false;
+                        if (this.isCheckPayment) {
+                            this.isCheckPayment = false;
 
-                            this.showSummarySection = true;
+                            this.$http.post("{{ route('shop.checkout.save-payment') }}", {'payment': this.selected_payment_method})
+                            .then(response => {
+                                this.isCheckPayment = true;
+                                this.disable_button = false;
 
-                            reviewHtml = Vue.compile(response.data.html)
-                            this.completed_step = this.step_numbers[response.data.jump_to_section] + 1;
-                            this.current_step = this.step_numbers[response.data.jump_to_section];
+                                this.showSummarySection = true;
 
-                            document.body.style.cursor = 'auto';
+                                reviewHtml = Vue.compile(response.data.html)
+                                this.completed_step = this.step_numbers[response.data.jump_to_section] + 1;
+                                this.current_step = this.step_numbers[response.data.jump_to_section];
 
-                            this.getOrderSummary();
-                        })
-                        .catch(error => {
-                            this.disable_button = false;
-                            this.handleErrorResponse(error.response, 'payment-form')
-                        });
+                                document.body.style.cursor = 'auto';
+
+                                this.getOrderSummary();
+                            })
+                            .catch(error => {
+                                this.disable_button = false;
+                                this.handleErrorResponse(error.response, 'payment-form')
+                            });
+                        }
                     },
 
                     placeOrder: function() {
