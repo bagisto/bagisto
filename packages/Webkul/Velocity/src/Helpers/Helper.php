@@ -206,5 +206,20 @@ class Helper extends Review
 
         return [];
     }
+
+    public function formatCartItem($item)
+    {
+        $product = $item->product;
+        $images = $product->getTypeInstance()->getBaseImage($item);
+
+        return [
+            'images' => $images,
+            'itemId' => $item->id,
+            'name' => $item->name,
+            'url_key' => $product->url_key,
+            'quantity' => $item->quantity,
+            'baseTotal' => core()->currency($item->base_total),
+        ];
+    }
 }
 
