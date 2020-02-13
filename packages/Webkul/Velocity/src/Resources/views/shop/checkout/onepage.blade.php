@@ -204,7 +204,7 @@
                             isManualValidationFail = this.validateAddressForm();
                         }
 
-                        if (!isManualValidationFail) {
+                        if (! isManualValidationFail) {
                             this.$validator.validateAll(scope)
                             .then(result => {
                                 if (result) {
@@ -482,13 +482,17 @@
                     },
 
                     backToSavedBillingAddress: function() {
-                        this.isPlaceOrderEnabled = true;
                         this.new_billing_address = false;
+                        setTimeout(() => {
+                            this.validateForm('address-form');
+                        }, 0);
                     },
 
                     backToSavedShippingAddress: function() {
-                        this.isPlaceOrderEnabled = true;
                         this.new_shipping_address = false;
+                        setTimeout(() => {
+                            this.validateForm('address-form');
+                        }, 0);
                     },
                 }
             });

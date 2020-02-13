@@ -92,7 +92,7 @@
 
         <button
             type="submit"
-            class="theme-btn ml10 mb20" @click="showModal('deleteProfile')" >
+            class="theme-btn mb20" @click="showModal('deleteProfile')" >
             {{ __('shop::app.customer.account.address.index.delete') }}
         </button>
 
