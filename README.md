@@ -47,8 +47,9 @@ It packs in lots of features that will allow your E-Commerce business to scale i
 * Multistore Inventory System.
 * Orders Management System.
 * Customer Cart, Wishlist, Product Reviews.
-* Simple and Configurable Products.
+* Simple, Configurable, Group, Bundle, Downloadable and Virtual Products.
 * Price rules (Discount) inbuilt.
+* Theme (Velocity).
 * CMS Pages.
 * Check out [these features and more](https://bagisto.com/features/).
 
