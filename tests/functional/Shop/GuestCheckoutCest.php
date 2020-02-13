@@ -19,7 +19,7 @@ class GuestCheckoutCest
         $this->faker = Factory::create();
 
         $pConfigDefault = [
-            'productInventory' => ['qty' => $this->faker->randomNumber(2)],
+            'productInventory' => ['qty' => $this->faker->numberBetween(1, 1000)],
             'attributeValues'  => [
                 'status'         => true,
                 'new'            => 1,
@@ -27,7 +27,7 @@ class GuestCheckoutCest
             ],
         ];
         $pConfigGuestCheckout = [
-            'productInventory' => ['qty' => $this->faker->randomNumber(2)],
+            'productInventory' => ['qty' => $this->faker->numberBetween(1, 1000)],
             'attributeValues'  => [
                 'status'         => true,
                 'new'            => 1,
