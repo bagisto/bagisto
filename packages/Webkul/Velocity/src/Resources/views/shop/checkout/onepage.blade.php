@@ -204,23 +204,32 @@
                             let form = $(document).find('form[data-vv-scope=address-form]');
 
                             // validate that if all the field contains some value
-                            var requiredField = ['first_name', 'last_name', 'email', 'address1', 'city', 'state', 'postcode', 'phone', 'country'];
+                            if (form) {
+                                form.find(':input').each((index, element) => {
+                                    let value = $(element).val();
+                                    let elementId = element.id;
 
-                            requiredField.forEach(field => {
-                                if (! this.address.billing[field]) {
+                                    if (value == ""
+                                        && element.id != 'billing[company_name]'
+                                        && element.id != 'shipping[company_name]'
+                                    ) {
+                                        if (elementId.match('address_field_')) {
+                                            if (elementId == 'address_field_0') {
+                                                isManualValidationFail = true;
+                                            }
+                                        } else {
+                                            isManualValidationFail = true;
+                                        }
+                                    }
+                                });
+                            }
+
+                            // validate that if customer wants to use different shipping address
+                            if (! this.address.billing.use_for_shipping) {
+                                if (! this.address.shipping.address_id && ! this.new_shipping_address) {
                                     isManualValidationFail = true;
                                 }
-
-                                if (this.address.billing.use_for_shipping) {
-                                    if (this.address.shipping.address_id) {
-                                        isManualValidationFail = true;
-                                    }
-                                } else {
-                                    if (! this.address.shipping[field]) {
-                                        isManualValidationFail = true;
-                                    }
-                                }
-                            });
+                            }
                         }
 
                         if (!isManualValidationFail) {
@@ -228,7 +237,6 @@
                             .then(result => {
                                 if (result) {
                                     document.body.style.cursor = 'wait';
-
                                     if (scope == 'address-form') {
                                         this.saveAddress();
                                         document.body.style.cursor = 'default';
@@ -239,7 +247,6 @@
                                         document.body.style.cursor = 'wait';
                                         this.savePayment();
                                     }
-
                                     this.isPlaceOrderEnabled = true;
                                 } else {
                                     this.isPlaceOrderEnabled = false;
@@ -439,11 +446,13 @@
                     newBillingAddress: function() {
                         this.new_billing_address = true;
                         this.isPlaceOrderEnabled = false;
+                        this.address.shipping.address_id = null;
                     },
 
                     newShippingAddress: function() {
                         this.new_shipping_address = true;
                         this.isPlaceOrderEnabled = false;
+                        this.address.shipping.address_id = null;
                     },
 
                     backToSavedBillingAddress: function() {
