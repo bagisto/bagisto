@@ -4,14 +4,13 @@
 
     @if (isset($shipping) && $shipping)
         <div :class="`col-12 form-field mb30 ${errors.has('address-form.shipping[first_name]') ? 'has-error' : ''}`">
-            <label for="shipping[first_name]" class="mandatory">
+            <label for="shipping[first_name]" class="mandatory" style="width: unset;">
                 {{ __('shop::app.checkout.onepage.first-name') }}
             </label>
 
             <input
                 type="text"
                 class="control"
-                style="width: unset;"
                 v-validate="'required'"
                 id="shipping[first_name]"
                 name="shipping[first_name]"
@@ -157,7 +156,6 @@
                 {{ __('shop::app.checkout.onepage.state') }}
             </label>
 
-
             <input
                 type="text"
                 class="control"
@@ -176,6 +174,7 @@
                 class="control styled-select"
                 v-if="haveStates('shipping')"
                 v-model="address.shipping.state"
+                @change="validateForm('address-form')"
                 data-vv-as="&quot;{{ __('shop::app.checkout.onepage.state') }}&quot;">
 
                 <option value="">{{ __('shop::app.checkout.onepage.select-state') }}</option>
@@ -184,7 +183,10 @@
                     @{{ state.default_name }}
                 </option>
             </select>
-            <i v-if="haveStates('shipping')" class="select-icon rango-arrow-down"></i>
+
+            <div class="select-icon-container" v-if="haveStates('shipping')">
+                <i class="select-icon rango-arrow-down"></i>
+            </div>
 
             <span class="control-error" v-if="errors.has('address-form.shipping[state]')">
                 @{{ errors.first('address-form.shipping[state]') }}
