@@ -213,8 +213,14 @@
                                         && element.id != 'billing[company_name]'
                                         && element.id != 'shipping[company_name]'
                                     ) {
-                                        if (elementId.match('address_field_')) {
-                                            if (elementId == 'address_field_0') {
+                                        // check for multiple line address
+                                        if (elementId.match('billing_address_')
+                                            || elementId.match('shipping_address_')
+                                        ) {
+                                            // only first line address is required
+                                            if (elementId == 'billing_address_0'
+                                                || elementId == 'shipping_address_0'
+                                            ) {
                                                 isManualValidationFail = true;
                                             }
                                         } else {
@@ -237,17 +243,28 @@
                             .then(result => {
                                 if (result) {
                                     document.body.style.cursor = 'wait';
-                                    if (scope == 'address-form') {
-                                        this.saveAddress();
-                                        document.body.style.cursor = 'default';
-                                    } else if (scope == 'shipping-form') {
-                                        document.body.style.cursor = 'wait';
-                                        this.saveShipping();
-                                    } else if (scope == 'payment-form') {
-                                        document.body.style.cursor = 'wait';
-                                        this.savePayment();
+
+                                    switch (scope) {
+                                        case 'address-form':
+                                            this.saveAddress();
+                                            document.body.style.cursor = 'default';
+                                            break;
+
+                                        case 'shipping-form':
+                                            document.body.style.cursor = 'wait';
+                                            this.saveShipping();
+                                            break;
+
+                                        case 'payment-form':
+                                            document.body.style.cursor = 'wait';
+                                            this.savePayment();
+                                            break;
+
+                                        default:
+                                            break;
                                     }
-                                    this.isPlaceOrderEnabled = true;
+
+                                    this.isPlaceOrderEnabled = this.isPlaceOrderEnabled;
                                 } else {
                                     this.isPlaceOrderEnabled = false;
                                 }

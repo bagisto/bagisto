@@ -94,6 +94,7 @@
                         class="control"
                         id="shipping_address_{{ $i }}"
                         name="shipping[address1][{{ $i }}]"
+                        @change="validateForm('address-form')"
                         v-model="address.shipping.address1[{{$i}}]" />
                 </div>
             @endfor
@@ -513,8 +514,8 @@
                         type="checkbox"
                         id="billing[use_for_shipping]"
                         name="billing[use_for_shipping]"
-                        @change="validateForm('address-form')"
-                        v-model="address.billing.use_for_shipping" />
+                        v-model="address.billing.use_for_shipping"
+                        @change="setTimeout(() => validateForm('address-form'), 0)" />
 
                     <span class="ml-5">
                         {{ __('shop::app.checkout.onepage.use_for_shipping') }}
