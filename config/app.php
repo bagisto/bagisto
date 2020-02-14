@@ -265,6 +265,7 @@ return [
         Webkul\Rule\Providers\RuleServiceProvider::class,
         Webkul\CMS\Providers\CMSServiceProvider::class,
         Webkul\Velocity\Providers\VelocityServiceProvider::class,
+        Webkul\BookingProduct\Providers\BookingProductServiceProvider::class,
     ],
 
     /*
