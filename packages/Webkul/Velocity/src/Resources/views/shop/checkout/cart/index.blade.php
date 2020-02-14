@@ -87,13 +87,16 @@
                                                 </div>
 
                                                 @if (isset($item->additional['attributes']))
-                                                    <div class="row col-12 no-padding no-margin">
-
-                                                        @foreach ($item->additional['attributes'] as $attribute)
-                                                            <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
-                                                        @endforeach
-
-                                                    </div>
+                                                    @foreach ($item->additional['attributes'] as $attribute)
+                                                        <div class="row col-12 no-padding no-margin display-block">
+                                                            <label class="no-margin">
+                                                                {{ $attribute['attribute_name'] }} :
+                                                            </label>
+                                                            <span>
+                                                                {{ $attribute['option_label'] }}
+                                                            </span>
+                                                        </div>
+                                                    @endforeach
                                                 @endif
 
                                                 <div class="row col-12 no-padding no-margin">
@@ -149,7 +152,7 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="product-quantity col-3 no-padding">
                                                 <quantity-changer
                                                     :control-name="'qty[{{$item->id}}]'"
