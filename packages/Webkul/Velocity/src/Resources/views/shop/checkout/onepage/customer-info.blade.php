@@ -67,12 +67,7 @@
                     </div>
                 </div>
 
-                <div id="message"></div>
-
-                <div
-                    class="control-group"
-                    :class="[errors.has('address-form.billing[address_id]') ? 'has-error' : '']">
-
+                <div :class="`col-12 mt15 has-error ${errors.has('address-form.billing[address_id]') ? 'has-error' : ''}`">
                     <span
                         class="control-error"
                         v-if="errors.has('address-form.billing[address_id]')">
@@ -88,7 +83,7 @@
                                 class="ml0"
                                 id="billing[use_for_shipping]"
                                 name="billing[use_for_shipping]"
-                                @change="validateForm('address-form')"
+                                @change="setTimeout(() => validateForm('address-form'), 0)"
                                 v-model="address.billing.use_for_shipping" />
 
                             <span class="ml-5">
@@ -147,14 +142,13 @@
                     <i class="rango-arrow"></i>
                 </div>
 
-                <div class="address-container row mb30" slot="body">
+                <div class="address-container row mb30 remove-padding-margin" slot="body">
                     <div
-                        class="col-lg-6 address-holder"
+                        class="col-lg-6 address-holder pl0"
                         v-for='(addresses, index) in this.allAddress'>
 
                         <div class="card">
                             <div class="card-body row">
-
                                 <div class="col-1">
                                     <input
                                         type="radio"
@@ -187,7 +181,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-6 address-holder">
+                    <div class="col-lg-6 address-holder pl0">
                         <div class="card">
                             <div class="card-body add-address-button">
                                 <div class="cursor-pointer" @click="newShippingAddress()">
@@ -200,9 +194,7 @@
                         </div>
                     </div>
 
-                    <div id="message"></div>
-
-                    <div class="control-group" :class="[errors.has('address-form.shipping[address_id]') ? 'has-error' : '']">
+                    <div :class="`col-12 mt15 has-error pl0 ${errors.has('address-form.shipping[address_id]') ? 'has-error' : ''}`">
                         <span class="control-error" v-if="errors.has('address-form.shipping[address_id]')">
                             @{{ errors.first('address-form.shipping[address_id]') }}
                         </span>
