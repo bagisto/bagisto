@@ -170,60 +170,60 @@ return [
         ],
     ], [
         'key'  => 'emails',
-        'name' => 'admin::app.admin.emails',
+        'name' => 'admin::app.admin.emails.email',
         'sort' => 1,
     ], [
         'key'  => 'emails.general',
-        'name' => 'admin::app.admin.emails.verification',
+        'name' => 'admin::app.admin.emails.notification_label',
         'sort' => 1,
     ], [
         'key'    => 'emails.general.notifications',
-        'name'   => 'admin::app.admin.emails.verification',
+        'name'   => 'admin::app.admin.emails.notification_label',
         'sort'   => 1,
         'fields' => [
             [
                 'name'  => 'emails.general.notifications.verification',
-                'title' => 'admin::app.admin.emails.general.verification',
+                'title' => 'admin::app.admin.emails.notifications.verification',
                 'type'  => 'boolean',
             ],
             [
                 'name'  => 'emails.general.notifications.customer',
-                'title' => 'admin::app.admin.emails.general.customer',
+                'title' => 'admin::app.admin.emails.notifications.customer',
                 'type'  => 'boolean',
             ],
             [
                 'name'  => 'emails.general.notifications.new-order',
-                'title' => 'admin::app.admin.emails.general.customer-notification',
+                'title' => 'admin::app.admin.emails.notifications.new-order',
                 'type'  => 'boolean',
             ],
             [
                 'name'  => 'emails.general.notifications.new-admin',
-                'title' => 'admin::app.admin.emails.general.new-admin',
+                'title' => 'admin::app.admin.emails.notifications.new-admin',
                 'type'  => 'boolean',
             ],
             [
                 'name'  => 'emails.general.notifications.new-invoice',
-                'title' => 'admin::app.admin.emails.general.new-invoice',
+                'title' => 'admin::app.admin.emails.notifications.new-invoice',
                 'type'  => 'boolean',
             ],
             [
                 'name'  => 'emails.general.notifications.new-refund',
-                'title' => 'admin::app.admin.emails.general.new-refund',
+                'title' => 'admin::app.admin.emails.notifications.new-refund',
                 'type'  => 'boolean',
             ],
             [
                 'name'  => 'emails.general.notifications.new-shipment',
-                'title' => 'admin::app.admin.emails.general.new-shipment',
+                'title' => 'admin::app.admin.emails.notifications.new-shipment',
                 'type'  => 'boolean',
             ],
             [
                 'name'  => 'emails.general.notifications.new-inventory-source',
-                'title' => 'admin::app.admin.emails.general.new-inventory-source',
+                'title' => 'admin::app.admin.emails.notifications.new-inventory-source',
                 'type'  => 'boolean',
             ],
             [
                 'name'  => 'emails.general.notifications.cancel-order',
-                'title' => 'admin::app.admin.emails.general.cancel-order',
+                'title' => 'admin::app.admin.emails.notifications.cancel-order',
                 'type'  => 'boolean',
             ],
         ],
