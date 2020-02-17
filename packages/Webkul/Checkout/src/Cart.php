@@ -756,6 +756,13 @@ class Cart {
 
                         $item->save();
                         break;
+                    } else {
+                        $item->tax_percent = 0;
+                        $item->tax_amount = 0;
+                        $item->base_tax_amount = 0;
+
+                        $item->save();
+                        break;
                     }
                 }
             } else {
