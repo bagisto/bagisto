@@ -36,6 +36,16 @@ class ConfigTableSeeder extends Seeder
 
         DB::table('core_config')->insert([
             'id'           => 3,
+            'code'         => 'emails.general.notifications.emails.general.notifications.registration',
+            'value'        => '1',
+            'channel_code' => null,
+            'locale_code'  => null,
+            'created_at'   => $now,
+            'updated_at'   => $now,
+        ]);
+
+        DB::table('core_config')->insert([
+            'id'           => 4,
             'code'         => 'emails.general.notifications.emails.general.notifications.customer',
             'value'        => '1',
             'channel_code' => null,

@@ -187,6 +187,11 @@ return [
                 'type'  => 'boolean',
             ],
             [
+                'name'  => 'emails.general.notifications.registration',
+                'title' => 'admin::app.admin.emails.notifications.registration',
+                'type'  => 'boolean',
+            ],
+            [
                 'name'  => 'emails.general.notifications.customer',
                 'title' => 'admin::app.admin.emails.notifications.customer',
                 'type'  => 'boolean',

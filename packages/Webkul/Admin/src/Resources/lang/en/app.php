@@ -1211,6 +1211,7 @@ return [
             'notification_label' => 'Notifications',
             'notifications' => [
                 'verification' => 'Send verification E-mail',
+                'registration' => 'Send registration E-mail',
                 'customer' => 'Send customer E-mail',
                 'new-order' => 'Send Order Confirmation E-mail',
                 'new-admin' => 'Send Admin Invitation E-mail',
