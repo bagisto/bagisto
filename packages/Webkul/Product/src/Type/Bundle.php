@@ -405,7 +405,6 @@ class Bundle extends AbstractType
      */
     public function prepareForCart($data)
     {
-
         if (isset($data['bundle_options']))
             $data['bundle_options'] = array_filter($this->validateBundleOptionForCart($data['bundle_options']));
 

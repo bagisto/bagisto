@@ -3,6 +3,7 @@
 namespace Webkul\BookingProduct\Helpers;
 
 use Carbon\Carbon;
+use Webkul\BookingProduct\Repositories\BookingProductRepository;
 use Webkul\BookingProduct\Repositories\BookingProductDefaultSlotRepository;
 use Webkul\BookingProduct\Repositories\BookingProductAppointmentSlotRepository;
 use Webkul\BookingProduct\Repositories\BookingProductEventSlotRepository;
@@ -18,9 +19,27 @@ use Webkul\BookingProduct\Repositories\BookingProductTableSlotRepository;
 class Booking
 {
     /**
+     * BookingProductRepository
+     * 
+     * @return object
+     */
+    protected $bookingProductRepository;
+
+    /**
      * @return array
      */
     protected $typeRepositories = [];
+
+    /**
+     * @return array
+     */
+    protected $typeHelpers = [
+        'default' => DefaultSlot::class,
+        'appointment' => AppointmentSlot::class,
+        'event' => EventSlot::class,
+        'rental' => RentalSlot::class,
+        'table' => TableSlot::class,
+    ];
 
     /**
      * @return array
@@ -30,6 +49,7 @@ class Booking
     /**
      * Create a new helper instance.
      *
+     * @param Webkul\BookingProduct\Repositories\BookingProductRepository                $bookingProductRepository
      * @param Webkul\BookingProduct\Repositories\BookingProductDefaultSlotRepository     $bookingProductDefaultSlotRepository
      * @param Webkul\BookingProduct\Repositories\BookingProductAppointmentSlotRepository $bookingProductAppointmentSlotRepository
      * @param Webkul\BookingProduct\Repositories\BookingProductEventSlotRepository       $bookingProductEventSlotRepository
@@ -38,6 +58,7 @@ class Booking
      * @return void
      */
     public function __construct(
+        BookingProductRepository $bookingProductRepository,
         BookingProductDefaultSlotRepository $bookingProductDefaultSlotRepository,
         BookingProductAppointmentSlotRepository $bookingProductAppointmentSlotRepository,
         BookingProductEventSlotRepository $bookingProductEventSlotRepository,
@@ -45,6 +66,8 @@ class Booking
         BookingProductTableSlotRepository $bookingProductTableSlotRepository
     )
     {
+        $this->bookingProductRepository = $bookingProductRepository;
+
         $this->typeRepositories['default'] = $bookingProductDefaultSlotRepository;
 
         $this->typeRepositories['appointment'] = $bookingProductAppointmentSlotRepository;
@@ -54,6 +77,17 @@ class Booking
         $this->typeRepositories['rental'] = $bookingProductRentalSlotRepository;
 
         $this->typeRepositories['table'] = $bookingProductTableSlotRepository;
+    }
+
+    /**
+     * Returns the booking type hepler instance
+     *
+     * @param string $type
+     * @return array
+     */
+    public function getTypeHepler($type)
+    {
+        return $this->typeHelpers[$type];
     }
 
     /**
@@ -272,5 +306,102 @@ class Booking
         }
 
         return $slots;
+    }
+
+    /**
+     * Returns additional cart item information
+     *
+     * @param array $data
+     * @return array
+     */
+    public function getCartItemOptions($data)
+    {
+        $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $data['product_id']);
+
+        if (! $bookingProduct)
+            return $data;
+
+        switch ($bookingProduct->type) {
+            case 'rental':
+                $rentingType = $data['booking']['renting_type'] ?? $bookingProduct->rental_slot->renting_type;
+
+                if ($rentingType == 'daily') {
+                    $from = Carbon::createFromTimeString($data['booking']['date_from'] . " 00:00:01")->format('d F, Y');
+
+                    $to = Carbon::createFromTimeString($data['booking']['date_to'] . " 23:59:59")->format('d F, Y');
+                } else {
+                    $from = Carbon::createFromTimestamp($data['booking']['slot']['from'])->format('d F, Y h:i A');
+
+                    $to = Carbon::createFromTimestamp($data['booking']['slot']['to'])->format('d F, Y h:i A');
+                }
+
+                $data['attributes'] = [
+                    [
+                        'attribute_name' => 'Rent Type',
+                        'option_id' => 0,
+                        'option_label' => trans('bookingproduct::app.shop.cart.' . $rentingType),
+                    ], [
+                        'attribute_name' => 'Rent From',
+                        'option_id' => 0,
+                        'option_label' => $from,
+                    ], [
+                        'attribute_name' => 'Rent Till',
+                        'option_id' => 0,
+                        'option_label' => $to,
+                    ]];
+
+                break;
+            
+            default:
+                $timestamps = explode('-', $data['booking']['slot']);
+
+                $data['attributes'] = [
+                    [
+                        'attribute_name' => 'Booking From',
+                        'option_id' => 0,
+                        'option_label' => Carbon::createFromTimestamp($timestamps[0])->format('d F, Y h:i A'),
+                    ], [
+                        'attribute_name' => 'Booking Till',
+                        'option_id' => 0,
+                        'option_label' => Carbon::createFromTimestamp($timestamps[1])->format('d F, Y h:i A'),
+                    ]];
+
+                break;
+        }
+
+        return $data;
+    }
+
+    /**
+     * Add booking additional prices to cart item
+     *
+     * @param array $products
+     * @return array
+     */
+    public function addAdditionalPrices($products)
+    {
+        return $products;
+    }
+
+    /**
+     * Validate cart item product price
+     *
+     * @param CartItem $item
+     * @return float
+     */
+    public function validateCartItem($item)
+    {
+        $price = $item->product->getTypeInstance()->getFinalPrice();
+
+        if ($price == $item->base_price)
+            return;
+
+        $item->base_price = $price;
+        $item->price = core()->convertPrice($price);
+
+        $item->base_total = $price * $item->quantity;
+        $item->total = core()->convertPrice($price * $item->quantity);
+
+        $item->save();
     }
 }

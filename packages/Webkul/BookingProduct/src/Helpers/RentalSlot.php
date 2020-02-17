@@ -91,4 +91,74 @@ class RentalSlot extends Booking
 
         return $slots;
     }
+
+    /**
+     * Add booking additional prices to cart item
+     *
+     * @param array $products
+     * @return array
+     */
+    public function addAdditionalPrices($products)
+    {
+        $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $products[0]['product_id']);
+
+        $rentingType = $products[0]['additional']['booking']['renting_type'] ?? $bookingProduct->rental_slot->renting_type;
+
+        if ($rentingType == 'daily') {
+            $from = Carbon::createFromTimeString($products[0]['additional']['booking']['date_from'] . " 00:00:00");
+            $to = Carbon::createFromTimeString($products[0]['additional']['booking']['date_to'] . " 24:00:00");
+
+            $price = $bookingProduct->rental_slot->daily_price * $to->diffInDays($from);
+        } else {
+            $from = Carbon::createFromTimestamp($products[0]['additional']['booking']['slot']['from']);
+            $to = Carbon::createFromTimestamp($products[0]['additional']['booking']['slot']['to']);
+
+            $price = $bookingProduct->rental_slot->hourly_price * $to->diffInHours($from);
+        }
+
+        $products[0]['price'] += core()->convertPrice($price);
+        $products[0]['base_price'] += $price;
+        $products[0]['total'] += (core()->convertPrice($price) * $products[0]['quantity']);
+        $products[0]['base_total'] += ($price * $products[0]['quantity']);
+
+        return $products;
+    }
+
+    /**
+     * Validate cart item product price
+     *
+     * @param CartItem $item
+     * @return float
+     */
+    public function validateCartItem($item)
+    {
+        $price = $item->product->getTypeInstance()->getFinalPrice();
+
+        $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $item->product_id);
+
+        $rentingType = $item->additional['booking']['renting_type'] ?? $bookingProduct->rental_slot->renting_type;
+
+        if ($rentingType == 'daily') {
+            $from = Carbon::createFromTimeString($item->additional['booking']['date_from'] . " 00:00:00");
+            $to = Carbon::createFromTimeString($item->additional['booking']['date_to'] . " 24:00:00");
+
+            $price += $item->product->getTypeInstance()->getFinalPrice() + $bookingProduct->rental_slot->daily_price * $to->diffInDays($from);
+        } else {
+            $from = Carbon::createFromTimestamp($item->additional['booking']['slot']['from']);
+            $to = Carbon::createFromTimestamp($item->additional['booking']['slot']['to']);
+
+            $price += $bookingProduct->rental_slot->hourly_price * $to->diffInHours($from);
+        }
+
+        if ($price == $item->base_price)
+            return;
+
+        $item->base_price = $price;
+        $item->price = core()->convertPrice($price);
+
+        $item->base_total = $price * $item->quantity;
+        $item->total = core()->convertPrice($price * $item->quantity);
+
+        $item->save();
+    }
 }

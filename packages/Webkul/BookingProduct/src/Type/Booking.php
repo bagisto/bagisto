@@ -8,6 +8,7 @@ use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Helpers\ProductImage;
+use Webkul\BookingProduct\Repositories\BookingProductRepository;
 use Webkul\BookingProduct\Helpers\Booking as BookingHelper;
 use Webkul\Product\Type\AbstractType;
 
@@ -19,6 +20,13 @@ use Webkul\Product\Type\AbstractType;
  */
 class Booking extends AbstractType
 {
+    /**
+     * BookingProductRepository instance
+     *
+     * @var BookingProductRepository
+    */
+    protected $bookingProductRepository;
+
     /**
      * Booking helper instance
      *
@@ -58,8 +66,9 @@ class Booking extends AbstractType
      * @param  Webkul\Product\Repositories\ProductAttributeValueRepository $attributeValueRepository
      * @param  Webkul\Product\Repositories\ProductInventoryRepository      $productInventoryRepository
      * @param  Webkul\Product\Repositories\ProductImageRepository          $productImageRepository
-     * @param  Webkul\BookingProduct\Helpers\BookingHelper                 $bookingHelper
      * @param  Webkul\Product\Helpers\ProductImage                         $productImageHelper
+     * @param  Webkul\BookingProduct\Repositories\BookingProductRepository $bookingProductRepository
+     * @param  Webkul\BookingProduct\Helpers\BookingHelper                 $bookingHelper
      * @return void
      */
     public function __construct(
@@ -68,8 +77,9 @@ class Booking extends AbstractType
         ProductAttributeValueRepository $attributeValueRepository,
         ProductInventoryRepository $productInventoryRepository,
         ProductImageRepository $productImageRepository,
-        BookingHelper $bookingHelper,
-        ProductImage $productImageHelper
+        ProductImage $productImageHelper,
+        BookingProductRepository $bookingProductRepository,
+        BookingHelper $bookingHelper
     )
     {
         parent::__construct(
@@ -80,6 +90,8 @@ class Booking extends AbstractType
             $productImageRepository,
             $productImageHelper
         );
+
+        $this->bookingProductRepository = $bookingProductRepository;
 
         $this->bookingHelper = $bookingHelper;
     }
@@ -121,14 +133,22 @@ class Booking extends AbstractType
     /**
      * Add product. Returns error message if can't prepare product.
      *
-     * @param array   $data
+     * @param array $data
      * @return array
      */
     public function prepareForCart($data)
     {
-        $products = parent::prepareForCart($data);
+        if (! isset($data['booking']) || ! count($data['booking']))
+            return trans('shop::app.checkout.cart.integrity.missing_options');
 
-        dd($products);
+        $products = parent::prepareForCart($data);
+        
+        $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $data['product_id']);
+
+        if ($bookingProduct)
+            $products = app($this->bookingHelper->getTypeHepler($bookingProduct->type))->addAdditionalPrices($products);
+
+        return $products;
     }
 
     /**
@@ -153,17 +173,22 @@ class Booking extends AbstractType
      */
     public function getAdditionalOptions($data)
     {
-        $data['attributes'] = [
-            [
-                'attribute_name' => 'From',
-                'option_id' => 0,
-                'option_label' => "",
-            ], [
-                'attribute_name' => 'To',
-                'option_id' => 0,
-                'option_label' => "",
-            ]];
+        return $this->bookingHelper->getCartItemOptions($data);
+    }
 
-        return $data;
+    /**
+     * Validate cart item product price
+     *
+     * @param CartItem $item
+     * @return float
+     */
+    public function validateCartItem($item)
+    {
+        $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $item->product_id);
+
+        if (! $bookingProduct)
+            return;
+
+        app($this->bookingHelper->getTypeHepler($bookingProduct->type))->validateCartItem($item);
     }
 }

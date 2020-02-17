@@ -104,6 +104,12 @@ return [
             'base-price' => 'Base Price',
             'total-price' => 'Total Price',
             'base-price-info' => '(This will be apply to each type of ticket for each quantity)'
+        ],
+
+        'cart' => [
+            'renting_type' => 'Rent Type',
+            'daily' => 'Daily',
+            'hourly' => 'Hourly',
         ]
     ]
 ];
