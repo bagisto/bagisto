@@ -6,7 +6,6 @@
 
 @section('content')
     <div class="content">
-        <?php $locale = request()->get('locale') ?: app()->getLocale(); ?>
 
         <form method="POST" action="" @submit.prevent="onSubmit" enctype="multipart/form-data">
 
