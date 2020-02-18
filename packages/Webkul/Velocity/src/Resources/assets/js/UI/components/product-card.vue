@@ -40,7 +40,7 @@
                 class="card-img-top lzy_img" />
                 <!-- :src="`${$root.baseUrl}/vendor/webkul/ui/assets/images/product/meduim-product-placeholder.png`" /> -->
 
-            <!-- <quick-view-btn details="{{ $product }}"></quick-view-btn> -->
+            <product-quick-view-btn :quick-view-details="product"></product-quick-view-btn>
         </a>
 
         <div class="card-body">
@@ -58,7 +58,9 @@
 
             <div class="product-rating col-12 no-padding" v-if="product.totalReviews && product.totalReviews > 0">
                 <star-ratings :ratings="product.avgRating"></star-ratings>
-                <span class="align-top">{{ product.totalReviews }} Ratings</span>
+                <span class="align-top">
+                    {{ __('products.ratings', {'totalRatings': product.totalReviews}) }}
+                </span>
             </div>
 
             <div class="product-rating col-12 no-padding" v-else>

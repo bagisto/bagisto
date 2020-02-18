@@ -30,7 +30,7 @@
                 </div>
             </div>
 
-            <accordian :title="'{{ __('admin::app.catalog.attributes.general') }}'" :active="false">
+            <accordian :title="'{{ __('admin::app.catalog.attributes.general') }}'" :active="true">
                 <div slot="body">
                     <div class="control-group">
                         <label>{{ __('velocity::app.admin.meta-data.activate-slider') }}</label>

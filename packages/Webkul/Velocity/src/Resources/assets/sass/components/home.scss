@@ -588,15 +588,14 @@ body::after {
 }
 
 .cd-quick-view {
-    top: 50px;
-    left: 22%;
-    width: 734px;
-    z-index: 11;
+    top: 100px;
+    width: 700px;
+    z-index: 101;
     padding: 40px;
     display: block;
-    position: fixed;
-    max-width: 900px;
-    max-height: 1000px;
+    position: absolute;
+    margin-bottom: 50px;
+    left: calc(50% - 350px);
     background-color: #fff;
     // transition: box-shadow .3s;
     // -moz-transition: box-shadow .3s;
@@ -609,8 +608,8 @@ body::after {
     -webkit-backface-visibility: hidden;
 
     .cd-slider li.selected img {
-        width: 317px;
-        height: 397px;
+        width: 100%;
+        height: 100%;
         display: inline-block !important;
     }
 
@@ -619,8 +618,9 @@ body::after {
     }
 
     .close-btn {
-        top: -25px;
-        right: -15px;
+        top: 15px;
+        right: 20px;
+        font-weight: 600;
         position: absolute;
     }
 
@@ -631,6 +631,40 @@ body::after {
         > span {
             font-size: 24px;
             margin-left: 24px;
+        }
+    }
+
+    .product-price {
+        span:nth-child(1),
+        .special-price,
+        .price-from > span:not(:nth-child(2)) {
+            font-size: 20px;
+            font-weight: 600;
+        }
+    }
+
+    .wishlist-icon {
+        height: 38px;
+        display: table;
+        margin-left: 10px;
+
+        i {
+            display: table-cell;
+            vertical-align: middle;
+        }
+    }
+
+    .quick-view-name {
+        font-size: 24px;
+        line-height: 25px;
+    }
+
+    .product-rating {
+        display: table;
+
+        span {
+            vertical-align: top;
+            display: table-cell;
         }
     }
 }

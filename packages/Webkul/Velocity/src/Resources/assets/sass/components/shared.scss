@@ -847,18 +847,6 @@ button[disabled] {
     font-family: 'Webkul Rango' !important;
 }
 
-.quick-view-name {
-    font-size: 24px;
-}
-
-.quick-view-price {
-    font-size: 30px;
-}
-
-.description-text {
-    font-size: 14px;
-}
-
 .max-height-350 {
     max-height: 350px;
 }
@@ -873,4 +861,12 @@ button[disabled] {
     textarea {
         border-color: $border-danger !important;
     }
+}
+
+.modal-parent {
+    width: 100%;
+    height: 100%;
+    z-index: 5000;
+    position: fixed;
+    background: rgba(255, 255, 255, 0.9);
 }
