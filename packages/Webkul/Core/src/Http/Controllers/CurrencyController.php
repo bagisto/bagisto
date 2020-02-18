@@ -72,7 +72,7 @@ class CurrencyController extends Controller
             'name' => 'required'
         ]);
 
-        Event::dispatch('core.channel.create.before');
+        Event::dispatch('core.currency.create.before');
 
         $currency = $this->currencyRepository->create(request()->all());
 
