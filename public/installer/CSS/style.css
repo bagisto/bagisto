@@ -4,9 +4,17 @@ body {
     font-family: "Montserrat", sans-serif;
     color: #000311;
     text-align: center;
-    background: white;
+    background: #fff;
     position: relative;
     height: 100%;
+}
+
+a {
+    color: rgb(0, 65, 255);
+  }
+
+.initial-display{
+    padding-top: 30px;
 }
 
 .initial-display .logo {
@@ -54,13 +62,12 @@ body {
 }
 
 .content {
-    border: 1px solid #979797;
     border-radius: 3px;
-    width: 600px;
-    height: 392px;
+    box-shadow: 0 10px 40px rgba(62, 85, 120, 0.45);
+    width: 650px;
     margin-left: calc(50% - 300px);
     text-align: left;
-    overflow-x: scroll;
+    overflow:auto;
 }
 
 .title {
@@ -70,6 +77,7 @@ body {
     text-align: left;
     margin-top: 30px;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 span {
@@ -84,7 +92,7 @@ span {
 
 .control-group {
     display: block;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     font-size: 15px;
     color: #333333;
     width: 750px;
@@ -155,7 +163,7 @@ pre.bash {
 }
 
 .check {
-    line-height: 40px;
+    line-height: 35px;
 }
 
 .cp-round:after {
@@ -188,4 +196,27 @@ pre.bash {
 
 .message {
     padding-left: 140px;
+}
+
+@media (max-width: 900px) {
+    .content {
+        padding: 2rem 0;
+    }
+
+    .content {
+        width: 90%;
+        height: 350px !important;
+        margin: 30px auto;
+    }
+}
+
+@media (min-width: 720px) {
+    .content {
+        padding: 1rem 0;
+    }
+
+    .content {
+        max-height: 488px;
+        margin: 30px auto;
+    }
 }

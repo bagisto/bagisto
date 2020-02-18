@@ -14,15 +14,21 @@
                 <p>Requirements</p>
 
                 <div class="content">
-                    <div class="title" style="text-align: center; margin-top: 10px">
-                        Please wait while we are checking the requirements
+                    <div class="title">
+                        Please wait while we are checking the server requirements.
+                    </div>
+
+                    <br />
+
+                    <div style="text-align: center; padding-bottom: 20px;">
+                        This is just for testing purpose<br /> it will be removed before pushing to Bagisto's branch.
                     </div>
 
                     <div class="check" style="margin-left: 25%">
                         <?php if($phpVersion['supported'] ? $src = $greenCheck : $src = $redCheck): ?>
                             <img src="<?php echo $src ?>">
                         <?php endif; ?>
-                        <span style="margin-left: 10px"><b>PHP</b></span>
+                        <span><b>PHP</b></span>
                         <span>(<?php echo $phpVersion['minimum'] ?> or Higher)</span>
                     </div>
 
@@ -33,19 +39,19 @@
                                 <?php if($enabled ? $src = $greenCheck : $src = $redCheck ): ?>
                                     <img src="<?php echo $src ?>">
                                 <?php endif; ?>
-                                <span style="margin-left: 10px"><b><?php echo $extention ?></b></span>
+                                <span><b><?php echo $extention ?></b></span>
                                 <span>(<?php echo $extention ?> Required)</span>
                             </div>
                         <?php endforeach; ?>
 
                     <?php endforeach; ?>
 
-                    <php class="check" style="margin-left: 25%">
+                    <div class="check" style="margin-left: 25%">
                         <?php if(($composerInstall['composer_install'] == 0) ? $src = $greenCheck : $src = $redCheck ): ?>
                             <img src="<?php echo $src ?>">
                             <span style="margin-left: 10px"><b>Composer</b></span>
                         <?php endif; ?>
-                    </php>
+                    </div>
 
                     <div style="margin-left: 30%;">
                         <?php if(!($composerInstall['composer_install'] == 0)): ?>

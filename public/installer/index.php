@@ -1,5 +1,4 @@
 <html>
-
     <?php
         $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
@@ -10,22 +9,25 @@
     ?>
 
     <head>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,500">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
         <title>Bagisto Installer</title>
+
         <link rel="icon" sizes="16x16" href="Images/favicon.ico">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,500">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" type="text/css" href= "<?php echo $cssUrl; ?> ">
+
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
-        <link rel="stylesheet" type="text/css" href= "<?php echo $cssUrl; ?> ">
     </head>
 
     <body>
-
-        <div class="container requirement">
-            <div class="initial-display" style="padding-top: 100px;">
+        <div class="container">
+            <div class="initial-display">
                 <img class="logo" src= "<?php echo $logo; ?>" >
             </div>
-
-
         </div>
 
         <?php
@@ -134,10 +136,9 @@
             }
         ?>
 
-        <div style="margin-bottom: 10px; margin-top: 10px;">
-            Powered by <a href="https://bagisto.com/" target="_blank" style="color: blue">Bagisto</a>, A Community Project by
-            <a href="https://webkul.com/" target="_blank" style="color: blue">Webkul</a>
+        <div style="margin-bottom: 5px; margin-top: 30px;">
+            Powered by <a href="https://bagisto.com/" target="_blank">Bagisto</a>, a community project by
+            <a href="https://webkul.com/" target="_blank">Webkul</a>
         </div>
-
     </body>
 </html>

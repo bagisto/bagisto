@@ -19,6 +19,7 @@
                     <div class="control-group" id="mail_encryption">
                         <label for="mail_encryption">Encryption</label>
                         <select name="mail_encryption" class="control">
+                            <option value="none">None</option>
                             <option value="ssl">SSL</option>
                             <option value="tls">TLS</option>
                         </select>
