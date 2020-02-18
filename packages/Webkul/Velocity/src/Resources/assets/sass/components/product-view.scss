@@ -182,6 +182,7 @@
         overflow: hidden;
         margin-top: 10px;
         position: relative;
+        pointer-events: none;
 
         .arrow {
             left: 0px;

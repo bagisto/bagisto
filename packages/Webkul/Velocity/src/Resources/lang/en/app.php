@@ -227,6 +227,7 @@ return [
         'not-available' => 'Not Available',
         'submit-review' => 'Submit Review',
         'ratings' => ':totalRatings Ratings',
+        'reviews' => ':totalReviews Reviews',
         'customer-rating' => 'Customer Rating',
         'more-infomation' => 'More Information',
         'view-all-reviews' => 'View All Reviews',

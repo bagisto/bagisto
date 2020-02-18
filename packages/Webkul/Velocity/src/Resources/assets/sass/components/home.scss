@@ -659,12 +659,39 @@ body::after {
         line-height: 25px;
     }
 
+    .product-price {
+        margin-top: 10px;
+    }
+
     .product-rating {
         display: table;
+        margin: 10px 0;
 
         span {
             vertical-align: top;
             display: table-cell;
+        }
+    }
+
+    .product-gallery {
+        top: 10px;
+        position: sticky;
+
+        .VueCarousel-pagination {
+            button {
+                padding: 0px !important;
+                margin: 3px !important;
+                border: 1px solid $border-dark !important;
+                background-color: $white-color !important;
+
+                &.VueCarousel-dot--active {
+                    background-color: $border-dark !important;
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+            }
         }
     }
 }

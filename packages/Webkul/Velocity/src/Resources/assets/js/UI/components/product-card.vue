@@ -59,7 +59,7 @@
             <div class="product-rating col-12 no-padding" v-if="product.totalReviews && product.totalReviews > 0">
                 <star-ratings :ratings="product.avgRating"></star-ratings>
                 <span class="align-top">
-                    {{ __('products.ratings', {'totalRatings': product.totalReviews}) }}
+                    {{ __('products.reviews', {'totalReviews': product.totalReviews}) }}
                 </span>
             </div>
 

@@ -1,24 +1,27 @@
 <template>
     <div class="modal-parent scrollable">
         <div class="cd-quick-view">
-            <div class="col-lg-6 cd-slider-wrapper model-animation">
+            <div class="col-lg-6 product-gallery">
                 <ul class="cd-slider" type="none">
-                    <li class="selected">
-                        <img :src="product.galleryImages[currentlyActiveImage].medium_image_url" :alt="product.name" />
-                    </li>
-                </ul>
+                    <carousel-component
+                        slides-per-page="1"
+                        navigation-enabled="hide"
+                        :slides-count="product.galleryImages.length">
 
-                <ul type="square" class="circle-list" v-if='product.galleryImages.length > 1'>
-                    <li
-                        :key="index"
-                        v-for="index in product.galleryImages.length"
-                        :class="`circle ${(index - 1 == currentlyActiveImage) ? '' : 'fill'}`"
-                        @click="changeImage(index - 1)">
-                    </li>
+                            <slide
+                                :key="index"
+                                :slot="`slide-${index}`"
+                                v-for="(image, index) in product.galleryImages">
+
+                                <li class="selected">
+                                    <img :src="image.medium_image_url" :alt="product.name" />
+                                </li>
+                            </slide>
+                    </carousel-component>
                 </ul>
             </div>
 
-            <div class="col-lg-6 cd-item-info fs16">
+            <div class="col-lg-6 fs16">
                 <h2 class="text-nowrap fw6 quick-view-name">{{ product.name }}</h2>
 
                 <div class="product-price" v-html="product.priceHTML"></div>
@@ -29,7 +32,7 @@
 
                     <star-ratings :ratings="product.avgRating"></star-ratings>
                     <span class="pl10">
-                        {{ __('products.ratings', {'totalRatings': product.totalReviews}) }}
+                        {{ __('products.reviews', {'totalReviews': product.totalReviews}) }}
                     </span>
                 </div>
 
