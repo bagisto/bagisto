@@ -113,6 +113,10 @@ class OnepageController extends Controller
 
             Cart::collectTotals();
 
+            if (! auth()->guard('customer')->check() && ! $cart->hasGuestCheckoutItems()) {
+                return response()->json(['redirect_url' => route('customer.session.index')], 403);
+            }
+
             if ($cart->haveStockableItems()) {
                 if (! $rates = Shipping::collectRates())
                     return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
