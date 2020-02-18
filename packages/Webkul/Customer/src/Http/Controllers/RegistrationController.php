@@ -31,23 +31,24 @@ class RegistrationController extends Controller
      * CustomerRepository object
      *
      * @var Object
-    */
+     */
     protected $customerRepository;
 
     /**
      * CustomerGroupRepository object
      *
      * @var Object
-    */
+     */
     protected $customerGroupRepository;
 
     /**
      * Create a new Repository instance.
      *
-     * @param  \Webkul\Customer\Repositories\CustomerRepository      $customer
-     * @param  \Webkul\Customer\Repositories\CustomerGroupRepository $customerGroupRepository
+     * @param \Webkul\Customer\Repositories\CustomerRepository      $customer
+     * @param \Webkul\Customer\Repositories\CustomerGroupRepository $customerGroupRepository
+     *
      * @return void
-    */
+     */
     public function __construct(
         CustomerRepository $customerRepository,
         CustomerGroupRepository $customerGroupRepository
@@ -79,9 +80,9 @@ class RegistrationController extends Controller
     {
         $this->validate(request(), [
             'first_name' => 'string|required',
-            'last_name' => 'string|required',
-            'email' => 'email|required|unique:customers,email',
-            'password' => 'confirmed|min:6|required',
+            'last_name'  => 'string|required',
+            'email'      => 'email|required|unique:customers,email',
+            'password'   => 'confirmed|min:6|required',
         ]);
 
         $data = request()->input();
@@ -110,7 +111,10 @@ class RegistrationController extends Controller
         if ($customer) {
             if (core()->getConfigData('customer.settings.email.verification')) {
                 try {
-                    Mail::queue(new VerificationEmail($verificationData));
+                    $configKey = 'emails.general.notifications.emails.general.notifications.verification';
+                    if (core()->getConfigData($configKey)) {
+                        Mail::queue(new VerificationEmail($verificationData));
+                    }
 
                     session()->flash('success', trans('shop::app.customer.signup-form.success-verify'));
                 } catch (\Exception $e) {
@@ -119,7 +123,10 @@ class RegistrationController extends Controller
                 }
             } else {
                 try {
-                    Mail::queue(new RegistrationEmail(request()->all()));
+                    $configKey = 'emails.general.notifications.emails.general.notifications.registration';
+                    if (core()->getConfigData($configKey)) {
+                        Mail::queue(new RegistrationEmail(request()->all()));
+                    }
 
                     session()->flash('success', trans('shop::app.customer.signup-form.success-verify')); //customer registered successfully
                 } catch (\Exception $e) {
