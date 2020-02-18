@@ -77,6 +77,7 @@ return [
         'more-infomation' => 'معلومات اكثر',
         'short-description' => 'أوصاف قصيرة',
         'ratings' => ':totalRatings تصنيفات',
+        'ratings' => ':totalReviews التعليقات',
         'write-your-review' => 'اكتب مراجعتك',
         'be-first-review' => 'كن أول من يكتب نقد',
         'view-all-reviews' => 'عرض جميع التقييمات',
