@@ -2,7 +2,6 @@
 
 namespace Webkul\Product\Models;
 
-use Webkul\Core\Models\Channel;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Attribute\Models\AttributeFamilyProxy;
 use Webkul\Category\Models\CategoryProxy;
@@ -182,8 +181,8 @@ class Product extends Model implements ProductContract
     public function inventory_source_qty($inventorySourceId)
     {
         return $this->inventories()
-            ->where('inventory_source_id', $inventorySourceId)
-            ->sum('qty');
+                ->where('inventory_source_id', $inventorySourceId)
+                ->sum('qty');
     }
 
     /**
@@ -244,7 +243,6 @@ class Product extends Model implements ProductContract
      *
      * @param Group $group
      * @param bool  $skipSuperAttribute
-     *
      * @return Collection
      */
     public function getEditableAttributes($group = null, $skipSuperAttribute = true)
@@ -255,8 +253,7 @@ class Product extends Model implements ProductContract
     /**
      * Get an attribute from the model.
      *
-     * @param string $key
-     *
+     * @param  string  $key
      * @return mixed
      */
     public function getAttribute($key)
@@ -265,9 +262,8 @@ class Product extends Model implements ProductContract
             if (isset($this->id)) {
                 $this->attributes[$key] = '';
 
-                $attribute = core()
-                    ->getSingletonInstance(\Webkul\Attribute\Repositories\AttributeRepository::class)
-                    ->getAttributeByCode($key);
+                $attribute = core()->getSingletonInstance(\Webkul\Attribute\Repositories\AttributeRepository::class)
+                        ->getAttributeByCode($key);
 
                 $this->attributes[$key] = $this->getCustomAttributeValue($attribute);
 
@@ -288,9 +284,8 @@ class Product extends Model implements ProductContract
         $hiddenAttributes = $this->getHidden();
 
         if (isset($this->id)) {
-            $familyAttributes = core()
-                ->getSingletonInstance(\Webkul\Attribute\Repositories\AttributeRepository::class)
-                ->getFamilyAttributes($this->attribute_family);
+            $familyAttributes = core()->getSingletonInstance(\Webkul\Attribute\Repositories\AttributeRepository::class)
+                    ->getFamilyAttributes($this->attribute_family);
 
             foreach ($familyAttributes as $attribute) {
                 if (in_array($attribute->code, $hiddenAttributes)) {
@@ -311,41 +306,24 @@ class Product extends Model implements ProductContract
      */
     public function getCustomAttributeValue($attribute)
     {
-        if (! $attribute) {
+        if (! $attribute)
             return;
-        }
 
         $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
-        $locale = $this->determineLocale($channel);
+        $locale = request()->get('locale') ?: app()->getLocale();
 
         if ($attribute->value_per_channel) {
             if ($attribute->value_per_locale) {
-                $attributeValue = $this
-                    ->attribute_values()
-                    ->where('channel', $channel)
-                    ->where('locale', $locale)
-                    ->where('attribute_id', $attribute->id)
-                    ->first();
+                $attributeValue = $this->attribute_values()->where('channel', $channel)->where('locale', $locale)->where('attribute_id', $attribute->id)->first();
             } else {
-                $attributeValue = $this
-                    ->attribute_values()
-                    ->where('channel', $channel)
-                    ->where('attribute_id', $attribute->id)
-                    ->first();
+                $attributeValue = $this->attribute_values()->where('channel', $channel)->where('attribute_id', $attribute->id)->first();
             }
         } else {
             if ($attribute->value_per_locale) {
-                $attributeValue = $this
-                    ->attribute_values()
-                    ->where('locale', $locale)
-                    ->where('attribute_id', $attribute->id)
-                    ->first();
+                $attributeValue = $this->attribute_values()->where('locale', $locale)->where('attribute_id', $attribute->id)->first();
             } else {
-                $attributeValue = $this
-                    ->attribute_values()
-                    ->where('attribute_id', $attribute->id)
-                    ->first();
+                $attributeValue = $this->attribute_values()->where('attribute_id', $attribute->id)->first();
             }
         }
 
@@ -355,8 +333,7 @@ class Product extends Model implements ProductContract
     /**
      * Overrides the default Eloquent query builder
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function newEloquentBuilder($query)
@@ -378,25 +355,5 @@ class Product extends Model implements ProductContract
     public function getProductAttribute()
     {
         return $this;
-    }
-
-    /**
-     * Determine if the given channel has a default locale configured.
-     * If not, return the channel given in the request.
-     * If none given, return the fallback channel given in the application configuration
-     *
-     * @param string $channel
-     *
-     * @return string
-     */
-    private function determineLocale(string $channel): string
-    {
-        $channelModel = Channel::where(['code' => $channel])->first();
-
-        if ($channelModel) {
-            return $channelModel->default_locale->code;
-        }
-
-        return request()->get('locale') ?: app()->getLocale();
     }
 }
