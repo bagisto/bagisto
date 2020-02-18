@@ -120,7 +120,10 @@ class CustomerController extends Controller
         $customer = $this->customerRepository->create($data);
 
         try {
-            Mail::queue(new NewCustomerNotification($customer, $password));
+            $configKey = 'emails.general.notifications.emails.general.notifications.customer';
+            if (core()->getConfigData($configKey)) {
+                Mail::queue(new NewCustomerNotification($customer, $password));
+            }
         } catch (\Exception $e) {
             report($e);
         }

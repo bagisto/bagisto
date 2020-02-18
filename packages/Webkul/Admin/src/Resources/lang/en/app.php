@@ -1206,6 +1206,23 @@ return [
     ],
 
     'admin' => [
+        'emails' => [
+            'email' => 'Email',
+            'notification_label' => 'Notifications',
+            'notifications' => [
+                'verification' => 'Send verification E-mail',
+                'registration' => 'Send registration E-mail',
+                'customer' => 'Send customer E-mail',
+                'new-order' => 'Send Order Confirmation E-mail',
+                'new-admin' => 'Send Admin Invitation E-mail',
+                'new-invoice' => 'Send Invoice Confirmation E-mail',
+                'new-refund' => 'Send Refund Notification E-mail',
+                'new-shipment' => 'Send Shipment Notification E-mail',
+                'new-inventory-source' => 'Send Inventory Source Notification E-mail',
+                'cancel-order' => 'Send cancel Order Notification E-mail',
+            ],
+
+        ],
         'system' => [
             'catalog' => 'Catalog',
             'products' => 'Products',
