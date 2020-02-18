@@ -1,14 +1,14 @@
 @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 @inject ('reviewHelper', 'Webkul\Product\Helpers\Review')
 @inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar')
-{{--  @include('shop::UI.product-quick-view')  --}}
+{{-- @include('shop::UI.product-quick-view') --}}
 
 @push('css')
     <style type="text/css">
         .list-card .wishlist-icon i {
             padding-left: 10px;
         }
-        
+
         .product-price span:first-child, .product-price span:last-child {
             font-size: 18px;
             font-weight: 600;

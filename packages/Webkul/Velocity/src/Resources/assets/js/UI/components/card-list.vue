@@ -1,7 +1,9 @@
 <template>
     <div class="row flex-nowrap" :class="rowClass">
-
-        <product-quick-view v-if="quickViewDetails" :quick-view-details="quickViewDetails"></product-quick-view>
+        <!-- <product-quick-view
+            v-if="quickViewDetails"
+            :quick-view-details="quickViewDetails">
+        </product-quick-view> -->
 
         <div class="col-2 lg-card-container" v-for="(card, index) in cardDetails" :key="index">
             <div @click="redirect(card.route)" class="card padding-10">
