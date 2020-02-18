@@ -186,8 +186,10 @@ class ProductController extends Controller
         $inventorySources = $this->inventorySourceRepository->all();
 
         $channel = request()->get('channel') ?: core()->getDefaultChannel();
-        $channelCode = $channel->code;
-        $localeCode = request()->get('localeCode') ?: $channel->default_locale->code ?: app()->getLocale();
+
+        ($channel == 'default') ? $channelCode = 'default' : $channelCode = $channel->code;
+        
+        $localeCode = request()->get('locale') ?: $channel->default_locale->code ?: app()->getLocale();
 
         return view($this->_config['view'], compact('product',
             'categories',
