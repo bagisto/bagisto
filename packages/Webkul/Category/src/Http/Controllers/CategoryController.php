@@ -39,8 +39,9 @@ class CategoryController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Category\Repositories\CategoryRepository   $categoryRepository
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository $attributeRepository
+     * @param \Webkul\Category\Repositories\CategoryRepository   $categoryRepository
+     * @param \Webkul\Attribute\Repositories\AttributeRepository $attributeRepository
+     *
      * @return void
      */
     public function __construct(
@@ -74,7 +75,7 @@ class CategoryController extends Controller
     {
         $categories = $this->categoryRepository->getCategoryTree(null, ['id']);
 
-        $attributes = $this->attributeRepository->findWhere(['is_filterable' =>  1]);
+        $attributes = $this->attributeRepository->findWhere(['is_filterable' => 1]);
 
         return view($this->_config['view'], compact('categories', 'attributes'));
     }
@@ -87,10 +88,10 @@ class CategoryController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'slug' => ['required', 'unique:category_translations,slug', new \Webkul\Core\Contracts\Validations\Slug],
-            'name' => 'required',
-            'image.*' => 'mimes:jpeg,jpg,bmp,png',
-            'description' => 'required_if:display_mode,==,description_only,products_and_description'
+            'slug'        => ['required', 'unique:category_translations,slug', new \Webkul\Core\Contracts\Validations\Slug],
+            'name'        => 'required',
+            'image.*'     => 'mimes:jpeg,jpg,bmp,png',
+            'description' => 'required_if:display_mode,==,description_only,products_and_description',
         ]);
 
         if (strtolower(request()->input('name')) == 'root') {
@@ -98,14 +99,14 @@ class CategoryController extends Controller
 
             $result = $categoryTransalation->where('name', request()->input('name'))->get();
 
-            if(count($result) > 0) {
+            if (count($result) > 0) {
                 session()->flash('error', trans('admin::app.response.create-root-failure'));
 
                 return redirect()->back();
             }
         }
 
-        $category = $this->categoryRepository->create(request()->all());
+        $this->categoryRepository->create(request()->all());
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Category']));
 
@@ -116,6 +117,7 @@ class CategoryController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param int $id
+     *
      * @return \Illuminate\View\View
      */
     public function edit($id)
@@ -124,15 +126,25 @@ class CategoryController extends Controller
 
         $categories = $this->categoryRepository->getCategoryTreeWithoutDescendant($id);
 
-        $attributes = $this->attributeRepository->findWhere(['is_filterable' =>  1]);
+        $attributes = $this->attributeRepository->findWhere(['is_filterable' => 1]);
 
-        return view($this->_config['view'], compact('category', 'categories', 'attributes'));
+        $locale = request()->get('locale')
+            ?: core()->getDefaultChannel()->default_locale->code
+            ?: app()->getLocale();
+
+        return view($this->_config['view'], compact(
+            'category',
+            'categories',
+            'attributes',
+            'locale'
+        ));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update($id)
@@ -146,7 +158,7 @@ class CategoryController extends Controller
                 }
             }],
             $locale . '.name' => 'required',
-            'image.*' => 'mimes:jpeg,jpg,bmp,png'
+            'image.*'         => 'mimes:jpeg,jpg,bmp,png',
         ]);
 
         $this->categoryRepository->update(request()->all(), $id);
@@ -159,14 +171,15 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $category = $this->categoryRepository->findOrFail($id);
 
-        if(strtolower($category->name) == "root") {
+        if (strtolower($category->name) == "root") {
             session()->flash('warning', trans('admin::app.response.delete-category-root', ['name' => 'Category']));
         } else {
             try {
@@ -179,7 +192,7 @@ class CategoryController extends Controller
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Category']));
 
                 return response()->json(['message' => true], 200);
-            } catch(\Exception $e) {
+            } catch (\Exception $e) {
                 session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Category']));
             }
         }
@@ -192,7 +205,8 @@ class CategoryController extends Controller
      *
      * @return response \Illuminate\Http\Response
      */
-    public function massDestroy() {
+    public function massDestroy()
+    {
         $suppressFlash = false;
 
         if (request()->isMethod('delete') || request()->isMethod('post')) {
@@ -205,7 +219,7 @@ class CategoryController extends Controller
                     $this->categoryRepository->delete($value);
 
                     Event::dispatch('catalog.category.delete.after', $value);
-                } catch(\Exception $e) {
+                } catch (\Exception $e) {
                     $suppressFlash = true;
 
                     continue;
