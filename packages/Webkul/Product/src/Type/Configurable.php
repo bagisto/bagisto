@@ -523,7 +523,7 @@ class Configurable extends AbstractType
         if ($price == $item->base_price)
             return;
 
-        $item->base_price = $total;
+        $item->base_price = $price;
         $item->price = core()->convertPrice($price);
 
         $item->base_total = $price * $item->quantity;
