@@ -10,7 +10,7 @@ use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Helpers\ProductImage;
 use Webkul\BookingProduct\Repositories\BookingProductRepository;
 use Webkul\BookingProduct\Helpers\Booking as BookingHelper;
-use Webkul\Product\Type\AbstractType;
+use Webkul\Product\Type\Virtual;
 
 /**
  * Class Booking.
@@ -18,7 +18,7 @@ use Webkul\Product\Type\AbstractType;
  * @author    Jitendra Singh <jitendra@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class Booking extends AbstractType
+class Booking extends Virtual
 {
     /**
      * BookingProductRepository instance
@@ -35,25 +35,13 @@ class Booking extends AbstractType
     protected $bookingHelper;
 
     /**
-     * Skip attribute for virtual product type
-     *
-     * @var array
-     */
-    protected $skipAttributes = ['width', 'height', 'depth', 'weight'];
-
-    /**
-     * Show quantity box
-     *
-     * @var boolean
-     */
-    protected $showQuantityBox = true;
-
-    /**
      * @var array
      */
     protected $additionalViews = [
+        'admin::catalog.products.accordians.inventories',
         'admin::catalog.products.accordians.images',
         'admin::catalog.products.accordians.categories',
+        'admin::catalog.products.accordians.channels',
         'bookingproduct::admin.catalog.products.accordians.booking',
         'admin::catalog.products.accordians.product-links'
     ];
@@ -97,37 +85,42 @@ class Booking extends AbstractType
     }
 
     /**
-     * Return true if this product type is saleable
+     * Returns additional views
      *
      * @return array
      */
-    public function isSaleable()
+    public function getBookingProduct($productId)
     {
-        if (! $this->product->status)
-            return false;
-            
+        static $bookingProduct;
+
+        if ($bookingProduct)
+            return $bookingProduct;
+
+        return $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $productId);
+    }
+
+    /**
+     * @param integer $qty
+     * @return bool
+     */
+    public function haveSufficientQuantity($qty)
+    {
         return true;
     }
 
     /**
-     * Return true if this product can have inventory
+     * Returns additional views
      *
      * @return array
      */
-    public function isStockable()
+    public function getAdditionalViews()
     {
-        return false;
-    }
+        $bookingProduct = $this->getBookingProduct($this->product->id);
 
-    /**
-     * Return true if item can be moved to cart from wishlist
-     *
-     * @param CartItem $item
-     * @return boolean
-     */
-    public function canBeMovedFromWishlistToCart($item)
-    {
-        return true;
+        if ($bookingProduct->type != 'default')
+            unset($this->additionalViews[0]);
+
+        return $this->additionalViews;
     }
 
     /**
@@ -143,7 +136,7 @@ class Booking extends AbstractType
 
         $products = parent::prepareForCart($data);
         
-        $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $data['product_id']);
+        $bookingProduct = $this->getBookingProduct($data['product_id']);
 
         if ($bookingProduct)
             $products = app($this->bookingHelper->getTypeHepler($bookingProduct->type))->addAdditionalPrices($products);
@@ -184,7 +177,7 @@ class Booking extends AbstractType
      */
     public function validateCartItem($item)
     {
-        $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $item->product_id);
+        $bookingProduct = $this->getBookingProduct($item->product_id);
 
         if (! $bookingProduct)
             return;

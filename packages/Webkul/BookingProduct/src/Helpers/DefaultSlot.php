@@ -138,11 +138,11 @@ class DefaultSlot extends Booking
 
                 if ($qty && $currentTime <= $from) {
                     $slots[] = [
-                            'from' => $from->format('h:i A'), 
-                            'to' => $to->format('h:i A'), 
-                            'timestamp' => $from->getTimestamp() . '-' . $to->getTimestamp(), 
-                            'qty' => $qty, 
-                        ];
+                        'from' => $from->format('h:i A'), 
+                        'to' => $to->format('h:i A'), 
+                        'timestamp' => $from->getTimestamp() . '-' . $to->getTimestamp(), 
+                        'qty' => $qty, 
+                    ];
                 }
             } else {
                 break;
