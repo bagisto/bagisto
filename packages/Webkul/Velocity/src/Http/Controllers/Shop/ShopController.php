@@ -228,6 +228,7 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
             'slug' => $product->url_key,
             'image' => $productImage,
             'description' => $product->description,
+            'shortDescription' => $product->meta_description,
             'galleryImages' => $galleryImages,
             'priceHTML' => view('shop::products.price', ['product' => $product])->render(),
             'totalReviews' => $totalReviews,

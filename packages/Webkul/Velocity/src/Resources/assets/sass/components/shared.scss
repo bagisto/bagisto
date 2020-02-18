@@ -675,6 +675,13 @@ a {
     &.remove-decoration:focus {
         text-decoration: none;
     }
+
+    &.active-hover {
+        &:hover {
+            color: $link-color !important;
+            text-decoration: underline !important;
+        }
+    }
 }
 
 .dropdown-icon::after {

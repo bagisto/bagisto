@@ -6,13 +6,14 @@
 
     .magnifier {
         > img {
-            height: 450px;
+            min-height: 450px;
+            max-height: 530px;
         }
     }
 
     img {
-        width: 100%;
-        height: 100%;
+        // width: 100%;
+        // height: 100%;
     }
 
     .right {
@@ -182,7 +183,6 @@
         overflow: hidden;
         margin-top: 10px;
         position: relative;
-        pointer-events: none;
 
         .arrow {
             left: 0px;
@@ -199,6 +199,7 @@
                 right: 0;
                 left: unset;
                 line-height: 13rem;
+                pointer-events: none;
             }
         }
 
