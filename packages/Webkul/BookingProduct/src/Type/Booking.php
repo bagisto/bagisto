@@ -24,14 +24,14 @@ class Booking extends Virtual
      * BookingProductRepository instance
      *
      * @var BookingProductRepository
-    */
+     */
     protected $bookingProductRepository;
 
     /**
      * Booking helper instance
      *
      * @var Booking
-    */
+     */
     protected $bookingHelper;
 
     /**
@@ -138,8 +138,9 @@ class Booking extends Virtual
         
         $bookingProduct = $this->getBookingProduct($data['product_id']);
 
-        if ($bookingProduct)
+        if ($bookingProduct) {
             $products = app($this->bookingHelper->getTypeHepler($bookingProduct->type))->addAdditionalPrices($products);
+        }
 
         return $products;
     }

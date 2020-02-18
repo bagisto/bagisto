@@ -21,7 +21,7 @@ class BookingProductController extends Controller
      * Booking object
      *
      * @var Object
-    */
+     */
     protected $bookingHelper;
 
     /**
