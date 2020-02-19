@@ -58,9 +58,9 @@
 
             <div class="product-rating col-12 no-padding" v-if="product.totalReviews && product.totalReviews > 0">
                 <star-ratings :ratings="product.avgRating"></star-ratings>
-                <span class="align-top">
-                    {{ __('products.reviews', {'totalReviews': product.totalReviews}) }}
-                </span>
+                <a class="fs14 align-top unset active-hover" :href="`${$root.baseUrl}/reviews/${product.slug}`">
+                    {{ __('products.reviews-count', {'totalReviews': product.totalReviews}) }}
+                </a>
             </div>
 
             <div class="product-rating col-12 no-padding" v-else>
