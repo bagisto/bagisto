@@ -688,9 +688,9 @@
                                 
                                 if (response.data.redirect) {
                                     window.location.href = response.data.redirect;
+                                } else {
+                                    location.reload();
                                 }
-                                
-                                location.reload();
                             }).catch(function (error) {
                                 location.reload();
                             });
