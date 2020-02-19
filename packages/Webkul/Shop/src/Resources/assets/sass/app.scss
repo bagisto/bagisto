@@ -3759,6 +3759,12 @@ section.review {
 .rtl {
     direction: rtl;
 
+    .dropdown-filters {
+        .per-page-label {
+            position: static !important;
+        }
+    }
+
     //header css start here
     .header {
         .header-top {
