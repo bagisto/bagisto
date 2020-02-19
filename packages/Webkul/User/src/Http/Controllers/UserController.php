@@ -172,7 +172,9 @@ class UserController extends Controller
             Event::dispatch('user.admin.delete.before', $id);
 
             if (auth()->guard('admin')->user()->id == $id) {
-                return view('admin::customers.confirm-password');
+                return response()->json([
+                    'redirect' => route('super.users.confirm', ['id' => $id]),
+                ]);
             }
 
             try {
@@ -189,6 +191,19 @@ class UserController extends Controller
         }
 
         return response()->json(['message' => false], 400);
+    }
+
+    /**
+     * Show the form for confirming the user password.
+     *
+     * @param integer $id
+     * @return \Illuminate\View\View
+     */
+    public function confirm($id)
+    {
+        $user = $this->adminRepository->findOrFail($id);
+
+        return view($this->_config['view'], compact('user'));
     }
 
     /**

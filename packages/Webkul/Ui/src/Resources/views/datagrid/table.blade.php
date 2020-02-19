@@ -685,6 +685,11 @@
                                 _method : element.getAttribute('data-method')
                             }).then(function(response) {
                                 this.result = response;
+                                
+                                if (response.data.redirect) {
+                                    window.location.href = response.data.redirect;
+                                }
+                                
                                 location.reload();
                             }).catch(function (error) {
                                 location.reload();
