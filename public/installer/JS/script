@@ -11,6 +11,8 @@
 
         var welcomeCheck = document.getElementById('welcome-check');
         var requirementCheck = document.getElementById('requirement-check');
+        var requirementsRefresh = document.getElementById('requirements-refresh');
+
         var permisssionCheck = document.getElementById('permission-check');
         var environmentCheck = document.getElementById('environment-check');
         var continue_to_admin =  document.getElementById('continue');
@@ -22,6 +24,10 @@
 
         if (requirementCheck) {
             requirementCheck.addEventListener('click', myFunction);
+        }
+
+        if (requirementsRefresh) {
+            requirementsRefresh.addEventListener('click', myFunction);
         }
 
         if (welcomeCheck) {
@@ -56,7 +62,6 @@
             migrationBack.addEventListener('click', myFunction);
         }
 
-
         function myFunction() {
             if(this.id == 'welcome-check') {
                 requirement.style.display = "block";
@@ -76,6 +81,8 @@
             } else if (this.id == 'migration-back') {
                 migration.style.display = "none";
                 environment.style.display ="block";
+            } else if (this.id == 'requirements-refresh') {
+                location.reload();
             }
         }
     };

@@ -52,6 +52,24 @@
 
 * #2449 [fixed] - error clicking empty cart.
 
+* #2458 [fixed] - Payment method is not updating on checkout page.
+
+* #2459 [fixed] - shipping address field warning for guest customer not translated.
+
+* #2469 [fixed] - Displaying wrong amount for bundle product in cart.
+
+* #2479 [fixed] - showing total review in recent view product list.
+
+* #2480 [fixed] - Exception is thrown by mini cart when catalog rule is applied on configurable product.
+
+* #2488 [fixed] - ErrorException When Editing product in different language.
+
+* #2490 [fixed] - missing zip code & country field in checkout page.
+
+* #2491 [fixed] - Exception on Create/Edit bundle product.
+
+* #2494 [fixed] - Product total inventory for all locale is showing wrong.
+
 ## **v1.0.0-BETA1(5th of February 2020)** - *Release*
 
 * [feature] Updated to laravel version 6.

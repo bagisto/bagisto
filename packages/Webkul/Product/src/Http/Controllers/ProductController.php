@@ -73,13 +73,12 @@ class ProductController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param \Webkul\Category\Repositories\CategoryRepository                 $categoryRepository
-     * @param \Webkul\Product\Repositories\ProductRepository                   $productRepository
-     * @param \Webkul\Product\Repositories\ProductDownloadableLinkRepository   $productDownloadableLinkRepository
-     * @param \Webkul\Product\Repositories\ProductDownloadableSampleRepository $productDownloadableSampleRepository
-     * @param \Webkul\Attribute\Repositories\AttributeFamilyRepository         $attributeFamilyRepository
-     * @param \Webkul\Inventory\Repositories\InventorySourceRepository         $inventorySource
-     *
+     * @param  \Webkul\Category\Repositories\CategoryRepository                 $categoryRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository                   $productRepository
+     * @param  \Webkul\Product\Repositories\ProductDownloadableLinkRepository   $productDownloadableLinkRepository
+     * @param  \Webkul\Product\Repositories\ProductDownloadableSampleRepository $productDownloadableSampleRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeFamilyRepository         $attributeFamilyRepository
+     * @param  \Webkul\Inventory\Repositories\InventorySourceRepository         $inventorySource
      * @return void
      */
     public function __construct(
@@ -150,7 +149,7 @@ class ProductController extends Controller
 
         if (ProductType::hasVariants(request()->input('type'))
             && (! request()->has('super_attributes')
-                || ! count(request()->get('super_attributes')))) {
+            || ! count(request()->get('super_attributes')))) {
 
             session()->flash('error', trans('admin::app.catalog.products.configurable-error'));
 
@@ -158,9 +157,9 @@ class ProductController extends Controller
         }
 
         $this->validate(request(), [
-            'type'                => 'required',
+            'type' => 'required',
             'attribute_family_id' => 'required',
-            'sku'                 => ['required', 'unique:products,sku', new \Webkul\Core\Contracts\Validations\Slug],
+            'sku' => ['required', 'unique:products,sku', new \Webkul\Core\Contracts\Validations\Slug]
         ]);
 
         $product = $this->productRepository->create(request()->all());
@@ -173,8 +172,7 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return \Illuminate\View\View
      */
     public function edit($id)
@@ -185,25 +183,14 @@ class ProductController extends Controller
 
         $inventorySources = $this->inventorySourceRepository->all();
 
-        $channel = request()->get('channel') ?: core()->getDefaultChannel();
-        $channelCode = $channel->code;
-        $localeCode = request()->get('localeCode') ?: $channel->default_locale->code ?: app()->getLocale();
-
-        return view($this->_config['view'], compact('product',
-            'categories',
-            'inventorySources',
-            'channel',
-            'channelCode',
-            'localeCode'
-        ));
+        return view($this->_config['view'], compact('product', 'categories', 'inventorySources'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \Webkul\Product\Http\Requests\ProductForm $request
-     * @param int                                       $id
-     *
+     * @param  \Webkul\Product\Http\Requests\ProductForm $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(ProductForm $request, $id)
@@ -218,8 +205,7 @@ class ProductController extends Controller
     /**
      * Uploads downloadable file
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function uploadLink($id)
@@ -232,8 +218,7 @@ class ProductController extends Controller
     /**
      * Uploads downloadable sample file
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function uploadSample($id)
@@ -246,8 +231,7 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -303,7 +287,7 @@ class ProductController extends Controller
             return redirect()->back();
         }
 
-        if (! $data['massaction-type'] == 'update') {
+        if (!$data['massaction-type'] == 'update') {
             return redirect()->back();
         }
 
@@ -312,8 +296,8 @@ class ProductController extends Controller
         foreach ($productIds as $productId) {
             $this->productRepository->update([
                 'channel' => null,
-                'locale'  => null,
-                'status'  => $data['update-options'],
+                'locale' => null,
+                'status' => $data['update-options']
             ], $productId);
         }
 
@@ -344,10 +328,10 @@ class ProductController extends Controller
 
             foreach ($this->productRepository->searchProductByAttribute(request()->input('query')) as $row) {
                 $results[] = [
-                    'id'   => $row->product_id,
-                    'sku'  => $row->sku,
-                    'name' => $row->name,
-                ];
+                        'id' => $row->product_id,
+                        'sku' => $row->sku,
+                        'name' => $row->name,
+                    ];
             }
 
             return response()->json($results);
@@ -356,18 +340,17 @@ class ProductController extends Controller
         }
     }
 
-    /**
+     /**
      * Download image or file
      *
-     * @param int $productId , $attributeId
-     *
+     * @param  int $productId, $attributeId
      * @return \Illuminate\Http\Response
      */
     public function download($productId, $attributeId)
     {
         $productAttribute = $this->productAttributeValue->findOneWhere([
             'product_id'   => $productId,
-            'attribute_id' => $attributeId,
+            'attribute_id' => $attributeId
         ]);
 
         return Storage::download($productAttribute['text_value']);

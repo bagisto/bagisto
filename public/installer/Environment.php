@@ -8,9 +8,9 @@
 
                 <form action="EnvConfig.php" method="POST" id="environment-form">
                     <div class="content">
-                        <div class="databse-error" style="text-align: center; padding-top: 10px" id="database_error">
+                        <div class="databse-error" style="text-align: center; padding-top: 5px" id="database_error">
                         </div>
-                        <div class="form-container" style="padding: 10%; padding-top: 35px">
+                        <div class="form-container" style="padding: 10%; padding-top: 10px">
                             <div class="control-group" id="app_name">
                                 <label for="app_name" class="required">App Name</label>
                                 <input type = "text" name = "app_name" class = "control"
@@ -21,7 +21,7 @@
 
                             <div class="control-group" id="app_url">
                                 <label for="app_url" class="required">App URL</label>
-                                <input type="text" name="app_url" class="control"
+                                <input type="text" name="app_url" class="control" value="https://<?php echo $_SERVER['HTTP_HOST']; ?>"
                                 placeholder="http://localhost"
                                 data-validation="required length" data-validation-length="max50">
                             </div>
@@ -40,14 +40,13 @@
 
                             <div class="control-group" id="port_name">
                                 <label for="port_name" class="required">Database Port</label>
-                                <input type="text" name="port_name" class="control"
-                                placeholder="3306"
+                                <input type="text" name="port_name" class="control" value="3306" placeholder="3306"
                                 data-validation="required alphanumeric number length" data-validation-length="max5">
                             </div>
 
                             <div class="control-group" id="host_name">
                                 <label for="host_name" class="required">Database Host</label>
-                                <input type="text" name="host_name" class="control"
+                                <input type="text" name="host_name" class="control" value="127.0.0.1"
                                 placeholder="127.0.0.1"
                                 data-validation="required length" data-validation-length="max50">
                             </div>
@@ -68,7 +67,7 @@
 
                             <div class="control-group" id="user_password">
                                 <label for="user_password" class="required">User Password</label>
-                                <input type="text" name="user_password" class="control"
+                                <input type="password" name="user_password" class="control"
                                 placeholder="database password">
                             </div>
                         </div>

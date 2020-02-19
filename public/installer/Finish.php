@@ -7,12 +7,12 @@
                     <div class="content-container" style="padding: 20px">
                         <span>
                             Bagisto is successfully installed on your system.<br>
-                            Click the below button to launch Admin Panel.
+                            Click the below button to launch the admin panel.
                         </span>
                     </div>
                 </div>
 
-                <button  class="prepare-btn" onclick="finish()">Finish</button>
+                <button  class="prepare-btn" onclick="finish()">Continue</button>
             </div>
         </div>
     </body>

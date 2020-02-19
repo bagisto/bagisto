@@ -408,9 +408,13 @@ Route::group(['middleware' => ['web']], function () {
             //delete backend user
             Route::post('/users/delete/{id}', 'Webkul\User\Http\Controllers\UserController@destroy')->name('admin.users.delete');
 
-            Route::post('/confirm/destroy', 'Webkul\User\Http\Controllers\UserController@destroySelf')->defaults('_config', [
+            Route::get('/users/confirm/{id}', 'Webkul\User\Http\Controllers\UserController@confirm')->defaults('_config', [
+                'view' => 'admin::customers.confirm-password'
+            ])->name('super.users.confirm');
+
+            Route::post('/users/confirm/{id}', 'Webkul\User\Http\Controllers\UserController@destroySelf')->defaults('_config', [
                 'redirect' => 'admin.users.index'
-            ])->name('admin.users.confirm.destroy');
+            ])->name('admin.users.destroy');
 
             // User Role Routes
             Route::get('/roles', 'Webkul\User\Http\Controllers\RoleController@index')->defaults('_config', [
