@@ -18,8 +18,8 @@ class Payment
 
         return [
                 'jump_to_section' => 'payment',
-                'paymentMethods' => $this->getPaymentMethods(),
-                'html' => view('shop::checkout.onepage.payment', compact('paymentMethods'))->render()
+                'paymentMethods'  => $this->getPaymentMethods(),
+                'html'            => view('shop::checkout.onepage.payment', compact('paymentMethods'))->render()
             ];
     }
 
@@ -37,10 +37,10 @@ class Payment
 
             if ($object->isAvailable()) {
                 $paymentMethods[] = [
-                    'method' => $object->getCode(),
+                    'method'       => $object->getCode(),
                     'method_title' => $object->getTitle(),
-                    'description' => $object->getDescription(),
-                    'sort' => $object->getSortOrder(),
+                    'description'  => $object->getDescription(),
+                    'sort'         => $object->getSortOrder(),
                 ];
             }
         }

@@ -80,8 +80,9 @@ abstract class Payment
      */
     public function setCart()
     {
-        if (! $this->cart)
+        if (! $this->cart) {
             $this->cart = Cart::getCart();
+        }
     }
 
     /**
@@ -91,8 +92,9 @@ abstract class Payment
      */
     public function getCart()
     {
-        if (! $this->cart)
+        if (! $this->cart) {
             $this->setCart();
+        }
 
         return $this->cart;
     }
@@ -104,8 +106,9 @@ abstract class Payment
      */
     public function getCartItems()
     {
-        if (! $this->cart)
+        if (! $this->cart) {
             $this->setCart();
+        }
 
         return $this->cart->items;
     }
