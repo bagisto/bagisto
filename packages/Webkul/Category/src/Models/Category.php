@@ -110,6 +110,7 @@ class Category extends TranslatableModel implements CategoryContract
         if ($category->id === $this->id) {
             return $category;
         }
+        
         return $this->findInTree($category->children);
     }
 }

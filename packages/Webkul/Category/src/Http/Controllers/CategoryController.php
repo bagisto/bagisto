@@ -87,9 +87,9 @@ class CategoryController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'slug' => ['required', 'unique:category_translations,slug', new \Webkul\Core\Contracts\Validations\Slug],
-            'name' => 'required',
-            'image.*' => 'mimes:jpeg,jpg,bmp,png',
+            'slug'        => ['required', 'unique:category_translations,slug', new \Webkul\Core\Contracts\Validations\Slug],
+            'name'        => 'required',
+            'image.*'     => 'mimes:jpeg,jpg,bmp,png',
             'description' => 'required_if:display_mode,==,description_only,products_and_description'
         ]);
 
@@ -146,7 +146,7 @@ class CategoryController extends Controller
                 }
             }],
             $locale . '.name' => 'required',
-            'image.*' => 'mimes:jpeg,jpg,bmp,png'
+            'image.*'         => 'mimes:jpeg,jpg,bmp,png'
         ]);
 
         $this->categoryRepository->update(request()->all(), $id);
@@ -212,10 +212,11 @@ class CategoryController extends Controller
                 }
             }
 
-            if (! $suppressFlash)
+            if (! $suppressFlash) {
                 session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success'));
-            else
+            } else {
                 session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'Attribute Family']));
+            }
 
             return redirect()->back();
         } else {

@@ -109,8 +109,9 @@ class CategoryRepository extends Repository
     {
         static $categories = [];
 
-        if(array_key_exists($id, $categories))
+        if(array_key_exists($id, $categories)) {
             return $categories[$id];
+        }
 
         return $categories[$id] = $id
                 ? $this->model::orderBy('position', 'ASC')->where('status', 1)->descendantsOf($id)->toTree()
@@ -243,7 +244,7 @@ class CategoryRepository extends Repository
         foreach ($categories as $key => $category) {
             if ($category->name != null || $category->name != "") {
                 $trimmed[$key] = [
-                    'id' => $category->id,
+                    'id'   => $category->id,
                     'name' => $category->name,
                     'slug' => $category->slug
                 ];
