@@ -289,6 +289,8 @@
 
                     this.disable_button = true;
 
+                    console.log(this.address);
+
                     this.$http.post("{{ route('shop.checkout.save-address') }}", this.address)
                         .then(function(response) {
                             this_this.disable_button = false;
@@ -404,10 +406,12 @@
 
                 newBillingAddress: function() {
                     this.new_billing_address = true;
+                    this.address.billing.address_id = null;
                 },
 
                 newShippingAddress: function() {
                     this.new_shipping_address = true;
+                    this.address.shipping.address_id = null;
                 },
 
                 backToSavedBillingAddress: function() {
