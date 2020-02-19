@@ -72,9 +72,9 @@ use Webkul\CMS\Repositories\CmsRepository;
         $data = request()->all();
 
         $this->validate(request(), [
-            'url_key' => ['required', 'unique:cms_page_translations,url_key', new \Webkul\Core\Contracts\Validations\Slug],
-            'page_title' => 'required',
-            'channels' => 'required',
+            'url_key'      => ['required', 'unique:cms_page_translations,url_key', new \Webkul\Core\Contracts\Validations\Slug],
+            'page_title'   => 'required',
+            'channels'     => 'required',
             'html_content' => 'required'
         ]);
         
@@ -109,13 +109,14 @@ use Webkul\CMS\Repositories\CmsRepository;
         $locale = request()->get('locale') ?: app()->getLocale();
 
         $this->validate(request(), [
-            $locale . '.url_key' => ['required', new \Webkul\Core\Contracts\Validations\Slug, function ($attribute, $value, $fail) use ($id) {
-                if (! $this->cmsRepository->isUrlKeyUnique($id, $value))
+            $locale . '.url_key'      => ['required', new \Webkul\Core\Contracts\Validations\Slug, function ($attribute, $value, $fail) use ($id) {
+                if (! $this->cmsRepository->isUrlKeyUnique($id, $value)) {
                     $fail(trans('admin::app.response.already-taken', ['name' => 'Page']));
+                }
             }],
-            $locale . '.page_title' => 'required',
+            $locale . '.page_title'   => 'required',
             $locale . '.html_content' => 'required',
-            'channels' => 'required'
+            'channels'                => 'required'
         ]);
 
         $this->cmsRepository->update(request()->all(), $id);

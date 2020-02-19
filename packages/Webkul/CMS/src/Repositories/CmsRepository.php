@@ -37,8 +37,9 @@ class CmsRepository extends Repository
 
         foreach (core()->getAllLocales() as $locale) {
             foreach ($model->translatedAttributes as $attribute) {
-                if (isset($data[$attribute]))
+                if (isset($data[$attribute])) {
                     $data[$locale->code][$attribute] = $data[$attribute];
+                }
             }
         }
 
@@ -100,8 +101,9 @@ class CmsRepository extends Repository
     {
         $page = $this->model->whereTranslation('url_key', $urlKey)->first();
 
-        if ($page)
+        if ($page) {
             return $page;
+        }
 
         throw (new ModelNotFoundException)->setModel(
             get_class($this->model), $urlKey
