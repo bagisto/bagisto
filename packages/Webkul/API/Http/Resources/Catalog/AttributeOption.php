@@ -15,9 +15,9 @@ class AttributeOption extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'admin_name' => $this->admin_name,
-            'label' => $this->label,
+            'id'           => $this->id,
+            'admin_name'   => $this->admin_name,
+            'label'        => $this->label,
             'swatch_value' => $this->swatch_value
         ];
     }

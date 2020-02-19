@@ -101,12 +101,12 @@ class SessionController extends Controller
         $customer = auth($this->guard)->user();
 
         $this->validate(request(), [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'gender' => 'required',
+            'first_name'    => 'required',
+            'last_name'     => 'required',
+            'gender'        => 'required',
             'date_of_birth' => 'nullable|date|before:today',
-            'email' => 'email|unique:customers,email,' . $customer->id,
-            'password' => 'confirmed|min:6'
+            'email'         => 'email|unique:customers,email,' . $customer->id,
+            'password'      => 'confirmed|min:6'
         ]);
 
         $data = request()->all();
@@ -125,7 +125,7 @@ class SessionController extends Controller
 
         return response()->json([
                 'message' => 'Your account has been created successfully.',
-                'data' => new CustomerResource($this->customerRepository->find($customer->id))
+                'data'    => new CustomerResource($this->customerRepository->find($customer->id))
             ]);
     }
 

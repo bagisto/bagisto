@@ -32,23 +32,23 @@ class Product extends JsonResource
         $product = $this->product ? $this->product : $this;
 
         return [
-            'id' => $product->id,
-            'type' => $product->type,
-            'name' => $this->name,
-            'url_key' => $this->url_key,
-            'price' => $product->getTypeInstance()->getMinimalPrice(),
-            'formated_price' => core()->currency($product->getTypeInstance()->getMinimalPrice()),
-            'short_description' => $this->short_description,
-            'description' => $this->description,
-            'sku' => $this->sku,
-            'images' => ProductImage::collection($product->images),
-            'base_image' => $this->productImageHelper->getProductBaseImage($product),
-            'variants' => Self::collection($this->variants),
-            'in_stock' => $product->haveSufficientQuantity(1),
+            'id'                     => $product->id,
+            'type'                   => $product->type,
+            'name'                   => $this->name,
+            'url_key'                => $this->url_key,
+            'price'                  => $product->getTypeInstance()->getMinimalPrice(),
+            'formated_price'         => core()->currency($product->getTypeInstance()->getMinimalPrice()),
+            'short_description'      => $this->short_description,
+            'description'            => $this->description,
+            'sku'                    => $this->sku,
+            'images'                 => ProductImage::collection($product->images),
+            'base_image'             => $this->productImageHelper->getProductBaseImage($product),
+            'variants'               => Self::collection($this->variants),
+            'in_stock'               => $product->haveSufficientQuantity(1),
             $this->mergeWhen($product->getTypeInstance()->isComposite(), [
                 'super_attributes' => Attribute::collection($product->super_attributes),
             ]),
-            'special_price' => $this->when(
+            'special_price'          => $this->when(
                     $product->getTypeInstance()->haveSpecialPrice(),
                     $product->getTypeInstance()->getSpecialPrice()
                 ),
@@ -56,15 +56,15 @@ class Product extends JsonResource
                     $product->getTypeInstance()->haveSpecialPrice(),
                     core()->currency($product->getTypeInstance()->getSpecialPrice())
                 ),
-            'reviews' => [
-                'total' => $total = $this->productReviewHelper->getTotalReviews($product),
-                'total_rating' => $total ? $this->productReviewHelper->getTotalRating($product) : 0,
+            'reviews'                => [
+                'total'          => $total = $this->productReviewHelper->getTotalReviews($product),
+                'total_rating'   => $total ? $this->productReviewHelper->getTotalRating($product) : 0,
                 'average_rating' => $total ? $this->productReviewHelper->getAverageRating($product) : 0,
-                'percentage' => $total ? json_encode($this->productReviewHelper->getPercentageRating($product)) : [],
+                'percentage'     => $total ? json_encode($this->productReviewHelper->getPercentageRating($product)) : [],
             ],
-            'is_saved' => false,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'is_saved'               => false,
+            'created_at'             => $this->created_at,
+            'updated_at'             => $this->updated_at,
         ];
     }
 }

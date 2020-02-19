@@ -62,6 +62,7 @@ class AddressController extends Controller
     public function get()
     {
         $customer = auth($this->guard)->user();
+        
         $addresses = $customer->addresses()->get();
 
         return CustomerAddressResource::collection($addresses);

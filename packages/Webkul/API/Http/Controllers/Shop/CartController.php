@@ -110,8 +110,9 @@ class CartController extends Controller
                 ], 400);
         }
 
-        if ($customer = auth($this->guard)->user())
+        if ($customer = auth($this->guard)->user()) {
             $this->wishlistRepository->deleteWhere(['product_id' => $id, 'customer_id' => $customer->id]);
+        }
 
         Event::dispatch('checkout.cart.item.add.after', $result);
 
@@ -121,7 +122,7 @@ class CartController extends Controller
 
         return response()->json([
                 'message' => 'Product added to cart successfully.',
-                'data' => $cart ? new CartResource($cart) : null
+                'data'    => $cart ? new CartResource($cart) : null
             ]);
     }
 
@@ -156,7 +157,7 @@ class CartController extends Controller
 
         return response()->json([
                 'message' => 'Cart updated successfully.',
-                'data' => $cart ? new CartResource($cart) : null
+                'data'    => $cart ? new CartResource($cart) : null
             ]);
     }
 
@@ -177,7 +178,7 @@ class CartController extends Controller
 
         return response()->json([
                 'message' => 'Cart removed successfully.',
-                'data' => $cart ? new CartResource($cart) : null
+                'data'    => $cart ? new CartResource($cart) : null
             ]);
     }
 
@@ -201,7 +202,7 @@ class CartController extends Controller
 
         return response()->json([
                 'message' => 'Cart removed successfully.',
-                'data' => $cart ? new CartResource($cart) : null
+                'data'    => $cart ? new CartResource($cart) : null
             ]);
     }
 
@@ -225,7 +226,7 @@ class CartController extends Controller
 
         return response()->json([
                 'message' => 'Cart item moved to wishlist successfully.',
-                'data' => $cart ? new CartResource($cart) : null
+                'data'    => $cart ? new CartResource($cart) : null
             ]);
     }
 }

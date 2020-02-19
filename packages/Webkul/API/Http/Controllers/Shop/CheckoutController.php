@@ -61,7 +61,6 @@ class CheckoutController extends Controller
 
         auth()->setDefaultDriver($this->guard);
 
-
         // $this->middleware('auth:' . $this->guard);
 
         $this->_config = request('_config');
@@ -84,6 +83,7 @@ class CheckoutController extends Controller
         $data = request()->all();
 
         $data['billing']['address1'] = implode(PHP_EOL, array_filter($data['billing']['address1']));
+
         $data['shipping']['address1'] = implode(PHP_EOL, array_filter($data['shipping']['address1']));
 
         if (isset($data['billing']['id']) && str_contains($data['billing']['id'], 'address_')) {
@@ -97,15 +97,16 @@ class CheckoutController extends Controller
         }
 
 
-        if (Cart::hasError() || ! Cart::saveCustomerAddress($data) || ! Shipping::collectRates())
+        if (Cart::hasError() || ! Cart::saveCustomerAddress($data) || ! Shipping::collectRates()) {
             abort(400);
+        }
 
         $rates = [];
 
         foreach (Shipping::getGroupedAllShippingRates() as $code => $shippingMethod) {
             $rates[] = [
                 'carrier_title' => $shippingMethod['carrier_title'],
-                'rates' => CartShippingRateResource::collection(collect($shippingMethod['rates']))
+                'rates'         => CartShippingRateResource::collection(collect($shippingMethod['rates']))
             ];
         }
 
@@ -114,7 +115,7 @@ class CheckoutController extends Controller
         return response()->json([
             'data' => [
                 'rates' => $rates,
-                'cart' => new CartResource(Cart::getCart())
+                'cart'  => new CartResource(Cart::getCart())
             ]
         ]);
     }
@@ -128,15 +129,16 @@ class CheckoutController extends Controller
     {
         $shippingMethod = request()->get('shipping_method');
 
-        if (Cart::hasError() || !$shippingMethod || ! Cart::saveShippingMethod($shippingMethod))
+        if (Cart::hasError() || !$shippingMethod || ! Cart::saveShippingMethod($shippingMethod)) {
             abort(400);
+        }
 
         Cart::collectTotals();
 
         return response()->json([
             'data' => [
                 'methods' => Payment::getPaymentMethods(),
-                'cart' => new CartResource(Cart::getCart())
+                'cart'    => new CartResource(Cart::getCart())
             ]
         ]);
     }
@@ -150,8 +152,9 @@ class CheckoutController extends Controller
     {
         $payment = request()->get('payment');
 
-        if (Cart::hasError() || ! $payment || ! Cart::savePaymentMethod($payment))
+        if (Cart::hasError() || ! $payment || ! Cart::savePaymentMethod($payment)) {
             abort(400);
+        }
 
         return response()->json([
             'data' => [
@@ -167,8 +170,9 @@ class CheckoutController extends Controller
     */
     public function saveOrder()
     {
-        if (Cart::hasError())
+        if (Cart::hasError()) {
             abort(400);
+        }
 
         Cart::collectTotals();
 
@@ -178,7 +182,7 @@ class CheckoutController extends Controller
 
         if ($redirectUrl = Payment::getRedirectUrl($cart)) {
             return response()->json([
-                    'success' => true,
+                    'success'      => true,
                     'redirect_url' => $redirectUrl
                 ]);
         }
@@ -189,7 +193,7 @@ class CheckoutController extends Controller
 
         return response()->json([
                 'success' => true,
-                'order' => new OrderResource($order),
+                'order'   => new OrderResource($order),
             ]);
     }
 

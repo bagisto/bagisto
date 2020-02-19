@@ -64,27 +64,27 @@ class WishlistController extends Controller
         $customer = auth()->guard($this->guard)->user();
 
         $wishlistItem = $this->wishlistRepository->findOneWhere([
-                'channel_id' => core()->getCurrentChannel()->id,
-                'product_id' => $id,
+                'channel_id'  => core()->getCurrentChannel()->id,
+                'product_id'  => $id,
                 'customer_id' => $customer->id
             ]);
 
         if (! $wishlistItem) {
             $wishlistItem = $this->wishlistRepository->create([
-                    'channel_id' => core()->getCurrentChannel()->id,
-                    'product_id' => $id,
+                    'channel_id'  => core()->getCurrentChannel()->id,
+                    'product_id'  => $id,
                     'customer_id' => $customer->id
                 ]);
 
             return response()->json([
-                    'data' => new WishlistResource($wishlistItem),
+                    'data'    => new WishlistResource($wishlistItem),
                     'message' => trans('customer::app.wishlist.success')
                 ]);
         } else {
             $this->wishlistRepository->delete($wishlistItem->id);
 
             return response()->json([
-                    'data' => null,
+                    'data'    => null,
                     'message' => 'Item removed from wishlist successfully.'
                 ]);
         }
@@ -100,10 +100,11 @@ class WishlistController extends Controller
     {
         $wishlistItem = $this->wishlistRepository->findOrFail($id);
 
-        if ($wishlistItem->customer_id != auth()->guard($this->guard)->user()->id)
+        if ($wishlistItem->customer_id != auth()->guard($this->guard)->user()->id) {
             return response()->json([
                     'message' => trans('shop::app.security-warning')
                 ], 400);
+        }
 
         $result = Cart::moveToCart($wishlistItem);
 

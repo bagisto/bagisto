@@ -60,16 +60,16 @@ class ReviewController extends Controller
 
         $data = array_merge(request()->all(), [
             'customer_id' => $customer ? $customer->id : null,
-            'name' => $customer ? $customer->name : request()->input('name'),
-            'status' => 'pending',
-            'product_id' => $id
+            'name'        => $customer ? $customer->name : request()->input('name'),
+            'status'      => 'pending',
+            'product_id'  => $id
         ]);
 
         $productReview = $this->reviewRepository->create($data);
 
         return response()->json([
                 'message' => 'Your review submitted successfully.',
-                'data' => new ProductReviewResource($this->reviewRepository->find($productReview->id))
+                'data'    => new ProductReviewResource($this->reviewRepository->find($productReview->id))
             ]);
     }
 }
