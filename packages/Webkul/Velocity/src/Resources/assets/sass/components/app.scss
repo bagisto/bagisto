@@ -255,6 +255,8 @@
     }
 
     .card-body {
+        cursor: default;
+
         > div:last-child {
             margin-top: 10px;
         }
@@ -274,17 +276,6 @@
         }
     }
 
-    .wishlist-icon {
-        height: 38px;
-        display: table;
-        text-align: right;
-
-        > i {
-            display: table-cell;
-            vertical-align: middle;
-        }
-    }
-
     .add-to-cart-btn {
         width: 100%;
         position: relative;
@@ -298,11 +289,24 @@
             }
         }
 
-        ~ .wishlist-icon {
+        ~ a {
             right: 0;
             margin: 0;
             padding: 0;
+            height: 38px;
+            display: table;
+            cursor: pointer;
+            text-align: right;
             position: absolute;
+
+            &.compare-icon {
+                right: 27px;
+            }
+
+            > i {
+                display: table-cell;
+                vertical-align: middle;
+            }
         }
     }
 }
@@ -708,9 +712,7 @@
 
         .customer-sidebar {
             border-right: 1px solid $border-general;
-        }
 
-        .customer-sidebar {
             .account-details {
                 text-align: center;
                 padding: 25px 20px;
@@ -774,6 +776,10 @@
 
                             &.downloadables::before {
                                 content: "\e926";
+                            }
+
+                            &.compare::before {
+                                content: "\e93b";
                             }
                         }
                     }
@@ -1022,6 +1028,51 @@
                 .table td {
                     border: unset;
                     padding: 6px 12px;
+                }
+            }
+
+            .compare-products {
+                margin-top: 20px;
+
+                .col,
+                .col-2 {
+                    padding: 0;
+                    max-width: 35%;
+
+                    .row:nth-child(1) {
+                        margin: 0;
+
+                        > div {
+                            width: 100%;
+                            margin-top: 10px;
+
+                            &.product-title {
+                                margin-top: 15px;
+                            }
+                        }
+
+                        .image-wrapper {
+                            img {
+                                width: 100%;
+                            }
+                        }
+
+                        .stars {
+                            i {
+                                font-size: 16px;
+                            }
+                        }
+
+                        .close-btn {
+                            right: 0;
+                            width: unset;
+                            position: absolute;
+
+                            &:hover {
+                                font-weight: 600;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -1494,7 +1545,7 @@
     span:nth-child(1),
     .special-price,
     .price-from > span:not(:nth-child(2)) {
-        font-size: 20px;
+        font-size: 20px !important;
         font-weight: 600;
     }
 
@@ -2195,6 +2246,10 @@
         .btn-add-to-cart {
             @extend .small-padding;
         }
+    }
+
+    .VueCarousel-slide {
+        cursor: default;
     }
 }
 

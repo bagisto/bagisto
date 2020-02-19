@@ -188,6 +188,12 @@ return [
     ],
 
     'customer' => [
+        'compare' => [
+            'text' => 'Compare',
+            'added' => 'Item successfully added to compare list',
+            'removed' => 'Item successfully removed from compare list',
+            'empty-text' => "You don't have any items in your compare list",
+        ],
         'login-form' => [
             'sign-up' => 'Sign up',
             'new-customer' => 'New Customer',

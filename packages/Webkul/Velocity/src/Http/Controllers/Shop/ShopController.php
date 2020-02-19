@@ -2,11 +2,14 @@
 
 namespace Webkul\Velocity\Http\Controllers\Shop;
 
+use Illuminate\Http\Request;
+
 use Cart;
 use Webkul\Velocity\Http\Shop\Controllers;
 use Webkul\Checkout\Contracts\Cart as CartModel;
 use Webkul\Product\Repositories\SearchRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Velocity\Repositories\VelocityCustomerDataRepository;
 use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRepository;
 
 /**
@@ -46,6 +49,14 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
     protected $velocityProductRepository;
 
     /**
+     * VelocityCustomerDataRepository object of velocity package
+     *
+     * @var VelocityCustomerDataRepository
+     */
+    protected $velocityCustomerDataRepository;
+
+
+    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Product\Repositories\SearchRepository $searchRepository
@@ -54,13 +65,15 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
     public function __construct(
         SearchRepository $searchRepository,
         ProductRepository $productRepository,
-        VelocityProductRepository $velocityProductRepository
+        VelocityProductRepository $velocityProductRepository,
+        VelocityCustomerDataRepository $velocityCustomerDataRepository
     ) {
         $this->_config = request('_config');
 
         $this->searchRepository = $searchRepository;
         $this->productRepository = $productRepository;
         $this->velocityProductRepository = $velocityProductRepository;
+        $this->velocityCustomerDataRepository = $velocityCustomerDataRepository;
     }
 
     /**
@@ -236,8 +249,9 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
             'firstReviewText' => trans('velocity::app.products.be-first-review'),
             'addToCartHtml' => view('shop::products.add-to-cart', [
                 'product' => $product,
+                'showCompare' => true,
                 'addWishlistClass' => !(isset($list) && $list) ? '' : '',
-                'addToCartBtnClass' => !(isset($list) && $list) ? $addToCartBtnClass ?? '' : ''
+                'addToCartBtnClass' => !(isset($list) && $list) ? 'small-padding' : '',
             ])->render(),
         ];
     }
@@ -306,6 +320,122 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
         return $response ?? [
             'status' => 'error',
             'message' => trans('velocity::app.error.something-went-wrong'),
+        ];
+    }
+
+    /**
+     * function for customers to get products in comparison.
+     *
+     * @return Mixed
+     */
+    public function getComparedList(Request $request)
+    {
+        if (request()->get('data')) {
+            $customer = $this->velocityCustomerDataRepository->findOneByField([
+                'customer_id' => auth()->guard('customer')->user()->id,
+            ]);
+
+            $productSlugs = json_decode($customer->compared_product, true);
+
+            $productCollection = [];
+            if ($productSlugs) {
+                foreach ($productSlugs as $slug) {
+                    $product = $this->productRepository->findBySlug($slug);
+
+                    array_push($productCollection, $this->formatProduct($product));
+                }
+            }
+
+            $response = [
+                'status' => 'success',
+                'products' => $productCollection,
+            ];
+        } else {
+            $response = view($this->_config['view']);
+        }
+
+        return $response;
+    }
+
+    /**
+     * function for customers to add product in comparison.
+     *
+     * @return json
+     */
+    public function addCompareProduct()
+    {
+        $slug = request()->get('slug');
+
+        $customer = $this->velocityCustomerDataRepository->findOneByField([
+            'customer_id' => auth()->guard('customer')->user()->id,
+        ]);
+
+        if ($customer) {
+            // update
+            $responseCode = 200;
+
+            $oldProducts = json_decode($customer->compared_product, true);
+            $combinedProducts = array_merge($oldProducts, [$slug]);
+            $uniqueCombinedProducts = array_unique($combinedProducts);
+
+            $this->velocityCustomerDataRepository->update([
+                'compared_product' => json_encode($uniqueCombinedProducts),
+            ], $customer->id);
+        } else {
+            // insert new row
+            $this->velocityCustomerDataRepository->create([
+                'compared_product' => json_encode([$slug]),
+                'customer_id' => auth()->guard('customer')->user()->id,
+            ]);
+
+            $responseCode = 201;
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => trans('velocity::app.customer.compare.added'),
+            'label' => trans('velocity::app.shop.general.alert.success'),
+        ], $responseCode);
+    }
+
+    /**
+     * function for customers to delete product in comparison.
+     *
+     * @return json
+     */
+    public function deleteCompareProduct()
+    {
+        // either delete all or individual
+        if (request()->get('slug') == 'all') {
+            // delete all
+            $this->velocityCustomerDataRepository->update([
+                'compared_product' => json_encode([]),
+                'customer_id' => auth()->guard('customer')->user()->id,
+            ]);
+        } else {
+            // delete individual
+            $customer = $this->velocityCustomerDataRepository->findOneByField([
+                'customer_id' => auth()->guard('customer')->user()->id,
+            ]);
+
+            $slug = request()->get('slug');
+            $comparedList = json_decode($customer->compared_product, true);
+
+            $index = array_search($slug, $comparedList);
+
+            if ($index > -1) {
+                unset($comparedList[$index]);
+
+                $this->velocityCustomerDataRepository->update([
+                    'compared_product' => json_encode($comparedList),
+                ], $customer->id);
+            }
+        }
+
+        return $response = [
+            'status' => 'success',
+            'message' => trans('velocity::app.customer.compare.removed'),
+            'label' => trans('velocity::app.shop.general.alert.success'),
         ];
     }
 }

@@ -82,7 +82,7 @@
                     }
                 })
                 .catch(error => {
-                    console.log("something went wrong");
+                    console.log(this.__('error.something-went-wrong'));
                 })
             }
         }

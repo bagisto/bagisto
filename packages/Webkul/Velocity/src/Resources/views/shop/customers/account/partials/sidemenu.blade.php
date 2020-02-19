@@ -18,6 +18,11 @@
                     $subMenuCollection['orders'] = $menuItem['children']['orders'];
                     $subMenuCollection['downloadables'] = $menuItem['children']['downloadables'];
                     $subMenuCollection['wishlist'] = $menuItem['children']['wishlist'];
+                    $subMenuCollection['compare'] = [
+                        'key' => 'account.compare',
+                        'url' => route('customer.product.compare'),
+                        'name' => 'velocity::app.customer.compare.text',
+                    ];
                     $subMenuCollection['reviews'] = $menuItem['children']['reviews'];
                     $subMenuCollection['address'] = $menuItem['children']['address'];
                 } catch (\Exception $exception) {
@@ -26,7 +31,7 @@
             @endphp
 
             @foreach ($subMenuCollection as $index => $subMenuItem)
-                <li class="{{ $menu->getActive($subMenuItem) }}">
+                <li class="{{ $menu->getActive($subMenuItem) }}" title="{{ trans($subMenuItem['name']) }}">
                     <a class="unset fw6 full-width" href="{{ $subMenuItem['url'] }}">
                         <i class="icon {{ $index }} text-down-3"></i>
                         <span>{{ trans($subMenuItem['name']) }}<span>

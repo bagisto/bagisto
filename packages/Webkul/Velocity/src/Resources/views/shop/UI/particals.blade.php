@@ -9,7 +9,7 @@
 
         <i
             :class="`material-icons ${editable ? 'cursor-pointer' : ''}`"
-            v-for="(rating, index) in parseInt(showFilled ? showFilled : 3)"
+            v-for="(rating, index) in parseInt((showFilled != 'undefined') ? showFilled : 3)"
             :key="`${index}${Math.random()}`"
             @click="updateRating(index + 1)">
             star
@@ -18,7 +18,7 @@
         <template v-if="!hideBlank">
             <i
                 :class="`material-icons ${editable ? 'cursor-pointer' : ''}`"
-                v-for="(blankStar, index) in (5 - (showFilled ? showFilled : 3))"
+                v-for="(blankStar, index) in (5 - ((showFilled != 'undefined') ? showFilled : 3))"
                 :key="`${index}${Math.random()}`"
                 @click="updateRating(showFilled + index + 1)">
                 star_border

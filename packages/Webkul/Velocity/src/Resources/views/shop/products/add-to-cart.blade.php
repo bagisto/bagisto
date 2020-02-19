@@ -52,6 +52,12 @@
         @endif
     </div>
 
+    @auth('customer')
+        @if (isset($showCompare) && $showCompare)
+            <compare-component slug="{{ $product->url_key }}"></compare-component>
+        @endif
+    @endif
+
     @if (! (isset($showWishlist) && !$showWishlist))
         @include('shop::products.wishlist', [
             'addClass' => $addWishlistClass ?? ''

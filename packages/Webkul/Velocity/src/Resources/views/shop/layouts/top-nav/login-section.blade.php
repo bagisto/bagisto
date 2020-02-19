@@ -87,6 +87,10 @@
                             </li>
 
                             <li>
+                                <a href="{{ route('customer.product.compare') }}" class="unset">{{ __('velocity::app.customer.compare.text') }}</a>
+                            </li>
+
+                            <li>
                                 <a href="{{ route('customer.session.destroy') }}" class="unset">{{ __('shop::app.header.logout') }}</a>
                             </li>
                         </ul>
