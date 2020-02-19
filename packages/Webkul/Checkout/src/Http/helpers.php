@@ -7,4 +7,3 @@
             return app()->make(Cart::class);
         }
     }
-?>

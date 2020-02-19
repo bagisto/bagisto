@@ -4,9 +4,15 @@ body {
     font-family: "Montserrat", sans-serif;
     color: #000311;
     text-align: center;
-    background: white;
+    background: #fff;
     position: relative;
     height: 100%;
+}
+
+a { color: rgb(0, 65, 255); text-decoration: none;}
+
+.initial-display{
+    padding-top: 50px;
 }
 
 .initial-display .logo {
@@ -18,7 +24,7 @@ body {
     color: #333333;
     text-align: center;
     font-weight: 600;
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 .prepare-btn {
@@ -32,6 +38,10 @@ body {
     color: #ffffff;
     padding: 10px 20px;
     margin-top: 20px;
+}
+
+.warning {
+    margin-left: 15%;
 }
 
 .footer {
@@ -54,13 +64,76 @@ body {
 }
 
 .content {
-    border: 1px solid #979797;
-    border-radius: 3px;
+    border-radius: 5px;
+    box-shadow: 1px 8px 18px rgba(62, 85, 120, 0.45);
+    min-height: 300px;
     width: 600px;
-    height: 392px;
     margin-left: calc(50% - 300px);
     text-align: left;
-    overflow-x: scroll;
+    overflow-y: auto;
+}
+
+.requirements_list {
+    width: 90%;
+    list-style: none;
+    margin-left: 5%;
+    padding:0;
+}
+
+.requirements_list li { 
+    padding: 0 8px 8px; 
+    margin-bottom: 8px; 
+    border-bottom: 1px dashed #dcdcdc; 
+    line-height: normal; 
+}
+
+.requirements_list li:last-child { border-bottom: 0;}
+
+.requirements_list small {
+    font-size: 13px; 
+    color:#9b9b9b;
+}
+
+.content .cp-round {
+    position: auto !important;
+}
+
+.content .cp-round:before {
+    border-radius: 50%;
+    content: " ";
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+    box-sizing: border-box;
+    border-top: solid 6px #bababa;
+    border-right: solid 6px #bababa;
+    border-bottom: solid 6px #bababa;
+    border-left: solid 6px #bababa;
+    position: absolute;
+    top: calc(40% - 14px);
+    left: calc(50% - 24px);
+}
+
+.content .cp-round:after {
+    border-radius: 50%;
+    content: " ";
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+    box-sizing: border-box;
+    border-top: solid 6px #0041FF;
+    border-right: solid 6px #bababa;
+    border-bottom: solid 6px #bababa;
+    border-left: solid 6px #bababa;
+    position: absolute;
+    top: calc(40% - 14px);
+    left: calc(50% - 24px);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 .title {
@@ -70,6 +143,7 @@ body {
     text-align: left;
     margin-top: 30px;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 span {
@@ -138,46 +212,9 @@ pre.bash {
     height: 100%;
 }
 
-.cp-round:before {
-    border-radius: 50%;
-    content: " ";
-    width: 48px;
-    height: 48px;
-    display: inline-block;
-    box-sizing: border-box;
-    border-top: solid 6px #bababa;
-    border-right: solid 6px #bababa;
-    border-bottom: solid 6px #bababa;
-    border-left: solid 6px #bababa;
-    position: absolute;
-    top: calc(50% - 24px);
-    left: calc(50% - 24px);
-}
-
 .check {
-    line-height: 40px;
-}
-
-.cp-round:after {
-    border-radius: 50%;
-    content: " ";
-    width: 48px;
-    height: 48px;
-    display: inline-block;
-    box-sizing: border-box;
-    border-top: solid 6px #0041FF;
-    border-right: solid 6px #bababa;
-    border-bottom: solid 6px #bababa;
-    border-left: solid 6px #bababa;
-    position: absolute;
-    top: calc(50% - 24px);
-    left: calc(50% - 24px);
-    animation: spin 1s ease-in-out infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    line-height: 35px;
+    margin-left: 25%;
 }
 
 .composer {
@@ -188,4 +225,34 @@ pre.bash {
 
 .message {
     padding-left: 140px;
+}
+
+@media (min-width: 1281px) {
+    .content {
+        padding: 2rem 0;
+    }
+
+    .content {
+        max-height: 484px;
+        margin: 20px auto;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .initial-display{
+        padding-top: 15px;
+    }
+
+    .content {
+        padding: 1rem 0;
+    }
+
+    .content {
+        max-height: 488px;
+        margin: 30px auto;
+    }
+
+    .initial-display p {
+        margin-top: 4px;
+    }    
 }
