@@ -10,23 +10,7 @@
     if (isset($category)) {
         $products = $productRepository->getAll($category->id);
 
-        if (count($category->filterableAttributes) > 0 && count($products)) {
-            $filterAttributes = $category->filterableAttributes;
-        } else {
-            $categoryProductAttributes = $productFlatRepository->getCategoryProductAttribute($category->id);
-
-            if ($categoryProductAttributes) {
-                foreach ($attributeRepository->getFilterAttributes() as $filterAttribute) {
-                    if (in_array($filterAttribute->id, $categoryProductAttributes)) {
-                        $filterAttributes[] = $filterAttribute;
-                    } else  if ($filterAttribute ['code'] == 'price') {
-                        $filterAttributes[] = $filterAttribute;
-                    }
-                }
-
-                $filterAttributes = collect($filterAttributes);
-            }
-        }
+        $filterAttributes = $productFlatRepository->getFilterableAttributes($category, $products);
     } else {
         $filterAttributes = $attributeRepository->getFilterAttributes();
     }
