@@ -83,16 +83,16 @@ class CartRuleController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'name' => 'required',
-            'channels' => 'required|array|min:1',
-            'customer_groups' => 'required|array|min:1',
-            'coupon_type' => 'required',
+            'name'                => 'required',
+            'channels'            => 'required|array|min:1',
+            'customer_groups'     => 'required|array|min:1',
+            'coupon_type'         => 'required',
             'use_auto_generation' => 'required_if:coupon_type,==,1',
-            'coupon_code' => 'required_if:use_auto_generation,==,0',
-            'starts_from' => 'nullable|date',
-            'ends_till' => 'nullable|date|after_or_equal:starts_from',
-            'action_type' => 'required',
-            'discount_amount' => 'required|numeric'
+            'coupon_code'         => 'required_if:use_auto_generation,==,0',
+            'starts_from'         => 'nullable|date',
+            'ends_till'           => 'nullable|date|after_or_equal:starts_from',
+            'action_type'         => 'required',
+            'discount_amount'     => 'required|numeric'
         ]);
 
         $data = request()->all();
@@ -131,16 +131,16 @@ class CartRuleController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(), [
-            'name' => 'required',
-            'channels' => 'required|array|min:1',
-            'customer_groups' => 'required|array|min:1',
-            'coupon_type' => 'required',
+            'name'                => 'required',
+            'channels'            => 'required|array|min:1',
+            'customer_groups'     => 'required|array|min:1',
+            'coupon_type'         => 'required',
             'use_auto_generation' => 'required_if:coupon_type,==,1',
-            'coupon_code' => 'required_if:use_auto_generation,==,0',
-            'starts_from' => 'nullable|date',
-            'ends_till' => 'nullable|date|after_or_equal:starts_from',
-            'action_type' => 'required',
-            'discount_amount' => 'required|numeric'
+            'coupon_code'         => 'required_if:use_auto_generation,==,0',
+            'starts_from'         => 'nullable|date',
+            'ends_till'           => 'nullable|date|after_or_equal:starts_from',
+            'action_type'         => 'required',
+            'discount_amount'     => 'required|numeric'
         ]);
 
         $cartRule = $this->cartRuleRepository->findOrFail($id);
@@ -191,13 +191,14 @@ class CartRuleController extends Controller
     public function generateCoupons()
     {
         $this->validate(request(), [
-            'coupon_qty' => 'required|integer|min:1',
+            'coupon_qty'  => 'required|integer|min:1',
             'code_length' => 'required|integer|min:10',
             'code_format' => 'required'
         ]);
         
-        if (! request('id'))
+        if (! request('id')) {
             return response()->json(['message' => trans('admin::app.promotions.cart-rules.cart-rule-not-defind-error')], 400);
+        }
 
         $this->cartRuleCouponRepository->generateCoupons(request()->all(), request('id'));
 

@@ -76,8 +76,9 @@ class Order
      */
     public function manageCartRule($order)
     {
-        if (! $order->discount_amount)
+        if (! $order->discount_amount) {
             return;
+        }
 
         $cartRuleIds = explode(',', $order->applied_cart_rule_ids);
 
@@ -86,16 +87,18 @@ class Order
         foreach ($cartRuleIds as $ruleId) {
             $rule = $this->cartRuleRepository->find($ruleId);
 
-            if (! $rule)
+            if (! $rule) {
                 continue;
+            }
 
             $rule->update(['times_used' => $rule->times_used + 1]);
 
-            if (! $order->customer_id)
+            if (! $order->customer_id) {
                 continue;
+            }
 
             $ruleCustomer = $this->cartRuleCustomerRepository->findOneWhere([
-                    'customer_id' => $order->customer_id,
+                    'customer_id'  => $order->customer_id,
                     'cart_rule_id' => $ruleId
                 ]);
 
@@ -103,15 +106,16 @@ class Order
                 $this->cartRuleCustomerRepository->update(['times_used' => $ruleCustomer->times_used + 1], $ruleCustomer->id);
             } else {
                 $this->cartRuleCustomerRepository->create([
-                        'customer_id' => $order->customer_id,
+                        'customer_id'  => $order->customer_id,
                         'cart_rule_id' => $ruleId,
-                        'times_used' => 1
+                        'times_used'   => 1
                     ]);
             }
         }
 
-        if (! $order->coupon_code)
+        if (! $order->coupon_code) {
             return;
+        }
 
         $coupon = $this->cartRuleCouponRepository->findOneByField('code', $order->coupon_code);
         
@@ -120,7 +124,7 @@ class Order
 
             if ($order->customer_id) {
                 $couponUsage = $this->cartRuleCouponUsageRepository->findOneWhere([
-                        'customer_id' => $order->customer_id,
+                        'customer_id'         => $order->customer_id,
                         'cart_rule_coupon_id' => $coupon->id
                     ]);
 
@@ -128,9 +132,9 @@ class Order
                     $this->cartRuleCouponUsageRepository->update(['times_used' => $couponUsage->times_used + 1], $couponUsage->id);
                 } else {
                     $this->cartRuleCouponUsageRepository->create([
-                            'customer_id' => $order->customer_id,
+                            'customer_id'         => $order->customer_id,
                             'cart_rule_coupon_id' => $coupon->id,
-                            'times_used' => 1
+                            'times_used'          => 1
                         ]);
                 }
             }

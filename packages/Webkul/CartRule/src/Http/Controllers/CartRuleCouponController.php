@@ -44,8 +44,9 @@ class CartRuleCouponController extends Controller
         foreach ($couponIds as $couponId) {
             $coupon = $this->cartRuleCouponRepository->find($couponId);
 
-            if ($coupon)
+            if ($coupon) {
                 $this->cartRuleCouponRepository->delete($couponId);
+            }
         }
 
         session()->flash('success', trans('admin::app.promotions.cart-rules.mass-delete-success'));
