@@ -15,7 +15,7 @@ class NewsLetterDataGrid extends DataGrid
 {
     protected $index = 'id';
 
-    protected $sortOrder = 'desc'; //asc or desc
+    protected $sortOrder = 'desc';
 
     public function prepareQueryBuilder()
     {
@@ -27,53 +27,54 @@ class NewsLetterDataGrid extends DataGrid
     public function addColumns()
     {
         $this->addColumn([
-            'index' => 'id',
-            'label' => trans('admin::app.datagrid.id'),
-            'type' => 'number',
+            'index'      => 'id',
+            'label'      => trans('admin::app.datagrid.id'),
+            'type'       => 'number',
             'searchable' => false,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'is_subscribed',
-            'label' => trans('admin::app.datagrid.subscribed'),
-            'type' => 'string',
+            'index'      => 'is_subscribed',
+            'label'      => trans('admin::app.datagrid.subscribed'),
+            'type'       => 'string',
             'searchable' => false,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true,
-            'wrapper' => function($value) {
-                if ($value->is_subscribed == 1)
+            'wrapper'    => function($value) {
+                if ($value->is_subscribed == 1) {
                     return 'True';
-                else
+                } else {
                     return 'False';
+                }
             }
         ]);
 
         $this->addColumn([
-            'index' => 'email',
-            'label' => trans('admin::app.datagrid.email'),
-            'type' => 'string',
+            'index'      => 'email',
+            'label'      => trans('admin::app.datagrid.email'),
+            'type'       => 'string',
             'searchable' => true,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
     }
 
     public function prepareActions() {
         $this->addAction([
-            'title' => 'Edit News Letter',
-            'method' => 'GET', // use GET request only for redirect purposes
-            'route' => 'admin.customers.subscribers.edit',
-            'icon' => 'icon pencil-lg-icon'
+            'title'  => 'Edit News Letter',
+            'method' => 'GET',
+            'route'  => 'admin.customers.subscribers.edit',
+            'icon'   => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
-            'title' => 'Delete News Letter',
-            'method' => 'POST', // use GET request only for redirect purposes
-            'route' => 'admin.customers.subscribers.delete',
+            'title'        => 'Delete News Letter',
+            'method'       => 'POST',
+            'route'        => 'admin.customers.subscribers.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'Exchange Rate']),
-            'icon' => 'icon trash-icon'
+            'icon'         => 'icon trash-icon'
         ]);
     }
 }

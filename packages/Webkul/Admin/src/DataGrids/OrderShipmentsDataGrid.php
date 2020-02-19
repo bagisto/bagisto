@@ -15,7 +15,7 @@ class OrderShipmentsDataGrid extends DataGrid
 {
     protected $index = 'shipment_id';
 
-    protected $sortOrder = 'desc'; //asc or desc
+    protected $sortOrder = 'desc';
 
     public function prepareQueryBuilder()
     {
@@ -44,64 +44,64 @@ class OrderShipmentsDataGrid extends DataGrid
     public function addColumns()
     {
         $this->addColumn([
-            'index' => 'shipment_id',
-            'label' => trans('admin::app.datagrid.id'),
-            'type' => 'number',
+            'index'      => 'shipment_id',
+            'label'      => trans('admin::app.datagrid.id'),
+            'type'       => 'number',
             'searchable' => false,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'shipment_order_id',
-            'label' => trans('admin::app.datagrid.order-id'),
-            'type' => 'string',
+            'index'      => 'shipment_order_id',
+            'label'      => trans('admin::app.datagrid.order-id'),
+            'type'       => 'string',
             'searchable' => true,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'shipment_total_qty',
-            'label' => trans('admin::app.datagrid.total-qty'),
-            'type' => 'number',
+            'index'      => 'shipment_total_qty',
+            'label'      => trans('admin::app.datagrid.total-qty'),
+            'type'       => 'number',
             'searchable' => false,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'inventory_source_name',
-            'label' => trans('admin::app.datagrid.inventory-source'),
-            'type' => 'string',
+            'index'      => 'inventory_source_name',
+            'label'      => trans('admin::app.datagrid.inventory-source'),
+            'type'       => 'string',
             'searchable' => true,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'order_date',
-            'label' => trans('admin::app.datagrid.order-date'),
-            'type' => 'datetime',
-            'sortable' => true,
+            'index'      => 'order_date',
+            'label'      => trans('admin::app.datagrid.order-date'),
+            'type'       => 'datetime',
+            'sortable'   => true,
             'searchable' => false,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'shipment_created_at',
-            'label' => trans('admin::app.datagrid.shipment-date'),
-            'type' => 'datetime',
-            'sortable' => true,
+            'index'      => 'shipment_created_at',
+            'label'      => trans('admin::app.datagrid.shipment-date'),
+            'type'       => 'datetime',
+            'sortable'   => true,
             'searchable' => false,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'shipped_to',
-            'label' => trans('admin::app.datagrid.shipment-to'),
-            'type' => 'string',
-            'sortable' => true,
+            'index'      => 'shipped_to',
+            'label'      => trans('admin::app.datagrid.shipment-to'),
+            'type'       => 'string',
+            'sortable'   => true,
             'searchable' => true,
             'filterable' => true
         ]);
@@ -109,10 +109,10 @@ class OrderShipmentsDataGrid extends DataGrid
 
     public function prepareActions() {
         $this->addAction([
-            'title' => 'Order Shipment View',
-            'method' => 'GET', // use GET request only for redirect purposes
-            'route' => 'admin.sales.shipments.view',
-            'icon' => 'icon eye-icon'
+            'title'  => 'Order Shipment View',
+            'method' => 'GET',
+            'route'  => 'admin.sales.shipments.view',
+            'icon'   => 'icon eye-icon'
         ]);
     }
 }

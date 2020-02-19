@@ -34,54 +34,54 @@ class CMSPageDataGrid extends DataGrid
     public function addColumns()
     {
         $this->addColumn([
-            'index' => 'id',
-            'label' => trans('admin::app.datagrid.id'),
-            'type' => 'number',
+            'index'      => 'id',
+            'label'      => trans('admin::app.datagrid.id'),
+            'type'       => 'number',
             'searchable' => false,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'page_title',
-            'label' => trans('admin::app.cms.pages.page-title'),
-            'type' => 'string',
+            'index'      => 'page_title',
+            'label'      => trans('admin::app.cms.pages.page-title'),
+            'type'       => 'string',
             'searchable' => true,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'url_key',
-            'label' => trans('admin::app.datagrid.url-key'),
-            'type' => 'string',
+            'index'      => 'url_key',
+            'label'      => trans('admin::app.datagrid.url-key'),
+            'type'       => 'string',
             'searchable' => true,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
     }
 
     public function prepareActions() {
         $this->addAction([
-            'title' => 'Edit CMSPage',
+            'title'  => 'Edit CMSPage',
             'method' => 'GET',
-            'route' => 'admin.cms.edit',
-            'icon' => 'icon pencil-lg-icon'
+            'route'  => 'admin.cms.edit',
+            'icon'   => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
-            'title' => 'Delete CMSPage',
+            'title'  => 'Delete CMSPage',
             'method' => 'POST',
-            'route' => 'admin.cms.delete',
-            'icon' => 'icon trash-icon'
+            'route'  => 'admin.cms.delete',
+            'icon'   => 'icon trash-icon'
         ]);
     }
 
     public function prepareMassActions()
     {
         $this->addMassAction([
-            'type' => 'delete',
-            'label' => trans('admin::app.datagrid.delete'),
+            'type'   => 'delete',
+            'label'  => trans('admin::app.datagrid.delete'),
             'action' => route('admin.cms.mass-delete'),
             'method' => 'DELETE'
         ]);

@@ -15,7 +15,9 @@ class CreateBookingsTable extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->json('slot_information')->nullable();
+            $table->integer('qty')->default(0)->nullable();
+            $table->integer('from')->nullable();
+            $table->integer('to')->nullable();
 
             $table->integer('order_item_id')->unsigned()->nullable();
 

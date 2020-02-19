@@ -29,47 +29,47 @@ class CartRuleCouponDataGrid extends DataGrid
     public function addColumns()
     {
         $this->addColumn([
-            'index' => 'id',
-            'label' => trans('admin::app.datagrid.id'),
-            'type' => 'number',
+            'index'      => 'id',
+            'label'      => trans('admin::app.datagrid.id'),
+            'type'       => 'number',
             'searchable' => false,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'code',
-            'label' => trans('admin::app.datagrid.coupon-code'),
-            'type' => 'string',
+            'index'      => 'code',
+            'label'      => trans('admin::app.datagrid.coupon-code'),
+            'type'       => 'string',
             'searchable' => true,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'created_at',
-            'label' => trans('admin::app.datagrid.created-date'),
-            'type' => 'datetime',
-            'sortable' => true,
+            'index'      => 'created_at',
+            'label'      => trans('admin::app.datagrid.created-date'),
+            'type'       => 'datetime',
+            'sortable'   => true,
             'searchable' => false,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'expired_at',
-            'label' => trans('admin::app.datagrid.expiration-date'),
-            'type' => 'datetime',
-            'sortable' => true,
+            'index'      => 'expired_at',
+            'label'      => trans('admin::app.datagrid.expiration-date'),
+            'type'       => 'datetime',
+            'sortable'   => true,
             'searchable' => false,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'times_used',
-            'label' => trans('admin::app.datagrid.times-used'),
-            'type' => 'number',
+            'index'      => 'times_used',
+            'label'      => trans('admin::app.datagrid.times-used'),
+            'type'       => 'number',
             'searchable' => true,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
     }
@@ -77,9 +77,9 @@ class CartRuleCouponDataGrid extends DataGrid
     public function prepareMassActions()
     {
         $this->addMassAction([
-            'type' => 'delete',
+            'type'   => 'delete',
             'action' => route('admin.cart-rule-coupons.mass-delete'),
-            'label' => trans('admin::app.datagrid.delete'),
+            'label'  => trans('admin::app.datagrid.delete'),
             'method' => 'DELETE'
         ]);
     }

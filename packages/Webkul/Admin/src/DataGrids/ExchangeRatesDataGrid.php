@@ -15,7 +15,7 @@ class ExchangeRatesDataGrid extends DataGrid
 {
     protected $index = 'currency_exch_id';
 
-    protected $sortOrder = 'desc'; //asc or desc
+    protected $sortOrder = 'desc';
 
     public function prepareQueryBuilder()
     {
@@ -29,47 +29,47 @@ class ExchangeRatesDataGrid extends DataGrid
     public function addColumns()
     {
         $this->addColumn([
-            'index' => 'currency_exch_id',
-            'label' => trans('admin::app.datagrid.id'),
-            'type' => 'number',
+            'index'      => 'currency_exch_id',
+            'label'      => trans('admin::app.datagrid.id'),
+            'type'       => 'number',
             'searchable' => false,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'name',
-            'label' => trans('admin::app.datagrid.currency-name'),
-            'type' => 'string',
+            'index'      => 'name',
+            'label'      => trans('admin::app.datagrid.currency-name'),
+            'type'       => 'string',
             'searchable' => true,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'rate',
-            'label' => trans('admin::app.datagrid.exch-rate'),
-            'type' => 'number',
+            'index'      => 'rate',
+            'label'      => trans('admin::app.datagrid.exch-rate'),
+            'type'       => 'number',
             'searchable' => true,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
     }
 
     public function prepareActions() {
         $this->addAction([
-            'title' => 'Edit Exchange Rate',
-            'method' => 'GET', // use GET request only for redirect purposes
-            'route' => 'admin.exchange_rates.edit',
-            'icon' => 'icon pencil-lg-icon'
+            'title'  => 'Edit Exchange Rate',
+            'method' => 'GET',
+            'route'  => 'admin.exchange_rates.edit',
+            'icon'   => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
-            'title' => 'Delete Exchange Rate',
-            'method' => 'POST', // use GET request only for redirect purposes
-            'route' => 'admin.exchange_rates.delete',
+            'title'        => 'Delete Exchange Rate',
+            'method'       => 'POST',
+            'route'        => 'admin.exchange_rates.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'Exchange Rate']),
-            'icon' => 'icon trash-icon'
+            'icon'         => 'icon trash-icon'
         ]);
     }
 }

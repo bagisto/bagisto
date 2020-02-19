@@ -15,7 +15,7 @@ class TaxCategoryDataGrid extends DataGrid
 {
     protected $index = 'id';
 
-    protected $sortOrder = 'desc'; //asc or desc
+    protected $sortOrder = 'desc';
 
     public function prepareQueryBuilder()
     {
@@ -27,46 +27,46 @@ class TaxCategoryDataGrid extends DataGrid
     public function addColumns()
     {
         $this->addColumn([
-            'index' => 'id',
-            'label' => trans('admin::app.datagrid.id'),
-            'type' => 'number',
+            'index'      => 'id',
+            'label'      => trans('admin::app.datagrid.id'),
+            'type'       => 'number',
             'searchable' => false,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'name',
-            'label' => trans('admin::app.datagrid.name'),
-            'type' => 'string',
+            'index'      => 'name',
+            'label'      => trans('admin::app.datagrid.name'),
+            'type'       => 'string',
             'searchable' => true,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'code',
-            'label' => trans('admin::app.datagrid.code'),
-            'type' => 'string',
+            'index'      => 'code',
+            'label'      => trans('admin::app.datagrid.code'),
+            'type'       => 'string',
             'searchable' => true,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
     }
 
     public function prepareActions() {
         $this->addAction([
-            'title' => 'Edit Tax Category',
-            'method' => 'GET', // use GET request only for redirect purposes
-            'route' => 'admin.tax-categories.edit',
-            'icon' => 'icon pencil-lg-icon'
+            'title'  => 'Edit Tax Category',
+            'method' => 'GET',
+            'route'  => 'admin.tax-categories.edit',
+            'icon'   => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
-            'title' => 'Delete Tax Category',
-            'method' => 'POST', // use GET request only for redirect purposes
-            'route' => 'admin.tax-categories.delete',
-            'icon' => 'icon trash-icon'
+            'title'  => 'Delete Tax Category',
+            'method' => 'POST',
+            'route'  => 'admin.tax-categories.delete',
+            'icon'   => 'icon trash-icon'
         ]);
     }
 }

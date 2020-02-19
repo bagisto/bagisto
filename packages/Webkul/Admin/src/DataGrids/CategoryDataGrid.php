@@ -13,9 +13,9 @@ use DB;
  */
 class CategoryDataGrid extends DataGrid
 {
-    protected $index = 'category_id'; //the column that needs to be treated as index column
+    protected $index = 'category_id';
 
-    protected $sortOrder = 'desc'; //asc or desc
+    protected $sortOrder = 'desc';
 
     public function prepareQueryBuilder()
     {
@@ -38,52 +38,53 @@ class CategoryDataGrid extends DataGrid
     public function addColumns()
     {
         $this->addColumn([
-            'index' => 'category_id',
-            'label' => trans('admin::app.datagrid.id'),
-            'type' => 'number',
+            'index'      => 'category_id',
+            'label'      => trans('admin::app.datagrid.id'),
+            'type'       => 'number',
             'searchable' => false,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'name',
-            'label' => trans('admin::app.datagrid.name'),
-            'type' => 'string',
+            'index'      => 'name',
+            'label'      => trans('admin::app.datagrid.name'),
+            'type'       => 'string',
             'searchable' => true,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'position',
-            'label' => trans('admin::app.datagrid.position'),
-            'type' => 'number',
+            'index'      => 'position',
+            'label'      => trans('admin::app.datagrid.position'),
+            'type'       => 'number',
             'searchable' => false,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'status',
-            'label' => trans('admin::app.datagrid.status'),
-            'type' => 'boolean',
-            'sortable' => true,
+            'index'      => 'status',
+            'label'      => trans('admin::app.datagrid.status'),
+            'type'       => 'boolean',
+            'sortable'   => true,
             'searchable' => true,
             'filterable' => true,
-            'wrapper' => function($value) {
-                if ($value->status == 1)
+            'wrapper'    => function($value) {
+                if ($value->status == 1) {
                     return 'Active';
-                else
+                } else {
                     return 'Inactive';
+                }
             }
         ]);
 
         $this->addColumn([
-            'index' => 'count',
-            'label' => trans('admin::app.datagrid.no-of-products'),
-            'type' => 'number',
-            'sortable' => true,
+            'index'      => 'count',
+            'label'      => trans('admin::app.datagrid.no-of-products'),
+            'type'       => 'number',
+            'sortable'   => true,
             'searchable' => false,
             'filterable' => false
         ]);
@@ -91,18 +92,18 @@ class CategoryDataGrid extends DataGrid
 
     public function prepareActions() {
         $this->addAction([
-            'title' => 'Edit Category',
-            'method' => 'GET', // use GET request only for redirect purposes
-            'route' => 'admin.catalog.categories.edit',
-            'icon' => 'icon pencil-lg-icon'
+            'title'  => 'Edit Category',
+            'method' => 'GET',
+            'route'  => 'admin.catalog.categories.edit',
+            'icon'   => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
-            'title' => 'Delete Category',
-            'method' => 'POST', // use GET request only for redirect purposes
-            'route' => 'admin.catalog.categories.delete',
+            'title'        => 'Delete Category',
+            'method'       => 'POST',
+            'route'        => 'admin.catalog.categories.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
-            'icon' => 'icon trash-icon'
+            'icon'         => 'icon trash-icon'
         ]);
     }
 }

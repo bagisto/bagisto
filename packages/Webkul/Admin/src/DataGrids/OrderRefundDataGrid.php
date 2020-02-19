@@ -15,7 +15,7 @@ class OrderRefundDataGrid extends DataGrid
 {
     protected $index = 'id';
 
-    protected $sortOrder = 'desc'; //asc or desc
+    protected $sortOrder = 'desc';
 
     public function prepareQueryBuilder()
     {
@@ -41,57 +41,57 @@ class OrderRefundDataGrid extends DataGrid
     public function addColumns()
     {
         $this->addColumn([
-            'index' => 'id',
-            'label' => trans('admin::app.datagrid.id'),
-            'type' => 'number',
+            'index'      => 'id',
+            'label'      => trans('admin::app.datagrid.id'),
+            'type'       => 'number',
             'searchable' => false,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'increment_id',
-            'label' => trans('admin::app.datagrid.order-id'),
-            'type' => 'string',
+            'index'      => 'increment_id',
+            'label'      => trans('admin::app.datagrid.order-id'),
+            'type'       => 'string',
             'searchable' => true,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'base_grand_total',
-            'label' => trans('admin::app.datagrid.refunded'),
-            'type' => 'price',
+            'index'      => 'base_grand_total',
+            'label'      => trans('admin::app.datagrid.refunded'),
+            'type'       => 'price',
             'searchable' => true,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'billed_to',
-            'label' => trans('admin::app.datagrid.billed-to'),
-            'type' => 'string',
+            'index'      => 'billed_to',
+            'label'      => trans('admin::app.datagrid.billed-to'),
+            'type'       => 'string',
             'searchable' => true,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'created_at',
-            'label' => trans('admin::app.datagrid.refund-date'),
-            'type' => 'datetime',
+            'index'      => 'created_at',
+            'label'      => trans('admin::app.datagrid.refund-date'),
+            'type'       => 'datetime',
             'searchable' => true,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
     }
 
     public function prepareActions() {
         $this->addAction([
-            'title' => 'Order Refund View',
-            'method' => 'GET', // use GET request only for redirect purposes
-            'route' => 'admin.sales.refunds.view',
-            'icon' => 'icon eye-icon'
+            'title'  => 'Order Refund View',
+            'method' => 'GET',
+            'route'  => 'admin.sales.refunds.view',
+            'icon'   => 'icon eye-icon'
         ]);
     }
 }

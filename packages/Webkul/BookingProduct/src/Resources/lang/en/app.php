@@ -53,6 +53,7 @@ return [
                 'table' => 'Table',
                 'prevent-scheduling-before' => 'Prevent Scheduling Before',
                 'guest-limit' => 'Guest Limit',
+                'guest-capacity' => 'Guest Capacity',
                 'type' => 'Type',
                 'many-bookings-for-one-day' => 'Many Bookings for One Day',
                 'one-booking-for-many-days' => 'One Booking for Many Days',

@@ -13,9 +13,9 @@ use DB;
  */
 class CustomerGroupDataGrid extends DataGrid
 {
-    protected $index = 'id'; //the column that needs to be treated as index column
+    protected $index = 'id';
 
-    protected $sortOrder = 'desc'; //asc or desc
+    protected $sortOrder = 'desc';
 
     public function prepareQueryBuilder()
     {
@@ -27,46 +27,46 @@ class CustomerGroupDataGrid extends DataGrid
     public function addColumns()
     {
         $this->addColumn([
-            'index' => 'id',
-            'label' => trans('admin::app.datagrid.id'),
-            'type' => 'number',
+            'index'      => 'id',
+            'label'      => trans('admin::app.datagrid.id'),
+            'type'       => 'number',
             'searchable' => false,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'code',
-            'label' => trans('admin::app.datagrid.code'),
-            'type' => 'string',
+            'index'      => 'code',
+            'label'      => trans('admin::app.datagrid.code'),
+            'type'       => 'string',
             'searchable' => false,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'name',
-            'label' => trans('admin::app.datagrid.name'),
-            'type' => 'string',
+            'index'      => 'name',
+            'label'      => trans('admin::app.datagrid.name'),
+            'type'       => 'string',
             'searchable' => true,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
     }
 
     public function prepareActions() {
         $this->addAction([
-            'title' => 'Edit Customer Group',
-            'method' => 'GET', // use GET request only for redirect purposes
-            'route' => 'admin.groups.edit',
-            'icon' => 'icon pencil-lg-icon'
+            'title'  => 'Edit Customer Group',
+            'method' => 'GET',
+            'route'  => 'admin.groups.edit',
+            'icon'   => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
-            'title' => 'Delete Customer Group',
-            'method' => 'POST', // use GET request only for redirect purposes
-            'route' => 'admin.groups.delete',
-            'icon' => 'icon trash-icon'
+            'title'  => 'Delete Customer Group',
+            'method' => 'POST',
+            'route'  => 'admin.groups.delete',
+            'icon'   => 'icon trash-icon'
         ]);
     }
 }

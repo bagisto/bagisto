@@ -15,7 +15,7 @@ class OrderInvoicesDataGrid extends DataGrid
 {
     protected $index = 'id';
 
-    protected $sortOrder = 'desc'; //asc or desc
+    protected $sortOrder = 'desc';
 
     public function prepareQueryBuilder()
     {
@@ -34,48 +34,48 @@ class OrderInvoicesDataGrid extends DataGrid
     public function addColumns()
     {
         $this->addColumn([
-            'index' => 'id',
-            'label' => trans('admin::app.datagrid.id'),
-            'type' => 'number',
+            'index'      => 'id',
+            'label'      => trans('admin::app.datagrid.id'),
+            'type'       => 'number',
             'searchable' => false,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'order_id',
-            'label' => trans('admin::app.datagrid.order-id'),
-            'type' => 'string',
+            'index'      => 'order_id',
+            'label'      => trans('admin::app.datagrid.order-id'),
+            'type'       => 'string',
             'searchable' => true,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'base_grand_total',
-            'label' => trans('admin::app.datagrid.grand-total'),
-            'type' => 'price',
+            'index'      => 'base_grand_total',
+            'label'      => trans('admin::app.datagrid.grand-total'),
+            'type'       => 'price',
             'searchable' => true,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'created_at',
-            'label' => trans('admin::app.datagrid.invoice-date'),
-            'type' => 'datetime',
+            'index'      => 'created_at',
+            'label'      => trans('admin::app.datagrid.invoice-date'),
+            'type'       => 'datetime',
             'searchable' => true,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
     }
 
     public function prepareActions() {
         $this->addAction([
-            'title' => 'Order Invoice View',
-            'method' => 'GET', // use GET request only for redirect purposes
-            'route' => 'admin.sales.invoices.view',
-            'icon' => 'icon eye-icon'
+            'title'  => 'Order Invoice View',
+            'method' => 'GET',
+            'route'  => 'admin.sales.invoices.view',
+            'icon'   => 'icon eye-icon'
         ]);
     }
 }

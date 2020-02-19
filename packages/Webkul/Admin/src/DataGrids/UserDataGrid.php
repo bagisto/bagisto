@@ -15,7 +15,7 @@ class UserDataGrid extends DataGrid
 {
     protected $index = 'user_id';
 
-    protected $sortOrder = 'desc'; //asc or desc
+    protected $sortOrder = 'desc';
 
     public function prepareQueryBuilder()
     {
@@ -31,31 +31,31 @@ class UserDataGrid extends DataGrid
     public function addColumns()
     {
         $this->addColumn([
-            'index' => 'user_id',
-            'label' => trans('admin::app.datagrid.id'),
-            'type' => 'number',
+            'index'      => 'user_id',
+            'label'      => trans('admin::app.datagrid.id'),
+            'type'       => 'number',
             'searchable' => false,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'user_name',
-            'label' => trans('admin::app.datagrid.name'),
-            'type' => 'string',
+            'index'      => 'user_name',
+            'label'      => trans('admin::app.datagrid.name'),
+            'type'       => 'string',
             'searchable' => true,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'status',
-            'label' => trans('admin::app.datagrid.status'),
-            'type' => 'boolean',
+            'index'      => 'status',
+            'label'      => trans('admin::app.datagrid.status'),
+            'type'       => 'boolean',
             'searchable' => true,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true,
-            'wrapper' => function($value) {
+            'wrapper'    => function($value) {
                 if ($value->status == 1) {
                     return 'Active';
                 } else {
@@ -65,37 +65,37 @@ class UserDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'email',
-            'label' => trans('admin::app.datagrid.email'),
-            'type' => 'string',
+            'index'      => 'email',
+            'label'      => trans('admin::app.datagrid.email'),
+            'type'       => 'string',
             'searchable' => true,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'role_name',
-            'label' => trans('admin::app.datagrid.role'),
-            'type' => 'string',
+            'index'      => 'role_name',
+            'label'      => trans('admin::app.datagrid.role'),
+            'type'       => 'string',
             'searchable' => true,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
     }
 
     public function prepareActions() {
         $this->addAction([
-            'title' => 'Edit User',
-            'method' => 'GET', // use GET request only for redirect purposes
-            'route' => 'admin.users.edit',
-            'icon' => 'icon pencil-lg-icon'
+            'title'  => 'Edit User',
+            'method' => 'GET',
+            'route'  => 'admin.users.edit',
+            'icon'   => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
-            'title' => 'Delete User',
-            'method' => 'POST', // use GET request only for redirect purposes
-            'route' => 'admin.users.delete',
-            'icon' => 'icon trash-icon'
+            'title'  => 'Delete User',
+            'method' => 'POST',
+            'route'  => 'admin.users.delete',
+            'icon'   => 'icon trash-icon'
         ]);
     }
 }
