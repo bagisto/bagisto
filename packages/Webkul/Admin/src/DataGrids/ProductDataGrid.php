@@ -46,7 +46,7 @@ class ProductDataGrid extends DataGrid
             'product_flat.status',
             'product_flat.price',
             'attribute_families.name as attribute_family',
-            DB::raw('SUM(' . DB::getTablePrefix() . 'product_inventories.qty) as quantity')
+            DB::raw('SUM(DISTINCT ' . DB::getTablePrefix() . 'product_inventories.qty) as quantity')
         );
 
         if ($this->locale !== 'all') {

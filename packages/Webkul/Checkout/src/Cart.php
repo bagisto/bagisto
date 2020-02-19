@@ -738,8 +738,11 @@ class Cart {
                 foreach ($taxRates as $rate) {
                     $haveTaxRate = false;
 
-                    if ($rate->state != '' && $rate->state != $address->state)
+                    if ($rate->state != '' && $rate->state != $address->state) {
+                        $this->setItemTaxToZero($item);
+
                         continue;
+                    }
 
                     if (! $rate->is_zip) {
                         if ($rate->zip_code == '*' || $rate->zip_code == $address->postcode)
@@ -756,16 +759,29 @@ class Cart {
 
                         $item->save();
                         break;
+                    } else {
+                        $this->setItemTaxToZero($item);
+
+                        break;
                     }
                 }
             } else {
-                $item->tax_percent = 0;
-                $item->tax_amount = 0;
-                $item->base_tax_amount = 0;
-
-                $item->save();
+                $this->setItemTaxToZero($item);
             }
         }
+    }
+
+    /**
+     * Set Item tax to zero.
+     *
+     * @return void
+     */
+    protected function setItemTaxToZero($item) {
+        $item->tax_percent = 0;
+        $item->tax_amount = 0;
+        $item->base_tax_amount = 0;
+
+        $item->save();
     }
 
     /**

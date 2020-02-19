@@ -2,7 +2,7 @@
 
 return [
     [
-        'key' => 'general',
+        'key'  => 'general',
         'name' => 'admin::app.admin.system.general',
         'sort' => 1,
     ], [
@@ -21,15 +21,15 @@ return [
                 'options'       => [
                     [
                         'title' => 'lbs',
-                        'value' => 'lbs'
+                        'value' => 'lbs',
                     ], [
                         'title' => 'kgs',
-                        'value' => 'kgs'
-                    ]
+                        'value' => 'kgs',
+                    ],
                 ],
                 'channel_based' => true,
-            ]
-        ]
+            ],
+        ],
     ], [
         'key'  => 'general.content',
         'name' => 'admin::app.admin.system.content',
@@ -44,24 +44,15 @@ return [
                 'title'         => 'admin::app.admin.system.footer-content',
                 'type'          => 'text',
                 'channel_based' => true,
-                'locale_based'  => true
+                'locale_based'  => true,
             ], [
-                'name'    => 'footer_toggle',
-                'title'   => 'admin::app.admin.system.footer-toggle',
-                'type'    => 'select',
-                'options' => [
-                    [
-                        'title' => 'True',
-                        'value' => 1
-                    ], [
-                        'title' => 'False',
-                        'value' => 0
-                    ]
-                ],
+                'name'          => 'footer_toggle',
+                'title'         => 'admin::app.admin.system.footer-toggle',
+                'type'          => 'boolean',
                 'locale_based'  => true,
                 'channel_based' => true,
-            ]
-        ]
+            ],
+        ],
     ], [
         'key'  => 'general.design',
         'name' => 'admin::app.admin.system.design',
@@ -76,17 +67,17 @@ return [
                 'title'         => 'admin::app.admin.system.logo-image',
                 'type'          => 'image',
                 'channel_based' => true,
-                'validation'    => 'mimes:jpeg,bmp,png,jpg'
-            ]
-        ]
+                'validation'    => 'mimes:jpeg,bmp,png,jpg',
+            ],
+        ],
     ], [
         'key'  => 'catalog',
         'name' => 'admin::app.admin.system.catalog',
-        'sort' => 2
+        'sort' => 2,
     ], [
         'key'  => 'catalog.products',
         'name' => 'admin::app.admin.system.products',
-        'sort' => 2
+        'sort' => 2,
     ], [
         'key'    => 'catalog.products.guest-checkout',
         'name'   => 'admin::app.admin.system.guest-checkout',
@@ -95,9 +86,9 @@ return [
             [
                 'name'  => 'allow-guest-checkout',
                 'title' => 'admin::app.admin.system.allow-guest-checkout',
-                'type'  => 'boolean'
-            ]
-        ]
+                'type'  => 'boolean',
+            ],
+        ],
     ], [
         'key'    => 'catalog.products.review',
         'name'   => 'admin::app.admin.system.review',
@@ -106,9 +97,9 @@ return [
             [
                 'name'  => 'guest_review',
                 'title' => 'admin::app.admin.system.allow-guest-review',
-                'type'  => 'boolean'
-            ]
-        ]
+                'type'  => 'boolean',
+            ],
+        ],
     ], [
         'key'  => 'catalog.inventory',
         'name' => 'admin::app.admin.system.inventory',
@@ -122,9 +113,9 @@ return [
                 'name'          => 'backorders',
                 'title'         => 'admin::app.admin.system.allow-backorders',
                 'type'          => 'boolean',
-                'channel_based' => true
-            ]
-        ]
+                'channel_based' => true,
+            ],
+        ],
     ], [
         'key'  => 'customer',
         'name' => 'admin::app.admin.system.customer',
@@ -143,9 +134,9 @@ return [
                 'title'         => 'admin::app.admin.system.street-lines',
                 'type'          => 'text',
                 'validation'    => 'between:1,4',
-                'channel_based' => true
-            ]
-        ]
+                'channel_based' => true,
+            ],
+        ],
     ], [
         'key'    => 'customer.settings.newsletter',
         'name'   => 'admin::app.admin.system.newsletter',
@@ -155,7 +146,7 @@ return [
                 'name'  => 'subscription',
                 'title' => 'admin::app.admin.system.newsletter-subscription',
                 'type'  => 'boolean',
-            ]
+            ],
         ],
     ], [
         'key'    => 'customer.settings.email',
@@ -165,8 +156,72 @@ return [
             [
                 'name'  => 'verification',
                 'title' => 'admin::app.admin.system.email-verification',
-                'type'  => 'boolean'
-            ]
+                'type'  => 'boolean',
+            ],
+        ],
+    ], [
+        'key'  => 'emails',
+        'name' => 'admin::app.admin.emails.email',
+        'sort' => 1,
+    ], [
+        'key'  => 'emails.general',
+        'name' => 'admin::app.admin.emails.notification_label',
+        'sort' => 1,
+    ], [
+        'key'    => 'emails.general.notifications',
+        'name'   => 'admin::app.admin.emails.notification_label',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'  => 'emails.general.notifications.verification',
+                'title' => 'admin::app.admin.emails.notifications.verification',
+                'type'  => 'boolean',
+            ],
+            [
+                'name'  => 'emails.general.notifications.registration',
+                'title' => 'admin::app.admin.emails.notifications.registration',
+                'type'  => 'boolean',
+            ],
+            [
+                'name'  => 'emails.general.notifications.customer',
+                'title' => 'admin::app.admin.emails.notifications.customer',
+                'type'  => 'boolean',
+            ],
+            [
+                'name'  => 'emails.general.notifications.new-order',
+                'title' => 'admin::app.admin.emails.notifications.new-order',
+                'type'  => 'boolean',
+            ],
+            [
+                'name'  => 'emails.general.notifications.new-admin',
+                'title' => 'admin::app.admin.emails.notifications.new-admin',
+                'type'  => 'boolean',
+            ],
+            [
+                'name'  => 'emails.general.notifications.new-invoice',
+                'title' => 'admin::app.admin.emails.notifications.new-invoice',
+                'type'  => 'boolean',
+            ],
+            [
+                'name'  => 'emails.general.notifications.new-refund',
+                'title' => 'admin::app.admin.emails.notifications.new-refund',
+                'type'  => 'boolean',
+            ],
+            [
+                'name'  => 'emails.general.notifications.new-shipment',
+                'title' => 'admin::app.admin.emails.notifications.new-shipment',
+                'type'  => 'boolean',
+            ],
+            [
+                'name'  => 'emails.general.notifications.new-inventory-source',
+                'title' => 'admin::app.admin.emails.notifications.new-inventory-source',
+                'type'  => 'boolean',
+            ],
+            [
+                'name'  => 'emails.general.notifications.cancel-order',
+                'title' => 'admin::app.admin.emails.notifications.cancel-order',
+                'type'  => 'boolean',
+            ],
         ],
     ],
 ];

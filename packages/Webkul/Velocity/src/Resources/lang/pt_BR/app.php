@@ -74,6 +74,7 @@ return [
         'submit-review' => 'Enviar revisão',
         'not-available' => 'Não disponível',
         'ratings' => ':totalRatings Avaliações',
+        'reviews-count' => ':totalReviews Avaliações',
         'more-infomation' => 'Mais Informações',
         'short-description' => 'Descrições breves',
         'customer-rating' => 'Avaliação do cliente',

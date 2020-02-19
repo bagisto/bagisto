@@ -56,10 +56,8 @@
             <div class="initial-display">
                 <p>Migration & Seed</p>
 
-                <div class="cp-spinner cp-round" id="loader">
-                </div>
-
                 <div class="content" id="migration-result">
+                    <div class="cp-spinner cp-round" id="loader"></div>
                     <div class="window" id="migrate">
                     </div>
                     <div class="window" id="key">

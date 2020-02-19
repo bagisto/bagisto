@@ -82,6 +82,7 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
         if ($product) {
             $productReviewHelper = app('Webkul\Product\Helpers\Review');
             $productImageHelper = app('Webkul\Product\Helpers\ProductImage');
+            $galleryImages = $productImageHelper->getProductBaseImage($product);
 
             $response = [
                 'status' => true,
@@ -91,7 +92,7 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
                     'priceHTML' => $product->getTypeInstance()->getPriceHtml(),
                     'totalReviews' => $productReviewHelper->getTotalReviews($product),
                     'rating' => ceil($productReviewHelper->getAverageRating($product)),
-                    'image' => $productImageHelper->getProductBaseImage($product)['small_image_url'],
+                    'image' => $galleryImages['small_image_url'],
                 ]
             ];
         } else {
@@ -213,16 +214,24 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
     private function formatProduct($product, $list = false)
     {
         $reviewHelper = app('Webkul\Product\Helpers\Review');
+        $productImageHelper = app('Webkul\Product\Helpers\ProductImage');
+
         $totalReviews = $reviewHelper->getTotalReviews($product);
+
         $avgRatings = ceil($reviewHelper->getAverageRating($product));
-        $productImage = app('Webkul\Product\Helpers\ProductImage')->getProductBaseImage($product)['medium_image_url'];
+
+        $galleryImages = $productImageHelper->getGalleryImages($product);
+        $productImage = $productImageHelper->getProductBaseImage($product)['medium_image_url'];
 
         return [
             'name' => $product->name,
-            'image' => $productImage,
             'slug' => $product->url_key,
+            'image' => $productImage,
+            'description' => $product->description,
+            'shortDescription' => $product->meta_description,
+            'galleryImages' => $galleryImages,
             'priceHTML' => view('shop::products.price', ['product' => $product])->render(),
-            'totalReviews' => trans('velocity::app.products.ratings', [ 'totalRatings' => $totalReviews]),
+            'totalReviews' => $totalReviews,
             'avgRating' => $avgRatings,
             'firstReviewText' => trans('velocity::app.products.be-first-review'),
             'addToCartHtml' => view('shop::products.add-to-cart', [

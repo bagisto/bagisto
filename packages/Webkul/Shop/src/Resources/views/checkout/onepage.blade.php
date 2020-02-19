@@ -404,10 +404,12 @@
 
                 newBillingAddress: function() {
                     this.new_billing_address = true;
+                    this.address.billing.address_id = null;
                 },
 
                 newShippingAddress: function() {
                     this.new_shipping_address = true;
+                    this.address.shipping.address_id = null;
                 },
 
                 backToSavedBillingAddress: function() {
