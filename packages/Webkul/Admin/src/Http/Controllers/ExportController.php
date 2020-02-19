@@ -38,6 +38,7 @@ class ExportController extends Controller
         $format = $criteria['format'];
 
         $gridName = explode('\\', $criteria['gridName']);
+
         $path = '\Webkul\Admin\DataGrids'.'\\'.last($gridName);
 
         $proceed = false;
@@ -53,6 +54,7 @@ class ExportController extends Controller
         }
 
         $gridInstance = new $path;
+        
         $records = $gridInstance->export();
 
         if (count($records) == 0) {

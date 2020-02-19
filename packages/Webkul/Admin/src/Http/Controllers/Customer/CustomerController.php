@@ -225,9 +225,7 @@ class CustomerController extends Controller
 
         $customer = $this->customerRepository->find(request()->input('_customer'));
 
-        $noteTaken = $customer->update([
-            'notes' => request()->input('notes'),
-        ]);
+        $noteTaken = $customer->update(['notes' => request()->input('notes')]);
 
         if ($noteTaken) {
             session()->flash('success', 'Note taken');
@@ -251,9 +249,7 @@ class CustomerController extends Controller
         foreach ($customerIds as $customerId) {
             $customer = $this->customerRepository->find($customerId);
 
-            $customer->update([
-                'status' => $updateOption,
-            ]);
+            $customer->update(['status' => $updateOption]);
         }
 
         session()->flash('success', trans('admin::app.customers.customers.mass-update-success'));
@@ -271,9 +267,7 @@ class CustomerController extends Controller
         $customerIds = explode(',', request()->input('indexes'));
 
         foreach ($customerIds as $customerId) {
-            $this->customerRepository->deleteWhere([
-                'id' => $customerId,
-            ]);
+            $this->customerRepository->deleteWhere(['id' => $customerId]);
         }
 
         session()->flash('success', trans('admin::app.customers.customers.mass-destroy-success'));

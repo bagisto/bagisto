@@ -43,6 +43,7 @@ class NewInventorySourceNotification extends Mailable
     public function build()
     {
         $order = $this->shipment->order;
+        
         $inventory = $this->shipment->inventory_source;
 
         return $this->to($inventory->contact_email, $inventory->name)

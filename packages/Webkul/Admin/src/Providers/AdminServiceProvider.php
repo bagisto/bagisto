@@ -139,8 +139,9 @@ class AdminServiceProvider extends ServiceProvider
     {
         static $tree;
 
-        if ($tree)
+        if ($tree) {
             return $tree;
+        }
 
         $tree = Tree::create();
 

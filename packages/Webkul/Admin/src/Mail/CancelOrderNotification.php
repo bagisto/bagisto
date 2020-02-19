@@ -11,9 +11,10 @@ class CancelOrderNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /*
+    /**
      * @var Order
-     * */
+     * 
+     */
     public $order;
 
     public function __construct($order)

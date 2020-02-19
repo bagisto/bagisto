@@ -24,7 +24,6 @@ class NewAdminNotification extends Mailable
      */
     public $order;
 
-
     /**
      * Create a new message instance.
      *

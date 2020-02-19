@@ -115,9 +115,9 @@ class ShipmentController extends Controller
 
         $this->validate(request(), [
             'shipment.carrier_title' => 'required',
-            'shipment.track_number' => 'required',
-            'shipment.source' => 'required',
-            'shipment.items.*.*' => 'required|numeric|min:0',
+            'shipment.track_number'  => 'required',
+            'shipment.source'        => 'required',
+            'shipment.items.*.*'     => 'required|numeric|min:0',
         ]);
 
         $data = request()->all();
@@ -143,8 +143,9 @@ class ShipmentController extends Controller
      */
     public function isInventoryValidate(&$data)
     {
-        if (! isset($data['shipment']['items']))
+        if (! isset($data['shipment']['items'])) {
             return ;
+        }
 
         $valid = false;
 
@@ -154,13 +155,15 @@ class ShipmentController extends Controller
             if ($qty = $inventorySource[$inventorySourceId]) {
                 $orderItem = $this->orderItemRepository->find($itemId);
 
-                if ($orderItem->qty_to_ship < $qty)
+                if ($orderItem->qty_to_ship < $qty) {
                     return false;
+                }
 
                 if ($orderItem->getTypeInstance()->isComposite()) {
                     foreach ($orderItem->children as $child) {
-                        if (! $child->qty_ordered)
+                        if (! $child->qty_ordered) {
                             continue;
+                        }
 
                         $finalQty = ($child->qty_ordered / $orderItem->qty_ordered) * $qty;
 
@@ -168,16 +171,18 @@ class ShipmentController extends Controller
                             ->where('inventory_source_id', $inventorySourceId)
                             ->sum('qty');
 
-                        if ($child->qty_to_ship < $finalQty || $availableQty < $finalQty)
+                        if ($child->qty_to_ship < $finalQty || $availableQty < $finalQty) {
                             return false;
+                        }
                     }
                 } else {
                     $availableQty = $orderItem->product->inventories()
                             ->where('inventory_source_id', $inventorySourceId)
                             ->sum('qty');
 
-                    if ($orderItem->qty_to_ship < $qty || $availableQty < $qty)
+                    if ($orderItem->qty_to_ship < $qty || $availableQty < $qty) {
                         return false;
+                    }
                 }
 
                 $valid = true;

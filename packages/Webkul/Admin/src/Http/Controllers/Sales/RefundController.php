@@ -148,8 +148,9 @@ class RefundController extends Controller
     {
         $data = $this->refundRepository->getOrderItemsRefundSummary(request()->all(), $orderId);
 
-        if (! $data)
+        if (! $data) {
             return response('');
+        }
 
         return response()->json($data);
     }

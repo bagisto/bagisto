@@ -152,7 +152,6 @@ class AddressController extends Controller
         $address = $this->customerAddress->find($id);
 
         if ($address) {
-
             $this->customerAddress->update($data, $id);
 
             session()->flash('success', trans('admin::app.customers.addresses.success-update'));

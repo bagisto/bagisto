@@ -103,6 +103,7 @@ class InvoiceController extends Controller
         $data = request()->all();
 
         $haveProductToInvoice = false;
+        
         foreach ($data['invoice']['items'] as $itemId => $qty) {
             if ($qty) {
                 $haveProductToInvoice = true;

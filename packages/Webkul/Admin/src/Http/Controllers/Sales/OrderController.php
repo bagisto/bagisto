@@ -40,7 +40,6 @@ class OrderController extends Controller
         $this->_config = request('_config');
 
         $this->orderRepository = $orderRepository;
-
     }
 
     /**

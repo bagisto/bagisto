@@ -51,7 +51,6 @@ class ConfigurationController extends Controller
         $this->_config = request('_config');
 
         $this->prepareConfigTree();
-
     }
 
     /**

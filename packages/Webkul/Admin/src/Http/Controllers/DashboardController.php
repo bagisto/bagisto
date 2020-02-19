@@ -116,8 +116,9 @@ class DashboardController extends Controller
      */
     public function getPercentageChange($previous, $current)
     {
-        if (! $previous)
+        if (! $previous) {
             return $current ? 100 : 0;
+        }
 
         return ($current - $previous) / $previous * 100;
     }
@@ -132,30 +133,30 @@ class DashboardController extends Controller
         $this->setStartEndDate();
 
         $statistics = [
-            'total_customers' => [
+            'total_customers'          => [
                 'previous' => $previous = $this->getCustomersBetweenDates($this->lastStartDate, $this->lastEndDate)->count(),
-                'current' => $current = $this->getCustomersBetweenDates($this->startDate, $this->endDate)->count(),
+                'current'  => $current = $this->getCustomersBetweenDates($this->startDate, $this->endDate)->count(),
                 'progress' => $this->getPercentageChange($previous, $current)
             ],
-            'total_orders' =>  [
+            'total_orders'             =>  [
                 'previous' => $previous = $this->previousOrders()->count(),
-                'current' => $current = $this->currentOrders()->count(),
+                'current'  => $current = $this->currentOrders()->count(),
                 'progress' => $this->getPercentageChange($previous, $current)
             ],
-            'total_sales' =>  [
+            'total_sales'              =>  [
                 'previous' => $previous = $this->previousOrders()->sum('base_grand_total_invoiced') - $this->previousOrders()->sum('base_grand_total_refunded'),
-                'current' => $current = $this->currentOrders()->sum('base_grand_total_invoiced') - $this->currentOrders()->sum('base_grand_total_refunded'),
+                'current'  => $current = $this->currentOrders()->sum('base_grand_total_invoiced') - $this->currentOrders()->sum('base_grand_total_refunded'),
                 'progress' => $this->getPercentageChange($previous, $current)
             ],
-            'avg_sales' =>  [
+            'avg_sales'                =>  [
                 'previous' => $previous = $this->previousOrders()->avg('base_grand_total_invoiced') - $this->previousOrders()->avg('base_grand_total_refunded'),
-                'current' => $current = $this->currentOrders()->avg('base_grand_total_invoiced') - $this->currentOrders()->avg('base_grand_total_refunded'),
+                'current'  => $current = $this->currentOrders()->avg('base_grand_total_invoiced') - $this->currentOrders()->avg('base_grand_total_refunded'),
                 'progress' => $this->getPercentageChange($previous, $current)
             ],
-            'top_selling_categories' => $this->getTopSellingCategories(),
-            'top_selling_products' => $this->getTopSellingProducts(),
+            'top_selling_categories'   => $this->getTopSellingCategories(),
+            'top_selling_products'     => $this->getTopSellingProducts(),
             'customer_with_most_sales' => $this->getCustomerWithMostSales(),
-            'stock_threshold' => $this->getStockThreshold(),
+            'stock_threshold'          => $this->getStockThreshold(),
         ];
 
         foreach (core()->getTimeInterval($this->startDate, $this->endDate) as $interval) {
@@ -264,8 +265,9 @@ class DashboardController extends Controller
             ? Carbon::createFromTimeString(request()->get('end') . " 23:59:59")
             : Carbon::now();
 
-        if ($this->endDate > Carbon::now())
+        if ($this->endDate > Carbon::now()) {
             $this->endDate = Carbon::now();
+        }
 
         $this->lastStartDate = clone $this->startDate;
         $this->lastEndDate = clone $this->startDate;

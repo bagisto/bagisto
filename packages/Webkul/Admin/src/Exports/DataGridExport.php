@@ -12,16 +12,14 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
  * @author    Rahul Shukla <rahulshukla.symfony517@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class DataGridExport implements FromView, ShouldAutoSize
 {
-
     /**
      * DataGrid instance
      *
      * @var mixed
      */
-    protected $gridData = array();
+    protected $gridData = [];
 
     /**
      * Create a new instance.
@@ -40,7 +38,7 @@ class DataGridExport implements FromView, ShouldAutoSize
      */
     public function view(): View
     {
-        $columns = array();
+        $columns = [];
 
         foreach($this->gridData as $key => $gridData) {
             $columns = array_keys((array) $gridData);
