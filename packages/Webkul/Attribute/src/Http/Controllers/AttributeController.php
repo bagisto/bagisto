@@ -68,9 +68,9 @@ class AttributeController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:attributes,code', new \Webkul\Core\Contracts\Validations\Code],
+            'code'       => ['required', 'unique:attributes,code', new \Webkul\Core\Contracts\Validations\Code],
             'admin_name' => 'required',
-            'type' => 'required'
+            'type'       => 'required'
         ]);
 
         $data = request()->all();
@@ -106,9 +106,9 @@ class AttributeController extends Controller
     public function update($id)
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:attributes,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
+            'code'       => ['required', 'unique:attributes,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
             'admin_name' => 'required',
-            'type' => 'required'
+            'type'       => 'required'
         ]);
 
         $attribute = $this->attributeRepository->update(request()->all(), $id);
@@ -153,6 +153,7 @@ class AttributeController extends Controller
     public function massDestroy()
     {
         $suppressFlash = false;
+
         if (request()->isMethod('post')) {
             $indexes = explode(',', request()->input('indexes'));
 
@@ -169,16 +170,18 @@ class AttributeController extends Controller
                     }
                 } catch (\Exception $e) {
                     report($e);
+
                     $suppressFlash = true;
 
                     continue;
                 }
             }
 
-            if ($suppressFlash)
+            if ($suppressFlash) {
                 session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'attributes']));
-            else
+            } else {
                 session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'attributes']));
+            }
 
             return redirect()->back();
         } else {

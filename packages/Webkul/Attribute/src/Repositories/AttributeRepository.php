@@ -60,7 +60,9 @@ class AttributeRepository extends Repository
         $data = $this->validateUserInput($data);
 
         $options = isset($data['options']) ? $data['options'] : [];
+
         unset($data['options']);
+
         $attribute = $this->model->create($data);
 
         if (in_array($attribute->type, ['select', 'multiselect', 'checkbox']) && count($options)) {
@@ -183,8 +185,9 @@ class AttributeRepository extends Repository
                 'status'
             ], $attributeColumns);
 
-        if (in_array('*', $codes))
+        if (in_array('*', $codes)) {
             return $this->all($attributeColumns);
+        }
 
         return $this->findWhereIn('code', $codes, $attributeColumns);
     }
@@ -196,8 +199,9 @@ class AttributeRepository extends Repository
     {
         static $attributes = [];
 
-        if (array_key_exists($code, $attributes))
+        if (array_key_exists($code, $attributes)) {
             return $attributes[$code];
+        }
 
         return $attributes[$code] = $this->findOneByField('code', $code);
     }
@@ -209,8 +213,9 @@ class AttributeRepository extends Repository
     {
         static $attributes = [];
 
-        if (array_key_exists($attributeFamily->id, $attributes))
+        if (array_key_exists($attributeFamily->id, $attributes)) {
             return $attributes[$attributeFamily->id];
+        }
 
         return $attributes[$attributeFamily->id] = $attributeFamily->custom_attributes;
     }
@@ -232,21 +237,21 @@ class AttributeRepository extends Repository
                 )) {
                 if ($attribute->options()->exists()) {
                     array_push($trimmed, [
-                        'id' => $attribute->id,
-                        'name' => $attribute->admin_name,
-                        'type' => $attribute->type,
-                        'code' => $attribute->code,
+                        'id'          => $attribute->id,
+                        'name'        => $attribute->admin_name,
+                        'type'        => $attribute->type,
+                        'code'        => $attribute->code,
                         'has_options' => true,
-                        'options' => $attribute->options
+                        'options'     => $attribute->options
                     ]);
                 } else {
                     array_push($trimmed, [
-                        'id' => $attribute->id,
-                        'name' => $attribute->admin_name,
-                        'type' => $attribute->type,
-                        'code' => $attribute->code,
+                        'id'          => $attribute->id,
+                        'name'        => $attribute->admin_name,
+                        'type'        => $attribute->type,
+                        'code'        => $attribute->code,
                         'has_options' => false,
-                        'options' => null
+                        'options'     => null
                     ]);
                 }
 
