@@ -3,7 +3,7 @@
 ini_set('max_execution_time', 300);
 
 // array to pass back data
-$data    = array();
+$data = array();
 
 // run command on terminal
 $command = 'cd ../.. && php artisan migrate --force';
