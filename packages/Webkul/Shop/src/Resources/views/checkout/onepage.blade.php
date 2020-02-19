@@ -289,8 +289,6 @@
 
                     this.disable_button = true;
 
-                    console.log(this.address);
-
                     this.$http.post("{{ route('shop.checkout.save-address') }}", this.address)
                         .then(function(response) {
                             this_this.disable_button = false;
