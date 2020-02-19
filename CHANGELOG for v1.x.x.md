@@ -56,6 +56,8 @@
 
 * #2459 [fixed] - shipping address field warning for guest customer not translated.
 
+* #2463 [fixed] - Tax rate is not update on same product.
+
 * #2469 [fixed] - Displaying wrong amount for bundle product in cart.
 
 * #2479 [fixed] - showing total review in recent view product list.
