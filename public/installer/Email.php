@@ -19,7 +19,6 @@
                     <div class="control-group" id="mail_encryption">
                         <label for="mail_encryption">Encryption</label>
                         <select name="mail_encryption" class="control">
-                            <option value="none">None</option>
                             <option value="ssl">SSL</option>
                             <option value="tls">TLS</option>
                         </select>
@@ -90,12 +89,12 @@
                         $('#mail_port').addClass('has-error');
                         $('#mail_port').append('<div class="form-error">' + data.errors.mail_port + '</div>');
                     }
-
+/*
                     if (data.errors.mail_encryption) {
                         $('#mail_encryption').addClass('has-error');
                         $('#mail_encryption').append('<div class="form-error">' + data.errors.mail_encryption + '</div>');
                     }
-
+*/
                     if (data.errors.mail_from) {
                         $('#mail_from').addClass('has-error');
                         $('#mail_from').append('<div class="form-error">' + data.errors.mail_from + '</div>');

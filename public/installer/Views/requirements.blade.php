@@ -11,66 +11,60 @@
 
         <div class="container requirement" id="requirement">
             <div class="initial-display">
-                <p>Requirements</p>
-
+                <p>Server Requirements</p>
                 <div class="content">
-                    <div class="title">
-                        Please wait while we are checking the server requirements.
-                    </div>
+                    <ul class="requirements_list">
+                        <li>
+                            <?php if($phpVersion['supported'] ? $src = $greenCheck : $src = $redCheck): ?>
+                                <img src="<?php echo $src ?>">
+                            <?php endif; ?>
+                            <span><b>PHP</b></span>
+                            <small>(<?php echo $phpVersion['minimum'] ?> or higher)</small>
+                            <br>
+                            <?php if(!($phpVersion['supported'] == 1)): ?>
+                                <small style="color: red;">
+                                    Bagisto has detected that your PHP version (<?php echo $phpVersion['current']; ?>) is not supported.<br>
+                                    Contact your provider if you are not the server administrator.
+                                </small>
+                            <?php endif; ?>
+                        </li>
 
-                    <br />
-
-                    <div style="text-align: center; padding-bottom: 20px;">
-                        This is just for testing purpose<br /> it will be removed before pushing to Bagisto's branch.
-                    </div>
-
-                    <div class="check" style="margin-left: 25%">
-                        <?php if($phpVersion['supported'] ? $src = $greenCheck : $src = $redCheck): ?>
-                            <img src="<?php echo $src ?>">
-                        <?php endif; ?>
-                        <span><b>PHP</b></span>
-                        <span>(<?php echo $phpVersion['minimum'] ?> or Higher)</span>
-                    </div>
-
-                    <?php foreach($requirements['requirements'] as $type => $require): ?>
-
-                        <?php foreach($requirements['requirements'][$type] as $extention => $enabled) : ?>
-                            <div class="check" style="margin-left: 25%">
-                                <?php if($enabled ? $src = $greenCheck : $src = $redCheck ): ?>
-                                    <img src="<?php echo $src ?>">
-                                <?php endif; ?>
-                                <span><b><?php echo $extention ?></b></span>
-                                <span>(<?php echo $extention ?> Required)</span>
-                            </div>
+                        <?php foreach($requirements['requirements'] as $type => $require): ?>
+                            <?php foreach($requirements['requirements'][$type] as $extention => $enabled) : ?>
+                                <li>
+                                    <?php if($enabled ? $src = $greenCheck : $src = $redCheck ): ?>
+                                        <img src="<?php echo $src ?>">
+                                    <?php endif; ?>
+                                    <span><b><?php echo $extention ?></b></span>
+                                </li>
+                            <?php endforeach; ?>
                         <?php endforeach; ?>
 
-                    <?php endforeach; ?>
-
-                    <div class="check" style="margin-left: 25%">
-                        <?php if(($composerInstall['composer_install'] == 0) ? $src = $greenCheck : $src = $redCheck ): ?>
-                            <img src="<?php echo $src ?>">
-                            <span style="margin-left: 10px"><b>Composer</b></span>
-                        <?php endif; ?>
-                    </div>
-
-                    <div style="margin-left: 30%;">
-                        <?php if(!($composerInstall['composer_install'] == 0)): ?>
-                            <span style="margin-left: 10px; color: red;"><?php echo $composerInstall['composer'] ?></span>
-                        <?php endif; ?>
-                    </div>
-
+                        <li>
+                            <?php if(($composerInstall['composer_install'] == 0) ? $src = $greenCheck : $src = $redCheck ): ?>
+                                <img src="<?php echo $src ?>">
+                                <span><b>composer</b></span>
+                            <?php endif; ?>
+                            <br>                            
+                            <?php if(!($composerInstall['composer_install'] == 0)): ?>
+                                <small style="color: red;">
+                                    <?php echo $composerInstall['composer'] ?>
+                                </small>
+                            <?php endif; ?>
+                        </li>
+                    </ul>
                 </div>
 
                 <?php if(!isset($requirements['errors']) && ($phpVersion['supported'] && $composerInstall['composer_install'] == 0)): ?>
-                    <div>
-                        <button type="button" class="prepare-btn" id="requirement-check">Continue</button>
-                    </div>
-
+                    <div><button type="button" class="prepare-btn" id="requirement-check">Continue</button></div>
+                <?php elseif(!($phpVersion['supported'] && $composerInstall['composer_install'] == 0)): ?>
+                    <div><button type="button" class="prepare-btn" id="requirements-refresh">Refresh</button></div>
                 <?php endif; ?>
 
             </div>
         </div>
-
+        <script>
+            $('#loader').show();
+        </script>
     </body>
-
 </html>

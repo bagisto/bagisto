@@ -10,7 +10,7 @@
                     <div class="content">
                         <div class="databse-error" style="text-align: center; padding-top: 5px" id="database_error">
                         </div>
-                        <div class="form-container" style="padding: 10%; padding-top: 3px">
+                        <div class="form-container" style="padding: 10%; padding-top: 10px">
                             <div class="control-group" id="app_name">
                                 <label for="app_name" class="required">App Name</label>
                                 <input type = "text" name = "app_name" class = "control"
