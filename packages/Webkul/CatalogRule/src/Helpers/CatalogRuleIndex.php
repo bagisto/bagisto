@@ -78,8 +78,9 @@ class CatalogRuleIndex
     public function reindexProduct($product)
     {
         try {
-            if (! $product->getTypeInstance()->priceRuleCanBeApplied())
+            if (! $product->getTypeInstance()->priceRuleCanBeApplied()) {
                 return;
+            }
 
             $productIds = $product->getTypeInstance()->isComposite()
                             ? $product->getTypeInstance()->getChildrenIds()
@@ -119,8 +120,9 @@ class CatalogRuleIndex
     {
         static $catalogRules;
 
-        if ($catalogRules)
+        if ($catalogRules) {
             return $catalogRules;
+        }
 
         $catalogRules = $this->catalogRuleRepository->scopeQuery(function($query) {
             return $query->where(function ($query1) {

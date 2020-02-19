@@ -85,16 +85,16 @@ class CatalogRuleProduct
             foreach ($rule->channels()->pluck('id') as $channelId) {
                 foreach ($rule->customer_groups()->pluck('id') as $customerGroupId) {
                     $rows[] = [
-                        'starts_from' => $startsFrom,
-                        'ends_till' => $endsTill,
-                        'catalog_rule_id' => $rule->id,
-                        'channel_id' => $channelId,
+                        'starts_from'       => $startsFrom,
+                        'ends_till'         => $endsTill,
+                        'catalog_rule_id'   => $rule->id,
+                        'channel_id'        => $channelId,
                         'customer_group_id' => $customerGroupId,
-                        'product_id' => $productId,
-                        'discount_amount' => $rule->discount_amount,
-                        'action_type' => $rule->action_type,
-                        'end_other_rules' => $rule->end_other_rules,
-                        'sort_order' => $rule->sort_order,
+                        'product_id'        => $productId,
+                        'discount_amount'   => $rule->discount_amount,
+                        'action_type'       => $rule->action_type,
+                        'end_other_rules'   => $rule->end_other_rules,
+                        'sort_order'        => $rule->sort_order,
                     ];
 
                     if (count($rows) == $batchCount) {
@@ -106,8 +106,9 @@ class CatalogRuleProduct
             }
         }
 
-        if (! empty($rows))
+        if (! empty($rows)) {
             $this->catalogRuleProductRepository->getModel()->insert($rows);
+        }
     }
 
     /**
@@ -126,11 +127,13 @@ class CatalogRuleProduct
                     ->leftJoin('channels', 'product_flat.channel', '=', 'channels.code')
                     ->whereIn('channels.id', $rule->channels()->pluck('id')->toArray());
 
-            if ($product)
+            if ($product) {
                 $qb->where('products.id', $product->id);
+            }
 
-            if (! $rule->conditions)
+            if (! $rule->conditions) {
                 return $qb;
+            }
 
             $appliedAttributes = [];
 
@@ -139,8 +142,9 @@ class CatalogRuleProduct
                     || ! isset($condition['value'])
                     || is_null($condition['value'])
                     || $condition['value'] == ''
-                    || in_array($condition['attribute'], $appliedAttributes))
+                    || in_array($condition['attribute'], $appliedAttributes)) {
                     continue;
+                }
                 
                 $appliedAttributes[] = $condition['attribute'];
 
@@ -155,8 +159,9 @@ class CatalogRuleProduct
         $validatedProductIds = [];
 
         foreach ($qb->get() as $product) {
-            if (! $product->getTypeInstance()->priceRuleCanBeApplied())
+            if (! $product->getTypeInstance()->priceRuleCanBeApplied()) {
                 continue;
+            }
 
             if ($this->validator->validate($rule, $product)) {
                 if ($product->getTypeInstance()->isComposite()) {
@@ -181,8 +186,9 @@ class CatalogRuleProduct
     {
         $attribute = $this->attributeRepository->findOneByField('code', $attributeCode);
 
-        if (! $attribute)
+        if (! $attribute) {
             return $query;
+        }
 
         $query = $query->leftJoin('product_attribute_values as ' . 'pav_' . $attribute->code, function($qb) use($attribute) {
             $qb = $qb->where('pav_' . $attribute->code . '.channel', $attribute->value_per_channel ? core()->getDefaultChannelCode() : null)
@@ -218,8 +224,9 @@ class CatalogRuleProduct
             $qb = $this->addAttributeToSelect('price', $qb);
 
             if ($product) {
-                if (! $product->getTypeInstance()->priceRuleCanBeApplied())
+                if (! $product->getTypeInstance()->priceRuleCanBeApplied()) {
                     return $qb;
+                }
 
                 if ($product->getTypeInstance()->isComposite()) {
                     $qb->whereIn('catalog_rule_products.product_id', $product->getTypeInstance()->getChildrenIds());

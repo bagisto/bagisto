@@ -141,18 +141,18 @@ class CatalogRuleRepository extends Repository
     {
         $attributes = [
             [
-                'key' => 'product',
-                'label' => trans('admin::app.promotions.catalog-rules.product-attribute'),
+                'key'      => 'product',
+                'label'    => trans('admin::app.promotions.catalog-rules.product-attribute'),
                 'children' => [
                     [
-                        'key' => 'product|category_ids',
-                        'type' => 'multiselect',
-                        'label' => trans('admin::app.promotions.catalog-rules.categories'),
+                        'key'     => 'product|category_ids',
+                        'type'    => 'multiselect',
+                        'label'   => trans('admin::app.promotions.catalog-rules.categories'),
                         'options' => $this->categoryRepository->getCategoryTree()
                     ], [
-                        'key' => 'product|attribute_family_id',
-                        'type' => 'select',
-                        'label' => trans('admin::app.promotions.catalog-rules.attribute_family'),
+                        'key'     => 'product|attribute_family_id',
+                        'type'    => 'select',
+                        'label'   => trans('admin::app.promotions.catalog-rules.attribute_family'),
                         'options' => $this->getAttributeFamilies()
                     ]
                 ]
@@ -175,9 +175,9 @@ class CatalogRuleRepository extends Repository
                 $attributeType = 'integer';
 
             $attributes[0]['children'][] = [
-                'key' => 'product|' . $attribute->code,
-                'type' => $attribute->type,
-                'label' => $attribute->name,
+                'key'     => 'product|' . $attribute->code,
+                'type'    => $attribute->type,
+                'label'   => $attribute->name,
                 'options' => $options
             ];
         }
@@ -196,7 +196,7 @@ class CatalogRuleRepository extends Repository
 
         foreach ($this->taxCategoryRepository->all() as $taxCategory) {
             $taxCategories[] = [
-                'id' => $taxCategory->id,
+                'id'         => $taxCategory->id,
                 'admin_name' => $taxCategory->name,
             ];
         }
@@ -215,7 +215,7 @@ class CatalogRuleRepository extends Repository
 
         foreach ($this->attributeFamilyRepository->all() as $attributeFamily) {
             $attributeFamilies[] = [
-                'id' => $attributeFamily->id,
+                'id'         => $attributeFamily->id,
                 'admin_name' => $attributeFamily->name,
             ];
         }

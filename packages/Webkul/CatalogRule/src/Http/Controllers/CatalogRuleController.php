@@ -83,12 +83,12 @@ class CatalogRuleController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'name' => 'required',
-            'channels' => 'required|array|min:1',
+            'name'            => 'required',
+            'channels'        => 'required|array|min:1',
             'customer_groups' => 'required|array|min:1',
-            'starts_from' => 'nullable|date',
-            'ends_till' => 'nullable|date|after_or_equal:starts_from',
-            'action_type' => 'required',
+            'starts_from'     => 'nullable|date',
+            'ends_till'       => 'nullable|date|after_or_equal:starts_from',
+            'action_type'     => 'required',
             'discount_amount' => 'required|numeric'
         ]);
 
@@ -130,12 +130,12 @@ class CatalogRuleController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(), [
-            'name' => 'required',
-            'channels' => 'required|array|min:1',
+            'name'            => 'required',
+            'channels'        => 'required|array|min:1',
             'customer_groups' => 'required|array|min:1',
-            'starts_from' => 'nullable|date',
-            'ends_till' => 'nullable|date|after_or_equal:starts_from',
-            'action_type' => 'required',
+            'starts_from'     => 'nullable|date',
+            'ends_till'       => 'nullable|date|after_or_equal:starts_from',
+            'action_type'     => 'required',
             'discount_amount' => 'required|numeric'
         ]);
 

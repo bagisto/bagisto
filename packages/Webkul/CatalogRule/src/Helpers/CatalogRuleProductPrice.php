@@ -72,9 +72,9 @@ class CatalogRuleProductPrice
     public function indexRuleProductPrice($batchCount, $product = null)
     {
         $dates = [
-            'current' => $currentDate = Carbon::now(),
+            'current'  => $currentDate = Carbon::now(),
             'previous' => (clone $currentDate)->subDays('1')->setTime(23, 59, 59),
-            'next' => (clone $currentDate)->addDays('1')->setTime(0, 0, 0),
+            'next'     => (clone $currentDate)->addDays('1')->setTime(0, 0, 0),
         ];
 
         $prices = $endRuleFlags = [];
@@ -102,19 +102,20 @@ class CatalogRuleProductPrice
                 {
                     $priceKey = $date->getTimestamp() . '-' . $productKey;
 
-                    if (isset($endRuleFlags[$priceKey]))
+                    if (isset($endRuleFlags[$priceKey])) {
                         continue;
+                    }
 
                     if (! isset($prices[$priceKey])) {
                         $prices[$priceKey] = [
-                            'rule_date' => $date,
-                            'catalog_rule_id' => $row->catalog_rule_id,
-                            'channel_id' => $row->channel_id,
+                            'rule_date'         => $date,
+                            'catalog_rule_id'   => $row->catalog_rule_id,
+                            'channel_id'        => $row->channel_id,
                             'customer_group_id' => $row->customer_group_id,
-                            'product_id' => $row->product_id,
-                            'price' => $this->calculate($row),
-                            'starts_from' => $row->starts_from,
-                            'ends_till' => $row->ends_till,
+                            'product_id'        => $row->product_id,
+                            'price'             => $this->calculate($row),
+                            'starts_from'       => $row->starts_from,
+                            'ends_till'         => $row->ends_till,
                         ];
                     } else {
                         $prices[$priceKey]['price'] = $this->calculate($row, $prices[$priceKey]);
@@ -124,8 +125,9 @@ class CatalogRuleProductPrice
                         $prices[$priceKey]['ends_till'] = min($prices[$priceKey]['ends_till'], $row->ends_till);
                     }
 
-                    if ($row->end_other_rules)
+                    if ($row->end_other_rules) {
                         $endRuleFlags[$priceKey] = true;
+                    }
                 }
             }
 
@@ -201,17 +203,18 @@ class CatalogRuleProductPrice
         } else {
             $customerGroup = $this->customerGroupRepository->findOneByField('code', 'guest');
 
-            if (! $customerGroup)
+            if (! $customerGroup) {
                 return;
+            }
 
             $customerGroupId = $customerGroup->id;
         }
 
         return $this->catalogRuleProductPriceRepository->findOneWhere([
-                'product_id' => $product->id,
-                'channel_id' => core()->getCurrentChannel()->id,
+                'product_id'        => $product->id,
+                'channel_id'        => core()->getCurrentChannel()->id,
                 'customer_group_id' => $customerGroupId,
-                'rule_date' => Carbon::now()->format('Y-m-d'),
+                'rule_date'         => Carbon::now()->format('Y-m-d'),
             ]);
     }
 }
