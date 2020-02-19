@@ -478,7 +478,7 @@
                     newBillingAddress: function() {
                         this.new_billing_address = true;
                         this.isPlaceOrderEnabled = false;
-                        this.address.shipping.address_id = null;
+                        this.address.billing.address_id = null;
                     },
 
                     newShippingAddress: function() {

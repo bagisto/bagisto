@@ -120,7 +120,7 @@
                 {{-- customer reviews --}}
                 <div slot="header" class="col-lg-12 no-padding">
                     <h3 class="display-inbl">
-                        {{ __('velocity::app.products.reviews') }}
+                        {{ __('velocity::app.products.reviews-title') }}
                     </h3>
 
                     <i class="rango-arrow"></i>
@@ -161,7 +161,7 @@
             </accordian>
         @else
             <h3 class="display-inbl mb20 col-lg-12 no-padding">
-                {{ __('velocity::app.products.reviews') }}
+                {{ __('velocity::app.products.reviews-title') }}
             </h3>
 
             <div class="customer-reviews">

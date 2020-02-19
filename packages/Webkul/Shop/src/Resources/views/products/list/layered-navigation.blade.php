@@ -10,26 +10,22 @@
     if (isset($category)) {
         $products = $productRepository->getAll($category->id);
 
-        if (count($category->filterableAttributes) > 0 && count($products)) {
-            $filterAttributes = $category->filterableAttributes;
-        } else {
-            $categoryProductAttributes = $productFlatRepository->getCategoryProductAttribute($category->id);
-
-            if ($categoryProductAttributes) {
-                foreach ($attributeRepository->getFilterAttributes() as $filterAttribute) {
-                    if (in_array($filterAttribute->id, $categoryProductAttributes)) {
-                        $filterAttributes[] = $filterAttribute;
-                    } else  if ($filterAttribute ['code'] == 'price') {
-                        $filterAttributes[] = $filterAttribute;
-                    }
-                }
-
-                $filterAttributes = collect($filterAttributes);
-            }
-        }
+        $filterAttributes = $productFlatRepository->getFilterableAttributes($category, $products);
     } else {
         $filterAttributes = $attributeRepository->getFilterAttributes();
     }
+
+    foreach ($filterAttributes as $attribute) {
+        if ($attribute->code <> 'price') {
+            if (! $attribute->options->isEmpty()) {
+                $attributes[] = $attribute;
+            }
+        } else {
+            $attributes[] = $attribute;
+        }
+    }
+
+    $filterAttributes = collect($attributes);
 ?>
 
 <div class="layered-filter-wrapper">
@@ -99,7 +95,7 @@
                         :tooltip-style="sliderConfig.tooltipStyle"
                         :max="sliderConfig.max"
                         :lazy="true"
-                        @callback="priceRangeUpdated($event)"
+                        @change="priceRangeUpdated($event)"
                     ></vue-slider>
                 </div>
 
@@ -116,7 +112,7 @@
             data: function() {
                 return {
                     attributes: @json($filterAttributes),
-                    
+
                     appliedFilters: {}
                 }
             },
@@ -187,7 +183,7 @@
 
             created: function () {
                 if (!this.index)
-                    this.active = false;
+                    this.active = true;
 
                 if (this.appliedFilterValues && this.appliedFilterValues.length) {
                     this.appliedFilters = this.appliedFilterValues;

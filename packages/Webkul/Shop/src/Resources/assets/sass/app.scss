@@ -2156,6 +2156,56 @@ section.product-detail {
     }
 }
 
+.vue-slider {
+    .vue-slider-rail {
+        background-color: #ccc;
+        cursor: pointer;
+    }
+
+    .vue-slider-dot-handle {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-color: $btn-background-color;
+        box-shadow: 0.5px 0.5px 2px 1px rgba(0,0,0,.32);
+    }
+
+    .vue-slider-dot-tooltip-inner {
+        border-color: $slider-color !important;
+        background-color: $slider-color !important;
+    }
+
+    .vue-slider-dot-tooltip-text {
+        display: block;
+        font-size: 14px;
+        min-width: 20px;
+        padding: 2px 5px;
+        text-align: center;
+        border-radius: 5px;
+        white-space: nowrap;
+        color: $btn-background-color;
+        border-color: $slider-color !important;
+        background-color: $slider-color !important;
+    }
+
+    .vue-slider-dot-tooltip-text::before {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border: 5px solid transparent;
+        border: 6px solid transparent\0;
+        border-top-color: inherit;
+        transform: translate(-50%);
+    }
+
+    .vue-slider-process {
+        background-color: $slider-color !important;
+    }
+}
+
 // product pages responsive css start here
 @media only screen and (max-width: 720px) {
     section.product-detail div.layouter .form-container {
@@ -3758,6 +3808,12 @@ section.review {
 /// rtl css start here
 .rtl {
     direction: rtl;
+
+    .dropdown-filters {
+        .per-page-label {
+            position: static !important;
+        }
+    }
 
     //header css start here
     .header {

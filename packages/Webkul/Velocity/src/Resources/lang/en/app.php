@@ -220,7 +220,7 @@ return [
     'products' => [
         'text' => 'Products',
         'details' => 'Details',
-        'reviews' => 'Reviews',
+        'reviews-title' => 'Reviews',
         'reviewed' => 'Reviewed',
         'review-by' => 'Review by',
         'quick-view' => 'Quick View',
