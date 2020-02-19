@@ -63,8 +63,5 @@
 
             </div>
         </div>
-        <script>
-            $('#loader').show();
-        </script>
     </body>
 </html>
