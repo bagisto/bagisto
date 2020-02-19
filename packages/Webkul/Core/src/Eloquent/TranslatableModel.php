@@ -25,8 +25,9 @@ class TranslatableModel extends Model
     {
         $chunks = explode('-', $key);
         if (count($chunks) > 1) {
-            if (Locale::where('code', '=', end($chunks))->first())
+            if (Locale::where('code', '=', end($chunks))->first()) {
                 return true;
+            }
         } else if (Locale::where('code', '=', $key)->first()) {
             return true;
         }

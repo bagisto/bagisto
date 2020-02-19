@@ -68,19 +68,19 @@ class ChannelController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:channels,code', new \Webkul\Core\Contracts\Validations\Code],
-            'name' => 'required',
-            'locales' => 'required|array|min:1',
+            'code'              => ['required', 'unique:channels,code', new \Webkul\Core\Contracts\Validations\Code],
+            'name'              => 'required',
+            'locales'           => 'required|array|min:1',
             'default_locale_id' => 'required|in_array:locales.*',
-            'currencies' => 'required|array|min:1',
-            'base_currency_id' => 'required|in_array:currencies.*',
-            'root_category_id' => 'required',
-            'logo.*' => 'mimes:jpeg,jpg,bmp,png',
-            'favicon.*' => 'mimes:jpeg,jpg,bmp,png',
-            'seo_title' => 'required|string',
-            'seo_description' => 'required|string',
-            'seo_keywords' => 'required|string',
-            'hostname' => 'unique:channels,hostname',
+            'currencies'        => 'required|array|min:1',
+            'base_currency_id'  => 'required|in_array:currencies.*',
+            'root_category_id'  => 'required',
+            'logo.*'            => 'mimes:jpeg,jpg,bmp,png',
+            'favicon.*'         => 'mimes:jpeg,jpg,bmp,png',
+            'seo_title'         => 'required|string',
+            'seo_description'   => 'required|string',
+            'seo_keywords'      => 'required|string',
+            'hostname'          => 'unique:channels,hostname',
         ]);
 
         $data = request()->all();
@@ -130,17 +130,17 @@ class ChannelController extends Controller
     public function update($id)
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:channels,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
-            'name' => 'required',
-            'locales' => 'required|array|min:1',
+            'code'              => ['required', 'unique:channels,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
+            'name'              => 'required',
+            'locales'           => 'required|array|min:1',
             'inventory_sources' => 'required|array|min:1',
             'default_locale_id' => 'required|in_array:locales.*',
-            'currencies' => 'required|array|min:1',
-            'base_currency_id' => 'required|in_array:currencies.*',
-            'root_category_id' => 'required',
-            'logo.*' => 'mimes:jpeg,jpg,bmp,png',
-            'favicon.*' => 'mimes:jpeg,jpg,bmp,png',
-            'hostname' => 'unique:channels,hostname,' . $id,
+            'currencies'        => 'required|array|min:1',
+            'base_currency_id'  => 'required|in_array:currencies.*',
+            'root_category_id'  => 'required',
+            'logo.*'            => 'mimes:jpeg,jpg,bmp,png',
+            'favicon.*'         => 'mimes:jpeg,jpg,bmp,png',
+            'hostname'          => 'unique:channels,hostname,' . $id,
         ]);
 
         $data = request()->all();

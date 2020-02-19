@@ -74,9 +74,9 @@ class SliderController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'title' => 'string|required',
+            'title'      => 'string|required',
             'channel_id' => 'required',
-            'image.*'  => 'required|mimes:jpeg,bmp,png,jpg'
+            'image.*'    => 'required|mimes:jpeg,bmp,png,jpg'
         ]);
 
         $result = $this->sliderRepository->save(request()->all());
@@ -109,9 +109,9 @@ class SliderController extends Controller
     public function update($id)
     {
         $this->validate(request(), [
-            'title' => 'string|required',
+            'title'      => 'string|required',
             'channel_id' => 'required',
-            'image.*'  => 'sometimes|mimes:jpeg,bmp,png,jpg'
+            'image.*'    => 'sometimes|mimes:jpeg,bmp,png,jpg'
         ]);
 
         if ( is_null(request()->image)) {

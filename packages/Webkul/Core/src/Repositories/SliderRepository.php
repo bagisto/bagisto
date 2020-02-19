@@ -62,15 +62,15 @@ class SliderRepository extends Repository
 
         $dir = 'slider_images/' . $channelName;
 
-        $uploaded = false;
-        $image = false;
+        $uploaded = $image = false;
 
         if (isset($data['image'])) {
             $image = $first = Arr::first($data['image'], function ($value, $key) {
-                if ($value)
+                if ($value) {
                     return $value;
-                else
+                } else {
                     return false;
+                }
             });
         }
 

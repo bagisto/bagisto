@@ -26,7 +26,7 @@ class FixerExchange  extends ExchangeRate
     {
         $this->apiKey = config('services.exchange-api')['fixer']['key'];
 
-        $this->apiEndPoint = 'http://data.fixer.io/api/latest?access_key='.$this->apiKey;
+        $this->apiEndPoint = 'http://data.fixer.io/api/latest?access_key=' . $this->apiKey;
     }
 
     public function fetchRates()
@@ -39,10 +39,9 @@ class FixerExchange  extends ExchangeRate
         $client = new \GuzzleHttp\Client();
 
         if (config('services.exchange-api')['fixer']['paid_account']) {
-            $result = $client->request('GET', 'http://data.fixer.io/api/'.date('Y-m-d').'?access_key='.$this->apiKey.'&base='.core()->getBaseCurrency()->code.'&symbols=INR');
-
+            $result = $client->request('GET', 'http://data.fixer.io/api/' . date('Y-m-d').'?access_key=' . $this->apiKey.'&base=' . core()->getBaseCurrency()->code . '&symbols=INR');
         } else {
-            $result = $client->request('GET', 'http://data.fixer.io/api/'.date('Y-m-d').'?access_key='.$this->apiKey.'&symbols=USD');
+            $result = $client->request('GET', 'http://data.fixer.io/api/' . date('Y-m-d') . '?access_key=' . $this->apiKey . '&symbols=USD');
         }
 
         $result = json_decode($result->getBody()->getContents());

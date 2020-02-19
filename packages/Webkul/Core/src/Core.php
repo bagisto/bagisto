@@ -111,8 +111,9 @@ class Core
     {
         static $channels;
 
-        if ($channels)
+        if ($channels) {
             return $channels;
+        }
 
         return $channels = $this->channelRepository->all();
     }
@@ -126,8 +127,9 @@ class Core
     {
         static $channel;
 
-        if ($channel)
+        if ($channel) {
             return $channel;
+        }
 
         $channel = $this->channelRepository->findWhereIn('hostname', [
             request()->getHttpHost(),
@@ -135,8 +137,9 @@ class Core
             'https://' . request()->getHttpHost(),
         ])->first();
 
-        if (! $channel)
+        if (! $channel) {
             $channel = $this->channelRepository->first();
+        }
 
         return $channel;
     }
@@ -150,8 +153,9 @@ class Core
     {
         static $channelCode;
 
-        if ($channelCode)
+        if ($channelCode) {
             return $channelCode;
+        }
 
         return ($channel = $this->getCurrentChannel()) ? $channelCode = $channel->code : '';
     }
@@ -203,8 +207,9 @@ class Core
     {
         static $locales;
 
-        if ($locales)
+        if ($locales) {
             return $locales;
+        }
 
         return $locales = $this->localeRepository->all();
     }
@@ -240,8 +245,9 @@ class Core
     {
         static $currencies;
 
-        if ($currencies)
+        if ($currencies) {
             return $currencies;
+        }
 
         return $currencies = $this->currencyRepository->all();
     }
@@ -255,13 +261,15 @@ class Core
     {
         static $currency;
 
-        if ($currency)
+        if ($currency) {
             return $currency;
+        }
 
         $baseCurrency = $this->currencyRepository->findOneByField('code', config('app.currency'));
 
-        if (! $baseCurrency)
+        if (! $baseCurrency) {
             $baseCurrency = $this->currencyRepository->first();
+        }
 
         return $currency = $baseCurrency;
     }
@@ -275,8 +283,9 @@ class Core
     {
         static $currencyCode;
 
-        if ($currencyCode)
+        if ($currencyCode) {
             return $currencyCode;
+        }
 
         return ($currency = $this->getBaseCurrency()) ? $currencyCode = $currency->code : '';
     }
@@ -290,8 +299,9 @@ class Core
     {
         static $currency;
 
-        if ($currency)
+        if ($currency) {
             return $currency;
+        }
 
         $currenctChannel = $this->getCurrentChannel();
 
@@ -307,8 +317,9 @@ class Core
     {
         static $currencyCode;
 
-        if ($currencyCode)
+        if ($currencyCode) {
             return $currencyCode;
+        }
 
         return ($currency = $this->getChannelBaseCurrency()) ? $currencyCode = $currency->code : '';
     }
@@ -322,12 +333,14 @@ class Core
     {
         static $currency;
 
-        if ($currency)
+        if ($currency) {
             return $currency;
+        }
 
         if ($currencyCode = session()->get('currency')) {
-            if ($currency = $this->currencyRepository->findOneByField('code', $currencyCode))
+            if ($currency = $this->currencyRepository->findOneByField('code', $currencyCode)) {
                 return $currency;
+            }
         }
 
         return $currency = $this->getChannelBaseCurrency();
@@ -342,8 +355,9 @@ class Core
     {
         static $currencyCode;
 
-        if ($currencyCode)
+        if ($currencyCode) {
             return $currencyCode;
+        }
 
         return ($currency = $this->getCurrentCurrency()) ? $currencyCode = $currency->code : '';
     }
@@ -358,27 +372,31 @@ class Core
      */
     public function convertPrice($amount, $targetCurrencyCode = null)
     {
-        if (! isset($this->lastCurrencyCode))
+        if (! isset($this->lastCurrencyCode)) {
             $this->lastCurrencyCode = $this->getBaseCurrency()->code;
+        }
 
         $targetCurrency = ! $targetCurrencyCode
             ? $this->getCurrentCurrency()
             : $this->currencyRepository->findOneByField('code', $targetCurrencyCode);
 
-        if (! $targetCurrency)
+        if (! $targetCurrency) {
             return $amount;
+        }
 
         $exchangeRate = $this->exchangeRateRepository->findOneWhere([
             'target_currency' => $targetCurrency->id,
         ]);
 
-        if (null === $exchangeRate || ! $exchangeRate->rate)
+        if (null === $exchangeRate || ! $exchangeRate->rate) {
             return $amount;
+        }
 
         $result = (float)$amount * (float)($this->lastCurrencyCode == $targetCurrency->code ? 1.0 : $exchangeRate->rate);
 
-        if ($this->lastCurrencyCode != $targetCurrency->code)
+        if ($this->lastCurrencyCode != $targetCurrency->code) {
             $this->lastCurrencyCode = $targetCurrency->code;
+        }
 
         return $result;
     }
@@ -397,15 +415,17 @@ class Core
             ? $this->getCurrentCurrency()
             : $this->currencyRepository->findOneByField('code', $targetCurrencyCode);
 
-        if (! $targetCurrency)
+        if (! $targetCurrency) {
             return $amount;
+        }
 
         $exchangeRate = $this->exchangeRateRepository->findOneWhere([
             'target_currency' => $targetCurrency->id,
         ]);
 
-        if (null === $exchangeRate || ! $exchangeRate->rate)
+        if (null === $exchangeRate || ! $exchangeRate->rate) {
             return $amount;
+        }
 
         return (float)$amount / $exchangeRate->rate;
     }
@@ -419,8 +439,9 @@ class Core
      */
     public function currency($amount = 0)
     {
-        if (is_null($amount))
+        if (is_null($amount)) {
             $amount = 0;
+        }
 
         return $this->formatPrice($this->convertPrice($amount), $this->getCurrentCurrency()->code);
     }
@@ -448,8 +469,9 @@ class Core
      */
     public function formatPrice($price, $currencyCode)
     {
-        if (is_null($price))
+        if (is_null($price)) {
             $price = 0;
+        }
 
         $formater = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
 
@@ -497,8 +519,9 @@ class Core
      */
     public function formatBasePrice($price)
     {
-        if (is_null($price))
+        if (is_null($price)) {
             $price = 0;
+        }
 
         $formater = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
 
@@ -540,7 +563,7 @@ class Core
 
         if (! $this->is_empty_date($dateFrom) && $channelTimeStamp < $fromTimeStamp) {
             $result = false;
-        } elseif (! $this->is_empty_date($dateTo) && $channelTimeStamp > $toTimeStamp) {
+        } else if (! $this->is_empty_date($dateTo) && $channelTimeStamp > $toTimeStamp) {
             $result = false;
         } else {
             $result = true;
@@ -964,8 +987,9 @@ class Core
     {
         static $instance = [];
 
-        if (array_key_exists($className, $instance))
+        if (array_key_exists($className, $instance)) {
             return $instance[$className];
+        }
 
         return $instance[$className] = app($className);
     }

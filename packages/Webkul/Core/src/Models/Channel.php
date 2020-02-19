@@ -44,9 +44,6 @@ class Channel extends Model implements ChannelContract
         return $this->belongsToMany(InventorySourceProxy::modelClass(), 'channel_inventory_sources');
     }
 
-
-    // protected $with = ['base_currency'];
-
     /**
      * Get the base currency
      */
@@ -68,8 +65,9 @@ class Channel extends Model implements ChannelContract
      */
     public function logo_url()
     {
-        if (! $this->logo)
+        if (! $this->logo) {
             return;
+        }
 
         return Storage::url($this->logo);
     }
@@ -87,8 +85,9 @@ class Channel extends Model implements ChannelContract
      */
     public function favicon_url()
     {
-        if (! $this->favicon)
+        if (! $this->favicon) {
             return;
+        }
 
         return Storage::url($this->favicon);
     }

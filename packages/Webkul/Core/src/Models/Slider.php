@@ -24,8 +24,9 @@ class Slider extends Model implements SliderContract
      */
     public function image_url()
     {
-        if (! $this->path)
+        if (! $this->path) {
             return;
+        }
 
         return Storage::url($this->path);
     }

@@ -85,9 +85,9 @@ class CoreConfigRepository extends Repository
 
                 if (! count($coreConfigValue)) {
                     $this->model->create([
-                            'code' => $fieldName,
-                            'value' => $value,
-                            'locale_code' => $localeBased ? $locale : null,
+                            'code'         => $fieldName,
+                            'value'        => $value,
+                            'locale_code'  => $localeBased ? $locale : null,
                             'channel_code' => $channelBased ? $channel : null
                         ]);
                 } else {
@@ -98,9 +98,9 @@ class CoreConfigRepository extends Repository
                             $this->model->destroy($coreConfig['id']);
                         } else {
                             $coreConfig->update([
-                                    'code' => $fieldName,
-                                    'value' => $value,
-                                    'locale_code' => $localeBased ? $locale : null,
+                                    'code'         => $fieldName,
+                                    'value'        => $value,
+                                    'locale_code'  => $localeBased ? $locale : null,
                                     'channel_code' => $channelBased ? $channel : null
                                 ]);
                         }
