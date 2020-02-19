@@ -82,14 +82,14 @@ class WishlistController extends Controller
             return redirect()->back();
 
         $data = [
-            'channel_id' => core()->getCurrentChannel()->id,
-            'product_id' => $itemId,
+            'channel_id'  => core()->getCurrentChannel()->id,
+            'product_id'  => $itemId,
             'customer_id' => auth()->guard('customer')->user()->id
         ];
 
         $checked = $this->wishlistRepository->findWhere([
-                'channel_id' => core()->getCurrentChannel()->id,
-                'product_id' => $itemId,
+                'channel_id'  => core()->getCurrentChannel()->id,
+                'product_id'  => $itemId,
                 'customer_id' => auth()->guard('customer')->user()->id
             ]);
 
@@ -152,12 +152,13 @@ class WishlistController extends Controller
     public function move($itemId)
     {
         $wishlistItem = $this->wishlistRepository->findOneWhere([
-                'id' => $itemId,
+                'id'          => $itemId,
                 'customer_id' => auth()->guard('customer')->user()->id
             ]);
 
-        if (! $wishlistItem)
+        if (! $wishlistItem) {
             abort(404);
+        }
 
         try {
             $result = Cart::moveToCart($wishlistItem);

@@ -72,6 +72,7 @@ class CustomerAddressRepository extends Repository
             if ($default_address->id != $address->id) {
                 $default_address->update(['default_address' => 0]);
             }
+            
             $address->update($data);
         } else {
             $address->update($data);

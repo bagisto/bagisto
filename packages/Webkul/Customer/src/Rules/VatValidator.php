@@ -64,6 +64,7 @@ class VatValidator
     public function validate(string $vatNumber): bool
     {
         $vatNumber = $this->vatCleaner($vatNumber);
+
         list($country, $number) = $this->splitVat($vatNumber);
 
         if (! isset(self::$pattern_expression[$country])) {
@@ -81,6 +82,7 @@ class VatValidator
     private function vatCleaner(string $vatNumber): string
     {
         $vatNumber_no_spaces = trim($vatNumber);
+        
         return strtoupper($vatNumber_no_spaces);
     }
 

@@ -182,8 +182,9 @@ class AddressController extends Controller
      */
     public function makeDefault($id)
     {
-        if ($default = $this->customer->default_address)
+        if ($default = $this->customer->default_address) {
             $this->customerAddressRepository->find($default->id)->update(['default_address' => 0]);
+        }
 
         if ($address = $this->customerAddressRepository->find($id)) {
             $address->update(['default_address' => 1]);
@@ -208,8 +209,9 @@ class AddressController extends Controller
             'customer_id' => auth()->guard('customer')->user()->id,
         ]);
 
-        if (! $address)
+        if (! $address) {
             abort(404);
+        }
 
         $this->customerAddressRepository->delete($id);
 

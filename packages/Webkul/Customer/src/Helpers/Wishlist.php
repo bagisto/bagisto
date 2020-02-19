@@ -36,14 +36,15 @@ class Wishlist
 
         if (auth()->guard('customer')->user()) {
             $wishlist = $this->wishlistRepository->findOneWhere([
-                'channel_id' => core()->getCurrentChannel()->id,
-                'product_id' => $product->product_id,
+                'channel_id'  => core()->getCurrentChannel()->id,
+                'product_id'  => $product->product_id,
                 'customer_id' => auth()->guard('customer')->user()->id
             ]);
         }
 
-        if ($wishlist)
+        if ($wishlist) {
             return true;
+        }
 
         return false;
     }
