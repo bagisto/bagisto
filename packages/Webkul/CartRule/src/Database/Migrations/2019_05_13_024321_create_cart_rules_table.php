@@ -55,7 +55,7 @@ class CreateCartRulesTable extends Migration
             $table->dropForeign('cart_rule_coupons_cart_rule_id_foreign');
         });
 
-        // Schema::dropIfExists('cart_rule_coupons');
+         // Schema::dropIfExists('cart_rule_coupons');
 
         Schema::dropIfExists('cart_rules');
     }
