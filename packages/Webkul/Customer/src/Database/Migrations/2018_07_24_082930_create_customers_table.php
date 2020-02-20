@@ -39,12 +39,6 @@ class CreateCustomersTable extends Migration
      */
     public function down()
     {
-        Schema::table('cart_rule_customers', function (Blueprint $table) {
-            $table->dropForeign('cart_rule_customers_customer_id_foreign');
-        });
-
-      //  Schema::dropIfExists('cart_rule_customers');
-
         Schema::dropIfExists('customers');
     }
 }
