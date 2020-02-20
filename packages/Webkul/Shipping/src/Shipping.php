@@ -25,8 +25,9 @@ class Shipping
      */
     public function collectRates()
     {
-        if (! $cart = Cart::getCart())
+        if (! $cart = Cart::getCart()) {
             return false;
+        }
 
         $this->removeAllShippingRates();
 
@@ -47,7 +48,7 @@ class Shipping
         return [
                 'jump_to_section' => 'shipping',
                 'shippingMethods' => $this->getGroupedAllShippingRates(),
-                'html' => view('shop::checkout.onepage.shipping', ['shippingRateGroups' => $this->getGroupedAllShippingRates()])->render()
+                'html'            => view('shop::checkout.onepage.shipping', ['shippingRateGroups' => $this->getGroupedAllShippingRates()])->render()
             ];
     }
 
@@ -58,8 +59,9 @@ class Shipping
      */
     public function removeAllShippingRates()
     {
-        if (! $cart = Cart::getCart())
+        if (! $cart = Cart::getCart()) {
             return;
+        }
 
         foreach ($cart->shipping_rates()->get() as $rate) {
             $rate->delete();
@@ -73,8 +75,9 @@ class Shipping
      */
     public function saveAllShippingRates()
     {
-        if (! $cart = Cart::getCart())
+        if (! $cart = Cart::getCart()) {
             return;
+        }
 
         $shippingAddress = $cart->shipping_address;
 
@@ -98,7 +101,7 @@ class Shipping
             if (! isset($rates[$rate->carrier])) {
                 $rates[$rate->carrier] = [
                     'carrier_title' => $rate->carrier_title,
-                    'rates' => []
+                    'rates'         => []
                 ];
             }
 
@@ -120,13 +123,14 @@ class Shipping
         foreach (Config::get('carriers') as $shippingMethod) {
             $object = new $shippingMethod['class'];
 
-            if (! $object->isAvailable())
+            if (! $object->isAvailable()) {
                 continue;
+            }
 
             $methods[] = [
-                'method' => $object->getCode(),
+                'method'       => $object->getCode(),
                 'method_title' => $object->getTitle(),
-                'description' => $object->getDescription()
+                'description'  => $object->getDescription()
             ];
         }
 
