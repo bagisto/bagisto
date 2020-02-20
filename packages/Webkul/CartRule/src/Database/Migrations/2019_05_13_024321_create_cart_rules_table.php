@@ -47,16 +47,6 @@ class CreateCartRulesTable extends Migration
      */
     public function down()
     {
-        Schema::table('cart_rule_customers', function (Blueprint $table) {
-            $table->dropForeign('cart_rule_customers_cart_rule_id_foreign');
-        });
-
-        Schema::table('cart_rule_coupons', function (Blueprint $table) {
-            $table->dropForeign('cart_rule_coupons_cart_rule_id_foreign');
-        });
-
-         // Schema::dropIfExists('cart_rule_coupons');
-
         Schema::dropIfExists('cart_rules');
     }
 }

@@ -33,17 +33,17 @@
         "maatwebsite/excel": "3.1.18",
         "nwidart/laravel-modules": "^3.2",
         "prettus/l5-repository": "^2.6",
-        "tymon/jwt-auth": "^1.0.0"
+        "tymon/jwt-auth": "^1.0.0",
+        "barryvdh/laravel-debugbar": "^3.1",
+        "fzaninotto/faker": "^1.4"
     },
 
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.1",
         "codeception/codeception": "^4.0",
         "codeception/module-asserts": "^1.1",
         "codeception/module-filesystem": "^1.0",
         "codeception/module-laravel5": "^1.0",
         "filp/whoops": "^2.0",
-        "fzaninotto/faker": "^1.4",
         "laravel/dusk": "^5.7.0",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^2.0",
