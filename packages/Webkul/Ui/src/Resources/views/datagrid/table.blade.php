@@ -297,7 +297,7 @@
                         }
 
                         if (this.type == 'string') {
-                            this.formURL(this.columnOrAlias, this.stringCondition, this.stringValue, label)
+                            this.formURL(this.columnOrAlias, this.stringCondition, encodeURIComponent(this.stringValue), label)
                         } else if (this.type == 'number') {
                             indexConditions = true;
 
@@ -685,7 +685,12 @@
                                 _method : element.getAttribute('data-method')
                             }).then(function(response) {
                                 this.result = response;
-                                location.reload();
+                                
+                                if (response.data.redirect) {
+                                    window.location.href = response.data.redirect;
+                                } else {
+                                    location.reload();
+                                }
                             }).catch(function (error) {
                                 location.reload();
                             });

@@ -137,7 +137,6 @@
 
         .limiter::after {
             margin-left: 10px;
-            content: 'per page';
         }
     }
 }
@@ -224,12 +223,13 @@
     margin: 0 5px 10px 10px;
 
     .product-image-container {
-        height: 225px;
+        max-height: 225px;
         position: relative;
 
         img {
             width: 100%;
             height: 100%;
+            max-height: 225px;
         }
     }
 
@@ -299,7 +299,9 @@
         }
 
         ~ .wishlist-icon {
-            right: 10px;
+            right: 0;
+            margin: 0;
+            padding: 0;
             position: absolute;
         }
     }
@@ -336,7 +338,7 @@
 
 .product-card-new:hover {
     #quick-view-btn-container {
-        // display: block;
+        display: block;
     }
 }
 
@@ -521,18 +523,12 @@
         .badge {
             @include border-radius(50%);
 
-            top: -7px;
-            left: -13px;
+            top: -2px;
+            left: 15px;
             padding: 4px;
             min-width: 20px;
-            position: relative;
+            position: absolute;
             background: $button-primary-bg;
-        }
-
-        .cart-text {
-            top: 0px;
-            left: -14px;
-            position: relative;
         }
     }
 }
@@ -657,7 +653,7 @@
 
         .cart-item-list {
             > .row {
-                margin-bottom: 20px;
+                margin-bottom: 40px;
             }
 
             > .row:last-child {
@@ -681,10 +677,10 @@
                 .card-current-price {
                     font-size: 18px;
                 }
-            }
 
-            > .row:not(:last-child) {
-                margin-bottom: 10px;
+                > a {
+                    line-height: 20px;
+                }
             }
         }
     }
@@ -1009,6 +1005,25 @@
                     }
                 }
             }
+
+            &.profile-page-content {
+                .table {
+                    padding: 0;
+                    width: 800px;
+                    margin-bottom: 15px;
+                }
+
+                .table > table {
+                    width:100%;
+                    color: #5E5E5E;
+                    border: 1px solid rgba(0,0,0,.125);
+                }
+
+                .table td {
+                    border: unset;
+                    padding: 6px 12px;
+                }
+            }
         }
 
         .account-items-list {
@@ -1272,7 +1287,7 @@
         }
 
         button {
-            margin: 20px 0;
+            margin: 20px 0 30px 0;
         }
 
         .applied-coupon-details {
@@ -1292,6 +1307,8 @@
 }
 
 .address-container {
+    display: none;
+
     .address-holder {
         margin-top: 15px;
 
@@ -1310,6 +1327,21 @@
             ul {
                 li {
                     display: inline-block;
+                }
+            }
+
+            .add-address-button {
+                height: 100%;
+                display: table;
+                text-align: center;
+
+                > div {
+                    display: table-cell;
+                    vertical-align: middle;
+
+                    span {
+                        vertical-align: super;
+                    }
                 }
             }
         }
@@ -1351,7 +1383,7 @@
 .payment-form,
 .review-checkout-conainer {
     h3 {
-        margin-bottom: 30px;
+        margin-bottom: 20px;
     }
 
     .shipping-methods,
@@ -1454,9 +1486,14 @@
     }
 }
 
+.price-label {
+    margin-right: 6px;
+}
+
 .product-price {
     span:nth-child(1),
-    .special-price {
+    .special-price,
+    .price-from > span:not(:nth-child(2)) {
         font-size: 20px;
         font-weight: 600;
     }
@@ -1558,7 +1595,6 @@
 
         .rango-arrow-right {
             top: 4px;
-            float: right;
             position: relative;
         }
 
@@ -1666,9 +1702,6 @@
 
 .grouped-product-container {
     .grouped-product-list {
-        padding: 15px 0;
-        border-top: solid 1px rgba(162, 162, 162, 0.2);
-
         ul {
             li {
                 width: 100%;
@@ -2163,4 +2196,12 @@
             @extend .small-padding;
         }
     }
+}
+
+.vue-slider {
+    max-width: 97%;
+}
+
+.profile-update-form {
+    width: 800px;
 }

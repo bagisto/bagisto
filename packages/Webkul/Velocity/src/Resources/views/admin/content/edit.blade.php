@@ -122,7 +122,7 @@
 
     <script type="text/x-template" id="content-type-template">
         <div>
-            <div :class="`control-group ${errors.has('{{$locale}}[custom_title]') ? 'has-error' : ''}`">
+            {{-- <div :class="`control-group ${errors.has('{{$locale}}[custom_title]') ? 'has-error' : ''}`">
                 <label for="custom_title">
                     {{ __('velocity::app.admin.contents.content.custom-title') }}
                     <span class="locale">[{{ $locale }}]</span>
@@ -163,7 +163,7 @@
                     v-if="errors.has('{{$locale}}[custom_heading]')">
                     @{{ errors.first('{!!$locale!!}[custom_heading]') }}
                 </span>
-            </div>
+            </div> --}}
 
             <div :class="`control-group ${errors.has('content_type') ? 'has-error' : ''}`">
                 <label

@@ -3,7 +3,10 @@
 namespace Webkul\Velocity\Providers;
 
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Velocity\Facades\Velocity as VelocityFacade;
@@ -30,24 +33,11 @@ class VelocityServiceProvider extends ServiceProvider
 
         $this->app->register(EventServiceProvider::class);
 
+        $this->loadGloableVariables();
+        $this->loadPublishableAssets();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
-        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'velocity');
-
-        $this->publishes([
-            __DIR__ . '/../../publishable/assets/' => public_path('themes/velocity/assets'),
-        ], 'public');
-
-        $this->publishes([
-            __DIR__ . '/../Resources/views/shop' => resource_path('themes/velocity/views'),
-        ]);
-
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'velocity');
-
-        $velocityHelper = app('Webkul\Velocity\Helpers\Helper');
-        $velocityMetaData = $velocityHelper->getVelocityMetaData();
-
-        view()->share('showRecentlyViewed', true);
-        view()->share('velocityMetaData', $velocityMetaData);
+        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'velocity');
     }
 
     /**
@@ -58,9 +48,7 @@ class VelocityServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerConfig();
-
         $this->registerFacades();
-
     }
 
     /**
@@ -88,5 +76,31 @@ class VelocityServiceProvider extends ServiceProvider
     {
         $loader = AliasLoader::getInstance();
         $loader->alias('velocity', VelocityFacade::class);
+    }
+
+    // this function will provide global variables shared by view (blade files)
+    private function loadPublishableAssets()
+    {
+        $this->publishes([
+            __DIR__ . '/../../publishable/assets/' => public_path('themes/velocity/assets'),
+        ], 'public');
+
+        $this->publishes([
+            __DIR__ . '/../Resources/views/shop' => resource_path('themes/velocity/views'),
+        ]);
+
+        return true;
+    }
+
+    // this function will provide global variables shared by view (blade files)
+    private function loadGloableVariables()
+    {
+        $velocityHelper = app('Webkul\Velocity\Helpers\Helper');
+        $velocityMetaData = $velocityHelper->getVelocityMetaData();
+
+        view()->share('showRecentlyViewed', true);
+        view()->share('velocityMetaData', $velocityMetaData);
+
+        return true;
     }
 }

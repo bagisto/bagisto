@@ -193,5 +193,33 @@ class Helper extends Review
 
         return $reviews;
     }
+
+    public function jsonTranslations()
+    {
+        $currentLocale = app()->getLocale();
+
+        $path = __DIR__ . "/../Resources/lang/$currentLocale/app.php";
+
+        if (is_string($path) && is_readable($path)) {
+            return include $path;
+        }
+
+        return [];
+    }
+
+    public function formatCartItem($item)
+    {
+        $product = $item->product;
+        $images = $product->getTypeInstance()->getBaseImage($item);
+
+        return [
+            'images' => $images,
+            'itemId' => $item->id,
+            'name' => $item->name,
+            'url_key' => $product->url_key,
+            'quantity' => $item->quantity,
+            'baseTotal' => core()->currency($item->base_total),
+        ];
+    }
 }
 

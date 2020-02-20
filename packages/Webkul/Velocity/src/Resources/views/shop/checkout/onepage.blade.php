@@ -14,6 +14,7 @@
     <script type="text/x-template" id="checkout-template">
         <div class="container">
             <div id="checkout" class="checkout-process row offset-lg-1 col-lg-11 col-md-12">
+
                 <h1 class="col-12">{{ __('velocity::app.checkout.checkout') }}</h1>
 
                 <div class="col-lg-7 col-md-12">
@@ -65,7 +66,7 @@
                                         type="button"
                                         class="theme-btn"
                                         @click="placeOrder()"
-                                        :disabled="disable_button"
+                                        :disabled="!isPlaceOrderEnabled"
                                         id="checkout-place-order-button">
                                         {{ __('shop::app.checkout.onepage.place-order') }}
                                     </button>
@@ -115,14 +116,16 @@
                         allAddress: {},
                         current_step: 1,
                         completed_step: 0,
+                        isCheckPayment: true,
                         is_customer_exist: 0,
                         disable_button: false,
                         reviewComponentKey: 0,
                         summeryComponentKey: 0,
-                        new_billing_address: false,
-                        showShippingSection: false,
                         showPaymentSection: false,
                         showSummarySection: false,
+                        isPlaceOrderEnabled: false,
+                        new_billing_address: false,
+                        showShippingSection: false,
                         new_shipping_address: false,
                         selected_payment_method: '',
                         selected_shipping_method: '',
@@ -199,38 +202,86 @@
                         var isManualValidationFail = false;
 
                         if (scope == 'address-form') {
-                            let form = $(document).find('form[data-vv-scope=address-form]');
-
-                            if (form) {
-                                form.find(':input').each((index, element) => {
-                                    let value = $(element).val();
-
-                                    if (value == "") {
-                                        isManualValidationFail = true;
-                                    }
-                                });
-                            }
+                            isManualValidationFail = this.validateAddressForm();
                         }
 
-                        if (!isManualValidationFail) {
+                        if (! isManualValidationFail) {
                             this.$validator.validateAll(scope)
                             .then(result => {
                                 if (result) {
                                     document.body.style.cursor = 'wait';
 
-                                    if (scope == 'address-form') {
-                                        this.saveAddress();
-                                        document.body.style.cursor = 'default';
-                                    } else if (scope == 'shipping-form') {
-                                        document.body.style.cursor = 'wait';
-                                        this.saveShipping();
-                                    } else if (scope == 'payment-form') {
-                                        document.body.style.cursor = 'wait';
-                                        this.savePayment();
+                                    switch (scope) {
+                                        case 'address-form':
+                                            this.saveAddress();
+                                            document.body.style.cursor = 'default';
+                                            break;
+
+                                        case 'shipping-form':
+                                            document.body.style.cursor = 'wait';
+                                            this.saveShipping();
+                                            break;
+
+                                        case 'payment-form':
+                                            document.body.style.cursor = 'wait';
+                                            this.savePayment();
+
+                                            this.isPlaceOrderEnabled = ! this.validateAddressForm();
+                                            break;
+
+                                        default:
+                                            break;
+                                    }
+
+                                } else {
+                                    this.isPlaceOrderEnabled = false;
+                                }
+                            });
+                        } else {
+                            this.isPlaceOrderEnabled = false;
+                        }
+                    },
+
+                    validateAddressForm: function () {
+                        var isManualValidationFail = false;
+
+                        let form = $(document).find('form[data-vv-scope=address-form]');
+
+                        // validate that if all the field contains some value
+                        if (form) {
+                            form.find(':input').each((index, element) => {
+                                let value = $(element).val();
+                                let elementId = element.id;
+
+                                if (value == ""
+                                    && element.id != 'billing[company_name]'
+                                    && element.id != 'shipping[company_name]'
+                                ) {
+                                    // check for multiple line address
+                                    if (elementId.match('billing_address_')
+                                        || elementId.match('shipping_address_')
+                                    ) {
+                                        // only first line address is required
+                                        if (elementId == 'billing_address_0'
+                                            || elementId == 'shipping_address_0'
+                                        ) {
+                                            isManualValidationFail = true;
+                                        }
+                                    } else {
+                                        isManualValidationFail = true;
                                     }
                                 }
                             });
                         }
+
+                        // validate that if customer wants to use different shipping address
+                        if (! this.address.billing.use_for_shipping) {
+                            if (! this.address.shipping.address_id && ! this.new_shipping_address) {
+                                isManualValidationFail = true;
+                            }
+                        }
+
+                        return isManualValidationFail;
                     },
 
                     isCustomerExist: function() {
@@ -309,6 +360,7 @@
 
                                 shippingMethods = response.data.shippingMethods;
 
+                                this.validateForm('shipping-form');
                                 this.getOrderSummary();
                             })
                             .catch(error => {
@@ -339,6 +391,7 @@
                                     this.savePayment();
                                 }
 
+                                this.validateForm('payment-form');
                                 this.getOrderSummary();
                             })
                             .catch(error => {
@@ -351,46 +404,56 @@
                     savePayment: function() {
                         this.disable_button = true;
 
-                        this.$http.post("{{ route('shop.checkout.save-payment') }}", {'payment': this.selected_payment_method})
-                        .then(response => {
-                            this.disable_button = false;
+                        if (this.isCheckPayment) {
+                            this.isCheckPayment = false;
 
-                            this.showSummarySection = true;
+                            this.$http.post("{{ route('shop.checkout.save-payment') }}", {'payment': this.selected_payment_method})
+                            .then(response => {
+                                this.isCheckPayment = true;
+                                this.disable_button = false;
 
-                            reviewHtml = Vue.compile(response.data.html)
-                            this.completed_step = this.step_numbers[response.data.jump_to_section] + 1;
-                            this.current_step = this.step_numbers[response.data.jump_to_section];
+                                this.showSummarySection = true;
 
-                            document.body.style.cursor = 'auto';
+                                reviewHtml = Vue.compile(response.data.html)
+                                this.completed_step = this.step_numbers[response.data.jump_to_section] + 1;
+                                this.current_step = this.step_numbers[response.data.jump_to_section];
 
-                            this.getOrderSummary();
-                        })
-                        .catch(error => {
-                            this.disable_button = false;
-                            this.handleErrorResponse(error.response, 'payment-form')
-                        });
+                                document.body.style.cursor = 'auto';
+
+                                this.getOrderSummary();
+                            })
+                            .catch(error => {
+                                this.disable_button = false;
+                                this.handleErrorResponse(error.response, 'payment-form')
+                            });
+                        }
                     },
 
                     placeOrder: function() {
-                        this.disable_button = true;
+                        if (this.isPlaceOrderEnabled) {
+                            this.disable_button = false;
+                            this.isPlaceOrderEnabled = false;
 
-                        this.$http.post("{{ route('shop.checkout.save-order') }}", {'_token': "{{ csrf_token() }}"})
-                        .then(function(response) {
-                            if (response.data.success) {
-                                if (response.data.redirect_url) {
-                                    window.location.href = response.data.redirect_url;
-                                } else {
-                                    window.location.href = "{{ route('shop.checkout.success') }}";
+                            this.$http.post("{{ route('shop.checkout.save-order') }}", {'_token': "{{ csrf_token() }}"})
+                            .then(function(response) {
+                                if (response.data.success) {
+                                    if (response.data.redirect_url) {
+                                        window.location.href = response.data.redirect_url;
+                                    } else {
+                                        window.location.href = "{{ route('shop.checkout.success') }}";
+                                    }
                                 }
-                            }
-                        })
-                        .catch(error => {
+                            })
+                            .catch(error => {
+                                this.disable_button = true;
+
+                                window.flashMessages = [{'type': 'alert-error', 'message': "{{ __('shop::app.common.error') }}" }];
+
+                                this.$root.addFlashMessages();
+                            })
+                        } else {
                             this.disable_button = true;
-
-                            window.flashMessages = [{'type': 'alert-error', 'message': "{{ __('shop::app.common.error') }}" }];
-
-                            this.$root.addFlashMessages();
-                        })
+                        }
                     },
 
                     handleErrorResponse: function(response, scope) {
@@ -414,18 +477,28 @@
 
                     newBillingAddress: function() {
                         this.new_billing_address = true;
+                        this.isPlaceOrderEnabled = false;
+                        this.address.billing.address_id = null;
                     },
 
                     newShippingAddress: function() {
                         this.new_shipping_address = true;
+                        this.isPlaceOrderEnabled = false;
+                        this.address.shipping.address_id = null;
                     },
 
                     backToSavedBillingAddress: function() {
                         this.new_billing_address = false;
+                        setTimeout(() => {
+                            this.validateForm('address-form');
+                        }, 0);
                     },
 
                     backToSavedShippingAddress: function() {
                         this.new_shipping_address = false;
+                        setTimeout(() => {
+                            this.validateForm('address-form');
+                        }, 0);
                     },
                 }
             });

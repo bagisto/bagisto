@@ -31,6 +31,7 @@ $factory->define(OrderItem::class, function (Faker $faker) {
         },
         'created_at'   => $now,
         'updated_at'   => $now,
+        'product_type' => Product::class,
     ];
 });
 

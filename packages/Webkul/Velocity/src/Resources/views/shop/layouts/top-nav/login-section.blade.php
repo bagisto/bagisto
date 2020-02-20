@@ -47,7 +47,7 @@
                                         type="button"
                                         class="theme-btn fs14 fw6">
 
-                                        {{ __('velocity::app.header.sign-in') }}
+                                        {{ __('shop::app.header.sign-in') }}
                                     </button>
                                 </a>
                             </div>
@@ -57,7 +57,7 @@
                                     <button
                                         type="button"
                                         class="theme-btn fs14 fw6">
-                                        {{ __('velocity::app.header.sign-up') }}
+                                        {{ __('shop::app.header.sign-up') }}
                                     </button>
                                 </a>
                             </div>
@@ -79,11 +79,11 @@
                             </li>
 
                             <li>
-                                <a href="{{ route('customer.wishlist.index') }}" class="unset">{{ __('shop::app.header.wishlist') }}</a>
+                                <a href="{{ route('customer.orders.index') }}" class="unset">{{ __('velocity::app.shop.general.orders') }}</a>
                             </li>
 
                             <li>
-                                <a href="{{ route('shop.checkout.cart.index') }}" class="unset">{{ __('shop::app.header.cart') }}</a>
+                                <a href="{{ route('customer.wishlist.index') }}" class="unset">{{ __('shop::app.header.wishlist') }}</a>
                             </li>
 
                             <li>

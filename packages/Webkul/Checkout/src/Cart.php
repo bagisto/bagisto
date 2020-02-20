@@ -173,9 +173,10 @@ class Cart
                         $cartItem = $this->cartItemRepository->create(array_merge($cartProduct,
                             ['cart_id' => $cart->id]));
                     } else {
-                        if ($product->getTypeInstance()->showQuantityBox() === false) {
+                        if ($cartItem->product->getTypeInstance()->showQuantityBox() === false) {
                             return ['warning' => __('shop::app.checkout.cart.integrity.qty_impossible')];
                         }
+
                         $cartItem = $this->cartItemRepository->update($cartProduct, $cartItem->id);
                     }
                 }
@@ -783,19 +784,18 @@ class Cart
                 'country' => $address->country,
             ])->orderBy('tax_rate', 'desc')->get();
 
-            $item->tax_percent = 0;
-            $item->tax_amount = 0;
-            $item->base_tax_amount = 0;
-
             if ($taxRates->count()) {
                 foreach ($taxRates as $rate) {
                     $haveTaxRate = false;
 
                     if ($rate->state != '' && $rate->state != $address->state) {
+                        $this->setItemTaxToZero($item);
+
                         continue;
                     }
-                    if (!$rate->is_zip) {
-                        if ($rate->zip_code == '*' || $rate->zip_code == $address->postcode) {
+
+                    if (! $rate->is_zip) {
+                        if ($rate->zip_code == '*' || $rate->zip_code == $address->postcode)
                             $haveTaxRate = true;
                         }
                     } else {
@@ -809,12 +809,31 @@ class Cart
                         $item->base_tax_amount = ($item->base_total * $rate->tax_rate) / 100;
 
                         break;
+                    } else {
+                        $this->setItemTaxToZero($item);
+
+                        break;
                     }
                 }
+            } else {
+                $this->setItemTaxToZero($item);
             }
 
             $item->save();
         }
+    }
+
+    /**
+     * Set Item tax to zero.
+     *
+     * @return void
+     */
+    protected function setItemTaxToZero($item) {
+        $item->tax_percent = 0;
+        $item->tax_amount = 0;
+        $item->base_tax_amount = 0;
+
+        $item->save();
     }
 
     /**

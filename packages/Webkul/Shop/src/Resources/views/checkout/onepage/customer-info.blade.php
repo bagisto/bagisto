@@ -34,7 +34,7 @@
                         </li>
 
                         <li class="mb-15">
-                            @{{ addresses.country }}.
+                            @{{ addresses.country }}  @{{ addresses.postcode }}
                         </li>
 
                         <li>

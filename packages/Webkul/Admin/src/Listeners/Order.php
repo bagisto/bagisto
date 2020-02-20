@@ -28,9 +28,15 @@ class Order
     public function sendNewOrderMail($order)
     {
         try {
-            Mail::queue(new NewOrderNotification($order));
+            $configKey = 'emails.general.notifications.emails.general.notifications.new-order';
+            if (core()->getConfigData($configKey)) {
+                Mail::queue(new NewOrderNotification($order));
+            }
 
-            Mail::queue(new NewAdminNotification($order));
+            $configKey = 'emails.general.notifications.emails.general.notifications.new-admin';
+            if (core()->getConfigData($configKey)) {
+                Mail::queue(new NewAdminNotification($order));
+            }
         } catch (\Exception $e) {
             report($e);
         }
@@ -48,7 +54,10 @@ class Order
                 return;
             }
 
-            Mail::queue(new NewInvoiceNotification($invoice));
+            $configKey = 'emails.general.notifications.emails.general.notifications.new-invoice';
+            if (core()->getConfigData($configKey)) {
+                Mail::queue(new NewInvoiceNotification($invoice));
+            }
         } catch (\Exception $e) {
             report($e);
         }
@@ -62,7 +71,10 @@ class Order
     public function sendNewRefundMail($refund)
     {
         try {
-            Mail::queue(new NewRefundNotification($refund));
+            $configKey = 'emails.general.notifications.emails.general.notifications.new-refund';
+            if (core()->getConfigData($configKey)) {
+                Mail::queue(new NewRefundNotification($refund));
+            }
         } catch (\Exception $e) {
             report($e);
         }
@@ -80,9 +92,15 @@ class Order
                 return;
             }
 
-            Mail::queue(new NewShipmentNotification($shipment));
+            $configKey = 'emails.general.notifications.emails.general.notifications.new-shipment';
+            if (core()->getConfigData($configKey)) {
+                Mail::queue(new NewShipmentNotification($shipment));
+            }
 
-            Mail::queue(new NewInventorySourceNotification($shipment));
+            $configKey = 'emails.general.notifications.emails.general.notifications.new-inventory-source';
+            if (core()->getConfigData($configKey)) {
+                Mail::queue(new NewInventorySourceNotification($shipment));
+            }
         } catch (\Exception $e) {
             report($e);
         }
@@ -95,7 +113,10 @@ class Order
     public function sendCancelOrderMail($order)
     {
         try {
-            Mail::queue(new CancelOrderNotification($order));
+            $configKey = 'emails.general.notifications.emails.general.notifications.cancel-order';
+            if (core()->getConfigData($configKey)) {
+                Mail::queue(new CancelOrderNotification($order));
+            }
         } catch (\Exception $e) {
             report($e);
         }

@@ -21,13 +21,16 @@
                 @if (! empty($sliderData))
                     @foreach ($sliderData as $index => $slider)
 
+                    @php
+                        $textContent = str_replace("\r\n", '', $slider['content']);
+                    @endphp
                         <slide slot="slide-{{ $index }}">
                             <a @if($slider['slider_path']) href="{{ $slider['slider_path'] }}" @endif>
                                 <img
                                     class="col-12 no-padding banner-icon"
                                     src="{{ url()->to('/') . '/storage/' . $slider['path'] }}" />
 
-                                <div class="show-content" v-html="'{{ $slider['content'] }}'">
+                                <div class="show-content" v-html="'{{ $textContent }}'">
                                 </div>
                             </a>
                         </slide>

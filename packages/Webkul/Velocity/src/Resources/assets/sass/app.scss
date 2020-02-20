@@ -263,6 +263,8 @@ body {
 
     .locale-switcher {
         padding-left: 5px;
+        position: relative;
+        padding-right: 15px;
     }
 
     .dropdown {
@@ -270,7 +272,7 @@ body {
 
         .select-icon-container {
             .select-icon {
-                right: -8px;
+                right: 0;
             }
         }
     }
@@ -311,7 +313,6 @@ body {
 
 .no-padding {
     padding: 0px !important;
-    cursor: default;
 }
 
 .btn-normal {
@@ -482,20 +483,30 @@ header {
 
         #mini-cart {
             .mini-cart-content {
-                width: 75px;
                 font-size: 16px;
                 font-weight: 600;
                 text-align: right;
+                margin-right: 7px;
                 letter-spacing: 0;
                 position: relative;
                 color: $font-color;
                 display: inline-block;
 
-                .material-icons {
-                    left: 0px;
-                    top: 0px;
-                    font-size: 26px;
-                    position: absolute;
+                i {
+                    + span.cart-text {
+                        padding-left: 0px;
+                        vertical-align: text-bottom;
+                    }
+                }
+
+                .cart-text {
+                    padding-left: 5px;
+                }
+
+                + .down-arrow-container {
+                    .rango-arrow-down {
+                        top: 8px;
+                    }
                 }
             }
         }

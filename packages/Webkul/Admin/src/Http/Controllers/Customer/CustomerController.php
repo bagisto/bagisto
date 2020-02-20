@@ -120,7 +120,10 @@ class CustomerController extends Controller
         $customer = $this->customerRepository->create($data);
 
         try {
-            Mail::queue(new NewCustomerNotification($customer, $password));
+            $configKey = 'emails.general.notifications.emails.general.notifications.customer';
+            if (core()->getConfigData($configKey)) {
+                Mail::queue(new NewCustomerNotification($customer, $password));
+            }
         } catch (\Exception $e) {
             report($e);
         }
@@ -165,7 +168,11 @@ class CustomerController extends Controller
             'date_of_birth' => 'date|before:today',
         ]);
 
-        $this->customerRepository->update(request()->all(), $id);
+        $data = request()->all();
+
+        $data['status'] = ! isset($data['status']) ? 0 : 1;
+
+        $this->customerRepository->update($data, $id);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Customer']));
 

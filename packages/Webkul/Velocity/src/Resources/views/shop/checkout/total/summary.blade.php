@@ -30,7 +30,7 @@
 
             <span class="col-8">{{ __('shop::app.checkout.total.disc-amount') }}</span>
             <span class="col-4 text-right">
-                {{ core()->currency($cart->base_discount_amount) }}
+                -{{ core()->currency($cart->base_discount_amount) }}
             </span>
         </div>
     @endif

@@ -8,26 +8,24 @@
     if (isset($category)) {
         $products = $productRepository->getAll($category->id);
 
-        if (count($category->filterableAttributes) > 0 && count($products)) {
-            $filterAttributes = $category->filterableAttributes;
-        } else {
-            $categoryProductAttributes = $productFlatRepository->getCategoryProductAttribute($category->id);
+        $filterAttributes = $productFlatRepository->getFilterableAttributes($category, $products);
+    }
 
-            if ($categoryProductAttributes) {
-                foreach ($attributeRepository->getFilterAttributes() as $filterAttribute) {
-                    if (in_array($filterAttribute->id, $categoryProductAttributes)) {
-                        $filterAttributes[] = $filterAttribute;
-                    } else  if ($filterAttribute ['code'] == 'price') {
-                        $filterAttributes[] = $filterAttribute;
-                    }
-                }
-
-                $filterAttributes = collect($filterAttributes);
-            }
-        }
-    } else {
+    if (! count($filterAttributes) > 0) {
         $filterAttributes = $attributeRepository->getFilterAttributes();
     }
+
+    foreach ($filterAttributes as $attribute) {
+        if ($attribute->code <> 'price') {
+            if (! $attribute->options->isEmpty()) {
+                $attributes[] = $attribute;
+            }
+        } else {
+            $attributes[] = $attribute;
+        }
+    }
+
+    $filterAttributes = collect($attributes);
 ?>
 
 <div class="layered-filter-wrapper left">
@@ -42,7 +40,7 @@
 
 @push('scripts')
     <script type="text/x-template" id="layered-navigation-template">
-        <div>
+        <div v-if="attributes.length > 0">
 
             <h3 class="filter-title fw6 mb20">
                 {{ __('shop::app.products.layered-nav-title') }}
@@ -183,25 +181,28 @@
             ],
 
             data: function() {
+                let maxPrice  = '{{ core()->convertPrice($productFlatRepository->getCategoryProductMaximumPrice($category)) }}';
+
+                maxPrice = (maxPrice !== '') ? parseInt(maxPrice) : 0;
+
                 return {
                     active: false,
                     appliedFilters: [],
                     sliderConfig: {
-                        value: [
-                            0,
-                            0
-                        ],
-                        max: {{ core()->convertPrice($productFlatRepository->getCategoryProductMaximumPrice($category)) }},
+                        max: maxPrice,
+                        value: [ 0, 0 ],
 
                         processStyle: {
                             "backgroundColor": "#FF6472"
                         },
+
                         tooltipStyle: {
+                            "borderColor": "#FF6472",
                             "backgroundColor": "#FF6472",
-                            "borderColor": "#FF6472"
                         },
-                        priceFrom: 0,
+
                         priceTo: 0,
+                        priceFrom: 0,
                     }
                 }
             },

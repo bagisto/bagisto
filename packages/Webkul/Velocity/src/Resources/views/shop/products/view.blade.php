@@ -21,6 +21,10 @@
 
 @push('css')
     <style type="text/css">
+        .related-products {
+            width: 100%;
+        }
+        
         .recently-viewed {
             margin-top: 20px;
         }
@@ -65,7 +69,12 @@
                                             ></star-ratings>
 
                                             <div class="reviews">
-                                                <span>{{ $avgRatings }} Ratings and {{ $total }} Reviews</span>
+                                                <span>
+                                                    {{ __('shop::app.reviews.ratingreviews', [
+                                                        'rating' => $avgRatings,
+                                                        'review' => $total])
+                                                    }}
+                                                </span>
                                             </div>
                                         </div>
                                     @endif
@@ -85,11 +94,13 @@
 
                                 {!! view_render_event('bagisto.shop.products.view.short_description.before', ['product' => $product]) !!}
 
-                                <div class="description">
-                                    <h3 class="col-lg-12">{{ __('velocity::app.products.short-description') }}</h3>
+                                @if ($product->short_description)
+                                    <div class="description">
+                                        <h3 class="col-lg-12">{{ __('velocity::app.products.short-description') }}</h3>
 
-                                    {!! $product->short_description !!}
-                                </div>
+                                        {!! $product->short_description !!}
+                                    </div>
+                                @endif
 
                                 {!! view_render_event('bagisto.shop.products.view.short_description.after', ['product' => $product]) !!}
 
@@ -97,7 +108,9 @@
                                 {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
 
                                 @if ($product->getTypeInstance()->showQuantityBox())
-                                    <quantity-changer></quantity-changer>
+                                    <div>
+                                        <quantity-changer></quantity-changer>
+                                    </div>
                                 @else
                                     <input type="hidden" name="quantity" value="1">
                                 @endif

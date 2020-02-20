@@ -30,14 +30,19 @@
                 <div class="row customer-rating" slot="body">
                     <div class="row full-width text-center mb30">
                         <div class="col-lg-12 col-xl-6">
-                            <h4 class="col-lg-12 fs16">{{ $avgRatings }} Star</h4>
+                            <h4 class="col-lg-12 fs16">{{ $avgRatings }} {{ __('shop::app.reviews.star') }}</h4>
 
                             <star-ratings
                                 :size="24"
                                 :ratings="{{ $avgStarRating }}"
                             ></star-ratings>
 
-                            <span class="fs16 fw6 display-block">{{ $avgRatings }} Ratings and {{ $total }} Reviews</span>
+                            <span class="fs16 fw6 display-block">
+                                {{ __('shop::app.reviews.ratingreviews', [
+                                    'rating' => $avgRatings,
+                                    'review' => $total])
+                                }}
+                            </span>
 
                             @if (core()->getConfigData('catalog.products.review.guest_review') || auth()->guard('customer')->check())
                                 <a href="{{ route('shop.reviews.create', ['slug' => $product->url_key ]) }}">
@@ -51,7 +56,7 @@
                             @for ($i = 5; $i >= 1; $i--)
 
                                 <div class="row">
-                                    <span class="col-3 no-padding fs16 fw6">{{ $i }} Star</span>
+                                    <span class="col-3 no-padding fs16 fw6">{{ $i }} {{ __('shop::app.reviews.star') }}</span>
 
                                     <div class="col-7 rating-bar" title="{{ $percentageRatings[$i] }}%">
                                         <div style="width: {{ $percentageRatings[$i] }}%"></div>
@@ -69,14 +74,19 @@
             <div class="row customer-rating">
                 <div class="row full-width text-center mb30">
                     <div class="col-lg-12 col-xl-6">
-                        <h3 class="col-lg-12">{{ $avgRatings }} Star</h3>
+                        <h3 class="col-lg-12">{{ $avgRatings }} {{ __('shop::app.reviews.star') }}</h3>
 
                         <star-ratings
                             :size="24"
                             :ratings="{{ $avgStarRating }}"
                         ></star-ratings>
 
-                        <span class="fs16 display-block">{{ $avgRatings }} Ratings and {{ $total }} Reviews</span>
+                        <span class="fs16 display-block">
+                            {{ __('shop::app.reviews.ratingreviews', [
+                                'rating' => $avgRatings,
+                                'review' => $total])
+                            }}
+                        </span>
 
                         @if (core()->getConfigData('catalog.products.review.guest_review') || auth()->guard('customer')->check())
                             <a href="{{ route('shop.reviews.create', ['slug' => $product->url_key ]) }}">
@@ -110,7 +120,7 @@
                 {{-- customer reviews --}}
                 <div slot="header" class="col-lg-12 no-padding">
                     <h3 class="display-inbl">
-                        {{ __('velocity::app.products.reviews') }}
+                        {{ __('velocity::app.products.reviews-title') }}
                     </h3>
 
                     <i class="rango-arrow"></i>
@@ -151,7 +161,7 @@
             </accordian>
         @else
             <h3 class="display-inbl mb20 col-lg-12 no-padding">
-                {{ __('velocity::app.products.reviews') }}
+                {{ __('velocity::app.products.reviews-title') }}
             </h3>
 
             <div class="customer-reviews">

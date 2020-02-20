@@ -68,10 +68,12 @@
 
                             <div class="control-group">
                                 <label for="status" class="required">{{ __('admin::app.customers.customers.status') }}</label>
-                                <select name="status" class="control" value="{{ $customer->status }}" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.customers.customers.status') }}&quot;">
-                                    <option value="1" {{ $customer->status == "1" ? 'selected' : '' }}>{{ __('admin::app.customers.customers.active') }}</option>
-                                    <option value="0" {{ $customer->status == "0" ? 'selected' : '' }}>{{ __('admin::app.customers.customers.in-active') }}</option>
-                                </select>
+                                    
+                                <label class="switch">
+                                    <input type="checkbox" id="status" name="status" value="{{ $customer->status }}" {{ $customer->status ? 'checked' : '' }}>
+                                    <span class="slider round"></span>
+                                </label>
+
                                 <span class="control-error" v-if="errors.has('status')">@{{ errors.first('status') }}</span>
                             </div>
 

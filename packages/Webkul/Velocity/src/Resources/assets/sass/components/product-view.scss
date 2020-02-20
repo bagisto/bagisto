@@ -6,13 +6,14 @@
 
     .magnifier {
         > img {
-            height: 450px;
+            min-height: 450px;
+            max-height: 530px;
         }
     }
 
     img {
-        width: 100%;
-        height: 100%;
+        // width: 100%;
+        // height: 100%;
     }
 
     .right {
@@ -169,6 +170,10 @@
                 display: none;
             }
         }
+
+        .quantity {
+            width: unset;
+        }
     }
 
     .thumb-list {
@@ -194,6 +199,7 @@
                 right: 0;
                 left: unset;
                 line-height: 13rem;
+                pointer-events: none;
             }
         }
 

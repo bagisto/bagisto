@@ -32,21 +32,24 @@ window.Carousel = VueCarousel;
 // UI components
 Vue.component("vue-slider", require("vue-slider-component"));
 Vue.component('modal-component', require('./UI/components/modal'));
+Vue.component("add-to-cart", require("./UI/components/add-to-cart"));
 Vue.component('quantity-btn', require('./UI/components/quantity-btn'));
 Vue.component('sidebar-component', require('./UI/components/sidebar'));
 Vue.component("product-card", require("./UI/components/product-card"));
 Vue.component("wishlist-component", require("./UI/components/wishlist"));
 Vue.component('carousel-component', require('./UI/components/carousel'));
 Vue.component('child-sidebar', require('./UI/components/child-sidebar'));
-Vue.component('card-list-content', require('./UI/components/card-list'));
 Vue.component('card-list-header', require('./UI/components/card-header'));
 Vue.component('magnify-image', require('./UI/components/image-magnifier'));
 Vue.component('responsive-sidebar', require('./UI/components/responsive-sidebar'));
+Vue.component('product-quick-view', require('./UI/components/product-quick-view'));
+Vue.component('product-quick-view-btn', require('./UI/components/product-quick-view-btn'));
 
 window.eventBus = new Vue();
 
 $(document).ready(function () {
     // define a mixin object
+    Vue.mixin(require('./UI/components/trans'));
     Vue.mixin({
         data: function () {
             return {
@@ -161,6 +164,8 @@ $(document).ready(function () {
         data: function () {
             return {
                 modalIds: {},
+                quickView: false,
+                productDetails: [],
             }
         },
 

@@ -9,7 +9,23 @@
 
     @foreach ($menu->items as $menuItem)
         <ul type="none" class="navigation">
-            @foreach ($menuItem['children'] as $index => $subMenuItem)
+            {{-- rearrange menu items --}}
+            @php
+                $subMenuCollection = [];
+
+                try {
+                    $subMenuCollection['profile'] = $menuItem['children']['profile'];
+                    $subMenuCollection['orders'] = $menuItem['children']['orders'];
+                    $subMenuCollection['downloadables'] = $menuItem['children']['downloadables'];
+                    $subMenuCollection['wishlist'] = $menuItem['children']['wishlist'];
+                    $subMenuCollection['reviews'] = $menuItem['children']['reviews'];
+                    $subMenuCollection['address'] = $menuItem['children']['address'];
+                } catch (\Exception $exception) {
+                    $subMenuCollection = $menuItem['children'];
+                }
+            @endphp
+
+            @foreach ($subMenuCollection as $index => $subMenuItem)
                 <li class="{{ $menu->getActive($subMenuItem) }}">
                     <a class="unset fw6 full-width" href="{{ $subMenuItem['url'] }}">
                         <i class="icon {{ $index }} text-down-3"></i>

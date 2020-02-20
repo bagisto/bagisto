@@ -35,8 +35,9 @@ class ProductFlatRepository extends Repository
     }
 
     /**
-     * get Category Product
+     * get Category Product Attribute
      *
+     * @param CategoryId $categoryId
      * @return array
      */
     public function getCategoryProductAttribute($categoryId)
@@ -60,5 +61,36 @@ class ProductFlatRepository extends Repository
         $productCategoryArrributes = array_unique(array_merge($productArrributes, $productSuperArrributes));
 
         return $productCategoryArrributes;
+    }
+
+    /**
+     * get Filterable Attributes.
+     *
+     * @param array $category
+     * @param array $products
+     * @return collection
+     */
+    public function getFilterableAttributes($category, $products) {
+        $filterAttributes = [];
+
+        if (count($category->filterableAttributes) > 0 ) {
+            $filterAttributes = $category->filterableAttributes;
+        } else {
+            $categoryProductAttributes = $this->getCategoryProductAttribute($category->id);
+
+            if ($categoryProductAttributes) {
+                foreach (app('Webkul\Attribute\Repositories\AttributeRepository')->getFilterAttributes() as $filterAttribute) {
+                    if (in_array($filterAttribute->id, $categoryProductAttributes)) {
+                        $filterAttributes[] = $filterAttribute;
+                    } else  if ($filterAttribute ['code'] == 'price') {
+                        $filterAttributes[] = $filterAttribute;
+                    }
+                }
+
+                $filterAttributes = collect($filterAttributes);
+            }
+        }
+
+        return $filterAttributes;
     }
 }

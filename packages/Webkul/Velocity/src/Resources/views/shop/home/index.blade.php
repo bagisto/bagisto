@@ -40,6 +40,15 @@
     @endif
 @endsection
 
+@push('css')
+    <style type="text/css">
+        .product-price span:first-child, .product-price span:last-child {
+            font-size: 18px;
+            font-weight: 600;
+        }
+    </style>
+@endpush
+
 @section('content-wrapper')
     @include('shop::home.slider')
 @endsection

@@ -8,15 +8,15 @@
     <div class="content">
         <div class="page-header">
             <div class="page-title">
-                <h1>{{ __('admin::app.users.users.confirm-delete-title') }}</h1>
-            </div>
-            <div class="page-action">
-
+                <h1>
+                    <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                    {{ __('admin::app.users.users.confirm-delete-title') }}
+                </h1>
             </div>
         </div>
 
         <div class="page-content">
-            <form action="{{ route('admin.users.confirm.destroy') }}" method="POST" @submit.prevent="onSubmit">
+            <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" @submit.prevent="onSubmit">
                 @csrf
                 <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
                     <label for="password" class="required">

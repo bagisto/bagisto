@@ -1,7 +1,11 @@
 <template>
 
     <div :class="`row mb15 col-12 ${rowClass}`">
-        <div class="col-4 no-padding">
+        <div class="col-4 no-padding" v-if="tabs || viewAll || scrollable">
+            <h2 class="fs20 fw6">{{ headerHeading }}</h2>
+        </div>
+
+        <div class="col-12 no-padding" v-else >
             <h2 class="fs20 fw6">{{ headerHeading }}</h2>
         </div>
 
@@ -42,7 +46,7 @@
                 <template v-if="(! (viewAll == 'false' || viewAll == '')) && viewAll">
                     <div>
                         <a :href="viewAll" :title="`View all ${headerHeading} products`" class="remove-decoration link-color">
-                            <h2 class="fs16 fw6 cursor-pointer tab">View All</h2>
+                            <h2 class="fs16 fw6 cursor-pointer tab">{{ __('home.view-all') }}</h2>
                         </a>
                     </div>
                 </template>
@@ -78,7 +82,7 @@
 
             return {
                 tabs: tabs,
-                headerHeading: this.heading ? this.heading : 'Products',
+                headerHeading: this.heading ? this.heading : this.__('products.text'),
             }
         },
 
