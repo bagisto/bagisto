@@ -9,7 +9,9 @@
         $products = $productRepository->getAll($category->id);
 
         $filterAttributes = $productFlatRepository->getFilterableAttributes($category, $products);
-    } else {
+    }
+
+    if (! count($filterAttributes) > 0) {
         $filterAttributes = $attributeRepository->getFilterAttributes();
     }
 
