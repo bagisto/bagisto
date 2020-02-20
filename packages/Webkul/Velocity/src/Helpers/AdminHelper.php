@@ -14,9 +14,8 @@ class AdminHelper
      */
     protected $categoryRepository;
 
-    public function __construct(
-        CategoryRepository $categoryRepository
-    ) {
+    public function __construct(CategoryRepository $categoryRepository)
+    {
         $this->categoryRepository =  $categoryRepository;
     }
 
@@ -33,12 +32,12 @@ class AdminHelper
     public function storeCategoryIcon($category)
     {
         $data = request()->all();
-        $type = 'category_icon_path';
 
-        if (! $category instanceof \Webkul\Category\Models\Category)
+        if (! $category instanceof \Webkul\Category\Contracts\Category) {
             $category = $this->categoryRepository->findOrFail($category);
+        }
 
-        $category = $this->uploadImage($category, $data, $type);
+        $category = $this->uploadImage($category, $data, 'category_icon_path');
 
         return $category;
     }

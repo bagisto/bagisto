@@ -27,22 +27,22 @@ class ContentController extends Controller
      *
      * @var object
     */
-    protected $content;
+    protected $contentRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param \Webkul\Product\Repositories\ProductRepository $productRepository;
-     * @param \Webkul\Velocity\Repositories\ContentRepository $content;
+     * @param \Webkul\Product\Repositories\ProductRepository $productRepository
+     * @param \Webkul\Velocity\Repositories\ContentRepository $contentRepository
      * @return void
      */
     public function __construct(
         ProductRepository $productRepository,
-        ContentRepository $content
+        ContentRepository $contentRepository
     ) {
         $this->productRepository = $productRepository;
 
-        $this->content = $content;
+        $this->contentRepository = $contentRepository;
 
         $this->_config = request('_config');
     }
@@ -67,10 +67,10 @@ class ContentController extends Controller
 
         $params = request()->input();
 
-        if ( isset($params['query']) && $params['query'] ) {
+        if (isset($params['query']) && $params['query']) {
             foreach ($this->productRepository->searchProductByAttribute(request()->input('query')) as $row) {
                 $results[] = [
-                        'id' => $row->product_id,
+                        'id'   => $row->product_id,
                         'name' => $row->name,
                     ];
             }
@@ -97,11 +97,11 @@ class ContentController extends Controller
     {
         $params = request()->all();
 
-        if ( isset($params['products']) ) {
+        if (isset($params['products'])) {
             $params['products'] = json_encode($params['products']);
         }
 
-        $this->content->create($params);
+        $this->contentRepository->create($params);
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Content Page']));
 
@@ -116,7 +116,7 @@ class ContentController extends Controller
      */
     public function edit($id)
     {
-        $content = $this->content->findOrFail($id);
+        $content = $this->contentRepository->findOrFail($id);
 
         return view($this->_config['view'], compact('content'));
     }
@@ -132,11 +132,11 @@ class ContentController extends Controller
     {
         $params = request()->all();
 
-        if ( isset($params['locale']) && isset($params[$params['locale']]['products']) ) {
+        if (isset($params['locale']) && isset($params[$params['locale']]['products'])) {
             $params[$params['locale']]['products'] = json_encode($params[$params['locale']]['products']);
         }
 
-        $content = $this->content->update($params, $id);
+        $content = $this->contentRepository->update($params, $id);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Content']));
 
@@ -151,10 +151,10 @@ class ContentController extends Controller
      */
     public function destroy($id)
     {
-        $content = $this->content->findOrFail($id);
+        $content = $this->contentRepository->findOrFail($id);
 
         try {
-            $this->content->delete($id);
+            $this->contentRepository->delete($id);
 
             session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Content']));
 
@@ -177,10 +177,10 @@ class ContentController extends Controller
 
         foreach ($contentIds as $contentId) {
 
-            $content = $this->content->find($contentId);
+            $content = $this->contentRepository->find($contentId);
 
             if (isset($content)) {
-                $this->content->delete($contentId);
+                $this->contentRepository->delete($contentId);
             }
         }
 

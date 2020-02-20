@@ -2,7 +2,7 @@
 
 namespace Webkul\Velocity;
 
-use Webkul\Category\Repositories\CategoryRepository as Category;
+use Webkul\Category\Repositories\CategoryRepository;
 
 class Velocity
 {
@@ -12,9 +12,9 @@ class Velocity
      * @var mixed
      */
 	protected $content_type = [
-        // 'link' => 'Link CMS Page',
-        // 'product' => 'Catalog Products',
-        // 'static' => 'Static Content',
+        // 'link'     => 'Link CMS Page',
+        // 'product'  => 'Catalog Products',
+        // 'static'   => 'Static Content',
         'category' => 'Category Slug',
     ];
 
@@ -24,33 +24,34 @@ class Velocity
      * @var mixed
      */
 	protected $catalog_type = [
-        'new' => 'New Arrival',
-        'offer' => 'Offered Product [Special]',
+        'new'     => 'New Arrival',
+        'offer'   => 'Offered Product [Special]',
         'popular' => 'Popular Products',
-        'viewed' => 'Most Viewed',
-        'rated' => 'Most Rated',
-        'custom' => 'Custom Selection',
+        'viewed'  => 'Most Viewed',
+        'rated'   => 'Most Rated',
+        'custom'  => 'Custom Selection',
     ];
 
-	protected $category;
+	protected $categoryRepository;
 
     /**
      * Create a new instance.
      *
-     * @param  Webkul\Category\Repositories\CategoryRepository  $category
+     * @param  Webkul\Category\Repositories\CategoryRepository $categoryRepository
      * @return void
      */
-    public function __construct(
-        Category $category
-    ) {
-        $this->category = $category;
+    public function __construct(CategoryRepository $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
     }
 
-	public function getContentType() {
+    public function getContentType()
+    {
 		return $this->content_type;
     }
 
-    public function getCatalogType() {
+    public function getCatalogType()
+    {
 		return $this->catalog_type;
     }
 }

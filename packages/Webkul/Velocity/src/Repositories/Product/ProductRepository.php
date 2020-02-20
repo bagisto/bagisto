@@ -118,7 +118,7 @@ class ProductRepository extends Repository
                     ->where('product_flat.locale', $locale)
                     ->whereNotNull('product_flat.url_key');
 
-            if ( $term )
+            if ($term)
                 $query->where('product_flat.name', 'like', '%' . urldecode($term) . '%');
 
             if ($categoryId && $categoryId !== "") {

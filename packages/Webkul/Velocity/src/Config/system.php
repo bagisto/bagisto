@@ -2,22 +2,22 @@
 
 return [
     [
-        'key' => 'velocity',
+        'key'  => 'velocity',
         'name' => 'velocity::app.admin.system.velocity.extension_name',
         'sort' => 2
     ], [
-        'key' => 'velocity.configuration',
+        'key'  => 'velocity.configuration',
         'name' => 'velocity::app.admin.system.velocity.settings',
         'sort' => 1,
     ], [
-        'key' => 'velocity.configuration.general',
-        'name' => 'velocity::app.admin.system.velocity.general',
-        'sort' => 1,
+        'key'   => 'velocity.configuration.general',
+        'name'  => 'velocity::app.admin.system.velocity.general',
+        'sort'  => 1,
         'fields' => [
             [
-                'name' => 'status',
-                'title' => 'velocity::app.admin.system.general.status',
-                'type' => 'select',
+                'name'    => 'status',
+                'title'   => 'velocity::app.admin.system.general.status',
+                'type'    => 'select',
                 'options' => [
                     [
                         'title' => 'velocity::app.admin.system.general.active',
@@ -30,14 +30,14 @@ return [
             ]
         ]
     ],  [
-        'key' => 'velocity.configuration.category',
-        'name' => 'velocity::app.admin.system.velocity.category',
-        'sort' => 1,
+        'key'    => 'velocity.configuration.category',
+        'name'   => 'velocity::app.admin.system.velocity.category',
+        'sort'   => 1,
         'fields' => [
             [
-                'name' => 'icon_status',
-                'title' => 'velocity::app.admin.system.category.icon-status',
-                'type' => 'select',
+                'name'    => 'icon_status',
+                'title'   => 'velocity::app.admin.system.category.icon-status',
+                'type'    => 'select',
                 'options' => [
                     [
                         'title' => 'velocity::app.admin.system.category.active',
@@ -48,9 +48,9 @@ return [
                     ]
                 ]
             ],  [
-                'name' => 'image_status',
-                'title' => 'velocity::app.admin.system.category.image-status',
-                'type' => 'select',
+                'name'    => 'image_status',
+                'title'   => 'velocity::app.admin.system.category.image-status',
+                'type'    => 'select',
                 'options' => [
                     [
                         'title' => 'velocity::app.admin.system.category.active',
@@ -61,29 +61,29 @@ return [
                     ]
                 ]
             ],  [
-                'name' => 'image_height',
-                'title' => 'velocity::app.admin.system.category.image-height',
-                'type' => 'depands',
-                'depand' => 'image_status:true',
-                'validation' => 'numeric|max:3',
+                'name'          => 'image_height',
+                'title'         => 'velocity::app.admin.system.category.image-height',
+                'type'          => 'depands',
+                'depand'        => 'image_status:true',
+                'validation'    => 'numeric|max:3',
                 'channel_based' => false,
-                'locale_based' => false,
+                'locale_based'  => false,
             ],  [
-                'name' => 'image_width',
-                'title' => 'velocity::app.admin.system.category.image-width',
-                'type' => 'depands',
-                'depand' => 'image_status:true',
-                'validation' => 'numeric|max:3',
+                'name'          => 'image_width',
+                'title'         => 'velocity::app.admin.system.category.image-width',
+                'type'          => 'depands',
+                'depand'        => 'image_status:true',
+                'validation'    => 'numeric|max:3',
                 'channel_based' => false,
-                'locale_based' => false,
+                'locale_based'  => false,
             ],  [
-                'name' => 'image_alignment',
-                'title' => 'velocity::app.admin.system.category.image-alignment',
+                'name'          => 'image_alignment',
+                'title'         => 'velocity::app.admin.system.category.image-alignment',
                 'channel_based' => false,
-                'locale_based' => false,
-                'type' => 'depands',
-                'depand' => 'image_status:true',
-                'options' => [
+                'locale_based'  => false,
+                'type'          => 'depands',
+                'depand'        => 'image_status:true',
+                'options'       => [
                     [
                         'title' => 'Right',
                         'value' => 'right'
@@ -93,9 +93,9 @@ return [
                     ]
                 ]
             ],  [
-                'name' => 'tooltip_status',
-                'title' => 'velocity::app.admin.system.category.show-tooltip',
-                'type' => 'select',
+                'name'    => 'tooltip_status',
+                'title'   => 'velocity::app.admin.system.category.show-tooltip',
+                'type'    => 'select',
                 'options' => [
                     [
                         'title' => 'velocity::app.admin.system.category.active',
@@ -106,12 +106,12 @@ return [
                     ]
                 ]
             ],  [
-                'name' => 'sub_category',
-                'title' => 'velocity::app.admin.system.category.sub-category-show',
+                'name'          => 'sub_category',
+                'title'         => 'velocity::app.admin.system.category.sub-category-show',
                 'channel_based' => false,
-                'locale_based' => false,
-                'type' => 'select',
-                'options' => [
+                'locale_based'  => false,
+                'type'          => 'select',
+                'options'       => [
                     [
                         'title' => 'All',
                         'value' => 'all'
@@ -121,13 +121,13 @@ return [
                     ]
                 ]
             ],  [
-                'name' => 'sub_category_num',
-                'title' => 'velocity::app.admin.system.category.num-sub-category',
+                'name'          => 'sub_category_num',
+                'title'         => 'velocity::app.admin.system.category.num-sub-category',
                 'channel_based' => false,
-                'locale_based' => false,
-                'type' => 'depands',
-                'depand' => 'sub_category:custom',
-                'validation' => 'numeric|max:2',
+                'locale_based'  => false,
+                'type'          => 'depands',
+                'depand'        => 'sub_category:custom',
+                'validation'    => 'numeric|max:2',
             ]
         ]
     ]

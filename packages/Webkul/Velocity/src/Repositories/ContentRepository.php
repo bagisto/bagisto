@@ -101,13 +101,13 @@ class ContentRepository extends Repository
 
             $products = json_decode($contentLocale->products, true);
 
-            if (!empty($products)) {
+            if (! empty($products)) {
                 foreach ($products as $product_id) {
                     $product = $this->productRepository->find($product_id);
 
-                    if ( isset($product->id)) {
+                    if (isset($product->id)) {
                         $results[] = [
-                            'id' => $product->id,
+                            'id'   => $product->id,
                             'name' => $product->name,
                         ];
                     }
@@ -132,11 +132,12 @@ class ContentRepository extends Repository
                 ->get();
 
         $formattedContent = [];
+        
         foreach ($contentCollection as $content) {
             array_push($formattedContent, [
-                'title' => $content->title,
-                'page_link' => $content->page_link,
-                'link_target' => $content->link_target,
+                'title'        => $content->title,
+                'page_link'    => $content->page_link,
+                'link_target'  => $content->link_target,
                 'content_type' => $content->content_type,
             ]);
         }

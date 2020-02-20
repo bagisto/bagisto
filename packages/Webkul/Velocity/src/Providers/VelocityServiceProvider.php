@@ -28,15 +28,21 @@ class VelocityServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
         include __DIR__ . '/../Http/helpers.php';
+
         include __DIR__ . '/../Http/admin-routes.php';
+
         include __DIR__ . '/../Http/front-routes.php';
 
         $this->app->register(EventServiceProvider::class);
 
         $this->loadGloableVariables();
+
         $this->loadPublishableAssets();
+
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'velocity');
+
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'velocity');
     }
 
@@ -48,6 +54,7 @@ class VelocityServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerConfig();
+
         $this->registerFacades();
     }
 
@@ -75,6 +82,7 @@ class VelocityServiceProvider extends ServiceProvider
     protected function registerFacades()
     {
         $loader = AliasLoader::getInstance();
+        
         $loader->alias('velocity', VelocityFacade::class);
     }
 

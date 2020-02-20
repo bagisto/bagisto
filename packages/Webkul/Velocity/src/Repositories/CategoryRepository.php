@@ -57,12 +57,12 @@ class CategoryRepository extends Repository
         
         $categories = $this->category->getVisibleCategoryTree(core()->getCurrentChannel()->root_category_id);
 
-        if ( isset($categories->first()->id)) {
+        if (isset($categories->first()->id)) {
             foreach ($categories as $category) {
                 
-                if ( !empty($categoryMenues) && !in_array($category->id, array_column($categoryMenues, 'category_id'))) {
+                if (! empty($categoryMenues) && !in_array($category->id, array_column($categoryMenues, 'category_id'))) {
                     $results[] = [
-                        'id' => $category->id,
+                        'id'   => $category->id,
                         'name' => $category->name,
                     ];
                 }

@@ -59,7 +59,9 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
         $this->_config = request('_config');
 
         $this->searchRepository = $searchRepository;
+
         $this->productRepository = $productRepository;
+
         $this->velocityProductRepository = $velocityProductRepository;
     }
 
@@ -81,24 +83,26 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
 
         if ($product) {
             $productReviewHelper = app('Webkul\Product\Helpers\Review');
+
             $productImageHelper = app('Webkul\Product\Helpers\ProductImage');
+
             $galleryImages = $productImageHelper->getProductBaseImage($product);
 
             $response = [
-                'status' => true,
+                'status'  => true,
                 'details' => [
-                    'name' => $product->name,
-                    'urlKey' => $product->url_key,
-                    'priceHTML' => $product->getTypeInstance()->getPriceHtml(),
+                    'name'         => $product->name,
+                    'urlKey'       => $product->url_key,
+                    'priceHTML'    => $product->getTypeInstance()->getPriceHtml(),
                     'totalReviews' => $productReviewHelper->getTotalReviews($product),
-                    'rating' => ceil($productReviewHelper->getAverageRating($product)),
-                    'image' => $galleryImages['small_image_url'],
+                    'rating'       => ceil($productReviewHelper->getAverageRating($product)),
+                    'image'        => $galleryImages['small_image_url'],
                 ]
             ];
         } else {
             $response = [
                 'status' => false,
-                'slug' => $slug,
+                'slug'  => $slug,
             ];
         }
 
@@ -149,10 +153,10 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
                     }
 
                     $response = [
-                        'status' => true,
-                        'list' => $list,
-                        'categoryDetails' => $categoryDetails,
-                        'categoryProducts' => $customizedProducts,
+                        'status'           => true,
+                        'list'             => $list,
+                        'categoryDetails'  => $categoryDetails,
+                        'categoryProducts' => $customizedProducts
                     ];
                 }
 
@@ -174,7 +178,7 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
         }
 
         return [
-            'status' => true,
+            'status'     => true,
             'categories' => $formattedCategories,
         ];
     }
@@ -185,7 +189,7 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
 
         if ($categoryDetails) {
             $response = [
-                'status' => true,
+                'status'          => true,
                 'categoryDetails' => $this->getCategoryFilteredData($categoryDetails)
             ];
         }
@@ -203,10 +207,10 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
         }
 
         return [
-            'id' => $category->id,
-            'slug' => $category->slug,
-            'name' => $category->name,
-            'children' => $formattedChildCategory,
+            'id'                 => $category->id,
+            'slug'               => $category->slug,
+            'name'               => $category->name,
+            'children'           => $formattedChildCategory,
             'category_icon_path' => $category->category_icon_path,
         ];
     }
@@ -224,19 +228,19 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
         $productImage = $productImageHelper->getProductBaseImage($product)['medium_image_url'];
 
         return [
-            'name' => $product->name,
-            'slug' => $product->url_key,
-            'image' => $productImage,
-            'description' => $product->description,
+            'name'             => $product->name,
+            'slug'             => $product->url_key,
+            'image'            => $productImage,
+            'description'      => $product->description,
             'shortDescription' => $product->meta_description,
-            'galleryImages' => $galleryImages,
-            'priceHTML' => view('shop::products.price', ['product' => $product])->render(),
-            'totalReviews' => $totalReviews,
-            'avgRating' => $avgRatings,
-            'firstReviewText' => trans('velocity::app.products.be-first-review'),
-            'addToCartHtml' => view('shop::products.add-to-cart', [
-                'product' => $product,
-                'addWishlistClass' => !(isset($list) && $list) ? '' : '',
+            'galleryImages'    => $galleryImages,
+            'priceHTML'        => view('shop::products.price', ['product' => $product])->render(),
+            'totalReviews'     => $totalReviews,
+            'avgRating'        => $avgRatings,
+            'firstReviewText'  => trans('velocity::app.products.be-first-review'),
+            'addToCartHtml'    => view('shop::products.add-to-cart', [
+                'product'           => $product,
+                'addWishlistClass'  => !(isset($list) && $list) ? '' : '',
                 'addToCartBtnClass' => !(isset($list) && $list) ? $addToCartBtnClass ?? '' : ''
             ])->render(),
         ];
@@ -267,7 +271,7 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
 
             if (is_array($cart) && isset($cart['warning'])) {
                 $response = [
-                    'status' => 'warning',
+                    'status'  => 'warning',
                     'message' => $cart['warning'],
                 ];
             }
@@ -281,30 +285,32 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
                 }
 
                 $response = [
-                    'status' => 'success',
+                    'status'         => 'success',
                     'totalCartItems' => sizeof($items),
-                    'addedItems' => array_slice($formattedItems, sizeof($formattedBeforeItems)),
-                    'message' => trans('shop::app.checkout.cart.item.success'),
+                    'addedItems'     => array_slice($formattedItems, sizeof($formattedBeforeItems)),
+                    'message'        => trans('shop::app.checkout.cart.item.success'),
                 ];
 
-                if ($customer = auth()->guard('customer')->user())
+                if ($customer = auth()->guard('customer')->user()) {
                     $this->wishlistRepository->deleteWhere(['product_id' => $id, 'customer_id' => $customer->id]);
+                }
 
-                if (request()->get('is_buy_now'))
+                if (request()->get('is_buy_now')) {
                     return redirect()->route('shop.checkout.onepage.index');
+                }
             }
         } catch(\Exception $exception) {
             $product = $this->productRepository->find($id);
 
             $response = [
-                'status' => 'false',
-                'message' => trans($exception->getMessage()),
+                'status'           => 'false',
+                'message'          => trans($exception->getMessage()),
                 'redirectionRoute' => route('shop.productOrCategory.index', $product->url_key),
             ];
         }
 
         return $response ?? [
-            'status' => 'error',
+            'status'  => 'error',
             'message' => trans('velocity::app.error.something-went-wrong'),
         ];
     }

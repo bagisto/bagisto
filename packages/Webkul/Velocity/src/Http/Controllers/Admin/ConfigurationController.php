@@ -43,7 +43,7 @@ class ConfigurationController extends Controller
     {
         $velocityMetaData = $this->velocityHelper->getVelocityMetaData();
 
-        if ( $velocityMetaData->advertisement ) {
+        if ($velocityMetaData->advertisement) {
             $velocityMetaData->advertisement = $this->manageAddImages(json_decode($velocityMetaData->advertisement, true));
         }
 
@@ -71,12 +71,12 @@ class ConfigurationController extends Controller
 
         $params['advertisement'] = [];
 
-        if ( isset($params['images'])) {
+        if (isset($params['images'])) {
             foreach ($params['images'] as $index => $images) {
                 $params['advertisement'][$index] =  $this->uploadAdvertisementImages($images, $index, $advertisement);
             }
 
-            if ( $advertisement ) {
+            if ($advertisement) {
                 foreach ($advertisement as $key => $image_array) {
                     if (! isset($params['images'][$key])) {
                         foreach ($advertisement[$key] as $image) {
@@ -120,7 +120,7 @@ class ConfigurationController extends Controller
             $file = 'images.' . $index . '.' . $imageId;
             $dir = 'velocity/images';
 
-            if ( Str::contains($imageId, 'image_') ) {
+            if (Str::contains($imageId, 'image_')) {
                 if (request()->hasFile($file) && $image) {
                     $filter_index = substr($imageId, 6, 1);
                     if ( isset($data[$filter_index]) ) {
@@ -146,7 +146,7 @@ class ConfigurationController extends Controller
             }
         }
 
-        if ( isset($advertisement[$index]) && $advertisement[$index]) {
+        if (isset($advertisement[$index]) && $advertisement[$index]) {
             foreach ($advertisement[$index] as $imageId) {
                 Storage::delete($imageId);
             }
@@ -178,12 +178,12 @@ class ConfigurationController extends Controller
         $images_path = [];
         foreach ($add_images as $add_id => $images) {
             foreach ($images as $key => $image) {
-                if ( $image ) {
+                if ($image) {
                     $images_path[$add_id][] = [
-                        'id' => $key,
+                        'id'   => $key,
                         'type' => null,
                         'path' => $image,
-                        'url' => Storage::url($image)
+                        'url'  => Storage::url($image)
                     ];
                 }
             }

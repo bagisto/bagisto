@@ -58,16 +58,21 @@ class Helper extends Review
     public function __construct(
         ProductModel $productModel,
         ProductRepository $productRepository,
-        AttributeOptionRepository $attributeOption,
+        AttributeOptionRepository $attributeOptionRepository,
         OrderBrandsRepository $orderBrandsRepository,
         ProductReviewRepository $productReviewRepository,
         VelocityMetadataRepository $velocityMetadataRepository
     ) {
         $this->productModel =  $productModel;
-        $this->attributeOption =  $attributeOption;
+
+        $this->attributeOptionRepository =  $attributeOptionRepository;
+
         $this->productRepository = $productRepository;
+
         $this->orderBrandsRepository = $orderBrandsRepository;
+
         $this->productReviewRepository =  $productReviewRepository;
+
         $this->velocityMetadataRepository =  $velocityMetadataRepository;
     }
 
@@ -79,14 +84,13 @@ class Helper extends Review
             $products[] = $orderItem->product;
 
             $this->orderBrandsRepository->create([
-                'order_id' => $orderItem->order_id,
+                'order_id'      => $orderItem->order_id,
                 'order_item_id' => $orderItem->id,
-                'product_id' => $orderItem->product_id,
-                'brand' => $products[$key]->brand,
+                'product_id'    => $orderItem->product_id,
+                'brand'         => $products[$key]->brand,
             ]);
         }
     }
-
 
     public function getBrandsWithCategories()
     {
@@ -101,8 +105,9 @@ class Helper extends Review
                 }
 
                 $categoryName = $brandName = $brandImplode = [];
+
                 foreach($product_categories as $totalData) {
-                    $brand = $this->attributeOption->findOneWhere(['id' => $totalData['brand']]);
+                    $brand = $this->attributeOptionRepository->findOneWhere(['id' => $totalData['brand']]);
 
                     foreach ($totalData['categories'] as $categories) {
                         foreach($categories['translations'] as $catName) {
@@ -213,11 +218,11 @@ class Helper extends Review
         $images = $product->getTypeInstance()->getBaseImage($item);
 
         return [
-            'images' => $images,
-            'itemId' => $item->id,
-            'name' => $item->name,
-            'url_key' => $product->url_key,
-            'quantity' => $item->quantity,
+            'images'    => $images,
+            'itemId'    => $item->id,
+            'name'      => $item->name,
+            'url_key'   => $product->url_key,
+            'quantity'  => $item->quantity,
             'baseTotal' => core()->currency($item->base_total),
         ];
     }
