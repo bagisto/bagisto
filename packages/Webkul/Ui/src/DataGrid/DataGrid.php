@@ -94,21 +94,21 @@ abstract class DataGrid
     protected $itemsPerPage = 10;
 
     protected $operators = [
-        'eq' => "=",
-        'lt' => "<",
-        'gt' => ">",
-        'lte' => "<=",
-        'gte' => ">=",
-        'neqs' => "<>",
-        'neqn' => "!=",
-        'eqo' => "<=>",
-        'like' => "like",
-        'blike' => "like binary",
-        'nlike' => "not like",
-        'ilike' => "ilike",
-        'and' => "&",
-        'bor' => "|",
-        'regex' => "regexp",
+        'eq'       => "=",
+        'lt'       => "<",
+        'gt'       => ">",
+        'lte'      => "<=",
+        'gte'      => ">=",
+        'neqs'     => "<>",
+        'neqn'     => "!=",
+        'eqo'      => "<=>",
+        'like'     => "like",
+        'blike'    => "like binary",
+        'nlike'    => "not like",
+        'ilike'    => "ilike",
+        'and'      => "&",
+        'bor'      => "|",
+        'regex'    => "regexp",
         'notregex' => "not regexp"
     ];
 
@@ -123,20 +123,21 @@ abstract class DataGrid
     ];
 
     protected $selectcomponents = [
-        0 => "aggregate",
-        1 => "columns",
-        2 => "from",
-        3 => "joins",
-        4 => "wheres",
-        5 => "groups",
-        6 => "havings",
-        7 => "orders",
-        8 => "limit",
-        9 => "offset",
+        0  => "aggregate",
+        1  => "columns",
+        2  => "from",
+        3  => "joins",
+        4  => "wheres",
+        5  => "groups",
+        6  => "havings",
+        7  => "orders",
+        8  => "limit",
+        9  => "offset",
         10 => "lock"
     ];
 
     abstract public function prepareQueryBuilder();
+    
     abstract public function addColumns();
 
     public function __construct()
