@@ -32,6 +32,6 @@ class CreateCartruleCustomersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cartrule_customers');
+        Schema::dropIfExists('cart_rule_customers');
     }
 }

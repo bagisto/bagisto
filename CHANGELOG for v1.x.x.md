@@ -72,6 +72,8 @@
 
 * #2494 [fixed] - Product total inventory for all locale is showing wrong.
 
+* #2500 [fixed] - Database reset fails.
+
 ## **v1.0.0-BETA1(5th of February 2020)** - *Release*
 
 * [feature] Updated to laravel version 6.

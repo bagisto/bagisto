@@ -22,7 +22,7 @@ class CreateCartruleCouponsTable extends Migration
             $table->integer('type')->unsigned()->default(0);
             $table->boolean('is_primary')->default(0);
             $table->date('expired_at')->nullable();
-            
+
             $table->integer('cart_rule_id')->unsigned();
             $table->foreign('cart_rule_id')->references('id')->on('cart_rules')->onDelete('cascade');
             $table->timestamps();
@@ -36,6 +36,6 @@ class CreateCartruleCouponsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cartrule_coupons');
+        Schema::dropIfExists('cart_rule_coupons');
     }
 }
