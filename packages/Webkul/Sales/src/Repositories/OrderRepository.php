@@ -195,9 +195,9 @@ class OrderRepository extends Repository
      */
     public function generateIncrementId()
     {
-        foreach ([  'Prefix' => 'prefix',
-                    'Length' => 'length',
-                    'Suffix' => 'suffix', ] as
+        foreach ([  'Prefix'   => 'prefix',
+                    'Length'   => 'length',
+                    'Suffix'   => 'suffix', ] as
                     $varSuffix => $confKey)
                 {
                     $var = "invoiceNumber{$varSuffix}";
@@ -298,7 +298,7 @@ class OrderRepository extends Repository
 
         if ($this->isInCanceledState($order)) {
             $status = 'canceled';
-        } elseif ($this->isInClosedState($order)) {
+        } else if ($this->isInClosedState($order)) {
             $status = 'closed';
         }
 

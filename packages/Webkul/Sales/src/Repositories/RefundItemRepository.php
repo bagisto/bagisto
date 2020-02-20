@@ -34,8 +34,9 @@ class RefundItemRepository extends Repository
      */
     public function returnQtyToProductInventory($orderItem, $quantity)
     {
-        if (! $product = $orderItem->product)
+        if (! $product = $orderItem->product) {
             return;
+        }
 
         if ($orderItem->qty_shipped && $quantity > $orderItem->qty_ordered - $orderItem->qty_shipped) {
             $nonShippedQty = $orderItem->qty_ordered - $orderItem->qty_shipped;
@@ -44,11 +45,13 @@ class RefundItemRepository extends Repository
                 $shipmentItems = $orderItem->parent ? $orderItem->parent->shipment_items : $orderItem->shipment_items;
 
                 foreach ($shipmentItems as $shipmentItem) {
-                    if (! $totalShippedQtyToRefund)
+                    if (! $totalShippedQtyToRefund) {
                         break;
+                    }
 
-                    if (! $shipmentItem->shipment->inventory_source_id)
+                    if (! $shipmentItem->shipment->inventory_source_id) {
                         continue;
+                    }
 
 
                     if ($orderItem->parent) {
@@ -73,15 +76,16 @@ class RefundItemRepository extends Repository
 
                 $quantity -= $totalShippedQtyToRefund;
             }
-        } elseif ($orderItem->getTypeInstance()->showQuantityBox()) {
+        } else if ($orderItem->getTypeInstance()->showQuantityBox()) {
             $inventory = $orderItem->product->inventories()
                     // ->where('vendor_id', $data['vendor_id'])
                     ->whereIn('inventory_source_id', $orderItem->order->channel->inventory_sources()->pluck('id'))
                     ->orderBy('qty', 'desc')
                     ->first();
 
-            if ($inventory)
+            if ($inventory) {
                 $inventory->update(['qty' => $inventory->qty + $quantity]);
+            }
         }
 
         if ($quantity) {
@@ -89,11 +93,13 @@ class RefundItemRepository extends Repository
                     ->where('channel_id', $orderItem->order->channel->id)
                     ->first();
 
-            if (! $orderedInventory)
+            if (! $orderedInventory) {
                 return;
+            }
 
-            if (($qty = $orderedInventory->qty - $quantity) < 0)
+            if (($qty = $orderedInventory->qty - $quantity) < 0) {
                 $qty = 0;
+            }
 
             $orderedInventory->update(['qty' => $qty]);
         }

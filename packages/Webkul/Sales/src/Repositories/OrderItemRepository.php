@@ -118,8 +118,9 @@ class OrderItemRepository extends Repository
         }
 
         foreach ($orderItems as $item) {
-            if (! $item->product)
+            if (! $item->product) {
                 continue;
+            }
 
             $orderedInventory = $item->product->ordered_inventories()
                     ->where('channel_id', $orderItem->order->channel->id)
@@ -133,7 +134,7 @@ class OrderItemRepository extends Repository
                     ]);
             } else {
                 $item->product->ordered_inventories()->create([
-                        'qty' => $qty,
+                        'qty'        => $qty,
                         'product_id' => $item->product_id,
                         'channel_id' => $orderItem->order->channel->id,
                     ]);
@@ -153,11 +154,13 @@ class OrderItemRepository extends Repository
                 ->where('channel_id', $orderItem->order->channel->id)
                 ->first();
 
-        if (! $orderedInventory)
+        if (! $orderedInventory) {
             return;
+        }
 
-        if (($qty = $orderedInventory->qty - ($orderItem->qty_ordered ? $orderItem->qty_to_cancel : $orderItem->parent->qty_ordered)) < 0)
+        if (($qty = $orderedInventory->qty - ($orderItem->qty_ordered ? $orderItem->qty_to_cancel : $orderItem->parent->qty_ordered)) < 0) {
             $qty = 0;
+        }
 
         $orderedInventory->update(['qty' => $qty]);
     }

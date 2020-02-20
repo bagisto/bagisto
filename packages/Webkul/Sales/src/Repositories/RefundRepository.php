@@ -98,46 +98,48 @@ class RefundRepository extends Repository
             $totalQty = array_sum($data['refund']['items']);
 
             $refund = parent::create([
-                    'order_id' => $order->id,
-                    'total_qty' => $totalQty,
-                    'state' => 'refunded',
-                    'base_currency_code' => $order->base_currency_code,
-                    'channel_currency_code' => $order->channel_currency_code,
-                    'order_currency_code' => $order->order_currency_code,
-                    'adjustment_refund' => core()->convertPrice($data['refund']['adjustment_refund'], $order->order_currency_code),
+                    'order_id'               => $order->id,
+                    'total_qty'              => $totalQty,
+                    'state'                  => 'refunded',
+                    'base_currency_code'     => $order->base_currency_code,
+                    'channel_currency_code'  => $order->channel_currency_code,
+                    'order_currency_code'    => $order->order_currency_code,
+                    'adjustment_refund'      => core()->convertPrice($data['refund']['adjustment_refund'], $order->order_currency_code),
                     'base_adjustment_refund' => $data['refund']['adjustment_refund'],
-                    'adjustment_fee' => core()->convertPrice($data['refund']['adjustment_fee'], $order->order_currency_code),
-                    'base_adjustment_fee' => $data['refund']['adjustment_fee'],
-                    'shipping_amount' => core()->convertPrice($data['refund']['shipping'], $order->order_currency_code),
-                    'base_shipping_amount' => $data['refund']['shipping']
+                    'adjustment_fee'         => core()->convertPrice($data['refund']['adjustment_fee'], $order->order_currency_code),
+                    'base_adjustment_fee'    => $data['refund']['adjustment_fee'],
+                    'shipping_amount'        => core()->convertPrice($data['refund']['shipping'], $order->order_currency_code),
+                    'base_shipping_amount'   => $data['refund']['shipping']
                 ]);
 
             foreach ($data['refund']['items'] as $itemId => $qty) {
-                if (! $qty)
+                if (! $qty) {
                     continue;
+                }
 
                 $orderItem = $this->orderItemRepository->find($itemId);
 
-                if ($qty > $orderItem->qty_to_refund)
+                if ($qty > $orderItem->qty_to_refund) {
                     $qty = $orderItem->qty_to_refund;
+                }
 
                 $refundItem = $this->refundItemRepository->create([
-                        'refund_id' => $refund->id,
-                        'order_item_id' => $orderItem->id,
-                        'name' => $orderItem->name,
-                        'sku' => $orderItem->sku,
-                        'qty' => $qty,
-                        'price' => $orderItem->price,
-                        'base_price' => $orderItem->base_price,
-                        'total' => $orderItem->price * $qty,
-                        'base_total' => $orderItem->base_price * $qty,
-                        'tax_amount' => ( ($orderItem->tax_amount / $orderItem->qty_ordered) * $qty ),
-                        'base_tax_amount' => ( ($orderItem->base_tax_amount / $orderItem->qty_ordered) * $qty ),
-                        'discount_amount' => ( ($orderItem->discount_amount / $orderItem->qty_ordered) * $qty ),
+                        'refund_id'            => $refund->id,
+                        'order_item_id'        => $orderItem->id,
+                        'name'                 => $orderItem->name,
+                        'sku'                  => $orderItem->sku,
+                        'qty'                  => $qty,
+                        'price'                => $orderItem->price,
+                        'base_price'           => $orderItem->base_price,
+                        'total'                => $orderItem->price * $qty,
+                        'base_total'           => $orderItem->base_price * $qty,
+                        'tax_amount'           => ( ($orderItem->tax_amount / $orderItem->qty_ordered) * $qty ),
+                        'base_tax_amount'      => ( ($orderItem->base_tax_amount / $orderItem->qty_ordered) * $qty ),
+                        'discount_amount'      => ( ($orderItem->discount_amount / $orderItem->qty_ordered) * $qty ),
                         'base_discount_amount' => ( ($orderItem->base_discount_amount / $orderItem->qty_ordered) * $qty ),
-                        'product_id' => $orderItem->product_id,
-                        'product_type' => $orderItem->product_type,
-                        'additional' => $orderItem->additional
+                        'product_id'           => $orderItem->product_id,
+                        'product_type'         => $orderItem->product_type,
+                        'additional'           => $orderItem->additional
                     ]);
 
                 if ($orderItem->getTypeInstance()->isComposite()) {
@@ -147,40 +149,43 @@ class RefundRepository extends Repository
                                 : $orderItem->qty_ordered;
 
                         $refundItem->child = $this->refundItemRepository->create([
-                                'refund_id' => $refund->id,
-                                'order_item_id' => $childOrderItem->id,
-                                'parent_id' => $refundItem->id,
-                                'name' => $childOrderItem->name,
-                                'sku' => $childOrderItem->sku,
-                                'qty' => $finalQty,
-                                'price' => $childOrderItem->price,
-                                'base_price' => $childOrderItem->base_price,
-                                'total' => $childOrderItem->price * $finalQty,
-                                'base_total' => $childOrderItem->base_price * $finalQty,
-                                'tax_amount' => 0,
-                                'base_tax_amount' => 0,
-                                'discount_amount' => 0,
+                                'refund_id'            => $refund->id,
+                                'order_item_id'        => $childOrderItem->id,
+                                'parent_id'            => $refundItem->id,
+                                'name'                 => $childOrderItem->name,
+                                'sku'                  => $childOrderItem->sku,
+                                'qty'                  => $finalQty,
+                                'price'                => $childOrderItem->price,
+                                'base_price'           => $childOrderItem->base_price,
+                                'total'                => $childOrderItem->price * $finalQty,
+                                'base_total'           => $childOrderItem->base_price * $finalQty,
+                                'tax_amount'           => 0,
+                                'base_tax_amount'      => 0,
+                                'discount_amount'      => 0,
                                 'base_discount_amount' => 0,
-                                'product_id' => $childOrderItem->product_id,
-                                'product_type' => $childOrderItem->product_type,
-                                'additional' => $childOrderItem->additional
+                                'product_id'           => $childOrderItem->product_id,
+                                'product_type'         => $childOrderItem->product_type,
+                                'additional'           => $childOrderItem->additional
                             ]);
 
-                        if ($childOrderItem->getTypeInstance()->isStockable() || $childOrderItem->getTypeInstance()->showQuantityBox())
+                        if ($childOrderItem->getTypeInstance()->isStockable() || $childOrderItem->getTypeInstance()->showQuantityBox()) {
                             $this->refundItemRepository->returnQtyToProductInventory($childOrderItem, $finalQty);
+                        }
 
                         $this->orderItemRepository->collectTotals($childOrderItem);
                     }
 
                 } else {
-                    if ($orderItem->getTypeInstance()->isStockable() || $orderItem->getTypeInstance()->showQuantityBox())
+                    if ($orderItem->getTypeInstance()->isStockable() || $orderItem->getTypeInstance()->showQuantityBox()) {
                         $this->refundItemRepository->returnQtyToProductInventory($orderItem, $qty);
+                    }
                 }
 
                 $this->orderItemRepository->collectTotals($orderItem);
 
-                if ($orderItem->qty_ordered == $orderItem->qty_refunded + $orderItem->qty_canceled)
+                if ($orderItem->qty_ordered == $orderItem->qty_refunded + $orderItem->qty_canceled) {
                     $this->downloadableLinkPurchasedRepository->updateStatus($orderItem, 'expired');
+                }
             }
 
             $this->collectTotals($refund);
@@ -240,21 +245,23 @@ class RefundRepository extends Repository
         $order = $this->orderRepository->find($orderId);
 
         $summary = [
-            'subtotal' => ['price' => 0],
-            'discount' => ['price' => 0],
-            'tax' => ['price' => 0],
-            'shipping' => ['price' => 0],
-            'grand_total' => ['price' => 0]
+            'subtotal'        => ['price' => 0],
+            'discount'        => ['price' => 0],
+            'tax'             => ['price' => 0],
+            'shipping'        => ['price' => 0],
+            'grand_total'     => ['price' => 0]
         ];
 
         foreach ($data as $orderItemId => $qty) {
-            if (! $qty)
+            if (! $qty) {
                 continue;
+            }
 
             $orderItem = $this->orderItemRepository->find($orderItemId);
 
-            if ($qty > $orderItem->qty_to_refund)
+            if ($qty > $orderItem->qty_to_refund) {
                 return false;
+            }
 
             $summary['subtotal']['price'] += $orderItem->base_price * $qty;
 

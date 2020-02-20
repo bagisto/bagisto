@@ -15,17 +15,20 @@ class Validator
      */
     public function validate($rule, $entity)
     {
-        if (! $rule->conditions)
+        if (! $rule->conditions) {
             return true;
+        }
 
         $validConditionCount = $totalConditionCount = 0;
 
         foreach ($rule->conditions as $condition) {
-            if (! $condition['attribute'] || ! isset($condition['value']) || is_null($condition['value']) ||  $condition['value'] == '')
+            if (! $condition['attribute'] || ! isset($condition['value']) || is_null($condition['value']) ||  $condition['value'] == '') {
                 continue;
+            }
 
-            if ($entity instanceof \Webkul\Checkout\Contracts\Cart && strpos($condition['attribute'], 'cart|') === false)
+            if ($entity instanceof \Webkul\Checkout\Contracts\Cart && strpos($condition['attribute'], 'cart|') === false) {
                 continue;
+            }
             
             $totalConditionCount++;
 
@@ -64,20 +67,23 @@ class Validator
                 $cart = $entity instanceof \Webkul\Checkout\Contracts\Cart ? $entity : $entity->cart;
 
                 if (in_array($attributeCode, ['postcode', 'state', 'country'])) {
-                    if (! $cart->shipping_address)
+                    if (! $cart->shipping_address) {
                         return;
+                    }
 
                     return $cart->shipping_address->{$attributeCode};
                 } else if ($attributeCode == 'shipping_method') {
-                    if (! $cart->shipping_method)
+                    if (! $cart->shipping_method) {
                         return;
+                    }
 
                     $shippingChunks = explode('_', $cart->shipping_method);
 
                     return current($shippingChunks);
                 } else if ($attributeCode == 'payment_method') {
-                    if (! $cart->payment)
+                    if (! $cart->payment) {
                         return;
+                    }
 
                     return $cart->payment->method;
                 } else {
@@ -99,8 +105,9 @@ class Validator
                                 ? $entity->product->{$attributeCode}
                                 : $entity->{$attributeCode};
 
-                    if (! in_array($condition['attribute_type'], ['multiselect', 'checkbox']))
+                    if (! in_array($condition['attribute_type'], ['multiselect', 'checkbox'])) {
                         return $value;
+                    }
     
                     return $value ? explode(',', $value) : [];
                 }
@@ -121,8 +128,9 @@ class Validator
         foreach ($this->getAllItems($this->getAttributeScope($condition), $entity) as $item) {
             $attributeValue = $this->getAttributeValue($condition, $item);
 
-            if ($validated = $this->validateAttribute($condition, $attributeValue))
+            if ($validated = $this->validateAttribute($condition, $attributeValue)) {
                 break;
+            }
         }
 
         return $validated;
@@ -139,7 +147,7 @@ class Validator
     {
         if ($attributeScope === 'parent') {
             return [$item];
-        } elseif ($attributeScope === 'children') {
+        } else if ($attributeScope === 'children') {
             return $item->children ?: [$item];
         } else {
             $items = $item->children ?: [];
@@ -177,8 +185,9 @@ class Validator
         switch ($condition['operator']) {
             case '==': case '!=':
                 if (is_array($condition['value'])) {
-                    if (! is_array($attributeValue))
+                    if (! is_array($attributeValue)) {
                         return false;
+                    }
 
                     $result = ! empty(array_intersect($condition['value'], $attributeValue));
                 } else {
@@ -192,16 +201,18 @@ class Validator
                 break;
 
             case '<=': case '>':
-                if (! is_scalar($attributeValue))
+                if (! is_scalar($attributeValue)) {
                     return false;
+                }
 
                 $result = $attributeValue <= $condition['value'];
 
                 break;
 
             case '>=': case '<':
-                if (! is_scalar($attributeValue))
+                if (! is_scalar($attributeValue)) {
                     return false;
+                }
 
                 $result = $attributeValue >= $condition['value'];
 
@@ -217,8 +228,9 @@ class Validator
                         }
                     }
                 } else if (is_array($condition['value'])) {
-                    if (! is_array($attributeValue))
+                    if (! is_array($attributeValue)) {
                         return false;
+                    }
 
                     $result = ! empty(array_intersect($condition['value'], $attributeValue));
                 } else {
@@ -232,8 +244,9 @@ class Validator
                 break;
         }
 
-        if (in_array($condition['operator'], ['!=', '>', '<', '!{}']))
+        if (in_array($condition['operator'], ['!=', '>', '<', '!{}'])) {
             $result = ! $result;
+        }
 
         return $result;
     }

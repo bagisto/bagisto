@@ -33,16 +33,18 @@ class InvoiceItemRepository extends Repository
      */
     public function updateProductInventory($data)
     {
-        if (! $data['product'])
+        if (! $data['product']) {
             return;
+        }
 
         $orderedInventory = $data['product']->ordered_inventories()
                 ->where('channel_id', $data['invoice']->order->channel->id)
                 ->first();
 
         if ($orderedInventory) {
-            if (($orderedQty = $orderedInventory->qty - $data['qty']) < 0)
+            if (($orderedQty = $orderedInventory->qty - $data['qty']) < 0) {
                 $orderedQty = 0;
+            }
 
             $orderedInventory->update(['qty' => $orderedQty]);
         }

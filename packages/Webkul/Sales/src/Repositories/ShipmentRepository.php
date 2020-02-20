@@ -89,13 +89,13 @@ class ShipmentRepository extends Repository
             $order = $this->orderRepository->find($data['order_id']);
 
             $shipment = $this->model->create([
-                    'order_id' => $order->id,
-                    'total_qty' => 0,
-                    'carrier_title' => $data['shipment']['carrier_title'],
-                    'track_number' => $data['shipment']['track_number'],
-                    'customer_id' => $order->customer_id,
-                    'customer_type' => $order->customer_type,
-                    'order_address_id' => $order->shipping_address->id,
+                    'order_id'            => $order->id,
+                    'total_qty'           => 0,
+                    'carrier_title'       => $data['shipment']['carrier_title'],
+                    'track_number'        => $data['shipment']['track_number'],
+                    'customer_id'         => $order->customer_id,
+                    'customer_type'       => $order->customer_type,
+                    'order_address_id'    => $order->shipping_address->id,
                     'inventory_source_id' => $data['shipment']['source'],
                 ]);
 
@@ -106,25 +106,26 @@ class ShipmentRepository extends Repository
 
                 $orderItem = $this->orderItemRepository->find($itemId);
 
-                if ($qty > $orderItem->qty_to_ship)
+                if ($qty > $orderItem->qty_to_ship) {
                     $qty = $orderItem->qty_to_ship;
+                }
 
                 $totalQty += $qty;
 
                 $shipmentItem = $this->shipmentItemRepository->create([
-                        'shipment_id' => $shipment->id,
+                        'shipment_id'   => $shipment->id,
                         'order_item_id' => $orderItem->id,
-                        'name' => $orderItem->name,
-                        'sku' => $orderItem->getTypeInstance()->getOrderedItem($orderItem)->sku,
-                        'qty' => $qty,
-                        'weight' => $orderItem->weight * $qty,
-                        'price' => $orderItem->price,
-                        'base_price' => $orderItem->base_price,
-                        'total' => $orderItem->price * $qty,
-                        'base_total' => $orderItem->base_price * $qty,
-                        'product_id' => $orderItem->product_id,
-                        'product_type' => $orderItem->product_type,
-                        'additional' => $orderItem->additional,
+                        'name'          => $orderItem->name,
+                        'sku'           => $orderItem->getTypeInstance()->getOrderedItem($orderItem)->sku,
+                        'qty'           => $qty,
+                        'weight'        => $orderItem->weight * $qty,
+                        'price'         => $orderItem->price,
+                        'base_price'    => $orderItem->base_price,
+                        'total'         => $orderItem->price * $qty,
+                        'base_total'    => $orderItem->base_price * $qty,
+                        'product_id'    => $orderItem->product_id,
+                        'product_type'  => $orderItem->product_type,
+                        'additional'    => $orderItem->additional,
                     ]);
 
                 if ($orderItem->getTypeInstance()->isComposite()) {
@@ -136,9 +137,9 @@ class ShipmentRepository extends Repository
                         }
 
                         $this->shipmentItemRepository->updateProductInventory([
-                                'shipment' => $shipment,
-                                'product' => $child->product,
-                                'qty' => $finalQty,
+                                'shipment'  => $shipment,
+                                'product'   => $child->product,
+                                'qty'       => $finalQty,
                                 'vendor_id' => isset($data['vendor_id']) ? $data['vendor_id'] : 0
                             ]);
 
@@ -146,9 +147,9 @@ class ShipmentRepository extends Repository
                     }
                 } else {
                     $this->shipmentItemRepository->updateProductInventory([
-                            'shipment' => $shipment,
-                            'product' => $orderItem->product,
-                            'qty' => $qty,
+                            'shipment'  => $shipment,
+                            'product'   => $orderItem->product,
+                            'qty'       => $qty,
                             'vendor_id' => isset($data['vendor_id']) ? $data['vendor_id'] : 0
                         ]);
                 }
@@ -157,7 +158,7 @@ class ShipmentRepository extends Repository
             }
 
             $shipment->update([
-                    'total_qty' => $totalQty,
+                    'total_qty'             => $totalQty,
                     'inventory_source_name' => $shipment->inventory_source->name
                 ]);
 

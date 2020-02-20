@@ -60,21 +60,22 @@ class DownloadableLinkPurchasedRepository extends Repository
         }
 
         foreach ($orderItem->additional['links'] as $linkId) {
-            if (! $productDownloadableLink = $this->productDownloadableLinkRepository->find($linkId))
+            if (! $productDownloadableLink = $this->productDownloadableLinkRepository->find($linkId)) {
                 continue;
+            }
 
             $this->create([
-                'name' => $productDownloadableLink->title,
-                'product_name' => $orderItem->name,
-                'url' => $productDownloadableLink->url,
-                'file' => $productDownloadableLink->file,
-                'file_name' => $productDownloadableLink->file_name,
-                'type' => $productDownloadableLink->type,
+                'name'            => $productDownloadableLink->title,
+                'product_name'    => $orderItem->name,
+                'url'             => $productDownloadableLink->url,
+                'file'            => $productDownloadableLink->file,
+                'file_name'       => $productDownloadableLink->file_name,
+                'type'            => $productDownloadableLink->type,
                 'download_bought' => $productDownloadableLink->downloads * $orderItem->qty_ordered,
-                'status' => 'pending',
-                'customer_id' => $orderItem->order->customer_id,
-                'order_id' => $orderItem->order_id,
-                'order_item_id' => $orderItem->id
+                'status'          => 'pending',
+                'customer_id'     => $orderItem->order->customer_id,
+                'order_id'        => $orderItem->order_id,
+                'order_item_id'   => $orderItem->id
             ]);
         }
     }
@@ -89,6 +90,7 @@ class DownloadableLinkPurchasedRepository extends Repository
         if (stristr($orderItem->type,'downloadable') !== false && isset($orderItem->additional['links'])) {
             return true;
         }
+        
         return false;
     }
 

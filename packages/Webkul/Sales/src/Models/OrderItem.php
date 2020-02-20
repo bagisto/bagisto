@@ -23,13 +23,15 @@ class OrderItem extends Model implements OrderItemContract
      */
     public function getTypeInstance()
     {
-        if ($this->typeInstance)
+        if ($this->typeInstance) {
             return $this->typeInstance;
+        }
 
         $this->typeInstance = app(config('product_types.' . $this->type . '.class'));
 
-        if ($this->product)
+        if ($this->product) {
             $this->typeInstance->setProduct($this);
+        }
 
         return $this->typeInstance;
     }
@@ -47,11 +49,13 @@ class OrderItem extends Model implements OrderItemContract
      */
     public function canShip()
     {
-        if (! $this->isStockable())
+        if (! $this->isStockable()) {
             return false;
+        }
 
-        if ($this->qty_to_ship > 0)
+        if ($this->qty_to_ship > 0) {
             return true;
+        }
 
         return false;
     }
@@ -61,8 +65,9 @@ class OrderItem extends Model implements OrderItemContract
      */
     public function getQtyToShipAttribute()
     {
-        if (! $this->isStockable())
+        if (! $this->isStockable()) {
             return 0;
+        }
 
         return $this->qty_ordered - $this->qty_shipped - $this->qty_refunded - $this->qty_canceled;
     }
@@ -72,8 +77,9 @@ class OrderItem extends Model implements OrderItemContract
      */
     public function canInvoice()
     {
-        if ($this->qty_to_invoice > 0)
+        if ($this->qty_to_invoice > 0) {
             return true;
+        }
 
         return false;
     }
@@ -91,8 +97,9 @@ class OrderItem extends Model implements OrderItemContract
      */
     public function canCancel()
     {
-        if ($this->qty_to_cancel > 0)
+        if ($this->qty_to_cancel > 0) {
             return true;
+        }
 
         return false;
     }
