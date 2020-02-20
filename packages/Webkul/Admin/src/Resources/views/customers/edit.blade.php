@@ -59,16 +59,16 @@
                                 <label for="gender" class="required">{{ __('admin::app.customers.customers.gender') }}</label>
                                 <select name="gender" class="control" value="{{ $customer->gender }}" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.customers.customers.gender') }}&quot;">
                                     <option value="" {{ $customer->gender == "" ? 'selected' : '' }}></option>
-                                    <option value="Other" {{ $customer->gender == "Other" ? 'selected' : '' }}>{{ __('admin::app.customers.customers.other') }}</option>
-                                    <option value="Male" {{ $customer->gender == "Male" ? 'selected' : '' }}>{{ __('admin::app.customers.customers.male') }}</option>
-                                    <option value="Female" {{ $customer->gender == "Female" ? 'selected' : '' }}>{{ __('admin::app.customers.customers.female') }}</option>
+                                    <option value="{{ __('admin::app.customers.customers.male') }}" {{ $customer->gender == __('admin::app.customers.customers.male') ? 'selected' : '' }}>{{ __('admin::app.customers.customers.male') }}</option>
+                                    <option value="{{ __('admin::app.customers.customers.female') }}" {{ $customer->gender == __('admin::app.customers.customers.female') ? 'selected' : '' }}>{{ __('admin::app.customers.customers.female') }}</option>
+                                    <option value="{{ __('admin::app.customers.customers.other') }}" {{ $customer->gender == __('admin::app.customers.customers.other') ? 'selected' : '' }}>{{ __('admin::app.customers.customers.other') }}</option>
                                 </select>
                                 <span class="control-error" v-if="errors.has('gender')">@{{ errors.first('gender') }}</span>
                             </div>
 
                             <div class="control-group">
                                 <label for="status" class="required">{{ __('admin::app.customers.customers.status') }}</label>
-                                    
+
                                 <label class="switch">
                                     <input type="checkbox" id="status" name="status" value="{{ $customer->status }}" {{ $customer->status ? 'checked' : '' }}>
                                     <span class="slider round"></span>
