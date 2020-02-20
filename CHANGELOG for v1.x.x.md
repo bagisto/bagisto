@@ -2,7 +2,7 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
-## **v1.0.0-BETA2(13th of February 2020)** - *Release*
+## **v1.0.0-BETA2(20th of February 2020)** - *Release*
 
 * #2377 [fixed] - Getting exception on creating a new category under any other category.
 
@@ -47,6 +47,8 @@
 * #2438 [fixed] - Add hyphen - with cart discount amount.
 
 * #2439 [fixed] - can't process for further checkout steps until all the address line filled.
+
+* #2435 [fixed] -  error composer install --no-dev.
 
 * #2440 [fixed] - Advertisement Three Images is not working.
 
