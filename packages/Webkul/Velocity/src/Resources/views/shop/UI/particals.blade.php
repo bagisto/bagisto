@@ -182,7 +182,7 @@
                             </ul>
 
                             <ul type="none" class="category-wrapper">
-                                <li v-for="(category, index) in JSON.parse(categories)">
+                                <li v-for="(category, index) in JSON.parse(rootCategories)">
                                     <a
                                         class="unset"
                                         :href="`${$root.baseUrl}/${category.slug}`">
