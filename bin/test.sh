@@ -15,12 +15,6 @@ printf "### start preparation ###\n"
     printf ">> truncate and migrate database\n"
     php artisan migrate:fresh --env=testing --quiet
 
-    printf ">> cleaning laravel caches ###\n"
-    ${WORKPATH}/../php artisan view:clear
-    ${WORKPATH}/../php artisan route:clear
-    ${WORKPATH}/../php artisan cache:clear
-    ${WORKPATH}/../php artisan config:clear
-
     printf ">> cleaning previous tests ###\n"
     ${WORKPATH}/../vendor/bin/codecept clean
 printf "### finish preparation ###\n"
