@@ -125,9 +125,9 @@ class CartRuleRepository extends Repository
      */
     public function create(array $data)
     {
-        $data['starts_from'] = $data['starts_from'] ?: null;
+        $data['starts_from'] = isset($data['starts_from']) ? $data['starts_from'] : null;
 
-        $data['ends_till'] = $data['ends_till'] ?: null;
+        $data['ends_till'] = isset($data['ends_till']) ? $data['ends_till'] : null;
 
         $data['status'] = ! isset($data['status']) ? 0 : 1;
 
