@@ -328,24 +328,32 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
      *
      * @return Mixed
      */
-    public function getComparedList(Request $request)
+    public function getComparisonList(Request $request)
     {
         if (request()->get('data')) {
+            $customer = null;
+            $productSlugs = null;
             $productCollection = [];
 
-            $customer = $this->velocityCustomerDataRepository->findOneByField([
-                'customer_id' => auth()->guard('customer')->user()->id,
-            ]);
+            if (auth()->guard('customer')->user()) {
+                $customer = $this->velocityCustomerDataRepository->findOneByField([
+                    'customer_id' => auth()->guard('customer')->user()->id,
+                ]);
+            }
 
             if ($customer) {
                 $productSlugs = json_decode($customer->compared_product, true);
+            } else {
+                if ($items = request()->get('items')) {
+                    $productSlugs = explode('&', $items);
+                }
+            }
 
-                if ($productSlugs) {
-                    foreach ($productSlugs as $slug) {
-                        $product = $this->productRepository->findBySlug($slug);
+            if ($productSlugs) {
+                foreach ($productSlugs as $slug) {
+                    $product = $this->productRepository->findBySlug($slug);
 
-                        array_push($productCollection, $this->formatProduct($product));
-                    }
+                    array_push($productCollection, $this->formatProduct($product));
                 }
             }
 
@@ -406,7 +414,7 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
      *
      * @return json
      */
-    public function deleteCompareProduct()
+    public function deleteComparisonProduct()
     {
         // either delete all or individual
         if (request()->get('slug') == 'all') {

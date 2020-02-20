@@ -6,7 +6,7 @@
 
 <script>
     export default {
-        props: ['slug'],
+        props: ['slug', 'customer'],
 
         data: function () {
             return {}
@@ -14,19 +14,37 @@
 
         methods: {
             addProductToCompare: function () {
-                this.$http.put(
-                    `${this.$root.baseUrl}/customer/account/compare`, {
-                        slug: this.slug,
+                if (this.customer == "true") {
+                    this.$http.put(
+                        `${this.$root.baseUrl}/comparison`, {
+                            slug: this.slug,
+                        }
+                    ).then(response => {
+                        window.showAlert(`alert-${response.data.status}`, response.data.label, response.data.message);
+                    }).catch(error => {
+                        window.showAlert(
+                            'alert-danger',
+                            this.__('shop.general.alert.error'),
+                            this.__('error.something-went-wrong')
+                        );
+                    });
+                } else {
+                    let updatedItems = [this.slug];
+                    let existingItems = window.localStorage.getItem('compared_product');
+
+                    if (existingItems) {
+                        existingItems = JSON.parse(existingItems);
+                        updatedItems = existingItems.concat([this.slug]);
                     }
-                ).then(response => {
-                    window.showAlert(`alert-${response.data.status}`, response.data.label, response.data.message);
-                }).catch(error => {
+
+                    window.localStorage.setItem('compared_product', JSON.stringify(updatedItems));
+
                     window.showAlert(
-                        'alert-danger',
-                        this.__('shop.general.alert.error'),
-                        this.__('error.something-went-wrong')
+                        `alert-success`,
+                        this.__('shop.general.alert.success'),
+                        `${this.__('customer.compare.added')} <a href="${this.baseUrl}/comparison">compare</a>`
                     );
-                });
+                }
             }
         }
     }

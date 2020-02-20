@@ -17,20 +17,14 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
 
         Route::post('/cart/add', 'ShopController@addProductToCart')->name('velocity.cart.add.product');
 
-        // Auth Routes
-        Route::group(['middleware' => ['customer']], function () {
-            //customer compared products
-            Route::prefix('customer/account')->group(function () {
-                Route::get('/compare', 'ShopController@getComparedList')
-                    ->name('customer.product.compare')
-                    ->defaults('_config', [
-                        'view' => 'velocity::customers.account.compare.index'
-                    ]);
+        Route::get('/comparison', 'ShopController@getComparisonList')
+            ->name('velocity.product.compare')
+            ->defaults('_config', [
+                'view' => 'shop::compare.index'
+            ]);
 
-                Route::put('/compare', 'ShopController@addCompareProduct')->name('customer.product.add.compare');
+        Route::put('/comparison', 'ShopController@addCompareProduct')->name('customer.product.add.compare');
 
-                Route::delete('/compare', 'ShopController@deleteCompareProduct')->name('customer.product.delete.compare');
-            });
-        });
+        Route::delete('/comparison', 'ShopController@deleteComparisonProduct')->name('customer.product.delete.compare');
     });
 });

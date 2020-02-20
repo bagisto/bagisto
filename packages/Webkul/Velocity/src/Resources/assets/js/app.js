@@ -156,6 +156,22 @@ $(document).ready(function () {
                   return false
                 }
             },
+
+            getDynamicHTML: function (input) {
+                debugger
+                const { render, staticRenderFns } = Vue.compile(input);
+                const _staticRenderFns = this.$options.staticRenderFns = staticRenderFns;
+
+                try {
+                    var output = render.call(this, this.$createElement)
+                } catch (exception) {
+                    console.log(this.__('error.something-went-wrong'));
+                }
+
+                this.$options.staticRenderFns = _staticRenderFns
+
+                return output;
+            }
         }
     });
 
@@ -282,7 +298,7 @@ $(document).ready(function () {
                         }
                     })
                 });
-            }
+            },
         }
     });
 

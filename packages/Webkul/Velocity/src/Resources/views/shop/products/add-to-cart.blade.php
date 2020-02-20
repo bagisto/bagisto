@@ -52,9 +52,13 @@
         @endif
     </div>
 
-    @auth('customer')
-        @if (isset($showCompare) && $showCompare)
-            <compare-component slug="{{ $product->url_key }}"></compare-component>
+    @if (isset($showCompare) && $showCompare)
+        @auth('customer')
+            <compare-component slug="{{ $product->url_key }}" customer="true"></compare-component>
+        @endif
+
+        @guest('customer')
+            <compare-component slug="{{ $product->url_key }}" customer="false"></compare-component>
         @endif
     @endif
 
