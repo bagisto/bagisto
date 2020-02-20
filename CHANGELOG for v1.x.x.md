@@ -56,6 +56,8 @@
 
 * #2459 [fixed] - shipping address field warning for guest customer not translated.
 
+* #2463 [fixed] - Tax rate is not update on same product.
+
 * #2469 [fixed] - Displaying wrong amount for bundle product in cart.
 
 * #2479 [fixed] - showing total review in recent view product list.
@@ -69,6 +71,8 @@
 * #2491 [fixed] - Exception on Create/Edit bundle product.
 
 * #2494 [fixed] - Product total inventory for all locale is showing wrong.
+
+* #2500 [fixed] - Database reset fails.
 
 ## **v1.0.0-BETA1(5th of February 2020)** - *Release*
 
