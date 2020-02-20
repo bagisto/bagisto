@@ -78,10 +78,10 @@ class SubscriptionController extends Controller
 
             if ($mailSent) {
                 $result = $this->subscriptionRepository->create([
-                    'email' => $email,
-                    'channel_id' => core()->getCurrentChannel()->id,
+                    'email'         => $email,
+                    'channel_id'    => core()->getCurrentChannel()->id,
                     'is_subscribed' => 1,
-                    'token' => $token
+                    'token'         => $token
                 ]);
 
                 if (! $result) {

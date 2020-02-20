@@ -55,12 +55,13 @@ class DownloadableProductController extends Controller
     public function download($id)
     {
         $downloadableLinkPurchased = $this->downloadableLinkPurchasedRepository->findOneByField([
-                'id' => $id,
+                'id'          => $id,
                 'customer_id' => auth()->guard('customer')->user()->id,
             ]);
 
-        if ($downloadableLinkPurchased->status == 'pending')
+        if ($downloadableLinkPurchased->status == 'pending') {
             abort(403);
+        }
 
         if ($downloadableLinkPurchased->download_bought
             && ($downloadableLinkPurchased->download_bought - $downloadableLinkPurchased->download_used) <= 0) {
@@ -74,7 +75,7 @@ class DownloadableProductController extends Controller
         if ($downloadableLinkPurchased->download_bought) {
             $this->downloadableLinkPurchasedRepository->update([
                     'download_used' => $downloadableLinkPurchased->download_used + 1,
-                    'status' => $remainingDownloads <= 0 ? 'expired' : $downloadableLinkPurchased->status
+                    'status'        => $remainingDownloads <= 0 ? 'expired' : $downloadableLinkPurchased->status
                 ], $downloadableLinkPurchased->id);
         }
 

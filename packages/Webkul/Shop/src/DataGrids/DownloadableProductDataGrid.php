@@ -34,23 +34,23 @@ class DownloadableProductDataGrid extends DataGrid
     public function addColumns()
     {
         $this->addColumn([
-            'index' => 'increment_id',
-            'label' => trans('shop::app.customer.account.downloadable_products.order-id'),
-            'type' => 'string',
+            'index'      => 'increment_id',
+            'label'      => trans('shop::app.customer.account.downloadable_products.order-id'),
+            'type'       => 'string',
             'searchable' => false,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'product_name',
-            'label' => trans('shop::app.customer.account.downloadable_products.name'),
-            'type' => 'string',
+            'index'      => 'product_name',
+            'label'      => trans('shop::app.customer.account.downloadable_products.name'),
+            'type'       => 'string',
             'searchable' => true,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true,
-            'closure' => true,
-            'wrapper' => function ($value) {
+            'closure'    => true,
+            'wrapper'    => function ($value) {
                 if ($value->status == 'pending' || $value->status == 'expired') {
                     return $value->product_name;
                 } else {
@@ -60,43 +60,45 @@ class DownloadableProductDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'created_at',
-            'label' => trans('shop::app.customer.account.downloadable_products.date'),
-            'type' => 'datetime',
+            'index'      => 'created_at',
+            'label'      => trans('shop::app.customer.account.downloadable_products.date'),
+            'type'       => 'datetime',
             'searchable' => false,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true
         ]);
 
         $this->addColumn([
-            'index' => 'status',
-            'label' => trans('shop::app.customer.account.downloadable_products.status'),
-            'type' => 'string',
+            'index'      => 'status',
+            'label'      => trans('shop::app.customer.account.downloadable_products.status'),
+            'type'       => 'string',
             'searchable' => false,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => true,
-            'closure' => true,
-            'wrapper' => function ($value) {
-                if ($value->status == 'pending')
+            'closure'    => true,
+            'wrapper'    => function ($value) {
+                if ($value->status == 'pending') {
                     return trans('shop::app.customer.account.downloadable_products.pending');
-                else if ($value->status == 'available')
+                } else if ($value->status == 'available') {
                     return trans('shop::app.customer.account.downloadable_products.available');
-                else if ($value->status == 'expired')
+                } else if ($value->status == 'expired') {
                     return trans('shop::app.customer.account.downloadable_products.expired');
+                }
             },
         ]);
 
         $this->addColumn([
-            'index' => 'remaining_downloads',
-            'label' => trans('shop::app.customer.account.downloadable_products.remaining-downloads'),
-            'type' => 'datetime',
+            'index'      => 'remaining_downloads',
+            'label'      => trans('shop::app.customer.account.downloadable_products.remaining-downloads'),
+            'type'       => 'datetime',
             'searchable' => false,
-            'sortable' => true,
+            'sortable'   => true,
             'filterable' => false,
-            'closure' => true,
-            'wrapper' => function ($value) {
-                if (! $value->download_bought)
+            'closure'    => true,
+            'wrapper'    => function ($value) {
+                if (! $value->download_bought) {
                     return trans('shop::app.customer.account.downloadable_products.unlimited');
+                }
 
                 return $value->remaining_downloads;
             },

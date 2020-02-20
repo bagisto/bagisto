@@ -70,11 +70,12 @@ class OrderController extends Controller
     {
         $order = $this->orderRepository->findOneWhere([
             'customer_id' => auth()->guard('customer')->user()->id,
-            'id' => $id
+            'id'          => $id
         ]);
 
-        if (! $order)
+        if (! $order) {
             abort(404);
+        }
 
         return view($this->_config['view'], compact('order'));
     }

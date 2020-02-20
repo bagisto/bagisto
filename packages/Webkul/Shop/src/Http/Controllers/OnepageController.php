@@ -114,10 +114,11 @@ class OnepageController extends Controller
             Cart::collectTotals();
 
             if ($cart->haveStockableItems()) {
-                if (! $rates = Shipping::collectRates())
+                if (! $rates = Shipping::collectRates()) {
                     return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
-                else
+                } else {
                     return response()->json($rates);
+                }
             } else {
                 return response()->json(Payment::getSupportedPaymentMethods());
             }
@@ -133,8 +134,9 @@ class OnepageController extends Controller
     {
         $shippingMethod = request()->get('shipping_method');
 
-        if (Cart::hasError() || !$shippingMethod || !Cart::saveShippingMethod($shippingMethod))
+        if (Cart::hasError() || !$shippingMethod || !Cart::saveShippingMethod($shippingMethod)) {
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
+        }
 
         Cart::collectTotals();
 
@@ -150,8 +152,9 @@ class OnepageController extends Controller
     {
         $payment = request()->get('payment');
 
-        if (Cart::hasError() || ! $payment || ! Cart::savePaymentMethod($payment))
+        if (Cart::hasError() || ! $payment || ! Cart::savePaymentMethod($payment)) {
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
+        }
 
         Cart::collectTotals();
 
@@ -159,7 +162,7 @@ class OnepageController extends Controller
 
         return response()->json([
             'jump_to_section' => 'review',
-            'html' => view('shop::checkout.onepage.review', compact('cart'))->render()
+            'html'            => view('shop::checkout.onepage.review', compact('cart'))->render()
         ]);
     }
 
@@ -170,8 +173,9 @@ class OnepageController extends Controller
     */
     public function saveOrder()
     {
-        if (Cart::hasError())
+        if (Cart::hasError()) {
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
+        }
 
         Cart::collectTotals();
 
@@ -181,7 +185,7 @@ class OnepageController extends Controller
 
         if ($redirectUrl = Payment::getRedirectUrl($cart)) {
             return response()->json([
-                'success' => true,
+                'success'      => true,
                 'redirect_url' => $redirectUrl
             ]);
         }
@@ -204,8 +208,9 @@ class OnepageController extends Controller
     */
     public function success()
     {
-        if (! $order = session('order'))
+        if (! $order = session('order')) {
             return redirect()->route('shop.checkout.cart.index');
+        }
 
         return view($this->_config['view'], compact('order'));
     }
@@ -219,17 +224,21 @@ class OnepageController extends Controller
     {
         $cart = Cart::getCart();
 
-        if ($cart->haveStockableItems() && ! $cart->shipping_address)
+        if ($cart->haveStockableItems() && ! $cart->shipping_address) {
             throw new \Exception(trans('Please check shipping address.'));
+        }
 
-        if (! $cart->billing_address)
+        if (! $cart->billing_address) {
             throw new \Exception(trans('Please check billing address.'));
+        }
 
-        if ($cart->haveStockableItems() && ! $cart->selected_shipping_rate)
+        if ($cart->haveStockableItems() && ! $cart->selected_shipping_rate) {
             throw new \Exception(trans('Please specify shipping method.'));
+        }
 
-        if (! $cart->payment)
+        if (! $cart->payment) {
             throw new \Exception(trans('Please specify payment method.'));
+        }
     }
 
     /**
@@ -243,8 +252,9 @@ class OnepageController extends Controller
             'email' => request()->email
        ]);
 
-       if (! is_null($customer))
+       if (! is_null($customer)) {
            return 'true';
+       }
 
        return 'false';
     }
@@ -260,8 +270,9 @@ class OnepageController extends Controller
             'email' => 'required|email'
         ]);
 
-        if (! auth()->guard('customer')->attempt(request(['email', 'password'])))
+        if (! auth()->guard('customer')->attempt(request(['email', 'password']))) {
             return response()->json(['error' => trans('shop::app.customer.login-form.invalid-creds')]);
+        }
 
         Cart::mergeCart();
 
@@ -289,13 +300,13 @@ class OnepageController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => trans('shop::app.checkout.total.coupon-applied'),
-                'result' => $result
+                'result'  => $result
             ], 200);
         } else {
             return response()->json([
                 'success' => false,
                 'message' => trans('shop::app.checkout.total.cannot-apply-coupon'),
-                'result' => null
+                'result'  => null
             ], 422);
         }
 
@@ -317,7 +328,7 @@ class OnepageController extends Controller
             return response()->json([
                     'success' => true,
                     'message' => trans('admin::app.promotion.status.coupon-removed'),
-                    'data' => [
+                    'data'    => [
                         'grand_total' => core()->currency(Cart::getCart()->grand_total)
                     ]
                 ], 200);
@@ -325,7 +336,7 @@ class OnepageController extends Controller
             return response()->json([
                     'success' => false,
                     'message' => trans('admin::app.promotion.status.coupon-remove-failed'),
-                    'data' => null
+                    'data'    => null
                 ], 422);
         }
     }

@@ -115,12 +115,13 @@ class ReviewController extends Controller
     public function destroy($id)
     {
         $review = $this->productReviewRepository->findOneWhere([
-            'id' => $id,
+            'id'          => $id,
             'customer_id' => auth()->guard('customer')->user()->id
         ]);
 
-        if (! $review)
+        if (! $review) {
             abort(404);
+        }
 
         $this->productReviewRepository->delete($id);
 

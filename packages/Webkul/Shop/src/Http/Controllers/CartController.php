@@ -83,8 +83,9 @@ class CartController extends Controller
             if ($result instanceof CartModel) {
                 session()->flash('success', trans('shop::app.checkout.cart.item.success'));
 
-                if ($customer = auth()->guard('customer')->user())
+                if ($customer = auth()->guard('customer')->user()) {
                     $this->wishlistRepository->deleteWhere(['product_id' => $id, 'customer_id' => $customer->id]);
+                }
 
                 if (request()->get('is_buy_now')) {
                     Event::dispatch('shop.item.buy-now', $id);
@@ -112,8 +113,9 @@ class CartController extends Controller
     {
         $result = Cart::removeItem($itemId);
 
-        if ($result)
+        if ($result) {
             session()->flash('success', trans('shop::app.checkout.cart.item.success-remove'));
+        }
 
         return redirect()->back();
     }
@@ -128,8 +130,9 @@ class CartController extends Controller
         try {
             $result = Cart::updateItems(request()->all());
 
-            if ($result)
+            if ($result) {
                 session()->flash('success', trans('shop::app.checkout.cart.quantity.success'));
+            }
         } catch(\Exception $e) {
             session()->flash('error', trans($e->getMessage()));
         }

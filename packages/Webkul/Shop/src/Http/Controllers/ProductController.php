@@ -98,9 +98,9 @@ class ProductController extends Controller
             if (request('type') == 'link') {
                 $productDownloadableLink = $this->productDownloadableLinkRepository->findOrFail(request('id'));
 
-                if ($productDownloadableLink->sample_type == 'file')
+                if ($productDownloadableLink->sample_type == 'file') {
                     return Storage::download($productDownloadableLink->sample_file);
-                else {
+                } else {
                     $fileName = $name = substr($productDownloadableLink->sample_url, strrpos($productDownloadableLink->sample_url, '/') + 1);
 
                     $tempImage = tempnam(sys_get_temp_dir(), $fileName);
@@ -112,9 +112,9 @@ class ProductController extends Controller
             } else {
                 $productDownloadableSample = $this->productDownloadableSampleRepository->findOrFail(request('id'));
 
-                if ($productDownloadableSample->type == 'file')
+                if ($productDownloadableSample->type == 'file') {
                     return Storage::download($productDownloadableSample->file);
-                else {
+                } else {
                     $fileName = $name = substr($productDownloadableSample->url, strrpos($productDownloadableSample->url, '/') + 1);
 
                     $tempImage = tempnam(sys_get_temp_dir(), $fileName);
