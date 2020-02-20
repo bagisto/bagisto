@@ -72,7 +72,7 @@ return [
         'sliders' => 'Sliders',
         'taxes' => 'BTW',
         'tax-categories' => 'BTW-groepen',
-        'tax-rates' => 'Belastingtarieven',
+        'tax-rates' => 'BTW-tarieven',
         'promotions' => 'Promoties',
         'discount' => 'Korting',
         'cms' => 'CMS'
@@ -105,7 +105,7 @@ return [
         'sliders' => 'Sliders',
         'taxes' => 'Belastingen',
         'tax-categories' => 'Belasting categorieën',
-        'tax-rates' => 'Belastingtarieven',
+        'tax-rates' => 'BTW-tarieven',
         'edit' => 'Edit',
         'create' => 'Add',
         'delete' => 'Verwijder',
@@ -633,7 +633,7 @@ return [
         ],
 
         'tax-rates' => [
-            'title' => 'Belastingtarieven',
+            'title' => 'BTW-tarieven',
             'add-title' => 'Add Tax Rate',
             'edit-title' => 'Edit Tax Rate',
             'save-btn-title' => 'Save Tax Rate',
@@ -789,7 +789,7 @@ return [
             'add-title' => 'Create Slider',
             'edit-title' => 'Edit Slider',
             'save-btn-title' => 'Save Slider',
-            'general' => 'General',
+            'general' => 'Algemeen',
             'image' => 'Afbeelding',
             'content' => 'Content',
             'channels' => 'Channel',
@@ -825,7 +825,7 @@ return [
         ],
 
         'tax-rates' => [
-            'title' => 'Belastingtarieven',
+            'title' => 'BTW-tarieven',
             'add-title' => 'Create Tax Rate',
             'edit-title' => 'Edit Tax Rate',
             'save-btn-title' => 'Save Tax Rate',
@@ -842,36 +842,36 @@ return [
                 'title' => 'Edit Tax Rate',
                 'edit-button-title' => 'Edit Rate'
             ],
-            'zip_code' => 'Zip Code',
+            'zip_code' => 'Postcode',
             'is_zip' => 'Enable Zip Range',
-            'create-success' => 'Tax Rate Created Successfully',
+            'create-success' => 'Belastingtarief succesvol aangemaakt',
             'create-error' => 'Cannot Create Tax Rate',
             'update-success' => 'Tax Rate Updated Successfully',
             'update-error' => 'Error! Tax Rate Cannot Be Updated',
-            'delete' => 'Tax Rate Deleted Successfully',
+            'delete' => 'Het BTW-tarief is verwijderd',
             'atleast-one' => 'Cannot Delete Last Tax Rate'
         ],
         'development' => [
-            'title' => 'Development',
+            'title' => 'Ontwikkeling',
         ]
     ],
 
     'customers' => [
         'groups' =>[
-            'add-title' => 'Add Group',
-            'edit-title' => 'Edit Group',
+            'add-title' => 'Groep toevoegen',
+            'edit-title' => 'Groep wijzigen',
             'save-btn-title' => 'Save Group',
             'title' => 'Groepen',
             'save-btn-title' => 'Save Group',
             'code' => 'Code',
             'name' => 'Naam',
-            'is_user_defined' => 'User Defined',
-            'yes' => 'Yes'
+            'is_user_defined' => 'Door de gebruiker gedefinieerd',
+            'yes' => 'Ja'
         ],
 
         'addresses' => [
             'title' => ':customer_name\'s Addresses List',
-            'vat_id' => 'Vat id',
+            'vat_id' => 'BTW nummer',
             'create-title' => 'Create Customer\'s Address',
             'edit-title' => 'Update Customer\'s Address',
             'title-orders' => ':customer_name\'s Orders List',
@@ -882,15 +882,15 @@ return [
             'city' => 'City',
             'state-name' => 'Staat',
             'country-name' => 'Land',
-            'postcode' => 'Post Code',
-            'default-address' => 'Default Address',
+            'postcode' => 'Postcode',
+            'default-address' => 'Standaard Address',
             'yes' => 'Ja',
-            'not-approved' => 'Not Approved',
+            'not-approved' => 'Niet akkoord',
             'no' => 'Nee',
             'dash' => '-',
             'delete' => 'Verwijder',
-            'create-btn-title' => 'Add Address',
-            'save-btn-title' => 'Save Address',
+            'create-btn-title' => 'Adres toevoegen',
+            'save-btn-title' => 'Bewaar adres',
             'general' => 'General',
             'success-create' => 'Success: Customer address created successfully.',
             'success-update' => 'Success: Customer address updated successfully.',
