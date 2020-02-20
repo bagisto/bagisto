@@ -35,8 +35,9 @@ class EventSlot extends Booking
      */
     public function getTickets($bookingProduct)
     {
-        if (! $bookingProduct->event_slot)
+        if (! $bookingProduct->event_slot) {
             return;
+        }
 
         return $this->formatPrice($bookingProduct->event_slot->slots);
     }

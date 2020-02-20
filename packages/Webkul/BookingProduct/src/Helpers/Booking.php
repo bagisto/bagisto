@@ -34,11 +34,11 @@ class Booking
      * @return array
      */
     protected $typeHelpers = [
-        'default' => DefaultSlot::class,
+        'default'     => DefaultSlot::class,
         'appointment' => AppointmentSlot::class,
-        'event' => EventSlot::class,
-        'rental' => RentalSlot::class,
-        'table' => TableSlot::class,
+        'event'       => EventSlot::class,
+        'rental'      => RentalSlot::class,
+        'table'       => TableSlot::class,
     ];
 
     /**
@@ -107,11 +107,12 @@ class Booking
         foreach ($this->daysOfWeek as $index => $isOpen) {
             $slots = [];
 
-            if ($isOpen)
+            if ($isOpen) {
                 $slots = $bookingProductSlot->same_slot_all_days ? $bookingProductSlot->slots : ($bookingProductSlot->slots[$index] ?? []);
+            }
 
             $slotsByDays[] = [
-                'name' => trans($this->daysOfWeek[$index]),
+                'name'  => trans($this->daysOfWeek[$index]),
                 'slots' => isset($availabileDays[$index]) ? $this->conver24To12Hours($slots) : []
             ];
         }
@@ -159,8 +160,9 @@ class Booking
      */
     public function getAvailableWeekDays($bookingProductSlot)
     {
-        if ($bookingProductSlot->available_every_week)
+        if ($bookingProductSlot->available_every_week) {
             return $this->daysOfWeek;
+        }
 
         $days = [];
 
@@ -174,8 +176,9 @@ class Booking
             $date = clone $currentTime;
             $date->addDays($i);
 
-            if ($date >= $availableFrom && $date <= $availableTo)
+            if ($date >= $availableFrom && $date <= $availableTo) {
                 $days[$i] = $date->format('l');
+            }
         }
 
         return $this->sortDaysOfWeek($days);
@@ -212,8 +215,9 @@ class Booking
      */
     public function conver24To12Hours($slots)
     {
-        if (! $slots)
+        if (! $slots) {
             return [];
+        }
 
         foreach ($slots as $index => $slot) {
             $slots[$index]['from']  = Carbon::createFromTimeString($slot['from'])->format("h:i a");
@@ -234,8 +238,9 @@ class Booking
     {
         $bookingProductSlot = $this->typeRepositories[$bookingProduct->type]->findOneByField('booking_product_id', $bookingProduct->id);
 
-        if (! is_array($bookingProductSlot->slots) || ! count($bookingProductSlot->slots))
+        if (! is_array($bookingProductSlot->slots) || ! count($bookingProductSlot->slots)) {
             return [];
+        }
 
         $requestedDate = Carbon::createFromTimeString($date . " 00:00:00");
 
@@ -293,10 +298,10 @@ class Booking
 
                     if ($qty && $currentTime <= $from) {
                         $slots[] = [
-                                'from' => $from->format('h:i A'), 
-                                'to' => $to->format('h:i A'), 
+                                'from'      => $from->format('h:i A'), 
+                                'to'        => $to->format('h:i A'), 
                                 'timestamp' => $from->getTimestamp() . '-' . $to->getTimestamp(), 
-                                'qty' => $qty, 
+                                'qty'       => $qty, 
                             ];
                     }
                 } else {
@@ -318,8 +323,9 @@ class Booking
     {
         $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $data['product_id']);
 
-        if (! $bookingProduct)
+        if (! $bookingProduct) {
             return $data;
+        }
 
         switch ($bookingProduct->type) {
             case 'rental':
@@ -338,16 +344,16 @@ class Booking
                 $data['attributes'] = [
                     [
                         'attribute_name' => 'Rent Type',
-                        'option_id' => 0,
-                        'option_label' => trans('bookingproduct::app.shop.cart.' . $rentingType),
+                        'option_id'      => 0,
+                        'option_label'   => trans('bookingproduct::app.shop.cart.' . $rentingType)
                     ], [
                         'attribute_name' => 'Rent From',
-                        'option_id' => 0,
-                        'option_label' => $from,
+                        'option_id'      => 0,
+                        'option_label'   => $from
                     ], [
                         'attribute_name' => 'Rent Till',
-                        'option_id' => 0,
-                        'option_label' => $to,
+                        'option_id'      => 0,
+                        'option_label'   => $to
                     ]];
 
                 break;
@@ -358,12 +364,12 @@ class Booking
                 $data['attributes'] = [
                     [
                         'attribute_name' => 'Booking From',
-                        'option_id' => 0,
-                        'option_label' => Carbon::createFromTimestamp($timestamps[0])->format('d F, Y h:i A'),
+                        'option_id'      => 0,
+                        'option_label'   => Carbon::createFromTimestamp($timestamps[0])->format('d F, Y h:i A'),
                     ], [
                         'attribute_name' => 'Booking Till',
-                        'option_id' => 0,
-                        'option_label' => Carbon::createFromTimestamp($timestamps[1])->format('d F, Y h:i A'),
+                        'option_id'      => 0,
+                        'option_label'   => Carbon::createFromTimestamp($timestamps[1])->format('d F, Y h:i A'),
                     ]];
 
                 break;
@@ -393,8 +399,9 @@ class Booking
     {
         $price = $item->product->getTypeInstance()->getFinalPrice();
 
-        if ($price == $item->base_price)
+        if ($price == $item->base_price) {
             return;
+        }
 
         $item->base_price = $price;
         $item->price = core()->convertPrice($price);

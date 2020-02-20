@@ -84,16 +84,18 @@ class BookingProductRepository extends Repository
         parent::update($data, $id, $attribute);
 
         foreach ($this->typeRepositories as $type => $repository) {
-            if ($type == $data['type'])
+            if ($type == $data['type']) {
                 continue;
+            }
 
             $repository->deleteWhere(['booking_product_id' => $id]);
         }
 
         $bookingProductTypeSlot = $this->typeRepositories[$data['type']]->findOneByField('booking_product_id', $id);
 
-        if (isset($data['slots']))
+        if (isset($data['slots'])) {
             $data['slots'] = $this->formatSlots($data);
+        }
 
         if (! $bookingProductTypeSlot) {
             $this->typeRepositories[$data['type']]->create(array_merge($data, ['booking_product_id' => $id]));

@@ -23,8 +23,9 @@ class RentalSlot extends Booking
     {
         $bookingProductSlot = $this->typeRepositories[$bookingProduct->type]->findOneByField('booking_product_id', $bookingProduct->id);
 
-        if (! is_array($bookingProductSlot->slots) || ! count($bookingProductSlot->slots))
+        if (! is_array($bookingProductSlot->slots) || ! count($bookingProductSlot->slots)) {
             return [];
+        }
 
         $requestedDate = Carbon::createFromTimeString($date . " 00:00:00");
 
@@ -72,15 +73,16 @@ class RentalSlot extends Booking
                     $qty = isset($timeDuration['qty']) ? ( $timeDuration['qty'] - $orderedQty ) : 1;
 
                     if ($qty && $currentTime <= $from) {
-                        if (! isset($slots[$index]))
+                        if (! isset($slots[$index])) {
                             $slots[$index]['time'] = $startDayTime->format('h:i A') . ' - ' . $endDayTime->format('h:i A');
+                        }
 
                         $slots[$index]['slots'][] = [
-                            'from' => $from->format('h:i A'),
-                            'to' => $to->format('h:i A'),
+                            'from'           => $from->format('h:i A'),
+                            'to'             => $to->format('h:i A'),
                             'from_timestamp' => $from->getTimestamp(),
-                            'to_timestamp' => $to->getTimestamp(),
-                            'qty' => $qty
+                            'to_timestamp'   => $to->getTimestamp(),
+                            'qty'            => $qty
                         ];
                     }
                 } else {
@@ -150,8 +152,9 @@ class RentalSlot extends Booking
             $price += $bookingProduct->rental_slot->hourly_price * $to->diffInHours($from);
         }
 
-        if ($price == $item->base_price)
+        if ($price == $item->base_price) {
             return;
+        }
 
         $item->base_price = $price;
         $item->price = core()->convertPrice($price);

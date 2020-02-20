@@ -28,8 +28,9 @@ class DefaultSlot extends Booking
     {
         $bookingProductSlot = $this->typeRepositories[$bookingProduct->type]->findOneByField('booking_product_id', $bookingProduct->id);
 
-        if (! is_array($bookingProductSlot->slots) || ! count($bookingProductSlot->slots))
+        if (! is_array($bookingProductSlot->slots) || ! count($bookingProductSlot->slots)) {
             return [];
+        }
 
         $requestedDate = Carbon::createFromTimeString($date . " 00:00:00");
 
@@ -41,8 +42,9 @@ class DefaultSlot extends Booking
 
         if ($requestedDate < $currentTime
             || $requestedDate < $availableFrom
-            || $requestedDate > $availableTo)
+            || $requestedDate > $availableTo) {
             return [];
+        }
 
         $slots = [];
 
@@ -63,15 +65,16 @@ class DefaultSlot extends Booking
         $slots = [];
 
         foreach ($bookingProductSlot->slots as $timeDuration) {
-            if ($requestedDate->dayOfWeek != $timeDuration['from_day'])
+            if ($requestedDate->dayOfWeek != $timeDuration['from_day']) {
                 continue;
+            }
 
             $startDate = clone $requestedDate->modify('this ' . $this->daysOfWeek[$timeDuration['from_day']]);
             $endDate = clone $requestedDate->modify('this ' . $this->daysOfWeek[$timeDuration['to_day']]);
 
             $slots[] = [
-                'from' => $startDate->format('d F, Y h:i A'),
-                'to' => $endDate->format('d F, Y h:i A'),
+                'from'      => $startDate->format('d F, Y h:i A'),
+                'to'        => $endDate->format('d F, Y h:i A'),
                 'timestamp' => $startDate->getTimestamp() . '-' . $endDate->getTimestamp(),
             ];
         }
@@ -96,8 +99,9 @@ class DefaultSlot extends Booking
 
         $timeDuration = $bookingProductSlot->slots[$requestedDate->format('w')] ?? [];
 
-        if (! count($timeDuration) || ! $timeDuration['status'])
+        if (! count($timeDuration) || ! $timeDuration['status']) {
             return [];
+        }
 
         $slots = [];
 
@@ -138,10 +142,10 @@ class DefaultSlot extends Booking
 
                 if ($qty && $currentTime <= $from) {
                     $slots[] = [
-                        'from' => $from->format('h:i A'), 
-                        'to' => $to->format('h:i A'), 
+                        'from'      => $from->format('h:i A'), 
+                        'to'        => $to->format('h:i A'), 
                         'timestamp' => $from->getTimestamp() . '-' . $to->getTimestamp(), 
-                        'qty' => $qty, 
+                        'qty'       => $qty, 
                     ];
                 }
             } else {

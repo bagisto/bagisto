@@ -37,8 +37,9 @@ class Product
      */
     public function afterProductUpdated($product)
     {
-        if ($product->type != 'booking' || ! request('booking'))
+        if ($product->type != 'booking' || ! request('booking')) {
             return;
+        }
 
         $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $product->id);
 

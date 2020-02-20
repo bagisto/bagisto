@@ -93,8 +93,9 @@ class Booking extends Virtual
     {
         static $bookingProduct;
 
-        if ($bookingProduct)
+        if ($bookingProduct) {
             return $bookingProduct;
+        }
 
         return $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $productId);
     }
@@ -117,8 +118,9 @@ class Booking extends Virtual
     {
         $bookingProduct = $this->getBookingProduct($this->product->id);
 
-        if ($bookingProduct->type != 'default')
+        if ($bookingProduct->type != 'default') {
             unset($this->additionalViews[0]);
+        }
 
         return $this->additionalViews;
     }
@@ -131,8 +133,9 @@ class Booking extends Virtual
      */
     public function prepareForCart($data)
     {
-        if (! isset($data['booking']) || ! count($data['booking']))
+        if (! isset($data['booking']) || ! count($data['booking'])) {
             return trans('shop::app.checkout.cart.integrity.missing_options');
+        }
 
         $products = parent::prepareForCart($data);
         
@@ -153,8 +156,9 @@ class Booking extends Virtual
      */
     public function compareOptions($options1, $options2)
     {
-        if ($this->product->id != $options2['product_id'])
+        if ($this->product->id != $options2['product_id']) {
             return false;
+        }
 
         return $options1['booking'] == $options2['booking'];
     }
@@ -180,8 +184,9 @@ class Booking extends Virtual
     {
         $bookingProduct = $this->getBookingProduct($item->product_id);
 
-        if (! $bookingProduct)
+        if (! $bookingProduct) {
             return;
+        }
 
         app($this->bookingHelper->getTypeHepler($bookingProduct->type))->validateCartItem($item);
     }
