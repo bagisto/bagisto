@@ -51,9 +51,9 @@ class AccountController extends Controller
         $user = auth()->guard('admin')->user();
 
         $this->validate(request(), [
-            'name' => 'required',
-            'email' => 'email|unique:admins,email,' . $user->id,
-            'password' => 'nullable|min:6|confirmed',
+            'name'             => 'required',
+            'email'            => 'email|unique:admins,email,' . $user->id,
+            'password'         => 'nullable|min:6|confirmed',
             'current_password' => 'required|min:6'
         ]);
 
@@ -65,10 +65,11 @@ class AccountController extends Controller
             return redirect()->back();
         }
 
-        if (! $data['password'])
+        if (! $data['password']) {
             unset($data['password']);
-        else
+        } else {
             $data['password'] = bcrypt($data['password']);
+        }
 
         $user->update($data);
 

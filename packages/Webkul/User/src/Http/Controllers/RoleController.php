@@ -70,7 +70,7 @@ class RoleController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'name' => 'required',
+            'name'            => 'required',
             'permission_type' => 'required',
         ]);
 
@@ -107,7 +107,7 @@ class RoleController extends Controller
     public function update($id)
     {
         $this->validate(request(), [
-            'name' => 'required',
+            'name'            => 'required',
             'permission_type' => 'required',
         ]);
 

@@ -29,8 +29,9 @@ class Bouncer
 
     public function checkIfAuthorized($request)
     {
-        if (! $role = auth()->guard('admin')->user()->role)
+        if (! $role = auth()->guard('admin')->user()->role) {
             abort(401, 'This action is unauthorized.');
+        }
 
         if ($role->permission_type == 'all') {
             return;
