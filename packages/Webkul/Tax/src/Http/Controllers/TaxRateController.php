@@ -73,18 +73,19 @@ class TaxRateController extends Controller
     {
         $this->validate(request(), [
             'identifier' => 'required|string|unique:tax_rates,identifier',
-            'is_zip' => 'sometimes',
-            'zip_code' => 'sometimes|required_without:is_zip',
-            'zip_from' => 'nullable|required_with:is_zip',
-            'zip_to' => 'nullable|required_with:is_zip,zip_from',
-            'country' => 'required|string',
-            'tax_rate' => 'required|numeric|min:0.0001'
+            'is_zip'     => 'sometimes',
+            'zip_code'   => 'sometimes|required_without:is_zip',
+            'zip_from'   => 'nullable|required_with:is_zip',
+            'zip_to'     => 'nullable|required_with:is_zip,zip_from',
+            'country'    => 'required|string',
+            'tax_rate'   => 'required|numeric|min:0.0001'
         ]);
 
         $data = request()->all();
 
         if (isset($data['is_zip'])) {
             $data['is_zip'] = 1;
+
             unset($data['zip_code']);
         }
 
@@ -121,11 +122,11 @@ class TaxRateController extends Controller
     {
         $this->validate(request(), [
             'identifier' => 'required|string|unique:tax_rates,identifier,'.$id,
-            'is_zip' => 'sometimes',
-            'zip_from' => 'nullable|required_with:is_zip',
-            'zip_to' => 'nullable|required_with:is_zip,zip_from',
-            'country' => 'required|string',
-            'tax_rate' => 'required|numeric|min:0.0001'
+            'is_zip'     => 'sometimes',
+            'zip_from'   => 'nullable|required_with:is_zip',
+            'zip_to'     => 'nullable|required_with:is_zip,zip_from',
+            'country'    => 'required|string',
+            'tax_rate'   => 'required|numeric|min:0.0001'
         ]);
 
         Event::dispatch('tax.tax_rate.update.before', $id);
@@ -184,19 +185,19 @@ class TaxRateController extends Controller
                 foreach ($excelData as $data) {
                     foreach ($data as $column => $uploadData) {
 
-                        if (!is_null($uploadData['zip_from']) && !is_null($uploadData['zip_to'])) {
+                        if (! is_null($uploadData['zip_from']) && !is_null($uploadData['zip_to'])) {
                             $uploadData['is_zip'] = 1;
                         }
 
                         $validator = Validator::make($uploadData, [
                             'identifier' => 'required|string',
-                            'state' => 'required|string',
-                            'country' => 'required|string',
-                            'tax_rate' => 'required|numeric|min:0.0001',
-                            'is_zip' => 'sometimes',
-                            'zip_code' => 'sometimes|required_without:is_zip',
-                            'zip_from' => 'nullable|required_with:is_zip',
-                            'zip_to' => 'nullable|required_with:is_zip,zip_from',
+                            'state'      => 'required|string',
+                            'country'    => 'required|string',
+                            'tax_rate'   => 'required|numeric|min:0.0001',
+                            'is_zip'     => 'sometimes',
+                            'zip_code'   => 'sometimes|required_without:is_zip',
+                            'zip_from'   => 'nullable|required_with:is_zip',
+                            'zip_to'     => 'nullable|required_with:is_zip,zip_from',
                         ]);
 
                         if ($validator->fails()) {
