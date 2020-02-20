@@ -331,18 +331,21 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
     public function getComparedList(Request $request)
     {
         if (request()->get('data')) {
+            $productCollection = [];
+
             $customer = $this->velocityCustomerDataRepository->findOneByField([
                 'customer_id' => auth()->guard('customer')->user()->id,
             ]);
 
-            $productSlugs = json_decode($customer->compared_product, true);
+            if ($customer) {
+                $productSlugs = json_decode($customer->compared_product, true);
 
-            $productCollection = [];
-            if ($productSlugs) {
-                foreach ($productSlugs as $slug) {
-                    $product = $this->productRepository->findBySlug($slug);
+                if ($productSlugs) {
+                    foreach ($productSlugs as $slug) {
+                        $product = $this->productRepository->findBySlug($slug);
 
-                    array_push($productCollection, $this->formatProduct($product));
+                        array_push($productCollection, $this->formatProduct($product));
+                    }
                 }
             }
 

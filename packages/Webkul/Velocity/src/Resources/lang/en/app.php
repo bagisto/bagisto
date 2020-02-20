@@ -190,6 +190,7 @@ return [
     'customer' => [
         'compare' => [
             'text' => 'Compare',
+            'compare_similar_items' => 'Compare Similar Items',
             'added' => 'Item successfully added to compare list',
             'removed' => 'Item successfully removed from compare list',
             'empty-text' => "You don't have any items in your compare list",

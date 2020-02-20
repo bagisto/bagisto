@@ -1,7 +1,7 @@
 @extends('shop::customers.account.index')
 
 @section('page_title')
-    {{ __('velocity::app.customer.compare.text') }}
+    {{ __('velocity::app.customer.compare.compare_similar_items') }}
 @endsection
 
 @section('page-detail-wrapper')
@@ -12,7 +12,7 @@
             </a>
         </span>
         <span class="account-heading">
-            {{ __('velocity::app.customer.compare.text') }}
+            {{ __('velocity::app.customer.compare.compare_similar_items') }}
         </span>
     </div>
 
@@ -33,13 +33,15 @@
 
                 <div class="col" :key="index" v-for="(product, index) in products">
                     <div class="row col-12">
+                        <div class="product-title">
+                            <h3>@{{ product.name }}</h3>
+                        </div>
+
                         <div class='image-wrapper'>
                             <img :src="product.image" />
                         </div>
 
-                        <div class="product-title">
-                            <h3>@{{ product.name }}</h3>
-                        </div>
+                        <div class="product-price" v-html="product.priceHTML"></div>
 
                         <div class="product-reviews">
                             <star-ratings :ratings="product.avgRating"></star-ratings>
@@ -48,15 +50,14 @@
                             </a>
                         </div>
 
-                        <div class="product-price" v-html="product.priceHTML"></div>
+                        <div class="action">
+                            <div class="add-to-cart" v-html="product.addToCartHtml"></div>
+                            <div class="close-btn rango-close fs18 cursor-pointer" @click="removeProductCompare(product.slug)"></div>
+                        </div>
 
                         <div class="product-description">
                             <p v-html="product.description"></p>
                         </div>
-
-                        <div class="add-to-cart" v-html="product.addToCartHtml"></div>
-
-                        <div class="close-btn rango-close fs18 cursor-pointer" @click="removeProductCompare(product.slug)"></div>
                     </div>
                 </div>
 

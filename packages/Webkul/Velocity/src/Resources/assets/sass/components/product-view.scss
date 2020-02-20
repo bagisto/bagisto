@@ -220,9 +220,11 @@
         }
     }
 
+    .compare-icon,
     .wishlist-icon {
         height: 46px;
         display: table;
+        cursor: pointer;
         padding-left: 10px;
 
         i {

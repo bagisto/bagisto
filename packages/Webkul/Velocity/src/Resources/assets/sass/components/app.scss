@@ -1037,21 +1037,32 @@
                 .col,
                 .col-2 {
                     padding: 0;
-                    max-width: 35%;
+                    max-width: 30%;
 
-                    .row:nth-child(1) {
+                    > .row:nth-child(1) {
                         margin: 0;
 
                         > div {
                             width: 100%;
-                            margin-top: 10px;
+                            margin-top: 25px;
 
                             &.product-title {
+                                font-size: 16px;
+
+                                h3 {
+                                    font-weight: 600;
+                                }
+                            }
+
+                            &.product-price {
                                 margin-top: 15px;
                             }
                         }
 
                         .image-wrapper {
+                            height: 200px;
+                            overflow: hidden;
+
                             img {
                                 width: 100%;
                             }
@@ -1063,13 +1074,18 @@
                             }
                         }
 
-                        .close-btn {
-                            right: 0;
-                            width: unset;
-                            position: absolute;
+                        .action {
+                            position: relative;
 
-                            &:hover {
-                                font-weight: 600;
+                            .close-btn {
+                                right: 0;
+                                top: 6px;
+                                position: absolute;
+                                display: inline-block;
+
+                                &:hover {
+                                    font-weight: 600;
+                                }
                             }
                         }
                     }
@@ -2250,6 +2266,12 @@
 
     .VueCarousel-slide {
         cursor: default;
+    }
+
+    #new-products-carousel {
+        .compare-icon {
+            display: none;
+        }
     }
 }
 
