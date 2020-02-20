@@ -60,6 +60,8 @@
 
 * #2463 [fixed] - Tax rate is not update on same product.
 
+* #2468 [fixed] - Guest user is able to checkout if guest checkout is disabled.
+
 * #2469 [fixed] - Displaying wrong amount for bundle product in cart.
 
 * #2479 [fixed] - showing total review in recent view product list.
