@@ -537,7 +537,7 @@ return [
             'decimal' => 'Decimal',
             'email' => 'Email',
             'url' => 'URL',
-            'configuration' => 'Configuration',
+            'configuration' => 'Configuratie',
             'status' => 'Status',
             'yes' => 'Ja',
             'no' => 'Nee',
@@ -608,9 +608,9 @@ return [
     ],
 
     'configuration' => [
-        'title' => 'Configuration',
+        'title' => 'Configuratie',
         'save-btn-title' => 'Opslaan',
-        'save-message' => 'Configuration saved successfully',
+        'save-message' => 'Configuratie succesvol opgeslagen',
         'yes' => 'Ja',
         'no' => 'Nee',
         'delete' => 'Verwijder',
