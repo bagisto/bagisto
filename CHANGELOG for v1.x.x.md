@@ -2,7 +2,7 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
-## **v1.0.0-BETA2(13th of February 2020)** - *Release*
+## **v1.0.0-BETA2(20th of February 2020)** - *Release*
 
 * #2377 [fixed] - Getting exception on creating a new category under any other category.
 
@@ -48,6 +48,8 @@
 
 * #2439 [fixed] - can't process for further checkout steps until all the address line filled.
 
+* #2435 [fixed] -  error composer install --no-dev.
+
 * #2440 [fixed] - Advertisement Three Images is not working.
 
 * #2449 [fixed] - error clicking empty cart.
@@ -57,6 +59,8 @@
 * #2459 [fixed] - shipping address field warning for guest customer not translated.
 
 * #2463 [fixed] - Tax rate is not update on same product.
+
+* #2468 [fixed] - Guest user is able to checkout if guest checkout is disabled.
 
 * #2469 [fixed] - Displaying wrong amount for bundle product in cart.
 
