@@ -60,8 +60,9 @@ class ProductBundleOptionRepository extends Repository
                 } else {
                     $productBundleOption = $this->find($bundleOptionId);
 
-                    if (is_numeric($index = $previousBundleOptionIds->search($bundleOptionId)))
+                    if (is_numeric($index = $previousBundleOptionIds->search($bundleOptionId))) {
                         $previousBundleOptionIds->forget($index);
+                    }
 
                     $this->update($bundleOptionInputs, $bundleOptionId);
                 }

@@ -157,9 +157,9 @@ class ProductController extends Controller
         }
 
         $this->validate(request(), [
-            'type' => 'required',
+            'type'                => 'required',
             'attribute_family_id' => 'required',
-            'sku' => ['required', 'unique:products,sku', new \Webkul\Core\Contracts\Validations\Slug]
+            'sku'                 => ['required', 'unique:products,sku', new \Webkul\Core\Contracts\Validations\Slug]
         ]);
 
         $product = $this->productRepository->create(request()->all());
@@ -287,7 +287,7 @@ class ProductController extends Controller
             return redirect()->back();
         }
 
-        if (!$data['massaction-type'] == 'update') {
+        if (! $data['massaction-type'] == 'update') {
             return redirect()->back();
         }
 
@@ -296,8 +296,8 @@ class ProductController extends Controller
         foreach ($productIds as $productId) {
             $this->productRepository->update([
                 'channel' => null,
-                'locale' => null,
-                'status' => $data['update-options']
+                'locale'  => null,
+                'status'  => $data['update-options']
             ], $productId);
         }
 
@@ -328,8 +328,8 @@ class ProductController extends Controller
 
             foreach ($this->productRepository->searchProductByAttribute(request()->input('query')) as $row) {
                 $results[] = [
-                        'id' => $row->product_id,
-                        'sku' => $row->sku,
+                        'id'   => $row->product_id,
+                        'sku'  => $row->sku,
                         'name' => $row->name,
                     ];
             }

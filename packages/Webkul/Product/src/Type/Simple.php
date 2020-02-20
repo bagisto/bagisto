@@ -44,11 +44,13 @@ class Simple extends AbstractType
      */
     public function isSaleable()
     {
-        if (! $this->product->status)
+        if (! $this->product->status) {
             return false;
+        }
 
-        if ($this->haveSufficientQuantity(1))
+        if ($this->haveSufficientQuantity(1)) {
             return true;
+        }
 
         return false;
     }
@@ -61,6 +63,7 @@ class Simple extends AbstractType
     public function haveSufficientQuantity($qty)
     {
         $backorders = core()->getConfigData('catalog.inventory.stock_options.backorders');
+        
         return $qty <= $this->totalQuantity() ? true : $backorders;
     }
 }

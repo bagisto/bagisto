@@ -21,8 +21,9 @@ class Review extends AbstractProduct
     {
         static $reviews = [];
 
-        if(array_key_exists($product->id, $reviews))
+        if (array_key_exists($product->id, $reviews)) {
             return $reviews[$product->id];
+        }
 
         return $reviews[$product->id] = $product->reviews()->where('status', 'approved');
     }
@@ -37,8 +38,9 @@ class Review extends AbstractProduct
     {
         static $avgRating = [];
 
-        if(array_key_exists($product->id, $avgRating))
+        if (array_key_exists($product->id, $avgRating)) {
             return $avgRating[$product->id];
+        }
 
         return $avgRating[$product->id] = number_format(round($product->reviews()->where('status', 'approved')->avg('rating'), 2), 1);
     }
@@ -53,8 +55,9 @@ class Review extends AbstractProduct
     {
         static $totalReviews = [];
 
-        if(array_key_exists($product->id, $totalReviews))
+        if (array_key_exists($product->id, $totalReviews)) {
             return $totalReviews[$product->id];
+        }
 
         return $totalReviews[$product->id] = $product->reviews()->where('status', 'approved')->count();
     }
@@ -69,8 +72,9 @@ class Review extends AbstractProduct
     {
         static $totalRating = [];
 
-        if(array_key_exists($product->id, $totalRating))
+        if (array_key_exists($product->id, $totalRating)) {
             return $totalRating[$product->id];
+        }
 
         return $totalRating[$product->id] = $product->reviews()->where('status','approved')->sum('rating');
     }

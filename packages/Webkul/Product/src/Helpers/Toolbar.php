@@ -19,12 +19,12 @@ class Toolbar extends AbstractProduct
     public function getAvailableOrders()
     {
         return [
-            'name-asc' => 'from-a-z',
-            'name-desc' => 'from-z-a',
+            'name-asc'        => 'from-a-z',
+            'name-desc'       => 'from-z-a',
             'created_at-desc' => 'newest-first',
-            'created_at-asc' => 'oldest-first',
-            'price-asc' => 'cheapest-first',
-            'price-desc' => 'expensive-first'
+            'created_at-asc'  => 'oldest-first',
+            'price-asc'       => 'cheapest-first',
+            'price-desc'      => 'expensive-first'
         ];
     }
     /**
@@ -49,7 +49,7 @@ class Toolbar extends AbstractProduct
         $keys = explode('-', $key);
 
         return request()->fullUrlWithQuery([
-                'sort' => current($keys),
+                'sort'  => current($keys),
                 'order' => end($keys)
             ]);
     }
@@ -90,10 +90,11 @@ class Toolbar extends AbstractProduct
     {
         $params = request()->input();
 
-        if (isset($params['sort']) && $key == $params['sort'] . '-' . $params['order'])
+        if (isset($params['sort']) && $key == $params['sort'] . '-' . $params['order']) {
             return true;
-        else if (! isset($params['sort']) && $key == 'created_at-desc')
+        } else if (! isset($params['sort']) && $key == 'created_at-desc') {
             return true;
+        }
 
         return false;
     }
@@ -108,8 +109,9 @@ class Toolbar extends AbstractProduct
     {
         $params = request()->input();
 
-        if (isset($params['limit']) && $limit == $params['limit'])
+        if (isset($params['limit']) && $limit == $params['limit']) {
             return true;
+        }
 
         return false;
     }
@@ -124,8 +126,9 @@ class Toolbar extends AbstractProduct
     {
         $params = request()->input();
 
-        if (isset($params['mode']) && $key == $params['mode'])
+        if (isset($params['mode']) && $key == $params['mode']) {
             return true;
+        }
 
         return false;
     }
@@ -140,8 +143,9 @@ class Toolbar extends AbstractProduct
     {
         $params = request()->input();
 
-        if (isset($params['mode']))
+        if (isset($params['mode'])) {
             return $params['mode'];
+        }
 
         return 'grid';
     }

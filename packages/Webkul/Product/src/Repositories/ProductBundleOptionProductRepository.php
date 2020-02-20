@@ -36,8 +36,9 @@ class ProductBundleOptionProductRepository extends Repository
                             'product_bundle_option_id' => $productBundleOption->id,
                         ], $bundleOptionProductInputs));
                 } else {
-                    if (is_numeric($index = $previousBundleOptionProductIds->search($bundleOptionProductId)))
+                    if (is_numeric($index = $previousBundleOptionProductIds->search($bundleOptionProductId))) {
                         $previousBundleOptionProductIds->forget($index);
+                    }
 
                     $this->update($bundleOptionProductInputs, $bundleOptionProductId);
                 }
@@ -55,8 +56,9 @@ class ProductBundleOptionProductRepository extends Repository
      */
     public function setIsDefaultFlag(&$data)
     {
-        if (! count($data['products']))
+        if (! count($data['products'])) {
             return;
+        }
 
         $haveIsDefaulFlag = false;
 
@@ -68,7 +70,8 @@ class ProductBundleOptionProductRepository extends Repository
             }
         }
 
-        if (! $haveIsDefaulFlag && $data['is_required'])
+        if (! $haveIsDefaulFlag && $data['is_required']) {
             $data['products'][key($data['products'])]['is_default'] = 1;
+        }
     }
 }

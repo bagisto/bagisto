@@ -59,8 +59,9 @@ abstract class AbstractProduct
      */
     public function setProductFlat($product)
     {
-        if (array_key_exists($product->id, $this->productFlat))
+        if (array_key_exists($product->id, $this->productFlat)) {
             return;
+        }
 
         if (! $product instanceof ProductFlat) {
             $this->productFlat[$product->id] = ProductFlatProxy::modelClass()

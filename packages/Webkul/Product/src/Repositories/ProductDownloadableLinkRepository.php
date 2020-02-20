@@ -34,9 +34,9 @@ class ProductDownloadableLinkRepository extends Repository
         foreach ($data as $type => $file) {
             if (request()->hasFile($type)) {
                 return [
-                    $type => $path = request()->file($type)->store('product_downloadable_links/' . $productId),
+                    $type           => $path = request()->file($type)->store('product_downloadable_links/' . $productId),
                     $type . '_name' => $file->getClientOriginalName(),
-                    $type . '_url' => Storage::url($path)
+                    $type . '_url'  => Storage::url($path)
                 ];
             }
         }

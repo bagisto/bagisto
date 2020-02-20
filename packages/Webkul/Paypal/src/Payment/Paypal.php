@@ -39,7 +39,6 @@ abstract class Paypal extends Payment
         $cartItems = $this->getCartItems();
 
         foreach ($cartItems as $item) {
-
             foreach ($this->itemFieldsFormat as $modelField => $paypalField) {
                 $fields[sprintf($paypalField, $i)] = $item->{$modelField};
             }

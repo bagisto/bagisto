@@ -192,8 +192,9 @@ class Product extends Model implements ProductContract
      */
     public function getTypeInstance()
     {
-        if ($this->typeInstance)
+        if ($this->typeInstance) {
             return $this->typeInstance;
+        }
 
         $this->typeInstance = app(config('product_types.' . $this->type . '.class'));
 
@@ -306,8 +307,9 @@ class Product extends Model implements ProductContract
      */
     public function getCustomAttributeValue($attribute)
     {
-        if (! $attribute)
+        if (! $attribute) {
             return;
+        }
 
         $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 

@@ -83,8 +83,9 @@ class ProductRepository extends Repository
 
         $product = $product->getTypeInstance()->update($data, $id, $attribute);
 
-        if (isset($data['channels']))
+        if (isset($data['channels'])) {
             $product['channels'] = $data['channels'];
+        }
 
         Event::dispatch('catalog.product.update.after', $product);
 
@@ -125,14 +126,17 @@ class ProductRepository extends Repository
                         ->where('product_flat.locale', $locale)
                         ->whereNotNull('product_flat.url_key');
 
-                if ($categoryId)
+                if ($categoryId) {
                     $qb->where('product_categories.category_id', $categoryId);
+                }
 
-                if (is_null(request()->input('status')))
+                if (is_null(request()->input('status'))) {
                     $qb->where('product_flat.status', 1);
+                }
 
-                if (is_null(request()->input('visible_individually')))
+                if (is_null(request()->input('visible_individually'))) {
                     $qb->where('product_flat.visible_individually', 1);
+                }
 
                 $queryBuilder = $qb->leftJoin('product_flat as flat_variants', function($qb) use($channel, $locale) {
                     $qb->on('product_flat.id', '=', 'flat_variants.parent_id')
@@ -182,8 +186,9 @@ class ProductRepository extends Repository
 
                                     $query2 = $query2->where(function($query3) use($aliasTemp, $column, $temp) {
                                         foreach($temp as $code => $filterValue) {
-                                            if (! is_numeric($filterValue))
+                                            if (! is_numeric($filterValue)) {
                                                 continue;
+                                            }
 
                                             $columns = $aliasTemp . '.' . $column;
                                             $query3 = $query3->orwhereRaw("find_in_set($filterValue, $columns)");
@@ -214,7 +219,7 @@ class ProductRepository extends Repository
     {
         $product = app(ProductFlatRepository::class)->findOneWhere([
                 'url_key' => $slug,
-                'locale' => app()->getLocale(),
+                'locale'  => app()->getLocale(),
                 'channel' => core()->getCurrentChannelCode(),
             ]);
 
@@ -238,7 +243,7 @@ class ProductRepository extends Repository
     {
         return app(ProductFlatRepository::class)->findOneWhere([
             'url_key' => $slug,
-            'locale' => app()->getLocale(),
+            'locale'  => app()->getLocale(),
             'channel' => core()->getCurrentChannelCode(),
         ]);
     }
@@ -334,9 +339,9 @@ class ProductRepository extends Repository
 
             foreach ($attribute->options as $option) {
                 $superAttrbutes[$key]['options'][] = [
-                    'id' => $option->id,
-                    'admin_name' => $option->admin_name,
-                    'sort_order' => $option->sort_order,
+                    'id'           => $option->id,
+                    'admin_name'   => $option->admin_name,
+                    'sort_order'   => $option->sort_order,
                     'swatch_value' => $option->swatch_value,
                 ];
             }

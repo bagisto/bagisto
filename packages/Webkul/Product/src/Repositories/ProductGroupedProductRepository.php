@@ -35,8 +35,9 @@ class ProductGroupedProductRepository extends Repository
                             'product_id' => $product->id,
                         ], $linkInputs));
                 } else {
-                    if (is_numeric($index = $previousGroupedProductIds->search($linkId)))
+                    if (is_numeric($index = $previousGroupedProductIds->search($linkId))) {
                         $previousGroupedProductIds->forget($index);
+                    }
 
                     $this->update($linkInputs, $linkId);
                 }

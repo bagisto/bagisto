@@ -144,10 +144,11 @@ class Ipn
      */
     protected function postBack()
     {
-        if (array_key_exists('test_ipn', $this->post) && 1 === (int) $this->post['test_ipn'])
+        if (array_key_exists('test_ipn', $this->post) && 1 === (int) $this->post['test_ipn']) {
             $url = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
-        else
+        } else {
             $url = 'https://www.paypal.com/cgi-bin/webscr';
+        }
 
         // Set up request to PayPal
         $request = curl_init();

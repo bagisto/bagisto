@@ -106,8 +106,9 @@ class Configurable extends AbstractType
 
                         $this->createVariant($product, $permutation, $variantData);
                     } else {
-                        if (is_numeric($index = $previousVariantIds->search($variantId)))
+                        if (is_numeric($index = $previousVariantIds->search($variantId))) {
                             $previousVariantIds->forget($index);
+                        }
 
                         $variantData['channel'] = $data['channel'];
                         $variantData['locale'] = $data['locale'];
@@ -135,12 +136,12 @@ class Configurable extends AbstractType
     {
         if (! count($data)) {
             $data = [
-                    "sku" => $product->sku . '-variant-' . implode('-', $permutation),
-                    "name" => "",
-                    "inventories" => [],
-                    "price" => 0,
-                    "weight" => 0,
-                    "status" => 1
+                    'sku'         => $product->sku . '-variant-' . implode('-', $permutation),
+                    'name'        => '',
+                    'inventories' => [],
+                    'price'       => 0,
+                    'weight'      => 0,
+                    'status'      => 1
                 ];
         }
 
@@ -165,21 +166,21 @@ class Configurable extends AbstractType
                     foreach (core()->getAllChannels() as $channel) {
                         foreach (core()->getAllLocales() as $locale) {
                             $this->attributeValueRepository->create([
-                                    'product_id' => $variant->id,
+                                    'product_id'   => $variant->id,
                                     'attribute_id' => $attribute->id,
-                                    'channel' => $channel->code,
-                                    'locale' => $locale->code,
-                                    'value' => $data[$attributeCode]
+                                    'channel'      => $channel->code,
+                                    'locale'       => $locale->code,
+                                    'value'        => $data[$attributeCode]
                                 ]);
                         }
                     }
                 } else {
                     foreach (core()->getAllChannels() as $channel) {
                         $this->attributeValueRepository->create([
-                                'product_id' => $variant->id,
+                                'product_id'   => $variant->id,
                                 'attribute_id' => $attribute->id,
-                                'channel' => $channel->code,
-                                'value' => $data[$attributeCode]
+                                'channel'      => $channel->code,
+                                'value'        => $data[$attributeCode]
                             ]);
                     }
                 }
@@ -187,17 +188,17 @@ class Configurable extends AbstractType
                 if ($attribute->value_per_locale) {
                     foreach (core()->getAllLocales() as $locale) {
                         $this->attributeValueRepository->create([
-                                'product_id' => $variant->id,
+                                'product_id'   => $variant->id,
                                 'attribute_id' => $attribute->id,
-                                'locale' => $locale->code,
-                                'value' => $data[$attributeCode]
+                                'locale'       => $locale->code,
+                                'value'        => $data[$attributeCode]
                             ]);
                     }
                 } else {
                     $this->attributeValueRepository->create([
-                            'product_id' => $variant->id,
+                            'product_id'   => $variant->id,
                             'attribute_id' => $attribute->id,
-                            'value' => $data[$attributeCode]
+                            'value'        => $data[$attributeCode]
                         ]);
                 }
             }
@@ -205,9 +206,9 @@ class Configurable extends AbstractType
 
         foreach ($permutation as $attributeId => $optionId) {
             $this->attributeValueRepository->create([
-                    'product_id' => $variant->id,
+                    'product_id'   => $variant->id,
                     'attribute_id' => $attributeId,
-                    'value' => $optionId
+                    'value'        => $optionId
                 ]);
         }
 
@@ -231,19 +232,19 @@ class Configurable extends AbstractType
             $attribute = $this->attributeRepository->findOneByField('code', $attributeCode);
 
             $attributeValue = $this->attributeValueRepository->findOneWhere([
-                    'product_id' => $id,
+                    'product_id'   => $id,
                     'attribute_id' => $attribute->id,
-                    'channel' => $attribute->value_per_channel ? $data['channel'] : null,
-                    'locale' => $attribute->value_per_locale ? $data['locale'] : null
+                    'channel'      => $attribute->value_per_channel ? $data['channel'] : null,
+                    'locale'       => $attribute->value_per_locale ? $data['locale'] : null
                 ]);
 
             if (! $attributeValue) {
                 $this->attributeValueRepository->create([
-                        'product_id' => $id,
+                        'product_id'   => $id,
                         'attribute_id' => $attribute->id,
-                        'value' => $data[$attribute->code],
-                        'channel' => $attribute->value_per_channel ? $data['channel'] : null,
-                        'locale' => $attribute->value_per_locale ? $data['locale'] : null
+                        'value'        => $data[$attribute->code],
+                        'channel'      => $attribute->value_per_channel ? $data['channel'] : null,
+                        'locale'       => $attribute->value_per_locale ? $data['locale'] : null
                     ]);
             } else {
                 $this->attributeValueRepository->update([
@@ -267,21 +268,25 @@ class Configurable extends AbstractType
         $superAttributeCodes = $product->parent->super_attributes->pluck('code');
 
         foreach ($product->parent->variants as $variant) {
-            if ($variant->id == $product->id)
+            if ($variant->id == $product->id) {
                 continue;
+            }
 
             $matchCount = 0;
 
             foreach ($superAttributeCodes as $attributeCode) {
-                if (! isset($data[$attributeCode]))
+                if (! isset($data[$attributeCode])) {
                     return false;
+                }
 
-                if ($data[$attributeCode] == $variant->{$attributeCode})
+                if ($data[$attributeCode] == $variant->{$attributeCode}) {
                     $matchCount++;
+                }
             }
 
-            if ($matchCount == $superAttributeCodes->count())
+            if ($matchCount == $superAttributeCodes->count()) {
                 return true;
+            }
         }
 
         return false;
@@ -314,9 +319,9 @@ class Configurable extends AbstractType
     public function getTypeValidationRules()
     {
         return [
-            'variants.*.name' => 'required',
-            'variants.*.sku' => 'required',
-            'variants.*.price' => 'required',
+            'variants.*.name'   => 'required',
+            'variants.*.sku'    => 'required',
+            'variants.*.price'  => 'required',
             'variants.*.weight' => 'required',
         ];
     }
@@ -329,8 +334,9 @@ class Configurable extends AbstractType
      */
     public function canBeMovedFromWishlistToCart($item)
     {
-        if (isset($item->additional['selected_configurable_option']))
+        if (isset($item->additional['selected_configurable_option'])) {
             return true;
+        }
 
         return false;
     }
@@ -358,8 +364,9 @@ class Configurable extends AbstractType
             $minPrices[] = $price->min_price;
         }
 
-        if (empty($minPrices))
+        if (empty($minPrices)) {
             return 0;
+        }
 
         return min($minPrices);
     }
@@ -401,39 +408,41 @@ class Configurable extends AbstractType
      */
     public function prepareForCart($data)
     {
-        if (! isset($data['selected_configurable_option']) || ! $data['selected_configurable_option'])
+        if (! isset($data['selected_configurable_option']) || ! $data['selected_configurable_option']) {
             return trans('shop::app.checkout.cart.integrity.missing_options');
+        }
 
         $data = $this->getQtyRequest($data);
 
         $childProduct = $this->productRepository->find($data['selected_configurable_option']);
 
-        if (! $childProduct->haveSufficientQuantity($data['quantity']))
+        if (! $childProduct->haveSufficientQuantity($data['quantity'])) {
             return trans('shop::app.checkout.cart.quantity.inventory_warning');
+        }
 
         $price = $childProduct->getTypeInstance()->getFinalPrice();
 
         $products = [
             [
-                'product_id' => $this->product->id,
-                'sku' => $this->product->sku,
-                'quantity' => $data['quantity'],
-                'name' => $this->product->name,
-                'price' => $convertedPrice = core()->convertPrice($price),
-                'base_price' => $price,
-                'total' => $convertedPrice * $data['quantity'],
-                'base_total' => $price * $data['quantity'],
-                'weight' => $childProduct->weight,
-                'total_weight' => $childProduct->weight * $data['quantity'],
+                'product_id'        => $this->product->id,
+                'sku'               => $this->product->sku,
+                'quantity'          => $data['quantity'],
+                'name'              => $this->product->name,
+                'price'             => $convertedPrice = core()->convertPrice($price),
+                'base_price'        => $price,
+                'total'             => $convertedPrice * $data['quantity'],
+                'base_total'        => $price * $data['quantity'],
+                'weight'            => $childProduct->weight,
+                'total_weight'      => $childProduct->weight * $data['quantity'],
                 'base_total_weight' => $childProduct->weight * $data['quantity'],
-                'type' => $this->product->type,
-                'additional' => $this->getAdditionalOptions($data)
+                'type'              => $this->product->type,
+                'additional'        => $this->getAdditionalOptions($data)
             ], [
-                'parent_id' => $this->product->id,
+                'parent_id'  => $this->product->id,
                 'product_id' => (int) $data['selected_configurable_option'],
-                'sku' => $childProduct->sku,
-                'name' => $childProduct->name,
-                'type' => 'simple',
+                'sku'        => $childProduct->sku,
+                'name'       => $childProduct->name,
+                'type'       => 'simple',
                 'additional' => ['product_id' => (int) $data['selected_configurable_option'], 'parent_id' => $this->product->id]
             ]
         ];
@@ -449,8 +458,9 @@ class Configurable extends AbstractType
      */
     public function compareOptions($options1, $options2)
     {
-        if ($this->product->id != $options2['product_id'])
+        if ($this->product->id != $options2['product_id']) {
             return false;
+        }
 
         return $options1['selected_configurable_option'] === $options2['selected_configurable_option'];
     }
@@ -470,8 +480,8 @@ class Configurable extends AbstractType
 
             $data['attributes'][$attribute->code] = [
                 'attribute_name' => $attribute->name ?  $attribute->name : $attribute->admin_name,
-                'option_id' => $option->id,
-                'option_label' => $option->label ? $option->label : $option->admin_name,
+                'option_id'      => $option->id,
+                'option_label'   => $option->label ? $option->label : $option->admin_name,
             ];
         }
 
@@ -520,8 +530,9 @@ class Configurable extends AbstractType
     {
         $price = $item->child->product->getTypeInstance()->getFinalPrice();
 
-        if ($price == $item->base_price)
+        if ($price == $item->base_price) {
             return;
+        }
 
         $item->base_price = $price;
         $item->price = core()->convertPrice($price);

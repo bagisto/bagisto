@@ -203,10 +203,10 @@ abstract class AbstractType
             }
 
             $attributeValue = $this->attributeValueRepository->findOneWhere([
-                    'product_id' => $product->id,
+                    'product_id'   => $product->id,
                     'attribute_id' => $attribute->id,
-                    'channel' => $attribute->value_per_channel ? $data['channel'] : null,
-                    'locale' => $attribute->value_per_locale ? $data['locale'] : null
+                    'channel'      => $attribute->value_per_channel ? $data['channel'] : null,
+                    'locale'       => $attribute->value_per_locale ? $data['locale'] : null
                 ]);
 
             if (! $attributeValue) {
@@ -495,8 +495,9 @@ abstract class AbstractType
     {
         $rulePrice = app('Webkul\CatalogRule\Helpers\CatalogRuleProductPrice')->getRulePrice($this->product);
 
-        if ((is_null($this->product->special_price) || ! (float) $this->product->special_price) && ! $rulePrice)
+        if ((is_null($this->product->special_price) || ! (float) $this->product->special_price) && ! $rulePrice) {
             return false;
+        }
 
         if (! (float) $this->product->special_price) {
             if ($rulePrice) {
@@ -532,11 +533,11 @@ abstract class AbstractType
     {
         return [
             'regular_price' => [
-                'price' => core()->convertPrice($this->product->price),
+                'price'          => core()->convertPrice($this->product->price),
                 'formated_price' => core()->currency($this->product->price)
             ],
-            'final_price' => [
-                'price' => core()->convertPrice($this->getMinimalPrice()),
+            'final_price'   => [
+                'price'          => core()->convertPrice($this->getMinimalPrice()),
                 'formated_price' => core()->currency($this->getMinimalPrice())
             ]
         ];
@@ -580,19 +581,19 @@ abstract class AbstractType
 
         $products = [
             [
-                'product_id' => $this->product->id,
-                'sku' => $this->product->sku,
-                'quantity' => $data['quantity'],
-                'name' => $this->product->name,
-                'price' => $convertedPrice = core()->convertPrice($price),
-                'base_price' => $price,
-                'total' => $convertedPrice * $data['quantity'],
-                'base_total' => $price * $data['quantity'],
-                'weight' => $this->product->weight ?? 0,
-                'total_weight' => ($this->product->weight ?? 0) * $data['quantity'],
+                'product_id'        => $this->product->id,
+                'sku'               => $this->product->sku,
+                'quantity'          => $data['quantity'],
+                'name'              => $this->product->name,
+                'price'             => $convertedPrice = core()->convertPrice($price),
+                'base_price'        => $price,
+                'total'             => $convertedPrice * $data['quantity'],
+                'base_total'        => $price * $data['quantity'],
+                'weight'            => $this->product->weight ?? 0,
+                'total_weight'      => ($this->product->weight ?? 0) * $data['quantity'],
                 'base_total_weight' => ($this->product->weight ?? 0) * $data['quantity'],
-                'type' => $this->product->type,
-                'additional' => $this->getAdditionalOptions($data)
+                'type'              => $this->product->type,
+                'additional'        => $this->getAdditionalOptions($data)
             ]
         ];
 

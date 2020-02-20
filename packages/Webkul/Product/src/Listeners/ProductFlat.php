@@ -59,17 +59,17 @@ class ProductFlat
      * @var object
      */
     public $attributeTypeFields = [
-        'text' => 'text',
-        'textarea' => 'text',
-        'price' => 'float',
-        'boolean' => 'boolean',
-        'select' => 'integer',
+        'text'        => 'text',
+        'textarea'    => 'text',
+        'price'       => 'float',
+        'boolean'     => 'boolean',
+        'select'      => 'integer',
         'multiselect' => 'text',
-        'datetime' => 'datetime',
-        'date' => 'date',
-        'file' => 'text',
-        'image' => 'text',
-        'checkbox' => 'text'
+        'datetime'    => 'datetime',
+        'date'        => 'date',
+        'file'        => 'text',
+        'image'       => 'text',
+        'checkbox'    => 'text'
     ];
 
     /**
@@ -169,11 +169,13 @@ class ProductFlat
 
         static $superAttributes = [];
 
-        if (! array_key_exists($product->attribute_family->id, $familyAttributes))
+        if (! array_key_exists($product->attribute_family->id, $familyAttributes)) {
             $familyAttributes[$product->attribute_family->id] = $product->attribute_family->custom_attributes;
+        }
 
-        if ($parentProduct && ! array_key_exists($parentProduct->id, $superAttributes))
+        if ($parentProduct && ! array_key_exists($parentProduct->id, $superAttributes)) {
             $superAttributes[$parentProduct->id] = $parentProduct->super_attributes()->pluck('code')->toArray();
+        }
 
         if (isset($product['channels'])) {
             foreach ($product['channels'] as $channel) {
@@ -194,27 +196,30 @@ class ProductFlat
                 foreach ($channel->locales as $locale) {
                     $productFlat = $this->productFlatRepository->findOneWhere([
                         'product_id' => $product->id,
-                        'channel' => $channel->code,
-                        'locale' => $locale->code
+                        'channel'    => $channel->code,
+                        'locale'     => $locale->code
                     ]);
 
                     if (! $productFlat) {
                         $productFlat = $this->productFlatRepository->create([
                             'product_id' => $product->id,
-                            'channel' => $channel->code,
-                            'locale' => $locale->code
+                            'channel'    => $channel->code,
+                            'locale'     => $locale->code
                         ]);
                     }
 
                     foreach ($familyAttributes[$product->attribute_family->id] as $attribute) {
-                        if ($parentProduct && ! in_array($attribute->code, array_merge($superAttributes[$parentProduct->id], ['sku', 'name', 'price', 'weight', 'status'])))
+                        if ($parentProduct && ! in_array($attribute->code, array_merge($superAttributes[$parentProduct->id], ['sku', 'name', 'price', 'weight', 'status']))) {
                             continue;
+                        }
 
-                        if (in_array($attribute->code, ['tax_category_id']))
+                        if (in_array($attribute->code, ['tax_category_id'])) {
                             continue;
+                        }
 
-                        if (! Schema::hasColumn('product_flat', $attribute->code))
+                        if (! Schema::hasColumn('product_flat', $attribute->code)) {
                             continue;
+                        }
 
                         if ($attribute->value_per_channel) {
                             if ($attribute->value_per_locale) {
@@ -274,12 +279,13 @@ class ProductFlat
                     if ($parentProduct) {
                         $parentProductFlat = $this->productFlatRepository->findOneWhere([
                                 'product_id' => $parentProduct->id,
-                                'channel' => $channel->code,
-                                'locale' => $locale->code
+                                'channel'    => $channel->code,
+                                'locale'     => $locale->code
                             ]);
 
-                        if ($parentProductFlat)
+                        if ($parentProductFlat) {
                             $productFlat->parent_id = $parentProductFlat->id;
+                        }
                     }
 
                     $productFlat->save();
@@ -290,7 +296,7 @@ class ProductFlat
                 if ($route == 'admin.catalog.products.update') {
                     $productFlat = $this->productFlatRepository->findOneWhere([
                         'product_id' => $product->id,
-                        'channel' => $channel->code,
+                        'channel'    => $channel->code,
                     ]);
 
                     if ($productFlat) {

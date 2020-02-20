@@ -35,9 +35,9 @@ class ProductInventoryRepository extends Repository
                 $qty = is_null($qty) ? 0 : $qty;
 
                 $productInventory = $this->findOneWhere([
-                        'product_id' => $product->id,
+                        'product_id'          => $product->id,
                         'inventory_source_id' => $inventorySourceId,
-                        'vendor_id' => isset($data['vendor_id']) ? $data['vendor_id'] : 0
+                        'vendor_id'           => isset($data['vendor_id']) ? $data['vendor_id'] : 0
                     ]);
 
                 if ($productInventory) {
@@ -46,10 +46,10 @@ class ProductInventoryRepository extends Repository
                     $productInventory->save();
                 } else {
                     $this->create([
-                            'qty' => $qty,
-                            'product_id' => $product->id,
+                            'qty'                 => $qty,
+                            'product_id'          => $product->id,
                             'inventory_source_id' => $inventorySourceId,
-                            'vendor_id' => isset($data['vendor_id']) ? $data['vendor_id'] : 0
+                            'vendor_id'           => isset($data['vendor_id']) ? $data['vendor_id'] : 0
                         ]);
                 }
             }

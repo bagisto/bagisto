@@ -7,6 +7,7 @@ use Webkul\Product\Models\Product;
 
 $factory->define(Product::class, function (Faker $faker) {
     $now = date("Y-m-d H:i:s");
+    
     return [
         'sku'                 => $faker->uuid,
         'created_at'          => $now,

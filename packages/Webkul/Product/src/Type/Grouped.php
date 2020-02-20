@@ -98,8 +98,9 @@ class Grouped extends AbstractType
     {
         $product = parent::update($data, $id, $attribute);
 
-        if (request()->route()->getName() != 'admin.catalog.products.massupdate')
+        if (request()->route()->getName() != 'admin.catalog.products.massupdate') {
             $this->productGroupedProductRepository->saveGroupedProducts($data, $product);
+        }
 
         return $product;
     }
@@ -137,8 +138,9 @@ class Grouped extends AbstractType
             $minPrices[] = $groupOptionProduct->associated_product->getTypeInstance()->getMinimalPrice();
         }
 
-        if (empty($minPrices))
+        if (empty($minPrices)) {
             return 0;
+        }
 
         return min($minPrices);
     }
@@ -162,14 +164,16 @@ class Grouped extends AbstractType
      */
     public function prepareForCart($data)
     {
-        if (! isset($data['qty']) || ! is_array($data['qty']))
+        if (! isset($data['qty']) || ! is_array($data['qty'])) {
             return trans('shop::app.checkout.cart.integrity.missing_options');
+        }
 
         $products = [];
 
         foreach ($data['qty'] as $productId => $qty) {
-            if (! $qty)
+            if (! $qty) {
                 continue;
+            }
 
             $product = $this->productRepository->find($productId);
 
@@ -178,14 +182,16 @@ class Grouped extends AbstractType
                     'quantity' => $qty,
                 ]);
 
-            if (is_string($cartProducts))
+            if (is_string($cartProducts)) {
                 return $cartProducts;
+            }
                 
             $products = array_merge($products, $cartProducts);
         }
 
-        if (! count($products))
+        if (! count($products)) {
             return trans('shop::app.checkout.cart.integrity.qty_missing');
+        }
 
         return $products;
     }

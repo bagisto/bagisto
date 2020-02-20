@@ -65,12 +65,12 @@ class BundleOption extends AbstractProduct
     private function getOptionItemData($option)
     {
         return [
-            'id' => $option->id,
-            'label' => $option->label,
-            'type' => $option->type,
+            'id'          => $option->id,
+            'label'       => $option->label,
+            'type'        => $option->type,
             'is_required' => $option->is_required,
-            'products' => $this->getOptionProducts($option),
-            'sort_order' => $option->sort_order
+            'products'    => $this->getOptionProducts($option),
+            'sort_order'  => $option->sort_order
         ];
     }
 
@@ -86,10 +86,10 @@ class BundleOption extends AbstractProduct
 
         foreach ($option->bundle_option_products as $index => $bundleOptionProduct) {
             $products[$bundleOptionProduct->id] = [
-                'id' => $bundleOptionProduct->id,
-                'qty' => $bundleOptionProduct->qty,
-                'price' => $bundleOptionProduct->product->getTypeInstance()->getProductPrices(),
-                'name' => $bundleOptionProduct->product->name,
+                'id'         => $bundleOptionProduct->id,
+                'qty'        => $bundleOptionProduct->qty,
+                'price'      => $bundleOptionProduct->product->getTypeInstance()->getProductPrices(),
+                'name'       => $bundleOptionProduct->product->name,
                 'product_id' => $bundleOptionProduct->product_id,
                 'is_default' => $bundleOptionProduct->is_default,
                 'sort_order' => $bundleOptionProduct->sort_order

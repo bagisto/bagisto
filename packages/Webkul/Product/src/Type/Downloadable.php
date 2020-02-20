@@ -125,11 +125,13 @@ class Downloadable extends AbstractType
      */
     public function isSaleable()
     {
-        if (! $this->product->status)
+        if (! $this->product->status) {
             return false;
+        }
 
-        if ($this->product->downloadable_links()->count())
+        if ($this->product->downloadable_links()->count()) {
             return true;
+        }
 
         return false;
     }
@@ -143,11 +145,11 @@ class Downloadable extends AbstractType
     {
         return [
             // 'downloadable_links.*.title' => 'required',
-            'downloadable_links.*.type' => 'required',
-            'downloadable_links.*.file' => 'required_if:type,==,file',
-            'downloadable_links.*.file_name' => 'required_if:type,==,file',
-            'downloadable_links.*.url' => 'required_if:type,==,url',
-            'downloadable_links.*.downloads' => 'required',
+            'downloadable_links.*.type'       => 'required',
+            'downloadable_links.*.file'       => 'required_if:type,==,file',
+            'downloadable_links.*.file_name'  => 'required_if:type,==,file',
+            'downloadable_links.*.url'        => 'required_if:type,==,url',
+            'downloadable_links.*.downloads'  => 'required',
             'downloadable_links.*.sort_order' => 'required',
         ];
     }
@@ -160,14 +162,16 @@ class Downloadable extends AbstractType
      */
     public function prepareForCart($data)
     {
-        if (! isset($data['links']) || ! count($data['links']))
+        if (! isset($data['links']) || ! count($data['links'])) {
             return trans('shop::app.checkout.cart.integrity.missing_links');
+        }
 
         $products = parent::prepareForCart($data);
 
         foreach ($this->product->downloadable_links as $link) {
-            if (! in_array($link->id, $data['links']))
+            if (! in_array($link->id, $data['links'])) {
                 continue;
+            }
 
             $products[0]['price'] += core()->convertPrice($link->price);
             $products[0]['base_price'] += $link->price;
@@ -186,8 +190,9 @@ class Downloadable extends AbstractType
      */
     public function compareOptions($options1, $options2)
     {
-        if ($this->product->id != $options2['product_id'])
+        if ($this->product->id != $options2['product_id']) {
             return false;
+        }
 
         return $options1['links'] == $options2['links'];
     }
@@ -203,14 +208,15 @@ class Downloadable extends AbstractType
         $labels = [];
 
         foreach ($this->product->downloadable_links as $link) {
-            if (in_array($link->id, $data['links']))
+            if (in_array($link->id, $data['links'])) {
                 $labels[] = $link->title;
+            }
         }
 
         $data['attributes'][0] = [
             'attribute_name' => 'Downloads',
-            'option_id' => 0,
-            'option_label' => implode(', ', $labels),
+            'option_id'      => 0,
+            'option_label'   => implode(', ', $labels),
         ];
 
         return $data;
@@ -227,14 +233,16 @@ class Downloadable extends AbstractType
         $price = $item->product->getTypeInstance()->getFinalPrice();
 
         foreach ($item->product->downloadable_links as $link) {
-            if (! in_array($link->id, $item->additional['links']))
+            if (! in_array($link->id, $item->additional['links'])) {
                 continue;
+            }
 
             $price += $link->price;
         }
 
-        if ($price == $item->base_price)
+        if ($price == $item->base_price) {
             return;
+        }
 
         $item->base_price = $price;
         $item->price = core()->convertPrice($price);

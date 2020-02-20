@@ -32,7 +32,7 @@ class Builder extends BaseBuilder
                                     : $this->model->newCollection();
 
         return $this->paginator($results, $total, $perPage, $page, [
-            'path' => Paginator::resolveCurrentPath(),
+            'path'     => Paginator::resolveCurrentPath(),
             'pageName' => $pageName,
         ]);
     }
