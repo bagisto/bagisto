@@ -785,7 +785,7 @@ class Cart
             ])->orderBy('tax_rate', 'desc')->get();
 
             $item = $this->setItemTaxToZero($item);
-            
+
             if ($taxRates->count()) {
                 foreach ($taxRates as $rate) {
                     $haveTaxRate = false;
@@ -822,11 +822,11 @@ class Cart
      * @param CartItem $item
      * @return CartItem
      */
-    protected function setItemTaxToZero($item) {
+    protected function setItemTaxToZero(CartItem $item): CartItem {
         $item->tax_percent = 0;
         $item->tax_amount = 0;
         $item->base_tax_amount = 0;
-        
+
         return $item;
     }
 
