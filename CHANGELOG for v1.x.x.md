@@ -78,6 +78,10 @@
 
 * #2500 [fixed] - Database reset fails.
 
+* #2519 [fixed] - filter price attribute throwing an exception.
+
+* #2526 [fixed] - Velocity backend route is not accessible in arabic locale.
+
 ## **v1.0.0-BETA1(5th of February 2020)** - *Release*
 
 * [feature] Updated to laravel version 6.
