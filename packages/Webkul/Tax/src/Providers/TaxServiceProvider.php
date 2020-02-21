@@ -22,5 +22,6 @@ class TaxServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->loadFactoriesFrom(__DIR__ . '/../Database/Factories');
     }
 }

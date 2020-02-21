@@ -30,7 +30,8 @@
             {{ __('shop::app.mail.invoice.summary') }}
         </div>
 
-        <div style="display: flex;flex-direction: row;margin-top: 20px;justify-content: space-between;margin-bottom: 40px;">
+        <div
+            style="display: flex;flex-direction: row;margin-top: 20px;justify-content: space-between;margin-bottom: 40px;">
             @if ($order->shipping_address)
                 <div style="line-height: 25px;">
                     <div style="font-weight: bold;font-size: 16px;color: #242424;">
@@ -103,37 +104,41 @@
                 <table style="overflow-x: auto; border-collapse: collapse;
                 border-spacing: 0;width: 100%">
                     <thead>
-                        <tr style="background-color: #f2f2f2">
-                            <th style="text-align: left;padding: 8px">{{ __('shop::app.customer.account.order.view.product-name') }}</th>
-                            <th style="text-align: left;padding: 8px">{{ __('shop::app.customer.account.order.view.price') }}</th>
-                            <th style="text-align: left;padding: 8px">{{ __('shop::app.customer.account.order.view.qty') }}</th>
-                        </tr>
+                    <tr style="background-color: #f2f2f2">
+                        <th style="text-align: left;padding: 8px">{{ __('shop::app.customer.account.order.view.product-name') }}</th>
+                        <th style="text-align: left;padding: 8px">{{ __('shop::app.customer.account.order.view.price') }}</th>
+                        <th style="text-align: left;padding: 8px">{{ __('shop::app.customer.account.order.view.qty') }}</th>
+                    </tr>
                     </thead>
 
                     <tbody>
-                        @foreach ($invoice->items as $item)
-                            <tr>
-                                <td data-value="{{ __('shop::app.customer.account.order.view.product-name') }}" style="text-align: left;padding: 8px">
-                                    {{ $item->name }}
-                                    
-                                    @if (isset($item->additional['attributes']))
-                                        <div class="item-options">
-                                            
-                                            @foreach ($item->additional['attributes'] as $attribute)
-                                                <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
-                                            @endforeach
+                    @foreach ($invoice->items as $item)
+                        <tr>
+                            <td data-value="{{ __('shop::app.customer.account.order.view.product-name') }}"
+                                style="text-align: left;padding: 8px">
+                                {{ $item->name }}
 
-                                        </div>
-                                    @endif
-                                </td>
+                                @if (isset($item->additional['attributes']))
+                                    <div class="item-options">
 
-                                <td data-value="{{ __('shop::app.customer.account.order.view.price') }}" style="text-align: left;padding: 8px">{{ core()->formatPrice($item->price, $order->order_currency_code) }}
-                                </td>
+                                        @foreach ($item->additional['attributes'] as $attribute)
+                                            <b>{{ $attribute['attribute_name'] }}
+                                                : </b>{{ $attribute['option_label'] }}</br>
+                                        @endforeach
 
-                                <td data-value="{{ __('shop::app.customer.account.order.view.qty') }}" style="text-align: left;padding: 8px">{{ $item->qty }}</td>
-                            </tr>
+                                    </div>
+                                @endif
+                            </td>
 
-                        @endforeach
+                            <td data-value="{{ __('shop::app.customer.account.order.view.price') }}"
+                                style="text-align: left;padding: 8px">{{ core()->formatPrice($item->price, $order->order_currency_code) }}
+                            </td>
+
+                            <td data-value="{{ __('shop::app.customer.account.order.view.qty') }}"
+                                style="text-align: left;padding: 8px">{{ $item->qty }}</td>
+                        </tr>
+
+                    @endforeach
                     </tbody>
                 </table>
             </div>
@@ -146,7 +151,7 @@
                     {{ core()->formatPrice($invoice->sub_total, $invoice->order_currency_code) }}
                 </span>
             </div>
-            
+
             @if ($order->shipping_address)
                 <div>
                     <span>{{ __('shop::app.mail.order.shipping-handling') }}</span>
@@ -158,8 +163,8 @@
 
             <div>
                 <span>{{ __('shop::app.mail.order.tax') }}</span>
-                <span style="float: right;">
-                    {{ core()->formatPrice($invoice->tax_amount, $invoice->order_currency_code) }}
+                <span id="taxamount" style="float: right;">
+                    {{ core()->formatPrice($invoice->tax_amount, $order->order_currency_code) }}
                 </span>
             </div>
 
@@ -180,7 +185,8 @@
             </div>
         </div>
 
-        <div style="margin-top: 65px;font-size: 16px;color: #5E5E5E;line-height: 24px;display: inline-block;width: 100%">
+        <div
+            style="margin-top: 65px;font-size: 16px;color: #5E5E5E;line-height: 24px;display: inline-block;width: 100%">
             <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
                 {!!
                     __('shop::app.mail.order.help', [
