@@ -291,7 +291,7 @@ return [
                     'tax-amount' => 'Tax Amount',
                     'discount-amount' => 'Discount Amount',
                     'grand-total' => 'Grand Total',
-                    'total-paid' => 'Total Paid',
+                    'total-paid' => 'Totaal betaald',
                     'total-refunded' => 'Total Refunded',
                     'total-due' => 'Total Due',
                     'shipping-address' => 'Shipping Address',
