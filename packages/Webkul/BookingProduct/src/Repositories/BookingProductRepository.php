@@ -23,7 +23,7 @@ class BookingProductRepository extends Repository
      *
      * @param Webkul\BookingProduct\Repositories\BookingProductDefaultSlotRepository     $bookingProductDefaultSlotRepository
      * @param Webkul\BookingProduct\Repositories\BookingProductAppointmentSlotRepository $bookingProductAppointmentSlotRepository
-     * @param Webkul\BookingProduct\Repositories\BookingProductEventSlotRepository       $bookingProductEventSlotRepository
+     * @param Webkul\BookingProduct\Repositories\BookingProductEventTicketRepository     $bookingProductEventTicketRepository
      * @param Webkul\BookingProduct\Repositories\BookingProductRentalSlotRepository      $bookingProductRentalSlotRepository
      * @param Webkul\BookingProduct\Repositories\BookingProductTableSlotRepository       $bookingProductTableSlotRepository
      * @return void
@@ -31,7 +31,7 @@ class BookingProductRepository extends Repository
     public function __construct(
         BookingProductDefaultSlotRepository $bookingProductDefaultSlotRepository,
         BookingProductAppointmentSlotRepository $bookingProductAppointmentSlotRepository,
-        BookingProductEventSlotRepository $bookingProductEventSlotRepository,
+        BookingProductEventTicketRepository $bookingProductEventTicketRepository,
         BookingProductRentalSlotRepository $bookingProductRentalSlotRepository,
         BookingProductTableSlotRepository $bookingProductTableSlotRepository,
         App $app
@@ -43,7 +43,7 @@ class BookingProductRepository extends Repository
 
         $this->typeRepositories['appointment'] = $bookingProductAppointmentSlotRepository;
 
-        $this->typeRepositories['event'] = $bookingProductEventSlotRepository;
+        $this->typeRepositories['event'] = $bookingProductEventTicketRepository;
 
         $this->typeRepositories['rental'] = $bookingProductRentalSlotRepository;
 
@@ -68,7 +68,11 @@ class BookingProductRepository extends Repository
     {
         $bookingProduct = parent::create($data);
 
-        $this->typeRepositories[$data['type']]->create(array_merge($data, ['booking_product_id' => $bookingProduct->id]));
+        if ($bookingProduct->type == 'event') {
+            $this->typeRepositories[$data['type']]->saveEventTickets($data, $bookingProduct);
+        } else {
+            $this->typeRepositories[$data['type']]->create(array_merge($data, ['booking_product_id' => $bookingProduct->id]));
+        }
 
         return $bookingProduct;
     }
@@ -81,7 +85,7 @@ class BookingProductRepository extends Repository
      */
     public function update(array $data, $id, $attribute = "id")
     {
-        parent::update($data, $id, $attribute);
+        $bookingProduct = parent::update($data, $id, $attribute);
 
         foreach ($this->typeRepositories as $type => $repository) {
             if ($type == $data['type']) {
@@ -91,16 +95,20 @@ class BookingProductRepository extends Repository
             $repository->deleteWhere(['booking_product_id' => $id]);
         }
 
-        $bookingProductTypeSlot = $this->typeRepositories[$data['type']]->findOneByField('booking_product_id', $id);
-
-        if (isset($data['slots'])) {
-            $data['slots'] = $this->formatSlots($data);
-        }
-
-        if (! $bookingProductTypeSlot) {
-            $this->typeRepositories[$data['type']]->create(array_merge($data, ['booking_product_id' => $id]));
+        if ($bookingProduct->type == 'event') {
+            $this->typeRepositories[$data['type']]->saveEventTickets($data, $bookingProduct);
         } else {
-            $this->typeRepositories[$data['type']]->update($data, $bookingProductTypeSlot->id);
+            $bookingProductTypeSlot = $this->typeRepositories[$data['type']]->findOneByField('booking_product_id', $id);
+
+            if (isset($data['slots'])) {
+                $data['slots'] = $this->formatSlots($data);
+            }
+
+            if (! $bookingProductTypeSlot) {
+                $this->typeRepositories[$data['type']]->create(array_merge($data, ['booking_product_id' => $id]));
+            } else {
+                $this->typeRepositories[$data['type']]->update($data, $bookingProductTypeSlot->id);
+            }
         }
     }
 

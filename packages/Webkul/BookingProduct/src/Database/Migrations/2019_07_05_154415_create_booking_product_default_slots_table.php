@@ -16,8 +16,6 @@ class CreateBookingProductDefaultSlotsTable extends Migration
         Schema::create('booking_product_default_slots', function (Blueprint $table) {
             $table->increments('id');
             $table->string('booking_type');
-            $table->date('available_from')->nullable();
-            $table->date('available_to')->nullable();
             $table->integer('duration')->nullable();
             $table->integer('break_time')->nullable();
             $table->json('slots')->nullable();

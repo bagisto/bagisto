@@ -18,6 +18,9 @@ class CreateBookingProductsTable extends Migration
             $table->string('type');
             $table->string('location')->nullable();
             $table->boolean('show_location')->default(0);
+            $table->boolean('available_every_week')->nullable();
+            $table->date('available_from')->nullable();
+            $table->date('available_to')->nullable();
 
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');

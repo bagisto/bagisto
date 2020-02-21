@@ -8,9 +8,9 @@ use Webkul\BookingProduct\Contracts\BookingProduct as BookingProductContract;
 
 class BookingProduct extends Model implements BookingProductContract
 {
-    protected $fillable = ['location', 'show_location', 'type', 'product_id'];
+    protected $fillable = ['location', 'show_location', 'type', 'available_every_week', 'available_from', 'available_to', 'product_id'];
 
-    protected $with = ['default_slot', 'appointment_slot', 'event_slot', 'rental_slot', 'table_slot'];
+    protected $with = ['default_slot', 'appointment_slot', 'event_tickets', 'rental_slot', 'table_slot'];
 
     /**
      * The Product Default Booking that belong to the product booking.
@@ -31,9 +31,9 @@ class BookingProduct extends Model implements BookingProductContract
     /**
      * The Product Event Booking that belong to the product booking.
      */
-    public function event_slot()
+    public function event_tickets()
     {
-        return $this->hasOne(BookingProductEventSlotProxy::modelClass());
+        return $this->hasMany(BookingProductEventTicketProxy::modelClass());
     }
 
     /**

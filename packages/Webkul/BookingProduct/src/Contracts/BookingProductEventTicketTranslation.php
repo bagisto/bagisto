@@ -2,6 +2,6 @@
 
 namespace Webkul\BookingProduct\Contracts;
 
-interface BookingProductEventSlot
+interface BookingProductEventTicketTranslation
 {
 }

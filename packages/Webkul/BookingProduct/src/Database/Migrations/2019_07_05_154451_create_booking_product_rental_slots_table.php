@@ -16,11 +16,8 @@ class CreateBookingProductRentalSlotsTable extends Migration
         Schema::create('booking_product_rental_slots', function (Blueprint $table) {
             $table->increments('id');
             $table->string('renting_type');
-            $table->decimal('daily_price', 12, 4)->default(0)->nullable();;
-            $table->decimal('hourly_price', 12, 4)->default(0)->nullable();;
-            $table->boolean('available_every_week')->nullable();
-            $table->date('available_from')->nullable();
-            $table->date('available_to')->nullable();
+            $table->decimal('daily_price', 12, 4)->default(0)->nullable();
+            $table->decimal('hourly_price', 12, 4)->default(0)->nullable();
             $table->boolean('slot_has_quantity')->nullable();
             $table->boolean('same_slot_all_days')->nullable();
             $table->json('slots')->nullable();

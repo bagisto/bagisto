@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBookingProductEventSlotsTable extends Migration
+class CreateBookingProductEventTicketsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateBookingProductEventSlotsTable extends Migration
      */
     public function up()
     {
-        Schema::create('booking_product_event_slots', function (Blueprint $table) {
+        Schema::create('booking_product_event_tickets', function (Blueprint $table) {
             $table->increments('id');
-            $table->datetime('available_from')->nullable();
-            $table->datetime('available_to')->nullable();
-            $table->json('slots')->nullable();
+            $table->decimal('price', 12, 4)->default(0)->nullable();
+            $table->integer('qty')->default(0)->nullable();
 
             $table->integer('booking_product_id')->unsigned();
             $table->foreign('booking_product_id')->references('id')->on('booking_products')->onDelete('cascade');
@@ -31,6 +30,6 @@ class CreateBookingProductEventSlotsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('booking_product_event_slots');
+        Schema::dropIfExists('booking_product_event_tickets');
     }
 }

@@ -1,4 +1,4 @@
-@inject ('bookingSlotHelper', 'Webkul\BookingProduct\Helpers\EventSlot')
+@inject ('bookingSlotHelper', 'Webkul\BookingProduct\Helpers\EventTicket')
 
 <div class="booking-info-row">
     <span class="icon bp-slot-icon"></span>

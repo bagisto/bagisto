@@ -21,9 +21,6 @@ class CreateBookingProductTableSlotsTable extends Migration
             $table->integer('duration');
             $table->integer('break_time');
             $table->integer('prevent_scheduling_before');
-            $table->boolean('available_every_week')->nullable();
-            $table->date('available_from')->nullable();
-            $table->date('available_to')->nullable();
             $table->boolean('same_slot_all_days')->nullable();
             $table->json('slots')->nullable();
 

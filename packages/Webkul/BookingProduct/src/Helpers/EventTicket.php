@@ -5,12 +5,12 @@ namespace Webkul\BookingProduct\Helpers;
 use Carbon\Carbon;
 
 /**
- * EventSlot Helper
+ * EventTicket Helper
  *
  * @author    Jitendra Singh <jitendra@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class EventSlot extends Booking
+class EventTicket extends Booking
 {
     /**
      * Returns event date
@@ -20,9 +20,9 @@ class EventSlot extends Booking
      */
     public function getEventDate($bookingProduct)
     {
-        $from = Carbon::createFromTimeString($bookingProduct->event_slot->available_from)->format('d F, Y h:i A');
+        $from = Carbon::createFromTimeString($bookingProduct->available_from)->format('d F, Y h:i A');
 
-        $to = Carbon::createFromTimeString($bookingProduct->event_slot->available_to)->format('d F, Y h:i A');
+        $to = Carbon::createFromTimeString($bookingProduct->available_to)->format('d F, Y h:i A');
 
         return $from . ' - ' . $to;
     }
@@ -35,11 +35,11 @@ class EventSlot extends Booking
      */
     public function getTickets($bookingProduct)
     {
-        if (! $bookingProduct->event_slot) {
+        if (! $bookingProduct->event_tickets()->count()) {
             return;
         }
 
-        return $this->formatPrice($bookingProduct->event_slot->slots);
+        return $this->formatPrice($bookingProduct->event_tickets);
     }
 
     /**
@@ -51,8 +51,8 @@ class EventSlot extends Booking
     public function formatPrice($tickets)
     {
         foreach ($tickets as $index => $ticket) {
-            $tickets[$index]['converted_price'] = core()->convertPrice($ticket['price']);
-            $tickets[$index]['formated_price'] = $formatedPrice = core()->currency($ticket['price']);
+            $tickets[$index]['converted_price'] = core()->convertPrice($ticket->price);
+            $tickets[$index]['formated_price'] = $formatedPrice = core()->currency($ticket->price);
             $tickets[$index]['formated_price_text'] = trans('bookingproduct::app.shop.products.per-ticket-price', ['price' => $formatedPrice]);
         }
 

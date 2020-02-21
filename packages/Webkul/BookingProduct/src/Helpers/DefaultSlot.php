@@ -32,13 +32,17 @@ class DefaultSlot extends Booking
             return [];
         }
 
-        $requestedDate = Carbon::createFromTimeString($date . " 00:00:00");
+        $requestedDate = Carbon::createFromTimeString($date . ' 00:00:00');
 
         $currentTime = Carbon::now();
 
-        $availableFrom = Carbon::createFromTimeString($bookingProductSlot->available_from . " 00:00:00");
+        $availableFrom = ! $bookingProduct->available_from && $bookingProduct->available_from
+                            ? Carbon::createFromTimeString($bookingProduct->available_from . ' 00:00:00')
+                            : clone $currentTime;
 
-        $availableTo = Carbon::createFromTimeString($bookingProductSlot->available_to . ' 23:59:59');
+        $availableTo = ! $bookingProduct->available_from && $bookingProduct->available_to
+                            ? Carbon::createFromTimeString($bookingProduct->available_to . ' 23:59:59')
+                            : Carbon::createFromTimeString('2080-01-01 00:00:00');
 
         if ($requestedDate < $currentTime
             || $requestedDate < $availableFrom
@@ -91,11 +95,17 @@ class DefaultSlot extends Booking
      */
     public function getManyBookingsforOneDaySlots($bookingProductSlot, $requestedDate)
     {
+        $bookingProduct = $bookingProductSlot->booking_product;
+
         $currentTime = Carbon::now();
 
-        $availableFrom = Carbon::createFromTimeString($bookingProductSlot->available_from . ' 00:00:00');
+        $availableFrom = ! $bookingProduct->available_from && $bookingProduct->available_from
+                            ? Carbon::createFromTimeString($bookingProduct->available_from . ' 00:00:00')
+                            : clone $currentTime;
 
-        $availableTo = Carbon::createFromTimeString($bookingProductSlot->available_to . ' 23:59:59');
+        $availableTo = ! $bookingProduct->available_from && $bookingProduct->available_to
+                            ? Carbon::createFromTimeString($bookingProduct->available_to . ' 23:59:59')
+                            : Carbon::createFromTimeString('2080-01-01 00:00:00');
 
         $timeDuration = $bookingProductSlot->slots[$requestedDate->format('w')] ?? [];
 

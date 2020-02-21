@@ -9,26 +9,6 @@
 
     <script type="text/x-template" id="event-booking-template">
         <div>
-            <div class="control-group" :class="[errors.has('booking[available_from]') ? 'has-error' : '']">
-                <label class="required">{{ __('bookingproduct::app.admin.catalog.products.event-start-date') }}</label>
-
-                <datetime>
-                    <input type="text" v-validate="'required'" name="booking[available_from]" v-model="event_booking.available_from" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.event-start-date') }}&quot;"/>
-                </datetime>
-                
-                <span class="control-error" v-if="errors.has('booking[available_from]')">@{{ errors.first('booking[available_from]') }}</span>
-            </div>
-
-            <div class="control-group" :class="[errors.has('booking[available_to]') ? 'has-error' : '']">
-                <label class="required">{{ __('bookingproduct::app.admin.catalog.products.event-end-date') }}</label>
-
-                <datetime>
-                    <input type="text" v-validate="'required'" name="booking[available_to]" v-model="event_booking.available_to" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.event-end-date') }}&quot;"/>
-                </datetime>
-                
-                <span class="control-error" v-if="errors.has('booking[available_to]')">@{{ errors.first('booking[available_to]') }}</span>
-            </div>
-
             <div class="section">
                 <div class="secton-title">
                     <span>{{ __('bookingproduct::app.admin.catalog.products.tickets') }}</span>
@@ -36,7 +16,7 @@
 
                 <div class="section-content">
 
-                    <ticket-list :tickets="event_booking.slots"></ticket-list>
+                    <ticket-list :tickets="tickets"></ticket-list>
                 
                 </div>
             </div>
@@ -60,8 +40,8 @@
                     <ticket-item
                         v-for="(ticket, index) in tickets"
                         :key="index"
+                        :index="index"
                         :ticket-item="ticket"
-                        :control-name="'booking[slots][' + index + ']'"
                         @onRemoveTicket="removeTicket($event)"
                     ></ticket-item>
                 </tbody>
@@ -76,11 +56,11 @@
     <script type="text/x-template" id="ticket-item-template">
         <tr>
             <td>
-                <div class="control-group" :class="[errors.has(controlName + '[name]') ? 'has-error' : '']">
-                    <input type="text" v-validate="'required'" :name="controlName + '[name]'" v-model="ticketItem.name" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.name') }}&quot;">
+                <div class="control-group" :class="[errors.has(controlName + '[{{$locale}}][name]') ? 'has-error' : '']">
+                    <input type="text" v-validate="'required'" :name="controlName + '[{{$locale}}][name]'" v-model="ticketItem.name" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.name') }}&quot;">
 
-                    <span class="control-error" v-if="errors.has(controlName + '[name]')">
-                        @{{ errors.first(controlName + '[name]') }}
+                    <span class="control-error" v-if="errors.has(controlName + '[{{$locale}}][name]')">
+                        @{{ errors.first(controlName + '[{!!$locale!!}][name]') }}
                     </span>
                 </div>
             </td>
@@ -106,11 +86,11 @@
             </td>
 
             <td>
-                <div class="control-group" :class="[errors.has(controlName + '[description]') ? 'has-error' : '']">
-                    <textarea type="text" v-validate="'required'" :name="controlName + '[description]'" v-model="ticketItem.description" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.description') }}&quot;"></textarea>
+                <div class="control-group" :class="[errors.has(controlName + '[{{$locale}}][description]') ? 'has-error' : '']">
+                    <textarea type="text" v-validate="'required'" :name="controlName + '[{{$locale}}][description]'" v-model="ticketItem.description" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.description') }}&quot;"></textarea>
 
-                    <span class="control-error" v-if="errors.has(controlName + '[description]')">
-                        @{{ errors.first(controlName + '[description]') }}
+                    <span class="control-error" v-if="errors.has(controlName + '[{{$locale}}][description]')">
+                        @{{ errors.first(controlName + '[{!!$locale!!}][description]') }}
                     </span>
                 </div>
             </td>
@@ -130,13 +110,7 @@
 
             data: function() {
                 return {
-                    event_booking: bookingProduct && bookingProduct.event_slot ? bookingProduct.event_slot : {
-                        available_from: '',
-
-                        available_to: '',
-
-                        slots: []
-                    }
+                    tickets: @json($bookingProduct->event_tickets()->get())
                 }
             }
         });
@@ -171,9 +145,18 @@
 
             template: '#ticket-item-template',
 
-            props: ['ticketItem', 'controlName'],
+            props: ['index', 'ticketItem'],
 
             inject: ['$validator'],
+
+            computed: {
+                controlName: function () {
+                    if (this.ticketItem.id)
+                        return 'booking[tickets][' + this.ticketItem.id + ']';
+
+                    return 'booking[tickets][ticket_' + this.index + ']';
+                }
+            },
 
             methods: {
                 removeTicket: function() {

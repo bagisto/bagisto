@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Webkul\BookingProduct\Repositories\BookingProductRepository;
 use Webkul\BookingProduct\Repositories\BookingProductDefaultSlotRepository;
 use Webkul\BookingProduct\Repositories\BookingProductAppointmentSlotRepository;
-use Webkul\BookingProduct\Repositories\BookingProductEventSlotRepository;
+use Webkul\BookingProduct\Repositories\BookingProductEventTicketRepository;
 use Webkul\BookingProduct\Repositories\BookingProductRentalSlotRepository;
 use Webkul\BookingProduct\Repositories\BookingProductTableSlotRepository;
 
@@ -36,7 +36,7 @@ class Booking
     protected $typeHelpers = [
         'default'     => DefaultSlot::class,
         'appointment' => AppointmentSlot::class,
-        'event'       => EventSlot::class,
+        'event'       => EventTicket::class,
         'rental'      => RentalSlot::class,
         'table'       => TableSlot::class,
     ];
@@ -52,7 +52,7 @@ class Booking
      * @param Webkul\BookingProduct\Repositories\BookingProductRepository                $bookingProductRepository
      * @param Webkul\BookingProduct\Repositories\BookingProductDefaultSlotRepository     $bookingProductDefaultSlotRepository
      * @param Webkul\BookingProduct\Repositories\BookingProductAppointmentSlotRepository $bookingProductAppointmentSlotRepository
-     * @param Webkul\BookingProduct\Repositories\BookingProductEventSlotRepository       $bookingProductEventSlotRepository
+     * @param Webkul\BookingProduct\Repositories\BookingProductEventTicketRepository     $bookingProductEventTicketRepository
      * @param Webkul\BookingProduct\Repositories\BookingProductRentalSlotRepository      $bookingProductRentalSlotRepository
      * @param Webkul\BookingProduct\Repositories\BookingProductTableSlotRepository       $bookingProductTableSlotRepository
      * @return void
@@ -61,7 +61,7 @@ class Booking
         BookingProductRepository $bookingProductRepository,
         BookingProductDefaultSlotRepository $bookingProductDefaultSlotRepository,
         BookingProductAppointmentSlotRepository $bookingProductAppointmentSlotRepository,
-        BookingProductEventSlotRepository $bookingProductEventSlotRepository,
+        BookingProductEventTicketRepository $bookingProductEventTicketRepository,
         BookingProductRentalSlotRepository $bookingProductRentalSlotRepository,
         BookingProductTableSlotRepository $bookingProductTableSlotRepository
     )
@@ -72,7 +72,7 @@ class Booking
 
         $this->typeRepositories['appointment'] = $bookingProductAppointmentSlotRepository;
 
-        $this->typeRepositories['event'] = $bookingProductEventSlotRepository;
+        $this->typeRepositories['event'] = $bookingProductEventTicketRepository;
 
         $this->typeRepositories['rental'] = $bookingProductRentalSlotRepository;
 
@@ -102,7 +102,7 @@ class Booking
 
         $bookingProductSlot = $this->typeRepositories[$bookingProduct->type]->findOneByField('booking_product_id', $bookingProduct->id);
 
-        $availabileDays = $this->getAvailableWeekDays($bookingProductSlot);
+        $availabileDays = $this->getAvailableWeekDays($bookingProduct);
 
         foreach ($this->daysOfWeek as $index => $isOpen) {
             $slots = [];
@@ -155,12 +155,12 @@ class Booking
     /**
      * Returns the available week days
      *
-     * @param Object $bookingProductSlot
+     * @param Object $bookingProduct
      * @return array
      */
-    public function getAvailableWeekDays($bookingProductSlot)
+    public function getAvailableWeekDays($bookingProduct)
     {
-        if ($bookingProductSlot->available_every_week) {
+        if ($bookingProduct->available_every_week) {
             return $this->daysOfWeek;
         }
 
@@ -168,9 +168,9 @@ class Booking
 
         $currentTime = Carbon::now();
 
-        $availableFrom = Carbon::createFromTimeString($bookingProductSlot->available_from . " 00:00:01");
+        $availableFrom = Carbon::createFromTimeString($bookingProduct->available_from . " 00:00:01");
 
-        $availableTo = Carbon::createFromTimeString($bookingProductSlot->available_to . " 23:59:59");
+        $availableTo = Carbon::createFromTimeString($bookingProduct->available_to . " 23:59:59");
 
         for ($i = 0; $i < 7; $i++) {
             $date = clone $currentTime;
@@ -246,13 +246,13 @@ class Booking
 
         $currentTime = Carbon::now();
 
-        $availableFrom = ! $bookingProductSlot->available_every_week
-                ? Carbon::createFromTimeString($bookingProductSlot->available_from . " 00:00:00")
-                : Carbon::createFromTimeString($currentTime->format('Y-m-d') . ' 00:00:00');
+        $availableFrom = ! $bookingProduct->available_every_week && $bookingProduct->available_from
+                        ? Carbon::createFromTimeString($bookingProduct->available_from . " 00:00:00")
+                        : Carbon::createFromTimeString($currentTime->format('Y-m-d') . ' 00:00:00');
 
-        $availableTo = ! $bookingProductSlot->available_every_week
-                ? Carbon::createFromTimeString($bookingProductSlot->available_to . ' 23:59:59')
-                : Carbon::createFromTimeString('2080-01-01 00:00:00');
+        $availableTo = ! $bookingProduct->available_every_week && $bookingProduct->available_from
+                        ? Carbon::createFromTimeString($bookingProduct->available_to . ' 23:59:59')
+                        : Carbon::createFromTimeString('2080-01-01 00:00:00');
 
         $timeDurations = $bookingProductSlot->same_slot_all_days
                 ? $bookingProductSlot->slots
@@ -328,6 +328,12 @@ class Booking
         }
 
         switch ($bookingProduct->type) {
+            case 'event':
+
+                dd($data, $bookingProduct->event_tickets);
+                
+                break;
+
             case 'rental':
                 $rentingType = $data['booking']['renting_type'] ?? $bookingProduct->rental_slot->renting_type;
 

@@ -85,6 +85,31 @@ class Booking extends Virtual
     }
 
     /**
+     * @param array $data
+     * @param $id
+     * @param string $attribute
+     * @return Product
+     */
+    public function update(array $data, $id, $attribute = "id")
+    {
+        $product = parent::update($data, $id, $attribute);
+
+        if (request()->route()->getName() != 'admin.catalog.products.massupdate') {
+            $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $id);
+
+            if ($bookingProduct) {
+                $this->bookingProductRepository->update(request('booking'), $bookingProduct->id);
+            } else {
+                $this->bookingProductRepository->create(array_merge(request('booking'), [
+                        'product_id' => $id
+                    ]));
+            }
+        }
+
+        return $product;
+    }
+
+    /**
      * Returns additional views
      *
      * @return array
@@ -118,7 +143,7 @@ class Booking extends Virtual
     {
         $bookingProduct = $this->getBookingProduct($this->product->id);
 
-        if ($bookingProduct->type != 'default') {
+        if ($bookingProduct->type != 'default' && $bookingProduct->type != 'rental') {
             unset($this->additionalViews[0]);
         }
 

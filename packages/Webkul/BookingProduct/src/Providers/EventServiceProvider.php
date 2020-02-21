@@ -17,7 +17,5 @@ class EventServiceProvider extends ServiceProvider
         Event::listen('bagisto.shop.products.view.short_description.after', function($viewRenderEventManager) {
             $viewRenderEventManager->addTemplate('bookingproduct::shop.products.view.booking');
         });
-
-        Event::listen('catalog.product.update.after', 'Webkul\BookingProduct\Listeners\Product@afterProductUpdated');
     }
 }

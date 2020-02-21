@@ -77,23 +77,23 @@
                                 @foreach ($customAttributes as $attribute)
 
                                     <?php
-                                    if ($attribute->code == 'guest_checkout' && ! core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout')) {
-                                        continue;
-                                    }
+                                        if ($attribute->code == 'guest_checkout' && ! core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout')) {
+                                            continue;
+                                        }
 
-                                    $validations = [];
+                                        $validations = [];
 
-                                    if ($attribute->is_required) {
-                                        array_push($validations, 'required');
-                                    }
+                                        if ($attribute->is_required) {
+                                            array_push($validations, 'required');
+                                        }
 
-                                    if ($attribute->type == 'price') {
-                                        array_push($validations, 'decimal');
-                                    }
+                                        if ($attribute->type == 'price') {
+                                            array_push($validations, 'decimal');
+                                        }
 
-                                    array_push($validations, $attribute->validation);
+                                        array_push($validations, $attribute->validation);
 
-                                    $validations = implode('|', array_filter($validations));
+                                        $validations = implode('|', array_filter($validations));
                                     ?>
 
                                     @if (view()->exists($typeView = 'admin::catalog.products.field-types.' . $attribute->type))

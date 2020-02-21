@@ -6,7 +6,7 @@ use Webkul\BookingProduct\Repositories\BookingProductRepository;
 use Webkul\BookingProduct\Helpers\DefaultSlot as DefaultSlotHelper;
 use Webkul\BookingProduct\Helpers\AppointmentSlot as AppointmentSlotHelper;
 use Webkul\BookingProduct\Helpers\RentalSlot as RentalSlotHelper;
-use Webkul\BookingProduct\Helpers\EventSlot as EventSlotHelper;
+use Webkul\BookingProduct\Helpers\EventTicket as EventTicketHelper;
 use Webkul\BookingProduct\Helpers\TableSlot as TableSlotHelper;
 
 /**
@@ -36,7 +36,7 @@ class BookingProductController extends Controller
      * @param Webkul\BookingProduct\Helpers\DefaultSlot                   $defaultSlotHelper
      * @param Webkul\BookingProduct\Helpers\AppointmentSlot               $appointmentSlotHelper
      * @param Webkul\BookingProduct\Helpers\RentalSlot                    $rentalSlotHelper
-     * @param Webkul\BookingProduct\Helpers\EventSlot                     $eventSlotHelper
+     * @param Webkul\BookingProduct\Helpers\EventTicket                     $EventTicketHelper
      * @param Webkul\BookingProduct\Helpers\TableSlot                     $tableSlotHelper
      * @return void
      */
@@ -45,7 +45,7 @@ class BookingProductController extends Controller
         DefaultSlotHelper $defaultSlotHelper,
         AppointmentSlotHelper $appointmentSlotHelper,
         RentalSlotHelper $rentalSlotHelper,
-        EventSlotHelper $eventSlotHelper,
+        EventTicketHelper $eventTicketHelper,
         TableSlotHelper $tableSlotHelper
     )
     {
@@ -57,7 +57,7 @@ class BookingProductController extends Controller
 
         $this->bookingHelpers['rental'] = $rentalSlotHelper;
 
-        $this->bookingHelpers['event'] = $eventSlotHelper;
+        $this->bookingHelpers['event'] = $eventTicketHelper;
 
         $this->bookingHelpers['table'] = $tableSlotHelper;
     }
