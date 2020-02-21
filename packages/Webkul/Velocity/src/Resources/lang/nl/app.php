@@ -173,17 +173,17 @@ return [
     ],
 
     'checkout' => [
-        'qty' => 'Qty',
+        'qty' => 'Aantal',
         'checkout' => 'Checkout',
         'cart' => [
             'view-cart' => 'Bekijk winkelwagen',
-            'cart-summary' => 'Cart Summary',
+            'cart-summary' => 'Winkelwagen overzicht',
         ],
-        'qty' => 'Qty',
+        'qty' => 'Aantal',
         'items' => 'Items',
-        'subtotal' => 'Subtotal',
-        'sub-total' => 'Sub Total',
-        'proceed' => 'Proceed to checkout',
+        'subtotal' => 'Subtotaal',
+        'sub-total' => 'Sub Totaal',
+        'proceed' => 'Ga naar de kassa',
     ],
 
     'customer' => [
@@ -205,7 +205,7 @@ return [
             'login' => 'Login',
             'forgot-password' => 'Forgot Password',
             'recover-password' => 'Recover Password',
-            'recover-password-text' => 'If you forgot your password, recover it by entering your email address.',
+            'recover-password-text' => 'Als u uw wachtwoord bent vergeten, kan u dit herstellen door uw e-mailadres in te voeren..',
         ]
     ],
 
