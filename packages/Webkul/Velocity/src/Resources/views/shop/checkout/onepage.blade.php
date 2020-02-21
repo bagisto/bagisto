@@ -218,9 +218,11 @@
                                             break;
 
                                         case 'shipping-form':
-                                            document.body.style.cursor = 'wait';
-                                            this.saveShipping();
-                                            break;
+                                            if (this.showShippingSection) {
+                                                document.body.style.cursor = 'wait';
+                                                this.saveShipping();
+                                                break;
+                                            }
 
                                         case 'payment-form':
                                             document.body.style.cursor = 'wait';
