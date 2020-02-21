@@ -98,6 +98,10 @@ class CartController extends Controller
      */
     public function store($id)
     {
+        if (request()->get('is_buy_now')) {
+            Event::dispatch('shop.item.buy-now', $id);
+        }
+        
         Event::dispatch('checkout.cart.item.add.before', $id);
 
         $result = Cart::addProduct($id, request()->except('_token'));

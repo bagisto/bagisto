@@ -119,7 +119,7 @@
 
                                 @if (isset($item->additional['attributes']))
                                     <div class="item-options">
-                                        
+
                                         @foreach ($item->additional['attributes'] as $attribute)
                                             <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
                                         @endforeach
@@ -157,12 +157,14 @@
                 </span>
             </div>
 
-            <div>
-                <span>{{ __('shop::app.mail.order.cancel.tax') }}</span>
-                <span style="float: right;">
-                    {{ core()->formatPrice($order->tax_amount, $order->order_currency_code) }}
+            @foreach (Webkul\Tax\Helpers\Tax::getTaxRatesWithAmount($order, false) as $taxRate => $taxAmount )
+                <div>
+                    <span id="taxrate-{{ core()->taxRateAsIdentifier($taxRate) }}">{{ __('shop::app.mail.order.cancel.tax') }} {{ $taxRate }} %</span>
+                    <span id="taxamount-{{ core()->taxRateAsIdentifier($taxRate) }}" style="float: right;">
+                    {{ core()->formatPrice($taxAmount, $order->order_currency_code) }}
                 </span>
-            </div>
+                </div>
+            @endforeach
 
             @if ($order->discount_amount > 0)
                 <div>

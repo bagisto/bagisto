@@ -15,6 +15,8 @@ printf "### start preparation ###\n"
     printf ">> truncate and migrate database\n"
     php artisan migrate:fresh --env=testing --quiet
 
+    printf ">> cleaning previous tests ###\n"
+    ${WORKPATH}/../vendor/bin/codecept clean
 printf "### finish preparation ###\n"
 
 printf "### start tests ###\n"

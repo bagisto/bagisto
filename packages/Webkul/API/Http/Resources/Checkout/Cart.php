@@ -16,6 +16,12 @@ class Cart extends JsonResource
      */
     public function toArray($request)
     {
+        $taxes = \Webkul\Tax\Helpers\Tax::getTaxRatesWithAmount($this, false);
+        $baseTaxes = \Webkul\Tax\Helpers\Tax::getTaxRatesWithAmount($this, true);
+
+        $formatedTaxes = $this->formatTaxAmounts($taxes, false);
+        $formatedBaseTaxes = $this->formatTaxAmounts($baseTaxes, true);
+
         return [
             'id' => $this->id,
             'customer_email'            => $this->customer_email,
@@ -60,6 +66,31 @@ class Cart extends JsonResource
             'shipping_address'          => new CartAddress($this->shipping_address),
             'created_at'                => $this->created_at,
             'updated_at'                => $this->updated_at,
+            'taxes'                     => json_encode($taxes, JSON_FORCE_OBJECT),
+            'formated_taxes'            => json_encode($formatedTaxes, JSON_FORCE_OBJECT),
+            'base_taxes'                => json_encode($baseTaxes, JSON_FORCE_OBJECT),
+            'formated_base_taxes'       => json_encode($formatedBaseTaxes, JSON_FORCE_OBJECT),
         ];
+    }
+
+    /**
+     * @param array $taxes
+     * @param bool  $isBase
+     *
+     * @return array
+     */
+    private function formatTaxAmounts(array $taxes, bool $isBase = false): array
+    {
+        $result = [];
+
+        foreach ($taxes as $taxRate => $taxAmount) {
+            if ($isBase === true) {
+                $result[$taxRate] = core()->formatBasePrice($taxAmount);
+            } else {
+                $result[$taxRate] = core()->formatPrice($taxAmount, $this->cart_currency_code);
+            }
+        }
+
+        return $result;
     }
 }

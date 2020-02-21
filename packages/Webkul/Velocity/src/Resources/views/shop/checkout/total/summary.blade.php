@@ -14,10 +14,12 @@
     @endif
 
     @if ($cart->base_tax_total)
-        <div class="row">
-            <span class="col-8">{{ __('shop::app.checkout.total.tax') }}</span>
-            <span class="col-4 text-right">{{ core()->currency($cart->base_tax_total) }}</span>
-        </div>
+        @foreach (Webkul\Tax\Helpers\Tax::getTaxRatesWithAmount($cart, true) as $taxRate => $baseTaxAmount )
+            <div class="row">
+                <span class="col-8" id="taxrate-{{ core()->taxRateAsIdentifier($taxRate) }}">{{ __('shop::app.checkout.total.tax') }} {{ $taxRate }} %</span>
+                <span class="col-4 text-right" id="basetaxamount-{{ core()->taxRateAsIdentifier($taxRate) }}">{{ core()->currency($baseTaxAmount) }}</span>
+            </div>
+        @endforeach
     @endif
 
     @if (

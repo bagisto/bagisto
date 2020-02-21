@@ -2,7 +2,7 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
-## **v1.0.0-BETA2(13th of February 2020)** - *Release*
+## **v1.0.0 (21st of February 2020)** - *Release*
 
 * #2377 [fixed] - Getting exception on creating a new category under any other category.
 
@@ -48,9 +48,43 @@
 
 * #2439 [fixed] - can't process for further checkout steps until all the address line filled.
 
+* #2435 [fixed] -  error composer install --no-dev.
+
 * #2440 [fixed] - Advertisement Three Images is not working.
 
 * #2449 [fixed] - error clicking empty cart.
+
+* #2458 [fixed] - Payment method is not updating on checkout page.
+
+* #2459 [fixed] - shipping address field warning for guest customer not translated.
+
+* #2463 [fixed] - Tax rate is not update on same product.
+
+* #2468 [fixed] - Guest user is able to checkout if guest checkout is disabled.
+
+* #2469 [fixed] - Displaying wrong amount for bundle product in cart.
+
+* #2479 [fixed] - showing total review in recent view product list.
+
+* #2480 [fixed] - Exception is thrown by mini cart when catalog rule is applied on configurable product.
+
+* #2488 [fixed] - ErrorException When Editing product in different language.
+
+* #2490 [fixed] - missing zip code & country field in checkout page.
+
+* #2491 [fixed] - Exception on Create/Edit bundle product.
+
+* #2494 [fixed] - Product total inventory for all locale is showing wrong.
+
+* #2500 [fixed] - Database reset fails.
+
+* #2519 [fixed] - filter price attribute throwing an exception.
+
+* #2526 [fixed] - Velocity backend route is not accessible in arabic locale.
+
+* #2533 [fixed] - Shipment email notification is not sending to customer.
+
+* #2538 [fixed] - unable to place order for virtual & downloadable product.
 
 ## **v1.0.0-BETA1(5th of February 2020)** - *Release*
 

@@ -239,8 +239,8 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
             'avgRating'        => $avgRatings,
             'firstReviewText'  => trans('velocity::app.products.be-first-review'),
             'addToCartHtml'    => view('shop::products.add-to-cart', [
-                'product'           => $product,
-                'addWishlistClass'  => !(isset($list) && $list) ? '' : '',
+                'product'          => $product,
+                'addWishlistClass' => !(isset($list) && $list) ? '' : '',
                 'addToCartBtnClass' => !(isset($list) && $list) ? $addToCartBtnClass ?? '' : ''
             ])->render(),
         ];

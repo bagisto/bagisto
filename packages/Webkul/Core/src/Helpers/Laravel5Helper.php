@@ -73,6 +73,7 @@ class Laravel5Helper extends Laravel5
      * @param array $productStates
      *
      * @return \Webkul\Product\Models\Product
+     * @part ORM
      */
     public function haveProduct(int $productType, array $configs = [], array $productStates = []): Product
     {

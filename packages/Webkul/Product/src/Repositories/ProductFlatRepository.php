@@ -74,7 +74,7 @@ class ProductFlatRepository extends Repository
     public function getFilterableAttributes($category, $products) {
         $filterAttributes = [];
 
-        if (count($category->filterableAttributes) > 0 && count($products)) {
+        if (count($category->filterableAttributes) > 0 ) {
             $filterAttributes = $category->filterableAttributes;
         } else {
             $categoryProductAttributes = $this->getCategoryProductAttribute($category->id);

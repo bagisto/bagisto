@@ -140,7 +140,12 @@
 
         .filter-row-one .dropdown-filters {
             right: unset;
+            position: static !important;
             left: 25px;
+
+            .per-page-label {
+                position: static !important;
+            }
         }
     }
 
