@@ -8,7 +8,7 @@ return [
     'layouts' => [
         'my-account' => 'Mijn account',
         'profile' => 'Profiel',
-        'address' => 'Address',
+        'address' => 'Mijn adressen',
         'reviews' => 'Reviews',
         'wishlist' => 'Verlanglijst',
         'orders' => 'Bestellingen',
@@ -170,9 +170,9 @@ return [
 
             'profile' => [
                 'index' => [
-                    'page-title' => 'Profile',
-                    'title' => 'Profile',
-                    'edit' => 'Edit',
+                    'page-title' => 'Profiel',
+                    'title' => 'Profiel',
+                    'edit' => 'Wijzig',
                 ],
 
                 'edit-success' => 'Profile updated successfully.',
@@ -203,7 +203,7 @@ return [
                 'index' => [
                     'page-title' => 'Address',
                     'title' => 'Address',
-                    'add' => 'Add Address',
+                    'add' => 'Adres toevoegen',
                     'edit' => 'Edit',
                     'empty' => 'You do not have any saved addresses here, please try to create it by clicking the link below',
                     'create' => 'Create Address',
@@ -218,22 +218,22 @@ return [
 
                 'create' => [
                     'page-title' => 'Add Address Form',
-                    'company_name' => 'Company name',
-                    'first_name' => 'First name',
-                    'last_name' => 'Last name',
-                    'vat_id' => 'Vat id',
-                    'vat_help_note' => '[Note: Use Country Code with VAT Id. Eg. INV01234567891]',
-                    'title' => 'Add Address',
-                    'street-address' => 'Street Address',
-                    'country' => 'Country',
-                    'state' => 'State',
-                    'select-state' => 'Select a region, state or province',
-                    'city' => 'City',
-                    'postcode' => 'Postal Code',
+                    'company_name' => 'Bedrijfsnaam',
+                    'first_name' => 'Voornaam',
+                    'last_name' => 'Naam',
+                    'vat_id' => 'BTW nummer',
+                    'vat_help_note' => '[bv. BE01234567891]',
+                    'title' => 'Adres toevoegen',
+                    'street-address' => 'Adres',
+                    'country' => 'Land',
+                    'state' => 'Staat / Provincie',
+                    'select-state' => 'Selecteer een regio, staat of provincie',
+                    'city' => 'Gemeente',
+                    'postcode' => 'Postcode',
                     'phone' => 'Telefoonnummer',
-                    'submit' => 'Save Address',
-                    'success' => 'Address have been successfully added.',
-                    'error' => 'Address cannot be added.'
+                    'submit' => 'Adres bewaren',
+                    'success' => 'Adres is succesvol toegevoegd.',
+                    'error' => 'Adres kan niet worden toegevoegd.'
                 ],
 
                 'edit' => [
@@ -256,9 +256,9 @@ return [
 
             'order' => [
                 'index' => [
-                    'page-title' => 'Orders',
-                    'title' => 'Orders',
-                    'order_id' => 'Order ID',
+                    'page-title' => 'Bestellingen',
+                    'title' => 'Bestellingen',
+                    'order_id' => 'Bestelnummer',
                     'date' => 'Date',
                     'status' => 'Status',
                     'total' => 'Total',
@@ -315,9 +315,9 @@ return [
             ],
 
             'wishlist' => [
-                'page-title' => 'Wishlist',
-                'title' => 'Wishlist',
-                'deleteall' => 'Delete All',
+                'page-title' => 'Verlanglijst',
+                'title' => 'Verlanglijst',
+                'deleteall' => 'Alles verwijderen',
                 'moveall' => 'Move All Products To Cart',
                 'move-to-cart' => 'Move To Cart',
                 'error' => 'Cannot add product to wishlist due to unknown problems, please checkback later',
@@ -336,17 +336,17 @@ return [
             ],
 
             'downloadable_products' => [
-                'title' => 'Downloadable Products',
-                'order-id' => 'Order Id',
-                'date' => 'Date',
-                'name' => 'Title',
+                'title' => 'Downloadbare producten',
+                'order-id' => 'Bestelnummer',
+                'date' => 'Datum',
+                'name' => 'Titel',
                 'status' => 'Status',
                 'pending' => 'Pending',
-                'available' => 'Available',
+                'available' => 'Beschikbaar',
                 'expired' => 'Expired',
-                'remaining-downloads' => 'Remaining Downloads',
-                'unlimited' => 'Unlimited',
-                'download-error' => 'Download link has been expired.'
+                'remaining-downloads' => 'Resterende downloads',
+                'unlimited' => 'Onbeperkt',
+                'download-error' => 'Downloadlink is verlopen.'
             ],
 
             'review' => [

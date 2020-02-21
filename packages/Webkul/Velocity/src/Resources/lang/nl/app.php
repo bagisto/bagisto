@@ -246,14 +246,14 @@ return [
             'view' => 'View',
             'filter' => 'Filter',
             'orders' => 'Orders',
-            'update' => 'Update',
+            'update' => 'Bijwerken',
             'reviews' => 'Reviews',
             'addresses' => 'Adressen',
             'top-brands' => 'Top merken',
             'new-password' => 'Nieuw wachtwoord',
             'downloadables' => 'Downloadable Products',
-            'confirm-new-password' => 'Confirm new password',
-            'enter-current-password' => 'Enter your current password',
+            'confirm-new-password' => 'Bevestig uw nieuw wachtwoord',
+            'enter-current-password' => 'Huidig wachtwoord',
 
             'alert' => [
                 'info' => 'Info',
