@@ -2,7 +2,7 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
-## **v1.0.0-BETA2(20th of February 2020)** - *Release*
+## **v1.0.0 (21st of February 2020)** - *Release*
 
 * #2377 [fixed] - Getting exception on creating a new category under any other category.
 
