@@ -239,7 +239,7 @@ return [
             'password' => 'Wachtwoord',
             'confirm-password' => 'Bevestig wachtwoord',
             'back-link-title' => 'Terug naar inloggen',
-            'submit-btn-title' => 'Verzend wachtwoord Reset e-mail'
+            'submit-btn-title' => 'Wachtwoord herstellen'
         ],
 
         'reset-password' => [
@@ -261,7 +261,7 @@ return [
             'description' => 'Omschrijving',
             'access-control' => 'Toegangscontrole',
             'permissions' => 'Rechten',
-            'custom' => 'Custom',
+            'custom' => 'Aangepast',
             'all' => 'Alles'
         ],
 
@@ -369,9 +369,9 @@ return [
         'invoices' => [
             'title' => 'Facturen',
             'id' => 'Id',
-            'invoice-id' => 'Invoice Id',
+            'invoice-id' => 'Factuurnummer',
             'date' => 'Factuur datum',
-            'order-id' => 'Order Id',
+            'order-id' => 'Bestelnummer',
             'customer-name' => 'Klantnaam',
             'status' => 'Status',
             'amount' => 'Bedrag',

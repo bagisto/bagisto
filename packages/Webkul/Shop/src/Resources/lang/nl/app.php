@@ -363,7 +363,7 @@ return [
     ],
 
     'products' => [
-        'layered-nav-title' => 'Shop By',
+        'layered-nav-title' => 'Shop per',
         'price-label' => 'As low as',
         'remove-filter-link-title' => 'Clear All',
         'sort-by' => 'Sort By',

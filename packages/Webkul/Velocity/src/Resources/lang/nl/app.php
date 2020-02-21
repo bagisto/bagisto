@@ -164,11 +164,11 @@ return [
 
     'menu-navbar' => [
         'text-more' => 'More',
-        'text-category' => 'Shop by Category',
+        'text-category' => 'Winkel per categorie',
     ],
 
     'minicart' => [
-        'cart' => 'Cart',
+        'cart' => 'Winkelwagen',
         'view-cart' => 'Bekijk winkelwagen',
     ],
 
