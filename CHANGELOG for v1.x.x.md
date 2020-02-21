@@ -82,6 +82,8 @@
 
 * #2526 [fixed] - Velocity backend route is not accessible in arabic locale.
 
+* #2533 [fixed] - Shipment email notification is not sending to customer
+
 ## **v1.0.0-BETA1(5th of February 2020)** - *Release*
 
 * [feature] Updated to laravel version 6.
