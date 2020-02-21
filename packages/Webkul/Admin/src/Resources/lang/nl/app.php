@@ -239,7 +239,7 @@ return [
             'password' => 'Wachtwoord',
             'confirm-password' => 'Bevestig wachtwoord',
             'back-link-title' => 'Terug naar inloggen',
-            'submit-btn-title' => 'Send Password Reset Email'
+            'submit-btn-title' => 'Verzend wachtwoord Reset e-mail'
         ],
 
         'reset-password' => [
