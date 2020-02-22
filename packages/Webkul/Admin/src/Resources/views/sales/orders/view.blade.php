@@ -266,7 +266,7 @@
 
                                                         @if (isset($item->additional['attributes']))
                                                             <div class="item-options">
-                                                                
+
                                                                 @foreach ($item->additional['attributes'] as $attribute)
                                                                     <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
                                                                 @endforeach
@@ -344,11 +344,14 @@
                                         </tr>
                                     @endif
 
-                                    <tr class="border">
-                                        <td>{{ __('admin::app.sales.orders.tax') }}</td>
+                                    @php ($taxRates = Webkul\Tax\Helpers\Tax::getTaxRatesWithAmount($order, true))
+                                    @foreach ($taxRates as $taxRate => $baseTaxAmount)
+                                    <tr {{ $loop->last ? 'class=border' : ''}}>
+                                        <td id="taxrate-{{ core()->taxRateAsIdentifier($taxRate) }}">{{ __('admin::app.sales.orders.tax') }} {{ $taxRate }} %</td>
                                         <td>-</td>
-                                        <td>{{ core()->formatBasePrice($order->base_tax_amount) }}</td>
+                                        <td id="basetaxamount-{{ core()->taxRateAsIdentifier($taxRate) }}">{{ core()->formatBasePrice($baseTaxAmount) }}</td>
                                     </tr>
+                                    @endforeach
 
                                     <tr class="bold">
                                         <td>{{ __('admin::app.sales.orders.grand-total') }}</td>

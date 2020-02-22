@@ -108,6 +108,9 @@ return [
             'footer-middle-content' => 'Footer Middle Content',
             'advertisement-four' => 'Advertisement Four Images',
             'advertisement-three' => 'Advertisement Three Images',
+            'images' => 'Images',
+            'general' => 'General',
+            'add-image-btn-title' => 'Add Image'
         ],
         'category' => [
             'save-btn-title' => 'Save Menu',

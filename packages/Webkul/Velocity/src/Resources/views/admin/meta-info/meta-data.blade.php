@@ -30,7 +30,7 @@
                 </div>
             </div>
 
-            <accordian :title="'{{ __('admin::app.catalog.attributes.general') }}'" :active="true">
+            <accordian :title="'{{ __('velocity::app.admin.meta-data.general') }}'" :active="true">
                 <div slot="body">
                     <div class="control-group">
                         <label>{{ __('velocity::app.admin.meta-data.activate-slider') }}</label>
@@ -106,19 +106,19 @@
                 </div>
             </accordian>
 
-            <accordian :title="'{{ __('admin::app.catalog.products.images') }}'" :active="false">
+            <accordian :title="'{{ __('velocity::app.admin.meta-data.images') }}'" :active="false">
                 <div slot="body">
                     <div class="control-group">
                         <label>{{ __('velocity::app.admin.meta-data.advertisement-four') }}</label>
 
                         @if(! isset($metaData->advertisement[4]))
                             <image-wrapper
-                                :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'"
+                                :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'"
                                 input-name="images[4]">
                             </image-wrapper>
                         @else
                             <image-wrapper
-                                :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'"
+                                :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'"
                                 input-name="images[4]" :images='@json($metaData->advertisement[4])'>
                             </image-wrapper>
                         @endif
@@ -128,12 +128,12 @@
                         <label>{{ __('velocity::app.admin.meta-data.advertisement-three') }}</label>
                         @if(! isset($metaData->advertisement[3]))
                             <image-wrapper
-                                :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'"
+                                :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'"
                                 input-name="images[3]">
                             </image-wrapper>
                         @else
                             <image-wrapper
-                                :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'"
+                                :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'"
                                 input-name="images[3]" :images='@json($metaData->advertisement[3])'>
                             </image-wrapper>
                         @endif
@@ -144,33 +144,16 @@
 
                         @if(! isset($metaData->advertisement[2]))
                             <image-wrapper
-                                :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'"
+                                :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'"
                                 input-name="images[2]">
                             </image-wrapper>
                         @else
                             <image-wrapper
-                                :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'"
+                                :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'"
                                 input-name="images[2]" :images='@json($metaData->advertisement[2])'>
                             </image-wrapper>
                         @endif
                     </div>
-
-                    {{-- <div class="control-group">
-                        <label>{{ __('velocity::app.admin.meta-data.advertisement-one') }}</label>
-
-                        <image-wrapper
-                            :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'"
-                            input-name="images[1]">
-                        </image-wrapper>
-                    </div> --}}
-
-                    {{-- <div class="control-group product-view-image">
-                        <label>{{ __('velocity::app.admin.meta-data.product-view-image') }}</label>
-
-                        <image-wrapper
-                            input-name="product_view_images">
-                        </image-wrapper>
-                    </div> --}}
                 </div>
             </accordian>
 

@@ -103,6 +103,10 @@ class OnepageController extends Controller
     {
         $data = request()->all();
 
+        if (! auth()->guard('customer')->check() && ! Cart::getCart()->hasGuestCheckoutItems()) {
+            return response()->json(['redirect_url' => route('customer.session.index')], 403);
+        }
+
         $data['billing']['address1'] = implode(PHP_EOL, array_filter($data['billing']['address1']));
         $data['shipping']['address1'] = implode(PHP_EOL, array_filter($data['shipping']['address1']));
 

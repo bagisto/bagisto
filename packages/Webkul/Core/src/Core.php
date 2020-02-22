@@ -969,4 +969,15 @@ class Core
 
         return $instance[$className] = app($className);
     }
+
+    /**
+     * Returns a string as selector part for identifying elements in views
+     * @param float $taxRate
+     *
+     * @return string
+     */
+    public static function taxRateAsIdentifier(float $taxRate): string
+    {
+        return str_replace('.', '_', (string)$taxRate);
+    }
 }
