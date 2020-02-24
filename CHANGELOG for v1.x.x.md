@@ -2,7 +2,7 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
-## **v1.0.0 (21st of February 2020)** - *Release*
+## **v1.0.0 (24th of February 2020)** - *Release*
 
 * #2377 [fixed] - Getting exception on creating a new category under any other category.
 
@@ -54,6 +54,8 @@
 
 * #2449 [fixed] - error clicking empty cart.
 
+* #2451 [fixed] - Invoice totals don't tally when using non-base currency.
+
 * #2458 [fixed] - Payment method is not updating on checkout page.
 
 * #2459 [fixed] - shipping address field warning for guest customer not translated.
@@ -82,9 +84,15 @@
 
 * #2526 [fixed] - Velocity backend route is not accessible in arabic locale.
 
+* #2527 [fixed] - Order datagrid is using static text.
+
+* #2529 [fixed] - [Webkul\Admin] Customer firstname & lastname are using wrong translations
+
 * #2533 [fixed] - Shipment email notification is not sending to customer.
 
 * #2538 [fixed] - unable to place order for virtual & downloadable product.
+
+* #2540 [fixed] - add to cart and whitelist button overlap.
 
 ## **v1.0.0-BETA1(5th of February 2020)** - *Release*
 

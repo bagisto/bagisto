@@ -68,13 +68,13 @@
                                                     <td data-value="{{ __('shop::app.customer.account.order.view.SKU') }}">
                                                         {{ $item->getTypeInstance()->getOrderedItem($item)->sku }}
                                                     </td>
-                                                    
+
                                                     <td data-value="{{ __('shop::app.customer.account.order.view.product-name') }}">
                                                         {{ $item->name }}
-                                    
+
                                                         @if (isset($item->additional['attributes']))
                                                             <div class="item-options">
-                                                                
+
                                                                 @foreach ($item->additional['attributes'] as $attribute)
                                                                     <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
                                                                 @endforeach
