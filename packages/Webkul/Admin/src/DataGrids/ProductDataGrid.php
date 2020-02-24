@@ -50,6 +50,8 @@ class ProductDataGrid extends DataGrid
 
         if ($this->locale !== 'all') {
             $queryBuilder->where('locale', $this->locale);
+        } else {
+            $queryBuilder->whereNotNull('product_flat.name');
         }
 
         if ($this->channel !== 'all') {
