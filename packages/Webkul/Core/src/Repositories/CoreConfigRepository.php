@@ -127,7 +127,7 @@ class CoreConfigRepository extends Repository
                 
                 if ($dim > 1) {
                     $this->recuressiveArray($formValue, $value);
-                } else if ($dim == 1) {
+                } elseif ($dim == 1) {
                     $data[$value] = $formValue;
                 }
             }

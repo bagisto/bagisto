@@ -28,7 +28,7 @@ class TranslatableModel extends Model
             if (Locale::where('code', '=', end($chunks))->first()) {
                 return true;
             }
-        } else if (Locale::where('code', '=', $key)->first()) {
+        } elseif (Locale::where('code', '=', $key)->first()) {
             return true;
         }
 

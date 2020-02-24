@@ -11,7 +11,7 @@ class Booking extends Model implements BookingContract
 {
     public $timestamps = false;
 
-    protected $fillable = ['slot_information', 'order_item_id', 'order_id'];
+    protected $fillable = ['from', 'to', 'order_item_id', 'order_id'];
 
     /**
      * Get the order record associated with the order item.

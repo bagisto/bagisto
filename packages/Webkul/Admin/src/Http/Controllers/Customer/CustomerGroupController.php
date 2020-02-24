@@ -130,7 +130,7 @@ class CustomerGroupController extends Controller
 
         if ($customerGroup->is_user_defined == 0) {
             session()->flash('warning', trans('admin::app.customers.customers.group-default'));
-        } else if (count($customerGroup->customer) > 0) {
+        } elseif (count($customerGroup->customer) > 0) {
             session()->flash('warning', trans('admin::app.response.customer-associate', ['name' => 'Customer Group']));
         } else {
             try {

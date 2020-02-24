@@ -68,17 +68,17 @@ class OrderDataGrid extends DataGrid
             'wrapper'    => function ($value) {
                 if ($value->status == 'processing') {
                     return '<span class="badge badge-md badge-success">Processing</span>';
-                } else if ($value->status == 'completed') {
+                } elseif ($value->status == 'completed') {
                     return '<span class="badge badge-md badge-success">Completed</span>';
-                } else if ($value->status == "canceled") {
+                } elseif ($value->status == "canceled") {
                     return '<span class="badge badge-md badge-danger">Canceled</span>';
-                } else if ($value->status == "closed") {
+                } elseif ($value->status == "closed") {
                     return '<span class="badge badge-md badge-info">Closed</span>';
-                } else if ($value->status == "pending") {
+                } elseif ($value->status == "pending") {
                     return '<span class="badge badge-md badge-warning">Pending</span>';
-                } else if ($value->status == "pending_payment") {
+                } elseif ($value->status == "pending_payment") {
                     return '<span class="badge badge-md badge-warning">Pending Payment</span>';
-                } else if ($value->status == "fraud") {
+                } elseif ($value->status == "fraud") {
                     return '<span class="badge badge-md badge-danger">Fraud</span>';
                 }
             },

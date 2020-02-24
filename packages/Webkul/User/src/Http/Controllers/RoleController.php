@@ -134,7 +134,7 @@ class RoleController extends Controller
 
         if ($role->admins->count() >= 1) {
             session()->flash('error', trans('admin::app.response.being-used', ['name' => 'Role', 'source' => 'Admin User']));
-        } else if($this->roleRepository->count() == 1) {
+        } elseif($this->roleRepository->count() == 1) {
             session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Role']));
         } else {
             try {

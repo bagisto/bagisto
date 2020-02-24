@@ -166,7 +166,10 @@ class InvoiceRepository extends Repository
                                 'additional'           => $childOrderItem->additional
                             ]);
 
-                        if ($childOrderItem->product && ! $childOrderItem->getTypeInstance()->isStockable() && $childOrderItem->getTypeInstance()->showQuantityBox()) {
+                        if ($childOrderItem->product
+                            && ! $childOrderItem->getTypeInstance()->isStockable()
+                            && $childOrderItem->getTypeInstance()->showQuantityBox()) {
+
                             $this->invoiceItemRepository->updateProductInventory([
                                     'invoice'   => $invoice,
                                     'product'   => $childOrderItem->product,
@@ -177,7 +180,10 @@ class InvoiceRepository extends Repository
 
                         $this->orderItemRepository->collectTotals($childOrderItem);
                     }
-                } else if ($orderItem->product && ! $orderItem->getTypeInstance()->isStockable() && $orderItem->getTypeInstance()->showQuantityBox()) {
+                } elseif ($orderItem->product
+                    && ! $orderItem->getTypeInstance()->isStockable()
+                    && $orderItem->getTypeInstance()->showQuantityBox()) {
+                        
                     $this->invoiceItemRepository->updateProductInventory([
                             'invoice'   => $invoice,
                             'product'   => $orderItem->product,

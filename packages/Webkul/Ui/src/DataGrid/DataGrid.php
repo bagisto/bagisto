@@ -252,7 +252,7 @@ abstract class DataGrid
                 if ( ! is_array($value)) {
                     unset($parsedUrl[$key]);
                 }
-            } else if ( ! is_array($value)) {
+            } elseif ( ! is_array($value)) {
                 unset($parsedUrl[$key]);
             }
         }
@@ -312,7 +312,7 @@ abstract class DataGrid
                     $columnName[1],
                     array_values($info)[0]
                 );
-            } else if ($key == "search") {
+            } elseif ($key == "search") {
                 $count_keys = count(array_keys($info));
 
                 if ($count_keys > 1) {
@@ -326,7 +326,7 @@ abstract class DataGrid
                             if ($column['searchable'] == true) {
                                 if($this->enableFilterMap && isset($this->filterMap[$column['index']])) {
                                     $collection->orWhere($this->filterMap[$column['index']], 'like', '%'.$info['all'].'%');
-                                } else if($this->enableFilterMap && !isset($this->filterMap[$column['index']])) {
+                                } elseif($this->enableFilterMap && !isset($this->filterMap[$column['index']])) {
                                     $collection->orWhere($column['index'], 'like', '%'.$info['all'].'%');
                                 }else {
                                     $collection->orWhere($column['index'], 'like', '%'.$info['all'].'%');
@@ -350,7 +350,7 @@ abstract class DataGrid
                                 $this->operators[$condition],
                                 '%'.$filter_value.'%'
                             );
-                        } else if ($this->enableFilterMap && ! isset($this->filterMap[$columnName])) {
+                        } elseif ($this->enableFilterMap && ! isset($this->filterMap[$columnName])) {
                             $collection->where(
                                 $columnName,
                                 $this->operators[$condition],
@@ -373,7 +373,7 @@ abstract class DataGrid
                                     $this->operators[$condition],
                                     $filter_value
                                 );
-                            } else if ($this->enableFilterMap && ! isset($this->filterMap[$columnName])) {
+                            } elseif ($this->enableFilterMap && ! isset($this->filterMap[$columnName])) {
                                 $collection->whereDate(
                                     $columnName,
                                     $this->operators[$condition],
@@ -393,7 +393,7 @@ abstract class DataGrid
                                     $this->operators[$condition],
                                     $filter_value
                                 );
-                            } else if($this->enableFilterMap && !isset($this->filterMap[$columnName])) {
+                            } elseif($this->enableFilterMap && !isset($this->filterMap[$columnName])) {
                                 $collection->where(
                                     $columnName,
                                     $this->operators[$condition],

@@ -116,15 +116,15 @@
                             count = count + moveDown;
 
                             $('.navbar-left').css("top", count + "px");
-                        } else if ((event.keyCode == 40) && count >= -differenceInHeight) {
+                        } elseif ((event.keyCode == 40) && count >= -differenceInHeight) {
                             count = count + moveUp;
 
                             $('.navbar-left').css("top", count + "px");
-                        } else if ((event.keyCode == 33) && countKeyUp <= 0) {
+                        } elseif ((event.keyCode == 33) && countKeyUp <= 0) {
                             countKeyUp = countKeyUp + pageDown;
 
                             $('.navbar-left').css("top", countKeyUp + "px");
-                        } else if ((event.keyCode == 34) && countKeyUp >= -differenceInHeight) {
+                        } elseif ((event.keyCode == 34) && countKeyUp >= -differenceInHeight) {
                             countKeyUp = countKeyUp + pageUp;
 
                             $('.navbar-left').css("top", countKeyUp + "px");

@@ -563,7 +563,7 @@ class Core
 
         if (! $this->is_empty_date($dateFrom) && $channelTimeStamp < $fromTimeStamp) {
             $result = false;
-        } else if (! $this->is_empty_date($dateTo) && $channelTimeStamp > $toTimeStamp) {
+        } elseif (! $this->is_empty_date($dateTo) && $channelTimeStamp > $toTimeStamp) {
             $result = false;
         } else {
             $result = true;
@@ -802,7 +802,7 @@ class Core
 
                 $timeIntervals[] = ['start' => $start, 'end' => $end, 'formatedDate' => $date->format('M')];
             }
-        } else if ($totalWeeks > 6) {
+        } elseif ($totalWeeks > 6) {
             for ($i = 0; $i < $totalWeeks; $i++) {
                 $date = clone $startDate;
                 $date->addWeeks($i);

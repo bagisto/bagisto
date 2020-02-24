@@ -247,28 +247,28 @@
                                     this.numberConditionSelect = false;
 
                                     this.nullify();
-                                } else if (this.type == 'datetime') {
+                                } elseif (this.type == 'datetime') {
                                     this.datetimeConditionSelect = true;
                                     this.stringConditionSelect = false;
                                     this.booleanConditionSelect = false;
                                     this.numberConditionSelect = false;
 
                                     this.nullify();
-                                } else if (this.type == 'boolean') {
+                                } elseif (this.type == 'boolean') {
                                     this.booleanConditionSelect = true;
                                     this.datetimeConditionSelect = false;
                                     this.stringConditionSelect = false;
                                     this.numberConditionSelect = false;
 
                                     this.nullify();
-                                } else if (this.type == 'number') {
+                                } elseif (this.type == 'number') {
                                     this.numberConditionSelect = true;
                                     this.booleanConditionSelect = false;
                                     this.datetimeConditionSelect = false;
                                     this.stringConditionSelect = false;
 
                                     this.nullify();
-                                } else if (this.type == 'price') {
+                                } elseif (this.type == 'price') {
                                     this.numberConditionSelect = true;
                                     this.booleanConditionSelect = false;
                                     this.datetimeConditionSelect = false;
@@ -298,7 +298,7 @@
 
                         if (this.type == 'string') {
                             this.formURL(this.columnOrAlias, this.stringCondition, encodeURIComponent(this.stringValue), label)
-                        } else if (this.type == 'number') {
+                        } elseif (this.type == 'number') {
                             indexConditions = true;
 
                             if (this.filterIndex == this.columnOrAlias && (this.numberValue == 0 || this.numberValue < 0)) {
@@ -309,11 +309,11 @@
 
                             if(indexConditions)
                                 this.formURL(this.columnOrAlias, this.numberCondition, this.numberValue, label);
-                        } else if (this.type == 'boolean') {
+                        } elseif (this.type == 'boolean') {
                             this.formURL(this.columnOrAlias, this.booleanCondition, this.booleanValue, label);
-                        } else if (this.type == 'datetime') {
+                        } elseif (this.type == 'datetime') {
                             this.formURL(this.columnOrAlias, this.datetimeCondition, this.datetimeValue, label);
-                        } else if (this.type == 'price') {
+                        } elseif (this.type == 'price') {
                             this.formURL(this.columnOrAlias, this.numberCondition, this.numberValue, label);
                         }
                     },
@@ -412,7 +412,7 @@
                                                 filterRepeated = 1;
 
                                                 return false;
-                                            } else if(this.filters[j].cond == condition && this.filters[j].val != response) {
+                                            } elseif(this.filters[j].cond == condition && this.filters[j].val != response) {
                                                 filterRepeated = 1;
 
                                                 this.filters[j].val = response;
@@ -542,7 +542,7 @@
                             if (this.filters[i].column == 'status') {
                                 if (this.filters[i].val.includes("True")) {
                                     this.filters[i].val = 1;
-                                } else if (this.filters[i].val.includes("False")) {
+                                } elseif (this.filters[i].val.includes("False")) {
                                     this.filters[i].val = 0;
                                 }
                             }
@@ -594,7 +594,7 @@
                                         obj.label = this.columns[colIndex].label;
                                     }
                                 }
-                            } else if (col == "search") {
+                            } elseif (col == "search") {
                                 obj.label = 'Search';
                             } else {
                                 obj.label = '';

@@ -506,7 +506,7 @@
                         if (! this.idNullOption) {
                             this.addOptionRow(true);
                         }
-                    } else if(this.idNullOption !== null && typeof this.idNullOption !== 'undefined') {
+                    } elseif(this.idNullOption !== null && typeof this.idNullOption !== 'undefined') {
                         const row = this.optionRows.find(optionRow => optionRow.id === this.idNullOption);
                         this.removeRow(row);
                     }

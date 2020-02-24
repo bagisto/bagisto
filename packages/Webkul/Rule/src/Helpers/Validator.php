@@ -72,7 +72,7 @@ class Validator
                     }
 
                     return $cart->shipping_address->{$attributeCode};
-                } else if ($attributeCode == 'shipping_method') {
+                } elseif ($attributeCode == 'shipping_method') {
                     if (! $cart->shipping_method) {
                         return;
                     }
@@ -80,7 +80,7 @@ class Validator
                     $shippingChunks = explode('_', $cart->shipping_method);
 
                     return current($shippingChunks);
-                } else if ($attributeCode == 'payment_method') {
+                } elseif ($attributeCode == 'payment_method') {
                     if (! $cart->payment) {
                         return;
                     }
@@ -147,7 +147,7 @@ class Validator
     {
         if ($attributeScope === 'parent') {
             return [$item];
-        } else if ($attributeScope === 'children') {
+        } elseif ($attributeScope === 'children') {
             return $item->children ?: [$item];
         } else {
             $items = $item->children ?: [];
@@ -227,7 +227,7 @@ class Validator
                             break;
                         }
                     }
-                } else if (is_array($condition['value'])) {
+                } elseif (is_array($condition['value'])) {
                     if (! is_array($attributeValue)) {
                         return false;
                     }

@@ -182,7 +182,7 @@ class ProductFlat
                 $channel = app('Webkul\Core\Repositories\ChannelRepository')->findOrFail($channel);
                 $channels[] = $channel['code'];
             }
-        } else if (isset($parentProduct['channels'])){
+        } elseif (isset($parentProduct['channels'])){
             foreach ($parentProduct['channels'] as $channel) {
                 $channel = app('Webkul\Core\Repositories\ChannelRepository')->findOrFail($channel);
                 $channels[] = $channel['code'];

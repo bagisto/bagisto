@@ -33,9 +33,9 @@ class Handler extends ExceptionHandler
             $statusCode = in_array($exception->getStatusCode(), [401, 403, 404, 503]) ? $exception->getStatusCode() : 500;
 
             return $this->response($path, $statusCode);
-        } else if ($exception instanceof ModelNotFoundException) {
+        } elseif ($exception instanceof ModelNotFoundException) {
             return $this->response($path, 404);
-        } else if ($exception instanceof PDOException) {
+        } elseif ($exception instanceof PDOException) {
             return $this->response($path, 500);
         }
 

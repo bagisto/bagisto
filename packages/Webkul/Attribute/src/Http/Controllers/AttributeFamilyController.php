@@ -144,7 +144,7 @@ class AttributeFamilyController extends Controller
         if ($this->attributeFamilyRepository->count() == 1) {
             session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Family']));
 
-        } else if ($attributeFamily->products()->count()) {
+        } elseif ($attributeFamily->products()->count()) {
             session()->flash('error', trans('admin::app.response.attribute-product-error', ['name' => 'Attribute family']));
         } else {
             try {

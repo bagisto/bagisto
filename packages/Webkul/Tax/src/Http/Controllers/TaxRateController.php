@@ -229,17 +229,17 @@ class TaxRateController extends Controller
                         foreach ($failedRules as $coulmn => $fail) {
                             if ($fail->first('identifier')){
                                 $errorMsg[$coulmn] = $fail->first('identifier');
-                            } else if ($fail->first('tax_rate')) {
+                            } elseif ($fail->first('tax_rate')) {
                                 $errorMsg[$coulmn] = $fail->first('tax_rate');
-                            } else if ($fail->first('country')) {
+                            } elseif ($fail->first('country')) {
                                 $errorMsg[$coulmn] = $fail->first('country');
-                            } else if ($fail->first('state')) {
+                            } elseif ($fail->first('state')) {
                                 $errorMsg[$coulmn] = $fail->first('state');
-                            } else if ($fail->first('zip_code')) {
+                            } elseif ($fail->first('zip_code')) {
                                 $errorMsg[$coulmn] = $fail->first('zip_code');
-                            } else if ($fail->first('zip_from')) {
+                            } elseif ($fail->first('zip_from')) {
                                 $errorMsg[$coulmn] = $fail->first('zip_from');
-                            } else if ($fail->first('zip_to')) {
+                            } elseif ($fail->first('zip_to')) {
                                 $errorMsg[$coulmn] = $fail->first('zip_to');
                             }
                         }

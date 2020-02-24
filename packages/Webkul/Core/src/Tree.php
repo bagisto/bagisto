@@ -81,7 +81,7 @@ class Tree {
 			if (strpos($this->current, $item['url']) !== false) {
                 $this->currentKey = $item['key'];
 			}
-		} else if ($type == 'acl') {
+		} elseif ($type == 'acl') {
 			$item['name'] = trans($item['name']);
 			$this->roles[$item['route']] = $item['key'];
 		}

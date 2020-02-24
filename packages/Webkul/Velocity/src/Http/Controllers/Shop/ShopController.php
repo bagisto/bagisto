@@ -123,7 +123,7 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
 
                 if ($slug == "new-products") {
                     $products = $productRepository->getNewProducts($count);
-                } else if ($slug == "featured-products") {
+                } elseif ($slug == "featured-products") {
                     $products = $productRepository->getFeaturedProducts($count);
                 }
 

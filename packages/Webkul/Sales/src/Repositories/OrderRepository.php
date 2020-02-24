@@ -298,7 +298,7 @@ class OrderRepository extends Repository
 
         if ($this->isInCanceledState($order)) {
             $status = 'canceled';
-        } else if ($this->isInClosedState($order)) {
+        } elseif ($this->isInClosedState($order)) {
             $status = 'closed';
         }
 

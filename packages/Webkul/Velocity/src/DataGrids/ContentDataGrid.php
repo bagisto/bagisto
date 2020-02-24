@@ -87,11 +87,11 @@ class ContentDataGrid extends DataGrid
             'wrapper'    => function($value) {
                 if ($value->content_type == 'category') {
                     return 'Category Slug';
-                } else if ($value->content_type == 'link') {
+                } elseif ($value->content_type == 'link') {
                     return 'Link';
-                } else if ($value->content_type == 'product') {
+                } elseif ($value->content_type == 'product') {
                     return 'Product';
-                } else if ($value->content_type == 'static') {
+                } elseif ($value->content_type == 'static') {
                     return 'Static';
                 }
             }

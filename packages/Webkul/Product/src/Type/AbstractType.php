@@ -513,7 +513,7 @@ abstract class AbstractType
             } else {
                 if (core()->isChannelDateInInterval($this->product->special_price_from, $this->product->special_price_to)) {
                     return true;
-                } else if ($rulePrice) {
+                } elseif ($rulePrice) {
                     $this->product->special_price = $rulePrice->price;
 
                     return true;
@@ -632,9 +632,9 @@ abstract class AbstractType
                 } else {
                     return false;
                 }
-            } else if (isset($options1['parent_id']) && ! isset($options2['parent_id'])) {
+            } elseif (isset($options1['parent_id']) && ! isset($options2['parent_id'])) {
                 return false;
-            } else if (isset($options2['parent_id']) && ! isset($options1['parent_id'])) {
+            } elseif (isset($options2['parent_id']) && ! isset($options1['parent_id'])) {
                 return false;
             }
         }

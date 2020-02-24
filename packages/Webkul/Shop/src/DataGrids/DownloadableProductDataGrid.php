@@ -79,9 +79,9 @@ class DownloadableProductDataGrid extends DataGrid
             'wrapper'    => function ($value) {
                 if ($value->status == 'pending') {
                     return trans('shop::app.customer.account.downloadable_products.pending');
-                } else if ($value->status == 'available') {
+                } elseif ($value->status == 'available') {
                     return trans('shop::app.customer.account.downloadable_products.available');
-                } else if ($value->status == 'expired') {
+                } elseif ($value->status == 'expired') {
                     return trans('shop::app.customer.account.downloadable_products.expired');
                 }
             },

@@ -179,9 +179,9 @@ class ReviewController extends Controller
                             $review->update(['status' => 'approved']);
 
                             Event::dispatch('customer.review.update.after', $review);
-                        } else if ($data['update-options'] == 0) {
+                        } elseif ($data['update-options'] == 0) {
                             $review->update(['status' => 'pending']);
-                        } else if ($data['update-options'] == 2) {
+                        } elseif ($data['update-options'] == 2) {
                             $review->update(['status' => 'disapproved']);
                         } else {
                             continue;

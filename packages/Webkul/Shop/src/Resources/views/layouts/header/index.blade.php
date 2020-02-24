@@ -191,7 +191,7 @@
                     $('#hammenu').addClass('icon-menu');
                     $("#search-responsive").css("display", "block");
                     $("#header-bottom").css("display", "none");
-                } else if (currentElement.hasClass('icon-menu')) {
+                } elseif (currentElement.hasClass('icon-menu')) {
                     currentElement.removeClass('icon-menu');
                     currentElement.addClass('icon-menu-close');
                     $('#search').removeClass('icon-menu-close');

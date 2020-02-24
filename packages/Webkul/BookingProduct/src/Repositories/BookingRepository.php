@@ -15,30 +15,6 @@ use Webkul\Core\Eloquent\Repository;
 class BookingRepository extends Repository
 {
     /**
-     * ProductRepository object
-     *
-     * @var Object
-     */
-    protected $productRepository;
-
-    /**
-     * Create a new repository instance.
-     *
-     * @param  Webkul\BookingProduct\Repositories\BookingProductRepository $bookingProductRepository
-     * @param  Illuminate\Container\Container                              $app
-     * @return void
-     */
-    public function __construct(
-        BookingProductRepository $bookingProductRepository,
-        App $app
-    )
-    {
-        $this->bookingProductRepository = $bookingProductRepository;
-
-        parent::__construct($app);
-    }
-
-    /**
      * Specify Model class name
      *
      * @return mixed
@@ -61,19 +37,27 @@ class BookingRepository extends Repository
                 continue;
             }
 
-            Event::fire('booking_product.booking.save.before', $item);
+            Event::dispatch('booking_product.booking.save.before', $item);
 
             $from = $to = null;
 
-            $booking = $this->bookingProductRepository->create([
+            if (isset($item->additional['booking']['slot'])) {
+                $timestamps = explode('-', $item->additional['booking']['slot']);
+
+                $from = current($timestamps);
+
+                $to = end($timestamps);
+            }
+
+            $booking = parent::create([
                     'qty'           => $item->qty_ordered,
                     'from'          => $from,
                     'to'            => $to,
-                    'order_id'      => $order,
+                    'order_id'      => $order->id,
                     'order_item_id' => $item->id
                 ]);
 
-            Event::fire('marketplace.booking.save.after', $booking);
+            Event::dispatch('marketplace.booking.save.after', $booking);
         }
     }
 }

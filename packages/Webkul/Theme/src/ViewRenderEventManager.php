@@ -81,7 +81,7 @@ class ViewRenderEventManager
         foreach ($this->templates as $template) {
             if (view()->exists($template)) {
                 $string .= view($template , $this->params)->render();
-            } else if (is_string($template)) {
+            } elseif (is_string($template)) {
                 $string .= $template;
             }
         }

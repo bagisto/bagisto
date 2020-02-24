@@ -452,7 +452,7 @@
 
                 if (dependValue == 'true') {
                     dependValue = 1;
-                } else if (dependValue == 'false') {
+                } elseif (dependValue == 'false') {
                     dependValue = 0;
                 }
 

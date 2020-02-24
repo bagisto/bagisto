@@ -92,7 +92,7 @@ class Toolbar extends AbstractProduct
 
         if (isset($params['sort']) && $key == $params['sort'] . '-' . $params['order']) {
             return true;
-        } else if (! isset($params['sort']) && $key == 'created_at-desc') {
+        } elseif (! isset($params['sort']) && $key == 'created_at-desc') {
             return true;
         }
 
