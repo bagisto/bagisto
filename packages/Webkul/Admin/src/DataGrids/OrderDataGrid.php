@@ -99,7 +99,7 @@ class OrderDataGrid extends DataGrid
                 if ($value->status == 'processing')
                     return '<span class="badge badge-md badge-success">'. trans('admin::app.sales.orders.order-status-processing') .'</span>';
                 else if ($value->status == 'completed')
-                    return '<span class="badge badge-md badge-success">'. trans('admin::app.sales.orders.order-status-completed') .'</span>';
+                    return '<span class="badge badge-md badge-success">'. trans('admin::app.sales.orders.order-status-success') .'</span>';
                 else if ($value->status == "canceled")
                     return '<span class="badge badge-md badge-danger">'. trans('admin::app.sales.orders.order-status-canceled') .'</span>';
                 else if ($value->status == "closed")
