@@ -115,9 +115,9 @@ class CustomerDataGrid extends DataGrid
             'closure' => true,
             'wrapper' => function ($row) {
                 if ($row->status == 1) {
-                    return '<span class="badge badge-md badge-success">Activated</span>';
+                    return '<span class="badge badge-md badge-success">'. trans('admin::app.customers.customers.active') .'</span>';
                 } else {
-                    return '<span class="badge badge-md badge-danger">Blocked</span>';
+                    return '<span class="badge badge-md badge-danger">'. trans('admin::app.customers.customers.inactive') .'</span>';
                 }
             }
         ]);

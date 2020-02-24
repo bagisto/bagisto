@@ -32,13 +32,13 @@
                     @csrf()
 
                     <div class="control-group" :class="[errors.has('first_name') ? 'has-error' : '']">
-                        <label for="first_name" class="required">{{ __('shop::app.customer.signup-form.firstname') }}</label>
+                        <label for="first_name" class="required">{{ __('admin::app.customers.customers.first_name') }}</label>
                         <input type="text" class="control" name="first_name" v-validate="'required'" value="{{ old('first_name') }}" data-vv-as="&quot;{{ __('shop::app.customer.signup-form.firstname') }}&quot;">
                         <span class="control-error" v-if="errors.has('first_name')">@{{ errors.first('first_name') }}</span>
                     </div>
 
                     <div class="control-group" :class="[errors.has('last_name') ? 'has-error' : '']">
-                        <label for="last_name" class="required">{{ __('shop::app.customer.signup-form.lastname') }}</label>
+                        <label for="last_name" class="required">{{ __('admin::app.customers.customers.last_name') }}</label>
                         <input type="text" class="control" name="last_name" v-validate="'required'" value="{{ old('last_name') }}" data-vv-as="&quot;{{ __('shop::app.customer.signup-form.lastname') }}&quot;">
                         <span class="control-error" v-if="errors.has('last_name')">@{{ errors.first('last_name') }}</span>
                     </div>
@@ -53,9 +53,9 @@
                         <label for="gender" class="required">{{ __('admin::app.customers.customers.gender') }}</label>
                         <select name="gender" class="control" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.customers.customers.gender') }}&quot;">
                             <option value=""></option>
-                            <option value="Other">{{ __('admin::app.customers.customers.other') }}</option>
-                            <option value="Male">{{ __('admin::app.customers.customers.male') }}</option>
-                            <option value="Female">{{ __('admin::app.customers.customers.female') }}</option>
+                            <option value="{{ __('admin::app.customers.customers.male') }}">{{ __('admin::app.customers.customers.male') }}</option>
+                            <option value="{{ __('admin::app.customers.customers.female') }}">{{ __('admin::app.customers.customers.female') }}</option>
+                            <option value="{{ __('admin::app.customers.customers.other') }}">{{ __('admin::app.customers.customers.other') }}</option>
                         </select>
                         <span class="control-error" v-if="errors.has('gender')">@{{ errors.first('gender') }}</span>
                     </div>
