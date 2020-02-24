@@ -116,13 +116,13 @@ class Booking extends Virtual
      */
     public function getBookingProduct($productId)
     {
-        static $bookingProduct;
+        static $bookingProducts = [];
 
-        if ($bookingProduct) {
-            return $bookingProduct;
+        if (isset($bookingProducts[$productId])) {
+            return $bookingProducts[$productId];
         }
 
-        return $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $productId);
+        return $bookingProducts[$productId] = $this->bookingProductRepository->findOneByField('product_id', $productId);
     }
 
     /**
@@ -131,7 +131,9 @@ class Booking extends Virtual
      */
     public function haveSufficientQuantity($qty)
     {
-        return true;
+        $bookingProduct = $this->getBookingProduct($this->product->id);
+
+        return app($this->bookingHelper->getTypeHepler($bookingProduct->type))->haveSufficientQuantity($qty, $bookingProduct);
     }
 
     /**

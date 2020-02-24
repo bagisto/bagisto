@@ -170,8 +170,9 @@ class Cart
                     $cartItem = $this->cartItemRepository->create(array_merge($cartProduct, ['cart_id' => $cart->id]));
                 } else {
                     if (isset($cartProduct['parent_id']) && $cartItem->parent_id != $parentCartItem->id) {
-                        $cartItem = $this->cartItemRepository->create(array_merge($cartProduct,
-                            ['cart_id' => $cart->id]));
+                        $cartItem = $this->cartItemRepository->create(array_merge($cartProduct, [
+                                'cart_id' => $cart->id
+                            ]));
                     } else {
                         if ($cartItem->product->getTypeInstance()->showQuantityBox() === false) {
                             return ['warning' => __('shop::app.checkout.cart.integrity.qty_impossible')];
@@ -225,7 +226,7 @@ class Cart
 
         $cart = $this->cartRepository->create($cartData);
 
-        if (!$cart) {
+        if (! $cart) {
             session()->flash('error', trans('shop::app.checkout.cart.create-error'));
 
             return;
@@ -368,7 +369,6 @@ class Cart
             }
 
             foreach ($guestCart->items as $key => $guestCartItem) {
-
                 $found = false;
 
                 foreach ($cart->items as $cartItem) {
@@ -378,7 +378,7 @@ class Cart
 
                     $cartItem->quantity = $newQuantity = $cartItem->quantity + $guestCartItem->quantity;
 
-                    if (!$this->isItemHaveQuantity($cartItem)) {
+                    if (! $this->isItemHaveQuantity($cartItem)) {
                         $this->cartItemRepository->delete($guestCartItem->id);
 
                         continue;
@@ -399,7 +399,7 @@ class Cart
                     $found = true;
                 }
 
-                if (!$found) {
+                if (! $found) {
                     $this->cartItemRepository->update([
                         'cart_id' => $cart->id,
                     ], $guestCartItem->id);
@@ -431,7 +431,7 @@ class Cart
      */
     public function putCart($cart)
     {
-        if (!$this->getCurrentCustomer()->check()) {
+        if (! $this->getCurrentCustomer()->check()) {
             session()->put('cart', $cart);
         }
     }
@@ -720,7 +720,7 @@ class Cart
             foreach ($cart->items as $item) {
                 $item->product->getTypeInstance()->validateCartItem($item);
 
-                $price = !is_null($item->custom_price) ? $item->custom_price : $item->base_price;
+                $price = ! is_null($item->custom_price) ? $item->custom_price : $item->base_price;
 
                 $this->cartItemRepository->update([
                     'price'      => core()->convertPrice($price),
@@ -766,6 +766,7 @@ class Cart
             if ($address === null) {
                 $address = new class() {
                     public $country;
+
                     public $postcode;
 
                     function __construct()
@@ -788,7 +789,8 @@ class Cart
                     if ($rate->state != '' && $rate->state != $address->state) {
                         continue;
                     }
-                    if (!$rate->is_zip) {
+
+                    if (! $rate->is_zip) {
                         if ($rate->zip_code == '*' || $rate->zip_code == $address->postcode) {
                             $haveTaxRate = true;
                         }

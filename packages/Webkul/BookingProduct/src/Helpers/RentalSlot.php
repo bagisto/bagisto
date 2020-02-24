@@ -138,7 +138,11 @@ class RentalSlot extends Booking
 
         $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $item->product_id);
 
-        $rentingType = $item->additional['booking']['renting_type'] ?? $bookingProduct->rental_slot->renting_type;
+        try {
+            $rentingType = $item->additional['booking']['renting_type'] ?? $bookingProduct->rental_slot->renting_type;
+        } catch(\Exception $e) {
+            dd($item, $bookingProduct, $bookingProduct->rental_slot, 111);
+        }
 
         if ($rentingType == 'daily') {
             $from = Carbon::createFromTimeString($item->additional['booking']['date_from'] . " 00:00:00");

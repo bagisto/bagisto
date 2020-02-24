@@ -314,6 +314,16 @@ class Booking
     }
 
     /**
+     * @param integer        $qty
+     * @param BookingProduct $bookingProduct
+     * @return bool
+     */
+    public function haveSufficientQuantity($qty, $bookingProduct)
+    {
+        return true;
+    }
+
+    /**
      * Returns additional cart item information
      *
      * @param array $data
