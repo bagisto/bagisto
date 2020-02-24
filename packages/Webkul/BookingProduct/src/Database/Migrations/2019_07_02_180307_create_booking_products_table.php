@@ -16,6 +16,7 @@ class CreateBookingProductsTable extends Migration
         Schema::create('booking_products', function (Blueprint $table) {
             $table->increments('id');
             $table->string('type');
+            $table->integer('qty')->default(0)->nullable();
             $table->string('location')->nullable();
             $table->boolean('show_location')->default(0);
             $table->boolean('available_every_week')->nullable();

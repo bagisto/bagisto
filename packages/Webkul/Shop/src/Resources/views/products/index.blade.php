@@ -104,7 +104,7 @@
                     $('.responsive-layred-filter').css('display','none');
                     $('.pager').css('display','flex');
                     $('.pager').css('justify-content','space-between');
-                } elseif (currentElement.hasClass('filter-icon')) {
+                } else if (currentElement.hasClass('filter-icon')) {
                     currentElement.removeClass('filter-icon');
                     currentElement.addClass('icon-menu-close-adj');
                     currentElement.prev().removeClass();

@@ -224,9 +224,9 @@
                         if (result) {
                             if (scope == 'address-form') {
                                 this_this.saveAddress();
-                            } elseif (scope == 'shipping-form') {
+                            } else if (scope == 'shipping-form') {
                                 this_this.saveShipping();
-                            } elseif (scope == 'payment-form') {
+                            } else if (scope == 'payment-form') {
                                 this_this.savePayment();
                             }
                         }
@@ -387,7 +387,7 @@
                     if (response.status == 422) {
                         serverErrors = response.data.errors;
                         this.$root.addServerErrors(scope)
-                    } elseif (response.status == 403) {
+                    } else if (response.status == 403) {
                         if (response.data.redirect_url) {
                             window.location.href = response.data.redirect_url;
                         }

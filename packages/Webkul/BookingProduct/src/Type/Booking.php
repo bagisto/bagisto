@@ -38,7 +38,6 @@ class Booking extends Virtual
      * @var array
      */
     protected $additionalViews = [
-        'admin::catalog.products.accordians.inventories',
         'admin::catalog.products.accordians.images',
         'admin::catalog.products.accordians.categories',
         'admin::catalog.products.accordians.channels',
@@ -134,22 +133,6 @@ class Booking extends Virtual
         $bookingProduct = $this->getBookingProduct($this->product->id);
 
         return app($this->bookingHelper->getTypeHepler($bookingProduct->type))->haveSufficientQuantity($qty, $bookingProduct);
-    }
-
-    /**
-     * Returns additional views
-     *
-     * @return array
-     */
-    public function getAdditionalViews()
-    {
-        $bookingProduct = $this->getBookingProduct($this->product->id);
-
-        if ($bookingProduct->type != 'default' && $bookingProduct->type != 'rental') {
-            unset($this->additionalViews[0]);
-        }
-
-        return $this->additionalViews;
     }
 
     /**
