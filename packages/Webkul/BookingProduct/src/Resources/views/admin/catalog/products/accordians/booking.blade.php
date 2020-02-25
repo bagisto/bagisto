@@ -21,7 +21,7 @@
             <div class="control-group" :class="[errors.has('booking[type]') ? 'has-error' : '']">
                 <label class="required">{{ __('bookingproduct::app.admin.catalog.products.booking-type') }}</label>
 
-                <select v-validate="'required'" name="booking[type]" v-model="booking_type" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.booking-type') }}&quot;">
+                <select v-validate="'required'" name="booking[type]" v-model="booking.type" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.booking-type') }}&quot;">
                     <option value="default">{{ __('bookingproduct::app.admin.catalog.products.default') }}</option>
                     <option value="appointment">{{ __('bookingproduct::app.admin.catalog.products.appointment-booking') }}</option>
                     <option value="event">{{ __('bookingproduct::app.admin.catalog.products.event-booking') }}</option>
@@ -34,22 +34,22 @@
         
             <div class="control-group">
                 <label>{{ __('bookingproduct::app.admin.catalog.products.location') }}</label>
-                <input type="text" name="booking[location]" v-model="location" class="control"/>
+                <input type="text" name="booking[location]" v-model="booking.location" class="control"/>
             </div>
         
-            <div class="control-group" :class="[errors.has('booking[qty]') ? 'has-error' : '']">
+            <div class="control-group" :class="[errors.has('booking[qty]') ? 'has-error' : '']" v-if="booking.type == 'default' || booking.type == 'rental'">
                 <label class="required">{{ __('bookingproduct::app.admin.catalog.products.qty') }}</label>
 
-                <input type="text" v-validate="'required|numeric|min:0'" name="booking[qty]" v-model="qty" class="control"/>
+                <input type="text" v-validate="'required|numeric|min:0'" name="booking[qty]" v-model="booking.qty" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.qty') }}&quot;"/>
                     
                 <span class="control-error" v-if="errors.has('booking[qty]')">@{{ errors.first('booking[qty]') }}</span>
             </div>
 
-            <div v-if="booking_type == 'appointment' || booking_type == 'event' || booking_type == 'rental' || booking_type == 'table'">
-                <div class="control-group" v-if="booking_type != 'event'" :class="[errors.has('booking[available_every_week]') ? 'has-error' : '']">
+            <div v-if="booking.type == 'appointment' || booking.type == 'event' || booking.type == 'rental' || booking.type == 'table'">
+                <div class="control-group" v-if="booking.type != 'event'" :class="[errors.has('booking[available_every_week]') ? 'has-error' : '']">
                     <label class="required">{{ __('bookingproduct::app.admin.catalog.products.available-every-week') }}</label>
 
-                    <select v-validate="'required'" name="booking[available_every_week]" v-model="available_every_week" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.available-every-week') }}&quot;">
+                    <select v-validate="'required'" name="booking[available_every_week]" v-model="booking.available_every_week" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.available-every-week') }}&quot;">
                         <option value="1">{{ __('bookingproduct::app.admin.catalog.products.yes') }}</option>
                         <option value="0">{{ __('bookingproduct::app.admin.catalog.products.no') }}</option>
                     </select>
@@ -57,12 +57,12 @@
                     <span class="control-error" v-if="errors.has('booking[available_every_week]')">@{{ errors.first('booking[available_every_week]') }}</span>
                 </div>
 
-                <div v-if="! parseInt(available_every_week)">
+                <div v-if="! parseInt(booking.available_every_week)">
                     <div class="control-group" :class="[errors.has('booking[available_from]') ? 'has-error' : '']">
                         <label class="required">{{ __('bookingproduct::app.admin.catalog.products.available-from') }}</label>
 
                         <date>
-                            <input type="text" v-validate="'required'" name="booking[available_from]" v-model="available_from" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.available-from') }}&quot;"/>
+                            <input type="text" v-validate="'required'" name="booking[available_from]" v-model="booking.available_from" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.available-from') }}&quot;"/>
                         </date>
                         
                         <span class="control-error" v-if="errors.has('booking[available_from]')">@{{ errors.first('booking[available_from]') }}</span>
@@ -72,7 +72,7 @@
                         <label class="required">{{ __('bookingproduct::app.admin.catalog.products.available-to') }}</label>
 
                         <date>
-                            <input type="text" v-validate="'required'" name="booking[available_to]" v-model="available_to" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.available-to') }}&quot;"/>
+                            <input type="text" v-validate="'required'" name="booking[available_to]" v-model="booking.available_to" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.available-to') }}&quot;"/>
                         </date>
                         
                         <span class="control-error" v-if="errors.has('booking[available_to]')">@{{ errors.first('booking[available_to]') }}</span>
@@ -80,23 +80,23 @@
                 </div>
             </div>
 
-            <div class="default-booking-section" v-if="booking_type == 'default'">
+            <div class="default-booking-section" v-if="booking.type == 'default'">
                 @include ('bookingproduct::admin.catalog.products.accordians.booking.default', ['bookingProduct' => $bookingProduct])
             </div>
 
-            <div class="appointment-booking-section" v-if="booking_type == 'appointment'">
+            <div class="appointment-booking-section" v-if="booking.type == 'appointment'">
                 @include ('bookingproduct::admin.catalog.products.accordians.booking.appointment', ['bookingProduct' => $bookingProduct])
             </div>
 
-            <div class="event-booking-section" v-if="booking_type == 'event'">
+            <div class="event-booking-section" v-if="booking.type == 'event'">
                 @include ('bookingproduct::admin.catalog.products.accordians.booking.event', ['bookingProduct' => $bookingProduct])
             </div>
 
-            <div class="rental-booking-section" v-if="booking_type == 'rental'">
+            <div class="rental-booking-section" v-if="booking.type == 'rental'">
                 @include ('bookingproduct::admin.catalog.products.accordians.booking.rental', ['bookingProduct' => $bookingProduct])
             </div>
 
-            <div class="table-booking-section" v-if="booking_type == 'table'">
+            <div class="table-booking-section" v-if="booking.type == 'table'">
                 @include ('bookingproduct::admin.catalog.products.accordians.booking.table', ['bookingProduct' => $bookingProduct])
             </div>
 
@@ -114,17 +114,20 @@
 
             data: function() {
                 return {
-                    booking_type: bookingProduct ? bookingProduct.type : 'default',
+                    booking: bookingProduct ? bookingProduct : {
 
-                    location: '',
+                        booking_type: 'default',
 
-                    qty: 0,
+                        location: '',
 
-                    available_every_week: bookingProduct.available_every_week,
+                        qty: 0,
 
-                    available_from: bookingProduct.available_from,
+                        available_every_week: '',
 
-                    available_to: bookingProduct.available_to
+                        available_from: '',
+
+                        available_to: ''
+                    }
                 }
             }
         });
