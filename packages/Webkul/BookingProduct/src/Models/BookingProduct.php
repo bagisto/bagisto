@@ -8,7 +8,7 @@ use Webkul\BookingProduct\Contracts\BookingProduct as BookingProductContract;
 
 class BookingProduct extends Model implements BookingProductContract
 {
-    protected $fillable = ['location', 'show_location', 'type', 'available_every_week', 'available_from', 'available_to', 'product_id'];
+    protected $fillable = ['location', 'show_location', 'type', 'qty', 'available_every_week', 'available_from', 'available_to', 'product_id'];
 
     protected $with = ['default_slot', 'appointment_slot', 'event_tickets', 'rental_slot', 'table_slot'];
 

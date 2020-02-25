@@ -36,6 +36,14 @@
                 <label>{{ __('bookingproduct::app.admin.catalog.products.location') }}</label>
                 <input type="text" name="booking[location]" v-model="location" class="control"/>
             </div>
+        
+            <div class="control-group" :class="[errors.has('booking[qty]') ? 'has-error' : '']">
+                <label class="required">{{ __('bookingproduct::app.admin.catalog.products.qty') }}</label>
+
+                <input type="text" v-validate="'required|numeric|min:0'" name="booking[qty]" v-model="qty" class="control"/>
+                    
+                <span class="control-error" v-if="errors.has('booking[qty]')">@{{ errors.first('booking[qty]') }}</span>
+            </div>
 
             <div v-if="booking_type == 'appointment' || booking_type == 'event' || booking_type == 'rental' || booking_type == 'table'">
                 <div class="control-group" v-if="booking_type != 'event'" :class="[errors.has('booking[available_every_week]') ? 'has-error' : '']">
@@ -109,6 +117,8 @@
                     booking_type: bookingProduct ? bookingProduct.type : 'default',
 
                     location: '',
+
+                    qty: 0,
 
                     available_every_week: bookingProduct.available_every_week,
 
