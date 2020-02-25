@@ -78,10 +78,10 @@ class install extends Command
     {
         $envExists = File::exists(base_path() . '/.env');
         if (!$envExists) {
-            $this->info('Creating .env file');
+            $this->info('Creating the environment configuration file.');
             $this->createEnvFile();
         } else {
-            $this->info('Great! .env file aready exists');
+            $this->info('Great! your environment configuration file aready exists.');
         }
     }
 
@@ -108,7 +108,7 @@ class install extends Command
 
             $this->addDatabaseDetails();
         } catch (\Exception $e) {
-            $this->error('Error in creating .env file, please create it manually and then run `php artisan migrate` again');
+            $this->error('Error in creating .env file, please create it manually and then run `php artisan migrate` again.');
         }
     }
 
@@ -117,9 +117,9 @@ class install extends Command
      */
     public function addDatabaseDetails()
     {
-        $dbName = $this->ask('What is the database name to be used by bagisto');
-        $dbUser = $this->anticipate('What is your database username', ['root']);
-        $dbPass = $this->secret('What is your database password');
+        $dbName = $this->ask('What is the database name to be used by bagisto?');
+        $dbUser = $this->anticipate('What is your database username?', ['root']);
+        $dbPass = $this->secret('What is your database password?');
 
         $this->envUpdate('DB_DATABASE=', $dbName);
         $this->envUpdate('DB_USERNAME=', $dbUser);
