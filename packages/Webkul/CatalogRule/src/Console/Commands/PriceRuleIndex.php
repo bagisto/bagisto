@@ -48,6 +48,6 @@ class PriceRuleIndex extends Command
      */
     public function handle()
     {
-        // $this->catalogRuleIndexHelper->reindexComplete();
+        $this->catalogRuleIndexHelper->reindexComplete();
     }
 }

@@ -367,13 +367,28 @@ class Core
      *
      * @param float  $amount
      * @param string $targetCurrencyCode
+     * @param string $orderCurrencyCode
      *
      * @return string
      */
-    public function convertPrice($amount, $targetCurrencyCode = null)
+    public function convertPrice($amount, $targetCurrencyCode = null, $orderCurrencyCode = null)
     {
         if (! isset($this->lastCurrencyCode)) {
             $this->lastCurrencyCode = $this->getBaseCurrency()->code;
+        }
+
+        if ($orderCurrencyCode) {
+            if (! isset($this->lastOrderCode)) {
+                $this->lastOrderCode = $orderCurrencyCode;
+            }
+
+            if (($targetCurrencyCode != $this->lastOrderCode)
+                && ($targetCurrencyCode != $orderCurrencyCode)
+                && ($orderCurrencyCode  != $this->getBaseCurrencyCode())
+                && ($orderCurrencyCode  != $this->lastCurrencyCode)) {
+                    
+                    $amount = $this->convertToBasePrice($amount, $orderCurrencyCode);
+            }
         }
 
         $targetCurrency = ! $targetCurrencyCode
@@ -460,28 +475,37 @@ class Core
         return $formatter->getSymbol(\NumberFormatter::CURRENCY_SYMBOL);
     }
 
-    /**
+     /**
      * Format and convert price with currency symbol
      *
-     * @param float $price
+     * @param float  $price
+     * @param string $currencyCode
      *
      * @return string
      */
     public function formatPrice($price, $currencyCode)
     {
+        $code = $this->getCurrentCurrency()->code;
+
         if (is_null($price)) {
             $price = 0;
+        } else {
+            if ($code != $currencyCode) {
+                $price = $this->convertPrice($price, $code, $currencyCode);
+            }
         }
 
         $formater = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
 
-        if ($symbol = $this->getCurrentCurrency()->symbol) {
+        $symbol = $this->getCurrentCurrency()->symbol;
+
+        if ($symbol) {
             if ($this->currencySymbol($currencyCode) == $symbol) {
                 return $formater->formatCurrency($price, $currencyCode);
             } else {
                 $formater->setSymbol(\NumberFormatter::CURRENCY_SYMBOL, $symbol);
 
-                return $formater->format($this->convertPrice($price));
+                return $formater->format($price);  // $this->convertPrice($price, $code)
             }
         } else {
             return $formater->formatCurrency($price, $currencyCode);
