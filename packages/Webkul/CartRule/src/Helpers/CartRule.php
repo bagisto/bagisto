@@ -228,8 +228,6 @@ class CartRule
 
         $cart = $item->cart;
 
-        $cart->applied_cart_rule_ids = null;
-
         $appliedRuleIds = [];
 
         foreach ($this->getCartRules() as $rule) {
