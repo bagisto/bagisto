@@ -99,10 +99,10 @@ class install extends Command
             $this->envUpdate('APP_LOCALE=', $locale);
     
             $TimeZones = timezone_identifiers_list();
-            $timezone = $this->anticipate('Enter the default timezone', $TimeZones, date_default_timezone_get());
+            $timezone = $this->anticipate('Please enter the default timezone', $TimeZones, date_default_timezone_get());
             $this->envUpdate('APP_TIMEZONE=', $timezone);
 
-            $currency = $this->choice('Enter the default currency', ['USD', 'EUR'], 'USD');
+            $currency = $this->choice('Please enter the default currency', ['USD', 'EUR'], 'USD');
             $this->envUpdate('APP_CURRENCY=', $currency);
 
 
