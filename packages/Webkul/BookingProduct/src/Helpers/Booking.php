@@ -339,8 +339,24 @@ class Booking
 
         switch ($bookingProduct->type) {
             case 'event':
+                foreach ($data['booking']['qty'] as $ticketId => $qty) {
+                    $ticket = $bookingProduct->event_tickets()->find($ticketId);
 
-                dd($data, $bookingProduct->event_tickets);
+                    $data['attributes'] = [
+                        [
+                            'attribute_name' => 'Event Ticket',
+                            'option_id'      => 0,
+                            'option_label'   => $ticket->name
+                        ], [
+                            'attribute_name' => 'Rent From',
+                            'option_id'      => 0,
+                            'option_label'   => Carbon::createFromTimeString($bookingProduct->available_from)->format('d F, Y')
+                        ], [
+                            'attribute_name' => 'Rent Till',
+                            'option_id'      => 0,
+                            'option_label'   => Carbon::createFromTimeString($bookingProduct->available_to)->format('d F, Y')
+                        ]];
+                }
                 
                 break;
 

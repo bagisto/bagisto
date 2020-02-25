@@ -147,9 +147,35 @@ class Booking extends Virtual
             return trans('shop::app.checkout.cart.integrity.missing_options');
         }
 
-        $products = parent::prepareForCart($data);
-        
         $bookingProduct = $this->getBookingProduct($data['product_id']);
+
+        if ($bookingProduct->type == 'event') {
+            $products = [];
+
+            foreach ($data['booking']['qty'] as $ticketId => $qty) {
+                if (! $qty) {
+                    continue;
+                }
+
+                $cartProducts = parent::prepareForCart([
+                        'product_id' => $data['product_id'],
+                        'quantity'   => $qty,
+                        'booking'    => [
+                            'qty' => [
+                                $ticketId => $qty
+                            ]
+                        ]
+                    ]);
+
+                if (is_string($cartProducts)) {
+                    return $cartProducts;
+                }
+                    
+                $products = array_merge($products, $cartProducts);
+            }
+        } else {
+            $products = parent::prepareForCart($data);
+        }
 
         if ($bookingProduct) {
             $products = app($this->bookingHelper->getTypeHepler($bookingProduct->type))->addAdditionalPrices($products);

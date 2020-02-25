@@ -74,6 +74,7 @@ class DefaultSlot extends Booking
             }
 
             $startDate = clone $requestedDate->modify('this ' . $this->daysOfWeek[$timeDuration['from_day']]);
+            
             $endDate = clone $requestedDate->modify('this ' . $this->daysOfWeek[$timeDuration['to_day']]);
 
             $slots[] = [

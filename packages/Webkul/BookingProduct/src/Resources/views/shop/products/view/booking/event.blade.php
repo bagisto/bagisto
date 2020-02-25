@@ -31,10 +31,10 @@
                     </div>
 
                     <div class="ticket-quantity">
-                        <div class="control-group" :class="[errors.has('booking[qty][' + index + ']') ? 'has-error' : '']">
+                        <div class="control-group" :class="[errors.has('booking[qty][' + ticket.id + ']') ? 'has-error' : '']">
                             <label class="required">{{ __('bookingproduct::app.shop.products.number-of-tickets') }}</label>
-                            <input type="text" v-validate="'required'" :name="'booking[qty][' + index + ']'" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.shop.products.number-of-tickets') }}&quot;" style="width: 100%"/>
-                            <span class="control-error" v-if="errors.has('booking[qty][' + index + ']')">@{{ errors.first('booking[qty][' + index + ']') }}</span>
+                            <input type="text" v-validate="'required'" :name="'booking[qty][' + ticket.id + ']'" class="control" value="0" data-vv-as="&quot;{{ __('bookingproduct::app.shop.products.number-of-tickets') }}&quot;" style="width: 100%"/>
+                            <span class="control-error" v-if="errors.has('booking[qty][' + ticket.id + ']')">@{{ errors.first('booking[qty][' + ticket.id + ']') }}</span>
                         </div>
                     </div>
 
