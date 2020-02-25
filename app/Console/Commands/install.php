@@ -85,6 +85,9 @@ class install extends Command
         }
     }
 
+    /**
+     * Create a new .env file.
+     */
     public function createEnvFile()
     {
         try {
@@ -109,6 +112,9 @@ class install extends Command
         }
     }
 
+    /**
+     * Add the database credentials to the .env file.
+     */
     public function addDatabaseDetails()
     {
         $dbName = $this->ask('What is the database name to be used by bagisto');
@@ -120,6 +126,9 @@ class install extends Command
         $this->envUpdate('DB_PASSWORD=', $dbPass);
     }
 
+    /**
+     * Update the .env values.
+     */
     public static function envUpdate($key, $value)
     {
         $path  = base_path() . '/.env';
