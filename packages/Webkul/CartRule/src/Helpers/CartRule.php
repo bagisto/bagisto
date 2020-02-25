@@ -226,8 +226,6 @@ class CartRule
         $item->discount_amount = 0;
         $item->base_discount_amount = 0;
 
-        $cart = $item->cart;
-
         $appliedRuleIds = [];
 
         foreach ($this->getCartRules() as $rule) {
