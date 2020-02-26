@@ -212,7 +212,7 @@ class Cart
             'items_count'           => 1,
         ];
 
-        //Authentication details
+        // Fill in the customer data, as far as possible:
         if ($this->getCurrentCustomer()->check()) {
             $cartData['customer_id'] = $this->getCurrentCustomer()->user()->id;
             $cartData['is_guest'] = 0;
