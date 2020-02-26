@@ -2,6 +2,7 @@
 
 namespace Webkul\BookingProduct\Helpers;
 
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 /**
@@ -92,6 +93,75 @@ class RentalSlot extends Booking
         }
 
         return $slots;
+    }
+
+    /**
+     * @param CartItem $cartItem
+     * @return bool
+     */
+    public function isItemHaveQuantity($cartItem)
+    {
+        $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $cartItem->product_id);
+
+        if ($bookingProduct->qty - $this->getBookedQuantity($cartItem) < $cartItem->quantity) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @param array $cartProducts
+     * @return bool
+     */
+    public function isSlotAvailable($cartProducts)
+    {
+        foreach ($cartProducts as $cartProduct) {
+            $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $cartProduct['product_id']);
+
+            if ($bookingProduct->qty - $this->getBookedQuantity($cartProduct) < $cartProduct['quantity']) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param array $data
+     * @return integer
+     */
+    public function getBookedQuantity($data)
+    {
+        $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $data['product_id']);
+
+        $rentingType = $products[0]['additional']['booking']['renting_type'] ?? $bookingProduct->rental_slot->renting_type;
+
+        if ($rentingType == 'daily') {
+            $from = Carbon::createFromTimeString($data['additional']['booking']['date_from'] . ' 00:00:01')->getTimestamp();
+
+            $to = Carbon::createFromTimeString($data['additional']['booking']['date_to'] . ' 23:59:59')->getTimestamp();
+        } else {
+            $from = Carbon::createFromTimestamp($data['additional']['booking']['slot']['from'])->getTimestamp();
+
+            $to = Carbon::createFromTimestamp($data['additional']['booking']['slot']['to'])->getTimestamp();
+        }
+
+        $result = $this->bookingRepository->getModel()
+                ->leftJoin('order_items', 'bookings.order_item_id', '=', 'order_items.id')
+                ->addSelect(DB::raw('SUM(qty_ordered - qty_canceled - qty_refunded) as total_qty_booked'))
+                ->where('bookings.product_id', $data['product_id'])
+                ->where(function ($query) use($from, $to) {
+                    $query->where(function ($query) use($from) {
+                        $query->where('bookings.from', '<=', $from)->where('bookings.to', '>=', $from);
+                    })
+                    ->orWhere(function($query) use($to) {
+                        $query->where('bookings.from', '<=', $to)->where('bookings.to', '>=', $to);
+                    });
+                })
+                ->first();
+
+        return ! is_null($result->total_qty_booked) ? $result->total_qty_booked : 0;
     }
 
     /**
