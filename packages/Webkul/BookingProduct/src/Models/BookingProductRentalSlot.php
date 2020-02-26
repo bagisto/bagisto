@@ -11,5 +11,5 @@ class BookingProductRentalSlot extends Model implements BookingProductRentalSlot
     
     protected $casts = ['slots' => 'array'];
 
-    protected $fillable = ['renting_type', 'daily_price', 'hourly_price', 'available_every_week', 'slot_has_quantity', 'same_slot_all_days', 'slots', 'booking_product_id'];
+    protected $fillable = ['renting_type', 'daily_price', 'hourly_price', 'same_slot_all_days', 'slots', 'booking_product_id'];
 }

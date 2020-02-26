@@ -12,6 +12,11 @@ class BookingProduct extends Model implements BookingProductContract
 
     protected $with = ['default_slot', 'appointment_slot', 'event_tickets', 'rental_slot', 'table_slot'];
 
+    protected $casts = [
+        'available_from' => 'datetime',
+        'available_to'   => 'datetime',
+    ];
+
     /**
      * The Product Default Booking that belong to the product booking.
      */

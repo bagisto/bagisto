@@ -6,7 +6,6 @@
                     <tr>
                         <th>{{ __('bookingproduct::app.admin.catalog.products.from') }}</th>
                         <th>{{ __('bookingproduct::app.admin.catalog.products.to') }}</th>
-                        <th v-if="parseInt(slotHasQuantity)">{{ __('bookingproduct::app.admin.catalog.products.qty') }}</th>
                         <th class="actions"></th>
                     </tr>
                 </thead>
@@ -17,7 +16,6 @@
                         :key="index"
                         :slot-item="slot"
                         :control-name="'booking[slots][' + index + ']'"
-                        :slot-has-quantity="slotHasQuantity"
                         @onRemoveSlot="removeSlot($event)">
                     </slot-item>
                 </tbody>
@@ -46,7 +44,6 @@
                             <tr>
                                 <th>{{ __('bookingproduct::app.admin.catalog.products.from') }}</th>
                                 <th>{{ __('bookingproduct::app.admin.catalog.products.to') }}</th>
-                                <th v-if="parseInt(slotHasQuantity)">{{ __('bookingproduct::app.admin.catalog.products.qty') }}</th>
                                 <th class="actions"></th>
                             </tr>
                         </thead>
@@ -57,7 +54,6 @@
                                 :key="dayIndex + '_' + slotIndex"
                                 :slot-item="slot"
                                 :control-name="'booking[slots][' + dayIndex + '][' + slotIndex + ']'"
-                                :slot-has-quantity="slotHasQuantity"
                                 @onRemoveSlot="removeSlot($event, dayIndex)"
                             ></slot-item>
                         </tbody>
@@ -98,16 +94,6 @@
             </div>
         </td>
 
-        <td v-if="parseInt(slotHasQuantity)">
-            <div class="control-group" :class="[errors.has(controlName + '[qty]') ? 'has-error' : '']">
-                <input type="text" v-validate="'required|min_value:0'" :name="controlName + '[qty]'" v-model="slotItem.qty" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.qty') }}&quot;">
-
-                <span class="control-error" v-if="errors.has(controlName + '[qty]')">
-                    @{{ errors.first(controlName + '[qty]') }}
-                </span>
-            </div>
-        </td>
-
         <td>
             <i class="icon remove-icon" @click="removeSlot()"></i>
         </td>
@@ -119,7 +105,7 @@
 
         template: '#slot-list-template',
 
-        props: ['bookingType', 'sameSlotAllDays', 'slotHasQuantity'],
+        props: ['bookingType', 'sameSlotAllDays'],
 
         inject: ['$validator'],
 
@@ -162,8 +148,7 @@
 
                     var slot = {
                         'from': '',
-                        'to': '',
-                        'qty': 0
+                        'to': ''
                     };
 
                     this.slots['different_for_week'][dayIndex].push(slot)
@@ -172,8 +157,7 @@
                 } else {
                     var slot = {
                         'from': '',
-                        'to': '',
-                        'qty': 0
+                        'to': ''
                     };
 
                     this.slots['same_for_week'].push(slot);
@@ -198,7 +182,7 @@
 
         template: '#slot-item-template',
 
-        props: ['slotItem', 'controlName', 'slotHasQuantity'],
+        props: ['slotItem', 'controlName'],
 
         inject: ['$validator'],
 

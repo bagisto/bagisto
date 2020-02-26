@@ -18,7 +18,6 @@ class CreateBookingProductRentalSlotsTable extends Migration
             $table->string('renting_type');
             $table->decimal('daily_price', 12, 4)->default(0)->nullable();
             $table->decimal('hourly_price', 12, 4)->default(0)->nullable();
-            $table->boolean('slot_has_quantity')->nullable();
             $table->boolean('same_slot_all_days')->nullable();
             $table->json('slots')->nullable();
 

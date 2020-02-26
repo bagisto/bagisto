@@ -11,5 +11,5 @@ class BookingProductAppointmentSlot extends Model implements BookingProductAppoi
     
     protected $casts = ['slots' => 'array'];
 
-    protected $fillable = ['duration', 'break_time', 'available_every_week', 'slot_has_quantity', 'same_slot_all_days', 'slots', 'booking_product_id'];
+    protected $fillable = ['duration', 'break_time', 'same_slot_all_days', 'slots', 'booking_product_id'];
 }

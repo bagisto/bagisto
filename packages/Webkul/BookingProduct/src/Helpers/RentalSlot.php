@@ -32,11 +32,11 @@ class RentalSlot extends Booking
         $currentTime = Carbon::now();
 
         $availableFrom = ! $bookingProduct->available_every_week && $bookingProduct->available_from
-                            ? Carbon::createFromTimeString($bookingProduct->available_from . ' 00:00:00')
+                            ? Carbon::createFromTimeString($bookingProduct->available_from->format('Y-m-d') . ' 00:00:00')
                             : Carbon::createFromTimeString($currentTime->format('Y-m-d') . ' 00:00:00');
 
         $availableTo = ! $bookingProduct->available_every_week && $bookingProduct->available_from
-                            ? Carbon::createFromTimeString($bookingProduct->available_to . ' 23:59:59')
+                            ? Carbon::createFromTimeString($bookingProduct->available_to->format('Y-m-d') . ' 23:59:59')
                             : Carbon::createFromTimeString('2080-01-01 00:00:00');
 
         $timeDurations = $bookingProductSlot->same_slot_all_days

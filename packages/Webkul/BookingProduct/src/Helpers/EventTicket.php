@@ -20,9 +20,9 @@ class EventTicket extends Booking
      */
     public function getEventDate($bookingProduct)
     {
-        $from = Carbon::createFromTimeString($bookingProduct->available_from)->format('d F, Y h:i A');
+        $from = Carbon::createFromTimeString($bookingProduct->available_from->format('Y-m-d'))->format('d F, Y h:i A');
 
-        $to = Carbon::createFromTimeString($bookingProduct->available_to)->format('d F, Y h:i A');
+        $to = Carbon::createFromTimeString($bookingProduct->available_to->format('Y-m-d'))->format('d F, Y h:i A');
 
         return $from . ' - ' . $to;
     }

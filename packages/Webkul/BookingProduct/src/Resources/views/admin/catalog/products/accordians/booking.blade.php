@@ -37,7 +37,7 @@
                 <input type="text" name="booking[location]" v-model="booking.location" class="control"/>
             </div>
         
-            <div class="control-group" :class="[errors.has('booking[qty]') ? 'has-error' : '']" v-if="booking.type == 'default' || booking.type == 'rental'">
+            <div class="control-group" :class="[errors.has('booking[qty]') ? 'has-error' : '']" v-if="booking.type == 'default' || booking.type == 'appointment' || booking.type == 'rental'">
                 <label class="required">{{ __('bookingproduct::app.admin.catalog.products.qty') }}</label>
 
                 <input type="text" v-validate="'required|numeric|min:0'" name="booking[qty]" v-model="booking.qty" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.qty') }}&quot;"/>

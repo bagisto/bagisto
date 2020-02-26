@@ -2,6 +2,7 @@
 
 namespace Webkul\BookingProduct\Helpers;
 
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Webkul\BookingProduct\Repositories\BookingProductRepository;
 use Webkul\BookingProduct\Repositories\BookingProductDefaultSlotRepository;
@@ -180,9 +181,9 @@ class Booking
 
         $currentTime = Carbon::now();
 
-        $availableFrom = Carbon::createFromTimeString($bookingProduct->available_from . " 00:00:01");
+        $availableFrom = Carbon::createFromTimeString($bookingProduct->available_from->format('Y-m-d') . " 00:00:01");
 
-        $availableTo = Carbon::createFromTimeString($bookingProduct->available_to . " 23:59:59");
+        $availableTo = Carbon::createFromTimeString($bookingProduct->available_to->format('Y-m-d') . " 23:59:59");
 
         for ($i = 0; $i < 7; $i++) {
             $date = clone $currentTime;
@@ -259,11 +260,11 @@ class Booking
         $currentTime = Carbon::now();
 
         $availableFrom = ! $bookingProduct->available_every_week && $bookingProduct->available_from
-                        ? Carbon::createFromTimeString($bookingProduct->available_from . " 00:00:00")
+                        ? Carbon::createFromTimeString($bookingProduct->available_from->format('Y-m-d') . " 00:00:00")
                         : Carbon::createFromTimeString($currentTime->format('Y-m-d') . ' 00:00:00');
 
         $availableTo = ! $bookingProduct->available_every_week && $bookingProduct->available_from
-                        ? Carbon::createFromTimeString($bookingProduct->available_to . ' 23:59:59')
+                        ? Carbon::createFromTimeString($bookingProduct->available_to->format('Y-m-d') . ' 23:59:59')
                         : Carbon::createFromTimeString('2080-01-01 00:00:00');
 
         $timeDurations = $bookingProductSlot->same_slot_all_days
@@ -331,6 +332,12 @@ class Booking
      */
     public function isItemHaveQuantity($cartItem)
     {
+        $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $cartItem->product_id);
+
+        if ($bookingProduct->qty - $this->getBookedQuantity($cartItem) < $cartItem->quantity) {
+            return false;
+        }
+
         return true;
     }
 
@@ -340,7 +347,34 @@ class Booking
      */
     public function isSlotAvailable($cartProducts)
     {
+        foreach ($cartProducts as $cartProduct) {
+            $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $cartProduct['product_id']);
+
+            if ($bookingProduct->qty - $this->getBookedQuantity($cartProduct) < $cartProduct['quantity']) {
+                return false;
+            }
+        }
+
         return true;
+    }
+
+    /**
+     * @param array $data
+     * @return integer
+     */
+    public function getBookedQuantity($data)
+    {
+        $timestamps = explode('-', $data['additional']['booking']['slot']);
+
+        $result = $this->bookingRepository->getModel()
+                ->leftJoin('order_items', 'bookings.order_item_id', '=', 'order_items.id')
+                ->addSelect(DB::raw('SUM(qty_ordered - qty_canceled - qty_refunded) as total_qty_booked'))
+                ->where('bookings.product_id', $data['product_id'])
+                ->where('bookings.from', $timestamps[0])
+                ->where('bookings.to', $timestamps[1])
+                ->first();
+
+        return $result->total_qty_booked;
     }
 
     /**
@@ -369,11 +403,11 @@ class Booking
                     ], [
                         'attribute_name' => 'Rent From',
                         'option_id'      => 0,
-                        'option_label'   => Carbon::createFromTimeString($bookingProduct->available_from)->format('d F, Y'),
+                        'option_label'   => Carbon::createFromTimeString($bookingProduct->available_from->format('Y-m-d'))->format('d F, Y'),
                     ], [
                         'attribute_name' => 'Rent Till',
                         'option_id'      => 0,
-                        'option_label'   => Carbon::createFromTimeString($bookingProduct->available_to)->format('d F, Y'),
+                        'option_label'   => Carbon::createFromTimeString($bookingProduct->available_to->format('Y-m-d'))->format('d F, Y'),
                     ]];
                 
                 break;

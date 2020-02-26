@@ -25,17 +25,6 @@
                 <span class="control-error" v-if="errors.has('booking[break_time]')">@{{ errors.first('booking[break_time]') }}</span>
             </div>
 
-            <div class="control-group" :class="[errors.has('booking[slot_has_quantity]') ? 'has-error' : '']">
-                <label class="required">{{ __('bookingproduct::app.admin.catalog.products.slot-has-quantity') }}</label>
-
-                <select v-validate="'required'" name="booking[slot_has_quantity]" v-model="appointment_booking.slot_has_quantity" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.slot-has-quantity') }}&quot;">
-                    <option value="1">{{ __('bookingproduct::app.admin.catalog.products.yes') }}</option>
-                    <option value="0">{{ __('bookingproduct::app.admin.catalog.products.no') }}</option>
-                </select>
-                
-                <span class="control-error" v-if="errors.has('booking[slot_has_quantity]')">@{{ errors.first('booking[slot_has_quantity]') }}</span>
-            </div>
-
             <div class="control-group" :class="[errors.has('booking[same_slot_all_days]') ? 'has-error' : '']">
                 <label class="required">{{ __('bookingproduct::app.admin.catalog.products.same-slot-all-days') }}</label>
 
@@ -56,8 +45,7 @@
 
                     <slot-list
                         booking-type="appointment_slot"
-                        :same-slot-all-days="appointment_booking.same_slot_all_days"
-                        :slot-has-quantity="appointment_booking.slot_has_quantity">
+                        :same-slot-all-days="appointment_booking.same_slot_all_days">
                     </slot-list>
                 
                 </div>
@@ -80,8 +68,6 @@
                         break_time: 15,
 
                         same_slot_all_days: 1,
-                        
-                        slot_has_quantity: 1,
 
                         slots: []
                     }
