@@ -78,35 +78,57 @@ class install extends Command
     {
         $envExists = File::exists(base_path() . '/.env');
         if (!$envExists) {
-            $this->info('Creating .env file');
+            $this->info('Creating the environment configuration file.');
             $this->createEnvFile();
         } else {
-            $this->info('Great! .env file aready exists');
+            $this->info('Great! your environment configuration file aready exists.');
         }
     }
 
+    /**
+     * Create a new .env file.
+     */
     public function createEnvFile()
     {
         try {
             File::copy('.env.example', '.env');
             Artisan::call('key:generate');
             $this->envUpdate('APP_URL=http://localhost', ':8000');
+
+            $locale = $this->choice('Please select the default locale or press enter to continue', ['ar', 'en', 'fa', 'nl', 'pt_BR'], 1);
+            $this->envUpdate('APP_LOCALE=', $locale);
+    
+            $TimeZones = timezone_identifiers_list();
+            $timezone = $this->anticipate('Please enter the default timezone', $TimeZones, date_default_timezone_get());
+            $this->envUpdate('APP_TIMEZONE=', $timezone);
+
+            $currency = $this->choice('Please enter the default currency', ['USD', 'EUR'], 'USD');
+            $this->envUpdate('APP_CURRENCY=', $currency);
+
+
             $this->addDatabaseDetails();
         } catch (\Exception $e) {
-            $this->error('Error in creating .env file, please create manually and then run `php artisan migrate` again');
+            $this->error('Error in creating .env file, please create it manually and then run `php artisan migrate` again.');
         }
     }
 
+    /**
+     * Add the database credentials to the .env file.
+     */
     public function addDatabaseDetails()
     {
-        $dbName = $this->ask('What is your database name to be used by bagisto');
-        $dbUser = $this->anticipate('What is your database username', ['root']);
-        $dbPass = $this->secret('What is your database password');
+        $dbName = $this->ask('What is the database name to be used by bagisto?');
+        $dbUser = $this->anticipate('What is your database username?', ['root']);
+        $dbPass = $this->secret('What is your database password?');
+
         $this->envUpdate('DB_DATABASE=', $dbName);
         $this->envUpdate('DB_USERNAME=', $dbUser);
         $this->envUpdate('DB_PASSWORD=', $dbPass);
     }
 
+    /**
+     * Update the .env values.
+     */
     public static function envUpdate($key, $value)
     {
         $path  = base_path() . '/.env';
