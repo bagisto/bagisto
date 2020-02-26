@@ -112,7 +112,7 @@ class CartRule
             $appliedCartRuleIds = array_merge($appliedCartRuleIds, $itemCartRuleIds);
 
             if ($item->children()->count() && $item->product->getTypeInstance()->isChildrenCalculated())
-                $this->devideDiscount($item);
+                $this->divideDiscount($item);
         }
 
         $cart->applied_cart_rule_ids = implode(',', array_unique($appliedCartRuleIds, SORT_REGULAR));
@@ -153,10 +153,12 @@ class CartRule
                 ->where('cart_rule_customer_groups.customer_group_id', $customerGroupId)
                 ->where('cart_rule_channels.channel_id', core()->getCurrentChannel()->id)
                 ->where(function ($query1) {
-                    $query1->where('cart_rules.starts_from', '<=', Carbon::now()->format('Y-m-d'))->orWhereNull('cart_rules.starts_from');
+                    $query1->where('cart_rules.starts_from', '<=', Carbon::now()->format('Y-m-d'))
+                        ->orWhereNull('cart_rules.starts_from');
                 })
                 ->where(function ($query2) {
-                    $query2->where('cart_rules.ends_till', '>=', Carbon::now()->format('Y-m-d'))->orWhereNull('cart_rules.ends_till');
+                    $query2->where('cart_rules.ends_till', '>=', Carbon::now()->format('Y-m-d'))
+                        ->orWhereNull('cart_rules.ends_till');
                 })
                 ->orderBy('sort_order', 'asc');
         })->findWhere(['status' => 1]);
@@ -171,7 +173,7 @@ class CartRule
      *
      * @return boolean
      */
-    public function canProcessRule($rule)
+    public function canProcessRule($rule): bool
     {
         $cart = Cart::getCart();
 
@@ -183,8 +185,9 @@ class CartRule
                 ]);
 
                 if ($coupon) {
-                    if ($coupon->usage_limit && $coupon->times_used >= $coupon->usage_limit)
+                    if ($coupon->usage_limit && $coupon->times_used >= $coupon->usage_limit) {
                         return false;
+                    }
 
                     if ($cart->customer_id && $coupon->usage_per_customer) {
                         $couponUsage = $this->cartRuleCouponUsageRepository->findOneWhere([
@@ -192,8 +195,9 @@ class CartRule
                             'customer_id'         => $cart->customer_id,
                         ]);
 
-                        if ($couponUsage && $couponUsage->times_used >= $coupon->usage_per_customer)
+                        if ($couponUsage && $couponUsage->times_used >= $coupon->usage_per_customer) {
                             return false;
+                        }
                     }
                 } else {
                     return false;
@@ -285,8 +289,9 @@ class CartRule
                     break;
 
                 case 'buy_x_get_y':
-                    if (! $rule->discount_step || $rule->discount_amount > $rule->discount_step)
+                    if (! $rule->discount_step || $rule->discount_amount > $rule->discount_step) {
                         break;
+                    }
 
                     $buyAndDiscountQty = $rule->discount_step + $rule->discount_amount;
 
@@ -296,8 +301,9 @@ class CartRule
 
                     $discountQty = $qtyPeriod * $rule->discount_amount;
 
-                    if ($freeQty > $rule->discount_step)
+                    if ($freeQty > $rule->discount_step) {
                         $discountQty += $freeQty - $rule->discount_step;
+                    }
 
                     $discountAmount = $discountQty * $item->price;
 
@@ -311,11 +317,12 @@ class CartRule
 
             $appliedRuleIds[$rule->id] = $rule->id;
 
-            if ($rule->end_other_rules)
+            if ($rule->end_other_rules) {
                 break;
+            }
         }
 
-        $item->applied_cart_rule_ids = join(',', $appliedRuleIds);
+        $item->applied_cart_rule_ids = implode(',', $appliedRuleIds);
 
         $item->save();
 
@@ -340,14 +347,17 @@ class CartRule
         $appliedRuleIds = [];
 
         foreach ($this->getCartRules() as $rule) {
-            if (! $this->canProcessRule($rule))
+            if (! $this->canProcessRule($rule)) {
                 continue;
+            }
 
-            if (! $this->validator->validate($rule, $cart))
+            if (! $this->validator->validate($rule, $cart)) {
                 continue;
+            }
 
-            if (! $rule || ! $rule->apply_to_shipping)
+            if (! $rule || ! $rule->apply_to_shipping) {
                 continue;
+            }
 
             $discountAmount = $baseDiscountAmount = 0;
 
@@ -380,8 +390,9 @@ class CartRule
 
             $appliedRuleIds[$rule->id] = $rule->id;
 
-            if ($rule->end_other_rules)
+            if ($rule->end_other_rules) {
                 break;
+            }
         }
 
         $selectedShipping->save();
@@ -392,7 +403,7 @@ class CartRule
 
         $cartAppliedCartRuleIds = array_unique($cartAppliedCartRuleIds);
 
-        $cart->applied_cart_rule_ids = join(',', $cartAppliedCartRuleIds);
+        $cart->applied_cart_rule_ids = implode(',', $cartAppliedCartRuleIds);
 
         $cart->save();
 
@@ -408,8 +419,9 @@ class CartRule
      */
     public function processFreeShippingDiscount($cart)
     {
-        if (! $selectedShipping = $cart->selected_shipping_rate)
+        if (! $selectedShipping = $cart->selected_shipping_rate) {
             return;
+        }
 
         $selectedShipping->discount_amount = 0;
 
@@ -418,14 +430,17 @@ class CartRule
         $appliedRuleIds = [];
 
         foreach ($this->getCartRules() as $rule) {
-            if (! $this->canProcessRule($rule))
+            if (! $this->canProcessRule($rule)) {
                 continue;
+            }
 
-            if (! $this->validator->validate($rule, $cart))
+            if (! $this->validator->validate($rule, $cart)) {
                 continue;
+            }
 
-            if (! $rule || ! $rule->free_shipping)
+            if (! $rule || ! $rule->free_shipping) {
                 continue;
+            }
 
             $selectedShipping->price = 0;
 
@@ -491,30 +506,33 @@ class CartRule
     {
         $cart = Cart::getCart();
 
-        if (! $cart->coupon_code)
+        if (! $cart->coupon_code) {
             return;
+        }
 
         $coupon = $this->cartRuleCouponRepository->findOneByField('code', $cart->coupon_code);
 
-        if (! $coupon || ! in_array($coupon->cart_rule_id, explode(',', $cart->applied_cart_rule_ids)))
+        if (! $coupon || ! in_array($coupon->cart_rule_id, explode(',', $cart->applied_cart_rule_ids))) {
             Cart::removeCouponCode();
+        }
     }
 
     /**
-     * Devide discount amount to children
+     * Divide discount amount to children
      *
      * @param CartItem $item
      *
      * @return void
      */
-    protected function devideDiscount($item)
+    protected function divideDiscount($item)
     {
         foreach ($item->children as $child) {
             $ratio = $item->base_total != 0 ? $child->base_total / $item->base_total : 0;
 
             foreach (['discount_amount', 'base_discount_amount'] as $column) {
-                if (! $item->{$column})
+                if (! $item->{$column}) {
                     continue;
+                }
 
                 $child->{$column} = round(($item->{$column} * $ratio), 4);
 
