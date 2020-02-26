@@ -151,7 +151,7 @@ class Cart
         if (is_string($cartProducts)) {
             $this->collectTotals();
 
-            if (!count($cart->all_items) > 0) {
+            if (! count($cart->all_items) > 0) {
                 session()->forget('cart');
             }
 
@@ -166,7 +166,7 @@ class Cart
                     $cartProduct['parent_id'] = $parentCartItem->id;
                 }
 
-                if (!$cartItem) {
+                if (! $cartItem) {
                     $cartItem = $this->cartItemRepository->create(array_merge($cartProduct, ['cart_id' => $cart->id]));
                 } else {
                     if (isset($cartProduct['parent_id']) && $cartItem->parent_id != $parentCartItem->id) {
@@ -210,7 +210,7 @@ class Cart
             'base_currency_code'    => core()->getBaseCurrencyCode(),
             'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
             'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-            'items_count'           => 1
+            'items_count'           => 1,
         ];
 
         //Authentication details
@@ -272,7 +272,7 @@ class Cart
                     'total'             => core()->convertPrice($item->price * $quantity),
                     'base_total'        => $item->price * $quantity,
                     'total_weight'      => $item->weight * $quantity,
-                    'base_total_weight' => $item->weight * $quantity
+                    'base_total_weight' => $item->weight * $quantity,
                 ], $itemId);
 
             Event::dispatch('checkout.cart.update.after', $item);
@@ -360,7 +360,7 @@ class Cart
                     'is_guest'            => 0,
                     'customer_first_name' => $this->getCurrentCustomer()->user()->first_name,
                     'customer_last_name'  => $this->getCurrentCustomer()->user()->last_name,
-                    'customer_email'      => $this->getCurrentCustomer()->user()->email
+                    'customer_email'      => $this->getCurrentCustomer()->user()->email,
                 ], $guestCart->id);
 
                 session()->forget('cart');
@@ -389,7 +389,7 @@ class Cart
                         'total'             => core()->convertPrice($cartItem->price * $newQuantity),
                         'base_total'        => $cartItem->price * $newQuantity,
                         'total_weight'      => $cartItem->weight * $newQuantity,
-                        'base_total_weight' => $cartItem->weight * $newQuantity
+                        'base_total_weight' => $cartItem->weight * $newQuantity,
                     ], $cartItem->id);
 
                     $guestCart->items->forget($key);
@@ -448,7 +448,7 @@ class Cart
         if ($this->getCurrentCustomer()->check()) {
             $cart = $this->cartRepository->findOneWhere([
                 'customer_id' => $this->getCurrentCustomer()->user()->id,
-                'is_active'   => 1
+                'is_active'   => 1,
             ]);
         } elseif (session()->has('cart')) {
             $cart = $this->cartRepository->find(session()->get('cart')->id);
@@ -820,7 +820,8 @@ class Cart
      * @param CartItem $item
      * @return CartItem
      */
-    protected function setItemTaxToZero(CartItem $item): CartItem {
+    protected function setItemTaxToZero(CartItem $item): CartItem
+    {
         $item->tax_percent = 0;
         $item->tax_amount = 0;
         $item->base_tax_amount = 0;
@@ -1037,7 +1038,7 @@ class Cart
 
         $wishlistItems = $this->wishlistRepository->findWhere([
                 'customer_id' => $this->getCurrentCustomer()->user()->id,
-                'product_id'  => $cartItem->product_id
+                'product_id'  => $cartItem->product_id,
             ]);
 
         $found = false;
@@ -1059,7 +1060,7 @@ class Cart
                     'channel_id'  => $cart->channel_id,
                     'customer_id' => $this->getCurrentCustomer()->user()->id,
                     'product_id'  => $cartItem->product_id,
-                    'additional'  => $cartItem->additional
+                    'additional'  => $cartItem->additional,
                 ]);
         }
 

@@ -125,14 +125,14 @@ class Booking extends Virtual
     }
 
     /**
-     * @param integer $qty
+     * @param CartItem $cartItem
      * @return bool
      */
-    public function haveSufficientQuantity($qty)
+    public function isItemHaveQuantity($cartItem)
     {
         $bookingProduct = $this->getBookingProduct($this->product->id);
 
-        return app($this->bookingHelper->getTypeHepler($bookingProduct->type))->haveSufficientQuantity($qty, $bookingProduct);
+        return app($this->bookingHelper->getTypeHepler($bookingProduct->type))->isItemHaveQuantity($cartItem);
     }
 
     /**
@@ -147,11 +147,11 @@ class Booking extends Virtual
             return trans('shop::app.checkout.cart.integrity.missing_options');
         }
 
+        $products = [];
+
         $bookingProduct = $this->getBookingProduct($data['product_id']);
 
         if ($bookingProduct->type == 'event') {
-            $products = [];
-
             foreach ($data['booking']['qty'] as $ticketId => $qty) {
                 if (! $qty) {
                     continue;
@@ -161,10 +161,8 @@ class Booking extends Virtual
                         'product_id' => $data['product_id'],
                         'quantity'   => $qty,
                         'booking'    => [
-                            'qty' => [
-                                $ticketId => $qty
-                            ]
-                        ]
+                            'ticket_id' => $ticketId,
+                        ],
                     ]);
 
                 if (is_string($cartProducts)) {
@@ -177,9 +175,13 @@ class Booking extends Virtual
             $products = parent::prepareForCart($data);
         }
 
-        if ($bookingProduct) {
-            $products = app($this->bookingHelper->getTypeHepler($bookingProduct->type))->addAdditionalPrices($products);
+        $typeHelper = app($this->bookingHelper->getTypeHepler($bookingProduct->type));
+
+        if (! $typeHelper->isSlotAvailable($products)) {
+            return trans('shop::app.checkout.cart.quantity.inventory_warning');
         }
+
+        $products = $typeHelper->addAdditionalPrices($products);
 
         return $products;
     }

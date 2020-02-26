@@ -71,7 +71,7 @@ class EventTicket extends Booking
         foreach ($products as $key => $product) {
             $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $product['product_id']);
 
-            $ticket = $bookingProduct->event_tickets()->find(array_keys($product['additional']['booking']['qty'])[0]);
+            $ticket = $bookingProduct->event_tickets()->find($product['additional']['booking']['ticket_id']);
 
             $products[$key]['price'] += core()->convertPrice($ticket->price);
             $products[$key]['base_price'] += $ticket->price;
@@ -94,7 +94,7 @@ class EventTicket extends Booking
 
         $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $item->product_id);
 
-        $ticket = $bookingProduct->event_tickets()->find(array_keys($item->additional['booking']['qty'])[0]);
+        $ticket = $bookingProduct->event_tickets()->find($item->additional['booking']['ticket_id']);
 
         $price += $ticket->price;
 

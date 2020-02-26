@@ -9,6 +9,7 @@ use Webkul\BookingProduct\Repositories\BookingProductAppointmentSlotRepository;
 use Webkul\BookingProduct\Repositories\BookingProductEventTicketRepository;
 use Webkul\BookingProduct\Repositories\BookingProductRentalSlotRepository;
 use Webkul\BookingProduct\Repositories\BookingProductTableSlotRepository;
+use Webkul\BookingProduct\Repositories\BookingRepository;
 
 /**
  * Booking Helper
@@ -29,6 +30,13 @@ class Booking
      * @return array
      */
     protected $typeRepositories = [];
+
+    /**
+     * BookingRepository
+     * 
+     * @return object
+     */
+    protected $bookingRepository;
 
     /**
      * @return array
@@ -55,6 +63,7 @@ class Booking
      * @param Webkul\BookingProduct\Repositories\BookingProductEventTicketRepository     $bookingProductEventTicketRepository
      * @param Webkul\BookingProduct\Repositories\BookingProductRentalSlotRepository      $bookingProductRentalSlotRepository
      * @param Webkul\BookingProduct\Repositories\BookingProductTableSlotRepository       $bookingProductTableSlotRepository
+     * @param Webkul\BookingProduct\Repositories\BookingRepository                       $bookingRepository
      * @return void
      */
     public function __construct(
@@ -63,7 +72,8 @@ class Booking
         BookingProductAppointmentSlotRepository $bookingProductAppointmentSlotRepository,
         BookingProductEventTicketRepository $bookingProductEventTicketRepository,
         BookingProductRentalSlotRepository $bookingProductRentalSlotRepository,
-        BookingProductTableSlotRepository $bookingProductTableSlotRepository
+        BookingProductTableSlotRepository $bookingProductTableSlotRepository,
+        BookingRepository $bookingRepository
     )
     {
         $this->bookingProductRepository = $bookingProductRepository;
@@ -77,6 +87,8 @@ class Booking
         $this->typeRepositories['rental'] = $bookingProductRentalSlotRepository;
 
         $this->typeRepositories['table'] = $bookingProductTableSlotRepository;
+
+        $this->bookingRepository = $bookingRepository;
     }
 
     /**
@@ -113,7 +125,7 @@ class Booking
 
             $slotsByDays[] = [
                 'name'  => trans($this->daysOfWeek[$index]),
-                'slots' => isset($availabileDays[$index]) ? $this->conver24To12Hours($slots) : []
+                'slots' => isset($availabileDays[$index]) ? $this->conver24To12Hours($slots) : [],
             ];
         }
 
@@ -314,11 +326,19 @@ class Booking
     }
 
     /**
-     * @param integer        $qty
-     * @param BookingProduct $bookingProduct
+     * @param CartItem $cartItem
      * @return bool
      */
-    public function haveSufficientQuantity($qty, $bookingProduct)
+    public function isItemHaveQuantity($cartItem)
+    {
+        return true;
+    }
+
+    /**
+     * @param array $cartProducts
+     * @return bool
+     */
+    public function isSlotAvailable($cartProducts)
     {
         return true;
     }
@@ -339,24 +359,22 @@ class Booking
 
         switch ($bookingProduct->type) {
             case 'event':
-                foreach ($data['booking']['qty'] as $ticketId => $qty) {
-                    $ticket = $bookingProduct->event_tickets()->find($ticketId);
+                $ticket = $bookingProduct->event_tickets()->find($data['booking']['ticket_id']);
 
-                    $data['attributes'] = [
-                        [
-                            'attribute_name' => 'Event Ticket',
-                            'option_id'      => 0,
-                            'option_label'   => $ticket->name
-                        ], [
-                            'attribute_name' => 'Rent From',
-                            'option_id'      => 0,
-                            'option_label'   => Carbon::createFromTimeString($bookingProduct->available_from)->format('d F, Y')
-                        ], [
-                            'attribute_name' => 'Rent Till',
-                            'option_id'      => 0,
-                            'option_label'   => Carbon::createFromTimeString($bookingProduct->available_to)->format('d F, Y')
-                        ]];
-                }
+                $data['attributes'] = [
+                    [
+                        'attribute_name' => 'Event Ticket',
+                        'option_id'      => 0,
+                        'option_label'   => $ticket->name,
+                    ], [
+                        'attribute_name' => 'Rent From',
+                        'option_id'      => 0,
+                        'option_label'   => Carbon::createFromTimeString($bookingProduct->available_from)->format('d F, Y'),
+                    ], [
+                        'attribute_name' => 'Rent Till',
+                        'option_id'      => 0,
+                        'option_label'   => Carbon::createFromTimeString($bookingProduct->available_to)->format('d F, Y'),
+                    ]];
                 
                 break;
 
@@ -377,15 +395,15 @@ class Booking
                     [
                         'attribute_name' => 'Rent Type',
                         'option_id'      => 0,
-                        'option_label'   => trans('bookingproduct::app.shop.cart.' . $rentingType)
+                        'option_label'   => trans('bookingproduct::app.shop.cart.' . $rentingType),
                     ], [
                         'attribute_name' => 'Rent From',
                         'option_id'      => 0,
-                        'option_label'   => $from
+                        'option_label'   => $from,
                     ], [
                         'attribute_name' => 'Rent Till',
                         'option_id'      => 0,
-                        'option_label'   => $to
+                        'option_label'   => $to,
                     ]];
 
                 break;

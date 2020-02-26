@@ -82,7 +82,7 @@ class RentalSlot extends Booking
                             'to'             => $to->format('h:i A'),
                             'from_timestamp' => $from->getTimestamp(),
                             'to_timestamp'   => $to->getTimestamp(),
-                            'qty'            => $qty
+                            'qty'            => $qty,
                         ];
                     }
                 } else {
