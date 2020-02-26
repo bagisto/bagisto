@@ -152,10 +152,10 @@ class CartRule
                     ->where('cart_rule_customer_groups.customer_group_id', $customerGroupId)
                     ->where('cart_rule_channels.channel_id', core()->getCurrentChannel()->id)
                     ->where(function ($query1) {
-                        $query1->where('cart_rules.starts_from', '<=', Carbon::now()->format('Y-m-d'))->orWhereNull('cart_rules.starts_from');
+                        $query1->where('cart_rules.starts_from', '<=', Carbon::now()->format('Y-m-d H:i:s'))->orWhereNull('cart_rules.starts_from');
                     })
                     ->where(function ($query2) {
-                        $query2->where('cart_rules.ends_till', '>=', Carbon::now()->format('Y-m-d'))->orWhereNull('cart_rules.ends_till');
+                        $query2->where('cart_rules.ends_till', '>=', Carbon::now()->format('Y-m-d H:i:s'))->orWhereNull('cart_rules.ends_till');
                     })
                     ->orderBy('sort_order', 'asc');
         })->findWhere(['status' => 1]);
