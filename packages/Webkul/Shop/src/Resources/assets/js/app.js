@@ -1,12 +1,12 @@
 import $ from 'jquery';
 import Vue from 'vue';
 import VeeValidate from 'vee-validate';
+import de from 'vee-validate/dist/locale/de';
+import ar from 'vee-validate/dist/locale/ar';
 import axios from 'axios';
 import VueSlider from 'vue-slider-component';
 import accounting from 'accounting';
-
 import ImageSlider from './components/image-slider';
-import { messages as localeMessages } from './lang/locales';
 
 window.jQuery = window.$ = $;
 window.Vue = Vue;
@@ -17,7 +17,8 @@ require("ez-plus/src/jquery.ez-plus.js");
 
 Vue.use(VeeValidate, {
     dictionary: {
-        ar: { messages: localeMessages.ar }
+        ar: ar,
+        de: de,
     },
     events: 'input|change|blur',
 });
