@@ -11,6 +11,24 @@ class OrderAddress extends Model implements OrderAddressContract
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'email',
+        'company_name',
+        'vat_id',
+        'address1',
+        'address2',
+        'city',
+        'state',
+        'postcode',
+        'country',
+        'phone',
+        'address_type',
+        'cart_id',
+        'customer_id',
+    ];
+
     /**
      * Get of the customer fullname.
      */
