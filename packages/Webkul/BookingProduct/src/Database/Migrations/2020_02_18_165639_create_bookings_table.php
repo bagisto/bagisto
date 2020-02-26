@@ -21,6 +21,8 @@ class CreateBookingsTable extends Migration
 
             $table->integer('order_item_id')->unsigned()->nullable();
 
+            $table->integer('booking_product_event_ticket_id')->unsigned()->nullable();
+
             $table->integer('order_id')->unsigned()->nullable();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
 

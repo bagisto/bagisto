@@ -2,6 +2,7 @@
 
 namespace Webkul\BookingProduct\Helpers;
 
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 /**
@@ -20,9 +21,9 @@ class EventTicket extends Booking
      */
     public function getEventDate($bookingProduct)
     {
-        $from = Carbon::createFromTimeString($bookingProduct->available_from->format('Y-m-d'))->format('d F, Y h:i A');
+        $from = Carbon::createFromTimeString($bookingProduct->available_from)->format('d F, Y h:i A');
 
-        $to = Carbon::createFromTimeString($bookingProduct->available_to->format('Y-m-d'))->format('d F, Y h:i A');
+        $to = Carbon::createFromTimeString($bookingProduct->available_to)->format('d F, Y h:i A');
 
         return $from . ' - ' . $to;
     }
@@ -58,6 +59,58 @@ class EventTicket extends Booking
         }
 
         return $tickets;
+    }
+
+    /**
+     * @param CartItem $cartItem
+     * @return bool
+     */
+    public function isItemHaveQuantity($cartItem)
+    {
+        $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $cartItem->product_id);
+
+        $ticket = $bookingProduct->event_tickets()->find($cartItem['additional']['booking']['ticket_id']);
+
+        if ($ticket->qty - $this->getBookedQuantity($cartItem) < $cartItem->quantity) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @param array $cartProducts
+     * @return bool
+     */
+    public function isSlotAvailable($cartProducts)
+    {
+        foreach ($cartProducts as $cartProduct) {
+            $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $cartProduct['product_id']);
+
+            $ticket = $bookingProduct->event_tickets()->find($cartProduct['additional']['booking']['ticket_id']);
+
+            if ($ticket->qty - $this->getBookedQuantity($cartProduct) < $cartProduct['quantity']) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param array $data
+     * @return integer
+     */
+    public function getBookedQuantity($data)
+    {
+        $result = $this->bookingRepository->getModel()
+                ->leftJoin('order_items', 'bookings.order_item_id', '=', 'order_items.id')
+                ->addSelect(DB::raw('SUM(qty_ordered - qty_canceled - qty_refunded) as total_qty_booked'))
+                ->where('bookings.product_id', $data['product_id'])
+                ->where('bookings.booking_product_event_ticket_id', $data['additional']['booking']['ticket_id'])
+                ->first();
+
+        return ! is_null($result->total_qty_booked) ? $result->total_qty_booked : 0;
     }
 
     /**

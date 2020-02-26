@@ -37,11 +37,11 @@ class DefaultSlot extends Booking
         $currentTime = Carbon::now();
 
         $availableFrom = ! $bookingProduct->available_from && $bookingProduct->available_from
-                            ? Carbon::createFromTimeString($bookingProduct->available_from->format('Y-m-d') . ' 00:00:00')
+                            ? Carbon::createFromTimeString($bookingProduct->available_from)
                             : clone $currentTime;
 
         $availableTo = ! $bookingProduct->available_from && $bookingProduct->available_to
-                            ? Carbon::createFromTimeString($bookingProduct->available_to->format('Y-m-d') . ' 23:59:59')
+                            ? Carbon::createFromTimeString($bookingProduct->available_to)
                             : Carbon::createFromTimeString('2080-01-01 00:00:00');
 
         if ($requestedDate < $currentTime
@@ -101,11 +101,11 @@ class DefaultSlot extends Booking
         $currentTime = Carbon::now();
 
         $availableFrom = ! $bookingProduct->available_from && $bookingProduct->available_from
-                            ? Carbon::createFromTimeString($bookingProduct->available_from->format('Y-m-d') . ' 00:00:00')
+                            ? Carbon::createFromTimeString($bookingProduct->available_from)
                             : clone $currentTime;
 
         $availableTo = ! $bookingProduct->available_from && $bookingProduct->available_to
-                            ? Carbon::createFromTimeString($bookingProduct->available_to->format('Y-m-d') . ' 23:59:59')
+                            ? Carbon::createFromTimeString($bookingProduct->available_to)
                             : Carbon::createFromTimeString('2080-01-01 00:00:00');
 
         $timeDuration = $bookingProductSlot->slots[$requestedDate->format('w')] ?? [];

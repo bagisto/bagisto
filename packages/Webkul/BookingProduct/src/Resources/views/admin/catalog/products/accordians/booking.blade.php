@@ -61,9 +61,9 @@
                     <div class="control-group" :class="[errors.has('booking[available_from]') ? 'has-error' : '']">
                         <label class="required">{{ __('bookingproduct::app.admin.catalog.products.available-from') }}</label>
 
-                        <date>
+                        <datetime>
                             <input type="text" v-validate="'required'" name="booking[available_from]" v-model="booking.available_from" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.available-from') }}&quot;"/>
-                        </date>
+                        </datetime>
                         
                         <span class="control-error" v-if="errors.has('booking[available_from]')">@{{ errors.first('booking[available_from]') }}</span>
                     </div>
@@ -71,9 +71,9 @@
                     <div class="control-group" :class="[errors.has('booking[available_to]') ? 'has-error' : '']">
                         <label class="required">{{ __('bookingproduct::app.admin.catalog.products.available-to') }}</label>
 
-                        <date>
+                        <datetime>
                             <input type="text" v-validate="'required'" name="booking[available_to]" v-model="booking.available_to" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.available-to') }}&quot;"/>
-                        </date>
+                        </datetime>
                         
                         <span class="control-error" v-if="errors.has('booking[available_to]')">@{{ errors.first('booking[available_to]') }}</span>
                     </div>

@@ -181,9 +181,13 @@ class Booking
 
         $currentTime = Carbon::now();
 
-        $availableFrom = Carbon::createFromTimeString($bookingProduct->available_from->format('Y-m-d') . " 00:00:01");
+        $availableFrom = ! $bookingProduct->available_from && $bookingProduct->available_from
+                ? Carbon::createFromTimeString($bookingProduct->available_from)
+                : clone $currentTime;
 
-        $availableTo = Carbon::createFromTimeString($bookingProduct->available_to->format('Y-m-d') . " 23:59:59");
+        $availableTo = ! $bookingProduct->available_from && $bookingProduct->available_to
+                ? Carbon::createFromTimeString($bookingProduct->available_to)
+                : Carbon::createFromTimeString('2080-01-01 00:00:00');
 
         for ($i = 0; $i < 7; $i++) {
             $date = clone $currentTime;
@@ -260,11 +264,11 @@ class Booking
         $currentTime = Carbon::now();
 
         $availableFrom = ! $bookingProduct->available_every_week && $bookingProduct->available_from
-                        ? Carbon::createFromTimeString($bookingProduct->available_from->format('Y-m-d') . " 00:00:00")
-                        : Carbon::createFromTimeString($currentTime->format('Y-m-d') . ' 00:00:00');
+                        ? Carbon::createFromTimeString($bookingProduct->available_from)
+                        : Carbon::createFromTimeString($currentTime);
 
         $availableTo = ! $bookingProduct->available_every_week && $bookingProduct->available_from
-                        ? Carbon::createFromTimeString($bookingProduct->available_to->format('Y-m-d') . ' 23:59:59')
+                        ? Carbon::createFromTimeString($bookingProduct->available_to)
                         : Carbon::createFromTimeString('2080-01-01 00:00:00');
 
         $timeDurations = $bookingProductSlot->same_slot_all_days
@@ -374,7 +378,7 @@ class Booking
                 ->where('bookings.to', $timestamps[1])
                 ->first();
 
-        return $result->total_qty_booked;
+        return ! is_null($result->total_qty_booked) ? $result->total_qty_booked : 0;
     }
 
     /**
@@ -403,11 +407,11 @@ class Booking
                     ], [
                         'attribute_name' => 'Rent From',
                         'option_id'      => 0,
-                        'option_label'   => Carbon::createFromTimeString($bookingProduct->available_from->format('Y-m-d'))->format('d F, Y'),
+                        'option_label'   => Carbon::createFromTimeString($bookingProduct->available_from)->format('d F, Y'),
                     ], [
                         'attribute_name' => 'Rent Till',
                         'option_id'      => 0,
-                        'option_label'   => Carbon::createFromTimeString($bookingProduct->available_to->format('Y-m-d'))->format('d F, Y'),
+                        'option_label'   => Carbon::createFromTimeString($bookingProduct->available_to)->format('d F, Y'),
                     ]];
                 
                 break;
