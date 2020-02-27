@@ -178,9 +178,9 @@ class Grouped extends AbstractType
             $product = $this->productRepository->find($productId);
 
             $cartProducts = $product->getTypeInstance()->prepareForCart([
-                    'product_id' => $productId,
-                    'quantity' => $qty,
-                ]);
+                'product_id' => $productId,
+                'quantity' => $qty,
+            ]);
 
             if (is_string($cartProducts)) {
                 return $cartProducts;

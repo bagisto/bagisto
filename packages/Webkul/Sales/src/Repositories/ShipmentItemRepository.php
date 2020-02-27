@@ -36,8 +36,8 @@ class ShipmentItemRepository extends Repository
         }
 
         $orderedInventory = $data['product']->ordered_inventories()
-                ->where('channel_id', $data['shipment']->order->channel->id)
-                ->first();
+                                            ->where('channel_id', $data['shipment']->order->channel->id)
+                                            ->first();
 
         if ($orderedInventory) {
             if (($orderedQty = $orderedInventory->qty - $data['qty']) < 0) {
@@ -48,9 +48,9 @@ class ShipmentItemRepository extends Repository
         }
 
         $inventory = $data['product']->inventories()
-                ->where('vendor_id', $data['vendor_id'])
-                ->where('inventory_source_id', $data['shipment']->inventory_source_id)
-                ->first();
+                                     ->where('vendor_id', $data['vendor_id'])
+                                     ->where('inventory_source_id', $data['shipment']->inventory_source_id)
+                                     ->first();
 
         if (! $inventory) {
             return;

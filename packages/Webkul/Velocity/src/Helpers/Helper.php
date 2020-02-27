@@ -148,11 +148,12 @@ class Helper extends Review
      */
     public function getCountRating($product)
     {
-        $reviews = $product->reviews()->where('status', 'approved')
-            ->select('rating', DB::raw('count(*) as total'))
-            ->groupBy('rating')
-            ->orderBy('rating','desc')
-            ->get();
+        $reviews = $product->reviews()
+                           ->where('status', 'approved')
+                           ->select('rating', DB::raw('count(*) as total'))
+                           ->groupBy('rating')
+                           ->orderBy('rating','desc')
+                           ->get();
 
         $totalReviews = $this->getTotalReviews($product);
 
@@ -192,9 +193,9 @@ class Helper extends Review
     public function getShopRecentReviews($reviewCount = 4)
     {
         $reviews = $this->productReviewRepository->getModel()
-                ->orderBy('id', 'desc')
-                ->where('status', 'approved')
-                ->take($reviewCount)->get();
+                                                 ->orderBy('id', 'desc')
+                                                 ->where('status', 'approved')
+                                                 ->take($reviewCount)->get();
 
         return $reviews;
     }

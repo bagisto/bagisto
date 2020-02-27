@@ -88,10 +88,10 @@ class WishlistController extends Controller
         ];
 
         $checked = $this->wishlistRepository->findWhere([
-                'channel_id'  => core()->getCurrentChannel()->id,
-                'product_id'  => $itemId,
-                'customer_id' => auth()->guard('customer')->user()->id
-            ]);
+            'channel_id'  => core()->getCurrentChannel()->id,
+            'product_id'  => $itemId,
+            'customer_id' => auth()->guard('customer')->user()->id
+        ]);
 
         //accidental case if some one adds id of the product in the anchor tag amd gives id of a variant.
         if ($product->parent_id != null) {

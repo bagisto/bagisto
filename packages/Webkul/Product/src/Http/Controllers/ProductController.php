@@ -246,6 +246,7 @@ class ProductController extends Controller
             return response()->json(['message' => true], 200);
         } catch (\Exception $e) {
             report($e);
+
             session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Product']));
         }
 
@@ -328,10 +329,10 @@ class ProductController extends Controller
 
             foreach ($this->productRepository->searchProductByAttribute(request()->input('query')) as $row) {
                 $results[] = [
-                        'id'   => $row->product_id,
-                        'sku'  => $row->sku,
-                        'name' => $row->name,
-                    ];
+                    'id'   => $row->product_id,
+                    'sku'  => $row->sku,
+                    'name' => $row->name,
+                ];
             }
 
             return response()->json($results);

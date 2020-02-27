@@ -203,11 +203,11 @@ abstract class AbstractType
             }
 
             $attributeValue = $this->attributeValueRepository->findOneWhere([
-                    'product_id'   => $product->id,
-                    'attribute_id' => $attribute->id,
-                    'channel'      => $attribute->value_per_channel ? $data['channel'] : null,
-                    'locale'       => $attribute->value_per_locale ? $data['locale'] : null
-                ]);
+                'product_id'   => $product->id,
+                'attribute_id' => $attribute->id,
+                'channel'      => $attribute->value_per_channel ? $data['channel'] : null,
+                'locale'       => $attribute->value_per_locale ? $data['locale'] : null
+            ]);
 
             if (! $attributeValue) {
                 $this->attributeValueRepository->create([
@@ -373,9 +373,9 @@ abstract class AbstractType
         $total = 0;
 
         $channelInventorySourceIds = core()->getCurrentChannel()
-                ->inventory_sources()
-                ->where('status', 1)
-                ->pluck('id');
+                                           ->inventory_sources()
+                                           ->where('status', 1)
+                                           ->pluck('id');
 
         foreach ($this->product->inventories as $inventory) {
             if (is_numeric($index = $channelInventorySourceIds->search($inventory->inventory_source_id))) {
@@ -384,8 +384,8 @@ abstract class AbstractType
         }
 
         $orderedInventory = $this->product->ordered_inventories()
-                ->where('channel_id', core()->getCurrentChannel()->id)
-                ->first();
+                                          ->where('channel_id', core()->getCurrentChannel()->id)
+                                          ->first();
 
         if ($orderedInventory) {
             $total -= $orderedInventory->qty;

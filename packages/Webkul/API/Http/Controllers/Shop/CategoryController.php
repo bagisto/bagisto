@@ -40,7 +40,7 @@ class CategoryController extends Controller
     public function index()
     {
         return CategoryResource::collection(
-                $this->categoryRepository->getVisibleCategoryTree(request()->input('parent_id'))
-            );
+            $this->categoryRepository->getVisibleCategoryTree(request()->input('parent_id'))
+        );
     }
 }

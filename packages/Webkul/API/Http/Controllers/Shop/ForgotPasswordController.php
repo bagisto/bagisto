@@ -30,13 +30,13 @@ class ForgotPasswordController extends Controller
 
         if ($response == Password::RESET_LINK_SENT) {
             return response()->json([
-                    'message' => trans($response)
-                ]);
+                'message' => trans($response)
+            ]);
         }
 
         return response()->json([
-                'error' => trans($response)
-            ]);
+            'error' => trans($response)
+        ]);
     }
 
     /**

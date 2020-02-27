@@ -57,8 +57,8 @@ class ProductDownloadableLinkRepository extends Repository
             foreach ($data['downloadable_links'] as $linkId => $data) {
                 if (Str::contains($linkId, 'link_')) {
                     $this->create(array_merge([
-                            'product_id' => $product->id,
-                        ], $data));
+                        'product_id' => $product->id,
+                    ], $data));
                 } else {
                     if (is_numeric($index = $previousLinkIds->search($linkId))) {
                         $previousLinkIds->forget($index);

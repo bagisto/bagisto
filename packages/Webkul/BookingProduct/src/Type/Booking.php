@@ -100,8 +100,8 @@ class Booking extends Virtual
                 $this->bookingProductRepository->update(request('booking'), $bookingProduct->id);
             } else {
                 $this->bookingProductRepository->create(array_merge(request('booking'), [
-                        'product_id' => $id
-                    ]));
+                    'product_id' => $id
+                ]));
             }
         }
 
@@ -158,12 +158,12 @@ class Booking extends Virtual
                 }
 
                 $cartProducts = parent::prepareForCart([
-                        'product_id' => $data['product_id'],
-                        'quantity'   => $qty,
-                        'booking'    => [
-                            'ticket_id' => $ticketId,
-                        ],
-                    ]);
+                    'product_id' => $data['product_id'],
+                    'quantity'   => $qty,
+                    'booking'    => [
+                        'ticket_id' => $ticketId,
+                    ],
+                ]);
 
                 if (is_string($cartProducts)) {
                     return $cartProducts;

@@ -78,10 +78,11 @@ class SubscriptionController extends Controller
 
         $result = $subscriber->update($data);
 
-        if ($result)
+        if ($result) {
             session()->flash('success', trans('admin::app.customers.subscribers.update-success'));
-        else
+        } else {
             session()->flash('error', trans('admin::app.customers.subscribers.update-failed'));
+        }
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -104,6 +105,7 @@ class SubscriptionController extends Controller
             return response()->json(['message' => true], 200);
         } catch (\Exception $e) {
             report($e);
+            
             session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Subscriber']));
         }
 

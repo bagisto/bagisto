@@ -89,8 +89,8 @@ class OnepageController extends Controller
         $cart = Cart::getCart();
 
         return response()->json([
-                'html' => view('shop::checkout.total.summary', compact('cart'))->render()
-            ]);
+            'html' => view('shop::checkout.total.summary', compact('cart'))->render()
+        ]);
     }
 
     /**
@@ -330,18 +330,18 @@ class OnepageController extends Controller
             Cart::collectTotals();
 
             return response()->json([
-                    'success' => true,
-                    'message' => trans('admin::app.promotion.status.coupon-removed'),
-                    'data'    => [
-                        'grand_total' => core()->currency(Cart::getCart()->grand_total)
-                    ]
-                ], 200);
+                'success' => true,
+                'message' => trans('admin::app.promotion.status.coupon-removed'),
+                'data'    => [
+                    'grand_total' => core()->currency(Cart::getCart()->grand_total)
+                ]
+            ], 200);
         } else {
             return response()->json([
-                    'success' => false,
-                    'message' => trans('admin::app.promotion.status.coupon-remove-failed'),
-                    'data'    => null
-                ], 422);
+                'success' => false,
+                'message' => trans('admin::app.promotion.status.coupon-remove-failed'),
+                'data'    => null
+            ], 422);
         }
     }
 }

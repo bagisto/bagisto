@@ -59,8 +59,7 @@ class AddressDataGrid extends DataGrid
                 ->on('countries.id', 'country_states.country_id');
         });
 
-        $queryBuilder
-            ->groupBy('ca.id')
+        $queryBuilder->groupBy('ca.id')
             ->addSelect(DB::raw(DB::getTablePrefix() . 'country_states.default_name as state_name'));
 
         $this->addFilter('address_id', 'ca.id');

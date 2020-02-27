@@ -58,6 +58,7 @@ class Laravel5Helper extends Laravel5
             'brand'                => 'text_value',
             'guest_checkout'       => 'boolean_value',
         ];
+        
         if (! array_key_exists($attribute, $attributes)) {
             return null;
         }
@@ -222,6 +223,7 @@ class Laravel5Helper extends Laravel5
     private function createAttributeValues(int $productId, array $attributeValues = []): void
     {
         $I = $this;
+        
         $productAttributeValues = [
             'sku',
             'url_key',
@@ -248,7 +250,7 @@ class Laravel5Helper extends Laravel5
             if (array_key_exists($attribute, $attributeValues)) {
                 $fieldName = self::getAttributeFieldName($attribute);
 
-                if (!array_key_exists($fieldName, $data)) {
+                if (! array_key_exists($fieldName, $data)) {
                     $data[$fieldName] = $attributeValues[$attribute];
                 } else {
                     $data = [$fieldName => $attributeValues[$attribute]];

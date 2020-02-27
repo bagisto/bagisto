@@ -31,7 +31,6 @@ class CurrencyRepository extends Repository
             } else {
                 return false;
             }
-
         }
     }
 }

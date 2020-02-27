@@ -21,6 +21,7 @@ class LocalesTableSeeder extends Seeder
                 'id'   => 2,
                 'code' => 'fr',
                 'name' => 'French',
-            ]);
+            ]
+        );
     }
 }

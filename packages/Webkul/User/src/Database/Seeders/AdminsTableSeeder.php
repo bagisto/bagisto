@@ -13,15 +13,15 @@ class AdminsTableSeeder extends Seeder
         DB::table('admins')->delete();
 
         DB::table('admins')->insert([
-                'id'         => 1,
-                'name'       => 'Example',
-                'email'      => 'admin@example.com',
-                'password'   => bcrypt('admin123'),
-                'api_token'  => Str::random(80),
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s'),
-                'status'     => 1,
-                'role_id'    => 1
-            ]);
+            'id'         => 1,
+            'name'       => 'Example',
+            'email'      => 'admin@example.com',
+            'password'   => bcrypt('admin123'),
+            'api_token'  => Str::random(80),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+            'status'     => 1,
+            'role_id'    => 1
+        ]);
     }
 }

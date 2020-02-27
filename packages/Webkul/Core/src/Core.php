@@ -392,8 +392,8 @@ class Core
         }
 
         $targetCurrency = ! $targetCurrencyCode
-            ? $this->getCurrentCurrency()
-            : $this->currencyRepository->findOneByField('code', $targetCurrencyCode);
+                          ? $this->getCurrentCurrency()
+                          : $this->currencyRepository->findOneByField('code', $targetCurrencyCode);
 
         if (! $targetCurrency) {
             return $amount;
@@ -427,8 +427,8 @@ class Core
     public function convertToBasePrice($amount, $targetCurrencyCode = null)
     {
         $targetCurrency = ! $targetCurrencyCode
-            ? $this->getCurrentCurrency()
-            : $this->currencyRepository->findOneByField('code', $targetCurrencyCode);
+                          ? $this->getCurrentCurrency()
+                          : $this->currencyRepository->findOneByField('code', $targetCurrencyCode);
 
         if (! $targetCurrency) {
             return $amount;
@@ -821,8 +821,8 @@ class Core
 
                 $start = Carbon::createFromTimeString($date->format('Y-m-d') . ' 00:00:01');
                 $end = $totalMonths - 1 == $i
-                    ? $endDate
-                    : Carbon::createFromTimeString($date->format('Y-m-d') . ' 23:59:59');
+                       ? $endDate
+                       : Carbon::createFromTimeString($date->format('Y-m-d') . ' 23:59:59');
 
                 $timeIntervals[] = ['start' => $start, 'end' => $end, 'formatedDate' => $date->format('M')];
             }
@@ -832,11 +832,11 @@ class Core
                 $date->addWeeks($i);
 
                 $start = $i == 0
-                    ? $startDate
-                    : Carbon::createFromTimeString($this->xWeekRange($date, 0) . ' 00:00:01');
+                         ? $startDate
+                         : Carbon::createFromTimeString($this->xWeekRange($date, 0) . ' 00:00:01');
                 $end = $totalWeeks - 1 == $i
-                    ? $endDate
-                    : Carbon::createFromTimeString($this->xWeekRange($date, 1) . ' 23:59:59');
+                       ? $endDate
+                       : Carbon::createFromTimeString($this->xWeekRange($date, 1) . ' 23:59:59');
 
                 $timeIntervals[] = ['start' => $start, 'end' => $end, 'formatedDate' => $date->format('d M')];
             }
@@ -966,6 +966,7 @@ class Core
         }
 
         $finalKey = array_shift($keys);
+
         if (isset($array[$finalKey])) {
             $array[$finalKey] = $this->arrayMerge($array[$finalKey], $value);
         } else {
@@ -978,6 +979,7 @@ class Core
     protected function arrayMerge(array &$array1, array &$array2)
     {
         $merged = $array1;
+        
         foreach ($array2 as $key => &$value) {
             if (is_array($value) && isset($merged[$key]) && is_array($merged[$key])) {
                 $merged[$key] = $this->arrayMerge($merged[$key], $value);

@@ -190,6 +190,7 @@ class RegistrationController extends Controller
 
             return redirect()->back();
         }
+        
         session()->flash('success', trans('shop::app.customer.signup-form.verification-sent'));
 
         return redirect()->back();

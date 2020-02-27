@@ -76,7 +76,7 @@ class SliderController extends Controller
         $this->validate(request(), [
             'title'      => 'string|required',
             'channel_id' => 'required',
-            'image.*'    => 'required|mimes:jpeg,bmp,png,jpg'
+            'image.*'    => 'required|mimes:jpeg,bmp,png,jpg',
         ]);
 
         $result = $this->sliderRepository->save(request()->all());
@@ -111,11 +111,12 @@ class SliderController extends Controller
         $this->validate(request(), [
             'title'      => 'string|required',
             'channel_id' => 'required',
-            'image.*'    => 'sometimes|mimes:jpeg,bmp,png,jpg'
+            'image.*'    => 'sometimes|mimes:jpeg,bmp,png,jpg',
         ]);
 
         if ( is_null(request()->image)) {
             session()->flash('error', trans('admin::app.settings.sliders.update-fail'));
+            
             return redirect()->back();
         }
 

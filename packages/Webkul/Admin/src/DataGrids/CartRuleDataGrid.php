@@ -22,7 +22,7 @@ class CartRuleDataGrid extends DataGrid
         $queryBuilder = DB::table('cart_rules')
                 ->leftJoin('cart_rule_coupons', function($leftJoin) {
                     $leftJoin->on('cart_rule_coupons.cart_rule_id', '=', 'cart_rules.id')
-                        ->where('cart_rule_coupons.is_primary', 1);
+                             ->where('cart_rule_coupons.is_primary', 1);
                 })
                 ->addSelect('cart_rules.id', 'name', 'cart_rule_coupons.code as coupon_code', 'status', 'starts_from', 'ends_till', 'sort_order');
 

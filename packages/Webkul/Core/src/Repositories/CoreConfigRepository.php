@@ -85,11 +85,11 @@ class CoreConfigRepository extends Repository
 
                 if (! count($coreConfigValue)) {
                     $this->model->create([
-                            'code'         => $fieldName,
-                            'value'        => $value,
-                            'locale_code'  => $localeBased ? $locale : null,
-                            'channel_code' => $channelBased ? $channel : null
-                        ]);
+                        'code'         => $fieldName,
+                        'value'        => $value,
+                        'locale_code'  => $localeBased ? $locale : null,
+                        'channel_code' => $channelBased ? $channel : null
+                    ]);
                 } else {
                     foreach ($coreConfigValue as $coreConfig) {
                         Storage::delete($coreConfig['value']);
@@ -98,11 +98,11 @@ class CoreConfigRepository extends Repository
                             $this->model->destroy($coreConfig['id']);
                         } else {
                             $coreConfig->update([
-                                    'code'         => $fieldName,
-                                    'value'        => $value,
-                                    'locale_code'  => $localeBased ? $locale : null,
-                                    'channel_code' => $channelBased ? $channel : null
-                                ]);
+                                'code'         => $fieldName,
+                                'value'        => $value,
+                                'locale_code'  => $localeBased ? $locale : null,
+                                'channel_code' => $channelBased ? $channel : null
+                            ]);
                         }
                     }
                 }
@@ -117,6 +117,7 @@ class CoreConfigRepository extends Repository
      */
     public function recuressiveArray(array $formData, $method) {
         static $data = [];
+        
         static $recuressiveArrayData = [];
 
         foreach ($formData as $form => $formValue) {

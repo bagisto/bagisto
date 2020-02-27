@@ -36,8 +36,8 @@ class BookingProductEventTicketRepository extends Repository
             foreach ($data['tickets'] as $ticketId => $ticketInputs) {
                 if (Str::contains($ticketId, 'ticket_')) {
                     $this->create(array_merge([
-                            'booking_product_id' => $bookingProduct->id,
-                        ], $ticketInputs));
+                        'booking_product_id' => $bookingProduct->id,
+                    ], $ticketInputs));
                 } else {
                     if (is_numeric($index = $previousTicketIds->search($ticketId))) {
                         $previousTicketIds->forget($index);

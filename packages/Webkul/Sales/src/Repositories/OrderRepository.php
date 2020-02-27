@@ -199,10 +199,10 @@ class OrderRepository extends Repository
                     'Length'   => 'length',
                     'Suffix'   => 'suffix', ] as
                     $varSuffix => $confKey)
-                {
-                    $var = "invoiceNumber{$varSuffix}";
-                    $$var = core()->getConfigData('sales.orderSettings.order_number.order_number_'.$confKey) ?: false;
-                }
+        {
+            $var = "invoiceNumber{$varSuffix}";
+            $$var = core()->getConfigData('sales.orderSettings.order_number.order_number_'.$confKey) ?: false;
+        }
 
         $lastOrder = $this->model->orderBy('id', 'desc')->limit(1)->first();
         $lastId = $lastOrder ? $lastOrder->id : 0;

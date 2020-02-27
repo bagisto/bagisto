@@ -30,9 +30,9 @@ class ProductFlatRepository extends Repository
         }
 
         return $this->model
-            ->leftJoin('product_categories', 'product_flat.product_id', 'product_categories.product_id')
-            ->where('product_categories.category_id', $category->id)
-            ->max('max_price');
+                    ->leftJoin('product_categories', 'product_flat.product_id', 'product_categories.product_id')
+                    ->where('product_categories.category_id', $category->id)
+                    ->max('max_price');
     }
 
     /**
@@ -44,20 +44,18 @@ class ProductFlatRepository extends Repository
     public function getCategoryProductAttribute($categoryId)
     {
         $qb = $this->model
-            ->leftJoin('product_categories', 'product_flat.product_id', 'product_categories.product_id')
-            ->where('product_categories.category_id', $categoryId)
-            ->where('product_flat.channel', core()->getCurrentChannelCode())
-            ->where('product_flat.locale', app()->getLocale());
+                   ->leftJoin('product_categories', 'product_flat.product_id', 'product_categories.product_id')
+                   ->where('product_categories.category_id', $categoryId)
+                   ->where('product_flat.channel', core()->getCurrentChannelCode())
+                   ->where('product_flat.locale', app()->getLocale());
 
-        $productArrributes = $qb
-            ->leftJoin('product_attribute_values as pa', 'product_flat.product_id', 'pa.product_id')
-            ->pluck('pa.attribute_id')
-            ->toArray();
+        $productArrributes = $qb->leftJoin('product_attribute_values as pa', 'product_flat.product_id', 'pa.product_id')
+                                ->pluck('pa.attribute_id')
+                                ->toArray();
 
-        $productSuperArrributes = $qb
-            ->leftJoin('product_super_attributes as ps', 'product_flat.product_id', 'ps.product_id')
-            ->pluck('ps.attribute_id')
-            ->toArray();
+        $productSuperArrributes = $qb->leftJoin('product_super_attributes as ps', 'product_flat.product_id', 'ps.product_id')
+                                     ->pluck('ps.attribute_id')
+                                     ->toArray();
 
         $productCategoryArrributes = array_unique(array_merge($productArrributes, $productSuperArrributes));
 

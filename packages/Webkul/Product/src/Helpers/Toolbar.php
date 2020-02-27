@@ -49,9 +49,9 @@ class Toolbar extends AbstractProduct
         $keys = explode('-', $key);
 
         return request()->fullUrlWithQuery([
-                'sort'  => current($keys),
-                'order' => end($keys)
-            ]);
+            'sort'  => current($keys),
+            'order' => end($keys)
+        ]);
     }
 
     /**
@@ -63,8 +63,8 @@ class Toolbar extends AbstractProduct
     public function getLimitUrl($limit)
     {
         return request()->fullUrlWithQuery([
-                'limit' => $limit
-            ]);
+            'limit' => $limit
+        ]);
     }
 
     /**
@@ -76,8 +76,8 @@ class Toolbar extends AbstractProduct
     public function getModeUrl($mode)
     {
         return request()->fullUrlWithQuery([
-                'mode' => $mode
-            ]);
+            'mode' => $mode
+        ]);
     }
 
     /**

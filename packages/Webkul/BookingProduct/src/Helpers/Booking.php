@@ -272,8 +272,8 @@ class Booking
                         : Carbon::createFromTimeString('2080-01-01 00:00:00');
 
         $timeDurations = $bookingProductSlot->same_slot_all_days
-                ? $bookingProductSlot->slots
-                : ($bookingProductSlot->slots[$requestedDate->format('w')] ?? []);
+                        ? $bookingProductSlot->slots
+                        : ($bookingProductSlot->slots[$requestedDate->format('w')] ?? []);
 
         $slots = [];
 
@@ -315,11 +315,11 @@ class Booking
 
                     if ($qty && $currentTime <= $from) {
                         $slots[] = [
-                                'from'      => $from->format('h:i A'), 
-                                'to'        => $to->format('h:i A'), 
-                                'timestamp' => $from->getTimestamp() . '-' . $to->getTimestamp(), 
-                                'qty'       => $qty, 
-                            ];
+                            'from'      => $from->format('h:i A'), 
+                            'to'        => $to->format('h:i A'), 
+                            'timestamp' => $from->getTimestamp() . '-' . $to->getTimestamp(), 
+                            'qty'       => $qty, 
+                        ];
                     }
                 } else {
                     break;
@@ -371,12 +371,12 @@ class Booking
         $timestamps = explode('-', $data['additional']['booking']['slot']);
 
         $result = $this->bookingRepository->getModel()
-                ->leftJoin('order_items', 'bookings.order_item_id', '=', 'order_items.id')
-                ->addSelect(DB::raw('SUM(qty_ordered - qty_canceled - qty_refunded) as total_qty_booked'))
-                ->where('bookings.product_id', $data['product_id'])
-                ->where('bookings.from', $timestamps[0])
-                ->where('bookings.to', $timestamps[1])
-                ->first();
+                       ->leftJoin('order_items', 'bookings.order_item_id', '=', 'order_items.id')
+                       ->addSelect(DB::raw('SUM(qty_ordered - qty_canceled - qty_refunded) as total_qty_booked'))
+                       ->where('bookings.product_id', $data['product_id'])
+                       ->where('bookings.from', $timestamps[0])
+                       ->where('bookings.to', $timestamps[1])
+                       ->first();
 
         return ! is_null($result->total_qty_booked) ? $result->total_qty_booked : 0;
     }
@@ -412,7 +412,8 @@ class Booking
                         'attribute_name' => 'Rent Till',
                         'option_id'      => 0,
                         'option_label'   => Carbon::createFromTimeString($bookingProduct->available_to)->format('d F, Y'),
-                    ]];
+                    ]
+                ];
                 
                 break;
 
@@ -442,7 +443,8 @@ class Booking
                         'attribute_name' => 'Rent Till',
                         'option_id'      => 0,
                         'option_label'   => $to,
-                    ]];
+                    ]
+                ];
 
                 break;
             
@@ -458,7 +460,8 @@ class Booking
                         'attribute_name' => 'Booking Till',
                         'option_id'      => 0,
                         'option_label'   => Carbon::createFromTimestamp($timestamps[1])->format('d F, Y h:i A'),
-                    ]];
+                    ]
+                ];
 
                 break;
         }

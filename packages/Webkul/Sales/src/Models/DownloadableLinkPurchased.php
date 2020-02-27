@@ -11,7 +11,20 @@ class DownloadableLinkPurchased extends Model implements DownloadableLinkPurchas
 {
     protected $table = 'downloadable_link_purchased';
 
-    protected $fillable = ['product_name', 'name', 'url', 'file', 'file_name', 'type', 'download_bought', 'download_used', 'status', 'customer_id', 'order_id', 'order_item_id'];
+    protected $fillable = [
+        'product_name',
+        'name',
+        'url',
+        'file',
+        'file_name',
+        'type',
+        'download_bought',
+        'download_used',
+        'status',
+        'customer_id',
+        'order_id',
+        'order_item_id',
+    ];
 
     /**
      * Get the customer record associated with the item.

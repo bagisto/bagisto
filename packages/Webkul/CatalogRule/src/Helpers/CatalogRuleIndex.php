@@ -83,8 +83,8 @@ class CatalogRuleIndex
             }
 
             $productIds = $product->getTypeInstance()->isComposite()
-                            ? $product->getTypeInstance()->getChildrenIds()
-                            : [$product->id];
+                          ? $product->getTypeInstance()->getChildrenIds()
+                          : [$product->id];
 
             $this->cleanIndexes($productIds);
 
@@ -126,10 +126,12 @@ class CatalogRuleIndex
 
         $catalogRules = $this->catalogRuleRepository->scopeQuery(function($query) {
             return $query->where(function ($query1) {
-                        $query1->where('catalog_rules.starts_from', '<=', Carbon::now()->format('Y-m-d'))->orWhereNull('catalog_rules.starts_from');
+                        $query1->where('catalog_rules.starts_from', '<=', Carbon::now()->format('Y-m-d'))
+                               ->orWhereNull('catalog_rules.starts_from');
                     })
                     ->where(function ($query2) {
-                        $query2->where('catalog_rules.ends_till', '>=', Carbon::now()->format('Y-m-d'))->orWhereNull('catalog_rules.ends_till');
+                        $query2->where('catalog_rules.ends_till', '>=', Carbon::now()->format('Y-m-d'))
+                               ->orWhereNull('catalog_rules.ends_till');
                     })
                     ->orderBy('sort_order', 'asc');
         })->findWhere(['status' => 1]);

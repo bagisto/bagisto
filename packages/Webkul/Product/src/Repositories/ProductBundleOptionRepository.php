@@ -55,8 +55,8 @@ class ProductBundleOptionRepository extends Repository
             foreach ($data['bundle_options'] as $bundleOptionId => $bundleOptionInputs) {
                 if (Str::contains($bundleOptionId, 'option_')) {
                     $productBundleOption = $this->create(array_merge([
-                            'product_id' => $product->id,
-                        ], $bundleOptionInputs));
+                        'product_id' => $product->id,
+                    ], $bundleOptionInputs));
                 } else {
                     $productBundleOption = $this->find($bundleOptionId);
 

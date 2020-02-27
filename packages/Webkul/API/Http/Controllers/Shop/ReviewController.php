@@ -68,8 +68,8 @@ class ReviewController extends Controller
         $productReview = $this->reviewRepository->create($data);
 
         return response()->json([
-                'message' => 'Your review submitted successfully.',
-                'data'    => new ProductReviewResource($this->reviewRepository->find($productReview->id))
-            ]);
+            'message' => 'Your review submitted successfully.',
+            'data'    => new ProductReviewResource($this->reviewRepository->find($productReview->id))
+        ]);
     }
 }

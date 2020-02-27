@@ -22,9 +22,9 @@ abstract class Paypal extends Payment
     public function getPaypalUrl($params = [])
     {
         return sprintf('https://www.%spaypal.com/cgi-bin/webscr%s',
-                $this->getConfigData('sandbox') ? 'sandbox.' : '',
-                $params ? '?' . http_build_query($params) : ''
-            );
+            $this->getConfigData('sandbox') ? 'sandbox.' : '',
+            $params ? '?' . http_build_query($params) : ''
+        );
     }
 
     /**

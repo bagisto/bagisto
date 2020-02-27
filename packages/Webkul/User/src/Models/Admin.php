@@ -19,7 +19,12 @@ class Admin extends Authenticatable implements AdminContract
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'api_token', 'role_id', 'status',
+        'name',
+        'email',
+        'password',
+        'api_token',
+        'role_id',
+        'status',
     ];
 
     /**
@@ -28,7 +33,9 @@ class Admin extends Authenticatable implements AdminContract
      * @var array
      */
     protected $hidden = [
-        'password', 'api_token', 'remember_token',
+        'password',
+        'api_token',
+        'remember_token',
     ];
 
     /**

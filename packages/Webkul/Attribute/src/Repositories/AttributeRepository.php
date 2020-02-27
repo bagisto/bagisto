@@ -68,8 +68,8 @@ class AttributeRepository extends Repository
         if (in_array($attribute->type, ['select', 'multiselect', 'checkbox']) && count($options)) {
             foreach ($options as $optionInputs) {
                 $this->attributeOptionRepository->create(array_merge([
-                        'attribute_id' => $attribute->id
-                    ], $optionInputs));
+                    'attribute_id' => $attribute->id
+                ], $optionInputs));
             }
         }
 
@@ -101,8 +101,8 @@ class AttributeRepository extends Repository
                 foreach ($data['options'] as $optionId => $optionInputs) {
                     if (Str::contains($optionId, 'option_')) {
                         $this->attributeOptionRepository->create(array_merge([
-                                'attribute_id' => $attribute->id,
-                            ], $optionInputs));
+                            'attribute_id' => $attribute->id,
+                        ], $optionInputs));
                     } else {
                         if (is_numeric($index = $previousOptionIds->search($optionId))) {
                             $previousOptionIds->forget($index);

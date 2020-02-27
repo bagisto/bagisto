@@ -85,7 +85,7 @@ class CustomerController extends Controller
         Event::dispatch('customer.registration.after', $customer);
 
         return response()->json([
-                'message' => 'Your account has been created successfully.'
-            ]);
+            'message' => 'Your account has been created successfully.'
+        ]);
     }
 }

@@ -78,25 +78,25 @@ class AddressController extends Controller
         $customer = auth($this->guard)->user();
 
         request()->merge([
-            'address1' => implode(PHP_EOL, array_filter(request()->input('address1'))),
+            'address1'    => implode(PHP_EOL, array_filter(request()->input('address1'))),
             'customer_id' => $customer->id
         ]);
 
         $this->validate(request(), [
             'address1' => 'string|required',
-            'country' => 'string|required',
-            'state' => 'string|required',
-            'city' => 'string|required',
+            'country'  => 'string|required',
+            'state'    => 'string|required',
+            'city'     => 'string|required',
             'postcode' => 'required',
-            'phone' => 'required'
+            'phone'    => 'required'
         ]);
 
         $customerAddress = $this->customerAddressRepository->create(request()->all());
 
         return response()->json([
-                'message' => 'Your address has been created successfully.',
-                'data' => new CustomerAddressResource($customerAddress)
-            ]);
+            'message' => 'Your address has been created successfully.',
+            'data'    => new CustomerAddressResource($customerAddress)
+        ]);
     }
 
     /**
@@ -112,18 +112,18 @@ class AddressController extends Controller
 
         $this->validate(request(), [
             'address1' => 'string|required',
-            'country' => 'string|required',
-            'state' => 'string|required',
-            'city' => 'string|required',
+            'country'  => 'string|required',
+            'state'    => 'string|required',
+            'city'     => 'string|required',
             'postcode' => 'required',
-            'phone' => 'required'
+            'phone'    => 'required'
         ]);
 
         $this->customerAddressRepository->update(request()->all(), request()->input('id'));
 
         return response()->json([
-                'message' => 'Your address has been updated successfully.',
-                'data' => new CustomerAddressResource($this->customerAddressRepository->find(request()->input('id')))
-            ]);
+            'message' => 'Your address has been updated successfully.',
+            'data'    => new CustomerAddressResource($this->customerAddressRepository->find(request()->input('id')))
+        ]);
     }
 }

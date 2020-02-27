@@ -64,29 +64,29 @@ class WishlistController extends Controller
         $customer = auth()->guard($this->guard)->user();
 
         $wishlistItem = $this->wishlistRepository->findOneWhere([
+            'channel_id'  => core()->getCurrentChannel()->id,
+            'product_id'  => $id,
+            'customer_id' => $customer->id
+        ]);
+
+        if (! $wishlistItem) {
+            $wishlistItem = $this->wishlistRepository->create([
                 'channel_id'  => core()->getCurrentChannel()->id,
                 'product_id'  => $id,
                 'customer_id' => $customer->id
             ]);
 
-        if (! $wishlistItem) {
-            $wishlistItem = $this->wishlistRepository->create([
-                    'channel_id'  => core()->getCurrentChannel()->id,
-                    'product_id'  => $id,
-                    'customer_id' => $customer->id
-                ]);
-
             return response()->json([
-                    'data'    => new WishlistResource($wishlistItem),
-                    'message' => trans('customer::app.wishlist.success')
-                ]);
+                'data'    => new WishlistResource($wishlistItem),
+                'message' => trans('customer::app.wishlist.success')
+            ]);
         } else {
             $this->wishlistRepository->delete($wishlistItem->id);
 
             return response()->json([
-                    'data'    => null,
-                    'message' => 'Item removed from wishlist successfully.'
-                ]);
+                'data'    => null,
+                'message' => 'Item removed from wishlist successfully.'
+            ]);
         }
     }
 
@@ -102,8 +102,8 @@ class WishlistController extends Controller
 
         if ($wishlistItem->customer_id != auth()->guard($this->guard)->user()->id) {
             return response()->json([
-                    'message' => trans('shop::app.security-warning')
-                ], 400);
+                'message' => trans('shop::app.security-warning')
+            ], 400);
         }
 
         $result = Cart::moveToCart($wishlistItem);
@@ -114,14 +114,14 @@ class WishlistController extends Controller
             $cart = Cart::getCart();
 
             return response()->json([
-                    'data' => $cart ? new CartResource($cart) : null,
-                    'message' => trans('shop::app.wishlist.moved')
-                ]);
+                'data' => $cart ? new CartResource($cart) : null,
+                'message' => trans('shop::app.wishlist.moved')
+            ]);
         } else {
             return response()->json([
-                    'data' => -1,
-                    'error' => trans('shop::app.wishlist.option-missing')
-                ], 400);
+                'data' => -1,
+                'error' => trans('shop::app.wishlist.option-missing')
+            ], 400);
         }
     }
 }

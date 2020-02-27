@@ -24,7 +24,7 @@ class OrderRefundDataGrid extends DataGrid
                 ->leftJoin('orders', 'refunds.order_id', '=', 'orders.id')
                 ->leftJoin('order_address as order_address_billing', function($leftJoin) {
                     $leftJoin->on('order_address_billing.order_id', '=', 'orders.id')
-                        ->where('order_address_billing.address_type', 'billing');
+                             ->where('order_address_billing.address_type', 'billing');
                 })
                 ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.first_name, " ", ' . DB::getTablePrefix() . 'order_address_billing.last_name) as billed_to'));
 

@@ -39,8 +39,9 @@ class Validator
                     $validConditionCount++;
                 }
             } else {
-                if ($this->validateObject($condition, $entity))
+                if ($this->validateObject($condition, $entity)) {
                     return true;
+                }
             }
         }
 
@@ -96,14 +97,14 @@ class Validator
             case 'product':
                 if ($attributeCode == 'category_ids') {
                     $value = $entity->product
-                                ? $entity->product->categories()->pluck('id')->toArray()
-                                : $entity->categories()->pluck('id')->toArray();
+                             ? $entity->product->categories()->pluck('id')->toArray()
+                             : $entity->categories()->pluck('id')->toArray();
                     
                     return $value;
                 } else {
                     $value = $entity->product
-                                ? $entity->product->{$attributeCode}
-                                : $entity->{$attributeCode};
+                             ? $entity->product->{$attributeCode}
+                              : $entity->{$attributeCode};
 
                     if (! in_array($condition['attribute_type'], ['multiselect', 'checkbox'])) {
                         return $value;

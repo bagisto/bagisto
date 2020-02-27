@@ -322,7 +322,6 @@ abstract class DataGrid
                 if ($count_keys == 1) {
                     $collection->where(function($collection) use($info) {
                         foreach ($this->completeColumnDetails as $column) {
-
                             if ($column['searchable'] == true) {
                                 if($this->enableFilterMap && isset($this->filterMap[$column['index']])) {
                                     $collection->orWhere($this->filterMap[$column['index']], 'like', '%'.$info['all'].'%');

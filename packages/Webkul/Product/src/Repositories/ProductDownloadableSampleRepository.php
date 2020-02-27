@@ -55,8 +55,8 @@ class ProductDownloadableSampleRepository extends Repository
             foreach ($data['downloadable_samples'] as $sampleId => $data) {
                 if (Str::contains($sampleId, 'sample_')) {
                     $this->create(array_merge([
-                            'product_id' => $product->id,
-                        ], $data));
+                        'product_id' => $product->id,
+                    ], $data));
                 } else {
                     if (is_numeric($index = $previousSampleIds->search($sampleId))) {
                         $previousSampleIds->forget($index);

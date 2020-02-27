@@ -98,18 +98,18 @@ class Order
             }
 
             $ruleCustomer = $this->cartRuleCustomerRepository->findOneWhere([
-                    'customer_id'  => $order->customer_id,
-                    'cart_rule_id' => $ruleId
-                ]);
+                'customer_id'  => $order->customer_id,
+                'cart_rule_id' => $ruleId
+            ]);
 
             if ($ruleCustomer) {
                 $this->cartRuleCustomerRepository->update(['times_used' => $ruleCustomer->times_used + 1], $ruleCustomer->id);
             } else {
                 $this->cartRuleCustomerRepository->create([
-                        'customer_id'  => $order->customer_id,
-                        'cart_rule_id' => $ruleId,
-                        'times_used'   => 1
-                    ]);
+                    'customer_id'  => $order->customer_id,
+                    'cart_rule_id' => $ruleId,
+                    'times_used'   => 1
+                ]);
             }
         }
 
@@ -124,18 +124,18 @@ class Order
 
             if ($order->customer_id) {
                 $couponUsage = $this->cartRuleCouponUsageRepository->findOneWhere([
-                        'customer_id'         => $order->customer_id,
-                        'cart_rule_coupon_id' => $coupon->id
-                    ]);
+                    'customer_id'         => $order->customer_id,
+                    'cart_rule_coupon_id' => $coupon->id
+                ]);
 
                 if ($couponUsage) {
                     $this->cartRuleCouponUsageRepository->update(['times_used' => $couponUsage->times_used + 1], $couponUsage->id);
                 } else {
                     $this->cartRuleCouponUsageRepository->create([
-                            'customer_id'         => $order->customer_id,
-                            'cart_rule_coupon_id' => $coupon->id,
-                            'times_used'          => 1
-                        ]);
+                        'customer_id'         => $order->customer_id,
+                        'cart_rule_coupon_id' => $coupon->id,
+                        'times_used'          => 1
+                    ]);
                 }
             }
         }

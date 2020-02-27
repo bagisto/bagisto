@@ -51,8 +51,8 @@ class ProductController extends Controller
     public function get($id)
     {
         return new ProductResource(
-                $this->productRepository->findOrFail($id)
-            );
+            $this->productRepository->findOrFail($id)
+        );
     }
 
     /**
@@ -63,8 +63,8 @@ class ProductController extends Controller
     public function additionalInformation($id)
     {
         return response()->json([
-                'data' => app('Webkul\Product\Helpers\View')->getAdditionalData($this->productRepository->findOrFail($id))
-            ]);
+            'data' => app('Webkul\Product\Helpers\View')->getAdditionalData($this->productRepository->findOrFail($id))
+        ]);
     }
 
     /**
@@ -75,7 +75,7 @@ class ProductController extends Controller
     public function configurableConfig($id)
     {
         return response()->json([
-                'data' => app('Webkul\Product\Helpers\ConfigurableOption')->getConfigurationConfig($this->productRepository->findOrFail($id))
-            ]);
+            'data' => app('Webkul\Product\Helpers\ConfigurableOption')->getConfigurationConfig($this->productRepository->findOrFail($id))
+        ]);
     }
 }

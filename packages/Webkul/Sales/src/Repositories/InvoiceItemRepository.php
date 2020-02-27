@@ -38,8 +38,8 @@ class InvoiceItemRepository extends Repository
         }
 
         $orderedInventory = $data['product']->ordered_inventories()
-                ->where('channel_id', $data['invoice']->order->channel->id)
-                ->first();
+                                            ->where('channel_id', $data['invoice']->order->channel->id)
+                                            ->first();
 
         if ($orderedInventory) {
             if (($orderedQty = $orderedInventory->qty - $data['qty']) < 0) {
@@ -50,10 +50,10 @@ class InvoiceItemRepository extends Repository
         }
 
         $inventories = $data['product']->inventories()
-                ->where('vendor_id', $data['vendor_id'])
-                ->whereIn('inventory_source_id', $data['invoice']->order->channel->inventory_sources()->pluck('id'))
-                ->orderBy('qty', 'desc')
-                ->get();
+                                       ->where('vendor_id', $data['vendor_id'])
+                                       ->whereIn('inventory_source_id', $data['invoice']->order->channel->inventory_sources()->pluck('id'))
+                                       ->orderBy('qty', 'desc')
+                                       ->get();
 
         foreach ($inventories as $key => $inventory) {
             if ($inventory->qty >= $data['qty']) {

@@ -171,8 +171,8 @@ class Cart
                 } else {
                     if (isset($cartProduct['parent_id']) && $cartItem->parent_id != $parentCartItem->id) {
                         $cartItem = $this->cartItemRepository->create(array_merge($cartProduct, [
-                                'cart_id' => $cart->id
-                            ]));
+                            'cart_id' => $cart->id
+                        ]));
                     } else {
                         if ($cartItem->product->getTypeInstance()->showQuantityBox() === false) {
                             return ['warning' => __('shop::app.checkout.cart.integrity.qty_impossible')];
@@ -268,12 +268,12 @@ class Cart
             Event::dispatch('checkout.cart.update.before', $item);
 
             $this->cartItemRepository->update([
-                    'quantity'          => $quantity,
-                    'total'             => core()->convertPrice($item->price * $quantity),
-                    'base_total'        => $item->price * $quantity,
-                    'total_weight'      => $item->weight * $quantity,
-                    'base_total_weight' => $item->weight * $quantity,
-                ], $itemId);
+                'quantity'          => $quantity,
+                'total'             => core()->convertPrice($item->price * $quantity),
+                'base_total'        => $item->price * $quantity,
+                'total_weight'      => $item->weight * $quantity,
+                'base_total_weight' => $item->weight * $quantity,
+            ], $itemId);
 
             Event::dispatch('checkout.cart.update.after', $item);
         }
@@ -556,11 +556,13 @@ class Cart
                     }
                 } else {
                     if (isset($billingAddress['use_for_shipping']) && $billingAddress['use_for_shipping']) {
-                        $this->cartAddressRepository->create(array_merge($billingAddress,
-                            ['address_type' => 'shipping']));
+                        $this->cartAddressRepository->create(
+                            array_merge($billingAddress, ['address_type' => 'shipping'])
+                        );
                     } else {
-                        $this->cartAddressRepository->create(array_merge($shippingAddress,
-                            ['address_type' => 'shipping']));
+                        $this->cartAddressRepository->create(
+                            array_merge($shippingAddress, ['address_type' => 'shipping'])
+                        );
                     }
                 }
             }
@@ -569,9 +571,13 @@ class Cart
 
             if ($cart->haveStockableItems()) {
                 if (isset($billingAddress['use_for_shipping']) && $billingAddress['use_for_shipping']) {
-                    $this->cartAddressRepository->create(array_merge($billingAddress, ['address_type' => 'shipping']));
+                    $this->cartAddressRepository->create(
+                        array_merge($billingAddress, ['address_type' => 'shipping'])
+                    );
                 } else {
-                    $this->cartAddressRepository->create(array_merge($shippingAddress, ['address_type' => 'shipping']));
+                    $this->cartAddressRepository->create(
+                        array_merge($shippingAddress, ['address_type' => 'shipping'])
+                    );
                 }
             }
         }
@@ -1037,9 +1043,9 @@ class Cart
         }
 
         $wishlistItems = $this->wishlistRepository->findWhere([
-                'customer_id' => $this->getCurrentCustomer()->user()->id,
-                'product_id'  => $cartItem->product_id,
-            ]);
+            'customer_id' => $this->getCurrentCustomer()->user()->id,
+            'product_id'  => $cartItem->product_id,
+        ]);
 
         $found = false;
 
@@ -1057,11 +1063,11 @@ class Cart
 
         if (!$found) {
             $this->wishlistRepository->create([
-                    'channel_id'  => $cart->channel_id,
-                    'customer_id' => $this->getCurrentCustomer()->user()->id,
-                    'product_id'  => $cartItem->product_id,
-                    'additional'  => $cartItem->additional,
-                ]);
+                'channel_id'  => $cart->channel_id,
+                'customer_id' => $this->getCurrentCustomer()->user()->id,
+                'product_id'  => $cartItem->product_id,
+                'additional'  => $cartItem->additional,
+            ]);
         }
 
         $result = $this->cartItemRepository->delete($itemId);

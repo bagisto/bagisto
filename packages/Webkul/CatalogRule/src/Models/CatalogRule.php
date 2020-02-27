@@ -9,7 +9,19 @@ use Webkul\Customer\Models\CustomerGroupProxy;
 
 class CatalogRule extends Model implements CatalogRuleContract
 {
-    protected $fillable = ['name', 'description', 'starts_from', 'ends_till', 'status', 'condition_type', 'conditions',  'end_other_rules', 'action_type', 'discount_amount', 'sort_order'];
+    protected $fillable = [
+        'name',
+        'description',
+        'starts_from',
+        'ends_till',
+        'status',
+        'condition_type',
+        'conditions',
+        'end_other_rules',
+        'action_type',
+        'discount_amount',
+        'sort_order',
+    ];
 
     protected $casts = [
         'conditions' => 'array'

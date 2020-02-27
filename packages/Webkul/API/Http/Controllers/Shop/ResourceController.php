@@ -92,8 +92,8 @@ class ResourceController extends Controller
     public function get($id)
     {
         return new $this->_config['resource'](
-                $this->repository->findOrFail($id)
-            );
+            $this->repository->findOrFail($id)
+        );
     }
 
     /**
@@ -108,7 +108,7 @@ class ResourceController extends Controller
         $this->repository->delete($id);
         
         return response()->json([
-                'message' => 'Item removed successfully.'
-            ]);
+            'message' => 'Item removed successfully.'
+        ]);
     }
 }

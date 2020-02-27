@@ -235,9 +235,10 @@ class Bundle extends AbstractType
 
         foreach ($option->bundle_option_products as $index => $bundleOptionProduct) {
             $optionPrices[] = $bundleOptionProduct->qty
-                            * ($minPrice
+                              * ($minPrice
                                 ? $bundleOptionProduct->product->getTypeInstance()->getMinimalPrice()
-                                : $bundleOptionProduct->product->price);
+                                : $bundleOptionProduct->product->price
+                            );
         }
 
         return $optionPrices;
@@ -467,21 +468,21 @@ class Bundle extends AbstractType
                 }
 
                 $optionProduct = $this->productBundleOptionProductRepository->findOneWhere([
-                        'id'                       => $optionProductId,
-                        'product_bundle_option_id' => $optionId
-                    ]);
+                    'id'                       => $optionProductId,
+                    'product_bundle_option_id' => $optionId
+                ]);
 
                 $qty = $data['bundle_option_qty'][$optionId] ?? $optionProduct->qty;
 
                 if (! isset($products[$optionProduct->product_id])) {
                     $products[$optionProduct->product_id] = [
-                            'product_id' => $optionProduct->product_id,
-                            'quantity'   => $qty,
-                        ];
+                        'product_id' => $optionProduct->product_id,
+                        'quantity'   => $qty,
+                    ];
                 } else {
                     $products[$optionProduct->product_id] = array_merge($products[$optionProduct->product_id], [
-                            'quantity' => $products[$optionProduct->product_id]['quantity'] + $qty
-                        ]);
+                        'quantity' => $products[$optionProduct->product_id]['quantity'] + $qty
+                    ]);
                 }
             }
         }

@@ -152,18 +152,18 @@ class CartRule
 
         $cartRules = $this->cartRuleRepository->scopeQuery(function ($query) use ($customerGroupId) {
             return $query->leftJoin('cart_rule_customer_groups', 'cart_rules.id', '=', 'cart_rule_customer_groups.cart_rule_id')
-                ->leftJoin('cart_rule_channels', 'cart_rules.id', '=', 'cart_rule_channels.cart_rule_id')
-                ->where('cart_rule_customer_groups.customer_group_id', $customerGroupId)
-                ->where('cart_rule_channels.channel_id', core()->getCurrentChannel()->id)
-                ->where(function ($query1) {
-                    $query1->where('cart_rules.starts_from', '<=', Carbon::now()->format('Y-m-d'))
-                        ->orWhereNull('cart_rules.starts_from');
-                })
-                ->where(function ($query2) {
-                    $query2->where('cart_rules.ends_till', '>=', Carbon::now()->format('Y-m-d'))
-                        ->orWhereNull('cart_rules.ends_till');
-                })
-                ->orderBy('sort_order', 'asc');
+                         ->leftJoin('cart_rule_channels', 'cart_rules.id', '=', 'cart_rule_channels.cart_rule_id')
+                         ->where('cart_rule_customer_groups.customer_group_id', $customerGroupId)
+                         ->where('cart_rule_channels.channel_id', core()->getCurrentChannel()->id)
+                         ->where(function ($query1) {
+                             $query1->where('cart_rules.starts_from', '<=', Carbon::now()->format('Y-m-d'))
+                                 ->orWhereNull('cart_rules.starts_from');
+                         })
+                         ->where(function ($query2) {
+                             $query2->where('cart_rules.ends_till', '>=', Carbon::now()->format('Y-m-d'))
+                                 ->orWhereNull('cart_rules.ends_till');
+                         })
+                         ->orderBy('sort_order', 'asc');
         })->findWhere(['status' => 1]);
 
         return $cartRules;

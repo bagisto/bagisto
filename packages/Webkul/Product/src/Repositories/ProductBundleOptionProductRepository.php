@@ -33,8 +33,8 @@ class ProductBundleOptionProductRepository extends Repository
             foreach ($data['products'] as $bundleOptionProductId => $bundleOptionProductInputs) {
                 if (Str::contains($bundleOptionProductId, 'product_')) {
                     $this->create(array_merge([
-                            'product_bundle_option_id' => $productBundleOption->id,
-                        ], $bundleOptionProductInputs));
+                        'product_bundle_option_id' => $productBundleOption->id,
+                    ], $bundleOptionProductInputs));
                 } else {
                     if (is_numeric($index = $previousBundleOptionProductIds->search($bundleOptionProductId))) {
                         $previousBundleOptionProductIds->forget($index);

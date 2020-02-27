@@ -93,10 +93,10 @@ class ProductForm extends FormRequest
 
             if ($attribute->type == 'text' && $attribute->validation) {
                 array_push($validations, 
-                        $attribute->validation == 'decimal'
-                        ? new \Webkul\Core\Contracts\Validations\Decimal
-                        : $attribute->validation
-                    );
+                    $attribute->validation == 'decimal'
+                    ? new \Webkul\Core\Contracts\Validations\Decimal
+                    : $attribute->validation
+                );
             }
 
             if ($attribute->type == 'price') {

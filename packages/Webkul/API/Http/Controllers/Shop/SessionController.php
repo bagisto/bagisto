@@ -71,10 +71,10 @@ class SessionController extends Controller
         $customer = auth($this->guard)->user();
 
         return response()->json([
-            'token' => $jwtToken,
-            'message' => 'Logged in successfully.',
-            'data' => new CustomerResource($customer)
-        ]);
+        'token' => $jwtToken,
+        'message' => 'Logged in successfully.',
+        'data' => new CustomerResource($customer)
+    ]);
     }
 
     /**
@@ -124,9 +124,9 @@ class SessionController extends Controller
         $this->customerRepository->update($data, $customer->id);
 
         return response()->json([
-                'message' => 'Your account has been created successfully.',
-                'data'    => new CustomerResource($this->customerRepository->find($customer->id))
-            ]);
+            'message' => 'Your account has been created successfully.',
+            'data'    => new CustomerResource($this->customerRepository->find($customer->id))
+        ]);
     }
 
     /**

@@ -139,13 +139,13 @@ class CartRuleRepository extends Repository
 
         if ($data['coupon_type'] && ! $data['use_auto_generation']) {
             $this->cartRuleCouponRepository->create([
-                    'cart_rule_id'       => $cartRule->id,
-                    'code'               => $data['coupon_code'],
-                    'usage_limit'        => $data['usage_per_customer'] ?? 0,
-                    'usage_per_customer' => $data['usage_per_customer'] ?? 0,
-                    'is_primary'         => 1,
-                    'expired_at'         => $data['ends_till'] ?: null
-                ]);
+                'cart_rule_id'       => $cartRule->id,
+                'code'               => $data['coupon_code'],
+                'usage_limit'        => $data['usage_per_customer'] ?? 0,
+                'usage_per_customer' => $data['usage_per_customer'] ?? 0,
+                'is_primary'         => 1,
+                'expired_at'         => $data['ends_till'] ?: null
+            ]);
         }
 
         return $cartRule;
@@ -181,29 +181,29 @@ class CartRuleRepository extends Repository
 
                 if ($cartRuleCoupon) {
                     $this->cartRuleCouponRepository->update([
-                            'code'               => $data['coupon_code'],
-                            'usage_limit'        => $data['uses_per_coupon'] ?? 0,
-                            'usage_per_customer' => $data['usage_per_customer'] ?? 0,
-                            'expired_at'         => $data['ends_till'] ?: null
-                        ], $cartRuleCoupon->id);
+                        'code'               => $data['coupon_code'],
+                        'usage_limit'        => $data['uses_per_coupon'] ?? 0,
+                        'usage_per_customer' => $data['usage_per_customer'] ?? 0,
+                        'expired_at'         => $data['ends_till'] ?: null
+                    ], $cartRuleCoupon->id);
                 } else {
                     $this->cartRuleCouponRepository->create([
-                            'cart_rule_id'       => $cartRule->id,
-                            'code'               => $data['coupon_code'],
-                            'usage_limit'        => $data['uses_per_coupon'] ?? 0,
-                            'usage_per_customer' => $data['usage_per_customer'] ?? 0,
-                            'is_primary'         => 1,
-                            'expired_at'         => $data['ends_till'] ?: null
-                        ]);
+                        'cart_rule_id'       => $cartRule->id,
+                        'code'               => $data['coupon_code'],
+                        'usage_limit'        => $data['uses_per_coupon'] ?? 0,
+                        'usage_per_customer' => $data['usage_per_customer'] ?? 0,
+                        'is_primary'         => 1,
+                        'expired_at'         => $data['ends_till'] ?: null
+                    ]);
                 }
             } else {
                 $this->cartRuleCouponRepository->deleteWhere(['is_primary' => 1, 'cart_rule_id' => $cartRule->id]);
 
                 $this->cartRuleCouponRepository->getModel()->where('cart_rule_id', $cartRule->id)->update([
-                        'usage_limit'        => $data['uses_per_coupon'] ?? 0,
-                        'usage_per_customer' => $data['usage_per_customer'] ?? 0,
-                        'expired_at'         => $data['ends_till'] ?: null
-                    ]);
+                    'usage_limit'        => $data['uses_per_coupon'] ?? 0,
+                    'usage_per_customer' => $data['usage_per_customer'] ?? 0,
+                    'expired_at'         => $data['ends_till'] ?: null
+                ]);
             }
         } else {
             $cartRuleCoupon = $this->cartRuleCouponRepository->deleteWhere(['is_primary' => 1, 'cart_rule_id' => $cartRule->id]);
@@ -461,9 +461,9 @@ class CartRuleRepository extends Repository
 
         foreach ($this->countryRepository->all() as $country) {
             $countryStates = $this->countryStateRepository->findWhere(
-                    ['country_id' => $country->id],
-                    ['code', 'default_name as admin_name']
-                )->toArray();
+                ['country_id' => $country->id],
+                ['code', 'default_name as admin_name']
+            )->toArray();
 
             if (! count($countryStates)) {
                 continue;

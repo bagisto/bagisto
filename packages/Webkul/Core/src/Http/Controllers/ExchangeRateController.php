@@ -87,7 +87,7 @@ class ExchangeRateController extends Controller
     {
         $this->validate(request(), [
             'target_currency' => ['required', 'unique:currency_exchange_rates,target_currency'],
-            'rate'            => 'required|numeric'
+            'rate'            => 'required|numeric',
         ]);
 
         Event::dispatch('core.exchange_rate.create.before');
@@ -126,7 +126,7 @@ class ExchangeRateController extends Controller
     {
         $this->validate(request(), [
             'target_currency' => ['required', 'unique:currency_exchange_rates,target_currency,' . $id],
-            'rate'            => 'required|numeric'
+            'rate'            => 'required|numeric',
         ]);
 
         Event::dispatch('core.exchange_rate.update.before', $id);
@@ -155,8 +155,8 @@ class ExchangeRateController extends Controller
                     'success' => false,
                     'rates'   => null,
                     'error'   => trans('admin::app.exchange-rate.exchange-class-not-found', [
-                        'service' => $service
-                    ])
+                        'service' => $service,
+                    ]),
                 ], 400);
             }
 
@@ -165,13 +165,13 @@ class ExchangeRateController extends Controller
 
             return response()->json([
                 'success' => true,
-                'rates'   => 'rates'
+                'rates'   => 'rates',
             ], 200);
         } else {
             return response()->json([
                 'success' => false,
                 'rates'   => null,
-                'error'   => trans('admin::app.exchange-rate.invalid-config')
+                'error'   => trans('admin::app.exchange-rate.invalid-config'),
             ], 400);
         }
     }

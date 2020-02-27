@@ -23,7 +23,7 @@ class CMSPageDataGrid extends DataGrid
                 ->select('cms_pages.id', 'cms_page_translations.page_title', 'cms_page_translations.url_key')
                 ->leftJoin('cms_page_translations', function($leftJoin) {
                     $leftJoin->on('cms_pages.id', '=', 'cms_page_translations.cms_page_id')
-                        ->where('cms_page_translations.locale', app()->getLocale());
+                             ->where('cms_page_translations.locale', app()->getLocale());
                 });
 
         $this->addFilter('id', 'cms_pages.id');

@@ -11,5 +11,15 @@ class BookingProductTableSlot extends Model implements BookingProductTableSlotCo
     
     protected $casts = ['slots' => 'array'];
 
-    protected $fillable = ['price_type', 'guest_limit', 'guest_capacity', 'duration', 'break_time', 'prevent_scheduling_before', 'same_slot_all_days', 'slots', 'booking_product_id'];
+    protected $fillable = [
+        'price_type',
+        'guest_limit',
+        'guest_capacity',
+        'duration',
+        'break_time',
+        'prevent_scheduling_before',
+        'same_slot_all_days',
+        'slots',
+        'booking_product_id',
+    ];
 }

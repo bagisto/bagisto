@@ -192,9 +192,9 @@ class CheckoutController extends Controller
         Cart::deActivateCart();
 
         return response()->json([
-                'success' => true,
-                'order'   => new OrderResource($order),
-            ]);
+            'success' => true,
+            'order'   => new OrderResource($order),
+        ]);
     }
 
     /**

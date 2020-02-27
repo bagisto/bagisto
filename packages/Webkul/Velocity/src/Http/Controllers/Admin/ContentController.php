@@ -70,9 +70,9 @@ class ContentController extends Controller
         if (isset($params['query']) && $params['query']) {
             foreach ($this->productRepository->searchProductByAttribute(request()->input('query')) as $row) {
                 $results[] = [
-                        'id'   => $row->product_id,
-                        'name' => $row->name,
-                    ];
+                    'id'   => $row->product_id,
+                    'name' => $row->name,
+                ];
             }
         }
         return response()->json($results);

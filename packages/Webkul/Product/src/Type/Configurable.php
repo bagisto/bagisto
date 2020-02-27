@@ -136,27 +136,28 @@ class Configurable extends AbstractType
     {
         if (! count($data)) {
             $data = [
-                    'sku'         => $product->sku . '-variant-' . implode('-', $permutation),
-                    'name'        => '',
-                    'inventories' => [],
-                    'price'       => 0,
-                    'weight'      => 0,
-                    'status'      => 1
-                ];
+                'sku'         => $product->sku . '-variant-' . implode('-', $permutation),
+                'name'        => '',
+                'inventories' => [],
+                'price'       => 0,
+                'weight'      => 0,
+                'status'      => 1
+            ];
         }
 
         $typeOfVariants = 'simple';
         $productInstance = app(config('product_types.' . $product->type . '.class'));
+
         if (isset($productInstance->variantsType) && ! in_array($productInstance->variantsType , ['bundle', 'configurable', 'grouped'])) {
             $typeOfVariants = $productInstance->variantsType;
         }
 
         $variant = $this->productRepository->getModel()->create([
-                'parent_id' => $product->id,
-                'type' => $typeOfVariants,
-                'attribute_family_id' => $product->attribute_family_id,
-                'sku' => $data['sku'],
-            ]);
+            'parent_id' => $product->id,
+            'type' => $typeOfVariants,
+            'attribute_family_id' => $product->attribute_family_id,
+            'sku' => $data['sku'],
+        ]);
 
         foreach (['sku', 'name', 'price', 'weight', 'status'] as $attributeCode) {
             $attribute = $this->attributeRepository->findOneByField('code', $attributeCode);
@@ -166,50 +167,50 @@ class Configurable extends AbstractType
                     foreach (core()->getAllChannels() as $channel) {
                         foreach (core()->getAllLocales() as $locale) {
                             $this->attributeValueRepository->create([
-                                    'product_id'   => $variant->id,
-                                    'attribute_id' => $attribute->id,
-                                    'channel'      => $channel->code,
-                                    'locale'       => $locale->code,
-                                    'value'        => $data[$attributeCode]
-                                ]);
+                                'product_id'   => $variant->id,
+                                'attribute_id' => $attribute->id,
+                                'channel'      => $channel->code,
+                                'locale'       => $locale->code,
+                                'value'        => $data[$attributeCode]
+                            ]);
                         }
                     }
                 } else {
                     foreach (core()->getAllChannels() as $channel) {
                         $this->attributeValueRepository->create([
-                                'product_id'   => $variant->id,
-                                'attribute_id' => $attribute->id,
-                                'channel'      => $channel->code,
-                                'value'        => $data[$attributeCode]
-                            ]);
+                            'product_id'   => $variant->id,
+                            'attribute_id' => $attribute->id,
+                            'channel'      => $channel->code,
+                            'value'        => $data[$attributeCode]
+                        ]);
                     }
                 }
             } else {
                 if ($attribute->value_per_locale) {
                     foreach (core()->getAllLocales() as $locale) {
                         $this->attributeValueRepository->create([
-                                'product_id'   => $variant->id,
-                                'attribute_id' => $attribute->id,
-                                'locale'       => $locale->code,
-                                'value'        => $data[$attributeCode]
-                            ]);
+                            'product_id'   => $variant->id,
+                            'attribute_id' => $attribute->id,
+                            'locale'       => $locale->code,
+                            'value'        => $data[$attributeCode]
+                        ]);
                     }
                 } else {
                     $this->attributeValueRepository->create([
-                            'product_id'   => $variant->id,
-                            'attribute_id' => $attribute->id,
-                            'value'        => $data[$attributeCode]
-                        ]);
+                        'product_id'   => $variant->id,
+                        'attribute_id' => $attribute->id,
+                        'value'        => $data[$attributeCode]
+                    ]);
                 }
             }
         }
 
         foreach ($permutation as $attributeId => $optionId) {
             $this->attributeValueRepository->create([
-                    'product_id'   => $variant->id,
-                    'attribute_id' => $attributeId,
-                    'value'        => $optionId
-                ]);
+                'product_id'   => $variant->id,
+                'attribute_id' => $attributeId,
+                'value'        => $optionId
+            ]);
         }
 
         $this->productInventoryRepository->saveInventories($data, $variant);
@@ -232,20 +233,20 @@ class Configurable extends AbstractType
             $attribute = $this->attributeRepository->findOneByField('code', $attributeCode);
 
             $attributeValue = $this->attributeValueRepository->findOneWhere([
-                    'product_id'   => $id,
-                    'attribute_id' => $attribute->id,
-                    'channel'      => $attribute->value_per_channel ? $data['channel'] : null,
-                    'locale'       => $attribute->value_per_locale ? $data['locale'] : null
-                ]);
+                'product_id'   => $id,
+                'attribute_id' => $attribute->id,
+                'channel'      => $attribute->value_per_channel ? $data['channel'] : null,
+                'locale'       => $attribute->value_per_locale ? $data['locale'] : null
+            ]);
 
             if (! $attributeValue) {
                 $this->attributeValueRepository->create([
-                        'product_id'   => $id,
-                        'attribute_id' => $attribute->id,
-                        'value'        => $data[$attribute->code],
-                        'channel'      => $attribute->value_per_channel ? $data['channel'] : null,
-                        'locale'       => $attribute->value_per_locale ? $data['locale'] : null
-                    ]);
+                    'product_id'   => $id,
+                    'attribute_id' => $attribute->id,
+                    'value'        => $data[$attribute->code],
+                    'channel'      => $attribute->value_per_channel ? $data['channel'] : null,
+                    'locale'       => $attribute->value_per_locale ? $data['locale'] : null
+                ]);
             } else {
                 $this->attributeValueRepository->update([
                     ProductAttributeValue::$attributeTypeFields[$attribute->type] => $data[$attribute->code]

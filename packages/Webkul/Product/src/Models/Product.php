@@ -181,8 +181,8 @@ class Product extends Model implements ProductContract
     public function inventory_source_qty($inventorySourceId)
     {
         return $this->inventories()
-                ->where('inventory_source_id', $inventorySourceId)
-                ->sum('qty');
+                    ->where('inventory_source_id', $inventorySourceId)
+                    ->sum('qty');
     }
 
     /**
@@ -264,7 +264,7 @@ class Product extends Model implements ProductContract
                 $this->attributes[$key] = '';
 
                 $attribute = core()->getSingletonInstance(\Webkul\Attribute\Repositories\AttributeRepository::class)
-                        ->getAttributeByCode($key);
+                                   ->getAttributeByCode($key);
 
                 $this->attributes[$key] = $this->getCustomAttributeValue($attribute);
 
@@ -286,7 +286,7 @@ class Product extends Model implements ProductContract
 
         if (isset($this->id)) {
             $familyAttributes = core()->getSingletonInstance(\Webkul\Attribute\Repositories\AttributeRepository::class)
-                    ->getFamilyAttributes($this->attribute_family);
+                                      ->getFamilyAttributes($this->attribute_family);
 
             foreach ($familyAttributes as $attribute) {
                 if (in_array($attribute->code, $hiddenAttributes)) {

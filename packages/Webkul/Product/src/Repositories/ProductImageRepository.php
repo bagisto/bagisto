@@ -41,9 +41,9 @@ class ProductImageRepository extends Repository
                 if (Str::contains($imageId, 'image_')) {
                     if (request()->hasFile($file)) {
                         $this->create([
-                                'path'       => request()->file($file)->store($dir),
-                                'product_id' => $product->id
-                            ]);
+                            'path'       => request()->file($file)->store($dir),
+                            'product_id' => $product->id
+                        ]);
                     }
                 } else {
                     if (is_numeric($index = $previousImageIds->search($imageId))) {

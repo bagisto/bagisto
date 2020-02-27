@@ -140,10 +140,11 @@ class ReviewController extends Controller
                 }
             }
 
-            if (! $suppressFlash)
+            if (! $suppressFlash) {
                 session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'Reviews']));
-            else
+            } else {
                 session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'Reviews']));
+            }
 
             return redirect()->route($this->_config['redirect']);
 
@@ -194,10 +195,11 @@ class ReviewController extends Controller
                 }
             }
 
-            if (! $suppressFlash)
+            if (! $suppressFlash) {
                 session()->flash('success', trans('admin::app.datagrid.mass-ops.update-success', ['resource' => 'Reviews']));
-            else
+            } else {
                 session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'Reviews']));
+            }
 
             return redirect()->route($this->_config['redirect']);
         } else {

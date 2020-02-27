@@ -55,9 +55,9 @@ class DownloadableProductController extends Controller
     public function download($id)
     {
         $downloadableLinkPurchased = $this->downloadableLinkPurchasedRepository->findOneByField([
-                'id'          => $id,
-                'customer_id' => auth()->guard('customer')->user()->id,
-            ]);
+            'id'          => $id,
+            'customer_id' => auth()->guard('customer')->user()->id,
+        ]);
 
         if ($downloadableLinkPurchased->status == 'pending') {
             abort(403);
@@ -65,6 +65,7 @@ class DownloadableProductController extends Controller
 
         if ($downloadableLinkPurchased->download_bought
             && ($downloadableLinkPurchased->download_bought - $downloadableLinkPurchased->download_used) <= 0) {
+
             session()->flash('warning', trans('shop::app.customer.account.downloadable_products.download-error'));
 
             return redirect()->route('customer.downloadable_products.index');
@@ -74,9 +75,9 @@ class DownloadableProductController extends Controller
 
         if ($downloadableLinkPurchased->download_bought) {
             $this->downloadableLinkPurchasedRepository->update([
-                    'download_used' => $downloadableLinkPurchased->download_used + 1,
-                    'status'        => $remainingDownloads <= 0 ? 'expired' : $downloadableLinkPurchased->status
-                ], $downloadableLinkPurchased->id);
+                'download_used' => $downloadableLinkPurchased->download_used + 1,
+                'status'        => $remainingDownloads <= 0 ? 'expired' : $downloadableLinkPurchased->status
+            ], $downloadableLinkPurchased->id);
         }
 
         if ($downloadableLinkPurchased->type == 'file') {

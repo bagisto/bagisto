@@ -50,19 +50,19 @@ class ProductRepository extends Repository
     public function getFeaturedProducts($count)
     {
         $results = app(ProductFlatRepository::class)->scopeQuery(function($query) {
-                $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
+            $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
-                $locale = request()->get('locale') ?: app()->getLocale();
+            $locale = request()->get('locale') ?: app()->getLocale();
 
-                return $query->distinct()
-                        ->addSelect('product_flat.*')
-                        ->where('product_flat.status', 1)
-                        ->where('product_flat.visible_individually', 1)
-                        ->where('product_flat.featured', 1)
-                        ->where('product_flat.channel', $channel)
-                        ->where('product_flat.locale', $locale)
-                        ->orderBy('product_id', 'desc');
-            })->paginate($count);
+            return $query->distinct()
+                            ->addSelect('product_flat.*')
+                            ->where('product_flat.status', 1)
+                            ->where('product_flat.visible_individually', 1)
+                            ->where('product_flat.featured', 1)
+                            ->where('product_flat.channel', $channel)
+                            ->where('product_flat.locale', $locale)
+                            ->orderBy('product_id', 'desc');
+        })->paginate($count);
 
         return $results;
     }
@@ -75,19 +75,19 @@ class ProductRepository extends Repository
     public function getNewProducts($count)
     {
         $results = app(ProductFlatRepository::class)->scopeQuery(function($query) {
-                $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
+            $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
-                $locale = request()->get('locale') ?: app()->getLocale();
+            $locale = request()->get('locale') ?: app()->getLocale();
 
-                return $query->distinct()
-                        ->addSelect('product_flat.*')
-                        ->where('product_flat.status', 1)
-                        ->where('product_flat.visible_individually', 1)
-                        ->where('product_flat.new', 1)
-                        ->where('product_flat.channel', $channel)
-                        ->where('product_flat.locale', $locale)
-                        ->orderBy('product_id', 'desc');
-            })->paginate($count);
+            return $query->distinct()
+                            ->addSelect('product_flat.*')
+                            ->where('product_flat.status', 1)
+                            ->where('product_flat.visible_individually', 1)
+                            ->where('product_flat.new', 1)
+                            ->where('product_flat.channel', $channel)
+                            ->where('product_flat.locale', $locale)
+                            ->orderBy('product_id', 'desc');
+        })->paginate($count);
 
         return $results;
     }
@@ -109,14 +109,14 @@ class ProductRepository extends Repository
             $locale = request()->get('locale') ?: app()->getLocale();
 
             $query = $query->distinct()
-                    ->addSelect('product_flat.*')
-                    ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
-                    ->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id')
-                    ->where('product_flat.status', 1)
-                    ->where('product_flat.visible_individually', 1)
-                    ->where('product_flat.channel', $channel)
-                    ->where('product_flat.locale', $locale)
-                    ->whereNotNull('product_flat.url_key');
+                           ->addSelect('product_flat.*')
+                           ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
+                           ->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id')
+                           ->where('product_flat.status', 1)
+                           ->where('product_flat.visible_individually', 1)
+                           ->where('product_flat.channel', $channel)
+                           ->where('product_flat.locale', $locale)
+                           ->whereNotNull('product_flat.url_key');
 
             if ($term)
                 $query->where('product_flat.name', 'like', '%' . urldecode($term) . '%');
@@ -143,9 +143,9 @@ class ProductRepository extends Repository
 
             $query = $query->where(function($query1) use($query) {
                 $aliases = [
-                        'products' => 'filter_',
-                        'variants' => 'variant_filter_'
-                    ];
+                    'products' => 'filter_',
+                    'variants' => 'variant_filter_'
+                ];
 
                 foreach($aliases as $table => $alias) {
                     $query1 = $query1->orWhere(function($query2) use ($query, $table, $alias) {
@@ -173,7 +173,7 @@ class ProductRepository extends Repository
                                 });
                             } else {
                                 $query2->where('product_flat.min_price', '>=', core()->convertToBasePrice(current($temp)))
-                                    ->where('product_flat.min_price', '<=', core()->convertToBasePrice(end($temp)));
+                                       ->where('product_flat.min_price', '<=', core()->convertToBasePrice(end($temp)));
                             }
                         }
                     });

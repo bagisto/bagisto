@@ -223,9 +223,16 @@ class ProductFlat
 
                         if ($attribute->value_per_channel) {
                             if ($attribute->value_per_locale) {
-                                $productAttributeValue = $product->attribute_values()->where('channel', $channel->code)->where('locale', $locale->code)->where('attribute_id', $attribute->id)->first();
+                                $productAttributeValue = $product->attribute_values()
+                                                                 ->where('channel', $channel->code)
+                                                                 ->where('locale', $locale->code)
+                                                                 ->where('attribute_id', $attribute->id)
+                                                                 ->first();
                             } else {
-                                $productAttributeValue = $product->attribute_values()->where('channel', $channel->code)->where('attribute_id', $attribute->id)->first();
+                                $productAttributeValue = $product->attribute_values()
+                                                                 ->where('channel', $channel->code)
+                                                                 ->where('attribute_id', $attribute->id)
+                                                                 ->first();
                             }
                         } else {
                             if ($attribute->value_per_locale) {

@@ -32,8 +32,8 @@ class ProductGroupedProductRepository extends Repository
             foreach ($data['links'] as $linkId => $linkInputs) {
                 if (Str::contains($linkId, 'link_')) {
                     $this->create(array_merge([
-                            'product_id' => $product->id,
-                        ], $linkInputs));
+                        'product_id' => $product->id,
+                    ], $linkInputs));
                 } else {
                     if (is_numeric($index = $previousGroupedProductIds->search($linkId))) {
                         $previousGroupedProductIds->forget($index);

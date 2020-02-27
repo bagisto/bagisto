@@ -16,7 +16,10 @@ class Slider extends Model implements SliderContract
     protected $table = 'sliders';
 
     protected $fillable = [
-        'title', 'path', 'content', 'channel_id'
+        'title',
+        'path',
+        'content',
+        'channel_id',
     ];
 
     /**

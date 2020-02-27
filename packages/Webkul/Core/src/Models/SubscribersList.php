@@ -16,7 +16,10 @@ class SubscribersList extends Model implements SubscribersListContract
     protected $table = 'subscribers_list';
 
     protected $fillable = [
-        'email', 'is_subscribed', 'token', 'channel_id'
+        'email',
+        'is_subscribed',
+        'token',
+        'channel_id',
     ];
 
     protected $hidden = ['token'];

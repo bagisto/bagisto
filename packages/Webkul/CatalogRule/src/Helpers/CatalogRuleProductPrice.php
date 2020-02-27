@@ -211,10 +211,10 @@ class CatalogRuleProductPrice
         }
 
         return $this->catalogRuleProductPriceRepository->findOneWhere([
-                'product_id'        => $product->id,
-                'channel_id'        => core()->getCurrentChannel()->id,
-                'customer_group_id' => $customerGroupId,
-                'rule_date'         => Carbon::now()->format('Y-m-d'),
-            ]);
+            'product_id'        => $product->id,
+            'channel_id'        => core()->getCurrentChannel()->id,
+            'customer_group_id' => $customerGroupId,
+            'rule_date'         => Carbon::now()->format('Y-m-d'),
+        ]);
     }
 }

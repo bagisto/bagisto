@@ -122,10 +122,10 @@ class CatalogRuleProduct
     {
         $qb = $this->productRepository->scopeQuery(function($query) use($rule, $product) {
             $qb = $query->distinct()
-                    ->addSelect('products.*')
-                    ->leftJoin('product_flat', 'products.id', '=', 'product_flat.product_id')
-                    ->leftJoin('channels', 'product_flat.channel', '=', 'channels.code')
-                    ->whereIn('channels.id', $rule->channels()->pluck('id')->toArray());
+                        ->addSelect('products.*')
+                        ->leftJoin('product_flat', 'products.id', '=', 'product_flat.product_id')
+                        ->leftJoin('channels', 'product_flat.channel', '=', 'channels.code')
+                        ->whereIn('channels.id', $rule->channels()->pluck('id')->toArray());
 
             if ($product) {
                 $qb->where('products.id', $product->id);
@@ -192,10 +192,10 @@ class CatalogRuleProduct
 
         $query = $query->leftJoin('product_attribute_values as ' . 'pav_' . $attribute->code, function($qb) use($attribute) {
             $qb = $qb->where('pav_' . $attribute->code . '.channel', $attribute->value_per_channel ? core()->getDefaultChannelCode() : null)
-                    ->where('pav_' . $attribute->code . '.locale', $attribute->value_per_locale ? app()->getLocale() : null);
+                     ->where('pav_' . $attribute->code . '.locale', $attribute->value_per_locale ? app()->getLocale() : null);
             
             $qb->on('products.id', 'pav_' . $attribute->code . '.product_id')
-                    ->where('pav_' . $attribute->code . '.attribute_id', $attribute->id);
+               ->where('pav_' . $attribute->code . '.attribute_id', $attribute->id);
         });
 
         $query = $query->addSelect('pav_' . $attribute->code . '.' . ProductAttributeValue::$attributeTypeFields[$attribute->type] . ' as ' . $attribute->code);
@@ -213,13 +213,13 @@ class CatalogRuleProduct
     {
         $results = $this->catalogRuleProductRepository->scopeQuery(function($query) use($product) {
             $qb = $query->distinct()
-                    ->select('catalog_rule_products.*')
-                    ->leftJoin('products', 'catalog_rule_products.product_id', '=', 'products.id')
-                    ->orderBy('channel_id', 'asc')
-                    ->orderBy('customer_group_id', 'asc')
-                    ->orderBy('product_id', 'asc')
-                    ->orderBy('sort_order', 'asc')
-                    ->orderBy('catalog_rule_id', 'asc');
+                        ->select('catalog_rule_products.*')
+                        ->leftJoin('products', 'catalog_rule_products.product_id', '=', 'products.id')
+                        ->orderBy('channel_id', 'asc')
+                        ->orderBy('customer_group_id', 'asc')
+                        ->orderBy('product_id', 'asc')
+                        ->orderBy('sort_order', 'asc')
+                        ->orderBy('catalog_rule_id', 'asc');
 
             $qb = $this->addAttributeToSelect('price', $qb);
 

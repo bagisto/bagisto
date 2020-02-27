@@ -70,7 +70,7 @@ class LocaleController extends Controller
         $this->validate(request(), [
             'code'      => ['required', 'unique:locales,code', new \Webkul\Core\Contracts\Validations\Code],
             'name'      => 'required',
-            'direction' => 'in:ltr,rtl'
+            'direction' => 'in:ltr,rtl',
         ]);
 
         Event::dispatch('core.locale.create.before');
@@ -108,7 +108,7 @@ class LocaleController extends Controller
         $this->validate(request(), [
             'code'      => ['required', 'unique:locales,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
             'name'      => 'required',
-            'direction' => 'in:ltr,rtl'
+            'direction' => 'in:ltr,rtl',
         ]);
 
         Event::dispatch('core.locale.update.before', $id);

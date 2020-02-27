@@ -24,6 +24,7 @@ class TranslatableModel extends Model
     protected function isKeyALocale($key)
     {
         $chunks = explode('-', $key);
+
         if (count($chunks) > 1) {
             if (Locale::where('code', '=', end($chunks))->first()) {
                 return true;
@@ -47,8 +48,7 @@ class TranslatableModel extends Model
                 return $this->defaultLocale;
             }
 
-            return config('translatable.locale')
-                ?: app()->make('translator')->getLocale();
+            return config('translatable.locale') ?: app()->make('translator')->getLocale();
         }
     }
 

@@ -21,7 +21,15 @@ class Category extends TranslatableModel implements CategoryContract
 {
     use NodeTrait;
 
-    public $translatedAttributes = ['name', 'description', 'slug', 'url_path', 'meta_title', 'meta_description', 'meta_keywords'];
+    public $translatedAttributes = [
+        'name',
+        'description',
+        'slug',
+        'url_path',
+        'meta_title',
+        'meta_description',
+        'meta_keywords',
+    ];
 
     protected $fillable = ['position', 'status', 'display_mode', 'parent_id'];
 
