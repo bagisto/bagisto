@@ -28,12 +28,12 @@
                 <span class="control-error" v-if="errors.has('booking[guest_limit]')">@{{ errors.first('booking[guest_limit]') }}</span>
             </div>
 
-            <div class="control-group" :class="[errors.has('booking[guest_capacity]') ? 'has-error' : '']">
+            <div class="control-group" :class="[errors.has('booking[qty]') ? 'has-error' : '']">
                 <label class="required">{{ __('bookingproduct::app.admin.catalog.products.guest-capacity') }}</label>
 
-                <input type="text" v-validate="'required|min_value:1'" name="booking[guest_capacity]" v-model="table_booking.guest_capacity" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.guest-limit') }}&quot;"/>
+                <input type="text" v-validate="'required|min_value:1'" name="booking[qty]" value="{{ $bookingProduct->qty }}" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.guest-limit') }}&quot;"/>
                 
-                <span class="control-error" v-if="errors.has('booking[guest_capacity]')">@{{ errors.first('booking[guest_capacity]') }}</span>
+                <span class="control-error" v-if="errors.has('booking[qty]')">@{{ errors.first('booking[qty]') }}</span>
             </div>
 
             <div class="control-group" :class="[errors.has('booking[duration]') ? 'has-error' : '']">
@@ -101,8 +101,6 @@
                         price_type: 'guest',
 
                         guest_limit: 2,
-
-                        guest_capacity: 100,
 
                         duration: 45,
 

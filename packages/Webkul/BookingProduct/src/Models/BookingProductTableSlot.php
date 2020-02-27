@@ -14,7 +14,6 @@ class BookingProductTableSlot extends Model implements BookingProductTableSlotCo
     protected $fillable = [
         'price_type',
         'guest_limit',
-        'guest_capacity',
         'duration',
         'break_time',
         'prevent_scheduling_before',

@@ -331,14 +331,14 @@ class Booking
     }
 
     /**
-     * @param CartItem $cartItem
+     * @param CartItem|array $cartItem
      * @return bool
      */
     public function isItemHaveQuantity($cartItem)
     {
-        $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $cartItem->product_id);
+        $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $cartItem['product_id']);
 
-        if ($bookingProduct->qty - $this->getBookedQuantity($cartItem) < $cartItem->quantity) {
+        if ($bookingProduct->qty - $this->getBookedQuantity($cartItem) < $cartItem['quantity']) {
             return false;
         }
 
@@ -352,9 +352,7 @@ class Booking
     public function isSlotAvailable($cartProducts)
     {
         foreach ($cartProducts as $cartProduct) {
-            $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $cartProduct['product_id']);
-
-            if ($bookingProduct->qty - $this->getBookedQuantity($cartProduct) < $cartProduct['quantity']) {
+            if (! $this->isItemHaveQuantity($cartProduct)) {
                 return false;
             }
         }

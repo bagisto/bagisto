@@ -17,7 +17,6 @@ class CreateBookingProductTableSlotsTable extends Migration
             $table->increments('id');
             $table->string('price_type');
             $table->integer('guest_limit')->default(0);
-            $table->integer('guest_capacity')->default(0);
             $table->integer('duration');
             $table->integer('break_time');
             $table->integer('prevent_scheduling_before');

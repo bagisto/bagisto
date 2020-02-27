@@ -96,38 +96,6 @@ class RentalSlot extends Booking
     }
 
     /**
-     * @param CartItem $cartItem
-     * @return bool
-     */
-    public function isItemHaveQuantity($cartItem)
-    {
-        $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $cartItem->product_id);
-
-        if ($bookingProduct->qty - $this->getBookedQuantity($cartItem) < $cartItem->quantity) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * @param array $cartProducts
-     * @return bool
-     */
-    public function isSlotAvailable($cartProducts)
-    {
-        foreach ($cartProducts as $cartProduct) {
-            $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $cartProduct['product_id']);
-
-            if ($bookingProduct->qty - $this->getBookedQuantity($cartProduct) < $cartProduct['quantity']) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /**
      * @param array $data
      * @return integer
      */

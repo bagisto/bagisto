@@ -57,12 +57,6 @@
         'title' => __('bookingproduct::app.shop.products.book-a-table')
     ])
 
-<div class="control-group" :class="[errors.has('booking[qty]') ? 'has-error' : '']">
-    <label>{{ __('bookingproduct::app.shop.products.number-of-tables') }}</label>
-    <input type="text" v-validate="'required'" name="booking[qty]" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.shop.products.number-of-tables') }}&quot;" style="width: 100%"/>
-    <span class="control-error" v-if="errors.has('booking[qty]')">@{{ errors.first('booking[qty]') }}</span>
-</div>
-
 <div class="control-group">
     <label>{{ __('bookingproduct::app.shop.products.special-notes') }}</label>
     <textarea name="booking[note]" class="control" style="width: 100%"/>

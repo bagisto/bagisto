@@ -62,16 +62,16 @@ class EventTicket extends Booking
     }
 
     /**
-     * @param CartItem $cartItem
+     * @param CartItem|array $cartItem
      * @return bool
      */
     public function isItemHaveQuantity($cartItem)
     {
-        $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $cartItem->product_id);
+        $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $cartItem['product_id']);
 
         $ticket = $bookingProduct->event_tickets()->find($cartItem['additional']['booking']['ticket_id']);
 
-        if ($ticket->qty - $this->getBookedQuantity($cartItem) < $cartItem->quantity) {
+        if ($ticket->qty - $this->getBookedQuantity($cartItem) < $cartItem['quantity']) {
             return false;
         }
 
@@ -85,11 +85,7 @@ class EventTicket extends Booking
     public function isSlotAvailable($cartProducts)
     {
         foreach ($cartProducts as $cartProduct) {
-            $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $cartProduct['product_id']);
-
-            $ticket = $bookingProduct->event_tickets()->find($cartProduct['additional']['booking']['ticket_id']);
-
-            if ($ticket->qty - $this->getBookedQuantity($cartProduct) < $cartProduct['quantity']) {
+            if (! $this->isItemHaveQuantity($cartProduct)) {
                 return false;
             }
         }
