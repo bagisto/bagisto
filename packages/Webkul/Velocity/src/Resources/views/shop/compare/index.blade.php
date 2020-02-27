@@ -35,6 +35,13 @@
                             'code' => 'image',
                             'admin_name' => 'Product Image'
                         ]]);
+
+                        array_splice($comparableAttributes, 2, 0, [[
+                            'code' => 'addToCartHtml',
+                            'admin_name' => 'Actions'
+                        ]]);
+
+                        @dd($comparableAttributes);
                     @endphp
 
                     @foreach ($comparableAttributes as $attribute)
@@ -50,6 +57,8 @@
                                     <img :src="product['{{ $attribute['code'] }}']" class="image-wrapper"></span>
                                 @elseif ($attribute['code'] == 'price')
                                     <span v-html="product['priceHTML']"></span>
+                                @elseif ($attribute['code'] == 'addToCartHtml')
+                                    <span v-html="product['addToCartHtml']"></span>
                                 @else
                                     <span v-html="product['{{ $attribute['code'] }}']"></span>
                                 @endif
