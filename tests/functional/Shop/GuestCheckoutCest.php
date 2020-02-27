@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Webkul\Unit\Shop;
+namespace Tests\Functional\Shop;
 
 use Codeception\Example;
 use FunctionalTester;
@@ -35,10 +35,10 @@ class GuestCheckoutCest
             ],
         ];
 
-        $this->productNoGuestCheckout = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT, $pConfigDefault, ['simple']);
+        $this->productNoGuestCheckout = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT, $pConfigDefault);
         $this->productNoGuestCheckout->refresh();
 
-        $this->productGuestCheckout = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT, $pConfigGuestCheckout, ['simple']);
+        $this->productGuestCheckout = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT, $pConfigGuestCheckout);
         $this->productGuestCheckout->refresh();
     }
 

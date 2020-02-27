@@ -13,7 +13,7 @@
 
             <div class="page-action">
                 <a href="{{ route('admin.catalog.categories.create') }}" class="btn btn-lg btn-primary">
-                    {{ __('Add Category') }}
+                    {{ __('admin::app.catalog.categories.add-title') }}
                 </a>
             </div>
         </div>
@@ -21,12 +21,9 @@
         {!! view_render_event('bagisto.admin.catalog.categories.list.before') !!}
 
         <div class="page-content">
-
             {!! app('Webkul\Admin\DataGrids\CategoryDataGrid')->render() !!}
-
         </div>
 
         {!! view_render_event('bagisto.admin.catalog.categories.list.after') !!}
-
     </div>
 @stop

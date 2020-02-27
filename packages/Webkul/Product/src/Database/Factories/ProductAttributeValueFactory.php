@@ -42,7 +42,7 @@ $factory->defineAs(ProductAttributeValue::class, 'tax_category_id', function (Fa
             return factory(Product::class)->create()->id;
         },
         'channel'       => 'default',
-        'integer_value' => null, // ToDo
+        'integer_value' => null,
         'attribute_id'  => 4,
     ];
 });

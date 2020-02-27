@@ -103,7 +103,7 @@ class OnepageController extends Controller
     {
         $data = request()->all();
 
-        if (! auth()->guard('customer')->check() && ! $cart->hasGuestCheckoutItems()) {
+        if (! auth()->guard('customer')->check() && ! Cart::getCart()->hasGuestCheckoutItems()) {
             return response()->json(['redirect_url' => route('customer.session.index')], 403);
         }
 

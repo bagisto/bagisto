@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => env('APP_LOCALE', 'en'),
 
     /*
     |--------------------------------------------------------------------------
@@ -102,6 +102,8 @@ return [
     | Ensure it is uppercase and reflects the 'code' column of the
     | countries table.
     |
+    | for example: DE EN FR
+    | (use capital letters!)
     */
 
     'default_country' => null,
@@ -114,8 +116,8 @@ return [
     | Here you may specify the base currency code for your application.
     |
     */
-
-    'currency' => env('APP_CURRENCY','USD'),
+    
+    'currency' => env('APP_CURRENCY', 'USD'),
 
     /*
     |--------------------------------------------------------------------------

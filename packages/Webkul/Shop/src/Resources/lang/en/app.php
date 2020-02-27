@@ -500,7 +500,7 @@ return [
             'contact' => 'Contact',
             'place-order' => 'Place Order',
             'new-address' => 'Add New Address',
-            'save_as_address' => 'Save as Address',
+            'save_as_address' => 'Save this address',
             'apply-coupon' => 'Apply Coupon',
             'amt-payable' => 'Amount Payable',
             'got' => 'Got',
