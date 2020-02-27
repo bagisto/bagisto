@@ -52,6 +52,14 @@
                                 `${this.__('customer.compare.already_added')} <a href="${this.baseUrl}/comparison">compare</a>`
                             );
                         }
+                    } else {
+                        window.localStorage.setItem('compared_product', JSON.stringify([this.slug]));
+
+                        window.showAlert(
+                            `alert-success`,
+                            this.__('shop.general.alert.success'),
+                            `${this.__('customer.compare.added')} <a href="${this.baseUrl}/comparison">compare</a>`
+                        );
                     }
                 }
             }
