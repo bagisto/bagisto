@@ -43,7 +43,11 @@
                     class="sub-category-container"
                     v-if="category.children.length && category.children.length > 0">
 
-                    <div :class="`sub-categories sub-category-${sidebarLevel+categoryIndex}`">
+                    <div
+                        @mouseout="toggleSidebar(id, $event, 'mouseout')"
+                        @mouseover="remainBar(`sidebar-level-${sidebarLevel+categoryIndex}`)"
+                        :class="`sub-categories sub-category-${sidebarLevel+categoryIndex} cursor-default`">
+
                         <nav
                             class="sidebar"
                             :id="`sidebar-level-${sidebarLevel+categoryIndex}`"
@@ -55,7 +59,7 @@
                                     v-for="(subCategory, subCategoryIndex) in category.children">
 
                                     <a
-                                        :class="`category unset ${(subCategory.children.length > 0) ? 'fw6' : ''}`"
+                                        :class="`category sub-category unset ${(subCategory.children.length > 0) ? 'fw6' : ''}`"
                                         :href="`${$root.baseUrl}/${category.slug}/${subCategory.slug}`">
 
                                         <div

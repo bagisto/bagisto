@@ -52,6 +52,7 @@ window.eventBus = new Vue();
 $(document).ready(function () {
     // define a mixin object
     Vue.mixin(require('./UI/components/trans'));
+
     Vue.mixin({
         data: function () {
             return {
@@ -89,11 +90,11 @@ $(document).ready(function () {
                         }
                     }
                 } else if (
-                    Array.from(target.classList)[0] == "category"
-                    || Array.from(target.classList)[0] == "category-icon"
-                    || Array.from(target.classList)[0] == "category-title"
-                    || Array.from(target.classList)[0] == "category-content"
-                    || Array.from(target.classList)[0] == "rango-arrow-right"
+                    Array.from(target.classList)[0]     == "category"
+                    || Array.from(target.classList)[0]  == "category-icon"
+                    || Array.from(target.classList)[0]  == "category-title"
+                    || Array.from(target.classList)[0]  == "category-content"
+                    || Array.from(target.classList)[0]  == "rango-arrow-right"
                 ) {
                     let parentItem = target.closest('li');
                     if (target.id || parentItem.id.match('category-')) {
@@ -289,6 +290,7 @@ $(document).ready(function () {
                 this.$http.get(`${this.baseUrl}/categories`)
                 .then(response => {
                     this.sharedRootCategories = response.data.categories;
+                    $(`<style type='text/css'> .sub-categories{ min-height:${response.data.categories.length * 30}px;} </style>`).appendTo("head");
                 })
                 .catch(error => {
                     console.log('failed to load categories');

@@ -40,12 +40,12 @@
                     @foreach ($comparableAttributes as $attribute)
                         <div class="row col-12 pr-0 mt15">
                             <div class="col-2">
-                                <span>{{ $attribute['admin_name'] }}</span>
+                                <span class="fs16">{{ $attribute['admin_name'] }}</span>
                             </div>
 
                             <div class="product-title col" :key="`title-${index}`" v-for="(product, index) in products">
                                 @if ($attribute['code'] == 'name')
-                                    <h1 class="fw6" v-text="product['{{ $attribute['code'] }}']"></h1>
+                                    <h1 class="fw6 fs18" v-text="product['{{ $attribute['code'] }}']"></h1>
                                 @elseif ($attribute['code'] == 'image')
                                     <img :src="product['{{ $attribute['code'] }}']" class="image-wrapper"></span>
                                 @elseif ($attribute['code'] == 'price')
