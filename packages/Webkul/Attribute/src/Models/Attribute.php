@@ -9,7 +9,7 @@ class Attribute extends TranslatableModel implements AttributeContract
 {
     public $translatedAttributes = ['name'];
 
-    protected $fillable = ['code', 'admin_name', 'type', 'position', 'is_required', 'is_unique', 'validation', 'value_per_locale', 'value_per_channel', 'is_filterable', 'is_configurable', 'is_visible_on_front', 'is_user_defined', 'swatch_type', 'use_in_flat'];
+    protected $fillable = ['code', 'admin_name', 'type', 'position', 'is_required', 'is_unique', 'validation', 'value_per_locale', 'value_per_channel', 'is_filterable', 'is_configurable', 'is_visible_on_front', 'is_user_defined', 'swatch_type', 'use_in_flat', 'is_comparable'];
 
     // protected $with = ['options'];
 
@@ -30,5 +30,10 @@ class Attribute extends TranslatableModel implements AttributeContract
     public function scopeFilterableAttributes($query)
     {
         return $query->where('is_filterable', 1)->where('swatch_type', '<>', 'image')->orderBy('position');
+    }
+
+    public function getComparableAttributes()
+    {
+        return $this->where('is_comparable', 1)->orderBy('position')->get();
     }
 }

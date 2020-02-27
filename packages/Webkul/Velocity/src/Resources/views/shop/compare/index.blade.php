@@ -5,58 +5,66 @@
 @endsection
 
 @section('content-wrapper')
+    @php
+        $attributeModel = app('\Webkul\Attribute\Models\Attribute');
+        $comparableAttributes = $attributeModel->getComparableAttributes();
+    @endphp
 
-    <section class="cart-details row no-margin col-12">
-        <h1 class="fw6 col-12">
-            {{ __('velocity::app.customer.compare.compare_similar_items') }}
-        </h1>
-
-        {!! view_render_event('bagisto.shop.customers.account.compare.view.before') !!}
-
-            <compare-product></compare-product>
-
-        {!! view_render_event('bagisto.shop.customers.account.compare.view.after') !!}
-    </section>
-
+    <compare-product></compare-product>
 @endsection
 
 @push('scripts')
     <script type="text/x-template" id="compare-product-template">
-        <div class="row compare-products col-12 ml0">
-            <div class="col" :key="index" v-for="(product, index) in products">
-                <div class="row col-12 pl0">
-                    <div class="product-title">
-                        <h3>@{{ product.name }}</h3>
-                    </div>
+        <section class="cart-details row no-margin col-12">
+            <h1 class="fw6 col-6">
+                {{ __('velocity::app.customer.compare.compare_similar_items') }}
+            </h1>
 
-                    <div class='image-wrapper'>
-                        <img :src="product.image" />
-                    </div>
-
-                    <div class="product-price" v-html="product.priceHTML"></div>
-
-                    <div class="product-reviews">
-                        <star-ratings :ratings="product.avgRating"></star-ratings>
-                        <a class="fs14 align-top unset active-hover" :href="`${$root.baseUrl}/reviews/${product.slug}`">
-                            @{{ __('products.reviews-count', {'totalReviews': product.totalReviews}) }}
-                        </a>
-                    </div>
-
-                    <div class="action">
-                        <vnode-injector :nodes="getAddToCartHtml(product.addToCartHtml)"></vnode-injector>
-                        <div class="close-btn rango-close fs18 cursor-pointer" @click="removeProductCompare(product.slug)"></div>
-                    </div>
-
-                    <div class="product-description">
-                        <p v-html="product.description"></p>
-                    </div>
-                </div>
+            <div class="col-6" v-if="products.length > 0">
+                <button class="theme-btn light pull-right" @click="removeProductCompare('all')">Clear All</button>
             </div>
 
-            <span v-if="isProductListLoaded && products.length == 0">
-                @{{ __('customer.compare.empty-text') }}
-            </span>
-        </div>
+            {!! view_render_event('bagisto.shop.customers.account.compare.view.before') !!}
+
+            <div class="row compare-products col-12 ml0">
+                <template v-if="products.length > 0">
+                    @php
+                        $comparableAttributes = $comparableAttributes->toArray();
+
+                        array_splice($comparableAttributes, 1, 0, [[
+                            'code' => 'image',
+                            'admin_name' => 'Product Image'
+                        ]]);
+                    @endphp
+
+                    @foreach ($comparableAttributes as $attribute)
+                        <div class="row col-12 pr-0 mt15">
+                            <div class="col-2">
+                                <span>{{ $attribute['admin_name'] }}</span>
+                            </div>
+
+                            <div class="product-title col" :key="`title-${index}`" v-for="(product, index) in products">
+                                @if ($attribute['code'] == 'name')
+                                    <h1 class="fw6" v-text="product['{{ $attribute['code'] }}']"></h1>
+                                @elseif ($attribute['code'] == 'image')
+                                    <img :src="product['{{ $attribute['code'] }}']" class="image-wrapper"></span>
+                                @elseif ($attribute['code'] == 'price')
+                                    <span v-html="product['priceHTML']"></span>
+                                @else
+                                    <span v-html="product['{{ $attribute['code'] }}']"></span>
+                                @endif
+                            </div>
+                        </div>
+                    @endforeach
+                </template>
+
+                <span v-if="isProductListLoaded && products.length == 0">
+                    @{{ __('customer.compare.empty-text') }}
+                </span>
+            </div>
+
+            {!! view_render_event('bagisto.shop.customers.account.compare.view.after') !!}
+        </section>
     </script>
 
     <script>
@@ -120,8 +128,13 @@
                         let existingItems = window.localStorage.getItem('compared_product');
                         existingItems = JSON.parse(existingItems);
 
-                        updatedItems = existingItems.filter(item => item != slug);
-                        this.$set(this, 'products', this.products.filter(product => product.slug != slug));
+                        if (slug == "all") {
+                            updatedItems = [];
+                            this.$set(this, 'products', []);
+                        } else {
+                            updatedItems = existingItems.filter(item => item != slug);
+                            this.$set(this, 'products', this.products.filter(product => product.slug != slug));
+                        }
 
                         window.localStorage.setItem('compared_product', JSON.stringify(updatedItems));
 
@@ -148,6 +161,6 @@
                     return output;
                 }
             }
-        })
+        });
     </script>
 @endpush

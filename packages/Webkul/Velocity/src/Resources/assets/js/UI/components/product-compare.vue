@@ -34,16 +34,25 @@
 
                     if (existingItems) {
                         existingItems = JSON.parse(existingItems);
-                        updatedItems = existingItems.concat([this.slug]);
+
+                        if (existingItems.indexOf(this.slug) == -1) {
+                            updatedItems = existingItems.concat([this.slug]);
+
+                            window.localStorage.setItem('compared_product', JSON.stringify(updatedItems));
+
+                            window.showAlert(
+                                `alert-success`,
+                                this.__('shop.general.alert.success'),
+                                `${this.__('customer.compare.added')} <a href="${this.baseUrl}/comparison">compare</a>`
+                            );
+                        } else {
+                            window.showAlert(
+                                `alert-success`,
+                                this.__('shop.general.alert.success'),
+                                `${this.__('customer.compare.already_added')} <a href="${this.baseUrl}/comparison">compare</a>`
+                            );
+                        }
                     }
-
-                    window.localStorage.setItem('compared_product', JSON.stringify(updatedItems));
-
-                    window.showAlert(
-                        `alert-success`,
-                        this.__('shop.general.alert.success'),
-                        `${this.__('customer.compare.added')} <a href="${this.baseUrl}/comparison">compare</a>`
-                    );
                 }
             }
         }

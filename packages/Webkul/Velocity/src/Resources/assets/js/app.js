@@ -69,6 +69,12 @@ $(document).ready(function () {
                 route ? window.location.href = route : '';
             },
 
+            debounceToggleSidebar: function (id, {target}, type) {
+                // setTimeout(() => {
+                    this.toggleSidebar(id, target, type);
+                // }, 500);
+            },
+
             toggleSidebar: function (id, {target}, type) {
                 if (
                     Array.from(target.classList)[0] == "main-category"

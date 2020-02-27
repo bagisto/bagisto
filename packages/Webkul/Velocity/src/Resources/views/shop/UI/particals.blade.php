@@ -118,6 +118,13 @@
             {!! view_render_event('bagisto.shop.layout.header.cart-item.before') !!}
                 @include('shop::checkout.cart.mini-cart')
             {!! view_render_event('bagisto.shop.layout.header.cart-item.after') !!}
+
+            {!! view_render_event('bagisto.shop.layout.header.compare.before') !!}
+                <a class="compare-btn unset" href="{{ route('velocity.product.compare') }}">
+                    <i class="material-icons">compare_arrows</i>
+                    <span>Compare</span>
+                </a>
+            {!! view_render_event('bagisto.shop.layout.header.compare.after') !!}
         </div>
     </div>
 </script>

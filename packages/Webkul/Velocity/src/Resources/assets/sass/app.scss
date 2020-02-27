@@ -510,6 +510,18 @@ header {
                 }
             }
         }
+
+        ~ .compare-btn {
+            height: 50px;
+            float: right;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 10px 16px 6px 16px;
+
+            i {
+                vertical-align: middle;
+            }
+        }
     }
 
     .dropdown-menu-large {
