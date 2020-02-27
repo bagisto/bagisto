@@ -79,21 +79,6 @@ class EventTicket extends Booking
     }
 
     /**
-     * @param array $cartProducts
-     * @return bool
-     */
-    public function isSlotAvailable($cartProducts)
-    {
-        foreach ($cartProducts as $cartProduct) {
-            if (! $this->isItemHaveQuantity($cartProduct)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /**
      * @param array $data
      * @return integer
      */
