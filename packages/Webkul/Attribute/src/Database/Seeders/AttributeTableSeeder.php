@@ -34,7 +34,7 @@ class AttributeTableSeeder extends Seeder
             ['id' => '6','code' => 'featured','admin_name' => 'Featured','type' => 'boolean','validation' => NULL,'position' => '6','is_required' => '0','is_unique' => '0','value_per_locale' => '0','value_per_channel' => '0','is_filterable' => '0','is_configurable' => '0','is_user_defined' => '0','is_visible_on_front' => '0',
             'use_in_flat' => '1','created_at' => $now,'updated_at' => $now, 'is_comparable' => '0'],
 
-            ['id' => '7','code' => 'visible_individually','admin_name' => 'Visible Individually','type' => 'boolean','validation' => NULL,'position' => '7','is_required' => '1','is_unique' => '0','value_per_locale' => '0','value_per_channel' => '0','is_filterable' => '0','is_configurable' => '0','is_user_defined' => '0','is_visible_on_front' => '0','created_at' => $now, 'use_in_flat' => '1','updated_at' => $now],
+            ['id' => '7','code' => 'visible_individually','admin_name' => 'Visible Individually','type' => 'boolean','validation' => NULL,'position' => '7','is_required' => '1','is_unique' => '0','value_per_locale' => '0','value_per_channel' => '0','is_filterable' => '0','is_configurable' => '0','is_user_defined' => '0','is_visible_on_front' => '0','created_at' => $now, 'use_in_flat' => '1','updated_at' => $now, 'is_comparable' => '0'],
 
             ['id' => '8','code' => 'status','admin_name' => 'Status','type' => 'boolean','validation' => NULL,'position' => '8','is_required' => '1','is_unique' => '0','value_per_locale' => '0','value_per_channel' => '0','is_filterable' => '0','is_configurable' => '0','is_user_defined' => '0','is_visible_on_front' => '0',
             'use_in_flat' => '1','created_at' => $now,'updated_at' => $now, 'is_comparable' => '0'],
