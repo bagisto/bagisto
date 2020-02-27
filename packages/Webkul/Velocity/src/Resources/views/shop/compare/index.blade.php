@@ -40,8 +40,6 @@
                             'code' => 'addToCartHtml',
                             'admin_name' => 'Actions'
                         ]]);
-
-                        @dd($comparableAttributes);
                     @endphp
 
                     @foreach ($comparableAttributes as $attribute)
