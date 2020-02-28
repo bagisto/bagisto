@@ -177,9 +177,23 @@
                 .ticket-quantity {
                     width: 50%;
                     display: inline-block;
+                    text-align: right;
 
                     .control-group {
                         margin: 0;
+
+                        &.quantity {
+                            max-width: initial;
+                            width: auto;
+                            text-align: center;
+                            margin-bottom: 0;
+                            border-top: 0;
+                            padding-top: 0;
+                            
+                            label {
+                                display: none;
+                            }
+                        }
                     }
                 }
 
