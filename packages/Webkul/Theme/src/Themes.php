@@ -35,7 +35,6 @@ class Themes
      */
     protected $defaultThemeCode = 'default';
 
-
     /**
      * Create a new Themes instance.
      *
@@ -75,7 +74,6 @@ class Themes
         
         return false;
     }
-
 
     /**
      * Prepare all themes
@@ -179,7 +177,6 @@ class Themes
 
         throw new Exceptions\ThemeNotFound($themeName);
     }
-
 
     /**
      * Original view paths defined in config.view.php

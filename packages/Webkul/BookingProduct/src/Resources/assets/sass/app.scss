@@ -104,7 +104,7 @@
             color: #3a3a3a;
         }
 
-        .control-group {
+        .control-group, .form-group {
             label {
                 font-size: 16px;
             }
@@ -118,11 +118,11 @@
             width: 100%;
             float: left;
 
-            .control-group:not(.quantity) {
+            .control-group:not(.quantity), .form-group:not(.quantity) {
                 width: 50%;
                 float: left;
 
-                .control {
+                .control, .form-style {
                     width: 100%;
                 }
 
@@ -179,7 +179,7 @@
                     display: inline-block;
                     text-align: right;
 
-                    .control-group {
+                    .control-group, .form-group {
                         margin: 0;
 
                         &.quantity {
