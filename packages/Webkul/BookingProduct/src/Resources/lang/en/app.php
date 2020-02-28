@@ -110,6 +110,15 @@ return [
             'renting_type' => 'Rent Type',
             'daily' => 'Daily',
             'hourly' => 'Hourly',
+            'event-ticket' => 'Event Ticket',
+            'event-from' => 'Event From',
+            'event-till' => 'Event Till',
+            'rent-type' => 'Rent Type',
+            'rent-from' => 'Rent From',
+            'rent-till' => 'Rent Till',
+            'booking-from' => 'Booking From',
+            'booking-till' => 'Booking Till',
+            'special-note' => 'Special Request/Notes',
         ]
     ]
 ];
