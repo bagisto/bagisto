@@ -6,6 +6,7 @@
 
     .magnifier {
         > img {
+            max-width: 100%;
             min-height: 450px;
             max-height: 530px;
         }
