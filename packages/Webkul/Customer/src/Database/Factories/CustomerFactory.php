@@ -8,12 +8,11 @@ use Webkul\Customer\Models\Customer;
 
 $factory->define(Customer::class, function (Faker $faker) {
     $now = date("Y-m-d H:i:s");
-    $gender = array_rand(['male', 'female', 'other']);
     $password = $faker->password;
     return [
-        'first_name'        => $faker->firstName($gender),
+        'first_name'        => $faker->firstName(),
         'last_name'         => $faker->lastName,
-        'gender'            => ucfirst($gender),
+        'gender'            => array_random(['male', 'female', 'other']),
         'email'             => $faker->email,
         'status'            => 1,
         'password'          => Hash::make($password),
@@ -21,7 +20,7 @@ $factory->define(Customer::class, function (Faker $faker) {
         'is_verified'       => 1,
         'created_at'        => $now,
         'updated_at'        => $now,
-        'notes'             => json_encode(array('plain_password' => $password)),
+        'notes'             => json_encode(['plain_password' => $password]),
     ];
 });
 

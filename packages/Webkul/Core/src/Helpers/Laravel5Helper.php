@@ -6,9 +6,14 @@ namespace Webkul\Core\Helpers;
 // all public methods declared in helper class will be available in $I
 
 use Codeception\Module\Laravel5;
+use Webkul\Checkout\Models\Cart;
+use Webkul\Customer\Models\Customer;
+use Webkul\Checkout\Models\CartItem;
 use Illuminate\Support\Facades\Event;
 use Webkul\Product\Models\Product;
+use Webkul\Checkout\Models\CartAddress;
 use Webkul\Product\Models\ProductInventory;
+use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Models\ProductDownloadableLink;
 use Webkul\Product\Models\ProductDownloadableLinkTranslation;
@@ -63,6 +68,93 @@ class Laravel5Helper extends Laravel5
         }
         return $attributes[$attribute];
     }
+
+    /**
+     * Generate a cart for the customer. Usually this is necessary to prepare the database
+     * before testing the checkout.
+     *
+     * @param array $options pass some options to configure some of the properties of the cart
+     *
+     * @return array the generated mocks as array
+     *
+     * @throws \Exception
+     */
+    public function prepareCart(array $options = []): array
+    {
+        $faker = \Faker\Factory::create();
+
+        $I = $this;
+
+        $product = $I->haveProduct(self::SIMPLE_PRODUCT, $options['productOptions'] ?? []);
+
+        if (isset($options['customer'])) {
+            $customer = $options['customer'];
+        } else {
+            $customer = $I->have(Customer::class);
+        }
+
+        $I->have(CustomerAddress::class, [
+            'customer_id'     => $customer->id,
+            'default_address' => 1,
+            'first_name'      => $customer->first_name,
+            'last_name'       => $customer->last_name,
+            'company_name'    => $faker->company,
+        ]);
+
+        if (isset($options['payment_method']) && $options['payment_method'] === 'free_of_charge') {
+            $grand_total = '0.0000';
+            $base_grand_total = '0.0000';
+        } else {
+            $grand_total = (string)$faker->numberBetween(1, 666);
+            $base_grand_total = $grand_total;
+        }
+
+        $cart = $I->have(Cart::class, [
+            'customer_id'         => $customer->id,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
+            'customer_email'      => $customer->email,
+            'is_active'           => 1,
+            'channel_id'          => 1,
+            'grand_total'         => $grand_total,
+            'base_grand_total'    => $base_grand_total,
+        ]);
+
+        $cartAddress = $I->have(CartAddress::class, ['cart_id' => $cart->id]);
+
+
+        if (isset($options['product_type'])) {
+            $type = $options['product_type'];
+        } else {
+            $type = 'virtual';
+        }
+
+        $generatedCartItems = rand(3, 10);
+        for ($i = 2; $i <= $generatedCartItems; $i++) {
+            $cartItem = $I->have(CartItem::class, [
+                'type'       => $type,
+                'quantity'   => random_int(1, 10),
+                'cart_id'    => $cart->id,
+                'product_id' => $product->id,
+            ]);
+        }
+
+        // actually set the cart to the user's session
+        // when in an functional test:
+        $stub = new \StdClass();
+        $stub->id = $cart->id;
+        $I->setSession(['cart' => $stub]);
+
+        return [
+            'cart'        => $cart,
+            'product'     => $product,
+            'customer'    => $customer,
+            'cartAddress' => $cartAddress,
+            'cartItem'    => $cartItem,
+        ];
+
+    }
+
 
     /**
      * Helper function to generate products for testing

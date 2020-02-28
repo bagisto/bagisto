@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Webkul\User\Models\Admin;
 use Webkul\Customer\Models\Customer;
+use Webkul\Customer\Models\CustomerAddress;
+use Webkul\Checkout\Models\Cart;
+use Webkul\Checkout\Models\CartItem;
+use Webkul\Checkout\Models\CartAddress;
 
 /**
  * Inherited Methods
@@ -104,9 +108,11 @@ class FunctionalTester extends \Codeception\Actor
      * // TODO: change method as soon as there is a method to set core config data
      *
      * @param $data array containing 'code => value' pairs
+     *
      * @return void
      */
-    public function setConfigData($data): void {
+    public function setConfigData($data): void
+    {
         foreach ($data as $key => $value) {
             if (DB::table('core_config')->where('code', '=', $key)->exists()) {
                 DB::table('core_config')->where('code', '=', $key)->update(['value' => $value]);
@@ -115,7 +121,7 @@ class FunctionalTester extends \Codeception\Actor
                     'code'       => $key,
                     'value'      => $value,
                     'created_at' => date('Y-m-d H:i:s'),
-                    'updated_at' => date('Y-m-d H:i:s')
+                    'updated_at' => date('Y-m-d H:i:s'),
                 ]);
             }
         }
