@@ -165,7 +165,6 @@ $(document).ready(function () {
             },
 
             getDynamicHTML: function (input) {
-                debugger
                 const { render, staticRenderFns } = Vue.compile(input);
                 const _staticRenderFns = this.$options.staticRenderFns = staticRenderFns;
 
