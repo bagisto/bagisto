@@ -4,7 +4,7 @@ namespace Webkul\Velocity\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class VelocityCustomerCompareProducts extends Model
+class VelocityCustomerCompareProduct extends Model
 {
     protected $guarded = [];
 }

@@ -11,7 +11,7 @@ use Webkul\Checkout\Contracts\Cart as CartModel;
 use Webkul\Product\Repositories\SearchRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Category\Repositories\CategoryRepository;
-use Webkul\Velocity\Repositories\VelocityCustomerCompareProductsRepository;
+use Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository;
 use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRepository;
 
 /**
@@ -65,9 +65,9 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
     protected $categoryRepository;
 
     /**
-     * VelocityCustomerCompareProductsRepository object of velocity package
+     * VelocityCustomerCompareProductRepository object of velocity package
      *
-     * @var VelocityCustomerCompareProductsRepository
+     * @var VelocityCustomerCompareProductRepository
      */
     protected $velocityCompareProductsRepository;
 
@@ -79,7 +79,7 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
      * @param  \Webkul\Product\Repositories\ProductRepository $productRepository
      * @param  \Webkul\Category\Repositories\CategoryRepository $categoryRepository
      * @param  \Webkul\Velocity\Repositories\Product\ProductRepository $velocityProductRepository
-     * @param  \Webkul\Velocity\Repositories\VelocityCustomerCompareProductsRepository $velocityCompareProductsRepository
+     * @param  \Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository $velocityCompareProductsRepository
      * @return void
     */
     public function __construct(
@@ -88,7 +88,7 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
         ProductRepository $productRepository,
         CategoryRepository $categoryRepository,
         VelocityProductRepository $velocityProductRepository,
-        VelocityCustomerCompareProductsRepository $velocityCompareProductsRepository
+        VelocityCustomerCompareProductRepository $velocityCompareProductsRepository
     ) {
         $this->_config = request('_config');
 
