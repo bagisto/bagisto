@@ -8,6 +8,14 @@ return [
     ],
 
     'customer' => [
+        'compare' => [
+            'text' => 'Comparar',
+            'compare_similar_items' => 'Comparar itens semelhantes',
+            'already_added' => 'Item já adicionado à lista de comparação',
+            'added' => 'Item adicionado com sucesso à lista de comparação',
+            'removed' => 'Item removido com sucesso da lista de comparação',
+            'empty-text' => "Você não possui nenhum item na sua lista de comparação",
+        ],
         'login-form' => [
             'sign-up' => 'inscrever-se',
             'new-customer' => 'Novo cliente',

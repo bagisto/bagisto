@@ -98,7 +98,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     @else
         <div class="dropdown disable-active">
