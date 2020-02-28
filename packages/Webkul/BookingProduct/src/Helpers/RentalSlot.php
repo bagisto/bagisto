@@ -66,8 +66,8 @@ class RentalSlot extends Booking
                 if (($startDayTime <= $from && $from <= $availableTo)
                     && ($availableTo >= $to && $to >= $startDayTime)
                     && ($startDayTime <= $from && $from <= $endDayTime)
-                    && ($endDayTime >= $to && $to >= $startDayTime)) {
-                        
+                    && ($endDayTime >= $to && $to >= $startDayTime)
+                ) {
                     // Get already ordered qty for this slot
                     $orderedQty = 0;
 

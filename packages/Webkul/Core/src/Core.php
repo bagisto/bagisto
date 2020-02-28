@@ -385,9 +385,9 @@ class Core
             if (($targetCurrencyCode != $this->lastOrderCode)
                 && ($targetCurrencyCode != $orderCurrencyCode)
                 && ($orderCurrencyCode  != $this->getBaseCurrencyCode())
-                && ($orderCurrencyCode  != $this->lastCurrencyCode)) {
-                    
-                    $amount = $this->convertToBasePrice($amount, $orderCurrencyCode);
+                && ($orderCurrencyCode  != $this->lastCurrencyCode)
+            ) {
+                $amount = $this->convertToBasePrice($amount, $orderCurrencyCode);
             }
         }
 

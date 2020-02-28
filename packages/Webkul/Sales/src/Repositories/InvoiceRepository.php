@@ -168,8 +168,8 @@ class InvoiceRepository extends Repository
 
                         if ($childOrderItem->product
                             && ! $childOrderItem->getTypeInstance()->isStockable()
-                            && $childOrderItem->getTypeInstance()->showQuantityBox()) {
-
+                            && $childOrderItem->getTypeInstance()->showQuantityBox()
+                        ) {
                             $this->invoiceItemRepository->updateProductInventory([
                                 'invoice'   => $invoice,
                                 'product'   => $childOrderItem->product,
@@ -182,8 +182,8 @@ class InvoiceRepository extends Repository
                     }
                 } elseif ($orderItem->product
                     && ! $orderItem->getTypeInstance()->isStockable()
-                    && $orderItem->getTypeInstance()->showQuantityBox()) {
-                        
+                    && $orderItem->getTypeInstance()->showQuantityBox()
+                ) {
                     $this->invoiceItemRepository->updateProductInventory([
                         'invoice'   => $invoice,
                         'product'   => $orderItem->product,

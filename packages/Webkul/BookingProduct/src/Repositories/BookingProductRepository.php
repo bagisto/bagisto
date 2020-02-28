@@ -101,7 +101,9 @@ class BookingProductRepository extends Repository
             $bookingProductTypeSlot = $this->typeRepositories[$data['type']]->findOneByField('booking_product_id', $id);
 
             if (isset($data['slots'])) {
-                $data['slots'] = $this->formatSlots($data);
+                $data['slots'] = $this->validateSlots(
+                                    $this->formatSlots($data)
+                                );
             }
 
             if (! $bookingProductTypeSlot) {
@@ -141,5 +143,18 @@ class BookingProductRepository extends Repository
         }
 
         return $data['slots'];
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    public function validateSlots($data)
+    {
+        foreach ($data['slots'] as $key => $timeInterval) {
+            
+        }
+
+        return $data;
     }
 }

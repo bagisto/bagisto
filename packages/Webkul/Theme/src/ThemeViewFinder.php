@@ -43,7 +43,6 @@ class ThemeViewFinder extends FileViewFinder
             $newPath = base_path() . '/' . $path;
 
             $paths = Arr::prepend($paths, $newPath);
-
         }
 
         return $paths;

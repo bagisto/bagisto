@@ -142,7 +142,8 @@ class CatalogRuleProduct
                     || ! isset($condition['value'])
                     || is_null($condition['value'])
                     || $condition['value'] == ''
-                    || in_array($condition['attribute'], $appliedAttributes)) {
+                    || in_array($condition['attribute'], $appliedAttributes)
+                ) {
                     continue;
                 }
                 

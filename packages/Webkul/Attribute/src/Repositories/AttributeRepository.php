@@ -234,7 +234,7 @@ class AttributeRepository extends Repository
                     $attribute->type == 'select'
                     || $attribute->type == 'multiselect'
                     || $attribute->code == 'sku'
-                )) {
+            )) {
                 if ($attribute->options()->exists()) {
                     array_push($trimmed, [
                         'id'          => $attribute->id,

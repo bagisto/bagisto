@@ -261,13 +261,14 @@ class TaxRateController extends Controller
 
                         foreach ($excelData as $data) {
                             foreach ($data as $column => $uploadData) {
-                                if (!is_null($uploadData['zip_from']) && !is_null($uploadData['zip_to'])) {
+                                if (! is_null($uploadData['zip_from']) && ! is_null($uploadData['zip_to'])) {
                                     $uploadData['is_zip'] = 1;
                                     $uploadData['zip_code'] = NULL;
                                 }
 
                                 if (isset($rateIdentifier)) {
                                     $id = array_search($uploadData['identifier'], $rateIdentifier);
+                                    
                                     if ($id) {
                                         $this->taxRateRepository->update($uploadData, $id);
                                     } else {

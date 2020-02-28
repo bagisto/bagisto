@@ -26,7 +26,9 @@ class ConfigurationForm extends FormRequest
     {
         $this->rules = [];
 
-        if (request()->has('general.design.admin_logo.logo_image') && ! request()->input('general.design.admin_logo.logo_image.delete')) {
+        if (request()->has('general.design.admin_logo.logo_image')
+            && ! request()->input('general.design.admin_logo.logo_image.delete')
+        ) {
             $this->rules = [
                 'general.design.admin_logo.logo_image'  => 'required|mimes:jpeg,bmp,png,jpg'
             ];
