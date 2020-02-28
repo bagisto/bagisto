@@ -6,7 +6,7 @@
 
 <script>
     export default {
-        props: ['slug', 'customer'],
+        props: ['slug', 'customer', 'productId'],
 
         data: function () {
             return {}
@@ -17,7 +17,7 @@
                 if (this.customer == "true") {
                     this.$http.put(
                         `${this.$root.baseUrl}/comparison`, {
-                            slug: this.slug,
+                            productId: this.productId,
                         }
                     ).then(response => {
                         window.showAlert(`alert-${response.data.status}`, response.data.label, response.data.message);
@@ -43,13 +43,13 @@
                             window.showAlert(
                                 `alert-success`,
                                 this.__('shop.general.alert.success'),
-                                `${this.__('customer.compare.added')} <a href="${this.baseUrl}/comparison">compare</a>`
+                                `${this.__('customer.compare.added')}`
                             );
                         } else {
                             window.showAlert(
                                 `alert-success`,
                                 this.__('shop.general.alert.success'),
-                                `${this.__('customer.compare.already_added')} <a href="${this.baseUrl}/comparison">compare</a>`
+                                `${this.__('customer.compare.already_added')}`
                             );
                         }
                     } else {
@@ -58,7 +58,7 @@
                         window.showAlert(
                             `alert-success`,
                             this.__('shop.general.alert.success'),
-                            `${this.__('customer.compare.added')} <a href="${this.baseUrl}/comparison">compare</a>`
+                            `${this.__('customer.compare.added')}`
                         );
                     }
                 }

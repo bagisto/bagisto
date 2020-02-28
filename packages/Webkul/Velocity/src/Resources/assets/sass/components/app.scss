@@ -2264,4 +2264,13 @@
             font-size: 24px !important
         }
     }
+
+    .material-icons {
+        &.cross {
+            top: 5px;
+            right: 20px;
+            cursor: pointer;
+            position: absolute;
+        }
+    }
 }

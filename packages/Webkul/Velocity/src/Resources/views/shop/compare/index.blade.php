@@ -6,8 +6,8 @@
 
 @section('content-wrapper')
     @php
-        $attributeModel = app('\Webkul\Attribute\Models\Attribute');
-        $comparableAttributes = $attributeModel->getComparableAttributes();
+        $attributeRepository = app('\Webkul\Attribute\Repositories\AttributeRepository');
+        $comparableAttributes = $attributeRepository->findByField('is_comparable', 1);
     @endphp
 
     <compare-product></compare-product>
@@ -48,15 +48,20 @@
                                 <span class="fs16">{{ $attribute['admin_name'] }}</span>
                             </div>
 
-                            <div class="product-title col" :key="`title-${index}`" v-for="(product, index) in products">
+                            <div class="col" :key="`title-${index}`" v-for="(product, index) in products">
                                 @if ($attribute['code'] == 'name')
-                                    <h1 class="fw6 fs18" v-text="product['{{ $attribute['code'] }}']"></h1>
+                                    <a :href="`${$root.baseUrl}/${product.url_key}`" class="unset">
+                                        <h1 class="fw6 fs18" v-text="product['{{ $attribute['code'] }}']"></h1>
+                                    </a>
                                 @elseif ($attribute['code'] == 'image')
-                                    <img :src="product['{{ $attribute['code'] }}']" class="image-wrapper"></span>
+                                    <a :href="`${$root.baseUrl}/${product.url_key}`" class="unset">
+                                        <img :src="product['{{ $attribute['code'] }}']" class="image-wrapper"></span>
+                                    </a>
                                 @elseif ($attribute['code'] == 'price')
                                     <span v-html="product['priceHTML']"></span>
                                 @elseif ($attribute['code'] == 'addToCartHtml')
-                                    <span v-html="product['addToCartHtml']"></span>
+                                    <div v-html="product['addToCartHtml']"></div>
+                                    <i class="material-icons cross fs16" @click="removeProductCompare(isCustomer ? product.id : product.slug)">close</i>
                                 @else
                                     <span v-html="product['{{ $attribute['code'] }}']"></span>
                                 @endif
@@ -120,11 +125,15 @@
                     });
                 },
 
-                'removeProductCompare': function (slug) {
+                'removeProductCompare': function (productId) {
                     if (this.isCustomer) {
-                        this.$http.delete(`${this.$root.baseUrl}/comparison?slug=${slug}`)
+                        this.$http.delete(`${this.$root.baseUrl}/comparison?productId=${productId}`)
                         .then(response => {
-                            this.$set(this, 'products', this.products.filter(product => product.slug != slug));
+                            if (productId == 'all') {
+                                this.$set(this, 'products', this.products.filter(product => false));
+                            } else {
+                                this.$set(this, 'products', this.products.filter(product => product.id != productId));
+                            }
 
                             window.showAlert(`alert-${response.data.status}`, response.data.label, response.data.message);
                         })
@@ -135,12 +144,12 @@
                         let existingItems = window.localStorage.getItem('compared_product');
                         existingItems = JSON.parse(existingItems);
 
-                        if (slug == "all") {
+                        if (productId == "all") {
                             updatedItems = [];
                             this.$set(this, 'products', []);
                         } else {
-                            updatedItems = existingItems.filter(item => item != slug);
-                            this.$set(this, 'products', this.products.filter(product => product.slug != slug));
+                            updatedItems = existingItems.filter(item => item != productId);
+                            this.$set(this, 'products', this.products.filter(product => product.slug != productId));
                         }
 
                         window.localStorage.setItem('compared_product', JSON.stringify(updatedItems));

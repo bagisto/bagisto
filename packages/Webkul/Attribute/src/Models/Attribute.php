@@ -31,9 +31,4 @@ class Attribute extends TranslatableModel implements AttributeContract
     {
         return $query->where('is_filterable', 1)->where('swatch_type', '<>', 'image')->orderBy('position');
     }
-
-    public function getComparableAttributes()
-    {
-        return $this->where('is_comparable', 1)->orderBy('position')->get();
-    }
 }

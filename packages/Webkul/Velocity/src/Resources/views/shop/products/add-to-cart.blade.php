@@ -52,11 +52,19 @@
 
         @if (isset($showCompare) && $showCompare)
             @auth('customer')
-                <compare-component slug="{{ $product->url_key }}" customer="true"></compare-component>
+                <compare-component
+                    customer="true"
+                    productId="{{ $product->id }}"
+                    slug="{{ $product->url_key }}"
+                ></compare-component>
             @endif
 
             @guest('customer')
-                <compare-component slug="{{ $product->url_key }}" customer="false"></compare-component>
+                <compare-component
+                    customer="false"
+                    productId="{{ $product->id }}"
+                    slug="{{ $product->url_key }}"
+                ></compare-component>
             @endif
         @endif
 

@@ -4,7 +4,7 @@ namespace Webkul\Velocity\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
 
-class VelocityCustomerDataRepository extends Repository
+class VelocityCustomerCompareProductsRepository extends Repository
 {
     /**
      * Specify Model class name
@@ -13,6 +13,6 @@ class VelocityCustomerDataRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Velocity\Models\VelocityCustomerData';
+        return 'Webkul\Velocity\Models\VelocityCustomerCompareProducts';
     }
 }
