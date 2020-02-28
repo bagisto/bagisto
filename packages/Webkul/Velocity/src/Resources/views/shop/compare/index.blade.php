@@ -50,11 +50,11 @@
 
                             <div class="col" :key="`title-${index}`" v-for="(product, index) in products">
                                 @if ($attribute['code'] == 'name')
-                                    <a :href="`${$root.baseUrl}/${product.url_key}`" class="unset">
+                                    <a :href="`${$root.baseUrl}/${isCustomer ? product.url_key : product.slug}`" class="unset">
                                         <h1 class="fw6 fs18" v-text="product['{{ $attribute['code'] }}']"></h1>
                                     </a>
                                 @elseif ($attribute['code'] == 'image')
-                                    <a :href="`${$root.baseUrl}/${product.url_key}`" class="unset">
+                                    <a :href="`${$root.baseUrl}/${isCustomer ? product.url_key : product.slug}`" class="unset">
                                         <img :src="product['{{ $attribute['code'] }}']" class="image-wrapper"></span>
                                     </a>
                                 @elseif ($attribute['code'] == 'price')
