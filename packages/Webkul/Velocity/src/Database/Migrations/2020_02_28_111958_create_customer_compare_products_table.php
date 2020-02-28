@@ -38,6 +38,6 @@ class CreateCustomerCompareProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customer_compare_products');
+        Schema::dropIfExists('velocity_customer_compare_products');
     }
 }
