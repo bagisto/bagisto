@@ -125,6 +125,22 @@ class Booking extends Virtual
     }
 
     /**
+     * Return true if this product can have inventory
+     *
+     * @return boolean
+     */
+    public function showQuantityBox()
+    {
+        $bookingProduct = $this->getBookingProduct($this->product->id);
+
+        if (in_array($bookingProduct->type, ['default', 'rental', 'table'])) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * @param CartItem $cartItem
      * @return bool
      */

@@ -30,7 +30,6 @@
     <script>
 
         Vue.component('book-slots', {
-
             template: '#book-slots-template',
 
             inject: ['$validator'],

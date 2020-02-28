@@ -41,22 +41,6 @@
                     <p>@{{ ticket.description }}</p>
                 </div>
             </div>
-
-            <div class="ticket-total">
-                <!--<div class="total-tickets">
-                    {{ __('bookingproduct::app.shop.products.total-tickets') }} - 1
-                </div>-->
-
-                <div class="ticket-base-price">
-                    {{ __('bookingproduct::app.shop.products.base-price') }} - $100
-                    
-                    <p>{{ __('bookingproduct::app.shop.products.base-price-info') }}</p>
-                </div>
-
-                <!--<div class="ticket-total-price">
-                    {{ __('bookingproduct::app.shop.products.total-price') }} - $100
-                </div>-->
-            </div>
         </div>
     </script>
 

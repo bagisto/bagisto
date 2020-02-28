@@ -179,21 +179,21 @@ class DashboardController extends Controller
     public function getTopSellingCategories()
     {
         return $this->orderItemRepository->getModel()
-            ->leftJoin('products', 'order_items.product_id', 'products.id')
-            ->leftJoin('product_categories', 'products.id', 'product_categories.product_id')
-            ->leftJoin('categories', 'product_categories.category_id', 'categories.id')
-            ->leftJoin('category_translations', 'categories.id', 'category_translations.category_id')
-            ->where('category_translations.locale', app()->getLocale())
-            ->where('order_items.created_at', '>=', $this->startDate)
-            ->where('order_items.created_at', '<=', $this->endDate)
-            ->addSelect(DB::raw('SUM(qty_invoiced - qty_refunded) as total_qty_invoiced'))
-            ->addSelect(DB::raw('COUNT(' . DB::getTablePrefix() . 'products.id) as total_products'))
-            ->addSelect('order_items.id', 'categories.id as category_id', 'category_translations.name')
-            ->groupBy('categories.id')
-            ->havingRaw('SUM(qty_invoiced - qty_refunded) > 0')
-            ->orderBy('total_qty_invoiced', 'DESC')
-            ->limit(5)
-            ->get();
+                    ->leftJoin('products', 'order_items.product_id', 'products.id')
+                    ->leftJoin('product_categories', 'products.id', 'product_categories.product_id')
+                    ->leftJoin('categories', 'product_categories.category_id', 'categories.id')
+                    ->leftJoin('category_translations', 'categories.id', 'category_translations.category_id')
+                    ->where('category_translations.locale', app()->getLocale())
+                    ->where('order_items.created_at', '>=', $this->startDate)
+                    ->where('order_items.created_at', '<=', $this->endDate)
+                    ->addSelect(DB::raw('SUM(qty_invoiced - qty_refunded) as total_qty_invoiced'))
+                    ->addSelect(DB::raw('COUNT(' . DB::getTablePrefix() . 'products.id) as total_products'))
+                    ->addSelect('order_items.id', 'categories.id as category_id', 'category_translations.name')
+                    ->groupBy('categories.id')
+                    ->havingRaw('SUM(qty_invoiced - qty_refunded) > 0')
+                    ->orderBy('total_qty_invoiced', 'DESC')
+                    ->limit(5)
+                    ->get();
     }
 
     /**
@@ -204,13 +204,13 @@ class DashboardController extends Controller
     public function getStockThreshold()
     {
         return $this->productInventoryRepository->getModel()
-            ->leftJoin('products', 'product_inventories.product_id', 'products.id')
-            ->select(DB::raw('SUM(qty) as total_qty'))
-            ->addSelect('product_inventories.product_id')
-            ->groupBy('product_id')
-            ->orderBy('total_qty', 'ASC')
-            ->limit(5)
-            ->get();
+                    ->leftJoin('products', 'product_inventories.product_id', 'products.id')
+                    ->select(DB::raw('SUM(qty) as total_qty'))
+                    ->addSelect('product_inventories.product_id')
+                    ->groupBy('product_id')
+                    ->orderBy('total_qty', 'ASC')
+                    ->limit(5)
+                    ->get();
     }
 
     /**
@@ -220,15 +220,15 @@ class DashboardController extends Controller
     public function getTopSellingProducts()
     {
         return $this->orderItemRepository->getModel()
-            ->select(DB::raw('SUM(qty_ordered) as total_qty_ordered'))
-            ->addSelect('id', 'product_id', 'product_type', 'name')
-            ->where('order_items.created_at', '>=', $this->startDate)
-            ->where('order_items.created_at', '<=', $this->endDate)
-            ->whereNull('parent_id')
-            ->groupBy('product_id')
-            ->orderBy('total_qty_ordered', 'DESC')
-            ->limit(5)
-            ->get();
+                    ->select(DB::raw('SUM(qty_ordered) as total_qty_ordered'))
+                    ->addSelect('id', 'product_id', 'product_type', 'name')
+                    ->where('order_items.created_at', '>=', $this->startDate)
+                    ->where('order_items.created_at', '<=', $this->endDate)
+                    ->whereNull('parent_id')
+                    ->groupBy('product_id')
+                    ->orderBy('total_qty_ordered', 'DESC')
+                    ->limit(5)
+                    ->get();
     }
 
     /**
@@ -239,15 +239,15 @@ class DashboardController extends Controller
     public function getCustomerWithMostSales()
     {
         return $this->orderRepository->getModel()
-            ->select(DB::raw('SUM(base_grand_total) as total_base_grand_total'))
-            ->addSelect(DB::raw('COUNT(id) as total_orders'))
-            ->addSelect('id', 'customer_id', 'customer_email', 'customer_first_name', 'customer_last_name')
-            ->where('orders.created_at', '>=', $this->startDate)
-            ->where('orders.created_at', '<=', $this->endDate)
-            ->groupBy('customer_email')
-            ->orderBy('total_base_grand_total', 'DESC')
-            ->limit(5)
-            ->get();
+                    ->select(DB::raw('SUM(base_grand_total) as total_base_grand_total'))
+                    ->addSelect(DB::raw('COUNT(id) as total_orders'))
+                    ->addSelect('id', 'customer_id', 'customer_email', 'customer_first_name', 'customer_last_name')
+                    ->where('orders.created_at', '>=', $this->startDate)
+                    ->where('orders.created_at', '<=', $this->endDate)
+                    ->groupBy('customer_email')
+                    ->orderBy('total_base_grand_total', 'DESC')
+                    ->limit(5)
+                    ->get();
     }
 
     /**
@@ -258,12 +258,12 @@ class DashboardController extends Controller
     public function setStartEndDate()
     {
         $this->startDate = request()->get('start')
-            ? Carbon::createFromTimeString(request()->get('start') . " 00:00:01")
-            : Carbon::createFromTimeString(Carbon::now()->subDays(30)->format('Y-m-d') . " 00:00:01");
+                           ? Carbon::createFromTimeString(request()->get('start') . " 00:00:01")
+                           : Carbon::createFromTimeString(Carbon::now()->subDays(30)->format('Y-m-d') . " 00:00:01");
 
         $this->endDate = request()->get('end')
-            ? Carbon::createFromTimeString(request()->get('end') . " 23:59:59")
-            : Carbon::now();
+                         ? Carbon::createFromTimeString(request()->get('end') . " 23:59:59")
+                         : Carbon::now();
 
         if ($this->endDate > Carbon::now()) {
             $this->endDate = Carbon::now();

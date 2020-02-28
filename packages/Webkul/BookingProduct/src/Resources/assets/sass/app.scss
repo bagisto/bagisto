@@ -89,10 +89,9 @@
     }
 
     .book-slots {
-        padding-top: 25px;
+        // padding-top: 25px;
         display: inline-block;
         width: 100%;
-        border-top: solid 1px #e8e8e8;
 
         h3 {
             font-weight: 600;
@@ -156,6 +155,10 @@
                 display: inline-block;
                 padding: 16px 0;
                 border-bottom: solid 1px #e8e8e8;
+                
+                &:last-child {
+                    border-bottom: 0;
+                }
 
                 .ticket-info {
                     width: 50%;
