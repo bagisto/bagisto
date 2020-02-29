@@ -93,7 +93,7 @@
         },
 
         mounted: function () {
-            // console.log(this.quickViewDetails, this.quickView);
+            $('.compare-icon').click(this.closeQuickView);
         },
 
         methods: {

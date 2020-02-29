@@ -2208,8 +2208,10 @@
     }
 
     #new-products-carousel {
-        .compare-icon {
-            display: none;
+        .add-to-cart-btn {
+            ~ a {
+                position: static;
+            }
         }
     }
 }
