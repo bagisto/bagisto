@@ -8,10 +8,6 @@
     export default {
         props: ['slug', 'customer', 'productId'],
 
-        data: function () {
-            return {}
-        },
-
         methods: {
             addProductToCompare: function () {
                 if (this.customer == "true") {

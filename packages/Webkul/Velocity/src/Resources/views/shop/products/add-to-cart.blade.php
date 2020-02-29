@@ -54,7 +54,7 @@
             @auth('customer')
                 <compare-component
                     customer="true"
-                    productId="{{ $product->id }}"
+                    product-id="{{ $product->id }}"
                     slug="{{ $product->url_key }}"
                 ></compare-component>
             @endif
@@ -62,7 +62,7 @@
             @guest('customer')
                 <compare-component
                     customer="false"
-                    productId="{{ $product->id }}"
+                    product-id="{{ $product->id }}"
                     slug="{{ $product->url_key }}"
                 ></compare-component>
             @endif
