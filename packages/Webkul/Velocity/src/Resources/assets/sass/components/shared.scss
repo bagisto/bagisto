@@ -486,11 +486,17 @@
         .wishlist-icon {
             height: 40px;
             display: table;
+            padding-left: 0 !important;
 
             i {
                 display: table-cell;
                 vertical-align: middle;
+                padding-left: 0 !important;
             }
+        }
+
+        .compare-icon {
+            padding-left: 0;
         }
 
         .add-to-cart-btn {

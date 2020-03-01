@@ -2,12 +2,21 @@
 
 @inject ('reviewHelper', 'Webkul\Product\Helpers\Review')
 @inject ('customHelper', 'Webkul\Velocity\Helpers\Helper')
+@inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
 @php
     $total = $reviewHelper->getTotalReviews($product);
 
     $avgRatings = $reviewHelper->getAverageRating($product);
     $avgStarRating = ceil($avgRatings);
+
+    $productImages = [];
+    $images = $productImageHelper->getGalleryImages($product);
+
+    foreach ($images as $key => $image) {
+        array_push($productImages, $image['medium_image_url']);
+    }
+
 @endphp
 
 @section('page_title')
@@ -163,10 +172,25 @@
 @endsection
 
 @push('scripts')
+    <script type='text/javascript' src='https://unpkg.com/spritespin@x.x.x/release/spritespin.js'></script>
+
     <script type="text/x-template" id="product-view-template">
         <form method="POST" id="product-form" action="{{ route('cart.add', $product->product_id) }}" @click="onSubmit($event)">
             <input type="hidden" name="is_buy_now" v-model="is_buy_now">
-            <slot></slot>
+
+            {{-- <button type="button" class="theme-btn" @click="open360View" style="position: absolute;">360 view</button> --}}
+
+            <slot v-if="slot"></slot>
+
+            <div v-else>
+                @foreach ($productImages as $image)
+                    <img src="{{ $image }}" />
+                @endforeach
+
+                <div class="spritespin"></div>
+                <input class="spritespin-slider" type="range">
+            </div>
+
         </form>
     </script>
 
@@ -176,6 +200,7 @@
             template: '#product-view-template',
             data: function() {
                 return {
+                    slot: true,
                     is_buy_now: 0,
                 }
             },
@@ -228,6 +253,35 @@
                                 document.getElementById('product-form').submit();
                             }, 0);
                         }
+                    });
+                },
+
+                open360View: function () {
+                    this.slot = false;
+
+                    $(function() {
+                        $('.spritespin').spritespin({
+                            source: SpriteSpin.sourceArray('{{ $productImages[0] }}', {frame: [1,3], digits: 3}),
+                            width: 480,
+                            height: 327,
+                            sense: 1,
+                            animate: false,
+                            plugins: [
+                            '360'
+                            ],
+                            onFrame: function(e, data) {
+                            $('.spritespin-slider').val(data.frame)
+                            },
+                            onInit: function(e, data) {
+                            $('.spritespin-slider')
+                                .attr("min", 0)
+                                .attr("max", data.source.length - 1)
+                                .attr("value", 0)
+                                .on("input", function(e) {
+                                SpriteSpin.updateFrame(data, e.target.value);
+                                })
+                            }
+                        });
                     });
                 }
             }

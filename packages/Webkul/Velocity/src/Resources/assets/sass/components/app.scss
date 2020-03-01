@@ -355,6 +355,17 @@
     }
 }
 
+.lg-card-container:hover {
+    .product-image {
+        overflow: hidden;
+
+        img {
+            transition: 0.5s all;
+            transform: scale(1.1);
+        }
+    }
+}
+
 .quantity {
     @extend .btn-group;
 

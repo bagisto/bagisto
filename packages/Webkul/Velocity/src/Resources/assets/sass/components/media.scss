@@ -462,6 +462,11 @@
         &.vc-small-screen {
             display: block !important;
         }
+
+        + .recently-viewed {
+            top: 0;
+            position: static;
+        }
     }
 
     .reviews-container {
@@ -575,7 +580,7 @@
 
             .filters-container {
                 left: 0px;
-                top: 40px;
+                top: 30px;
                 padding: 0;
                 width: 100%;
                 z-index: 9;
@@ -629,9 +634,9 @@
 
             .category-title {
                 width: 100%;
+                display: none;
                 display: table;
                 padding-left: 10px;
-                display: none;
                 margin : 13px 0px 13px 0px;
 
                 > i {
@@ -681,9 +686,10 @@
 
                 li {
                     font-size: 16px;
+                    padding: 10px 0px 10px 20px;
 
                     a {
-                        padding: 10px 0px 10px 20px;
+                        // padding: 10px 0px 10px 20px;
                     }
 
                     &:hover {
