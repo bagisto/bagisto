@@ -172,23 +172,16 @@
 @endsection
 
 @push('scripts')
-    <script type='text/javascript' src='https://unpkg.com/spritespin@x.x.x/release/spritespin.js'></script>
+    <script type='text/javascript' src='https://unpkg.com/spritespin@4.1.0/release/spritespin.js'></script>
 
     <script type="text/x-template" id="product-view-template">
         <form method="POST" id="product-form" action="{{ route('cart.add', $product->product_id) }}" @click="onSubmit($event)">
             <input type="hidden" name="is_buy_now" v-model="is_buy_now">
 
-            {{-- <button type="button" class="theme-btn" @click="open360View" style="position: absolute;">360 view</button> --}}
-
             <slot v-if="slot"></slot>
 
             <div v-else>
-                @foreach ($productImages as $image)
-                    <img src="{{ $image }}" />
-                @endforeach
-
                 <div class="spritespin"></div>
-                <input class="spritespin-slider" type="range">
             </div>
 
         </form>
@@ -243,11 +236,9 @@
 
                     e.preventDefault();
 
-                    var this_this = this;
-
-                    this.$validator.validateAll().then(function (result) {
+                    this.$validator.validateAll().then(result => {
                         if (result) {
-                            this_this.is_buy_now = e.target.classList.contains('buynow') ? 1 : 0;
+                            this.is_buy_now = e.target.classList.contains('buynow') ? 1 : 0;
 
                             setTimeout(function() {
                                 document.getElementById('product-form').submit();
@@ -261,36 +252,39 @@
 
                     $(function() {
                         $('.spritespin').spritespin({
-                            source: SpriteSpin.sourceArray('{{ $productImages[0] }}', {frame: [1,3], digits: 3}),
-                            width: 480,
-                            height: 327,
+                            source: SpriteSpin.sourceArray('http://localhost/3d-image/sample-{lane}-{frame}.jpg', {
+                                lane: [0,5],
+                                frame: [0,5],
+                                digits: 2
+                            }),
+                            // width and height of the display
+                            width: 400,
+                            height: 225,
+                            // the number of lanes (vertical angles)
+                            lanes: 12,
+                            // the number of frames per lane (per vertical angle)
+                            frames: 24,
+                            // interaction sensitivity (and direction) modifier for horizontal movement
                             sense: 1,
+                            // interaction sensitivity (and direction) modifier for vertical movement
+                            senseLane: -2,
+
+                            // the initial lane number
+                            lane: 6,
+                            // the initial frame number (within the lane)
+                            frame: 0,
+                            // disable autostart of the animation
                             animate: false,
+
                             plugins: [
-                            '360'
-                            ],
-                            onFrame: function(e, data) {
-                            $('.spritespin-slider').val(data.frame)
-                            },
-                            onInit: function(e, data) {
-                            $('.spritespin-slider')
-                                .attr("min", 0)
-                                .attr("max", data.source.length - 1)
-                                .attr("value", 0)
-                                .on("input", function(e) {
-                                SpriteSpin.updateFrame(data, e.target.value);
-                                })
-                            }
+                                'progress',
+                                '360',
+                                'drag'
+                            ];
                         });
                     });
                 }
             }
-        });
-
-        $(document).ready(function() {
-            var addTOButton = document.getElementsByClassName('add-to-buttons')[0];
-            // document.getElementById('loader').style.display="none";
-            // addTOButton.style.display="flex";
         });
 
         window.onload = function() {

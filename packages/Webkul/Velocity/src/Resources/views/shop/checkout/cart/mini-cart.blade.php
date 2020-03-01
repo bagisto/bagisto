@@ -9,12 +9,27 @@
         @php
             Cart::collectTotals();
             $items = $cart->items;
+
+            $cartItems = $items->toArray();
+
+            $cartDetails = [];
+            $cartDetails['base_sub_total'] = core()->currency($cart->base_sub_total);
         @endphp
 
         <div class="dropdown">
             <cart-btn item-count="{{ $cart->items->count() }}"></cart-btn>
 
-            <div class="modal-content sensitive-modal cart-modal-content hide" id="cart-modal-content">
+            @foreach ($items as $index => $item)
+                @php
+                    $images = $item->product->getTypeInstance()->getBaseImage($item);
+
+                    $cartItems[$index]['images'] = $images;
+                    $cartItems[$index]['url_key'] = $item->product->url_key;
+                    $cartItems[$index]['base_total'] = core()->currency($item->base_total);
+                @endphp
+            @endforeach
+
+            {{-- <div class="modal-content sensitive-modal cart-modal-content hide" id="cart-modal-content">
                 <!--Body-->
                 <div class="mini-cart-container">
                     @foreach ($items as $item)
@@ -97,7 +112,18 @@
                         </a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
+
+            <mini-cart
+                items="{{ json_encode($cartItems) }}"
+                cart-details="{{ json_encode($cartDetails) }}"
+                view-cart="{{ route('shop.checkout.cart.index') }}"
+                cart-text="{{ __('shop::app.minicart.view-cart') }}"
+                checkout-text="{{ __('shop::app.minicart.checkout') }}"
+                checkout-url="{{ route('shop.checkout.onepage.index') }}"
+                subtotal-text="{{ __('shop::app.checkout.cart.cart-subtotal') }}"
+                remove-url="{{ route('shop.checkout.cart.remove', ['id' => $item->id]) }}">
+            </mini-cart>
         </div>
     @else
         <div class="dropdown disable-active">
