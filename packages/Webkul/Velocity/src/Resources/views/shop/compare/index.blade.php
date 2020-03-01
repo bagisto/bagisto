@@ -50,18 +50,25 @@
 
                             <div class="col" :key="`title-${index}`" v-for="(product, index) in products">
                                 @if ($attribute['code'] == 'name')
-                                    <a :href="`${$root.baseUrl}/${isCustomer ? product.url_key : product.slug}`" class="unset">
+                                    <a :href="`${$root.baseUrl}/${product.url_key}`" class="unset">
                                         <h1 class="fw6 fs18" v-text="product['{{ $attribute['code'] }}']"></h1>
                                     </a>
                                 @elseif ($attribute['code'] == 'image')
-                                    <a :href="`${$root.baseUrl}/${isCustomer ? product.url_key : product.slug}`" class="unset">
+                                    <a :href="`${$root.baseUrl}/${product.url_key}`" class="unset">
                                         <img :src="product['{{ $attribute['code'] }}']" class="image-wrapper"></span>
                                     </a>
                                 @elseif ($attribute['code'] == 'price')
                                     <span v-html="product['priceHTML']"></span>
                                 @elseif ($attribute['code'] == 'addToCartHtml')
                                     <div v-html="product['addToCartHtml']"></div>
+                                    @include('shop::products.wishlist')
                                     <i class="material-icons cross fs16" @click="removeProductCompare(isCustomer ? product.id : product.slug)">close</i>
+                                @elseif ($attribute['code'] == 'color')
+                                    <span v-html="product.color_label"></span>
+                                @elseif ($attribute['code'] == 'size')
+                                    <span v-html="product.size_label"></span>
+                                @elseif ($attribute['code'] == 'size')
+                                    <span v-html="product.size_label"></span>
                                 @else
                                     <span v-html="product['{{ $attribute['code'] }}']"></span>
                                 @endif

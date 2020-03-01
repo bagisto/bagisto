@@ -344,6 +344,15 @@
     #quick-view-btn-container {
         display: block;
     }
+
+    .product-image-container {
+        overflow: hidden;
+
+        img {
+            transition: 0.5s all;
+            transform: scale(1.1);
+        }
+    }
 }
 
 .quantity {
@@ -2274,5 +2283,12 @@
             cursor: pointer;
             position: absolute;
         }
+    }
+
+    .wishlist-icon {
+        top: 5px;
+        right: 60px;
+        position: absolute;
+        display: inline-block;
     }
 }
