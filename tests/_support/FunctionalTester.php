@@ -115,13 +115,17 @@ class FunctionalTester extends \Codeception\Actor
     {
         foreach ($data as $key => $value) {
             if (DB::table('core_config')->where('code', '=', $key)->exists()) {
-                DB::table('core_config')->where('code', '=', $key)->update(['value' => $value]);
+                DB::table('core_config')
+                    ->where('code', '=', $key)
+                    ->update(['value' => $value]);
             } else {
                 DB::table('core_config')->insert([
-                    'code'       => $key,
-                    'value'      => $value,
-                    'created_at' => date('Y-m-d H:i:s'),
-                    'updated_at' => date('Y-m-d H:i:s'),
+                    'code'         => $key,
+                    'value'        => $value,
+                    'channel_code' => null,
+                    'locale_code'  => null,
+                    'created_at'   => date('Y-m-d H:i:s'),
+                    'updated_at'   => date('Y-m-d H:i:s'),
                 ]);
             }
         }

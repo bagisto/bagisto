@@ -101,7 +101,8 @@ class Laravel5Helper extends Laravel5
             'company_name'    => $faker->company,
         ]);
 
-        if (isset($options['payment_method']) && $options['payment_method'] === 'free_of_charge') {
+        if (isset($options['payment_method'])
+            && $options['payment_method'] === 'free_of_charge') {
             $grand_total = '0.0000';
             $base_grand_total = '0.0000';
         } else {
@@ -122,11 +123,10 @@ class Laravel5Helper extends Laravel5
 
         $cartAddress = $I->have(CartAddress::class, ['cart_id' => $cart->id]);
 
-
         if (isset($options['product_type'])) {
             $type = $options['product_type'];
         } else {
-            $type = 'virtual';
+            $type = 'simple';
         }
 
         $generatedCartItems = rand(3, 10);
@@ -166,7 +166,11 @@ class Laravel5Helper extends Laravel5
      * @return \Webkul\Product\Models\Product
      * @part ORM
      */
-    public function haveProduct(int $productType, array $configs = [], array $productStates = []): Product
+    public function haveProduct(
+        int $productType,
+        array $configs = [],
+        array $productStates = []
+    ): Product
     {
         $I = $this;
 
@@ -218,9 +222,13 @@ class Laravel5Helper extends Laravel5
      *
      * @return \Webkul\Product\Models\Product
      */
-    private function haveSimpleProduct(array $configs = [], array $productStates = []): Product
+    private function haveSimpleProduct(
+        array $configs = [],
+        array $productStates = []
+    ): Product
     {
         $I = $this;
+
         if (! in_array('simple', $productStates)) {
             $productStates = array_merge($productStates, ['simple']);
         }
@@ -299,10 +307,13 @@ class Laravel5Helper extends Laravel5
     private function createInventory(int $productId, array $inventoryConfig = []): void
     {
         $I = $this;
+
         $I->have(ProductInventory::class, array_merge($inventoryConfig, [
             'product_id'          => $productId,
             'inventory_source_id' => 1,
+            'qty'                 => random_int(100, 666),
         ]));
+
     }
 
     /**

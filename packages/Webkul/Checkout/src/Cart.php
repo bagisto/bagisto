@@ -837,7 +837,7 @@ class Cart
      */
     public function hasError()
     {
-        if (!$this->getCart()) {
+        if (! $this->getCart()) {
             return true;
         }
 
