@@ -24,7 +24,7 @@
         .related-products {
             width: 100%;
         }
-        
+
         .recently-viewed {
             margin-top: 20px;
         }
@@ -88,6 +88,7 @@
                                     @include ('shop::products.add-to-cart', [
                                         'form' => false,
                                         'product' => $product,
+                                        'showCompare' => true,
                                         'showCartIcon' => false,
                                     ])
                                 </div>

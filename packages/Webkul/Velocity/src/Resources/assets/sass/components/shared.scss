@@ -124,7 +124,7 @@
     margin-top: 10px;
 }
 .mt15 {
-    margin-top: 15px;
+    margin-top: 15px !important;
 }
 .mr5 {
     margin-right: 5px;
@@ -876,4 +876,16 @@ button[disabled] {
     z-index: 5000;
     position: fixed;
     background: rgba(255, 255, 255, 0.9);
+}
+
+.compare-icon,
+.wishlist-icon {
+    height: 38px;
+    display: table;
+    margin-left: 10px;
+
+    i {
+        display: table-cell;
+        vertical-align: middle;
+    }
 }

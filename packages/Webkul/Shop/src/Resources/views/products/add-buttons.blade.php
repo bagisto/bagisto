@@ -7,4 +7,6 @@
     </form>
 
     @include('shop::products.wishlist')
+
+    @include('shop::products.compare')
 </div>

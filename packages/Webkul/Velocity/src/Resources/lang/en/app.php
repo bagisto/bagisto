@@ -191,6 +191,14 @@ return [
     ],
 
     'customer' => [
+        'compare' => [
+            'text' => 'Compare',
+            'compare_similar_items' => 'Compare Similar Items',
+            'added' => 'Item successfully added to compare list',
+            'already_added' => 'Item already added to compare list',
+            'removed' => 'Item successfully removed from compare list',
+            'empty-text' => "You don't have any items in your compare list",
+        ],
         'login-form' => [
             'sign-up' => 'Sign up',
             'new-customer' => 'New Customer',

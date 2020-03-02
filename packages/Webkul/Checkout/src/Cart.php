@@ -212,7 +212,7 @@ class Cart
             'items_count'           => 1,
         ];
 
-        //Authentication details
+        // Fill in the customer data, as far as possible:
         if ($this->getCurrentCustomer()->check()) {
             $cartData['customer_id'] = $this->getCurrentCustomer()->user()->id;
             $cartData['is_guest'] = 0;
@@ -678,7 +678,7 @@ class Cart
         $cart->tax_total = Tax::getTaxTotal($cart, false);
         $cart->base_tax_total = Tax::getTaxTotal($cart, true);
 
-        $cart->grand_total = $cart->sub_total + $cart->tax_total + $cart->discount_amount;
+        $cart->grand_total = $cart->sub_total + $cart->tax_total - $cart->discount_amount;
         $cart->base_grand_total = $cart->base_sub_total + $cart->base_tax_total - $cart->base_discount_amount;
 
         if ($shipping = $cart->selected_shipping_rate) {

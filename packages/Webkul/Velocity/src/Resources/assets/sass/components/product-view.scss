@@ -6,6 +6,7 @@
 
     .magnifier {
         > img {
+            max-width: 100%;
             min-height: 450px;
             max-height: 530px;
         }
@@ -219,9 +220,11 @@
         }
     }
 
+    .compare-icon,
     .wishlist-icon {
         height: 46px;
         display: table;
+        cursor: pointer;
         padding-left: 10px;
 
         i {

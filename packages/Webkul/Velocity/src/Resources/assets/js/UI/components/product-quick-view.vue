@@ -114,7 +114,7 @@
                 try {
                     var output = render.call(this, this.$createElement)
                 } catch (exception) {
-                    console.log("something went wrong");
+                    console.log(this.__('error.something-went-wrong'));
                 }
 
                 this.$options.staticRenderFns = _staticRenderFns
