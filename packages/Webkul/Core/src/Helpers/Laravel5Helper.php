@@ -63,7 +63,7 @@ class Laravel5Helper extends Laravel5
             'brand'                => 'text_value',
             'guest_checkout'       => 'boolean_value',
         ];
-        if (!array_key_exists($attribute, $attributes)) {
+        if (! array_key_exists($attribute, $attributes)) {
             return null;
         }
         return $attributes[$attribute];
@@ -192,6 +192,27 @@ class Laravel5Helper extends Laravel5
     }
 
     /**
+     * Set all session with the given key and value in the array.
+     *
+     * @param array $keyValue
+     */
+    public function setSession(array $keyValue)
+    {
+        session($keyValue);
+    }
+
+    /**
+     * Flush the session data and regenerate the ID
+     * A logged in user will be logged off.
+     *
+     */
+    public function invalidateSession()
+    {
+        session()->invalidate();
+    }
+
+
+    /**
      * @param array $configs
      * @param array $productStates
      *
@@ -200,7 +221,7 @@ class Laravel5Helper extends Laravel5
     private function haveSimpleProduct(array $configs = [], array $productStates = []): Product
     {
         $I = $this;
-        if (!in_array('simple', $productStates)) {
+        if (! in_array('simple', $productStates)) {
             $productStates = array_merge($productStates, ['simple']);
         }
 
@@ -223,7 +244,7 @@ class Laravel5Helper extends Laravel5
     private function haveVirtualProduct(array $configs = [], array $productStates = []): Product
     {
         $I = $this;
-        if (!in_array('virtual', $productStates)) {
+        if (! in_array('virtual', $productStates)) {
             $productStates = array_merge($productStates, ['virtual']);
         }
 
@@ -246,7 +267,7 @@ class Laravel5Helper extends Laravel5
     private function haveDownloadableProduct(array $configs = [], array $productStates = []): Product
     {
         $I = $this;
-        if (!in_array('downloadable', $productStates)) {
+        if (! in_array('downloadable', $productStates)) {
             $productStates = array_merge($productStates, ['downloadable']);
         }
 
@@ -329,7 +350,7 @@ class Laravel5Helper extends Laravel5
             $data = ['product_id' => $productId];
             if (array_key_exists($attribute, $attributeValues)) {
                 $fieldName = self::getAttributeFieldName($attribute);
-                if (!array_key_exists($fieldName, $data)) {
+                if (! array_key_exists($fieldName, $data)) {
                     $data[$fieldName] = $attributeValues[$attribute];
                 } else {
                     $data = [$fieldName => $attributeValues[$attribute]];
