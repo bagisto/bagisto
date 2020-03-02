@@ -199,6 +199,8 @@
             },
 
             mounted: function () {
+                // this.open360View();
+
                 let currentProductId = '{{ $product->url_key }}';
                 let existingViewed = window.localStorage.getItem('recentlyViewed');
                 if (! existingViewed) {
@@ -250,9 +252,9 @@
                 open360View: function () {
                     this.slot = false;
 
-                    $(function() {
+                    setTimeout(() => {
                         $('.spritespin').spritespin({
-                            source: SpriteSpin.sourceArray('http://localhost/3d-image/sample-{lane}-{frame}.jpg', {
+                            source: SpriteSpin.sourceArray('http://shubham.webkul.com/3d-image/sample-{lane}-{frame}.jpg', {
                                 lane: [0,5],
                                 frame: [0,5],
                                 digits: 2
@@ -280,9 +282,10 @@
                                 'progress',
                                 '360',
                                 'drag'
-                            ];
+                            ]
                         });
-                    });
+                    }, 0);
+
                 }
             }
         });

@@ -57,7 +57,7 @@ return [
 
     'error' => [
         'go-to-home' => 'Vá para casa',
-        'something-went-wrong' => 'algo deu errado',
+        'something_went_wrong' => 'algo deu errado',
         'page-lost-short' => 'Conteúdo perdido da página',
         'page-lost-description' => "A página que você está procurando não está disponível. Tente pesquisar novamente ou use o botão Voltar atrás abaixo.",
     ],

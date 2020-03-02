@@ -2,7 +2,7 @@
     <form method="POST" @submit.prevent="addToCart">
         <button
             type="submit"
-            :disabled="isButtonEnable == 'false'"
+            :disabled="isButtonEnable == 'false' || isButtonEnable == false"
             :class="`btn btn-add-to-cart ${addClassToBtn}`">
 
             <i class="material-icons text-down-3" v-if="showCartIcon">shopping_cart</i>
@@ -26,8 +26,8 @@
 
         data: function () {
             return {
-                'qtyText': this.__('checkout.qty'),
                 'isButtonEnable': this.isEnable,
+                'qtyText': this.__('checkout.qty'),
             }
         },
 
@@ -44,45 +44,20 @@
                 .then(response => {
                     this.isButtonEnable = true;
 
-                    if (response.data.status) {
-                        response.data.addedItems.forEach(item => {
-                            let cartItemHTML = `<div class="row small-card-container">
-                                <div class="col-3 product-image-container mr15">
-                                    <a href="${this.$root.baseUrl}/checkout/cart/remove/${item.itemId}">
-                                        <span class="rango-close"></span>
-                                    </a>
+                    if (response.data.status == 'success') {
+                        this.$root.miniCartKey++;
 
-                                    <a
-                                        href="${this.$root.baseUrl}/${item.url_key}"
-                                        class="unset">
+                        window.showAlert(`alert-success`, this.__('shop.general.alert.success'), response.data.message);
+                    } else {
+                        window.showAlert(`alert-${response.data.status}`, response.data.label ? response.data.label : this.__('shop.general.alert.error'), response.data.message);
 
-                                        <div class="product-image"
-                                            style="background-image: url('${item.images['small_image_url']}');">
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-9 no-padding card-body align-vertical-top">
-                                    <div class="no-padding">
-                                        <div class="fs16 text-nowrap fw6">${item.name}</div>
-                                        <div class="fs18 card-current-price fw6">
-                                            <div class="display-inbl">
-                                                <label class="fw5">${this.qtyText}</label>
-
-                                                <input type="text" disabled value="${item.quantity}" class="ml5" />
-                                            </div>
-                                            <span class="card-total-price fw6">${item.baseTotal}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>`;
-
-                            $('#cart-modal-content .mini-cart-container').append(cartItemHTML);
-                            $('.mini-cart-container .badge').text(response.data.totalCartItems);
-                        });
+                        if (response.data.redirectionRoute) {
+                            window.location.href = response.data.redirectionRoute;
+                        }
                     }
                 })
                 .catch(error => {
-                    console.log(this.__('error.something-went-wrong'));
+                    console.log(this.__('error.something_went_wrong'));
                 })
             }
         }

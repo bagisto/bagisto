@@ -136,7 +136,7 @@
                     if (messageType && message !== '') {
                         let html = `<div class="alert ${messageType} alert-dismissible" id="alert">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            <strong>${messageLabel} !</strong> ${message}.
+                            <strong>${messageLabel ? messageLabel + '!' : ''} </strong> ${message}.
                         </div>`;
 
                         $('body').append(html);

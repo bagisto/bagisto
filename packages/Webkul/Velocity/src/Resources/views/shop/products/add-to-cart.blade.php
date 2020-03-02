@@ -17,28 +17,7 @@
                     </span>
                 </button>
             @else
-                <form method="POST" action="{{ route('cart.add', $product->product_id) }}">
-                    @csrf
-
-                    <input type="hidden" name="quantity" value="1" />
-                    <input type="hidden" name="product_id" value="{{ $product->product_id }}" />
-
-                    <button
-                        type="submit"
-                        {{ ! $product->isSaleable() ? 'disabled' : '' }}
-                        class="btn btn-add-to-cart {{ $addToCartBtnClass ?? '' }}">
-
-                        @if (! (isset($showCartIcon) && !$showCartIcon))
-                            <i class="material-icons text-down-3">shopping_cart</i>
-                        @endif
-
-                        <span class="fs14 fw6 text-uppercase text-up-4">
-                            {{ $btnText ?? __('shop::app.products.add-to-cart') }}
-                        </span>
-                    </button>
-                </form>
-
-                {{-- <add-to-cart
+                <add-to-cart
                     form="true"
                     csrf-token='{{ csrf_token() }}'
                     product-id="{{ $product->product_id }}"
@@ -46,26 +25,23 @@
                     is-enable={{ ! $product->isSaleable() ? 'false' : 'true' }}
                     show-cart-icon={{ !(isset($showCartIcon) && !$showCartIcon) }}
                     btn-text="{{ $btnText ?? __('shop::app.products.add-to-cart') }}">
-                </add-to-cart> --}}
+                </add-to-cart>
             @endif
         </div>
 
         @if (isset($showCompare) && $showCompare)
-            @auth('customer')
                 <compare-component
-                    customer="true"
-                    product-id="{{ $product->id }}"
-                    slug="{{ $product->url_key }}"
-                ></compare-component>
-            @endif
+                    @auth('customer')
+                        customer="true"
+                    @endif
 
-            @guest('customer')
-                <compare-component
-                    customer="false"
-                    product-id="{{ $product->id }}"
+                    @guest('customer')
+                        customer="false"
+                    @endif
+
                     slug="{{ $product->url_key }}"
+                    product-id="{{ $product->id }}"
                 ></compare-component>
-            @endif
         @endif
 
         @if (! (isset($showWishlist) && !$showWishlist))

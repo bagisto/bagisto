@@ -166,16 +166,22 @@ $(document).ready(function () {
             },
 
             getDynamicHTML: function (input) {
+                var _staticRenderFns;
                 const { render, staticRenderFns } = Vue.compile(input);
-                const _staticRenderFns = this.$options.staticRenderFns = staticRenderFns;
 
-                try {
-                    var output = render.call(this, this.$createElement)
-                } catch (exception) {
-                    console.log(this.__('error.something-went-wrong'));
+                if (this.$options.staticRenderFns.length > 0) {
+                    _staticRenderFns = this.$options.staticRenderFns;
+                } else {
+                    _staticRenderFns = this.$options.staticRenderFns = staticRenderFns;
                 }
 
-                this.$options.staticRenderFns = _staticRenderFns
+                try {
+                    var output = render.call(this, this.$createElement);
+                } catch (exception) {
+                    console.log(this.__('error.something_went_wrong'));
+                }
+
+                this.$options.staticRenderFns = _staticRenderFns;
 
                 return output;
             }
@@ -189,6 +195,7 @@ $(document).ready(function () {
         data: function () {
             return {
                 modalIds: {},
+                miniCartKey: 0,
                 quickView: false,
                 productDetails: [],
             }
@@ -317,5 +324,5 @@ $(document).ready(function () {
         render(h, {props}) {
             return props.nodes;
         }
-    })
+    });
 });

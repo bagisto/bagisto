@@ -21,7 +21,7 @@
                         window.showAlert(
                             'alert-danger',
                             this.__('shop.general.alert.error'),
-                            this.__('error.something-went-wrong')
+                            this.__('error.something_went_wrong')
                         );
                     });
                 } else {

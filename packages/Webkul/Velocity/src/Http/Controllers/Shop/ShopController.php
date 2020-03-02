@@ -11,7 +11,6 @@ use Webkul\Checkout\Contracts\Cart as CartModel;
 use Webkul\Product\Repositories\SearchRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Category\Repositories\CategoryRepository;
-use Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository;
 use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRepository;
 
 /**
@@ -20,7 +19,7 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
  * @author  Shubham Mehrotra <shubhammehrotra.symfony@webkul.com> @shubhwebkul
  * @copyright 2019 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
- class ShopController extends Controller
+class ShopController extends Controller
 {
     /**
      * Contains route related configuration
@@ -47,7 +46,7 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
      * ProductRepository object
      *
      * @var ProductRepository
-     */
+    */
     protected $productRepository;
 
     /**
@@ -65,13 +64,6 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
     protected $categoryRepository;
 
     /**
-     * VelocityCustomerCompareProductRepository object of velocity package
-     *
-     * @var VelocityCustomerCompareProductRepository
-     */
-    protected $velocityCompareProductsRepository;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Product\Helpers\ProductImage $productImageHelper
@@ -79,7 +71,6 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
      * @param  \Webkul\Product\Repositories\ProductRepository $productRepository
      * @param  \Webkul\Category\Repositories\CategoryRepository $categoryRepository
      * @param  \Webkul\Velocity\Repositories\Product\ProductRepository $velocityProductRepository
-     * @param  \Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository $velocityCompareProductsRepository
      * @return void
     */
     public function __construct(
@@ -87,8 +78,7 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
         SearchRepository $searchRepository,
         ProductRepository $productRepository,
         CategoryRepository $categoryRepository,
-        VelocityProductRepository $velocityProductRepository,
-        VelocityCustomerCompareProductRepository $velocityCompareProductsRepository
+        VelocityProductRepository $velocityProductRepository
     ) {
         $this->_config = request('_config');
 
@@ -97,7 +87,6 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
         $this->productImageHelper = $productImageHelper;
         $this->categoryRepository = $categoryRepository;
         $this->velocityProductRepository = $velocityProductRepository;
-        $this->velocityCompareProductsRepository = $velocityCompareProductsRepository;
     }
 
     /**
@@ -276,215 +265,6 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
                 'addWishlistClass'  => !(isset($list) && $list) ? '' : '',
                 'addToCartBtnClass' => !(isset($list) && $list) ? 'small-padding' : '',
             ])->render(),
-        ];
-    }
-
-    /**
-     * Function for guests user to add the product in the cart.
-     *
-     * @return Mixed
-     */
-    public function addProductToCart()
-    {
-        try {
-            $cart = Cart::getCart();
-            $formattedBeforeItems = [];
-            $id = request()->get('product_id');
-            $velocityHelper = app('Webkul\Velocity\Helpers\Helper');
-
-            if ($cart) {
-                $beforeItems = $cart->items;
-
-                foreach ($beforeItems as $item) {
-                    array_push($formattedBeforeItems, $velocityHelper->formatCartItem($item));
-                }
-            }
-
-            $cart = Cart::addProduct($id, request()->all());
-
-            if (is_array($cart) && isset($cart['warning'])) {
-                $response = [
-                    'status' => 'warning',
-                    'message' => $cart['warning'],
-                ];
-            }
-
-            if ($cart instanceof CartModel) {
-                $items = $cart->items;
-                $formattedItems = [];
-
-                foreach ($items as $item) {
-                    array_push($formattedItems, $velocityHelper->formatCartItem($item));
-                }
-
-                $response = [
-                    'status'            => 'success',
-                    'totalCartItems'    => sizeof($items),
-                    'message'           => trans('shop::app.checkout.cart.item.success'),
-                    'addedItems'        => array_slice($formattedItems, sizeof($formattedBeforeItems)),
-                ];
-
-                if ($customer = auth()->guard('customer')->user()) {
-                    $this->wishlistRepository->deleteWhere(['product_id' => $id, 'customer_id' => $customer->id]);
-                }
-
-                if (request()->get('is_buy_now')) {
-                    return redirect()->route('shop.checkout.onepage.index');
-                }
-            }
-        } catch(\Exception $exception) {
-            $product = $this->productRepository->find($id);
-
-            $response = [
-                'status'            => 'false',
-                'message'           => trans($exception->getMessage()),
-                'redirectionRoute'  => route('shop.productOrCategory.index', $product->url_key),
-            ];
-        }
-
-        return $response ?? [
-            'status'    => 'error',
-            'message'   => trans('velocity::app.error.something-went-wrong'),
-        ];
-    }
-
-    /**
-     * function for customers to get products in comparison.
-     *
-     * @return Mixed
-     */
-    public function getComparisonList(Request $request)
-    {
-        if (request()->get('data')) {
-            $productSlugs = null;
-            $productCollection = [];
-
-            if (auth()->guard('customer')->user()) {
-                $productCollection = $this->velocityCompareProductsRepository
-                    ->leftJoin(
-                        'product_flat',
-                        'velocity_customer_compare_products.product_flat_id',
-                        'product_flat.id'
-                    )
-                    ->where('customer_id', auth()->guard('customer')->user()->id)
-                    ->get()
-                    ->toArray();
-
-                foreach ($productCollection as $index => $customerCompare) {
-                    $product = $this->productRepository->find($customerCompare['product_id']);
-                    $formattedProduct = $this->formatProduct($product);
-
-                    $productCollection[$index]['image'] = $formattedProduct['image'];
-                    $productCollection[$index]['priceHTML'] = $formattedProduct['priceHTML'];
-                    $productCollection[$index]['addToCartHtml'] = $formattedProduct['addToCartHtml'];
-                }
-            } else {
-                // for product details
-                if ($items = request()->get('items')) {
-                    $productSlugs = explode('&', $items);
-
-                    foreach ($productSlugs as $slug) {
-                        $product = $this->productRepository->findBySlug($slug);
-
-                        $formattedProduct = $this->formatProduct($product);
-
-                        $productMetaDetails = [];
-                        $productMetaDetails['image'] = $formattedProduct['image'];
-                        $productMetaDetails['priceHTML'] = $formattedProduct['priceHTML'];
-                        $productMetaDetails['addToCartHtml'] = $formattedProduct['addToCartHtml'];
-
-                        $product = array_merge($product->toArray(), $productMetaDetails);
-
-                        array_push($productCollection, $product);
-                    }
-                }
-            }
-
-            $response = [
-                'status'    => 'success',
-                'products'  => $productCollection,
-            ];
-        } else {
-            $response = view($this->_config['view']);
-        }
-
-        return $response;
-    }
-
-    /**
-     * function for customers to add product in comparison.
-     *
-     * @return json
-     */
-    public function addCompareProduct()
-    {
-        $productId = request()->get('productId');
-        $customerId = auth()->guard('customer')->user()->id;
-
-        $compareProduct = $this->velocityCompareProductsRepository->findOneByField([
-            'customer_id' => $customerId,
-            'product_flat_id' => $productId,
-        ]);
-
-        if (! $compareProduct) {
-            // insert new row
-            $this->velocityCompareProductsRepository->create([
-                'customer_id' => $customerId,
-                'product_flat_id'  => $productId,
-            ]);
-
-            return response()->json([
-                'status'    => 'success',
-                'message'   => trans('velocity::app.customer.compare.added'),
-                'label'     => trans('velocity::app.shop.general.alert.success'),
-            ], 201);
-        } else {
-            return response()->json([
-                'status'    => 'success',
-                'label'     => trans('velocity::app.shop.general.alert.success'),
-                'message'   => trans('velocity::app.customer.compare.already_added'),
-            ], 200);
-        }
-    }
-
-    /**
-     * function for customers to delete product in comparison.
-     *
-     * @return json
-     */
-    public function deleteComparisonProduct()
-    {
-        // either delete all or individual
-        if (request()->get('productId') == 'all') {
-            // delete all
-            $customerId = auth()->guard('customer')->user()->id;
-            $this->velocityCompareProductsRepository->deleteWhere([
-                'customer_id' => auth()->guard('customer')->user()->id,
-            ]);
-        } else {
-            // delete individual
-            $this->velocityCompareProductsRepository->deleteWhere([
-                'product_flat_id' => request()->get('productId'),
-                'customer_id' => auth()->guard('customer')->user()->id,
-            ]);
-
-            // $comparedList = json_decode($customer->compared_product, true);
-
-            // $index = array_search($productId, $comparedList);
-
-            // if ($index > -1) {
-            //     unset($comparedList[$index]);
-
-            //     $this->velocityCustomerDataRepository->update([
-            //         'compared_product' => json_encode($comparedList),
-            //     ], $customer->id);
-            // }
-        }
-
-        return [
-            'status'  => 'success',
-            'message' => trans('velocity::app.customer.compare.removed'),
-            'label'   => trans('velocity::app.shop.general.alert.success'),
         ];
     }
 }
