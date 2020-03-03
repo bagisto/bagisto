@@ -17,6 +17,18 @@ class OrderCest
     {
         $customer = $I->loginAsCustomer();
 
+        $addressData = [
+            'city'         => 'Quia et cillum rerum',
+            'company_name' => 'Davis and Best Plc',
+            'country'      => 'TN',
+            'email'        => 'kularynefo@mailinator.com',
+            'first_name'   => 'Maggie',
+            'last_name'    => 'Paul',
+            'phone'        => '+1 (995) 347-2667',
+            'postcode'     => '16239',
+            'state'        => 'Aperiam a eligendi a',
+        ];
+
         $mocks = $I->prepareCart([
             'customer' => $customer,
         ]);
@@ -27,48 +39,21 @@ class OrderCest
         // simulate the entering of the address(es):
         $I->sendAjaxPostRequest(route('shop.checkout.save-address'), [
             '_token'   => csrf_token(),
-            'billing'  => [
+            'billing'  => array_merge($addressData, [
                 'address1'         => ['900 Nobel Parkway'],
-                'city'             => 'Quia et cillum rerum',
-                'company_name'     => 'Davis and Best Plc',
-                'country'          => 'TN',
-                'email'            => 'kularynefo@mailinator.com',
-                'first_name'       => 'Maggie',
-                'last_name'        => 'Paul',
-                'phone'            => '+1 (995) 347-2667',
-                'postcode'         => '16239',
                 'save_as_address'  => true,
-                'state'            => 'Aperiam a eligendi a',
                 'use_for_shipping' => true,
-            ],
-            'shipping' => [
+            ]),
+            'shipping' => array_merge($addressData, [
                 'address1'         => ['900 Nobel Parkway'],
-                'city'             => 'Quia et cillum rerum',
-                'company_name'     => 'Davis and Best Plc',
-                'country'          => 'TN',
-                'email'            => 'kularynefo@mailinator.com',
-                'first_name'       => 'Maggie',
-                'last_name'        => 'Paul',
-                'phone'            => '+1 (995) 347-2667',
-                'postcode'         => '16239',
                 'save_as_address'  => true,
-                'state'            => 'Aperiam a eligendi a',
                 'use_for_shipping' => true,
-            ],
+            ]),
         ]);
 
         $I->seeResponseCodeIsSuccessful();
 
-        $I->seeRecord(CartAddress::class, [
-            'city'         => 'Quia et cillum rerum',
-            'company_name' => 'Davis and Best Plc',
-            'country'      => 'TN',
-            'email'        => 'kularynefo@mailinator.com',
-            'first_name'   => 'Maggie',
-            'last_name'    => 'Paul',
-            'phone'        => '+1 (995) 347-2667',
-            'postcode'     => '16239',
-        ]);
+        $I->seeRecord(CartAddress::class, $addressData);
 
         $I->sendAjaxPostRequest(route('shop.checkout.save-shipping'), [
             '_token'          => csrf_token(),
@@ -93,15 +78,6 @@ class OrderCest
 
         $I->seeResponseCodeIsSuccessful();
 
-        $I->seeRecord(OrderAddress::class, [
-            'city'         => 'Quia et cillum rerum',
-            'company_name' => 'Davis and Best Plc',
-            'country'      => 'TN',
-            'email'        => 'kularynefo@mailinator.com',
-            'first_name'   => 'Maggie',
-            'last_name'    => 'Paul',
-            'phone'        => '+1 (995) 347-2667',
-            'postcode'     => '16239',
-        ]);
+        $I->seeRecord(OrderAddress::class, $addressData);
     }
 }
