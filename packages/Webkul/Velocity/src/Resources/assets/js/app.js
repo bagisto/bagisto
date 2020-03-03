@@ -31,8 +31,10 @@ window.Carousel = VueCarousel;
 
 // UI components
 Vue.component("vue-slider", require("vue-slider-component"));
+Vue.component('mini-cart', require('./UI/components/mini-cart'));
 Vue.component('modal-component', require('./UI/components/modal'));
 Vue.component("add-to-cart", require("./UI/components/add-to-cart"));
+Vue.component('star-ratings', require('./UI/components/star-rating'));
 Vue.component('quantity-btn', require('./UI/components/quantity-btn'));
 Vue.component('sidebar-component', require('./UI/components/sidebar'));
 Vue.component("product-card", require("./UI/components/product-card"));
@@ -41,6 +43,7 @@ Vue.component('carousel-component', require('./UI/components/carousel'));
 Vue.component('child-sidebar', require('./UI/components/child-sidebar'));
 Vue.component('card-list-header', require('./UI/components/card-header'));
 Vue.component('magnify-image', require('./UI/components/image-magnifier'));
+Vue.component('compare-component', require('./UI/components/product-compare'));
 Vue.component('responsive-sidebar', require('./UI/components/responsive-sidebar'));
 Vue.component('product-quick-view', require('./UI/components/product-quick-view'));
 Vue.component('product-quick-view-btn', require('./UI/components/product-quick-view-btn'));
@@ -50,6 +53,7 @@ window.eventBus = new Vue();
 $(document).ready(function () {
     // define a mixin object
     Vue.mixin(require('./UI/components/trans'));
+
     Vue.mixin({
         data: function () {
             return {
@@ -67,6 +71,12 @@ $(document).ready(function () {
                 route ? window.location.href = route : '';
             },
 
+            debounceToggleSidebar: function (id, {target}, type) {
+                // setTimeout(() => {
+                    this.toggleSidebar(id, target, type);
+                // }, 500);
+            },
+
             toggleSidebar: function (id, {target}, type) {
                 if (
                     Array.from(target.classList)[0] == "main-category"
@@ -81,11 +91,11 @@ $(document).ready(function () {
                         }
                     }
                 } else if (
-                    Array.from(target.classList)[0] == "category"
-                    || Array.from(target.classList)[0] == "category-icon"
-                    || Array.from(target.classList)[0] == "category-title"
-                    || Array.from(target.classList)[0] == "category-content"
-                    || Array.from(target.classList)[0] == "rango-arrow-right"
+                    Array.from(target.classList)[0]     == "category"
+                    || Array.from(target.classList)[0]  == "category-icon"
+                    || Array.from(target.classList)[0]  == "category-title"
+                    || Array.from(target.classList)[0]  == "category-content"
+                    || Array.from(target.classList)[0]  == "rango-arrow-right"
                 ) {
                     let parentItem = target.closest('li');
                     if (target.id || parentItem.id.match('category-')) {
@@ -154,6 +164,27 @@ $(document).ready(function () {
                   return false
                 }
             },
+
+            getDynamicHTML: function (input) {
+                var _staticRenderFns;
+                const { render, staticRenderFns } = Vue.compile(input);
+
+                if (this.$options.staticRenderFns.length > 0) {
+                    _staticRenderFns = this.$options.staticRenderFns;
+                } else {
+                    _staticRenderFns = this.$options.staticRenderFns = staticRenderFns;
+                }
+
+                try {
+                    var output = render.call(this, this.$createElement);
+                } catch (exception) {
+                    console.log(this.__('error.something_went_wrong'));
+                }
+
+                this.$options.staticRenderFns = _staticRenderFns;
+
+                return output;
+            }
         }
     });
 
@@ -164,6 +195,7 @@ $(document).ready(function () {
         data: function () {
             return {
                 modalIds: {},
+                miniCartKey: 0,
                 quickView: false,
                 productDetails: [],
             }
@@ -265,6 +297,7 @@ $(document).ready(function () {
                 this.$http.get(`${this.baseUrl}/categories`)
                 .then(response => {
                     this.sharedRootCategories = response.data.categories;
+                    $(`<style type='text/css'> .sub-categories{ min-height:${response.data.categories.length * 30}px;} </style>`).appendTo("head");
                 })
                 .catch(error => {
                     console.log('failed to load categories');
@@ -280,7 +313,7 @@ $(document).ready(function () {
                         }
                     })
                 });
-            }
+            },
         }
     });
 
@@ -291,5 +324,5 @@ $(document).ready(function () {
         render(h, {props}) {
             return props.nodes;
         }
-    })
+    });
 });

@@ -509,6 +509,21 @@ header {
                     }
                 }
             }
+
+            // transform: scale(1) rotateZ(-180deg);
+            // transition: transform .15s,opacity .15s;
+        }
+
+        ~ .compare-btn {
+            height: 50px;
+            float: right;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 10px 16px 6px 16px;
+
+            i {
+                vertical-align: middle;
+            }
         }
     }
 

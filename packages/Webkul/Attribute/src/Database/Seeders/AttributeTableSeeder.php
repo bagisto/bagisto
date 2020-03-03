@@ -36,6 +36,7 @@ class AttributeTableSeeder extends Seeder
                 'use_in_flat'         => '1',
                 'created_at'          => $now,
                 'updated_at'          => $now,
+                'is_comparable'       => '0',
             ], [
                 'id'                  => '2',
                 'code'                => 'name',
@@ -54,6 +55,7 @@ class AttributeTableSeeder extends Seeder
                 'use_in_flat'         => '1',
                 'created_at'          => $now,
                 'updated_at'          => $now,
+                'is_comparable'       => '1',
             ], [
                 'id'                  => '3',
                 'code'                => 'url_key',
@@ -72,6 +74,7 @@ class AttributeTableSeeder extends Seeder
                 'use_in_flat'         => '1',
                 'created_at'          => $now,
                 'updated_at'          => $now,
+                'is_comparable'       => '0',
             ], [
                 'id'                  => '4',
                 'code'                => 'tax_category_id',
@@ -90,6 +93,7 @@ class AttributeTableSeeder extends Seeder
                 'use_in_flat'         => '1',
                 'created_at'          => $now,
                 'updated_at'          => $now,
+                'is_comparable'       => '0',
             ], [
                 'id'                  => '5',
                 'code'                => 'new',
@@ -108,10 +112,11 @@ class AttributeTableSeeder extends Seeder
                 'use_in_flat'         => '1',
                 'created_at'          => $now,
                 'updated_at'          => $now,
+                'is_comparable'       => '0',
             ], [
                 'id'                  => '6',
                 'code'                => 'featured',
-                'admin_name'          =>          'Featured',
+                'admin_name'          => 'Featured',
                 'type'                => 'boolean',
                 'validation'          => NULL,
                 'position'            => '6',
@@ -126,6 +131,7 @@ class AttributeTableSeeder extends Seeder
                 'use_in_flat'         => '1',
                 'created_at'          => $now,
                 'updated_at'          => $now,
+                'is_comparable'       => '0',
             ], [
                 'id'                  => '7',
                 'code'                => 'visible_individually',
@@ -144,6 +150,7 @@ class AttributeTableSeeder extends Seeder
                 'created_at'          => $now,
                 'use_in_flat'         => '1',
                 'updated_at'          => $now,
+                'is_comparable'       => '0',
             ], [
                 'id'                  => '8',
                 'code'                => 'status',
@@ -162,6 +169,7 @@ class AttributeTableSeeder extends Seeder
                 'use_in_flat'         => '1',
                 'created_at'          => $now,
                 'updated_at'          => $now,
+                'is_comparable'       => '0',
             ], [
                 'id'                  => '9',
                 'code'                => 'short_description',
@@ -180,6 +188,7 @@ class AttributeTableSeeder extends Seeder
                 'use_in_flat'         => '1',
                 'created_at'          => $now,
                 'updated_at'          => $now,
+                'is_comparable'       => '0',
             ], [
                 'id'                  => '10',
                 'code'                => 'description',
@@ -198,6 +207,7 @@ class AttributeTableSeeder extends Seeder
                 'use_in_flat'         => '1',
                 'created_at'          => $now,
                 'updated_at'          => $now,
+                'is_comparable'       => '1',
             ], [
                 'id'                  => '11',
                 'code'                => 'price',
@@ -216,6 +226,7 @@ class AttributeTableSeeder extends Seeder
                 'use_in_flat'         => '1',
                 'created_at'          => $now,
                 'updated_at'          => $now,
+                'is_comparable'       => '1',
             ], [
                 'id'                  => '12',
                 'code'                => 'cost',
@@ -234,6 +245,7 @@ class AttributeTableSeeder extends Seeder
                 'use_in_flat'         => '1',
                 'created_at'          => $now,
                 'updated_at'          => $now,
+                'is_comparable'       => '0',
             ], [
                 'id'                  => '13',
                 'code'                => 'special_price',
@@ -252,6 +264,7 @@ class AttributeTableSeeder extends Seeder
                 'use_in_flat'         => '1',
                 'created_at'          => $now,
                 'updated_at'          => $now,
+                'is_comparable'       => '0',
             ], [
                 'id'                  => '14',
                 'code'                => 'special_price_from',
@@ -270,6 +283,7 @@ class AttributeTableSeeder extends Seeder
                 'use_in_flat'         => '1',
                 'created_at'          => $now,
                 'updated_at'          => $now,
+                'is_comparable'       => '0',
             ], [
                 'id'                  => '15',
                 'code'                => 'special_price_to',
@@ -288,6 +302,7 @@ class AttributeTableSeeder extends Seeder
                 'is_visible_on_front' => '0',
                 'created_at'          => $now,
                 'updated_at'          => $now,
+                'is_comparable'       => '0',
             ], [
                 'id'                  => '16',
                 'code'                => 'meta_title',
@@ -306,6 +321,7 @@ class AttributeTableSeeder extends Seeder
                 'use_in_flat'         => '1',
                 'created_at'          => $now,
                 'updated_at'          => $now,
+                'is_comparable'       => '0',
             ], [
                 'id'                  => '17',
                 'code'                => 'meta_keywords',
@@ -324,6 +340,7 @@ class AttributeTableSeeder extends Seeder
                 'use_in_flat'         => '1',
                 'created_at'          => $now,
                 'updated_at'          => $now,
+                'is_comparable'       => '0',
             ], [
                 'id'                  => '18',
                 'code'                => 'meta_description',
@@ -342,6 +359,7 @@ class AttributeTableSeeder extends Seeder
                 'use_in_flat'         => '1',
                 'created_at'          => $now,
                 'updated_at'          => $now,
+                'is_comparable'       => '0',
             ], [
                 'id'                  => '19',
                 'code'                => 'width',
@@ -360,6 +378,7 @@ class AttributeTableSeeder extends Seeder
                 'use_in_flat'         => '1',
                 'created_at'          => $now,
                 'updated_at'          => $now,
+                'is_comparable'       => '0',
             ], [
                 'id'                  => '20',
                 'code'                => 'height',
@@ -378,6 +397,7 @@ class AttributeTableSeeder extends Seeder
                 'use_in_flat'         => '1',
                 'created_at'          => $now,
                 'updated_at'          => $now,
+                'is_comparable'       => '0',
             ], [
                 'id'                  => '21',
                 'code'                => 'depth',
@@ -396,6 +416,7 @@ class AttributeTableSeeder extends Seeder
                 'use_in_flat'         => '1',
                 'created_at'          => $now,
                 'updated_at'          => $now,
+                'is_comparable'       => '0',
             ], [
                 'id'                  => '22',
                 'code'                => 'weight',
@@ -414,6 +435,7 @@ class AttributeTableSeeder extends Seeder
                 'use_in_flat'         => '1',
                 'created_at'          => $now,
                 'updated_at'          => $now,
+                'is_comparable'       => '0',
             ], [
                 'id'                  => '23',
                 'code'                => 'color',
@@ -432,6 +454,7 @@ class AttributeTableSeeder extends Seeder
                 'use_in_flat'         => '1',
                 'created_at'          => $now,
                 'updated_at'          => $now,
+                'is_comparable'       => '0',
             ], [
                 'id'                  => '24',
                 'code'                => 'size',
@@ -450,6 +473,7 @@ class AttributeTableSeeder extends Seeder
                 'use_in_flat'         => '1',
                 'created_at'          => $now,
                 'updated_at'          => $now,
+                'is_comparable'       => '0',
             ], [
                 'id'                  => '25',
                 'code'                => 'brand',
@@ -468,6 +492,7 @@ class AttributeTableSeeder extends Seeder
                 'use_in_flat'         => '1',
                 'created_at'          => $now,
                 'updated_at'          => $now,
+                'is_comparable'       => '0',
             ], [
                 'id'                  => '26',
                 'code'                => 'guest_checkout',
@@ -486,6 +511,7 @@ class AttributeTableSeeder extends Seeder
                 'use_in_flat'         => '1',
                 'created_at'          => $now,
                 'updated_at'          => $now,
+                'is_comparable'       => '0',
             ]
         ]);
 

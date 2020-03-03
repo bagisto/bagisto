@@ -25,6 +25,7 @@ class Attribute extends TranslatableModel implements AttributeContract
         'is_user_defined',
         'swatch_type',
         'use_in_flat',
+        'is_comparable',
     ];
 
     // protected $with = ['options'];
