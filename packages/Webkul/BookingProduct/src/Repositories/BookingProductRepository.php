@@ -3,6 +3,7 @@
 namespace Webkul\BookingProduct\Repositories;
 
 use Illuminate\Container\Container as App;
+use Carbon\Carbon;
 use Webkul\Core\Eloquent\Repository;
 
 /**
@@ -101,9 +102,9 @@ class BookingProductRepository extends Repository
             $bookingProductTypeSlot = $this->typeRepositories[$data['type']]->findOneByField('booking_product_id', $id);
 
             if (isset($data['slots'])) {
-                $data['slots'] = $this->validateSlots(
-                                    $this->formatSlots($data)
-                                );
+                $data['slots'] = $this->formatSlots($data);
+
+                $data['slots'] = $this->validateSlots($data);
             }
 
             if (! $bookingProductTypeSlot) {
@@ -120,7 +121,7 @@ class BookingProductRepository extends Repository
      */
     public function formatSlots($data)
     {
-        if (isset($data['slots']) && isset($data['same_slot_all_days']) && ! $data['same_slot_all_days']) {
+        if (isset($data['same_slot_all_days']) && ! $data['same_slot_all_days']) {
             for ($i = 0; $i < 7; $i++) {
                 if (! isset($data['slots'][$i])) {
                     $data['slots'][$i] = [];
@@ -151,10 +152,54 @@ class BookingProductRepository extends Repository
      */
     public function validateSlots($data)
     {
-        foreach ($data['slots'] as $key => $timeInterval) {
-            
+        if (! isset($data['same_slot_all_days'])) {
+            return $data;
         }
 
-        return $data;
+        if (! $data['same_slot_all_days']) {
+            foreach ($data['slots'] as $day => $slots) {
+                $data['slots'][$day] = $this->skipOverLappingSlots($slots);
+            }
+        } else {
+            $data['slots'] = $this->skipOverLappingSlots($data['slots']);
+        }
+
+        return $data['slots'];
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    public function skipOverLappingSlots($slots)
+    {
+        $tempSlots = [];
+
+        foreach ($slots as $key => $timeInterval) {
+            $from = Carbon::createFromTimeString($timeInterval['from'])->getTimestamp();
+
+            $to = Carbon::createFromTimeString($timeInterval['to'])->getTimestamp();
+
+            $isOverLapping = false;
+
+            foreach ($tempSlots as $slot) {
+                if (($slot['from'] <= $from && $slot['to'] >= $from)
+                    || ($slot['from'] <= $to && $slot['to'] >= $to)
+                ) {
+                    $isOverLapping = true;
+
+                    unset($slots[$key]);
+                }
+            }
+
+            if (! $isOverLapping) {
+                $tempSlots[] = [
+                    'from' => $from,
+                    'to'   => $to,
+                ];
+            }
+        }
+
+        return $slots;
     }
 }
