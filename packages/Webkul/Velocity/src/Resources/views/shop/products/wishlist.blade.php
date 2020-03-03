@@ -16,15 +16,16 @@
                 title="{{ __('velocity::app.shop.wishlist.remove-wishlist-text') }}"
             @endif>
 
-            <wishlist-component active="{{ !$isWished }}"></wishlist-component>
+            <wishlist-component active="{{ !$isWished }}" is-customer="true"></wishlist-component>
         </a>
     @endauth
 
     @guest('customer')
-        <a
-            href="{{ route('customer.session.index') }}"
-            class="unset wishlist-icon {{ $addWishlistClass ?? '' }} text-right">
-            <wishlist-component active="false"></wishlist-component>
-        </a>
+        <wishlist-component
+            active="false"
+            is-customer="false"
+            product-id="{{ $product->product_id }}"
+            add-class="{{ $addWishlistClass ?? '' }}">
+        </wishlist-component>
     @endauth
 {!! view_render_event('bagisto.shop.products.wishlist.after') !!}
