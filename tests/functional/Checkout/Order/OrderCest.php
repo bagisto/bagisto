@@ -5,8 +5,13 @@ namespace Tests\Functional\Checkout\Cart;
 use Faker\Factory;
 use FunctionalTester;
 use Cart;
+use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderAddress;
+use Webkul\Sales\Models\OrderPayment;
 use Webkul\Checkout\Models\CartAddress;
+use Webkul\Checkout\Models\CartPayment;
+use Webkul\Customer\Models\Customer;
+use Webkul\Core\Models\Channel;
 
 /**
  * Class OrderCest
@@ -61,7 +66,15 @@ class OrderCest
 
         $I->seeResponseCodeIsSuccessful();
 
-        $I->seeRecord(CartAddress::class, $addressData);
+        $I->seeRecord(CartAddress::class, array_merge($addressData, [
+            'address_type' => 'shipping',
+            'cart_id'      => $mocks['cart']->id,
+        ]));
+
+        $I->seeRecord(CartAddress::class, array_merge($addressData, [
+            'address_type' => 'billing',
+            'cart_id'      => $mocks['cart']->id,
+        ]));
 
         $I->sendAjaxPostRequest(route('shop.checkout.save-shipping'), [
             '_token'          => csrf_token(),
@@ -79,6 +92,12 @@ class OrderCest
 
         $I->seeResponseCodeIsSuccessful();
 
+        $I->seeRecord(CartPayment::class, [
+            'method'       => 'cashondelivery',
+            'method_title' => null,
+            'cart_id'      => $mocks['cart']->id,
+        ]);
+
         // simulate click on the 'place order' button at the last step:
         $I->sendAjaxPostRequest(route('shop.checkout.save-order'),
             ['_token' => csrf_token()]
@@ -86,6 +105,36 @@ class OrderCest
 
         $I->seeResponseCodeIsSuccessful();
 
-        $I->seeRecord(OrderAddress::class, $addressData);
+        $order = $I->grabRecord(Order::class, [
+            'status'               => 'pending',
+            'channel_name'         => 'Default',
+            'is_guest'             => 0,
+            'shipping_method'      => 'free_free',
+            'shipping_title'       => 'Free Shipping - Free Shipping',
+            'shipping_description' => 'Free Shipping',
+            'customer_type'        => Customer::class,
+            'channel_id'           => 1,
+            'channel_type'         => Channel::class,
+            'cart_id'              => $mocks['cart']->id,
+            'customer_id'          => $customer->id,
+            'total_item_count'     => count($mocks['cartItems']),
+            'total_qty_ordered'    => $mocks['totalQtyOrdered'],
+        ]);
+
+        $I->seeRecord(OrderAddress::class, array_merge($addressData, [
+            'order_id'     => $order->id,
+            'address_type' => 'shipping',
+        ]));
+
+        $I->seeRecord(OrderAddress::class, array_merge($addressData, [
+            'order_id'     => $order->id,
+            'address_type' => 'billing',
+        ]));
+
+        $I->seeRecord(OrderPayment::class, [
+            'method'       => 'cashondelivery',
+            'method_title' => null,
+            'order_id'     => $order->id,
+        ]);
     }
 }

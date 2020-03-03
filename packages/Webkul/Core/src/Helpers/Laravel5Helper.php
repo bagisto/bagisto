@@ -129,14 +129,24 @@ class Laravel5Helper extends Laravel5
             $type = 'simple';
         }
 
+        $totalQtyOrdered = 0;
+
+        $cartItems = [];
+
         $generatedCartItems = rand(3, 10);
+
         for ($i = 2; $i <= $generatedCartItems; $i++) {
+            $quantity = random_int(1, 10);
             $cartItem = $I->have(CartItem::class, [
                 'type'       => $type,
-                'quantity'   => random_int(1, 10),
+                'quantity'   => $quantity,
                 'cart_id'    => $cart->id,
                 'product_id' => $product->id,
             ]);
+
+            $totalQtyOrdered += $quantity;
+
+            $cartItems[] = $cartItem;
         }
 
         // actually set the cart to the user's session
@@ -146,11 +156,12 @@ class Laravel5Helper extends Laravel5
         $I->setSession(['cart' => $stub]);
 
         return [
-            'cart'        => $cart,
-            'product'     => $product,
-            'customer'    => $customer,
-            'cartAddress' => $cartAddress,
-            'cartItem'    => $cartItem,
+            'cart'            => $cart,
+            'product'         => $product,
+            'customer'        => $customer,
+            'cartAddress'     => $cartAddress,
+            'cartItems'       => $cartItems,
+            'totalQtyOrdered' => $totalQtyOrdered,
         ];
 
     }
