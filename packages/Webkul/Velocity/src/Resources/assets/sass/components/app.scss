@@ -344,6 +344,26 @@
     #quick-view-btn-container {
         display: block;
     }
+
+    .product-image-container {
+        overflow: hidden;
+
+        img {
+            transition: 0.5s all;
+            transform: scale(1.1);
+        }
+    }
+}
+
+.lg-card-container:hover {
+    .product-image {
+        overflow: hidden;
+
+        img {
+            transition: 0.5s all;
+            transform: scale(1.1);
+        }
+    }
 }
 
 .quantity {
@@ -2208,8 +2228,10 @@
     }
 
     #new-products-carousel {
-        .compare-icon {
-            display: none;
+        .add-to-cart-btn {
+            ~ a {
+                position: static;
+            }
         }
     }
 }
@@ -2272,5 +2294,12 @@
             cursor: pointer;
             position: absolute;
         }
+    }
+
+    .wishlist-icon {
+        top: 5px;
+        right: 60px;
+        position: absolute;
+        display: inline-block;
     }
 }

@@ -224,7 +224,7 @@ return [
     'error' => [
         'go-to-home' => 'Go to home',
         'page-lost-short' => 'Page lost content',
-        'something-went-wrong' => 'something went wrong',
+        'something_went_wrong' => 'something went wrong',
         'page-lost-description' => "The page you're looking for isn't available. Try to search again or use the Go Back button below.",
     ],
 

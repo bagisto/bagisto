@@ -58,7 +58,7 @@ return [
     'error' => [
         'go-to-home' => 'الذهاب إلى المنزل',
         'page-lost-short' => 'الصفحة فقدت المحتوى',
-        'something-went-wrong' => 'هناك خطأ ما',
+        'something_went_wrong' => 'هناك خطأ ما',
         'page-lost-description' => "الصفحة التي تبحث عنها غير متوفرة. حاول البحث مرة أخرى أو استخدم زر العودة للخلف أدناه.",
     ],
 

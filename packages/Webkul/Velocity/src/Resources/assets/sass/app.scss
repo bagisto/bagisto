@@ -509,6 +509,9 @@ header {
                     }
                 }
             }
+
+            // transform: scale(1) rotateZ(-180deg);
+            // transition: transform .15s,opacity .15s;
         }
 
         ~ .compare-btn {

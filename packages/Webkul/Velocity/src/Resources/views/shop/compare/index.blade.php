@@ -50,18 +50,32 @@
 
                             <div class="col" :key="`title-${index}`" v-for="(product, index) in products">
                                 @if ($attribute['code'] == 'name')
-                                    <a :href="`${$root.baseUrl}/${isCustomer ? product.url_key : product.slug}`" class="unset">
+                                    <a :href="`${$root.baseUrl}/${product.url_key}`" class="unset">
                                         <h1 class="fw6 fs18" v-text="product['{{ $attribute['code'] }}']"></h1>
                                     </a>
                                 @elseif ($attribute['code'] == 'image')
-                                    <a :href="`${$root.baseUrl}/${isCustomer ? product.url_key : product.slug}`" class="unset">
+                                    <a :href="`${$root.baseUrl}/${product.url_key}`" class="unset">
                                         <img :src="product['{{ $attribute['code'] }}']" class="image-wrapper"></span>
                                     </a>
                                 @elseif ($attribute['code'] == 'price')
                                     <span v-html="product['priceHTML']"></span>
                                 @elseif ($attribute['code'] == 'addToCartHtml')
-                                    <div v-html="product['addToCartHtml']"></div>
-                                    <i class="material-icons cross fs16" @click="removeProductCompare(isCustomer ? product.id : product.slug)">close</i>
+                                    <div class="action">
+                                        <vnode-injector :nodes="$root.getDynamicHTML(product.addToCartHtml)"></vnode-injector>
+
+                                        <i
+                                            class="material-icons cross fs16"
+                                            @click="removeProductCompare(isCustomer ? product.id : product.slug)">
+
+                                            close
+                                        </i>
+                                    </div>
+                                @elseif ($attribute['code'] == 'color')
+                                    <span v-html="product.color_label"></span>
+                                @elseif ($attribute['code'] == 'size')
+                                    <span v-html="product.size_label"></span>
+                                @elseif ($attribute['code'] == 'size')
+                                    <span v-html="product.size_label"></span>
                                 @else
                                     <span v-html="product['{{ $attribute['code'] }}']"></span>
                                 @endif
@@ -118,10 +132,10 @@
                     this.$http.get(`${this.$root.baseUrl}/comparison`, data)
                     .then(response => {
                         this.isProductListLoaded = true;
-                        this.products = response.data.products
+                        this.products = response.data.products;
                     })
                     .catch(error => {
-                        console.log(this.__('error.something-went-wrong'));
+                        console.log(this.__('error.something_went_wrong'));
                     });
                 },
 
@@ -138,7 +152,7 @@
                             window.showAlert(`alert-${response.data.status}`, response.data.label, response.data.message);
                         })
                         .catch(error => {
-                            console.log(this.__('error.something-went-wrong'));
+                            console.log(this.__('error.something_went_wrong'));
                         });
                     } else {
                         let existingItems = window.localStorage.getItem('compared_product');
@@ -161,21 +175,6 @@
                         );
                     }
                 },
-
-                'getAddToCartHtml': function (input) {
-                    const { render, staticRenderFns } = Vue.compile(input);
-                    const _staticRenderFns = this.$options.staticRenderFns = staticRenderFns;
-
-                    try {
-                        var output = render.call(this, this.$createElement)
-                    } catch (exception) {
-                        console.log(this.__('error.something-went-wrong'));
-                    }
-
-                    this.$options.staticRenderFns = _staticRenderFns
-
-                    return output;
-                }
             }
         });
     </script>

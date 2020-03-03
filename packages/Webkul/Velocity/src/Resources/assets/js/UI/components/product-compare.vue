@@ -8,10 +8,6 @@
     export default {
         props: ['slug', 'customer', 'productId'],
 
-        data: function () {
-            return {}
-        },
-
         methods: {
             addProductToCompare: function () {
                 if (this.customer == "true") {
@@ -25,7 +21,7 @@
                         window.showAlert(
                             'alert-danger',
                             this.__('shop.general.alert.error'),
-                            this.__('error.something-went-wrong')
+                            this.__('error.something_went_wrong')
                         );
                     });
                 } else {

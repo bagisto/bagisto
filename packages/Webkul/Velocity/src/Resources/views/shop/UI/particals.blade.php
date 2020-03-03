@@ -140,11 +140,15 @@
                                 <i class="material-icons">perm_identity</i>
                                 <span>
                                     @guest('customer')
+                                        <a class="unset" href="{{ route('customer.session.index') }}">
                                         {{ __('velocity::app.responsive.header.greeting', ['customer' => 'Guest']) }}
+                                        </a>
                                     @endguest
 
                                     @auth('customer')
-                                        {{ __('velocity::app.responsive.header.greeting', ['customer' => auth()->guard('customer')->user()->first_name]) }}
+                                        <a class="unset" href="{{ route('customer.profile.index') }}">
+                                            {{ __('velocity::app.responsive.header.greeting', ['customer' => auth()->guard('customer')->user()->first_name]) }}
+                                        </a>
                                     @endauth
                                     <i
                                         class="material-icons pull-right"
@@ -189,7 +193,7 @@
                             </ul>
 
                             <ul type="none" class="category-wrapper">
-                                <li v-for="(category, index) in JSON.parse(rootCategories)">
+                                <li v-for="(category, index) in $root.sharedRootCategories">
                                     <a
                                         class="unset"
                                         :href="`${$root.baseUrl}/${category.slug}`">
@@ -263,10 +267,10 @@
                                             <img
                                                 class="language-logo"
                                                 src="{{ asset('/storage/' . $locale->locale_image) }}" />
-                                        @else
+                                        @elseif ($locale->code == "en")
                                             <img
                                                 class="language-logo"
-                                                src="{{ asset($locale->locale_image) }}" />
+                                                src="{{ asset('/themes/velocity/assets/images/flags/en.png') }}" />
                                         @endif
                                     </div>
                                     <span>{{ $locale->name }}</span>
@@ -682,7 +686,7 @@
                     } else {
                         event.preventDefault();
 
-                        let categories = this.sharedRootCategories;
+                        let categories = this.$root.sharedRootCategories;
                         this.rootCategories = false;
                         this.subCategory = categories[index];
                     }

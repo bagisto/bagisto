@@ -65,6 +65,7 @@
                     <div class="cart-wish-wrap mt5">
                         @include ('shop::products.add-to-cart', [
                             'product' => $product,
+                            'showCompare' => true,
                             'addWishlistClass' => 'pl10',
                             'addToCartBtnClass' => 'medium-padding'
                         ])
@@ -120,6 +121,7 @@
                     @include ('shop::products.add-to-cart', [
                         'product' => $product,
                         'addWishlistClass' => 'col-lg-4 col-md-4 col-sm-12 offset-lg-4 pr0',
+                        'showCompare' => true,
                         'addToCartBtnClass' => $addToCartBtnClass ?? '',
                         'btnText' => $btnText ?? null
                     ])
