@@ -2,11 +2,17 @@
 
 namespace Tests\Functional\Checkout\Cart;
 
+use Faker\Factory;
 use FunctionalTester;
 use Cart;
 use Webkul\Sales\Models\OrderAddress;
 use Webkul\Checkout\Models\CartAddress;
 
+/**
+ * Class OrderCest
+ *
+ * @package Tests\Functional\Checkout\Cart
+ */
 class OrderCest
 {
 
@@ -17,16 +23,18 @@ class OrderCest
     {
         $customer = $I->loginAsCustomer();
 
+        $faker = Factory::create();
+
         $addressData = [
-            'city'         => 'Quia et cillum rerum',
-            'company_name' => 'Davis and Best Plc',
-            'country'      => 'TN',
-            'email'        => 'kularynefo@mailinator.com',
-            'first_name'   => 'Maggie',
-            'last_name'    => 'Paul',
-            'phone'        => '+1 (995) 347-2667',
-            'postcode'     => '16239',
-            'state'        => 'Aperiam a eligendi a',
+            'city'         => $faker->city,
+            'company_name' => $faker->company,
+            'country'      => $faker->countryCode,
+            'email'        => $faker->email,
+            'first_name'   => $faker->firstName,
+            'last_name'    => $faker->lastName,
+            'phone'        => $faker->phoneNumber,
+            'postcode'     => $faker->postcode,
+            'state'        => $faker->state,
         ];
 
         $mocks = $I->prepareCart([
