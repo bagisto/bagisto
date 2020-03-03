@@ -22,8 +22,17 @@ class ThemeViewFinder extends FileViewFinder
         if ($namespace != 'admin') {
             $paths = $this->addThemeNamespacePaths($namespace);
 
-            // Find and return the view
-            return $this->findInPaths($view, $paths);
+            try {
+                return $this->findInPaths($view, $paths);
+            } catch(\Exception $e) {
+                if ($namespace != 'shop') {
+                    if (strpos($view, 'shop.') !== false) {
+                        $view = str_replace('shop.', 'shop.' . Themes::current()->code . '.', $view);
+                    }
+                }
+
+                return $this->findInPaths($view, $paths);
+            }
         } else {
             return $this->findInPaths($view, $this->hints[$namespace]);
         }
@@ -43,7 +52,6 @@ class ThemeViewFinder extends FileViewFinder
             $newPath = base_path() . '/' . $path;
 
             $paths = Arr::prepend($paths, $newPath);
-
         }
 
         return $paths;
@@ -80,6 +88,7 @@ class ThemeViewFinder extends FileViewFinder
     public function setPaths($paths)
     {
         $this->paths = $paths;
+
         $this->flush();
     }
 }

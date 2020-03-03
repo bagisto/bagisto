@@ -1,32 +1,3 @@
-<script type="text/x-template" id="star-ratings-template">
-    <div :class="`stars mr5 fs${size ? size : '16'} ${pushClass ? pushClass : ''}`">
-        <input
-            v-if="editable"
-            type="number"
-            :value="showFilled"
-            name="rating"
-            class="hidden" />
-
-        <i
-            :class="`material-icons ${editable ? 'cursor-pointer' : ''}`"
-            v-for="(rating, index) in parseInt(showFilled ? showFilled : 3)"
-            :key="`${index}${Math.random()}`"
-            @click="updateRating(index + 1)">
-            star
-        </i>
-
-        <template v-if="!hideBlank">
-            <i
-                :class="`material-icons ${editable ? 'cursor-pointer' : ''}`"
-                v-for="(blankStar, index) in (5 - (showFilled ? showFilled : 3))"
-                :key="`${index}${Math.random()}`"
-                @click="updateRating(showFilled + index + 1)">
-                star_border
-            </i>
-        </template>
-    </div>
-</script>
-
 <script type="text/x-template" id="cart-btn-template">
     <button
         type="button"
@@ -147,6 +118,13 @@
             {!! view_render_event('bagisto.shop.layout.header.cart-item.before') !!}
                 @include('shop::checkout.cart.mini-cart')
             {!! view_render_event('bagisto.shop.layout.header.cart-item.after') !!}
+
+            {!! view_render_event('bagisto.shop.layout.header.compare.before') !!}
+                <a class="compare-btn unset" href="{{ route('velocity.product.compare') }}">
+                    <i class="material-icons">compare_arrows</i>
+                    <span>Compare</span>
+                </a>
+            {!! view_render_event('bagisto.shop.layout.header.compare.after') !!}
         </div>
     </div>
 </script>
@@ -162,11 +140,15 @@
                                 <i class="material-icons">perm_identity</i>
                                 <span>
                                     @guest('customer')
+                                        <a class="unset" href="{{ route('customer.session.index') }}">
                                         {{ __('velocity::app.responsive.header.greeting', ['customer' => 'Guest']) }}
+                                        </a>
                                     @endguest
 
                                     @auth('customer')
-                                        {{ __('velocity::app.responsive.header.greeting', ['customer' => auth()->guard('customer')->user()->first_name]) }}
+                                        <a class="unset" href="{{ route('customer.profile.index') }}">
+                                            {{ __('velocity::app.responsive.header.greeting', ['customer' => auth()->guard('customer')->user()->first_name]) }}
+                                        </a>
                                     @endauth
                                     <i
                                         class="material-icons pull-right"
@@ -211,7 +193,7 @@
                             </ul>
 
                             <ul type="none" class="category-wrapper">
-                                <li v-for="(category, index) in JSON.parse(categories)">
+                                <li v-for="(category, index) in $root.sharedRootCategories">
                                     <a
                                         class="unset"
                                         :href="`${$root.baseUrl}/${category.slug}`">
@@ -285,10 +267,10 @@
                                             <img
                                                 class="language-logo"
                                                 src="{{ asset('/storage/' . $locale->locale_image) }}" />
-                                        @else
+                                        @elseif ($locale->code == "en")
                                             <img
                                                 class="language-logo"
-                                                src="{{ asset($locale->locale_image) }}" />
+                                                src="{{ asset('/themes/velocity/assets/images/flags/en.png') }}" />
                                         @endif
                                     </div>
                                     <span>{{ $locale->name }}</span>
@@ -524,31 +506,6 @@
 
 <script type="text/javascript">
     (() => {
-        Vue.component('star-ratings', {
-            props: [
-                'ratings',
-                'size',
-                'hideBlank',
-                'pushClass',
-                'editable'
-            ],
-
-            template: '#star-ratings-template',
-
-            data: function () {
-                return {
-                    showFilled: this.ratings,
-                }
-            },
-
-            methods: {
-                updateRating: function (index) {
-                    index = Math.abs(index);
-                    this.editable ? this.showFilled = index : '';
-                }
-            },
-        })
-
         Vue.component('cart-btn', {
             template: '#cart-btn-template',
 
@@ -729,7 +686,7 @@
                     } else {
                         event.preventDefault();
 
-                        let categories = this.sharedRootCategories;
+                        let categories = this.$root.sharedRootCategories;
                         this.rootCategories = false;
                         this.subCategory = categories[index];
                     }

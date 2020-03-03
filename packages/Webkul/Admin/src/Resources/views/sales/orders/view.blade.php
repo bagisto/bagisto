@@ -344,14 +344,11 @@
                                         </tr>
                                     @endif
 
-                                    @php ($taxRates = Webkul\Tax\Helpers\Tax::getTaxRatesWithAmount($order, true))
-                                    @foreach ($taxRates as $taxRate => $baseTaxAmount)
-                                    <tr {{ $loop->last ? 'class=border' : ''}}>
-                                        <td id="taxrate-{{ core()->taxRateAsIdentifier($taxRate) }}">{{ __('admin::app.sales.orders.tax') }} {{ $taxRate }} %</td>
+                                    <tr class="border">
+                                        <td>{{ __('admin::app.sales.orders.tax') }}</td>
                                         <td>-</td>
-                                        <td id="basetaxamount-{{ core()->taxRateAsIdentifier($taxRate) }}">{{ core()->formatBasePrice($baseTaxAmount) }}</td>
+                                        <td>{{ core()->formatBasePrice($order->base_tax_amount) }}</td>
                                     </tr>
-                                    @endforeach
 
                                     <tr class="bold">
                                         <td>{{ __('admin::app.sales.orders.grand-total') }}</td>
@@ -437,9 +434,8 @@
                                     <tr>
                                         <th>{{ __('admin::app.sales.shipments.id') }}</th>
                                         <th>{{ __('admin::app.sales.shipments.date') }}</th>
-                                        <th>{{ __('admin::app.sales.shipments.order-id') }}</th>
-                                        <th>{{ __('admin::app.sales.shipments.order-date') }}</th>
-                                        <th>{{ __('admin::app.sales.shipments.customer-name') }}</th>
+                                        <th>{{ __('admin::app.sales.shipments.carrier-title') }}</th>
+                                        <th>{{ __('admin::app.sales.shipments.tracking-number') }}</th>
                                         <th>{{ __('admin::app.sales.shipments.total-qty') }}</th>
                                         <th>{{ __('admin::app.sales.shipments.action') }}</th>
                                     </tr>
@@ -451,9 +447,8 @@
                                         <tr>
                                             <td>#{{ $shipment->id }}</td>
                                             <td>{{ $shipment->created_at }}</td>
-                                            <td>#{{ $shipment->order->id }}</td>
-                                            <td>{{ $shipment->order->created_at }}</td>
-                                            <td>{{ $shipment->address->name }}</td>
+                                            <td>{{ $shipment->carrier_title }}</td>
+                                            <td>{{ $shipment->track_number }}</td>
                                             <td>{{ $shipment->total_qty }}</td>
                                             <td class="action">
                                                 <a href="{{ route('admin.sales.shipments.view', $shipment->id) }}">

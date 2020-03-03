@@ -138,9 +138,9 @@ class Helper extends Review
     /**
      * Returns the count rating of the product
      *
-    * @param Product $product
+     * @param Product $product
      * @return array
-     */
+    */
     public function getCountRating($product)
     {
         $reviews = $product->reviews()->where('status', 'approved')
@@ -219,6 +219,38 @@ class Helper extends Review
             'url_key' => $product->url_key,
             'quantity' => $item->quantity,
             'baseTotal' => core()->currency($item->base_total),
+        ];
+    }
+
+    public function formatProduct($product, $list = false)
+    {
+        $reviewHelper = app('Webkul\Product\Helpers\Review');
+        $productImageHelper = app('Webkul\Product\Helpers\ProductImage');
+
+        $totalReviews = $reviewHelper->getTotalReviews($product);
+
+        $avgRatings = ceil($reviewHelper->getAverageRating($product));
+
+        $galleryImages = $productImageHelper->getGalleryImages($product);
+        $productImage = $productImageHelper->getProductBaseImage($product)['medium_image_url'];
+
+        return [
+            'avgRating'         => $avgRatings,
+            'totalReviews'      => $totalReviews,
+            'image'             => $productImage,
+            'galleryImages'     => $galleryImages,
+            'name'              => $product->name,
+            'slug'              => $product->url_key,
+            'description'       => $product->description,
+            'shortDescription'  => $product->short_description,
+            'firstReviewText'   => trans('velocity::app.products.be-first-review'),
+            'priceHTML'         => view('shop::products.price', ['product' => $product])->render(),
+            'addToCartHtml'     => view('shop::products.add-to-cart', [
+                'product'           => $product,
+                'showCompare'       => true,
+                'addWishlistClass'  => !(isset($list) && $list) ? '' : '',
+                'addToCartBtnClass' => !(isset($list) && $list) ? 'small-padding' : '',
+            ])->render(),
         ];
     }
 }

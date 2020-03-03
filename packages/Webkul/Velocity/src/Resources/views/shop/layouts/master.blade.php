@@ -132,25 +132,23 @@
 
         <script type="text/javascript">
             (() => {
-                var showAlert = (messageType, messageLabel, message) => {
+                window.showAlert = (messageType, messageLabel, message) => {
                     if (messageType && message !== '') {
                         let html = `<div class="alert ${messageType} alert-dismissible" id="alert">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            <strong>${messageLabel} !</strong> ${message}.
+                            <strong>${messageLabel ? messageLabel + '!' : ''} </strong> ${message}.
                         </div>`;
 
-                        document.body.innerHTML += html;
+                        $('body').append(html);
 
                         window.setTimeout(() => {
-                            $(".alert").fadeTo(500, 0).slideUp(500, () => {
-                                $(this).remove();
-                            });
+                            $(".alert").remove();
                         }, 5000);
                     }
                 }
 
-                let messageType = 'alert-success';
-                let messageLabel = 'dsfghjkl';
+                let messageType = '';
+                let messageLabel = '';
 
                 @if ($message = session('success'))
                     messageType = 'alert-success';
@@ -167,7 +165,7 @@
                 @endif
 
                 if (messageType && '{{ $message }}' !== '') {
-                    showAlert(messageType, messageLabel, '{{ $message }}');
+                    window.showAlert(messageType, messageLabel, '{{ $message }}');
                 }
 
                 window.serverErrors = [];

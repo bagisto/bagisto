@@ -112,8 +112,9 @@ class CartController extends Controller
     {
         $result = Cart::removeItem($itemId);
 
-        if ($result)
+        if ($result) {
             session()->flash('success', trans('shop::app.checkout.cart.item.success-remove'));
+        }
 
         return redirect()->back();
     }

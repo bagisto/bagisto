@@ -2,11 +2,15 @@
 
 namespace Webkul\Velocity\Http\Controllers\Shop;
 
+use Illuminate\Http\Request;
+
 use Cart;
+use Webkul\Product\Helpers\ProductImage;
 use Webkul\Velocity\Http\Shop\Controllers;
 use Webkul\Checkout\Contracts\Cart as CartModel;
 use Webkul\Product\Repositories\SearchRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRepository;
 
 /**
@@ -15,7 +19,7 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
  * @author  Shubham Mehrotra <shubhammehrotra.symfony@webkul.com> @shubhwebkul
  * @copyright 2019 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
- class ShopController extends Controller
+class ShopController extends Controller
 {
     /**
      * Contains route related configuration
@@ -23,6 +27,13 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
      * @var array
      */
     protected $_config;
+
+    /**
+     * Webkul\Product\Helpers\ProductImage object
+     *
+     * @var ProductImage
+    */
+    protected $productImageHelper;
 
     /**
      * SearchRepository object
@@ -35,7 +46,7 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
      * ProductRepository object
      *
      * @var ProductRepository
-     */
+    */
     protected $productRepository;
 
     /**
@@ -46,20 +57,35 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
     protected $velocityProductRepository;
 
     /**
+     * CategoryRepository object of velocity package
+     *
+     * @var CategoryRepository
+     */
+    protected $categoryRepository;
+
+    /**
      * Create a new controller instance.
      *
+     * @param  \Webkul\Product\Helpers\ProductImage $productImageHelper
      * @param  \Webkul\Product\Repositories\SearchRepository $searchRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository $productRepository
+     * @param  \Webkul\Category\Repositories\CategoryRepository $categoryRepository
+     * @param  \Webkul\Velocity\Repositories\Product\ProductRepository $velocityProductRepository
      * @return void
     */
     public function __construct(
+        ProductImage $productImageHelper,
         SearchRepository $searchRepository,
         ProductRepository $productRepository,
+        CategoryRepository $categoryRepository,
         VelocityProductRepository $velocityProductRepository
     ) {
         $this->_config = request('_config');
 
         $this->searchRepository = $searchRepository;
         $this->productRepository = $productRepository;
+        $this->productImageHelper = $productImageHelper;
+        $this->categoryRepository = $categoryRepository;
         $this->velocityProductRepository = $velocityProductRepository;
     }
 
@@ -81,24 +107,23 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
 
         if ($product) {
             $productReviewHelper = app('Webkul\Product\Helpers\Review');
-            $productImageHelper = app('Webkul\Product\Helpers\ProductImage');
-            $galleryImages = $productImageHelper->getProductBaseImage($product);
+            $galleryImages = $this->productImageHelper->getProductBaseImage($product);
 
             $response = [
-                'status' => true,
+                'status'  => true,
                 'details' => [
-                    'name' => $product->name,
-                    'urlKey' => $product->url_key,
-                    'priceHTML' => $product->getTypeInstance()->getPriceHtml(),
-                    'totalReviews' => $productReviewHelper->getTotalReviews($product),
-                    'rating' => ceil($productReviewHelper->getAverageRating($product)),
-                    'image' => $galleryImages['small_image_url'],
+                    'name'          => $product->name,
+                    'urlKey'        => $product->url_key,
+                    'image'         => $galleryImages['small_image_url'],
+                    'priceHTML'     => $product->getTypeInstance()->getPriceHtml(),
+                    'totalReviews'  => $productReviewHelper->getTotalReviews($product),
+                    'rating'        => ceil($productReviewHelper->getAverageRating($product)),
                 ]
             ];
         } else {
             $response = [
                 'status' => false,
-                'slug' => $slug,
+                'slug'   => $slug,
             ];
         }
 
@@ -134,7 +159,7 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
 
                 break;
             default:
-                $categoryDetails = app('Webkul\Category\Repositories\CategoryRepository')->findByPath($slug);
+                $categoryDetails = $this->categoryRepository->findByPath($slug);
 
                 if ($categoryDetails) {
                     $list = false;
@@ -149,10 +174,10 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
                     }
 
                     $response = [
-                        'status' => true,
-                        'list' => $list,
-                        'categoryDetails' => $categoryDetails,
-                        'categoryProducts' => $customizedProducts,
+                        'status'            => true,
+                        'list'              => $list,
+                        'categoryDetails'   => $categoryDetails,
+                        'categoryProducts'  => $customizedProducts,
                     ];
                 }
 
@@ -167,25 +192,25 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
     public function fetchCategories()
     {
         $formattedCategories = [];
-        $categories = app('Webkul\Category\Repositories\CategoryRepository')->getVisibleCategoryTree(core()->getCurrentChannel()->root_category_id);
+        $categories = $this->categoryRepository->getVisibleCategoryTree(core()->getCurrentChannel()->root_category_id);
 
         foreach ($categories as $category) {
             array_push($formattedCategories, $this->getCategoryFilteredData($category));
         }
 
         return [
-            'status' => true,
-            'categories' => $formattedCategories,
+            'status'        => true,
+            'categories'    => $formattedCategories,
         ];
     }
 
     public function fetchFancyCategoryDetails($slug)
     {
-        $categoryDetails = app('Webkul\Category\Repositories\CategoryRepository')->findByPath($slug);
+        $categoryDetails = $this->categoryRepository->findByPath($slug);
 
         if ($categoryDetails) {
             $response = [
-                'status' => true,
+                'status'          => true,
                 'categoryDetails' => $this->getCategoryFilteredData($categoryDetails)
             ];
         }
@@ -198,114 +223,48 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
     private function getCategoryFilteredData($category)
     {
         $formattedChildCategory = [];
+
         foreach ($category->children as $child) {
             array_push($formattedChildCategory, $this->getCategoryFilteredData($child));
         }
 
         return [
-            'id' => $category->id,
-            'slug' => $category->slug,
-            'name' => $category->name,
-            'children' => $formattedChildCategory,
-            'category_icon_path' => $category->category_icon_path,
+            'id'                    => $category->id,
+            'slug'                  => $category->slug,
+            'name'                  => $category->name,
+            'children'              => $formattedChildCategory,
+            'category_icon_path'    => $category->category_icon_path,
         ];
     }
 
     private function formatProduct($product, $list = false)
     {
         $reviewHelper = app('Webkul\Product\Helpers\Review');
-        $productImageHelper = app('Webkul\Product\Helpers\ProductImage');
 
         $totalReviews = $reviewHelper->getTotalReviews($product);
 
         $avgRatings = ceil($reviewHelper->getAverageRating($product));
 
-        $galleryImages = $productImageHelper->getGalleryImages($product);
-        $productImage = $productImageHelper->getProductBaseImage($product)['medium_image_url'];
+        $galleryImages = $this->productImageHelper->getGalleryImages($product);
+        $productImage = $this->productImageHelper->getProductBaseImage($product)['medium_image_url'];
 
         return [
-            'name' => $product->name,
-            'slug' => $product->url_key,
-            'image' => $productImage,
-            'description' => $product->description,
-            'shortDescription' => $product->short_description,
-            'galleryImages' => $galleryImages,
-            'priceHTML' => view('shop::products.price', ['product' => $product])->render(),
-            'totalReviews' => $totalReviews,
-            'avgRating' => $avgRatings,
-            'firstReviewText' => trans('velocity::app.products.be-first-review'),
-            'addToCartHtml' => view('shop::products.add-to-cart', [
-                'product' => $product,
-                'addWishlistClass' => !(isset($list) && $list) ? '' : '',
-                'addToCartBtnClass' => !(isset($list) && $list) ? $addToCartBtnClass ?? '' : ''
+            'avgRating'         => $avgRatings,
+            'totalReviews'      => $totalReviews,
+            'image'             => $productImage,
+            'galleryImages'     => $galleryImages,
+            'name'              => $product->name,
+            'slug'              => $product->url_key,
+            'description'       => $product->description,
+            'shortDescription'  => $product->short_description,
+            'firstReviewText'   => trans('velocity::app.products.be-first-review'),
+            'priceHTML'         => view('shop::products.price', ['product' => $product])->render(),
+            'addToCartHtml'     => view('shop::products.add-to-cart', [
+                'product'           => $product,
+                'showCompare'       => true,
+                'addWishlistClass'  => !(isset($list) && $list) ? '' : '',
+                'addToCartBtnClass' => !(isset($list) && $list) ? 'small-padding' : '',
             ])->render(),
-        ];
-    }
-
-    /**
-     * Function for guests user to add the product in the cart.
-     *
-     * @return Mixed
-     */
-    public function addProductToCart()
-    {
-        try {
-            $cart = Cart::getCart();
-            $formattedBeforeItems = [];
-            $id = request()->get('product_id');
-            $velocityHelper = app('Webkul\Velocity\Helpers\Helper');
-
-            if ($cart) {
-                $beforeItems = $cart->items;
-
-                foreach ($beforeItems as $item) {
-                    array_push($formattedBeforeItems, $velocityHelper->formatCartItem($item));
-                }
-            }
-
-            $cart = Cart::addProduct($id, request()->all());
-
-            if (is_array($cart) && isset($cart['warning'])) {
-                $response = [
-                    'status' => 'warning',
-                    'message' => $cart['warning'],
-                ];
-            }
-
-            if ($cart instanceof CartModel) {
-                $items = $cart->items;
-                $formattedItems = [];
-
-                foreach ($items as $item) {
-                    array_push($formattedItems, $velocityHelper->formatCartItem($item));
-                }
-
-                $response = [
-                    'status' => 'success',
-                    'totalCartItems' => sizeof($items),
-                    'addedItems' => array_slice($formattedItems, sizeof($formattedBeforeItems)),
-                    'message' => trans('shop::app.checkout.cart.item.success'),
-                ];
-
-                if ($customer = auth()->guard('customer')->user())
-                    $this->wishlistRepository->deleteWhere(['product_id' => $id, 'customer_id' => $customer->id]);
-
-                if (request()->get('is_buy_now'))
-                    return redirect()->route('shop.checkout.onepage.index');
-            }
-        } catch(\Exception $exception) {
-            $product = $this->productRepository->find($id);
-
-            $response = [
-                'status' => 'false',
-                'message' => trans($exception->getMessage()),
-                'redirectionRoute' => route('shop.productOrCategory.index', $product->url_key),
-            ];
-        }
-
-        return $response ?? [
-            'status' => 'error',
-            'message' => trans('velocity::app.error.something-went-wrong'),
         ];
     }
 }

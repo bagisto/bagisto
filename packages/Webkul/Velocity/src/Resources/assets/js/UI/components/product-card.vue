@@ -67,7 +67,7 @@
                 <span class="fs14" v-text="product.firstReviewText"></span>
             </div>
 
-            <vnode-injector :nodes="getAddToCartHtml()"></vnode-injector>
+            <vnode-injector :nodes="$root.getDynamicHTML(product.addToCartHtml)"></vnode-injector>
         </div>
     </div>
 </template>
@@ -86,23 +86,6 @@
                 'addToCartHtml': '',
                 'message' : "Hello there",
                 'showTestClass': 'sdfsdf',
-            }
-        },
-
-        methods: {
-            getAddToCartHtml: function () {
-                const { render, staticRenderFns } = Vue.compile(this.product.addToCartHtml);
-                const _staticRenderFns = this.$options.staticRenderFns = staticRenderFns;
-
-                try {
-                    var output = render.call(this, this.$createElement)
-                } catch (exception) {
-                    debugger
-                }
-
-                this.$options.staticRenderFns = _staticRenderFns
-
-                return output
             }
         },
     }
