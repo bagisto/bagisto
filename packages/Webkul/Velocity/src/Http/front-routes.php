@@ -24,11 +24,17 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
         Route::get('/comparison', 'ComparisonController@getComparisonList')
             ->name('velocity.product.compare')
             ->defaults('_config', [
-                'view' => 'shop::compare.index'
+                'view' => 'shop::guest.compare.index'
             ]);
 
         Route::put('/comparison', 'ComparisonController@addCompareProduct')->name('customer.product.add.compare');
 
         Route::delete('/comparison', 'ComparisonController@deleteComparisonProduct')->name('customer.product.delete.compare');
+
+        Route::get('/guest-wishlist', 'ShopController@getWishlistList')
+            ->name('velocity.product.guest-wishlist')
+            ->defaults('_config', [
+                'view' => 'shop::guest.wishlist.index'
+            ]);
     });
 });

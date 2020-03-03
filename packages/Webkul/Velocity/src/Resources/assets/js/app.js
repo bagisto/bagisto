@@ -59,6 +59,7 @@ $(document).ready(function () {
             return {
                 'baseUrl': document.querySelector("script[src$='velocity.js']").getAttribute('baseUrl'),
                 'navContainer': false,
+                'headerItemsCount': 0,
                 'responsiveSidebarTemplate': '',
                 'responsiveSidebarKey': Math.random(),
                 'sharedRootCategories': [],
@@ -184,7 +185,23 @@ $(document).ready(function () {
                 this.$options.staticRenderFns = _staticRenderFns;
 
                 return output;
-            }
+            },
+
+            getStorageValue: function (key) {
+                let value = window.localStorage.getItem(key);
+
+                if (value) {
+                    value = JSON.parse(value);
+                }
+
+                return value;
+            },
+
+            setStorageValue: function (key, value) {
+                window.localStorage.setItem(key, JSON.stringify(value));
+
+                return true;
+            },
         }
     });
 

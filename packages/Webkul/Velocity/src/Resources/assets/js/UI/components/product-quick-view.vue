@@ -43,7 +43,7 @@
 
                     <p class="pt14 fs14 description-text" v-html="product.shortDescription"></p>
 
-                    <vnode-injector :nodes="$root.getDynamicHTML(product.addToCartHtml)"></vnode-injector>
+                    <vnode-injector :nodes="getDynamicHTML(product.addToCartHtml)"></vnode-injector>
                 </div>
 
                 <div

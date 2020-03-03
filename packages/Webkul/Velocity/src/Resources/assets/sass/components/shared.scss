@@ -672,20 +672,20 @@ a {
         text-decoration: none !important;
     }
 
-    &.remove-decoration {
-        text-decoration: none;
-    }
-
-    &.remove-decoration:hover,
-    &.remove-decoration:active,
-    &.remove-decoration:focus {
-        text-decoration: none;
-    }
-
     &.active-hover {
         &:hover {
             color: $link-color !important;
             text-decoration: underline !important;
+        }
+    }
+
+    &.remove-decoration {
+        text-decoration: none !important;
+
+        &:hover,
+        &:active,
+        &:focus {
+            text-decoration: none !important;
         }
     }
 }

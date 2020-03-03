@@ -267,4 +267,9 @@ class ShopController extends Controller
             ])->render(),
         ];
     }
+
+    public function getWishlistList()
+    {
+        return view($this->_config['view']);
+    }
 }
