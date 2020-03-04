@@ -25,7 +25,7 @@ class TaxRate extends Model implements TaxRateContract
         'zip_to',
         'state',
         'country',
-        'tax_rate'
+        'tax_rate',
     ];
 
     public function tax_categories()

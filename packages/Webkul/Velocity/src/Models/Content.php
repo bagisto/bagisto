@@ -18,10 +18,14 @@ class Content extends TranslatableModel implements ContentContract
         'link_target',
         'catalog_type',
         'products',
-        'description'
+        'description',
     ];
 
-    protected $fillable = ['content_type', 'position', 'status'];
+    protected $fillable = [
+        'content_type',
+        'position',
+        'status',
+    ];
 
     protected $with = ['translations'];
 }

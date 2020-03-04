@@ -75,7 +75,7 @@ class DownloadableLinkPurchasedRepository extends Repository
                 'status'          => 'pending',
                 'customer_id'     => $orderItem->order->customer_id,
                 'order_id'        => $orderItem->order_id,
-                'order_item_id'   => $orderItem->id
+                'order_item_id'   => $orderItem->id,
             ]);
         }
     }
@@ -105,7 +105,7 @@ class DownloadableLinkPurchasedRepository extends Repository
 
         foreach ($purchasedLinks as $purchasedLink) {
             $this->update([
-                'status' => $status
+                'status' => $status,
             ], $purchasedLink->id);
         }
     }

@@ -44,7 +44,7 @@ class ProductImage extends AbstractProduct
                 'small_image_url'    => asset('vendor/webkul/ui/assets/images/product/small-product-placeholder.png'),
                 'medium_image_url'   => asset('vendor/webkul/ui/assets/images/product/meduim-product-placeholder.png'),
                 'large_image_url'    => asset('vendor/webkul/ui/assets/images/product/large-product-placeholder.png'),
-                'original_image_url' => asset('vendor/webkul/ui/assets/images/product/large-product-placeholder.png')
+                'original_image_url' => asset('vendor/webkul/ui/assets/images/product/large-product-placeholder.png'),
             ];
         }
 

@@ -54,7 +54,7 @@ class AccountController extends Controller
             'name'             => 'required',
             'email'            => 'email|unique:admins,email,' . $user->id,
             'password'         => 'nullable|min:6|confirmed',
-            'current_password' => 'required|min:6'
+            'current_password' => 'required|min:6',
         ]);
 
         $data = request()->input();

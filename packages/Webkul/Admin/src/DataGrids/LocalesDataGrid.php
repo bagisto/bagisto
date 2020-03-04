@@ -32,7 +32,7 @@ class LocalesDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -41,7 +41,7 @@ class LocalesDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -50,7 +50,7 @@ class LocalesDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -67,7 +67,7 @@ class LocalesDataGrid extends DataGrid
                 } else {
                     return trans('admin::app.datagrid.rtl');
                 }
-            }
+            },
         ]);
     }
 
@@ -76,7 +76,7 @@ class LocalesDataGrid extends DataGrid
             'title'  => 'Edit Locales',
             'method' => 'GET',
             'route'  => 'admin.locales.edit',
-            'icon'   => 'icon pencil-lg-icon'
+            'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
@@ -84,7 +84,7 @@ class LocalesDataGrid extends DataGrid
             'method'       => 'POST',
             'route'        => 'admin.locales.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'Exchange Rate']),
-            'icon'         => 'icon trash-icon'
+            'icon'         => 'icon trash-icon',
         ]);
     }
 }

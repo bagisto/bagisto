@@ -11,5 +11,9 @@ class BookingProductEventTicket extends TranslatableModel implements BookingProd
 
     public $translatedAttributes = ['name', 'description'];
     
-    protected $fillable = ['price', 'qty', 'booking_product_id'];
+    protected $fillable = [
+        'price',
+        'qty',
+        'booking_product_id',
+    ];
 }

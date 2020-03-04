@@ -20,8 +20,8 @@ class SliderDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('sliders as sl')
-                ->addSelect('sl.id as slider_id', 'sl.title', 'ch.name')
-                ->leftJoin('channels as ch', 'sl.channel_id', '=', 'ch.id');
+            ->addSelect('sl.id as slider_id', 'sl.title', 'ch.name')
+            ->leftJoin('channels as ch', 'sl.channel_id', '=', 'ch.id');
 
         $this->addFilter('slider_id', 'sl.id');
         $this->addFilter('channel_name', 'ch.name');
@@ -37,7 +37,7 @@ class SliderDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -46,7 +46,7 @@ class SliderDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -55,7 +55,7 @@ class SliderDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
     }
 
@@ -64,14 +64,14 @@ class SliderDataGrid extends DataGrid
             'title'  => 'Edit Slider',
             'method' => 'GET',
             'route'  => 'admin.sliders.edit',
-            'icon'   => 'icon pencil-lg-icon'
+            'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
             'title'  => 'Delete Slider',
             'method' => 'POST',
             'route'  => 'admin.sliders.delete',
-            'icon'   => 'icon trash-icon'
+            'icon'   => 'icon trash-icon',
         ]);
     }
 }

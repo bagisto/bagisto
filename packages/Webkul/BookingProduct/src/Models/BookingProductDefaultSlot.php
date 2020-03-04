@@ -13,7 +13,13 @@ class BookingProductDefaultSlot extends Model implements BookingProductDefaultSl
     
     protected $casts = ['slots' => 'array'];
 
-    protected $fillable = ['booking_type', 'duration', 'break_time', 'slots', 'booking_product_id'];
+    protected $fillable = [
+        'booking_type',
+        'duration',
+        'break_time',
+        'slots',
+        'booking_product_id'
+    ];
 
     /**
      * Get the product that owns the attribute value.

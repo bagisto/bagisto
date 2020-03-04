@@ -158,7 +158,7 @@ class ShopController extends Controller
                 }
 
                 $response = [
-                    'status' => true,
+                    'status'   => true,
                     'products' => $formattedProducts,
                 ];
 

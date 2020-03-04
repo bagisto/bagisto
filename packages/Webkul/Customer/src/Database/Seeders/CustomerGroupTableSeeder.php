@@ -16,7 +16,7 @@ class CustomerGroupTableSeeder extends Seeder
                 'id'              => 1,
                 'code'            => 'guest',
                 'name'            => 'Guest',
-                'is_user_defined' => 0
+                'is_user_defined' => 0,
             ], [
                 'id'              => 2,
                 'code'            => 'general',
@@ -26,7 +26,7 @@ class CustomerGroupTableSeeder extends Seeder
                 'id'              => 3,
                 'code'            => 'wholesale',
                 'name'            => 'Wholesale',
-                'is_user_defined' => 0
+                'is_user_defined' => 0,
             ]
         ]);
     }

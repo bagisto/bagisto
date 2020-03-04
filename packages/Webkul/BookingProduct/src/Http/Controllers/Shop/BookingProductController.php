@@ -72,7 +72,7 @@ class BookingProductController extends Controller
         $bookingProduct = $this->bookingProductRepository->find(request('id'));
 
         return response()->json([
-            'data' => $this->bookingHelpers[$bookingProduct->type]->getSlotsByDate($bookingProduct, request()->get('date'))
+            'data' => $this->bookingHelpers[$bookingProduct->type]->getSlotsByDate($bookingProduct, request()->get('date')),
         ]);
     }
 }

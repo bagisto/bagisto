@@ -32,7 +32,7 @@ class CurrencyDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -41,7 +41,7 @@ class CurrencyDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -50,7 +50,7 @@ class CurrencyDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
     }
 
@@ -59,14 +59,14 @@ class CurrencyDataGrid extends DataGrid
             'title'  => 'Edit Currency',
             'method' => 'GET',
             'route'  => 'admin.currencies.edit',
-            'icon'   => 'icon pencil-lg-icon'
+            'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
             'title'  => 'Delete Currency',
             'method' => 'POST',
             'route'  => 'admin.currencies.delete',
-            'icon'   => 'icon trash-icon'
+            'icon'   => 'icon trash-icon',
         ]);
     }
 }

@@ -48,7 +48,7 @@ class ConfigurationController extends Controller
         }
 
         return view($this->_config['view'], [
-            'metaData' => $velocityMetaData
+            'metaData' => $velocityMetaData,
         ]);
     }
 
@@ -57,11 +57,11 @@ class ConfigurationController extends Controller
         // check if radio button value
         if (request()->get('slides') == "on") {
             $params = request()->all() + [
-                'slider' => 1
+                'slider' => 1,
             ];
         } else {
             $params = request()->all() + [
-                'slider' => 0
+                'slider' => 0,
             ];
         }
 
@@ -183,7 +183,7 @@ class ConfigurationController extends Controller
                         'id'   => $key,
                         'type' => null,
                         'path' => $image,
-                        'url'  => Storage::url($image)
+                        'url'  => Storage::url($image),
                     ];
                 }
             }

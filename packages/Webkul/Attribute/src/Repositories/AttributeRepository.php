@@ -68,7 +68,7 @@ class AttributeRepository extends Repository
         if (in_array($attribute->type, ['select', 'multiselect', 'checkbox']) && count($options)) {
             foreach ($options as $optionInputs) {
                 $this->attributeOptionRepository->create(array_merge([
-                    'attribute_id' => $attribute->id
+                    'attribute_id' => $attribute->id,
                 ], $optionInputs));
             }
         }
@@ -182,7 +182,7 @@ class AttributeRepository extends Repository
                 'special_price',
                 'special_price_from',
                 'special_price_to',
-                'status'
+                'status',
             ], $attributeColumns);
 
         if (in_array('*', $codes)) {
@@ -242,7 +242,7 @@ class AttributeRepository extends Repository
                         'type'        => $attribute->type,
                         'code'        => $attribute->code,
                         'has_options' => true,
-                        'options'     => $attribute->options
+                        'options'     => $attribute->options,
                     ]);
                 } else {
                     array_push($trimmed, [
@@ -251,7 +251,7 @@ class AttributeRepository extends Repository
                         'type'        => $attribute->type,
                         'code'        => $attribute->code,
                         'has_options' => false,
-                        'options'     => null
+                        'options'     => null,
                     ]);
                 }
 

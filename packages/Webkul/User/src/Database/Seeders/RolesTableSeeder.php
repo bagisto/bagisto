@@ -18,7 +18,7 @@ class RolesTableSeeder extends Seeder
             'id'              => 1,
             'name'            => 'Administrator',
             'description'     => 'Administrator rolem',
-            'permission_type' => 'all'
+            'permission_type' => 'all',
         ]);
     }
 }

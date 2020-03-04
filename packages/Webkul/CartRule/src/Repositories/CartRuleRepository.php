@@ -144,7 +144,7 @@ class CartRuleRepository extends Repository
                 'usage_limit'        => $data['usage_per_customer'] ?? 0,
                 'usage_per_customer' => $data['usage_per_customer'] ?? 0,
                 'is_primary'         => 1,
-                'expired_at'         => $data['ends_till'] ?: null
+                'expired_at'         => $data['ends_till'] ?: null,
             ]);
         }
 
@@ -184,7 +184,7 @@ class CartRuleRepository extends Repository
                         'code'               => $data['coupon_code'],
                         'usage_limit'        => $data['uses_per_coupon'] ?? 0,
                         'usage_per_customer' => $data['usage_per_customer'] ?? 0,
-                        'expired_at'         => $data['ends_till'] ?: null
+                        'expired_at'         => $data['ends_till'] ?: null,
                     ], $cartRuleCoupon->id);
                 } else {
                     $this->cartRuleCouponRepository->create([
@@ -193,7 +193,7 @@ class CartRuleRepository extends Repository
                         'usage_limit'        => $data['uses_per_coupon'] ?? 0,
                         'usage_per_customer' => $data['usage_per_customer'] ?? 0,
                         'is_primary'         => 1,
-                        'expired_at'         => $data['ends_till'] ?: null
+                        'expired_at'         => $data['ends_till'] ?: null,
                     ]);
                 }
             } else {
@@ -202,7 +202,7 @@ class CartRuleRepository extends Repository
                 $this->cartRuleCouponRepository->getModel()->where('cart_rule_id', $cartRule->id)->update([
                     'usage_limit'        => $data['uses_per_coupon'] ?? 0,
                     'usage_per_customer' => $data['usage_per_customer'] ?? 0,
-                    'expired_at'         => $data['ends_till'] ?: null
+                    'expired_at'         => $data['ends_till'] ?: null,
                 ]);
             }
         } else {
@@ -227,35 +227,35 @@ class CartRuleRepository extends Repository
                     [
                         'key'   => 'cart|base_sub_total',
                         'type'  => 'price',
-                        'label' => trans('admin::app.promotions.cart-rules.subtotal')
+                        'label' => trans('admin::app.promotions.cart-rules.subtotal'),
                     ], [
                         'key'   => 'cart|items_qty',
                         'type'  => 'integer',
-                        'label' => trans('admin::app.promotions.cart-rules.total-items-qty')
+                        'label' => trans('admin::app.promotions.cart-rules.total-items-qty'),
                     ], [
                         'key'     => 'cart|payment_method',
                         'type'    => 'select',
                         'options' => $this->getPaymentMethods(),
-                        'label'   => trans('admin::app.promotions.cart-rules.payment-method')
+                        'label'   => trans('admin::app.promotions.cart-rules.payment-method'),
                     ], [
                         'key'     => 'cart|shipping_method',
                         'type'    => 'select',
                         'options' => $this->getShippingMethods(),
-                        'label'   => trans('admin::app.promotions.cart-rules.shipping-method')
+                        'label'   => trans('admin::app.promotions.cart-rules.shipping-method'),
                     ], [
                         'key'   => 'cart|postcode',
                         'type'  => 'text',
-                        'label' => trans('admin::app.promotions.cart-rules.shipping-postcode')
+                        'label' => trans('admin::app.promotions.cart-rules.shipping-postcode'),
                     ], [
                         'key'     => 'cart|state',
                         'type'    => 'select',
                         'options' => $this->groupedStatesByCountries(),
-                        'label'   => trans('admin::app.promotions.cart-rules.shipping-state')
+                        'label'   => trans('admin::app.promotions.cart-rules.shipping-state'),
                     ], [
                         'key'     => 'cart|country',
                         'type'    => 'select',
                         'options' => $this->getCountries(),
-                        'label'   => trans('admin::app.promotions.cart-rules.shipping-country')
+                        'label'   => trans('admin::app.promotions.cart-rules.shipping-country'),
                     ]
                 ]
             ], [
@@ -265,19 +265,19 @@ class CartRuleRepository extends Repository
                     [
                         'key'   => 'cart_item|base_price',
                         'type'  => 'price',
-                        'label' => trans('admin::app.promotions.cart-rules.price-in-cart')
+                        'label' => trans('admin::app.promotions.cart-rules.price-in-cart'),
                     ], [
                         'key'   => 'cart_item|quantity',
                         'type'  => 'integer',
-                        'label' => trans('admin::app.promotions.cart-rules.qty-in-cart')
+                        'label' => trans('admin::app.promotions.cart-rules.qty-in-cart'),
                     ], [
                         'key'   => 'cart_item|base_total_weight',
                         'type'  => 'decimal',
-                        'label' => trans('admin::app.promotions.cart-rules.total-weight')
+                        'label' => trans('admin::app.promotions.cart-rules.total-weight'),
                     ], [
                         'key'   => 'cart_item|base_total',
                         'type'  => 'price',
-                        'label' => trans('admin::app.promotions.cart-rules.subtotal')
+                        'label' => trans('admin::app.promotions.cart-rules.subtotal'),
                     ]
                 ]
             ], [
@@ -288,22 +288,22 @@ class CartRuleRepository extends Repository
                         'key'     => 'product|category_ids',
                         'type'    => 'multiselect',
                         'label'   => trans('admin::app.promotions.cart-rules.categories'),
-                        'options' => $categories = $this->categoryRepository->getCategoryTree()
+                        'options' => $categories = $this->categoryRepository->getCategoryTree(),
                     ], [
                         'key'     => 'product|children::category_ids',
                         'type'    => 'multiselect',
                         'label'   => trans('admin::app.promotions.cart-rules.children-categories'),
-                        'options' => $categories
+                        'options' => $categories,
                     ], [
                         'key'     => 'product|parent::category_ids',
                         'type'    => 'multiselect',
                         'label'   => trans('admin::app.promotions.cart-rules.parent-categories'),
-                        'options' => $categories
+                        'options' => $categories,
                     ], [
                         'key'     => 'product|attribute_family_id',
                         'type'    => 'select',
                         'label'   => trans('admin::app.promotions.cart-rules.attribute_family'),
-                        'options' => $this->getAttributeFamilies()
+                        'options' => $this->getAttributeFamilies(),
                     ]
                 ]
             ]
@@ -330,21 +330,21 @@ class CartRuleRepository extends Repository
                 'key'     => 'product|' . $attribute->code,
                 'type'    => $attribute->type,
                 'label'   => $attribute->name,
-                'options' => $options
+                'options' => $options,
             ];
 
             $attributes[2]['children'][] = [
                 'key'     => 'product|children::' . $attribute->code,
                 'type'    => $attribute->type,
                 'label'   => trans('admin::app.promotions.cart-rules.attribute-name-children-only', ['attribute_name' => $attribute->name]),
-                'options' => $options
+                'options' => $options,
             ];
 
             $attributes[2]['children'][] = [
                 'key'     => 'product|parent::' . $attribute->code,
                 'type'    => $attribute->type,
                 'label'   => trans('admin::app.promotions.cart-rules.attribute-name-parent-only', ['attribute_name' => $attribute->name]),
-                'options' => $options
+                'options' => $options,
             ];
         }
 
@@ -365,7 +365,7 @@ class CartRuleRepository extends Repository
 
             $methods[] = [
                 'id'         => $object->getCode(),
-                'admin_name' => $object->getTitle()
+                'admin_name' => $object->getTitle(),
             ];
         }
 
@@ -386,7 +386,7 @@ class CartRuleRepository extends Repository
 
             $methods[] = [
                 'id'         => $object->getCode(),
-                'admin_name' => $object->getTitle()
+                'admin_name' => $object->getTitle(),
             ];
         }
 
@@ -472,7 +472,7 @@ class CartRuleRepository extends Repository
             $collection[] = [
                 'id'         => $country->code,
                 'admin_name' => $country->name,
-                'states'     => $countryStates
+                'states'     => $countryStates,
             ];
         }
 

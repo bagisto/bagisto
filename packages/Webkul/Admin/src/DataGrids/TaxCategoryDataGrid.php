@@ -32,7 +32,7 @@ class TaxCategoryDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -41,7 +41,7 @@ class TaxCategoryDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -50,7 +50,7 @@ class TaxCategoryDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
     }
 
@@ -59,14 +59,14 @@ class TaxCategoryDataGrid extends DataGrid
             'title'  => 'Edit Tax Category',
             'method' => 'GET',
             'route'  => 'admin.tax-categories.edit',
-            'icon'   => 'icon pencil-lg-icon'
+            'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
             'title'  => 'Delete Tax Category',
             'method' => 'POST',
             'route'  => 'admin.tax-categories.delete',
-            'icon'   => 'icon trash-icon'
+            'icon'   => 'icon trash-icon',
         ]);
     }
 }

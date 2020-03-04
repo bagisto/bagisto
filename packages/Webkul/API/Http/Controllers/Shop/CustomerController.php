@@ -65,7 +65,7 @@ class CustomerController extends Controller
             'first_name' => 'required',
             'last_name'  => 'required',
             'email'      => 'email|required|unique:customers,email',
-            'password'   => 'confirmed|min:6|required'
+            'password'   => 'confirmed|min:6|required',
         ]);
 
         $data = request()->input();
@@ -73,7 +73,7 @@ class CustomerController extends Controller
         $data = array_merge($data, [
                 'password'    => bcrypt($data['password']),
                 'channel_id'  => core()->getCurrentChannel()->id,
-                'is_verified' => 1
+                'is_verified' => 1,
             ]);
 
         $data['customer_group_id'] = $this->customerGroupRepository->findOneWhere(['code' => 'general'])->id;
@@ -85,7 +85,7 @@ class CustomerController extends Controller
         Event::dispatch('customer.registration.after', $customer);
 
         return response()->json([
-            'message' => 'Your account has been created successfully.'
+            'message' => 'Your account has been created successfully.',
         ]);
     }
 }

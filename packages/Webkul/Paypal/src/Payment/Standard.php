@@ -61,7 +61,7 @@ class Standard extends Paypal
             'amount'          => $cart->sub_total,
             'tax'             => $cart->tax_total,
             'shipping'        => $cart->selected_shipping_rate ? $cart->selected_shipping_rate->price : 0,
-            'discount_amount' => $cart->discount_amount
+            'discount_amount' => $cart->discount_amount,
         ];
 
         if ($this->getIsLineItemsEnabled()) {

@@ -40,7 +40,7 @@ class CustomerReviewDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -49,7 +49,7 @@ class CustomerReviewDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -58,7 +58,7 @@ class CustomerReviewDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -67,7 +67,7 @@ class CustomerReviewDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => false
+            'filterable' => false,
         ]);
 
         $this->addColumn([
@@ -96,14 +96,14 @@ class CustomerReviewDataGrid extends DataGrid
             'title'  => 'Edit Customer Review',
             'method' => 'GET',
             'route'  => 'admin.customer.review.edit',
-            'icon'   => 'icon pencil-lg-icon'
+            'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
             'title'  => 'Delete Customer Review',
             'method' => 'POST',
             'route'  => 'admin.customer.review.delete',
-            'icon'   => 'icon trash-icon'
+            'icon'   => 'icon trash-icon',
         ]);
     }
 
@@ -112,7 +112,7 @@ class CustomerReviewDataGrid extends DataGrid
             'type'  => 'delete',
             'label'  => trans('admin::app.datagrid.delete'),
             'action' => route('admin.customer.review.massdelete'),
-            'method' => 'DELETE'
+            'method' => 'DELETE',
         ]);
 
         $this->addMassAction([
@@ -123,8 +123,8 @@ class CustomerReviewDataGrid extends DataGrid
             'options' => [
                 'Pending'    => 0,
                 'Approve'    => 1,
-                'Disapprove' => 2
-            ]
+                'Disapprove' => 2,
+            ],
         ]);
     }
 }

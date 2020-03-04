@@ -107,7 +107,7 @@ class InvoiceRepository extends Repository
                 'base_currency_code'    => $order->base_currency_code,
                 'channel_currency_code' => $order->channel_currency_code,
                 'order_currency_code'   => $order->order_currency_code,
-                'order_address_id'      => $order->billing_address->id
+                'order_address_id'      => $order->billing_address->id,
             ]);
 
             foreach ($data['invoice']['items'] as $itemId => $qty) {
@@ -137,7 +137,7 @@ class InvoiceRepository extends Repository
                     'base_discount_amount' => ( ($orderItem->base_discount_amount / $orderItem->qty_ordered) * $qty ),
                     'product_id'           => $orderItem->product_id,
                     'product_type'         => $orderItem->product_type,
-                    'additional'           => $orderItem->additional
+                    'additional'           => $orderItem->additional,
                 ]);
 
                 if ($orderItem->getTypeInstance()->isComposite()) {
@@ -163,7 +163,7 @@ class InvoiceRepository extends Repository
                             'base_discount_amount' => 0,
                             'product_id'           => $childOrderItem->product_id,
                             'product_type'         => $childOrderItem->product_type,
-                            'additional'           => $childOrderItem->additional
+                            'additional'           => $childOrderItem->additional,
                         ]);
 
                         if ($childOrderItem->product
@@ -174,7 +174,7 @@ class InvoiceRepository extends Repository
                                 'invoice'   => $invoice,
                                 'product'   => $childOrderItem->product,
                                 'qty'       => $finalQty,
-                                'vendor_id' => isset($data['vendor_id']) ? $data['vendor_id'] : 0
+                                'vendor_id' => isset($data['vendor_id']) ? $data['vendor_id'] : 0,
                             ]);
                         }
 
@@ -188,7 +188,7 @@ class InvoiceRepository extends Repository
                         'invoice'   => $invoice,
                         'product'   => $orderItem->product,
                         'qty'       => $qty,
-                        'vendor_id' => isset($data['vendor_id']) ? $data['vendor_id'] : 0
+                        'vendor_id' => isset($data['vendor_id']) ? $data['vendor_id'] : 0,
                     ]);
                 }
 

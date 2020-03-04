@@ -69,7 +69,7 @@ class CartController extends Controller
             }
 
             $response = [
-                'status' => true,
+                'status'    => true,
                 'mini_cart' => [
                     'cart_items' => $cartItems,
                     'cart_details' => $cartDetails,
@@ -99,7 +99,7 @@ class CartController extends Controller
 
             if (is_array($cart) && isset($cart['warning'])) {
                 $response = [
-                    'status' => 'warning',
+                    'status'  => 'warning',
                     'message' => $cart['warning'],
                 ];
             }

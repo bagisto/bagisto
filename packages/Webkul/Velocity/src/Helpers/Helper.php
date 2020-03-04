@@ -254,8 +254,8 @@ class Helper extends Review
             'addToCartHtml'     => view('shop::products.add-to-cart', [
                 'product'           => $product,
                 'showCompare'       => true,
-                'addWishlistClass'  => !(isset($list) && $list) ? '' : '',
-                'addToCartBtnClass' => !(isset($list) && $list) ? 'small-padding' : '',
+                'addWishlistClass'  => ! (isset($list) && $list) ? '' : '',
+                'addToCartBtnClass' => ! (isset($list) && $list) ? 'small-padding' : '',
             ])->render(),
         ];
     }

@@ -20,15 +20,15 @@ class OrderShipmentsDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('shipments')
-                ->leftJoin('order_address as order_address_shipping', function($leftJoin) {
-                    $leftJoin->on('order_address_shipping.order_id', '=', 'shipments.order_id')
-                             ->where('order_address_shipping.address_type', 'shipping');
-                })
-                ->leftJoin('orders as ors', 'shipments.order_id', '=', 'ors.id')
-                ->leftJoin('inventory_sources as is', 'shipments.inventory_source_id', '=', 'is.id')
-                ->select('shipments.id as shipment_id', 'ors.increment_id as shipment_order_id', 'shipments.total_qty as shipment_total_qty', 'ors.created_at as order_date', 'shipments.created_at as shipment_created_at')
-                ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name) as shipped_to'))
-                ->selectRaw('IF(' . DB::getTablePrefix() . 'shipments.inventory_source_id IS NOT NULL,' . DB::getTablePrefix() . 'is.name, ' . DB::getTablePrefix() . 'shipments.inventory_source_name) as inventory_source_name');
+            ->leftJoin('order_address as order_address_shipping', function($leftJoin) {
+                $leftJoin->on('order_address_shipping.order_id', '=', 'shipments.order_id')
+                            ->where('order_address_shipping.address_type', 'shipping');
+            })
+            ->leftJoin('orders as ors', 'shipments.order_id', '=', 'ors.id')
+            ->leftJoin('inventory_sources as is', 'shipments.inventory_source_id', '=', 'is.id')
+            ->select('shipments.id as shipment_id', 'ors.increment_id as shipment_order_id', 'shipments.total_qty as shipment_total_qty', 'ors.created_at as order_date', 'shipments.created_at as shipment_created_at')
+            ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name) as shipped_to'))
+            ->selectRaw('IF(' . DB::getTablePrefix() . 'shipments.inventory_source_id IS NOT NULL,' . DB::getTablePrefix() . 'is.name, ' . DB::getTablePrefix() . 'shipments.inventory_source_name) as inventory_source_name');
 
         $this->addFilter('shipment_id', 'shipments.id');
         $this->addFilter('shipment_order_id', 'ors.increment_id');
@@ -49,7 +49,7 @@ class OrderShipmentsDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -58,7 +58,7 @@ class OrderShipmentsDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -67,7 +67,7 @@ class OrderShipmentsDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -76,7 +76,7 @@ class OrderShipmentsDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -85,7 +85,7 @@ class OrderShipmentsDataGrid extends DataGrid
             'type'       => 'datetime',
             'sortable'   => true,
             'searchable' => false,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -94,7 +94,7 @@ class OrderShipmentsDataGrid extends DataGrid
             'type'       => 'datetime',
             'sortable'   => true,
             'searchable' => false,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -103,7 +103,7 @@ class OrderShipmentsDataGrid extends DataGrid
             'type'       => 'string',
             'sortable'   => true,
             'searchable' => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
     }
 
@@ -112,7 +112,7 @@ class OrderShipmentsDataGrid extends DataGrid
             'title'  => 'Order Shipment View',
             'method' => 'GET',
             'route'  => 'admin.sales.shipments.view',
-            'icon'   => 'icon eye-icon'
+            'icon'   => 'icon eye-icon',
         ]);
     }
 }

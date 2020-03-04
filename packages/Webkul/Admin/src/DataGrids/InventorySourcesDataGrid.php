@@ -32,7 +32,7 @@ class InventorySourcesDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -41,7 +41,7 @@ class InventorySourcesDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -50,7 +50,7 @@ class InventorySourcesDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -59,7 +59,7 @@ class InventorySourcesDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -75,7 +75,7 @@ class InventorySourcesDataGrid extends DataGrid
                 } else {
                     return 'Inactive';
                 }
-            }
+            },
         ]);
     }
 
@@ -84,7 +84,7 @@ class InventorySourcesDataGrid extends DataGrid
             'title'  => 'Edit Inventory Source',
             'method' => 'GET',
             'route'  => 'admin.inventory_sources.edit',
-            'icon'   => 'icon pencil-lg-icon'
+            'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
@@ -92,7 +92,7 @@ class InventorySourcesDataGrid extends DataGrid
             'method'       => 'POST',
             'route'        => 'admin.inventory_sources.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'Exchange Rate']),
-            'icon'         => 'icon trash-icon'
+            'icon'         => 'icon trash-icon',
         ]);
     }
 }

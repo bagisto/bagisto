@@ -51,7 +51,7 @@ class ForgetPasswordController extends Controller
     {
         try {
             $this->validate(request(), [
-                'email' => 'required|email'
+                'email' => 'required|email',
             ]);
 
             $response = $this->broker()->sendResetLink(
@@ -66,9 +66,9 @@ class ForgetPasswordController extends Controller
 
             return back()
                 ->withInput(request(['email']))
-                ->withErrors(
-                    ['email' => trans($response)]
-                );
+                ->withErrors([
+                    'email' => trans($response),
+                ]);
         } catch(\Exception $e) {
             session()->flash('error', trans($e->getMessage()));
 

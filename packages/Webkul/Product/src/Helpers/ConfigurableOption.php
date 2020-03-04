@@ -83,11 +83,11 @@ class ConfigurableOption extends AbstractProduct
             'index'          => isset($options['index']) ? $options['index'] : [],
             'regular_price'  => [
                 'formated_price' => core()->currency($product->getTypeInstance()->getMinimalPrice()),
-                'price'          => $product->getTypeInstance()->getMinimalPrice()
+                'price'          => $product->getTypeInstance()->getMinimalPrice(),
             ],
             'variant_prices' => $this->getVariantPrices($product),
             'variant_images' => $this->getVariantImages($product),
-            'chooseText'     => trans('shop::app.products.choose-option')
+            'chooseText'     => trans('shop::app.products.choose-option'),
         ];
 
         return $config;
@@ -169,7 +169,7 @@ class ConfigurableOption extends AbstractProduct
                     'code'        => $attribute->code,
                     'label'       => $attribute->name ? $attribute->name : $attribute->admin_name,
                     'swatch_type' => $attribute->swatch_type,
-                    'options'     => $attributeOptionsData
+                    'options'     => $attributeOptionsData,
                 ];
             }
         }
@@ -195,7 +195,7 @@ class ConfigurableOption extends AbstractProduct
                     'id'           => $optionId,
                     'label'        => $attributeOption->label ? $attributeOption->label : $attributeOption->admin_name,
                     'swatch_value' => $attribute->swatch_type == 'image' ? $attributeOption->swatch_value_url : $attributeOption->swatch_value,
-                    'products'     => $options[$attribute->id][$optionId]
+                    'products'     => $options[$attribute->id][$optionId],
                 ];
             }
         }

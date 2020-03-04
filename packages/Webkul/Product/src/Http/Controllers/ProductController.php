@@ -159,7 +159,7 @@ class ProductController extends Controller
         $this->validate(request(), [
             'type'                => 'required',
             'attribute_family_id' => 'required',
-            'sku'                 => ['required', 'unique:products,sku', new \Webkul\Core\Contracts\Validations\Slug]
+            'sku'                 => ['required', 'unique:products,sku', new \Webkul\Core\Contracts\Validations\Slug],
         ]);
 
         $product = $this->productRepository->create(request()->all());
@@ -298,7 +298,7 @@ class ProductController extends Controller
             $this->productRepository->update([
                 'channel' => null,
                 'locale'  => null,
-                'status'  => $data['update-options']
+                'status'  => $data['update-options'],
             ], $productId);
         }
 
@@ -351,7 +351,7 @@ class ProductController extends Controller
     {
         $productAttribute = $this->productAttributeValue->findOneWhere([
             'product_id'   => $productId,
-            'attribute_id' => $attributeId
+            'attribute_id' => $attributeId,
         ]);
 
         return Storage::download($productAttribute['text_value']);

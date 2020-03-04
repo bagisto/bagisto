@@ -81,7 +81,7 @@ class ProductController extends Controller
     {
         $productAttribute = $this->productAttributeValueRepository->findOneWhere([
             'product_id'   => $productId,
-            'attribute_id' => $attributeId
+            'attribute_id' => $attributeId,
         ]);
 
         return Storage::download($productAttribute['text_value']);

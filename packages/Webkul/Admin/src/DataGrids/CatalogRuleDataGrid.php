@@ -33,7 +33,7 @@ class CatalogRuleDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -42,7 +42,7 @@ class CatalogRuleDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -51,7 +51,7 @@ class CatalogRuleDataGrid extends DataGrid
             'type'       => 'datetime',
             'sortable'   => true,
             'searchable' => false,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -60,7 +60,7 @@ class CatalogRuleDataGrid extends DataGrid
             'type'       => 'datetime',
             'sortable'   => true,
             'searchable' => false,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -76,7 +76,7 @@ class CatalogRuleDataGrid extends DataGrid
                 } else {
                     return trans('admin::app.datagrid.inactive');
                 }
-            }
+            },
         ]);
 
         $this->addColumn([
@@ -85,7 +85,7 @@ class CatalogRuleDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
     }
 
@@ -95,14 +95,14 @@ class CatalogRuleDataGrid extends DataGrid
             'title'  => 'Edit Catalog Rule',
             'method' => 'GET',
             'route'  => 'admin.catalog-rules.edit',
-            'icon'   => 'icon pencil-lg-icon'
+            'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
             'title'  => 'Delete Catalog Rule',
             'method' => 'POST',
             'route'  => 'admin.catalog-rules.delete',
-            'icon'   => 'icon trash-icon'
+            'icon'   => 'icon trash-icon',
         ]);
     }
 }

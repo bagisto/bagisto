@@ -206,16 +206,16 @@ abstract class AbstractType
                 'product_id'   => $product->id,
                 'attribute_id' => $attribute->id,
                 'channel'      => $attribute->value_per_channel ? $data['channel'] : null,
-                'locale'       => $attribute->value_per_locale ? $data['locale'] : null
+                'locale'       => $attribute->value_per_locale ? $data['locale'] : null,
             ]);
 
             if (! $attributeValue) {
                 $this->attributeValueRepository->create([
-                    'product_id' => $product->id,
+                    'product_id'   => $product->id,
                     'attribute_id' => $attribute->id,
-                    'value' => $data[$attribute->code],
-                    'channel' => $attribute->value_per_channel ? $data['channel'] : null,
-                    'locale' => $attribute->value_per_locale ? $data['locale'] : null
+                    'value'        => $data[$attribute->code],
+                    'channel'      => $attribute->value_per_channel ? $data['channel'] : null,
+                    'locale'       => $attribute->value_per_locale ? $data['locale'] : null,
                 ]);
             } else {
                 $this->attributeValueRepository->update([
@@ -534,11 +534,11 @@ abstract class AbstractType
         return [
             'regular_price' => [
                 'price'          => core()->convertPrice($this->product->price),
-                'formated_price' => core()->currency($this->product->price)
+                'formated_price' => core()->currency($this->product->price),
             ],
             'final_price'   => [
                 'price'          => core()->convertPrice($this->getMinimalPrice()),
-                'formated_price' => core()->currency($this->getMinimalPrice())
+                'formated_price' => core()->currency($this->getMinimalPrice()),
             ]
         ];
     }
@@ -593,7 +593,7 @@ abstract class AbstractType
                 'total_weight'      => ($this->product->weight ?? 0) * $data['quantity'],
                 'base_total_weight' => ($this->product->weight ?? 0) * $data['quantity'],
                 'type'              => $this->product->type,
-                'additional'        => $this->getAdditionalOptions($data)
+                'additional'        => $this->getAdditionalOptions($data),
             ]
         ];
 

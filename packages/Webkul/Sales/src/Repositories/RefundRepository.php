@@ -109,7 +109,7 @@ class RefundRepository extends Repository
                 'adjustment_fee'         => core()->convertPrice($data['refund']['adjustment_fee'], $order->order_currency_code),
                 'base_adjustment_fee'    => $data['refund']['adjustment_fee'],
                 'shipping_amount'        => core()->convertPrice($data['refund']['shipping'], $order->order_currency_code),
-                'base_shipping_amount'   => $data['refund']['shipping']
+                'base_shipping_amount'   => $data['refund']['shipping'],
             ]);
 
             foreach ($data['refund']['items'] as $itemId => $qty) {
@@ -139,7 +139,7 @@ class RefundRepository extends Repository
                     'base_discount_amount' => ( ($orderItem->base_discount_amount / $orderItem->qty_ordered) * $qty ),
                     'product_id'           => $orderItem->product_id,
                     'product_type'         => $orderItem->product_type,
-                    'additional'           => $orderItem->additional
+                    'additional'           => $orderItem->additional,
                 ]);
 
                 if ($orderItem->getTypeInstance()->isComposite()) {
@@ -165,7 +165,7 @@ class RefundRepository extends Repository
                             'base_discount_amount' => 0,
                             'product_id'           => $childOrderItem->product_id,
                             'product_type'         => $childOrderItem->product_type,
-                            'additional'           => $childOrderItem->additional
+                            'additional'           => $childOrderItem->additional,
                         ]);
 
                         if ($childOrderItem->getTypeInstance()->isStockable() || $childOrderItem->getTypeInstance()->showQuantityBox()) {
@@ -245,11 +245,11 @@ class RefundRepository extends Repository
         $order = $this->orderRepository->find($orderId);
 
         $summary = [
-            'subtotal'        => ['price' => 0],
-            'discount'        => ['price' => 0],
-            'tax'             => ['price' => 0],
-            'shipping'        => ['price' => 0],
-            'grand_total'     => ['price' => 0]
+            'subtotal'    => ['price' => 0],
+            'discount'    => ['price' => 0],
+            'tax'         => ['price' => 0],
+            'shipping'    => ['price' => 0],
+            'grand_total' => ['price' => 0],
         ];
 
         foreach ($data as $orderItemId => $qty) {

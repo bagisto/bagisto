@@ -30,7 +30,7 @@ class ConfigurationForm extends FormRequest
             && ! request()->input('general.design.admin_logo.logo_image.delete')
         ) {
             $this->rules = [
-                'general.design.admin_logo.logo_image'  => 'required|mimes:jpeg,bmp,png,jpg'
+                'general.design.admin_logo.logo_image'  => 'required|mimes:jpeg,bmp,png,jpg',
             ];
         }
 
@@ -45,7 +45,7 @@ class ConfigurationForm extends FormRequest
     public function messages()
     {
         return [
-            'general.design.admin_logo.logo_image.mimes' => 'Invalid file format. Use only jpeg, bmp, png, jpg.'
+            'general.design.admin_logo.logo_image.mimes' => 'Invalid file format. Use only jpeg, bmp, png, jpg.',
         ];
     }
 }

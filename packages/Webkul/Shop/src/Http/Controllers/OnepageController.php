@@ -89,7 +89,7 @@ class OnepageController extends Controller
         $cart = Cart::getCart();
 
         return response()->json([
-            'html' => view('shop::checkout.total.summary', compact('cart'))->render()
+            'html' => view('shop::checkout.total.summary', compact('cart'))->render(),
         ]);
     }
 
@@ -166,7 +166,7 @@ class OnepageController extends Controller
 
         return response()->json([
             'jump_to_section' => 'review',
-            'html'            => view('shop::checkout.onepage.review', compact('cart'))->render()
+            'html'            => view('shop::checkout.onepage.review', compact('cart'))->render(),
         ]);
     }
 
@@ -190,7 +190,7 @@ class OnepageController extends Controller
         if ($redirectUrl = Payment::getRedirectUrl($cart)) {
             return response()->json([
                 'success'      => true,
-                'redirect_url' => $redirectUrl
+                'redirect_url' => $redirectUrl,
             ]);
         }
 
@@ -253,7 +253,7 @@ class OnepageController extends Controller
     public function checkExistCustomer()
     {
        $customer = $this->customerRepository->findOneWhere([
-            'email' => request()->email
+            'email' => request()->email,
        ]);
 
        if (! is_null($customer)) {
@@ -291,7 +291,7 @@ class OnepageController extends Controller
     public function applyCoupon()
     {
         $this->validate(request(), [
-            'code' => 'string|required'
+            'code' => 'string|required',
         ]);
 
         $code = request()->input('code');
@@ -304,13 +304,13 @@ class OnepageController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => trans('shop::app.checkout.total.coupon-applied'),
-                'result'  => $result
+                'result'  => $result,
             ], 200);
         } else {
             return response()->json([
                 'success' => false,
                 'message' => trans('shop::app.checkout.total.cannot-apply-coupon'),
-                'result'  => null
+                'result'  => null,
             ], 422);
         }
 
@@ -333,14 +333,14 @@ class OnepageController extends Controller
                 'success' => true,
                 'message' => trans('admin::app.promotion.status.coupon-removed'),
                 'data'    => [
-                    'grand_total' => core()->currency(Cart::getCart()->grand_total)
-                ]
+                    'grand_total' => core()->currency(Cart::getCart()->grand_total),
+                ],
             ], 200);
         } else {
             return response()->json([
                 'success' => false,
                 'message' => trans('admin::app.promotion.status.coupon-remove-failed'),
-                'data'    => null
+                'data'    => null,
             ], 422);
         }
     }

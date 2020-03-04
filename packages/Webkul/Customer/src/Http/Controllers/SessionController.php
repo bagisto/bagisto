@@ -55,7 +55,7 @@ class SessionController extends Controller
     {
         $this->validate(request(), [
             'email'    => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
         ]);
 
         if (! auth()->guard('customer')->attempt(request(['email', 'password']))) {

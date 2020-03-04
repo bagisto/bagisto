@@ -84,13 +84,13 @@ class WishlistController extends Controller
         $data = [
             'channel_id'  => core()->getCurrentChannel()->id,
             'product_id'  => $itemId,
-            'customer_id' => auth()->guard('customer')->user()->id
+            'customer_id' => auth()->guard('customer')->user()->id,
         ];
 
         $checked = $this->wishlistRepository->findWhere([
             'channel_id'  => core()->getCurrentChannel()->id,
             'product_id'  => $itemId,
-            'customer_id' => auth()->guard('customer')->user()->id
+            'customer_id' => auth()->guard('customer')->user()->id,
         ]);
 
         //accidental case if some one adds id of the product in the anchor tag amd gives id of a variant.
@@ -153,7 +153,7 @@ class WishlistController extends Controller
     {
         $wishlistItem = $this->wishlistRepository->findOneWhere([
                 'id'          => $itemId,
-                'customer_id' => auth()->guard('customer')->user()->id
+                'customer_id' => auth()->guard('customer')->user()->id,
             ]);
 
         if (! $wishlistItem) {

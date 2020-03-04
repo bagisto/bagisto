@@ -42,7 +42,7 @@ class Booking extends Virtual
         'admin::catalog.products.accordians.categories',
         'admin::catalog.products.accordians.channels',
         'bookingproduct::admin.catalog.products.accordians.booking',
-        'admin::catalog.products.accordians.product-links'
+        'admin::catalog.products.accordians.product-links',
     ];
 
     /**
@@ -100,7 +100,7 @@ class Booking extends Virtual
                 $this->bookingProductRepository->update(request('booking'), $bookingProduct->id);
             } else {
                 $this->bookingProductRepository->create(array_merge(request('booking'), [
-                    'product_id' => $id
+                    'product_id' => $id,
                 ]));
             }
         }

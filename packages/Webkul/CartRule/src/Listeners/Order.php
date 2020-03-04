@@ -99,7 +99,7 @@ class Order
 
             $ruleCustomer = $this->cartRuleCustomerRepository->findOneWhere([
                 'customer_id'  => $order->customer_id,
-                'cart_rule_id' => $ruleId
+                'cart_rule_id' => $ruleId,
             ]);
 
             if ($ruleCustomer) {
@@ -108,7 +108,7 @@ class Order
                 $this->cartRuleCustomerRepository->create([
                     'customer_id'  => $order->customer_id,
                     'cart_rule_id' => $ruleId,
-                    'times_used'   => 1
+                    'times_used'   => 1,
                 ]);
             }
         }
@@ -125,7 +125,7 @@ class Order
             if ($order->customer_id) {
                 $couponUsage = $this->cartRuleCouponUsageRepository->findOneWhere([
                     'customer_id'         => $order->customer_id,
-                    'cart_rule_coupon_id' => $coupon->id
+                    'cart_rule_coupon_id' => $coupon->id,
                 ]);
 
                 if ($couponUsage) {
@@ -134,7 +134,7 @@ class Order
                     $this->cartRuleCouponUsageRepository->create([
                         'customer_id'         => $order->customer_id,
                         'cart_rule_coupon_id' => $coupon->id,
-                        'times_used'          => 1
+                        'times_used'          => 1,
                     ]);
                 }
             }

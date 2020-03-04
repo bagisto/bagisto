@@ -70,7 +70,7 @@ class OrderController extends Controller
     {
         $order = $this->orderRepository->findOneWhere([
             'customer_id' => auth()->guard('customer')->user()->id,
-            'id'          => $id
+            'id'          => $id,
         ]);
 
         if (! $order) {

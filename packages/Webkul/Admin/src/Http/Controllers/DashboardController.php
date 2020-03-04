@@ -136,22 +136,22 @@ class DashboardController extends Controller
             'total_customers'          => [
                 'previous' => $previous = $this->getCustomersBetweenDates($this->lastStartDate, $this->lastEndDate)->count(),
                 'current'  => $current = $this->getCustomersBetweenDates($this->startDate, $this->endDate)->count(),
-                'progress' => $this->getPercentageChange($previous, $current)
+                'progress' => $this->getPercentageChange($previous, $current),
             ],
             'total_orders'             =>  [
                 'previous' => $previous = $this->previousOrders()->count(),
                 'current'  => $current = $this->currentOrders()->count(),
-                'progress' => $this->getPercentageChange($previous, $current)
+                'progress' => $this->getPercentageChange($previous, $current),
             ],
             'total_sales'              =>  [
                 'previous' => $previous = $this->previousOrders()->sum('base_grand_total_invoiced') - $this->previousOrders()->sum('base_grand_total_refunded'),
                 'current'  => $current = $this->currentOrders()->sum('base_grand_total_invoiced') - $this->currentOrders()->sum('base_grand_total_refunded'),
-                'progress' => $this->getPercentageChange($previous, $current)
+                'progress' => $this->getPercentageChange($previous, $current),
             ],
             'avg_sales'                =>  [
                 'previous' => $previous = $this->previousOrders()->avg('base_grand_total_invoiced') - $this->previousOrders()->avg('base_grand_total_refunded'),
                 'current'  => $current = $this->currentOrders()->avg('base_grand_total_invoiced') - $this->currentOrders()->avg('base_grand_total_refunded'),
-                'progress' => $this->getPercentageChange($previous, $current)
+                'progress' => $this->getPercentageChange($previous, $current),
             ],
             'top_selling_categories'   => $this->getTopSellingCategories(),
             'top_selling_products'     => $this->getTopSellingProducts(),

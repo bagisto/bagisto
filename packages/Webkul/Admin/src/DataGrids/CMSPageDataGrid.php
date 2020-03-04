@@ -39,7 +39,7 @@ class CMSPageDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -48,7 +48,7 @@ class CMSPageDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -57,7 +57,7 @@ class CMSPageDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
     }
 
@@ -66,14 +66,14 @@ class CMSPageDataGrid extends DataGrid
             'title'  => 'Edit CMSPage',
             'method' => 'GET',
             'route'  => 'admin.cms.edit',
-            'icon'   => 'icon pencil-lg-icon'
+            'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
             'title'  => 'Delete CMSPage',
             'method' => 'POST',
             'route'  => 'admin.cms.delete',
-            'icon'   => 'icon trash-icon'
+            'icon'   => 'icon trash-icon',
         ]);
     }
 
@@ -83,7 +83,7 @@ class CMSPageDataGrid extends DataGrid
             'type'   => 'delete',
             'label'  => trans('admin::app.datagrid.delete'),
             'action' => route('admin.cms.mass-delete'),
-            'method' => 'DELETE'
+            'method' => 'DELETE',
         ]);
     }
 }

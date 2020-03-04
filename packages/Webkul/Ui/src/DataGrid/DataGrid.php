@@ -109,7 +109,7 @@ abstract class DataGrid
         'and'      => "&",
         'bor'      => "|",
         'regex'    => "regexp",
-        'notregex' => "not regexp"
+        'notregex' => "not regexp",
     ];
 
     protected $bindings = [
@@ -119,7 +119,7 @@ abstract class DataGrid
         3 => "where",
         4 => "having",
         5 => "order",
-        6 => "union"
+        6 => "union",
     ];
 
     protected $selectcomponents = [
@@ -133,7 +133,7 @@ abstract class DataGrid
         7  => "orders",
         8  => "limit",
         9  => "offset",
-        10 => "lock"
+        10 => "lock",
     ];
 
     abstract public function prepareQueryBuilder();
@@ -445,7 +445,17 @@ abstract class DataGrid
 
         $this->prepareQueryBuilder();
 
-        return view('ui::datagrid.table')->with('results', ['records' => $this->getCollection(), 'columns' => $this->completeColumnDetails, 'actions' => $this->actions, 'massactions' => $this->massActions, 'index' => $this->index, 'enableMassActions' => $this->enableMassAction, 'enableActions' => $this->enableAction, 'paginated' => $this->paginate, 'norecords' => trans('ui::app.datagrid.no-records')]);
+        return view('ui::datagrid.table')->with('results', [
+            'records'           => $this->getCollection(),
+            'columns'           => $this->completeColumnDetails,
+            'actions'           => $this->actions,
+            'massactions'       => $this->massActions,
+            'index'             => $this->index,
+            'enableMassActions' => $this->enableMassAction,
+            'enableActions'     => $this->enableAction,
+            'paginated'         => $this->paginate,
+            'norecords'         => trans('ui::app.datagrid.no-records'),
+        ]);
     }
 
     public function export()

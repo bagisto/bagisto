@@ -19,7 +19,9 @@ class UserDataGrid extends DataGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('admins as u')->addSelect('u.id as user_id', 'u.name as user_name', 'u.status', 'u.email', 'ro.name as role_name')->leftJoin('roles as ro', 'u.role_id', '=', 'ro.id');
+        $queryBuilder = DB::table('admins as u')
+            ->leftJoin('roles as ro', 'u.role_id', '=', 'ro.id')
+            ->addSelect('u.id as user_id', 'u.name as user_name', 'u.status', 'u.email', 'ro.name as role_name');
 
         $this->addFilter('user_id', 'u.id');
         $this->addFilter('user_name', 'u.name');
@@ -36,7 +38,7 @@ class UserDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -45,7 +47,7 @@ class UserDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -61,7 +63,7 @@ class UserDataGrid extends DataGrid
                 } else {
                     return 'Inactive';
                 }
-            }
+            },
         ]);
 
         $this->addColumn([
@@ -70,7 +72,7 @@ class UserDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -79,7 +81,7 @@ class UserDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
     }
 
@@ -88,14 +90,14 @@ class UserDataGrid extends DataGrid
             'title'  => 'Edit User',
             'method' => 'GET',
             'route'  => 'admin.users.edit',
-            'icon'   => 'icon pencil-lg-icon'
+            'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
             'title'  => 'Delete User',
             'method' => 'POST',
             'route'  => 'admin.users.delete',
-            'icon'   => 'icon trash-icon'
+            'icon'   => 'icon trash-icon',
         ]);
     }
 }

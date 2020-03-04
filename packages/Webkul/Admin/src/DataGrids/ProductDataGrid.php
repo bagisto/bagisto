@@ -27,9 +27,13 @@ class ProductDataGrid extends DataGrid
     {
         parent::__construct();
 
-        $this->locale = request()->get('locale') ?? 'all';
-
-        $this->channel = request()->get('channel') ?? 'all';
+        $this->locale = request()->get('locale') == 'all'
+                        ? app()->getLocale()
+                        : (request()->get('locale') ?? app()->getLocale());
+        
+        $this->channel = request()->get('channel') == 'all'
+                         ? core()->getDefaultChannelCode()
+                         : (request()->get('channel') ?? core()->getDefaultChannelCode());
     }
 
     public function prepareQueryBuilder()
@@ -47,17 +51,7 @@ class ProductDataGrid extends DataGrid
             'product_flat.price',
             'attribute_families.name as attribute_family',
             DB::raw('SUM(DISTINCT ' . DB::getTablePrefix() . 'product_inventories.qty) as quantity')
-        );
-
-        if ($this->locale !== 'all') {
-            $queryBuilder->where('locale', $this->locale);
-        } else {
-            $queryBuilder->whereNotNull('product_flat.name');
-        }
-
-        if ($this->channel !== 'all') {
-            $queryBuilder->where('channel', $this->channel);
-        }
+        )->where('locale', $this->locale)->where('locale', $this->locale);
 
         $queryBuilder->groupBy('product_flat.product_id');
 
@@ -79,7 +73,7 @@ class ProductDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -88,7 +82,7 @@ class ProductDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -97,7 +91,7 @@ class ProductDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -106,7 +100,7 @@ class ProductDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -115,7 +109,7 @@ class ProductDataGrid extends DataGrid
             'type'       => 'string',
             'sortable'   => true,
             'searchable' => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -131,7 +125,7 @@ class ProductDataGrid extends DataGrid
                 } else {
                     return 'Inactive';
                 }
-            }
+            },
         ]);
 
         $this->addColumn([
@@ -140,7 +134,7 @@ class ProductDataGrid extends DataGrid
             'type'       => 'price',
             'sortable'   => true,
             'searchable' => false,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -156,7 +150,7 @@ class ProductDataGrid extends DataGrid
                 } else {
                     return $value->quantity;
                 }
-            }
+            },
         ]);
     }
 
@@ -168,7 +162,7 @@ class ProductDataGrid extends DataGrid
             'icon'      => 'icon pencil-lg-icon',
             'condition' => function() {
                 return true;
-            }
+            },
         ]);
 
         $this->addAction([
@@ -176,7 +170,7 @@ class ProductDataGrid extends DataGrid
             'method'       => 'POST',
             'route'        => 'admin.catalog.products.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
-            'icon'         => 'icon trash-icon'
+            'icon'         => 'icon trash-icon',
         ]);
     }
 
@@ -185,7 +179,7 @@ class ProductDataGrid extends DataGrid
             'type'   => 'delete',
             'label'  => trans('admin::app.datagrid.delete'),
             'action' => route('admin.catalog.products.massdelete'),
-            'method' => 'DELETE'
+            'method' => 'DELETE',
         ]);
 
         $this->addMassAction([
@@ -194,9 +188,9 @@ class ProductDataGrid extends DataGrid
             'action'  => route('admin.catalog.products.massupdate'),
             'method'  => 'PUT',
             'options' => [
-                'Active' => 1,
-                'Inactive' => 0
-            ]
+                'Active'   => 1,
+                'Inactive' => 0,
+            ],
         ]);
     }
 }

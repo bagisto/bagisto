@@ -123,13 +123,13 @@ class ContentRepository extends Repository
         $query = $this->model::orderBy('position', 'ASC');
 
         $contentCollection = $query
-                ->select('velocity_contents.*', 'velocity_contents_translations.*')
-                ->where('velocity_contents.status', 1)
-                ->leftJoin('velocity_contents_translations', 'velocity_contents.id', 'velocity_contents_translations.content_id')
-                ->distinct('velocity_contents_translations.id')
-                ->where('velocity_contents_translations.locale', app()->getLocale())
-                ->limit(5)
-                ->get();
+            ->select('velocity_contents.*', 'velocity_contents_translations.*')
+            ->where('velocity_contents.status', 1)
+            ->leftJoin('velocity_contents_translations', 'velocity_contents.id', 'velocity_contents_translations.content_id')
+            ->distinct('velocity_contents_translations.id')
+            ->where('velocity_contents_translations.locale', app()->getLocale())
+            ->limit(5)
+            ->get();
 
         $formattedContent = [];
         

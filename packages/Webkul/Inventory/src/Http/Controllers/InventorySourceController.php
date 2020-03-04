@@ -77,7 +77,7 @@ class InventorySourceController extends Controller
             'country'        => 'required',
             'state'          => 'required',
             'city'           => 'required',
-            'postcode'       => 'required'
+            'postcode'       => 'required',
         ]);
 
         $data = request()->all();
@@ -126,7 +126,7 @@ class InventorySourceController extends Controller
             'country'        => 'required',
             'state'          => 'required',
             'city'           => 'required',
-            'postcode'       => 'required'
+            'postcode'       => 'required',
         ]);
 
         $data = request()->all();

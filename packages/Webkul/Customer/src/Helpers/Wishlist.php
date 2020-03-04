@@ -38,7 +38,7 @@ class Wishlist
             $wishlist = $this->wishlistRepository->findOneWhere([
                 'channel_id'  => core()->getCurrentChannel()->id,
                 'product_id'  => $product->product_id,
-                'customer_id' => auth()->guard('customer')->user()->id
+                'customer_id' => auth()->guard('customer')->user()->id,
             ]);
         }
 

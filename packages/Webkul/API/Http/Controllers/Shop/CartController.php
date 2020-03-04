@@ -84,7 +84,7 @@ class CartController extends Controller
         $cart = Cart::getCart();
 
         return response()->json([
-            'data' => $cart ? new CartResource($cart) : null
+            'data' => $cart ? new CartResource($cart) : null,
         ]);
     }
 
@@ -110,7 +110,7 @@ class CartController extends Controller
             $message = session()->get('warning') ?? session()->get('error');
 
             return response()->json([
-                'error' => session()->get('warning')
+                'error' => session()->get('warning'),
             ], 400);
         }
 
@@ -126,7 +126,7 @@ class CartController extends Controller
 
         return response()->json([
             'message' => __('shop::app.checkout.cart.item.success'),
-            'data'    => $cart ? new CartResource($cart) : null
+            'data'    => $cart ? new CartResource($cart) : null,
         ]);
     }
 
@@ -140,7 +140,7 @@ class CartController extends Controller
         foreach (request()->get('qty') as $qty) {
             if ($qty <= 0) {
                 return response()->json([
-                    'message' => trans('shop::app.checkout.cart.quantity.illegal')
+                    'message' => trans('shop::app.checkout.cart.quantity.illegal'),
                 ], 401);
             }
         }
@@ -161,7 +161,7 @@ class CartController extends Controller
 
         return response()->json([
             'message' => __('shop::app.checkout.cart.quantity.success'),
-            'data'    => $cart ? new CartResource($cart) : null
+            'data'    => $cart ? new CartResource($cart) : null,
         ]);
     }
 
@@ -182,7 +182,7 @@ class CartController extends Controller
 
         return response()->json([
             'message' => __('shop::app.checkout.cart.item.success-remove'),
-            'data'    => $cart ? new CartResource($cart) : null
+            'data'    => $cart ? new CartResource($cart) : null,
         ]);
     }
 
@@ -207,7 +207,7 @@ class CartController extends Controller
 
         return response()->json([
             'message' => __('shop::app.checkout.cart.item.success-remove'),
-            'data'    => $cart ? new CartResource($cart) : null
+            'data'    => $cart ? new CartResource($cart) : null,
         ]);
     }
 
@@ -231,7 +231,7 @@ class CartController extends Controller
 
         return response()->json([
             'message' => __('shop::app.checkout.cart.move-to-wishlist-success'),
-            'data'    => $cart ? new CartResource($cart) : null
+            'data'    => $cart ? new CartResource($cart) : null,
         ]);
     }
 }

@@ -148,12 +148,12 @@ class CatalogRuleRepository extends Repository
                         'key'     => 'product|category_ids',
                         'type'    => 'multiselect',
                         'label'   => trans('admin::app.promotions.catalog-rules.categories'),
-                        'options' => $this->categoryRepository->getCategoryTree()
+                        'options' => $this->categoryRepository->getCategoryTree(),
                     ], [
                         'key'     => 'product|attribute_family_id',
                         'type'    => 'select',
                         'label'   => trans('admin::app.promotions.catalog-rules.attribute_family'),
-                        'options' => $this->getAttributeFamilies()
+                        'options' => $this->getAttributeFamilies(),
                     ]
                 ]
             ]
@@ -178,7 +178,7 @@ class CatalogRuleRepository extends Repository
                 'key'     => 'product|' . $attribute->code,
                 'type'    => $attribute->type,
                 'label'   => $attribute->name,
-                'options' => $options
+                'options' => $options,
             ];
         }
 

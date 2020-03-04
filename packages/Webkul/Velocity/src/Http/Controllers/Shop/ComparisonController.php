@@ -129,27 +129,27 @@ class ComparisonController extends Controller
         $customerId = auth()->guard('customer')->user()->id;
 
         $compareProduct = $this->velocityCompareProductsRepository->findOneByField([
-            'customer_id' => $customerId,
+            'customer_id'     => $customerId,
             'product_flat_id' => $productId,
         ]);
 
         if (! $compareProduct) {
             // insert new row
             $this->velocityCompareProductsRepository->create([
-                'customer_id' => $customerId,
-                'product_flat_id'  => $productId,
+                'customer_id'     => $customerId,
+                'product_flat_id' => $productId,
             ]);
 
             return response()->json([
-                'status'    => 'success',
-                'message'   => trans('velocity::app.customer.compare.added'),
-                'label'     => trans('velocity::app.shop.general.alert.success'),
+                'status'  => 'success',
+                'message' => trans('velocity::app.customer.compare.added'),
+                'label'   => trans('velocity::app.shop.general.alert.success'),
             ], 201);
         } else {
             return response()->json([
-                'status'    => 'success',
-                'label'     => trans('velocity::app.shop.general.alert.success'),
-                'message'   => trans('velocity::app.customer.compare.already_added'),
+                'status'  => 'success',
+                'label'   => trans('velocity::app.shop.general.alert.success'),
+                'message' => trans('velocity::app.customer.compare.already_added'),
             ], 200);
         }
     }
@@ -172,7 +172,7 @@ class ComparisonController extends Controller
             // delete individual
             $this->velocityCompareProductsRepository->deleteWhere([
                 'product_flat_id' => request()->get('productId'),
-                'customer_id' => auth()->guard('customer')->user()->id,
+                'customer_id'     => auth()->guard('customer')->user()->id,
             ]);
         }
 

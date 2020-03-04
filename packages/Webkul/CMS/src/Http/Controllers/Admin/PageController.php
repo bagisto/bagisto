@@ -75,7 +75,7 @@ use Webkul\CMS\Repositories\CmsRepository;
             'url_key'      => ['required', 'unique:cms_page_translations,url_key', new \Webkul\Core\Contracts\Validations\Slug],
             'page_title'   => 'required',
             'channels'     => 'required',
-            'html_content' => 'required'
+            'html_content' => 'required',
         ]);
         
         $page = $this->cmsRepository->create(request()->all());
@@ -116,7 +116,7 @@ use Webkul\CMS\Repositories\CmsRepository;
             }],
             $locale . '.page_title'   => 'required',
             $locale . '.html_content' => 'required',
-            'channels'                => 'required'
+            'channels'                => 'required',
         ]);
 
         $this->cmsRepository->update(request()->all(), $id);
@@ -174,11 +174,11 @@ use Webkul\CMS\Repositories\CmsRepository;
 
             if (count($pageIDs) == $count) {
                 session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', [
-                    'resource' => 'CMS Pages'
+                    'resource' => 'CMS Pages',
                 ]));
             } else {
                 session()->flash('success', trans('admin::app.datagrid.mass-ops.partial-action', [
-                    'resource' => 'CMS Pages'
+                    'resource' => 'CMS Pages',
                 ]));
             }
         } else {

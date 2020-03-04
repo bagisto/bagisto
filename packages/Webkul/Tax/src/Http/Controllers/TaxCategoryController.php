@@ -79,7 +79,7 @@ class TaxCategoryController extends Controller
             'code'        => 'required|string|unique:tax_categories,code',
             'name'        => 'required|string',
             'description' => 'required|string',
-            'taxrates'    => 'array|required'
+            'taxrates'    => 'array|required',
         ]);
 
         Event::dispatch('tax.tax_category.create.before');
@@ -122,7 +122,7 @@ class TaxCategoryController extends Controller
             'code'        => 'required|string|unique:tax_categories,code,' . $id,
             'name'        => 'required|string',
             'description' => 'required|string',
-            'taxrates'    => 'array|required'
+            'taxrates'    => 'array|required',
         ]);
 
         $data = request()->input();

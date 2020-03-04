@@ -35,7 +35,7 @@ class SubscriptionEmail extends Mailable
                     ->view('shop::emails.customer.subscription-email')
                     ->with('data', [
                             'content' => 'You Are Subscribed',
-                            'token' => $this->subscriptionData['token']
+                            'token'   => $this->subscriptionData['token'],
                         ]
                     );
 

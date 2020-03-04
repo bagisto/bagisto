@@ -89,7 +89,7 @@ class CatalogRuleController extends Controller
             'starts_from'     => 'nullable|date',
             'ends_till'       => 'nullable|date|after_or_equal:starts_from',
             'action_type'     => 'required',
-            'discount_amount' => 'required|numeric'
+            'discount_amount' => 'required|numeric',
         ]);
 
         $data = request()->all();
@@ -136,7 +136,7 @@ class CatalogRuleController extends Controller
             'starts_from'     => 'nullable|date',
             'ends_till'       => 'nullable|date|after_or_equal:starts_from',
             'action_type'     => 'required',
-            'discount_amount' => 'required|numeric'
+            'discount_amount' => 'required|numeric',
         ]);
 
         $catalogRule = $this->catalogRuleRepository->findOrFail($id);

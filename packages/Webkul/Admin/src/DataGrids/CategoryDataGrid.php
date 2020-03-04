@@ -43,7 +43,7 @@ class CategoryDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -52,7 +52,7 @@ class CategoryDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -61,7 +61,7 @@ class CategoryDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -77,7 +77,7 @@ class CategoryDataGrid extends DataGrid
                 } else {
                     return 'Inactive';
                 }
-            }
+            },
         ]);
 
         $this->addColumn([
@@ -86,7 +86,7 @@ class CategoryDataGrid extends DataGrid
             'type'       => 'number',
             'sortable'   => true,
             'searchable' => false,
-            'filterable' => false
+            'filterable' => false,
         ]);
     }
 
@@ -95,7 +95,7 @@ class CategoryDataGrid extends DataGrid
             'title'  => 'Edit Category',
             'method' => 'GET',
             'route'  => 'admin.catalog.categories.edit',
-            'icon'   => 'icon pencil-lg-icon'
+            'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
@@ -103,7 +103,7 @@ class CategoryDataGrid extends DataGrid
             'method'       => 'POST',
             'route'        => 'admin.catalog.categories.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
-            'icon'         => 'icon trash-icon'
+            'icon'         => 'icon trash-icon',
         ]);
     }
 }

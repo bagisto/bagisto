@@ -176,7 +176,7 @@ class AttributeFamilyRepository extends Repository
                 $trimmed[$key] = [
                     'id'   => $attributeFamily->id,
                     'code' => $attributeFamily->code,
-                    'name' => $attributeFamily->name
+                    'name' => $attributeFamily->name,
                 ];
             }
         }

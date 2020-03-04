@@ -14,7 +14,14 @@ use Excel;
 class ExportController extends Controller
 {
     protected $exportableGrids = [
-        'OrderDataGrid', 'OrderInvoicesDataGrid', 'OrderShipmentsDataGrid', 'OrderRefundDataGrid', 'CustomerDataGrid', 'TaxRateDataGrid', 'ProductDataGrid', 'CMSPageDataGrid'
+        'OrderDataGrid',
+        'OrderInvoicesDataGrid',
+        'OrderShipmentsDataGrid',
+        'OrderRefundDataGrid',
+        'CustomerDataGrid',
+        'TaxRateDataGrid',
+        'ProductDataGrid',
+        'CMSPageDataGrid',
     ];
 
     /**
@@ -57,7 +64,7 @@ class ExportController extends Controller
         
         $records = $gridInstance->export();
 
-        if (count($records) == 0) {
+        if (! count($records)) {
             session()->flash('warning', trans('admin::app.export.no-records'));
 
             return redirect()->back();

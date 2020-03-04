@@ -69,7 +69,7 @@ class CurrencyController extends Controller
     {
         $this->validate(request(), [
             'code' => 'required|min:3|max:3|unique:currencies,code',
-            'name' => 'required'
+            'name' => 'required',
         ]);
 
         Event::dispatch('core.currency.create.before');
@@ -106,7 +106,7 @@ class CurrencyController extends Controller
     {
         $this->validate(request(), [
             'code' => ['required', 'unique:currencies,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
-            'name' => 'required'
+            'name' => 'required',
         ]);
 
         Event::dispatch('core.currency.update.before', $id);

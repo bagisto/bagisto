@@ -34,7 +34,7 @@ class AttributeDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -43,7 +43,7 @@ class AttributeDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -52,7 +52,7 @@ class AttributeDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -61,7 +61,7 @@ class AttributeDataGrid extends DataGrid
             'type'       => 'string',
             'sortable'   => true,
             'searchable' => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -76,7 +76,7 @@ class AttributeDataGrid extends DataGrid
                 } else {
                     return 'False';
                 }
-            }
+            },
         ]);
 
         $this->addColumn([
@@ -92,7 +92,7 @@ class AttributeDataGrid extends DataGrid
                 } else {
                     return 'False';
                 }
-            }
+            },
         ]);
 
         $this->addColumn([
@@ -108,7 +108,7 @@ class AttributeDataGrid extends DataGrid
                 } else {
                     return 'False';
                 }
-            }
+            },
         ]);
 
         $this->addColumn([
@@ -124,7 +124,7 @@ class AttributeDataGrid extends DataGrid
                 } else {
                     return 'False';
                 }
-            }
+            },
         ]);
     }
 
@@ -134,14 +134,14 @@ class AttributeDataGrid extends DataGrid
             'title'  => 'Edit Attribute',
             'method' => 'GET',
             'route'  => 'admin.catalog.attributes.edit',
-            'icon'   => 'icon pencil-lg-icon'
+            'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
             'title'  => 'Delete Attribute',
             'method' => 'POST',
             'route'  => 'admin.catalog.attributes.delete',
-            'icon'  => 'icon trash-icon'
+            'icon'  => 'icon trash-icon',
         ]);
     }
 
@@ -152,7 +152,7 @@ class AttributeDataGrid extends DataGrid
             'action' => route('admin.catalog.attributes.massdelete'),
             'label'  => trans('admin::app.datagrid.delete'),
             'index'  => 'admin_name',
-            'method' => 'DELETE'
+            'method' => 'DELETE',
         ]);
     }
 }

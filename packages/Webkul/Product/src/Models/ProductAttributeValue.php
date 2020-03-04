@@ -40,7 +40,7 @@ class ProductAttributeValue extends Model implements ProductAttributeValueContra
         'float_value',
         'datetime_value',
         'date_value',
-        'json_value'
+        'json_value',
     ];
 
     /**

@@ -32,7 +32,7 @@ class AttributeFamilyDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -50,7 +50,7 @@ class AttributeFamilyDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
     }
 
@@ -59,14 +59,14 @@ class AttributeFamilyDataGrid extends DataGrid
             'title'  => 'Edit Attribute Family',
             'method' => 'GET',
             'route'  => 'admin.catalog.families.edit',
-            'icon'   => 'icon pencil-lg-icon'
+            'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
             'title'  => 'Delete Attribute Family',
             'method' => 'POST',
             'route'  => 'admin.catalog.families.delete',
-            'icon'   => 'icon trash-icon'
+            'icon'   => 'icon trash-icon',
         ]);
     }
 }

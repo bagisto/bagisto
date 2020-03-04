@@ -116,7 +116,7 @@ class ReviewController extends Controller
     {
         $review = $this->productReviewRepository->findOneWhere([
             'id'          => $id,
-            'customer_id' => auth()->guard('customer')->user()->id
+            'customer_id' => auth()->guard('customer')->user()->id,
         ]);
 
         if (! $review) {

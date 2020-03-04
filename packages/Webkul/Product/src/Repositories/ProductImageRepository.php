@@ -42,7 +42,7 @@ class ProductImageRepository extends Repository
                     if (request()->hasFile($file)) {
                         $this->create([
                             'path'       => request()->file($file)->store($dir),
-                            'product_id' => $product->id
+                            'product_id' => $product->id,
                         ]);
                     }
                 } else {
@@ -56,7 +56,7 @@ class ProductImageRepository extends Repository
                         }
 
                         $this->update([
-                                'path' => request()->file($file)->store($dir)
+                                'path' => request()->file($file)->store($dir),
                             ], $imageId);
                     }
                 }

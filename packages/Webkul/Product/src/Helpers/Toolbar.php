@@ -24,7 +24,7 @@ class Toolbar extends AbstractProduct
             'created_at-desc' => 'newest-first',
             'created_at-asc'  => 'oldest-first',
             'price-asc'       => 'cheapest-first',
-            'price-desc'      => 'expensive-first'
+            'price-desc'      => 'expensive-first',
         ];
     }
     /**
@@ -50,7 +50,7 @@ class Toolbar extends AbstractProduct
 
         return request()->fullUrlWithQuery([
             'sort'  => current($keys),
-            'order' => end($keys)
+            'order' => end($keys),
         ]);
     }
 
@@ -63,7 +63,7 @@ class Toolbar extends AbstractProduct
     public function getLimitUrl($limit)
     {
         return request()->fullUrlWithQuery([
-            'limit' => $limit
+            'limit' => $limit,
         ]);
     }
 
@@ -76,7 +76,7 @@ class Toolbar extends AbstractProduct
     public function getModeUrl($mode)
     {
         return request()->fullUrlWithQuery([
-            'mode' => $mode
+            'mode' => $mode,
         ]);
     }
 

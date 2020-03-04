@@ -32,7 +32,7 @@ class ChannelDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -41,7 +41,7 @@ class ChannelDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -50,7 +50,7 @@ class ChannelDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -59,7 +59,7 @@ class ChannelDataGrid extends DataGrid
             'type'       => 'string',
             'sortable'   => true,
             'searchable' => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
     }
 
@@ -68,7 +68,7 @@ class ChannelDataGrid extends DataGrid
             'title'  => 'Edit Channel',
             'method' => 'GET',
             'route'  => 'admin.channels.edit',
-            'icon'   => 'icon pencil-lg-icon'
+            'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
@@ -76,7 +76,7 @@ class ChannelDataGrid extends DataGrid
             'method'       => 'POST',
             'route'        => 'admin.channels.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
-            'icon'         => 'icon trash-icon'
+            'icon'         => 'icon trash-icon',
         ]);
     }
 }

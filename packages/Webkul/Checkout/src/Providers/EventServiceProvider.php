@@ -12,6 +12,6 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $subscribe = [
-        'Webkul\Checkout\Listeners\CustomerEventsHandler'
+        'Webkul\Checkout\Listeners\CustomerEventsHandler',
     ];
 }

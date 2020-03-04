@@ -12,7 +12,12 @@ class AttributeOption extends TranslatableModel implements AttributeOptionContra
 
     public $translatedAttributes = ['label'];
 
-    protected $fillable = ['admin_name', 'swatch_value', 'sort_order', 'attribute_id'];
+    protected $fillable = [
+        'admin_name',
+        'swatch_value',
+        'sort_order',
+        'attribute_id',
+    ];
 
     /**
      * Get the attribute that owns the attribute option.

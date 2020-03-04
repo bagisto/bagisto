@@ -20,7 +20,7 @@ class ContentTranslation extends Model implements ContentTranslationContract
         'link_target',
         'catalog_type',
         'products',
-        'description'
+        'description',
     ];
 
     public function content()

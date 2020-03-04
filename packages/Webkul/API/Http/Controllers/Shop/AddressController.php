@@ -79,7 +79,7 @@ class AddressController extends Controller
 
         request()->merge([
             'address1'    => implode(PHP_EOL, array_filter(request()->input('address1'))),
-            'customer_id' => $customer->id
+            'customer_id' => $customer->id,
         ]);
 
         $this->validate(request(), [
@@ -88,14 +88,14 @@ class AddressController extends Controller
             'state'    => 'string|required',
             'city'     => 'string|required',
             'postcode' => 'required',
-            'phone'    => 'required'
+            'phone'    => 'required',
         ]);
 
         $customerAddress = $this->customerAddressRepository->create(request()->all());
 
         return response()->json([
             'message' => 'Your address has been created successfully.',
-            'data'    => new CustomerAddressResource($customerAddress)
+            'data'    => new CustomerAddressResource($customerAddress),
         ]);
     }
 
@@ -116,14 +116,14 @@ class AddressController extends Controller
             'state'    => 'string|required',
             'city'     => 'string|required',
             'postcode' => 'required',
-            'phone'    => 'required'
+            'phone'    => 'required',
         ]);
 
         $this->customerAddressRepository->update(request()->all(), request()->input('id'));
 
         return response()->json([
             'message' => 'Your address has been updated successfully.',
-            'data'    => new CustomerAddressResource($this->customerAddressRepository->find(request()->input('id')))
+            'data'    => new CustomerAddressResource($this->customerAddressRepository->find(request()->input('id'))),
         ]);
     }
 }

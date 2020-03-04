@@ -56,7 +56,7 @@ class AddressDataGrid extends DataGrid
 
         $queryBuilder = $queryBuilder->leftJoin('country_states', function($qb) {
             $qb->on('ca.state', 'country_states.code')
-                ->on('countries.id', 'country_states.country_id');
+               ->on('countries.id', 'country_states.country_id');
         });
 
         $queryBuilder->groupBy('ca.id')
@@ -82,7 +82,7 @@ class AddressDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -91,7 +91,7 @@ class AddressDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -100,7 +100,7 @@ class AddressDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -109,7 +109,7 @@ class AddressDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -118,7 +118,7 @@ class AddressDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -127,7 +127,7 @@ class AddressDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -143,7 +143,7 @@ class AddressDataGrid extends DataGrid
                 } else {
                     return trans('admin::app.customers.addresses.dash');
                 }
-            }
+            },
         ]);
     }
 
@@ -153,7 +153,7 @@ class AddressDataGrid extends DataGrid
             'type'   => 'Edit',
             'method' => 'GET',
             'route'  => 'admin.customer.addresses.edit',
-            'icon'   => 'icon pencil-lg-icon'
+            'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
@@ -161,7 +161,7 @@ class AddressDataGrid extends DataGrid
             'method'       => 'POST',
             'route'        => 'admin.customer.addresses.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'address']),
-            'icon'         => 'icon trash-icon'
+            'icon'         => 'icon trash-icon',
         ]);
     }
 
@@ -171,7 +171,7 @@ class AddressDataGrid extends DataGrid
             'type'   => 'delete',
             'label'  => trans('admin::app.customers.addresses.delete'),
             'action' => route('admin.customer.addresses.massdelete', request('id')),
-            'method' => 'DELETE'
+            'method' => 'DELETE',
         ]);
     }
 }

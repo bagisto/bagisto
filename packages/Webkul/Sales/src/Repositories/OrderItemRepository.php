@@ -130,7 +130,7 @@ class OrderItemRepository extends Repository
 
             if ($orderedInventory) {
                 $orderedInventory->update([
-                    'qty' => $orderedInventory->qty + $qty
+                    'qty' => $orderedInventory->qty + $qty,
                 ]);
             } else {
                 $item->product->ordered_inventories()->create([

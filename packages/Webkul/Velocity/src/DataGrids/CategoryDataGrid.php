@@ -22,14 +22,14 @@ class CategoryDataGrid extends DataGrid
         $defaultChannel = core()->getCurrentChannel();
 
         $queryBuilder = DB::table('velocity_category as v_cat')
-                ->select('v_cat.id as category_menu_id', 'v_cat.category_id', 'ct.name', 'v_cat.icon', 'v_cat.tooltip', 'v_cat.status')
-                ->leftJoin('categories as c', 'c.id', '=', 'v_cat.category_id')
-                ->leftJoin('category_translations as ct', function($leftJoin) {
-                    $leftJoin->on('c.id', '=', 'ct.category_id')
-                        ->where('ct.locale', app()->getLocale());
-                })
-                ->where('c.parent_id', $defaultChannel->root_category_id)
-                ->groupBy('v_cat.id');
+            ->select('v_cat.id as category_menu_id', 'v_cat.category_id', 'ct.name', 'v_cat.icon', 'v_cat.tooltip', 'v_cat.status')
+            ->leftJoin('categories as c', 'c.id', '=', 'v_cat.category_id')
+            ->leftJoin('category_translations as ct', function($leftJoin) {
+                $leftJoin->on('c.id', '=', 'ct.category_id')
+                         ->where('ct.locale', app()->getLocale());
+            })
+            ->where('c.parent_id', $defaultChannel->root_category_id)
+            ->groupBy('v_cat.id');
 
         // $this->addFilter('content_id', 'con.id');
 
@@ -44,7 +44,7 @@ class CategoryDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -53,7 +53,7 @@ class CategoryDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -66,7 +66,7 @@ class CategoryDataGrid extends DataGrid
             'closure'    => true,
             'wrapper'    => function ($row) {
                 return '<span class="wk-icon '.$row->icon.'"></span>';
-            }
+            },
         ]);
 
         $this->addColumn([
@@ -83,7 +83,7 @@ class CategoryDataGrid extends DataGrid
                 } else {
                     return '<span class="badge badge-md badge-danger">Disabled</span>';
                 }
-            }
+            },
         ]);
     }
 
@@ -92,7 +92,7 @@ class CategoryDataGrid extends DataGrid
             'type'   => 'Edit',
             'method' => 'GET',
             'route'  => 'velocity.admin.category.edit',
-            'icon'   => 'icon pencil-lg-icon'
+            'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
@@ -100,7 +100,7 @@ class CategoryDataGrid extends DataGrid
             'method'       => 'POST',
             'route'        => 'velocity.admin.category.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'Category']),
-            'icon'         => 'icon trash-icon'
+            'icon'         => 'icon trash-icon',
         ]);
     }
 
@@ -110,7 +110,7 @@ class CategoryDataGrid extends DataGrid
             'type'   => 'delete',
             'action' => route('velocity.admin.category.mass-delete'),
             'label'  => trans('admin::app.datagrid.delete'),
-            'method' => 'DELETE'
+            'method' => 'DELETE',
         ]);
     }
 }

@@ -40,7 +40,7 @@ class CartRuleDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -49,7 +49,7 @@ class CartRuleDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -58,7 +58,7 @@ class CartRuleDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -67,7 +67,7 @@ class CartRuleDataGrid extends DataGrid
             'type'       => 'datetime',
             'sortable'   => true,
             'searchable' => false,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -76,7 +76,7 @@ class CartRuleDataGrid extends DataGrid
             'type'       => 'datetime',
             'sortable'   => true,
             'searchable' => false,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -92,7 +92,7 @@ class CartRuleDataGrid extends DataGrid
                 } else {
                     return trans('admin::app.datagrid.inactive');
                 }
-            }
+            },
         ]);
 
         $this->addColumn([
@@ -101,7 +101,7 @@ class CartRuleDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
     }
 
@@ -111,14 +111,14 @@ class CartRuleDataGrid extends DataGrid
             'title'  => 'Edit Cart Rule',
             'method' => 'GET',
             'route'  => 'admin.cart-rules.edit',
-            'icon'   => 'icon pencil-lg-icon'
+            'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
             'title'  => 'Delete Cart Rule',
             'method' => 'POST',
             'route'  => 'admin.cart-rules.delete',
-            'icon'   => 'icon trash-icon'
+            'icon'   => 'icon trash-icon',
         ]);
     }
 }

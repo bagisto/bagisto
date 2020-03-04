@@ -88,7 +88,7 @@ class CoreConfigRepository extends Repository
                         'code'         => $fieldName,
                         'value'        => $value,
                         'locale_code'  => $localeBased ? $locale : null,
-                        'channel_code' => $channelBased ? $channel : null
+                        'channel_code' => $channelBased ? $channel : null,
                     ]);
                 } else {
                     foreach ($coreConfigValue as $coreConfig) {
@@ -101,7 +101,7 @@ class CoreConfigRepository extends Repository
                                 'code'         => $fieldName,
                                 'value'        => $value,
                                 'locale_code'  => $localeBased ? $locale : null,
-                                'channel_code' => $channelBased ? $channel : null
+                                'channel_code' => $channelBased ? $channel : null,
                             ]);
                         }
                     }

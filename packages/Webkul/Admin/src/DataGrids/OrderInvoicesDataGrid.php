@@ -39,7 +39,7 @@ class OrderInvoicesDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -48,7 +48,7 @@ class OrderInvoicesDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -57,7 +57,7 @@ class OrderInvoicesDataGrid extends DataGrid
             'type'       => 'price',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -66,7 +66,7 @@ class OrderInvoicesDataGrid extends DataGrid
             'type'       => 'datetime',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
     }
 
@@ -75,7 +75,7 @@ class OrderInvoicesDataGrid extends DataGrid
             'title'  => 'Order Invoice View',
             'method' => 'GET',
             'route'  => 'admin.sales.invoices.view',
-            'icon'   => 'icon eye-icon'
+            'icon'   => 'icon eye-icon',
         ]);
     }
 }

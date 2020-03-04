@@ -108,7 +108,7 @@ class ResourceController extends Controller
         $this->repository->delete($id);
         
         return response()->json([
-            'message' => 'Item removed successfully.'
+            'message' => 'Item removed successfully.',
         ]);
     }
 }

@@ -23,7 +23,7 @@ class InventoryTableSeeder extends Seeder
             'state'          => 'MI',
             'street'         => '12th Street',
             'city'           => 'Detroit',
-            'postcode'       => '48127'
+            'postcode'       => '48127',
         ]);
     }
 }

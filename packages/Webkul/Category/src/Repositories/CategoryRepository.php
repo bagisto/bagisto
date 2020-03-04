@@ -246,7 +246,7 @@ class CategoryRepository extends Repository
                 $trimmed[$key] = [
                     'id'   => $category->id,
                     'name' => $category->name,
-                    'slug' => $category->slug
+                    'slug' => $category->slug,
                 ];
             }
         }

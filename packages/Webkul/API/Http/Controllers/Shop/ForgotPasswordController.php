@@ -23,19 +23,19 @@ class ForgotPasswordController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'email' => 'required|email'
+            'email' => 'required|email',
         ]);
 
         $response = $this->broker()->sendResetLink(request(['email']));
 
         if ($response == Password::RESET_LINK_SENT) {
             return response()->json([
-                'message' => trans($response)
+                'message' => trans($response),
             ]);
         }
 
         return response()->json([
-            'error' => trans($response)
+            'error' => trans($response),
         ]);
     }
 

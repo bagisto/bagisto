@@ -4,7 +4,7 @@ return [
     [
         'key'  => 'velocity',
         'name' => 'velocity::app.admin.system.velocity.extension_name',
-        'sort' => 2
+        'sort' => 2,
     ], [
         'key'  => 'velocity.configuration',
         'name' => 'velocity::app.admin.system.velocity.settings',
@@ -21,10 +21,10 @@ return [
                 'options' => [
                     [
                         'title' => 'velocity::app.admin.system.general.active',
-                        'value' => true
+                        'value' => true,
                     ], [
                         'title' => 'velocity::app.admin.system.general.inactive',
-                        'value' => false
+                        'value' => false,
                     ]
                 ]
             ]
@@ -41,10 +41,10 @@ return [
                 'options' => [
                     [
                         'title' => 'velocity::app.admin.system.category.active',
-                        'value' => true
+                        'value' => true,
                     ], [
                         'title' => 'velocity::app.admin.system.category.inactive',
-                        'value' => false
+                        'value' => false,
                     ]
                 ]
             ],  [
@@ -54,10 +54,10 @@ return [
                 'options' => [
                     [
                         'title' => 'velocity::app.admin.system.category.active',
-                        'value' => true
+                        'value' => true,
                     ], [
                         'title' => 'velocity::app.admin.system.category.inactive',
-                        'value' => false
+                        'value' => false,
                     ]
                 ]
             ],  [
@@ -86,10 +86,10 @@ return [
                 'options'       => [
                     [
                         'title' => 'Right',
-                        'value' => 'right'
+                        'value' => 'right',
                     ], [
                         'title' => 'Left',
-                        'value' => 'left'
+                        'value' => 'left',
                     ]
                 ]
             ],  [
@@ -99,10 +99,10 @@ return [
                 'options' => [
                     [
                         'title' => 'velocity::app.admin.system.category.active',
-                        'value' => true
+                        'value' => true,
                     ], [
                         'title' => 'velocity::app.admin.system.category.inactive',
-                        'value' => false
+                        'value' => false,
                     ]
                 ]
             ],  [
@@ -114,10 +114,10 @@ return [
                 'options'       => [
                     [
                         'title' => 'All',
-                        'value' => 'all'
+                        'value' => 'all',
                     ], [
                         'title' => 'Custom',
-                        'value' => 'custom'
+                        'value' => 'custom',
                     ]
                 ]
             ],  [

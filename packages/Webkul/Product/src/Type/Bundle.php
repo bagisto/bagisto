@@ -347,22 +347,22 @@ class Bundle extends AbstractType
             'from' => [
                 'regular_price' => [
                     'price'          => core()->convertPrice($this->getRegularMinimalPrice()),
-                    'formated_price' => core()->currency($this->getRegularMinimalPrice())
+                    'formated_price' => core()->currency($this->getRegularMinimalPrice()),
                 ],
                 'final_price'   => [
                     'price'          => core()->convertPrice($this->getMinimalPrice()),
-                    'formated_price' => core()->currency($this->getMinimalPrice())
+                    'formated_price' => core()->currency($this->getMinimalPrice()),
                 ]
             ],
 
             'to'   => [
                 'regular_price' => [
                     'price'          => core()->convertPrice($this->getRegularMaximamPrice()),
-                    'formated_price' => core()->currency($this->getRegularMaximamPrice())
+                    'formated_price' => core()->currency($this->getRegularMaximamPrice()),
                 ],
                 'final_price'   => [
                     'price'          => core()->convertPrice($this->getMaximamPrice()),
-                    'formated_price' => core()->currency($this->getMaximamPrice())
+                    'formated_price' => core()->currency($this->getMaximamPrice()),
                 ]
             ]
         ];
@@ -469,7 +469,7 @@ class Bundle extends AbstractType
 
                 $optionProduct = $this->productBundleOptionProductRepository->findOneWhere([
                     'id'                       => $optionProductId,
-                    'product_bundle_option_id' => $optionId
+                    'product_bundle_option_id' => $optionId,
                 ]);
 
                 $qty = $data['bundle_option_qty'][$optionId] ?? $optionProduct->qty;
@@ -481,7 +481,7 @@ class Bundle extends AbstractType
                     ];
                 } else {
                     $products[$optionProduct->product_id] = array_merge($products[$optionProduct->product_id], [
-                        'quantity' => $products[$optionProduct->product_id]['quantity'] + $qty
+                        'quantity' => $products[$optionProduct->product_id]['quantity'] + $qty,
                     ]);
                 }
             }

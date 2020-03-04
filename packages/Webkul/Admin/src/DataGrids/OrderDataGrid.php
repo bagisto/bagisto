@@ -20,17 +20,17 @@ class OrderDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('orders')
-                ->leftJoin('order_address as order_address_shipping', function($leftJoin) {
-                    $leftJoin->on('order_address_shipping.order_id', '=', 'orders.id')
-                             ->where('order_address_shipping.address_type', 'shipping');
-                })
-                ->leftJoin('order_address as order_address_billing', function($leftJoin) {
-                    $leftJoin->on('order_address_billing.order_id', '=', 'orders.id')
-                             ->where('order_address_billing.address_type', 'billing');
-                })
-                ->addSelect('orders.id','orders.increment_id', 'orders.base_sub_total', 'orders.base_grand_total', 'orders.created_at', 'channel_name', 'status')
-                ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.first_name, " ", ' . DB::getTablePrefix() . 'order_address_billing.last_name) as billed_to'))
-                ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name) as shipped_to'));
+            ->leftJoin('order_address as order_address_shipping', function($leftJoin) {
+                $leftJoin->on('order_address_shipping.order_id', '=', 'orders.id')
+                            ->where('order_address_shipping.address_type', 'shipping');
+            })
+            ->leftJoin('order_address as order_address_billing', function($leftJoin) {
+                $leftJoin->on('order_address_billing.order_id', '=', 'orders.id')
+                            ->where('order_address_billing.address_type', 'billing');
+            })
+            ->addSelect('orders.id','orders.increment_id', 'orders.base_sub_total', 'orders.base_grand_total', 'orders.created_at', 'channel_name', 'status')
+            ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.first_name, " ", ' . DB::getTablePrefix() . 'order_address_billing.last_name) as billed_to'))
+            ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name) as shipped_to'));
 
         $this->addFilter('billed_to', DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.first_name, " ", ' . DB::getTablePrefix() . 'order_address_billing.last_name)'));
         $this->addFilter('shipped_to', DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name)'));
@@ -48,7 +48,7 @@ class OrderDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -57,7 +57,7 @@ class OrderDataGrid extends DataGrid
             'type'       => 'price',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -66,7 +66,7 @@ class OrderDataGrid extends DataGrid
             'type'       => 'price',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -75,7 +75,7 @@ class OrderDataGrid extends DataGrid
             'type'       => 'datetime',
             'sortable'   => true,
             'searchable' => false,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -84,7 +84,7 @@ class OrderDataGrid extends DataGrid
             'type'       => 'string',
             'sortable'   => true,
             'searchable' => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -111,7 +111,7 @@ class OrderDataGrid extends DataGrid
                 } elseif ($value->status == "fraud") {
                     return '<span class="badge badge-md badge-danger">'. trans('admin::app.sales.orders.order-status-fraud') . '</span>';
                 }
-            }
+            },
         ]);
 
         $this->addColumn([
@@ -120,7 +120,7 @@ class OrderDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -129,7 +129,7 @@ class OrderDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
     }
 
@@ -138,7 +138,7 @@ class OrderDataGrid extends DataGrid
             'title'  => 'Order View',
             'method' => 'GET',
             'route'  => 'admin.sales.orders.view',
-            'icon'   => 'icon eye-icon'
+            'icon'   => 'icon eye-icon',
         ]);
     }
 }

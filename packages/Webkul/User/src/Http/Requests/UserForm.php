@@ -30,7 +30,7 @@ class UserForm extends FormRequest
             'email'    => 'email|unique:admins,email',
             'password' => 'nullable|confirmed',
             'status'   => 'sometimes',
-            'role_id'  => 'required'
+            'role_id'  => 'required',
         ];
 
         if ($this->method() == 'PUT') {

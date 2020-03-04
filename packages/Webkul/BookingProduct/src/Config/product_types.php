@@ -5,6 +5,6 @@ return [
         'key'   => 'booking',
         'name'  => 'Booking',
         'class' => 'Webkul\BookingProduct\Type\Booking',
-        'sort'  => 7
+        'sort'  => 7,
     ]
 ];

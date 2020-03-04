@@ -34,7 +34,7 @@ class CartRuleCouponsDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -43,7 +43,7 @@ class CartRuleCouponsDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -52,7 +52,7 @@ class CartRuleCouponsDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -61,7 +61,7 @@ class CartRuleCouponsDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -77,7 +77,7 @@ class CartRuleCouponsDataGrid extends DataGrid
                 } else {
                     return 'false';
                 }
-            }
+            },
         ]);
     }
 }

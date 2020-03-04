@@ -54,8 +54,8 @@ class SessionController extends Controller
     public function create()
     {
         request()->validate([
-            'email' => 'required|email',
-            'password' => 'required'
+            'email'    => 'required|email',
+            'password' => 'required',
         ]);
 
         $jwtToken = null;
@@ -71,9 +71,9 @@ class SessionController extends Controller
         $customer = auth($this->guard)->user();
 
         return response()->json([
-        'token' => $jwtToken,
+        'token'   => $jwtToken,
         'message' => 'Logged in successfully.',
-        'data' => new CustomerResource($customer)
+        'data'    => new CustomerResource($customer),
     ]);
     }
 
@@ -87,7 +87,7 @@ class SessionController extends Controller
         $customer = auth($this->guard)->user();
 
         return response()->json([
-            'data' => new CustomerResource($customer)
+            'data' => new CustomerResource($customer),
         ]);
     }
 
@@ -106,7 +106,7 @@ class SessionController extends Controller
             'gender'        => 'required',
             'date_of_birth' => 'nullable|date|before:today',
             'email'         => 'email|unique:customers,email,' . $customer->id,
-            'password'      => 'confirmed|min:6'
+            'password'      => 'confirmed|min:6',
         ]);
 
         $data = request()->all();
@@ -125,7 +125,7 @@ class SessionController extends Controller
 
         return response()->json([
             'message' => 'Your account has been created successfully.',
-            'data'    => new CustomerResource($this->customerRepository->find($customer->id))
+            'data'    => new CustomerResource($this->customerRepository->find($customer->id)),
         ]);
     }
 

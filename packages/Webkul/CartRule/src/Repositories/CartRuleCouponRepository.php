@@ -18,7 +18,7 @@ class CartRuleCouponRepository extends Repository
     protected $charsets = [
         'alphanumeric' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
         'alphabetical' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-        'numeric'      => '0123456789'
+        'numeric'      => '0123456789',
     ];
 
     /**
@@ -49,7 +49,7 @@ class CartRuleCouponRepository extends Repository
                 'usage_limit'        => $cartRule->uses_per_coupon ?? 0,
                 'usage_per_customer' => $cartRule->usage_per_customer ?? 0,
                 'is_primary'         => 0,
-                'expired_at'         => $cartRule->ends_till ?: null
+                'expired_at'         => $cartRule->ends_till ?: null,
             ]);
         }
     }

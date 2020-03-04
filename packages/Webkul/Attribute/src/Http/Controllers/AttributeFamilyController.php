@@ -86,7 +86,7 @@ class AttributeFamilyController extends Controller
     {
         $this->validate(request(), [
             'code' => ['required', 'unique:attribute_families,code', new \Webkul\Core\Contracts\Validations\Code],
-            'name' => 'required'
+            'name' => 'required',
         ]);
 
         $attributeFamily = $this->attributeFamilyRepository->create(request()->all());
@@ -121,7 +121,7 @@ class AttributeFamilyController extends Controller
     {
         $this->validate(request(), [
             'code' => ['required', 'unique:attribute_families,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
-            'name' => 'required'
+            'name' => 'required',
         ]);
 
         $attributeFamily = $this->attributeFamilyRepository->update(request()->all(), $id);
@@ -185,7 +185,7 @@ class AttributeFamilyController extends Controller
                 }
             }
 
-            if (!$suppressFlash) {
+            if (! $suppressFlash) {
                 session()->flash('success', ('admin::app.datagrid.mass-ops.delete-success'));
             } else {
                 session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'Attribute Family']));

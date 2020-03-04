@@ -34,7 +34,7 @@ class ExchangeRatesDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -43,7 +43,7 @@ class ExchangeRatesDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -52,7 +52,7 @@ class ExchangeRatesDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
     }
 
@@ -61,7 +61,7 @@ class ExchangeRatesDataGrid extends DataGrid
             'title'  => 'Edit Exchange Rate',
             'method' => 'GET',
             'route'  => 'admin.exchange_rates.edit',
-            'icon'   => 'icon pencil-lg-icon'
+            'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
@@ -69,7 +69,7 @@ class ExchangeRatesDataGrid extends DataGrid
             'method'       => 'POST',
             'route'        => 'admin.exchange_rates.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'Exchange Rate']),
-            'icon'         => 'icon trash-icon'
+            'icon'         => 'icon trash-icon',
         ]);
     }
 }

@@ -20,13 +20,13 @@ class OrderRefundDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('refunds')
-                ->select('refunds.id', 'orders.increment_id', 'refunds.state', 'refunds.base_grand_total', 'refunds.created_at')
-                ->leftJoin('orders', 'refunds.order_id', '=', 'orders.id')
-                ->leftJoin('order_address as order_address_billing', function($leftJoin) {
-                    $leftJoin->on('order_address_billing.order_id', '=', 'orders.id')
-                             ->where('order_address_billing.address_type', 'billing');
-                })
-                ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.first_name, " ", ' . DB::getTablePrefix() . 'order_address_billing.last_name) as billed_to'));
+            ->select('refunds.id', 'orders.increment_id', 'refunds.state', 'refunds.base_grand_total', 'refunds.created_at')
+            ->leftJoin('orders', 'refunds.order_id', '=', 'orders.id')
+            ->leftJoin('order_address as order_address_billing', function($leftJoin) {
+                $leftJoin->on('order_address_billing.order_id', '=', 'orders.id')
+                         ->where('order_address_billing.address_type', 'billing');
+            })
+            ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.first_name, " ", ' . DB::getTablePrefix() . 'order_address_billing.last_name) as billed_to'));
 
         $this->addFilter('billed_to', DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.first_name, " ", ' . DB::getTablePrefix() . 'order_address_billing.last_name)'));
         $this->addFilter('id', 'refunds.id');
@@ -46,7 +46,7 @@ class OrderRefundDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -55,7 +55,7 @@ class OrderRefundDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -64,7 +64,7 @@ class OrderRefundDataGrid extends DataGrid
             'type'       => 'price',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -73,7 +73,7 @@ class OrderRefundDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -82,7 +82,7 @@ class OrderRefundDataGrid extends DataGrid
             'type'       => 'datetime',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
     }
 
@@ -91,7 +91,7 @@ class OrderRefundDataGrid extends DataGrid
             'title'  => 'Order Refund View',
             'method' => 'GET',
             'route'  => 'admin.sales.refunds.view',
-            'icon'   => 'icon eye-icon'
+            'icon'   => 'icon eye-icon',
         ]);
     }
 }

@@ -20,12 +20,12 @@ class ContentDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('velocity_contents as con')
-                ->select('con.id as content_id', 'con_trans.title', 'con.position', 'con.content_type', 'con.status')
-                ->leftJoin('velocity_contents_translations as con_trans', function($leftJoin) {
-                    $leftJoin->on('con.id', '=', 'con_trans.content_id')
-                        ->where('con_trans.locale', app()->getLocale());
-                })
-                ->groupBy('con.id');
+            ->select('con.id as content_id', 'con_trans.title', 'con.position', 'con.content_type', 'con.status')
+            ->leftJoin('velocity_contents_translations as con_trans', function($leftJoin) {
+                $leftJoin->on('con.id', '=', 'con_trans.content_id')
+                         ->where('con_trans.locale', app()->getLocale());
+            })
+            ->groupBy('con.id');
 
         $this->addFilter('content_id', 'con.id');
 
@@ -40,7 +40,7 @@ class ContentDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -49,7 +49,7 @@ class ContentDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -58,7 +58,7 @@ class ContentDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -74,7 +74,7 @@ class ContentDataGrid extends DataGrid
                 } else {
                     return 'Inactive';
                 }
-            }
+            },
         ]);
 
         $this->addColumn([
@@ -94,7 +94,7 @@ class ContentDataGrid extends DataGrid
                 } elseif ($value->content_type == 'static') {
                     return 'Static';
                 }
-            }
+            },
         ]);
     }
 
@@ -103,7 +103,7 @@ class ContentDataGrid extends DataGrid
             'type'   => 'Edit',
             'method' => 'GET',
             'route'  => 'velocity.admin.content.edit',
-            'icon'   => 'icon pencil-lg-icon'
+            'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
@@ -111,7 +111,7 @@ class ContentDataGrid extends DataGrid
             'method'       => 'POST',
             'route'        => 'velocity.admin.content.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'content']),
-            'icon'         => 'icon trash-icon'
+            'icon'         => 'icon trash-icon',
         ]);
     }
 
@@ -121,7 +121,7 @@ class ContentDataGrid extends DataGrid
             'type'   => 'delete',
             'action' => route('velocity.admin.content.mass-delete'),
             'label'  => trans('admin::app.datagrid.delete'),
-            'method' => 'DELETE'
+            'method' => 'DELETE',
         ]);
     }
 }

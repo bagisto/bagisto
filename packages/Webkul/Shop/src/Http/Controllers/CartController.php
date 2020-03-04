@@ -175,21 +175,21 @@ class CartController extends Controller
                 if (Cart::getCart()->coupon_code == $couponCode) {
                     return response()->json([
                         'success' => true,
-                        'message' => trans('shop::app.checkout.total.success-coupon')
+                        'message' => trans('shop::app.checkout.total.success-coupon'),
                     ]);
                 }
             }
 
             return response()->json([
                 'success' => false,
-                'message' => trans('shop::app.checkout.total.invalid-coupon')
+                'message' => trans('shop::app.checkout.total.invalid-coupon'),
             ]);
         } catch (\Exception $e) {
             report($e);
 
             return response()->json([
                 'success' => false,
-                'message' => trans('shop::app.checkout.total.coupon-apply-issue')
+                'message' => trans('shop::app.checkout.total.coupon-apply-issue'),
             ]);
         }
     }
@@ -205,7 +205,7 @@ class CartController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => trans('shop::app.checkout.total.remove-coupon')
+            'message' => trans('shop::app.checkout.total.remove-coupon'),
         ]);
     }
 

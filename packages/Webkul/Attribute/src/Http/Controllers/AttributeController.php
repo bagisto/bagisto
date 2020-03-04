@@ -70,7 +70,7 @@ class AttributeController extends Controller
         $this->validate(request(), [
             'code'       => ['required', 'unique:attributes,code', new \Webkul\Core\Contracts\Validations\Code],
             'admin_name' => 'required',
-            'type'       => 'required'
+            'type'       => 'required',
         ]);
 
         $data = request()->all();
@@ -108,7 +108,7 @@ class AttributeController extends Controller
         $this->validate(request(), [
             'code'       => ['required', 'unique:attributes,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
             'admin_name' => 'required',
-            'type'       => 'required'
+            'type'       => 'required',
         ]);
 
         $attribute = $this->attributeRepository->update(request()->all(), $id);
@@ -163,8 +163,8 @@ class AttributeController extends Controller
                 try {
                     if ($attribute->is_user_defined) {
                         $suppressFlash = true;
+
                         $this->attributeRepository->delete($value);
-                       
                     } else {
                         session()->flash('error', trans('admin::app.response.user-define-error', ['name' => 'Attribute']));
                     }

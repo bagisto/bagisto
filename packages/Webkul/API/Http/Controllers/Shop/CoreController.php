@@ -26,7 +26,7 @@ class CoreController extends Controller
         }
         
         return response()->json([
-            'data' => $configValues
+            'data' => $configValues,
         ]);
     }
 
@@ -38,7 +38,7 @@ class CoreController extends Controller
     public function getCountryStateGroup()
     {
         return response()->json([
-            'data' => core()->groupedStatesByCountries()
+            'data' => core()->groupedStatesByCountries(),
         ]);
     }
 

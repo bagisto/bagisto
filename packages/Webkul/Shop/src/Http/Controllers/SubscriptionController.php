@@ -42,7 +42,7 @@ class SubscriptionController extends Controller
     public function subscribe()
     {
         $this->validate(request(), [
-            'subscriber_email' => 'email|required'
+            'subscriber_email' => 'email|required',
         ]);
 
         $email = request()->input('subscriber_email');
@@ -81,7 +81,7 @@ class SubscriptionController extends Controller
                     'email'         => $email,
                     'channel_id'    => core()->getCurrentChannel()->id,
                     'is_subscribed' => 1,
-                    'token'         => $token
+                    'token'         => $token,
                 ]);
 
                 if (! $result) {

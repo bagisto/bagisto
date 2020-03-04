@@ -16,7 +16,7 @@ return [
                 'type'          => 'text',
                 'validation'    => false,
                 'channel_based' => true,
-                'locale_based'  => true
+                'locale_based'  => true,
             ],
             [
                 'name'          => 'order_number_length',
@@ -24,7 +24,7 @@ return [
                 'type'          => 'text',
                 'validation'    => 'numeric',
                 'channel_based' => true,
-                'locale_based'  => true
+                'locale_based'  => true,
             ],
             [
                 'name'          => 'order_number_suffix',
@@ -32,7 +32,7 @@ return [
                 'type'          => 'text',
                 'validation'    => false,
                 'channel_based' => true,
-                'locale_based'  => true
+                'locale_based'  => true,
             ],
         ]
     ]

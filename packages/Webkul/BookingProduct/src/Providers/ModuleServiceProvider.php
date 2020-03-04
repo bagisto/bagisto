@@ -14,6 +14,6 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
         \Webkul\BookingProduct\Models\BookingProductEventTicketTranslation::class,
         \Webkul\BookingProduct\Models\BookingProductRentalSlot::class,
         \Webkul\BookingProduct\Models\BookingProductTableSlot::class,
-        \Webkul\BookingProduct\Models\Booking::class
+        \Webkul\BookingProduct\Models\Booking::class,
     ];
 }

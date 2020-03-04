@@ -78,7 +78,7 @@ class TaxRateController extends Controller
             'zip_from'   => 'nullable|required_with:is_zip',
             'zip_to'     => 'nullable|required_with:is_zip,zip_from',
             'country'    => 'required|string',
-            'tax_rate'   => 'required|numeric|min:0.0001'
+            'tax_rate'   => 'required|numeric|min:0.0001',
         ]);
 
         $data = request()->all();
@@ -126,7 +126,7 @@ class TaxRateController extends Controller
             'zip_from'   => 'nullable|required_with:is_zip',
             'zip_to'     => 'nullable|required_with:is_zip,zip_from',
             'country'    => 'required|string',
-            'tax_rate'   => 'required|numeric|min:0.0001'
+            'tax_rate'   => 'required|numeric|min:0.0001',
         ]);
 
         Event::dispatch('tax.tax_rate.update.before', $id);

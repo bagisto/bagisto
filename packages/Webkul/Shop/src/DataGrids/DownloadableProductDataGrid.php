@@ -20,10 +20,10 @@ class DownloadableProductDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('downloadable_link_purchased')
-                ->leftJoin('orders', 'downloadable_link_purchased.order_id', '=', 'orders.id')
-                ->addSelect('downloadable_link_purchased.*', 'orders.increment_id')
-                ->addSelect(DB::raw('(' . DB::getTablePrefix() . 'downloadable_link_purchased.download_bought - ' . DB::getTablePrefix() . 'downloadable_link_purchased.download_used) as remaining_downloads'))
-                ->where('downloadable_link_purchased.customer_id', auth()->guard('customer')->user()->id);
+            ->leftJoin('orders', 'downloadable_link_purchased.order_id', '=', 'orders.id')
+            ->addSelect('downloadable_link_purchased.*', 'orders.increment_id')
+            ->addSelect(DB::raw('(' . DB::getTablePrefix() . 'downloadable_link_purchased.download_bought - ' . DB::getTablePrefix() . 'downloadable_link_purchased.download_used) as remaining_downloads'))
+            ->where('downloadable_link_purchased.customer_id', auth()->guard('customer')->user()->id);
 
         $this->addFilter('status', 'downloadable_link_purchased.status');
         $this->addFilter('created_at', 'downloadable_link_purchased.created_at');
@@ -39,7 +39,7 @@ class DownloadableProductDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -65,7 +65,7 @@ class DownloadableProductDataGrid extends DataGrid
             'type'       => 'datetime',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([

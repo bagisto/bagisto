@@ -34,7 +34,7 @@ class CartRuleCouponDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -43,7 +43,7 @@ class CartRuleCouponDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -52,7 +52,7 @@ class CartRuleCouponDataGrid extends DataGrid
             'type'       => 'datetime',
             'sortable'   => true,
             'searchable' => false,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -61,7 +61,7 @@ class CartRuleCouponDataGrid extends DataGrid
             'type'       => 'datetime',
             'sortable'   => true,
             'searchable' => false,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -70,7 +70,7 @@ class CartRuleCouponDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
     }
 
@@ -80,7 +80,7 @@ class CartRuleCouponDataGrid extends DataGrid
             'type'   => 'delete',
             'action' => route('admin.cart-rule-coupons.mass-delete'),
             'label'  => trans('admin::app.datagrid.delete'),
-            'method' => 'DELETE'
+            'method' => 'DELETE',
         ]);
     }
 }

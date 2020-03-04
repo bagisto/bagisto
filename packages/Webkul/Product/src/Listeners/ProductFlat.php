@@ -69,7 +69,7 @@ class ProductFlat
         'date'        => 'date',
         'file'        => 'text',
         'image'       => 'text',
-        'checkbox'    => 'text'
+        'checkbox'    => 'text',
     ];
 
     /**
@@ -197,14 +197,14 @@ class ProductFlat
                     $productFlat = $this->productFlatRepository->findOneWhere([
                         'product_id' => $product->id,
                         'channel'    => $channel->code,
-                        'locale'     => $locale->code
+                        'locale'     => $locale->code,
                     ]);
 
                     if (! $productFlat) {
                         $productFlat = $this->productFlatRepository->create([
                             'product_id' => $product->id,
                             'channel'    => $channel->code,
-                            'locale'     => $locale->code
+                            'locale'     => $locale->code,
                         ]);
                     }
 
@@ -287,7 +287,7 @@ class ProductFlat
                         $parentProductFlat = $this->productFlatRepository->findOneWhere([
                                 'product_id' => $parentProduct->id,
                                 'channel'    => $channel->code,
-                                'locale'     => $locale->code
+                                'locale'     => $locale->code,
                             ]);
 
                         if ($parentProductFlat) {

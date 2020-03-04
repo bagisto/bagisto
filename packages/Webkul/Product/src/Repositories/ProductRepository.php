@@ -166,7 +166,7 @@ class ProductRepository extends Repository
                 $qb = $qb->where(function($query1) use($qb) {
                     $aliases = [
                         'products' => 'filter_',
-                        'variants' => 'variant_filter_'
+                        'variants' => 'variant_filter_',
                     ];
 
                     foreach($aliases as $table => $alias) {

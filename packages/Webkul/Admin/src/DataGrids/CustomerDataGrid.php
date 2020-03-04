@@ -43,7 +43,7 @@ class CustomerDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -52,7 +52,7 @@ class CustomerDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -61,7 +61,7 @@ class CustomerDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -70,7 +70,7 @@ class CustomerDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -87,7 +87,7 @@ class CustomerDataGrid extends DataGrid
                 } else {
                     return $row->phone;
                 }
-            }
+            },
         ]);
 
         $this->addColumn([
@@ -104,7 +104,7 @@ class CustomerDataGrid extends DataGrid
                 } else {
                     return $row->gender;
                 }
-            }
+            },
         ]);
 
         $this->addColumn([
@@ -121,7 +121,7 @@ class CustomerDataGrid extends DataGrid
                 } else {
                     return '<span class="badge badge-md badge-danger">'. trans('admin::app.customers.customers.inactive') .'</span>';
                 }
-            }
+            },
         ]);
     }
 
@@ -130,7 +130,7 @@ class CustomerDataGrid extends DataGrid
             'method' => 'GET',
             'route'  => 'admin.customer.edit',
             'icon'   => 'icon pencil-lg-icon',
-            'title'  => trans('admin::app.customers.customers.edit-help-title')
+            'title'  => trans('admin::app.customers.customers.edit-help-title'),
         ]);
 
         $this->addAction([
@@ -138,21 +138,21 @@ class CustomerDataGrid extends DataGrid
             'method' => 'GET',
             'route'  => 'admin.customer.addresses.index',
             'icon'   => 'icon list-icon',
-            'title'  => trans('admin::app.customers.customers.addresses')
+            'title'  => trans('admin::app.customers.customers.addresses'),
         ]);
 
         $this->addAction([
             'method' => 'POST',
             'route'  => 'admin.customer.delete',
             'icon'   => 'icon trash-icon',
-            'title'  => trans('admin::app.customers.customers.delete-help-title')
+            'title'  => trans('admin::app.customers.customers.delete-help-title'),
         ]);
 
         $this->addAction([
             'method' => 'GET',
             'route'  => 'admin.customer.note.create',
             'icon'   => 'icon note-icon',
-            'title'  => trans('admin::app.customers.note.help-title')
+            'title'  => trans('admin::app.customers.note.help-title'),
         ]);
     }
 
@@ -175,8 +175,8 @@ class CustomerDataGrid extends DataGrid
             'method'  => 'PUT',
             'options' => [
                 'Active'   => 1,
-                'Inactive' => 0
-            ]
+                'Inactive' => 0,
+            ],
         ]);
     }
 }

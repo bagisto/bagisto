@@ -106,7 +106,7 @@ class CheckoutController extends Controller
         foreach (Shipping::getGroupedAllShippingRates() as $code => $shippingMethod) {
             $rates[] = [
                 'carrier_title' => $shippingMethod['carrier_title'],
-                'rates'         => CartShippingRateResource::collection(collect($shippingMethod['rates']))
+                'rates'         => CartShippingRateResource::collection(collect($shippingMethod['rates'])),
             ];
         }
 
@@ -115,7 +115,7 @@ class CheckoutController extends Controller
         return response()->json([
             'data' => [
                 'rates' => $rates,
-                'cart'  => new CartResource(Cart::getCart())
+                'cart'  => new CartResource(Cart::getCart()),
             ]
         ]);
     }
@@ -141,7 +141,7 @@ class CheckoutController extends Controller
         return response()->json([
             'data' => [
                 'methods' => Payment::getPaymentMethods(),
-                'cart'    => new CartResource(Cart::getCart())
+                'cart'    => new CartResource(Cart::getCart()),
             ]
         ]);
     }
@@ -161,7 +161,7 @@ class CheckoutController extends Controller
 
         return response()->json([
             'data' => [
-                'cart' => new CartResource(Cart::getCart())
+                'cart' => new CartResource(Cart::getCart()),
             ]
         ]);
     }
@@ -186,7 +186,7 @@ class CheckoutController extends Controller
         if ($redirectUrl = Payment::getRedirectUrl($cart)) {
             return response()->json([
                     'success'      => true,
-                    'redirect_url' => $redirectUrl
+                    'redirect_url' => $redirectUrl,
                 ]);
         }
 

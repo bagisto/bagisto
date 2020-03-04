@@ -64,7 +64,7 @@ class AttributeOptionRepository extends Repository
 
         if ($data['swatch_value'] instanceof \Illuminate\Http\UploadedFile) {
             parent::update([
-                'swatch_value' => $data['swatch_value']->store('attribute_option')
+                'swatch_value' => $data['swatch_value']->store('attribute_option'),
             ], $optionId);
         }
     }

@@ -28,7 +28,7 @@ class BundleOption extends AbstractProduct
         $this->product = $product;
 
         return [
-            'options' => $this->getOptions()
+            'options' => $this->getOptions(),
         ];
     }
 
@@ -70,7 +70,7 @@ class BundleOption extends AbstractProduct
             'type'        => $option->type,
             'is_required' => $option->is_required,
             'products'    => $this->getOptionProducts($option),
-            'sort_order'  => $option->sort_order
+            'sort_order'  => $option->sort_order,
         ];
     }
 
@@ -92,7 +92,7 @@ class BundleOption extends AbstractProduct
                 'name'       => $bundleOptionProduct->product->name,
                 'product_id' => $bundleOptionProduct->product_id,
                 'is_default' => $bundleOptionProduct->is_default,
-                'sort_order' => $bundleOptionProduct->sort_order
+                'sort_order' => $bundleOptionProduct->sort_order,
             ];
         }
 

@@ -24,7 +24,7 @@ class CatalogRule extends Model implements CatalogRuleContract
     ];
 
     protected $casts = [
-        'conditions' => 'array'
+        'conditions' => 'array',
     ];
 
     /**

@@ -20,8 +20,8 @@ class OrderDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('orders as order')
-                ->addSelect('order.id', 'order.increment_id', 'order.status', 'order.created_at', 'order.grand_total', 'order.order_currency_code')
-                ->where('customer_id', auth()->guard('customer')->user()->id);
+            ->addSelect('order.id', 'order.increment_id', 'order.status', 'order.created_at', 'order.grand_total', 'order.order_currency_code')
+            ->where('customer_id', auth()->guard('customer')->user()->id);
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -34,7 +34,7 @@ class OrderDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -43,7 +43,7 @@ class OrderDataGrid extends DataGrid
             'type'       => 'datetime',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -55,7 +55,7 @@ class OrderDataGrid extends DataGrid
             'filterable' => true,
             'wrapper'    => function ($value) {
                 return core()->formatPrice($value->grand_total, $value->order_currency_code);
-            }
+            },
         ]);
 
         $this->addColumn([
@@ -82,7 +82,7 @@ class OrderDataGrid extends DataGrid
                     return '<span class="badge badge-md badge-danger">Fraud</span>';
                 }
             },
-            'filterable' => true
+            'filterable' => true,
         ]);
     }
 
@@ -91,7 +91,7 @@ class OrderDataGrid extends DataGrid
             'type'   => 'View',
             'method' => 'GET',
             'route'  => 'customer.orders.view',
-            'icon'   => 'icon eye-icon'
+            'icon'   => 'icon eye-icon',
         ]);
     }
 }

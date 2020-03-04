@@ -32,7 +32,7 @@ class NewsLetterDataGrid extends DataGrid
             'type'       => 'number',
             'searchable' => false,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -48,7 +48,7 @@ class NewsLetterDataGrid extends DataGrid
                 } else {
                     return 'False';
                 }
-            }
+            },
         ]);
 
         $this->addColumn([
@@ -57,7 +57,7 @@ class NewsLetterDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
     }
 
@@ -66,7 +66,7 @@ class NewsLetterDataGrid extends DataGrid
             'title'  => 'Edit News Letter',
             'method' => 'GET',
             'route'  => 'admin.customers.subscribers.edit',
-            'icon'   => 'icon pencil-lg-icon'
+            'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
@@ -74,7 +74,7 @@ class NewsLetterDataGrid extends DataGrid
             'method'       => 'POST',
             'route'        => 'admin.customers.subscribers.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'Exchange Rate']),
-            'icon'         => 'icon trash-icon'
+            'icon'         => 'icon trash-icon',
         ]);
     }
 }
