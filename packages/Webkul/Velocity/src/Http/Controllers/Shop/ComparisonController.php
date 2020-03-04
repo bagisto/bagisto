@@ -88,22 +88,7 @@ class ComparisonController extends Controller
             } else {
                 // for product details
                 if ($items = request()->get('items')) {
-                    $productSlugs = explode('&', $items);
-
-                    foreach ($productSlugs as $slug) {
-                        $product = $this->productRepository->findBySlug($slug);
-
-                        $formattedProduct = $this->velocityHelper->formatProduct($product);
-
-                        $productMetaDetails = [];
-                        $productMetaDetails['image'] = $formattedProduct['image'];
-                        $productMetaDetails['priceHTML'] = $formattedProduct['priceHTML'];
-                        $productMetaDetails['addToCartHtml'] = $formattedProduct['addToCartHtml'];
-
-                        $product = array_merge($product->toArray(), $productMetaDetails);
-
-                        array_push($productCollection, $product);
-                    }
+                    $productCollection = $this->velocityHelper->fetchProductCollection($items);
                 }
             }
 

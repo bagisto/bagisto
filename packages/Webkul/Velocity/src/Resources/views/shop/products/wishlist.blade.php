@@ -24,8 +24,10 @@
         <wishlist-component
             active="false"
             is-customer="false"
-            product-id="{{ $product->product_id }}"
-            add-class="{{ $addWishlistClass ?? '' }}">
+            product-slug="{{ $product->url_key }}"
+            add-class="{{ $addWishlistClass ?? '' }}"
+            added-text="{{ __('shop::app.customer.account.wishlist.add') }}"
+            remove-text="{{ __('shop::app.customer.account.wishlist.remove') }}">
         </wishlist-component>
     @endauth
 {!! view_render_event('bagisto.shop.products.wishlist.after') !!}

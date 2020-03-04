@@ -21,7 +21,11 @@
             </h1>
 
             <div class="col-6" v-if="products.length > 0">
-                <button class="theme-btn light pull-right" @click="removeProductCompare('all')">Clear All</button>
+                <button
+                    class="theme-btn light pull-right"
+                    @click="removeProductCompare('all')">
+                    {{ __('shop::app.customer.account.wishlist.deleteall') }}
+                </button>
             </div>
 
             {!! view_render_event('bagisto.shop.customers.account.compare.view.before') !!}
@@ -49,36 +53,53 @@
                             </div>
 
                             <div class="col" :key="`title-${index}`" v-for="(product, index) in products">
-                                @if ($attribute['code'] == 'name')
-                                    <a :href="`${$root.baseUrl}/${product.url_key}`" class="unset">
-                                        <h1 class="fw6 fs18" v-text="product['{{ $attribute['code'] }}']"></h1>
-                                    </a>
-                                @elseif ($attribute['code'] == 'image')
-                                    <a :href="`${$root.baseUrl}/${product.url_key}`" class="unset">
-                                        <img :src="product['{{ $attribute['code'] }}']" class="image-wrapper"></span>
-                                    </a>
-                                @elseif ($attribute['code'] == 'price')
-                                    <span v-html="product['priceHTML']"></span>
-                                @elseif ($attribute['code'] == 'addToCartHtml')
-                                    <div class="action">
-                                        <vnode-injector :nodes="$root.getDynamicHTML(product.addToCartHtml)"></vnode-injector>
+                                @switch ($attribute['code'])
+                                    @case('name')
+                                        <a :href="`${$root.baseUrl}/${product.url_key}`" class="unset remove-decoration active-hover">
+                                            <h1 class="fw6 fs18" v-text="product['{{ $attribute['code'] }}']"></h1>
+                                        </a>
+                                        @break
 
-                                        <i
-                                            class="material-icons cross fs16"
-                                            @click="removeProductCompare(isCustomer ? product.id : product.slug)">
+                                    @case('image')
+                                        <a :href="`${$root.baseUrl}/${product.url_key}`" class="unset">
+                                            <img :src="product['{{ $attribute['code'] }}']" class="image-wrapper"></span>
+                                        </a>
+                                        @break
 
-                                            close
-                                        </i>
-                                    </div>
-                                @elseif ($attribute['code'] == 'color')
-                                    <span v-html="product.color_label"></span>
-                                @elseif ($attribute['code'] == 'size')
-                                    <span v-html="product.size_label"></span>
-                                @elseif ($attribute['code'] == 'size')
-                                    <span v-html="product.size_label"></span>
-                                @else
-                                    <span v-html="product['{{ $attribute['code'] }}']"></span>
-                                @endif
+                                    @case('price')
+                                        <span v-html="product['priceHTML']"></span>
+                                        @break
+
+                                    @case('addToCartHtml')
+                                        <div class="action">
+                                            <vnode-injector :nodes="getDynamicHTML(product.addToCartHtml)"></vnode-injector>
+
+                                            <i
+                                                class="material-icons cross fs16"
+                                                @click="removeProductCompare(isCustomer ? product.id : product.url_key)">
+
+                                                close
+                                            </i>
+                                        </div>
+                                        @break
+
+                                    @case('color')
+                                        <span v-html="product.color_label" class="fs16"></span>
+                                        @break
+
+                                    @case('size')
+                                        <span v-html="product.size_label" class="fs16"></span>
+                                        @break
+
+                                    @case('description')
+                                        <span v-html="product.description"></span>
+                                        @break
+
+                                    @default
+                                        <span v-html="product['{{ $attribute['code'] }}']" class="fs16"></span>
+                                        @break
+
+                                @endswitch
                             </div>
                         </div>
                     @endforeach
@@ -163,10 +184,12 @@
                             this.$set(this, 'products', []);
                         } else {
                             updatedItems = existingItems.filter(item => item != productId);
-                            this.$set(this, 'products', this.products.filter(product => product.slug != productId));
+                            this.$set(this, 'products', this.products.filter(product => product.url_key != productId));
                         }
 
                         window.localStorage.setItem('compared_product', JSON.stringify(updatedItems));
+
+                        this.$root.headerItemsCount++;
 
                         window.showAlert(
                             `alert-success`,

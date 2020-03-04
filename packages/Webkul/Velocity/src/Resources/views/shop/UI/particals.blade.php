@@ -56,7 +56,7 @@
 
 <script type="text/x-template" id="searchbar-template">
     <div class="row no-margin right searchbar">
-        <div class="col-lg-8 col-md-12 no-padding input-group">
+        <div class="col-lg-6 col-md-12 no-padding input-group">
             <form
                 method="GET"
                 role="search"
@@ -114,7 +114,7 @@
             </form>
         </div>
 
-        <div class="col-4">
+        <div class="col-6">
             {!! view_render_event('bagisto.shop.layout.header.cart-item.before') !!}
                 @include('shop::checkout.cart.mini-cart')
             {!! view_render_event('bagisto.shop.layout.header.cart-item.after') !!}
@@ -122,9 +122,24 @@
             {!! view_render_event('bagisto.shop.layout.header.compare.before') !!}
                 <a class="compare-btn unset" href="{{ route('velocity.product.compare') }}">
                     <i class="material-icons">compare_arrows</i>
-                    <span>Compare</span>
+                    <div class="badge-container" v-if="compareCount > 0">
+                        <span class="badge" v-text="compareCount"></span>
+                    </div>
+                    <span>{{ __('velocity::app.customer.compare.text') }}</span>
                 </a>
             {!! view_render_event('bagisto.shop.layout.header.compare.after') !!}
+
+            @guest('customer')
+                {!! view_render_event('bagisto.shop.layout.header.wishlist.before') !!}
+                    <a class="wishlist-btn unset" href="{{ route('velocity.product.guest-wishlist') }}">
+                        <i class="material-icons">favorite_border</i>
+                        <div class="badge-container" v-if="wishlistCount > 0">
+                            <span class="badge" v-text="wishlistCount"></span>
+                        </div>
+                        <span>{{ __('shop::app.layouts.wishlist') }}</span>
+                    </a>
+                {!! view_render_event('bagisto.shop.layout.header.wishlist.after') !!}
+            @endguest
         </div>
     </div>
 </script>
@@ -600,7 +615,15 @@
             template: '#searchbar-template',
             data: function () {
                 return {
+                    compareCount: 0,
+                    wishlistCount: 0,
                     searchedQuery: []
+                }
+            },
+
+            watch: {
+                '$root.headerItemsCount': function () {
+                    this.updateHeaderItemsCount();
                 }
             },
 
@@ -616,11 +639,26 @@
                 });
 
                 this.searchedQuery = updatedSearchedCollection;
+
+                this.updateHeaderItemsCount();
             },
 
             methods: {
                 'focusInput': function (event) {
                     $(event.target.parentElement.parentElement).find('input').focus();
+                },
+
+                'updateHeaderItemsCount': function () {
+                    let comparedItems = this.getStorageValue('compared_product');
+                    let wishlistedItems = this.getStorageValue('wishlist_product');
+
+                    if (wishlistedItems) {
+                        this.wishlistCount = wishlistedItems.length;
+                    }
+
+                    if (comparedItems) {
+                        this.compareCount = comparedItems.length;
+                    }
                 }
             }
         })

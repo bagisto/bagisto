@@ -67,7 +67,7 @@
                 <span class="fs14" v-text="product.firstReviewText"></span>
             </div>
 
-            <vnode-injector :nodes="$root.getDynamicHTML(product.addToCartHtml)"></vnode-injector>
+            <vnode-injector :nodes="getDynamicHTML(product.addToCartHtml)"></vnode-injector>
         </div>
     </div>
 </template>

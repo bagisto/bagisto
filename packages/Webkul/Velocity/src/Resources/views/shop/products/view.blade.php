@@ -94,12 +94,14 @@
                                         @include ('shop::products.price', ['product' => $product])
                                     </div>
 
-                                    @include ('shop::products.add-to-cart', [
-                                        'form' => false,
-                                        'product' => $product,
-                                        'showCompare' => true,
-                                        'showCartIcon' => false,
-                                    ])
+                                    <div class="product-actions">
+                                        @include ('shop::products.add-to-cart', [
+                                            'form' => false,
+                                            'product' => $product,
+                                            'showCompare' => true,
+                                            'showCartIcon' => false,
+                                        ])
+                                    </div>
                                 </div>
 
                                 {!! view_render_event('bagisto.shop.products.view.short_description.before', ['product' => $product]) !!}
