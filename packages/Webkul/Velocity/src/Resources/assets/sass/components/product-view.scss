@@ -220,18 +220,35 @@
         }
     }
 
-    .compare-icon,
-    .wishlist-icon {
-        height: 46px;
-        display: table;
-        cursor: pointer;
-        padding-left: 10px;
+    .product-actions {
+        > div {
+            display: inline-block;
 
-        i {
-            display: table-cell;
-            vertical-align: middle;
+            .add-to-cart-btn {
+                float: left;
+            }
+
+            .compare-icon,
+            .wishlist-icon {
+                height: 46px;
+                padding-left: 10px;
+
+                i {
+                    display: table-cell;
+                    vertical-align: middle;
+                }
+            }
+
+            .compare-icon {
+                display: inline-table;
+            }
+
+            .wishlist-icon {
+                float: right;
+            }
         }
     }
+
 
     .layouter,
     #product-form {

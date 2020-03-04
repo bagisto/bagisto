@@ -33,7 +33,7 @@ class ConfigurationController extends Controller
         VelocityMetadataRepository $velocityMetadataRepository
     ) {
         $this->_config = request('_config');
-        
+
         $this->velocityHelper = app('Webkul\Velocity\Helpers\Helper');
 
         $this->velocityMetaDataRepository = $velocityMetadataRepository;
@@ -43,7 +43,7 @@ class ConfigurationController extends Controller
     {
         $velocityMetaData = $this->velocityHelper->getVelocityMetaData();
 
-        if ( $velocityMetaData->advertisement ) {
+        if ( $velocityMetaData && $velocityMetaData->advertisement ) {
             $velocityMetaData->advertisement = $this->manageAddImages(json_decode($velocityMetaData->advertisement, true));
         }
 
@@ -115,7 +115,7 @@ class ConfigurationController extends Controller
     {
         $save_image = [];
         $save_data = $advertisement;
-        
+
         foreach ($data as $imageId => $image) {
             $file = 'images.' . $index . '.' . $imageId;
             $dir = 'velocity/images';
@@ -125,7 +125,7 @@ class ConfigurationController extends Controller
                     $filter_index = substr($imageId, 6, 1);
                     if ( isset($data[$filter_index]) ) {
                         $size = array_key_last($save_data[$index]);
-                        
+
                         $save_image[$size + 1] = request()->file($file)->store($dir);
                     } else {
                         $save_image[substr($imageId, 6, 1)] = request()->file($file)->store($dir);
@@ -135,9 +135,9 @@ class ConfigurationController extends Controller
                 if ( isset($advertisement[$index][$imageId]) && $advertisement[$index][$imageId] && !request()->hasFile($file)) {
                     $save_image[$imageId] = $advertisement[$index][$imageId];
 
-                    unset($advertisement[$index][$imageId]); 
+                    unset($advertisement[$index][$imageId]);
                 }
-                
+
                 if (request()->hasFile($file) && isset($advertisement[$index][$imageId])) {
                     Storage::delete($advertisement[$index][$imageId]);
 
@@ -188,7 +188,7 @@ class ConfigurationController extends Controller
                 }
             }
         }
-        
+
         return $images_path;
     }
 }
