@@ -99,6 +99,7 @@ $(document).ready(function () {
                     || Array.from(target.classList)[0]  == "rango-arrow-right"
                 ) {
                     let parentItem = target.closest('li');
+
                     if (target.id || parentItem.id.match('category-')) {
                         let subCategories = $(`#${target.id ? target.id : parentItem.id} .sub-categories`);
 
