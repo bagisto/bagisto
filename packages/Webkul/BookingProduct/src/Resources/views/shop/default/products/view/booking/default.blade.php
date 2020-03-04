@@ -3,7 +3,7 @@
     <span class="title">
         {{ __('bookingproduct::app.shop.products.slot-duration') }} :
 
-        {{ __('bookingproduct::app.shop.products.slot-duration-in-minutes', ['minutes' => 30]) }}
+        {{ __('bookingproduct::app.shop.products.slot-duration-in-minutes', ['minutes' => $bookingProduct->default_slot->duration]) }}
     </span>
 </div>
 
