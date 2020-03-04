@@ -27,8 +27,8 @@ class ProductDataGrid extends DataGrid
     {
         parent::__construct();
 
-        $this->locale  = request()->get('locale') == 'all' ? app()->getLocale() : (request()->get('locale') ?? app()->getLocale());
-        $this->channel = request()->get('channel') == 'all' ? core()->getDefaultChannelCode() : (request()->get('channel') ?? core()->getDefaultChannelCode());
+        $this->locale = request()->get('locale') ?? 'all';
+        $this->channel = request()->get('channel') ?? 'all';
     }
 
     public function prepareQueryBuilder()
@@ -46,7 +46,17 @@ class ProductDataGrid extends DataGrid
             'product_flat.price',
             'attribute_families.name as attribute_family',
             DB::raw('SUM(DISTINCT ' . DB::getTablePrefix() . 'product_inventories.qty) as quantity')
-        )->where('locale', $this->locale)->where('locale', $this->locale);
+        );
+
+        if ($this->locale !== 'all') {
+            $queryBuilder->where('locale', $this->locale);
+        } else {
+            $queryBuilder->whereNotNull('product_flat.name');
+        }
+
+        if ($this->channel !== 'all') {
+            $queryBuilder->where('channel', $this->channel);
+        }
 
         $queryBuilder->groupBy('product_flat.product_id');
 
