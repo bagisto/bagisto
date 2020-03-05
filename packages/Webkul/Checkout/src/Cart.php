@@ -2,6 +2,7 @@
 
 namespace Webkul\Checkout;
 
+use Webkul\Checkout\Models\CartAddress;
 use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Checkout\Repositories\CartItemRepository;
 use Webkul\Checkout\Repositories\CartAddressRepository;
@@ -1094,12 +1095,13 @@ class Cart
     {
         $attributes = [];
 
-        $attributes['address1'] = $addressAttributes['address1'] ?? '';
-        $attributes['country'] = $addressAttributes['country'] ?? '';
-        $attributes['state'] = $addressAttributes['state'] ?? '';
-        $attributes['city'] = $addressAttributes['city'] ?? '';
-        $attributes['postcode'] = $addressAttributes['postcode'] ?? '';
-        $attributes['phone'] = $addressAttributes['phone'] ?? '';
+        $cartAddress = new CartAddress();
+
+        foreach ($cartAddress->getFillable() as $attribute) {
+            if (isset($addressAttributes[$attribute])) {
+                $attributes[$attribute] = $addressAttributes[$attribute];
+            }
+        }
 
         return $attributes;
     }
@@ -1148,6 +1150,7 @@ class Cart
             $this->fillCustomerAttributes(),
             $this->fillAddressAttributes($data['billing'])
         );
+
 
         return $billingAddress;
     }

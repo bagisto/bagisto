@@ -66,11 +66,6 @@ class OrderCest
 
         $I->seeResponseCodeIsSuccessful();
 
-        // assert with the data from the customer model:
-        $addressData['first_name'] = $mocks['customer']->first_name;
-        $addressData['last_name'] = $mocks['customer']->last_name;
-        $addressData['email'] = $mocks['customer']->email;
-
         $I->seeRecord(CartAddress::class, array_merge($addressData, [
             'address_type' => 'shipping',
             'cart_id'      => $mocks['cart']->id,
