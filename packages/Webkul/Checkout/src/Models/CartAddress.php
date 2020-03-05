@@ -23,6 +23,7 @@ class CartAddress extends Model implements CartAddressContract
         'phone',
         'address_type',
         'cart_id',
+        'customer_id',
         ];
 
     /**

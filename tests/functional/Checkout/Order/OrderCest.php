@@ -66,14 +66,21 @@ class OrderCest
 
         $I->seeResponseCodeIsSuccessful();
 
+        // assert with the data from the customer model:
+        $addressData['first_name'] = $mocks['customer']->first_name;
+        $addressData['last_name'] = $mocks['customer']->last_name;
+        $addressData['email'] = $mocks['customer']->email;
+
         $I->seeRecord(CartAddress::class, array_merge($addressData, [
             'address_type' => 'shipping',
             'cart_id'      => $mocks['cart']->id,
+            'customer_id'  => $mocks['customer']->id,
         ]));
 
         $I->seeRecord(CartAddress::class, array_merge($addressData, [
             'address_type' => 'billing',
             'cart_id'      => $mocks['cart']->id,
+            'customer_id'  => $mocks['customer']->id,
         ]));
 
         $I->sendAjaxPostRequest(route('shop.checkout.save-shipping'), [
@@ -127,11 +134,13 @@ class OrderCest
         $I->seeRecord(OrderAddress::class, array_merge($addressData, [
             'order_id'     => $order->id,
             'address_type' => 'shipping',
+            'customer_id'  => $mocks['customer']->id,
         ]));
 
         $I->seeRecord(OrderAddress::class, array_merge($addressData, [
             'order_id'     => $order->id,
             'address_type' => 'billing',
+            'customer_id'  => $mocks['customer']->id,
         ]));
 
         $I->seeRecord(OrderPayment::class, [
