@@ -25,12 +25,11 @@ class CartItemRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @param $id
-     * @param string $attribute
-     * @return mixed
+     * @param  array   $data
+     * @param  int     $id
+     * @param  string  $attribute
+     * @return \Webkul\Checkout\Contracts\CartItem
      */
-
     public function update(array $data, $id, $attribute = "id")
     {
         $item = $this->find($id);
@@ -40,6 +39,10 @@ class CartItemRepository extends Repository
         return $item;
     }
 
+    /**
+     * @param  int  $cartItemId
+     * @return int
+     */
     public function getProduct($cartItemId)
     {
         return $this->model->find($cartItemId)->product->id;

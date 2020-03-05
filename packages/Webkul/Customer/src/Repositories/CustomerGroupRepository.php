@@ -25,10 +25,9 @@ class CustomerGroupRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @return mixed
+     * @param  array  $data
+     * @return \Webkul\Customer\Contracts\CustomerGroup
      */
-
     public function create(array $data)
     {
         $customer = $this->model->create($data);
@@ -37,12 +36,11 @@ class CustomerGroupRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @param $id
-     * @param string $attribute
-     * @return mixed
+     * @param  array   $data
+     * @param  int     $id
+     * @param  string  $id
+     * @return \Webkul\Customer\Contracts\CustomerGroup
      */
-
     public function update(array $data, $id, $attribute = "id")
     {
         $customer = $this->find($id);

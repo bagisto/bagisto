@@ -30,18 +30,16 @@ class AddressController extends Controller
     /**
      * CustomerAddressRepository object
      *
-     * @var Object
+     * @var \Webkul\Customer\Repositories\CustomerAddressRepository
      */
     protected $customerAddressRepository;
 
     /**
      * Controller instance
      *
-     * @param Webkul\Customer\Repositories\CustomerAddressRepository $customerAddressRepository
+     * @param  Webkul\Customer\Repositories\CustomerAddressRepository  $customerAddressRepository
      */
-    public function __construct(
-        CustomerAddressRepository $customerAddressRepository
-    )
+    public function __construct(CustomerAddressRepository $customerAddressRepository)
     {
         $this->guard = request()->has('token') ? 'api' : 'customer';
 

@@ -25,22 +25,22 @@ class CatalogRuleController extends Controller
     /**
      * To hold Catalog repository instance
      * 
-     * @var CatalogRuleRepository
+     * @var \Webkul\CatalogRule\Repositories\CatalogRuleRepository
      */
     protected $catalogRuleRepository;
 
     /**
      * CatalogRuleIndex
      * 
-     * @var CatalogRuleIndex
+     * @var \Webkul\CatalogRule\Helpers\CatalogRuleIndex
      */
     protected $catalogRuleIndexHelper;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\CatalogRule\Repositories\CatalogRuleRepository $catalogRuleRepository
-     * @param  \Webkul\CatalogRule\Helpers\CatalogRuleIndex           $catalogRuleIndexHelper
+     * @param  \Webkul\CatalogRule\Repositories\CatalogRuleRepository  $catalogRuleRepository
+     * @param  \Webkul\CatalogRule\Helpers\CatalogRuleIndex            $catalogRuleIndexHelper
      * @return void
      */
     public function __construct(
@@ -110,7 +110,7 @@ class CatalogRuleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -124,7 +124,7 @@ class CatalogRuleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  int  $id
+     * @param  int                      $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)

@@ -22,11 +22,11 @@ class BookingProductRepository extends Repository
     /**
      * Create a new repository instance.
      *
-     * @param Webkul\BookingProduct\Repositories\BookingProductDefaultSlotRepository     $bookingProductDefaultSlotRepository
-     * @param Webkul\BookingProduct\Repositories\BookingProductAppointmentSlotRepository $bookingProductAppointmentSlotRepository
-     * @param Webkul\BookingProduct\Repositories\BookingProductEventTicketRepository     $bookingProductEventTicketRepository
-     * @param Webkul\BookingProduct\Repositories\BookingProductRentalSlotRepository      $bookingProductRentalSlotRepository
-     * @param Webkul\BookingProduct\Repositories\BookingProductTableSlotRepository       $bookingProductTableSlotRepository
+     * @param  \Webkul\BookingProduct\Repositories\BookingProductDefaultSlotRepository      $bookingProductDefaultSlotRepository
+     * @param  \Webkul\BookingProduct\Repositories\BookingProductAppointmentSlotRepository  $bookingProductAppointmentSlotRepository
+     * @param  \Webkul\BookingProduct\Repositories\BookingProductEventTicketRepository      $bookingProductEventTicketRepository
+     * @param  \Webkul\BookingProduct\Repositories\BookingProductRentalSlotRepository       $bookingProductRentalSlotRepository
+     * @param  \Webkul\BookingProduct\Repositories\BookingProductTableSlotRepository        $bookingProductTableSlotRepository
      * @return void
      */
     public function __construct(
@@ -62,8 +62,8 @@ class BookingProductRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @return mixed
+     * @param  array  $data
+     * @return \Webkul\BookingProduct\Contracts\BookingProduct
      */
     public function create(array $data)
     {
@@ -79,10 +79,10 @@ class BookingProductRepository extends Repository
     }
 
     /**
-     * @param array   $data
-     * @param integer $id
-     * @param string  $attribute
-     * @return mixed
+     * @param  array   $data
+     * @param  int     $id
+     * @param  string  $attribute
+     * @return \Webkul\BookingProduct\Contracts\BookingProduct
      */
     public function update(array $data, $id, $attribute = "id")
     {
@@ -116,7 +116,7 @@ class BookingProductRepository extends Repository
     }
 
     /**
-     * @param array $data
+     * @param  array  $data
      * @return array
      */
     public function formatSlots($data)
@@ -147,7 +147,7 @@ class BookingProductRepository extends Repository
     }
 
     /**
-     * @param array $data
+     * @param  array  $data
      * @return array
      */
     public function validateSlots($data)
@@ -168,7 +168,7 @@ class BookingProductRepository extends Repository
     }
 
     /**
-     * @param array $data
+     * @param  array  $data
      * @return array
      */
     public function skipOverLappingSlots($slots)

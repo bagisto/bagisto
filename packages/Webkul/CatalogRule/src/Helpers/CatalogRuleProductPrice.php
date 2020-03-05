@@ -11,30 +11,30 @@ class CatalogRuleProductPrice
     /**
      * CatalogRuleProductPriceRepository object
      *
-     * @var CatalogRuleProductPriceRepository
+     * @var \Webkul\CatalogRule\Repositories\CatalogRuleProductPriceRepository
      */
     protected $catalogRuleProductPriceRepository;
 
     /**
      * CatalogRuleProduct object
      *
-     * @var CatalogRuleProduct
+     * @var \Webkul\CatalogRule\Helpers\CatalogRuleProduct
      */
     protected $catalogRuleProductHelper;
 
     /**
      * CustomerGroupRepository object
      *
-     * @var CustomerGroupRepository
+     * @var \Webkul\Customer\Repositories\CustomerGroupRepository
      */
     protected $customerGroupRepository;
 
     /**
      * Create a new helper instance.
      *
-     * @param  Webkul\Attribute\Repositories\CatalogRuleProductPriceRepository $catalogRuleProductPriceRepository
-     * @param  Webkul\CatalogRule\Repositories\CatalogRuleProduct              $catalogRuleProductHelper
-     * @param  Webkul\Customer\Repositories\CustomerGroupRepository            $customerGroupRepository
+     * @param  \Webkul\Attribute\Repositories\CatalogRuleProductPriceRepository  $catalogRuleProductPriceRepository
+     * @param  \Webkul\CatalogRule\Repositories\CatalogRuleProduct               $catalogRuleProductHelper
+     * @param  \Webkul\Customer\Repositories\CustomerGroupRepository             $customerGroupRepository
      * @return void
      */
     public function __construct(
@@ -53,7 +53,7 @@ class CatalogRuleProductPrice
     /**
      * Return current logged in customer
      *
-     * @return Customer | Boolean
+     * @return  Customer|bool
      */
     public function getCurrentCustomer()
     {
@@ -65,8 +65,8 @@ class CatalogRuleProductPrice
     /**
      * Collect discount on cart
      *
-     * @param integer $batchCount
-     * @param Product $product
+     * @param  int                                $batchCount
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @return void
      */
     public function indexRuleProductPrice($batchCount, $product = null)
@@ -140,8 +140,8 @@ class CatalogRuleProductPrice
     /**
      * Calculates product price based on rule
      *
-     * @param array        $rule
-     * @param Product|null $productData
+     * @param  array                                   $rule
+     * @param  \Webkul\Product\Contracts\Product|null  $productData
      * @return float
      */
     public function calculate($rule, $productData = null)
@@ -176,7 +176,7 @@ class CatalogRuleProductPrice
     /**
      * Clean product price index
      *
-     * @param array $productIds
+     * @param  array  $productIds
      * @return void
      */
     public function cleanProductPriceIndex($productIds = [])
@@ -193,8 +193,8 @@ class CatalogRuleProductPrice
     /**
      * Get catalog rules product price for specific date, channel and customer group
      *
-     * @param Product $product
-     * @return void
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @return array|void
      */
     public function getRulePrice($product)
     {

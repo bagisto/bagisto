@@ -9,19 +9,30 @@ class FixerExchange  extends ExchangeRate
 {
     /**
      * API key
+     * 
+     * @var string 
      */
     protected $apiKey;
 
     /**
      * API endpoint
+     * 
+     * @var string 
      */
     protected $apiEndPoint;
 
     /**
      * Holds ExchangeRateRepository instance
+     * 
+     * @var \Webkul\Core\Helpers\Exchange\ExchangeRate
      */
     protected $exchangeRate;
 
+    /**
+     * Create a new helper instance.
+     *
+     * @return void
+     */
     public function  __construct()
     {
         $this->apiKey = config('services.exchange-api')['fixer']['key'];
@@ -29,6 +40,9 @@ class FixerExchange  extends ExchangeRate
         $this->apiEndPoint = 'http://data.fixer.io/api/latest?access_key=' . $this->apiKey;
     }
 
+    /**
+     * @return array
+     */
     public function fetchRates()
     {
         $rates = array();

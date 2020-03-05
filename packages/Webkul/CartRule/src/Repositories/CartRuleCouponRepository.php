@@ -34,8 +34,8 @@ class CartRuleCouponRepository extends Repository
     /**
      * Creates coupons for cart rule
      *
-     * @param array   $data
-     * @param integer $cartRuleId
+     * @param  array  $data
+     * @param  int    $cartRuleId
      * @return void
      */
     public function generateCoupons($data, $cartRuleId)
@@ -57,8 +57,8 @@ class CartRuleCouponRepository extends Repository
     /**
      * Creates coupons for cart rule
      *
-     * @param string  $format
-     * @param integer $length
+     * @param  string  $format
+     * @param  int     $length
      * @return string
      */
     public function getRandomString($format, $length)

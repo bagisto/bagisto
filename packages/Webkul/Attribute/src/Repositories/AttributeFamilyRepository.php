@@ -20,22 +20,22 @@ class AttributeFamilyRepository extends Repository
     /**
      * AttributeRepository object
      *
-     * @var Object
+     * @var \Webkul\Attribute\Repositories\AttributeRepository
      */
     protected $attributeRepository;
 
     /**
      * AttributeGroupRepository object
      *
-     * @var Object
+     * @var \Webkul\Attribute\Repositories\AttributeGroupRepository
      */
     protected $attributeGroupRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeRepository      $attributeRepository
-     * @param  Webkul\Attribute\Repositories\AttributeGroupRepository $attributeGroupRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository       $attributeRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeGroupRepository  $attributeGroupRepository
      * @return void
      */
     public function __construct(
@@ -62,8 +62,8 @@ class AttributeFamilyRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @return mixed
+     * @param  array  $data
+     * @return \Webkul\Attribute\Contracts\AttributeFamily
      */
     public function create(array $data)
     {
@@ -99,10 +99,10 @@ class AttributeFamilyRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @param $id
-     * @param string $attribute
-     * @return mixed
+     * @param  array   $data
+     * @param  int     $id
+     * @param  string  $attribute
+     * @return \Webkul\Attribute\Contracts\AttributeFamily
      */
     public function update(array $data, $id, $attribute = "id")
     {
@@ -165,6 +165,10 @@ class AttributeFamilyRepository extends Repository
         return $family;
     }
 
+
+    /**
+     * @return array
+     */
     public function getPartial()
     {
         $attributeFamilies = $this->model->all();
@@ -185,7 +189,7 @@ class AttributeFamilyRepository extends Repository
     }
 
     /**
-     * @param $id
+     * @param  int  $id
      * @return void
      */
     public function delete($id)

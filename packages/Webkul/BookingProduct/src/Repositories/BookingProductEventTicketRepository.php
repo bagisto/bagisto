@@ -24,8 +24,8 @@ class BookingProductEventTicketRepository extends Repository
     }
 
     /**
-     * @param array          $data
-     * @param BookingProduct $bookingProduct
+     * @param  array                                            $data
+     * @param  \Webkul\BookingProduct\Contracts\BookingProduct  $bookingProduct
      * @return void
      */
     public function saveEventTickets($data, $bookingProduct)

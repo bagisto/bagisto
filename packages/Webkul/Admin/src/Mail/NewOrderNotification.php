@@ -20,13 +20,14 @@ class NewOrderNotification extends Mailable
     /**
      * The order instance.
      *
-     * @var Order
+     * @var  \Webkul\Sales\Contracts\Order  $order
      */
     public $order;
 
     /**
      * Create a new message instance.
      *
+     * @param  \Webkul\Sales\Contracts\Order  $order
      * @return void
      */
     public function __construct($order)

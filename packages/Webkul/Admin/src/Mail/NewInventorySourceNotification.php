@@ -20,14 +20,14 @@ class NewInventorySourceNotification extends Mailable
     /**
      * The shipment instance.
      *
-     * @var Shipment
+     * @var \Webkul\Customer\Contracts\Shipment
      */
     public $shipment;
 
     /**
      * Create a new message instance.
      *
-     * @param mixed $shipment
+     * @param  \Webkul\Customer\Contracts\Shipment  $shipment
      * @return void
      */
     public function __construct($shipment)

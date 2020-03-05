@@ -20,23 +20,28 @@ class NewCustomerNotification extends Mailable
     /**
      * The customer instance.
      *
-     * @var customer
+     * @var  \Webkul\Customer\Contracts\Customer
      */
     public $customer;
 
     /**
      * The password instance.
      *
-     * @var password
+     * @var string
      */
     public $password;
 
     /**
      * Create a new message instance.
-     *
+     * 
+     * @param  \Webkul\Customer\Contracts\Customer  $order
+     * @param  string                               $password
      * @return void
      */
-    public function __construct($customer, $password)
+    public function __construct(
+        $customer,
+        $password
+    )
     {
         $this->customer = $customer;
 

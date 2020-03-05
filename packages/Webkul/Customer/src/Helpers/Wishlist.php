@@ -9,14 +9,14 @@ class Wishlist
     /**
      * WishlistRepository object
      *
-     * @var array
+     * @var \Webkul\Customer\Repositories\WishlistRepository
      */
     protected $wishlistRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Customer\Repositories\WishlistRepository
+     * @param  \Webkul\Customer\Repositories\WishlistRepository
      * @return void
      */
     public function __construct(WishlistRepository $wishlistRepository)
@@ -27,7 +27,7 @@ class Wishlist
     /**
      * Returns wishlist products for current customer.
      *
-     * @param Product $product
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @return boolean
      */
     public function getWishlistProduct($product)

@@ -20,8 +20,8 @@ class CartRuleCouponsDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('cart_rules')
-                ->select('id')
-                ->addSelect('id', 'code', 'limit', 'usage_per_customer', 'usage_throttle');
+            ->select('id')
+            ->addSelect('id', 'code', 'limit', 'usage_per_customer', 'usage_throttle');
 
         $this->setQueryBuilder($queryBuilder);
     }

@@ -18,38 +18,38 @@ class Order
     /**
      * CartRuleRepository object
      *
-     * @var CartRuleRepository
+     * @var \Webkul\CartRule\Repositories\CartRuleRepository
      */
     protected $cartRuleRepository;
 
     /**
      * CartRuleCustomerRepository object
      *
-     * @var CartRuleCustomerRepository
+     * @var Webkul\CartRule\Repositories\\CartRuleCustomerRepository
      */
     protected $cartRuleCustomerRepository;
 
     /**
      * CartRuleCouponRepository object
      *
-     * @var CartRuleCouponRepository
+     * @var Webkul\CartRule\Repositories\\CartRuleCouponRepository
      */
     protected $cartRuleCouponRepository;
 
     /**
      * CartRuleCouponUsageRepository object
      *
-     * @var CartRuleCouponUsageRepository
+     * @var \Webkul\CartRule\Repositories\CartRuleCouponUsageRepository
      */
     protected $cartRuleCouponUsageRepository;
 
     /**
      * Create a new listener instance.
      *
-     * @param  Webkul\CartRule\Repositories\CartRuleRepository            $cartRuleRepository
-     * @param  Webkul\CartRule\Repositories\CartRuleCustomerRepository    $cartRuleCustomerRepository
-     * @param  Webkul\CartRule\Repositories\CartRuleCouponRepository      $cartRuleCouponRepository
-     * @param  Webkul\CartRule\Repositories\CartRuleCouponUsageRepository $cartRuleCouponUsageRepository
+     * @param  \Webkul\CartRule\Repositories\CartRuleRepository             $cartRuleRepository
+     * @param  \Webkul\CartRule\Repositories\CartRuleCustomerRepository     $cartRuleCustomerRepository
+     * @param  \Webkul\CartRule\Repositories\CartRuleCouponRepository       $cartRuleCouponRepository
+     * @param  \Webkul\CartRule\Repositories\CartRuleCouponUsageRepository  $cartRuleCouponUsageRepository
      * @return void
      */
     public function __construct(
@@ -71,7 +71,7 @@ class Order
     /**
      * Save cart rule and cart rule coupon properties after place order
      * 
-     * @param Order $order
+     * @param  \Webkul\Sales\Contracts\Order  $order
      * @return void
      */
     public function manageCartRule($order)

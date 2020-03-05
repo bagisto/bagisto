@@ -26,8 +26,8 @@ class CmsRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @return mixed
+     * @param  array  $data
+     * @return \Webkul\CMS\Contracts\CmsPage
      */
     public function create(array $data)
     {
@@ -53,10 +53,10 @@ class CmsRepository extends Repository
     }
 
     /**
-     * @param array   $data
-     * @param integer $id
-     * @param string $attribute
-     * @return mixed
+     * @param  array   $data
+     * @param  int     $id
+     * @param  string  $attribute
+     * @return \Webkul\CMS\Contracts\CmsPage
      */
     public function update(array $data, $id, $attribute = "id")
     {
@@ -76,9 +76,9 @@ class CmsRepository extends Repository
     /**
      * Checks slug is unique or not based on locale
      *
-     * @param integer $id
-     * @param string  $urlKey
-     * @return boolean
+     * @param  int     $id
+     * @param  string  $urlKey
+     * @return bool
      */
     public function isUrlKeyUnique($id, $urlKey)
     {
@@ -94,8 +94,8 @@ class CmsRepository extends Repository
     /**
      * Retrive category from slug
      *
-     * @param string $urlKey
-     * @return mixed
+     * @param  string  $urlKey
+     * @return \Webkul\CMS\Contracts\CmsPage|\Exception
      */
     public function findByUrlKeyOrFail($urlKey)
     {

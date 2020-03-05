@@ -24,22 +24,22 @@ class ExchangeRateController extends Controller
     /**
      * ExchangeRateRepository instance
      *
-     * @var Object
+     * @var \Webkul\Core\Repositories\ExchangeRateRepository
      */
     protected $exchangeRateRepository;
 
     /**
      * CurrencyRepository object
      *
-     * @var Object
+     * @var \Webkul\Core\Repositories\CurrencyRepository
      */
     protected $currencyRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\ExchangeRateRepository $exchangeRateRepository
-     * @param  \Webkul\Core\Repositories\CurrencyRepository     $currencyRepository
+     * @param  \Webkul\Core\Repositories\ExchangeRateRepository  $exchangeRateRepository
+     * @param  \Webkul\Core\Repositories\CurrencyRepository      $currencyRepository
      * @return void
      */
     public function __construct(
@@ -143,6 +143,7 @@ class ExchangeRateController extends Controller
     /**
      * Update Rates Using Exchange Rates API
      *
+     * @param  string  $service
      * @return \Illuminate\Http\JsonResponse
      */
     public function updateRates($service)

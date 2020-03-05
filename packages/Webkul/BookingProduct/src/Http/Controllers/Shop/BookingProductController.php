@@ -18,13 +18,6 @@ use Webkul\BookingProduct\Helpers\TableSlot as TableSlotHelper;
 class BookingProductController extends Controller
 {
     /**
-     * Booking object
-     *
-     * @var Object
-     */
-    protected $bookingHelper;
-
-    /**
      * @return array
      */
     protected $bookingHelpers = [];
@@ -32,12 +25,12 @@ class BookingProductController extends Controller
     /**
      * Create a new helper instance.
      *
-     * @param Webkul\BookingProduct\Repositories\BookingProductRepository $bookingProductRepository
-     * @param Webkul\BookingProduct\Helpers\DefaultSlot                   $defaultSlotHelper
-     * @param Webkul\BookingProduct\Helpers\AppointmentSlot               $appointmentSlotHelper
-     * @param Webkul\BookingProduct\Helpers\RentalSlot                    $rentalSlotHelper
-     * @param Webkul\BookingProduct\Helpers\EventTicket                     $EventTicketHelper
-     * @param Webkul\BookingProduct\Helpers\TableSlot                     $tableSlotHelper
+     * @param  \Webkul\BookingProduct\Repositories\BookingProductRepository  $bookingProductRepository
+     * @param  \Webkul\BookingProduct\Helpers\DefaultSlot                    $defaultSlotHelper
+     * @param  \Webkul\BookingProduct\Helpers\AppointmentSlot                $appointmentSlotHelper
+     * @param  \Webkul\BookingProduct\Helpers\RentalSlot                     $rentalSlotHelper
+     * @param  \Webkul\BookingProduct\Helpers\EventTicket                    $EventTicketHelper
+     * @param  \Webkul\BookingProduct\Helpers\TableSlot                      $tableSlotHelper
      * @return void
      */
     public function __construct(

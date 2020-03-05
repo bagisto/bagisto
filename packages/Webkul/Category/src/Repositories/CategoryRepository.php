@@ -30,8 +30,8 @@ class CategoryRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @return mixed
+     * @param  array $data
+     * @return \Webkul\Category\Contracts\Category
      */
     public function create(array $data)
     {
@@ -66,8 +66,8 @@ class CategoryRepository extends Repository
     /**
      * Specify category tree
      *
-     * @param integer $id
-     * @return mixed
+     * @param  int  $id
+     * @return \Webkul\Category\Contracts\Category
      */
     public function getCategoryTree($id = null)
     {
@@ -79,8 +79,8 @@ class CategoryRepository extends Repository
     /**
      * Specify category tree
      *
-     * @param integer $id
-     * @return mixed
+     * @param  int  $id
+     * @return \Illuminate\Support\Collection
      */
     public function getCategoryTreeWithoutDescendant($id = null)
     {
@@ -92,7 +92,7 @@ class CategoryRepository extends Repository
     /**
      * Get root categories
      *
-     * @return mixed
+     * @return \Illuminate\Support\Collection
      */
     public function getRootCategories()
     {
@@ -102,8 +102,8 @@ class CategoryRepository extends Repository
     /**
      * get visible category tree
      *
-     * @param integer $id
-     * @return mixed
+     * @param  int  $id
+     * @return \Illuminate\Support\Collection
      */
     public function getVisibleCategoryTree($id = null)
     {
@@ -121,9 +121,9 @@ class CategoryRepository extends Repository
     /**
      * Checks slug is unique or not based on locale
      *
-     * @param integer $id
-     * @param string  $slug
-     * @return boolean
+     * @param  int     $id
+     * @param  string  $slug
+     * @return bool
      */
     public function isSlugUnique($id, $slug)
     {
@@ -140,7 +140,7 @@ class CategoryRepository extends Repository
      * Retrive category from slug
      *
      * @param string $slug
-     * @return mixed
+     * @return \Webkul\Category\Contracts\Category
      */
     public function findBySlugOrFail($slug)
     {
@@ -156,9 +156,8 @@ class CategoryRepository extends Repository
     }
 
     /**
-     * @param string $urlPath
-     *
-     * @return mixed
+     * @param  string  $urlPath
+     * @return \Webkul\Category\Contracts\Category
      */
     public function findByPath(string $urlPath)
     {
@@ -166,10 +165,10 @@ class CategoryRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @param $id
-     * @param string $attribute
-     * @return mixed
+     * @param  array   $data
+     * @param  int     $id
+     * @param  string  $attribute
+     * @return \Webkul\Category\Contracts\Category
      */
     public function update(array $data, $id, $attribute = "id")
     {
@@ -191,7 +190,7 @@ class CategoryRepository extends Repository
     }
 
     /**
-     * @param $id
+     * @param  int  $id
      * @return void
      */
     public function delete($id)
@@ -204,8 +203,8 @@ class CategoryRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @param mixed $category
+     * @param  array                                $data
+     * @param  \Webkul\Category\Contracts\Category  $category
      * @return void
      */
     public function uploadImages($data, $category, $type = "image")
@@ -236,10 +235,15 @@ class CategoryRepository extends Repository
         }
     }
 
+    /**
+     * @param  array|null  $columns
+     * @return array
+     */
     public function getPartial($columns = null)
     {
         $categories = $this->model->all();
-        $trimmed = array();
+
+        $trimmed = [];
 
         foreach ($categories as $key => $category) {
             if ($category->name != null || $category->name != "") {

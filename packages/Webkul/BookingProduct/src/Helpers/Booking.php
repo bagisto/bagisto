@@ -23,7 +23,7 @@ class Booking
     /**
      * BookingProductRepository
      * 
-     * @return object
+     * @return \Webkul\BookingProduct\Repositories\BookingProductRepository
      */
     protected $bookingProductRepository;
 
@@ -35,7 +35,7 @@ class Booking
     /**
      * BookingRepository
      * 
-     * @return object
+     * @return \Webkul\BookingProduct\Repositories\BookingRepository
      */
     protected $bookingRepository;
 
@@ -58,13 +58,13 @@ class Booking
     /**
      * Create a new helper instance.
      *
-     * @param Webkul\BookingProduct\Repositories\BookingProductRepository                $bookingProductRepository
-     * @param Webkul\BookingProduct\Repositories\BookingProductDefaultSlotRepository     $bookingProductDefaultSlotRepository
-     * @param Webkul\BookingProduct\Repositories\BookingProductAppointmentSlotRepository $bookingProductAppointmentSlotRepository
-     * @param Webkul\BookingProduct\Repositories\BookingProductEventTicketRepository     $bookingProductEventTicketRepository
-     * @param Webkul\BookingProduct\Repositories\BookingProductRentalSlotRepository      $bookingProductRentalSlotRepository
-     * @param Webkul\BookingProduct\Repositories\BookingProductTableSlotRepository       $bookingProductTableSlotRepository
-     * @param Webkul\BookingProduct\Repositories\BookingRepository                       $bookingRepository
+     * @param  \Webkul\BookingProduct\Repositories\BookingProductRepository                 $bookingProductRepository
+     * @param  \Webkul\BookingProduct\Repositories\BookingProductDefaultSlotRepository      $bookingProductDefaultSlotRepository
+     * @param  \Webkul\BookingProduct\Repositories\BookingProductAppointmentSlotRepository  $bookingProductAppointmentSlotRepository
+     * @param  \Webkul\BookingProduct\Repositories\BookingProductEventTicketRepository      $bookingProductEventTicketRepository
+     * @param  \Webkul\BookingProduct\Repositories\BookingProductRentalSlotRepository       $bookingProductRentalSlotRepository
+     * @param  \Webkul\BookingProduct\Repositories\BookingProductTableSlotRepository        $bookingProductTableSlotRepository
+     * @param  \Webkul\BookingProduct\Repositories\BookingRepository                        $bookingRepository
      * @return void
      */
     public function __construct(
@@ -95,7 +95,7 @@ class Booking
     /**
      * Returns the booking type hepler instance
      *
-     * @param string $type
+     * @param  string  $type
      * @return array
      */
     public function getTypeHepler($type)
@@ -106,7 +106,7 @@ class Booking
     /**
      * Returns the booking information
      *
-     * @param BookingProduct $bookingProduct
+     * @param  \Webkul\BookingProduct\Contracts\BookingProduct  $bookingProduct
      * @return array
      */
     public function getWeekSlotDurations($bookingProduct)
@@ -136,7 +136,7 @@ class Booking
     /**
      * Returns html of slots for a current day
      *
-     * @param BookingProduct $bookingProduct
+     * @param  \Webkul\BookingProduct\Contracts\BookingProduct  $bookingProduct
      * @return string
      */
     public function getTodaySlotsHtml($bookingProduct)
@@ -155,7 +155,7 @@ class Booking
     /**
      * Returns slots for a current day
      *
-     * @param BookingProduct $bookingProduct
+     * @param  \Webkul\BookingProduct\Contracts\BookingProduct  $bookingProduct
      * @return array
      */
     public function getTodaySlots($bookingProduct)
@@ -168,7 +168,7 @@ class Booking
     /**
      * Returns the available week days
      *
-     * @param Object $bookingProduct
+     * @param  \Webkul\BookingProduct\Contracts\BookingProduct  $bookingProduct
      * @return array
      */
     public function getAvailableWeekDays($bookingProduct)
@@ -204,7 +204,7 @@ class Booking
     /**
      * Sort days
      *
-     * @param array $days
+     * @param  array  $days
      * @return array
      */
     public function sortDaysOfWeek($days)
@@ -227,7 +227,7 @@ class Booking
     /**
      * Convert time from 24 to 12 hour format
      *
-     * @param array $slots
+     * @param  array  $slots
      * @return array
      */
     public function conver24To12Hours($slots)
@@ -247,8 +247,8 @@ class Booking
     /**
      * Returns slots for a perticular day
      *
-     * @param BookingProduct $bookingProduct
-     * @param string         $date
+     * @param  \Webkul\BookingProduct\Contracts\BookingProduct  $bookingProduct
+     * @param  string                                           $date
      * @return array
      */
     public function getSlotsByDate($bookingProduct, $date)
@@ -331,7 +331,7 @@ class Booking
     }
 
     /**
-     * @param CartItem|array $cartItem
+     * @param  \Webkul\Ceckout\Contracts\CartItem|array  $cartItem
      * @return bool
      */
     public function isItemHaveQuantity($cartItem)
@@ -346,7 +346,7 @@ class Booking
     }
 
     /**
-     * @param array $cartProducts
+     * @param  array  $cartProducts
      * @return bool
      */
     public function isSlotAvailable($cartProducts)
@@ -361,8 +361,8 @@ class Booking
     }
 
     /**
-     * @param array $data
-     * @return integer
+     * @param  array  $data
+     * @return int
      */
     public function getBookedQuantity($data)
     {
@@ -382,7 +382,7 @@ class Booking
     /**
      * Returns additional cart item information
      *
-     * @param array $data
+     * @param  array  $data
      * @return array
      */
     public function getCartItemOptions($data)
@@ -495,7 +495,7 @@ class Booking
     /**
      * Add booking additional prices to cart item
      *
-     * @param array $products
+     * @param  array  $products
      * @return array
      */
     public function addAdditionalPrices($products)
@@ -506,7 +506,7 @@ class Booking
     /**
      * Validate cart item product price
      *
-     * @param CartItem $item
+     * @param  \Webkul\Checkout\Contracts\CartItem  $item
      * @return float
      */
     public function validateCartItem($item)

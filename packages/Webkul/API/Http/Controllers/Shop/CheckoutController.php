@@ -33,23 +33,23 @@ class CheckoutController extends Controller
     /**
      * CartRepository object
      *
-     * @var Object
+     * @var \Webkul\Checkout\Repositories\CartRepository
      */
     protected $cartRepository;
 
     /**
      * CartItemRepository object
      *
-     * @var Object
+     * @var \Webkul\Checkout\Repositories\CartItemRepository
      */
     protected $cartItemRepository;
 
     /**
      * Controller instance
      *
-     * @param Webkul\Checkout\Repositories\CartRepository     $cartRepository
-     * @param Webkul\Checkout\Repositories\CartItemRepository $cartItemRepository
-     * @param Webkul\Sales\Repositories\OrderRepository       $orderRepository
+     * @param  \Webkul\Checkout\Repositories\CartRepository      $cartRepository
+     * @param  \Webkul\Checkout\Repositories\CartItemRepository  $cartItemRepository
+     * @param  \Webkul\Sales\Repositories\OrderRepository        $orderRepository
      */
     public function __construct(
         CartRepository $cartRepository,

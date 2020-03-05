@@ -12,11 +12,15 @@ class CancelOrderNotification extends Mailable
     use Queueable, SerializesModels;
 
     /**
-     * @var Order
+     * @var \Webkul\Sales\Contracts\Order
      * 
      */
     public $order;
 
+    /**
+     * @param  \Webkul\Sales\Contracts\Order  $order
+     * @return void
+     */
     public function __construct($order)
     {
         $this->order = $order;

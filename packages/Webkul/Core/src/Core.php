@@ -18,62 +18,62 @@ class Core
     /**
      * ChannelRepository class
      *
-     * @var mixed
+     * @var \Webkul\Core\Repositories\ChannelRepository
      */
     protected $channelRepository;
 
     /**
      * CurrencyRepository class
      *
-     * @var mixed
+     * @var \Webkul\Core\Repositories\CurrencyRepository
      */
     protected $currencyRepository;
 
     /**
      * ExchangeRateRepository class
      *
-     * @var mixed
+     * @var \Webkul\Core\Repositories\ExchangeRateRepository
      */
     protected $exchangeRateRepository;
 
     /**
      * CountryRepository class
      *
-     * @var mixed
+     * @var \Webkul\Core\Repositories\CountryRepository
      */
     protected $countryRepository;
 
     /**
      * CountryStateRepository class
      *
-     * @var mixed
+     * @var \Webkul\Core\Repositories\CountryStateRepository
      */
     protected $countryStateRepository;
 
     /**
      * LocaleRepository class
      *
-     * @var mixed
+     * @var \Webkul\Core\Repositories\LocaleRepository
      */
     protected $localeRepository;
 
     /**
      * CoreConfigRepository class
      *
-     * @var mixed
+     * @var \Webkul\Core\Repositories\CoreConfigRepository
      */
     protected $coreConfigRepository;
 
     /**
      * Create a new instance.
      *
-     * @param Webkul\Core\Repositories\ChannelRepository      $channelRepository
-     * @param Webkul\Core\Repositories\CurrencyRepository     $currencyRepository
-     * @param Webkul\Core\Repositories\ExchangeRateRepository $exchangeRateRepository
-     * @param Webkul\Core\Repositories\CountryRepository      $countryRepository
-     * @param Webkul\Core\Repositories\CountryStateRepository $countryStateRepository
-     * @param Webkul\Core\Repositories\LocaleRepository       $localeRepository
-     * @param Webkul\Core\Repositories\CoreConfigRepository   $coreConfigRepository
+     * @param  \Webkul\Core\Repositories\ChannelRepository       $channelRepository
+     * @param  \Webkul\Core\Repositories\CurrencyRepository      $currencyRepository
+     * @param  \Webkul\Core\Repositories\ExchangeRateRepository  $exchangeRateRepository
+     * @param  \Webkul\Core\Repositories\CountryRepository       $countryRepository
+     * @param  \Webkul\Core\Repositories\CountryStateRepository  $countryStateRepository
+     * @param  \Webkul\Core\Repositories\LocaleRepository        $localeRepository
+     * @param  \Webkul\Core\Repositories\CoreConfigRepository    $coreConfigRepository
      *
      * @return void
      */
@@ -105,7 +105,7 @@ class Core
     /**
      * Returns all channels
      *
-     * @return Collection
+     * @return \Illuminate\Support\Collection
      */
     public function getAllChannels()
     {
@@ -121,7 +121,7 @@ class Core
     /**
      * Returns currenct channel models
      *
-     * @return mixed
+     * @return \Webkul\Core\Contracts\Channel
      */
     public function getCurrentChannel()
     {
@@ -147,7 +147,7 @@ class Core
     /**
      * Returns currenct channel code
      *
-     * @return string
+     * @return \Webkul\Core\Contracts\Channel
      */
     public function getCurrentChannelCode(): string
     {
@@ -163,7 +163,7 @@ class Core
     /**
      * Returns default channel models
      *
-     * @return null or Channel
+     * @return \Webkul\Core\Contracts\Channel
      */
     public function getDefaultChannel(): ?Channel
     {
@@ -201,7 +201,7 @@ class Core
     /**
      * Returns all locales
      *
-     * @return Collection
+     * @return \Illuminate\Support\Collection
      */
     public function getAllLocales()
     {
@@ -217,7 +217,7 @@ class Core
     /**
      * Returns current locale
      *
-     * @return Object
+     * @return \Webkul\Core\Contracts\Locale
      */
     public function getCurrentLocale()
     {
@@ -239,7 +239,7 @@ class Core
     /**
      * Returns all currencies
      *
-     * @return Collection
+     * @return \Illuminate\Support\Collection
      */
     public function getAllCurrencies()
     {
@@ -255,7 +255,7 @@ class Core
     /**
      * Returns base channel's currency model
      *
-     * @return mixed
+     * @return \Webkul\Core\Contracts\Currency
      */
     public function getBaseCurrency()
     {
@@ -293,7 +293,7 @@ class Core
     /**
      * Returns base channel's currency model
      *
-     * @return mixed
+     * @return \Webkul\Core\Contracts\Currency
      */
     public function getChannelBaseCurrency()
     {
@@ -327,7 +327,7 @@ class Core
     /**
      * Returns current channel's currency model
      *
-     * @return mixed
+     * @return \Webkul\Core\Contracts\Currency
      */
     public function getCurrentCurrency()
     {
@@ -365,10 +365,9 @@ class Core
     /**
      * Converts price
      *
-     * @param float  $amount
-     * @param string $targetCurrencyCode
-     * @param string $orderCurrencyCode
-     *
+     * @param  float   $amount
+     * @param  string  $targetCurrencyCode
+     * @param  string  $orderCurrencyCode
      * @return string
      */
     public function convertPrice($amount, $targetCurrencyCode = null, $orderCurrencyCode = null)
@@ -419,9 +418,8 @@ class Core
     /**
      * Converts to base price
      *
-     * @param float  $amount
-     * @param string $targetCurrencyCode
-     *
+     * @param  float   $amount
+     * @param  string  $targetCurrencyCode
      * @return string
      */
     public function convertToBasePrice($amount, $targetCurrencyCode = null)
@@ -448,8 +446,7 @@ class Core
     /**
      * Format and convert price with currency symbol
      *
-     * @param float $price
-     *
+     * @param  float  $price
      * @return string
      */
     public function currency($amount = 0)
@@ -464,8 +461,7 @@ class Core
     /**
      * Return currency symbol from currency code
      *
-     * @param float $price
-     *
+     * @param  float  $price
      * @return string
      */
     public function currencySymbol($code)
@@ -478,9 +474,8 @@ class Core
      /**
      * Format and convert price with currency symbol
      *
-     * @param float  $price
-     * @param string $currencyCode
-     *
+     * @param  float   $price
+     * @param  string  $currencyCode
      * @return string
      */
     public function formatPrice($price, $currencyCode)
@@ -537,8 +532,7 @@ class Core
     /**
      * Format price with base currency symbol
      *
-     * @param float $price
-     *
+     * @param  float $price
      * @return string
      */
     public function formatBasePrice($price)
@@ -565,10 +559,9 @@ class Core
     /**
      * Checks if current date of the given channel (in the channel timezone) is within the range
      *
-     * @param int|string|Channel $channel
-     * @param string|null        $dateFrom
-     * @param string|null        $dateTo
-     *
+     * @param int|string|\Webkul\Core\Contracts\Channel $channel
+     * @param string|null                               $dateFrom
+     * @param string|null                               $dateTo
      * @return bool
      */
     public function isChannelDateInInterval($dateFrom = null, $dateTo = null)
@@ -597,11 +590,9 @@ class Core
     }
 
     /**
-     * Get channel timestamp
-     * Timstamp will be builded with channel timezone settings
+     * Get channel timestamp, timstamp will be builded with channel timezone settings
      *
-     * @param mixed $channel
-     *
+     * @param  \Webkul\Core\Contracts\Channel  $channel
      * @return  int
      */
     public function channelTimeStamp($channel)
@@ -622,9 +613,8 @@ class Core
     /**
      * Check whether sql date is empty
      *
-     * @param string $date
-     *
-     * @return boolean
+     * @param  string  $date
+     * @return bool
      */
     function is_empty_date($date)
     {
@@ -634,8 +624,8 @@ class Core
     /**
      * Format date using current channel.
      *
-     * @param date|null $date
-     * @param string    $format
+     * @param  \Illuminate\Support\Carbon|null  $date
+     * @param  string                           $format
      *
      * @return  string
      */
@@ -655,8 +645,9 @@ class Core
     /**
      * Retrieve information from payment configuration
      *
-     * @param string          $field
-     * @param int|string|null $channelId
+     * @param  string           $field
+     * @param  int|string|null  $channelId
+     * @param  string|null      $locale
      *
      * @return mixed
      */
@@ -711,7 +702,9 @@ class Core
 
         if (! $coreConfigValue) {
             $fields = explode(".", $field);
+
             array_shift($fields);
+            
             $field = implode(".", $fields);
 
             return Config::get($field);
@@ -723,7 +716,8 @@ class Core
     /**
      * Retrieve a group of information from the core config table
      *
-     * @return array
+     * @param  mixed  $criteria
+     * @return mixed
      */
     public function retrieveGroupConfig($criteria)
     {
@@ -733,7 +727,7 @@ class Core
     /**
      * Retrieve all countries
      *
-     * @return Collection
+     * @return \Illuminate\Support\Collection
      */
     public function countries()
     {
@@ -743,8 +737,7 @@ class Core
     /**
      * Returns country name by code
      *
-     * @param string $code
-     *
+     * @param  string  $code
      * @return string
      */
     public function country_name($code)
@@ -757,7 +750,8 @@ class Core
     /**
      * Retrieve all country states
      *
-     * @return Collection
+     * @param  string  $countryCode
+     * @return \Illuminate\Support\Collection
      */
     public function states($countryCode)
     {
@@ -767,7 +761,7 @@ class Core
     /**
      * Retrieve all grouped states by country code
      *
-     * @return Collection
+     * @return \Illuminate\Support\Collection
      */
     public function groupedStatesByCountries()
     {
@@ -783,7 +777,7 @@ class Core
     /**
      * Retrieve all grouped states by country code
      *
-     * @return Collection
+     * @return \Illuminate\Support\Collection
      */
     public function findStateByCountryCode($countryCode = null, $stateCode = null)
     {
@@ -801,6 +795,8 @@ class Core
     /**
      * Returns time intervals
      *
+     * @param  \Illuminate\Support\Carbon  $startDate
+     * @param  \Illuminate\Support\Carbon  $endDate
      * @return array
      */
     public function getTimeInterval($startDate, $endDate)
@@ -856,6 +852,9 @@ class Core
     }
 
     /**
+     * 
+     * @param  string  $date
+     * @param  int     $day 
      * @return string
      */
     public function xWeekRange($date, $day)
@@ -876,7 +875,8 @@ class Core
     /**
      * Method to sort through the acl items and put them in order
      *
-     * @return void
+     * @param  array  $items
+     * @return array
      */
     public function sortItems($items)
     {
@@ -898,8 +898,7 @@ class Core
     }
 
     /**
-     * @param string $fieldName
-     *
+     * @param  string  $fieldName
      * @return array
      */
     public function getConfigField($fieldName)
@@ -917,6 +916,10 @@ class Core
         }
     }
 
+    /**
+     * @param  array  $items
+     * @return array
+     */
     public function convertToAssociativeArray($items)
     {
         foreach ($items as $key1 => $level1) {
@@ -946,6 +949,12 @@ class Core
         return $items;
     }
 
+    /**
+     * @param  array             $items
+     * @param  string            $key
+     * @param  string|int|float  $value
+     * @return array
+     */
     public function array_set(&$array, $key, $value)
     {
         if (is_null($key)) {
@@ -976,6 +985,11 @@ class Core
         return $array;
     }
 
+    /**
+     * @param  array  $array1
+     * @param  array  $array2
+     * @return array
+     */
     protected function arrayMerge(array &$array1, array &$array2)
     {
         $merged = $array1;
@@ -991,6 +1005,10 @@ class Core
         return $merged;
     }
 
+    /**
+     * @param  array  $array1
+     * @return array
+     */
     public function convertEmptyStringsToNull($array)
     {
         foreach ($array as $key => $value) {
@@ -1005,8 +1023,7 @@ class Core
     /**
      * Create singletom object through single facade
      *
-     * @param string $className
-     *
+     * @param  string  $className
      * @return object
      */
     public function getSingletonInstance($className)
@@ -1022,8 +1039,8 @@ class Core
 
     /**
      * Returns a string as selector part for identifying elements in views
-     * @param float $taxRate
-     *
+     * 
+     * @param  float  $taxRate
      * @return string
      */
     public static function taxRateAsIdentifier(float $taxRate): string

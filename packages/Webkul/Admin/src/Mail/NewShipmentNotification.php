@@ -20,14 +20,14 @@ class NewShipmentNotification extends Mailable
     /**
      * The shipment instance.
      *
-     * @var Shipment
+     * @var \Webkul\Sales\Contracts\Shipment
      */
     public $shipment;
 
     /**
      * Create a new message instance.
      *
-     * @param mixed $shipment
+     * @param  \Webkul\Sales\Contracts\Shipment  $shipment
      * @return void
      */
     public function __construct($shipment)

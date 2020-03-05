@@ -22,6 +22,12 @@ class CurrencyRepository extends Repository
         return 'Webkul\Core\Contracts\Currency';
     }
 
+    /**
+     * Specify Model class name
+     *
+     * @param  int  $id
+     * @return bool
+     */
     public function delete($id) {
         if ($this->model->count() == 1) {
             return false;

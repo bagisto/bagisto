@@ -25,22 +25,22 @@ class CustomerController extends Controller
     /**
      * Repository object
      *
-     * @var array
+     * @var \Webkul\Customer\Repositories\CustomerRepository
      */
     protected $customerRepository;
 
     /**
      * Repository object
      *
-     * @var array
+     * @var \Webkul\Customer\Repositories\CustomerGroupRepository
      */
     protected $customerGroupRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Customer\Repositories\CustomerRepository     $customerRepository
-     * @param  \Webkul\Customer\Repositories\CustomerGroupRepository     $customerGroupRepository
+     * @param  \Webkul\Customer\Repositories\CustomerRepository       $customerRepository
+     * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository
      * @return void
      */
     public function __construct(
@@ -57,7 +57,7 @@ class CustomerController extends Controller
     /**
      * Method to store user's sign up form data to DB.
      *
-     * @return Mixed
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {

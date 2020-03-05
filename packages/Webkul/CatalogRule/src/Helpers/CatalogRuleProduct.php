@@ -14,38 +14,38 @@ class CatalogRuleProduct
     /**
      * AttributeRepository object
      *
-     * @var AttributeRepository
+     * @var \Webkul\Attribute\Repositories\AttributeRepository
      */
     protected $attributeRepository;
 
     /**
      * ProductRepository object
      *
-     * @var ProductRepository
+     * @var \Webkul\Product\Repositories\ProductRepository
      */
     protected $productRepository;
 
     /**
      * CatalogRuleProductRepository object
      *
-     * @var CatalogRuleProductRepository
+     * @var \Webkul\CatalogRule\Repositories\CatalogRuleProductRepository
      */
     protected $catalogRuleProductRepository;
 
     /**
      * Validator object
      *
-     * @var Validator
+     * @var \Webkul\Rule\Helpers\ValidatorValidator
      */
     protected $validator;
 
     /**
      * Create a new helper instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeRepository            $attributeRepository
-     * @param  Webkul\Product\Repositories\ProductRepository                $productRepository
-     * @param  Webkul\CatalogRule\Repositories\CatalogRuleProductRepository $catalogRuleProductRepository
-     * @param  Webkul\Rule\Helpers\Validator                                $validator
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository             $attributeRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository                 $productRepository
+     * @param  \Webkul\CatalogRule\Repositories\CatalogRuleProductRepository  $catalogRuleProductRepository
+     * @param  \Webkul\Rule\Helpers\Validator                                 $validator
      * @return void
      */
     public function __construct(
@@ -67,8 +67,8 @@ class CatalogRuleProduct
     /**
      * Collect discount on cart
      *
-     * @param CatalogRule $rule
-     * @param integer     $batchCount
+     * @param \Webkul\CatalogRule\Contracts\CatalogRule  $rule
+     * @param int                                        $batchCount
      * @return void
      */
     public function insertRuleProduct($rule, $batchCount = 1000, $product = null)
@@ -114,8 +114,8 @@ class CatalogRuleProduct
     /**
      * Get array of product ids which are matched by rule
      *
-     * @param CatalogRule $rule
-     * @param Product     $product
+     * @param  \Webkul\CatalogRule\Contracts\CatalogRule  $rule
+     * @param  \Webkul\Product\Contracts\Product          $product
      * @return array
      */
     public function getMatchingProductIds($rule, $product = null)
@@ -179,12 +179,13 @@ class CatalogRuleProduct
     /**
      * Add product attribute condition to query
      *
-     * @param string       $attributeCode
-     * @param QueryBuilder $query
-     * @return QueryBuilder
+     * @param  string                                $attributeCode
+     * @param \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function addAttributeToSelect($attributeCode, $query)
     {
+        dd($query);
         $attribute = $this->attributeRepository->findOneByField('code', $attributeCode);
 
         if (! $attribute) {
@@ -207,8 +208,8 @@ class CatalogRuleProduct
     /**
      * Returns catalog rule products
      *
-     * @param Product $product
-     * @return Collection
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @return \Illuminate\Support\Collection
      */
     public function getCatalogRuleProducts($product = null)
     {
@@ -245,7 +246,7 @@ class CatalogRuleProduct
     /**
      * Returns catalog rules
      *
-     * @param CatalogRule $rule
+     * @param  \Webkul\CatalogRule\Contracts\CatalogRule  $rule
      * @return void
      */
     public function cleanProductIndex($productIds = [])

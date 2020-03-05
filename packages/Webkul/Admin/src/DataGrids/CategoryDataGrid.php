@@ -20,14 +20,14 @@ class CategoryDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('categories as cat')
-                ->select('cat.id as category_id', 'ct.name', 'cat.position', 'cat.status', 'ct.locale',
-                DB::raw('COUNT(DISTINCT ' . DB::getTablePrefix() . 'pc.product_id) as count'))
-                ->leftJoin('category_translations as ct', function($leftJoin) {
-                    $leftJoin->on('cat.id', '=', 'ct.category_id')
-                             ->where('ct.locale', app()->getLocale());
-                })
-                ->leftJoin('product_categories as pc', 'cat.id', '=', 'pc.category_id')
-                ->groupBy('cat.id');
+            ->select('cat.id as category_id', 'ct.name', 'cat.position', 'cat.status', 'ct.locale',
+            DB::raw('COUNT(DISTINCT ' . DB::getTablePrefix() . 'pc.product_id) as count'))
+            ->leftJoin('category_translations as ct', function($leftJoin) {
+                $leftJoin->on('cat.id', '=', 'ct.category_id')
+                         ->where('ct.locale', app()->getLocale());
+            })
+            ->leftJoin('product_categories as pc', 'cat.id', '=', 'pc.category_id')
+            ->groupBy('cat.id');
 
 
         $this->addFilter('category_id', 'cat.id');

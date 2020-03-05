@@ -23,14 +23,14 @@ class AttributeController extends Controller
     /**
      * AttributeRepository object
      *
-     * @var array
+     * @var \Webkul\Attribute\Repositories\AttributeRepository
      */
     protected $attributeRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository $attributeRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
      * @return void
      */
     public function __construct(AttributeRepository $attributeRepository)
@@ -148,7 +148,7 @@ class AttributeController extends Controller
     /**
      * Remove the specified resources from database
      *
-     * @return response \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
     public function massDestroy()
     {

@@ -27,12 +27,16 @@ class AddressController extends Controller
     /**
      * CustomerAddressRepository object
      *
-     * @param \Webkul\Customer\Repositories\CustomerAddressRepository $customerAddressRepository
-     *
-     * @var Object
+     * @var \Webkul\Customer\Repositories\CustomerAddressRepository
      */
     protected $customerAddressRepository;
 
+    /**
+     * Create a new controller instance.
+     *
+     * @param  \Webkul\Customer\Repositories\CustomerAddressRepository  $customerAddressRepository
+     * @return void
+     */
     public function __construct(CustomerAddressRepository $customerAddressRepository)
     {
         $this->middleware('customer');
@@ -126,17 +130,16 @@ class AddressController extends Controller
             abort(404);
         }
 
-        return view($this->_config['view'], array_merge(
-            compact('address'),
-            ['defaultCountry' => config('app.default_country')]
-        ));
+        return view($this->_config['view'], array_merge(compact('address'), [
+            'defaultCountry' => config('app.default_country')
+        ]));
     }
 
     /**
-     * Edit's the premade resource of customer called
-     * Address.
+     * Edit's the premade resource of customer called Address.
      *
-     * @return redirect
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
     public function update($id)
     {
@@ -175,10 +178,10 @@ class AddressController extends Controller
     }
 
     /**
-     * To change the default address or make the default address, by default when first address is
-     * created will be the default address
+     * To change the default address or make the default address,
+     * by default when first address is created will be the default address
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function makeDefault($id)
     {
@@ -198,9 +201,8 @@ class AddressController extends Controller
     /**
      * Delete address of the current customer
      *
-     * @param integer $id
-     *
-     * @return response mixed
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {

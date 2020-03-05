@@ -23,14 +23,14 @@ use Webkul\CMS\Repositories\CmsRepository;
     /**
      * To hold the CMSRepository instance
      * 
-     * @var Object
+     * @var \Webkul\CMS\Repositories\CmsRepository
      */
     protected $cmsRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\CMS\Repositories\CmsRepository $cmsRepository
+     * @param  \Webkul\CMS\Repositories\CmsRepository  $cmsRepository
      * @return void
      */
     public function __construct(CmsRepository $cmsRepository)
@@ -88,7 +88,7 @@ use Webkul\CMS\Repositories\CmsRepository;
     /**
      * To edit a previously created CMS page
      *
-     * @param integer $id
+     * @param  int  $id
      * @return \Illuminate\View\View
      */
     public function edit($id)
@@ -101,7 +101,7 @@ use Webkul\CMS\Repositories\CmsRepository;
     /**
      * To update the previously created CMS page in storage
      *
-     * @param integer $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update($id)
@@ -129,8 +129,7 @@ use Webkul\CMS\Repositories\CmsRepository;
     /**
      * To delete the previously create CMS page
      *
-     * @param integer $id
-     *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function delete($id)

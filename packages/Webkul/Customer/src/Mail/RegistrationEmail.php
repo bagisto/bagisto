@@ -17,9 +17,19 @@ class RegistrationEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    /**
+     * @var array
+     */
     public $data;
 
-    public function __construct($data) {
+    /**
+     * Create a new mailable instance.
+     *
+     * @param  array  $data
+     * @return void
+     */
+    public function __construct($data)
+    {
         $this->data = $data;
     }
 

@@ -16,8 +16,8 @@ class RentalSlot extends Booking
     /**
      * Returns slots for a perticular day
      *
-     * @param BookingProduct $bookingProduct
-     * @param string         $date
+     * @param  \Webkul\BookingProduct\Contracts\BookingProduct  $bookingProduct
+     * @param  string                                           $date
      * @return array
      */
     public function getSlotsByDate($bookingProduct, $date)
@@ -96,8 +96,8 @@ class RentalSlot extends Booking
     }
 
     /**
-     * @param array $data
-     * @return integer
+     * @param  array  $data
+     * @return int
      */
     public function getBookedQuantity($data)
     {
@@ -135,7 +135,7 @@ class RentalSlot extends Booking
     /**
      * Add booking additional prices to cart item
      *
-     * @param array $products
+     * @param  array  $products
      * @return array
      */
     public function addAdditionalPrices($products)
@@ -167,7 +167,7 @@ class RentalSlot extends Booking
     /**
      * Validate cart item product price
      *
-     * @param CartItem $item
+     * @param  \Webkul\Checkout\Contracts\CartItem  $item
      * @return float
      */
     public function validateCartItem($item)

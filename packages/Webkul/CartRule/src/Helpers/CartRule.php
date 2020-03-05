@@ -17,42 +17,42 @@ class CartRule
     /**
      * CartRuleRepository object
      *
-     * @var CartRuleRepository
+     * @var \Webkul\CartRule\Repositories\CartRuleRepository
      */
     protected $cartRuleRepository;
 
     /**
      * CartRuleCouponRepository object
      *
-     * @var CartRuleCouponRepository
+     * @var \Webkul\CartRule\Repositories\CartRuleCouponRepository
      */
     protected $cartRuleCouponRepository;
 
     /**
      * CartRuleCouponUsageRepository object
      *
-     * @var CartRuleCouponUsageRepository
+     * @var \Webkul\CartRule\Repositories\CartRuleCouponUsageRepository
      */
     protected $cartRuleCouponUsageRepository;
 
     /**
      * CartRuleCustomerRepository object
      *
-     * @var CartRuleCustomerRepository
+     * @var \Webkul\CartRule\Repositories\CartRuleCustomerRepository
      */
     protected $cartRuleCustomerRepository;
 
     /**
      * CustomerGroupRepository object
      *
-     * @var CustomerGroupRepository
+     * @var \Webkul\Customer\Repositories\CustomerGroupRepository
      */
     protected $customerGroupRepository;
 
     /**
      * Validator object
      *
-     * @var Validator
+     * @var \Webkul\Rule\Helpers\Validator
      */
     protected $validator;
 
@@ -64,12 +64,12 @@ class CartRule
     /**
      * Create a new helper instance.
      *
-     * @param Webkul\CartRule\Repositories\CartRuleRepository            $cartRuleRepository
-     * @param Webkul\CartRule\Repositories\CartRuleCouponRepository      $cartRuleCouponRepository
-     * @param Webkul\CartRule\Repositories\CartRuleCouponUsageRepository $cartRuleCouponUsageRepository
-     * @param Webkul\CartRule\Repositories\CartRuleCustomerRepository    $cartRuleCustomerRepository
-     * @param Webkul\Customer\Repositories\CustomerGroupRepository       $customerGroupRepository
-     * @param Webkul\Rule\Helpers\Validator                              $validator
+     * @param  \Webkul\CartRule\Repositories\CartRuleRepository             $cartRuleRepository
+     * @param  \Webkul\CartRule\Repositories\CartRuleCouponRepository       $cartRuleCouponRepository
+     * @param  \Webkul\CartRule\Repositories\CartRuleCouponUsageRepository  $cartRuleCouponUsageRepository
+     * @param  \Webkul\CartRule\Repositories\CartRuleCustomerRepository     $cartRuleCustomerRepository
+     * @param  \Webkul\Customer\Repositories\CustomerGroupRepository        $customerGroupRepository
+     * @param  \Webkul\Rule\Helpers\Validator                               $validator
      *
      * @return void
      */
@@ -130,7 +130,7 @@ class CartRule
     /**
      * Returns cart rules
      *
-     * @return Collection
+     * @return \Illuminate\Support\Collection
      */
     public function getCartRules()
     {
@@ -172,9 +172,8 @@ class CartRule
     /**
      * Check if cart rule can be applied
      *
-     * @param CartRule $rule
-     *
-     * @return boolean
+     * @param  \Webkul\CartRule\Contracts\CartRule  $rule
+     * @return bool
      */
     public function canProcessRule($rule): bool
     {
@@ -228,7 +227,6 @@ class CartRule
      * Cart item discount calculation process
      *
      * @param \Webkul\Checkout\Models\CartItem $item
-     *
      * @return array
      */
     public function process(CartItem $item): array
@@ -338,8 +336,7 @@ class CartRule
     /**
      * Cart shipping discount calculation process
      *
-     * @param Cart $cart
-     *
+     * @param  \Webkul\Checkout\Contracts\Cart  $cart
      * @return void
      */
     public function processShippingDiscount($cart)
@@ -420,8 +417,7 @@ class CartRule
     /**
      * Cart free shipping discount calculation process
      *
-     * @param Cart $cart
-     *
+     * @param  \Webkul\Checkout\Contracts\Cart  $cart
      * @return void
      */
     public function processFreeShippingDiscount($cart)
@@ -476,9 +472,8 @@ class CartRule
     /**
      * Calculate cart item totals for each rule
      *
-     * @param mixed $items
-     *
-     * @return Validator
+     * @param  \Illuminate\Support\Collecton  $items
+     * @return \Webkul\Rule\Helpers\Validator
      */
     public function calculateCartItemTotals($items)
     {
@@ -529,8 +524,7 @@ class CartRule
     /**
      * Divide discount amount to children
      *
-     * @param CartItem $item
-     *
+     * @param  \Webkul\Checkout\Contracts\CartItem  $item
      * @return void
      */
     protected function divideDiscount($item)

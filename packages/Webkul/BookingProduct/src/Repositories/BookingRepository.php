@@ -26,8 +26,8 @@ class BookingRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @return mixed
+     * @param  array  $data
+     * @return \Webkul\BookingProduct\Contracts\Booking
      */
     public function create(array $data)
     {

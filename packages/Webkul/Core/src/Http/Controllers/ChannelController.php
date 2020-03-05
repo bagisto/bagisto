@@ -23,14 +23,14 @@ class ChannelController extends Controller
     /**
      * ChannelRepository object
      *
-     * @var Object
+     * @var \Webkul\Core\Repositories\ChannelRepository
      */
     protected $channelRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\ChannelRepository $channelRepository
+     * @param  \Webkul\Core\Repositories\ChannelRepository  $channelRepository
      * @return void
      */
     public function __construct(ChannelRepository $channelRepository)

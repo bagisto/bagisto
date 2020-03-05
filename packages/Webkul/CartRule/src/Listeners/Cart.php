@@ -15,14 +15,14 @@ class Cart
     /**
      * CartRule object
      *
-     * @var CartRule
+     * @var \Webkul\CartRule\Helpers\CartRule
      */
     protected $cartRuleHepler;
 
     /**
      * Create a new listener instance.
      *
-     * @param  Webkul\CartRule\Repositories\CartRule $cartRuleHepler
+     * @param  \Webkul\CartRule\Repositories\CartRule  $cartRuleHepler
      * @return void
      */
     public function __construct(CartRule $cartRuleHepler)
@@ -33,7 +33,7 @@ class Cart
     /**
      * Aplly valid cart rules to cart
      * 
-     * @param Cart $cart
+     * @param  \Webkul\Checkout\Contracts\Cart  $cart
      * @return void
      */
     public function applyCartRules($cart)

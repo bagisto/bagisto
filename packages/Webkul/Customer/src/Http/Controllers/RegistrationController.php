@@ -30,22 +30,22 @@ class RegistrationController extends Controller
     /**
      * CustomerRepository object
      *
-     * @var Object
+     * @var \Webkul\Customer\Repositories\CustomerRepository
      */
     protected $customerRepository;
 
     /**
      * CustomerGroupRepository object
      *
-     * @var Object
+     * @var \Webkul\Customer\Repositories\CustomerGroupRepository
      */
     protected $customerGroupRepository;
 
     /**
      * Create a new Repository instance.
      *
-     * @param \Webkul\Customer\Repositories\CustomerRepository      $customer
-     * @param \Webkul\Customer\Repositories\CustomerGroupRepository $customerGroupRepository
+     * @param  \Webkul\Customer\Repositories\CustomerRepository       $customer
+     * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository
      *
      * @return void
      */
@@ -74,7 +74,7 @@ class RegistrationController extends Controller
     /**
      * Method to store user's sign up form data to DB.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -148,7 +148,8 @@ class RegistrationController extends Controller
     /**
      * Method to verify account
      *
-     * @param string $token
+     * @param  string  $token
+     * @return \Illuminate\Http\Response
      */
     public function verifyAccount($token)
     {
@@ -165,6 +166,10 @@ class RegistrationController extends Controller
         return redirect()->route('customer.session.index');
     }
 
+    /**
+     * @param  string  $email
+     * @return \Illuminate\Http\Response
+     */
     public function resendVerificationEmail($email)
     {
         $verificationData['email'] = $email;

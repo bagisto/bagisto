@@ -11,7 +11,7 @@ namespace Webkul\BookingProduct\Helpers;
 class TableSlot extends Booking
 {
     /**
-     * @param CartItem|array $cartItem
+     * @param  \Webkul\Checkout\Contracts\CartItem|array  $cartItem
      * @return bool
      */
     public function isItemHaveQuantity($cartItem)

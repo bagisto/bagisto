@@ -22,7 +22,7 @@ class CustomerEventsHandler {
     /**
      * Register the listeners for the subscriber.
      *
-     * @param  Illuminate\Events\Dispatcher  $events
+     * @param  \Illuminate\Events\Dispatcher  $events
      * @return void
      */
     public function subscribe($events)

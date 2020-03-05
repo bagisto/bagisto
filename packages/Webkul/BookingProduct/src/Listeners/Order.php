@@ -15,14 +15,14 @@ class Order
     /**
      * BookingRepository Object
      *
-     * @var Object
+     * @var \Webkul\BookingProduct\Repositories\BookingRepository
      */
     protected $bookingRepository;
 
     /**
      * Create a new listener instance.
      *
-     * @param  Webkul\Booking\Repositories\BookingRepository $bookingRepository
+     * @param  \Webkul\Booking\Repositories\BookingRepository  $bookingRepository
      * @return void
      */
     public function __construct(BookingRepository $bookingRepository)
@@ -33,7 +33,7 @@ class Order
     /**
      * After sales order creation, add entry to bookings table
      *
-     * @param mixed $order
+     * @param \Webkul\Sales\Contracts\Order  $order
      */
     public function afterPlaceOrder($order)
     {

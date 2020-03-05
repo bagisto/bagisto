@@ -17,7 +17,7 @@ class SessionController extends Controller
     /**
      * Contains current guard
      *
-     * @var array
+     * @var string
      */
     protected $guard;
 
@@ -31,7 +31,7 @@ class SessionController extends Controller
     /**
      * Controller instance
      *
-     * @param Webkul\Customer\Repositories\CustomerRepository $customerRepository
+     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
      */
     public function __construct(CustomerRepository $customerRepository)
     {
@@ -49,7 +49,7 @@ class SessionController extends Controller
     /**
      * Method to store user's sign up form data to DB.
      *
-     * @return Mixed
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -71,10 +71,10 @@ class SessionController extends Controller
         $customer = auth($this->guard)->user();
 
         return response()->json([
-        'token'   => $jwtToken,
-        'message' => 'Logged in successfully.',
-        'data'    => new CustomerResource($customer),
-    ]);
+            'token'   => $jwtToken,
+            'message' => 'Logged in successfully.',
+            'data'    => new CustomerResource($customer),
+        ]);
     }
 
     /**

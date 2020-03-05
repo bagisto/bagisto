@@ -23,22 +23,22 @@ class AttributeFamilyController extends Controller
     /**
      * AttributeFamilyRepository object
      *
-     * @var Object
+     * @var \Webkul\Attribute\Repositories\AttributeFamilyRepository
      */
     protected $attributeFamilyRepository;
 
     /**
      * AttributeRepository object
      *
-     * @var Object
+     * @var \Webkul\Attribute\Repositories\AttributeRepository
      */
     protected $attributeRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Attribute\Repositories\AttributeFamilyRepository $attributeFamilyRepository
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository       $attributeRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamilyRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository        $attributeRepository
      * @return void
      */
     public function __construct(
@@ -165,7 +165,7 @@ class AttributeFamilyController extends Controller
     /**
      * Remove the specified resources from database
      *
-     * @return response \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
     public function massDestroy()
     {

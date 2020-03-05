@@ -16,14 +16,14 @@ class PagePresenterController extends Controller
     /**
      * CmsRepository object
      *
-     * @var Object
+     * @var \Webkul\CMS\Repositories\CmsRepository
      */
     protected $cmsRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\CMS\Repositories\CmsRepository $cmsRepository
+     * @param  \Webkul\CMS\Repositories\CmsRepository  $cmsRepository
      * @return void
      */
     public function __construct(CmsRepository $cmsRepository)
@@ -34,7 +34,7 @@ class PagePresenterController extends Controller
     /**
      * To extract the page content and load it in the respective view file
      *
-     * @param string $urlKey
+     * @param  string  $urlKey
      * @return \Illuminate\View\View
      */
     public function presenter($urlKey)

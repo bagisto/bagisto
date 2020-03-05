@@ -46,9 +46,9 @@ class ShipmentController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Sales\Repositories\ShipmentRepository  $shipmentRepository
-     * @param  \Webkul\Sales\Repositories\OrderRepository     $orderRepository
-     * @param  \Webkul\Sales\Repositories\OrderitemRepository $orderItemRepository
+     * @param  \Webkul\Sales\Repositories\ShipmentRepository   $shipmentRepository
+     * @param  \Webkul\Sales\Repositories\OrderRepository      $orderRepository
+     * @param  \Webkul\Sales\Repositories\OrderitemRepository  $orderItemRepository
      * @return void
      */
     public function __construct(
@@ -81,7 +81,7 @@ class ShipmentController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param int $orderId
+     * @param  int  $orderId
      * @return \Illuminate\View\View
      */
     public function create($orderId)
@@ -100,7 +100,7 @@ class ShipmentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param int $orderId
+     * @param  int  $orderId
      * @return \Illuminate\Http\Response
      */
     public function store($orderId)
@@ -138,7 +138,7 @@ class ShipmentController extends Controller
     /**
      * Checks if requested quantity available or not
      *
-     * @param array $data
+     * @param  array  $data
      * @return boolean
      */
     public function isInventoryValidate(&$data)

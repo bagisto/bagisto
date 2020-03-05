@@ -30,7 +30,7 @@ class OrderController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Sales\Repositories\OrderRepository $orderRepository
+     * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
      * @return void
      */
     public function __construct(OrderRepository $orderRepository)

@@ -10,30 +10,30 @@ class CatalogRuleIndex
     /**
      * CatalogRuleRepository object
      *
-     * @var Object
+     * @var \Webkul\CatalogRule\Repositories\CatalogRuleRepository
     */
     protected $catalogRuleRepository;
 
     /**
      * CatalogRuleProduct object
      *
-     * @var Object
+     * @var \Webkul\CatalogRule\Helpers\CatalogRuleProduct
     */
     protected $catalogRuleHelper;
 
     /**
      * CatalogRuleProductPrice object
      *
-     * @var Object
+     * @var \Webkul\CatalogRule\Helpers\CatalogRuleProductPrice
     */
     protected $catalogRuleProductPriceHelper;
 
     /**
      * Create a new helper instance.
      *
-     * @param  Webkul\CatalogRule\Repositories\CatalogRuleRepository     $catalogRuleRepository
-     * @param  Webkul\CatalogRuleProduct\Helpers\CatalogRuleProduct      $catalogRuleProductHelper
-     * @param  Webkul\CatalogRuleProduct\Helpers\CatalogRuleProductPrice $catalogRuleProductPriceHelper
+     * @param  \Webkul\CatalogRule\Repositories\CatalogRuleRepository      $catalogRuleRepository
+     * @param  \Webkul\CatalogRuleProduct\Helpers\CatalogRuleProduct       $catalogRuleProductHelper
+     * @param  \Webkul\CatalogRuleProduct\Helpers\CatalogRuleProductPrice  $catalogRuleProductPriceHelper
      * @return void
      */
     public function __construct(
@@ -72,7 +72,7 @@ class CatalogRuleIndex
     /**
      * Full reindex
      *
-     * @param Product $product
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @return void
      */
     public function reindexProduct($product)
@@ -101,7 +101,7 @@ class CatalogRuleIndex
     /**
      * Deletes catalog rule product and catalog rule product price indexes
      *
-     * @param array $productIds
+     * @param  array  $productIds
      * @return void
      */
     public function cleanIndexes($productIds = [])
@@ -114,7 +114,7 @@ class CatalogRuleIndex
     /**
      * Returns catalog rules
      *
-     * @return Collection
+     * @return \Illuminate\Support\Collection
      */
     public function getCatalogRules()
     {

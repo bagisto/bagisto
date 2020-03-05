@@ -17,9 +17,19 @@ class VerificationEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    /**
+     * @var array
+     */
     public $verificationData;
 
-    public function __construct($verificationData) {
+    /**
+     * Create a new mailable instance.
+     *
+     * @param  array  $verificationData
+     * @return void
+     */
+    public function __construct($verificationData)
+    {
         $this->verificationData = $verificationData;
     }
 

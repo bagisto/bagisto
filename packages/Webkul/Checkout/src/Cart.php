@@ -29,65 +29,62 @@ class Cart
     /**
      * CartRepository instance
      *
-     * @var mixed
+     * @var \Webkul\Checkout\Repositories\CartRepository
      */
     protected $cartRepository;
 
     /**
      * CartItemRepository instance
      *
-     * @var mixed
+     * @var \Webkul\Checkout\Repositories\CartItemRepository
      */
     protected $cartItemRepository;
 
     /**
      * CartAddressRepository instance
      *
-     * @var mixed
+     * @var \Webkul\Checkout\Repositories\CartAddressRepository
      */
     protected $cartAddressRepository;
 
     /**
      * ProductRepository instance
      *
-     * @var mixed
+     * @var \Webkul\Checkout\Repositories\ProductRepository
      */
     protected $productRepository;
 
     /**
      * TaxCategoryRepository instance
      *
-     * @var mixed
+     * @var \Webkul\Tax\Repositories\TaxCategoryRepository
      */
     protected $taxCategoryRepository;
 
     /**
      * WishlistRepository instance
      *
-     * @var mixed
+     * @var \Webkul\Customer\Repositories\WishlistRepository
      */
     protected $wishlistRepository;
 
     /**
      * CustomerAddressRepository instance
      *
-     * @var mixed
+     * @var \Webkul\Customer\Repositories\CustomerAddressRepository
      */
     protected $customerAddressRepository;
 
     /**
-     * Create a new controller instance.
+     * Create a new class instance.
      *
-     * @param Webkul\Checkout\Repositories\CartRepository           $cart
-     * @param Webkul\Checkout\Repositories\CartItemRepository       $cartItem
-     * @param Webkul\Checkout\Repositories\CartAddressRepository    $cartAddress
-     * @param Webkul\Product\Repositories\ProductRepository         $product
-     * @param Webkul\Product\Repositories\TaxCategoryRepository     $taxCategory
-     * @param Webkul\Product\Repositories\CustomerAddressRepository $customerAddress
-     * @param Webkul\Product\Repositories\CustomerAddressRepository $customerAddress
-     * @param Webkul\Discount\Repositories\CartRuleRepository       $cartRule
-     * @param Webkul\Helpers\Discount                               $discount
-     *
+     * @param  \Webkul\Checkout\Repositories\CartRepository             $cartRepository
+     * @param  \Webkul\Checkout\Repositories\CartItemRepository         $cartItemRepository
+     * @param  \Webkul\Checkout\Repositories\CartAddressRepository      $cartAddressRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository           $productRepository
+     * @param  \Webkul\Tax\Repositories\TaxCategoryRepository           $taxCategoryRepository
+     * @param  \Webkul\Customer\Repositories\WishlistRepository         $wishlistRepository
+     * @param  \Webkul\Customer\Repositories\CustomerAddressRepository  $customerAddressRepository
      * @return void
      */
     public function __construct(
@@ -98,7 +95,8 @@ class Cart
         TaxCategoryRepository $taxCategoryRepository,
         WishlistRepository $wishlistRepository,
         CustomerAddressRepository $customerAddressRepository
-    ) {
+    )
+    {
         $this->cartRepository = $cartRepository;
 
         $this->cartItemRepository = $cartItemRepository;
@@ -117,7 +115,7 @@ class Cart
     /**
      * Return current logged in customer
      *
-     * @return Customer|boolean
+     * @return \Webkul\Customer\Contracts\Customer|bool
      */
     public function getCurrentCustomer()
     {
@@ -129,10 +127,9 @@ class Cart
     /**
      * Add Items in a cart with some cart and item details.
      *
-     * @param integer $productId
-     * @param array   $data
-     *
-     * @return Mixed  Cart on success, array with warning otherwise
+     * @param  int    $productId
+     * @param  array  $data
+     * @return \Webkul\Checkout\Contracts\Cart|\Exception|array
      */
     public function addProduct($productId, $data)
     {
@@ -198,9 +195,8 @@ class Cart
     /**
      * Create new cart instance.
      *
-     * @param array $data
-     *
-     * @return Cart|null
+     * @param  array  $data
+     * @return \Webkul\Checkout\Contracts\Cart|null
      */
     public function create($data)
     {
@@ -240,9 +236,8 @@ class Cart
     /**
      * Update cart items information
      *
-     * @param array $data
-     *
-     * @return string|boolean
+     * @param  array  $data
+     * @return bool|void|\Exception
      */
     public function updateItems($data)
     {
@@ -286,9 +281,8 @@ class Cart
     /**
      * Get cart item by product
      *
-     * @param array $data
-     *
-     * @return CartItem|void
+     * @param  array  $data
+     * @return \Webkul\Checkout\Contracts\CartItem|void
      */
     public function getItemByProduct($data)
     {
@@ -310,9 +304,8 @@ class Cart
     /**
      * Remove the item from the cart
      *
-     * @param integer $itemId
-     *
-     * @return boolean
+     * @param  int  $itemId
+     * @return bool
      */
     public function removeItem($itemId)
     {
@@ -342,7 +335,7 @@ class Cart
     /**
      * This function handles when guest has some of cart products and then logs in.
      *
-     * @return boolean
+     * @return bool
      */
     public function mergeCart()
     {
@@ -425,8 +418,7 @@ class Cart
     /**
      * Save cart
      *
-     * @param Cart $cart
-     *
+     * @param  \Webkul\Checkout\Contracts\Cart  $cart
      * @return void
      */
     public function putCart($cart)
@@ -439,7 +431,7 @@ class Cart
     /**
      * Returns cart
      *
-     * @return Cart|null
+     * @return \Webkul\Checkout\Contracts\Cart|null
      */
     public function getCart()
     {
@@ -486,9 +478,8 @@ class Cart
     /**
      * Save customer address
      *
-     * @param array $data
-     *
-     * @return boolean
+     * @param  array  $data
+     * @return bool
      */
     public function saveCustomerAddress($data)
     {
@@ -602,9 +593,8 @@ class Cart
     /**
      * Save shipping method for cart
      *
-     * @param string $shippingMethodCode
-     *
-     * @return boolean
+     * @param  string  $shippingMethodCode
+     * @return bool
      */
     public function saveShippingMethod($shippingMethodCode)
     {
@@ -621,9 +611,8 @@ class Cart
     /**
      * Save payment method for cart
      *
-     * @param string $payment
-     *
-     * @return CartPayment
+     * @param  string  $payment
+     * @return \Webkul\Checkout\Contracts\CartPayment
      */
     public function savePaymentMethod($payment)
     {
@@ -710,7 +699,7 @@ class Cart
     /**
      * To validate if the product information is changed by admin and the items have been added to the cart before it.
      *
-     * @return boolean
+     * @return bool
      */
     public function validateItems()
     {
@@ -823,8 +812,8 @@ class Cart
     /**
      * Set Item tax to zero.
      *
-     * @param CartItem $item
-     * @return CartItem
+     * @param  \Webkul\Checkout\Contracts\CartItem  $item
+     * @return \Webkul\Checkout\Contracts\CartItem
      */
     protected function setItemTaxToZero(CartItem $item): CartItem
     {
@@ -838,7 +827,7 @@ class Cart
     /**
      * Checks if cart has any error
      *
-     * @return boolean
+     * @return bool
      */
     public function hasError()
     {
@@ -856,7 +845,7 @@ class Cart
     /**
      * Checks if all cart items have sufficient quantity.
      *
-     * @return boolean
+     * @return bool
      */
     public function isItemsHaveSufficientQuantity()
     {
@@ -872,9 +861,8 @@ class Cart
     /**
      * Checks if all cart items have sufficient quantity.
      *
-     * @param CartItem $item
-     *
-     * @return boolean
+     * @param \Webkul\Checkout\Contracts\CartItem  $item
+     * @return bool
      */
     public function isItemHaveQuantity($item)
     {
@@ -957,8 +945,7 @@ class Cart
     /**
      * Prepares data for order item
      *
-     * @param array $data
-     *
+     * @param  array  $data
      * @return array
      */
     public function prepareDataForOrderItem($data)
@@ -998,9 +985,8 @@ class Cart
     /**
      * Move a wishlist item to cart
      *
-     * @param WishlistItem $wishlistItem
-     *
-     * @return boolean
+     * @param  \Webkul\Customer\Contracts\WishlistItem  $wishlistItem
+     * @return bool
      */
     public function moveToCart($wishlistItem)
     {
@@ -1028,9 +1014,8 @@ class Cart
     /**
      * Function to move a already added product to wishlist will run only on customer authentication.
      *
-     * @param integer $itemId
-     *
-     * @return boolean|void
+     * @param  int  $itemId
+     * @return bool
      */
     public function moveToWishlist($itemId)
     {
@@ -1084,9 +1069,8 @@ class Cart
     /**
      * Set coupon code to the cart
      *
-     * @param string $code
-     *
-     * @return Cart
+     * @param  string  $code
+     * @return \Webkul\Checkout\Contracts\Cart
      */
     public function setCouponCode($code)
     {
@@ -1102,7 +1086,7 @@ class Cart
     /**
      * Remove coupon code from cart
      *
-     * @return Cart
+     * @return \Webkul\Checkout\Contracts\Cart
      */
     public function removeCouponCode()
     {

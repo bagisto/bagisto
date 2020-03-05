@@ -17,10 +17,9 @@ abstract class Repository extends BaseRepository {
     /**
      * Find data by field and value
      *
-     * @param       $field
-     * @param       $value
-     * @param array $columns
-     *
+     * @param  string  $field
+     * @param  string  $value
+     * @param  array  $columns
      * @return mixed
      */
     public function findOneByField($field, $value = null, $columns = ['*'])
@@ -33,10 +32,9 @@ abstract class Repository extends BaseRepository {
     /**
      * Find data by field and value
      *
-     * @param       $field
-     * @param       $value
-     * @param array $columns
-     *
+     * @param  string  $field
+     * @param  string  $value
+     * @param  array  $columns
      * @return mixed
      */
     public function findOneWhere(array $where, $columns = ['*'])
@@ -49,9 +47,8 @@ abstract class Repository extends BaseRepository {
     /**
      * Find data by id
      *
-     * @param       $id
-     * @param array $columns
-     *
+     * @param  int   $id
+     * @param  array  $columns
      * @return mixed
      */
     public function find($id, $columns = ['*'])
@@ -67,9 +64,8 @@ abstract class Repository extends BaseRepository {
     /**
      * Find data by id
      *
-     * @param       $id
-     * @param array $columns
-     *
+     * @param  int    $id
+     * @param  array  $columns
      * @return mixed
      */
     public function findOrFail($id, $columns = ['*'])
@@ -85,9 +81,8 @@ abstract class Repository extends BaseRepository {
      /**
      * Count results of repository
      *
-     * @param array $where
-     * @param string $columns
-     *
+     * @param  array   $where
+     * @param  string  $columns
      * @return int
      */
     public function count(array $where = [], $columns = '*')
@@ -107,6 +102,7 @@ abstract class Repository extends BaseRepository {
     }
 
     /**
+     * @param  string  $columns
      * @return mixed
      */
     public function sum($columns)
@@ -121,6 +117,7 @@ abstract class Repository extends BaseRepository {
     }
 
     /**
+     * @param  string  $columns
      * @return mixed
      */
     public function avg($columns)

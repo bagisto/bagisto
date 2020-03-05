@@ -23,14 +23,14 @@ class LocaleController extends Controller
     /**
      * LocaleRepository object
      *
-     * @var array
+     * @var \Webkul\Core\Repositories\LocaleRepository
      */
     protected $localeRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\LocaleRepository $localeRepository
+     * @param  \Webkul\Core\Repositories\LocaleRepository  $localeRepository
      * @return void
      */
     public function __construct(LocaleRepository $localeRepository)

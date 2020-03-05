@@ -22,7 +22,7 @@ class SliderController extends Controller
     /**
      * SliderRepository
      *
-     * @var Object
+     * @var \Webkul\Core\Repositories\SliderRepository
      */
     protected $sliderRepository;
 
@@ -34,7 +34,7 @@ class SliderController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\SliderRepository $sliderRepository
+     * @param  \Webkul\Core\Repositories\SliderRepository  $sliderRepository
      * @return void
      */
     public function __construct(SliderRepository $sliderRepository)
@@ -69,7 +69,7 @@ class SliderController extends Controller
     /**
      * Creates the new sider item.
      *
-     * @return response
+     * @return \Illuminate\Http\Response
      */
     public function store()
     {
@@ -81,10 +81,11 @@ class SliderController extends Controller
 
         $result = $this->sliderRepository->save(request()->all());
 
-        if ($result)
+        if ($result) {
             session()->flash('success', trans('admin::app.settings.sliders.created-success'));
-        else
+        } else {
             session()->flash('success', trans('admin::app.settings.sliders.created-fail'));
+        }
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -104,7 +105,8 @@ class SliderController extends Controller
     /**
      * Edit the previously created slider item.
      *
-     * @return response
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
     public function update($id)
     {
@@ -134,7 +136,8 @@ class SliderController extends Controller
     /**
      * Delete a slider item and preserve the last one from deleting
      *
-     * @return mixed
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {

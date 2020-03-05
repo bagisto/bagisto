@@ -24,8 +24,8 @@ class CoreConfigRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @return mixed
+     * @param  array  $data
+     * @return \Webkul\Core\Contracts\CoreConfig
      */
     public function create(array $data)
     {
@@ -111,8 +111,8 @@ class CoreConfigRepository extends Repository
     }
 
     /**
-     * @param array  $formData
-     * @param string $method
+     * @param  array   $formData
+     * @param  string  $method
      * @return array
      */
     public function recuressiveArray(array $formData, $method) {
@@ -150,9 +150,10 @@ class CoreConfigRepository extends Repository
     }
 
     /**
-     * return dimension of array
-     * @param array  $array
-     * @return integer
+     * Return dimension of array
+     * 
+     * @param  array  $array
+     * @return int
     */
     public function countDim($array)
     {

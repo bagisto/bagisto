@@ -20,14 +20,14 @@ class NewInvoiceNotification extends Mailable
     /**
      * The invoice instance.
      *
-     * @var Invoice
+     * @param  \Webkul\Customer\Contracts\Invoice  $invoice
      */
     public $invoice;
 
     /**
      * Create a new message instance.
      *
-     * @param mixed $invoice
+     * @param  \Webkul\Customer\Contracts\Invoice  $invoice
      * @return void
      */
     public function __construct($invoice)

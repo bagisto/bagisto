@@ -23,14 +23,14 @@ class Booking extends Virtual
     /**
      * BookingProductRepository instance
      *
-     * @var BookingProductRepository
+     * @var \Webkul\BookingProduct\Repositories\BookingProductRepository
      */
     protected $bookingProductRepository;
 
     /**
      * Booking helper instance
      *
-     * @var Booking
+     * @var \Webkul\BookingProduct\Helpers\Booking
      */
     protected $bookingHelper;
 
@@ -48,14 +48,14 @@ class Booking extends Virtual
     /**
      * Create a new product type instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeRepository           $attributeRepository
-     * @param  Webkul\Product\Repositories\ProductRepository               $productRepository
-     * @param  Webkul\Product\Repositories\ProductAttributeValueRepository $attributeValueRepository
-     * @param  Webkul\Product\Repositories\ProductInventoryRepository      $productInventoryRepository
-     * @param  Webkul\Product\Repositories\ProductImageRepository          $productImageRepository
-     * @param  Webkul\Product\Helpers\ProductImage                         $productImageHelper
-     * @param  Webkul\BookingProduct\Repositories\BookingProductRepository $bookingProductRepository
-     * @param  Webkul\BookingProduct\Helpers\BookingHelper                 $bookingHelper
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository            $attributeRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository                $productRepository
+     * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $attributeValueRepository
+     * @param  \Webkul\Product\Repositories\ProductInventoryRepository       $productInventoryRepository
+     * @param  \Webkul\Product\Repositories\ProductImageRepository           $productImageRepository
+     * @param  \Webkul\Product\Helpers\ProductImage                          $productImageHelper
+     * @param  \Webkul\BookingProduct\Repositories\BookingProductRepository  $bookingProductRepository
+     * @param  \Webkul\BookingProduct\Helpers\BookingHelper                  $bookingHelper
      * @return void
      */
     public function __construct(
@@ -84,10 +84,10 @@ class Booking extends Virtual
     }
 
     /**
-     * @param array $data
-     * @param $id
-     * @param string $attribute
-     * @return Product
+     * @param  array   $data
+     * @param  int     $id
+     * @param  string  $attribute
+     * @return \Webkul\Product\Contracts\Product
      */
     public function update(array $data, $id, $attribute = "id")
     {
@@ -111,6 +111,7 @@ class Booking extends Virtual
     /**
      * Returns additional views
      *
+     * @param  int  $id
      * @return array
      */
     public function getBookingProduct($productId)
@@ -127,7 +128,7 @@ class Booking extends Virtual
     /**
      * Return true if this product can have inventory
      *
-     * @return boolean
+     * @return bool
      */
     public function showQuantityBox()
     {
@@ -141,7 +142,7 @@ class Booking extends Virtual
     }
 
     /**
-     * @param CartItem $cartItem
+     * @param  \Webkul\Checkout\Contracts\CartItem  $cartItem
      * @return bool
      */
     public function isItemHaveQuantity($cartItem)
@@ -154,7 +155,7 @@ class Booking extends Virtual
     /**
      * Add product. Returns error message if can't prepare product.
      *
-     * @param array $data
+     * @param  array  $data
      * @return array
      */
     public function prepareForCart($data)
@@ -204,8 +205,8 @@ class Booking extends Virtual
 
     /**
      *
-     * @param array $options1
-     * @param array $options2
+     * @param  array  $options1
+     * @param  array  $options2
      * @return boolean
      */
     public function compareOptions($options1, $options2)
@@ -220,7 +221,7 @@ class Booking extends Virtual
     /**
      * Returns additional information for items
      *
-     * @param array $data
+     * @param  array  $data
      * @return array
      */
     public function getAdditionalOptions($data)
@@ -231,7 +232,7 @@ class Booking extends Virtual
     /**
      * Validate cart item product price
      *
-     * @param CartItem $item
+     * @param  \Webkul\Checkout\Contracts\CartItem  $item
      * @return float
      */
     public function validateCartItem($item)

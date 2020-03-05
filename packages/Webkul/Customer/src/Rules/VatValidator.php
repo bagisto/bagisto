@@ -57,8 +57,7 @@ class VatValidator
     /**
      * Validate a VAT number format.
      *
-     * @param string $vatNumber
-     *
+     * @param  string  $vatNumber
      * @return boolean
      */
     public function validate(string $vatNumber): bool
@@ -75,8 +74,7 @@ class VatValidator
     }
 
     /**
-     * @param string $vatNumber
-     *
+     * @param  string  $vatNumber
      * @return string
      */
     private function vatCleaner(string $vatNumber): string
@@ -87,8 +85,7 @@ class VatValidator
     }
 
     /**
-     * @param string $vatNumber
-     *
+     * @param  string  $vatNumber
      * @return array
      */
     private function splitVat(string $vatNumber): array

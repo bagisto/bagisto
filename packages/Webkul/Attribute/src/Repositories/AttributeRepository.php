@@ -19,14 +19,14 @@ class AttributeRepository extends Repository
     /**
      * AttributeOptionRepository object
      *
-     * @var Object
+     * @var \Webkul\Attribute\Repositories\AttributeOptionRepository
      */
     protected $attributeOptionRepository;
 
     /**
      * Create a new repository instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeOptionRepository  $attributeOptionRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeOptionRepository  $attributeOptionRepository
      * @return void
      */
     public function __construct(
@@ -50,8 +50,8 @@ class AttributeRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @return mixed
+     * @param  array  $data
+     * @return  \Webkul\Attribute\Contracts\Attribute
      */
     public function create(array $data)
     {
@@ -79,10 +79,10 @@ class AttributeRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @param $id
-     * @param string $attribute
-     * @return mixed
+     * @param  array   $data
+     * @param  int     $id
+     * @param  string  $attribute
+     * @return  \Webkul\Attribute\Contracts\Attribute
      */
     public function update(array $data, $id, $attribute = "id")
     {
@@ -124,7 +124,7 @@ class AttributeRepository extends Repository
     }
 
     /**
-     * @param $id
+     * @param  int  $id
      * @return void
      */
     public function delete($id)
@@ -137,7 +137,7 @@ class AttributeRepository extends Repository
     }
 
     /**
-     * @param array $data
+     * @param  array  $data
      * @return array
      */
     public function validateUserInput($data)
@@ -166,6 +166,8 @@ class AttributeRepository extends Repository
     }
 
     /**
+     * 
+     * @param  array  $codes
      * @return array
      */
     public function getProductDefaultAttributes($codes = null)
@@ -193,7 +195,8 @@ class AttributeRepository extends Repository
     }
 
     /**
-     * @return Object
+     * @param  string  $code
+     * @return \Webkul\Attribute\Contracts\Attribute
      */
     public function getAttributeByCode($code)
     {
@@ -207,7 +210,8 @@ class AttributeRepository extends Repository
     }
 
     /**
-     * @return Object
+     * @param  \Webkul\Attribute\Contracts\AttributeFamily  $attributeFamily
+     * @return \Webkul\Attribute\Contracts\Attribute
      */
     public function getFamilyAttributes($attributeFamily)
     {
@@ -221,12 +225,13 @@ class AttributeRepository extends Repository
     }
 
     /**
-     * @return Object
+     * @return array
      */
     public function getPartial()
     {
         $attributes = $this->model->all();
-        $trimmed = array();
+
+        $trimmed = [];
 
         foreach($attributes as $key => $attribute) {
             if ($attribute->code != 'tax_category_id'

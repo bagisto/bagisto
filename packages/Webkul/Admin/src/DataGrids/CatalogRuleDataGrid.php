@@ -20,7 +20,7 @@ class CatalogRuleDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('catalog_rules')
-                ->addSelect('catalog_rules.id', 'name', 'status', 'starts_from', 'ends_till', 'sort_order');
+            ->addSelect('catalog_rules.id', 'name', 'status', 'starts_from', 'ends_till', 'sort_order');
 
         $this->setQueryBuilder($queryBuilder);
     }

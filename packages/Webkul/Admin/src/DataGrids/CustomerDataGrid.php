@@ -23,9 +23,9 @@ class CustomerDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('customers')
-                ->leftJoin('customer_groups', 'customers.customer_group_id', '=', 'customer_groups.id')
-                ->addSelect('customers.id as customer_id', 'customers.email', 'customer_groups.name', 'customers.phone', 'customers.gender', 'status')
-                ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'customers.first_name, " ", ' . DB::getTablePrefix() . 'customers.last_name) as full_name'));
+            ->leftJoin('customer_groups', 'customers.customer_group_id', '=', 'customer_groups.id')
+            ->addSelect('customers.id as customer_id', 'customers.email', 'customer_groups.name', 'customers.phone', 'customers.gender', 'status')
+            ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'customers.first_name, " ", ' . DB::getTablePrefix() . 'customers.last_name) as full_name'));
 
         $this->addFilter('customer_id', 'customers.id');
         $this->addFilter('full_name', DB::raw('CONCAT(' . DB::getTablePrefix() . 'customers.first_name, " ", ' . DB::getTablePrefix() . 'customers.last_name)'));

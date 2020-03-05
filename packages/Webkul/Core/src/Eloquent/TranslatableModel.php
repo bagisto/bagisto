@@ -17,8 +17,7 @@ class TranslatableModel extends Model
     }
 
     /**
-     * @param string $key
-     *
+     * @param  string  $key
      * @return bool
      */
     protected function isKeyALocale($key)
@@ -53,7 +52,7 @@ class TranslatableModel extends Model
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     protected function isChannelBased()
     {

@@ -20,20 +20,20 @@ class WishlistController extends Controller
     /**
      * WishlistRepository object
      *
-     * @var object
+     * @var \Webkul\Customer\Repositories\WishlistRepository
      */
     protected $wishlistRepository;
 
     /**
      * ProductRepository object
      *
-     * @var object
+     * @var \Webkul\Customer\Repositories\ProductRepository
      */
     protected $productRepository;
 
     /**
-     * @param Webkul\Customer\Repositories\WishlistRepository $wishlistRepository
-     * @param Webkul\Product\Repositories\ProductRepository   $productRepository
+     * @param  \Webkul\Customer\Repositories\WishlistRepository  $wishlistRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository    $productRepository
      */
     public function __construct(
         WishlistRepository $wishlistRepository,
@@ -54,7 +54,7 @@ class WishlistController extends Controller
     /**
      * Function to add item to the wishlist.
      *
-     * @param integer $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function create($id)
@@ -93,7 +93,7 @@ class WishlistController extends Controller
     /**
      * Move product from wishlist to cart.
      *
-     * @param integer $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function moveToCart($id)

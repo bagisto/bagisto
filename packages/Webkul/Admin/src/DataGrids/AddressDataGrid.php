@@ -49,10 +49,10 @@ class AddressDataGrid extends DataGrid
         $customer = $this->customerRepository->find(request('id'));
 
         $queryBuilder = DB::table('customer_addresses as ca')
-                ->leftJoin('countries', 'ca.country', '=', 'countries.code')
-                ->leftJoin('customers as c', 'ca.customer_id', '=', 'c.id')
-                ->addSelect('ca.id as address_id', 'ca.company_name', 'ca.address1', 'ca.country', DB::raw('' . DB::getTablePrefix() . 'countries.name as country_name'), 'ca.state', 'ca.city', 'ca.postcode', 'ca.phone', 'ca.default_address')
-                ->where('c.id', $customer->id);
+            ->leftJoin('countries', 'ca.country', '=', 'countries.code')
+            ->leftJoin('customers as c', 'ca.customer_id', '=', 'c.id')
+            ->addSelect('ca.id as address_id', 'ca.company_name', 'ca.address1', 'ca.country', DB::raw('' . DB::getTablePrefix() . 'countries.name as country_name'), 'ca.state', 'ca.city', 'ca.postcode', 'ca.phone', 'ca.default_address')
+            ->where('c.id', $customer->id);
 
         $queryBuilder = $queryBuilder->leftJoin('country_states', function($qb) {
             $qb->on('ca.state', 'country_states.code')

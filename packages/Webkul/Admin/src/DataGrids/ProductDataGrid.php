@@ -39,19 +39,19 @@ class ProductDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('product_flat')
-        ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
-        ->leftJoin('attribute_families', 'products.attribute_family_id', '=', 'attribute_families.id')
-        ->leftJoin('product_inventories', 'product_flat.product_id', '=', 'product_inventories.product_id')
-        ->select(
-            'product_flat.product_id as product_id',
-            'products.sku as product_sku',
-            'product_flat.name as product_name',
-            'products.type as product_type',
-            'product_flat.status',
-            'product_flat.price',
-            'attribute_families.name as attribute_family',
-            DB::raw('SUM(DISTINCT ' . DB::getTablePrefix() . 'product_inventories.qty) as quantity')
-        )->where('locale', $this->locale)->where('locale', $this->locale);
+            ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
+            ->leftJoin('attribute_families', 'products.attribute_family_id', '=', 'attribute_families.id')
+            ->leftJoin('product_inventories', 'product_flat.product_id', '=', 'product_inventories.product_id')
+            ->select(
+                'product_flat.product_id as product_id',
+                'products.sku as product_sku',
+                'product_flat.name as product_name',
+                'products.type as product_type',
+                'product_flat.status',
+                'product_flat.price',
+                'attribute_families.name as attribute_family',
+                DB::raw('SUM(DISTINCT ' . DB::getTablePrefix() . 'product_inventories.qty) as quantity')
+            )->where('locale', $this->locale)->where('locale', $this->locale);
 
         $queryBuilder->groupBy('product_flat.product_id');
 

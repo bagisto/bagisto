@@ -137,7 +137,6 @@ class CustomerController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     *
      * @return \Illuminate\View\View
      */
     public function edit($id)
@@ -155,7 +154,6 @@ class CustomerController extends Controller
      * Update the specified resource in storage.
      *
      * @param int $id
-     *
      * @return \Illuminate\Http\Response
      */
     public function update($id)
@@ -183,7 +181,6 @@ class CustomerController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -206,6 +203,7 @@ class CustomerController extends Controller
     /**
      * To load the note taking screen for the customers
      *
+     * @param int $id
      * @return \Illuminate\View\View
      */
     public function createNote($id)
@@ -218,7 +216,7 @@ class CustomerController extends Controller
     /**
      * To store the response of the note in storage
      *
-     * @return redirect
+     * @return \Illuminate\Http\Response
      */
     public function storeNote()
     {
@@ -242,7 +240,7 @@ class CustomerController extends Controller
     /**
      * To mass update the customer
      *
-     * @return redirect
+     * @return \Illuminate\Http\Response
      */
     public function massUpdate()
     {
@@ -263,7 +261,7 @@ class CustomerController extends Controller
     /**
      * To mass delete the customer
      *
-     * @return redirect
+     * @return \Illuminate\Http\Response
      */
     public function massDestroy()
     {

@@ -18,14 +18,14 @@ class ProductController extends Controller
     /**
      * ProductRepository object
      *
-     * @var array
+     * @var \Webkul\Product\Repositories\ProductRepository
      */
     protected $productRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Product\Repositories\ProductRepository $productRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository $productRepository
      * @return void
      */
     public function __construct(ProductRepository $productRepository)
@@ -46,6 +46,7 @@ class ProductController extends Controller
     /**
      * Returns a individual resource.
      *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function get($id)
@@ -58,6 +59,7 @@ class ProductController extends Controller
     /**
      * Returns product's additional information.
      *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function additionalInformation($id)
@@ -70,6 +72,7 @@ class ProductController extends Controller
     /**
      * Returns product's additional information.
      *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function configurableConfig($id)

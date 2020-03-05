@@ -29,7 +29,7 @@ class ResourceController extends Controller
     /**
      * Repository object
      *
-     * @var array
+     * @var \Webkul\Core\Eloquent\Repository
      */
     protected $repository;
 
@@ -87,6 +87,7 @@ class ResourceController extends Controller
     /**
      * Returns a individual resource.
      *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function get($id)
@@ -99,6 +100,7 @@ class ResourceController extends Controller
     /**
      * Delete's a individual resource.
      *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

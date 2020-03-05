@@ -27,30 +27,30 @@ class CartController extends Controller
     /**
      * CartRepository object
      *
-     * @var Object
+     * @var \Webkul\Checkout\Repositories\CartRepository
      */
     protected $cartRepository;
 
     /**
      * CartItemRepository object
      *
-     * @var Object
+     * @var \Webkul\Checkout\Repositories\CartItemRepository
      */
     protected $cartItemRepository;
 
     /**
      * WishlistRepository object
      *
-     * @var Object
+     * @var \Webkul\Checkout\Repositories\WishlistRepository
      */
     protected $wishlistRepository;
 
     /**
      * Controller instance
      *
-     * @param Webkul\Checkout\Repositories\CartRepository     $cartRepository
-     * @param Webkul\Checkout\Repositories\CartItemRepository $cartItemRepository
-     * @param Webkul\Checkout\Repositories\WishlistRepository $wishlistRepository
+     * @param  \Webkul\Checkout\Repositories\CartRepository      $cartRepository
+     * @param  \Webkul\Checkout\Repositories\CartItemRepository  $cartItemRepository
+     * @param  \Webkul\Checkout\Repositories\WishlistRepository  $wishlistRepository
      */
     public function __construct(
         CartRepository $cartRepository,
@@ -92,8 +92,7 @@ class CartController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function store($id)
@@ -189,8 +188,7 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroyItem($id)
@@ -212,10 +210,9 @@ class CartController extends Controller
     }
 
     /**
-     * Function to move a already added product to wishlist
-     * will run only on customer authentication.
+     * Function to move a already added product to wishlist will run only on customer authentication.
      *
-     * @param instance cartItem $id
+     * @param  \Webkul\Checkout\Repositories\CartItemRepository  $id
      */
     public function moveToWishlist($id)
     {

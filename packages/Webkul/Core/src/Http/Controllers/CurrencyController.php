@@ -23,14 +23,14 @@ class CurrencyController extends Controller
     /**
      * CurrencyRepository object
      *
-     * @var array
+     * @var \Webkul\Core\Repositories\CurrencyRepository
      */
     protected $currencyRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\CurrencyRepository $currencyRepository
+     * @param  \Webkul\Core\Repositories\CurrencyRepository  $currencyRepository
      * @return void
      */
     public function __construct(CurrencyRepository $currencyRepository)
@@ -155,9 +155,10 @@ class CurrencyController extends Controller
     /**
      * Remove the specified resources from database
      *
-     * @return response \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
-    public function massDestroy() {
+    public function massDestroy()
+    {
         $suppressFlash = false;
 
         if (request()->isMethod('post')) {

@@ -22,11 +22,11 @@ class OrderDataGrid extends DataGrid
         $queryBuilder = DB::table('orders')
             ->leftJoin('order_address as order_address_shipping', function($leftJoin) {
                 $leftJoin->on('order_address_shipping.order_id', '=', 'orders.id')
-                            ->where('order_address_shipping.address_type', 'shipping');
+                         ->where('order_address_shipping.address_type', 'shipping');
             })
             ->leftJoin('order_address as order_address_billing', function($leftJoin) {
                 $leftJoin->on('order_address_billing.order_id', '=', 'orders.id')
-                            ->where('order_address_billing.address_type', 'billing');
+                         ->where('order_address_billing.address_type', 'billing');
             })
             ->addSelect('orders.id','orders.increment_id', 'orders.base_sub_total', 'orders.base_grand_total', 'orders.created_at', 'channel_name', 'status')
             ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.first_name, " ", ' . DB::getTablePrefix() . 'order_address_billing.last_name) as billed_to'))

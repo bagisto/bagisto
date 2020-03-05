@@ -127,10 +127,10 @@ class AddressController extends Controller
     }
 
     /**
-     * Edit's the premade resource of customer called
-     * Address.
+     * Edit's the premade resource of customer called Address.
      *
-     * @return redirect
+     * @param int $id
+     * @return \Illuminate\Http\Response
      */
     public function update($id)
     {
@@ -165,7 +165,6 @@ class AddressController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -180,7 +179,8 @@ class AddressController extends Controller
     /**
      * Mass Delete the customer's addresses
      *
-     * @return response
+     * @param int $id
+     * @return \Illuminate\Http\Response
      */
     public function massDestroy($id)
     {

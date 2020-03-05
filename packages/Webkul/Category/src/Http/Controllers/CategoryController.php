@@ -25,22 +25,22 @@ class CategoryController extends Controller
     /**
      * CategoryRepository object
      *
-     * @var Object
+     * @var \Webkul\Category\Repositories\CategoryRepository
      */
     protected $categoryRepository;
 
     /**
      * AttributeRepository object
      *
-     * @var Object
+     * @var \Webkul\Attribute\Repositories\AttributeRepository
      */
     protected $attributeRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Category\Repositories\CategoryRepository   $categoryRepository
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository $attributeRepository
+     * @param  \Webkul\Category\Repositories\CategoryRepository    $categoryRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
      * @return void
      */
     public function __construct(
@@ -115,7 +115,7 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\View\View
      */
     public function edit($id)
@@ -190,9 +190,10 @@ class CategoryController extends Controller
     /**
      * Remove the specified resources from database
      *
-     * @return response \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
-    public function massDestroy() {
+    public function massDestroy()
+    {
         $suppressFlash = false;
 
         if (request()->isMethod('delete') || request()->isMethod('post')) {

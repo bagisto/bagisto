@@ -83,10 +83,10 @@ class DashboardController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Sales\Repositories\OrderRepository              $orderRepository
-     * @param  \Webkul\Sales\Repositories\OrderItemRepository          $orderItemRepository
-     * @param  \Webkul\Customer\Repositories\CustomerRepository        $customerRepository
-     * @param  \Webkul\Product\Repositories\ProductInventoryRepository $productInventoryRepository
+     * @param  \Webkul\Sales\Repositories\OrderRepository               $orderRepository
+     * @param  \Webkul\Sales\Repositories\OrderItemRepository           $orderItemRepository
+     * @param  \Webkul\Customer\Repositories\CustomerRepository         $customerRepository
+     * @param  \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
      * @return void
      */
     public function __construct(
@@ -174,7 +174,7 @@ class DashboardController extends Controller
     /**
      * Returns the list of top selling categories
      *
-     * @return Collection
+     * @return \Illuminate\Support\Collection
      */
     public function getTopSellingCategories()
     {
@@ -199,7 +199,7 @@ class DashboardController extends Controller
     /**
      * Return stock threshold.
      *
-     * @return Collection
+     * @return \Illuminate\Support\Collection
      */
     public function getStockThreshold()
     {
@@ -215,7 +215,7 @@ class DashboardController extends Controller
 
     /**
      * Returns top selling products
-     * @return Collection
+     * @return \Illuminate\Support\Collection
      */
     public function getTopSellingProducts()
     {
@@ -234,7 +234,7 @@ class DashboardController extends Controller
     /**
      * Returns top selling products
      *
-     * @return Collection
+     * @return \Illuminate\Support\Collection
      */
     public function getCustomerWithMostSales()
     {

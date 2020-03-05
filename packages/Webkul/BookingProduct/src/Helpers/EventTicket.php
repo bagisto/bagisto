@@ -16,7 +16,7 @@ class EventTicket extends Booking
     /**
      * Returns event date
      *
-     * @param BookingProduct $bookingProduct
+     * @param  \Webkul\BookingProduct\Contracts\BookingProduct  $bookingProduct
      * @return string
      */
     public function getEventDate($bookingProduct)
@@ -31,7 +31,7 @@ class EventTicket extends Booking
     /**
      * Returns tickets
      *
-     * @param BookingProduct $bookingProduct
+     * @param  \Webkul\BookingProduct\Contracts\BookingProduct  $bookingProduct
      * @return array
      */
     public function getTickets($bookingProduct)
@@ -46,7 +46,7 @@ class EventTicket extends Booking
     /**
      * Format ticket price
      *
-     * @param array $tickets
+     * @param  array  $tickets
      * @return array
      */
     public function formatPrice($tickets)
@@ -62,7 +62,7 @@ class EventTicket extends Booking
     }
 
     /**
-     * @param CartItem|array $cartItem
+     * @param \Webkul\Checkout\Contracts\CartItem|array  $cartItem
      * @return bool
      */
     public function isItemHaveQuantity($cartItem)
@@ -79,8 +79,8 @@ class EventTicket extends Booking
     }
 
     /**
-     * @param array $data
-     * @return integer
+     * @param  array  $data
+     * @return int
      */
     public function getBookedQuantity($data)
     {
@@ -97,7 +97,7 @@ class EventTicket extends Booking
     /**
      * Add booking additional prices to cart item
      *
-     * @param array $products
+     * @param  array  $products
      * @return array
      */
     public function addAdditionalPrices($products)
@@ -119,7 +119,7 @@ class EventTicket extends Booking
     /**
      * Validate cart item product price
      *
-     * @param CartItem $item
+     * @param  \Webkul\Checkout\Contracts\CartItem  $item
      * @return float
      */
     public function validateCartItem($item)

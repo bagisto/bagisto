@@ -24,14 +24,14 @@ class ReviewController extends Controller
     /**
      * ProductReviewRepository object
      *
-     * @var array
+     * @var \Webkul\Product\Repositories\ProductReviewRepository
      */
     protected $reviewRepository;
 
     /**
      * Controller instance
      *
-     * @param Webkul\Product\Repositories\ProductReviewRepository $reviewRepository
+     * @param  Webkul\Product\Repositories\ProductReviewRepository  $reviewRepository
      */
     public function __construct(ProductReviewRepository $reviewRepository)
     {
@@ -46,6 +46,7 @@ class ReviewController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  int                       $id
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, $id)

@@ -70,7 +70,7 @@ class InvoiceController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param int $orderId
+     * @param  int  $orderId
      * @return \Illuminate\View\View
      */
     public function create($orderId)
@@ -83,7 +83,7 @@ class InvoiceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param int $orderId
+     * @param  int  $orderId
      * @return \Illuminate\Http\Response
      */
     public function store($orderId)

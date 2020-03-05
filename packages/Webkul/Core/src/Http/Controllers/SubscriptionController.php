@@ -24,14 +24,14 @@ class SubscriptionController extends Controller
     /**
      * SubscribersListRepository
      *
-     * @var Object
+     * @var \Webkul\Core\Repositories\SubscribersListRepository
      */
     protected $subscribersListRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\SubscribersListRepository $subscribersListRepository
+     * @param  \Webkul\Core\Repositories\SubscribersListRepository  $subscribersListRepository
      * @return void
      */
     public function __construct(SubscribersListRepository $subscribersListRepository)
@@ -54,7 +54,7 @@ class SubscriptionController extends Controller
     /**
      * To unsubscribe the user without deleting the resource of the subscribed user
      *
-     * @param integer $id
+     * @param  int  $id
      * @return \Illuminate\View\View
      */
     public function edit($id)
@@ -67,8 +67,8 @@ class SubscriptionController extends Controller
     /**
      * To unsubscribe the user without deleting the resource of the subscribed user
      *
-     * @param integer $id
-     * @return mixed
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
     public function update($id)
     {

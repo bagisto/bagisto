@@ -18,16 +18,14 @@ class CustomerAddressRepository extends Repository
      *
      * @return mixed
      */
-
     function model()
     {
         return 'Webkul\Customer\Contracts\CustomerAddress';
     }
 
     /**
-     * @param array $data
-     *
-     * @return mixed
+     * @param  array  $data
+     * @return \Webkul\Customer\Contracts\CustomerAddress
      */
     public function create(array $data)
     {
@@ -51,10 +49,9 @@ class CustomerAddressRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @param       $id
-     *
-     * @return mixed
+     * @param  array  $data
+     * @param  int    $id
+     * @return \Webkul\Customer\Contracts\CustomerAddress
      */
     public function update(array $data, $id)
     {

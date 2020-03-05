@@ -22,8 +22,7 @@ class Laravel5Helper extends Laravel5
     /**
      * Returns field name of given attribute.
      *
-     * @param string $attribute
-     *
+     * @param  string  $attribute
      * @return string|null
      * @part ORM
      */
@@ -69,10 +68,9 @@ class Laravel5Helper extends Laravel5
     /**
      * Helper function to generate products for testing
      *
-     * @param int   $productType
-     * @param array $configs
-     * @param array $productStates
-     *
+     * @param  int    $productType
+     * @param  array  $configs
+     * @param  array  $productStates
      * @return \Webkul\Product\Models\Product
      * @part ORM
      */
@@ -104,10 +102,9 @@ class Laravel5Helper extends Laravel5
     }
 
     /**
-     * @param array $configs
-     * @param array $productStates
-     *
-     * @return \Webkul\Product\Models\Product
+     * @param  array  $configs
+     * @param  array  $productStates
+     * @return  \Webkul\Product\Contracts\Product
      */
     private function haveSimpleProduct(array $configs = [], array $productStates = []): Product
     {
@@ -128,10 +125,9 @@ class Laravel5Helper extends Laravel5
     }
 
     /**
-     * @param array $configs
-     * @param array $productStates
-     *
-     * @return \Webkul\Product\Models\Product
+     * @param  array  $configs
+     * @param  array  $productStates
+     * @return \Webkul\Product\Contracts\Product
      */
     private function haveVirtualProduct(array $configs = [], array $productStates = []): Product
     {
@@ -152,10 +148,9 @@ class Laravel5Helper extends Laravel5
     }
 
     /**
-     * @param array $configs
-     * @param array $productStates
-     *
-     * @return \Webkul\Product\Models\Product
+     * @param  array  $configs
+     * @param  array  $productStates
+     * @return \Webkul\Product\Contracts\Product
      */
     private function haveDownloadableProduct(array $configs = [], array $productStates = []): Product
     {
@@ -187,8 +182,9 @@ class Laravel5Helper extends Laravel5
     }
 
     /**
-     * @param int   $productId
-     * @param array $inventoryConfig
+     * @param  int    $productId
+     * @param  array  $inventoryConfig
+     * @return void
      */
     private function createInventory(int $productId, array $inventoryConfig = []): void
     {
@@ -201,7 +197,8 @@ class Laravel5Helper extends Laravel5
     }
 
     /**
-     * @param int $productId
+     * @param  int  $productId
+     * @return void
      */
     private function createDownloadableLink(int $productId): void
     {
@@ -217,8 +214,9 @@ class Laravel5Helper extends Laravel5
     }
 
     /**
-     * @param int   $productId
-     * @param array $attributeValues
+     * @param  int    $productId
+     * @param  array  $attributeValues
+     * @return void
      */
     private function createAttributeValues(int $productId, array $attributeValues = []): void
     {

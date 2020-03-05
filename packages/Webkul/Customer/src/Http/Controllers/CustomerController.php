@@ -25,26 +25,28 @@ class CustomerController extends Controller
     /**
      * CustomerRepository object
      *
-     * @var Object
+     * @var \Webkul\Customer\Repositories\CustomerRepository
      */
     protected $customerRepository;
 
     /**
      * ProductReviewRepository object
      *
-     * @var array
+     * @var \Webkul\Customer\Repositories\ProductReviewRepository
      */
     protected $productReviewRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param \Webkul\Customer\Repositories\CustomerRepository     $customer
-     * @param \Webkul\Product\Repositories\ProductReviewRepository $productReview
-     *
+     * @param  \Webkul\Customer\Repositories\CustomerRepository      $customer
+     * @param  \Webkul\Product\Repositories\ProductReviewRepository  $productReview
      * @return void
      */
-    public function __construct(CustomerRepository $customerRepository, ProductReviewRepository $productReviewRepository)
+    public function __construct(
+        CustomerRepository $customerRepository,
+        ProductReviewRepository $productReviewRepository
+    )
     {
         $this->middleware('customer');
 
@@ -82,7 +84,7 @@ class CustomerController extends Controller
     /**
      * Edit function for editing customer profile.
      *
-     * @return response
+     * @return \Illuminate\Http\Response
      */
     public function update()
     {
@@ -133,8 +135,7 @@ class CustomerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     *
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

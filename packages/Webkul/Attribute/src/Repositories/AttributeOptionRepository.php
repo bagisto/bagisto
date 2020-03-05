@@ -24,8 +24,8 @@ class AttributeOptionRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @return mixed
+     * @param  array  $data
+     * @return  \Webkul\Attribute\Contracts\AttributeOption
      */
     public function create(array $data)
     {
@@ -37,10 +37,10 @@ class AttributeOptionRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @param $id
-     * @param string $attribute
-     * @return mixed
+     * @param  array   $data
+     * @param  int     $id
+     * @param  string  $attribute
+     * @return  \Webkul\Attribute\Contracts\AttributeOption
      */
     public function update(array $data, $id, $attribute = "id")
     {
@@ -52,9 +52,9 @@ class AttributeOptionRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @param mixed $optionId
-     * @return mixed
+     * @param  array  $data
+     * @param  int    $optionId
+     * @return void
      */
     public function uploadSwatchImage($data, $optionId)
     {

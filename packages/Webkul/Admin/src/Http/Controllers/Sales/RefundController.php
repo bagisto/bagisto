@@ -46,9 +46,9 @@ class RefundController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Sales\Repositories\OrderRepository     $orderRepository
-     * @param  \Webkul\Sales\Repositories\OrderItemRepository $orderItemRepository
-     * @param  \Webkul\Sales\Repositories\RefundRepository    $refundRepository
+     * @param  \Webkul\Sales\Repositories\OrderRepository      $orderRepository
+     * @param  \Webkul\Sales\Repositories\OrderItemRepository  $orderItemRepository
+     * @param  \Webkul\Sales\Repositories\RefundRepository     $refundRepository
      * @return void
      */
     public function __construct(
@@ -81,7 +81,7 @@ class RefundController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param int $orderId
+     * @param  int  $orderId
      * @return \Illuminate\Http\View
      */
     public function create($orderId)
@@ -94,7 +94,7 @@ class RefundController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param int $orderId
+     * @param  int  $orderId
      * @return \Illuminate\Http\Response
      */
     public function store($orderId)
@@ -141,7 +141,7 @@ class RefundController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param int $orderId
+     * @param  int  $orderId
      * @return \Illuminate\Http\JsonResponse
      */
     public function updateQty($orderId)
@@ -158,7 +158,7 @@ class RefundController extends Controller
     /**
      * Show the view for the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\View
      */
     public function view($id)

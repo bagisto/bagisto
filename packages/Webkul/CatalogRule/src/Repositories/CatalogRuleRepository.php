@@ -20,39 +20,39 @@ class CatalogRuleRepository extends Repository
     /**
      * AttributeFamilyRepository object
      *
-     * @var AttributeFamilyRepository
+     * @var \Webkul\Attribute\Repositories\AttributeFamilyRepository
      */
     protected $attributeFamilyRepository;
 
     /**
      * AttributeRepository object
      *
-     * @var AttributeRepository
+     * @var \Webkul\Attribute\Repositories\AttributeRepository
      */
     protected $attributeRepository;
 
     /**
      * CategoryRepository class
      *
-     * @var CategoryRepository
+     * @var \Webkul\Category\Repositories\CategoryRepository
      */
     protected $categoryRepository;
 
     /**
      * TaxCategoryRepository class
      *
-     * @var TaxCategoryRepository
+     * @var \Webkul\CaTaxtegory\Repositories\axCategoryRepository
      */
     protected $taxCategoryRepository;
 
     /**
      * Create a new repository instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeFamilyRepository $attributeFamilyRepository
-     * @param  Webkul\Attribute\Repositories\AttributeRepository       $attributeRepository
-     * @param  Webkul\Category\Repositories\CategoryRepository         $categoryRepository
-     * @param  Webkul\Tax\Repositories\TaxCategoryRepository           $taxCategoryRepository
-     * @param  Illuminate\Container\Container                          $app
+     * @param  \Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamilyRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository        $attributeRepository
+     * @param  \Webkul\Category\Repositories\CategoryRepository          $categoryRepository
+     * @param  \Webkul\Tax\Repositories\TaxCategoryRepository            $taxCategoryRepository
+     * @param  \Illuminate\Container\Container                           $app
      * @return void
      */
     public function __construct(
@@ -85,8 +85,8 @@ class CatalogRuleRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @return mixed
+     * @param  array  $data
+     * @return \Webkul\CatalogRule\Contracts\CatalogRule
      */
     public function create(array $data)
     {
@@ -106,10 +106,10 @@ class CatalogRuleRepository extends Repository
     }
 
     /**
-     * @param array  $data
-     * @param array  $id
-     * @param string $attribute
-     * @return mixed
+     * @param  array   $data
+     * @param  int     $id
+     * @param  string  $attribute
+     * @return \Webkul\CatalogRule\Contracts\CatalogRule
      */
     public function update(array $data, $id, $attribute = "id")
     {

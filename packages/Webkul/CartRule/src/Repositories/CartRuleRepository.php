@@ -22,63 +22,63 @@ class CartRuleRepository extends Repository
     /**
      * AttributeFamilyRepository object
      *
-     * @var AttributeFamilyRepository
+     * @var \Webkul\Attribute\Repositories\AttributeFamilyRepository
      */
     protected $attributeFamilyRepository;
 
     /**
      * AttributeRepository object
      *
-     * @var AttributeRepository
+     * @var \Webkul\Attribute\Repositories\AttributeRepository
      */
     protected $attributeRepository;
 
     /**
      * CategoryRepository class
      *
-     * @var CategoryRepository
+     * @var \Webkul\Category\Repositories\CategoryRepository
      */
     protected $categoryRepository;
 
     /**
      * CartRuleCouponRepository object
      *
-     * @var CartRuleCouponRepository
+     * @var Webkul\CartRule\Repositories\CartRuleCouponRepository
      */
     protected $cartRuleCouponRepository;
 
     /**
      * TaxCategoryRepository class
      *
-     * @var TaxCategoryRepository
+     * @var \Webkul\Tax\Repositories\TaxCategoryRepository
      */
     protected $taxCategoryRepository;
 
     /**
      * CountryRepository class
      *
-     * @var CountryRepository
+     * @var \Webkul\Core\Repositories\CountryRepository
      */
     protected $countryRepository;
 
     /**
      * CountryStateRepository class
      *
-     * @var CountryStateRepository
+     * @var \Webkul\Core\Repositories\CountryStateRepository
      */
     protected $countryStateRepository;
 
     /**
      * Create a new repository instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeFamilyRepository $attributeFamilyRepository
-     * @param  Webkul\Attribute\Repositories\AttributeRepository       $attributeRepository
-     * @param  Webkul\Category\Repositories\CategoryRepository         $categoryRepository
-     * @param  Webkul\CartRule\Repositories\CartRuleCouponRepository   $cartRuleCouponRepository
-     * @param  Webkul\Tax\Repositories\TaxCategoryRepository           $taxCategoryRepository
-     * @param  Webkul\Core\Repositories\CountryRepository              $countryRepository
-     * @param  Webkul\Core\Repositories\CountryStateRepository         $countryStateRepository
-     * @param  Illuminate\Container\Container                          $app
+     * @param  \Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamilyRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository        $attributeRepository
+     * @param  \Webkul\Category\Repositories\CategoryRepository          $categoryRepository
+     * @param  \Webkul\CartRule\Repositories\CartRuleCouponRepository    $cartRuleCouponRepository
+     * @param  \Webkul\Tax\Repositories\TaxCategoryRepository            $taxCategoryRepository
+     * @param  \Webkul\Core\Repositories\CountryRepository               $countryRepository
+     * @param  \Webkul\Core\Repositories\CountryStateRepository          $countryStateRepository
+     * @param  \Illuminate\Container\Container                           $app
      * @return void
      */
     public function __construct(
@@ -120,8 +120,8 @@ class CartRuleRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @return mixed
+     * @param  array  $data
+     * @return \Webkul\CartRule\Contracts\CartRule
      */
     public function create(array $data)
     {
@@ -152,10 +152,10 @@ class CartRuleRepository extends Repository
     }
 
     /**
-     * @param array  $data
-     * @param array  $id
-     * @param string $attribute
-     * @return mixed
+     * @param  array   $data
+     * @param  int     $id
+     * @param  string  $attribute
+     * @return \Webkul\CartRule\Contracts\CartRule
      */
     public function update(array $data, $id, $attribute = "id")
     {

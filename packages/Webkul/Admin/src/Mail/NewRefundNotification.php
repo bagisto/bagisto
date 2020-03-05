@@ -20,14 +20,14 @@ class NewRefundNotification extends Mailable
     /**
      * The refund instance.
      *
-     * @var Refund
+     * @var \Webkul\Sales\Contracts\Refund
      */
     public $refund;
 
     /**
      * Create a new message instance.
      *
-     * @param mixed $refund
+     * @param  \Webkul\Sales\Contracts\Refund  $refund
      * @return void
      */
     public function __construct($refund)
