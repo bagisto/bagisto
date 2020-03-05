@@ -22,11 +22,11 @@ class BookingProductRepository extends Repository
     /**
      * Create a new repository instance.
      *
-     * @param  \Webkul\BookingProduct\Repositories\BookingProductDefaultSlotRepository      $bookingProductDefaultSlotRepository
+     * @param  \Webkul\BookingProduct\Repositories\BookingProductDefaultSlotRepository  $bookingProductDefaultSlotRepository
      * @param  \Webkul\BookingProduct\Repositories\BookingProductAppointmentSlotRepository  $bookingProductAppointmentSlotRepository
-     * @param  \Webkul\BookingProduct\Repositories\BookingProductEventTicketRepository      $bookingProductEventTicketRepository
-     * @param  \Webkul\BookingProduct\Repositories\BookingProductRentalSlotRepository       $bookingProductRentalSlotRepository
-     * @param  \Webkul\BookingProduct\Repositories\BookingProductTableSlotRepository        $bookingProductTableSlotRepository
+     * @param  \Webkul\BookingProduct\Repositories\BookingProductEventTicketRepository  $bookingProductEventTicketRepository
+     * @param  \Webkul\BookingProduct\Repositories\BookingProductRentalSlotRepository  $bookingProductRentalSlotRepository
+     * @param  \Webkul\BookingProduct\Repositories\BookingProductTableSlotRepository  $bookingProductTableSlotRepository
      * @return void
      */
     public function __construct(
