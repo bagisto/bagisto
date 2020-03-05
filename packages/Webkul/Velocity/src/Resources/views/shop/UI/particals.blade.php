@@ -129,17 +129,15 @@
                 </a>
             {!! view_render_event('bagisto.shop.layout.header.compare.after') !!}
 
-            @guest('customer')
-                {!! view_render_event('bagisto.shop.layout.header.wishlist.before') !!}
-                    <a class="wishlist-btn unset" href="{{ route('velocity.product.guest-wishlist') }}">
-                        <i class="material-icons">favorite_border</i>
-                        <div class="badge-container" v-if="wishlistCount > 0">
-                            <span class="badge" v-text="wishlistCount"></span>
-                        </div>
-                        <span>{{ __('shop::app.layouts.wishlist') }}</span>
-                    </a>
-                {!! view_render_event('bagisto.shop.layout.header.wishlist.after') !!}
-            @endguest
+            {!! view_render_event('bagisto.shop.layout.header.wishlist.before') !!}
+                <a class="wishlist-btn unset" :href="`${isCustomer ? '{{ route('customer.wishlist.index') }}' : '{{ route('velocity.product.guest-wishlist') }}'}`">
+                    <i class="material-icons">favorite_border</i>
+                    <div class="badge-container" v-if="wishlistCount > 0">
+                        <span class="badge" v-text="wishlistCount"></span>
+                    </div>
+                    <span>{{ __('shop::app.layouts.wishlist') }}</span>
+                </a>
+            {!! view_render_event('bagisto.shop.layout.header.wishlist.after') !!}
         </div>
     </div>
 </script>
@@ -539,7 +537,7 @@
                     event.stopPropagation();
                 }
             }
-        })
+        });
 
         Vue.component('close-btn', {
             template: '#close-btn-template',
@@ -617,7 +615,8 @@
                 return {
                     compareCount: 0,
                     wishlistCount: 0,
-                    searchedQuery: []
+                    searchedQuery: [],
+                    isCustomer: '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == "true",
                 }
             },
 
@@ -649,19 +648,30 @@
                 },
 
                 'updateHeaderItemsCount': function () {
-                    let comparedItems = this.getStorageValue('compared_product');
-                    let wishlistedItems = this.getStorageValue('wishlist_product');
+                    if (! this.isCustomer) {
+                        let comparedItems = this.getStorageValue('compared_product');
+                        let wishlistedItems = this.getStorageValue('wishlist_product');
 
-                    if (wishlistedItems) {
-                        this.wishlistCount = wishlistedItems.length;
-                    }
+                        if (wishlistedItems) {
+                            this.wishlistCount = wishlistedItems.length;
+                        }
 
-                    if (comparedItems) {
-                        this.compareCount = comparedItems.length;
+                        if (comparedItems) {
+                            this.compareCount = comparedItems.length;
+                        }
+                    } else {
+                        this.$http.get(`${this.$root.baseUrl}/items-count`)
+                            .then(response => {
+                                this.compareCount = response.data.compareProductsCount;
+                                this.wishlistCount = response.data.wishlistedProductsCount;
+                            })
+                            .catch(exception => {
+                                console.log(this.__('error.something_went_wrong'));
+                            });
                     }
                 }
             }
-        })
+        });
 
         Vue.component('content-header', {
             template: '#content-header-template',
@@ -735,6 +745,6 @@
                     this[metaKey] = !this[metaKey];
                 }
             },
-        })
+        });
     })()
 </script>

@@ -5,13 +5,8 @@ namespace Webkul\Velocity\Http\Controllers\Shop;
 use Illuminate\Http\Request;
 
 use Cart;
-use Webkul\Product\Helpers\ProductImage;
 use Webkul\Velocity\Http\Shop\Controllers;
 use Webkul\Checkout\Contracts\Cart as CartModel;
-use Webkul\Product\Repositories\SearchRepository;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Category\Repositories\CategoryRepository;
-use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRepository;
 
 /**
  * Shop controller
@@ -22,78 +17,10 @@ use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRep
 class ShopController extends Controller
 {
     /**
-     * Contains route related configuration
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
-     * Webkul\Product\Helpers\ProductImage object
-     *
-     * @var ProductImage
-    */
-    protected $productImageHelper;
-
-    /**
-     * SearchRepository object
-     *
-     * @var SearchRepository
-    */
-    protected $searchRepository;
-
-    /**
-     * ProductRepository object
-     *
-     * @var ProductRepository
-    */
-    protected $productRepository;
-
-    /**
-     * ProductRepository object of velocity package
-     *
-     * @var ProductRepository
-     */
-    protected $velocityProductRepository;
-
-    /**
-     * CategoryRepository object of velocity package
-     *
-     * @var CategoryRepository
-     */
-    protected $categoryRepository;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @param  \Webkul\Product\Helpers\ProductImage $productImageHelper
-     * @param  \Webkul\Product\Repositories\SearchRepository $searchRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository $productRepository
-     * @param  \Webkul\Category\Repositories\CategoryRepository $categoryRepository
-     * @param  \Webkul\Velocity\Repositories\Product\ProductRepository $velocityProductRepository
-     * @return void
-    */
-    public function __construct(
-        ProductImage $productImageHelper,
-        SearchRepository $searchRepository,
-        ProductRepository $productRepository,
-        CategoryRepository $categoryRepository,
-        VelocityProductRepository $velocityProductRepository
-    ) {
-        $this->_config = request('_config');
-
-        $this->searchRepository = $searchRepository;
-        $this->productRepository = $productRepository;
-        $this->productImageHelper = $productImageHelper;
-        $this->categoryRepository = $categoryRepository;
-        $this->velocityProductRepository = $velocityProductRepository;
-    }
-
-    /**
      * Index to handle the view loaded with the search results
      *
      * @return \Illuminate\View\View
-     */
+    */
     public function search()
     {
         $results = $this->velocityProductRepository->searchProductsFromCategory(request()->all());
@@ -271,5 +198,58 @@ class ShopController extends Controller
     public function getWishlistList()
     {
         return view($this->_config['view']);
+    }
+
+    /**
+     * this function will provide the count of wishlist and comparison for logged in user
+     *
+     * @return Response
+    */
+    public function getItemsCount()
+    {
+        if ($customer = auth()->guard('customer')->user()) {
+            $wishlistItemsCount = $this->wishlistRepository->count([
+                'customer_id' => $customer->id,
+                'channel_id' => core()->getCurrentChannel()->id,
+            ]);
+
+            $comparedItemsCount = $this->compareProductsRepository->count([
+                'customer_id' => $customer->id,
+            ]);
+
+            $response = [
+                'status' => true,
+                'compareProductsCount' => $comparedItemsCount,
+                'wishlistedProductsCount' => $wishlistItemsCount,
+            ];
+        }
+
+        return response()->json($response ?? [
+            'status' => false
+        ]);
+    }
+
+    /**
+     * this function will provide details of multiple product
+     *
+     * @param $productIds
+     *
+     * @return Response
+    */
+    public function getDetailedProducts()
+    {
+        // for product details
+        if ($items = request()->get('items')) {
+            $productCollection = $this->velocityHelper->fetchProductCollection($items);
+
+            $response = [
+                'status' => 'success',
+                'products' => $productCollection,
+            ];
+        }
+
+        return response()->json($response ?? [
+            'status' => false
+        ]);
     }
 }

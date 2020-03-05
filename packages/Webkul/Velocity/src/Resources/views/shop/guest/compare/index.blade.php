@@ -132,25 +132,24 @@
 
             methods: {
                 'getComparedProducts': function () {
-                    if (this.isCustomer) {
-                        var data = {
-                            params: {
-                                data: true,
-                            }
-                        };
-                    } else {
-                        let items = JSON.parse(window.localStorage.getItem('compared_product'));
+                    let url = `${this.$root.baseUrl}/${this.isCustomer ? 'comparison' : 'detailed-products'}`;
+
+                    let data = {
+                        params: {'data': true}
+                    }
+
+                    if (! this.isCustomer) {
+                        let items = this.getStorageValue('compared_product');
                         items = items ? items.join('&') : '';
 
-                        var data = {
+                        data = {
                             params: {
-                                items,
-                                data: true,
+                                items
                             }
                         };
                     }
 
-                    this.$http.get(`${this.$root.baseUrl}/comparison`, data)
+                    this.$http.get(url, data)
                     .then(response => {
                         this.isProductListLoaded = true;
                         this.products = response.data.products;

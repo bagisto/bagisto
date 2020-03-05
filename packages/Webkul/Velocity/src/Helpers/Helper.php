@@ -246,10 +246,10 @@ class Helper extends Review
             'firstReviewText'   => trans('velocity::app.products.be-first-review'),
             'priceHTML'         => view('shop::products.price', ['product' => $product])->render(),
             'addToCartHtml'     => view('shop::products.add-to-cart', [
-                'product'           => $product,
                 'showCompare'       => true,
-                'addWishlistClass'  => !(isset($list) && $list) ? '' : '',
-                'addToCartBtnClass' => !(isset($list) && $list) ? 'small-padding' : '',
+                'product'           => $product,
+                'addWishlistClass'  => ! (isset($list) && $list) ? '' : '',
+                'addToCartBtnClass' => ! (isset($list) && $list) ? 'small-padding' : '',
             ])->render(),
         ];
     }
@@ -261,10 +261,10 @@ class Helper extends Review
      *
      * @return array
     */
-    public function fetchProductCollection($items)
+    public function fetchProductCollection($items, $separator='&')
     {
         $productCollection = [];
-        $productSlugs = explode('&', $items);
+        $productSlugs = explode($separator, $items);
 
         foreach ($productSlugs as $slug) {
             $product = $this->productRepository->findBySlug($slug);
