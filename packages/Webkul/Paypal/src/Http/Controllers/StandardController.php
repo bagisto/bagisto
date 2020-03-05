@@ -6,12 +6,6 @@ use Webkul\Checkout\Facades\Cart;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Paypal\Helpers\Ipn;
 
-/**
- * Paypal Standard controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class StandardController extends Controller
 {
     /**

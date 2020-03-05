@@ -7,12 +7,6 @@ use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Product\Models\ProductAttributeValue;
 
-/**
- * Product Attribute Value Reposotory
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ProductAttributeValueRepository extends Repository
 {
     /**

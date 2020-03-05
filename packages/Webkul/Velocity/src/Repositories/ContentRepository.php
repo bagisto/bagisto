@@ -7,12 +7,6 @@ use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Facades\Event;
 use Webkul\Product\Repositories\ProductRepository;
 
-/**
- * Content Reposotory
- *
- * @author    Vivek Sharma <viveksh047@webkul.com>
- * @copyright 2019 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ContentRepository extends Repository
 {
    /**

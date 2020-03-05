@@ -5,12 +5,6 @@ namespace Webkul\Admin\DataGrids;
 use Webkul\Ui\DataGrid\DataGrid;
 use Illuminate\Support\Facades\DB;
 
-/**
- * ProductDataGrid Class
- *
- * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ProductDataGrid extends DataGrid
 {
     protected $sortOrder = 'desc';

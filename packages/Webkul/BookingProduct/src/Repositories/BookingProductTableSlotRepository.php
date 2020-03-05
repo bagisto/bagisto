@@ -4,12 +4,6 @@ namespace Webkul\BookingProduct\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
 
-/**
- * BookingProductTableSlot Repository
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class BookingProductTableSlotRepository extends Repository
 {
     /**

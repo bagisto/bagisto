@@ -6,12 +6,6 @@ use Illuminate\Container\Container as App;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Category\Repositories\CategoryRepository as Category;
 
-/**
- * Category Reposotory
- *
- * @author    Vivek Sharma <viveksh047@webkul.com>
- * @copyright 2019 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class CategoryRepository extends Repository
 {   
    /**

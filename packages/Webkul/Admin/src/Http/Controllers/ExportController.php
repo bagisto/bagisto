@@ -5,12 +5,6 @@ namespace Webkul\Admin\Http\Controllers;
 use Webkul\Admin\Exports\DataGridExport;
 use Excel;
 
-/**
- * Export controlller
- *
- * @author    Rahul Shukla <rahulshukla.symfony517@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ExportController extends Controller
 {
     protected $exportableGrids = [

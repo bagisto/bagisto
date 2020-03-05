@@ -5,12 +5,6 @@ namespace Webkul\CMS\Http\Controllers\Shop;
 use Webkul\CMS\Http\Controllers\Controller;
 use Webkul\CMS\Repositories\CmsRepository;
 
-/**
- * PagePresenter controller
- *
- * @author  Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class PagePresenterController extends Controller
 {
     /**

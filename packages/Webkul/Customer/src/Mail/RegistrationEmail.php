@@ -7,12 +7,6 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-/**
- * Registration Mail class
- *
- * @author    Prateek Srivastava
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class RegistrationEmail extends Mailable
 {
     use Queueable, SerializesModels;

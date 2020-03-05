@@ -5,12 +5,6 @@ namespace Webkul\Admin\Http\Controllers\Sales;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Sales\Repositories\OrderRepository;
 
-/**
- * Sales Order controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class OrderController extends Controller
 {
     /**

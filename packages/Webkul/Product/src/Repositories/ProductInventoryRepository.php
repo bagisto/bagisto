@@ -5,12 +5,6 @@ namespace Webkul\Product\Repositories;
 use Illuminate\Container\Container as App;
 use Webkul\Core\Eloquent\Repository;
 
-/**
- * Product Inventory Reposotory
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ProductInventoryRepository extends Repository
 {
     /**

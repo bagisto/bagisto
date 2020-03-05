@@ -5,12 +5,6 @@ namespace Webkul\Admin\DataGrids;
 use Illuminate\Support\Facades\DB;
 use Webkul\Ui\DataGrid\DataGrid;
 
-/**
- * Cart Rule DataGrid class
- *
- * @author Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class CartRuleDataGrid extends DataGrid
 {
     protected $index = 'id';

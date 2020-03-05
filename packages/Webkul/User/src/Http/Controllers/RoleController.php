@@ -5,12 +5,6 @@ namespace Webkul\User\Http\Controllers;
 use Illuminate\Support\Facades\Event;
 use Webkul\User\Repositories\RoleRepository;
 
-/**
- * Admin user role controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class RoleController extends Controller
 {
     /**

@@ -8,12 +8,6 @@ use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Illuminate\Container\Container as App;
 use Illuminate\Support\Str;
 
-/**
- * Attribute Reposotory
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class AttributeRepository extends Repository
 {
     /**

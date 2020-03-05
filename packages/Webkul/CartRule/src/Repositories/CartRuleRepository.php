@@ -11,12 +11,6 @@ use Webkul\Tax\Repositories\TaxCategoryRepository;
 use Webkul\Core\Repositories\CountryRepository;
 use Webkul\Core\Repositories\CountryStateRepository;
 
-/**
- * CartRule Reposotory
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class CartRuleRepository extends Repository
 {
     /**

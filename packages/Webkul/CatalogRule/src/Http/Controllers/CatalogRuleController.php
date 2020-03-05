@@ -7,12 +7,6 @@ use Illuminate\Support\Facades\Event;
 use Webkul\CatalogRule\Repositories\CatalogRuleRepository;
 use Webkul\CatalogRule\Helpers\CatalogRuleIndex;
 
-/**
- * Catalog Rule controller
- *
- * @author Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class CatalogRuleController extends Controller
 {
     /**

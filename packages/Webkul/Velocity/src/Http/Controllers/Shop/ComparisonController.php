@@ -6,12 +6,6 @@ use Webkul\Velocity\Helpers\Helper;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository;
 
-/**
- * Comparison controller
- *
- * @author  Shubham Mehrotra <shubhammehrotra.symfony@webkul.com> @shubhwebkul
- * @copyright 2020 Webkul Software Pvt Ltd (http://www.webkul.com)
-*/
 class ComparisonController extends Controller
 {
     /**

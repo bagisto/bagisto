@@ -4,12 +4,6 @@ namespace Webkul\User\Http\Controllers;
 
 use Hash;
 
-/**
- * Admin user account controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class AccountController extends Controller
 {
     /**

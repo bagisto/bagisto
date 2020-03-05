@@ -6,12 +6,6 @@ use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Models\ProductFlatProxy;
 use Webkul\Product\Models\ProductFlat;
 
-/**
- * Abstract Product Helper
- *
- * @author Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 abstract class AbstractProduct
 {
     /**

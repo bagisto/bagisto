@@ -2,12 +2,6 @@
 
 namespace Webkul\Product\Type;
 
-/**
- * Class Simple.
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class Simple extends AbstractType
 {
     /**

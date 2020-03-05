@@ -6,12 +6,6 @@ use Illuminate\Http\Request;
 use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\API\Http\Resources\Catalog\ProductReview as ProductReviewResource;
 
-/**
- * Review controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ReviewController extends Controller
 {
     /**

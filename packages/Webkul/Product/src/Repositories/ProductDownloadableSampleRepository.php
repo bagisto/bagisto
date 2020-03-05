@@ -6,12 +6,6 @@ use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Str;
 
-/**
- * Product Downloadable Sample Reposotory
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ProductDownloadableSampleRepository extends Repository
 {
     /**

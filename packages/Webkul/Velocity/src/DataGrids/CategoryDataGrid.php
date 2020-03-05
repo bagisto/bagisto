@@ -5,12 +5,6 @@ namespace Webkul\Velocity\DataGrids;
 use Illuminate\Support\Facades\DB;
 use Webkul\Ui\DataGrid\DataGrid;
 
-/**
- * Category DataGrid
- *
- * @author Vivek Sharma <viveksh047@webkul.com> @viveksh-webkul
- * @copyright 2019 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class CategoryDataGrid extends DataGrid
 {
     protected $index = 'category_menu_id';

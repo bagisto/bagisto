@@ -9,12 +9,6 @@ use Webkul\BookingProduct\Helpers\RentalSlot as RentalSlotHelper;
 use Webkul\BookingProduct\Helpers\EventTicket as EventTicketHelper;
 use Webkul\BookingProduct\Helpers\TableSlot as TableSlotHelper;
 
-/**
- * BookingProduct page controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class BookingProductController extends Controller
 {
     /**

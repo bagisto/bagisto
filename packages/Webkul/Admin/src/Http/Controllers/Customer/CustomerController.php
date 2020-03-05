@@ -9,12 +9,6 @@ use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Admin\Mail\NewCustomerNotification;
 use Mail;
 
-/**
- * Customer controlller
- *
- * @author    Rahul Shukla <rahulshukla.symfony517@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class CustomerController extends Controller
 {
     /**

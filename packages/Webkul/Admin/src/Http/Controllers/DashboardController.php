@@ -9,12 +9,6 @@ use Webkul\Sales\Repositories\OrderItemRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 
-/**
- * Dashboard controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class DashboardController extends Controller
 {
     /**

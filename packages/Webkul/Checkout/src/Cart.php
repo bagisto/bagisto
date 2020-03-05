@@ -16,13 +16,6 @@ use Webkul\Customer\Repositories\CustomerAddressRepository;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Arr;
 
-/**
- * Facades handler for all the methods to be implemented in Cart.
- *
- * @author    Prashant Singh <prashant.singh852@webkul.com>
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class Cart
 {
 

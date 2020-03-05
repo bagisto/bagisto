@@ -4,12 +4,6 @@ namespace Webkul\Product\Helpers;
 
 use Illuminate\Support\Facades\Storage;
 
-/**
- * Product Image Helper
- *
- * @author Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ProductImage extends AbstractProduct
 {
     /**

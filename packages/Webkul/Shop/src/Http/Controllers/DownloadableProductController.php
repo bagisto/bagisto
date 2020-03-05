@@ -5,12 +5,6 @@ namespace Webkul\Shop\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository;
 
-/**
- * Downloadable Product Controller controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class DownloadableProductController extends Controller
 {
     /**

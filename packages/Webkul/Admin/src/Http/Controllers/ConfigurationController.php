@@ -8,12 +8,6 @@ use Webkul\Core\Tree;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Admin\Http\Requests\ConfigurationForm;
 
-/**
- * Configuration controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ConfigurationController extends Controller
 {
     /**

@@ -5,12 +5,6 @@ namespace Webkul\Shop\DataGrids;
 use Illuminate\Support\Facades\DB;
 use Webkul\Ui\DataGrid\DataGrid;
 
-/**
- * OrderDataGrid class
- *
- * @author Rahul Shukla <rahulshkla.symfont517@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class OrderDataGrid extends DataGrid
 {
     protected $index = 'id';

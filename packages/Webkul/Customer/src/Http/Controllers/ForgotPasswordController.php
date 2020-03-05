@@ -5,12 +5,6 @@ namespace Webkul\Customer\Http\Controllers;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Support\Facades\Password;
 
-/**
- * Forgot Password controlller for the customer.
- *
- * @author    Prashant Singh <prashant.singh852@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ForgotPasswordController extends Controller
 {
 

@@ -5,12 +5,6 @@ namespace Webkul\Product\Http\Controllers;
 use Illuminate\Support\Facades\Event;
 use Webkul\Product\Repositories\ProductReviewRepository;
 
-/**
- * Review controller
- *
- * @author    Rahul Shukla <rahulshukla.symfony517@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ReviewController extends Controller
 {
     /**

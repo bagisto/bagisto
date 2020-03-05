@@ -3,13 +3,7 @@
 namespace Webkul\CatalogRule\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
-
-/**
- * CatalogRuleProductPrice Repository
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
+x
 class CatalogRuleProductPriceRepository extends Repository
 {
     /**

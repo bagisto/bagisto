@@ -6,12 +6,6 @@ use Illuminate\Http\Response;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Velocity\Repositories\CategoryRepository as VelocityCategoryRepository;
 
-/**
- * Category Controller
- *
- * @author    Vivek Sharma <viveksh047@webkul.com> @vivek
- * @copyright 2019 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class CategoryController extends Controller
 {
     /**

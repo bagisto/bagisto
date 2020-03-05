@@ -5,12 +5,6 @@ namespace Webkul\Core\Http\Controllers;
 use Illuminate\Support\Facades\Event;
 use Webkul\Core\Repositories\LocaleRepository;
 
-/**
- * Locale controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class LocaleController extends Controller
 {
     /**

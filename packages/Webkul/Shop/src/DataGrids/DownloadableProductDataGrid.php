@@ -5,12 +5,6 @@ namespace Webkul\Shop\DataGrids;
 use Illuminate\Support\Facades\DB;
 use Webkul\Ui\DataGrid\DataGrid;
 
-/**
- * DownloadableProduct DataGrid class
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class DownloadableProductDataGrid extends DataGrid
 {
     protected $index = 'id';

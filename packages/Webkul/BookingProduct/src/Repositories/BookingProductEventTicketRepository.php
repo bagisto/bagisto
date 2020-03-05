@@ -5,12 +5,6 @@ namespace Webkul\BookingProduct\Repositories;
 use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Str;
 
-/**
- * BookingProductEventTicket Repository
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class BookingProductEventTicketRepository extends Repository
 {
     /**

@@ -11,12 +11,6 @@ use Webkul\Core\Eloquent\Repository;
 use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Product\Models\ProductAttributeValue;
 
-/**
- * Product Repository
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ProductRepository extends Repository
 {
     /**

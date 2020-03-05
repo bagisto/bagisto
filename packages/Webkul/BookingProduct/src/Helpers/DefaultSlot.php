@@ -4,12 +4,6 @@ namespace Webkul\BookingProduct\Helpers;
 
 use Carbon\Carbon;
 
-/**
- * DefaultSlot Helper
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class DefaultSlot extends Booking
 {
     /**

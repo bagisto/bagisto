@@ -4,12 +4,6 @@ namespace Webkul\CartRule\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
 
-/**
- * CartRuleCoupon Reposotory
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class CartRuleCouponRepository extends Repository
 {
     /**

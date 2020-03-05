@@ -5,12 +5,6 @@ namespace Webkul\CartRule\Http\Controllers;
 use Illuminate\Http\Request;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 
-/**
- * Cart Rule Coupon controller
- *
- * @author Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class CartRuleCouponController extends Controller
 {
     /**

@@ -10,13 +10,6 @@ use Webkul\Checkout\Http\Requests\CustomerAddressForm;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
 
-/**
- * Chekout controller for the customer and guest for placing order
- *
- * @author  Jitendra Singh <jitendra@webkul.com> @jitendra-webkul
- * @author  Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class OnepageController extends Controller
 {
     /**

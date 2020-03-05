@@ -6,14 +6,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Webkul\Velocity\Repositories\VelocityMetadataRepository;
 
-/**
- * Category Controller
- *
- * @author    Shubham Mehrotra <shubhammehrotra.symfony@webkul.com> @shubhwebkul
- * @author    Vivek Sharma <viveksh047@webkul.com> @vivek-webkul
- * @copyright 2019 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
-
 class ConfigurationController extends Controller
 {
     /**

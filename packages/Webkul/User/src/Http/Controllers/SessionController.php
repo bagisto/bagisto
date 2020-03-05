@@ -4,12 +4,6 @@ namespace Webkul\User\Http\Controllers;
 
 use Auth;
 
-/**
- * Admin user session controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class SessionController extends Controller
 {
     /**

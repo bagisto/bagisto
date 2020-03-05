@@ -2,16 +2,6 @@
 
 namespace Webkul\Customer\Rules;
 
-/**
- * Class VatValidator
- *
- * This class is borrowed from:
- *
- * @see     https://raw.githubusercontent.com/danielebarbaro/laravel-vat-eu-validator
- *
- * @package Danielebarbaro\LaravelVatEuValidator
- * @author  Vivek Sharma <viveksh047@webkul.com> @vivek-webkul
- */
 class VatValidator
 {
     /**

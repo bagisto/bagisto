@@ -11,13 +11,6 @@ use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Helpers\ProductType;
 use Webkul\Product\Models\ProductAttributeValue;
 
-/**
- * Product Flat Event handler
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @author    Prashant Singh <prashant.singh852@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ProductFlat
 {
     /**

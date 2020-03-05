@@ -5,12 +5,6 @@ namespace Webkul\API\Http\Controllers\Shop;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
 use Webkul\API\Http\Resources\Customer\CustomerAddress as CustomerAddressResource;
 
-/**
- * Address controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class AddressController extends Controller
 {
     /**

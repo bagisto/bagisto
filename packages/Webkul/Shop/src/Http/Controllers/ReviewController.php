@@ -5,12 +5,6 @@ namespace Webkul\Shop\Http\Controllers;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
 
-/**
- * Review controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ReviewController extends Controller
 {
     /**

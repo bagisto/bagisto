@@ -9,12 +9,6 @@ use Webkul\API\Http\Resources\Customer\Wishlist as WishlistResource;
 use Webkul\API\Http\Resources\Checkout\Cart as CartResource;
 use Cart;
 
-/**
- * Wishlist controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class WishlistController extends Controller
 {
     /**

@@ -6,13 +6,6 @@ use Hash;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
 
-/**
- * Customer controlller for the customer basically for the tasks of customers which will be
- * done after customer authentication.
- *
- * @author    Prashant Singh <prashant.singh852@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class CustomerController extends Controller
 {
     /**

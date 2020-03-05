@@ -5,12 +5,6 @@ namespace Webkul\Admin\DataGrids;
 use Illuminate\Support\Facades\DB;
 use Webkul\Ui\DataGrid\DataGrid;
 
-/**
- * CustomerReviewDataGrid Class
- *
- * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class CustomerReviewDataGrid extends DataGrid
 {
     protected $index = 'product_review_id';

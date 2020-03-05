@@ -5,12 +5,6 @@ namespace Webkul\Attribute\Http\Controllers;
 use Illuminate\Support\Facades\Event;
 use Webkul\Attribute\Repositories\AttributeRepository;
 
-/**
- * Catalog attribute controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class AttributeController extends Controller
 {
     /**

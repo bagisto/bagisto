@@ -7,13 +7,6 @@ use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Sales\Contracts\OrderItem;
 
-/**
- * OrderItem Reposotory
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
-
 class OrderItemRepository extends Repository
 {
     /**

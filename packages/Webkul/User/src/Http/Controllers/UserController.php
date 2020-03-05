@@ -9,12 +9,6 @@ use Webkul\User\Repositories\RoleRepository;
 use Webkul\User\Http\Requests\UserForm;
 use Hash;
 
-/**
- * Admin user controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class UserController extends Controller
 {
     /**

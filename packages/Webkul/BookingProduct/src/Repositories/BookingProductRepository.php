@@ -6,12 +6,6 @@ use Illuminate\Container\Container as App;
 use Carbon\Carbon;
 use Webkul\Core\Eloquent\Repository;
 
-/**
- * BookingProduct Repository
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class BookingProductRepository extends Repository
 {
     /**

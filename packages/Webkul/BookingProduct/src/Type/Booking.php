@@ -12,12 +12,6 @@ use Webkul\BookingProduct\Repositories\BookingProductRepository;
 use Webkul\BookingProduct\Helpers\Booking as BookingHelper;
 use Webkul\Product\Type\Virtual;
 
-/**
- * Class Booking.
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class Booking extends Virtual
 {
     /**

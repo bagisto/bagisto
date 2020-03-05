@@ -6,13 +6,6 @@ use Illuminate\Support\Facades\Event;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 
-/**
- * Customer controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @author    Vivek Sharma <viveksh047@webkul.com> @vivek-webkul
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class CustomerController extends Controller
 {
     /**

@@ -4,12 +4,6 @@ namespace Webkul\CatalogRule\Listeners;
 
 use Webkul\CatalogRule\Helpers\CatalogRuleIndex;
 
-/**
- * Products Event handler
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class Product
 {
     /**

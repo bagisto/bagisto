@@ -6,12 +6,6 @@ use Illuminate\Support\Facades\Mail;
 use Webkul\Shop\Mail\SubscriptionEmail;
 use Webkul\Core\Repositories\SubscribersListRepository;
 
-/**
- * Subscription controller
- *
- * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class SubscriptionController extends Controller
 {
     /**

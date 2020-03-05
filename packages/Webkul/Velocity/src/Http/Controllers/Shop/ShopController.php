@@ -13,12 +13,6 @@ use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRepository;
 use Webkul\Category\Repositories\CategoryRepository;
 
-/**
- * Shop controller
- *
- * @author  Shubham Mehrotra <shubhammehrotra.symfony@webkul.com> @shubhwebkul
- * @copyright 2019 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ShopController extends Controller
 {
     /**

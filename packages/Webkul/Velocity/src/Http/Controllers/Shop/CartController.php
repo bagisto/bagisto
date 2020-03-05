@@ -7,12 +7,6 @@ use Webkul\Velocity\Helpers\Helper;
 use Webkul\Checkout\Contracts\Cart as CartModel;
 use Webkul\Product\Repositories\ProductRepository;
 
-/**
- * Cart controller
- *
- * @author  Shubham Mehrotra <shubhammehrotra.symfony@webkul.com> @shubhwebkul
- * @copyright 2020 Webkul Software Pvt Ltd (http://www.webkul.com)
-*/
 class CartController extends Controller
 {
     /**

@@ -11,12 +11,6 @@ use Webkul\Admin\Mail\NewInventorySourceNotification;
 use Webkul\Admin\Mail\CancelOrderNotification;
 use Webkul\Admin\Mail\NewRefundNotification;
 
-/**
- * Order event handler
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class Order
 {
 

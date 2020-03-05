@@ -12,12 +12,6 @@ use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
 use Webkul\Product\Helpers\ProductImage;
 use Webkul\Product\Helpers\BundleOption;
 
-/**
- * Class Bundle.
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class Bundle extends AbstractType
 {
     /**

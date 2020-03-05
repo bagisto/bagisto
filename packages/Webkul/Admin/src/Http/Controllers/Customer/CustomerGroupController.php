@@ -5,12 +5,6 @@ namespace Webkul\Admin\Http\Controllers\Customer;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 
-/**
- * Customer Group controlller
- *
- * @author    Rahul Shukla <rahulshukla.symfony517@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class CustomerGroupController extends Controller
 {
     /**

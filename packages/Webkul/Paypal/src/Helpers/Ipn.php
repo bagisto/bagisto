@@ -5,12 +5,6 @@ namespace Webkul\Paypal\Helpers;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
 
-/**
- * Paypal ipn listener helper
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class Ipn
 {
     /**

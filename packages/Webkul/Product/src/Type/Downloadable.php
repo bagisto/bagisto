@@ -12,12 +12,6 @@ use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
 use Webkul\Product\Helpers\ProductImage;
 use Webkul\Checkout\Models\CartItem;
 
-/**
- * Class Downloadable.
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class Downloadable extends AbstractType
 {
     /**

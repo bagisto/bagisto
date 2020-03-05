@@ -5,12 +5,6 @@ namespace Webkul\CMS\Http\Controllers\Admin;
 use Webkul\CMS\Http\Controllers\Controller;
 use Webkul\CMS\Repositories\CmsRepository;
 
-/**
- * CMS controller
- *
- * @author  Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
  class PageController extends Controller
 {
     /**

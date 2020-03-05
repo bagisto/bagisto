@@ -5,12 +5,6 @@ namespace Webkul\BookingProduct\Helpers;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
-/**
- * RentalSlot Helper
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class RentalSlot extends Booking
 {
     /**

@@ -8,12 +8,6 @@ use Illuminate\Support\Facades\DB;
 use Webkul\Sales\Contracts\Refund;
 use Webkul\Core\Eloquent\Repository;
 
-/**
- * Refund Reposotory
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class RefundRepository extends Repository
 {
     /**

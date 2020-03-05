@@ -6,12 +6,6 @@ use Webkul\Core\Eloquent\Repository;
 use Webkul\Product\Repositories\ProductRepository;
 use Illuminate\Support\Str;
 
-/**
- * Product Grouped Product Repository
- *
- * @author Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ProductGroupedProductRepository extends Repository
 {
     public function model()

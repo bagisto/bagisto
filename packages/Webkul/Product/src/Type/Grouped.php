@@ -12,12 +12,6 @@ use Webkul\Product\Helpers\ProductImage;
 use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Models\ProductFlat;
 
-/**
- * Class Grouped.
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class Grouped extends AbstractType
 {
     /**
