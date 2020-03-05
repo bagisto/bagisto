@@ -2,8 +2,8 @@
 
 namespace Webkul\Admin\DataGrids;
 
+use Illuminate\Support\Facades\DB;
 use Webkul\Ui\DataGrid\DataGrid;
-use DB;
 
 /**
  * TaxCategoryDataGrid Class

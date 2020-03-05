@@ -2,8 +2,8 @@
 
 namespace Webkul\Category\Database\Seeders;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
-use DB;
 use Carbon\Carbon;
 
 class CategoryTableSeeder extends Seeder

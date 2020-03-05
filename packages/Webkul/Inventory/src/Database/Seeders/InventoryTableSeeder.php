@@ -2,8 +2,8 @@
 
 namespace Webkul\Inventory\Database\Seeders;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
-use DB;
 
 class InventoryTableSeeder extends Seeder
 {

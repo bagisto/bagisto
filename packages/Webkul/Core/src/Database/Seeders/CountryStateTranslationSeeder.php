@@ -2,9 +2,9 @@
 
 namespace Webkul\Core\Database\Seeders;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Arr;
-use DB;
 
 class CountryStateTranslationSeeder extends Seeder
 {

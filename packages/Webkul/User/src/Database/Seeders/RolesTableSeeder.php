@@ -2,9 +2,9 @@
 
 namespace Webkul\User\Database\Seeders;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 use Webkul\User\Models\Role;
-use DB;
 
 class RolesTableSeeder extends Seeder
 {

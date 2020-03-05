@@ -2,7 +2,7 @@
 
 namespace Webkul\Velocity\Helpers;
 
-use DB;
+use Illuminate\Support\Facades\DB;
 use Webkul\Product\Helpers\Review;
 use Webkul\Product\Models\Product as ProductModel;
 use Webkul\Velocity\Repositories\OrderBrandsRepository;

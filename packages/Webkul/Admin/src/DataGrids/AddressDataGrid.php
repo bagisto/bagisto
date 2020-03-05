@@ -2,7 +2,7 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use DB;
+use Illuminate\Support\Facades\DB;
 use Webkul\Ui\DataGrid\DataGrid;
 use Webkul\Customer\Repositories\CustomerRepository;
 

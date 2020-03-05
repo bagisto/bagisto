@@ -1,7 +1,8 @@
 <?php
 
 namespace Webkul\Product\Helpers;
-use DB;
+
+use Illuminate\Support\Facades\DB;
 
 /**
  * Product Review Helper

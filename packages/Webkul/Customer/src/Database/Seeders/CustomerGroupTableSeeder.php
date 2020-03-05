@@ -2,8 +2,8 @@
 
 namespace Webkul\Customer\Database\Seeders;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
-use DB;
 
 class CustomerGroupTableSeeder extends Seeder
 {

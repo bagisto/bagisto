@@ -2,7 +2,7 @@
 
 namespace Webkul\Product\Repositories;
 
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Container\Container as App;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
