@@ -59,7 +59,8 @@
         {!! view_render_event('bagisto.shop.home.content.before') !!}
 
             @if ($velocityMetaData)
-                {!! DbView::make($velocityMetaData)->field('home_page_content')->render() !!}
+                {{-- {!! DbView::make($velocityMetaData)->field('home_page_content')->render() !!} --}}
+                @include('shop::home.new-products')
             @else
                 @include('shop::home.advertisements.advertisement-four')
                 @include('shop::home.featured-products')

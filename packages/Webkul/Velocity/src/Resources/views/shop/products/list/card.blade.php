@@ -117,11 +117,12 @@
                     </div>
                 @endif
 
-                <div class="cart-wish-wrap row col-12 no-padding ml0">
+                <div class="cart-wish-wrap no-padding ml0">
                     @include ('shop::products.add-to-cart', [
-                        'product' => $product,
-                        'showCompare' => true,
-                        'btnText' => $btnText ?? null,
+                        'showCompare'       => true,
+                        'product'           => $product,
+                        'btnText'           => $btnText ?? null,
+                        'addToCartForm'     => $addToCartForm ?? false,
                         'addToCartBtnClass' => $addToCartBtnClass ?? '',
                     ])
                 </div>

@@ -1,6 +1,6 @@
 {!! view_render_event('bagisto.shop.products.add_to_cart.before', ['product' => $product]) !!}
 
-    <div class="row mx-0 col-12 no-padding">
+    <div class="mx-0 no-padding">
         @if (isset($showCompare) && $showCompare)
                 <compare-component
                     @auth('customer')
@@ -37,6 +37,29 @@
                         {{ __('shop::app.products.add-to-cart') }}
                     </span>
                 </button>
+            @elseif(isset($addToCartForm) && !$addToCartForm)
+                <form
+                    method="POST"
+                    action="{{ route('cart.add', $product->product_id) }}">
+
+                    @csrf
+
+                    <input type="hidden" name="product_id" value="{{ $product->product_id }}">
+                    <input type="hidden" name="quantity" value="1">
+                    <button
+                        type="submit"
+                        {{ ! $product->isSaleable() ? 'disabled' : '' }}
+                        class="btn btn-add-to-cart {{ $addToCartBtnClass ?? '' }}">
+
+                        @if (! (isset($showCartIcon) && !$showCartIcon))
+                            <i class="material-icons text-down-3">shopping_cart</i>
+                        @endif
+
+                        <span class="fs14 fw6 text-uppercase text-up-4">
+                            {{ $btnText ?? __('shop::app.products.add-to-cart') }}
+                        </span>
+                    </button>
+                </form>
             @else
                 <add-to-cart
                     form="true"

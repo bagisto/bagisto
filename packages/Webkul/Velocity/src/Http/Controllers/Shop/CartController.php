@@ -16,35 +16,6 @@ use Webkul\Product\Repositories\ProductRepository;
 class CartController extends Controller
 {
     /**
-     * Webkul\Velocity\Helpers\Helper object
-     *
-     * @var Helper
-    */
-    protected $velocityHelper;
-
-    /**
-     * Webkul\Product\Repositories\ProductRepository object
-     *
-     * @var ProductRepository
-    */
-    protected $productRepository;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-    */
-    public function __construct(
-        Helper $velocityHelper,
-        ProductRepository $productRepository
-    ) {
-        $this->_config = request('_config');
-
-        $this->velocityHelper = $velocityHelper;
-        $this->productRepository = $productRepository;
-    }
-
-    /**
      * Retrives the mini cart details
      *
      * @return Response
