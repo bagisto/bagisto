@@ -26,19 +26,19 @@ class CartTaxesCest
         $tax1 = $I->have(TaxRate::class, [
             'country' => $this->country,
         ]);
-        $taxCategorie1 = $I->have(TaxCategory::class);
+        $taxCategory1 = $I->have(TaxCategory::class);
         $I->have(TaxMap::class, [
             'tax_rate_id'     => $tax1->id,
-            'tax_category_id' => $taxCategorie1->id,
+            'tax_category_id' => $taxCategory1->id,
         ]);
 
         $tax2 = $I->have(TaxRate::class, [
             'country' => $this->country,
         ]);
-        $taxCategorie2 = $I->have(TaxCategory::class);
+        $taxCategory2 = $I->have(TaxCategory::class);
         $I->have(TaxMap::class, [
             'tax_rate_id'     => $tax2->id,
-            'tax_category_id' => $taxCategorie2->id,
+            'tax_category_id' => $taxCategory2->id,
         ]);
 
         $config1 = [
@@ -46,7 +46,7 @@ class CartTaxesCest
             'attributeValues'  => [
                 'status'          => true,
                 'new'             => 1,
-                'tax_category_id' => $taxCategorie1->id,
+                'tax_category_id' => $taxCategory1->id,
             ],
         ];
         $product1 = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT, $config1);
@@ -56,7 +56,7 @@ class CartTaxesCest
             'attributeValues'  => [
                 'status'          => true,
                 'new'             => 1,
-                'tax_category_id' => $taxCategorie2->id,
+                'tax_category_id' => $taxCategory2->id,
             ],
         ];
         $product2 = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT, $config2);
@@ -158,15 +158,15 @@ class CartTaxesCest
             'tax_rate' => $I->fake()->randomFloat(2, 3, 8),
         ]);
 
-        $taxCategorie1 = $I->have(TaxCategory::class);
+        $taxCategory1 = $I->have(TaxCategory::class);
 
         $I->have(TaxMap::class, [
             'tax_rate_id'     => $tax11->id,
-            'tax_category_id' => $taxCategorie1->id,
+            'tax_category_id' => $taxCategory1->id,
         ]);
         $I->have(TaxMap::class, [
             'tax_rate_id'     => $tax12->id,
-            'tax_category_id' => $taxCategorie1->id,
+            'tax_category_id' => $taxCategory1->id,
         ]);
 
         $tax21 = $I->have(TaxRate::class, [
@@ -186,15 +186,15 @@ class CartTaxesCest
             'tax_rate' => $I->fake()->randomFloat(2, 14, 25),
         ]);
 
-        $taxCategorie2 = $I->have(TaxCategory::class);
+        $taxCategory2 = $I->have(TaxCategory::class);
 
         $I->have(TaxMap::class, [
             'tax_rate_id'     => $tax21->id,
-            'tax_category_id' => $taxCategorie2->id,
+            'tax_category_id' => $taxCategory2->id,
         ]);
         $I->have(TaxMap::class, [
             'tax_rate_id'     => $tax22->id,
-            'tax_category_id' => $taxCategorie2->id,
+            'tax_category_id' => $taxCategory2->id,
         ]);
 
         $config1 = [
@@ -202,7 +202,7 @@ class CartTaxesCest
             'attributeValues'  => [
                 'status'          => true,
                 'new'             => 1,
-                'tax_category_id' => $taxCategorie1->id,
+                'tax_category_id' => $taxCategory1->id,
             ],
         ];
         $product1 = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT, $config1);
@@ -212,7 +212,7 @@ class CartTaxesCest
             'attributeValues'  => [
                 'status'          => true,
                 'new'             => 1,
-                'tax_category_id' => $taxCategorie2->id,
+                'tax_category_id' => $taxCategory2->id,
             ],
         ];
         $product2 = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT, $config2);

@@ -1094,12 +1094,12 @@ class Cart
     {
         $attributes = [];
 
-        $attributes['address1'] = $addressAttributes['address1'];
-        $attributes['country'] = $addressAttributes['country'];
-        $attributes['state'] = $addressAttributes['state'];
-        $attributes['city'] = $addressAttributes['city'];
-        $attributes['postcode'] = $addressAttributes['postcode'];
-        $attributes['phone'] = $addressAttributes['phone'];
+        $attributes['address1'] = $addressAttributes['address1'] ?? '';
+        $attributes['country'] = $addressAttributes['country'] ?? '';
+        $attributes['state'] = $addressAttributes['state'] ?? '';
+        $attributes['city'] = $addressAttributes['city'] ?? '';
+        $attributes['postcode'] = $addressAttributes['postcode'] ?? '';
+        $attributes['phone'] = $addressAttributes['phone'] ?? '';
 
         return $attributes;
     }
