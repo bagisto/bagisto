@@ -21,7 +21,7 @@ class DefaultSlot extends Booking
      * Returns slots for a perticular day
      *
      * @param  \Webkul\BookingProduct\Contracts\BookingProduct  $bookingProduct
-     * @param  string                                           $date
+     * @param  string  $date
      * @return array
      */
     public function getSlotsByDate($bookingProduct, $date)
@@ -62,7 +62,7 @@ class DefaultSlot extends Booking
      * Returns slots for One Booking For Many Days
      *
      * @param  \Webkul\BookingProduct\Contracts\BookingProduct  $bookingProduct
-     * @param  string                                           $requestedDate
+     * @param  string   $requestedDate
      * @return array
      */
     public function getOneBookingForManyDaysSlots($bookingProductSlot, $requestedDate)
@@ -92,7 +92,7 @@ class DefaultSlot extends Booking
      * Returns slots for Many Bookings for One Day
      *
      * @param  \Webkul\BookingProduct\Contracts\BookingProductSlot  $bookingProductSlot
-     * @param  string                                                $requestedDate
+     * @param  string  $requestedDate
      * @return array
      */
     public function getManyBookingsforOneDaySlots($bookingProductSlot, $requestedDate)

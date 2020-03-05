@@ -2,7 +2,6 @@
 
 namespace Webkul\Product\Helpers;
 
-use Webkul\Attribute\Repositories\AttributeOptionRepository as AttributeOption;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -16,7 +15,7 @@ class ProductImage extends AbstractProduct
     /**
      * Retrieve collection of gallery images
      *
-     * @param Product $product
+     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
      * @return array
      */
     public function getGalleryImages($product)
@@ -54,7 +53,7 @@ class ProductImage extends AbstractProduct
     /**
      * Get product's base image
      *
-     * @param Product $product
+     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
      * @return array
      */
     public function getProductBaseImage($product)

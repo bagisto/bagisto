@@ -111,7 +111,7 @@ class CoreConfigRepository extends Repository
     }
 
     /**
-     * @param  array   $formData
+     * @param  array  $formData
      * @param  string  $method
      * @return array
      */

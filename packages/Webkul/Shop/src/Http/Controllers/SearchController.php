@@ -15,14 +15,14 @@ use Webkul\Product\Repositories\SearchRepository;
     /**
      * SearchRepository object
      *
-     * @var Object
+     * @var \Webkul\Product\Repositories\SearchRepository
     */
     protected $searchRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Product\Repositories\SearchRepository $searchRepository
+     * @param  \Webkul\Product\Repositories\SearchRepository  $searchRepository
      * @return void
     */
     public function __construct(SearchRepository $searchRepository)

@@ -25,21 +25,21 @@ class RefundController extends Controller
     /**
      * OrderRepository object
      *
-     * @var Object
+     * @var \Webkul\Sales\Repositories\OrderRepository
      */
     protected $orderRepository;
 
     /**
      * OrderItemRepository object
      *
-     * @var Object
+     * @var \Webkul\Sales\Repositories\OrderItemRepository
      */
     protected $orderItemRepository;
 
     /**
      * RefundRepository object
      *
-     * @var Object
+     * @var \Webkul\Sales\Repositories\RefundRepository
      */
     protected $refundRepository;
 

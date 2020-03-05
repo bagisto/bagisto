@@ -33,14 +33,14 @@ class Simple extends AbstractType
     /**
      * Show quantity box
      *
-     * @var boolean
+     * @var bool
      */
     protected $showQuantityBox = true;
 
     /**
      * Return true if this product type is saleable
      *
-     * @return boolean
+     * @return bool
      */
     public function isSaleable()
     {
@@ -56,9 +56,8 @@ class Simple extends AbstractType
     }
 
     /**
-     * @param integer $qty
-     *
-     * @return boolean
+     * @param  int  $qty
+     * @return bool
      */
     public function haveSufficientQuantity($qty)
     {

@@ -23,8 +23,8 @@ class TaxMapRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @return mixed
+     * @param  array  $data
+     * @return \Webkul\Tax\Contracts\TaxMap
      */
     public function create(array $data)
     {
@@ -34,10 +34,10 @@ class TaxMapRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @param $id
-     * @param string $attribute
-     * @return mixed
+     * @param  array  $data
+     * @param  int  $id
+     * @param  string  $attribute
+     * @return \Webkul\Tax\Contracts\TaxMap
      */
     public function update(array $data, $id, $attribute = "id")
     {

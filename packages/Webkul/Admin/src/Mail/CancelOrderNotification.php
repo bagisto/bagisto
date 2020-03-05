@@ -13,7 +13,6 @@ class CancelOrderNotification extends Mailable
 
     /**
      * @var \Webkul\Sales\Contracts\Order
-     * 
      */
     public $order;
 

@@ -17,22 +17,23 @@ class CategoryRepository extends Repository
    /**
     * Category Repository object
     *
-    * @var array
+    * @var \Webkul\Category\Repositories\CategoryRepository
     */
-    protected $category;
+    protected $categoryRepository;
 
     /**
-     * Create a new controller instance.
+     * Create a new repository instance.
      *
-     * @param  Webkul\Category\Repositories\CategoryRepository $category
+     * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
+     * @param  \Illuminate\Container\Container  $app
      * @return void
      */
     public function __construct(
-        Category $category,
+        CategoryRepository $categoryRepository,
         App $app
-        )
+    )
     {
-        $this->category = $category;
+        $this->categoryRepository = $categoryRepository;
 
         parent::__construct($app);
     }
@@ -40,13 +41,18 @@ class CategoryRepository extends Repository
     /**
      * Specify Model class name
      *
-     * @return mixed
+     * @return string
      */
     function model()
     {
         return 'Webkul\Velocity\Models\Category';
     }
 
+    /**
+     * Return current channel categories
+     *
+     * @return array
+     */
     public function getChannelCategories()
     {
         $results = [];
@@ -55,7 +61,7 @@ class CategoryRepository extends Repository
 
         $categoryMenues = json_decode(json_encode($velocityCategories), true);
         
-        $categories = $this->category->getVisibleCategoryTree(core()->getCurrentChannel()->root_category_id);
+        $categories = $this->categoryRepository->getVisibleCategoryTree(core()->getCurrentChannel()->root_category_id);
 
         if (isset($categories->first()->id)) {
             foreach ($categories as $category) {

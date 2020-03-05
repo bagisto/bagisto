@@ -17,22 +17,22 @@ class CategoryController extends Controller
     /**
      * Category Repository object
      *
-     * @var object
+     * @var \Webkul\Category\Repositories\CategoryRepository
     */
-    protected $category;
+    protected $categoryRepository;
 
     /**
      * VelocityCategory Repository object
      *
-     * @var object
+     * @var \Webkul\Velocity\Repositories\CategoryRepository
     */
-    protected $velocityCategory;
+    protected $velocityCategoryRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param \Webkul\Category\Repositories\CategoryRepository $categoryRepository;
-     * @param \Webkul\Velocity\Repositories\CategoryRepository $velocityCategory;
+     * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository;
+     * @param  \Webkul\Velocity\Repositories\CategoryRepository  $velocityCategory;
      * @return void
      */
     public function __construct(
@@ -49,7 +49,7 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -65,7 +65,7 @@ class CategoryController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -92,7 +92,7 @@ class CategoryController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
@@ -144,7 +144,7 @@ class CategoryController extends Controller
     /**
      * Mass Delete the products
      *
-     * @return response
+     * @return \Illuminate\Http\Response
      */
     public function massDestroy()
     {

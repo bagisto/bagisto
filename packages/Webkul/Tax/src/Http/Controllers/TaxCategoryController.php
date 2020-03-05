@@ -24,22 +24,22 @@ class TaxCategoryController extends Controller
     /**
      * TaxCategoryRepository
      *
-     * @var Object
+     * @var \Webkul\Tax\Repositories\TaxCategoryRepository
      */
     protected $taxCategoryRepository;
 
     /**
      * TaxRateRepository
      *
-     * @var Object
+     * @var \Webkul\Tax\Repositories\TaxRateRepository
      */
     protected $taxRateRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Tax\Repositories\TaxCategoryRepository $taxCategoryRepository
-     * @param  \Webkul\Tax\Repositories\TaxRateRepository     $taxRateRepository
+     * @param  \Webkul\Tax\Repositories\TaxCategoryRepository  $taxCategoryRepository
+     * @param  \Webkul\Tax\Repositories\TaxRateRepository  $taxRateRepository
      * @return void
      */
     public function __construct(
@@ -65,10 +65,9 @@ class TaxCategoryController extends Controller
     }
 
     /**
-     * Function to create
-     * the tax category.
+     * Function to create the tax category.
      *
-     * @return view
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -99,7 +98,7 @@ class TaxCategoryController extends Controller
     /**
      * To show the edit form form the tax category
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\View\View
      */
     public function edit($id)
@@ -112,8 +111,8 @@ class TaxCategoryController extends Controller
     /**
      * To update the tax category
      *
-     * @param int $id
-     * @return Response
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
     public function update($id)
     {

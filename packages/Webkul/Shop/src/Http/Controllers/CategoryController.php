@@ -15,14 +15,14 @@ class CategoryController extends Controller
     /**
      * CategoryRepository object
      *
-     * @var array
+     * @var \Webkul\Category\Repositories\CategoryRepository
      */
     protected $categoryRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Category\Repositories\CategoryRepository $categoryRepository
+     * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
      * @return void
      */
     public function __construct(CategoryRepository $categoryRepository)

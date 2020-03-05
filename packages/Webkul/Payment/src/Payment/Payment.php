@@ -61,9 +61,8 @@ abstract class Payment
     /**
      * Retrieve information from payment configuration
      *
-     * @param string $field
-     * @param int|string|null $channelId
-     *
+     * @param  string  $field
+     * @param  int|string|null  $channelId
      * @return mixed
      */
     public function getConfigData($field)

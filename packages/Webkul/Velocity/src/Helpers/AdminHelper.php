@@ -10,15 +10,25 @@ class AdminHelper
     /**
      * CategoryRepository object
      *
-     * @var object
+     * @var \Webkul\Category\Repositories\CategoryRepository
      */
     protected $categoryRepository;
 
+    /**
+     * Create a new helper instance.
+     *
+     * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
+     * @return void
+     */
     public function __construct(CategoryRepository $categoryRepository)
     {
         $this->categoryRepository =  $categoryRepository;
     }
 
+    /**
+     * @param  string  $locale
+     * @return string
+     */
     public function saveLocaleImg($locale)
     {
         $data = request()->all();
@@ -29,6 +39,10 @@ class AdminHelper
         return $locale;
     }
 
+    /**
+     * @param  \Webkul\Category\Contracts\Category  $category
+     * @return \Webkul\Category\Contracts\Category
+     */
     public function storeCategoryIcon($category)
     {
         $data = request()->all();
@@ -42,6 +56,10 @@ class AdminHelper
         return $category;
     }
 
+    /**
+     * @param  \Webkul\Core\Contracts\Slider  $slider
+     * @return bool
+     */
     public function storeSliderDetails($slider)
     {
         $slider->slider_path = request()->get('slider_path');
@@ -50,6 +68,12 @@ class AdminHelper
         return true;
     }
 
+    /**
+     * @param  \Illuminate\Database\Eloquent\Model  $slider
+     * @param  array  $data
+     * @param  string  $type
+     * @return \Illuminate\Database\Eloquent\Model
+     */
     public function uploadImage($model, $data, $type) {
         if (isset($data[$type])) {
             $request = request();

@@ -84,8 +84,8 @@ class Booking extends Virtual
     }
 
     /**
-     * @param  array   $data
-     * @param  int     $id
+     * @param  array  $data
+     * @param  int  $id
      * @param  string  $attribute
      * @return \Webkul\Product\Contracts\Product
      */

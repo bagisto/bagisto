@@ -79,8 +79,8 @@ class BookingProductRepository extends Repository
     }
 
     /**
-     * @param  array   $data
-     * @param  int     $id
+     * @param  array  $data
+     * @param  int  $id
      * @param  string  $attribute
      * @return \Webkul\BookingProduct\Contracts\BookingProduct
      */

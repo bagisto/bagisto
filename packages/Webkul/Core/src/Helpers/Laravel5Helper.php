@@ -68,7 +68,7 @@ class Laravel5Helper extends Laravel5
     /**
      * Helper function to generate products for testing
      *
-     * @param  int    $productType
+     * @param  int  $productType
      * @param  array  $configs
      * @param  array  $productStates
      * @return \Webkul\Product\Models\Product
@@ -214,7 +214,7 @@ class Laravel5Helper extends Laravel5
     }
 
     /**
-     * @param  int    $productId
+     * @param  int  $productId
      * @param  array  $attributeValues
      * @return void
      */

@@ -62,6 +62,7 @@ class Themes
     /**
      * Check if specified exists
      *
+     * @param  string  $themeName
      * @return bool
      */
     public function exists($themeName)
@@ -78,11 +79,12 @@ class Themes
     /**
      * Prepare all themes
      *
-     * @return Theme
+     * @return \Webkul\Theme\Theme
      */
     public function loadThemes()
     {
         $parentThemes = [];
+        
         $themes = config('themes.themes', []);
 
         foreach ($themes as $code => $data) {
@@ -114,7 +116,8 @@ class Themes
     /**
      * Enable theme
      *
-     * @return Theme
+     * @param  string  $themeName
+     * @return \Webkul\Theme\Theme
      */
     public function set($themeName)
     {
@@ -145,7 +148,7 @@ class Themes
     /**
      * Get current theme
      *
-     * @return Theme
+     * @return \Webkul\Theme\Theme
      */
     public function current()
     {
@@ -165,7 +168,8 @@ class Themes
     /**
      * Find a theme by it's name
      *
-     * @return Theme
+     * @param  string  $themeName
+     * @return \Webkul\Theme\Theme
      */
     public function find($themeName)
     {
@@ -191,6 +195,8 @@ class Themes
     /**
      * Return asset url of current theme
      *
+     * @param  string  $themeName
+     * @param  bool|null  $secure
      * @return string
      */
     public function url($filename, $secure = null)

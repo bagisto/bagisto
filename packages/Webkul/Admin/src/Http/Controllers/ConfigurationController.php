@@ -26,7 +26,7 @@ class ConfigurationController extends Controller
     /**
      * CoreConfigRepository object
      *
-     * @var array
+     * @var \Webkul\Core\Repositories\CoreConfigRepository
      */
     protected $coreConfigRepository;
 

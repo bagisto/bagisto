@@ -248,7 +248,7 @@ class Booking
      * Returns slots for a perticular day
      *
      * @param  \Webkul\BookingProduct\Contracts\BookingProduct  $bookingProduct
-     * @param  string                                           $date
+     * @param  string  $date
      * @return array
      */
     public function getSlotsByDate($bookingProduct, $date)

@@ -23,21 +23,21 @@ class Bundle extends AbstractType
     /**
      * ProductBundleOptionRepository instance
      *
-     * @var ProductBundleOptionRepository
+     * @var \Webkul\Product\Repositories\ProductBundleOptionRepository
      */
     protected $productBundleOptionRepository;
 
     /**
      * ProductBundleOptionProductRepository instance
      *
-     * @var ProductBundleOptionProductRepository
+     * @var \Webkul\Product\Repositories\ProductBundleOptionProductRepository
      */
     protected $productBundleOptionProductRepository;
 
     /**
      * Bundle Option helper instance
      *
-     * @var BundleOption
+     * @var \Webkul\Product\Helpers\BundleOption
     */
     protected $bundleOptionHelper;
 
@@ -64,29 +64,29 @@ class Bundle extends AbstractType
     /**
      * Is a composite product type
      *
-     * @var boolean
+     * @var bool
      */
     protected $isComposite = true;
 
     /**
      * Product children price can be calculated or not
      *
-     * @var boolean
+     * @var bool
      */
     protected $isChildrenCalculated = true;
 
     /**
      * Create a new product type instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeRepository                $attributeRepository
-     * @param  Webkul\Product\Repositories\ProductRepository                    $productRepository
-     * @param  Webkul\Product\Repositories\ProductAttributeValueRepository      $attributeValueRepository
-     * @param  Webkul\Product\Repositories\ProductInventoryRepository           $productInventoryRepository
-     * @param  Webkul\Product\Repositories\ProductImageRepository               $productImageRepository
-     * @param  Webkul\Product\Repositories\ProductBundleOptionRepository        $productBundleOptionRepository
-     * @param  Webkul\Product\Repositories\ProductBundleOptionProductRepository $productBundleOptionProductRepository
-     * @param  Webkul\Product\Helpers\ProductImage                              $productImageHelper
-     * @param  Webkul\Product\Helpers\BundleOption                              $bundleOptionHelper
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $attributeValueRepository
+     * @param  \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
+     * @param  \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
+     * @param  \Webkul\Product\Repositories\ProductBundleOptionRepository  $productBundleOptionRepository
+     * @param  \Webkul\Product\Repositories\ProductBundleOptionProductRepository  $productBundleOptionProductRepository
+     * @param  \Webkul\Product\Helpers\ProductImage  $productImageHelper
+     * @param  \Webkul\Product\Helpers\BundleOption  $bundleOptionHelper
      * @return void
      */
     public function __construct(
@@ -118,10 +118,10 @@ class Bundle extends AbstractType
     }
 
     /**
-     * @param array $data
-     * @param $id
-     * @param string $attribute
-     * @return Product
+     * @param  array  $data
+     * @param  int  $id
+     * @param  string  $attribute
+     * @return \Webkul\Product\Contracts\Product
      */
     public function update(array $data, $id, $attribute = "id")
     {
@@ -225,8 +225,8 @@ class Bundle extends AbstractType
     /**
      * Get product regular minimal price
      *
-     * @param ProductBundleOption $option
-     * @param boolean             $minPrice
+     * @param  \Webkul\Product\Contracts\ProductBundleOption  $option
+     * @param  bool  $minPrice
      * @return float
      */
     public function getOptionProductsPrices($option, $minPrice = true)
@@ -247,7 +247,7 @@ class Bundle extends AbstractType
     /**
      * Check if product has required options or not
      *
-     * @return boolean
+     * @return bool
      */
     protected function haveRequiredOptions()
     {
@@ -408,7 +408,7 @@ class Bundle extends AbstractType
     /**
      * Add product. Returns error message if can't prepare product.
      *
-     * @param array   $data
+     * @param  array  $data
      * @return array
      */
     public function prepareForCart($data)
@@ -454,7 +454,7 @@ class Bundle extends AbstractType
     /**
      * Add product. Returns error message if can't prepare product.
      *
-     * @param array   $data
+     * @param  array  $data
      * @return array
      */
     public function getCartChildProducts($data)
@@ -492,8 +492,8 @@ class Bundle extends AbstractType
 
     /**
      *
-     * @param array $options1
-     * @param array $options2
+     * @param  array  $options1
+     * @param  array  $options2
      * @return boolean
      */
     public function compareOptions($options1, $options2)
@@ -509,7 +509,7 @@ class Bundle extends AbstractType
     /**
      * Remove invalid options from add to cart request
      *
-     * @param array $data
+     * @param  array  $data
      * @return array
      */
     public function validateBundleOptionForCart($data)
@@ -530,7 +530,7 @@ class Bundle extends AbstractType
     /**
      * Returns additional information for items
      *
-     * @param array $data
+     * @param  array  $data
      * @return array
      */
     public function getAdditionalOptions($data)
@@ -575,7 +575,7 @@ class Bundle extends AbstractType
     /**
      * Returns additional information for items
      *
-     * @param array $data
+     * @param  array  $data
      * @return array
      */
     public function getOptionQuantities($data)
@@ -606,7 +606,7 @@ class Bundle extends AbstractType
     /**
      * Validate cart item product price
      *
-     * @param CartItem $item
+     * @param  \Webkul\Checkout\Contracts\CartItem  $item
      * @return void
      */
     public function validateCartItem($item)

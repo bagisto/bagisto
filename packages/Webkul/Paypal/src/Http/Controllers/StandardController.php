@@ -17,14 +17,14 @@ class StandardController extends Controller
     /**
      * OrderRepository object
      *
-     * @var array
+     * @var \Webkul\Sales\Repositories\OrderRepository
      */
     protected $orderRepository;
 
     /**
      * Ipn object
      *
-     * @var array
+     * @var \Webkul\Paypal\Helpers\Ipn
      */
     protected $ipnHelper;
 
@@ -32,6 +32,7 @@ class StandardController extends Controller
      * Create a new controller instance.
      *
      * @param  \Webkul\Attribute\Repositories\OrderRepository  $orderRepository
+     * @param  \Webkul\Paypal\Helpers\Ipn  $ipnHelper
      * @return void
      */
     public function __construct(

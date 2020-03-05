@@ -17,7 +17,7 @@ class ProductDownloadableLinkRepository extends Repository
     /**
      * Specify Model class name
      *
-     * @return mixed
+     * @return string
      */
     function model()
     {
@@ -25,9 +25,9 @@ class ProductDownloadableLinkRepository extends Repository
     }
 
     /**
-     * @param  array   $data
+     * @param  array  $data
      * @param  integer $productId
-     * @return mixed
+     * @return array
      */
     public function upload($data, $productId)
     {
@@ -45,8 +45,8 @@ class ProductDownloadableLinkRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @param mixed $product
+     * @param  array  $data
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @return void
      */
     public function saveLinks(array $data, $product)

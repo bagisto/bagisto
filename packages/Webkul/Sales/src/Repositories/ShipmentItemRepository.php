@@ -18,7 +18,7 @@ class ShipmentItemRepository extends Repository
     /**
      * Specify Model class name
      *
-     * @return Mixed
+     * @return string
      */
     function model()
     {
@@ -26,7 +26,7 @@ class ShipmentItemRepository extends Repository
     }
 
     /**
-     * @param array $data
+     * @param  array  $data
      * @return void
      */
     public function updateProductInventory($data)

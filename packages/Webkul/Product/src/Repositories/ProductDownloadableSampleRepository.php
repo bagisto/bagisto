@@ -17,7 +17,7 @@ class ProductDownloadableSampleRepository extends Repository
     /**
      * Specify Model class name
      *
-     * @return mixed
+     * @return string
      */
     function model()
     {
@@ -25,8 +25,8 @@ class ProductDownloadableSampleRepository extends Repository
     }
 
     /**
-     * @param  array   $data
-     * @param  integer $productId
+     * @param  array  $data
+     * @param  int  $productId
      * @return mixed
      */
     public function upload($data, $productId)
@@ -43,8 +43,8 @@ class ProductDownloadableSampleRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @param mixed $product
+     * @param  array  $data
+     * @param  Webkul\Product\Contracts\Product  $product
      * @return void
      */
     public function saveSamples(array $data, $product)

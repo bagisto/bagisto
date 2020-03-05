@@ -19,14 +19,14 @@ class DownloadableLinkPurchasedRepository extends Repository
     /**
      * ProductDownloadableLinkRepository object
      *
-     * @var Object
+     * @var \Webkul\Product\Repositories\ProductDownloadableLinkRepository
      */
     protected $productDownloadableLinkRepository;
 
     /**
      * Create a new repository instance.
      *
-     * @param  Webkul\Product\Repositories\ProductDownloadableLinkRepository $productDownloadableLinkRepository
+     * @param  \Webkul\Product\Repositories\ProductDownloadableLinkRepository  $productDownloadableLinkRepository
      * @return void
      */
     public function __construct(
@@ -42,7 +42,7 @@ class DownloadableLinkPurchasedRepository extends Repository
     /**
      * Specify Model class name
      *
-     * @return Mixed
+     * @return string
      */
     function model()
     {
@@ -50,7 +50,7 @@ class DownloadableLinkPurchasedRepository extends Repository
     }
 
     /**
-     * @param mixed $orderItem
+     * @param  \Webkul\Sales\Contracts\OrderItem  $orderItem
      * @return void
      */
     public function saveLinks($orderItem)
@@ -83,7 +83,7 @@ class DownloadableLinkPurchasedRepository extends Repository
     /**
      * Return true, if ordered item is valid downloadable product with links
      *
-     * @param mixed $orderItem Webkul\Sales\Models\OrderItem;
+     * @param  \Webkul\Sales\Contracts\OrderItem  $orderItem
      * @return bool
      */
     private function isValidDownloadableProduct($orderItem) : bool {
@@ -95,8 +95,8 @@ class DownloadableLinkPurchasedRepository extends Repository
     }
 
     /**
-     * @param OrderItem $orderItem
-     * @param string    $status
+     * @param  \Webkul\Sales\Contracts\OrderItem  $orderItem
+     * @param  string    $status
      * @return void
      */
     public function updateStatus($orderItem, $status)

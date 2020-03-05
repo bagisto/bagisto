@@ -16,14 +16,14 @@ class DownloadableProductController extends Controller
     /**
      * DownloadableLinkPurchasedRepository object
      *
-     * @var array
+     * @var \Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository
      */
     protected $downloadableLinkPurchasedRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository
+     * @param  \Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository  $downloadableLinkPurchasedRepository
      * @return void
      */
     public function __construct(
@@ -42,7 +42,8 @@ class DownloadableProductController extends Controller
      *
      * @return \Illuminate\View\View
     */
-    public function index() {
+    public function index()
+    {
         return view($this->_config['view']);
     }
 

@@ -23,14 +23,14 @@ class CustomerGroupController extends Controller
     /**
      * CustomerGroupRepository object
      *
-     * @var array
+     * @var \Webkul\Customer\Repositories\CustomerGroupRepository
     */
     protected $customerGroupRepository;
 
      /**
      * Create a new controller instance.
      *
-     * @param \Webkul\Customer\Repositories\CustomerGroupRepository $customerGroupRepository;
+     * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository;
      * @return void
      */
     public function __construct(CustomerGroupRepository $customerGroupRepository)

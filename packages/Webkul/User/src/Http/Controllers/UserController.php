@@ -27,22 +27,22 @@ class UserController extends Controller
     /**
      * AdminRepository object
      *
-     * @var Object
+     * @var \Webkul\User\Repositories\AdminRepository
      */
     protected $adminRepository;
 
     /**
      * RoleRepository object
      *
-     * @var Object
+     * @var \Webkul\User\Repositories\RoleRepository
      */
     protected $roleRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\User\Repositories\AdminRepository $adminRepository
-     * @param  \Webkul\User\Repositories\RoleRepository $roleRepository
+     * @param  \Webkul\User\Repositories\AdminRepository  $adminRepository
+     * @param  \Webkul\User\Repositories\RoleRepository  $roleRepository
      * @return void
      */
     public function __construct(
@@ -110,7 +110,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param integer $id
+     * @param  int  $id
      * @return \Illuminate\View\View
      */
     public function edit($id)
@@ -127,7 +127,7 @@ class UserController extends Controller
      *
      * @param  \Webkul\User\Http\Requests\UserForm  $request
      * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response
      */
     public function update(UserForm $request, $id)
     {
@@ -160,7 +160,7 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View
+     * @return \Illuminate\Http\Response|\Illuminate\View\View
      */
     public function destroy($id)
     {
@@ -196,7 +196,7 @@ class UserController extends Controller
     /**
      * Show the form for confirming the user password.
      *
-     * @param integer $id
+     * @param  int  $id
      * @return \Illuminate\View\View
      */
     public function confirm($id)
@@ -209,7 +209,7 @@ class UserController extends Controller
     /**
      * destroy current after confirming
      *
-     * @return mixed
+     * @return \Illuminate\Http\Response
      */
     public function destroySelf()
     {

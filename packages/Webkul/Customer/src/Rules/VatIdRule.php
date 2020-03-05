@@ -20,7 +20,7 @@ class VatIdRule implements Rule
      * @see https://raw.githubusercontent.com/danielebarbaro/laravel-vat-eu-validator/master/src/VatValidator.php
      *
      * @param  string  $attribute
-     * @param  mixed   $value
+     * @param  mixed  $value
      * @return bool
      */
     public function passes($attribute, $value)

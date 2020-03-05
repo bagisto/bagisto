@@ -19,16 +19,15 @@ class InvoiceItemRepository extends Repository
     /**
      * Specify Model class name
      *
-     * @return Mixed
+     * @return string
      */
-
     function model()
     {
         return InvoiceItem::class;
     }
 
     /**
-     * @param array $data
+     * @param  array  $data
      * @return void
      */
     public function updateProductInventory($data)

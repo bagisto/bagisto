@@ -18,14 +18,15 @@ class ProductAttributeValueRepository extends Repository
     /**
      * AttributeRepository object
      *
-     * @var array
+     * @var \Webkul\Attribute\Repositories\AttributeRepository
      */
     protected $attributeRepository;
 
     /**
-     * Create a new controller instance.
+     * Create a new reposotory instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeRepository $attributeRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
+     * @param  \Illuminate\Container\Container  $app
      * @return void
      */
     public function __construct(
@@ -41,7 +42,7 @@ class ProductAttributeValueRepository extends Repository
     /**
      * Specify Model class name
      *
-     * @return mixed
+     * @return string
      */
     function model()
     {
@@ -49,8 +50,8 @@ class ProductAttributeValueRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @return mixed
+     * @param  array  $data
+     * @return \Webkul\Product\Contracts\ProductAttributeValue
      */
     public function create(array $data)
     {
@@ -70,10 +71,10 @@ class ProductAttributeValueRepository extends Repository
     }
 
     /**
-     * @param string $column
-     * @param int    $attributeId
-     * @param int    $productId
-     * @param string $value
+     * @param  string  $column
+     * @param  int  $attributeId
+     * @param  int  $productId
+     * @param  string  $value
      * @return boolean
      */
     public function isValueUnique($productId, $attributeId, $column, $value)

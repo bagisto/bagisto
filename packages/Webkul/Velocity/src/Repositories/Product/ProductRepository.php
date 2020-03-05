@@ -12,14 +12,15 @@ class ProductRepository extends Repository
      /**
      * AttributeRepository object
      *
-     * @var array
+     * @var \Webkul\Attribute\Repositories\AttributeRepository
      */
     protected $attributeRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeRepository $attributeRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
+     * @param  \Illuminate\Container\Container  $app
      * @return void
      */
     public function __construct(
@@ -35,7 +36,7 @@ class ProductRepository extends Repository
     /**
      * Specify Model class name
      *
-     * @return mixed
+     * @return string
      */
     function model()
     {
@@ -45,7 +46,8 @@ class ProductRepository extends Repository
     /**
      * Returns featured product
      *
-     * @return Collection
+     * @param  int  $count
+     * @return \Illuminate\Support\Collection
      */
     public function getFeaturedProducts($count)
     {
@@ -70,7 +72,8 @@ class ProductRepository extends Repository
     /**
      * Returns newly added product
      *
-     * @return Collection
+     * @param  int  $count
+     * @return \Illuminate\Support\Collection
      */
     public function getNewProducts($count)
     {
@@ -96,7 +99,8 @@ class ProductRepository extends Repository
     /**
      * Search Product by Attribute
      *
-     * @return Collection
+     * @param  array  $params
+     * @return \Illuminate\Support\Collection
      */
     public function searchProductsFromCategory($params)
     {

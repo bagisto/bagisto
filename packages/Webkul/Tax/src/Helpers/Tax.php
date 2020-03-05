@@ -4,13 +4,15 @@ namespace Webkul\Tax\Helpers;
 
 class Tax
 {
+    /**
+     * @var int
+     */
     public const TAX_PRECISION = 4;
 
     /**
      * Returns an array with tax rates and tax amount
-     * @param object $that
-     * @param bool   $asBase
-     *
+     * @param  object  $that
+     * @param  bool  $asBase
      * @return array
      */
     public static function getTaxRatesWithAmount(object $that, bool $asBase = false): array
@@ -32,9 +34,8 @@ class Tax
 
     /**
      * Returns the total tax amount
-     * @param object $that
-     * @param bool   $asBase
-     *
+     * @param  object  $that
+     * @param  bool  $asBase
      * @return float
      */
     public static function getTaxTotal(object $that, bool $asBase = false): float

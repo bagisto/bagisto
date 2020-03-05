@@ -19,7 +19,7 @@ class OrderItemRepository extends Repository
     /**
      * Specify Model class name
      *
-     * @return Mixed
+     * @return string
      */
     function model()
     {
@@ -27,8 +27,8 @@ class OrderItemRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @return mixed
+     * @param  array  $data
+     * @return \Webkul\Sales\Contracts\OrderItem
      */
     public function create(array $data)
     {
@@ -43,8 +43,8 @@ class OrderItemRepository extends Repository
     }
 
     /**
-     * @param mixed $orderItem
-     * @return mixed
+     * @param  \Webkul\Sales\Contracts\OrderItem  $orderItem
+     * @return \Webkul\Sales\Contracts\OrderItem
      */
     public function collectTotals($orderItem)
     {
@@ -102,7 +102,7 @@ class OrderItemRepository extends Repository
     }
 
     /**
-     * @param mixed $orderItem
+     * @param  \Webkul\Sales\Contracts\OrderItem  $orderItem
      * @return void
      */
     public function manageInventory($orderItem)
@@ -145,7 +145,7 @@ class OrderItemRepository extends Repository
     /**
      * Returns qty to product inventory after order cancelation
      *
-     * @param OrderItem $orderItem
+     * @param  \Webkul\Sales\Contracts\OrderItem  $orderItem
      * @return void
      */
     public function returnQtyToProductInventory($orderItem)

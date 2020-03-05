@@ -51,7 +51,7 @@ class AttributeRepository extends Repository
 
     /**
      * @param  array  $data
-     * @return  \Webkul\Attribute\Contracts\Attribute
+     * @return \Webkul\Attribute\Contracts\Attribute
      */
     public function create(array $data)
     {
@@ -79,10 +79,10 @@ class AttributeRepository extends Repository
     }
 
     /**
-     * @param  array   $data
-     * @param  int     $id
+     * @param  array  $data
+     * @param  int $id
      * @param  string  $attribute
-     * @return  \Webkul\Attribute\Contracts\Attribute
+     * @return \Webkul\Attribute\Contracts\Attribute
      */
     public function update(array $data, $id, $attribute = "id")
     {

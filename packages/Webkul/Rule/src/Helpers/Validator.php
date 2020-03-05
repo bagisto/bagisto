@@ -9,8 +9,8 @@ class Validator
     /**
      * Validate cart rule for condition
      *
-     * @param CartRule|CatalogRule  $rule
-     * @param Cart|CartItem|Product $entity
+     * @param  \Webkul\CartRule\Contracts\CartRule|\Webkul\CatalogRule\Contracts\CatalogRule  $rule
+     * @param  \Webkul\Checkout\Contracts\Cart|\Webkul\Checkout\Contracts\CartItem|\Webkul\Product\Contracts\Product  $entity
      * @return boolean
      */
     public function validate($rule, $entity)
@@ -51,8 +51,8 @@ class Validator
     /**
      * Return value for the attribute
      *
-     * @param array            $condition
-     * @param CartItem|Product $entity
+     * @param  array  $condition
+     * @param  \Webkul\Checkout\Contracts\CartItem|\Webkul\Product\Contracts\Product  $entity
      * @return boolean
      */
     public function getAttributeValue($condition, $entity)
@@ -118,8 +118,8 @@ class Validator
     /**
      * Validate object
      *
-     * @param array    $condition
-     * @param CartItem $entity
+     * @param  array  $condition
+     * @param  \Webkul\Checkout\Contracts\CartItem  $entity
      * @return bool
      */
     private function validateObject($condition, $entity)
@@ -140,8 +140,8 @@ class Validator
     /**
      * Return all cart items
      *
-     * @param string                $attributeScope
-     * @param Cart|CartItem|Product $item
+     * @param  string  $attributeScope
+     * @param  \Webkul\Checkout\Contracts\Cart|\Webkul\Checkout\Contracts\CartItem|\Webkul\Product\Contracts\Product  $item
      * @return array
      */
     private function getAllItems($attributeScope, $item)
@@ -162,7 +162,7 @@ class Validator
     /**
      * Validate object
      *
-     * @param array $condition
+     * @param  array  $condition
      * @return string
      */
     private function getAttributeScope($condition)
@@ -177,9 +177,9 @@ class Validator
     /**
      * Validate attribute value for condition
      *
-     * @param array $condition
-     * @param mixed $attributeValue
-     * @return boolean
+     * @param  array $condition
+     * @param  mixed $attributeValue
+     * @return bool
      */
     public function validateAttribute($condition, $attributeValue)
     {

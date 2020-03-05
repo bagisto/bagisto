@@ -13,8 +13,7 @@ class Toolbar extends AbstractProduct
     /**
      * Returns available sort orders
      *
-     * @param string $key
-     * @return string
+     * @return array
      */
     public function getAvailableOrders()
     {
@@ -30,8 +29,7 @@ class Toolbar extends AbstractProduct
     /**
      * Returns available limits
      *
-     * @param string $key
-     * @return string
+     * @return array
      */
     public function getAvailableLimits()
     {
@@ -41,7 +39,7 @@ class Toolbar extends AbstractProduct
     /**
      * Returns the sort order url
      *
-     * @param string $key
+     * @param  string $key
      * @return string
      */
     public function getOrderUrl($key)
@@ -57,7 +55,7 @@ class Toolbar extends AbstractProduct
     /**
      * Returns the limit url
      *
-     * @param integer $limit
+     * @param  int  $limit
      * @return string
      */
     public function getLimitUrl($limit)
@@ -70,7 +68,7 @@ class Toolbar extends AbstractProduct
     /**
      * Returns the mode url
      *
-     * @param string $mode
+     * @param  string $mode
      * @return string
      */
     public function getModeUrl($mode)
@@ -83,8 +81,8 @@ class Toolbar extends AbstractProduct
     /**
      * Checks if sort order is active
      *
-     * @param string $key
-     * @return boolean
+     * @param  string $key
+     * @return bool
      */
     public function isOrderCurrent($key)
     {
@@ -102,8 +100,8 @@ class Toolbar extends AbstractProduct
     /**
      * Checks if limit is active
      *
-     * @param integer $limit
-     * @return boolean
+     * @param  int  $limit
+     * @return bool
      */
     public function isLimitCurrent($limit)
     {
@@ -119,8 +117,8 @@ class Toolbar extends AbstractProduct
     /**
      * Checks if mode is active
      *
-     * @param string $key
-     * @return boolean
+     * @param  string  $key
+     * @return bool
      */
     public function isModeActive($key)
     {
@@ -136,7 +134,6 @@ class Toolbar extends AbstractProduct
     /**
      * Returns the current mode
      *
-     * @param string $mode
      * @return string
      */
     public function getCurrentMode()

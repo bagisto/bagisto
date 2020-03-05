@@ -47,7 +47,7 @@ abstract class Repository extends BaseRepository {
     /**
      * Find data by id
      *
-     * @param  int   $id
+     * @param  int  $id
      * @param  array  $columns
      * @return mixed
      */
@@ -64,7 +64,7 @@ abstract class Repository extends BaseRepository {
     /**
      * Find data by id
      *
-     * @param  int    $id
+     * @param  int  $id
      * @param  array  $columns
      * @return mixed
      */
@@ -81,7 +81,7 @@ abstract class Repository extends BaseRepository {
      /**
      * Count results of repository
      *
-     * @param  array   $where
+     * @param  array  $where
      * @param  string  $columns
      * @return int
      */

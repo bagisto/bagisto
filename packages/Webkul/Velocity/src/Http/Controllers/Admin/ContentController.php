@@ -18,22 +18,22 @@ class ContentController extends Controller
     /**
      * ProductRepository object
      *
-     * @var object
+     * @var \Webkul\Product\Repositories\ProductRepository
     */
     protected $productRepository;
 
     /**
      * ContentRepository object
      *
-     * @var object
+     * @var \Webkul\Velocity\Repositories\ContentRepository
     */
     protected $contentRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param \Webkul\Product\Repositories\ProductRepository $productRepository
-     * @param \Webkul\Velocity\Repositories\ContentRepository $contentRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Velocity\Repositories\ContentRepository  $contentRepository
      * @return void
      */
     public function __construct(
@@ -49,7 +49,7 @@ class ContentController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -59,7 +59,7 @@ class ContentController extends Controller
     /**
      * Search for catalog
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
     */
     public function search()
     {
@@ -124,7 +124,7 @@ class ContentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Webkul\Product\Http\Requests\ProductForm $request
+     * @param  \Webkul\Product\Http\Requests\ProductForm  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -169,7 +169,7 @@ class ContentController extends Controller
     /**
      * Mass Delete the products
      *
-     * @return response
+     * @return \Illuminate\Http\Response
      */
     public function massDestroy()
     {

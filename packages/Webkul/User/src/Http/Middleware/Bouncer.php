@@ -27,6 +27,12 @@ class Bouncer
         return $next($request);
     }
 
+    /**
+    * Handle an incoming request.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return mixed
+    */
     public function checkIfAuthorized($request)
     {
         if (! $role = auth()->guard('admin')->user()->role) {

@@ -23,7 +23,7 @@ class ReviewController extends Controller
     /**
      * ProductReviewRepository object
      *
-     * @var Object
+     * @var \Webkul\Product\Repositories\ProductReviewRepository
      */
     protected $productReviewRepository;
 
@@ -33,9 +33,7 @@ class ReviewController extends Controller
      * @param  \Webkul\Product\Repositories\ProductReviewRepository  $productReview
      * @return void
      */
-    public function __construct(
-        ProductReviewRepository $productReviewRepository
-    )
+    public function __construct(ProductReviewRepository $productReviewRepository)
     {
         $this->productReviewRepository = $productReviewRepository;
 
@@ -115,7 +113,7 @@ class ReviewController extends Controller
     /**
      * Mass delete the reviews on the products.
      *
-     * @return response
+     * @return \Illuminate\Http\Response
      */
     public function massDestroy()
     {
@@ -158,7 +156,7 @@ class ReviewController extends Controller
     /**
      * Mass approve the reviews on the products.
      *
-     * @return response
+     * @return \Illuminate\Http\Response
      */
     public function massUpdate()
     {

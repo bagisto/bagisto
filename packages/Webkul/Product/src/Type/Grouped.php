@@ -23,7 +23,7 @@ class Grouped extends AbstractType
     /**
      * ProductGroupedProductRepository instance
      *
-     * @var ProductGroupedProductRepository
+     * @var \Webkul\Product\Repositories\ProductGroupedProductRepository
      */
     protected $productGroupedProductRepository;
     
@@ -57,13 +57,13 @@ class Grouped extends AbstractType
     /**
      * Create a new product type instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeRepository           $attributeRepository
-     * @param  Webkul\Product\Repositories\ProductRepository               $productRepository
-     * @param  Webkul\Product\Repositories\ProductAttributeValueRepository $attributeValueRepository
-     * @param  Webkul\Product\Repositories\ProductInventoryRepository      $productInventoryRepository
-     * @param  Webkul\Product\Repositories\ProductImageRepository          $productImageRepository
-     * @param  Webkul\Product\Repositories\ProductGroupedProductRepository $productGroupedProductRepository
-     * @param  Webkul\Product\Helpers\ProductImage                         $productImageHelper
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $attributeValueRepository
+     * @param  \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
+     * @param  \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
+     * @param  \Webkul\Product\Repositories\ProductGroupedProductRepository  $productGroupedProductRepository
+     * @param  \Webkul\Product\Helpers\ProductImage  $productImageHelper
      * @return void
      */
     public function __construct(
@@ -89,10 +89,10 @@ class Grouped extends AbstractType
     }
 
     /**
-     * @param array $data
-     * @param $id
-     * @param string $attribute
-     * @return Product
+     * @param  array  $data
+     * @param  int  $id
+     * @param  string  $attribute
+     * @return \Webkul\Product\Contracts\Product
      */
     public function update(array $data, $id, $attribute = "id")
     {
@@ -159,7 +159,7 @@ class Grouped extends AbstractType
     /**
      * Add product. Returns error message if can't prepare product.
      *
-     * @param array $data
+     * @param  array  $data
      * @return array
      */
     public function prepareForCart($data)

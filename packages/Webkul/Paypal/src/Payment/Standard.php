@@ -32,7 +32,7 @@ class Standard extends Paypal
     /**
      * Return paypal redirect url
      *
-     * @var string
+     * @return string
      */
     public function getRedirectUrl()
     {
@@ -97,8 +97,8 @@ class Standard extends Paypal
     /**
      * Add shipping as item
      *
-     * @param array $fields
-     * @param int $i
+     * @param  array  $fields
+     * @param  int    $i
      * @return void
      */
     protected function addShippingAsLineItems(&$fields, $i)

@@ -365,7 +365,7 @@ class Core
     /**
      * Converts price
      *
-     * @param  float   $amount
+     * @param  float  $amount
      * @param  string  $targetCurrencyCode
      * @param  string  $orderCurrencyCode
      * @return string
@@ -418,7 +418,7 @@ class Core
     /**
      * Converts to base price
      *
-     * @param  float   $amount
+     * @param  float  $amount
      * @param  string  $targetCurrencyCode
      * @return string
      */
@@ -474,7 +474,7 @@ class Core
      /**
      * Format and convert price with currency symbol
      *
-     * @param  float   $price
+     * @param  float  $price
      * @param  string  $currencyCode
      * @return string
      */
@@ -560,8 +560,8 @@ class Core
      * Checks if current date of the given channel (in the channel timezone) is within the range
      *
      * @param int|string|\Webkul\Core\Contracts\Channel $channel
-     * @param string|null                               $dateFrom
-     * @param string|null                               $dateTo
+     * @param string|null  $dateFrom
+     * @param string|null  $dateTo
      * @return bool
      */
     public function isChannelDateInInterval($dateFrom = null, $dateTo = null)
@@ -625,7 +625,7 @@ class Core
      * Format date using current channel.
      *
      * @param  \Illuminate\Support\Carbon|null  $date
-     * @param  string                           $format
+     * @param  string  $format
      *
      * @return  string
      */
@@ -645,9 +645,9 @@ class Core
     /**
      * Retrieve information from payment configuration
      *
-     * @param  string           $field
+     * @param  string  $field
      * @param  int|string|null  $channelId
-     * @param  string|null      $locale
+     * @param  string|null  $locale
      *
      * @return mixed
      */
@@ -854,7 +854,7 @@ class Core
     /**
      * 
      * @param  string  $date
-     * @param  int     $day 
+     * @param  int  $day 
      * @return string
      */
     public function xWeekRange($date, $day)
@@ -950,8 +950,8 @@ class Core
     }
 
     /**
-     * @param  array             $items
-     * @param  string            $key
+     * @param  array  $items
+     * @param  string  $key
      * @param  string|int|float  $value
      * @return array
      */

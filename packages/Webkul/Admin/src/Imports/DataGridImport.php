@@ -20,7 +20,7 @@ class DataGridImport implements ToCollection, WithHeadingRow
     use Importable;
 
     /**
-     * @param array $row
+     * @param  Illuminate\Support\Collection  $row
      * @return void
     */
     public function collection(Collection $rows)

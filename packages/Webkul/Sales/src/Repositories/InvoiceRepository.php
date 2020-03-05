@@ -19,39 +19,39 @@ class InvoiceRepository extends Repository
     /**
      * OrderRepository object
      *
-     * @var Object
+     * @var \Webkul\Sales\Repositories\OrderRepository
      */
     protected $orderRepository;
 
     /**
      * OrderItemRepository object
      *
-     * @var Object
+     * @var \Webkul\Sales\Repositories\OrderItemRepository
      */
     protected $orderItemRepository;
 
     /**
      * InvoiceItemRepository object
      *
-     * @var Object
+     * @var \Webkul\Sales\Repositories\InvoiceItemRepository
      */
     protected $invoiceItemRepository;
 
     /**
      * DownloadableLinkPurchasedRepository object
      *
-     * @var Object
+     * @var \Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository
      */
     protected $downloadableLinkPurchasedRepository;
 
     /**
      * Create a new repository instance.
      *
-     * @param \Webkul\Sales\Repositories\OrderRepository                     $orderRepository
-     * @param \Webkul\Sales\Repositories\OrderItemRepository                 $orderItemRepository
-     * @param \Webkul\Sales\Repositories\InvoiceItemRepository               $invoiceItemRepository
-     * @param \Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository
-     * @param \Illuminate\Container\Container                                $app
+     * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
+     * @param  \Webkul\Sales\Repositories\OrderItemRepository  $orderItemRepository
+     * @param  \Webkul\Sales\Repositories\InvoiceItemRepository  $invoiceItemRepository
+     * @param  \Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository  $downloadableLinkPurchasedRepository
+     * @param  \Illuminate\Container\Container  $app
      */
     public function __construct(
         OrderRepository $orderRepository,
@@ -77,7 +77,7 @@ class InvoiceRepository extends Repository
     /**
      * Specify Model class name
      *
-     * @return Mixed
+     * @return string
      */
 
     function model()
@@ -86,8 +86,8 @@ class InvoiceRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @return mixed
+     * @param  array  $data
+     * @return \Webkul\Sales\Contracts\Invoice
      */
     public function create(array $data)
     {
@@ -216,8 +216,8 @@ class InvoiceRepository extends Repository
     }
 
     /**
-     * @param mixed $invoice
-     * @return mixed
+     * @param  \Webkul\Sales\Contracts\Invoice  $invoice
+     * @return \Webkul\Sales\Contracts\Invoice
      */
     public function collectTotals($invoice)
     {

@@ -24,9 +24,9 @@ class ProductInventoryRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @param mixed $product
-     * @return mixed
+     * @param  array  $data
+     * @param  Webkul\Product\Contracts\Product  $product
+     * @return void
      */
     public function saveInventories(array $data, $product)
     {

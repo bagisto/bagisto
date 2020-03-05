@@ -16,14 +16,14 @@ use Webkul\Core\Repositories\SliderRepository;
     /**
      * SliderRepository object
      *
-     * @var Object
+     * @var \Webkul\Core\Repositories\SliderRepository
     */
     protected $sliderRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\SliderRepository $sliderRepository
+     * @param  \Webkul\Core\Repositories\SliderRepository  $sliderRepository
      * @return void
     */
     public function __construct(SliderRepository $sliderRepository)
@@ -49,6 +49,8 @@ use Webkul\Core\Repositories\SliderRepository;
 
     /**
      * loads the home page for the storefront
+     * 
+     * @return \Exception
      */
     public function notFound()
     {

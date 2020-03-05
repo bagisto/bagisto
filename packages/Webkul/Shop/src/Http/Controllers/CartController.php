@@ -21,22 +21,22 @@ class CartController extends Controller
     /**
      * WishlistRepository Repository object
      *
-     * @var Object
+     * @var \Webkul\Customer\Repositories\WishlistRepository
      */
     protected $wishlistRepository;
 
     /**
      * ProductRepository object
      *
-     * @var Object
+     * @var \Webkul\Product\Repositories\ProductRepository
      */
     protected $productRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Customer\Repositories\CartItemRepository $wishlistRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository   $productRepository
+     * @param  \Webkul\Customer\Repositories\CartItemRepository  $wishlistRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      * @return void
      */
     public function __construct(
@@ -68,7 +68,8 @@ class CartController extends Controller
     /**
      * Function for guests user to add the product in the cart.
      *
-     * @return Mixed
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
     public function add($id)
     {
@@ -106,8 +107,8 @@ class CartController extends Controller
     /**
      * Removes the item from the cart if it exists
      *
-     * @param integer $itemId
-     * @return Response
+     * @param  int  $itemId
+     * @return \Illuminate\Http\Response
      */
     public function remove($itemId)
     {
@@ -123,7 +124,7 @@ class CartController extends Controller
     /**
      * Updates the quantity of the items present in the cart.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function updateBeforeCheckout()
     {
@@ -143,8 +144,8 @@ class CartController extends Controller
     /**
      * Function to move a already added product to wishlist will run only on customer authentication.
      *
-     * @param integer $id
-     * @return Response
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
     public function moveToWishlist($id)
     {
@@ -162,7 +163,7 @@ class CartController extends Controller
     /**
      * Apply coupon to the cart
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Response
     */
     public function applyCoupon()
     {
@@ -197,7 +198,7 @@ class CartController extends Controller
     /**
      * Apply coupon to the cart
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Response
     */
     public function removeCoupon()
     {
@@ -210,11 +211,9 @@ class CartController extends Controller
     }
 
     /**
-     * Returns true, if result of adding product to cart
-     * is an array and contains a key "warning"
+     * Returns true, if result of adding product to cart is an array and contains a key "warning"
      *
-     * @param $result
-     *
+     * @param array  $result
      * @return bool
      */
     private function onWarningAddingToCart($result): bool {

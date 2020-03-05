@@ -12,13 +12,12 @@ use Webkul\Sales\Contracts\RefundItem;
  * @author    Jitendra Singh <jitendra@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class RefundItemRepository extends Repository
 {
     /**
      * Specify Model class name
      *
-     * @return Mixed
+     * @return string
      */
     function model()
     {
@@ -28,8 +27,8 @@ class RefundItemRepository extends Repository
     /**
      * Returns qty to product inventory after order refund
      *
-     * @param OrdreItem $orderItem
-     * @param integer   $quantity
+     * @param  \Webkul\Sales\Contracts\Order  $orderItem
+     * @param  int  $quantity
      * @return void
      */
     public function returnQtyToProductInventory($orderItem, $quantity)

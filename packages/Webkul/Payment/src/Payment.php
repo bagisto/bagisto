@@ -59,7 +59,8 @@ class Payment
     /**
      * Returns payment redirect url if have any
      *
-     * @return array
+     * @param  \Webkul\Checkout\Contracts\Cart  $cart
+     * @return string
      */
     public function getRedirectUrl($cart)
     {

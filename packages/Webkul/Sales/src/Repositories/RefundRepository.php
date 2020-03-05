@@ -19,39 +19,39 @@ class RefundRepository extends Repository
     /**
      * OrderRepository object
      *
-     * @var Object
+     * @var \Webkul\Sales\Repositories\OrderRepository
      */
     protected $orderRepository;
 
     /**
      * OrderItemRepository object
      *
-     * @var Object
+     * @var \Webkul\Sales\Repositories\OrderItemRepository
      */
     protected $orderItemRepository;
 
     /**
      * RefundItemRepository object
      *
-     * @var Object
+     * @var \Webkul\Sales\Repositories\RefundItemRepository
      */
     protected $refundItemRepository;
 
     /**
      * DownloadableLinkPurchasedRepository object
      *
-     * @var Object
+     * @var \Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository
      */
     protected $downloadableLinkPurchasedRepository;
 
     /**
      * Create a new repository instance.
      *
-     * @param \Webkul\Sales\Repositories\OrderRepository                     $orderRepository
-     * @param \Webkul\Sales\Repositories\OrderItemRepository                 $orderItemRepository
-     * @param \Webkul\Sales\Repositories\RefundItemRepository                $refundItemRepository
-     * @param \Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository
-     * @param \Illuminate\Container\Container                                $app
+     * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
+     * @param  \Webkul\Sales\Repositories\OrderItemRepository  $orderItemRepository
+     * @param  \Webkul\Sales\Repositories\RefundItemRepository   $refundItemRepository
+     * @param  \Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository  $downloadableLinkPurchasedRepository
+     * @param  \Illuminate\Container\Container  $app
      */
     public function __construct(
         OrderRepository $orderRepository,
@@ -75,7 +75,7 @@ class RefundRepository extends Repository
     /**
      * Specify Model class name
      *
-     * @return Mixed
+     * @return string
      */
     function model()
     {
@@ -83,8 +83,8 @@ class RefundRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @return mixed
+     * @param  array  $data
+     * @return \Webkul\Sales\Contracts\Refund
      */
     public function create(array $data)
     {
@@ -207,8 +207,8 @@ class RefundRepository extends Repository
     }
 
     /**
-     * @param Refund $refund
-     * @return mixed
+     * @param  \Webkul\Sales\Contracts\Refund  $refund
+     * @return \Webkul\Sales\Contracts\Refund
      */
     public function collectTotals($refund)
     {
@@ -236,8 +236,8 @@ class RefundRepository extends Repository
     }
 
     /**
-     * @param array   $data
-     * @param integer $orderId
+     * @param  array  $data
+     * @param  integer  $orderId
      * @return array
      */
     public function getOrderItemsRefundSummary($data, $orderId)

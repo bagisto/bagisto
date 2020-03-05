@@ -30,7 +30,7 @@ class CategoryRepository extends Repository
     }
 
     /**
-     * @param  array $data
+     * @param  array  $data
      * @return \Webkul\Category\Contracts\Category
      */
     public function create(array $data)
@@ -121,7 +121,7 @@ class CategoryRepository extends Repository
     /**
      * Checks slug is unique or not based on locale
      *
-     * @param  int     $id
+     * @param  int  $id
      * @param  string  $slug
      * @return bool
      */
@@ -165,8 +165,8 @@ class CategoryRepository extends Repository
     }
 
     /**
-     * @param  array   $data
-     * @param  int     $id
+     * @param  array  $data
+     * @param  int  $id
      * @param  string  $attribute
      * @return \Webkul\Category\Contracts\Category
      */
@@ -203,7 +203,7 @@ class CategoryRepository extends Repository
     }
 
     /**
-     * @param  array                                $data
+     * @param  array  $data
      * @param  \Webkul\Category\Contracts\Category  $category
      * @return void
      */

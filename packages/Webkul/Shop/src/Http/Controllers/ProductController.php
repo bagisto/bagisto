@@ -19,38 +19,38 @@ class ProductController extends Controller
     /**
      * ProductRepository object
      *
-     * @var array
+     * @var \Webkul\Product\Repositories\ProductRepository
      */
     protected $productRepository;
 
     /**
      * ProductAttributeValueRepository object
      *
-     * @var array
+     * @var \Webkul\Product\Repositories\ProductAttributeValueRepository
      */
     protected $productAttributeValueRepository;
 
     /**
      * ProductDownloadableSampleRepository object
      *
-     * @var array
+     * @var \Webkul\Product\Repositories\ProductDownloadableSampleRepository
      */
     protected $productDownloadableSampleRepository;
 
     /**
      * ProductDownloadableLinkRepository object
      *
-     * @var array
+     * @var \Webkul\Product\Repositories\ProductDownloadableLinkRepository
      */
     protected $productDownloadableLinkRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Product\Repositories\ProductRepository                   $productRepository
-     * @param  \Webkul\Product\Repositories\productAttributeValueRepository     $productAttributeValueRepository
-     * @param  \Webkul\Product\Repositories\ProductDownloadableSampleRepository $productDownloadableSampleRepository
-     * @param  \Webkul\Product\Repositories\ProductDownloadableLinkRepository   $productDownloadableLinkRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Product\Repositories\productAttributeValueRepository  $productAttributeValueRepository
+     * @param  \Webkul\Product\Repositories\ProductDownloadableSampleRepository  $productDownloadableSampleRepository
+     * @param  \Webkul\Product\Repositories\ProductDownloadableLinkRepository  $productDownloadableLinkRepository
      * @return void
      */
     public function __construct(
@@ -74,7 +74,8 @@ class ProductController extends Controller
     /**
      * Download image or file
      *
-     * @param  int $productId, $attributeId
+     * @param  int  $productId
+     * @param  int  $attributeId
      * @return \Illuminate\Http\Response
      */
     public function download($productId, $attributeId)
@@ -90,7 +91,7 @@ class ProductController extends Controller
     /**
      * Download the for the specified resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|\Exception
      */
     public function downloadSample()
     {

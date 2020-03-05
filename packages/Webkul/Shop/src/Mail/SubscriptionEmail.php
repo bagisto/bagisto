@@ -19,7 +19,13 @@ class SubscriptionEmail extends Mailable
 
     public $subscriptionData;
 
-    public function __construct($subscriptionData) {
+    /**
+     * Create a mailable instance
+     * 
+     * @param  array  $subscriptionData
+     */
+    public function __construct($subscriptionData)
+    {
         $this->subscriptionData = $subscriptionData;
     }
 

@@ -14,67 +14,88 @@ abstract class DataGrid
 {
     /**
      * set index columns, ex: id.
+     * 
+     * @var int
      */
     protected $index = null;
 
     /**
-     * To know the class of datagrid calling parent methods, to be set by the extending class.
-     */
-    protected $invoker = null;
-
-    /**
      * Default sort order of datagrid
+     * 
+     * @var string
      */
     protected $sortOrder = 'asc';
 
     /**
      * Situation handling property when working with custom columns in datagrid, helps abstaining
      * aliases on custom column.
+     * 
+     * @var bool
      */
     protected $enableFilterMap = false;
 
     /**
      * This is array where aliases and custom column's name are passed
+     * 
+     * @var array
      */
     protected $filterMap = [];
 
     /**
      * array to hold all the columns which will be displayed on frontend.
+     * 
+     * @var array
      */
     protected $columns = [];
 
+
+    /**
+     * @var array
+     */
     protected $completeColumnDetails = [];
 
     /**
      * Hold query builder instance of the query prepared by executing datagrid
      * class method setQueryBuilder
+     * 
+     * @var array
      */
     protected $queryBuilder = [];
 
     /**
      * Final result of the datagrid program that is collection object.
+     * 
+     * @var array
      */
     protected $collection = [];
 
     /**
      * Set of handly click tools which you could be using for various operations.
      * ex: dyanmic and static redirects, deleting, etc.
+     * 
+     * @var array
      */
     protected $actions = [];
 
     /**
      * Works on selection of values index column as comma separated list as response
      * to your endpoint set as route.
+     * 
+     * @var array
      */
     protected $massActions = [];
 
     /**
      * Parsed value of the url parameters
+     * 
+     * @var array
      */
     protected $parse;
 
     /**
      * To show mass action or not.
+     * 
+     * @var bool
      */
     protected $enableMassAction = false;
 
@@ -85,14 +106,21 @@ abstract class DataGrid
 
     /**
      * paginate the collection or not
+     * 
+     * @var bool
      */
     protected $paginate = true;
 
     /**
      * If paginated then value of pagination.
+     * 
+     * @var int
      */
     protected $itemsPerPage = 10;
 
+    /**
+     * @var array
+     */
     protected $operators = [
         'eq'       => "=",
         'lt'       => "<",
@@ -112,6 +140,9 @@ abstract class DataGrid
         'notregex' => "not regexp",
     ];
 
+    /**
+     * @var array
+     */
     protected $bindings = [
         0 => "select",
         1 => "from",
@@ -122,6 +153,9 @@ abstract class DataGrid
         6 => "union",
     ];
 
+    /**
+     * @var array
+     */
     protected $selectcomponents = [
         0  => "aggregate",
         1  => "columns",
@@ -140,6 +174,9 @@ abstract class DataGrid
     
     abstract public function addColumns();
 
+    /**
+     * @return void
+     */
     public function __construct()
     {
         $this->invoker = $this;
@@ -147,6 +184,8 @@ abstract class DataGrid
 
     /**
      * Parse the URL and get it ready to be used.
+     * 
+     * @return void
      */
     private function parseUrl()
     {
@@ -176,6 +215,8 @@ abstract class DataGrid
     /**
      * Add the index as alias of the column and use the column to make things happen
      *
+     * @param  string  $alias
+     * @param  string  $column
      * @return void
      */
     public function addFilter($alias, $column) {
@@ -184,6 +225,10 @@ abstract class DataGrid
         $this->enableFilterMap = true;
     }
 
+    /**
+     * @param  string  $column
+     * @return void
+     */
     public function addColumn($column)
     {
         $this->fireEvent('add.column.before.'.$column['index']);
@@ -195,16 +240,28 @@ abstract class DataGrid
         $this->fireEvent('add.column.after.'.$column['index']);
     }
 
+    /**
+     * @param  string  $column
+     * @return void
+     */
     public function setCompleteColumnDetails($column)
     {
         array_push($this->completeColumnDetails, $column);
     }
 
+    /**
+     * @param  \Illuminate\Database\Query\Builder  $queryBuilder
+     * @return void
+     */
     public function setQueryBuilder($queryBuilder)
     {
         $this->queryBuilder = $queryBuilder;
     }
 
+    /**
+     * @param  array  $action
+     * @return void
+     */
     public function addAction($action)
     {
         if (isset($action['title'])) {
@@ -224,6 +281,10 @@ abstract class DataGrid
         $this->fireEvent('action.after.' . $eventName);
     }
 
+    /**
+     * @param  array  $massAction
+     * @return void
+     */
     public function addMassAction($massAction)
     {
         if (isset($massAction['label'])) {
@@ -243,6 +304,9 @@ abstract class DataGrid
         $this->fireEvent('mass.action.after.' . $eventName);
     }
 
+    /**
+     * @return \Illuminate\Support\Collection
+     */
     public function getCollection()
     {
         $parsedUrl = $this->parseUrl();
@@ -282,7 +346,8 @@ abstract class DataGrid
     /**
      * To find the alias of the column and by taking the column name.
      *
-     * @return string
+     * @param  array  $columnAlias
+     * @return array
      */
     public function findColumnType($columnAlias)
     {
@@ -293,6 +358,11 @@ abstract class DataGrid
         }
     }
 
+    /**
+     * @param  \Illuminate\Support\Collection  $collection
+     * @param  array  $parseInfo
+     * @return \Illuminate\Support\Collection
+     */
     public function sortOrFilterCollection($collection, $parseInfo)
     {
         foreach ($parseInfo as $key => $info)  {
@@ -414,6 +484,10 @@ abstract class DataGrid
         return $collection;
     }
 
+    /**
+     * @param  string  $name
+     * @return void
+     */
     protected function fireEvent($name)
     {
         if (isset($name)) {
@@ -429,12 +503,23 @@ abstract class DataGrid
         }
     }
 
-    public function prepareMassActions() {
+    /**
+     * @return void
+     */
+    public function prepareMassActions()
+    {
     }
 
-    public function prepareActions() {
+    /**
+     * @return void
+     */
+    public function prepareActions()
+    {
     }
 
+    /**
+     * @return \Illuminate\View\View
+     */
     public function render()
     {
         $this->addColumns();
@@ -458,6 +543,9 @@ abstract class DataGrid
         ]);
     }
 
+    /**
+     * @return \Illuminate\Support\Collection
+     */
     public function export()
     {
         $this->paginate = false;

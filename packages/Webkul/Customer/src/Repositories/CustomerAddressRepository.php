@@ -50,7 +50,7 @@ class CustomerAddressRepository extends Repository
 
     /**
      * @param  array  $data
-     * @param  int    $id
+     * @param  int  $id
      * @return \Webkul\Customer\Contracts\CustomerAddress
      */
     public function update(array $data, $id)

@@ -56,8 +56,8 @@ class Configurable extends AbstractType
     protected $hasVariants = true;
 
     /**
-     * @param array $data
-     * @return Product
+     * @param  array  $data
+     * @return \Webkul\Product\Contracts\Product
      */
     public function create(array $data)
     {
@@ -83,10 +83,10 @@ class Configurable extends AbstractType
     }
 
     /**
-     * @param array $data
-     * @param $id
-     * @param string $attribute
-     * @return Product
+     * @param  array  $data
+     * @param  int  $id
+     * @param  string  $attribute
+     * @return \Webkul\Product\Contracts\Product
      */
     public function update(array $data, $id, $attribute = "id")
     {
@@ -127,10 +127,10 @@ class Configurable extends AbstractType
     }
 
     /**
-     * @param mixed $product
-     * @param array $permutation
-     * @param array $data
-     * @return mixed
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  array                              $permutation
+     * @param  array                              $data
+     * @return \Webkul\Product\Contracts\Product
      */
     public function createVariant($product, $permutation, $data = [])
     {
@@ -219,9 +219,9 @@ class Configurable extends AbstractType
     }
 
     /**
-     * @param array $data
-     * @param $id
-     * @return mixed
+     * @param  array  $data
+     * @param  int  $id
+     * @return \Webkul\Product\Contracts\Product
      */
     public function updateVariant(array $data, $id)
     {
@@ -260,9 +260,9 @@ class Configurable extends AbstractType
     }
 
     /**
-     * @param array $data
-     * @param mixed $product
-     * @return mixed
+     * @param  array                              $data
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @return bool
      */
     public function checkVariantOptionAvailabiliy($data, $product)
     {
@@ -304,7 +304,7 @@ class Configurable extends AbstractType
     }
 
     /**
-     * @param CartItem $cartItem
+     * @param  \Webkul\Checkout\Contracts\CartItem  $cartItem
      * @return bool
      */
     public function isItemHaveQuantity($cartItem)
@@ -330,8 +330,8 @@ class Configurable extends AbstractType
     /**
      * Return true if item can be moved to cart from wishlist
      *
-     * @param Wishlist $item
-     * @return boolean
+     * @param  \Webkul\Customer\Contracts\Wishlist  $item
+     * @return bool
      */
     public function canBeMovedFromWishlistToCart($item)
     {
@@ -404,7 +404,7 @@ class Configurable extends AbstractType
     /**
      * Add product. Returns error message if can't prepare product.
      *
-     * @param array   $data
+     * @param  array  $data
      * @return array
      */
     public function prepareForCart($data)
@@ -456,9 +456,9 @@ class Configurable extends AbstractType
 
     /**
      *
-     * @param array $options1
-     * @param array $options2
-     * @return boolean
+     * @param  array  $options1
+     * @param  array  $options2
+     * @return bool
      */
     public function compareOptions($options1, $options2)
     {
@@ -472,7 +472,7 @@ class Configurable extends AbstractType
     /**
      * Returns additional information for items
      *
-     * @param array $data
+     * @param  array  $data
      * @return array
      */
     public function getAdditionalOptions($data)
@@ -495,8 +495,8 @@ class Configurable extends AbstractType
     /**
      * Get actual ordered item
      *
-     * @param CartItem $item
-     * @return CartItem|OrderItem|InvoiceItem|ShipmentItem
+     * @param  \Webkul\Checkout\Contracts\CartItem  $item
+     * @return \Webkul\Checkout\Contracts\CartItem|\Webkul\Sales\Contracts\OrderItem|\Webkul\Sales\Contracts\InvoiceItem|\Webkul\Sales\Contracts\ShipmentItem|\Webkul\Customer\Contracts\Wishlist
      */
     public function getOrderedItem($item)
     {
@@ -506,7 +506,7 @@ class Configurable extends AbstractType
     /**
      * Get product base image
      *
-     * @param Wishlist|CartItem $item
+     * @param  \Webkul\Customer\Contracts\Wishlist|\Webkul\Checkout\Contracts\CartItem  $item
      * @return array
      */
     public function getBaseImage($item)
@@ -527,7 +527,7 @@ class Configurable extends AbstractType
     /**
      * Validate cart item product price
      *
-     * @param CartItem $item
+     * @param  \Webkul\Checkout\Contracts\CartItem  $item
      * @return float
      */
     public function validateCartItem($item)

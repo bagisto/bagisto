@@ -2,7 +2,6 @@
 
 namespace Webkul\Product\Helpers;
 
-use Webkul\Attribute\Repositories\AttributeOptionRepository as AttributeOption;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductAttributeValue;
 
@@ -15,13 +14,6 @@ use Webkul\Product\Models\ProductAttributeValue;
 class ConfigurableOption extends AbstractProduct
 {
     /**
-     * AttributeOptionRepository object
-     *
-     * @var array
-     */
-    protected $attributeOption;
-
-    /**
      * ProductImage object
      *
      * @var array
@@ -31,25 +23,19 @@ class ConfigurableOption extends AbstractProduct
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeOptionRepository $attributeOption
-     * @param  Webkul\Product\Helpers\ProductImage                     $productImage
+     * @param  \Webkul\Product\Helpers\ProductImage  $productImage
      * @return void
      */
-    public function __construct(
-        AttributeOption $attributeOption,
-        ProductImage $productImage
-    )
+    public function __construct(ProductImage $productImage)
     {
-        $this->attributeOption = $attributeOption;
-
         $this->productImage = $productImage;
     }
 
     /**
      * Returns the allowed variants
      *
-     * @param Product $product
-     * @return float
+     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @return array
      */
     public function getAllowedProducts($product)
     {
@@ -71,7 +57,7 @@ class ConfigurableOption extends AbstractProduct
     /**
      * Returns the allowed variants JSON
      *
-     * @param Product $product
+     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
      * @return array
      */
     public function getConfigurationConfig($product)
@@ -96,8 +82,8 @@ class ConfigurableOption extends AbstractProduct
     /**
      * Get allowed attributes
      *
-     * @param Product $product
-     * @return array
+     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @return \Illuminate\Support\Collection
      */
     public function getAllowAttributes($product)
     {
@@ -107,8 +93,8 @@ class ConfigurableOption extends AbstractProduct
     /**
      * Get Configurable Product Options
      *
-     * @param Product $currentProduct
-     * @param array $allowedProducts
+     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $currentProduct
+     * @param  array  $allowedProducts
      * @return array
      */
     public function getOptions($currentProduct, $allowedProducts)
@@ -145,8 +131,8 @@ class ConfigurableOption extends AbstractProduct
     /**
      * Get product attributes
      *
-     * @param Product $product
-     * @param array $options
+     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @param  array  $options
      * @return array
      */
     public function getAttributesData($product, array $options = [])
@@ -178,8 +164,8 @@ class ConfigurableOption extends AbstractProduct
     }
 
     /**
-     * @param Attribute $attribute
-     * @param array $options
+     * @param  \Webkul\Attribute\Contracts\Attribute  $attribute
+     * @param  array  $options
      * @return array
      */
     protected function getAttributeOptionsData($attribute, $options)
@@ -206,7 +192,7 @@ class ConfigurableOption extends AbstractProduct
     /**
      * Get product prices for configurable variations
      *
-     * @param Product $product
+     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
      * @return array
      */
     protected function getVariantPrices($product)
@@ -229,7 +215,7 @@ class ConfigurableOption extends AbstractProduct
     /**
      * Get product images for configurable variations
      *
-     * @param Product $product
+     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
      * @return array
      */
     protected function getVariantImages($product)

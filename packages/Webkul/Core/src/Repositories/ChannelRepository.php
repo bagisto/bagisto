@@ -45,8 +45,8 @@ class ChannelRepository extends Repository
     }
 
     /**
-     * @param  array   $data
-     * @param  int     $id
+     * @param  array  $data
+     * @param  int  $id
      * @param  string  $attribute
      * @return \Webkul\Core\Contracts\Channel
      */
@@ -70,9 +70,9 @@ class ChannelRepository extends Repository
     }
 
     /**
-     * @param  array                           $data
+     * @param  array  $data
      * @param  \Webkul\Core\Contratcs\Channel  $channel
-     * @param  string                          $type
+     * @param  string  $type
      * @return void
      */
     public function uploadImages($data, $channel, $type = "logo")

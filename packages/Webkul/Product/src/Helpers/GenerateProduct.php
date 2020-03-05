@@ -4,8 +4,8 @@ namespace Webkul\Product\Helpers;
 
 use Webkul\Attribute\Models\Attribute;
 use Webkul\Attribute\Models\AttributeOption;
-use Webkul\Product\Repositories\ProductRepository as Product;
-use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Illuminate\Support\Str;
 
 /**
@@ -17,22 +17,40 @@ class GenerateProduct
 {
     /**
      * Product Repository instance
+     * 
+     * @var \Webkul\Product\Repositories\ProductRepository
      */
-    protected $product;
+    protected $productRepository;
 
     /**
      * AttributeFamily Repository instance
+     * 
+     * @var \Webkul\Product\Repositories\AttributeFamilyRepository
      */
-    protected $attributeFamily;
+    protected $attributeFamilyRepository;
 
     /**
      * Product Attribute Types
+     * 
+     * @var array
      */
     protected $types;
 
-    public function __construct(Product $product, AttributeFamily $attributeFamily)
+    /**
+     * Create a new helper instance.
+     *
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productImage
+     * @param  \Webkul\Product\Repositories\AttributeFamilyRepository  $productImage
+     * @return void
+     */
+    public function __construct(
+        ProductRepository $productRepository,
+        AttributeFamilyRepository $attributeFamilyRepository
+    )
     {
-        $this->product = $product;
+        $this->productRepository = $productRepository;
+
+        $this->attributeFamilyRepository = $attributeFamilyRepository;
 
         $this->types = [
             'text',
@@ -47,13 +65,13 @@ class GenerateProduct
             'file',
             'checkbox',
         ];
-
-        $this->attributeFamily = $attributeFamily;
     }
 
     /**
      * This brand option needs to be available so that the generated product
      * can be linked to the order_brands table after checkout.
+     * 
+     * @return void
      */
     public function generateDemoBrand()
     {
@@ -77,7 +95,7 @@ class GenerateProduct
     {
         $attributes = $this->getDefaultFamilyAttributes();
 
-        $attributeFamily = $this->attributeFamily->findWhere([
+        $attributeFamily = $this->attributeFamilyRepository->findWhere([
             'code' => 'default',
         ]);
 
@@ -86,7 +104,7 @@ class GenerateProduct
         $data['attribute_family_id'] = $attributeFamily->first()->id;
         $data['type'] = 'simple';
 
-        $product = $this->product->create($data);
+        $product = $this->productRepository->create($data);
 
         unset($data);
 
@@ -197,14 +215,17 @@ class GenerateProduct
             0 => $channel->root_category->id,
         ];
 
-        $updated = $this->product->update($data, $product->id);
+        $updated = $this->productRepository->update($data, $product->id);
 
         return $updated;
     }
 
+    /**
+     * @return \Illuminate\Support\Collection
+     */
     public function getDefaultFamilyAttributes()
     {
-        $attributeFamily = $this->attributeFamily->findWhere([
+        $attributeFamily = $this->attributeFamilyRepository->findWhere([
             'code' => 'default',
         ]);
 

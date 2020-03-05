@@ -16,21 +16,21 @@ class ReviewController extends Controller
     /**
      * ProductRepository object
      *
-     * @var Object
+     * @var \Webkul\Product\Repositories\ProductRepository
      */
     protected $productRepository;
 
     /**
      * ProductReviewRepository object
      *
-     * @var Object
+     * @var \Webkul\Product\Repositories\ProductReviewRepository
      */
     protected $productReviewRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Product\Repositories\ProductRepository        $productRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      * @param  \Webkul\Product\Repositories\ProductReviewRepository  $productReviewRepository
      * @return void
      */
@@ -48,8 +48,8 @@ class ReviewController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param  string $slug
-     * @return \Illuminate\View\View
+     * @param  string  $slug
+     * @return \Illuminate\View\View|\Exception
      */
     public function create($slug)
     {
@@ -65,7 +65,7 @@ class ReviewController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param integer $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function store($id)
@@ -96,7 +96,7 @@ class ReviewController extends Controller
     /**
      * Display reviews of particular product.
      *
-     * @param  string $slug
+     * @param  string  $slug
      * @return \Illuminate\View\View
     */
     public function show($slug)
@@ -109,8 +109,8 @@ class ReviewController extends Controller
     /**
      * Customer delete a reviews from their account
      *
-     * @param integer $id
-     * @return response
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
@@ -133,7 +133,7 @@ class ReviewController extends Controller
     /**
      * Customer delete all reviews from their account
      *
-     * @return Mixed Response & Boolean
+     * @return \Illuminate\Http\Response
     */
     public function deleteAll()
     {

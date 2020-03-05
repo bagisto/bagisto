@@ -53,7 +53,7 @@ class CatalogRuleProductPrice
     /**
      * Return current logged in customer
      *
-     * @return  Customer|bool
+     * @return  \Webkul\Customer\Contracts\Customer|bool
      */
     public function getCurrentCustomer()
     {
@@ -65,7 +65,7 @@ class CatalogRuleProductPrice
     /**
      * Collect discount on cart
      *
-     * @param  int                                $batchCount
+     * @param  int  $batchCount
      * @param  \Webkul\Product\Contracts\Product  $product
      * @return void
      */
@@ -140,7 +140,7 @@ class CatalogRuleProductPrice
     /**
      * Calculates product price based on rule
      *
-     * @param  array                                   $rule
+     * @param  array  $rule
      * @param  \Webkul\Product\Contracts\Product|null  $productData
      * @return float
      */

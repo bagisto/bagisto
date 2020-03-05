@@ -10,8 +10,8 @@ use Webkul\Velocity\Http\Shop\Controllers;
 use Webkul\Checkout\Contracts\Cart as CartModel;
 use Webkul\Product\Repositories\SearchRepository;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRepository;
+use Webkul\Category\Repositories\CategoryRepository;
 
 /**
  * Shop controller
@@ -29,48 +29,48 @@ class ShopController extends Controller
     protected $_config;
 
     /**
-     * Webkul\Product\Helpers\ProductImage object
+     * ProductImage object
      *
-     * @var ProductImage
+     * @var \Webkul\Product\Helpers\ProductImage
     */
     protected $productImageHelper;
 
     /**
      * SearchRepository object
      *
-     * @var SearchRepository
+     * @var \Webkul\Product\Repositories\SearchRepository
     */
     protected $searchRepository;
 
     /**
      * ProductRepository object
      *
-     * @var ProductRepository
+     * @var \Webkul\Product\Repositories\ProductRepository
     */
     protected $productRepository;
 
     /**
      * ProductRepository object of velocity package
      *
-     * @var ProductRepository
+     * @var \Webkul\Velocity\Repositories\Product\ProductRepository
      */
     protected $velocityProductRepository;
 
     /**
      * CategoryRepository object of velocity package
      *
-     * @var CategoryRepository
+     * @var \Webkul\Category\Repositories\CategoryRepository
      */
     protected $categoryRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Product\Helpers\ProductImage $productImageHelper
-     * @param  \Webkul\Product\Repositories\SearchRepository $searchRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository $productRepository
-     * @param  \Webkul\Category\Repositories\CategoryRepository $categoryRepository
-     * @param  \Webkul\Velocity\Repositories\Product\ProductRepository $velocityProductRepository
+     * @param  \Webkul\Product\Helpers\ProductImage  $productImageHelper
+     * @param  \Webkul\Product\Repositories\SearchRepository  $searchRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
+     * @param  \Webkul\Velocity\Repositories\Product\ProductRepository  $velocityProductRepository
      * @return void
     */
     public function __construct(
@@ -135,6 +135,9 @@ class ShopController extends Controller
         return $response;
     }
 
+    /**
+     * @return \Illuminate\Http\Response
+     */
     public function categoryDetails()
     {
         $slug = request()->get('category-slug');
@@ -195,6 +198,9 @@ class ShopController extends Controller
         ];
     }
 
+    /**
+     * @return array
+     */
     public function fetchCategories()
     {
         $formattedCategories = [];
@@ -210,6 +216,10 @@ class ShopController extends Controller
         ];
     }
 
+    /**
+     * @param  string  $slug
+     * @return array
+     */
     public function fetchFancyCategoryDetails($slug)
     {
         $categoryDetails = $this->categoryRepository->findByPath($slug);
@@ -226,6 +236,10 @@ class ShopController extends Controller
         ];
     }
 
+    /**
+     * @param  \Webkul\Category\Contracts\Category  $category
+     * @return array
+     */
     private function getCategoryFilteredData($category)
     {
         $formattedChildCategory = [];
@@ -243,6 +257,11 @@ class ShopController extends Controller
         ];
     }
 
+    /**
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  bool  $list
+     * @return array
+     */
     private function formatProduct($product, $list = false)
     {
         $reviewHelper = app('Webkul\Product\Helpers\Review');

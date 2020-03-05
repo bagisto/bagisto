@@ -17,14 +17,14 @@ class SubscriptionController extends Controller
     /**
      * SubscribersListRepository
      *
-     * @var Object
+     * @var \Webkul\Core\Repositories\SubscribersListRepository
      */
     protected $subscriptionRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\SubscribersListRepository $subscriptionRepository
+     * @param  \Webkul\Core\Repositories\SubscribersListRepository  $subscriptionRepository
      * @return void
      */
     public function __construct(SubscribersListRepository $subscriptionRepository)
@@ -37,7 +37,7 @@ class SubscriptionController extends Controller
     /**
      * Subscribes email to the email subscription list
      *
-     * @return Redirect
+     * @return \Illuminate\Http\Response
      */
     public function subscribe()
     {
@@ -100,7 +100,8 @@ class SubscriptionController extends Controller
     /**
      * To unsubscribe from a the subcription list
      *
-     * @var string $token
+     * @param  string  $token
+     * @return \Illuminate\Http\Response
      */
     public function unsubscribe($token)
     {

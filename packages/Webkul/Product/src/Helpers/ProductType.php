@@ -10,7 +10,6 @@ class ProductType extends AbstractProduct
      * Checks if a ProductType may have variants
      *
      * @param string $typeKey as defined in config('product_types)
-     *
      * @return bool whether ProductType is able to have variants
      */
     public static function hasVariants(string $typeKey): bool

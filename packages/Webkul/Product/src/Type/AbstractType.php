@@ -24,21 +24,21 @@ abstract class AbstractType
     /**
      * AttributeRepository instance
      *
-     * @var AttributeRepository
+     * @var \Webkul\Attribute\Repositories\AttributeRepository
      */
     protected $attributeRepository;
 
     /**
      * ProductRepository instance
      *
-     * @var ProductRepository
+     * @var \Webkul\Product\Repositories\ProductRepository
      */
     protected $productRepository;
 
     /**
      * ProductAttributeValueRepository instance
      *
-     * @var ProductAttributeValueRepository
+     * @var \Webkul\Product\Repositories\ProductAttributeValueRepository
      */
     protected $attributeValueRepository;
 
@@ -52,82 +52,82 @@ abstract class AbstractType
     /**
      * ProductImageRepository instance
      *
-     * @var ProductImageRepository
+     * @var \Webkul\Product\Repositories\ProductInventoryRepository
      */
     protected $productImageRepository;
 
     /**
      * Product Image helper instance
      *
-     * @var ProductImage
+     * @var \Webkul\Product\Helpers\ProductImage
     */
     protected $productImageHelper;
 
     /**
      * Product model instance
      *
-     * @var Product
+     * @var \Webkul\Product\Contracts\Product
      */
     protected $product;
 
     /**
      * Is a composite product type
      *
-     * @var boolean
+     * @var bool
      */
     protected $isComposite = false;
 
     /**
      * Is a stokable product type
      *
-     * @var boolean
+     * @var bool
      */
     protected $isStockable = true;
 
     /**
      * Show quantity box
      *
-     * @var boolean
+     * @var bool
      */
     protected $showQuantityBox = false;
 
     /**
      * Is product have sufficient quantity
      *
-     * @var boolean
+     * @var bool
      */
     protected $haveSufficientQuantity = true;
 
     /**
      * Product can be moved from wishlist to cart or not
      *
-     * @var boolean
+     * @var bool
      */
     protected $canBeMovedFromWishlistToCart = true;
 
     /**
      * Has child products aka variants
      *
-     * @var boolean
+     * @var bool
      */
     protected $hasVariants = false;
 
     /**
      * Product children price can be calculated or not
      *
-     * @var boolean
+     * @var bool
      */
     protected $isChildrenCalculated = false;
 
     /**
      * Create a new product type instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeRepository           $attributeRepository
-     * @param  Webkul\Product\Repositories\ProductRepository               $productRepository
-     * @param  Webkul\Product\Repositories\ProductAttributeValueRepository $attributeValueRepository
-     * @param  Webkul\Product\Repositories\ProductInventoryRepository      $productInventoryRepository
-     * @param  Webkul\Product\Repositories\ProductImageRepository          $productImageRepository
-     * @param  Webkul\Product\Helpers\ProductImage                         $productImageHelper
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $attributeValueRepository
+     * @param  \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
+     * @param  \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
+     * @param  \Webkul\Product\Helpers\ProductImage  $productImageHelper
      * @return void
      */
     public function __construct(
@@ -153,8 +153,8 @@ abstract class AbstractType
     }
 
     /**
-     * @param array $data
-     * @return Product
+     * @param  array  $data
+     * @return \Webkul\Product\Contracts\Product
      */
     public function create(array $data)
     {
@@ -162,10 +162,10 @@ abstract class AbstractType
     }
 
     /**
-     * @param array $data
-     * @param $id
-     * @param string $attribute
-     * @return Product
+     * @param  array  $data
+     * @param  int  $id
+     * @param  string  $attribute
+     * @return \Webkul\Product\Contracts\Product
      */
     public function update(array $data, $id, $attribute = "id")
     {
@@ -253,8 +253,8 @@ abstract class AbstractType
     /**
      * Specify type instance product
      *
-     * @param  Product $product
-     * @return AbstractType
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @return \Webkul\Product\Type\AbstractType
      */
     public function setProduct($product)
     {
@@ -286,7 +286,7 @@ abstract class AbstractType
     /**
      * Return true if this product type is saleable
      *
-     * @return boolean
+     * @return bool
      */
     public function isSaleable()
     {
@@ -300,7 +300,7 @@ abstract class AbstractType
     /**
      * Return true if this product can have inventory
      *
-     * @return boolean
+     * @return bool
      */
     public function isStockable()
     {
@@ -310,7 +310,7 @@ abstract class AbstractType
     /**
      * Return true if this product can be composite
      *
-     * @return boolean
+     * @return bool
      */
     public function isComposite()
     {
@@ -338,7 +338,7 @@ abstract class AbstractType
     }
 
     /**
-     * @param integer $qty
+     * @param  int  $qty
      * @return bool
      */
     public function haveSufficientQuantity($qty)
@@ -349,7 +349,7 @@ abstract class AbstractType
     /**
      * Return true if this product can have inventory
      *
-     * @return boolean
+     * @return bool
      */
     public function showQuantityBox()
     {
@@ -357,7 +357,7 @@ abstract class AbstractType
     }
 
     /**
-     * @param CartItem $cartItem
+     * @param  \Webkul\Checkout\Contracts\CartItem  $cartItem
      * @return bool
      */
     public function isItemHaveQuantity($cartItem)
@@ -366,7 +366,7 @@ abstract class AbstractType
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function totalQuantity()
     {
@@ -397,7 +397,8 @@ abstract class AbstractType
     /**
      * Return true if item can be moved to cart from wishlist
      *
-     * @return boolean
+     * @param  \Webkul\Checkout\Contracts\CartItem  $item
+     * @return bool
      */
     public function canBeMovedFromWishlistToCart($item)
     {
@@ -407,9 +408,9 @@ abstract class AbstractType
     /**
      * Retrieve product attributes
      *
-     * @param Group $group
-     * @param bool  $skipSuperAttribute
-     * @return Collection
+     * @param  \Webkul\Attribute\Contracts\Group  $group
+     * @param  bool  $skipSuperAttribute
+     * @return \Illuminate\Support\Collection
      */
     public function getEditableAttributes($group = null, $skipSuperAttribute = true)
     {
@@ -489,7 +490,7 @@ abstract class AbstractType
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function haveSpecialPrice()
     {
@@ -564,7 +565,7 @@ abstract class AbstractType
     /**
      * Add product. Returns error message if can't prepare product.
      *
-     * @param array $data
+     * @param  array  $data
      * @return array
      */
     public function prepareForCart($data)
@@ -603,7 +604,7 @@ abstract class AbstractType
     /**
      * Get request quantity
      *
-     * @param array $data
+     * @param  array  $data
      * @return array
      */
     public function getQtyRequest($data)
@@ -617,9 +618,9 @@ abstract class AbstractType
 
     /**
      *
-     * @param array $options1
-     * @param array $options2
-     * @return boolean
+     * @param  array  $options1
+     * @param  array  $options2
+     * @return bool
      */
     public function compareOptions($options1, $options2)
     {
@@ -645,7 +646,7 @@ abstract class AbstractType
     /**
      * Returns additional information for items
      *
-     * @param array $data
+     * @param  array  $data
      * @return array
      */
     public function getAdditionalOptions($data)
@@ -656,8 +657,8 @@ abstract class AbstractType
     /**
      * Get actual ordered item
      *
-     * @param CartItem $item
-     * @return CartItem|OrderItem|InvoiceItem|ShipmentItem|Wishlist
+     * @param  \Webkul\Checkout\Contracts\CartItem $item
+     * @return \Webkul\Checkout\Contracts\CartItem|\Webkul\Sales\Contracts\OrderItem|\Webkul\Sales\Contracts\InvoiceItem|\Webkul\Sales\Contracts\ShipmentItem|\Webkul\Customer\Contracts\Wishlist
      */
     public function getOrderedItem($item)
     {
@@ -667,7 +668,7 @@ abstract class AbstractType
     /**
      * Get product base image
      *
-     * @param Wishlist|CartItem $item
+     * @param  \Webkul\Customer\Contracts\CartItem|\Webkul\Checkout\Contracts\CartItem  $item
      * @return array
      */
     public function getBaseImage($item)
@@ -678,7 +679,7 @@ abstract class AbstractType
     /**
      * Validate cart item product price
      *
-     * @param CartItem $item
+     * @param  \Webkul\Customer\Contracts\CartItem  $item
      * @return void
      */
     public function validateCartItem($item)

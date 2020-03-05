@@ -22,30 +22,30 @@ class ShipmentRepository extends Repository
     /**
      * OrderRepository object
      *
-     * @var Object
+     * @var \Webkul\Sales\Repositories\OrderRepository
      */
     protected $orderRepository;
 
     /**
      * OrderItemRepository object
      *
-     * @var Object
+     * @var \Webkul\Sales\Repositories\OrderItemRepository
      */
     protected $orderItemRepository;
 
     /**
      * ShipmentItemRepository object
      *
-     * @var Object
+     * @var \Webkul\Sales\Repositories\ShipmentItemRepository
      */
     protected $shipmentItemRepository;
 
     /**
      * Create a new repository instance.
      *
-     * @param  Webkul\Sales\Repositories\OrderRepository        $orderRepository
-     * @param  Webkul\Sales\Repositories\OrderItemRepository    $orderItemRepository
-     * @param  Webkul\Sales\Repositories\ShipmentItemRepository $orderItemRepository
+     * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
+     * @param  \Webkul\Sales\Repositories\OrderItemRepository  $orderItemRepository
+     * @param  \Webkul\Sales\Repositories\ShipmentItemRepository  $orderItemRepository
      * @return void
      */
     public function __construct(
@@ -67,17 +67,16 @@ class ShipmentRepository extends Repository
     /**
      * Specify Model class name
      *
-     * @return Mixed
+     * @return string
      */
-
     function model()
     {
         return Shipment::class;
     }
 
     /**
-     * @param array $data
-     * @return mixed
+     * @param  array  $data
+     * @return \Webkul\Sales\Contracts\Shipment
      */
     public function create(array $data)
     {

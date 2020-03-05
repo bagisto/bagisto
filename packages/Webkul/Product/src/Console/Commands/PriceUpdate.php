@@ -24,20 +24,17 @@ class PriceUpdate extends Command
     /**
      * ProductFlatRepository object
      *
-     * @var Object
+     * @var \Webkul\Product\Repositories\ProductFlatRepository
     */
     protected $productFlatRepository;
-
 
     /**
      * Create a new command instance.
      *
-     * @param  Webkul\Product\Repositories\ProductFlatRepository $productFlatRepository
+     * @param  ]Webkul\Product\Repositories\ProductFlatRepository  $productFlatRepository
      * @return void
      */
-    public function __construct(
-        ProductFlatRepository $productFlatRepository
-    )
+    public function __construct(ProductFlatRepository $productFlatRepository)
     {
         $this->productFlatRepository = $productFlatRepository;
 
@@ -47,7 +44,7 @@ class PriceUpdate extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @return void
      */
     public function handle()
     {

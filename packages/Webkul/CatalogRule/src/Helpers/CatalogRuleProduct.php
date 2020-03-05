@@ -68,7 +68,7 @@ class CatalogRuleProduct
      * Collect discount on cart
      *
      * @param \Webkul\CatalogRule\Contracts\CatalogRule  $rule
-     * @param int                                        $batchCount
+     * @param int  $batchCount
      * @return void
      */
     public function insertRuleProduct($rule, $batchCount = 1000, $product = null)
@@ -115,7 +115,7 @@ class CatalogRuleProduct
      * Get array of product ids which are matched by rule
      *
      * @param  \Webkul\CatalogRule\Contracts\CatalogRule  $rule
-     * @param  \Webkul\Product\Contracts\Product          $product
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @return array
      */
     public function getMatchingProductIds($rule, $product = null)
@@ -179,13 +179,12 @@ class CatalogRuleProduct
     /**
      * Add product attribute condition to query
      *
-     * @param  string                                $attributeCode
+     * @param  string  $attributeCode
      * @param \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function addAttributeToSelect($attributeCode, $query)
     {
-        dd($query);
         $attribute = $this->attributeRepository->findOneByField('code', $attributeCode);
 
         if (! $attribute) {

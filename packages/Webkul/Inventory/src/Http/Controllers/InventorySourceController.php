@@ -23,7 +23,7 @@ class InventorySourceController extends Controller
     /**
      * InventorySourceRepository object
      *
-     * @var array
+     * @var \Webkul\Inventory\Repositories\InventorySourceRepository
      */
     protected $inventorySourceRepository;
 

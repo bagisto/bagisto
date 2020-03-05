@@ -53,7 +53,7 @@ class AttributeOptionRepository extends Repository
 
     /**
      * @param  array  $data
-     * @param  int    $optionId
+     * @param  int  $optionId
      * @return void
      */
     public function uploadSwatchImage($data, $optionId)

@@ -25,22 +25,22 @@ class InvoiceController extends Controller
     /**
      * OrderRepository object
      *
-     * @var array
+     * @var \Webkul\Sales\Repositories\OrderRepository
      */
     protected $orderRepository;
 
     /**
      * InvoiceRepository object
      *
-     * @var array
+     * @var \Webkul\Sales\Repositories\InvoiceRepository
      */
     protected $invoiceRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Sales\Repositories\OrderRepository   $orderRepository
-     * @param  \Webkul\Sales\Repositories\InvoiceRepository $invoiceRepository
+     * @param  \Webkul\Sales\Repositories\OrderRepository    $orderRepository
+     * @param  \Webkul\Sales\Repositories\InvoiceRepository  $invoiceRepository
      * @return void
      */
     public function __construct(

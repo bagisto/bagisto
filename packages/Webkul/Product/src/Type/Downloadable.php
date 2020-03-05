@@ -23,14 +23,14 @@ class Downloadable extends AbstractType
     /**
      * ProductDownloadableLinkRepository instance
      *
-     * @var ProductDownloadableLinkRepository
+     * @var \Webkul\Product\Repositories\ProductDownloadableLinkRepository
     */
     protected $productDownloadableLinkRepository;
 
     /**
      * ProductDownloadableSampleRepository instance
      *
-     * @var ProductDownloadableSampleRepository
+     * @var \Webkul\Product\Repositories\ProductDownloadableSampleRepository
     */
     protected $productDownloadableSampleRepository;
 
@@ -57,21 +57,21 @@ class Downloadable extends AbstractType
     /**
      * Is a stokable product type
      *
-     * @var boolean
+     * @var bool
      */
     protected $isStockable = false;
 
     /**
      * Create a new product type instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeRepository               $attributeRepository
-     * @param  Webkul\Product\Repositories\ProductRepository                   $productRepository
-     * @param  Webkul\Product\Repositories\ProductAttributeValueRepository     $attributeValueRepository
-     * @param  Webkul\Product\Repositories\ProductInventoryRepository          $productInventoryRepository
-     * @param  Webkul\Product\Repositories\ProductImageRepository              $productImageRepository
-     * @param  Webkul\Product\Repositories\ProductDownloadableLinkRepository   $productDownloadableLinkRepository
-     * @param  Webkul\Product\Repositories\ProductDownloadableSampleRepository $productDownloadableSampleRepository
-     * @param  Webkul\Product\Helpers\ProductImage                             $productImageHelper
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $attributeValueRepository
+     * @param  \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
+     * @param  \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
+     * @param  \Webkul\Product\Repositories\ProductDownloadableLinkRepository  $productDownloadableLinkRepository
+     * @param  \Webkul\Product\Repositories\ProductDownloadableSampleRepository  $productDownloadableSampleRepository
+     * @param  \Webkul\Product\Helpers\ProductImage  $productImageHelper
      * @return void
      */
     public function __construct(
@@ -100,10 +100,10 @@ class Downloadable extends AbstractType
     }
 
     /**
-     * @param array $data
-     * @param $id
-     * @param string $attribute
-     * @return Product
+     * @param  array  $data
+     * @param  int  $id
+     * @param  string  $attribute
+     * @return \Webkul\Product\Contracts\Product
      */
     public function update(array $data, $id, $attribute = "id")
     {
@@ -121,7 +121,7 @@ class Downloadable extends AbstractType
     /**
      * Return true if this product type is saleable
      *
-     * @return boolean
+     * @return bool
      */
     public function isSaleable()
     {
@@ -157,7 +157,7 @@ class Downloadable extends AbstractType
     /**
      * Add product. Returns error message if can't prepare product.
      *
-     * @param array   $data
+     * @param  array  $data
      * @return array
      */
     public function prepareForCart($data)
@@ -184,9 +184,9 @@ class Downloadable extends AbstractType
 
     /**
      *
-     * @param array $options1
-     * @param array $options2
-     * @return boolean
+     * @param  array  $options1
+     * @param  array  $options2
+     * @return bool
      */
     public function compareOptions($options1, $options2)
     {
@@ -200,7 +200,7 @@ class Downloadable extends AbstractType
     /**
      * Returns additional information for items
      *
-     * @param array $data
+     * @param  array  $data
      * @return array
      */
     public function getAdditionalOptions($data)
@@ -225,7 +225,7 @@ class Downloadable extends AbstractType
     /**
      * Validate cart item product price
      *
-     * @param CartItem $item
+     * @param  \Webkul\Checkout\Contracts\CartItem  $item
      * @return float
      */
     public function validateCartItem($item)

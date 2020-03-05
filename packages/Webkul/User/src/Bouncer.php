@@ -7,8 +7,8 @@ class Bouncer
     /**
      * Checks if user allowed or not for certain action
      *
-     * @param  String $permission
-     * @return Void
+     * @param  string  $permission
+     * @return void
      */
     public function hasPermission($permission)
     {
@@ -26,8 +26,8 @@ class Bouncer
     /**
      * Checks if user allowed or not for certain action
      *
-     * @param  String $permission
-     * @return Void
+     * @param  string  $permission
+     * @return void
      */
     public static function allow($permission)
     {

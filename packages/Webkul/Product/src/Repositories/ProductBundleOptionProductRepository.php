@@ -13,14 +13,19 @@ use Illuminate\Support\Str;
  */
 class ProductBundleOptionProductRepository extends Repository
 {
+    /**
+     * Specify Model class name
+     *
+     * @return string
+     */
     public function model()
     {
         return 'Webkul\Product\Contracts\ProductBundleOptionProduct';
     }
 
     /**
-     * @param array   $data
-     * @param ProductBundleOption $productBundleOption
+     * @param array  $data
+     * @param  \Webkul\Product\Contracts\ProductBundleOption  $productBundleOption
      * @return void
      */
     public function saveBundleOptonProducts($data, $productBundleOption)
@@ -52,7 +57,7 @@ class ProductBundleOptionProductRepository extends Repository
 
     /**
      * @param array $data
-     * @return void
+     * @return void|null
      */
     public function setIsDefaultFlag(&$data)
     {

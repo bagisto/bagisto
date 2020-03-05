@@ -14,7 +14,7 @@ class Review extends AbstractProduct
     /**
      * Returns the product's avg rating
      *
-     * @param Product $product
+     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
      * @return float
      */
     public function getReviews($product)
@@ -31,7 +31,7 @@ class Review extends AbstractProduct
     /**
      * Returns the product's avg rating
      *
-     * @param Product $product
+     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
      * @return float
      */
     public function getAverageRating($product)
@@ -48,8 +48,8 @@ class Review extends AbstractProduct
     /**
      * Returns the total review of the product
      *
-    * @param Product $product
-     * @return integer
+    * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @return int
      */
     public function getTotalReviews($product)
     {
@@ -65,8 +65,8 @@ class Review extends AbstractProduct
      /**
      * Returns the total rating of the product
      *
-     * @param Product $product
-     * @return integer
+     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @return int
      */
     public function getTotalRating($product)
     {
@@ -82,8 +82,8 @@ class Review extends AbstractProduct
      /**
      * Returns the Percentage rating of the product
      *
-    * @param Product $product
-     * @return integer
+    * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @return int
      */
     public function getPercentageRating($product)
     {
@@ -103,11 +103,11 @@ class Review extends AbstractProduct
 
                         break;
                     } else {
-                        $percentage[$i]=0;
+                        $percentage[$i] = 0;
                     }
                 }
             } else {
-                $percentage[$i]=0;
+                $percentage[$i] = 0;
             }
         }
 

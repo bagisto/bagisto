@@ -18,20 +18,21 @@ class ContentRepository extends Repository
    /**
     * Product Repository object
     *
-    * @var array
+    * @var \Webkul\Product\Repositories\ProductRepository
     */
     protected $productRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Product\Repositories\ProductRepository $productRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository $productRepository
+     * @param  \Illuminate\Container\Container  $app
      * @return void
      */
     public function __construct(
         ProductRepository $productRepository,
         App $app
-        )
+    )
     {
         $this->productRepository = $productRepository;
 
@@ -41,16 +42,19 @@ class ContentRepository extends Repository
     /**
      * Specify Model class name
      *
-     * @return mixed
+     * @return string
      */
     function model()
     {
         return 'Webkul\Velocity\Models\Content';
     }
 
+    /**
+     * @param  array  $data
+     * @return \Webkul\Velocity\Models\Content
+     */
     public function create(array $data)
     {
-        //before store of the Content
         // Event::fire('velocity.content.create.before');
 
         if (isset($data['locale']) && $data['locale'] == 'all') {
@@ -67,27 +71,33 @@ class ContentRepository extends Repository
 
         $content = $this->model->create($data);
 
-        //after store of the content
         // Event::fire('velocity.content.create.after', $content);
 
         return $content;
     }
 
+    /**
+     * @param  array  $data
+     * @param  int  $id
+     * @return \Webkul\Velocity\Models\Content
+     */
     public function update(array $data, $id)
     {
         $content = $this->find($id);
 
-        //before store of the Content
         // Event::fire('velocity.content.update.before', $id);
 
         $content->update($data);
 
-        //after store of the content
         // Event::fire('velocity.content.update.after', $id);
 
         return $content;
     }
 
+    /**
+     * @param  int  $id
+     * @return array
+     */
     public function getProducts($id)
     {
         $results = [];
@@ -118,6 +128,9 @@ class ContentRepository extends Repository
         return $results;
     }
 
+    /**
+     * @return array
+     */
     public function getAllContents()
     {
         $query = $this->model::orderBy('position', 'ASC');

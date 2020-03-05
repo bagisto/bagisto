@@ -53,8 +53,8 @@ class CmsRepository extends Repository
     }
 
     /**
-     * @param  array   $data
-     * @param  int     $id
+     * @param  array  $data
+     * @param  int  $id
      * @param  string  $attribute
      * @return \Webkul\CMS\Contracts\CmsPage
      */
@@ -76,7 +76,7 @@ class CmsRepository extends Repository
     /**
      * Checks slug is unique or not based on locale
      *
-     * @param  int     $id
+     * @param  int  $id
      * @param  string  $urlKey
      * @return bool
      */

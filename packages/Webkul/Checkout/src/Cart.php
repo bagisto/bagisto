@@ -127,7 +127,7 @@ class Cart
     /**
      * Add Items in a cart with some cart and item details.
      *
-     * @param  int    $productId
+     * @param  int  $productId
      * @param  array  $data
      * @return \Webkul\Checkout\Contracts\Cart|\Exception|array
      */

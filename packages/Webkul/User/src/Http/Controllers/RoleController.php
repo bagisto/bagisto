@@ -23,14 +23,14 @@ class RoleController extends Controller
     /**
      * RoleRepository object
      *
-     * @var array
+     * @var \Webkul\User\Repositories\RoleRepository
      */
     protected $roleRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\User\Repositories\RoleRepository $roleRepository
+     * @param  \Webkul\User\Repositories\RoleRepository  $roleRepository
      * @return void
      */
     public function __construct(RoleRepository $roleRepository)

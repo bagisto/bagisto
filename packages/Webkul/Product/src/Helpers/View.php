@@ -13,8 +13,8 @@ class View extends AbstractProduct
     /**
      * Returns the visible custom attributes
      *
-     * @param Webkul\Product\Models\Product $product
-     * @return integer
+     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @return void|array
      */
     public function getAdditionalData($product)
     {

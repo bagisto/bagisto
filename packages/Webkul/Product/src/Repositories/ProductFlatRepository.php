@@ -20,7 +20,7 @@ class ProductFlatRepository extends Repository
     /**
      * Maximum Price of Category Product
      *
-     * @param Category $category
+     * @param \Webkul\Category\Contracts\Category  $category
      * @return float
      */
     public function getCategoryProductMaximumPrice($category = null)
@@ -38,7 +38,7 @@ class ProductFlatRepository extends Repository
     /**
      * get Category Product Attribute
      *
-     * @param CategoryId $categoryId
+     * @param  int  $categoryId
      * @return array
      */
     public function getCategoryProductAttribute($categoryId)
@@ -65,9 +65,9 @@ class ProductFlatRepository extends Repository
     /**
      * get Filterable Attributes.
      *
-     * @param array $category
-     * @param array $products
-     * @return collection
+     * @param  array  $category
+     * @param  array  $products
+     * @return \Illuminate\Support\Collection
      */
     public function getFilterableAttributes($category, $products) {
         $filterAttributes = [];

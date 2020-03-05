@@ -27,30 +27,30 @@ class CustomerController extends Controller
     /**
      * CustomerRepository object
      *
-     * @var array
+     * @var \Webkul\Customer\Repositories\CustomerRepository
      */
     protected $customerRepository;
 
     /**
      * CustomerGroupRepository object
      *
-     * @var array
+     * @var \Webkul\Customer\Repositories\CustomerGroupRepository
      */
     protected $customerGroupRepository;
 
     /**
      * ChannelRepository object
      *
-     * @var array
+     * @var \Webkul\Core\Repositories\ChannelRepository
      */
     protected $channelRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param \Webkul\Customer\Repositories\CustomerRepository      $customerRepository
-     * @param \Webkul\Customer\Repositories\CustomerGroupRepository $customerGroupRepository
-     * @param \Webkul\Core\Repositories\ChannelRepository           $channelRepository
+     * @param \Webkul\Customer\Repositories\CustomerRepository       $customerRepository
+     * @param \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository
+     * @param \Webkul\Core\Repositories\ChannelRepository            $channelRepository
      */
     public function __construct(
         CustomerRepository $customerRepository,
@@ -136,7 +136,7 @@ class CustomerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\View\View
      */
     public function edit($id)
@@ -153,7 +153,7 @@ class CustomerController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update($id)
@@ -180,7 +180,7 @@ class CustomerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -203,7 +203,7 @@ class CustomerController extends Controller
     /**
      * To load the note taking screen for the customers
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\View\View
      */
     public function createNote($id)

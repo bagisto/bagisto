@@ -20,63 +20,63 @@ class DashboardController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @var array
      */
     protected $_config;
 
     /**
      * OrderRepository object
      *
-     * @var Object
+     * @var \Webkul\Sales\Repositories\OrderRepository
      */
     protected $orderRepository;
 
     /**
      * OrderItemRepository object
      *
-     * @var Object
+     * @var \Webkul\Sales\Repositories\OrderItemRepository
      */
     protected $orderItemRepository;
 
     /**
      * CustomerRepository object
      *
-     * @var Object
+     * @var \Webkul\Customer\Repositories\CustomerRepository
      */
     protected $customerRepository;
 
     /**
      * ProductInventoryRepository object
      *
-     * @var Object
+     * @var \Webkul\Product\Repositories\ProductInventoryRepository
      */
     protected $productInventoryRepository;
 
     /**
      * string object
      *
-     * @var Object
+     * @var \Illuminate\Support\Carbon
      */
     protected $startDate;
 
     /**
      * string object
      *
-     * @var Object
+     * @var \Illuminate\Support\Carbon
      */
     protected $lastStartDate;
 
     /**
      * string object
      *
-     * @var Object
+     * @var \Illuminate\Support\Carbon
      */
     protected $endDate;
 
     /**
      * string object
      *
-     * @var Object
+     * @var \Illuminate\Support\Carbon
      */
     protected $lastEndDate;
 
@@ -112,7 +112,9 @@ class DashboardController extends Controller
     /**
      * Returns percentage difference
      *
-     * @return integer
+     * @param  int  $previous
+     * @param  int  $current
+     * @return int
      */
     public function getPercentageChange($previous, $current)
     {
@@ -215,6 +217,7 @@ class DashboardController extends Controller
 
     /**
      * Returns top selling products
+     * 
      * @return \Illuminate\Support\Collection
      */
     public function getTopSellingProducts()
@@ -279,7 +282,7 @@ class DashboardController extends Controller
     /**
      * Returns previous order query
      *
-     * @return mixed
+     * @return Illuminate\Database\Query\Builder
      */
     private function previousOrders()
     {
@@ -289,7 +292,7 @@ class DashboardController extends Controller
     /**
      * Returns current order query
      *
-     * @return mixed
+     * @return Illuminate\Database\Query\Builder
      */
     private function currentOrders()
     {
@@ -299,7 +302,9 @@ class DashboardController extends Controller
     /**
      * Returns orders between two dates
      *
-     * @return mixed
+     * @param  \Illuminate\Support\Carbon  $start
+     * @param  \Illuminate\Support\Carbon  $end
+     * @return Illuminate\Database\Query\Builder
      */
     private function getOrdersBetweenDate($start, $end)
     {
@@ -311,7 +316,9 @@ class DashboardController extends Controller
     /**
      * Returns customers between two dates
      *
-     * @return mixed
+     * @param  \Illuminate\Support\Carbon  $start
+     * @param  \Illuminate\Support\Carbon  $end
+     * @return Illuminate\Database\Query\Builder
      */
     private function getCustomersBetweenDates($start, $end)
     {

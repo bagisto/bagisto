@@ -31,54 +31,54 @@ class ProductController extends Controller
     /**
      * CategoryRepository object
      *
-     * @var Object
+     * @var \Webkul\Category\Repositories\CategoryRepository
      */
     protected $categoryRepository;
 
     /**
      * ProductRepository object
      *
-     * @var Object
+     * @var \Webkul\Product\Repositories\ProductRepository
      */
     protected $productRepository;
 
     /**
      * ProductDownloadableLinkRepository object
      *
-     * @var Object
+     * @var \Webkul\Product\Repositories\ProductDownloadableLinkRepository
      */
     protected $productDownloadableLinkRepository;
 
     /**
      * ProductDownloadableSampleRepository object
      *
-     * @var Object
+     * @var \Webkul\Product\Repositories\ProductDownloadableSampleRepository
      */
     protected $productDownloadableSampleRepository;
 
     /**
      * AttributeFamilyRepository object
      *
-     * @var Object
+     * @var \Webkul\Attribute\Repositories\AttributeFamilyRepository
      */
     protected $attributeFamilyRepository;
 
     /**
      * InventorySourceRepository object
      *
-     * @var Object
+     * @var \Webkul\Inventory\Repositories\InventorySourceRepository
      */
     protected $inventorySourceRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Category\Repositories\CategoryRepository                 $categoryRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository                   $productRepository
-     * @param  \Webkul\Product\Repositories\ProductDownloadableLinkRepository   $productDownloadableLinkRepository
-     * @param  \Webkul\Product\Repositories\ProductDownloadableSampleRepository $productDownloadableSampleRepository
-     * @param  \Webkul\Attribute\Repositories\AttributeFamilyRepository         $attributeFamilyRepository
-     * @param  \Webkul\Inventory\Repositories\InventorySourceRepository         $inventorySource
+     * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Product\Repositories\ProductDownloadableLinkRepository  $productDownloadableLinkRepository
+     * @param  \Webkul\Product\Repositories\ProductDownloadableSampleRepository  $productDownloadableSampleRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamilyRepository
+     * @param  \Webkul\Inventory\Repositories\InventorySourceRepository  $inventorySourceRepository
      * @return void
      */
     public function __construct(
@@ -189,7 +189,7 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Webkul\Product\Http\Requests\ProductForm $request
+     * @param  \Webkul\Product\Http\Requests\ProductForm  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -256,7 +256,7 @@ class ProductController extends Controller
     /**
      * Mass Delete the products
      *
-     * @return response
+     * @return \Illuminate\Http\Response
      */
     public function massDestroy()
     {
@@ -278,7 +278,7 @@ class ProductController extends Controller
     /**
      * Mass updates the products
      *
-     * @return response
+     * @return \Illuminate\Http\Response
      */
     public function massUpdate()
     {
@@ -307,8 +307,10 @@ class ProductController extends Controller
         return redirect()->route($this->_config['redirect']);
     }
 
-    /*
+    /**
      * To be manually invoked when data is seeded into products
+     * 
+     * @return \Illuminate\Http\Response
      */
     public function sync()
     {
@@ -320,7 +322,7 @@ class ProductController extends Controller
     /**
      * Result of search product.
      *
-     * @return \Illuminate\View\View | \Illuminate\Http\JsonResponse
+     * @return \Illuminate\View\View|\Illuminate\Http\Response
      */
     public function productLinkSearch()
     {
@@ -344,7 +346,8 @@ class ProductController extends Controller
      /**
      * Download image or file
      *
-     * @param  int $productId, $attributeId
+     * @param  int  $productId
+     * @param  int  $attributeId
      * @return \Illuminate\Http\Response
      */
     public function download($productId, $attributeId)
@@ -360,7 +363,7 @@ class ProductController extends Controller
     /**
      * Search simple products
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Response
      */
     public function searchSimpleProducts()
     {

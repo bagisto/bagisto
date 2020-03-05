@@ -36,8 +36,8 @@ class WishlistRepository extends Repository
     }
 
     /**
-     * @param  array   $data
-     * @param  int     $id
+     * @param  array  $data
+     * @param  int  $id
      * @param  string  $attribute
      * @return \Webkul\Customer\Contracts\Wishlist
      */

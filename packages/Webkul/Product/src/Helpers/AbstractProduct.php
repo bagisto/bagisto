@@ -24,10 +24,10 @@ abstract class AbstractProduct
     /**
      * Add Channle and Locale filter
      *
-     * @param Attribute $attribute
-     * @param QB $qb
-     * @param sting $alias
-     * @return QB
+     * @param  \Webkul\Attribute\Contracts\Attribute  $attribute
+     * @param  \Illuminate\Database\Eloquent\Builder  $qb
+     * @param  string  $alias
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function applyChannelLocaleFilter($attribute, $qb, $alias = 'product_attribute_values')
     {
@@ -54,8 +54,8 @@ abstract class AbstractProduct
     /**
      * Sets product flat variable
      *
-     * @param Product $product
-     * @return void
+     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @return void|null
      */
     public function setProductFlat($product)
     {

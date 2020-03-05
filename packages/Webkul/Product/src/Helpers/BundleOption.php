@@ -13,14 +13,14 @@ class BundleOption extends AbstractProduct
     /**
      * Product
      *
-     * @var Product
+     * @var \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat
      */
     protected $product;
 
     /**
      * Returns bundle option config
      *
-     * @param Product $product
+     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
      * @return array
      */
     public function getBundleConfig($product)
@@ -59,7 +59,7 @@ class BundleOption extends AbstractProduct
     /**
      * Get formed data from bundle option
      *
-     * @param ProductBundleOption $option
+     * @param  \Product\Product\Contracts\ProductBundleOption  $option
      * @return array
      */
     private function getOptionItemData($option)
@@ -77,7 +77,7 @@ class BundleOption extends AbstractProduct
     /**
      * Get formed data from bundle option product
      *
-     * @param ProductBundleOption $option
+     * @param  \Product\Product\Contracts\ProductBundleOption  $option
      * @return array
      */
     private function getOptionProducts($option)

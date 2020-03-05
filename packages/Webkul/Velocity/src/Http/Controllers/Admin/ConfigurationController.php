@@ -19,19 +19,18 @@ class ConfigurationController extends Controller
     /**
      * VelocityMetadataRepository object
      *
-     * @var Object
+     * @var \Webkul\Velocity\Repositories\VelocityMetadataRepository
      */
     protected $velocityMetaDataRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Velocity\Repositories\MetadataRepository $metaDataRepository
+     * @param  \Webkul\Velocity\Repositories\MetadataRepository  $velocityMetaDataRepository
+     * @return void
      */
-
-    public function __construct (
-        VelocityMetadataRepository $velocityMetadataRepository
-    ) {
+    public function __construct (VelocityMetadataRepository $velocityMetadataRepository)
+    {
         $this->_config = request('_config');
         
         $this->velocityHelper = app('Webkul\Velocity\Helpers\Helper');
@@ -39,6 +38,9 @@ class ConfigurationController extends Controller
         $this->velocityMetaDataRepository = $velocityMetadataRepository;
     }
 
+    /**
+     * @return \Illuminate\View\View
+     */
     public function renderMetaData()
     {
         $velocityMetaData = $this->velocityHelper->getVelocityMetaData();
@@ -52,6 +54,10 @@ class ConfigurationController extends Controller
         ]);
     }
 
+    /**
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function storeMetaData($id)
     {
         // check if radio button value
@@ -111,10 +117,17 @@ class ConfigurationController extends Controller
         return redirect()->route($this->_config['redirect']);
     }
 
+    /**
+     * @param  array  $data
+     * @param  int  $index
+     * @param  array  $advertisement
+     * @return array
+     */
     public function uploadAdvertisementImages($data, $index, $advertisement)
     {
-        $save_image = [];
-        $save_data = $advertisement;
+        $saveImage = [];
+
+        $saveData = $advertisement;
         
         foreach ($data as $imageId => $image) {
             $file = 'images.' . $index . '.' . $imageId;
@@ -124,16 +137,16 @@ class ConfigurationController extends Controller
                 if (request()->hasFile($file) && $image) {
                     $filter_index = substr($imageId, 6, 1);
                     if ( isset($data[$filter_index]) ) {
-                        $size = array_key_last($save_data[$index]);
+                        $size = array_key_last($saveData[$index]);
                         
-                        $save_image[$size + 1] = request()->file($file)->store($dir);
+                        $saveImage[$size + 1] = request()->file($file)->store($dir);
                     } else {
-                        $save_image[substr($imageId, 6, 1)] = request()->file($file)->store($dir);
+                        $saveImage[substr($imageId, 6, 1)] = request()->file($file)->store($dir);
                     }
                 }
             } else {
                 if ( isset($advertisement[$index][$imageId]) && $advertisement[$index][$imageId] && !request()->hasFile($file)) {
-                    $save_image[$imageId] = $advertisement[$index][$imageId];
+                    $saveImage[$imageId] = $advertisement[$index][$imageId];
 
                     unset($advertisement[$index][$imageId]); 
                 }
@@ -141,7 +154,7 @@ class ConfigurationController extends Controller
                 if (request()->hasFile($file) && isset($advertisement[$index][$imageId])) {
                     Storage::delete($advertisement[$index][$imageId]);
 
-                    $save_image[$imageId] = request()->file($file)->store($dir);
+                    $saveImage[$imageId] = request()->file($file)->store($dir);
                 }
             }
         }
@@ -152,9 +165,14 @@ class ConfigurationController extends Controller
             }
         }
 
-        return $save_image;
+        return $saveImage;
     }
 
+    /**
+     * @param  array  $data
+     * @param  int  $index
+     * @return mixed
+     */
     public function uploadImage($data, $index)
     {
         $type = 'product_view_images';
@@ -173,22 +191,29 @@ class ConfigurationController extends Controller
         return $image;
     }
 
-    public function manageAddImages($add_images)
+    /**
+     * @param  array  $addImages
+     * @return array
+     */
+    public function manageAddImages($addImages)
     {
-        $images_path = [];
-        foreach ($add_images as $add_id => $images) {
+        $imagePaths = [];
+
+        foreach ($addImages as $id => $images) {
             foreach ($images as $key => $image) {
                 if ($image) {
-                    $images_path[$add_id][] = [
-                        'id'   => $key,
-                        'type' => null,
-                        'path' => $image,
-                        'url'  => Storage::url($image),
-                    ];
+                    continue;
                 }
+
+                $imagePaths[$id][] = [
+                    'id'   => $key,
+                    'type' => null,
+                    'path' => $image,
+                    'url'  => Storage::url($image),
+                ];
             }
         }
         
-        return $images_path;
+        return $imagePaths;
     }
 }

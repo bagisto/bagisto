@@ -35,7 +35,7 @@ class NewCustomerNotification extends Mailable
      * Create a new message instance.
      * 
      * @param  \Webkul\Customer\Contracts\Customer  $order
-     * @param  string                               $password
+     * @param  string  $password
      * @return void
      */
     public function __construct(

@@ -18,22 +18,22 @@ class OrderController extends Controller
     /**
      * OrderrRepository object
      *
-     * @var Object
+     * @var \Webkul\Sales\Repositories\OrderRepository
      */
     protected $orderRepository;
 
     /**
      * InvoiceRepository object
      *
-     * @var Object
+     * @var \Webkul\Sales\Repositories\InvoiceRepository
      */
     protected $invoiceRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Order\Repositories\OrderRepository   $orderRepository
-     * @param  \Webkul\Order\Repositories\InvoiceRepository $invoiceRepository
+     * @param  \Webkul\Order\Repositories\OrderRepository  $orderRepository
+     * @param  \Webkul\Order\Repositories\InvoiceRepository  $invoiceRepository
      * @return void
      */
     public function __construct(

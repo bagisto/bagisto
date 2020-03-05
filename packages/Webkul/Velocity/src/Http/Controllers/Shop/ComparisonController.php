@@ -15,34 +15,33 @@ use Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository;
 class ComparisonController extends Controller
 {
     /**
-     * Webkul\Velocity\Helpers\Helper object
+     * Helper object
      *
-     * @var Helper
-    */
+     * @var \Webkul\Velocity\Helpers\Helper
+     */
     protected $velocityHelper;
 
     /**
-     * Webkul\Product\Repositories\ProductRepository object
+     * ProductRepository object
      *
-     * @var ProductRepository
-    */
+     * @var \Webkul\Product\Repositories\ProductRepository
+     */
     protected $productRepository;
 
     /**
-     * Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository object of repository
+     * VelocityCustomerCompareProductRepository object of repository
      *
-     * @var VelocityCustomerCompareProductRepository
-    */
+     * @var \Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository
+     */
     protected $velocityCompareProductsRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Product\Repositories\ProductRepository $productRepository
-     * @param  \Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository $velocityCompareProductsRepository
-     *
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository  $velocityCompareProductsRepository
      * @return void
-    */
+     */
     public function __construct(
         Helper $velocityHelper,
         ProductRepository $productRepository,
@@ -51,15 +50,17 @@ class ComparisonController extends Controller
         $this->_config = request('_config');
 
         $this->velocityHelper = $velocityHelper;
+
         $this->productRepository = $productRepository;
+
         $this->velocityCompareProductsRepository = $velocityCompareProductsRepository;
     }
 
     /**
      * function for customers to get products in comparison.
      *
-     * @return Mixed
-    */
+     * @return \Illuminate\Http\Response|\Illuminate\View\View
+     */
     public function getComparisonList()
     {
         if (request()->get('data')) {
@@ -121,11 +122,12 @@ class ComparisonController extends Controller
     /**
      * function for customers to add product in comparison.
      *
-     * @return json
-    */
+     * @return \Illuminate\Http\Response
+     */
     public function addCompareProduct()
     {
         $productId = request()->get('productId');
+
         $customerId = auth()->guard('customer')->user()->id;
 
         $compareProduct = $this->velocityCompareProductsRepository->findOneByField([
@@ -157,8 +159,8 @@ class ComparisonController extends Controller
     /**
      * function for customers to delete product in comparison.
      *
-     * @return json
-    */
+     * @return \Illuminate\Http\Response
+     */
     public function deleteComparisonProduct()
     {
         // either delete all or individual

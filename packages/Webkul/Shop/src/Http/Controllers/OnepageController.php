@@ -22,20 +22,22 @@ class OnepageController extends Controller
     /**
      * OrderRepository object
      *
-     * @var array
+     * @var \Webkul\Sales\Repositories\OrderRepository
      */
     protected $orderRepository;
 
      /**
      * customerRepository instance object
+     * 
+     * @var \Webkul\Customer\Repositories\CustomerRepository
      */
     protected $customerRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Attribute\Repositories\OrderRepository   $orderRepository
-     * @param  \Webkul\Customer\Repositories\CustomerRepository $customerRepository
+     * @param  \Webkul\Attribute\Repositories\OrderRepository  $orderRepository
+     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
      * @return void
      */
     public function __construct(
@@ -82,7 +84,7 @@ class OnepageController extends Controller
     /**
      * Return order short summary
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Http\Response
     */
     public function summary()
     {
@@ -96,7 +98,7 @@ class OnepageController extends Controller
     /**
      * Saves customer address.
      *
-     * @param  \Webkul\Checkout\Http\Requests\CustomerAddressForm $request
+     * @param  \Webkul\Checkout\Http\Requests\CustomerAddressForm  $request
      * @return \Illuminate\Http\Response
     */
     public function saveAddress(CustomerAddressForm $request)
@@ -150,7 +152,7 @@ class OnepageController extends Controller
     /**
      * Saves payment method.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Response
     */
     public function savePayment()
     {
@@ -222,7 +224,7 @@ class OnepageController extends Controller
     /**
      * Validate order before creation
      *
-     * @return mixed
+     * @return void|\Exception
      */
     public function validateOrder()
     {
@@ -248,7 +250,7 @@ class OnepageController extends Controller
     /**
      * Check Customer is exist or not
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function checkExistCustomer()
     {
@@ -266,7 +268,7 @@ class OnepageController extends Controller
     /**
      * Login for checkout
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function loginForCheckout()
     {
@@ -286,7 +288,7 @@ class OnepageController extends Controller
     /**
      * To apply couponable rule requested
      *
-     * @return JSON
+     * @return \Illuminate\Http\Response
      */
     public function applyCoupon()
     {
@@ -320,7 +322,7 @@ class OnepageController extends Controller
     /**
      * Initiates the removal of couponable cart rule
      *
-     * @return Void
+     * @return array
      */
     public function removeCoupon()
     {

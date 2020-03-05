@@ -23,7 +23,7 @@ class OrderController extends Controller
     /**
      * OrderRepository object
      *
-     * @var array
+     * @var \Webkul\Sales\Repositories\OrderRepository
      */
     protected $orderRepository;
 

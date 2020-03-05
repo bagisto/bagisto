@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
-use Webkul\Product\Helpers\ProductType;
 use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Helpers\ProductType;
 use Webkul\Product\Models\ProductAttributeValue;
 
 /**
@@ -23,40 +23,40 @@ class ProductFlat
     /**
      * AttributeRepository Repository Object
      *
-     * @var object
+     * @var \Webkul\Attribute\Repositories\AttributeRepository
      */
     protected $attributeRepository;
 
     /**
      * AttributeOptionRepository Repository Object
      *
-     * @var object
+     * @var \Webkul\Attribute\Repositories\AttributeOptionRepository
      */
     protected $attributeOptionRepository;
 
     /**
      * ProductFlatRepository Repository Object
      *
-     * @var object
+     * @var \Webkul\Product\Repositories\ProductFlatRepository
      */
     protected $productFlatRepository;
 
     /**
      * ProductAttributeValueRepository Repository Object
      *
-     * @var object
+     * @var \Webkul\Product\Repositories\ProductAttributeValueRepository
      */
     protected $productAttributeValueRepository;
 
     /**
      * Attribute Object
      *
-     * @var object
+     * @var \Webkul\Attribute\Contracts\Attribute
      */
     protected $attribute;
 
     /**
-     * @var object
+     * @var array
      */
     public $attributeTypeFields = [
         'text'        => 'text',
@@ -75,10 +75,10 @@ class ProductFlat
     /**
      * Create a new listener instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeRepository           $attributeRepository
-     * @param  Webkul\Attribute\Repositories\AttributeOptionRepository     $attributeOptionRepository
-     * @param  Webkul\Product\Repositories\ProductFlatRepository           $productFlatRepository
-     * @param  Webkul\Product\Repositories\ProductAttributeValueRepository $productAttributeValueRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeOptionRepository  $attributeOptionRepository
+     * @param  \Webkul\Product\Repositories\ProductFlatRepository  $productFlatRepository
+     * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $productAttributeValueRepository
      * @return void
      */
     public function __construct(
@@ -100,6 +100,7 @@ class ProductFlat
     /**
      * After the attribute is created
      *
+     * @param  \Webkul\Attribute\Contracts\Attribute  $attribute
      * @return void
      */
     public function afterAttributeCreatedUpdated($attribute)
@@ -124,6 +125,12 @@ class ProductFlat
         }
     }
 
+    /**
+     * After the attribute is deleted
+     *
+     * @param  int  $attributeId
+     * @return void
+     */
     public function afterAttributeDeleted($attributeId)
     {
         $attribute = $this->attributeRepository->find($attributeId);
@@ -142,7 +149,7 @@ class ProductFlat
     /**
      * Creates product flat
      *
-     * @param Product $product
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @return void
      */
     public function afterProductCreatedUpdated($product)
@@ -159,8 +166,8 @@ class ProductFlat
     /**
      * Creates product flat
      *
-     * @param Product $product
-     * @param Product $parentProduct
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  \Webkul\Product\Contracts\Product  $parentProduct
      * @return void
      */
     public function createFlat($product, $parentProduct = null)

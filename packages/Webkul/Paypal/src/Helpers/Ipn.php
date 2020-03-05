@@ -23,29 +23,29 @@ class Ipn
     /**
      * Order object
      *
-     * @var object
+     * @var \Webkul\Sales\Contracts\Order
      */
     protected $order;
 
     /**
      * OrderRepository object
      *
-     * @var object
+     * @var \Webkul\Sales\Repositories\OrderRepository
      */
     protected $orderRepository;
 
     /**
      * InvoiceRepository object
      *
-     * @var object
+     * @var \Webkul\Sales\Repositories\InvoiceRepository
      */
     protected $invoiceRepository;
 
     /**
      * Create a new helper instance.
      *
-     * @param  Webkul\Sales\Repositories\OrderRepository   $orderRepository
-     * @param  Webkul\Sales\Repositories\InvoiceRepository $invoiceRepository
+     * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
+     * @param  \Webkul\Sales\Repositories\InvoiceRepository  $invoiceRepository
      * @return void
      */
     public function __construct(
@@ -61,15 +61,16 @@ class Ipn
     /**
      * This function process the ipn sent from paypal end
      *
-     * @param array $post
-     * @return void
+     * @param  array  $post
+     * @return null|void|\Exception
      */
     public function processIpn($post)
     {
         $this->post = $post;
 
-        if (! $this->postBack())
+        if (! $this->postBack()) {
             return;
+        }
 
         try {
             if (isset($this->post['txn_type']) && 'recurring_payment' == $this->post['txn_type']) {
@@ -87,7 +88,6 @@ class Ipn
     /**
      * Load order via ipn invoice id
      *
-     *
      * @return void
      */
     protected function getOrder()
@@ -99,7 +99,6 @@ class Ipn
 
     /**
      * Process order and create invoice
-     *
      *
      * @return void
      */
@@ -121,13 +120,12 @@ class Ipn
     /**
      * Prepares order's invoice data for creation
      *
-     *
      * @return array
      */
     protected function prepareInvoiceData()
     {
         $invoiceData = [
-            "order_id" => $this->order->id
+            "order_id" => $this->order->id,
         ];
 
         foreach ($this->order->items as $item) {
@@ -140,7 +138,7 @@ class Ipn
     /**
      * Post back to PayPal to check whether this request is a valid one
      *
-     * @param Zend_Http_Client_Adapter_Interface $httpAdapter
+     * @return bool
      */
     protected function postBack()
     {
@@ -150,22 +148,19 @@ class Ipn
             $url = 'https://www.paypal.com/cgi-bin/webscr';
         }
 
-        // Set up request to PayPal
         $request = curl_init();
-        curl_setopt_array($request, array
-        (
-            CURLOPT_URL => $url,
-            CURLOPT_POST => TRUE,
-            CURLOPT_POSTFIELDS => http_build_query(array('cmd' => '_notify-validate') + $this->post),
+
+        curl_setopt_array($request, [
+            CURLOPT_URL            => $url,
+            CURLOPT_POST           => TRUE,
+            CURLOPT_POSTFIELDS     => http_build_query(array('cmd' => '_notify-validate') + $this->post),
             CURLOPT_RETURNTRANSFER => TRUE,
-            CURLOPT_HEADER => FALSE,
-        ));
+            CURLOPT_HEADER         => FALSE,
+        ]);
 
-        // Execute request and get response and status code
         $response = curl_exec($request);
-        $status   = curl_getinfo($request, CURLINFO_HTTP_CODE);
+        $status = curl_getinfo($request, CURLINFO_HTTP_CODE);
 
-        // Close connection
         curl_close($request);
 
         if ($status == 200 && $response == 'VERIFIED') {

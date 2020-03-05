@@ -16,24 +16,26 @@ use Webkul\Product\Repositories\ProductRepository;
 class CartController extends Controller
 {
     /**
-     * Webkul\Velocity\Helpers\Helper object
+     * Helper object
      *
-     * @var Helper
+     * @var \Webkul\Velocity\Helpers\Helper
     */
     protected $velocityHelper;
 
     /**
-     * Webkul\Product\Repositories\ProductRepository object
+     * ProductRepository object
      *
-     * @var ProductRepository
+     * @var \Webkul\Product\Repositories\ProductRepository
     */
     protected $productRepository;
 
     /**
      * Create a new controller instance.
      *
+     * @param  \Webkul\Velocity\Helpers\Helper  $velocityHelper
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      * @return void
-    */
+     */
     public function __construct(
         Helper $velocityHelper,
         ProductRepository $productRepository
@@ -41,13 +43,14 @@ class CartController extends Controller
         $this->_config = request('_config');
 
         $this->velocityHelper = $velocityHelper;
+
         $this->productRepository = $productRepository;
     }
 
     /**
      * Retrives the mini cart details
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
     */
     public function getMiniCartDetails()
     {
@@ -87,7 +90,7 @@ class CartController extends Controller
     /**
      * Function for guests user to add the product in the cart.
      *
-     * @return Mixed
+     * @return array
     */
     public function addProductToCart()
     {
@@ -145,8 +148,8 @@ class CartController extends Controller
     /**
      * Removes the item from the cart if it exists
      *
-     * @param integer $itemId
-     * @return Response
+     * @param  int  $itemId
+     * @return \Illuminate\Http\Response
     */
     public function removeProductFromCart($itemId)
     {

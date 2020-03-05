@@ -24,7 +24,7 @@ class BookingProductEventTicketRepository extends Repository
     }
 
     /**
-     * @param  array                                            $data
+     * @param  array  $data
      * @param  \Webkul\BookingProduct\Contracts\BookingProduct  $bookingProduct
      * @return void
      */

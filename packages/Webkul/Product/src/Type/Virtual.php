@@ -33,21 +33,21 @@ class Virtual extends AbstractType
     /**
      * Is a stokable product type
      *
-     * @var boolean
+     * @var bool
      */
     protected $isStockable = false;
 
     /**
      * Show quantity box
      *
-     * @var boolean
+     * @var bool
      */
     protected $showQuantityBox = true;
 
     /**
      * Return true if this product type is saleable
      *
-     * @return boolean
+     * @return bool
      */
     public function isSaleable()
     {
@@ -63,7 +63,7 @@ class Virtual extends AbstractType
     }
 
     /**
-     * @param integer $qty
+     * @param  int  $qty
      * @return bool
      */
     public function haveSufficientQuantity($qty)

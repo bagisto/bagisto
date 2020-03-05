@@ -27,14 +27,14 @@ class TaxRateController extends Controller
     /**
      * TaxRateRepository object
      *
-     * @var Object
+     * @var \Webkul\Tax\Repositories\TaxRateRepository
      */
     protected $taxRateRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Tax\Repositories\TaxRateRepository $taxRateRepository
+     * @param  \Webkul\Tax\Repositories\TaxRateRepository  $taxRateRepository
      * @return void
      */
     public function __construct(TaxRateRepository $taxRateRepository)
@@ -49,8 +49,8 @@ class TaxRateController extends Controller
      *
      * @return \Illuminate\View\View
      */
-
-    public function index() {
+    public function index()
+    {
         return view($this->_config['view']);
     }
 
@@ -67,7 +67,7 @@ class TaxRateController extends Controller
     /**
      * Create the tax rate
      *
-     * @return mixed
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -103,6 +103,7 @@ class TaxRateController extends Controller
     /**
      * Show the edit form for the previously created tax rates.
      *
+     * @param  int  $id
      * @return \Illuminate\View\View
      */
     public function edit($id)
@@ -113,10 +114,10 @@ class TaxRateController extends Controller
     }
 
     /**
-     * Edit the previous
-     * tax rate
+     * Edit the previous tax rate
      *
-     * @return mixed
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
     public function update($id)
     {
@@ -172,8 +173,8 @@ class TaxRateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function import() {
-
+    public function import()
+    {
         $valid_extension = ['xlsx', 'csv', 'xls'];
 
         if (! in_array(request()->file('file')->getClientOriginalExtension(), $valid_extension)) {

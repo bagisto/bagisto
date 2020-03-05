@@ -25,21 +25,21 @@ class ShipmentController extends Controller
     /**
      * OrderRepository object
      *
-     * @var mixed
+     * @var \Webkul\Sales\Repositories\OrderRepository
      */
     protected $orderRepository;
 
     /**
      * OrderItemRepository object
      *
-     * @var mixed
+     * @var \Webkul\Sales\Repositories\OrderItemRepository
      */
     protected $orderItemRepository;
 
     /**
      * ShipmentRepository object
      *
-     * @var mixed
+     * @var \Webkul\Sales\Repositories\ShipmentRepository
      */
     protected $shipmentRepository;
 
@@ -139,7 +139,7 @@ class ShipmentController extends Controller
      * Checks if requested quantity available or not
      *
      * @param  array  $data
-     * @return boolean
+     * @return bool
      */
     public function isInventoryValidate(&$data)
     {

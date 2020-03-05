@@ -36,8 +36,8 @@ class CustomerGroupRepository extends Repository
     }
 
     /**
-     * @param  array   $data
-     * @param  int     $id
+     * @param  array  $data
+     * @param  int  $id
      * @param  string  $id
      * @return \Webkul\Customer\Contracts\CustomerGroup
      */

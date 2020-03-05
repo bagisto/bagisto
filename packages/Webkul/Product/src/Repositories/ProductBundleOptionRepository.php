@@ -17,14 +17,15 @@ class ProductBundleOptionRepository extends Repository
     /**
      * ProductBundleOptionProductRepository object
      *
-     * @var ProductBundleOptionProductRepository
+     * @var \Webkul\Product\Repositories\ProductBundleOptionProductRepository
      */
     protected $productBundleOptionProductRepository;
 
     /**
-     * Create a new controller instance.
+     * Create a new repository instance.
      *
-     * @param  Webkul\Product\Repositories\ProductBundleOptionProductRepository $productBundleOptionProductRepository
+     * @param  Webkul\Product\Repositories\ProductBundleOptionProductRepository  $productBundleOptionProductRepository
+     * @param  \Illuminate\Container\Container  $app
      * @return void
      */
     public function __construct(
@@ -37,14 +38,19 @@ class ProductBundleOptionRepository extends Repository
         parent::__construct($app);
     }
 
+    /**
+     * Specify Model class name
+     *
+     * @return string
+     */
     public function model()
     {
         return 'Webkul\Product\Contracts\ProductBundleOption';
     }
 
     /**
-     * @param array   $data
-     * @param Product $product
+     * @param  array  $data
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @return void
      */
     public function saveBundleOptons($data, $product)
