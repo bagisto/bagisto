@@ -3,7 +3,7 @@
 namespace Webkul\CatalogRule\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
-x
+
 class CatalogRuleProductPriceRepository extends Repository
 {
     /**
