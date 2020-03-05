@@ -52,13 +52,13 @@ class Booking
     /**
      * Create a new helper instance.
      *
-     * @param  \Webkul\BookingProduct\Repositories\BookingProductRepository                 $bookingProductRepository
-     * @param  \Webkul\BookingProduct\Repositories\BookingProductDefaultSlotRepository      $bookingProductDefaultSlotRepository
+     * @param  \Webkul\BookingProduct\Repositories\BookingProductRepository  $bookingProductRepository
+     * @param  \Webkul\BookingProduct\Repositories\BookingProductDefaultSlotRepository  $bookingProductDefaultSlotRepository
      * @param  \Webkul\BookingProduct\Repositories\BookingProductAppointmentSlotRepository  $bookingProductAppointmentSlotRepository
-     * @param  \Webkul\BookingProduct\Repositories\BookingProductEventTicketRepository      $bookingProductEventTicketRepository
-     * @param  \Webkul\BookingProduct\Repositories\BookingProductRentalSlotRepository       $bookingProductRentalSlotRepository
-     * @param  \Webkul\BookingProduct\Repositories\BookingProductTableSlotRepository        $bookingProductTableSlotRepository
-     * @param  \Webkul\BookingProduct\Repositories\BookingRepository                        $bookingRepository
+     * @param  \Webkul\BookingProduct\Repositories\BookingProductEventTicketRepository  $bookingProductEventTicketRepository
+     * @param  \Webkul\BookingProduct\Repositories\BookingProductRentalSlotRepository  $bookingProductRentalSlotRepository
+     * @param  \Webkul\BookingProduct\Repositories\BookingProductTableSlotRepository  $bookingProductTableSlotRepository
+     * @param  \Webkul\BookingProduct\Repositories\BookingRepository  $bookingRepository
      * @return void
      */
     public function __construct(
