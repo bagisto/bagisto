@@ -43,10 +43,10 @@ class CatalogRuleRepository extends Repository
      * Create a new repository instance.
      *
      * @param  \Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamilyRepository
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository        $attributeRepository
-     * @param  \Webkul\Category\Repositories\CategoryRepository          $categoryRepository
-     * @param  \Webkul\Tax\Repositories\TaxCategoryRepository            $taxCategoryRepository
-     * @param  \Illuminate\Container\Container                           $app
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
+     * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
+     * @param  \Webkul\Tax\Repositories\TaxCategoryRepository  $taxCategoryRepository
+     * @param  \Illuminate\Container\Container  $app
      * @return void
      */
     public function __construct(

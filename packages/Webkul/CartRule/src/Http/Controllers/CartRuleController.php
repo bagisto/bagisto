@@ -33,7 +33,7 @@ class CartRuleController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\CartRule\Repositories\CartRuleRepository        $cartRuleRepository
+     * @param  \Webkul\CartRule\Repositories\CartRuleRepository $cartRuleRepository
      * @param  \Webkul\CartRule\Repositories\CartRuleCouponRepository  $cartRuleCouponRepository
      *
      * @return void

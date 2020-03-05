@@ -67,13 +67,13 @@ class Core
     /**
      * Create a new instance.
      *
-     * @param  \Webkul\Core\Repositories\ChannelRepository       $channelRepository
-     * @param  \Webkul\Core\Repositories\CurrencyRepository      $currencyRepository
+     * @param  \Webkul\Core\Repositories\ChannelRepository  $channelRepository
+     * @param  \Webkul\Core\Repositories\CurrencyRepository  $currencyRepository
      * @param  \Webkul\Core\Repositories\ExchangeRateRepository  $exchangeRateRepository
-     * @param  \Webkul\Core\Repositories\CountryRepository       $countryRepository
+     * @param  \Webkul\Core\Repositories\CountryRepository  $countryRepository
      * @param  \Webkul\Core\Repositories\CountryStateRepository  $countryStateRepository
-     * @param  \Webkul\Core\Repositories\LocaleRepository        $localeRepository
-     * @param  \Webkul\Core\Repositories\CoreConfigRepository    $coreConfigRepository
+     * @param  \Webkul\Core\Repositories\LocaleRepository  $localeRepository
+     * @param  \Webkul\Core\Repositories\CoreConfigRepository  $coreConfigRepository
      *
      * @return void
      */

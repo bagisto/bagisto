@@ -28,7 +28,7 @@ class AttributeFamilyRepository extends Repository
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository       $attributeRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
      * @param  \Webkul\Attribute\Repositories\AttributeGroupRepository  $attributeGroupRepository
      * @return void
      */

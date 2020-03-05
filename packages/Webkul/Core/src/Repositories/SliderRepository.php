@@ -22,7 +22,7 @@ class SliderRepository extends Repository
      * Create a new repository instance.
      *
      * @param  \Webkul\Core\Repositories\ChannelRepository  $channelRepository
-     * @param  \Illuminate\Container\Container              $channelRepository
+     * @param  \Illuminate\Container\Container  $channelRepository
      * @return void
      */
     public function __construct(

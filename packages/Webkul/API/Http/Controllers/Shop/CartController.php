@@ -42,7 +42,7 @@ class CartController extends Controller
     /**
      * Controller instance
      *
-     * @param  \Webkul\Checkout\Repositories\CartRepository      $cartRepository
+     * @param  \Webkul\Checkout\Repositories\CartRepository  $cartRepository
      * @param  \Webkul\Checkout\Repositories\CartItemRepository  $cartItemRepository
      * @param  \Webkul\Checkout\Repositories\WishlistRepository  $wishlistRepository
      */

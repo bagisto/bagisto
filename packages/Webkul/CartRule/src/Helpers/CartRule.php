@@ -64,12 +64,12 @@ class CartRule
     /**
      * Create a new helper instance.
      *
-     * @param  \Webkul\CartRule\Repositories\CartRuleRepository             $cartRuleRepository
-     * @param  \Webkul\CartRule\Repositories\CartRuleCouponRepository       $cartRuleCouponRepository
+     * @param  \Webkul\CartRule\Repositories\CartRuleRepository  $cartRuleRepository
+     * @param  \Webkul\CartRule\Repositories\CartRuleCouponRepository  $cartRuleCouponRepository
      * @param  \Webkul\CartRule\Repositories\CartRuleCouponUsageRepository  $cartRuleCouponUsageRepository
-     * @param  \Webkul\CartRule\Repositories\CartRuleCustomerRepository     $cartRuleCustomerRepository
-     * @param  \Webkul\Customer\Repositories\CustomerGroupRepository        $customerGroupRepository
-     * @param  \Webkul\Rule\Helpers\Validator                               $validator
+     * @param  \Webkul\CartRule\Repositories\CartRuleCustomerRepository  $cartRuleCustomerRepository
+     * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository
+     * @param  \Webkul\Rule\Helpers\Validator  $validator
      *
      * @return void
      */

@@ -23,7 +23,8 @@ class SubscribersListRepository extends Repository
      * @param  int  $id
      * @return bool
      */
-    public function destroy($id) {
+    public function destroy($id)
+    {
         return $this->model->destroy($id);
     }
 }

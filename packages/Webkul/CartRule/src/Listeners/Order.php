@@ -40,9 +40,9 @@ class Order
     /**
      * Create a new listener instance.
      *
-     * @param  \Webkul\CartRule\Repositories\CartRuleRepository             $cartRuleRepository
-     * @param  \Webkul\CartRule\Repositories\CartRuleCustomerRepository     $cartRuleCustomerRepository
-     * @param  \Webkul\CartRule\Repositories\CartRuleCouponRepository       $cartRuleCouponRepository
+     * @param  \Webkul\CartRule\Repositories\CartRuleRepository  $cartRuleRepository
+     * @param  \Webkul\CartRule\Repositories\CartRuleCustomerRepository  $cartRuleCustomerRepository
+     * @param  \Webkul\CartRule\Repositories\CartRuleCouponRepository  $cartRuleCouponRepository
      * @param  \Webkul\CartRule\Repositories\CartRuleCouponUsageRepository  $cartRuleCouponUsageRepository
      * @return void
      */

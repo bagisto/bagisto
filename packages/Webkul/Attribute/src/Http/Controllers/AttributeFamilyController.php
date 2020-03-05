@@ -32,7 +32,7 @@ class AttributeFamilyController extends Controller
      * Create a new controller instance.
      *
      * @param  \Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamilyRepository
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository        $attributeRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
      * @return void
      */
     public function __construct(

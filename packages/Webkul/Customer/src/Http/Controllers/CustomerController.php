@@ -32,7 +32,7 @@ class CustomerController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Customer\Repositories\CustomerRepository      $customer
+     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customer
      * @param  \Webkul\Product\Repositories\ProductReviewRepository  $productReview
      * @return void
      */

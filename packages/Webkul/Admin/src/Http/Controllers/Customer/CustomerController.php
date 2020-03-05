@@ -42,9 +42,9 @@ class CustomerController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param \Webkul\Customer\Repositories\CustomerRepository       $customerRepository
+     * @param \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
      * @param \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository
-     * @param \Webkul\Core\Repositories\ChannelRepository            $channelRepository
+     * @param \Webkul\Core\Repositories\ChannelRepository  $channelRepository
      */
     public function __construct(
         CustomerRepository $customerRepository,

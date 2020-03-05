@@ -31,8 +31,8 @@ class CatalogRuleIndex
     /**
      * Create a new helper instance.
      *
-     * @param  \Webkul\CatalogRule\Repositories\CatalogRuleRepository      $catalogRuleRepository
-     * @param  \Webkul\CatalogRuleProduct\Helpers\CatalogRuleProduct       $catalogRuleProductHelper
+     * @param  \Webkul\CatalogRule\Repositories\CatalogRuleRepository  $catalogRuleRepository
+     * @param  \Webkul\CatalogRuleProduct\Helpers\CatalogRuleProduct  $catalogRuleProductHelper
      * @param  \Webkul\CatalogRuleProduct\Helpers\CatalogRuleProductPrice  $catalogRuleProductPriceHelper
      * @return void
      */

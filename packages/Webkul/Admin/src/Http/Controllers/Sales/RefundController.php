@@ -40,9 +40,9 @@ class RefundController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Sales\Repositories\OrderRepository      $orderRepository
+     * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
      * @param  \Webkul\Sales\Repositories\OrderItemRepository  $orderItemRepository
-     * @param  \Webkul\Sales\Repositories\RefundRepository     $refundRepository
+     * @param  \Webkul\Sales\Repositories\RefundRepository  $refundRepository
      * @return void
      */
     public function __construct(

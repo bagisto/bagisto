@@ -33,7 +33,7 @@ class InvoiceController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Sales\Repositories\OrderRepository    $orderRepository
+     * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
      * @param  \Webkul\Sales\Repositories\InvoiceRepository  $invoiceRepository
      * @return void
      */

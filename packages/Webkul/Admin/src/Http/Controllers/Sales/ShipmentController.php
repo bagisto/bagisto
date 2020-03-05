@@ -41,7 +41,7 @@ class ShipmentController extends Controller
      * Create a new controller instance.
      *
      * @param  \Webkul\Sales\Repositories\ShipmentRepository   $shipmentRepository
-     * @param  \Webkul\Sales\Repositories\OrderRepository      $orderRepository
+     * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
      * @param  \Webkul\Sales\Repositories\OrderitemRepository  $orderItemRepository
      * @return void
      */

@@ -33,7 +33,7 @@ class CategoryController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Category\Repositories\CategoryRepository    $categoryRepository
+     * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
      * @return void
      */

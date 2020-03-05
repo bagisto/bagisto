@@ -34,7 +34,7 @@ class CatalogRuleController extends Controller
      * Create a new controller instance.
      *
      * @param  \Webkul\CatalogRule\Repositories\CatalogRuleRepository  $catalogRuleRepository
-     * @param  \Webkul\CatalogRule\Helpers\CatalogRuleIndex            $catalogRuleIndexHelper
+     * @param  \Webkul\CatalogRule\Helpers\CatalogRuleIndex  $catalogRuleIndexHelper
      * @return void
      */
     public function __construct(

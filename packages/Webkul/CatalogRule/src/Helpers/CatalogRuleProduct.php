@@ -42,10 +42,10 @@ class CatalogRuleProduct
     /**
      * Create a new helper instance.
      *
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository             $attributeRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository                 $productRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      * @param  \Webkul\CatalogRule\Repositories\CatalogRuleProductRepository  $catalogRuleProductRepository
-     * @param  \Webkul\Rule\Helpers\Validator                                 $validator
+     * @param  \Webkul\Rule\Helpers\Validator  $validator
      * @return void
      */
     public function __construct(

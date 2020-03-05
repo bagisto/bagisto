@@ -66,13 +66,13 @@ class CartRuleRepository extends Repository
      * Create a new repository instance.
      *
      * @param  \Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamilyRepository
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository        $attributeRepository
-     * @param  \Webkul\Category\Repositories\CategoryRepository          $categoryRepository
-     * @param  \Webkul\CartRule\Repositories\CartRuleCouponRepository    $cartRuleCouponRepository
-     * @param  \Webkul\Tax\Repositories\TaxCategoryRepository            $taxCategoryRepository
-     * @param  \Webkul\Core\Repositories\CountryRepository               $countryRepository
-     * @param  \Webkul\Core\Repositories\CountryStateRepository          $countryStateRepository
-     * @param  \Illuminate\Container\Container                           $app
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
+     * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
+     * @param  \Webkul\CartRule\Repositories\CartRuleCouponRepository  $cartRuleCouponRepository
+     * @param  \Webkul\Tax\Repositories\TaxCategoryRepository  $taxCategoryRepository
+     * @param  \Webkul\Core\Repositories\CountryRepository  $countryRepository
+     * @param  \Webkul\Core\Repositories\CountryStateRepository  $countryStateRepository
+     * @param  \Illuminate\Container\Container  $app
      * @return void
      */
     public function __construct(

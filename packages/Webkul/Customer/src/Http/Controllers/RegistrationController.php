@@ -38,7 +38,7 @@ class RegistrationController extends Controller
     /**
      * Create a new Repository instance.
      *
-     * @param  \Webkul\Customer\Repositories\CustomerRepository       $customer
+     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customer
      * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository
      *
      * @return void

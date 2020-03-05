@@ -33,7 +33,7 @@ class WishlistController extends Controller
      * Create a new controller instance.
      *
      * @param  \Webkul\Customer\Repositories\WishlistRepository  $wishlistRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository    $productRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      * @return void
      */
     public function __construct(

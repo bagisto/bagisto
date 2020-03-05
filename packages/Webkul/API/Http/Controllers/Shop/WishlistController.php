@@ -27,7 +27,7 @@ class WishlistController extends Controller
 
     /**
      * @param  \Webkul\Customer\Repositories\WishlistRepository  $wishlistRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository    $productRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      */
     public function __construct(
         WishlistRepository $wishlistRepository,

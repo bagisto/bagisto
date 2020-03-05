@@ -77,9 +77,9 @@ class DashboardController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Sales\Repositories\OrderRepository               $orderRepository
-     * @param  \Webkul\Sales\Repositories\OrderItemRepository           $orderItemRepository
-     * @param  \Webkul\Customer\Repositories\CustomerRepository         $customerRepository
+     * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
+     * @param  \Webkul\Sales\Repositories\OrderItemRepository  $orderItemRepository
+     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
      * @param  \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
      * @return void
      */

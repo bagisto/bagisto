@@ -33,7 +33,7 @@ class ExchangeRateController extends Controller
      * Create a new controller instance.
      *
      * @param  \Webkul\Core\Repositories\ExchangeRateRepository  $exchangeRateRepository
-     * @param  \Webkul\Core\Repositories\CurrencyRepository      $currencyRepository
+     * @param  \Webkul\Core\Repositories\CurrencyRepository  $currencyRepository
      * @return void
      */
     public function __construct(

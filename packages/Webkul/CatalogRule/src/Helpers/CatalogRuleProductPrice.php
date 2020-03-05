@@ -33,8 +33,8 @@ class CatalogRuleProductPrice
      * Create a new helper instance.
      *
      * @param  \Webkul\Attribute\Repositories\CatalogRuleProductPriceRepository  $catalogRuleProductPriceRepository
-     * @param  \Webkul\CatalogRule\Repositories\CatalogRuleProduct               $catalogRuleProductHelper
-     * @param  \Webkul\Customer\Repositories\CustomerGroupRepository             $customerGroupRepository
+     * @param  \Webkul\CatalogRule\Repositories\CatalogRuleProduct  $catalogRuleProductHelper
+     * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository
      * @return void
      */
     public function __construct(
