@@ -57,9 +57,9 @@
                             `${this.__('customer.compare.added')}`
                         );
                     }
-
-                    this.$root.headerItemsCount++;
                 }
+
+                this.$root.headerItemsCount++;
             }
         }
     }
