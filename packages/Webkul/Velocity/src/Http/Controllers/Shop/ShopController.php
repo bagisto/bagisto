@@ -189,7 +189,7 @@ class ShopController extends Controller
         if ($customer = auth()->guard('customer')->user()) {
             $wishlistItemsCount = $this->wishlistRepository->count([
                 'customer_id' => $customer->id,
-                'channel_id' => core()->getCurrentChannel()->id,
+                'channel_id'  => core()->getCurrentChannel()->id,
             ]);
 
             $comparedItemsCount = $this->compareProductsRepository->count([
@@ -220,7 +220,7 @@ class ShopController extends Controller
             $productCollection = $this->velocityHelper->fetchProductCollection($items);
 
             $response = [
-                'status' => 'success',
+                'status'   => 'success',
                 'products' => $productCollection,
             ];
         }

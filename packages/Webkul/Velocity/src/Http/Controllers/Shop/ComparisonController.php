@@ -17,6 +17,7 @@ class ComparisonController extends Controller
     {
         if (request()->get('data')) {
             $productSlugs = null;
+            
             $productCollection = [];
 
             if (auth()->guard('customer')->user()) {
