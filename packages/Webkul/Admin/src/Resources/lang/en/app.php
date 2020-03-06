@@ -213,7 +213,9 @@ return [
         'times-used' => 'Times Used',
         'created-date' => 'Created Date',
         'expiration-date' => 'Expiration Date',
+        'edit' => 'Edit',
         'delete' => 'Delete',
+        'view' => 'View',
         'rtl' => 'RTL',
         'ltr' => 'LTR',
         'update-status' => 'Update Status'

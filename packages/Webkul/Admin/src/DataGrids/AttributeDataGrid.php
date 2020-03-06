@@ -125,14 +125,14 @@ class AttributeDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'title'  => 'Edit Attribute',
+            'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.catalog.attributes.edit',
             'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
-            'title'  => 'Delete Attribute',
+            'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
             'route'  => 'admin.catalog.attributes.delete',
             'icon'  => 'icon trash-icon',

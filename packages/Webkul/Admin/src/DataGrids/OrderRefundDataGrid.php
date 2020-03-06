@@ -80,9 +80,10 @@ class OrderRefundDataGrid extends DataGrid
         ]);
     }
 
-    public function prepareActions() {
+    public function prepareActions()
+    {
         $this->addAction([
-            'title'  => 'Order Refund View',
+            'title'  => trans('admin::app.datagrid.view'),
             'method' => 'GET',
             'route'  => 'admin.sales.refunds.view',
             'icon'   => 'icon eye-icon',

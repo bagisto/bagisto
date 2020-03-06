@@ -144,14 +144,14 @@ class AddressDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'type'   => 'Edit',
+            'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.customer.addresses.edit',
             'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
-            'type'         => 'Delete',
+            'title'        => trans('admin::app.datagrid.delete'),
             'method'       => 'POST',
             'route'        => 'admin.customer.addresses.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'address']),
