@@ -67,9 +67,9 @@ class CategoryDataGrid extends DataGrid
             'filterable' => true,
             'wrapper'    => function($value) {
                 if ($value->status == 1) {
-                    return 'Active';
+                    return trans('admin::app.datagrid.active');
                 } else {
-                    return 'Inactive';
+                    return trans('admin::app.datagrid.inactive');
                 }
             },
         ]);

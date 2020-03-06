@@ -38,9 +38,9 @@ class NewsLetterDataGrid extends DataGrid
             'filterable' => true,
             'wrapper'    => function($value) {
                 if ($value->is_subscribed == 1) {
-                    return 'True';
+                    return trans('admin::app.datagrid.true');
                 } else {
-                    return 'False';
+                    return trans('admin::app.datagrid.false');
                 }
             },
         ]);
