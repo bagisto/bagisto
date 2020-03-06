@@ -46,8 +46,8 @@ class ComparisonController extends Controller
             }
 
             $response = [
-                'status'    => 'success',
-                'products'  => $productCollection,
+                'status'   => 'success',
+                'products' => $productCollection,
             ];
         } else {
             $response = view($this->_config['view']);
@@ -67,27 +67,16 @@ class ComparisonController extends Controller
 
         $customerId = auth()->guard('customer')->user()->id;
 
-<<<<<<< HEAD
-        $compareProduct = $this->velocityCompareProductsRepository->findOneByField([
-            'customer_id'     => $customerId,
-=======
         $compareProduct = $this->compareProductsRepository->findOneByField([
-            'customer_id' => $customerId,
->>>>>>> 276a2e288b172d3bacd05662b775a5b320185d51
+            'customer_id'     => $customerId,
             'product_flat_id' => $productId,
         ]);
 
         if (! $compareProduct) {
             // insert new row
-<<<<<<< HEAD
-            $this->velocityCompareProductsRepository->create([
+            $this->compareProductsRepository->create([
                 'customer_id'     => $customerId,
                 'product_flat_id' => $productId,
-=======
-            $this->compareProductsRepository->create([
-                'customer_id' => $customerId,
-                'product_flat_id'  => $productId,
->>>>>>> 276a2e288b172d3bacd05662b775a5b320185d51
             ]);
 
             return response()->json([
