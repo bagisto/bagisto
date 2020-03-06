@@ -4,52 +4,10 @@ namespace Webkul\Velocity\Http\Controllers\Shop;
 
 use Webkul\Velocity\Helpers\Helper;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository;
+use Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository as CustomerCompareProductRepository;
 
 class ComparisonController extends Controller
 {
-    /**
-     * Helper object
-     *
-     * @var \Webkul\Velocity\Helpers\Helper
-     */
-    protected $velocityHelper;
-
-    /**
-     * ProductRepository object
-     *
-     * @var \Webkul\Product\Repositories\ProductRepository
-     */
-    protected $productRepository;
-
-    /**
-     * VelocityCustomerCompareProductRepository object of repository
-     *
-     * @var \Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository
-     */
-    protected $velocityCompareProductsRepository;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
-     * @param  \Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository  $velocityCompareProductsRepository
-     * @return void
-     */
-    public function __construct(
-        Helper $velocityHelper,
-        ProductRepository $productRepository,
-        VelocityCustomerCompareProductRepository $velocityCompareProductsRepository
-    ) {
-        $this->_config = request('_config');
-
-        $this->velocityHelper = $velocityHelper;
-
-        $this->productRepository = $productRepository;
-
-        $this->velocityCompareProductsRepository = $velocityCompareProductsRepository;
-    }
-
     /**
      * function for customers to get products in comparison.
      *
@@ -62,7 +20,7 @@ class ComparisonController extends Controller
             $productCollection = [];
 
             if (auth()->guard('customer')->user()) {
-                $productCollection = $this->velocityCompareProductsRepository
+                $productCollection = $this->compareProductsRepository
                     ->leftJoin(
                         'product_flat',
                         'velocity_customer_compare_products.product_flat_id',
@@ -83,22 +41,7 @@ class ComparisonController extends Controller
             } else {
                 // for product details
                 if ($items = request()->get('items')) {
-                    $productSlugs = explode('&', $items);
-
-                    foreach ($productSlugs as $slug) {
-                        $product = $this->productRepository->findBySlug($slug);
-
-                        $formattedProduct = $this->velocityHelper->formatProduct($product);
-
-                        $productMetaDetails = [];
-                        $productMetaDetails['image'] = $formattedProduct['image'];
-                        $productMetaDetails['priceHTML'] = $formattedProduct['priceHTML'];
-                        $productMetaDetails['addToCartHtml'] = $formattedProduct['addToCartHtml'];
-
-                        $product = array_merge($product->toArray(), $productMetaDetails);
-
-                        array_push($productCollection, $product);
-                    }
+                    $productCollection = $this->velocityHelper->fetchProductCollection($items);
                 }
             }
 
@@ -124,16 +67,27 @@ class ComparisonController extends Controller
 
         $customerId = auth()->guard('customer')->user()->id;
 
+<<<<<<< HEAD
         $compareProduct = $this->velocityCompareProductsRepository->findOneByField([
             'customer_id'     => $customerId,
+=======
+        $compareProduct = $this->compareProductsRepository->findOneByField([
+            'customer_id' => $customerId,
+>>>>>>> 276a2e288b172d3bacd05662b775a5b320185d51
             'product_flat_id' => $productId,
         ]);
 
         if (! $compareProduct) {
             // insert new row
+<<<<<<< HEAD
             $this->velocityCompareProductsRepository->create([
                 'customer_id'     => $customerId,
                 'product_flat_id' => $productId,
+=======
+            $this->compareProductsRepository->create([
+                'customer_id' => $customerId,
+                'product_flat_id'  => $productId,
+>>>>>>> 276a2e288b172d3bacd05662b775a5b320185d51
             ]);
 
             return response()->json([
@@ -161,12 +115,12 @@ class ComparisonController extends Controller
         if (request()->get('productId') == 'all') {
             // delete all
             $customerId = auth()->guard('customer')->user()->id;
-            $this->velocityCompareProductsRepository->deleteWhere([
+            $this->compareProductsRepository->deleteWhere([
                 'customer_id' => auth()->guard('customer')->user()->id,
             ]);
         } else {
             // delete individual
-            $this->velocityCompareProductsRepository->deleteWhere([
+            $this->compareProductsRepository->deleteWhere([
                 'product_flat_id' => request()->get('productId'),
                 'customer_id'     => auth()->guard('customer')->user()->id,
             ]);

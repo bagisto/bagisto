@@ -25,16 +25,14 @@
                         );
                     });
                 } else {
-                    let updatedItems = [this.slug];
-                    let existingItems = window.localStorage.getItem('compared_product');
+                    let updatedItems = [this.productId];
+                    let existingItems = this.getStorageValue('compared_product');
 
                     if (existingItems) {
-                        existingItems = JSON.parse(existingItems);
+                        if (existingItems.indexOf(this.productId) == -1) {
+                            updatedItems = existingItems.concat(updatedItems);
 
-                        if (existingItems.indexOf(this.slug) == -1) {
-                            updatedItems = existingItems.concat([this.slug]);
-
-                            window.localStorage.setItem('compared_product', JSON.stringify(updatedItems));
+                            this.setStorageValue('compared_product', updatedItems);
 
                             window.showAlert(
                                 `alert-success`,
@@ -49,7 +47,7 @@
                             );
                         }
                     } else {
-                        window.localStorage.setItem('compared_product', JSON.stringify([this.slug]));
+                        this.setStorageValue('compared_product', updatedItems);
 
                         window.showAlert(
                             `alert-success`,
@@ -58,6 +56,8 @@
                         );
                     }
                 }
+
+                this.$root.headerItemsCount++;
             }
         }
     }

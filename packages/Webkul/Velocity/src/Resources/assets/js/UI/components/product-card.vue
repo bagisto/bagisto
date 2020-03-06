@@ -56,7 +56,10 @@
 
             <div class="product-price fs16" v-html="product.priceHTML"></div>
 
-            <div class="product-rating col-12 no-padding" v-if="product.totalReviews && product.totalReviews > 0">
+            <div
+                class="product-rating col-12 no-padding"
+                v-if="product.totalReviews && product.totalReviews > 0">
+
                 <star-ratings :ratings="product.avgRating"></star-ratings>
                 <a class="fs14 align-top unset active-hover" :href="`${$root.baseUrl}/reviews/${product.slug}`">
                     {{ __('products.reviews-count', {'totalReviews': product.totalReviews}) }}
@@ -67,7 +70,7 @@
                 <span class="fs14" v-text="product.firstReviewText"></span>
             </div>
 
-            <vnode-injector :nodes="$root.getDynamicHTML(product.addToCartHtml)"></vnode-injector>
+            <vnode-injector :nodes="getDynamicHTML(product.addToCartHtml)"></vnode-injector>
         </div>
     </div>
 </template>

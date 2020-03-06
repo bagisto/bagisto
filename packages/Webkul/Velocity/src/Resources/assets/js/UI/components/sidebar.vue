@@ -16,8 +16,8 @@
                 v-for="(category, categoryIndex) in slicedCategories">
 
                 <a
-                    :class="`category unset ${(category.children.length > 0) ? 'fw6' : ''}`"
-                    :href="`${$root.baseUrl}/${category.slug}`">
+                    :href="`${$root.baseUrl}/${category.slug}`"
+                    :class="`category unset ${(category.children.length > 0) ? 'fw6' : ''}`">
 
                     <div
                         class="category-icon"
@@ -59,8 +59,10 @@
                                     v-for="(subCategory, subCategoryIndex) in category.children">
 
                                     <a
-                                        :class="`category sub-category unset ${(subCategory.children.length > 0) ? 'fw6' : ''}`"
-                                        :href="`${$root.baseUrl}/${category.slug}/${subCategory.slug}`">
+                                        :id="`sidebar-level-link-2-${subCategoryIndex}`"
+                                        @mouseout="toggleSidebar(id, $event, 'mouseout')"
+                                        :href="`${$root.baseUrl}/${category.slug}/${subCategory.slug}`"
+                                        :class="`category sub-category unset ${(subCategory.children.length > 0) ? 'fw6' : ''}`">
 
                                         <div
                                             class="category-icon"
@@ -80,6 +82,7 @@
                                             v-for="(childSubCategory, childSubCategoryIndex) in subCategory.children">
 
                                             <a
+                                                :id="`sidebar-level-link-3-${childSubCategoryIndex}`"
                                                 :class="`category unset ${(subCategory.children.length > 0) ? 'fw6' : ''}`"
                                                 :href="`${$root.baseUrl}/${category.slug}/${subCategory.slug}/${childSubCategory.slug}`">
                                                 <span class="category-title">{{ childSubCategory.name }}</span>

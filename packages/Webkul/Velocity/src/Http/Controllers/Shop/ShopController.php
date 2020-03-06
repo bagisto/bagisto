@@ -3,90 +3,12 @@
 namespace Webkul\Velocity\Http\Controllers\Shop;
 
 use Illuminate\Http\Request;
-
-use Cart;
-use Webkul\Product\Helpers\ProductImage;
 use Webkul\Velocity\Http\Shop\Controllers;
 use Webkul\Checkout\Contracts\Cart as CartModel;
-use Webkul\Product\Repositories\SearchRepository;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Velocity\Repositories\Product\ProductRepository as VelocityProductRepository;
-use Webkul\Category\Repositories\CategoryRepository;
+use Cart;
 
 class ShopController extends Controller
 {
-    /**
-     * Contains route related configuration
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
-     * ProductImage object
-     *
-     * @var \Webkul\Product\Helpers\ProductImage
-    */
-    protected $productImageHelper;
-
-    /**
-     * SearchRepository object
-     *
-     * @var \Webkul\Product\Repositories\SearchRepository
-    */
-    protected $searchRepository;
-
-    /**
-     * ProductRepository object
-     *
-     * @var \Webkul\Product\Repositories\ProductRepository
-    */
-    protected $productRepository;
-
-    /**
-     * ProductRepository object of velocity package
-     *
-     * @var \Webkul\Velocity\Repositories\Product\ProductRepository
-     */
-    protected $velocityProductRepository;
-
-    /**
-     * CategoryRepository object of velocity package
-     *
-     * @var \Webkul\Category\Repositories\CategoryRepository
-     */
-    protected $categoryRepository;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @param  \Webkul\Product\Helpers\ProductImage  $productImageHelper
-     * @param  \Webkul\Product\Repositories\SearchRepository  $searchRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
-     * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
-     * @param  \Webkul\Velocity\Repositories\Product\ProductRepository  $velocityProductRepository
-     * @return void
-    */
-    public function __construct(
-        ProductImage $productImageHelper,
-        SearchRepository $searchRepository,
-        ProductRepository $productRepository,
-        CategoryRepository $categoryRepository,
-        VelocityProductRepository $velocityProductRepository
-    ) {
-        $this->_config = request('_config');
-
-        $this->searchRepository = $searchRepository;
-
-        $this->productRepository = $productRepository;
-
-        $this->productImageHelper = $productImageHelper;
-
-        $this->categoryRepository = $categoryRepository;
-        
-        $this->velocityProductRepository = $velocityProductRepository;
-    }
-
     /**
      * Index to handle the view loaded with the search results
      *
@@ -142,16 +64,14 @@ class ShopController extends Controller
                 $formattedProducts = [];
                 $count = request()->get('count');
 
-                $productRepository = app('Webkul\Velocity\Repositories\Product\ProductRepository');
-
                 if ($slug == "new-products") {
-                    $products = $productRepository->getNewProducts($count);
-                } elseif ($slug == "featured-products") {
-                    $products = $productRepository->getFeaturedProducts($count);
+                    $products = $this->velocityProductRepository->getNewProducts($count);
+                } else if ($slug == "featured-products") {
+                    $products = $this->velocityProductRepository->getFeaturedProducts($count);
                 }
 
                 foreach ($products as $product) {
-                    array_push($formattedProducts, $this->formatProduct($product));
+                    array_push($formattedProducts, $this->velocityHelper->formatProduct($product));
                 }
 
                 $response = [
@@ -171,7 +91,7 @@ class ShopController extends Controller
                     foreach ($products as $product) {
                         $productDetails = [];
 
-                        $productDetails = array_merge($productDetails, $this->formatProduct($product));
+                        $productDetails = array_merge($productDetails, $this->velocityHelper->formatProduct($product));
                         
                         array_push($customizedProducts, $productDetails);
                     }
@@ -252,39 +172,61 @@ class ShopController extends Controller
     }
 
     /**
-     * @param  \Webkul\Product\Contracts\Product  $product
-     * @param  bool  $list
-     * @return array
+     * @return \Illuminate\View\View
      */
-    private function formatProduct($product, $list = false)
+    public function getWishlistList()
     {
-        $reviewHelper = app('Webkul\Product\Helpers\Review');
+        return view($this->_config['view']);
+    }
 
-        $totalReviews = $reviewHelper->getTotalReviews($product);
+    /**
+     * this function will provide the count of wishlist and comparison for logged in user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getItemsCount()
+    {
+        if ($customer = auth()->guard('customer')->user()) {
+            $wishlistItemsCount = $this->wishlistRepository->count([
+                'customer_id' => $customer->id,
+                'channel_id' => core()->getCurrentChannel()->id,
+            ]);
 
-        $avgRatings = ceil($reviewHelper->getAverageRating($product));
+            $comparedItemsCount = $this->compareProductsRepository->count([
+                'customer_id' => $customer->id,
+            ]);
 
-        $galleryImages = $this->productImageHelper->getGalleryImages($product);
-        
-        $productImage = $this->productImageHelper->getProductBaseImage($product)['medium_image_url'];
+            $response = [
+                'status' => true,
+                'compareProductsCount'    => $comparedItemsCount,
+                'wishlistedProductsCount' => $wishlistItemsCount,
+            ];
+        }
 
-        return [
-            'avgRating'        => $avgRatings,
-            'totalReviews'     => $totalReviews,
-            'image'            => $productImage,
-            'galleryImages'    => $galleryImages,
-            'name'             => $product->name,
-            'slug'             => $product->url_key,
-            'description'      => $product->description,
-            'shortDescription' => $product->short_description,
-            'firstReviewText'  => trans('velocity::app.products.be-first-review'),
-            'priceHTML'        => view('shop::products.price', ['product' => $product])->render(),
-            'addToCartHtml'    => view('shop::products.add-to-cart', [
-                'product'           => $product,
-                'showCompare'       => true,
-                'addWishlistClass'  => ! (isset($list) && $list) ? '' : '',
-                'addToCartBtnClass' => ! (isset($list) && $list) ? 'small-padding' : '',
-            ])->render(),
-        ];
+        return response()->json($response ?? [
+            'status' => false
+        ]);
+    }
+
+    /**
+     * This function will provide details of multiple product
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getDetailedProducts()
+    {
+        // for product details
+        if ($items = request()->get('items')) {
+            $productCollection = $this->velocityHelper->fetchProductCollection($items);
+
+            $response = [
+                'status' => 'success',
+                'products' => $productCollection,
+            ];
+        }
+
+        return response()->json($response ?? [
+            'status' => false
+        ]);
     }
 }

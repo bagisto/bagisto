@@ -24,7 +24,7 @@ class ConfigurationController extends Controller
     public function __construct (VelocityMetadataRepository $velocityMetadataRepository)
     {
         $this->_config = request('_config');
-        
+
         $this->velocityHelper = app('Webkul\Velocity\Helpers\Helper');
 
         $this->velocityMetaDataRepository = $velocityMetadataRepository;
@@ -37,7 +37,7 @@ class ConfigurationController extends Controller
     {
         $velocityMetaData = $this->velocityHelper->getVelocityMetaData();
 
-        if ($velocityMetaData->advertisement) {
+        if ($velocityMetaData && $velocityMetaData->advertisement) {
             $velocityMetaData->advertisement = $this->manageAddImages(json_decode($velocityMetaData->advertisement, true));
         }
 
@@ -140,9 +140,9 @@ class ConfigurationController extends Controller
                 if ( isset($advertisement[$index][$imageId]) && $advertisement[$index][$imageId] && !request()->hasFile($file)) {
                     $saveImage[$imageId] = $advertisement[$index][$imageId];
 
-                    unset($advertisement[$index][$imageId]); 
+                    unset($advertisement[$index][$imageId]);
                 }
-                
+
                 if (request()->hasFile($file) && isset($advertisement[$index][$imageId])) {
                     Storage::delete($advertisement[$index][$imageId]);
 

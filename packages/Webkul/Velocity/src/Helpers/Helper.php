@@ -5,9 +5,10 @@ namespace Webkul\Velocity\Helpers;
 use Illuminate\Support\Facades\DB;
 use Webkul\Product\Helpers\Review;
 use Webkul\Product\Models\Product as ProductModel;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Velocity\Repositories\OrderBrandsRepository;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
-use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Velocity\Repositories\VelocityMetadataRepository;
 
@@ -28,13 +29,20 @@ class Helper extends Review
     protected $orderBrandsRepository;
 
     /**
-     * productRepository object
+     * ProductRepository object
      *
-     * @var object
+     * @var \Webkul\Product\Repositories\ProductRepository
      */
     protected $productRepository;
 
     /**
+     * ProductFlatRepository object
+     *
+     * @var \Webkul\Product\Repositories\ProductFlatRepository
+     */
+    protected $productFlatRepository;
+
+      /**
      * productModel object
      *
      * @var \Webkul\Attribute\Repositories\AttributeOptionRepository
@@ -68,7 +76,8 @@ class Helper extends Review
     public function __construct(
         ProductModel $productModel,
         ProductRepository $productRepository,
-        AttributeOptionRepository $attributeOptionRepository,
+        AttributeOptionRepository $attributeOption,
+        ProductFlatRepository $productFlatRepository,
         OrderBrandsRepository $orderBrandsRepository,
         ProductReviewRepository $productReviewRepository,
         VelocityMetadataRepository $velocityMetadataRepository
@@ -79,6 +88,8 @@ class Helper extends Review
 
         $this->productRepository = $productRepository;
 
+        $this->productFlatRepository = $productFlatRepository;
+        
         $this->orderBrandsRepository = $orderBrandsRepository;
 
         $this->productReviewRepository =  $productReviewRepository;
@@ -279,6 +290,18 @@ class Helper extends Review
         $galleryImages = $productImageHelper->getGalleryImages($product);
         $productImage = $productImageHelper->getProductBaseImage($product)['medium_image_url'];
 
+        $largeProductImageName = "large-product-placeholder.png";
+        $mediumProductImageName = "meduim-product-placeholder.png";
+
+        if (strpos($productImage, $mediumProductImageName) > -1) {
+            $productImageNameCollection = explode('/', $productImage);
+            $productImageName = $productImageNameCollection[sizeof($productImageNameCollection) - 1];
+
+            if ($productImageName == $mediumProductImageName) {
+                $productImage = str_replace($mediumProductImageName, $largeProductImageName, $productImage);
+            }
+        }
+
         return [
             'avgRating'         => $avgRatings,
             'totalReviews'      => $totalReviews,
@@ -291,12 +314,51 @@ class Helper extends Review
             'firstReviewText'   => trans('velocity::app.products.be-first-review'),
             'priceHTML'         => view('shop::products.price', ['product' => $product])->render(),
             'addToCartHtml'     => view('shop::products.add-to-cart', [
-                'product'           => $product,
                 'showCompare'       => true,
+                'product'           => $product,
                 'addWishlistClass'  => ! (isset($list) && $list) ? '' : '',
                 'addToCartBtnClass' => ! (isset($list) && $list) ? 'small-padding' : '',
             ])->render(),
         ];
     }
-}
 
+    /**
+     * Returns the count rating of the product
+     *
+     * @param $items
+     * @param $separator
+     *
+     * @return array
+     */
+    public function fetchProductCollection($items, $separator='&')
+    {
+        $productCollection = [];
+        $productIds = explode($separator, $items);
+
+        foreach ($productIds as $productId) {
+            // @TODO:- query only once insted of 2
+            $productFlat = $this->productFlatRepository->findOneWhere(['id' => $productId]);
+
+            if ($productFlat) {
+                $product = $this->productRepository->findOneWhere(['id' => $productFlat->product_id]);
+
+                if ($product) {
+                    $formattedProduct = $this->formatProduct($productFlat);
+
+                    $productMetaDetails = [];
+                    $productMetaDetails['slug'] = $product->url_key;
+                    $productMetaDetails['image'] = $formattedProduct['image'];
+                    $productMetaDetails['priceHTML'] = $formattedProduct['priceHTML'];
+                    $productMetaDetails['addToCartHtml'] = $formattedProduct['addToCartHtml'];
+                    $productMetaDetails['galleryImages'] = $formattedProduct['galleryImages'];
+
+                    $product = array_merge($productFlat->toArray(), $productMetaDetails);
+
+                    array_push($productCollection, $product);
+                }
+            }
+        }
+
+        return $productCollection;
+    }
+}

@@ -10,38 +10,6 @@ use Webkul\Product\Repositories\ProductRepository;
 class CartController extends Controller
 {
     /**
-     * Helper object
-     *
-     * @var \Webkul\Velocity\Helpers\Helper
-    */
-    protected $velocityHelper;
-
-    /**
-     * ProductRepository object
-     *
-     * @var \Webkul\Product\Repositories\ProductRepository
-    */
-    protected $productRepository;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @param  \Webkul\Velocity\Helpers\Helper  $velocityHelper
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
-     * @return void
-     */
-    public function __construct(
-        Helper $velocityHelper,
-        ProductRepository $productRepository
-    ) {
-        $this->_config = request('_config');
-
-        $this->velocityHelper = $velocityHelper;
-
-        $this->productRepository = $productRepository;
-    }
-
-    /**
      * Retrives the mini cart details
      *
      * @return \Illuminate\Http\Response
@@ -102,10 +70,9 @@ class CartController extends Controller
             }
 
             if ($cart instanceof CartModel) {
-                $items = $cart->items;
                 $formattedItems = [];
 
-                foreach ($items as $item) {
+                foreach ($cart->items as $item) {
                     array_push($formattedItems, $this->velocityHelper->formatCartItem($item));
                 }
 
@@ -127,15 +94,15 @@ class CartController extends Controller
             $product = $this->productRepository->find($id);
 
             $response = [
-                'status'            => 'danger',
-                'message'           => trans($exception->getMessage()),
-                'redirectionRoute'  => route('shop.productOrCategory.index', $product->url_key),
+                'status'           => 'danger',
+                'message'          => trans($exception->getMessage()),
+                'redirectionRoute' => route('shop.productOrCategory.index', $product->url_key),
             ];
         }
 
         return $response ?? [
-            'status'    => 'danger',
-            'message'   => trans('velocity::app.error.something_went_wrong'),
+            'status'  => 'danger',
+            'message' => trans('velocity::app.error.something_went_wrong'),
         ];
     }
 
@@ -151,16 +118,16 @@ class CartController extends Controller
 
         if ($result) {
             $response = [
-                'status'    => 'success',
-                'label'     => trans('velocity::app.shop.general.alert.success'),
-                'message'   => trans('shop::app.checkout.cart.item.success-remove'),
+                'status'  => 'success',
+                'label'   => trans('velocity::app.shop.general.alert.success'),
+                'message' => trans('shop::app.checkout.cart.item.success-remove'),
             ];
         }
 
         return response()->json($response ?? [
-            'status'    => 'danger',
-            'label'     => trans('velocity::app.shop.general.alert.error'),
-            'message'   => trans('velocity::app.error.something_went_wrong'),
+            'status'  => 'danger',
+            'label'   => trans('velocity::app.shop.general.alert.error'),
+            'message' => trans('velocity::app.error.something_went_wrong'),
         ], 200);
     }
 }
