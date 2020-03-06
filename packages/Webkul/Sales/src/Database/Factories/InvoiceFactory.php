@@ -12,13 +12,13 @@ $factory->define(Invoice::class, function (Faker $faker, array $attributes) {
     $shippingAmount = $faker->randomFloat(2);
     $taxAmount = $faker->randomFloat(2);
 
-    if (!$attributes['order_id']) {
+    if (! isset($attributes['order_id'])) {
         $attributes['order_id'] = function () {
             return factory(Order::class)->create()->id;
         };
     }
 
-    if (!$attributes['order_address_id']) {
+    if (! isset($attributes['order_address_id'])) {
         $attributes['order_address_id'] = function () use ($attributes) {
             return factory(OrderAddress::class)
                 ->create(['order_id' => $attributes['order_id']])

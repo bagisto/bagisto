@@ -6,12 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Webkul\Core\Repositories\SubscribersListRepository;
 
-/**
- * Subscription controller
- *
- * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class SubscriptionController extends Controller
 {
     /**
@@ -24,14 +18,14 @@ class SubscriptionController extends Controller
     /**
      * SubscribersListRepository
      *
-     * @var Object
+     * @var \Webkul\Core\Repositories\SubscribersListRepository
      */
     protected $subscribersListRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\SubscribersListRepository $subscribersListRepository
+     * @param  \Webkul\Core\Repositories\SubscribersListRepository  $subscribersListRepository
      * @return void
      */
     public function __construct(SubscribersListRepository $subscribersListRepository)
@@ -54,7 +48,7 @@ class SubscriptionController extends Controller
     /**
      * To unsubscribe the user without deleting the resource of the subscribed user
      *
-     * @param integer $id
+     * @param  int  $id
      * @return \Illuminate\View\View
      */
     public function edit($id)
@@ -67,8 +61,8 @@ class SubscriptionController extends Controller
     /**
      * To unsubscribe the user without deleting the resource of the subscribed user
      *
-     * @param integer $id
-     * @return mixed
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
     public function update($id)
     {
@@ -78,11 +72,11 @@ class SubscriptionController extends Controller
 
         $result = $subscriber->update($data);
 
-        if ($result)
+        if ($result) {
             session()->flash('success', trans('admin::app.customers.subscribers.update-success'));
-            // session()->flash('success', 'admin::app.customers.subscribers.delete-success');
-        else
+        } else {
             session()->flash('error', trans('admin::app.customers.subscribers.update-failed'));
+        }
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -105,6 +99,7 @@ class SubscriptionController extends Controller
             return response()->json(['message' => true], 200);
         } catch (\Exception $e) {
             report($e);
+            
             session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Subscriber']));
         }
 

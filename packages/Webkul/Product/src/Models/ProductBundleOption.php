@@ -11,7 +11,12 @@ class ProductBundleOption extends TranslatableModel implements ProductBundleOpti
 
     public $translatedAttributes = ['label'];
 
-    protected $fillable = ['type', 'is_required', 'sort_order', 'product_id'];
+    protected $fillable = [
+        'type',
+        'is_required',
+        'sort_order',
+        'product_id',
+    ];
 
     /**
      * Get the product that owns the image.

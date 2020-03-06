@@ -1,6 +1,27 @@
 {!! view_render_event('bagisto.shop.products.add_to_cart.before', ['product' => $product]) !!}
 
-    <div class="row mx-0 col-12 no-padding">
+    <div class="mx-0 no-padding">
+        @if (isset($showCompare) && $showCompare)
+                <compare-component
+                    @auth('customer')
+                        customer="true"
+                    @endif
+
+                    @guest('customer')
+                        customer="false"
+                    @endif
+
+                    slug="{{ $product->url_key }}"
+                    product-id="{{ $product->id }}"
+                ></compare-component>
+        @endif
+
+        @if (! (isset($showWishlist) && !$showWishlist))
+            @include('shop::products.wishlist', [
+                'addClass' => $addWishlistClass ?? ''
+            ])
+        @endif
+
         <div class="add-to-cart-btn pl0">
             @if (isset($form) && !$form)
                 <button
@@ -16,13 +37,15 @@
                         {{ __('shop::app.products.add-to-cart') }}
                     </span>
                 </button>
-            @else
-                <form method="POST" action="{{ route('cart.add', $product->product_id) }}">
+            @elseif(isset($addToCartForm) && !$addToCartForm)
+                <form
+                    method="POST"
+                    action="{{ route('cart.add', $product->product_id) }}">
+
                     @csrf
 
-                    <input type="hidden" name="quantity" value="1" />
-                    <input type="hidden" name="product_id" value="{{ $product->product_id }}" />
-
+                    <input type="hidden" name="product_id" value="{{ $product->product_id }}">
+                    <input type="hidden" name="quantity" value="1">
                     <button
                         type="submit"
                         {{ ! $product->isSaleable() ? 'disabled' : '' }}
@@ -37,8 +60,8 @@
                         </span>
                     </button>
                 </form>
-
-                {{-- <add-to-cart
+            @else
+                <add-to-cart
                     form="true"
                     csrf-token='{{ csrf_token() }}'
                     product-id="{{ $product->product_id }}"
@@ -46,33 +69,9 @@
                     is-enable={{ ! $product->isSaleable() ? 'false' : 'true' }}
                     show-cart-icon={{ !(isset($showCartIcon) && !$showCartIcon) }}
                     btn-text="{{ $btnText ?? __('shop::app.products.add-to-cart') }}">
-                </add-to-cart> --}}
+                </add-to-cart>
             @endif
         </div>
-
-        @if (isset($showCompare) && $showCompare)
-            @auth('customer')
-                <compare-component
-                    customer="true"
-                    productId="{{ $product->id }}"
-                    slug="{{ $product->url_key }}"
-                ></compare-component>
-            @endif
-
-            @guest('customer')
-                <compare-component
-                    customer="false"
-                    productId="{{ $product->id }}"
-                    slug="{{ $product->url_key }}"
-                ></compare-component>
-            @endif
-        @endif
-
-        @if (! (isset($showWishlist) && !$showWishlist))
-            @include('shop::products.wishlist', [
-                'addClass' => $addWishlistClass ?? ''
-            ])
-        @endif
     </div>
 
 {!! view_render_event('bagisto.shop.products.add_to_cart.after', ['product' => $product]) !!}

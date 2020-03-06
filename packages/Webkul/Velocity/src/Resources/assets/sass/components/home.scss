@@ -1,5 +1,4 @@
 
-/* @author Shubham Mehrotra */
 body {
     display: none;
     overflow-x: hidden;
@@ -634,6 +633,31 @@ body::after {
         }
     }
 
+    .product-actions {
+        display: inline-block;
+
+        .compare-icon,
+        .wishlist-icon {
+            height: 38px;
+            display: inline-table;
+            cursor: pointer;
+            margin-left: 10px;
+
+            i {
+                display: table-cell;
+                vertical-align: middle;
+            }
+        }
+
+        .wishlist-icon {
+            float: right;
+        }
+
+        .add-to-cart-btn {
+            float: left;
+        }
+    }
+
     .product-price {
         span:nth-child(1),
         .special-price,
@@ -641,17 +665,12 @@ body::after {
             font-size: 20px;
             font-weight: 600;
         }
-    }
 
-    .compare-icon,
-    .wishlist-icon {
-        height: 38px;
-        display: table;
-        margin-left: 10px;
-
-        i {
-            display: table-cell;
-            vertical-align: middle;
+        .price-from {
+            span:nth-child(3) {
+                margin-left: 6px;
+                display: inline-block !important;
+            }
         }
     }
 

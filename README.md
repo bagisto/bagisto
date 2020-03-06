@@ -74,11 +74,11 @@ Take advantage of two of the hottest frameworks used in this project -- Laravel 
 
 ### Installation and Configuration
 
-**1. Try our new GUI installer to install Bagisto:**
+**1. You can install Bagisto by using the GUI installer.**
 
 ##### a. Download zip from the link below:
 
-[Download](https://github.com/bagisto/bagisto/archive/v0.1.6.zip)
+[Download the latest release](https://github.com/bagisto/bagisto/releases/latest)
 
 ##### b. Extract the contents of zip and execute the project in your browser:
 
@@ -92,7 +92,7 @@ or
 http(s)://example.com/public
 ~~~
 
-**2. Try our old fashioned way to install Bagisto:**
+**2. Or you can install Bagisto from your console.**
 
 ##### Execute these commands below, in order
 
@@ -100,43 +100,9 @@ http(s)://example.com/public
 1. composer create-project bagisto/bagisto
 ~~~
 
-**Now, configure your database:**
-
-If the above command was completed successfully, then you'll find directory **bagisto** with all of the code inside it.
-
-Find file **.env** inside **bagisto** directory and set the environment variables listed below:
-
-* **APP_URL**
-* **DB_CONNECTION**
-* **DB_HOST**
-* **DB_PORT**
-* **DB_DATABASE**
-* **DB_USERNAME**
-* **DB_PASSWORD**
-
-Mailer environment variables are also required to be set up. This is because **Bagisto** needs to send emails to customers and admins depending on what events require notification.
-
 ~~~
-2. php artisan migrate
+2. php artisan bagisto:install
 ~~~
-
-~~~
-3. php artisan db:seed
-~~~
-
-~~~
-4. php artisan vendor:publish
--> Press 0 and then press enter to publish all assets and configurations.
-~~~
-
-~~~
-5. php artisan storage:link
-~~~
-
-~~~
-6. composer dump-autoload
-~~~
-
 
 **To execute Bagisto**:
 

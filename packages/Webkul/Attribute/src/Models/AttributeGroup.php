@@ -17,7 +17,7 @@ class AttributeGroup extends Model implements AttributeGroupContract
     public function custom_attributes()
     {
         return $this->belongsToMany(AttributeProxy::modelClass(), 'attribute_group_mappings')
-            ->withPivot('position')
-            ->orderBy('pivot_position', 'asc');
+                    ->withPivot('position')
+                    ->orderBy('pivot_position', 'asc');
     }
 }

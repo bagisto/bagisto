@@ -15,11 +15,14 @@ class Role extends Model implements RoleContract
      * @var array
      */
     protected $fillable = [
-        'name', 'description', 'permission_type', 'permissions',
+        'name',
+        'description',
+        'permission_type',
+        'permissions',
     ];
 
     protected $casts = [
-        'permissions' => 'array'
+        'permissions' => 'array',
     ];
 
     /**

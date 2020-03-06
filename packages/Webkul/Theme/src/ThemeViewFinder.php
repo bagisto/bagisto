@@ -8,7 +8,7 @@ use Illuminate\View\FileViewFinder;
 
 class ThemeViewFinder extends FileViewFinder
 {
-    /*
+    /**
      * Override findNamespacedView() to add "resources/themes/theme_name/views/..." paths
      *
      * @param  string  $name
@@ -38,6 +38,10 @@ class ThemeViewFinder extends FileViewFinder
         }
     }
 
+    /**
+     * @param  string  $namespace
+     * @return array
+     */
     public function addThemeNamespacePaths($namespace)
     {
         if (! isset($this->hints[$namespace])) {
@@ -84,6 +88,7 @@ class ThemeViewFinder extends FileViewFinder
      * Set the array of paths where the views are being searched.
      *
      * @param  array  $paths
+     * @return void
      */
     public function setPaths($paths)
     {

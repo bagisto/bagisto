@@ -8,10 +8,6 @@
     export default {
         props: ['slug', 'customer', 'productId'],
 
-        data: function () {
-            return {}
-        },
-
         methods: {
             addProductToCompare: function () {
                 if (this.customer == "true") {
@@ -25,20 +21,18 @@
                         window.showAlert(
                             'alert-danger',
                             this.__('shop.general.alert.error'),
-                            this.__('error.something-went-wrong')
+                            this.__('error.something_went_wrong')
                         );
                     });
                 } else {
-                    let updatedItems = [this.slug];
-                    let existingItems = window.localStorage.getItem('compared_product');
+                    let updatedItems = [this.productId];
+                    let existingItems = this.getStorageValue('compared_product');
 
                     if (existingItems) {
-                        existingItems = JSON.parse(existingItems);
+                        if (existingItems.indexOf(this.productId) == -1) {
+                            updatedItems = existingItems.concat(updatedItems);
 
-                        if (existingItems.indexOf(this.slug) == -1) {
-                            updatedItems = existingItems.concat([this.slug]);
-
-                            window.localStorage.setItem('compared_product', JSON.stringify(updatedItems));
+                            this.setStorageValue('compared_product', updatedItems);
 
                             window.showAlert(
                                 `alert-success`,
@@ -53,7 +47,7 @@
                             );
                         }
                     } else {
-                        window.localStorage.setItem('compared_product', JSON.stringify([this.slug]));
+                        this.setStorageValue('compared_product', updatedItems);
 
                         window.showAlert(
                             `alert-success`,
@@ -62,6 +56,8 @@
                         );
                     }
                 }
+
+                this.$root.headerItemsCount++;
             }
         }
     }

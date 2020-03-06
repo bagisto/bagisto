@@ -10,9 +10,16 @@ class Cart extends Model implements CartContract
 {
     protected $table = 'cart';
 
-    protected $guarded = ['id', 'created_at', 'updated_at'];
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at',
+    ];
 
-    protected $with = ['items', 'items.children'];
+    protected $with = [
+        'items',
+        'items.children',
+    ];
 
     /**
      * To get relevant associated items with the cart instance
@@ -108,8 +115,9 @@ class Cart extends Model implements CartContract
     public function haveStockableItems()
     {
         foreach ($this->items as $item) {
-            if ($item->product->isStockable())
+            if ($item->product->isStockable()) {
                 return true;
+            }
         }
 
         return false;

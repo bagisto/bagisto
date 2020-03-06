@@ -10,7 +10,14 @@ class ProductDownloadableSample extends TranslatableModel implements ProductDown
 {
     public $translatedAttributes = ['title'];
 
-    protected $fillable = ['url', 'file', 'file_name', 'type', 'sort_order', 'product_id'];
+    protected $fillable = [
+        'url',
+        'file',
+        'file_name',
+        'type',
+        'sort_order',
+        'product_id',
+    ];
 
     protected $with = ['translations'];
 

@@ -21,6 +21,6 @@ return [
         \Webkul\User\Providers\ModuleServiceProvider::class,
         \Webkul\CatalogRule\Providers\ModuleServiceProvider::class,
         \Webkul\CartRule\Providers\ModuleServiceProvider::class,
-        \Webkul\CMS\Providers\ModuleServiceProvider::class
+        \Webkul\CMS\Providers\ModuleServiceProvider::class,
     ]
 ];

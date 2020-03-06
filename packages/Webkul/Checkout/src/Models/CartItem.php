@@ -16,7 +16,11 @@ class CartItem extends Model implements CartItemContract
         'additional' => 'array',
     ];
 
-    protected $guarded = ['id', 'created_at', 'updated_at'];
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at',
+    ];
 
     public function product()
     {

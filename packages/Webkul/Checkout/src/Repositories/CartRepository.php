@@ -4,13 +4,6 @@ namespace Webkul\Checkout\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
 
-/**
- * Cart Reposotory
- *
- * @author    Prashant Singh <prashant.singh852@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
-
 class CartRepository extends Repository
 {
     /**
@@ -25,10 +18,9 @@ class CartRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @return Mixed
+     * @param  array  $data
+     * @return \Webkul\Checkout\Contracts\Cart
      */
-
     public function create(array $data)
     {
         $cart = $this->model->create($data);
@@ -37,10 +29,10 @@ class CartRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @param $id
-     * @param string $attribute
-     * @return Mixed
+     * @param  array  $data
+     * @param  int  $id
+     * @param  string  $attribute
+     * @return \Webkul\Checkout\Contracts\Cart
      */
     public function update(array $data, $id, $attribute = "id")
     {
@@ -52,17 +44,14 @@ class CartRepository extends Repository
     }
 
     /**
-     * Method to detach
-     * associations.
-     *
-     * Use this only with
-     * guest cart only.
-     *
-     * @return Mixed
+     * Method to detach associations. Use this only with guest cart only.
+     * 
+     * @param  int  $cartId
+     * @return bool
      */
-    public function deleteParent($cart_id) {
-        $cart = $this->model->find($cart_id);
+    public function deleteParent($cartId) {
+        $cart = $this->model->find($cartId);
 
-        return $this->model->destroy($cart_id);
+        return $this->model->destroy($cartId);
     }
 }

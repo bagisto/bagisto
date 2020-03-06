@@ -4,12 +4,6 @@ namespace Webkul\Core;
 
 use Illuminate\Support\Facades\Request;
 
-/**
- * Tree class
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class Tree {
 
     /**
@@ -45,7 +39,8 @@ class Tree {
      *
      * @return void
      */
-	public function __construct() {
+	public function __construct()
+	{
 		$this->current = Request::url();
 	}
 
@@ -53,10 +48,11 @@ class Tree {
 	 * Shortcut method for create a Config with a callback.
 	 * This will allow you to do things like fire an event on creation.
 	 *
-	 * @param  callable $callback Callback to use after the Config creation
+	 * @param  callable  $callback Callback to use after the Config creation
 	 * @return object
 	 */
-	public static function create($callback = null) {
+	public static function create($callback = null)
+	{
 		$tree = new Tree();
 
 		if ($callback) {
@@ -69,7 +65,8 @@ class Tree {
 	/**
 	 * Add a Config item to the item stack
 	 *
-	 * @param string  $item Dot seperated heirarchy
+	 * @param  string  $item
+	 * @return void
 	 */
 	public function add($item, $type = '')
 	{
@@ -81,22 +78,22 @@ class Tree {
 			if (strpos($this->current, $item['url']) !== false) {
                 $this->currentKey = $item['key'];
 			}
-		} else if ($type == 'acl') {
+		} elseif ($type == 'acl') {
 			$item['name'] = trans($item['name']);
+
 			$this->roles[$item['route']] = $item['key'];
 		}
 
 		$children = str_replace('.', '.children.', $item['key']);
 
 		core()->array_set($this->items, $children, $item);
-
 	}
 
 	/**
 	 * Method to find the active links
 	 *
-	 * @param  array $item Item that needs to be checked if active
-	 * @return string
+	 * @param  array  $item
+	 * @return string|void
 	 */
 	public function getActive($item)
 	{

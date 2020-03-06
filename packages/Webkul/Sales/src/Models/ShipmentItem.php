@@ -7,7 +7,12 @@ use Webkul\Sales\Contracts\ShipmentItem as ShipmentItemContract;
 
 class ShipmentItem extends Model implements ShipmentItemContract
 {
-    protected $guarded = ['id', 'child', 'created_at', 'updated_at'];
+    protected $guarded = [
+        'id',
+        'child',
+        'created_at',
+        'updated_at',
+    ];
 
     protected $casts = [
         'additional' => 'array',

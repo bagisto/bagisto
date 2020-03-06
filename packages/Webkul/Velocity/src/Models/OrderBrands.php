@@ -12,9 +12,15 @@ class OrderBrands extends Model implements OrderBrandContract
     
     protected $table = 'order_brands';
 
-    protected $fillable = ['order_item_id','order_id','product_id','brand'];
+    protected $fillable = [
+        'order_item_id',
+        'order_id',
+        'product_id',
+        'brand',
+    ];
 
-    public function getBrands() {
+    public function getBrands()
+    {
         return $this->belongsTo(AttributeOptionProxy::modelClass() , 'brand');
     }
 

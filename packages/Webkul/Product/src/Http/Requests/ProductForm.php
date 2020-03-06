@@ -4,52 +4,47 @@ namespace Webkul\Product\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
-use Webkul\Product\Repositories\ProductRepository as Product;
-use Webkul\Product\Repositories\ProductAttributeValueRepository as AttributeValue;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Models\ProductAttributeValue;
 
 class ProductForm extends FormRequest
 {
     /**
-     * AttributeFamilyRepository object
-     *
-     * @var array
-     */
-    protected $attributeFamily;
-
-    /**
      * ProductRepository object
      *
-     * @var array
+     * @var \Webkul\Product\Repositories\ProductRepository
      */
-    protected $product;
+    protected $productRepository;
 
     /**
      * ProductAttributeValueRepository object
      *
-     * @var array
+     * @var \Webkul\Product\Repositories\ProductAttributeValueRepository
      */
-    protected $attributeValue;
+    protected $productAttributeValueRepository;
 
     /**
-     * Create a new controller instance.
+     * @var array
+     */
+    protected $rules;
+
+    /**
+     * Create a new form request instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeFamilyRepository     $attributeFamily
-     * @param  Webkul\Product\Repositories\ProductRepository               $product
-     * @param  Webkul\Product\Repositories\ProductAttributeValueRepository $attributeValue
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository $productAttributeValueRepository
      * @return void
      */
-    public function __construct(AttributeFamily $attributeFamily, Product $product, AttributeValue $attributeValue)
+    public function __construct(
+        ProductRepository $productRepository,
+        ProductAttributeValueRepository $productAttributeValueRepository
+    )
     {
-        $this->attributeFamily = $attributeFamily;
+        $this->productRepository = $productRepository;
 
-        $this->product = $product;
-
-        $this->attributeValue = $attributeValue;
+        $this->productAttributeValueRepository = $productAttributeValueRepository;
     }
-
-    protected $rules;
 
     /**
      * Determine if the product is authorized to make this request.
@@ -68,44 +63,48 @@ class ProductForm extends FormRequest
      */
     public function rules()
     {
-        $product = $this->product->find($this->id);
+        $product = $this->productRepository->find($this->id);
         
         $this->rules = array_merge($product->getTypeInstance()->getTypeValidationRules(), [
-            'sku' => ['required', 'unique:products,sku,' . $this->id, new \Webkul\Core\Contracts\Validations\Slug],
-            'images.*' => 'mimes:jpeg,jpg,bmp,png',
+            'sku'                => ['required', 'unique:products,sku,' . $this->id, new \Webkul\Core\Contracts\Validations\Slug],
+            'images.*'           => 'mimes:jpeg,jpg,bmp,png',
             'special_price_from' => 'nullable|date',
-            'special_price_to' => 'nullable|date|after_or_equal:special_price_from',
-            'special_price' => ['nullable', new \Webkul\Core\Contracts\Validations\Decimal, 'lt:price']
+            'special_price_to'   => 'nullable|date|after_or_equal:special_price_from',
+            'special_price'      => ['nullable', new \Webkul\Core\Contracts\Validations\Decimal, 'lt:price'],
         ]);
 
         foreach ($product->getEditableAttributes() as $attribute) {
-            if ($attribute->code == 'sku' || $attribute->type == 'boolean')
+            if ($attribute->code == 'sku' || $attribute->type == 'boolean') {
                 continue;
+            }
 
             $validations = [];
 
-            if (! isset($this->rules[$attribute->code]))
+            if (! isset($this->rules[$attribute->code])) {
                 array_push($validations, $attribute->is_required ? 'required' : 'nullable');
-            else
+            } else {
                 $validations = $this->rules[$attribute->code];
+            }
 
             if ($attribute->type == 'text' && $attribute->validation) {
                 array_push($validations, 
-                        $attribute->validation == 'decimal'
-                        ? new \Webkul\Core\Contracts\Validations\Decimal
-                        : $attribute->validation
-                    );
+                    $attribute->validation == 'decimal'
+                    ? new \Webkul\Core\Contracts\Validations\Decimal
+                    : $attribute->validation
+                );
             }
 
-            if ($attribute->type == 'price')
+            if ($attribute->type == 'price') {
                 array_push($validations, new \Webkul\Core\Contracts\Validations\Decimal);
+            }
 
             if ($attribute->is_unique) {
                 array_push($validations, function ($field, $value, $fail) use ($attribute) {
                     $column = ProductAttributeValue::$attributeTypeFields[$attribute->type];
 
-                    if (! $this->attributeValue->isValueUnique($this->id, $attribute->id, $column, request($attribute->code)))
+                    if (! $this->productAttributeValueRepository->isValueUnique($this->id, $attribute->id, $column, request($attribute->code))) {
                         $fail('The :attribute has already been taken.');
+                    }
                 });
             }
 

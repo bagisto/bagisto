@@ -22,8 +22,7 @@ class Laravel5Helper extends Laravel5
     /**
      * Returns field name of given attribute.
      *
-     * @param string $attribute
-     *
+     * @param  string  $attribute
      * @return string|null
      * @part ORM
      */
@@ -58,19 +57,20 @@ class Laravel5Helper extends Laravel5
             'brand'                => 'text_value',
             'guest_checkout'       => 'boolean_value',
         ];
-        if (!array_key_exists($attribute, $attributes)) {
+        
+        if (! array_key_exists($attribute, $attributes)) {
             return null;
         }
+
         return $attributes[$attribute];
     }
 
     /**
      * Helper function to generate products for testing
      *
-     * @param int   $productType
-     * @param array $configs
-     * @param array $productStates
-     *
+     * @param  int  $productType
+     * @param  array  $configs
+     * @param  array  $productStates
      * @return \Webkul\Product\Models\Product
      * @part ORM
      */
@@ -81,10 +81,12 @@ class Laravel5Helper extends Laravel5
         switch ($productType) {
             case self::DOWNLOADABLE_PRODUCT:
                 $product = $I->haveDownloadableProduct($configs, $productStates);
+
                 break;
 
             case self::VIRTUAL_PRODUCT:
                 $product = $I->haveVirtualProduct($configs, $productStates);
+                
                 break;
 
             case self::SIMPLE_PRODUCT:
@@ -100,15 +102,15 @@ class Laravel5Helper extends Laravel5
     }
 
     /**
-     * @param array $configs
-     * @param array $productStates
-     *
-     * @return \Webkul\Product\Models\Product
+     * @param  array  $configs
+     * @param  array  $productStates
+     * @return  \Webkul\Product\Contracts\Product
      */
     private function haveSimpleProduct(array $configs = [], array $productStates = []): Product
     {
         $I = $this;
-        if (!in_array('simple', $productStates)) {
+
+        if (! in_array('simple', $productStates)) {
             $productStates = array_merge($productStates, ['simple']);
         }
 
@@ -123,15 +125,15 @@ class Laravel5Helper extends Laravel5
     }
 
     /**
-     * @param array $configs
-     * @param array $productStates
-     *
-     * @return \Webkul\Product\Models\Product
+     * @param  array  $configs
+     * @param  array  $productStates
+     * @return \Webkul\Product\Contracts\Product
      */
     private function haveVirtualProduct(array $configs = [], array $productStates = []): Product
     {
         $I = $this;
-        if (!in_array('virtual', $productStates)) {
+
+        if (! in_array('virtual', $productStates)) {
             $productStates = array_merge($productStates, ['virtual']);
         }
 
@@ -146,15 +148,15 @@ class Laravel5Helper extends Laravel5
     }
 
     /**
-     * @param array $configs
-     * @param array $productStates
-     *
-     * @return \Webkul\Product\Models\Product
+     * @param  array  $configs
+     * @param  array  $productStates
+     * @return \Webkul\Product\Contracts\Product
      */
     private function haveDownloadableProduct(array $configs = [], array $productStates = []): Product
     {
         $I = $this;
-        if (!in_array('downloadable', $productStates)) {
+
+        if (! in_array('downloadable', $productStates)) {
             $productStates = array_merge($productStates, ['downloadable']);
         }
 
@@ -180,12 +182,14 @@ class Laravel5Helper extends Laravel5
     }
 
     /**
-     * @param int   $productId
-     * @param array $inventoryConfig
+     * @param  int    $productId
+     * @param  array  $inventoryConfig
+     * @return void
      */
     private function createInventory(int $productId, array $inventoryConfig = []): void
     {
         $I = $this;
+
         $I->have(ProductInventory::class, array_merge($inventoryConfig, [
             'product_id'          => $productId,
             'inventory_source_id' => 1,
@@ -193,11 +197,13 @@ class Laravel5Helper extends Laravel5
     }
 
     /**
-     * @param int $productId
+     * @param  int  $productId
+     * @return void
      */
     private function createDownloadableLink(int $productId): void
     {
         $I = $this;
+
         $link = $I->have(ProductDownloadableLink::class, [
             'product_id' => $productId,
         ]);
@@ -208,12 +214,14 @@ class Laravel5Helper extends Laravel5
     }
 
     /**
-     * @param int   $productId
-     * @param array $attributeValues
+     * @param  int  $productId
+     * @param  array  $attributeValues
+     * @return void
      */
     private function createAttributeValues(int $productId, array $attributeValues = []): void
     {
         $I = $this;
+        
         $productAttributeValues = [
             'sku',
             'url_key',
@@ -233,16 +241,20 @@ class Laravel5Helper extends Laravel5
             'meta_description',
             'weight',
         ];
+
         foreach ($productAttributeValues as $attribute) {
             $data = ['product_id' => $productId];
+
             if (array_key_exists($attribute, $attributeValues)) {
                 $fieldName = self::getAttributeFieldName($attribute);
-                if (!array_key_exists($fieldName, $data)) {
+
+                if (! array_key_exists($fieldName, $data)) {
                     $data[$fieldName] = $attributeValues[$attribute];
                 } else {
                     $data = [$fieldName => $attributeValues[$attribute]];
                 }
             }
+            
             $I->have(ProductAttributeValue::class, $data, $attribute);
         }
     }

@@ -6,12 +6,6 @@ use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Models\ProductFlatProxy;
 use Webkul\Product\Models\ProductFlat;
 
-/**
- * Abstract Product Helper
- *
- * @author Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 abstract class AbstractProduct
 {
     /**
@@ -24,10 +18,10 @@ abstract class AbstractProduct
     /**
      * Add Channle and Locale filter
      *
-     * @param Attribute $attribute
-     * @param QB $qb
-     * @param sting $alias
-     * @return QB
+     * @param  \Webkul\Attribute\Contracts\Attribute  $attribute
+     * @param  \Illuminate\Database\Eloquent\Builder  $qb
+     * @param  string  $alias
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function applyChannelLocaleFilter($attribute, $qb, $alias = 'product_attribute_values')
     {
@@ -54,13 +48,14 @@ abstract class AbstractProduct
     /**
      * Sets product flat variable
      *
-     * @param Product $product
-     * @return void
+     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @return void|null
      */
     public function setProductFlat($product)
     {
-        if (array_key_exists($product->id, $this->productFlat))
+        if (array_key_exists($product->id, $this->productFlat)) {
             return;
+        }
 
         if (! $product instanceof ProductFlat) {
             $this->productFlat[$product->id] = ProductFlatProxy::modelClass()

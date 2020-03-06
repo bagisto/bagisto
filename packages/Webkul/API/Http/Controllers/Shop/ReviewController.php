@@ -6,12 +6,6 @@ use Illuminate\Http\Request;
 use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\API\Http\Resources\Catalog\ProductReview as ProductReviewResource;
 
-/**
- * Review controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ReviewController extends Controller
 {
     /**
@@ -24,14 +18,14 @@ class ReviewController extends Controller
     /**
      * ProductReviewRepository object
      *
-     * @var array
+     * @var \Webkul\Product\Repositories\ProductReviewRepository
      */
     protected $reviewRepository;
 
     /**
      * Controller instance
      *
-     * @param Webkul\Product\Repositories\ProductReviewRepository $reviewRepository
+     * @param  Webkul\Product\Repositories\ProductReviewRepository  $reviewRepository
      */
     public function __construct(ProductReviewRepository $reviewRepository)
     {
@@ -46,6 +40,7 @@ class ReviewController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, $id)
@@ -60,16 +55,16 @@ class ReviewController extends Controller
 
         $data = array_merge(request()->all(), [
             'customer_id' => $customer ? $customer->id : null,
-            'name' => $customer ? $customer->name : request()->input('name'),
-            'status' => 'pending',
-            'product_id' => $id
+            'name'        => $customer ? $customer->name : request()->input('name'),
+            'status'      => 'pending',
+            'product_id'  => $id,
         ]);
 
         $productReview = $this->reviewRepository->create($data);
 
         return response()->json([
-                'message' => 'Your review submitted successfully.',
-                'data' => new ProductReviewResource($this->reviewRepository->find($productReview->id))
-            ]);
+            'message' => 'Your review submitted successfully.',
+            'data'    => new ProductReviewResource($this->reviewRepository->find($productReview->id)),
+        ]);
     }
 }

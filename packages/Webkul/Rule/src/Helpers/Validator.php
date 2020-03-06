@@ -9,23 +9,26 @@ class Validator
     /**
      * Validate cart rule for condition
      *
-     * @param CartRule|CatalogRule  $rule
-     * @param Cart|CartItem|Product $entity
+     * @param  \Webkul\CartRule\Contracts\CartRule|\Webkul\CatalogRule\Contracts\CatalogRule  $rule
+     * @param  \Webkul\Checkout\Contracts\Cart|\Webkul\Checkout\Contracts\CartItem|\Webkul\Product\Contracts\Product  $entity
      * @return boolean
      */
     public function validate($rule, $entity)
     {
-        if (! $rule->conditions)
+        if (! $rule->conditions) {
             return true;
+        }
 
         $validConditionCount = $totalConditionCount = 0;
 
         foreach ($rule->conditions as $condition) {
-            if (! $condition['attribute'] || ! isset($condition['value']) || is_null($condition['value']) ||  $condition['value'] == '')
+            if (! $condition['attribute'] || ! isset($condition['value']) || is_null($condition['value']) ||  $condition['value'] == '') {
                 continue;
+            }
 
-            if ($entity instanceof \Webkul\Checkout\Contracts\Cart && strpos($condition['attribute'], 'cart|') === false)
+            if ($entity instanceof \Webkul\Checkout\Contracts\Cart && strpos($condition['attribute'], 'cart|') === false) {
                 continue;
+            }
             
             $totalConditionCount++;
 
@@ -36,8 +39,9 @@ class Validator
                     $validConditionCount++;
                 }
             } else {
-                if ($this->validateObject($condition, $entity))
+                if ($this->validateObject($condition, $entity)) {
                     return true;
+                }
             }
         }
 
@@ -47,8 +51,8 @@ class Validator
     /**
      * Return value for the attribute
      *
-     * @param array            $condition
-     * @param CartItem|Product $entity
+     * @param  array  $condition
+     * @param  \Webkul\Checkout\Contracts\CartItem|\Webkul\Product\Contracts\Product  $entity
      * @return boolean
      */
     public function getAttributeValue($condition, $entity)
@@ -64,20 +68,23 @@ class Validator
                 $cart = $entity instanceof \Webkul\Checkout\Contracts\Cart ? $entity : $entity->cart;
 
                 if (in_array($attributeCode, ['postcode', 'state', 'country'])) {
-                    if (! $cart->shipping_address)
+                    if (! $cart->shipping_address) {
                         return;
+                    }
 
                     return $cart->shipping_address->{$attributeCode};
-                } else if ($attributeCode == 'shipping_method') {
-                    if (! $cart->shipping_method)
+                } elseif ($attributeCode == 'shipping_method') {
+                    if (! $cart->shipping_method) {
                         return;
+                    }
 
                     $shippingChunks = explode('_', $cart->shipping_method);
 
                     return current($shippingChunks);
-                } else if ($attributeCode == 'payment_method') {
-                    if (! $cart->payment)
+                } elseif ($attributeCode == 'payment_method') {
+                    if (! $cart->payment) {
                         return;
+                    }
 
                     return $cart->payment->method;
                 } else {
@@ -90,17 +97,18 @@ class Validator
             case 'product':
                 if ($attributeCode == 'category_ids') {
                     $value = $entity->product
-                                ? $entity->product->categories()->pluck('id')->toArray()
-                                : $entity->categories()->pluck('id')->toArray();
+                             ? $entity->product->categories()->pluck('id')->toArray()
+                             : $entity->categories()->pluck('id')->toArray();
                     
                     return $value;
                 } else {
                     $value = $entity->product
-                                ? $entity->product->{$attributeCode}
-                                : $entity->{$attributeCode};
+                             ? $entity->product->{$attributeCode}
+                              : $entity->{$attributeCode};
 
-                    if (! in_array($condition['attribute_type'], ['multiselect', 'checkbox']))
+                    if (! in_array($condition['attribute_type'], ['multiselect', 'checkbox'])) {
                         return $value;
+                    }
     
                     return $value ? explode(',', $value) : [];
                 }
@@ -110,8 +118,8 @@ class Validator
     /**
      * Validate object
      *
-     * @param array    $condition
-     * @param CartItem $entity
+     * @param  array  $condition
+     * @param  \Webkul\Checkout\Contracts\CartItem  $entity
      * @return bool
      */
     private function validateObject($condition, $entity)
@@ -121,8 +129,9 @@ class Validator
         foreach ($this->getAllItems($this->getAttributeScope($condition), $entity) as $item) {
             $attributeValue = $this->getAttributeValue($condition, $item);
 
-            if ($validated = $this->validateAttribute($condition, $attributeValue))
+            if ($validated = $this->validateAttribute($condition, $attributeValue)) {
                 break;
+            }
         }
 
         return $validated;
@@ -131,8 +140,8 @@ class Validator
     /**
      * Return all cart items
      *
-     * @param string                $attributeScope
-     * @param Cart|CartItem|Product $item
+     * @param  string  $attributeScope
+     * @param  \Webkul\Checkout\Contracts\Cart|\Webkul\Checkout\Contracts\CartItem|\Webkul\Product\Contracts\Product  $item
      * @return array
      */
     private function getAllItems($attributeScope, $item)
@@ -153,7 +162,7 @@ class Validator
     /**
      * Validate object
      *
-     * @param array $condition
+     * @param  array  $condition
      * @return string
      */
     private function getAttributeScope($condition)
@@ -168,17 +177,18 @@ class Validator
     /**
      * Validate attribute value for condition
      *
-     * @param array $condition
-     * @param mixed $attributeValue
-     * @return boolean
+     * @param  array $condition
+     * @param  mixed $attributeValue
+     * @return bool
      */
     public function validateAttribute($condition, $attributeValue)
     {
         switch ($condition['operator']) {
             case '==': case '!=':
                 if (is_array($condition['value'])) {
-                    if (! is_array($attributeValue))
+                    if (! is_array($attributeValue)) {
                         return false;
+                    }
 
                     $result = ! empty(array_intersect($condition['value'], $attributeValue));
                 } else {
@@ -192,16 +202,18 @@ class Validator
                 break;
 
             case '<=': case '>':
-                if (! is_scalar($attributeValue))
+                if (! is_scalar($attributeValue)) {
                     return false;
+                }
 
                 $result = $attributeValue <= $condition['value'];
 
                 break;
 
             case '>=': case '<':
-                if (! is_scalar($attributeValue))
+                if (! is_scalar($attributeValue)) {
                     return false;
+                }
 
                 $result = $attributeValue >= $condition['value'];
 
@@ -216,9 +228,10 @@ class Validator
                             break;
                         }
                     }
-                } else if (is_array($condition['value'])) {
-                    if (! is_array($attributeValue))
+                } elseif (is_array($condition['value'])) {
+                    if (! is_array($attributeValue)) {
                         return false;
+                    }
 
                     $result = ! empty(array_intersect($condition['value'], $attributeValue));
                 } else {
@@ -232,8 +245,9 @@ class Validator
                 break;
         }
 
-        if (in_array($condition['operator'], ['!=', '>', '<', '!{}']))
+        if (in_array($condition['operator'], ['!=', '>', '<', '!{}'])) {
             $result = ! $result;
+        }
 
         return $result;
     }

@@ -2,12 +2,6 @@
 
 namespace Webkul\Product\Type;
 
-/**
- * Class Simple.
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class Simple extends AbstractType
 {
     /**
@@ -33,34 +27,36 @@ class Simple extends AbstractType
     /**
      * Show quantity box
      *
-     * @var boolean
+     * @var bool
      */
     protected $showQuantityBox = true;
 
     /**
      * Return true if this product type is saleable
      *
-     * @return boolean
+     * @return bool
      */
     public function isSaleable()
     {
-        if (! $this->product->status)
+        if (! $this->product->status) {
             return false;
+        }
 
-        if ($this->haveSufficientQuantity(1))
+        if ($this->haveSufficientQuantity(1)) {
             return true;
+        }
 
         return false;
     }
 
     /**
-     * @param integer $qty
-     *
-     * @return boolean
+     * @param  int  $qty
+     * @return bool
      */
     public function haveSufficientQuantity($qty)
     {
         $backorders = core()->getConfigData('catalog.inventory.stock_options.backorders');
+        
         return $qty <= $this->totalQuantity() ? true : $backorders;
     }
 }

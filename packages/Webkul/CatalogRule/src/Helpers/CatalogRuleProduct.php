@@ -14,38 +14,38 @@ class CatalogRuleProduct
     /**
      * AttributeRepository object
      *
-     * @var AttributeRepository
+     * @var \Webkul\Attribute\Repositories\AttributeRepository
      */
     protected $attributeRepository;
 
     /**
      * ProductRepository object
      *
-     * @var ProductRepository
+     * @var \Webkul\Product\Repositories\ProductRepository
      */
     protected $productRepository;
 
     /**
      * CatalogRuleProductRepository object
      *
-     * @var CatalogRuleProductRepository
+     * @var \Webkul\CatalogRule\Repositories\CatalogRuleProductRepository
      */
     protected $catalogRuleProductRepository;
 
     /**
      * Validator object
      *
-     * @var Validator
+     * @var \Webkul\Rule\Helpers\ValidatorValidator
      */
     protected $validator;
 
     /**
      * Create a new helper instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeRepository            $attributeRepository
-     * @param  Webkul\Product\Repositories\ProductRepository                $productRepository
-     * @param  Webkul\CatalogRule\Repositories\CatalogRuleProductRepository $catalogRuleProductRepository
-     * @param  Webkul\Rule\Helpers\Validator                                $validator
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\CatalogRule\Repositories\CatalogRuleProductRepository  $catalogRuleProductRepository
+     * @param  \Webkul\Rule\Helpers\Validator  $validator
      * @return void
      */
     public function __construct(
@@ -67,8 +67,8 @@ class CatalogRuleProduct
     /**
      * Collect discount on cart
      *
-     * @param CatalogRule $rule
-     * @param integer     $batchCount
+     * @param \Webkul\CatalogRule\Contracts\CatalogRule  $rule
+     * @param int  $batchCount
      * @return void
      */
     public function insertRuleProduct($rule, $batchCount = 1000, $product = null)
@@ -85,16 +85,16 @@ class CatalogRuleProduct
             foreach ($rule->channels()->pluck('id') as $channelId) {
                 foreach ($rule->customer_groups()->pluck('id') as $customerGroupId) {
                     $rows[] = [
-                        'starts_from' => $startsFrom,
-                        'ends_till' => $endsTill,
-                        'catalog_rule_id' => $rule->id,
-                        'channel_id' => $channelId,
+                        'starts_from'       => $startsFrom,
+                        'ends_till'         => $endsTill,
+                        'catalog_rule_id'   => $rule->id,
+                        'channel_id'        => $channelId,
                         'customer_group_id' => $customerGroupId,
-                        'product_id' => $productId,
-                        'discount_amount' => $rule->discount_amount,
-                        'action_type' => $rule->action_type,
-                        'end_other_rules' => $rule->end_other_rules,
-                        'sort_order' => $rule->sort_order,
+                        'product_id'        => $productId,
+                        'discount_amount'   => $rule->discount_amount,
+                        'action_type'       => $rule->action_type,
+                        'end_other_rules'   => $rule->end_other_rules,
+                        'sort_order'        => $rule->sort_order,
                     ];
 
                     if (count($rows) == $batchCount) {
@@ -106,31 +106,34 @@ class CatalogRuleProduct
             }
         }
 
-        if (! empty($rows))
+        if (! empty($rows)) {
             $this->catalogRuleProductRepository->getModel()->insert($rows);
+        }
     }
 
     /**
      * Get array of product ids which are matched by rule
      *
-     * @param CatalogRule $rule
-     * @param Product     $product
+     * @param  \Webkul\CatalogRule\Contracts\CatalogRule  $rule
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @return array
      */
     public function getMatchingProductIds($rule, $product = null)
     {
         $qb = $this->productRepository->scopeQuery(function($query) use($rule, $product) {
             $qb = $query->distinct()
-                    ->addSelect('products.*')
-                    ->leftJoin('product_flat', 'products.id', '=', 'product_flat.product_id')
-                    ->leftJoin('channels', 'product_flat.channel', '=', 'channels.code')
-                    ->whereIn('channels.id', $rule->channels()->pluck('id')->toArray());
+                        ->addSelect('products.*')
+                        ->leftJoin('product_flat', 'products.id', '=', 'product_flat.product_id')
+                        ->leftJoin('channels', 'product_flat.channel', '=', 'channels.code')
+                        ->whereIn('channels.id', $rule->channels()->pluck('id')->toArray());
 
-            if ($product)
+            if ($product) {
                 $qb->where('products.id', $product->id);
+            }
 
-            if (! $rule->conditions)
+            if (! $rule->conditions) {
                 return $qb;
+            }
 
             $appliedAttributes = [];
 
@@ -139,8 +142,10 @@ class CatalogRuleProduct
                     || ! isset($condition['value'])
                     || is_null($condition['value'])
                     || $condition['value'] == ''
-                    || in_array($condition['attribute'], $appliedAttributes))
+                    || in_array($condition['attribute'], $appliedAttributes)
+                ) {
                     continue;
+                }
                 
                 $appliedAttributes[] = $condition['attribute'];
 
@@ -155,8 +160,9 @@ class CatalogRuleProduct
         $validatedProductIds = [];
 
         foreach ($qb->get() as $product) {
-            if (! $product->getTypeInstance()->priceRuleCanBeApplied())
+            if (! $product->getTypeInstance()->priceRuleCanBeApplied()) {
                 continue;
+            }
 
             if ($this->validator->validate($rule, $product)) {
                 if ($product->getTypeInstance()->isComposite()) {
@@ -173,23 +179,24 @@ class CatalogRuleProduct
     /**
      * Add product attribute condition to query
      *
-     * @param string       $attributeCode
-     * @param QueryBuilder $query
-     * @return QueryBuilder
+     * @param  string  $attributeCode
+     * @param \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function addAttributeToSelect($attributeCode, $query)
     {
         $attribute = $this->attributeRepository->findOneByField('code', $attributeCode);
 
-        if (! $attribute)
+        if (! $attribute) {
             return $query;
+        }
 
         $query = $query->leftJoin('product_attribute_values as ' . 'pav_' . $attribute->code, function($qb) use($attribute) {
             $qb = $qb->where('pav_' . $attribute->code . '.channel', $attribute->value_per_channel ? core()->getDefaultChannelCode() : null)
-                    ->where('pav_' . $attribute->code . '.locale', $attribute->value_per_locale ? app()->getLocale() : null);
+                     ->where('pav_' . $attribute->code . '.locale', $attribute->value_per_locale ? app()->getLocale() : null);
             
             $qb->on('products.id', 'pav_' . $attribute->code . '.product_id')
-                    ->where('pav_' . $attribute->code . '.attribute_id', $attribute->id);
+               ->where('pav_' . $attribute->code . '.attribute_id', $attribute->id);
         });
 
         $query = $query->addSelect('pav_' . $attribute->code . '.' . ProductAttributeValue::$attributeTypeFields[$attribute->type] . ' as ' . $attribute->code);
@@ -200,26 +207,27 @@ class CatalogRuleProduct
     /**
      * Returns catalog rule products
      *
-     * @param Product $product
-     * @return Collection
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @return \Illuminate\Support\Collection
      */
     public function getCatalogRuleProducts($product = null)
     {
         $results = $this->catalogRuleProductRepository->scopeQuery(function($query) use($product) {
             $qb = $query->distinct()
-                    ->select('catalog_rule_products.*')
-                    ->leftJoin('products', 'catalog_rule_products.product_id', '=', 'products.id')
-                    ->orderBy('channel_id', 'asc')
-                    ->orderBy('customer_group_id', 'asc')
-                    ->orderBy('product_id', 'asc')
-                    ->orderBy('sort_order', 'asc')
-                    ->orderBy('catalog_rule_id', 'asc');
+                        ->select('catalog_rule_products.*')
+                        ->leftJoin('products', 'catalog_rule_products.product_id', '=', 'products.id')
+                        ->orderBy('channel_id', 'asc')
+                        ->orderBy('customer_group_id', 'asc')
+                        ->orderBy('product_id', 'asc')
+                        ->orderBy('sort_order', 'asc')
+                        ->orderBy('catalog_rule_id', 'asc');
 
             $qb = $this->addAttributeToSelect('price', $qb);
 
             if ($product) {
-                if (! $product->getTypeInstance()->priceRuleCanBeApplied())
+                if (! $product->getTypeInstance()->priceRuleCanBeApplied()) {
                     return $qb;
+                }
 
                 if ($product->getTypeInstance()->isComposite()) {
                     $qb->whereIn('catalog_rule_products.product_id', $product->getTypeInstance()->getChildrenIds());
@@ -237,7 +245,7 @@ class CatalogRuleProduct
     /**
      * Returns catalog rules
      *
-     * @param CatalogRule $rule
+     * @param  \Webkul\CatalogRule\Contracts\CatalogRule  $rule
      * @return void
      */
     public function cleanProductIndex($productIds = [])

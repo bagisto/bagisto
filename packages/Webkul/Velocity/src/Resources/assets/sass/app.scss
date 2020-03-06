@@ -509,9 +509,13 @@ header {
                     }
                 }
             }
+
+            // transform: scale(1) rotateZ(-180deg);
+            // transition: transform .15s,opacity .15s;
         }
 
-        ~ .compare-btn {
+        ~ .compare-btn,
+        ~ .wishlist-btn {
             height: 50px;
             float: right;
             font-size: 18px;
@@ -519,7 +523,29 @@ header {
             padding: 10px 16px 6px 16px;
 
             i {
+                margin-right: 5px;
                 vertical-align: middle;
+            }
+
+            .badge-container {
+                position: relative;
+                display: inline-block;
+
+                .badge {
+                    @include border-radius(50%);
+
+                    top: -23px;
+                    left: -15px;
+                    padding: 4px;
+                    min-width: 20px;
+                    position: absolute;
+                    background: $button-primary-bg;
+                }
+            }
+
+            span {
+                top: 2px;
+                position: relative;
             }
         }
     }

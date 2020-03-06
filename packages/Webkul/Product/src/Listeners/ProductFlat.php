@@ -6,79 +6,72 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
-use Webkul\Product\Helpers\ProductType;
 use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Helpers\ProductType;
 use Webkul\Product\Models\ProductAttributeValue;
 
-/**
- * Product Flat Event handler
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @author    Prashant Singh <prashant.singh852@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ProductFlat
 {
     /**
      * AttributeRepository Repository Object
      *
-     * @var object
+     * @var \Webkul\Attribute\Repositories\AttributeRepository
      */
     protected $attributeRepository;
 
     /**
      * AttributeOptionRepository Repository Object
      *
-     * @var object
+     * @var \Webkul\Attribute\Repositories\AttributeOptionRepository
      */
     protected $attributeOptionRepository;
 
     /**
      * ProductFlatRepository Repository Object
      *
-     * @var object
+     * @var \Webkul\Product\Repositories\ProductFlatRepository
      */
     protected $productFlatRepository;
 
     /**
      * ProductAttributeValueRepository Repository Object
      *
-     * @var object
+     * @var \Webkul\Product\Repositories\ProductAttributeValueRepository
      */
     protected $productAttributeValueRepository;
 
     /**
      * Attribute Object
      *
-     * @var object
+     * @var \Webkul\Attribute\Contracts\Attribute
      */
     protected $attribute;
 
     /**
-     * @var object
+     * @var array
      */
     public $attributeTypeFields = [
-        'text' => 'text',
-        'textarea' => 'text',
-        'price' => 'float',
-        'boolean' => 'boolean',
-        'select' => 'integer',
+        'text'        => 'text',
+        'textarea'    => 'text',
+        'price'       => 'float',
+        'boolean'     => 'boolean',
+        'select'      => 'integer',
         'multiselect' => 'text',
-        'datetime' => 'datetime',
-        'date' => 'date',
-        'file' => 'text',
-        'image' => 'text',
-        'checkbox' => 'text'
+        'datetime'    => 'datetime',
+        'date'        => 'date',
+        'file'        => 'text',
+        'image'       => 'text',
+        'checkbox'    => 'text',
     ];
 
     /**
      * Create a new listener instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeRepository           $attributeRepository
-     * @param  Webkul\Attribute\Repositories\AttributeOptionRepository     $attributeOptionRepository
-     * @param  Webkul\Product\Repositories\ProductFlatRepository           $productFlatRepository
-     * @param  Webkul\Product\Repositories\ProductAttributeValueRepository $productAttributeValueRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeOptionRepository  $attributeOptionRepository
+     * @param  \Webkul\Product\Repositories\ProductFlatRepository  $productFlatRepository
+     * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $productAttributeValueRepository
      * @return void
      */
     public function __construct(
@@ -100,6 +93,7 @@ class ProductFlat
     /**
      * After the attribute is created
      *
+     * @param  \Webkul\Attribute\Contracts\Attribute  $attribute
      * @return void
      */
     public function afterAttributeCreatedUpdated($attribute)
@@ -124,6 +118,12 @@ class ProductFlat
         }
     }
 
+    /**
+     * After the attribute is deleted
+     *
+     * @param  int  $attributeId
+     * @return void
+     */
     public function afterAttributeDeleted($attributeId)
     {
         $attribute = $this->attributeRepository->find($attributeId);
@@ -142,7 +142,7 @@ class ProductFlat
     /**
      * Creates product flat
      *
-     * @param Product $product
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @return void
      */
     public function afterProductCreatedUpdated($product)
@@ -159,8 +159,8 @@ class ProductFlat
     /**
      * Creates product flat
      *
-     * @param Product $product
-     * @param Product $parentProduct
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  \Webkul\Product\Contracts\Product  $parentProduct
      * @return void
      */
     public function createFlat($product, $parentProduct = null)
@@ -169,18 +169,20 @@ class ProductFlat
 
         static $superAttributes = [];
 
-        if (! array_key_exists($product->attribute_family->id, $familyAttributes))
+        if (! array_key_exists($product->attribute_family->id, $familyAttributes)) {
             $familyAttributes[$product->attribute_family->id] = $product->attribute_family->custom_attributes;
+        }
 
-        if ($parentProduct && ! array_key_exists($parentProduct->id, $superAttributes))
+        if ($parentProduct && ! array_key_exists($parentProduct->id, $superAttributes)) {
             $superAttributes[$parentProduct->id] = $parentProduct->super_attributes()->pluck('code')->toArray();
+        }
 
         if (isset($product['channels'])) {
             foreach ($product['channels'] as $channel) {
                 $channel = app('Webkul\Core\Repositories\ChannelRepository')->findOrFail($channel);
                 $channels[] = $channel['code'];
             }
-        } else if (isset($parentProduct['channels'])){
+        } elseif (isset($parentProduct['channels'])){
             foreach ($parentProduct['channels'] as $channel) {
                 $channel = app('Webkul\Core\Repositories\ChannelRepository')->findOrFail($channel);
                 $channels[] = $channel['code'];
@@ -194,33 +196,43 @@ class ProductFlat
                 foreach ($channel->locales as $locale) {
                     $productFlat = $this->productFlatRepository->findOneWhere([
                         'product_id' => $product->id,
-                        'channel' => $channel->code,
-                        'locale' => $locale->code
+                        'channel'    => $channel->code,
+                        'locale'     => $locale->code,
                     ]);
 
                     if (! $productFlat) {
                         $productFlat = $this->productFlatRepository->create([
                             'product_id' => $product->id,
-                            'channel' => $channel->code,
-                            'locale' => $locale->code
+                            'channel'    => $channel->code,
+                            'locale'     => $locale->code,
                         ]);
                     }
 
                     foreach ($familyAttributes[$product->attribute_family->id] as $attribute) {
-                        if ($parentProduct && ! in_array($attribute->code, array_merge($superAttributes[$parentProduct->id], ['sku', 'name', 'price', 'weight', 'status'])))
+                        if ($parentProduct && ! in_array($attribute->code, array_merge($superAttributes[$parentProduct->id], ['sku', 'name', 'price', 'weight', 'status']))) {
                             continue;
+                        }
 
-                        if (in_array($attribute->code, ['tax_category_id']))
+                        if (in_array($attribute->code, ['tax_category_id'])) {
                             continue;
+                        }
 
-                        if (! Schema::hasColumn('product_flat', $attribute->code))
+                        if (! Schema::hasColumn('product_flat', $attribute->code)) {
                             continue;
+                        }
 
                         if ($attribute->value_per_channel) {
                             if ($attribute->value_per_locale) {
-                                $productAttributeValue = $product->attribute_values()->where('channel', $channel->code)->where('locale', $locale->code)->where('attribute_id', $attribute->id)->first();
+                                $productAttributeValue = $product->attribute_values()
+                                                                 ->where('channel', $channel->code)
+                                                                 ->where('locale', $locale->code)
+                                                                 ->where('attribute_id', $attribute->id)
+                                                                 ->first();
                             } else {
-                                $productAttributeValue = $product->attribute_values()->where('channel', $channel->code)->where('attribute_id', $attribute->id)->first();
+                                $productAttributeValue = $product->attribute_values()
+                                                                 ->where('channel', $channel->code)
+                                                                 ->where('attribute_id', $attribute->id)
+                                                                 ->first();
                             }
                         } else {
                             if ($attribute->value_per_locale) {
@@ -274,12 +286,13 @@ class ProductFlat
                     if ($parentProduct) {
                         $parentProductFlat = $this->productFlatRepository->findOneWhere([
                                 'product_id' => $parentProduct->id,
-                                'channel' => $channel->code,
-                                'locale' => $locale->code
+                                'channel'    => $channel->code,
+                                'locale'     => $locale->code,
                             ]);
 
-                        if ($parentProductFlat)
+                        if ($parentProductFlat) {
                             $productFlat->parent_id = $parentProductFlat->id;
+                        }
                     }
 
                     $productFlat->save();
@@ -290,7 +303,7 @@ class ProductFlat
                 if ($route == 'admin.catalog.products.update') {
                     $productFlat = $this->productFlatRepository->findOneWhere([
                         'product_id' => $product->id,
-                        'channel' => $channel->code,
+                        'channel'    => $channel->code,
                     ]);
 
                     if ($productFlat) {

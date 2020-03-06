@@ -4,12 +4,6 @@ namespace Webkul\Customer\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
 
-/**
- * Customer Reposotory
- *
- * @author    Prashant Singh <prashant.singh852@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class CustomerRepository extends Repository
 {
     /**

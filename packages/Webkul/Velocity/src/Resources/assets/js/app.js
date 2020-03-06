@@ -31,6 +31,7 @@ window.Carousel = VueCarousel;
 
 // UI components
 Vue.component("vue-slider", require("vue-slider-component"));
+Vue.component('mini-cart', require('./UI/components/mini-cart'));
 Vue.component('modal-component', require('./UI/components/modal'));
 Vue.component("add-to-cart", require("./UI/components/add-to-cart"));
 Vue.component('star-ratings', require('./UI/components/star-rating'));
@@ -58,6 +59,7 @@ $(document).ready(function () {
             return {
                 'baseUrl': document.querySelector("script[src$='velocity.js']").getAttribute('baseUrl'),
                 'navContainer': false,
+                'headerItemsCount': 0,
                 'responsiveSidebarTemplate': '',
                 'responsiveSidebarKey': Math.random(),
                 'sharedRootCategories': [],
@@ -97,6 +99,7 @@ $(document).ready(function () {
                     || Array.from(target.classList)[0]  == "rango-arrow-right"
                 ) {
                     let parentItem = target.closest('li');
+
                     if (target.id || parentItem.id.match('category-')) {
                         let subCategories = $(`#${target.id ? target.id : parentItem.id} .sub-categories`);
 
@@ -165,19 +168,41 @@ $(document).ready(function () {
             },
 
             getDynamicHTML: function (input) {
+                var _staticRenderFns;
                 const { render, staticRenderFns } = Vue.compile(input);
-                const _staticRenderFns = this.$options.staticRenderFns = staticRenderFns;
 
-                try {
-                    var output = render.call(this, this.$createElement)
-                } catch (exception) {
-                    console.log(this.__('error.something-went-wrong'));
+                if (this.$options.staticRenderFns.length > 0) {
+                    _staticRenderFns = this.$options.staticRenderFns;
+                } else {
+                    _staticRenderFns = this.$options.staticRenderFns = staticRenderFns;
                 }
 
-                this.$options.staticRenderFns = _staticRenderFns
+                try {
+                    var output = render.call(this, this.$createElement);
+                } catch (exception) {
+                    console.log(this.__('error.something_went_wrong'));
+                }
+
+                this.$options.staticRenderFns = _staticRenderFns;
 
                 return output;
-            }
+            },
+
+            getStorageValue: function (key) {
+                let value = window.localStorage.getItem(key);
+
+                if (value) {
+                    value = JSON.parse(value);
+                }
+
+                return value;
+            },
+
+            setStorageValue: function (key, value) {
+                window.localStorage.setItem(key, JSON.stringify(value));
+
+                return true;
+            },
         }
     });
 
@@ -188,6 +213,7 @@ $(document).ready(function () {
         data: function () {
             return {
                 modalIds: {},
+                miniCartKey: 0,
                 quickView: false,
                 productDetails: [],
             }
@@ -316,5 +342,5 @@ $(document).ready(function () {
         render(h, {props}) {
             return props.nodes;
         }
-    })
+    });
 });
