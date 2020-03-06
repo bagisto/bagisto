@@ -121,9 +121,9 @@ class ProductDataGrid extends DataGrid
             'filterable' => true,
             'wrapper'    => function($value) {
                 if ($value->status == 1) {
-                    return 'Active';
+                    return trans('admin::app.datagrid.active');
                 } else {
-                    return 'Inactive';
+                    return trans('admin::app.datagrid.inactive');
                 }
             },
         ]);
@@ -154,9 +154,10 @@ class ProductDataGrid extends DataGrid
         ]);
     }
 
-    public function prepareActions() {
+    public function prepareActions()
+    {
         $this->addAction([
-            'title'     => 'Edit Product',
+            'title'     => trans('admin::app.datagrid.edit'),
             'method'    => 'GET',
             'route'     => 'admin.catalog.products.edit',
             'icon'      => 'icon pencil-lg-icon',
@@ -166,7 +167,7 @@ class ProductDataGrid extends DataGrid
         ]);
 
         $this->addAction([
-            'title'        => 'Delete Product',
+            'title'        => trans('admin::app.datagrid.delete'),
             'method'       => 'POST',
             'route'        => 'admin.catalog.products.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
@@ -174,7 +175,8 @@ class ProductDataGrid extends DataGrid
         ]);
     }
 
-    public function prepareMassActions() {
+    public function prepareMassActions()
+    {
         $this->addMassAction([
             'type'   => 'delete',
             'label'  => trans('admin::app.datagrid.delete'),

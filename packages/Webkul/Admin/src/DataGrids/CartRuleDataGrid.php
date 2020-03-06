@@ -102,14 +102,14 @@ class CartRuleDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'title'  => 'Edit Cart Rule',
+            'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.cart-rules.edit',
             'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
-            'title'  => 'Delete Cart Rule',
+            'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
             'route'  => 'admin.cart-rules.delete',
             'icon'   => 'icon trash-icon',

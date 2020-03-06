@@ -118,7 +118,8 @@ class CustomerDataGrid extends DataGrid
         ]);
     }
 
-    public function prepareActions() {
+    public function prepareActions()
+    {
         $this->addAction([
             'method' => 'GET',
             'route'  => 'admin.customer.edit',

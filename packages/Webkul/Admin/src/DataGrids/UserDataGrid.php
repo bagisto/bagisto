@@ -53,9 +53,9 @@ class UserDataGrid extends DataGrid
             'filterable' => true,
             'wrapper'    => function($value) {
                 if ($value->status == 1) {
-                    return 'Active';
+                    return trans('admin::app.datagrid.active');
                 } else {
-                    return 'Inactive';
+                    return trans('admin::app.datagrid.inactive');
                 }
             },
         ]);
@@ -79,16 +79,17 @@ class UserDataGrid extends DataGrid
         ]);
     }
 
-    public function prepareActions() {
+    public function prepareActions()
+    {
         $this->addAction([
-            'title'  => 'Edit User',
+            'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.users.edit',
             'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
-            'title'  => 'Delete User',
+            'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
             'route'  => 'admin.users.delete',
             'icon'   => 'icon trash-icon',

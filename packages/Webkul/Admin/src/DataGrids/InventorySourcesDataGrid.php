@@ -65,24 +65,25 @@ class InventorySourcesDataGrid extends DataGrid
             'filterable' => true,
             'wrapper'    => function($value) {
                 if ($value->status == 1) {
-                    return 'Active';
+                    return trans('admin::app.datagrid.active');
                 } else {
-                    return 'Inactive';
+                    return trans('admin::app.datagrid.inactive');
                 }
             },
         ]);
     }
 
-    public function prepareActions() {
+    public function prepareActions()
+    {
         $this->addAction([
-            'title'  => 'Edit Inventory Source',
+            'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.inventory_sources.edit',
             'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
-            'title'        => 'Delete Inventory Source',
+            'title'        => trans('admin::app.datagrid.delete'),
             'method'       => 'POST',
             'route'        => 'admin.inventory_sources.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'Exchange Rate']),

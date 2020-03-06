@@ -75,33 +75,35 @@ class CustomerReviewDataGrid extends DataGrid
             'closure'    => true,
             'wrapper'    => function ($value) {
                 if ($value->product_review_status == 'approved') {
-                    return '<span class="badge badge-md badge-success">Approved</span>';
+                    return '<span class="badge badge-md badge-success">' . trans('admin::app.datagrid.approved') . '</span>';
                 } elseif ($value->product_review_status == "pending") {
-                    return '<span class="badge badge-md badge-warning">Pending</span>';
+                    return '<span class="badge badge-md badge-warning">' . trans('admin::app.datagrid.pending') . '</span>';
                 } elseif ($value->product_review_status == "disapproved") {
-                    return '<span class="badge badge-md badge-danger">Disapproved</span>';
+                    return '<span class="badge badge-md badge-danger">' . trans('admin::app.datagrid.disapproved') . '</span>';
                 }
             },
         ]);
     }
 
-    public function prepareActions() {
+    public function prepareActions()
+    {
         $this->addAction([
-            'title'  => 'Edit Customer Review',
+            'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.customer.review.edit',
             'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
-            'title'  => 'Delete Customer Review',
+            'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
             'route'  => 'admin.customer.review.delete',
             'icon'   => 'icon trash-icon',
         ]);
     }
 
-    public function prepareMassActions() {
+    public function prepareMassActions()
+    {
         $this->addMassAction([
             'type'  => 'delete',
             'label'  => trans('admin::app.datagrid.delete'),
