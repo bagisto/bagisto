@@ -22,9 +22,9 @@
     </span>
 
     <div class="toggle" @click="showDaysAvailability = ! showDaysAvailability">
-        Show for all days
+        {{ __('bookingproduct::app.shop.products.slots-for-all-days') }}
 
-        <i class="icon arrow-down-icon"></i>
+        <i class="icon" :class="[! showDaysAvailability ? 'arrow-down-icon' : 'arrow-up-icon']"></i>
     </div>
 
     <div class="days-availability" v-show="showDaysAvailability">
