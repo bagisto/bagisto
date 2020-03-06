@@ -5,11 +5,12 @@ namespace Webkul\Velocity\Helpers;
 use DB;
 use Webkul\Product\Helpers\Review;
 use Webkul\Product\Models\Product as ProductModel;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Velocity\Repositories\OrderBrandsRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Velocity\Repositories\VelocityMetadataRepository;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
-use Webkul\Product\Repositories\ProductRepository as ProductRepository;
 
 class Helper extends Review
 {
@@ -21,11 +22,18 @@ class Helper extends Review
     protected $orderBrands;
 
     /**
-     * productRepository object
+     * \Webkul\Product\Repositories\ProductRepository object
      *
      * @var object
      */
     protected $productRepository;
+
+    /**
+     * \Webkul\Product\Repositories\ProductFlatRepository object
+     *
+     * @var object
+     */
+    protected $productFlatRepository;
 
      /**
      * productModel object
@@ -59,6 +67,7 @@ class Helper extends Review
         ProductModel $productModel,
         ProductRepository $productRepository,
         AttributeOptionRepository $attributeOption,
+        ProductFlatRepository $productFlatRepository,
         OrderBrandsRepository $orderBrandsRepository,
         ProductReviewRepository $productReviewRepository,
         VelocityMetadataRepository $velocityMetadataRepository
@@ -66,6 +75,7 @@ class Helper extends Review
         $this->productModel =  $productModel;
         $this->attributeOption =  $attributeOption;
         $this->productRepository = $productRepository;
+        $this->productFlatRepository = $productFlatRepository;
         $this->orderBrandsRepository = $orderBrandsRepository;
         $this->productReviewRepository =  $productReviewRepository;
         $this->velocityMetadataRepository =  $velocityMetadataRepository;
@@ -232,7 +242,7 @@ class Helper extends Review
         $avgRatings = ceil($reviewHelper->getAverageRating($product));
 
         $galleryImages = $productImageHelper->getGalleryImages($product);
-        $productImage = $productImageHelper->getProductBaseImage($product)['medium_image_url'];
+        $productImage = $productImageHelper->getProductBaseImage($product)['large_image_url'];
 
         return [
             'avgRating'         => $avgRatings,
@@ -257,30 +267,37 @@ class Helper extends Review
     /**
      * Returns the count rating of the product
      *
-     * @param $items - & seperated product slugs
+     * @param $items
+     * @param $separator
      *
      * @return array
-    */
+     */
     public function fetchProductCollection($items, $separator='&')
     {
         $productCollection = [];
-        $productSlugs = explode($separator, $items);
+        $productIds = explode($separator, $items);
 
-        foreach ($productSlugs as $slug) {
-            $product = $this->productRepository->findBySlug($slug);
+        foreach ($productIds as $productId) {
+            // @TODO:- query only once insted of 2
+            $productFlat = $this->productFlatRepository->findOneWhere(['id' => $productId]);
 
-            if ($product) {
-                $formattedProduct = $this->formatProduct($product);
+            if ($productFlat) {
+                $product = $this->productRepository->findOneWhere(['id' => $productFlat->product_id]);
 
-                $productMetaDetails = [];
-                $productMetaDetails['image'] = $formattedProduct['image'];
-                $productMetaDetails['priceHTML'] = $formattedProduct['priceHTML'];
-                $productMetaDetails['addToCartHtml'] = $formattedProduct['addToCartHtml'];
-                $productMetaDetails['galleryImages'] = $formattedProduct['galleryImages'];
+                if ($product) {
+                    $formattedProduct = $this->formatProduct($product);
 
-                $product = array_merge($product->toArray(), $productMetaDetails);
+                    $productMetaDetails = [];
+                    $productMetaDetails['slug'] = $product->url_key;
+                    $productMetaDetails['image'] = $formattedProduct['image'];
+                    $productMetaDetails['priceHTML'] = $formattedProduct['priceHTML'];
+                    $productMetaDetails['addToCartHtml'] = $formattedProduct['addToCartHtml'];
+                    $productMetaDetails['galleryImages'] = $formattedProduct['galleryImages'];
 
-                array_push($productCollection, $product);
+                    $product = array_merge($product->toArray(), $productMetaDetails);
+
+                    array_push($productCollection, $product);
+                }
             }
         }
 

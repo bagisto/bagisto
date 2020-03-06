@@ -132,6 +132,7 @@
 
             methods: {
                 'getComparedProducts': function () {
+                    let items = '';
                     let url = `${this.$root.baseUrl}/${this.isCustomer ? 'comparison' : 'detailed-products'}`;
 
                     let data = {
@@ -139,7 +140,7 @@
                     }
 
                     if (! this.isCustomer) {
-                        let items = this.getStorageValue('compared_product');
+                        items = this.getStorageValue('compared_product');
                         items = items ? items.join('&') : '';
 
                         data = {
@@ -149,14 +150,19 @@
                         };
                     }
 
-                    this.$http.get(url, data)
-                    .then(response => {
+                    if (this.isCustomer || (! this.isCustomer && items != "")) {
+                        this.$http.get(url, data)
+                        .then(response => {
+                            this.isProductListLoaded = true;
+                            this.products = response.data.products;
+                        })
+                        .catch(error => {
+                            console.log(this.__('error.something_went_wrong'));
+                        });
+                    } else {
                         this.isProductListLoaded = true;
-                        this.products = response.data.products;
-                    })
-                    .catch(error => {
-                        console.log(this.__('error.something_went_wrong'));
-                    });
+                    }
+
                 },
 
                 'removeProductCompare': function (productId) {

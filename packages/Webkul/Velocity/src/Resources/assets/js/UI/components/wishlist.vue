@@ -10,7 +10,7 @@
 
     <a
         v-else
-        @click="toggleProductWishlist(productSlug)"
+        @click="toggleProductWishlist(productId)"
         :class="`unset wishlist-icon ${addClass ? addClass : ''} text-right`">
 
         <i
@@ -29,6 +29,7 @@
             'active',
             'addClass',
             'addedText',
+            'productId',
             'removeText',
             'isCustomer',
             'productSlug',
@@ -43,21 +44,21 @@
 
         created: function () {
             if (this.isCustomer == 'false') {
-                this.isActive = this.isWishlisted(this.productSlug);
+                this.isActive = this.isWishlisted(this.productId);
             }
         },
 
         methods: {
-            toggleProductWishlist: function (productSlug) {
-                var updatedValue = [productSlug];
+            toggleProductWishlist: function (productId) {
+                var updatedValue = [productId];
                 let existingValue = this.getStorageValue('wishlist_product');
 
                 if (existingValue) {
-                    let valueIndex = existingValue.indexOf(productSlug);
+                    let valueIndex = existingValue.indexOf(productId);
 
                     if (valueIndex == -1) {
                         this.isActive = true;
-                        existingValue.push(productSlug);
+                        existingValue.push(productId);
                     } else {
                         this.isActive = false;
                         existingValue.splice(valueIndex, 1);
@@ -80,11 +81,11 @@
                 return true;
             },
 
-            isWishlisted: function (productSlug) {
+            isWishlisted: function (productId) {
                 let existingValue = this.getStorageValue('wishlist_product');
 
                 if (existingValue) {
-                    return ! (existingValue.indexOf(productSlug) == -1);
+                    return ! (existingValue.indexOf(productId) == -1);
                 } else {
                     return false;
                 }

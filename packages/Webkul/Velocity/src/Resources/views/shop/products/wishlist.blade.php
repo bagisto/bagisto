@@ -24,6 +24,7 @@
         <wishlist-component
             active="false"
             is-customer="false"
+            product-id="{{ $product->id }}"
             product-slug="{{ $product->url_key }}"
             add-class="{{ $addWishlistClass ?? '' }}"
             added-text="{{ __('shop::app.customer.account.wishlist.add') }}"
