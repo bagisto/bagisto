@@ -242,7 +242,19 @@ class Helper extends Review
         $avgRatings = ceil($reviewHelper->getAverageRating($product));
 
         $galleryImages = $productImageHelper->getGalleryImages($product);
-        $productImage = $productImageHelper->getProductBaseImage($product)['large_image_url'];
+        $productImage = $productImageHelper->getProductBaseImage($product)['medium_image_url'];
+
+        $largeProductImageName = "large-product-placeholder.png";
+        $mediumProductImageName = "meduim-product-placeholder.png";
+
+        if (strpos($productImage, $mediumProductImageName) > -1) {
+            $productImageNameCollection = explode('/', $productImage);
+            $productImageName = $productImageNameCollection[sizeof($productImageNameCollection) - 1];
+
+            if ($productImageName == $mediumProductImageName) {
+                $productImage = str_replace($mediumProductImageName, $largeProductImageName, $productImage);
+            }
+        }
 
         return [
             'avgRating'         => $avgRatings,

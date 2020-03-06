@@ -666,6 +666,13 @@ body::after {
             font-size: 20px;
             font-weight: 600;
         }
+
+        .price-from {
+            span:nth-child(3) {
+                margin-left: 6px;
+                display: inline-block !important;
+            }
+        }
     }
 
     .quick-view-name {
