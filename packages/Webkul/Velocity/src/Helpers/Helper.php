@@ -76,7 +76,7 @@ class Helper extends Review
     public function __construct(
         ProductModel $productModel,
         ProductRepository $productRepository,
-        AttributeOptionRepository $attributeOption,
+        AttributeOptionRepository $attributeOptionRepository,
         ProductFlatRepository $productFlatRepository,
         OrderBrandsRepository $orderBrandsRepository,
         ProductReviewRepository $productReviewRepository,
