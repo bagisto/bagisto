@@ -5,12 +5,6 @@ namespace Webkul\User\Http\Controllers;
 use Illuminate\Support\Facades\Event;
 use Webkul\User\Repositories\RoleRepository;
 
-/**
- * Admin user role controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class RoleController extends Controller
 {
     /**
@@ -23,14 +17,14 @@ class RoleController extends Controller
     /**
      * RoleRepository object
      *
-     * @var array
+     * @var \Webkul\User\Repositories\RoleRepository
      */
     protected $roleRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\User\Repositories\RoleRepository $roleRepository
+     * @param  \Webkul\User\Repositories\RoleRepository  $roleRepository
      * @return void
      */
     public function __construct(RoleRepository $roleRepository)
@@ -70,7 +64,7 @@ class RoleController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'name' => 'required',
+            'name'            => 'required',
             'permission_type' => 'required',
         ]);
 
@@ -107,7 +101,7 @@ class RoleController extends Controller
     public function update($id)
     {
         $this->validate(request(), [
-            'name' => 'required',
+            'name'            => 'required',
             'permission_type' => 'required',
         ]);
 
@@ -134,7 +128,7 @@ class RoleController extends Controller
 
         if ($role->admins->count() >= 1) {
             session()->flash('error', trans('admin::app.response.being-used', ['name' => 'Role', 'source' => 'Admin User']));
-        } else if($this->roleRepository->count() == 1) {
+        } elseif($this->roleRepository->count() == 1) {
             session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Role']));
         } else {
             try {

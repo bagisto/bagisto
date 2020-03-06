@@ -16,78 +16,68 @@ use Webkul\Customer\Repositories\CustomerAddressRepository;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Arr;
 
-/**
- * Facades handler for all the methods to be implemented in Cart.
- *
- * @author    Prashant Singh <prashant.singh852@webkul.com>
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class Cart
 {
 
     /**
      * CartRepository instance
      *
-     * @var mixed
+     * @var \Webkul\Checkout\Repositories\CartRepository
      */
     protected $cartRepository;
 
     /**
      * CartItemRepository instance
      *
-     * @var mixed
+     * @var \Webkul\Checkout\Repositories\CartItemRepository
      */
     protected $cartItemRepository;
 
     /**
      * CartAddressRepository instance
      *
-     * @var mixed
+     * @var \Webkul\Checkout\Repositories\CartAddressRepository
      */
     protected $cartAddressRepository;
 
     /**
      * ProductRepository instance
      *
-     * @var mixed
+     * @var \Webkul\Checkout\Repositories\ProductRepository
      */
     protected $productRepository;
 
     /**
      * TaxCategoryRepository instance
      *
-     * @var mixed
+     * @var \Webkul\Tax\Repositories\TaxCategoryRepository
      */
     protected $taxCategoryRepository;
 
     /**
      * WishlistRepository instance
      *
-     * @var mixed
+     * @var \Webkul\Customer\Repositories\WishlistRepository
      */
     protected $wishlistRepository;
 
     /**
      * CustomerAddressRepository instance
      *
-     * @var mixed
+     * @var \Webkul\Customer\Repositories\CustomerAddressRepository
      */
     protected $customerAddressRepository;
 
     /**
-     * Create a new controller instance.
+     * Create a new class instance.
      *
-     * @param Webkul\Checkout\Repositories\CartRepository           $cart
-     * @param Webkul\Checkout\Repositories\CartItemRepository       $cartItem
-     * @param Webkul\Checkout\Repositories\CartAddressRepository    $cartAddress
-     * @param Webkul\Product\Repositories\ProductRepository         $product
-     * @param Webkul\Product\Repositories\TaxCategoryRepository     $taxCategory
-     * @param Webkul\Product\Repositories\CustomerAddressRepository $customerAddress
-     * @param Webkul\Product\Repositories\CustomerAddressRepository $customerAddress
-     * @param Webkul\Discount\Repositories\CartRuleRepository       $cartRule
-     * @param Webkul\Helpers\Discount                               $discount
-     *
+     * @param  \Webkul\Checkout\Repositories\CartRepository             $cartRepository
+     * @param  \Webkul\Checkout\Repositories\CartItemRepository         $cartItemRepository
+     * @param  \Webkul\Checkout\Repositories\CartAddressRepository      $cartAddressRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository           $productRepository
+     * @param  \Webkul\Tax\Repositories\TaxCategoryRepository           $taxCategoryRepository
+     * @param  \Webkul\Customer\Repositories\WishlistRepository         $wishlistRepository
+     * @param  \Webkul\Customer\Repositories\CustomerAddressRepository  $customerAddressRepository
      * @return void
      */
     public function __construct(
@@ -98,7 +88,8 @@ class Cart
         TaxCategoryRepository $taxCategoryRepository,
         WishlistRepository $wishlistRepository,
         CustomerAddressRepository $customerAddressRepository
-    ) {
+    )
+    {
         $this->cartRepository = $cartRepository;
 
         $this->cartItemRepository = $cartItemRepository;
@@ -117,7 +108,7 @@ class Cart
     /**
      * Return current logged in customer
      *
-     * @return Customer|boolean
+     * @return \Webkul\Customer\Contracts\Customer|bool
      */
     public function getCurrentCustomer()
     {
@@ -129,10 +120,9 @@ class Cart
     /**
      * Add Items in a cart with some cart and item details.
      *
-     * @param integer $productId
-     * @param array   $data
-     *
-     * @return Mixed  Cart on success, array with warning otherwise
+     * @param  int  $productId
+     * @param  array  $data
+     * @return \Webkul\Checkout\Contracts\Cart|\Exception|array
      */
     public function addProduct($productId, $data)
     {
@@ -151,7 +141,7 @@ class Cart
         if (is_string($cartProducts)) {
             $this->collectTotals();
 
-            if (!count($cart->all_items) > 0) {
+            if (! count($cart->all_items) > 0) {
                 session()->forget('cart');
             }
 
@@ -166,12 +156,13 @@ class Cart
                     $cartProduct['parent_id'] = $parentCartItem->id;
                 }
 
-                if (!$cartItem) {
+                if (! $cartItem) {
                     $cartItem = $this->cartItemRepository->create(array_merge($cartProduct, ['cart_id' => $cart->id]));
                 } else {
                     if (isset($cartProduct['parent_id']) && $cartItem->parent_id != $parentCartItem->id) {
-                        $cartItem = $this->cartItemRepository->create(array_merge($cartProduct,
-                            ['cart_id' => $cart->id]));
+                        $cartItem = $this->cartItemRepository->create(array_merge($cartProduct, [
+                            'cart_id' => $cart->id
+                        ]));
                     } else {
                         if ($cartItem->product->getTypeInstance()->showQuantityBox() === false) {
                             return ['warning' => __('shop::app.checkout.cart.integrity.qty_impossible')];
@@ -181,7 +172,7 @@ class Cart
                     }
                 }
 
-                if (!$parentCartItem) {
+                if (! $parentCartItem) {
                     $parentCartItem = $cartItem;
                 }
             }
@@ -197,9 +188,8 @@ class Cart
     /**
      * Create new cart instance.
      *
-     * @param array $data
-     *
-     * @return Cart|null
+     * @param  array  $data
+     * @return \Webkul\Checkout\Contracts\Cart|null
      */
     public function create($data)
     {
@@ -225,7 +215,7 @@ class Cart
 
         $cart = $this->cartRepository->create($cartData);
 
-        if (!$cart) {
+        if (! $cart) {
             session()->flash('error', trans('shop::app.checkout.cart.create-error'));
 
             return;
@@ -239,16 +229,15 @@ class Cart
     /**
      * Update cart items information
      *
-     * @param array $data
-     *
-     * @return string|boolean
+     * @param  array  $data
+     * @return bool|void|\Exception
      */
     public function updateItems($data)
     {
         foreach ($data['qty'] as $itemId => $quantity) {
             $item = $this->cartItemRepository->findOneByField('id', $itemId);
 
-            if (!$item) {
+            if (! $item) {
                 continue;
             }
 
@@ -260,7 +249,7 @@ class Cart
 
             $item->quantity = $quantity;
 
-            if (!$this->isItemHaveQuantity($item)) {
+            if (! $this->isItemHaveQuantity($item)) {
                 throw new \Exception(trans('shop::app.checkout.cart.quantity.inventory_warning'));
             }
 
@@ -285,9 +274,8 @@ class Cart
     /**
      * Get cart item by product
      *
-     * @param array $data
-     *
-     * @return CartItem|void
+     * @param  array  $data
+     * @return \Webkul\Checkout\Contracts\CartItem|void
      */
     public function getItemByProduct($data)
     {
@@ -296,8 +284,7 @@ class Cart
         foreach ($items as $item) {
             if ($item->product->getTypeInstance()->compareOptions($item->additional, $data['additional'])) {
                 if (isset($data['additional']['parent_id'])) {
-                    if ($item->parent->product->getTypeInstance()->compareOptions($item->parent->additional,
-                        request()->all())) {
+                    if ($item->parent->product->getTypeInstance()->compareOptions($item->parent->additional, request()->all())) {
                         return $item;
                     }
                 } else {
@@ -310,21 +297,19 @@ class Cart
     /**
      * Remove the item from the cart
      *
-     * @param integer $itemId
-     *
-     * @return boolean
+     * @param  int  $itemId
+     * @return bool
      */
     public function removeItem($itemId)
     {
         Event::dispatch('checkout.cart.delete.before', $itemId);
 
-        if (!$cart = $this->getCart()) {
+        if (! $cart = $this->getCart()) {
             return false;
         }
 
         $this->cartItemRepository->delete($itemId);
 
-        //delete the cart instance if no items are there
         if ($cart->items()->get()->count() == 0) {
             $this->cartRepository->delete($cart->id);
 
@@ -343,7 +328,7 @@ class Cart
     /**
      * This function handles when guest has some of cart products and then logs in.
      *
-     * @return boolean
+     * @return bool
      */
     public function mergeCart()
     {
@@ -355,8 +340,7 @@ class Cart
 
             $guestCart = session()->get('cart');
 
-            //when the logged in customer is not having any of the cart instance previously and are active.
-            if (!$cart) {
+            if (! $cart) {
                 $this->cartRepository->update([
                     'customer_id'         => $this->getCurrentCustomer()->user()->id,
                     'is_guest'            => 0,
@@ -371,18 +355,16 @@ class Cart
             }
 
             foreach ($guestCart->items as $key => $guestCartItem) {
-
                 $found = false;
 
                 foreach ($cart->items as $cartItem) {
-                    if (!$cartItem->product->getTypeInstance()->compareOptions($cartItem->additional,
-                        $guestCartItem->additional)) {
+                    if (! $cartItem->product->getTypeInstance()->compareOptions($cartItem->additional, $guestCartItem->additional)) {
                         continue;
                     }
 
                     $cartItem->quantity = $newQuantity = $cartItem->quantity + $guestCartItem->quantity;
 
-                    if (!$this->isItemHaveQuantity($cartItem)) {
+                    if (! $this->isItemHaveQuantity($cartItem)) {
                         $this->cartItemRepository->delete($guestCartItem->id);
 
                         continue;
@@ -403,7 +385,7 @@ class Cart
                     $found = true;
                 }
 
-                if (!$found) {
+                if (! $found) {
                     $this->cartItemRepository->update([
                         'cart_id' => $cart->id,
                     ], $guestCartItem->id);
@@ -429,13 +411,12 @@ class Cart
     /**
      * Save cart
      *
-     * @param Cart $cart
-     *
+     * @param  \Webkul\Checkout\Contracts\Cart  $cart
      * @return void
      */
     public function putCart($cart)
     {
-        if (!$this->getCurrentCustomer()->check()) {
+        if (! $this->getCurrentCustomer()->check()) {
             session()->put('cart', $cart);
         }
     }
@@ -443,7 +424,7 @@ class Cart
     /**
      * Returns cart
      *
-     * @return Cart|null
+     * @return \Webkul\Checkout\Contracts\Cart|null
      */
     public function getCart()
     {
@@ -490,13 +471,12 @@ class Cart
     /**
      * Save customer address
      *
-     * @param array $data
-     *
-     * @return boolean
+     * @param  array  $data
+     * @return bool
      */
     public function saveCustomerAddress($data)
     {
-        if (!$cart = $this->getCart()) {
+        if (! $cart = $this->getCart()) {
             return false;
         }
 
@@ -519,6 +499,7 @@ class Cart
 
         if (isset($data['billing']['save_as_address']) && $data['billing']['save_as_address']) {
             $billingAddress['customer_id'] = $this->getCurrentCustomer()->user()->id;
+
             $this->customerAddressRepository->create($billingAddress);
         }
 
@@ -559,11 +540,13 @@ class Cart
                     }
                 } else {
                     if (isset($billingAddress['use_for_shipping']) && $billingAddress['use_for_shipping']) {
-                        $this->cartAddressRepository->create(array_merge($billingAddress,
-                            ['address_type' => 'shipping']));
+                        $this->cartAddressRepository->create(
+                            array_merge($billingAddress, ['address_type' => 'shipping'])
+                        );
                     } else {
-                        $this->cartAddressRepository->create(array_merge($shippingAddress,
-                            ['address_type' => 'shipping']));
+                        $this->cartAddressRepository->create(
+                            array_merge($shippingAddress, ['address_type' => 'shipping'])
+                        );
                     }
                 }
             }
@@ -572,9 +555,13 @@ class Cart
 
             if ($cart->haveStockableItems()) {
                 if (isset($billingAddress['use_for_shipping']) && $billingAddress['use_for_shipping']) {
-                    $this->cartAddressRepository->create(array_merge($billingAddress, ['address_type' => 'shipping']));
+                    $this->cartAddressRepository->create(
+                        array_merge($billingAddress, ['address_type' => 'shipping'])
+                    );
                 } else {
-                    $this->cartAddressRepository->create(array_merge($shippingAddress, ['address_type' => 'shipping']));
+                    $this->cartAddressRepository->create(
+                        array_merge($shippingAddress, ['address_type' => 'shipping'])
+                    );
                 }
             }
         }
@@ -599,13 +586,12 @@ class Cart
     /**
      * Save shipping method for cart
      *
-     * @param string $shippingMethodCode
-     *
-     * @return boolean
+     * @param  string  $shippingMethodCode
+     * @return bool
      */
     public function saveShippingMethod($shippingMethodCode)
     {
-        if (!$cart = $this->getCart()) {
+        if (! $cart = $this->getCart()) {
             return false;
         }
 
@@ -618,13 +604,12 @@ class Cart
     /**
      * Save payment method for cart
      *
-     * @param string $payment
-     *
-     * @return CartPayment
+     * @param  string  $payment
+     * @return \Webkul\Checkout\Contracts\CartPayment
      */
     public function savePaymentMethod($payment)
     {
-        if (!$cart = $this->getCart()) {
+        if (! $cart = $this->getCart()) {
             return false;
         }
 
@@ -650,11 +635,11 @@ class Cart
     {
         $validated = $this->validateItems();
 
-        if (!$validated) {
+        if (! $validated) {
             return false;
         }
 
-        if (!$cart = $this->getCart()) {
+        if (! $cart = $this->getCart()) {
             return false;
         }
 
@@ -705,18 +690,16 @@ class Cart
     }
 
     /**
-     * To validate if the product information is changed by admin and the items have
-     * been added to the cart before it.
+     * To validate if the product information is changed by admin and the items have been added to the cart before it.
      *
-     * @return boolean
+     * @return bool
      */
     public function validateItems()
     {
-        if (!$cart = $this->getCart()) {
+        if (! $cart = $this->getCart()) {
             return;
         }
 
-        //rare case of accident-->used when there are no items.
         if (count($cart->items) == 0) {
             $this->cartRepository->delete($cart->id);
 
@@ -725,7 +708,7 @@ class Cart
             foreach ($cart->items as $item) {
                 $item->product->getTypeInstance()->validateCartItem($item);
 
-                $price = !is_null($item->custom_price) ? $item->custom_price : $item->base_price;
+                $price = ! is_null($item->custom_price) ? $item->custom_price : $item->base_price;
 
                 $this->cartItemRepository->update([
                     'price'      => core()->convertPrice($price),
@@ -746,14 +729,14 @@ class Cart
      */
     public function calculateItemsTax(): void
     {
-        if (!$cart = $this->getCart()) {
+        if (! $cart = $this->getCart()) {
             return;
         }
 
         foreach ($cart->items()->get() as $item) {
             $taxCategory = $this->taxCategoryRepository->find($item->product->tax_category_id);
 
-            if (!$taxCategory) {
+            if (! $taxCategory) {
                 continue;
             }
 
@@ -771,6 +754,7 @@ class Cart
             if ($address === null) {
                 $address = new class() {
                     public $country;
+
                     public $postcode;
 
                     function __construct()
@@ -793,7 +777,8 @@ class Cart
                     if ($rate->state != '' && $rate->state != $address->state) {
                         continue;
                     }
-                    if (!$rate->is_zip) {
+
+                    if (! $rate->is_zip) {
                         if ($rate->zip_code == '*' || $rate->zip_code == $address->postcode) {
                             $haveTaxRate = true;
                         }
@@ -802,6 +787,7 @@ class Cart
                             $haveTaxRate = true;
                         }
                     }
+                    
                     if ($haveTaxRate) {
                         $item->tax_percent = $rate->tax_rate;
                         $item->tax_amount = ($item->total * $rate->tax_rate) / 100;
@@ -819,10 +805,11 @@ class Cart
     /**
      * Set Item tax to zero.
      *
-     * @param CartItem $item
-     * @return CartItem
+     * @param  \Webkul\Checkout\Contracts\CartItem  $item
+     * @return \Webkul\Checkout\Contracts\CartItem
      */
-    protected function setItemTaxToZero(CartItem $item): CartItem {
+    protected function setItemTaxToZero(CartItem $item): CartItem
+    {
         $item->tax_percent = 0;
         $item->tax_amount = 0;
         $item->base_tax_amount = 0;
@@ -833,15 +820,15 @@ class Cart
     /**
      * Checks if cart has any error
      *
-     * @return boolean
+     * @return bool
      */
     public function hasError()
     {
-        if (!$this->getCart()) {
+        if (! $this->getCart()) {
             return true;
         }
 
-        if (!$this->isItemsHaveSufficientQuantity()) {
+        if (! $this->isItemsHaveSufficientQuantity()) {
             return true;
         }
 
@@ -851,12 +838,12 @@ class Cart
     /**
      * Checks if all cart items have sufficient quantity.
      *
-     * @return boolean
+     * @return bool
      */
     public function isItemsHaveSufficientQuantity()
     {
         foreach ($this->getCart()->items as $item) {
-            if (!$this->isItemHaveQuantity($item)) {
+            if (! $this->isItemHaveQuantity($item)) {
                 return false;
             }
         }
@@ -867,9 +854,8 @@ class Cart
     /**
      * Checks if all cart items have sufficient quantity.
      *
-     * @param CartItem $item
-     *
-     * @return boolean
+     * @param \Webkul\Checkout\Contracts\CartItem  $item
+     * @return bool
      */
     public function isItemHaveQuantity($item)
     {
@@ -952,8 +938,7 @@ class Cart
     /**
      * Prepares data for order item
      *
-     * @param array $data
-     *
+     * @param  array  $data
      * @return array
      */
     public function prepareDataForOrderItem($data)
@@ -993,17 +978,16 @@ class Cart
     /**
      * Move a wishlist item to cart
      *
-     * @param WishlistItem $wishlistItem
-     *
-     * @return boolean
+     * @param  \Webkul\Customer\Contracts\WishlistItem  $wishlistItem
+     * @return bool
      */
     public function moveToCart($wishlistItem)
     {
-        if (!$wishlistItem->product->getTypeInstance()->canBeMovedFromWishlistToCart($wishlistItem)) {
+        if (! $wishlistItem->product->getTypeInstance()->canBeMovedFromWishlistToCart($wishlistItem)) {
             return false;
         }
 
-        if (!$wishlistItem->additional) {
+        if (! $wishlistItem->additional) {
             $wishlistItem->additional = ['product_id' => $wishlistItem->product_id];
         }
 
@@ -1023,9 +1007,8 @@ class Cart
     /**
      * Function to move a already added product to wishlist will run only on customer authentication.
      *
-     * @param integer $itemId
-     *
-     * @return boolean|void
+     * @param  int  $itemId
+     * @return bool
      */
     public function moveToWishlist($itemId)
     {
@@ -1033,7 +1016,7 @@ class Cart
 
         $cartItem = $cart->items()->find($itemId);
 
-        if (!$cartItem) {
+        if (! $cartItem) {
             return false;
         }
 
@@ -1047,11 +1030,13 @@ class Cart
         foreach ($wishlistItems as $wishlistItem) {
             $options = $wishlistItem->item_options;
 
-            if (! $options)
+            if (! $options) {
                 $options = ['product_id' => $wishlistItem->product_id];
+            }
 
-            if ($cartItem->product->getTypeInstance()->compareOptions($cartItem->additional, $options))
+            if ($cartItem->product->getTypeInstance()->compareOptions($cartItem->additional, $options)) {
                 $found = true;
+            }
         }
 
         if (!$found) {
@@ -1065,7 +1050,7 @@ class Cart
 
         $result = $this->cartItemRepository->delete($itemId);
 
-        if (!$cart->items()->count()) {
+        if (! $cart->items()->count()) {
             $this->cartRepository->delete($cart->id);
         }
 
@@ -1077,9 +1062,8 @@ class Cart
     /**
      * Set coupon code to the cart
      *
-     * @param string $code
-     *
-     * @return Cart
+     * @param  string  $code
+     * @return \Webkul\Checkout\Contracts\Cart
      */
     public function setCouponCode($code)
     {
@@ -1095,7 +1079,7 @@ class Cart
     /**
      * Remove coupon code from cart
      *
-     * @return Cart
+     * @return \Webkul\Checkout\Contracts\Cart
      */
     public function removeCouponCode()
     {

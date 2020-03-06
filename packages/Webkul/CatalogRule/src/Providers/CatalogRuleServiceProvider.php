@@ -36,7 +36,8 @@ class CatalogRuleServiceProvider extends ServiceProvider
      */
     protected function registerCommands()
     {
-        if ($this->app->runningInConsole())
+        if ($this->app->runningInConsole()) {
             $this->commands([PriceRuleIndex::class]);
+        }
     }
 }

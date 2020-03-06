@@ -2,85 +2,105 @@
 
 namespace Webkul\Velocity\Helpers;
 
-use DB;
+use Illuminate\Support\Facades\DB;
 use Webkul\Product\Helpers\Review;
 use Webkul\Product\Models\Product as ProductModel;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Velocity\Repositories\OrderBrandsRepository;
+use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Velocity\Repositories\VelocityMetadataRepository;
-use Webkul\Attribute\Repositories\AttributeOptionRepository;
 
 class Helper extends Review
 {
     /**
-     * orderBrands object
-     *
-     * @var object
-     */
-    protected $orderBrands;
+    * productModel object
+    *
+    * @var \Webkul\Product\Contracts\Product
+    */
+   protected $productModel;
 
     /**
-     * \Webkul\Product\Repositories\ProductRepository object
+     * orderBrands object
      *
-     * @var object
+     * @var \Webkul\Velocity\Repositories\OrderBrandsRepository
+     */
+    protected $orderBrandsRepository;
+
+    /**
+     * ProductRepository object
+     *
+     * @var \Webkul\Product\Repositories\ProductRepository
      */
     protected $productRepository;
 
     /**
-     * \Webkul\Product\Repositories\ProductFlatRepository object
+     * ProductFlatRepository object
      *
-     * @var object
+     * @var \Webkul\Product\Repositories\ProductFlatRepository
      */
     protected $productFlatRepository;
-
-     /**
-     * productModel object
-     *
-     * @var object
-     */
-    protected $productModel;
 
       /**
      * productModel object
      *
-     * @var object
+     * @var \Webkul\Attribute\Repositories\AttributeOptionRepository
      */
-    protected $attributeOption;
+    protected $attributeOptionRepository;
 
     /**
      * ProductReviewRepository object
      *
-     * @var object
+     * @var \Webkul\Product\Repositories\ProductReviewRepository
      */
     protected $productReviewRepository;
 
     /**
      * VelocityMetadata object
      *
-     * @var object
+     * @var \Webkul\Velocity\Repositories\VelocityMetadataRepository
      */
     protected $velocityMetadataRepository;
 
+    /**
+     * Create a helper instamce
+     *
+     * @param  \Webkul\Product\Contracts\Product  $productModel
+     * @param  \Webkul\Velocity\Repositories\OrderBrandsRepository  $orderBrands
+     * @param  \Webkul\Attribute\Repositories\AttributeOptionRepository  $attributeOptionRepository
+     * @param  \Webkul\Product\Repositories\ProductReviewRepository  $productReviewRepository
+     * @param  \Webkul\Velocity\Repositories\VelocityMetadataRepository  $velocityMetadataRepository
+     * @return void
+     */
     public function __construct(
         ProductModel $productModel,
         ProductRepository $productRepository,
-        AttributeOptionRepository $attributeOption,
+        AttributeOptionRepository $attributeOptionRepository,
         ProductFlatRepository $productFlatRepository,
         OrderBrandsRepository $orderBrandsRepository,
         ProductReviewRepository $productReviewRepository,
         VelocityMetadataRepository $velocityMetadataRepository
     ) {
         $this->productModel =  $productModel;
-        $this->attributeOption =  $attributeOption;
+
+        $this->attributeOptionRepository =  $attributeOptionRepository;
+
         $this->productRepository = $productRepository;
+
         $this->productFlatRepository = $productFlatRepository;
+        
         $this->orderBrandsRepository = $orderBrandsRepository;
+
         $this->productReviewRepository =  $productReviewRepository;
+
         $this->velocityMetadataRepository =  $velocityMetadataRepository;
     }
 
+    /**
+     * @param  \Webkul\Sales\Contracts\Order
+     * @return void
+     */
     public function topBrand($order)
     {
         $orderItems = $order->items;
@@ -89,15 +109,17 @@ class Helper extends Review
             $products[] = $orderItem->product;
 
             $this->orderBrandsRepository->create([
-                'order_id' => $orderItem->order_id,
+                'order_id'      => $orderItem->order_id,
                 'order_item_id' => $orderItem->id,
-                'product_id' => $orderItem->product_id,
-                'brand' => $products[$key]->brand,
+                'product_id'    => $orderItem->product_id,
+                'brand'         => $products[$key]->brand,
             ]);
         }
     }
 
-
+    /**
+     * @return \Illuminate\Support\Collection|\Exception
+     */
     public function getBrandsWithCategories()
     {
         try {
@@ -111,8 +133,9 @@ class Helper extends Review
                 }
 
                 $categoryName = $brandName = $brandImplode = [];
+
                 foreach($product_categories as $totalData) {
-                    $brand = $this->attributeOption->findOneWhere(['id' => $totalData['brand']]);
+                    $brand = $this->attributeOptionRepository->findOneWhere(['id' => $totalData['brand']]);
 
                     foreach ($totalData['categories'] as $categories) {
                         foreach($categories['translations'] as $catName) {
@@ -148,16 +171,17 @@ class Helper extends Review
     /**
      * Returns the count rating of the product
      *
-     * @param Product $product
-     * @return array
-    */
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @return int
+     */
     public function getCountRating($product)
     {
-        $reviews = $product->reviews()->where('status', 'approved')
-            ->select('rating', DB::raw('count(*) as total'))
-            ->groupBy('rating')
-            ->orderBy('rating','desc')
-            ->get();
+        $reviews = $product->reviews()
+                           ->where('status', 'approved')
+                           ->select('rating', DB::raw('count(*) as total'))
+                           ->groupBy('rating')
+                           ->orderBy('rating','desc')
+                           ->get();
 
         $totalReviews = $this->getTotalReviews($product);
 
@@ -180,6 +204,11 @@ class Helper extends Review
         return $percentage;
     }
 
+    /**
+     * Returns the count rating of the product
+     *
+     * @return array
+     */
     public function getVelocityMetaData()
     {
         try {
@@ -194,16 +223,23 @@ class Helper extends Review
         }
     }
 
+    /**
+     * @param  int  $reviewCount
+     * @return \Illuminate\Support\Collection
+     */
     public function getShopRecentReviews($reviewCount = 4)
     {
         $reviews = $this->productReviewRepository->getModel()
-                ->orderBy('id', 'desc')
-                ->where('status', 'approved')
-                ->take($reviewCount)->get();
+                                                 ->orderBy('id', 'desc')
+                                                 ->where('status', 'approved')
+                                                 ->take($reviewCount)->get();
 
         return $reviews;
     }
 
+    /**
+     * @return array
+     */
     public function jsonTranslations()
     {
         $currentLocale = app()->getLocale();
@@ -217,21 +253,31 @@ class Helper extends Review
         return [];
     }
 
+    /**
+     * @param  \Webkul\Checkout\Contracts\CartItem  $item
+     * @return array
+     */
     public function formatCartItem($item)
     {
         $product = $item->product;
+
         $images = $product->getTypeInstance()->getBaseImage($item);
 
         return [
-            'images' => $images,
-            'itemId' => $item->id,
-            'name' => $item->name,
-            'url_key' => $product->url_key,
-            'quantity' => $item->quantity,
+            'images'    => $images,
+            'itemId'    => $item->id,
+            'name'      => $item->name,
+            'url_key'   => $product->url_key,
+            'quantity'  => $item->quantity,
             'baseTotal' => core()->currency($item->base_total),
         ];
     }
 
+    /**
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  bool  $list
+     * @return array
+     */
     public function formatProduct($product, $list = false)
     {
         $reviewHelper = app('Webkul\Product\Helpers\Review');

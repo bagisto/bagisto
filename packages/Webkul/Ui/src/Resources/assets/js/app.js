@@ -19,6 +19,7 @@ import Code from './directives/code';
 import Alert from './directives/alert';
 import DatetimeComponent from './components/datetime';
 import DateComponent from './components/date';
+import TimeComponent from './components/time';
 import SwatchPicker from './components/swatch-picker';
 import Debounce from './directives/debounce';
 
@@ -41,6 +42,7 @@ Vue.directive('code', Code);
 Vue.directive('alert', Alert);
 Vue.component('datetime', DatetimeComponent);
 Vue.component('date', DateComponent);
+Vue.component("time-component", TimeComponent);
 Vue.component('swatch-picker', SwatchPicker);
 Vue.directive('debounce', Debounce);
 Vue.filter('truncate', function (value, limit, trail) {

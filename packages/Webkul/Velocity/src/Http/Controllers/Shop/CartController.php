@@ -7,18 +7,12 @@ use Webkul\Velocity\Helpers\Helper;
 use Webkul\Checkout\Contracts\Cart as CartModel;
 use Webkul\Product\Repositories\ProductRepository;
 
-/**
- * Cart controller
- *
- * @author  Shubham Mehrotra <shubhammehrotra.symfony@webkul.com> @shubhwebkul
- * @copyright 2020 Webkul Software Pvt Ltd (http://www.webkul.com)
-*/
 class CartController extends Controller
 {
     /**
      * Retrives the mini cart details
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
     */
     public function getMiniCartDetails()
     {
@@ -40,7 +34,7 @@ class CartController extends Controller
             }
 
             $response = [
-                'status' => true,
+                'status'    => true,
                 'mini_cart' => [
                     'cart_items' => $cartItems,
                     'cart_details' => $cartDetails,
@@ -58,7 +52,7 @@ class CartController extends Controller
     /**
      * Function for guests user to add the product in the cart.
      *
-     * @return Mixed
+     * @return array
     */
     public function addProductToCart()
     {
@@ -70,16 +64,15 @@ class CartController extends Controller
 
             if (is_array($cart) && isset($cart['warning'])) {
                 $response = [
-                    'status' => 'warning',
+                    'status'  => 'warning',
                     'message' => $cart['warning'],
                 ];
             }
 
             if ($cart instanceof CartModel) {
-                $items = $cart->items;
                 $formattedItems = [];
 
-                foreach ($items as $item) {
+                foreach ($cart->items as $item) {
                     array_push($formattedItems, $this->velocityHelper->formatCartItem($item));
                 }
 
@@ -101,23 +94,23 @@ class CartController extends Controller
             $product = $this->productRepository->find($id);
 
             $response = [
-                'status'            => 'danger',
-                'message'           => trans($exception->getMessage()),
-                'redirectionRoute'  => route('shop.productOrCategory.index', $product->url_key),
+                'status'           => 'danger',
+                'message'          => trans($exception->getMessage()),
+                'redirectionRoute' => route('shop.productOrCategory.index', $product->url_key),
             ];
         }
 
         return $response ?? [
-            'status'    => 'danger',
-            'message'   => trans('velocity::app.error.something_went_wrong'),
+            'status'  => 'danger',
+            'message' => trans('velocity::app.error.something_went_wrong'),
         ];
     }
 
     /**
      * Removes the item from the cart if it exists
      *
-     * @param integer $itemId
-     * @return Response
+     * @param  int  $itemId
+     * @return \Illuminate\Http\Response
     */
     public function removeProductFromCart($itemId)
     {
@@ -125,16 +118,16 @@ class CartController extends Controller
 
         if ($result) {
             $response = [
-                'status'    => 'success',
-                'label'     => trans('velocity::app.shop.general.alert.success'),
-                'message'   => trans('shop::app.checkout.cart.item.success-remove'),
+                'status'  => 'success',
+                'label'   => trans('velocity::app.shop.general.alert.success'),
+                'message' => trans('shop::app.checkout.cart.item.success-remove'),
             ];
         }
 
         return response()->json($response ?? [
-            'status'    => 'danger',
-            'label'     => trans('velocity::app.shop.general.alert.error'),
-            'message'   => trans('velocity::app.error.something_went_wrong'),
+            'status'  => 'danger',
+            'label'   => trans('velocity::app.shop.general.alert.error'),
+            'message' => trans('velocity::app.error.something_went_wrong'),
         ], 200);
     }
 }

@@ -10,7 +10,6 @@ class ProductType extends AbstractProduct
      * Checks if a ProductType may have variants
      *
      * @param string $typeKey as defined in config('product_types)
-     *
      * @return bool whether ProductType is able to have variants
      */
     public static function hasVariants(string $typeKey): bool
@@ -29,6 +28,7 @@ class ProductType extends AbstractProduct
     public static function getAllTypesHavingVariants(): array
     {
         $havingVariants = [];
+        
         foreach (config('product_types') as $type) {
             if (self::hasVariants($type['key'])) {
                 array_push($havingVariants, $type['key']);

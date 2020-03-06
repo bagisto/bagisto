@@ -24,6 +24,7 @@ class RedirectIfNotCustomer
                 Auth::guard($guard)->logout();
 
                 session()->flash('warning', trans('shop::app.customer.login-form.not-activated'));
+                
                 return redirect()->route('customer.session.index');
             }
         }

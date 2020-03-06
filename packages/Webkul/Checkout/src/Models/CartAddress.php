@@ -23,7 +23,7 @@ class CartAddress extends Model implements CartAddressContract
         'phone',
         'address_type',
         'cart_id',
-        ];
+    ];
 
     /**
      * Get the shipping rates for the cart address.

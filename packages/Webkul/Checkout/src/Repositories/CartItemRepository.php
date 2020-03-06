@@ -4,13 +4,6 @@ namespace Webkul\Checkout\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
 
-/**
- * Cart Items Reposotory
- *
- * @author    Prashant Singh <prashant.singh852@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
-
 class CartItemRepository extends Repository
 {
     /**
@@ -25,12 +18,11 @@ class CartItemRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @param $id
-     * @param string $attribute
-     * @return mixed
+     * @param  array  $data
+     * @param  int  $id
+     * @param  string  $attribute
+     * @return \Webkul\Checkout\Contracts\CartItem
      */
-
     public function update(array $data, $id, $attribute = "id")
     {
         $item = $this->find($id);
@@ -40,6 +32,10 @@ class CartItemRepository extends Repository
         return $item;
     }
 
+    /**
+     * @param  int  $cartItemId
+     * @return int
+     */
     public function getProduct($cartItemId)
     {
         return $this->model->find($cartItemId)->product->id;

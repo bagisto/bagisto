@@ -12,12 +12,6 @@ use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Cookie;
 
-/**
- * Registration controller
- *
- * @author    Prashant Singh <prashant.singh852@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class RegistrationController extends Controller
 {
     /**
@@ -30,22 +24,22 @@ class RegistrationController extends Controller
     /**
      * CustomerRepository object
      *
-     * @var Object
+     * @var \Webkul\Customer\Repositories\CustomerRepository
      */
     protected $customerRepository;
 
     /**
      * CustomerGroupRepository object
      *
-     * @var Object
+     * @var \Webkul\Customer\Repositories\CustomerGroupRepository
      */
     protected $customerGroupRepository;
 
     /**
      * Create a new Repository instance.
      *
-     * @param \Webkul\Customer\Repositories\CustomerRepository      $customer
-     * @param \Webkul\Customer\Repositories\CustomerGroupRepository $customerGroupRepository
+     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customer
+     * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository
      *
      * @return void
      */
@@ -74,7 +68,7 @@ class RegistrationController extends Controller
     /**
      * Method to store user's sign up form data to DB.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -148,7 +142,8 @@ class RegistrationController extends Controller
     /**
      * Method to verify account
      *
-     * @param string $token
+     * @param  string  $token
+     * @return \Illuminate\Http\Response
      */
     public function verifyAccount($token)
     {
@@ -165,6 +160,10 @@ class RegistrationController extends Controller
         return redirect()->route('customer.session.index');
     }
 
+    /**
+     * @param  string  $email
+     * @return \Illuminate\Http\Response
+     */
     public function resendVerificationEmail($email)
     {
         $verificationData['email'] = $email;
@@ -190,6 +189,7 @@ class RegistrationController extends Controller
 
             return redirect()->back();
         }
+        
         session()->flash('success', trans('shop::app.customer.signup-form.verification-sent'));
 
         return redirect()->back();

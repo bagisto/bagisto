@@ -10,6 +10,7 @@ $factory->define(Customer::class, function (Faker $faker) {
     $now = date("Y-m-d H:i:s");
     $gender = array_rand(['male', 'female', 'other']);
     $password = $faker->password;
+    
     return [
         'first_name'        => $faker->firstName($gender),
         'last_name'         => $faker->lastName,

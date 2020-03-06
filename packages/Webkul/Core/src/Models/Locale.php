@@ -13,6 +13,8 @@ class Locale extends Model implements LocaleContract
      * @var array
      */
     protected $fillable = [
-        'code', 'name', 'direction'
+        'code',
+        'name',
+        'direction',
     ];
 }

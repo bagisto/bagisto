@@ -11,7 +11,12 @@ use Webkul\Product\Contracts\Product as ProductContract;
 
 class Product extends Model implements ProductContract
 {
-    protected $fillable = ['type', 'attribute_family_id', 'sku', 'parent_id'];
+    protected $fillable = [
+        'type',
+        'attribute_family_id',
+        'sku',
+        'parent_id',
+    ];
 
     protected $typeInstance;
 
@@ -181,8 +186,8 @@ class Product extends Model implements ProductContract
     public function inventory_source_qty($inventorySourceId)
     {
         return $this->inventories()
-                ->where('inventory_source_id', $inventorySourceId)
-                ->sum('qty');
+                    ->where('inventory_source_id', $inventorySourceId)
+                    ->sum('qty');
     }
 
     /**
@@ -192,8 +197,9 @@ class Product extends Model implements ProductContract
      */
     public function getTypeInstance()
     {
-        if ($this->typeInstance)
+        if ($this->typeInstance) {
             return $this->typeInstance;
+        }
 
         $this->typeInstance = app(config('product_types.' . $this->type . '.class'));
 
@@ -258,12 +264,15 @@ class Product extends Model implements ProductContract
      */
     public function getAttribute($key)
     {
-        if (! method_exists(static::class, $key) && ! in_array($key, ['parent_id', 'attribute_family_id']) && ! isset($this->attributes[$key])) {
+        if (! method_exists(static::class, $key)
+            && ! in_array($key, ['parent_id', 'attribute_family_id'])
+            && ! isset($this->attributes[$key])
+        ) {
             if (isset($this->id)) {
                 $this->attributes[$key] = '';
 
                 $attribute = core()->getSingletonInstance(\Webkul\Attribute\Repositories\AttributeRepository::class)
-                        ->getAttributeByCode($key);
+                                   ->getAttributeByCode($key);
 
                 $this->attributes[$key] = $this->getCustomAttributeValue($attribute);
 
@@ -285,7 +294,7 @@ class Product extends Model implements ProductContract
 
         if (isset($this->id)) {
             $familyAttributes = core()->getSingletonInstance(\Webkul\Attribute\Repositories\AttributeRepository::class)
-                    ->getFamilyAttributes($this->attribute_family);
+                                      ->getFamilyAttributes($this->attribute_family);
 
             foreach ($familyAttributes as $attribute) {
                 if (in_array($attribute->code, $hiddenAttributes)) {
@@ -306,8 +315,9 @@ class Product extends Model implements ProductContract
      */
     public function getCustomAttributeValue($attribute)
     {
-        if (! $attribute)
+        if (! $attribute) {
             return;
+        }
 
         $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 

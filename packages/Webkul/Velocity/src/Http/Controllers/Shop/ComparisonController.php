@@ -6,23 +6,18 @@ use Webkul\Velocity\Helpers\Helper;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository as CustomerCompareProductRepository;
 
-/**
- * Comparison controller
- *
- * @author  Shubham Mehrotra <shubhammehrotra.symfony@webkul.com> @shubhwebkul
- * @copyright 2020 Webkul Software Pvt Ltd (http://www.webkul.com)
-*/
 class ComparisonController extends Controller
 {
     /**
      * function for customers to get products in comparison.
      *
-     * @return Mixed
-    */
+     * @return \Illuminate\Http\Response|\Illuminate\View\View
+     */
     public function getComparisonList()
     {
         if (request()->get('data')) {
             $productSlugs = null;
+            
             $productCollection = [];
 
             if (auth()->guard('customer')->user()) {
@@ -52,8 +47,8 @@ class ComparisonController extends Controller
             }
 
             $response = [
-                'status'    => 'success',
-                'products'  => $productCollection,
+                'status'   => 'success',
+                'products' => $productCollection,
             ];
         } else {
             $response = view($this->_config['view']);
@@ -65,35 +60,36 @@ class ComparisonController extends Controller
     /**
      * function for customers to add product in comparison.
      *
-     * @return json
-    */
+     * @return \Illuminate\Http\Response
+     */
     public function addCompareProduct()
     {
         $productId = request()->get('productId');
+
         $customerId = auth()->guard('customer')->user()->id;
 
         $compareProduct = $this->compareProductsRepository->findOneByField([
-            'customer_id' => $customerId,
+            'customer_id'     => $customerId,
             'product_flat_id' => $productId,
         ]);
 
         if (! $compareProduct) {
             // insert new row
             $this->compareProductsRepository->create([
-                'customer_id' => $customerId,
-                'product_flat_id'  => $productId,
+                'customer_id'     => $customerId,
+                'product_flat_id' => $productId,
             ]);
 
             return response()->json([
-                'status'    => 'success',
-                'message'   => trans('velocity::app.customer.compare.added'),
-                'label'     => trans('velocity::app.shop.general.alert.success'),
+                'status'  => 'success',
+                'message' => trans('velocity::app.customer.compare.added'),
+                'label'   => trans('velocity::app.shop.general.alert.success'),
             ], 201);
         } else {
             return response()->json([
-                'status'    => 'success',
-                'label'     => trans('velocity::app.shop.general.alert.success'),
-                'message'   => trans('velocity::app.customer.compare.already_added'),
+                'status'  => 'success',
+                'label'   => trans('velocity::app.shop.general.alert.success'),
+                'message' => trans('velocity::app.customer.compare.already_added'),
             ], 200);
         }
     }
@@ -101,8 +97,8 @@ class ComparisonController extends Controller
     /**
      * function for customers to delete product in comparison.
      *
-     * @return json
-    */
+     * @return \Illuminate\Http\Response
+     */
     public function deleteComparisonProduct()
     {
         // either delete all or individual
@@ -116,7 +112,7 @@ class ComparisonController extends Controller
             // delete individual
             $this->compareProductsRepository->deleteWhere([
                 'product_flat_id' => request()->get('productId'),
-                'customer_id' => auth()->guard('customer')->user()->id,
+                'customer_id'     => auth()->guard('customer')->user()->id,
             ]);
         }
 

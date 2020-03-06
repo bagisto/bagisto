@@ -3,17 +3,10 @@
 namespace Webkul\Velocity\Http\Controllers\Shop;
 
 use Illuminate\Http\Request;
-
-use Cart;
 use Webkul\Velocity\Http\Shop\Controllers;
 use Webkul\Checkout\Contracts\Cart as CartModel;
+use Cart;
 
-/**
- * Shop controller
- *
- * @author  Shubham Mehrotra <shubhammehrotra.symfony@webkul.com> @shubhwebkul
- * @copyright 2019 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ShopController extends Controller
 {
     /**
@@ -34,17 +27,18 @@ class ShopController extends Controller
 
         if ($product) {
             $productReviewHelper = app('Webkul\Product\Helpers\Review');
+            
             $galleryImages = $this->productImageHelper->getProductBaseImage($product);
 
             $response = [
                 'status'  => true,
                 'details' => [
-                    'name'          => $product->name,
-                    'urlKey'        => $product->url_key,
-                    'image'         => $galleryImages['small_image_url'],
-                    'priceHTML'     => $product->getTypeInstance()->getPriceHtml(),
-                    'totalReviews'  => $productReviewHelper->getTotalReviews($product),
-                    'rating'        => ceil($productReviewHelper->getAverageRating($product)),
+                    'name'         => $product->name,
+                    'urlKey'       => $product->url_key,
+                    'priceHTML'    => $product->getTypeInstance()->getPriceHtml(),
+                    'totalReviews' => $productReviewHelper->getTotalReviews($product),
+                    'rating'       => ceil($productReviewHelper->getAverageRating($product)),
+                    'image'        => $galleryImages['small_image_url'],
                 ]
             ];
         } else {
@@ -57,6 +51,9 @@ class ShopController extends Controller
         return $response;
     }
 
+    /**
+     * @return \Illuminate\Http\Response
+     */
     public function categoryDetails()
     {
         $slug = request()->get('category-slug');
@@ -78,7 +75,7 @@ class ShopController extends Controller
                 }
 
                 $response = [
-                    'status' => true,
+                    'status'   => true,
                     'products' => $formattedProducts,
                 ];
 
@@ -95,14 +92,15 @@ class ShopController extends Controller
                         $productDetails = [];
 
                         $productDetails = array_merge($productDetails, $this->velocityHelper->formatProduct($product));
+                        
                         array_push($customizedProducts, $productDetails);
                     }
 
                     $response = [
-                        'status'            => true,
-                        'list'              => $list,
-                        'categoryDetails'   => $categoryDetails,
-                        'categoryProducts'  => $customizedProducts,
+                        'status'           => true,
+                        'list'             => $list,
+                        'categoryDetails'  => $categoryDetails,
+                        'categoryProducts' => $customizedProducts,
                     ];
                 }
 
@@ -114,6 +112,9 @@ class ShopController extends Controller
         ];
     }
 
+    /**
+     * @return array
+     */
     public function fetchCategories()
     {
         $formattedCategories = [];
@@ -124,11 +125,15 @@ class ShopController extends Controller
         }
 
         return [
-            'status'        => true,
-            'categories'    => $formattedCategories,
+            'status'     => true,
+            'categories' => $formattedCategories,
         ];
     }
 
+    /**
+     * @param  string  $slug
+     * @return array
+     */
     public function fetchFancyCategoryDetails($slug)
     {
         $categoryDetails = $this->categoryRepository->findByPath($slug);
@@ -145,6 +150,10 @@ class ShopController extends Controller
         ];
     }
 
+    /**
+     * @param  \Webkul\Category\Contracts\Category  $category
+     * @return array
+     */
     private function getCategoryFilteredData($category)
     {
         $formattedChildCategory = [];
@@ -154,14 +163,17 @@ class ShopController extends Controller
         }
 
         return [
-            'id'                    => $category->id,
-            'slug'                  => $category->slug,
-            'name'                  => $category->name,
-            'children'              => $formattedChildCategory,
-            'category_icon_path'    => $category->category_icon_path,
+            'id'                 => $category->id,
+            'slug'               => $category->slug,
+            'name'               => $category->name,
+            'children'           => $formattedChildCategory,
+            'category_icon_path' => $category->category_icon_path,
         ];
     }
 
+    /**
+     * @return \Illuminate\View\View
+     */
     public function getWishlistList()
     {
         return view($this->_config['view']);
@@ -170,14 +182,14 @@ class ShopController extends Controller
     /**
      * this function will provide the count of wishlist and comparison for logged in user
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function getItemsCount()
     {
         if ($customer = auth()->guard('customer')->user()) {
             $wishlistItemsCount = $this->wishlistRepository->count([
                 'customer_id' => $customer->id,
-                'channel_id' => core()->getCurrentChannel()->id,
+                'channel_id'  => core()->getCurrentChannel()->id,
             ]);
 
             $comparedItemsCount = $this->compareProductsRepository->count([
@@ -186,7 +198,7 @@ class ShopController extends Controller
 
             $response = [
                 'status' => true,
-                'compareProductsCount' => $comparedItemsCount,
+                'compareProductsCount'    => $comparedItemsCount,
                 'wishlistedProductsCount' => $wishlistItemsCount,
             ];
         }
@@ -197,9 +209,9 @@ class ShopController extends Controller
     }
 
     /**
-     * this function will provide details of multiple product
+     * This function will provide details of multiple product
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function getDetailedProducts()
     {
@@ -208,7 +220,7 @@ class ShopController extends Controller
             $productCollection = $this->velocityHelper->fetchProductCollection($items);
 
             $response = [
-                'status' => 'success',
+                'status'   => 'success',
                 'products' => $productCollection,
             ];
         }

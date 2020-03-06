@@ -5,12 +5,6 @@ namespace Webkul\Core\Repositories;
 use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Facades\Storage;
 
-/**
- * Channel Reposotory
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ChannelRepository extends Repository
 {
     /**
@@ -24,8 +18,8 @@ class ChannelRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @return mixed
+     * @param  array  $data
+     * @return \Webkul\Core\Contracts\Channel
      */
     public function create(array $data)
     {
@@ -45,10 +39,10 @@ class ChannelRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @param $id
-     * @param string $attribute
-     * @return mixed
+     * @param  array  $data
+     * @param  int  $id
+     * @param  string  $attribute
+     * @return \Webkul\Core\Contracts\Channel
      */
     public function update(array $data, $id, $attribute = "id")
     {
@@ -70,8 +64,9 @@ class ChannelRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @param mixed $channel
+     * @param  array  $data
+     * @param  \Webkul\Core\Contratcs\Channel  $channel
+     * @param  string  $type
      * @return void
      */
     public function uploadImages($data, $channel, $type = "logo")

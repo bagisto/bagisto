@@ -5,7 +5,6 @@ namespace Webkul\Velocity\Http\Controllers\Shop;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-
 use Webkul\Velocity\Helpers\Helper;
 use Webkul\Product\Helpers\ProductImage;
 use Webkul\Product\Repositories\SearchRepository;
@@ -27,75 +26,74 @@ class Controller extends BaseController
     protected $_config;
 
     /**
-     * Webkul\Product\Helpers\ProductImage object
+     * ProductImage object
      *
-     * @var ProductImage
-    */
+     * @var \Webkul\Product\Helpers\ProductImage
+     */
     protected $productImageHelper;
 
     /**
      * SearchRepository object
      *
-     * @var SearchRepository
-    */
+     * @var \Webkul\Product\Repositories\SearchRepository
+     */
     protected $searchRepository;
 
     /**
      * ProductRepository object
      *
-     * @var ProductRepository
-    */
+     * @var \Webkul\Product\Repositories\ProductRepository
+     */
     protected $productRepository;
 
     /**
      * ProductRepository object of velocity package
      *
-     * @var ProductRepository
+     * @var \Webkul\Velocity\Repositories\Product\ProductRepository
      */
     protected $velocityProductRepository;
 
     /**
      * CategoryRepository object of velocity package
      *
-     * @var CategoryRepository
-    */
+     * @var \Webkul\Category\Repositories\CategoryRepository
+     */
     protected $categoryRepository;
 
     /**
      * WishlistRepository object
      *
-     * @var WishlistRepository
-    */
+     * @var \Webkul\Customer\Repositories\WishlistRepository
+     */
     protected $wishlistRepository;
 
     /**
-     * \Webkul\Velocity\Helpers\Helper object
+     * Helper object
      *
-     * @var Helper
-    */
+     * @var \Webkul\Velocity\Helpers\Helper
+     */
     protected $velocityHelper;
 
     /**
-     * Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository object of repository
+     * VelocityCustomerCompareProductRepository object of repository
      *
-     * @var VelocityCustomerCompareProductRepository
-    */
+     * @var \Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository
+     */
     protected $compareProductsRepository;
 
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Velocity\Helpers\Helper $velocityHelper
-     * @param  \Webkul\Product\Helpers\ProductImage $productImageHelper
-     * @param  \Webkul\Product\Repositories\SearchRepository $searchRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository $productRepository
-     * @param  \Webkul\Category\Repositories\CategoryRepository $categoryRepository
-     * @param  \Webkul\Velocity\Repositories\Product\ProductRepository $velocityProductRepository
-     * @param  CustomerCompareProductRepository $compareProductsRepository
-     *
+     * @param  \Webkul\Velocity\Helpers\Helper  $velocityHelper
+     * @param  \Webkul\Product\Helpers\ProductImage  $productImageHelper
+     * @param  \Webkul\Product\Repositories\SearchRepository  $searchRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
+     * @param  \Webkul\Velocity\Repositories\Product\ProductRepository  $velocityProductRepository
+     * @param  \Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository  $compareProductsRepository
      * @return void
-    */
+     */
     public function __construct(
         Helper $velocityHelper,
         ProductImage $productImageHelper,
@@ -109,12 +107,19 @@ class Controller extends BaseController
         $this->_config = request('_config');
 
         $this->velocityHelper = $velocityHelper;
+
         $this->searchRepository = $searchRepository;
+
         $this->productRepository = $productRepository;
+
         $this->productImageHelper = $productImageHelper;
+
         $this->categoryRepository = $categoryRepository;
+
         $this->wishlistRepository = $wishlistRepository;
+
         $this->velocityProductRepository = $velocityProductRepository;
+        
         $this->compareProductsRepository = $compareProductsRepository;
     }
 }

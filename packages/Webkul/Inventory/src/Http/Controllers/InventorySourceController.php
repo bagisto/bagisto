@@ -5,12 +5,6 @@ namespace Webkul\Inventory\Http\Controllers;
 use Illuminate\Support\Facades\Event;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
 
-/**
- * Inventory source controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class InventorySourceController extends Controller
 {
     /**
@@ -23,7 +17,7 @@ class InventorySourceController extends Controller
     /**
      * InventorySourceRepository object
      *
-     * @var array
+     * @var \Webkul\Inventory\Repositories\InventorySourceRepository
      */
     protected $inventorySourceRepository;
 
@@ -77,7 +71,7 @@ class InventorySourceController extends Controller
             'country'        => 'required',
             'state'          => 'required',
             'city'           => 'required',
-            'postcode'       => 'required'
+            'postcode'       => 'required',
         ]);
 
         $data = request()->all();
@@ -126,7 +120,7 @@ class InventorySourceController extends Controller
             'country'        => 'required',
             'state'          => 'required',
             'city'           => 'required',
-            'postcode'       => 'required'
+            'postcode'       => 'required',
         ]);
 
         $data = request()->all();
@@ -169,6 +163,7 @@ class InventorySourceController extends Controller
                 return response()->json(['message' => true], 200);
             } catch (\Exception $e) {
                 report($e);
+                
                 session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Inventory source']));
             }
         }

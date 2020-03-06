@@ -7,12 +7,6 @@ use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\OrderItemRepository;
 use Webkul\Sales\Repositories\RefundRepository;
 
-/**
- * Sales Refund controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class RefundController extends Controller
 {
     /**
@@ -25,30 +19,30 @@ class RefundController extends Controller
     /**
      * OrderRepository object
      *
-     * @var Object
+     * @var \Webkul\Sales\Repositories\OrderRepository
      */
     protected $orderRepository;
 
     /**
      * OrderItemRepository object
      *
-     * @var Object
+     * @var \Webkul\Sales\Repositories\OrderItemRepository
      */
     protected $orderItemRepository;
 
     /**
      * RefundRepository object
      *
-     * @var Object
+     * @var \Webkul\Sales\Repositories\RefundRepository
      */
     protected $refundRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Sales\Repositories\OrderRepository     $orderRepository
-     * @param  \Webkul\Sales\Repositories\OrderItemRepository $orderItemRepository
-     * @param  \Webkul\Sales\Repositories\RefundRepository    $refundRepository
+     * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
+     * @param  \Webkul\Sales\Repositories\OrderItemRepository  $orderItemRepository
+     * @param  \Webkul\Sales\Repositories\RefundRepository  $refundRepository
      * @return void
      */
     public function __construct(
@@ -81,7 +75,7 @@ class RefundController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param int $orderId
+     * @param  int  $orderId
      * @return \Illuminate\Http\View
      */
     public function create($orderId)
@@ -94,7 +88,7 @@ class RefundController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param int $orderId
+     * @param  int  $orderId
      * @return \Illuminate\Http\Response
      */
     public function store($orderId)
@@ -108,7 +102,7 @@ class RefundController extends Controller
         }
 
         $this->validate(request(), [
-            'refund.items.*' => 'required|numeric|min:0'
+            'refund.items.*' => 'required|numeric|min:0',
         ]);
 
         $data = request()->all();
@@ -141,15 +135,16 @@ class RefundController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param int $orderId
+     * @param  int  $orderId
      * @return \Illuminate\Http\JsonResponse
      */
     public function updateQty($orderId)
     {
         $data = $this->refundRepository->getOrderItemsRefundSummary(request()->all(), $orderId);
 
-        if (! $data)
+        if (! $data) {
             return response('');
+        }
 
         return response()->json($data);
     }
@@ -157,7 +152,7 @@ class RefundController extends Controller
     /**
      * Show the view for the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\View
      */
     public function view($id)

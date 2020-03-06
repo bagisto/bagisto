@@ -17,42 +17,42 @@ class CartRule
     /**
      * CartRuleRepository object
      *
-     * @var CartRuleRepository
+     * @var \Webkul\CartRule\Repositories\CartRuleRepository
      */
     protected $cartRuleRepository;
 
     /**
      * CartRuleCouponRepository object
      *
-     * @var CartRuleCouponRepository
+     * @var \Webkul\CartRule\Repositories\CartRuleCouponRepository
      */
     protected $cartRuleCouponRepository;
 
     /**
      * CartRuleCouponUsageRepository object
      *
-     * @var CartRuleCouponUsageRepository
+     * @var \Webkul\CartRule\Repositories\CartRuleCouponUsageRepository
      */
     protected $cartRuleCouponUsageRepository;
 
     /**
      * CartRuleCustomerRepository object
      *
-     * @var CartRuleCustomerRepository
+     * @var \Webkul\CartRule\Repositories\CartRuleCustomerRepository
      */
     protected $cartRuleCustomerRepository;
 
     /**
      * CustomerGroupRepository object
      *
-     * @var CustomerGroupRepository
+     * @var \Webkul\Customer\Repositories\CustomerGroupRepository
      */
     protected $customerGroupRepository;
 
     /**
      * Validator object
      *
-     * @var Validator
+     * @var \Webkul\Rule\Helpers\Validator
      */
     protected $validator;
 
@@ -64,12 +64,12 @@ class CartRule
     /**
      * Create a new helper instance.
      *
-     * @param Webkul\CartRule\Repositories\CartRuleRepository            $cartRuleRepository
-     * @param Webkul\CartRule\Repositories\CartRuleCouponRepository      $cartRuleCouponRepository
-     * @param Webkul\CartRule\Repositories\CartRuleCouponUsageRepository $cartRuleCouponUsageRepository
-     * @param Webkul\CartRule\Repositories\CartRuleCustomerRepository    $cartRuleCustomerRepository
-     * @param Webkul\Customer\Repositories\CustomerGroupRepository       $customerGroupRepository
-     * @param Webkul\Rule\Helpers\Validator                              $validator
+     * @param  \Webkul\CartRule\Repositories\CartRuleRepository  $cartRuleRepository
+     * @param  \Webkul\CartRule\Repositories\CartRuleCouponRepository  $cartRuleCouponRepository
+     * @param  \Webkul\CartRule\Repositories\CartRuleCouponUsageRepository  $cartRuleCouponUsageRepository
+     * @param  \Webkul\CartRule\Repositories\CartRuleCustomerRepository  $cartRuleCustomerRepository
+     * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository
+     * @param  \Webkul\Rule\Helpers\Validator  $validator
      *
      * @return void
      */
@@ -111,8 +111,9 @@ class CartRule
             $itemCartRuleIds = $this->process($item);
             $appliedCartRuleIds = array_merge($appliedCartRuleIds, $itemCartRuleIds);
 
-            if ($item->children()->count() && $item->product->getTypeInstance()->isChildrenCalculated())
+            if ($item->children()->count() && $item->product->getTypeInstance()->isChildrenCalculated()) {
                 $this->divideDiscount($item);
+            }
         }
 
         $cart->applied_cart_rule_ids = implode(',', array_unique($appliedCartRuleIds, SORT_REGULAR));
@@ -129,38 +130,40 @@ class CartRule
     /**
      * Returns cart rules
      *
-     * @return Collection
+     * @return \Illuminate\Support\Collection
      */
     public function getCartRules()
     {
         static $cartRules;
 
-        if ($cartRules)
+        if ($cartRules) {
             return $cartRules;
+        }
 
         $customerGroupId = null;
 
         if (Cart::getCurrentCustomer()->check()) {
             $customerGroupId = Cart::getCurrentCustomer()->user()->customer_group_id;
         } else {
-            if ($customerGuestGroup = $this->customerGroupRepository->findOneByField('code', 'guest'))
+            if ($customerGuestGroup = $this->customerGroupRepository->findOneByField('code', 'guest')) {
                 $customerGroupId = $customerGuestGroup->id;
+            }
         }
 
         $cartRules = $this->cartRuleRepository->scopeQuery(function ($query) use ($customerGroupId) {
             return $query->leftJoin('cart_rule_customer_groups', 'cart_rules.id', '=', 'cart_rule_customer_groups.cart_rule_id')
-                ->leftJoin('cart_rule_channels', 'cart_rules.id', '=', 'cart_rule_channels.cart_rule_id')
-                ->where('cart_rule_customer_groups.customer_group_id', $customerGroupId)
-                ->where('cart_rule_channels.channel_id', core()->getCurrentChannel()->id)
-                ->where(function ($query1) {
-                    $query1->where('cart_rules.starts_from', '<=', Carbon::now()->format('Y-m-d'))
-                        ->orWhereNull('cart_rules.starts_from');
-                })
-                ->where(function ($query2) {
-                    $query2->where('cart_rules.ends_till', '>=', Carbon::now()->format('Y-m-d'))
-                        ->orWhereNull('cart_rules.ends_till');
-                })
-                ->orderBy('sort_order', 'asc');
+                         ->leftJoin('cart_rule_channels', 'cart_rules.id', '=', 'cart_rule_channels.cart_rule_id')
+                         ->where('cart_rule_customer_groups.customer_group_id', $customerGroupId)
+                         ->where('cart_rule_channels.channel_id', core()->getCurrentChannel()->id)
+                         ->where(function ($query1) {
+                             $query1->where('cart_rules.starts_from', '<=', Carbon::now()->format('Y-m-d'))
+                                 ->orWhereNull('cart_rules.starts_from');
+                         })
+                         ->where(function ($query2) {
+                             $query2->where('cart_rules.ends_till', '>=', Carbon::now()->format('Y-m-d'))
+                                 ->orWhereNull('cart_rules.ends_till');
+                         })
+                         ->orderBy('sort_order', 'asc');
         })->findWhere(['status' => 1]);
 
         return $cartRules;
@@ -169,9 +172,8 @@ class CartRule
     /**
      * Check if cart rule can be applied
      *
-     * @param CartRule $rule
-     *
-     * @return boolean
+     * @param  \Webkul\CartRule\Contracts\CartRule  $rule
+     * @return bool
      */
     public function canProcessRule($rule): bool
     {
@@ -213,8 +215,9 @@ class CartRule
                 'customer_id'  => $cart->customer_id,
             ]);
 
-            if ($ruleCustomer && $ruleCustomer->times_used >= $rule->usage_per_customer)
+            if ($ruleCustomer && $ruleCustomer->times_used >= $rule->usage_per_customer) {
                 return false;
+            }
         }
 
         return true;
@@ -224,7 +227,6 @@ class CartRule
      * Cart item discount calculation process
      *
      * @param \Webkul\Checkout\Models\CartItem $item
-     *
      * @return array
      */
     public function process(CartItem $item): array
@@ -236,11 +238,13 @@ class CartRule
         $appliedRuleIds = [];
 
         foreach ($this->getCartRules() as $rule) {
-            if (! $this->canProcessRule($rule))
+            if (! $this->canProcessRule($rule)) {
                 continue;
+            }
 
-            if (! $this->validator->validate($rule, $item))
+            if (! $this->validator->validate($rule, $item)) {
                 continue;
+            }
 
             $quantity = $rule->discount_quantity ? min($item->quantity, $rule->discount_quantity) : $item->quantity;
 
@@ -332,14 +336,14 @@ class CartRule
     /**
      * Cart shipping discount calculation process
      *
-     * @param Cart $cart
-     *
+     * @param  \Webkul\Checkout\Contracts\Cart  $cart
      * @return void
      */
     public function processShippingDiscount($cart)
     {
-        if (! $selectedShipping = $cart->selected_shipping_rate)
+        if (! $selectedShipping = $cart->selected_shipping_rate) {
             return;
+        }
 
         $selectedShipping->discount_amount = 0;
         $selectedShipping->base_discount_amount = 0;
@@ -413,8 +417,7 @@ class CartRule
     /**
      * Cart free shipping discount calculation process
      *
-     * @param Cart $cart
-     *
+     * @param  \Webkul\Checkout\Contracts\Cart  $cart
      * @return void
      */
     public function processFreeShippingDiscount($cart)
@@ -450,8 +453,9 @@ class CartRule
 
             $appliedRuleIds[$rule->id] = $rule->id;
 
-            if ($rule->end_other_rules)
+            if ($rule->end_other_rules) {
                 break;
+            }
         }
 
         $cartAppliedCartRuleIds = array_merge(explode(',', $cart->applied_cart_rule_ids), $appliedRuleIds);
@@ -468,9 +472,8 @@ class CartRule
     /**
      * Calculate cart item totals for each rule
      *
-     * @param mixed $items
-     *
-     * @return Validator
+     * @param  \Illuminate\Support\Collecton  $items
+     * @return \Webkul\Rule\Helpers\Validator
      */
     public function calculateCartItemTotals($items)
     {
@@ -479,8 +482,9 @@ class CartRule
                 $totalPrice = $totalBasePrice = $validCount = 0;
 
                 foreach ($items as $item) {
-                    if (! $this->canProcessRule($rule, $item))
+                    if (! $this->canProcessRule($rule, $item)) {
                         continue;
+                    }
 
                     $quantity = $rule->discount_quantity ? min($item->quantity, $rule->discount_quantity) : $item->quantity;
 
@@ -520,8 +524,7 @@ class CartRule
     /**
      * Divide discount amount to children
      *
-     * @param CartItem $item
-     *
+     * @param  \Webkul\Checkout\Contracts\CartItem  $item
      * @return void
      */
     protected function divideDiscount($item)

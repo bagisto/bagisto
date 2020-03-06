@@ -6,13 +6,6 @@ use Hash;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
 
-/**
- * Customer controlller for the customer basically for the tasks of customers which will be
- * done after customer authentication.
- *
- * @author    Prashant Singh <prashant.singh852@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class CustomerController extends Controller
 {
     /**
@@ -25,26 +18,28 @@ class CustomerController extends Controller
     /**
      * CustomerRepository object
      *
-     * @var Object
+     * @var \Webkul\Customer\Repositories\CustomerRepository
      */
     protected $customerRepository;
 
     /**
      * ProductReviewRepository object
      *
-     * @var array
+     * @var \Webkul\Customer\Repositories\ProductReviewRepository
      */
     protected $productReviewRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param \Webkul\Customer\Repositories\CustomerRepository     $customer
-     * @param \Webkul\Product\Repositories\ProductReviewRepository $productReview
-     *
+     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customer
+     * @param  \Webkul\Product\Repositories\ProductReviewRepository  $productReview
      * @return void
      */
-    public function __construct(CustomerRepository $customerRepository, ProductReviewRepository $productReviewRepository)
+    public function __construct(
+        CustomerRepository $customerRepository,
+        ProductReviewRepository $productReviewRepository
+    )
     {
         $this->middleware('customer');
 
@@ -82,7 +77,7 @@ class CustomerController extends Controller
     /**
      * Edit function for editing customer profile.
      *
-     * @return response
+     * @return \Illuminate\Http\Response
      */
     public function update()
     {
@@ -133,8 +128,7 @@ class CustomerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     *
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
