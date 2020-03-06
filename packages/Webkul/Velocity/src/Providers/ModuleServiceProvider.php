@@ -8,6 +8,6 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
 {
     protected $models = [
         \Webkul\Velocity\Models\Content::class,
-        \Webkul\Velocity\Models\Category::class
+        \Webkul\Velocity\Models\Category::class,
     ];
 }

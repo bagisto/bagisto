@@ -4,12 +4,6 @@ namespace Webkul\API\Http\Controllers\Shop;
 
 use Illuminate\Http\Request;
 
-/**
- * Core controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class CoreController extends Controller
 {
     /**
@@ -26,7 +20,7 @@ class CoreController extends Controller
         }
         
         return response()->json([
-            'data' => $configValues
+            'data' => $configValues,
         ]);
     }
 
@@ -38,7 +32,7 @@ class CoreController extends Controller
     public function getCountryStateGroup()
     {
         return response()->json([
-            'data' => core()->groupedStatesByCountries()
+            'data' => core()->groupedStatesByCountries(),
         ]);
     }
 

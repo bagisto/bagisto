@@ -6,13 +6,6 @@ use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Cart;
 
-/**
- * Customer controller
- *
- * @author    Prashant Singh <prashant.singh852@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
-
 class WishlistController extends Controller
 {
     /**
@@ -25,22 +18,22 @@ class WishlistController extends Controller
     /**
      * ProductRepository object
      *
-     * @var Object
+     * @var \Webkul\Customer\Repositories\WishlistRepository
     */
     protected $wishlistRepository;
 
     /**
      * WishlistRepository object
      *
-     * @var Object
+     * @var \Webkul\Product\Repositories\ProductRepository
     */
     protected $productRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Customer\Repositories\WishlistRepository $wishlistRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository   $productRepository
+     * @param  \Webkul\Customer\Repositories\WishlistRepository  $wishlistRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      * @return void
      */
     public function __construct(
@@ -72,7 +65,8 @@ class WishlistController extends Controller
     /**
      * Function to add item to the wishlist.
      *
-     * @param integer $itemId
+     * @param  int  $itemId
+     * @return \Illuminate\Http\Response
      */
     public function add($itemId)
     {
@@ -82,16 +76,16 @@ class WishlistController extends Controller
             return redirect()->back();
 
         $data = [
-            'channel_id' => core()->getCurrentChannel()->id,
-            'product_id' => $itemId,
-            'customer_id' => auth()->guard('customer')->user()->id
+            'channel_id'  => core()->getCurrentChannel()->id,
+            'product_id'  => $itemId,
+            'customer_id' => auth()->guard('customer')->user()->id,
         ];
 
         $checked = $this->wishlistRepository->findWhere([
-                'channel_id' => core()->getCurrentChannel()->id,
-                'product_id' => $itemId,
-                'customer_id' => auth()->guard('customer')->user()->id
-            ]);
+            'channel_id'  => core()->getCurrentChannel()->id,
+            'product_id'  => $itemId,
+            'customer_id' => auth()->guard('customer')->user()->id,
+        ]);
 
         //accidental case if some one adds id of the product in the anchor tag amd gives id of a variant.
         if ($product->parent_id != null) {
@@ -123,7 +117,8 @@ class WishlistController extends Controller
     /**
      * Function to remove item to the wishlist.
      *
-     * @param integer $itemId
+     * @param  int  $itemId
+     * @return \Illuminate\Http\Response
      */
     public function remove($itemId)
     {
@@ -147,17 +142,19 @@ class WishlistController extends Controller
     /**
      * Function to move item from wishlist to cart.
      *
-     * @param integer $itemId
+     * @param  int  $itemId
+     * @return \Illuminate\Http\Response
      */
     public function move($itemId)
     {
         $wishlistItem = $this->wishlistRepository->findOneWhere([
-                'id' => $itemId,
-                'customer_id' => auth()->guard('customer')->user()->id
+                'id'          => $itemId,
+                'customer_id' => auth()->guard('customer')->user()->id,
             ]);
 
-        if (! $wishlistItem)
+        if (! $wishlistItem) {
             abort(404);
+        }
 
         try {
             $result = Cart::moveToCart($wishlistItem);
@@ -173,6 +170,7 @@ class WishlistController extends Controller
             return redirect()->back();
         } catch (\Exception $e) {
             report($e);
+
             session()->flash('warning', $e->getMessage());
 
             return redirect()->route('shop.productOrCategory.index',  $wishlistItem->product->url_key);
@@ -182,7 +180,7 @@ class WishlistController extends Controller
     /**
      * Function to remove all of the items items in the customer's wishlist
      *
-     * @return Mixed Response & Boolean
+     * @return \Illuminate\Http\Response
      */
     public function removeAll()
     {

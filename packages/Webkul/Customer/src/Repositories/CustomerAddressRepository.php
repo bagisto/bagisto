@@ -5,12 +5,6 @@ namespace Webkul\Customer\Repositories;
 use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Facades\Event;
 
-/**
- * Customer Repository
- *
- * @author    Prashant Singh <prashant.singh852@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class CustomerAddressRepository extends Repository
 {
     /**
@@ -18,16 +12,14 @@ class CustomerAddressRepository extends Repository
      *
      * @return mixed
      */
-
     function model()
     {
         return 'Webkul\Customer\Contracts\CustomerAddress';
     }
 
     /**
-     * @param array $data
-     *
-     * @return mixed
+     * @param  array  $data
+     * @return \Webkul\Customer\Contracts\CustomerAddress
      */
     public function create(array $data)
     {
@@ -51,10 +43,9 @@ class CustomerAddressRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @param       $id
-     *
-     * @return mixed
+     * @param  array  $data
+     * @param  int  $id
+     * @return \Webkul\Customer\Contracts\CustomerAddress
      */
     public function update(array $data, $id)
     {
@@ -72,6 +63,7 @@ class CustomerAddressRepository extends Repository
             if ($default_address->id != $address->id) {
                 $default_address->update(['default_address' => 0]);
             }
+            
             $address->update($data);
         } else {
             $address->update($data);

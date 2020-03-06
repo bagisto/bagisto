@@ -7,12 +7,6 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-/**
- * New Admin Mail class
- *
- * @author    Rahul Shukla <rahulshukla.symfony517@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class NewCustomerNotification extends Mailable
 {
     use Queueable, SerializesModels;
@@ -20,23 +14,28 @@ class NewCustomerNotification extends Mailable
     /**
      * The customer instance.
      *
-     * @var customer
+     * @var  \Webkul\Customer\Contracts\Customer
      */
     public $customer;
 
     /**
      * The password instance.
      *
-     * @var password
+     * @var string
      */
     public $password;
 
     /**
      * Create a new message instance.
-     *
+     * 
+     * @param  \Webkul\Customer\Contracts\Customer  $order
+     * @param  string  $password
      * @return void
      */
-    public function __construct($customer, $password)
+    public function __construct(
+        $customer,
+        $password
+    )
     {
         $this->customer = $customer;
 
@@ -51,7 +50,7 @@ class NewCustomerNotification extends Mailable
     public function build()
     {
         return $this->to($this->customer->email)
-                ->subject(trans('shop::app.mail.customer.new.subject'))
-                ->view('shop::emails.customer.new-customer')->with(['customer' => $this->customer, 'password' => $this->password]);
+                    ->subject(trans('shop::app.mail.customer.new.subject'))
+                    ->view('shop::emails.customer.new-customer')->with(['customer' => $this->customer, 'password' => $this->password]);
     }
 }

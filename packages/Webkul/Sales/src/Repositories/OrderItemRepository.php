@@ -7,19 +7,12 @@ use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Sales\Contracts\OrderItem;
 
-/**
- * OrderItem Reposotory
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
-
 class OrderItemRepository extends Repository
 {
     /**
      * Specify Model class name
      *
-     * @return Mixed
+     * @return string
      */
     function model()
     {
@@ -27,8 +20,8 @@ class OrderItemRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @return mixed
+     * @param  array  $data
+     * @return \Webkul\Sales\Contracts\OrderItem
      */
     public function create(array $data)
     {
@@ -43,8 +36,8 @@ class OrderItemRepository extends Repository
     }
 
     /**
-     * @param mixed $orderItem
-     * @return mixed
+     * @param  \Webkul\Sales\Contracts\OrderItem  $orderItem
+     * @return \Webkul\Sales\Contracts\OrderItem
      */
     public function collectTotals($orderItem)
     {
@@ -102,7 +95,7 @@ class OrderItemRepository extends Repository
     }
 
     /**
-     * @param mixed $orderItem
+     * @param  \Webkul\Sales\Contracts\OrderItem  $orderItem
      * @return void
      */
     public function manageInventory($orderItem)
@@ -118,25 +111,26 @@ class OrderItemRepository extends Repository
         }
 
         foreach ($orderItems as $item) {
-            if (! $item->product)
+            if (! $item->product) {
                 continue;
+            }
 
             $orderedInventory = $item->product->ordered_inventories()
-                    ->where('channel_id', $orderItem->order->channel->id)
-                    ->first();
+                                              ->where('channel_id', $orderItem->order->channel->id)
+                                              ->first();
 
             $qty = $item->qty_ordered ?: $item->parent->qty_ordered;
 
             if ($orderedInventory) {
                 $orderedInventory->update([
-                        'qty' => $orderedInventory->qty + $qty
-                    ]);
+                    'qty' => $orderedInventory->qty + $qty,
+                ]);
             } else {
                 $item->product->ordered_inventories()->create([
-                        'qty' => $qty,
-                        'product_id' => $item->product_id,
-                        'channel_id' => $orderItem->order->channel->id,
-                    ]);
+                    'qty'        => $qty,
+                    'product_id' => $item->product_id,
+                    'channel_id' => $orderItem->order->channel->id,
+                ]);
             }
         }
     }
@@ -144,20 +138,22 @@ class OrderItemRepository extends Repository
     /**
      * Returns qty to product inventory after order cancelation
      *
-     * @param OrderItem $orderItem
+     * @param  \Webkul\Sales\Contracts\OrderItem  $orderItem
      * @return void
      */
     public function returnQtyToProductInventory($orderItem)
     {
         $orderedInventory = $orderItem->product->ordered_inventories()
-                ->where('channel_id', $orderItem->order->channel->id)
-                ->first();
+                                      ->where('channel_id', $orderItem->order->channel->id)
+                                      ->first();
 
-        if (! $orderedInventory)
+        if (! $orderedInventory) {
             return;
+        }
 
-        if (($qty = $orderedInventory->qty - ($orderItem->qty_ordered ? $orderItem->qty_to_cancel : $orderItem->parent->qty_ordered)) < 0)
+        if (($qty = $orderedInventory->qty - ($orderItem->qty_ordered ? $orderItem->qty_to_cancel : $orderItem->parent->qty_ordered)) < 0) {
             $qty = 0;
+        }
 
         $orderedInventory->update(['qty' => $qty]);
     }

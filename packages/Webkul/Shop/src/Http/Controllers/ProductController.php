@@ -8,49 +8,43 @@ use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
 use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
 
-/**
- * Product controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ProductController extends Controller
 {
     /**
      * ProductRepository object
      *
-     * @var array
+     * @var \Webkul\Product\Repositories\ProductRepository
      */
     protected $productRepository;
 
     /**
      * ProductAttributeValueRepository object
      *
-     * @var array
+     * @var \Webkul\Product\Repositories\ProductAttributeValueRepository
      */
     protected $productAttributeValueRepository;
 
     /**
      * ProductDownloadableSampleRepository object
      *
-     * @var array
+     * @var \Webkul\Product\Repositories\ProductDownloadableSampleRepository
      */
     protected $productDownloadableSampleRepository;
 
     /**
      * ProductDownloadableLinkRepository object
      *
-     * @var array
+     * @var \Webkul\Product\Repositories\ProductDownloadableLinkRepository
      */
     protected $productDownloadableLinkRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Product\Repositories\ProductRepository                   $productRepository
-     * @param  \Webkul\Product\Repositories\productAttributeValueRepository     $productAttributeValueRepository
-     * @param  \Webkul\Product\Repositories\ProductDownloadableSampleRepository $productDownloadableSampleRepository
-     * @param  \Webkul\Product\Repositories\ProductDownloadableLinkRepository   $productDownloadableLinkRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Product\Repositories\productAttributeValueRepository  $productAttributeValueRepository
+     * @param  \Webkul\Product\Repositories\ProductDownloadableSampleRepository  $productDownloadableSampleRepository
+     * @param  \Webkul\Product\Repositories\ProductDownloadableLinkRepository  $productDownloadableLinkRepository
      * @return void
      */
     public function __construct(
@@ -74,14 +68,15 @@ class ProductController extends Controller
     /**
      * Download image or file
      *
-     * @param  int $productId, $attributeId
+     * @param  int  $productId
+     * @param  int  $attributeId
      * @return \Illuminate\Http\Response
      */
     public function download($productId, $attributeId)
     {
         $productAttribute = $this->productAttributeValueRepository->findOneWhere([
             'product_id'   => $productId,
-            'attribute_id' => $attributeId
+            'attribute_id' => $attributeId,
         ]);
 
         return Storage::download($productAttribute['text_value']);
@@ -90,7 +85,7 @@ class ProductController extends Controller
     /**
      * Download the for the specified resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|\Exception
      */
     public function downloadSample()
     {
@@ -98,9 +93,9 @@ class ProductController extends Controller
             if (request('type') == 'link') {
                 $productDownloadableLink = $this->productDownloadableLinkRepository->findOrFail(request('id'));
 
-                if ($productDownloadableLink->sample_type == 'file')
+                if ($productDownloadableLink->sample_type == 'file') {
                     return Storage::download($productDownloadableLink->sample_file);
-                else {
+                } else {
                     $fileName = $name = substr($productDownloadableLink->sample_url, strrpos($productDownloadableLink->sample_url, '/') + 1);
 
                     $tempImage = tempnam(sys_get_temp_dir(), $fileName);
@@ -112,9 +107,9 @@ class ProductController extends Controller
             } else {
                 $productDownloadableSample = $this->productDownloadableSampleRepository->findOrFail(request('id'));
 
-                if ($productDownloadableSample->type == 'file')
+                if ($productDownloadableSample->type == 'file') {
                     return Storage::download($productDownloadableSample->file);
-                else {
+                } else {
                     $fileName = $name = substr($productDownloadableSample->url, strrpos($productDownloadableSample->url, '/') + 1);
 
                     $tempImage = tempnam(sys_get_temp_dir(), $fileName);

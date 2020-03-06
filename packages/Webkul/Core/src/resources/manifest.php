@@ -2,5 +2,5 @@
 
  return [
     'name'    => 'Webkul Bagisto Core',
-    'version' => '0.0.1'
+    'version' => '0.0.1',
  ];

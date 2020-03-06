@@ -10,5 +10,9 @@ class OrderPayment extends Model implements OrderPaymentContract
 {
     protected $table = 'order_payment';
 
-    protected $guarded = ['id', 'created_at', 'updated_at'];
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at',
+    ];
 }

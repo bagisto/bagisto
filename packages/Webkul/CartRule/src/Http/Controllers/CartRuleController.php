@@ -7,12 +7,6 @@ use Illuminate\Support\Facades\Event;
 use Webkul\CartRule\Repositories\CartRuleRepository;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 
-/**
- * Cart Rule controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class CartRuleController extends Controller
 {
     /**
@@ -25,22 +19,22 @@ class CartRuleController extends Controller
     /**
      * To hold Cart repository instance
      * 
-     * @var CartRuleRepository
+     * @var \Webkul\CartRule\Repositories\CartRuleRepository
      */
     protected $cartRuleRepository;
 
     /**
      * To hold CartRuleCouponRepository repository instance
      * 
-     * @var CartRuleCouponRepository
+     * @var \Webkul\CartRule\Repositories\CartRuleCouponRepository
      */
     protected $cartRuleCouponRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param \Webkul\CartRule\Repositories\CartRuleRepository       $cartRuleRepository
-     * @param \Webkul\CartRule\Repositories\CartRuleCouponRepository $cartRuleCouponRepository
+     * @param  \Webkul\CartRule\Repositories\CartRuleRepository $cartRuleRepository
+     * @param  \Webkul\CartRule\Repositories\CartRuleCouponRepository  $cartRuleCouponRepository
      *
      * @return void
      */
@@ -112,8 +106,7 @@ class CartRuleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -126,9 +119,8 @@ class CartRuleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int                      $id
-     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int                       $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -162,8 +154,7 @@ class CartRuleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -200,8 +191,9 @@ class CartRuleController extends Controller
             'code_format' => 'required',
         ]);
         
-        if (! request('id'))
+        if (! request('id')) {
             return response()->json(['message' => trans('admin::app.promotions.cart-rules.cart-rule-not-defind-error')], 400);
+        }
 
         $this->cartRuleCouponRepository->generateCoupons(request()->all(), request('id'));
 

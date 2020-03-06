@@ -7,10 +7,14 @@ use Intervention\Image\Filters\FilterInterface;
 
 class Medium implements FilterInterface
 {
+    /**
+     * @param  \Intervention\Image\Image  $image
+     * @return \Intervention\Image\Image
+     */
     public function applyFilter(Image $image)
     {
-        $width = 280;
-        $height = 280;
+        $width = $height = 280;
+
         $image->resize($width, $height, function ($constraint) {
             $constraint->aspectRatio();
         });

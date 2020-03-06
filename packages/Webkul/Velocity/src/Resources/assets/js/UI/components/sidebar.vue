@@ -11,13 +11,13 @@
                 :key="categoryIndex"
                 :id="`category-${category.id}`"
                 class="category-content cursor-pointer"
-                v-for="(category, categoryIndex) in slicedCategories"
                 @mouseout="toggleSidebar(id, $event, 'mouseout')"
-                @mouseover="toggleSidebar(id, $event, 'mouseover')">
+                @mouseover="toggleSidebar(id, $event, 'mouseover')"
+                v-for="(category, categoryIndex) in slicedCategories">
 
                 <a
-                    :class="`category unset ${(category.children.length > 0) ? 'fw6' : ''}`"
-                    :href="`${$root.baseUrl}/${category.slug}`">
+                    :href="`${$root.baseUrl}/${category.slug}`"
+                    :class="`category unset ${(category.children.length > 0) ? 'fw6' : ''}`">
 
                     <div
                         class="category-icon"
@@ -28,7 +28,9 @@
                             v-if="category.category_icon_path"
                             :src="`${$root.baseUrl}/storage/${category.category_icon_path}`" />
                     </div>
+
                     <span class="category-title">{{ category['name'] }}</span>
+
                     <i
                         class="rango-arrow-right pr15 pull-right"
                         @mouseout="toggleSidebar(id, $event, 'mouseout')"
@@ -41,19 +43,26 @@
                     class="sub-category-container"
                     v-if="category.children.length && category.children.length > 0">
 
-                    <div :class="`sub-categories sub-category-${sidebarLevel+categoryIndex}`">
+                    <div
+                        @mouseout="toggleSidebar(id, $event, 'mouseout')"
+                        @mouseover="remainBar(`sidebar-level-${sidebarLevel+categoryIndex}`)"
+                        :class="`sub-categories sub-category-${sidebarLevel+categoryIndex} cursor-default`">
+
                         <nav
                             class="sidebar"
-                            @mouseover="remainBar(`sidebar-level-${sidebarLevel+categoryIndex}`)"
-                            :id="`sidebar-level-${sidebarLevel+categoryIndex}`">
+                            :id="`sidebar-level-${sidebarLevel+categoryIndex}`"
+                            @mouseover="remainBar(`sidebar-level-${sidebarLevel+categoryIndex}`)">
+
                             <ul type="none">
                                 <li
                                     :key="`${subCategoryIndex}-${categoryIndex}`"
                                     v-for="(subCategory, subCategoryIndex) in category.children">
 
                                     <a
-                                        :class="`category unset ${(subCategory.children.length > 0) ? 'fw6' : ''}`"
-                                        :href="`${$root.baseUrl}/${category.slug}/${subCategory.slug}`">
+                                        :id="`sidebar-level-link-2-${subCategoryIndex}`"
+                                        @mouseout="toggleSidebar(id, $event, 'mouseout')"
+                                        :href="`${$root.baseUrl}/${category.slug}/${subCategory.slug}`"
+                                        :class="`category sub-category unset ${(subCategory.children.length > 0) ? 'fw6' : ''}`">
 
                                         <div
                                             class="category-icon"
@@ -73,6 +82,7 @@
                                             v-for="(childSubCategory, childSubCategoryIndex) in subCategory.children">
 
                                             <a
+                                                :id="`sidebar-level-link-3-${childSubCategoryIndex}`"
                                                 :class="`category unset ${(subCategory.children.length > 0) ? 'fw6' : ''}`"
                                                 :href="`${$root.baseUrl}/${category.slug}/${subCategory.slug}/${childSubCategory.slug}`">
                                                 <span class="category-title">{{ childSubCategory.name }}</span>
@@ -143,7 +153,7 @@
                     slicedCategories['parentSlug'] = this.parentSlug;
 
                 this.slicedCategories = slicedCategories;
-            }
+            },
         }
     }
 </script>

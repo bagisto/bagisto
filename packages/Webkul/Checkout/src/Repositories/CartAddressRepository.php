@@ -10,7 +10,6 @@ use Webkul\Core\Eloquent\Repository;
  * @author    Prashant Singh <prashant.singh852@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class CartAddressRepository extends Repository
 {
     /**

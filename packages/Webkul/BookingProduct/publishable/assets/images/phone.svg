@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+    <title>icon-menu copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="icon-menu-copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <g id="Group-3" transform="translate(7.000000, 5.000000)" stroke="#242424" stroke-width="3">
+            <g id="Group-2">
+                <g id="Group">
+                    <path d="M0,1 C0,6.2 2.66666667,10.5333333 8,14" id="Path-24"></path>
+                    <path d="M0,0.860920013 L3.33066907e-16,0.860920013 C0.692541156,0.399225909 1.62823371,0.58636442 2.08992781,1.27890558 C2.0981214,1.29119595 2.10613384,1.30360612 2.11396256,1.31613206 L2.36753004,1.72184003 C2.99745806,2.72972486 2.84834566,4.03901444 2.00791685,4.87944325 L1.29138002,5.59598008" id="Path-25" fill="#242424"></path>
+                    <path d="M8.63269516,13.7386314 L5,10.4383311 L5.96373991,10.125193 C7.09411415,9.75791214 8.32839532,10.2194571 8.94044595,11.2382972 L9.18681717,11.648415 C9.19442371,11.6610771 9.20184367,11.6738503 9.20907467,11.6867306 C9.61652862,12.4125102 9.35847472,13.3311774 8.63269516,13.7386314 Z" id="Path-25" stroke-linejoin="round"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

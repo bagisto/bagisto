@@ -4,12 +4,6 @@ namespace Webkul\Tax\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
 
-/**
- * Tax Mapping Reposotory
- *
- * @author    Prashant Singh <prashant.singh852@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class TaxMapRepository extends Repository
 {
     /**
@@ -23,8 +17,8 @@ class TaxMapRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @return mixed
+     * @param  array  $data
+     * @return \Webkul\Tax\Contracts\TaxMap
      */
     public function create(array $data)
     {
@@ -34,10 +28,10 @@ class TaxMapRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @param $id
-     * @param string $attribute
-     * @return mixed
+     * @param  array  $data
+     * @param  int  $id
+     * @param  string  $attribute
+     * @return \Webkul\Tax\Contracts\TaxMap
      */
     public function update(array $data, $id, $attribute = "id")
     {

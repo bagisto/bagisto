@@ -7,25 +7,19 @@ use Illuminate\Http\Response;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\API\Http\Resources\Catalog\Product as ProductResource;
 
-/**
- * Product controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ProductController extends Controller
 {
     /**
      * ProductRepository object
      *
-     * @var array
+     * @var \Webkul\Product\Repositories\ProductRepository
      */
     protected $productRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Product\Repositories\ProductRepository $productRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository $productRepository
      * @return void
      */
     public function __construct(ProductRepository $productRepository)
@@ -46,36 +40,39 @@ class ProductController extends Controller
     /**
      * Returns a individual resource.
      *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function get($id)
     {
         return new ProductResource(
-                $this->productRepository->findOrFail($id)
-            );
+            $this->productRepository->findOrFail($id)
+        );
     }
 
     /**
      * Returns product's additional information.
      *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function additionalInformation($id)
     {
         return response()->json([
-                'data' => app('Webkul\Product\Helpers\View')->getAdditionalData($this->productRepository->findOrFail($id))
-            ]);
+            'data' => app('Webkul\Product\Helpers\View')->getAdditionalData($this->productRepository->findOrFail($id)),
+        ]);
     }
 
     /**
      * Returns product's additional information.
      *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function configurableConfig($id)
     {
         return response()->json([
-                'data' => app('Webkul\Product\Helpers\ConfigurableOption')->getConfigurationConfig($this->productRepository->findOrFail($id))
-            ]);
+            'data' => app('Webkul\Product\Helpers\ConfigurableOption')->getConfigurationConfig($this->productRepository->findOrFail($id)),
+        ]);
     }
 }

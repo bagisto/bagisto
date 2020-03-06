@@ -213,6 +213,14 @@
                                 </select>
                             </div>
 
+                            <div class="control-group">
+                                <label for="is_comparable">{{ __('admin::app.catalog.attributes.is_comparable') }}</label>
+                                <select class="control" id="is_comparable" name="is_comparable">
+                                    <option value="0">{{ __('admin::app.catalog.attributes.no') }}</option>
+                                    <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
+                                </select>
+                            </div>
+
                             {!! view_render_event('bagisto.admin.catalog.attribute.create_form_accordian.configuration.controls.after') !!}
 
                         </div>

@@ -15,14 +15,14 @@ class Attribute extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'code' => $this->code,
-            'type' => $this->type,
-            'name' => $this->name,
+            'id'          => $this->id,
+            'code'        => $this->code,
+            'type'        => $this->type,
+            'name'        => $this->name,
             'swatch_type' => $this->swatch_type,
-            'options' => AttributeOption::collection($this->options),
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'options'     => AttributeOption::collection($this->options),
+            'created_at'  => $this->created_at,
+            'updated_at'  => $this->updated_at,
         ];
     }
 }

@@ -9,50 +9,44 @@ use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
 
-/**
- * CatalogRule Reposotory
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class CatalogRuleRepository extends Repository
 {
     /**
      * AttributeFamilyRepository object
      *
-     * @var AttributeFamilyRepository
+     * @var \Webkul\Attribute\Repositories\AttributeFamilyRepository
      */
     protected $attributeFamilyRepository;
 
     /**
      * AttributeRepository object
      *
-     * @var AttributeRepository
+     * @var \Webkul\Attribute\Repositories\AttributeRepository
      */
     protected $attributeRepository;
 
     /**
      * CategoryRepository class
      *
-     * @var CategoryRepository
+     * @var \Webkul\Category\Repositories\CategoryRepository
      */
     protected $categoryRepository;
 
     /**
      * TaxCategoryRepository class
      *
-     * @var TaxCategoryRepository
+     * @var \Webkul\CaTaxtegory\Repositories\axCategoryRepository
      */
     protected $taxCategoryRepository;
 
     /**
      * Create a new repository instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeFamilyRepository $attributeFamilyRepository
-     * @param  Webkul\Attribute\Repositories\AttributeRepository       $attributeRepository
-     * @param  Webkul\Category\Repositories\CategoryRepository         $categoryRepository
-     * @param  Webkul\Tax\Repositories\TaxCategoryRepository           $taxCategoryRepository
-     * @param  Illuminate\Container\Container                          $app
+     * @param  \Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamilyRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
+     * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
+     * @param  \Webkul\Tax\Repositories\TaxCategoryRepository  $taxCategoryRepository
+     * @param  \Illuminate\Container\Container  $app
      * @return void
      */
     public function __construct(
@@ -85,8 +79,8 @@ class CatalogRuleRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @return mixed
+     * @param  array  $data
+     * @return \Webkul\CatalogRule\Contracts\CatalogRule
      */
     public function create(array $data)
     {
@@ -106,10 +100,10 @@ class CatalogRuleRepository extends Repository
     }
 
     /**
-     * @param array  $data
-     * @param array  $id
-     * @param string $attribute
-     * @return mixed
+     * @param  array  $data
+     * @param  int  $id
+     * @param  string  $attribute
+     * @return \Webkul\CatalogRule\Contracts\CatalogRule
      */
     public function update(array $data, $id, $attribute = "id")
     {
@@ -141,19 +135,19 @@ class CatalogRuleRepository extends Repository
     {
         $attributes = [
             [
-                'key' => 'product',
-                'label' => trans('admin::app.promotions.catalog-rules.product-attribute'),
+                'key'      => 'product',
+                'label'    => trans('admin::app.promotions.catalog-rules.product-attribute'),
                 'children' => [
                     [
-                        'key' => 'product|category_ids',
-                        'type' => 'multiselect',
-                        'label' => trans('admin::app.promotions.catalog-rules.categories'),
-                        'options' => $this->categoryRepository->getCategoryTree()
+                        'key'     => 'product|category_ids',
+                        'type'    => 'multiselect',
+                        'label'   => trans('admin::app.promotions.catalog-rules.categories'),
+                        'options' => $this->categoryRepository->getCategoryTree(),
                     ], [
-                        'key' => 'product|attribute_family_id',
-                        'type' => 'select',
-                        'label' => trans('admin::app.promotions.catalog-rules.attribute_family'),
-                        'options' => $this->getAttributeFamilies()
+                        'key'     => 'product|attribute_family_id',
+                        'type'    => 'select',
+                        'label'   => trans('admin::app.promotions.catalog-rules.attribute_family'),
+                        'options' => $this->getAttributeFamilies(),
                     ]
                 ]
             ]
@@ -175,10 +169,10 @@ class CatalogRuleRepository extends Repository
                 $attributeType = 'integer';
 
             $attributes[0]['children'][] = [
-                'key' => 'product|' . $attribute->code,
-                'type' => $attribute->type,
-                'label' => $attribute->name,
-                'options' => $options
+                'key'     => 'product|' . $attribute->code,
+                'type'    => $attribute->type,
+                'label'   => $attribute->name,
+                'options' => $options,
             ];
         }
 
@@ -196,7 +190,7 @@ class CatalogRuleRepository extends Repository
 
         foreach ($this->taxCategoryRepository->all() as $taxCategory) {
             $taxCategories[] = [
-                'id' => $taxCategory->id,
+                'id'         => $taxCategory->id,
                 'admin_name' => $taxCategory->name,
             ];
         }
@@ -215,7 +209,7 @@ class CatalogRuleRepository extends Repository
 
         foreach ($this->attributeFamilyRepository->all() as $attributeFamily) {
             $attributeFamilies[] = [
-                'id' => $attributeFamily->id,
+                'id'         => $attributeFamily->id,
                 'admin_name' => $attributeFamily->name,
             ];
         }

@@ -6,6 +6,7 @@
 
     .magnifier {
         > img {
+            max-width: 100%;
             min-height: 450px;
             max-height: 530px;
         }
@@ -219,16 +220,36 @@
         }
     }
 
-    .wishlist-icon {
-        height: 46px;
-        display: table;
-        padding-left: 10px;
+    .product-actions {
+        > div {
+            display: inline-block;
 
-        i {
-            display: table-cell;
-            vertical-align: middle;
+            .add-to-cart-btn {
+                float: left;
+            }
+
+            .compare-icon,
+            .wishlist-icon {
+                height: 46px;
+                margin-left: 0;
+                padding-left: 10px;
+
+                i {
+                    display: table-cell;
+                    vertical-align: middle;
+                }
+            }
+
+            .compare-icon {
+                display: inline-table;
+            }
+
+            .wishlist-icon {
+                float: right;
+            }
         }
     }
+
 
     .layouter,
     #product-form {

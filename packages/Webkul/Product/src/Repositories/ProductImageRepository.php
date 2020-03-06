@@ -6,12 +6,6 @@ use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Str;
 
-/**
- * Product Image Reposotory
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ProductImageRepository extends Repository
 {
     /**
@@ -25,9 +19,9 @@ class ProductImageRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @param mixed $product
-     * @return mixed
+     * @param  array  $data
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @return void
      */
     public function uploadImages($data, $product)
     {
@@ -41,9 +35,9 @@ class ProductImageRepository extends Repository
                 if (Str::contains($imageId, 'image_')) {
                     if (request()->hasFile($file)) {
                         $this->create([
-                                'path' => request()->file($file)->store($dir),
-                                'product_id' => $product->id
-                            ]);
+                            'path'       => request()->file($file)->store($dir),
+                            'product_id' => $product->id,
+                        ]);
                     }
                 } else {
                     if (is_numeric($index = $previousImageIds->search($imageId))) {
@@ -56,7 +50,7 @@ class ProductImageRepository extends Repository
                         }
 
                         $this->update([
-                                'path' => request()->file($file)->store($dir)
+                                'path' => request()->file($file)->store($dir),
                             ], $imageId);
                     }
                 }

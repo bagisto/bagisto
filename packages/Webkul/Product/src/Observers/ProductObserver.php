@@ -9,7 +9,7 @@ class ProductObserver
     /**
      * Handle the Product "deleted" event.
      *
-     * @param  Product $product
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @return void
      */
     public function deleted($product)

@@ -48,16 +48,7 @@ return [
             ], [
                 'name'          => 'footer_toggle',
                 'title'         => 'admin::app.admin.system.footer-toggle',
-                'type'          => 'select',
-                'options'       => [
-                    [
-                        'title' => 'True',
-                        'value' => 1,
-                    ], [
-                        'title' => 'False',
-                        'value' => 0,
-                    ],
-                ],
+                'type'          => 'boolean',
                 'locale_based'  => true,
                 'channel_based' => true,
             ],

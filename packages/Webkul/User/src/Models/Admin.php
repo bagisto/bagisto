@@ -19,7 +19,12 @@ class Admin extends Authenticatable implements AdminContract
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'api_token', 'role_id', 'status',
+        'name',
+        'email',
+        'password',
+        'api_token',
+        'role_id',
+        'status',
     ];
 
     /**
@@ -28,7 +33,9 @@ class Admin extends Authenticatable implements AdminContract
      * @var array
      */
     protected $hidden = [
-        'password', 'api_token', 'remember_token',
+        'password',
+        'api_token',
+        'remember_token',
     ];
 
     /**
@@ -58,8 +65,9 @@ class Admin extends Authenticatable implements AdminContract
      */
     public function hasPermission($permission)
     {
-        if ($this->role->permission_type == 'custom' && ! $this->role->permissions)
+        if ($this->role->permission_type == 'custom' && ! $this->role->permissions) {
             return false;
+        }
 
         return in_array($permission, $this->role->permissions);
     }

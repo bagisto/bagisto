@@ -24,20 +24,17 @@ class PriceUpdate extends Command
     /**
      * ProductFlatRepository object
      *
-     * @var Object
+     * @var \Webkul\Product\Repositories\ProductFlatRepository
     */
     protected $productFlatRepository;
-
 
     /**
      * Create a new command instance.
      *
-     * @param  Webkul\Product\Repositories\ProductFlatRepository $productFlatRepository
+     * @param  ]Webkul\Product\Repositories\ProductFlatRepository  $productFlatRepository
      * @return void
      */
-    public function __construct(
-        ProductFlatRepository $productFlatRepository
-    )
+    public function __construct(ProductFlatRepository $productFlatRepository)
     {
         $this->productFlatRepository = $productFlatRepository;
 
@@ -47,7 +44,7 @@ class PriceUpdate extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @return void
      */
     public function handle()
     {
@@ -70,13 +67,13 @@ class PriceUpdate extends Command
                 $product->parent->save();
             } else {
                 $bundleProducts = $this->productFlatRepository->getModel()
-                        ->addSelect('product_flat.*')
-                        ->distinct()
-                        ->leftJoin('products', 'product_flat.product_id', 'products.id')
-                        ->leftJoin('product_bundle_options', 'products.id', 'product_bundle_options.product_id')
-                        ->leftJoin('product_bundle_option_products', 'product_bundle_options.id', 'product_bundle_option_products.product_bundle_option_id')
-                        ->where('product_bundle_option_products.product_id', $product->product_id)
-                        ->get();
+                                       ->addSelect('product_flat.*')
+                                       ->distinct()
+                                       ->leftJoin('products', 'product_flat.product_id', 'products.id')
+                                       ->leftJoin('product_bundle_options', 'products.id', 'product_bundle_options.product_id')
+                                       ->leftJoin('product_bundle_option_products', 'product_bundle_options.id', 'product_bundle_option_productsproduct_bundle_option_id')
+                                       ->where('product_bundle_option_products.product_id', $product->product_id)
+                                       ->get();
 
                 foreach ($bundleProducts as $bundleProduct) {
                     $bundleProduct->min_price = $bundleProduct->getTypeInstance()->getMinimalPrice();

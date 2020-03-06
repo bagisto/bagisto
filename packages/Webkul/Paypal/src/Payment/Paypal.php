@@ -5,33 +5,27 @@ namespace Webkul\Paypal\Payment;
 use Illuminate\Support\Facades\Config;
 use Webkul\Payment\Payment\Payment;
 
-/**
- * Paypal class
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 abstract class Paypal extends Payment
 {
     /**
      * PayPal web URL generic getter
      *
-     * @param array $params
+     * @param  array  $params
      * @return string
      */
     public function getPaypalUrl($params = [])
     {
         return sprintf('https://www.%spaypal.com/cgi-bin/webscr%s',
-                $this->getConfigData('sandbox') ? 'sandbox.' : '',
-                $params ? '?' . http_build_query($params) : ''
-            );
+            $this->getConfigData('sandbox') ? 'sandbox.' : '',
+            $params ? '?' . http_build_query($params) : ''
+        );
     }
 
     /**
      * Add order item fields
      *
-     * @param array $fields
-     * @param int $i
+     * @param  array  $fields
+     * @param  int  $i
      * @return void
      */
     protected function addLineItemsFields(&$fields, $i = 1)
@@ -39,7 +33,6 @@ abstract class Paypal extends Payment
         $cartItems = $this->getCartItems();
 
         foreach ($cartItems as $item) {
-
             foreach ($this->itemFieldsFormat as $modelField => $paypalField) {
                 $fields[sprintf($paypalField, $i)] = $item->{$modelField};
             }
@@ -51,7 +44,7 @@ abstract class Paypal extends Payment
     /**
      * Add billing address fields
      *
-     * @param array $fields
+     * @param  array  $fields
      * @return void
      */
     protected function addAddressFields(&$fields)
@@ -69,15 +62,14 @@ abstract class Paypal extends Payment
             'zip'              => $billingAddress->postcode,
             'state'            => $billingAddress->state,
             'address1'         => $billingAddress->address1,
-            'address_override' => 1
+            'address_override' => 1,
         ]);
     }
 
     /**
      * Checks if line items enabled or not
      *
-     * @param array $fields
-     * @return void
+     * @return bool
      */
     public function getIsLineItemsEnabled()
     {

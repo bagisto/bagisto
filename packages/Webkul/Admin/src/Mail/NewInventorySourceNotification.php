@@ -7,12 +7,6 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-/**
- * New InventorySource Notification Mail class
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class NewInventorySourceNotification extends Mailable
 {
     use Queueable, SerializesModels;
@@ -20,14 +14,14 @@ class NewInventorySourceNotification extends Mailable
     /**
      * The shipment instance.
      *
-     * @var Shipment
+     * @var \Webkul\Customer\Contracts\Shipment
      */
     public $shipment;
 
     /**
      * Create a new message instance.
      *
-     * @param mixed $shipment
+     * @param  \Webkul\Customer\Contracts\Shipment  $shipment
      * @return void
      */
     public function __construct($shipment)
@@ -43,10 +37,11 @@ class NewInventorySourceNotification extends Mailable
     public function build()
     {
         $order = $this->shipment->order;
+        
         $inventory = $this->shipment->inventory_source;
 
         return $this->to($inventory->contact_email, $inventory->name)
-                ->subject(trans('shop::app.mail.shipment.subject', ['order_id' => $order->increment_id]))
-                ->view('shop::emails.sales.new-inventorysource-shipment');
+                    ->subject(trans('shop::app.mail.shipment.subject', ['order_id' => $order->increment_id]))
+                    ->view('shop::emails.sales.new-inventorysource-shipment');
     }
 }

@@ -2,9 +2,9 @@
 
 namespace Webkul\Core\Database\Seeders;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Arr;
-use DB;
 
 class CountryStateTranslationSeeder extends Seeder
 {
@@ -25,6 +25,7 @@ class CountryStateTranslationSeeder extends Seeder
             data_fill($stateTranslations, '*.locale', $code);
 
             DB::table('country_translations')->insert($countryTranslations);
+            
             DB::table('country_state_translations')->insert($stateTranslations);
         }
 

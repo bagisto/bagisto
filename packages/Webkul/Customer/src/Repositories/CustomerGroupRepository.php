@@ -4,13 +4,6 @@ namespace Webkul\Customer\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
 
-/**
- * CustomerGroup Reposotory
- *
- * @author    Rahul Shukla <rahulshukla.symfony517@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
-
 class CustomerGroupRepository extends Repository
 {
     /**
@@ -25,10 +18,9 @@ class CustomerGroupRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @return mixed
+     * @param  array  $data
+     * @return \Webkul\Customer\Contracts\CustomerGroup
      */
-
     public function create(array $data)
     {
         $customer = $this->model->create($data);
@@ -37,12 +29,11 @@ class CustomerGroupRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @param $id
-     * @param string $attribute
-     * @return mixed
+     * @param  array  $data
+     * @param  int  $id
+     * @param  string  $id
+     * @return \Webkul\Customer\Contracts\CustomerGroup
      */
-
     public function update(array $data, $id, $attribute = "id")
     {
         $customer = $this->find($id);

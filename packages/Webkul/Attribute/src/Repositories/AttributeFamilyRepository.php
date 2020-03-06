@@ -9,33 +9,27 @@ use Webkul\Attribute\Repositories\AttributeGroupRepository;
 use Illuminate\Container\Container as App;
 use Illuminate\Support\Str;
 
-/**
- * Attribute Reposotory
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class AttributeFamilyRepository extends Repository
 {
     /**
      * AttributeRepository object
      *
-     * @var Object
+     * @var \Webkul\Attribute\Repositories\AttributeRepository
      */
     protected $attributeRepository;
 
     /**
      * AttributeGroupRepository object
      *
-     * @var Object
+     * @var \Webkul\Attribute\Repositories\AttributeGroupRepository
      */
     protected $attributeGroupRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeRepository      $attributeRepository
-     * @param  Webkul\Attribute\Repositories\AttributeGroupRepository $attributeGroupRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeGroupRepository  $attributeGroupRepository
      * @return void
      */
     public function __construct(
@@ -62,20 +56,24 @@ class AttributeFamilyRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @return mixed
+     * @param  array  $data
+     * @return \Webkul\Attribute\Contracts\AttributeFamily
      */
     public function create(array $data)
     {
         Event::dispatch('catalog.attribute_family.create.before');
 
         $attributeGroups = isset($data['attribute_groups']) ? $data['attribute_groups'] : [];
+
         unset($data['attribute_groups']);
+
         $family = $this->model->create($data);
 
         foreach ($attributeGroups as $group) {
             $custom_attributes = isset($group['custom_attributes']) ? $group['custom_attributes'] : [];
+
             unset($group['custom_attributes']);
+
             $attributeGroup = $family->attribute_groups()->create($group);
 
             foreach ($custom_attributes as $key => $attribute) {
@@ -95,10 +93,10 @@ class AttributeFamilyRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @param $id
-     * @param string $attribute
-     * @return mixed
+     * @param  array  $data
+     * @param  int  $id
+     * @param  string  $attribute
+     * @return \Webkul\Attribute\Contracts\AttributeFamily
      */
     public function update(array $data, $id, $attribute = "id")
     {
@@ -118,6 +116,7 @@ class AttributeFamilyRepository extends Repository
                     if (isset($attributeGroupInputs['custom_attributes'])) {
                         foreach ($attributeGroupInputs['custom_attributes'] as $key => $attribute) {
                             $attributeModel = $this->attributeRepository->find($attribute['id']);
+
                             $attributeGroup->custom_attributes()->save($attributeModel, ['position' => $key + 1]);
                         }
                     }
@@ -127,6 +126,7 @@ class AttributeFamilyRepository extends Repository
                     }
 
                     $attributeGroup = $this->attributeGroupRepository->find($attributeGroupId);
+
                     $attributeGroup->update($attributeGroupInputs);
 
                     $attributeIds = $attributeGroup->custom_attributes()->get()->pluck('id');
@@ -137,6 +137,7 @@ class AttributeFamilyRepository extends Repository
                                 $attributeIds->forget($index);
                             } else {
                                 $attributeModel = $this->attributeRepository->find($attribute['id']);
+
                                 $attributeGroup->custom_attributes()->save($attributeModel, ['position' => $key + 1]);
                             }
                         }
@@ -158,17 +159,22 @@ class AttributeFamilyRepository extends Repository
         return $family;
     }
 
+
+    /**
+     * @return array
+     */
     public function getPartial()
     {
         $attributeFamilies = $this->model->all();
-        $trimmed = array();
+
+        $trimmed = [];
 
         foreach ($attributeFamilies as $key => $attributeFamily) {
             if ($attributeFamily->name != null || $attributeFamily->name != "") {
                 $trimmed[$key] = [
-                    'id' => $attributeFamily->id,
+                    'id'   => $attributeFamily->id,
                     'code' => $attributeFamily->code,
-                    'name' => $attributeFamily->name
+                    'name' => $attributeFamily->name,
                 ];
             }
         }
@@ -177,7 +183,7 @@ class AttributeFamilyRepository extends Repository
     }
 
     /**
-     * @param $id
+     * @param  int  $id
      * @return void
      */
     public function delete($id)

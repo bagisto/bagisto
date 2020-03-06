@@ -7,8 +7,10 @@
 
                     target.value = e.target.value.toString()
                         .toLowerCase()
+                        
+                        .normalize('NFKD') // Normalize Unicode
                         .replace(/[^\w- ]+/g, '')
-
+                              
                         // replace whitespaces with dashes
                         .replace(/ +/g, '-')
 

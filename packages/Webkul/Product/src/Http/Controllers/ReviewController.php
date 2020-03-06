@@ -5,12 +5,6 @@ namespace Webkul\Product\Http\Controllers;
 use Illuminate\Support\Facades\Event;
 use Webkul\Product\Repositories\ProductReviewRepository;
 
-/**
- * Review controller
- *
- * @author    Rahul Shukla <rahulshukla.symfony517@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ReviewController extends Controller
 {
     /**
@@ -23,7 +17,7 @@ class ReviewController extends Controller
     /**
      * ProductReviewRepository object
      *
-     * @var Object
+     * @var \Webkul\Product\Repositories\ProductReviewRepository
      */
     protected $productReviewRepository;
 
@@ -33,9 +27,7 @@ class ReviewController extends Controller
      * @param  \Webkul\Product\Repositories\ProductReviewRepository  $productReview
      * @return void
      */
-    public function __construct(
-        ProductReviewRepository $productReviewRepository
-    )
+    public function __construct(ProductReviewRepository $productReviewRepository)
     {
         $this->productReviewRepository = $productReviewRepository;
 
@@ -115,7 +107,7 @@ class ReviewController extends Controller
     /**
      * Mass delete the reviews on the products.
      *
-     * @return response
+     * @return \Illuminate\Http\Response
      */
     public function massDestroy()
     {
@@ -140,10 +132,11 @@ class ReviewController extends Controller
                 }
             }
 
-            if (! $suppressFlash)
+            if (! $suppressFlash) {
                 session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'Reviews']));
-            else
+            } else {
                 session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'Reviews']));
+            }
 
             return redirect()->route($this->_config['redirect']);
 
@@ -157,7 +150,7 @@ class ReviewController extends Controller
     /**
      * Mass approve the reviews on the products.
      *
-     * @return response
+     * @return \Illuminate\Http\Response
      */
     public function massUpdate()
     {
@@ -179,9 +172,9 @@ class ReviewController extends Controller
                             $review->update(['status' => 'approved']);
 
                             Event::dispatch('customer.review.update.after', $review);
-                        } else if ($data['update-options'] == 0) {
+                        } elseif ($data['update-options'] == 0) {
                             $review->update(['status' => 'pending']);
-                        } else if ($data['update-options'] == 2) {
+                        } elseif ($data['update-options'] == 2) {
                             $review->update(['status' => 'disapproved']);
                         } else {
                             continue;
@@ -194,10 +187,11 @@ class ReviewController extends Controller
                 }
             }
 
-            if (! $suppressFlash)
+            if (! $suppressFlash) {
                 session()->flash('success', trans('admin::app.datagrid.mass-ops.update-success', ['resource' => 'Reviews']));
-            else
+            } else {
                 session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'Reviews']));
+            }
 
             return redirect()->route($this->_config['redirect']);
         } else {

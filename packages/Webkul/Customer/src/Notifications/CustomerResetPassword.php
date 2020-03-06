@@ -23,8 +23,9 @@ class CustomerResetPassword extends ResetPassword
         return (new MailMessage)
             ->subject(__('shop::app.mail.forget-password.subject') )
             ->view('shop::emails.customer.forget-password', [
-                'user_name' => $notifiable->name,
-                'token' => $this->token
-            ]);
+                    'user_name' => $notifiable->name,
+                    'token'     => $this->token,
+                ]
+            );
     }
 }

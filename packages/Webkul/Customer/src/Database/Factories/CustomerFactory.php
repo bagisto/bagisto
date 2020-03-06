@@ -9,6 +9,7 @@ use Webkul\Customer\Models\Customer;
 $factory->define(Customer::class, function (Faker $faker) {
     $now = date("Y-m-d H:i:s");
     $password = $faker->password;
+    
     return [
         'first_name'        => $faker->firstName(),
         'last_name'         => $faker->lastName,

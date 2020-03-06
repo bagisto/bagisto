@@ -173,8 +173,9 @@ class Order extends Model implements OrderContract
     public function haveStockableItems()
     {
         foreach ($this->items as $item) {
-            if ($item->getTypeInstance()->isStockable())
+            if ($item->getTypeInstance()->isStockable()) {
                 return true;
+            }
         }
 
         return false;
@@ -185,12 +186,14 @@ class Order extends Model implements OrderContract
      */
     public function canShip()
     {
-        if ($this->status == 'fraud')
+        if ($this->status == 'fraud') {
             return false;
+        }
 
         foreach ($this->items as $item) {
-            if ($item->canShip())
+            if ($item->canShip()) {
                 return true;
+            }
         }
 
         return false;
@@ -201,12 +204,14 @@ class Order extends Model implements OrderContract
      */
     public function canInvoice()
     {
-        if ($this->status == 'fraud')
+        if ($this->status == 'fraud') {
             return false;
+        }
 
         foreach ($this->items as $item) {
-            if ($item->canInvoice())
+            if ($item->canInvoice()) {
                 return true;
+            }
         }
 
         return false;
@@ -217,12 +222,14 @@ class Order extends Model implements OrderContract
      */
     public function canCancel()
     {
-        if ($this->status == 'fraud')
+        if ($this->status == 'fraud') {
             return false;
+        }
 
         foreach ($this->items as $item) {
-            if ($item->canCancel())
+            if ($item->canCancel()) {
                 return true;
+            }
         }
 
         return false;
@@ -233,16 +240,19 @@ class Order extends Model implements OrderContract
      */
     public function canRefund()
     {
-        if ($this->status == 'fraud')
+        if ($this->status == 'fraud') {
             return false;
-
-        foreach ($this->items as $item) {
-            if ($item->qty_to_refund > 0)
-                return true;
         }
 
-        if ($this->base_grand_total_invoiced - $this->base_grand_total_refunded - $this->refunds()->sum('base_adjustment_fee') > 0)
+        foreach ($this->items as $item) {
+            if ($item->qty_to_refund > 0) {
+                return true;
+            }
+        }
+
+        if ($this->base_grand_total_invoiced - $this->base_grand_total_refunded - $this->refunds()->sum('base_adjustment_fee') > 0) {
             return true;
+        }
 
         return false;
     }

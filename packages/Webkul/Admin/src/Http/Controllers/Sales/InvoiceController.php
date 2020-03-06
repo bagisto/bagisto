@@ -7,12 +7,6 @@ use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use PDF;
 
-/**
- * Sales Invoice controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class InvoiceController extends Controller
 {
     /**
@@ -25,22 +19,22 @@ class InvoiceController extends Controller
     /**
      * OrderRepository object
      *
-     * @var array
+     * @var \Webkul\Sales\Repositories\OrderRepository
      */
     protected $orderRepository;
 
     /**
      * InvoiceRepository object
      *
-     * @var array
+     * @var \Webkul\Sales\Repositories\InvoiceRepository
      */
     protected $invoiceRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Sales\Repositories\OrderRepository   $orderRepository
-     * @param  \Webkul\Sales\Repositories\InvoiceRepository $invoiceRepository
+     * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
+     * @param  \Webkul\Sales\Repositories\InvoiceRepository  $invoiceRepository
      * @return void
      */
     public function __construct(
@@ -70,7 +64,7 @@ class InvoiceController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param int $orderId
+     * @param  int  $orderId
      * @return \Illuminate\View\View
      */
     public function create($orderId)
@@ -83,7 +77,7 @@ class InvoiceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param int $orderId
+     * @param  int  $orderId
      * @return \Illuminate\Http\Response
      */
     public function store($orderId)
@@ -103,6 +97,7 @@ class InvoiceController extends Controller
         $data = request()->all();
 
         $haveProductToInvoice = false;
+        
         foreach ($data['invoice']['items'] as $itemId => $qty) {
             if ($qty) {
                 $haveProductToInvoice = true;

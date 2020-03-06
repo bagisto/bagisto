@@ -3,72 +3,67 @@
 namespace Webkul\Velocity\Http\Controllers\Admin;
 
 use Illuminate\Http\Response;
-use Webkul\Category\Repositories\CategoryRepository as Category;
-use Webkul\Velocity\Repositories\CategoryRepository as VelocityCategory;
+use Webkul\Category\Repositories\CategoryRepository;
+use Webkul\Velocity\Repositories\CategoryRepository as VelocityCategoryRepository;
 
-/**
- * Category Controller
- *
- * @author    Vivek Sharma <viveksh047@webkul.com> @vivek
- * @copyright 2019 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class CategoryController extends Controller
 {
     /**
      * Category Repository object
      *
-     * @var object
+     * @var \Webkul\Category\Repositories\CategoryRepository
     */
-    protected $category;
+    protected $categoryRepository;
 
     /**
      * VelocityCategory Repository object
      *
-     * @var object
+     * @var \Webkul\Velocity\Repositories\CategoryRepository
     */
-    protected $velocityCategory;
+    protected $velocityCategoryRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param \Webkul\Category\Repositories\CategoryRepository $category;
-     * @param \Webkul\Velocity\Repositories\CategoryRepository $velocityCategory;
+     * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository;
+     * @param  \Webkul\Velocity\Repositories\CategoryRepository  $velocityCategory;
      * @return void
      */
     public function __construct(
-        Category $category,
-        VelocityCategory $velocityCategory
+        CategoryRepository $categoryRepository,
+        VelocityCategoryRepository $velocityCategoryRepository
     )
     {
-        $this->category = $category;
+        $this->categoryRepository = $categoryRepository;
 
-        $this->velocityCategory = $velocityCategory;
+        $this->velocityCategoryRepository = $velocityCategoryRepository;
 
         $this->_config = request('_config');
     }
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
-        if (!core()->getConfigData('velocity.configuration.general.status')) {
+        if (! core()->getConfigData('velocity.configuration.general.status')) {
             session()->flash('error', trans('velocity::app.admin.system.velocity.error-module-inactive'));
 
             return redirect()->route('admin.configuration.index', ['slug' => 'velocity', 'slug2' => 'configuration']);
         }
+
         return view($this->_config['view']);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
-        $categories = $this->velocityCategory->getChannelCategories();
+        $categories = $this->velocityCategoryRepository->getChannelCategories();
 
         return view($this->_config['view'], compact('categories'));
     }
@@ -80,7 +75,7 @@ class CategoryController extends Controller
      */
     public function store()
     {
-        $this->velocityCategory->create(request()->all());
+        $this->velocityCategoryRepository->create(request()->all());
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Category Menu']));
 
@@ -91,13 +86,13 @@ class CategoryController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
-        $categories = $this->category->getVisibleCategoryTree(core()->getCurrentChannel()->root_category_id);
+        $categories = $this->categoryRepository->getVisibleCategoryTree(core()->getCurrentChannel()->root_category_id);
 
-        $velocityCategory = $this->velocityCategory->findOrFail($id);
+        $velocityCategory = $this->velocityCategoryRepository->findOrFail($id);
 
         return view($this->_config['view'], compact('categories', 'velocityCategory'));
     }
@@ -110,7 +105,7 @@ class CategoryController extends Controller
      */
     public function update($id)
     {
-        $velocityCategory = $this->velocityCategory->update(request()->all(), $id);
+        $velocityCategory = $this->velocityCategoryRepository->update(request()->all(), $id);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Category Menu']));
 
@@ -125,10 +120,10 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $velocityCategory = $this->velocityCategory->findOrFail($id);
+        $velocityCategory = $this->velocityCategoryRepository->findOrFail($id);
 
         try {
-            $this->velocityCategory->delete($id);
+            $this->velocityCategoryRepository->delete($id);
 
             session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Category Menu']));
 
@@ -143,18 +138,17 @@ class CategoryController extends Controller
     /**
      * Mass Delete the products
      *
-     * @return response
+     * @return \Illuminate\Http\Response
      */
     public function massDestroy()
     {
         $menuIds = explode(',', request()->input('indexes'));
 
         foreach ($menuIds as $menuId) {
-
-            $velocityCategory = $this->velocityCategory->find($menuId);
+            $velocityCategory = $this->velocityCategoryRepository->find($menuId);
 
             if (isset($velocityCategory)) {
-                $this->velocityCategory->delete($menuId);
+                $this->velocityCategoryRepository->delete($menuId);
             }
         }
 
