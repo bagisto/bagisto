@@ -297,7 +297,7 @@ class Helper extends Review
                 $product = $this->productRepository->findOneWhere(['id' => $productFlat->product_id]);
 
                 if ($product) {
-                    $formattedProduct = $this->formatProduct($product);
+                    $formattedProduct = $this->formatProduct($productFlat);
 
                     $productMetaDetails = [];
                     $productMetaDetails['slug'] = $product->url_key;
@@ -306,7 +306,7 @@ class Helper extends Review
                     $productMetaDetails['addToCartHtml'] = $formattedProduct['addToCartHtml'];
                     $productMetaDetails['galleryImages'] = $formattedProduct['galleryImages'];
 
-                    $product = array_merge($product->toArray(), $productMetaDetails);
+                    $product = array_merge($productFlat->toArray(), $productMetaDetails);
 
                     array_push($productCollection, $product);
                 }

@@ -76,7 +76,7 @@
 
                                             <i
                                                 class="material-icons cross fs16"
-                                                @click="removeProductCompare(isCustomer ? product.id : product.url_key)">
+                                                @click="removeProductCompare(product.id)">
 
                                                 close
                                             </i>
@@ -181,20 +181,17 @@
                             console.log(this.__('error.something_went_wrong'));
                         });
                     } else {
-                        let existingItems = window.localStorage.getItem('compared_product');
-                        existingItems = JSON.parse(existingItems);
+                        let existingItems = this.getStorageValue('compared_product');
 
                         if (productId == "all") {
                             updatedItems = [];
                             this.$set(this, 'products', []);
                         } else {
                             updatedItems = existingItems.filter(item => item != productId);
-                            this.$set(this, 'products', this.products.filter(product => product.url_key != productId));
+                            this.$set(this, 'products', this.products.filter(product => product.id != productId));
                         }
 
-                        window.localStorage.setItem('compared_product', JSON.stringify(updatedItems));
-
-                        this.$root.headerItemsCount++;
+                        this.setStorageValue('compared_product', updatedItems);
 
                         window.showAlert(
                             `alert-success`,
@@ -202,6 +199,8 @@
                             `${this.__('customer.compare.removed')}`
                         );
                     }
+
+                    this.$root.headerItemsCount++;
                 },
             }
         });
