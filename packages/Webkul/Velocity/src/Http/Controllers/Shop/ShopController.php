@@ -20,7 +20,7 @@ class ShopController extends Controller
      * Index to handle the view loaded with the search results
      *
      * @return \Illuminate\View\View
-    */
+     */
     public function search()
     {
         $results = $this->velocityProductRepository->searchProductsFromCategory(request()->all());
@@ -67,16 +67,14 @@ class ShopController extends Controller
                 $formattedProducts = [];
                 $count = request()->get('count');
 
-                $productRepository = app('Webkul\Velocity\Repositories\Product\ProductRepository');
-
                 if ($slug == "new-products") {
-                    $products = $productRepository->getNewProducts($count);
+                    $products = $this->velocityProductRepository->getNewProducts($count);
                 } else if ($slug == "featured-products") {
-                    $products = $productRepository->getFeaturedProducts($count);
+                    $products = $this->velocityProductRepository->getFeaturedProducts($count);
                 }
 
                 foreach ($products as $product) {
-                    array_push($formattedProducts, $this->formatProduct($product));
+                    array_push($formattedProducts, $this->velocityHelper->formatProduct($product));
                 }
 
                 $response = [
@@ -96,7 +94,7 @@ class ShopController extends Controller
                     foreach ($products as $product) {
                         $productDetails = [];
 
-                        $productDetails = array_merge($productDetails, $this->formatProduct($product));
+                        $productDetails = array_merge($productDetails, $this->velocityHelper->formatProduct($product));
                         array_push($customizedProducts, $productDetails);
                     }
 
@@ -164,37 +162,6 @@ class ShopController extends Controller
         ];
     }
 
-    private function formatProduct($product, $list = false)
-    {
-        $reviewHelper = app('Webkul\Product\Helpers\Review');
-
-        $totalReviews = $reviewHelper->getTotalReviews($product);
-
-        $avgRatings = ceil($reviewHelper->getAverageRating($product));
-
-        $galleryImages = $this->productImageHelper->getGalleryImages($product);
-        $productImage = $this->productImageHelper->getProductBaseImage($product)['medium_image_url'];
-
-        return [
-            'avgRating'         => $avgRatings,
-            'totalReviews'      => $totalReviews,
-            'image'             => $productImage,
-            'galleryImages'     => $galleryImages,
-            'name'              => $product->name,
-            'slug'              => $product->url_key,
-            'description'       => $product->description,
-            'shortDescription'  => $product->short_description,
-            'firstReviewText'   => trans('velocity::app.products.be-first-review'),
-            'priceHTML'         => view('shop::products.price', ['product' => $product])->render(),
-            'addToCartHtml'     => view('shop::products.add-to-cart', [
-                'product'           => $product,
-                'showCompare'       => true,
-                'addWishlistClass'  => !(isset($list) && $list) ? '' : '',
-                'addToCartBtnClass' => !(isset($list) && $list) ? 'small-padding' : '',
-            ])->render(),
-        ];
-    }
-
     public function getWishlistList()
     {
         return view($this->_config['view']);
@@ -204,7 +171,7 @@ class ShopController extends Controller
      * this function will provide the count of wishlist and comparison for logged in user
      *
      * @return Response
-    */
+     */
     public function getItemsCount()
     {
         if ($customer = auth()->guard('customer')->user()) {
@@ -232,10 +199,8 @@ class ShopController extends Controller
     /**
      * this function will provide details of multiple product
      *
-     * @param $productIds
-     *
      * @return Response
-    */
+     */
     public function getDetailedProducts()
     {
         // for product details
