@@ -41,10 +41,11 @@
 
             .icon {
                 position: relative;
-                width: 10px;
-                height: 10px;
+                display: inline-block;
+                width: 8px;
+                height: 8px;
                 margin-left: 5px;
-                top: 0;
+                top: -1px;
 
                 &.arrow-down-icon {
                     background-image: url(../images/arrow-down.svg) !important;
@@ -221,6 +222,25 @@
                     margin-top: 4px;
                 }
             }
+        }
+    }
+}
+
+.form-group {
+    position: relative;
+
+    &.date, &.datetime {
+        &::after {
+            background-image: url("../images/Icon-Calendar.svg");
+            width: 24px;
+            height: 24px;
+            content: '';
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: -34px;
+            margin-top: 2px;
+            top: 3px !important;
+            pointer-events: none;
         }
     }
 }

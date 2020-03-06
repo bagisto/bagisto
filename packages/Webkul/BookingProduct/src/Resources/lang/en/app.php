@@ -73,6 +73,7 @@ return [
             'slot-duration' => 'Slot Duration',
             'slot-duration-in-minutes' => ':minutes Minutes',
             'today-availability' => 'Today Availability',
+            'slots-for-all-days' => 'Show for all days',
             'sunday' => 'Sunday',
             'monday' => 'Monday',
             'tuesday' => 'Tuesday',
