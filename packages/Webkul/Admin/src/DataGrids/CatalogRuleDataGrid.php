@@ -86,14 +86,14 @@ class CatalogRuleDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'title'  => 'Edit Catalog Rule',
+            'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.catalog-rules.edit',
             'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
-            'title'  => 'Delete Catalog Rule',
+            'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
             'route'  => 'admin.catalog-rules.delete',
             'icon'   => 'icon trash-icon',

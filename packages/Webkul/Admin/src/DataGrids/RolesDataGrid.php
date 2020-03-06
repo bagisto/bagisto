@@ -49,16 +49,17 @@ class RolesDataGrid extends DataGrid
         ]);
     }
 
-    public function prepareActions() {
+    public function prepareActions()
+    {
         $this->addAction([
-            'title'  => 'Edit',
+            'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.roles.edit',
             'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
-            'title'  => 'Delete',
+            'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
             'route'  => 'admin.roles.delete',
             'icon'   => 'icon trash-icon',

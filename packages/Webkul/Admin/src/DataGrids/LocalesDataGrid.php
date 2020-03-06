@@ -65,16 +65,17 @@ class LocalesDataGrid extends DataGrid
         ]);
     }
 
-    public function prepareActions() {
+    public function prepareActions()
+    {
         $this->addAction([
-            'title'  => 'Edit Locales',
+            'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.locales.edit',
             'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
-            'title'        => 'Delete Locales',
+            'title'        => trans('admin::app.datagrid.delete'),
             'method'       => 'POST',
             'route'        => 'admin.locales.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'Exchange Rate']),

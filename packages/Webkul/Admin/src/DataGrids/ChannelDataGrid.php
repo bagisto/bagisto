@@ -57,16 +57,17 @@ class ChannelDataGrid extends DataGrid
         ]);
     }
 
-    public function prepareActions() {
+    public function prepareActions()
+    {
         $this->addAction([
-            'title'  => 'Edit Channel',
+            'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.channels.edit',
             'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
-            'title'        => 'Delete Channel',
+            'title'        => trans('admin::app.datagrid.delete'),
             'method'       => 'POST',
             'route'        => 'admin.channels.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),

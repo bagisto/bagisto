@@ -48,16 +48,17 @@ class CurrencyDataGrid extends DataGrid
         ]);
     }
 
-    public function prepareActions() {
+    public function prepareActions()
+    {
         $this->addAction([
-            'title'  => 'Edit Currency',
+            'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.currencies.edit',
             'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
-            'title'  => 'Delete Currency',
+            'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
             'route'  => 'admin.currencies.delete',
             'icon'   => 'icon trash-icon',
