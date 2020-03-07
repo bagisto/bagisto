@@ -13,6 +13,6 @@ class VelocityCustomerCompareProductRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Velocity\Models\VelocityCustomerCompareProduct';
+        return 'Webkul\Velocity\Contracts\VelocityCustomerCompareProduct';
     }
 }

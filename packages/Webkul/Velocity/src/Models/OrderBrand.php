@@ -7,7 +7,7 @@ use Webkul\Velocity\Contracts\OrderBrand as OrderBrandContract;
 use Webkul\Attribute\Models\AttributeOptionProxy;
 use Webkul\Category\Models\CategoryProxy;
 
-class OrderBrands extends Model implements OrderBrandContract
+class OrderBrand extends Model implements OrderBrandContract
 {
     
     protected $table = 'order_brands';

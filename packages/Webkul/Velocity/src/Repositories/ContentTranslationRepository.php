@@ -13,6 +13,6 @@ class ContentTranslationRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Velocity\Models\ContentTranslation';
+        return 'Webkul\Velocity\Contracts\ContentTranslation';
     }
 }

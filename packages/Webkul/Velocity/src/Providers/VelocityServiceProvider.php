@@ -3,10 +3,6 @@
 namespace Webkul\Velocity\Providers;
 
 use Illuminate\Routing\Router;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Velocity\Facades\Velocity as VelocityFacade;
@@ -58,10 +54,6 @@ class VelocityServiceProvider extends ServiceProvider
      */
     protected function registerConfig()
     {
-        // $this->mergeConfigFrom(
-        //     dirname(__DIR__) . '/Config/system.php', 'core'
-        // );
-
         $this->mergeConfigFrom(
             dirname(__DIR__) . '/Config/admin-menu.php', 'menu.admin'
         );
