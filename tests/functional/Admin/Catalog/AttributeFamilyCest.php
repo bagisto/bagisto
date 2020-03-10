@@ -74,7 +74,8 @@ class AttributeFamilyCest
     private function fillForm(FunctionalTester $I): array
     {
         $testData = [
-            'code' => $I->fake()->uuid,
+            // code needs to match to: '/^[a-zA-Z]+[a-zA-Z0-9_]+$/'
+            'code' => $I->fake()->word . strtr($I->fake()->uuid, ['-' => '_']),
             'name' => $I->fake()->sentence,
         ];
 
