@@ -211,7 +211,6 @@ class Laravel5Helper extends Laravel5
     }
 
     /**
-     * <<<<<<< HEAD
      * Set all session with the given key and value in the array.
      *
      * @param array $keyValue
