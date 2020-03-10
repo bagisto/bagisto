@@ -74,8 +74,8 @@ class AttributeFamilyCest
     private function fillForm(FunctionalTester $I): array
     {
         $testData = [
-            'code' => $I->fake()->word,
-            'name' => $I->fake()->word,
+            'code' => $I->fake()->uuid,
+            'name' => $I->fake()->sentence,
         ];
 
         $I->fillField('code', $testData['code']);
