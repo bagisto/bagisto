@@ -245,7 +245,14 @@ return [
                     'order_id' => 'شماره سفارش',
                     'date' => 'تاریخ',
                     'status' => 'وضعیت',
-                    'total' => 'جمع'
+                    'total' => 'جمع',
+                    'processing' => 'Processing',
+                    'completed' => 'Completed',
+                    'canceled' => 'Canceled',
+                    'closed' => 'Closed',
+                    'pending' => 'Pending',
+                    'pending-payment' => 'Pending Payment',
+                    'fraud' => 'Fraud'
                 ],
 
                 'view' => [
