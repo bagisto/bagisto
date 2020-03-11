@@ -110,7 +110,7 @@
 
             data: function() {
                 return {
-                    tickets: @json($bookingProduct->event_tickets()->get())
+                    tickets: @json($bookingProduct ? $bookingProduct->event_tickets()->get() : [])
                 }
             }
         });
