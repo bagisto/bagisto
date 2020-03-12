@@ -243,7 +243,14 @@ return [
                     'order_id' => 'ترتيب',
                     'date' => 'التاريخ',
                     'status' => 'الحالة',
-                    'total' => 'المجموع'
+                    'total' => 'المجموع',
+                    'processing' => 'Processing',
+                    'completed' => 'Completed',
+                    'canceled' => 'Canceled',
+                    'closed' => 'Closed',
+                    'pending' => 'Pending',
+                    'pending-payment' => 'Pending Payment',
+                    'fraud' => 'Fraud'
                 ],
 
                 'view' => [

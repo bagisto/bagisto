@@ -116,7 +116,7 @@
                 return {
                     booking: bookingProduct ? bookingProduct : {
 
-                        booking_type: 'default',
+                        type: 'default',
 
                         location: '',
 
