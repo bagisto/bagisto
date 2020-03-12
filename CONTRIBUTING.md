@@ -52,9 +52,7 @@ Below is an example of a valid Bagisto doc block. Note that the @param attribute
     * @param  string|array  $loader
     * @param  \Closure|string|null  $concrete
     * @param  bool  $shared
-    *
     * @return void
-    *
     * @throws \Exception
     */
     protected function registerFacades($loader, $concrete = null, $shared = false)
