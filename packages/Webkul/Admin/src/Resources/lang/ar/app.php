@@ -100,10 +100,9 @@ return [
     'datagrid' => [
         'mass-ops' => [
             'method-error' => 'خطأ! تم اكتشاف طريقة خاطئة ، الرجاء التحقق من تشكيل حركة الكتلة',
-            'delete-success' => 'فهرس مختار من :تم حذف المورد بنجاح',
+            'delete-success' => "تم حذف المورد بنجاح :Selected",
             'partial-action' => 'ولم تنفذ بعض الإجراءات بسبب القيود المفروضة على النظام :resource',
-            'update-success' => 'فهرس مختار من :تم تحديث المورد بنجاح
-            ',
+            'update-success' => "تم تحديث المورد بنجاح :Selected"
         ],
         'id' => 'ID',
         'status' => 'الحالة',
@@ -263,7 +262,7 @@ return [
     'sales' => [
         'orders' => [
             'title' => 'الأوامر',
-            'view-title' => 'الأوامر #:order_id',
+            'view-title' => '#:order_id الأوامر',
             'cancel-btn-title' => 'إلغاء',
             'shipment-btn-title' => 'السفينة',
             'invoice-btn-title' => 'فاتورة',
@@ -294,11 +293,11 @@ return [
             'product-name' => 'اسم المنتج',
             'qty' => 'Qty',
             'item-status' => 'حالة البند',
-            'item-ordered' => 'أمر (:qty_ordered)',
-            'item-invoice' => '3-الفواتير (:qty_invoiced)',
-            'item-shipped' => 'شحنت (:qty_shipped)',
-            'item-canceled' => 'ملغاة (:qty_canceled)',
-            'item-refunded' => 'Refunded (:qty_refunded)',
+            'item-ordered' => '(:qty_ordered) سفارش ',
+            'item-invoice' => '(:qty_invoiced) صورتحساب',
+            'item-shipped' =>'(:qty_shipped) شحنت',
+            'item-canceled' => '(:qty_canceled)ملغاة',
+            'item-refunded' => '(:qty_refunded) بازپرداخت',
             'price' => 'السعر',
             'total' => 'المجموع',
             'subtotal' => 'المجموع الفرعي',
@@ -330,9 +329,9 @@ return [
             'add-title' => 'أنشئ الفاتورة',
             'save-btn-title' => 'احفظ الفاتورة',
             'qty' => 'Qty',
-            'qty-ordered' => 'أمر qty',
+            'qty-ordered' => 'تعداد سفارشات',
             'qty-to-invoice' => 'qty إلى فاتورة',
-            'view-title' => 'فاتورة #:invoice_id',
+            'view-title' => '#:invoice_id فاتورة',
             'bill-to' => 'بيل إلى',
             'ship-to' => 'السفينة إلى',
             'print' => 'اطبع',
@@ -361,7 +360,7 @@ return [
             'inventory-source' => 'مصدر الجرد',
             'carrier-title' => 'حق الناقل في الملكية',
             'tracking-number' => 'رقم التتبع',
-            'view-title' => 'الشحن #:shipment_id',
+            'view-title' => '#:shipment_id الشحن',
             'creation-error' => 'لا يمكن إنشاء الشحنة لهذا الطلب.',
             'order-error' => 'لا يسمح بإنشاء شحنة الطلب.',
             'quantity-invalid' => 'الكمية المطلوبة غير صالحة أو غير متاحة.',
@@ -603,7 +602,7 @@ return [
 
     'settings' => [
         'locales' => [
-            'title' => 'Locales',
+            'title' => 'لغات',
             'add-title' => 'إضافة محلي',
             'edit-title' => 'حرر الموقع',
             'add-title' => 'إضافة محلي',
@@ -613,7 +612,7 @@ return [
             'name' => 'اسم'
         ],
         'countries' => [
-            'title' => 'Countries',
+            'title' => 'بلدان',
             'add-title' => 'أضف البلد',
             'save-btn-title' => 'احفظ البلد',
             'general' => 'ألف-لمحة عامة',
@@ -621,7 +620,7 @@ return [
             'name' => 'اسم'
         ],
         'currencies' => [
-            'title' => 'Currencies',
+            'title' => 'العملات',
             'add-title' => 'أضف عملة',
             'edit-title' => 'حرر العملة',
             'save-btn-title' => 'احفظ العملة',
@@ -866,8 +865,8 @@ return [
         'csv' => 'CSV',
         'xls' => 'XLS',
         'file' => 'ملف',
-        'upload-error' => 'الملف يجب أن يكون ملف من نوع: xls, xlsx, csv.',
-        'duplicate-error' => 'معرف يجب أن يكون فريد ، معرف مكرر :identifier at row :position.'
+        'upload-error' => ' xls, xlsx, csv: الملف يجب أن يكون ملف من نوع',
+        'duplicate-error' => ':position عند الصف :identifier  يجب أن يكون المعرف فريدًا ومكررًا'
     ],
 
     'response' => [
