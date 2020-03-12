@@ -491,7 +491,7 @@ return [
             'discount' => 'تخفیف',
             'price' => 'قیمت',
             'disc-amount' => 'مقدار تخفیف',
-            'new-grand-total' => 'New Grand Total',
+            'new-grand-total' => 'کل بزرگ عالی',
             'coupon' => 'کوپن',
             'coupon-applied' => 'کوپن کاربردی',
             'remove-coupon' => 'کوپن را بردارید',
