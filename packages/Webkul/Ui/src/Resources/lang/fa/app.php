@@ -32,9 +32,9 @@ return [
         'false' => 'غلط / غیرفعال',
         'between' => 'ما بین',
         'apply' => 'درخواست',
-        'items-per-page' => 'Items Per Page',
-        'value-here' => 'Value here',
-        'numeric-value-here' => 'Numeric Value here',
-        'submit' => 'Submit'
+        'items-per-page' => 'موارد در هر صفحه',
+        'value-here' => 'ارزش در اینجا',
+        'numeric-value-here' => 'ارزش عددی در اینجا',
+        'submit' => 'ارسال'
     ]
 ];
