@@ -102,9 +102,9 @@ class BookingProductRepository extends Repository
             }
 
             if (! $bookingProductTypeSlot) {
-                $this->typeRepositories[$data['type']]->create(array_merge($data, ['booking_product_id' => $id]));
+                $this->typeRepositories[$data['type']]->create(array_merge($data['slots'], ['booking_product_id' => $id]));
             } else {
-                $this->typeRepositories[$data['type']]->update($data, $bookingProductTypeSlot->id);
+                $this->typeRepositories[$data['type']]->update($data['slots'], $bookingProductTypeSlot->id);
             }
         }
     }
