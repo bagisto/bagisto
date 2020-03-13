@@ -45,38 +45,36 @@
                 <span class="control-error" v-if="errors.has('booking[qty]')">@{{ errors.first('booking[qty]') }}</span>
             </div>
 
-            <div v-if="booking.type == 'appointment' || booking.type == 'event' || booking.type == 'rental' || booking.type == 'table'">
-                <div class="control-group" v-if="booking.type != 'event'" :class="[errors.has('booking[available_every_week]') ? 'has-error' : '']">
-                    <label class="required">{{ __('bookingproduct::app.admin.catalog.products.available-every-week') }}</label>
+            <div class="control-group" v-if="booking.type != 'event' && booking.type != 'default'" :class="[errors.has('booking[available_every_week]') ? 'has-error' : '']">
+                <label class="required">{{ __('bookingproduct::app.admin.catalog.products.available-every-week') }}</label>
 
-                    <select v-validate="'required'" name="booking[available_every_week]" v-model="booking.available_every_week" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.available-every-week') }}&quot;">
-                        <option value="1">{{ __('bookingproduct::app.admin.catalog.products.yes') }}</option>
-                        <option value="0">{{ __('bookingproduct::app.admin.catalog.products.no') }}</option>
-                    </select>
+                <select v-validate="'required'" name="booking[available_every_week]" v-model="booking.available_every_week" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.available-every-week') }}&quot;">
+                    <option value="1">{{ __('bookingproduct::app.admin.catalog.products.yes') }}</option>
+                    <option value="0">{{ __('bookingproduct::app.admin.catalog.products.no') }}</option>
+                </select>
+                
+                <span class="control-error" v-if="errors.has('booking[available_every_week]')">@{{ errors.first('booking[available_every_week]') }}</span>
+            </div>
+
+            <div v-if="! parseInt(booking.available_every_week)">
+                <div class="control-group" :class="[errors.has('booking[available_from]') ? 'has-error' : '']">
+                    <label class="required">{{ __('bookingproduct::app.admin.catalog.products.available-from') }}</label>
+
+                    <datetime>
+                        <input type="text" v-validate="'required'" name="booking[available_from]" v-model="booking.available_from" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.available-from') }}&quot;"/>
+                    </datetime>
                     
-                    <span class="control-error" v-if="errors.has('booking[available_every_week]')">@{{ errors.first('booking[available_every_week]') }}</span>
+                    <span class="control-error" v-if="errors.has('booking[available_from]')">@{{ errors.first('booking[available_from]') }}</span>
                 </div>
 
-                <div v-if="! parseInt(booking.available_every_week)">
-                    <div class="control-group" :class="[errors.has('booking[available_from]') ? 'has-error' : '']">
-                        <label class="required">{{ __('bookingproduct::app.admin.catalog.products.available-from') }}</label>
+                <div class="control-group" :class="[errors.has('booking[available_to]') ? 'has-error' : '']">
+                    <label class="required">{{ __('bookingproduct::app.admin.catalog.products.available-to') }}</label>
 
-                        <datetime>
-                            <input type="text" v-validate="'required'" name="booking[available_from]" v-model="booking.available_from" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.available-from') }}&quot;"/>
-                        </datetime>
-                        
-                        <span class="control-error" v-if="errors.has('booking[available_from]')">@{{ errors.first('booking[available_from]') }}</span>
-                    </div>
-
-                    <div class="control-group" :class="[errors.has('booking[available_to]') ? 'has-error' : '']">
-                        <label class="required">{{ __('bookingproduct::app.admin.catalog.products.available-to') }}</label>
-
-                        <datetime>
-                            <input type="text" v-validate="'required'" name="booking[available_to]" v-model="booking.available_to" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.available-to') }}&quot;"/>
-                        </datetime>
-                        
-                        <span class="control-error" v-if="errors.has('booking[available_to]')">@{{ errors.first('booking[available_to]') }}</span>
-                    </div>
+                    <datetime>
+                        <input type="text" v-validate="'required'" name="booking[available_to]" v-model="booking.available_to" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.available-to') }}&quot;"/>
+                    </datetime>
+                    
+                    <span class="control-error" v-if="errors.has('booking[available_to]')">@{{ errors.first('booking[available_to]') }}</span>
                 </div>
             </div>
 
