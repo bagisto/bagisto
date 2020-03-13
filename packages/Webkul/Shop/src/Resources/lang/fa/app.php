@@ -134,7 +134,7 @@ return [
             'forgot_pass' => 'رمز عبور را فراموش کرده اید؟',
             'button_title' => 'ورود',
             'remember' => 'مرا به خاطر بسپار',
-            'footer' => '© کپی رایت: نرم افزار Webkul سال ، کلیه حقوق محفوظ است',
+            'footer' => '© حقوق النشر :year Webkul Software ، جميع الحقوق محفوظة',
             'invalid-creds' => 'لطفا مدارک خود را بررسی کنید و دوباره امتحان کنید',
             'verify-first' => 'ابتدا حساب ایمیل خود را تأیید کنید',
             'not-activated' => 'فعال سازی شما به دنبال تأیید سرپرست است',
@@ -249,7 +249,7 @@ return [
                 ],
 
                 'view' => [
-                    'page-tile' => 'سفارش #:order_id',
+                    'page-tile' => '#:order_id سفارش',
                     'info' => 'اطلاعات',
                     'placed-on' => 'قرار داده شده در',
                     'products-ordered' => 'محصولات سفارش داده شده',
@@ -259,11 +259,11 @@ return [
                     'product-name' => 'نام',
                     'qty' => 'کمیت',
                     'item-status' => 'وضعیت مورد',
-                    'item-ordered' => 'سفارش داد (:qty_ordered)',
-                    'item-invoice' => 'صورتحساب (:qty_invoiced)',
-                    'item-shipped' => 'حمل شده (:qty_shipped)',
-                    'item-canceled' => 'لغو شد (:qty_canceled)',
-                    'item-refunded' => 'بازپرداخت (:qty_refunded)',
+                    'item-ordered' => '(:qty_ordered) سفارش داد',
+                    'item-invoice' => '(:qty_invoiced) صورتحساب ',
+                    'item-shipped' => '(:qty_shipped) حمل شده',
+                    'item-canceled' => '(:qty_canceled) لغو شد',
+                    'item-refunded' => '(:qty_refunded) بازپرداخت',
                     'price' => 'قیمت',
                     'total' => 'جمع',
                     'subtotal' => 'فرعی',
@@ -281,8 +281,8 @@ return [
                     'billing-address' => 'آدرس قبض',
                     'shipping-method' => 'روش حمل و نقل',
                     'payment-method' => 'روش پرداخت',
-                    'individual-invoice' => 'صورتحساب #:invoice_id',
-                    'individual-shipment' => 'حمل و نقل #:shipment_id',
+                    'individual-invoice' => '#:invoice_id صورتحساب',
+                    'individual-shipment' => '#:shipment_id حمل و نقل',
                     'print' => 'چاپ',
                     'invoice-id' => 'شناسه فاکتور',
                     'order-id' => 'شماره سفارش',
@@ -291,7 +291,7 @@ return [
                     'ship-to' => 'حمل به',
                     'contact' => 'تماس',
                     'refunds' => 'Refunds',
-                    'individual-refund' => 'بازپرداخت #:refund_id',
+                    'individual-refund' => '#:refund_id بازپرداخت',
                     'adjustment-refund' => 'بازپرداخت تنظیم',
                     'adjustment-fee' => 'هزینه تنظیم',
                 ]
@@ -338,7 +338,7 @@ return [
                 ],
 
                 'view' => [
-                    'page-tile' => 'بررسی #:id',
+                    'page-tile' => '#:id بررسی',
                 ]
             ]
         ]
@@ -550,15 +550,15 @@ return [
         ],
 
         'refund' => [
-            'heading' => 'Your Refund #:refund_id for Order #:order_id',
-            'subject' => 'Refund for your order #:order_id',
+            'heading' => '#:order_id للطلب #:refund_id أموالك المستردة',
+            'subject' => '#:order_id رد أموال لطلبك',
             'summary' => 'خلاصه بازپرداخت',
             'adjustment-refund' => 'بازپرداخت تنظیم',
             'adjustment-fee' => 'هزینه تنظیم'
         ],
 
         'forget-password' => [
-            'dear' => 'عزیز :name',
+            'dear' => ':name عزیز',
             'info' => 'شما این ایمیل را دریافت می کنید زیرا ما درخواست بازنشانی رمزعبور را برای حساب شما دریافت کردیم',
             'reset-password' => 'بازنشانی گذرواژه',
             'final-summary' => 'اگر درخواست بازنشانی گذرواژه را نکردید ، دیگر نیازی به اقدامات لازم نیست',
@@ -567,13 +567,13 @@ return [
     ],
 
     'webkul' => [
-        'copy-right' => '© کپی رایت: نرم افزار Webkul سال ، کلیه حقوق محفوظ است',
+        'copy-right' => ' جميع الحقوق محفوظة,:year Webkul Software حقوق الطبع والنشر  ©',
     ],
 
     'response' => [
-        'create-success' => ':name با موفقیت ایجاد شد',
-        'update-success' => ':name با موفقیت به روز شد.',
-        'delete-success' => ':name با موفقیت حذف شد',
-        'submit-success' => ':name با موفقیت ثبت شد.'
+        'create-success' => 'تم إنشاء name: بنجاح',
+        'update-success' => 'تم تحديث name: بنجاح',
+        'delete-success' => 'تم حذف :name بنجاح',
+        'submit-success' => 'تم تقديم name: بنجاح'
     ],
 ];

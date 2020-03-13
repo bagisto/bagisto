@@ -77,7 +77,7 @@ return [
         'rating-reviews' => 'التقييم والمراجعات',
         'submit' => 'إرسال',
         'delete-all' => 'حذف كل المراجعات',
-        'ratingreviews' => ':rating تقيمات & :review باء-الاستعراضات',
+        'ratingreviews' => ' مراجعات :review تقييمات و :rating',
         'star' => 'نجم',
         'percentage' => ':percentage %',
         'id-star' => 'نجم',
@@ -247,7 +247,7 @@ return [
                 ],
 
                 'view' => [
-                    'page-tile' => 'ترتيب #:order_id',
+                    'page-tile' => '#:order_id اطلب',
                     'info' => 'معلومات',
                     'placed-on' => 'وضع على',
                     'products-ordered' => 'المنتجات المطلوبة',
@@ -257,11 +257,11 @@ return [
                     'product-name' => 'الاسم',
                     'qty' => 'الكمية',
                     'item-status' => 'حالة البند',
-                    'item-ordered' => 'أمر(:qty_ordered)',
-                    'item-invoice' => '3-الفواتير(:qty_invoiced)',
-                    'item-shipped' => 'شحنت(:qty_shipped)',
-                    'item-canceled' => 'ملغاة(:qty_canceled)',
-                    'item-refunded' => 'ردها (:qty_refunded)',
+                    'item-ordered' => '(:qty_ordered) أمر',
+                    'item-invoice' => '(:qty_invoiced) مفوتر',
+                    'item-shipped' => '(:qty_shipped) شحنت',
+                    'item-canceled' => '(:qty_canceled) ملغاة',
+                    'item-refunded' => '(:qty_refunded) ردها',
                     'price' => 'السعر',
                     'total' => 'المجموع',
                     'subtotal' => 'المجموع الفرعي',
@@ -279,8 +279,8 @@ return [
                     'billing-address' => 'عنوان الفواتير',
                     'shipping-method' => 'طريقة الشحن',
                     'payment-method' => 'طريقة الدفع',
-                    'individual-invoice' => 'فاتورة #:invoice_id',
-                    'individual-shipment' => 'الشحن #:shipment_id',
+                    'individual-invoice' => '#:invoice_id فاتورة',
+                    'individual-shipment' => ' #:shipment_id الشحن',
                     'print' => 'اطبع',
                     'invoice-id' => 'رقم الفاتورة',
                     'order-id' => 'ترتيب ',
@@ -289,7 +289,7 @@ return [
                     'ship-to' => 'يشحن إلى',
                     'contact' => 'معلومات الإتصال',
                     'refunds' => 'المسترجع',
-                    'individual-refund' => 'مسترجع #:refund_id',
+                    'individual-refund' => '#:refund_id مسترجع',
                     'adjustment-refund' => 'تعديلات عملية الإسترجاع',
                     'adjustment-fee' => 'تكلفة تعديلات عملية الإسترجاع'
                 ]
@@ -336,7 +336,7 @@ return [
                 ],
 
                 'view' => [
-                    'page-tile' => 'مراجعة #:id',
+                    'page-tile' => '#:id مراجعة',
                 ]
             ]
         ]
@@ -354,12 +354,12 @@ return [
         'cheapest-first' => 'الأرخص أولا',
         'expensive-first' => 'الأغلى أولا',
         'show' => 'اعرض',
-        'pager-info' => 'عرض :showing of :total Items',
+        'pager-info' => 'عنصر :total من :showing  عرض',
         'description' => 'الوصف',
         'specification' => 'مواصفات',
-        'total-reviews' => ':total المراجعات',
-        'total-rating' => ':total_rating تقييمات & :total_reviews مراجعات',
-        'by' => 'من قبل :name',
+        'total-reviews' => ' المراجعات :total',
+        'total-rating' => ',تعليق :total_reviews  تقييمات و :total_rating',
+        'by' =>  ':name من قبل ',
         'up-sell-title' => 'وجدنا منتجات أخرى قد ترغب!',
         'reviews-title' => 'المراجعات',
         'write-review-btn' => 'اكتب مراجعة',
@@ -477,7 +477,7 @@ return [
         'success' => [
             'title' => 'تم الدفع بنجاح',
             'thanks' => 'شكرا على طلبك!',
-            'order-id-info' => 'رقم الطلب هو #:order_id',
+            'order-id-info' => '#:order_id رقم الطلب هو ',
             'info' => 'سنرسل لك بريدا الكترونيا ، تفاصيل طلباتك و معلومات التعقب'
         ]
     ],
@@ -486,8 +486,8 @@ return [
         'order' => [
             'subject' => 'تأكيد الطلب الجديد',
             'heading' => 'تأكيد الطلب!',
-            'dear' => 'عزيزي :customer_name',
-            'greeting' => 'شكرا على طلبك :order_id placed on :created_at',
+            'dear' => ' :customer_name عزيزي',
+            'greeting' =>  ':created_at لعام :order_id شكرًا لطلبك رقم',
             'summary' => 'معلومات الطلب',
             'shipping-address' => 'عنوان الشحن',
             'billing-address' => 'عنوان الفواتير',
@@ -502,34 +502,34 @@ return [
             'discount' => 'التخفيض',
             'grand-total' => 'المجموع الكلي',
             'final-summary' => 'شكرا لإظهارك إهتمامك بمتجرنا سنرسل لك رقم التتبع بمجرد شحنه',
-            'help' => 'إذا كنت بحاجة إلى أي نوع من المساعدة يرجى الاتصال بنا على: support_email',
+            'help' => ': support_email إذا كنت بحاجة إلى أي نوع من المساعدة يرجى الاتصال بنا على',
             'thanks' => 'شكرا!'
         ],
 
         'invoice' => [
-            'heading' => 'فاتورتك #:invoice_id لطلبك #:order_id',
-            'subject' => 'فاتورة لطلبك #:order_id',
+            'heading' => '#:order_id للطلب #:invoice_id  فاتورتك',
+            'subject' =>  '#:order_id فاتورة لطلبك',
             'summary' => 'موجز الفاتورة',
         ],
 
         'shipment' => [
-            'heading' => 'شحنتك #:shipment_id لطلبك #:order_id',
-            'subject' => 'شحنة لطلبك #:order_id',
+            'heading' => '#:order_id للطلب #:shipment_id  تم إنشاء الشحنة ' ,
+            'subject' =>  '#:order_id شحنة لطلبك',
             'summary' => 'موجز الشحن',
             'carrier' => 'الناقل',
             'tracking-number' => 'رقم التتبع'
         ],
 
         'refund' => [
-            'heading' => 'المسترجع #:refund_id لطبلك #:order_id',
-            'subject' => 'المسترجع لطلبك #:order_id',
+            'heading' => '#:order_id للطلب #:refund_id أموالك المستردة',
+            'subject' => '#:order_id المسترجع لطلبك',
             'summary' => 'تفاصيل المسترجع',
             'adjustment-refund' => 'تعديلات عملية الإسترجاع',
             'adjustment-fee' => 'تكلفة تعديلات عملية الإسترجاع'
         ],
 
         'forget-password' => [
-            'dear' => 'عزيزي :name',
+            'dear' => ':name عزيزي',
             'info' => 'أنت تستلم هذا البريد الإلكتروني لأننا تلقينا طلب إعادة ضبط كلمة الدخول لحسابك',
             'reset-password' => 'أعد ضبط كلمة الدخول',
             'final-summary' => 'إذا لم تطلب إعادة تعيين كلمة الدخول ، لا إجراء آخر مطلوب',
@@ -542,9 +542,9 @@ return [
     ],
 
     'response' => [
-        'create-success' => ':name إنشء بنجاح.',
-        'update-success' => ':name تم تعديله بنحاح.',
-        'delete-success' => ':name تم مسحه بنجاح.',
-        'submit-success' => ':name تم الإرسال بنجاح.'
+        'create-success' => 'بنجاح :name تم إنشاء',
+        'update-success' => 'تم تحديث name: بنجاح',
+        'delete-success' => 'تم حذف name: بنجاح',
+        'submit-success' => 'تم تقديم name: بنجاح'
     ],
 ];
