@@ -216,7 +216,8 @@ return [
             'orderBy'      => 'orderBy',
             'sortedBy'     => 'sortedBy',
             'with'         => 'with',
-            'searchJoin'   => 'searchJoin'
+            'searchJoin'   => 'searchJoin',
+            'withCount'    => 'withCount'
         ]
     ],
     /*
