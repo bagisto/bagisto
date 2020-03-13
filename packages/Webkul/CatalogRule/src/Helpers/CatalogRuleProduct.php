@@ -73,6 +73,9 @@ class CatalogRuleProduct
      */
     public function insertRuleProduct($rule, $batchCount = 1000, $product = null)
     {
+        if (! (float) $rule->discount_amount)
+            return;
+
         $productIds = $this->getMatchingProductIds($rule, $product);
 
         $rows = [];
