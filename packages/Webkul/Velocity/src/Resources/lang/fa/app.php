@@ -162,7 +162,7 @@ return [
         'wishlist' => 'لیست علاقه مندیها',
         'all-categories' => 'همه دسته بندی ها',
         'search-text' => 'محصولات را در اینجا جستجو کنید',
-        'welcome-message' => 'خوش آمدی, :customer_name',
+        'welcome-message' => ':customer_name, خوش آمدی',
         'dropdown-text' => 'مدیریت سبد خرید, سفارشات و لیست دلخواه',
     ],
 

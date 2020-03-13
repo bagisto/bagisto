@@ -162,7 +162,7 @@ return [
         'wishlist' => 'قائمة الرغبات',
         'all-categories' => 'جميع الفئات',
         'search-text' => 'ابحث عن منتجات هنا',
-        'welcome-message' => 'أهلا بك, :customer_name',
+        'welcome-message' => ':customer_name, أهلا بك',
         'dropdown-text' => 'إدارة سلة التسوق, الطلبات وقائمة الرغبات',
     ],
 
@@ -282,7 +282,7 @@ return [
 
     'responsive' => [
         'header' => [
-            'greeting' => 'أهلا بك, :customer !',
+            'greeting' => ':customer, أهلا بك ',
         ]
     ],
 ]
