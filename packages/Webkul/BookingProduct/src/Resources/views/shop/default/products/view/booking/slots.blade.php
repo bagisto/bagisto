@@ -47,6 +47,8 @@
                     this.$http.get("{{ route('booking_product.slots.index', $bookingProduct->id) }}", {params: {date: date}})
                         .then (function(response) {
                             this_this.slots = response.data.data;
+
+                            this_this.errors.clear();
                         })
                         .catch (function (error) {})
                 }
