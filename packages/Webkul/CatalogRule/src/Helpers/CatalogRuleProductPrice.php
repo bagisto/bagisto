@@ -98,8 +98,8 @@ class CatalogRuleProductPrice
 
             foreach ($dates as $key => $date) {
                 if ((! $row->starts_from || $date >= $row->starts_from)
-                    && (! $row->ends_till || $date <= $row->ends_till))
-                {
+                    && (! $row->ends_till || $date <= $row->ends_till)
+                ) {
                     $priceKey = $date->getTimestamp() . '-' . $productKey;
 
                     if (isset($endRuleFlags[$priceKey])) {

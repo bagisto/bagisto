@@ -946,7 +946,7 @@ return [
             'mass-update-success' => 'Customers updated successfully',
             'status' => 'Status',
             'active' => 'Actief',
-            'in-active' => 'Niet geactiveerd'
+            'inactive' => 'Niet geactiveerd'
         ],
 
         'reviews' => [
