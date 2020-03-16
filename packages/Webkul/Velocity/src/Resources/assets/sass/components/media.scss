@@ -441,6 +441,11 @@
             .searchbar {
                 padding-left: 20px !important;
                 padding-right: 20px !important;
+
+                .compare-btn,
+                .wishlist-btn {
+                    display: none;
+                }
             }
 
             #search-form {
