@@ -102,9 +102,9 @@ class BookingProductRepository extends Repository
             }
 
             if (! $bookingProductTypeSlot) {
-                $this->typeRepositories[$data['type']]->create(array_merge($data['slots'], ['booking_product_id' => $id]));
+                $this->typeRepositories[$data['type']]->create(array_merge($data, ['booking_product_id' => $id]));
             } else {
-                $this->typeRepositories[$data['type']]->update($data['slots'], $bookingProductTypeSlot->id);
+                $this->typeRepositories[$data['type']]->update($data, $bookingProductTypeSlot->id);
             }
         }
     }
@@ -147,7 +147,7 @@ class BookingProductRepository extends Repository
     public function validateSlots($data)
     {
         if (! isset($data['same_slot_all_days'])) {
-            return $data;
+            return $data['slots'];
         }
 
         if (! $data['same_slot_all_days']) {
