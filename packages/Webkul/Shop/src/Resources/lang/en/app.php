@@ -267,7 +267,14 @@ return [
                     'date' => 'Date',
                     'status' => 'Status',
                     'total' => 'Total',
-                    'order_number' => 'Order Number'
+                    'order_number' => 'Order Number',
+                    'processing' => 'Processing',
+                    'completed' => 'Completed',
+                    'canceled' => 'Canceled',
+                    'closed' => 'Closed',
+                    'pending' => 'Pending',
+                    'pending-payment' => 'Pending Payment',
+                    'fraud' => 'Fraud'
                 ],
 
                 'view' => [

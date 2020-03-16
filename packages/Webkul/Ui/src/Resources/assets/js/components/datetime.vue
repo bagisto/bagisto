@@ -31,8 +31,8 @@ export default {
 		var element = this.$el.getElementsByTagName("input")[0];
 		this.datepicker = new Flatpickr(element, {
 			allowInput: true,
-			altFormat: "Y-m-d H:i:s",
-			dateFormat: "Y-m-d H:i:s",
+			altFormat: "Y-m-d H:i:S",
+			dateFormat: "Y-m-d H:i:S",
 			enableTime: true,
 			onChange: function(selectedDates, dateStr, instance) {
 				this_this.$emit('onChange', dateStr)

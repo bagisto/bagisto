@@ -49,7 +49,8 @@ class ProductServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function registerConfig(): void {
+    public function registerConfig(): void
+    {
         $this->mergeConfigFrom(
             dirname(__DIR__) . '/Config/product_types.php', 'product_types'
         );

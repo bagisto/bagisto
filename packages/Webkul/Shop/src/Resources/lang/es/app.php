@@ -245,7 +245,14 @@ return [
                     'date' => 'Fecha',
                     'status' => 'Estado',
                     'total' => 'Total',
-                    'order_number' => 'Número de pedido'
+                    'order_number' => 'Número de pedido',
+                    'processing' => 'Processing',
+                    'completed' => 'Completed',
+                    'canceled' => 'Canceled',
+                    'closed' => 'Closed',
+                    'pending' => 'Pending',
+                    'pending-payment' => 'Pending Payment',
+                    'fraud' => 'Fraud'
                 ],
 
                 'view' => [
