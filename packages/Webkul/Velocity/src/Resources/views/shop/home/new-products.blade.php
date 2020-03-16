@@ -6,25 +6,74 @@
 
 @push('scripts')
     <script type="text/x-template" id="new-products-template">
-        <div class="container-fluid" v-if="newProducts.length > 0">
-            <card-list-header heading="{{ __('shop::app.home.new-products') }}">
-            </card-list-header>
+        <div class="container-fluid">
+            <shimmer-component v-if="isLoading && !isMobileView"></shimmer-component>
 
-            {!! view_render_event('bagisto.shop.new-products.before') !!}
+            <template v-else-if="newProducts.length > 0">
+                <card-list-header heading="{{ __('shop::app.home.new-products') }}">
+                </card-list-header>
 
-                @if ($showRecentlyViewed)
-                    @push('css')
-                        <style>
-                            .recently-viewed {
-                                padding-right: 0px;
-                            }
-                        </style>
-                    @endpush
+                {!! view_render_event('bagisto.shop.new-products.before') !!}
 
-                    <div class="row ltr">
-                        <div class="col-9 no-padding carousel-products vc-full-screen with-recent-viewed" v-if="!isMobileDevice">
+                    @if ($showRecentlyViewed)
+                        @push('css')
+                            <style>
+                                .recently-viewed {
+                                    padding-right: 0px;
+                                }
+                            </style>
+                        @endpush
+
+                        <div class="row ltr">
+                            <div class="col-9 no-padding carousel-products vc-full-screen with-recent-viewed" v-if="!isMobileDevice">
+                                <carousel-component
+                                    slides-per-page="5"
+                                    navigation-enabled="hide"
+                                    pagination-enabled="hide"
+                                    id="new-products-carousel"
+                                    :slides-count="newProducts.length">
+
+                                    <slide
+                                        :key="index"
+                                        :slot="`slide-${index}`"
+                                        v-for="(product, index) in newProducts">
+                                        <product-card
+                                            :list="list"
+                                            :product="product">
+                                        </product-card>
+                                    </slide>
+                                </carousel-component>
+                            </div>
+
+                            <div class="col-12 no-padding carousel-products vc-small-screen" v-else>
+                                <carousel-component
+                                    slides-per-page="2"
+                                    navigation-enabled="hide"
+                                    pagination-enabled="hide"
+                                    id="new-products-carousel"
+                                    :slides-count="newProducts.length">
+
+                                    <slide
+                                        :key="index"
+                                        :slot="`slide-${index}`"
+                                        v-for="(product, index) in newProducts">
+                                        <product-card
+                                            :list="list"
+                                            :product="product">
+                                        </product-card>
+                                    </slide>
+                                </carousel-component>
+                            </div>
+
+                            @include ('shop::products.list.recently-viewed', [
+                                'quantity'          => 3,
+                                'addClass'          => 'col-lg-3 col-md-12',
+                            ])
+                        </div>
+                    @else
+                        <div class="carousel-products vc-full-screen" v-if="!isMobileDevice">
                             <carousel-component
-                                slides-per-page="5"
+                                slides-per-page="6"
                                 navigation-enabled="hide"
                                 pagination-enabled="hide"
                                 id="new-products-carousel"
@@ -42,7 +91,7 @@
                             </carousel-component>
                         </div>
 
-                        <div class="col-12 no-padding carousel-products vc-small-screen" v-else>
+                        <div class="carousel-products vc-small-screen" v-else>
                             <carousel-component
                                 slides-per-page="2"
                                 navigation-enabled="hide"
@@ -61,55 +110,10 @@
                                 </slide>
                             </carousel-component>
                         </div>
+                    @endif
 
-                        @include ('shop::products.list.recently-viewed', [
-                            'quantity'          => 3,
-                            'addClass'          => 'col-lg-3 col-md-12',
-                        ])
-                    </div>
-                @else
-                    <div class="carousel-products vc-full-screen" v-if="!isMobileDevice">
-                        <carousel-component
-                            slides-per-page="6"
-                            navigation-enabled="hide"
-                            pagination-enabled="hide"
-                            id="new-products-carousel"
-                            :slides-count="newProducts.length">
-
-                            <slide
-                                :key="index"
-                                :slot="`slide-${index}`"
-                                v-for="(product, index) in newProducts">
-                                <product-card
-                                    :list="list"
-                                    :product="product">
-                                </product-card>
-                            </slide>
-                        </carousel-component>
-                    </div>
-
-                    <div class="carousel-products vc-small-screen" v-else>
-                        <carousel-component
-                            slides-per-page="2"
-                            navigation-enabled="hide"
-                            pagination-enabled="hide"
-                            id="new-products-carousel"
-                            :slides-count="newProducts.length">
-
-                            <slide
-                                :key="index"
-                                :slot="`slide-${index}`"
-                                v-for="(product, index) in newProducts">
-                                <product-card
-                                    :list="list"
-                                    :product="product">
-                                </product-card>
-                            </slide>
-                        </carousel-component>
-                    </div>
-                @endif
-
-            {!! view_render_event('bagisto.shop.new-products.after') !!}
+                {!! view_render_event('bagisto.shop.new-products.after') !!}
+            </template>
         </div>
     </script>
 
@@ -120,6 +124,7 @@
                 data: function () {
                     return {
                         'list': false,
+                        'isLoading': true,
                         'newProducts': [],
                         'isMobileDevice': this.$root.isMobile(),
                     }
@@ -134,9 +139,14 @@
                         this.$http.get(`${this.baseUrl}/category-details?category-slug=new-products&count={{ $count }}`)
                         .then(response => {
                             if (response.data.status)
-                                this.newProducts = response.data.products
+                                this.newProducts = response.data.products;
+
+                            this.isLoading = false;
                         })
-                        .catch(error => {})
+                        .catch(error => {
+                            this.isLoading = false;
+                            console.log(this.__('error.something_went_wrong'));
+                        })
                     }
                 }
             })
