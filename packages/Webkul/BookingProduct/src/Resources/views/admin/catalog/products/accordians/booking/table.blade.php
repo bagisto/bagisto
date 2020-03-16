@@ -31,7 +31,7 @@
             <div class="control-group" :class="[errors.has('booking[qty]') ? 'has-error' : '']">
                 <label class="required">{{ __('bookingproduct::app.admin.catalog.products.guest-capacity') }}</label>
 
-                <input type="text" v-validate="'required|min_value:1'" name="booking[qty]" v-model="table_booking.qty" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.guest-limit') }}&quot;"/>
+                <input type="text" v-validate="'required|min_value:1'" name="booking[qty]" value="{{ $bookingProduct ? $bookingProduct->qty : 0 }}" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.guest-limit') }}&quot;"/>
                 
                 <span class="control-error" v-if="errors.has('booking[qty]')">@{{ errors.first('booking[qty]') }}</span>
             </div>
@@ -98,8 +98,6 @@
             data: function() {
                 return {
                     table_booking: bookingProduct && bookingProduct.table_slot ? bookingProduct.table_slot : {
-                        qty: {{ $bookingProduct ? $bookingProduct->qty : 0 }},
-
                         price_type: 'guest',
 
                         guest_limit: 2,
