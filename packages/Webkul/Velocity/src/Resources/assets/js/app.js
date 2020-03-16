@@ -44,6 +44,7 @@ Vue.component('child-sidebar', require('./UI/components/child-sidebar'));
 Vue.component('card-list-header', require('./UI/components/card-header'));
 Vue.component('magnify-image', require('./UI/components/image-magnifier'));
 Vue.component('compare-component', require('./UI/components/product-compare'));
+Vue.component("shimmer-component", require("./UI/components/shimmer-component"));
 Vue.component('responsive-sidebar', require('./UI/components/responsive-sidebar'));
 Vue.component('product-quick-view', require('./UI/components/product-quick-view'));
 Vue.component('product-quick-view-btn', require('./UI/components/product-quick-view-btn'));

@@ -146,7 +146,7 @@
     <header class="row velocity-divide-page vc-header header-shadow active">
         <div class="vc-small-screen container" v-if="isMobile()">
             <div class="row">
-                <div class="col-8">
+                <div class="col-6">
                     <div v-if="hamburger" class="nav-container scrollable">
                         <div class="wrapper" v-if="this.rootCategories">
                             <div class="greeting drawer-section fw6">
@@ -198,19 +198,18 @@
                             @endforeach
 
                             <ul type="none" class="velocity-content">
-                                <li
-                                    :key="index"
-                                    v-for="(content, index) in headerContent">
-                                    <a :href="`${$root.baseUrl}/${content.page_link}`" class="unset" v-text="content.title"></a>
+                                <li :key="index" v-for="(content, index) in headerContent">
+                                    <a
+                                        class="unset"
+                                        v-text="content.title"
+                                        :href="`${$root.baseUrl}/${content.page_link}`">
+                                    </a>
                                 </li>
                             </ul>
 
                             <ul type="none" class="category-wrapper">
                                 <li v-for="(category, index) in $root.sharedRootCategories">
-                                    <a
-                                        class="unset"
-                                        :href="`${$root.baseUrl}/${category.slug}`">
-
+                                    <a class="unset" :href="`${$root.baseUrl}/${category.slug}`">
                                         <div class="category-logo">
                                             <img
                                                 class="category-icon"
@@ -220,10 +219,7 @@
                                         <span v-text="category.name"></span>
                                     </a>
 
-                                    <i
-                                        class="rango-arrow-right"
-                                        @click="toggleSubcategories(index, $event)">
-                                    </i>
+                                    <i class="rango-arrow-right" @click="toggleSubcategories(index, $event)"></i>
                                 </li>
                             </ul>
 
@@ -447,8 +443,18 @@
                     <logo-component></logo-component>
                 </div>
 
-                <div class="right-vc-header col-4">
-                    <a :href="`${$root.baseUrl}/customer/account/wishlist`" class="unset">
+                <div class="right-vc-header col-6">
+                    <a class="compare-btn unset" href="{{ route('velocity.product.compare') }}">
+                        <div class="badge-container" v-if="compareCount > 0">
+                            <span class="badge" v-text="compareCount"></span>
+                        </div>
+                        <i class="material-icons">compare_arrows</i>
+                    </a>
+
+                    <a class="wishlist-btn unset" :href="`${isCustomer ? '{{ route('customer.wishlist.index') }}' : '{{ route('velocity.product.guest-wishlist') }}'}`">
+                        <div class="badge-container" v-if="wishlistCount > 0">
+                            <span class="badge" v-text="wishlistCount"></span>
+                        </div>
                         <i class="material-icons">favorite_border</i>
                     </a>
 
@@ -688,6 +694,7 @@
                     'subCategory': null,
                     'isSearchbar': false,
                     'rootCategories': true,
+                    'isCustomer': '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == "true",
                 }
             },
 
@@ -698,7 +705,15 @@
                     } else {
                         document.body.classList.remove('open-hamburger');
                     }
+                },
+
+                '$root.headerItemsCount': function () {
+                    this.updateHeaderItemsCount();
                 }
+            },
+
+            created: function () {
+                this.updateHeaderItemsCount();
             },
 
             methods: {
@@ -743,6 +758,30 @@
                 toggleMetaInfo: function (metaKey) {
                     this.rootCategories = false;
                     this[metaKey] = !this[metaKey];
+                },
+
+                updateHeaderItemsCount: function () {
+                    if (! this.isCustomer) {
+                        let comparedItems = this.getStorageValue('compared_product');
+                        let wishlistedItems = this.getStorageValue('wishlist_product');
+
+                        if (wishlistedItems) {
+                            this.wishlistCount = wishlistedItems.length;
+                        }
+
+                        if (comparedItems) {
+                            this.compareCount = comparedItems.length;
+                        }
+                    } else {
+                        this.$http.get(`${this.$root.baseUrl}/items-count`)
+                            .then(response => {
+                                this.compareCount = response.data.compareProductsCount;
+                                this.wishlistCount = response.data.wishlistedProductsCount;
+                            })
+                            .catch(exception => {
+                                console.log(this.__('error.something_went_wrong'));
+                            });
+                    }
                 }
             },
         });

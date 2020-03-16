@@ -121,7 +121,8 @@
                         vertical-align: middle;
                     }
 
-                    .badge-wrapper {
+                    .badge-wrapper,
+                    .badge-container {
                         top: -2px;
                         left: -7px;
                         position: relative;
@@ -132,6 +133,11 @@
                             position: absolute;
                             background: $theme-color;
                         }
+                    }
+
+                    .badge-container {
+                        left: 4px;
+                        margin-right: 10px;
                     }
                 }
             }
@@ -435,6 +441,11 @@
             .searchbar {
                 padding-left: 20px !important;
                 padding-right: 20px !important;
+
+                .compare-btn,
+                .wishlist-btn {
+                    display: none;
+                }
             }
 
             #search-form {
