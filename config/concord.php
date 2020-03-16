@@ -10,6 +10,7 @@ return [
          */
 
         \Webkul\Attribute\Providers\ModuleServiceProvider::class,
+        \Webkul\BookingProduct\Providers\ModuleServiceProvider::class,
         \Webkul\Category\Providers\ModuleServiceProvider::class,
         \Webkul\Checkout\Providers\ModuleServiceProvider::class,
         \Webkul\Core\Providers\ModuleServiceProvider::class,
@@ -22,7 +23,6 @@ return [
         \Webkul\CatalogRule\Providers\ModuleServiceProvider::class,
         \Webkul\CartRule\Providers\ModuleServiceProvider::class,
         \Webkul\CMS\Providers\ModuleServiceProvider::class,
-        \Webkul\BookingProduct\Providers\ModuleServiceProvider::class,
         \Webkul\Velocity\Providers\ModuleServiceProvider::class
     ]
 ];
