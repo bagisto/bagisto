@@ -72,6 +72,7 @@
                         isLoading: true,
                         isCategory: false,
                         heading: 'customer',
+                        categoryProducts: [],
                         isMobileView: this.$root.isMobile(),
                     }
                 },

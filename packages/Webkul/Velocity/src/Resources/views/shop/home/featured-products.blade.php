@@ -66,7 +66,7 @@
                         'list': false,
                         'isLoading': true,
                         'featuredProducts': [],
-                        'isMobileDevice': this.$root.isMobile(),
+                        'isMobileView': this.$root.isMobile(),
                     }
                 },
 

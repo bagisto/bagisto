@@ -25,7 +25,7 @@
                         @endpush
 
                         <div class="row ltr">
-                            <div class="col-9 no-padding carousel-products vc-full-screen with-recent-viewed" v-if="!isMobileDevice">
+                            <div class="col-9 no-padding carousel-products vc-full-screen with-recent-viewed" v-if="!isMobileView">
                                 <carousel-component
                                     slides-per-page="5"
                                     navigation-enabled="hide"
@@ -71,7 +71,7 @@
                             ])
                         </div>
                     @else
-                        <div class="carousel-products vc-full-screen" v-if="!isMobileDevice">
+                        <div class="carousel-products vc-full-screen" v-if="!isMobileView">
                             <carousel-component
                                 slides-per-page="6"
                                 navigation-enabled="hide"
@@ -126,7 +126,7 @@
                         'list': false,
                         'isLoading': true,
                         'newProducts': [],
-                        'isMobileDevice': this.$root.isMobile(),
+                        'isMobileView': this.$root.isMobile(),
                     }
                 },
 
