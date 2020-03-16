@@ -39,7 +39,7 @@ class CategoryRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Velocity\Models\Category';
+        return 'Webkul\Velocity\Contracts\Category';
     }
 
     /**

@@ -13,6 +13,6 @@ class VelocityMetadataRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Velocity\Models\VelocityMetadata';
+        return 'Webkul\Velocity\Contracts\VelocityMetadata';
     }
 }
