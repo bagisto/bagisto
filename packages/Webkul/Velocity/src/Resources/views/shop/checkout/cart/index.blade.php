@@ -75,7 +75,7 @@
                                                     alt="{{ $product->name }}">
                                             </a>
 
-                                            <div class="product-details-content col-6">
+                                            <div class="product-details-content col-7 pr0">
                                                 <div class="row item-title no-margin">
                                                     <a
                                                         href="{{ route('shop.productOrCategory.index', $product->url_key) }}"
@@ -154,7 +154,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="product-quantity col-3 no-padding">
+                                            <div class="product-quantity col-2 no-padding">
                                                 <quantity-changer
                                                     :control-name="'qty[{{$item->id}}]'"
                                                     quantity="{{ $item->quantity }}">
