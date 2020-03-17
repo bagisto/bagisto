@@ -1039,7 +1039,7 @@ class Cart
             }
         }
 
-        if (!$found) {
+        if (! $found) {
             $this->wishlistRepository->create([
                 'channel_id'  => $cart->channel_id,
                 'customer_id' => $this->getCurrentCustomer()->user()->id,

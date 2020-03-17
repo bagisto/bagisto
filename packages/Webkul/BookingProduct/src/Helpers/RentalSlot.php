@@ -176,7 +176,7 @@ class RentalSlot extends Booking
             $from = Carbon::createFromTimeString($item->additional['booking']['date_from'] . " 00:00:00");
             $to = Carbon::createFromTimeString($item->additional['booking']['date_to'] . " 24:00:00");
 
-            $price += $item->product->getTypeInstance()->getFinalPrice() + $bookingProduct->rental_slot->daily_price * $to->diffInDays($from);
+            $price += $bookingProduct->rental_slot->daily_price * $to->diffInDays($from);
         } else {
             $from = Carbon::createFromTimestamp($item->additional['booking']['slot']['from']);
             $to = Carbon::createFromTimestamp($item->additional['booking']['slot']['to']);
