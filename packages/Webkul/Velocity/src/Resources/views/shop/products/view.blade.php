@@ -177,7 +177,11 @@
     <script type='text/javascript' src='https://unpkg.com/spritespin@4.1.0/release/spritespin.js'></script>
 
     <script type="text/x-template" id="product-view-template">
-        <form method="POST" id="product-form" action="{{ route('cart.add', $product->product_id) }}" @click="onSubmit($event)">
+        <form
+            method="POST"
+            id="product-form"
+            action="{{ route('cart.add', $product->product_id) }}">
+
             <input type="hidden" name="is_buy_now" v-model="is_buy_now">
 
             <slot v-if="slot"></slot>

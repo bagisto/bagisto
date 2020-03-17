@@ -2,18 +2,18 @@
 
     <div class="mx-0 no-padding">
         @if (isset($showCompare) && $showCompare)
-                <compare-component
-                    @auth('customer')
-                        customer="true"
-                    @endif
+            <compare-component
+                @auth('customer')
+                    customer="true"
+                @endif
 
-                    @guest('customer')
-                        customer="false"
-                    @endif
+                @guest('customer')
+                    customer="false"
+                @endif
 
-                    slug="{{ $product->url_key }}"
-                    product-id="{{ $product->id }}"
-                ></compare-component>
+                slug="{{ $product->url_key }}"
+                product-id="{{ $product->id }}"
+            ></compare-component>
         @endif
 
         @if (! (isset($showWishlist) && !$showWishlist))
@@ -25,7 +25,8 @@
         <div class="add-to-cart-btn pl0">
             @if (isset($form) && !$form)
                 <button
-                    type="submit"
+                    type="button"
+                    @click="onSubmit"
                     {{ ! $product->isSaleable() ? 'disabled' : '' }}
                     class="btn btn-add-to-cart {{ $addToCartBtnClass ?? '' }}">
 
