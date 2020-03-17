@@ -702,7 +702,7 @@
 
             .wishlist-icon {
                 margin: 0;
-                display: inline-block;
+                display: inline;
             }
         }
 
@@ -2310,6 +2310,12 @@
     .product-price {
         span {
             font-size: 24px !important
+        }
+
+        .price-from {
+            span:nth-child(2) {
+                font-size: 20px !important;
+            }
         }
     }
 

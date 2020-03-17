@@ -75,7 +75,7 @@
                                                     alt="{{ $product->name }}">
                                             </a>
 
-                                            <div class="product-details-content col-6">
+                                            <div class="product-details-content col-7 pr0">
                                                 <div class="row item-title no-margin">
                                                     <a
                                                         href="{{ route('shop.productOrCategory.index', $product->url_key) }}"
@@ -103,23 +103,17 @@
                                                     @include ('shop::products.price', ['product' => $product])
                                                 </div>
 
+                                                @php
+                                                    $moveToWishlist = trans('shop::app.checkout.cart.move-to-wishlist');
+                                                @endphp
+
                                                 <div class="no-padding col-12 cursor-pointer fs16">
                                                     @auth('customer')
                                                         @if ($item->parent_id != 'null' ||$item->parent_id != null)
-                                                            <a
-                                                                class="unset"
-                                                                href="{{ route('shop.movetowishlist', $item->id) }}"
-                                                                onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">
-
-                                                                <wishlist-component
-                                                                    active="false"
-                                                                    add-class="align-vertical-top">
-                                                                </wishlist-component>
-
-                                                                <span class="align-vertical-top">
-                                                                    {{ __('shop::app.checkout.cart.move-to-wishlist') }}
-                                                                </span>
-                                                            </a>
+                                                            @include('shop::products.wishlist', [
+                                                                'route' => route('shop.movetowishlist', $item->id),
+                                                                'text' => "<span class='align-vertical-super'>$moveToWishlist</span>"
+                                                            ])
                                                         @else
                                                             <a
                                                                 class="unset"
@@ -138,6 +132,13 @@
                                                         @endif
                                                     @endauth
 
+                                                    @guest('customer')
+                                                        @include('shop::products.wishlist')
+                                                        <span class="align-vertical-top">
+                                                            {{ __('shop::app.checkout.cart.move-to-wishlist') }}
+                                                        </span>
+                                                    @endguest
+
                                                     <a
                                                         class="unset
                                                             @auth('customer')
@@ -153,7 +154,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="product-quantity col-3 no-padding">
+                                            <div class="product-quantity col-2 no-padding">
                                                 <quantity-changer
                                                     :control-name="'qty[{{$item->id}}]'"
                                                     quantity="{{ $item->quantity }}">
