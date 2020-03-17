@@ -706,7 +706,7 @@ class Cart
             return false;
         } else {
             foreach ($cart->items as $item) {
-                $item->product->getTypeInstance()->validateCartItem($item);
+                $response = $item->product->getTypeInstance()->validateCartItem($item);
 
                 $price = ! is_null($item->custom_price) ? $item->custom_price : $item->base_price;
 

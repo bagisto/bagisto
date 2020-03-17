@@ -38,6 +38,13 @@ class RentalSlot extends Booking
                          ? $bookingProductSlot->slots
                          : $bookingProductSlot->slots[$requestedDate->format('w')];
 
+        if ($requestedDate < $currentTime
+            || $requestedDate < $availableFrom
+            || $requestedDate > $availableTo
+        ) {
+            return [];
+        }
+
         $slots = [];
 
         foreach ($timeDurations as $index => $timeDuration) {
@@ -124,6 +131,33 @@ class RentalSlot extends Booking
                        ->first();
 
         return ! is_null($result->total_qty_booked) ? $result->total_qty_booked : 0;
+    }
+
+    /**
+     * @param  \Webkul\Ceckout\Contracts\CartItem|array  $cartItem
+     * @return bool
+     */
+    public function isSlotExpired($cartItem)
+    {
+        $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $cartItem['product_id']);
+        
+        $typeHelper = app($this->typeHelpers[$bookingProduct->type]);
+
+        $timeIntervals = $typeHelper->getSlotsByDate($bookingProduct, $cartItem['additional']['booking']['date']);
+
+        $isExpired = true;
+
+        foreach ($timeIntervals as $timeInterval) {
+            foreach ($timeInterval['slots'] as $slot) {
+                if ($slot['from_timestamp'] == $cartItem['additional']['booking']['slot']['from']
+                    && $slot['to_timestamp'] == $cartItem['additional']['booking']['slot']['to']
+                ) {
+                    $isExpired = false;
+                }
+            }
+        }
+
+        return $isExpired;
     }
 
     /**
