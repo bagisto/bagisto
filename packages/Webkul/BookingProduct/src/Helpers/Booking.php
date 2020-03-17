@@ -3,6 +3,7 @@
 namespace Webkul\BookingProduct\Helpers;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Arr;
 use Carbon\Carbon;
 use Webkul\BookingProduct\Repositories\BookingProductRepository;
 use Webkul\BookingProduct\Repositories\BookingProductDefaultSlotRepository;
@@ -269,6 +270,13 @@ class Booking
                          ? $bookingProductSlot->slots
                          : ($bookingProductSlot->slots[$requestedDate->format('w')] ?? []);
 
+        if ($requestedDate < $currentTime
+            || $requestedDate < $availableFrom
+            || $requestedDate > $availableTo
+        ) {
+            return [];
+        }
+
         $slots = [];
 
         foreach ($timeDurations as $timeDuration) {
@@ -332,7 +340,7 @@ class Booking
     {
         $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $cartItem['product_id']);
 
-        if ($bookingProduct->qty - $this->getBookedQuantity($cartItem) < $cartItem['quantity']) {
+        if ($bookingProduct->qty - $this->getBookedQuantity($cartItem) < $cartItem['quantity'] || $this->isSlotExpired($cartItem)) {
             return false;
         }
 
@@ -352,6 +360,25 @@ class Booking
         }
 
         return true;
+    }
+
+    /**
+     * @param  \Webkul\Ceckout\Contracts\CartItem|array  $cartItem
+     * @return bool
+     */
+    public function isSlotExpired($cartItem)
+    {
+        $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $cartItem['product_id']);
+        
+        $typeHelper = app($this->typeHelpers[$bookingProduct->type]);
+
+        $slots = $typeHelper->getSlotsByDate($bookingProduct, $cartItem['additional']['booking']['date']);
+
+        $filtered = Arr::where($slots, function ($slot, $key) use ($cartItem) {
+            return $slot['timestamp'] == $cartItem['additional']['booking']['slot'];
+        });
+
+        return count($filtered) ? false : true;
     }
 
     /**
@@ -501,7 +528,7 @@ class Booking
      * Validate cart item product price
      *
      * @param  \Webkul\Checkout\Contracts\CartItem  $item
-     * @return float
+     * @return void
      */
     public function validateCartItem($item)
     {

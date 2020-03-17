@@ -209,7 +209,13 @@ class Booking extends Virtual
             return false;
         }
 
-        return $options1['booking'] == $options2['booking'];
+        if (isset($options1['booking']) && isset($options2['booking'])) {
+            return $options1['booking'] === $options2['booking'];
+        } elseif (! isset($options1['booking'])) {
+            return false;
+        } elseif (! isset($options2['booking'])) {
+            return false;
+        }
     }
 
     /**

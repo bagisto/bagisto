@@ -70,6 +70,7 @@ class CartController extends Controller
 
             if ($this->onWarningAddingToCart($result)) {
                 session()->flash('warning', $result['warning']);
+
                 return redirect()->back();
             }
 
@@ -82,6 +83,7 @@ class CartController extends Controller
 
                 if (request()->get('is_buy_now')) {
                     Event::dispatch('shop.item.buy-now', $id);
+
                     return redirect()->route('shop.checkout.onepage.index');
                 }
             }
@@ -205,10 +207,11 @@ class CartController extends Controller
     /**
      * Returns true, if result of adding product to cart is an array and contains a key "warning"
      *
-     * @param array  $result
-     * @return bool
+     * @param  array  $result
+     * @return boolean
      */
-    private function onWarningAddingToCart($result): bool {
+    private function onWarningAddingToCart($result): bool
+    {
         return is_array($result) && isset($result['warning']);
     }
 }

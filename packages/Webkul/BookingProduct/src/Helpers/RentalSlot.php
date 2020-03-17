@@ -38,6 +38,13 @@ class RentalSlot extends Booking
                          ? $bookingProductSlot->slots
                          : $bookingProductSlot->slots[$requestedDate->format('w')];
 
+        if ($requestedDate < $currentTime
+            || $requestedDate < $availableFrom
+            || $requestedDate > $availableTo
+        ) {
+            return [];
+        }
+
         $slots = [];
 
         foreach ($timeDurations as $index => $timeDuration) {
@@ -127,6 +134,33 @@ class RentalSlot extends Booking
     }
 
     /**
+     * @param  \Webkul\Ceckout\Contracts\CartItem|array  $cartItem
+     * @return bool
+     */
+    public function isSlotExpired($cartItem)
+    {
+        $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $cartItem['product_id']);
+        
+        $typeHelper = app($this->typeHelpers[$bookingProduct->type]);
+
+        $timeIntervals = $typeHelper->getSlotsByDate($bookingProduct, $cartItem['additional']['booking']['date']);
+
+        $isExpired = true;
+
+        foreach ($timeIntervals as $timeInterval) {
+            foreach ($timeInterval['slots'] as $slot) {
+                if ($slot['from_timestamp'] == $cartItem['additional']['booking']['slot']['from']
+                    && $slot['to_timestamp'] == $cartItem['additional']['booking']['slot']['to']
+                ) {
+                    $isExpired = false;
+                }
+            }
+        }
+
+        return $isExpired;
+    }
+
+    /**
      * Add booking additional prices to cart item
      *
      * @param  array  $products
@@ -176,7 +210,7 @@ class RentalSlot extends Booking
             $from = Carbon::createFromTimeString($item->additional['booking']['date_from'] . " 00:00:00");
             $to = Carbon::createFromTimeString($item->additional['booking']['date_to'] . " 24:00:00");
 
-            $price += $item->product->getTypeInstance()->getFinalPrice() + $bookingProduct->rental_slot->daily_price * $to->diffInDays($from);
+            $price += $bookingProduct->rental_slot->daily_price * $to->diffInDays($from);
         } else {
             $from = Carbon::createFromTimestamp($item->additional['booking']['slot']['from']);
             $to = Carbon::createFromTimestamp($item->additional['booking']['slot']['to']);
