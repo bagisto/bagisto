@@ -188,7 +188,13 @@ class Downloadable extends AbstractType
             return false;
         }
 
-        return $options1['links'] == $options2['links'];
+        if (isset($options1['links']) && isset($options2['links'])) {
+            return $options1['links'] === $options2['links'];
+        } elseif (! isset($options1['links'])) {
+            return false;
+        } elseif (! isset($options2['links'])) {
+            return false;
+        }
     }
 
     /**

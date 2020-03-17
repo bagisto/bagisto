@@ -460,7 +460,13 @@ class Configurable extends AbstractType
             return false;
         }
 
-        return $options1['selected_configurable_option'] === $options2['selected_configurable_option'];
+        if (isset($options1['selected_configurable_option']) && isset($options2['selected_configurable_option'])) {
+            return $options1['selected_configurable_option'] === $options2['selected_configurable_option'];
+        } elseif (! isset($options1['selected_configurable_option'])) {
+            return false;
+        } elseif (! isset($options2['selected_configurable_option'])) {
+            return false;
+        }
     }
 
     /**
