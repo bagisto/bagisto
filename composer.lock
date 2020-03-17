@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a07e6be1ba36d87f79bd8547e7580ac8",
+    "content-hash": "dca322023597f38ef7991bc9d9bdc50f",
     "packages": [
         {
             "name": "astrotomic/laravel-translatable",
@@ -5285,16 +5285,16 @@
         },
         {
             "name": "codeception/codeception",
-            "version": "4.1.2",
+            "version": "4.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/Codeception.git",
-                "reference": "35224380f3033bd1778765fe3f114e8d1bc9a9dc"
+                "reference": "be584da4859baf34e05afd26fe4c587be4787ff0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/35224380f3033bd1778765fe3f114e8d1bc9a9dc",
-                "reference": "35224380f3033bd1778765fe3f114e8d1bc9a9dc",
+                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/be584da4859baf34e05afd26fe4c587be4787ff0",
+                "reference": "be584da4859baf34e05afd26fe4c587be4787ff0",
                 "shasum": ""
             },
             "require": {
@@ -5366,7 +5366,7 @@
                 "functional testing",
                 "unit testing"
             ],
-            "time": "2020-03-14T16:36:25+00:00"
+            "time": "2020-02-19T16:56:20+00:00"
         },
         {
             "name": "codeception/lib-asserts",
