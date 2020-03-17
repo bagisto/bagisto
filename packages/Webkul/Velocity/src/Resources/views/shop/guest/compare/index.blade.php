@@ -31,7 +31,9 @@
             {!! view_render_event('bagisto.shop.customers.account.compare.view.before') !!}
 
             <div class="row compare-products col-12 ml0">
-                <template v-if="products.length > 0">
+                <shimmer-component v-if="!isProductListLoaded && !isMobile()"></shimmer-component>
+
+                <template v-else-if="isProductListLoaded && products.length > 0">
                     @php
                         $comparableAttributes = $comparableAttributes->toArray();
 
@@ -105,7 +107,7 @@
                     @endforeach
                 </template>
 
-                <span v-if="isProductListLoaded && products.length == 0">
+                <span v-else-if="isProductListLoaded && products.length == 0">
                     @{{ __('customer.compare.empty-text') }}
                 </span>
             </div>
@@ -157,6 +159,7 @@
                             this.products = response.data.products;
                         })
                         .catch(error => {
+                            this.isProductListLoaded = true;
                             console.log(this.__('error.something_went_wrong'));
                         });
                     } else {
