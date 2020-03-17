@@ -949,7 +949,7 @@ return [
             'mass-update-success' => 'Clientes atualizados com sucesso',
             'status' => 'Status',
             'active' => 'Ativo (a)',
-            'in-active' => 'Inativo (a)'
+            'inactive' => 'Inativo (a)'
         ],
 
         'reviews' => [

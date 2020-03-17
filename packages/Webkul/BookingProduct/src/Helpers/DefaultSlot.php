@@ -30,11 +30,11 @@ class DefaultSlot extends Booking
 
         $currentTime = Carbon::now();
 
-        $availableFrom = ! $bookingProduct->available_from && $bookingProduct->available_from
+        $availableFrom = $bookingProduct->available_from
                          ? Carbon::createFromTimeString($bookingProduct->available_from)
                          : clone $currentTime;
 
-        $availableTo = ! $bookingProduct->available_from && $bookingProduct->available_to
+        $availableTo = $bookingProduct->available_to
                        ? Carbon::createFromTimeString($bookingProduct->available_to)
                        : Carbon::createFromTimeString('2080-01-01 00:00:00');
 
@@ -56,7 +56,7 @@ class DefaultSlot extends Booking
      * Returns slots for One Booking For Many Days
      *
      * @param  \Webkul\BookingProduct\Contracts\BookingProduct  $bookingProduct
-     * @param  string   $requestedDate
+     * @param  string  $requestedDate
      * @return array
      */
     public function getOneBookingForManyDaysSlots($bookingProductSlot, $requestedDate)
@@ -71,6 +71,10 @@ class DefaultSlot extends Booking
             $startDate = clone $requestedDate->modify('this ' . $this->daysOfWeek[$timeDuration['from_day']]);
             
             $endDate = clone $requestedDate->modify('this ' . $this->daysOfWeek[$timeDuration['to_day']]);
+
+            $startDate = Carbon::createFromTimeString($startDate->format('Y-m-d') . ' ' . $timeDuration['from'] . ':00');
+
+            $endDate = Carbon::createFromTimeString($endDate->format('Y-m-d') . ' ' . $timeDuration['to'] . ':00');
 
             $slots[] = [
                 'from'      => $startDate->format('d F, Y h:i A'),
@@ -95,11 +99,11 @@ class DefaultSlot extends Booking
 
         $currentTime = Carbon::now();
 
-        $availableFrom = ! $bookingProduct->available_from && $bookingProduct->available_from
+        $availableFrom = $bookingProduct->available_from
                          ? Carbon::createFromTimeString($bookingProduct->available_from)
                          : clone $currentTime;
 
-        $availableTo = ! $bookingProduct->available_from && $bookingProduct->available_to
+        $availableTo = $bookingProduct->available_to
                        ? Carbon::createFromTimeString($bookingProduct->available_to)
                        : Carbon::createFromTimeString('2080-01-01 00:00:00');
 

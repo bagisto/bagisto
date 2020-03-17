@@ -257,7 +257,14 @@ return [
                     'date' => 'التاريخ',
                     'status' => 'الحالة',
                     'total' => 'المجموع',
-                    'order_number' => 'Order Number'
+                    'order_number' => 'رقم الأمر',
+                    'processing' => 'معالجة',
+                    'completed' => 'منجز',
+                    'canceled' => 'ألغيت',
+                    'closed' => 'مغلق',
+                    'pending' => 'قيد الانتظار',
+                    'pending-payment' => 'في انتظار الدفع',
+                    'fraud' => 'تزوير'
                 ],
 
                 'view' => [

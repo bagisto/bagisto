@@ -40,7 +40,7 @@ class ContentRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Velocity\Models\Content';
+        return 'Webkul\Velocity\Contracts\Content';
     }
 
     /**

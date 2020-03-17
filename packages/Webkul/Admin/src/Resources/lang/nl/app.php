@@ -949,7 +949,7 @@ return [
             'mass-update-success' => 'Klanten succesvol bijgewerkt',
             'status' => 'Toestand',
             'active' => 'Actief',
-            'in-active' => 'Niet geactiveerd'
+            'inactive' => 'Niet geactiveerd'
         ],
 
         'reviews' => [

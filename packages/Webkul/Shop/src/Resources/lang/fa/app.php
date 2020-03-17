@@ -257,7 +257,14 @@ return [
                     'date' => 'تاریخ',
                     'status' => 'وضعیت',
                     'total' => 'جمع',
-                    'order_number' => 'شماره سفارش'
+                    'order_number' => 'شماره سفارش',
+                    'processing' => 'در حال پردازش',
+                    'completed' => 'تکمیل شد',
+                    'canceled' => 'لغو شد',
+                    'closed' => 'بسته شد',
+                    'pending' => 'در انتظار',
+                    'pending-payment' => 'در انتظار پرداخت',
+                    'fraud' => 'تقلب'
                 ],
 
                 'view' => [

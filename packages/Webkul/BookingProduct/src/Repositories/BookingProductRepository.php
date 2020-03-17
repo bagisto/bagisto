@@ -147,7 +147,7 @@ class BookingProductRepository extends Repository
     public function validateSlots($data)
     {
         if (! isset($data['same_slot_all_days'])) {
-            return $data;
+            return $data['slots'];
         }
 
         if (! $data['same_slot_all_days']) {

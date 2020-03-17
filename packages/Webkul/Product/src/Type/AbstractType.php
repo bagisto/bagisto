@@ -495,7 +495,7 @@ abstract class AbstractType
         }
 
         if (! (float) $this->product->special_price) {
-            if ($rulePrice) {
+            if ($rulePrice && $rulePrice->price < $this->product->price) {
                 $this->product->special_price = $rulePrice->price;
 
                 return true;

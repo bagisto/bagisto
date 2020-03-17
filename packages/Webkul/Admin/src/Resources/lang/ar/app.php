@@ -949,7 +949,7 @@ return [
             'mass-update-success' => 'تم تحديث العملاء بنجاح',
             'status' => 'الحالة',
             'active' => 'نشيط',
-            'in-active' => 'غير نشط'
+            'inactive' => 'غير نشط'
         ],
 
         'reviews' => [

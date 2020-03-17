@@ -949,7 +949,7 @@ return [
             'mass-update-success' => 'مشتریان با موفقیت به روز شدند',
             'status' => 'وضعیت',
             'active' => 'فعال',
-            'in-active' => 'غیرفعال'
+            'inactive' => 'غیرفعال'
         ],
 
         'reviews' => [
