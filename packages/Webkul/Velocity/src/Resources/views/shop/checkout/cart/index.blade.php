@@ -103,23 +103,17 @@
                                                     @include ('shop::products.price', ['product' => $product])
                                                 </div>
 
+                                                @php
+                                                    $moveToWishlist = trans('shop::app.checkout.cart.move-to-wishlist');
+                                                @endphp
+
                                                 <div class="no-padding col-12 cursor-pointer fs16">
                                                     @auth('customer')
                                                         @if ($item->parent_id != 'null' ||$item->parent_id != null)
-                                                            <a
-                                                                class="unset"
-                                                                href="{{ route('shop.movetowishlist', $item->id) }}"
-                                                                onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">
-
-                                                                <wishlist-component
-                                                                    active="false"
-                                                                    add-class="align-vertical-top">
-                                                                </wishlist-component>
-
-                                                                <span class="align-vertical-top">
-                                                                    {{ __('shop::app.checkout.cart.move-to-wishlist') }}
-                                                                </span>
-                                                            </a>
+                                                            @include('shop::products.wishlist', [
+                                                                'route' => route('shop.movetowishlist', $item->id),
+                                                                'text' => "<span class='align-vertical-super'>$moveToWishlist</span>"
+                                                            ])
                                                         @else
                                                             <a
                                                                 class="unset"
@@ -137,6 +131,13 @@
                                                             </a>
                                                         @endif
                                                     @endauth
+
+                                                    @guest('customer')
+                                                        @include('shop::products.wishlist')
+                                                        <span class="align-vertical-top">
+                                                            {{ __('shop::app.checkout.cart.move-to-wishlist') }}
+                                                        </span>
+                                                    @endguest
 
                                                     <a
                                                         class="unset

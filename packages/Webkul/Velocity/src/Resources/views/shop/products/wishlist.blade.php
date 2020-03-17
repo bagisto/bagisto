@@ -8,7 +8,9 @@
 
         <a
             class="unset wishlist-icon {{ $addWishlistClass ?? '' }} text-right"
-            @if (! $isWished)
+            @if(isset($route))
+                href="{{ $route }}"
+            @elseif (! $isWished)
                 href="{{ route('customer.wishlist.add', $product->product_id) }}"
                 title="{{ __('velocity::app.shop.wishlist.add-wishlist-text') }}"
             @elseif (isset($itemId) && $itemId)
@@ -17,6 +19,10 @@
             @endif>
 
             <wishlist-component active="{{ !$isWished }}" is-customer="true"></wishlist-component>
+
+            @if (isset($text))
+                {!! $text !!}
+            @endif
         </a>
     @endauth
 
