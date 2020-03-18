@@ -13,7 +13,6 @@ use Webkul\Admin\Mail\NewRefundNotification;
 
 class Order
 {
-
     /**
      * Send new order Mail to the customer and admin
      * 
@@ -24,11 +23,13 @@ class Order
     {
         try {
             $configKey = 'emails.general.notifications.emails.general.notifications.new-order';
+
             if (core()->getConfigData($configKey)) {
                 Mail::queue(new NewOrderNotification($order));
             }
 
             $configKey = 'emails.general.notifications.emails.general.notifications.new-admin';
+
             if (core()->getConfigData($configKey)) {
                 Mail::queue(new NewAdminNotification($order));
             }
@@ -51,6 +52,7 @@ class Order
             }
 
             $configKey = 'emails.general.notifications.emails.general.notifications.new-invoice';
+
             if (core()->getConfigData($configKey)) {
                 Mail::queue(new NewInvoiceNotification($invoice));
             }
@@ -69,6 +71,7 @@ class Order
     {
         try {
             $configKey = 'emails.general.notifications.emails.general.notifications.new-refund';
+
             if (core()->getConfigData($configKey)) {
                 Mail::queue(new NewRefundNotification($refund));
             }
@@ -80,7 +83,7 @@ class Order
     /**
      * Send new shipment mail to the customer
      * 
-     * @param  \Webkul\Sales\Contracts\Shipment  $refund
+     * @param  \Webkul\Sales\Contracts\Shipment  $shipment
      * @return void
      */
     public function sendNewShipmentMail($shipment)
@@ -91,11 +94,13 @@ class Order
             }
 
             $configKey = 'emails.general.notifications.emails.general.notifications.new-shipment';
+
             if (core()->getConfigData($configKey)) {
                 Mail::queue(new NewShipmentNotification($shipment));
             }
 
             $configKey = 'emails.general.notifications.emails.general.notifications.new-inventory-source';
+
             if (core()->getConfigData($configKey)) {
                 Mail::queue(new NewInventorySourceNotification($shipment));
             }
