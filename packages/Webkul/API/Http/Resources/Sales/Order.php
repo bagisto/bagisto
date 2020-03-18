@@ -11,7 +11,8 @@ class Order extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request
+     * @param \Illuminate\Http\Request
+     *
      * @return array
      */
     public function toArray($request)
@@ -103,7 +104,7 @@ class Order extends JsonResource
             'items'                              => OrderItem::collection($this->items),
             'invoices'                           => Invoice::collection($this->invoices),
             'shipments'                          => Shipment::collection($this->shipments),
-            'created_at'                         => $this->created_at
+            'created_at'                         => $this->created_at,
         ];
     }
 }

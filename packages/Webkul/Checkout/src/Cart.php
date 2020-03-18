@@ -2,6 +2,7 @@
 
 namespace Webkul\Checkout;
 
+use Webkul\Checkout\Models\CartAddress;
 use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Checkout\Repositories\CartItemRepository;
 use Webkul\Checkout\Repositories\CartAddressRepository;
@@ -141,7 +142,7 @@ class Cart
         if (is_string($cartProducts)) {
             $this->collectTotals();
 
-            if (! count($cart->all_items) > 0) {
+            if (count($cart->all_items) <= 0) {
                 session()->forget('cart');
             }
 
@@ -340,6 +341,7 @@ class Cart
 
             $guestCart = session()->get('cart');
 
+            //when the logged in customer is not having any of the cart instance previously and are active.
             if (! $cart) {
                 $this->cartRepository->update([
                     'customer_id'         => $this->getCurrentCustomer()->user()->id,
@@ -358,7 +360,11 @@ class Cart
                 $found = false;
 
                 foreach ($cart->items as $cartItem) {
-                    if (! $cartItem->product->getTypeInstance()->compareOptions($cartItem->additional, $guestCartItem->additional)) {
+                    if (! $cartItem
+                        ->product
+                        ->getTypeInstance()
+                        ->compareOptions($cartItem->additional, $guestCartItem->additional)
+                    ) {
                         continue;
                     }
 
@@ -471,110 +477,25 @@ class Cart
     /**
      * Save customer address
      *
-     * @param  array  $data
-     * @return bool
+     * @param array $data
+     *
+     * @return void is the cart valid
      */
-    public function saveCustomerAddress($data)
+    public function saveCustomerAddress($data): bool
     {
         if (! $cart = $this->getCart()) {
             return false;
         }
 
-        $billingAddress = $data['billing'];
-        $billingAddress['cart_id'] = $cart->id;
+        $billingAddressData = $this->gatherBillingAddress($data, $cart);
 
-        if (isset($data['billing']['address_id']) && $data['billing']['address_id']) {
-            $address = $this->customerAddressRepository->findOneWhere(['id' => $data['billing']['address_id']])->toArray();
+        $shippingAddressData = $this->gatherShippingAddress($data, $cart);
 
-            $billingAddress['first_name'] = $this->getCurrentCustomer()->user()->first_name;
-            $billingAddress['last_name'] = $this->getCurrentCustomer()->user()->last_name;
-            $billingAddress['email'] = $this->getCurrentCustomer()->user()->email;
-            $billingAddress['address1'] = $address['address1'];
-            $billingAddress['country'] = $address['country'];
-            $billingAddress['state'] = $address['state'];
-            $billingAddress['city'] = $address['city'];
-            $billingAddress['postcode'] = $address['postcode'];
-            $billingAddress['phone'] = $address['phone'];
-        }
+        $this->saveAddressesWhenRequested($data, $billingAddressData, $shippingAddressData);
 
-        if (isset($data['billing']['save_as_address']) && $data['billing']['save_as_address']) {
-            $billingAddress['customer_id'] = $this->getCurrentCustomer()->user()->id;
+        $this->linkAddresses($cart, $billingAddressData, $shippingAddressData);
 
-            $this->customerAddressRepository->create($billingAddress);
-        }
-
-        if ($cart->haveStockableItems()) {
-            $shippingAddress = $data['shipping'];
-            $shippingAddress['cart_id'] = $cart->id;
-
-            if (isset($data['shipping']['address_id']) && $data['shipping']['address_id']) {
-                $address = $this->customerAddressRepository->findOneWhere(['id' => $data['shipping']['address_id']])->toArray();
-
-                $shippingAddress['first_name'] = $this->getCurrentCustomer()->user()->first_name;
-                $shippingAddress['last_name'] = $this->getCurrentCustomer()->user()->last_name;
-                $shippingAddress['email'] = $this->getCurrentCustomer()->user()->email;
-                $shippingAddress['address1'] = $address['address1'];
-                $shippingAddress['country'] = $address['country'];
-                $shippingAddress['state'] = $address['state'];
-                $shippingAddress['city'] = $address['city'];
-                $shippingAddress['postcode'] = $address['postcode'];
-                $shippingAddress['phone'] = $address['phone'];
-            }
-
-            if (isset($data['shipping']['save_as_address']) && $data['shipping']['save_as_address']) {
-                $shippingAddress['customer_id'] = $this->getCurrentCustomer()->user()->id;
-
-                $this->customerAddressRepository->create($shippingAddress);
-            }
-        }
-
-        if ($billingAddressModel = $cart->billing_address) {
-            $this->cartAddressRepository->update($billingAddress, $billingAddressModel->id);
-
-            if ($cart->haveStockableItems()) {
-                if ($shippingAddressModel = $cart->shipping_address) {
-                    if (isset($billingAddress['use_for_shipping']) && $billingAddress['use_for_shipping']) {
-                        $this->cartAddressRepository->update($billingAddress, $shippingAddressModel->id);
-                    } else {
-                        $this->cartAddressRepository->update($shippingAddress, $shippingAddressModel->id);
-                    }
-                } else {
-                    if (isset($billingAddress['use_for_shipping']) && $billingAddress['use_for_shipping']) {
-                        $this->cartAddressRepository->create(
-                            array_merge($billingAddress, ['address_type' => 'shipping'])
-                        );
-                    } else {
-                        $this->cartAddressRepository->create(
-                            array_merge($shippingAddress, ['address_type' => 'shipping'])
-                        );
-                    }
-                }
-            }
-        } else {
-            $this->cartAddressRepository->create(array_merge($billingAddress, ['address_type' => 'billing']));
-
-            if ($cart->haveStockableItems()) {
-                if (isset($billingAddress['use_for_shipping']) && $billingAddress['use_for_shipping']) {
-                    $this->cartAddressRepository->create(
-                        array_merge($billingAddress, ['address_type' => 'shipping'])
-                    );
-                } else {
-                    $this->cartAddressRepository->create(
-                        array_merge($shippingAddress, ['address_type' => 'shipping'])
-                    );
-                }
-            }
-        }
-
-        if ($this->getCurrentCustomer()->check()) {
-            $cart->customer_email = $this->getCurrentCustomer()->user()->email;
-            $cart->customer_first_name = $this->getCurrentCustomer()->user()->first_name;
-            $cart->customer_last_name = $this->getCurrentCustomer()->user()->last_name;
-        } else {
-            $cart->customer_email = $cart->billing_address->email;
-            $cart->customer_first_name = $cart->billing_address->first_name;
-            $cart->customer_last_name = $cart->billing_address->last_name;
-        }
+        $this->assignCustomerFields($cart);
 
         $cart->save();
 
@@ -589,7 +510,7 @@ class Cart
      * @param  string  $shippingMethodCode
      * @return bool
      */
-    public function saveShippingMethod($shippingMethodCode)
+    public function saveShippingMethod($shippingMethodCode): bool
     {
         if (! $cart = $this->getCart()) {
             return false;
@@ -752,7 +673,7 @@ class Cart
 
             if ($address === null && auth()->guard('customer')->check()) {
                 $address = auth()->guard('customer')->user()->addresses()
-                    ->where('default_address',1)->first();
+                    ->where('default_address', 1)->first();
             }
 
             if ($address === null) {
@@ -791,7 +712,7 @@ class Cart
                             $haveTaxRate = true;
                         }
                     }
-                    
+
                     if ($haveTaxRate) {
                         $item->tax_percent = $rate->tax_rate;
                         $item->tax_amount = ($item->total * $rate->tax_rate) / 100;
@@ -930,6 +851,7 @@ class Cart
                 'shipping_discount_amount'      => $data['selected_shipping_rate']['discount_amount'],
                 'base_shipping_discount_amount' => $data['selected_shipping_rate']['base_discount_amount'],
             ]);
+
         }
 
         foreach ($data['items'] as $item) {
@@ -1009,7 +931,8 @@ class Cart
     }
 
     /**
-     * Function to move a already added product to wishlist will run only on customer authentication.
+     * Function to move a already added product to wishlist will run only on customer
+     * authentication.
      *
      * @param  int  $itemId
      * @return bool
@@ -1094,5 +1017,201 @@ class Cart
         $cart->save();
 
         return $this;
+    }
+
+    /**
+     * Transfer the user profile information into the cart/into the order.
+     *
+     * When logged in as guest or the customer profile is not complete, we use the
+     * billing address to fill the order customer_ data.
+     *
+     * @param \Webkul\Checkout\Models\Cart $cart
+     */
+    private function assignCustomerFields(\Webkul\Checkout\Models\Cart $cart): void
+    {
+        if ($this->getCurrentCustomer()->check()
+            && ($user = $this->getCurrentCustomer()->user())
+            && $this->profileIsComplete($user)
+        ) {
+            $cart->customer_email = $user->email;
+            $cart->customer_first_name = $user->first_name;
+            $cart->customer_last_name = $user->last_name;
+        } else {
+            $cart->customer_email = $cart->billing_address->email;
+            $cart->customer_first_name = $cart->billing_address->first_name;
+            $cart->customer_last_name = $cart->billing_address->last_name;
+        }
+    }
+
+    /**
+     * @param $user
+     *
+     * @return bool
+     */
+    private function profileIsComplete($user): bool
+    {
+        return $user->email && $user->first_name && $user->last_name;
+    }
+
+    /**
+     * @return array
+     */
+    private function fillCustomerAttributes(): array
+    {
+        $attributes = [];
+
+        $user = $this->getCurrentCustomer()->user();
+
+        if ($user) {
+            $attributes['first_name'] = $user->first_name;
+            $attributes['last_name'] = $user->last_name;
+            $attributes['email'] = $user->email;
+            $attributes['customer_id'] = $user->id;
+        }
+
+        return $attributes;
+    }
+
+    /**
+     * @return array
+     */
+    private function fillAddressAttributes(array $addressAttributes): array
+    {
+        $attributes = [];
+
+        $cartAddress = new CartAddress();
+
+        foreach ($cartAddress->getFillable() as $attribute) {
+            if (isset($addressAttributes[$attribute])) {
+                $attributes[$attribute] = $addressAttributes[$attribute];
+            }
+        }
+
+        return $attributes;
+    }
+
+    /**
+     * @param array $data
+     * @param array $billingAddress
+     * @param array $shippingAddress
+     */
+    private function saveAddressesWhenRequested(
+        array $data,
+        array $billingAddress,
+        array $shippingAddress
+    ): void
+    {
+        if (isset($data['billing']['save_as_address']) && $data['billing']['save_as_address']) {
+            $this->customerAddressRepository->create($billingAddress);
+        }
+
+        if (isset($data['shipping']['save_as_address']) && $data['shipping']['save_as_address']) {
+            $this->customerAddressRepository->create($shippingAddress);
+        }
+    }
+
+    /**
+     * @param $data
+     * @param $cart
+     *
+     * @return array
+     */
+    private function gatherBillingAddress($data, \Webkul\Checkout\Models\Cart $cart): array
+    {
+        $customerAddress = [];
+
+        if (isset($data['billing']['address_id']) && $data['billing']['address_id']) {
+            $customerAddress = $this
+                ->customerAddressRepository
+                ->findOneWhere(['id' => $data['billing']['address_id']])
+                ->toArray();
+        }
+
+        $billingAddress = array_merge(
+            $customerAddress,
+            $data['billing'],
+            ['cart_id' => $cart->id],
+            $this->fillCustomerAttributes(),
+            $this->fillAddressAttributes($data['billing'])
+        );
+
+
+        return $billingAddress;
+    }
+
+    /**
+     * @param                            $data
+     * @param \Webkul\Checkout\Cart|null $cart
+     *
+     * @return array
+     */
+    private function gatherShippingAddress($data, \Webkul\Checkout\Models\Cart $cart): array
+    {
+        $customerAddress = [];
+
+        if (isset($data['shipping']['address_id']) && $data['shipping']['address_id']) {
+            $customerAddress = $this
+                ->customerAddressRepository
+                ->findOneWhere(['id' => $data['shipping']['address_id']])
+                ->toArray();
+        }
+
+        $shippingAddress = array_merge(
+            $customerAddress,
+            $data['shipping'],
+            ['cart_id' => $cart->id],
+            $this->fillCustomerAttributes(),
+            $this->fillAddressAttributes($data['shipping'])
+        );
+
+        return $shippingAddress;
+    }
+
+    /**
+     * @param \Webkul\Checkout\Cart|null $cart
+     * @param array                      $billingAddressData
+     * @param array                      $shippingAddressData
+     *
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     */
+    private function linkAddresses(
+        \Webkul\Checkout\Models\Cart $cart,
+        array $billingAddressData,
+        array $shippingAddressData
+    ): void
+    {
+        $billingAddressModel = $cart->billing_address;
+        if ($billingAddressModel) {
+            $this->cartAddressRepository->update($billingAddressData, $billingAddressModel->id);
+
+            if ($cart->haveStockableItems()) {
+                $shippingAddressModel = $cart->shipping_address;
+                if ($shippingAddressModel) {
+                    if (isset($billingAddressData['use_for_shipping']) && $billingAddressData['use_for_shipping']) {
+                        $this->cartAddressRepository->update($billingAddressData, $shippingAddressModel->id);
+                    } else {
+                        $this->cartAddressRepository->update($shippingAddressData, $shippingAddressModel->id);
+                    }
+                } else {
+                    if (isset($billingAddressData['use_for_shipping']) && $billingAddressData['use_for_shipping']) {
+                        $this->cartAddressRepository->create(array_merge($billingAddressData,
+                            ['address_type' => 'shipping']));
+                    } else {
+                        $this->cartAddressRepository->create(array_merge($shippingAddressData,
+                            ['address_type' => 'shipping']));
+                    }
+                }
+            }
+        } else {
+            $this->cartAddressRepository->create(array_merge($billingAddressData, ['address_type' => 'billing']));
+
+            if ($cart->haveStockableItems()) {
+                if (isset($billingAddressData['use_for_shipping']) && $billingAddressData['use_for_shipping']) {
+                    $this->cartAddressRepository->create(array_merge($billingAddressData, ['address_type' => 'shipping']));
+                } else {
+                    $this->cartAddressRepository->create(array_merge($shippingAddressData, ['address_type' => 'shipping']));
+                }
+            }
+        }
     }
 }

@@ -6,9 +6,14 @@ namespace Webkul\Core\Helpers;
 // all public methods declared in helper class will be available in $I
 
 use Codeception\Module\Laravel5;
+use Webkul\Checkout\Models\Cart;
+use Webkul\Customer\Models\Customer;
+use Webkul\Checkout\Models\CartItem;
 use Illuminate\Support\Facades\Event;
 use Webkul\Product\Models\Product;
+use Webkul\Checkout\Models\CartAddress;
 use Webkul\Product\Models\ProductInventory;
+use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Models\ProductDownloadableLink;
 use Webkul\Product\Models\ProductDownloadableLinkTranslation;
@@ -22,7 +27,8 @@ class Laravel5Helper extends Laravel5
     /**
      * Returns field name of given attribute.
      *
-     * @param  string  $attribute
+     * @param string $attribute
+     *
      * @return string|null
      * @part ORM
      */
@@ -57,7 +63,7 @@ class Laravel5Helper extends Laravel5
             'brand'                => 'text_value',
             'guest_checkout'       => 'boolean_value',
         ];
-        
+
         if (! array_key_exists($attribute, $attributes)) {
             return null;
         }
@@ -66,15 +72,118 @@ class Laravel5Helper extends Laravel5
     }
 
     /**
+     * Generate a cart for the customer. Usually this is necessary to prepare the database
+     * before testing the checkout.
+     *
+     * @param array $options pass some options to configure some of the properties of the cart
+     *
+     * @return array the generated mocks as array
+     *
+     * @throws \Exception
+     */
+    public function prepareCart(array $options = []): array
+    {
+        $faker = \Faker\Factory::create();
+
+        $I = $this;
+
+        $product = $I->haveProduct(self::SIMPLE_PRODUCT, $options['productOptions'] ?? []);
+
+        if (isset($options['customer'])) {
+            $customer = $options['customer'];
+        } else {
+            $customer = $I->have(Customer::class);
+        }
+
+        $I->have(CustomerAddress::class, [
+            'customer_id'     => $customer->id,
+            'default_address' => 1,
+            'first_name'      => $customer->first_name,
+            'last_name'       => $customer->last_name,
+            'company_name'    => $faker->company,
+        ]);
+
+        if (isset($options['payment_method'])
+            && $options['payment_method'] === 'free_of_charge') {
+            $grand_total = '0.0000';
+            $base_grand_total = '0.0000';
+        } else {
+            $grand_total = (string)$faker->numberBetween(1, 666);
+            $base_grand_total = $grand_total;
+        }
+
+        $cart = $I->have(Cart::class, [
+            'customer_id'         => $customer->id,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
+            'customer_email'      => $customer->email,
+            'is_active'           => 1,
+            'channel_id'          => 1,
+            'grand_total'         => $grand_total,
+            'base_grand_total'    => $base_grand_total,
+        ]);
+
+        $cartAddress = $I->have(CartAddress::class, ['cart_id' => $cart->id]);
+
+        if (isset($options['product_type'])) {
+            $type = $options['product_type'];
+        } else {
+            $type = 'simple';
+        }
+
+        $totalQtyOrdered = 0;
+
+        $cartItems = [];
+
+        $generatedCartItems = rand(3, 10);
+
+        for ($i = 2; $i <= $generatedCartItems; $i++) {
+            $quantity = random_int(1, 10);
+            $cartItem = $I->have(CartItem::class, [
+                'type'       => $type,
+                'quantity'   => $quantity,
+                'cart_id'    => $cart->id,
+                'product_id' => $product->id,
+            ]);
+
+            $totalQtyOrdered += $quantity;
+
+            $cartItems[] = $cartItem;
+        }
+
+        // actually set the cart to the user's session
+        // when in an functional test:
+        $stub = new \StdClass();
+        $stub->id = $cart->id;
+        $I->setSession(['cart' => $stub]);
+
+        return [
+            'cart'            => $cart,
+            'product'         => $product,
+            'customer'        => $customer,
+            'cartAddress'     => $cartAddress,
+            'cartItems'       => $cartItems,
+            'totalQtyOrdered' => $totalQtyOrdered,
+        ];
+
+    }
+
+
+    /**
      * Helper function to generate products for testing
      *
-     * @param  int  $productType
-     * @param  array  $configs
-     * @param  array  $productStates
+     * @param int   $productType
+     * @param array $configs
+     * @param array $productStates
+     *
      * @return \Webkul\Product\Models\Product
      * @part ORM
      */
-    public function haveProduct(int $productType, array $configs = [], array $productStates = []): Product
+    public function haveProduct(
+        int $productType,
+        array $configs = [],
+        array $productStates = []
+    ): Product
     {
         $I = $this;
 
@@ -86,7 +195,7 @@ class Laravel5Helper extends Laravel5
 
             case self::VIRTUAL_PRODUCT:
                 $product = $I->haveVirtualProduct($configs, $productStates);
-                
+
                 break;
 
             case self::SIMPLE_PRODUCT:
@@ -102,11 +211,36 @@ class Laravel5Helper extends Laravel5
     }
 
     /**
-     * @param  array  $configs
-     * @param  array  $productStates
-     * @return  \Webkul\Product\Contracts\Product
+     * Set all session with the given key and value in the array.
+     *
+     * @param array $keyValue
      */
-    private function haveSimpleProduct(array $configs = [], array $productStates = []): Product
+    public function setSession(array $keyValue)
+    {
+        session($keyValue);
+    }
+
+    /**
+     * Flush the session data and regenerate the ID
+     * A logged in user will be logged off.
+     *
+     */
+    public function invalidateSession()
+    {
+        session()->invalidate();
+    }
+
+
+    /**
+     * @param array $configs
+     * @param array $productStates
+     *
+     * @return \Webkul\Product\Models\Product
+     */
+    private function haveSimpleProduct(
+        array $configs = [],
+        array $productStates = []
+    ): Product
     {
         $I = $this;
 
@@ -125,8 +259,9 @@ class Laravel5Helper extends Laravel5
     }
 
     /**
-     * @param  array  $configs
-     * @param  array  $productStates
+     * @param array $configs
+     * @param array $productStates
+     *
      * @return \Webkul\Product\Contracts\Product
      */
     private function haveVirtualProduct(array $configs = [], array $productStates = []): Product
@@ -148,8 +283,9 @@ class Laravel5Helper extends Laravel5
     }
 
     /**
-     * @param  array  $configs
-     * @param  array  $productStates
+     * @param array $configs
+     * @param array $productStates
+     *
      * @return \Webkul\Product\Contracts\Product
      */
     private function haveDownloadableProduct(array $configs = [], array $productStates = []): Product
@@ -182,8 +318,9 @@ class Laravel5Helper extends Laravel5
     }
 
     /**
-     * @param  int    $productId
-     * @param  array  $inventoryConfig
+     * @param int   $productId
+     * @param array $inventoryConfig
+     *
      * @return void
      */
     private function createInventory(int $productId, array $inventoryConfig = []): void
@@ -193,11 +330,14 @@ class Laravel5Helper extends Laravel5
         $I->have(ProductInventory::class, array_merge($inventoryConfig, [
             'product_id'          => $productId,
             'inventory_source_id' => 1,
+            'qty'                 => random_int(100, 666),
         ]));
+
     }
 
     /**
-     * @param  int  $productId
+     * @param int $productId
+     *
      * @return void
      */
     private function createDownloadableLink(int $productId): void
@@ -214,14 +354,15 @@ class Laravel5Helper extends Laravel5
     }
 
     /**
-     * @param  int  $productId
-     * @param  array  $attributeValues
+     * @param int   $productId
+     * @param array $attributeValues
+     *
      * @return void
      */
     private function createAttributeValues(int $productId, array $attributeValues = []): void
     {
         $I = $this;
-        
+
         $productAttributeValues = [
             'sku',
             'url_key',
@@ -254,7 +395,7 @@ class Laravel5Helper extends Laravel5
                     $data = [$fieldName => $attributeValues[$attribute]];
                 }
             }
-            
+
             $I->have(ProductAttributeValue::class, $data, $attribute);
         }
     }
