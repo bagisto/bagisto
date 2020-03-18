@@ -27,6 +27,9 @@ $data = array();
     if (empty($_POST['mail_username']))
         $errors['mail_username'] = 'Please enter your email address or username.';
 
+    if (preg_match('/\s/', $_POST['mail_username']))
+        $errors['mail_username'] = 'There should be no space in Username.';
+
     if (empty($_POST['mail_password']))
         $errors['mail_password'] = 'Please enter the password for this email address.';
 
