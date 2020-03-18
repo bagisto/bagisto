@@ -298,7 +298,7 @@ class Cart
      * Remove the item from the cart
      *
      * @param  int  $itemId
-     * @return bool
+     * @return boolean
      */
     public function removeItem($itemId)
     {
@@ -707,6 +707,10 @@ class Cart
         } else {
             foreach ($cart->items as $item) {
                 $response = $item->product->getTypeInstance()->validateCartItem($item);
+
+                if ($response) {
+                    return;
+                }
 
                 $price = ! is_null($item->custom_price) ? $item->custom_price : $item->base_price;
 
