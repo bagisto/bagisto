@@ -37,7 +37,7 @@
     },
 
     "require-dev": {
-        "codeception/codeception": "4.1.1",
+        "codeception/codeception": "^4.0",
         "codeception/module-asserts": "^1.1",
         "codeception/module-filesystem": "^1.0",
         "codeception/module-laravel5": "^1.0",
