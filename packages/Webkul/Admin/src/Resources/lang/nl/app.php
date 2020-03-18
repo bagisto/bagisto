@@ -1298,7 +1298,9 @@ return [
             'default' => 'Standaard',
             'sandbox' => 'Sandbox',
             'all-channels' => 'Alles',
-            'all-locales' => 'Alles'
+            'all-locales' => 'Alles',
+            'invoice-slip-design' => 'Invoice Slip Design',
+            'logo' => 'logo'
         ]
     ]
 ];

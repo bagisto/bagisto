@@ -35,5 +35,24 @@ return [
                 'locale_based'  => true,
             ],
         ]
+    ], [
+        'key'    => 'sales.orderSettings.invoice_slip_design',
+        'name'   => 'admin::app.admin.system.invoice-slip-design',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'logo',
+                'title'         => 'admin::app.admin.system.logo',
+                'type'          => 'image',
+                'validation'    => 'mimes:jpeg,bmp,png,jpg',
+                'channel_based' => true,
+            ],
+            [
+                'name'          => 'address',
+                'title'         => 'admin::app.admin.system.address',
+                'type'          => 'textarea',
+                'channel_based' => true,
+            ]
+        ]
     ]
 ];

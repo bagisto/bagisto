@@ -1070,7 +1070,9 @@ return [
             'credit-max' => 'اعتبار مشتری حداکثر',
             'credit-max-value' => 'حداکثر میزان اعتبار',
             'use-credit-max' => 'استفاده از حداکثر اعتبار',
-            'sandbox' => 'Sandbox'
+            'sandbox' => 'Sandbox',
+            'invoice-slip-design' => 'Invoice Slip Design',
+            'logo' => 'logo'
         ]
     ]
 ];
