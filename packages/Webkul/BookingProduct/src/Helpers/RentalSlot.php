@@ -4,6 +4,7 @@ namespace Webkul\BookingProduct\Helpers;
 
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Webkul\Checkout\Facades\Cart;
 
 class RentalSlot extends Booking
 {
@@ -196,7 +197,7 @@ class RentalSlot extends Booking
      * Validate cart item product price
      *
      * @param  \Webkul\Checkout\Contracts\CartItem  $item
-     * @return float
+     * @return void|null
      */
     public function validateCartItem($item)
     {
@@ -207,11 +208,27 @@ class RentalSlot extends Booking
         $rentingType = $item->additional['booking']['renting_type'] ?? $bookingProduct->rental_slot->renting_type;
 
         if ($rentingType == 'daily') {
+            if (! isset($item->additional['booking']['date_from'])
+                || ! isset($item->additional['booking']['date_to'])
+            ) {
+                Cart::removeItem($item->id);
+
+                return true;
+            }
+            
             $from = Carbon::createFromTimeString($item->additional['booking']['date_from'] . " 00:00:00");
             $to = Carbon::createFromTimeString($item->additional['booking']['date_to'] . " 24:00:00");
 
             $price += $bookingProduct->rental_slot->daily_price * $to->diffInDays($from);
         } else {
+            if (! isset($item->additional['booking']['slot']['from'])
+                || ! isset($item->additional['booking']['slot']['to'])
+            ) {
+                Cart::removeItem($item->id);
+
+                return true;
+            }
+
             $from = Carbon::createFromTimestamp($item->additional['booking']['slot']['from']);
             $to = Carbon::createFromTimestamp($item->additional['booking']['slot']['to']);
 

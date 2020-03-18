@@ -243,6 +243,6 @@ class Booking extends Virtual
             return;
         }
 
-        app($this->bookingHelper->getTypeHepler($bookingProduct->type))->validateCartItem($item);
+        return app($this->bookingHelper->getTypeHepler($bookingProduct->type))->validateCartItem($item);
     }
 }
