@@ -8,7 +8,6 @@
         }
     ],
     "require": {
-        "propaganistas/laravel-intl": "^2.0"
     },
     "autoload": {
         "psr-4": {
