@@ -949,7 +949,9 @@ return [
             'order-number-length' => 'Order Number Length',
             'order-number-suffix' => 'Order Number Suffix',
             'default' => 'Default',
-            'sandbox' => 'Sandbox'
+            'sandbox' => 'Sandbox',
+            'invoice-slip-design' => 'Invoice Slip Design',
+            'logo' => 'logo'
         ]
     ]
 ];
