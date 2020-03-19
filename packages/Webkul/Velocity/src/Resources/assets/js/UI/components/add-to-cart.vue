@@ -68,7 +68,6 @@
                     }
                 })
                 .catch(error => {
-                    debugger
                     console.log(this.__('error.something_went_wrong'));
                 })
             },
