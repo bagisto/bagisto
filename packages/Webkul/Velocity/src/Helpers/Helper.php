@@ -66,11 +66,12 @@ class Helper extends Review
     /**
      * Create a helper instamce
      *
-     * @param  \Webkul\Product\Contracts\Product  $productModel
-     * @param  \Webkul\Velocity\Repositories\OrderBrandsRepository  $orderBrands
-     * @param  \Webkul\Attribute\Repositories\AttributeOptionRepository  $attributeOptionRepository
-     * @param  \Webkul\Product\Repositories\ProductReviewRepository  $productReviewRepository
-     * @param  \Webkul\Velocity\Repositories\VelocityMetadataRepository  $velocityMetadataRepository
+     * @param  \Webkul\Product\Contracts\Product                        $productModel
+     * @param  \Webkul\Velocity\Repositories\OrderBrandsRepository      $orderBrands
+     * @param  \Webkul\Attribute\Repositories\AttributeOptionRepository $attributeOptionRepository
+     * @param  \Webkul\Product\Repositories\ProductReviewRepository     $productReviewRepository
+     * @param  \Webkul\Velocity\Repositories\VelocityMetadataRepository $velocityMetadataRepository
+     *
      * @return void
      */
     public function __construct(
@@ -89,7 +90,7 @@ class Helper extends Review
         $this->productRepository = $productRepository;
 
         $this->productFlatRepository = $productFlatRepository;
-        
+
         $this->orderBrandsRepository = $orderBrandsRepository;
 
         $this->productReviewRepository =  $productReviewRepository;
@@ -98,7 +99,8 @@ class Helper extends Review
     }
 
     /**
-     * @param  \Webkul\Sales\Contracts\Order
+     * @param  \Webkul\Sales\Contracts\Order $order
+     *
      * @return void
      */
     public function topBrand($order)
