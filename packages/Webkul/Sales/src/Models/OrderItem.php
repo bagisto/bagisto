@@ -135,7 +135,7 @@ class OrderItem extends Model implements OrderItemContract
     }
 
     /**
-     * Get the order record associated with the order item.
+     * Get the product record associated with the order item.
      */
     public function product()
     {

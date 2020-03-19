@@ -2,6 +2,7 @@
 
 namespace Webkul\Sales\Models;
 
+use Webkul\Checkout\Models\CartProxy;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Sales\Contracts\Order as OrderContract;
 
@@ -60,6 +61,15 @@ class Order extends Model implements OrderContract
     {
         return $this->grand_total - $this->grand_total_invoiced;
     }
+
+    /**
+     * Get the associated cart that was used to create this order.
+     */
+    public function cart()
+    {
+        return $this->belongsTo(CartProxy::modelClass());
+    }
+
 
     /**
      * Get the order items record associated with the order.
