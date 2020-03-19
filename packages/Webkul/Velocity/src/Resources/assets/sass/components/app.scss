@@ -702,7 +702,7 @@
 
             .wishlist-icon {
                 margin: 0;
-                display: inline-block;
+                display: inline;
             }
         }
 
@@ -2272,6 +2272,9 @@
 
 
 .compare-products {
+    // overflow-x: scroll;
+    // padding-bottom: 30px;
+
     .col,
     .col-2 {
         padding-left: 0;
@@ -2310,6 +2313,12 @@
     .product-price {
         span {
             font-size: 24px !important
+        }
+
+        .price-from {
+            span:nth-child(2) {
+                font-size: 20px !important;
+            }
         }
     }
 

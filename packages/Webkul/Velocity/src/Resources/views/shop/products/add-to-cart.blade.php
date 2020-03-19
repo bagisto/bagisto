@@ -2,18 +2,18 @@
 
     <div class="mx-0 no-padding">
         @if (isset($showCompare) && $showCompare)
-                <compare-component
-                    @auth('customer')
-                        customer="true"
-                    @endif
+            <compare-component
+                @auth('customer')
+                    customer="true"
+                @endif
 
-                    @guest('customer')
-                        customer="false"
-                    @endif
+                @guest('customer')
+                    customer="false"
+                @endif
 
-                    slug="{{ $product->url_key }}"
-                    product-id="{{ $product->id }}"
-                ></compare-component>
+                slug="{{ $product->url_key }}"
+                product-id="{{ $product->id }}"
+            ></compare-component>
         @endif
 
         @if (! (isset($showWishlist) && !$showWishlist))
@@ -33,7 +33,7 @@
                         <i class="material-icons text-down-3">shopping_cart</i>
                     @endif
 
-                    <span class="fs14 fw6 text-uppercase text-up-4">
+                    <span type="submit" class="fs14 fw6 text-uppercase text-up-4">
                         {{ __('shop::app.products.add-to-cart') }}
                     </span>
                 </button>
@@ -64,7 +64,9 @@
                 <add-to-cart
                     form="true"
                     csrf-token='{{ csrf_token() }}'
+                    product-flat-id="{{ $product->id }}"
                     product-id="{{ $product->product_id }}"
+                    move-to-cart="{{ $moveToCart ?? false }}"
                     add-class-to-btn="{{ $addToCartBtnClass ?? '' }}"
                     is-enable={{ ! $product->isSaleable() ? 'false' : 'true' }}
                     show-cart-icon={{ !(isset($showCartIcon) && !$showCartIcon) }}

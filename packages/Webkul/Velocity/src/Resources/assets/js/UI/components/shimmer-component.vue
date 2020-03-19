@@ -37,6 +37,10 @@
 </script>
 
 <style>
+    .shimmer-card-container {
+        width: 100%;
+    }
+
     .shimmer-card {
         margin: 0px 10px 50px 10px;
         padding: 30px 40px;

@@ -177,7 +177,12 @@
     <script type='text/javascript' src='https://unpkg.com/spritespin@4.1.0/release/spritespin.js'></script>
 
     <script type="text/x-template" id="product-view-template">
-        <form method="POST" id="product-form" action="{{ route('cart.add', $product->product_id) }}" @click="onSubmit($event)">
+        <form
+            method="POST"
+            id="product-form"
+            @click="onSubmit($event)"
+            action="{{ route('cart.add', $product->product_id) }}">
+
             <input type="hidden" name="is_buy_now" v-model="is_buy_now">
 
             <slot v-if="slot"></slot>
@@ -189,11 +194,11 @@
         </form>
     </script>
 
-    <script type="text/javascript">
+    <script>
         Vue.component('product-view', {
             inject: ['$validator'],
             template: '#product-view-template',
-            data: function() {
+            data: function () {
                 return {
                     slot: true,
                     is_buy_now: 0,
@@ -205,6 +210,7 @@
 
                 let currentProductId = '{{ $product->url_key }}';
                 let existingViewed = window.localStorage.getItem('recentlyViewed');
+
                 if (! existingViewed) {
                     existingViewed = [];
                 } else {
@@ -234,15 +240,15 @@
             },
 
             methods: {
-                onSubmit: function(e) {
-                    if (e.target.getAttribute('type') != 'submit')
+                onSubmit: function(event) {
+                    if (event.target.getAttribute('type') != 'submit')
                         return;
 
-                    e.preventDefault();
+                    event.preventDefault();
 
                     this.$validator.validateAll().then(result => {
                         if (result) {
-                            this.is_buy_now = e.target.classList.contains('buynow') ? 1 : 0;
+                            this.is_buy_now = event.target.classList.contains('buynow') ? 1 : 0;
 
                             setTimeout(function() {
                                 document.getElementById('product-form').submit();
@@ -287,7 +293,6 @@
                             ]
                         });
                     }, 0);
-
                 }
             }
         });

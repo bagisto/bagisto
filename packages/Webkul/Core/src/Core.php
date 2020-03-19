@@ -1047,4 +1047,38 @@ class Core
     {
         return str_replace('.', '_', (string)$taxRate);
     }
+
+    /**
+     * Get Shop email sender details
+     *
+     * @return array
+     */
+    public function getSenderEmailDetails()
+    {
+        $sender_name = core()->getConfigData('general.general.email_settings.sender_name') ? core()->getConfigData('general.general.email_settings.sender_name') : config('mail.from.name');
+
+        $sender_email = core()->getConfigData('general.general.email_settings.shop_email_from') ? core()->getConfigData('general.general.email_settings.shop_email_from') : config('mail.from.address');
+
+        return [
+            'name'   => $sender_name,
+            'email'  => $sender_email,
+        ];
+    }
+
+    /**
+     * Get Admin email details
+     *
+     * @return array
+     */
+    public function getAdminEmailDetails()
+    {
+        $admin_name = core()->getConfigData('general.general.email_settings.admin_name') ? core()->getConfigData('general.general.email_settings.admin_name') : config('mail.admin.name');
+
+        $admin_email = core()->getConfigData('general.general.email_settings.admin_email') ? core()->getConfigData('general.general.email_settings.admin_email') : config('mail.admin.address');
+
+        return [
+            'name'   => $admin_name,
+            'email'  => $admin_email,
+        ];
+    }
 }

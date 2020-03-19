@@ -1288,6 +1288,12 @@ return [
             'weight-unit' => 'Unidade de peso',
             'admin-page-limit' => 'Itens padrão por página (administrador)',
             'design' => 'Projeto',
+            'email-settings'    => 'Email Settings',
+            'email-sender-name' => 'Email Sender Name',
+            'shop-email-from'   => 'Shop Email Address [For sending emails]',
+            'admin-name'    => 'Admin Name',
+            'admin-email' => 'Admin Email',
+            'design' => 'Design',
             'admin-logo' => 'Admin Logo',
             'logo-image' => 'Logo Imagem',
             'credit-max' => 'Máximo de crédito do cliente',
@@ -1301,7 +1307,10 @@ return [
             'default' => 'Padrão',
             'sandbox' => 'Sandbox',
             'all-channels' => 'Todos',
-            'all-locales' => 'Todos'
+            'all-locales' => 'Todos',
+            'sandbox' => 'Sandbox',
+            'invoice-slip-design' => 'Invoice Slip Design',
+            'logo' => 'logo'
         ]
     ]
 ];

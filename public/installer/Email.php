@@ -21,6 +21,7 @@
                         <select name="mail_encryption" class="control">
                             <option value="ssl">SSL</option>
                             <option value="tls">TLS</option>
+                            <option value="">None</option>
                         </select>
                     </div>
 

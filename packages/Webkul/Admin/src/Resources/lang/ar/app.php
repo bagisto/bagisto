@@ -1301,7 +1301,9 @@ return [
             'default' => 'إفتراضي',
             'sandbox' => 'صندوق الرمل',
             'all-channels' => 'الكل',
-            'all-locales' => 'الكل'
+            'all-locales' => 'الكل',
+            'invoice-slip-design' => 'Invoice Slip Design',
+            'logo' => 'logo'
         ]
     ]
 ];

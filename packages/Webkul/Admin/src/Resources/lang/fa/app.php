@@ -1287,6 +1287,11 @@ return [
             'locale-options' => 'گزینه های واحد',
             'weight-unit' => 'واحد وزن',
             'admin-page-limit' => 'موارد پیش فرض در هر صفحه (مدیر)',
+            'email-settings'    => 'Email Settings',
+            'email-sender-name' => 'Email Sender Name',
+            'shop-email-from'   => 'Shop Email Address [For sending emails]',
+            'admin-name'    => 'Admin Name',
+            'admin-email' => 'Admin Email',
             'design' => 'طراحی',
             'admin-logo' => 'لوگو مدیر',
             'logo-image' => 'تصویر لوگو',
@@ -1301,7 +1306,10 @@ return [
             'default' => 'پیش فرض',
             'sandbox' => 'Sandbox',
             'all-channels' => 'همه',
-            'all-locales' => 'همه'
+            'all-locales' => 'همه',
+            'sandbox' => 'Sandbox',
+            'invoice-slip-design' => 'Invoice Slip Design',
+            'logo' => 'logo'
         ]
     ]
 ];

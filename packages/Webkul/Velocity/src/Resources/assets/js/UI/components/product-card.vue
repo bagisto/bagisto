@@ -87,8 +87,6 @@
             return {
                 'addToCart': 0,
                 'addToCartHtml': '',
-                'message' : "Hello there",
-                'showTestClass': 'sdfsdf',
             }
         },
     }
