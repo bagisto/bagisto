@@ -464,7 +464,7 @@ class Cart
         if ($cart->haveStockableItems()) {
             $data['shipping_address'] = $cart->shipping_address->toArray();
 
-            $data['selected_shipping_rate'] = $cart->selected_shipping_rate->toArray();
+            $data['selected_shipping_rate'] = $cart->selected_shipping_rate ? $cart->selected_shipping_rate->toArray() : 0.0;
         }
 
         $data['payment'] = $cart->payment->toArray();
@@ -567,6 +567,7 @@ class Cart
         Event::dispatch('checkout.cart.collect.totals.before', $cart);
 
         $this->calculateItemsTax();
+        $cart->refresh();
 
         $cart->grand_total = $cart->base_grand_total = 0;
         $cart->sub_total = $cart->base_sub_total = 0;
@@ -657,6 +658,8 @@ class Cart
         if (! $cart = $this->getCart()) {
             return;
         }
+        
+        Event::dispatch('checkout.cart.calculate.items.tax.before', $cart);
 
         foreach ($cart->items()->get() as $item) {
             $taxCategory = $this->taxCategoryRepository->find($item->product->tax_category_id);
@@ -725,6 +728,7 @@ class Cart
 
             $item->save();
         }
+        Event::dispatch('checkout.cart.calculate.items.tax.after', $cart);
     }
 
     /**
