@@ -87,7 +87,7 @@
                             </li>
 
                             <li>
-                                <a href="{{ route('velocity.product.compare') }}" class="unset">{{ __('velocity::app.customer.compare.text') }}</a>
+                                <a href="{{ route('velocity.customer.product.compare') }}" class="unset">{{ __('velocity::app.customer.compare.text') }}</a>
                             </li>
 
                             <li>

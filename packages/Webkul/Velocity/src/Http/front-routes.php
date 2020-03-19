@@ -34,6 +34,12 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
                 'view' => 'shop::guest.compare.index'
             ]);
 
+        Route::get('/customer/account/comparison', 'ComparisonController@getComparisonList')
+            ->name('velocity.customer.product.compare')
+            ->defaults('_config', [
+                'view' => 'shop::customers.account.compare.index'
+            ]);
+
         Route::put('/comparison', 'ComparisonController@addCompareProduct')
             ->name('customer.product.add.compare');
 
