@@ -49,8 +49,8 @@ class RefundItemRepository extends Repository
 
                     if ($orderItem->parent) {
                         $shippedQty = $orderItem->qty_ordered
-                                ? ($orderItem->qty_ordered / $orderItem->parent->qty_ordered) * $shipmentItem->qty
-                                : $orderItem->parent->qty_ordered;
+                                      ? ($orderItem->qty_ordered / $orderItem->parent->qty_ordered) * $shipmentItem->qty
+                                      : $orderItem->parent->qty_ordered;
                     } else {
                         $shippedQty = $shipmentItem->qty;
                     }
@@ -69,7 +69,9 @@ class RefundItemRepository extends Repository
 
                 $quantity -= $totalShippedQtyToRefund;
             }
-        } elseif ($orderItem->getTypeInstance()->showQuantityBox()) {
+        } elseif (! $orderItem->getTypeInstance()->isStockable()
+                  && $orderItem->getTypeInstance()->showQuantityBox()
+        ) {
             $inventory = $orderItem->product->inventories()
                                             // ->where('vendor_id', $data['vendor_id'])
                                             ->whereIn('inventory_source_id', $orderItem->order->channel->inventory_sources()->pluck('id'))
