@@ -124,6 +124,8 @@
 
 * #2571 [fixed] - compare icon should classify the total compare product added in the comparison page
 
+* #2592 [fixed] - No menu for the logged in user when clicking over comparison
+
 * #2593 [fixed] - Cannot read property 'disabled' of undefined" on filter price
 
 * #2594 [fixed] - After refund quantity of product increases.
