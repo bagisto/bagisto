@@ -153,7 +153,7 @@ return [
     /*
         Application Version
     */
-    'version' => env('APP_VERSION', '0.1.6'),
+    'version' => env('APP_VERSION', '1.1.0'),
 
     /**
      * Blacklisting attributes while debugging
