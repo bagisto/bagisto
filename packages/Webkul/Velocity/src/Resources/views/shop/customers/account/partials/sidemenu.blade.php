@@ -20,7 +20,7 @@
                     $subMenuCollection['wishlist'] = $menuItem['children']['wishlist'];
                     $subMenuCollection['compare'] = [
                         'key'   => 'account.compare',
-                        'url'   => route('velocity.product.compare'),
+                        'url'   => route('velocity.customer.product.compare'),
                         'name'  => 'velocity::app.customer.compare.text',
                     ];
                     $subMenuCollection['reviews'] = $menuItem['children']['reviews'];
