@@ -20,8 +20,10 @@
             'isEnable',
             'csrfToken',
             'productId',
+            'moveToCart',
             'showCartIcon',
             'addClassToBtn',
+            'productFlatId',
         ],
 
         data: function () {
@@ -47,6 +49,15 @@
                     if (response.data.status == 'success') {
                         this.$root.miniCartKey++;
 
+                        if (this.moveToCart == "true") {
+                            let existingItems = this.getStorageValue('wishlist_product');
+
+                            let updatedItems = existingItems.filter(item => item != this.productFlatId);
+
+                            this.$root.headerItemsCount++;
+                            this.setStorageValue('wishlist_product', updatedItems);
+                        }
+
                         window.showAlert(`alert-success`, this.__('shop.general.alert.success'), response.data.message);
                     } else {
                         window.showAlert(`alert-${response.data.status}`, response.data.label ? response.data.label : this.__('shop.general.alert.error'), response.data.message);
@@ -57,9 +68,10 @@
                     }
                 })
                 .catch(error => {
+                    debugger
                     console.log(this.__('error.something_went_wrong'));
                 })
-            }
+            },
         }
     }
 </script>

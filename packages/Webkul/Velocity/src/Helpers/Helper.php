@@ -15,10 +15,10 @@ use Webkul\Velocity\Repositories\VelocityMetadataRepository;
 class Helper extends Review
 {
     /**
-    * productModel object
-    *
-    * @var \Webkul\Product\Contracts\Product
-    */
+     * productModel object
+     *
+     * @var \Webkul\Product\Contracts\Product
+     */
    protected $productModel;
 
     /**
@@ -42,7 +42,7 @@ class Helper extends Review
      */
     protected $productFlatRepository;
 
-      /**
+    /**
      * productModel object
      *
      * @var \Webkul\Attribute\Repositories\AttributeOptionRepository
@@ -111,8 +111,8 @@ class Helper extends Review
             $products[] = $orderItem->product;
 
             $this->orderBrandsRepository->create([
-                'order_id'      => $orderItem->order_id,
                 'order_item_id' => $orderItem->id,
+                'order_id'      => $orderItem->order_id,
                 'product_id'    => $orderItem->product_id,
                 'brand'         => $products[$key]->brand,
             ]);
@@ -174,6 +174,7 @@ class Helper extends Review
      * Returns the count rating of the product
      *
      * @param  \Webkul\Product\Contracts\Product  $product
+     *
      * @return int
      */
     public function getCountRating($product)
@@ -231,10 +232,11 @@ class Helper extends Review
      */
     public function getShopRecentReviews($reviewCount = 4)
     {
-        $reviews = $this->productReviewRepository->getModel()
-                                                 ->orderBy('id', 'desc')
-                                                 ->where('status', 'approved')
-                                                 ->take($reviewCount)->get();
+        $reviews = $this->productReviewRepository
+                        ->getModel()
+                        ->orderBy('id', 'desc')
+                        ->where('status', 'approved')
+                        ->take($reviewCount)->get();
 
         return $reviews;
     }
@@ -269,8 +271,8 @@ class Helper extends Review
             'images'    => $images,
             'itemId'    => $item->id,
             'name'      => $item->name,
-            'url_key'   => $product->url_key,
             'quantity'  => $item->quantity,
+            'url_key'   => $product->url_key,
             'baseTotal' => core()->currency($item->base_total),
         ];
     }
@@ -280,7 +282,7 @@ class Helper extends Review
      * @param  bool  $list
      * @return array
      */
-    public function formatProduct($product, $list = false)
+    public function formatProduct($product, $list = false, $metaInformation = [])
     {
         $reviewHelper = app('Webkul\Product\Helpers\Review');
         $productImageHelper = app('Webkul\Product\Helpers\ProductImage');
@@ -319,6 +321,12 @@ class Helper extends Review
                 'showCompare'       => true,
                 'product'           => $product,
                 'addWishlistClass'  => ! (isset($list) && $list) ? '' : '',
+                'btnText'           => (isset($metaInformation['btnText']) && $metaInformation['btnText'])
+                                       ? $metaInformation['btnText']
+                                       : null,
+                'moveToCart'           => (isset($metaInformation['moveToCart']) && $metaInformation['moveToCart'])
+                                       ? $metaInformation['moveToCart']
+                                       : null,
                 'addToCartBtnClass' => ! (isset($list) && $list) ? 'small-padding' : '',
             ])->render(),
         ];
@@ -332,7 +340,7 @@ class Helper extends Review
      *
      * @return array
      */
-    public function fetchProductCollection($items, $separator='&')
+    public function fetchProductCollection($items, $moveToCart = false, $separator='&')
     {
         $productCollection = [];
         $productIds = explode($separator, $items);
@@ -345,7 +353,10 @@ class Helper extends Review
                 $product = $this->productRepository->findOneWhere(['id' => $productFlat->product_id]);
 
                 if ($product) {
-                    $formattedProduct = $this->formatProduct($productFlat);
+                    $formattedProduct = $this->formatProduct($productFlat, false, [
+                        'moveToCart' => $moveToCart,
+                        'btnText' => $moveToCart ? trans('shop::app.customer.account.wishlist.move-to-cart') : null,
+                    ]);
 
                     $productMetaDetails = [];
                     $productMetaDetails['slug'] = $product->url_key;

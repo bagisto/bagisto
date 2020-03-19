@@ -27,7 +27,7 @@ class ShopController extends Controller
 
         if ($product) {
             $productReviewHelper = app('Webkul\Product\Helpers\Review');
-            
+
             $galleryImages = $this->productImageHelper->getProductBaseImage($product);
 
             $response = [
@@ -92,7 +92,7 @@ class ShopController extends Controller
                         $productDetails = [];
 
                         $productDetails = array_merge($productDetails, $this->velocityHelper->formatProduct($product));
-                        
+
                         array_push($customizedProducts, $productDetails);
                     }
 
@@ -217,7 +217,9 @@ class ShopController extends Controller
     {
         // for product details
         if ($items = request()->get('items')) {
-            $productCollection = $this->velocityHelper->fetchProductCollection($items);
+            $moveToCart = request()->get('moveToCart');
+
+            $productCollection = $this->velocityHelper->fetchProductCollection($items, $moveToCart);
 
             $response = [
                 'status'   => 'success',
