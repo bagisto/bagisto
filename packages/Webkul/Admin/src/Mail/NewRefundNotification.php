@@ -39,8 +39,8 @@ class NewRefundNotification extends Mailable
         $order = $this->refund->order;
 
         return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
-            ->to($order->customer_email, $order->customer_full_name)
-            ->subject(trans('shop::app.mail.refund.subject', ['order_id' => $order->increment_id]))
-            ->view('shop::emails.sales.new-refund');
+                    ->to($order->customer_email, $order->customer_full_name)
+                    ->subject(trans('shop::app.mail.refund.subject', ['order_id' => $order->increment_id]))
+                    ->view('shop::emails.sales.new-refund');
     }
 }
