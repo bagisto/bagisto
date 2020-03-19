@@ -120,7 +120,17 @@
             {!! view_render_event('bagisto.shop.layout.header.cart-item.after') !!}
 
             {!! view_render_event('bagisto.shop.layout.header.compare.before') !!}
-                <a class="compare-btn unset" href="{{ route('velocity.product.compare') }}">
+                <a
+                    class="compare-btn unset"
+                    @auth('customer')
+                        href="{{ route('velocity.customer.product.compare') }}"
+                    @endauth
+
+                    @guest('customer')
+                        href="{{ route('velocity.product.compare') }}"
+                    @endguest
+                    >
+
                     <i class="material-icons">compare_arrows</i>
                     <div class="badge-container" v-if="compareCount > 0">
                         <span class="badge" v-text="compareCount"></span>
@@ -444,7 +454,17 @@
                 </div>
 
                 <div class="right-vc-header col-6">
-                    <a class="compare-btn unset" href="{{ route('velocity.product.compare') }}">
+                    <a
+                        class="compare-btn unset"
+                        @auth('customer')
+                            href="{{ route('velocity.customer.product.compare') }}"
+                        @endauth
+
+                        @guest('customer')
+                            href="{{ route('velocity.product.compare') }}"
+                        @endguest
+                        >
+
                         <div class="badge-container" v-if="compareCount > 0">
                             <span class="badge" v-text="compareCount"></span>
                         </div>
