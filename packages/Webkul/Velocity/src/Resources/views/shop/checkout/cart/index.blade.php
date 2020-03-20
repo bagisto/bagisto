@@ -204,7 +204,7 @@
                                                 </div>
 
                                                 <div class="row col-12 remove-padding-margin actions">
-                                                    <div class="product-quantity col-4 no-padding">
+                                                    <div class="product-quantity col-lg-4 col-6 no-padding">
                                                         <quantity-changer
                                                             :control-name="'qty[{{$item->id}}]'"
                                                             quantity="{{ $item->quantity }}">
@@ -248,18 +248,18 @@
                 {!! view_render_event('bagisto.shop.checkout.cart.summary.after', ['cart' => $cart]) !!}
 
                     @if ($cart)
-                        <div class="col-lg-4 col-md-12 offset-2 row order-summary-container">
+                        <div class="col-lg-4 col-md-12 offset-lg-2 row order-summary-container">
                             @include('shop::checkout.total.summary', ['cart' => $cart])
 
                             <coupon-component></coupon-component>
                         </div>
                     @else
-                        <div class="fs16 col-12">
+                        <div class="fs16 col-12 empty-cart-message">
                             {{ __('shop::app.checkout.cart.empty') }}
                         </div>
 
                         <a
-                            class="fs16 mt15 col-12 remove-decoration"
+                            class="fs16 mt15 col-12 remove-decoration continue-shopping"
                             href="{{ route('shop.home.index') }}">
 
                             <button type="button" class="theme-btn remove-decoration">
