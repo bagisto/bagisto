@@ -78,7 +78,7 @@ class CartController extends Controller
 
                 $response = [
                     'status'         => 'success',
-                    'totalCartItems' => sizeof($items),
+                    'totalCartItems' => sizeof($cart->items),
                     'message'        => trans('shop::app.checkout.cart.item.success'),
                 ];
 

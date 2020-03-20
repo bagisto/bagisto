@@ -52,12 +52,14 @@ class OnepageController extends Controller
     */
     public function index()
     {
-        if (! auth()->guard('customer')->check() && ! core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout')) {
+        if (! auth()->guard('customer')->check()
+            && ! core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout')) {
             return redirect()->route('customer.session.index');
         }
 
-        if (Cart::hasError())
+        if (Cart::hasError()) {
             return redirect()->route('shop.checkout.cart.index');
+        }
 
         $cart = Cart::getCart();
 

@@ -1,7 +1,7 @@
 
 {!! view_render_event('bagisto.admin.content.create_form_accordian.content.link.before') !!}
 
-<div class="control-group" :class="[errors.has('page_link') ? 'has-error' : '']">
+<div class="control-group" :class="[errors.has('{!!$locale!!}[page_link]') ? 'has-error' : '']">
     <label for="page_link" class="required">
         {{ __('velocity::app.admin.contents.content.category-slug') }}
     </label>
@@ -17,10 +17,10 @@
         name="{{$locale}}[page_link]"
         v-validate="'required|max:150'"
         value="{{ $pageTarget }}"
-        data-vv-as="&quot;{{ __('velocity::app.admin.contents.content.page-link') }}&quot;" />
+        data-vv-as="&quot;{{ __('velocity::app.admin.contents.content.category-slug') }}&quot;" />
 
-    <span class="control-error" v-if="errors.has('page_link')">
-        @{{ errors.first('page_link') }}
+    <span class="control-error" v-if="errors.has('{!!$locale!!}[page_link]')">
+        @{{ errors.first('{!!$locale!!}[page_link]') }}
     </span>
 </div>
 

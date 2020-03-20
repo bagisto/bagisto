@@ -18,7 +18,7 @@ class OrderBrandsRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Velocity\Models\OrderBrands';
+        return 'Webkul\Velocity\Contracts\OrderBrand';
     }
     
 }

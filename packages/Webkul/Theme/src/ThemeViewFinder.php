@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Webkul\Theme;
 
@@ -18,7 +18,7 @@ class ThemeViewFinder extends FileViewFinder
     {
         // Extract the $view and the $namespace parts
         list($namespace, $view) = $this->parseNamespaceSegments($name);
-        
+
         if ($namespace != 'admin') {
             $paths = $this->addThemeNamespacePaths($namespace);
 
@@ -64,14 +64,14 @@ class ThemeViewFinder extends FileViewFinder
     /**
      * Override replaceNamespace() to add path for custom error pages "resources/themes/theme_name/views/errors/..."
      *
-     * @param  string  $namespace
+     * @param  string        $namespace
      * @param  string|array  $hints
      * @return void
      */
     public function replaceNamespace($namespace, $hints)
     {
         $this->hints[$namespace] = (array) $hints;
-        
+
         // Overide Error Pages
         if ($namespace == 'errors' || $namespace == 'mails') {
             $searchPaths = array_diff($this->paths, Themes::getLaravelViewPaths());

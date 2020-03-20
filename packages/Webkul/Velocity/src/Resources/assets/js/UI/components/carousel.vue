@@ -15,7 +15,7 @@
         ]">
 
         <slot
-            v-for="index in slidesCount"
+            v-for="index in parseInt(slidesCount)"
             :name="`slide-${parseInt(index) - 1}`">
         </slot>
     </carousel>

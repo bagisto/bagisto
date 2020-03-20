@@ -183,7 +183,7 @@
             data: function() {
                 let maxPrice  = '{{ core()->convertPrice($productFlatRepository->getCategoryProductMaximumPrice($category)) }}';
 
-                maxPrice = (maxPrice !== '') ? parseInt(maxPrice) : 0;
+                maxPrice = (parseInt(maxPrice) !== 0) ? parseInt(maxPrice) : 500;
 
                 return {
                     active: false,

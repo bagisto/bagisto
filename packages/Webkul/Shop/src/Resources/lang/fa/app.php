@@ -1,7 +1,8 @@
 <?php
 
 return [
-    'security-warning' => 'فعالیت مشکوکی یافت شد !!!',
+    'security-warning' => '!!!فعالیت مشکوکی یافت شد',
+    'nothing-to-delete' => 'هیچ چیز برای حذف نیست',
     'nothing-to-delete' => 'هیچ چیز برای حذف نیست',
 
     'layouts' => [
@@ -119,6 +120,7 @@ return [
             'verified' => 'حساب شما تأیید شده است ، سعی کنید هم اکنون وارد سیستم شوید',
             'verify-failed' => 'ما نمی توانیم حساب نامه شما را تأیید کنیم',
             'dont-have-account' => 'شما با ما حساب ندارید',
+            'customer-registration' => 'ثبت نام مشتری با موفقیت انجام شد'
         ],
 
         'login-text' => [
@@ -134,7 +136,7 @@ return [
             'forgot_pass' => 'رمز عبور را فراموش کرده اید؟',
             'button_title' => 'ورود',
             'remember' => 'مرا به خاطر بسپار',
-            'footer' => '© کپی رایت: نرم افزار Webkul سال ، کلیه حقوق محفوظ است',
+            'footer' => '© حقوق النشر :year Webkul Software ، جميع الحقوق محفوظة',
             'invalid-creds' => 'لطفا مدارک خود را بررسی کنید و دوباره امتحان کنید',
             'verify-first' => 'ابتدا حساب ایمیل خود را تأیید کنید',
             'not-activated' => 'فعال سازی شما به دنبال تأیید سرپرست است',
@@ -211,6 +213,11 @@ return [
 
                 'create' => [
                     'page-title' => 'مشتری - فرم آدرس را اضافه کنید',
+                    'company_name' => 'نام شرکت',
+                    'first_name' => 'نام کوچک',
+                    'last_name' => 'نام خانوادگی',
+                    'vat_id' => 'id وات',
+                    'vat_help_note' => '[Note: Use Country Code with VAT Id. Eg. INV01234567891]',
                     'title' => 'اضافه کردن آدرس',
                     'street-address' => 'آدرس خیابان',
                     'country' => 'کشور',
@@ -226,6 +233,10 @@ return [
 
                 'edit' => [
                     'page-title' => 'مشتری - ویرایش آدرس',
+                    'company_name' => 'نام شرکت',
+                    'first_name' => 'نام کوچک',
+                    'last_name' => 'نام خانوادگی',
+                    'vat_id' => 'id وات',
                     'title' => 'ویرایش آدرس',
                     'street-address' => 'آدرس خیابان',
                     'submit' => 'ذخیره آدرس',
@@ -246,17 +257,18 @@ return [
                     'date' => 'تاریخ',
                     'status' => 'وضعیت',
                     'total' => 'جمع',
-                    'processing' => 'Processing',
-                    'completed' => 'Completed',
-                    'canceled' => 'Canceled',
-                    'closed' => 'Closed',
-                    'pending' => 'Pending',
-                    'pending-payment' => 'Pending Payment',
-                    'fraud' => 'Fraud'
+                    'order_number' => 'شماره سفارش',
+                    'processing' => 'در حال پردازش',
+                    'completed' => 'تکمیل شد',
+                    'canceled' => 'لغو شد',
+                    'closed' => 'بسته شد',
+                    'pending' => 'در انتظار',
+                    'pending-payment' => 'در انتظار پرداخت',
+                    'fraud' => 'تقلب'
                 ],
 
                 'view' => [
-                    'page-tile' => 'سفارش #:order_id',
+                    'page-tile' => '#:order_id سفارش',
                     'info' => 'اطلاعات',
                     'placed-on' => 'قرار داده شده در',
                     'products-ordered' => 'محصولات سفارش داده شده',
@@ -266,11 +278,11 @@ return [
                     'product-name' => 'نام',
                     'qty' => 'کمیت',
                     'item-status' => 'وضعیت مورد',
-                    'item-ordered' => 'سفارش داد (:qty_ordered)',
-                    'item-invoice' => 'صورتحساب (:qty_invoiced)',
-                    'item-shipped' => 'حمل شده (:qty_shipped)',
-                    'item-canceled' => 'لغو شد (:qty_canceled)',
-                    'item-refunded' => 'بازپرداخت (:qty_refunded)',
+                    'item-ordered' => '(:qty_ordered) سفارش داد',
+                    'item-invoice' => '(:qty_invoiced) صورتحساب ',
+                    'item-shipped' => '(:qty_shipped) حمل شده',
+                    'item-canceled' => '(:qty_canceled) لغو شد',
+                    'item-refunded' => '(:qty_refunded) بازپرداخت',
                     'price' => 'قیمت',
                     'total' => 'جمع',
                     'subtotal' => 'فرعی',
@@ -288,8 +300,8 @@ return [
                     'billing-address' => 'آدرس قبض',
                     'shipping-method' => 'روش حمل و نقل',
                     'payment-method' => 'روش پرداخت',
-                    'individual-invoice' => 'صورتحساب #:invoice_id',
-                    'individual-shipment' => 'حمل و نقل #:shipment_id',
+                    'individual-invoice' => '#:invoice_id صورتحساب',
+                    'individual-shipment' => '#:shipment_id حمل و نقل',
                     'print' => 'چاپ',
                     'invoice-id' => 'شناسه فاکتور',
                     'order-id' => 'شماره سفارش',
@@ -297,8 +309,8 @@ return [
                     'bill-to' => 'بیل به',
                     'ship-to' => 'حمل به',
                     'contact' => 'تماس',
-                    'refunds' => 'Refunds',
-                    'individual-refund' => 'بازپرداخت #:refund_id',
+                    'refunds' => 'بازپرداخت',
+                    'individual-refund' => '#:refund_id بازپرداخت',
                     'adjustment-refund' => 'بازپرداخت تنظیم',
                     'adjustment-fee' => 'هزینه تنظیم',
                 ]
@@ -314,6 +326,7 @@ return [
                 'add' => 'مورد با موفقیت به لیست دلخواه اضافه شد',
                 'remove' => 'مورد با موفقیت از لیست دلخواه حذف شد',
                 'moved' => 'مورد با موفقیت به سبد خرید منتقل شد',
+                'option-missing' => 'گزینه های محصول وجود ندارد ، بنابراین مورد را نمی توان به لیست دلخواه منتقل کرد.',
                 'move-error' => 'مورد را نمی توان به لیست دلخواه منتقل کرد ، لطفا بعداً دوباره امتحان کنید',
                 'success' => 'مورد با موفقیت به لیست دلخواه اضافه شد',
                 'failure' => 'مورد را نمی توان به لیست دلخواه اضافه کرد ، لطفا بعداً دوباره امتحان کنید',
@@ -345,7 +358,7 @@ return [
                 ],
 
                 'view' => [
-                    'page-tile' => 'بررسی #:id',
+                    'page-tile' => '#:id بررسی',
                 ]
             ]
         ]
@@ -387,6 +400,11 @@ return [
         'view-all' => 'مشاهده همه',
         'select-above-options' => 'لطفا ابتدا گزینه های بالا را انتخاب کنید',
         'less-quantity' => 'کمیت نمی تواند کمتر از یک باشد.',
+        'samples' => 'نمونه ها',
+        'links' => 'پیوندها',
+        'sample' => 'نمونه',
+        'name' => 'نام',
+        'qty' => 'کمیت',
         'starting-at' => 'شروع از',
         'customize-options' => 'گزینه ها را سفارشی کنید',
         'choose-selection' => 'انتخابی را انتخاب کنید',
@@ -403,16 +421,15 @@ return [
         'no-options' => 'لطفا قبل از خرید این محصول گزینه هایی را انتخاب کنید'
     ],
 
-
     'checkout' => [
         'cart' => [
             'integrity' => [
                 'missing_fields' =>'نقض یکپارچگی سیستم سبد خرید ، برخی از زمینه های لازم وجود ندارد',
                 'missing_options' =>'نقض یکپارچگی سیستم سبد خرید ، گزینه هایی برای محصول قابل تنظیم وجود ندارد',
                 'missing_links' => 'لینک های قابل بارگیری برای این محصول وجود ندارد',
-                'qty_missing' => 'حداقل یک محصول باید بیش از 1 مقدار داشته باشد.'
+                'qty_missing' => 'حداقل یک محصول باید بیش از 1 مقدار داشته باشد.',
+                'qty_impossible' => 'نمی توان بیش از یکی از این محصولات را به سبد خرید اضافه کرد'
             ],
-
             'create-error' => 'هنگام تهیه نمونه سبد خرید ، با برخی از شماره ها روبرو شد',
             'title' => 'سبد خرید',
             'empty' => 'سبد خرید شما خالی است',
@@ -454,6 +471,7 @@ return [
             'complete' => 'تکمیل',
             'billing-address' => 'آدرس قبض',
             'sign-in' => 'ورود',
+            'company-name' => 'نام شرکت',
             'first-name' => 'نام کوچک',
             'last-name' => 'نام خانوادگی',
             'email' => 'پست الکترونیک',
@@ -486,7 +504,15 @@ return [
             'free' => 'رایگان',
             'coupon-used' => 'کوپن مورد استفاده',
             'applied' => 'کاربردی',
-            'back' => 'بازگشت'
+            'back' => 'بازگشت',
+            'cash-desc' => 'پرداخت نقدی هنگام تحویل',
+            'money-desc' => 'انتقال پول',
+            'paypal-desc' => 'استاندارد پی پال',
+            'free-desc' => 'این یک ارسال رایگان است',
+            'flat-desc' => 'این یک نرخ مسطح است',
+            'password' => 'کلمه عبور',
+            'login-exist-message' => 'شما قبلاً با ما حساب کاربری دارید ، وارد شوید یا به عنوان مهمان ادامه دهید',
+            'enter-coupon-code' => 'شماره کوپن را وارد کنید'
         ],
 
         'total' => [
@@ -498,11 +524,14 @@ return [
             'discount' => 'تخفیف',
             'price' => 'قیمت',
             'disc-amount' => 'مقدار تخفیف',
-            'new-grand-total' => 'New Grand Total',
+            'new-grand-total' => 'کل بزرگ عالی',
             'coupon' => 'کوپن',
             'coupon-applied' => 'کوپن کاربردی',
             'remove-coupon' => 'کوپن را بردارید',
-            'cannot-apply-coupon' => 'کوپن قابل اعمال نیست'
+            'cannot-apply-coupon' => 'کوپن قابل اعمال نیست',
+            'invalid-coupon' => 'کد کوپن نامعتبر است',
+            'success-coupon' => 'کد کوپن با موفقیت اعمال شد',
+            'coupon-apply-issue' => 'کد کوپن نمی تواند اعمال شود'
         ],
 
         'success' => [
@@ -536,7 +565,27 @@ return [
             'grand-total' => 'بزرگ توتال',
             'final-summary' => 'با تشکر از علاقه شما به فروشگاه ما ، شماره حمل و نقل را برای شما ارسال می کنیم',
             'help' => 'در صورت نیاز به هر نوع کمک ، لطفا با ما تماس بگیرید :support_email',
-            'thanks' => 'با تشکر!'
+            'thanks' => 'با تشکر!',
+            'cancel' => [
+                'subject' => 'تأیید سفارش را لغو کنید',
+                'heading' => 'سفارش لغو شد',
+                'dear' => ':customer_name عزیز',
+                'greeting' => ':created_at والمقدم في #:order_id  تم إلغاء الطلب الذي يحمل رقم الطلب',
+                'summary' => 'خلاصه سفارش',
+                'shipping-address' => 'آدرس حمل و نقل',
+                'billing-address' => 'آدرس قبض',
+                'contact' => 'مخاطب',
+                'shipping' => 'روش حمل و نقل',
+                'payment' => 'روش پرداخت',
+                'subtotal' => 'فرعی',
+                'shipping-handling' => 'حمل و نقل و جابجایی',
+                'tax' => 'مالیات',
+                'discount' => 'تخفیف',
+                'grand-total' => 'بزرگ توتال',
+                'final-summary' => 'با تشکر از علاقه شما به فروشگاه ما',
+                'help' => ':support_email در صورت نیاز به هر نوع کمک ، لطفا با ما تماس بگیرید',
+                'thanks' => '!با تشکر',
+            ]
         ],
 
         'invoice' => [
@@ -557,30 +606,68 @@ return [
         ],
 
         'refund' => [
-            'heading' => 'Your Refund #:refund_id for Order #:order_id',
-            'subject' => 'Refund for your order #:order_id',
+            'heading' => '#:order_id للطلب #:refund_id أموالك المستردة',
+            'subject' => '#:order_id رد أموال لطلبك',
             'summary' => 'خلاصه بازپرداخت',
             'adjustment-refund' => 'بازپرداخت تنظیم',
             'adjustment-fee' => 'هزینه تنظیم'
         ],
 
         'forget-password' => [
-            'dear' => 'عزیز :name',
+            'subject' => 'بازنشانی گذرواژه مشتری',
+            'dear' => ':name عزیز',
             'info' => 'شما این ایمیل را دریافت می کنید زیرا ما درخواست بازنشانی رمزعبور را برای حساب شما دریافت کردیم',
             'reset-password' => 'بازنشانی گذرواژه',
             'final-summary' => 'اگر درخواست بازنشانی گذرواژه را نکردید ، دیگر نیازی به اقدامات لازم نیست',
-            'thanks' => 'با تشکر!'
+            'thanks' => 'با تشکر'
+        ],
+
+        'customer' => [
+            'new' => [
+                'dear' => ':customer_name عزیز',
+                'username-email' => 'نام کاربری / ایمیل',
+                'subject' => 'ثبت نام مشتری جدید',
+                'password' => 'ثبت نام مشتری جدیدثبت نام مشتری جدید',
+                'summary' => 'حساب شما ایجاد شده است
+                                 جزئیات حساب شما در زیر آمده است',
+                'thanks' => 'با تشکر'
+            ],
+
+            'registration' => [
+                'subject' => 'ثبت نام مشتری جدید',
+                'customer-registration' => 'ثبت نام مشتری با موفقیت انجام شد',
+                'dear' => ':customer_name عزیز',
+                'greeting' => '! خوش آمديد و از شما ممنونم كه با ما ثبت نام كرديد',
+                'summary' => 'اکنون حساب شما با موفقیت ایجاد شده است و می توانید با استفاده از آدرس ایمیل و اعتبار نامه خود وارد شوید. پس از ورود به سیستم ، می توانید به سایر خدمات از جمله بررسی سفارشات گذشته ، لیست های آرزو و ویرایش اطلاعات حساب خود دسترسی پیدا کنید.',
+                'thanks' => 'با تشکر',
+            ],
+
+            'verification' => [
+                'heading' => ' - تأكيد بواسطة البريد الالكتروني' . config('app.name') ,
+                'subject' => 'نامه تأیید صحت',
+                'verify' => 'حساب کاربری خودراتایید کنید',
+                'summary' => 'این نامه برای تأیید اینکه آدرس ایمیلی که وارد کردید مال شماست.
+                                 برای تأیید حساب خود ، لطفاً روی دکمه تأیید حساب خود در زیر کلیک کنید'
+            ],
+
+            'subscription' => [
+                'subject' => 'ایمیل اشتراک',
+                'greeting' => ' الاشتراك عبر البريد الإلكتروني' . config('app.name'). ' مرحبًا بك في',
+                'unsubscribe' => 'لغو اشتراک',
+                'summary' => 'متشکرم که مرا وارد صندوق ورودی کردید. مدتی است که شما نامه' . config('app.name').'  را خوانده اید ، و ما نمی خواهیم صندوق ورودی شما را تحت الشعاع قرار دهیم. اگر هنوز نمی خواهید دریافت کنید
+                                 آخرین اخبار بازاریابی ایمیل و سپس برای دیدن دکمه زیر کلیک کنید.'
+            ]
         ]
     ],
 
     'webkul' => [
-        'copy-right' => '© کپی رایت: نرم افزار Webkul سال ، کلیه حقوق محفوظ است',
+        'copy-right' => ' جميع الحقوق محفوظة,:year Webkul Software حقوق الطبع والنشر  ©',
     ],
 
     'response' => [
-        'create-success' => ':name با موفقیت ایجاد شد',
-        'update-success' => ':name با موفقیت به روز شد.',
-        'delete-success' => ':name با موفقیت حذف شد',
-        'submit-success' => ':name با موفقیت ثبت شد.'
+        'create-success' => 'تم إنشاء name: بنجاح',
+        'update-success' => 'تم تحديث name: بنجاح',
+        'delete-success' => 'تم حذف :name بنجاح',
+        'submit-success' => 'تم تقديم name: بنجاح'
     ],
 ];

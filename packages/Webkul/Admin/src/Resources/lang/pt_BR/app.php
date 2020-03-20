@@ -1,5 +1,38 @@
 <?php
+
 return [
+    'save' => 'Salve ',
+    'create' => 'Crio',
+    'update' => 'Atualizar',
+    'delete' => 'Excluir',
+    'failed' => 'Falhou',
+    'store' => 'Loja',
+    'image' => 'Imagem',
+    'no result' => 'Nenhum resultado',
+    'product' => 'produtos',
+    'attribute' => 'Atributo',
+    'actions' => 'Ações',
+    'id' => 'ID',
+    'action' => 'açao',
+    'yes' => 'sim',
+    'no' => 'Não',
+    'true' => 'Verdade',
+    'false' => 'Falso',
+    'apply' => 'Aplique',
+    'action' => 'Açao',
+    'label' => 'Rótulo',
+    'name' => 'Nome',
+    'title' => 'Título',
+    'code' => 'Código',
+    'type' => 'Tipo',
+    'required' => 'Requeridos',
+    'unique' => 'Único',
+    'locale-based' => 'Com base na localidade',
+    'channel-based' => 'Baseado em canal',
+    'status' => 'Status',
+    'select-option' => 'Selecionar opção',
+    'category' => 'Categoria',
+
     'common' => [
         'no-result-found' => 'Não conseguimos encontrar nenhum registro.',
         'country' => 'Pais',
@@ -7,15 +40,17 @@ return [
         'true' => 'Verdadeiro',
         'false' => 'Falso'
     ],
+
     'layouts' => [
         'my-account' => 'Minha Conta',
         'logout' => 'Sair',
         'visit-shop' => 'Visitar Loja',
-        'dashboard' => 'Dashboard',
+        'dashboard' => 'painel de controle',
         'sales' => 'Vendas',
         'orders' => 'Pedido',
         'shipments' => 'Envíos',
         'invoices' => 'Faturas',
+        'refunds' => 'Reembolsos',
         'catalog' => 'Catálogo',
         'products' => 'Produtos',
         'categories' => 'Categorias',
@@ -39,8 +74,10 @@ return [
         'tax-categories' => 'Categorias de Impostos',
         'tax-rates' => 'Impostos de Impostos',
         'promotion' => 'Promoções',
-        'discount' => 'Desconto'
+        'discount' => 'Desconto',
+        'cms' => 'CMS'
     ],
+
     'acl' => [
         'dashboard' => 'Dashboard',
         'sales' => 'Vendas',
@@ -56,7 +93,7 @@ return [
         'groups' => 'Grupos',
         'reviews' => 'Avaliações',
         'newsletter-subscriptions' => 'Inscrições de Newsletter',
-        'configure' => 'Configure',
+        'configure' => 'Configurar',
         'settings' => 'Configurações',
         'locales' => 'Idiomas',
         'currencies' => 'Moedas',
@@ -73,8 +110,10 @@ return [
         'create' => 'Add',
         'delete' => 'Delete',
         'promotions' => 'Promoções',
-        'cart-rules' => 'Regras do Carrinho'
+        'cart-rules' => 'Regras do Carrinho',
+        'catalog-rules' => 'Regras do Catálogo',
     ],
+
     'dashboard' => [
         'title' => 'Dashboard',
         'from' => 'De',
@@ -96,18 +135,22 @@ return [
         'stock-threshold' => 'Limite de Estoque',
         'qty-left' => ':qty Restante',
     ],
+
     'datagrid' => [
         'mass-ops' => [
             'method-error' => 'Erro! Método errado detectado, por favor, verifique a configuração de ação em massa',
             'delete-success' => 'O índice selecionado de :resource foi excluído com sucesso',
             'partial-action' => 'Algumas ações não foram executadas devido a restrições restritas do sistema em :resource',
             'update-success' => 'O índice selecionado :resource foram atualizados com sucesso',
+            'no-resource' => 'O recurso fornecido insuficiente para a ação'
         ],
+
         'id' => 'ID',
         'status' => 'Status',
         'code' => 'Código',
         'admin-name' => 'Nome',
         'name' => 'Nome',
+        'direction' => 'Direção',
         'fullname' => 'Nome Completo',
         'type' => 'Tipo',
         'required' => 'Obrigatório',
@@ -116,10 +159,14 @@ return [
         'per-channel' => 'Por Canal (Loja)',
         'position' => 'Posição',
         'locale' => 'Idioma',
-        'hostname' => 'Hostname',
-        'email' => 'Email',
+        'hostname' => 'nome de anfitrião',
+        'email' => 'O email',
         'group' => 'Grupo',
+        'phone' => 'telefone',
+        'gender' => 'Gênero',
         'title' => 'Título',
+        'layout' => 'Layout',
+        'url-key' => 'URL Chave',
         'comment' => 'Comentário',
         'product-name' => 'Produto',
         'currency-name' => 'Nome da Moéda',
@@ -155,29 +202,30 @@ return [
         'per-cust' => 'Por cliente',
         'usage-throttle' => 'Tempos de uso',
         'for-guest' => 'Para convidados',
-        'order_number' => 'Order Number',
-        'refund-date' => 'Refund Date',
-        'refunded' => 'Refunded',
-        'start' => 'Start',
-        'end' => 'End',
-        'active' => 'Active',
-        'inactive' => 'Inactive',
-        'true' => 'True',
-        'false' => 'False',
-        'approved' => 'Approved',
-        'pending' => 'Pending',
-        'disapproved' => 'Disapproved',
-        'coupon-code' => 'Coupon Code',
-        'times-used' => 'Times Used',
-        'created-date' => 'Created Date',
-        'expiration-date' => 'Expiration Date',
-        'edit' => 'Edit',
-        'delete' => 'Delete',
-        'view' => 'View',
+        'order_number' => 'Número do pedido',
+        'refund-date' => 'Data do reembolso',
+        'refunded' => 'Devolveu',
+        'start' => 'Começar',
+        'end' => 'Fim',
+        'active' => 'Ativo',
+        'inactive' => 'Inativo',
+        'true' => 'Verdade',
+        'false' => 'Falso',
+        'approved' => 'Aprovado',
+        'pending' => 'Pendente',
+        'disapproved' => 'Reprovado',
+        'coupon-code' => 'Código do cupom',
+        'times-used' => 'Vezes Utilizado',
+        'created-date' => 'Data de criação',
+        'expiration-date' => 'Data de validade',
+        'edit' => 'Editar',
+        'delete' => 'Excluir',
+        'view' => 'Visão',
         'rtl' => 'RTL',
         'ltr' => 'LTR',
-        'update-status' => 'Update Status'
+        'update-status' => 'Atualizar o status'
     ],
+
     'account' => [
         'title' => 'Minha Conta',
         'save-btn-title' => 'Salvar',
@@ -189,6 +237,7 @@ return [
         'change-password' => 'Mudar Senha da Conta',
         'current-password' => 'Senha Atual'
     ],
+
     'users' => [
         'forget-password' => [
             'title' => 'Esqueci Minha Senha',
@@ -199,6 +248,7 @@ return [
             'back-link-title' => 'Voltar para Login',
             'submit-btn-title' => 'Link do E-mail para Recuperar Senha'
         ],
+
         'reset-password' => [
             'title' => 'Resetar Senha',
             'email' => 'E-mail Registrado',
@@ -207,6 +257,7 @@ return [
             'back-link-title' => 'Voltar para Login',
             'submit-btn-title' => 'Resetar Senha'
         ],
+
         'roles' => [
             'title' => 'Funções',
             'add-role-title' => 'Add Função',
@@ -220,6 +271,7 @@ return [
             'custom' => 'Personalizado',
             'all' => 'Tudo'
         ],
+
         'users' => [
             'title' => 'Usuário',
             'add-user-title' => 'Add Usuário',
@@ -245,6 +297,7 @@ return [
             'login-error' => 'Por favor, verifique suas credenciais e tente novamente.',
             'activate-warning' => 'Sua conta ainda está para ser ativada, entre em contato com o administrador.'
         ],
+
         'sessions' => [
             'title' => 'Entrar',
             'email' => 'Email',
@@ -254,6 +307,7 @@ return [
             'submit-btn-title' => 'Entrar'
         ]
     ],
+
     'sales' => [
         'orders' => [
             'title' => 'Pedidos',
@@ -268,9 +322,16 @@ return [
             'order-info' => 'Informação do Pedido',
             'order-date' => 'Data do Pedido',
             'order-status' => 'Status do Pedido',
+            'order-status-canceled' => 'Cancelado',
+            'order-status-closed' => 'Fechados',
+            'order-status-fraud' => 'Fraude',
+            'order-status-pending' => 'Pendente',
+            'order-status-pending-payment' => 'Pagamento Pendente',
+            'order-status-processing' => 'Em processamento',
+            'order-status-success' => 'Concluído',
             'channel' => 'Canal (Loja)',
             'customer-name' => 'Nome do Cliente',
-            'email' => 'Email',
+            'email' => 'O email',
             'contact-number' => 'Número de Contato',
             'account-info' => 'Informação da Conta',
             'address' => 'Endereço',
@@ -292,7 +353,7 @@ return [
             'item-invoice' => 'Faturado(s) (:qty_invoiced)',
             'item-shipped' => 'Enviado(s) (:qty_shipped)',
             'item-canceled' => 'Cancelado(s) (:qty_canceled)',
-            'item-refunded' => 'Refunded (:qty_refunded)',
+            'item-refunded' => 'Devolveu (:qty_refunded)',
             'price' => 'Preço',
             'total' => 'Total',
             'subtotal' => 'Subtotal',
@@ -311,6 +372,7 @@ return [
             'refunds' => 'Refunds',
             'refunded' => 'Refunded'
         ],
+
         'invoices' => [
             'title' => 'Faturas',
             'id' => 'Id',
@@ -362,28 +424,30 @@ return [
         ],
 
         'refunds' => [
-            'title' => 'Refunds',
+            'title' => 'Reembolsos',
             'id' => 'Id',
-            'add-title' => 'Create Refund',
-            'save-btn-title' => 'Refund',
-            'order-id' => 'Order Id',
-            'qty-ordered' => 'Qty Ordered',
-            'qty-to-refund' => 'Qty To Refund',
-            'refund-shipping' => 'Refund Shipping',
-            'adjustment-refund' => 'Adjustment Refund',
-            'adjustment-fee' => 'Adjustment Fee',
-            'update-qty' => 'Update Quantities',
-            'invalid-qty' => 'Found invalid quantity for return items.',
-            'refund-limit-error' => 'The most money available to refund is :amount.',
-            'refunded' => 'Refunded',
-            'date' => 'Refund Date',
-            'customer-name' => 'Customer Name',
+            'add-title' => 'Criar reembolso',
+            'save-btn-title' => 'Reembolso',
+            'order-id' => 'Ordem Id',
+            'qty-ordered' => 'Qty Encomendado',
+            'qty-to-refund' => 'Qty To Reembolso',
+            'refund-shipping' => 'Envio de reembolso',
+            'adjustment-refund' => 'Reembolso de ajuste',
+            'adjustment-fee' => 'Taxa de ajuste',
+            'update-qty' => 'Quantidades de atualização',
+            'invalid-qty' => 'Encontramos uma quantidade inválida para reembolsar itens.',
+            'refund-limit-error' => 'O máximo de dinheiro disponível para reembolso :amount.',
+            'refunded' => 'Devolveu',
+            'date' => 'Data do reembolso',
+            'customer-name' => 'nome do cliente',
             'status' => 'Status',
-            'action' => 'Action',
-            'view-title' => 'Refund #:refund_id',
+            'action' => 'Açao',
+            'view-title' => 'Reembolso #:refund_id',
             'invalid-refund-amount-error' => 'Refund amount should be non zero.'
+
         ]
     ],
+
     'catalog' => [
         'products' => [
             'title' => 'Produtos',
@@ -410,28 +474,30 @@ return [
             'price' => 'Preço',
             'weight' => 'Peso',
             'status' => 'Status',
+            'enabled' => 'Ativado',
+            'disabled' => 'Desativado',
             'add-variant-title' => 'Add Variação',
             'variant-already-exist-message' => 'Variante com as mesmas opções de atributo já existe.',
             'add-image-btn-title' => 'Add Imagem',
             'mass-delete-success' => 'Todos os índices de produtos selecionados foram excluídos com sucesso',
             'mass-update-success' => 'Todo o índice selecionado de produtos foi atualizado com sucesso',
-            'downloadable' => 'Downloadable Information',
-            'links' => 'Links',
-            'add-link-btn-title' => 'Add Link',
-            'samples' => 'Samples',
-            'add-sample-btn-title' => 'Add Sample',
-            'downloads' => 'Download Allowed',
-            'file' => 'File',
-            'sample' => 'Sample',
-            'upload-file' => 'Upload File',
-            'url' => 'Url',
-            'sort-order' => 'Sort Order',
-            'browse-file' => 'Browse File',
-            'configurable-error' => 'Por favor, selecione pelo menos um atributo configurável.',
+            'configurable-error' => 'Selecione pelo menos um atributo configurável.',
             'categories' => 'Categorias',
             'images' => 'Imagens',
             'inventories' => 'Os inventários',
             'variations' => 'Variações',
+            'downloadable' => 'Informações para Download',
+            'links' => 'Ligações',
+            'add-link-btn-title' => 'Adicionar Link',
+            'samples' => 'Amostras',
+            'add-sample-btn-title' => 'Adicionar amostra',
+            'downloads' => 'Download permitido',
+            'file' => 'Arquivo',
+            'sample' => 'Amostra',
+            'upload-file' => 'Subir arquivo',
+            'url' => 'Url',
+            'sort-order' => 'Ordem de classificação',
+            'browse-file' => 'Procurar arquivo',
             'product-link' => 'Produtos Vinculados',
             'cross-selling' => 'Venda cruzada',
             'up-selling' => 'Acima de vender',
@@ -439,12 +505,13 @@ return [
             'product-search-hint' => 'Comece a digitar o nome do produto',
             'no-result-found' => 'Produtos não encontrados com o mesmo nome.',
             'searching' => 'Procurando ...',
-            'grouped-products' => 'Grouped Products',
-            'search-products' => 'Search Products',
-            'no-result-found' => 'Products not found with same name.',
-            'bundle-items' => 'Bundle Items',
-            'add-option-btn-title' => 'Add Option',
-            'option-title' => 'Option Title',
+            'grouped-products' => 'Produtos Agrupados',
+            'search-products' => 'procurar produtos',
+            'no-result-found' => 'Produtos não encontrados com o mesmo nome.',
+            'channel' => 'Canais',
+            'bundle-items' => 'Itens do pacote',
+            'add-option-btn-title' => 'Adicionar opção',
+            'option-title' => 'Título da opção',
             'input-type' => 'Input Type',
             'is-required' => 'Is Required',
             'select' => 'Select',
@@ -454,6 +521,7 @@ return [
             'new-option' => 'New Option',
             'is-default' => 'Is Default'
         ],
+
         'attributes' => [
             'title' => 'Atributos',
             'add-title' => 'Add Atributo',
@@ -489,6 +557,7 @@ return [
             'no' => 'Não',
             'value_per_locale' => 'Valor Por Idioma',
             'value_per_channel' => 'Valor Por Canal (Loja)',
+            'value_per_channel' => 'Valor Por Canal (Loja)',
             'is_filterable' => 'Usar na navegação em camadas',
             'is_configurable' => 'Usar para Criar Produtos Configuráveis',
             'admin_name' => 'Admin Nome',
@@ -500,7 +569,11 @@ return [
             'text-swatch' => 'Amostra de texto',
             'swatch' => 'Swatch',
             'image' => 'Imagem',
-            'file' => 'Arquivo'
+            'file' => 'Arquivo',
+            'checkbox' => 'Checkbox',
+            'use_in_flat' => "Criar na tabela plana do produto",
+            'is_comparable' => "O atributo é comparável",
+            'default_null_option' => 'Criar opção vazia padrão',
         ],
         'families' => [
             'title' => 'Famílias',
@@ -531,10 +604,10 @@ return [
             'yes' => 'Sim',
             'no' => 'Não',
             'position' => 'Posição',
-            'display-mode' => 'Display Mode',
-            'products-and-description' => 'Products and Description',
-            'products-only' => 'Products Only',
-            'description-only' => 'Description Only',
+            'display-mode' => 'Modo de exibição',
+            'products-and-description' => 'Produtos e Descrição',
+            'products-only' => 'Apenas produtos',
+            'description-only' => 'Apenas descrição',
             'description-and-images' => 'Descrição e Imagens',
             'description' => 'Descrição',
             'parent-category' => 'Categoria Pai',
@@ -544,8 +617,11 @@ return [
             'meta_description' => 'Meta Descrição',
             'meta_keywords' => 'Meta Keywords',
             'image' => 'Imagem',
+            'filterable-attributes' => 'Atributos filtráveis',
+            'attributes' => 'Atributos',
         ]
     ],
+
     'configuration' => [
         'title' => 'Configuração',
         'save-btn-title' => 'Salvar',
@@ -553,6 +629,7 @@ return [
         'yes' => 'Sim',
         'no' => 'Não',
         'delete' => 'Deletar',
+
         'tax-categories' => [
             'title' => 'Categorias de Imposto',
             'add-title' => 'Add Categorias de Imposto',
@@ -569,6 +646,7 @@ return [
                 'edit-button-title' => 'Editar Categorias de Imposto'
             ]
         ],
+
         'tax-rates' => [
             'title' => 'Taxas de Impostos',
             'add-title' => 'Add Taxas de Imposto',
@@ -590,6 +668,7 @@ return [
             'zip_code' => 'CEP',
             'is_zip' => 'Ativar intervalo de CEP'
         ],
+
         'sales' => [
             'shipping-method' => [
                 'title' => 'Método de Entregas',
@@ -600,15 +679,18 @@ return [
             ]
         ]
     ],
+
     'settings' => [
         'locales' => [
             'title' => 'Idiomas',
             'add-title' => 'Add Idioma',
             'edit-title' => 'Editar Idioma',
+            'add-title' => 'Add Idioma',
             'save-btn-title' => 'Salvar Idioma',
             'general' => 'Geral',
             'code' => 'Código',
             'name' => 'Nome',
+            'direction' => 'Direção',
             'create-success' => 'Local criado com sucesso.',
             'update-success' => 'Localidade atualizada com sucesso.',
             'delete-success' => 'Locale excluído com sucesso.',
@@ -644,6 +726,8 @@ return [
             'general' => 'Geral',
             'source_currency' => 'Moeda de Origem',
             'target_currency' => 'Moeda Alvo',
+            'rate' => 'Taxa',
+            'exchange-class-not-found' => ':service de taxa de câmbio de serviço não encontrada',
             'rate' => 'Taxa',
             'create-success' => 'Taxa de Câmbio criada com sucesso.',
             'update-success' => 'Taxa de Câmbio atualizada com sucesso.',
@@ -706,8 +790,14 @@ return [
             'create-success' => 'Canal criado com sucesso.',
             'update-success' => 'Canal atualizado com sucesso.',
             'delete-success' => 'Canal excluído com sucesso.',
-            'last-delete-error' => 'Pelo menos um canal é necessário.'
+            'last-delete-error' => 'Pelo menos um canal é necessário.',
+            'seo' => 'Página inicial SEO',
+            'seo-title' => 'Meta título',
+            'seo-description' => 'Meta Descrição',
+            'seo-keywords' => 'Meta palavras-chave',
+
         ],
+
         'sliders' => [
             'title' => 'Sliders',
             'name' => 'Name',
@@ -725,6 +815,7 @@ return [
             'delete-success' => 'Não foi possível excluir o slider',
             'delete-fail' => 'Slider excluído com sucesso'
         ],
+
         'tax-categories' => [
             'title' => 'Categorias de Imposto',
             'add-title' => 'Criar Categoria de Imposto',
@@ -747,6 +838,7 @@ return [
             'atleast-one' => 'Não é possível excluir a última Categoria de Imposto',
             'delete' => 'Categoria de Imposto excluída com sucesso'
         ],
+
         'tax-rates' => [
             'title' => 'Taxas de Impostos',
             'add-title' => 'Criar Taxas de Impostos',
@@ -778,6 +870,7 @@ return [
             'title' => 'Desenvolvimento',
         ]
     ],
+
     'customers' => [
         'groups' =>[
             'add-title' => 'Add Grupo',
@@ -790,12 +883,44 @@ return [
             'is_user_defined' => 'Usuário Definido',
             'yes' => 'Sim'
         ],
-        'note' => [
-            'title' => 'Add Note',
-            'save-note' => 'Save Note',
-            'enter-note' => 'Enter Note',
-            'help-title' => 'Add Note On This Customer'
+
+        'addresses' => [
+            'title' => 'Lista de Endereços de :customer_name',
+            'vat_id' => 'Vat id',
+            'create-title' => 'Criar endereço do cliente',
+            'edit-title' => 'Atualizar endereço do cliente',
+            'title-orders' => 'Lista de pedidos :customer_name ',
+            'address-list' => 'Lista de Endereços',
+            'order-list' => 'Lista de pedidos',
+            'address-id' => 'Endereço ID',
+            'address-1' => 'Endereço 1',
+            'city' => 'Cidade',
+            'state-name' => 'Estado',
+            'country-name' => 'País',
+            'postcode' => 'Código postal',
+            'default-address' => 'Endereço padrão',
+            'yes' => 'sim',
+            'not-approved' => 'Não aprovado',
+            'no' => 'Não',
+            'dash' => '-',
+            'delete' => 'Excluir',
+            'create-btn-title' => 'Adicionar endereço',
+            'save-btn-title' => 'Salvar endereço',
+            'general' => 'Geral',
+            'success-create' => 'Success: Endereço do cliente criado com sucesso.',
+            'success-update' => 'Success: Endereço do cliente atualizado com sucesso.',
+            'success-delete' => 'Success: Endereço do cliente excluído com sucesso.',
+            'success-mass-delete' => 'Success: endereços selecionados excluídos com sucesso.',
+            'error-create' => 'Error: Endereço do cliente não criado.',
         ],
+
+        'note' => [
+            'title' => 'Adicionar nota',
+            'save-note' => 'Salvar nota',
+            'enter-note' => 'Inserir nota',
+            'help-title' => 'Adicionar nota sobre este cliente'
+        ],
+
         'customers' => [
             'add-title' => 'Add Cliente',
             'edit-title' => 'Editar Cliente',
@@ -826,6 +951,7 @@ return [
             'active' => 'Ativo (a)',
             'inactive' => 'Inativo (a)'
         ],
+
         'reviews' => [
             'title' => 'Avaliações',
             'edit-title' => 'Editar Avaliação',
@@ -836,6 +962,7 @@ return [
             'approved' => 'Aprovado',
             'disapproved' => 'Desaprovar'
         ],
+
         'subscribers' => [
             'title' => 'Assinantes de Newletter',
             'title-edit' => 'Editar Assinante',
@@ -848,93 +975,147 @@ return [
             'delete-failed' => 'Erro! Você não pode excluir a inscrição desse usuário',
         ]
     ],
+
     'promotion' => [
-        'catalog-rule' => 'Regras de Catálogo',
-        'cart-rule' => 'Regras do Carrinho',
-        'add-catalog-rule' => 'Adicionar regra de catálogo',
-        'add-cart-rule' => 'Adicionar Regra do Carrinho',
-        'edit-cart-rule' => 'Editar regra do carrinho',
-        'edit-catalog-rule' => 'Editar regra do catálogo',
-        'create-catalog-rule' => 'Criar regra de catálogo',
-        'create-cart-rule' => 'Criar regra de carrinho',
-        'save-btn-title' => 'Criar',
-        'edit-btn-title' => 'Editar',
-        'save' => 'Salve',
-        'select-attr' => 'Selecione o atributo',
-        'select-attr-fam' => 'Selecione a Família de Atributos',
-        'select-cart-attr' => 'Selecione o atributo Carrinho',
-        'general-info' => [
-            'name' => 'Nome da regra',
-            'description' => 'Descrição',
-            'starts-from' => 'Começar',
-            'ends-till' => 'Fim',
-            'channels' => 'Canais',
-            'channels-req' => 'Canais',
-            'cust-groups' => 'Grupos de clientes',
-            'priority' => 'Prioridade',
-            'add-condition' => 'Adicionar condições',
-            'disc_amt' => 'Valor de desconto',
-            'disc_percent' => 'Porcentagem de desconto',
-            'is-coupon' => 'Use cupom',
-            'is-coupon-yes' => 'Sim',
-            'is-coupon-no' => 'Não',
-            'uses-per-cust' => 'Usos por cliente',
-            'all' => 'Todos (a)',
-            'any' => 'Qualquer',
-            'end-other-rules' => 'Acabar com outras regras',
-            'status' => 'Está ativo',
-            'all-conditions-true' => 'Assumindo que todas as condições sejam verdadeiras',
-            'assuming' => 'Assumindo',
-            'any' => 'Qualquer',
-            'all' => 'Todos (a)',
-            'conditions' => 'Condições',
-            'apply' => 'Aplique',
-            'are' => 'está',
-            'true' => 'verdade',
-            'false' => 'falso (a)',
-            'limit' => 'Limite de uso',
-            'specific-coupon' => 'Cupom Específico (Cheque) / Gerado Automaticamente (Desmarque)',
-            'free-shipping' => 'Frete grátis',
-            'is-guest' => 'Para os hóspedes',
-            'disc_qty' => 'Max. Quantidade permitida para ser descontado',
-            'test-mode' => 'Escolha como testar as condições',
-            'labels' => 'Rótulos'
-        ],
-        'status' => [
-            'success' => 'Sucesso! regra criada',
-            'success-coupon' => 'Sucesso! regra criada junto com o cupom',
-            'failed' => 'Erro! não conseguiu criar regra',
-            'update-success' => 'Sucesso! regra atualizada',
-            'update-coupon-success' => 'Sucesso! regra atualizada junto com cupom',
-            'update-failed' => 'Erro! não pode atualizar',
-            'delete-success' => 'Sucesso! regra excluída',
-            'delete-failed' => 'Erro! não pode apagar',
-            'coupon-applied' => 'Cupom Usado',
-            'coupon-failed' => 'O cupom não foi aplicado',
-            'no-coupon' => '* Cupom não aplicável',
-            'coupon-removed' => 'Cupom removido com sucesso',
-            'coupon-remove-failed' => 'Remoção de cupons falhou',
-            'duplicate-coupon' => 'O cupom já existe, por favor tente novamente com um cupom diferente'
-        ],
-        'catalog' => [
+        'cart-rules' => [
+            'title' => 'Regras do carrinho',
+            'add-title' => 'Adicionar regra de carrinho',
+            'edit-title' => 'Editar regra do carrinho',
+            'save-btn-title' => 'Regra Salvar carrinho',
+            'rule-information' => 'Informações sobre regras',
             'name' => 'Nome',
             'description' => 'Descrição',
-            'apply-percent' => 'Aplique como porcentagem',
-            'apply-fixed' => 'Aplicar como quantia fixa',
-            'adjust-to-percent' => 'Ajuste para porcentagem',
-            'adjust-to-value' => 'Ajustar ao valor de desconto',
-            'condition-missing' => 'Por favor, verifique condições, alguns valores podem estar faltando'
+            'status' => 'Status',
+            'is-active' => 'A regra do carrinho está ativa',
+            'channels' => 'Canais',
+            'customer-groups' => 'Grupos de Clientes',
+            'coupon-type' => 'Tipo de cupom',
+            'no-coupon' => 'Sem Cupom',
+            'specific-coupon' => 'Cupom específico',
+            'auto-generate-coupon' => 'Gerar cupom automaticamente',
+            'no' => 'Não',
+            'yes' => 'sim',
+            'coupon-code' => 'Código do cupom',
+            'uses-per-coupon' => 'Usos por cupom',
+            'uses-per-customer' => 'Usos por cliente',
+            'uses-per-customer-control-info' => 'Será usado apenas para clientes logados.',
+            'from' => 'A partir de',
+            'to' => 'Para',
+            'priority' => 'Prioridade',
+            'conditions' => 'Condições',
+            'condition-type' => 'Tipo de condição',
+            'all-conditions-true' => 'Todas as condições são verdadeiras',
+            'any-condition-true' => 'Qualquer condição é verdadeira',
+            'add-condition' => 'Adicionar Condição',
+            'choose-condition-to-add' => 'Escolha uma condição para adicionar',
+            'cart-attribute' => 'Atributo do carrinho',
+            'subtotal' => 'Subtotal',
+            'total-items-qty' => 'Quantidade total de itens',
+            'total-weight' => 'Peso total',
+            'payment-method' => 'Forma de pagamento',
+            'shipping-method' => 'método de envio',
+            'shipping-postcode' => 'CEP / código postal',
+            'shipping-state' => 'Estado de envio',
+            'shipping-country' => 'País de envio',
+            'cart-item-attribute' => 'Atributo do item do carrinho',
+            'price-in-cart' => 'Preço no carrinho',
+            'qty-in-cart' => 'Quantidade no carrinho',
+            'product-attribute' => 'Atributo do produto',
+            'attribute-name-children-only' => ':attribute_name (somente filhos)',
+            'attribute-name-parent-only' => ':attribute_name (somente pai)',
+            'is-equal-to' => 'É igual a',
+            'is-not-equal-to' => 'Não é igual a',
+            'equals-or-greater-than' => 'Igual ou superior a',
+            'equals-or-less-than' => 'Igual ou menor que',
+            'greater-than' => 'Maior que',
+            'less-than' => 'Menor que',
+            'contain' => 'Conter',
+            'contains' => 'Contém',
+            'does-not-contain' => 'Não contém',
+            'actions' => 'Ações',
+            'action-type' => 'Tipo de acão',
+            'percentage-product-price' => 'Porcentagem do preço do produto',
+            'fixed-amount' => 'Quantia fixa',
+            'fixed-amount-whole-cart' => 'Montante fixo ao carrinho inteiro',
+            'buy-x-get-y-free' => 'Compre o X Get Y grátis',
+            'discount-amount' => 'Valor do desconto',
+            'discount-quantity' => 'Quantidade máxima permitida para desconto',
+            'discount-step' => 'Comprar X Quantidade',
+            'free-shipping' => 'Envio Grátis',
+            'apply-to-shipping' => 'Aplicar ao envio',
+            'coupon-codes' => 'Códigos de cupom',
+            'coupon-qty' => 'Quantidade do Cupom',
+            'code-length' => 'Comprimento do código',
+            'code-format' => 'Formato do código',
+            'alphanumeric' => 'Alfanumérica',
+            'alphabetical' => 'Alfabética',
+            'numeric' => 'Numérico',
+            'code-prefix' => 'Prefixo do código',
+            'code-suffix' => 'Sufixo de código',
+            'generate' => 'Gerar',
+            'cart-rule-not-defind-error' => 'A regra do carrinho não está definida',
+            'mass-delete-success' => 'Todos os cupons selecionados foram excluídos com sucesso.',
+            'end-other-rules' => 'Terminar outras regras',
+            'children-categories' => 'Categorias (Somente Crianças)',
+            'parent-categories' => 'Categorias (somente pai)',
+            'categories' => 'Categorias',
+            'attribute_family' => 'Família de Atributos'
         ],
-        'cart' => [
-            'buy-atleast' => 'Compre Atleast',
-            'apply-to-shipping' => 'Aplicar ao envio'
+
+        'catalog-rules' => [
+            'title' => 'Regras do Catálogo',
+            'add-title' => 'Adicionar regra de catálogo',
+            'edit-title' => 'Editar regra do catálogo',
+            'save-btn-title' => 'Salvar regra de catálogo',
+            'rule-information' => 'Informações sobre regras',
+            'name' => 'Nome',
+            'description' => 'Descrição',
+            'status' => 'Status',
+            'is-active' => 'A regra do catálogo está ativa',
+            'channels' => 'Canais',
+            'customer-groups' => 'Grupos de Clientes',
+            'no' => 'Não',
+            'yes' => 'sim',
+            'from' => 'A partir de',
+            'to' => 'Para',
+            'priority' => 'Prioridade',
+            'conditions' => 'Condições',
+            'condition-type' => 'Tipo de condição',
+            'all-conditions-true' => 'Todas as condições são verdadeiras',
+            'any-condition-true' => 'Qualquer condição é verdadeira',
+            'add-condition' => 'Adicionar Condição',
+            'choose-condition-to-add' => 'Escolha uma condição para adicionar',
+            'product-attribute' => 'Atributo do produto',
+            'attribute-name-children-only' => ':attribute_name (somente filhos)',
+            'attribute-name-parent-only' => ': attribute_name (somente pai)',
+            'is-equal-to' => 'É igual a',
+            'is-not-equal-to' => 'Não é igual a',
+            'equals-or-greater-than' => 'Igual ou superior a',
+            'equals-or-less-than' => 'Igual ou menor que',
+            'greater-than' => 'Maior que',
+            'less-than' => 'Menor que',
+            'contain' => 'Conter',
+            'contains' => 'Contém',
+            'does-not-contain' => 'Não contém',
+            'actions' => 'Ações',
+            'action-type' => 'Tipo de acão',
+            'percentage-product-price' => 'Porcentagem do preço do produto',
+            'fixed-amount' => 'Quantia fixa',
+            'fixed-amount-whole-cart' => 'Montante fixo ao catálogo inteiro',
+            'buy-x-get-y-free' => 'Compre o X Get Y grátis',
+            'discount-amount' => 'Valor do desconto',
+            'mass-delete-success' => 'Todo o índice selecionado de cupons foi excluído com sucesso.',
+            'end-other-rules' => 'Terminar outras regras',
+            'categories' => 'Categorias',
+            'attribute_family' => 'Família de Atributos'
         ]
     ],
 
     'error' => [
         'go-to-home' => 'IR PARA PÁGINA INICIAL',
-        'in-maitainace' => 'In Maintenance',
-        'right-back' => 'Be Right Back',
+        'in-maitainace' => 'Em manutenção',
+        'right-back' => 'Volto logo',
+
         '404' => [
             'page-title' => '404 Página não Encontrada',
             'name' => '404',
@@ -978,12 +1159,48 @@ return [
         'no-records' => 'Nada para exportar',
         'illegal-format' => 'Erro! Este tipo de formato não é suportado ou seu formato ilegal'
     ],
+
+    'cms' => [
+        'pages' => [
+            'general' => 'Geral',
+            'seo' => 'SEO',
+            'pages' => 'Páginas',
+            'title' => 'Páginas',
+            'add-title' => 'Adicionar Página',
+            'content' => 'Conteúdo',
+            'url-key' => 'Chave de URL',
+            'channel' => 'Canais',
+            'locale' => 'Localidades',
+            'create-btn-title' => 'Salvar pagina',
+            'edit-title' => 'Editar Página',
+            'edit-btn-title' => 'Salvar pagina',
+            'create-success' => 'Página criada com sucesso',
+            'create-partial' => 'Algumas das páginas solicitadas já existem',
+            'create-failure' => 'Todas as páginas solicitadas já existem',
+            'update-success' => 'Página atualizada com sucesso',
+            'update-failure' => 'A página não pode ser atualizada',
+            'page-title' => 'Título da página',
+            'layout' => 'Layout',
+            'meta_keywords' => 'Meta Palavras-chave',
+            'meta_description' => 'Meta Descrição',
+            'meta_title' => 'Meta Título',
+            'delete-success' => 'Página CMS excluída com sucesso',
+            'delete-failure' => 'A página do CMS não pode ser excluída',
+            'preview' => 'Pré-visualização',
+            'one-col' => '<div class="mt-10">Use class: <b>"static-container one-column"</b> para um layout de coluna.</div>',
+            'two-col' => '<div class="mt-10">Use class: <b>"static-container two-column"</b> para layout de duas colunas.</div>',
+            'three-col' => '<div class="mt-10">Use class: <b>"static-container three-column"</b> para layout de três colunas.</div>',
+            'helper-classes' => 'Helper Classes'
+        ]
+    ],
+
     'response' => [
         'being-used' => 'Este recurso :name está sendo usado em :source',
         'cannot-delete-default' => 'Não é possível excluir o canal padrão',
         'create-success' => ':name criado com sucesso.',
         'update-success' => ':name atualizaco com sucesso.',
         'delete-success' => ':name excluído com sucesso.',
+        'delete-failed' => 'Erro encontrado ao excluir :name.',
         'last-delete-error' => 'Ao menos um :name é obrigatório.',
         'user-define-error' => 'Não pode excluir o sistema :name',
         'attribute-error' => ':name é usado em produtos configuráveis.',
@@ -995,7 +1212,8 @@ return [
         'create-root-failure' => 'A categoria com nome root já existe',
         'cancel-success' => ':name cancelado com sucesso.',
         'cancel-error' => ':name não pode ser cancelado.',
-        'already-taken' => 'O :name já foi tomada.'
+        'already-taken' => 'O :name já foi tomada.',
+        'order-pending' => 'Não é possível excluir a conta porque alguns pedidos estão em estado pendente ou em processamento.'
     ],
 
     'footer' => [
@@ -1003,9 +1221,29 @@ return [
     ],
 
     'admin' => [
+        'emails' => [
+            'email' => 'O email',
+            'notification_label' => 'Notificações',
+            'notifications' => [
+                'verification' => 'Enviar email de verificação',
+                'registration' => 'Enviar registro E-mail',
+                'customer' => 'Enviar e-mail do cliente',
+                'new-order' => 'Enviar E-mail de Confirmação de Pedido',
+                'new-admin' => 'Enviar email de convite de administrador',
+                'new-invoice' => 'Enviar e-mail de confirmação da fatura',
+                'new-refund' => 'Enviar email de notificação de reembolso',
+                'new-shipment' => 'Enviar email de notificação de remessa',
+                'new-inventory-source' => 'Enviar email de notificação de origem de inventário',
+                'cancel-order' => 'Enviar cancelar E-mail de notificação de pedido',
+            ],
+
+        ],
         'system' => [
             'catalog' => 'Catálogo',
             'products' => 'Produtos',
+            'guest-checkout' => 'Saída do hóspede',
+            'allow-guest-checkout' => 'Permitir saída do hóspede',
+            'allow-guest-checkout-hint' => 'Dica: se ativada, esta opção pode ser configurada para cada produto especificamente.',
             'review' => 'Reveja',
             'allow-guest-review' => 'Permitir comentário de convidado',
             'inventory' => 'Inventário',
@@ -1045,8 +1283,16 @@ return [
             'footer' => 'Rodapé',
             'content' => 'Conteúdo',
             'footer-content' => 'Texto de rodapé',
+            'footer-toggle' => 'Alternar rodapé',
             'locale-options' => 'Opções de unidade',
             'weight-unit' => 'Unidade de peso',
+            'admin-page-limit' => 'Itens padrão por página (administrador)',
+            'design' => 'Projeto',
+            'email-settings'    => 'Email Settings',
+            'email-sender-name' => 'Email Sender Name',
+            'shop-email-from'   => 'Shop Email Address [For sending emails]',
+            'admin-name'    => 'Admin Name',
+            'admin-email' => 'Admin Email',
             'design' => 'Design',
             'admin-logo' => 'Admin Logo',
             'logo-image' => 'Logo Imagem',
@@ -1058,7 +1304,13 @@ return [
             'order-number-prefix' => 'Order Number Prefix',
             'order-number-length' => 'Order Number Length',
             'order-number-suffix' => 'Order Number Suffix',
-            'sandbox' => 'Sandbox'
+            'default' => 'Padrão',
+            'sandbox' => 'Sandbox',
+            'all-channels' => 'Todos',
+            'all-locales' => 'Todos',
+            'sandbox' => 'Sandbox',
+            'invoice-slip-design' => 'Invoice Slip Design',
+            'logo' => 'logo'
         ]
     ]
 ];

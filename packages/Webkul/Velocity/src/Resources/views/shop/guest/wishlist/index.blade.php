@@ -36,7 +36,9 @@
             {!! view_render_event('bagisto.shop.customers.account.guest-customer.view.before') !!}
 
             <div class="row products-collection col-12 ml0">
-                <template v-if="products.length > 0">
+                <shimmer-component v-if="!isProductListLoaded && !isMobile()"></shimmer-component>
+
+                <template v-else-if="isProductListLoaded && products.length > 0">
                     <carousel-component
                         slides-per-page="6"
                         navigation-enabled="hide"
@@ -53,7 +55,7 @@
                     </carousel-component>
                 </template>
 
-                <span v-else>{{ __('customer::app.wishlist.empty') }}</span>
+                <span v-else-if="isProductListLoaded">{{ __('customer::app.wishlist.empty') }}</span>
             </div>
 
             {!! view_render_event('bagisto.shop.customers.account.guest-customer.view.after') !!}
@@ -89,17 +91,19 @@
                     if (items != "") {
                         this.$http
                         .get(`${this.$root.baseUrl}/detailed-products`, {
-                            params: { items }
+                            params: { moveToCart: true, items }
                         })
                         .then(response => {
                             this.isProductListLoaded = true;
                             this.products = response.data.products;
                         })
                         .catch(error => {
+                            this.isProductListLoaded = true;
                             console.log(this.__('error.something_went_wrong'));
                         });
+                    } else {
+                        this.isProductListLoaded = true;
                     }
-
                 },
 
                 'removeProduct': function (productId) {

@@ -75,11 +75,27 @@
                 font-weight: 600;
             }
 
+            .logo {
+                height: 70px;
+                width: 70px;
+            }
+
         </style>
     </head>
 
     <body style="background-image: none;background-color: #fff;">
         <div class="container">
+
+            <div class="header">
+                <div class="image">
+                    <img class="logo" src="{{ Storage::url(core()->getConfigData('sales.orderSettings.invoice_slip_design.logo')) }}"/>
+                </div>
+                <div class="address">
+                    <p>
+                      <b> {{ core()->getConfigData('sales.orderSettings.invoice_slip_design.address') }} </b>
+                    </p>
+                </div>
+            </div>
 
             <div class="invoice-summary">
 
