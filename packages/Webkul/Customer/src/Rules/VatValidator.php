@@ -2,16 +2,6 @@
 
 namespace Webkul\Customer\Rules;
 
-/**
- * Class VatValidator
- *
- * This class is borrowed from:
- *
- * @see     https://raw.githubusercontent.com/danielebarbaro/laravel-vat-eu-validator
- *
- * @package Danielebarbaro\LaravelVatEuValidator
- * @author  Vivek Sharma <viveksh047@webkul.com> @vivek-webkul
- */
 class VatValidator
 {
     /**
@@ -57,13 +47,13 @@ class VatValidator
     /**
      * Validate a VAT number format.
      *
-     * @param string $vatNumber
-     *
+     * @param  string  $vatNumber
      * @return boolean
      */
     public function validate(string $vatNumber): bool
     {
         $vatNumber = $this->vatCleaner($vatNumber);
+
         list($country, $number) = $this->splitVat($vatNumber);
 
         if (! isset(self::$pattern_expression[$country])) {
@@ -74,19 +64,18 @@ class VatValidator
     }
 
     /**
-     * @param string $vatNumber
-     *
+     * @param  string  $vatNumber
      * @return string
      */
     private function vatCleaner(string $vatNumber): string
     {
         $vatNumber_no_spaces = trim($vatNumber);
+        
         return strtoupper($vatNumber_no_spaces);
     }
 
     /**
-     * @param string $vatNumber
-     *
+     * @param  string  $vatNumber
      * @return array
      */
     private function splitVat(string $vatNumber): array

@@ -3,9 +3,13 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Webkul\Product\Repositories\ProductRepository as Product;
 use Webkul\Product\Helpers\GenerateProduct;
 
+/**
+ * Class GenerateProducts
+ *
+ * @package App\Console\Commands
+ */
 class GenerateProducts extends Command
 {
     /**
@@ -54,12 +58,24 @@ class GenerateProducts extends Command
         if (! is_string($this->argument('value')) || ! is_numeric($this->argument('quantity'))) {
             $this->info('Illegal parameters or value of parameters are passed');
         } else {
-            if (strtolower($this->argument('value')) == 'product'  || strtolower($this->argument('value')) == 'products') {
-                $quantity = intval($this->argument('quantity'));
+            if (strtolower($this->argument('value')) == 'product' || strtolower($this->argument('value')) == 'products') {
+                $quantity = (int)$this->argument('quantity');
 
+                // @see https://laravel.com/docs/6.x/artisan#writing-output
+                // @see https://symfony.com/doc/current/components/console/helpers/progressbar.html
+                $bar = $this->output->createProgressBar($quantity);
+
+                $this->line("Generating $quantity {$this->argument('value')}.");
+
+                $bar->start();
+
+                $generatedProducts = 0;
+                $this->generateProduct->generateDemoBrand();
                 while ($quantity > 0) {
                     try {
                         $result = $this->generateProduct->create();
+                        $generatedProducts++;
+                        $bar->advance();
                     } catch (\Exception $e) {
                         report($e);
                         continue;
@@ -68,10 +84,13 @@ class GenerateProducts extends Command
                     $quantity--;
                 }
 
-                if ($result)
-                    $this->info('Product(s) created successfully.');
-                else
+
+                if ($result) {
+                    $bar->finish();
+                    $this->info("\n$generatedProducts Product(s) created successfully.");
+                } else {
                     $this->info('Product(s) cannot be created successfully.');
+                }
             } else {
                 $this->line('Sorry, this generate option is invalid.');
             }

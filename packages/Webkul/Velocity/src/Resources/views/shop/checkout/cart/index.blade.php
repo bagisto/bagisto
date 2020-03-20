@@ -75,7 +75,7 @@
                                                     alt="{{ $product->name }}">
                                             </a>
 
-                                            <div class="product-details-content col-6">
+                                            <div class="product-details-content col-7 pr0">
                                                 <div class="row item-title no-margin">
                                                     <a
                                                         href="{{ route('shop.productOrCategory.index', $product->url_key) }}"
@@ -103,23 +103,17 @@
                                                     @include ('shop::products.price', ['product' => $product])
                                                 </div>
 
+                                                @php
+                                                    $moveToWishlist = trans('shop::app.checkout.cart.move-to-wishlist');
+                                                @endphp
+
                                                 <div class="no-padding col-12 cursor-pointer fs16">
                                                     @auth('customer')
                                                         @if ($item->parent_id != 'null' ||$item->parent_id != null)
-                                                            <a
-                                                                class="unset"
-                                                                href="{{ route('shop.movetowishlist', $item->id) }}"
-                                                                onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">
-
-                                                                <wishlist-component
-                                                                    active="false"
-                                                                    add-class="align-vertical-top">
-                                                                </wishlist-component>
-
-                                                                <span class="align-vertical-top">
-                                                                    {{ __('shop::app.checkout.cart.move-to-wishlist') }}
-                                                                </span>
-                                                            </a>
+                                                            @include('shop::products.wishlist', [
+                                                                'route' => route('shop.movetowishlist', $item->id),
+                                                                'text' => "<span class='align-vertical-super'>$moveToWishlist</span>"
+                                                            ])
                                                         @else
                                                             <a
                                                                 class="unset"
@@ -138,6 +132,13 @@
                                                         @endif
                                                     @endauth
 
+                                                    @guest('customer')
+                                                        @include('shop::products.wishlist')
+                                                        <span class="align-vertical-top">
+                                                            {{ __('shop::app.checkout.cart.move-to-wishlist') }}
+                                                        </span>
+                                                    @endguest
+
                                                     <a
                                                         class="unset
                                                             @auth('customer')
@@ -153,7 +154,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="product-quantity col-3 no-padding">
+                                            <div class="product-quantity col-2 no-padding">
                                                 <quantity-changer
                                                     :control-name="'qty[{{$item->id}}]'"
                                                     quantity="{{ $item->quantity }}">
@@ -203,7 +204,7 @@
                                                 </div>
 
                                                 <div class="row col-12 remove-padding-margin actions">
-                                                    <div class="product-quantity col-4 no-padding">
+                                                    <div class="product-quantity col-lg-4 col-6 no-padding">
                                                         <quantity-changer
                                                             :control-name="'qty[{{$item->id}}]'"
                                                             quantity="{{ $item->quantity }}">
@@ -247,18 +248,18 @@
                 {!! view_render_event('bagisto.shop.checkout.cart.summary.after', ['cart' => $cart]) !!}
 
                     @if ($cart)
-                        <div class="col-lg-4 col-md-12 offset-2 row order-summary-container">
+                        <div class="col-lg-4 col-md-12 offset-lg-2 row order-summary-container">
                             @include('shop::checkout.total.summary', ['cart' => $cart])
 
                             <coupon-component></coupon-component>
                         </div>
                     @else
-                        <div class="fs16 col-12">
+                        <div class="fs16 col-12 empty-cart-message">
                             {{ __('shop::app.checkout.cart.empty') }}
                         </div>
 
                         <a
-                            class="fs16 mt15 col-12 remove-decoration"
+                            class="fs16 mt15 col-12 remove-decoration continue-shopping"
                             href="{{ route('shop.home.index') }}">
 
                             <button type="button" class="theme-btn remove-decoration">

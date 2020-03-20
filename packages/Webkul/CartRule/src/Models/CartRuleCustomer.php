@@ -9,5 +9,9 @@ class CartRuleCustomer extends Model implements CartRuleCustomerContract
 {
     public $timestamps = false;
     
-    protected $fillable = ['times_used', 'cart_rule_id', 'customer_id'];
+    protected $fillable = [
+        'times_used',
+        'cart_rule_id',
+        'customer_id',
+    ];
 }

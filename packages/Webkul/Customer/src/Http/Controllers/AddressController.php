@@ -8,13 +8,6 @@ use Webkul\Customer\Repositories\CustomerAddressRepository;
 use Webkul\Customer\Rules\VatIdRule;
 use Auth;
 
-/**
- * Customer controlller for the customer basically for the tasks of customers which will
- * be done after customer authenticastion.
- *
- * @author    Prashant Singh <prashant.singh852@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class AddressController extends Controller
 {
     /**
@@ -27,12 +20,16 @@ class AddressController extends Controller
     /**
      * CustomerAddressRepository object
      *
-     * @param \Webkul\Customer\Repositories\CustomerAddressRepository $customerAddressRepository
-     *
-     * @var Object
+     * @var \Webkul\Customer\Repositories\CustomerAddressRepository
      */
     protected $customerAddressRepository;
 
+    /**
+     * Create a new controller instance.
+     *
+     * @param  \Webkul\Customer\Repositories\CustomerAddressRepository  $customerAddressRepository
+     * @return void
+     */
     public function __construct(CustomerAddressRepository $customerAddressRepository)
     {
         $this->middleware('customer');
@@ -126,17 +123,16 @@ class AddressController extends Controller
             abort(404);
         }
 
-        return view($this->_config['view'], array_merge(
-            compact('address'),
-            ['defaultCountry' => config('app.default_country')]
-        ));
+        return view($this->_config['view'], array_merge(compact('address'), [
+            'defaultCountry' => config('app.default_country')
+        ]));
     }
 
     /**
-     * Edit's the premade resource of customer called
-     * Address.
+     * Edit's the premade resource of customer called Address.
      *
-     * @return redirect
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
     public function update($id)
     {
@@ -175,15 +171,16 @@ class AddressController extends Controller
     }
 
     /**
-     * To change the default address or make the default address, by default when first address is
-     * created will be the default address
+     * To change the default address or make the default address,
+     * by default when first address is created will be the default address
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function makeDefault($id)
     {
-        if ($default = $this->customer->default_address)
+        if ($default = $this->customer->default_address) {
             $this->customerAddressRepository->find($default->id)->update(['default_address' => 0]);
+        }
 
         if ($address = $this->customerAddressRepository->find($id)) {
             $address->update(['default_address' => 1]);
@@ -197,9 +194,8 @@ class AddressController extends Controller
     /**
      * Delete address of the current customer
      *
-     * @param integer $id
-     *
-     * @return response mixed
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
@@ -208,8 +204,9 @@ class AddressController extends Controller
             'customer_id' => auth()->guard('customer')->user()->id,
         ]);
 
-        if (! $address)
+        if (! $address) {
             abort(404);
+        }
 
         $this->customerAddressRepository->delete($id);
 

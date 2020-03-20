@@ -5,12 +5,6 @@ namespace Webkul\Core\Repositories;
 use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Facades\Storage;
 
-/**
- * Core Config Reposotory
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class CoreConfigRepository extends Repository
 {
     /**
@@ -24,8 +18,8 @@ class CoreConfigRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @return mixed
+     * @param  array  $data
+     * @return \Webkul\Core\Contracts\CoreConfig
      */
     public function create(array $data)
     {
@@ -85,11 +79,11 @@ class CoreConfigRepository extends Repository
 
                 if (! count($coreConfigValue)) {
                     $this->model->create([
-                            'code' => $fieldName,
-                            'value' => $value,
-                            'locale_code' => $localeBased ? $locale : null,
-                            'channel_code' => $channelBased ? $channel : null
-                        ]);
+                        'code'         => $fieldName,
+                        'value'        => $value,
+                        'locale_code'  => $localeBased ? $locale : null,
+                        'channel_code' => $channelBased ? $channel : null,
+                    ]);
                 } else {
                     foreach ($coreConfigValue as $coreConfig) {
                         Storage::delete($coreConfig['value']);
@@ -98,11 +92,11 @@ class CoreConfigRepository extends Repository
                             $this->model->destroy($coreConfig['id']);
                         } else {
                             $coreConfig->update([
-                                    'code' => $fieldName,
-                                    'value' => $value,
-                                    'locale_code' => $localeBased ? $locale : null,
-                                    'channel_code' => $channelBased ? $channel : null
-                                ]);
+                                'code'         => $fieldName,
+                                'value'        => $value,
+                                'locale_code'  => $localeBased ? $locale : null,
+                                'channel_code' => $channelBased ? $channel : null,
+                            ]);
                         }
                     }
                 }
@@ -111,12 +105,13 @@ class CoreConfigRepository extends Repository
     }
 
     /**
-     * @param array  $formData
-     * @param string $method
+     * @param  array  $formData
+     * @param  string  $method
      * @return array
      */
     public function recuressiveArray(array $formData, $method) {
         static $data = [];
+        
         static $recuressiveArrayData = [];
 
         foreach ($formData as $form => $formValue) {
@@ -127,7 +122,7 @@ class CoreConfigRepository extends Repository
                 
                 if ($dim > 1) {
                     $this->recuressiveArray($formValue, $value);
-                } else if ($dim == 1) {
+                } elseif ($dim == 1) {
                     $data[$value] = $formValue;
                 }
             }
@@ -149,9 +144,10 @@ class CoreConfigRepository extends Repository
     }
 
     /**
-     * return dimension of array
-     * @param array  $array
-     * @return integer
+     * Return dimension of array
+     * 
+     * @param  array  $array
+     * @return int
     */
     public function countDim($array)
     {

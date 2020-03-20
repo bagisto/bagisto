@@ -120,16 +120,6 @@ return [
             'verified' => 'Your account has been verified, try to login now.',
             'verify-failed' => 'We cannot verify your mail account.',
             'dont-have-account' => 'You do not have account with us.',
-            'success' => 'Account Created Successfully',
-            'success-verify' => 'Account Created Successfully, an e-mail has been sent for verification.',
-            'success-verify-email-unsent' => 'Account created successfully, but verification e-mail unsent',
-            'failed' => 'Error! Cannot Create Your Account, Try Again Later',
-            'already-verified' => 'Your Account is already verified Or Please Try Sending A New Verification Email Again',
-            'verification-not-sent' => 'Error! Problem In Sending Verification Email, Try Again Later',
-            'verification-sent' => 'Verification Email Sent',
-            'verified' => 'Your Account Has Been Verified, Try To Login Now',
-            'verify-failed' => 'We Cannot Verify Your Mail Account',
-            'dont-have-account' => 'You Do Not Have Account With Us',
             'customer-registration' => 'Customer Registered Successfully'
         ],
 
@@ -267,7 +257,14 @@ return [
                     'date' => 'Date',
                     'status' => 'Status',
                     'total' => 'Total',
-                    'order_number' => 'Order Number'
+                    'order_number' => 'Order Number',
+                    'processing' => 'Processing',
+                    'completed' => 'Completed',
+                    'canceled' => 'Canceled',
+                    'closed' => 'Closed',
+                    'pending' => 'Pending',
+                    'pending-payment' => 'Pending Payment',
+                    'fraud' => 'Fraud'
                 ],
 
                 'view' => [

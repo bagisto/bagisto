@@ -11,7 +11,7 @@ class CategoryObserver
     /**
      * Handle the Category "deleted" event.
      *
-     * @param  Category $category
+     * @param  \Webkul\Category\Contracts\Category  $category
      * @return void
      */
     public function deleted($category)
@@ -22,7 +22,7 @@ class CategoryObserver
     /**
      * Handle the Category "saved" event.
      *
-     * @param Category $category
+     * @param  \Webkul\Category\Contracts\Category  $category
      */
     public function saved($category)
     {

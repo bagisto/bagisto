@@ -6,18 +6,12 @@ use Illuminate\Support\Facades\Event;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\API\Http\Resources\Customer\Customer as CustomerResource;
 
-/**
- * Session controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class SessionController extends Controller
 {
     /**
      * Contains current guard
      *
-     * @var array
+     * @var string
      */
     protected $guard;
 
@@ -31,7 +25,7 @@ class SessionController extends Controller
     /**
      * Controller instance
      *
-     * @param Webkul\Customer\Repositories\CustomerRepository $customerRepository
+     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
      */
     public function __construct(CustomerRepository $customerRepository)
     {
@@ -49,13 +43,13 @@ class SessionController extends Controller
     /**
      * Method to store user's sign up form data to DB.
      *
-     * @return Mixed
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
         request()->validate([
-            'email' => 'required|email',
-            'password' => 'required'
+            'email'    => 'required|email',
+            'password' => 'required',
         ]);
 
         $jwtToken = null;
@@ -71,9 +65,9 @@ class SessionController extends Controller
         $customer = auth($this->guard)->user();
 
         return response()->json([
-            'token' => $jwtToken,
+            'token'   => $jwtToken,
             'message' => 'Logged in successfully.',
-            'data' => new CustomerResource($customer)
+            'data'    => new CustomerResource($customer),
         ]);
     }
 
@@ -87,7 +81,7 @@ class SessionController extends Controller
         $customer = auth($this->guard)->user();
 
         return response()->json([
-            'data' => new CustomerResource($customer)
+            'data' => new CustomerResource($customer),
         ]);
     }
 
@@ -101,12 +95,12 @@ class SessionController extends Controller
         $customer = auth($this->guard)->user();
 
         $this->validate(request(), [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'gender' => 'required',
+            'first_name'    => 'required',
+            'last_name'     => 'required',
+            'gender'        => 'required',
             'date_of_birth' => 'nullable|date|before:today',
-            'email' => 'email|unique:customers,email,' . $customer->id,
-            'password' => 'confirmed|min:6'
+            'email'         => 'email|unique:customers,email,' . $customer->id,
+            'password'      => 'confirmed|min:6',
         ]);
 
         $data = request()->all();
@@ -124,9 +118,9 @@ class SessionController extends Controller
         $this->customerRepository->update($data, $customer->id);
 
         return response()->json([
-                'message' => 'Your account has been created successfully.',
-                'data' => new CustomerResource($this->customerRepository->find($customer->id))
-            ]);
+            'message' => 'Your account has been created successfully.',
+            'data'    => new CustomerResource($this->customerRepository->find($customer->id)),
+        ]);
     }
 
     /**

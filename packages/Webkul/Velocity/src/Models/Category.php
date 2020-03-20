@@ -10,5 +10,10 @@ class Category extends Model implements CategoryContract
     
     protected $table = 'velocity_category';
 
-    protected $fillable = ['category_id', 'icon', 'tooltip', 'status'];
+    protected $fillable = [
+        'category_id',
+        'icon',
+        'tooltip',
+        'status',
+    ];
 }

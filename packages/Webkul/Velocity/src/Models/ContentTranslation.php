@@ -12,7 +12,16 @@ class ContentTranslation extends Model implements ContentTranslationContract
 
     public $timestamps = false;
 
-    protected $fillable = ['title', 'custom_title', 'custom_heading', 'page_link', 'link_target', 'catalog_type', 'products', 'description'];
+    protected $fillable = [
+        'title',
+        'custom_title',
+        'custom_heading',
+        'page_link',
+        'link_target',
+        'catalog_type',
+        'products',
+        'description',
+    ];
 
     public function content()
     {

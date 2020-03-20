@@ -5,12 +5,6 @@ namespace Webkul\Core\Http\Controllers;
 use Illuminate\Support\Facades\Event;
 use Webkul\Core\Repositories\CurrencyRepository;
 
-/**
- * Currency controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class CurrencyController extends Controller
 {
     /**
@@ -23,14 +17,14 @@ class CurrencyController extends Controller
     /**
      * CurrencyRepository object
      *
-     * @var array
+     * @var \Webkul\Core\Repositories\CurrencyRepository
      */
     protected $currencyRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\CurrencyRepository $currencyRepository
+     * @param  \Webkul\Core\Repositories\CurrencyRepository  $currencyRepository
      * @return void
      */
     public function __construct(CurrencyRepository $currencyRepository)
@@ -69,7 +63,7 @@ class CurrencyController extends Controller
     {
         $this->validate(request(), [
             'code' => 'required|min:3|max:3|unique:currencies,code',
-            'name' => 'required'
+            'name' => 'required',
         ]);
 
         Event::dispatch('core.currency.create.before');
@@ -106,7 +100,7 @@ class CurrencyController extends Controller
     {
         $this->validate(request(), [
             'code' => ['required', 'unique:currencies,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
-            'name' => 'required'
+            'name' => 'required',
         ]);
 
         Event::dispatch('core.currency.update.before', $id);
@@ -155,9 +149,10 @@ class CurrencyController extends Controller
     /**
      * Remove the specified resources from database
      *
-     * @return response \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
-    public function massDestroy() {
+    public function massDestroy()
+    {
         $suppressFlash = false;
 
         if (request()->isMethod('post')) {

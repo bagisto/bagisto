@@ -14,7 +14,13 @@ class AttributeFamilyTableSeeder extends Seeder
         DB::table('attribute_families')->delete();
 
         DB::table('attribute_families')->insert([
-            ['id' => '1','code' => 'default','name' => 'Default','status' => '0','is_user_defined' => '1']
+            [
+                'id'              => '1',
+                'code'            => 'default',
+                'name'            => 'Default',
+                'status'          => '0',
+                'is_user_defined' => '1',
+            ]
         ]);
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');

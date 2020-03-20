@@ -9,7 +9,14 @@ class ProductBundleOptionProduct extends Model implements ProductBundleOptionPro
 {
     public $timestamps = false;
     
-    protected $fillable = ['qty', 'is_user_defined', 'sort_order', 'is_default', 'product_bundle_option_id', 'product_id'];
+    protected $fillable = [
+        'qty',
+        'is_user_defined',
+        'sort_order',
+        'is_default',
+        'product_bundle_option_id',
+        'product_id',
+    ];
 
     /**
      * Get the bundle option that owns this resource.

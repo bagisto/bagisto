@@ -16,7 +16,10 @@ class Slider extends Model implements SliderContract
     protected $table = 'sliders';
 
     protected $fillable = [
-        'title', 'path', 'content', 'channel_id'
+        'title',
+        'path',
+        'content',
+        'channel_id',
     ];
 
     /**
@@ -24,8 +27,9 @@ class Slider extends Model implements SliderContract
      */
     public function image_url()
     {
-        if (! $this->path)
+        if (! $this->path) {
             return;
+        }
 
         return Storage::url($this->path);
     }

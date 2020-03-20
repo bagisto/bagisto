@@ -11,6 +11,7 @@ $factory->define(ProductDownloadableLink::class, function (Faker $faker) {
     $now = date("Y-m-d H:i:s");
     $filename = 'ProductImageExampleForUpload.jpg';
     $filepath = '/tests/_data/';
+    
     return [
         'url'        => '',
         'file'       => $filepath . $filename,

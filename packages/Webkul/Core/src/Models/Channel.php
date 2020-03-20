@@ -10,7 +10,19 @@ use Webkul\Core\Contracts\Channel as ChannelContract;
 
 class Channel extends Model implements ChannelContract
 {
-    protected $fillable = ['code', 'name', 'description', 'theme', 'home_page_content', 'footer_content', 'hostname', 'default_locale_id', 'base_currency_id', 'root_category_id', 'home_seo'];
+    protected $fillable = [
+        'code',
+        'name',
+        'description',
+        'theme',
+        'home_page_content',
+        'footer_content',
+        'hostname',
+        'default_locale_id',
+        'base_currency_id',
+        'root_category_id',
+        'home_seo',
+    ];
 
     /**
      * Get the channel locales.
@@ -44,9 +56,6 @@ class Channel extends Model implements ChannelContract
         return $this->belongsToMany(InventorySourceProxy::modelClass(), 'channel_inventory_sources');
     }
 
-
-    // protected $with = ['base_currency'];
-
     /**
      * Get the base currency
      */
@@ -68,8 +77,9 @@ class Channel extends Model implements ChannelContract
      */
     public function logo_url()
     {
-        if (! $this->logo)
+        if (! $this->logo) {
             return;
+        }
 
         return Storage::url($this->logo);
     }
@@ -87,8 +97,9 @@ class Channel extends Model implements ChannelContract
      */
     public function favicon_url()
     {
-        if (! $this->favicon)
+        if (! $this->favicon) {
             return;
+        }
 
         return Storage::url($this->favicon);
     }

@@ -9,5 +9,13 @@ class CatalogRuleProductPrice extends Model implements CatalogRuleProductPriceCo
 {
     public $timestamps = false;
 
-    protected $fillable = ['price', 'rule_date', 'starts_from', 'ends_till', 'catalog_rule_id', 'channel_id', 'customer_group_id'];
+    protected $fillable = [
+        'price',
+        'rule_date',
+        'starts_from',
+        'ends_till',
+        'catalog_rule_id',
+        'channel_id',
+        'customer_group_id',
+    ];
 }

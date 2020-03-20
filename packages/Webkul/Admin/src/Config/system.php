@@ -31,6 +31,37 @@ return [
             ],
         ],
     ], [
+        'key'    => 'general.general.email_settings',
+        'name'   => 'admin::app.admin.system.email-settings',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'sender_name',
+                'title'         => 'admin::app.admin.system.email-sender-name',
+                'type'          => 'text',
+                'validation'    => 'required|max:50',
+                'channel_based' => true,
+            ],  [
+                'name'          => 'shop_email_from',
+                'title'         => 'admin::app.admin.system.shop-email-from',
+                'type'          => 'text',
+                'validation'    => 'required|email',
+                'channel_based' => true,
+            ],  [
+                'name'          => 'admin_name',
+                'title'         => 'admin::app.admin.system.admin-name',
+                'type'          => 'text',
+                'validation'    => 'required|max:50',
+                'channel_based' => true,
+            ],  [
+                'name'          => 'admin_email',
+                'title'         => 'admin::app.admin.system.admin-email',
+                'type'          => 'text',
+                'validation'    => 'required|email',
+                'channel_based' => true,
+            ],
+        ],
+    ], [
         'key'  => 'general.content',
         'name' => 'admin::app.admin.system.content',
         'sort' => 2,
@@ -48,16 +79,7 @@ return [
             ], [
                 'name'          => 'footer_toggle',
                 'title'         => 'admin::app.admin.system.footer-toggle',
-                'type'          => 'select',
-                'options'       => [
-                    [
-                        'title' => 'True',
-                        'value' => 1,
-                    ], [
-                        'title' => 'False',
-                        'value' => 0,
-                    ],
-                ],
+                'type'          => 'boolean',
                 'locale_based'  => true,
                 'channel_based' => true,
             ],

@@ -11,21 +11,24 @@ $data = array();
 
     if (empty($_POST['mail_driver']))
         $errors['mail_driver'] = 'Please select the mail driver.';
-    
+
     if (empty($_POST['mail_host']))
         $errors['mail_host'] = 'Please enter the hostname for this outgoing mail server.';
 
     if (empty($_POST['mail_port']))
-        $errors['mail_port'] = 'Please enter the port for this outgoing mail server.';        
+        $errors['mail_port'] = 'Please enter the port for this outgoing mail server.';
 
-    if (empty($_POST['mail_encryption']))
-        $errors['mail_encryption'] = 'Please select the encryption method for this outgoing mail server.';
-        
+    // if (empty($_POST['mail_encryption']))
+    //     $errors['mail_encryption'] = 'Please select the encryption method for this outgoing mail server.';
+
     if (empty($_POST['mail_from']))
         $errors['mail_from'] = 'Please enter the email address for this store.';
 
     if (empty($_POST['mail_username']))
         $errors['mail_username'] = 'Please enter your email address or username.';
+
+    if (preg_match('/\s/', $_POST['mail_username']))
+        $errors['mail_username'] = 'There should be no space in Username.';
 
     if (empty($_POST['mail_password']))
         $errors['mail_password'] = 'Please enter the password for this email address.';

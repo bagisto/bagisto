@@ -12,7 +12,12 @@ class AttributeOption extends TranslatableModel implements AttributeOptionContra
 
     public $translatedAttributes = ['label'];
 
-    protected $fillable = ['admin_name', 'swatch_value', 'sort_order', 'attribute_id'];
+    protected $fillable = [
+        'admin_name',
+        'swatch_value',
+        'sort_order',
+        'attribute_id',
+    ];
 
     /**
      * Get the attribute that owns the attribute option.
@@ -27,8 +32,9 @@ class AttributeOption extends TranslatableModel implements AttributeOptionContra
      */
     public function swatch_value_url()
     {
-        if ($this->swatch_value && $this->attribute->swatch_type == 'image')
+        if ($this->swatch_value && $this->attribute->swatch_type == 'image') {
             return Storage::url($this->swatch_value);
+        }
         
         return;
     }

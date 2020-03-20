@@ -39,3 +39,9 @@
  *
  * Date: 2019-05-01T21:04Z
  */
+
+/**
+  * vue-class-component v7.0.1
+  * (c) 2015-present Evan You
+  * @license MIT
+  */

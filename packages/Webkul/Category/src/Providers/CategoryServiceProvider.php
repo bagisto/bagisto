@@ -24,16 +24,6 @@ class CategoryServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-
-    }
-
-    /**
      * Register factories.
      *
      * @param  string  $path

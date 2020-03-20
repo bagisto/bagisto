@@ -14,7 +14,15 @@ class Wishlist extends Model implements WishlistContract
         'additional' => 'array',
     ];
 
-    protected $fillable = ['channel_id', 'product_id', 'customer_id', 'additional', 'moved_to_cart', 'shared', 'time_of_moving'];
+    protected $fillable = [
+        'channel_id',
+        'product_id',
+        'customer_id',
+        'additional',
+        'moved_to_cart',
+        'shared',
+        'time_of_moving'
+    ];
 
     /**
      * The Product that belong to the wishlist.

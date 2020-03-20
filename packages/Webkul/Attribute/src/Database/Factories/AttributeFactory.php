@@ -33,21 +33,21 @@ $factory->define(Attribute::class, function (Faker $faker, array $attributes) {
     }
 
     return [
-        'admin_name' => $faker->word,
-        'code' => $faker->word,
-        'type' => array_rand($types),
-        'validation' => '',
-        'position' => $faker->randomDigit,
-        'is_required' => false,
-        'is_unique' => false,
-        'value_per_locale' => false,
-        'value_per_channel' => false,
-        'is_filterable' => false,
-        'is_configurable' => false,
-        'is_user_defined' => true,
+        'admin_name'          => $faker->word,
+        'code'                => $faker->word,
+        'type'                => array_rand($types),
+        'validation'          => '',
+        'position'            => $faker->randomDigit,
+        'is_required'         => false,
+        'is_unique'           => false,
+        'value_per_locale'    => false,
+        'value_per_channel'   => false,
+        'is_filterable'       => false,
+        'is_configurable'     => false,
+        'is_user_defined'     => true,
         'is_visible_on_front' => true,
-        'swatch_type' => null,
-        'use_in_flat' => true,
+        'swatch_type'         => null,
+        'use_in_flat'         => true,
     ];
 });
 

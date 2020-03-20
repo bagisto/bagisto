@@ -9,10 +9,10 @@ class VelocityMetadataRepository extends Repository
     /**
      * Specify Model class name
      *
-     * @return mixed
+     * @return string
      */
     function model()
     {
-        return 'Webkul\Velocity\Models\VelocityMetadata';
+        return 'Webkul\Velocity\Contracts\VelocityMetadata';
     }
 }

@@ -18,7 +18,8 @@ class TaxMap extends Model implements TaxMapContract
     protected $table = 'tax_categories_tax_rates';
 
     protected $fillable = [
-       'tax_category_id', 'tax_rate_id'
+       'tax_category_id',
+       'tax_rate_id',
     ];
 
 }

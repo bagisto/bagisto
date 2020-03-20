@@ -12,25 +12,19 @@ use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
 use Webkul\Product\Helpers\ProductImage;
 use Webkul\Checkout\Models\CartItem;
 
-/**
- * Class Downloadable.
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class Downloadable extends AbstractType
 {
     /**
      * ProductDownloadableLinkRepository instance
      *
-     * @var ProductDownloadableLinkRepository
+     * @var \Webkul\Product\Repositories\ProductDownloadableLinkRepository
     */
     protected $productDownloadableLinkRepository;
 
     /**
      * ProductDownloadableSampleRepository instance
      *
-     * @var ProductDownloadableSampleRepository
+     * @var \Webkul\Product\Repositories\ProductDownloadableSampleRepository
     */
     protected $productDownloadableSampleRepository;
 
@@ -57,21 +51,21 @@ class Downloadable extends AbstractType
     /**
      * Is a stokable product type
      *
-     * @var boolean
+     * @var bool
      */
     protected $isStockable = false;
 
     /**
      * Create a new product type instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeRepository               $attributeRepository
-     * @param  Webkul\Product\Repositories\ProductRepository                   $productRepository
-     * @param  Webkul\Product\Repositories\ProductAttributeValueRepository     $attributeValueRepository
-     * @param  Webkul\Product\Repositories\ProductInventoryRepository          $productInventoryRepository
-     * @param  Webkul\Product\Repositories\ProductImageRepository              $productImageRepository
-     * @param  Webkul\Product\Repositories\ProductDownloadableLinkRepository   $productDownloadableLinkRepository
-     * @param  Webkul\Product\Repositories\ProductDownloadableSampleRepository $productDownloadableSampleRepository
-     * @param  Webkul\Product\Helpers\ProductImage                             $productImageHelper
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $attributeValueRepository
+     * @param  \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
+     * @param  \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
+     * @param  \Webkul\Product\Repositories\ProductDownloadableLinkRepository  $productDownloadableLinkRepository
+     * @param  \Webkul\Product\Repositories\ProductDownloadableSampleRepository  $productDownloadableSampleRepository
+     * @param  \Webkul\Product\Helpers\ProductImage  $productImageHelper
      * @return void
      */
     public function __construct(
@@ -100,10 +94,10 @@ class Downloadable extends AbstractType
     }
 
     /**
-     * @param array $data
-     * @param $id
-     * @param string $attribute
-     * @return Product
+     * @param  array  $data
+     * @param  int  $id
+     * @param  string  $attribute
+     * @return \Webkul\Product\Contracts\Product
      */
     public function update(array $data, $id, $attribute = "id")
     {
@@ -121,15 +115,17 @@ class Downloadable extends AbstractType
     /**
      * Return true if this product type is saleable
      *
-     * @return boolean
+     * @return bool
      */
     public function isSaleable()
     {
-        if (! $this->product->status)
+        if (! $this->product->status) {
             return false;
+        }
 
-        if ($this->product->downloadable_links()->count())
+        if ($this->product->downloadable_links()->count()) {
             return true;
+        }
 
         return false;
     }
@@ -143,11 +139,11 @@ class Downloadable extends AbstractType
     {
         return [
             // 'downloadable_links.*.title' => 'required',
-            'downloadable_links.*.type' => 'required',
-            'downloadable_links.*.file' => 'required_if:type,==,file',
-            'downloadable_links.*.file_name' => 'required_if:type,==,file',
-            'downloadable_links.*.url' => 'required_if:type,==,url',
-            'downloadable_links.*.downloads' => 'required',
+            'downloadable_links.*.type'       => 'required',
+            'downloadable_links.*.file'       => 'required_if:type,==,file',
+            'downloadable_links.*.file_name'  => 'required_if:type,==,file',
+            'downloadable_links.*.url'        => 'required_if:type,==,url',
+            'downloadable_links.*.downloads'  => 'required',
             'downloadable_links.*.sort_order' => 'required',
         ];
     }
@@ -155,19 +151,21 @@ class Downloadable extends AbstractType
     /**
      * Add product. Returns error message if can't prepare product.
      *
-     * @param array   $data
+     * @param  array  $data
      * @return array
      */
     public function prepareForCart($data)
     {
-        if (! isset($data['links']) || ! count($data['links']))
+        if (! isset($data['links']) || ! count($data['links'])) {
             return trans('shop::app.checkout.cart.integrity.missing_links');
+        }
 
         $products = parent::prepareForCart($data);
 
         foreach ($this->product->downloadable_links as $link) {
-            if (! in_array($link->id, $data['links']))
+            if (! in_array($link->id, $data['links'])) {
                 continue;
+            }
 
             $products[0]['price'] += core()->convertPrice($link->price);
             $products[0]['base_price'] += $link->price;
@@ -180,22 +178,29 @@ class Downloadable extends AbstractType
 
     /**
      *
-     * @param array $options1
-     * @param array $options2
-     * @return boolean
+     * @param  array  $options1
+     * @param  array  $options2
+     * @return bool
      */
     public function compareOptions($options1, $options2)
     {
-        if ($this->product->id != $options2['product_id'])
+        if ($this->product->id != $options2['product_id']) {
             return false;
+        }
 
-        return $options1['links'] == $options2['links'];
+        if (isset($options1['links']) && isset($options2['links'])) {
+            return $options1['links'] === $options2['links'];
+        } elseif (! isset($options1['links'])) {
+            return false;
+        } elseif (! isset($options2['links'])) {
+            return false;
+        }
     }
 
     /**
      * Returns additional information for items
      *
-     * @param array $data
+     * @param  array  $data
      * @return array
      */
     public function getAdditionalOptions($data)
@@ -203,14 +208,15 @@ class Downloadable extends AbstractType
         $labels = [];
 
         foreach ($this->product->downloadable_links as $link) {
-            if (in_array($link->id, $data['links']))
+            if (in_array($link->id, $data['links'])) {
                 $labels[] = $link->title;
+            }
         }
 
         $data['attributes'][0] = [
             'attribute_name' => 'Downloads',
-            'option_id' => 0,
-            'option_label' => implode(', ', $labels),
+            'option_id'      => 0,
+            'option_label'   => implode(', ', $labels),
         ];
 
         return $data;
@@ -219,7 +225,7 @@ class Downloadable extends AbstractType
     /**
      * Validate cart item product price
      *
-     * @param CartItem $item
+     * @param  \Webkul\Checkout\Contracts\CartItem  $item
      * @return float
      */
     public function validateCartItem($item)
@@ -227,14 +233,16 @@ class Downloadable extends AbstractType
         $price = $item->product->getTypeInstance()->getFinalPrice();
 
         foreach ($item->product->downloadable_links as $link) {
-            if (! in_array($link->id, $item->additional['links']))
+            if (! in_array($link->id, $item->additional['links'])) {
                 continue;
+            }
 
             $price += $link->price;
         }
 
-        if ($price == $item->base_price)
+        if ($price == $item->base_price) {
             return;
+        }
 
         $item->base_price = $price;
         $item->price = core()->convertPrice($price);

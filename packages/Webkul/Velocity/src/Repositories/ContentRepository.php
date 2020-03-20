@@ -7,31 +7,26 @@ use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Facades\Event;
 use Webkul\Product\Repositories\ProductRepository;
 
-/**
- * Content Reposotory
- *
- * @author    Vivek Sharma <viveksh047@webkul.com>
- * @copyright 2019 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ContentRepository extends Repository
 {
    /**
     * Product Repository object
     *
-    * @var array
+    * @var \Webkul\Product\Repositories\ProductRepository
     */
     protected $productRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Product\Repositories\ProductRepository $productRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository $productRepository
+     * @param  \Illuminate\Container\Container  $app
      * @return void
      */
     public function __construct(
         ProductRepository $productRepository,
         App $app
-        )
+    )
     {
         $this->productRepository = $productRepository;
 
@@ -41,16 +36,19 @@ class ContentRepository extends Repository
     /**
      * Specify Model class name
      *
-     * @return mixed
+     * @return string
      */
     function model()
     {
-        return 'Webkul\Velocity\Models\Content';
+        return 'Webkul\Velocity\Contracts\Content';
     }
 
+    /**
+     * @param  array  $data
+     * @return \Webkul\Velocity\Models\Content
+     */
     public function create(array $data)
     {
-        //before store of the Content
         // Event::fire('velocity.content.create.before');
 
         if (isset($data['locale']) && $data['locale'] == 'all') {
@@ -67,27 +65,33 @@ class ContentRepository extends Repository
 
         $content = $this->model->create($data);
 
-        //after store of the content
         // Event::fire('velocity.content.create.after', $content);
 
         return $content;
     }
 
+    /**
+     * @param  array  $data
+     * @param  int  $id
+     * @return \Webkul\Velocity\Models\Content
+     */
     public function update(array $data, $id)
     {
         $content = $this->find($id);
 
-        //before store of the Content
         // Event::fire('velocity.content.update.before', $id);
 
         $content->update($data);
 
-        //after store of the content
         // Event::fire('velocity.content.update.after', $id);
 
         return $content;
     }
 
+    /**
+     * @param  int  $id
+     * @return array
+     */
     public function getProducts($id)
     {
         $results = [];
@@ -101,13 +105,13 @@ class ContentRepository extends Repository
 
             $products = json_decode($contentLocale->products, true);
 
-            if (!empty($products)) {
+            if (! empty($products)) {
                 foreach ($products as $product_id) {
                     $product = $this->productRepository->find($product_id);
 
-                    if ( isset($product->id)) {
+                    if (isset($product->id)) {
                         $results[] = [
-                            'id' => $product->id,
+                            'id'   => $product->id,
                             'name' => $product->name,
                         ];
                     }
@@ -118,25 +122,29 @@ class ContentRepository extends Repository
         return $results;
     }
 
+    /**
+     * @return array
+     */
     public function getAllContents()
     {
         $query = $this->model::orderBy('position', 'ASC');
 
         $contentCollection = $query
-                ->select('velocity_contents.*', 'velocity_contents_translations.*')
-                ->where('velocity_contents.status', 1)
-                ->leftJoin('velocity_contents_translations', 'velocity_contents.id', 'velocity_contents_translations.content_id')
-                ->distinct('velocity_contents_translations.id')
-                ->where('velocity_contents_translations.locale', app()->getLocale())
-                ->limit(5)
-                ->get();
+            ->select('velocity_contents.*', 'velocity_contents_translations.*')
+            ->where('velocity_contents.status', 1)
+            ->leftJoin('velocity_contents_translations', 'velocity_contents.id', 'velocity_contents_translations.content_id')
+            ->distinct('velocity_contents_translations.id')
+            ->where('velocity_contents_translations.locale', app()->getLocale())
+            ->limit(5)
+            ->get();
 
         $formattedContent = [];
+        
         foreach ($contentCollection as $content) {
             array_push($formattedContent, [
-                'title' => $content->title,
-                'page_link' => $content->page_link,
-                'link_target' => $content->link_target,
+                'title'        => $content->title,
+                'page_link'    => $content->page_link,
+                'link_target'  => $content->link_target,
                 'content_type' => $content->content_type,
             ]);
         }

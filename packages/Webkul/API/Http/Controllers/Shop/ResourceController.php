@@ -4,12 +4,6 @@ namespace Webkul\API\Http\Controllers\Shop;
 
 use Illuminate\Http\Request;
 
-/**
- * Resource Controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ResourceController extends Controller
 {
     /**
@@ -29,7 +23,7 @@ class ResourceController extends Controller
     /**
      * Repository object
      *
-     * @var array
+     * @var \Webkul\Core\Eloquent\Repository
      */
     protected $repository;
 
@@ -87,18 +81,20 @@ class ResourceController extends Controller
     /**
      * Returns a individual resource.
      *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function get($id)
     {
         return new $this->_config['resource'](
-                $this->repository->findOrFail($id)
-            );
+            $this->repository->findOrFail($id)
+        );
     }
 
     /**
      * Delete's a individual resource.
      *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -108,7 +104,7 @@ class ResourceController extends Controller
         $this->repository->delete($id);
         
         return response()->json([
-                'message' => 'Item removed successfully.'
-            ]);
+            'message' => 'Item removed successfully.',
+        ]);
     }
 }

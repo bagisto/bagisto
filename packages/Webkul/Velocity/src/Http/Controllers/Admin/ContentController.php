@@ -6,50 +6,43 @@ use Illuminate\Http\Response;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Velocity\Repositories\ContentRepository;
 
-/**
- * Content Controller
- *
- * @author    Vivek Sharma <viveksh047@webkul.com> @vivek
- * @author    Shubham Mehrotra <shubhammehrotra.symfony@webkul.com> @shubhwebkul
- * @copyright 2019 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ContentController extends Controller
 {
     /**
      * ProductRepository object
      *
-     * @var object
+     * @var \Webkul\Product\Repositories\ProductRepository
     */
     protected $productRepository;
 
     /**
      * ContentRepository object
      *
-     * @var object
+     * @var \Webkul\Velocity\Repositories\ContentRepository
     */
-    protected $content;
+    protected $contentRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param \Webkul\Product\Repositories\ProductRepository $productRepository;
-     * @param \Webkul\Velocity\Repositories\ContentRepository $content;
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Velocity\Repositories\ContentRepository  $contentRepository
      * @return void
      */
     public function __construct(
         ProductRepository $productRepository,
-        ContentRepository $content
+        ContentRepository $contentRepository
     ) {
         $this->productRepository = $productRepository;
 
-        $this->content = $content;
+        $this->contentRepository = $contentRepository;
 
         $this->_config = request('_config');
     }
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -59,7 +52,7 @@ class ContentController extends Controller
     /**
      * Search for catalog
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
     */
     public function search()
     {
@@ -67,12 +60,12 @@ class ContentController extends Controller
 
         $params = request()->input();
 
-        if ( isset($params['query']) && $params['query'] ) {
+        if (isset($params['query']) && $params['query']) {
             foreach ($this->productRepository->searchProductByAttribute(request()->input('query')) as $row) {
                 $results[] = [
-                        'id' => $row->product_id,
-                        'name' => $row->name,
-                    ];
+                    'id'   => $row->product_id,
+                    'name' => $row->name,
+                ];
             }
         }
         return response()->json($results);
@@ -97,11 +90,11 @@ class ContentController extends Controller
     {
         $params = request()->all();
 
-        if ( isset($params['products']) ) {
+        if (isset($params['products'])) {
             $params['products'] = json_encode($params['products']);
         }
 
-        $this->content->create($params);
+        $this->contentRepository->create($params);
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Content Page']));
 
@@ -116,7 +109,7 @@ class ContentController extends Controller
      */
     public function edit($id)
     {
-        $content = $this->content->findOrFail($id);
+        $content = $this->contentRepository->findOrFail($id);
 
         return view($this->_config['view'], compact('content'));
     }
@@ -124,7 +117,7 @@ class ContentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Webkul\Product\Http\Requests\ProductForm $request
+     * @param  \Webkul\Product\Http\Requests\ProductForm  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -132,11 +125,11 @@ class ContentController extends Controller
     {
         $params = request()->all();
 
-        if ( isset($params['locale']) && isset($params[$params['locale']]['products']) ) {
+        if (isset($params['locale']) && isset($params[$params['locale']]['products'])) {
             $params[$params['locale']]['products'] = json_encode($params[$params['locale']]['products']);
         }
 
-        $content = $this->content->update($params, $id);
+        $content = $this->contentRepository->update($params, $id);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Content']));
 
@@ -151,10 +144,10 @@ class ContentController extends Controller
      */
     public function destroy($id)
     {
-        $content = $this->content->findOrFail($id);
+        $content = $this->contentRepository->findOrFail($id);
 
         try {
-            $this->content->delete($id);
+            $this->contentRepository->delete($id);
 
             session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Content']));
 
@@ -169,7 +162,7 @@ class ContentController extends Controller
     /**
      * Mass Delete the products
      *
-     * @return response
+     * @return \Illuminate\Http\Response
      */
     public function massDestroy()
     {
@@ -177,10 +170,10 @@ class ContentController extends Controller
 
         foreach ($contentIds as $contentId) {
 
-            $content = $this->content->find($contentId);
+            $content = $this->contentRepository->find($contentId);
 
             if (isset($content)) {
-                $this->content->delete($contentId);
+                $this->contentRepository->delete($contentId);
             }
         }
 

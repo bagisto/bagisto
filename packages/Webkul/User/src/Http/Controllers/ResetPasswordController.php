@@ -8,12 +8,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Str;
 
-/**
- * Admin reset password controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ResetPasswordController extends Controller
 {
     use ResetsPasswords;
@@ -45,9 +39,10 @@ class ResetPasswordController extends Controller
      */
     public function create($token = null)
     {
-        return view($this->_config['view'])->with(
-            ['token' => $token, 'email' => request('email')]
-        );
+        return view($this->_config['view'])->with([
+            'token' => $token,
+            'email' => request('email'),
+        ]);
     }
 
     /**
@@ -59,8 +54,8 @@ class ResetPasswordController extends Controller
     {
         try {
             $this->validate(request(), [
-                'token' => 'required',
-                'email' => 'required|email',
+                'token'    => 'required',
+                'email'    => 'required|email',
                 'password' => 'required|confirmed|min:6',
             ]);
 
@@ -77,7 +72,7 @@ class ResetPasswordController extends Controller
             return back()
                 ->withInput(request(['email']))
                 ->withErrors([
-                    'email' => trans($response)
+                    'email' => trans($response),
                 ]);
         } catch(\Exception $e) {
             session()->flash('error', trans($e->getMessage()));

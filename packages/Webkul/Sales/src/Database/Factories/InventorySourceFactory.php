@@ -7,6 +7,7 @@ use Webkul\Inventory\Models\InventorySource;
 
 $factory->define(InventorySource::class, function (Faker $faker) {
     $code = $faker->unique()->word;
+    
     return [
         'code'           => $faker->unique()->word,
         'name'           => $code,

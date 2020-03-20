@@ -55,15 +55,11 @@
         <script type="text/javascript">
             window.flashMessages = [];
 
-            @if ($success = session('success'))
-                window.flashMessages = [{'type': 'alert-success', 'message': "{{ $success }}" }];
-            @elseif ($warning = session('warning'))
-                window.flashMessages = [{'type': 'alert-warning', 'message': "{{ $warning }}" }];
-            @elseif ($error = session('error'))
-                window.flashMessages = [{'type': 'alert-error', 'message': "{{ $error }}" }];
-            @elseif ($info = session('info'))
-                window.flashMessages = [{'type': 'alert-info', 'message': "{{ $info }}" }];
-            @endif
+            @foreach (['success', 'warning', 'error', 'info'] as $key)
+                @if ($value = session($key))
+                    window.flashMessages.push({'type': 'alert-{{ $key }}', 'message': "{{ $value }}" });
+                @endif
+            @endforeach
 
             window.serverErrors = [];
             @if (isset($errors))

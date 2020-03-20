@@ -6,25 +6,20 @@ use Illuminate\Container\Container as App;
 use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Str;
 
-/**
- * ProductBundleOption Repository
- *
- * @author Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ProductBundleOptionRepository extends Repository
 {
     /**
      * ProductBundleOptionProductRepository object
      *
-     * @var ProductBundleOptionProductRepository
+     * @var \Webkul\Product\Repositories\ProductBundleOptionProductRepository
      */
     protected $productBundleOptionProductRepository;
 
     /**
-     * Create a new controller instance.
+     * Create a new repository instance.
      *
-     * @param  Webkul\Product\Repositories\ProductBundleOptionProductRepository $productBundleOptionProductRepository
+     * @param  Webkul\Product\Repositories\ProductBundleOptionProductRepository  $productBundleOptionProductRepository
+     * @param  \Illuminate\Container\Container  $app
      * @return void
      */
     public function __construct(
@@ -37,14 +32,19 @@ class ProductBundleOptionRepository extends Repository
         parent::__construct($app);
     }
 
+    /**
+     * Specify Model class name
+     *
+     * @return string
+     */
     public function model()
     {
         return 'Webkul\Product\Contracts\ProductBundleOption';
     }
 
     /**
-     * @param array   $data
-     * @param Product $product
+     * @param  array  $data
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @return void
      */
     public function saveBundleOptons($data, $product)
@@ -55,13 +55,14 @@ class ProductBundleOptionRepository extends Repository
             foreach ($data['bundle_options'] as $bundleOptionId => $bundleOptionInputs) {
                 if (Str::contains($bundleOptionId, 'option_')) {
                     $productBundleOption = $this->create(array_merge([
-                            'product_id' => $product->id,
-                        ], $bundleOptionInputs));
+                        'product_id' => $product->id,
+                    ], $bundleOptionInputs));
                 } else {
                     $productBundleOption = $this->find($bundleOptionId);
 
-                    if (is_numeric($index = $previousBundleOptionIds->search($bundleOptionId)))
+                    if (is_numeric($index = $previousBundleOptionIds->search($bundleOptionId))) {
                         $previousBundleOptionIds->forget($index);
+                    }
 
                     $this->update($bundleOptionInputs, $bundleOptionId);
                 }

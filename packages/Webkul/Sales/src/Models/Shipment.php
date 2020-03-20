@@ -8,7 +8,11 @@ use Webkul\Sales\Contracts\Shipment as ShipmentContract;
 
 class Shipment extends Model implements ShipmentContract
 {
-    protected $guarded = ['id', 'created_at', 'updated_at'];
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at',
+    ];
 
     /**
      * Get the order that belongs to the invoice.

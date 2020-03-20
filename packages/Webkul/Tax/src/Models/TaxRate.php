@@ -17,10 +17,19 @@ class TaxRate extends Model implements TaxRateContract
     protected $table = 'tax_rates';
 
     protected $fillable = [
-        'identifier', 'is_zip', 'zip_code', 'zip_code', 'zip_from', 'zip_to', 'state', 'country', 'tax_rate'
+        'identifier',
+        'is_zip',
+        'zip_code',
+        'zip_code',
+        'zip_from',
+        'zip_to',
+        'state',
+        'country',
+        'tax_rate',
     ];
 
-    public function tax_categories() {
+    public function tax_categories()
+    {
         return $this->belongsToMany(TaxCategoryProxy::modelClass(), 'tax_categories_tax_rates', 'tax_rate_id', 'id');
     }
 }

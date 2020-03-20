@@ -255,6 +255,8 @@
     }
 
     .card-body {
+        cursor: default;
+
         > div:last-child {
             margin-top: 10px;
         }
@@ -274,35 +276,35 @@
         }
     }
 
-    .wishlist-icon {
-        height: 38px;
-        display: table;
-        text-align: right;
-
-        > i {
-            display: table-cell;
-            vertical-align: middle;
-        }
-    }
-
-    .add-to-cart-btn {
-        width: 100%;
-        position: relative;
-        padding-right: 35px;
-
-        .btn-add-to-cart {
-            max-width: 140px;
-
-            &.small-padding {
-                max-width: 130px;
-            }
-        }
-
-        ~ .wishlist-icon {
-            right: 0;
-            margin: 0;
-            padding: 0;
+    .card-body {
+        .compare-icon,
+        .wishlist-icon {
+            left: 0;
+            top: 10px;
+            display: none;
+            margin-left: 5px;
+            margin-right: 5px;
             position: absolute;
+        }
+
+        .compare-icon {
+            right: 0;
+            left: unset;
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            position: relative;
+
+            .btn-add-to-cart {
+                width: 100%;
+                max-width: 140px;
+                max-width: 100% !important;
+
+                &.small-padding {
+                    max-width: 130px;
+                }
+            }
         }
     }
 }
@@ -339,6 +341,37 @@
 .product-card-new:hover {
     #quick-view-btn-container {
         display: block;
+    }
+
+    .product-image-container {
+        overflow: hidden;
+
+        img {
+            transition: 0.5s all;
+            transform: scale(1.05);
+        }
+    }
+
+    .compare-icon,
+    .wishlist-icon {
+        display: block;
+    }
+
+    .product-price {
+        .sticker {
+            display: none;
+        }
+    }
+}
+
+.lg-card-container:hover {
+    .product-image {
+        overflow: hidden;
+
+        img {
+            transition: 0.5s all;
+            transform: scale(1.05);
+        }
     }
 }
 
@@ -645,6 +678,8 @@
 
         .product-quantity {
             .quantity {
+                float: left;
+                
                 label {
                     display: none !important;
                 }
@@ -665,6 +700,11 @@
                 padding: 0;
                 max-width: 110px;
                 max-height: 110px;
+            }
+
+            .wishlist-icon {
+                margin: 0;
+                display: inline;
             }
         }
 
@@ -708,9 +748,7 @@
 
         .customer-sidebar {
             border-right: 1px solid $border-general;
-        }
 
-        .customer-sidebar {
             .account-details {
                 text-align: center;
                 padding: 25px 20px;
@@ -774,6 +812,10 @@
 
                             &.downloadables::before {
                                 content: "\e926";
+                            }
+
+                            &.compare::before {
+                                content: "\e93b";
                             }
                         }
                     }
@@ -1202,23 +1244,27 @@
     }
 }
 
-.alert {
-    right: 15px !important;
-    top: 50px !important;
-    z-index: 100 !important;
-    font-size: 16px !important;
-    position: fixed !important;
-    max-width: 400px !important;
-    min-height: 45px !important;
-    max-height: 100px !important;
+#alert-container {
+    top: 50px;
+    right: 15px;
+    z-index: 100;
+    position: fixed;
+    font-size: 16px;
 
-    &.alert-dismissible {
-        .close {
-            font-size: 23px;
-            padding: .3rem 1.25rem;
+    .alert {
+        max-width: 400px !important;
+        min-height: 45px !important;
+        max-height: 100px !important;
+
+        &.alert-dismissible {
+            .close {
+                font-size: 23px;
+                padding: .3rem 1.25rem;
+            }
         }
     }
 }
+
 
 .wishlist-icon {
     vertical-align: middle;
@@ -1494,8 +1540,20 @@
     span:nth-child(1),
     .special-price,
     .price-from > span:not(:nth-child(2)) {
-        font-size: 20px;
+        font-size: 20px !important;
         font-weight: 600;
+    }
+
+    .price-from {
+        span:nth-child(2) {
+            margin-left: 6px;
+            text-transform: lowercase;
+            display: inline-block !important;
+        }
+
+        span:nth-child(3) {
+            display: block !important;
+        }
     }
 
     .price-label {
@@ -1679,7 +1737,7 @@
     }
 
     .sub-categories {
-        top: 0px;
+        top: -1px;
         left: 100%;
         z-index: 100;
         padding-top: 10px;
@@ -1932,6 +1990,7 @@
         img {
             width: 100%;
             height: 100%;
+            max-height: 500px;
             margin-bottom: 30px;
         }
     }
@@ -2154,6 +2213,9 @@
 }
 
 .bottom-toolbar {
+    width: 100%;
+    display: block;
+
     .pagination {
         .page-item {
             padding: 0 10px;
@@ -2196,6 +2258,10 @@
             @extend .small-padding;
         }
     }
+
+    .VueCarousel-slide {
+        cursor: default;
+    }
 }
 
 .vue-slider {
@@ -2204,4 +2270,74 @@
 
 .profile-update-form {
     width: 800px;
+}
+
+
+.compare-products {
+    // overflow-x: scroll;
+    // padding-bottom: 30px;
+
+    .col,
+    .col-2 {
+        max-width: 20%;
+        padding-left: 0;
+        word-break: break-word;
+    }
+
+    .image-wrapper {
+        width: 100%;
+    }
+
+    .stars {
+        i {
+            font-size: 16px;
+        }
+    }
+
+    .action {
+        position: relative;
+
+        .close-btn {
+            right: 0;
+            top: 6px;
+            position: absolute;
+            display: inline-block;
+
+            &:hover {
+                font-weight: 600;
+            }
+        }
+
+        .compare-icon {
+            display: none;
+        }
+    }
+
+    .product-price {
+        span {
+            font-size: 24px !important
+        }
+
+        .price-from {
+            span:nth-child(2) {
+                font-size: 20px !important;
+            }
+        }
+    }
+
+    .material-icons {
+        &.cross {
+            top: 5px;
+            right: 20px;
+            cursor: pointer;
+            position: absolute;
+        }
+    }
+
+    .wishlist-icon {
+        top: 5px;
+        right: 60px;
+        position: absolute;
+        display: inline-block;
+    }
 }

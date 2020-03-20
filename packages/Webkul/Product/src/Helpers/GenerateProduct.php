@@ -2,44 +2,101 @@
 
 namespace Webkul\Product\Helpers;
 
-use Webkul\Product\Repositories\ProductRepository as Product;
-use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
+use Webkul\Attribute\Models\Attribute;
+use Webkul\Attribute\Models\AttributeOption;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Illuminate\Support\Str;
 
+/**
+ * Class GenerateProduct
+ *
+ * @package Webkul\Product\Helpers
+ */
 class GenerateProduct
 {
     /**
      * Product Repository instance
+     * 
+     * @var \Webkul\Product\Repositories\ProductRepository
      */
-    protected $product;
+    protected $productRepository;
 
     /**
      * AttributeFamily Repository instance
+     * 
+     * @var \Webkul\Product\Repositories\AttributeFamilyRepository
      */
-    protected $attributeFamily;
+    protected $attributeFamilyRepository;
 
     /**
      * Product Attribute Types
+     * 
+     * @var array
      */
     protected $types;
 
-    public function __construct(Product $product, AttributeFamily $attributeFamily)
+    /**
+     * Create a new helper instance.
+     *
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productImage
+     * @param  \Webkul\Product\Repositories\AttributeFamilyRepository  $productImage
+     * @return void
+     */
+    public function __construct(
+        ProductRepository $productRepository,
+        AttributeFamilyRepository $attributeFamilyRepository
+    )
     {
-        $this->product = $product;
+        $this->productRepository = $productRepository;
+
+        $this->attributeFamilyRepository = $attributeFamilyRepository;
 
         $this->types = [
-            'text', 'textarea', 'boolean', 'select', 'multiselect', 'datetime', 'date', 'price', 'image', 'file', 'checkbox'
+            'text',
+            'textarea',
+            'boolean',
+            'select',
+            'multiselect',
+            'datetime',
+            'date',
+            'price',
+            'image',
+            'file',
+            'checkbox',
         ];
-
-        $this->attributeFamily = $attributeFamily;
     }
 
+    /**
+     * This brand option needs to be available so that the generated product
+     * can be linked to the order_brands table after checkout.
+     * 
+     * @return void
+     */
+    public function generateDemoBrand()
+    {
+        $brand = Attribute::where(['code' => 'brand'])->first();
+
+        if (! AttributeOption::where(['attribute_id' => $brand->id])->exists()) {
+
+            AttributeOption::create([
+                'admin_name'   => 'Webkul Demo Brand (c) 2020',
+                'attribute_id' => $brand->id,
+            ]);
+        }
+
+
+    }
+
+    /**
+     * @return mixed
+     */
     public function create()
     {
         $attributes = $this->getDefaultFamilyAttributes();
 
-        $attributeFamily = $this->attributeFamily->findWhere([
-            'code' => 'default'
+        $attributeFamily = $this->attributeFamilyRepository->findWhere([
+            'code' => 'default',
         ]);
 
         $sku = Str::random(10);
@@ -47,7 +104,7 @@ class GenerateProduct
         $data['attribute_family_id'] = $attributeFamily->first()->id;
         $data['type'] = 'simple';
 
-        $product = $this->product->create($data);
+        $product = $this->productRepository->create($data);
 
         unset($data);
 
@@ -59,36 +116,40 @@ class GenerateProduct
 
         foreach ($attributes as $attribute) {
             if ($attribute->type == 'text') {
-                if ($attribute->code == 'width' || $attribute->code == 'height' || $attribute->code == 'depth' || $attribute->code == 'weight') {
+                if ($attribute->code == 'width'
+                    || $attribute->code == 'height'
+                    || $attribute->code == 'depth'
+                    || $attribute->code == 'weight'
+                ) {
                     $data[$attribute->code] = $faker->randomNumber(3);
-                } else if ($attribute->code == 'url_key') {
+                } elseif ($attribute->code == 'url_key') {
                     $data[$attribute->code] = strtolower($sku);
-                } else if ($attribute->code != 'sku') {
+                } elseif ($attribute->code != 'sku') {
                     $data[$attribute->code] = $faker->name;
                 } else {
                     $data[$attribute->code] = $sku;
                 }
-            } else if ($attribute->type == 'textarea') {
+            } elseif ($attribute->type == 'textarea') {
                 $data[$attribute->code] = $faker->text;
 
                 if ($attribute->code == 'description' || $attribute->code == 'short_description') {
-                    $data[$attribute->code] = '<p>'. $data[$attribute->code] . '</p>';
+                    $data[$attribute->code] = '<p>' . $data[$attribute->code] . '</p>';
                 }
-            } else if ($attribute->type == 'boolean') {
+            } elseif ($attribute->type == 'boolean') {
                 $data[$attribute->code] = $faker->boolean;
-            } else if ($attribute->type == 'price') {
+            } elseif ($attribute->type == 'price') {
                 $data[$attribute->code] = $faker->randomNumber(2);
-            } else if ($attribute->type == 'datetime') {
+            } elseif ($attribute->type == 'datetime') {
                 $data[$attribute->code] = $date->toDateTimeString();
-            } else if ($attribute->type == 'date') {
+            } elseif ($attribute->type == 'date') {
                 if ($attribute->code == 'special_price_from') {
                     $data[$attribute->code] = $specialFrom;
-                } else if ($attribute->code == 'special_price_to') {
+                } elseif ($attribute->code == 'special_price_to') {
                     $data[$attribute->code] = $specialTo;
                 } else {
                     $data[$attribute->code] = $date->toDateString();
                 }
-            } else if ($attribute->code != 'tax_category_id' && ($attribute->type == 'select' || $attribute->type == 'multiselect')) {
+            } elseif ($attribute->code != 'tax_category_id' && ($attribute->type == 'select' || $attribute->type == 'multiselect')) {
                 $options = $attribute->options;
 
                 if ($attribute->type == 'select') {
@@ -99,7 +160,7 @@ class GenerateProduct
                     } else {
                         $data[$attribute->code] = "";
                     }
-                } else if ($attribute->type == 'multiselect') {
+                } elseif ($attribute->type == 'multiselect') {
                     if ($options->count()) {
                         $option = $options->first()->id;
 
@@ -114,10 +175,10 @@ class GenerateProduct
                 } else {
                     $data[$attribute->code] = "";
                 }
-            } else if ($attribute->code == 'checkbox') {
+            } elseif ($attribute->code == 'checkbox') {
                 $options = $attribute->options;
 
-                 if ($options->count()) {
+                if ($options->count()) {
                     $option = $options->first()->id;
 
                     $optionArray = [];
@@ -135,31 +196,37 @@ class GenerateProduct
 
         $data['locale'] = core()->getCurrentLocale()->code;
 
+        $brand = Attribute::where(['code' => 'brand'])->first();
+        $data['brand'] = AttributeOption::where(['attribute_id' => $brand->id])->first()->id ?? '';
+
         $data['channel'] = $channel->code;
 
         $data['channels'] = [
-            0 => $channel->id
+            0 => $channel->id,
         ];
 
         $inventorySource = $channel->inventory_sources[0];
 
         $data['inventories'] = [
-            $inventorySource->id => 10
+            $inventorySource->id => 10,
         ];
 
         $data['categories'] = [
-            0 => $channel->root_category->id
+            0 => $channel->root_category->id,
         ];
 
-        $updated = $this->product->update($data, $product->id);
+        $updated = $this->productRepository->update($data, $product->id);
 
         return $updated;
     }
 
+    /**
+     * @return \Illuminate\Support\Collection
+     */
     public function getDefaultFamilyAttributes()
     {
-        $attributeFamily = $this->attributeFamily->findWhere([
-            'code' => 'default'
+        $attributeFamily = $this->attributeFamilyRepository->findWhere([
+            'code' => 'default',
         ]);
 
         $attributes = collect();

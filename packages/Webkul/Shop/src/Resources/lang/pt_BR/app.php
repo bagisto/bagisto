@@ -244,7 +244,14 @@ return [
                     'order_id' => 'Pedido ID',
                     'date' => 'Data',
                     'status' => 'Status',
-                    'total' => 'Total'
+                    'total' => 'Total',
+                    'processing' => 'Processing',
+                    'completed' => 'Completed',
+                    'canceled' => 'Canceled',
+                    'closed' => 'Closed',
+                    'pending' => 'Pending',
+                    'pending-payment' => 'Pending Payment',
+                    'fraud' => 'Fraud'
                 ],
 
                 'view' => [

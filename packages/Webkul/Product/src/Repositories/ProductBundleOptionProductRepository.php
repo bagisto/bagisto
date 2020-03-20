@@ -5,22 +5,21 @@ namespace Webkul\Product\Repositories;
 use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Str;
 
-/**
- * ProductBundleOptionProduct Repository
- *
- * @author Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ProductBundleOptionProductRepository extends Repository
 {
+    /**
+     * Specify Model class name
+     *
+     * @return string
+     */
     public function model()
     {
         return 'Webkul\Product\Contracts\ProductBundleOptionProduct';
     }
 
     /**
-     * @param array   $data
-     * @param ProductBundleOption $productBundleOption
+     * @param array  $data
+     * @param  \Webkul\Product\Contracts\ProductBundleOption  $productBundleOption
      * @return void
      */
     public function saveBundleOptonProducts($data, $productBundleOption)
@@ -33,11 +32,12 @@ class ProductBundleOptionProductRepository extends Repository
             foreach ($data['products'] as $bundleOptionProductId => $bundleOptionProductInputs) {
                 if (Str::contains($bundleOptionProductId, 'product_')) {
                     $this->create(array_merge([
-                            'product_bundle_option_id' => $productBundleOption->id,
-                        ], $bundleOptionProductInputs));
+                        'product_bundle_option_id' => $productBundleOption->id,
+                    ], $bundleOptionProductInputs));
                 } else {
-                    if (is_numeric($index = $previousBundleOptionProductIds->search($bundleOptionProductId)))
+                    if (is_numeric($index = $previousBundleOptionProductIds->search($bundleOptionProductId))) {
                         $previousBundleOptionProductIds->forget($index);
+                    }
 
                     $this->update($bundleOptionProductInputs, $bundleOptionProductId);
                 }
@@ -51,12 +51,13 @@ class ProductBundleOptionProductRepository extends Repository
 
     /**
      * @param array $data
-     * @return void
+     * @return void|null
      */
     public function setIsDefaultFlag(&$data)
     {
-        if (! count($data['products']))
+        if (! count($data['products'])) {
             return;
+        }
 
         $haveIsDefaulFlag = false;
 
@@ -68,7 +69,8 @@ class ProductBundleOptionProductRepository extends Repository
             }
         }
 
-        if (! $haveIsDefaulFlag && $data['is_required'])
+        if (! $haveIsDefaulFlag && $data['is_required']) {
             $data['products'][key($data['products'])]['is_default'] = 1;
+        }
     }
 }

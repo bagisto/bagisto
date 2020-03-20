@@ -7,7 +7,7 @@ about: 'Report a general library issue.'
 
 ### Title
 **Just a quick sentence to brief your trouble with Bagisto or something associated with it.**
-**Please be calm, short and emaphasize on points.**
+**Please be calm, short and emphasize on points.**
 
 ### Issue Description
 **Description helps the developers to understand the bug. It describes the problem encountered or some after effect of some kind.**

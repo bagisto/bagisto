@@ -9,7 +9,7 @@ class SliderObserver
     /**
      * Handle the Slider "deleted" event.
      *
-     * @param  Slider $slider
+     * @param  \Webkul\Core\Contracts\Slider $slider
      * @return void
      */
     public function deleted($slider)

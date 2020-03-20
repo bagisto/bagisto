@@ -6,6 +6,7 @@
 
     .magnifier {
         > img {
+            max-width: 100%;
             min-height: 450px;
             max-height: 530px;
         }
@@ -173,6 +174,25 @@
         .quantity {
             width: unset;
         }
+
+        .form-group {
+            label {
+                display: block;
+            }
+
+            .radio {
+                margin-right: 10px;
+
+                input[type=radio] {
+                    margin-left: 0;
+                    position: static;
+                }
+
+                .radio-view {
+                    display: none;
+                }
+            }
+        }
     }
 
     .thumb-list {
@@ -219,16 +239,36 @@
         }
     }
 
-    .wishlist-icon {
-        height: 46px;
-        display: table;
-        padding-left: 10px;
+    .product-actions {
+        > div {
+            display: inline-block;
 
-        i {
-            display: table-cell;
-            vertical-align: middle;
+            .add-to-cart-btn {
+                float: left;
+            }
+
+            .compare-icon,
+            .wishlist-icon {
+                height: 46px;
+                margin-left: 0;
+                padding-left: 10px;
+
+                i {
+                    display: table-cell;
+                    vertical-align: middle;
+                }
+            }
+
+            .compare-icon {
+                display: inline-table;
+            }
+
+            .wishlist-icon {
+                float: right;
+            }
         }
     }
+
 
     .layouter,
     #product-form {

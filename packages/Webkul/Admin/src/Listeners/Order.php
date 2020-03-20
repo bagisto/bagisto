@@ -11,29 +11,25 @@ use Webkul\Admin\Mail\NewInventorySourceNotification;
 use Webkul\Admin\Mail\CancelOrderNotification;
 use Webkul\Admin\Mail\NewRefundNotification;
 
-/**
- * Order event handler
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class Order
 {
-
     /**
-     * @param mixed $order
-     *
      * Send new order Mail to the customer and admin
+     * 
+     * @param  \Webkul\Sales\Contracts\Order  $order
+     * @return void
      */
     public function sendNewOrderMail($order)
     {
         try {
             $configKey = 'emails.general.notifications.emails.general.notifications.new-order';
+
             if (core()->getConfigData($configKey)) {
                 Mail::queue(new NewOrderNotification($order));
             }
 
             $configKey = 'emails.general.notifications.emails.general.notifications.new-admin';
+
             if (core()->getConfigData($configKey)) {
                 Mail::queue(new NewAdminNotification($order));
             }
@@ -43,9 +39,10 @@ class Order
     }
 
     /**
-     * @param mixed $invoice
-     *
      * Send new invoice mail to the customer
+     * 
+     * @param  \Webkul\Sales\Contracts\Invoice  $invoice
+     * @return void
      */
     public function sendNewInvoiceMail($invoice)
     {
@@ -55,6 +52,7 @@ class Order
             }
 
             $configKey = 'emails.general.notifications.emails.general.notifications.new-invoice';
+
             if (core()->getConfigData($configKey)) {
                 Mail::queue(new NewInvoiceNotification($invoice));
             }
@@ -64,14 +62,16 @@ class Order
     }
 
     /**
-     * @param mixed $refund
-     *
      * Send new refund mail to the customer
+     * 
+     * @param  \Webkul\Sales\Contracts\Refund  $refund
+     * @return void
      */
     public function sendNewRefundMail($refund)
     {
         try {
             $configKey = 'emails.general.notifications.emails.general.notifications.new-refund';
+
             if (core()->getConfigData($configKey)) {
                 Mail::queue(new NewRefundNotification($refund));
             }
@@ -81,9 +81,10 @@ class Order
     }
 
     /**
-     * @param mixed $shipment
-     *
      * Send new shipment mail to the customer
+     * 
+     * @param  \Webkul\Sales\Contracts\Shipment  $shipment
+     * @return void
      */
     public function sendNewShipmentMail($shipment)
     {
@@ -93,11 +94,13 @@ class Order
             }
 
             $configKey = 'emails.general.notifications.emails.general.notifications.new-shipment';
+
             if (core()->getConfigData($configKey)) {
                 Mail::queue(new NewShipmentNotification($shipment));
             }
 
             $configKey = 'emails.general.notifications.emails.general.notifications.new-inventory-source';
+
             if (core()->getConfigData($configKey)) {
                 Mail::queue(new NewInventorySourceNotification($shipment));
             }
@@ -107,8 +110,8 @@ class Order
     }
 
     /**
-     * @param mixed $order
-     *
+     * @param  \Webkul\Sales\Contracts\Order  $order
+     * @return void
      */
     public function sendCancelOrderMail($order)
     {

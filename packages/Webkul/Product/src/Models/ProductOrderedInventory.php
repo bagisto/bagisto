@@ -11,7 +11,11 @@ class ProductOrderedInventory extends Model implements ProductOrderedInventoryCo
 {
     public $timestamps = false;
 
-    protected $fillable = ['qty', 'product_id', 'channel_id'];
+    protected $fillable = [
+        'qty',
+        'product_id',
+        'channel_id',
+    ];
 
     /**
      * Get the channel owns the inventory.

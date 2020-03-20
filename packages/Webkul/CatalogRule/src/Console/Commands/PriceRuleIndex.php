@@ -24,14 +24,14 @@ class PriceRuleIndex extends Command
     /**
      * CatalogRuleIndex object
      *
-     * @var Object
+     * @var \Webkul\CatalogRule\Helpers\CatalogRuleIndex
     */
     protected $catalogRuleIndexHelper;
 
     /**
      * Create a new command instance.
      *
-     * @param  Webkul\CatalogRuleProduct\Helpers\CatalogRuleIndex $catalogRuleIndexHelper
+     * @param  \Webkul\CatalogRuleProduct\Helpers\CatalogRuleIndex  $catalogRuleIndexHelper
      * @return void
      */
     public function __construct(CatalogRuleIndex $catalogRuleIndexHelper)
@@ -44,7 +44,7 @@ class PriceRuleIndex extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @return void
      */
     public function handle()
     {

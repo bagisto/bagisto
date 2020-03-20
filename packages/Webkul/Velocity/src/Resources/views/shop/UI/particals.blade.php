@@ -1,32 +1,3 @@
-<script type="text/x-template" id="star-ratings-template">
-    <div :class="`stars mr5 fs${size ? size : '16'} ${pushClass ? pushClass : ''}`">
-        <input
-            v-if="editable"
-            type="number"
-            :value="showFilled"
-            name="rating"
-            class="hidden" />
-
-        <i
-            :class="`material-icons ${editable ? 'cursor-pointer' : ''}`"
-            v-for="(rating, index) in parseInt(showFilled ? showFilled : 3)"
-            :key="`${index}${Math.random()}`"
-            @click="updateRating(index + 1)">
-            star
-        </i>
-
-        <template v-if="!hideBlank">
-            <i
-                :class="`material-icons ${editable ? 'cursor-pointer' : ''}`"
-                v-for="(blankStar, index) in (5 - (showFilled ? showFilled : 3))"
-                :key="`${index}${Math.random()}`"
-                @click="updateRating(showFilled + index + 1)">
-                star_border
-            </i>
-        </template>
-    </div>
-</script>
-
 <script type="text/x-template" id="cart-btn-template">
     <button
         type="button"
@@ -85,7 +56,7 @@
 
 <script type="text/x-template" id="searchbar-template">
     <div class="row no-margin right searchbar">
-        <div class="col-lg-8 col-md-12 no-padding input-group">
+        <div class="col-lg-6 col-md-12 no-padding input-group">
             <form
                 method="GET"
                 role="search"
@@ -143,10 +114,40 @@
             </form>
         </div>
 
-        <div class="col-4">
+        <div class="col-6">
             {!! view_render_event('bagisto.shop.layout.header.cart-item.before') !!}
                 @include('shop::checkout.cart.mini-cart')
             {!! view_render_event('bagisto.shop.layout.header.cart-item.after') !!}
+
+            {!! view_render_event('bagisto.shop.layout.header.compare.before') !!}
+                <a
+                    class="compare-btn unset"
+                    @auth('customer')
+                        href="{{ route('velocity.customer.product.compare') }}"
+                    @endauth
+
+                    @guest('customer')
+                        href="{{ route('velocity.product.compare') }}"
+                    @endguest
+                    >
+
+                    <i class="material-icons">compare_arrows</i>
+                    <div class="badge-container" v-if="compareCount > 0">
+                        <span class="badge" v-text="compareCount"></span>
+                    </div>
+                    <span>{{ __('velocity::app.customer.compare.text') }}</span>
+                </a>
+            {!! view_render_event('bagisto.shop.layout.header.compare.after') !!}
+
+            {!! view_render_event('bagisto.shop.layout.header.wishlist.before') !!}
+                <a class="wishlist-btn unset" :href="`${isCustomer ? '{{ route('customer.wishlist.index') }}' : '{{ route('velocity.product.guest-wishlist') }}'}`">
+                    <i class="material-icons">favorite_border</i>
+                    <div class="badge-container" v-if="wishlistCount > 0">
+                        <span class="badge" v-text="wishlistCount"></span>
+                    </div>
+                    <span>{{ __('shop::app.layouts.wishlist') }}</span>
+                </a>
+            {!! view_render_event('bagisto.shop.layout.header.wishlist.after') !!}
         </div>
     </div>
 </script>
@@ -155,18 +156,22 @@
     <header class="row velocity-divide-page vc-header header-shadow active">
         <div class="vc-small-screen container" v-if="isMobile()">
             <div class="row">
-                <div class="col-8">
+                <div class="col-6">
                     <div v-if="hamburger" class="nav-container scrollable">
                         <div class="wrapper" v-if="this.rootCategories">
                             <div class="greeting drawer-section fw6">
                                 <i class="material-icons">perm_identity</i>
                                 <span>
                                     @guest('customer')
+                                        <a class="unset" href="{{ route('customer.session.index') }}">
                                         {{ __('velocity::app.responsive.header.greeting', ['customer' => 'Guest']) }}
+                                        </a>
                                     @endguest
 
                                     @auth('customer')
-                                        {{ __('velocity::app.responsive.header.greeting', ['customer' => auth()->guard('customer')->user()->first_name]) }}
+                                        <a class="unset" href="{{ route('customer.profile.index') }}">
+                                            {{ __('velocity::app.responsive.header.greeting', ['customer' => auth()->guard('customer')->user()->first_name]) }}
+                                        </a>
                                     @endauth
                                     <i
                                         class="material-icons pull-right"
@@ -203,19 +208,18 @@
                             @endforeach
 
                             <ul type="none" class="velocity-content">
-                                <li
-                                    :key="index"
-                                    v-for="(content, index) in headerContent">
-                                    <a :href="`${$root.baseUrl}/${content.page_link}`" class="unset" v-text="content.title"></a>
+                                <li :key="index" v-for="(content, index) in headerContent">
+                                    <a
+                                        class="unset"
+                                        v-text="content.title"
+                                        :href="`${$root.baseUrl}/${content.page_link}`">
+                                    </a>
                                 </li>
                             </ul>
 
                             <ul type="none" class="category-wrapper">
-                                <li v-for="(category, index) in JSON.parse(categories)">
-                                    <a
-                                        class="unset"
-                                        :href="`${$root.baseUrl}/${category.slug}`">
-
+                                <li v-for="(category, index) in $root.sharedRootCategories">
+                                    <a class="unset" :href="`${$root.baseUrl}/${category.slug}`">
                                         <div class="category-logo">
                                             <img
                                                 class="category-icon"
@@ -225,10 +229,7 @@
                                         <span v-text="category.name"></span>
                                     </a>
 
-                                    <i
-                                        class="rango-arrow-right"
-                                        @click="toggleSubcategories(index, $event)">
-                                    </i>
+                                    <i class="rango-arrow-right" @click="toggleSubcategories(index, $event)"></i>
                                 </li>
                             </ul>
 
@@ -285,10 +286,10 @@
                                             <img
                                                 class="language-logo"
                                                 src="{{ asset('/storage/' . $locale->locale_image) }}" />
-                                        @else
+                                        @elseif ($locale->code == "en")
                                             <img
                                                 class="language-logo"
-                                                src="{{ asset($locale->locale_image) }}" />
+                                                src="{{ asset('/themes/velocity/assets/images/flags/en.png') }}" />
                                         @endif
                                     </div>
                                     <span>{{ $locale->name }}</span>
@@ -452,8 +453,28 @@
                     <logo-component></logo-component>
                 </div>
 
-                <div class="right-vc-header col-4">
-                    <a :href="`${$root.baseUrl}/customer/account/wishlist`" class="unset">
+                <div class="right-vc-header col-6">
+                    <a
+                        class="compare-btn unset"
+                        @auth('customer')
+                            href="{{ route('velocity.customer.product.compare') }}"
+                        @endauth
+
+                        @guest('customer')
+                            href="{{ route('velocity.product.compare') }}"
+                        @endguest
+                        >
+
+                        <div class="badge-container" v-if="compareCount > 0">
+                            <span class="badge" v-text="compareCount"></span>
+                        </div>
+                        <i class="material-icons">compare_arrows</i>
+                    </a>
+
+                    <a class="wishlist-btn unset" :href="`${isCustomer ? '{{ route('customer.wishlist.index') }}' : '{{ route('velocity.product.guest-wishlist') }}'}`">
+                        <div class="badge-container" v-if="wishlistCount > 0">
+                            <span class="badge" v-text="wishlistCount"></span>
+                        </div>
                         <i class="material-icons">favorite_border</i>
                     </a>
 
@@ -524,31 +545,6 @@
 
 <script type="text/javascript">
     (() => {
-        Vue.component('star-ratings', {
-            props: [
-                'ratings',
-                'size',
-                'hideBlank',
-                'pushClass',
-                'editable'
-            ],
-
-            template: '#star-ratings-template',
-
-            data: function () {
-                return {
-                    showFilled: this.ratings,
-                }
-            },
-
-            methods: {
-                updateRating: function (index) {
-                    index = Math.abs(index);
-                    this.editable ? this.showFilled = index : '';
-                }
-            },
-        })
-
         Vue.component('cart-btn', {
             template: '#cart-btn-template',
 
@@ -567,7 +563,7 @@
                     event.stopPropagation();
                 }
             }
-        })
+        });
 
         Vue.component('close-btn', {
             template: '#close-btn-template',
@@ -643,7 +639,16 @@
             template: '#searchbar-template',
             data: function () {
                 return {
-                    searchedQuery: []
+                    compareCount: 0,
+                    wishlistCount: 0,
+                    searchedQuery: [],
+                    isCustomer: '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == "true",
+                }
+            },
+
+            watch: {
+                '$root.headerItemsCount': function () {
+                    this.updateHeaderItemsCount();
                 }
             },
 
@@ -659,14 +664,40 @@
                 });
 
                 this.searchedQuery = updatedSearchedCollection;
+
+                this.updateHeaderItemsCount();
             },
 
             methods: {
                 'focusInput': function (event) {
                     $(event.target.parentElement.parentElement).find('input').focus();
+                },
+
+                'updateHeaderItemsCount': function () {
+                    if (! this.isCustomer) {
+                        let comparedItems = this.getStorageValue('compared_product');
+                        let wishlistedItems = this.getStorageValue('wishlist_product');
+
+                        if (wishlistedItems) {
+                            this.wishlistCount = wishlistedItems.length;
+                        }
+
+                        if (comparedItems) {
+                            this.compareCount = comparedItems.length;
+                        }
+                    } else {
+                        this.$http.get(`${this.$root.baseUrl}/items-count`)
+                            .then(response => {
+                                this.compareCount = response.data.compareProductsCount;
+                                this.wishlistCount = response.data.wishlistedProductsCount;
+                            })
+                            .catch(exception => {
+                                console.log(this.__('error.something_went_wrong'));
+                            });
+                    }
                 }
             }
-        })
+        });
 
         Vue.component('content-header', {
             template: '#content-header-template',
@@ -683,6 +714,7 @@
                     'subCategory': null,
                     'isSearchbar': false,
                     'rootCategories': true,
+                    'isCustomer': '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == "true",
                 }
             },
 
@@ -693,7 +725,15 @@
                     } else {
                         document.body.classList.remove('open-hamburger');
                     }
+                },
+
+                '$root.headerItemsCount': function () {
+                    this.updateHeaderItemsCount();
                 }
+            },
+
+            created: function () {
+                this.updateHeaderItemsCount();
             },
 
             methods: {
@@ -729,7 +769,7 @@
                     } else {
                         event.preventDefault();
 
-                        let categories = this.sharedRootCategories;
+                        let categories = this.$root.sharedRootCategories;
                         this.rootCategories = false;
                         this.subCategory = categories[index];
                     }
@@ -738,8 +778,32 @@
                 toggleMetaInfo: function (metaKey) {
                     this.rootCategories = false;
                     this[metaKey] = !this[metaKey];
+                },
+
+                updateHeaderItemsCount: function () {
+                    if (! this.isCustomer) {
+                        let comparedItems = this.getStorageValue('compared_product');
+                        let wishlistedItems = this.getStorageValue('wishlist_product');
+
+                        if (wishlistedItems) {
+                            this.wishlistCount = wishlistedItems.length;
+                        }
+
+                        if (comparedItems) {
+                            this.compareCount = comparedItems.length;
+                        }
+                    } else {
+                        this.$http.get(`${this.$root.baseUrl}/items-count`)
+                            .then(response => {
+                                this.compareCount = response.data.compareProductsCount;
+                                this.wishlistCount = response.data.wishlistedProductsCount;
+                            })
+                            .catch(exception => {
+                                console.log(this.__('error.something_went_wrong'));
+                            });
+                    }
                 }
             },
-        })
+        });
     })()
 </script>

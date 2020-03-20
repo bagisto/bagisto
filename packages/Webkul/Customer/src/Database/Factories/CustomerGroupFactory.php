@@ -7,6 +7,7 @@ use Webkul\Customer\Models\CustomerGroup;
 
 $factory->define(CustomerGroup::class, function (Faker $faker) {
     $name = ucfirst($faker->word);
+    
     return [
         'name'            => $name,
         'is_user_defined' => $faker->boolean,

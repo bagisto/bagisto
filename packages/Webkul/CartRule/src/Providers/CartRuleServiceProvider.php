@@ -18,13 +18,4 @@ class CartRuleServiceProvider extends ServiceProvider
 
         $this->app->register(EventServiceProvider::class);
     }
-
-    /**
-     * Register services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-    }
 }

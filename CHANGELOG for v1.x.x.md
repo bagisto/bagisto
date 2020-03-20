@@ -2,6 +2,171 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
+## **v1.1.0 (20th of March 2020)** - *Release*
+
+* [feature] Added new booking type product.
+
+* [feature] Impletment compare product feature.
+
+* [feature] Impletment compare product feature.
+
+* #2541 [fixed] - Showing product's price with the price including tax
+
+* #2552 [fixed] - error mysql 8
+
+* #2556 [fixed] - Logo and favicon broken
+
+* #2562 [fixed] - error catalog/categories/create
+
+* #2563 [fixed] - error add in cart
+
+* #2567 [fixed] - Error 404 found when click on compare product image
+
+* #2568 [fixed] - Getting exception when update to default theme from the comparison page
+
+* #2572 [fixed] - custom attribute values are not show in comparison product
+
+* #2573 [fixed] - Add to wishlist icon is missing with each product in comparison page
+
+* #2574 [fixed] - Quick view popup should be closed when click add to compare
+
+* #2575 [fixed] - compare feature is not working from the product page for logged In customer
+
+* #2576 [fixed] - Compare icon is missing for new products
+
+* #2577 [fixed] - GUI installer stuck at Migration & Seed
+
+* #2578 [fixed] - Impossible to create the root directory
+
+* #2579 [fixed] - error menu mobile
+
+* #2580 [fixed] - error recently viewed products in mobile
+
+* #2581 [fixed] - admin/configuration/general/design
+
+* #2583 [fixed] - Display 3D product preivew image
+
+* #2584 [fixed] - Not getting root category name, in categories.
+
+* #2585 [fixed] - Product name , description and short description gets removed on editing the product.
+
+* #2586 [fixed] - APP_TIMEZONE and APP_LOCALE values should be available in env file.
+
+* #2587 [fixed] - Getting some warning during installation.
+
+* #2589 [fixed] - Getting exception on editing header content on php 7.4.
+
+* #2596 [fixed] - Allow Email Verification field is given twice, once in Configure->Customers->Setting and in Configure->Admin->Email.Currently if field is enable from any one grid and disable from other grid, then its not working.
+
+* #2597 [fixed] - Not getting email for "Send Inventory Source Notification E-mail".
+
+* #2599 [fixed] - login required when add compare product from the category page
+
+* #2601 [fixed] - all comparable product remove from list only when single product remove
+
+* #2602 [fixed] - Catalog default image height should be equal to the original image in Velocity
+
+* #2604 [fixed] - Not able to make product as comparable from the category page as logged In user
+
+* #2605 [fixed] - Attribute is comparable (yes/no) option is missing when add new attribute
+
+* #2606 [fixed] - custom attributes are not Visible on Product View Page on Front-end
+
+* #2608 [fixed] - Getting exception on creating category.
+
+* #2609 [fixed] - product removed from comparison page when update product by name
+
+* #2611 [fixed] - installer error
+
+* #2613 [fixed] - Propaganistas/Laravel-Intl is abandoned
+
+* #2619 [fixed] - Issue when category slug & product slug are same
+
+* #2621 [fixed] - i create a site and it is up kind of noting works
+
+* #2626 [fixed] - Tax rates zipcode is still required when enable zip range is disabled
+
+* #2630 [fixed] - Error exception when add booking product
+
+* #2634 [fixed] - console error when select slots in default booking
+
+* #2635 [fixed] - Default Booking details remove from edit page for many booking of one day
+
+* #2636 [fixed] - Error alert when add to cart a simple product from the home page
+
+* #2638 [fixed] - customer status is not translated in customer list
+
+* #2639 [fixed] - category slug field should show warning if saved blank header content
+
+* #2643 [fixed] - Getting exception when add appointment booking
+
+* #2645 [fixed] - Error on adding product to cart
+
+* #2649 [fixed] - Incorrect slot time for one booking many days in product page
+
+* #2650 [fixed] - remove slot duration from the booking product page
+
+* #2654 [fixed] - warning should be removed once slot field is selected
+
+* #2658 [fixed] - slot, duration, break time are not saved for appointment booking
+
+* #2660 [fixed] - guest capacity value is not saved in table booking
+
+* #2661 [fixed] - Charged_per drop down value is not updating for table booking
+
+* #2284 [fixed] - Layout issue in pt_BR locale.
+
+* #2468 [fixed] - Guest user is able to checkout if guest checkout is disabled.
+
+* #2517 [fixed] - Product description text gets selected if click on drop down icon on product page
+
+* #2549 [fixed] - Invoices aren't legally valid.
+
+* #2571 [fixed] - compare icon should classify the total compare product added in the comparison page
+
+* #2592 [fixed] - No menu for the logged in user when clicking over comparison
+
+* #2593 [fixed] - Cannot read property 'disabled' of undefined" on filter price
+
+* #2594 [fixed] - After refund quantity of product increases.
+
+* #2595 [fixed] - Category image size issue in velocity theme.
+
+* #2610 [fixed] - some of the attribute values aren't visible in comparison page
+
+* #2616 [fixed] - Tiny Bug on Admin Pages
+
+* #2637 [fixed] - blank admin page if username contains whitespaces in email configuration
+
+* #2640 [fixed] - product moved to cart still showing in wishlist
+
+* #2641 [fixed] - Issue on wishlist page for guest user
+
+* #2644 [fixed] - Add an option to set encryption to none during installation
+
+* #2646 [fixed] - error missing wishlist or compare icon on mobile view
+
+* #2666 [fixed] - fix the UI for booking product in cart page
+
+* #2667 [fixed] - By default wishlist option is selected in cart
+
+* #2669 [fixed] - Booking product should be removed from the cart when selected slot time expired
+
+* #2671 [fixed] - Error on moving booking product to wishlist
+
+* #2672 [fixed] - wrong price calculated in cart for rental booking
+
+* #2674 [fixed] - Rental booking added to cart without selecting date in velocity
+
+* #2677 [fixed] - error on cart when rental booking update from backend
+
+* #2678 [fixed] - UI issue in rental booking product page
+
+* #2693 [fixed] - Booking product page - add to cart button js error
+
+* #2707 [fixed] Getting exception when generate invoice in appointment booking
+
+
 ## **v1.0.0 (24th of February 2020)** - *Release*
 
 * #2377 [fixed] - Getting exception on creating a new category under any other category.

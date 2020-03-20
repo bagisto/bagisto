@@ -16,7 +16,10 @@ class CoreConfig extends Model implements CoreConfigContract
     protected $table = 'core_config';
 
     protected $fillable = [
-        'code', 'value','channel_code','locale_code'
+        'code',
+        'value',
+        'channel_code',
+        'locale_code',
     ];
 
     protected $hidden = ['token'];

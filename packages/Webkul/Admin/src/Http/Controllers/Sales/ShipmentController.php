@@ -7,12 +7,6 @@ use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\OrderItemRepository;
 use Webkul\Sales\Repositories\ShipmentRepository;
 
-/**
- * Sales Shipment controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ShipmentController extends Controller
 {
     /**
@@ -25,30 +19,30 @@ class ShipmentController extends Controller
     /**
      * OrderRepository object
      *
-     * @var mixed
+     * @var \Webkul\Sales\Repositories\OrderRepository
      */
     protected $orderRepository;
 
     /**
      * OrderItemRepository object
      *
-     * @var mixed
+     * @var \Webkul\Sales\Repositories\OrderItemRepository
      */
     protected $orderItemRepository;
 
     /**
      * ShipmentRepository object
      *
-     * @var mixed
+     * @var \Webkul\Sales\Repositories\ShipmentRepository
      */
     protected $shipmentRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Sales\Repositories\ShipmentRepository  $shipmentRepository
-     * @param  \Webkul\Sales\Repositories\OrderRepository     $orderRepository
-     * @param  \Webkul\Sales\Repositories\OrderitemRepository $orderItemRepository
+     * @param  \Webkul\Sales\Repositories\ShipmentRepository   $shipmentRepository
+     * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
+     * @param  \Webkul\Sales\Repositories\OrderitemRepository  $orderItemRepository
      * @return void
      */
     public function __construct(
@@ -81,7 +75,7 @@ class ShipmentController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param int $orderId
+     * @param  int  $orderId
      * @return \Illuminate\View\View
      */
     public function create($orderId)
@@ -100,7 +94,7 @@ class ShipmentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param int $orderId
+     * @param  int  $orderId
      * @return \Illuminate\Http\Response
      */
     public function store($orderId)
@@ -115,9 +109,9 @@ class ShipmentController extends Controller
 
         $this->validate(request(), [
             'shipment.carrier_title' => 'required',
-            'shipment.track_number' => 'required',
-            'shipment.source' => 'required',
-            'shipment.items.*.*' => 'required|numeric|min:0',
+            'shipment.track_number'  => 'required',
+            'shipment.source'        => 'required',
+            'shipment.items.*.*'     => 'required|numeric|min:0',
         ]);
 
         $data = request()->all();
@@ -138,13 +132,14 @@ class ShipmentController extends Controller
     /**
      * Checks if requested quantity available or not
      *
-     * @param array $data
-     * @return boolean
+     * @param  array  $data
+     * @return bool
      */
     public function isInventoryValidate(&$data)
     {
-        if (! isset($data['shipment']['items']))
+        if (! isset($data['shipment']['items'])) {
             return ;
+        }
 
         $valid = false;
 
@@ -154,13 +149,15 @@ class ShipmentController extends Controller
             if ($qty = $inventorySource[$inventorySourceId]) {
                 $orderItem = $this->orderItemRepository->find($itemId);
 
-                if ($orderItem->qty_to_ship < $qty)
+                if ($orderItem->qty_to_ship < $qty) {
                     return false;
+                }
 
                 if ($orderItem->getTypeInstance()->isComposite()) {
                     foreach ($orderItem->children as $child) {
-                        if (! $child->qty_ordered)
+                        if (! $child->qty_ordered) {
                             continue;
+                        }
 
                         $finalQty = ($child->qty_ordered / $orderItem->qty_ordered) * $qty;
 
@@ -168,16 +165,18 @@ class ShipmentController extends Controller
                             ->where('inventory_source_id', $inventorySourceId)
                             ->sum('qty');
 
-                        if ($child->qty_to_ship < $finalQty || $availableQty < $finalQty)
+                        if ($child->qty_to_ship < $finalQty || $availableQty < $finalQty) {
                             return false;
+                        }
                     }
                 } else {
                     $availableQty = $orderItem->product->inventories()
                             ->where('inventory_source_id', $inventorySourceId)
                             ->sum('qty');
 
-                    if ($orderItem->qty_to_ship < $qty || $availableQty < $qty)
+                    if ($orderItem->qty_to_ship < $qty || $availableQty < $qty) {
                         return false;
+                    }
                 }
 
                 $valid = true;

@@ -12,22 +12,22 @@ class ProductsCategoriesProxyController extends Controller
     /**
      * CategoryRepository object
      *
-     * @var CategoryRepository
+     * @var \Webkul\Category\Repositories\CategoryRepository
      */
     protected $categoryRepository;
 
     /**
      * ProductRepository object
      *
-     * @var ProductRepository
+     * @var \Webkul\Product\Repositories\ProductRepository
      */
     protected $productRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param Webkul\Category\Repositories\CategoryRepository $categoryRepository
-     * @param Webkul\Product\Repositories\ProductRepository   $productRepository
+     * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      *
      * @return void
      */
@@ -44,12 +44,10 @@ class ProductsCategoriesProxyController extends Controller
     }
 
     /**
-     * Show product or category view. If neither category nor product matches,
-     * abort with code 404.
+     * Show product or category view. If neither category nor product matches, abort with code 404.
      *
-     * @param Request $request
-     *
-     * @return \Illuminate\View\View
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\View\View|\Exception
      */
     public function index(Request $request)
     {

@@ -5,12 +5,6 @@ namespace Webkul\API\Http\Controllers\Shop;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
 use Webkul\API\Http\Resources\Customer\CustomerAddress as CustomerAddressResource;
 
-/**
- * Address controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class AddressController extends Controller
 {
     /**
@@ -30,18 +24,16 @@ class AddressController extends Controller
     /**
      * CustomerAddressRepository object
      *
-     * @var Object
+     * @var \Webkul\Customer\Repositories\CustomerAddressRepository
      */
     protected $customerAddressRepository;
 
     /**
      * Controller instance
      *
-     * @param Webkul\Customer\Repositories\CustomerAddressRepository $customerAddressRepository
+     * @param  Webkul\Customer\Repositories\CustomerAddressRepository  $customerAddressRepository
      */
-    public function __construct(
-        CustomerAddressRepository $customerAddressRepository
-    )
+    public function __construct(CustomerAddressRepository $customerAddressRepository)
     {
         $this->guard = request()->has('token') ? 'api' : 'customer';
 
@@ -62,6 +54,7 @@ class AddressController extends Controller
     public function get()
     {
         $customer = auth($this->guard)->user();
+        
         $addresses = $customer->addresses()->get();
 
         return CustomerAddressResource::collection($addresses);
@@ -77,25 +70,25 @@ class AddressController extends Controller
         $customer = auth($this->guard)->user();
 
         request()->merge([
-            'address1' => implode(PHP_EOL, array_filter(request()->input('address1'))),
-            'customer_id' => $customer->id
+            'address1'    => implode(PHP_EOL, array_filter(request()->input('address1'))),
+            'customer_id' => $customer->id,
         ]);
 
         $this->validate(request(), [
             'address1' => 'string|required',
-            'country' => 'string|required',
-            'state' => 'string|required',
-            'city' => 'string|required',
+            'country'  => 'string|required',
+            'state'    => 'string|required',
+            'city'     => 'string|required',
             'postcode' => 'required',
-            'phone' => 'required'
+            'phone'    => 'required',
         ]);
 
         $customerAddress = $this->customerAddressRepository->create(request()->all());
 
         return response()->json([
-                'message' => 'Your address has been created successfully.',
-                'data' => new CustomerAddressResource($customerAddress)
-            ]);
+            'message' => 'Your address has been created successfully.',
+            'data'    => new CustomerAddressResource($customerAddress),
+        ]);
     }
 
     /**
@@ -111,18 +104,18 @@ class AddressController extends Controller
 
         $this->validate(request(), [
             'address1' => 'string|required',
-            'country' => 'string|required',
-            'state' => 'string|required',
-            'city' => 'string|required',
+            'country'  => 'string|required',
+            'state'    => 'string|required',
+            'city'     => 'string|required',
             'postcode' => 'required',
-            'phone' => 'required'
+            'phone'    => 'required',
         ]);
 
         $this->customerAddressRepository->update(request()->all(), request()->input('id'));
 
         return response()->json([
-                'message' => 'Your address has been updated successfully.',
-                'data' => new CustomerAddressResource($this->customerAddressRepository->find(request()->input('id')))
-            ]);
+            'message' => 'Your address has been updated successfully.',
+            'data'    => new CustomerAddressResource($this->customerAddressRepository->find(request()->input('id'))),
+        ]);
     }
 }

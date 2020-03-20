@@ -9,34 +9,27 @@ use Webkul\Core\Eloquent\Repository;
 use Webkul\Sales\Contracts\Order;
 use Webkul\Sales\Models\Order as OrderModel;
 
-/**
- * Order Repository
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class OrderRepository extends Repository
 {
     /**
      * OrderItemRepository object
      *
-     * @var Object
+     * @var \Webkul\Sales\Repositories\OrderItemRepository
      */
     protected $orderItemRepository;
 
     /**
      * DownloadableLinkPurchasedRepository object
      *
-     * @var Object
+     * @var \Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository
      */
     protected $downloadableLinkPurchasedRepository;
 
     /**
      * Create a new repository instance.
      *
-     * @param Webkul\Sales\Repositories\OrderItemRepository                 $orderItemRepository
-     * @param Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository
-     *
+     * @param  \Webkul\Sales\Repositories\OrderItemRepository  $orderItemRepository
+     * @param  \Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository  $downloadableLinkPurchasedRepository
      * @return void
      */
     public function __construct(
@@ -54,18 +47,16 @@ class OrderRepository extends Repository
     /**
      * Specify Model class name
      *
-     * @return Mixed
+     * @return string
      */
-
     public function model()
     {
         return Order::class;
     }
 
     /**
-     * @param array $data
-     *
-     * @return mixed
+     * @param  array  $data
+     * @return \Webkul\Sales\Contracts\Order
      */
     public function create(array $data)
     {
@@ -132,9 +123,8 @@ class OrderRepository extends Repository
     }
 
     /**
-     * @param int $orderId
-     *
-     * @return mixed
+     * @param  int  $orderId
+     * @return \Webkul\Sales\Contracts\Order
      */
     public function cancel($orderId)
     {
@@ -191,18 +181,18 @@ class OrderRepository extends Repository
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function generateIncrementId()
     {
-        foreach ([  'Prefix' => 'prefix',
-                    'Length' => 'length',
-                    'Suffix' => 'suffix', ] as
+        foreach ([  'Prefix'   => 'prefix',
+                    'Length'   => 'length',
+                    'Suffix'   => 'suffix', ] as
                     $varSuffix => $confKey)
-                {
-                    $var = "invoiceNumber{$varSuffix}";
-                    $$var = core()->getConfigData('sales.orderSettings.order_number.order_number_'.$confKey) ?: false;
-                }
+        {
+            $var = "invoiceNumber{$varSuffix}";
+            $$var = core()->getConfigData('sales.orderSettings.order_number.order_number_'.$confKey) ?: false;
+        }
 
         $lastOrder = $this->model->orderBy('id', 'desc')->limit(1)->first();
         $lastId = $lastOrder ? $lastOrder->id : 0;
@@ -217,8 +207,7 @@ class OrderRepository extends Repository
     }
 
     /**
-     * @param mixed $order
-     *
+     * @param  \Webkul\Sales\Contracts\Order  $order
      * @return void
      */
     public function isInCompletedState($order)
@@ -249,8 +238,7 @@ class OrderRepository extends Repository
     }
 
     /**
-     * @param mixed $order
-     *
+     * @param  \Webkul\Sales\Contracts\Order  $order
      * @return void
      */
     public function isInCanceledState($order)
@@ -284,8 +272,7 @@ class OrderRepository extends Repository
     }
 
     /**
-     * @param mixed $order
-     *
+     * @param  \Webkul\Sales\Contracts\Order  $order
      * @return void
      */
     public function updateOrderStatus($order)
@@ -307,8 +294,7 @@ class OrderRepository extends Repository
     }
 
     /**
-     * @param mixed $order
-     *
+     * @param  \Webkul\Sales\Contracts\Order  $order
      * @return mixed
      */
     public function collectTotals($order)

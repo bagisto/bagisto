@@ -4,12 +4,6 @@ namespace Webkul\Product\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
 
-/**
- * Product Repository
- *
- * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ProductFlatRepository extends Repository
 {
     public function model()
@@ -20,43 +14,42 @@ class ProductFlatRepository extends Repository
     /**
      * Maximum Price of Category Product
      *
-     * @param Category $category
+     * @param \Webkul\Category\Contracts\Category  $category
      * @return float
      */
     public function getCategoryProductMaximumPrice($category = null)
     {
-        if (! $category)
+        if (! $category) {
             return $this->model->max('max_price');
+        }
 
         return $this->model
-            ->leftJoin('product_categories', 'product_flat.product_id', 'product_categories.product_id')
-            ->where('product_categories.category_id', $category->id)
-            ->max('max_price');
+                    ->leftJoin('product_categories', 'product_flat.product_id', 'product_categories.product_id')
+                    ->where('product_categories.category_id', $category->id)
+                    ->max('max_price');
     }
 
     /**
      * get Category Product Attribute
      *
-     * @param CategoryId $categoryId
+     * @param  int  $categoryId
      * @return array
      */
     public function getCategoryProductAttribute($categoryId)
     {
         $qb = $this->model
-            ->leftJoin('product_categories', 'product_flat.product_id', 'product_categories.product_id')
-            ->where('product_categories.category_id', $categoryId)
-            ->where('product_flat.channel', core()->getCurrentChannelCode())
-            ->where('product_flat.locale', app()->getLocale());
+                   ->leftJoin('product_categories', 'product_flat.product_id', 'product_categories.product_id')
+                   ->where('product_categories.category_id', $categoryId)
+                   ->where('product_flat.channel', core()->getCurrentChannelCode())
+                   ->where('product_flat.locale', app()->getLocale());
 
-        $productArrributes = $qb
-            ->leftJoin('product_attribute_values as pa', 'product_flat.product_id', 'pa.product_id')
-            ->pluck('pa.attribute_id')
-            ->toArray();
+        $productArrributes = $qb->leftJoin('product_attribute_values as pa', 'product_flat.product_id', 'pa.product_id')
+                                ->pluck('pa.attribute_id')
+                                ->toArray();
 
-        $productSuperArrributes = $qb
-            ->leftJoin('product_super_attributes as ps', 'product_flat.product_id', 'ps.product_id')
-            ->pluck('ps.attribute_id')
-            ->toArray();
+        $productSuperArrributes = $qb->leftJoin('product_super_attributes as ps', 'product_flat.product_id', 'ps.product_id')
+                                     ->pluck('ps.attribute_id')
+                                     ->toArray();
 
         $productCategoryArrributes = array_unique(array_merge($productArrributes, $productSuperArrributes));
 
@@ -66,9 +59,9 @@ class ProductFlatRepository extends Repository
     /**
      * get Filterable Attributes.
      *
-     * @param array $category
-     * @param array $products
-     * @return collection
+     * @param  array  $category
+     * @param  array  $products
+     * @return \Illuminate\Support\Collection
      */
     public function getFilterableAttributes($category, $products) {
         $filterAttributes = [];

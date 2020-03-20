@@ -5,12 +5,6 @@ namespace Webkul\Admin\Http\Controllers\Customer;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 
-/**
- * Customer Group controlller
- *
- * @author    Rahul Shukla <rahulshukla.symfony517@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class CustomerGroupController extends Controller
 {
     /**
@@ -23,14 +17,14 @@ class CustomerGroupController extends Controller
     /**
      * CustomerGroupRepository object
      *
-     * @var array
+     * @var \Webkul\Customer\Repositories\CustomerGroupRepository
     */
     protected $customerGroupRepository;
 
      /**
      * Create a new controller instance.
      *
-     * @param \Webkul\Customer\Repositories\CustomerGroupRepository $customerGroupRepository;
+     * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository;
      * @return void
      */
     public function __construct(CustomerGroupRepository $customerGroupRepository)
@@ -130,7 +124,7 @@ class CustomerGroupController extends Controller
 
         if ($customerGroup->is_user_defined == 0) {
             session()->flash('warning', trans('admin::app.customers.customers.group-default'));
-        } else if (count($customerGroup->customer) > 0) {
+        } elseif (count($customerGroup->customer) > 0) {
             session()->flash('warning', trans('admin::app.response.customer-associate', ['name' => 'Customer Group']));
         } else {
             try {

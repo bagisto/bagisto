@@ -2,19 +2,13 @@
 
 namespace Webkul\Product\Helpers;
 
-/**
- * Product View Helper
- *
- * @author Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class View extends AbstractProduct
 {
     /**
      * Returns the visible custom attributes
      *
-     * @param Webkul\Product\Models\Product $product
-     * @return integer
+     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @return void|array
      */
     public function getAdditionalData($product)
     {
@@ -33,7 +27,7 @@ class View extends AbstractProduct
 
             if ($attribute->type == 'boolean') {
                 $value = $value ? 'Yes' : 'No';
-            } else if($value) {
+            } elseif($value) {
                 if ($attribute->type == 'select') {
                     $attributeOption = $attributeOptionReposotory->find($value);
 
@@ -44,7 +38,7 @@ class View extends AbstractProduct
                             continue;
                         }
                     }
-                } else if ($attribute->type == 'multiselect' || $attribute->type == 'checkbox') {
+                } elseif ($attribute->type == 'multiselect' || $attribute->type == 'checkbox') {
                     $lables = [];
 
                     $attributeOptions = $attributeOptionReposotory->findWhereIn('id', explode(",", $value));
@@ -60,12 +54,12 @@ class View extends AbstractProduct
             }
 
             $data[] = [
-                'id' => $attribute->id,
-                'code' => $attribute->code,
-                'label' => $attribute->name,
-                'value' => $value,
+                'id'         => $attribute->id,
+                'code'       => $attribute->code,
+                'label'      => $attribute->name,
+                'value'      => $value,
                 'admin_name' => $attribute->admin_name,
-                'type' => $attribute->type,
+                'type'       => $attribute->type,
             ];
         }
 

@@ -8,7 +8,9 @@
 
         <a
             class="unset wishlist-icon {{ $addWishlistClass ?? '' }} text-right"
-            @if (! $isWished)
+            @if(isset($route))
+                href="{{ $route }}"
+            @elseif (! $isWished)
                 href="{{ route('customer.wishlist.add', $product->product_id) }}"
                 title="{{ __('velocity::app.shop.wishlist.add-wishlist-text') }}"
             @elseif (isset($itemId) && $itemId)
@@ -16,15 +18,23 @@
                 title="{{ __('velocity::app.shop.wishlist.remove-wishlist-text') }}"
             @endif>
 
-            <wishlist-component active="{{ !$isWished }}"></wishlist-component>
+            <wishlist-component active="{{ !$isWished }}" is-customer="true"></wishlist-component>
+
+            @if (isset($text))
+                {!! $text !!}
+            @endif
         </a>
     @endauth
 
     @guest('customer')
-        <a
-            href="{{ route('customer.session.index') }}"
-            class="unset wishlist-icon {{ $addWishlistClass ?? '' }} text-right">
-            <wishlist-component active="false"></wishlist-component>
-        </a>
+        <wishlist-component
+            active="false"
+            is-customer="false"
+            product-id="{{ $product->id }}"
+            product-slug="{{ $product->url_key }}"
+            add-class="{{ $addWishlistClass ?? '' }}"
+            added-text="{{ __('shop::app.customer.account.wishlist.add') }}"
+            remove-text="{{ __('shop::app.customer.account.wishlist.remove') }}">
+        </wishlist-component>
     @endauth
 {!! view_render_event('bagisto.shop.products.wishlist.after') !!}

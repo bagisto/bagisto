@@ -7,7 +7,11 @@ use Webkul\Sales\Contracts\Refund as RefundContract;
 
 class Refund extends Model implements RefundContract
 {
-    protected $guarded = ['id', 'created_at', 'updated_at'];
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at',
+    ];
 
     protected $statusLabel = [
     ];

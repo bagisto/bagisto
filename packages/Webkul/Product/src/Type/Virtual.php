@@ -2,12 +2,6 @@
 
 namespace Webkul\Product\Type;
 
-/**
- * Class Virtual.
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class Virtual extends AbstractType
 {
     /**
@@ -27,45 +21,47 @@ class Virtual extends AbstractType
         'admin::catalog.products.accordians.images',
         'admin::catalog.products.accordians.categories',
         'admin::catalog.products.accordians.channels',
-        'admin::catalog.products.accordians.product-links'
+        'admin::catalog.products.accordians.product-links',
     ];
 
     /**
      * Is a stokable product type
      *
-     * @var boolean
+     * @var bool
      */
     protected $isStockable = false;
 
     /**
      * Show quantity box
      *
-     * @var boolean
+     * @var bool
      */
     protected $showQuantityBox = true;
 
     /**
      * Return true if this product type is saleable
      *
-     * @return boolean
+     * @return bool
      */
     public function isSaleable()
     {
-        if (! $this->product->status)
+        if (! $this->product->status) {
             return false;
+        }
 
-        if ($this->haveSufficientQuantity(1))
+        if ($this->haveSufficientQuantity(1)) {
             return true;
+        }
 
         return false;
     }
 
     /**
-     * @param integer $qty
+     * @param  int  $qty
      * @return bool
      */
     public function haveSufficientQuantity($qty)
     {
-        return $qty <= $this->totalQuantity() ? true : false;
+        return true;
     }
 }

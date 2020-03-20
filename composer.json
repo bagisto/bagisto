@@ -21,7 +21,7 @@
         "barryvdh/laravel-dompdf": "0.8.5",
         "doctrine/dbal": "2.9.2",
         "fideloper/proxy": "^4.0",
-        "flynsarmy/db-blade-compiler": "*",
+        "flynsarmy/db-blade-compiler": "^5.5",
         "guzzlehttp/guzzle": "~6.0",
         "intervention/image": "^2.4",
         "intervention/imagecache": "^2.3",
@@ -33,21 +33,20 @@
         "maatwebsite/excel": "3.1.18",
         "nwidart/laravel-modules": "^3.2",
         "prettus/l5-repository": "^2.6",
-        "tymon/jwt-auth": "^1.0.0",
-        "barryvdh/laravel-debugbar": "^3.1",
-        "fzaninotto/faker": "^1.4"
+        "tymon/jwt-auth": "^1.0.0"
     },
 
     "require-dev": {
-        "codeception/codeception": "^4.0",
+        "codeception/codeception": "4.1.1",
         "codeception/module-asserts": "^1.1",
         "codeception/module-filesystem": "^1.0",
         "codeception/module-laravel5": "^1.0",
         "filp/whoops": "^2.0",
-        "laravel/dusk": "^5.7.0",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^2.0",
-        "phpunit/phpunit": "^7.0"
+        "phpunit/phpunit": "^7.0",
+        "barryvdh/laravel-debugbar": "^3.1",
+        "fzaninotto/faker": "^1.4"
     },
 
     "replace": {
@@ -101,7 +100,8 @@
         "Webkul\\CartRule\\": "packages/Webkul/CartRule/src",
         "Webkul\\Rule\\": "packages/Webkul/Rule/src",
         "Webkul\\CMS\\": "packages/Webkul/CMS/src",
-        "Webkul\\Velocity\\": "packages/Webkul/Velocity/src"
+        "Webkul\\Velocity\\": "packages/Webkul/Velocity/src",
+        "Webkul\\BookingProduct\\": "packages/Webkul/BookingProduct/src"
       }
     },
 

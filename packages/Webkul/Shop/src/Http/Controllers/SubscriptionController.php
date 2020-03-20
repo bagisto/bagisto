@@ -6,25 +6,19 @@ use Illuminate\Support\Facades\Mail;
 use Webkul\Shop\Mail\SubscriptionEmail;
 use Webkul\Core\Repositories\SubscribersListRepository;
 
-/**
- * Subscription controller
- *
- * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class SubscriptionController extends Controller
 {
     /**
      * SubscribersListRepository
      *
-     * @var Object
+     * @var \Webkul\Core\Repositories\SubscribersListRepository
      */
     protected $subscriptionRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\SubscribersListRepository $subscriptionRepository
+     * @param  \Webkul\Core\Repositories\SubscribersListRepository  $subscriptionRepository
      * @return void
      */
     public function __construct(SubscribersListRepository $subscriptionRepository)
@@ -37,12 +31,12 @@ class SubscriptionController extends Controller
     /**
      * Subscribes email to the email subscription list
      *
-     * @return Redirect
+     * @return \Illuminate\Http\Response
      */
     public function subscribe()
     {
         $this->validate(request(), [
-            'subscriber_email' => 'email|required'
+            'subscriber_email' => 'email|required',
         ]);
 
         $email = request()->input('subscriber_email');
@@ -78,10 +72,10 @@ class SubscriptionController extends Controller
 
             if ($mailSent) {
                 $result = $this->subscriptionRepository->create([
-                    'email' => $email,
-                    'channel_id' => core()->getCurrentChannel()->id,
+                    'email'         => $email,
+                    'channel_id'    => core()->getCurrentChannel()->id,
                     'is_subscribed' => 1,
-                    'token' => $token
+                    'token'         => $token,
                 ]);
 
                 if (! $result) {
@@ -100,7 +94,8 @@ class SubscriptionController extends Controller
     /**
      * To unsubscribe from a the subcription list
      *
-     * @var string $token
+     * @param  string  $token
+     * @return \Illuminate\Http\Response
      */
     public function unsubscribe($token)
     {

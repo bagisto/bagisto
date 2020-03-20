@@ -4,12 +4,6 @@ namespace Webkul\Core\Http\Controllers;
 
 use Webkul\Core\Repositories\SliderRepository;
 
-/**
- * Slider controller for managing the slider controls.
- *
- * @author  Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
- * @copyright  2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class SliderController extends Controller
 {
     /**
@@ -22,7 +16,7 @@ class SliderController extends Controller
     /**
      * SliderRepository
      *
-     * @var Object
+     * @var \Webkul\Core\Repositories\SliderRepository
      */
     protected $sliderRepository;
 
@@ -34,7 +28,7 @@ class SliderController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\SliderRepository $sliderRepository
+     * @param  \Webkul\Core\Repositories\SliderRepository  $sliderRepository
      * @return void
      */
     public function __construct(SliderRepository $sliderRepository)
@@ -69,22 +63,23 @@ class SliderController extends Controller
     /**
      * Creates the new sider item.
      *
-     * @return response
+     * @return \Illuminate\Http\Response
      */
     public function store()
     {
         $this->validate(request(), [
-            'title' => 'string|required',
+            'title'      => 'string|required',
             'channel_id' => 'required',
-            'image.*'  => 'required|mimes:jpeg,bmp,png,jpg'
+            'image.*'    => 'required|mimes:jpeg,bmp,png,jpg',
         ]);
 
         $result = $this->sliderRepository->save(request()->all());
 
-        if ($result)
+        if ($result) {
             session()->flash('success', trans('admin::app.settings.sliders.created-success'));
-        else
+        } else {
             session()->flash('success', trans('admin::app.settings.sliders.created-fail'));
+        }
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -104,18 +99,20 @@ class SliderController extends Controller
     /**
      * Edit the previously created slider item.
      *
-     * @return response
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
     public function update($id)
     {
         $this->validate(request(), [
-            'title' => 'string|required',
+            'title'      => 'string|required',
             'channel_id' => 'required',
-            'image.*'  => 'sometimes|mimes:jpeg,bmp,png,jpg'
+            'image.*'    => 'sometimes|mimes:jpeg,bmp,png,jpg',
         ]);
 
         if ( is_null(request()->image)) {
             session()->flash('error', trans('admin::app.settings.sliders.update-fail'));
+            
             return redirect()->back();
         }
 
@@ -133,7 +130,8 @@ class SliderController extends Controller
     /**
      * Delete a slider item and preserve the last one from deleting
      *
-     * @return mixed
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {

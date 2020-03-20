@@ -5,7 +5,6 @@ namespace Webkul\Admin\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\PDOException;
-use Illuminate\Database\Eloquent\ErrorException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -23,7 +22,7 @@ class Handler extends ExceptionHandler
      * Render an exception into an HTTP response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
+     * @param  \Exception   $exception
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
@@ -34,9 +33,9 @@ class Handler extends ExceptionHandler
             $statusCode = in_array($exception->getStatusCode(), [401, 403, 404, 503]) ? $exception->getStatusCode() : 500;
 
             return $this->response($path, $statusCode);
-        } else if ($exception instanceof ModelNotFoundException) {
+        } elseif ($exception instanceof ModelNotFoundException) {
             return $this->response($path, 404);
-        } else if ($exception instanceof PDOException) {
+        } elseif ($exception instanceof PDOException) {
             return $this->response($path, 500);
         }
 
@@ -68,10 +67,10 @@ class Handler extends ExceptionHandler
     {
         if (request()->expectsJson()) {
             return response()->json([
-                    'error' => isset($this->jsonErrorMessages[$statusCode])
-                        ? $this->jsonErrorMessages[$statusCode]
-                        : 'Something went wrong, please try again later.'
-                ], $statusCode);
+                'error' => isset($this->jsonErrorMessages[$statusCode])
+                           ? $this->jsonErrorMessages[$statusCode]
+                           : 'Something went wrong, please try again later.'
+            ], $statusCode);
         }
 
         return response()->view("{$path}::errors.{$statusCode}", [], $statusCode);

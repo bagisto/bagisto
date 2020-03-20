@@ -8,12 +8,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Str;
 
-/**
- * Reset Password controlller for the customer.
- *
- * @author    Prashant Singh <prashant.singh852@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ResetPasswordController extends Controller
 {
     use ResetsPasswords;
@@ -59,8 +53,8 @@ class ResetPasswordController extends Controller
     {
         try {
             $this->validate(request(), [
-                'token' => 'required',
-                'email' => 'required|email',
+                'token'    => 'required',
+                'email'    => 'required|email',
                 'password' => 'required|confirmed|min:6',
             ]);
 
@@ -77,7 +71,7 @@ class ResetPasswordController extends Controller
             return back()
                 ->withInput(request(['email']))
                 ->withErrors([
-                    'email' => trans($response)
+                    'email' => trans($response),
                 ]);
         } catch(\Exception $e) {
             session()->flash('error', trans($e->getMessage()));

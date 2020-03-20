@@ -43,7 +43,9 @@
 
                     <p class="pt14 fs14 description-text" v-html="product.shortDescription"></p>
 
-                    <vnode-injector :nodes="getAddToCartHtml()"></vnode-injector>
+                    <div class="product-actions">
+                        <vnode-injector :nodes="getDynamicHTML(product.addToCartHtml)"></vnode-injector>
+                    </div>
                 </div>
 
                 <div
@@ -93,7 +95,9 @@
         },
 
         mounted: function () {
-            // console.log(this.quickViewDetails, this.quickView);
+            $('.compare-icon').click(this.closeQuickView);
+            $('.wishlist-icon').click(this.closeQuickView);
+            $('.add-to-cart-btn').click(() => setTimeout(this.closeQuickView, 0));
         },
 
         methods: {
@@ -106,21 +110,6 @@
             changeImage: function (imageIndex) {
                 this.currentlyActiveImage = imageIndex;
             },
-
-            getAddToCartHtml: function () {
-                const { render, staticRenderFns } = Vue.compile(this.product.addToCartHtml);
-                const _staticRenderFns = this.$options.staticRenderFns = staticRenderFns;
-
-                try {
-                    var output = render.call(this, this.$createElement)
-                } catch (exception) {
-                    console.log("something went wrong");
-                }
-
-                this.$options.staticRenderFns = _staticRenderFns
-
-                return output;
-            }
         }
     }
 </script>

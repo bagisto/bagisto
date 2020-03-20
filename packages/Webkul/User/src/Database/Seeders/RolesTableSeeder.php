@@ -2,9 +2,9 @@
 
 namespace Webkul\User\Database\Seeders;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 use Webkul\User\Models\Role;
-use DB;
 
 class RolesTableSeeder extends Seeder
 {
@@ -15,10 +15,10 @@ class RolesTableSeeder extends Seeder
         DB::table('roles')->delete();
 
         DB::table('roles')->insert([
-                'id' => 1,
-                'name' => 'Administrator',
-                'description' => 'Administrator rolem',
-                'permission_type' => 'all'
-            ]);
+            'id'              => 1,
+            'name'            => 'Administrator',
+            'description'     => 'Administrator rolem',
+            'permission_type' => 'all',
+        ]);
     }
 }

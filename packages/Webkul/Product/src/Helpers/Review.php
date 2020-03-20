@@ -1,28 +1,24 @@
 <?php
 
 namespace Webkul\Product\Helpers;
-use DB;
 
-/**
- * Product Review Helper
- *
- * @author Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
+use Illuminate\Support\Facades\DB;
+
 class Review extends AbstractProduct
 {
     /**
      * Returns the product's avg rating
      *
-     * @param Product $product
+     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
      * @return float
      */
     public function getReviews($product)
     {
         static $reviews = [];
 
-        if(array_key_exists($product->id, $reviews))
+        if (array_key_exists($product->id, $reviews)) {
             return $reviews[$product->id];
+        }
 
         return $reviews[$product->id] = $product->reviews()->where('status', 'approved');
     }
@@ -30,15 +26,16 @@ class Review extends AbstractProduct
     /**
      * Returns the product's avg rating
      *
-     * @param Product $product
+     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
      * @return float
      */
     public function getAverageRating($product)
     {
         static $avgRating = [];
 
-        if(array_key_exists($product->id, $avgRating))
+        if (array_key_exists($product->id, $avgRating)) {
             return $avgRating[$product->id];
+        }
 
         return $avgRating[$product->id] = number_format(round($product->reviews()->where('status', 'approved')->avg('rating'), 2), 1);
     }
@@ -46,15 +43,16 @@ class Review extends AbstractProduct
     /**
      * Returns the total review of the product
      *
-    * @param Product $product
-     * @return integer
+    * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @return int
      */
     public function getTotalReviews($product)
     {
         static $totalReviews = [];
 
-        if(array_key_exists($product->id, $totalReviews))
+        if (array_key_exists($product->id, $totalReviews)) {
             return $totalReviews[$product->id];
+        }
 
         return $totalReviews[$product->id] = $product->reviews()->where('status', 'approved')->count();
     }
@@ -62,15 +60,16 @@ class Review extends AbstractProduct
      /**
      * Returns the total rating of the product
      *
-     * @param Product $product
-     * @return integer
+     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @return int
      */
     public function getTotalRating($product)
     {
         static $totalRating = [];
 
-        if(array_key_exists($product->id, $totalRating))
+        if (array_key_exists($product->id, $totalRating)) {
             return $totalRating[$product->id];
+        }
 
         return $totalRating[$product->id] = $product->reviews()->where('status','approved')->sum('rating');
     }
@@ -78,16 +77,16 @@ class Review extends AbstractProduct
      /**
      * Returns the Percentage rating of the product
      *
-    * @param Product $product
-     * @return integer
+    * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @return int
      */
     public function getPercentageRating($product)
     {
         $reviews = $product->reviews()->where('status', 'approved')
-                    ->select('rating', DB::raw('count(*) as total'))
-                    ->groupBy('rating')
-                    ->orderBy('rating','desc')
-                    ->get();
+                           ->select('rating', DB::raw('count(*) as total'))
+                           ->groupBy('rating')
+                           ->orderBy('rating','desc')
+                           ->get();
 
         $totalReviews = $this->getTotalReviews($product);
 
@@ -99,11 +98,11 @@ class Review extends AbstractProduct
 
                         break;
                     } else {
-                        $percentage[$i]=0;
+                        $percentage[$i] = 0;
                     }
                 }
             } else {
-                $percentage[$i]=0;
+                $percentage[$i] = 0;
             }
         }
 

@@ -2,55 +2,67 @@
 
 namespace Webkul\Velocity;
 
-use Webkul\Category\Repositories\CategoryRepository as Category;
+use Webkul\Category\Repositories\CategoryRepository;
 
 class Velocity
 {
     /**
      * Content Type List
      *
-     * @var mixed
+     * @var array
      */
 	protected $content_type = [
-        // 'link' => 'Link CMS Page',
-        // 'product' => 'Catalog Products',
-        // 'static' => 'Static Content',
+        // 'link'     => 'Link CMS Page',
+        // 'product'  => 'Catalog Products',
+        // 'static'   => 'Static Content',
         'category' => 'Category Slug',
     ];
 
     /**
      * Catalog Product Type
      *
-     * @var mixed
+     * @var array
      */
 	protected $catalog_type = [
-        'new' => 'New Arrival',
-        'offer' => 'Offered Product [Special]',
+        'new'     => 'New Arrival',
+        'offer'   => 'Offered Product [Special]',
         'popular' => 'Popular Products',
-        'viewed' => 'Most Viewed',
-        'rated' => 'Most Rated',
-        'custom' => 'Custom Selection',
+        'viewed'  => 'Most Viewed',
+        'rated'   => 'Most Rated',
+        'custom'  => 'Custom Selection',
     ];
 
-	protected $category;
+	/**
+	 * CategoryRepository object
+	 * 
+	 * @var \Webkul\Category\Repositories\CategoryRepository
+	 */
+	protected $categoryRepository;
 
     /**
      * Create a new instance.
      *
-     * @param  Webkul\Category\Repositories\CategoryRepository  $category
+     * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
      * @return void
      */
-    public function __construct(
-        Category $category
-    ) {
-        $this->category = $category;
+    public function __construct(CategoryRepository $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
     }
 
-	public function getContentType() {
+    /**
+     * @return string
+     */
+    public function getContentType()
+    {
 		return $this->content_type;
     }
 
-    public function getCatalogType() {
+    /**
+     * @return string
+     */
+    public function getCatalogType()
+    {
 		return $this->catalog_type;
     }
 }

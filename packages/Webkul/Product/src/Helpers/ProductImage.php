@@ -2,27 +2,21 @@
 
 namespace Webkul\Product\Helpers;
 
-use Webkul\Attribute\Repositories\AttributeOptionRepository as AttributeOption;
 use Illuminate\Support\Facades\Storage;
 
-/**
- * Product Image Helper
- *
- * @author Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ProductImage extends AbstractProduct
 {
     /**
      * Retrieve collection of gallery images
      *
-     * @param Product $product
+     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
      * @return array
      */
     public function getGalleryImages($product)
     {
-        if (! $product)
+        if (! $product) {
             return [];
+        }
 
         $images = [];
 
@@ -31,19 +25,19 @@ class ProductImage extends AbstractProduct
                 continue;
 
             $images[] = [
-                'small_image_url' => url('cache/small/' . $image->path),
-                'medium_image_url' => url('cache/medium/' . $image->path),
-                'large_image_url' => url('cache/large/' . $image->path),
+                'small_image_url'    => url('cache/small/' . $image->path),
+                'medium_image_url'   => url('cache/medium/' . $image->path),
+                'large_image_url'    => url('cache/large/' . $image->path),
                 'original_image_url' => url('cache/original/' . $image->path),
             ];
         }
 
         if (! $product->parent_id && ! count($images)) {
             $images[] = [
-                'small_image_url' => asset('vendor/webkul/ui/assets/images/product/small-product-placeholder.png'),
-                'medium_image_url' => asset('vendor/webkul/ui/assets/images/product/meduim-product-placeholder.png'),
-                'large_image_url' => asset('vendor/webkul/ui/assets/images/product/large-product-placeholder.png'),
-                'original_image_url' => asset('vendor/webkul/ui/assets/images/product/large-product-placeholder.png')
+                'small_image_url'    => asset('vendor/webkul/ui/assets/images/product/small-product-placeholder.png'),
+                'medium_image_url'   => asset('vendor/webkul/ui/assets/images/product/meduim-product-placeholder.png'),
+                'large_image_url'    => asset('vendor/webkul/ui/assets/images/product/large-product-placeholder.png'),
+                'original_image_url' => asset('vendor/webkul/ui/assets/images/product/large-product-placeholder.png'),
             ];
         }
 
@@ -53,7 +47,7 @@ class ProductImage extends AbstractProduct
     /**
      * Get product's base image
      *
-     * @param Product $product
+     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
      * @return array
      */
     public function getProductBaseImage($product)
@@ -62,16 +56,16 @@ class ProductImage extends AbstractProduct
 
         if ($images && $images->count()) {
             $image = [
-                'small_image_url' => url('cache/small/' . $images[0]->path),
-                'medium_image_url' => url('cache/medium/' . $images[0]->path),
-                'large_image_url' => url('cache/large/' . $images[0]->path),
+                'small_image_url'    => url('cache/small/' . $images[0]->path),
+                'medium_image_url'   => url('cache/medium/' . $images[0]->path),
+                'large_image_url'    => url('cache/large/' . $images[0]->path),
                 'original_image_url' => url('cache/original/' . $images[0]->path),
             ];
         } else {
             $image = [
-                'small_image_url' => asset('vendor/webkul/ui/assets/images/product/small-product-placeholder.png'),
-                'medium_image_url' => asset('vendor/webkul/ui/assets/images/product/meduim-product-placeholder.png'),
-                'large_image_url' => asset('vendor/webkul/ui/assets/images/product/large-product-placeholder.png'),
+                'small_image_url'    => asset('vendor/webkul/ui/assets/images/product/small-product-placeholder.png'),
+                'medium_image_url'   => asset('vendor/webkul/ui/assets/images/product/meduim-product-placeholder.png'),
+                'large_image_url'    => asset('vendor/webkul/ui/assets/images/product/large-product-placeholder.png'),
                 'original_image_url' => asset('vendor/webkul/ui/assets/images/product/large-product-placeholder.png'),
             ];
         }

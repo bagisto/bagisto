@@ -7,12 +7,6 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-/**
- * New Shipment Mail class
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class NewShipmentNotification extends Mailable
 {
     use Queueable, SerializesModels;
@@ -20,14 +14,14 @@ class NewShipmentNotification extends Mailable
     /**
      * The shipment instance.
      *
-     * @var Shipment
+     * @var \Webkul\Sales\Contracts\Shipment
      */
     public $shipment;
 
     /**
      * Create a new message instance.
      *
-     * @param mixed $shipment
+     * @param  \Webkul\Sales\Contracts\Shipment  $shipment
      * @return void
      */
     public function __construct($shipment)
@@ -44,8 +38,9 @@ class NewShipmentNotification extends Mailable
     {
         $order = $this->shipment->order;
 
-        return $this->to($order->customer_email, $order->customer_full_name)
-                ->subject(trans('shop::app.mail.shipment.subject', ['order_id' => $order->increment_id]))
-                ->view('shop::emails.sales.new-shipment');
+        return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
+                    ->to($order->customer_email, $order->customer_full_name)
+                    ->subject(trans('shop::app.mail.shipment.subject', ['order_id' => $order->increment_id]))
+                    ->view('shop::emails.sales.new-shipment');
     }
 }

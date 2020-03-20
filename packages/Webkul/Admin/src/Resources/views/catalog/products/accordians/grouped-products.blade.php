@@ -203,9 +203,9 @@
             computed: {
                 inputName: function () {
                     if (this.groupedProduct.id)
-                        return "links[" + this.groupedProduct.id + "]";
+                        return 'links[' + this.groupedProduct.id + ']';
 
-                    return "links[link_" + this.index + "]";
+                    return 'links[link_' + this.index + ']';
                 }
             },
 

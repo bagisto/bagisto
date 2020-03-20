@@ -11,7 +11,12 @@ class ProductSalableInventory extends Model implements ProductSalableInventoryCo
 {
     public $timestamps = false;
 
-    protected $fillable = ['qty', 'sold_qty', 'product_id', 'channel_id'];
+    protected $fillable = [
+        'qty',
+        'sold_qty',
+        'product_id',
+        'channel_id',
+    ];
 
     /**
      * Get the channel owns the inventory.

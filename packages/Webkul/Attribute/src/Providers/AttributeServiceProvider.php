@@ -18,14 +18,4 @@ class AttributeServiceProvider extends ServiceProvider
 
         $this->app->make(EloquentFactory::class)->load(__DIR__ . '/../Database/Factories');
     }
-
-    /**
-     * Register services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-
-    }
 }

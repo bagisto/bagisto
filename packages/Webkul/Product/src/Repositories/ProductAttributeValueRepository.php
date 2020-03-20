@@ -7,25 +7,20 @@ use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Product\Models\ProductAttributeValue;
 
-/**
- * Product Attribute Value Reposotory
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ProductAttributeValueRepository extends Repository
 {
     /**
      * AttributeRepository object
      *
-     * @var array
+     * @var \Webkul\Attribute\Repositories\AttributeRepository
      */
     protected $attributeRepository;
 
     /**
-     * Create a new controller instance.
+     * Create a new reposotory instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeRepository $attributeRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
+     * @param  \Illuminate\Container\Container  $app
      * @return void
      */
     public function __construct(
@@ -41,7 +36,7 @@ class ProductAttributeValueRepository extends Repository
     /**
      * Specify Model class name
      *
-     * @return mixed
+     * @return string
      */
     function model()
     {
@@ -49,8 +44,8 @@ class ProductAttributeValueRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @return mixed
+     * @param  array  $data
+     * @return \Webkul\Product\Contracts\ProductAttributeValue
      */
     public function create(array $data)
     {
@@ -60,8 +55,9 @@ class ProductAttributeValueRepository extends Repository
             $attribute = $this->attributeRepository->findOneByField('code', $data['attribute_code']);
         }
 
-        if (! $attribute)
+        if (! $attribute) {
             return;
+        }
 
         $data[ProductAttributeValue::$attributeTypeFields[$attribute->type]] = $data['value'];
 
@@ -69,10 +65,10 @@ class ProductAttributeValueRepository extends Repository
     }
 
     /**
-     * @param string $column
-     * @param int    $attributeId
-     * @param int    $productId
-     * @param string $value
+     * @param  string  $column
+     * @param  int  $attributeId
+     * @param  int  $productId
+     * @param  string  $value
      * @return boolean
      */
     public function isValueUnique($productId, $attributeId, $column, $value)

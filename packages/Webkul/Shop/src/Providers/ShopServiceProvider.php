@@ -10,12 +10,6 @@ use Webkul\Shop\Http\Middleware\Theme;
 use Webkul\Shop\Http\Middleware\Currency;
 use Webkul\Core\Tree;
 
-/**
- * Shop service provider
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class ShopServiceProvider extends ServiceProvider
 {
     /**

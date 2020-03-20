@@ -209,11 +209,18 @@ return [
         'end' => 'End',
         'active' => 'Active',
         'inactive' => 'Inactive',
+        'true' => 'True',
+        'false' => 'False',
+        'approved' => 'Approved',
+        'pending' => 'Pending',
+        'disapproved' => 'Disapproved',
         'coupon-code' => 'Coupon Code',
         'times-used' => 'Times Used',
         'created-date' => 'Created Date',
         'expiration-date' => 'Expiration Date',
+        'edit' => 'Edit',
         'delete' => 'Delete',
+        'view' => 'View',
         'rtl' => 'RTL',
         'ltr' => 'LTR',
         'update-status' => 'Update Status'
@@ -565,6 +572,7 @@ return [
             'file' => 'File',
             'checkbox' => 'Checkbox',
             'use_in_flat' => "Create in Product Flat Table",
+            'is_comparable' => "Attribute is comparable",
             'default_null_option' => 'Create default empty option',
         ],
         'families' => [
@@ -941,7 +949,7 @@ return [
             'mass-update-success' => 'Customers updated successfully',
             'status' => 'Status',
             'active' => 'Active',
-            'in-active' => 'Inactive'
+            'inactive' => 'Inactive'
         ],
 
         'reviews' => [
@@ -1278,6 +1286,11 @@ return [
             'footer-toggle' => 'Toggle footer',
             'locale-options' => 'Unit Options',
             'weight-unit' => 'Weight Unit',
+            'email-settings'    => 'Email Settings',
+            'email-sender-name' => 'Email Sender Name',
+            'shop-email-from'   => 'Shop Email Address [For sending emails]',
+            'admin-name'    => 'Admin Name',
+            'admin-email' => 'Admin Email',
             'admin-page-limit' => 'Default Items Per Page (Admin)',
             'design' => 'Design',
             'admin-logo' => 'Admin Logo',
@@ -1293,7 +1306,9 @@ return [
             'default' => 'Default',
             'sandbox' => 'Sandbox',
             'all-channels' => 'All',
-            'all-locales' => 'All'
-        ]
+            'all-locales' => 'All',
+            'invoice-slip-design' => 'Invoice Slip Design',
+            'logo' => 'logo'
+       ]
     ]
 ];

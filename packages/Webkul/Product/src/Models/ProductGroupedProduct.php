@@ -9,7 +9,12 @@ class ProductGroupedProduct extends Model implements ProductGroupedProductContra
 {
     public $timestamps = false;
     
-    protected $fillable = ['qty', 'sort_order', 'product_id', 'associated_product_id'];
+    protected $fillable = [
+        'qty',
+        'sort_order',
+        'product_id',
+        'associated_product_id',
+    ];
 
     /**
      * Get the product that owns the image.

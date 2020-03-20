@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Webkul\Theme;
 
@@ -8,7 +8,7 @@ use Illuminate\View\FileViewFinder;
 
 class ThemeViewFinder extends FileViewFinder
 {
-    /*
+    /**
      * Override findNamespacedView() to add "resources/themes/theme_name/views/..." paths
      *
      * @param  string  $name
@@ -18,17 +18,30 @@ class ThemeViewFinder extends FileViewFinder
     {
         // Extract the $view and the $namespace parts
         list($namespace, $view) = $this->parseNamespaceSegments($name);
-        
+
         if ($namespace != 'admin') {
             $paths = $this->addThemeNamespacePaths($namespace);
 
-            // Find and return the view
-            return $this->findInPaths($view, $paths);
+            try {
+                return $this->findInPaths($view, $paths);
+            } catch(\Exception $e) {
+                if ($namespace != 'shop') {
+                    if (strpos($view, 'shop.') !== false) {
+                        $view = str_replace('shop.', 'shop.' . Themes::current()->code . '.', $view);
+                    }
+                }
+
+                return $this->findInPaths($view, $paths);
+            }
         } else {
             return $this->findInPaths($view, $this->hints[$namespace]);
         }
     }
 
+    /**
+     * @param  string  $namespace
+     * @return array
+     */
     public function addThemeNamespacePaths($namespace)
     {
         if (! isset($this->hints[$namespace])) {
@@ -43,7 +56,6 @@ class ThemeViewFinder extends FileViewFinder
             $newPath = base_path() . '/' . $path;
 
             $paths = Arr::prepend($paths, $newPath);
-
         }
 
         return $paths;
@@ -52,14 +64,14 @@ class ThemeViewFinder extends FileViewFinder
     /**
      * Override replaceNamespace() to add path for custom error pages "resources/themes/theme_name/views/errors/..."
      *
-     * @param  string  $namespace
+     * @param  string        $namespace
      * @param  string|array  $hints
      * @return void
      */
     public function replaceNamespace($namespace, $hints)
     {
         $this->hints[$namespace] = (array) $hints;
-        
+
         // Overide Error Pages
         if ($namespace == 'errors' || $namespace == 'mails') {
             $searchPaths = array_diff($this->paths, Themes::getLaravelViewPaths());
@@ -76,10 +88,12 @@ class ThemeViewFinder extends FileViewFinder
      * Set the array of paths where the views are being searched.
      *
      * @param  array  $paths
+     * @return void
      */
     public function setPaths($paths)
     {
         $this->paths = $paths;
+
         $this->flush();
     }
 }

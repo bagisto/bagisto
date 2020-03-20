@@ -2,12 +2,21 @@
 
 @inject ('reviewHelper', 'Webkul\Product\Helpers\Review')
 @inject ('customHelper', 'Webkul\Velocity\Helpers\Helper')
+@inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
 @php
     $total = $reviewHelper->getTotalReviews($product);
 
     $avgRatings = $reviewHelper->getAverageRating($product);
     $avgStarRating = ceil($avgRatings);
+
+    $productImages = [];
+    $images = $productImageHelper->getGalleryImages($product);
+
+    foreach ($images as $key => $image) {
+        array_push($productImages, $image['medium_image_url']);
+    }
+
 @endphp
 
 @section('page_title')
@@ -24,7 +33,7 @@
         .related-products {
             width: 100%;
         }
-        
+
         .recently-viewed {
             margin-top: 20px;
         }
@@ -85,11 +94,14 @@
                                         @include ('shop::products.price', ['product' => $product])
                                     </div>
 
-                                    @include ('shop::products.add-to-cart', [
-                                        'form' => false,
-                                        'product' => $product,
-                                        'showCartIcon' => false,
-                                    ])
+                                    <div class="product-actions">
+                                        @include ('shop::products.add-to-cart', [
+                                            'form' => false,
+                                            'product' => $product,
+                                            'showCompare' => true,
+                                            'showCartIcon' => false,
+                                        ])
+                                    </div>
                                 </div>
 
                                 {!! view_render_event('bagisto.shop.products.view.short_description.before', ['product' => $product]) !!}
@@ -162,26 +174,43 @@
 @endsection
 
 @push('scripts')
+    <script type='text/javascript' src='https://unpkg.com/spritespin@4.1.0/release/spritespin.js'></script>
+
     <script type="text/x-template" id="product-view-template">
-        <form method="POST" id="product-form" action="{{ route('cart.add', $product->product_id) }}" @click="onSubmit($event)">
+        <form
+            method="POST"
+            id="product-form"
+            @click="onSubmit($event)"
+            action="{{ route('cart.add', $product->product_id) }}">
+
             <input type="hidden" name="is_buy_now" v-model="is_buy_now">
-            <slot></slot>
+
+            <slot v-if="slot"></slot>
+
+            <div v-else>
+                <div class="spritespin"></div>
+            </div>
+
         </form>
     </script>
 
-    <script type="text/javascript">
+    <script>
         Vue.component('product-view', {
             inject: ['$validator'],
             template: '#product-view-template',
-            data: function() {
+            data: function () {
                 return {
+                    slot: true,
                     is_buy_now: 0,
                 }
             },
 
             mounted: function () {
+                // this.open360View();
+
                 let currentProductId = '{{ $product->url_key }}';
                 let existingViewed = window.localStorage.getItem('recentlyViewed');
+
                 if (! existingViewed) {
                     existingViewed = [];
                 } else {
@@ -211,31 +240,61 @@
             },
 
             methods: {
-                onSubmit: function(e) {
-                    if (e.target.getAttribute('type') != 'submit')
+                onSubmit: function(event) {
+                    if (event.target.getAttribute('type') != 'submit')
                         return;
 
-                    e.preventDefault();
+                    event.preventDefault();
 
-                    var this_this = this;
-
-                    this.$validator.validateAll().then(function (result) {
+                    this.$validator.validateAll().then(result => {
                         if (result) {
-                            this_this.is_buy_now = e.target.classList.contains('buynow') ? 1 : 0;
+                            this.is_buy_now = event.target.classList.contains('buynow') ? 1 : 0;
 
                             setTimeout(function() {
                                 document.getElementById('product-form').submit();
                             }, 0);
                         }
                     });
+                },
+
+                open360View: function () {
+                    this.slot = false;
+
+                    setTimeout(() => {
+                        $('.spritespin').spritespin({
+                            source: SpriteSpin.sourceArray('http://shubham.webkul.com/3d-image/sample-{lane}-{frame}.jpg', {
+                                lane: [0,5],
+                                frame: [0,5],
+                                digits: 2
+                            }),
+                            // width and height of the display
+                            width: 400,
+                            height: 225,
+                            // the number of lanes (vertical angles)
+                            lanes: 12,
+                            // the number of frames per lane (per vertical angle)
+                            frames: 24,
+                            // interaction sensitivity (and direction) modifier for horizontal movement
+                            sense: 1,
+                            // interaction sensitivity (and direction) modifier for vertical movement
+                            senseLane: -2,
+
+                            // the initial lane number
+                            lane: 6,
+                            // the initial frame number (within the lane)
+                            frame: 0,
+                            // disable autostart of the animation
+                            animate: false,
+
+                            plugins: [
+                                'progress',
+                                '360',
+                                'drag'
+                            ]
+                        });
+                    }, 0);
                 }
             }
-        });
-
-        $(document).ready(function() {
-            var addTOButton = document.getElementsByClassName('add-to-buttons')[0];
-            // document.getElementById('loader').style.display="none";
-            // addTOButton.style.display="flex";
         });
 
         window.onload = function() {

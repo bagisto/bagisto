@@ -26,11 +26,11 @@ class UserForm extends FormRequest
     public function rules()
     {
         $this->rules = [
-            'name' => 'required',
-            'email' => 'email|unique:admins,email',
+            'name'     => 'required',
+            'email'    => 'email|unique:admins,email',
             'password' => 'nullable|confirmed',
-            'status' => 'sometimes',
-            'role_id' => 'required'
+            'status'   => 'sometimes',
+            'role_id'  => 'required',
         ];
 
         if ($this->method() == 'PUT') {

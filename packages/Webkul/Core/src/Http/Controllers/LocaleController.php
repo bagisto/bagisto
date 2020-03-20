@@ -5,12 +5,6 @@ namespace Webkul\Core\Http\Controllers;
 use Illuminate\Support\Facades\Event;
 use Webkul\Core\Repositories\LocaleRepository;
 
-/**
- * Locale controller
- *
- * @author    Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class LocaleController extends Controller
 {
     /**
@@ -23,14 +17,14 @@ class LocaleController extends Controller
     /**
      * LocaleRepository object
      *
-     * @var array
+     * @var \Webkul\Core\Repositories\LocaleRepository
      */
     protected $localeRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\LocaleRepository $localeRepository
+     * @param  \Webkul\Core\Repositories\LocaleRepository  $localeRepository
      * @return void
      */
     public function __construct(LocaleRepository $localeRepository)
@@ -68,9 +62,9 @@ class LocaleController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:locales,code', new \Webkul\Core\Contracts\Validations\Code],
-            'name' => 'required',
-            'direction' => 'in:ltr,rtl'
+            'code'      => ['required', 'unique:locales,code', new \Webkul\Core\Contracts\Validations\Code],
+            'name'      => 'required',
+            'direction' => 'in:ltr,rtl',
         ]);
 
         Event::dispatch('core.locale.create.before');
@@ -106,9 +100,9 @@ class LocaleController extends Controller
     public function update($id)
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:locales,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
-            'name' => 'required',
-            'direction' => 'in:ltr,rtl'
+            'code'      => ['required', 'unique:locales,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
+            'name'      => 'required',
+            'direction' => 'in:ltr,rtl',
         ]);
 
         Event::dispatch('core.locale.update.before', $id);

@@ -5,7 +5,7 @@
         $customAttributeValues = $productViewHelper->getAdditionalData($product);
     @endphp
 
-    @if ($customAttributeValues && $customAttributeValues[0]['value'])
+    @if ($customAttributeValues)
         <accordian :title="'{{ __('shop::app.products.specification') }}'" :active="'{{ $active }}' == true ? true : false">
             <div slot="header">
                 <h3 class="no-margin display-inbl">

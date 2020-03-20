@@ -11,5 +11,8 @@ class CartRuleCouponUsage extends Model implements CartRuleCouponUsageContract
     
     protected $table = 'cart_rule_coupon_usage';
 
-    protected $guarded = ['created_at', 'updated_at'];
+    protected $guarded = [
+        'created_at',
+        'updated_at',
+    ];
 }

@@ -35,6 +35,7 @@
                 @include ('shop::products.list.card', [
                     'checkmode' => true,
                     'itemId' => $item->id,
+                    'addToCartForm' => true,
                     'removeWishlist' => true,
                     'product' => $item->product,
                     'btnText' => $moveToCartText,

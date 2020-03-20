@@ -7,12 +7,6 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\CMS\Models\CmsPageTranslation;
 
-/**
- * CMS Reposotory
- *
- * @author  Jitendra Singh <jitendra@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
- */
 class CmsRepository extends Repository
 {
     /**
@@ -26,8 +20,8 @@ class CmsRepository extends Repository
     }
 
     /**
-     * @param array $data
-     * @return mixed
+     * @param  array  $data
+     * @return \Webkul\CMS\Contracts\CmsPage
      */
     public function create(array $data)
     {
@@ -37,8 +31,9 @@ class CmsRepository extends Repository
 
         foreach (core()->getAllLocales() as $locale) {
             foreach ($model->translatedAttributes as $attribute) {
-                if (isset($data[$attribute]))
+                if (isset($data[$attribute])) {
                     $data[$locale->code][$attribute] = $data[$attribute];
+                }
             }
         }
 
@@ -52,10 +47,10 @@ class CmsRepository extends Repository
     }
 
     /**
-     * @param array   $data
-     * @param integer $id
-     * @param string $attribute
-     * @return mixed
+     * @param  array  $data
+     * @param  int  $id
+     * @param  string  $attribute
+     * @return \Webkul\CMS\Contracts\CmsPage
      */
     public function update(array $data, $id, $attribute = "id")
     {
@@ -75,9 +70,9 @@ class CmsRepository extends Repository
     /**
      * Checks slug is unique or not based on locale
      *
-     * @param integer $id
-     * @param string  $urlKey
-     * @return boolean
+     * @param  int  $id
+     * @param  string  $urlKey
+     * @return bool
      */
     public function isUrlKeyUnique($id, $urlKey)
     {
@@ -93,15 +88,16 @@ class CmsRepository extends Repository
     /**
      * Retrive category from slug
      *
-     * @param string $urlKey
-     * @return mixed
+     * @param  string  $urlKey
+     * @return \Webkul\CMS\Contracts\CmsPage|\Exception
      */
     public function findByUrlKeyOrFail($urlKey)
     {
         $page = $this->model->whereTranslation('url_key', $urlKey)->first();
 
-        if ($page)
+        if ($page) {
             return $page;
+        }
 
         throw (new ModelNotFoundException)->setModel(
             get_class($this->model), $urlKey
