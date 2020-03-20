@@ -37,7 +37,8 @@
                 :alt="product.name"
                 :src="product.image"
                 :data-src="product.image"
-                class="card-img-top lzy_img" />
+                class="card-img-top lzy_img"
+                :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
                 <!-- :src="`${$root.baseUrl}/vendor/webkul/ui/assets/images/product/meduim-product-placeholder.png`" /> -->
 
             <product-quick-view-btn :quick-view-details="product"></product-quick-view-btn>
@@ -76,7 +77,6 @@
 </template>
 
 <script type="text/javascript">
-    // compile add to cart html (it contains wishlist component)
     export default {
         props: [
             'list',
