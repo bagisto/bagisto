@@ -128,6 +128,10 @@ class Booking extends Virtual
     {
         $bookingProduct = $this->getBookingProduct($this->product->id);
 
+        if (! $bookingProduct) {
+            return false;
+        }
+        
         if (in_array($bookingProduct->type, ['default', 'rental', 'table'])) {
             return true;
         }
