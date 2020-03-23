@@ -164,6 +164,8 @@
 
 * #2693 [fixed] - Booking product page - add to cart button js error
 
+* #2707 [fixed] Getting exception when generate invoice in appointment booking
+
 
 ## **v1.0.0 (24th of February 2020)** - *Release*
 
