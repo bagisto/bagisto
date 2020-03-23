@@ -37,7 +37,7 @@ class RentalSlot extends Booking
 
         $timeDurations = $bookingProductSlot->same_slot_all_days
                          ? $bookingProductSlot->slots
-                         : $bookingProductSlot->slots[$requestedDate->format('w')];
+                         : $bookingProductSlot->slots[$requestedDate->format('w')] ?? [];
 
         if ($requestedDate < $availableFrom
             || $requestedDate > $availableTo
