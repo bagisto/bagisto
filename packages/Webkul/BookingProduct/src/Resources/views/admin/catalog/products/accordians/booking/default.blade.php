@@ -157,7 +157,7 @@
     <script type="text/x-template" id="default-slot-item-template">
         <tr>
             <td class="has-control-group">
-                <div class="control-group" :class="[errors.has(controlName + '[from_day]') ? 'has-error' : '']">
+                <div class="control-group date" :class="[errors.has(controlName + '[from_day]') ? 'has-error' : '']">
                     <select v-validate="'required'" :name="controlName + '[from_day]'" v-model="slotItem.from_day" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.day') }}&quot;">
                         <option v-for="(day, index) in $parent.days" :value="index">@{{ day }}</option>
                     </select>
@@ -165,7 +165,7 @@
                     <span class="control-error" v-if="errors.has(controlName + '[from_day]')">@{{ errors.first(controlName + '[from_day]') }}</span>
                 </div>
 
-                <div class="control-group" :class="[errors.has(controlName + '[from]') ? 'has-error' : '']">
+                <div class="control-group date" :class="[errors.has(controlName + '[from]') ? 'has-error' : '']">
                     <time-component>
                         <input type="text" v-validate="'required'" :name="controlName + '[from]'" v-model="slotItem.from" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.from') }}&quot;">
                     </time-component>
@@ -177,7 +177,7 @@
             </td>
 
             <td class="has-control-group">
-                <div class="control-group" :class="[errors.has(controlName + '[to_day]') ? 'has-error' : '']">
+                <div class="control-group date" :class="[errors.has(controlName + '[to_day]') ? 'has-error' : '']">
                     <select v-validate="'required'" :name="controlName + '[to_day]'" v-model="slotItem.to_day" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.day') }}&quot;">
                         <option v-for="(day, index) in $parent.days" :value="index">@{{ day }}</option>
                     </select>
@@ -185,7 +185,7 @@
                     <span class="control-error" v-if="errors.has(controlName + '[to_day]')">@{{ errors.first(controlName + '[to_day]') }}</span>
                 </div>
 
-                <div class="control-group" :class="[errors.has(controlName + '[to]') ? 'has-error' : '']">
+                <div class="control-group date" :class="[errors.has(controlName + '[to]') ? 'has-error' : '']">
                     <time-component>
                         <input type="text" v-validate="'required'" :name="controlName + '[to]'" v-model="slotItem.to" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.to') }}&quot;">
                     </time-component>
