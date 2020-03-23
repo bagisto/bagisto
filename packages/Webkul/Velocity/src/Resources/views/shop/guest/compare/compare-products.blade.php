@@ -54,7 +54,10 @@
 
                                     @case('image')
                                         <a :href="`${$root.baseUrl}/${product.url_key}`" class="unset">
-                                            <img :src="product['{{ $attribute['code'] }}']" class="image-wrapper"></span>
+                                            <img
+                                                class="image-wrapper"
+                                                :src="product['{{ $attribute['code'] }}']"
+                                                :onerror="`this.src='${$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
                                         </a>
                                         @break
 

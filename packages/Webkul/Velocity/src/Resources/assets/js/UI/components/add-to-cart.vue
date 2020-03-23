@@ -20,6 +20,7 @@
             'isEnable',
             'csrfToken',
             'productId',
+            'reloadPage',
             'moveToCart',
             'showCartIcon',
             'addClassToBtn',
@@ -59,6 +60,10 @@
                         }
 
                         window.showAlert(`alert-success`, this.__('shop.general.alert.success'), response.data.message);
+
+                        if (this.reloadPage == "1") {
+                            window.location.reload();
+                        }
                     } else {
                         window.showAlert(`alert-${response.data.status}`, response.data.label ? response.data.label : this.__('shop.general.alert.error'), response.data.message);
 
