@@ -2,7 +2,11 @@
     <div class="col-12 lg-card-container list-card product-card row" v-if="list">
         <div class="product-image">
             <a :title="product.name" :href="`${baseUrl}/${product.slug}`">
-                <img :src="product.image" />
+                <img
+                    :src="product.image"
+                    :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
+
+                <product-quick-view-btn :quick-view-details="product"></product-quick-view-btn>
             </a>
         </div>
 
@@ -18,14 +22,14 @@
 
                 <div class="product-rating" v-if="product.totalReviews && product.totalReviews > 0">
                     <star-ratings :ratings="product.avgRating"></star-ratings>
-                    <span>{{ product.totalReviews }}</span>
+                    <span>{{ __('products.reviews-count', {'totalReviews': product.totalReviews}) }}</span>
                 </div>
 
                 <div class="product-rating" v-else>
                     <span class="fs14" v-text="product.firstReviewText"></span>
                 </div>
 
-                <div class="cart-wish-wrap row mt5" v-html="product.addToCartHtml"></div>
+                <vnode-injector :nodes="getDynamicHTML(product.addToCartHtml)"></vnode-injector>
             </div>
         </div>
     </div>
