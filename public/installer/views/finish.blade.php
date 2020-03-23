@@ -29,9 +29,4 @@
         next = next.concat('/admin/login');
         window.location.href = next;
     }
-    
-    $(document).ready(function() {
-        $('#finish').hide();
-        $('#requirement').show();
-    });
 </script>
