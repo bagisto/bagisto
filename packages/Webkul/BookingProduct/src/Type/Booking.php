@@ -2,6 +2,7 @@
 
 namespace Webkul\BookingProduct\Type;
 
+use Illuminate\Support\Arr;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
@@ -159,6 +160,14 @@ class Booking extends Virtual
     public function prepareForCart($data)
     {
         if (! isset($data['booking']) || ! count($data['booking'])) {
+            return trans('shop::app.checkout.cart.integrity.missing_options');
+        }
+
+        $filtered = Arr::where($data['booking']['qty'], function ($qty, $key) {
+            return $qty != 0;
+        });
+
+        if (! count($filtered)) {
             return trans('shop::app.checkout.cart.integrity.missing_options');
         }
 
