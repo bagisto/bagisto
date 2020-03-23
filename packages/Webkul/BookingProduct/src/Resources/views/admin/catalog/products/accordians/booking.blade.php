@@ -57,7 +57,7 @@
             </div>
 
             <div v-if="! parseInt(booking.available_every_week)">
-                <div class="control-group" :class="[errors.has('booking[available_from]') ? 'has-error' : '']">
+                <div class="control-group date" :class="[errors.has('booking[available_from]') ? 'has-error' : '']">
                     <label class="required">{{ __('bookingproduct::app.admin.catalog.products.available-from') }}</label>
 
                     <datetime>
@@ -67,7 +67,7 @@
                     <span class="control-error" v-if="errors.has('booking[available_from]')">@{{ errors.first('booking[available_from]') }}</span>
                 </div>
 
-                <div class="control-group" :class="[errors.has('booking[available_to]') ? 'has-error' : '']">
+                <div class="control-group date" :class="[errors.has('booking[available_to]') ? 'has-error' : '']">
                     <label class="required">{{ __('bookingproduct::app.admin.catalog.products.available-to') }}</label>
 
                     <datetime>
