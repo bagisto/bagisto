@@ -38,8 +38,7 @@ class DefaultSlot extends Booking
                        ? Carbon::createFromTimeString($bookingProduct->available_to)
                        : Carbon::createFromTimeString('2080-01-01 00:00:00');
 
-        if ($requestedDate < $currentTime
-            || $requestedDate < $availableFrom
+        if ($requestedDate < $availableFrom
             || $requestedDate > $availableTo
         ) {
             return [];

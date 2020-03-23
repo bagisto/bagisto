@@ -270,8 +270,7 @@ class Booking
                          ? $bookingProductSlot->slots
                          : ($bookingProductSlot->slots[$requestedDate->format('w')] ?? []);
 
-        if ($requestedDate < $currentTime
-            || $requestedDate < $availableFrom
+        if ($requestedDate < $availableFrom
             || $requestedDate > $availableTo
         ) {
             return [];
