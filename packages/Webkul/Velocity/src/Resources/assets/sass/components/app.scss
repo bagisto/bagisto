@@ -678,6 +678,8 @@
 
         .product-quantity {
             .quantity {
+                float: left;
+                
                 label {
                     display: none !important;
                 }
@@ -2277,8 +2279,9 @@
 
     .col,
     .col-2 {
-        padding-left: 0;
         max-width: 20%;
+        padding-left: 0;
+        word-break: break-word;
     }
 
     .image-wrapper {

@@ -102,6 +102,7 @@
                             console.log(this.__('error.something_went_wrong'));
                         });
                     } else {
+                        this.products = [];
                         this.isProductListLoaded = true;
                     }
                 },
