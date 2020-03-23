@@ -1,50 +1,58 @@
 <div class="container email" id="email">
     <div class="initial-display">
         <p>Email Configuration</p>
-        <form action="EmailConfig.php"  method= "POST" id="email-form">
-            <div class="content">
-                <div class="form-container" style="padding: 10%; padding-top: 35px">
-                    <input type="hidden" name="mail_driver" value="smtp">
+    </div>
 
-                    <div class="control-group" id="mail_host">
-                        <label for="mail_host" class="required">Outgoing mail server</label>
-                        <input type="text" name="mail_host" class="control" placeholder="smtp.mailtrap.io" data-validation="required">
-                    </div>
-
-                    <div class="control-group" id="mail_port">
-                        <label for="mail_port" class="required">Outgoing mail server port</label>
-                        <input type="text" name="mail_port" class="control" placeholder="2525" data-validation="required">
-                    </div>
-
-                    <div class="control-group" id="mail_encryption">
-                        <label for="mail_encryption">Encryption</label>
-                        <select name="mail_encryption" class="control">
-                            <option value="ssl">SSL</option>
-                            <option value="tls">TLS</option>
-                            <option value="">None</option>
-                        </select>
-                    </div>
-
-                    <div class="control-group" id="mail_from">
-                        <label for="mail_from" class="required">Store email address</label>
-                        <input type="text" name="mail_from" class="control" placeholder="store@example.com" data-validation="required">
-                    </div>
-
-                    <div class="control-group" id="mail_username">
-                        <label for="mail_username" class="required">Username</label>
-                        <input type="text" name="mail_username" class="control" placeholder="store@example.com" data-validation="required">
-                    </div>
-
-                    <div class="control-group" id="mail_password">
-                        <label for="mail_password" class="required">Password</label>
-                        <input type="password" name="mail_password" class="control">
-                    </div>
+    <div class="row justify-content-center">
+		<div class="col-md-6 col-md-offset-1">
+			<div class="card card-default">
+				<div class="card-body">
+                    <form action="EmailConfig.php" method= "POST" id="email-form">
+                        <input type="hidden" name="mail_driver" value="smtp">
+                        
+                        <div class="form-row">
+                            <div class="form-group col-md-6" id="mail_host">
+                                <label for="mail_hostname" class="required">Outgoing mail server</label>
+                                <input type="text" name="mail_host" id="mail_hostname" class="form-control" placeholder="smtp.mailtrap.io" data-validation="required">
+                            </div>
+                            
+                            <div class="form-group col-md-6" id="mail_port">
+                                <label for="mail_portnumber" class="required">Server port</label>
+                                <input type="text" name="mail_port" id="mail_portnumber" class="form-control" placeholder="2525" data-validation="required">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group" id="mail_encryption">
+                            <label for="mail_encrypt">Encryption</label>
+                            <select name="mail_encryption" id="mail_encrypt" class="form-control">
+                                <option value="ssl">SSL</option>
+                                <option value="tls">TLS</option>
+                                <option value="">None</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group" id="mail_from">
+                            <label for="email_from" class="required">Store email address</label>
+                            <input type="text" name="mail_from" id="email_from" class="form-control" placeholder="store@example.com" data-validation="required">
+                        </div>
+                        
+                        <div class="form-group" id="mail_username">
+                            <label for="email_username" class="required">Username</label>
+                            <input type="text" name="mail_username" id="email_username" class="form-control" placeholder="store@example.com" data-validation="required">
+                        </div>
+                        
+                        <div class="form-group" id="mail_password">
+                            <label for="email_password" class="required">Password</label>
+                            <input type="password" name="mail_password" id="email_password" class="form-control" data-validation="required">
+                        </div>
+                        
+                        <div class="text-center">
+                            <button class="btn btn-primary" id="mail-check">Save configuration</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <div>
-                <button class="prepare-btn" id="mail-check">Save configuration</button>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
@@ -57,7 +65,7 @@
         $('#email').hide();
         // process the form
         $('#email-form').submit(function(event) {
-            $('.control-group').removeClass('has-error'); // remove the error class
+            $('.form-group').removeClass('has-error'); // remove the error class
             $('.form-error').remove(); // remove the error text
             // get the form data
             var mailformData = {
