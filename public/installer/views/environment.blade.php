@@ -33,7 +33,7 @@
                                 <label for="application_timezone" class="required">Default Timezone</label>
                                 <select name="app_timezone" id="application_timezone" class="js-example-basic-single">
                                     <?php 
-                                    
+                                    date_default_timezone_set('UTC');
                                     $tzlist = DateTimeZone::listIdentifiers(DateTimeZone::ALL);
                                     $current = date_default_timezone_get();
                                     
