@@ -26,8 +26,6 @@ class LocalesTableSeeder extends Seeder
                 'id'   => 3,
                 'code' => 'nl',
                 'name' => 'Dutch',
-            ]
-            
-        ]);
+            ]]);
     }
 }
