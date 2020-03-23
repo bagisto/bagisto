@@ -61,7 +61,7 @@
                     <label class="required">{{ __('bookingproduct::app.admin.catalog.products.available-from') }}</label>
 
                     <datetime>
-                        <input type="text" v-validate="'required|date_format:Y-m-d H:i:s'" name="booking[available_from]" v-model="booking.available_from" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.available-from') }}&quot;"/>
+                        <input type="text" v-validate="'required|date_format:yyyy-MM-dd HH:mm:ss|after:{{\Carbon\Carbon::now()}}'" name="booking[available_from]" v-model="booking.available_from" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.available-from') }}&quot;" ref="available_from"/>
                     </datetime>
                     
                     <span class="control-error" v-if="errors.has('booking[available_from]')">@{{ errors.first('booking[available_from]') }}</span>
@@ -71,7 +71,7 @@
                     <label class="required">{{ __('bookingproduct::app.admin.catalog.products.available-to') }}</label>
 
                     <datetime>
-                        <input type="text" v-validate="'required|date_format:Y-m-d H:i:s'" name="booking[available_to]" v-model="booking.available_to" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.available-to') }}&quot;"/>
+                        <input type="text" v-validate="'required|date_format:yyyy-MM-dd HH:mm:ss|after:available_from'" name="booking[available_to]" v-model="booking.available_to" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.available-to') }}&quot;"/>
                     </datetime>
                     
                     <span class="control-error" v-if="errors.has('booking[available_to]')">@{{ errors.first('booking[available_to]') }}</span>
