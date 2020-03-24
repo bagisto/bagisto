@@ -158,6 +158,8 @@ class RentalSlot extends Booking
 
             return $isExpired;
         } else {
+            $currentTime = Carbon::now();
+            
             $requestedFromDate = Carbon::createFromTimeString($cartItem['additional']['booking']['date_from'] . " 00:00:00");
 
             $requestedToDate = Carbon::createFromTimeString($cartItem['additional']['booking']['date_to'] . " 23:59:59");
