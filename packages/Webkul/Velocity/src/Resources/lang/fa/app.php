@@ -255,6 +255,8 @@ return [
             'female' => 'زن',
         ],
         'general' => [
+            'no' => 'No',
+            'yes' => 'Yes',
             'view' => 'چشم انداز',
             'filter' => 'فیلتر',
             'orders' => 'سفارشات',

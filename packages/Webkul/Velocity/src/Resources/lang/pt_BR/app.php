@@ -255,6 +255,8 @@ return [
             'other' => 'De outros',
         ],
         'general' => [
+            'no' => 'No',
+            'yes' => 'Yes',
             'view' => 'Visão',
             'filter' => 'Filtro',
             'update' => 'Atualizar',
