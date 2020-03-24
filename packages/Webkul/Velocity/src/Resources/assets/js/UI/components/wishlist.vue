@@ -20,12 +20,15 @@
 
             {{ isActive ? 'favorite' : 'favorite_border' }}
         </i>
+
+        <span style="vertical-align: super;" v-html="text"></span>
     </a>
 </template>
 
 <script type="text/javascript">
     export default {
         props: [
+            'text',
             'active',
             'addClass',
             'addedText',
@@ -33,6 +36,7 @@
             'removeText',
             'isCustomer',
             'productSlug',
+            'moveToWishlist',
         ],
 
         data: function () {
@@ -77,6 +81,10 @@
                     this.__('shop.general.alert.success'),
                     this.isActive ? this.addedText : this.removeText
                 );
+
+                if (this.moveToWishlist) {
+                    window.location.href = this.moveToWishlist;
+                }
 
                 return true;
             },

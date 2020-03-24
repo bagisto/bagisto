@@ -116,28 +116,18 @@
                                                                 'text' => "<span class='align-vertical-super'>$moveToWishlist</span>"
                                                             ])
                                                         @else
-                                                            <a
-                                                                class="unset"
-                                                                href="{{ route('shop.movetowishlist', $item->child->id) }}"
-                                                                onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">
-
-                                                                <wishlist-component
-                                                                    active="false"
-                                                                    add-class="align-vertical-top">
-                                                                </wishlist-component>
-
-                                                                <span class="align-vertical-top">
-                                                                    {{ __('shop::app.layouts.wishlist') }}
-                                                                </span>
-                                                            </a>
+                                                            @include('shop::products.wishlist', [
+                                                                'route' => route('shop.movetowishlist', $item->child->id),
+                                                                'text' => "<span class='align-vertical-super'>$moveToWishlist</span>"
+                                                            ])
                                                         @endif
                                                     @endauth
 
                                                     @guest('customer')
-                                                        @include('shop::products.wishlist')
-                                                        <span class="align-vertical-top">
-                                                            {{ __('shop::app.checkout.cart.move-to-wishlist') }}
-                                                        </span>
+                                                        @include('shop::products.wishlist', [
+                                                            'isMoveToWishlist' => route('shop.checkout.cart.remove', ['id' => $item->id]),
+                                                            'text' => "<span class='align-vertical-top'>$moveToWishlist</span>"
+                                                        ])
                                                     @endguest
 
                                                     <a
