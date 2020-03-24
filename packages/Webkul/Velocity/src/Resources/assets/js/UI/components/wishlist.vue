@@ -58,7 +58,7 @@
                 let existingValue = this.getStorageValue('wishlist_product');
 
                 if (existingValue) {
-                    let valueIndex = existingValue.indexOf(productId);
+                    var valueIndex = existingValue.indexOf(productId);
 
                     if (valueIndex == -1) {
                         this.isActive = true;
@@ -82,7 +82,7 @@
                     this.isActive ? this.addedText : this.removeText
                 );
 
-                if (this.moveToWishlist) {
+                if (this.moveToWishlist && valueIndex == -1) {
                     window.location.href = this.moveToWishlist;
                 }
 
