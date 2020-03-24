@@ -182,6 +182,8 @@
 
 * #2716 [fixed] - After saving the default booking time product selected time for date range changes to 00:00:00 ,because of which not able to book appointment on frontend.
 
+* #2717 [fixed] - Getting error message on adding rental product in cart if rental booking is not available for that day.
+
 * #2722 [fixed] - warning showing when update event booking cart quantity from the product page
 
 * #2723 [fixed] - Compare product icon on header showing counts of compare product but there are no product in compare list.
