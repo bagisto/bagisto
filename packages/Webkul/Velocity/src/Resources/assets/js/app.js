@@ -29,44 +29,25 @@ Vue.filter('currency', function (value, argument) {
 window.Vue = Vue;
 window.Carousel = VueCarousel;
 
-import VueSlider from 'vue-slider-component';
-import MiniCart from './UI/components/mini-cart';
-import ModalComponent from './UI/components/modal';
-import AddToCart from './UI/components/add-to-cart';
-import StarRating from './UI/components/star-rating';
-import QuantityBtn from './UI/components/quantity-btn';
-import Sidebar from './UI/components/sidebar';
-import ProductCard from './UI/components/product-card';
-import Wishlist from './UI/components/wishlist';
-import Carousel from './UI/components/carousel';
-import ChildSidebar from './UI/components/child-sidebar';
-import CardHeader from './UI/components/card-header';
-import ImageMagnifier from './UI/components/image-magnifier';
-import ProductCompare from './UI/components/product-compare';
-import ShimmerComponent from './UI/components/shimmer-component';
-import ResponsiveSidebar from './UI/components/responsive-sidebar';
-import ProductQuickView from './UI/components/product-quick-view';
-import ProductQuickViewBtn from './UI/components/product-quick-view-btn';
-
 // UI components
-Vue.component("vue-slider", VueSlider);
-Vue.component('mini-cart', MiniCart);
-Vue.component('modal-component', ModalComponent);
-Vue.component("add-to-cart", AddToCart);
-Vue.component('star-ratings', StarRating);
-Vue.component('quantity-btn', QuantityBtn);
-Vue.component('sidebar-component', Sidebar);
-Vue.component("product-card", ProductCard);
-Vue.component("wishlist-component", Wishlist);
-Vue.component('carousel-component', Carousel);
-Vue.component('child-sidebar', ChildSidebar);
-Vue.component('card-list-header', CardHeader);
-Vue.component('magnify-image', ImageMagnifier);
-Vue.component('compare-component', ProductCompare);
-Vue.component("shimmer-component", ShimmerComponent);
-Vue.component('responsive-sidebar', ResponsiveSidebar);
-Vue.component('product-quick-view', ProductQuickView);
-Vue.component('product-quick-view-btn', ProductQuickViewBtn);
+Vue.component("vue-slider", require("vue-slider-component"));
+Vue.component('mini-cart', require('./UI/components/mini-cart'));
+Vue.component('modal-component', require('./UI/components/modal'));
+Vue.component("add-to-cart", require("./UI/components/add-to-cart"));
+Vue.component('star-ratings', require('./UI/components/star-rating'));
+Vue.component('quantity-btn', require('./UI/components/quantity-btn'));
+Vue.component('sidebar-component', require('./UI/components/sidebar'));
+Vue.component("product-card", require("./UI/components/product-card"));
+Vue.component("wishlist-component", require("./UI/components/wishlist"));
+Vue.component('carousel-component', require('./UI/components/carousel'));
+Vue.component('child-sidebar', require('./UI/components/child-sidebar'));
+Vue.component('card-list-header', require('./UI/components/card-header'));
+Vue.component('magnify-image', require('./UI/components/image-magnifier'));
+Vue.component('compare-component', require('./UI/components/product-compare'));
+Vue.component("shimmer-component", require("./UI/components/shimmer-component"));
+Vue.component('responsive-sidebar', require('./UI/components/responsive-sidebar'));
+Vue.component('product-quick-view', require('./UI/components/product-quick-view'));
+Vue.component('product-quick-view-btn', require('./UI/components/product-quick-view-btn'));
 
 window.eventBus = new Vue();
 
