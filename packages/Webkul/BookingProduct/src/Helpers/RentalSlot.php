@@ -140,24 +140,46 @@ class RentalSlot extends Booking
     public function isSlotExpired($cartItem)
     {
         $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $cartItem['product_id']);
-        
-        $typeHelper = app($this->typeHelpers[$bookingProduct->type]);
 
-        $timeIntervals = $typeHelper->getSlotsByDate($bookingProduct, $cartItem['additional']['booking']['date']);
+        if (isset($cartItem['additional']['booking']['date'])) {
+            $timeIntervals = $this->getSlotsByDate($bookingProduct, $cartItem['additional']['booking']['date']);
 
-        $isExpired = true;
+            $isExpired = true;
 
-        foreach ($timeIntervals as $timeInterval) {
-            foreach ($timeInterval['slots'] as $slot) {
-                if ($slot['from_timestamp'] == $cartItem['additional']['booking']['slot']['from']
-                    && $slot['to_timestamp'] == $cartItem['additional']['booking']['slot']['to']
-                ) {
-                    $isExpired = false;
+            foreach ($timeIntervals as $timeInterval) {
+                foreach ($timeInterval['slots'] as $slot) {
+                    if ($slot['from_timestamp'] == $cartItem['additional']['booking']['slot']['from']
+                        && $slot['to_timestamp'] == $cartItem['additional']['booking']['slot']['to']
+                    ) {
+                        $isExpired = false;
+                    }
                 }
             }
-        }
 
-        return $isExpired;
+            return $isExpired;
+        } else {
+            $requestedFromDate = Carbon::createFromTimeString($cartItem['additional']['booking']['date_from'] . " 00:00:00");
+
+            $requestedToDate = Carbon::createFromTimeString($cartItem['additional']['booking']['date_to'] . " 23:59:59");
+
+            $availableFrom = ! $bookingProduct->available_every_week && $bookingProduct->available_from
+                        ? Carbon::createFromTimeString($bookingProduct->available_from)
+                        : Carbon::createFromTimeString($currentTime->format('Y-m-d 00:00:00'));
+
+            $availableTo = ! $bookingProduct->available_every_week && $bookingProduct->available_from
+                    ? Carbon::createFromTimeString($bookingProduct->available_to)
+                    : Carbon::createFromTimeString('2080-01-01 00:00:00');
+
+            if ($requestedFromDate < $availableFrom
+                || $requestedFromDate > $availableTo
+                || $requestedToDate < $availableFrom
+                || $requestedToDate > $availableTo
+            ) {
+                return true;
+            }
+
+            return false;
+        }
     }
 
     /**
