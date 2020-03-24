@@ -91,7 +91,19 @@
                                         @break
 
                                     @default
-                                        <span v-html="product['{{ $attribute['code'] }}']" class="fs16"></span>
+                                        @switch ($attribute['type'])
+                                            @case('boolean')
+                                                <span
+                                                    v-text="product.product['{{ $attribute['code'] }}']
+                                                            ? '{{ __('velocity::app.shop.general.yes') }}'
+                                                            : '{{ __('velocity::app.shop.general.no') }}'"
+                                                ></span>
+                                                @break;
+                                            @default
+                                                <span v-html="product.product['{{ $attribute['code'] }}']" class="fs16"></span>
+                                                @break;
+                                        @endswitch
+
                                         @break
 
                                 @endswitch

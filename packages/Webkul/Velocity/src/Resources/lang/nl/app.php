@@ -255,6 +255,8 @@ return [
             'female' => 'Vrouw',
         ],
         'general' => [
+            'no' => 'No',
+            'yes' => 'Yes',
             'view' => 'View',
             'filter' => 'Filter',
             'orders' => 'Orders',
