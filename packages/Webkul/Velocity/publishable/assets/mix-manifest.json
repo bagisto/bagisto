@@ -1,5 +1,9 @@
 {
-    "/js/velocity.js": "/js/velocity.js?id=402de46225161bbc3aa8",
+    "/js/velocity.js": "/js/velocity.js?id=d3f7d56e990550452f19",
     "/css/velocity-admin.css": "/css/velocity-admin.css?id=612d35e452446366eef7",
+<<<<<<< HEAD
     "/css/velocity.css": "/css/velocity.css?id=d047a8c4cfcb4ce793e3"
+=======
+    "/css/velocity.css": "/css/velocity.css?id=52109e4f344a8b0bce61"
+>>>>>>> e6e84dfdf9e8125b3ebf5afdd139a420ad256f35
 }

@@ -279,7 +279,8 @@ class Helper extends Review
 
     /**
      * @param  \Webkul\Product\Contracts\Product  $product
-     * @param  bool  $list
+     * @param  bool                               $list
+     * @param  array                              $metaInformation
      * @return array
      */
     public function formatProduct($product, $list = false, $metaInformation = [])
@@ -322,11 +323,9 @@ class Helper extends Review
                 'product'           => $product,
                 'addWishlistClass'  => ! (isset($list) && $list) ? '' : '',
                 'btnText'           => (isset($metaInformation['btnText']) && $metaInformation['btnText'])
-                                       ? $metaInformation['btnText']
-                                       : null,
-                'moveToCart'           => (isset($metaInformation['moveToCart']) && $metaInformation['moveToCart'])
-                                       ? $metaInformation['moveToCart']
-                                       : null,
+                                       ? $metaInformation['btnText'] : null,
+                'moveToCart'        => (isset($metaInformation['moveToCart']) && $metaInformation['moveToCart'])
+                                       ? $metaInformation['moveToCart'] : null,
                 'addToCartBtnClass' => ! (isset($list) && $list) ? 'small-padding' : '',
             ])->render(),
         ];

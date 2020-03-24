@@ -54,7 +54,10 @@
 
                                     @case('image')
                                         <a :href="`${$root.baseUrl}/${product.url_key}`" class="unset">
-                                            <img :src="product['{{ $attribute['code'] }}']" class="image-wrapper"></span>
+                                            <img
+                                                class="image-wrapper"
+                                                :src="product['{{ $attribute['code'] }}']"
+                                                :onerror="`this.src='${$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
                                         </a>
                                         @break
 
@@ -88,7 +91,19 @@
                                         @break
 
                                     @default
-                                        <span v-html="product['{{ $attribute['code'] }}']" class="fs16"></span>
+                                        @switch ($attribute['type'])
+                                            @case('boolean')
+                                                <span
+                                                    v-text="product.product['{{ $attribute['code'] }}']
+                                                            ? '{{ __('velocity::app.shop.general.yes') }}'
+                                                            : '{{ __('velocity::app.shop.general.no') }}'"
+                                                ></span>
+                                                @break;
+                                            @default
+                                                <span v-html="product.product['{{ $attribute['code'] }}']" class="fs16"></span>
+                                                @break;
+                                        @endswitch
+
                                         @break
 
                                 @endswitch

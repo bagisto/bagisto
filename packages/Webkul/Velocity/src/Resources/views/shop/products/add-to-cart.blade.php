@@ -66,6 +66,7 @@
                     csrf-token='{{ csrf_token() }}'
                     product-flat-id="{{ $product->id }}"
                     product-id="{{ $product->product_id }}"
+                    reload-page="{{ $reloadPage ?? false }}"
                     move-to-cart="{{ $moveToCart ?? false }}"
                     add-class-to-btn="{{ $addToCartBtnClass ?? '' }}"
                     is-enable={{ ! $product->isSaleable() ? 'false' : 'true' }}

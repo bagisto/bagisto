@@ -2219,6 +2219,37 @@
     .pagination {
         .page-item {
             padding: 0 10px;
+
+            &.active {
+                font-weight: 600;
+                color: $theme-color !important;
+                border-bottom: 2px solid $theme-color;
+            }
+
+            &.next,
+            &.previous {
+                .angle-right-icon,
+                .angle-left-icon {
+                    @extend .rango-default;
+
+                    margin: 0;
+                    font-size: 24px;
+                    background: unset;
+                    text-align: center;
+                }
+            }
+
+            &.next {
+                .angle-right-icon::before {
+                    content: "\E908";
+                }
+            }
+
+            &.previous {
+                .angle-left-icon::before {
+                    content: "\E907";
+                }
+            }
         }
 
         a {
@@ -2280,6 +2311,7 @@
     .col,
     .col-2 {
         max-width: 20%;
+        min-width: 17%;
         padding-left: 0;
         word-break: break-word;
     }

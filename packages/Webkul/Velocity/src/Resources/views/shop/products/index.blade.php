@@ -57,12 +57,14 @@
                     <div class="pl0 col-12">
                         <h1 class="fw6 mb10">{{ $category->name }}</h1>
     
-                        @if ($isDisplayMode && $products->count())
-                            @if ($category->description)
-                                <div class="category-description">
-                                    {!! $category->description !!}
-                                </div>
-                            @endif
+                        @if ($isDisplayMode)
+                            <template v-if="products.length > 0">
+                                @if ($category->description)
+                                    <div class="category-description">
+                                        {!! $category->description !!}
+                                    </div>
+                                @endif
+                            </template>
                         @endif
                     </div>
     
@@ -137,6 +139,7 @@
                 return {
                     'products': [],
                     'isLoading': true,
+                    'paginationHTML': '',
                 }
             },
 
@@ -150,6 +153,7 @@
                     .then(response => {
                         this.isLoading = false;
                         this.products = response.data.products.data;
+                        this.paginationHTML = response.data.paginationHTML;
                     })
                     .catch(error => {
                         this.isLoading = false;

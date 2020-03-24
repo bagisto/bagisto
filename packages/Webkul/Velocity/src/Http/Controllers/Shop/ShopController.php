@@ -244,12 +244,13 @@ class ShopController extends Controller
                 array_push($formattedProducts, $this->velocityHelper->formatProduct($product));
             }
 
-            $products = $products->toArray();
-            $products['data'] = $formattedProducts;
+            $productsArray = $products->toArray();
+            $productsArray['data'] = $formattedProducts;
         }
-        
+
         return response()->json($response ?? [
-            'products' => $products
+            'products'       => $productsArray,
+            'paginationHTML' => $products->appends(request()->input())->links()->toHtml(),
         ]);
     }
 }

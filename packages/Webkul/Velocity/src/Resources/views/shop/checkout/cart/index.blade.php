@@ -70,9 +70,10 @@
                                                 href="{{ route('shop.productOrCategory.index', $product->url_key) }}">
 
                                                 <img
-                                                    src="{{ $productBaseImage['medium_image_url'] }}"
                                                     class="card-img-top"
-                                                    alt="{{ $product->name }}">
+                                                    alt="{{ $product->name }}"
+                                                    src="{{ $productBaseImage['large_image_url'] }}"
+                                                    :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`">
                                             </a>
 
                                             <div class="product-details-content col-7 pr0">
