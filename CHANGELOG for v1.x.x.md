@@ -2,13 +2,15 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
-## **v1.1.0 (20th of March 2020)** - *Release*
+## **v1.1.0 (24th of March 2020)** - *Release*
 
 * [feature] Added new booking type product.
 
 * [feature] Impletment compare product feature.
 
 * [feature] Impletment compare product feature.
+
+* #2525 [fixed] - Add more settings to the installers
 
 * #2541 [fixed] - Showing product's price with the price including tax
 
@@ -72,13 +74,19 @@
 
 * #2606 [fixed] - custom attributes are not Visible on Product View Page on Front-end
 
+* #2607 [fixed] - Getting exception on editing category for pt_BR locale in php 7.4
+
 * #2608 [fixed] - Getting exception on creating category.
 
 * #2609 [fixed] - product removed from comparison page when update product by name
 
 * #2611 [fixed] - installer error
 
+* #2612 [fixed] - available slots are not showing for current date even if slot time is not expired
+
 * #2613 [fixed] - Propaganistas/Laravel-Intl is abandoned
+
+* #2614 [fixed] - table booking slot time is expired still exist in cart
 
 * #2619 [fixed] - Issue when category slug & product slug are same
 
@@ -150,7 +158,9 @@
 
 * #2667 [fixed] - By default wishlist option is selected in cart
 
-* #2669 [fixed] - Booking product should be removed from the cart when selected slot time expired
+* #2670 [fixed] - Booking product should be removed from the cart when selected slot time expired
+
+* #2669 [fixed] - Browser compatibility issue
 
 * #2671 [fixed] - Error on moving booking product to wishlist
 
@@ -164,7 +174,23 @@
 
 * #2693 [fixed] - Booking product page - add to cart button js error
 
-* #2707 [fixed] Getting exception when generate invoice in appointment booking
+* #2704 [fixed] - product's assigned category can't be removed
+
+* #2707 [fixed] - Getting exception when generate invoice in appointment booking
+
+* #2715 [fixed] - Error message should throw if "To" time is less than "From".
+
+* #2716 [fixed] - After saving the default booking time product selected time for date range changes to 00:00:00 ,because of which not able to book appointment on frontend.
+
+* #2722 [fixed] - warning showing when update event booking cart quantity from the product page
+
+* #2723 [fixed] - Compare product icon on header showing counts of compare product but there are no product in compare list.
+
+* #2724 [fixed] - table bookings quantity should update in existing booking added in cart for same slot/date
+
+* #2726 [fixed] - is shop.js the vue framework ??
+
+* #2732 [fixed] - missing product's quick view in category page
 
 
 ## **v1.0.0 (24th of February 2020)** - *Release*
