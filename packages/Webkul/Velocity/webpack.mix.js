@@ -1,9 +1,4 @@
-const mix = require("laravel-mix");
-
-if (mix == 'undefined') {
-    const { mix } = require("laravel-mix");
-}
-
+const { mix } = require("laravel-mix");
 require("laravel-mix-merge-manifest");
 
 var publicPath = "../../../public/themes/velocity/assets";
@@ -17,7 +12,8 @@ mix.disableNotifications();
 
 mix
     .js(
-        __dirname + "/src/Resources/assets/js/app.js", "js/velocity.js"
+        __dirname + "/src/Resources/assets/js/app.js",
+        "js/velocity.js"
     )
 
     .sass(
@@ -26,7 +22,9 @@ mix
     )
     .sass(
         __dirname + '/src/Resources/assets/sass/app.scss',
-        __dirname + '/' + publicPath + '/css/velocity.css'
+        __dirname + '/' + publicPath + '/css/velocity.css', {
+            includePaths: ['node_modules/bootstrap-sass/assets/stylesheets/'],
+        }
     )
 
     .options({
