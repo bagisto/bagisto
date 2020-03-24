@@ -86,7 +86,7 @@
                 <div class="control-group-container">
                     <div class="control-group date" :class="[errors.has('booking[date_from]') ? 'has-error' : '']">
                         <date @onChange="dateSelected($event)">
-                            <input type="text" v-validate="'required'" name="booking[date_from]" v-model="date_from" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.shop.products.from') }}&quot;" placeholder="{{ __('bookingproduct::app.shop.products.from') }}" data-min-date="today"/>
+                            <input type="text" v-validate="'required|date_format:yyyy-MM-dd|before_or_equal:date_to'" name="booking[date_from]" v-model="date_from" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.shop.products.from') }}&quot;" placeholder="{{ __('bookingproduct::app.shop.products.from') }}" ref="date_from" data-min-date="today"/>
                         </date>
 
                         <span class="control-error" v-if="errors.has('booking[date_from]')">@{{ errors.first('booking[date_from]') }}</span>
@@ -94,7 +94,7 @@
 
                     <div class="control-group date" :class="[errors.has('booking[date_to]') ? 'has-error' : '']">
                         <date @onChange="dateSelected($event)">
-                            <input type="text" v-validate="'required'" name="booking[date_to]" v-model="date_to" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.shop.products.to') }}&quot;" placeholder="{{ __('bookingproduct::app.shop.products.to') }}"/>
+                            <input type="text" v-validate="'required|date_format:yyyy-MM-dd|after_or_equal:date_from'" name="booking[date_to]" v-model="date_to" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.shop.products.to') }}&quot;" placeholder="{{ __('bookingproduct::app.shop.products.to') }}" ref="date_to" data-min-date="today"/>
                         </date>
 
                         <span class="control-error" v-if="errors.has('booking[date_to]')">@{{ errors.first('booking[date_to]') }}</span>
@@ -129,6 +129,46 @@
 
                     date_to: ''
                 }
+            },
+
+            created: function() {
+                var self = this;
+
+                this.$validator.extend('after_or_equal', {
+                    getMessage(field, val) {
+                        return 'The "To" must be equal or after "From"';
+                    },
+
+                    validate(value, field) {
+                        if (! self.date_from) {
+                            return true;
+                        }
+
+                        var from = new Date(self.date_from);
+                        
+                        var to = new Date(self.date_to);
+
+                        return from <= to;
+                    }
+                });
+
+                this.$validator.extend('before_or_equal', {
+                    getMessage(field, val) {
+                        return 'The "From must be equal or before "To"';
+                    },
+
+                    validate(value, field) {
+                        if (! self.date_to) {
+                            return true;
+                        }
+
+                        var from = new Date(self.date_from);
+                        
+                        var to = new Date(self.date_to);
+
+                        return from <= to;
+                    }
+                });
             },
 
             methods: {
