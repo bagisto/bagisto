@@ -39,6 +39,10 @@ class ShopServiceProvider extends ServiceProvider
 
         Paginator::defaultView('shop::partials.pagination');
         Paginator::defaultSimpleView('shop::partials.pagination');
+
+        $this->publishes([
+            __DIR__ . '/../Resources/views' => resource_path('themes/default/views'),
+        ]);
     }
 
     /**
