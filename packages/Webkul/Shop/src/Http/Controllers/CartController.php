@@ -65,7 +65,7 @@ class CartController extends Controller
      */
     public function add($id)
     {
-        try {
+        // try {
             $result = Cart::addProduct($id, request()->all());
 
             if ($this->onWarningAddingToCart($result)) {
@@ -87,13 +87,13 @@ class CartController extends Controller
                     return redirect()->route('shop.checkout.onepage.index');
                 }
             }
-        } catch(\Exception $e) {
-            session()->flash('error', trans($e->getMessage()));
+        // } catch(\Exception $e) {
+        //     session()->flash('error', trans($e->getMessage()));
 
-            $product = $this->productRepository->find($id);
+        //     $product = $this->productRepository->find($id);
 
-            return redirect()->route('shop.productOrCategory.index', $product->url_key);
-        }
+        //     return redirect()->route('shop.productOrCategory.index', $product->url_key);
+        // }
 
         return redirect()->back();
     }
