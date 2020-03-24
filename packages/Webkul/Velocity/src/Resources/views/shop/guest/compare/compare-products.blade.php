@@ -20,7 +20,7 @@
 
             {!! view_render_event('bagisto.shop.customers.account.compare.view.before') !!}
 
-            <div class="row compare-products col-12 ml0">
+            <table class="row compare-products">
                 <shimmer-component v-if="!isProductListLoaded && !isMobile()"></shimmer-component>
 
                 <template v-else-if="isProductListLoaded && products.length > 0">
@@ -39,12 +39,12 @@
                     @endphp
 
                     @foreach ($comparableAttributes as $attribute)
-                        <div class="row col-12 pr-0 mt15">
-                            <div class="col-2">
+                        <tr>
+                            <td>
                                 <span class="fs16">{{ $attribute['admin_name'] }}</span>
-                            </div>
+                            </td>
 
-                            <div class="col" :key="`title-${index}`" v-for="(product, index) in products">
+                            <td :key="`title-${index}`" v-for="(product, index) in products">
                                 @switch ($attribute['code'])
                                     @case('name')
                                         <a :href="`${$root.baseUrl}/${product.url_key}`" class="unset remove-decoration active-hover">
@@ -100,22 +100,22 @@
                                                 ></span>
                                                 @break;
                                             @default
-                                                <span v-html="product.product['{{ $attribute['code'] }}']" class="fs16"></span>
+                                                <span v-html="product.product['{{ $attribute['code'] }}'] ? product.product['{{ $attribute['code'] }}'] : '__'" class="fs16"></span>
                                                 @break;
                                         @endswitch
 
                                         @break
 
                                 @endswitch
-                            </div>
-                        </div>
+                            </td>
+                        </tr>
                     @endforeach
                 </template>
 
                 <span v-else-if="isProductListLoaded && products.length == 0">
                     @{{ __('customer.compare.empty-text') }}
                 </span>
-            </div>
+            </table>
 
             {!! view_render_event('bagisto.shop.customers.account.compare.view.after') !!}
         </section>

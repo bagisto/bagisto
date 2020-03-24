@@ -2305,15 +2305,17 @@
 
 
 .compare-products {
-    // overflow-x: scroll;
-    // padding-bottom: 30px;
+    width: 100%;
+    overflow-x: scroll;
+    padding-bottom: 20px;
+    margin-left: 0 !important;
+    margin-right: 10px !important;
 
-    .col,
-    .col-2 {
-        max-width: 20%;
-        min-width: 17%;
-        padding-left: 0;
-        word-break: break-word;
+    td {
+        padding: 15px;
+        min-width: 250px;
+        max-width: 250px;
+        vertical-align: top;
     }
 
     .image-wrapper {
