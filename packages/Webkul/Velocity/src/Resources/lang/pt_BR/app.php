@@ -183,6 +183,7 @@ return [
         'cart' => [
             'view-cart' => 'Ver Carrinho',
             'cart-summary' => 'Resumo do Carrinho',
+            'cart-subtotal' => 'Subtotal',
         ],
         'qty' => 'Qtd',
         'items' => 'Itens',
