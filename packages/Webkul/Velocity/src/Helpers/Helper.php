@@ -318,6 +318,7 @@ class Helper extends Review
             'shortDescription'  => $product->short_description,
             'firstReviewText'   => trans('velocity::app.products.be-first-review'),
             'priceHTML'         => view('shop::products.price', ['product' => $product])->render(),
+            'defaultAddToCart'  => view('shop::products.add-buttons', ['product' => $product])->render(),
             'addToCartHtml'     => view('shop::products.add-to-cart', [
                 'showCompare'       => true,
                 'product'           => $product,
@@ -363,6 +364,7 @@ class Helper extends Review
                     $productMetaDetails['priceHTML'] = $formattedProduct['priceHTML'];
                     $productMetaDetails['addToCartHtml'] = $formattedProduct['addToCartHtml'];
                     $productMetaDetails['galleryImages'] = $formattedProduct['galleryImages'];
+                    $productMetaDetails['defaultAddToCart'] = $formattedProduct['defaultAddToCart'];
 
                     $product = array_merge($productFlat->toArray(), $productMetaDetails);
 

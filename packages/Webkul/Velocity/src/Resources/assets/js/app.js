@@ -58,13 +58,13 @@ $(document).ready(function () {
     Vue.mixin({
         data: function () {
             return {
-                'baseUrl': document.querySelector("script[src$='velocity.js']").getAttribute('baseUrl'),
+                'imageObserver': null,
                 'navContainer': false,
                 'headerItemsCount': 0,
+                'sharedRootCategories': [],
                 'responsiveSidebarTemplate': '',
                 'responsiveSidebarKey': Math.random(),
-                'sharedRootCategories': [],
-                'imageObserver': null,
+                'baseUrl': document.querySelector("script[src$='velocity.js']").getAttribute('baseUrl'),
             }
         },
 

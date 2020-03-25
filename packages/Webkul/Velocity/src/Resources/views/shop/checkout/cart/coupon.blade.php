@@ -74,7 +74,6 @@
 
                         this.disable_button = false;
                     }).catch(error => {
-                        debugger
                         this.error_message = error.response.data.message;
 
                         this.disable_button = false;
