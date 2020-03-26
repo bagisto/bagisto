@@ -3,27 +3,62 @@
     $comparableAttributes = $attributeRepository->findByField('is_comparable', 1);
 @endphp
 
+@push('css')
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+
+        .comparison-component {
+            width: 100%;
+            padding-top: 20px;
+        }
+
+        .comparison-component > h1 {
+            display: inline-block;
+        }
+
+        td {
+            padding: 15px;
+            min-width: 250px;
+            max-width: 250px;
+            line-height: 30px;
+            vertical-align: top;
+            word-break: break-word;
+        }
+
+        .icon.remove-product {
+            top: 15px;
+            float: right;
+            cursor: pointer;
+            position: relative;
+            background-color: black;
+        }
+
+        .action > div {
+            display: inline-block;
+        }
+    </style>
+@endpush
+
 @push('scripts')
     <script type="text/x-template" id="compare-product-template">
-        <section class="cart-details row no-margin col-12">
-            <h1 class="fw6 col-6">
+        <section class="comparison-component">
+            <h1>
                 {{ __('velocity::app.customer.compare.compare_similar_items') }}
             </h1>
 
-            <div class="col-6" v-if="products.length > 0">
-                <button
-                    class="theme-btn light pull-right"
-                    @click="removeProductCompare('all')">
-                    {{ __('shop::app.customer.account.wishlist.deleteall') }}
-                </button>
-            </div>
+            <button
+                v-if="products.length > 0"
+                class="btn btn-primary btn-md pull-right"
+                @click="removeProductCompare('all')">
+                {{ __('shop::app.customer.account.wishlist.deleteall') }}
+            </button>
 
             {!! view_render_event('bagisto.shop.customers.account.compare.view.before') !!}
 
-            <table class="row compare-products">
-                <shimmer-component v-if="!isProductListLoaded && !isMobile()"></shimmer-component>
-
-                <template v-else-if="isProductListLoaded && products.length > 0">
+            <table class="compare-products">
+                <template v-if="isProductListLoaded && products.length > 0">
                     @php
                         $comparableAttributes = $comparableAttributes->toArray();
 
@@ -47,17 +82,17 @@
                             <td :key="`title-${index}`" v-for="(product, index) in products">
                                 @switch ($attribute['code'])
                                     @case('name')
-                                        <a :href="`${$root.baseUrl}/${product.url_key}`" class="unset remove-decoration active-hover">
-                                            <h1 class="fw6 fs18" v-text="product['{{ $attribute['code'] }}']"></h1>
+                                        <a :href="`${baseUrl}/${product.url_key}`" class="unset remove-decoration active-hover">
+                                            <h3 class="fw6 fs18" v-text="product['{{ $attribute['code'] }}']"></h3>
                                         </a>
                                         @break
 
                                     @case('image')
-                                        <a :href="`${$root.baseUrl}/${product.url_key}`" class="unset">
+                                        <a :href="`${baseUrl}/${product.url_key}`" class="unset">
                                             <img
                                                 class="image-wrapper"
                                                 :src="product['{{ $attribute['code'] }}']"
-                                                :onerror="`this.src='${$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
+                                                :onerror="`this.src='${baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
                                         </a>
                                         @break
 
@@ -67,14 +102,9 @@
 
                                     @case('addToCartHtml')
                                         <div class="action">
-                                            <vnode-injector :nodes="getDynamicHTML(product.addToCartHtml)"></vnode-injector>
+                                            <div v-html="product.defaultAddToCart"></div>
 
-                                            <i
-                                                class="material-icons cross fs16"
-                                                @click="removeProductCompare(product.id)">
-
-                                                close
-                                            </i>
+                                            <span class="icon white-cross-sm-icon remove-product" @click="removeProductCompare(product.id)"></span>
                                         </div>
                                         @break
 
@@ -113,7 +143,7 @@
                 </template>
 
                 <span v-else-if="isProductListLoaded && products.length == 0">
-                    @{{ __('customer.compare.empty-text') }}
+                    {{ __('velocity::app.customer.compare.empty-text') }}
                 </span>
             </table>
 
@@ -129,6 +159,7 @@
                 return {
                     'products': [],
                     'isProductListLoaded': false,
+                    'baseUrl': "{{ url()->to('/') }}",
                     'isCustomer': '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == "true",
                 }
             },
@@ -140,7 +171,7 @@
             methods: {
                 'getComparedProducts': function () {
                     let items = '';
-                    let url = `${this.$root.baseUrl}/${this.isCustomer ? 'comparison' : 'detailed-products'}`;
+                    let url = `${this.baseUrl}/${this.isCustomer ? 'comparison' : 'detailed-products'}`;
 
                     let data = {
                         params: {'data': true}
@@ -162,15 +193,15 @@
                         .then(response => {
                             this.isProductListLoaded = true;
 
-                            if (response.data.products.length > 3) {
-                                $('.compare-products').css('overflow-x', 'scroll');
+                            if (response.data.products.length > 2) {
+                                $('.comparison-component').css('overflow-x', 'scroll');
                             }
 
                             this.products = response.data.products;
                         })
                         .catch(error => {
                             this.isProductListLoaded = true;
-                            console.log(this.__('error.something_went_wrong'));
+                            console.log("{{ __('velocity::app.error.something_went_wrong') }}");
                         });
                     } else {
                         this.isProductListLoaded = true;
@@ -180,7 +211,7 @@
 
                 'removeProductCompare': function (productId) {
                     if (this.isCustomer) {
-                        this.$http.delete(`${this.$root.baseUrl}/comparison?productId=${productId}`)
+                        this.$http.delete(`${this.baseUrl}/comparison?productId=${productId}`)
                         .then(response => {
                             if (productId == 'all') {
                                 this.$set(this, 'products', this.products.filter(product => false));
@@ -188,10 +219,10 @@
                                 this.$set(this, 'products', this.products.filter(product => product.id != productId));
                             }
 
-                            window.showAlert(`alert-${response.data.status}`, response.data.label, response.data.message);
+                            // window.showAlert(`alert-${response.data.status}`, response.data.label, response.data.message);
                         })
                         .catch(error => {
-                            console.log(this.__('error.something_went_wrong'));
+                            console.log("{{ __('velocity::app.error.something_went_wrong') }}");
                         });
                     } else {
                         let existingItems = this.getStorageValue('compared_product');
@@ -206,14 +237,57 @@
 
                         this.setStorageValue('compared_product', updatedItems);
 
-                        window.showAlert(
-                            `alert-success`,
-                            this.__('shop.general.alert.success'),
-                            `${this.__('customer.compare.removed')}`
-                        );
+                        // window.showAlert(
+                        //     `alert-success`,
+                        //     "{{ __('velocity::app.shop.general.alert.success') }}",
+                        //     `${this.__('customer.compare.removed')}`
+                        // );
+                    }
+                },
+
+                'getDynamicHTML': function (input) {
+                    var _staticRenderFns;
+                    const { render, staticRenderFns } = Vue.compile(input);
+
+                    if (this.$options.staticRenderFns.length > 0) {
+                        _staticRenderFns = this.$options.staticRenderFns;
+                    } else {
+                        _staticRenderFns = this.$options.staticRenderFns = staticRenderFns;
                     }
 
-                    this.$root.headerItemsCount++;
+                    try {
+                        var output = render.call(this, this.$createElement);
+                    } catch (exception) {
+                        console.log(this.__('error.something_went_wrong'));
+                    }
+
+                    this.$options.staticRenderFns = _staticRenderFns;
+
+                    return output;
+                },
+
+                'isMobile': function () {
+                    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                    return true
+                    } else {
+                    return false
+                    }
+                },
+
+                'getStorageValue': function (key) {
+                    let value = window.localStorage.getItem(key);
+
+                    if (value) {
+                        value = JSON.parse(value);
+                    }
+
+                    return value;
+                },
+
+                'setStorageValue': function (key, value) {
+                    window.localStorage.setItem(key, JSON.stringify(value));
+
+                    return true;
                 },
             }
         });

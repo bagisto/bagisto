@@ -69,7 +69,6 @@ class ForgotPasswordController extends Controller
 
             return redirect()->back();
         } catch (\Exception $e) {
-            dd($e);
             report($e);
             session()->flash('error', trans($e->getMessage()));
 
