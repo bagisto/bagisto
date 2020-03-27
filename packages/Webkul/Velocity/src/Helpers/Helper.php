@@ -279,7 +279,8 @@ class Helper extends Review
 
     /**
      * @param  \Webkul\Product\Contracts\Product  $product
-     * @param  bool  $list
+     * @param  bool                               $list
+     * @param  array                              $metaInformation
      * @return array
      */
     public function formatProduct($product, $list = false, $metaInformation = [])
@@ -317,16 +318,15 @@ class Helper extends Review
             'shortDescription'  => $product->short_description,
             'firstReviewText'   => trans('velocity::app.products.be-first-review'),
             'priceHTML'         => view('shop::products.price', ['product' => $product])->render(),
+            'defaultAddToCart'  => view('shop::products.add-buttons', ['product' => $product])->render(),
             'addToCartHtml'     => view('shop::products.add-to-cart', [
                 'showCompare'       => true,
                 'product'           => $product,
                 'addWishlistClass'  => ! (isset($list) && $list) ? '' : '',
                 'btnText'           => (isset($metaInformation['btnText']) && $metaInformation['btnText'])
-                                       ? $metaInformation['btnText']
-                                       : null,
-                'moveToCart'           => (isset($metaInformation['moveToCart']) && $metaInformation['moveToCart'])
-                                       ? $metaInformation['moveToCart']
-                                       : null,
+                                       ? $metaInformation['btnText'] : null,
+                'moveToCart'        => (isset($metaInformation['moveToCart']) && $metaInformation['moveToCart'])
+                                       ? $metaInformation['moveToCart'] : null,
                 'addToCartBtnClass' => ! (isset($list) && $list) ? 'small-padding' : '',
             ])->render(),
         ];
@@ -364,6 +364,7 @@ class Helper extends Review
                     $productMetaDetails['priceHTML'] = $formattedProduct['priceHTML'];
                     $productMetaDetails['addToCartHtml'] = $formattedProduct['addToCartHtml'];
                     $productMetaDetails['galleryImages'] = $formattedProduct['galleryImages'];
+                    $productMetaDetails['defaultAddToCart'] = $formattedProduct['defaultAddToCart'];
 
                     $product = array_merge($productFlat->toArray(), $productMetaDetails);
 

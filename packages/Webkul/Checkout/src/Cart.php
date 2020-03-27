@@ -165,9 +165,9 @@ class Cart
                             'cart_id' => $cart->id
                         ]));
                     } else {
-                        if ($cartItem->product->getTypeInstance()->showQuantityBox() === false) {
-                            return ['warning' => __('shop::app.checkout.cart.integrity.qty_impossible')];
-                        }
+                        // if ($cartItem->product->getTypeInstance()->showQuantityBox() === false) {
+                        //     return ['warning' => __('shop::app.checkout.cart.integrity.qty_impossible')];
+                        // }
 
                         $cartItem = $this->cartItemRepository->update($cartProduct, $cartItem->id);
                     }

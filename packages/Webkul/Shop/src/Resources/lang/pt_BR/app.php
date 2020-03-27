@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'invalid_vat_format' => 'The given vat id has a wrong format',
+    'security-warning' => 'Suspicious activity found!!!',
+    'nothing-to-delete' => 'Nothing to delete',
+
     'layouts' => [
         'my-account' => 'Minha Conta',
         'profile' => 'Perfil',
@@ -113,8 +117,9 @@ return [
             'verification-not-sent' => 'Erro! Problema ao enviar e-mail de verificação, tente novamente mais tarde',
             'verification-sent' => 'E-mail de verificação enviado',
             'verified' => 'Sua Conta Foi Verificada, Tente Entrar Agora',
-            'verify-failed' => 'Não podemos verificar sua conta de e-mail',
+            'verify-failed' => 'Não podemos verificar sua conta de e-mail.',
             'dont-have-account' => 'Você não tem conta conosco',
+            'customer-registration' => 'Cliente Cadastrado com Sucesso'
         ],
 
         'login-text' => [
@@ -245,13 +250,14 @@ return [
                     'date' => 'Data',
                     'status' => 'Status',
                     'total' => 'Total',
-                    'processing' => 'Processing',
-                    'completed' => 'Completed',
-                    'canceled' => 'Canceled',
-                    'closed' => 'Closed',
-                    'pending' => 'Pending',
-                    'pending-payment' => 'Pending Payment',
-                    'fraud' => 'Fraud'
+                    'order_number' => 'Número do Pedido',
+                    'processing' => 'Precessando',
+                    'completed' => 'Completo',
+                    'canceled' => 'Cancelado',
+                    'closed' => 'Fechado',
+                    'pending' => 'Pendente',
+                    'pending-payment' => 'Pagamento Pendente',
+                    'fraud' => 'Fraude'
                 ],
 
                 'view' => [
@@ -304,7 +310,7 @@ return [
             ],
 
             'wishlist' => [
-                'page-title' => 'Customer - Wishlist',
+                'page-title' => 'Lista de Desejos',
                 'title' => 'Lista de Desejos',
                 'deleteall' => 'Excluir Tudo',
                 'moveall' => 'Adicionar todos ao Carrinho',
@@ -313,6 +319,7 @@ return [
                 'add' => 'Item adicionado com sucesso a Lista de Desejos',
                 'remove' => 'Item removido com sucesso da Lista de Desejos',
                 'moved' => 'Item movido com sucesso para Lista de Desejos',
+                'option-missing' => 'As opções do produto estão ausentes, portanto, o item não pode ser movido para a lista de desejos.',
                 'move-error' => 'Item não pode ser movido para Lista de Desejos, por favor, tente novamente mais tarde',
                 'success' => 'Item adicionado com sucesso a Lista de Desejos',
                 'failure' => 'Item não pode ser adicionado à Lista de Desejos, por favor, tente novamente mais tarde',
@@ -408,8 +415,9 @@ return [
             'integrity' => [
                 'missing_fields' =>'Violação de integridade do sistema de carrinho, alguns campos obrigatórios ausentes',
                 'missing_options' =>'Violação de Integridade do Sistema de Carrinho, Faltam Opções para o Produto Configurável',
-                'missing_links' => 'Downloadable links are missing for this product.',
-                'qty_missing' => 'Atleast one product should have more than 1 quantity.'
+                'missing_links' => 'Faltam links para download para este produto.',
+                'qty_missing' => 'Pelo menos um produto deve ter mais de 1 quantidade.',
+                'qty_impossible' => 'Não é possível adicionar mais do que um desse produto ao carrinho.'
             ],
 
             'create-error' => 'Encontrou algum problema ao fazer a instância do carrinho',
@@ -438,11 +446,11 @@ return [
                 'success-remove' => 'Item foi removido com sucesso do carrinho',
                 'error-add' => 'Item não pode ser adicionado ao carrinho, por favor, tente novamente mais tarde',
             ],
-
             'quantity-error' => 'Quantidade solicitada não está disponível',
             'cart-subtotal' => 'Subtotal do carrinho',
             'cart-remove-action' => 'Você realmente quer fazer isso ?',
-            'partial-cart-update' => 'Only some of the product(s) were updated'
+            'partial-cart-update' => 'Only some of the product(s) were updated',
+            'link-missing' => ''
         ],
 
         'onepage' => [
@@ -466,7 +474,7 @@ return [
             'country' => 'País',
             'order-summary' => 'Resumo do Pedido',
             'shipping-address' => 'Endereço de Entrega',
-            'use_for_shipping' => 'Enviar para esse endereçõ',
+            'use_for_shipping' => 'Enviar para esse endereço',
             'continue' => 'Continuar',
             'shipping-method' => 'Selecione o Método de Entrega',
             'payment-methods' => 'Selecione o Método de Pagamento',
@@ -479,7 +487,9 @@ return [
             'contact' => 'Contato',
             'place-order' => 'Enviar Pedido',
             'new-address' => 'Add Novo Endereço',
-            'save_as_address' => 'Salvar Endereço'
+            'save_as_address' => 'Salvar Endereço',
+            'apply-coupon' => 'Aplicar Cupom',
+            'enter-coupon-code' => 'Digite aqui o seu Cupom'
         ],
 
         'total' => [
@@ -488,8 +498,17 @@ return [
             'grand-total' => 'Total',
             'delivery-charges' => 'Taxas de Entrega',
             'tax' => 'Imposto',
-            'discount' => 'Discount',
-            'price' => 'preço'
+            'discount' => 'Desconto',
+            'price' => 'preço',
+            'disc-amount' => 'Valor descontado',
+            'new-grand-total' => 'Novo Total',
+            'coupon' => 'Cupom',
+            'coupon-applied' => 'Cupom Aplicado',
+            'remove-coupon' => 'Remover Cupom',
+            'cannot-apply-coupon' => 'Não foi possível aplicar esse Cupom',
+            'invalid-coupon' => 'Código do Cupom é inválido.',
+            'success-coupon' => 'Cupom aplicado com sucesso.',
+            'coupon-apply-issue' => 'Não foi possível aplicar esse Cupom'
         ],
 
         'success' => [
@@ -505,6 +524,7 @@ return [
             'subject' => 'Confirmação de Novo Pedido',
             'heading' => 'Confirmação de Pedido!',
             'dear' => 'Caro :customer_name',
+            'dear-admin' => 'Caro :admin_name',
             'greeting' => 'Obrigado pelo seu Pedido :order_id realizado em :created_at',
             'summary' => 'Resumo do Pedido',
             'shipping-address' => 'Endereço de Entrega',
@@ -521,7 +541,27 @@ return [
             'grand-total' => 'Total',
             'final-summary' => 'Obrigado por mostrar o seu interesse em nossa loja nós lhe enviaremos o número de rastreamento assim que for despachado',
             'help' => 'Se você precisar de algum tipo de ajuda, por favor entre em contato conosco :support_email',
-            'thanks' => 'Muito Obrigado!'
+            'thanks' => 'Muito Obrigado!',
+            'cancel' => [
+                'subject' => 'Confirmação de Cancelamento de Pedido',
+                'heading' => 'Pedido Cancelado',
+                'dear' => 'Caro :customer_name',
+                'greeting' => 'Seu Pedido com o ID #:order_id finalizado em :created_at foi cancelado',
+                'summary' => 'Resumo do Pedido',
+                'shipping-address' => 'Endereço de Entrega',
+                'billing-address' => 'Endereço de Faturamento',
+                'contact' => 'Contato',
+                'shipping' => 'Método de Envio',
+                'payment' => 'Método de Pagamento',
+                'subtotal' => 'Subtotal',
+                'shipping-handling' => 'Entrega & Manuseio',
+                'tax' => 'Taxa',
+                'discount' => 'Desconto',
+                'grand-total' => 'Total',
+                'final-summary' => 'Obrigado por mostrar interesse em nosa Loja',
+                'help' => 'Caso precise de qualquer tipo de ajuda entre em contato conosco :support_email',
+                'thanks' => 'Obrigado!',
+            ]
         ],
 
         'invoice' => [
@@ -547,11 +587,49 @@ return [
         ],
 
         'forget-password' => [
+            'subject' => 'Recuperação de Senha',
             'dear' => 'Caro :name',
             'info' => 'Você está recebendo este e-mail porque recebemos uma solicitação de redefinição de senha para sua conta',
             'reset-password' => 'Redefinir Senha',
             'final-summary' => 'Se você não solicitou uma redefinição de senha, nenhuma ação adicional é necessária',
-            'thanks' => 'Muito Obrigado!'
+            'thanks' => 'Obrigado!'
+        ],
+
+        'customer' => [
+            'new' => [
+                'dear' => 'Caro :customer_name',
+                'username-email' => 'Nome de usuário/Email',
+                'subject' => 'Nova Conta',
+                'password' => 'Senha',
+                'summary' => 'Sua conta foi criada.
+                Abaixo está suas informaços: ',
+                'thanks' => 'Obrigado!',
+            ],
+
+            'registration' => [
+                'subject' => 'Novo Cliente',
+                'customer-registration' => 'Cliente cadastrado com Sucesso',
+                'dear' => 'Caro :customer_name',
+                'greeting' => 'Bem vindo e obrigado por se cadastrar conosco!',
+                'summary' => 'Sua conta foi criada com sucesso e agora você pode entrar utilizando seu endereço de email e senha. Ao fazer login, você poderá acessar outros serviços, incluindo a revisão de pedidos anteriores, listas de desejos e a edição das informações da sua conta..',
+                'thanks' => 'Obrigado!',
+            ],
+
+            'verification' => [
+                'heading' => config('app.name') . ' - Verificação de Email',
+                'subject' => 'Verificação de Email',
+                'verify' => 'Confirme sua conta',
+                'summary' => 'Esse email é para confirmar que esse endereço de e-mail é válido e pertence a você.
+                Por favor, clique no botão Confirme sua conta abaixo para verificar sua conta. '
+            ],
+
+            'subscription' => [
+                'subject' => 'Email de Inscrição',
+                'greeting' => ' Bem vindo a ' . config('app.name') . ' - Incrição de Email',
+                'unsubscribe' => 'Unsubscribe',
+                'summary' => 'Obrigado por me colocar na sua caixa de entrada. Já faz um tempo desde que você leu ' . config('app.name') . ' e-mail e não queremos sobrecarregar sua caixa de entrada. Se você ainda não deseja receber
+                as últimas notícias de email marketing e, com certeza, clique no botão abaixo.'
+            ]
         ]
     ],
 

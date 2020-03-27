@@ -27,15 +27,13 @@
                 <button
                     type="submit"
                     {{ ! $product->isSaleable() ? 'disabled' : '' }}
-                    class="btn btn-add-to-cart {{ $addToCartBtnClass ?? '' }}">
+                    class="theme-btn {{ $addToCartBtnClass ?? '' }}">
 
                     @if (! (isset($showCartIcon) && !$showCartIcon))
                         <i class="material-icons text-down-3">shopping_cart</i>
                     @endif
 
-                    <span type="submit" class="fs14 fw6 text-uppercase text-up-4">
                         {{ __('shop::app.products.add-to-cart') }}
-                    </span>
                 </button>
             @elseif(isset($addToCartForm) && !$addToCartForm)
                 <form

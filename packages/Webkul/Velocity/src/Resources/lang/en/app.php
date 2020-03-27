@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'admin' => [
-        'system'   => [
+    'admin'         => [
+        'system'    => [
             'velocity' => [
                 'general'  => 'General',
                 'category'  => 'Category',
@@ -39,14 +39,14 @@ return [
                 'num-sub-category' => 'Number Of Sub Category',
             ]
         ],
-        'layouts' => [
+        'layouts'   => [
             'velocity' => 'Velocity',
             'cms-pages' => 'CMS Pages',
             'meta-data' => 'Meta Data',
             'category-menu' => 'Category Menu',
             'header-content' => 'Header Content',
         ],
-        'contents' => [
+        'contents'  => [
             'self' => 'Self',
             'active' => 'Active',
             'new-tab' => 'New Tab',
@@ -112,7 +112,7 @@ return [
             'general' => 'General',
             'add-image-btn-title' => 'Add Image'
         ],
-        'category' => [
+        'category'  => [
             'save-btn-title' => 'Save Menu',
             'title' => 'Category Menu List',
             'add-title' => 'Add Menu Content',
@@ -136,151 +136,153 @@ return [
             'tooltip-content' => 'Tooltip Content',
             'mass-delete-success' => 'Selected categories menu deleted successfully.',
         ],
-        'general' => [
+        'general'   => [
             'locale_logo' => 'Locale Logo',
         ],
     ],
 
-    'home' => [
-        'view-all' => 'View All',
-        'add-to-cart' => 'Add To Cart',
-        'hot-categories' => 'Hot Categories',
-        'payment-methods' => 'Payment Methods',
-        'customer-reviews' => 'Customer Reviews',
-        'shipping-methods' => 'Shipping Methods',
+    'home'          => [
+        'view-all'           => 'View All',
+        'add-to-cart'        => 'Add To Cart',
+        'hot-categories'     => 'Hot Categories',
+        'payment-methods'    => 'Payment Methods',
+        'customer-reviews'   => 'Customer Reviews',
+        'shipping-methods'   => 'Shipping Methods',
         'popular-categories' => 'Popular Categories',
     ],
 
-    'header' => [
-        'cart' => 'Cart',
-        'cart' => 'Cart',
-        'guest' => 'Guest',
-        'logout' => 'Logout',
-        'title' => 'Account',
-        'account' => 'Account',
-        'profile' => 'Profile',
-        'wishlist' => 'Wishlist',
-        'all-categories' => 'All Categories',
-        'search-text' => 'Search products here',
-        'welcome-message' => 'Welcome, :customer_name',
-        'dropdown-text' => 'Manage Cart, Orders & Wishlist',
+    'header'        => [
+        'cart'              => 'Cart',
+        'cart'              => 'Cart',
+        'guest'             => 'Guest',
+        'logout'            => 'Logout',
+        'title'             => 'Account',
+        'account'           => 'Account',
+        'profile'           => 'Profile',
+        'wishlist'          => 'Wishlist',
+        'all-categories'    => 'All Categories',
+        'search-text'       => 'Search products here',
+        'welcome-message'   => 'Welcome, :customer_name',
+        'dropdown-text'     => 'Manage Cart, Orders & Wishlist',
     ],
 
-    'menu-navbar' => [
-        'text-more' => 'More',
+    'menu-navbar'   => [
+        'text-more'     => 'More',
         'text-category' => 'Shop by Category',
     ],
 
-    'minicart' => [
-        'cart' => 'Cart',
+    'minicart'      => [
+        'cart'      => 'Cart',
         'view-cart' => 'View Cart',
     ],
 
-    'checkout' => [
-        'qty' => 'Qty',
-        'checkout' => 'Checkout',
-        'cart' => [
-            'view-cart' => 'View Cart',
-            'cart-summary' => 'Cart Summary',
+    'checkout'      => [
+        'qty'       => 'Qty',
+        'checkout'  => 'Checkout',
+        'cart'      => [
+            'view-cart'     => 'View Cart',
+            'cart-summary'  => 'Cart Summary',
         ],
-        'qty' => 'Qty',
-        'items' => 'Items',
-        'subtotal' => 'Subtotal',
+        'qty'       => 'Qty',
+        'items'     => 'Items',
+        'subtotal'  => 'Subtotal',
         'sub-total' => 'Sub Total',
-        'proceed' => 'Proceed to checkout',
+        'proceed'   => 'Proceed to checkout',
     ],
 
-    'customer' => [
-        'compare' => [
-            'text' => 'Compare',
+    'customer'      => [
+        'compare'           => [
+            'text'                  => 'Compare',
             'compare_similar_items' => 'Compare Similar Items',
-            'added' => 'Item successfully added to compare list',
-            'already_added' => 'Item already added to compare list',
-            'removed' => 'Item successfully removed from compare list',
-            'empty-text' => "You don't have any items in your compare list",
+            'added'                 => 'Item successfully added to compare list',
+            'already_added'         => 'Item already added to compare list',
+            'removed'               => 'Item successfully removed from compare list',
+            'empty-text'            => "You don't have any items in your compare list",
         ],
-        'login-form' => [
-            'sign-up' => 'Sign up',
-            'new-customer' => 'New Customer',
-            'customer-login' => 'Customer Login',
-            'registered-user' => 'Registered User',
-            'your-email-address' => 'Your email address',
-            'form-login-text' => 'If you have an account, sign in with your email address.',
+        'login-form'        => [
+            'sign-up'               => 'Sign up',
+            'new-customer'          => 'New Customer',
+            'customer-login'        => 'Customer Login',
+            'registered-user'       => 'Registered User',
+            'your-email-address'    => 'Your email address',
+            'form-login-text'       => 'If you have an account, sign in with your email address.',
         ],
-        'signup-form' => [
-            'login' => 'Login',
-            'become-user' => 'Become User',
+        'signup-form'       => [
+            'login'             => 'Login',
+            'become-user'       => 'Become User',
             'user-registration' => 'User Registration',
-            'form-sginup-text' => 'If you are new to our store, we glab to have you as member.',
+            'form-sginup-text'  => 'If you are new to our store, we glab to have you as member.',
         ],
-        'forget-password' => [
-            'login' => 'Login',
-            'forgot-password' => 'Forgot Password',
-            'recover-password' => 'Recover Password',
+        'forget-password'   => [
+            'login'                 => 'Login',
+            'forgot-password'       => 'Forgot Password',
+            'recover-password'      => 'Recover Password',
             'recover-password-text' => 'If you forgot your password, recover it by entering your email address.',
         ]
     ],
 
-    'error' => [
-        'go-to-home' => 'Go to home',
-        'page-lost-short' => 'Page lost content',
-        'something_went_wrong' => 'something went wrong',
+    'error'         => [
+        'go-to-home'            => 'Go to home',
+        'page-lost-short'       => 'Page lost content',
+        'something_went_wrong'  => 'something went wrong',
         'page-lost-description' => "The page you're looking for isn't available. Try to search again or use the Go Back button below.",
     ],
 
-    'products' => [
-        'text' => 'Products',
-        'details' => 'Details',
-        'reviews-title' => 'Reviews',
-        'reviewed' => 'Reviewed',
-        'review-by' => 'Review by',
-        'quick-view' => 'Quick View',
-        'not-available' => 'Not Available',
-        'submit-review' => 'Submit Review',
-        'ratings' => ':totalRatings Ratings',
-        'reviews-count' => ':totalReviews Reviews',
-        'customer-rating' => 'Customer Rating',
-        'more-infomation' => 'More Information',
-        'view-all-reviews' => 'View All Reviews',
+    'products'      => [
+        'text'              => 'Products',
+        'details'           => 'Details',
+        'reviews-title'     => 'Reviews',
+        'reviewed'          => 'Reviewed',
+        'review-by'         => 'Review by',
+        'quick-view'        => 'Quick View',
+        'not-available'     => 'Not Available',
+        'submit-review'     => 'Submit Review',
+        'ratings'           => ':totalRatings Ratings',
+        'reviews-count'     => ':totalReviews Reviews',
+        'customer-rating'   => 'Customer Rating',
+        'more-infomation'   => 'More Information',
+        'view-all-reviews'  => 'View All Reviews',
         'write-your-review' => 'Write Your Review',
         'short-description' => 'Short Descriptions',
-        'recently-viewed' => 'Recently Viewed Products',
-        'be-first-review' => 'Be the first to write a review',
+        'recently-viewed'   => 'Recently Viewed Products',
+        'be-first-review'   => 'Be the first to write a review',
     ],
 
-    'shop' => [
-        'gender' => [
-            'male' => 'Male',
-            'other' => 'Other',
+    'shop'          => [
+        'gender'    => [
+            'male'   => 'Male',
+            'other'  => 'Other',
             'female' => 'Female',
         ],
-        'general' => [
-            'view' => 'View',
-            'filter' => 'Filter',
-            'orders' => 'Orders',
-            'update' => 'Update',
-            'reviews' => 'Reviews',
-            'addresses' => 'Addresses',
-            'top-brands' => 'Top Brands',
-            'new-password' => 'New password',
-            'downloadables' => 'Downloadable Products',
-            'confirm-new-password' => 'Confirm new password',
+        'general'   => [
+            'no'                     => 'No',
+            'yes'                    => 'Yes',
+            'view'                   => 'View',
+            'filter'                 => 'Filter',
+            'orders'                 => 'Orders',
+            'update'                 => 'Update',
+            'reviews'                => 'Reviews',
+            'addresses'              => 'Addresses',
+            'top-brands'             => 'Top Brands',
+            'new-password'           => 'New password',
+            'downloadables'          => 'Downloadable Products',
+            'confirm-new-password'   => 'Confirm new password',
             'enter-current-password' => 'Enter your current password',
 
             'alert' => [
-                'info' => 'Info',
-                'error' => 'Error',
-                'success' => 'Success',
-                'warning' => 'Warning',
+                'info'      => 'Info',
+                'error'     => 'Error',
+                'success'   => 'Success',
+                'warning'   => 'Warning',
             ],
         ],
-        'wishlist' => [
-            'add-wishlist-text' => 'Add product to wishlist',
-            'remove-wishlist-text' => 'Remove product from wishlist'
+        'wishlist'  => [
+            'add-wishlist-text'     => 'Add product to wishlist',
+            'remove-wishlist-text'  => 'Remove product from wishlist'
         ]
     ],
 
-    'responsive' => [
+    'responsive'    => [
         'header' => [
             'greeting' => 'Welcome, :customer !',
         ]

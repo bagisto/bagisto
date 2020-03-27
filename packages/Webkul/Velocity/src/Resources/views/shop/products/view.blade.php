@@ -16,7 +16,6 @@
     foreach ($images as $key => $image) {
         array_push($productImages, $image['medium_image_url']);
     }
-
 @endphp
 
 @section('page_title')
@@ -73,8 +72,8 @@
                                     @if ($total)
                                         <div class="reviews col-lg-12">
                                             <star-ratings
-                                                :ratings="{{ $avgStarRating }}"
                                                 push-class="mr5"
+                                                :ratings="{{ $avgStarRating }}"
                                             ></star-ratings>
 
                                             <div class="reviews">
