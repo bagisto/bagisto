@@ -64,6 +64,9 @@ class Core
      */
     protected $coreConfigRepository;
 
+    /** @var Channel */
+    private static $channel;
+
     /**
      * Create a new instance.
      *
@@ -125,23 +128,31 @@ class Core
      */
     public function getCurrentChannel()
     {
-        static $channel;
-
-        if ($channel) {
-            return $channel;
+        if (self::$channel) {
+            return self::$channel;
         }
 
-        $channel = $this->channelRepository->findWhereIn('hostname', [
+        self::$channel = $this->channelRepository->findWhereIn('hostname', [
             request()->getHttpHost(),
             'http://' . request()->getHttpHost(),
             'https://' . request()->getHttpHost(),
         ])->first();
 
-        if (! $channel) {
-            $channel = $this->channelRepository->first();
+        if (! self::$channel) {
+            self::$channel = $this->channelRepository->first();
         }
 
-        return $channel;
+        return self::$channel;
+    }
+
+    /**
+     * Set the current channel
+     *
+     * @param Channel $channel
+     */
+    public function setCurrentChannel(Channel $channel): void
+    {
+        self::$channel = $channel;
     }
 
     /**
@@ -704,7 +715,7 @@ class Core
             $fields = explode(".", $field);
 
             array_shift($fields);
-            
+
             $field = implode(".", $fields);
 
             return Config::get($field);
@@ -852,9 +863,9 @@ class Core
     }
 
     /**
-     * 
+     *
      * @param  string  $date
-     * @param  int  $day 
+     * @param  int  $day
      * @return string
      */
     public function xWeekRange($date, $day)
@@ -993,7 +1004,7 @@ class Core
     protected function arrayMerge(array &$array1, array &$array2)
     {
         $merged = $array1;
-        
+
         foreach ($array2 as $key => &$value) {
             if (is_array($value) && isset($merged[$key]) && is_array($merged[$key])) {
                 $merged[$key] = $this->arrayMerge($merged[$key], $value);
@@ -1039,7 +1050,7 @@ class Core
 
     /**
      * Returns a string as selector part for identifying elements in views
-     * 
+     *
      * @param  float  $taxRate
      * @return string
      */
