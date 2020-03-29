@@ -491,9 +491,8 @@
 .customer-options{
     top: 40px;
     float: right;
+    height: 100%;
     padding: 20px;
-    height: 150px;
-    overflow-y: scroll;
     width: 200px !important;
 
 
@@ -2310,6 +2309,10 @@
     word-break: break-word;
     margin-left: 0 !important;
     margin-right: 10px !important;
+
+    tr {
+        width: 100%;
+    }
 
     td {
         padding: 15px;
