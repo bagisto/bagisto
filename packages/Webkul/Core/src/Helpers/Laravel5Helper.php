@@ -6,22 +6,26 @@ namespace Webkul\Core\Helpers;
 // all public methods declared in helper class will be available in $I
 
 use Faker\Factory;
-use Illuminate\Support\Str;
 use Codeception\Module\Laravel5;
 use Webkul\Checkout\Models\Cart;
 use Webkul\Checkout\Models\CartItem;
-use Illuminate\Support\Facades\Event;
 use Webkul\Product\Models\Product;
 use Webkul\Attribute\Models\Attribute;
 use Webkul\Checkout\Models\CartAddress;
 use Webkul\Product\Models\ProductInventory;
-use Webkul\Core\Contracts\Validations\Slug;
 use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Attribute\Models\AttributeOption;
 use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Models\ProductDownloadableLink;
 use Webkul\Product\Models\ProductDownloadableLinkTranslation;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
 
+/**
+ * Class Laravel5Helper
+ *
+ * @package Webkul\Core\Helpers
+ */
 class Laravel5Helper extends Laravel5
 {
     public const SIMPLE_PRODUCT = 1;
@@ -37,7 +41,7 @@ class Laravel5Helper extends Laravel5
      * @return string|null
      * @part ORM
      */
-    public static function getAttributeFieldName(string $attribute): ?string
+    public static function getAttributeFieldName(string $type): ?string
     {
 
         $attributes = [];
@@ -52,15 +56,7 @@ class Laravel5Helper extends Laravel5
             'date'     => 'date_value',
         ];
 
-        foreach (Attribute::all() as $item) {
-            $attributes[$item->code] = $possibleTypes[$item->type];
-        }
-
-        if (! array_key_exists($attribute, $attributes)) {
-            return null;
-        }
-
-        return $attributes[$attribute];
+        return $possibleTypes[$type];
     }
 
     public function prepareCart(array $options = []): array
@@ -78,8 +74,8 @@ class Laravel5Helper extends Laravel5
         }
 
         $I->have(CustomerAddress::class, [
-            'customer_id'     => $customer->id,
             'default_address' => 1,
+            'customer_id'     => $customer->id,
             'first_name'      => $customer->first_name,
             'last_name'       => $customer->last_name,
             'company_name'    => $faker->company,
@@ -99,18 +95,17 @@ class Laravel5Helper extends Laravel5
             'customer_first_name' => $customer->first_name,
             'customer_last_name'  => $customer->last_name,
             'customer_email'      => $customer->email,
-            'is_active'           => 1,
-            'channel_id'          => 1,
+            'is_active'           => $options['is_active'] ?? 1,
+            'channel_id'          => $options['channel_id'] ?? 1,
             'grand_total'         => $grand_total,
             'base_grand_total'    => $base_grand_total,
         ]);
 
         $cartAddress = $I->have(CartAddress::class, ['cart_id' => $cart->id]);
 
+        $type = 'simple';
         if (isset($options['product_type'])) {
             $type = $options['product_type'];
-        } else {
-            $type = 'simple';
         }
 
         $totalQtyOrdered = 0;
@@ -154,7 +149,7 @@ class Laravel5Helper extends Laravel5
      *
      * @param array $keyValue
      */
-    public function setSession(array $keyValue)
+    public function setSession(array $keyValue): void
     {
         session($keyValue);
     }
@@ -162,9 +157,8 @@ class Laravel5Helper extends Laravel5
     /**
      * Flush the session data and regenerate the ID
      * A logged in user will be logged off.
-     *
      */
-    public function invalidateSession()
+    public function invalidateSession(): void
     {
         session()->invalidate();
     }
@@ -208,12 +202,6 @@ class Laravel5Helper extends Laravel5
         return $product;
     }
 
-    /**
-     * @param array $configs
-     * @param array $productStates
-     *
-     * @return \Webkul\Product\Models\Product
-     */
     private function haveSimpleProduct(array $configs = [], array $productStates = []): Product
     {
         $I = $this;
@@ -231,12 +219,6 @@ class Laravel5Helper extends Laravel5
         return $product->refresh();
     }
 
-    /**
-     * @param array $configs
-     * @param array $productStates
-     *
-     * @return \Webkul\Product\Models\Product
-     */
     private function haveVirtualProduct(array $configs = [], array $productStates = []): Product
     {
         $I = $this;
@@ -254,12 +236,6 @@ class Laravel5Helper extends Laravel5
         return $product->refresh();
     }
 
-    /**
-     * @param array $configs
-     * @param array $productStates
-     *
-     * @return \Webkul\Product\Models\Product
-     */
     private function haveDownloadableProduct(array $configs = [], array $productStates = []): Product
     {
         $I = $this;
@@ -277,21 +253,11 @@ class Laravel5Helper extends Laravel5
         return $product->refresh();
     }
 
-    /**
-     * @param array $attributes
-     * @param array $states
-     *
-     * @return \Webkul\Product\Models\Product
-     */
     private function createProduct(array $attributes = [], array $states = []): Product
     {
         return factory(Product::class)->states($states)->create($attributes);
     }
 
-    /**
-     * @param int   $productId
-     * @param array $inventoryConfig
-     */
     private function createInventory(int $productId, array $inventoryConfig = []): void
     {
         $I = $this;
@@ -301,9 +267,6 @@ class Laravel5Helper extends Laravel5
         ]));
     }
 
-    /**
-     * @param int $productId
-     */
     private function createDownloadableLink(int $productId): void
     {
         $I = $this;
@@ -316,19 +279,19 @@ class Laravel5Helper extends Laravel5
         ]);
     }
 
-    /**
-     * @param Product $product
-     * @param array   $attributeValues
-     */
     private function createAttributeValues(Product $product, array $attributeValues = []): void
     {
         $I = $this;
 
         $faker = Factory::create();
 
-        $brand = Attribute::where(['code' => 'brand'])->first(); // usually 25
+        $brand = Attribute::query()
+            ->where(['code' => 'brand'])
+            ->first(); // usually 25
 
-        if (! AttributeOption::where(['attribute_id' => $brand->id])->exists()) {
+        if (! AttributeOption::query()
+            ->where(['attribute_id' => $brand->id])
+            ->exists()) {
             AttributeOption::create([
                 'admin_name'   => 'Webkul Demo Brand (c) 2020',
                 'attribute_id' => $brand->id,
@@ -360,29 +323,20 @@ class Laravel5Helper extends Laravel5
         $attributeValues = array_merge($defaultAttributeValues, $attributeValues);
 
         /** @var array $possibleAttributeValues list of the possible attributes a product can have */
-        $possibleAttributeValues = Attribute::all()->pluck('code')->toArray();
+        $possibleAttributeValues = DB::table('attributes')
+            ->select('id', 'code', 'type')
+            ->get()
+            ->toArray();
 
-        // set a value for _every_ possible attribute, even if empty:
-        foreach ($attributeValues as $attribute => $value) {
-            if (! in_array($attribute, $possibleAttributeValues)) {
-                throw new \Exception(
-                    "The given attribute '{$attribute}' does not exist in the 'attributes' table (column: code)");
-            }
-
-            $attributeId = Attribute::query()
-                ->where('code', $attribute)
-                ->select('id')
-                ->firstOrFail()
-                ->id;
-
+        foreach ($possibleAttributeValues as $set) {
             $data = [
                 'product_id'   => $product->id,
-                'attribute_id' => $attributeId,
+                'attribute_id' => $set->id,
             ];
 
-            $fieldName = self::getAttributeFieldName($attribute);
+            $fieldName = self::getAttributeFieldName($set->type);
 
-            $data[$fieldName] = $value;
+            $data[$fieldName] = $attributeValues[$set->code] ?? null;
 
             $I->have(ProductAttributeValue::class, $data);
         }
