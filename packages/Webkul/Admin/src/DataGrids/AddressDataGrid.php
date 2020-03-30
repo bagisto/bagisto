@@ -13,6 +13,7 @@ class AddressDataGrid extends DataGrid
      */
     public $index = 'address_id';
 
+
     /**
      * @var string
      */

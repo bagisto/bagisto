@@ -11,3 +11,13 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            let height = $('.customer-sidebar').css('height');
+
+            $('.account-content').css('height', height);
+        });
+    </script>
+@endpush

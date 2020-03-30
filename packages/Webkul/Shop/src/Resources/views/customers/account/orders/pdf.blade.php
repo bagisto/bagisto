@@ -91,9 +91,12 @@
         <div class="container">
 
             <div class="header">
-                <div class="image">
-                    <img class="logo" src="{{ Storage::url(core()->getConfigData('sales.orderSettings.invoice_slip_design.logo')) }}"/>
-                </div>
+                @if (core()->getConfigData('sales.orderSettings.invoice_slip_design.logo'))
+                    <div class="image">
+                        <img class="logo" src="{{ Storage::url(core()->getConfigData('sales.orderSettings.invoice_slip_design.logo')) }}"/>
+                    </div>
+                @endif
+                
                 <div class="address">
                     <p>
                       <b> {{ core()->getConfigData('sales.orderSettings.invoice_slip_design.address') }} </b>

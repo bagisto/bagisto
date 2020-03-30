@@ -645,8 +645,10 @@ h5 {
             display: inline-block;
             vertical-align: middle;
             margin-left: -34px;
-            margin-top: 2px;
             pointer-events: none;
+            left: 70%;
+            position: absolute;
+            top: 35px;
         }
     }
 

@@ -30,14 +30,14 @@ class SubscriptionEmail extends Mailable
      */
     public function build()
     {
-        return $this->to($this->subscriptionData['email'])
-                    ->subject(trans('shop::app.mail.customer.subscription.subject'))
-                    ->view('shop::emails.customer.subscription-email')
-                    ->with('data', [
-                            'content' => 'You Are Subscribed',
-                            'token'   => $this->subscriptionData['token'],
-                        ]
-                    );
-
+        return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
+            ->to($this->subscriptionData['email'])
+            ->subject(trans('shop::app.mail.customer.subscription.subject'))
+            ->view('shop::emails.customer.subscription-email')
+            ->with('data', [
+                'content' => 'You Are Subscribed',
+                'token'   => $this->subscriptionData['token'],
+                ]
+            );
     }
 }

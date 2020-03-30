@@ -27,7 +27,7 @@ class ShopController extends Controller
 
         if ($product) {
             $productReviewHelper = app('Webkul\Product\Helpers\Review');
-            
+
             $galleryImages = $this->productImageHelper->getProductBaseImage($product);
 
             $response = [
@@ -92,7 +92,7 @@ class ShopController extends Controller
                         $productDetails = [];
 
                         $productDetails = array_merge($productDetails, $this->velocityHelper->formatProduct($product));
-                        
+
                         array_push($customizedProducts, $productDetails);
                     }
 
@@ -217,7 +217,9 @@ class ShopController extends Controller
     {
         // for product details
         if ($items = request()->get('items')) {
-            $productCollection = $this->velocityHelper->fetchProductCollection($items);
+            $moveToCart = request()->get('moveToCart');
+
+            $productCollection = $this->velocityHelper->fetchProductCollection($items, $moveToCart);
 
             $response = [
                 'status'   => 'success',
@@ -227,6 +229,28 @@ class ShopController extends Controller
 
         return response()->json($response ?? [
             'status' => false
+        ]);
+    }
+
+    public function getCategoryProducts($categoryId)
+    {
+        $products = $this->productRepository->getAll($categoryId);
+        $productItems = $products->items();
+
+        if ($productItems) {
+            $formattedProducts =[];
+
+            foreach ($productItems as $product) {
+                array_push($formattedProducts, $this->velocityHelper->formatProduct($product));
+            }
+
+            $productsArray = $products->toArray();
+            $productsArray['data'] = $formattedProducts;
+        }
+
+        return response()->json($response ?? [
+            'products'       => $productsArray,
+            'paginationHTML' => $products->appends(request()->input())->links()->toHtml(),
         ]);
     }
 }

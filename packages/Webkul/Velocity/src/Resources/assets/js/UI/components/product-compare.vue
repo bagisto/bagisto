@@ -10,7 +10,7 @@
 
         methods: {
             addProductToCompare: function () {
-                if (this.customer == "true") {
+                if (this.customer == "true" || this.customer == true) {
                     this.$http.put(
                         `${this.$root.baseUrl}/comparison`, {
                             productId: this.productId,

@@ -91,7 +91,7 @@
                     if (items != "") {
                         this.$http
                         .get(`${this.$root.baseUrl}/detailed-products`, {
-                            params: { items }
+                            params: { moveToCart: true, items }
                         })
                         .then(response => {
                             this.isProductListLoaded = true;
@@ -101,8 +101,10 @@
                             this.isProductListLoaded = true;
                             console.log(this.__('error.something_went_wrong'));
                         });
+                    } else {
+                        this.products = [];
+                        this.isProductListLoaded = true;
                     }
-
                 },
 
                 'removeProduct': function (productId) {

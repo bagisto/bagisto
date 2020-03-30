@@ -2,9 +2,194 @@
 
 return [
     'admin' => [
-        'general' => [
-            'locale_logo' => 'Logotipo da localidade',
+        'system'   => [
+            'velocity' => [
+                'general'  => 'Geral',
+                'category'  => 'Categoria',
+                'settings'  => 'Configurações',
+                'extension_name' => 'Velocity Tema',
+                'error-module-inactive' => 'Atenção: Tema Velocity está inativo',
+            ],
+
+            'settings' => [
+                'channels'=> [
+                    'subscription_bar' => 'Conteúdo da barra de inscrição'
+                ],
+            ],
+
+            'general' => [
+                'status' => 'Status',
+                'active' => 'Ativo',
+                'inactive' => 'Inativo',
+            ],
+            'category' => [
+                'all' => 'Todos',
+                'left' => 'Esquerda',
+                'right' => 'Direita',
+                'active' => 'Ativo',
+                'custom' => 'Personalizar',
+                'inactive' => 'Inativo',
+                'image-alignment' => 'Alinhamento da Imagem',
+                'icon-status' => 'Status do Ícone da Categoria',
+                'image-status' => 'Status da Imagem de Categoria',
+                'sub-category-show' => 'Mostrar Subcategorias',
+                'image-height' => 'Altura da Imagem [em Pixel]',
+                'image-width' => 'Largura da Imagem [em Pixel]',
+                'show-tooltip' => 'Mostrar Sugestão de Categoria',
+                'num-sub-category' => 'Número de Subcategorias',
+            ]
         ],
+        'layouts' => [
+            'velocity' => 'Velocity',
+            'cms-pages' => 'CMS Páginas',
+            'meta-data' => 'Meta Data',
+            'category-menu' => 'Categoria Menu',
+            'header-content' => 'Cabeçalho Conteúdo',
+        ],
+        'contents' => [
+            'self' => 'Auto',
+            'active' => 'Ativo',
+            'new-tab' => 'Nova Aba',
+            'inactive' => 'Inativo',
+            'title' => 'Lista de Conteúdo',
+            'select' => '-- Selecione --',
+            'add-title' => 'Adicionar Conteúdo',
+            'btn-add-content' => 'Add Conteúdo',
+            'save-btn-title' => 'Salvar Conteúdo',
+            'autocomplete' => '[Autocompletar]',
+            'no-result-found' => 'Nenhum registo encontrado.',
+            'search-hint' => 'Busque produtos aqui...',
+            'mass-delete-success' => 'Conteúdo selecionado excluído com sucesso.',
+            'tab' => [
+                'page' => 'Configuração da Página',
+                'content' => 'Configuração do Conteúdo',
+                'meta_content' => 'Meta Data',
+            ],
+            'page' => [
+                'title' => 'Título',
+                'status' => 'Status',
+                'position' => 'Posição',
+            ],
+            'content' => [
+                'content-type' => 'Tipo de Conteúdo',
+                'custom-title' => 'Título Customizado',
+                'category-slug' => 'Slug da Categoria',
+                'link-target' => 'Destino do Link da Página',
+                'custom-product' => 'Produtos da Loja',
+                'custom-heading' => 'Cabeçalho Customizado',
+                'catalog-type' => 'Tipo de Catálogo de Produtos',
+                'static-description' => 'Descrição do Conteúdo',
+                'page-link' => 'Link da Página [e.g. http://example.com/../../]',
+            ],
+            'datagrid' => [
+                'id' => 'Id',
+                'title' => 'Título',
+                'status' => 'Status',
+                'position' => 'Posisção',
+                'content-type' => 'Tipo de Conteúdo',
+            ]
+        ],
+        'meta-data' => [
+            'footer' => 'Rodapé',
+            'title' => 'Velocity meta data',
+            'activate-slider' => 'Ativar Slider',
+            'home-page-content' => 'Conteúdo da Página Inicial',
+            'footer-left-content' => 'Conteúdo Rodapé Esquerdo',
+            'subscription-content' => 'Conteúdo da Barra de Inscrição',
+            'sidebar-categories' => 'Sidebar Categories',
+            'footer-left-raw-content' => '<p>We love to craft softwares and solve the real world problems with the binaries. We are highly committed to our goals. We invest our resources to create world class easy to use softwares and applications for the enterprise business with the top notch, on the edge technology expertise.</p>',
+            'slider-path' => 'Caminho do Slider',
+            'category-logo' => 'Logo da Categoria',
+            'product-policy' => 'Política de Produto',
+            'update-meta-data' => 'Atualizar Meta Data',
+            'product-view-image' => 'Imagem da Visualização do produto',
+            'advertisement-two' => 'Anúncio Duas Imagens',
+            'advertisement-one' => 'Anúncio Uma Imagem',
+            'footer-middle-content' => 'Rodapé Conteúdo do Meio',
+            'advertisement-four' => 'Anúncio Quatro Imagens',
+            'advertisement-three' => 'Anúncio Três Imagens',
+            'images' => 'Imagens',
+            'general' => 'Geral',
+            'add-image-btn-title' => 'Add Imagem'
+        ],
+        'category' => [
+            'save-btn-title' => 'Salvar Menu',
+            'title' => 'Lista de Categorias Menu',
+            'add-title' => 'Adicionar Conteúdo do Menu',
+            'edit-title' => 'Editar Conteúdo do Menu',
+            'btn-add-category' => 'Add Conteúdo da Categoria',
+            'datagrid' => [
+                'category-id' => 'Categoria Id',
+                'category-name' => 'Categoria Nome',
+                'category-icon' => 'Categoria Ícone',
+                'category-status' => 'Status',
+            ],
+            'tab' => [
+                'general' => 'Geral',
+            ],
+            'status' => 'Status',
+            'active' => 'Ativo',
+            'inactive' => 'Inativo',
+            'select' => '-- Selecionar --',
+            'icon-class' => 'Classe do Ícone',
+            'select-category' => 'Escolha a Categoria',
+            'tooltip-content' => 'Conteúdo da Dica',
+            'mass-delete-success' => 'Menu de categorias selecionadas excluído com sucesso.',
+        ],
+        'general' => [
+            'locale_logo' => 'Logotipo da liguagem',
+        ],
+    ],
+
+    'home' => [
+        'view-all' => 'Ver tudo',
+        'add-to-cart' => 'Adicionar ao carrinho',
+        'hot-categories' => 'Categorias quentes',
+        'shipping-methods' => 'Métodos de Envio',
+        'payment-methods' => 'Métodos de Pagamento',
+        'popular-categories' => 'Categorias populares',
+        'customer-reviews' => 'Opinião dos consumidores',
+    ],
+
+    'header' => [
+        'cart' => 'Carrinho',
+        'guest' => 'Cliente',
+        'logout' => 'Sair',
+        'title' => 'Minha Conta',
+        'account' => 'Minha Conta',
+        'profile' => 'Conta',
+        'wishlist' => 'Lista de Desejo',
+        'all-categories' => 'Toda Loja',
+        'search-text' => 'Pesquise produtos aqui',
+        'welcome-message' => 'Bem-vindo, :customer_name',
+        'dropdown-text' => 'Configurar Carrinho, Pedidos & Listas de Desejo',
+        'sign-in' => 'Entrar',
+        'sign-up' => 'Criar Conta'
+    ],
+
+    'menu-navbar' => [
+        'text-more' => 'Mais',
+        'text-category' => 'Comprar por categoria',
+    ],
+
+    'minicart' => [
+        'cart' => 'Carrinho',
+        'view-cart' => 'Ver carrinho',
+    ],
+
+    'checkout' => [
+        'qty' => 'Qtd',
+        'checkout' => 'Finalizar Compra',
+        'cart' => [
+            'view-cart' => 'Ver Carrinho',
+            'cart-summary' => 'Resumo do Carrinho',
+            'cart-subtotal' => 'Subtotal',
+        ],
+        'qty' => 'Qtd',
+        'items' => 'Itens',
+        'subtotal' => 'Subtotal',
+        'sub-total' => 'Sub Total',
+        'proceed' => 'Finalizar Compra',
     ],
 
     'customer' => [
@@ -17,7 +202,7 @@ return [
             'empty-text' => "Você não possui nenhum item na sua lista de comparação",
         ],
         'login-form' => [
-            'sign-up' => 'inscrever-se',
+            'sign-up' => 'Cadastrar',
             'new-customer' => 'Novo cliente',
             'customer-login' => 'Login do cliente',
             'registered-user' => 'Usuário Registrado',
@@ -38,38 +223,11 @@ return [
         ]
     ],
 
-    'menu-navbar' => [
-        'text-category' => 'Compre por categoria',
-    ],
-
-    'header' => [
-        'guest' => 'Hóspede',
-        'search-text' => 'Pesquise produtos aqui',
-        'all-categories' => 'todas as categorias',
-        'welcome-message' => 'Bem-vinda, :customer_name',
-    ],
-
-    'minicart' => [
-        'cart' => 'Carrinho',
-        'view-cart' => 'Ver carrinho',
-        'checkout' => 'Verificação de saída',
-    ],
-
     'error' => [
-        'go-to-home' => 'Vá para casa',
+        'go-to-home' => 'Vá para Página Inicial',
         'something_went_wrong' => 'algo deu errado',
         'page-lost-short' => 'Conteúdo perdido da página',
-        'page-lost-description' => "A página que você está procurando não está disponível. Tente pesquisar novamente ou use o botão Voltar atrás abaixo.",
-    ],
-
-    'home' => [
-        'view-all' => 'Ver tudo',
-        'add-to-cart' => 'Adicionar ao carrinho',
-        'hot-categories' => 'Categorias quentes',
-        'shipping-methods' => 'Métodos de Envio',
-        'payment-methods' => 'Métodos de Pagamento',
-        'popular-categories' => 'Categorias populares',
-        'customer-reviews' => 'Opinião dos consumidores',
+        'page-lost-description' => "A página que você está procurando não está disponível. Tente pesquisar novamente ou use o botão Voltar abaixo.",
     ],
 
     'products' => [
@@ -81,8 +239,8 @@ return [
         'quick-view' => 'Olhada rápida',
         'submit-review' => 'Enviar revisão',
         'not-available' => 'Não disponível',
-        'ratings' => ':totalRatings Avaliações',
-        'reviews-count' => ':totalReviews Avaliações',
+        'ratings' => ':total Ratings Avaliações',
+        'reviews-count' => ':total Reviews Avaliações',
         'more-infomation' => 'Mais Informações',
         'short-description' => 'Descrições breves',
         'customer-rating' => 'Avaliação do cliente',
@@ -94,11 +252,13 @@ return [
 
     'shop' => [
         'gender' => [
-            'female' => 'Fêmea',
-            'male' => 'Masculino',
-            'other' => 'De outros',
+            'female' => 'Mulher',
+            'male' => 'Homem',
+            'other' => 'Outro',
         ],
         'general' => [
+            'no' => 'Não',
+            'yes' => 'Sim',
             'view' => 'Visão',
             'filter' => 'Filtro',
             'update' => 'Atualizar',
@@ -126,7 +286,7 @@ return [
 
     'responsive' => [
         'header' => [
-            'greeting' => 'Bem-vinda, :customer !',
+            'greeting' => 'Bem-vindo, :customer !',
         ]
     ],
 ]

@@ -18,11 +18,7 @@
                     $subMenuCollection['orders'] = $menuItem['children']['orders'];
                     $subMenuCollection['downloadables'] = $menuItem['children']['downloadables'];
                     $subMenuCollection['wishlist'] = $menuItem['children']['wishlist'];
-                    $subMenuCollection['compare'] = [
-                        'key'   => 'account.compare',
-                        'url'   => route('velocity.product.compare'),
-                        'name'  => 'velocity::app.customer.compare.text',
-                    ];
+                    $subMenuCollection['compare'] = $menuItem['children']['compare'];
                     $subMenuCollection['reviews'] = $menuItem['children']['reviews'];
                     $subMenuCollection['address'] = $menuItem['children']['address'];
                 } catch (\Exception $exception) {

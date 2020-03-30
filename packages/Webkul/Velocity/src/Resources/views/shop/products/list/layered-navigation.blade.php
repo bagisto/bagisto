@@ -128,7 +128,7 @@
         </div>
     </script>
 
-    <script type="text/javascript">
+    <script>
         Vue.component('layered-navigation', {
             template: '#layered-navigation-template',
             data: function() {
@@ -154,13 +154,13 @@
                         delete this.appliedFilters[attributeCode];
                     }
 
-                    this.applyFilter()
+                    this.applyFilter();
                 },
 
                 applyFilter: function () {
                     var params = [];
 
-                    for(key in this.appliedFilters) {
+                    for (key in this.appliedFilters) {
                         if (key != 'page') {
                             params.push(key + '=' + this.appliedFilters[key].join(','))
                         }
@@ -183,7 +183,7 @@
             data: function() {
                 let maxPrice  = '{{ core()->convertPrice($productFlatRepository->getCategoryProductMaximumPrice($category)) }}';
 
-                maxPrice = (parseInt(maxPrice) !== 0) ? parseInt(maxPrice) : 500;
+                maxPrice = maxPrice ? ((parseInt(maxPrice) !== 0 || maxPrice) ? parseInt(maxPrice) : 500) : 500;
 
                 return {
                     active: false,

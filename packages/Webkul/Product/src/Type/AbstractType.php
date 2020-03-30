@@ -226,9 +226,11 @@ abstract class AbstractType
         $route = request()->route() ? request()->route()->getName() : "";
 
         if ($route != 'admin.catalog.products.massupdate') {
-            if  (isset($data['categories'])) {
-                $product->categories()->sync($data['categories']);
+            if  (! isset($data['categories'])) {
+                $data['categories'] = [];
             }
+
+            $product->categories()->sync($data['categories']);
 
             $product->up_sells()->sync($data['up_sell'] ?? []);
 
