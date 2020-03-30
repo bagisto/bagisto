@@ -72,10 +72,10 @@ class TaxCest
         $this->scenario = [
             'object'           => Cart::getCart(),
             'expectedTaxRates' => [
-                (string)round((float)$tax1->tax_rate, \Webkul\Tax\Helpers\Tax::TAX_PRECISION)
+                (string)round((float)$tax1->tax_rate, 4)
                 => round(11 * $product1->price * $tax1->tax_rate / 100, 4),
 
-                (string)round((float)$tax2->tax_rate, \Webkul\Tax\Helpers\Tax::TAX_PRECISION)
+                (string)round((float)$tax2->tax_rate, 4)
                 => round(7 * $product2->price * $tax2->tax_rate / 100, 4),
             ],
             'expectedTaxTotal' =>
