@@ -43,6 +43,9 @@ class Laravel5Helper extends Laravel5
      */
     public static function getAttributeFieldName(string $type): ?string
     {
+
+        $attributes = [];
+
         $possibleTypes = [
             'text'     => 'text_value',
             'select'   => 'integer_value',
@@ -207,6 +210,8 @@ class Laravel5Helper extends Laravel5
 
         $I->createAttributeValues($product->id, $configs['attributeValues'] ?? []);
 
+        $I->createInventory($product->id, $configs['productInventory']);
+
         return $product->refresh();
     }
 
@@ -221,6 +226,8 @@ class Laravel5Helper extends Laravel5
         $product = $I->createProduct($configs['productAttributes'] ?? [], $productStates);
 
         $I->createAttributeValues($product->id, $configs['attributeValues'] ?? []);
+
+        $I->createInventory($product->id, $configs['productInventory']);
 
         return $product->refresh();
     }
@@ -245,6 +252,15 @@ class Laravel5Helper extends Laravel5
     private function createProduct(array $attributes = [], array $states = []): Product
     {
         return factory(Product::class)->states($states)->create($attributes);
+    }
+
+    private function createInventory(int $productId, array $inventoryConfig = []): void
+    {
+        $I = $this;
+        $I->have(ProductInventory::class, array_merge($inventoryConfig, [
+            'product_id'          => $productId,
+            'inventory_source_id' => 1,
+        ]));
     }
 
     private function createDownloadableLink(int $productId): void
