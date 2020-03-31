@@ -307,6 +307,7 @@ class Laravel5Helper extends Laravel5
             'sku'                  => $faker->word,
             'url_key'              => $faker->slug,
             'status'               => true,
+            'guest_checkout'       => true,
             'visible_individually' => true,
             'special_price_from'   => null,
             'special_price_to'     => null,
