@@ -43,10 +43,6 @@ class Laravel5Helper extends Laravel5
      */
     public static function getAttributeFieldName(string $type): ?string
     {
-
-        $attributes = [];
-
-        // @todo implement json_value ?
         $possibleTypes = [
             'text'     => 'text_value',
             'select'   => 'integer_value',
@@ -103,10 +99,7 @@ class Laravel5Helper extends Laravel5
 
         $cartAddress = $I->have(CartAddress::class, ['cart_id' => $cart->id]);
 
-        $type = 'simple';
-        if (isset($options['product_type'])) {
-            $type = $options['product_type'];
-        }
+        $type = $options['product_type'] ?? 'simple';
 
         $totalQtyOrdered = 0;
 
@@ -212,9 +205,7 @@ class Laravel5Helper extends Laravel5
         /** @var Product $product */
         $product = $I->createProduct($configs['productAttributes'] ?? [], $productStates);
 
-        $I->createAttributeValues($product, $configs['attributeValues'] ?? []);
-
-        $I->createInventory($product->id, $configs['productInventory'] ?? ['qty' => 10]);
+        $I->createAttributeValues($product->id, $configs['attributeValues'] ?? []);
 
         return $product->refresh();
     }
@@ -229,9 +220,7 @@ class Laravel5Helper extends Laravel5
         /** @var Product $product */
         $product = $I->createProduct($configs['productAttributes'] ?? [], $productStates);
 
-        $I->createAttributeValues($product, $configs['attributeValues'] ?? []);
-
-        $I->createInventory($product->id, $configs['productInventory'] ?? ['qty' => 10]);
+        $I->createAttributeValues($product->id, $configs['attributeValues'] ?? []);
 
         return $product->refresh();
     }
@@ -246,7 +235,7 @@ class Laravel5Helper extends Laravel5
         /** @var Product $product */
         $product = $I->createProduct($configs['productAttributes'] ?? [], $productStates);
 
-        $I->createAttributeValues($product, $configs['attributeValues'] ?? []);
+        $I->createAttributeValues($product->id, $configs['attributeValues'] ?? []);
 
         $I->createDownloadableLink($product->id);
 
@@ -256,15 +245,6 @@ class Laravel5Helper extends Laravel5
     private function createProduct(array $attributes = [], array $states = []): Product
     {
         return factory(Product::class)->states($states)->create($attributes);
-    }
-
-    private function createInventory(int $productId, array $inventoryConfig = []): void
-    {
-        $I = $this;
-        $I->have(ProductInventory::class, array_merge($inventoryConfig, [
-            'product_id'          => $productId,
-            'inventory_source_id' => 1,
-        ]));
     }
 
     private function createDownloadableLink(int $productId): void
@@ -279,7 +259,7 @@ class Laravel5Helper extends Laravel5
         ]);
     }
 
-    private function createAttributeValues(Product $product, array $attributeValues = []): void
+    private function createAttributeValues(int $productId, array $attributeValues = []): void
     {
         $I = $this;
 
@@ -315,7 +295,7 @@ class Laravel5Helper extends Laravel5
             'special_price_from'   => null,
             'special_price_to'     => null,
             'special_price'        => null,
-            'price'                => '1.00',
+            'price'                => $faker->randomFloat(4, 1),
             'weight'               => '1.00', // necessary for shipping
             'brand'                => AttributeOption::firstWhere('attribute_id', $brand->id)->id,
         ];
@@ -328,15 +308,15 @@ class Laravel5Helper extends Laravel5
             ->get()
             ->toArray();
 
-        foreach ($possibleAttributeValues as $set) {
+        foreach ($possibleAttributeValues as $attributeSet) {
             $data = [
-                'product_id'   => $product->id,
-                'attribute_id' => $set->id,
+                'product_id'   => $productId,
+                'attribute_id' => $attributeSet->id,
             ];
 
-            $fieldName = self::getAttributeFieldName($set->type);
+            $fieldName = self::getAttributeFieldName($attributeSet->type);
 
-            $data[$fieldName] = $attributeValues[$set->code] ?? null;
+            $data[$fieldName] = $attributeValues[$attributeSet->code] ?? null;
 
             $I->have(ProductAttributeValue::class, $data);
         }
