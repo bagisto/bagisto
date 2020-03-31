@@ -311,7 +311,7 @@ class Laravel5Helper extends Laravel5
             'special_price_from'   => null,
             'special_price_to'     => null,
             'special_price'        => null,
-            'price'                => $faker->randomFloat(4, 0, 1000),
+            'price'                => $faker->randomFloat(4, 1, 1000),
             'weight'               => '1.00', // necessary for shipping
             'brand'                => AttributeOption::firstWhere('attribute_id', $brand->id)->id,
         ];
