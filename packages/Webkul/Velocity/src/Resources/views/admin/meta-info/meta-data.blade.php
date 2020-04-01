@@ -37,13 +37,13 @@
 
                         <label class="switch">
                             <input
-                                type="checkbox"
-                                class="control"
                                 id="slides"
                                 name="slides"
+                                type="checkbox"
+                                class="control"
                                 data-vv-as="&quot;slides&quot;"
                                 {{ $metaData && $metaData->slider ? 'checked' : ''}} />
-
+                                
                             <span class="slider round"></span>
                         </label>
                     </div>
@@ -111,7 +111,11 @@
                     <div class="control-group">
                         <label>{{ __('velocity::app.admin.meta-data.advertisement-four') }}</label>
 
-                        @if(! isset($metaData->advertisement[4]))
+                        @php
+                            $advertisement = json_decode($metaData->get('advertisement')->all()[0]->advertisement, true);
+                        @endphp
+
+                        @if(! isset($advertisement[4]))
                             <image-wrapper
                                 :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'"
                                 input-name="images[4]">
@@ -119,14 +123,14 @@
                         @else
                             <image-wrapper
                                 :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'"
-                                input-name="images[4]" :images='@json($metaData->advertisement[4])'>
+                                input-name="images[4]" :images='@json($advertisement[4])'>
                             </image-wrapper>
                         @endif
                     </div>
 
                     <div class="control-group">
                         <label>{{ __('velocity::app.admin.meta-data.advertisement-three') }}</label>
-                        @if(! isset($metaData->advertisement[3]))
+                        @if(! isset($advertisement[3]))
                             <image-wrapper
                                 :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'"
                                 input-name="images[3]">
@@ -134,7 +138,7 @@
                         @else
                             <image-wrapper
                                 :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'"
-                                input-name="images[3]" :images='@json($metaData->advertisement[3])'>
+                                input-name="images[3]" :images='@json($advertisement[3])'>
                             </image-wrapper>
                         @endif
                     </div>
@@ -142,7 +146,7 @@
                     <div class="control-group">
                         <label>{{ __('velocity::app.admin.meta-data.advertisement-two') }}</label>
 
-                        @if(! isset($metaData->advertisement[2]))
+                        @if(! isset($advertisement[2]))
                             <image-wrapper
                                 :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'"
                                 input-name="images[2]">
@@ -150,7 +154,7 @@
                         @else
                             <image-wrapper
                                 :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'"
-                                input-name="images[2]" :images='@json($metaData->advertisement[2])'>
+                                input-name="images[2]" :images='@json($advertisement[2])'>
                             </image-wrapper>
                         @endif
                     </div>

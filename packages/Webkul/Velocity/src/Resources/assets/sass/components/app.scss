@@ -860,7 +860,8 @@
             }
 
             input,
-            select {
+            select,
+            textarea {
                 width: 100%;
                 resize: none;
                 font-size: 16px;
@@ -872,6 +873,8 @@
 
             input:active,
             input:focus,
+            textarea:active,
+            textarea:focus,
             select:focus,
             select:active {
                 border-color: $theme-color;
