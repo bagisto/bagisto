@@ -289,6 +289,16 @@
 
                     this.disable_button = true;
 
+                    let address = this.allAddress.forEach(address => {
+                        if (address.id == this.address.billing.address_id) {
+                            this.address.billing.address1 = [address.address1];
+                        }
+
+                        if (address.id == this.address.shipping.address_id) {
+                            this.address.shipping.address1 = [address.address1];
+                        }
+                    });
+
                     this.$http.post("{{ route('shop.checkout.save-address') }}", this.address)
                         .then(function(response) {
                             this_this.disable_button = false;

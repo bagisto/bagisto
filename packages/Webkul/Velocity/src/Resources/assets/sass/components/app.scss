@@ -1274,18 +1274,15 @@
     i {
         color: $black-color;
     }
-
-    i:hover::before {
-        // content: "\E93D";
-    }
 }
 
 .checkout-process {
     padding: 40px 20px;
 
-    .col-7 {
-        > div {
-            width: 100%;
+    .col-lg-7 {
+        .coupon-container,
+        > div:not(:first-child) {
+            margin-top: 20px;
         }
     }
 
