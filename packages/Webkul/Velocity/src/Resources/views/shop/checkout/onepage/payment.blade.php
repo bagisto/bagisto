@@ -17,13 +17,13 @@
                         <div>
                             <label class="radio-container">
                                 <input
-                                    v-validate="'required'"
                                     type="radio"
-                                    id="{{ $payment['method'] }}"
                                     name="payment[method]"
-                                    value="{{ $payment['method'] }}"
+                                    v-validate="'required'"
                                     v-model="payment.method"
                                     @change="methodSelected()"
+                                    id="{{ $payment['method'] }}"
+                                    value="{{ $payment['method'] }}"
                                     data-vv-as="&quot;{{ __('shop::app.checkout.onepage.payment-method') }}&quot;" />
 
                                 <span class="checkmark"></span>
