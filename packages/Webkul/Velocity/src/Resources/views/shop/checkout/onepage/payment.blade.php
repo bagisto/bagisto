@@ -2,9 +2,11 @@
     <div class="form-container">
         <accordian :title="'{{ __('shop::app.checkout.payment-methods') }}'" :active="true">
             <div class="form-header mb-30" slot="header">
+                
                 <h3 class="fw6 display-inbl">
                    {{ __('shop::app.checkout.onepage.payment-methods') }}
                 </h3>
+
                 <i class="rango-arrow"></i>
             </div>
 
