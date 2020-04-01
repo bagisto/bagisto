@@ -211,7 +211,7 @@ return [
             'login'             => 'Login',
             'become-user'       => 'Become User',
             'user-registration' => 'User Registration',
-            'form-sginup-text'  => 'If you are new to our store, we glab to have you as member.',
+            'form-sginup-text'  => 'If you are new to our store, we glad to have you as member.',
         ],
         'forget-password'   => [
             'login'                 => 'Login',
