@@ -174,23 +174,25 @@
 }
 
 .modal-container {
-    background: #ffffff;
+    left: 50%;
     top: 100px;
+    z-index: 11;
     width: 600px;
     max-width: 80%;
-    left: 50%;
-    margin-left: -300px;
+    max-height: 80%;
     position: fixed;
-    z-index: 11;
+    font-size: 14px;
+    overflow-y: auto;
+    margin-left: -300px;
+    background: #ffffff;
+    animation: jelly 0.5s ease-in-out;
+    animation: fade-in-white 0.3s ease-in-out;
+
+    @include border-radius(5px);
     @include box-shadow(
         0px 15px 25px 0px rgba(0, 0, 0, 0.03),
         0px 20px 45px 5px rgba(0, 0, 0, 0.2)
     );
-    animation: fade-in-white 0.3s ease-in-out;
-    animation: jelly 0.5s ease-in-out;
-    @include border-radius(5px);
-    overflow-y: auto;
-    max-height: 80%;
 
     .modal-header {
         padding: 20px;
@@ -205,6 +207,15 @@
         .icon {
             float: right;
             cursor: pointer;
+
+            &.remove-icon {
+                width: 24px;
+                right: 20px;
+                height: 24px;
+                margin-right: 0;
+                position: absolute;
+                background-image: url(/themes/velocity/assets/images/Icon-remove.svg);
+            }
         }
     }
 
