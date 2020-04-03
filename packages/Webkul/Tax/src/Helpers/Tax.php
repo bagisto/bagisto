@@ -7,7 +7,8 @@ class Tax
     /**
      * @var int
      */
-    public const TAX_PRECISION = 4;
+    private const TAX_RATE_PRECISION = 4;
+    private const TAX_AMOUNT_PRECISION = 2;
 
     /**
      * Returns an array with tax rates and tax amount
@@ -20,13 +21,18 @@ class Tax
         $taxes = [];
 
         foreach ($that->items as $item) {
-            $taxRate = (string) round((float) $item->tax_percent, self::TAX_PRECISION);
+            $taxRate = (string) round((float) $item->tax_percent, self::TAX_RATE_PRECISION);
 
             if (! array_key_exists($taxRate, $taxes)) {
                 $taxes[$taxRate] = 0;
             }
 
             $taxes[$taxRate] += $asBase ? $item->base_tax_amount : $item->tax_amount;
+        }
+
+        // finally round tax amounts now (to reduce rounding differences)
+        foreach ($taxes as $taxRate => $taxAmount) {
+            $taxes[$taxRate] = round($taxAmount, self::TAX_AMOUNT_PRECISION);
         }
 
         return $taxes;
@@ -45,7 +51,7 @@ class Tax
         $result = 0;
 
         foreach ($taxes as $taxRate => $taxAmount) {
-            $result += round($taxAmount, 2);
+            $result += $taxAmount;
         }
 
         return $result;

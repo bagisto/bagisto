@@ -1,16 +1,18 @@
 <template>
-    <div class="modal-container" v-if="isModalOpen">
-        <div class="modal-header">
-            <slot name="header">
-                Default header
-            </slot>
-            <i class="icon remove-icon" @click="closeModal"></i>
-        </div>
+    <div class="modal-parent scrollable" v-if="isModalOpen">
+        <div class="modal-container">
+            <div class="modal-header">
+                <slot name="header">
+                    Default header
+                </slot>
+                <i class="icon remove-icon" @click="closeModal"></i>
+            </div>
 
-        <div class="modal-body">
-            <slot name="body">
-                Default body
-            </slot>
+            <div class="modal-body">
+                <slot name="body">
+                    Default body
+                </slot>
+            </div>
         </div>
     </div>
 </template>
@@ -23,12 +25,8 @@
             return {}
         },
 
-        created () {
-            this.closeModal();
-        },
-
         computed: {
-            isModalOpen () {
+            isModalOpen: function () {
                 this.addClassToBody();
 
                 return this.isOpen;
@@ -36,12 +34,13 @@
         },
 
         methods: {
-            closeModal () {
-                this.$root.$set(this.$root.modalIds, this.id, true);
+            closeModal: function () {
+                this.$root.$set(this.$root.modalIds, this.id, false);
             },
 
-            addClassToBody () {
+            addClassToBody: function () {
                 var body = document.querySelector("body");
+
                 if(this.isOpen) {
                     body.classList.add("modal-open");
                 } else {

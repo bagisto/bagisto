@@ -309,19 +309,15 @@
                     },
 
                     loginCustomer: function() {
-                        var this_this = this;
-
-                        this_this.$http.post("{{ route('customer.checkout.login') }}", {
-                                email: this_this.address.billing.email,
-                                password: this_this.address.billing.password
+                        this.$http.post("{{ route('customer.checkout.login') }}", {
+                                email: this.address.billing.email,
+                                password: this.address.billing.password
                             })
-                            .then(function(response) {
+                            .then(response => {
                                 if (response.data.success) {
                                     window.location.href = "{{ route('shop.checkout.onepage.index') }}";
                                 } else {
-                                    window.flashMessages = [{'type': 'alert-error', 'message': response.data.error }];
-
-                                    this_this.$root.addFlashMessages()
+                                    window.showAlert(`alert-danger`, this.__('shop.general.alert.danger'), response.data.error);
                                 }
                             })
                             .catch(function (error) {})
@@ -340,6 +336,18 @@
 
                     saveAddress: function() {
                         this.disable_button = true;
+
+                        if (this.allAddress.length > 0) {
+                            let address = this.allAddress.forEach(address => {
+                                if (address.id == this.address.billing.address_id) {
+                                    this.address.billing.address1 = [address.address1];
+                                }
+
+                                if (address.id == this.address.shipping.address_id) {
+                                    this.address.shipping.address1 = [address.address1];
+                                }
+                            });
+                        }
 
                         this.$http.post("{{ route('shop.checkout.save-address') }}", this.address)
                             .then(response => {
@@ -449,9 +457,7 @@
                             .catch(error => {
                                 this.disable_button = true;
 
-                                window.flashMessages = [{'type': 'alert-error', 'message': "{{ __('shop::app.common.error') }}" }];
-
-                                this.$root.addFlashMessages();
+                                window.showAlert(`alert-danger`, this.__('shop.general.alert.danger'), "{{ __('shop::app.common.error') }}");
                             })
                         } else {
                             this.disable_button = true;
