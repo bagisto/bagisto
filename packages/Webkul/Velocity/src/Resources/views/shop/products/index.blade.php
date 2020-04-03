@@ -144,7 +144,7 @@
             },
 
             created: function () {
-                this.getCategoryProducts();
+                // this.getCategoryProducts();
             },
 
             methods: {
