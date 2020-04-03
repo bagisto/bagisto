@@ -520,6 +520,11 @@
     li {
         padding: 3px 0;
         height: unset !important;
+
+        a {
+            display: block;
+            padding: 0 20px !important;
+        }
     }
 
     a {
