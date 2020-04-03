@@ -471,40 +471,20 @@ class Core
         return $formatter->getSymbol(\NumberFormatter::CURRENCY_SYMBOL);
     }
 
-     /**
-     * Format and convert price with currency symbol
-     *
-     * @param  float  $price
-     * @param  string  $currencyCode
-     * @return string
-     */
+    /**
+    * Format and convert price with currency symbol
+    *
+    *  @param float $price
+    *  @return string
+    */
     public function formatPrice($price, $currencyCode)
     {
-        $code = $this->getCurrentCurrency()->code;
-
-        if (is_null($price)) {
+        if (is_null($price))
             $price = 0;
-        } else {
-            if ($code != $currencyCode) {
-                $price = $this->convertPrice($price, $code, $currencyCode);
-            }
-        }
 
-        $formater = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
+        $formatter = new \NumberFormatter( app()->getLocale(), \NumberFormatter::CURRENCY );
 
-        $symbol = $this->getCurrentCurrency()->symbol;
-
-        if ($symbol) {
-            if ($this->currencySymbol($currencyCode) == $symbol) {
-                return $formater->formatCurrency($price, $currencyCode);
-            } else {
-                $formater->setSymbol(\NumberFormatter::CURRENCY_SYMBOL, $symbol);
-
-                return $formater->format($price);  // $this->convertPrice($price, $code)
-            }
-        } else {
-            return $formater->formatCurrency($price, $currencyCode);
-        }
+        return $formatter->formatCurrency($price, $currencyCode);
     }
 
     /**
