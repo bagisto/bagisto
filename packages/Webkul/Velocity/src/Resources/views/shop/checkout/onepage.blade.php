@@ -337,6 +337,18 @@
                     saveAddress: function() {
                         this.disable_button = true;
 
+                        if (this.allAddress.length > 0) {
+                            let address = this.allAddress.forEach(address => {
+                                if (address.id == this.address.billing.address_id) {
+                                    this.address.billing.address1 = [address.address1];
+                                }
+
+                                if (address.id == this.address.shipping.address_id) {
+                                    this.address.shipping.address1 = [address.address1];
+                                }
+                            });
+                        }
+
                         this.$http.post("{{ route('shop.checkout.save-address') }}", this.address)
                             .then(response => {
                                 this.disable_button = false;

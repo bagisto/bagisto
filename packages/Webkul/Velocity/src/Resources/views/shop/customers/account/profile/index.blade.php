@@ -5,24 +5,9 @@
 @endsection
 
 @push('css')
-    <style type="text/css">
+    <style>
         .account-head {
             height: 50px;
-        }
-        .remove-icon {
-            right: 15px;
-            font-size: 22px;
-            height: 24px;
-            text-align: center;
-            position: absolute;
-            border-radius: 50%;
-            color: #333;
-            width: 24px;
-            padding: 0px;
-            top: 10px;
-        }
-        .remove-icon:before {
-            content: "x";
         }
     </style>
 @endpush
