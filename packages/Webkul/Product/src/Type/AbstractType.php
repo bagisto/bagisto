@@ -114,6 +114,11 @@ abstract class AbstractType
     protected $isChildrenCalculated = false;
 
     /**
+     * get product options
+     */
+    protected $getProductOptions = [];
+
+    /**
      * Create a new product type instance.
      *
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
@@ -693,5 +698,11 @@ abstract class AbstractType
         $item->total = core()->convertPrice($price * $item->quantity);
 
         $item->save();
+    }
+
+    //get product options
+    public function getProductOptions()
+    {
+        return $this->getProductOptions;
     }
 }

@@ -50,6 +50,11 @@ class Configurable extends AbstractType
     protected $hasVariants = true;
 
     /**
+     * get product options
+     */
+    protected $getProductOptions = [];
+
+    /**
      * @param  array  $data
      * @return \Webkul\Product\Contracts\Product
      */
@@ -545,5 +550,13 @@ class Configurable extends AbstractType
         $item->total = core()->convertPrice($price * $item->quantity);
 
         $item->save();
+    }
+
+    //product options
+    public function getProductOptions($product = "")
+    {
+        $configurableOption = app('Webkul\Product\Helpers\ConfigurableOption');
+        $options = $configurableOption->getConfigurationConfig($product);
+        return $options;
     }
 }
