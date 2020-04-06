@@ -57,6 +57,7 @@
                                             <img
                                                 class="image-wrapper"
                                                 :src="product['{{ $attribute['code'] }}']"
+                                                onload="window.updateHeight ? window.updateHeight() : ''"
                                                 :onerror="`this.src='${$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
                                         </a>
                                         @break
