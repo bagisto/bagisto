@@ -15,16 +15,22 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            let sidebarHeight = $('.customer-sidebar').css('height');
-            let contentHeight = $('.account-layout').css('height');
+            let updateHeight = () => {
+                let sidebarHeight = $('.customer-sidebar').css('height');
+                let contentHeight = $('.account-layout').css('height');
 
-            sidebarHeight = parseInt(sidebarHeight.substring(0, sidebarHeight.length - 2));
-            contentHeight = parseInt(contentHeight.substring(0, contentHeight.length - 2));
+                sidebarHeight = parseInt(sidebarHeight.substring(0, sidebarHeight.length - 2));
+                contentHeight = parseInt(contentHeight.substring(0, contentHeight.length - 2));
 
-            let height = sidebarHeight > contentHeight ? sidebarHeight + 30 : contentHeight;
-            height = height + "px";
+                let height = sidebarHeight > contentHeight ? sidebarHeight + 30 : contentHeight;
+                height = height + "px";
 
-            $('.account-content').css('height', height);
+                $('.account-content').css('height', height);
+            }
+
+            updateHeight();
+
+            $('.accordian-header').click(updateHeight);
         });
     </script>
 @endpush
