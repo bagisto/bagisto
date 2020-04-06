@@ -15,7 +15,7 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            let updateHeight = () => {
+            window.updateHeight = () => {
                 let sidebarHeight = $('.customer-sidebar').css('height');
                 let contentHeight = $('.account-layout').css('height');
 
@@ -28,9 +28,9 @@
                 $('.account-content').css('height', height);
             }
 
-            updateHeight();
+            window.updateHeight();
 
-            $('.accordian-header').click(updateHeight);
+            $('.accordian-header').click(window.updateHeight);
         });
     </script>
 @endpush
