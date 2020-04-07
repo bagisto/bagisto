@@ -50,9 +50,9 @@ class Configurable extends AbstractType
     protected $hasVariants = true;
 
     /**
-     * get product options
+     * product options
      */
-    protected $getProductOptions = [];
+    protected $productOptions = [];
 
     /**
      * @param  array  $data
@@ -557,6 +557,7 @@ class Configurable extends AbstractType
     {
         $configurableOption = app('Webkul\Product\Helpers\ConfigurableOption');
         $options = $configurableOption->getConfigurationConfig($product);
+
         return $options;
     }
 }

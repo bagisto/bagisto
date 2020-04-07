@@ -257,16 +257,4 @@ class Downloadable extends AbstractType
 
         $item->save();
     }
-
-    /**
-     * get product options
-    */
-    // public function getProductOptions($product)
-    // {
-    //     $configurableOption = app('Webkul\Product\Helpers\DownloadableOption');
-    //     dd($configurableOption);
-    //     $options = $configurableOption->getDownloadableConfig($product);
-    //     dd($options);
-    //     return $options;
-    // }
 }
