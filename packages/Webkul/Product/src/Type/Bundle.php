@@ -70,9 +70,9 @@ class Bundle extends AbstractType
     protected $isChildrenCalculated = true;
 
     /**
-     * getProductOptions
+     * Product Options
      */
-    protected $getProductOptions = [];
+    protected $productOptions = [];
 
     /**
      * Create a new product type instance.
@@ -646,6 +646,7 @@ class Bundle extends AbstractType
     {
         $bundleOption = app('Webkul\Product\Helpers\BundleOption');
         $options = $bundleOption->getProductOptions($product);
+
         return $options;
     }
 }
