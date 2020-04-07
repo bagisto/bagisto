@@ -112,18 +112,34 @@
                         <label>{{ __('velocity::app.admin.meta-data.advertisement-four') }}</label>
 
                         @php
+                            $images = [
+                                4 => [],
+                                3 => [],
+                                2 => [],
+                            ];
                             $advertisement = json_decode($metaData->get('advertisement')->all()[0]->advertisement, true);
                         @endphp
 
                         @if(! isset($advertisement[4]))
                             <image-wrapper
-                                :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'"
-                                input-name="images[4]">
+                                input-name="images[4]"
+                                :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'">
                             </image-wrapper>
                         @else
+                            @foreach ($advertisement[4] as $index => $image)
+                                @php
+                                    $images[4][] = [
+                                        'id' => 'image_' . $index,
+                                        'url' => asset('/storage/' . $image),
+                                    ];
+                                @endphp
+                            @endforeach
+
                             <image-wrapper
-                                :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'"
-                                input-name="images[4]" :images='@json($advertisement[4])'>
+                                :multiple="true"
+                                input-name="images[4]"
+                                :images='@json($images[4])'
+                                :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'">
                             </image-wrapper>
                         @endif
                     </div>
@@ -136,9 +152,19 @@
                                 input-name="images[3]">
                             </image-wrapper>
                         @else
+                            @foreach ($advertisement[3] as $index => $image)
+                                @php
+                                    $images[3][] = [
+                                        'id' => 'image_' . $index,
+                                        'url' => asset('/storage/' . $image),
+                                    ];
+                                @endphp
+                            @endforeach
+
                             <image-wrapper
-                                :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'"
-                                input-name="images[3]" :images='@json($advertisement[3])'>
+                                input-name="images[3]"
+                                :images='@json($images[3])'
+                                :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'">
                             </image-wrapper>
                         @endif
                     </div>
@@ -152,9 +178,19 @@
                                 input-name="images[2]">
                             </image-wrapper>
                         @else
+                            @foreach ($advertisement[2] as $index => $image)
+                                @php
+                                    $images[2][] = [
+                                        'id' => 'image_' . $index,
+                                        'url' => asset('/storage/' . $image),
+                                    ];
+                                @endphp
+                            @endforeach
+
                             <image-wrapper
-                                :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'"
-                                input-name="images[2]" :images='@json($advertisement[2])'>
+                                input-name="images[2]"
+                                :images='@json($images[2])'
+                                :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'">
                             </image-wrapper>
                         @endif
                     </div>
