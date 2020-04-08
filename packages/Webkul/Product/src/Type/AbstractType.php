@@ -114,9 +114,9 @@ abstract class AbstractType
     protected $isChildrenCalculated = false;
 
     /**
-     * get product options
+     * product options
      */
-    protected $getProductOptions = [];
+    protected $productOptions = [];
 
     /**
      * Create a new product type instance.
@@ -703,6 +703,6 @@ abstract class AbstractType
     //get product options
     public function getProductOptions()
     {
-        return $this->getProductOptions;
+        return $this->productOptions;
     }
 }
