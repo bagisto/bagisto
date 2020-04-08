@@ -45,9 +45,10 @@ class ProductController extends Controller
      */
     public function get($id)
     {
-        return new ProductResource(
-            $this->productRepository->findOrFail($id)
-        );
+        $product = $this->productRepository->findOrFail($id);
+        $options = $this->productRepository->findOrFail($id)->getTypeInstance()->getProductOptions($product);
+
+        return $options;
     }
 
     /**

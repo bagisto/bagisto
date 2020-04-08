@@ -70,6 +70,11 @@ class Bundle extends AbstractType
     protected $isChildrenCalculated = true;
 
     /**
+     * Product Options
+     */
+    protected $productOptions = [];
+
+    /**
      * Create a new product type instance.
      *
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
@@ -632,5 +637,16 @@ class Bundle extends AbstractType
         $item->additional = $this->getAdditionalOptions($item->additional);
 
         $item->save();
+    }
+
+    /**
+     * get product options
+    */
+    public function getProductOptions($product = "")
+    {
+        $bundleOption = app('Webkul\Product\Helpers\BundleOption');
+        $options = $bundleOption->getProductOptions($product);
+
+        return $options;
     }
 }
