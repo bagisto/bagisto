@@ -286,26 +286,25 @@
                         return isManualValidationFail;
                     },
 
-                    isCustomerExist: function () {
-                        this.$validator.attach('email', 'required|email');
+                    isCustomerExist: function() {
+                        this.$validator.attach('address-form.billing[email]', 'required|email');
 
-                        var this_this = this;
+                        this.$validator.validate('address-form.billing[email]', this.address.billing.email)
+                        .then(isValid => {
+                            if (! isValid)
+                                return;
 
-                        this.$validator.validate('email', this.address.billing.email)
-                            .then(function(isValid) {
-                                if (! isValid)
-                                    return;
+                            this.$http.post("{{ route('customer.checkout.exist') }}", {email: this.address.billing.email})
+                            .then(response => {
+                                this.is_customer_exist = response.data ? 1 : 0;
+                                console.log(this.is_customer_exist);
 
-                                this_this.$http.post("{{ route('customer.checkout.exist') }}", {email: this_this.address.billing.email})
-                                    .then(function(response) {
-                                        this_this.is_customer_exist = response.data ? 1 : 0;
-
-                                        if (response.data)
-                                            document.body.style.cursor = 'default';
-                                    })
-                                    .catch(function (error) {})
-
+                                if (response.data)
+                                    document.body.style.cursor = 'default';
                             })
+                            .catch(function (error) {})
+                        })
+                        .catch(error => {})
                     },
 
                     loginCustomer: function () {
