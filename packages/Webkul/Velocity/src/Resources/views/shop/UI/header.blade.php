@@ -19,9 +19,10 @@
                                             {{ __('velocity::app.responsive.header.greeting', ['customer' => auth()->guard('customer')->user()->first_name]) }}
                                         </a>
                                     @endauth
+                                    
                                     <i
-                                        class="material-icons pull-right"
-                                        @click="closeDrawer()">
+                                        @click="closeDrawer()"
+                                        class="material-icons pull-right text-dark">
                                         cancel
                                     </i>
                                 </span>
@@ -53,7 +54,7 @@
                                 @endif
                             @endforeach
 
-                            <ul type="none" class="velocity-content">
+                            <ul type="none" class="velocity-content" v-if="headerContent.length > 0">
                                 <li :key="index" v-for="(content, index) in headerContent">
                                     <a
                                         class="unset"
@@ -183,7 +184,7 @@
 
                                 <h4 class="display-inbl">@{{ subCategory.name }}</h4>
 
-                                <i class="material-icons pull-right" @click="closeDrawer()">
+                                <i class="material-icons pull-right text-dark" @click="closeDrawer()">
                                     cancel
                                 </i>
                             </div>
@@ -234,9 +235,9 @@
 
                         <div class="wrapper" v-else-if="languages">
                             <div class="drawer-section">
-                                <i class="rango-arrow-left fs24 text-down-4" @click="toggleSubcategories('root')"></i>
-                                <h4 class="display-inbl">Languages</h4>
-                                <i class="material-icons pull-right" @click="closeDrawer()">cancel</i>
+                                <i class="rango-arrow-left fs24 text-down-4" @click="toggleMetaInfo('languages')"></i>
+                                <h4 class="display-inbl">{{ __('velocity::app.responsive.header.languages') }}</h4>
+                                <i class="material-icons pull-right text-dark" @click="closeDrawer()">cancel</i>
                             </div>
 
                             <ul type="none">
@@ -267,9 +268,9 @@
 
                         <div class="wrapper" v-else-if="currencies">
                             <div class="drawer-section">
-                                <i class="rango-arrow-left fs24 text-down-4" @click="toggleSubcategories('root')"></i>
+                                <i class="rango-arrow-left fs24 text-down-4" @click="toggleMetaInfo('currencies')"></i>
                                 <h4 class="display-inbl">Currencies</h4>
-                                <i class="material-icons pull-right" @click="closeDrawer()">cancel</i>
+                                <i class="material-icons pull-right text-dark" @click="closeDrawer()">cancel</i>
                             </div>
 
                             <ul type="none">
@@ -452,6 +453,7 @@
                 toggleSubcategories: function (index, event) {
                     if (index == "root") {
                         this.rootCategories = true;
+                        this.subCategory = false;
                     } else {
                         event.preventDefault();
 
@@ -462,7 +464,8 @@
                 },
 
                 toggleMetaInfo: function (metaKey) {
-                    this.rootCategories = false;
+                    this.rootCategories = ! this.rootCategories;
+                    
                     this[metaKey] = !this[metaKey];
                 },
 
