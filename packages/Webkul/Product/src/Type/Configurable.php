@@ -560,4 +560,46 @@ class Configurable extends AbstractType
 
         return $options;
     }
+
+    /**
+     * @param  int  $qty
+     * @return bool
+     */
+    public function haveSufficientQuantity($qty)
+    {
+        $backorders = core()->getConfigData('catalog.inventory.stock_options.backorders');
+
+        return $qty <= $this->totalQuantity() ? true : $backorders;
+    }
+
+    /**
+     * @return int
+     */
+    public function totalQuantity()
+    {
+        $total = 0;
+
+        $channelInventorySourceIds = core()->getCurrentChannel()
+                                           ->inventory_sources()
+                                           ->where('status', 1)
+                                           ->pluck('id');
+
+        foreach ($this->product->variants as $variant) {
+            foreach ($variant->inventories as $inventory) {
+                if (is_numeric($index = $channelInventorySourceIds->search($inventory->inventory_source_id))) {
+                    $total += $inventory->qty;
+                }
+            }
+
+            $orderedInventory = $variant->ordered_inventories()
+                                          ->where('channel_id', core()->getCurrentChannel()->id)
+                                          ->first();
+
+            if ($orderedInventory) {
+                $total -= $orderedInventory->qty;
+            }
+        }
+
+        return $total;
+    }
 }
