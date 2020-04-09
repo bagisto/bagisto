@@ -3,13 +3,15 @@
         margin-bottom: 0 !important;
         padding-bottom: 15px;
         border-bottom: 1px solid $border-color;
-    }
 
-    .page-header {
         .control-group {
+            span {
+                width: 100%;
+            }
+
             &.date::after {
-                left: unset;
-                top: 5px;
+                margin-top: -13px;
+                left: 100%;
             }
         }
     }
