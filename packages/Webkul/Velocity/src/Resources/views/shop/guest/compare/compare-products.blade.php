@@ -3,6 +3,17 @@
     $comparableAttributes = $attributeRepository->findByField('is_comparable', 1);
 @endphp
 
+@push('css')
+    <style>
+        .btn-add-to-cart {
+            max-width: 130px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    </style>
+@endpush
+
 @push('scripts')
     <script type="text/x-template" id="compare-product-template">
         <section class="cart-details row no-margin col-12">
