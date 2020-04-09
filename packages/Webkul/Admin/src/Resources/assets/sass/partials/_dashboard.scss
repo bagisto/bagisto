@@ -5,6 +5,15 @@
         border-bottom: 1px solid $border-color;
     }
 
+    .page-header {
+        .control-group {
+            &.date::after {
+                left: unset;
+                top: 5px;
+            }
+        }
+    }
+
     .page-content {
         margin-top: 15px;
     }
