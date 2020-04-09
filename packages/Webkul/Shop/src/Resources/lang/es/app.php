@@ -381,7 +381,8 @@ return [
         'out-of-stock' => 'Sin estoc',
         'view-all' => 'Ver todo',
         'select-above-options' => 'Primero selecciona las opciones de arriba.',
-        'less-quantity' => 'La cantidad no debe ser inferior a uno.'
+        'less-quantity' => 'La cantidad no debe ser inferior a uno.',
+        'available' => 'Available'
     ],
 
     // 'reviews' => [

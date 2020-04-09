@@ -398,7 +398,8 @@ return [
         'choose-selection' => 'Escolha uma seleção',
         'your-customization' => 'Sua personalização',
         'total-amount' => 'Valor total',
-        'none' => 'Nenhum'
+        'none' => 'Nenhum',
+        'available' => 'Available'
     ],
 
     // 'reviews' => [
