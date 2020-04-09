@@ -127,18 +127,20 @@
 
                             <ul type="none" class="meta-wrapper">
                                 <li>
-                                    <div class="language-logo-wrapper">
-                                        @if ($locale->locale_image)
-                                            <img
-                                                class="language-logo"
-                                                src="{{ asset('/storage/' . $locale->locale_image) }}" />
-                                        @elseif ($locale->code == "en")
-                                            <img
-                                                class="language-logo"
-                                                src="{{ asset('/themes/velocity/assets/images/flags/en.png') }}" />
-                                        @endif
-                                    </div>
-                                    <span>{{ $locale->name }}</span>
+                                    @if ($locale)
+                                        <div class="language-logo-wrapper">
+                                            @if ($locale->locale_image)
+                                                <img
+                                                    class="language-logo"
+                                                    src="{{ asset('/storage/' . $locale->locale_image) }}" />
+                                            @elseif ($locale->code == "en")
+                                                <img
+                                                    class="language-logo"
+                                                    src="{{ asset('/themes/velocity/assets/images/flags/en.png') }}" />
+                                            @endif
+                                        </div>
+                                        <span>{{ $locale->name }}</span>
+                                    @endif
 
                                     <i
                                         class="rango-arrow-right"
