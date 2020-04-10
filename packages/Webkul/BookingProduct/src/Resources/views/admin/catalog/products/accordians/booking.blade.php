@@ -1,3 +1,12 @@
+@section('css')
+    <style>
+        .slot-list .control-group.date::after {
+            margin-top: -13px;
+            left: 100%;
+        }
+    </style>
+@stop
+
 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.booking.before', ['product' => $product]) !!}
 
 <accordian :title="'{{ __('bookingproduct::app.admin.catalog.products.booking') }}'" :active="true">
