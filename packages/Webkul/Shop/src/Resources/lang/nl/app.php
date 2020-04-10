@@ -415,7 +415,8 @@ return [
         'choose-selection' => 'Kies een selectie',
         'your-customization' => 'Uw maatwerk',
         'total-amount' => 'Totale hoeveelheid',
-        'none' => 'Geen'
+        'none' => 'Geen',
+        'available' => 'Available'
     ],
 
     // 'reviews' => [
