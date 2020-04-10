@@ -16,15 +16,25 @@
 
 * #2684 [fixed] - API checkout/cart returns null for guest user
 
+* #2691 [fixed] - Shipping and Payment methods automatically selected on Checkout oage
+
 * #2706 [fixed] - Getting exception on editing category for pt_BR locale in php 7.4
 
 * #2708 [fixed] - Able to create booking product from back date.
+
+* #2713 [fixed] - fix the invoice header in pdf
 
 * #2726 [fixed] - is shop.js the vue framework ??
 
 * #2752 [fixed] - Error when you create or update a new catalog under root
 
+* #2763 [fixed] - error to add rental booking into cart
+
+* #2764 [fixed] - fix UI when select back_date of booking product,the calendar icon is set on another place
+
 * #2765 [fixed] - Email settings configuration values are not write in .env file
+
+* #2768 [fixed] - Getting exception in cart when remove one ticket from event booking from backend
 
 * #2769 [fixed] - Can't delete Exchange Rates data
 
@@ -48,7 +58,17 @@
 
 * #2788 [fixed] - guest_checkout is missing from edit product
 
+* #2790 [fixed] - Minicart disable when use new languages only velocity theme
+
+* #2792 [fixed] - Weight Validation Inconsistencies
+
+* #2793 [fixed] - Stock Check Incorrect for Configurable Items
+
+* #2794 [fixed] - When allow backorder is enabled, display a message available for order rather than in stock.
+
 * #2796 [fixed] - Try to create category in windows 10 getting exception
+
+* #2801 [fixed] - Address with more than 2 lines is not added correctly to the cart_address table
 
 * #2807 [fixed] - Illegal mix of collations
 
@@ -78,6 +98,8 @@
 
 * #2832 [fixed] - Illegal mix of collations
 
+* #2834 [fixed] - Layout issue in compare page in pt_BR locale
+
 * #2837 [fixed] - subscription bar content source code is not visible in text editor
 
 * #2840 [fixed] - Velocity theme is not available on fresh install
@@ -85,6 +107,14 @@
 * #2845 [fixed] - Implement custom RegistrationController
 
 * #2846 [fixed] - does not show next step
+
+* #2847 [fixed] - Class 'Faker\Factory' not found
+
+* #2849 [fixed] - Can not add my stylesheet to Velocity theme
+
+* #2851 [fixed] - Fix date picker icon layout at dashboard
+
+* #2856 [fixed] - Issue with Sort by functionality, when open any category it by defaults show Newest First but after changing sort by when again select newest first it shows different product.
 
 
 
