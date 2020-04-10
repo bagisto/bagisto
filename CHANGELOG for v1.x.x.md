@@ -84,6 +84,9 @@
 
 * #2845 [fixed] - Implement custom RegistrationController
 
+* #2846 [fixed] - does not show next step
+
+
 
 ## **v1.1.0 (24th of March 2020)** - *Release*
 
