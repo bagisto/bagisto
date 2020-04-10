@@ -157,7 +157,7 @@
     <script type="text/x-template" id="default-slot-item-template">
         <tr>
             <td class="has-control-group">
-                <div class="control-group date" :class="[errors.has(controlName + '[from_day]') ? 'has-error' : '']">
+                <div class="control-group" :class="[errors.has(controlName + '[from_day]') ? 'has-error' : '']">
                     <select v-validate="'required'" :name="controlName + '[from_day]'" v-model="slotItem.from_day" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.day') }}&quot;">
                         <option v-for="(day, index) in $parent.days" :value="index">@{{ day }}</option>
                     </select>
@@ -177,7 +177,7 @@
             </td>
 
             <td class="has-control-group">
-                <div class="control-group date" :class="[errors.has(controlName + '[to_day]') ? 'has-error' : '']">
+                <div class="control-group" :class="[errors.has(controlName + '[to_day]') ? 'has-error' : '']">
                     <select v-validate="'required'" :name="controlName + '[to_day]'" v-model="slotItem.to_day" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.day') }}&quot;">
                         <option v-for="(day, index) in $parent.days" :value="index">@{{ day }}</option>
                     </select>
