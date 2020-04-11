@@ -31,14 +31,15 @@ class ComparisonController extends Controller
                     ->get()
                     ->toArray();
 
-                foreach ($productCollection as $index => $customerCompare) {
-                    $product = $this->productRepository->find($customerCompare['product_id']);
-                    $formattedProduct = $this->velocityHelper->formatProduct($product);
+                $items = [];
 
-                    $productCollection[$index]['image'] = $formattedProduct['image'];
-                    $productCollection[$index]['priceHTML'] = $formattedProduct['priceHTML'];
-                    $productCollection[$index]['addToCartHtml'] = $formattedProduct['addToCartHtml'];
+                foreach ($productCollection as $index => $customerCompare) {
+                    array_push($items, $customerCompare['id']);
                 }
+
+                $items = implode('&', $items);
+                $productCollection = $this->velocityHelper->fetchProductCollection($items);
+
             } else {
                 // for product details
                 if ($items = request()->get('items')) {

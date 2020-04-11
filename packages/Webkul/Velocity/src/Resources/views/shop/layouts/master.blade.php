@@ -66,7 +66,12 @@
 
                 @section('body-header')
                     @include('shop::layouts.top-nav.index')
-                    @include('shop::layouts.header.index')
+
+                    {!! view_render_event('bagisto.shop.layout.header.before') !!}
+
+                        @include('shop::layouts.header.index')
+
+                    {!! view_render_event('bagisto.shop.layout.header.after') !!}
 
                     <div class="main-content-wrapper col-12 no-padding">
                         @php

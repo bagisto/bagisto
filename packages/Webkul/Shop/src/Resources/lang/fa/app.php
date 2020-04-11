@@ -410,7 +410,8 @@ return [
         'choose-selection' => 'انتخابی را انتخاب کنید',
         'your-customization' => 'شخصی سازی شما',
         'total-amount' => 'مقدار کل',
-        'none' => 'هیچ یک'
+        'none' => 'هیچ یک',
+        'available' => 'Available'
     ],
 
     // 'reviews' => [

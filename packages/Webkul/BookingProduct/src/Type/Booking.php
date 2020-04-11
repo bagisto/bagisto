@@ -2,6 +2,7 @@
 
 namespace Webkul\BookingProduct\Type;
 
+use Illuminate\Support\Arr;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
@@ -167,6 +168,14 @@ class Booking extends Virtual
         $bookingProduct = $this->getBookingProduct($data['product_id']);
 
         if ($bookingProduct->type == 'event') {
+            $filtered = Arr::where($data['booking']['qty'], function ($qty, $key) {
+                return $qty != 0;
+            });
+
+            if (! count($filtered)) {
+                return trans('shop::app.checkout.cart.integrity.missing_options');
+            }
+
             foreach ($data['booking']['qty'] as $ticketId => $qty) {
                 if (! $qty) {
                     continue;
@@ -214,7 +223,7 @@ class Booking extends Virtual
         }
 
         if (isset($options1['booking']) && isset($options2['booking'])) {
-            return $options1['booking'] === $options2['booking'];
+            return $options1['booking'] == $options2['booking'];
         } elseif (! isset($options1['booking'])) {
             return false;
         } elseif (! isset($options2['booking'])) {

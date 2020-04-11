@@ -2,13 +2,131 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
-## **v1.1.0 (20th of March 2020)** - *Release*
+## **v1.1.0 (24th of March 2020)** - *Release*
+
+* #797 [fixed] - Add new module
+
+* #826 [fixed] - Impossible to create the root directory "".
+
+* #2152 [fixed] - Product images are not showing
+
+* #2329 [fixed] - Getting exception on frontend after updating meta data.
+
+* #2619 [fixed] - Issue when category slug & product slug are same
+
+* #2684 [fixed] - API checkout/cart returns null for guest user
+
+* #2691 [fixed] - Shipping and Payment methods automatically selected on Checkout oage
+
+* #2706 [fixed] - Getting exception on editing category for pt_BR locale in php 7.4
+
+* #2708 [fixed] - Able to create booking product from back date.
+
+* #2713 [fixed] - fix the invoice header in pdf
+
+* #2726 [fixed] - is shop.js the vue framework ??
+
+* #2752 [fixed] - Error when you create or update a new catalog under root
+
+* #2763 [fixed] - error to add rental booking into cart
+
+* #2764 [fixed] - fix UI when select back_date of booking product,the calendar icon is set on another place
+
+* #2765 [fixed] - Email settings configuration values are not write in .env file
+
+* #2768 [fixed] - Getting exception in cart when remove one ticket from event booking from backend
+
+* #2769 [fixed] - Can't delete Exchange Rates data
+
+* #2774 [fixed] - How to add new icon in bagisto admin panel?
+
+* #2775 [fixed] - compare icon is missing in each product for default theme
+
+* #2776 [fixed] - compare option in side bar menu at customer panel should be available
+
+* #2778 [fixed] - Issue in customer profile dropdown.
+
+* #2779 [fixed] - Issue on checkout page, email should ask first as in default theme.
+
+* #2780 [fixed] - Sidebar layout issue.
+
+* #2781 [fixed] - Mobile menu is not showing correct sub-menu
+
+* #2785 [fixed] - missing address details in checkout page
+
+* #2786 [fixed] - Getting error message on adding product to compare product from search page.
+
+* #2788 [fixed] - guest_checkout is missing from edit product
+
+* #2790 [fixed] - Minicart disable when use new languages only velocity theme
+
+* #2792 [fixed] - Weight Validation Inconsistencies
+
+* #2793 [fixed] - Stock Check Incorrect for Configurable Items
+
+* #2794 [fixed] - When allow backorder is enabled, display a message available for order rather than in stock.
+
+* #2796 [fixed] - Try to create category in windows 10 getting exception
+
+* #2801 [fixed] - Address with more than 2 lines is not added correctly to the cart_address table
+
+* #2807 [fixed] - Illegal mix of collations
+
+* #2808 [fixed] - Correct the spelling on registration page.
+
+* #2810 [fixed] - UI issue on compare similar item page.
+
+* #2811 [fixed] - how to change checkout proccess
+
+* #2812 [fixed] - getting timezone error while setup
+
+* #2813 [fixed] - Ui issue if there is only one product in compare page.
+
+* #2814 [fixed] - variant product's name aren't update when select their options in Front
+
+* #2818 [fixed] - Not able to view menu in velocity theme on storefront
+
+* #2821 [fixed] - Address Line is Null in Emails
+
+* #2825 [fixed] - PHP Notice:
+
+* #2827 [fixed] - default local not changing in storefront in velocity theme
+
+* #2828 [fixed] - currency change error on velocity theme
+
+* #2829 [fixed] - changing home page content in velocity and npm
+
+* #2832 [fixed] - Illegal mix of collations
+
+* #2834 [fixed] - Layout issue in compare page in pt_BR locale
+
+* #2837 [fixed] - subscription bar content source code is not visible in text editor
+
+* #2840 [fixed] - Velocity theme is not available on fresh install
+
+* #2845 [fixed] - Implement custom RegistrationController
+
+* #2846 [fixed] - does not show next step
+
+* #2847 [fixed] - Class 'Faker\Factory' not found
+
+* #2849 [fixed] - Can not add my stylesheet to Velocity theme
+
+* #2851 [fixed] - Fix date picker icon layout at dashboard
+
+* #2856 [fixed] - Issue with Sort by functionality, when open any category it by defaults show Newest First but after changing sort by when again select newest first it shows different product.
+
+
+
+## **v1.1.0 (24th of March 2020)** - *Release*
 
 * [feature] Added new booking type product.
 
 * [feature] Impletment compare product feature.
 
 * [feature] Impletment compare product feature.
+
+* #2525 [fixed] - Add more settings to the installers
 
 * #2541 [fixed] - Showing product's price with the price including tax
 
@@ -72,13 +190,19 @@
 
 * #2606 [fixed] - custom attributes are not Visible on Product View Page on Front-end
 
+* #2607 [fixed] - Getting exception on editing category for pt_BR locale in php 7.4
+
 * #2608 [fixed] - Getting exception on creating category.
 
 * #2609 [fixed] - product removed from comparison page when update product by name
 
 * #2611 [fixed] - installer error
 
+* #2612 [fixed] - available slots are not showing for current date even if slot time is not expired
+
 * #2613 [fixed] - Propaganistas/Laravel-Intl is abandoned
+
+* #2614 [fixed] - table booking slot time is expired still exist in cart
 
 * #2619 [fixed] - Issue when category slug & product slug are same
 
@@ -150,7 +274,9 @@
 
 * #2667 [fixed] - By default wishlist option is selected in cart
 
-* #2669 [fixed] - Booking product should be removed from the cart when selected slot time expired
+* #2670 [fixed] - Booking product should be removed from the cart when selected slot time expired
+
+* #2669 [fixed] - Browser compatibility issue
 
 * #2671 [fixed] - Error on moving booking product to wishlist
 
@@ -164,7 +290,25 @@
 
 * #2693 [fixed] - Booking product page - add to cart button js error
 
-* #2707 [fixed] Getting exception when generate invoice in appointment booking
+* #2704 [fixed] - product's assigned category can't be removed
+
+* #2707 [fixed] - Getting exception when generate invoice in appointment booking
+
+* #2715 [fixed] - Error message should throw if "To" time is less than "From".
+
+* #2716 [fixed] - After saving the default booking time product selected time for date range changes to 00:00:00 ,because of which not able to book appointment on frontend.
+
+* #2717 [fixed] - Getting error message on adding rental product in cart if rental booking is not available for that day.
+
+* #2722 [fixed] - warning showing when update event booking cart quantity from the product page
+
+* #2723 [fixed] - Compare product icon on header showing counts of compare product but there are no product in compare list.
+
+* #2724 [fixed] - table bookings quantity should update in existing booking added in cart for same slot/date
+
+* #2726 [fixed] - is shop.js the vue framework ??
+
+* #2732 [fixed] - missing product's quick view in category page
 
 
 ## **v1.0.0 (24th of February 2020)** - *Release*

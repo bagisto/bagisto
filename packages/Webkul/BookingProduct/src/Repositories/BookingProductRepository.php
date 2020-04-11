@@ -174,6 +174,12 @@ class BookingProductRepository extends Repository
 
             $to = Carbon::createFromTimeString($timeInterval['to'])->getTimestamp();
 
+            if ($from > $to) {
+                unset($slots[$key]);
+                
+                continue;
+            }
+
             $isOverLapping = false;
 
             foreach ($tempSlots as $slot) {

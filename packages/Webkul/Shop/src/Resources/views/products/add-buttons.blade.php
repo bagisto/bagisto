@@ -8,5 +8,7 @@
 
     @include('shop::products.wishlist')
 
-    @include('shop::products.compare')
+    @include('shop::products.compare', [
+        'productId' => $product->id
+    ])
 </div>

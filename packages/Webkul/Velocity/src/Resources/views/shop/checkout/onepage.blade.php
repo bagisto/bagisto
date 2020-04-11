@@ -93,10 +93,10 @@
             var customerAddress = '';
             var shippingMethods = '';
 
-            var shippingTemplateRenderFns = [];
-            var paymentTemplateRenderFns = [];
             var reviewTemplateRenderFns = [];
+            var paymentTemplateRenderFns = [];
             var summaryTemplateRenderFns = [];
+            var shippingTemplateRenderFns = [];
 
             @auth('customer')
                 @if(auth('customer')->user()->addresses)
@@ -111,7 +111,7 @@
                 template: '#checkout-template',
                 inject: ['$validator'],
 
-                data: function() {
+                data: function () {
                     return {
                         allAddress: {},
                         current_step: 1,
@@ -153,10 +153,10 @@
                     }
                 },
 
-                created: function() {
+                created: function () {
                     this.getOrderSummary();
 
-                    if(! customerAddress) {
+                    if (! customerAddress) {
                         this.new_shipping_address = true;
                         this.new_billing_address = true;
                     } else {
@@ -184,21 +184,21 @@
                 },
 
                 methods: {
-                    navigateToStep: function(step) {
+                    navigateToStep: function (step) {
                         if (step <= this.completed_step) {
                             this.current_step = step
                             this.completed_step = step - 1;
                         }
                     },
 
-                    haveStates: function(addressType) {
+                    haveStates: function (addressType) {
                         if (this.countryStates[this.address[addressType].country] && this.countryStates[this.address[addressType].country].length)
                             return true;
 
                         return false;
                     },
 
-                    validateForm: function(scope) {
+                    validateForm: function (scope) {
                         var isManualValidationFail = false;
 
                         if (scope == 'address-form') {
@@ -287,47 +287,42 @@
                     },
 
                     isCustomerExist: function() {
-                        this.$validator.attach('email', 'required|email');
+                        this.$validator.attach('address-form.billing[email]', 'required|email');
 
-                        var this_this = this;
+                        this.$validator.validate('address-form.billing[email]', this.address.billing.email)
+                        .then(isValid => {
+                            if (! isValid)
+                                return;
 
-                        this.$validator.validate('email', this.address.billing.email)
-                            .then(function(isValid) {
-                                if (! isValid)
-                                    return;
+                            this.$http.post("{{ route('customer.checkout.exist') }}", {email: this.address.billing.email})
+                            .then(response => {
+                                this.is_customer_exist = response.data ? 1 : 0;
+                                console.log(this.is_customer_exist);
 
-                                this_this.$http.post("{{ route('customer.checkout.exist') }}", {email: this_this.address.billing.email})
-                                    .then(function(response) {
-                                        this_this.is_customer_exist = response.data ? 1 : 0;
-
-                                        if (response.data)
-                                            document.body.style.cursor = 'default';
-                                    })
-                                    .catch(function (error) {})
-
+                                if (response.data)
+                                    document.body.style.cursor = 'default';
                             })
+                            .catch(function (error) {})
+                        })
+                        .catch(error => {})
                     },
 
-                    loginCustomer: function() {
-                        var this_this = this;
-
-                        this_this.$http.post("{{ route('customer.checkout.login') }}", {
-                                email: this_this.address.billing.email,
-                                password: this_this.address.billing.password
+                    loginCustomer: function () {
+                        this.$http.post("{{ route('customer.checkout.login') }}", {
+                                email: this.address.billing.email,
+                                password: this.address.billing.password
                             })
-                            .then(function(response) {
+                            .then(response => {
                                 if (response.data.success) {
                                     window.location.href = "{{ route('shop.checkout.onepage.index') }}";
                                 } else {
-                                    window.flashMessages = [{'type': 'alert-error', 'message': response.data.error }];
-
-                                    this_this.$root.addFlashMessages()
+                                    window.showAlert(`alert-danger`, this.__('shop.general.alert.danger'), response.data.error);
                                 }
                             })
                             .catch(function (error) {})
                     },
 
-                    getOrderSummary () {
+                    getOrderSummary: function () {
                         this.$http.get("{{ route('shop.checkout.summary') }}")
                             .then(response => {
                                 summaryHtml = Vue.compile(response.data.html)
@@ -338,8 +333,20 @@
                             .catch(function (error) {})
                     },
 
-                    saveAddress: function() {
+                    saveAddress: function () {
                         this.disable_button = true;
+
+                        if (this.allAddress.length > 0) {
+                            let address = this.allAddress.forEach(address => {
+                                if (address.id == this.address.billing.address_id) {
+                                    this.address.billing.address1 = [address.address1];
+                                }
+
+                                if (address.id == this.address.shipping.address_id) {
+                                    this.address.shipping.address1 = [address.address1];
+                                }
+                            });
+                        }
 
                         this.$http.post("{{ route('shop.checkout.save-address') }}", this.address)
                             .then(response => {
@@ -362,7 +369,6 @@
 
                                 shippingMethods = response.data.shippingMethods;
 
-                                this.validateForm('shipping-form');
                                 this.getOrderSummary();
                             })
                             .catch(error => {
@@ -372,7 +378,7 @@
                             })
                     },
 
-                    saveShipping: function() {
+                    saveShipping: function () {
                         this.disable_button = true;
 
                         this.$http.post("{{ route('shop.checkout.save-shipping') }}", {'shipping_method': this.selected_shipping_method})
@@ -380,6 +386,8 @@
                                 this.disable_button = false;
 
                                 this.showPaymentSection = true;
+
+                                document.body.style.cursor = 'default';
 
                                 paymentHtml = Vue.compile(response.data.html)
 
@@ -393,7 +401,6 @@
                                     this.savePayment();
                                 }
 
-                                this.validateForm('payment-form');
                                 this.getOrderSummary();
                             })
                             .catch(error => {
@@ -403,7 +410,7 @@
                             })
                     },
 
-                    savePayment: function() {
+                    savePayment: function () {
                         this.disable_button = true;
 
                         if (this.isCheckPayment) {
@@ -415,6 +422,7 @@
                                 this.disable_button = false;
 
                                 this.showSummarySection = true;
+                                document.body.style.cursor = 'default';
 
                                 reviewHtml = Vue.compile(response.data.html)
                                 this.completed_step = this.step_numbers[response.data.jump_to_section] + 1;
@@ -431,7 +439,7 @@
                         }
                     },
 
-                    placeOrder: function() {
+                    placeOrder: function () {
                         if (this.isPlaceOrderEnabled) {
                             this.disable_button = false;
                             this.isPlaceOrderEnabled = false;
@@ -449,16 +457,14 @@
                             .catch(error => {
                                 this.disable_button = true;
 
-                                window.flashMessages = [{'type': 'alert-error', 'message': "{{ __('shop::app.common.error') }}" }];
-
-                                this.$root.addFlashMessages();
+                                window.showAlert(`alert-danger`, this.__('shop.general.alert.danger'), "{{ __('shop::app.common.error') }}");
                             })
                         } else {
                             this.disable_button = true;
                         }
                     },
 
-                    handleErrorResponse: function(response, scope) {
+                    handleErrorResponse: function (response, scope) {
                         if (response.status == 422) {
                             serverErrors = response.data.errors;
                             this.$root.addServerErrors(scope)
@@ -469,34 +475,34 @@
                         }
                     },
 
-                    shippingMethodSelected: function(shippingMethod) {
+                    shippingMethodSelected: function (shippingMethod) {
                         this.selected_shipping_method = shippingMethod;
                     },
 
-                    paymentMethodSelected: function(paymentMethod) {
+                    paymentMethodSelected: function (paymentMethod) {
                         this.selected_payment_method = paymentMethod;
                     },
 
-                    newBillingAddress: function() {
+                    newBillingAddress: function () {
                         this.new_billing_address = true;
                         this.isPlaceOrderEnabled = false;
                         this.address.billing.address_id = null;
                     },
 
-                    newShippingAddress: function() {
+                    newShippingAddress: function () {
                         this.new_shipping_address = true;
                         this.isPlaceOrderEnabled = false;
                         this.address.shipping.address_id = null;
                     },
 
-                    backToSavedBillingAddress: function() {
+                    backToSavedBillingAddress: function () {
                         this.new_billing_address = false;
                         setTimeout(() => {
                             this.validateForm('address-form');
                         }, 0);
                     },
 
-                    backToSavedShippingAddress: function() {
+                    backToSavedShippingAddress: function () {
                         this.new_shipping_address = false;
                         setTimeout(() => {
                             this.validateForm('address-form');
@@ -508,7 +514,7 @@
             Vue.component('shipping-section', {
                 inject: ['$validator'],
 
-                data: function() {
+                data: function () {
                     return {
                         templateRender: null,
 
@@ -520,21 +526,9 @@
 
                 staticRenderFns: shippingTemplateRenderFns,
 
-                mounted: function() {
-                    for (method in shippingMethods) {
-                        if (this.first_iteration) {
-
-                            for (rate in shippingMethods[method]['rates']) {
-                                this.selected_shipping_method = shippingMethods[method]['rates'][rate]['method'];
-
-                                this.first_iteration = false;
-
-                                this.methodSelected();
-                            }
-                        }
-                    }
-
+                mounted: function () {
                     this.templateRender = shippingHtml.render;
+
                     for (var i in shippingHtml.staticRenderFns) {
                         shippingTemplateRenderFns.push(shippingHtml.staticRenderFns[i]);
                     }
@@ -542,7 +536,7 @@
                     eventBus.$emit('after-checkout-shipping-section-added');
                 },
 
-                render: function(h) {
+                render: function (h) {
                     return h('div', [
                         (this.templateRender ?
                             this.templateRender() :
@@ -551,7 +545,7 @@
                 },
 
                 methods: {
-                    methodSelected: function() {
+                    methodSelected: function () {
                         this.$parent.validateForm('shipping-form');
 
                         this.$emit('onShippingMethodSelected', this.selected_shipping_method)
@@ -564,7 +558,7 @@
             Vue.component('payment-section', {
                 inject: ['$validator'],
 
-                data: function() {
+                data: function () {
                     return {
                         templateRender: null,
 
@@ -578,16 +572,9 @@
 
                 staticRenderFns: paymentTemplateRenderFns,
 
-                mounted: function() {
-                    for (method in paymentMethods) {
-                        if (this.first_iteration) {
-                            this.payment.method = paymentMethods[method]['method'];
-                            this.first_iteration = false;
-                            this.methodSelected();
-                        }
-                    }
-
+                mounted: function () {
                     this.templateRender = paymentHtml.render;
+
                     for (var i in paymentHtml.staticRenderFns) {
                         paymentTemplateRenderFns.push(paymentHtml.staticRenderFns[i]);
                     }
@@ -595,7 +582,7 @@
                     eventBus.$emit('after-checkout-payment-section-added');
                 },
 
-                render: function(h) {
+                render: function (h) {
                     return h('div', [
                         (this.templateRender ?
                             this.templateRender() :
@@ -604,7 +591,7 @@
                 },
 
                 methods: {
-                    methodSelected: function() {
+                    methodSelected: function () {
                         this.$parent.validateForm('payment-form');
 
                         this.$emit('onPaymentMethodSelected', this.payment)
@@ -632,7 +619,7 @@
                     );
                 },
 
-                mounted: function() {
+                mounted: function () {
                     this.templateRender = reviewHtml.render;
 
                     for (var i in reviewHtml.staticRenderFns) {
@@ -655,7 +642,7 @@
                     }
                 },
 
-                data: function() {
+                data: function () {
                     return {
                         changeCount: 0,
                         coupon_code: null,
@@ -665,7 +652,7 @@
                     }
                 },
 
-                mounted: function() {
+                mounted: function () {
                     this.templateRender = summaryHtml.render;
 
                     for (var i in summaryHtml.staticRenderFns) {
@@ -675,7 +662,7 @@
                     this.$forceUpdate();
                 },
 
-                render: function(h) {
+                render: function (h) {
                     return h('div', [
                         (this.templateRender ?
                             this.templateRender() :
@@ -684,12 +671,12 @@
                 },
 
                 methods: {
-                    onSubmit: function() {
+                    onSubmit: function () {
                         var this_this = this;
                         const emptyCouponErrorText = "Please enter a coupon code";
                     },
 
-                    changeCoupon: function() {
+                    changeCoupon: function () {
                         if (this.couponChanged == true && this.changeCount == 0) {
                             this.changeCount++;
 
@@ -700,12 +687,9 @@
                             this.changeCount = 0;
                         }
                     },
-
-                    removeCoupon: function () {
-                        var this_this = this;
-                    }
                 }
             });
+
         })()
     </script>
 

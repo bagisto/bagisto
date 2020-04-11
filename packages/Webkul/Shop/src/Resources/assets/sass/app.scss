@@ -785,6 +785,7 @@ section.slider-block {
                         border-bottom-right-radius: 0px;
                         padding-left: 12px;
                         font-size: 14px;
+                        -webkit-appearance: none;
                     }
 
                     .search-icon-wrapper {
@@ -794,11 +795,13 @@ section.slider-block {
                         border: 2px solid $border-color;
                         border-top-right-radius: 3px;
                         border-bottom-right-radius: 3px;
+                        margin-left: -2px;
 
                         button {
                             background: $btn-background-color;
                             border: 0;
                             padding: 3px 5px;
+                            margin: 0px;
                         }
                     }
                 }
@@ -3832,6 +3835,7 @@ section.review {
                         border-radius: 2px;
                         border-top-left-radius: 0px;
                         border-bottom-left-radius: 0px;
+                        -webkit-appearance: none;
                     }
 
                     .search-icon-wrapper {
@@ -3840,6 +3844,7 @@ section.review {
                         border-radius: 2px;
                         border-top-right-radius: 0px;
                         border-bottom-right-radius: 0px;
+                        margin-left: -2px;
                     }
                 }
             }
