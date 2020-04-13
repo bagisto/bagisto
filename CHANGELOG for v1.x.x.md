@@ -118,6 +118,8 @@
 
 * #2856 [fixed] - Issue with Sort by functionality, when open any category it by defaults show Newest First but after changing sort by when again select newest first it shows different product.
 
+* #2871 [fixed] - Refund throws "Undefined index: shipping" error
+
 
 
 ## **v1.1.0 (24th of March 2020)** - *Release*
