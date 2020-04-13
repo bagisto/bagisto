@@ -30,6 +30,18 @@
 
             window.updateHeight();
 
+            $('input').change(() => {
+                setTimeout(() => {
+                    window.updateHeight()
+                }, 0)
+            });
+
+            $('button').click(() => {
+                setTimeout(() => {
+                    window.updateHeight()
+                }, 0)
+            });
+
             $('.accordian-header').click(window.updateHeight);
         });
     </script>
