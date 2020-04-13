@@ -30,7 +30,7 @@
 
             window.updateHeight();
 
-            $('input').change(() => {
+            $('input, select').change(() => {
                 setTimeout(() => {
                     window.updateHeight()
                 }, 0)
