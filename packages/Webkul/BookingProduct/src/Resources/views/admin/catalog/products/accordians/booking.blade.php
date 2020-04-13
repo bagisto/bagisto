@@ -4,6 +4,19 @@
             margin-top: -13px;
             left: 100%;
         }
+        
+        .has-control-group .control-group {
+            width: 50%;
+            float: left;
+        }
+
+        .has-control-group .control-group:first-child {
+            padding-right: 10px;
+        }
+
+        .has-control-group .control-group:last-child {
+            padding-left: 10px;
+        }
     </style>
 @stop
 
