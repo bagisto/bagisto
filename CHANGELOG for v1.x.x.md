@@ -52,6 +52,8 @@
 
 * #2781 [fixed] - Mobile menu is not showing correct sub-menu
 
+* #2784 [fixed] - One booking for many days slot time issue
+
 * #2785 [fixed] - missing address details in checkout page
 
 * #2786 [fixed] - Getting error message on adding product to compare product from search page.
