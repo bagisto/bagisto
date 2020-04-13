@@ -351,6 +351,7 @@
                         this.$http.post("{{ route('shop.checkout.save-address') }}", this.address)
                             .then(response => {
                                 this.disable_button = false;
+                                this.isPlaceOrderEnabled = true;
 
                                 if (this.step_numbers[response.data.jump_to_section] == 2) {
                                     this.showShippingSection = true;
