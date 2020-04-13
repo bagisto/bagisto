@@ -34,6 +34,20 @@
 
                     {!! view_render_event('bagisto.admin.settings.slider.create.before') !!}
 
+                    <div class="control-group" :class="[errors.has('locale') ? 'has-error' : '']">
+                        <label for="locale">{{ __('admin::app.datagrid.locale') }}</label>
+                        
+                        <select class="control" id="locale" name="locale" data-vv-as="&quot;{{ __('admin::app.datagrid.locale') }}&quot;" value="" v-validate="'required'">
+                            @foreach (core()->getAllLocales() as $localeModel)
+
+                                <option value="{{ $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
+                                    {{ $localeModel->name }}
+                                </option>
+
+                            @endforeach
+                        </select>
+                    </div>
+
                     <div class="control-group" :class="[errors.has('title') ? 'has-error' : '']">
                         <label for="title" class="required">{{ __('admin::app.settings.sliders.name') }}</label>
                         <input type="text" class="control" name="title" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.settings.sliders.name') }}&quot;">
