@@ -252,9 +252,13 @@ class Helper extends Review
 
         if (is_string($path) && is_readable($path)) {
             return include $path;
-        }
+        } else {
+            $currentLocale = "en";
 
-        return [];
+            $path = __DIR__ . "/../Resources/lang/$currentLocale/app.php";
+
+            return include $path;
+        }
     }
 
     /**

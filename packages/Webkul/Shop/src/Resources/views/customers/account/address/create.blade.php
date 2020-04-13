@@ -32,17 +32,23 @@
                         <span class="control-error" v-if="errors.has('company_name')">@{{ errors.first('company_name') }}</span>
                     </div>
 
+                    {!! view_render_event('bagisto.shop.customers.account.address.create_form_controls.company_name.after') !!}
+
                     <div class="control-group" :class="[errors.has('first_name') ? 'has-error' : '']">
                         <label for="first_name" class="required">{{ __('shop::app.customer.account.address.create.first_name') }}</label>
                         <input value="{{ old('first_name') }}" type="text" class="control" name="first_name" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.first_name') }}&quot;">
                         <span class="control-error" v-if="errors.has('first_name')">@{{ errors.first('first_name') }}</span>
                     </div>
 
+                    {!! view_render_event('bagisto.shop.customers.account.address.create_form_controls.first_name.after') !!}
+
                     <div class="control-group" :class="[errors.has('last_name') ? 'has-error' : '']">
                         <label for="last_name" class="required">{{ __('shop::app.customer.account.address.create.last_name') }}</label>
                         <input value="{{ old('last_name') }}" type="text" class="control" name="last_name" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.last_name') }}&quot;">
                         <span class="control-error" v-if="errors.has('last_name')">@{{ errors.first('last_name') }}</span>
                     </div>
+
+                    {!! view_render_event('bagisto.shop.customers.account.address.create_form_controls.last_name.after') !!}
 
                     <div class="control-group" :class="[errors.has('vat_id') ? 'has-error' : '']">
                         <label for="vat_id">{{ __('shop::app.customer.account.address.create.vat_id') }}
@@ -52,6 +58,8 @@
                         v-validate="''" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.vat_id') }}&quot;">
                         <span class="control-error" v-if="errors.has('vat_id')">@{{ errors.first('vat_id') }}</span>
                     </div>
+
+                    {!! view_render_event('bagisto.shop.customers.account.address.create_form_controls.vat_id.after') !!}
 
                     <div class="control-group" :class="[errors.has('address1[]') ? 'has-error' : '']">
                         <label for="address1" class="required">{{ __('shop::app.customer.account.address.create.street-address') }}</label>
@@ -67,7 +75,11 @@
                         </div>
                     @endif
 
+                    {!! view_render_event('bagisto.shop.customers.account.address.create_form_controls.street-address.after') !!}
+
                     @include ('shop::customers.account.address.country-state', ['countryCode' => old('country'), 'stateCode' => old('state')])
+
+                    {!! view_render_event('bagisto.shop.customers.account.address.create_form_controls.country-state.after') !!}
 
                     <div class="control-group" :class="[errors.has('city') ? 'has-error' : '']">
                         <label for="city" class="required">{{ __('shop::app.customer.account.address.create.city') }}</label>
@@ -75,11 +87,15 @@
                         <span class="control-error" v-if="errors.has('city')">@{{ errors.first('city') }}</span>
                     </div>
 
+                    {!! view_render_event('bagisto.shop.customers.account.address.create_form_controls.city.after') !!}
+
                     <div class="control-group" :class="[errors.has('postcode') ? 'has-error' : '']">
                         <label for="postcode" class="required">{{ __('shop::app.customer.account.address.create.postcode') }}</label>
                         <input value="{{ old('postcode') }}" type="text" class="control" name="postcode" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.postcode') }}&quot;">
                         <span class="control-error" v-if="errors.has('postcode')">@{{ errors.first('postcode') }}</span>
                     </div>
+
+                    {!! view_render_event('bagisto.shop.customers.account.address.create_form_controls.postcode.after') !!}
 
                     <div class="control-group" :class="[errors.has('phone') ? 'has-error' : '']">
                         <label for="phone" class="required">{{ __('shop::app.customer.account.address.create.phone') }}</label>

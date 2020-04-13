@@ -351,6 +351,7 @@
                         this.$http.post("{{ route('shop.checkout.save-address') }}", this.address)
                             .then(response => {
                                 this.disable_button = false;
+                                this.isPlaceOrderEnabled = true;
 
                                 if (this.step_numbers[response.data.jump_to_section] == 2) {
                                     this.showShippingSection = true;
@@ -369,7 +370,6 @@
 
                                 shippingMethods = response.data.shippingMethods;
 
-                                this.validateForm('shipping-form');
                                 this.getOrderSummary();
                             })
                             .catch(error => {
@@ -388,6 +388,8 @@
 
                                 this.showPaymentSection = true;
 
+                                document.body.style.cursor = 'default';
+
                                 paymentHtml = Vue.compile(response.data.html)
 
                                 this.completed_step = this.step_numbers[response.data.jump_to_section] + 1;
@@ -400,7 +402,6 @@
                                     this.savePayment();
                                 }
 
-                                this.validateForm('payment-form');
                                 this.getOrderSummary();
                             })
                             .catch(error => {
@@ -422,6 +423,7 @@
                                 this.disable_button = false;
 
                                 this.showSummarySection = true;
+                                document.body.style.cursor = 'default';
 
                                 reviewHtml = Vue.compile(response.data.html)
                                 this.completed_step = this.step_numbers[response.data.jump_to_section] + 1;
@@ -526,20 +528,8 @@
                 staticRenderFns: shippingTemplateRenderFns,
 
                 mounted: function () {
-                    for (method in shippingMethods) {
-                        if (this.first_iteration) {
-
-                            for (rate in shippingMethods[method]['rates']) {
-                                this.selected_shipping_method = shippingMethods[method]['rates'][rate]['method'];
-
-                                this.first_iteration = false;
-
-                                this.methodSelected();
-                            }
-                        }
-                    }
-
                     this.templateRender = shippingHtml.render;
+
                     for (var i in shippingHtml.staticRenderFns) {
                         shippingTemplateRenderFns.push(shippingHtml.staticRenderFns[i]);
                     }
@@ -584,15 +574,8 @@
                 staticRenderFns: paymentTemplateRenderFns,
 
                 mounted: function () {
-                    for (method in paymentMethods) {
-                        if (this.first_iteration) {
-                            this.payment.method = paymentMethods[method]['method'];
-                            this.first_iteration = false;
-                            this.methodSelected();
-                        }
-                    }
-
                     this.templateRender = paymentHtml.render;
+
                     for (var i in paymentHtml.staticRenderFns) {
                         paymentTemplateRenderFns.push(paymentHtml.staticRenderFns[i]);
                     }
@@ -707,6 +690,7 @@
                     },
                 }
             });
+
         })()
     </script>
 

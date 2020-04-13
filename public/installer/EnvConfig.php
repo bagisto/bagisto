@@ -9,11 +9,20 @@ $data    = array();
 // validate the variables
 // if any of these variables don't exist, add an error to our $errors array
 
+    if (empty($_POST['app_name']))
+        $errors['app_name'] = 'App Name is required.';
+    
     if (empty($_POST['app_url']))
         $errors['app_url'] = 'App Url is required.';
 
-    if (empty($_POST['app_name']))
-        $errors['app_name'] = 'App Name is required.';
+    if (empty($_POST['app_currency']))
+        $errors['app_currency'] = 'The application currency is required.';
+    
+    if (empty($_POST['app_locale']))
+        $errors['app_locale'] = 'Please select a locale for the application.';
+
+    if (empty($_POST['app_timezone']))
+        $errors['app_timezone'] = 'The application timezone is required.';
 
     if (empty($_POST['host_name']))
         $errors['host_name'] = 'Host Name is required.';
@@ -51,7 +60,7 @@ $data    = array();
 //return a response
 // if there are any errors in our errors array, return a success boolean of false
 
-    if ( ! empty($errors)) {
+    if (! empty($errors)) {
 
         // if there are items in our errors array, return those errors
         $data['success'] = false;
@@ -101,6 +110,9 @@ $data    = array();
         $keyValueData['DB_PASSWORD'] = $_POST["user_password"];
         $keyValueData['APP_NAME'] = $_POST["app_name"];
         $keyValueData['APP_URL'] = $_POST["app_url"];
+        $keyValueData['APP_CURRENCY'] = $_POST["app_currency"];
+        $keyValueData['APP_LOCALE'] = $_POST["app_locale"];
+        $keyValueData['APP_TIMEZONE'] = $_POST["app_timezone"];
         $keyValueData['DB_CONNECTION'] = $_POST["database_connection"];
         $keyValueData['DB_PORT'] = $_POST["port_name"];
 

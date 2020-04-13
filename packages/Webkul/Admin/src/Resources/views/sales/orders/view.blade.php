@@ -12,13 +12,19 @@
 
             <div class="page-title">
                 <h1>
+                    {!! view_render_event('sales.order.title.before', ['order' => $order]) !!}
+
                     <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
 
                     {{ __('admin::app.sales.orders.view-title', ['order_id' => $order->increment_id]) }}
+
+                    {!! view_render_event('sales.order.title.after', ['order' => $order]) !!}
                 </h1>
             </div>
 
             <div class="page-action">
+                {!! view_render_event('sales.order.page_action.before', ['order' => $order]) !!}
+
                 @if ($order->canCancel())
                     <a href="{{ route('admin.sales.orders.cancel', $order->id) }}" class="btn btn-lg btn-primary" v-alert:message="'{{ __('admin::app.sales.orders.cancel-confirm-msg') }}'">
                         {{ __('admin::app.sales.orders.cancel-btn-title') }}
@@ -42,6 +48,8 @@
                         {{ __('admin::app.sales.orders.shipment-btn-title') }}
                     </a>
                 @endif
+
+                {!! view_render_event('sales.order.page_action.after', ['order' => $order]) !!}
             </div>
         </div>
 
@@ -72,6 +80,8 @@
                                             </span>
                                         </div>
 
+                                        {!! view_render_event('sales.order.created_at.after', ['order' => $order]) !!}
+
                                         <div class="row">
                                             <span class="title">
                                                 {{ __('admin::app.sales.orders.order-status') }}
@@ -82,6 +92,8 @@
                                             </span>
                                         </div>
 
+                                        {!! view_render_event('sales.order.status_label.after', ['order' => $order]) !!}
+
                                         <div class="row">
                                             <span class="title">
                                                 {{ __('admin::app.sales.orders.channel') }}
@@ -91,6 +103,8 @@
                                                 {{ $order->channel_name }}
                                             </span>
                                         </div>
+
+                                        {!! view_render_event('sales.order.channel_name.after', ['order' => $order]) !!}
                                     </div>
                                 </div>
 
@@ -110,6 +124,8 @@
                                             </span>
                                         </div>
 
+                                        {!! view_render_event('sales.order.customer_full_name.after', ['order' => $order]) !!}
+
                                         <div class="row">
                                             <span class="title">
                                                 {{ __('admin::app.sales.orders.email') }}
@@ -119,6 +135,8 @@
                                                 {{ $order->customer_email }}
                                             </span>
                                         </div>
+
+                                        {!! view_render_event('sales.order.customer_email.after', ['order' => $order]) !!}
 
                                         @if (! is_null($order->customer))
                                             <div class="row">
@@ -131,6 +149,8 @@
                                                 </span>
                                             </div>
                                         @endif
+
+                                        {!! view_render_event('sales.order.customer_group.after', ['order' => $order]) !!}
                                     </div>
                                 </div>
 
@@ -146,9 +166,9 @@
                                     </div>
 
                                     <div class="section-content">
-
                                         @include ('admin::sales.address', ['address' => $order->billing_address])
 
+                                        {!! view_render_event('sales.order.billing_address.after', ['order' => $order]) !!}
                                     </div>
                                 </div>
 
@@ -159,9 +179,9 @@
                                         </div>
 
                                         <div class="section-content">
-
                                             @include ('admin::sales.address', ['address' => $order->shipping_address])
 
+                                            {!! view_render_event('sales.order.shipping_address.after', ['order' => $order]) !!}
                                         </div>
                                     </div>
                                 @endif
@@ -197,6 +217,8 @@
                                                 {{ $order->order_currency_code }}
                                             </span>
                                         </div>
+
+                                        {!! view_render_event('sales.order.payment-method.after', ['order' => $order]) !!}
                                     </div>
                                 </div>
 
@@ -226,6 +248,8 @@
                                                     {{ core()->formatBasePrice($order->base_shipping_amount) }}
                                                 </span>
                                             </div>
+
+                                            {!! view_render_event('sales.order.shipping-method.after', ['order' => $order]) !!}
                                         </div>
                                     </div>
                                 @endif

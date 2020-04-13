@@ -107,6 +107,10 @@ class RefundController extends Controller
 
         $data = request()->all();
 
+        if (! $data['refund']['shipping']) {
+            $data['refund']['shipping'] = 0;
+        }
+
         $totals = $this->refundRepository->getOrderItemsRefundSummary($data['refund']['items'], $orderId);
 
         $maxRefundAmount = $totals['grand_total']['price'] - $order->refunds()->sum('base_adjustment_refund');

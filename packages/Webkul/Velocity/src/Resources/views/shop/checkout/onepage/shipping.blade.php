@@ -18,14 +18,14 @@
                                 <div>
                                     <label class="radio-container">
                                         <input
-                                            v-validate="'required'"
                                             type="radio"
-                                            id="{{ $rate->method }}"
+                                            v-validate="'required'"
                                             name="shipping_method"
-                                            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.shipping-method') }}&quot;"
+                                            id="{{ $rate->method }}"
                                             value="{{ $rate->method }}"
+                                            @change="methodSelected()"
                                             v-model="selected_shipping_method"
-                                            @change="methodSelected()" />
+                                            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.shipping-method') }}&quot;" />
 
                                         <span class="checkmark"></span>
                                     </label>
