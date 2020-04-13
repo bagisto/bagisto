@@ -146,9 +146,9 @@
                                     </div>
 
                                     <div class="section-content">
-
                                         @include ('admin::sales.address', ['address' => $order->billing_address])
 
+                                        {!! view_render_event('sales.order.billing-address.after', ['order' => $order]) !!}
                                     </div>
                                 </div>
 
@@ -159,9 +159,9 @@
                                         </div>
 
                                         <div class="section-content">
-
                                             @include ('admin::sales.address', ['address' => $order->shipping_address])
 
+                                            {!! view_render_event('sales.order.shipping-address.after', ['order' => $order]) !!}
                                         </div>
                                     </div>
                                 @endif
@@ -197,6 +197,8 @@
                                                 {{ $order->order_currency_code }}
                                             </span>
                                         </div>
+
+                                        {!! view_render_event('sales.order.payment-method.after', ['order' => $order]) !!}
                                     </div>
                                 </div>
 
@@ -226,6 +228,8 @@
                                                     {{ core()->formatBasePrice($order->base_shipping_amount) }}
                                                 </span>
                                             </div>
+
+                                            {!! view_render_event('sales.order.shipping-method.after', ['order' => $order]) !!}
                                         </div>
                                     </div>
                                 @endif
