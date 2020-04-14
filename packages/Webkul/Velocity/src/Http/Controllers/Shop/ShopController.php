@@ -235,16 +235,17 @@ class ShopController extends Controller
     public function getCategoryProducts($categoryId)
     {
         $products = $this->productRepository->getAll($categoryId);
+
         $productItems = $products->items();
+        $productsArray = $products->toArray();
 
         if ($productItems) {
-            $formattedProducts =[];
+            $formattedProducts = [];
 
             foreach ($productItems as $product) {
                 array_push($formattedProducts, $this->velocityHelper->formatProduct($product));
             }
 
-            $productsArray = $products->toArray();
             $productsArray['data'] = $formattedProducts;
         }
 
