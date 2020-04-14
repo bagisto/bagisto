@@ -303,7 +303,7 @@ class ProductController extends Controller
 
     /**
      * To be manually invoked when data is seeded into products
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function sync()
