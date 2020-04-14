@@ -196,7 +196,7 @@
 
                                     <a
                                         class="unset"
-                                        :href="`${$root.baseUrl}/${nestedSubCategory.slug}`">
+                                        :href="`${$root.baseUrl}/${subCategory.slug}/${nestedSubCategory.slug}`">
 
                                         <div class="category-logo">
                                             <img
