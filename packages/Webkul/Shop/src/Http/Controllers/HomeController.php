@@ -35,8 +35,14 @@ use Webkul\Core\Repositories\SliderRepository;
     public function index()
     {
         $currentChannel = core()->getCurrentChannel();
-        
-        $sliderData = $this->sliderRepository->findByField('channel_id', $currentChannel->id)->toArray();
+
+        $currentLocale = core()->getCurrentLocale();
+
+        $sliderData = $this->sliderRepository
+          ->where('channel_id', $currentChannel->id)
+          ->where('locale', $currentLocale->code)
+          ->get()
+          ->toArray();
 
         return view($this->_config['view'], compact('sliderData'));
     }
