@@ -12,6 +12,12 @@
 
 * #2329 [fixed] - Getting exception on frontend after updating meta data.
 
+* #2354 [fixed] - possible integrate this payment
+
+* #2543 [fixed] - Sliders Text should be translatable
+
+* #2558 [fixed] - Sliders Text should be translatable
+
 * #2619 [fixed] - Issue when category slug & product slug are same
 
 * #2684 [fixed] - API checkout/cart returns null for guest user
@@ -51,6 +57,8 @@
 * #2780 [fixed] - Sidebar layout issue.
 
 * #2781 [fixed] - Mobile menu is not showing correct sub-menu
+
+* #2784 [fixed] - One booking for many days slot time issue
 
 * #2785 [fixed] - missing address details in checkout page
 
@@ -112,9 +120,19 @@
 
 * #2849 [fixed] - Can not add my stylesheet to Velocity theme
 
+* #2850 [fixed] - admin crash on save configration
+
 * #2851 [fixed] - Fix date picker icon layout at dashboard
 
 * #2856 [fixed] - Issue with Sort by functionality, when open any category it by defaults show Newest First but after changing sort by when again select newest first it shows different product.
+
+* #2865 [fixed] - Save order taking so long time 30s
+
+* #2866 [fixed] - ayout issue when customer save addresses form
+
+* #2871 [fixed] - Refund throws "Undefined index: shipping" error
+
+* #2876 [fixed] - Place order is disable at checkout when select shipping address
 
 
 

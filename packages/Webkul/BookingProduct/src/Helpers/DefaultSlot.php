@@ -62,8 +62,10 @@ class DefaultSlot extends Booking
     {
         $slots = [];
 
+        $dayOfWeek = $requestedDate->dayOfWeek;
+
         foreach ($bookingProductSlot->slots as $timeDuration) {
-            if ($requestedDate->dayOfWeek != $timeDuration['from_day']) {
+            if ($dayOfWeek != $timeDuration['from_day']) {
                 continue;
             }
 
