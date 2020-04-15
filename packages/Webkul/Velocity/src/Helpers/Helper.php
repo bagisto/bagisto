@@ -117,14 +117,7 @@ class Helper extends Review
                     'product_id'    => $orderItem->product_id,
                     'brand'         => $products[$key]->brand,
                 ]);
-            } catch(\Exception $exception) {
-                $this->orderBrandsRepository->create([
-                    'brand'         => null,
-                    'order_item_id' => $orderItem->id,
-                    'order_id'      => $orderItem->order_id,
-                    'product_id'    => $orderItem->product_id,
-                ]);
-            }
+            } catch(\Exception $exception) {}
         }
     }
 
