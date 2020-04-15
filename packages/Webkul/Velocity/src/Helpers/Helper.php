@@ -110,12 +110,14 @@ class Helper extends Review
         foreach ($orderItems as $key => $orderItem) {
             $products[] = $orderItem->product;
 
-            $this->orderBrandsRepository->create([
-                'order_item_id' => $orderItem->id,
-                'order_id'      => $orderItem->order_id,
-                'product_id'    => $orderItem->product_id,
-                'brand'         => $products[$key]->brand,
-            ]);
+            try {
+                $this->orderBrandsRepository->create([
+                    'order_item_id' => $orderItem->id,
+                    'order_id'      => $orderItem->order_id,
+                    'product_id'    => $orderItem->product_id,
+                    'brand'         => $products[$key]->brand,
+                ]);
+            } catch(\Exception $exception) {}
         }
     }
 
