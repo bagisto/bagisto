@@ -409,6 +409,7 @@ return [
             'add-title' => 'Create Shipment',
             'save-btn-title' => 'Save Shipment',
             'qty-ordered' => 'Qty Ordered',
+            'qty-invoiced' => 'Qty Invoiced',
             'qty-to-ship' => 'Qty to Ship',
             'available-sources' => 'Available Sources',
             'source' => 'Source',

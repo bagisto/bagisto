@@ -409,6 +409,7 @@ return [
             'add-title' => 'Criar Entrega',
             'save-btn-title' => 'Salvar Entrega',
             'qty-ordered' => 'Qtd pedido',
+            'qty-invoiced' => 'Qty Invoiced',
             'qty-to-ship' => 'Qty para enviar',
             'available-sources' => 'Fontes Disponíveis',
             'source' => 'Fonte',
