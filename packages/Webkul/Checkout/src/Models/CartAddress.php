@@ -2,29 +2,29 @@
 
 namespace Webkul\Checkout\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Webkul\Checkout\Contracts\CartAddress as CartAddressContract;
+use Webkul\Core\Models\Address;
 
-class CartAddress extends Model implements CartAddressContract
+class CartAddress extends Address implements CartAddressContract
 {
-    protected $table = 'cart_address';
+    public const ADDRESS_TYPE_SHIPPING = 'cart_address_shipping';
+    public const ADDRESS_TYPE_BILLING = 'cart_address_billing';
 
-    protected $fillable = [
-        'first_name',
-        'last_name',
-        'email',
-        'company_name',
-        'vat_id',
-        'address1',
-        'city',
-        'state',
-        'postcode',
-        'country',
-        'phone',
-        'address_type',
-        'cart_id',
-        'customer_id',
-    ];
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::addGlobalScope('address_type', function (Builder $builder) {
+            $builder->whereIn('address_type', [
+                self::ADDRESS_TYPE_BILLING,
+                self::ADDRESS_TYPE_SHIPPING
+            ]);
+        });
+    }
 
     /**
      * Get the shipping rates for the cart address.
@@ -35,10 +35,10 @@ class CartAddress extends Model implements CartAddressContract
     }
 
     /**
-     * Get all of the attributes for the attribute groups.
+     * Get the cart record associated with the address.
      */
-    public function getNameAttribute()
+    public function cart()
     {
-        return $this->first_name . ' ' . $this->last_name;
+        return $this->belongsTo(Cart::class);
     }
 }

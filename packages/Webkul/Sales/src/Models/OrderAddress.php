@@ -2,47 +2,35 @@
 
 namespace Webkul\Sales\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Webkul\Customer\Models\Customer;
+use Webkul\Core\Models\Address;
 use Webkul\Sales\Contracts\OrderAddress as OrderAddressContract;
+use Illuminate\Database\Eloquent\Builder;
 
-class OrderAddress extends Model implements OrderAddressContract
+class OrderAddress extends Address implements OrderAddressContract
 {
-    protected $table = 'order_address';
-
-    protected $guarded = ['id', 'created_at', 'updated_at'];
-
-    protected $fillable = [
-        'first_name',
-        'last_name',
-        'email',
-        'company_name',
-        'vat_id',
-        'address1',
-        'address2',
-        'city',
-        'state',
-        'postcode',
-        'country',
-        'phone',
-        'address_type',
-        'cart_id',
-        'customer_id',
-    ];
+    public const ADDRESS_TYPE_SHIPPING = 'order_address_shipping';
+    public const ADDRESS_TYPE_BILLING = 'order_address_billing';
 
     /**
-     * Get of the customer fullname.
+     * The "booted" method of the model.
+     *
+     * @return void
      */
-    public function getNameAttribute()
+    protected static function booted()
     {
-        return $this->first_name . ' ' . $this->last_name;
+        static::addGlobalScope('address_type', function (Builder $builder) {
+            $builder->whereIn('address_type', [
+                self::ADDRESS_TYPE_BILLING,
+                self::ADDRESS_TYPE_SHIPPING
+            ]);
+        });
     }
 
     /**
-     * Get the customer record associated with the order.
+     * Get the order record associated with the address.
      */
-    public function customer()
+    public function order()
     {
-        return $this->belongsTo(Customer::class);
+        return $this->belongsTo(Order::class);
     }
 }

@@ -140,7 +140,7 @@ class Order extends Model implements OrderContract
      */
     public function billing_address()
     {
-        return $this->addresses()->where('address_type', 'billing');
+        return $this->addresses()->where('address_type', OrderAddress::ADDRESS_TYPE_BILLING);
     }
 
     /**
@@ -156,7 +156,7 @@ class Order extends Model implements OrderContract
      */
     public function shipping_address()
     {
-        return $this->addresses()->where('address_type', 'shipping');
+        return $this->addresses()->where('address_type', OrderAddress::ADDRESS_TYPE_SHIPPING);
     }
 
     /**
