@@ -409,6 +409,7 @@ return [
             'add-title' => 'ایجاد حمل و نقل',
             'save-btn-title' => 'ذخیره حمل و نقل',
             'qty-ordered' => 'سفارش داده شده',
+            'qty-invoiced' => 'Qty Invoiced',
             'qty-to-ship' => 'مقدار به کشتی',
             'available-sources' => 'منابع موجود',
             'source' => 'منابع',

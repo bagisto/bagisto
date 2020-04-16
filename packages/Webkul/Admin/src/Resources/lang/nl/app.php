@@ -409,6 +409,7 @@ return [
             'add-title' => 'Zending maken',
             'save-btn-title' => 'Zending opslaan',
             'qty-ordered' => 'Besteld aantal',
+            'qty-invoiced' => 'Qty Invoiced',
             'qty-to-ship' => 'Te verzenden',
             'available-sources' => 'Beschikbare bronnen',
             'source' => 'Bron',
