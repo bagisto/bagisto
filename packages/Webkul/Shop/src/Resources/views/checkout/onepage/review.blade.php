@@ -13,6 +13,9 @@
                 <div class="card-content">
                     <ul>
                         <li class="mb-10">
+                            {{ $billingAddress->company_name ?? '' }}
+                        </li>
+                        <li class="mb-10">
                             {{ $billingAddress->first_name }} {{ $billingAddress->last_name }}
                         </li>
                         <li class="mb-10">
@@ -40,6 +43,9 @@
 
                 <div class="card-content">
                     <ul>
+                        <li class="mb-10">
+                            {{ $shippingAddress->company_name ?? '' }}
+                        </li>
                         <li class="mb-10">
                             {{ $shippingAddress->first_name }} {{ $shippingAddress->last_name }}
                         </li>

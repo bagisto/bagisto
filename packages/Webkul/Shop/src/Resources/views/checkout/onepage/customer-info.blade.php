@@ -21,6 +21,10 @@
                             <b>@{{ allAddress.first_name }} @{{ allAddress.last_name }},</b>
                         </li>
 
+                        <li class="mb-5" v-if="addresses.company_name != ''">
+                            @{{ addresses.company_name }},
+                        </li>
+
                         <li class="mb-5">
                             @{{ addresses.address1 }},
                         </li>
