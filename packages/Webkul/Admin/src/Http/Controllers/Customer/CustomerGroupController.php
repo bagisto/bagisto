@@ -105,6 +105,8 @@ class CustomerGroupController extends Controller
             'name' => 'required',
         ]);
 
+        dd(request()->all());
+
         $this->customerGroupRepository->update(request()->all(), $id);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Customer Group']));
