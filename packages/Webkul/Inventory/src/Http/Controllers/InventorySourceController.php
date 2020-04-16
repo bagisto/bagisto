@@ -125,8 +125,6 @@ class InventorySourceController extends Controller
 
         $data = request()->all();
 
-        dd($data);
-
         $data['status'] = !isset($data['status']) ? 0 : 1;
 
         Event::dispatch('inventory.inventory_source.update.before', $id);
