@@ -86,7 +86,7 @@
 
                         <div class="control-group" :class="[errors.has('sku') ? 'has-error' : '']">
                             <label for="sku" class="required">{{ __('admin::app.catalog.products.sku') }}</label>
-                            <input type="text" v-validate="{ required: true, regex: /^[a-z0-9]+(?:-[a-z0-9]+)*$/ }" class="control" id="sku" name="sku" value="{{ request()->input('sku') ?: old('sku') }}" data-vv-as="&quot;{{ __('admin::app.catalog.products.sku') }}&quot;"/>
+                            <input type="text" v-validate="{ required: true, regex: /^[A-Z0-9]+(?:-[A-Z0-9]+)*$/ }" class="control" id="sku" name="sku" value="{{ request()->input('sku') ?: old('sku') }}" data-vv-as="&quot;{{ __('admin::app.catalog.products.sku') }}&quot;"/>
                             <span class="control-error" v-if="errors.has('sku')">@{{ errors.first('sku') }}</span>
                         </div>
 
@@ -166,6 +166,12 @@
             $('.actions .trash-icon').on('click', function(e) {
                 $(e.target).parents('tr').remove();
             })
+
+            $('#sku').on('input', function(evt) {
+                $(this).val(function(_, val) {
+                  return val.toUpperCase();
+                });
+              });
         });
     </script>
 @endpush
