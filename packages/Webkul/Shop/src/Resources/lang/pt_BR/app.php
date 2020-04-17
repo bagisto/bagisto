@@ -451,7 +451,10 @@ return [
             'cart-subtotal' => 'Subtotal do carrinho',
             'cart-remove-action' => 'Você realmente quer fazer isso ?',
             'partial-cart-update' => 'Only some of the product(s) were updated',
-            'link-missing' => ''
+            'link-missing' => '',
+            'event' => [
+                'expired' => 'This event has been expired.'
+            ]
         ],
 
         'onepage' => [

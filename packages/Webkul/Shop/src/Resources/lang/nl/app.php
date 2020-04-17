@@ -466,7 +466,10 @@ return [
             'cart-subtotal' => 'Subtotaal',
             'cart-remove-action' => 'Wil je dit echt doen?',
             'partial-cart-update' => 'Slechts enkele van de producten zijn bijgewerkt',
-            'link-missing' => ''
+            'link-missing' => '',
+            'event' => [
+                'expired' => 'This event has been expired.'
+            ]
         ],
 
         'onepage' => [
