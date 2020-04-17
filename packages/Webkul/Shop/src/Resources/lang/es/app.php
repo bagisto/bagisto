@@ -429,6 +429,9 @@ return [
             'cart-subtotal' => 'Total parcial',
             'cart-remove-action' => '¿Realmente quieres hacer esto?',
             'partial-cart-update' => 'Solo algunos de los productos se han actualizado',
+            'event' => [
+                'expired' => 'This event has been expired.'
+            ]
         ],
 
         'onepage' => [

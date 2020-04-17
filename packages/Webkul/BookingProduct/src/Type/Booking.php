@@ -12,6 +12,7 @@ use Webkul\Product\Helpers\ProductImage;
 use Webkul\BookingProduct\Repositories\BookingProductRepository;
 use Webkul\BookingProduct\Helpers\Booking as BookingHelper;
 use Webkul\Product\Type\Virtual;
+use Carbon\Carbon;
 
 class Booking extends Virtual
 {
@@ -168,6 +169,10 @@ class Booking extends Virtual
         $bookingProduct = $this->getBookingProduct($data['product_id']);
 
         if ($bookingProduct->type == 'event') {
+            if (Carbon::now() > $bookingProduct->available_from && Carbon::now() > $bookingProduct->available_to) {
+                return trans('shop::app.checkout.cart.event.expired');
+            } 
+
             $filtered = Arr::where($data['booking']['qty'], function ($qty, $key) {
                 return $qty != 0;
             });
