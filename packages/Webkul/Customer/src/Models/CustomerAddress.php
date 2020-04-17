@@ -11,13 +11,20 @@ class CustomerAddress extends Address implements CustomerAddressContract
     public const ADDRESS_TYPE = 'customer';
 
     /**
+     * @var array default values
+     */
+    protected $attributes = [
+        'address_type' => self::ADDRESS_TYPE,
+    ];
+
+    /**
      * The "booted" method of the model.
      *
      * @return void
      */
     protected static function booted()
     {
-        static::addGlobalScope('address_type', function (Builder $builder) {
+        static::addGlobalScope('address_type', static function (Builder $builder) {
             $builder->where('address_type', self::ADDRESS_TYPE);
         });
     }

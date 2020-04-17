@@ -34,7 +34,8 @@ class Invoice extends Model implements InvoiceContract
     /**
      * Get the invoice items record associated with the invoice.
      */
-    public function items() {
+    public function items()
+    {
         return $this->hasMany(InvoiceItemProxy::modelClass())->whereNull('parent_id');
     }
 
@@ -59,6 +60,7 @@ class Invoice extends Model implements InvoiceContract
      */
     public function address()
     {
-        return $this->belongsTo(OrderAddressProxy::modelClass(), 'order_address_id');
+        return $this->belongsTo(OrderAddressProxy::modelClass(), 'order_address_id')
+            ->where('address_type', OrderAddress::ADDRESS_TYPE_BILLING);
     }
 }

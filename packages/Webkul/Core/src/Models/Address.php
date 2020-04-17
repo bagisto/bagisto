@@ -5,10 +5,13 @@ namespace Webkul\Core\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Webkul\Customer\Models\Customer;
 
 abstract class Address extends Model
 {
+    protected $table = 'addresses';
+
     protected $guarded = [
         'id',
         'created_at',
@@ -16,6 +19,7 @@ abstract class Address extends Model
     ];
 
     protected $fillable = [
+        'address_type',
         'customer_id',
         'cart_id',
         'order_id',
@@ -32,12 +36,17 @@ abstract class Address extends Model
         'email',
         'phone',
         'default_address',
+        'additional',
+    ];
+
+    protected $casts = [
+        'additional' => 'array',
     ];
 
     /**
      * Get all of the attributes for the attribute groups.
      */
-    public function getNameAttribute()
+    public function getNameAttribute(): string
     {
         return $this->first_name . ' ' . $this->last_name;
     }
@@ -45,7 +54,7 @@ abstract class Address extends Model
     /**
      * Get the customer record associated with the address.
      */
-    public function customer()
+    public function customer(): BelongsTo
     {
         return $this->belongsTo(Customer::class);
     }

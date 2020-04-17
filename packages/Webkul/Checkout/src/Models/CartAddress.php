@@ -12,13 +12,20 @@ class CartAddress extends Address implements CartAddressContract
     public const ADDRESS_TYPE_BILLING = 'cart_address_billing';
 
     /**
+     * @var array default values
+     */
+    protected $attributes = [
+        'address_type' => self::ADDRESS_TYPE_BILLING,
+    ];
+
+    /**
      * The "booted" method of the model.
      *
      * @return void
      */
     protected static function booted()
     {
-        static::addGlobalScope('address_type', function (Builder $builder) {
+        static::addGlobalScope('address_type', static function (Builder $builder) {
             $builder->whereIn('address_type', [
                 self::ADDRESS_TYPE_BILLING,
                 self::ADDRESS_TYPE_SHIPPING

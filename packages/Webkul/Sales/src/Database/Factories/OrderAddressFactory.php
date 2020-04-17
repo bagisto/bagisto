@@ -22,7 +22,7 @@ $factory->define(OrderAddress::class, function (Faker $faker) {
         'city'         => $customerAddress->city,
         'postcode'     => $customerAddress->postcode,
         'phone'        => $customerAddress->phone,
-        'address_type' => 'billing',
+        'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
         'order_id'     => function () {
             return factory(Order::class)->create()->id;
         },
@@ -30,5 +30,5 @@ $factory->define(OrderAddress::class, function (Faker $faker) {
 });
 
 $factory->state(OrderAddress::class, 'shipping', [
-    'address_type' => 'shipping',
+    'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
 ]);

@@ -51,6 +51,7 @@ class Shipment extends Model implements ShipmentContract
      */
     public function address()
     {
-        return $this->belongsTo(OrderAddressProxy::modelClass(), 'order_address_id');
+        return $this->belongsTo(OrderAddressProxy::modelClass(), 'order_address_id')
+            ->where('address_type', OrderAddress::ADDRESS_TYPE_SHIPPING);
     }
 }

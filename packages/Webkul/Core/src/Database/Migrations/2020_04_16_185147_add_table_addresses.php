@@ -4,6 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Webkul\Checkout\Models\CartAddress;
+use Webkul\Checkout\Models\CartShippingRate;
+use Webkul\Sales\Models\Invoice;
+use Webkul\Sales\Models\OrderAddress;
+use Webkul\Sales\Models\Shipment;
 
 class AddTableAddresses extends Migration
 {
@@ -14,6 +19,8 @@ class AddTableAddresses extends Migration
      */
     public function up()
     {
+        DB::beginTransaction();
+
         Schema::create('addresses', function (Blueprint $table) {
             $table->increments('id');
             $table->string('address_type');
@@ -39,6 +46,8 @@ class AddTableAddresses extends Migration
                 ->default(false)
                 ->comment('only for customer_addresses');
 
+            $table->json('additional')->nullable();
+
             $table->timestamps();
 
             $table->foreign(['customer_id'])->references('id')->on('customers');
@@ -46,13 +55,17 @@ class AddTableAddresses extends Migration
             $table->foreign(['order_id'])->references('id')->on('orders');
         });
 
-        $this->insertCustomerAddresses();
-        $this->insertCartAddresses();
-        $this->insertOrderAddresses();
+        $this->migrateCustomerAddresses();
+        $this->migrateCartAddresses();
+        $this->migrateOrderAddresses();
+
+        $this->migrateForeignKeys();
 
         Schema::drop('customer_addresses');
         Schema::drop('cart_address');
         Schema::drop('order_address');
+
+        DB::commit();
     }
 
     /**
@@ -65,7 +78,7 @@ class AddTableAddresses extends Migration
         throw new Exception('you cannot revert this migration: data would be lost');
     }
 
-    private function insertCustomerAddresses(): void
+    private function migrateCustomerAddresses(): void
     {
         $dbPrefix = DB::getTablePrefix();
 
@@ -86,6 +99,7 @@ class AddTableAddresses extends Migration
                 email,
                 phone,
                 default_address,
+                additional,
                 created_at,
                 updated_at
             )
@@ -105,6 +119,7 @@ class AddTableAddresses extends Migration
                 null,
                 phone,
                 default_address,
+                JSON_INSERT('{}', '$.old_customer_address_id', id),
                 created_at,
                 updated_at
             FROM customer_addresses ca;
@@ -113,7 +128,7 @@ SQL;
         DB::unprepared($insertCustomerAddresses);
     }
 
-    private function insertCartAddresses(): void
+    private function migrateCartAddresses(): void
     {
         $dbPrefix = DB::getTablePrefix();
 
@@ -134,12 +149,12 @@ SQL;
                 country,
                 email,
                 phone,
-                default_address,
+                additional,
                 created_at,
                 updated_at
             )
             SELECT
-                (CASE ca.address_type='billing' THEN "cart_address_billing" ELSE "cart_address_shipping" END),
+                (CASE WHEN ca.address_type='billing' THEN "cart_address_billing" ELSE "cart_address_shipping" END),
                 customer_id,
                 cart_id,
                 first_name,
@@ -154,7 +169,7 @@ SQL;
                 country,
                 email,
                 phone,
-                default_address,
+                JSON_INSERT('{}', '$.old_cart_address_id', id),
                 created_at,
                 updated_at
             FROM cart_address ca;
@@ -163,7 +178,7 @@ SQL;
         DB::unprepared($insertCustomerAddresses);
     }
 
-    private function insertOrderAddresses(): void
+    private function migrateOrderAddresses(): void
     {
         $dbPrefix = DB::getTablePrefix();
 
@@ -184,17 +199,17 @@ SQL;
                 country,
                 email,
                 phone,
-                default_address,
+                additional,
                 created_at,
                 updated_at
             )
             SELECT
-                (CASE ca.address_type='billing' THEN "order_address_billing" ELSE "order_address_shipping" END),
+                (CASE WHEN oa.address_type='billing' THEN "order_address_billing" ELSE "order_address_shipping" END),
                 customer_id,
                 order_id,
                 first_name,
                 last_name,
-                (SELECT gender FROM customers c WHERE c.id=os.customer_id),
+                (SELECT gender FROM customers c WHERE c.id=oa.customer_id),
                 company_name,
                 address1,
                 address2,
@@ -204,12 +219,57 @@ SQL;
                 country,
                 email,
                 phone,
-                default_address,
+                JSON_INSERT('{}', '$.old_Order_address_id', id),
                 created_at,
                 updated_at
             FROM order_address oa;
 SQL;
 
         DB::unprepared($insertCustomerAddresses);
+    }
+
+    private function migrateForeignKeys(): void
+    {
+        Schema::table('cart_shipping_rates', static function (Blueprint $table) {
+            $table->dropForeign(['cart_address_id']);
+
+            CartAddress::query()
+                ->orderBy('id', 'asc') // for some reason each() needs an orderBy in before
+                ->each(static function ($row) {
+                    CartShippingRate::query()
+                        ->where('cart_address_id', $row->additional['old_cart_address_id'])
+                        ->update(['cart_address_id' => $row->id]);
+                });
+
+            $table->foreign(['cart_address_id'])->references('id')->on('addresses');
+        });
+
+        Schema::table('invoices', static function (Blueprint $table) {
+            $table->dropForeign(['order_address_id']);
+
+            OrderAddress::query()
+                ->orderBy('id', 'asc') // for some reason each() needs an orderBy in before
+                ->each(static function ($row) {
+                    Invoice::query()
+                        ->where('order_address_id', $row->additional['old_order_address_id'])
+                        ->update(['order_address_id' => $row->id]);
+                });
+
+            $table->foreign(['order_address_id'])->references('id')->on('addresses');
+        });
+
+        Schema::table('shipments', static function (Blueprint $table) {
+            $table->dropForeign(['order_address_id']);
+
+            OrderAddress::query()
+                ->orderBy('id', 'asc') // for some reason each() needs an orderBy in before
+                ->each(static function ($row) {
+                    Shipment::query()
+                        ->where('order_address_id', $row->additional['old_order_address_id'])
+                        ->update(['order_address_id' => $row->id]);
+                });
+
+            $table->foreign(['order_address_id'])->references('id')->on('addresses');
+        });
     }
 }
