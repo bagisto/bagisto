@@ -10,7 +10,7 @@ use Webkul\Sales\Models\OrderAddress;
 
 $factory->define(OrderAddress::class, function (Faker $faker) {
     $customer = factory(Customer::class)->create();
-    $customerAddress = factory(CustomerAddress::class)->create();
+    $customerAddress = factory(CustomerAddress::class)->make();
 
     return [
         'first_name'   => $customer->first_name,

@@ -4,10 +4,39 @@
 namespace Webkul\Core\Models;
 
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Webkul\Customer\Models\Customer;
 
+/**
+ * Class Address
+ * @package Webkul\Core\Models
+ *
+ * @property string       $address_type
+ * @property integer      $customer_id
+ * @property Customer     $customer
+ * @property string       $first_name
+ * @property string       $last_name
+ * @property string       $gender
+ * @property string       $company_name
+ * @property string       $address1
+ * @property string       $address2
+ * @property string       $postcode
+ * @property string       $city
+ * @property string       $state
+ * @property string       $country
+ * @property string       $email
+ * @property string       $phone
+ * @property boolean      $default_address
+ * @property array        $additional
+ *
+ * @property-read integer $id
+ * @property-read string  $name
+ * @property-read Carbon  $created_at
+ * @property-read Carbon  $updated_at
+ *
+ */
 abstract class Address extends Model
 {
     protected $table = 'addresses';
@@ -36,6 +65,7 @@ abstract class Address extends Model
         'email',
         'phone',
         'default_address',
+        'vat_id',
         'additional',
     ];
 

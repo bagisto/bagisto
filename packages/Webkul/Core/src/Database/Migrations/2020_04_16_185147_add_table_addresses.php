@@ -50,9 +50,9 @@ class AddTableAddresses extends Migration
 
             $table->timestamps();
 
-            $table->foreign(['customer_id'])->references('id')->on('customers');
-            $table->foreign(['cart_id'])->references('id')->on('cart');
-            $table->foreign(['order_id'])->references('id')->on('orders');
+            $table->foreign(['customer_id'])->references('id')->on('customers')->onDelete('cascade');
+            $table->foreign(['cart_id'])->references('id')->on('cart')->onDelete('cascade');
+            $table->foreign(['order_id'])->references('id')->on('orders')->onDelete('cascade');
         });
 
         $this->migrateCustomerAddresses();
@@ -241,7 +241,10 @@ SQL;
                         ->update(['cart_address_id' => $row->id]);
                 });
 
-            $table->foreign(['cart_address_id'])->references('id')->on('addresses');
+            $table->foreign(['cart_address_id'])
+                ->references('id')
+                ->on('addresses')
+                ->onDelete('cascade');
         });
 
         Schema::table('invoices', static function (Blueprint $table) {
@@ -255,7 +258,10 @@ SQL;
                         ->update(['order_address_id' => $row->id]);
                 });
 
-            $table->foreign(['order_address_id'])->references('id')->on('addresses');
+            $table->foreign(['order_address_id'])
+                ->references('id')
+                ->on('addresses')
+                ->onDelete('cascade');
         });
 
         Schema::table('shipments', static function (Blueprint $table) {
@@ -269,7 +275,10 @@ SQL;
                         ->update(['order_address_id' => $row->id]);
                 });
 
-            $table->foreign(['order_address_id'])->references('id')->on('addresses');
+            $table->foreign(['order_address_id'])
+                ->references('id')
+                ->on('addresses')
+                ->onDelete('cascade');
         });
     }
 }

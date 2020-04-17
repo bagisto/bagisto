@@ -22,10 +22,12 @@ class CustomerAddress extends Address implements CustomerAddressContract
      *
      * @return void
      */
-    protected static function booted()
+    protected static function boot()
     {
         static::addGlobalScope('address_type', static function (Builder $builder) {
             $builder->where('address_type', self::ADDRESS_TYPE);
         });
+
+        parent::boot();
     }
 }

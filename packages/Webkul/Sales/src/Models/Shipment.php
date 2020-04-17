@@ -47,7 +47,7 @@ class Shipment extends Model implements ShipmentContract
     }
 
     /**
-     * Get the addresses for the shipment.
+     * Get the address for the shipment.
      */
     public function address()
     {

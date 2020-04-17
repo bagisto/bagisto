@@ -56,7 +56,7 @@ class Invoice extends Model implements InvoiceContract
     }
 
     /**
-     * Get the addresses for the shipment.
+     * Get the address for the invoice.
      */
     public function address()
     {

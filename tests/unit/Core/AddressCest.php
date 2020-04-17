@@ -18,6 +18,25 @@ use Webkul\Shipping\Carriers\Free;
 
 class AddressCest
 {
+    public function testAddressFilters(UnitTester $I): void
+    {
+        $cartAddress = $I->have(CartAddress::class);
+        $customerAddress = $I->have(CustomerAddress::class);
+        $orderAddress = $I->have(OrderAddress::class);
+
+        $cartAddresses = CartAddress::all();
+        $I->assertCount(1, $cartAddresses);
+        $I->assertEquals($cartAddress->id, $cartAddresses[0]->id);
+
+        $customerAddresses = CustomerAddress::all();
+        $I->assertCount(1, $customerAddresses);
+        $I->assertEquals($customerAddress->id, $customerAddresses[0]->id);
+
+        $orderAddresses = OrderAddress::all();
+        $I->assertCount(1, $orderAddresses);
+        $I->assertEquals($orderAddress->id, $orderAddresses[0]->id);
+    }
+
     public function testCustomerAddressRelations(UnitTester $I): void
     {
         /** @var Customer $customer1 */
