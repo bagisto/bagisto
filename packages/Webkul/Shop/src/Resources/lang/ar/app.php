@@ -411,7 +411,7 @@ return [
         'your-customization' => 'التخصيص الخاص بك',
         'total-amount' => 'المبلغ الإجمالي',
         'none' => 'لا شيء',
-        'available' => 'Available'
+        'available' => 'Available',
     ],
 
     // 'reviews' => [
@@ -461,7 +461,10 @@ return [
             'cart-subtotal' => 'المجموع الفرعي للمشتريات',
             'cart-remove-action' => 'هل تريد حقا أن تسمح هذا ؟',
             'partial-cart-update' => 'تم تحديث بعض المنتجات.',
-            'link-missing' => ''
+            'link-missing' => '',
+            'event' => [
+                'expired' => 'This event has been expired.'
+            ]
         ],
 
         'onepage' => [

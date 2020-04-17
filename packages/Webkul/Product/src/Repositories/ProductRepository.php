@@ -313,7 +313,10 @@ class ProductRepository extends Repository
                             ->where('product_flat.channel', $channel)
                             ->where('product_flat.locale', $locale)
                             ->whereNotNull('product_flat.url_key')
-                            ->where('product_flat.name', 'like', '%' . urldecode($term) . '%')
+                            ->where(function($sub_query) use ($term) {  
+                                $sub_query->where('product_flat.name', 'like', '%' . urldecode($term) . '%')
+                                          ->orWhere('product_flat.short_description', 'like', '%' . urldecode($term) . '%');
+                                })
                             ->orderBy('product_id', 'desc');
         })->paginate(16);
 

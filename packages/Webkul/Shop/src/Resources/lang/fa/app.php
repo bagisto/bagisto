@@ -462,6 +462,9 @@ return [
             'cart-subtotal' => 'سبد فرعی',
             'cart-remove-action' => 'آیا واقعاً می خواهید این کار را انجام دهید؟',
             'partial-cart-update' => 'فقط برخی از محصولات (های) به روز شده اند',
+            'event' => [
+                'expired' => 'This event has been expired.'
+            ]
         ],
 
         'onepage' => [

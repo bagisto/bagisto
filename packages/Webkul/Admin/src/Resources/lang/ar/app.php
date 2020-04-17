@@ -409,6 +409,7 @@ return [
             'add-title' => 'أنشئ شحنة',
             'save-btn-title' => 'احفظ الشحنة',
             'qty-ordered' => 'أمر qty',
+            'qty-invoiced' => 'Qty Invoiced',
             'qty-to-ship' => 'من كيوتي إلى السفينة',
             'available-sources' => 'المصادر المتاحة',
             'source' => 'المصدر',
