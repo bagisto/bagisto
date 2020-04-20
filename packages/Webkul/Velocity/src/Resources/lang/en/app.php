@@ -284,6 +284,7 @@ return [
 
     'responsive'    => [
         'header' => [
+            'done'      => 'Done',
             'languages' => 'Languages',
             'greeting'  => 'Welcome, :customer !',
         ]
