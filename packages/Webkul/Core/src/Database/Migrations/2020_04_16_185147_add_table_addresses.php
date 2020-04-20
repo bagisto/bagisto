@@ -154,7 +154,7 @@ SQL;
                 updated_at
             )
             SELECT
-                (CASE WHEN ca.address_type='billing' THEN "cart_address_billing" ELSE "cart_address_shipping" END),
+                (CASE WHEN ca.address_type='billing' THEN "cart_billing" ELSE "cart_shipping" END),
                 customer_id,
                 cart_id,
                 first_name,
@@ -204,7 +204,7 @@ SQL;
                 updated_at
             )
             SELECT
-                (CASE WHEN oa.address_type='billing' THEN "order_address_billing" ELSE "order_address_shipping" END),
+                (CASE WHEN oa.address_type='billing' THEN "order_billing" ELSE "order_shipping" END),
                 customer_id,
                 order_id,
                 first_name,

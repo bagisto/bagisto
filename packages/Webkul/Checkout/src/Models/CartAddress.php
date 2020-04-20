@@ -16,8 +16,8 @@ use Webkul\Core\Models\Address;
  */
 class CartAddress extends Address implements CartAddressContract
 {
-    public const ADDRESS_TYPE_SHIPPING = 'cart_address_shipping';
-    public const ADDRESS_TYPE_BILLING = 'cart_address_billing';
+    public const ADDRESS_TYPE_SHIPPING = 'cart_shipping';
+    public const ADDRESS_TYPE_BILLING = 'cart_billing';
 
     /**
      * @var array default values

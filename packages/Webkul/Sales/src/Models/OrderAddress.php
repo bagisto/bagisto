@@ -17,8 +17,8 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class OrderAddress extends Address implements OrderAddressContract
 {
-    public const ADDRESS_TYPE_SHIPPING = 'order_address_shipping';
-    public const ADDRESS_TYPE_BILLING = 'order_address_billing';
+    public const ADDRESS_TYPE_SHIPPING = 'order_shipping';
+    public const ADDRESS_TYPE_BILLING = 'order_billing';
 
     /**
      * @var array default values
