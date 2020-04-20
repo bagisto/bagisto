@@ -217,7 +217,7 @@
                                             v-for="(thirdLevelCategory, index) in nestedSubCategory.children">
                                             <a
                                                 class="unset"
-                                                :href="`${$root.baseUrl}/${nestedSubCategory.slug}`">
+                                                :href="`${$root.baseUrl}/${subCategory.slug}/${nestedSubCategory.slug}/${thirdLevelCategory.slug}`">
 
                                                 <div class="category-logo">
                                                     <img
@@ -331,18 +331,9 @@
                         <i class="material-icons">search</i>
                     </a>
 
-                    @php
-                        $cart = cart()->getCart();
-
-                        $cartItemsCount = trans('shop::app.minicart.zero');
-                        if ($cart) {
-                            $cartItemsCount = $cart->items->count();
-                        }
-                    @endphp
-
                     <a href="{{ route('shop.checkout.cart.index') }}" class="unset">
                         <div class="badge-wrapper">
-                            <span class="badge">{{ $cartItemsCount }}</span>
+                            <span class="badge">@{{ cartItemsCount }}</span>
                         </div>
                         <i class="material-icons text-down-3">shopping_cart</i>
                     </a>
@@ -382,6 +373,16 @@
     </header>
 </script>
 
+@php
+    $cart = cart()->getCart();
+
+    $cartItemsCount = trans('shop::app.minicart.zero');
+
+    if ($cart) {
+        $cartItemsCount = $cart->items->count();
+    }
+@endphp
+
 <script type="text/javascript">
     (() => {
         Vue.component('content-header', {
@@ -401,6 +402,7 @@
                     'subCategory': null,
                     'isSearchbar': false,
                     'rootCategories': true,
+                    'cartItemsCount': '{{ $cartItemsCount }}',
                     'isCustomer': '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == "true",
                 }
             },
@@ -416,10 +418,15 @@
 
                 '$root.headerItemsCount': function () {
                     this.updateHeaderItemsCount();
+                },
+
+                '$root.miniCartKey': function () {
+                    this.getMiniCartDetails();
                 }
             },
 
             created: function () {
+                this.getMiniCartDetails();
                 this.updateHeaderItemsCount();
             },
 
@@ -491,7 +498,19 @@
                                 console.log(this.__('error.something_went_wrong'));
                             });
                     }
-                }
+                },
+
+                getMiniCartDetails: function () {
+                    this.$http.get(`${this.$root.baseUrl}/mini-cart`)
+                    .then(response => {
+                        if (response.data.status) {
+                            this.cartItemsCount = response.data.mini_cart.cart_items.length;
+                        }
+                    })
+                    .catch(exception => {
+                        console.log(this.__('error.something_went_wrong'));
+                    });
+                },
             },
         });
     })()
