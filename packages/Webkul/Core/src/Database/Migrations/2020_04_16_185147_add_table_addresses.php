@@ -19,53 +19,63 @@ class AddTableAddresses extends Migration
      */
     public function up()
     {
-        DB::beginTransaction();
+        try {
+            // transaction is important to prevent loosing data on failure
+            DB::beginTransaction();
 
-        Schema::create('addresses', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('address_type');
-            $table->unsignedInteger('customer_id')->nullable()->comment('null if guest checkout');
-            $table->unsignedInteger('cart_id')->nullable()->comment('only for cart_addresses');
-            $table->unsignedInteger('order_id')->nullable()->comment('only for order_addresses');
+            Schema::create('addresses', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('address_type');
+                $table->unsignedInteger('customer_id')->nullable()->comment('null if guest checkout');
+                $table->unsignedInteger('cart_id')->nullable()->comment('only for cart_addresses');
+                $table->unsignedInteger('order_id')->nullable()->comment('only for order_addresses');
 
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('gender')->nullable();
-            $table->string('company_name')->nullable();
-            $table->string('address1');
-            $table->string('address2')->nullable();
-            $table->string('postcode');
-            $table->string('city');
-            $table->string('state');
-            $table->string('country');
-            $table->string('email')->nullable();
-            $table->string('phone')->nullable();
+                $table->string('first_name');
+                $table->string('last_name');
+                $table->string('gender')->nullable();
+                $table->string('company_name')->nullable();
+                $table->string('address1');
+                $table->string('address2')->nullable();
+                $table->string('postcode');
+                $table->string('city');
+                $table->string('state');
+                $table->string('country');
+                $table->string('email')->nullable();
+                $table->string('phone')->nullable();
 
-            $table->string('vat_id')->nullable();
-            $table->boolean('default_address')
-                ->default(false)
-                ->comment('only for customer_addresses');
+                $table->string('vat_id')->nullable();
+                $table->boolean('default_address')
+                    ->default(false)
+                    ->comment('only for customer_addresses');
 
-            $table->json('additional')->nullable();
+                $table->json('additional')->nullable();
 
-            $table->timestamps();
+                $table->timestamps();
 
-            $table->foreign(['customer_id'])->references('id')->on('customers')->onDelete('cascade');
-            $table->foreign(['cart_id'])->references('id')->on('cart')->onDelete('cascade');
-            $table->foreign(['order_id'])->references('id')->on('orders')->onDelete('cascade');
-        });
+                $table->foreign(['customer_id'])->references('id')->on('customers')->onDelete('cascade');
+                $table->foreign(['cart_id'])->references('id')->on('cart')->onDelete('cascade');
+                $table->foreign(['order_id'])->references('id')->on('orders')->onDelete('cascade');
+            });
 
-        $this->migrateCustomerAddresses();
-        $this->migrateCartAddresses();
-        $this->migrateOrderAddresses();
+            Schema::disableForeignKeyConstraints();
 
-        $this->migrateForeignKeys();
+            $this->migrateCustomerAddresses();
+            $this->migrateCartAddresses();
+            $this->migrateOrderAddresses();
 
-        Schema::drop('customer_addresses');
-        Schema::drop('cart_address');
-        Schema::drop('order_address');
+            $this->migrateForeignKeys();
 
-        DB::commit();
+            Schema::drop('customer_addresses');
+            Schema::drop('cart_address');
+            Schema::drop('order_address');
+
+            Schema::enableForeignKeyConstraints();
+
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
     }
 
     /**
@@ -219,7 +229,7 @@ SQL;
                 country,
                 email,
                 phone,
-                JSON_INSERT('{}', '$.old_Order_address_id', id),
+                JSON_INSERT('{}', '$.old_order_address_id', id),
                 created_at,
                 updated_at
             FROM order_address oa;
