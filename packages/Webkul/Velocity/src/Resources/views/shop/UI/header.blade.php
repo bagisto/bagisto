@@ -64,7 +64,7 @@
                                 </li>
                             </ul>
 
-                            <ul type="none" class="category-wrapper">
+                            <ul type="none" class="category-wrapper" v-if="$root.sharedRootCategories.length > 0">
                                 <li v-for="(category, index) in $root.sharedRootCategories">
                                     <a class="unset" :href="`${$root.baseUrl}/${category.slug}`">
                                         <div class="category-logo">
