@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Webkul\Core\Console\Commands;
 
 use Illuminate\Console\Command;
 
