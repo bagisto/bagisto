@@ -2,34 +2,32 @@
 
 namespace Webkul\Customer\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Webkul\Core\Models\Address;
 use Webkul\Customer\Contracts\CustomerAddress as CustomerAddressContract;
 
-class CustomerAddress extends Model implements CustomerAddressContract
+class CustomerAddress extends Address implements CustomerAddressContract
 {
-    protected $table = 'customer_addresses';
+    public const ADDRESS_TYPE = 'customer';
 
-    protected $fillable = [
-        'customer_id',
-        'company_name',
-        'vat_id',
-        'address1',
-        'address2',
-        'country',
-        'state',
-        'city',
-        'postcode',
-        'phone',
-        'default_address',
-        'first_name',
-        'last_name',
+    /**
+     * @var array default values
+     */
+    protected $attributes = [
+        'address_type' => self::ADDRESS_TYPE,
     ];
 
     /**
-     * Get the customer address full name.
+     * The "booted" method of the model.
+     *
+     * @return void
      */
-    public function getNameAttribute()
+    protected static function boot()
     {
-        return $this->first_name . ' ' . $this->last_name;
+        static::addGlobalScope('address_type', static function (Builder $builder) {
+            $builder->where('address_type', self::ADDRESS_TYPE);
+        });
+
+        parent::boot();
     }
 }
