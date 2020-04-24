@@ -1,40 +1,40 @@
-<style>
-    .window {
-        max-height: 488px;
-        background: #222;
-        color: #fff;
-        overflow: hidden;
-        position: relative;
-        margin: 0 auto;
-        width: 100%;
+<html>
 
-        &:before {
-            content: ' ';
-            display: block;
-            height: 48px;
-            background: #C6C6C6;
-        }
-
-        &:after {
-            content: '. . .';
-            position: absolute;
-            left: 12px;
-            right: 0;
-            top: -3px;
-            font-family: "Times New Roman", Times, serif;
-            font-size: 96px;
+    <style>
+        .window {
+            background: #222;
             color: #fff;
-            line-height: 0;
-            letter-spacing: -12px;
-        }
-    }
+            overflow: hidden;
+            position: relative;
+            margin: 0 auto;
+            width: 100%;
 
-    .terminal {
-        margin: 20px;
-        font-family: monospace;
-        font-size: 16px;
-        color: #22da26;
-        max-height: 488px;
+            &:before {
+                content: ' ';
+                display: block;
+                height: 48px;
+                background: #C6C6C6;
+            }
+
+            &:after {
+                content: '. . .';
+                position: absolute;
+                left: 12px;
+                right: 0;
+                top: -3px;
+                font-family: "Times New Roman", Times, serif;
+                font-size: 96px;
+                color: #fff;
+                line-height: 0;
+                letter-spacing: -12px;
+            }
+        }
+
+        .terminal {
+            margin: 20px;
+            font-family: monospace;
+            font-size: 16px;
+            color: #22da26;
 
         .command {
             width: 0%;
@@ -47,76 +47,72 @@
                 color: #22da26;
             }
         }
-    }
-</style>
 
-<div class="container migration" id="migration">
-    <div class="initial-display">
-        <p>Database Configuration</p>
-    </div>
+    </style>
 
-    <div class="row justify-content-center">
-		<div class="col-md-6 col-md-offset-1">
-			<div class="card card-default">
-				<div class="card-body" id="migration-result">
+    <body>
+
+        <div class="container migration" id="migration">
+            <div class="initial-display">
+                <p>Migration & Seed</p>
+
+                <div class="content" id="migration-result">
                     <div class="cp-spinner cp-round" id="loader"></div>
-
-                    <div id="install-log">
-                        <label for="install-details">Installation log</label>
-                        <textarea rows="15" id="install-details" class="form-control"></textarea>
+                    <div class="window" id="migrate">
                     </div>
-                    
+                    <div class="window" id="key">
+                    </div>
+                    <div class="window" id="seed">
+                    </div>
+                    <div class="window" id="publish">
+                    </div>
+                    <div class="window" id="composer">
+                    </div>
+
                     <div class="instructions" style="padding-top: 40px;" id="instructions">
                         <div style="text-align: center;">
-                            <h4> Click the button below to run following :</h4>
+                            <span> Click the below button to run following : </span>
                         </div>
-                        
                         <div class="message">
-                            <span>Create the database tables </span>
+                            <span>Database Migration </span>
                         </div>
-                        
                         <div class="message">
-                            <span> Populate the database tables </span>
+                            <span> Database Seeder </span>
                         </div>
-                        
                         <div class="message">
                             <span> Publishing Vendor </span>
                         </div>
-                    </div>
-                   
-                    
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                        <p class="composer" id="comp">Checking Composer Dependency</p>
-                        <p class="composer" id="composer-migrate">Migrating Database</p>
-                        <p class="composer" id="composer-seed">Seeding Data</p>
+                        <div class="message">
+                            <span> Generating Application Key </span>
                         </div>
                     </div>
 
-                    <div class="clearfix">&nbsp;</div>
-
-                    <form method="POST" id="migration-form">
-                        <div style="text-align: center;">
-                            <button class="btn btn-primary" id="migrate-seed">Start installation</button>
-                            <button class="btn btn-primary" id="continue">Continue</button>
-                        </div>
-                        
-                        <div style="cursor: pointer; margin-top:10px">
-                            <span id="migration-back">back</span>
-                        </div>
-                    </form>
+                    <span class="composer" id="comp" style="left: calc(50% - 135px);">Checking Composer Dependency</span>
+                    <span class="composer"  id="composer-migrate" style="left: calc(50% - 85px);">Migrating Database</span>
+                    <span class="composer"  id="composer-seed" style="left: calc(50% - 55px);">Seeding Data</span>
                 </div>
+
+                <form method="POST" id="migration-form">
+                    <div>
+                        <button class="prepare-btn" id="migrate-seed">Migrate & Seed</button>
+                        <button class="prepare-btn" id="continue">Continue</button>
+                    </div>
+                    <div style="cursor: pointer; margin-top:10px">
+                        <span id="migration-back">back</span>
+                    </div>
+                </form>
+
             </div>
         </div>
-    </div>
-</div>
 
+    </body>
+
+</html>
 
 <script>
     $(document).ready(function() {
         $('#continue').hide();
         $('#loader').hide();
-        $('#install-log').hide();
 
         // process the form
         $('#migration-form').submit(function(event) {
@@ -181,16 +177,15 @@
                                      // using the done promise callback
                                     .done(function(data) {
                                         $('#composer-seed').hide();
-                                        $('#install-log').show();
 
                                         if (data['seeder']) {
-                                            $('#install-details').append(data['seeder']);
+                                            $('#seed').append('<div class="terminal">' + data['seeder'] + '</div>');
                                         }
                                         if (data['publish']) {
-                                            $('#install-details').append(data['publish']);
+                                            $('#publish').append('<div class="terminal">' + data['publish'] + '</div>');
                                         }
                                         if (data['key']) {
-                                            $('#install-details').append(data['key']);
+                                            $('#key').append('<div class="terminal">' + data['key'] + '</div>');
                                         }
 
                                         if ((data['key_results'] == 0) && (data['seeder_results'] == 0) && (data['publish_results'] == 0)) {
@@ -206,7 +201,7 @@
                                     $('#migrate-seed').hide();
                                     $('#migration-back').hide();
                                     if (data['migrate']) {
-                                        $('#install-details').append(data['migrate']);
+                                        $('#migrate').append('<div class="terminal">' + data['migrate'] + '</div>');
                                     }
                                 }
                             }
@@ -217,8 +212,7 @@
                         $('#composer-migrate').hide();
                         $('#migrate-seed').hide();
                         $('#migration-back').hide();
-                        $('#install-details').append(data['composer']);
-                        $('#install-log').show();
+                        $('#composer').append('<div class="terminal">' + data['composer'] +'</div>');
                     }
                 }
             });

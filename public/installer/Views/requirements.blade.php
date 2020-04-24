@@ -1,18 +1,18 @@
-<?php
-    $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-    $greenCheck = $actual_link .'/'. 'Images/green-check.svg';
-    $redCheck = $actual_link .'/'. 'Images/red-check.svg';
-?>
+<html>
 
-<div class="container requirement" id="requirement">
-    <div class="initial-display">
-        <p>Server Requirements</p>
-    </div>
+    <?php
+        $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
-    <div class="row justify-content-center">
-		<div class="col-md-6 col-md-offset-1">
-			<div class="card card-default">
-				<div class="card-body">
+        $greenCheck = $actual_link .'/'. 'Images/green-check.svg';
+        $redCheck = $actual_link .'/'. 'Images/red-check.svg';
+    ?>
+
+    <body>
+
+        <div class="container requirement" id="requirement">
+            <div class="initial-display">
+                <p>Server Requirements</p>
+                <div class="content">
                     <ul class="requirements_list">
                         <li>
                             <?php if($phpVersion['supported'] ? $src = $greenCheck : $src = $redCheck): ?>
@@ -53,14 +53,15 @@
                             <?php endif; ?>
                         </li>
                     </ul>
-
-                    <?php if(!isset($requirements['errors']) && ($phpVersion['supported'] && $composerInstall['composer_install'] == 0)): ?>
-                        <div class="text-center"><button type="button" class="btn btn-primary" id="requirement-check">Continue</button></div>
-                    <?php elseif(!($phpVersion['supported'] && $composerInstall['composer_install'] == 0)): ?>
-                        <div><button type="button" class="prepare-btn" id="requirements-refresh">Refresh</button></div>
-                    <?php endif; ?>
                 </div>
+
+                <?php if(!isset($requirements['errors']) && ($phpVersion['supported'] && $composerInstall['composer_install'] == 0)): ?>
+                    <div><button type="button" class="prepare-btn" id="requirement-check">Continue</button></div>
+                <?php elseif(!($phpVersion['supported'] && $composerInstall['composer_install'] == 0)): ?>
+                    <div><button type="button" class="prepare-btn" id="requirements-refresh">Refresh</button></div>
+                <?php endif; ?>
+
             </div>
         </div>
-    </div>
-</div>
+    </body>
+</html>
