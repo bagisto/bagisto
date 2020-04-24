@@ -523,7 +523,11 @@ class Configurable extends AbstractType
                 $product = $item->product;
             }
         } else {
-            $product = $item->child->product;
+            if ($item instanceof \Webkul\Customer\Contracts\CartItem) {
+                $product = $item->child->product;
+            } else {
+                $product = $item->product;
+            }
         }
 
         return $this->productImageHelper->getProductBaseImage($product);
