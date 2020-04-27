@@ -101,7 +101,9 @@
                     </span>
                 </div>
 
-                @include ('shop::products.list.layered-navigation')
+                @if (request()->route()->getName() != 'velocity.search.index')
+                    @include ('shop::products.list.layered-navigation')
+                @endif
             </div>
 
             <div class="col-4" @click="toggleLayeredNavigation({event: $event, actionType: 'open'})">
