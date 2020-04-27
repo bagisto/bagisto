@@ -116,11 +116,11 @@
                 include __DIR__ . '/Classes/Requirement.php';
 
                 // including php files
-                include __DIR__ . '/views/environment.blade.php';
-                include __DIR__ . '/views/migration.blade.php';
-                include __DIR__ . '/views/admin.blade.php';
-                include __DIR__ . '/views/email.blade.php';
-                include __DIR__ . '/views/finish.blade.php';
+                include __DIR__ . '/Views/environment.blade.php';
+                include __DIR__ . '/Views/migration.blade.php';
+                include __DIR__ . '/Views/admin.blade.php';
+                include __DIR__ . '/Views/email.blade.php';
+                include __DIR__ . '/Views/finish.blade.php';
 
                 // object creation
                 $requirement = new Requirement();
