@@ -16,7 +16,6 @@ class TaxCategory extends Model implements TaxCategoryContract
     protected $table = 'tax_categories';
 
     protected $fillable = [
-       'channel_id',
        'code',
        'name',
        'description',

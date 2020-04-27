@@ -68,7 +68,6 @@ class TaxCategoryController extends Controller
         $data = request()->input();
 
         $this->validate(request(), [
-            'channel_id'  => 'required|numeric',
             'code'        => 'required|string|unique:tax_categories,code',
             'name'        => 'required|string',
             'description' => 'required|string',
@@ -111,7 +110,6 @@ class TaxCategoryController extends Controller
     public function update($id)
     {
         $this->validate(request(), [
-            'channel_id'  => 'required|numeric',
             'code'        => 'required|string|unique:tax_categories,code,' . $id,
             'name'        => 'required|string',
             'description' => 'required|string',
