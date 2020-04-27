@@ -46,28 +46,28 @@
                         <td>{{ $customer->first_name }}</td>
                     </tr>
 
-                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.first_name.after') !!}
+                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.first_name.after', ['customer' => $customer]) !!}
 
                     <tr>
                         <td>{{ __('shop::app.customer.account.profile.lname') }}</td>
                         <td>{{ $customer->last_name }}</td>
                     </tr>
 
-                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.last_name.after') !!}
+                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.last_name.after', ['customer' => $customer]) !!}
 
                     <tr>
                         <td>{{ __('shop::app.customer.account.profile.gender') }}</td>
                         <td>{{ $customer->gender ?? '-' }}</td>
                     </tr>
 
-                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.gender.after') !!}
+                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.gender.after', ['customer' => $customer]) !!}
 
                     <tr>
                         <td>{{ __('shop::app.customer.account.profile.dob') }}</td>
                         <td>{{ $customer->date_of_birth ?? '-' }}</td>
                     </tr>
 
-                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.date_of_birth.after') !!}
+                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.date_of_birth.after', ['customer' => $customer]) !!}
 
                     <tr>
                         <td>{{ __('shop::app.customer.account.profile.email') }}</td>
