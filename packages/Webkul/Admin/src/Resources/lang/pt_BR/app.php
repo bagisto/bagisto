@@ -729,6 +729,7 @@ return [
             'target_currency' => 'Moeda Alvo',
             'rate' => 'Taxa',
             'exchange-class-not-found' => ':service de taxa de câmbio de serviço não encontrada',
+            'update-rates' => 'Atualizar Tarifas',
             'rate' => 'Taxa',
             'create-success' => 'Taxa de Câmbio criada com sucesso.',
             'update-success' => 'Taxa de Câmbio atualizada com sucesso.',

@@ -729,7 +729,7 @@ return [
             'target_currency' => 'Target Currency',
             'rate' => 'Rate',
             'exchange-class-not-found' => ':service exchange rate class not found',
-            'update-rates' => 'Update rates using :service',
+            'update-rates' => 'Update Rates',
             'create-success' => 'Exchange Rate created successfully.',
             'update-success' => 'Exchange Rate updated successfully.',
             'delete-success' => 'Exchange Rate deleted successfully.',

@@ -729,7 +729,7 @@ return [
             'target_currency' => 'Valuta doel',
             'rate' => 'Tarief',
             'exchange-class-not-found' => ':service wisselkoersklasse niet gevonden',
-            'update-rates' => 'Tarieven bijwerken met :service',
+            'update-rates' => 'Tarieven bijwerken',
             'create-success' => 'Wisselkoers succesvol aangemaakt.',
             'update-success' => 'Wisselkoers succesvol bijgewerkt.',
             'delete-success' => 'Wisselkoers succesvol verwijderd.',
