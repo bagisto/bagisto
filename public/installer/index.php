@@ -1,8 +1,9 @@
 <?php
     $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
-    $cssUrl = $actual_link .'/'. 'css/style.css';
+    $cssUrl = $actual_link .'/'. 'CSS/style.css';
     $logo =  $actual_link .'/'. 'Images/logo.svg';
+    $jsURL = $actual_link .'/'. 'js/script.js';
 ?>
 <!DOCTYPE html>
 <html>
@@ -143,6 +144,7 @@
             <a href="https://bagisto.com/" target="_blank">Bagisto</a> a community project by <a href="https://webkul.com/" target="_blank">Webkul</a>
         </div>
 
-        <script src="js/script.js"></script>
+        <script src="<?php echo $jsURL; ?>" ></script>
+        
     </body>
 </html>
