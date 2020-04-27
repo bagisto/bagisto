@@ -2,11 +2,16 @@
 
 namespace Webkul\Core\Eloquent;
 
+use Prettus\Repository\Contracts\CacheableInterface;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Container\Container as App;
+use Prettus\Repository\Traits\CacheableRepository;
 
-abstract class Repository extends BaseRepository {
+
+abstract class Repository extends BaseRepository implements CacheableInterface {
+
+    use CacheableRepository;
 
     /**
      * Find data by field and value
@@ -18,7 +23,7 @@ abstract class Repository extends BaseRepository {
      */
     public function findOneByField($field, $value = null, $columns = ['*'])
     {
-        $model = parent::findByField($field, $value, $columns = ['*']);
+        $model = $this->findByField($field, $value, $columns = ['*']);
 
         return $model->first();
     }
@@ -33,7 +38,7 @@ abstract class Repository extends BaseRepository {
      */
     public function findOneWhere(array $where, $columns = ['*'])
     {
-        $model = parent::findWhere($where, $columns);
+        $model = $this->findWhere($where, $columns);
 
         return $model->first();
     }
