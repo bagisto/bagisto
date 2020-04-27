@@ -67,7 +67,7 @@ class ExchangeRateController extends Controller
      */
     public function create()
     {
-        $currencies = $this->currencyRepository->with('CurrencyExchangeRate')->all();
+        $currencies = $this->currencyRepository->with('exchange_rate')->all();
 
         return view($this->_config['view'], compact('currencies'));
     }
@@ -137,38 +137,19 @@ class ExchangeRateController extends Controller
     /**
      * Update Rates Using Exchange Rates API
      *
-     * @param  string  $service
      * @return \Illuminate\Http\JsonResponse
      */
-    public function updateRates($service)
+    public function updateRates()
     {
-        $exchangeService = config('services.exchange-api')[$service];
+        try {
+            app(config('services.exchange-api.' . config('services.exchange-api.default') . '.class'))->updateRates();
 
-        if (is_array($exchangeService)) {
-            if (! array_key_exists('class', $exchangeService)) {
-                return response()->json([
-                    'success' => false,
-                    'rates'   => null,
-                    'error'   => trans('admin::app.exchange-rate.exchange-class-not-found', [
-                        'service' => $service,
-                    ]),
-                ], 400);
-            }
-
-            $exchangeServiceInstance = new $exchangeService['class'];
-            $updatedRates = $exchangeServiceInstance->fetchRates();
-
-            return response()->json([
-                'success' => true,
-                'rates'   => 'rates',
-            ], 200);
-        } else {
-            return response()->json([
-                'success' => false,
-                'rates'   => null,
-                'error'   => trans('admin::app.exchange-rate.invalid-config'),
-            ], 400);
+            session()->flash('success', trans('admin::app.settings.exchange_rates.update-success'));
+        } catch(\Exception $e) {
+            session()->flash('error', $e->getMessage());
         }
+
+        return redirect()->back();
     }
 
     /**
