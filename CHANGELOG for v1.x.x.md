@@ -12,6 +12,8 @@
 
 * #2752 [fixed] - Error when you create or update a new catalog under root
 
+* #2793 [fixed] - Stock Check Incorrect for Configurable Items
+
 * #2826 [fixed] - Not able to view cart icon
 
 * #2869 [fixed] - Updating "Velocity meta data" throws QueryException
@@ -38,13 +40,19 @@
 
 * #2902 [fixed] - unify address tables
 
+* #2908 [fixed] - A class is missing from the Velocity ProductRepositiry file
+
 * #2914 [fixed] - Filter not showing on mobile, also sorting not working on mobile
 
 * #2915 [fixed] - filters are missing on mobile view.
 
+* #2919 [fixed] - Header Content not working on other languages
+
 * #2925 [fixed] - exception for php version 7.4
 
 * #2940 [fixed] - creating categories have error
+
+* #2943 [fixed] - Scroll images is not working
 
 
 ## **v1.1.0 (24th of March 2020)** - *Release*
