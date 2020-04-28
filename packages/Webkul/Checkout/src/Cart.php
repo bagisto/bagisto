@@ -368,6 +368,8 @@ class Cart
                         continue;
                     }
 
+                    $found = true;
+
                     $cartItem->quantity = $newQuantity = $cartItem->quantity + $guestCartItem->quantity;
 
                     if (! $this->isItemHaveQuantity($cartItem)) {
@@ -387,8 +389,6 @@ class Cart
                     $guestCart->items->forget($key);
 
                     $this->cartItemRepository->delete($guestCartItem->id);
-
-                    $found = true;
                 }
 
                 if (! $found) {
