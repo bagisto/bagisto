@@ -38,6 +38,8 @@
 
 * #2897 [fixed] - Inventory status field should be passed through validation for boolean in its backend controller.
 
+* #2898 [fixed] - error when viewing a category and then wanting to change the language of the page in mobile view
+
 * #2899 [fixed] - showing the configured products as radio button
 
 * #2900 [fixed] - getting different variant of a configurable product in front end
