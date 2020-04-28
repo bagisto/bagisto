@@ -54,6 +54,8 @@
 
 * #2943 [fixed] - Scroll images is not working
 
+* #2945 [fixed] - API product detail return empty array
+
 * #2954 [fixed] - The merging cart function does not work when already added all items of product into customer cart
 
 
