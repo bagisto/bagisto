@@ -2,7 +2,13 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
-## **v1.1.0 (24th of March 2020)** - *Release*
+## **v1.1.2 (24th of March 2020)** - *Release*
+
+* [feature] - Now customer can cancel order.
+
+* [feature] - Auto and manual currency exchange rates update feature added.
+
+
 
 * #797 [fixed] - Add new module
 
@@ -50,9 +56,15 @@
 
 * #2925 [fixed] - exception for php version 7.4
 
+* #2938 [fixed] - Extend Model Class
+
+* #2939 [fixed] - get product description for API without html tags
+
 * #2940 [fixed] - creating categories have error
 
 * #2943 [fixed] - Scroll images is not working
+
+* #2945 [fixed] - API product detail return empty array
 
 * #2954 [fixed] - The merging cart function does not work when already added all items of product into customer cart
 
