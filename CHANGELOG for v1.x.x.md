@@ -6,6 +6,59 @@
 
 * #797 [fixed] - Add new module
 
+* #2453 [fixed] - Velocity theme is not loading on fresh instance
+
+* #2691 [fixed] - Shipping and Payment methods automatically selected on Checkout oage
+
+* #2752 [fixed] - Error when you create or update a new catalog under root
+
+* #2793 [fixed] - Stock Check Incorrect for Configurable Items
+
+* #2826 [fixed] - Not able to view cart icon
+
+* #2869 [fixed] - Updating "Velocity meta data" throws QueryException
+
+* #2871 [fixed] - Refund throws "Undefined index: shipping" error
+
+* #2875 [fixed] - Deleting brands that have been assigned to products causes checkout error
+
+* #2884 [fixed] - Undefined Index slot: when add to cart rental booking
+
+* #2890 [fixed] - cart rule condition (price in cart) always set to equal or less than when select greater than/less than
+
+* #2895 [fixed] - The type hint of view in this blade file is 'address' - there is no tag in any provider which loads view with this type hint.
+
+* #2896 [fixed] - There are two fields with having same value of name attribute one is hidden and other is of its desired type - is this redundant code or its solving any purpose?
+
+* #2897 [fixed] - Inventory status field should be passed through validation for boolean in its backend controller.
+
+* #2899 [fixed] - showing the configured products as radio button
+
+* #2900 [fixed] - getting different variant of a configurable product in front end
+
+* #2901 [fixed] - Error when creating a category
+
+* #2902 [fixed] - unify address tables
+
+* #2908 [fixed] - A class is missing from the Velocity ProductRepositiry file
+
+* #2914 [fixed] - Filter not showing on mobile, also sorting not working on mobile
+
+* #2915 [fixed] - filters are missing on mobile view.
+
+* #2919 [fixed] - Header Content not working on other languages
+
+* #2925 [fixed] - exception for php version 7.4
+
+* #2940 [fixed] - creating categories have error
+
+* #2943 [fixed] - Scroll images is not working
+
+
+## **v1.1.0 (24th of March 2020)** - *Release*
+
+* #797 [fixed] - Add new module
+
 * #826 [fixed] - Impossible to create the root directory "".
 
 * #2152 [fixed] - Product images are not showing
