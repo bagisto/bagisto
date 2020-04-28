@@ -372,6 +372,10 @@ class Cart
 
                     $cartItem->quantity = $newQuantity = $cartItem->quantity + $guestCartItem->quantity;
 
+                    if ($cartItem->quantity > $cartItem->product->getTypeInstance()->totalQuantity()) {
+                        $cartItem->quantity = $newQuantity = $cartItem->product->getTypeInstance()->totalQuantity();
+                    }
+
                     if (! $this->isItemHaveQuantity($cartItem)) {
                         $this->cartItemRepository->delete($guestCartItem->id);
 
