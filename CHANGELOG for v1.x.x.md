@@ -54,6 +54,8 @@
 
 * #2943 [fixed] - Scroll images is not working
 
+* #2954 [fixed] - The merging cart function does not work when already added all items of product into customer cart
+
 
 ## **v1.1.0 (24th of March 2020)** - *Release*
 

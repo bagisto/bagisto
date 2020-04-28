@@ -368,7 +368,13 @@ class Cart
                         continue;
                     }
 
+                    $found = true;
+
                     $cartItem->quantity = $newQuantity = $cartItem->quantity + $guestCartItem->quantity;
+
+                    if ($cartItem->quantity > $cartItem->product->getTypeInstance()->totalQuantity()) {
+                        $cartItem->quantity = $newQuantity = $cartItem->product->getTypeInstance()->totalQuantity();
+                    }
 
                     if (! $this->isItemHaveQuantity($cartItem)) {
                         $this->cartItemRepository->delete($guestCartItem->id);
@@ -387,8 +393,6 @@ class Cart
                     $guestCart->items->forget($key);
 
                     $this->cartItemRepository->delete($guestCartItem->id);
-
-                    $found = true;
                 }
 
                 if (! $found) {
