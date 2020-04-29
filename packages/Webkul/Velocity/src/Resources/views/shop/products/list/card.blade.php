@@ -36,7 +36,9 @@
                     title="{{ $product->name }}"
                     href="{{ route('shop.productOrCategory.index', $product->url_key) }}">
 
-                    <img src="{{ $productBaseImage['medium_image_url'] }}" />
+                    <img
+                        src="{{ $productBaseImage['medium_image_url'] }}"
+                        :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
                 </a>
             </div>
 
@@ -83,10 +85,11 @@
                 <img
 					loading="lazy"
                     class="card-img-top"
-                    src="{{ $productBaseImage['medium_image_url'] }}"
-                    alt="{{ $product->name }}">
+                    alt="{{ $product->name }}"
+                    src="{{ $productBaseImage['large_image_url'] }}"
+                    :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
 
-                 {{-- <quick-view-btn details="{{ $product }}"></quick-view-btn> --}}
+                    {{-- <product-quick-view-btn :quick-view-details="product"></product-quick-view-btn> --}}
             </a>
 
             <div class="card-body">
@@ -122,6 +125,8 @@
                         'showCompare'       => true,
                         'product'           => $product,
                         'btnText'           => $btnText ?? null,
+                        'moveToCart'        => $moveToCart ?? null,
+                        'reloadPage'        => $reloadPage ?? null,
                         'addToCartForm'     => $addToCartForm ?? false,
                         'addToCartBtnClass' => $addToCartBtnClass ?? '',
                     ])

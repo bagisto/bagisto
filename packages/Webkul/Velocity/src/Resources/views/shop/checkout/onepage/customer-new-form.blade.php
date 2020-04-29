@@ -272,11 +272,6 @@
             </span>
         </div>
 
-        {{--  for customer login checkout   --}}
-        @if (! $isCustomer)
-            @include('shop::checkout.onepage.customer-checkout')
-        @endif
-
         <div :class="`col-12 form-field ${errors.has('address-form.billing[first_name]') ? 'has-error' : ''}`">
             <label for="billing[first_name]" class="mandatory">
                 {{ __('shop::app.checkout.onepage.first-name') }}
@@ -337,6 +332,11 @@
                 @{{ errors.first('address-form.billing[email]') }}
             </span>
         </div>
+
+        {{--  for customer login checkout   --}}
+        @if (! $isCustomer)
+            @include('shop::checkout.onepage.customer-checkout')
+        @endif
 
         <div :class="`col-12 form-field ${errors.has('address-form.billing[address1][]') ? 'has-error' : ''}`" style="margin-bottom: 0;">
             <label for="billing_address_0" class="mandatory">

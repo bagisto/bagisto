@@ -507,7 +507,7 @@ Route::group(['middleware' => ['web']], function () {
                 'view' => 'admin::settings.exchange_rates.edit'
             ])->name('admin.exchange_rates.edit');
 
-            Route::get('/exchange_rates/update-rates/{service}', 'Webkul\Core\Http\Controllers\ExchangeRateController@updateRates')->name('admin.exchange_rates.update-rates');
+            Route::get('/exchange_rates/update-rates', 'Webkul\Core\Http\Controllers\ExchangeRateController@updateRates')->name('admin.exchange_rates.update_rates');
 
             Route::put('/exchange_rates/edit/{id}', 'Webkul\Core\Http\Controllers\ExchangeRateController@update')->defaults('_config', [
                 'redirect' => 'admin.exchange_rates.index'

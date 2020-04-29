@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Customer;
 
+use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
@@ -111,7 +112,11 @@ class CustomerController extends Controller
 
         $data['is_verified'] = 1;
 
+        Event::dispatch('customer.registration.before');
+
         $customer = $this->customerRepository->create($data);
+
+        Event::dispatch('customer.registration.after', $customer);
 
         try {
             $configKey = 'emails.general.notifications.emails.general.notifications.customer';
@@ -164,7 +169,11 @@ class CustomerController extends Controller
 
         $data['status'] = ! isset($data['status']) ? 0 : 1;
 
-        $this->customerRepository->update($data, $id);
+        Event::dispatch('customer.update.before');
+
+        $customer = $this->customerRepository->update($data, $id);
+
+        Event::dispatch('customer.update.after', $customer);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Customer']));
 

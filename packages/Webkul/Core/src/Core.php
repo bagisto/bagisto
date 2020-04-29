@@ -64,6 +64,9 @@ class Core
      */
     protected $coreConfigRepository;
 
+    /** @var Channel */
+    private static $channel;
+
     /**
      * Create a new instance.
      *
@@ -125,23 +128,31 @@ class Core
      */
     public function getCurrentChannel()
     {
-        static $channel;
-
-        if ($channel) {
-            return $channel;
+        if (self::$channel) {
+            return self::$channel;
         }
 
-        $channel = $this->channelRepository->findWhereIn('hostname', [
+        self::$channel = $this->channelRepository->findWhereIn('hostname', [
             request()->getHttpHost(),
             'http://' . request()->getHttpHost(),
             'https://' . request()->getHttpHost(),
         ])->first();
 
-        if (! $channel) {
-            $channel = $this->channelRepository->first();
+        if (! self::$channel) {
+            self::$channel = $this->channelRepository->first();
         }
 
-        return $channel;
+        return self::$channel;
+    }
+
+    /**
+     * Set the current channel
+     *
+     * @param Channel $channel
+     */
+    public function setCurrentChannel(Channel $channel): void
+    {
+        self::$channel = $channel;
     }
 
     /**
@@ -471,40 +482,20 @@ class Core
         return $formatter->getSymbol(\NumberFormatter::CURRENCY_SYMBOL);
     }
 
-     /**
-     * Format and convert price with currency symbol
-     *
-     * @param  float  $price
-     * @param  string  $currencyCode
-     * @return string
-     */
+    /**
+    * Format and convert price with currency symbol
+    *
+    *  @param float $price
+    *  @return string
+    */
     public function formatPrice($price, $currencyCode)
     {
-        $code = $this->getCurrentCurrency()->code;
-
-        if (is_null($price)) {
+        if (is_null($price))
             $price = 0;
-        } else {
-            if ($code != $currencyCode) {
-                $price = $this->convertPrice($price, $code, $currencyCode);
-            }
-        }
 
-        $formater = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
+        $formatter = new \NumberFormatter( app()->getLocale(), \NumberFormatter::CURRENCY );
 
-        $symbol = $this->getCurrentCurrency()->symbol;
-
-        if ($symbol) {
-            if ($this->currencySymbol($currencyCode) == $symbol) {
-                return $formater->formatCurrency($price, $currencyCode);
-            } else {
-                $formater->setSymbol(\NumberFormatter::CURRENCY_SYMBOL, $symbol);
-
-                return $formater->format($price);  // $this->convertPrice($price, $code)
-            }
-        } else {
-            return $formater->formatCurrency($price, $currencyCode);
-        }
+        return $formatter->formatCurrency($price, $currencyCode);
     }
 
     /**
@@ -704,7 +695,7 @@ class Core
             $fields = explode(".", $field);
 
             array_shift($fields);
-            
+
             $field = implode(".", $fields);
 
             return Config::get($field);
@@ -852,9 +843,9 @@ class Core
     }
 
     /**
-     * 
+     *
      * @param  string  $date
-     * @param  int  $day 
+     * @param  int  $day
      * @return string
      */
     public function xWeekRange($date, $day)
@@ -993,7 +984,7 @@ class Core
     protected function arrayMerge(array &$array1, array &$array2)
     {
         $merged = $array1;
-        
+
         foreach ($array2 as $key => &$value) {
             if (is_array($value) && isset($merged[$key]) && is_array($merged[$key])) {
                 $merged[$key] = $this->arrayMerge($merged[$key], $value);
@@ -1039,7 +1030,7 @@ class Core
 
     /**
      * Returns a string as selector part for identifying elements in views
-     * 
+     *
      * @param  float  $taxRate
      * @return string
      */

@@ -120,33 +120,49 @@ class ConfigurationController extends Controller
         $saveImage = [];
 
         $saveData = $advertisement;
-        
-        foreach ($data as $imageId => $image) {
-            $file = 'images.' . $index . '.' . $imageId;
-            $dir = 'velocity/images';
 
-            if (Str::contains($imageId, 'image_')) {
-                if (request()->hasFile($file) && $image) {
-                    $filter_index = substr($imageId, 6, 1);
-                    if ( isset($data[$filter_index]) ) {
-                        $size = array_key_last($saveData[$index]);
-                        
-                        $saveImage[$size + 1] = request()->file($file)->store($dir);
-                    } else {
-                        $saveImage[substr($imageId, 6, 1)] = request()->file($file)->store($dir);
+        foreach ($data as $imageId => $image) {
+            if ($image != "") {
+                $file = 'images.' . $index . '.' . $imageId;
+                $dir = 'velocity/images';
+    
+                if (Str::contains($imageId, 'image_')) {
+                    if (request()->hasFile($file) && $image) {
+                        $filter_index = substr($imageId, 6, 1);
+                        if ( isset($data[$filter_index]) ) {
+                            $size = array_key_last($saveData[$index]);
+                            
+                            $saveImage[$size + 1] = request()->file($file)->store($dir);
+                        } else {
+                            $saveImage[substr($imageId, 6, 1)] = request()->file($file)->store($dir);
+                        }
+                    }
+                } else {
+                    if ( isset($advertisement[$index][$imageId]) && $advertisement[$index][$imageId] && !request()->hasFile($file)) {
+                        $saveImage[$imageId] = $advertisement[$index][$imageId];
+    
+                        unset($advertisement[$index][$imageId]);
+                    }
+    
+                    if (request()->hasFile($file) && isset($advertisement[$index][$imageId])) {
+                        Storage::delete($advertisement[$index][$imageId]);
+    
+                        $saveImage[$imageId] = request()->file($file)->store($dir);
                     }
                 }
             } else {
-                if ( isset($advertisement[$index][$imageId]) && $advertisement[$index][$imageId] && !request()->hasFile($file)) {
-                    $saveImage[$imageId] = $advertisement[$index][$imageId];
+                if ($saveData) {
+                    $subIndex = substr($imageId, -1);
 
-                    unset($advertisement[$index][$imageId]);
-                }
+                    if (isset($advertisement[$index][$subIndex])) {
+                        $saveImage[$subIndex] = $advertisement[$index][$subIndex];
 
-                if (request()->hasFile($file) && isset($advertisement[$index][$imageId])) {
-                    Storage::delete($advertisement[$index][$imageId]);
-
-                    $saveImage[$imageId] = request()->file($file)->store($dir);
+                        if (sizeof($advertisement[$index]) == 1) {
+                            unset($advertisement[$index]);
+                        } else {
+                            unset($advertisement[$index][$subIndex]);
+                        }
+                    }
                 }
             }
         }

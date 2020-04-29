@@ -71,7 +71,7 @@
 <script type="text/x-template" id="slot-item-template">
     <tr>
         <td>
-            <div class="control-group" :class="[errors.has(controlName + '[from]') ? 'has-error' : '']">
+            <div class="control-group date" :class="[errors.has(controlName + '[from]') ? 'has-error' : '']">
                 <time-component>
                     <input type="text" v-validate="'required'" :name="controlName + '[from]'" v-model="slotItem.from" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.from') }}&quot;">
                 </time-component>
@@ -83,7 +83,7 @@
         </td>
 
         <td>
-            <div class="control-group" :class="[errors.has(controlName + '[to]') ? 'has-error' : '']">
+            <div class="control-group date" :class="[errors.has(controlName + '[to]') ? 'has-error' : '']">
                 <time-component>
                     <input type="text" v-validate="'required'" :name="controlName + '[to]'" v-model="slotItem.to" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.to') }}&quot;">
                 </time-component>

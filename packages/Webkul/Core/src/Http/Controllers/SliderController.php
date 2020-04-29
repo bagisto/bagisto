@@ -57,7 +57,9 @@ class SliderController extends Controller
     {
         $channels = core()->getAllChannels();
 
-        return view($this->_config['view']);
+        $locale = request()->get('locale') ?: core()->getCurrentLocale();
+        
+        return view($this->_config['view'])->with("locale", $locale);
     }
 
     /**
