@@ -11,14 +11,13 @@ window.jQuery = window.$ = require("jquery");
 window.BootstrapSass = require("bootstrap-sass");
 
 Vue.use(VueToast);
-Vue.use(VeeValidate);
 Vue.use(VueCarousel);
 Vue.use(BootstrapSass);
 Vue.prototype.$http = axios;
 
 Vue.use(VeeValidate, {
     dictionary: {
-        ar: { messages: messagesAr }
+        ar: messagesAr
     }
 });
 
