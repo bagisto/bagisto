@@ -25,6 +25,14 @@
                     {{ __('shop::app.customer.account.order.view.page-tile', ['order_id' => $order->increment_id]) }}
                 </span>
                 <span></span>
+
+                @if ($order->canCancel())
+                    <span class="account-action">
+                        <a href="{{ route('customer.orders.cancel', $order->id) }}" class="theme-btn light unset pull-right" v-alert:message="'{{ __('admin::app.sales.orders.cancel-confirm-msg') }}'" style="float: right">
+                            {{ __('shop::app.customer.account.order.view.cancel-btn-title') }}
+                        </a>
+                    </span>
+                @endif
             </div>
 
             {!! view_render_event('bagisto.shop.customers.account.orders.view.before', ['order' => $order]) !!}
