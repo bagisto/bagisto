@@ -27,11 +27,11 @@ $data    = array();
     if (empty($_POST['host_name']))
         $errors['host_name'] = 'Host Name is required.';
 
-    if (empty($_POST['database_name']))
-        $errors['database_name'] = 'Database Name is required.';
+    // if (empty($_POST['database_name']))
+    //     $errors['database_name'] = 'Database Name is required.';
 
-    if (empty($_POST['user_name']))
-        $errors['user_name'] = 'User Name is required.';
+    // if (empty($_POST['user_name']))
+    //     $errors['user_name'] = 'User Name is required.';
 
     if (empty($_POST['port_name']))
         $errors['port_name'] = 'Port Name is required.';
