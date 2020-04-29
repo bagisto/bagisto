@@ -489,9 +489,9 @@
                                 </div>
 
                                 <div class="box-content">
-
                                     @include ('admin::sales.address', ['address' => $order->billing_address])
 
+                                    {!! view_render_event('bagisto.shop.customers.account.orders.view.billing-address.after', ['order' => $order]) !!}
                                 </div>
                             </div>
 
@@ -502,9 +502,9 @@
                                     </div>
 
                                     <div class="box-content">
-
                                         @include ('admin::sales.address', ['address' => $order->shipping_address])
 
+                                        {!! view_render_event('bagisto.shop.customers.account.orders.view.shipping-address.after', ['order' => $order]) !!}
                                     </div>
                                 </div>
 
@@ -514,9 +514,9 @@
                                     </div>
 
                                     <div class="box-content">
-
                                         {{ $order->shipping_title }}
 
+                                        {!! view_render_event('bagisto.shop.customers.account.orders.view.shipping-method.after', ['order' => $order]) !!}
                                     </div>
                                 </div>
                             @endif
@@ -528,6 +528,8 @@
 
                                 <div class="box-content">
                                     {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
+
+                                    {!! view_render_event('bagisto.shop.customers.account.orders.view.payment-method.after', ['order' => $order]) !!}
                                 </div>
                             </div>
                         </div>

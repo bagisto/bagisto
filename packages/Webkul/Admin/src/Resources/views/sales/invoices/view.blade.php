@@ -12,16 +12,24 @@
         <div class="page-header">
             <div class="page-title">
                 <h1>
+                    {!! view_render_event('sales.invoice.title.before', ['order' => $order]) !!}
+
                     <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
 
                     {{ __('admin::app.sales.invoices.view-title', ['invoice_id' => $invoice->id]) }}
+
+                    {!! view_render_event('sales.invoice.title.after', ['order' => $order]) !!}
                 </h1>
             </div>
 
             <div class="page-action">
+                {!! view_render_event('sales.invoice.page_action.before', ['order' => $order]) !!}
+
                 <a href="{{ route('admin.sales.invoices.print', $invoice->id) }}" class="btn btn-lg btn-primary">
                     {{ __('admin::app.sales.invoices.print') }}
                 </a>
+
+                {!! view_render_event('sales.invoice.page_action.after', ['order' => $order]) !!}
             </div>
         </div>
 
@@ -47,6 +55,8 @@
                                     </span>
                                 </div>
 
+                                {!! view_render_event('sales.invoice.increment_id.after', ['order' => $order]) !!}
+
                                 <div class="row">
                                     <span class="title">
                                         {{ __('admin::app.sales.orders.order-date') }}
@@ -56,6 +66,8 @@
                                         {{ $order->created_at }}
                                     </span>
                                 </div>
+
+                                {!! view_render_event('sales.invoice.created_at.after', ['order' => $order]) !!}
 
                                 <div class="row">
                                     <span class="title">
@@ -67,6 +79,8 @@
                                     </span>
                                 </div>
 
+                                {!! view_render_event('sales.invoice.status_label.after', ['order' => $order]) !!}
+
                                 <div class="row">
                                     <span class="title">
                                         {{ __('admin::app.sales.orders.channel') }}
@@ -76,6 +90,8 @@
                                         {{ $order->channel_name }}
                                     </span>
                                 </div>
+
+                                {!! view_render_event('sales.invoice.channel_name.after', ['order' => $order]) !!}
                             </div>
                         </div>
 
@@ -95,6 +111,8 @@
                                     </span>
                                 </div>
 
+                                {!! view_render_event('sales.invoice.customer_name.after', ['order' => $order]) !!}
+
                                 <div class="row">
                                     <span class="title">
                                         {{ __('admin::app.sales.orders.email') }}
@@ -104,6 +122,8 @@
                                         {{ $invoice->address->email }}
                                     </span>
                                 </div>
+
+                                {!! view_render_event('sales.invoice.customer_email.after', ['order' => $order]) !!}
                             </div>
                         </div>
 
@@ -119,9 +139,9 @@
                             </div>
 
                             <div class="section-content">
-
                                 @include ('admin::sales.address', ['address' => $order->billing_address])
 
+                                {!! view_render_event('sales.invoice.billing_address.after', ['order' => $order]) !!}
                             </div>
                         </div>
 
@@ -132,9 +152,9 @@
                                 </div>
 
                                 <div class="section-content">
-
                                     @include ('admin::sales.address', ['address' => $order->shipping_address])
 
+                                    {!! view_render_event('sales.invoice.shipping_address.after', ['order' => $order]) !!}
                                 </div>
                             </div>
                         @endif
@@ -170,6 +190,8 @@
                                         {{ $order->order_currency_code }}
                                     </span>
                                 </div>
+
+                                {!! view_render_event('sales.invoice.payment-method.after', ['order' => $order]) !!}
                             </div>
                         </div>
 
@@ -199,6 +221,8 @@
                                             {{ core()->formatBasePrice($order->base_shipping_amount) }}
                                         </span>
                                     </div>
+
+                                    {!! view_render_event('sales.invoice.shipping-method.after', ['order' => $order]) !!}
                                 </div>
                             </div>
                         @endif
@@ -236,7 +260,7 @@
 
                                                 @if (isset($item->additional['attributes']))
                                                     <div class="item-options">
-                                                        
+
                                                         @foreach ($item->additional['attributes'] as $attribute)
                                                             <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
                                                         @endforeach

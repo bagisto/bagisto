@@ -3,6 +3,17 @@
     $comparableAttributes = $attributeRepository->findByField('is_comparable', 1);
 @endphp
 
+@push('css')
+    <style>
+        .btn-add-to-cart {
+            max-width: 130px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    </style>
+@endpush
+
 @push('scripts')
     <script type="text/x-template" id="compare-product-template">
         <section class="cart-details row no-margin col-12">
@@ -20,7 +31,7 @@
 
             {!! view_render_event('bagisto.shop.customers.account.compare.view.before') !!}
 
-            <div class="row compare-products col-12 ml0">
+            <table class="row compare-products">
                 <shimmer-component v-if="!isProductListLoaded && !isMobile()"></shimmer-component>
 
                 <template v-else-if="isProductListLoaded && products.length > 0">
@@ -39,12 +50,12 @@
                     @endphp
 
                     @foreach ($comparableAttributes as $attribute)
-                        <div class="row col-12 pr-0 mt15">
-                            <div class="col-2">
+                        <tr>
+                            <td>
                                 <span class="fs16">{{ $attribute['admin_name'] }}</span>
-                            </div>
+                            </td>
 
-                            <div class="col" :key="`title-${index}`" v-for="(product, index) in products">
+                            <td :key="`title-${index}`" v-for="(product, index) in products">
                                 @switch ($attribute['code'])
                                     @case('name')
                                         <a :href="`${$root.baseUrl}/${product.url_key}`" class="unset remove-decoration active-hover">
@@ -54,7 +65,11 @@
 
                                     @case('image')
                                         <a :href="`${$root.baseUrl}/${product.url_key}`" class="unset">
-                                            <img :src="product['{{ $attribute['code'] }}']" class="image-wrapper"></span>
+                                            <img
+                                                class="image-wrapper"
+                                                :src="product['{{ $attribute['code'] }}']"
+                                                onload="window.updateHeight ? window.updateHeight() : ''"
+                                                :onerror="`this.src='${$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
                                         </a>
                                         @break
 
@@ -88,19 +103,31 @@
                                         @break
 
                                     @default
-                                        <span v-html="product['{{ $attribute['code'] }}']" class="fs16"></span>
+                                        @switch ($attribute['type'])
+                                            @case('boolean')
+                                                <span
+                                                    v-text="product.product['{{ $attribute['code'] }}']
+                                                            ? '{{ __('velocity::app.shop.general.yes') }}'
+                                                            : '{{ __('velocity::app.shop.general.no') }}'"
+                                                ></span>
+                                                @break;
+                                            @default
+                                                <span v-html="product['{{ $attribute['code'] }}'] ? product['{{ $attribute['code'] }}'] : product.product['{{ $attribute['code'] }}'] ? product.product['{{ $attribute['code'] }}'] : '__'" class="fs16"></span>
+                                                @break;
+                                        @endswitch
+
                                         @break
 
                                 @endswitch
-                            </div>
-                        </div>
+                            </td>
+                        </tr>
                     @endforeach
                 </template>
 
                 <span v-else-if="isProductListLoaded && products.length == 0">
                     @{{ __('customer.compare.empty-text') }}
                 </span>
-            </div>
+            </table>
 
             {!! view_render_event('bagisto.shop.customers.account.compare.view.after') !!}
         </section>
@@ -146,6 +173,11 @@
                         this.$http.get(url, data)
                         .then(response => {
                             this.isProductListLoaded = true;
+
+                            if (response.data.products.length > 3) {
+                                $('.compare-products').css('overflow-x', 'scroll');
+                            }
+
                             this.products = response.data.products;
                         })
                         .catch(error => {

@@ -27,11 +27,15 @@
                 <span class="control-error" v-if="errors.has('first_name')">@{{ errors.first('first_name') }}</span>
             </div>
 
+            {!! view_render_event('bagisto.shop.customers.signup_form_controls.firstname.after') !!}
+
             <div class="control-group" :class="[errors.has('last_name') ? 'has-error' : '']">
                 <label for="last_name" class="required">{{ __('shop::app.customer.signup-form.lastname') }}</label>
                 <input type="text" class="control" name="last_name" v-validate="'required'" value="{{ old('last_name') }}" data-vv-as="&quot;{{ __('shop::app.customer.signup-form.lastname') }}&quot;">
                 <span class="control-error" v-if="errors.has('last_name')">@{{ errors.first('last_name') }}</span>
             </div>
+
+            {!! view_render_event('bagisto.shop.customers.signup_form_controls.lastname.after') !!}
 
             <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
                 <label for="email" class="required">{{ __('shop::app.customer.signup-form.email') }}</label>
@@ -39,11 +43,15 @@
                 <span class="control-error" v-if="errors.has('email')">@{{ errors.first('email') }}</span>
             </div>
 
+            {!! view_render_event('bagisto.shop.customers.signup_form_controls.email.after') !!}
+
             <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
                 <label for="password" class="required">{{ __('shop::app.customer.signup-form.password') }}</label>
                 <input type="password" class="control" name="password" v-validate="'required|min:6'" ref="password" value="{{ old('password') }}" data-vv-as="&quot;{{ __('shop::app.customer.signup-form.password') }}&quot;">
                 <span class="control-error" v-if="errors.has('password')">@{{ errors.first('password') }}</span>
             </div>
+
+            {!! view_render_event('bagisto.shop.customers.signup_form_controls.password.after') !!}
 
             <div class="control-group" :class="[errors.has('password_confirmation') ? 'has-error' : '']">
                 <label for="password_confirmation" class="required">{{ __('shop::app.customer.signup-form.confirm_pass') }}</label>

@@ -30,12 +30,16 @@ return [
     ],
 
     'exchange-api' => [
-        'default' => 'fixer',
+        'default' => 'exchange_rates',
+
         'fixer' => [
-            'paid_account' => false,
             'key' => env('fixer_api_key'),
             'class' => 'Webkul\Core\Helpers\Exchange\FixerExchange'
-        ]
+        ],
+
+        'exchange_rates' => [
+            'class' => 'Webkul\Core\Helpers\Exchange\ExchangeRates'
+        ],
     ],
 
     'stripe' => [

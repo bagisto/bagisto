@@ -82,17 +82,28 @@
         </div>
 
         <div class="toolbar-wrapper row col-12 remove-padding-margin" v-else>
-            <div v-if="layeredNavigation" class="nav-container scrollable">
+            <div
+                v-if="layeredNavigation"
+                class="nav-container scrollable"
+                style="
+                    z-index: 1000;
+                    color: black;
+                    position: relative;
+                ">
                 <div class="header drawer-section">
                     <i class="material-icons" @click="toggleLayeredNavigation">keyboard_backspace</i>
 
                     <span class="fs24 fw6">
                         {{ __('velocity::app.shop.general.filter') }}
                     </span>
-                    {{-- <span class="pull-right link-color" @click="toggleLayeredNavigation">Done</span> --}}
+                    <span class="pull-right link-color" @click="toggleLayeredNavigation">
+                        {{ __('velocity::app.responsive.header.done') }}
+                    </span>
                 </div>
 
-                {{-- @include ('shop::products.list.layered-navigation') --}}
+                @if (request()->route()->getName() != 'velocity.search.index')
+                    @include ('shop::products.list.layered-navigation')
+                @endif
             </div>
 
             <div class="col-4" @click="toggleLayeredNavigation({event: $event, actionType: 'open'})">

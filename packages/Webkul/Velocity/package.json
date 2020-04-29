@@ -23,7 +23,7 @@
     "bootstrap-sass": "^3.4.1",
     "font-awesome": "^4.7.0",
     "material-icons": "^0.3.1",
-    "vee-validate": "2.0.0-rc.26",
+    "vee-validate": "^2.2.15",
     "vue-slider-component": "^3.1.0",
     "vue-toast-notification": "0.0.2"
   }

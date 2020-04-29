@@ -130,7 +130,12 @@ class ContentRepository extends Repository
         $query = $this->model::orderBy('position', 'ASC');
 
         $contentCollection = $query
-            ->select('velocity_contents.*', 'velocity_contents_translations.*')
+            ->select(
+                'velocity_contents.content_type',
+                'velocity_contents_translations.title as title',
+                'velocity_contents_translations.page_link as page_link',
+                'velocity_contents_translations.link_target as link_target'
+            )
             ->where('velocity_contents.status', 1)
             ->leftJoin('velocity_contents_translations', 'velocity_contents.id', 'velocity_contents_translations.content_id')
             ->distinct('velocity_contents_translations.id')

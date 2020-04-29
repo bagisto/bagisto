@@ -5,24 +5,9 @@
 @endsection
 
 @push('css')
-    <style type="text/css">
+    <style>
         .account-head {
             height: 50px;
-        }
-        .remove-icon {
-            right: 15px;
-            font-size: 22px;
-            height: 24px;
-            text-align: center;
-            position: absolute;
-            border-radius: 50%;
-            color: #333;
-            width: 24px;
-            padding: 0px;
-            top: 10px;
-        }
-        .remove-icon:before {
-            content: "x";
         }
     </style>
 @endpush
@@ -61,20 +46,28 @@
                         <td>{{ $customer->first_name }}</td>
                     </tr>
 
+                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.first_name.after', ['customer' => $customer]) !!}
+
                     <tr>
                         <td>{{ __('shop::app.customer.account.profile.lname') }}</td>
                         <td>{{ $customer->last_name }}</td>
                     </tr>
+
+                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.last_name.after', ['customer' => $customer]) !!}
 
                     <tr>
                         <td>{{ __('shop::app.customer.account.profile.gender') }}</td>
                         <td>{{ $customer->gender ?? '-' }}</td>
                     </tr>
 
+                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.gender.after', ['customer' => $customer]) !!}
+
                     <tr>
                         <td>{{ __('shop::app.customer.account.profile.dob') }}</td>
                         <td>{{ $customer->date_of_birth ?? '-' }}</td>
                     </tr>
+
+                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.date_of_birth.after', ['customer' => $customer]) !!}
 
                     <tr>
                         <td>{{ __('shop::app.customer.account.profile.email') }}</td>

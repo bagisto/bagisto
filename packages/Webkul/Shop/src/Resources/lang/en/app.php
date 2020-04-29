@@ -313,6 +313,7 @@ return [
                     'individual-refund' => 'Refund #:refund_id',
                     'adjustment-refund' => 'Adjustment Refund',
                     'adjustment-fee' => 'Adjustment Fee',
+                    'cancel-btn-title' => 'Cancel',
                 ]
             ],
 
@@ -410,7 +411,8 @@ return [
         'choose-selection' => 'Choose a selection',
         'your-customization' => 'Your Customization',
         'total-amount' => 'Total Amount',
-        'none' => 'None'
+        'none' => 'None',
+        'available' => 'Available'
     ],
 
     // 'reviews' => [
@@ -460,7 +462,10 @@ return [
             'cart-subtotal' => 'Cart Subtotal',
             'cart-remove-action' => 'Do you really want to do this ?',
             'partial-cart-update' => 'Only some of the product(s) were updated',
-            'link-missing' => ''
+            'link-missing' => '',
+            'event' => [
+                'expired' => 'This event has been expired.'
+            ]
         ],
 
         'onepage' => [
