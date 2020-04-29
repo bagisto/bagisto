@@ -138,11 +138,11 @@ class expectedCart
     {
         $this->sub_total = round($this->sub_total, self::CART_TOTAL_PRECISION);
         $this->tax_total = round($this->tax_total, self::CART_TOTAL_PRECISION);
-        $this->grand_total = $this->sub_total + $this->tax_total - $this->discount_amount;
+        $this->grand_total = round($this->sub_total + $this->tax_total - $this->discount_amount, self::CART_TOTAL_PRECISION);
 
         $this->base_sub_total = round($this->base_sub_total, self::CART_TOTAL_PRECISION);
         $this->base_tax_total = round($this->base_tax_total, self::CART_TOTAL_PRECISION);
-        $this->base_grand_total = $this->base_sub_total + $this->base_tax_total - $this->base_discount_amount;
+        $this->base_grand_total = round($this->base_sub_total + $this->base_tax_total - $this->base_discount_amount, self::CART_TOTAL_PRECISION);
     }
 
     public function toArray(): array
