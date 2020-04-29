@@ -1304,7 +1304,8 @@ return [
             'all-channels' => 'الكل',
             'all-locales' => 'الكل',
             'invoice-slip-design' => 'Invoice Slip Design',
-            'logo' => 'logo'
+            'logo' => 'logo',
+            'favicon' => 'Favicon'
         ]
     ]
 ];
