@@ -430,9 +430,9 @@ class Cart
     /**
      * Returns cart
      *
-     * @return \Webkul\Checkout\Models\Cart|null
+     * @return \Webkul\Checkout\Contracts\Cart|null
      */
-    public function getCart(): ?\Webkul\Checkout\Models\Cart
+    public function getCart(): ?\Webkul\Checkout\Contracts\Cart
     {
         if ($this->getCurrentCustomer()->check()) {
             return $this->cartRepository->findOneWhere([

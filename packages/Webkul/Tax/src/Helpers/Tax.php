@@ -17,7 +17,7 @@ class Tax
      *
      * @return array
      */
-    public static function getTaxRatesWithAmount(\Webkul\Checkout\Models\Cart $that, bool $asBase = false): array
+    public static function getTaxRatesWithAmount(\Webkul\Checkout\Contracts\Cart $that, bool $asBase = false): array
     {
         $taxes = [];
 
@@ -42,7 +42,7 @@ class Tax
      *
      * @return float
      */
-    public static function getTaxTotal(\Webkul\Checkout\Models\Cart $that, bool $asBase = false): float
+    public static function getTaxTotal(\Webkul\Checkout\Contracts\Cart $that, bool $asBase = false): float
     {
         $taxes = self::getTaxRatesWithAmount($that, $asBase);
 
