@@ -1310,7 +1310,8 @@ return [
             'all-locales' => 'همه',
             'sandbox' => 'Sandbox',
             'invoice-slip-design' => 'Invoice Slip Design',
-            'logo' => 'logo'
+            'logo' => 'logo',
+            'favicon' => 'Favicon'
         ]
     ]
 ];

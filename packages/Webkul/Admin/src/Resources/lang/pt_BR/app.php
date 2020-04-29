@@ -1313,7 +1313,8 @@ return [
             'all-locales' => 'Todos',
             'sandbox' => 'Sandbox',
             'invoice-slip-design' => 'Design da Nota do Pedido',
-            'logo' => 'logo'
+            'logo' => 'logo',
+            'favicon' => 'Favicon'
         ]
     ]
 ];
