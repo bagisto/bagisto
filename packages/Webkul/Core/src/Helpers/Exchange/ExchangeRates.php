@@ -6,15 +6,8 @@ use Webkul\Core\Helpers\Exchange\ExchangeRate;
 use Webkul\Core\Repositories\CurrencyRepository;
 use Webkul\Core\Repositories\ExchangeRateRepository;
 
-class FixerExchange extends ExchangeRate
+class ExchangeRates extends ExchangeRate
 {
-    /**
-     * API key
-     * 
-     * @var string 
-     */
-    protected $apiKey;
-
     /**
      * API endpoint
      * 
@@ -52,9 +45,7 @@ class FixerExchange extends ExchangeRate
 
         $this->exchangeRateRepository = $exchangeRateRepository;
 
-        $this->apiEndPoint = 'http://data.fixer.io/api';
-
-        $this->apiKey = config('services.exchange-api')['fixer']['key'];
+        $this->apiEndPoint = 'https://api.exchangeratesapi.io/latest';
     }
 
     /**
@@ -71,12 +62,12 @@ class FixerExchange extends ExchangeRate
                 continue;
             }
 
-            $result = $client->request('GET', $this->apiEndPoint . '/' . date('Y-m-d') . '?access_key=' . $this->apiKey .'&base=' . config('app.currency') . '&symbols=' . $currency->code);
-
+            $result = $client->request('GET', $this->apiEndPoint . '?base=' . config('app.currency') . '&symbols=' . $currency->code);
+            
             $result = json_decode($result->getBody()->getContents(), true);
 
             if (isset($result['success']) && ! $result['success']) {
-                throw new \Exception(
+                throw new E\xception(
                     isset($result['error']['info'])
                     ? $result['error']['info']
                     : $result['error']['type'], 1);

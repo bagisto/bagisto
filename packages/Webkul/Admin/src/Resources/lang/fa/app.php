@@ -729,7 +729,7 @@ return [
             'target_currency' => 'هدف ارز',
             'rate' => 'نرخ',
             'exchange-class-not-found' => 'کلاس نرخ ارز :service یافت نشد',
-            'update-rates' => ' به روز کنید :service    نرخ ها را با استفاده از',
+            'update-rates' => 'نرخ ها را به روز کنید',
             'create-success' => 'نرخ ارز با موفقیت ایجاد شد.',
             'update-success' => 'نرخ ارز با موفقیت به روز شد.',
             'delete-success' => 'نرخ ارز با موفقیت حذف شد.',
@@ -1310,7 +1310,8 @@ return [
             'all-locales' => 'همه',
             'sandbox' => 'Sandbox',
             'invoice-slip-design' => 'Invoice Slip Design',
-            'logo' => 'logo'
+            'logo' => 'logo',
+            'favicon' => 'Favicon'
         ]
     ]
 ];

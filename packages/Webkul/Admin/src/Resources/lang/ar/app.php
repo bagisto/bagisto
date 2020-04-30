@@ -729,7 +729,7 @@ return [
             'target_currency' => 'العملة المستهدفة',
             'rate' => 'معدل',
             'exchange-class-not-found' => ':service لم يتم العثور على فئة سعر الصرف آسيف',
-            'update-rates' => ':service تحديث الأسعار باستخدام ',
+            'update-rates' => 'الأسعار',
             'create-success' => 'تم إنشاء سعر الصرف بنجاح',
             'update-success' => 'تم تحديث سعر الصرف بنجاح',
             'delete-success' => 'تم حذف سعر الصرف بنجاح',
@@ -1304,7 +1304,8 @@ return [
             'all-channels' => 'الكل',
             'all-locales' => 'الكل',
             'invoice-slip-design' => 'Invoice Slip Design',
-            'logo' => 'logo'
+            'logo' => 'logo',
+            'favicon' => 'Favicon'
         ]
     ]
 ];

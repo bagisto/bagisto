@@ -729,7 +729,7 @@ return [
             'target_currency' => 'Valuta doel',
             'rate' => 'Tarief',
             'exchange-class-not-found' => ':service wisselkoersklasse niet gevonden',
-            'update-rates' => 'Tarieven bijwerken met :service',
+            'update-rates' => 'Tarieven bijwerken',
             'create-success' => 'Wisselkoers succesvol aangemaakt.',
             'update-success' => 'Wisselkoers succesvol bijgewerkt.',
             'delete-success' => 'Wisselkoers succesvol verwijderd.',
@@ -1309,7 +1309,8 @@ return [
             'all-channels' => 'Alles',
             'all-locales' => 'Alles',
             'invoice-slip-design' => 'Invoice Slip Design',
-            'logo' => 'logo'
+            'logo' => 'logo',
+            'favicon' => 'Favicon'
         ]
     ]
 ];

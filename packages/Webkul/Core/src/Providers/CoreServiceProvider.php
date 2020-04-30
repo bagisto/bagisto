@@ -12,6 +12,7 @@ use Webkul\Core\Models\SliderProxy;
 use Webkul\Core\Observers\SliderObserver;
 use Webkul\Core\Console\Commands\BagistoVersion;
 use Webkul\Core\Console\Commands\Install;
+use Webkul\Core\Console\Commands\ExchangeRateUpdate;
 
 class CoreServiceProvider extends ServiceProvider
 {
@@ -78,7 +79,7 @@ class CoreServiceProvider extends ServiceProvider
     protected function registerCommands(): void
     {
         if ($this->app->runningInConsole()) {
-            $this->commands([BagistoVersion::class, Install::class,]);
+            $this->commands([BagistoVersion::class, Install::class, ExchangeRateUpdate::class]);
         }
     }
 
