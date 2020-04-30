@@ -87,7 +87,7 @@ return array (
             'products' => 'Produkte',
             'categories' => 'Kategorien',
             'attributes' => 'Attribute',
-            'attribute-families' => 'Attributgruppeb',
+            'attribute-families' => 'Attributgruppen',
             'customers' => 'Kunden',
             'groups' => 'Gruppen',
             'reviews' => 'Bewertungen',
