@@ -532,6 +532,13 @@
                 }
             }
         }
+
+        .arrow {
+            &.left,
+            &.right {
+                display: none
+            }
+        }
     }
 
     .review-page-container {
