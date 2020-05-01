@@ -134,11 +134,14 @@ class CartRule
      */
     public function getCartRules()
     {
-        static $cartRules;
-
-        if ($cartRules) {
-            return $cartRules;
+        $staticCartRules = new class() {
+            public static $cartRules;
+            public static $cartID;
+        };
+        if ($staticCartRules::$cartID === cart()->getCart()->id && $staticCartRules::$cartRules) {
+            return $staticCartRules::$cartRules;
         }
+        $staticCartRules::$cartID = cart()->getCart()->id;
 
         $customerGroupId = null;
 
@@ -166,6 +169,7 @@ class CartRule
                          ->orderBy('sort_order', 'asc');
         })->findWhere(['status' => 1]);
 
+        $staticCartRules::$cartRules = $cartRules;
         return $cartRules;
     }
 
@@ -246,6 +250,10 @@ class CartRule
                 continue;
             }
 
+            if ($rule->coupon_code) {
+                $item->coupon_code = $rule->coupon_code;
+            }
+
             $quantity = $rule->discount_quantity ? min($item->quantity, $rule->discount_quantity) : $item->quantity;
 
             $discountAmount = $baseDiscountAmount = 0;
@@ -254,9 +262,9 @@ class CartRule
                 case 'by_percent':
                     $rulePercent = min(100, $rule->discount_amount);
 
-                    $discountAmount = ($quantity * $item->price - $item->discount_amount) * ($rulePercent / 100);
+                    $discountAmount = ($quantity * $item->price + $item->tax_amount - $item->discount_amount) * ($rulePercent / 100);
 
-                    $baseDiscountAmount = ($quantity * $item->base_price - $item->base_discount_amount) * ($rulePercent / 100);
+                    $baseDiscountAmount = ($quantity * $item->base_price + $item->base_tax_amount - $item->base_discount_amount) * ($rulePercent / 100);
 
                     if (! $rule->discount_quantity || $rule->discount_quantity > $quantity) {
                         $discountPercent = min(100, $item->discount_percent + $rulePercent);
@@ -316,8 +324,16 @@ class CartRule
                     break;
             }
 
-            $item->discount_amount = min($item->discount_amount + $discountAmount, $item->price * $quantity + $item->tax_amount);
-            $item->base_discount_amount = min($item->base_discount_amount + $baseDiscountAmount, $item->base_price * $quantity + $item->base_tax_amount);
+            $item->discount_amount = round(
+                min(
+                    $item->discount_amount + $discountAmount,
+                    $item->price * $quantity + $item->tax_amount
+                ),2);
+            $item->base_discount_amount = round(
+                min(
+                    $item->base_discount_amount + $baseDiscountAmount,
+                    $item->base_price * $quantity + $item->base_tax_amount
+                ), 2);
 
             $appliedRuleIds[$rule->id] = $rule->id;
 

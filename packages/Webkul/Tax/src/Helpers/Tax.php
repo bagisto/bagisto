@@ -12,15 +12,17 @@ class Tax
 
     /**
      * Returns an array with tax rates and tax amount
-     * @param  object  $that
-     * @param  bool  $asBase
+     *
+     * @param \Webkul\Checkout\Contracts\Cart $cart
+     * @param bool                            $asBase
+     *
      * @return array
      */
-    public static function getTaxRatesWithAmount(object $that, bool $asBase = false): array
+    public static function getTaxRatesWithAmount(\Webkul\Checkout\Contracts\Cart $cart, bool $asBase = false): array
     {
         $taxes = [];
 
-        foreach ($that->items as $item) {
+        foreach ($cart->items as $item) {
             $taxRate = (string) round((float) $item->tax_percent, self::TAX_RATE_PRECISION);
 
             if (! array_key_exists($taxRate, $taxes)) {
@@ -40,13 +42,15 @@ class Tax
 
     /**
      * Returns the total tax amount
-     * @param  object  $that
-     * @param  bool  $asBase
+     *
+     * @param \Webkul\Checkout\Contracts\Cart $cart
+     * @param bool                            $asBase
+     *
      * @return float
      */
-    public static function getTaxTotal(object $that, bool $asBase = false): float
+    public static function getTaxTotal(\Webkul\Checkout\Contracts\Cart $cart, bool $asBase = false): float
     {
-        $taxes = self::getTaxRatesWithAmount($that, $asBase);
+        $taxes = self::getTaxRatesWithAmount($cart, $asBase);
 
         $result = 0;
 
