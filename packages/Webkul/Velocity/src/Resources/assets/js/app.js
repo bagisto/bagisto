@@ -11,14 +11,13 @@ window.jQuery = window.$ = require("jquery");
 window.BootstrapSass = require("bootstrap-sass");
 
 Vue.use(VueToast);
-Vue.use(VeeValidate);
 Vue.use(VueCarousel);
 Vue.use(BootstrapSass);
 Vue.prototype.$http = axios;
 
 Vue.use(VeeValidate, {
     dictionary: {
-        ar: { messages: messagesAr }
+        ar: messagesAr
     }
 });
 
@@ -58,13 +57,13 @@ $(document).ready(function () {
     Vue.mixin({
         data: function () {
             return {
-                'baseUrl': document.querySelector("script[src$='velocity.js']").getAttribute('baseUrl'),
+                'imageObserver': null,
                 'navContainer': false,
                 'headerItemsCount': 0,
+                'sharedRootCategories': [],
                 'responsiveSidebarTemplate': '',
                 'responsiveSidebarKey': Math.random(),
-                'sharedRootCategories': [],
-                'imageObserver': null,
+                'baseUrl': document.querySelector("script[src$='velocity.js']").getAttribute('baseUrl'),
             }
         },
 

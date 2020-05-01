@@ -25,6 +25,14 @@
                     {{ __('shop::app.customer.account.order.view.page-tile', ['order_id' => $order->increment_id]) }}
                 </span>
                 <span></span>
+
+                @if ($order->canCancel())
+                    <span class="account-action">
+                        <a href="{{ route('customer.orders.cancel', $order->id) }}" class="theme-btn light unset pull-right" v-alert:message="'{{ __('admin::app.sales.orders.cancel-confirm-msg') }}'" style="float: right">
+                            {{ __('shop::app.customer.account.order.view.cancel-btn-title') }}
+                        </a>
+                    </span>
+                @endif
             </div>
 
             {!! view_render_event('bagisto.shop.customers.account.orders.view.before', ['order' => $order]) !!}
@@ -489,9 +497,9 @@
                                 </div>
 
                                 <div class="box-content">
-
                                     @include ('admin::sales.address', ['address' => $order->billing_address])
 
+                                    {!! view_render_event('bagisto.shop.customers.account.orders.view.billing-address.after', ['order' => $order]) !!}
                                 </div>
                             </div>
 
@@ -502,9 +510,9 @@
                                     </div>
 
                                     <div class="box-content">
-
                                         @include ('admin::sales.address', ['address' => $order->shipping_address])
 
+                                        {!! view_render_event('bagisto.shop.customers.account.orders.view.shipping-address.after', ['order' => $order]) !!}
                                     </div>
                                 </div>
 
@@ -514,9 +522,9 @@
                                     </div>
 
                                     <div class="box-content">
-
                                         {{ $order->shipping_title }}
 
+                                        {!! view_render_event('bagisto.shop.customers.account.orders.view.shipping-method.after', ['order' => $order]) !!}
                                     </div>
                                 </div>
                             @endif
@@ -528,6 +536,8 @@
 
                                 <div class="box-content">
                                     {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
+
+                                    {!! view_render_event('bagisto.shop.customers.account.orders.view.payment-method.after', ['order' => $order]) !!}
                                 </div>
                             </div>
                         </div>

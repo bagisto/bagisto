@@ -32,14 +32,13 @@ class DefaultSlot extends Booking
 
         $availableFrom = $bookingProduct->available_from
                          ? Carbon::createFromTimeString($bookingProduct->available_from)
-                         : clone $currentTime;
+                         : Carbon::createFromTimeString($currentTime->format('Y-m-d 00:00:00'));
 
         $availableTo = $bookingProduct->available_to
                        ? Carbon::createFromTimeString($bookingProduct->available_to)
                        : Carbon::createFromTimeString('2080-01-01 00:00:00');
 
-        if ($requestedDate < $currentTime
-            || $requestedDate < $availableFrom
+        if ($requestedDate < $availableFrom
             || $requestedDate > $availableTo
         ) {
             return [];
@@ -63,8 +62,10 @@ class DefaultSlot extends Booking
     {
         $slots = [];
 
+        $dayOfWeek = $requestedDate->dayOfWeek;
+
         foreach ($bookingProductSlot->slots as $timeDuration) {
-            if ($requestedDate->dayOfWeek != $timeDuration['from_day']) {
+            if ($dayOfWeek != $timeDuration['from_day']) {
                 continue;
             }
 
@@ -101,7 +102,7 @@ class DefaultSlot extends Booking
 
         $availableFrom = $bookingProduct->available_from
                          ? Carbon::createFromTimeString($bookingProduct->available_from)
-                         : clone $currentTime;
+                         : Carbon::createFromTimeString($currentTime->format('Y-m-d 00:00:00'));
 
         $availableTo = $bookingProduct->available_to
                        ? Carbon::createFromTimeString($bookingProduct->available_to)

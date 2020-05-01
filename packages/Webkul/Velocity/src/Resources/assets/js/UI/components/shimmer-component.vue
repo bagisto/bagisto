@@ -4,13 +4,13 @@
             id="shimmer-carousel"
             navigation-enabled="hide"
             pagination-enabled="hide"
-            :slides-count="shimmerCount + 1"
-            :slides-per-page="shimmerCount">
+            :slides-count="shimmerCountInt + 1"
+            :slides-per-page="shimmerCountInt">
 
                 <slide
                     :key="count"
                     :slot="`slide-${count}`"
-                    v-for="count in shimmerCount">
+                    v-for="count in shimmerCountInt">
 
                     <div class="shimmer-card">
                         <div class="shimmer-wrapper">
@@ -30,9 +30,14 @@
         props: {
             'shimmerCount': {
                 default: 6,
-                type: Number,
             },
         },
+
+        data: function () {
+            return {
+                shimmerCountInt: parseInt(this.shimmerCount),
+            }
+        }
     }
 </script>
 

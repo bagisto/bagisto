@@ -409,6 +409,7 @@ return [
             'add-title' => 'Create Shipment',
             'save-btn-title' => 'Save Shipment',
             'qty-ordered' => 'Qty Ordered',
+            'qty-invoiced' => 'Qty Invoiced',
             'qty-to-ship' => 'Qty to Ship',
             'available-sources' => 'Available Sources',
             'source' => 'Source',
@@ -728,7 +729,7 @@ return [
             'target_currency' => 'Target Currency',
             'rate' => 'Rate',
             'exchange-class-not-found' => ':service exchange rate class not found',
-            'update-rates' => 'Update rates using :service',
+            'update-rates' => 'Update Rates',
             'create-success' => 'Exchange Rate created successfully.',
             'update-success' => 'Exchange Rate updated successfully.',
             'delete-success' => 'Exchange Rate deleted successfully.',
@@ -1308,7 +1309,8 @@ return [
             'all-channels' => 'All',
             'all-locales' => 'All',
             'invoice-slip-design' => 'Invoice Slip Design',
-            'logo' => 'logo'
+            'logo' => 'logo',
+            'favicon' => 'Favicon'
        ]
     ]
 ];

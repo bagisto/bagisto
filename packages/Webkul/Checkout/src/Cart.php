@@ -165,9 +165,9 @@ class Cart
                             'cart_id' => $cart->id
                         ]));
                     } else {
-                        if ($cartItem->product->getTypeInstance()->showQuantityBox() === false) {
-                            return ['warning' => __('shop::app.checkout.cart.integrity.qty_impossible')];
-                        }
+                        // if ($cartItem->product->getTypeInstance()->showQuantityBox() === false) {
+                        //     return ['warning' => __('shop::app.checkout.cart.integrity.qty_impossible')];
+                        // }
 
                         $cartItem = $this->cartItemRepository->update($cartProduct, $cartItem->id);
                     }
@@ -368,7 +368,13 @@ class Cart
                         continue;
                     }
 
+                    $found = true;
+
                     $cartItem->quantity = $newQuantity = $cartItem->quantity + $guestCartItem->quantity;
+
+                    if ($cartItem->quantity > $cartItem->product->getTypeInstance()->totalQuantity()) {
+                        $cartItem->quantity = $newQuantity = $cartItem->product->getTypeInstance()->totalQuantity();
+                    }
 
                     if (! $this->isItemHaveQuantity($cartItem)) {
                         $this->cartItemRepository->delete($guestCartItem->id);
@@ -387,8 +393,6 @@ class Cart
                     $guestCart->items->forget($key);
 
                     $this->cartItemRepository->delete($guestCartItem->id);
-
-                    $found = true;
                 }
 
                 if (! $found) {
@@ -658,7 +662,7 @@ class Cart
         if (! $cart = $this->getCart()) {
             return;
         }
-        
+
         Event::dispatch('checkout.cart.calculate.items.tax.before', $cart);
 
         foreach ($cart->items()->get() as $item) {
@@ -1199,21 +1203,21 @@ class Cart
                 } else {
                     if (isset($billingAddressData['use_for_shipping']) && $billingAddressData['use_for_shipping']) {
                         $this->cartAddressRepository->create(array_merge($billingAddressData,
-                            ['address_type' => 'shipping']));
+                            ['address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]));
                     } else {
                         $this->cartAddressRepository->create(array_merge($shippingAddressData,
-                            ['address_type' => 'shipping']));
+                            ['address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]));
                     }
                 }
             }
         } else {
-            $this->cartAddressRepository->create(array_merge($billingAddressData, ['address_type' => 'billing']));
+            $this->cartAddressRepository->create(array_merge($billingAddressData, ['address_type' => CartAddress::ADDRESS_TYPE_BILLING]));
 
             if ($cart->haveStockableItems()) {
                 if (isset($billingAddressData['use_for_shipping']) && $billingAddressData['use_for_shipping']) {
-                    $this->cartAddressRepository->create(array_merge($billingAddressData, ['address_type' => 'shipping']));
+                    $this->cartAddressRepository->create(array_merge($billingAddressData, ['address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]));
                 } else {
-                    $this->cartAddressRepository->create(array_merge($shippingAddressData, ['address_type' => 'shipping']));
+                    $this->cartAddressRepository->create(array_merge($shippingAddressData, ['address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]));
                 }
             }
         }

@@ -24,6 +24,7 @@ class CartShippingRate extends Model implements CartShippingRateContract
      */
     public function shipping_address()
     {
-        return $this->belongsTo(CartAddressProxy::modelClass());
+        return $this->belongsTo(CartAddressProxy::modelClass(), 'cart_address_id')
+            ->where('address_type', CartAddress::ADDRESS_TYPE_SHIPPING);
     }
 }

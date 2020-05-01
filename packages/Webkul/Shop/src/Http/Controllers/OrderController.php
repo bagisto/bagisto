@@ -87,4 +87,23 @@ class OrderController extends Controller
 
         return $pdf->download('invoice-' . $invoice->created_at->format('d-m-Y') . '.pdf');
     }
+
+    /**
+     * Cancel action for the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function cancel($id)
+    {
+        $result = $this->orderRepository->cancel($id);
+
+        if ($result) {
+            session()->flash('success', trans('admin::app.response.cancel-success', ['name' => 'Order']));
+        } else {
+            session()->flash('error', trans('admin::app.response.cancel-error', ['name' => 'Order']));
+        }
+
+        return redirect()->back();
+    }
 }

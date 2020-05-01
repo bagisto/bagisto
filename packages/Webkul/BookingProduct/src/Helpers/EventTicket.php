@@ -4,6 +4,7 @@ namespace Webkul\BookingProduct\Helpers;
 
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Webkul\Checkout\Facades\Cart;
 
 class EventTicket extends Booking
 {
@@ -123,6 +124,12 @@ class EventTicket extends Booking
         $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $item->product_id);
 
         $ticket = $bookingProduct->event_tickets()->find($item->additional['booking']['ticket_id']);
+
+        if (! $ticket) {
+            Cart::removeItem($item->id);
+
+            return true;
+        }
 
         $price += $ticket->price;
 

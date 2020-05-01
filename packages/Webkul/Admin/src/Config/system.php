@@ -99,6 +99,12 @@ return [
                 'type'          => 'image',
                 'channel_based' => true,
                 'validation'    => 'mimes:jpeg,bmp,png,jpg',
+            ], [
+                'name'          => 'favicon',
+                'title'         => 'admin::app.admin.system.favicon',
+                'type'          => 'image',
+                'channel_based' => true,
+                'validation'    => 'mimes:jpeg,bmp,png,jpg',
             ],
         ],
     ], [

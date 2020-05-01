@@ -8,7 +8,7 @@
         name="password"
         v-model="address.billing.password" />
 
-    <div class="forgot-password-link">
+    <div class="forgot-password-link mt-4 mb-4">
         <a href="{{ route('customer.forgot-password.create') }}">{{ __('shop::app.customer.login-form.forgot_pass') }}</a>
 
         <div class="mt-10">
