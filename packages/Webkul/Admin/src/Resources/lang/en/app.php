@@ -1306,8 +1306,9 @@ return [
             'order-number-suffix' => 'Order Number Suffix',
             'default' => 'Default',
             'sandbox' => 'Sandbox',
-            'all-channels' => 'All',
-            'all-locales' => 'All',
+            'all-channels' => 'All Channels',
+            'all-locales' => 'All Locales',
+            'all-customer-groups' => 'All Customer groups',
             'invoice-slip-design' => 'Invoice Slip Design',
             'logo' => 'logo',
             'favicon' => 'Favicon'
