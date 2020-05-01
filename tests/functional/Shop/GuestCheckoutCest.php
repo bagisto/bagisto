@@ -59,7 +59,6 @@ class GuestCheckoutCest
         $I->assertEquals($example['globalConfig'],
             core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout'));
         $I->amOnRoute('shop.home.index');
-
         $I->sendAjaxPostRequest('/checkout/cart/add/' . $product->id, [
             '_token' => session('_token'),
             'product_id' => $product->id,
