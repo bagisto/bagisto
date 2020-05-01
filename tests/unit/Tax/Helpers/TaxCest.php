@@ -2,10 +2,8 @@
 
 namespace Tests\Unit\Tax\Helpers;
 
-use Faker\Factory;
 use Illuminate\Support\Facades\Config;
 use UnitTester;
-use Webkul\Tax\Helpers\Tax;
 use Webkul\Tax\Models\TaxCategory;
 use Webkul\Tax\Models\TaxMap;
 use Webkul\Tax\Models\TaxRate;
