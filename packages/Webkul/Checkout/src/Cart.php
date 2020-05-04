@@ -687,7 +687,7 @@ class Cart
             if ($address === null) {
                 $address = new class() {
                     public $country;
-
+                    public $state;
                     public $postcode;
 
                     function __construct()
