@@ -13,7 +13,7 @@ class Virtual extends AbstractType
 
     /**
      * These blade files will be included in product edit page
-     * 
+     *
      * @var array
      */
     protected $additionalViews = [
@@ -63,5 +63,11 @@ class Virtual extends AbstractType
     public function haveSufficientQuantity($qty)
     {
         return true;
+    }
+
+    //product options
+    public function getProductOptions($product = "")
+    {
+        return [];
     }
 }

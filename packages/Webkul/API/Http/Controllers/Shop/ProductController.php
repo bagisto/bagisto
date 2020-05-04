@@ -71,8 +71,9 @@ class ProductController extends Controller
      */
     public function configurableConfig($id)
     {
-        return response()->json([
-            'data' => app('Webkul\Product\Helpers\ConfigurableOption')->getConfigurationConfig($this->productRepository->findOrFail($id)),
-        ]);
+        $product = $this->productRepository->findOrFail($id);
+
+        return $product->getTypeInstance()->getProductOptions($product);
+
     }
 }

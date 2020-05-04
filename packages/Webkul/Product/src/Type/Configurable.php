@@ -556,15 +556,6 @@ class Configurable extends AbstractType
         $item->save();
     }
 
-    //product options
-    public function getProductOptions($product = "")
-    {
-        $configurableOption = app('Webkul\Product\Helpers\ConfigurableOption');
-        $options = $configurableOption->getConfigurationConfig($product);
-
-        return $options;
-    }
-
     /**
      * @param  int  $qty
      * @return bool
@@ -572,16 +563,16 @@ class Configurable extends AbstractType
     public function haveSufficientQuantity($qty)
     {
         $backorders = core()->getConfigData('catalog.inventory.stock_options.backorders');
-     
+
         foreach ($this->product->variants as $variant) {
             if ($variant->haveSufficientQuantity($qty)) {
                 return true;
             }
-        }    
+        }
 
         return $backorders;
     }
-     
+
     /**
      * Return true if this product type is saleable
      *
@@ -594,7 +585,16 @@ class Configurable extends AbstractType
                 return true;
             }
         }
-            
+
         return false;
+    }
+
+    //product options
+    public function getProductOptions($product = "")
+    {
+        $configurableOption = app('Webkul\Product\Helpers\ConfigurableOption');
+        $options = $configurableOption->getConfigurationConfig($product);
+
+        return $options;
     }
 }
