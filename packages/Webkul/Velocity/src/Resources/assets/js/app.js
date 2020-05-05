@@ -5,9 +5,12 @@ import VueToast from 'vue-toast-notification';
 import 'vue-toast-notification/dist/index.css';
 import de from 'vee-validate/dist/locale/de';
 import ar from 'vee-validate/dist/locale/ar';
+import VeeValidate, { Validator } from 'vee-validate';
+import axios from 'axios';
 
-window.axios = require("axios");
-window.VeeValidate = require("vee-validate");
+
+window.axios = axios;
+window.VeeValidate = VeeValidate;
 window.jQuery = window.$ = require("jquery");
 window.BootstrapSass = require("bootstrap-sass");
 
@@ -16,6 +19,8 @@ Vue.use(VeeValidate);
 Vue.use(VueCarousel);
 Vue.use(BootstrapSass);
 Vue.prototype.$http = axios;
+
+Validator.localize('de', de);
 
 Vue.use(VeeValidate, {
     dictionary: {

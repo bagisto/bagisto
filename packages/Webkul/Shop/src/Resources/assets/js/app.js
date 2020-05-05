@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import Vue from 'vue';
-import VeeValidate from 'vee-validate';
+import VeeValidate, { Validator } from 'vee-validate';
 import de from 'vee-validate/dist/locale/de';
 import ar from 'vee-validate/dist/locale/ar';
 import axios from 'axios';
@@ -14,6 +14,10 @@ window.VeeValidate = VeeValidate;
 window.axios = axios;
 require("./bootstrap");
 require("ez-plus/src/jquery.ez-plus.js");
+
+Vue.use(VeeValidate);
+
+Validator.localize('de', de);
 
 Vue.use(VeeValidate, {
     dictionary: {

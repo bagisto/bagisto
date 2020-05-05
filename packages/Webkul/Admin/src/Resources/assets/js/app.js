@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import VeeValidate from 'vee-validate';
+import VeeValidate, { Validator } from 'vee-validate';
 import de from 'vee-validate/dist/locale/de';
 import ar from 'vee-validate/dist/locale/ar';
 
@@ -7,6 +7,10 @@ import './bootstrap';
 
 window.Vue = Vue;
 window.VeeValidate = VeeValidate;
+
+Vue.use(VeeValidate);
+
+Validator.localize('de', de);
 
 Vue.use(VeeValidate, {
     dictionary: {
