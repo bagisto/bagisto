@@ -539,6 +539,14 @@
                 display: none
             }
         }
+
+        .thumb-list {
+            .thumb-frame {
+                > .bg-image {
+                    background-size: contain;
+                }
+            }
+        }
     }
 
     .review-page-container {
