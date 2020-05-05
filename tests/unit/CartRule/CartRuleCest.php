@@ -36,7 +36,7 @@ class cartRuleWithCoupon
 
 class expectedCartItem
 {
-    public const ITEM_DISCOUNT_AMOUNT_PRECISION = 2;
+    public const ITEM_DISCOUNT_AMOUNT_PRECISION = 4;
     public const ITEM_TAX_AMOUNT_PRECISION = 4;
 
     public $cart_id;
@@ -106,6 +106,7 @@ class expectedCartItem
 class expectedCart
 {
     public const CART_TOTAL_PRECISION = 2;
+    public const CART_GRAND_TOTAL_PRECISION = 4;
 
     public $customer_id;
     public $id;
@@ -138,11 +139,15 @@ class expectedCart
     {
         $this->sub_total = round($this->sub_total, self::CART_TOTAL_PRECISION);
         $this->tax_total = round($this->tax_total, self::CART_TOTAL_PRECISION);
-        $this->grand_total = round($this->sub_total + $this->tax_total - $this->discount_amount, self::CART_TOTAL_PRECISION);
+        $this->discount_amount = round($this->discount_amount, self::CART_TOTAL_PRECISION);
+        $this->grand_total = round($this->sub_total + $this->tax_total - $this->discount_amount,
+            self::CART_GRAND_TOTAL_PRECISION);
 
         $this->base_sub_total = round($this->base_sub_total, self::CART_TOTAL_PRECISION);
         $this->base_tax_total = round($this->base_tax_total, self::CART_TOTAL_PRECISION);
-        $this->base_grand_total = round($this->base_sub_total + $this->base_tax_total - $this->base_discount_amount, self::CART_TOTAL_PRECISION);
+        $this->base_discount_amount = round($this->base_discount_amount, self::CART_TOTAL_PRECISION);
+        $this->base_grand_total = round($this->base_sub_total + $this->base_tax_total - $this->base_discount_amount,
+            self::CART_GRAND_TOTAL_PRECISION);
     }
 
     public function toArray(): array
@@ -579,6 +584,102 @@ class CartRuleCest
         }
     }
 
+    public function checkExampleCase(UnitTester $I)
+    {
+        config(['app.default_country' => 'DE']);
+
+        $faker = Factory::create();
+
+        $customer = $I->have(Customer::class);
+
+        auth()->guard('customer')->loginUsingId($customer->id);
+        Event::dispatch('customer.after.login', $customer['email']);
+
+        $this->sessionToken = $faker->uuid;
+        session(['_token' => $this->sessionToken]);
+
+        $tax = $I->have(TaxRate::class, [
+            'country'  => 'DE',
+            'tax_rate' => 19.0,
+        ]);
+
+        $taxCategorie = $I->have(TaxCategory::class);
+
+        $I->have(TaxMap::class, [
+            'tax_rate_id'     => $tax->id,
+            'tax_category_id' => $taxCategorie->id,
+        ]);
+
+        $productConfig = [
+            'attributeValues' => [
+                'price'           => 23.92,
+                'tax_category_id' => $taxCategorie->id,
+            ],
+        ];
+        $product = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT, $productConfig);
+
+        $ruleConfig = [
+            'action_type'     => self::ACTION_TYPE_PERCENTAGE,
+            'discount_amount' => 100,
+            'conditions'      => [
+                [
+                    'attribute'      => 'product|sku',
+                    'value'          => $product->sku,
+                    'operator'       => '==',
+                    'attribute_type' => 'text',
+                ],
+            ],
+        ];
+        $cartRule = $I->have(CartRule::class, $ruleConfig);
+
+        DB::table('cart_rule_channels')->insert([
+            'cart_rule_id' => $cartRule->id,
+            'channel_id'   => core()->getCurrentChannel()->id,
+        ]);
+
+        $guestCustomerGroup = $I->grabRecord('customer_groups', ['code' => 'guest']);
+        DB::table('cart_rule_customer_groups')->insert([
+            'cart_rule_id'      => $cartRule->id,
+            'customer_group_id' => $guestCustomerGroup['id'],
+        ]);
+
+        $generalCustomerGroup = $I->grabRecord('customer_groups', ['code' => 'general']);
+        DB::table('cart_rule_customer_groups')->insert([
+            'cart_rule_id'      => $cartRule->id,
+            'customer_group_id' => $generalCustomerGroup['id'],
+        ]);
+
+        $coupon = $I->have(CartRuleCoupon::class, [
+            'code'         => 'AWESOME',
+            'cart_rule_id' => $cartRule->id,
+        ]);
+
+
+        $data = [
+            '_token'            => session('_token'),
+            'product_id'        => $product->id,
+            'quantity'          => 1,
+        ];
+        cart()->addProduct($product->id, $data);
+        cart()->setCouponCode('AWESOME')->collectTotals();
+
+        $cart = cart()->getCart();
+        $cartItem = $cart->items()->first();
+
+        $I->assertEquals('AWESOME', $cartItem['coupon_code']);
+        $I->assertEquals(23.92, $cartItem['price']);
+        $I->assertEquals(19.0, $cartItem['tax_percent']);
+        $I->assertEquals(4.5448, $cartItem['tax_amount']);
+        $I->assertEquals(28.4648, $cartItem['discount_amount']);
+
+        $I->assertEquals('AWESOME', $cart->coupon_code);
+        $I->assertEquals(23.92, $cart->sub_total);
+        $I->assertEquals(4.54, $cart->tax_total);
+        $I->assertEquals(28.46, $cart->discount_amount);
+        // 23.92 + 4.54 - 28.46 = 0.00
+        $I->assertEquals(0.00, $cart->grand_total);
+    }
+
     /**
      * @param \Codeception\Example                    $scenario
      * @param \Tests\Unit\Category\cartRuleWithCoupon $cartRuleWithCoupon
@@ -586,19 +687,15 @@ class CartRuleCest
      *
      * @return array
      */
-    private function getExpectedCartItems(
-        Example $scenario,
-        ?cartRuleWithCoupon $cartRuleWithCoupon,
-        int $cartID
-    ): array {
+    private function getExpectedCartItems(Example $scenario, ?cartRuleWithCoupon $cartRuleWithCoupon, int $cartID): array
+    {
         $cartItems = [];
 
         foreach ($scenario['productSequence'] as $key => $item) {
             $pos = $this->array_find(
                 'product_id',
                 $this->products[$scenario['productSequence'][$key]]->id,
-                $cartItems,
-                true
+                $cartItems
             );
 
             if ($pos === null) {
@@ -793,11 +890,8 @@ class CartRuleCest
      *
      * @return \Tests\Unit\Category\expectedCart
      */
-    private function getExpectedCart(
-        int $cartId,
-        array $expectedCartItems,
-        ?cartRuleWithCoupon $cartRuleWithCoupon
-    ): expectedCart {
+    private function getExpectedCart(int $cartId, array $expectedCartItems, ?cartRuleWithCoupon $cartRuleWithCoupon): expectedCart
+    {
         $cart = new expectedCart(
             $cartId,
             auth()->guard('customer')->user()->id

@@ -324,16 +324,14 @@ class CartRule
                     break;
             }
 
-            $item->discount_amount = round(
-                min(
-                    $item->discount_amount + $discountAmount,
-                    $item->price * $quantity + $item->tax_amount
-                ),2);
-            $item->base_discount_amount = round(
-                min(
-                    $item->base_discount_amount + $baseDiscountAmount,
-                    $item->base_price * $quantity + $item->base_tax_amount
-                ), 2);
+            $item->discount_amount = min(
+                $item->discount_amount + $discountAmount,
+                $item->price * $quantity + $item->tax_amount
+            );
+            $item->base_discount_amount = min(
+                $item->base_discount_amount + $baseDiscountAmount,
+                $item->base_price * $quantity + $item->base_tax_amount
+            );
 
             $appliedRuleIds[$rule->id] = $rule->id;
 
