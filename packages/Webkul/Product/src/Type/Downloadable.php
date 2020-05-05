@@ -257,4 +257,17 @@ class Downloadable extends AbstractType
 
         $item->save();
     }
+
+    /**
+     * product options
+     *
+     * @param $product
+     * @return array
+     */
+    public function getProductOptions($product = "")
+    {
+        $options = $this->productDownloadableLinkRepository->getLinkAndSample($product);
+
+        return $options;
+    }
 }

@@ -60,7 +60,12 @@ class Simple extends AbstractType
         return $qty <= $this->totalQuantity() ? true : $backorders;
     }
 
-    //product options
+     /**
+     * product options
+     *
+     * @param \Webkul\Product\Contracts\Product  $product
+     * @return array
+     */
     public function getProductOptions($product = "")
     {
         return [];

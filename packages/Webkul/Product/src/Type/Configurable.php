@@ -589,7 +589,12 @@ class Configurable extends AbstractType
         return false;
     }
 
-    //product options
+     /**
+     * product options
+     *
+     * @param \Webkul\Product\Contracts\Product  $product
+     * @return array
+     */
     public function getProductOptions($product = "")
     {
         $configurableOption = app('Webkul\Product\Helpers\ConfigurableOption');

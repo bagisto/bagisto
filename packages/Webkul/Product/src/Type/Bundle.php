@@ -639,9 +639,12 @@ class Bundle extends AbstractType
         $item->save();
     }
 
-    /**
-     * get product options
-    */
+   /**
+     * product options
+     *
+     * @param \Webkul\Product\Contracts\Product  $product
+     * @return array
+     */
     public function getProductOptions($product = "")
     {
         $bundleOption = app('Webkul\Product\Helpers\BundleOption');

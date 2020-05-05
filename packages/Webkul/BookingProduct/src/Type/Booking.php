@@ -133,7 +133,7 @@ class Booking extends Virtual
         if (! $bookingProduct) {
             return false;
         }
-        
+
         if (in_array($bookingProduct->type, ['default', 'rental', 'table'])) {
             return true;
         }
@@ -171,7 +171,7 @@ class Booking extends Virtual
         if ($bookingProduct->type == 'event') {
             if (Carbon::now() > $bookingProduct->available_from && Carbon::now() > $bookingProduct->available_to) {
                 return trans('shop::app.checkout.cart.event.expired');
-            } 
+            }
 
             $filtered = Arr::where($data['booking']['qty'], function ($qty, $key) {
                 return $qty != 0;
@@ -197,7 +197,7 @@ class Booking extends Virtual
                 if (is_string($cartProducts)) {
                     return $cartProducts;
                 }
-                    
+
                 $products = array_merge($products, $cartProducts);
             }
         } else {
@@ -262,5 +262,40 @@ class Booking extends Virtual
         }
 
         return app($this->bookingHelper->getTypeHepler($bookingProduct->type))->validateCartItem($item);
+    }
+
+    /**
+     * product options
+     *
+     * @param \Webkul\Product\Contracts\Product  $product
+     * @return array
+     */
+    public function getProductOptions($product = "")
+    {
+        $bookingOption = $this->getBookingProduct($product->id)->get();
+
+        $data = [];
+        foreach ($bookingOption as $key => $option) {
+            $slots[] = [
+                'default_slot' => $option->default_slot,
+                'appointment_slot' => $option->appointment_slot,
+                'event_tickets' => $option->event_tickets,
+                'rental_slot' => $option->rental_slot,
+                'table_slot' => $option->table_slot,
+            ];
+
+            $data[$key] = [
+                'type' => $option->type,
+                'qty' => $option->qty,
+                'location' => $option->location,
+                'show_location' => $option->show_location,
+                'available_every_week' => $option->type,
+                'available_from' => $option->available_from->toDateTimeString(),
+                'available_to' => $option->available_to->toDateTimeString(),
+                'avilable_slots' => $slots
+            ];
+        }
+
+        return $data;
     }
 }

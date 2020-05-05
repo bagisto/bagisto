@@ -67,4 +67,30 @@ class ProductDownloadableLinkRepository extends Repository
             $this->delete($linkId);
         }
     }
+
+    /**
+     * get product links and sample
+     *
+     * @param \Webkul\Product\Contracts\Product  $product
+     * @return array
+     */
+    public function getLinkAndSample(object $product)
+    {
+        $downloadinglinks = $product->downloadable_links()
+            ->where(['product_id' => $product->id])
+            ->get();
+
+        $data = [];
+        if ( !empty($downloadinglinks)) {
+            foreach ($downloadinglinks as $key=>$link) {
+                $data['links']['url'][] = $link->url;
+                $data['links']['file'][] = $link->file;
+                $data['samples']['url'][] = $link->sample_url;
+                $data['samples']['file'][] = $link->sample_file;
+            }
+        }
+
+        return $data;
+
+    }
 }
