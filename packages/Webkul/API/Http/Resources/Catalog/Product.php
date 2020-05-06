@@ -37,7 +37,7 @@ class Product extends JsonResource
             'name'                   => $this->name,
             'url_key'                => $this->url_key,
             'price'                  => $product->getTypeInstance()->getMinimalPrice(),
-            'formatted_price'         => core()->currency($product->getTypeInstance()->getMinimalPrice()),
+            'formated_price'         => core()->currency($product->getTypeInstance()->getMinimalPrice()),
             'short_description'      => $this->short_description,
             'description'            => $this->description,
             'sku'                    => $this->sku,
