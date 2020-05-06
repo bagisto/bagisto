@@ -370,7 +370,11 @@ return [
             'total-due' => 'Total Due',
             'cancel-confirm-msg' => 'Weet u zeker dat u deze bestelling wilt annuleren ?',
             'refund-btn-title' => 'Terugbetaling',
-            'refunds' => 'Terugbetalingen'
+            'refunds' => 'Terugbetalingen',
+            'comment-added-success' => 'Comment addded successfully.',
+            'comment' => 'Comment',
+            'submit-comment' => 'Submit Comment',
+            'notify-customer' => 'Notify Customer',
         ],
 
         'invoices' => [

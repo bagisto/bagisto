@@ -187,6 +187,8 @@ Route::group(['middleware' => ['web']], function () {
                     'view' => 'admin::sales.orders.cancel'
                 ])->name('admin.sales.orders.cancel');
 
+                Route::post('/orders/create/{order_id}', 'Webkul\Admin\Http\Controllers\Sales\OrderController@comment')->name('admin.sales.orders.comment');
+
 
                 // Sales Invoices Routes
                 Route::get('/invoices', 'Webkul\Admin\Http\Controllers\Sales\InvoiceController@index')->defaults('_config', [
