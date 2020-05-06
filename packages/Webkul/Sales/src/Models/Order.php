@@ -70,13 +70,20 @@ class Order extends Model implements OrderContract
         return $this->belongsTo(CartProxy::modelClass());
     }
 
-
     /**
      * Get the order items record associated with the order.
      */
     public function items()
     {
         return $this->hasMany(OrderItemProxy::modelClass())->whereNull('parent_id');
+    }
+
+    /**
+     * Get the comments record associated with the order.
+     */
+    public function comments()
+    {
+        return $this->hasMany(OrderCommentProxy::modelClass());
     }
 
     /**

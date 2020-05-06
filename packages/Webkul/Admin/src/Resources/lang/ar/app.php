@@ -370,7 +370,11 @@ return [
             'total-due' => 'المجموع المستحق',
             'cancel-confirm-msg' => 'هل أنت متأكد من أنك تريد إلغاء هذا الطلب ؟',
             'refunds' => 'المبالغ المستردة',
-            'refunded' => 'تم رد الأموال'
+            'refunded' => 'تم رد الأموال',
+            'comment-added-success' => 'Comment addded successfully.',
+            'comment' => 'Comment',
+            'submit-comment' => 'Submit Comment',
+            'notify-customer' => 'Notify Customer',
         ],
 
         'invoices' => [

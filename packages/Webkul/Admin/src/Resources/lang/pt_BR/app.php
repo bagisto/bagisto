@@ -370,7 +370,11 @@ return [
             'total-due' => 'Total Devido',
             'cancel-confirm-msg' => 'Tem certeza que deseja cancelar esse pedido ?',
             'refunds' => 'Refunds',
-            'refunded' => 'Refunded'
+            'refunded' => 'Refunded',
+            'comment-added-success' => 'Comment addded successfully.',
+            'comment' => 'Comment',
+            'submit-comment' => 'Submit Comment',
+            'notify-customer' => 'Notify Customer',
         ],
 
         'invoices' => [

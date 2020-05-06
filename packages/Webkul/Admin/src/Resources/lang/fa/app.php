@@ -370,7 +370,11 @@ return [
             'cancel-confirm-msg' => 'مطمئن هستید که می خواهید این سفارش را لغو کنید ؟',
             'refunds' => 'بازپرداخت',
             'refund-btn-title' => 'بازپرداخت',
-            'refunded' => 'بازپرداخت'
+            'refunded' => 'بازپرداخت',
+            'comment-added-success' => 'Comment addded successfully.',
+            'comment' => 'Comment',
+            'submit-comment' => 'Submit Comment',
+            'notify-customer' => 'Notify Customer',
         ],
 
         'invoices' => [
