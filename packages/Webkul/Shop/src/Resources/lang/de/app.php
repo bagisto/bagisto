@@ -101,7 +101,7 @@ return [
             'title' => 'Anmelden',
             'firstname' => 'Vorname',
             'lastname' => 'Nachname',
-            'email' => 'E-mail',
+            'email' => 'E-Mail',
             'password' => 'Passwort',
             'confirm_pass' => 'Passwort bestätigen',
             'button_title' => 'Registrieren',
@@ -131,7 +131,7 @@ return [
         'login-form' => [
             'page-title' => 'Kundenlogin',
             'title' => 'Anmelden',
-            'email' => 'E-mail',
+            'email' => 'E-Mail',
             'password' => 'Passwort',
             'forgot_pass' => 'Passwort vergessen?',
             'button_title' => 'Anmelden',
@@ -145,14 +145,14 @@ return [
 
         'forgot-password' => [
             'title' => 'Passwort wiederherstellen',
-            'email' => 'E-mail',
+            'email' => 'E-Mail',
             'submit' => 'E-Mail zum Zurücksetzen des Passworts senden',
             'page_title' => 'Haben Sie Ihr Passwort vergessen ?'
         ],
 
         'reset-password' => [
             'title' => 'Passwort zurücksetzen',
-            'email' => 'Registrierte E-mail',
+            'email' => 'Registrierte E-Mail',
             'password' => 'Passwort',
             'confirm-password' => 'Passwort bestätigen',
             'back-link-title' => 'Zurück zur Anmeldung',
@@ -182,7 +182,7 @@ return [
                 'female' => 'weiblich',
                 'dob' => 'Geburtsdatum',
                 'phone' => 'Telefon',
-                'email' => 'E-mail',
+                'email' => 'E-Mail',
                 'opassword' => 'Altes Passwort',
                 'password' => 'Passwort',
                 'cpassword' => 'Passwort bestätigen',
@@ -221,7 +221,7 @@ return [
                     'title' => 'Adresse hinzufügen',
                     'street-address' => 'Straße',
                     'country' => 'Land',
-                    'state' => 'Staat',
+                    'state' => 'Bundesland',
                     'select-state' => 'Wählen Sie eine Region, ein Bundesland oder eine Provinz aus',
                     'city' => 'Stadt',
                     'postcode' => 'Postleitzahl',
@@ -320,7 +320,7 @@ return [
                 'page-title' => 'Wunschliste',
                 'title' => 'Wunschliste',
                 'deleteall' => 'Alles löschen',
-                'moveall' => 'Alle Produkte in den Warenkorb legen',
+                'moveall' => 'Alle Produkte zum Warenkorb hinzufügen',
                 'move-to-cart' => 'In den Warenkorb legen',
                 'error' => 'Das Produkt kann aufgrund unbekannter Probleme nicht zur Wunschliste hinzugefügt werden. Bitte versuchen Sie es später erneut',
                 'add' => 'Artikel erfolgreich zur Wunschliste hinzugefügt',
@@ -391,7 +391,7 @@ return [
         'sale' => 'Verkauf',
         'new' => 'Neu',
         'empty' => 'Keine Produkte in dieser Kategorie verfügbar',
-        'add-to-cart' => 'In den Warenkorb legen',
+        'add-to-cart' => 'In Warenkorb',
         'buy-now' => 'Jetzt kaufen',
         'whoops' => 'Hoppla!',
         'quantity' => 'Menge',
@@ -429,7 +429,7 @@ return [
                 'missing_options' => 'Für dieses Produkt fehlen Optionen.',
                 'missing_links' => 'Für dieses Produkt fehlen herunterladbare Links.',
                 'qty_missing' => 'Mindestens ein Produkt sollte mehr als 1 Menge enthalten.',
-                'qty_impossible' => 'Es kann nicht mehr als eines dieser Produkte in den Warenkorb gelegt werden.'
+                'qty_impossible' => 'Es kann nicht mehr als eines dieser Produkte zum Warenkorb hinzugefügt werden.'
             ],
             'create-error' => 'Beim Erstellen des Warenkorbs ist ein Problem aufgetreten.',
             'title' => 'Warenkorb',
@@ -442,7 +442,7 @@ return [
             'move-to-wishlist' => 'Zur Wunschliste verschieben',
             'move-to-wishlist-success' => 'Artikel wurde erfolgreich auf die Wunschliste verschoben.',
             'move-to-wishlist-error' => 'Das Objekt kann nicht auf die Wunschliste verschoben werden. Bitte versuchen Sie es später erneut.',
-            'add-config-warning' => 'Bitte wählen Sie die Option, bevor Sie sie in den Warenkorb legen.',
+            'add-config-warning' => 'Bitte wählen Sie die Option, bevor Sie sie zum Warenkorb hinzufügen.',
             'quantity' => [
                 'quantity' => 'Menge',
                 'success' => 'Warenkorbartikel erfolgreich aktualisiert.',
@@ -452,14 +452,14 @@ return [
             ],
 
             'item' => [
-                'error_remove' => 'Keine Artikel aus dem Warenkorb zu entfernen.',
-                'success' => 'Artikel wurde erfolgreich in den Warenkorb gelegt.',
-                'success-remove' => 'Artikel wurde erfolgreich aus dem Warenkorb entfernt.',
-                'error-add' => 'Artikel kann nicht in den Warenkorb gelegt werden. Bitte versuchen Sie es später erneut.',
+                'error_remove' => 'Keine Artikel aus dem Warenkorb zu entfernen',
+                'success' => 'Artikel wurde erfolgreich zum Warenkorb hinzugefügt',
+                'success-remove' => 'Artikel wurde erfolgreich aus dem Warenkorb entfernt',
+                'error-add' => 'Artikel kann nicht zum Warenkorb hinzugefügt werden. Bitte versuchen Sie es später erneut',
             ],
-            'quantity-error' => 'Die angeforderte Menge ist nicht verfügbar.',
+            'quantity-error' => 'Die angeforderte Menge ist nicht verfügbar',
             'cart-subtotal' => 'Warenkorb Zwischensumme',
-            'cart-remove-action' => 'Wollen Sie dies wirklich tun ?',
+            'cart-remove-action' => 'Wollen Sie dies wirklich tun?',
             'partial-cart-update' => 'Nur einige der Produkte wurden aktualisiert',
             'link-missing' => ''
         ],
@@ -475,10 +475,10 @@ return [
             'company-name' => 'Name der Firma',
             'first-name' => 'Vorname',
             'last-name' => 'Nachname',
-            'email' => 'E-mail',
+            'email' => 'E-Mail',
             'address1' => 'Straße',
             'city' => 'Stadt',
-            'state' => 'Staat',
+            'state' => 'Bundesland',
             'select-state' => 'Wählen Sie eine Region, ein Bundesland oder eine Provinz aus',
             'postcode' => 'Postleitzahl',
             'phone' => 'Telefon',
@@ -626,7 +626,7 @@ return [
         'customer' => [
             'new' => [
                 'dear' => 'Sehr geehrte/r :customer_name',
-                'username-email' => 'Nutzername/E-mail',
+                'username-email' => 'Nutzername/E-Mail',
                 'subject' => 'Neukundenregistrierung',
                 'password' => 'Passwort',
                 'summary' => 'Ihr Konto wurde erstellt.
