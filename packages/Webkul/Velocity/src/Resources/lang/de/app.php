@@ -204,7 +204,7 @@ return [
             'new-customer'          => 'Neukunde',
             'customer-login'        => 'Kundenlogin',
             'registered-user'       => 'Registrierter Nutzer',
-            'your-email-address'    => 'Ihre Email-Adresse',
+            'your-email-address'    => 'Ihre E-mail-Adresse',
             'form-login-text'       => 'Wenn Sie ein Konto haben, melden Sie sich mit Ihrer E-Mail-Adresse an.',
         ],
         'signup-form'       => [
