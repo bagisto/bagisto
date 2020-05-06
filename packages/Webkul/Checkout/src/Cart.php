@@ -498,7 +498,7 @@ class Cart
         $this->saveAddressesWhenRequested($data, $billingAddressData, $shippingAddressData);
 
         $this->linkAddresses($cart, $billingAddressData, $shippingAddressData);
-
+        
         $this->assignCustomerFields($cart);
 
         $cart->save();
@@ -1191,14 +1191,17 @@ class Cart
     {
         $billingAddressModel = $cart->billing_address;
         if ($billingAddressModel) {
+            $billingAddressData['address_type'] = CartAddress::ADDRESS_TYPE_BILLING;
             $this->cartAddressRepository->update($billingAddressData, $billingAddressModel->id);
 
             if ($cart->haveStockableItems()) {
                 $shippingAddressModel = $cart->shipping_address;
                 if ($shippingAddressModel) {
                     if (isset($billingAddressData['use_for_shipping']) && $billingAddressData['use_for_shipping']) {
+                        $billingAddressData['address_type'] = CartAddress::ADDRESS_TYPE_SHIPPING;
                         $this->cartAddressRepository->update($billingAddressData, $shippingAddressModel->id);
                     } else {
+                        $shippingAddressData['address_type'] = CartAddress::ADDRESS_TYPE_SHIPPING;
                         $this->cartAddressRepository->update($shippingAddressData, $shippingAddressModel->id);
                     }
                 } else {
