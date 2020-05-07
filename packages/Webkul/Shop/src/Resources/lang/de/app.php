@@ -366,7 +366,7 @@ return [
 
     'products' => [
         'layered-nav-title' => 'Einkaufen bei',
-        'price-label' => 'So niedrig wie',
+        'price-label' => 'Angebotspreis von',
         'remove-filter-link-title' => 'Alles löschen',
         'filter-to' => 'bis',
         'sort-by' => 'Sortieren',

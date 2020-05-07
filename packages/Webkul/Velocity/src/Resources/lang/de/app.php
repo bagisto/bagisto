@@ -198,6 +198,8 @@ return [
             'already_added'         => 'Artikel bereits zur Vergleichsliste hinzugefügt',
             'removed'               => 'Element erfolgreich aus Vergleichsliste entfernt',
             'empty-text'            => "Sie haben keine Elemente in Ihrer Vergleichsliste",
+            'product_image'         => 'Produktbild',
+            'actions'               => 'Aktionen',
         ],
         'login-form'        => [
             'sign-up'               => 'Anmelden',

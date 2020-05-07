@@ -198,6 +198,8 @@ return [
             'already_added' => 'مورد در حال حاضر برای مقایسه لیست اضافه شده است',
             'removed' => 'مورد با موفقیت از لیست مقایسه حذف شد',
             'empty-text' => "شما هیچ موردی را در لیست مقایسه خود ندارید",
+            'product_image' => 'Product Image',
+            'actions' => 'Actions',
         ],
         'login-form' => [
             'sign-up' => 'ثبت نام',
