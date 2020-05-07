@@ -42,6 +42,7 @@ return [
     ],
 
     'layouts' => [
+        'app-version' => 'Version : :version',
         'my-account' => 'Mijn Profiel',
         'logout' => 'Afmelden',
         'visit-shop' => 'Winkel Bezoeken',

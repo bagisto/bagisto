@@ -66,6 +66,14 @@ body {
             cursor: pointer;
             position: relative;
 
+            .app-version {
+                padding: 10px 20px 0px 20px;
+                margin-bottom: -10px;
+                display: block;
+                cursor: default;
+                color: #a2a2a2;
+            }
+
             .dropdown-list {
                 top: 63px;
                 right: 0px !important;

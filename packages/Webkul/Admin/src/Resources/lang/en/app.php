@@ -42,6 +42,7 @@ return [
     ],
 
     'layouts' => [
+        'app-version' => 'Version : :version',
         'my-account' => 'My Account',
         'logout' => 'Logout',
         'visit-shop' => 'Visit Shop',
