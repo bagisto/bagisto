@@ -368,6 +368,7 @@ return [
         'layered-nav-title' => 'المنتجات',
         'price-label' => 'أقل من',
         'remove-filter-link-title' => 'امسح الكل',
+        'filter-to' => 'to',
         'sort-by' => 'افرز حسب',
         'from-a-z' => 'من a-z',
         'from-z-a' => 'من ز-أ',

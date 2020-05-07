@@ -368,6 +368,7 @@ return [
         'layered-nav-title' => 'Einkaufen bei',
         'price-label' => 'So niedrig wie',
         'remove-filter-link-title' => 'Alles löschen',
+        'filter-to' => 'bis',
         'sort-by' => 'Sortieren',
         'from-a-z' => 'Von A-Z',
         'from-z-a' => 'Von Z-A',
