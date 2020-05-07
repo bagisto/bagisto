@@ -11,17 +11,50 @@ class CartRuleDataGrid extends DataGrid
 
     protected $sortOrder = 'desc';
 
+    protected $customer_group = 'all';
+
+    protected $channel = 'all';
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->customer_group = request()->get('customer_group') ?? 'all';
+
+        $this->channel = request()->get('channel') ?? 'all';
+    }
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('cart_rules')
-            ->leftJoin('cart_rule_coupons', function($leftJoin) {
+            ->leftJoin('cart_rule_coupons', function ($leftJoin) {
                 $leftJoin->on('cart_rule_coupons.cart_rule_id', '=', 'cart_rules.id')
-                         ->where('cart_rule_coupons.is_primary', 1);
+                    ->where('cart_rule_coupons.is_primary', 1);
             })
-            ->addSelect('cart_rules.id', 'name', 'cart_rule_coupons.code as coupon_code', 'status', 'starts_from', 'ends_till', 'sort_order');
+            ->addSelect('cart_rules.id', 'name', 'cart_rule_coupons.code as coupon_code',
+                'status', 'starts_from', 'ends_till', 'sort_order');
 
         $this->addFilter('id', 'cart_rules.id');
         $this->addFilter('coupon_code', 'cart_rule_coupons.code');
+
+        if ($this->customer_group !== 'all') {
+            $queryBuilder->leftJoin(
+                'cart_rule_customer_groups',
+                'cart_rule_customer_groups.cart_rule_id',
+                '=',
+                'cart_rules.id'
+            );
+            $queryBuilder->where('cart_rule_customer_groups.customer_group_id', $this->customer_group);
+        }
+
+        if ($this->channel !== 'all') {
+            $queryBuilder->leftJoin(
+                'cart_rule_channels',
+                'cart_rule_channels.cart_rule_id',
+                '=',
+                'cart_rules.id');
+            $queryBuilder->where('cart_rule_channels.channel_id', $this->channel);
+        }
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -80,7 +113,7 @@ class CartRuleDataGrid extends DataGrid
             'searchable' => true,
             'sortable'   => true,
             'filterable' => true,
-            'wrapper'    => function($value) {
+            'wrapper'    => function ($value) {
                 if ($value->status == 1) {
                     return trans('admin::app.datagrid.active');
                 } else {

@@ -25,18 +25,15 @@
         <div class="add-to-cart-btn pl0">
             @if (isset($form) && !$form)
                 <button
-                    type="button"
-                    @click="onSubmit"
+                    type="submit"
                     {{ ! $product->isSaleable() ? 'disabled' : '' }}
-                    class="btn btn-add-to-cart {{ $addToCartBtnClass ?? '' }}">
+                    class="theme-btn {{ $addToCartBtnClass ?? '' }}">
 
                     @if (! (isset($showCartIcon) && !$showCartIcon))
                         <i class="material-icons text-down-3">shopping_cart</i>
                     @endif
 
-                    <span class="fs14 fw6 text-uppercase text-up-4">
                         {{ __('shop::app.products.add-to-cart') }}
-                    </span>
                 </button>
             @elseif(isset($addToCartForm) && !$addToCartForm)
                 <form
@@ -65,7 +62,10 @@
                 <add-to-cart
                     form="true"
                     csrf-token='{{ csrf_token() }}'
+                    product-flat-id="{{ $product->id }}"
                     product-id="{{ $product->product_id }}"
+                    reload-page="{{ $reloadPage ?? false }}"
+                    move-to-cart="{{ $moveToCart ?? false }}"
                     add-class-to-btn="{{ $addToCartBtnClass ?? '' }}"
                     is-enable={{ ! $product->isSaleable() ? 'false' : 'true' }}
                     show-cart-icon={{ !(isset($showCartIcon) && !$showCartIcon) }}

@@ -114,6 +114,11 @@ abstract class AbstractType
     protected $isChildrenCalculated = false;
 
     /**
+     * product options
+     */
+    protected $productOptions = [];
+
+    /**
      * Create a new product type instance.
      *
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
@@ -226,9 +231,11 @@ abstract class AbstractType
         $route = request()->route() ? request()->route()->getName() : "";
 
         if ($route != 'admin.catalog.products.massupdate') {
-            if  (isset($data['categories'])) {
-                $product->categories()->sync($data['categories']);
+            if  (! isset($data['categories'])) {
+                $data['categories'] = [];
             }
+
+            $product->categories()->sync($data['categories']);
 
             $product->up_sells()->sync($data['up_sell'] ?? []);
 
@@ -691,5 +698,11 @@ abstract class AbstractType
         $item->total = core()->convertPrice($price * $item->quantity);
 
         $item->save();
+    }
+
+    //get product options
+    public function getProductOptions()
+    {
+        return $this->productOptions;
     }
 }

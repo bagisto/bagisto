@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Webkul\Product\Console\Commands;
 
 use Illuminate\Console\Command;
 use Webkul\Product\Helpers\GenerateProduct;

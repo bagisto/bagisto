@@ -318,6 +318,8 @@
                                     galleryImages.unshift(image)
                                 });
                             }
+
+                            eventBus.$emit('configurable-variant-update-images-event', galleryImages);
                         },
 
                         changeStock: function (productId) {

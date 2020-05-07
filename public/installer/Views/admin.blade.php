@@ -1,60 +1,49 @@
-<html>
+<div class="container admin" id="admin">
+    <div class="initial-display">
+        <p>Create a Administrator</p>
+    </div>
 
-    <body>
-
-        <div class="container admin" id="admin">
-            <div class="initial-display">
-                <p>Admin Details</p>
-
-                <form action="AdminConfig.php"  method= "POST" id="admin-form">
-                    <div class="content">
-                        <div class="form-container" style="padding: 10%; padding-top: 35px">
-                            <div class="control-group" id="admin_name">
-                                <label for="admin_name" class="required">Name</label>
-                                <input type="text" name="admin_name" class="control"
-                                data-validation="required length" data-validation-length="max50">
-                            </div>
-
-                            <div class="control-group" id="admin_email">
-                                <label for="admin_email" class="required">Email</label>
-                                <input type="text" name="admin_email" class="control"
-                                data-validation="required email length" data-validation-length="max50">
-                            </div>
-
-                            <div class="control-group" id="admin_password">
-                                <label for="admin_password" class="required">Password</label>
-                                <input type="password" name="admin_password" class="control"
-                                data-validation="length required" data-validation-length="min6">
-                            </div>
-
-                            <div class="control-group" id="admin_re_password">
-                                <label for="admin_re_password" class="required">Re-Password</label>
-                                <input type="password" name="admin_re_password" class="control"
-                                data-validation="length required" data-validation-length="min6">
-                            </div>
+    <div class="row justify-content-center">
+		<div class="col-md-6 col-md-offset-1">
+			<div class="card card-default">
+                <div class="card-body">
+                    <form action="AdminConfig.php"  method= "POST" id="admin-form">
+                        <div class="form-group" id="admin_name">
+                            <label for="admin_user_name" class="required">Name</label>
+                            <input type="text" name="admin_name" id="admin_user_name" class="form-control" data-validation="required length" data-validation-length="max50">
                         </div>
-                    </div>
-                    <div>
-                        <button  class="prepare-btn" id="admin-check">Continue</button>
-                    </div>
-                </form>
+                        
+                        <div class="form-group" id="admin_email">
+                            <label for="admin_user_email" class="required">Email</label>
+                            <input type="text" name="admin_email" id="admin_user_email" class="form-control" data-validation="required email length" data-validation-length="max50">
+                        </div>
+                        
+                        <div class="form-group" id="admin_password">
+                            <label for="admin_user_password" class="required">Password</label>
+                            <input type="password" name="admin_password" id="admin_user_password" class="form-control" data-validation="length required" data-validation-length="min6">
+                        </div>
+                        
+                        <div class="form-group" id="admin_re_password">
+                            <label for="admin_user_repassword" class="required">Password confirmation</label>
+                            <input type="password" name="admin_re_password" id="admin_user_repassword" class="form-control" data-validation="length required" data-validation-length="min6">
+                        </div>
 
+                        <div class="text-center" style="padding-bottom: 10px;">
+                            <button type="submit" class="btn btn-primary" id="admin-check">Continue</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-
-    </body>
-
-</html>
-
-<script>
-    $.validate({});
-</script>
+    </div>
+</div>
 
 <script>
     $(document).ready(function() {
+        $.validate({});
         // process the form
         $('#admin-form').submit(function(event) {
-            $('.control-group').removeClass('has-error'); // remove the error class
+            $('.form-group').removeClass('has-error'); // remove the error class
             $('.form-error').remove(); // remove the error text
             // get the form data
             var formData = {

@@ -448,7 +448,14 @@
             height: 270px;
             max-width: 200px;
             max-height: 200px;
+            position: relative;
             background: #f2f2f2;
+
+            .quick-view-btn-container {
+                button {
+                    left: calc(50% - 40px);
+                }
+            }
         }
 
         .product-information {
@@ -485,7 +492,8 @@
 
         .wishlist-icon {
             height: 40px;
-            display: table;
+            vertical-align: top;
+            display: inline-table;
             padding-left: 0 !important;
 
             i {
@@ -497,10 +505,13 @@
 
         .compare-icon {
             padding-left: 0;
+            display: inline-table;
         }
 
         .add-to-cart-btn {
+            float: left;
             max-width: 150px;
+            display: inline-block;
         }
     }
 

@@ -145,14 +145,16 @@ class ProductRepository extends Repository
             if (isset($params['sort'])) {
                 $attribute = $this->attributeRepository->findOneByField('code', $params['sort']);
 
-                if ($params['sort'] == 'price') {
-                    if ($attribute->code == 'price') {
-                        $qb->orderBy('min_price', $params['order']);
+                if ($attribute) {
+                    if ($params['sort'] == 'price') {
+                        if ($attribute->code == 'price') {
+                            $qb->orderBy('min_price', $params['order']);
+                        } else {
+                            $qb->orderBy($attribute->code, $params['order']);
+                        }
                     } else {
-                        $qb->orderBy($attribute->code, $params['order']);
+                        $qb->orderBy($params['sort'] == 'created_at' ? 'product_flat.created_at' : $attribute->code, $params['order']);
                     }
-                } else {
-                    $qb->orderBy($params['sort'] == 'created_at' ? 'product_flat.created_at' : $attribute->code, $params['order']);
                 }
             }
 
@@ -262,7 +264,7 @@ class ProductRepository extends Repository
                             ->where('product_flat.new', 1)
                             ->where('product_flat.channel', $channel)
                             ->where('product_flat.locale', $locale)
-                            ->orderBy('product_id', 'desc');
+                            ->inRandomOrder();
         })->paginate(4);
 
         return $results;
@@ -287,7 +289,7 @@ class ProductRepository extends Repository
                             ->where('product_flat.featured', 1)
                             ->where('product_flat.channel', $channel)
                             ->where('product_flat.locale', $locale)
-                            ->orderBy('product_id', 'desc');
+                            ->inRandomOrder();
         })->paginate(4);
 
         return $results;
@@ -313,7 +315,10 @@ class ProductRepository extends Repository
                             ->where('product_flat.channel', $channel)
                             ->where('product_flat.locale', $locale)
                             ->whereNotNull('product_flat.url_key')
-                            ->where('product_flat.name', 'like', '%' . urldecode($term) . '%')
+                            ->where(function($sub_query) use ($term) {  
+                                $sub_query->where('product_flat.name', 'like', '%' . urldecode($term) . '%')
+                                          ->orWhere('product_flat.short_description', 'like', '%' . urldecode($term) . '%');
+                                })
                             ->orderBy('product_id', 'desc');
         })->paginate(16);
 

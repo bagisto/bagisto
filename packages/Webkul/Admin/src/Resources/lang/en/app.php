@@ -370,7 +370,13 @@ return [
             'total-due' => 'Total Due',
             'cancel-confirm-msg' => 'Are you sure you want to cancel this order ?',
             'refund-btn-title' => 'Refund',
-            'refunds' => 'Refunds'
+            'refunds' => 'Refunds',
+            'comment-added-success' => 'Comment addded successfully.',
+            'comment' => 'Comment',
+            'submit-comment' => 'Submit Comment',
+            'notify-customer' => 'Notify Customer',
+            'customer-notified' => ':date | Customer <b>Notified</b>',
+            'customer-not-notified' => ':date | Customer <b>Not Notified</b>'
         ],
 
         'invoices' => [
@@ -409,6 +415,7 @@ return [
             'add-title' => 'Create Shipment',
             'save-btn-title' => 'Save Shipment',
             'qty-ordered' => 'Qty Ordered',
+            'qty-invoiced' => 'Qty Invoiced',
             'qty-to-ship' => 'Qty to Ship',
             'available-sources' => 'Available Sources',
             'source' => 'Source',
@@ -728,7 +735,7 @@ return [
             'target_currency' => 'Target Currency',
             'rate' => 'Rate',
             'exchange-class-not-found' => ':service exchange rate class not found',
-            'update-rates' => 'Update rates using :service',
+            'update-rates' => 'Update Rates',
             'create-success' => 'Exchange Rate created successfully.',
             'update-success' => 'Exchange Rate updated successfully.',
             'delete-success' => 'Exchange Rate deleted successfully.',
@@ -1286,6 +1293,11 @@ return [
             'footer-toggle' => 'Toggle footer',
             'locale-options' => 'Unit Options',
             'weight-unit' => 'Weight Unit',
+            'email-settings'    => 'Email Settings',
+            'email-sender-name' => 'Email Sender Name',
+            'shop-email-from'   => 'Shop Email Address [For sending emails]',
+            'admin-name'    => 'Admin Name',
+            'admin-email' => 'Admin Email',
             'admin-page-limit' => 'Default Items Per Page (Admin)',
             'design' => 'Design',
             'admin-logo' => 'Admin Logo',
@@ -1300,10 +1312,12 @@ return [
             'order-number-suffix' => 'Order Number Suffix',
             'default' => 'Default',
             'sandbox' => 'Sandbox',
-            'all-channels' => 'All',
-            'all-locales' => 'All',
+            'all-channels' => 'All Channels',
+            'all-locales' => 'All Locales',
+            'all-customer-groups' => 'All Customer groups',
             'invoice-slip-design' => 'Invoice Slip Design',
-            'logo' => 'logo'
+            'logo' => 'logo',
+            'favicon' => 'Favicon'
        ]
     ]
 ];
