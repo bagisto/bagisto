@@ -13,7 +13,7 @@ class CreateBulkuploadDataflowprofileTable extends Migration
      */
     public function up()
     {
-        Schema::create('bulkupload_dataflowprofile', function (Blueprint $table) {
+        Schema::create('bulkupload_data_flow_profiles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('profile_name');
             $table->integer('attribute_family_id')->unsigned();
@@ -21,7 +21,6 @@ class CreateBulkuploadDataflowprofileTable extends Migration
             $table->boolean('is_seller')->default(0);
             $table->boolean('run_status')->default(0);
             $table->string('seller_id')->references('id')->on('customers');
-
             $table->timestamps();
         });
     }
@@ -33,6 +32,6 @@ class CreateBulkuploadDataflowprofileTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bulkupload_dataflowprofile');
+        Schema::dropIfExists('bulkupload_data_flow_profiles');
     }
 }

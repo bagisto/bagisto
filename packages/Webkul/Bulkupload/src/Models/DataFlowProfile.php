@@ -11,7 +11,7 @@ class DataFlowProfile extends Model implements DataFlowProfileContract
 {
     protected $guarded = array();
 
-    protected $table = "bulkupload_dataflowprofile";
+    protected $table = "bulkupload_data_flow_profiles";
 
     public function attribute_family()
     {

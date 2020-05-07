@@ -412,7 +412,7 @@ class BulkUploadController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'profile_name' => 'required|unique:bulkupload_dataflowprofile',
+            'profile_name' => 'required|unique:bulkupload_data_flow_profiles',
             'attribute_family' => 'required'
         ]);
 
