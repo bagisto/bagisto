@@ -42,6 +42,7 @@ return [
     ],
 
     'layouts' => [
+        'app-version' => 'Version : :version',
         'account' => 'حساب',
         'my-account' => 'پروفایل من',
         'logout' => 'خروج',
