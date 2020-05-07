@@ -105,7 +105,7 @@
         "Webkul\\CMS\\": "packages/Webkul/CMS/src",
         "Webkul\\Velocity\\": "packages/Webkul/Velocity/src",
         "Webkul\\BookingProduct\\": "packages/Webkul/BookingProduct/src",
-        "Webkul\\Bulkupload\\": "packages/Webkul/Bulkupload"
+        "Webkul\\Bulkupload\\": "packages/Webkul/Bulkupload/src"
       }
     },
 

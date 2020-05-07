@@ -19,8 +19,6 @@ use Storage;
 /**
  * BulkProduct Repository
  *
- * @author    Prateek Sivastava
- * @copyright 2019 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class BulkProductRepository extends Repository
 {

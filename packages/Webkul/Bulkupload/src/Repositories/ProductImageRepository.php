@@ -8,8 +8,6 @@ use Webkul\Core\Eloquent\Repository;
 /**
  * Product Image Reposotory
  *
- * @author    Prateek Srivastava <prateek.srivastava781@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class ProductImageRepository extends Repository
 {

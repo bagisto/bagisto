@@ -17,8 +17,6 @@ use Webkul\Product\Repositories\ProductRepository;
 /**
  * BulkProduct Repository
  *
- * @author    Prateek Sivastava
- * @copyright 2019 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class HelperRepository extends Repository
 {

@@ -20,8 +20,6 @@ use Illuminate\Support\Facades\Log;
 /**
  * BulkProduct Repository
  *
- * @author    Prateek Sivastava
- * @copyright 2019 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class BookingProductRepository extends Repository
 {
