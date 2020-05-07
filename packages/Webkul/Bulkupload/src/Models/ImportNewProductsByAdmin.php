@@ -7,7 +7,6 @@ use Webkul\Bulkupload\Contracts\ImportNewProductsByAdmin as ImportNewProductsByA
 
 class ImportNewProductsByAdmin extends Model implements ImportNewProductsByAdminContract
 {
-    //
     protected $table = "import_new_products_by_admin";
 
     protected $guarded = array();

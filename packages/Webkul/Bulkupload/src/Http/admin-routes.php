@@ -54,7 +54,6 @@ Route::group(['middleware' => ['web']], function () {
             ])->name('admin.bulk-upload.dataflow.update-profile');
 
             //mass destroy
-
             Route::post('products/massdestroy', 'Webkul\Bulkupload\Http\Controllers\Admin\BulkUploadController@massDestroy')->defaults('_config', [
                 'redirect' => 'admin.dataflow-profile.index'
             ])->name('bulkupload.admin.profile.massDelete');

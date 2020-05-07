@@ -781,7 +781,7 @@ class DownloadableProductRepository extends Repository
         }
     }
 
-    //sample file uploads (file set to storage folder)
+    //sample file uploads
     public function fileOrUrlUpload($dataFlowProfileRecord, $type, $file, $id, $downloadableLinks, $flag)
     {
         try {
@@ -838,24 +838,6 @@ class DownloadableProductRepository extends Repository
                     Storage::copy($files, $destination);
 
                     return $destination;
-
-
-
-                    // $urlPath = public_path('storage/imported-products/extracted-images/admin/link-sample-files/'.$dataFlowProfileRecord->id);
-
-                    // if (!file_exists($urlPath)) {
-                    //     mkdir($urlPath, 0777, true);
-                    // }
-
-                    // $imageFile = $urlPath.'/'.basename(trim($file));
-
-                    // file_put_contents($imageFile, file_get_contents(trim($file)));
-
-                    // $destination = "product/".$id.'/'.basename(trim($file));
-
-                    // Storage::copy(trim($imageFile), $destination);
-
-                    // return $destination;
                 }
             }
         } catch(\Exception $e) {
@@ -863,16 +845,14 @@ class DownloadableProductRepository extends Repository
         }
     }
 
-    //link file uploads (file set to storage folder)
+    //link file uploads
     public function linkFileOrUrlUpload($dataFlowProfileRecord, $type, $file, $id, $downloadableLinks)
     {
         try {
             if (trim($type) == "file") {
                 $files = "imported-products/extracted-images/admin/link-files/".$dataFlowProfileRecord->id.'/'. $downloadableLinks['uploadLinkFilesZipName']['dirname'].'/'.trim(basename($file));
 
-                // $destination = "product/".$id.'/'.trim(basename($file));
                 $destination = "product_downloadable_links/".$id.'/'.basename($file);
-
 
                 Storage::copy($files, $destination);
 
@@ -963,44 +943,4 @@ class DownloadableProductRepository extends Repository
             'uploadLinkFilesZipName' => $uploadLinkFilesZipName
         ];
     }
-
-    // public function createProductValidation($record, $loopCount)
-    // {
-    //     try {
-    //         $validateProduct = Validator::make($record, [
-    //             'type' => 'required',
-    //             'sku' => 'required',
-    //             'attribute_family_name' => 'required'
-    //         ]);
-
-    //         if ($validateProduct->fails()) {
-    //             $errors = $validateProduct->errors()->getMessages();
-
-    //             foreach($errors as $key => $error)
-    //             {
-    //                 $errorToBeReturn[] = str_replace(".", "", $error[0]) . " for record " . $loopCount + 1;
-    //             }
-
-    //             request()->countOfStartedProfiles =  $loopCount + 1;
-
-    //             $productsUploaded = $loopCount - request()->errorCount;
-
-    //             if (request()->numberOfCSVRecord != 0) {
-    //                 $remainDataInCSV = (int)request()->totalNumberOfCSVRecord - (int)request()->countOfStartedProfiles;
-    //             } else {
-    //                 $remainDataInCSV = 0;
-    //             }
-
-    //             $dataToBeReturn = array(
-    //                 'remainDataInCSV' => $remainDataInCSV,
-    //                 'productsUploaded' => $productsUploaded,
-    //                 'countOfStartedProfiles' => request()->countOfStartedProfiles,
-    //                 'error' => $errorToBeReturn,
-    //             );
-
-    //             return $dataToBeReturn;
-    //         }
-    //         return null;
-    //     } catch(\EXception $e) {}
-    // }
 }

@@ -51,21 +51,6 @@ class ProfileDataGrid extends DataGrid
             'filterable' => true
         ]);
 
-        // $this->addColumn([
-        //     'index' => 'seller_id',
-        //     'label' => 'Name',
-        //     'type' => 'string',
-        //     'searchable' => true,
-        //     'sortable' => true,
-        //     'filterable' => false,
-        //     'wrapper' => function($value) {
-        //         if (! $value->seller_id)
-        //             return "admin";
-        //         else
-        //             return $value->seller_id;
-        //     }
-        // ]);
-
         $this->addColumn([
             'index' => 'created_at',
             'label' => trans('bulkupload::app.shop.sellers.account.profile.date'),
@@ -80,16 +65,15 @@ class ProfileDataGrid extends DataGrid
     {
         $this->addAction([
             'type' => 'Edit',
-            'method' => 'GET', // use GET request only for redirect purposes
+            'method' => 'GET',
             'route' => 'bulkupload.admin.profile.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
             'type' => 'Delete',
-            'method' => 'GET', // use GET request only for redirect purposes
+            'method' => 'GET',
             'route' => 'bulkupload.admin.profile.delete',
-            // 'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
             'icon' => 'icon trash-icon'
         ]);
 

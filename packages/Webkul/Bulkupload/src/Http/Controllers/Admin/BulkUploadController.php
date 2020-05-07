@@ -31,7 +31,6 @@ use Storage;
 use Exception;
 use File;
 use DB;
-//need to alter above codes
 use Webkul\Bulkupload\Repositories\Products\SimpleProductRepository;
 use Webkul\Bulkupload\Repositories\Products\ConfigurableProductRepository;
 use Webkul\Bulkupload\Repositories\Products\VirtualProductRepository;
@@ -39,10 +38,6 @@ use Webkul\Bulkupload\Repositories\Products\DownloadableProductRepository;
 use Webkul\Bulkupload\Repositories\Products\GroupedProductRepository;
 use Webkul\Bulkupload\Repositories\Products\BundledProductRepository;
 use Webkul\Bulkupload\Repositories\Products\BookingProductRepository;
-
-
-
-
 
 class BulkUploadController extends Controller
 {
@@ -143,7 +138,6 @@ class BulkUploadController extends Controller
         CustomerRepository $customerRepository,
         ImportNewProductsByAdminRepository $importNewProductsByAdminRepository,
         BulkProductRepository $bulkProductRepository,
-        // cm
         SimpleProductRepository $simpleProductRepository,
         ConfigurableProductRepository $configurableProductRepository,        VirtualProductRepository $virtualProductRepository,
         DownloadableProductRepository $downloadableProductRepository,
@@ -567,202 +561,6 @@ class BulkUploadController extends Controller
         }
     }
 
-    // public function runProfiler(Request $request)
-    // {
-    //     $data_flow_profile_id = request()->data_flow_profile_id;
-    //     $numberOfCSVRecord = request()->numberOfCSVRecord;
-    //     $countOfStartedProfiles = request()->countOfStartedProfiles;
-    //     $totalNumberOfCSVRecord = request()->totalNumberOfCSVRecord;
-    //     $productUploaded = request()->productUploaded;
-    //     $errorCount = request()->errorCount;
-    //     $product = array();
-    //     $dataToBeReturn = array();
-    //     $categoryID = array();
-    //     $error = null;
-    //     $productSample = null;
-    //     $categoryError = null;
-    //     $imageZipName = null;
-    //     $ids = [];
-    //     $urlKeyOfCSV = "";
-    //     $CSVRecordErrors = [];
-    //     $urlKeyValidation = null;
-    //     $listOfUrlKey = [];
-
-    //     if ($totalNumberOfCSVRecord < 1000) {
-    //         $processCSVRecords = $totalNumberOfCSVRecord/($totalNumberOfCSVRecord/10);
-    //     } else {
-    //         $processCSVRecords = $totalNumberOfCSVRecord/($totalNumberOfCSVRecord/100);
-    //     }
-
-    //     $dataFlowProfileRecord = $this->importNewProducts->findOneByField
-    //     ('data_flow_profile_id', $data_flow_profile_id);
-
-    //     if ($dataFlowProfileRecord) {
-
-    //         $csvData = (new DataGridImport)->toArray($dataFlowProfileRecord->file_path)[0];
-
-    //         if (isset($dataFlowProfileRecord->image_path) && ($dataFlowProfileRecord->image_path != "") ) {
-    //             $imageZip = new \ZipArchive();
-
-    //             $extractedPath = storage_path('app/public/imported-products/extracted-images/admin/'.$dataFlowProfileRecord->id.'/');
-
-    //             if ($imageZip->open(storage_path('app/public/'.$dataFlowProfileRecord->image_path))) {
-    //                 for ($i = 0; $i < $imageZip->numFiles; $i++) {
-    //                     $filename = $imageZip->getNameIndex($i);
-    //                     $imageZipName = pathinfo($filename);
-    //                 }
-
-    //                 $imageZip->extractTo($extractedPath);
-    //                 $imageZip->close();
-    //             }
-    //         }
-
-    //         foreach ($csvData as $key => $value)
-    //         {
-    //             if ($numberOfCSVRecord >= 0) {
-    //                 for ($i = $countOfStartedProfiles; $i < count($csvData); $i++)
-    //                 {
-    //                     $product['loopCount'] = $i;
-
-    //                     switch($csvData[$i]['type']) {
-    //                         case "simple":
-    //                             $this->simpleProductRepository->createProduct(request()->all());
-    //                             break;
-    //                         case "configurable":
-    //                             $this->configurableProductRepository->createProduct();
-    //                             break;
-    //                         case "virtual":
-    //                             $this->virtualProductRepository->createProduct();
-    //                             break;
-    //                         case "downloadable":
-    //                             $this->downloadableProductRepository->createProduct();
-    //                             break;
-    //                         case "grouped":
-    //                             $this->groupedProductRepository->createProduct();
-    //                             break;
-    //                         case "booking":
-    //                             $this->bookingProductRepository->createProduct();
-    //                             break;
-    //                         case "bundled":
-    //                             $this->bundledProductRepository->createProduct();
-    //                             break;
-    //                     }
-    //                 }
-
-    //                 if ($errorCount == 0) {
-    //                     $dataToBeReturn = [
-    //                         'remainDataInCSV' => 0,
-    //                         'productsUploaded' => $totalNumberOfCSVRecord,
-    //                         'countOfStartedProfiles' => count($csvData),
-    //                     ];
-
-    //                     return response()->json($dataToBeReturn);
-    //                 } else if ($totalNumberOfCSVRecord == $errorCount) {
-    //                     $dataToBeReturn = [
-    //                         'remainDataInCSV' => 0,
-    //                         'productsUploaded' => 0,
-    //                         'countOfStartedProfiles' => count($csvData),
-    //                     ];
-
-    //                     return response()->json($dataToBeReturn);
-    //                 }
-
-    //             } else {
-    //                 return response()->json([
-    //                     "success" => true,
-    //                     "message" => "CSV Product Successfully Imported"
-    //                 ]);
-    //             }
-    //         }
-    //     }
-    // }
-
-    // public function validateCSV($dataFlowProfileId, $records, $dataFlowProfileRecord, $simpleproductDataId)
-    // {
-    //     $messages = [];
-
-    //     $profiler = $this->adminDataFlowProfileRepository->findOneByField('id', $dataFlowProfileId);
-
-    //     if ($dataFlowProfileRecord) {
-    //         $records = (new DataGridImport)->toArray($dataFlowProfileRecord->file_path)[0];
-    //         foreach($records as $data) {
-    //             $validate = Validator::make($data, [
-    //                 'sku' => ['required', 'unique:products,sku,' . $simpleproductDataId, new \Webkul\Core\Contracts\Validations\Slug],
-    //                 'variants.*.name' => 'required',
-    //                 'variants.*.sku' => 'required',
-    //                 'variants.*.price' => 'required',
-    //                 'variants.*.weight' => 'required',
-    //                 'images.*' => 'mimes:jpeg,jpg,bmp,png',
-    //             ]);
-    //             if (isset($validate) && $validate->fails()) {
-    //                 continue;
-    //             } else {
-    //                 $attributeFamily = $profiler->attribute_family;
-
-    //                 $attributes = $attributeFamily->custom_attributes;
-
-    //                 foreach ($attributes as $attribute) {
-    //                     if ($attribute->code == 'sku') {
-    //                         continue;
-    //                     }
-
-    //                     if ($data['type'] == 'configurable' && in_array($attribute->code, ['price', 'cost', 'special_price', 'special_price_from', 'special_price_to', 'width', 'height', 'depth', 'weight'])) {
-    //                         continue;
-    //                     }
-
-    //                     $validations = [];
-
-    //                     if ($attribute->is_required) {
-    //                         array_push($validations, 'required');
-    //                     } else {
-    //                         array_push($validations, 'nullable');
-    //                     }
-
-    //                     if ($attribute->type == 'text' && $attribute->validation) {
-    //                         if ($attribute->validation == 'decimal') {
-    //                             array_push($validations, new \Webkul\Core\Contracts\Validations\Decimal);
-    //                         } else {
-    //                             array_push($validations, $attribute->validation);
-    //                         }
-    //                     }
-
-    //                     if ($attribute->type == 'price') {
-    //                         array_push($validations, new \Webkul\Core\Contracts\Validations\Decimal);
-    //                     }
-
-
-
-    //                     if ($attribute->is_unique) {
-    //                         $this->id = $simpleproductDataId;
-
-    //                         array_push($validations, function ($field, $value, $fail) use ($data, $attribute) {
-    //                             $column = ProductAttributeValue::$attributeTypeFields[$attribute->type];
-    //                             if (! $this->productAttributeValueRepository->isValueUnique($this->id, $attribute->id, $column, $data[$attribute->code])) {
-    //                                 $fail('The :attribute has already been taken.');
-    //                             }
-    //                         });
-    //                     }
-    //                     $this->rules[$attribute->code] = $validations;
-    //                 }
-    //             }
-    //         }
-    //     }
-
-    //     $validationCheckForUpdateData = $this->productFlatRepository->findWhere(['sku' => $data['sku'], 'url_key' => $data['url_key']]);
-
-    //     if (! isset($validationCheckForUpdateData) || empty($validationCheckForUpdateData)) {
-    //         $urlKeyUniqueness = "unique:product_flat,url_key";
-    //         array_push($this->rules["url_key"], $urlKeyUniqueness);
-    //     }
-
-    //     return $this->rules;
-    // }
-
-    // public function updateValidatedCSVRecords($validationFormRequest, $id)
-    // {
-    //     $product = $this->product->update($validationFormRequest, $id);
-    // }
-
     public function readCSVData(Request $request)
     {
         $countCSV = 0;
@@ -792,113 +590,6 @@ class BulkUploadController extends Controller
             ]);
         }
     }
-
-    // public function createFlat($product, $parentProduct = null)
-    // {
-    //     static $familyAttributes = [];
-
-    //     static $superAttributes = [];
-
-    //     if (! array_key_exists($product->attribute_family->id, $familyAttributes))
-    //         $familyAttributes[$product->attribute_family->id] = $product->attribute_family->custom_attributes;
-
-    //     if ($parentProduct && ! array_key_exists($parentProduct->id, $superAttributes))
-    //         $superAttributes[$parentProduct->id] = $parentProduct->super_attributes()->pluck('code')->toArray();
-
-    //     foreach (core()->getAllChannels() as $channel) {
-    //         foreach ($channel->locales as $locale) {
-    //             $productFlat = $this->productFlatRepository->findOneWhere([
-    //                 'product_id' => $product->id,
-    //                 'channel' => $channel->code,
-    //                 'locale' => $locale->code
-    //             ]);
-
-    //             if (! $productFlat) {
-    //                 $productFlat = $this->productFlatRepository->create([
-    //                     'product_id' => $product->id,
-    //                     'channel' => $channel->code,
-    //                     'locale' => $locale->code
-    //                 ]);
-    //             }
-    //             foreach ($familyAttributes[$product->attribute_family->id] as $attribute) {
-    //                 if ($parentProduct && ! in_array($attribute->code, array_merge($superAttributes[$parentProduct->id], ['sku', 'name', 'price', 'weight', 'status'])))
-    //                     continue;
-
-    //                 if (in_array($attribute->code, ['tax_category_id']))
-    //                     continue;
-
-    //                 if (! Schema::hasColumn('product_flat', $attribute->code))
-    //                     continue;
-
-    //                 if ($attribute->value_per_channel) {
-    //                     if ($attribute->value_per_locale) {
-    //                         $productAttributeValue = $product->attribute_values()->where('channel', $channel->code)->where('locale', $locale->code)->where('attribute_id', $attribute->id)->first();
-    //                     } else {
-    //                         $productAttributeValue = $product->attribute_values()->where('channel', $channel->code)->where('attribute_id', $attribute->id)->first();
-    //                     }
-    //                 } else {
-    //                     if ($attribute->value_per_locale) {
-    //                         $productAttributeValue = $product->attribute_values()->where('locale', $locale->code)->where('attribute_id', $attribute->id)->first();
-    //                     } else {
-    //                         $productAttributeValue = $product->attribute_values()->where('attribute_id', $attribute->id)->first();
-    //                     }
-    //                 }
-
-    //                 if ($product->type == 'configurable' && $attribute->code == 'price') {
-    //                     $productFlat->{$attribute->code} = app('Webkul\Product\Helpers\Price')->getVariantMinPrice($product);
-    //                 } else {
-    //                     $productFlat->{$attribute->code} = $productAttributeValue[ProductAttributeValue::$attributeTypeFields[$attribute->type]];
-    //                 }
-
-    //                 if ($attribute->type == 'select') {
-    //                     $attributeOption = $this->attributeOptionRepository->find($product->{$attribute->code});
-
-    //                     if ($attributeOption) {
-    //                         if ($attributeOptionTranslation = $attributeOption->translate($locale->code)) {
-    //                             $productFlat->{$attribute->code . '_label'} = $attributeOptionTranslation->label;
-    //                         } else {
-    //                             $productFlat->{$attribute->code . '_label'} = $attributeOption->admin_name;
-    //                         }
-    //                     }
-    //                 } elseif ($attribute->type == 'multiselect') {
-    //                     $attributeOptionIds = explode(',', $product->{$attribute->code});
-
-    //                     if (count($attributeOptionIds)) {
-    //                         $attributeOptions = $this->attributeOptionRepository->findWhereIn('id', $attributeOptionIds);
-
-    //                         $optionLabels = [];
-
-    //                         foreach ($attributeOptions as $attributeOption) {
-    //                             if ($attributeOptionTranslation = $attributeOption->translate($locale->code)) {
-    //                                 $optionLabels[] = $attributeOptionTranslation->label;
-    //                             } else {
-    //                                 $optionLabels[] = $attributeOption->admin_name;
-    //                             }
-    //                         }
-
-    //                         $productFlat->{$attribute->code . '_label'} = implode(', ', $optionLabels);
-    //                     }
-    //                 }
-    //             }
-
-    //             $productFlat->created_at = $product->created_at;
-
-    //             $productFlat->updated_at = $product->updated_at;
-
-    //             if ($parentProduct) {
-    //                 $parentProductFlat = $this->productFlatRepository->findOneWhere([
-
-    //                         'product_id' => $parentProduct->id,
-    //                         'channel' => $channel->code,
-    //                         'locale' => $locale->code
-    //                     ]);
-    //             }
-    //             $productFlat->parent_id = $product->parent_id;
-
-    //             $productFlat->save();
-    //         }
-    //     }
-    // }
 
     public function edit($id)
     {
@@ -938,11 +629,6 @@ class BulkUploadController extends Controller
 
         return redirect()->route('admin.dataflow-profile.index');
     }
-
-    // public function deleteProductIfNotValidated($id)
-    // {
-    //     $this->productRepository->findOrFail($id)->delete();
-    // }
 
     public function massDestroy()
     {

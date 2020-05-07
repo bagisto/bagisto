@@ -63,7 +63,6 @@ class HelperRepository extends Repository
             foreach($records as $data) {
                 $this->rules = array_merge($product->getTypeInstance()->getTypeValidationRules(), [
                     'sku'                => ['required', 'unique:products,sku,' . $product->id, new \Webkul\Core\Contracts\Validations\Slug],
-                    // 'images.*'           => 'mimes:jpeg,jpg,bmp,png',
                     'special_price_from' => 'nullable|date',
                     'special_price_to'   => 'nullable|date|after_or_equal:special_price_from',
                     'special_price'      => ['nullable', new \Webkul\Core\Contracts\Validations\Decimal, 'lt:price'],
@@ -107,8 +106,6 @@ class HelperRepository extends Repository
                     }
 
                     $this->rules[$attribute->code] = $validations;
-
-                    // str_replace(".", "", $this->rules);
                 }
 
                 $validationCheckForUpdateData = $this->productFlatRepository

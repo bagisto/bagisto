@@ -75,8 +75,6 @@ class BulkProductRepository extends Repository
     {
         $this->attribute = $attribute;
 
-        // $this->attributeOption = $attributeOption;
-
         $this->attributeValue = $attributeValue;
 
         $this->productRepository = $productRepository;
@@ -88,7 +86,7 @@ class BulkProductRepository extends Repository
         parent::__construct($app);
     }
 
-    /**->where('product_flat.visible_individually', 1)
+    /**
      * Specify Model class name
      *
      * @return mixed
@@ -207,10 +205,6 @@ class BulkProductRepository extends Repository
                     }
                 }
             }
-
-            // foreach ($previousVariantIds as $variantId) {
-            //     $this->delete($variantId);
-            // }
 
             $this->productInventory->saveInventories($data, $product);
 

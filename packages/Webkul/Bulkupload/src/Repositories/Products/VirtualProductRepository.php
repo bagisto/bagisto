@@ -177,22 +177,6 @@ class VirtualProductRepository extends Repository
 
                     $data['inventories'] =  $inventory;
 
-                    // $inventory_data = core()->getCurrentChannel()->inventory_sources;
-
-                    // foreach($inventory_data as $key => $datas)
-                    // {
-                    //     $inventoryId = $datas->id;
-                    // }
-
-                    // $inventoryData[] = (string)$csvData[$i]['inventories'];
-
-                    // foreach ($inventoryData as $key => $d)
-                    // {
-                    //     $inventory[$inventoryId] = $d;
-                    // }
-
-                    // $data['inventories'] =  $inventory;
-
                     $categoryData = explode(',', $csvData[$i]['categories_slug']);
 
                     foreach ($categoryData as $key => $value)
@@ -337,22 +321,6 @@ class VirtualProductRepository extends Repository
 
                     $data['inventories'] =  $inventory;
 
-                    // $inventory_data = core()->getCurrentChannel()->inventory_sources;
-
-                    // foreach($inventory_data as $key => $datas)
-                    // {
-                    //     $inventoryId = $datas->id;
-                    // }
-
-                    // $inventoryData[] = (string)$csvData[$i]['inventories'];
-
-                    // foreach ($inventoryData as $key => $d)
-                    // {
-                    //     $inventory[$inventoryId] = $d;
-                    // }
-
-                    // $data['inventories'] =  $inventory;
-
                     $categoryData = explode(',', $csvData[$i]['categories_slug']);
 
                     foreach ($categoryData as $key => $value)
@@ -428,13 +396,10 @@ class VirtualProductRepository extends Repository
                 }
             }
 
-            //error handling
             if ($requestData['numberOfCSVRecord'] > 10) {
                 $remainDataInCSV = (int)$requestData['numberOfCSVRecord'] - (int)$processCSVRecords;
             } else {
                 $remainDataInCSV = 0;
-
-                // $this->adminDataFlowProfileRepository->findOneByField('id', $requestData['data_flow_profile_id'])->delete();
 
                 if($requestData['errorCount'] > 0) {
                     $uptoProcessCSVRecords = $requestData['totalNumberOfCSVRecord'] - $requestData['errorCount'];
@@ -492,48 +457,4 @@ class VirtualProductRepository extends Repository
             return $dataToBeReturn;
         }
     }
-
-    // public function createProductValidation($record, $loopCount)
-    // {
-    //     try {
-    //         $validateProduct = Validator::make($record, [
-    //             'type' => 'required',
-    //             'sku' => 'required',
-    //             'attribute_family_name' => 'required'
-    //         ]);
-
-    //         if ($validateProduct->fails()) {
-    //             $errors = $validateProduct->errors()->getMessages();
-
-    //             foreach($errors as $key => $error)
-    //             {
-    //                 $recordCount = (int)$loopCount + (int)1;
-
-    //                 $errorToBeReturn[] = str_replace(".", "", $error[0]) . " for record " . $recordCount;
-    //             }
-
-    //             request()->countOfStartedProfiles =  $loopCount + 1;
-
-    //             $productsUploaded = $loopCount - request()->errorCount;
-
-    //             if (request()->numberOfCSVRecord != 0) {
-    //                 $remainDataInCSV = (int)request()->totalNumberOfCSVRecord - (int)request()->countOfStartedProfiles;
-    //             } else {
-    //                 $remainDataInCSV = 0;
-    //             }
-
-    //             $dataToBeReturn = array(
-    //                 'remainDataInCSV' => $remainDataInCSV,
-    //                 'productsUploaded' => $productsUploaded,
-    //                 'countOfStartedProfiles' => request()->countOfStartedProfiles,
-    //                 'error' => $errorToBeReturn,
-    //             );
-
-    //             return $dataToBeReturn;
-    //         }
-
-    //         return null;
-    //     } catch(\EXception $e) {
-    //     }
-    // }
 }

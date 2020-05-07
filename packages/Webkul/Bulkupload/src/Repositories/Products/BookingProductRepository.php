@@ -164,7 +164,6 @@ class BookingProductRepository extends Repository
                     $data['locale'] = core()->getCurrentLocale()->code;
 
                     //booking product attributes
-
                     if (strtolower($csvData[$i]['booking_type']) == "default") {
                         $booking = $this->defaultBookingType($csvData[$i]);
                     } else if (strtolower($csvData[$i]['booking_type']) == "appointment") {
@@ -453,46 +452,6 @@ class BookingProductRepository extends Repository
             return $dataToBeReturn;
         }
     }
-
-    // public function createProductValidation($record, $loopCount)
-    // {
-    //     try {
-    //         $validateProduct = Validator::make($record, [
-    //             'type' => 'required',
-    //             'sku' => 'required',
-    //             'attribute_family_name' => 'required'
-    //         ]);
-
-    //         if ($validateProduct->fails()) {
-    //             $errors = $validateProduct->errors()->getMessages();
-
-    //             foreach($errors as $key => $error)
-    //             {
-    //                 $errorToBeReturn[] = str_replace(".", "", $error[0]) . " for record " . $loopCount + 1;
-    //             }
-
-    //             request()->countOfStartedProfiles =  $loopCount + 1;
-
-    //             $productsUploaded = $loopCount - request()->errorCount;
-
-    //             if (request()->numberOfCSVRecord != 0) {
-    //                 $remainDataInCSV = (int)request()->totalNumberOfCSVRecord - (int)request()->countOfStartedProfiles;
-    //             } else {
-    //                 $remainDataInCSV = 0;
-    //             }
-
-    //             $dataToBeReturn = array(
-    //                 'remainDataInCSV' => $remainDataInCSV,
-    //                 'productsUploaded' => $productsUploaded,
-    //                 'countOfStartedProfiles' => request()->countOfStartedProfiles,
-    //                 'error' => $errorToBeReturn,
-    //             );
-
-    //             return $dataToBeReturn;
-    //         }
-    //         return null;
-    //     } catch(\EXception $e) {}
-    // }
 
     public function defaultBookingType($data)
     {
@@ -939,7 +898,6 @@ class BookingProductRepository extends Repository
         }
     }
 
-    //below working
     public function prepareRentalBookingSlots($record)
     {
         try {

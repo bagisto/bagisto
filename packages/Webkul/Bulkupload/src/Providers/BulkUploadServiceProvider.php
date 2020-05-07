@@ -8,7 +8,6 @@ class BulkUploadServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        //
         include __DIR__ . '/../Http/admin-routes.php';
 
         $this->app->register(ModuleServiceProvider::class);

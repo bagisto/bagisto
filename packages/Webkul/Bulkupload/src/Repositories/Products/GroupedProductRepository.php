@@ -435,8 +435,6 @@ class GroupedProductRepository extends Repository
             } else {
                 $remainDataInCSV = 0;
 
-                // $this->adminDataFlowProfileRepository->findOneByField('id', $requestData['data_flow_profile_id'])->delete();
-
                 if($requestData['errorCount'] > 0) {
                     $uptoProcessCSVRecords = $requestData['totalNumberOfCSVRecord'] - $requestData['errorCount'];
                 } else {
@@ -494,44 +492,4 @@ class GroupedProductRepository extends Repository
             return $dataToBeReturn;
         }
     }
-
-    // public function createProductValidation($record, $loopCount)
-    // {
-    //     try {
-    //         $validateProduct = Validator::make($record, [
-    //             'type' => 'required',
-    //             'sku' => 'required',
-    //             'attribute_family_name' => 'required'
-    //         ]);
-
-    //         if ($validateProduct->fails()) {
-    //             $errors = $validateProduct->errors()->getMessages();
-
-    //             foreach($errors as $key => $error)
-    //             {
-    //                 $errorToBeReturn[] = str_replace(".", "", $error[0]) . " for record " . $loopCount + 1;
-    //             }
-
-    //             request()->countOfStartedProfiles =  $loopCount + 1;
-
-    //             $productsUploaded = $loopCount - request()->errorCount;
-
-    //             if (request()->numberOfCSVRecord != 0) {
-    //                 $remainDataInCSV = (int)request()->totalNumberOfCSVRecord - (int)request()->countOfStartedProfiles;
-    //             } else {
-    //                 $remainDataInCSV = 0;
-    //             }
-
-    //             $dataToBeReturn = array(
-    //                 'remainDataInCSV' => $remainDataInCSV,
-    //                 'productsUploaded' => $productsUploaded,
-    //                 'countOfStartedProfiles' => request()->countOfStartedProfiles,
-    //                 'error' => $errorToBeReturn,
-    //             );
-
-    //             return $dataToBeReturn;
-    //         }
-    //         return null;
-    //     } catch(\EXception $e) {}
-    // }
 }
