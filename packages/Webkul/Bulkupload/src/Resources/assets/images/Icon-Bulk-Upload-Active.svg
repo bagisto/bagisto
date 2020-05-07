@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+    <title>Icon-Bulk-Upload-Active</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icon-Bulk-Upload-Active" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12.9981102,12.047248 L37.9981102,12.0000018 C38.5503939,11.9989581 38.9989545,12.4458264 38.9999982,12.9981102 C38.9999994,12.9987401 39,12.9993701 39,13 L39,37.9962168 C39,38.5485015 38.5522847,38.9962168 38,38.9962168 C37.9993701,38.9962168 37.9987401,38.9962162 37.9981102,38.996215 L12.9981102,38.9489688 C12.4465643,38.9479265 12,38.5005175 12,37.9489706 L12,13.0472462 C12,12.4956993 12.4465643,12.0482903 12.9981102,12.047248 Z" id="Rectangle-15" stroke="#0041FF" stroke-width="2"></path>
+        <path d="M9,33.9508587 L9,11.0453581 C9,9.94226441 9.89312856,9.04744638 10.9962203,9.04536171 L33.9962203,9.00189524" id="Path" stroke="#0041FF" stroke-width="2"></path>
+        <path d="M12,17.202381 L39,17.202381" id="Path-29" stroke="#0041FF" stroke-width="2"></path>
+        <path d="M31.25,31 L31.25,35" id="Path-30-Copy-2" stroke="#0041FF" stroke-width="2"></path>
+        <path d="M34.25,31 L34.25,35" id="Path-30-Copy-3" stroke="#0041FF" stroke-width="2"></path>
+        <path d="M26,22 L26,31" id="Path-30" stroke="#0041FF" stroke-width="2"></path>
+        <polyline id="Path-38" stroke="#0041FF" stroke-width="2" transform="translate(26.000000, 25.000000) rotate(45.000000) translate(-26.000000, -25.000000) " points="23 28 23 22 29 22"></polyline>
+    </g>
+</svg>

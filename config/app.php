@@ -116,7 +116,7 @@ return [
     | Here you may specify the base currency code for your application.
     |
     */
-    
+
     'currency' => env('APP_CURRENCY', 'USD'),
 
     /*
@@ -268,6 +268,7 @@ return [
         Webkul\CMS\Providers\CMSServiceProvider::class,
         Webkul\Velocity\Providers\VelocityServiceProvider::class,
         Webkul\BookingProduct\Providers\BookingProductServiceProvider::class,
+        Webkul\Bulkupload\Providers\BulkUploadServiceProvider::class
     ],
 
     /*
