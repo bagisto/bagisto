@@ -277,20 +277,20 @@ class Booking extends Virtual
         $data = [];
         foreach ($bookingOption as $key => $option) {
             $slots[] = [
-                'default_slot' => $option->default_slot,
+                'default_slot'     => $option->default_slot,
                 'appointment_slot' => $option->appointment_slot,
-                'event_tickets' => $option->event_tickets,
-                'rental_slot' => $option->rental_slot,
-                'table_slot' => $option->table_slot,
+                'event_tickets'    => $option->event_tickets,
+                'rental_slot'      => $option->rental_slot,
+                'table_slot'       => $option->table_slot,
             ];
 
             $data[$key] = [
-                'type' => $option->type,
-                'qty' => $option->qty,
-                'location' => $option->location,
-                'show_location' => $option->show_location,
-                'available_every_week' => $option->type,
-                'available_from' => $option->available_from->toDateTimeString(),
+                'type'                => $option->type,
+                'qty'                 => $option->qty,
+                'location'            => $option->location,
+                'show_location'       => $option->show_location,
+                'available_every_week'=> $option->type,
+                'available_from'      => $option->available_from->toDateTimeString(),
                 'available_to' => $option->available_to->toDateTimeString(),
                 'avilable_slots' => $slots
             ];
