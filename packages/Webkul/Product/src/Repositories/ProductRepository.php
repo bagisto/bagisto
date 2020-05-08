@@ -2,13 +2,13 @@
 
 namespace Webkul\Product\Repositories;
 
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Container\Container as App;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Product\Models\ProductAttributeValue;
 
 class ProductRepository extends Repository
@@ -108,18 +108,22 @@ class ProductRepository extends Repository
     {
         $params = request()->input();
 
-        $results = app(ProductFlatRepository::class)->scopeQuery(function($query) use($params, $categoryId) {
+        $perPage = isset($params['limit']) ? $params['limit'] : 9;
+        $page = Paginator::resolveCurrentPage('page');
+
+        $repository = app(ProductFlatRepository::class)->scopeQuery(function($query) use($params, $categoryId) {
             $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
             $locale = request()->get('locale') ?: app()->getLocale();
 
             $qb = $query->distinct()
-                        ->addSelect('product_flat.*')
-                        ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
-                        ->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id')
-                        ->where('product_flat.channel', $channel)
-                        ->where('product_flat.locale', $locale)
-                        ->whereNotNull('product_flat.url_key');
+                ->select('product_flat.*')
+                ->join('product_flat as variants', 'product_flat.id', '=', DB::raw('COALESCE(variants.parent_id, variants.id)'))
+                ->leftJoin('product_categories', 'product_categories.product_id', '=', 'product_flat.product_id')
+                ->leftJoin('product_attribute_values', 'product_attribute_values.product_id', '=', 'variants.product_id')
+                ->where('product_flat.channel', $channel)
+                ->where('product_flat.locale', $locale)
+                ->whereNotNull('product_flat.url_key');
 
             if ($categoryId) {
                 $qb->where('product_categories.category_id', $categoryId);
@@ -132,12 +136,6 @@ class ProductRepository extends Repository
             if (is_null(request()->input('visible_individually'))) {
                 $qb->where('product_flat.visible_individually', 1);
             }
-
-            $queryBuilder = $qb->leftJoin('product_flat as flat_variants', function($qb) use($channel, $locale) {
-                $qb->on('product_flat.id', '=', 'flat_variants.parent_id')
-                    ->where('flat_variants.channel', $channel)
-                    ->where('flat_variants.locale', $locale);
-            });
 
             if (isset($params['search']))
                 $qb->where('product_flat.name', 'like', '%' . urldecode($params['search']) . '%');
@@ -158,50 +156,84 @@ class ProductRepository extends Repository
                 }
             }
 
-            $qb = $qb->leftJoin('products as variants', 'products.id', '=', 'variants.parent_id');
+            if( $priceFilter = request('price') ){
+                $priceRange = explode(',', $priceFilter);
+                if( count($priceRange) > 0 ) {
+                    $qb->where('variants.min_price', '>=', core()->convertToBasePrice($priceRange[0]));
+                    $qb->where('variants.min_price', '<=', core()->convertToBasePrice(end($priceRange)));
+                }
+            }
 
-            $qb = $qb->where(function($query1) use($qb) {
-                $aliases = [
-                    'products' => 'filter_',
-                    'variants' => 'variant_filter_',
-                ];
+            $attributeFilters = $this->attributeRepository
+                ->getProductDefaultAttributes(array_keys(
+                    request()->except(['price'])
+                ));
 
-                foreach($aliases as $table => $alias) {
-                    $query1 = $query1->orWhere(function($query2) use ($qb, $table, $alias) {
+            if( count($attributeFilters) > 0 ) {
+                $qb->where(function ($filterQuery) use($attributeFilters){
 
-                        foreach ($this->attributeRepository->getProductDefaultAttributes(array_keys(request()->input())) as $code => $attribute) {
-                            $aliasTemp = $alias . $attribute->code;
+                    foreach ($attributeFilters as $attribute) {
+                        $filterQuery->orWhere(function ($attributeQuery) use ($attribute) {
 
-                            $qb = $qb->leftJoin('product_attribute_values as ' . $aliasTemp, $table . '.id', '=', $aliasTemp . '.product_id');
+                            $column = 'product_attribute_values.' . ProductAttributeValue::$attributeTypeFields[$attribute->type];
 
-                            $column = ProductAttributeValue::$attributeTypeFields[$attribute->type];
+                            $filterInputValues = explode(',', request()->get($attribute->code));
 
-                            $temp = explode(',', request()->get($attribute->code));
+                            # define the attribute we are filtering
+                            $attributeQuery = $attributeQuery->where('product_attribute_values.attribute_id', $attribute->id);
 
+                            # apply the filter values to the correct column for this type of attribute.
                             if ($attribute->type != 'price') {
-                                $query2 = $query2->where($aliasTemp . '.attribute_id', $attribute->id);
 
-                                $query2 = $query2->where(function($query3) use($aliasTemp, $column, $temp) {
-                                    foreach($temp as $code => $filterValue) {
-                                        if (! is_numeric($filterValue)) {
+                                $attributeQuery->where(function ($attributeValueQuery) use ($column, $filterInputValues) {
+                                    foreach ($filterInputValues as $filterValue) {
+                                        if (!is_numeric($filterValue)) {
                                             continue;
                                         }
-
-                                        $columns = $aliasTemp . '.' . $column;
-                                        $query3 = $query3->orwhereRaw("find_in_set($filterValue, $columns)");
+                                        $attributeValueQuery->orWhereRaw("find_in_set(?, {$column})", [$filterValue]);
                                     }
                                 });
+
                             } else {
-                                $query2->where('product_flat.min_price', '>=', core()->convertToBasePrice(current($temp)))
-                                        ->where('product_flat.min_price', '<=', core()->convertToBasePrice(end($temp)));
+                                $attributeQuery->where($column, '>=', core()->convertToBasePrice(current($filterInputValues)))
+                                    ->where($column, '<=', core()->convertToBasePrice(end($filterInputValues)));
                             }
-                        }
-                    });
-                }
-            });
+                        });
+                    }
+
+                });
+
+                # this is key! if a product has been filtered down to the same number of attributes that we filtered on,
+                # we know that it has matched all of the requested filters.
+                $qb->groupBy('variants.id');
+                $qb->havingRaw('COUNT(*) = ' . count($attributeFilters));
+            }
 
             return $qb->groupBy('product_flat.id');
-        })->paginate(isset($params['limit']) ? $params['limit'] : 9);
+
+        });
+
+        # apply scope query so we can fetch the raw sql and perform a count
+        $repository->applyScope();
+        $countQuery = "select count(*) as aggregate from ({$repository->model->toSql()}) c";
+        $count = collect(DB::select($countQuery, $repository->model->getBindings()))->pluck('aggregate')->first();
+
+        if($count > 0) {
+            # apply a new scope query to limit results to one page
+            $repository->scopeQuery(function ($query) use ($page, $perPage) {
+                return $query->forPage($page, $perPage);
+            });
+
+            # manually build the paginator
+            $items = $repository->get();
+        } else {
+            $items = [];
+        }
+
+        $results = new \Illuminate\Pagination\LengthAwarePaginator($items, $count, $perPage, $page, [
+            'path'  => request()->url(),
+            'query' => request()->query()
+        ]);
 
         return $results;
     }
