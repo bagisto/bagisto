@@ -5,26 +5,41 @@ namespace Webkul\Bulkupload\Repositories\Products;
 use Illuminate\Container\Container as App;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Bulkupload\Repositories\DataFlowProfileRepository as AdminDataFlowProfileRepository;
-use Webkul\Admin\Imports\DataGridImport;
 use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Illuminate\Support\Facades\Validator;
 use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Product\Repositories\ProductRepository;
 
-
-
 /**
- * BulkProduct Repository
+ * Helper Repository
  *
  */
 class HelperRepository extends Repository
 {
-
+    /**
+     * adminDataFlowProfileRepository object
+     *
+     */
     protected $adminDataFlowProfileRepository;
 
+    /**
+     * productFlatRepository object
+     *
+     */
     protected $productFlatRepository;
+
+    /**
+     * productRepository object
+     *
+     */
     protected $productRepository;
+
+    /**
+     * productAttributeValueRepository object
+     *
+     */
+    protected $productAttributeValueRepository;
 
     public function __construct(
         AdminDataFlowProfileRepository $adminDataFlowProfileRepository,

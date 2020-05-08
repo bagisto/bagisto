@@ -11,18 +11,17 @@ class BulkUploadServiceProvider extends ServiceProvider
         include __DIR__ . '/../Http/admin-routes.php';
 
         $this->app->register(ModuleServiceProvider::class);
+        $this->app->register(EventServiceProvider::class);
 
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'bulkupload');
 
+        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'bulkupload');
+
         $this->publishes([
             __DIR__ . '/../../publishable/assets' => public_path('themes/default/assets'),
         ], 'public');
-
-        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'bulkupload');
-
-        $this->app->register(EventServiceProvider::class);
     }
 
     /**

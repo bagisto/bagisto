@@ -10,7 +10,6 @@ use Webkul\Core\Eloquent\Repository;
  */
 class ImportNewProductsByAdminRepository extends Repository
 {
-
     /**
      * Specify Model class name
      *

@@ -14,7 +14,6 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
         Event::listen('bagisto.admin.layout.head', function($viewRenderEventManager) {
             $viewRenderEventManager->addTemplate('bulkupload::admin.bulk-upload.style');
         });

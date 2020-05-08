@@ -5,7 +5,7 @@ namespace Webkul\Bulkupload\Repositories;
 use Webkul\Core\Eloquent\Repository;
 
 /**
- * Seller Invoice Reposotory
+ * DataFlowProfile Repository
  *
  */
 class DataFlowProfileRepository extends Repository

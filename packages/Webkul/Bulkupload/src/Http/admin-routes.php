@@ -15,20 +15,19 @@ Route::group(['middleware' => ['web']], function () {
                 'view' => 'bulkupload::admin.bulk-upload.run-profile.index'
             ])->name('admin.run-profile.index');
 
-            Route::post('read-csv', 'Webkul\Bulkupload\Http\Controllers\Admin\BulkUploadController@readCSVData')
+            Route::post('read-csv', 'Webkul\Bulkupload\Http\Controllers\Admin\HelperController@readCSVData')
             ->name('bulk-upload-admin.read-csv');
 
-            Route::post('getprofiles', 'Webkul\Bulkupload\Http\Controllers\Admin\BulkUploadController@getAllDataFlowProfiles')
+            Route::post('getprofiles', 'Webkul\Bulkupload\Http\Controllers\Admin\HelperController@getAllDataFlowProfiles')
             ->name('bulk-upload-admin.get-all-profile');
 
-
             // Download Sample Files
-            Route::post('download','Webkul\Bulkupload\Http\Controllers\Admin\BulkUploadController@downloadFile')->defaults('_config',[
+            Route::post('download','Webkul\Bulkupload\Http\Controllers\Admin\HelperController@downloadFile')->defaults('_config',[
                 'view' => 'bulkupload::admin.bulk-upload.upload-files.index'
             ])->name('download-sample-files');
 
             // import new products
-            Route::post('importnew', 'Webkul\Bulkupload\Http\Controllers\Admin\BulkUploadController@importNewProductsStore')->defaults('_config',['view' => 'bulkupload::admin.bulk-upload.upload-files.index' ])->name('import-new-products-form-submit');
+            Route::post('importnew', 'Webkul\Bulkupload\Http\Controllers\Admin\HelperController@importNewProductsStore')->defaults('_config',['view' => 'bulkupload::admin.bulk-upload.upload-files.index' ])->name('import-new-products-form-submit');
 
             Route::get('dataflowprofile', 'Webkul\Bulkupload\Http\Controllers\Admin\BulkUploadController@index')->defaults('_config', [
                 'view' => 'bulkupload::admin.bulk-upload.data-flow-profile.index'
@@ -38,7 +37,7 @@ Route::group(['middleware' => ['web']], function () {
                 'view' => 'bulkupload::admin.bulk-upload.data-flow-profile.index'
             ])->name('bulkupload.bulk-upload.dataflow.add-profile');
 
-            Route::post('runprofile', 'Webkul\Bulkupload\Http\Controllers\Admin\BulkUploadController@runProfile')->defaults('_config', [
+            Route::post('runprofile', 'Webkul\Bulkupload\Http\Controllers\Admin\HelperController@runProfile')->defaults('_config', [
                 'view' => 'bulkupload::admin.bulk-upload.run-profile.progressbar'
             ])->name('bulk-upload-admin.run-profile');
 

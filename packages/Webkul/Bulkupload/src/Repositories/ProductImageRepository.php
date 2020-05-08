@@ -73,19 +73,11 @@ class ProductImageRepository extends Repository
     {
         if (isset($data['images'])) {
             foreach($data['images'] as $key => $value) {
-                if(strpos($value, 'admin')) {
-                    $files = "imported-products/extracted-images/admin/".$data['dataFlowProfileRecordId'].'/'. $imageZipName['dirname'].'/'.basename($value);
+                $files = "imported-products/extracted-images/admin/".$data['dataFlowProfileRecordId'].'/'. $imageZipName['dirname'].'/'.basename($value);
 
-                    $destination = "product/".$product->id.'/'.basename($value);
+                $destination = "product/".$product->id.'/'.basename($value);
 
-                    Storage::copy($files, $destination);
-                } else {
-                    $files = "imported-products/extracted-images/".$data['dataFlowProfileRecordId'].'/'. $imageZipName['dirname'].'/'.basename($value);
-
-                    $destination = "product/".$product->id.'/'.basename($value);
-
-                    Storage::copy($files, $destination);
-                }
+                Storage::copy($files, $destination);
 
                 $this->create([
                     'path' => 'product/' . $product->id .'/'. basename($value),

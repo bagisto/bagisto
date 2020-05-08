@@ -2,19 +2,18 @@
 
 namespace Webkul\Bulkupload\Repositories;
 
-use Illuminate\Container\Container as App;
-use DB;
+use Storage;
 use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Attribute\Repositories\AttributeOptionRepository;
+use Illuminate\Container\Container as App;
 use Webkul\Product\Models\ProductAttributeValue;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use  Webkul\Product\Repositories\ProductImageRepository;
-use Storage;
+
+// use Webkul\Attribute\Repositories\AttributeRepository;
+// use Webkul\Attribute\Repositories\AttributeOptionRepository;
 
 /**
  * BulkProduct Repository
@@ -22,19 +21,7 @@ use Storage;
  */
 class BulkProductRepository extends Repository
 {
-    /**
-     * AttributeRepository object
-     *
-     * @var array
-     */
-    protected $attribute;
 
-    /**
-     * AttributeOptionRepository object
-     *
-     * @var array
-     */
-    protected $attributeOption;
 
     /**
      * ProductRepository object
@@ -64,16 +51,29 @@ class BulkProductRepository extends Repository
      */
     protected $productImage;
 
+    /**
+     * AttributeRepository object
+     *
+     * @var array
+     */
+    // protected $attribute;
+
+    /**
+     * AttributeOptionRepository object
+     *
+     * @var array
+     */
+    // protected $attributeOption;
 
     public function __construct(
-        AttributeRepository $attribute,
+        // AttributeRepository $attribute,
         ProductRepository $productRepository,
         ProductAttributeValueRepository $attributeValue,
          ProductInventoryRepository $productInventory,
         ProductImageRepository $productImage,
         App $app)
     {
-        $this->attribute = $attribute;
+        // $this->attribute = $attribute;
 
         $this->attributeValue = $attributeValue;
 
@@ -219,5 +219,4 @@ class BulkProductRepository extends Repository
 
         return $product;
     }
-
 }
