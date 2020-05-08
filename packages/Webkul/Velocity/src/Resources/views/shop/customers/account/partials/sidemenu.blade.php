@@ -21,6 +21,20 @@
                     $subMenuCollection['compare'] = $menuItem['children']['compare'];
                     $subMenuCollection['reviews'] = $menuItem['children']['reviews'];
                     $subMenuCollection['address'] = $menuItem['children']['address'];
+
+                    unset(
+                        $menuItem['children']['profile'],
+                        $menuItem['children']['orders'],
+                        $menuItem['children']['downloadables'],
+                        $menuItem['children']['wishlist'],
+                        $menuItem['children']['compare'],
+                        $menuItem['children']['reviews'],
+                        $menuItem['children']['address']
+                    );
+
+                    foreach ($menuItem['children'] as $key => $remainingChildren) {
+                        $subMenuCollection[$key] = $remainingChildren;
+                    }
                 } catch (\Exception $exception) {
                     $subMenuCollection = $menuItem['children'];
                 }

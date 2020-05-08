@@ -256,6 +256,7 @@
                                 let elementId = element.id;
 
                                 if (value == ""
+                                    && element.id != 'sign-btn'
                                     && element.id != 'billing[company_name]'
                                     && element.id != 'shipping[company_name]'
                                 ) {

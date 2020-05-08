@@ -37,7 +37,7 @@
             :id="galleryCarouselId"
             pagination-enabled="hide"
             navigation-enabled="hide"
-            add-class="product-gallary"
+            add-class="product-gallery"
             :slides-count="thumbs.length">
 
             <slide :slot="`slide-${index}`" v-for="(thumb, index) in thumbs">

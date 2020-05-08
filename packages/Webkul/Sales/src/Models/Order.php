@@ -8,6 +8,14 @@ use Webkul\Sales\Contracts\Order as OrderContract;
 
 class Order extends Model implements OrderContract
 {
+    public const STATUS_PENDING = 'pending';
+    public const STATUS_PENDING_PAYMENT = 'pending_payment';
+    public const STATUS_PROCESSING = 'processing';
+    public const STATUS_COMPLETED = 'completed';
+    public const STATUS_CANCELED = 'canceled';
+    public const STATUS_CLOSED = 'closed';
+    public const STATUS_FRAUD = 'fraud';
+
     protected $guarded = [
         'id',
         'items',
@@ -21,13 +29,13 @@ class Order extends Model implements OrderContract
     ];
 
     protected $statusLabel = [
-        'pending'         => 'Pending',
-        'pending_payment' => 'Pending Payment',
-        'processing'      => 'Processing',
-        'completed'       => 'Completed',
-        'canceled'        => 'Canceled',
-        'closed'          => 'Closed',
-        'fraud'           => 'Fraud',
+        self::STATUS_PENDING         => 'Pending',
+        self::STATUS_PENDING_PAYMENT => 'Pending Payment',
+        self::STATUS_PROCESSING      => 'Processing',
+        self::STATUS_COMPLETED       => 'Completed',
+        self::STATUS_CANCELED        => 'Canceled',
+        self::STATUS_CLOSED          => 'Closed',
+        self::STATUS_FRAUD           => 'Fraud',
     ];
 
     /**
@@ -147,7 +155,7 @@ class Order extends Model implements OrderContract
      */
     public function billing_address()
     {
-        return $this->addresses()->where('address_type', 'billing');
+        return $this->addresses()->where('address_type', OrderAddress::ADDRESS_TYPE_BILLING);
     }
 
     /**
@@ -163,7 +171,7 @@ class Order extends Model implements OrderContract
      */
     public function shipping_address()
     {
-        return $this->addresses()->where('address_type', 'shipping');
+        return $this->addresses()->where('address_type', OrderAddress::ADDRESS_TYPE_SHIPPING);
     }
 
     /**
@@ -187,7 +195,7 @@ class Order extends Model implements OrderContract
      *
      * @return boolean
      */
-    public function haveStockableItems()
+    public function haveStockableItems(): bool
     {
         foreach ($this->items as $item) {
             if ($item->getTypeInstance()->isStockable()) {
@@ -200,10 +208,12 @@ class Order extends Model implements OrderContract
 
     /**
      * Checks if new shipment is allow or not
+     *
+     * @return bool
      */
-    public function canShip()
+    public function canShip(): bool
     {
-        if ($this->status == 'fraud') {
+        if ($this->status === self::STATUS_FRAUD) {
             return false;
         }
 
@@ -218,10 +228,12 @@ class Order extends Model implements OrderContract
 
     /**
      * Checks if new invoice is allow or not
+     *
+     * @return bool
      */
-    public function canInvoice()
+    public function canInvoice(): bool
     {
-        if ($this->status == 'fraud') {
+        if ($this->status === self::STATUS_FRAUD) {
             return false;
         }
 
@@ -236,10 +248,12 @@ class Order extends Model implements OrderContract
 
     /**
      * Checks if order can be canceled or not
+     *
+     * @return bool
      */
-    public function canCancel()
+    public function canCancel(): bool
     {
-        if ($this->status == 'fraud') {
+        if ($this->status === self::STATUS_FRAUD) {
             return false;
         }
 
@@ -254,10 +268,12 @@ class Order extends Model implements OrderContract
 
     /**
      * Checks if order can be refunded or not
+     *
+     * @return bool
      */
-    public function canRefund()
+    public function canRefund(): bool
     {
-        if ($this->status == 'fraud') {
+        if ($this->status === self::STATUS_FRAUD) {
             return false;
         }
 

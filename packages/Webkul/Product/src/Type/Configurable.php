@@ -397,6 +397,7 @@ class Configurable extends AbstractType
     public function getPriceHtml()
     {
         return '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
+            . ' '
             . '<span class="final-price">' . core()->currency($this->getMinimalPrice()) . '</span>';
     }
 
@@ -523,7 +524,11 @@ class Configurable extends AbstractType
                 $product = $item->product;
             }
         } else {
-            $product = $item->child->product;
+            if ($item instanceof \Webkul\Customer\Contracts\CartItem) {
+                $product = $item->child->product;
+            } else {
+                $product = $item->product;
+            }
         }
 
         return $this->productImageHelper->getProductBaseImage($product);

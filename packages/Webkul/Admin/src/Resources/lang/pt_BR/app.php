@@ -1248,14 +1248,14 @@ return [
         'system' => [
             'catalog' => 'Catálogo',
             'products' => 'Produtos',
-            'guest-checkout' => 'Saída do hóspede',
-            'allow-guest-checkout' => 'Permitir saída do hóspede',
+            'guest-checkout' => 'Compras sem cadastro?',
+            'allow-guest-checkout' => 'Permitir compra para clientes sem cadastros?',
             'allow-guest-checkout-hint' => 'Dica: se ativada, esta opção pode ser configurada para cada produto especificamente.',
-            'review' => 'Reveja',
-            'allow-guest-review' => 'Permitir comentário de convidado',
+            'review' => 'Avaliações',
+            'allow-guest-review' => 'Permitir comentários sem cadastro?',
             'inventory' => 'Inventário',
             'stock-options' => 'Opções de ações',
-            'allow-backorders' => 'Permitir Pedidos por Admin',
+            'allow-backorders' => 'Permitir Pedidos pelo Admin',
             'customer' => 'Cliente',
             'settings' => 'Definições',
             'address' => 'Endereço',
@@ -1332,6 +1332,7 @@ return [
             'cheapest-first' => 'Cheapest First',
             'expensive-first' => 'Expensive First',
             'comma-seperated' => 'Comma Seperated',
+            'favicon' => 'Favicon'
         ]
     ]
 ];

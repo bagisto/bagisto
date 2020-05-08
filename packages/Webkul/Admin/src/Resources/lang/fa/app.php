@@ -1329,6 +1329,7 @@ return [
             'cheapest-first' => 'Cheapest First',
             'expensive-first' => 'Expensive First',
             'comma-seperated' => 'Comma Seperated',
+            'favicon' => 'Favicon'
         ]
     ]
 ];

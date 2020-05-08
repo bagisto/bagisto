@@ -1313,8 +1313,9 @@ return [
             'order-number-suffix' => 'Order Number Suffix',
             'default' => 'Default',
             'sandbox' => 'Sandbox',
-            'all-channels' => 'All',
-            'all-locales' => 'All',
+            'all-channels' => 'All Channels',
+            'all-locales' => 'All Locales',
+            'all-customer-groups' => 'All Customer groups',
             'invoice-slip-design' => 'Invoice Slip Design',
             'logo' => 'Logo',
             'storefront' => 'Storefront',
@@ -1330,6 +1331,7 @@ return [
             'cheapest-first' => 'Cheapest First',
             'expensive-first' => 'Expensive First',
             'comma-seperated' => 'Comma Seperated',
+            'favicon' => 'Favicon'
        ]
     ]
 ];
