@@ -121,9 +121,62 @@ return [
             ],
         ],
     ], [
+        'key'    => 'catalog.products.storefront',
+        'name'   => 'admin::app.admin.system.storefront',
+        'sort'   => 2,
+        'fields' => [
+            [
+                'name'          => 'mode',
+                'title'         => 'admin::app.admin.system.default-list-mode',
+                'type'          => 'select',
+                'options'       => [
+                    [
+                        'title' => 'admin::app.admin.system.grid',
+                        'value' => 'grid',
+                    ], [
+                        'title' => 'admin::app.admin.system.list',
+                        'value' => 'list',
+                    ],
+                ],
+                'channel_based' => true,
+            ], [
+                'name'          => 'products_per_page',
+                'title'         => 'admin::app.admin.system.products-per-page',
+                'type'          => 'text',
+                'info'          => 'admin::app.admin.system.comma-seperated',
+                'channel_based' => true,
+            ], [
+                'name'          => 'sort_by',
+                'title'         => 'admin::app.admin.system.sort-by',
+                'type'          => 'select',
+                'options'       => [
+                    [
+                        'title' => 'admin::app.admin.system.from-z-a',
+                        'value' => 'name-desc',
+                    ], [
+                        'title' => 'admin::app.admin.system.from-a-z',
+                        'value' => 'name-asc',
+                    ], [
+                        'title' => 'admin::app.admin.system.newest-first',
+                        'value' => 'created_at-desc',
+                    ], [
+                        'title' => 'admin::app.admin.system.oldest-first',
+                        'value' => 'created_at-asc',
+                    ], [
+                        'title' => 'admin::app.admin.system.cheapest-first',
+                        'value' => 'price-asc',
+                    ], [
+                        'title' => 'admin::app.admin.system.expensive-first',
+                        'value' => 'price-desc',
+                    ],
+                ],
+                'channel_based' => true,
+            ]
+        ],
+    ], [
         'key'    => 'catalog.products.review',
         'name'   => 'admin::app.admin.system.review',
-        'sort'   => 2,
+        'sort'   => 3,
         'fields' => [
             [
                 'name'  => 'guest_review',
