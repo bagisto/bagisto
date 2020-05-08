@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Webkul\Customer\Models\Customer;
+use Webkul\Core\Contracts\Address as AddressContract;
 
 /**
  * Class Address
@@ -37,7 +38,7 @@ use Webkul\Customer\Models\Customer;
  * @property-read Carbon  $updated_at
  *
  */
-abstract class Address extends Model
+abstract class Address extends Model implements AddressContract
 {
     protected $table = 'addresses';
 
