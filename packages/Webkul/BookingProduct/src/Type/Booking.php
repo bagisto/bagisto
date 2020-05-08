@@ -291,8 +291,8 @@ class Booking extends Virtual
                 'show_location'       => $option->show_location,
                 'available_every_week'=> $option->type,
                 'available_from'      => $option->available_from->toDateTimeString(),
-                'available_to' => $option->available_to->toDateTimeString(),
-                'avilable_slots' => $slots
+                'available_to'        => $option->available_to->toDateTimeString(),
+                'avilable_slots'      => $slots
             ];
         }
 
