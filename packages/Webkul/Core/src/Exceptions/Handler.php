@@ -7,9 +7,9 @@ use Illuminate\Auth\AuthenticationException;
 use Doctrine\DBAL\Driver\PDOException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use App\Exceptions\Handler as AppExceptionsHandler;
+use App\Exceptions\Handler as AppExceptionHandler;
 
-class Handler extends AppExceptionsHandler
+class Handler extends AppExceptionHandler
 {
     protected $jsonErrorMessages = [
         404 => 'Resource not found',
