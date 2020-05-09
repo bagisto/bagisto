@@ -1,15 +1,15 @@
 <?php
 
-namespace Webkul\Admin\Exceptions;
+namespace Webkul\Core\Exceptions;
 
 use Exception;
 use Illuminate\Auth\AuthenticationException;
-use Illuminate\Database\Eloquent\PDOException;
+use Doctrine\DBAL\Driver\PDOException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use App\Exceptions\Handler as AppExceptionsHandler;
 
-class Handler extends ExceptionHandler
+class Handler extends AppExceptionsHandler
 {
     protected $jsonErrorMessages = [
         404 => 'Resource not found',
