@@ -1,7 +1,10 @@
 <?php
 
+namespace Tests\Functional\Customer;
+
 use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Models\CustomerAddress;
+use FunctionalTester;
 
 class CustomerCest
 {

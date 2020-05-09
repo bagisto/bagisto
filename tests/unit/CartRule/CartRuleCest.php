@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Category;
+namespace Tests\Unit\CartRule;
 
 use UnitTester;
 use Codeception\Example;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Functional\Cart;
+namespace Tests\Functional\Shop;
 
 use FunctionalTester;
 use Illuminate\Support\Facades\Config;

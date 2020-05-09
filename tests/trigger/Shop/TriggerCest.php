@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Shop;
+namespace Tests\Trigger\Shop;
 
 use Faker\Factory;
 use UnitTester;

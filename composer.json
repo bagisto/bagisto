@@ -110,7 +110,10 @@
 
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Tests\\Acceptance\\": "tests/acceptance/",
+            "Tests\\Functional\\": "tests/functional/",
+            "Tests\\Unit\\": "tests/unit/",
+            "Tests\\Trigger\\": "tests/trigger/"
         }
     },
 
