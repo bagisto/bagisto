@@ -341,7 +341,7 @@
 
                                 <div class="summary-comment-container">
                                     <div class="comment-container">
-                                        <form action="{{ route('admin.sales.orders.comment', $order->id) }}" method="post">
+                                        <form action="{{ route('admin.sales.orders.comment', $order->id) }}" method="post" @submit.prevent="onSubmit">
                                             @csrf()
 
                                             <div class="control-group" :class="[errors.has('comment') ? 'has-error' : '']">
