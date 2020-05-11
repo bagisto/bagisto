@@ -32,7 +32,7 @@ return [
     'status' => 'Stato',
     'select-option' => 'Seleziona opzione',
     'category' => 'Categoria',
-
+	
     'common' => [
         'no-result-found' => 'Non è stato trovato nessun record.',
         'country' => 'Paese',
@@ -371,7 +371,7 @@ return [
             'total-due' => 'Totale Dovuto',
             'cancel-confirm-msg' => 'Sei sicuro di voler cancellare questo ordine ?',
             'refund-btn-title' => 'Rimborsa',
-            'refunds' => 'Rimbrsi'
+            'refunds' => 'Rimborsi',
             'comment-added-success' => 'Commento aggiunto con successo.',
             'comment' => 'Commento',
             'submit-comment' => 'Invia Commento',
