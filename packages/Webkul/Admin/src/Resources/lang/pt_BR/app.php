@@ -1318,7 +1318,20 @@ return [
             'all-locales' => 'Todos',
             'sandbox' => 'Sandbox',
             'invoice-slip-design' => 'Design da Nota do Pedido',
-            'logo' => 'logo',
+            'logo' => 'Logo',
+            'storefront' => 'Storefront',
+            'default-list-mode' => 'Default List Mode',
+            'grid' => 'Grid',
+            'list' => 'List',
+            'products-per-page' => 'Products Per Page',
+            'sort-by' => 'Sort By',
+            'from-z-a' => 'From Z-A',
+            'from-a-z' => 'From A-Z',
+            'newest-first' => 'Newest First',
+            'oldest-first' => 'Oldest First',
+            'cheapest-first' => 'Cheapest First',
+            'expensive-first' => 'Expensive First',
+            'comma-seperated' => 'Comma Seperated',
             'favicon' => 'Favicon'
         ]
     ]
