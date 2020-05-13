@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Product\Models\ProductAttributeValue;
+use Webkul\Product\Models\ProductAttributeValueProxy;
 
 class ProductRepository extends Repository
 {
@@ -175,7 +175,7 @@ class ProductRepository extends Repository
                     foreach ($attributeFilters as $attribute) {
                         $filterQuery->orWhere(function ($attributeQuery) use ($attribute) {
 
-                            $column = 'product_attribute_values.' . ProductAttributeValue::$attributeTypeFields[$attribute->type];
+                            $column = 'product_attribute_values.' . ProductAttributeValueProxy::modelClass()::$attributeTypeFields[$attribute->type];
 
                             $filterInputValues = explode(',', request()->get($attribute->code));
 
