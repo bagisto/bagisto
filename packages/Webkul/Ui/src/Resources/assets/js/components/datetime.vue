@@ -84,24 +84,6 @@
                     return validateDate(value)
                 }
             })
-
-            this.$validator.extend('after_datetime', {
-                getMessage(field, val) {
-                    return field + ' must be later than ' + val + '.'
-                },
-                validate(value, field) {
-                    let afterDateValue = field.valueOf().toString()
-                    if (validateDate(afterDateValue) === true) {
-                        let newDate = new Date(value)
-                        let afterDate = new Date(field.valueOf().toString())
-
-                        if (newDate <= afterDate) {
-                            return false
-                        }
-                    }
-                    return true
-                }
-            })
         },
 
         mounted() {
