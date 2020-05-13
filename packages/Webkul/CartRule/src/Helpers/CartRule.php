@@ -124,7 +124,9 @@ class CartRule
 
         $this->processFreeShippingDiscount($cart);
 
-        $this->validateCouponCode();
+        if (! $this->checkCouponCode()) {
+            cart()->removeCouponCode();
+        }
     }
 
     /**
@@ -324,16 +326,14 @@ class CartRule
                     break;
             }
 
-            $item->discount_amount = round(
-                min(
-                    $item->discount_amount + $discountAmount,
-                    $item->price * $quantity + $item->tax_amount
-                ),2);
-            $item->base_discount_amount = round(
-                min(
-                    $item->base_discount_amount + $baseDiscountAmount,
-                    $item->base_price * $quantity + $item->base_tax_amount
-                ), 2);
+            $item->discount_amount = min(
+                $item->discount_amount + $discountAmount,
+                $item->price * $quantity + $item->tax_amount
+            );
+            $item->base_discount_amount = min(
+                $item->base_discount_amount + $baseDiscountAmount,
+                $item->base_price * $quantity + $item->base_tax_amount
+            );
 
             $appliedRuleIds[$rule->id] = $rule->id;
 
@@ -518,23 +518,26 @@ class CartRule
     }
 
     /**
-     * Check if coupon code is valid or not, if not remove from cart
+     * Check if coupon code is applied or not
      *
-     * @return void
+     * @return bool
      */
-    public function validateCouponCode()
+    public function checkCouponCode(): bool
     {
-        $cart = Cart::getCart();
+        $cart = cart()->getCart();
 
         if (! $cart->coupon_code) {
-            return;
+            return true;
         }
 
-        $coupon = $this->cartRuleCouponRepository->findOneByField('code', $cart->coupon_code);
-
-        if (! $coupon || ! in_array($coupon->cart_rule_id, explode(',', $cart->applied_cart_rule_ids))) {
-            Cart::removeCouponCode();
+        $coupons = $this->cartRuleCouponRepository->where(['code' => $cart->coupon_code])->get();
+        foreach ($coupons as $coupon) {
+            if (in_array($coupon->cart_rule_id, explode(',', $cart->applied_cart_rule_ids))) {
+                return true;
+            }
         }
+
+        return false;
     }
 
     /**
