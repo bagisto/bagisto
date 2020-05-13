@@ -116,7 +116,7 @@ class OrderItemRepository extends Repository
             }
 
             $orderedInventory = $item->product->ordered_inventories()
-                                              ->where('channel_id', $orderItem->order->channel->id)
+                                              ->where('channel_id', $orderItem->order->channel_id)
                                               ->first();
 
             $qty = $item->qty_ordered ?: $item->parent->qty_ordered;

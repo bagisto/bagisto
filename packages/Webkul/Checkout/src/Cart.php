@@ -2,6 +2,7 @@
 
 namespace Webkul\Checkout;
 
+use Webkul\Checkout\Models\Cart as CartModel;
 use Webkul\Checkout\Models\CartAddress;
 use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Checkout\Repositories\CartItemRepository;
@@ -600,6 +601,8 @@ class Cart
             $cart->base_discount_amount += $shipping->base_discount_amount;
         }
 
+        $cart = $this->finalizeCartTotals($cart);
+
         $quantities = 0;
 
         foreach ($cart->items as $item) {
@@ -1050,6 +1053,25 @@ class Cart
             $cart->customer_first_name = $cart->billing_address->first_name;
             $cart->customer_last_name = $cart->billing_address->last_name;
         }
+    }
+
+    /**
+     * Round cart totals
+     *
+     * @param \Webkul\Checkout\Models\Cart $cart
+     *
+     * @return \Webkul\Checkout\Models\Cart
+     */
+    private function finalizeCartTotals(CartModel $cart): CartModel
+    {
+        $cart->discount_amount = round($cart->discount_amount, 2);
+        $cart->base_discount_amount = round($cart->base_discount_amount, 2);
+
+        $cart->grand_total = round($cart->grand_total, 2);
+        $cart->grand_total = round($cart->grand_total, 2);
+        $cart->base_grand_total = round($cart->base_grand_total, 2);
+
+        return $cart;
     }
 
     /**

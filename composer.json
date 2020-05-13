@@ -31,7 +31,6 @@
         "laravel/helpers": "^1.1",
         "laravel/tinker": "^1.0",
         "maatwebsite/excel": "3.1.18",
-        "nwidart/laravel-modules": "^3.2",
         "prettus/l5-repository": "^2.6",
         "tymon/jwt-auth": "^1.0.0",
         "barryvdh/laravel-debugbar": "^3.1",
@@ -110,7 +109,10 @@
 
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Tests\\Acceptance\\": "tests/acceptance/",
+            "Tests\\Functional\\": "tests/functional/",
+            "Tests\\Unit\\": "tests/unit/",
+            "Tests\\Trigger\\": "tests/trigger/"
         }
     },
 
