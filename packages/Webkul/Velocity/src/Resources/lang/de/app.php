@@ -244,7 +244,7 @@ return [
         'customer-rating'   => 'Kundenbewertung',
         'more-infomation'   => 'Mehr Informationen',
         'view-all-reviews'  => 'Alle Bewertungen anzeigen',
-        'write-your-review' => 'Schreiben Sie Ihre Rezension',
+        'write-your-review' => 'Schreiben Sie Ihre Bewertung',
         'short-description' => 'Kurze Beschreibungen',
         'recently-viewed'   => 'Kürzlich angesehene Produkte',
         'be-first-review'   => 'Sei der erste der eine Bewertung schreibt',
