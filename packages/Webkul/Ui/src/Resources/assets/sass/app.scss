@@ -665,12 +665,20 @@ h5 {
         margin-top: 5px;
     }
 
-    &.has-error .control {
-        border-color: $danger-color;
+    &.has-error {
+        .control {
+            border-color: $danger-color;
+        }
+
+        .control-error {
+            display: block;
+        }
     }
 
-    &.has-error .control-error {
-        display: block;
+    &.has-error.date, &.has-error.date {
+        &::after {
+            margin-top: -12px;
+        }
     }
 
     &.price {
