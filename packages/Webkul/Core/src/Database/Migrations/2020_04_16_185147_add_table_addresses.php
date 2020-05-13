@@ -118,7 +118,7 @@ class AddTableAddresses extends Migration
                 customer_id,
                 first_name,
                 last_name,
-                (SELECT gender FROM customers c WHERE c.id=ca.customer_id),
+                (SELECT gender FROM ${dbPrefix}customers c WHERE c.id=ca.customer_id),
                 company_name,
                 address1,
                 address2,
@@ -132,7 +132,7 @@ class AddTableAddresses extends Migration
                 JSON_INSERT('{}', '$.old_customer_address_id', id),
                 created_at,
                 updated_at
-            FROM customer_addresses ca;
+            FROM ${dbPrefix}customer_addresses ca;
 SQL;
 
         DB::unprepared($insertCustomerAddresses);
@@ -169,7 +169,7 @@ SQL;
                 cart_id,
                 first_name,
                 last_name,
-                (SELECT gender FROM customers c WHERE c.id=ca.customer_id),
+                (SELECT gender FROM ${dbPrefix}customers c WHERE c.id=ca.customer_id),
                 company_name,
                 address1,
                 address2,
@@ -182,7 +182,7 @@ SQL;
                 JSON_INSERT('{}', '$.old_cart_address_id', id),
                 created_at,
                 updated_at
-            FROM cart_address ca;
+            FROM ${dbPrefix}cart_address ca;
 SQL;
 
         DB::unprepared($insertCustomerAddresses);
@@ -219,7 +219,7 @@ SQL;
                 order_id,
                 first_name,
                 last_name,
-                (SELECT gender FROM customers c WHERE c.id=oa.customer_id),
+                (SELECT gender FROM ${dbPrefix}customers c WHERE c.id=oa.customer_id),
                 company_name,
                 address1,
                 address2,
@@ -232,7 +232,7 @@ SQL;
                 JSON_INSERT('{}', '$.old_order_address_id', id),
                 created_at,
                 updated_at
-            FROM order_address oa;
+            FROM ${dbPrefix}order_address oa;
 SQL;
 
         DB::unprepared($insertCustomerAddresses);
