@@ -69,7 +69,7 @@
                     add-class-to-btn="{{ $addToCartBtnClass ?? '' }}"
                     is-enable={{ ! $product->isSaleable() ? 'false' : 'true' }}
                     show-cart-icon={{ !(isset($showCartIcon) && !$showCartIcon) }}
-                    btn-text="{{ $btnText ?? __('shop::app.products.add-to-cart') }}">
+                    btn-text="{{ ($product->type == 'booking') ? $btnText ?? __('shop::app.products.book-now') : $btnText ?? __('shop::app.products.add-to-cart') }}">
                 </add-to-cart>
             @endif
         </div>
