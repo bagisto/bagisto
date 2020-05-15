@@ -383,7 +383,7 @@ return [
         'view-all' => 'Ver todo',
         'select-above-options' => 'Primero selecciona las opciones de arriba.',
         'less-quantity' => 'La cantidad no debe ser inferior a uno.',
-        'available' => 'Available'
+        'available-for-order' => 'Disponible para ordenar',
     ],
 
     // 'reviews' => [

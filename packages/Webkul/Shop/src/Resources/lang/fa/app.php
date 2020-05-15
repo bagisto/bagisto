@@ -412,7 +412,7 @@ return [
         'your-customization' => 'شخصی سازی شما',
         'total-amount' => 'مقدار کل',
         'none' => 'هیچ یک',
-        'available' => 'Available'
+        'available-for-order' => 'Available for Order',
     ],
 
     // 'reviews' => [

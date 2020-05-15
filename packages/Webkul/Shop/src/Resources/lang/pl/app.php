@@ -411,7 +411,7 @@ return [
         'your-customization' => 'Twoja personalizacja',
         'total-amount' => 'Całkowita kwota',
         'none' => 'Żaden',
-        'available' => 'Dostępny'
+        'available-for-order' => 'Dostępne na zamówienie'
     ],
 
     // 'reviews' => [

@@ -413,7 +413,7 @@ return [
         'your-customization' => 'Your Customization',
         'total-amount' => 'Total Amount',
         'none' => 'None',
-        'available' => 'Available'
+        'available-for-order' => 'Available for Order'
     ],
 
     // 'reviews' => [

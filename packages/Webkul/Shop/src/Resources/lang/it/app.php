@@ -412,7 +412,7 @@ return [
         'your-customization' => 'La tua Personalizzazione',
         'total-amount' => 'Totale',
         'none' => 'Nessuno',
-        'available' => 'Disponibile'
+        'available-for-order' => 'Disponibile per lordine'
     ],
 
     // 'reviews' => [

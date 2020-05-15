@@ -417,7 +417,7 @@ return [
         'your-customization' => 'Uw maatwerk',
         'total-amount' => 'Totale hoeveelheid',
         'none' => 'Geen',
-        'available' => 'Available'
+        'available-for-order' => 'Beschikbaar voor bestelling'
     ],
 
     // 'reviews' => [
