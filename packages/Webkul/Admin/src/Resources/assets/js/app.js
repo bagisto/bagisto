@@ -36,6 +36,8 @@ $(document).ready(function () {
         mounted() {
             this.addServerErrors();
             this.addFlashMessages();
+
+            this.$validator.localize(document.documentElement.lang);
         },
 
         methods: {
