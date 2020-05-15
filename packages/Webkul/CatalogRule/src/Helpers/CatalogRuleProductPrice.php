@@ -161,7 +161,7 @@ class CatalogRuleProductPrice
 
             case 'by_fixed':
                 $price = max(0, $price - $rule->discount_amount);
-                
+
                 break;
 
             case 'by_percent':
@@ -184,9 +184,9 @@ class CatalogRuleProductPrice
         if (count($productIds)) {
             $this->catalogRuleProductPriceRepository->getModel()->whereIn('product_id', $productIds)->delete();
         } else {
-            $this->catalogRuleProductPriceRepository->deleteWhere([
+            $this->catalogRuleProductPriceRepository->getModel()->where([
                 ['product_id', 'like', '%%']
-            ]);
+            ])->delete();
         }
     }
 
