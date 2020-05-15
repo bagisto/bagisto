@@ -411,7 +411,7 @@ return [
         'your-customization' => 'التخصيص الخاص بك',
         'total-amount' => 'المبلغ الإجمالي',
         'none' => 'لا شيء',
-        'available' => 'Available',
+        'available-for-order' => 'متوفر لطلب الشراء',
     ],
 
     // 'reviews' => [

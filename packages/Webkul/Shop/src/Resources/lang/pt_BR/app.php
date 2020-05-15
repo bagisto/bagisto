@@ -399,7 +399,7 @@ return [
         'your-customization' => 'Sua personalização',
         'total-amount' => 'Valor total',
         'none' => 'Nenhum',
-        'available' => 'Available'
+        'available-for-order' => 'Disponível para encomenda'
     ],
 
     // 'reviews' => [
