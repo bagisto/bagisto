@@ -361,6 +361,7 @@ return [
         'layered-nav-title' => 'Compre por',
         'price-label' => 'Tão baixo quanto',
         'remove-filter-link-title' => 'Limpar Todos',
+        'filter-to' => 'a',
         'sort-by' => 'Ordernar por',
         'from-a-z' => 'De A-Z',
         'from-z-a' => 'De Z-A',

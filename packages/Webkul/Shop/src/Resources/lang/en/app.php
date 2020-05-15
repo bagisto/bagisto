@@ -369,6 +369,7 @@ return [
         'layered-nav-title' => 'Shop By',
         'price-label' => 'As low as',
         'remove-filter-link-title' => 'Clear All',
+        'filter-to' => 'to',
         'sort-by' => 'Sort By',
         'from-a-z' => 'From A-Z',
         'from-z-a' => 'From Z-A',

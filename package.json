@@ -25,8 +25,9 @@
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
+        "opencollective": "^1.0.3",
         "opencollective-postinstall": "^2.0.1",
-        "opencollective": "^1.0.3"
+        "vee-validate": "^3.3.0"
     },
     "collective": {
         "type": "opencollective",
