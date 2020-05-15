@@ -393,6 +393,7 @@ return [
         'new' => 'Nuovo',
         'empty' => 'Nessun prodotto disponibile in questa categoria',
         'add-to-cart' => 'Aggiungi al Carrello',
+        'book-now' => 'Prenota ora',
         'buy-now' => 'Compra ora',
         'whoops' => 'Whoops!',
         'quantity' => 'Quantità',
@@ -668,7 +669,7 @@ return [
                 'subject' => 'Email Iscrizione',
                 'greeting' => ' Benvenuto ' . config('app.name') . ' - Email Iscrizione',
                 'unsubscribe' => 'Cancellati',
-                'summary' => 'Grazie per avere scelto di ricevere le nostre email. È passato un po\' di tempo da quando hai letto le email di ' . config('app.name') . '. Non è un nostro desidero inondare la tua casella email con le nostre comunicazioni. Se desideri comunque 
+                'summary' => 'Grazie per avere scelto di ricevere le nostre email. È passato un po\' di tempo da quando hai letto le email di ' . config('app.name') . '. Non è un nostro desidero inondare la tua casella email con le nostre comunicazioni. Se desideri comunque
                 non ricevere più le nostre news clicca il bottone qui sotto.'
             ]
         ]
