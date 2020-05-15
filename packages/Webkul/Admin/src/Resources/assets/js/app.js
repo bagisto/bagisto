@@ -8,10 +8,6 @@ import './bootstrap';
 window.Vue = Vue;
 window.VeeValidate = VeeValidate;
 
-Vue.use(VeeValidate);
-
-Validator.localize('de', de);
-
 Vue.use(VeeValidate, {
     dictionary: {
         ar: ar,

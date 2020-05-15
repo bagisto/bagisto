@@ -15,10 +15,6 @@ window.axios = axios;
 require("./bootstrap");
 require("ez-plus/src/jquery.ez-plus.js");
 
-Vue.use(VeeValidate);
-
-Validator.localize('de', de);
-
 Vue.use(VeeValidate, {
     dictionary: {
         ar: ar,
