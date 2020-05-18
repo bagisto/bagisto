@@ -499,17 +499,19 @@
 
                     backToSavedBillingAddress: function () {
                         this.new_billing_address = false;
-                        setTimeout(() => {
-                            this.validateForm('address-form');
-                        }, 0);
+                        this.validateFormAfterAction()
                     },
 
                     backToSavedShippingAddress: function () {
                         this.new_shipping_address = false;
+                        this.validateFormAfterAction()
+                    },
+
+                    validateFormAfterAction: function () {
                         setTimeout(() => {
                             this.validateForm('address-form');
                         }, 0);
-                    },
+                    }
                 }
             });
 

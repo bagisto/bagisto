@@ -79,11 +79,11 @@
                     <div class="mt10 mb10" v-if="address.billing.address_id">
                         <span class="checkbox fs16 display-inbl">
                             <input
-                                type="checkbox"
                                 class="ml0"
+                                type="checkbox"
                                 id="billing[use_for_shipping]"
                                 name="billing[use_for_shipping]"
-                                @change="setTimeout(() => validateForm('address-form'), 0)"
+                                @change="validateFormAfterAction"
                                 v-model="address.billing.use_for_shipping" />
 
                             <span class="ml-5">
