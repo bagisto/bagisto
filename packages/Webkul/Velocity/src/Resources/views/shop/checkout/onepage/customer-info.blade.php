@@ -83,7 +83,7 @@
                                 type="checkbox"
                                 id="billing[use_for_shipping]"
                                 name="billing[use_for_shipping]"
-                                @change="validateFormAfterAction"
+                                @change="setTimeout(() => validateForm('address-form'), 0)"
                                 v-model="address.billing.use_for_shipping" />
 
                             <span class="ml-5">
