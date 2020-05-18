@@ -207,9 +207,67 @@ return [
             ],
         ],
     ], [
+        'key'  => 'catalog.rich_snippets',
+        'name' => 'admin::app.admin.system.rich-snippets',
+        'sort' => 3,
+    ], [
+        'key'    => 'catalog.rich_snippets.products',
+        'name'   => 'admin::app.admin.system.products',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'  => 'enable',
+                'title' => 'admin::app.admin.system.enable',
+                'type'  => 'boolean',
+            ], [
+                'name'  => 'show_sku',
+                'title' => 'admin::app.admin.system.show-sku',
+                'type'  => 'boolean',
+            ], [
+                'name'  => 'show_weight',
+                'title' => 'admin::app.admin.system.show-weight',
+                'type'  => 'boolean',
+            ], [
+                'name'  => 'show_categories',
+                'title' => 'admin::app.admin.system.show-categories',
+                'type'  => 'boolean',
+            ], [
+                'name'  => 'show_images',
+                'title' => 'admin::app.admin.system.show-images',
+                'type'  => 'boolean',
+            ], [
+                'name'  => 'show_reviews',
+                'title' => 'admin::app.admin.system.show-reviews',
+                'type'  => 'boolean',
+            ], [
+                'name'  => 'show_ratings',
+                'title' => 'admin::app.admin.system.show-ratings',
+                'type'  => 'boolean',
+            ], [
+                'name'  => 'show_offers',
+                'title' => 'admin::app.admin.system.show-offers',
+                'type'  => 'boolean',
+            ],
+        ],
+    ], [
+        'key'    => 'catalog.rich_snippets.categories',
+        'name'   => 'admin::app.admin.system.categories',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'  => 'enable',
+                'title' => 'admin::app.admin.system.enable',
+                'type'  => 'boolean',
+            ], [
+                'name'  => 'show_search_input_field',
+                'title' => 'admin::app.admin.system.show-search-input-field',
+                'type'  => 'boolean',
+            ]
+        ]
+    ], [
         'key'  => 'customer',
         'name' => 'admin::app.admin.system.customer',
-        'sort' => 3,
+        'sort' => 4,
     ], [
         'key'  => 'customer.settings',
         'name' => 'admin::app.admin.system.settings',
@@ -252,7 +310,7 @@ return [
     ], [
         'key'  => 'emails',
         'name' => 'admin::app.admin.emails.email',
-        'sort' => 1,
+        'sort' => 5,
     ], [
         'key'  => 'emails.general',
         'name' => 'admin::app.admin.emails.notification_label',
