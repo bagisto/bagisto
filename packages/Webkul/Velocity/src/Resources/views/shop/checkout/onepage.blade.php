@@ -509,7 +509,7 @@
                         setTimeout(() => {
                             this.validateForm('address-form');
                         }, 0);
-                    }
+                    },
                 }
             });
 

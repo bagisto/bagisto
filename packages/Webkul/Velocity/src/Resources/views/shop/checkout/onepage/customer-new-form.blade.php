@@ -514,8 +514,8 @@
                         type="checkbox"
                         id="billing[use_for_shipping]"
                         name="billing[use_for_shipping]"
-                        @change="setTimeout(() => validateForm('address-form'), 0)"
-                        v-model="address.billing.use_for_shipping" />
+                        v-model="address.billing.use_for_shipping"
+                        @change="setTimeout(() => validateForm('address-form'), 0)" />
 
                     <span class="ml-5">
                         {{ __('shop::app.checkout.onepage.use_for_shipping') }}
