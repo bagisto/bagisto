@@ -71,7 +71,7 @@ class Review extends AbstractProduct
             return $totalRating[$product->id];
         }
 
-        return $totalRating[$product->id] = $product->reviews()->where('status','approved')->sum('rating');
+        return $totalRating[$product->id] = $product->reviews()->where('status', 'approved')->sum('rating');
     }
 
      /**
@@ -85,7 +85,7 @@ class Review extends AbstractProduct
         $reviews = $product->reviews()->where('status', 'approved')
                            ->select('rating', DB::raw('count(*) as total'))
                            ->groupBy('rating')
-                           ->orderBy('rating','desc')
+                           ->orderBy('rating', 'desc')
                            ->get();
 
         $totalReviews = $this->getTotalReviews($product);

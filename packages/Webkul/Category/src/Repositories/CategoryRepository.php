@@ -103,7 +103,7 @@ class CategoryRepository extends Repository
     {
         static $categories = [];
 
-        if(array_key_exists($id, $categories)) {
+        if (array_key_exists($id, $categories)) {
             return $categories[$id];
         }
 

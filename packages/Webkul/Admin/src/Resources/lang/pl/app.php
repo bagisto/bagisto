@@ -1002,7 +1002,7 @@ return [
             'specific-coupon' => 'Konkretny kupon',
             'auto-generate-coupon' => 'Automatyczniegeneruj kupon',
             'no' => 'Nie',
-            'yes' => 'Tak,
+            'yes' => 'Tak',
             'coupon-code' => 'Kod kuponu',
             'uses-per-coupon' => 'Wartość wykorzystania na kupon',
             'uses-per-customer' => 'Wartość wykorzystania na klienta',
@@ -1318,7 +1318,21 @@ return [
             'all-customer-groups' => 'Wszystkie grupy klientów',
             'invoice-slip-design' => 'Wzór wydruku faktury',
             'logo' => 'Logo',
-            'favicon' => 'Favicon'
+            'favicon' => 'Favicon',
+            'seo' => 'SEO',
+            'rich-snippets' => 'Rich Snippets',
+            'products' => 'Products',
+            'enable' => 'Enable',
+            'show-weight' => 'Show Weight',
+            'show-categories' => 'Show Categories',
+            'show-images' => 'Show Images',
+            'show-reviews' => 'Show Reviews',
+            'show-ratings' => 'Show Ratings',
+            'show-offers' => 'Show Offers',
+            'show-sku' => 'Show SKU',
+            'categories' => 'Categories',
+            'show-sku' => 'Show SKU',
+            'show-search-input-field' => 'Show Search Input Field'
        ]
     ]
 ];
