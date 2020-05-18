@@ -314,6 +314,7 @@ return [
                     'adjustment-refund' => 'Adjustment Refund',
                     'adjustment-fee' => 'Adjustment Fee',
                     'cancel-btn-title' => 'Cancel',
+                    'tracking-number' => 'Tracking Number',
                 ]
             ],
 

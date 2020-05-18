@@ -295,7 +295,8 @@ return [
                     'order-date' => 'Fecha pedido',
                     'bill-to' => 'Facturar a',
                     'ship-to' => 'Envío a',
-                    'contact' => 'Contacto'
+                    'contact' => 'Contacto',
+                    'tracking-number' => 'Tracking Number',
                 ]
             ],
 

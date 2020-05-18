@@ -312,7 +312,8 @@ return [
                     'refunds' => 'المسترجع',
                     'individual-refund' => '#:refund_id مسترجع',
                     'adjustment-refund' => 'تعديلات عملية الإسترجاع',
-                    'adjustment-fee' => 'تكلفة تعديلات عملية الإسترجاع'
+                    'adjustment-fee' => 'تكلفة تعديلات عملية الإسترجاع',
+                    'tracking-number' => 'Tracking Number',
                 ]
             ],
 
