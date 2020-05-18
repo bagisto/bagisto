@@ -206,7 +206,7 @@
                 v-validate="'required'"
                 name="shipping[postcode]"
                 v-model="address.shipping.postcode"
-                @change="validateForm('address-form')"
+                @keyup="validateForm('address-form')"
                 data-vv-as="&quot;{{ __('shop::app.checkout.onepage.postcode') }}&quot;" />
 
             <span class="control-error" v-if="errors.has('address-form.shipping[postcode]')">
@@ -498,7 +498,7 @@
                 name="billing[phone]"
                 v-validate="'required'"
                 v-model="address.billing.phone"
-                @change="validateForm('address-form')"
+                @keyup="validateForm('address-form')"
                 data-vv-as="&quot;{{ __('shop::app.checkout.onepage.phone') }}&quot;" />
 
             <span class="control-error" v-if="errors.has('address-form.billing[phone]')">
@@ -514,8 +514,8 @@
                         type="checkbox"
                         id="billing[use_for_shipping]"
                         name="billing[use_for_shipping]"
-                        @change="validateFormAfterAction"
-                        v-model="address.billing.use_for_shipping" />
+                        v-model="address.billing.use_for_shipping"
+                        @change="setTimeout(() => validateForm('address-form'), 0)" />
 
                     <span class="ml-5">
                         {{ __('shop::app.checkout.onepage.use_for_shipping') }}
