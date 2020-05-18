@@ -281,7 +281,7 @@
 
                 searchedItem.forEach(item => {
                     let splitedItem = item.split('=');
-                    updatedSearchedCollection[splitedItem[0]] = splitedItem[1];
+                    updatedSearchedCollection[splitedItem[0]] = decodeURI(splitedItem[1]);
                 });
 
                 this.searchedQuery = updatedSearchedCollection;
