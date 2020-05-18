@@ -318,6 +318,7 @@ return [
                     'individual-refund' => 'Terugbetaling #:refund_id',
                     'adjustment-refund' => 'Aanpassing restitutie',
                     'adjustment-fee' => 'Aanpassingskosten',
+                    'tracking-number' => 'Tracking Number',
                 ]
             ],
 

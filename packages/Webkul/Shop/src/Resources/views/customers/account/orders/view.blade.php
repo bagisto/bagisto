@@ -315,6 +315,20 @@
                             @foreach ($order->shipments as $shipment)
 
                                 <div class="sale-section">
+                                    <div class="section-content">
+                                        <div class="row">
+                                            <span class="title">
+                                                {{ __('shop::app.customer.account.order.view.tracking-number') }}
+                                            </span>
+
+                                            <span class="value">
+                                                {{  $shipment->track_number }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="sale-section">
                                     <div class="secton-title">
                                         <span>{{ __('shop::app.customer.account.order.view.individual-shipment', ['shipment_id' => $shipment->id]) }}</span>
                                     </div>

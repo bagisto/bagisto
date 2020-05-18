@@ -306,6 +306,7 @@ return [
                     'individual-refund' => 'Refund #:refund_id',
                     'adjustment-refund' => 'Adjustment Refund',
                     'adjustment-fee' => 'Adjustment Fee',
+                    'tracking-number' => 'Tracking Number',
                 ]
             ],
 
