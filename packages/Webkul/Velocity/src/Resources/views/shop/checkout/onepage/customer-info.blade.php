@@ -55,7 +55,9 @@
 
                     <div class="col-lg-6 col-md-12 address-holder pl0">
                         <div class="card">
-                            <div class="card-body add-address-button">
+                            <div
+                                @click="validateFormAfterAction"
+                                class="card-body add-address-button">
                                 <div class="cursor-pointer" @click="newBillingAddress()">
                                     <i class="material-icons">
                                         add_circle_outline
@@ -79,11 +81,11 @@
                     <div class="mt10 mb10" v-if="address.billing.address_id">
                         <span class="checkbox fs16 display-inbl">
                             <input
-                                type="checkbox"
                                 class="ml0"
+                                type="checkbox"
                                 id="billing[use_for_shipping]"
                                 name="billing[use_for_shipping]"
-                                @change="setTimeout(() => validateForm('address-form'), 0)"
+                                @change="validateFormAfterAction"
                                 v-model="address.billing.use_for_shipping" />
 
                             <span class="ml-5">
@@ -183,7 +185,9 @@
 
                     <div class="col-lg-6 address-holder pl0">
                         <div class="card">
-                            <div class="card-body add-address-button">
+                            <div
+                                @click="validateFormAfterAction"
+                                class="card-body add-address-button">
                                 <div class="cursor-pointer" @click="newShippingAddress()">
                                     <i class="material-icons">
                                         add_circle_outline
