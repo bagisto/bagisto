@@ -76,10 +76,22 @@ class ComparisonController extends Controller
 
         if (! $compareProduct) {
             // insert new row
-            $this->compareProductsRepository->create([
-                'customer_id'     => $customerId,
-                'product_flat_id' => $productId,
-            ]);
+
+            $productFlatRepository = app('\Webkul\Product\Models\ProductFlat');
+
+            $productFlat = $productFlatRepository
+                            ->where('product_id', $productId)
+                            ->get()
+                            ->first();
+
+            if ($productFlat) {
+                $productId = $productFlat->id;
+                
+                $this->compareProductsRepository->create([
+                    'customer_id'     => $customerId,
+                    'product_flat_id' => $productId,
+                ]);
+            }
 
             return response()->json([
                 'status'  => 'success',
