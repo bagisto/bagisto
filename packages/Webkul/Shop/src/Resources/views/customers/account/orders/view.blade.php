@@ -409,7 +409,7 @@
 
                                                     @if (! $refund->items->count())
                                                         <tr>
-                                                            <td class="empty" colspan="7">{{ __('admin::app.common.no-result-found') }}</td>
+                                                            <td class="empty" colspan="7">{{ __('shop::app.common.no-result-found') }}</td>
                                                         <tr>
                                                     @endif
                                                 </tbody>
