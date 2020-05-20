@@ -1323,7 +1323,21 @@ return [
             'cheapest-first' => 'Cheapest First',
             'expensive-first' => 'Expensive First',
             'comma-seperated' => 'Comma Seperated',
-            'favicon' => 'Favicon'
+            'favicon' => 'Favicon',
+            'seo' => 'SEO',
+            'rich-snippets' => 'Rich Snippets',
+            'products' => 'Products',
+            'enable' => 'Enable',
+            'show-weight' => 'Show Weight',
+            'show-categories' => 'Show Categories',
+            'show-images' => 'Show Images',
+            'show-reviews' => 'Show Reviews',
+            'show-ratings' => 'Show Ratings',
+            'show-offers' => 'Show Offers',
+            'show-sku' => 'Show SKU',
+            'categories' => 'Categories',
+            'show-sku' => 'Show SKU',
+            'show-search-input-field' => 'Show Search Input Field'
         ]
     ]
 ];

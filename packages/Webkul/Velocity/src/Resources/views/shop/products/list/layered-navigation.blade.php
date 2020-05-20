@@ -118,7 +118,7 @@
                             :value="sliderConfig.priceFrom"
                             id="price_from" />
 
-                        <label class="col text-center" for="to">to</label>
+                        <label class="col text-center" for="to">{{ __('shop::app.products.filter-to') }}</label>
                         <input
                         type="text"
                         disabled
