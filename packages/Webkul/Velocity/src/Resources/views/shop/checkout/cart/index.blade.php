@@ -46,9 +46,9 @@
 
                         <div class="cart-content col-12">
                             <form
-                                action="{{ route('shop.checkout.cart.update') }}"
                                 method="POST"
-                                @submit.prevent="onSubmit">
+                                @submit.prevent="onSubmit"
+                                action="{{ route('shop.checkout.cart.update') }}">
 
                                 <div class="cart-item-list">
                                     @csrf
@@ -145,7 +145,7 @@
                                                             @endauth
                                                         "
                                                         href="{{ route('shop.checkout.cart.remove', ['id' => $item->id]) }}"
-                                                        onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">
+                                                        @click="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">
 
                                                         <span class="rango-delete fs24"></span>
                                                         <span class="align-vertical-top">{{ __('shop::app.checkout.cart.remove') }}</span>
@@ -281,13 +281,15 @@
                     return {
                         isMobileDevice: this.isMobile(),
                     }
+                },
+
+                methods: {
+                    removeLink(message) {
+                        if (! confirm(message))
+                            event.preventDefault();
+                    }
                 }
             })
-
-            function removeLink(message) {
-                if (!confirm(message))
-                event.preventDefault();
-            }
         })()
     </script>
 @endpush
