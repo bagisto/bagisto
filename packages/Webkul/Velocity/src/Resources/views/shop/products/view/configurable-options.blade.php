@@ -323,7 +323,7 @@
                         },
 
                         changeStock: function (productId) {
-                            var inStockElement = document.querySelector('.stock-status');
+                            var inStockElement = document.querySelector('.disable-box-shadow');
 
                             if (productId) {
                                 inStockElement.style.display= "block";
