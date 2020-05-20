@@ -64,8 +64,8 @@
                                 </li>
                             </ul>
 
-                            <ul type="none" class="category-wrapper" v-if="$root.sharedRootCategories.length > 0">
-                                <li v-for="(category, index) in $root.sharedRootCategories">
+                            <ul type="none" class="category-wrapper" v-if="rootCategoriesCollection.length > 0">
+                                <li v-for="(category, index) in rootCategoriesCollection">
                                     <a class="unset" :href="`${$root.baseUrl}/${category.slug}`">
                                         <div class="category-logo">
                                             <img
@@ -390,6 +390,7 @@
             props: [
                 'heading',
                 'headerContent',
+                'categoryCount',
             ],
 
             data: function () {
@@ -403,6 +404,7 @@
                     'isSearchbar': false,
                     'rootCategories': true,
                     'cartItemsCount': '{{ $cartItemsCount }}',
+                    'rootCategoriesCollection': this.$root.sharedRootCategories,
                     'isCustomer': '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == "true",
                 }
             },
@@ -422,6 +424,10 @@
 
                 '$root.miniCartKey': function () {
                     this.getMiniCartDetails();
+                },
+
+                '$root.sharedRootCategories': function (categories) {
+                    this.formatCategories(categories);
                 }
             },
 
@@ -510,6 +516,23 @@
                     .catch(exception => {
                         console.log(this.__('error.something_went_wrong'));
                     });
+                },
+                
+                formatCategories: function (categories) {
+                    let slicedCategories = categories;
+                    let categoryCount = this.categoryCount ? this.categoryCount : 9;
+
+                    if (
+                        slicedCategories
+                        && slicedCategories.length > categoryCount
+                    ) {
+                        slicedCategories = categories.slice(0, categoryCount);
+                    }
+
+                    if (this.parentSlug)
+                        slicedCategories['parentSlug'] = this.parentSlug;
+
+                    this.rootCategoriesCollection = slicedCategories;
                 },
             },
         });
