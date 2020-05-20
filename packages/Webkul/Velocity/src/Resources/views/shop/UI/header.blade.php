@@ -529,9 +529,6 @@
                         slicedCategories = categories.slice(0, categoryCount);
                     }
 
-                    if (this.parentSlug)
-                        slicedCategories['parentSlug'] = this.parentSlug;
-
                     this.rootCategoriesCollection = slicedCategories;
                 },
             },
