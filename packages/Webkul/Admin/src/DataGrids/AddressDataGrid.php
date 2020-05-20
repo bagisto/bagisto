@@ -83,6 +83,15 @@ class AddressDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
+            'index'      => 'company_name',
+            'label'      => trans('admin::app.customers.addresses.company-name'),
+            'type'       => 'string',
+            'searchable' => true,
+            'sortable'   => true,
+            'filterable' => true,
+        ]);
+
+        $this->addColumn([
             'index'      => 'address1',
             'label'      => trans('admin::app.customers.addresses.address-1'),
             'type'       => 'string',
