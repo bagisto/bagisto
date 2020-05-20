@@ -315,6 +315,7 @@ return [
                     'adjustment-fee' => 'Adjustment Fee',
                     'cancel-btn-title' => 'Cancel',
                     'tracking-number' => 'Tracking Number',
+                    'cancel-confirm-msg' => 'Are you sure you want to cancel this order ?'
                 ]
             ],
 

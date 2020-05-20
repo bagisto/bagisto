@@ -314,6 +314,7 @@ return [
                     'adjustment-refund' => 'بازپرداخت تنظیم',
                     'adjustment-fee' => 'هزینه تنظیم',
                     'tracking-number' => 'Tracking Number',
+                    'cancel-confirm-msg' => 'Are you sure you want to cancel this order ?'
                 ]
             ],
 

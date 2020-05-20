@@ -21,7 +21,7 @@
 
 
                 @if ($order->canCancel())
-                    <a href="{{ route('customer.orders.cancel', $order->id) }}" class="btn btn-lg btn-primary" v-alert:message="'{{ __('admin::app.sales.orders.cancel-confirm-msg') }}'" style="float: right">
+                    <a href="{{ route('customer.orders.cancel', $order->id) }}" class="btn btn-lg btn-primary" v-alert:message="'{{ __('shop::app.customer.account.order.view.cancel-confirm-msg') }}'" style="float: right">
                         {{ __('shop::app.customer.account.order.view.cancel-btn-title') }}
                     </a>
                 @endif
@@ -409,7 +409,7 @@
 
                                                     @if (! $refund->items->count())
                                                         <tr>
-                                                            <td class="empty" colspan="7">{{ __('admin::app.common.no-result-found') }}</td>
+                                                            <td class="empty" colspan="7">{{ __('shop::app.common.no-result-found') }}</td>
                                                         <tr>
                                                     @endif
                                                 </tbody>

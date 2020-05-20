@@ -318,7 +318,8 @@ return [
                     'individual-refund' => 'Terugbetaling #:refund_id',
                     'adjustment-refund' => 'Aanpassing restitutie',
                     'adjustment-fee' => 'Aanpassingskosten',
-                    'tracking-number' => 'Tracking Number',
+                    'tracking-number' => 'Volg nummer',
+                    'cancel-confirm-msg' => 'Weet u zeker dat u deze bestelling wilt annuleren ?'
                 ]
             ],
 
