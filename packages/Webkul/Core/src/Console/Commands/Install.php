@@ -77,7 +77,7 @@ class Install extends Command
     public function checkForEnvFile()
     {
         $envExists = File::exists(base_path() . '/.env');
-        if (!$envExists) {
+        if (! $envExists) {
             $this->info('Creating the environment configuration file.');
             $this->createEnvFile();
         } else {
@@ -93,7 +93,7 @@ class Install extends Command
         try {
             File::copy('.env.example', '.env');
             Artisan::call('key:generate');
-            $this->envUpdate('APP_URL=http://localhost', ':8000');
+            $this->envUpdate('APP_URL=', 'http://localhost:8000');
 
             $locale = $this->choice('Please select the default locale or press enter to continue', ['ar', 'en', 'fa', 'nl', 'pt_BR'], 1);
             $this->envUpdate('APP_LOCALE=', $locale);
@@ -131,11 +131,31 @@ class Install extends Command
      */
     public static function envUpdate($key, $value)
     {
-        $path  = base_path() . '/.env';
-        file_put_contents($path, str_replace(
-            $key,
-            $key . $value,
-            file_get_contents($path)
-        ));
+        $path = base_path() . '/.env';
+        $data = file($path);
+        $keyValueData = $changedData = [];
+         
+        if ($data) {
+            foreach ($data as $line) {
+                $line = preg_replace('/\s+/', '', $line);
+                $rowValues = explode('=', $line);
+
+                if (strlen($line) !== 0) {
+                    $keyValueData[$rowValues[0]] = $rowValues[1];
+
+                    if (strpos($key, $rowValues[0]) !== false) {
+                        $keyValueData[$rowValues[0]] = $value;
+                    }
+                }               
+            }
+        }
+
+        foreach ($keyValueData as $key => $value) {
+            $changedData[] = $key . '=' . $value;
+        }
+
+        $changedData = implode(PHP_EOL, $changedData);
+
+        file_put_contents($path, $changedData);
     }
 }
