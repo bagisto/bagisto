@@ -293,6 +293,7 @@ return [
                     'individual-refund' => '返金 #:refund_id',
                     'adjustment-refund' => '返金調整',
                     'adjustment-fee' => '調整手数料',
+                    'tracking-number' => 'Tracking Number',
                 ]
             ],
 
@@ -378,7 +379,8 @@ return [
         'out-of-stock' => '在庫なし',
         'view-all' => '全て見る',
         'select-above-options' => '最初に上記のオプションを選択してください.',
-        'less-quantity' => '数量１未満は選択できません.'
+        'less-quantity' => '数量１未満は選択できません.',
+        'available-for-order' => '注文可能',
     ],
 
     'buynow' => [

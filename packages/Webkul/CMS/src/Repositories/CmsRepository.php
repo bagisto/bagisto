@@ -5,7 +5,7 @@ namespace Webkul\CMS\Repositories;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\CMS\Models\CmsPageTranslation;
+use Webkul\CMS\Models\CmsPageTranslationProxy;
 
 class CmsRepository extends Repository
 {
@@ -76,7 +76,7 @@ class CmsRepository extends Repository
      */
     public function isUrlKeyUnique($id, $urlKey)
     {
-        $exists = CmsPageTranslation::where('cms_page_id', '<>', $id)
+        $exists = CmsPageTranslationProxy::modelClass()::where('cms_page_id', '<>', $id)
             ->where('url_key', $urlKey)
             ->limit(1)
             ->select(\DB::raw(1))

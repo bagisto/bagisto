@@ -5,7 +5,7 @@ namespace Webkul\Product\Repositories;
 use Illuminate\Container\Container as App;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Product\Models\ProductAttributeValue;
+use Webkul\Product\Models\ProductAttributeValueProxy;
 
 class ProductAttributeValueRepository extends Repository
 {
@@ -59,7 +59,7 @@ class ProductAttributeValueRepository extends Repository
             return;
         }
 
-        $data[ProductAttributeValue::$attributeTypeFields[$attribute->type]] = $data['value'];
+        $data[ProductAttributeValueProxy::modelClass()::$attributeTypeFields[$attribute->type]] = $data['value'];
 
         return $this->model->create($data);
     }

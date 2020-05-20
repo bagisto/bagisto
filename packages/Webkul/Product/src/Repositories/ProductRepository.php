@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Product\Models\ProductAttributeValue;
+use Webkul\Product\Models\ProductAttributeValueProxy;
 
 class ProductRepository extends Repository
 {
@@ -140,18 +140,20 @@ class ProductRepository extends Repository
             if (isset($params['search']))
                 $qb->where('product_flat.name', 'like', '%' . urldecode($params['search']) . '%');
 
+            # sort direction
+            $orderDirection = 'asc';
+            if( isset($params['order']) && in_array($params['order'], ['desc', 'asc']) ){
+                $orderDirection = $params['order'];
+            }
+
             if (isset($params['sort'])) {
                 $attribute = $this->attributeRepository->findOneByField('code', $params['sort']);
 
                 if ($attribute) {
-                    if ($params['sort'] == 'price') {
-                        if ($attribute->code == 'price') {
-                            $qb->orderBy('min_price', $params['order']);
-                        } else {
-                            $qb->orderBy($attribute->code, $params['order']);
-                        }
+                    if ($attribute->code == 'price') {
+                        $qb->orderBy('min_price', $orderDirection);
                     } else {
-                        $qb->orderBy($params['sort'] == 'created_at' ? 'product_flat.created_at' : $attribute->code, $params['order']);
+                        $qb->orderBy($params['sort'] == 'created_at' ? 'product_flat.created_at' : $attribute->code, $orderDirection);
                     }
                 }
             }
@@ -175,7 +177,7 @@ class ProductRepository extends Repository
                     foreach ($attributeFilters as $attribute) {
                         $filterQuery->orWhere(function ($attributeQuery) use ($attribute) {
 
-                            $column = 'product_attribute_values.' . ProductAttributeValue::$attributeTypeFields[$attribute->type];
+                            $column = 'product_attribute_values.' . ProductAttributeValueProxy::modelClass()::$attributeTypeFields[$attribute->type];
 
                             $filterInputValues = explode(',', request()->get($attribute->code));
 

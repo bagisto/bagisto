@@ -314,6 +314,7 @@ return [
                     'adjustment-refund' => 'Rimborso',
                     'adjustment-fee' => 'Commissione di rimborso',
                     'cancel-btn-title' => 'Cancella',
+                    'tracking-number' => 'Tracking Number'
                 ]
             ],
 
@@ -412,7 +413,7 @@ return [
         'your-customization' => 'La tua Personalizzazione',
         'total-amount' => 'Totale',
         'none' => 'Nessuno',
-        'available' => 'Disponibile'
+        'available-for-order' => 'Disponibile per lordine'
     ],
 
     // 'reviews' => [

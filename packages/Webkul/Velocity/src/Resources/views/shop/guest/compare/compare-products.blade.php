@@ -40,19 +40,19 @@
 
                         array_splice($comparableAttributes, 1, 0, [[
                             'code' => 'image',
-                            'admin_name' => 'Product Image'
+                            'admin_name' => __('velocity::app.customer.compare.product_image')
                         ]]);
 
                         array_splice($comparableAttributes, 2, 0, [[
                             'code' => 'addToCartHtml',
-                            'admin_name' => 'Actions'
+                            'admin_name' => __('velocity::app.customer.compare.actions')
                         ]]);
                     @endphp
 
                     @foreach ($comparableAttributes as $attribute)
                         <tr>
                             <td>
-                                <span class="fs16">{{ $attribute['admin_name'] }}</span>
+                                <span class="fs16">{{ isset($attribute['name']) ? $attribute['name'] : $attribute['admin_name'] }}</span>
                             </td>
 
                             <td :key="`title-${index}`" v-for="(product, index) in products">

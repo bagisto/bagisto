@@ -314,6 +314,7 @@ return [
                     'adjustment-refund' => 'تعديلات عملية الإسترجاع',
                     'adjustment-fee' => 'تكلفة تعديلات عملية الإسترجاع',
                     'cancel-confirm-msg' => 'هل أنت متأكد من أنك تريد إلغاء هذا الطلب ؟',
+                    'tracking-number' => 'Tracking Number',
                 ]
             ],
 
@@ -369,6 +370,7 @@ return [
         'layered-nav-title' => 'المنتجات',
         'price-label' => 'أقل من',
         'remove-filter-link-title' => 'امسح الكل',
+        'filter-to' => 'to',
         'sort-by' => 'افرز حسب',
         'from-a-z' => 'من a-z',
         'from-z-a' => 'من ز-أ',
@@ -412,7 +414,7 @@ return [
         'your-customization' => 'التخصيص الخاص بك',
         'total-amount' => 'المبلغ الإجمالي',
         'none' => 'لا شيء',
-        'available' => 'Available',
+        'available-for-order' => 'متوفر لطلب الشراء',
     ],
 
     // 'reviews' => [

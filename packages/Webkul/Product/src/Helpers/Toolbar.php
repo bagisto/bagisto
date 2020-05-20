@@ -83,8 +83,9 @@ class Toolbar extends AbstractProduct
     public function isOrderCurrent($key)
     {
         $params = request()->input();
+        $orderDirection = $params['order'] ?? 'asc';
 
-        if (isset($params['sort']) && $key == $params['sort'] . '-' . $params['order']) {
+        if (isset($params['sort']) && $key == $params['sort'] . '-' . $orderDirection) {
             return true;
         } elseif (! isset($params['sort'])) {
             $sortBy = core()->getConfigData('catalog.products.storefront.sort_by')

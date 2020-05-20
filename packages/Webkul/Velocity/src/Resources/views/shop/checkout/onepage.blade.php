@@ -341,10 +341,34 @@
                             let address = this.allAddress.forEach(address => {
                                 if (address.id == this.address.billing.address_id) {
                                     this.address.billing.address1 = [address.address1];
+
+                                    if (address.email) {
+                                        this.address.billing.email = address.email;
+                                    }
+
+                                    if (address.first_name) {
+                                        this.address.billing.first_name = address.first_name;
+                                    }
+
+                                    if (address.last_name) {
+                                        this.address.billing.last_name = address.last_name;
+                                    }
                                 }
 
                                 if (address.id == this.address.shipping.address_id) {
                                     this.address.shipping.address1 = [address.address1];
+
+                                    if (address.email) {
+                                        this.address.shipping.email = address.email;
+                                    }
+
+                                    if (address.first_name) {
+                                        this.address.shipping.first_name = address.first_name;
+                                    }
+
+                                    if (address.last_name) {
+                                        this.address.shipping.last_name = address.last_name;
+                                    }
                                 }
                             });
                         }
@@ -499,17 +523,19 @@
 
                     backToSavedBillingAddress: function () {
                         this.new_billing_address = false;
-                        setTimeout(() => {
-                            this.validateForm('address-form');
-                        }, 0);
+                        this.validateFormAfterAction()
                     },
 
                     backToSavedShippingAddress: function () {
                         this.new_shipping_address = false;
+                        this.validateFormAfterAction()
+                    },
+
+                    validateFormAfterAction: function () {
                         setTimeout(() => {
                             this.validateForm('address-form');
                         }, 0);
-                    },
+                    }
                 }
             });
 

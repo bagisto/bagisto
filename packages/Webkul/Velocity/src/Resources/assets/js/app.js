@@ -3,10 +3,14 @@ import accounting from 'accounting';
 import VueCarousel from 'vue-carousel';
 import VueToast from 'vue-toast-notification';
 import 'vue-toast-notification/dist/index.css';
-import messagesAr from 'vee-validate/dist/locale/ar';
+import de from 'vee-validate/dist/locale/de';
+import ar from 'vee-validate/dist/locale/ar';
+import VeeValidate, { Validator } from 'vee-validate';
+import axios from 'axios';
 
-window.axios = require("axios");
-window.VeeValidate = require("vee-validate");
+
+window.axios = axios;
+window.VeeValidate = VeeValidate;
 window.jQuery = window.$ = require("jquery");
 window.BootstrapSass = require("bootstrap-sass");
 
@@ -17,7 +21,8 @@ Vue.prototype.$http = axios;
 
 Vue.use(VeeValidate, {
     dictionary: {
-        ar: messagesAr
+        ar: ar,
+        de: de,
     }
 });
 

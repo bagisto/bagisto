@@ -314,6 +314,7 @@ return [
                     'adjustment-refund' => 'Adjustment Refund',
                     'adjustment-fee' => 'Adjustment Fee',
                     'cancel-btn-title' => 'Cancel',
+                    'tracking-number' => 'Tracking Number',
                 ]
             ],
 
@@ -369,6 +370,7 @@ return [
         'layered-nav-title' => 'Shop By',
         'price-label' => 'As low as',
         'remove-filter-link-title' => 'Clear All',
+        'filter-to' => 'to',
         'sort-by' => 'Sort By',
         'from-a-z' => 'From A-Z',
         'from-z-a' => 'From Z-A',
@@ -412,7 +414,7 @@ return [
         'your-customization' => 'Your Customization',
         'total-amount' => 'Total Amount',
         'none' => 'None',
-        'available' => 'Available'
+        'available-for-order' => 'Available for Order'
     ],
 
     // 'reviews' => [
