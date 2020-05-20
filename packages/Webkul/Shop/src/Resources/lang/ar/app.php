@@ -314,6 +314,7 @@ return [
                     'adjustment-refund' => 'تعديلات عملية الإسترجاع',
                     'adjustment-fee' => 'تكلفة تعديلات عملية الإسترجاع',
                     'tracking-number' => 'Tracking Number',
+                    'cancel-confirm-msg' => 'هل أنت متأكد أنك تريد إلغاء هذا الطلب ?'
                 ]
             ],
 

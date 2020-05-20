@@ -314,7 +314,8 @@ return [
                     'adjustment-refund' => 'Rimborso',
                     'adjustment-fee' => 'Commissione di rimborso',
                     'cancel-btn-title' => 'Cancella',
-                    'tracking-number' => 'Tracking Number'
+                    'tracking-number' => 'Tracking Number',
+                    'cancel-confirm-msg' => 'Sei sicuro di voler annullare questo ordine ?'
                 ]
             ],
 
