@@ -52,11 +52,6 @@ return [
         'route' => 'admin.catalog.products.delete',
         'sort'  => 3,
     ], [
-        'key'   => 'catalog.products.view',
-        'name'  => 'admin::app.acl.view',
-        'route' => 'admin.catalog.products.index',
-        'sort'  => 4,
-    ], [
         'key'   => 'catalog.categories',
         'name'  => 'admin::app.acl.categories',
         'route' => 'admin.catalog.categories.index',
@@ -76,11 +71,6 @@ return [
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.catalog.categories.delete',
         'sort'  => 3,
-    ], [
-        'key'   => 'catalog.categories.view',
-        'name'  => 'admin::app.acl.view',
-        'route' => 'admin.catalog.categories.index',
-        'sort'  => 4,
     ], [
         'key'   => 'catalog.attributes',
         'name'  => 'admin::app.acl.attributes',
@@ -102,11 +92,6 @@ return [
         'route' => 'admin.catalog.attributes.delete',
         'sort'  => 3,
     ], [
-        'key'   => 'catalog.attributes.view',
-        'name'  => 'admin::app.acl.view',
-        'route' => 'admin.catalog.attributes.index',
-        'sort'  => 4,
-    ], [
         'key'   => 'catalog.families',
         'name'  => 'admin::app.acl.attribute-families',
         'route' => 'admin.catalog.families.index',
@@ -126,11 +111,6 @@ return [
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.catalog.families.delete',
         'sort'  => 3,
-    ], [
-        'key'   => 'catalog.families.view',
-        'name'  => 'admin::app.acl.view',
-        'route' => 'admin.catalog.families.index',
-        'sort'  => 4,
     ], [
         'key'   => 'customers',
         'name'  => 'admin::app.acl.customers',
@@ -157,11 +137,6 @@ return [
         'route' => 'admin.customer.delete',
         'sort'  => 3,
     ], [
-        'key'   => 'customers.customers.view',
-        'name'  => 'admin::app.acl.view',
-        'route' => 'admin.customer.index',
-        'sort'  => 4,
-    ], [
         'key'   => 'customers.groups',
         'name'  => 'admin::app.acl.groups',
         'route' => 'admin.groups.index',
@@ -181,11 +156,6 @@ return [
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.groups.delete',
         'sort'  => 3,
-    ], [
-        'key'   => 'customers.groups.view',
-        'name'  => 'admin::app.acl.view',
-        'route' => 'admin.groups.index',
-        'sort'  => 4,
     ], [
         'key'   => 'customers.reviews',
         'name'  => 'admin::app.acl.reviews',
@@ -232,11 +202,6 @@ return [
         'route' => 'admin.locales.delete',
         'sort'  => 3,
     ], [
-        'key'   => 'settings.locales.view',
-        'name'  => 'admin::app.acl.view',
-        'route' => 'admin.locales.index',
-        'sort'  => 4,
-    ], [
         'key'   => 'settings.currencies',
         'name'  => 'admin::app.acl.currencies',
         'route' => 'admin.currencies.index',
@@ -256,11 +221,6 @@ return [
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.currencies.delete',
         'sort'  => 3,
-    ], [
-        'key'   => 'settings.currencies.view',
-        'name'  => 'admin::app.acl.view',
-        'route' => 'admin.currencies.index',
-        'sort'  => 4,
     ], [
         'key'   => 'settings.exchange_rates',
         'name'  => 'admin::app.acl.exchange-rates',
@@ -282,11 +242,6 @@ return [
         'route' => 'admin.exchange_rates.delete',
         'sort'  => 3,
     ], [
-        'key'   => 'settings.exchange_rates.view',
-        'name'  => 'admin::app.acl.view',
-        'route' => 'settings.exchange_rates.index',
-        'sort'  => 4,
-    ], [
         'key'   => 'settings.inventory_sources',
         'name'  => 'admin::app.acl.inventory-sources',
         'route' => 'admin.inventory_sources.index',
@@ -307,11 +262,6 @@ return [
         'route' => 'admin.inventory_sources.delete',
         'sort'  => 3,
     ], [
-        'key'   => 'settings.inventory_sources.view',
-        'name'  => 'admin::app.acl.view',
-        'route' => 'settings.inventory_sources.index',
-        'sort'  => 4,
-    ], [
         'key'   => 'settings.channels',
         'name'  => 'admin::app.acl.channels',
         'route' => 'admin.channels.index',
@@ -331,11 +281,6 @@ return [
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.channels.delete',
         'sort'  => 3,
-    ], [
-        'key'   => 'settings.channels.view',
-        'name'  => 'admin::app.acl.view',
-        'route' => 'settings.channels.index',
-        'sort'  => 4,
     ], [
         'key'   => 'settings.users',
         'name'  => 'admin::app.acl.users',
@@ -362,11 +307,6 @@ return [
         'route' => 'admin.users.delete',
         'sort'  => 3,
     ], [
-        'key'   => 'settings.users.users.view',
-        'name'  => 'admin::app.acl.view',
-        'route' => 'admin.users.index',
-        'sort'  => 4,
-    ], [
         'key'   => 'settings.users.roles',
         'name'  => 'admin::app.acl.roles',
         'route' => 'admin.roles.index',
@@ -387,11 +327,6 @@ return [
         'route' => 'admin.roles.delete',
         'sort'  => 3,
     ], [
-        'key'   => 'settings.users.roles.view',
-        'name'  => 'admin::app.acl.view',
-        'route' => 'admin.roles.index',
-        'sort'  => 4,
-    ], [
         'key'   => 'settings.sliders',
         'name'  => 'admin::app.acl.sliders',
         'route' => 'admin.sliders.index',
@@ -411,11 +346,6 @@ return [
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.sliders.delete',
         'sort'  => 3,
-    ], [
-        'key'   => 'settings.sliders.view',
-        'name'  => 'admin::app.acl.view',
-        'route' => 'admin.sliders.index',
-        'sort'  => 4,
     ], [
         'key'   => 'settings.taxes',
         'name'  => 'admin::app.acl.taxes',
@@ -442,11 +372,6 @@ return [
         'route' => 'admin.tax-categories.delete',
         'sort'  => 3,
     ], [
-        'key'   => 'settings.taxes.tax-categories.view',
-        'name'  => 'admin::app.acl.view',
-        'route' => 'admin.tax-categories.index',
-        'sort'  => 4,
-    ], [
         'key'   => 'settings.taxes.tax-rates',
         'name'  => 'admin::app.acl.tax-rates',
         'route' => 'admin.tax-rates.index',
@@ -466,11 +391,6 @@ return [
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.tax-rates.delete',
         'sort'  => 3,
-    ], [
-        'key'   => 'settings.taxes.tax-rates.view',
-        'name'  => 'admin::app.acl.view',
-        'route' => 'admin.tax-rates.index',
-        'sort'  => 4,
     ], [
         'key'   => 'promotions',
         'name'  => 'admin::app.acl.promotions',
@@ -496,11 +416,6 @@ return [
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.cart-rules.delete',
         'sort'  => 3,
-    ], [
-        'key'   => 'promotions.cart-rules.view',
-        'name'  => 'admin::app.acl.view',
-        'route' => 'admin.cart-rules.index',
-        'sort'  => 4,
     ],
 ];
 
