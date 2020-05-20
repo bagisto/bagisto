@@ -6,7 +6,7 @@
 
                 var message = "Are your sure you want to perform this action ?";
 
-                if(binding.value && binding.value != '')
+                if (binding.value && binding.value != '')
                     message = binding.value;
 
                 if (confirm(message)) {
