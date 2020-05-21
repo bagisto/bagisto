@@ -901,6 +901,7 @@ return [
             'address-list' => 'Address\'s List',
             'order-list' => 'Order\'s List',
             'address-id' => 'Address ID',
+            'company-name' => 'Company Name',
             'address-1' => 'Address 1',
             'city' => 'City',
             'state-name' => 'State',
