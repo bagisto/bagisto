@@ -165,6 +165,12 @@
                                                     {{ core()->currency( $item->base_total) }}
                                                 </span>
                                             </div>
+
+                                            @if (! cart()->isItemHaveQuantity($item))
+                                                <div class="control-error mt-4 fs16 fw6">
+                                                    * {{ __('shop::app.checkout.cart.quantity-error') }}
+                                                </div>
+                                            @endif
                                         </div>
 
                                         <div class="row col-12" v-else>
