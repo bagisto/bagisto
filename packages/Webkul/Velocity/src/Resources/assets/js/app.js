@@ -302,12 +302,6 @@ $(document).ready(function () {
             },
 
             addFlashMessages: function () {
-                // const flashes = this.$refs.flashes;
-
-                // flashMessages.forEach(function (flash) {
-                //     flashes.addFlash(flash);
-                // }, this);
-
                 if (window.flashMessages.alertMessage)
                     window.alert(window.flashMessages.alertMessage);
             },
