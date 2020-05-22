@@ -75,7 +75,7 @@
                 <div>
                     {{ $order->billing_address->company_name ?? '' }}
                 </div>
-
+                
                 <div>
                     {{ $order->billing_address->name }}
                 </div>
