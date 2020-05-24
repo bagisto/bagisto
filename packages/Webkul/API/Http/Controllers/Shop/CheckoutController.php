@@ -14,8 +14,6 @@ use Webkul\Checkout\Http\Requests\CustomerAddressForm;
 use Webkul\Sales\Repositories\OrderRepository;
 use Illuminate\Support\Str;
 use Cart;
-use Exception;
-use Webkul\Shop\Http\Controllers\OnepageController;
 
 class CheckoutController extends Controller
 {
@@ -199,10 +197,26 @@ class CheckoutController extends Controller
     /**
      * Validate order before creation
      *
-     * @throws Exception
+     * @return mixed
      */
-    public function validateOrder(): void
+    public function validateOrder()
     {
-        app(OnepageController::class)->validateOrder();
+        $cart = Cart::getCart();
+
+        if (! $cart->shipping_address) {
+            throw new \Exception(trans('Please check shipping address.'));
+        }
+
+        if (! $cart->billing_address) {
+            throw new \Exception(trans('Please check billing address.'));
+        }
+
+        if (! $cart->selected_shipping_rate) {
+            throw new \Exception(trans('Please specify shipping method.'));
+        }
+
+        if (! $cart->payment) {
+            throw new \Exception(trans('Please specify payment method.'));
+        }
     }
 }

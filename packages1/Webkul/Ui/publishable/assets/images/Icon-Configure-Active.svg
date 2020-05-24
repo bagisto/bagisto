@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Icon-Configure-Active</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icon-Configure-Active" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(4.000000, 4.000000)" stroke="#0041FF" stroke-width="2">
+            <path d="M40.4050208,8.4699204 C40.7912341,9.66642796 41,10.9436642 41,12.2700565 C41,19.0466216 35.550775,24.540113 28.8288153,24.540113 C27.4775452,24.540113 26.1777068,24.3181191 24.9632274,23.9083344 L10.7535471,38.1180147 C8.57547658,40.2960852 5.04412656,40.2960852 2.86605605,38.1180147 C0.687985545,35.9399442 0.687985545,32.4085941 2.86605605,30.2305236 L17.1984629,15.8981168 C16.8469212,14.7515067 16.6576305,13.5330668 16.6576305,12.2700565 C16.6576305,5.49349141 22.1068556,0 28.8288153,0 C29.7074376,0 30.5643153,0.0938557949 31.3901218,0.272164867 L24.8494942,6.81279245 L25.5405734,14.9969882 L33.4558215,15.4191197 L40.4050208,8.4699204 Z" id="Combined-Shape" stroke-linecap="round" stroke-linejoin="round"></path>
+            <circle id="Oval-8" cx="7.5" cy="33.5" r="1.5"></circle>
+        </g>
+    </g>
+</svg>

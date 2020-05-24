@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Icon-Trash</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icon-Trash" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <polygon id="Rectangle-10" stroke="#979797" stroke-width="2" points="4 5 7.39453125 5 9.64208984 2.00048828 14.6196289 2.00048828 16.6455078 5 20 5 20 8 4 8"></polygon>
+        <polygon id="Rectangle-10" stroke="#979797" stroke-width="2" points="6 8 18 8 18 22 6 22"></polygon>
+        <path d="M9,12 L9,18" id="Path-12" stroke="#979797" stroke-width="2"></path>
+        <path d="M12,12 L12,18" id="Path-12-Copy" stroke="#979797" stroke-width="2"></path>
+        <path d="M15,12 L15,18" id="Path-12-Copy-2" stroke="#979797" stroke-width="2"></path>
+    </g>
+</svg>

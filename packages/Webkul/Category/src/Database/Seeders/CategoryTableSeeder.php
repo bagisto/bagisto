@@ -12,8 +12,6 @@ class CategoryTableSeeder extends Seeder
     {
         DB::table('categories')->delete();
 
-        DB::table('category_translations')->delete();
-
         $now = Carbon::now();
 
         DB::table('categories')->insert([

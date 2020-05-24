@@ -10,7 +10,10 @@ use Webkul\Customer\Mail\RegistrationEmail;
 use Webkul\Customer\Mail\VerificationEmail;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
+use Webkul\Customer\Models\Customer;
+use Socialite;
 use Cookie;
+
 
 class RegistrationController extends Controller
 {
@@ -62,6 +65,7 @@ class RegistrationController extends Controller
      */
     public function show()
     {
+
         return view($this->_config['view']);
     }
 
@@ -193,5 +197,55 @@ class RegistrationController extends Controller
         session()->flash('success', trans('shop::app.customer.signup-form.verification-sent'));
 
         return redirect()->back();
+    }
+
+    public function socialLoginFacebookCallback()
+    {
+        $provider="facebook";
+        $userSocial =   Socialite::driver($provider)->stateless()->user();
+         
+        $user=Customer::whereEmail($userSocial->getEmail())->whereProvider('facebook')->first();
+        Event::dispatch('customer.registration.before');
+        if(!empty($user))
+        {
+            auth()->guard('customer')->login($user);
+            return redirect()->intended(route('customer.profile.index'));
+             
+        }
+        $data['customer_group_id'] = $this->customerGroupRepository->findOneWhere(['code' => 'general'])->id;
+
+        $data['first_name'] = $userSocial->getName();
+        $data['email'] = $userSocial->getEmail();
+        $data['image'] = $userSocial->getAvatar();
+        $data['password'] = bcrypt(rand(1,10000));
+        $data['provider_id'] = $userSocial->getId();
+        $data['provider'] = $provider;
+        $data['is_verified'] = 1;
+        $user = $this->customerRepository->create($data);
+        auth()->guard('customer')->login($user);
+        return redirect()->intended(route('customer.profile.index'));
+    }
+    public function socialLoginGoogleCallback()
+    {
+        $provider="google";
+        $userSocial =   Socialite::driver($provider)->stateless()->user();
+        $user=Customer::whereEmail($googleUser->email)->whereProvider($provider)->first();
+        if(!empty($user))
+        {
+            auth()->guard('customer')->login($user);
+            return redirect()->intended(route('customer.profile.index'));
+        }
+          
+        $data['customer_group_id'] = $this->customerGroupRepository->findOneWhere(['code' => 'general'])->id;
+
+        $data['first_name'] = $googleUser->name;
+        $data['email'] = $googleUser->email;
+        $data['provider_id'] = $googleUser->id;
+        $data['password'] = bcrypt(rand(1,10000));
+        $data['provider'] = $provider;
+        $data['is_verified'] = 1;
+        $user = $this->customerRepository->create($data);
+        auth()->guard('customer')->login($user);
+        return redirect()->intended(route('customer.profile.index'));
     }
 }

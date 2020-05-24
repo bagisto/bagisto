@@ -2,13 +2,11 @@
 
 namespace Webkul\Core\Providers;
 
-use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\AliasLoader;
 use Webkul\Core\Core;
-use Webkul\Core\Exceptions\Handler;
 use Webkul\Core\Facades\Core as CoreFacade;
 use Webkul\Core\Models\SliderProxy;
 use Webkul\Core\Observers\SliderObserver;
@@ -42,11 +40,6 @@ class CoreServiceProvider extends ServiceProvider
         $this->publishes([
             dirname(__DIR__) . '/Config/concord.php' => config_path('concord.php'),
         ]);
-
-        $this->app->bind(
-            ExceptionHandler::class,
-            Handler::class
-        );
 
         SliderProxy::observe(SliderObserver::class);
     }

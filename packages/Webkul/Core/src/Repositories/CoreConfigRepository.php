@@ -23,6 +23,7 @@ class CoreConfigRepository extends Repository
      */
     public function create(array $data)
     {
+         
         unset($data['_token']);
 
         if ($data['locale'] || $data['channel']) {

@@ -112,6 +112,7 @@ class ConfigurationController extends Controller
      */
     public function store(ConfigurationForm $request)
     {
+         
         Event::dispatch('core.configuration.save.before');
 
         $this->coreConfigRepository->create(request()->all());

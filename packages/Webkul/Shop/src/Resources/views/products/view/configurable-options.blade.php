@@ -306,7 +306,7 @@
                     },
 
                     changeStock: function (productId) {
-                        var inStockElement = document.querySelector('.stock-status');
+                        var inStockElement = document.getElementById('in-stock');
 
                         if (productId) {
                             inStockElement.style.display= "block";

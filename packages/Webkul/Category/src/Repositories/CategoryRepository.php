@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Category\Models\Category;
-use Webkul\Category\Models\CategoryTranslationProxy;
+use Webkul\Category\Models\CategoryTranslation;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
 
@@ -103,7 +103,7 @@ class CategoryRepository extends Repository
     {
         static $categories = [];
 
-        if (array_key_exists($id, $categories)) {
+        if(array_key_exists($id, $categories)) {
             return $categories[$id];
         }
 
@@ -120,8 +120,8 @@ class CategoryRepository extends Repository
      * @return bool
      */
     public function isSlugUnique($id, $slug)
-    {   
-        $exists = CategoryTranslationProxy::modelClass()::where('category_id', '<>', $id)
+    {
+        $exists = CategoryTranslation::where('category_id', '<>', $id)
             ->where('slug', $slug)
             ->limit(1)
             ->select(DB::raw(1))

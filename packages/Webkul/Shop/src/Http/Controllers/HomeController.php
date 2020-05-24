@@ -34,6 +34,7 @@ use Webkul\Core\Repositories\SliderRepository;
      */
     public function index()
     {
+
         $currentChannel = core()->getCurrentChannel();
 
         $currentLocale = core()->getCurrentLocale();
@@ -43,7 +44,7 @@ use Webkul\Core\Repositories\SliderRepository;
           ->where('locale', $currentLocale->code)
           ->get()
           ->toArray();
-
+        
         return view($this->_config['view'], compact('sliderData'));
     }
 

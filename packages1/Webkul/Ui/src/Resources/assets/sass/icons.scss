@@ -1,0 +1,343 @@
+// Left Side Menu Icon
+%menu-properties {
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+    background-size: cover;
+}
+.icon {
+    display: inline-block;
+    background-size: cover;
+}
+.dashboard-icon {
+    @extend %menu-properties;
+    background-image: url("../images/Icon-Dashboard.svg");
+}
+.sales-icon {
+    @extend %menu-properties;
+    background-image: url("../images/Icon-Sales.svg");
+}
+.catalog-icon {
+    @extend %menu-properties;
+    background-image: url("../images/Icon-Catalog.svg");
+}
+.customer-icon {
+    @extend %menu-properties;
+    background-image: url("../images/Icon-Customers.svg");
+}
+.configuration-icon {
+    @extend %menu-properties;
+    background-image: url("../images/Icon-Configure.svg");
+}
+.settings-icon {
+    @extend %menu-properties;
+    background-image: url("../images/Icon-Settings.svg");
+}
+
+.promotion-icon {
+    @extend %menu-properties;
+    background-image: url("../images/icon-promotion.svg");
+}
+
+.cms-icon {
+    @extend %menu-properties;
+    background-image: url('../images/Icon-CMS.svg');
+}
+
+.angle-right-icon {
+    background-image: url("../images/Angle-Right.svg");
+    width: 17px;
+    height: 17px;
+}
+
+.angle-left-icon {
+    background-image: url("../images/Angle-Left.svg");
+    width: 17px;
+    height: 17px;
+}
+
+.arrow-down-icon {
+    background-image: url("../images/Arrow-Down-Light.svg");
+    width: 14px;
+    height: 8px;
+}
+
+.arrow-right-icon {
+    background-image: url("../images/Arrow-Right.svg");
+    width: 18px;
+    height: 18px;
+}
+
+.white-cross-sm-icon {
+    background-image: url("../images/Icon-Sm-Cross-White.svg");
+    width: 18px;
+    height: 18px;
+}
+
+.accordian-up-icon {
+    background-image: url("../images/Accordion-Arrow-Up.svg");
+    width: 24px;
+    height: 24px;
+}
+.accordian-down-icon {
+    background-image: url("../images/Accordion-Arrow-Down.svg");
+    width: 24px;
+    height: 24px;
+}
+
+.cross-icon {
+    background-image: url("../images/Icon-Crossed.svg");
+    width: 18px;
+    height: 18px;
+}
+
+.trash-icon {
+    background-image: url("../images/Icon-Trash.svg");
+    width: 24px;
+    height: 24px;
+}
+
+.remove-icon {
+    background-image: url("../images/Icon-remove.svg");
+    width: 24px;
+    height: 24px;
+}
+
+.pencil-lg-icon {
+    background-image: url("../images/Icon-Pencil-Large.svg");
+    width: 24px;
+    height: 24px;
+}
+
+.eye-icon {
+    background-image: url("../images/Icon-eye.svg");
+    width: 24px;
+    height: 24px;
+}
+
+.search-icon {
+    background-image: url("../images/icon-search.svg");
+    width: 24px;
+    height: 24px;
+}
+
+.sortable-icon {
+    background-image: url("../images/Icon-Sortable.svg");
+    width: 24px;
+    height: 24px;
+}
+
+.sort-down-icon {
+    background-image: url("../images/Icon-Sort-Down.svg");
+    width: 18px;
+    height: 18px;
+}
+
+.sort-up-icon {
+    background-image: url("../images/Icon-Sort-Down.svg");
+    width: 18px;
+    height: 18px;
+    transform: rotate(180deg);
+}
+
+.primary-back-icon {
+    background-image: url("../images/Icon-Back-Primary.svg");
+    width: 24px;
+    height: 24px;
+}
+
+.checkbox-dash-icon {
+    background-image: url("../images/Checkbox-Dash.svg");
+    width: 24px;
+    height: 24px;
+}
+
+.account-icon {
+    background-image: url("../images/icon-account.svg");
+    width: 24px;
+    height: 24px;
+}
+
+.expand-icon {
+    background-image: url("../images/Expand-Light.svg");
+    width: 18px;
+    height: 18px;
+}
+
+.expand-on-icon {
+    background-image: url("../images/Expand-Light-On.svg");
+    width: 18px;
+    height: 18px;
+}
+
+.dark-left-icon {
+    background-image: url("../images/arrow-left-dark.svg");
+    width: 18px;
+    height: 18px;
+}
+
+.light-right-icon {
+    background-image: url("../images/arrow-right-light.svg");
+    width: 18px;
+    height: 18px;
+}
+
+.folder-icon {
+    background-image: url("../images/Folder-Icon.svg");
+    width: 24px;
+    height: 24px;
+}
+
+.star-icon {
+    background-image: url("../images/Star-Icon.svg");
+    width: 24px;
+    height: 24px;
+}
+
+.arrow-down-white-icon {
+    background-image: url("../images/down-arrow-white.svg");
+    width: 17px;
+    height: 13px;
+}
+
+.arrow-up-white-icon {
+    background-image: url("../images/up-arrow-white.svg");
+    width: 17px;
+    height: 13px;
+}
+
+.profile-pic-icon {
+    background-image: url("../images/Profile-Pic.svg");
+    width: 60px;
+    height: 60px;
+}
+
+.graph-up-icon {
+    background-image: url("../images/Icon-Graph-Green.svg");
+    width: 24px;
+    height: 24px;
+}
+
+.graph-down-icon {
+    background-image: url("../images/Icon-Graph-Red.svg");
+    width: 24px;
+    height: 24px;
+}
+
+.no-result-icon {
+    background-image: url("../images/limited-icon.svg");
+    width: 52px;
+    height: 47px;
+}
+
+.note-icon {
+    background-image: url("../images/icon-note.svg");
+    width: 24px;
+    height: 24px;
+}
+
+.list-icon {
+    background-image: url("../images/Icon-Listing.svg");
+    width: 24px;
+    height: 24px;
+}
+
+.active {
+    .dashboard-icon {
+        background-image: url("../images/Icon-Dashboard-Active.svg");
+    }
+
+    .sales-icon {
+        background-image: url("../images/Icon-Sales-Active.svg");
+    }
+
+    .catalog-icon {
+        background-image: url("../images/Icon-Catalog-Active.svg");
+    }
+
+    .customer-icon {
+        background-image: url("../images/Icon-Customers-Active.svg");
+    }
+
+    .settings-icon {
+        background-image: url("../images/Icon-Settings-Active.svg");
+    }
+
+    .configuration-icon {
+        background-image: url("../images/Icon-Configure-Active.svg");
+    }
+
+    .promotion-icon {
+        background-image: url("../images/icon-promotion-active.svg");
+    }
+
+    .cms-icon {
+        @extend %menu-properties;
+        background-image: url('../images/Icon-CMS-Active.svg');
+    }
+
+    > .arrow-down-icon {
+        background-image: url("../images/Arrow-Down.svg");
+        width: 14px;
+        height: 8px;
+    }
+
+    > .expand-icon {
+        background-image: url("../images/Expand-Light-On.svg");
+    }
+
+    &.dashboard-icon {
+        background-image: url("../images/Icon-Dashboard-Active.svg");
+    }
+
+    &.customer-icon {
+        background-image: url("../images/Icon-Customers-Active.svg");
+    }
+
+    &.sales-icon {
+        background-image: url("../images/Icon-Sales-Active.svg");
+    }
+
+    &.settings-icon {
+        background-image: url("../images/Icon-Settings-Active.svg");
+    }
+
+    &.configuration-icon {
+        @extend %menu-properties;
+        background-image: url("../images/Icon-Configure-Active.svg");
+    }
+
+    &.arrow-down-icon {
+        background-image: url("../images/Arrow-Down.svg");
+        width: 14px;
+        height: 8px;
+    }
+
+    &.expand-icon {
+        background-image: url("../images/Expand-Light-On.svg");
+    }
+}
+
+.icon-404 {
+    background-image: url("../images/404-image.svg");
+    width: 255px;
+    height: 255px;
+}
+
+.export-icon {
+    background-image: url("../images/Icon-Export.svg");
+    width: 32px;
+    height: 32px;
+}
+
+.import-icon {
+    background-image: url("../images/Icon-Import.svg");
+    width: 32px;
+    height: 32px;
+}
+
+.star-blue-icon {
+    width: 17px;
+    height: 17px;
+    background-image: url("../images/Icon-star.svg");
+}

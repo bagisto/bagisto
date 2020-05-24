@@ -200,8 +200,6 @@ return [
             'added' => 'Item adicionado com sucesso à lista de comparação',
             'removed' => 'Item removido com sucesso da lista de comparação',
             'empty-text' => "Você não possui nenhum item na sua lista de comparação",
-            'product_image' => 'Imagem do Produto',
-            'actions' => 'Ações',
         ],
         'login-form' => [
             'sign-up' => 'Cadastrar',

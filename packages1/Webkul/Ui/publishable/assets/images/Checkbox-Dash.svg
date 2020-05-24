@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>Checkbox-Dash</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Checkbox-Dash" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Base" stroke="#0041FF" stroke-width="2" fill="#FFFFFF" x="1" y="1" width="22" height="22" rx="2"></rect>
+        <path d="M6,12 L17.215332,12" id="Path-8" stroke="#0041FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+    </g>
+</svg>

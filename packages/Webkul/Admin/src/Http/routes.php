@@ -116,7 +116,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('configuration/{slug?}/{slug2?}', 'Webkul\Admin\Http\Controllers\ConfigurationController@index')->defaults('_config', [
                 'view' => 'admin::configuration.index'
             ])->name('admin.configuration.index');
-
+            
             Route::post('configuration/{slug?}/{slug2?}', 'Webkul\Admin\Http\Controllers\ConfigurationController@store')->defaults('_config', [
                 'redirect' => 'admin.configuration.index'
             ])->name('admin.configuration.index.store');
@@ -186,8 +186,6 @@ Route::group(['middleware' => ['web']], function () {
                 Route::get('/orders/cancel/{id}', 'Webkul\Admin\Http\Controllers\Sales\OrderController@cancel')->defaults('_config', [
                     'view' => 'admin::sales.orders.cancel'
                 ])->name('admin.sales.orders.cancel');
-
-                Route::post('/orders/create/{order_id}', 'Webkul\Admin\Http\Controllers\Sales\OrderController@comment')->name('admin.sales.orders.comment');
 
 
                 // Sales Invoices Routes

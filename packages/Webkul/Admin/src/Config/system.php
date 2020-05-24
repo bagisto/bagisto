@@ -99,12 +99,6 @@ return [
                 'type'          => 'image',
                 'channel_based' => true,
                 'validation'    => 'mimes:jpeg,bmp,png,jpg',
-            ], [
-                'name'          => 'favicon',
-                'title'         => 'admin::app.admin.system.favicon',
-                'type'          => 'image',
-                'channel_based' => true,
-                'validation'    => 'mimes:jpeg,bmp,png,jpg',
             ],
         ],
     ], [
@@ -127,62 +121,9 @@ return [
             ],
         ],
     ], [
-        'key'    => 'catalog.products.storefront',
-        'name'   => 'admin::app.admin.system.storefront',
-        'sort'   => 2,
-        'fields' => [
-            [
-                'name'          => 'mode',
-                'title'         => 'admin::app.admin.system.default-list-mode',
-                'type'          => 'select',
-                'options'       => [
-                    [
-                        'title' => 'admin::app.admin.system.grid',
-                        'value' => 'grid',
-                    ], [
-                        'title' => 'admin::app.admin.system.list',
-                        'value' => 'list',
-                    ],
-                ],
-                'channel_based' => true,
-            ], [
-                'name'          => 'products_per_page',
-                'title'         => 'admin::app.admin.system.products-per-page',
-                'type'          => 'text',
-                'info'          => 'admin::app.admin.system.comma-seperated',
-                'channel_based' => true,
-            ], [
-                'name'          => 'sort_by',
-                'title'         => 'admin::app.admin.system.sort-by',
-                'type'          => 'select',
-                'options'       => [
-                    [
-                        'title' => 'admin::app.admin.system.from-z-a',
-                        'value' => 'name-desc',
-                    ], [
-                        'title' => 'admin::app.admin.system.from-a-z',
-                        'value' => 'name-asc',
-                    ], [
-                        'title' => 'admin::app.admin.system.newest-first',
-                        'value' => 'created_at-desc',
-                    ], [
-                        'title' => 'admin::app.admin.system.oldest-first',
-                        'value' => 'created_at-asc',
-                    ], [
-                        'title' => 'admin::app.admin.system.cheapest-first',
-                        'value' => 'price-asc',
-                    ], [
-                        'title' => 'admin::app.admin.system.expensive-first',
-                        'value' => 'price-desc',
-                    ],
-                ],
-                'channel_based' => true,
-            ]
-        ],
-    ], [
         'key'    => 'catalog.products.review',
         'name'   => 'admin::app.admin.system.review',
-        'sort'   => 3,
+        'sort'   => 2,
         'fields' => [
             [
                 'name'  => 'guest_review',
@@ -207,67 +148,119 @@ return [
             ],
         ],
     ], [
-        'key'  => 'catalog.rich_snippets',
-        'name' => 'admin::app.admin.system.rich-snippets',
+        'key'  => 'social-login',
+        'name' => 'admin::app.admin.system.sociallogin',
         'sort' => 3,
     ], [
-        'key'    => 'catalog.rich_snippets.products',
-        'name'   => 'admin::app.admin.system.products',
+        'key'  => 'social-login.settings',
+        'name' => 'admin::app.admin.system.sociallogin',
+        'sort' => 1,
+    ], [
+        'key'    => 'social-login.settings.sociallogins-enable-disable',
+        'name'   => 'admin::app.admin.system.sociallogins-enable-disable',
         'sort'   => 1,
         'fields' => [
             [
-                'name'  => 'enable',
-                'title' => 'admin::app.admin.system.enable',
-                'type'  => 'boolean',
-            ], [
-                'name'  => 'show_sku',
-                'title' => 'admin::app.admin.system.show-sku',
-                'type'  => 'boolean',
-            ], [
-                'name'  => 'show_weight',
-                'title' => 'admin::app.admin.system.show-weight',
-                'type'  => 'boolean',
-            ], [
-                'name'  => 'show_categories',
-                'title' => 'admin::app.admin.system.show-categories',
-                'type'  => 'boolean',
-            ], [
-                'name'  => 'show_images',
-                'title' => 'admin::app.admin.system.show-images',
-                'type'  => 'boolean',
-            ], [
-                'name'  => 'show_reviews',
-                'title' => 'admin::app.admin.system.show-reviews',
-                'type'  => 'boolean',
-            ], [
-                'name'  => 'show_ratings',
-                'title' => 'admin::app.admin.system.show-ratings',
-                'type'  => 'boolean',
-            ], [
-                'name'  => 'show_offers',
-                'title' => 'admin::app.admin.system.show-offers',
-                'type'  => 'boolean',
+                'name'          => 'sociallogins_status',
+                'title'         => 'admin::app.admin.system.sociallogins-status',
+                'type'          => 'select',
+                'options'       => [
+                    [
+                        'title' => 'Enable',
+                        'value' => '1',
+                    ], [
+                        'title' => 'Disable',
+                        'value' => '0',
+                    ],
+                ],
+                'channel_based' => true,
             ],
         ],
-    ], [
-        'key'    => 'catalog.rich_snippets.categories',
-        'name'   => 'admin::app.admin.system.categories',
-        'sort'   => 1,
+         
+    ],[
+        'key'    => 'social-login.settings.sociallogins-facebook',
+        'name'   => 'admin::app.admin.system.sociallogins-facebook',
+        'sort'   => 2,
         'fields' => [
             [
-                'name'  => 'enable',
-                'title' => 'admin::app.admin.system.enable',
-                'type'  => 'boolean',
+                'name'          => 'sociallogins_facebook_status',
+                'title'         => 'admin::app.admin.system.sociallogins-facebook-status',
+                'type'          => 'select',
+                'options'       => [
+                    [
+                        'title' => 'Enable',
+                        'value' => '1',
+                    ], [
+                        'title' => 'Disable',
+                        'value' => '0',
+                    ],
+                ],
+                'channel_based' => true,
             ], [
-                'name'  => 'show_search_input_field',
-                'title' => 'admin::app.admin.system.show-search-input-field',
-                'type'  => 'boolean',
-            ]
-        ]
+                'name'          => 'facebook_appid',
+                'title'         => 'admin::app.admin.system.sociallogins-facebook-appid',
+                'type'          => 'text',
+                'validation'    => 'required|max:100',
+                'channel_based' => true,
+            ],  [
+                'name'          => 'facebook_appsecret',
+                'title'         => 'admin::app.admin.system.sociallogins-facebook-appsecret',
+                'type'          => 'text',
+                'validation'    => 'required|max:100',
+                'channel_based' => true,
+            ],[
+                'name'          => 'facebook_loginbutton',
+                'title'         => 'admin::app.admin.system.sociallogins-facebook-appimage',
+                'type'          => 'file',
+                'validation'    => 'mimes:jpg,jpeg,gif,png',
+                'channel_based' => true,
+            ],
+        ],
+
+    ],[
+        'key'    => 'social-login.settings.sociallogins-google',
+        'name'   => 'admin::app.admin.system.sociallogins-google',
+        'sort'   => 2,
+        'fields' => [
+            [
+                'name'          => 'sociallogins_google_status',
+                'title'         => 'admin::app.admin.system.sociallogins-google-status',
+                'type'          => 'select',
+                'options'       => [
+                    [
+                        'title' => 'Enable',
+                        'value' => '1',
+                    ], [
+                        'title' => 'Disable',
+                        'value' => '0',
+                    ],
+                ],
+                'channel_based' => true,
+            ], [
+                'name'          => 'google_appid',
+                'title'         => 'admin::app.admin.system.sociallogins-google-clientid',
+                'type'          => 'text',
+                'validation'    => 'required|max:100',
+                'channel_based' => true,
+            ],  [
+                'name'          => 'google_appsecret',
+                'title'         => 'admin::app.admin.system.sociallogins-google-clientsecret',
+                'type'          => 'text',
+                'validation'    => 'required|max:100',
+                'channel_based' => true,
+            ],[
+                'name'          => 'google_loginbutton',
+                'title'         => 'admin::app.admin.system.sociallogins-google-appimage',
+                'type'          => 'file',
+                'validation'    => 'mimes:jpg,jpeg,gif,png',
+                'channel_based' => true,
+            ],
+        ],
+
     ], [
         'key'  => 'customer',
         'name' => 'admin::app.admin.system.customer',
-        'sort' => 4,
+        'sort' => 3,
     ], [
         'key'  => 'customer.settings',
         'name' => 'admin::app.admin.system.settings',
@@ -310,7 +303,7 @@ return [
     ], [
         'key'  => 'emails',
         'name' => 'admin::app.admin.emails.email',
-        'sort' => 5,
+        'sort' => 1,
     ], [
         'key'  => 'emails.general',
         'name' => 'admin::app.admin.emails.notification_label',

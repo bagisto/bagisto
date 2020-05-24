@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Checkbox-Checked</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Checkbox-Checked" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Base" stroke="#0041FF" stroke-width="2" fill="#0041FF" x="1" y="1" width="22" height="22" rx="2"></rect>
+        <g id="Check-Accent" transform="translate(6.000000, 7.000000)" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <polyline id="Path-2" points="0 5 4 9 13 0"></polyline>
+        </g>
+    </g>
+</svg>

@@ -174,6 +174,7 @@ return [
         ],
     ],
 
+    'fb'=>'test',
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -268,6 +269,7 @@ return [
         Webkul\CMS\Providers\CMSServiceProvider::class,
         Webkul\Velocity\Providers\VelocityServiceProvider::class,
         Webkul\BookingProduct\Providers\BookingProductServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
     ],
 
     /*
@@ -325,6 +327,8 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Concord' => Konekt\Concord\Facades\Concord::class,
-        'Helper'  => Konekt\Concord\Facades\Helper::class
+        'Helper'  => Konekt\Concord\Facades\Helper::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        
     ],
 ];
