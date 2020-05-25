@@ -11,11 +11,10 @@
         <div class="page-header">
             <div class="page-title">
                 <h1>{{ __('admin::app.promotions.cart-rules.title') }}</h1>
-            </div>
 
-            <div class="page-action">
                 <div class="control-group">
-                    <select class="control" id="channel-switcher" name="channel" onchange="reloadPage('channel', this.value)" >
+                    <select class="control" id="channel-switcher" name="channel"
+                            onchange="reloadPage('channel', this.value)">
                         <option value="all" {{ ! isset($channel) ? 'selected' : '' }}>
                             {{ __('admin::app.admin.system.all-channels') }}
                         </option>
@@ -31,7 +30,8 @@
                 </div>
 
                 <div class="control-group">
-                    <select class="control" id="customer-group-switcher" name="customer_group" onchange="reloadPage('customer_group', this.value)" >
+                    <select class="control" id="customer-group-switcher" name="customer_group"
+                            onchange="reloadPage('customer_group', this.value)">
                         <option value="all" {{ ! isset($locale) ? 'selected' : '' }}>
                             {{ __('admin::app.admin.system.all-customer-groups') }}
                         </option>
@@ -45,7 +45,9 @@
                         @endforeach
                     </select>
                 </div>
+            </div>
 
+            <div class="page-action">
                 <a href="{{ route('admin.cart-rules.create') }}" class="btn btn-lg btn-primary">
                     {{ __('admin::app.promotions.cart-rules.add-title') }}
                 </a>
