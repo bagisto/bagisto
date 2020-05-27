@@ -477,6 +477,7 @@ return [
             'shipping' => 'حمل دریایی',
             'payment' => 'پرداخت',
             'complete' => 'تکمیل',
+            'review' => 'مرور',
             'billing-address' => 'آدرس قبض',
             'sign-in' => 'ورود',
             'company-name' => 'نام شرکت',

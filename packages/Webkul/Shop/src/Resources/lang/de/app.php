@@ -472,6 +472,7 @@ return [
             'shipping' => 'Versand',
             'payment' => 'Zahlung',
             'complete' => 'Komplett',
+            'review' => 'Rezension',
             'billing-address' => 'Rechnungsadresse',
             'sign-in' => 'Anmelden',
             'company-name' => 'Name der Firma',

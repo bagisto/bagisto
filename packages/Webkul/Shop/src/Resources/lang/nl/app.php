@@ -482,6 +482,7 @@ return [
             'shipping' => 'Verzending',
             'payment' => 'Betaling',
             'complete' => 'Complete',
+            'review' => 'Beoordeling',
             'billing-address' => 'Factuur adres',
             'sign-in' => 'Inloggen',
             'company-name' => 'Bedrijfsnaam',

@@ -475,6 +475,7 @@ return [
             'shipping' => 'Wysyłka',
             'payment' => 'Płatność',
             'complete' => 'Kompletna',
+            'review' => 'Przejrzeć',
             'billing-address' => 'Adres rozliczeniowy',
             'sign-in' => 'Zaloguj się',
             'company-name' => 'Nazwa firmy',

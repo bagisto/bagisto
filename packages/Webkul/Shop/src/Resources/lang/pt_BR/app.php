@@ -467,6 +467,7 @@ return [
             'shipping' => 'Entrega',
             'payment' => 'Pagamento',
             'complete' => 'Completo',
+            'review' => 'Reveja',
             'billing-address' => 'Endereço de Cobrança',
             'sign-in' => 'Entrar',
             'first-name' => 'Nome',

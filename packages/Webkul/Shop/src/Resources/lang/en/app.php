@@ -478,6 +478,7 @@ return [
             'shipping' => 'Shipping',
             'payment' => 'Payment',
             'complete' => 'Complete',
+            'review' => 'Review',
             'billing-address' => 'Billing Address',
             'sign-in' => 'Sign In',
             'company-name' => 'Company Name',

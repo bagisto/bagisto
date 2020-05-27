@@ -478,6 +478,7 @@ return [
             'shipping' => 'الشحن',
             'payment' => 'الدفع',
             'complete' => 'اكتمل',
+            'review' => 'مراجعة',
             'billing-address' => 'عنوان الفواتير',
             'sign-in' => 'تسجيل الدخول',
             'first-name' => 'الاسم الأول',

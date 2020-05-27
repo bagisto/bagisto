@@ -40,7 +40,7 @@
 
                     <li :class="[current_step == 4 ? 'active' : '']">
                         <div class="decorator review"></div>
-                        <span>{{ __('shop::app.checkout.onepage.complete') }}</span>
+                        <span>{{ __('shop::app.checkout.onepage.review') }}</span>
                     </li>
                 </ul>
 

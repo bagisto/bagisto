@@ -436,6 +436,7 @@ return [
             'shipping' => '発送',
             'payment' => '支払い',
             'complete' => '完了',
+            'review' => 'レビュー',
             'billing-address' => '領収書宛先',
             'sign-in' => 'ログイン',
             'first-name' => '名',

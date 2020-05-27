@@ -444,6 +444,7 @@ return [
             'shipping' => 'Envío',
             'payment' => 'Pago',
             'complete' => 'Completado',
+            'review' => 'revisión',
             'billing-address' => 'Dirección de facturación',
             'sign-in' => 'Entrar',
             'first-name' => 'Nombre',
