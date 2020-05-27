@@ -112,6 +112,8 @@
                 }
 
                 .right-vc-header {
+                    position: relative;
+                    z-index: 2;
                     display: table;
                     text-align: right;
                     height: $header-height;
