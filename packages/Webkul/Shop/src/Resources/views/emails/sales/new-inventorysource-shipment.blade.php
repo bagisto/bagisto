@@ -40,6 +40,10 @@
                 </div>
 
                 <div>
+                    {{ $order->shipping_address->company_name ?? '' }}
+                </div>
+
+                <div>
                     {{ $order->shipping_address->name }}
                 </div>
 
@@ -79,6 +83,10 @@
             <div style="line-height: 25px;">
                 <div style="font-weight: bold;font-size: 16px;color: #242424;">
                     {{ __('shop::app.mail.order.billing-address') }}
+                </div>
+
+                <div>
+                    {{ $order->billing_address->company_name ?? '' }}
                 </div>
 
                 <div>

@@ -2,8 +2,8 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\Support\Facades\DB;
 use Webkul\Ui\DataGrid\DataGrid;
+use Illuminate\Support\Facades\DB;
 
 class CartRuleDataGrid extends DataGrid
 {
@@ -142,10 +142,18 @@ class CartRuleDataGrid extends DataGrid
         ]);
 
         $this->addAction([
+            'title'  => trans('admin::app.datagrid.copy'),
+            'method' => 'GET',
+            'route'  => 'admin.cart-rules.copy',
+            'icon'   => 'icon note-icon',
+        ]);
+
+        $this->addAction([
             'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
             'route'  => 'admin.cart-rules.delete',
             'icon'   => 'icon trash-icon',
         ]);
+
     }
 }
