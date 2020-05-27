@@ -373,6 +373,7 @@ return [
         'new' => 'new',
         'empty' => 'このカテゴリーにアイテムがありません。',
         'add-to-cart' => 'カートに追加する',
+        'book-now' => '今予約する',
         'buy-now' => '今すぐ購入',
         'whoops' => 'すみません！',
         'quantity' => '数量',

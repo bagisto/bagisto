@@ -377,6 +377,7 @@ return [
         'new' => 'Nuevo',
         'empty' => 'No hay prodcutos disponibles en esta categoría',
         'add-to-cart' => 'Añadir a la cesta',
+        'book-now' => 'reservar ahora',
         'buy-now' => 'Comprar ahora',
         'whoops' => 'Ups!',
         'quantity' => 'Cantidad',

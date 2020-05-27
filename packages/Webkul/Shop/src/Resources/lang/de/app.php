@@ -393,6 +393,7 @@ return [
         'new' => 'Neu',
         'empty' => 'Keine Produkte in dieser Kategorie verfügbar',
         'add-to-cart' => 'In Warenkorb',
+        'book-now' => 'buchen Sie jetzt',
         'buy-now' => 'Jetzt kaufen',
         'whoops' => 'Hoppla!',
         'quantity' => 'Menge',
