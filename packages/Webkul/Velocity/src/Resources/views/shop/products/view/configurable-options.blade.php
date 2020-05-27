@@ -323,13 +323,13 @@
                         },
 
                         changeStock: function (productId) {
-                            var inStockElement = document.querySelector('.disable-box-shadow');
+                            var inStockElement = document.getElementById('in-stock');
 
-                            if (productId) {
-                                inStockElement.style.display= "block";
-                            } else {
-                                inStockElement.style.display= "none";
-                            }
+                            // if (productId) {
+                            //     inStockElement.style.display= "block";
+                            // } else {
+                            //     inStockElement.style.display= "none";
+                            // }
                         },
                     }
                 });

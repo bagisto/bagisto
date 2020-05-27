@@ -82,7 +82,6 @@
                             url="{{ url()->to('/') }}"
                             :header-content="{{ json_encode($velocityContent) }}"
                             heading= "{{ __('velocity::app.menu-navbar.text-category') }}"
-                            category-count="{{ $velocityMetaData ? $velocityMetaData->sidebar_category_count : 10 }}"
                         ></content-header>
 
                         <div class="">
@@ -114,7 +113,7 @@
                 @show
 
                 <div class="container">
-
+                    
                     {!! view_render_event('bagisto.shop.layout.full-content.before') !!}
 
                         @yield('full-content-wrapper')

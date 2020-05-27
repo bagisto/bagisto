@@ -1,12 +1,10 @@
 <?php
 
-namespace Tests\Functional\CartRule;
-
 use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Models\ProductFlat;
-use FunctionalTester;
 
 use Webkul\CartRule\Models\CartRule;
+use Haendlerbund\SalesforceApi\Models\HbCartRule;
 
 class CartRuleCest
 {

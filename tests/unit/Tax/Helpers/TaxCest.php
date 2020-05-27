@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Tax\Helpers;
 
+use Faker\Factory;
 use Illuminate\Support\Facades\Config;
 use UnitTester;
 use Webkul\Tax\Models\TaxCategory;
@@ -12,11 +13,6 @@ use Cart;
 class TaxCest
 {
     public $scenario;
-
-    private const PRODUCT1_QTY = 11;
-    private const PRODUCT2_QTY = 7;
-
-    private const CART_TOTAL_PRECISION = 2;
 
     public function _before(UnitTester $I)
     {
@@ -63,36 +59,30 @@ class TaxCest
         Cart::addProduct($product1->id, [
             '_token'     => session('_token'),
             'product_id' => $product1->id,
-            'quantity'   => self::PRODUCT1_QTY,
+            'quantity'   => 11,
         ]);
 
         Cart::addProduct($product2->id, [
             '_token'     => session('_token'),
             'product_id' => $product2->id,
-            'quantity'   => self::PRODUCT2_QTY,
+            'quantity'   => 7,
         ]);
 
-        // rounded by precision of 2 because this are sums of corresponding tax categories
-        $expectedTaxAmount1 = round(
-            round(self::PRODUCT1_QTY * $product1->price, self::CART_TOTAL_PRECISION)
-            * $tax1->tax_rate / 100,
-            self::CART_TOTAL_PRECISION
-        );
-
-        $expectedTaxAmount2 = round(
-            round(self::PRODUCT2_QTY * $product2->price, self::CART_TOTAL_PRECISION)
-            * $tax2->tax_rate / 100,
-            self::CART_TOTAL_PRECISION
-        );
 
         $this->scenario = [
-            'cart'             => Cart::getCart(),
+            'object'           => Cart::getCart(),
             'expectedTaxRates' => [
-                (string)round((float)$tax1->tax_rate, 4) => $expectedTaxAmount1,
-                (string)round((float)$tax2->tax_rate, 4) => $expectedTaxAmount2,
+                (string)round((float)$tax1->tax_rate, 4)
+                => round(11 * $product1->price * $tax1->tax_rate / 100, 2),
+
+                (string)round((float)$tax2->tax_rate, 4)
+                => round(7 * $product2->price * $tax2->tax_rate / 100, 2),
             ],
             'expectedTaxTotal' =>
-                round($expectedTaxAmount1 + $expectedTaxAmount2, self::CART_TOTAL_PRECISION),
+                round(
+                    round(11 * $product1->price * $tax1->tax_rate / 100, 2)
+                    + round(7 * $product2->price * $tax2->tax_rate / 100, 2)
+                    , 2),
         ];
     }
 
@@ -101,7 +91,7 @@ class TaxCest
         $result = $I->executeFunction(
             \Webkul\Tax\Helpers\Tax::class,
             'getTaxRatesWithAmount',
-            [$this->scenario['cart'], false]
+            [$this->scenario['object'], false]
         );
 
         foreach ($result as $taxRate => $taxAmount) {
@@ -115,7 +105,7 @@ class TaxCest
         $result = $I->executeFunction(
             \Webkul\Tax\Helpers\Tax::class,
             'getTaxTotal',
-            [$this->scenario['cart'], false]
+            [$this->scenario['object'], false]
         );
 
         $I->assertEquals($this->scenario['expectedTaxTotal'], $result);

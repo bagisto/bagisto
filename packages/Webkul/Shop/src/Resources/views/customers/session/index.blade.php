@@ -49,9 +49,8 @@
                 <input class="btn btn-primary btn-lg" type="submit" value="{{ __('shop::app.customer.login-form.button_title') }}">
             </div>
         </form>
-
+          
         {!! view_render_event('bagisto.shop.customers.login.after') !!}
     </div>
-
 @stop
 

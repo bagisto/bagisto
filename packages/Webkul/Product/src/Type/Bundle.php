@@ -542,32 +542,29 @@ class Bundle extends AbstractType
     {
         $bundleOptionQuantities = $data['bundle_option_qty'] ?? [];
 
-        $productBundleOptions = $this->productBundleOptionRepository
-            ->whereIn('id', array_keys($data['bundle_options']))
-            ->orderBy('sort_order')
-            ->get();
+        foreach ($data['bundle_options'] as $optionId => $optionProductIds) {
+            $option = $this->productBundleOptionRepository->find($optionId);
 
-        foreach ($productBundleOptions as $option) {
             $labels = [];
 
-            foreach ($data['bundle_options'][$option->id] as $optionProductId) {
+            foreach ($optionProductIds as $optionProductId) {
                 if (! $optionProductId) {
                     continue;
                 }
 
                 $optionProduct = $this->productBundleOptionProductRepository->find($optionProductId);
 
-                $qty = $data['bundle_option_qty'][$option->id] ?? $optionProduct->qty;
+                $qty = $data['bundle_option_qty'][$optionId] ?? $optionProduct->qty;
 
-                if (! isset($data['bundle_option_qty'][$option->id])) {
-                    $bundleOptionQuantities[$option->id] = $qty;
+                if (! isset($data['bundle_option_qty'][$optionId])) {
+                    $bundleOptionQuantities[$optionId] = $qty;
                 }
 
                 $labels[] = $qty . ' x ' . $optionProduct->product->name . ' ' . core()->currency($optionProduct->product->getTypeInstance()->getMinimalPrice());
             }
 
             if (count($labels)) {
-                $data['attributes'][] = [
+                $data['attributes'][$option->id] = [
                     'attribute_name' => $option->label,
                     'option_id'      => $option->id,
                     'option_label'   => implode(', ', $labels),

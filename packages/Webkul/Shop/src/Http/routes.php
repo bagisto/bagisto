@@ -110,6 +110,7 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
     Route::prefix('customer')->group(function () {
         // forgot Password Routes
         // Forgot Password Form Show
+
         Route::get('/forgot-password', 'Webkul\Customer\Http\Controllers\ForgotPasswordController@create')->defaults('_config', [
             'view' => 'shop::customers.signup.forgot-password'
         ])->name('customer.forgot-password.create');
@@ -133,6 +134,23 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
             'view' => 'shop::customers.session.index',
         ])->name('customer.session.index');
 
+
+    // Social Login 
+
+        Route::get('login/{provider}', 'Webkul\Customer\Http\Controllers\SessionController@socialLogin')->name('customer.session.socialLogin');
+
+    // Facebook Callback
+        Route::get('login/facebook/callback', 'Webkul\Customer\Http\Controllers\RegistrationController@socialLoginFacebookCallback')->defaults('_config', [
+            'redirect' => 'customer.profile.index'
+        ])->name('customer.session.socialLoginFacebookCallback');
+        
+    // Google Callback
+        Route::get('login/google/callback', 'Webkul\Customer\Http\Controllers\RegistrationController@socialLoginGoogleCallback')->defaults('_config', [
+            'redirect' => 'customer.profile.index'
+        ])->name('customer.session.socialLoginGoogleCallback');
+ 
+
+         
         // Login form store
         Route::post('login', 'Webkul\Customer\Http\Controllers\SessionController@create')->defaults('_config', [
             'redirect' => 'customer.profile.index'
@@ -160,6 +178,17 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
 
         // for customer login checkout
         Route::post('/customer/checkout/login', 'Webkul\Shop\Http\Controllers\OnepageController@loginForCheckout')->name('customer.checkout.login');
+
+    // Social Login Facebook
+        Route::get('facebook-login', 'Webkul\Customer\Http\Controllers\SessionController@show')->defaults('_config', [
+            'view' => 'shop::customers.session.index',
+        ])->name('customer.facebook.create');
+
+        // Login form store
+        // Route::post('login', 'Webkul\Customer\Http\Controllers\SessionController@create')->defaults('_config', [
+        //     'redirect' => 'customer.profile.index'
+        // ])->name('customer.session.create');
+
 
         // Auth Routes
         Route::group(['middleware' => ['customer']], function () {

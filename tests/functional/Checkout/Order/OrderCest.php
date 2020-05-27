@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Functional\Checkout\Order;
+namespace Tests\Functional\Checkout\Cart;
 
 use Faker\Factory;
 use FunctionalTester;
