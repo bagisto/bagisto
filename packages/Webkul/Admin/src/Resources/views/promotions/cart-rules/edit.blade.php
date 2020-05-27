@@ -1,3 +1,8 @@
+<?php
+/** @var array $selectedOptionIds */
+/** @var \Webkul\CartRule\Models\CartRule $cartRule */
+?>
+
 @extends('admin::layouts.content')
 
 @section('page_title')
