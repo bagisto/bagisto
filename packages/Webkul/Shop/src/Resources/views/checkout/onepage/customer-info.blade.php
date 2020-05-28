@@ -17,7 +17,7 @@
                     </label>
 
                     <ul class="address-card-list" style="float: right; width: 85%;">
-                        <li class="mb-5" v-if="addresses.company-name != ''">
+                        <li class="mb-5" v-if="addresses.company_name != ''">
                             @{{ addresses.company_name }}
                         </li>
 
@@ -273,7 +273,7 @@
                         </label>
 
                         <ul class="address-card-list" style="float: right; width: 85%;">
-                            <li class="mb-5" v-if="addresses.company-name != ''">
+                            <li class="mb-5" v-if="addresses.company_name != ''">
                                 @{{ addresses.company_name }}
                             </li>
 

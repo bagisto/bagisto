@@ -152,6 +152,7 @@ return array (
             'direction' => 'Richtung',
             'fullname' => 'Vollständiger Name',
             'type' => 'Typ',
+            'copy' => 'Kopieren',
             'required' => 'Erforderlich',
             'unique' => 'Einzigartig',
             'per-locale' => 'Sprach-basierend',

@@ -2,13 +2,10 @@
 
 namespace Tests\Functional\CartRule;
 
-use Webkul\Product\Models\ProductAttributeValue;
-use Webkul\Product\Models\ProductFlat;
 use FunctionalTester;
-
 use Webkul\CartRule\Models\CartRule;
 
-class CartRuleCest
+class CartRuleCreateCest
 {
 
     public function testCartRuleCreation(FunctionalTester $I)
