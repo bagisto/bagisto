@@ -1,7 +1,8 @@
 <div class="col-lg-4 col-md-12 col-sm-12 footer-ct-content">
 	<div class="row">
+
         @if ($velocityMetaData)
-            {!! $velocityMetaData->footer_middle_content !!}
+            {!! DbView::make($velocityMetaData)->field('footer_middle_content')->render() !!}
         @else
             <div class="col-lg-6 col-md-12 col-sm-12 no-padding">
                 <ul type="none">

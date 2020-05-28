@@ -3,6 +3,17 @@
     $comparableAttributes = $attributeRepository->findByField('is_comparable', 1);
 @endphp
 
+@push('css')
+    <style>
+        .btn-add-to-cart {
+            max-width: 130px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    </style>
+@endpush
+
 @push('scripts')
     <script type="text/x-template" id="compare-product-template">
         <section class="cart-details row no-margin col-12">
@@ -29,19 +40,19 @@
 
                         array_splice($comparableAttributes, 1, 0, [[
                             'code' => 'image',
-                            'admin_name' => 'Product Image'
+                            'admin_name' => __('velocity::app.customer.compare.product_image')
                         ]]);
 
                         array_splice($comparableAttributes, 2, 0, [[
                             'code' => 'addToCartHtml',
-                            'admin_name' => 'Actions'
+                            'admin_name' => __('velocity::app.customer.compare.actions')
                         ]]);
                     @endphp
 
                     @foreach ($comparableAttributes as $attribute)
                         <tr>
                             <td>
-                                <span class="fs16">{{ $attribute['admin_name'] }}</span>
+                                <span class="fs16">{{ isset($attribute['name']) ? $attribute['name'] : $attribute['admin_name'] }}</span>
                             </td>
 
                             <td :key="`title-${index}`" v-for="(product, index) in products">
@@ -57,6 +68,7 @@
                                             <img
                                                 class="image-wrapper"
                                                 :src="product['{{ $attribute['code'] }}']"
+                                                onload="window.updateHeight ? window.updateHeight() : ''"
                                                 :onerror="`this.src='${$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
                                         </a>
                                         @break

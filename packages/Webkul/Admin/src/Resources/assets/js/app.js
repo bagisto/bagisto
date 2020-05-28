@@ -1,5 +1,7 @@
 import Vue from 'vue';
-import VeeValidate from 'vee-validate';
+import VeeValidate, { Validator } from 'vee-validate';
+import de from 'vee-validate/dist/locale/de';
+import ar from 'vee-validate/dist/locale/ar';
 
 import './bootstrap';
 
@@ -7,6 +9,10 @@ window.Vue = Vue;
 window.VeeValidate = VeeValidate;
 
 Vue.use(VeeValidate, {
+    dictionary: {
+        ar: ar,
+        de: de,
+    },
     events: 'input|change|blur',
 });
 Vue.prototype.$http = axios
@@ -30,6 +36,8 @@ $(document).ready(function () {
         mounted() {
             this.addServerErrors();
             this.addFlashMessages();
+
+            this.$validator.localize(document.documentElement.lang);
         },
 
         methods: {
@@ -90,7 +98,7 @@ $(document).ready(function () {
                 if (typeof flashMessages == 'undefined') {
                     return;
                 };
-                
+
                 const flashes = this.$refs.flashes;
 
                 flashMessages.forEach(function(flash) {

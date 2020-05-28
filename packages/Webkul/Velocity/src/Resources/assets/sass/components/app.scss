@@ -174,23 +174,25 @@
 }
 
 .modal-container {
-    background: #ffffff;
+    left: 50%;
     top: 100px;
+    z-index: 11;
     width: 600px;
     max-width: 80%;
-    left: 50%;
-    margin-left: -300px;
+    max-height: 80%;
     position: fixed;
-    z-index: 11;
+    font-size: 14px;
+    overflow-y: auto;
+    margin-left: -300px;
+    background: #ffffff;
+    animation: jelly 0.5s ease-in-out;
+    animation: fade-in-white 0.3s ease-in-out;
+
+    @include border-radius(5px);
     @include box-shadow(
         0px 15px 25px 0px rgba(0, 0, 0, 0.03),
         0px 20px 45px 5px rgba(0, 0, 0, 0.2)
     );
-    animation: fade-in-white 0.3s ease-in-out;
-    animation: jelly 0.5s ease-in-out;
-    @include border-radius(5px);
-    overflow-y: auto;
-    max-height: 80%;
 
     .modal-header {
         padding: 20px;
@@ -205,6 +207,15 @@
         .icon {
             float: right;
             cursor: pointer;
+
+            &.remove-icon {
+                width: 24px;
+                right: 20px;
+                height: 24px;
+                margin-right: 0;
+                position: absolute;
+                background-image: url(/themes/velocity/assets/images/Icon-remove.svg);
+            }
         }
     }
 
@@ -509,6 +520,11 @@
     li {
         padding: 3px 0;
         height: unset !important;
+
+        a {
+            display: block;
+            padding: 0 20px !important;
+        }
     }
 
     a {
@@ -860,7 +876,8 @@
             }
 
             input,
-            select {
+            select,
+            textarea {
                 width: 100%;
                 resize: none;
                 font-size: 16px;
@@ -872,6 +889,8 @@
 
             input:active,
             input:focus,
+            textarea:active,
+            textarea:focus,
             select:focus,
             select:active {
                 border-color: $theme-color;
@@ -1063,6 +1082,57 @@
                 .table td {
                     border: unset;
                     padding: 6px 12px;
+                }
+            }
+
+            .accordian .accordian-header {
+                padding: 10px 0;
+                font-weight: 600;
+            }
+
+            .image-wrapper {
+                width: 100%;
+                margin-top: 10px;
+                margin-bottom: 20px;
+                display: inline-block;
+
+                .image-item {
+                    width: 200px;
+                    height: 200px;
+                    position: relative;
+                    border-radius: 3px;
+                    margin-right: 20px;
+                    background: #f8f9fa;
+                    margin-bottom: 20px;
+                    display: inline-block;
+                    background-position: 50%;
+                    background-repeat: no-repeat;
+                    background-image: url(/vendor/webkul/ui/assets/images/placeholder-icon.svg);
+
+                    .remove-image {
+                        left: 0;
+                        bottom: 0;
+                        width: 100%;
+                        color: #fff;
+                        padding: 10px;
+                        cursor: pointer;
+                        margin-bottom: 0;
+                        text-align: center;
+                        position: absolute;
+                        margin-right: 20px;
+                        border-radius: 0 0 4px 4px;
+                        text-shadow: 0 1px 2px rgba(0,0,0,.24);
+                        background-image: linear-gradient(-180deg,rgba(0,0,0,.08),rgba(0,0,0,.24));
+                    }
+
+                    input {
+                        display: none;
+                    }
+                    
+                    img.preview {
+                        width: 100%;
+                        height: 100%;
+                    }
                 }
             }
         }
@@ -1271,18 +1341,15 @@
     i {
         color: $black-color;
     }
-
-    i:hover::before {
-        // content: "\E93D";
-    }
 }
 
 .checkout-process {
     padding: 40px 20px;
 
-    .col-7 {
-        > div {
-            width: 100%;
+    .col-lg-7 {
+        .coupon-container,
+        > div:not(:first-child) {
+            margin-top: 20px;
         }
     }
 

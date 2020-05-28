@@ -198,6 +198,8 @@ return [
             'removed' => 'تمت إزالة العنصر بنجاح من قائمة المقارنة',
             'already_added' => 'تمت إضافة العنصر بالفعل لمقارنة القائمة',
             'empty-text' => "ليس لديك أي عناصر في قائمة المقارنة الخاصة بك",
+            'product_image' => 'Product Image',
+            'actions' => 'Actions',
         ],
         'login-form' => [
             'sign-up' => 'سجل',

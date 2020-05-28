@@ -249,9 +249,12 @@ body {
 
     > div:last-child {
         height: 32px;
+    }
 
-        * {
-            // height: 100%;
+    > div {
+        .default {
+            padding: 5px;
+            font-size: 14px;
         }
     }
 
@@ -280,7 +283,6 @@ body {
         }
     }
 }
-
 
 .dropdown-menu {
     border-top: 3px solid $border-primary;

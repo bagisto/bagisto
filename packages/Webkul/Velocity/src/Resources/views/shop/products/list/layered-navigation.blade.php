@@ -4,12 +4,15 @@
 
 <?php
     $filterAttributes = [];
+    $maxPrice = 0;
 
     if (isset($category)) {
         $products = $productRepository->getAll($category->id);
 
         $filterAttributes = $productFlatRepository->getFilterableAttributes($category, $products);
-    }
+
+        $maxPrice = core()->convertPrice($productFlatRepository->getCategoryProductMaximumPrice($category));
+    } 
 
     if (! count($filterAttributes) > 0) {
         $filterAttributes = $attributeRepository->getFilterAttributes();
@@ -115,7 +118,7 @@
                             :value="sliderConfig.priceFrom"
                             id="price_from" />
 
-                        <label class="col text-center" for="to">to</label>
+                        <label class="col text-center" for="to">{{ __('shop::app.products.filter-to') }}</label>
                         <input
                         type="text"
                         disabled
@@ -181,7 +184,7 @@
             ],
 
             data: function() {
-                let maxPrice  = '{{ core()->convertPrice($productFlatRepository->getCategoryProductMaximumPrice($category)) }}';
+                let maxPrice  = @json($maxPrice);
 
                 maxPrice = maxPrice ? ((parseInt(maxPrice) !== 0 || maxPrice) ? parseInt(maxPrice) : 500) : 500;
 

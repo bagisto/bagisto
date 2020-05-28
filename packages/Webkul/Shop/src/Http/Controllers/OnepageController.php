@@ -2,6 +2,7 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
+use Illuminate\Support\Facades\Event;
 use Webkul\Shop\Http\Controllers\Controller;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Shipping\Facades\Shipping;
@@ -21,7 +22,7 @@ class OnepageController extends Controller
 
      /**
      * customerRepository instance object
-     * 
+     *
      * @var \Webkul\Customer\Repositories\CustomerRepository
      */
     protected $customerRepository;
@@ -52,6 +53,8 @@ class OnepageController extends Controller
     */
     public function index()
     {
+        Event::dispatch('checkout.load.index');
+
         if (! auth()->guard('customer')->check()
             && ! core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout')) {
             return redirect()->route('customer.session.index');

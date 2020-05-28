@@ -6,11 +6,14 @@
 
 <?php
     $filterAttributes = [];
+    $maxPrice = 0;
 
     if (isset($category)) {
         $products = $productRepository->getAll($category->id);
 
         $filterAttributes = $productFlatRepository->getFilterableAttributes($category, $products);
+
+        $maxPrice = core()->convertPrice($productFlatRepository->getCategoryProductMaximumPrice($category));
     }
 
     if (! count($filterAttributes) > 0) {
@@ -161,7 +164,7 @@
             props: ['index', 'attribute', 'appliedFilterValues'],
 
             data: function() {
-                let maxPrice  = '{{ core()->convertPrice($productFlatRepository->getCategoryProductMaximumPrice($category)) }}';
+                let maxPrice  = @json($maxPrice);
 
                 maxPrice = maxPrice ? ((parseInt(maxPrice) !== 0 || maxPrice) ? parseInt(maxPrice) : 500) : 500;
 

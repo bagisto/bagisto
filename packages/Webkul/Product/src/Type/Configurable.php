@@ -50,6 +50,11 @@ class Configurable extends AbstractType
     protected $hasVariants = true;
 
     /**
+     * product options
+     */
+    protected $productOptions = [];
+
+    /**
      * @param  array  $data
      * @return \Webkul\Product\Contracts\Product
      */
@@ -392,6 +397,7 @@ class Configurable extends AbstractType
     public function getPriceHtml()
     {
         return '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
+            . ' '
             . '<span class="final-price">' . core()->currency($this->getMinimalPrice()) . '</span>';
     }
 
@@ -518,7 +524,11 @@ class Configurable extends AbstractType
                 $product = $item->product;
             }
         } else {
-            $product = $item->child->product;
+            if ($item instanceof \Webkul\Customer\Contracts\CartItem) {
+                $product = $item->child->product;
+            } else {
+                $product = $item->product;
+            }
         }
 
         return $this->productImageHelper->getProductBaseImage($product);
@@ -545,5 +555,80 @@ class Configurable extends AbstractType
         $item->total = core()->convertPrice($price * $item->quantity);
 
         $item->save();
+    }
+
+    //product options
+    public function getProductOptions($product = "")
+    {
+        $configurableOption = app('Webkul\Product\Helpers\ConfigurableOption');
+        $options = $configurableOption->getConfigurationConfig($product);
+
+        return $options;
+    }
+
+    /**
+     * @param  int  $qty
+     * @return bool
+     */
+    public function haveSufficientQuantity($qty)
+    {
+        $backorders = core()->getConfigData('catalog.inventory.stock_options.backorders');
+
+        $backorders = ! is_null ($backorders) ? $backorders : false;
+     
+        foreach ($this->product->variants as $variant) {
+            if ($variant->haveSufficientQuantity($qty)) {
+                return true;
+            }
+        }    
+
+        return $backorders;
+    }
+     
+    /**
+     * Return true if this product type is saleable
+     *
+     * @return bool
+     */
+    public function isSaleable()
+    {
+        foreach ($this->product->variants as $variant) {
+            if ($variant->isSaleable()) {
+                return true;
+            }
+        }
+            
+        return false;
+    }
+
+    /**
+     * @return int
+     */
+    public function totalQuantity()
+    {
+        $total = 0;
+
+        $channelInventorySourceIds = core()->getCurrentChannel()
+                                           ->inventory_sources()
+                                           ->where('status', 1)
+                                           ->pluck('id');
+
+        foreach ($this->product->variants as $variant) {
+            foreach ($variant->inventories as $inventory) {
+                if (is_numeric($index = $channelInventorySourceIds->search($inventory->inventory_source_id))) {
+                    $total += $inventory->qty;
+                }
+            }
+
+            $orderedInventory = $variant->ordered_inventories()
+                                          ->where('channel_id', core()->getCurrentChannel()->id)
+                                          ->first();
+
+            if ($orderedInventory) {
+                $total -= $orderedInventory->qty;
+            }
+        }
+
+        return $total;
     }
 }

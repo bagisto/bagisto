@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Functional\Webkul\Admin;
+namespace Tests\Functional\Admin\Catalog;
 
 use FunctionalTester;
 use Faker\Factory;

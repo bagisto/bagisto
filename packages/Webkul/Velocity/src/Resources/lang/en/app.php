@@ -198,6 +198,8 @@ return [
             'already_added'         => 'Item already added to compare list',
             'removed'               => 'Item successfully removed from compare list',
             'empty-text'            => "You don't have any items in your compare list",
+            'product_image'         => 'Product Image',
+            'actions'               => 'Actions',
         ],
         'login-form'        => [
             'sign-up'               => 'Sign up',
@@ -211,7 +213,7 @@ return [
             'login'             => 'Login',
             'become-user'       => 'Become User',
             'user-registration' => 'User Registration',
-            'form-sginup-text'  => 'If you are new to our store, we glab to have you as member.',
+            'form-sginup-text'  => 'If you are new to our store, we glad to have you as member.',
         ],
         'forget-password'   => [
             'login'                 => 'Login',
@@ -284,7 +286,9 @@ return [
 
     'responsive'    => [
         'header' => [
-            'greeting' => 'Welcome, :customer !',
+            'done'      => 'Done',
+            'languages' => 'Languages',
+            'greeting'  => 'Welcome, :customer !',
         ]
     ],
 ]

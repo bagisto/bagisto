@@ -3,6 +3,7 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
+use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Ui\DataGrid\DataGrid;
 use Webkul\Customer\Repositories\CustomerRepository;
 
@@ -43,10 +44,11 @@ class AddressDataGrid extends DataGrid
     {
         $customer = $this->customerRepository->find(request('id'));
 
-        $queryBuilder = DB::table('customer_addresses as ca')
+        $queryBuilder = DB::table('addresses as ca')
             ->leftJoin('countries', 'ca.country', '=', 'countries.code')
             ->leftJoin('customers as c', 'ca.customer_id', '=', 'c.id')
             ->addSelect('ca.id as address_id', 'ca.company_name', 'ca.address1', 'ca.country', DB::raw('' . DB::getTablePrefix() . 'countries.name as country_name'), 'ca.state', 'ca.city', 'ca.postcode', 'ca.phone', 'ca.default_address')
+            ->where('ca.address_type', CustomerAddress::ADDRESS_TYPE)
             ->where('c.id', $customer->id);
 
         $queryBuilder = $queryBuilder->leftJoin('country_states', function($qb) {
@@ -75,6 +77,15 @@ class AddressDataGrid extends DataGrid
             'index'      => 'address_id',
             'label'      => trans('admin::app.customers.addresses.address-id'),
             'type'       => 'number',
+            'searchable' => true,
+            'sortable'   => true,
+            'filterable' => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'company_name',
+            'label'      => trans('admin::app.customers.addresses.company-name'),
+            'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
             'filterable' => true,

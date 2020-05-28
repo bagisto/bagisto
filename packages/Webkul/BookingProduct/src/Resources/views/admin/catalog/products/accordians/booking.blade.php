@@ -1,3 +1,25 @@
+@section('css')
+    <style>
+        .slot-list .control-group.date::after {
+            margin-top: -13px;
+            left: 100%;
+        }
+        
+        .has-control-group .control-group {
+            width: 50%;
+            float: left;
+        }
+
+        .has-control-group .control-group:first-child {
+            padding-right: 10px;
+        }
+
+        .has-control-group .control-group:last-child {
+            padding-left: 10px;
+        }
+    </style>
+@stop
+
 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.booking.before', ['product' => $product]) !!}
 
 <accordian :title="'{{ __('bookingproduct::app.admin.catalog.products.booking') }}'" :active="true">

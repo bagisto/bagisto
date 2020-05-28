@@ -263,6 +263,7 @@
                         <th>{{ __('admin::app.sales.orders.SKU') }}</th>
                         <th>{{ __('admin::app.sales.orders.product-name') }}</th>
                         <th>{{ __('admin::app.sales.shipments.qty-ordered') }}</th>
+                        <th>{{ __('admin::app.sales.shipments.qty-invoiced') }}</th>
                         <th>{{ __('admin::app.sales.shipments.qty-to-ship') }}</th>
                         <th>{{ __('admin::app.sales.shipments.available-sources') }}</th>
                     </tr>
@@ -288,6 +289,7 @@
                                     @endif
                                 </td>
                                 <td>{{ $item->qty_ordered }}</td>
+                                <td>{{ $item->qty_invoiced }}</td>
                                 <td>{{ $item->qty_to_ship }}</td>
                                 <td>
 
@@ -324,8 +326,8 @@
 
                                                         <div class="control-group" :class="[errors.has('{{ $inputName }}') ? 'has-error' : '']">
 
-                                                            <input type="text" v-validate="'required|numeric|min_value:0|max_value:{{$sourceQty}}'" class="control" id="{{ $inputName }}" name="{{ $inputName }}" value="0" data-vv-as="&quot;{{ __('admin::app.sales.shipments.qty-to-ship') }}&quot;" :disabled="source != '{{ $inventorySource->id }}'"/>
-
+                                                            <input type="text" v-validate="'required|numeric|min_value:0|max_value:{{$sourceQty}}'" class="control" id="{{ $inputName }}" name="{{ $inputName }}" value="{{ $item->qty_invoiced }}" data-vv-as="&quot;{{ __('admin::app.sales.shipments.qty-to-ship') }}&quot;" :disabled="source != '{{ $inventorySource->id }}'"/>
+                                                            
                                                             <span class="control-error" v-if="errors.has('{{ $inputName }}')">
                                                                 @verbatim
                                                                     {{ errors.first('<?php echo $inputName; ?>') }}

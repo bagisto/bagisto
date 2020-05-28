@@ -41,6 +41,7 @@ return [
     ],
 
     'layouts' => [
+        'app-version' => 'Version : :version',
         'my-account' => 'حسابي',
         'logout' => 'خروج',
         'visit-shop' => 'قم بزيارة المتجر',
@@ -369,7 +370,11 @@ return [
             'total-due' => 'المجموع المستحق',
             'cancel-confirm-msg' => 'هل أنت متأكد من أنك تريد إلغاء هذا الطلب ؟',
             'refunds' => 'المبالغ المستردة',
-            'refunded' => 'تم رد الأموال'
+            'refunded' => 'تم رد الأموال',
+            'comment-added-success' => 'Comment addded successfully.',
+            'comment' => 'Comment',
+            'submit-comment' => 'Submit Comment',
+            'notify-customer' => 'Notify Customer',
         ],
 
         'invoices' => [
@@ -408,6 +413,7 @@ return [
             'add-title' => 'أنشئ شحنة',
             'save-btn-title' => 'احفظ الشحنة',
             'qty-ordered' => 'أمر qty',
+            'qty-invoiced' => 'Qty Invoiced',
             'qty-to-ship' => 'من كيوتي إلى السفينة',
             'available-sources' => 'المصادر المتاحة',
             'source' => 'المصدر',
@@ -727,7 +733,7 @@ return [
             'target_currency' => 'العملة المستهدفة',
             'rate' => 'معدل',
             'exchange-class-not-found' => ':service لم يتم العثور على فئة سعر الصرف آسيف',
-            'update-rates' => ':service تحديث الأسعار باستخدام ',
+            'update-rates' => 'الأسعار',
             'create-success' => 'تم إنشاء سعر الصرف بنجاح',
             'update-success' => 'تم تحديث سعر الصرف بنجاح',
             'delete-success' => 'تم حذف سعر الصرف بنجاح',
@@ -1303,7 +1309,35 @@ return [
             'all-channels' => 'الكل',
             'all-locales' => 'الكل',
             'invoice-slip-design' => 'Invoice Slip Design',
-            'logo' => 'logo'
+            'logo' => 'Logo',
+            'storefront' => 'Storefront',
+            'default-list-mode' => 'Default List Mode',
+            'grid' => 'Grid',
+            'list' => 'List',
+            'products-per-page' => 'Products Per Page',
+            'sort-by' => 'Sort By',
+            'from-z-a' => 'From Z-A',
+            'from-a-z' => 'From A-Z',
+            'newest-first' => 'Newest First',
+            'oldest-first' => 'Oldest First',
+            'cheapest-first' => 'Cheapest First',
+            'expensive-first' => 'Expensive First',
+            'comma-seperated' => 'Comma Seperated',
+            'favicon' => 'Favicon',
+            'seo' => 'SEO',
+            'rich-snippets' => 'Rich Snippets',
+            'products' => 'Products',
+            'enable' => 'Enable',
+            'show-weight' => 'Show Weight',
+            'show-categories' => 'Show Categories',
+            'show-images' => 'Show Images',
+            'show-reviews' => 'Show Reviews',
+            'show-ratings' => 'Show Ratings',
+            'show-offers' => 'Show Offers',
+            'show-sku' => 'Show SKU',
+            'categories' => 'Categories',
+            'show-sku' => 'Show SKU',
+            'show-search-input-field' => 'Show Search Input Field'
         ]
     ]
 ];

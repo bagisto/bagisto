@@ -7,10 +7,14 @@ use Webkul\Product\Models\Product;
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderItem;
 
-$factory->define(OrderItem::class, function (Faker $faker) {
+$factory->define(OrderItem::class, function (Faker $faker, array $attributes) {
     $now = date("Y-m-d H:i:s");
 
-    $product = factory(Product::class, 'simple')->create();
+    if (isset($attributes['product_id'])) {
+        $product = Product::where('id', $attributes['product_id'])->first();
+    } else {
+        $product = factory(Product::class)->create();
+    }
 
     return [
         'sku'          => $product->sku,

@@ -46,9 +46,9 @@
 
                         <div class="cart-content col-12">
                             <form
-                                action="{{ route('shop.checkout.cart.update') }}"
                                 method="POST"
-                                @submit.prevent="onSubmit">
+                                @submit.prevent="onSubmit"
+                                action="{{ route('shop.checkout.cart.update') }}">
 
                                 <div class="cart-item-list">
                                     @csrf
@@ -61,13 +61,21 @@
 
                                             $productPrice = $product->getTypeInstance()->getProductPrices();
 
+                                            if (is_null ($product->url_key)) {
+                                                if (! is_null($product->parent)) {
+                                                    $url_key = $product->parent->url_key;
+                                                }
+                                            } else {
+                                                $url_key = $product->url_key;
+                                            }
+
                                         @endphp
 
                                         <div class="row col-12" v-if="!isMobileDevice">
                                             <a
                                                 title="{{ $product->name }}"
                                                 class="product-image-container col-2"
-                                                href="{{ route('shop.productOrCategory.index', $product->url_key) }}">
+                                                href="{{ route('shop.productOrCategory.index', $url_key) }}">
 
                                                 <img
                                                     class="card-img-top"
@@ -79,7 +87,7 @@
                                             <div class="product-details-content col-7 pr0">
                                                 <div class="row item-title no-margin">
                                                     <a
-                                                        href="{{ route('shop.productOrCategory.index', $product->url_key) }}"
+                                                        href="{{ route('shop.productOrCategory.index', $url_key) }}"
                                                         title="{{ $product->name }}"
                                                         class="unset col-12 no-padding">
 
@@ -137,7 +145,7 @@
                                                             @endauth
                                                         "
                                                         href="{{ route('shop.checkout.cart.remove', ['id' => $item->id]) }}"
-                                                        onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">
+                                                        @click="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">
 
                                                         <span class="rango-delete fs24"></span>
                                                         <span class="align-vertical-top">{{ __('shop::app.checkout.cart.remove') }}</span>
@@ -157,13 +165,19 @@
                                                     {{ core()->currency( $item->base_total) }}
                                                 </span>
                                             </div>
+
+                                            @if (! cart()->isItemHaveQuantity($item))
+                                                <div class="control-error mt-4 fs16 fw6">
+                                                    * {{ __('shop::app.checkout.cart.quantity-error') }}
+                                                </div>
+                                            @endif
                                         </div>
 
                                         <div class="row col-12" v-else>
                                             <a
                                                 title="{{ $product->name }}"
                                                 class="product-image-container col-2"
-                                                href="{{ route('shop.productOrCategory.index', $product->url_key) }}">
+                                                href="{{ route('shop.productOrCategory.index', $url_key) }}">
 
                                                 <img
                                                     src="{{ $productBaseImage['medium_image_url'] }}"
@@ -173,7 +187,7 @@
 
                                             <div class="col-10 pr0 item-title">
                                                 <a
-                                                    href="{{ route('shop.productOrCategory.index', $product->url_key) }}"
+                                                    href="{{ route('shop.productOrCategory.index', $url_key) }}"
                                                     title="{{ $product->name }}"
                                                     class="unset col-12 no-padding">
 
@@ -273,13 +287,15 @@
                     return {
                         isMobileDevice: this.isMobile(),
                     }
+                },
+
+                methods: {
+                    removeLink(message) {
+                        if (! confirm(message))
+                            event.preventDefault();
+                    }
                 }
             })
-
-            function removeLink(message) {
-                if (!confirm(message))
-                event.preventDefault();
-            }
         })()
     </script>
 @endpush

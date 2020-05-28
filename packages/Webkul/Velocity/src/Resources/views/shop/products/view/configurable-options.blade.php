@@ -318,16 +318,18 @@
                                     galleryImages.unshift(image)
                                 });
                             }
+
+                            eventBus.$emit('configurable-variant-update-images-event', galleryImages);
                         },
 
                         changeStock: function (productId) {
-                            var inStockElement = document.getElementById('in-stock');
+                            var inStockElement = document.querySelector('.disable-box-shadow');
 
-                            // if (productId) {
-                            //     inStockElement.style.display= "block";
-                            // } else {
-                            //     inStockElement.style.display= "none";
-                            // }
+                            if (productId) {
+                                inStockElement.style.display= "block";
+                            } else {
+                                inStockElement.style.display= "none";
+                            }
                         },
                     }
                 });

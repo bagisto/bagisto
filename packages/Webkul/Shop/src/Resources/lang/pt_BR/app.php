@@ -306,6 +306,8 @@ return [
                     'individual-refund' => 'Refund #:refund_id',
                     'adjustment-refund' => 'Adjustment Refund',
                     'adjustment-fee' => 'Adjustment Fee',
+                    'tracking-number' => 'Numero de rastreio',
+                    'cancel-confirm-msg'  => 'Tem certeza de que deseja cancelar este pedido ?'
                 ]
             ],
 
@@ -361,6 +363,7 @@ return [
         'layered-nav-title' => 'Compre por',
         'price-label' => 'Tão baixo quanto',
         'remove-filter-link-title' => 'Limpar Todos',
+        'filter-to' => 'a',
         'sort-by' => 'Ordernar por',
         'from-a-z' => 'De A-Z',
         'from-z-a' => 'De Z-A',
@@ -385,6 +388,7 @@ return [
         'new' => 'Novo',
         'empty' => 'Nenhum produto disponível nesta categoria',
         'add-to-cart' => 'Adicionar ao Carrinho',
+        'book-now' => 'Agende agora',
         'buy-now' => 'Comprar Agora',
         'whoops' => 'Oppss!',
         'quantity' => 'Quantidade',
@@ -398,7 +402,8 @@ return [
         'choose-selection' => 'Escolha uma seleção',
         'your-customization' => 'Sua personalização',
         'total-amount' => 'Valor total',
-        'none' => 'Nenhum'
+        'none' => 'Nenhum',
+        'available-for-order' => 'Disponível para encomenda'
     ],
 
     // 'reviews' => [
@@ -450,7 +455,10 @@ return [
             'cart-subtotal' => 'Subtotal do carrinho',
             'cart-remove-action' => 'Você realmente quer fazer isso ?',
             'partial-cart-update' => 'Only some of the product(s) were updated',
-            'link-missing' => ''
+            'link-missing' => '',
+            'event' => [
+                'expired' => 'This event has been expired.'
+            ]
         ],
 
         'onepage' => [
@@ -459,6 +467,7 @@ return [
             'shipping' => 'Entrega',
             'payment' => 'Pagamento',
             'complete' => 'Completo',
+            'review' => 'Reveja',
             'billing-address' => 'Endereço de Cobrança',
             'sign-in' => 'Entrar',
             'first-name' => 'Nome',

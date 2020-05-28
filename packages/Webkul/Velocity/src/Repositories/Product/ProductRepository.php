@@ -4,6 +4,7 @@ namespace Webkul\Velocity\Repositories\Product;
 
 use Webkul\Core\Eloquent\Repository;
 use Illuminate\Container\Container as App;
+use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 

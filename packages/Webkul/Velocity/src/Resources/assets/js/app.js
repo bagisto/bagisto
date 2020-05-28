@@ -3,22 +3,26 @@ import accounting from 'accounting';
 import VueCarousel from 'vue-carousel';
 import VueToast from 'vue-toast-notification';
 import 'vue-toast-notification/dist/index.css';
-import messagesAr from 'vee-validate/dist/locale/ar';
+import de from 'vee-validate/dist/locale/de';
+import ar from 'vee-validate/dist/locale/ar';
+import VeeValidate, { Validator } from 'vee-validate';
+import axios from 'axios';
 
-window.axios = require("axios");
-window.VeeValidate = require("vee-validate");
+
+window.axios = axios;
+window.VeeValidate = VeeValidate;
 window.jQuery = window.$ = require("jquery");
 window.BootstrapSass = require("bootstrap-sass");
 
 Vue.use(VueToast);
-Vue.use(VeeValidate);
 Vue.use(VueCarousel);
 Vue.use(BootstrapSass);
 Vue.prototype.$http = axios;
 
 Vue.use(VeeValidate, {
     dictionary: {
-        ar: { messages: messagesAr }
+        ar: ar,
+        de: de,
     }
 });
 
@@ -298,12 +302,6 @@ $(document).ready(function () {
             },
 
             addFlashMessages: function () {
-                // const flashes = this.$refs.flashes;
-
-                // flashMessages.forEach(function (flash) {
-                //     flashes.addFlash(flash);
-                // }, this);
-
                 if (window.flashMessages.alertMessage)
                     window.alert(window.flashMessages.alertMessage);
             },
