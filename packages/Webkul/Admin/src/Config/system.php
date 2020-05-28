@@ -296,10 +296,21 @@ return [
                 'type'  => 'boolean',
             ],
         ],
-    ], [
+    ],[
+        'key'    => 'customer.settings.reorder',
+        'name'   => 'admin::app.admin.system.reorder',
+        'sort'   => 3,
+        'fields' => [
+            [
+                'name'  => 'product_reorder',
+                'title' => 'admin::app.admin.system.show-reorder',
+                'type'  => 'boolean',
+            ],
+        ],
+    ],[
         'key'    => 'customer.settings.email',
         'name'   => 'admin::app.admin.system.email',
-        'sort'   => 3,
+        'sort'   => 4,
         'fields' => [
             [
                 'name'  => 'verification',

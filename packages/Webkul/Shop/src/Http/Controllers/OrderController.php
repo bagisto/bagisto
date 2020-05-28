@@ -3,11 +3,18 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use PDF;
 
 class OrderController extends Controller
 {
+    /**
+     * ProductRepository object
+     *
+     * @var \Webkul\Product\Repositories\ProductRepository
+     */
+    protected $productRepository;
     /**
      * OrderrRepository object
      *
@@ -31,7 +38,8 @@ class OrderController extends Controller
      */
     public function __construct(
         OrderRepository $orderRepository,
-        InvoiceRepository $invoiceRepository
+        InvoiceRepository $invoiceRepository,
+        ProductRepository $productRepository
     )
     {
         $this->middleware('customer');
@@ -39,6 +47,8 @@ class OrderController extends Controller
         $this->orderRepository = $orderRepository;
 
         $this->invoiceRepository = $invoiceRepository;
+
+        $this->productRepository = $productRepository;
 
         parent::__construct();
     }
@@ -61,6 +71,7 @@ class OrderController extends Controller
      */
     public function view($id)
     {
+        $can_reorder=1;
         $order = $this->orderRepository->findOneWhere([
             'customer_id' => auth()->guard('customer')->user()->id,
             'id'          => $id,
@@ -70,7 +81,20 @@ class OrderController extends Controller
             abort(404);
         }
 
-        return view($this->_config['view'], compact('order'));
+        foreach ($order->items as $item) 
+        {
+            $slugOrPath = strtolower(str_replace(" ","-",$item->name));
+            $product = $this->productRepository->findBySlug($slugOrPath);
+            if(!$product->isSaleable())
+            {
+                $can_reorder=0;
+            }
+
+            
+        }
+        
+
+        return view($this->_config['view'], compact('order', 'can_reorder'));
     }
 
     /**

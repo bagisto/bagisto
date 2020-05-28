@@ -4,12 +4,19 @@ namespace Webkul\Shop\Http\Controllers;
 
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Checkout\Contracts\Cart as CartModel;
 use Illuminate\Support\Facades\Event;
 use Cart;
 
 class CartController extends Controller
 {
+    /**
+     * OrderrRepository object
+     *
+     * @var \Webkul\Sales\Repositories\OrderRepository
+     */
+    protected $orderRepository;
     /**
      * WishlistRepository Repository object
      *
@@ -32,11 +39,14 @@ class CartController extends Controller
      * @return void
      */
     public function __construct(
+        OrderRepository $orderRepository,
         WishlistRepository $wishlistRepository,
         ProductRepository $productRepository
     )
     {
-        $this->middleware('customer')->only(['moveToWishlist']);
+        $this->middleware('customer')->only(['moveToWishlist','reorder']);
+
+        $this->orderRepository = $orderRepository;
 
         $this->wishlistRepository = $wishlistRepository;
 
@@ -202,6 +212,28 @@ class CartController extends Controller
             'success' => true,
             'message' => trans('shop::app.checkout.total.remove-coupon'),
         ]);
+    }
+
+
+    /**
+     * Re add products to the cart according to order id
+     *
+     * @return \Illuminate\Http\Response
+    */
+    public function reorder($id)
+    {
+        $order = $this->orderRepository->findOneWhere([
+            'customer_id' => auth()->guard('customer')->user()->id,
+            'id'          => $id,
+        ]);
+
+        foreach ($order->items as $item) 
+        {
+            $slugOrPath = strtolower(str_replace(" ","-",$item->name));
+            $product = $this->productRepository->findBySlug($slugOrPath);
+            Cart::addProduct($product->product_id, ['product_id'=>$product->product_id,'quantity'=>$item->qty_ordered]); 
+        }
+        return redirect()->route('shop.checkout.cart.index');
     }
 
     /**

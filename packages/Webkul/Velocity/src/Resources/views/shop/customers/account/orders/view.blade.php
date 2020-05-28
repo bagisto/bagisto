@@ -33,6 +33,21 @@
                         </a>
                     </span>
                 @endif
+                @if (core()->getConfigData('customer.settings.reorder.product_reorder'))
+                    @if($can_reorder)
+                    <span class="account-action">
+                        <a href="{{ route('customer.orders.reorder', $order->id) }}" class="theme-btn light unset pull-right" v-alert:message="'{{ __('admin::app.sales.orders.reorder-confirm-msg') }}'"  style="float: right" >
+                            {{ __('shop::app.customer.account.order.view.reorder-btn-title') }}
+                        </a>
+                    </span>
+                    @else
+                    <span class="account-action">
+                        <button  class="theme-btn light unset pull-right" v-alert:message="'{{ __('admin::app.sales.orders.reorder-confirm-msg') }}'"  style="float: right; cursor: not-allowed;" disabled>
+                            {{ __('shop::app.customer.account.order.view.reorder-btn-title') }}
+                        </button>
+                    </span>
+                    @endif
+                @endif
             </div>
 
             {!! view_render_event('bagisto.shop.customers.account.orders.view.before', ['order' => $order]) !!}
