@@ -645,8 +645,10 @@ h5 {
             display: inline-block;
             vertical-align: middle;
             margin-left: -34px;
-            margin-top: 2px;
             pointer-events: none;
+            position: absolute;
+            left: 70%;
+            top: 50%;
         }
     }
 
@@ -663,12 +665,20 @@ h5 {
         margin-top: 5px;
     }
 
-    &.has-error .control {
-        border-color: $danger-color;
+    &.has-error {
+        .control {
+            border-color: $danger-color;
+        }
+
+        .control-error {
+            display: block;
+        }
     }
 
-    &.has-error .control-error {
-        display: block;
+    &.has-error.date, &.has-error.date {
+        &::after {
+            margin-top: -12px;
+        }
     }
 
     &.price {

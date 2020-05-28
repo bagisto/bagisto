@@ -59,9 +59,11 @@ class GuestCheckoutCest
         $I->assertEquals($example['globalConfig'],
             core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout'));
         $I->amOnRoute('shop.home.index');
-        $I->see($product->name, '//div[@class="product-information"]/div[@class="product-name"]');
-        $I->click(__('shop::app.products.add-to-cart'),
-            '//form[input[@name="product_id"][@value="' . $product->id . '"]]/button');
+        $I->sendAjaxPostRequest('/checkout/cart/add/' . $product->id, [
+            '_token' => session('_token'),
+            'product_id' => $product->id,
+            'quantity' => 1
+        ]);
 
         $I->amOnRoute('shop.checkout.cart.index');
         $I->see('Shopping Cart', '//div[@class="title"]');

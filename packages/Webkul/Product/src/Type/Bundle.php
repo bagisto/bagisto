@@ -70,6 +70,11 @@ class Bundle extends AbstractType
     protected $isChildrenCalculated = true;
 
     /**
+     * Product Options
+     */
+    protected $productOptions = [];
+
+    /**
      * Create a new product type instance.
      *
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
@@ -537,29 +542,32 @@ class Bundle extends AbstractType
     {
         $bundleOptionQuantities = $data['bundle_option_qty'] ?? [];
 
-        foreach ($data['bundle_options'] as $optionId => $optionProductIds) {
-            $option = $this->productBundleOptionRepository->find($optionId);
+        $productBundleOptions = $this->productBundleOptionRepository
+            ->whereIn('id', array_keys($data['bundle_options']))
+            ->orderBy('sort_order')
+            ->get();
 
+        foreach ($productBundleOptions as $option) {
             $labels = [];
 
-            foreach ($optionProductIds as $optionProductId) {
+            foreach ($data['bundle_options'][$option->id] as $optionProductId) {
                 if (! $optionProductId) {
                     continue;
                 }
 
                 $optionProduct = $this->productBundleOptionProductRepository->find($optionProductId);
 
-                $qty = $data['bundle_option_qty'][$optionId] ?? $optionProduct->qty;
+                $qty = $data['bundle_option_qty'][$option->id] ?? $optionProduct->qty;
 
-                if (! isset($data['bundle_option_qty'][$optionId])) {
-                    $bundleOptionQuantities[$optionId] = $qty;
+                if (! isset($data['bundle_option_qty'][$option->id])) {
+                    $bundleOptionQuantities[$option->id] = $qty;
                 }
 
                 $labels[] = $qty . ' x ' . $optionProduct->product->name . ' ' . core()->currency($optionProduct->product->getTypeInstance()->getMinimalPrice());
             }
 
             if (count($labels)) {
-                $data['attributes'][$option->id] = [
+                $data['attributes'][] = [
                     'attribute_name' => $option->label,
                     'option_id'      => $option->id,
                     'option_label'   => implode(', ', $labels),
@@ -632,5 +640,16 @@ class Bundle extends AbstractType
         $item->additional = $this->getAdditionalOptions($item->additional);
 
         $item->save();
+    }
+
+    /**
+     * get product options
+    */
+    public function getProductOptions($product = "")
+    {
+        $bundleOption = app('Webkul\Product\Helpers\BundleOption');
+        $options = $bundleOption->getProductOptions($product);
+
+        return $options;
     }
 }

@@ -1,3 +1,8 @@
+<?php
+/** @var array $selectedOptionIds */
+/** @var \Webkul\CartRule\Models\CartRule $cartRule */
+?>
+
 @extends('admin::layouts.content')
 
 @section('page_title')
@@ -535,10 +540,10 @@
                                 'operator': '<=',
                                 'label': '{{ __('admin::app.promotions.cart-rules.equals-or-less-than') }}'
                             }, {
-                                'operator': '<=',
+                                'operator': '>',
                                 'label': '{{ __('admin::app.promotions.cart-rules.greater-than') }}'
                             }, {
-                                'operator': '<=',
+                                'operator': '<',
                                 'label': '{{ __('admin::app.promotions.cart-rules.less-than') }}'
                             }],
                         'decimal': [{

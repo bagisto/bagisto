@@ -112,6 +112,8 @@
                 }
 
                 .right-vc-header {
+                    position: relative;
+                    z-index: 2;
                     display: table;
                     text-align: right;
                     height: $header-height;
@@ -532,6 +534,21 @@
                 }
             }
         }
+
+        .arrow {
+            &.left,
+            &.right {
+                display: none
+            }
+        }
+
+        .thumb-list {
+            .thumb-frame {
+                > .bg-image {
+                    background-size: contain;
+                }
+            }
+        }
     }
 
     .review-page-container {
@@ -717,6 +734,8 @@
 
                     .rango-arrow-right {
                         float: right;
+                        font-size: 20px;
+                        padding-top: 5px;
                         padding-right: 15px;
                     }
 
@@ -863,6 +882,11 @@
 
         .actions {
             margin-top: 7px !important;
+        }
+
+        .continue-shopping,
+        .empty-cart-message {
+            padding: 0;
         }
     }
 

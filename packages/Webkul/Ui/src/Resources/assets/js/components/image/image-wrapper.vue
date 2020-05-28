@@ -67,8 +67,18 @@
             var this_this = this;
 
             if(this.multiple) {
-                if(this.images.length) {
+                if (this.images.length) {
                     this.images.forEach(function(image) {
+                        this_this.items.push(image)
+
+                        this_this.imageCount++;
+                    });
+                } else if (this.images.length == undefined && typeof this.images == 'object') {
+                    var images = Object.keys(this.images).map(key => { 
+                        return this.images[key]; 
+                    }); 
+
+                    images.forEach(function(image) {
                         this_this.items.push(image)
 
                         this_this.imageCount++;

@@ -1,4 +1,4 @@
-@extends('address::admin.layouts.content')
+@extends('admin::layouts.content')
 
 @section('page_title')
     {{ __('address::app.admin.addresses.title-orders', ['customer_name' => $customer->first_name . ' ' . $customer->last_name]) }}

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Functional\Cart;
+namespace Tests\Functional\Shop;
 
 use FunctionalTester;
 use Illuminate\Support\Facades\Config;
@@ -15,6 +15,9 @@ use Cart;
 class CartTaxesCest
 {
     public $country;
+
+    private const CART_TOTAL_PRECISION = 2;
+    private const TAX_AMOUNT_PRECISION = 2;
 
     function _before(FunctionalTester $I)
     {
@@ -62,7 +65,7 @@ class CartTaxesCest
         $product2 = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT, $config2);
 
         $prod1Quantity = $I->fake()->numberBetween(9, 30);
-        // quantity of product1 should be not even
+        // quantity of product1 should be odd
         if ($prod1Quantity % 2 !== 0) {
             $prod1Quantity -= 1;
         }
@@ -79,10 +82,15 @@ class CartTaxesCest
             'quantity'   => 1,
         ]);
 
+        $expectedTaxAmount1 = round(
+            round(1 * $product1->price, self::CART_TOTAL_PRECISION)
+            * $tax1->tax_rate / 100,
+            self::TAX_AMOUNT_PRECISION
+        );
+
         $I->amOnPage('/checkout/cart');
         $I->see('Tax ' . $tax1->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax1->tax_rate));
-        $I->see(
-            core()->currency(round($product1->price * $tax1->tax_rate / 100, 2)),
+        $I->see(core()->currency($expectedTaxAmount1),
             '#basetaxamount-' . core()->taxRateAsIdentifier($tax1->tax_rate)
         );
 
@@ -92,10 +100,15 @@ class CartTaxesCest
             'quantity'   => $prod1Quantity,
         ]);
 
+        $expectedTaxAmount1 = round(
+            round((1 + $prod1Quantity) * $product1->price, self::CART_TOTAL_PRECISION)
+            * $tax1->tax_rate / 100,
+            self::TAX_AMOUNT_PRECISION
+        );
+
         $I->amOnPage('/checkout/cart');
         $I->see('Tax ' . $tax1->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax1->tax_rate));
-        $I->see(
-            core()->currency(round(($prod1Quantity + 1) * $product1->price * $tax1->tax_rate / 100, 2)),
+        $I->see(core()->currency($expectedTaxAmount1),
             '#basetaxamount-' . core()->taxRateAsIdentifier($tax1->tax_rate)
         );
 
@@ -105,38 +118,40 @@ class CartTaxesCest
             'quantity'   => $prod2Quantity,
         ]);
 
+        $expectedTaxAmount2 = round(
+            round($prod2Quantity * $product2->price, self::CART_TOTAL_PRECISION)
+            * $tax2->tax_rate / 100,
+            self::TAX_AMOUNT_PRECISION
+        );
+
         $I->amOnPage('/checkout/cart');
         $I->see('Tax ' . $tax1->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax1->tax_rate));
-        $taxAmount1 = round(($prod1Quantity + 1) * $product1->price * $tax1->tax_rate / 100, 2);
-        $I->see(core()->currency($taxAmount1), '#basetaxamount-' . core()->taxRateAsIdentifier($tax1->tax_rate));
+        $I->see(core()->currency($expectedTaxAmount1), '#basetaxamount-' . core()->taxRateAsIdentifier($tax1->tax_rate));
 
         $I->see('Tax ' . $tax2->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax2->tax_rate));
-        $taxAmount2 = round($prod2Quantity * $product2->price * $tax2->tax_rate / 100, 2);
-        $I->see(core()->currency($taxAmount2), '#basetaxamount-' . core()->taxRateAsIdentifier($tax2->tax_rate));
+        $I->see(core()->currency($expectedTaxAmount2), '#basetaxamount-' . core()->taxRateAsIdentifier($tax2->tax_rate));
 
         $cart = Cart::getCart();
 
         $I->assertEquals(2, $cart->items_count);
         $I->assertEquals((float)($prod1Quantity + 1 + $prod2Quantity), $cart->items_qty);
-        $I->assertEquals($taxAmount1 + $taxAmount2, $cart->tax_total);
+        $I->assertEquals(round($expectedTaxAmount1 + $expectedTaxAmount2, self::TAX_AMOUNT_PRECISION), $cart->tax_total);
 
         Cart::removeItem($cart->items[1]->id);
 
         $I->amOnPage('/checkout/cart');
         $I->amOnPage('/checkout/cart');
         $I->see('Tax ' . $tax1->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax1->tax_rate));
-        $taxAmount1 = round(($prod1Quantity + 1) * $product1->price * $tax1->tax_rate / 100, 2);
-        $I->see(core()->currency($taxAmount1), '#basetaxamount-' . core()->taxRateAsIdentifier($tax1->tax_rate));
+        $I->see(core()->currency($expectedTaxAmount1), '#basetaxamount-' . core()->taxRateAsIdentifier($tax1->tax_rate));
 
         $I->dontSee('Tax ' . $tax2->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax2->tax_rate));
-        $taxAmount2 = round($prod2Quantity * $product2->price * $tax2->tax_rate / 100, 2);
-        $I->dontSee(core()->currency($taxAmount2), '#basetaxamount-' . core()->taxRateAsIdentifier($tax2->tax_rate));
+        $I->dontSee(core()->currency($expectedTaxAmount2), '#basetaxamount-' . core()->taxRateAsIdentifier($tax2->tax_rate));
 
         $cart = Cart::getCart();
 
         $I->assertEquals(1, $cart->items_count);
         $I->assertEquals((float)($prod1Quantity + 1), $cart->items_qty);
-        $I->assertEquals($taxAmount1, $cart->tax_total);
+        $I->assertEquals($expectedTaxAmount1, $cart->tax_total);
     }
 
     public function checkCartWithMultipleZipRangeBasedTaxes(FunctionalTester $I): void
@@ -233,6 +248,28 @@ class CartTaxesCest
             'quantity'   => 1,
         ]);
 
+        $expectedTaxAmount11 = round(
+            round(1 * $product1->price, self::CART_TOTAL_PRECISION)
+            * $tax11->tax_rate / 100,
+            self::TAX_AMOUNT_PRECISION
+        );
+        $expectedTaxAmount12 = round(
+            round(1 * $product1->price, self::CART_TOTAL_PRECISION)
+            * $tax12->tax_rate / 100,
+            self::TAX_AMOUNT_PRECISION
+        );
+
+        $expectedTaxAmount21 = round(
+            round(1 * $product2->price, self::CART_TOTAL_PRECISION)
+            * $tax21->tax_rate / 100,
+            self::TAX_AMOUNT_PRECISION
+        );
+        $expectedTaxAmount22 = round(
+            round(1 * $product2->price, self::CART_TOTAL_PRECISION)
+            * $tax22->tax_rate / 100,
+            self::TAX_AMOUNT_PRECISION
+        );
+
         Cart::saveCustomerAddress(
             [
                 'billing'  => [
@@ -256,26 +293,22 @@ class CartTaxesCest
         $I->amOnPage('/checkout/cart');
 
         $I->see('Tax ' . $tax11->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax11->tax_rate));
-        $I->see(
-            core()->currency(round($product1->price * $tax11->tax_rate / 100, 2)),
+        $I->see(core()->currency($expectedTaxAmount11),
             '#basetaxamount-' . core()->taxRateAsIdentifier($tax11->tax_rate)
         );
 
         $I->dontSee('Tax ' . $tax12->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax12->tax_rate));
-        $I->dontSee(
-            core()->currency(round($product1->price * $tax12->tax_rate / 100, 2)),
+        $I->dontSee(core()->currency($expectedTaxAmount12),
             '#basetaxamount-' . core()->taxRateAsIdentifier($tax12->tax_rate)
         );
 
         $I->dontSee('Tax ' . $tax21->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax21->tax_rate));
-        $I->dontSee(
-            core()->currency(round($product2->price * $tax21->tax_rate / 100, 2)),
+        $I->dontSee(core()->currency($expectedTaxAmount21),
             '#basetaxamount-' . core()->taxRateAsIdentifier($tax21->tax_rate)
         );
 
         $I->dontSee('Tax ' . $tax22->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax22->tax_rate));
-        $I->dontSee(
-            core()->currency(round($product2->price * $tax22->tax_rate / 100, 2)),
+        $I->dontSee(core()->currency($expectedTaxAmount22),
             '#basetaxamount-' . core()->taxRateAsIdentifier($tax22->tax_rate)
         );
 
@@ -288,34 +321,27 @@ class CartTaxesCest
         $I->amOnPage('/checkout/cart');
 
         $I->see('Tax ' . $tax11->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax11->tax_rate));
-        $I->see(
-            core()->currency(round($product1->price * $tax11->tax_rate / 100, 2)),
+        $I->see(core()->currency($expectedTaxAmount11),
             '#basetaxamount-' . core()->taxRateAsIdentifier($tax11->tax_rate)
         );
 
         $I->dontSee('Tax ' . $tax12->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax12->tax_rate));
-        $I->dontSee(
-            core()->currency(round($product1->price * $tax12->tax_rate / 100, 2)),
+        $I->dontSee(core()->currency($expectedTaxAmount12),
             '#basetaxamount-' . core()->taxRateAsIdentifier($tax12->tax_rate)
         );
 
         $I->see('Tax ' . $tax21->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax21->tax_rate));
-        $I->see(
-            core()->currency(round($product2->price * $tax21->tax_rate / 100, 2)),
+        $I->see(core()->currency($expectedTaxAmount21),
             '#basetaxamount-' . core()->taxRateAsIdentifier($tax21->tax_rate)
         );
 
         $I->dontSee('Tax ' . $tax22->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax22->tax_rate));
-        $I->dontSee(
-            core()->currency(round($product2->price * $tax22->tax_rate / 100, 2)),
+        $I->dontSee(core()->currency($expectedTaxAmount22),
             '#basetaxamount-' . core()->taxRateAsIdentifier($tax22->tax_rate)
         );
 
-        $taxAmount1 = round($product1->price * $tax11->tax_rate / 100, 2);
-        $I->see(core()->currency($taxAmount1), '#basetaxamount-' . core()->taxRateAsIdentifier($tax11->tax_rate));
-
-        $taxAmount2 = round($product2->price * $tax21->tax_rate / 100, 2);
-        $I->see(core()->currency($taxAmount2), '#basetaxamount-' . core()->taxRateAsIdentifier($tax21->tax_rate));
+        $I->see(core()->currency($expectedTaxAmount11), '#basetaxamount-' . core()->taxRateAsIdentifier($tax11->tax_rate));
+        $I->see(core()->currency($expectedTaxAmount21), '#basetaxamount-' . core()->taxRateAsIdentifier($tax21->tax_rate));
 
 
         $I->wantToTest('customer address with postcode in range of 50000 - 89999');
@@ -349,20 +375,17 @@ class CartTaxesCest
         $I->amOnPage('/checkout/cart');
 
         $I->dontSee('Tax ' . $tax11->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax11->tax_rate));
-        $I->dontSee(
-            core()->currency(round($product1->price * $tax11->tax_rate / 100, 2)),
+        $I->dontSee(core()->currency($expectedTaxAmount11),
             '#basetaxamount-' . core()->taxRateAsIdentifier($tax11->tax_rate)
         );
 
         $I->see('Tax ' . $tax12->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax12->tax_rate));
-        $I->see(
-            core()->currency(round($product1->price * $tax12->tax_rate / 100, 2)),
+        $I->see(core()->currency($expectedTaxAmount12),
             '#basetaxamount-' . core()->taxRateAsIdentifier($tax12->tax_rate)
         );
 
         $I->dontSee('Tax ' . $tax21->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax21->tax_rate));
-        $I->dontSee(
-            core()->currency(round($product2->price * $tax21->tax_rate / 100, 2)),
+        $I->dontSee(core()->currency($expectedTaxAmount21),
             '#basetaxamount-' . core()->taxRateAsIdentifier($tax21->tax_rate)
         );
 
@@ -372,11 +395,8 @@ class CartTaxesCest
             '#basetaxamount-' . core()->taxRateAsIdentifier($tax22->tax_rate)
         );
 
-        $taxAmount1 = round($product1->price * $tax12->tax_rate / 100, 2);
-        $I->see(core()->currency($taxAmount1), '#basetaxamount-' . core()->taxRateAsIdentifier($tax12->tax_rate));
-
-        $taxAmount2 = round($product2->price * $tax22->tax_rate / 100, 2);
-        $I->see(core()->currency($taxAmount2), '#basetaxamount-' . core()->taxRateAsIdentifier($tax22->tax_rate));
+        $I->see(core()->currency($expectedTaxAmount12), '#basetaxamount-' . core()->taxRateAsIdentifier($tax12->tax_rate));
+        $I->see(core()->currency($expectedTaxAmount22), '#basetaxamount-' . core()->taxRateAsIdentifier($tax22->tax_rate));
 
         $I->wantToTest('customer address with postcode in range of 90000 - 99000');
         $I->wanttoTest('as we dont have any taxes in this zip range');
@@ -410,26 +430,22 @@ class CartTaxesCest
         $I->amOnPage('/checkout/cart');
 
         $I->dontSee('Tax ' . $tax11->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax11->tax_rate));
-        $I->dontSee(
-            core()->currency(round($product1->price * $tax11->tax_rate / 100, 2)),
+        $I->dontSee(core()->currency($expectedTaxAmount11),
             '#basetaxamount-' . core()->taxRateAsIdentifier($tax11->tax_rate)
         );
 
         $I->dontSee('Tax ' . $tax12->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax12->tax_rate));
-        $I->dontSee(
-            core()->currency(round($product1->price * $tax12->tax_rate / 100, 2)),
+        $I->dontSee(core()->currency($expectedTaxAmount12),
             '#basetaxamount-' . core()->taxRateAsIdentifier($tax12->tax_rate)
         );
 
         $I->dontSee('Tax ' . $tax21->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax21->tax_rate));
-        $I->dontSee(
-            core()->currency(round($product2->price * $tax21->tax_rate / 100, 2)),
+        $I->dontSee(core()->currency($expectedTaxAmount21),
             '#basetaxamount-' . core()->taxRateAsIdentifier($tax21->tax_rate)
         );
 
         $I->dontSee('Tax ' . $tax22->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax22->tax_rate));
-        $I->dontSee(
-            core()->currency(round($product2->price * $tax22->tax_rate / 100, 2)),
+        $I->dontSee(core()->currency($expectedTaxAmount22),
             '#basetaxamount-' . core()->taxRateAsIdentifier($tax22->tax_rate)
         );
     }

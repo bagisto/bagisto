@@ -42,6 +42,26 @@
 
             <ul class="right-content-menu">
 
+                {!! view_render_event('bagisto.shop.layout.header.comppare-item.before') !!}
+
+                <li class="compare-dropdown-container">
+                    <a
+                        @auth('customer')
+                            href="{{ route('velocity.customer.product.compare') }}"
+                        @endauth
+
+                        @guest('customer')
+                            href="{{ route('velocity.product.compare') }}"
+                        @endguest
+                        style="color: #242424;"
+                        >
+                        <span class="name">{{ __('velocity::app.customer.compare.text') }}</span>
+
+                    </a>
+                </li>
+
+                {!! view_render_event('bagisto.shop.layout.header.compare-item.after') !!}
+
                 {!! view_render_event('bagisto.shop.layout.header.currency-item.before') !!}
 
                 @if (core()->getCurrentChannel()->currencies->count() > 1)

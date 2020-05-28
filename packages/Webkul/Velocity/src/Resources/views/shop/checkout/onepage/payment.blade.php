@@ -2,9 +2,11 @@
     <div class="form-container">
         <accordian :title="'{{ __('shop::app.checkout.payment-methods') }}'" :active="true">
             <div class="form-header mb-30" slot="header">
+                
                 <h3 class="fw6 display-inbl">
                    {{ __('shop::app.checkout.onepage.payment-methods') }}
                 </h3>
+
                 <i class="rango-arrow"></i>
             </div>
 
@@ -17,13 +19,13 @@
                         <div>
                             <label class="radio-container">
                                 <input
-                                    v-validate="'required'"
                                     type="radio"
-                                    id="{{ $payment['method'] }}"
                                     name="payment[method]"
-                                    value="{{ $payment['method'] }}"
+                                    v-validate="'required'"
                                     v-model="payment.method"
                                     @change="methodSelected()"
+                                    id="{{ $payment['method'] }}"
+                                    value="{{ $payment['method'] }}"
                                     data-vv-as="&quot;{{ __('shop::app.checkout.onepage.payment-method') }}&quot;" />
 
                                 <span class="checkmark"></span>

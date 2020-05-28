@@ -3,6 +3,7 @@
 namespace Webkul\Customer\Http\Controllers;
 
 use Hash;
+use Illuminate\Support\Facades\Event;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
 
@@ -114,7 +115,12 @@ class CustomerController extends Controller
             }
         }
 
-        if ($this->customerRepository->update($data, $id)) {
+        Event::dispatch('customer.update.before');
+
+        if ($customer = $this->customerRepository->update($data, $id)) {
+
+            Event::dispatch('customer.update.after', $customer);
+
             Session()->flash('success', trans('shop::app.customer.account.profile.edit-success'));
 
             return redirect()->route($this->_config['redirect']);

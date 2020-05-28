@@ -16,7 +16,6 @@
     foreach ($images as $key => $image) {
         array_push($productImages, $image['medium_image_url']);
     }
-
 @endphp
 
 @section('page_title')
@@ -25,7 +24,36 @@
 
 @section('seo')
     <meta name="description" content="{{ trim($product->meta_description) != "" ? $product->meta_description : str_limit(strip_tags($product->description), 120, '') }}"/>
+
     <meta name="keywords" content="{{ $product->meta_keywords }}"/>
+
+    @if (core()->getConfigData('catalog.rich_snippets.products.enable'))
+        <script type="application/ld+json">
+            {!! app('Webkul\Product\Helpers\SEO')->getProductJsonLd($product) !!}
+        </script>
+    @endif
+
+    <?php $productBaseImage = app('Webkul\Product\Helpers\ProductImage')->getProductBaseImage($product); ?>
+
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta name="twitter:title" content="{{ $product->name }}" />
+
+    <meta name="twitter:description" content="{{ $product->description }}" />
+
+    <meta name="twitter:image:alt" content="" />
+
+    <meta name="twitter:image" content="{{ $productBaseImage['medium_image_url'] }}" />
+
+    <meta property="og:type" content="og:product" />
+
+    <meta property="og:title" content="{{ $product->name }}" />
+
+    <meta property="og:image" content="{{ $productBaseImage['medium_image_url'] }}" />
+
+    <meta property="og:description" content="{{ $product->description }}" />
+
+    <meta property="og:url" content="{{ route('shop.productOrCategory.index', $product->url_key) }}" />
 @stop
 
 @push('css')
@@ -73,8 +101,8 @@
                                     @if ($total)
                                         <div class="reviews col-lg-12">
                                             <star-ratings
-                                                :ratings="{{ $avgStarRating }}"
                                                 push-class="mr5"
+                                                :ratings="{{ $avgStarRating }}"
                                             ></star-ratings>
 
                                             <div class="reviews">
@@ -180,6 +208,7 @@
         <form
             method="POST"
             id="product-form"
+            @click="onSubmit($event)"
             action="{{ route('cart.add', $product->product_id) }}">
 
             <input type="hidden" name="is_buy_now" v-model="is_buy_now">
@@ -193,11 +222,11 @@
         </form>
     </script>
 
-    <script type="text/javascript">
+    <script>
         Vue.component('product-view', {
             inject: ['$validator'],
             template: '#product-view-template',
-            data: function() {
+            data: function () {
                 return {
                     slot: true,
                     is_buy_now: 0,
@@ -209,6 +238,7 @@
 
                 let currentProductId = '{{ $product->url_key }}';
                 let existingViewed = window.localStorage.getItem('recentlyViewed');
+
                 if (! existingViewed) {
                     existingViewed = [];
                 } else {
@@ -238,15 +268,15 @@
             },
 
             methods: {
-                onSubmit: function(e) {
-                    if (e.target.getAttribute('type') != 'submit')
+                onSubmit: function(event) {
+                    if (event.target.getAttribute('type') != 'submit')
                         return;
 
-                    e.preventDefault();
+                    event.preventDefault();
 
                     this.$validator.validateAll().then(result => {
                         if (result) {
-                            this.is_buy_now = e.target.classList.contains('buynow') ? 1 : 0;
+                            this.is_buy_now = event.target.classList.contains('buynow') ? 1 : 0;
 
                             setTimeout(function() {
                                 document.getElementById('product-form').submit();
@@ -291,7 +321,6 @@
                             ]
                         });
                     }, 0);
-
                 }
             }
         });

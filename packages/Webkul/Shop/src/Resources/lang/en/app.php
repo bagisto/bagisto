@@ -120,16 +120,6 @@ return [
             'verified' => 'Your account has been verified, try to login now.',
             'verify-failed' => 'We cannot verify your mail account.',
             'dont-have-account' => 'You do not have account with us.',
-            'success' => 'Account Created Successfully',
-            'success-verify' => 'Account Created Successfully, an e-mail has been sent for verification.',
-            'success-verify-email-unsent' => 'Account created successfully, but verification e-mail unsent',
-            'failed' => 'Error! Cannot Create Your Account, Try Again Later',
-            'already-verified' => 'Your Account is already verified Or Please Try Sending A New Verification Email Again',
-            'verification-not-sent' => 'Error! Problem In Sending Verification Email, Try Again Later',
-            'verification-sent' => 'Verification Email Sent',
-            'verified' => 'Your Account Has Been Verified, Try To Login Now',
-            'verify-failed' => 'We Cannot Verify Your Mail Account',
-            'dont-have-account' => 'You Do Not Have Account With Us',
             'customer-registration' => 'Customer Registered Successfully'
         ],
 
@@ -323,6 +313,9 @@ return [
                     'individual-refund' => 'Refund #:refund_id',
                     'adjustment-refund' => 'Adjustment Refund',
                     'adjustment-fee' => 'Adjustment Fee',
+                    'cancel-btn-title' => 'Cancel',
+                    'tracking-number' => 'Tracking Number',
+                    'cancel-confirm-msg' => 'Are you sure you want to cancel this order ?'
                 ]
             ],
 
@@ -378,6 +371,7 @@ return [
         'layered-nav-title' => 'Shop By',
         'price-label' => 'As low as',
         'remove-filter-link-title' => 'Clear All',
+        'filter-to' => 'to',
         'sort-by' => 'Sort By',
         'from-a-z' => 'From A-Z',
         'from-z-a' => 'From Z-A',
@@ -402,6 +396,7 @@ return [
         'new' => 'New',
         'empty' => 'No products available in this category',
         'add-to-cart' => 'Add To Cart',
+        'book-now' => 'Book Now',
         'buy-now' => 'Buy Now',
         'whoops' => 'Whoops!',
         'quantity' => 'Quantity',
@@ -420,7 +415,8 @@ return [
         'choose-selection' => 'Choose a selection',
         'your-customization' => 'Your Customization',
         'total-amount' => 'Total Amount',
-        'none' => 'None'
+        'none' => 'None',
+        'available-for-order' => 'Available for Order'
     ],
 
     // 'reviews' => [
@@ -470,7 +466,10 @@ return [
             'cart-subtotal' => 'Cart Subtotal',
             'cart-remove-action' => 'Do you really want to do this ?',
             'partial-cart-update' => 'Only some of the product(s) were updated',
-            'link-missing' => ''
+            'link-missing' => '',
+            'event' => [
+                'expired' => 'This event has been expired.'
+            ]
         ],
 
         'onepage' => [
@@ -479,6 +478,7 @@ return [
             'shipping' => 'Shipping',
             'payment' => 'Payment',
             'complete' => 'Complete',
+            'review' => 'Review',
             'billing-address' => 'Billing Address',
             'sign-in' => 'Sign In',
             'company-name' => 'Company Name',
@@ -576,6 +576,15 @@ return [
             'final-summary' => 'Thanks for showing your interest in our store we will send you tracking number once it shipped',
             'help' => 'If you need any kind of help please contact us at :support_email',
             'thanks' => 'Thanks!',
+            
+            'comment' => [
+                'subject' => 'New comment added to your order',
+                'dear' => 'Dear :customer_name',
+                'final-summary' => 'Thanks for showing your interest in our store',
+                'help' => 'If you need any kind of help please contact us at :support_email',
+                'thanks' => 'Thanks!',
+            ],
+
             'cancel' => [
                 'subject' => 'Order Cancel Confirmation',
                 'heading' => 'Order Cancelled',
