@@ -272,6 +272,10 @@ class CartRuleRepository extends Repository
                         'key'   => 'cart_item|base_total',
                         'type'  => 'price',
                         'label' => trans('admin::app.promotions.cart-rules.subtotal'),
+                    ], [
+                        'key'   => 'cart_item|additional',
+                        'type'  => 'text',
+                        'label' => trans('admin::app.promotions.cart-rules.additional'),
                     ]
                 ]
             ], [

@@ -1010,6 +1010,7 @@ return [
             'choose-condition-to-add' => 'Choose a condition to add',
             'cart-attribute' => 'Cart Attribute',
             'subtotal' => 'Subtotal',
+            'additional' => 'Additional Information',
             'total-items-qty' => 'Total Items Qty',
             'total-weight' => 'Total Weight',
             'payment-method' => 'Payment Method',

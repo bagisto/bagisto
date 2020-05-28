@@ -1010,6 +1010,7 @@ return [
             'choose-condition-to-add' => 'Conditie toevoegen',
             'cart-attribute' => 'Winkelwagenattribuut',
             'subtotal' => 'Subtotaal',
+            'additional' => 'Additional Information',
             'total-items-qty' => 'Totaal aantal artikelen',
             'total-weight' => 'Totale gewicht',
             'payment-method' => 'Betaalmethode',
