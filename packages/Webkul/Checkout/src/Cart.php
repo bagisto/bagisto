@@ -1146,8 +1146,12 @@ class Cart
     /**
      * Remove item from cart, whose product is inactive
      * and returns true, if so.
+     *
+     * @param \Webkul\Checkout\Models\CartItem $item
+     *
+     * @return bool
      */
-    private function removeInactiveItem($item): bool
+    private function removeInactiveItem(\Webkul\Checkout\Models\CartItem $item): bool
     {
         if (! $item) {
             return false;
