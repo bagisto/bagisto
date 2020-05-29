@@ -499,7 +499,7 @@ class Cart
         $this->saveAddressesWhenRequested($data, $billingAddressData, $shippingAddressData);
 
         $this->linkAddresses($cart, $billingAddressData, $shippingAddressData);
-        
+
         $this->assignCustomerFields($cart);
 
         $cart->save();
@@ -765,7 +765,7 @@ class Cart
             return true;
         }
 
-        if (! $this->isItemsHaveSufficientQuantity()) {
+        if (! $this->checkCartItems()) {
             return true;
         }
 
@@ -773,19 +773,41 @@ class Cart
     }
 
     /**
-     * Checks if all cart items have sufficient quantity.
+     * Checks all cart items for:
+     * - product is active (if not, cart item will be removed)
+     * - product has sufficient quantity
      *
      * @return bool
      */
-    public function isItemsHaveSufficientQuantity(): bool
+    public function checkCartItems(): bool
     {
         foreach ($this->getCart()->items as $item) {
+            if ($this->removeInactiveItem($item)) {
+                continue;
+            }
+
             if (! $this->isItemHaveQuantity($item)) {
                 return false;
             }
         }
 
         return true;
+    }
+
+    /**
+     * Remove cart items, whose product is inactive
+     */
+    public function removeInactiveItems()
+    {
+        if (! $cart = $this->getCart()) {
+            return;
+        }
+
+        foreach ($cart->items as $item) {
+            if ($this->removeInactiveItem($item)) {
+                continue;
+            }
+        }
     }
 
     /**
@@ -1119,6 +1141,28 @@ class Cart
         }
 
         return $attributes;
+    }
+
+    /**
+     * Remove item from cart, whose product is inactive
+     * and returns true, if so.
+     */
+    private function removeInactiveItem($item): bool
+    {
+        if (! $item) {
+            return false;
+        }
+
+        if (! $this->getCart()) {
+            return false;
+        }
+
+        if ($item->product && $item->product->status === 0) {
+            $this->removeItem($item->id);
+            return true;
+        }
+
+        return false;
     }
 
     /**
