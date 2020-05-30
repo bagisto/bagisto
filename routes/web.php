@@ -10,3 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/redirect', 'Auth\LoginController@redirectToProvider');
+Route::get('/callback', 'Auth\LoginController@handleProviderCallback');
