@@ -43,7 +43,7 @@ class CartController extends Controller
     public function __construct(
         WishlistRepository $wishlistRepository,
         ProductRepository $productRepository,
-        OrderRepository $orderRepository,
+        OrderRepository $orderRepository
     )
     {
         $this->middleware('customer')->only(['moveToWishlist','reorder']);
