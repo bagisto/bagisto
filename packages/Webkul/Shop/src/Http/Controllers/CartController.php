@@ -132,11 +132,11 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
     */
-    public function reorder($orderId)
+    public function reorder($id)
     {
         $order = $this->orderRepository->findOneWhere([
             'customer_id' => auth()->guard('customer')->user()->id,
-            'id'          => $orderId,
+            'id'          => $id,
         ]);
 
         foreach ($order->items as $item) {
