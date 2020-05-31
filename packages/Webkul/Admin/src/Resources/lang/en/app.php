@@ -371,7 +371,7 @@ return [
             'total-refunded' => 'Total Refunded',
             'total-due' => 'Total Due',
             'cancel-confirm-msg' => 'Are you sure you want to cancel this order ?',
-            'reorder-confirm-msg' => 'Do you really want to perform this action ?',
+            'reorder-confirm-msg' => 'Are you sure you want to do this ?',
             'refund-btn-title' => 'Refund',
             'refunds' => 'Refunds',
             'comment-added-success' => 'Comment addded successfully.',

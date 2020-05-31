@@ -313,6 +313,7 @@ return [
                     'individual-refund' => 'Rückerstattung #:refund_id',
                     'adjustment-refund' => 'Anpassungsrückerstattung',
                     'adjustment-fee' => 'Anpassungsgebühr',
+                    'reorder-btn-title' => 'Nachbestellen',
                 ]
             ],
 

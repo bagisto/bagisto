@@ -12,12 +12,6 @@ use Cart;
 class CartController extends Controller
 {
     /**
-     * OrderrRepository object
-     *
-     * @var \Webkul\Sales\Repositories\OrderRepository
-     */
-    protected $orderRepository;
-    /**
      * WishlistRepository Repository object
      *
      * @var \Webkul\Customer\Repositories\WishlistRepository
@@ -32,25 +26,33 @@ class CartController extends Controller
     protected $productRepository;
 
     /**
+     * OrderrRepository object
+     *
+     * @var \Webkul\Sales\Repositories\OrderRepository
+     */
+    protected $orderRepository;
+
+    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Customer\Repositories\CartItemRepository  $wishlistRepository
      * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Order\Repositories\OrderRepository  $orderRepository
      * @return void
      */
     public function __construct(
-        OrderRepository $orderRepository,
         WishlistRepository $wishlistRepository,
-        ProductRepository $productRepository
+        ProductRepository $productRepository,
+        OrderRepository $orderRepository,
     )
     {
         $this->middleware('customer')->only(['moveToWishlist','reorder']);
 
-        $this->orderRepository = $orderRepository;
-
         $this->wishlistRepository = $wishlistRepository;
 
         $this->productRepository = $productRepository;
+
+        $this->orderRepository = $orderRepository;
 
         parent::__construct();
     }
@@ -123,6 +125,27 @@ class CartController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    /**
+     * Re add products to the cart according to order id
+     *
+     * @return \Illuminate\Http\Response
+    */
+    public function reorder($orderId)
+    {
+        $order = $this->orderRepository->findOneWhere([
+            'customer_id' => auth()->guard('customer')->user()->id,
+            'id'          => $orderId,
+        ]);
+
+        foreach ($order->items as $item) {
+            $slugOrPath = strtolower(str_replace(" ","-",$item->name));
+            $product = $this->productRepository->findBySlug($slugOrPath);
+            Cart::addProduct($product->product_id, ['product_id'=>$product->product_id,'quantity'=>$item->qty_ordered]); 
+        }
+
+        return redirect()->route('shop.checkout.cart.index');
     }
 
     /**
@@ -212,28 +235,6 @@ class CartController extends Controller
             'success' => true,
             'message' => trans('shop::app.checkout.total.remove-coupon'),
         ]);
-    }
-
-
-    /**
-     * Re add products to the cart according to order id
-     *
-     * @return \Illuminate\Http\Response
-    */
-    public function reorder($id)
-    {
-        $order = $this->orderRepository->findOneWhere([
-            'customer_id' => auth()->guard('customer')->user()->id,
-            'id'          => $id,
-        ]);
-
-        foreach ($order->items as $item) 
-        {
-            $slugOrPath = strtolower(str_replace(" ","-",$item->name));
-            $product = $this->productRepository->findBySlug($slugOrPath);
-            Cart::addProduct($product->product_id, ['product_id'=>$product->product_id,'quantity'=>$item->qty_ordered]); 
-        }
-        return redirect()->route('shop.checkout.cart.index');
     }
 
     /**

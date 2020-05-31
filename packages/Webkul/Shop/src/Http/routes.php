@@ -277,7 +277,7 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
 
                 Route::get('/orders/cancel/{id}', 'Webkul\Shop\Http\Controllers\OrderController@cancel')->name('customer.orders.cancel');
                 
-                  //reorder route
+                //Reorder route
                 Route::get('/orders/reorder/{id}', 'Webkul\Shop\Http\Controllers\CartController@reorder')->name('customer.orders.reorder');
 
                 /* Reviews route */

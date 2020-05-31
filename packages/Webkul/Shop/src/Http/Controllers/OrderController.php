@@ -15,6 +15,7 @@ class OrderController extends Controller
      * @var \Webkul\Product\Repositories\ProductRepository
      */
     protected $productRepository;
+
     /**
      * OrderrRepository object
      *
@@ -32,23 +33,24 @@ class OrderController extends Controller
     /**
      * Create a new controller instance.
      *
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      * @param  \Webkul\Order\Repositories\OrderRepository  $orderRepository
      * @param  \Webkul\Order\Repositories\InvoiceRepository  $invoiceRepository
      * @return void
      */
     public function __construct(
+        ProductRepository $productRepository,
         OrderRepository $orderRepository,
-        InvoiceRepository $invoiceRepository,
-        ProductRepository $productRepository
+        InvoiceRepository $invoiceRepository
     )
     {
         $this->middleware('customer');
 
+        $this->productRepository = $productRepository;
+
         $this->orderRepository = $orderRepository;
 
         $this->invoiceRepository = $invoiceRepository;
-
-        $this->productRepository = $productRepository;
 
         parent::__construct();
     }
@@ -71,7 +73,7 @@ class OrderController extends Controller
      */
     public function view($id)
     {
-        $can_reorder=1;
+        $can_reorder = true;
         $order = $this->orderRepository->findOneWhere([
             'customer_id' => auth()->guard('customer')->user()->id,
             'id'          => $id,
@@ -81,19 +83,14 @@ class OrderController extends Controller
             abort(404);
         }
 
-        foreach ($order->items as $item) 
-        {
+        foreach ($order->items as $item) {
             $slugOrPath = strtolower(str_replace(" ","-",$item->name));
             $product = $this->productRepository->findBySlug($slugOrPath);
-            if(!$product->isSaleable())
-            {
-                $can_reorder=0;
-            }
-
-            
+            if(!$product->isSaleable()){
+                $can_reorder = false;
+            }            
         }
         
-
         return view($this->_config['view'], compact('order', 'can_reorder'));
     }
 

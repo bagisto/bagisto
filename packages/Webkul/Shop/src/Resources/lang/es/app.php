@@ -297,6 +297,7 @@ return [
                     'ship-to' => 'Envío a',
                     'contact' => 'Contacto',
                     'tracking-number' => 'Tracking Number',
+                    'reorder-btn-title' => 'Reordenar',
                     'cancel-confirm-msg' => 'Estás segura de que deseas cancelar este pedido ?'
                 ]
             ],

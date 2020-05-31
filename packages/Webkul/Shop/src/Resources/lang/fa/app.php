@@ -313,6 +313,7 @@ return [
                     'individual-refund' => '#:refund_id بازپرداخت',
                     'adjustment-refund' => 'بازپرداخت تنظیم',
                     'adjustment-fee' => 'هزینه تنظیم',
+                    'reorder-btn-title' => 'Reorder',
                     'tracking-number' => 'Tracking Number',
                     'cancel-confirm-msg' => 'Are you sure you want to cancel this order ?'
                 ]
