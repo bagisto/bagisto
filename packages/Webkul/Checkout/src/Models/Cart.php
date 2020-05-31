@@ -48,7 +48,7 @@ class Cart extends Model implements CartContract
      */
     public function billing_address()
     {
-        return $this->addresses()->where('address_type', 'billing');
+        return $this->addresses()->where('address_type', CartAddress::ADDRESS_TYPE_BILLING);
     }
 
     /**
@@ -64,7 +64,7 @@ class Cart extends Model implements CartContract
      */
     public function shipping_address()
     {
-        return $this->addresses()->where('address_type', 'shipping');
+        return $this->addresses()->where('address_type', CartAddress::ADDRESS_TYPE_SHIPPING);
     }
 
     /**

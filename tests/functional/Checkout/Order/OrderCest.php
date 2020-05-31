@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Functional\Checkout\Cart;
+namespace Tests\Functional\Checkout\Order;
 
 use Faker\Factory;
 use FunctionalTester;
@@ -67,13 +67,13 @@ class OrderCest
         $I->seeResponseCodeIsSuccessful();
 
         $I->seeRecord(CartAddress::class, array_merge($addressData, [
-            'address_type' => 'shipping',
+            'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
             'cart_id'      => $mocks['cart']->id,
             'customer_id'  => $mocks['customer']->id,
         ]));
 
         $I->seeRecord(CartAddress::class, array_merge($addressData, [
-            'address_type' => 'billing',
+            'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
             'cart_id'      => $mocks['cart']->id,
             'customer_id'  => $mocks['customer']->id,
         ]));
@@ -128,13 +128,13 @@ class OrderCest
 
         $I->seeRecord(OrderAddress::class, array_merge($addressData, [
             'order_id'     => $order->id,
-            'address_type' => 'shipping',
+            'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
             'customer_id'  => $mocks['customer']->id,
         ]));
 
         $I->seeRecord(OrderAddress::class, array_merge($addressData, [
             'order_id'     => $order->id,
-            'address_type' => 'billing',
+            'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
             'customer_id'  => $mocks['customer']->id,
         ]));
 

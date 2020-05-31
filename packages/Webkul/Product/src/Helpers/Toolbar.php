@@ -27,7 +27,9 @@ class Toolbar extends AbstractProduct
      */
     public function getAvailableLimits()
     {
-        return [9, 15, 21, 28];
+        return core()->getConfigData('catalog.products.storefront.products_per_page')
+               ? explode(',', core()->getConfigData('catalog.products.storefront.products_per_page'))
+               : [9, 15, 21, 28];
     }
 
     /**
@@ -81,11 +83,18 @@ class Toolbar extends AbstractProduct
     public function isOrderCurrent($key)
     {
         $params = request()->input();
+        $orderDirection = $params['order'] ?? 'asc';
 
-        if (isset($params['sort']) && $key == $params['sort'] . '-' . $params['order']) {
+        if (isset($params['sort']) && $key == $params['sort'] . '-' . $orderDirection) {
             return true;
-        } elseif (! isset($params['sort']) && $key == 'created_at-desc') {
-            return true;
+        } elseif (! isset($params['sort'])) {
+            $sortBy = core()->getConfigData('catalog.products.storefront.sort_by')
+                   ? core()->getConfigData('catalog.products.storefront.sort_by')
+                   : 'created_at-asc';
+            
+            if ($key == $sortBy) {
+                return true;
+            }
         }
 
         return false;
@@ -138,6 +147,8 @@ class Toolbar extends AbstractProduct
             return $params['mode'];
         }
 
-        return 'grid';
+        return core()->getConfigData('catalog.products.storefront.mode')
+               ? core()->getConfigData('catalog.products.storefront.mode')
+               : 'grid';
     }
 }

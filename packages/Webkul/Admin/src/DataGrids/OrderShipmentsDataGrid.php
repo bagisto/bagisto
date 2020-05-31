@@ -3,6 +3,7 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
+use Webkul\Sales\Models\OrderAddress;
 use Webkul\Ui\DataGrid\DataGrid;
 
 class OrderShipmentsDataGrid extends DataGrid
@@ -14,9 +15,9 @@ class OrderShipmentsDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('shipments')
-            ->leftJoin('order_address as order_address_shipping', function($leftJoin) {
+            ->leftJoin('addresses as order_address_shipping', function($leftJoin) {
                 $leftJoin->on('order_address_shipping.order_id', '=', 'shipments.order_id')
-                         ->where('order_address_shipping.address_type', 'shipping');
+                         ->where('order_address_shipping.address_type', OrderAddress::ADDRESS_TYPE_SHIPPING);
             })
             ->leftJoin('orders as ors', 'shipments.order_id', '=', 'ors.id')
             ->leftJoin('inventory_sources as is', 'shipments.inventory_source_id', '=', 'is.id')

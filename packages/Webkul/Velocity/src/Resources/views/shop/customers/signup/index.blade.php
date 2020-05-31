@@ -58,6 +58,8 @@
                             </span>
                         </div>
 
+                        {!! view_render_event('bagisto.shop.customers.signup_form_controls.firstname.after') !!}
+
                         <div class="control-group" :class="[errors.has('last_name') ? 'has-error' : '']">
                             <label for="last_name" class="required label-style">
                                 {{ __('shop::app.customer.signup-form.lastname') }}
@@ -75,6 +77,8 @@
                                 @{{ errors.first('last_name') }}
                             </span>
                         </div>
+
+                        {!! view_render_event('bagisto.shop.customers.signup_form_controls.lastname.after') !!}
 
                         <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
                             <label for="email" class="required label-style">
@@ -94,6 +98,8 @@
                             </span>
                         </div>
 
+                        {!! view_render_event('bagisto.shop.customers.signup_form_controls.email.after') !!}
+
                         <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
                             <label for="password" class="required label-style">
                                 {{ __('shop::app.customer.signup-form.password') }}
@@ -112,6 +118,8 @@
                                 @{{ errors.first('password') }}
                             </span>
                         </div>
+
+                        {!! view_render_event('bagisto.shop.customers.signup_form_controls.password.after') !!}
 
                         <div class="control-group" :class="[errors.has('password_confirmation') ? 'has-error' : '']">
                             <label for="password_confirmation" class="required label-style">

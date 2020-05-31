@@ -13,5 +13,8 @@ return [
     ],
     'reviews' => [
         'empty' => 'You have not reviewed any of product yet'
+    ],
+    'forget_password' => [
+        'reset_link_sent' => 'We have e-mailed your reset password link.'
     ]
 ];

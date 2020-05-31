@@ -37,7 +37,7 @@ class CartRuleRepository extends Repository
     /**
      * CartRuleCouponRepository object
      *
-     * @var Webkul\CartRule\Repositories\CartRuleCouponRepository
+     * @var \Webkul\CartRule\Repositories\CartRuleCouponRepository
      */
     protected $cartRuleCouponRepository;
 

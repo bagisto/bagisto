@@ -4,12 +4,15 @@
 
 <?php
     $filterAttributes = [];
+    $maxPrice = 0;
 
     if (isset($category)) {
         $products = $productRepository->getAll($category->id);
 
         $filterAttributes = $productFlatRepository->getFilterableAttributes($category, $products);
-    }
+
+        $maxPrice = core()->convertPrice($productFlatRepository->getCategoryProductMaximumPrice($category));
+    } 
 
     if (! count($filterAttributes) > 0) {
         $filterAttributes = $attributeRepository->getFilterAttributes();
@@ -115,7 +118,7 @@
                             :value="sliderConfig.priceFrom"
                             id="price_from" />
 
-                        <label class="col text-center" for="to">to</label>
+                        <label class="col text-center" for="to">{{ __('shop::app.products.filter-to') }}</label>
                         <input
                         type="text"
                         disabled
@@ -128,7 +131,7 @@
         </div>
     </script>
 
-    <script type="text/javascript">
+    <script>
         Vue.component('layered-navigation', {
             template: '#layered-navigation-template',
             data: function() {
@@ -154,13 +157,13 @@
                         delete this.appliedFilters[attributeCode];
                     }
 
-                    this.applyFilter()
+                    this.applyFilter();
                 },
 
                 applyFilter: function () {
                     var params = [];
 
-                    for(key in this.appliedFilters) {
+                    for (key in this.appliedFilters) {
                         if (key != 'page') {
                             params.push(key + '=' + this.appliedFilters[key].join(','))
                         }
@@ -181,9 +184,9 @@
             ],
 
             data: function() {
-                let maxPrice  = '{{ core()->convertPrice($productFlatRepository->getCategoryProductMaximumPrice($category)) }}';
+                let maxPrice  = @json($maxPrice);
 
-                maxPrice = (parseInt(maxPrice) !== 0) ? parseInt(maxPrice) : 500;
+                maxPrice = maxPrice ? ((parseInt(maxPrice) !== 0 || maxPrice) ? parseInt(maxPrice) : 500) : 500;
 
                 return {
                     active: false,

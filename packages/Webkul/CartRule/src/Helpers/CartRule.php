@@ -124,7 +124,9 @@ class CartRule
 
         $this->processFreeShippingDiscount($cart);
 
-        $this->validateCouponCode();
+        if (! $this->checkCouponCode()) {
+            cart()->removeCouponCode();
+        }
     }
 
     /**
@@ -134,11 +136,14 @@ class CartRule
      */
     public function getCartRules()
     {
-        static $cartRules;
-
-        if ($cartRules) {
-            return $cartRules;
+        $staticCartRules = new class() {
+            public static $cartRules;
+            public static $cartID;
+        };
+        if ($staticCartRules::$cartID === cart()->getCart()->id && $staticCartRules::$cartRules) {
+            return $staticCartRules::$cartRules;
         }
+        $staticCartRules::$cartID = cart()->getCart()->id;
 
         $customerGroupId = null;
 
@@ -166,6 +171,7 @@ class CartRule
                          ->orderBy('sort_order', 'asc');
         })->findWhere(['status' => 1]);
 
+        $staticCartRules::$cartRules = $cartRules;
         return $cartRules;
     }
 
@@ -246,6 +252,10 @@ class CartRule
                 continue;
             }
 
+            if ($rule->coupon_code) {
+                $item->coupon_code = $rule->coupon_code;
+            }
+
             $quantity = $rule->discount_quantity ? min($item->quantity, $rule->discount_quantity) : $item->quantity;
 
             $discountAmount = $baseDiscountAmount = 0;
@@ -254,9 +264,9 @@ class CartRule
                 case 'by_percent':
                     $rulePercent = min(100, $rule->discount_amount);
 
-                    $discountAmount = ($quantity * $item->price - $item->discount_amount) * ($rulePercent / 100);
+                    $discountAmount = ($quantity * $item->price + $item->tax_amount - $item->discount_amount) * ($rulePercent / 100);
 
-                    $baseDiscountAmount = ($quantity * $item->base_price - $item->base_discount_amount) * ($rulePercent / 100);
+                    $baseDiscountAmount = ($quantity * $item->base_price + $item->base_tax_amount - $item->base_discount_amount) * ($rulePercent / 100);
 
                     if (! $rule->discount_quantity || $rule->discount_quantity > $quantity) {
                         $discountPercent = min(100, $item->discount_percent + $rulePercent);
@@ -316,8 +326,14 @@ class CartRule
                     break;
             }
 
-            $item->discount_amount = min($item->discount_amount + $discountAmount, $item->price * $quantity + $item->tax_amount);
-            $item->base_discount_amount = min($item->base_discount_amount + $baseDiscountAmount, $item->base_price * $quantity + $item->base_tax_amount);
+            $item->discount_amount = min(
+                $item->discount_amount + $discountAmount,
+                $item->price * $quantity + $item->tax_amount
+            );
+            $item->base_discount_amount = min(
+                $item->base_discount_amount + $baseDiscountAmount,
+                $item->base_price * $quantity + $item->base_tax_amount
+            );
 
             $appliedRuleIds[$rule->id] = $rule->id;
 
@@ -502,23 +518,26 @@ class CartRule
     }
 
     /**
-     * Check if coupon code is valid or not, if not remove from cart
+     * Check if coupon code is applied or not
      *
-     * @return void
+     * @return bool
      */
-    public function validateCouponCode()
+    public function checkCouponCode(): bool
     {
-        $cart = Cart::getCart();
+        $cart = cart()->getCart();
 
         if (! $cart->coupon_code) {
-            return;
+            return true;
         }
 
-        $coupon = $this->cartRuleCouponRepository->findOneByField('code', $cart->coupon_code);
-
-        if (! $coupon || ! in_array($coupon->cart_rule_id, explode(',', $cart->applied_cart_rule_ids))) {
-            Cart::removeCouponCode();
+        $coupons = $this->cartRuleCouponRepository->where(['code' => $cart->coupon_code])->get();
+        foreach ($coupons as $coupon) {
+            if (in_array($coupon->cart_rule_id, explode(',', $cart->applied_cart_rule_ids))) {
+                return true;
+            }
         }
+
+        return false;
     }
 
     /**

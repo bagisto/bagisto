@@ -110,12 +110,14 @@ class Helper extends Review
         foreach ($orderItems as $key => $orderItem) {
             $products[] = $orderItem->product;
 
-            $this->orderBrandsRepository->create([
-                'order_item_id' => $orderItem->id,
-                'order_id'      => $orderItem->order_id,
-                'product_id'    => $orderItem->product_id,
-                'brand'         => $products[$key]->brand,
-            ]);
+            try {
+                $this->orderBrandsRepository->create([
+                    'order_item_id' => $orderItem->id,
+                    'order_id'      => $orderItem->order_id,
+                    'product_id'    => $orderItem->product_id,
+                    'brand'         => $products[$key]->brand,
+                ]);
+            } catch(\Exception $exception) {}
         }
     }
 
@@ -252,9 +254,13 @@ class Helper extends Review
 
         if (is_string($path) && is_readable($path)) {
             return include $path;
-        }
+        } else {
+            $currentLocale = "en";
 
-        return [];
+            $path = __DIR__ . "/../Resources/lang/$currentLocale/app.php";
+
+            return include $path;
+        }
     }
 
     /**
@@ -279,7 +285,8 @@ class Helper extends Review
 
     /**
      * @param  \Webkul\Product\Contracts\Product  $product
-     * @param  bool  $list
+     * @param  bool                               $list
+     * @param  array                              $metaInformation
      * @return array
      */
     public function formatProduct($product, $list = false, $metaInformation = [])
@@ -317,16 +324,15 @@ class Helper extends Review
             'shortDescription'  => $product->short_description,
             'firstReviewText'   => trans('velocity::app.products.be-first-review'),
             'priceHTML'         => view('shop::products.price', ['product' => $product])->render(),
+            'defaultAddToCart'  => view('shop::products.add-buttons', ['product' => $product])->render(),
             'addToCartHtml'     => view('shop::products.add-to-cart', [
                 'showCompare'       => true,
                 'product'           => $product,
                 'addWishlistClass'  => ! (isset($list) && $list) ? '' : '',
                 'btnText'           => (isset($metaInformation['btnText']) && $metaInformation['btnText'])
-                                       ? $metaInformation['btnText']
-                                       : null,
-                'moveToCart'           => (isset($metaInformation['moveToCart']) && $metaInformation['moveToCart'])
-                                       ? $metaInformation['moveToCart']
-                                       : null,
+                                       ? $metaInformation['btnText'] : null,
+                'moveToCart'        => (isset($metaInformation['moveToCart']) && $metaInformation['moveToCart'])
+                                       ? $metaInformation['moveToCart'] : null,
                 'addToCartBtnClass' => ! (isset($list) && $list) ? 'small-padding' : '',
             ])->render(),
         ];
@@ -364,6 +370,7 @@ class Helper extends Review
                     $productMetaDetails['priceHTML'] = $formattedProduct['priceHTML'];
                     $productMetaDetails['addToCartHtml'] = $formattedProduct['addToCartHtml'];
                     $productMetaDetails['galleryImages'] = $formattedProduct['galleryImages'];
+                    $productMetaDetails['defaultAddToCart'] = $formattedProduct['defaultAddToCart'];
 
                     $product = array_merge($productFlat->toArray(), $productMetaDetails);
 

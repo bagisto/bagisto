@@ -28,10 +28,9 @@
                 @if (count(core()->getCurrentChannel()->locales) == 1)
                     disabled="disabled"
                 @endif>
-
+                
                 @foreach (core()->getCurrentChannel()->locales as $locale)
                     @if (isset($serachQuery))
-                        @dd(app()->getLocale());
                         <option
                             value="?{{ $serachQuery }}&locale={{ $locale->code }}"
                             {{ $locale->code == app()->getLocale() ? 'selected' : '' }}>

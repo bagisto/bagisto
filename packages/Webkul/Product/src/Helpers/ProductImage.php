@@ -21,8 +21,9 @@ class ProductImage extends AbstractProduct
         $images = [];
 
         foreach ($product->images as $image) {
-            if (! Storage::has($image->path))
+            if (! Storage::has($image->path)) {
                 continue;
+            }
 
             $images[] = [
                 'small_image_url'    => url('cache/small/' . $image->path),
