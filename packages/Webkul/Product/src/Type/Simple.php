@@ -57,8 +57,17 @@ class Simple extends AbstractType
     {
         $backorders = core()->getConfigData('catalog.inventory.stock_options.backorders');
 
-        $backorders = ! is_null ($backorders) ? $backorders : false;
-  
         return $qty <= $this->totalQuantity() ? true : $backorders;
+    }
+
+     /**
+     * product options
+     *
+     * @param \Webkul\Product\Contracts\Product  $product
+     * @return array
+     */
+    public function getProductOptions($product = "")
+    {
+        return [];
     }
 }

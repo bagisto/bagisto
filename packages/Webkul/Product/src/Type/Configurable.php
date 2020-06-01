@@ -397,7 +397,6 @@ class Configurable extends AbstractType
     public function getPriceHtml()
     {
         return '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
-            . ' '
             . '<span class="final-price">' . core()->currency($this->getMinimalPrice()) . '</span>';
     }
 
@@ -557,15 +556,6 @@ class Configurable extends AbstractType
         $item->save();
     }
 
-    //product options
-    public function getProductOptions($product = "")
-    {
-        $configurableOption = app('Webkul\Product\Helpers\ConfigurableOption');
-        $options = $configurableOption->getConfigurationConfig($product);
-
-        return $options;
-    }
-
     /**
      * @param  int  $qty
      * @return bool
@@ -574,17 +564,15 @@ class Configurable extends AbstractType
     {
         $backorders = core()->getConfigData('catalog.inventory.stock_options.backorders');
 
-        $backorders = ! is_null ($backorders) ? $backorders : false;
-     
         foreach ($this->product->variants as $variant) {
             if ($variant->haveSufficientQuantity($qty)) {
                 return true;
             }
-        }    
+        }
 
         return $backorders;
     }
-     
+
     /**
      * Return true if this product type is saleable
      *
@@ -597,38 +585,21 @@ class Configurable extends AbstractType
                 return true;
             }
         }
-            
+
         return false;
     }
 
-    /**
-     * @return int
+     /**
+     * product options
+     *
+     * @param \Webkul\Product\Contracts\Product  $product
+     * @return array
      */
-    public function totalQuantity()
+    public function getProductOptions($product = "")
     {
-        $total = 0;
+        $configurableOption = app('Webkul\Product\Helpers\ConfigurableOption');
+        $options = $configurableOption->getConfigurationConfig($product);
 
-        $channelInventorySourceIds = core()->getCurrentChannel()
-                                           ->inventory_sources()
-                                           ->where('status', 1)
-                                           ->pluck('id');
-
-        foreach ($this->product->variants as $variant) {
-            foreach ($variant->inventories as $inventory) {
-                if (is_numeric($index = $channelInventorySourceIds->search($inventory->inventory_source_id))) {
-                    $total += $inventory->qty;
-                }
-            }
-
-            $orderedInventory = $variant->ordered_inventories()
-                                          ->where('channel_id', core()->getCurrentChannel()->id)
-                                          ->first();
-
-            if ($orderedInventory) {
-                $total -= $orderedInventory->qty;
-            }
-        }
-
-        return $total;
+        return $options;
     }
 }

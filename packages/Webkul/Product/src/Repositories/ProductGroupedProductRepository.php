@@ -42,4 +42,17 @@ class ProductGroupedProductRepository extends Repository
             $this->delete($previousGroupedProductId);
         }
     }
+
+    /**
+     * @param array $data
+     * @param \Webkul\Product\Contracts\Product  $product
+     * @return array
+     */
+    public function getGroupedProduct($product)
+    {
+        $groupedProductIds = $this->with('product')->pluck('associated_product_id');
+
+        return $groupedProductIds;
+
+    }
 }

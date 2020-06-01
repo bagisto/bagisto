@@ -3,9 +3,8 @@
 namespace Webkul\Product\Repositories;
 
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use Illuminate\Http\UploadedFile;
 use Webkul\Core\Eloquent\Repository;
+use Illuminate\Support\Str;
 
 class ProductImageRepository extends Repository
 {
@@ -33,7 +32,7 @@ class ProductImageRepository extends Repository
                 $file = 'images.' . $imageId;
                 $dir = 'product/' . $product->id;
 
-                if ($image instanceof UploadedFile) {
+                if (Str::contains($imageId, 'image_')) {
                     if (request()->hasFile($file)) {
                         $this->create([
                             'path'       => request()->file($file)->store($dir),
@@ -43,6 +42,16 @@ class ProductImageRepository extends Repository
                 } else {
                     if (is_numeric($index = $previousImageIds->search($imageId))) {
                         $previousImageIds->forget($index);
+                    }
+
+                    if (request()->hasFile($file)) {
+                        if ($imageModel = $this->find($imageId)) {
+                            Storage::delete($imageModel->path);
+                        }
+
+                        $this->update([
+                                'path' => request()->file($file)->store($dir),
+                            ], $imageId);
                     }
                 }
             }
