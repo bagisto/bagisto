@@ -75,7 +75,7 @@ Route::group(['prefix' => 'api'], function ($router) {
             'resource' => 'Webkul\API\Http\Resources\Catalog\ProductReview',
             'authorization_required' => true
         ]);
-        
+
 
         //Channel routes
         Route::get('channels', 'ResourceController@index')->defaults('_config', [
@@ -113,6 +113,12 @@ Route::group(['prefix' => 'api'], function ($router) {
         ]);
 
         Route::get('country-states', 'CoreController@getCountryStateGroup');
+
+        //apply coupon
+        Route::post('apply/coupon', 'CartController@applyCoupon');
+
+        //remove coupon
+        Route::post('remove/coupon', 'CartController@removeCoupon');
 
 
         //Slider routes

@@ -499,7 +499,7 @@ class Cart
         $this->saveAddressesWhenRequested($data, $billingAddressData, $shippingAddressData);
 
         $this->linkAddresses($cart, $billingAddressData, $shippingAddressData);
-        
+
         $this->assignCustomerFields($cart);
 
         $cart->save();
