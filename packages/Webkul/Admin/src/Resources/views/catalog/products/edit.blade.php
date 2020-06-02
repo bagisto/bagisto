@@ -144,6 +144,12 @@
 
                                 @endforeach
 
+                                @if ($attributeGroup->name == 'Price')
+
+                                    @include ('admin::catalog.products.accordians.customer-group-price')
+
+                                @endif
+
                                 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.' . $attributeGroup->name . '.controls.after', ['product' => $product]) !!}
                             </div>
                         </accordian>

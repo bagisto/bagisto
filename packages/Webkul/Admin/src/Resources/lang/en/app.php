@@ -527,7 +527,12 @@ return [
             'checkbox' => 'Checkbox',
             'multiselect' => 'Multiselect',
             'new-option' => 'New Option',
-            'is-default' => 'Is Default'
+            'is-default' => 'Is Default',
+            'customer-group' => 'Customer Group',
+            'add-group-price' => 'Add Customer Group Price',
+            'all-group' => 'All Groups',
+            'fixed' => 'Fixed',
+            'discount' => 'Discount',
         ],
 
         'attributes' => [
