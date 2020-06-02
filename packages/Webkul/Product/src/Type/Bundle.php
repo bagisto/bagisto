@@ -156,9 +156,10 @@ class Bundle extends AbstractType
     /**
      * Get product minimal price
      *
+     * @param  int  $qty
      * @return float
      */
-    public function getMinimalPrice()
+    public function getMinimalPrice($qty = null)
     {
         $minPrice = 0;
 
@@ -326,11 +327,12 @@ class Bundle extends AbstractType
     }
 
     /**
-     * Get product final price
+     * Get product minimal price
      *
+     * @param  int  $qty
      * @return float
      */
-    public function getFinalPrice()
+    public function getFinalPrice($qty = null)
     {
         return 0;
     }
