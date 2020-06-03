@@ -158,7 +158,7 @@ class ProductRepository extends Repository
                 }
             }
 
-            if( $priceFilter = request('price') ){
+            if ( $priceFilter = request('price') ){
                 $priceRange = explode(',', $priceFilter);
                 if( count($priceRange) > 0 ) {
                     $qb->where('variants.min_price', '>=', core()->convertToBasePrice($priceRange[0]));
@@ -171,7 +171,7 @@ class ProductRepository extends Repository
                     request()->except(['price'])
                 ));
 
-            if( count($attributeFilters) > 0 ) {
+            if ( count($attributeFilters) > 0 ) {
                 $qb->where(function ($filterQuery) use($attributeFilters){
 
                     foreach ($attributeFilters as $attribute) {
@@ -220,7 +220,7 @@ class ProductRepository extends Repository
         $countQuery = "select count(*) as aggregate from ({$repository->model->toSql()}) c";
         $count = collect(DB::select($countQuery, $repository->model->getBindings()))->pluck('aggregate')->first();
 
-        if($count > 0) {
+        if ($count > 0) {
             # apply a new scope query to limit results to one page
             $repository->scopeQuery(function ($query) use ($page, $perPage) {
                 return $query->forPage($page, $perPage);
