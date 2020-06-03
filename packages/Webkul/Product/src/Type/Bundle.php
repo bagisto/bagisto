@@ -499,7 +499,7 @@ class Bundle extends AbstractType
      */
     public function compareOptions($options1, $options2)
     {
-        if ($this->product->id != $options2['product_id']) {
+        if (isset($options2['product_id']) && $this->product->id != $options2['product_id']) {
             return false;
         }
 
