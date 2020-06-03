@@ -344,9 +344,10 @@ class Configurable extends AbstractType
     /**
      * Get product minimal price
      *
+     * @param  int  $qty
      * @return float
      */
-    public function getMinimalPrice()
+    public function getMinimalPrice($qty = null)
     {
         $minPrices = [];
 
