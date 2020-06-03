@@ -542,7 +542,7 @@ class Configurable extends AbstractType
      */
     public function validateCartItem($item)
     {
-        $price = $item->child->product->getTypeInstance()->getFinalPrice();
+        $price = $item->child->product->getTypeInstance()->getFinalPrice($item->quantity);
 
         if ($price == $item->base_price) {
             return;

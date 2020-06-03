@@ -140,9 +140,11 @@ class CartRule
             public static $cartRules;
             public static $cartID;
         };
+
         if ($staticCartRules::$cartID === cart()->getCart()->id && $staticCartRules::$cartRules) {
             return $staticCartRules::$cartRules;
         }
+        
         $staticCartRules::$cartID = cart()->getCart()->id;
 
         $customerGroupId = null;

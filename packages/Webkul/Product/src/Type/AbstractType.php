@@ -11,7 +11,7 @@ use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Helpers\ProductImage;
-use Cart;
+use Webkul\Checkout\Facades\Cart;
 
 abstract class AbstractType
 {
@@ -246,6 +246,8 @@ abstract class AbstractType
             $this->productInventoryRepository->saveInventories($data, $product);
 
             $this->productImageRepository->uploadImages($data, $product);
+
+            app('Webkul\Product\Repositories\ProductCustomerGroupPriceRepository')->saveCustomerGroupPrices($data, $product);
         }
 
         return $product;
@@ -449,11 +451,12 @@ abstract class AbstractType
     /**
      * Get product minimal price
      *
+     * @param  int  $qty
      * @return float
      */
-    public function getMinimalPrice()
+    public function getMinimalPrice($qty = null)
     {
-        if ($this->haveSpecialPrice()) {
+        if ($this->haveSpecialPrice($qty)) {
             return $this->product->special_price;
         }
 
@@ -473,57 +476,148 @@ abstract class AbstractType
     /**
      * Get product minimal price
      *
+     * @param  int  $qty
      * @return float
      */
-    public function getFinalPrice()
+    public function getFinalPrice($qty = null)
     {
-        return $this->getMinimalPrice();
+        return $this->getMinimalPrice($qty);
     }
 
     /**
      * Returns the product's minimal price
      *
+     * @param  int  $qty
      * @return float
      */
-    public function getSpecialPrice()
+    public function getSpecialPrice($qty = null)
     {
-        return $this->haveSpecialPrice() ? $this->product->special_price : $this->product->price;
+        return $this->haveSpecialPrice($qty) ? $this->product->special_price : $this->product->price;
     }
 
     /**
+     * @param  int  $qty
      * @return bool
      */
-    public function haveSpecialPrice()
+    public function haveSpecialPrice($qty = null)
     {
+        $customerGroupPrice = $this->getCustomerGroupPrice($this->product, $qty);
+
         $rulePrice = app('Webkul\CatalogRule\Helpers\CatalogRuleProductPrice')->getRulePrice($this->product);
 
-        if ((is_null($this->product->special_price) || ! (float) $this->product->special_price) && ! $rulePrice) {
+        if ((is_null($this->product->special_price) || ! (float) $this->product->special_price)
+            && ! $rulePrice
+            && $customerGroupPrice == $this->product->price
+        ) {
             return false;
         }
+
+        $haveSpecialPrice = false;
 
         if (! (float) $this->product->special_price) {
             if ($rulePrice && $rulePrice->price < $this->product->price) {
                 $this->product->special_price = $rulePrice->price;
 
-                return true;
+                $haveSpecialPrice = true;
             }
         } else {
             if ($rulePrice && $rulePrice->price <= $this->product->special_price) {
                 $this->product->special_price = $rulePrice->price;
 
-                return true;
+                $haveSpecialPrice = true;
             } else {
                 if (core()->isChannelDateInInterval($this->product->special_price_from, $this->product->special_price_to)) {
-                    return true;
+                    $haveSpecialPrice = true;
                 } elseif ($rulePrice) {
                     $this->product->special_price = $rulePrice->price;
 
-                    return true;
+                    $haveSpecialPrice = true;
                 }
             }
         }
 
-        return false;
+        if ($haveSpecialPrice) {
+            $this->product->special_price = min($this->product->special_price, $customerGroupPrice);
+        } else {
+            $this->product->special_price = $customerGroupPrice;
+        }
+
+        return true;
+    }
+
+    /**
+     * Get product group price
+     *
+     * @return float
+     */
+    public function getCustomerGroupPrice($product, $qty)
+    {
+        if (is_null($qty)) {
+            $qty = 1;
+        }
+
+        $customerGroupId = null;
+
+        if (Cart::getCurrentCustomer()->check()) {
+            $customerGroupId = Cart::getCurrentCustomer()->user()->customer_group_id;
+        } else {
+            $customerGroupRepository = app('Webkul\Customer\Repositories\CustomerGroupRepository');
+
+            if ($customerGuestGroup = $customerGroupRepository->findOneByField('code', 'guest')) {
+                $customerGroupId = $customerGuestGroup->id;
+            }
+        }
+
+        $customerGroupPrices = $product->customer_group_prices()->where(function ($query) use ($customerGroupId) {
+            $query->where('customer_group_id', $customerGroupId)
+                  ->orWhereNull('customer_group_id');
+            }
+        )->get();
+
+        if (! $customerGroupPrices->count()) {
+            return $product->price;
+        }
+
+        $lastQty = 1;
+
+        $lastPrice = $product->price;
+
+        $lastCustomerGroupId = null;
+
+        foreach ($customerGroupPrices as $price) {
+            if ($price->customer_group_id != $customerGroupId && $price->customer_group_id) {
+                continue;
+            }
+
+            if ($qty < $price->qty) {
+                continue;
+            }
+
+            if ($price->qty < $lastQty) {
+                continue;
+            }
+
+            if ($price->qty == $lastQty
+                && $lastCustomerGroupId != null
+                && $price->customer_group_id == null
+            ) {
+                continue;
+            }
+
+            if ($price->value < $lastPrice) {
+                if ($price->value_type == 'percentage') {
+                    $lastPrice = $product->price * ($price->value / 100);
+                } else {
+                    $lastPrice = $price->value;
+                }
+
+                $lastQty = $price->qty;
+
+                $lastCustomerGroupId = $price->customer_group_id;
+            }
+        }
+
+        return $lastPrice;
     }
 
     /**
@@ -685,7 +779,7 @@ abstract class AbstractType
      */
     public function validateCartItem($item)
     {
-        $price = $item->product->getTypeInstance()->getFinalPrice();
+        $price = $item->product->getTypeInstance()->getFinalPrice($item->quantity);
 
         if ($price == $item->base_price) {
             return;
