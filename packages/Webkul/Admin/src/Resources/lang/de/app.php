@@ -2,6 +2,7 @@
 
 return array (
     'save' => 'Speichern',
+    'copy-of' => 'Kopie von',
     'create' => 'Erstellen',
     'update' => 'Update',
     'delete' => 'Löschen',

@@ -2,6 +2,7 @@
 
 return [
     'save' => 'Save',
+    'copy-of' => 'Copy of',
     'create' => 'Create',
     'update' => 'Update',
     'delete' => 'Delete',
