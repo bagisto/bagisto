@@ -1020,7 +1020,7 @@ return [
             'choose-condition-to-add' => 'Scegli una condizione da aggiungere',
             'cart-attribute' => 'Attributi Carrello',
             'subtotal' => 'Subtotale',
-            'additional' => 'Zusatzinformationen',
+            'additional' => 'Additional Information',
             'total-items-qty' => 'Totale articoli Qtà',
             'total-weight' => 'Totale Peso',
             'payment-method' => 'Metodo di Pagamento',

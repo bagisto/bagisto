@@ -1018,7 +1018,7 @@ return [
             'choose-condition-to-add' => 'Wybierz warunek do dodania',
             'cart-attribute' => ' Atrybut koszyka',
             'subtotal' => 'Suma częściowa',
-            'additional' => 'Zusatzinformationen',
+            'additional' => 'Additional Information',
             'total-items-qty' => 'Całkowita liczba pozycji',
             'total-weight' => 'Waga całkowita',
             'payment-method' => 'Metoda płatności',
