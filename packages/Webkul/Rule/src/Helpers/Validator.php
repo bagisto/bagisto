@@ -262,17 +262,17 @@ class Validator
      */
     private static function validateArrayValues(array $attributeValue, string $conditionValue): bool
     {
-        $result = in_array($conditionValue, $attributeValue, true);
-        if ($result === false) {
-            foreach ($attributeValue as $subValue) {
-                if (is_array($subValue)) {
-                    $result = self::validateArrayValues($subValue, $conditionValue);
-                    if ($result === true) {
-                        break;
-                    }
+        if (in_array($conditionValue, $attributeValue, true) === true) {
+            return true;
+        }
+        
+        foreach ($attributeValue as $subValue) {
+            if (is_array($subValue)) {
+                if (self::validateArrayValues($subValue, $conditionValue) === true) {
+                    return true;
                 }
             }
         }
-        return $result;
+        return false;
     }
 }
