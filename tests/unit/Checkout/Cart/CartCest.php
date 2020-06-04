@@ -85,8 +85,8 @@ class CartCest
             'links'      => $this->downloadableProduct2->downloadable_links->pluck('id')->all(),
         ]);
 
-        $I->assertFalse(cart()->hasError());
         $I->assertEquals(4, count(cart()->getCart()->items));
+        $I->assertFalse(cart()->hasError());
 
         $I->comment('deactivate dP2');
         DB::table('product_attribute_values')
@@ -97,9 +97,6 @@ class CartCest
             ->update(['boolean_value' => 0]);
 
         Event::dispatch('catalog.product.update.after', $this->downloadableProduct2->refresh());
-
-        $I->comment('we still have 4 products in cart as we didn`t changed cart itself');
-        $I->assertEquals(4, count(cart()->getCart()->items));
 
         $I->comment('add dP1 to cart, dP2 should be removed now');
         cart()->addProduct($this->downloadableProduct1->id, [

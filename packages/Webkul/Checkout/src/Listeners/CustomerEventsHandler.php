@@ -20,14 +20,6 @@ class CustomerEventsHandler {
     }
 
     /**
-     * Handle cart changes
-     */
-    public function onCartChanged()
-    {
-        Cart::removeInactiveItems();
-    }
-
-    /**
      * Register the listeners for the subscriber.
      *
      * @param  \Illuminate\Events\Dispatcher  $events
@@ -36,11 +28,5 @@ class CustomerEventsHandler {
     public function subscribe($events)
     {
         $events->listen('customer.after.login', 'Webkul\Checkout\Listeners\CustomerEventsHandler@onCustomerLogin');
-
-        $events->listen('checkout.cart.add.before', 'Webkul\Checkout\Listeners\CustomerEventsHandler@onCartChanged');
-        $events->listen('checkout.cart.item.add.before', 'Webkul\Checkout\Listeners\CustomerEventsHandler@onCartChanged');
-
-        $events->listen('checkout.cart.update.before', 'Webkul\Checkout\Listeners\CustomerEventsHandler@onCartChanged');
-        $events->listen('checkout.cart.item.update.before', 'Webkul\Checkout\Listeners\CustomerEventsHandler@onCartChanged');
     }
 }

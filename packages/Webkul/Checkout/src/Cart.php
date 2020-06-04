@@ -137,6 +137,9 @@ class Cart
         }
 
         $product = $this->productRepository->findOneByField('id', $productId);
+        if ($product->status === 0) {
+            return ['info' => __('shop::app.checkout.cart.item.inactive-add')];
+        }
 
         $cartProducts = $product->getTypeInstance()->prepareForCart($data);
 
@@ -241,6 +244,10 @@ class Cart
 
             if (! $item) {
                 continue;
+            }
+
+            if ($item->product && $item->product->status === 0) {
+                throw new \Exception(trans('shop::app.checkout.cart.item.inactive'));
             }
 
             if ($quantity <= 0) {
@@ -439,17 +446,20 @@ class Cart
      */
     public function getCart(): ?\Webkul\Checkout\Contracts\Cart
     {
+        $cart = null;
         if ($this->getCurrentCustomer()->check()) {
-            return $this->cartRepository->findOneWhere([
+            $cart = $this->cartRepository->findOneWhere([
                 'customer_id' => $this->getCurrentCustomer()->user()->id,
                 'is_active'   => 1,
             ]);
 
         } elseif (session()->has('cart')) {
-            return $this->cartRepository->find(session()->get('cart')->id);
+            $cart = $this->cartRepository->find(session()->get('cart')->id);
         }
 
-        return null;
+        $this->removeInactiveItems($cart);
+
+        return $cart;
     }
 
     /**
@@ -765,7 +775,7 @@ class Cart
             return true;
         }
 
-        if (! $this->checkCartItems()) {
+        if (! $this->isItemsHaveSufficientQuantity()) {
             return true;
         }
 
@@ -773,19 +783,13 @@ class Cart
     }
 
     /**
-     * Checks all cart items for:
-     * - product is active (if not, cart item will be removed)
-     * - product has sufficient quantity
+     * Checks if all cart items have sufficient quantity.
      *
      * @return bool
      */
-    public function checkCartItems(): bool
+    public function isItemsHaveSufficientQuantity(): bool
     {
         foreach ($this->getCart()->items as $item) {
-            if ($this->removeInactiveItem($item)) {
-                continue;
-            }
-
             if (! $this->isItemHaveQuantity($item)) {
                 return false;
             }
@@ -797,17 +801,31 @@ class Cart
     /**
      * Remove cart items, whose product is inactive
      */
-    public function removeInactiveItems()
+    public function removeInactiveItems(\Webkul\Checkout\Models\Cart $cart = null): ?\Webkul\Checkout\Models\Cart
     {
-        if (! $cart = $this->getCart()) {
-            return;
+        if (! $cart) {
+            return $cart;
         }
 
         foreach ($cart->items as $item) {
-            if ($this->removeInactiveItem($item)) {
-                continue;
+            if ($item->product && $item->product->status === 0) {
+
+                $this->cartItemRepository->delete($item->id);
+
+                if ($cart->items()->get()->count() == 0) {
+                    $this->cartRepository->delete($cart->id);
+
+                    if (session()->has('cart')) {
+                        session()->forget('cart');
+                    }
+                }
+
+                session()->flash('info', trans('shop::app.checkout.cart.item.inactive'));
             }
         }
+        $cart->save();
+
+        return $cart;
     }
 
     /**
@@ -1141,32 +1159,6 @@ class Cart
         }
 
         return $attributes;
-    }
-
-    /**
-     * Remove item from cart, whose product is inactive
-     * and returns true, if so.
-     *
-     * @param \Webkul\Checkout\Models\CartItem $item
-     *
-     * @return bool
-     */
-    private function removeInactiveItem(\Webkul\Checkout\Models\CartItem $item): bool
-    {
-        if (! $item) {
-            return false;
-        }
-
-        if (! $this->getCart()) {
-            return false;
-        }
-
-        if ($item->product && $item->product->status === 0) {
-            $this->removeItem($item->id);
-            return true;
-        }
-
-        return false;
     }
 
     /**

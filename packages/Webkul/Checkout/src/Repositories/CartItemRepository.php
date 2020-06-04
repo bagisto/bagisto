@@ -3,6 +3,7 @@
 namespace Webkul\Checkout\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Checkout\Contracts\CartItem;
 
 class CartItemRepository extends Repository
 {
@@ -18,16 +19,19 @@ class CartItemRepository extends Repository
     }
 
     /**
-     * @param  array  $data
-     * @param  int  $id
-     * @param  string  $attribute
-     * @return \Webkul\Checkout\Contracts\CartItem
+     * @param array  $data
+     * @param        $id
+     * @param string $attribute
+     *
+     * @return \Webkul\Checkout\Contracts\CartItem|null
      */
-    public function update(array $data, $id, $attribute = "id")
+    public function update(array $data, $id, $attribute = "id"): ?CartItem
     {
         $item = $this->find($id);
 
-        $item->update($data);
+        if ($item) {
+            $item->update($data);
+        }
 
         return $item;
     }

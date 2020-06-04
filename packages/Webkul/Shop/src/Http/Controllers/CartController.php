@@ -68,9 +68,7 @@ class CartController extends Controller
         try {
             $result = Cart::addProduct($id, request()->all());
 
-            if ($this->onWarningAddingToCart($result)) {
-                session()->flash('warning', $result['warning']);
-
+            if ($this->onFailureAddingToCart($result)) {
                 return redirect()->back();
             }
 
@@ -205,13 +203,25 @@ class CartController extends Controller
     }
 
     /**
-     * Returns true, if result of adding product to cart is an array and contains a key "warning"
+     * Returns true, if result of adding product to cart
+     * is an array and contains a key "warning" or "info"
      *
      * @param  array  $result
+     *
      * @return boolean
      */
-    private function onWarningAddingToCart($result): bool
+    private function onFailureAddingToCart($result): bool
     {
-        return is_array($result) && isset($result['warning']);
+        if (is_array($result) && isset($result['warning'])) {
+            session()->flash('warning', $result['warning']);
+            return true;
+        }
+
+        if (is_array($result) && isset($result['info'])) {
+            session()->flash('info', $result['info']);
+            return true;
+        }
+
+        return false;
     }
 }
