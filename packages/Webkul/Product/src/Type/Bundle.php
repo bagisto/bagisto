@@ -156,9 +156,10 @@ class Bundle extends AbstractType
     /**
      * Get product minimal price
      *
+     * @param  int  $qty
      * @return float
      */
-    public function getMinimalPrice()
+    public function getMinimalPrice($qty = null)
     {
         $minPrice = 0;
 
@@ -326,11 +327,12 @@ class Bundle extends AbstractType
     }
 
     /**
-     * Get product final price
+     * Get product minimal price
      *
+     * @param  int  $qty
      * @return float
      */
-    public function getFinalPrice()
+    public function getFinalPrice($qty = null)
     {
         return 0;
     }
@@ -497,7 +499,7 @@ class Bundle extends AbstractType
      */
     public function compareOptions($options1, $options2)
     {
-        if ($this->product->id != $options2['product_id']) {
+        if (isset($options2['product_id']) && $this->product->id != $options2['product_id']) {
             return false;
         }
 

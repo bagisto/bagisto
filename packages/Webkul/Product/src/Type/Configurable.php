@@ -344,9 +344,10 @@ class Configurable extends AbstractType
     /**
      * Get product minimal price
      *
+     * @param  int  $qty
      * @return float
      */
-    public function getMinimalPrice()
+    public function getMinimalPrice($qty = null)
     {
         $minPrices = [];
 
@@ -542,7 +543,7 @@ class Configurable extends AbstractType
      */
     public function validateCartItem($item)
     {
-        $price = $item->child->product->getTypeInstance()->getFinalPrice();
+        $price = $item->child->product->getTypeInstance()->getFinalPrice($item->quantity);
 
         if ($price == $item->base_price) {
             return;
@@ -575,16 +576,16 @@ class Configurable extends AbstractType
         $backorders = core()->getConfigData('catalog.inventory.stock_options.backorders');
 
         $backorders = ! is_null ($backorders) ? $backorders : false;
-     
+
         foreach ($this->product->variants as $variant) {
             if ($variant->haveSufficientQuantity($qty)) {
                 return true;
             }
-        }    
+        }
 
         return $backorders;
     }
-     
+
     /**
      * Return true if this product type is saleable
      *
@@ -597,7 +598,7 @@ class Configurable extends AbstractType
                 return true;
             }
         }
-            
+
         return false;
     }
 

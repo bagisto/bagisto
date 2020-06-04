@@ -108,7 +108,14 @@ class ProductRepository extends Repository
     {
         $params = request()->input();
 
-        $perPage = isset($params['limit']) ? $params['limit'] : 9;
+        if (core()->getConfigData('catalog.products.storefront.products_per_page')) {
+            $pages = explode(',', core()->getConfigData('catalog.products.storefront.products_per_page'));
+
+            $perPage = isset($params['limit']) ? $params['limit'] : current($pages);
+        } else {
+            $perPage = isset($params['limit']) ? $params['limit'] : 9;
+        }
+
         $page = Paginator::resolveCurrentPage('page');
 
         $repository = app(ProductFlatRepository::class)->scopeQuery(function($query) use($params, $categoryId) {
@@ -158,7 +165,7 @@ class ProductRepository extends Repository
                 }
             }
 
-            if( $priceFilter = request('price') ){
+            if ( $priceFilter = request('price') ){
                 $priceRange = explode(',', $priceFilter);
                 if( count($priceRange) > 0 ) {
                     $qb->where('variants.min_price', '>=', core()->convertToBasePrice($priceRange[0]));
@@ -171,7 +178,7 @@ class ProductRepository extends Repository
                     request()->except(['price'])
                 ));
 
-            if( count($attributeFilters) > 0 ) {
+            if ( count($attributeFilters) > 0 ) {
                 $qb->where(function ($filterQuery) use($attributeFilters){
 
                     foreach ($attributeFilters as $attribute) {
@@ -220,7 +227,7 @@ class ProductRepository extends Repository
         $countQuery = "select count(*) as aggregate from ({$repository->model->toSql()}) c";
         $count = collect(DB::select($countQuery, $repository->model->getBindings()))->pluck('aggregate')->first();
 
-        if($count > 0) {
+        if ($count > 0) {
             # apply a new scope query to limit results to one page
             $repository->scopeQuery(function ($query) use ($page, $perPage) {
                 return $query->forPage($page, $perPage);

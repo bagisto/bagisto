@@ -19,7 +19,7 @@
                         @if ($slider->locale)
                             <span class="locale">[{{ $slider->locale }}]</span>
                         @endif
-                        
+
                     </h1>
                 </div>
 
@@ -94,8 +94,8 @@
                 selector: 'textarea#tiny',
                 height: 200,
                 width: "100%",
-                plugins: 'image imagetools media wordcount save fullscreen code',
-                toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | code',
+                plugins: 'image imagetools media wordcount save fullscreen code table lists link hr',
+                toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor link hr | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | code | table',
                 image_advtab: true,
                 templates: [
                     { title: 'Test template 1', content: 'Test 1' },
