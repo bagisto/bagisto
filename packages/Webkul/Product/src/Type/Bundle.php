@@ -93,7 +93,7 @@ class Bundle extends AbstractType
         ProductRepository $productRepository,
         ProductAttributeValueRepository $attributeValueRepository,
         ProductInventoryRepository $productInventoryRepository,
-        productImageRepository $productImageRepository,
+        ProductImageRepository $productImageRepository,
         ProductBundleOptionRepository $productBundleOptionRepository,
         ProductBundleOptionProductRepository $productBundleOptionProductRepository,
         ProductImage $productImageHelper,
