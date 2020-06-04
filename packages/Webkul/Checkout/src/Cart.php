@@ -7,11 +7,9 @@ use Webkul\Checkout\Models\CartAddress;
 use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Checkout\Repositories\CartItemRepository;
 use Webkul\Checkout\Repositories\CartAddressRepository;
-use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Tax\Helpers\Tax;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
-use Webkul\Checkout\Models\CartItem;
 use Webkul\Checkout\Models\CartPayment;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
@@ -800,8 +798,12 @@ class Cart
 
     /**
      * Remove cart items, whose product is inactive
+     *
+     * @param \Webkul\Checkout\Models\Cart|null $cart
+     *
+     * @return \Webkul\Checkout\Models\Cart|null
      */
-    public function removeInactiveItems(\Webkul\Checkout\Models\Cart $cart = null): ?\Webkul\Checkout\Models\Cart
+    public function removeInactiveItems(CartModel $cart = null): ?CartModel
     {
         if (! $cart) {
             return $cart;
