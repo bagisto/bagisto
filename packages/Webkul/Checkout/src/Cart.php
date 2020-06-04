@@ -824,6 +824,7 @@ class Cart
             }
         }
         $cart->save();
+        $this->putCart($cart);
 
         return $cart;
     }
