@@ -30,7 +30,6 @@ class Toolbar extends AbstractProduct
         if (core()->getConfigData('catalog.products.storefront.products_per_page')) {
             $pages = explode(',', core()->getConfigData('catalog.products.storefront.products_per_page'));
 
-            var_dump($pages);
             return $pages;
         }
 
