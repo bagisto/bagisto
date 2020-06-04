@@ -108,7 +108,14 @@ class ProductRepository extends Repository
     {
         $params = request()->input();
 
-        $perPage = isset($params['limit']) ? $params['limit'] : 9;
+        if (core()->getConfigData('catalog.products.storefront.products_per_page')) {
+            $pages = explode(',', core()->getConfigData('catalog.products.storefront.products_per_page'));
+
+            $perPage = isset($params['limit']) ? $params['limit'] : current($pages);
+        } else {
+            $perPage = isset($params['limit']) ? $params['limit'] : 9;
+        }
+
         $page = Paginator::resolveCurrentPage('page');
 
         $repository = app(ProductFlatRepository::class)->scopeQuery(function($query) use($params, $categoryId) {
