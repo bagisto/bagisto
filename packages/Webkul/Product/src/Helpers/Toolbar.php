@@ -27,9 +27,13 @@ class Toolbar extends AbstractProduct
      */
     public function getAvailableLimits()
     {
-        return core()->getConfigData('catalog.products.storefront.products_per_page')
-               ? explode(',', core()->getConfigData('catalog.products.storefront.products_per_page'))
-               : [9, 15, 21, 28];
+        if (core()->getConfigData('catalog.products.storefront.products_per_page')) {
+            $pages = explode(',', core()->getConfigData('catalog.products.storefront.products_per_page'));
+
+            return $pages;
+        }
+
+        return [9, 15, 21, 28];
     }
 
     /**

@@ -32,7 +32,7 @@ return [
     'status' => 'Stato',
     'select-option' => 'Seleziona opzione',
     'category' => 'Categoria',
-	
+
     'common' => [
         'no-result-found' => 'Non è stato trovato nessun record.',
         'country' => 'Paese',
@@ -1020,6 +1020,7 @@ return [
             'choose-condition-to-add' => 'Scegli una condizione da aggiungere',
             'cart-attribute' => 'Attributi Carrello',
             'subtotal' => 'Subtotale',
+            'additional' => 'Additional Information',
             'total-items-qty' => 'Totale articoli Qtà',
             'total-weight' => 'Totale Peso',
             'payment-method' => 'Metodo di Pagamento',
@@ -1153,8 +1154,8 @@ return [
     ],
 
     'export' => [
-        'export' => 'Esporta
-        'import' => 'Importa,
+        'export' => 'Esporta',
+        'import' => 'Importa',
         'format' => 'Seleziona formato',
         'download' => 'Download',
         'upload' => 'Upload',

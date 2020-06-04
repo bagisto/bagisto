@@ -1016,6 +1016,7 @@ return [
             'choose-condition-to-add' => 'شرطی را برای اضافه کردن انتخاب کنید',
             'cart-attribute' => 'ویژگی سبد خرید',
             'subtotal' => 'فرعی',
+            'additional' => 'Additional Information',
             'total-items-qty' => 'تعداد کل موارد',
             'total-weight' => 'وزن کل',
             'payment-method' => 'روش پرداخت',
