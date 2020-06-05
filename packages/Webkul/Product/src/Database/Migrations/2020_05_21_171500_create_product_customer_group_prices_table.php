@@ -22,7 +22,7 @@ class CreateProductCustomerGroupPricesTable extends Migration
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
 
-            $table->integer('customer_group_id')->nullble()->unsigned();
+            $table->integer('customer_group_id')->unsigned()->nullable();
             $table->foreign('customer_group_id')->references('id')->on('customer_groups')->onDelete('cascade');
             $table->timestamps();
         });
