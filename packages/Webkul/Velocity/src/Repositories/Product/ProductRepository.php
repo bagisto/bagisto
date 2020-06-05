@@ -105,7 +105,7 @@ class ProductRepository extends Repository
      */
     public function searchProductsFromCategory($params)
     {
-        $term = $params['term'];
+        $term = $params['term'] ?? '';
         $categoryId = $params['category'];
 
         $results = app(ProductFlatRepository::class)->scopeQuery(function($query) use($term, $categoryId, $params) {
