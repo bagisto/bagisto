@@ -92,11 +92,11 @@ class CartRuleController extends Controller
 
         $copiedCartRule->save();
 
-        foreach($copiedCartRule->channels as $channel) {
+        foreach ($copiedCartRule->channels as $channel) {
             $copiedCartRule->channels()->save($channel);
         }
 
-        foreach($copiedCartRule->customer_groups as $group) {
+        foreach ($copiedCartRule->customer_groups as $group) {
             $copiedCartRule->customer_groups()->save($group);
         }
 
