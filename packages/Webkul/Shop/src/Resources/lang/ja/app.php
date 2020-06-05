@@ -422,6 +422,8 @@ return [
                 'success' => 'アイテムがカートに追加されました。',
                 'success-remove' => 'アイテムがカートから削除されました。',
                 'error-add' => 'アイテムをカートに追加できません。しばらくしてから再度お試し下さい。',
+                'inactive' => 'An item is inactive and was removed from cart.',
+                'inactive-add' => 'Inactive item cannot be added to cart.',
             ],
             'quantity-error' => 'ご希望の数量の在庫が現在ございません。',
             'cart-subtotal' => '小計',

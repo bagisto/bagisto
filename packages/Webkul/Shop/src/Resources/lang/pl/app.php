@@ -459,6 +459,8 @@ return [
                 'success' => 'Produkt został pomyślnie dodany do koszyka.',
                 'success-remove' => 'Produkt został pomyślnie usunięty z koszyka.',
                 'error-add' => 'Nie można dodać produktu do koszyka, spróbuj ponownie później.',
+                'inactive' => 'An item is inactive and was removed from cart.',
+                'inactive-add' => 'Inactive item cannot be added to cart.',
             ],
             'quantity-error' => 'Żądana ilość nie jest dostępna.',
             'cart-subtotal' => 'Suma częściowa koszyka',

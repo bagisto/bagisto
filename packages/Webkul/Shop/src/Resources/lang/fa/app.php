@@ -460,6 +460,8 @@ return [
                 'success' => 'مورد با موفقیت به سبد خرید اضافه شد',
                 'success-remove' => 'مورد با موفقیت از سبد خرید حذف شد',
                 'error-add' => 'لطفاً موردی را به سبد خرید اضافه نکرد ، لطفا بعداً دوباره امتحان کنید',
+                'inactive' => 'An item is inactive and was removed from cart.',
+                'inactive-add' => 'Inactive item cannot be added to cart.',
             ],
 
             'quantity-error' => 'مقدار درخواستی در دسترس نیست',

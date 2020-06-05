@@ -460,6 +460,8 @@ return [
                 'success' => 'Prodotto aggiunto al carrello.',
                 'success-remove' => 'Prodotto rimosso dal carrello.',
                 'error-add' => 'Il prodotto non può essere aggiunto al carrello, prova ancora.',
+                'inactive' => 'An item is inactive and was removed from cart.',
+                'inactive-add' => 'Inactive item cannot be added to cart.',
             ],
             'quantity-error' => 'La quantità richiesta non è disponibile.',
             'cart-subtotal' => 'Subtotale Carrello',
@@ -672,7 +674,7 @@ return [
                 'subject' => 'Email Iscrizione',
                 'greeting' => ' Benvenuto ' . config('app.name') . ' - Email Iscrizione',
                 'unsubscribe' => 'Cancellati',
-                'summary' => 'Grazie per avere scelto di ricevere le nostre email. È passato un po\' di tempo da quando hai letto le email di ' . config('app.name') . '. Non è un nostro desidero inondare la tua casella email con le nostre comunicazioni. Se desideri comunque 
+                'summary' => 'Grazie per avere scelto di ricevere le nostre email. È passato un po\' di tempo da quando hai letto le email di ' . config('app.name') . '. Non è un nostro desidero inondare la tua casella email con le nostre comunicazioni. Se desideri comunque
                 non ricevere più le nostre news clicca il bottone qui sotto.'
             ]
         ]

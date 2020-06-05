@@ -428,6 +428,8 @@ return [
                 'success' => 'El artículp se añadió a la cesta',
                 'success-remove' => 'El artículo se eliminó de la cesta',
                 'error-add' => 'El artículo no se puede añadir a la cesta, inténtelo más tarde',
+                'inactive' => 'An item is inactive and was removed from cart.',
+                'inactive-add' => 'Inactive item cannot be added to cart.',
             ],
             'quantity-error' => 'La cantidad solicitada no está disponible',
             'cart-subtotal' => 'Total parcial',

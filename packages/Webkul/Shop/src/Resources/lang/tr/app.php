@@ -459,6 +459,8 @@ return [
                 'success' => 'Ürün başarıyla sepete eklendi.',
                 'success-remove' => 'Ürün sepetten başarıyla kaldırıldı.',
                 'error-add' => 'Ürün sepete eklenirken hata oluştu, lütfen tekrar deneyin.',
+                'inactive' => 'An item is inactive and was removed from cart.',
+                'inactive-add' => 'Inactive item cannot be added to cart.',
             ],
             'quantity-error' => 'Girilen miktar mevcut değil.',
             'cart-subtotal' => 'Sepet Ara Toplam',
@@ -572,7 +574,7 @@ return [
             'final-summary' => 'Bizi tercih ettiğiniz için teşekkür ederiz. Ürün kargoya teslim edildikten sonra takip numarası iletilecektir.',
             'help' => 'Soru ve görüşleriniz için lütfen bizimle iletişime geçiniz: :support_email',
             'thanks' => 'Teşekkürler!',
-            
+
             'comment' => [
                 'subject' => 'Siparişinize yeni yorum yapıldı.',
                 'dear' => 'Sayın :customer_name',
