@@ -605,8 +605,8 @@ abstract class AbstractType
             }
 
             if ($price->value < $lastPrice) {
-                if ($price->value_type == 'percentage') {
-                    $lastPrice = $product->price * ($price->value / 100);
+                if ($price->value_type == 'discount') {
+                    $lastPrice = $product->price - ($product->price * $price->value) / 100;
                 } else {
                     $lastPrice = $price->value;
                 }
