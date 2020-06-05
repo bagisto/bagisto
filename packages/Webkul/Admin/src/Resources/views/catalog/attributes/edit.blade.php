@@ -379,7 +379,7 @@
                             @foreach (app('Webkul\Core\Repositories\LocaleRepository')->all() as $locale)
                                 <td>
                                     <div class="control-group" :class="[errors.has(localeInputName(row, '{{ $locale->code }}')) ? 'has-error' : '']">
-                                        <input type="text" v-validate="getOptionValidation(row, '{{ $locale->code }}')" v-model="row['{{ $locale->code }}']" :name="localeInputName(row, '{{ $locale->code }}')" class="control" data-vv-as="&quot;{{ $locale->name . ' (' . $locale->code . ')' }}&quot;"/>
+                                        <input type="text" v-validate="getOptionValidation(row, '{{ $locale->code }}')" v-model="row['locales']['{{ $locale->code }}']" :name="localeInputName(row, '{{ $locale->code }}')" class="control" data-vv-as="&quot;{{ $locale->name . ' (' . $locale->code . ')' }}&quot;"/>
                                         <span class="control-error" v-if="errors.has(localeInputName(row, '{{ $locale->code }}'))">@{{ errors.first(localeInputName(row, '{!! $locale->code !!}')) }}</span>
                                     </div>
                                 </td>
@@ -434,7 +434,8 @@
                             'sort_order': @json($option->sort_order),
                             'swatch_value': @json($option->swatch_value),
                             'swatch_value_url': @json($option->swatch_value_url),
-                            'notRequired': ''
+                            'notRequired': '',
+                            'locales': {}
                         };
 
                     @if (empty($option->label))
@@ -444,7 +445,7 @@
                     @endif
 
                     @foreach (app('Webkul\Core\Repositories\LocaleRepository')->all() as $locale)
-                        row['{{ $locale->code }}'] = @json($option->translate($locale->code)['label'] ?? '');
+                        row['locales']['{{ $locale->code }}'] = @json($option->translate($locale->code)['label'] ?? '');
                     @endforeach
 
                     this.optionRows.push(row);
@@ -465,10 +466,10 @@
                 addOptionRow: function (isNullOptionRow) {
                     const rowCount = this.optionRowCount++;
                     const id = 'option_' + rowCount;
-                    let row = {'id': id};
+                    let row = {'id': id, 'locales': {}};
 
                     @foreach (app('Webkul\Core\Repositories\LocaleRepository')->all() as $locale)
-                        row['{{ $locale->code }}'] = '';
+                        row['locales']['{{ $locale->code }}'] = '';
                     @endforeach
 
                     row['notRequired'] = '';
