@@ -20,9 +20,6 @@
                         <div class="card-content">
                             <ul type="none">
                                 <li>
-                                    {{ $billingAddress->company_name ?? '' }}
-                                </li><br />
-                                <li>
                                     {{ $billingAddress->name }}
                                 </li><br />
                                 <li>
@@ -48,9 +45,6 @@
 
                         <div class="card-content">
                             <ul>
-                                <li>
-                                    {{ $shippingAddress->company_name ?? '' }}
-                                </li><br/>
                                 <li>
                                     {{ $shippingAddress->name }}
                                 </li><br/>

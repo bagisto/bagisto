@@ -214,4 +214,48 @@ class CartController extends Controller
     {
         return is_array($result) && isset($result['warning']);
     }
+
+
+
+
+    public function reorder($id)
+    {
+        try {
+            $result = Cart::addProduct($id, request()->all());
+
+            if ($this->onWarningAddingToCart($result)) {
+                session()->flash('warning', $result['warning']);
+
+                return redirect()->back();
+            }
+
+            if ($result instanceof CartModel) {
+                session()->flash('success', trans('shop::app.checkout.cart.item.success'));
+
+                if ($customer = auth()->guard('customer')->user()) {
+                    $this->wishlistRepository->deleteWhere(['product_id' => $id, 'customer_id' => $customer->id]);
+                }
+
+                if (request()->get('is_buy_now')) {
+                    Event::dispatch('shop.item.buy-now', $id);
+
+                    return redirect()->route('shop.checkout.onepage.index');
+                }
+            }
+        } catch (\Exception $e) {
+            session()->flash('error', trans($e->getMessage()));
+
+            $product = $this->productRepository->find($id);
+
+            return redirect()->route('shop.productOrCategory.index', $product->url_key);
+        }
+
+
+        return redirect()->route('shop.checkout.cart.index');
+
+
+    }
+
+
+
 }

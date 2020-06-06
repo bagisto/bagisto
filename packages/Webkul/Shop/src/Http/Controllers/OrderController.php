@@ -2,6 +2,9 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
+use Webkul\Core\Models\CoreConfig;
+use Webkul\Product\Models\ProductInventory;
+use Webkul\Product\Models\ProductOrderedInventory;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use PDF;
@@ -70,7 +73,26 @@ class OrderController extends Controller
             abort(404);
         }
 
-        return view($this->_config['view'], compact('order'));
+        foreach($order->items as $item)
+        {
+
+            $order_product = ProductOrderedInventory::where('product_id', '=', $item->product_id)->first();
+            $product = ProductInventory::where('product_id', '=', $item->product_id)->first();
+
+
+            if($order_product['product_id'] == $product['product_id']){
+                $in_stock_product = $product['qty']-$order_product['qty'];
+                if($in_stock_product == 0){
+                    $in_stock_product = '';
+                }
+
+            }
+        }
+
+        $reorder = CoreConfig::where('code','=','customer.settings.re-order.re-order')
+            ->first();
+
+        return view($this->_config['view'], compact('order','in_stock_product','reorder'));
     }
 
     /**

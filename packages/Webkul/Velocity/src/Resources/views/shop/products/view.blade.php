@@ -24,36 +24,7 @@
 
 @section('seo')
     <meta name="description" content="{{ trim($product->meta_description) != "" ? $product->meta_description : str_limit(strip_tags($product->description), 120, '') }}"/>
-
     <meta name="keywords" content="{{ $product->meta_keywords }}"/>
-
-    @if (core()->getConfigData('catalog.rich_snippets.products.enable'))
-        <script type="application/ld+json">
-            {!! app('Webkul\Product\Helpers\SEO')->getProductJsonLd($product) !!}
-        </script>
-    @endif
-
-    <?php $productBaseImage = app('Webkul\Product\Helpers\ProductImage')->getProductBaseImage($product); ?>
-
-    <meta name="twitter:card" content="summary_large_image" />
-
-    <meta name="twitter:title" content="{{ $product->name }}" />
-
-    <meta name="twitter:description" content="{{ $product->description }}" />
-
-    <meta name="twitter:image:alt" content="" />
-
-    <meta name="twitter:image" content="{{ $productBaseImage['medium_image_url'] }}" />
-
-    <meta property="og:type" content="og:product" />
-
-    <meta property="og:title" content="{{ $product->name }}" />
-
-    <meta property="og:image" content="{{ $productBaseImage['medium_image_url'] }}" />
-
-    <meta property="og:description" content="{{ $product->description }}" />
-
-    <meta property="og:url" content="{{ route('shop.productOrCategory.index', $product->url_key) }}" />
 @stop
 
 @push('css')
@@ -234,6 +205,8 @@
             },
 
             mounted: function () {
+                // this.open360View();
+
                 let currentProductId = '{{ $product->url_key }}';
                 let existingViewed = window.localStorage.getItem('recentlyViewed');
 
@@ -282,6 +255,44 @@
                         }
                     });
                 },
+
+                open360View: function () {
+                    this.slot = false;
+
+                    setTimeout(() => {
+                        $('.spritespin').spritespin({
+                            source: SpriteSpin.sourceArray('http://shubham.webkul.com/3d-image/sample-{lane}-{frame}.jpg', {
+                                lane: [0,5],
+                                frame: [0,5],
+                                digits: 2
+                            }),
+                            // width and height of the display
+                            width: 400,
+                            height: 225,
+                            // the number of lanes (vertical angles)
+                            lanes: 12,
+                            // the number of frames per lane (per vertical angle)
+                            frames: 24,
+                            // interaction sensitivity (and direction) modifier for horizontal movement
+                            sense: 1,
+                            // interaction sensitivity (and direction) modifier for vertical movement
+                            senseLane: -2,
+
+                            // the initial lane number
+                            lane: 6,
+                            // the initial frame number (within the lane)
+                            frame: 0,
+                            // disable autostart of the animation
+                            animate: false,
+
+                            plugins: [
+                                'progress',
+                                '360',
+                                'drag'
+                            ]
+                        });
+                    }, 0);
+                }
             }
         });
 

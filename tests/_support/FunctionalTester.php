@@ -1,11 +1,15 @@
 <?php
 
-use Webkul\User\Models\Admin;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
-use Webkul\Customer\Models\Customer;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\RouteCollection;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route;
+use Webkul\User\Models\Admin;
+use Webkul\Customer\Models\Customer;
+use Webkul\Customer\Models\CustomerAddress;
+use Webkul\Checkout\Models\Cart;
+use Webkul\Checkout\Models\CartItem;
+use Webkul\Checkout\Models\CartAddress;
 
 /**
  * Inherited Methods
@@ -86,10 +90,10 @@ class FunctionalTester extends \Codeception\Actor
     /**
      * @param string $name
      */
-    public function amOnAdminRoute(string $name, array $params = [])
+    public function amOnAdminRoute(string $name)
     {
         $I = $this;
-        $I->amOnRoute($name, $params);
+        $I->amOnRoute($name);
         $I->seeCurrentRouteIs($name);
 
         /** @var RouteCollection $routes */

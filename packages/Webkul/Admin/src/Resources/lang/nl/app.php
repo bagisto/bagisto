@@ -42,7 +42,6 @@ return [
     ],
 
     'layouts' => [
-        'app-version' => 'Version : :version',
         'my-account' => 'Mijn Profiel',
         'logout' => 'Afmelden',
         'visit-shop' => 'Winkel Bezoeken',
@@ -371,11 +370,7 @@ return [
             'total-due' => 'Total Due',
             'cancel-confirm-msg' => 'Weet u zeker dat u deze bestelling wilt annuleren ?',
             'refund-btn-title' => 'Terugbetaling',
-            'refunds' => 'Terugbetalingen',
-            'comment-added-success' => 'Comment addded successfully.',
-            'comment' => 'Comment',
-            'submit-comment' => 'Submit Comment',
-            'notify-customer' => 'Notify Customer',
+            'refunds' => 'Terugbetalingen'
         ],
 
         'invoices' => [
@@ -1314,35 +1309,8 @@ return [
             'all-channels' => 'Alles',
             'all-locales' => 'Alles',
             'invoice-slip-design' => 'Invoice Slip Design',
-            'logo' => 'Logo',
-            'storefront' => 'Storefront',
-            'default-list-mode' => 'Default List Mode',
-            'grid' => 'Grid',
-            'list' => 'List',
-            'products-per-page' => 'Products Per Page',
-            'sort-by' => 'Sort By',
-            'from-z-a' => 'From Z-A',
-            'from-a-z' => 'From A-Z',
-            'newest-first' => 'Newest First',
-            'oldest-first' => 'Oldest First',
-            'cheapest-first' => 'Cheapest First',
-            'expensive-first' => 'Expensive First',
-            'comma-seperated' => 'Comma Seperated',
-            'favicon' => 'Favicon',
-            'seo' => 'SEO',
-            'rich-snippets' => 'Rich Snippets',
-            'products' => 'Products',
-            'enable' => 'Enable',
-            'show-weight' => 'Show Weight',
-            'show-categories' => 'Show Categories',
-            'show-images' => 'Show Images',
-            'show-reviews' => 'Show Reviews',
-            'show-ratings' => 'Show Ratings',
-            'show-offers' => 'Show Offers',
-            'show-sku' => 'Show SKU',
-            'categories' => 'Categories',
-            'show-sku' => 'Show SKU',
-            'show-search-input-field' => 'Show Search Input Field'
+            'logo' => 'logo',
+            'favicon' => 'Favicon'
         ]
     ]
 ];

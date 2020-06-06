@@ -21,10 +21,43 @@
 
 
                 @if ($order->canCancel())
-                    <a href="{{ route('customer.orders.cancel', $order->id) }}" class="btn btn-lg btn-primary" v-alert:message="'{{ __('shop::app.customer.account.order.view.cancel-confirm-msg') }}'" style="float: right">
+                    <a href="{{ route('customer.orders.cancel', $order->id) }}" class="btn btn-lg btn-primary" v-alert:message="'{{ __('admin::app.sales.orders.cancel-confirm-msg') }}'" style="float: right">
                         {{ __('shop::app.customer.account.order.view.cancel-btn-title') }}
                     </a>
                 @endif
+
+
+
+                
+
+                {{------------------------re-order functionality page------------}}
+                @if($reorder->value == 1)
+
+                    @foreach($order->items as $item)
+
+                        <form action="{{ route('cart.reorder', $item->product_id) }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $item->product_id }}">
+                            <input type="hidden" name="quantity" value="{{$item->qty_ordered}}">
+                            
+                                <button class="btn btn-lg btn-primary addtocart"  {{$in_stock_product ?  '' : 'disabled'}}
+                                        onclick="return confirm('Do you really want to perform this action?')">
+                                    Re-order
+                                </button>
+                            
+                        </form>
+
+                    @endforeach
+
+
+                @endif
+
+                {{------------------------ end  re-order functionality page------------}}
+
+
+
+
+
             </div>
 
             {!! view_render_event('bagisto.shop.customers.account.orders.view.before', ['order' => $order]) !!}
@@ -315,20 +348,6 @@
                             @foreach ($order->shipments as $shipment)
 
                                 <div class="sale-section">
-                                    <div class="section-content">
-                                        <div class="row">
-                                            <span class="title">
-                                                {{ __('shop::app.customer.account.order.view.tracking-number') }}
-                                            </span>
-
-                                            <span class="value">
-                                                {{  $shipment->track_number }}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="sale-section">
                                     <div class="secton-title">
                                         <span>{{ __('shop::app.customer.account.order.view.individual-shipment', ['shipment_id' => $shipment->id]) }}</span>
                                     </div>
@@ -409,7 +428,7 @@
 
                                                     @if (! $refund->items->count())
                                                         <tr>
-                                                            <td class="empty" colspan="7">{{ __('shop::app.common.no-result-found') }}</td>
+                                                            <td class="empty" colspan="7">{{ __('admin::app.common.no-result-found') }}</td>
                                                         <tr>
                                                     @endif
                                                 </tbody>

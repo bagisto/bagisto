@@ -2,7 +2,6 @@
 
 namespace Webkul\Checkout;
 
-use Webkul\Checkout\Models\Cart as CartModel;
 use Webkul\Checkout\Models\CartAddress;
 use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Checkout\Repositories\CartItemRepository;
@@ -437,19 +436,20 @@ class Cart
      *
      * @return \Webkul\Checkout\Contracts\Cart|null
      */
-    public function getCart(): ?\Webkul\Checkout\Contracts\Cart
+    public function getCart()
     {
+        $cart = null;
+
         if ($this->getCurrentCustomer()->check()) {
-            return $this->cartRepository->findOneWhere([
+            $cart = $this->cartRepository->findOneWhere([
                 'customer_id' => $this->getCurrentCustomer()->user()->id,
                 'is_active'   => 1,
             ]);
-
         } elseif (session()->has('cart')) {
-            return $this->cartRepository->find(session()->get('cart')->id);
+            $cart = $this->cartRepository->find(session()->get('cart')->id);
         }
 
-        return null;
+        return $cart && $cart->is_active ? $cart : null;
     }
 
     /**
@@ -483,8 +483,7 @@ class Cart
      *
      * @param array $data
      *
-     * @return bool
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     * @return void is the cart valid
      */
     public function saveCustomerAddress($data): bool
     {
@@ -499,7 +498,7 @@ class Cart
         $this->saveAddressesWhenRequested($data, $billingAddressData, $shippingAddressData);
 
         $this->linkAddresses($cart, $billingAddressData, $shippingAddressData);
-        
+
         $this->assignCustomerFields($cart);
 
         $cart->save();
@@ -601,8 +600,6 @@ class Cart
             $cart->base_discount_amount += $shipping->base_discount_amount;
         }
 
-        $cart = $this->finalizeCartTotals($cart);
-
         $quantities = 0;
 
         foreach ($cart->items as $item) {
@@ -636,7 +633,6 @@ class Cart
         } else {
             foreach ($cart->items as $item) {
                 $response = $item->product->getTypeInstance()->validateCartItem($item);
-                // ToDo: refactoring of all validateCartItem functions, at the moment they return nothing
 
                 if ($response) {
                     return;
@@ -690,7 +686,7 @@ class Cart
             if ($address === null) {
                 $address = new class() {
                     public $country;
-                    public $state;
+
                     public $postcode;
 
                     function __construct()
@@ -745,7 +741,7 @@ class Cart
      * @param  \Webkul\Checkout\Contracts\CartItem  $item
      * @return \Webkul\Checkout\Contracts\CartItem
      */
-    protected function setItemTaxToZero(\Webkul\Checkout\Contracts\CartItem $item): \Webkul\Checkout\Contracts\CartItem
+    protected function setItemTaxToZero(CartItem $item): CartItem
     {
         $item->tax_percent = 0;
         $item->tax_amount = 0;
@@ -759,7 +755,7 @@ class Cart
      *
      * @return bool
      */
-    public function hasError(): bool
+    public function hasError()
     {
         if (! $this->getCart()) {
             return true;
@@ -777,7 +773,7 @@ class Cart
      *
      * @return bool
      */
-    public function isItemsHaveSufficientQuantity(): bool
+    public function isItemsHaveSufficientQuantity()
     {
         foreach ($this->getCart()->items as $item) {
             if (! $this->isItemHaveQuantity($item)) {
@@ -794,7 +790,7 @@ class Cart
      * @param \Webkul\Checkout\Contracts\CartItem  $item
      * @return bool
      */
-    public function isItemHaveQuantity($item): bool
+    public function isItemHaveQuantity($item)
     {
         return $item->product->getTypeInstance()->isItemHaveQuantity($item);
     }
@@ -804,7 +800,7 @@ class Cart
      *
      * @return void
      */
-    public function deActivateCart(): void
+    public function deActivateCart()
     {
         if ($cart = $this->getCart()) {
             $this->cartRepository->update(['is_active' => false], $cart->id);
@@ -820,7 +816,7 @@ class Cart
      *
      * @return array
      */
-    public function prepareDataForOrder(): array
+    public function prepareDataForOrder()
     {
         $data = $this->toArray();
 
@@ -879,7 +875,7 @@ class Cart
      * @param  array  $data
      * @return array
      */
-    public function prepareDataForOrderItem($data): array
+    public function prepareDataForOrderItem($data)
     {
         $finalData = [
             'product'              => $this->productRepository->find($data['product_id']),
@@ -1037,9 +1033,9 @@ class Cart
      * When logged in as guest or the customer profile is not complete, we use the
      * billing address to fill the order customer_ data.
      *
-     * @param \Webkul\Checkout\Contracts\Cart $cart
+     * @param \Webkul\Checkout\Models\Cart $cart
      */
-    private function assignCustomerFields(\Webkul\Checkout\Contracts\Cart $cart): void
+    private function assignCustomerFields(\Webkul\Checkout\Models\Cart $cart): void
     {
         if ($this->getCurrentCustomer()->check()
             && ($user = $this->getCurrentCustomer()->user())
@@ -1053,25 +1049,6 @@ class Cart
             $cart->customer_first_name = $cart->billing_address->first_name;
             $cart->customer_last_name = $cart->billing_address->last_name;
         }
-    }
-
-    /**
-     * Round cart totals
-     *
-     * @param \Webkul\Checkout\Models\Cart $cart
-     *
-     * @return \Webkul\Checkout\Models\Cart
-     */
-    private function finalizeCartTotals(CartModel $cart): CartModel
-    {
-        $cart->discount_amount = round($cart->discount_amount, 2);
-        $cart->base_discount_amount = round($cart->base_discount_amount, 2);
-
-        $cart->grand_total = round($cart->grand_total, 2);
-        $cart->grand_total = round($cart->grand_total, 2);
-        $cart->base_grand_total = round($cart->base_grand_total, 2);
-
-        return $cart;
     }
 
     /**
@@ -1213,17 +1190,14 @@ class Cart
     {
         $billingAddressModel = $cart->billing_address;
         if ($billingAddressModel) {
-            $billingAddressData['address_type'] = CartAddress::ADDRESS_TYPE_BILLING;
             $this->cartAddressRepository->update($billingAddressData, $billingAddressModel->id);
 
             if ($cart->haveStockableItems()) {
                 $shippingAddressModel = $cart->shipping_address;
                 if ($shippingAddressModel) {
                     if (isset($billingAddressData['use_for_shipping']) && $billingAddressData['use_for_shipping']) {
-                        $billingAddressData['address_type'] = CartAddress::ADDRESS_TYPE_SHIPPING;
                         $this->cartAddressRepository->update($billingAddressData, $shippingAddressModel->id);
                     } else {
-                        $shippingAddressData['address_type'] = CartAddress::ADDRESS_TYPE_SHIPPING;
                         $this->cartAddressRepository->update($shippingAddressData, $shippingAddressModel->id);
                     }
                 } else {

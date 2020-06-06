@@ -37,7 +37,7 @@
             :id="galleryCarouselId"
             pagination-enabled="hide"
             navigation-enabled="hide"
-            add-class="product-gallery"
+            add-class="product-gallary"
             :slides-count="thumbs.length">
 
             <slide :slot="`slide-${index}`" v-for="(thumb, index) in thumbs">
@@ -86,12 +86,10 @@
 
                 watch: {
                     'images': function(newVal, oldVal) {
-                        if (this.images[0]) {
-                            this.changeImage({
-                                largeImageUrl: this.images[0]['large_image_url'],
-                                originalImageUrl: this.images[0]['original_image_url'],
-                            })
-                        }
+                        this.changeImage({
+                            largeImageUrl: this.images[0]['large_image_url'],
+                            originalImageUrl: this.images[0]['original_image_url'],
+                        })
 
                         this.prepareThumbs()
                     }

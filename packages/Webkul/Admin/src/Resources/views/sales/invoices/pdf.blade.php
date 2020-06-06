@@ -130,7 +130,6 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <p>{{ $invoice->order->billing_address->company_name ?? '' }}</p>
                                     <p>{{ $invoice->order->billing_address->name }}</p>
                                     <p>{{ $invoice->order->billing_address->address1 }}</p>
                                     <p>{{ $invoice->order->billing_address->city }}</p>
@@ -141,7 +140,6 @@
 
                                 @if ($invoice->order->shipping_address)
                                     <td>
-                                        <p>{{ $invoice->order->shipping_address->company_name ?? '' }}</p>
                                         <p>{{ $invoice->order->shipping_address->name }}</p>
                                         <p>{{ $invoice->order->shipping_address->address1 }}</p>
                                         <p>{{ $invoice->order->shipping_address->city }}</p>

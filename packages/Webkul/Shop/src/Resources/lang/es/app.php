@@ -295,9 +295,7 @@ return [
                     'order-date' => 'Fecha pedido',
                     'bill-to' => 'Facturar a',
                     'ship-to' => 'Envío a',
-                    'contact' => 'Contacto',
-                    'tracking-number' => 'Tracking Number',
-                    'cancel-confirm-msg' => 'Estás segura de que deseas cancelar este pedido ?'
+                    'contact' => 'Contacto'
                 ]
             ],
 
@@ -352,7 +350,6 @@ return [
         'layered-nav-title' => 'Comprado por',
         'price-label' => 'Tan bajo como',
         'remove-filter-link-title' => 'Limpiar todo',
-        'filter-to' => 'a',
         'sort-by' => 'Ordenar por',
         'from-a-z' => 'De A-Z',
         'from-z-a' => 'De Z-A',
@@ -377,7 +374,6 @@ return [
         'new' => 'Nuevo',
         'empty' => 'No hay prodcutos disponibles en esta categoría',
         'add-to-cart' => 'Añadir a la cesta',
-        'book-now' => 'reservar ahora',
         'buy-now' => 'Comprar ahora',
         'whoops' => 'Ups!',
         'quantity' => 'Cantidad',
@@ -386,7 +382,7 @@ return [
         'view-all' => 'Ver todo',
         'select-above-options' => 'Primero selecciona las opciones de arriba.',
         'less-quantity' => 'La cantidad no debe ser inferior a uno.',
-        'available-for-order' => 'Disponible para ordenar',
+        'available' => 'Available'
     ],
 
     // 'reviews' => [
@@ -444,7 +440,6 @@ return [
             'shipping' => 'Envío',
             'payment' => 'Pago',
             'complete' => 'Completado',
-            'review' => 'revisión',
             'billing-address' => 'Dirección de facturación',
             'sign-in' => 'Entrar',
             'first-name' => 'Nombre',

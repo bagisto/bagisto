@@ -43,6 +43,17 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
         'redirect' => 'shop.checkout.cart.index'
     ])->name('cart.add');
 
+
+    //re-order
+
+
+    Route::post('checkout/cart/reorder/{id}', 'Webkul\Shop\Http\Controllers\CartController@reorder')
+        ->defaults('_config', [
+            'redirect' => 'shop.checkout.cart.index'
+        ])->name('cart.reorder');
+
+
+
     //Cart Items Remove
     Route::get('checkout/cart/remove/{id}', 'Webkul\Shop\Http\Controllers\CartController@remove')->name('cart.remove');
 
@@ -50,6 +61,8 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
     Route::post('/checkout/cart', 'Webkul\Shop\Http\Controllers\CartController@updateBeforeCheckout')->defaults('_config', [
         'redirect' => 'shop.checkout.cart.index'
     ])->name('shop.checkout.cart.update');
+
+
 
     //Cart Items Remove
     Route::get('/checkout/cart/remove/{id}', 'Webkul\Shop\Http\Controllers\CartController@remove')->defaults('_config', [
@@ -80,6 +93,10 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
     Route::get('/checkout/success', 'Webkul\Shop\Http\Controllers\OnepageController@success')->defaults('_config', [
         'view' => 'shop::checkout.success'
     ])->name('shop.checkout.success');
+
+
+
+
 
     //Shop buynow button action
     Route::get('move/wishlist/{id}', 'Webkul\Shop\Http\Controllers\CartController@moveToWishlist')->name('shop.movetowishlist');

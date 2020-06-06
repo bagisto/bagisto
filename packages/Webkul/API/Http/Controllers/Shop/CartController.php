@@ -3,6 +3,7 @@
 namespace Webkul\API\Http\Controllers\Shop;
 
 use Illuminate\Support\Facades\Event;
+use Webkul\Checkout\Contracts\Cart as CartModel;
 use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Checkout\Repositories\CartItemRepository;
 use Webkul\API\Http\Resources\Checkout\Cart as CartResource;
@@ -225,4 +226,6 @@ class CartController extends Controller
             'data'    => $cart ? new CartResource($cart) : null,
         ]);
     }
+
+
 }

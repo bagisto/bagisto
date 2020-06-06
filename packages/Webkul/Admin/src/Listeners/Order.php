@@ -10,7 +10,6 @@ use Webkul\Admin\Mail\NewShipmentNotification;
 use Webkul\Admin\Mail\NewInventorySourceNotification;
 use Webkul\Admin\Mail\CancelOrderNotification;
 use Webkul\Admin\Mail\NewRefundNotification;
-use Webkul\Admin\Mail\OrderCommentNotification;
 
 class Order
 {
@@ -121,23 +120,6 @@ class Order
             if (core()->getConfigData($configKey)) {
                 Mail::queue(new CancelOrderNotification($order));
             }
-        } catch (\Exception $e) {
-            report($e);
-        }
-    }
-
-    /**
-     * @param  \Webkul\Sales\Contracts\OrderComment  $comment
-     * @return void
-     */
-    public function sendOrderCommentMail($comment)
-    {
-        if (! $comment->customer_notified) {
-            return;
-        }
-
-        try {
-            Mail::queue(new OrderCommentNotification($comment));
         } catch (\Exception $e) {
             report($e);
         }

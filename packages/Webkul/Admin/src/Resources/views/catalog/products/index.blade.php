@@ -19,6 +19,7 @@
                         </option>
 
                         @foreach (core()->getAllChannels() as $channelModel)
+
                             <option
                                     value="{{ $channelModel->code }}" {{ (isset($channel) && ($channelModel->code) == $channel) ? 'selected' : '' }}>
                                 {{ $channelModel->name }}
@@ -89,6 +90,6 @@
 
             window.location.href = url.href;
         }
-
+        
     </script>
 @endpush

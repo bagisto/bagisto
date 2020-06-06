@@ -124,9 +124,7 @@ class CartRule
 
         $this->processFreeShippingDiscount($cart);
 
-        if (! $this->checkCouponCode()) {
-            cart()->removeCouponCode();
-        }
+        $this->validateCouponCode();
     }
 
     /**
@@ -136,16 +134,11 @@ class CartRule
      */
     public function getCartRules()
     {
-        $staticCartRules = new class() {
-            public static $cartRules;
-            public static $cartID;
-        };
+        static $cartRules;
 
-        if ($staticCartRules::$cartID === cart()->getCart()->id && $staticCartRules::$cartRules) {
-            return $staticCartRules::$cartRules;
+        if ($cartRules) {
+            return $cartRules;
         }
-        
-        $staticCartRules::$cartID = cart()->getCart()->id;
 
         $customerGroupId = null;
 
@@ -173,7 +166,6 @@ class CartRule
                          ->orderBy('sort_order', 'asc');
         })->findWhere(['status' => 1]);
 
-        $staticCartRules::$cartRules = $cartRules;
         return $cartRules;
     }
 
@@ -254,10 +246,6 @@ class CartRule
                 continue;
             }
 
-            if ($rule->coupon_code) {
-                $item->coupon_code = $rule->coupon_code;
-            }
-
             $quantity = $rule->discount_quantity ? min($item->quantity, $rule->discount_quantity) : $item->quantity;
 
             $discountAmount = $baseDiscountAmount = 0;
@@ -266,9 +254,9 @@ class CartRule
                 case 'by_percent':
                     $rulePercent = min(100, $rule->discount_amount);
 
-                    $discountAmount = ($quantity * $item->price + $item->tax_amount - $item->discount_amount) * ($rulePercent / 100);
+                    $discountAmount = ($quantity * $item->price - $item->discount_amount) * ($rulePercent / 100);
 
-                    $baseDiscountAmount = ($quantity * $item->base_price + $item->base_tax_amount - $item->base_discount_amount) * ($rulePercent / 100);
+                    $baseDiscountAmount = ($quantity * $item->base_price - $item->base_discount_amount) * ($rulePercent / 100);
 
                     if (! $rule->discount_quantity || $rule->discount_quantity > $quantity) {
                         $discountPercent = min(100, $item->discount_percent + $rulePercent);
@@ -328,14 +316,8 @@ class CartRule
                     break;
             }
 
-            $item->discount_amount = min(
-                $item->discount_amount + $discountAmount,
-                $item->price * $quantity + $item->tax_amount
-            );
-            $item->base_discount_amount = min(
-                $item->base_discount_amount + $baseDiscountAmount,
-                $item->base_price * $quantity + $item->base_tax_amount
-            );
+            $item->discount_amount = min($item->discount_amount + $discountAmount, $item->price * $quantity + $item->tax_amount);
+            $item->base_discount_amount = min($item->base_discount_amount + $baseDiscountAmount, $item->base_price * $quantity + $item->base_tax_amount);
 
             $appliedRuleIds[$rule->id] = $rule->id;
 
@@ -520,26 +502,23 @@ class CartRule
     }
 
     /**
-     * Check if coupon code is applied or not
+     * Check if coupon code is valid or not, if not remove from cart
      *
-     * @return bool
+     * @return void
      */
-    public function checkCouponCode(): bool
+    public function validateCouponCode()
     {
-        $cart = cart()->getCart();
+        $cart = Cart::getCart();
 
         if (! $cart->coupon_code) {
-            return true;
+            return;
         }
 
-        $coupons = $this->cartRuleCouponRepository->where(['code' => $cart->coupon_code])->get();
-        foreach ($coupons as $coupon) {
-            if (in_array($coupon->cart_rule_id, explode(',', $cart->applied_cart_rule_ids))) {
-                return true;
-            }
-        }
+        $coupon = $this->cartRuleCouponRepository->findOneByField('code', $cart->coupon_code);
 
-        return false;
+        if (! $coupon || ! in_array($coupon->cart_rule_id, explode(',', $cart->applied_cart_rule_ids))) {
+            Cart::removeCouponCode();
+        }
     }
 
     /**

@@ -344,10 +344,9 @@ class Configurable extends AbstractType
     /**
      * Get product minimal price
      *
-     * @param  int  $qty
      * @return float
      */
-    public function getMinimalPrice($qty = null)
+    public function getMinimalPrice()
     {
         $minPrices = [];
 
@@ -398,7 +397,6 @@ class Configurable extends AbstractType
     public function getPriceHtml()
     {
         return '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
-            . ' '
             . '<span class="final-price">' . core()->currency($this->getMinimalPrice()) . '</span>';
     }
 
@@ -543,7 +541,7 @@ class Configurable extends AbstractType
      */
     public function validateCartItem($item)
     {
-        $price = $item->child->product->getTypeInstance()->getFinalPrice($item->quantity);
+        $price = $item->child->product->getTypeInstance()->getFinalPrice();
 
         if ($price == $item->base_price) {
             return;
@@ -574,8 +572,6 @@ class Configurable extends AbstractType
     public function haveSufficientQuantity($qty)
     {
         $backorders = core()->getConfigData('catalog.inventory.stock_options.backorders');
-
-        $backorders = ! is_null ($backorders) ? $backorders : false;
      
         foreach ($this->product->variants as $variant) {
             if ($variant->haveSufficientQuantity($qty)) {
@@ -600,36 +596,5 @@ class Configurable extends AbstractType
         }
             
         return false;
-    }
-
-    /**
-     * @return int
-     */
-    public function totalQuantity()
-    {
-        $total = 0;
-
-        $channelInventorySourceIds = core()->getCurrentChannel()
-                                           ->inventory_sources()
-                                           ->where('status', 1)
-                                           ->pluck('id');
-
-        foreach ($this->product->variants as $variant) {
-            foreach ($variant->inventories as $inventory) {
-                if (is_numeric($index = $channelInventorySourceIds->search($inventory->inventory_source_id))) {
-                    $total += $inventory->qty;
-                }
-            }
-
-            $orderedInventory = $variant->ordered_inventories()
-                                          ->where('channel_id', core()->getCurrentChannel()->id)
-                                          ->first();
-
-            if ($orderedInventory) {
-                $total -= $orderedInventory->qty;
-            }
-        }
-
-        return $total;
     }
 }

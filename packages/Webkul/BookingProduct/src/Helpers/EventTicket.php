@@ -119,7 +119,7 @@ class EventTicket extends Booking
      */
     public function validateCartItem($item)
     {
-        $price = $item->product->getTypeInstance()->getFinalPrice($item->quantity);
+        $price = $item->product->getTypeInstance()->getFinalPrice();
 
         $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $item->product_id);
 

@@ -531,7 +531,7 @@ class Booking
      */
     public function validateCartItem($item)
     {
-        $price = $item->product->getTypeInstance()->getFinalPrice($item->quantity);
+        $price = $item->product->getTypeInstance()->getFinalPrice();
 
         if ($price == $item->base_price) {
             return;

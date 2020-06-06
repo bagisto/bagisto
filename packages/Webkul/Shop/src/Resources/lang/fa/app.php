@@ -313,8 +313,6 @@ return [
                     'individual-refund' => '#:refund_id بازپرداخت',
                     'adjustment-refund' => 'بازپرداخت تنظیم',
                     'adjustment-fee' => 'هزینه تنظیم',
-                    'tracking-number' => 'Tracking Number',
-                    'cancel-confirm-msg' => 'Are you sure you want to cancel this order ?'
                 ]
             ],
 
@@ -370,7 +368,6 @@ return [
         'layered-nav-title' => 'خرید بوسیله ی',
         'price-label' => 'به اندازه کم',
         'remove-filter-link-title' => 'همه را پاک کن',
-        'filter-to' => 'to',
         'sort-by' => 'مرتب سازی بر اساس',
         'from-a-z' => 'از A-Z',
         'from-z-a' => 'از Z-A',
@@ -395,7 +392,6 @@ return [
         'new' => 'جدید',
         'empty' => 'هیچ کالایی در این گروه موجود نیست',
         'add-to-cart' => 'افزودن به سبد خرید',
-        'book-now' => 'اکنون ثبت کن',
         'buy-now' => 'هم اکنون خریداری کنید',
         'whoops' => 'وای!',
         'quantity' => 'مقدار',
@@ -415,7 +411,7 @@ return [
         'your-customization' => 'شخصی سازی شما',
         'total-amount' => 'مقدار کل',
         'none' => 'هیچ یک',
-        'available-for-order' => 'Available for Order',
+        'available' => 'Available'
     ],
 
     // 'reviews' => [
@@ -477,7 +473,6 @@ return [
             'shipping' => 'حمل دریایی',
             'payment' => 'پرداخت',
             'complete' => 'تکمیل',
-            'review' => 'مرور',
             'billing-address' => 'آدرس قبض',
             'sign-in' => 'ورود',
             'company-name' => 'نام شرکت',
