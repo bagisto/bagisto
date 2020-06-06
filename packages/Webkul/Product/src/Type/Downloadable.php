@@ -235,7 +235,7 @@ class Downloadable extends AbstractType
      */
     public function validateCartItem($item)
     {
-        $price = $item->product->getTypeInstance()->getFinalPrice();
+        $price = $item->product->getTypeInstance()->getFinalPrice($item->quantity);
 
         foreach ($item->product->downloadable_links as $link) {
             if (! in_array($link->id, $item->additional['links'])) {

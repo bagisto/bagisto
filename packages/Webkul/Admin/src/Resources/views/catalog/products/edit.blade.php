@@ -144,6 +144,12 @@
 
                                 @endforeach
 
+                                @if ($attributeGroup->name == 'Price')
+
+                                    @include ('admin::catalog.products.accordians.customer-group-price')
+
+                                @endif
+
                                 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.' . $attributeGroup->name . '.controls.after', ['product' => $product]) !!}
                             </div>
                         </accordian>
@@ -192,8 +198,8 @@
                 selector: 'textarea#description, textarea#short_description',
                 height: 200,
                 width: "100%",
-                plugins: 'image imagetools media wordcount save fullscreen code',
-                toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent  | removeformat | code',
+                plugins: 'image imagetools media wordcount save fullscreen code table lists link hr',
+                toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor link hr | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent  | removeformat | code | table',
                 image_advtab: true
             });
         });
