@@ -57,7 +57,7 @@ class OrderController extends Controller
     }
 
     /**
-     * Show the view for the specified resource.
+     * Show the view for the specified resource. with re-order funcationality
      *
      * @param  int  $id
      * @return \Illuminate\View\View

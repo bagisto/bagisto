@@ -46,12 +46,10 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
 
     //re-order
 
-
     Route::post('checkout/cart/reorder/{id}', 'Webkul\Shop\Http\Controllers\CartController@reorder')
         ->defaults('_config', [
             'redirect' => 'shop.checkout.cart.index'
         ])->name('cart.reorder');
-
 
 
     //Cart Items Remove

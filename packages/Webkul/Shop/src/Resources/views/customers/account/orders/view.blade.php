@@ -26,10 +26,6 @@
                     </a>
                 @endif
 
-
-
-                
-
                 {{------------------------re-order functionality page------------}}
                 @if($reorder->value == 1)
 

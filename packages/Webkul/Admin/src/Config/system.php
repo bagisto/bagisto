@@ -208,6 +208,7 @@ return [
                 'type'  => 'boolean',
             ],
         ],
+
 ],
 
         [

@@ -217,6 +217,10 @@ class CartController extends Controller
 
 
 
+    /**
+    re-order Functionality
+
+    */
 
     public function reorder($id)
     {
