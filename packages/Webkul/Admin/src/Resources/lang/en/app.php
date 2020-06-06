@@ -1279,9 +1279,7 @@ return [
             'newsletter-subscription' => 'Allow NewsLetter Subscription',
             'email' => 'Email Verification',
             'email-verification' => 'Allow Email Verification',
-
             're-order' => 'Allow Reorder',
-
             'sort_order' => 'Sort Order',
             'general' => 'General',
             'footer' => 'Footer',
