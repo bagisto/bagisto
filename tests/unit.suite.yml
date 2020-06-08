@@ -8,6 +8,7 @@ modules:
     - Asserts
     - Filesystem
     - \Helper\Unit
+    - \Helper\DataMocker
     - Webkul\Core\Helpers\Laravel5Helper:
         environment_file: .env.testing
         run_database_migrations: true
