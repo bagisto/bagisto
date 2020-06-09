@@ -124,7 +124,7 @@
                     @endforeach
                 </template>
 
-                <span v-else-if="isProductListLoaded && products.length == 0">
+                <span v-else-if="isProductListLoaded && products.length == 0" class="col-12">
                     @{{ __('customer.compare.empty-text') }}
                 </span>
             </table>
