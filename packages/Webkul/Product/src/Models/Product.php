@@ -179,6 +179,14 @@ class Product extends Model implements ProductContract
     }
 
     /**
+     * Get the product customer group prices that owns the product.
+     */
+    public function customer_group_prices()
+    {
+        return $this->hasMany(ProductCustomerGroupPriceProxy::modelClass());
+    }
+
+    /**
      * @param integer $qty
      *
      * @return bool

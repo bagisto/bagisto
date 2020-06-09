@@ -2,6 +2,7 @@
 
 return [
     'save' => 'Save',
+    'copy-of' => 'Copy of',
     'create' => 'Create',
     'update' => 'Update',
     'delete' => 'Delete',
@@ -19,7 +20,6 @@ return [
     'true' => 'True',
     'false' => 'False',
     'apply' => 'Apply',
-    'action' => 'Action',
     'label' => 'Label',
     'name' => 'Name',
     'title' => 'Title',
@@ -365,7 +365,6 @@ return [
             'tax-percent' => 'Tax Percent',
             'tax-amount' => 'Tax Amount',
             'discount-amount' => 'Discount Amount',
-            'discount-amount' => 'Discount Amount',
             'grand-total' => 'Grand Total',
             'total-paid' => 'Total Paid',
             'total-refunded' => 'Total Refunded',
@@ -483,8 +482,6 @@ return [
             'price' => 'Price',
             'weight' => 'Weight',
             'status' => 'Status',
-            'enabled' => 'Enabled',
-            'disabled' => 'Disabled',
             'add-variant-title' => 'Add Variant',
             'variant-already-exist-message' => 'Variant with same attribute options already exists.',
             'add-image-btn-title' => 'Add Image',
@@ -516,7 +513,6 @@ return [
             'searching' => 'Searching ...',
             'grouped-products' => 'Grouped Products',
             'search-products' => 'Search Products',
-            'no-result-found' => 'Products not found with same name.',
             'channel' => 'Channels',
             'bundle-items' => 'Bundle Items',
             'add-option-btn-title' => 'Add Option',
@@ -528,7 +524,12 @@ return [
             'checkbox' => 'Checkbox',
             'multiselect' => 'Multiselect',
             'new-option' => 'New Option',
-            'is-default' => 'Is Default'
+            'is-default' => 'Is Default',
+            'customer-group' => 'Customer Group',
+            'add-group-price' => 'Add Customer Group Price',
+            'all-group' => 'All Groups',
+            'fixed' => 'Fixed',
+            'discount' => 'Discount',
         ],
 
         'attributes' => [
@@ -565,7 +566,6 @@ return [
             'yes' => 'Yes',
             'no' => 'No',
             'value_per_locale' => 'Value Per Locale',
-            'value_per_channel' => 'Value Per Channel',
             'value_per_channel' => 'Value Per Channel',
             'is_filterable' => 'Use in Layered Navigation',
             'is_configurable' => 'Use To Create Configurable Product',
@@ -675,7 +675,6 @@ return [
                 'edit-button-title' => 'Edit Rate'
             ],
             'zip_code' => 'Zip Code',
-            'is_zip' => 'Enable Zip Range',
         ],
 
         'sales' => [
@@ -694,7 +693,6 @@ return [
             'title' => 'Locales',
             'add-title' => 'Add Locale',
             'edit-title' => 'Edit Locale',
-            'add-title' => 'Add Locale',
             'save-btn-title' => 'Save Locale',
             'general' => 'General',
             'code' => 'Code',
@@ -821,7 +819,7 @@ return [
             'created-fault' => 'Error in creating slider item',
             'update-success' => 'Slider item successfully updated',
             'update-fail' => 'Slider cannot be updated',
-            'delete-success' => 'Cannot delete last llider item',
+            'delete-success' => 'Cannot delete last slider item',
             'delete-fail' => 'Slider item successfully deleted'
         ],
 
@@ -867,7 +865,6 @@ return [
                 'edit-button-title' => 'Edit Rate'
             ],
             'zip_code' => 'Zip Code',
-            'is_zip' => 'Enable Zip Range',
             'create-success' => 'Tax Rate Created Successfully',
             'create-error' => 'Cannot Create Tax Rate',
             'update-success' => 'Tax Rate Updated Successfully',
@@ -886,7 +883,6 @@ return [
             'edit-title' => 'Edit Group',
             'save-btn-title' => 'Save Group',
             'title' => 'Groups',
-            'save-btn-title' => 'Save Group',
             'code' => 'Code',
             'name' => 'Name',
             'is_user_defined' => 'User Defined',
@@ -950,7 +946,6 @@ return [
             'other' => 'Other',
             'male' => 'Male',
             'female' => 'Female',
-            'phone' => 'Phone',
             'group-default' => 'Cannot delete the default group.',
             'edit-help-title' => 'Edit Customer',
             'delete-help-title' => 'Delete Customer',
@@ -1020,6 +1015,7 @@ return [
             'choose-condition-to-add' => 'Choose a condition to add',
             'cart-attribute' => 'Cart Attribute',
             'subtotal' => 'Subtotal',
+            'additional' => 'Additional Information',
             'total-items-qty' => 'Total Items Qty',
             'total-weight' => 'Total Weight',
             'payment-method' => 'Payment Method',
@@ -1336,7 +1332,6 @@ return [
             'favicon' => 'Favicon',
             'seo' => 'SEO',
             'rich-snippets' => 'Rich Snippets',
-            'products' => 'Products',
             'enable' => 'Enable',
             'show-weight' => 'Show Weight',
             'show-categories' => 'Show Categories',
@@ -1346,7 +1341,6 @@ return [
             'show-offers' => 'Show Offers',
             'show-sku' => 'Show SKU',
             'categories' => 'Categories',
-            'show-sku' => 'Show SKU',
             'show-search-input-field' => 'Show Search Input Field'
        ]
     ]
