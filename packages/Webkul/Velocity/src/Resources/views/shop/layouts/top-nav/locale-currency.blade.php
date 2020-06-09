@@ -1,5 +1,22 @@
-{!! view_render_event('bagisto.shop.layout.header.locale.before') !!}
+@php
+    $searchQuery = request()->input();
 
+    if ($searchQuery) {
+        $searchQuery = implode('&', array_map(
+            function ($v, $k) {
+                if (is_array($v)) {
+                    return $k.'[]='.implode('&'.$k.'[]=', $v);
+                } else {
+                    return $k.'='.$v;
+                }
+            }, 
+            $searchQuery, 
+            array_keys($searchQuery)
+        ));
+    }
+@endphp
+
+{!! view_render_event('bagisto.shop.layout.header.locale.before') !!}
     <div class="pull-left">
         <div class="dropdown">
 
@@ -30,9 +47,9 @@
                 @endif>
                 
                 @foreach (core()->getCurrentChannel()->locales as $locale)
-                    @if (isset($serachQuery))
+                    @if (isset($searchQuery))
                         <option
-                            value="?{{ $serachQuery }}&locale={{ $locale->code }}"
+                            value="?{{ $searchQuery }}&locale={{ $locale->code }}"
                             {{ $locale->code == app()->getLocale() ? 'selected' : '' }}>
                             {{ $locale->name }}
                         </option>
@@ -55,12 +72,12 @@
     @if (core()->getCurrentChannel()->currencies->count() > 1)
         <div class="pull-left">
             <div class="dropdown">
-               <select
+                <select
                     class="btn btn-link dropdown-toggle control locale-switcher styled-select"
                     onchange="window.location.href = this.value">
                     @foreach (core()->getCurrentChannel()->currencies as $currency)
-                        @if (isset($serachQuery))
-                            <option value="?{{ $serachQuery }}&currency={{ $currency->code }}" {{ $currency->code == core()->getCurrentCurrencyCode() ? 'selected' : '' }}>{{ $currency->code }}</option>
+                        @if (isset($searchQuery))
+                            <option value="?{{ $searchQuery }}&currency={{ $currency->code }}" {{ $currency->code == core()->getCurrentCurrencyCode() ? 'selected' : '' }}>{{ $currency->code }}</option>
                         @else
                             <option value="?currency={{ $currency->code }}" {{ $currency->code == core()->getCurrentCurrencyCode() ? 'selected' : '' }}>{{ $currency->code }}</option>
                         @endif
