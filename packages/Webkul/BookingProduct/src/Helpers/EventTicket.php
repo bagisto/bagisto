@@ -47,10 +47,19 @@ class EventTicket extends Booking
     public function formatPrice($tickets)
     {
         foreach ($tickets as $index => $ticket) {
+            $price = $ticket->price;
+
+            if ($this->isInSale($ticket)) {
+                $price = $ticket->special_price;
+
+                $tickets[$index]['original_converted_price'] = core()->convertPrice($ticket->price);
+                $tickets[$index]['original_formated_price'] = core()->currency($ticket->price);
+            }
+
             $tickets[$index]['id'] = $ticket->id;
-            $tickets[$index]['converted_price'] = core()->convertPrice($ticket->price);
-            $tickets[$index]['formated_price'] = $formatedPrice = core()->currency($ticket->price);
-            $tickets[$index]['formated_price_text'] = trans('bookingproduct::app.shop.products.per-ticket-price', ['price' => $formatedPrice]);
+            $tickets[$index]['converted_price'] = core()->convertPrice($price);
+            $tickets[$index]['formated_price'] = $formatedPrice = core()->currency($price);
+            $tickets[$index]['formated_price_text'] = __('bookingproduct::app.shop.products.per-ticket-price', ['price' => $formatedPrice]);
         }
 
         return $tickets;
@@ -102,10 +111,15 @@ class EventTicket extends Booking
 
             $ticket = $bookingProduct->event_tickets()->find($product['additional']['booking']['ticket_id']);
 
-            $products[$key]['price'] += core()->convertPrice($ticket->price);
-            $products[$key]['base_price'] += $ticket->price;
-            $products[$key]['total'] += (core()->convertPrice($ticket->price) * $products[$key]['quantity']);
-            $products[$key]['base_total'] += ($ticket->price * $products[$key]['quantity']);
+            $price = $ticket->price;
+            if ($this->isInSale($ticket)) {
+                $price = $ticket->special_price;
+            }
+
+            $products[$key]['price'] += core()->convertPrice($price);
+            $products[$key]['base_price'] += $price;
+            $products[$key]['total'] += (core()->convertPrice($price) * $products[$key]['quantity']);
+            $products[$key]['base_total'] += ($price * $products[$key]['quantity']);
         }
 
         return $products;
@@ -131,7 +145,11 @@ class EventTicket extends Booking
             return true;
         }
 
-        $price += $ticket->price;
+        if ($this->isInSale($ticket)) {
+            $price += $ticket->special_price;
+        } else {
+            $price += $ticket->price;
+        }
 
         if ($price == $item->base_price) {
             return;
@@ -144,5 +162,18 @@ class EventTicket extends Booking
         $item->total = core()->convertPrice($price * $item->quantity);
 
         $item->save();
+    }
+
+    /**
+     * Determines whether a single ticket is in Sale, i.e. has a valid sale price
+     *
+     * @return bool
+     */
+    public function isInSale($ticket): bool
+    {
+        return $ticket->special_price !== null
+            && $ticket->special_price > 0.0
+            && ($ticket->special_price_from === null || $ticket->special_price_from === '0000-00-00 00:00:00' || $ticket->special_price_from <= Carbon::now())
+            && ($ticket->special_price_to === null || $ticket->special_price_to === '0000-00-00 00:00:00' || $ticket->special_price_to > Carbon::now());
     }
 }
