@@ -151,7 +151,7 @@ class EventTicket extends Booking
             $price += $ticket->price;
         }
 
-        if ($price == $item->base_price) {
+        if ($price === $item->base_price) {
             return;
         }
 
