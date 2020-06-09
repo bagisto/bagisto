@@ -223,7 +223,7 @@ class Cart
         $cart = $this->cartRepository->create($cartData);
 
         if (! $cart) {
-            session()->flash('error', trans('shop::app.checkout.cart.create-error'));
+            session()->flash('error', __('shop::app.checkout.cart.create-error'));
 
             return;
         }
@@ -252,13 +252,13 @@ class Cart
             if ($quantity <= 0) {
                 $this->removeItem($itemId);
 
-                throw new Exception(trans('shop::app.checkout.cart.quantity.illegal'));
+                throw new Exception(__('shop::app.checkout.cart.quantity.illegal'));
             }
 
             $item->quantity = $quantity;
 
             if (! $this->isItemHaveQuantity($item)) {
-                throw new Exception(trans('shop::app.checkout.cart.quantity.inventory_warning'));
+                throw new Exception(__('shop::app.checkout.cart.quantity.inventory_warning'));
             }
 
             Event::dispatch('checkout.cart.update.before', $item);
