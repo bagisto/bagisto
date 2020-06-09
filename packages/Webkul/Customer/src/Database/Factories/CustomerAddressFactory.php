@@ -4,6 +4,7 @@
 
 use Faker\Generator as Faker;
 use Webkul\Customer\Models\Customer;
+use Illuminate\Support\Arr;
 use Webkul\Customer\Models\CustomerAddress;
 
 $factory->define(CustomerAddress::class, function (Faker $faker) {
