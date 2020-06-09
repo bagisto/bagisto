@@ -72,7 +72,7 @@ class CartController extends Controller
     /**
      * Get customer cart
      *
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function get()
     {
@@ -126,7 +126,7 @@ class CartController extends Controller
             ]);
         } catch (Exception $e) {
             Log::error('API CartController: ' . $e->getMessage(),
-                ['productID' => $id, 'cartID' => cart()->getCart() ?? 0]);
+                ['product_id' => $id, 'cart_id' => cart()->getCart() ?? 0]);
 
             return response()->json([
                 'error' => [
@@ -140,7 +140,7 @@ class CartController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update()
     {
@@ -175,7 +175,7 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy()
     {
@@ -198,7 +198,7 @@ class CartController extends Controller
      *
      * @param int $id
      *
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroyItem($id)
     {
@@ -223,7 +223,7 @@ class CartController extends Controller
      *
      * @param \Webkul\Checkout\Repositories\CartItemRepository $id
      *
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function moveToWishlist($id)
     {

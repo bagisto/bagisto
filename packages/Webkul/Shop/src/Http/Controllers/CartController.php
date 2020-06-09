@@ -93,7 +93,8 @@ class CartController extends Controller
 
             $product = $this->productRepository->find($id);
 
-            Log::error('Shop CartController: ' . $e->getMessage(), ['productID' => $id, 'cartID' => cart()->getCart() ?? 0]);
+            Log::error('Shop CartController: ' . $e->getMessage(),
+                ['product_id' => $id, 'cart_id' => cart()->getCart() ?? 0]);
 
             return redirect()->route('shop.productOrCategory.index', $product->url_key);
         }
