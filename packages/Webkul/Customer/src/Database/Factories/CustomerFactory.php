@@ -4,6 +4,7 @@
 
 use Faker\Generator as Faker;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Arr;
 use Webkul\Customer\Models\Customer;
 
 $factory->define(Customer::class, function (Faker $faker) {
@@ -13,7 +14,7 @@ $factory->define(Customer::class, function (Faker $faker) {
     return [
         'first_name'        => $faker->firstName(),
         'last_name'         => $faker->lastName,
-        'gender'            => array_random(['male', 'female', 'other']),
+        'gender'            => Arr::random(['male', 'female', 'other']),
         'email'             => $faker->email,
         'status'            => 1,
         'password'          => Hash::make($password),
