@@ -3,6 +3,7 @@
 namespace Webkul\Velocity\Http\Controllers\Shop;
 
 use Cart;
+use Illuminate\Support\Facades\Log;
 use Webkul\Velocity\Helpers\Helper;
 use Webkul\Checkout\Contracts\Cart as CartModel;
 use Webkul\Product\Repositories\ProductRepository;
@@ -93,16 +94,18 @@ class CartController extends Controller
         } catch(\Exception $exception) {
             $product = $this->productRepository->find($id);
 
+            Log::error('Velocity CartController: ' . $exception->getMessage(), ['productID' => $id, 'cartID' => cart()->getCart() ?? 0]);
+
             $response = [
                 'status'           => 'danger',
-                'message'          => trans($exception->getMessage()),
+                'message'          => __($exception->getMessage()),
                 'redirectionRoute' => route('shop.productOrCategory.index', $product->url_key),
             ];
         }
 
         return $response ?? [
             'status'  => 'danger',
-            'message' => trans('velocity::app.error.something_went_wrong'),
+            'message' => __('velocity::app.error.something_went_wrong'),
         ];
     }
 

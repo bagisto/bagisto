@@ -151,7 +151,6 @@ class Cart
                 session()->forget('cart');
             }
 
-            Log::error($cartProducts, ['product' => $product, 'cartData' => $data]);
             throw new Exception($cartProducts);
         } else {
             $parentCartItem = null;
