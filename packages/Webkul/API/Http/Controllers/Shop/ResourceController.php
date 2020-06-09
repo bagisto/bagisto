@@ -12,7 +12,7 @@ class ResourceController extends Controller
      * @var array
      */
     protected $guard;
-    
+
     /**
      * Contains route related configuration
      *
@@ -56,8 +56,15 @@ class ResourceController extends Controller
     public function index()
     {
         $query = $this->repository->scopeQuery(function($query) {
+
             foreach (request()->except(['page', 'limit', 'pagination', 'sort', 'order', 'token']) as $input => $value) {
                 $query = $query->whereIn($input, array_map('trim', explode(',', $value)));
+            }
+
+            // by passing token get only my wishlist items instead of passing costumer_id and expose users data
+            if(request()->has('token') && auth()->check() && class_basename($this->repository) == 'WishlistRepository')
+            {
+                $query = $query->where('customer_id', auth()->user()->id );
             }
 
             if ($sort = request()->input('sort')) {
@@ -102,7 +109,7 @@ class ResourceController extends Controller
         $wishlistProduct = $this->repository->findOrFail($id);
 
         $this->repository->delete($id);
-        
+
         return response()->json([
             'message' => 'Item removed successfully.',
         ]);
