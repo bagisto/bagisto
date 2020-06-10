@@ -1,4 +1,5 @@
 {!! view_render_event('bagisto.shop.layout.header.locale.before') !!}
+
     <div class="pull-left">
         <div class="dropdown">
 
@@ -54,7 +55,7 @@
     @if (core()->getCurrentChannel()->currencies->count() > 1)
         <div class="pull-left">
             <div class="dropdown">
-                <select
+               <select
                     class="btn btn-link dropdown-toggle control locale-switcher styled-select"
                     onchange="window.location.href = this.value">
                     @foreach (core()->getCurrentChannel()->currencies as $currency)
