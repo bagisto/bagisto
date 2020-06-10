@@ -86,6 +86,7 @@ class OrderController extends Controller
         foreach ($order->items as $item) {
             $slugOrPath = strtolower(str_replace(" ","-",$item->name));
             $product = $this->productRepository->findBySlug($slugOrPath);
+            
             if(!$product->isSaleable()){
                 $can_reorder = false;
             }            

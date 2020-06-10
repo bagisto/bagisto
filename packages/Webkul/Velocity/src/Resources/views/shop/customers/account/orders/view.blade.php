@@ -28,7 +28,7 @@
 
                 @if ($order->canCancel())
                     <span class="account-action">
-                        <a href="{{ route('customer.orders.cancel', $order->id) }}" class="theme-btn light unset pull-right" v-alert:message="'{{ __('shop::app.customer.account.order.view.cancel-confirm-msg') }}'" style="float: right">
+                        <a href="{{ route('customer.orders.cancel', $order->id) }}" class="theme-btn light unset pull-right" v-alert:message="'{{ __('shop::app.customer.account.order.view.cancel-confirm-msg') }}'" style="float: right; margin-left: 8px;">
                             {{ __('shop::app.customer.account.order.view.cancel-btn-title') }}
                         </a>
                     </span>
@@ -36,13 +36,13 @@
                 @if (core()->getConfigData('customer.settings.reorder.product_reorder'))
                     @if($can_reorder)
                     <span class="account-action">
-                        <a href="{{ route('customer.orders.reorder', $order->id) }}" class="theme-btn light unset pull-right" v-alert:message="'{{ __('admin::app.sales.orders.reorder-confirm-msg') }}'"  style="float: right" >
+                        <a href="{{ route('customer.orders.reorder', $order->id) }}" class="theme-btn light unset pull-right" v-alert:message="'{{ __('admin::app.sales.orders.reorder-confirm-msg') }}'"  style="float: right;" >
                             {{ __('shop::app.customer.account.order.view.reorder-btn-title') }}
                         </a>
                     </span>
                     @else
                     <span class="account-action">
-                        <button  class="theme-btn light unset pull-right" v-alert:message="'{{ __('admin::app.sales.orders.reorder-confirm-msg') }}'"  style="float: right; cursor: not-allowed;" disabled>
+                        <button  class="theme-btn light unset pull-right" style="float: right; cursor: not-allowed;" disabled>
                             {{ __('shop::app.customer.account.order.view.reorder-btn-title') }}
                         </button>
                     </span>
