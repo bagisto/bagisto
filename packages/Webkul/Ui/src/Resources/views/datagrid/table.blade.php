@@ -563,48 +563,48 @@
 
                     //make the filter array from url after being redirected
                     arrayFromUrl: function() {
-                        var obj = {};
-                        processedUrl = this.url.search.slice(1, this.url.length);
-                        splitted = [];
-                        moreSplitted = [];
+
+                        let obj = {};
+                        const processedUrl = this.url.search.slice(1, this.url.length);
+                        let splitted = [];
+                        let moreSplitted = [];
 
                         splitted = processedUrl.split('&');
 
-                        for(i = 0; i < splitted.length; i++) {
+                        for(let i = 0; i < splitted.length; i++) {
                             moreSplitted.push(splitted[i].split('='));
                         }
 
-                        for(i = 0; i < moreSplitted.length; i++) {
-                            col = moreSplitted[i][0].replace(']', '').split('[')[0];
-                            cond = moreSplitted[i][0].replace(']', '').split('[')[1]
-                            val = moreSplitted[i][1];
+                        for(let i = 0; i < moreSplitted.length; i++) {
+                            const key = decodeURI(moreSplitted[i][0]);
+                            const value = decodeURI(moreSplitted[i][1]);
+
+                            obj.column = key.replace(']', '').split('[')[0];
+                            obj.cond = key.replace(']', '').split('[')[1]
+                            obj.val = value;
 
                             label = 'cannotfindthislabel';
 
-                            obj.column = col;
-                            obj.cond = cond;
-                            obj.val = val;
-
-                            if(col == "sort") {
+                            if(obj.column === "sort") {
                                 label = '';
 
                                 for(colIndex in this.columns) {
-                                    if(this.columns[colIndex].index == obj.cond) {
+                                    if(this.columns[colIndex].index === obj.cond) {
 
                                         obj.label = this.columns[colIndex].label;
                                     }
                                 }
-                            } else if (col == "search") {
+                            } else if (obj.column === "search") {
                                 obj.label = 'Search';
                             } else {
                                 obj.label = '';
 
-                                for(colIndex in this.columns) {
-                                    if (this.columns[colIndex].index == obj.column) {
+                                for(let colIndex in this.columns) {
+                                    if (this.columns[colIndex].index === obj.column) {
                                         obj.label = this.columns[colIndex].label;
 
-                                        if (this.columns[colIndex].type == 'boolean') {
-                                            if (obj.val == 1) {
+                                        if (this.columns[colIndex].type === 'boolean') {
+                                            if (obj.val === 1) {
                                                 obj.val = '{{ __('ui::app.datagrid.true') }}';
                                             } else {
                                                 obj.val = '{{ __('ui::app.datagrid.false') }}';
@@ -614,7 +614,7 @@
                                 }
                             }
 
-                            if (col != undefined && cond != undefined && val != undefined)
+                            // if (col != undefined && cond != undefined && val != undefined)
                                 this.filters.push(obj);
 
                             obj = {};
@@ -685,7 +685,7 @@
                                 _method : element.getAttribute('data-method')
                             }).then(function(response) {
                                 this.result = response;
-                                
+
                                 if (response.data.redirect) {
                                     window.location.href = response.data.redirect;
                                 } else {
