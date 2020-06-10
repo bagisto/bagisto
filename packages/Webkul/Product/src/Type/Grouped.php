@@ -124,7 +124,7 @@ class Grouped extends AbstractType
      *
      * @return float
      */
-    public function getMinimalPrice($qty = null)
+    public function getMinimalPrice()
     {
         $minPrices = [];
 
