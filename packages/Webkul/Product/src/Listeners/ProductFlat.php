@@ -136,6 +136,10 @@ class ProductFlat
                     $table->dropColumn($attribute->code . '_label');
                 }
             });
+            
+            $query = "update product_flat f join product_attribute_values v on f.id = v.product_id and v.attribute_id = $attribute->id set f.$attribute->code = ". $attribute->type ."_value";
+            \DB::update($query);
+            
         }
     }
 
