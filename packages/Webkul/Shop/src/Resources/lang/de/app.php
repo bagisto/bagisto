@@ -71,7 +71,8 @@ return [
         'no-results' => 'Keine Ergebnisse gefunden',
         'page-title' => config('app.name') . ' - Suchen',
         'found-results' => 'Suchergebnisse gefunden',
-        'found-result' => 'Suchergebnis gefunden'
+        'found-result' => 'Suchergebnis gefunden',
+        'analysed-keywords' => 'Analysed Keywords'
     ],
 
     'reviews' => [
