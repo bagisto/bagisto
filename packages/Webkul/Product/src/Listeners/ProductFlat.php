@@ -137,8 +137,7 @@ class ProductFlat
                 }
             });
             
-            $query = "update product_flat f join product_attribute_values v on f.id = v.product_id and v.attribute_id = $attribute->id set f.$attribute->code = ". $attribute->type ."_value";
-            \DB::update($query);
+            $this->productFlatRepository->updateAttributeColumn( $attribute );
             
         }
     }

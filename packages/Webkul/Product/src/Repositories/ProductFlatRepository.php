@@ -86,4 +86,19 @@ class ProductFlatRepository extends Repository
 
         return $filterAttributes;
     }
+
+
+    /**
+     * update product_flat custom column
+     * 
+     * @param \Webkul\Attribute\Models\Attribute $attribute
+     */
+    public function updateAttributeColumn( \Webkul\Attribute\Models\Attribute $attribute ) {
+        return $this->model
+            ->leftJoin('product_attribute_values as v', function($join) use ($attribute) {
+                $join->on('product_flat.id', '=', 'v.product_id')
+                    ->on('v.attribute_id', '=', \DB::raw($attribute->id));
+            })->update(['product_flat.'.$attribute->code => \DB::raw($attribute->type .'_value')]);
+    }
+
 }
