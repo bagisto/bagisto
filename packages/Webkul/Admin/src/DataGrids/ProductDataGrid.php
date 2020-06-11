@@ -53,6 +53,10 @@ class ProductDataGrid extends DataGrid
             $queryBuilder->where('channel', $this->channel);
         }
 
+        if ($currentLocale = app()->getLocale()) {
+            $queryBuilder->where('product_flat.locale', $currentLocale);
+        }
+
         $queryBuilder->groupBy('product_flat.product_id');
 
         $this->addFilter('product_id', 'product_flat.product_id');
