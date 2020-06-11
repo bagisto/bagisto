@@ -63,7 +63,9 @@ class ConfigurationController extends Controller
             ];
         }
 
-        $velocityMetaData = $this->velocityMetaDataRepository->findorFail($id);
+        $velocityMetaData = $this->velocityMetaDataRepository->findOneWhere([
+            'id' => $id
+        ]);
 
         $advertisement = json_decode($velocityMetaData->advertisement, true);
 
@@ -101,6 +103,10 @@ class ConfigurationController extends Controller
         unset($params['images']);
         unset($params['slides']);
 
+        $locale = request()->get('locale') ?: app()->getLocale();
+
+        $params['locale'] = $locale;
+        
         // update row
         $product = $this->velocityMetaDataRepository->update($params, $id);
 
