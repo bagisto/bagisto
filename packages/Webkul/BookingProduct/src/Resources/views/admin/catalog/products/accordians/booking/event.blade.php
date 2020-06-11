@@ -17,7 +17,7 @@
                 <div class="section-content">
 
                     <ticket-list :tickets="tickets"></ticket-list>
-                
+
                 </div>
             </div>
         </div>
@@ -26,16 +26,6 @@
     <script type="text/x-template" id="ticket-list-template">
         <div class="ticket-list table">
             <table>
-                <thead>
-                    <tr>
-                        <th>{{ __('bookingproduct::app.admin.catalog.products.name') }}</th>
-                        <th>{{ __('bookingproduct::app.admin.catalog.products.price') }}</th>
-                        <th>{{ __('bookingproduct::app.admin.catalog.products.quantity') }}</th>
-                        <th>{{ __('bookingproduct::app.admin.catalog.products.description') }}</th>
-                        <th class="actions"></th>
-                    </tr>
-                </thead>
-
                 <tbody>
                     <ticket-item
                         v-for="(ticket, index) in tickets"
@@ -57,36 +47,65 @@
         <tr>
             <td>
                 <div class="control-group" :class="[errors.has(controlName + '[{{$locale}}][name]') ? 'has-error' : '']">
+                    <label class="ticket-label">{{ __('bookingproduct::app.admin.catalog.products.name') }}</label>
                     <input type="text" v-validate="'required'" :name="controlName + '[{{$locale}}][name]'" v-model="ticketItem.name" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.name') }}&quot;">
 
                     <span class="control-error" v-if="errors.has(controlName + '[{{$locale}}][name]')">
                         @{{ errors.first(controlName + '[{!!$locale!!}][name]') }}
                     </span>
                 </div>
+
+                <div class="control-group">
+                    <label class="ticket-label">{{ __('bookingproduct::app.admin.catalog.products.special-price') }}</label>
+                    <input type="text" :name="controlName + '[special_price]'" v-model="ticketItem.special_price" class="control">
+                </div>
             </td>
 
             <td>
                 <div class="control-group" :class="[errors.has(controlName + '[price]') ? 'has-error' : '']">
+                    <label class="ticket-label">{{ __('bookingproduct::app.admin.catalog.products.price') }}</label>
                     <input type="text" v-validate="'required'" :name="controlName + '[price]'" v-model="ticketItem.price" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.price') }}&quot;">
 
                     <span class="control-error" v-if="errors.has(controlName + '[price]')">
                         @{{ errors.first(controlName + '[price]') }}
                     </span>
                 </div>
+
+                <div class="control-group date" :class="[errors.has(controlName + '[special_price_from]') ? 'has-error' : '']">
+                    <label class="ticket-label">{{ __('bookingproduct::app.admin.catalog.products.special-price-from') }}</label>
+
+                    <datetime>
+                        <input type="text" v-validate="'date_format:yyyy-MM-dd HH:mm:ss|after:{{\Carbon\Carbon::yesterday()->format('Y-m-d 23:59:59')}}'" :name="controlName + '[special_price_from]'" v-model="ticketItem.special_price_from" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.special-price-from') }}&quot;" ref="special_price_from" style="width:70%"/>
+                    </datetime>
+
+                    <span class="control-error" v-if="errors.has(controlName + '[special_price_from]')">@{{ errors.first(controlName + '[special_price_from]') }}</span>
+                </div>
             </td>
 
             <td>
                 <div class="control-group" :class="[errors.has(controlName + '[qty]') ? 'has-error' : '']">
+                    <label class="ticket-label">{{ __('bookingproduct::app.admin.catalog.products.quantity') }}</label>
                     <input type="text" v-validate="'required|min_value:0'" :name="controlName + '[qty]'" v-model="ticketItem.qty" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.qty') }}&quot;">
 
                     <span class="control-error" v-if="errors.has(controlName + '[qty]')">
                         @{{ errors.first(controlName + '[qty]') }}
                     </span>
                 </div>
+
+                <div class="control-group date" :class="[errors.has(controlName + '[special_price_to]') ? 'has-error' : '']">
+                    <label class="ticket-label">{{ __('bookingproduct::app.admin.catalog.products.special-price-to') }}</label>
+
+                    <datetime>
+                        <input type="text" v-validate="'date_format:yyyy-MM-dd HH:mm:ss|after:special_price_from'" :name="controlName + '[special_price_to]'" v-model="ticketItem.special_price_to" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.special-price-to') }}&quot;" ref="special_price_to" style="width:70%"/>
+                    </datetime>
+
+                    <span class="control-error" v-if="errors.has(controlName + '[special_price_to]')">@{{ errors.first(controlName + '[special_price_to]') }}</span>
+                </div>
             </td>
 
             <td>
                 <div class="control-group" :class="[errors.has(controlName + '[{{$locale}}][description]') ? 'has-error' : '']">
+                    <label class="ticket-label">{{ __('bookingproduct::app.admin.catalog.products.description') }}</label>
                     <textarea type="text" v-validate="'required'" :name="controlName + '[{{$locale}}][description]'" v-model="ticketItem.description" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.description') }}&quot;"></textarea>
 
                     <span class="control-error" v-if="errors.has(controlName + '[{{$locale}}][description]')">
@@ -129,7 +148,10 @@
                         'name': '',
                         'price': '',
                         'qty': 0,
-                        'description': ''
+                        'description': '',
+                        'special_price': '',
+                        'special_price_from': '',
+                        'special_price_to': '',
                     });
                 },
 
@@ -166,4 +188,10 @@
         });
     </script>
 
+    <style>
+        .ticket-label {
+            font-weight: 700;
+            margin: 20px 0 10px 0;
+        }
+    </style>
 @endpush
