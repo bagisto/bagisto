@@ -225,7 +225,7 @@
 
                     if (this.filters.length) {
                         for (let i = 0; i < this.filters.length; i++) {
-                            if (this.filters[i].column == 'perPage') {
+                            if (this.filters[i].column === 'perPage') {
                                 this.perPage = this.filters[i].val;
                             }
                         }
@@ -237,17 +237,17 @@
                         this.columnOrAlias = columnOrAlias;
 
                         for(column in this.columns) {
-                            if (this.columns[column].index == this.columnOrAlias) {
+                            if (this.columns[column].index === this.columnOrAlias) {
                                 this.type = this.columns[column].type;
 
-                                if (this.type == 'string') {
+                                if (this.type === 'string') {
                                     this.stringConditionSelect = true;
                                     this.datetimeConditionSelect = false;
                                     this.booleanConditionSelect = false;
                                     this.numberConditionSelect = false;
 
                                     this.nullify();
-                                } else if (this.type == 'datetime') {
+                                } else if (this.type === 'datetime') {
                                     this.datetimeConditionSelect = true;
                                     this.stringConditionSelect = false;
                                     this.booleanConditionSelect = false;
@@ -261,14 +261,14 @@
                                     this.numberConditionSelect = false;
 
                                     this.nullify();
-                                } else if (this.type == 'number') {
+                                } else if (this.type === 'number') {
                                     this.numberConditionSelect = true;
                                     this.booleanConditionSelect = false;
                                     this.datetimeConditionSelect = false;
                                     this.stringConditionSelect = false;
 
                                     this.nullify();
-                                } else if (this.type == 'price') {
+                                } else if (this.type === 'price') {
                                     this.numberConditionSelect = true;
                                     this.booleanConditionSelect = false;
                                     this.datetimeConditionSelect = false;
@@ -290,18 +290,20 @@
                     getResponse: function() {
                         label = '';
 
-                        for(colIndex in this.columns) {
+                        for(let colIndex in this.columns) {
                             if(this.columns[colIndex].index == this.columnOrAlias) {
                                 label = this.columns[colIndex].label;
+                                break;
                             }
                         }
 
-                        if (this.type == 'string') {
+                        if (this.type === 'string') {
                             this.formURL(this.columnOrAlias, this.stringCondition, encodeURIComponent(this.stringValue), label)
                         } else if (this.type == 'number') {
                             indexConditions = true;
 
-                            if (this.filterIndex == this.columnOrAlias && (this.numberValue == 0 || this.numberValue < 0)) {
+                            if (this.filterIndex === this.columnOrAlias
+                                && (this.numberValue === 0 || this.numberValue < 0)) {
                                 indexConditions = false;
 
                                 alert('{{__('ui::app.datagrid.zero-index')}}');
@@ -309,22 +311,23 @@
 
                             if(indexConditions)
                                 this.formURL(this.columnOrAlias, this.numberCondition, this.numberValue, label);
-                        } else if (this.type == 'boolean') {
+                        } else if (this.type === 'boolean') {
                             this.formURL(this.columnOrAlias, this.booleanCondition, this.booleanValue, label);
-                        } else if (this.type == 'datetime') {
+                        } else if (this.type === 'datetime') {
                             this.formURL(this.columnOrAlias, this.datetimeCondition, this.datetimeValue, label);
-                        } else if (this.type == 'price') {
+                        } else if (this.type === 'price') {
                             this.formURL(this.columnOrAlias, this.numberCondition, this.numberValue, label);
                         }
                     },
 
                     sortCollection: function(alias) {
-                        label = '';
+                        let label = '';
 
-                        for(colIndex in this.columns) {
-                            if(this.columns[colIndex].index == alias) {
+                        for(let colIndex in this.columns) {
+                            if(this.columns[colIndex].index === alias) {
                                 matched = 0;
                                 label = this.columns[colIndex].label;
+                                break;
                             }
                         }
 
@@ -332,9 +335,7 @@
                     },
 
                     searchCollection: function(searchValue) {
-                        label = 'Search';
-
-                        this.formURL("search", 'all', searchValue, label);
+                        this.formURL("search", 'all', searchValue, 'Search');
                     },
 
                     // function triggered to check whether the query exists or not and then call the make filters from the url
@@ -345,7 +346,7 @@
                             this.arrayFromUrl();
                         }
 
-                        for(id in this.massActions) {
+                        for(let id in this.massActions) {
                             targetObj = {
                                 'type': this.massActions[id].type,
                                 'action': this.massActions[id].action
@@ -355,24 +356,24 @@
 
                             targetObj = {};
 
-                            if (this.massActions[id].type == 'update') {
+                            if (this.massActions[id].type === 'update') {
                                 this.massActionValues = this.massActions[id].options;
                             }
                         }
                     },
 
                     findCurrentSort: function() {
-                        for(i in this.filters) {
-                            if (this.filters[i].column == 'sort') {
+                        for(let i in this.filters) {
+                            if (this.filters[i].column === 'sort') {
                                 this.currentSort = this.filters[i].val;
                             }
                         }
                     },
 
                     changeMassActionTarget: function() {
-                        if (this.massActionType == 'delete') {
-                            for(i in this.massActionTargets) {
-                                if (this.massActionTargets[i].type == 'delete') {
+                        if (this.massActionType === 'delete') {
+                            for(let i in this.massActionTargets) {
+                                if (this.massActionTargets[i].type === 'delete') {
                                     this.massActionTarget = this.massActionTargets[i].action;
 
                                     break;
@@ -380,9 +381,9 @@
                             }
                         }
 
-                        if (this.massActionType == 'update') {
-                            for(i in this.massActionTargets) {
-                                if (this.massActionTargets[i].type == 'update') {
+                        if (this.massActionType === 'update') {
+                            for(let i in this.massActionTargets) {
+                                if (this.massActionTargets[i].type === 'update') {
                                     this.massActionTarget = this.massActionTargets[i].action;
 
                                     break;
@@ -397,7 +398,9 @@
                     formURL: function(column, condition, response, label) {
                         var obj = {};
 
-                        if (column == "" || condition == "" || response == "" || column == null || condition == null || response == null) {
+                        if (column === "" || condition === "" || response === ""
+                            || column === null || condition === null || response === null)
+                        {
                             alert('{{ __('ui::app.datagrid.filter-fields-missing') }}');
 
                             return false;
@@ -469,7 +472,7 @@
                                         }
                                     }
 
-                                    if (sort_exists == 0) {
+                                    if (sort_exists === 0) {
                                         if (this.currentSort == null)
                                             this.currentSort = this.sortAsc;
 
@@ -486,7 +489,7 @@
                                     }
                                 }
 
-                                if (column == "search") {
+                                if (column === "search") {
                                     search_found = 0;
 
                                     for(j = 0; j < this.filters.length; j++) {
@@ -538,7 +541,7 @@
                     makeURL: function() {
                         newParams = '';
 
-                        for(i = 0; i < this.filters.length; i++) {
+                        for (let i = 0; i < this.filters.length; i++) {
                             if (this.filters[i].column == 'status') {
                                 if (this.filters[i].val.includes("True")) {
                                     this.filters[i].val = 1;
@@ -547,11 +550,17 @@
                                 }
                             }
 
-                            if (i == 0) {
-                                newParams = '?' + this.filters[i].column + '[' + this.filters[i].cond + ']' + '=' + this.filters[i].val;
-                            } else {
-                                newParams = newParams + '&' + this.filters[i].column + '[' + this.filters[i].cond + ']' + '=' + this.filters[i].val;
+                            let condition = '';
+                            if (this.filters[i].cond !== undefined) {
+                                condition = '[' + this.filters[i].cond + ']';
                             }
+
+                            if (i == 0) {
+                                newParams = '?' + this.filters[i].column + condition + '=' + this.filters[i].val;
+                            } else {
+                                newParams = newParams + '&' + this.filters[i].column + condition + '=' + this.filters[i].val;
+                            }
+                            console.log('newParams', newParams);
                         }
 
                         var uri = window.location.href.toString();
@@ -583,47 +592,56 @@
                             obj.cond = key.replace(']', '').split('[')[1]
                             obj.val = value;
 
-                            label = 'cannotfindthislabel';
-
-                            if(obj.column === "sort") {
-                                label = '';
-
-                                for(colIndex in this.columns) {
-                                    if(this.columns[colIndex].index === obj.cond) {
-
-                                        obj.label = this.columns[colIndex].label;
+                            switch (obj.column) {
+                                case "search":
+                                    obj.label = "Search";
+                                    break;
+                                case "channel":
+                                    obj.label = "Channel";
+                                    console.log(obj.column, obj.label, obj.cond, obj.val);
+                                    break;
+                                case "customer_group":
+                                    obj.label = "Customer Group";
+                                    break;
+                                case "sort":
+                                    for (let colIndex in this.columns) {
+                                        if (this.columns[colIndex].index === obj.cond) {
+                                            obj.label = this.columns[colIndex].label;
+                                            break;
+                                        }
                                     }
-                                }
-                            } else if (obj.column === "search") {
-                                obj.label = 'Search';
-                            } else {
-                                obj.label = '';
+                                    break;
+                                default:
+                                    for (let colIndex in this.columns) {
+                                        if (this.columns[colIndex].index === obj.column) {
+                                            obj.label = this.columns[colIndex].label;
 
-                                for(let colIndex in this.columns) {
-                                    if (this.columns[colIndex].index === obj.column) {
-                                        obj.label = this.columns[colIndex].label;
-
-                                        if (this.columns[colIndex].type === 'boolean') {
-                                            if (obj.val === 1) {
-                                                obj.val = '{{ __('ui::app.datagrid.true') }}';
-                                            } else {
-                                                obj.val = '{{ __('ui::app.datagrid.false') }}';
+                                            if (this.columns[colIndex].type === 'boolean') {
+                                                if (obj.val === 1) {
+                                                    obj.val = '{{ __('ui::app.datagrid.true') }}';
+                                                } else {
+                                                    obj.val = '{{ __('ui::app.datagrid.false') }}';
+                                                }
                                             }
                                         }
                                     }
-                                }
+                                    break;
                             }
 
-                            // if (col != undefined && cond != undefined && val != undefined)
+                            if (obj.column !== undefined && obj.val !== undefined) {
                                 this.filters.push(obj);
+                            }
 
                             obj = {};
                         }
                     },
 
                     removeFilter: function(filter) {
-                        for(i in this.filters) {
-                            if (this.filters[i].col == filter.col && this.filters[i].cond == filter.cond && this.filters[i].val == filter.val) {
+                        for (let i in this.filters) {
+                            if (this.filters[i].col === filter.col
+                                && this.filters[i].cond === filter.cond
+                                && this.filters[i].val === filter.val)
+                            {
                                 this.filters.splice(i, 1);
 
                                 this.makeURL();
@@ -635,7 +653,7 @@
                     select: function() {
                         this.allSelected = false;
 
-                        if (this.dataIds.length == 0) {
+                        if (this.dataIds.length === 0) {
                             this.massActionsToggle = false;
                             this.massActionType = null;
                         } else {
@@ -651,12 +669,13 @@
 
                         if (this.allSelected) {
                             if (this.gridCurrentData.hasOwnProperty("data")) {
-                                for (currentData in this.gridCurrentData.data) {
+                                for (let currentData in this.gridCurrentData.data) {
 
-                                    i = 0;
-                                    for(currentId in this.gridCurrentData.data[currentData]) {
-                                        if (i==0)
+                                    let i = 0;
+                                    for (let currentId in this.gridCurrentData.data[currentData]) {
+                                        if (i==0) {
                                             this.dataIds.push(this.gridCurrentData.data[currentData][this.filterIndex]);
+                                        }
 
                                         i++;
                                     }
@@ -664,9 +683,9 @@
                             } else {
                                 for (currentData in this.gridCurrentData) {
 
-                                    i = 0;
-                                    for(currentId in this.gridCurrentData[currentData]) {
-                                        if (i==0)
+                                    let i = 0;
+                                    for (let currentId in this.gridCurrentData[currentData]) {
+                                        if (i === 0)
                                             this.dataIds.push(this.gridCurrentData[currentData][currentId]);
 
                                         i++;

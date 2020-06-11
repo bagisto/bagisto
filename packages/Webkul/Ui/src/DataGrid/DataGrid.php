@@ -8,14 +8,14 @@ abstract class DataGrid
 {
     /**
      * set index columns, ex: id.
-     * 
+     *
      * @var int
      */
     protected $index = null;
 
     /**
      * Default sort order of datagrid
-     * 
+     *
      * @var string
      */
     protected $sortOrder = 'asc';
@@ -23,21 +23,21 @@ abstract class DataGrid
     /**
      * Situation handling property when working with custom columns in datagrid, helps abstaining
      * aliases on custom column.
-     * 
+     *
      * @var bool
      */
     protected $enableFilterMap = false;
 
     /**
      * This is array where aliases and custom column's name are passed
-     * 
+     *
      * @var array
      */
     protected $filterMap = [];
 
     /**
      * array to hold all the columns which will be displayed on frontend.
-     * 
+     *
      * @var array
      */
     protected $columns = [];
@@ -51,14 +51,14 @@ abstract class DataGrid
     /**
      * Hold query builder instance of the query prepared by executing datagrid
      * class method setQueryBuilder
-     * 
+     *
      * @var array
      */
     protected $queryBuilder = [];
 
     /**
      * Final result of the datagrid program that is collection object.
-     * 
+     *
      * @var array
      */
     protected $collection = [];
@@ -66,7 +66,7 @@ abstract class DataGrid
     /**
      * Set of handly click tools which you could be using for various operations.
      * ex: dyanmic and static redirects, deleting, etc.
-     * 
+     *
      * @var array
      */
     protected $actions = [];
@@ -74,21 +74,21 @@ abstract class DataGrid
     /**
      * Works on selection of values index column as comma separated list as response
      * to your endpoint set as route.
-     * 
+     *
      * @var array
      */
     protected $massActions = [];
 
     /**
      * Parsed value of the url parameters
-     * 
+     *
      * @var array
      */
     protected $parse;
 
     /**
      * To show mass action or not.
-     * 
+     *
      * @var bool
      */
     protected $enableMassAction = false;
@@ -100,14 +100,14 @@ abstract class DataGrid
 
     /**
      * paginate the collection or not
-     * 
+     *
      * @var bool
      */
     protected $paginate = true;
 
     /**
      * If paginated then value of pagination.
-     * 
+     *
      * @var int
      */
     protected $itemsPerPage = 10;
@@ -165,7 +165,7 @@ abstract class DataGrid
     ];
 
     abstract public function prepareQueryBuilder();
-    
+
     abstract public function addColumns();
 
     /**
@@ -178,7 +178,7 @@ abstract class DataGrid
 
     /**
      * Parse the URL and get it ready to be used.
-     * 
+     *
      * @return void
      */
     private function parseUrl()
@@ -400,12 +400,12 @@ abstract class DataGrid
                 }
             } else {
                 foreach ($this->completeColumnDetails as $column) {
-                    if($column['index'] == $columnName && !$column['filterable']) {
+                    if($column['index'] === $columnName && !$column['filterable']) {
                         return $collection;
                     }
                 }
 
-                if (array_keys($info)[0] == "like" || array_keys($info)[0] == "nlike") {
+                if (array_keys($info)[0] === "like" || array_keys($info)[0] === "nlike") {
                     foreach ($info as $condition => $filter_value) {
                         if ($this->enableFilterMap && isset($this->filterMap[$columnName])) {
                             $collection->where(
@@ -429,7 +429,12 @@ abstract class DataGrid
                     }
                 } else {
                     foreach ($info as $condition => $filter_value) {
-                        if ($columnType == 'datetime') {
+
+                        if ($condition === 'undefined') {
+                            $condition = '=';
+                        }
+
+                        if ($columnType === 'datetime') {
                             if ($this->enableFilterMap && isset($this->filterMap[$columnName])) {
                                 $collection->whereDate(
                                     $this->filterMap[$columnName],
