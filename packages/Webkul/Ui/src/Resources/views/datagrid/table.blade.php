@@ -405,18 +405,19 @@
 
                             return false;
                         } else {
-                            if (this.filters.length > 0) {
-                                if (column != "sort" && column != "search") {
-                                    filterRepeated = 0;
 
-                                    for(j = 0; j < this.filters.length; j++) {
-                                        if (this.filters[j].column == column) {
-                                            if (this.filters[j].cond == condition && this.filters[j].val == response) {
-                                                filterRepeated = 1;
+                            if (this.filters.length > 0) {
+                                if (column !== "sort" && column !== "search") {
+                                    let filterRepeated = false;
+
+                                    for(let j = 0; j < this.filters.length; j++) {
+                                        if (this.filters[j].column === column) {
+                                            if (this.filters[j].cond === condition && this.filters[j].val === response) {
+                                                filterRepeated = true;
 
                                                 return false;
-                                            } else if(this.filters[j].cond == condition && this.filters[j].val != response) {
-                                                filterRepeated = 1;
+                                            } else if(this.filters[j].cond === condition && this.filters[j].val !== response) {
+                                                filterRepeated = true;
 
                                                 this.filters[j].val = response;
 
@@ -425,7 +426,7 @@
                                         }
                                     }
 
-                                    if (filterRepeated == 0) {
+                                    if (filterRepeated === false) {
                                         obj.column = column;
                                         obj.cond = condition;
                                         obj.val = response;
@@ -438,15 +439,15 @@
                                     }
                                 }
 
-                                if (column == "sort") {
-                                    sort_exists = 0;
+                                if (column === "sort") {
+                                    let sort_exists = false;
 
-                                    for (j = 0; j < this.filters.length; j++) {
-                                        if (this.filters[j].column == "sort") {
-                                            if (this.filters[j].column == column && this.filters[j].cond == condition) {
+                                    for (let j = 0; j < this.filters.length; j++) {
+                                        if (this.filters[j].column === "sort") {
+                                            if (this.filters[j].column === column && this.filters[j].cond === condition) {
                                                 this.findCurrentSort();
 
-                                                if (this.currentSort == "asc") {
+                                                if (this.currentSort === "asc") {
                                                     this.filters[j].column = column;
                                                     this.filters[j].cond = condition;
                                                     this.filters[j].val = this.sortDesc;
@@ -468,12 +469,12 @@
                                                 this.makeURL();
                                             }
 
-                                            sort_exists = 1;
+                                            sort_exists = true;
                                         }
                                     }
 
-                                    if (sort_exists === 0) {
-                                        if (this.currentSort == null)
+                                    if (sort_exists === false) {
+                                        if (this.currentSort === null)
                                             this.currentSort = this.sortAsc;
 
                                         obj.column = column;
@@ -490,29 +491,29 @@
                                 }
 
                                 if (column === "search") {
-                                    search_found = 0;
+                                    let search_found = false;
 
-                                    for(j = 0; j < this.filters.length; j++) {
-                                        if (this.filters[j].column == "search") {
+                                    for(let j = 0; j < this.filters.length; j++) {
+                                        if (this.filters[j].column === "search") {
                                             this.filters[j].column = column;
                                             this.filters[j].cond = condition;
-                                            this.filters[j].val = response;
+                                            this.filters[j].val = encodeURIComponent(response);
                                             this.filters[j].label = label;
 
                                             this.makeURL();
                                         }
                                     }
 
-                                    for (j = 0;j < this.filters.length;j++) {
-                                        if (this.filters[j].column == "search") {
-                                            search_found = 1;
+                                    for (let j = 0;j < this.filters.length;j++) {
+                                        if (this.filters[j].column === "search") {
+                                            search_found = true;
                                         }
                                     }
 
-                                    if (search_found == 0) {
+                                    if (search_found === false) {
                                         obj.column = column;
                                         obj.cond = condition;
-                                        obj.val = response;
+                                        obj.val = encodeURIComponent(response);
                                         obj.label = label;
 
                                         this.filters.push(obj);
@@ -525,7 +526,7 @@
                             } else {
                                 obj.column = column;
                                 obj.cond = condition;
-                                obj.val = response;
+                                obj.val = encodeURIComponent(response);
                                 obj.label = label;
 
                                 this.filters.push(obj);
