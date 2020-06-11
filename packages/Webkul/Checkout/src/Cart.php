@@ -135,6 +135,7 @@ class Cart
         }
 
         $product = $this->productRepository->findOneByField('id', $productId);
+
         if ($product->status === 0) {
             return ['info' => __('shop::app.checkout.cart.item.inactive-add')];
         }
@@ -825,6 +826,7 @@ class Cart
                 session()->flash('info', __('shop::app.checkout.cart.item.inactive'));
             }
         }
+
         $cart->save();
 
         return $cart;
