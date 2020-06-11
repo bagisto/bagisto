@@ -225,6 +225,12 @@ class Helper extends Review
                 'locale' => $locale
             ]);
 
+            if (! $metaData) {
+                $metaData = $this->velocityMetadataRepository->findOneWhere([
+                    'locale' => 'en'
+                ]);
+            }
+
             return $metaData;
         } catch (\Exception $exception) {
         }

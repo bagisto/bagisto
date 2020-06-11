@@ -76,6 +76,11 @@
                     <div class="main-content-wrapper col-12 no-padding">
                         @php
                             $velocityContent = app('Webkul\Velocity\Repositories\ContentRepository')->getAllContents();
+
+                            $velocityHelper = app('Webkul\Velocity\Helpers\Helper');
+                            $velocityMetaData = $velocityHelper->getVelocityMetaData();
+                            
+                            view()->share('velocityMetaData', $velocityMetaData);
                         @endphp
 
                         <content-header
