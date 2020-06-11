@@ -137,7 +137,7 @@ class ProductFlat
                 }
             });
             
-            $this->productFlatRepository->updateAttributeColumn( $attribute );
+            $this->productFlatRepository->updateAttributeColumn( $attribute , $this );
             
         }
     }
