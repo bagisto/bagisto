@@ -214,14 +214,16 @@ class Helper extends Review
      *
      * @return array
      */
-    public function getVelocityMetaData()
+    public function getVelocityMetaData($locale = null)
     {
-        try {
-            $metaData = $this->velocityMetadataRepository->get();
+        if (! $locale) {
+            $locale = request()->get('locale') ?: app()->getLocale();
+        }
 
-            if (! ($metaData && isset($metaData[0]) && $metaData = $metaData[0])) {
-                $metaData = null;
-            }
+        try {
+            $metaData = $this->velocityMetadataRepository->findOneWhere([
+                'locale' => $locale
+            ]);
 
             return $metaData;
         } catch (\Exception $exception) {
@@ -287,6 +289,7 @@ class Helper extends Review
      * @param  \Webkul\Product\Contracts\Product  $product
      * @param  bool                               $list
      * @param  array                              $metaInformation
+     * 
      * @return array
      */
     public function formatProduct($product, $list = false, $metaInformation = [])
