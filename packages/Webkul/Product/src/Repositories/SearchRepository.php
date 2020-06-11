@@ -3,6 +3,7 @@
 namespace Webkul\Product\Repositories;
 
 use Illuminate\Container\Container as App;
+use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Product\Repositories\ProductRepository;
 
@@ -41,5 +42,16 @@ class SearchRepository extends Repository
         $products = $this->productRepository->searchProductByAttribute($data['term']);
 
         return $products;
+    }
+
+    /**
+     * @param  array  $data
+     * @return void
+     */
+    public function uploadSearchImage($data)
+    {
+        $path = request()->file('image')->store('product-search');
+
+        return Storage::url($path);
     }
 }

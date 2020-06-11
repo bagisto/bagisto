@@ -55,7 +55,7 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
             ]);
 
         Route::get('/items-count', 'ShopController@getItemsCount')
-            ->name('velocity.product.details');
+            ->name('velocity.product.item-count');
 
         Route::get('/detailed-products', 'ShopController@getDetailedProducts')
             ->name('velocity.product.details');
