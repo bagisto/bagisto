@@ -19,13 +19,13 @@ $factory->define(OrderItem::class, function (Faker $faker, array $attributes) {
     $fallbackPrice = $faker->randomFloat(4, 0, 1000);
 
     return [
-        'sku'        => $product->sku,
-        'type'       => $product->type,
-        'name'       => $product->name,
-        'price'      => $product->price ?? $fallbackPrice,
-        'base_price' => $product->price ?? $fallbackPrice,
-        'total'      => $product->price ?? $fallbackPrice,
-        'base_total' => $product->price ?? $fallbackPrice,
+        'sku'          => $product->sku,
+        'type'         => $product->type,
+        'name'         => $product->name,
+        'price'        => $product->price ?? $fallbackPrice,
+        'base_price'   => $product->price ?? $fallbackPrice,
+        'total'        => $product->price ?? $fallbackPrice,
+        'base_total'   => $product->price ?? $fallbackPrice,
         'product_id'   => $product->id,
         'qty_ordered'  => 1,
         'qty_shipped'  => 0,
