@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\packages",
+    "\\packages\\Webkul",
+    "\\packages\\Webkul\\Admin",
+    "\\packages\\Webkul\\Admin\\src",
+    "\\packages\\Webkul\\Admin\\src\\Http\\Controllers",
+    "\\packages\\Webkul\\Admin\\src\\Resources",
+    "\\packages\\Webkul\\Admin\\src\\Resources\\lang",
+    "\\packages\\Webkul\\Admin\\src\\Resources\\lang\\en",
+    "\\packages\\Webkul\\Core\\src"
+  ],
+  "SelectedNode": "\\packages\\Webkul\\Admin\\src\\Resources\\lang\\en\\app.php",
+  "PreviewInSolutionExplorer": false
+}
