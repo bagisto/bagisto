@@ -214,7 +214,7 @@ class Helper extends Review
      *
      * @return array
      */
-    public function getVelocityMetaData($locale = null)
+    public function getVelocityMetaData($locale = null, $default = true)
     {
         if (! $locale) {
             $locale = request()->get('locale') ?: app()->getLocale();
@@ -225,7 +225,7 @@ class Helper extends Review
                 'locale' => $locale
             ]);
 
-            if (! $metaData) {
+            if (! $metaData && $default) {
                 $metaData = $this->velocityMetadataRepository->findOneWhere([
                     'locale' => 'en'
                 ]);

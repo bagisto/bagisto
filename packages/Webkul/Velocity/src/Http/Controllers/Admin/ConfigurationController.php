@@ -39,7 +39,7 @@ class ConfigurationController extends Controller
      */
     public function renderMetaData()
     {
-        $velocityMetaData = $this->velocityHelper->getVelocityMetaData($this->locale);
+        $velocityMetaData = $this->velocityHelper->getVelocityMetaData($this->locale, false);
 
         if (! $velocityMetaData) {
             $this->createMetaData($this->locale);

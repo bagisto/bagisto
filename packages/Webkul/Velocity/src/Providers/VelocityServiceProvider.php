@@ -96,7 +96,11 @@ class VelocityServiceProvider extends ServiceProvider
      */
     private function loadGloableVariables()
     {
+        $velocityHelper = app('Webkul\Velocity\Helpers\Helper');
+        $velocityMetaData = $velocityHelper->getVelocityMetaData();
+
         view()->share('showRecentlyViewed', true);
+        view()->share('velocityMetaData', $velocityMetaData);
 
         return true;
     }
