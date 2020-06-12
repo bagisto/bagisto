@@ -68,7 +68,8 @@ return [
         'no-results' => 'No hay resultados',
         'page-title' => 'Búsqueda',
         'found-results' => 'No hay resultados de búsqueda',
-        'found-result' => 'Resultados de la búsqueda'
+        'found-result' => 'Resultados de la búsqueda',
+        'analysed-keywords' => 'Analysed Keywords'
     ],
 
     'reviews' => [

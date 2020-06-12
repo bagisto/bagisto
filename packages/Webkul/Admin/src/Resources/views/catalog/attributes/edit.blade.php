@@ -429,22 +429,22 @@
                     this.optionRowCount++;
 
                     var row = {
-                            'id': '{{ $option->id }}',
-                            'admin_name': '{{ $option->admin_name }}',
-                            'sort_order': '{{ $option->sort_order }}',
-                            'swatch_value': '{{ $option->swatch_value }}',
-                            'swatch_value_url': '{{ $option->swatch_value_url }}',
+                            'id': @json($option->id),
+                            'admin_name': @json($option->admin_name),
+                            'sort_order': @json($option->sort_order),
+                            'swatch_value': @json($option->swatch_value),
+                            'swatch_value_url': @json($option->swatch_value_url),
                             'notRequired': ''
                         };
 
                     @if (empty($option->label))
                         this.isNullOptionChecked = true;
-                        this.idNullOption = '{{ $option->id }}';
+                        this.idNullOption = @json($option->id);
                         row['notRequired'] = true;
                     @endif
 
                     @foreach (app('Webkul\Core\Repositories\LocaleRepository')->all() as $locale)
-                        row['{{ $locale->code }}'] = "{{ $option->translate($locale->code)['label'] ?? '' }}";
+                        row['{{ $locale->code }}'] = @json($option->translate($locale->code)['label'] ?? '');
                     @endforeach
 
                     this.optionRows.push(row);

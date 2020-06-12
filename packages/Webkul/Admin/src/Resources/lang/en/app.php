@@ -42,6 +42,7 @@ return [
     ],
 
     'layouts' => [
+        'app-version' => 'Version : :version',
         'my-account' => 'My Account',
         'logout' => 'Logout',
         'visit-shop' => 'Visit Shop',
@@ -150,6 +151,7 @@ return [
         'code' => 'Code',
         'admin-name' => 'Name',
         'name' => 'Name',
+        'copy' => 'Copy',
         'direction' => 'Direction',
         'fullname' => 'Full Name',
         'type' => 'Type',
@@ -370,7 +372,13 @@ return [
             'total-due' => 'Total Due',
             'cancel-confirm-msg' => 'Are you sure you want to cancel this order ?',
             'refund-btn-title' => 'Refund',
-            'refunds' => 'Refunds'
+            'refunds' => 'Refunds',
+            'comment-added-success' => 'Comment addded successfully.',
+            'comment' => 'Comment',
+            'submit-comment' => 'Submit Comment',
+            'notify-customer' => 'Notify Customer',
+            'customer-notified' => ':date | Customer <b>Notified</b>',
+            'customer-not-notified' => ':date | Customer <b>Not Notified</b>'
         ],
 
         'invoices' => [
@@ -894,6 +902,7 @@ return [
             'address-list' => 'Address\'s List',
             'order-list' => 'Order\'s List',
             'address-id' => 'Address ID',
+            'company-name' => 'Company Name',
             'address-1' => 'Address 1',
             'city' => 'City',
             'state-name' => 'State',
@@ -1278,8 +1287,11 @@ return [
             'newsletter' => 'NewsLetter Subscription',
             'newsletter-subscription' => 'Allow NewsLetter Subscription',
             'email' => 'Email Verification',
+
+            're-order' => 'Allow Re-order',
+            'reorder' => 'Re-order',
+
             'email-verification' => 'Allow Email Verification',
-            're-order' => 'Allow Reorder',
             'sort_order' => 'Sort Order',
             'general' => 'General',
             'footer' => 'Footer',
@@ -1307,11 +1319,39 @@ return [
             'order-number-suffix' => 'Order Number Suffix',
             'default' => 'Default',
             'sandbox' => 'Sandbox',
-            'all-channels' => 'All',
-            'all-locales' => 'All',
+            'all-channels' => 'All Channels',
+            'all-locales' => 'All Locales',
+            'all-customer-groups' => 'All Customer groups',
             'invoice-slip-design' => 'Invoice Slip Design',
-            'logo' => 'logo',
-            'favicon' => 'Favicon'
+            'logo' => 'Logo',
+            'storefront' => 'Storefront',
+            'default-list-mode' => 'Default List Mode',
+            'grid' => 'Grid',
+            'list' => 'List',
+            'products-per-page' => 'Products Per Page',
+            'sort-by' => 'Sort By',
+            'from-z-a' => 'From Z-A',
+            'from-a-z' => 'From A-Z',
+            'newest-first' => 'Newest First',
+            'oldest-first' => 'Oldest First',
+            'cheapest-first' => 'Cheapest First',
+            'expensive-first' => 'Expensive First',
+            'comma-seperated' => 'Comma Seperated',
+            'favicon' => 'Favicon',
+            'seo' => 'SEO',
+            'rich-snippets' => 'Rich Snippets',
+            'products' => 'Products',
+            'enable' => 'Enable',
+            'show-weight' => 'Show Weight',
+            'show-categories' => 'Show Categories',
+            'show-images' => 'Show Images',
+            'show-reviews' => 'Show Reviews',
+            'show-ratings' => 'Show Ratings',
+            'show-offers' => 'Show Offers',
+            'show-sku' => 'Show SKU',
+            'categories' => 'Categories',
+            'show-sku' => 'Show SKU',
+            'show-search-input-field' => 'Show Search Input Field'
        ]
     ]
 ];

@@ -68,7 +68,8 @@ return [
         'no-results' => 'お探しの条件に合う検索結果が見つかりませんでした。',
         'page-title' => '検索',
         'found-results' => '検索結果',
-        'found-result' => '検索結果'
+        'found-result' => '検索結果',
+        'analysed-keywords' => 'Analysed Keywords'
     ],
 
     'reviews' => [

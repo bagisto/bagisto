@@ -1,5 +1,4 @@
 /docker-compose-collection
-/bin
 /node_modules
 /public/hot
 /public/storage
@@ -22,7 +21,6 @@ yarn.lock
 package-lock.json
 yarn.lock
 .php_cs.cache
-storage/
 storage/*.key
 /docker-compose-collection/
 /resources/themes/velocity/*

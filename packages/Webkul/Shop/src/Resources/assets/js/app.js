@@ -38,7 +38,9 @@ $(document).ready(function () {
         el: "#app",
 
         data: {
-            modalIds: {}
+            modalIds: {},
+
+            show_loader: false
         },
 
         mounted: function () {
@@ -114,6 +116,14 @@ $(document).ready(function () {
 
             showModal(id) {
                 this.$set(this.modalIds, id, true);
+            },
+
+            showLoader() {
+                this.show_loader = true;
+            },
+
+            hideLoader() {
+                this.show_loader = false;
             }
         }
     });

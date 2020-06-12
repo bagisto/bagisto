@@ -21,7 +21,7 @@ mix.js(__dirname + "/src/Resources/assets/js/app.js", "js/admin.js")
         processCssUrls: false
     });
 
-if (!mix.inProduction()) {
+if (! mix.inProduction()) {
     mix.sourceMaps();
 }
 

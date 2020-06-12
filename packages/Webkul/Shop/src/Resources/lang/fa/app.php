@@ -71,7 +71,8 @@ return [
         'no-results' => 'نتیجه ای پیدا نشد',
         'page-title' => 'فروشگاه - جستجو',
         'found-results' => 'نتایج جستجو یافت شد',
-        'found-result' => 'نتیجه جستجو یافت شد'
+        'found-result' => 'نتیجه جستجو یافت شد',
+        'analysed-keywords' => 'Analysed Keywords'
     ],
 
     'reviews' => [
