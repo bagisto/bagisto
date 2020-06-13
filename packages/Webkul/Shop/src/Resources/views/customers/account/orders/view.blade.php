@@ -19,14 +19,14 @@
                 </span>
                 <span></span>
 
-
                 @if ($order->canCancel())
                     <a href="{{ route('customer.orders.cancel', $order->id) }}" class="btn btn-lg btn-primary" v-alert:message="'{{ __('shop::app.customer.account.order.view.cancel-confirm-msg') }}'" style="float: right; margin-left: 8px;">
                         {{ __('shop::app.customer.account.order.view.cancel-btn-title') }}
                     </a>
                 @endif
+
                 @if (core()->getConfigData('customer.settings.reorder.product_reorder'))
-                    @if($can_reorder)
+                    @if ($canReorder)
                         <a href="{{ route('customer.orders.reorder', $order->id) }}" class="btn btn-lg btn-primary" v-alert:message="'{{ __('admin::app.sales.orders.reorder-confirm-msg') }}'"  style="float: right;" >
                             {{ __('shop::app.customer.account.order.view.reorder-btn-title') }}
                         </a>
@@ -36,6 +36,7 @@
                         </button>
                     @endif
                 @endif
+
             </div>
 
             {!! view_render_event('bagisto.shop.customers.account.orders.view.before', ['order' => $order]) !!}

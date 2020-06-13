@@ -46,7 +46,7 @@ class CartController extends Controller
         OrderRepository $orderRepository
     )
     {
-        $this->middleware('customer')->only(['moveToWishlist','reorder']);
+        $this->middleware('customer')->only(['moveToWishlist', 'reorder']);
 
         $this->wishlistRepository = $wishlistRepository;
 
@@ -139,10 +139,8 @@ class CartController extends Controller
             'id'          => $id,
         ]);
 
-        foreach ($order->items as $item) {
-            $slugOrPath = strtolower(str_replace(" ","-",$item->name));
-            $product = $this->productRepository->findBySlug($slugOrPath);
-            Cart::addProduct($product->product_id, ['product_id'=>$product->product_id,'quantity'=>$item->qty_ordered]); 
+        foreach ($order->items as $item) {            
+            Cart::addProduct($item->product->product_id, ['product_id' => $item->product->product_id, 'quantity' => $item->qty_ordered]);
         }
 
         return redirect()->route('shop.checkout.cart.index');

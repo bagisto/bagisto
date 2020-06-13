@@ -73,7 +73,8 @@ class OrderController extends Controller
      */
     public function view($id)
     {
-        $can_reorder = true;
+        $canReorder = true;
+
         $order = $this->orderRepository->findOneWhere([
             'customer_id' => auth()->guard('customer')->user()->id,
             'id'          => $id,
@@ -84,15 +85,14 @@ class OrderController extends Controller
         }
 
         foreach ($order->items as $item) {
-            $slugOrPath = strtolower(str_replace(" ","-",$item->name));
-            $product = $this->productRepository->findBySlug($slugOrPath);
-            
-            if(!$product->isSaleable()){
-                $can_reorder = false;
+            $result = $item->product->isSaleable();
+
+            if (! $result) {
+                $canReorder = false;
             }            
         }
         
-        return view($this->_config['view'], compact('order', 'can_reorder'));
+        return view($this->_config['view'], compact('order', 'canReorder'));
     }
 
     /**
