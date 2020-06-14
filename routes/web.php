@@ -11,5 +11,5 @@
 |
 */
 
-Route::get('/redirect', 'Auth\LoginController@redirectToProvider');
-Route::get('/callback', 'Auth\LoginController@handleProviderCallback');
+Route::get('/redirect','Auth\LoginController@google');
+Route::get('/callback','Auth\LoginController@googleRedirect');

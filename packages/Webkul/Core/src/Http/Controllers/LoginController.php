@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 
+use Hash;
+use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Str;
+use App\User;
+
 class LoginController extends Controller
 {
     /*
@@ -31,10 +36,26 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function handleProviderCallback()
-    {
-        $User = Socialite::driver('google')->user();
-    
-        // $user->token;
-    }    
+    public function google(){
+        //Send the user request to google
+        return Socialite::driver('google')->redirect();
+    }
+    public function googleRedirect(){
+        //get the auth request from the google to authenticate user
+        $user = Socialite::driver('google')->stateless()->user();
+
+        // If the user does not exist add then
+        // If they do, get the model
+        // either way, authenticate the user into the application and redirect
+        // afterwards
+        $user = User::firstOrCreate([
+            'email' => $user->email
+        ], [
+            'name' =>  $user->name,
+            'password' => Hash::make(Str::random(24))
+        ]);
+
+        Auth::login($user, true);
+
+        return redirect('/dashboard');     
 }
