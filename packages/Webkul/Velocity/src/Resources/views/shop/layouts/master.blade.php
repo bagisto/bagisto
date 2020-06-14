@@ -1,3 +1,10 @@
+@php
+    $velocityHelper = app('Webkul\Velocity\Helpers\Helper');
+    $velocityMetaData = $velocityHelper->getVelocityMetaData();
+    
+    view()->share('velocityMetaData', $velocityMetaData);
+@endphp
+
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 

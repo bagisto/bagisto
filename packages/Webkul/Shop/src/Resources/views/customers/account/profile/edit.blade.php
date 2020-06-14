@@ -21,7 +21,7 @@
 
             {!! view_render_event('bagisto.shop.customers.account.profile.edit.before', ['customer' => $customer]) !!}
 
-            <form method="post" action="{{ route('customer.profile.edit') }}" @submit.prevent="onSubmit">
+            <form method="post" action="{{ route('customer.profile.store') }}" @submit.prevent="onSubmit">
 
                 <div class="edit-form">
                     @csrf

@@ -22,7 +22,7 @@
                 method="POST"
                 @submit.prevent="onSubmit"
                 class="account-table-content"
-                action="{{ route('customer.profile.edit') }}">
+                action="{{ route('customer.profile.store') }}">
                 @csrf
 
                 {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.before', ['customer' => $customer]) !!}

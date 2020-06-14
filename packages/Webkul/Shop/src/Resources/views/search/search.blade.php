@@ -5,6 +5,10 @@
 @endsection
 
 @section('content-wrapper')
+    @if (request('image-search'))
+        <image-search-result-component></image-search-result-component>
+    @endif
+
     @if (! $results)
         {{  __('shop::app.search.no-results') }}
     @endif
@@ -40,3 +44,46 @@
         </div>
     @endif
 @endsection
+
+@push('scripts')
+
+    <script type="text/x-template" id="image-search-result-component-template">
+        <div class="image-search-result">
+            <div class="searched-image">
+                <img :src="searched_image_url"/>
+            </div>
+
+            <div class="searched-terms">
+                <h3>{{ __('shop::app.search.analysed-keywords') }}</h3>
+
+                <div class="term-list">
+                    <a v-for="term in searched_terms" :href="'{{ route('shop.search.index') }}?term=' + term">
+                        @{{ term }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script>
+        Vue.component('image-search-result-component', {
+
+            template: '#image-search-result-component-template',
+
+            data: function() {
+                return {
+                    searched_image_url: localStorage.searched_image_url,
+
+                    searched_terms: []
+                }
+            },
+
+            created: function() {
+                this.searched_terms = localStorage.searched_terms.split('_');
+
+                console.log(this.searched_terms)
+            }
+        });
+    </script>
+
+@endpush

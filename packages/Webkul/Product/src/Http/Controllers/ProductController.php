@@ -175,7 +175,7 @@ class ProductController extends Controller
 
         $categories = $this->categoryRepository->getCategoryTree();
 
-        $inventorySources = $this->inventorySourceRepository->all();
+        $inventorySources = $this->inventorySourceRepository->findWhere(['status' => 1]);
 
         return view($this->_config['view'], compact('product', 'categories', 'inventorySources'));
     }
@@ -303,7 +303,7 @@ class ProductController extends Controller
 
     /**
      * To be manually invoked when data is seeded into products
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function sync()
