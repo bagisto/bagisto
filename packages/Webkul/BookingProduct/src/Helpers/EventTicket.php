@@ -2,37 +2,37 @@
 
 namespace Webkul\BookingProduct\Helpers;
 
-use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Webkul\Checkout\Facades\Cart;
+use Illuminate\Support\Facades\DB;
 
 class EventTicket extends Booking
 {
     /**
      * Returns event date
      *
-     * @param  \Webkul\BookingProduct\Contracts\BookingProduct  $bookingProduct
-     * @return string
+     * @param \Webkul\BookingProduct\Contracts\BookingProduct $bookingProduct
      */
-    public function getEventDate($bookingProduct)
+    public function getEventDate($bookingProduct): string
     {
-        $from = Carbon::createFromTimeString($bookingProduct->available_from)->format('d F, Y h:i A');
+        $from = Carbon::createFromTimeString($bookingProduct->available_from)
+            ->format('d F, Y h:i A');
 
-        $to = Carbon::createFromTimeString($bookingProduct->available_to)->format('d F, Y h:i A');
+        $to = Carbon::createFromTimeString($bookingProduct->available_to)
+            ->format('d F, Y h:i A');
 
         return $from . ' - ' . $to;
     }
 
     /**
-     * Returns tickets
+     * Returns tickets, if available.
      *
-     * @param  \Webkul\BookingProduct\Contracts\BookingProduct  $bookingProduct
-     * @return array
+     * @param \Webkul\BookingProduct\Contracts\BookingProduct $bookingProduct
      */
-    public function getTickets($bookingProduct)
+    public function getTickets($bookingProduct): array
     {
         if (! $bookingProduct->event_tickets()->count()) {
-            return;
+            return [];
         }
 
         return $this->formatPrice($bookingProduct->event_tickets);
@@ -41,10 +41,9 @@ class EventTicket extends Booking
     /**
      * Format ticket price
      *
-     * @param  array  $tickets
-     * @return array
+     * @param array $tickets
      */
-    public function formatPrice($tickets)
+    public function formatPrice($tickets): array
     {
         foreach ($tickets as $index => $ticket) {
             $price = $ticket->price;
@@ -58,22 +57,26 @@ class EventTicket extends Booking
 
             $tickets[$index]['id'] = $ticket->id;
             $tickets[$index]['converted_price'] = core()->convertPrice($price);
-            $tickets[$index]['formated_price'] = $formatedPrice = core()->currency($price);
-            $tickets[$index]['formated_price_text'] = __('bookingproduct::app.shop.products.per-ticket-price', ['price' => $formatedPrice]);
+            $tickets[$index]['formated_price'] = $formattedPrice = core()->currency($price);
+            $tickets[$index]['formated_price_text'] = __('bookingproduct::app.shop.products.per-ticket-price', [
+                'price' => $formattedPrice,
+            ]);
         }
 
         return $tickets;
     }
 
     /**
-     * @param \Webkul\Checkout\Contracts\CartItem|array  $cartItem
-     * @return bool
+     * @param \Webkul\Checkout\Contracts\CartItem|array $cartItem
      */
-    public function isItemHaveQuantity($cartItem)
+    public function isItemHaveQuantity($cartItem): bool
     {
-        $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $cartItem['product_id']);
+        $bookingProduct = $this->bookingProductRepository
+            ->findOneByField('product_id', $cartItem['product_id']);
 
-        $ticket = $bookingProduct->event_tickets()->find($cartItem['additional']['booking']['ticket_id']);
+        $ticket = $bookingProduct
+            ->event_tickets()
+            ->find($cartItem['additional']['booking']['ticket_id']);
 
         if ($ticket->qty - $this->getBookedQuantity($cartItem) < $cartItem['quantity']) {
             return false;
@@ -83,17 +86,16 @@ class EventTicket extends Booking
     }
 
     /**
-     * @param  array  $data
-     * @return int
+     * @param array $data
      */
-    public function getBookedQuantity($data)
+    public function getBookedQuantity($data): int
     {
         $result = $this->bookingRepository->getModel()
-                       ->leftJoin('order_items', 'bookings.order_item_id', '=', 'order_items.id')
-                       ->addSelect(DB::raw('SUM(qty_ordered - qty_canceled - qty_refunded) as total_qty_booked'))
-                       ->where('bookings.product_id', $data['product_id'])
-                       ->where('bookings.booking_product_event_ticket_id', $data['additional']['booking']['ticket_id'])
-                       ->first();
+            ->leftJoin('order_items', 'bookings.order_item_id', '=', 'order_items.id')
+            ->addSelect(DB::raw('SUM(qty_ordered - qty_canceled - qty_refunded) as total_qty_booked'))
+            ->where('bookings.product_id', $data['product_id'])
+            ->where('bookings.booking_product_event_ticket_id', $data['additional']['booking']['ticket_id'])
+            ->first();
 
         return ! is_null($result->total_qty_booked) ? $result->total_qty_booked : 0;
     }
@@ -101,10 +103,9 @@ class EventTicket extends Booking
     /**
      * Add booking additional prices to cart item
      *
-     * @param  array  $products
-     * @return array
+     * @param array $products
      */
-    public function addAdditionalPrices($products)
+    public function addAdditionalPrices($products): array
     {
         foreach ($products as $key => $product) {
             $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $product['product_id']);
@@ -128,8 +129,7 @@ class EventTicket extends Booking
     /**
      * Validate cart item product price
      *
-     * @param  \Webkul\Checkout\Contracts\CartItem  $item
-     * @return float
+     * @param \Webkul\Checkout\Contracts\CartItem $item
      */
     public function validateCartItem($item)
     {
@@ -166,14 +166,19 @@ class EventTicket extends Booking
 
     /**
      * Determines whether a single ticket is in Sale, i.e. has a valid sale price
-     *
-     * @return bool
      */
     public function isInSale($ticket): bool
     {
         return $ticket->special_price !== null
             && $ticket->special_price > 0.0
-            && ($ticket->special_price_from === null || $ticket->special_price_from === '0000-00-00 00:00:00' || $ticket->special_price_from <= Carbon::now())
-            && ($ticket->special_price_to === null || $ticket->special_price_to === '0000-00-00 00:00:00' || $ticket->special_price_to > Carbon::now());
+            && (
+                $ticket->special_price_from === null
+                || $ticket->special_price_from === '0000-00-00 00:00:00'
+                || $ticket->special_price_from <= Carbon::now()
+            ) && (
+                $ticket->special_price_to === null
+                || $ticket->special_price_to === '0000-00-00 00:00:00'
+                || $ticket->special_price_to > Carbon::now()
+            );
     }
 }
