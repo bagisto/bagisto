@@ -155,11 +155,8 @@ class Downloadable extends AbstractType
 
     /**
      * Add product. Returns error message if can't prepare product.
-     *
-     * @param  array  $data
-     * @return array
      */
-    public function prepareForCart($data)
+    public function prepareForCart(array $data)
     {
         if (! isset($data['links']) || ! count($data['links'])) {
             return trans('shop::app.checkout.cart.integrity.missing_links');

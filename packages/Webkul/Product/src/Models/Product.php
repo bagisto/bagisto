@@ -226,10 +226,7 @@ class Product extends Model implements ProductContract
         return $this->getTypeInstance()->isSaleable();
     }
 
-    /**
-     * @return integer
-     */
-    public function totalQuantity()
+    public function totalQuantity(): int
     {
         return $this->getTypeInstance()->totalQuantity();
     }

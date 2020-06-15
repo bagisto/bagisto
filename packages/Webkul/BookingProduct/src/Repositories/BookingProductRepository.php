@@ -2,9 +2,9 @@
 
 namespace Webkul\BookingProduct\Repositories;
 
-use Illuminate\Container\Container as App;
 use Carbon\Carbon;
 use Webkul\Core\Eloquent\Repository;
+use Illuminate\Container\Container as App;
 
 class BookingProductRepository extends Repository
 {
@@ -16,11 +16,12 @@ class BookingProductRepository extends Repository
     /**
      * Create a new repository instance.
      *
-     * @param  \Webkul\BookingProduct\Repositories\BookingProductDefaultSlotRepository  $bookingProductDefaultSlotRepository
-     * @param  \Webkul\BookingProduct\Repositories\BookingProductAppointmentSlotRepository  $bookingProductAppointmentSlotRepository
-     * @param  \Webkul\BookingProduct\Repositories\BookingProductEventTicketRepository  $bookingProductEventTicketRepository
-     * @param  \Webkul\BookingProduct\Repositories\BookingProductRentalSlotRepository  $bookingProductRentalSlotRepository
-     * @param  \Webkul\BookingProduct\Repositories\BookingProductTableSlotRepository  $bookingProductTableSlotRepository
+     * @param \Webkul\BookingProduct\Repositories\BookingProductDefaultSlotRepository     $bookingProductDefaultSlotRepository
+     * @param \Webkul\BookingProduct\Repositories\BookingProductAppointmentSlotRepository $bookingProductAppointmentSlotRepository
+     * @param \Webkul\BookingProduct\Repositories\BookingProductEventTicketRepository     $bookingProductEventTicketRepository
+     * @param \Webkul\BookingProduct\Repositories\BookingProductRentalSlotRepository      $bookingProductRentalSlotRepository
+     * @param \Webkul\BookingProduct\Repositories\BookingProductTableSlotRepository       $bookingProductTableSlotRepository
+     *
      * @return void
      */
     public function __construct(
@@ -56,14 +57,15 @@ class BookingProductRepository extends Repository
     }
 
     /**
-     * @param  array  $data
+     * @param array $data
+     *
      * @return \Webkul\BookingProduct\Contracts\BookingProduct
      */
     public function create(array $data)
     {
         $bookingProduct = parent::create($data);
 
-        if ($bookingProduct->type == 'event') {
+        if ($bookingProduct->type === 'event') {
             $this->typeRepositories[$data['type']]->saveEventTickets($data, $bookingProduct);
         } else {
             $this->typeRepositories[$data['type']]->create(array_merge($data, ['booking_product_id' => $bookingProduct->id]));
@@ -73,9 +75,10 @@ class BookingProductRepository extends Repository
     }
 
     /**
-     * @param  array  $data
-     * @param  int  $id
-     * @param  string  $attribute
+     * @param array  $data
+     * @param int    $id
+     * @param string $attribute
+     *
      * @return \Webkul\BookingProduct\Contracts\BookingProduct
      */
     public function update(array $data, $id, $attribute = "id")
@@ -90,7 +93,7 @@ class BookingProductRepository extends Repository
             $repository->deleteWhere(['booking_product_id' => $id]);
         }
 
-        if ($bookingProduct->type == 'event') {
+        if ($bookingProduct->type === 'event') {
             $this->typeRepositories[$data['type']]->saveEventTickets($data, $bookingProduct);
         } else {
             $bookingProductTypeSlot = $this->typeRepositories[$data['type']]->findOneByField('booking_product_id', $id);
@@ -110,7 +113,8 @@ class BookingProductRepository extends Repository
     }
 
     /**
-     * @param  array  $data
+     * @param array $data
+     *
      * @return array
      */
     public function formatSlots($data)
@@ -126,7 +130,7 @@ class BookingProductRepository extends Repository
 
                     foreach ($data['slots'][$i] as $slot) {
                         $slots[] = array_merge($slot, ['id' => $i . '_slot_' . $count]);
-                        
+
                         $count++;
                     }
 
@@ -141,7 +145,8 @@ class BookingProductRepository extends Repository
     }
 
     /**
-     * @param  array  $data
+     * @param array $data
+     *
      * @return array
      */
     public function validateSlots($data)
@@ -162,7 +167,8 @@ class BookingProductRepository extends Repository
     }
 
     /**
-     * @param  array  $data
+     * @param array $data
+     *
      * @return array
      */
     public function skipOverLappingSlots($slots)
@@ -176,7 +182,7 @@ class BookingProductRepository extends Repository
 
             if ($from > $to) {
                 unset($slots[$key]);
-                
+
                 continue;
             }
 

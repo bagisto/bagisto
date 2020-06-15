@@ -6,6 +6,11 @@ use Carbon\Carbon;
 use Webkul\Checkout\Facades\Cart;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Class EventTicket
+ *
+ * @package Webkul\BookingProduct\Helpers
+ */
 class EventTicket extends Booking
 {
     /**

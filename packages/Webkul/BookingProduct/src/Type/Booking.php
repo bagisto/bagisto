@@ -157,8 +157,6 @@ class Booking extends Virtual
      * Add product. Returns error message if can't prepare product.
      *
      * @param array $data
-     *
-     * @return mixed
      */
     public function prepareForCart(array $data)
     {
@@ -197,7 +195,7 @@ class Booking extends Virtual
                 ]);
 
                 if (is_string($cartProducts)) {
-                    return $cartProducts;
+                    return [$cartProducts];
                 }
 
                 $products = array_merge($products, $cartProducts);

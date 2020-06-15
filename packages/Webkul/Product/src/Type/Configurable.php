@@ -404,11 +404,8 @@ class Configurable extends AbstractType
 
     /**
      * Add product. Returns error message if can't prepare product.
-     *
-     * @param  array  $data
-     * @return array
      */
-    public function prepareForCart($data)
+    public function prepareForCart(array $data)
     {
         if (! isset($data['selected_configurable_option']) || ! $data['selected_configurable_option']) {
             return trans('shop::app.checkout.cart.integrity.missing_options');
@@ -602,10 +599,7 @@ class Configurable extends AbstractType
         return false;
     }
 
-    /**
-     * @return int
-     */
-    public function totalQuantity()
+    public function totalQuantity(): int
     {
         $total = 0;
 

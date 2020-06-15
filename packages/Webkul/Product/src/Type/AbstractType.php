@@ -664,11 +664,8 @@ abstract class AbstractType
 
     /**
      * Add product. Returns error message if can't prepare product.
-     *
-     * @param  array  $data
-     * @return array
      */
-    public function prepareForCart($data)
+    public function prepareForCart(array $data)
     {
         $data['quantity'] = $data['quantity'] ?? 1;
 

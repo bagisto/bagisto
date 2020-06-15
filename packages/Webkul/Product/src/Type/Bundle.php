@@ -32,7 +32,7 @@ class Bundle extends AbstractType
      * Bundle Option helper instance
      *
      * @var \Webkul\Product\Helpers\BundleOption
-    */
+     */
     protected $bundleOptionHelper;
 
     /**
@@ -52,7 +52,7 @@ class Bundle extends AbstractType
         'admin::catalog.products.accordians.categories',
         'admin::catalog.products.accordians.bundle-items',
         'admin::catalog.products.accordians.channels',
-        'admin::catalog.products.accordians.product-links'
+        'admin::catalog.products.accordians.product-links',
     ];
 
     /**
@@ -77,15 +77,16 @@ class Bundle extends AbstractType
     /**
      * Create a new product type instance.
      *
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
-     * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $attributeValueRepository
-     * @param  \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
-     * @param  \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
-     * @param  \Webkul\Product\Repositories\ProductBundleOptionRepository  $productBundleOptionRepository
-     * @param  \Webkul\Product\Repositories\ProductBundleOptionProductRepository  $productBundleOptionProductRepository
-     * @param  \Webkul\Product\Helpers\ProductImage  $productImageHelper
-     * @param  \Webkul\Product\Helpers\BundleOption  $bundleOptionHelper
+     * @param \Webkul\Attribute\Repositories\AttributeRepository                $attributeRepository
+     * @param \Webkul\Product\Repositories\ProductRepository                    $productRepository
+     * @param \Webkul\Product\Repositories\ProductAttributeValueRepository      $attributeValueRepository
+     * @param \Webkul\Product\Repositories\ProductInventoryRepository           $productInventoryRepository
+     * @param \Webkul\Product\Repositories\ProductImageRepository               $productImageRepository
+     * @param \Webkul\Product\Repositories\ProductBundleOptionRepository        $productBundleOptionRepository
+     * @param \Webkul\Product\Repositories\ProductBundleOptionProductRepository $productBundleOptionProductRepository
+     * @param \Webkul\Product\Helpers\ProductImage                              $productImageHelper
+     * @param \Webkul\Product\Helpers\BundleOption                              $bundleOptionHelper
+     *
      * @return void
      */
     public function __construct(
@@ -117,9 +118,10 @@ class Bundle extends AbstractType
     }
 
     /**
-     * @param  array  $data
-     * @param  int  $id
-     * @param  string  $attribute
+     * @param array  $data
+     * @param int    $id
+     * @param string $attribute
+     *
      * @return \Webkul\Product\Contracts\Product
      */
     public function update(array $data, $id, $attribute = "id")
@@ -156,7 +158,8 @@ class Bundle extends AbstractType
     /**
      * Get product minimal price
      *
-     * @param  int  $qty
+     * @param int $qty
+     *
      * @return float
      */
     public function getMinimalPrice($qty = null)
@@ -173,7 +176,7 @@ class Bundle extends AbstractType
             if (count($optionProductsPrices)) {
                 $selectionMinPrice = min($optionProductsPrices);
 
-                if($option->is_required) {
+                if ($option->is_required) {
                     $minPrice += $selectionMinPrice;
                 } elseif (! $haveRequiredOptions) {
                     $minPrices[] = $selectionMinPrice;
@@ -207,7 +210,7 @@ class Bundle extends AbstractType
             if (count($optionProductsPrices)) {
                 $selectionMinPrice = min($optionProductsPrices);
 
-                if($option->is_required) {
+                if ($option->is_required) {
                     $minPrice += $selectionMinPrice;
                 } elseif (! $haveRequiredOptions) {
                     $minPrices[] = $selectionMinPrice;
@@ -225,8 +228,9 @@ class Bundle extends AbstractType
     /**
      * Get product regular minimal price
      *
-     * @param  \Webkul\Product\Contracts\ProductBundleOption  $option
-     * @param  bool  $minPrice
+     * @param \Webkul\Product\Contracts\ProductBundleOption $option
+     * @param bool                                          $minPrice
+     *
      * @return float
      */
     public function getOptionProductsPrices($option, $minPrice = true)
@@ -239,10 +243,10 @@ class Bundle extends AbstractType
             }
 
             $optionPrices[] = $bundleOptionProduct->qty
-                              * ($minPrice
-                                ? $bundleOptionProduct->product->getTypeInstance()->getMinimalPrice()
-                                : $bundleOptionProduct->product->price
-                            );
+                * ($minPrice
+                    ? $bundleOptionProduct->product->getTypeInstance()->getMinimalPrice()
+                    : $bundleOptionProduct->product->price
+                );
         }
 
         return $optionPrices;
@@ -278,7 +282,7 @@ class Bundle extends AbstractType
                 if (! $bundleOptionProduct->product->getTypeInstance()->isSaleable()) {
                     continue;
                 }
-                
+
                 if (in_array($option->type, ['multiselect', 'checkbox'])) {
                     if (! isset($optionPrices[$option->id][0])) {
                         $optionPrices[$option->id][0] = 0;
@@ -315,7 +319,7 @@ class Bundle extends AbstractType
                 if (! $bundleOptionProduct->product->getTypeInstance()->isSaleable()) {
                     continue;
                 }
-                
+
                 if (in_array($option->type, ['multiselect', 'checkbox'])) {
                     if (! isset($optionPrices[$option->id][0])) {
                         $optionPrices[$option->id][0] = 0;
@@ -341,7 +345,8 @@ class Bundle extends AbstractType
     /**
      * Get product minimal price
      *
-     * @param  int  $qty
+     * @param int $qty
+     *
      * @return float
      */
     public function getFinalPrice($qty = null)
@@ -365,10 +370,10 @@ class Bundle extends AbstractType
                 'final_price'   => [
                     'price'          => core()->convertPrice($this->getMinimalPrice()),
                     'formated_price' => core()->currency($this->getMinimalPrice()),
-                ]
+                ],
             ],
 
-            'to'   => [
+            'to' => [
                 'regular_price' => [
                     'price'          => core()->convertPrice($this->getRegularMaximamPrice()),
                     'formated_price' => core()->currency($this->getRegularMaximamPrice()),
@@ -376,8 +381,8 @@ class Bundle extends AbstractType
                 'final_price'   => [
                     'price'          => core()->convertPrice($this->getMaximamPrice()),
                     'formated_price' => core()->currency($this->getMaximamPrice()),
-                ]
-            ]
+                ],
+            ],
         ];
     }
 
@@ -394,7 +399,7 @@ class Bundle extends AbstractType
 
         if ($prices['from']['regular_price']['price'] != $prices['from']['final_price']['price']) {
             $priceHtml .= '<span class="regular-price">' . $prices['from']['regular_price']['formated_price'] . '</span>'
-                        . '<span class="special-price">' . $prices['from']['final_price']['formated_price'] . '</span>';
+                . '<span class="special-price">' . $prices['from']['final_price']['formated_price'] . '</span>';
         } else {
             $priceHtml .= '<span>' . $prices['from']['regular_price']['formated_price'] . '</span>';
         }
@@ -407,7 +412,7 @@ class Bundle extends AbstractType
 
             if ($prices['to']['regular_price']['price'] != $prices['to']['final_price']['price']) {
                 $priceHtml .= '<span class="regular-price">' . $prices['to']['regular_price']['formated_price'] . '</span>'
-                            . '<span class="special-price">' . $prices['to']['final_price']['formated_price'] . '</span>';
+                    . '<span class="special-price">' . $prices['to']['final_price']['formated_price'] . '</span>';
             } else {
                 $priceHtml .= '<span>' . $prices['to']['regular_price']['formated_price'] . '</span>';
             }
@@ -420,11 +425,8 @@ class Bundle extends AbstractType
 
     /**
      * Add product. Returns error message if can't prepare product.
-     *
-     * @param  array  $data
-     * @return array
      */
-    public function prepareForCart($data)
+    public function prepareForCart(array $data)
     {
         if (isset($data['bundle_options'])) {
             $data['bundle_options'] = array_filter($this->validateBundleOptionForCart($data['bundle_options']));
@@ -471,7 +473,8 @@ class Bundle extends AbstractType
     /**
      * Add product. Returns error message if can't prepare product.
      *
-     * @param  array  $data
+     * @param array $data
+     *
      * @return array
      */
     public function getCartChildProducts($data)
@@ -513,8 +516,9 @@ class Bundle extends AbstractType
 
     /**
      *
-     * @param  array  $options1
-     * @param  array  $options2
+     * @param array $options1
+     * @param array $options2
+     *
      * @return boolean
      */
     public function compareOptions($options1, $options2)
@@ -525,7 +529,7 @@ class Bundle extends AbstractType
 
         if (isset($options1['bundle_options']) && isset($options2['bundle_options'])) {
             return $options1['bundle_options'] == $options2['bundle_options']
-                   && $options1['bundle_option_qty'] == $this->getOptionQuantities($options2);
+                && $options1['bundle_option_qty'] == $this->getOptionQuantities($options2);
         } elseif (! isset($options1['bundle_options'])) {
             return false;
         } elseif (! isset($options2['bundle_options'])) {
@@ -536,7 +540,8 @@ class Bundle extends AbstractType
     /**
      * Remove invalid options from add to cart request
      *
-     * @param  array  $data
+     * @param array $data
+     *
      * @return array
      */
     public function validateBundleOptionForCart($data)
@@ -557,7 +562,8 @@ class Bundle extends AbstractType
     /**
      * Returns additional information for items
      *
-     * @param  array  $data
+     * @param array $data
+     *
      * @return array
      */
     public function getAdditionalOptions($data)
@@ -605,7 +611,8 @@ class Bundle extends AbstractType
     /**
      * Returns additional information for items
      *
-     * @param  array  $data
+     * @param array $data
+     *
      * @return array
      */
     public function getOptionQuantities($data)
@@ -636,7 +643,8 @@ class Bundle extends AbstractType
     /**
      * Validate cart item product price
      *
-     * @param  \Webkul\Checkout\Contracts\CartItem  $item
+     * @param \Webkul\Checkout\Contracts\CartItem $item
+     *
      * @return void
      */
     public function validateCartItem($item)
@@ -666,7 +674,7 @@ class Bundle extends AbstractType
 
     /**
      * get product options
-    */
+     */
     public function getProductOptions($product = "")
     {
         $bundleOption = app('Webkul\Product\Helpers\BundleOption');

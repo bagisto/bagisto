@@ -20,7 +20,7 @@ class Grouped extends AbstractType
      * @var \Webkul\Product\Repositories\ProductGroupedProductRepository
      */
     protected $productGroupedProductRepository;
-    
+
     /**
      * Skip attribute for downloadable product type
      *
@@ -30,7 +30,7 @@ class Grouped extends AbstractType
 
     /**
      * These blade files will be included in product edit page
-     * 
+     *
      * @var array
      */
     protected $additionalViews = [
@@ -153,11 +153,8 @@ class Grouped extends AbstractType
 
     /**
      * Add product. Returns error message if can't prepare product.
-     *
-     * @param  array  $data
-     * @return array
      */
-    public function prepareForCart($data)
+    public function prepareForCart(array $data)
     {
         if (! isset($data['qty']) || ! is_array($data['qty'])) {
             return trans('shop::app.checkout.cart.integrity.missing_options');
@@ -180,7 +177,7 @@ class Grouped extends AbstractType
             if (is_string($cartProducts)) {
                 return $cartProducts;
             }
-                
+
             $products = array_merge($products, $cartProducts);
         }
 
