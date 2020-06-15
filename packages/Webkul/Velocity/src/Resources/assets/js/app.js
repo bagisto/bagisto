@@ -221,6 +221,7 @@ $(document).ready(function () {
                 miniCartKey: 0,
                 quickView: false,
                 productDetails: [],
+                showPageLoader: false,
             }
         },
 
@@ -331,6 +332,14 @@ $(document).ready(function () {
                     })
                 });
             },
+
+            showLoader: function () {
+                this.showPageLoader = true;
+            },
+
+            hideLoader: function () {
+                this.showPageLoader = false;
+            }
         }
     });
 
