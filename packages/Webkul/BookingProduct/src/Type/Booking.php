@@ -154,6 +154,27 @@ class Booking extends Virtual
     }
 
     /**
+     * Subtract the already booked tickets from the inventory source to have
+     * a better reflection of the amount of buyable tickets.
+     *
+     * @return int
+     */
+    public function totalQuantity(): int
+    {
+        $quantity = parent::totalQuantity();
+
+        $alreadyReserved = \Webkul\BookingProduct\Models\Booking::query()
+            ->where(['product_id' => $this->product->id])
+            ->sum('qty');
+
+        if ($alreadyReserved >= $quantity) {
+            return 0;
+        }
+
+        return $quantity - $alreadyReserved;
+    }
+
+    /**
      * Add product. Returns error message if can't prepare product.
      *
      * @param array $data
