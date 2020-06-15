@@ -2,17 +2,17 @@
 
 namespace Webkul\BookingProduct\Type;
 
-use Illuminate\Support\Arr;
-use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Repositories\ProductAttributeValueRepository;
-use Webkul\Product\Repositories\ProductInventoryRepository;
-use Webkul\Product\Repositories\ProductImageRepository;
-use Webkul\Product\Helpers\ProductImage;
-use Webkul\BookingProduct\Repositories\BookingProductRepository;
-use Webkul\BookingProduct\Helpers\Booking as BookingHelper;
-use Webkul\Product\Type\Virtual;
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
+use Webkul\Product\Type\Virtual;
+use Webkul\Product\Helpers\ProductImage;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Product\Repositories\ProductImageRepository;
+use Webkul\BookingProduct\Helpers\Booking as BookingHelper;
+use Webkul\Product\Repositories\ProductInventoryRepository;
+use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\BookingProduct\Repositories\BookingProductRepository;
 
 class Booking extends Virtual
 {
@@ -133,7 +133,7 @@ class Booking extends Virtual
         if (! $bookingProduct) {
             return false;
         }
-        
+
         if (in_array($bookingProduct->type, ['default', 'rental', 'table'])) {
             return true;
         }
@@ -149,7 +149,7 @@ class Booking extends Virtual
     {
         $bookingProduct = $this->getBookingProduct($this->product->id);
 
-        return app($this->bookingHelper->getTypeHepler($bookingProduct->type))->isItemHaveQuantity($cartItem);
+        return app($this->bookingHelper->getTypeHelper($bookingProduct->type))->isItemHaveQuantity($cartItem);
     }
 
     /**
@@ -171,7 +171,7 @@ class Booking extends Virtual
         if ($bookingProduct->type == 'event') {
             if (Carbon::now() > $bookingProduct->available_from && Carbon::now() > $bookingProduct->available_to) {
                 return trans('shop::app.checkout.cart.event.expired');
-            } 
+            }
 
             $filtered = Arr::where($data['booking']['qty'], function ($qty, $key) {
                 return $qty != 0;
@@ -197,14 +197,14 @@ class Booking extends Virtual
                 if (is_string($cartProducts)) {
                     return $cartProducts;
                 }
-                    
+
                 $products = array_merge($products, $cartProducts);
             }
         } else {
             $products = parent::prepareForCart($data);
         }
 
-        $typeHelper = app($this->bookingHelper->getTypeHepler($bookingProduct->type));
+        $typeHelper = app($this->bookingHelper->getTypeHelper($bookingProduct->type));
 
         if (! $typeHelper->isSlotAvailable($products)) {
             return trans('shop::app.checkout.cart.quantity.inventory_warning');
@@ -261,6 +261,6 @@ class Booking extends Virtual
             return;
         }
 
-        return app($this->bookingHelper->getTypeHepler($bookingProduct->type))->validateCartItem($item);
+        return app($this->bookingHelper->getTypeHelper($bookingProduct->type))->validateCartItem($item);
     }
 }

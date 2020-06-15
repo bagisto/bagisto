@@ -2,16 +2,15 @@
 
 namespace Webkul\Product\Type;
 
-use Illuminate\Support\Facades\Storage;
-use phpDocumentor\Reflection\Types\Boolean;
-use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Repositories\ProductAttributeValueRepository;
-use Webkul\Product\Repositories\ProductInventoryRepository;
-use Webkul\Product\Repositories\ProductImageRepository;
-use Webkul\Product\Models\ProductAttributeValue;
-use Webkul\Product\Helpers\ProductImage;
 use Webkul\Checkout\Facades\Cart;
+use Illuminate\Support\Facades\Storage;
+use Webkul\Product\Helpers\ProductImage;
+use Webkul\Product\Models\ProductAttributeValue;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Product\Repositories\ProductImageRepository;
+use Webkul\Product\Repositories\ProductInventoryRepository;
+use Webkul\Product\Repositories\ProductAttributeValueRepository;
 
 abstract class AbstractType
 {
@@ -369,9 +368,15 @@ abstract class AbstractType
     }
 
     /**
-     * @return int
+     * How much entities of this product is currently available to sell ?
+     *
+     * It is possbile that some items are already reserved ('ordered_inventories').
+     * They are being recognized and subtracted automatically by this function.
+     *
+     * @return int if multiple active inventory sources are found, we return the sum of all
+     *             active inventories.
      */
-    public function totalQuantity()
+    public function totalQuantity(): int
     {
         $total = 0;
 

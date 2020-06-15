@@ -2,22 +2,22 @@
 
 namespace Webkul\BookingProduct\Helpers;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Arr;
 use Carbon\Carbon;
-use Webkul\BookingProduct\Repositories\BookingProductRepository;
-use Webkul\BookingProduct\Repositories\BookingProductDefaultSlotRepository;
-use Webkul\BookingProduct\Repositories\BookingProductAppointmentSlotRepository;
-use Webkul\BookingProduct\Repositories\BookingProductEventTicketRepository;
-use Webkul\BookingProduct\Repositories\BookingProductRentalSlotRepository;
-use Webkul\BookingProduct\Repositories\BookingProductTableSlotRepository;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Webkul\BookingProduct\Repositories\BookingRepository;
+use Webkul\BookingProduct\Repositories\BookingProductRepository;
+use Webkul\BookingProduct\Repositories\BookingProductTableSlotRepository;
+use Webkul\BookingProduct\Repositories\BookingProductRentalSlotRepository;
+use Webkul\BookingProduct\Repositories\BookingProductDefaultSlotRepository;
+use Webkul\BookingProduct\Repositories\BookingProductEventTicketRepository;
+use Webkul\BookingProduct\Repositories\BookingProductAppointmentSlotRepository;
 
 class Booking
 {
     /**
      * BookingProductRepository
-     * 
+     *
      * @return \Webkul\BookingProduct\Repositories\BookingProductRepository
      */
     protected $bookingProductRepository;
@@ -29,7 +29,7 @@ class Booking
 
     /**
      * BookingRepository
-     * 
+     *
      * @return \Webkul\BookingProduct\Repositories\BookingRepository
      */
     protected $bookingRepository;
@@ -88,12 +88,12 @@ class Booking
     }
 
     /**
-     * Returns the booking type hepler instance
+     * Returns the booking type helper instance
      *
      * @param  string  $type
      * @return array
      */
-    public function getTypeHepler($type)
+    public function getTypeHelper($type)
     {
         return $this->typeHelpers[$type];
     }
@@ -316,10 +316,10 @@ class Booking
 
                     if ($qty && $currentTime <= $from) {
                         $slots[] = [
-                            'from'      => $from->format('h:i A'), 
-                            'to'        => $to->format('h:i A'), 
-                            'timestamp' => $from->getTimestamp() . '-' . $to->getTimestamp(), 
-                            'qty'       => $qty, 
+                            'from'      => $from->format('h:i A'),
+                            'to'        => $to->format('h:i A'),
+                            'timestamp' => $from->getTimestamp() . '-' . $to->getTimestamp(),
+                            'qty'       => $qty,
                         ];
                     }
                 } else {
@@ -368,7 +368,7 @@ class Booking
     public function isSlotExpired($cartItem)
     {
         $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $cartItem['product_id']);
-        
+
         $typeHelper = app($this->typeHelpers[$bookingProduct->type]);
 
         $slots = $typeHelper->getSlotsByDate($bookingProduct, $cartItem['additional']['booking']['date']);
@@ -432,7 +432,7 @@ class Booking
                         'option_label'   => Carbon::createFromTimeString($bookingProduct->available_to)->format('d F, Y'),
                     ]
                 ];
-                
+
                 break;
 
             case 'rental':
@@ -465,7 +465,7 @@ class Booking
                 ];
 
                 break;
-            
+
             case 'table':
                 $timestamps = explode('-', $data['booking']['slot']);
 
@@ -490,7 +490,7 @@ class Booking
                 }
 
                 break;
-            
+
             default:
                 $timestamps = explode('-', $data['booking']['slot']);
 
