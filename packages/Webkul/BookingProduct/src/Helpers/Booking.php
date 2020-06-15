@@ -343,10 +343,8 @@ class Booking
 
     /**
      * @param \Webkul\Ceckout\Contracts\CartItem|array $cartItem
-     *
-     * @return bool
      */
-    public function isItemHaveQuantity($cartItem)
+    public function isItemHaveQuantity($cartItem): bool
     {
         $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $cartItem['product_id']);
 

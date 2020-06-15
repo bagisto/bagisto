@@ -44,14 +44,15 @@ class Booking extends Virtual
     /**
      * Create a new product type instance.
      *
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
-     * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $attributeValueRepository
-     * @param  \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
-     * @param  \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
-     * @param  \Webkul\Product\Helpers\ProductImage $productImageHelper
-     * @param  \Webkul\BookingProduct\Repositories\BookingProductRepository  $bookingProductRepository
-     * @param  \Webkul\BookingProduct\Helpers\BookingHelper  $bookingHelper
+     * @param \Webkul\Attribute\Repositories\AttributeRepository           $attributeRepository
+     * @param \Webkul\Product\Repositories\ProductRepository               $productRepository
+     * @param \Webkul\Product\Repositories\ProductAttributeValueRepository $attributeValueRepository
+     * @param \Webkul\Product\Repositories\ProductInventoryRepository      $productInventoryRepository
+     * @param \Webkul\Product\Repositories\ProductImageRepository          $productImageRepository
+     * @param \Webkul\Product\Helpers\ProductImage                         $productImageHelper
+     * @param \Webkul\BookingProduct\Repositories\BookingProductRepository $bookingProductRepository
+     * @param \Webkul\BookingProduct\Helpers\BookingHelper                 $bookingHelper
+     *
      * @return void
      */
     public function __construct(
@@ -80,16 +81,17 @@ class Booking extends Virtual
     }
 
     /**
-     * @param  array  $data
-     * @param  int  $id
-     * @param  string  $attribute
+     * @param array  $data
+     * @param int    $id
+     * @param string $attribute
+     *
      * @return \Webkul\Product\Contracts\Product
      */
     public function update(array $data, $id, $attribute = "id")
     {
         $product = parent::update($data, $id, $attribute);
 
-        if (request()->route()->getName() != 'admin.catalog.products.massupdate') {
+        if (request()->route()->getName() !== 'admin.catalog.products.massupdate') {
             $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $id);
 
             if ($bookingProduct) {
@@ -107,10 +109,9 @@ class Booking extends Virtual
     /**
      * Returns additional views
      *
-     * @param  int  $id
      * @return array
      */
-    public function getBookingProduct($productId)
+    public function getBookingProduct(int $productId)
     {
         static $bookingProducts = [];
 
@@ -118,15 +119,15 @@ class Booking extends Virtual
             return $bookingProducts[$productId];
         }
 
-        return $bookingProducts[$productId] = $this->bookingProductRepository->findOneByField('product_id', $productId);
+        return $bookingProducts[$productId] = $this
+            ->bookingProductRepository
+            ->findOneByField('product_id', $productId);
     }
 
     /**
-     * Return true if this product can have inventory
-     *
-     * @return bool
+     * Return true if this product can have a inventory stock.
      */
-    public function showQuantityBox()
+    public function showQuantityBox(): bool
     {
         $bookingProduct = $this->getBookingProduct($this->product->id);
 
@@ -142,23 +143,24 @@ class Booking extends Virtual
     }
 
     /**
-     * @param  \Webkul\Checkout\Contracts\CartItem  $cartItem
-     * @return bool
+     * @param \Webkul\Checkout\Contracts\CartItem $cartItem
      */
-    public function isItemHaveQuantity($cartItem)
+    public function isItemHaveQuantity($cartItem): bool
     {
         $bookingProduct = $this->getBookingProduct($this->product->id);
 
-        return app($this->bookingHelper->getTypeHelper($bookingProduct->type))->isItemHaveQuantity($cartItem);
+        return app($this->bookingHelper->getTypeHelper($bookingProduct->type))
+            ->isItemHaveQuantity($cartItem);
     }
 
     /**
      * Add product. Returns error message if can't prepare product.
      *
-     * @param  array  $data
-     * @return array
+     * @param array $data
+     *
+     * @return mixed
      */
-    public function prepareForCart($data)
+    public function prepareForCart(array $data)
     {
         if (! isset($data['booking']) || ! count($data['booking'])) {
             return trans('shop::app.checkout.cart.integrity.missing_options');
@@ -168,7 +170,7 @@ class Booking extends Virtual
 
         $bookingProduct = $this->getBookingProduct($data['product_id']);
 
-        if ($bookingProduct->type == 'event') {
+        if ($bookingProduct->type === 'event') {
             if (Carbon::now() > $bookingProduct->available_from && Carbon::now() > $bookingProduct->available_to) {
                 return trans('shop::app.checkout.cart.event.expired');
             }
@@ -217,11 +219,10 @@ class Booking extends Virtual
 
     /**
      *
-     * @param  array  $options1
-     * @param  array  $options2
-     * @return boolean
+     * @param array $options1
+     * @param array $options2
      */
-    public function compareOptions($options1, $options2)
+    public function compareOptions($options1, $options2): bool
     {
         if ($this->product->id != $options2['product_id']) {
             return false;
@@ -229,9 +230,13 @@ class Booking extends Virtual
 
         if (isset($options1['booking']) && isset($options2['booking'])) {
             return $options1['booking'] == $options2['booking'];
-        } elseif (! isset($options1['booking'])) {
+        }
+
+        if (! isset($options1['booking'])) {
             return false;
-        } elseif (! isset($options2['booking'])) {
+        }
+
+        if (! isset($options2['booking'])) {
             return false;
         }
     }
@@ -239,7 +244,8 @@ class Booking extends Virtual
     /**
      * Returns additional information for items
      *
-     * @param  array  $data
+     * @param array $data
+     *
      * @return array
      */
     public function getAdditionalOptions($data)
@@ -250,7 +256,8 @@ class Booking extends Virtual
     /**
      * Validate cart item product price
      *
-     * @param  \Webkul\Checkout\Contracts\CartItem  $item
+     * @param \Webkul\Checkout\Contracts\CartItem $item
+     *
      * @return float
      */
     public function validateCartItem($item)
@@ -261,6 +268,7 @@ class Booking extends Virtual
             return;
         }
 
-        return app($this->bookingHelper->getTypeHelper($bookingProduct->type))->validateCartItem($item);
+        return app($this->bookingHelper->getTypeHelper($bookingProduct->type))
+            ->validateCartItem($item);
     }
 }
