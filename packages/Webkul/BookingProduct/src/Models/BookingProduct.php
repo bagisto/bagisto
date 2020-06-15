@@ -3,7 +3,6 @@
 namespace Webkul\BookingProduct\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Webkul\Product\Models\ProductProxy;
 use Webkul\BookingProduct\Contracts\BookingProduct as BookingProductContract;
 
 class BookingProduct extends Model implements BookingProductContract

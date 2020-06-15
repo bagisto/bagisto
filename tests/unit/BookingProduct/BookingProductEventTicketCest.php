@@ -83,7 +83,8 @@ class BookingProductEventTicketCest
     public function testValidateCartItem(UnitTester $I, Example $scenario): void
     {
         $ticket = $I->have(BookingProductEventTicket::class, array_merge(
-                ['booking_product_id' => $this->bookingProduct->id], $scenario['ticket'])
+                ['booking_product_id' => $this->bookingProduct->id],
+                $scenario['ticket'])
         );
 
         $product = Product::query()->find($this->bookingProduct->product_id);
@@ -92,17 +93,21 @@ class BookingProductEventTicketCest
             'is_buy_now' => 0,
             'product_id' => $product->id,
             'quantity'   => $scenario['qty'],
-            "booking"    => [
-                "qty" => [
+            'booking' => [
+                'qty' => [
                     $ticket->id => $scenario['qty'],
-                ]
-            ]
+                ],
+            ],
         ];
 
         $cart = cart()->addProduct($product->id, $data);
         $I->assertEquals('booking', $cart->items[0]->type);
 
-        $product->getTypeInstance()->validateCartItem($cart->items[0]);
+        $instance = $product->getTypeInstance();
+
+        $instance->validateCartItem($cart->items[0]);
+
+        $I->assertIsNumeric($instance->totalQuantity());
 
         $finalPrice = $product->price + $scenario['expected'];
         $finalTotal = ($product->price + $scenario['expected']) * $scenario['qty'];
@@ -141,8 +146,8 @@ class BookingProductEventTicketCest
                 'expectFields' => [
                     'converted_price'     => 10,
                     'formated_price'      => '$10.00',
-                    'formated_price_text' => '$10.00 Per Ticket'
-                ]
+                    'formated_price_text' => '$10.00 Per Ticket',
+                ],
             ],
             [
                 'ticket'       => ['price' => 20, 'special_price' => 10],
@@ -152,7 +157,7 @@ class BookingProductEventTicketCest
                     'formated_price_text'      => '$10.00 Per Ticket',
                     'original_converted_price' => 20,
                     'original_formated_price'  => '$20.00',
-                ]
+                ],
             ],
             [
                 'ticket'       => [
@@ -167,7 +172,7 @@ class BookingProductEventTicketCest
                     'formated_price_text'      => '$10.00 Per Ticket',
                     'original_converted_price' => 20,
                     'original_formated_price'  => '$20.00',
-                ]
+                ],
             ],
             [
                 'ticket'       => [
@@ -180,7 +185,7 @@ class BookingProductEventTicketCest
                     'converted_price'     => 10,
                     'formated_price'      => '$10.00',
                     'formated_price_text' => '$10.00 Per Ticket',
-                ]
+                ],
             ],
         ];
     }
@@ -198,14 +203,14 @@ class BookingProductEventTicketCest
                     'base_total' => 10.0,
                     'additional' => [
                         'quantity' => 1,
-                    ]
+                    ],
                 ],
                 'expected'  => [
                     'price'      => 15.0,
                     'base_price' => 15.0,
                     'total'      => 15.0,
                     'base_total' => 15.0,
-                ]
+                ],
             ],
             [
                 'ticket'    => ['price' => 20, 'special_price' => 10],
@@ -217,14 +222,14 @@ class BookingProductEventTicketCest
                     'base_total' => 20.0,
                     'additional' => [
                         'quantity' => 1,
-                    ]
+                    ],
                 ],
                 'expected'  => [
                     'price'      => 30.0,
                     'base_price' => 30.0,
                     'total'      => 30.0,
                     'base_total' => 30.0,
-                ]
+                ],
             ],
             [
                 'ticket'    => ['price' => 20, 'special_price' => 10],
@@ -236,14 +241,14 @@ class BookingProductEventTicketCest
                     'base_total' => 20.0,
                     'additional' => [
                         'quantity' => 2,
-                    ]
+                    ],
                 ],
                 'expected'  => [
                     'price'      => 30.0,
                     'base_price' => 30.0,
                     'total'      => 40.0,
                     'base_total' => 40.0,
-                ]
+                ],
             ],
         ];
     }
@@ -252,39 +257,39 @@ class BookingProductEventTicketCest
     {
         return [
             [
-                'ticket'   => ['price' => 10],
+                'ticket'                => ['price' => 10],
+                'qty'                   => 1,
+                'expected'              => 10,
+            ],
+            [
+                'ticket'   => ['price' => 20, 'special_price' => 10],
                 'qty'      => 1,
                 'expected' => 10,
             ],
             [
                 'ticket'   => ['price' => 20, 'special_price' => 10],
-                'qty'      => 1,
-                'expected' =>  10,
-            ],
-            [
-                'ticket'   => ['price' => 20, 'special_price' => 10],
                 'qty'      => 2,
-                'expected' => 10
+                'expected' => 10,
             ],
             [
-                'ticket'       => [
+                'ticket'   => [
                     'price'              => 20,
                     'special_price'      => 10,
                     'special_price_from' => '0000-00-00 00:00:00',
                     'special_price_to'   => '0000-00-00 00:00:00',
                 ],
                 'qty'      => 2,
-                'expected' => 10
+                'expected' => 10,
             ],
             [
-                'ticket'       => [
+                'ticket'   => [
                     'price'              => 10,
                     'special_price'      => 7,
                     'special_price_from' => Carbon::yesterday(),
                     'special_price_to'   => Carbon::now(),
                 ],
                 'qty'      => 2,
-                'expected' => 10
+                'expected' => 10,
             ],
         ];
     }
@@ -295,16 +300,16 @@ class BookingProductEventTicketCest
             [
                 'ticket' => [
                     'price'         => '10.0000',
-                    'special_price' => null
+                    'special_price' => null,
                 ],
-                'expect' => false
+                'expect' => false,
             ],
             [
                 'ticket' => [
                     'price'         => '10.0000',
-                    'special_price' => '5.0000'
+                    'special_price' => '5.0000',
                 ],
-                'expect' => true
+                'expect' => true,
             ],
             [
                 'ticket' => [
@@ -313,7 +318,7 @@ class BookingProductEventTicketCest
                     'special_price_from' => null,
                     'special_price_to'   => null,
                 ],
-                'expect' => true
+                'expect' => true,
             ],
             [
                 'ticket' => [
@@ -322,7 +327,7 @@ class BookingProductEventTicketCest
                     'special_price_from' => '0000-00-00 00:00:00',
                     'special_price_to'   => '0000-00-00 00:00:00',
                 ],
-                'expect' => true
+                'expect' => true,
             ],
             [
                 'ticket' => [
@@ -331,7 +336,7 @@ class BookingProductEventTicketCest
                     'special_price_from' => Carbon::yesterday(),
                     'special_price_to'   => Carbon::tomorrow(),
                 ],
-                'expect' => true
+                'expect' => true,
             ],
             [
                 'ticket' => [
@@ -340,7 +345,7 @@ class BookingProductEventTicketCest
                     'special_price_from' => Carbon::yesterday(),
                     'special_price_to'   => Carbon::now(),
                 ],
-                'expect' => false
+                'expect' => false,
             ],
             [
                 'ticket' => [
@@ -349,7 +354,7 @@ class BookingProductEventTicketCest
                     'special_price_from' => Carbon::now(),
                     'special_price_to'   => Carbon::tomorrow(),
                 ],
-                'expect' => true
+                'expect' => true,
             ],
         ];
     }
