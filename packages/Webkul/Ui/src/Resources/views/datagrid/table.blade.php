@@ -236,7 +236,7 @@
                     getColumnOrAlias: function(columnOrAlias) {
                         this.columnOrAlias = columnOrAlias;
 
-                        for(column in this.columns) {
+                        for (column in this.columns) {
                             if (this.columns[column].index === this.columnOrAlias) {
                                 this.type = this.columns[column].type;
 
@@ -290,8 +290,8 @@
                     getResponse: function() {
                         label = '';
 
-                        for(let colIndex in this.columns) {
-                            if(this.columns[colIndex].index == this.columnOrAlias) {
+                        for (let colIndex in this.columns) {
+                            if (this.columns[colIndex].index == this.columnOrAlias) {
                                 label = this.columns[colIndex].label;
                                 break;
                             }
@@ -309,8 +309,9 @@
                                 alert('{{__('ui::app.datagrid.zero-index')}}');
                             }
 
-                            if(indexConditions)
+                            if (indexConditions) {
                                 this.formURL(this.columnOrAlias, this.numberCondition, this.numberValue, label);
+                            }
                         } else if (this.type === 'boolean') {
                             this.formURL(this.columnOrAlias, this.booleanCondition, this.booleanValue, label);
                         } else if (this.type === 'datetime') {
@@ -323,8 +324,8 @@
                     sortCollection: function(alias) {
                         let label = '';
 
-                        for(let colIndex in this.columns) {
-                            if(this.columns[colIndex].index === alias) {
+                        for (let colIndex in this.columns) {
+                            if (this.columns[colIndex].index === alias) {
                                 matched = 0;
                                 label = this.columns[colIndex].label;
                                 break;
@@ -346,7 +347,7 @@
                             this.arrayFromUrl();
                         }
 
-                        for(let id in this.massActions) {
+                        for (let id in this.massActions) {
                             targetObj = {
                                 'type': this.massActions[id].type,
                                 'action': this.massActions[id].action
@@ -363,7 +364,7 @@
                     },
 
                     findCurrentSort: function() {
-                        for(let i in this.filters) {
+                        for (let i in this.filters) {
                             if (this.filters[i].column === 'sort') {
                                 this.currentSort = this.filters[i].val;
                             }
@@ -372,7 +373,7 @@
 
                     changeMassActionTarget: function() {
                         if (this.massActionType === 'delete') {
-                            for(let i in this.massActionTargets) {
+                            for (let i in this.massActionTargets) {
                                 if (this.massActionTargets[i].type === 'delete') {
                                     this.massActionTarget = this.massActionTargets[i].action;
 
@@ -382,7 +383,7 @@
                         }
 
                         if (this.massActionType === 'update') {
-                            for(let i in this.massActionTargets) {
+                            for (let i in this.massActionTargets) {
                                 if (this.massActionTargets[i].type === 'update') {
                                     this.massActionTarget = this.massActionTargets[i].action;
 
@@ -410,13 +411,13 @@
                                 if (column !== "sort" && column !== "search") {
                                     let filterRepeated = false;
 
-                                    for(let j = 0; j < this.filters.length; j++) {
+                                    for (let j = 0; j < this.filters.length; j++) {
                                         if (this.filters[j].column === column) {
                                             if (this.filters[j].cond === condition && this.filters[j].val === response) {
                                                 filterRepeated = true;
 
                                                 return false;
-                                            } else if(this.filters[j].cond === condition && this.filters[j].val !== response) {
+                                            } else if (this.filters[j].cond === condition && this.filters[j].val !== response) {
                                                 filterRepeated = true;
 
                                                 this.filters[j].val = response;
@@ -493,7 +494,7 @@
                                 if (column === "search") {
                                     let search_found = false;
 
-                                    for(let j = 0; j < this.filters.length; j++) {
+                                    for (let j = 0; j < this.filters.length; j++) {
                                         if (this.filters[j].column === "search") {
                                             this.filters[j].column = column;
                                             this.filters[j].cond = condition;
@@ -581,11 +582,11 @@
 
                         splitted = processedUrl.split('&');
 
-                        for(let i = 0; i < splitted.length; i++) {
+                        for (let i = 0; i < splitted.length; i++) {
                             moreSplitted.push(splitted[i].split('='));
                         }
 
-                        for(let i = 0; i < moreSplitted.length; i++) {
+                        for (let i = 0; i < moreSplitted.length; i++) {
                             const key = decodeURI(moreSplitted[i][0]);
                             const value = decodeURI(moreSplitted[i][1]);
 
