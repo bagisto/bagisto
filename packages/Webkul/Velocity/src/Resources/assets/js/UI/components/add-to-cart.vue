@@ -65,7 +65,7 @@
                             window.location.reload();
                         }
                     } else {
-                        window.showAlert(`alert-${response.data.status}`, response.data.label ? response.data.label : this.__('shop.general.alert.error'), response.data.message);
+                        window.showAlert(`alert-warning`, response.data.label ? response.data.label : this.__('shop.general.alert.warning'), response.data.message);
 
                         if (response.data.redirectionRoute) {
                             window.location.href = response.data.redirectionRoute;

@@ -1,6 +1,10 @@
 .rtl {
     direction: rtl;
 
+    .form-container {
+        text-align: right !important;
+    }
+
     .navbar-top {
         .navbar-top-right {
             text-align: left;
