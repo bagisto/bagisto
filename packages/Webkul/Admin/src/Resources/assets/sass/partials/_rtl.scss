@@ -1,6 +1,10 @@
 .rtl {
     direction: rtl;
 
+    .form-container {
+        text-align: right !important;
+    }
+
     .navbar-top {
         .navbar-top-right {
             text-align: left;
@@ -43,6 +47,12 @@
             .control-group {
                 margin-right: 20px;
                 margin-left: 0px;
+                
+                &.has-error.date, &.has-error.date {
+                    &::after {
+                        margin-top: -12px;
+                    }
+                }
             }
 
             .control-group.date {
@@ -234,9 +244,8 @@
 
     .control-group.date {
         &::after {
-            margin-top: 15px;
-            position: absolute;
-            margin-right: -35px;
+            margin-right: -34px;
+            right: 70%;
         }
     }
 
