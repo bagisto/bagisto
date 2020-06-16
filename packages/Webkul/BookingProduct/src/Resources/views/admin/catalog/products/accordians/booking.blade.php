@@ -17,6 +17,11 @@
         .has-control-group .control-group:last-child {
             padding-left: 10px;
         }
+
+        .rtl .control-group.date::after {
+            right: 100%;
+            margin-right: -40px;
+        }
     </style>
 @stop
 
