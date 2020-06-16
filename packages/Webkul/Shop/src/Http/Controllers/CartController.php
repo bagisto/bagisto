@@ -2,6 +2,7 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
+use Illuminate\Support\Facades\Log;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Checkout\Contracts\Cart as CartModel;
@@ -75,7 +76,7 @@ class CartController extends Controller
             }
 
             if ($result instanceof CartModel) {
-                session()->flash('success', trans('shop::app.checkout.cart.item.success'));
+                session()->flash('success', __('shop::app.checkout.cart.item.success'));
 
                 if ($customer = auth()->guard('customer')->user()) {
                     $this->wishlistRepository->deleteWhere(['product_id' => $id, 'customer_id' => $customer->id]);
@@ -88,9 +89,12 @@ class CartController extends Controller
                 }
             }
         } catch(\Exception $e) {
-            session()->flash('error', trans($e->getMessage()));
+            session()->flash('error', __($e->getMessage()));
 
             $product = $this->productRepository->find($id);
+
+            Log::error('Shop CartController: ' . $e->getMessage(),
+                ['product_id' => $id, 'cart_id' => cart()->getCart() ?? 0]);
 
             return redirect()->route('shop.productOrCategory.index', $product->url_key);
         }
