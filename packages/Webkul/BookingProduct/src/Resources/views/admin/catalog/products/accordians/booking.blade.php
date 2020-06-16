@@ -154,6 +154,17 @@
                         available_to: ''
                     }
                 }
+            },
+
+            created: function() {
+                if (this.booking.available_from) {
+                    this.booking.available_from = "{{ $bookingProduct->available_from->format('Y-m-d H:i:s') }}";
+                }
+
+
+                if (this.booking.available_to) {
+                    this.booking.available_to = "{{ $bookingProduct->available_to->format('Y-m-d H:i:s') }}";
+                }
             }
         });
     </script>
