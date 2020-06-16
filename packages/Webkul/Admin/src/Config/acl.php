@@ -416,6 +416,26 @@ return [
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.cart-rules.delete',
         'sort'  => 3,
+    ], [
+        'key'   => 'promotions.catalog-rules',
+        'name'  => 'admin::app.acl.catalog-rules',
+        'route' => 'admin.cart-rules.index',
+        'sort'  => 1,
+    ], [
+        'key'   => 'promotions.catalog-rules.create',
+        'name'  => 'admin::app.acl.create',
+        'route' => 'admin.cart-rules.index',
+        'sort'  => 1,
+    ], [
+        'key'   => 'promotions.catalog-rules.edit',
+        'name'  => 'admin::app.acl.edit',
+        'route' => 'admin.cart-rules.edit',
+        'sort'  => 2,
+    ], [
+        'key'   => 'promotions.catalog-rules.delete',
+        'name'  => 'admin::app.acl.delete',
+        'route' => 'admin.cart-rules.delete',
+        'sort'  => 3,
     ],
 ];
 
