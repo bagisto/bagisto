@@ -134,16 +134,29 @@ class CartController extends Controller
     */
     public function reorder($id)
     {
-        $order = $this->orderRepository->findOneWhere([
-            'customer_id' => auth()->guard('customer')->user()->id,
-            'id'          => $id,
-        ]);
+        try {
+            $order = $this->orderRepository->findOneWhere([
+                'customer_id' => auth()->guard('customer')->user()->id,
+                'id'          => $id,
+            ]);
 
-        foreach ($order->items as $item) {            
-            Cart::addProduct($item->product->product_id, ['product_id' => $item->product->product_id, 'quantity' => $item->qty_ordered]);
+            foreach ($order->items as $item) {
+                $orderDetails = $item->additional;
+
+                unset($orderDetails['attributes']);
+                unset($orderDetails['_token']); 
+
+                Cart::addProduct($item->product->product_id, $orderDetails);
+            }
+
+            return redirect()->route('shop.checkout.cart.index');
+        } catch(\Exception $e) {
+            session()->flash('error', trans($e->getMessage()));
+
+            return redirect()->back();
         }
 
-        return redirect()->route('shop.checkout.cart.index');
+        return redirect()->back();
     }
 
     /**
