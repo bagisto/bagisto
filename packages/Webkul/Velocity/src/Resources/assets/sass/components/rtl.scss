@@ -278,6 +278,17 @@ body {
             }
         }
 
+        #alert-container {
+            right: unset;
+            left: 15px;
+        }
+
+        .alert-dismissible {
+            .close {
+                left: -8px;
+            }
+        }
+
         // Shared
         .text-right {
             text-align: left !important;
