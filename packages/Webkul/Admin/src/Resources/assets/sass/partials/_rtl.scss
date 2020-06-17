@@ -238,13 +238,19 @@
 
     .control-group.date {
         &::after {
-            margin-top: 15px;
             position: absolute;
-            margin-right: -35px;
+            right: calc(70% - 40px);
         }
     }
 
     .pagination .page-item .icon {
         transform: rotate(180deg);
+    }
+
+    .slot-list {
+        .control-group.date::after {
+            top: 18px;
+            right: calc(100% - 40px);
+        }
     }
 }
