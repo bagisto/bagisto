@@ -130,6 +130,10 @@
 
                 </div>
             </div>
+
+            <div class="modal-parent" style="top: 0" v-if="showPageLoader">
+                <overlay-loader :is-open="showPageLoader"></overlay-loader>
+            </div>
         </div>
 
         <!-- below footer -->
