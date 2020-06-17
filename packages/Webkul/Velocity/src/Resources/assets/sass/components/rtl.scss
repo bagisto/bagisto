@@ -138,6 +138,13 @@ body {
 
         #cart-modal-content {
             left: 0;
+
+            .small-card-container {
+                .rango-close {
+                    left: unset;
+                    right: -10px;
+                }
+            }
         }
 
         .category-list-container{
@@ -283,9 +290,38 @@ body {
             left: 15px;
         }
 
+        .mini-cart-content {
+            ~ .down-arrow-container {
+                .rango-arrow-down {
+                    left: -15px;
+                }
+            }
+        }
+
         .alert-dismissible {
             .close {
                 left: -8px;
+            }
+        }
+
+        .booking-information {
+            .book-slots {
+                .control-group-container {
+                    .form-group:not(.quantity).date:after {
+                        left: 40px;
+                        right: unset;
+                    }
+                }     
+            }
+        }
+
+        .full-content-wrapper {
+            > .container-fluid {
+                > .row {
+                    &.pl-26 {
+                        padding-right: 26% !important;
+                    }
+                }
             }
         }
 
@@ -321,6 +357,12 @@ body {
         }
         .ml-5 {
             margin-right: 3rem !important;
+        }
+        .mr15 {
+            margin-left: 15px !important;
+        }
+        .ml5 {
+            margin-right: 5px;
         }
     }
 }
