@@ -81,6 +81,7 @@ class ComparisonController extends Controller
 
             $productFlat = $productFlatRepository
                             ->where('product_id', $productId)
+                            ->orWhere('parent_id', $productId)
                             ->get()
                             ->first();
 

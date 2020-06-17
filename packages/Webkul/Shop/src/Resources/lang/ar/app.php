@@ -71,7 +71,8 @@ return [
         'no-results' => 'لا توجد نتائج',
         'page-title' => 'بحث',
         'found-results' => 'تم العثور على نتائج البحث',
-        'found-result' => 'تم العثور على نتيجة البحث'
+        'found-result' => 'تم العثور على نتيجة البحث',
+        'analysed-keywords' => 'Analysed Keywords'
     ],
 
     'reviews' => [

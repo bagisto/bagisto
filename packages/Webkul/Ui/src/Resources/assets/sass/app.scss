@@ -1166,3 +1166,12 @@ modal {
         }
     }
 }
+
+.overlay-loader {
+    position: fixed;
+    z-index: 11;
+    top: 50%;
+    left: 50%;
+    margin-top: -24px;
+    margin-left: -24px;
+}

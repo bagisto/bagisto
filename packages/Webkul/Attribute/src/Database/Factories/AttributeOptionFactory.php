@@ -30,7 +30,7 @@ $factory->define(AttributeOption::class, function (Faker $faker, array $attribut
     ];
 });
 
-$factory->defineAs(AttributeOption::class, 'swatch_color', function (Faker $faker, array $attributes) {
+$factory->define(AttributeOption::class, function (Faker $faker, array $attributes) {
     return [
         'admin_name'   => $faker->word,
         'sort_order'   => $faker->randomDigit,
@@ -43,7 +43,7 @@ $factory->defineAs(AttributeOption::class, 'swatch_color', function (Faker $fake
     ];
 });
 
-$factory->defineAs(AttributeOption::class, 'swatch_image', function (Faker $faker, array $attributes) {
+$factory->define(AttributeOption::class, function (Faker $faker, array $attributes) {
     return [
         'admin_name'   => $faker->word,
         'sort_order'   => $faker->randomDigit,
@@ -56,7 +56,7 @@ $factory->defineAs(AttributeOption::class, 'swatch_image', function (Faker $fake
     ];
 });
 
-$factory->defineAs(AttributeOption::class, 'swatch_dropdown', function (Faker $faker, array $attributes) {
+$factory->define(AttributeOption::class, function (Faker $faker, array $attributes) {
     return [
         'admin_name'   => $faker->word,
         'sort_order'   => $faker->randomDigit,
@@ -69,7 +69,7 @@ $factory->defineAs(AttributeOption::class, 'swatch_dropdown', function (Faker $f
     ];
 });
 
-$factory->defineAs(AttributeOption::class, 'swatch_text', function (Faker $faker, array $attributes) {
+$factory->define(AttributeOption::class, function (Faker $faker, array $attributes) {
     return [
         'admin_name'   => $faker->word,
         'sort_order'   => $faker->randomDigit,

@@ -4,6 +4,10 @@
     {{ __('velocity::app.admin.meta-data.title') }}
 @stop
 
+@php
+    $locale = request()->get('locale') ?: app()->getLocale();
+@endphp
+
 @section('content')
     <div class="content">
         <form
@@ -23,6 +27,21 @@
                 <div class="page-title">
                     <h1>{{ __('velocity::app.admin.meta-data.title') }}</h1>
                 </div>
+
+                <input type="hidden" name="locale" value="{{ $locale }}" />
+
+                <div class="control-group">
+                    <select class="control" id="locale-switcher" onChange="window.location.href = this.value">
+                        @foreach (core()->getAllLocales() as $localeModel)
+
+                            <option value="{{ route('velocity.admin.meta-data') . '?locale=' . $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
+                                {{ $localeModel->name }}
+                            </option>
+
+                        @endforeach
+                    </select>
+                </div>
+
                 <div class="page-action">
                     <button type="submit" class="btn btn-lg btn-primary">
                         {{ __('velocity::app.admin.meta-data.update-meta-data') }}
