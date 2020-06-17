@@ -226,6 +226,10 @@ $(document).ready(function () {
         },
 
         created: function () {
+            setTimeout(() => {
+                document.body.classList.remove("modal-open");
+            }, 0);
+
             window.addEventListener('click', () => {
                 let modals = document.getElementsByClassName('sensitive-modal');
 
@@ -334,11 +338,17 @@ $(document).ready(function () {
             },
 
             showLoader: function () {
-                this.showPageLoader = true;
+                $('#loader').show();
+                $('.overlay-loader').show();
+                
+                document.body.classList.add("modal-open");
             },
 
             hideLoader: function () {
-                this.showPageLoader = false;
+                $('#loader').hide();
+                $('.overlay-loader').hide();
+
+                document.body.classList.remove("modal-open");
             }
         }
     });

@@ -156,8 +156,8 @@
     </div>
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script> --}}
 
 <script type="text/x-template" id="sidebar-categories-template">
     <div class="wrapper" v-if="rootCategories">

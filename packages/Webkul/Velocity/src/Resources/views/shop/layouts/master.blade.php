@@ -131,8 +131,8 @@
                 </div>
             </div>
 
-            <div class="modal-parent" style="top: 0" v-if="showPageLoader">
-                <overlay-loader :is-open="showPageLoader"></overlay-loader>
+            <div class="modal-parent" id="loader" style="top: 0" v-show="showPageLoader">
+                <overlay-loader :is-open="true"></overlay-loader>
             </div>
         </div>
 
