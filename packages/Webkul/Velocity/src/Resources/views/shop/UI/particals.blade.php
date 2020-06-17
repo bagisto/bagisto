@@ -106,7 +106,7 @@
                                 placeholder="{{ __('velocity::app.header.search-text') }}"
                                 :value="searchedQuery.term ? searchedQuery.term.split('+').join(' ') : ''" />
 
-                            <image-search-component></image-search-component>
+                            {{-- <image-search-component></image-search-component> --}}
 
                             <button class="btn" type="submit" id="header-search-icon">
                                 <i class="fs16 fw6 rango-search"></i>
@@ -377,7 +377,6 @@
                             try {
                                 var queryString = '';
                                 var analysedResult = [];
-                                debugger
                                 net = await mobilenet.load();
     
                                 const imgElement = document.getElementById('uploaded-image-url');
