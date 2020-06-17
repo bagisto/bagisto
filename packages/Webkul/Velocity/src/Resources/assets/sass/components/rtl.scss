@@ -265,6 +265,29 @@ body {
         .modal-footer>:not(:last-child) {
             margin-left: .25rem;
         }
+        
+        .compare-products {
+            .wishlist-icon {
+                left: 60px;
+                right: unset;
+            }
+
+            .material-icons.cross {
+                left: 20px;
+                right: unset;
+            }
+        }
+
+        #alert-container {
+            right: unset;
+            left: 15px;
+        }
+
+        .alert-dismissible {
+            .close {
+                left: -8px;
+            }
+        }
 
         // Shared
         .text-right {
