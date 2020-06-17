@@ -320,3 +320,14 @@ body {
         margin-bottom: 5px;
     }
 }
+
+.ticket-list {
+    .control-group {
+        &.date {
+            &::after {
+                left: unset;
+                right: 10px;
+            }
+        }
+    }
+}
