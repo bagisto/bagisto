@@ -2,7 +2,7 @@
     $direction = core()->getCurrentLocale()->direction;
 @endphp
 
-@if ($velocityMetaData->slider)
+@if ($velocityMetaData && $velocityMetaData->slider)
     <slider-component direction="{{ $direction }}"></slider-component>
 @endif
 
