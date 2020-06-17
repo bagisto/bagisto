@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Password;
 class ForgetPasswordController extends Controller
 {
     use SendsPasswordResetEmails;
-
+    
     /**
      * Contains route related configuration
      *
