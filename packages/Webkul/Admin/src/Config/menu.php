@@ -53,13 +53,13 @@ return [
         'key'        => 'catalog.categories',
         'name'       => 'admin::app.layouts.categories',
         'route'      => 'admin.catalog.categories.index',
-        'sort'       => 3,
+        'sort'       => 2,
         'icon-class' => '',
     ], [
         'key'        => 'catalog.attributes',
         'name'       => 'admin::app.layouts.attributes',
         'route'      => 'admin.catalog.attributes.index',
-        'sort'       => 2,
+        'sort'       => 3,
         'icon-class' => '',
     ], [
         'key'        => 'catalog.families',
