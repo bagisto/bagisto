@@ -3,8 +3,8 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use Faker\Generator as Faker;
-use Webkul\Product\Models\Product;
 use Webkul\Sales\Models\Order;
+use Webkul\Product\Models\Product;
 use Webkul\Sales\Models\OrderItem;
 
 $factory->define(OrderItem::class, function (Faker $faker, array $attributes) {
@@ -16,14 +16,16 @@ $factory->define(OrderItem::class, function (Faker $faker, array $attributes) {
         $product = factory(Product::class)->create();
     }
 
+    $fallbackPrice = $faker->randomFloat(4, 0, 1000);
+
     return [
         'sku'          => $product->sku,
         'type'         => $product->type,
         'name'         => $product->name,
-        'price'        => $product->price,
-        'base_price'   => $product->price,
-        'total'        => $product->price,
-        'base_total'   => $product->price,
+        'price'        => $product->price ?? $fallbackPrice,
+        'base_price'   => $product->price ?? $fallbackPrice,
+        'total'        => $product->price ?? $fallbackPrice,
+        'base_total'   => $product->price ?? $fallbackPrice,
         'product_id'   => $product->id,
         'qty_ordered'  => 1,
         'qty_shipped'  => 0,
@@ -38,6 +40,3 @@ $factory->define(OrderItem::class, function (Faker $faker, array $attributes) {
         'product_type' => Product::class,
     ];
 });
-
-
-
