@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\AliasLoader;
+use Webkul\Core\Console\Commands\BookingCron;
 use Webkul\Core\Core;
 use Webkul\Core\Exceptions\Handler;
 use Webkul\Core\Facades\Core as CoreFacade;
@@ -22,6 +23,7 @@ class CoreServiceProvider extends ServiceProvider
      * Bootstrap services.
      *
      * @return void
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function boot()
     {
@@ -86,7 +88,12 @@ class CoreServiceProvider extends ServiceProvider
     protected function registerCommands(): void
     {
         if ($this->app->runningInConsole()) {
-            $this->commands([BagistoVersion::class, Install::class, ExchangeRateUpdate::class]);
+            $this->commands([
+                BagistoVersion::class,
+                Install::class,
+                ExchangeRateUpdate::class,
+                BookingCron::class
+            ]);
         }
     }
 
@@ -96,6 +103,7 @@ class CoreServiceProvider extends ServiceProvider
      * @param string $path
      *
      * @return void
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     protected function registerEloquentFactoriesFrom($path): void
     {

@@ -85,9 +85,20 @@ class CartRuleController extends Controller
 
         $copiedCartRule = $originalCartRule
             ->replicate()
-            ->fill(['status' => 0]);
+            ->fill([
+                'status' => 0,
+                'name'   => __('admin::app.copy-of') . ' ' . $originalCartRule->name,
+            ]);
 
         $copiedCartRule->save();
+
+        foreach ($copiedCartRule->channels as $channel) {
+            $copiedCartRule->channels()->save($channel);
+        }
+
+        foreach ($copiedCartRule->customer_groups as $group) {
+            $copiedCartRule->customer_groups()->save($group);
+        }
 
         return view($this->_config['view'], [
             'cartRule' => $copiedCartRule,

@@ -93,7 +93,7 @@ class Bundle extends AbstractType
         ProductRepository $productRepository,
         ProductAttributeValueRepository $attributeValueRepository,
         ProductInventoryRepository $productInventoryRepository,
-        productImageRepository $productImageRepository,
+        ProductImageRepository $productImageRepository,
         ProductBundleOptionRepository $productBundleOptionRepository,
         ProductBundleOptionProductRepository $productBundleOptionProductRepository,
         ProductImage $productImageHelper,
@@ -234,6 +234,10 @@ class Bundle extends AbstractType
         $optionPrices = [];
 
         foreach ($option->bundle_option_products as $index => $bundleOptionProduct) {
+            if (! $bundleOptionProduct->product->getTypeInstance()->isSaleable()) {
+                continue;
+            }
+
             $optionPrices[] = $bundleOptionProduct->qty
                               * ($minPrice
                                 ? $bundleOptionProduct->product->getTypeInstance()->getMinimalPrice()
@@ -271,6 +275,10 @@ class Bundle extends AbstractType
 
         foreach ($this->product->bundle_options as $option) {
             foreach ($option->bundle_option_products as $index => $bundleOptionProduct) {
+                if (! $bundleOptionProduct->product->getTypeInstance()->isSaleable()) {
+                    continue;
+                }
+                
                 if (in_array($option->type, ['multiselect', 'checkbox'])) {
                     if (! isset($optionPrices[$option->id][0])) {
                         $optionPrices[$option->id][0] = 0;
@@ -304,6 +312,10 @@ class Bundle extends AbstractType
 
         foreach ($this->product->bundle_options as $option) {
             foreach ($option->bundle_option_products as $index => $bundleOptionProduct) {
+                if (! $bundleOptionProduct->product->getTypeInstance()->isSaleable()) {
+                    continue;
+                }
+                
                 if (in_array($option->type, ['multiselect', 'checkbox'])) {
                     if (! isset($optionPrices[$option->id][0])) {
                         $optionPrices[$option->id][0] = 0;
@@ -427,6 +439,10 @@ class Bundle extends AbstractType
         foreach ($this->getCartChildProducts($data) as $productId => $data) {
             $product = $this->productRepository->find($productId);
 
+            if (! $product->getTypeInstance()->isSaleable()) {
+                continue;
+            }
+
             $cartProduct = $product->getTypeInstance()->prepareForCart(array_merge($data, ['parent_id' => $this->product->id]));
 
             if (is_string($cartProduct)) {
@@ -472,6 +488,10 @@ class Bundle extends AbstractType
                     'id'                       => $optionProductId,
                     'product_bundle_option_id' => $optionId,
                 ]);
+
+                if (! $optionProduct->product->getTypeInstance()->isSaleable()) {
+                    continue;
+                }
 
                 $qty = $data['bundle_option_qty'][$optionId] ?? $optionProduct->qty;
 
