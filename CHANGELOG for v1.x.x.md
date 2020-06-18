@@ -2,7 +2,7 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
-## **v1.1.3 (19th of Jine 2020)** - *Release*
+## **v1.1.3 (19th of June 2020)** - *Release*
 
 * [feature] - Customer group price for products implemented
 
