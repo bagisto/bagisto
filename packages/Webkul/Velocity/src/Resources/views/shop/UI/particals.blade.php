@@ -1,3 +1,9 @@
+<style>
+    .camera-icon {
+        background-image: url("{{ asset('/vendor/webkul/ui/assets/images/Camera.svg') }}");
+    }
+</style>
+
 <script type="text/x-template" id="cart-btn-template">
     <button
         type="button"
@@ -106,7 +112,7 @@
                                 placeholder="{{ __('velocity::app.header.search-text') }}"
                                 :value="searchedQuery.term ? searchedQuery.term.split('+').join(' ') : ''" />
 
-                            {{-- <image-search-component></image-search-component> --}}
+                            <image-search-component></image-search-component>
 
                             <button class="btn" type="submit" id="header-search-icon">
                                 <i class="fs16 fw6 rango-search"></i>
@@ -156,18 +162,8 @@
     </div>
 </script>
 
-{{-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script> --}}
-
-<script type="text/x-template" id="sidebar-categories-template">
-    <div class="wrapper" v-if="rootCategories">
-        Hello World
-    </div>
-
-    <div class="wrapper" v-else-if="subCategory">
-        Hello World 2
-    </div>
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
 
 <script type="text/x-template" id="image-search-component-template">
     <div class="d-inline-block">
@@ -309,6 +305,10 @@
                     updatedSearchedCollection[splitedItem[0]] = splitedItem[1];
                 });
 
+                if (updatedSearchedCollection['image-search'] == 1) {
+                    updatedSearchedCollection.term = '';
+                }
+
                 this.searchedQuery = updatedSearchedCollection;
 
                 this.updateHeaderItemsCount();
@@ -355,7 +355,6 @@
 
             methods: {
                 uploadImage: function() {
-                    debugger
                     this.$root.showLoader();
                     var formData = new FormData();
 
@@ -371,41 +370,42 @@
                         }
                     ).then(response => {
                         var net;
+                        var self = this;
                         this.uploadedImageUrl = response.data;
 
-                        (async () => {
-                            try {
-                                var queryString = '';
-                                var analysedResult = [];
-                                net = await mobilenet.load();
-    
-                                const imgElement = document.getElementById('uploaded-image-url');
-    
-                                const result = await net.classify(imgElement);
-    
-                                result.forEach(value => {
-                                    queryString = value.className.split(',');
-    
-                                    if (queryString.length > 1) {
-                                        analysedResult = analysedResult.concat(queryString)
-                                    } else {
-                                        analysedResult.push(queryString[0])
-                                    }
-                                })
-    
-                                localStorage.searchedImageUrl = this.uploadedImageUrl;
-    
-                                queryString = localStorage.searched_terms = analysedResult.join('_');
-                                
-                                this.$root.hideLoader();
-    
-                                window.location.href = "{{ route('shop.search.index') }}" + '?term=' + queryString + '&image-search=1';
-                            } catch (error) {
-                                this.$root.hideLoader();
-                            };
-                        })();
+
+                        async function app() {
+                            var analysedResult = [];
+
+                            var queryString = '';
+
+                            net = await mobilenet.load();
+
+                            const imgElement = document.getElementById('uploaded-image-url');
+
+                            const result = await net.classify(imgElement);
+
+                            result.forEach(function(value) {
+                                queryString = value.className.split(',');
+
+                                if (queryString.length > 1) {
+                                    analysedResult = analysedResult.concat(queryString)
+                                } else {
+                                    analysedResult.push(queryString[0])
+                                }
+                            })
+
+                            localStorage.searchedImageUrl = self.uploadedImageUrl;
+
+                            queryString = localStorage.searched_terms = analysedResult.join('_');
+                            
+                            self.$root.hideLoader();
+
+                            window.location.href = "{{ route('shop.search.index') }}" + '?term=' + queryString + '&image-search=1';
+                        }
+
+                        app();
                     }).catch(() => {
-                        debugger
                         this.$root.hideLoader();
                     });
                 }

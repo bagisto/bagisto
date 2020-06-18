@@ -9,6 +9,10 @@
 @section('content-wrapper')
     <div class="container">
         <section class="search-container row">
+            @if (request('image-search'))
+                <image-search-result-component></image-search-result-component>
+            @endif
+
             @if ($results && $results->count())
                 <div class="filters-container col-12">
                     @include ('shop::products.list.toolbar')
@@ -49,3 +53,42 @@
         </section>
     </div>
 @endsection
+
+@push('scripts')
+    <script type="text/x-template" id="image-search-result-component-template">
+        <div class="image-search-result">
+            <div class="searched-image">
+                <img :src="searchedImageUrl"/>
+            </div>
+
+            <div class="searched-terms">
+                <h3 class="fw6 fs20 mb-4">
+                    {{ __('shop::app.search.analysed-keywords') }}
+                </h3>
+
+                <div class="term-list">
+                    <a v-for="term in searched_terms" :href="'{{ route('shop.search.index') }}?term=' + term">
+                        @{{ term }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script>
+        Vue.component('image-search-result-component', {
+            template: '#image-search-result-component-template',
+
+            data: function() {
+                return {
+                    searched_terms: [],
+                    searchedImageUrl: localStorage.searchedImageUrl,
+                }
+            },
+
+            created: function() {
+                this.searched_terms = localStorage.searched_terms.split('_');
+            }
+        });
+    </script>
+@endpush
