@@ -10,7 +10,7 @@
 
 * [feature] - Migrated to Laravel 7
 
-* [feature] - Search engine optimization
+* [feature] - Search engine optimization with rich snippet
 
 
 * #343 [fixed] - Translation strings are missing from awful amount of controllers when returning responses with flash. And optimise translation strings for faster static translations.
@@ -347,6 +347,8 @@
 
 * #3219 [fixed] - fix the date/time format in booking products
 
+* #3222 [fixed] - UI issue in event ticket booking special price date field
+
 * #3227 [fixed] - Guest coupon code cannot be used for general users
 
 * #3228 [fixed] - product videos in e-commerce 
@@ -354,6 +356,8 @@
 * #3230 [fixed] - Redirect to my profile from checkout page after login
 
 * #3232 [fixed] - homepage is showing 404 error page in both theme
+
+* #3234 [fixed] - UI Issue for cart, wishlist, compare icon number indicator in RTL
 
 * #3236 [fixed] - selected category gets removed from the search in RTL
 
@@ -375,6 +379,13 @@
 
 * #3254 [fixed] - exception on changing locale to Italian
 
+* #3255 [fixed] - Appointment booking slot duration missing in UI for RTL
+
+* #3265 [fixed] - recently view product heading is overlapped in RTL
+
+* #3273 [fixed] - fix calendar icon present at dashboard in RTL
+
+* #3274 [fixed] - Installer Blank Page After Migration
 
 
 

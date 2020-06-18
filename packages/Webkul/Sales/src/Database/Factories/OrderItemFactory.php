@@ -32,6 +32,7 @@ $factory->define(OrderItem::class, function (Faker $faker, array $attributes) {
         'qty_invoiced' => 0,
         'qty_canceled' => 0,
         'qty_refunded' => 0,
+        'additional'   => [],
         'order_id'     => function () {
             return factory(Order::class)->create()->id;
         },

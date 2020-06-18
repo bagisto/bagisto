@@ -48,7 +48,7 @@
             <div class="control-group" :class="[errors.has('booking[type]') ? 'has-error' : '']">
                 <label class="required">{{ __('bookingproduct::app.admin.catalog.products.booking-type') }}</label>
 
-                <select v-validate="'required'" name="booking[type]" v-model="booking.type" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.booking-type') }}&quot;">
+                <select v-validate="'required'" name="booking[type]" v-model="booking.type" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.booking-type') }}&quot;" :disabled="! is_new">
                     <option value="default">{{ __('bookingproduct::app.admin.catalog.products.default') }}</option>
                     <option value="appointment">{{ __('bookingproduct::app.admin.catalog.products.appointment-booking') }}</option>
                     <option value="event">{{ __('bookingproduct::app.admin.catalog.products.event-booking') }}</option>
@@ -139,6 +139,8 @@
 
             data: function() {
                 return {
+                    is_new: bookingProduct ? false : true,
+
                     booking: bookingProduct ? bookingProduct : {
 
                         type: 'default',
