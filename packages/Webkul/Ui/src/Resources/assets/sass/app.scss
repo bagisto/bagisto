@@ -689,6 +689,32 @@ h5 {
     }
 }
 
+.table {
+    .control-group {
+        &.date, &.datetime {
+            &::after {
+                right: 50px !important;
+                top: 6px;
+                left: unset;
+            }
+        }
+    }
+}
+
+.rtl {
+    .table {
+        .control-group {
+            &.date, &.datetime {
+                &::after {
+                    left: 84px !important;
+                    top: 6px;
+                    right: unset !important;
+                }
+            }
+        }
+    }
+}
+
 .control-group {
     .switch {
         position: relative;
