@@ -2509,10 +2509,6 @@
     animation: spin 1s ease-in-out infinite;
 }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
 
 .image-search-container {
     top: 9px;
@@ -2529,4 +2525,40 @@
     display: inline-block;
     background-size: cover;
     background-image: url(/vendor/webkul/ui/assets/images/Camera.svg);
+}
+
+.image-search-result {
+    width: 100%;
+    padding: 20px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+    display: inline-block;
+    border: 1px solid #0041ff;
+    background-color: rgba(0,65,255,.1);
+
+    .searched-image {
+        float: left;
+
+        img {
+            width: 150px;
+            height: auto;
+            box-shadow: 1px 1px 3px 0 rgba(0,0,0,.32);
+        }
+    }
+
+    .searched-terms {
+        margin-left: 20px;
+        display: inline-block;
+
+        .term-list a {
+            padding: 5px 8px;
+            background: #fff;
+            margin-right: 10px;
+        }
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
