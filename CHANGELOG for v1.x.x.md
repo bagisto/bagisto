@@ -31,11 +31,7 @@
 
 * #1656 [fixed] - Validation error in Phone Field while Adding Address
 
-* #1679 [fixed] - Responsiveness issue on iphone
-
 * #1981 [fixed] - If customer update his address at time of checkout and save this address then address doesn't get save and also on checkout page old address displays.
-
-* #2007 [fixed] - Loggable models
 
 * #2009 [fixed] - Using AWS S3 for storage
 
@@ -67,57 +63,29 @@
 
 * #2805 [fixed] - the sku should be all in caps
 
-* #2819 [fixed] - Template overrides not working properly since upgrading to 1.1.0
-
-* #2822 [fixed] - set login on mobile number for costumer
-
 * #2844 [fixed] - showing product image of each color in configurable product
 
 * #2863 [fixed] - Search Product Name and Description
 
-* #2864 [fixed] - Role should we have view permission?
-
 * #2868 [fixed] - Cart (customer) address not persisted during the checkout
 
-* #2870 [fixed] - Should public folder be in gitignore
-
 * #2874 [fixed] - Order, payment process and payment metadata
-
-* #2885 [fixed] - getting the value of a custom attribute in shop side
 
 * #2888 [fixed] - Always Default locale should be selected when add new product for each channels
 
 * #2889 [fixed] - timezone drop down field is not visible in web installer
 
-* #2891 [fixed] - Problem exporting to xls and csv
-
 * #2893 [fixed] - When creating a shipment, display items invoiced
-
-* #2913 [fixed] - PauUmoney payment gateway integration
-
-* #2916 [fixed] - Minute tweak for breaking of theme assets.
-
-* #2922 [fixed] - Create Refund call Payment Method
-
-* #2926 [fixed] - bagisto_asset function not able to find files in custom package
-
-* #2929 [fixed] - How can set global value for items per page in datagrid
 
 * #2931 [fixed] - Customer pays order in PayPal but there is no record in bagisto
 
 * #2936 [fixed] - change the admin route for another
 
-* #2941 [fixed] - how to remove the magnifier from product .
-
 * #2942 [fixed] - Randomize New and Featured Products
-
-* #2948 [fixed] - How to remove Velocity Logo from admin
 
 * #2949 [fixed] - failed to migrate with new database using installer
 
 * #2950 [fixed] - multiple error message on installer
-
-* #2951 [fixed] - Getting error Base table channel not found
 
 * #2964 [fixed] - Exception when buying non stockable item via API
 
@@ -127,29 +95,13 @@
 
 * #2974 [fixed] - Thumbnails are not generating on mobile ifproduct has more than 4 photos
 
-* #2976 [fixed] - Security warning: HTTPS on images with SSL installed.
-
-* #2979 [fixed] - can we have functionality to insert fake data
-
-* #2980 [fixed] - After uploading on server rupees symbol not showing≈
-
-* #2982 [fixed] - Column not found: 1054 Unknown column 'default_name' in 'field list' (v1.1.2)
-
 * #2985 [fixed] - Product category is not saving
 
-* #2986 [fixed] - How to enable Vue debug
-
 * #2987 [fixed] - mult address
-
-* #2988 [fixed] - Facebook Customer Chat for Laravel
-
-* #2989 [fixed] - Social OAuth authentication for Laravel 5 & 6. Drivers: Facebook, Twitter, Google, LinkedIn, Github, Bitbucket.
 
 * #2990 [fixed] - Facebook Pixel integration for Laravel
 
 * #2991 [fixed] - Filters not showing in small devices
-
-* #2993 [fixed] - How to create jewelry website using Bagisto?
 
 * #2994 [fixed] - Shipping method not getting updated after changing the zip code.
 
@@ -170,8 +122,6 @@
 * #3009 [fixed] - Featured product slider and new product slider is not working
 
 * #3011 [fixed] - The product is in cart or not
-
-* #3012 [fixed] - This line does nothing, Theme::current() always return null.
 
 * #3014 [fixed] - Support for Responsive Admin Panel
 
@@ -203,23 +153,15 @@
 
 * #3040 [fixed] - Api logout not working..
 
-* #3042 [fixed] - Erroneous data format for unserializing error on PHP 7.2
-
-* #3043 [fixed] - How to edit address form?
-
 * #3044 [fixed] - Getting exception when click on view shopping cart if adding group product in cart that contains variants of configurable product.
 
 * #3047 [fixed] - The qty of configurable product is 0 when merging cart
 
 * #3048 [fixed] - "nwidart/laravel-modules": "^3.2", is the wrong version for laravel 6.*
 
-* #3049 [fixed] - Cannot Registering ModuleServiceProvider in config/concord.php
-
 * #3050 [fixed] - Can't override models
 
 * #3051 [fixed] - error while migrate bagisto manually from console command
-
-* #3052 [fixed] - showing product type name in admin panel in catalog
 
 * #3053 [fixed] - [Velocity] Checkout: Shipping/Billing Address Name, email does not get updated
 
@@ -239,8 +181,6 @@
 
 * #3079 [fixed] - Tracking Number in My Account
 
-* #3080 [fixed] - Using the API token
-
 * #3087 [fixed] - after installation, first product registration does not open detailed page, I only opened from the second product
 
 * #3089 [fixed] - not getting price after changing configurable options
@@ -253,31 +193,17 @@
 
 * #3097 [fixed] - getting console error when remove cart item
 
-* #3108 [fixed] - DevTools failed to load SourceMap
-
-* #3111 [fixed] - adding bulk discount on configurable variants
-
 * #3113 [fixed] - catalog storefront configuration for per product page is not working
-
-* #3114 [fixed] - what are supper attributes
 
 * #3115 [fixed] - minify the velocity.js for gtmetrix
 
 * #3118 [fixed] - Home page doesn't display categories and language bar doesn't work.
 
-* #3119 [fixed] - Product image is not showing
-
 * #3120 [fixed] - admin panel multi locale
-
-* #3129 [fixed] - css files and js files not found
 
 * #3135 [fixed] - How can I cad comment box in checkout form.
 
 * #3136 [fixed] - configurable product variant name gets removed from the catalog list
-
-* #3137 [fixed] - Is there any way to add "Order sample product" functionality?
-
-* #3139 [fixed] - While creating a category , it gives an error
 
 * #3140 [fixed] - API for more than one locale !
 
@@ -285,25 +211,17 @@
 
 * #3146 [fixed] - how to configure aws smtp server on bagisto
 
-* #3147 [fixed] - mobile menu categories not found problem
-
 * #3150 [fixed] - Attribute not showing on the creating new configurable product page
 
 * #3153 [fixed] - Free Shipping and Flat Rate Shipping not desable
 
-* #3156 [fixed] - checkout/save-address always creating new address
-
 * #3158 [fixed] - Column not found: 1054 Unknown column 'symbol' in 'field l
-
-* #3159 [fixed] - On hitting this command we got this issue :
 
 * #3160 [fixed] - Disabled products are not removed from bundles
 
 * #3161 [fixed] - Trying to access array offset on value of type null
 
 * #3164 [fixed] - getting exception when add/edit configurable product
-
-* #3170 [fixed] - Edit Cart Item 
 
 * #3171 [fixed] - fixed amount is applied on product for customer group price instead of apply in %
 
@@ -313,15 +231,11 @@
 
 * #3184 [fixed] - Site showing blank page on 404
 
-* #3185 [fixed] - succespage, After a transaction, where it changes?
-
 * #3186 [fixed] - replace payment method text with an image on the checkout page
 
 * #3190 [fixed] - Bagisto v1.1.2 velocity responsive theme issue on iPhone and iPads
 
 * #3191 [fixed] - Bagisto v1.1.2 velocity responsive theme issue on iPhone and iPads
-
-* #3192 [fixed] - Where are events defined?
 
 * #3197 [fixed] - Call to undefined function str_limit() when view product in velocity theme
 
@@ -348,8 +262,6 @@
 * #3219 [fixed] - fix the date/time format in booking products
 
 * #3222 [fixed] - UI issue in event ticket booking special price date field
-
-* #3227 [fixed] - Guest coupon code cannot be used for general users
 
 * #3228 [fixed] - product videos in e-commerce 
 
@@ -432,8 +344,6 @@
 * #2900 [fixed] - getting different variant of a configurable product in front end
 
 * #2901 [fixed] - Error when creating a category
-
-* #2902 [fixed] - unify address tables
 
 * #2908 [fixed] - A class is missing from the Velocity ProductRepositiry file
 
