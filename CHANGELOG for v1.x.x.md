@@ -95,6 +95,8 @@
 
 * #2974 [fixed] - Thumbnails are not generating on mobile ifproduct has more than 4 photos
 
+* #2886 [fixed] - Configuration option for Compare
+
 * #2985 [fixed] - Product category is not saving
 
 * #2987 [fixed] - mult address
@@ -304,6 +306,12 @@
 * #3274 [fixed] - Installer Blank Page After Migration
 
 * #3286 [fixed] - fix calendar icon css at admin dashboard
+
+* #3289 [fixed] - Main product is not showing in catalog grid if configurable product hasn't been created completely.
+
+* #3297 [fixed] - getting exception when save booking product from edit page
+
+* #3298 [fixed] - Header content category always redirect to 404 error page
 
 
 
