@@ -1,10 +1,5 @@
 @section('css')
     <style>
-        .slot-list .control-group.date::after {
-            margin-top: -13px;
-            left: 100%;
-        }
-        
         .has-control-group .control-group {
             width: 50%;
             float: left;
@@ -16,11 +11,6 @@
 
         .has-control-group .control-group:last-child {
             padding-left: 10px;
-        }
-
-        .rtl .control-group.date::after {
-            right: 100%;
-            margin-right: -40px;
         }
     </style>
 @stop
