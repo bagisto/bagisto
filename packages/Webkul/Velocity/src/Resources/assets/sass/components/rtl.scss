@@ -325,6 +325,21 @@ body {
             }
         }
 
+        .image-search-container {
+            left: 45px;
+            right: unset;
+        }
+
+        .product-policy-container {
+            .card {
+                .policy {
+                    .left {
+                        margin-left: 10px;
+                    }
+                }
+            }
+        }
+
         // Shared
         .text-right {
             text-align: left !important;
@@ -363,6 +378,54 @@ body {
         }
         .ml5 {
             margin-right: 5px;
+        }
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    body {
+        &.rtl {
+            .nav-container {
+                ul {
+                    li {
+                        padding: 10px 20px 10px 0px;
+
+                        .rango-arrow-right {
+                            float: left;
+                            padding-left: 40px;
+                        }
+                    }
+                }
+                
+                .wrapper {
+                    .vc-customer-options {
+                        li {
+                            i.icon {
+                                float: right;
+                                padding-left: 5px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .full-content-wrapper {
+                > .container-fluid {
+                    > .row {
+                        &.pl-26 {
+                            padding-right: 20px !important;
+                        }
+                    }
+                }
+            }
+
+            .account-content {
+                .account-layout {
+                    &.right {
+                        padding-right: 20px !important;
+                    }
+                }
+            }
         }
     }
 }
