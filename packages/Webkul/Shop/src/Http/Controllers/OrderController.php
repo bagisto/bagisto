@@ -85,11 +85,16 @@ class OrderController extends Controller
         }
 
         foreach ($order->items as $item) {
-            $result = $item->product->isSaleable();
+            if ($item->product) {
+                $result = $item->product->isSaleable();
 
-            if (! $result) {
+                if (! $result) {
+                    $canReorder = false;
+                }  
+            }
+            else {
                 $canReorder = false;
-            }            
+            }           
         }
         
         return view($this->_config['view'], compact('order', 'canReorder'));

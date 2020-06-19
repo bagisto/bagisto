@@ -146,6 +146,15 @@ class CartController extends Controller
                 unset($orderDetails['attributes']);
                 unset($orderDetails['_token']);
 
+                if ($item->product->type == 'booking' && $item->product->name == 'Event') {
+                    $orderDetails['booking'] = array(
+                        'qty' => array(
+                            $orderDetails['booking']['ticket_id'] => $orderDetails['quantity']
+                        )
+                    );
+                    $orderDetails['quantity'] = 1;
+                }
+
                 session()->put('reorderDetails', $orderDetails); 
 
                 Cart::addProduct($item->product->product_id, $orderDetails);
