@@ -6,15 +6,29 @@
     {{ __('shop::app.search.page-title') }}
 @endsection
 
+@push('css')
+    <style type="text/css">
+        @media only screen and (max-width: 992px) {
+            .main-content-wrapper .vc-header {
+                box-shadow: unset;
+            }
+        }
+    </style>
+@endpush
+
 @section('content-wrapper')
-    <div class="container">
-        <section class="search-container row">
+    <div class="container category-page-wrapper">
+        <section class="search-container row category-container">
             @if (request('image-search'))
                 <image-search-result-component></image-search-result-component>
             @endif
 
             @if ($results && $results->count())
-                <div class="filters-container col-12">
+                <div class="filters-container col-12" style="
+                    margin-top: 20px;
+                    padding-left: 0px !important;
+                    padding-bottom: 10px !important;
+                ">
                     @include ('shop::products.list.toolbar')
                 </div>
             @endif

@@ -126,8 +126,9 @@
                                         @include ('shop::products.add-to-cart', [
                                             'form' => false,
                                             'product' => $product,
-                                            'showCompare' => true,
                                             'showCartIcon' => false,
+                                            'showCompare' => core()->getConfigData('general.content.shop.compare_option') == "1"
+                                                             ? true : false,
                                         ])
                                     </div>
                                 </div>

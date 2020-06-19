@@ -335,13 +335,18 @@ class Helper extends Review
             'priceHTML'         => view('shop::products.price', ['product' => $product])->render(),
             'defaultAddToCart'  => view('shop::products.add-buttons', ['product' => $product])->render(),
             'addToCartHtml'     => view('shop::products.add-to-cart', [
-                'showCompare'       => true,
                 'product'           => $product,
                 'addWishlistClass'  => ! (isset($list) && $list) ? '' : '',
+
+                'showCompare'       => core()->getConfigData('general.content.shop.compare_option') == "1"
+                                       ? true : false,
+
                 'btnText'           => (isset($metaInformation['btnText']) && $metaInformation['btnText'])
                                        ? $metaInformation['btnText'] : null,
+
                 'moveToCart'        => (isset($metaInformation['moveToCart']) && $metaInformation['moveToCart'])
                                        ? $metaInformation['moveToCart'] : null,
+
                 'addToCartBtnClass' => ! (isset($list) && $list) ? 'small-padding' : '',
             ])->render(),
         ];

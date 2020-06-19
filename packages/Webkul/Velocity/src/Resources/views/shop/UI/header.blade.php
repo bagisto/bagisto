@@ -302,23 +302,29 @@
                     <logo-component></logo-component>
                 </div>
 
+                @php
+                    $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false
+                @endphp
+
                 <div class="right-vc-header col-6">
-                    <a
-                        class="compare-btn unset"
-                        @auth('customer')
-                            href="{{ route('velocity.customer.product.compare') }}"
-                        @endauth
+                    @if ($showCompare)
+                        <a
+                            class="compare-btn unset"
+                            @auth('customer')
+                                href="{{ route('velocity.customer.product.compare') }}"
+                            @endauth
 
-                        @guest('customer')
-                            href="{{ route('velocity.product.compare') }}"
-                        @endguest
-                        >
+                            @guest('customer')
+                                href="{{ route('velocity.product.compare') }}"
+                            @endguest
+                            >
 
-                        <div class="badge-container" v-if="compareCount > 0">
-                            <span class="badge" v-text="compareCount"></span>
-                        </div>
-                        <i class="material-icons">compare_arrows</i>
-                    </a>
+                            <div class="badge-container" v-if="compareCount > 0">
+                                <span class="badge" v-text="compareCount"></span>
+                            </div>
+                            <i class="material-icons">compare_arrows</i>
+                        </a>
+                    @endif
 
                     <a class="wishlist-btn unset" :href="`${isCustomer ? '{{ route('customer.wishlist.index') }}' : '{{ route('velocity.product.guest-wishlist') }}'}`">
                         <div class="badge-container" v-if="wishlistCount > 0">
