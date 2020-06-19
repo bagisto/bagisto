@@ -38,6 +38,8 @@
             <div class="control-group" :class="[errors.has('booking[type]') ? 'has-error' : '']">
                 <label class="required">{{ __('bookingproduct::app.admin.catalog.products.booking-type') }}</label>
 
+                <input type="hidden" name="booking[type]" :value="booking.type"/>
+
                 <select v-validate="'required'" name="booking[type]" v-model="booking.type" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.booking-type') }}&quot;" :disabled="! is_new">
                     <option value="default">{{ __('bookingproduct::app.admin.catalog.products.default') }}</option>
                     <option value="appointment">{{ __('bookingproduct::app.admin.catalog.products.appointment-booking') }}</option>
