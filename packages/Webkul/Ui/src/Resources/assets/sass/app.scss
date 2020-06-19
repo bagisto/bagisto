@@ -650,6 +650,13 @@ h5 {
             left: 70%;
             top: 50%;
         }
+
+        .cross-icon {
+            position: absolute;
+            cursor: pointer;
+            margin-left: -54px;
+            top: 38px;
+        }
     }
 
     .control-info {
@@ -693,23 +700,42 @@ h5 {
     .control-group {
         &.date, &.datetime {
             &::after {
-                right: 50px !important;
                 top: 6px;
                 left: unset;
+            }
+
+            .cross-icon {
+                top: 10px;
             }
         }
     }
 }
 
 .rtl {
+    .control-group {
+        &.date, &.datetime {
+            &::after {
+                margin-right: -34px;
+                right: 70%;
+            }
+
+            .cross-icon {
+                margin-right: -54px;
+                top: 38px;
+            }
+        }
+    }
+
     .table {
         .control-group {
             &.date, &.datetime {
                 &::after {
-                    left: 84px !important;
-                    top: 6px;
                     right: unset !important;
                 }
+            }
+
+            .cross-icon {
+                top: 10px;
             }
         }
     }
