@@ -47,24 +47,6 @@
             .control-group {
                 margin-right: 20px;
                 margin-left: 0px;
-                
-                &.has-error.date, &.has-error.date {
-                    &::after {
-                        margin-top: -12px;
-                    }
-                }
-            }
-
-            .control-group.date {
-                &::after {
-                    margin-top: 6px;
-                    position: absolute;
-                    margin-right: -35px;
-                }
-
-                &:last-child {
-                    margin-left: 0px;
-                }
             }
         }
 
@@ -242,21 +224,7 @@
         float: left;
     }
 
-    .control-group.date {
-        &::after {
-            position: absolute;
-            right: calc(70% - 40px);
-        }
-    }
-
     .pagination .page-item .icon {
         transform: rotate(180deg);
-    }
-
-    .slot-list {
-        .control-group.date::after {
-            top: 18px;
-            right: calc(100% - 40px);
-        }
     }
 }
