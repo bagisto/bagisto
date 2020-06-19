@@ -171,6 +171,8 @@
 
 * #3067 [fixed] - PHP Notice: date_default_timezone_set(): Timezone ID 'Asia/JakartaAsia/Kolkata' is invalid
 
+* #3068 [fixed] - Inactive inventory source are get select in channel and products
+
 * #3070 [fixed] - Edit Attribute -> Add Option or Swatch Item Error 404 for Indonesia(id) country code
 
 * #3073 [fixed] - HTML entities are not being decoded when editing attribute options
@@ -279,6 +281,8 @@
 
 * #3241 [fixed] - login fields(email,passwords) are in the center when in RTL
 
+* #3246 [fixed] - fix icon layout in edit booking product page for RTL
+
 * #3248 [fixed] - fix css for cancel icon on success alert RTL
 
 * #3249 [fixed] - icons are overlapped in comparison page for RTL
@@ -291,9 +295,15 @@
 
 * #3265 [fixed] - recently view product heading is overlapped in RTL
 
+* #3270 [fixed] - fix icon design on catalog rule when select special price as condition
+
+* #3272 [fixed] - getting exception when booking product type is not same as cart item for same product id
+
 * #3273 [fixed] - fix calendar icon present at dashboard in RTL
 
 * #3274 [fixed] - Installer Blank Page After Migration
+
+* #3286 [fixed] - fix calendar icon css at admin dashboard
 
 
 
@@ -495,6 +505,8 @@
 * #2871 [fixed] - Refund throws "Undefined index: shipping" error
 
 * #2876 [fixed] - Place order is disable at checkout when select shipping address
+
+
 
 
 
