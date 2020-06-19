@@ -6,7 +6,7 @@
         
 		<span
 			class="icon cross-icon"
-            v-if="enableRemoveButton"
+            v-if="! hideRemoveButton"
             @click.prevent="clear">
 		</span>
 	</span>
@@ -21,7 +21,7 @@ export default {
 
 			value: String,
 
-            enableRemoveButton: Boolean
+            hideRemoveButton: [Number, String]
 		},
 
 		data () {
