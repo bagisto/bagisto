@@ -404,7 +404,9 @@ return [
         'your-customization' => 'Sua personalização',
         'total-amount' => 'Valor total',
         'none' => 'Nenhum',
-        'available-for-order' => 'Disponível para encomenda'
+        'available-for-order' => 'Disponível para encomenda',
+        'settings' => 'Settings',
+        'compare_options' => 'Compare Options',
     ],
 
     // 'reviews' => [
