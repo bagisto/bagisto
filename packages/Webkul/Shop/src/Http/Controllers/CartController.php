@@ -144,9 +144,13 @@ class CartController extends Controller
                 $orderDetails = $item->additional;
 
                 unset($orderDetails['attributes']);
-                unset($orderDetails['_token']); 
+                unset($orderDetails['_token']);
+
+                session()->put('reorderDetails', $orderDetails); 
 
                 Cart::addProduct($item->product->product_id, $orderDetails);
+
+                session()->forget('reorderDetails');
             }
 
             return redirect()->route('shop.checkout.cart.index');

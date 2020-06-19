@@ -286,8 +286,14 @@ class Cart
         foreach ($items as $item) {
             if ($item->product->getTypeInstance()->compareOptions($item->additional, $data['additional'])) {
                 if (isset($data['additional']['parent_id'])) {
-                    if ($item->parent->product->getTypeInstance()->compareOptions($item->parent->additional, request()->all())) {
-                        return $item;
+                    if (session()->has('reorderDetails')) {
+                        if ($item->parent->product->getTypeInstance()->compareOptions($item->parent->additional, session()->get('reorderDetails'))) {
+                            return $item;
+                        }
+                    } else {
+                        if ($item->parent->product->getTypeInstance()->compareOptions($item->parent->additional, request()->all())) {
+                            return $item;
+                        }
                     }
                 } else {
                     return $item;
