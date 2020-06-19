@@ -129,24 +129,30 @@
                 @include('shop::checkout.cart.mini-cart')
             {!! view_render_event('bagisto.shop.layout.header.cart-item.after') !!}
 
+            @php
+                $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false
+            @endphp
+
             {!! view_render_event('bagisto.shop.layout.header.compare.before') !!}
-                <a
-                    class="compare-btn unset"
-                    @auth('customer')
-                        href="{{ route('velocity.customer.product.compare') }}"
-                    @endauth
+                @if ($showCompare)
+                    <a
+                        class="compare-btn unset"
+                        @auth('customer')
+                            href="{{ route('velocity.customer.product.compare') }}"
+                        @endauth
 
-                    @guest('customer')
-                        href="{{ route('velocity.product.compare') }}"
-                    @endguest
-                    >
+                        @guest('customer')
+                            href="{{ route('velocity.product.compare') }}"
+                        @endguest
+                        >
 
-                    <i class="material-icons">compare_arrows</i>
-                    <div class="badge-container" v-if="compareCount > 0">
-                        <span class="badge" v-text="compareCount"></span>
-                    </div>
-                    <span>{{ __('velocity::app.customer.compare.text') }}</span>
-                </a>
+                        <i class="material-icons">compare_arrows</i>
+                        <div class="badge-container" v-if="compareCount > 0">
+                            <span class="badge" v-text="compareCount"></span>
+                        </div>
+                        <span>{{ __('velocity::app.customer.compare.text') }}</span>
+                    </a>
+                @endif
             {!! view_render_event('bagisto.shop.layout.header.compare.after') !!}
 
             {!! view_render_event('bagisto.shop.layout.header.wishlist.before') !!}
