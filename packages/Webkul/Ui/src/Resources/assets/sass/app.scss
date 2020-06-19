@@ -637,6 +637,10 @@ h5 {
     }
 
     &.date, &.datetime {
+        .control {
+            padding-right: 40px;
+        }
+
         &::after {
             background-image: url("../images/Icon-Calendar.svg");
             width: 24px;
@@ -714,6 +718,11 @@ h5 {
 .rtl {
     .control-group {
         &.date, &.datetime {
+            .control {
+                padding-left: 40px;
+                padding-right: 10px;
+            }
+
             &::after {
                 margin-right: -34px;
                 right: 70%;
