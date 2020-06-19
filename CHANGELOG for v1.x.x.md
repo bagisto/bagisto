@@ -263,10 +263,6 @@
 
 * #3222 [fixed] - UI issue in event ticket booking special price date field
 
-* #3228 [fixed] - product videos in e-commerce 
-
-* #3230 [fixed] - Redirect to my profile from checkout page after login
-
 * #3232 [fixed] - homepage is showing 404 error page in both theme
 
 * #3234 [fixed] - UI Issue for cart, wishlist, compare icon number indicator in RTL
