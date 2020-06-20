@@ -100,7 +100,7 @@ class Ipn
     {
         if ($this->post['payment_status'] == 'Completed') {
             if ($this->post['mc_gross'] != $this->order->grand_total) {
-
+                return;
             } else {
                 $this->orderRepository->update(['status' => 'processing'], $this->order->id);
 

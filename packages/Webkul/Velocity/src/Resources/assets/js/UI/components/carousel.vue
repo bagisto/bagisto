@@ -9,6 +9,7 @@
         :autoplayTimeout="timeout ? parseInt(timeout) : 2000"
         :autoplayDirection="sliderDirection ? sliderDirection : 'forward'"
         :class="[
+            'ltr',
             (navigationEnabled == 'hide') ? 'navigation-hide' : '',
             (paginationEnabled == 'hide') ? 'pagination-hide' : '',
             addClass

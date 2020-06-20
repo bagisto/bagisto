@@ -1,3 +1,9 @@
+<style>
+    .camera-icon {
+        background-image: url("{{ asset('/vendor/webkul/ui/assets/images/Camera.svg') }}");
+    }
+</style>
+
 <script type="text/x-template" id="cart-btn-template">
     <button
         type="button"
@@ -103,8 +109,10 @@
                                 name="term"
                                 type="search"
                                 class="form-control"
-                                :value="searchedQuery.term ? searchedQuery.term.split('+').join(' ') : ''"
-                                placeholder="{{ __('velocity::app.header.search-text') }}" />
+                                placeholder="{{ __('velocity::app.header.search-text') }}"
+                                :value="searchedQuery.term ? searchedQuery.term.split('+').join(' ') : ''" />
+
+                            <image-search-component></image-search-component>
 
                             <button class="btn" type="submit" id="header-search-icon">
                                 <i class="fs16 fw6 rango-search"></i>
@@ -121,24 +129,30 @@
                 @include('shop::checkout.cart.mini-cart')
             {!! view_render_event('bagisto.shop.layout.header.cart-item.after') !!}
 
+            @php
+                $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false
+            @endphp
+
             {!! view_render_event('bagisto.shop.layout.header.compare.before') !!}
-                <a
-                    class="compare-btn unset"
-                    @auth('customer')
-                        href="{{ route('velocity.customer.product.compare') }}"
-                    @endauth
+                @if ($showCompare)
+                    <a
+                        class="compare-btn unset"
+                        @auth('customer')
+                            href="{{ route('velocity.customer.product.compare') }}"
+                        @endauth
 
-                    @guest('customer')
-                        href="{{ route('velocity.product.compare') }}"
-                    @endguest
-                    >
+                        @guest('customer')
+                            href="{{ route('velocity.product.compare') }}"
+                        @endguest
+                        >
 
-                    <i class="material-icons">compare_arrows</i>
-                    <div class="badge-container" v-if="compareCount > 0">
-                        <span class="badge" v-text="compareCount"></span>
-                    </div>
-                    <span>{{ __('velocity::app.customer.compare.text') }}</span>
-                </a>
+                        <i class="material-icons">compare_arrows</i>
+                        <div class="badge-container" v-if="compareCount > 0">
+                            <span class="badge" v-text="compareCount"></span>
+                        </div>
+                        <span>{{ __('velocity::app.customer.compare.text') }}</span>
+                    </a>
+                @endif
             {!! view_render_event('bagisto.shop.layout.header.compare.after') !!}
 
             {!! view_render_event('bagisto.shop.layout.header.wishlist.before') !!}
@@ -154,13 +168,26 @@
     </div>
 </script>
 
-<script type="text/x-template" id="sidebar-categories-template">
-    <div class="wrapper" v-if="rootCategories">
-        Hello World
-    </div>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
 
-    <div class="wrapper" v-else-if="subCategory">
-        Hello World 2
+<script type="text/x-template" id="image-search-component-template">
+    <div class="d-inline-block">
+        <label class="image-search-container" for="image-search-container">
+            <i class="icon camera-icon"></i>
+
+            <input
+                type="file"
+                class="d-none"
+                ref="image_search_input"
+                id="image-search-container"
+                v-on:change="uploadImage()" />
+
+            <img
+                class="d-none"
+                id="uploaded-image-url"
+                :src="uploadedImageUrl" />
+        </label>
     </div>
 </script>
 
@@ -284,6 +311,10 @@
                     updatedSearchedCollection[splitedItem[0]] = splitedItem[1];
                 });
 
+                if (updatedSearchedCollection['image-search'] == 1) {
+                    updatedSearchedCollection.term = '';
+                }
+
                 this.searchedQuery = updatedSearchedCollection;
 
                 this.updateHeaderItemsCount();
@@ -316,6 +347,73 @@
                                 console.log(this.__('error.something_went_wrong'));
                             });
                     }
+                }
+            }
+        });
+
+        Vue.component('image-search-component', {
+            template: '#image-search-component-template',
+            data: function() {
+                return {
+                    uploadedImageUrl: ''
+                }
+            },
+
+            methods: {
+                uploadImage: function() {
+                    this.$root.showLoader();
+                    var formData = new FormData();
+
+                    formData.append('image', this.$refs.image_search_input.files[0]);
+
+                    axios.post(
+                        "{{ route('shop.image.search.upload') }}",
+                        formData,
+                        {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        }
+                    ).then(response => {
+                        var net;
+                        var self = this;
+                        this.uploadedImageUrl = response.data;
+
+
+                        async function app() {
+                            var analysedResult = [];
+
+                            var queryString = '';
+
+                            net = await mobilenet.load();
+
+                            const imgElement = document.getElementById('uploaded-image-url');
+
+                            const result = await net.classify(imgElement);
+
+                            result.forEach(function(value) {
+                                queryString = value.className.split(',');
+
+                                if (queryString.length > 1) {
+                                    analysedResult = analysedResult.concat(queryString)
+                                } else {
+                                    analysedResult.push(queryString[0])
+                                }
+                            })
+
+                            localStorage.searchedImageUrl = self.uploadedImageUrl;
+
+                            queryString = localStorage.searched_terms = analysedResult.join('_');
+                            
+                            self.$root.hideLoader();
+
+                            window.location.href = "{{ route('shop.search.index') }}" + '?term=' + queryString + '&image-search=1';
+                        }
+
+                        app();
+                    }).catch(() => {
+                        this.$root.hideLoader();
+                    });
                 }
             }
         });

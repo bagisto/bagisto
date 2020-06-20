@@ -67,8 +67,17 @@ class ProductsCategoriesProxyController extends Controller
                 return view($this->_config['product_view'], compact('product', 'customer'));
             }
 
+            abort(404);
         }
 
-        abort(404);
+        $sliderRepository = app('Webkul\Core\Repositories\SliderRepository');
+        
+        $sliderData = $sliderRepository
+            ->where('channel_id', core()->getCurrentChannel()->id)
+            ->where('locale', core()->getCurrentLocale()->code)
+            ->get()
+            ->toArray();
+
+        return view('shop::home.index', compact('sliderData'));
     }
 }
