@@ -40,22 +40,15 @@ class LoginController extends Controller
         //Send the user request to google
         return Socialite::driver('google')->redirect();
     }
+    
     public function googleRedirect(){
         //get the auth request from the google to authenticate user
         $user = Socialite::driver('google')->stateless()->user();
-
-        // If the user does not exist add then
-        // If they do, get the model
-        // either way, authenticate the user into the application and redirect
-        // afterwards
-        $user = User::firstOrCreate([
-            'email' => $user->email
-        ], [
-            'name' =>  $user->name,
-            'password' => Hash::make(Str::random(24))
-        ]);
-
+        $user = User::firstOrCreate(
+            ['email' => $user->email], 
+            ['name' =>  $user->name],
+            ['password' => Hash::make(Str::random(24))]
+        );
         Auth::login($user, true);
-
         return redirect('/dashboard');     
 }
