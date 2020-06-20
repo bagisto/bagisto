@@ -414,7 +414,9 @@ return [
         'your-customization' => 'Ihre Anpassung',
         'total-amount' => 'Gesamtmenge',
         'none' => 'Keine',
-        'available' => 'Verfügbar'
+        'available' => 'Verfügbar',
+        'settings' => 'Settings',
+        'compare_options' => 'Compare Options',
     ],
 
     // 'reviews' => [

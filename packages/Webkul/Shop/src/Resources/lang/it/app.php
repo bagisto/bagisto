@@ -416,7 +416,9 @@ return [
         'your-customization' => 'La tua Personalizzazione',
         'total-amount' => 'Totale',
         'none' => 'Nessuno',
-        'available-for-order' => 'Disponibile per lordine'
+        'available-for-order' => 'Disponibile per lordine',
+        'settings' => 'Settings',
+        'compare_options' => 'Compare Options',
     ],
 
     // 'reviews' => [
@@ -581,7 +583,7 @@ return [
                 'subject' => 'Nuovo commento aggiunto al tuo ordine',
                 'dear' => ':customer_name',
                 'final-summary' => 'Grazie per aver mostrato interesse per il nostro store',
-                'help' => 'Se hai bisogno di aiuto contattaci all'indirizzo :support_email',
+                'help' => 'Se hai bisogno di aiuto contattaci all\'indirizzo :support_email',
                 'thanks' => 'Graze!',
             ],
 

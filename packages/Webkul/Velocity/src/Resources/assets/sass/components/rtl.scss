@@ -138,6 +138,13 @@ body {
 
         #cart-modal-content {
             left: 0;
+
+            .small-card-container {
+                .rango-close {
+                    left: unset;
+                    right: -10px;
+                }
+            }
         }
 
         .category-list-container{
@@ -265,6 +272,73 @@ body {
         .modal-footer>:not(:last-child) {
             margin-left: .25rem;
         }
+        
+        .compare-products {
+            .wishlist-icon {
+                left: 60px;
+                right: unset;
+            }
+
+            .material-icons.cross {
+                left: 20px;
+                right: unset;
+            }
+        }
+
+        #alert-container {
+            right: unset;
+            left: 15px;
+        }
+
+        .mini-cart-content {
+            ~ .down-arrow-container {
+                .rango-arrow-down {
+                    left: -15px;
+                }
+            }
+        }
+
+        .alert-dismissible {
+            .close {
+                left: -8px;
+            }
+        }
+
+        .booking-information {
+            .book-slots {
+                .control-group-container {
+                    .form-group:not(.quantity).date:after {
+                        left: 40px;
+                        right: unset;
+                    }
+                }     
+            }
+        }
+
+        .full-content-wrapper {
+            > .container-fluid {
+                > .row {
+                    &.pl-26 {
+                        padding-right: 26% !important;
+                    }
+                }
+            }
+        }
+
+        .image-search-container {
+            left: 45px;
+            right: unset;
+        }
+
+        .product-policy-container {
+            .card {
+                .policy {
+                    .left {
+                        margin-left: 10px;
+                    }
+                }
+            }
+        }
 
         // Shared
         .text-right {
@@ -298,6 +372,60 @@ body {
         }
         .ml-5 {
             margin-right: 3rem !important;
+        }
+        .mr15 {
+            margin-left: 15px !important;
+        }
+        .ml5 {
+            margin-right: 5px;
+        }
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    body {
+        &.rtl {
+            .nav-container {
+                ul {
+                    li {
+                        padding: 10px 20px 10px 0px;
+
+                        .rango-arrow-right {
+                            float: left;
+                            padding-left: 40px;
+                        }
+                    }
+                }
+                
+                .wrapper {
+                    .vc-customer-options {
+                        li {
+                            i.icon {
+                                float: right;
+                                padding-left: 5px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .full-content-wrapper {
+                > .container-fluid {
+                    > .row {
+                        &.pl-26 {
+                            padding-right: 20px !important;
+                        }
+                    }
+                }
+            }
+
+            .account-content {
+                .account-layout {
+                    &.right {
+                        padding-right: 20px !important;
+                    }
+                }
+            }
         }
     }
 }

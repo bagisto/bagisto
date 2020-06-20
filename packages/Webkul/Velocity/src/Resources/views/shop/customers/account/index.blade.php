@@ -23,8 +23,8 @@
                     sidebarHeight = parseInt(sidebarHeight.substring(0, sidebarHeight.length - 2));
                     contentHeight = parseInt(contentHeight.substring(0, contentHeight.length - 2));
 
-                    let height = sidebarHeight > contentHeight ? sidebarHeight + 30 : contentHeight;
-                    height = height + "px";
+                    let height = sidebarHeight > contentHeight ? sidebarHeight : contentHeight;
+                    height = (height + 30)+ "px";
 
                     $('.account-content').css('height', height);
                 }, 0);

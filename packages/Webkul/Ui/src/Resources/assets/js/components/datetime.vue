@@ -1,13 +1,14 @@
 <template>
-	<span style="display: flex;align-items: center;">
+	<span>
 		<slot>
 			<input type="text" :name="name" class="control" :value="value" data-input>
 		</slot>
-        <button
-            class="btn"
-            style="height:100%;margin-left: 8px; margin-top: 5px;"
-            @click.prevent="clear"
-        > <span class="icon trash-icon"></span> </button>
+        
+		<span
+			class="icon cross-icon"
+            v-if="! hideRemoveButton"
+            @click.prevent="clear">
+		</span>
 	</span>
 </template>
 
@@ -17,7 +18,10 @@ import Flatpickr from "flatpickr";
 export default {
         props: {
             name: String,
-            value: String
+
+            value: String,
+
+            hideRemoveButton: [Number, String]
         },
 
         data() {
