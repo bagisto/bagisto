@@ -499,7 +499,7 @@ class Cart
         $this->saveAddressesWhenRequested($data, $billingAddressData, $shippingAddressData);
 
         $this->linkAddresses($cart, $billingAddressData, $shippingAddressData);
-        
+
         $this->assignCustomerFields($cart);
 
         $cart->save();
@@ -1048,10 +1048,12 @@ class Cart
             $cart->customer_email = $user->email;
             $cart->customer_first_name = $user->first_name;
             $cart->customer_last_name = $user->last_name;
+            $cart->city = $user->city;
         } else {
             $cart->customer_email = $cart->billing_address->email;
             $cart->customer_first_name = $cart->billing_address->first_name;
             $cart->customer_last_name = $cart->billing_address->last_name;
+            $cart->city = $cart->billing_address->city;
         }
     }
 
