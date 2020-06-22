@@ -14,6 +14,19 @@ abstract class Repository extends BaseRepository implements CacheableInterface {
     use CacheableRepository;
 
     /**
+     * Find all data by field and value
+     *
+     * @param  array  $where
+     * @param  array  $columns
+     * @return mixed
+     */
+    public function findAllWhere(array $where, $columns = ['*'])
+    {
+        $model = $this->findWhere($where, $columns);
+        return $this->parserResult($model);
+    }
+
+    /**
      * Find data by field and value
      *
      * @param  string  $field

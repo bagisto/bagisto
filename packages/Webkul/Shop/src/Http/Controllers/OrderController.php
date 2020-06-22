@@ -44,13 +44,18 @@ class OrderController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display all orders for the customer.
      *
      * @return \Illuminate\View\View
     */
     public function index()
     {
-        return view($this->_config['view']);
+        $orders = $this->orderRepository->findAllWhere(['customer_id' => auth()->guard('customer')->user()->id,]);
+        if (! $orders) {
+            abort(404);
+        }
+
+        return view($this->_config['view'], compact('orders'));
     }
 
     /**
