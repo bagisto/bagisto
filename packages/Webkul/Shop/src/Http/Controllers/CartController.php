@@ -5,6 +5,7 @@ namespace Webkul\Shop\Http\Controllers;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\BookingProduct\Repositories\BookingProductRepository;
 use Webkul\Checkout\Contracts\Cart as CartModel;
 use Illuminate\Support\Facades\Event;
 use Cart;
@@ -33,17 +34,26 @@ class CartController extends Controller
     protected $orderRepository;
 
     /**
+     * BookingProductRepository instance
+     *
+     * @var \Webkul\BookingProduct\Repositories\BookingProductRepository
+     */
+    protected $bookingProductRepository;
+
+    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Customer\Repositories\CartItemRepository  $wishlistRepository
      * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      * @param  \Webkul\Order\Repositories\OrderRepository  $orderRepository
+     * @param  \Webkul\BookingProduct\Repositories\BookingProductRepository  $bookingProductRepository
      * @return void
      */
     public function __construct(
         WishlistRepository $wishlistRepository,
         ProductRepository $productRepository,
-        OrderRepository $orderRepository
+        OrderRepository $orderRepository,
+        BookingProductRepository $bookingProductRepository
     )
     {
         $this->middleware('customer')->only(['moveToWishlist', 'reorder']);
@@ -53,6 +63,8 @@ class CartController extends Controller
         $this->productRepository = $productRepository;
 
         $this->orderRepository = $orderRepository;
+
+        $this->bookingProductRepository = $bookingProductRepository;
 
         parent::__construct();
     }
@@ -146,13 +158,17 @@ class CartController extends Controller
                 unset($orderDetails['attributes']);
                 unset($orderDetails['_token']);
 
-                if ($item->product->type == 'booking' && $item->product->name == 'Event') {
-                    $orderDetails['booking'] = array(
+                if ($item->product->type == 'booking') {
+                    $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $item->product->product_id);
+                    
+                    if ($bookingProduct->type == 'event') {
+                        $orderDetails['booking'] = array(
                         'qty' => array(
                             $orderDetails['booking']['ticket_id'] => $orderDetails['quantity']
                         )
-                    );
-                    $orderDetails['quantity'] = 1;
+                        );
+                        $orderDetails['quantity'] = 1;
+                    }
                 }
 
                 session()->put('reorderDetails', $orderDetails); 
