@@ -50,7 +50,7 @@ class OrderController extends Controller
     */
     public function index()
     {
-        $order = $this->orderRepository->findOneWhere(['customer_id' => auth()->guard('customer')->user()->id,]);
+        $order = $this->orderRepository->findOneWhere(['customer_id' => auth()->guard('customer')->user()->id]);
 
         if (! $order) {
             abort(404);
