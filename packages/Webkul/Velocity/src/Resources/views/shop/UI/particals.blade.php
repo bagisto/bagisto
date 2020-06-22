@@ -110,7 +110,7 @@
                                 type="search"
                                 class="form-control"
                                 placeholder="{{ __('velocity::app.header.search-text') }}"
-                                :value="searchedQuery.term ? searchedQuery.term.split('+').join(' ') : ''" />
+                                :value="unescape(searchedQuery.term) ? unescape(searchedQuery.term.split('+').join(' ')) : ''" />
 
                             <image-search-component></image-search-component>
 
