@@ -2,6 +2,7 @@
 
 namespace Webkul\Product\Type;
 
+use Webkul\Customer\Contracts\CartItem;
 use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Models\ProductFlat;
 use Illuminate\Support\Str;
@@ -539,10 +540,13 @@ class Configurable extends AbstractType
      * Validate cart item product price
      *
      * @param  \Webkul\Checkout\Contracts\CartItem  $item
-     * @return float
      */
     public function validateCartItem($item)
     {
+        if (! $item || ! $item->child) {
+            return;
+        }
+
         $price = $item->child->product->getTypeInstance()->getFinalPrice($item->quantity);
 
         if ($price == $item->base_price) {

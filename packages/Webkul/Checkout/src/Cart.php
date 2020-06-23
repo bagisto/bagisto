@@ -816,7 +816,7 @@ class Cart
         }
 
         foreach ($cart->items as $item) {
-            if ($item->product && $item->product->status === 0) {
+            if ($this->isCartItemInactive($item)) {
 
                 $this->cartItemRepository->delete($item->id);
 
@@ -1121,6 +1121,25 @@ class Cart
         $cart->base_grand_total = round($cart->base_grand_total, 2);
 
         return $cart;
+    }
+
+    /**
+     * Returns true, if cart item is inactive
+     *
+     * @param \Webkul\Checkout\Contracts\CartItem $item
+     *
+     * @return bool
+     */
+    private function isCartItemInactive(\Webkul\Checkout\Contracts\CartItem $item): bool {
+        if ($item->product->status === 0) {
+            return true;
+        }
+
+        if ($item->product->type === 'configurable' && $item->child && $item->child->product->status === 0) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
