@@ -8,6 +8,10 @@
 
 @push('css')
     <style type="text/css">
+        .category-container {
+            min-height: unset;
+        }
+        
         @media only screen and (max-width: 992px) {
             .main-content-wrapper .vc-header {
                 box-shadow: unset;
