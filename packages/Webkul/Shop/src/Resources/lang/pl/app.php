@@ -416,7 +416,9 @@ return [
         'your-customization' => 'Twoja personalizacja',
         'total-amount' => 'Całkowita kwota',
         'none' => 'Żaden',
-        'available-for-order' => 'Dostępne na zamówienie'
+        'available-for-order' => 'Dostępne na zamówienie',
+        'settings' => 'Settings',
+        'compare_options' => 'Compare Options',
     ],
 
     // 'reviews' => [
@@ -528,7 +530,7 @@ return [
 
         'total' => [
             'order-summary' => 'Podsumowanie zamówienia',
-            'sub-total' => 'Produkty,
+            'sub-total' => 'Produkty',
             'grand-total' => 'Suma łączna',
             'delivery-charges' => 'Koszty dostawy',
             'tax' => 'Podatek',
@@ -594,7 +596,7 @@ return [
                 'discount' => 'Rabat',
                 'grand-total' => 'Suma łączna',
                 'final-summary' => 'Dziękujemy za zakupy w naszym sklepie',
-                'help' => ''Jeśli potrzebujesz jakiejkolwiek pomocy, skontaktuj się z nami pod adresem :support_email',
+                'help' => 'Jeśli potrzebujesz jakiejkolwiek pomocy, skontaktuj się z nami pod adresem :support_email',
                 'thanks' => 'Dzięki!',
             ]
         ],

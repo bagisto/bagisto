@@ -637,6 +637,10 @@ h5 {
     }
 
     &.date, &.datetime {
+        .control {
+            padding-right: 40px;
+        }
+
         &::after {
             background-image: url("../images/Icon-Calendar.svg");
             width: 24px;
@@ -649,6 +653,13 @@ h5 {
             position: absolute;
             left: 70%;
             top: 50%;
+        }
+
+        .cross-icon {
+            position: absolute;
+            cursor: pointer;
+            margin-left: -54px;
+            top: 38px;
         }
     }
 
@@ -685,6 +696,56 @@ h5 {
         .currency-code {
             vertical-align: middle;
             display: inline-block;
+        }
+    }
+}
+
+.table {
+    .control-group {
+        &.date, &.datetime {
+            &::after {
+                top: 6px;
+                left: unset;
+            }
+
+            .cross-icon {
+                top: 10px;
+            }
+        }
+    }
+}
+
+.rtl {
+    .control-group {
+        &.date, &.datetime {
+            .control {
+                padding-left: 40px;
+                padding-right: 10px;
+            }
+
+            &::after {
+                margin-right: -34px;
+                right: 70%;
+            }
+
+            .cross-icon {
+                margin-right: -54px;
+                top: 38px;
+            }
+        }
+    }
+
+    .table {
+        .control-group {
+            &.date, &.datetime {
+                &::after {
+                    right: unset !important;
+                }
+            }
+
+            .cross-icon {
+                top: 10px;
+            }
         }
     }
 }

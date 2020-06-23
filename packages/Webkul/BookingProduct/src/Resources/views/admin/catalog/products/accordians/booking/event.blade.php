@@ -75,7 +75,7 @@
                     <label class="ticket-label">{{ __('bookingproduct::app.admin.catalog.products.special-price-from') }}</label>
 
                     <datetime>
-                        <input type="text" v-validate="'date_format:yyyy-MM-dd HH:mm:ss|after:{{\Carbon\Carbon::yesterday()->format('Y-m-d 23:59:59')}}'" :name="controlName + '[special_price_from]'" v-model="ticketItem.special_price_from" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.special-price-from') }}&quot;" ref="special_price_from" style="width:70%"/>
+                        <input type="text" v-validate="'date_format:yyyy-MM-dd HH:mm:ss|after:{{\Carbon\Carbon::yesterday()->format('Y-m-d 23:59:59')}}'" :name="controlName + '[special_price_from]'" v-model="ticketItem.special_price_from" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.special-price-from') }}&quot;" ref="special_price_from" style="width:100%"/>
                     </datetime>
 
                     <span class="control-error" v-if="errors.has(controlName + '[special_price_from]')">@{{ errors.first(controlName + '[special_price_from]') }}</span>
@@ -96,7 +96,7 @@
                     <label class="ticket-label">{{ __('bookingproduct::app.admin.catalog.products.special-price-to') }}</label>
 
                     <datetime>
-                        <input type="text" v-validate="'date_format:yyyy-MM-dd HH:mm:ss|after:special_price_from'" :name="controlName + '[special_price_to]'" v-model="ticketItem.special_price_to" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.special-price-to') }}&quot;" ref="special_price_to" style="width:70%"/>
+                        <input type="text" v-validate="'date_format:yyyy-MM-dd HH:mm:ss|after:special_price_from'" :name="controlName + '[special_price_to]'" v-model="ticketItem.special_price_to" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.special-price-to') }}&quot;" ref="special_price_to" style="width:100%"/>
                     </datetime>
 
                     <span class="control-error" v-if="errors.has(controlName + '[special_price_to]')">@{{ errors.first(controlName + '[special_price_to]') }}</span>

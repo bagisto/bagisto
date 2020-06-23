@@ -12,6 +12,7 @@ import Flatpickr from "flatpickr";
 export default {
 	props: {
 		name: String,
+		
 		value: String
 	},
 

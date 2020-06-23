@@ -939,4 +939,17 @@
     .wishlist-icon {
         margin-left: 0;
     }
+
+    .image-search-result {
+        .searched-terms {
+            margin-left: 0;
+            margin-top: 20px;
+
+            .term-list {
+                a {
+                    line-height: 40px;
+                }
+            }
+        }
+    }
 }

@@ -384,6 +384,8 @@ return [
         'select-above-options' => '最初に上記のオプションを選択してください.',
         'less-quantity' => '数量１未満は選択できません.',
         'available-for-order' => '注文可能',
+        'settings' => 'Settings',
+        'compare_options' => 'Compare Options',
     ],
 
     'buynow' => [

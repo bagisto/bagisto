@@ -414,7 +414,9 @@ return [
         'your-customization' => 'Özelleştirmeniz',
         'total-amount' => 'Toplam Miktar',
         'none' => 'Hiçbiri',
-        'available-for-order' => 'Sipariş İçin Uygun'
+        'available-for-order' => 'Sipariş İçin Uygun',
+        'settings' => 'Settings',
+        'compare_options' => 'Compare Options',
     ],
 
     // 'reviews' => [

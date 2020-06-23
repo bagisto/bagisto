@@ -2,6 +2,319 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
+## **v1.1.3 (19th of June 2020)** - *Release*
+
+* [feature] - Customer group price for products implemented
+
+* [feature] - Image search feature added with tensorflow.js
+
+* [feature] - Migrated to Laravel 7
+
+* [feature] - Search engine optimization with rich snippet
+
+
+* #343 [fixed] - Translation strings are missing from awful amount of controllers when returning responses with flash. And optimise translation strings for faster static translations.
+
+* #824 [fixed] - Framework is not supporting I.E 11 browser.
+
+* #838 [fixed] - Packages as composer dependency
+
+* #985 [fixed] - Dynamically insert products
+
+* #1258 [fixed] - If payment is done through paypal then invoice should generate automatically and status of Order should be processing.
+
+* #1362 [fixed] - Site logo and Category Image are broken
+
+* #1370 [fixed] - install fails at the last step
+
+* #1522 [fixed] - Quick Links broken
+
+* #1656 [fixed] - Validation error in Phone Field while Adding Address
+
+* #1981 [fixed] - If customer update his address at time of checkout and save this address then address doesn't get save and also on checkout page old address displays.
+
+* #2009 [fixed] - Using AWS S3 for storage
+
+* #2060 [fixed] - auto generate coupon accordion not getting hidden while selecting no specific coupons
+
+* #2159 [fixed] - Taking more time to load product details in shopping cart.
+
+* #2415 [fixed] - Add TO CART button should replace by “BOOk NOW” button for booking product.
+
+* #2590 [fixed] - hi everyone i'm wondering if customers after register could give a referral code ??
+
+* #2702 [fixed] - Getting broken image for products and category.
+
+* #2720 [fixed] - Error during migration on php artisan migrate
+
+* #2725 [fixed] - Variants should not be created if cofigurable product created failed
+
+* #2762 [fixed] - Seeder: SQL Error: Duplicate entry for '1' key 'PRIMARY'
+
+* #2766 [fixed] - Needs User friendly UI for the event booking in product page
+
+* #2789 [fixed] - Product channel and locale dropdowns in the admin dashboard not working
+
+* #2795 [fixed] - Cart error merging if you authenticate having items with low stock
+
+* #2800 [fixed] - Add the ability to change Attribute Family for Products
+
+* #2804 [fixed] - There should be order review section instead of complete section on checkout page
+
+* #2805 [fixed] - the sku should be all in caps
+
+* #2844 [fixed] - showing product image of each color in configurable product
+
+* #2863 [fixed] - Search Product Name and Description
+
+* #2868 [fixed] - Cart (customer) address not persisted during the checkout
+
+* #2874 [fixed] - Order, payment process and payment metadata
+
+* #2888 [fixed] - Always Default locale should be selected when add new product for each channels
+
+* #2889 [fixed] - timezone drop down field is not visible in web installer
+
+* #2893 [fixed] - When creating a shipment, display items invoiced
+
+* #2931 [fixed] - Customer pays order in PayPal but there is no record in bagisto
+
+* #2936 [fixed] - change the admin route for another
+
+* #2942 [fixed] - Randomize New and Featured Products
+
+* #2949 [fixed] - failed to migrate with new database using installer
+
+* #2950 [fixed] - multiple error message on installer
+
+* #2964 [fixed] - Exception when buying non stockable item via API
+
+* #2969 [fixed] - Cancel icon is not visible in velocity theme for customer order detail
+
+* #2972 [fixed] - can add to homescreen on mobile device in velocity theme
+
+* #2974 [fixed] - Thumbnails are not generating on mobile ifproduct has more than 4 photos
+
+* #2886 [fixed] - Configuration option for Compare
+
+* #2985 [fixed] - Product category is not saving
+
+* #2987 [fixed] - mult address
+
+* #2990 [fixed] - Facebook Pixel integration for Laravel
+
+* #2991 [fixed] - Filters not showing in small devices
+
+* #2994 [fixed] - Shipping method not getting updated after changing the zip code.
+
+* #2995 [fixed] - filter is not showing when search product from search bar
+
+* #2996 [fixed] - Incomplete products JSON when type is grouped or bundled
+
+* #2997 [fixed] - Category show sidebar
+
+* #3000 [fixed] - arabic product in home page Not lined up in one format
+
+* #3001 [fixed] - Getting Error Exception when view order details
+
+* #3004 [fixed] - Category Deactivation not working
+
+* #3005 [fixed] - One page checkout creating new address in profile every time.
+
+* #3009 [fixed] - Featured product slider and new product slider is not working
+
+* #3011 [fixed] - The product is in cart or not
+
+* #3014 [fixed] - Support for Responsive Admin Panel
+
+* #3018 [fixed] - Icons are not showing on imac
+
+* #3020 [fixed] - Images can not add on velocity theme
+
+* #3021 [fixed] - Deactivating the last category of level1 renders only level2 etc. from deactivated category
+
+* #3022 [fixed] - storage/ should not be included in .gitignore
+
+* #3024 [fixed] - Blank order comment shouldn't added
+
+* #3025 [fixed] - save address return error 500
+
+* #3026 [fixed] - Date validation error when editing Booking Products
+
+* #3029 [fixed] - velocity theme not fully responsive
+
+* #3032 [fixed] - [Critical] Onecheckout preventing to continue to shipping method after selecting address
+
+* #3035 [fixed] - Please update pwa for bagisto
+
+* #3036 [fixed] - Shipping address options not shown
+
+* #3037 [fixed] - error mysql 8.0.20 bagisto v 1.1.2
+
+* #3038 [fixed] - Trying to get property 'code' of non-object
+
+* #3040 [fixed] - Api logout not working..
+
+* #3044 [fixed] - Getting exception when click on view shopping cart if adding group product in cart that contains variants of configurable product.
+
+* #3047 [fixed] - The qty of configurable product is 0 when merging cart
+
+* #3048 [fixed] - "nwidart/laravel-modules": "^3.2", is the wrong version for laravel 6.*
+
+* #3050 [fixed] - Can't override models
+
+* #3051 [fixed] - error while migrate bagisto manually from console command
+
+* #3053 [fixed] - [Velocity] Checkout: Shipping/Billing Address Name, email does not get updated
+
+* #3054 [fixed] - customer is getting exception while cancel order
+
+* #3061 [fixed] - CORS errors
+
+* #3067 [fixed] - PHP Notice: date_default_timezone_set(): Timezone ID 'Asia/JakartaAsia/Kolkata' is invalid
+
+* #3068 [fixed] - Inactive inventory source are get select in channel and products
+
+* #3070 [fixed] - Edit Attribute -> Add Option or Swatch Item Error 404 for Indonesia(id) country code
+
+* #3073 [fixed] - HTML entities are not being decoded when editing attribute options
+
+* #3076 [fixed] - checkout disable when add new shipping address
+
+* #3077 [fixed] - How to change validation messages to spanish not working
+
+* #3079 [fixed] - Tracking Number in My Account
+
+* #3087 [fixed] - after installation, first product registration does not open detailed page, I only opened from the second product
+
+* #3089 [fixed] - not getting price after changing configurable options
+
+* #3090 [fixed] - error mysql8
+
+* #3095 [fixed] - pending orders detail page is blank when viewing in arabic locale
+
+* #3096 [fixed] - error when add product in compare list from the search product page
+
+* #3097 [fixed] - getting console error when remove cart item
+
+* #3113 [fixed] - catalog storefront configuration for per product page is not working
+
+* #3115 [fixed] - minify the velocity.js for gtmetrix
+
+* #3118 [fixed] - Home page doesn't display categories and language bar doesn't work.
+
+* #3120 [fixed] - admin panel multi locale
+
+* #3135 [fixed] - How can I cad comment box in checkout form.
+
+* #3136 [fixed] - configurable product variant name gets removed from the catalog list
+
+* #3140 [fixed] - API for more than one locale !
+
+* #3144 [fixed] - error if selecting only one currency
+
+* #3146 [fixed] - how to configure aws smtp server on bagisto
+
+* #3150 [fixed] - Attribute not showing on the creating new configurable product page
+
+* #3153 [fixed] - Free Shipping and Flat Rate Shipping not desable
+
+* #3158 [fixed] - Column not found: 1054 Unknown column 'symbol' in 'field l
+
+* #3160 [fixed] - Disabled products are not removed from bundles
+
+* #3161 [fixed] - Trying to access array offset on value of type null
+
+* #3164 [fixed] - getting exception when add/edit configurable product
+
+* #3171 [fixed] - fixed amount is applied on product for customer group price instead of apply in %
+
+* #3172 [fixed] - description or name is missing for comparable items if customer login
+
+* #3183 [fixed] - ErrorException
+
+* #3184 [fixed] - Site showing blank page on 404
+
+* #3186 [fixed] - replace payment method text with an image on the checkout page
+
+* #3190 [fixed] - Bagisto v1.1.2 velocity responsive theme issue on iPhone and iPads
+
+* #3191 [fixed] - Bagisto v1.1.2 velocity responsive theme issue on iPhone and iPads
+
+* #3197 [fixed] - Call to undefined function str_limit() when view product in velocity theme
+
+* #3199 [fixed] - Getting exception when click on product.
+
+* #3202 [fixed] - Getting exception in creating grouped product.
+
+* #3203 [fixed] - Getting translation issue in price field of downloadable product.
+
+* #3204 [fixed] - Getting exception when changing currency from search page.
+
+* #3205 [fixed] - Able to create the product without selecting required toggles button.
+
+* #3208 [fixed] - Customer group price functionality is not working.
+
+* #3207 [fixed] - Issue in variant product of configurable, only one variant name display at a time and on refreshing it changes.
+
+* #3214 [fixed] - Getting exception on forgot password link.
+
+* #3215 [fixed] - when updating an attribute to 'use_in_flat', bagisto should update the product_flat table with the values of those products
+
+* #3218 [fixed] - virtual product not shipping step..
+
+* #3219 [fixed] - fix the date/time format in booking products
+
+* #3222 [fixed] - UI issue in event ticket booking special price date field
+
+* #3232 [fixed] - homepage is showing 404 error page in both theme
+
+* #3234 [fixed] - UI Issue for cart, wishlist, compare icon number indicator in RTL
+
+* #3236 [fixed] - selected category gets removed from the search in RTL
+
+* #3235 [fixed] - need space b/w sign in & sign up box in mini login window for RTL
+
+* #3237 [fixed] - Options of attribute not display as per its position
+
+* #3238 [fixed] - Trait 'Illuminate\Foundation\Auth\SendsPasswordResetEmails' not found
+
+* #3240 [fixed] - Payment methods in onepage checkout are not visible completely in RTL
+
+* #3241 [fixed] - login fields(email,passwords) are in the center when in RTL
+
+* #3246 [fixed] - fix icon layout in edit booking product page for RTL
+
+* #3248 [fixed] - fix css for cancel icon on success alert RTL
+
+* #3249 [fixed] - icons are overlapped in comparison page for RTL
+
+* #3250 [fixed] - find product by image in search attempt to an error if app_url isn't define
+
+* #3254 [fixed] - exception on changing locale to Italian
+
+* #3255 [fixed] - Appointment booking slot duration missing in UI for RTL
+
+* #3265 [fixed] - recently view product heading is overlapped in RTL
+
+* #3270 [fixed] - fix icon design on catalog rule when select special price as condition
+
+* #3272 [fixed] - getting exception when booking product type is not same as cart item for same product id
+
+* #3273 [fixed] - fix calendar icon present at dashboard in RTL
+
+* #3274 [fixed] - Installer Blank Page After Migration
+
+* #3286 [fixed] - fix calendar icon css at admin dashboard
+
+* #3289 [fixed] - Main product is not showing in catalog grid if configurable product hasn't been created completely.
+
+* #3297 [fixed] - getting exception when save booking product from edit page
+
+* #3298 [fixed] - Header content category always redirect to 404 error page
+
+
+
 ## **v1.1.2 (24th of March 2020)** - *Release*
 
 * [feature] - Now customer can cancel order.
@@ -45,8 +358,6 @@
 * #2900 [fixed] - getting different variant of a configurable product in front end
 
 * #2901 [fixed] - Error when creating a category
-
-* #2902 [fixed] - unify address tables
 
 * #2908 [fixed] - A class is missing from the Velocity ProductRepositiry file
 
@@ -202,6 +513,8 @@
 * #2871 [fixed] - Refund throws "Undefined index: shipping" error
 
 * #2876 [fixed] - Place order is disable at checkout when select shipping address
+
+
 
 
 
