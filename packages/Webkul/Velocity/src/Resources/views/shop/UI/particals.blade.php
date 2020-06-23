@@ -110,7 +110,7 @@
                                 type="search"
                                 class="form-control"
                                 placeholder="{{ __('velocity::app.header.search-text') }}"
-                                :value="unescape(searchedQuery.term) ? unescape(searchedQuery.term.split('+').join(' ')) : ''" />
+                                :value="searchedQuery.term ? searchedQuery.term.split('+').join(' ') : ''" />
 
                             <image-search-component></image-search-component>
 
@@ -404,7 +404,7 @@
                             localStorage.searchedImageUrl = self.uploadedImageUrl;
 
                             queryString = localStorage.searched_terms = analysedResult.join('_');
-                            
+
                             self.$root.hideLoader();
 
                             window.location.href = "{{ route('shop.search.index') }}" + '?term=' + queryString + '&image-search=1';
