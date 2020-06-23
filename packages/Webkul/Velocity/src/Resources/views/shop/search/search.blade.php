@@ -17,7 +17,10 @@
 @endpush
 
 @section('content-wrapper')
-    <div class="container category-page-wrapper">
+    <div
+        style="padding-left: 50px !important;"
+        class="container category-page-wrapper"
+    >
         <section class="search-container row category-container">
             @if (request('image-search'))
                 <image-search-result-component></image-search-result-component>
@@ -81,8 +84,8 @@
                 </h3>
 
                 <div class="term-list">
-                    <a v-for="term in searched_terms" :href="'{{ route('shop.search.index') }}?term=' + term">
-                        @{{ term }}
+                    <a v-for="term in searched_terms" :href="'{{ route('shop.search.index') }}?term=' + term.slug">
+                        @{{ term.name }}
                     </a>
                 </div>
             </div>
@@ -102,6 +105,13 @@
 
             created: function() {
                 this.searched_terms = localStorage.searched_terms.split('_');
+
+                this.searched_terms = this.searched_terms.map(term => {
+                    return {
+                        name: term,
+                        slug: term.split(' ').join('+'),
+                    }
+                });
             }
         });
     </script>
