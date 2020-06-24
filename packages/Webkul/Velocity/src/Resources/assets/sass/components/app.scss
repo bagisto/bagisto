@@ -920,7 +920,10 @@
             }
 
             #datagrid-filters {
+                width: 100%;
                 margin-bottom: 20px;
+                display: inline-flex;
+                justify-content: space-between;
 
                 > * {
                     display: inline-block;
@@ -958,6 +961,8 @@
                 }
 
                 .dropdown-filters {
+                    font-size: 16px;
+
                     .grid-dropdown-header {
                         display: inline-block;
                     }
@@ -1045,9 +1050,25 @@
                         }
                     }
                 }
+
+                .filter-left {
+                    @extend .pull-left;
+                }
+
+                .filter-right {
+                    top: -25px;
+                    width: 70%;
+                    float: right;
+                    position: relative;
+
+                    .per-page {
+                        right: 0;
+                        position: absolute;
+                    }
+                }
             }
 
-            .filter-row-two {
+            .filtered-tags {
                 .filter-tag {
                     .cross-icon {
                         @extend .rango-default;
