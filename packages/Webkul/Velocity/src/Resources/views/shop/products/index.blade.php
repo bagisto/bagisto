@@ -4,7 +4,7 @@
 @extends('shop::layouts.master')
 
 @section('page_title')
-    {{ $category->meta_title ?? $category->name }}
+    {{ trim($category->meta_title) != "" ? $category->meta_title : $category->name }}
 @stop
 
 @section('seo')
