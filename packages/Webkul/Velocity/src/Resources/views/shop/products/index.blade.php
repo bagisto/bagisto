@@ -10,6 +10,12 @@
 @section('seo')
     <meta name="description" content="{{ $category->meta_description }}" />
     <meta name="keywords" content="{{ $category->meta_keywords }}" />
+
+    @if (core()->getConfigData('catalog.rich_snippets.categories.enable'))
+        <script type="application/ld+json">
+            {!! app('Webkul\Product\Helpers\SEO')->getCategoryJsonLd($category) !!}
+        </script>
+    @endif
 @stop
 
 @push('css')
