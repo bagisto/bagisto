@@ -728,7 +728,9 @@ select:focus,
 .control-error {
     color: $color-danger;
 }
-.mandatory {
+
+.mandatory,
+.required {
     width: 100%;
 
     &::after {

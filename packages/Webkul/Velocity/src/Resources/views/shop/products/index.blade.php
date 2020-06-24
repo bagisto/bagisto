@@ -4,7 +4,7 @@
 @extends('shop::layouts.master')
 
 @section('page_title')
-    {{ $category->meta_title ?? $category->name }}
+    {{ trim($category->meta_title) != "" ? $category->meta_title : $category->name }}
 @stop
 
 @section('seo')
@@ -34,10 +34,18 @@
 @endpush
 
 @php
-    $isDisplayMode = in_array(
+    $isProductsDisplayMode = in_array(
         $category->display_mode, [
             null,
             'products_only',
+            'products_and_description'
+        ]
+    );
+
+    $isDescriptionDisplayMode = in_array(
+        $category->display_mode, [
+            null,
+            'description_only',
             'products_and_description'
         ]
     );
@@ -63,7 +71,7 @@
                     <div class="pl0 col-12">
                         <h1 class="fw6 mb10">{{ $category->name }}</h1>
     
-                        @if ($isDisplayMode)
+                        @if ($isDescriptionDisplayMode)
                             <template v-if="products.length > 0">
                                 @if ($category->description)
                                     <div class="category-description">
@@ -93,7 +101,7 @@
                         style="width: 100%"
                     @endif>
 
-                    @if ($isDisplayMode)
+                    @if ($isProductsDisplayMode)
                         <shimmer-component v-if="isLoading && !isMobile()" shimmer-count="4"></shimmer-component>
 
                         <template v-else-if="products.length > 0">

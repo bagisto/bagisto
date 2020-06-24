@@ -11,6 +11,16 @@
         .category-container {
             min-height: unset;
         }
+
+        .toolbar-wrapper .col-4:first-child {
+            display: none;
+        }
+
+        .toolbar-wrapper .col-4:last-child {
+            right: 0;
+            position: absolute;
+        }
+
         
         @media only screen and (max-width: 992px) {
             .main-content-wrapper .vc-header {

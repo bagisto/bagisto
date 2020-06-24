@@ -4,7 +4,7 @@ return [
     'admin'         => [
         'system'    => [
             'velocity' => [
-                'general'  => 'Ogólne,
+                'general'  => 'Ogólne',
                 'category'  => 'Kategoria',
                 'settings'  => 'Ustawienia',
                 'extension_name' => 'Motyw Velocity',
@@ -197,7 +197,7 @@ return [
             'added'                 => 'Produkt został pomyślnie dodany do listy porównania',
             'already_added'         => 'Produkt został już dodany do listy porównawczej',
             'removed'               => 'Produkt został pomyślnie usunięty z listy porównawcze',
-            'empty-text'            => Nie masz żadnych pozycji na liście porównawczej',
+            'empty-text'            => 'Nie masz żadnych pozycji na liście porównawczej',
         ],
         'login-form'        => [
             'sign-up'               => 'Zarejestruj się',
@@ -263,6 +263,7 @@ return [
             'update'                 => 'Aktualizacje',
             'reviews'                => 'Recenzje',
             'addresses'              => 'Adresy',
+            'currencies'             => 'Currencies',
             'top-brands'             => 'Najlepsze marki',
             'new-password'           => 'Nowe hasło',
             'downloadables'          => 'Produkty do pobrania',

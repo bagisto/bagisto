@@ -267,6 +267,7 @@ return [
             'update' => 'Aggiorna',
             'reviews' => 'Recensioni',
             'addresses' => 'Indirizzi',
+            'currencies' => 'Currencies',
             'top-brands' => 'Marchi top',
             'new-password' => 'Nuova password',
             'downloadables' => 'Prodotti Scaricabili',

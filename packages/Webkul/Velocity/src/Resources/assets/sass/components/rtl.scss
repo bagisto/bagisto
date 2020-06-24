@@ -79,7 +79,17 @@ body {
                     }
                 }
             }
-        }    
+
+            ~ .compare-btn {
+                left: 15%;
+                float: left;
+                position: relative;
+            }
+
+            ~ .wishlist-btn {
+                float: right;
+            }
+        }
 
         .form-container {
             .container {
