@@ -978,3 +978,14 @@ i.within-circle {
 }
 
 .row:before, .row:after {display: none !important;}
+
+.control-group {
+    label {
+        &.required:after {
+            content: "*";
+            color: #fc6868;
+            font-weight: 700;
+            display: inline-block;
+        }
+    }
+}
