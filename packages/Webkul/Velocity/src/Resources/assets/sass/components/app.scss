@@ -2344,6 +2344,67 @@
     }
 }
 
+.pagination {
+    .page-item {
+        padding: 0 10px;
+
+        &.active {
+            font-weight: 600;
+            color: $theme-color !important;
+            border-bottom: 2px solid $theme-color;
+        }
+
+        &.next,
+        &.previous {
+            .angle-right-icon,
+            .angle-left-icon {
+                @extend .rango-default;
+
+                margin: 0;
+                font-size: 24px;
+                background: unset;
+                text-align: center;
+            }
+        }
+
+        &.next {
+            .angle-right-icon::before {
+                content: "\E908";
+            }
+        }
+
+        &.previous {
+            .angle-left-icon::before {
+                content: "\E907";
+            }
+        }
+    }
+
+    a {
+        color: unset !important;
+        text-decoration: none !important;
+
+        i {
+            top: 2px;
+            font-size: 18px;
+            position: relative;
+        }
+    }
+
+    .angle-left-icon,
+    .angle-right-icon {
+        @include rango-default;
+
+        background: unset;
+    }
+    .angle-right-icon::before {
+        content: "\E908";
+    }
+    .angle-left-icon::before {
+        content: "\E907";
+    }
+}
+
 .carousel-products {
     + .recently-viewed {
         top: -40px;
