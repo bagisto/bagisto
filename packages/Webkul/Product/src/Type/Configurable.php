@@ -562,7 +562,13 @@ class Configurable extends AbstractType
         $item->save();
     }
 
-    //product options
+    /**
+     * Get product options.
+     *
+     * @param string $product
+     *
+     * @return array
+     */
     public function getProductOptions($product = "")
     {
         $configurableOption = app('Webkul\Product\Helpers\ConfigurableOption');
