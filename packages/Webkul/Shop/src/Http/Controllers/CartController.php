@@ -180,7 +180,7 @@ class CartController extends Controller
 
             return redirect()->route('shop.checkout.cart.index');
         } catch(\Exception $e) {
-            session()->flash('error', trans($e->getMessage()));
+            session()->flash('error', 'Sorry, This product is not available right now.');
 
             return redirect()->back();
         }
