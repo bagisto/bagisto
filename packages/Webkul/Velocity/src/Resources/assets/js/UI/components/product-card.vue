@@ -18,7 +18,7 @@
                     </a>
                 </div>
 
-                <div class="sticker new">
+                <div class="sticker new" v-if="product.new">
                     {{ product.new }}
                 </div>
 
@@ -63,7 +63,7 @@
                 </a>
             </div>
 
-            <div class="sticker new">
+            <div class="sticker new" v-if="product.new">
                 {{ product.new }}
             </div>
 
