@@ -332,6 +332,7 @@ class Helper extends Review
             'description'       => $product->description,
             'shortDescription'  => $product->short_description,
             'firstReviewText'   => trans('velocity::app.products.be-first-review'),
+            'new'               => $product->new ? __('shop::app.products.new') : false,
             'priceHTML'         => view('shop::products.price', ['product' => $product])->render(),
             'defaultAddToCart'  => view('shop::products.add-buttons', ['product' => $product])->render(),
             'addToCartHtml'     => view('shop::products.add-to-cart', [

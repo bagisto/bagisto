@@ -13,7 +13,7 @@
         }
 
         .toolbar-wrapper .col-4:first-child {
-            display: none;
+            display: none !important;
         }
 
         .toolbar-wrapper .col-4:last-child {
