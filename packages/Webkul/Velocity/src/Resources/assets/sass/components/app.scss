@@ -281,10 +281,8 @@
         }
     }
 
-    .product-price {
-        .sticker {
-            display: block;
-        }
+    .sticker {
+        display: block;
     }
 
     .card-body {
@@ -368,10 +366,8 @@
         display: block;
     }
 
-    .product-price {
-        .sticker {
-            display: none;
-        }
+    .sticker {
+        display: none;
     }
 }
 
@@ -1647,23 +1643,6 @@
         margin-right: 6px;
     }
 
-    .sticker {
-        top: 8px;
-        left: 8px;
-        border: none;
-        color: white;
-        display: none;
-        font-size: 14px;
-        font-weight: 600;
-        padding: 2px 10px;
-        position: absolute;
-        border-radius: 12px;
-
-        &.sale {
-            background-color: $theme-color;
-        }
-    }
-
     .regular-price {
         font-weight: 500;
         margin-right: 10px;
@@ -1678,6 +1657,27 @@
         &.final-price {
             font-size: 24px;
         }
+    }
+}
+
+.sticker {
+    top: 8px;
+    left: 8px;
+    border: none;
+    color: white;
+    display: none;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 2px 10px;
+    position: absolute;
+    border-radius: 12px;
+
+    &.sale {
+        background-color: $color-danger;
+    }
+
+    &.new {
+        background-color: $theme-color;
     }
 }
 
