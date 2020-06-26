@@ -30,6 +30,7 @@
         "kalnoy/nestedset": "5.0.1",
         "konekt/concord": "^1.2",
         "laravel/framework": "^7.0",
+        "laravel/socialite": "^4.4",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "maatwebsite/excel": "3.1.19",
@@ -103,7 +104,8 @@
         "Webkul\\Rule\\": "packages/Webkul/Rule/src",
         "Webkul\\CMS\\": "packages/Webkul/CMS/src",
         "Webkul\\Velocity\\": "packages/Webkul/Velocity/src",
-        "Webkul\\BookingProduct\\": "packages/Webkul/BookingProduct/src"
+        "Webkul\\BookingProduct\\": "packages/Webkul/BookingProduct/src",
+        "Webkul\\SocialLogin\\": "packages/Webkul/SocialLogin/src"
       }
     },
 
