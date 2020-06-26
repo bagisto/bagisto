@@ -8,28 +8,28 @@
         display: inline-block;
         background-size: cover;
 
-        &.icon-facebook {
-            background-image: url("../images/facebook.svg");
+        &.icon-facebook-login {
+            background-image: url("../images/facebook-login.svg");
         }
 
-        &.icon-twitter {
-            background-image: url("../images/twitter.svg");
+        &.icon-twitter-login {
+            background-image: url("../images/twitter-login.svg");
         }
 
-        &.icon-google {
-            background-image: url("../images/google.svg");
+        &.icon-google-login {
+            background-image: url("../images/google-login.svg");
         }
 
-        &.icon-linkedin {
-            background-image: url("../images/linkedin.svg");
+        &.icon-linkedin-login {
+            background-image: url("../images/linkedin-login.svg");
         }
 
-        &.icon-github {
-            background-image: url("../images/github.svg");
+        &.icon-github-login {
+            background-image: url("../images/github-login.svg");
         }
 
-        &.icon-instagram {
-            background-image: url("../images/instagram.svg");
+        &.icon-instagram-login {
+            background-image: url("../images/instagram-login.svg");
         }
     }
 }

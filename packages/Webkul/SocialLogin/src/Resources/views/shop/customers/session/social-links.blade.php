@@ -12,7 +12,7 @@
     @if (core()->getConfigData('customer.settings.social_login.enable_facebook'))
         <div class="control-group">
             <a href="{{ route('customer.social-login.index', 'facebook') }}" class="link facebook-link">
-                <span class="icon icon-facebook"></span>
+                <span class="icon icon-facebook-login"></span>
                 {{ __('sociallogin::app.shop.customer.login-form.continue-with-facebook') }}
             </a>
         </div>
@@ -21,7 +21,7 @@
     @if (core()->getConfigData('customer.settings.social_login.enable_twitter'))
         <div class="control-group">
             <a href="{{ route('customer.social-login.index', 'twitter') }}" class="link twitter-link">
-                <span class="icon icon-twitter"></span>
+                <span class="icon icon-twitter-login"></span>
                 {{ __('sociallogin::app.shop.customer.login-form.continue-with-twitter') }}
             </a>
         </div>
@@ -30,7 +30,7 @@
     @if (core()->getConfigData('customer.settings.social_login.enable_google'))
         <div class="control-group">
             <a href="{{ route('customer.social-login.index', 'google') }}" class="link google-link">
-                <span class="icon icon-google"></span>
+                <span class="icon icon-google-login"></span>
                 {{ __('sociallogin::app.shop.customer.login-form.continue-with-google') }}
             </a>
         </div>
@@ -39,7 +39,7 @@
     @if (core()->getConfigData('customer.settings.social_login.enable_linkedin'))
         <div class="control-group">
             <a href="{{ route('customer.social-login.index', 'linkedin') }}" class="link linkedin-link">
-                <span class="icon icon-linkedin"></span>
+                <span class="icon icon-linkedin-login"></span>
                 {{ __('sociallogin::app.shop.customer.login-form.continue-with-linkedin') }}
             </a>
         </div>
@@ -48,7 +48,7 @@
     @if (core()->getConfigData('customer.settings.social_login.enable_github'))
         <div class="control-group">
             <a href="{{ route('customer.social-login.index', 'github') }}" class="link github-link">
-                <span class="icon icon-github"></span>
+                <span class="icon icon-github-login"></span>
                 {{ __('sociallogin::app.shop.customer.login-form.continue-with-github') }}
             </a>
         </div>
