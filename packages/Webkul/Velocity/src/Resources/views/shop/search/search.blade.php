@@ -118,14 +118,16 @@
             },
 
             created: function() {
-                this.searched_terms = localStorage.searched_terms.split('_');
+                if (localStorage.searched_terms && localStorage.searched_terms != '') {
+                    this.searched_terms = localStorage.searched_terms.split('_');
 
-                this.searched_terms = this.searched_terms.map(term => {
-                    return {
-                        name: term,
-                        slug: term.split(' ').join('+'),
-                    }
-                });
+                    this.searched_terms = this.searched_terms.map(term => {
+                        return {
+                            name: term,
+                            slug: term.split(' ').join('+'),
+                        }
+                    });
+                }
             }
         });
     </script>
