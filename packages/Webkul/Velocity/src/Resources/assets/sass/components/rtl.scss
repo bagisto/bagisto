@@ -350,6 +350,19 @@ body {
             }
         }
 
+        .account-content {
+            .account-layout {
+                .account-table-content {
+                    #datagrid-filters {
+                        .per-page {
+                            left: 0;
+                            right: unset;
+                        }
+                    }
+                }
+            }
+        }
+
         // Shared
         .text-right {
             text-align: left !important;

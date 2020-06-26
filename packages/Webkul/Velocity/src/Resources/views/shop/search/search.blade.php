@@ -51,7 +51,7 @@
             @endif
 
             @if (! $results)
-                <h1 class="fw6 col-12">{{  __('shop::app.search.no-results') }}</h1>
+                <h1 class="fw6 col-12">{{ __('shop::app.search.no-results') }}</h1>
             @else
                 @if ($results->isEmpty())
                     <h1 class="fw6 col-12">{{ __('shop::app.products.whoops') }}</h1>
@@ -118,14 +118,16 @@
             },
 
             created: function() {
-                this.searched_terms = localStorage.searched_terms.split('_');
+                if (localStorage.searched_terms && localStorage.searched_terms != '') {
+                    this.searched_terms = localStorage.searched_terms.split('_');
 
-                this.searched_terms = this.searched_terms.map(term => {
-                    return {
-                        name: term,
-                        slug: term.split(' ').join('+'),
-                    }
-                });
+                    this.searched_terms = this.searched_terms.map(term => {
+                        return {
+                            name: term,
+                            slug: term.split(' ').join('+'),
+                        }
+                    });
+                }
             }
         });
     </script>
