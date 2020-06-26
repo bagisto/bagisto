@@ -258,17 +258,30 @@
 
                                 const imgElement = document.getElementById('uploaded-image-url');
 
-                                const result = await net.classify(imgElement);
+                                try {
+                                    const result = await net.classify(imgElement);
 
-                                result.forEach(function(value) {
-                                    queryString = value.className.split(',');
+                                    result.forEach(function(value) {
+                                        queryString = value.className.split(',');
 
-                                    if (queryString.length > 1) {
-                                        analysedResult = analysedResult.concat(queryString)
-                                    } else {
-                                        analysedResult.push(queryString[0])
-                                    }
-                                })
+                                        if (queryString.length > 1) {
+                                            analysedResult = analysedResult.concat(queryString)
+                                        } else {
+                                            analysedResult.push(queryString[0])
+                                        }
+                                    });
+                                } catch (error) {
+                                    self.$root.hideLoader();
+
+                                    window.flashMessages = [
+                                        {
+                                            'type': 'alert-error',
+                                            'message': "{{ __('shop::app.common.error') }}"
+                                        }
+                                    ];
+
+                                    self.$root.addFlashMessages();
+                                };
 
                                 localStorage.searched_image_url = self.uploaded_image_url;
 
@@ -281,8 +294,17 @@
 
                             app();
                         })
-                        .catch(function() {
+                        .catch(function(error) {
                             self.$root.hideLoader();
+
+                            window.flashMessages = [
+                                {
+                                    'type': 'alert-error',
+                                    'message': "{{ __('shop::app.common.error') }}"
+                                }
+                            ];
+
+                            self.$root.addFlashMessages();
                         });
                 }
             }

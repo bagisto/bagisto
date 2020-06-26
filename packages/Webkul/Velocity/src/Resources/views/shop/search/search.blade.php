@@ -51,7 +51,7 @@
             @endif
 
             @if (! $results)
-                <h1 class="fw6 col-12">{{  __('shop::app.search.no-results') }}</h1>
+                <h1 class="fw6 col-12">{{ __('shop::app.search.no-results') }}</h1>
             @else
                 @if ($results->isEmpty())
                     <h1 class="fw6 col-12">{{ __('shop::app.products.whoops') }}</h1>
