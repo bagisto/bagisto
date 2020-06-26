@@ -195,6 +195,9 @@
                 <button style="background: none; border: none; padding: 0px;">
                     <i class="icon icon-search"></i>
                 </button>
+                
+                <image-search-component></image-search-component>
+
                 <input type="search" name="term" class="search">
                 <i class="icon icon-menu-back right"></i>
             </div>

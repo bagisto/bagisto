@@ -3823,6 +3823,31 @@ section.review {
             }
         }
     }
+
+    .image-search-container {
+        .icon {
+            &.camera-icon {
+                top: 10px;
+                position: relative;
+                margin-left: 10px;
+            }
+        }
+
+        input[type=file] {
+            display: none;
+        }
+    }
+
+    .image-search-result {
+        .searched-terms {
+            margin-top: 15px;
+            margin-left: 0 !important;
+        }
+
+        .term-list {
+            line-height: 35px;
+        }
+    }
 }
 /// rtl css start here
 .rtl {
