@@ -100,10 +100,11 @@ class Order extends JsonResource
             'channel'                            => $this->when($this->channel_id, new ChannelResource($this->channel)),
             'shipping_address'                   => new OrderAddress($this->shipping_address),
             'billing_address'                    => new OrderAddress($this->billing_address),
-            'updated_at'                         => $this->updated_at,
             'items'                              => OrderItem::collection($this->items),
             'invoices'                           => Invoice::collection($this->invoices),
             'shipments'                          => Shipment::collection($this->shipments),
+            'downloadable_links'                 => $this->downloadable_link_purchased,
+            'updated_at'                         => $this->updated_at,
             'created_at'                         => $this->created_at,
         ];
     }
