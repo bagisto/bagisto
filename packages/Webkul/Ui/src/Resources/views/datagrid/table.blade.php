@@ -301,7 +301,7 @@
                             }
                         }
 
-                        if (this.type == 'string') {
+                        if (this.type == 'string' && this.stringValue != null) {
                             this.formURL(this.columnOrAlias, this.stringCondition, encodeURIComponent(this.stringValue), label)
                         } else if (this.type == 'number') {
                             indexConditions = true;

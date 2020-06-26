@@ -951,11 +951,6 @@
                     }
                 }
 
-                .filter-tag {
-                    font-size: 18px;
-                    font-weight: 600;
-                }
-
                 .dropdown-filters {
                     font-size: 16px;
 
@@ -1066,6 +1061,9 @@
 
             .filtered-tags {
                 .filter-tag {
+                    font-size: 16px;
+                    margin-right: 20px;
+
                     .cross-icon {
                         @extend .rango-default;
 
@@ -1079,6 +1077,14 @@
                         &:hover {
                             cursor: pointer;
                         }
+                    }
+
+                    .wrapper {
+                        color: #000311;
+                        margin-left: 10px;
+                        padding: 5px 10px;
+                        background: #e7e7e7;
+                        letter-spacing: -.22px;
                     }
                 }
             }
