@@ -268,6 +268,7 @@ return [
         Webkul\CMS\Providers\CMSServiceProvider::class,
         Webkul\Velocity\Providers\VelocityServiceProvider::class,
         Webkul\BookingProduct\Providers\BookingProductServiceProvider::class,
+        Webkul\SocialLogin\Providers\SocialLoginServiceProvider::class,
     ],
 
     /*
