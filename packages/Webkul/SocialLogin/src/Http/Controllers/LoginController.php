@@ -47,7 +47,13 @@ class LoginController extends Controller
      */
     public function redirectToProvider($provider)
     {
-        return Socialite::driver($provider)->redirect();
+        try {
+            return Socialite::driver($provider)->redirect();
+        } catch (\Exception $e) {
+            session()->flash('error', $e->getMessage());
+            
+            return redirect()->route('customer.session.index');
+        }
     }
  
     /**
