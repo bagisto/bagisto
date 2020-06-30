@@ -79,7 +79,17 @@ body {
                     }
                 }
             }
-        }    
+
+            ~ .compare-btn {
+                left: 15%;
+                float: left;
+                position: relative;
+            }
+
+            ~ .wishlist-btn {
+                float: right;
+            }
+        }
 
         .form-container {
             .container {
@@ -335,6 +345,19 @@ body {
                 .policy {
                     .left {
                         margin-left: 10px;
+                    }
+                }
+            }
+        }
+
+        .account-content {
+            .account-layout {
+                .account-table-content {
+                    #datagrid-filters {
+                        .per-page {
+                            left: 0;
+                            right: unset;
+                        }
                     }
                 }
             }

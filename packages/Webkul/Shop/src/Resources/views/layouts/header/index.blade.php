@@ -1,3 +1,11 @@
+<?php
+    $term = request()->input('term');
+
+    if (! is_null($term)) {
+        $serachQuery = 'term='.request()->input('term');
+    }
+?>
+
 <div class="header" id="header">
     <div class="header-top">
         <div class="left-content">
@@ -16,7 +24,14 @@
             <ul class="search-container">
                 <li class="search-group">
                     <form role="search" action="{{ route('shop.search.index') }}" method="GET" style="display: inherit;">
-                        <input type="search" name="term" class="search-field" placeholder="{{ __('shop::app.header.search-text') }}" required>
+                        <input
+                            required
+                            name="term"
+                            type="search"
+                            value="{{ $term }}"
+                            class="search-field"
+                            placeholder="{{ __('shop::app.header.search-text') }}"
+                        >
 
                         <image-search-component></image-search-component>
 
@@ -30,14 +45,6 @@
                 </li>
             </ul>
         </div>
-
-        <?php
-            $term = request()->input('term');
-
-            if (! is_null($term)) {
-                $serachQuery = 'term='.request()->input('term');
-            }
-        ?>
 
         <div class="right-content">
 
@@ -195,6 +202,9 @@
                 <button style="background: none; border: none; padding: 0px;">
                     <i class="icon icon-search"></i>
                 </button>
+                
+                <image-search-component></image-search-component>
+
                 <input type="search" name="term" class="search">
                 <i class="icon icon-menu-back right"></i>
             </div>
@@ -255,17 +265,30 @@
 
                                 const imgElement = document.getElementById('uploaded-image-url');
 
-                                const result = await net.classify(imgElement);
+                                try {
+                                    const result = await net.classify(imgElement);
 
-                                result.forEach(function(value) {
-                                    queryString = value.className.split(',');
+                                    result.forEach(function(value) {
+                                        queryString = value.className.split(',');
 
-                                    if (queryString.length > 1) {
-                                        analysedResult = analysedResult.concat(queryString)
-                                    } else {
-                                        analysedResult.push(queryString[0])
-                                    }
-                                })
+                                        if (queryString.length > 1) {
+                                            analysedResult = analysedResult.concat(queryString)
+                                        } else {
+                                            analysedResult.push(queryString[0])
+                                        }
+                                    });
+                                } catch (error) {
+                                    self.$root.hideLoader();
+
+                                    window.flashMessages = [
+                                        {
+                                            'type': 'alert-error',
+                                            'message': "{{ __('shop::app.common.error') }}"
+                                        }
+                                    ];
+
+                                    self.$root.addFlashMessages();
+                                };
 
                                 localStorage.searched_image_url = self.uploaded_image_url;
 
@@ -278,8 +301,17 @@
 
                             app();
                         })
-                        .catch(function() {
+                        .catch(function(error) {
                             self.$root.hideLoader();
+
+                            window.flashMessages = [
+                                {
+                                    'type': 'alert-error',
+                                    'message': "{{ __('shop::app.common.error') }}"
+                                }
+                            ];
+
+                            self.$root.addFlashMessages();
                         });
                 }
             }

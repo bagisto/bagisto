@@ -123,7 +123,7 @@
 
                     selected_slot: '',
 
-                    slot_from: 0,
+                    slot_from: '',
 
                     date_from: '',
 
@@ -179,7 +179,7 @@
                         .then (function(response) {
                             this_this.selected_slot = '';
                             
-                            this_this.slot_from = 0;
+                            this_this.slot_from = '';
 
                             this_this.slots = response.data.data;
                         })

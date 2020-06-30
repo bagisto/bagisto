@@ -389,22 +389,32 @@
 
                             const imgElement = document.getElementById('uploaded-image-url');
 
-                            const result = await net.classify(imgElement);
+                            try {
+                                const result = await net.classify(imgElement);
 
-                            result.forEach(function(value) {
-                                queryString = value.className.split(',');
+                                result.forEach(function(value) {
+                                    queryString = value.className.split(',');
 
-                                if (queryString.length > 1) {
-                                    analysedResult = analysedResult.concat(queryString)
-                                } else {
-                                    analysedResult.push(queryString[0])
-                                }
-                            })
+                                    if (queryString.length > 1) {
+                                        analysedResult = analysedResult.concat(queryString)
+                                    } else {
+                                        analysedResult.push(queryString[0])
+                                    }
+                                });
+                            } catch (error) {
+                                self.$root.hideLoader();
+
+                                window.showAlert(
+                                    `alert-danger`,
+                                    this.__('shop.general.alert.error'),
+                                    "{{ __('shop::app.common.error') }}"
+                                );
+                            }
 
                             localStorage.searchedImageUrl = self.uploadedImageUrl;
 
                             queryString = localStorage.searched_terms = analysedResult.join('_');
-                            
+
                             self.$root.hideLoader();
 
                             window.location.href = "{{ route('shop.search.index') }}" + '?term=' + queryString + '&image-search=1';
@@ -413,6 +423,12 @@
                         app();
                     }).catch(() => {
                         this.$root.hideLoader();
+
+                        window.showAlert(
+                            `alert-danger`,
+                            this.__('shop.general.alert.error'),
+                            "{{ __('shop::app.common.error') }}"
+                        );
                     });
                 }
             }

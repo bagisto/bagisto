@@ -261,6 +261,7 @@ return [
             'yes'                    => 'Ja',
             'view'                   => 'Ansicht',
             'filter'                 => 'Filter',
+            'currencies'             => 'Currencies',
             'orders'                 => 'Bestellungen',
             'update'                 => 'Aktualisieren',
             'reviews'                => 'Bewertungen',
