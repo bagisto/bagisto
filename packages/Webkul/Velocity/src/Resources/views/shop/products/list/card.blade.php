@@ -1,7 +1,6 @@
-@inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 @inject ('reviewHelper', 'Webkul\Product\Helpers\Review')
 @inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar')
-{{-- @include('shop::UI.product-quick-view') --}}
+@inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
 @push('css')
     <style type="text/css">
@@ -20,9 +19,7 @@
     if (isset($checkmode) && $checkmode && $toolbarHelper->getCurrentMode() == "list") {
         $list = true;
     }
-@endphp
 
-@php
     $productBaseImage = $productImageHelper->getProductBaseImage($product);
     $totalReviews = $reviewHelper->getTotalReviews($product);
     $avgRatings = ceil($reviewHelper->getAverageRating($product));
@@ -66,10 +63,11 @@
 
                     <div class="cart-wish-wrap mt5">
                         @include ('shop::products.add-to-cart', [
-                            'product' => $product,
-                            'showCompare' => true,
-                            'addWishlistClass' => 'pl10',
-                            'addToCartBtnClass' => 'medium-padding'
+                            'addWishlistClass'  => 'pl10',
+                            'product'           => $product,
+                            'addToCartBtnClass' => 'medium-padding',
+                            'showCompare'       => core()->getConfigData('general.content.shop.compare_option') == "1"
+                                                   ? true : false,
                         ])
                     </div>
                 </div>
@@ -122,13 +120,14 @@
 
                 <div class="cart-wish-wrap no-padding ml0">
                     @include ('shop::products.add-to-cart', [
-                        'showCompare'       => true,
                         'product'           => $product,
                         'btnText'           => $btnText ?? null,
                         'moveToCart'        => $moveToCart ?? null,
                         'reloadPage'        => $reloadPage ?? null,
                         'addToCartForm'     => $addToCartForm ?? false,
                         'addToCartBtnClass' => $addToCartBtnClass ?? '',
+                        'showCompare'       => core()->getConfigData('general.content.shop.compare_option') == "1"
+                                                ? true : false,
                     ])
                 </div>
             </div>

@@ -121,11 +121,7 @@
                     this.$root.headerItemsCount++;
                     this.setStorageValue('wishlist_product', updatedItems);
 
-                    window.showAlert(
-                        `alert-success`,
-                        this.__('shop.general.alert.success'),
-                        `${this.__('customer.compare.removed')}`
-                    );
+                    window.showAlert(`alert-success`, this.__('shop.general.alert.success'), `${this.__('customer.app.wishlist.removed')}`);
                 }
             }
         });

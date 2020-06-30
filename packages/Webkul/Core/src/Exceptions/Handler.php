@@ -2,7 +2,7 @@
 
 namespace Webkul\Core\Exceptions;
 
-use Exception;
+use Throwable;
 use Illuminate\Auth\AuthenticationException;
 use Doctrine\DBAL\Driver\PDOException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -22,10 +22,10 @@ class Handler extends AppExceptionHandler
      * Render an exception into an HTTP response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception   $exception
+     * @param  \Throwable   $exception
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $exception)
+    public function render($request, Throwable $exception)
     {
         $path = $this->isAdminUri() ? 'admin' : 'shop';
 

@@ -23,7 +23,7 @@
 @stop
 
 @section('seo')
-    <meta name="description" content="{{ trim($product->meta_description) != "" ? $product->meta_description : str_limit(strip_tags($product->description), 120, '') }}"/>
+    <meta name="description" content="{{ trim($product->meta_description) != "" ? $product->meta_description : \Illuminate\Support\Str::limit(strip_tags($product->description), 120, '') }}"/>
 
     <meta name="keywords" content="{{ $product->meta_keywords }}"/>
 
@@ -126,8 +126,9 @@
                                         @include ('shop::products.add-to-cart', [
                                             'form' => false,
                                             'product' => $product,
-                                            'showCompare' => true,
                                             'showCartIcon' => false,
+                                            'showCompare' => core()->getConfigData('general.content.shop.compare_option') == "1"
+                                                             ? true : false,
                                         ])
                                     </div>
                                 </div>

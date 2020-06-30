@@ -71,7 +71,8 @@ return [
         'no-results' => 'Nenhum resultado encontrado',
         'page-title' => 'Buscar',
         'found-results' => 'Resultados da pesquisa encontrados',
-        'found-result' => 'Resultado da pesquisa encontrado'
+        'found-result' => 'Resultado da pesquisa encontrado',
+        'analysed-keywords' => 'Analysed Keywords'
     ],
 
     'reviews' => [
@@ -403,7 +404,9 @@ return [
         'your-customization' => 'Sua personalização',
         'total-amount' => 'Valor total',
         'none' => 'Nenhum',
-        'available-for-order' => 'Disponível para encomenda'
+        'available-for-order' => 'Disponível para encomenda',
+        'settings' => 'Settings',
+        'compare_options' => 'Compare Options',
     ],
 
     // 'reviews' => [

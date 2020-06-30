@@ -209,23 +209,22 @@
                             this.$validator.validateAll(scope)
                             .then(result => {
                                 if (result) {
-                                    document.body.style.cursor = 'wait';
+                                    this.$root.showLoader();
 
                                     switch (scope) {
                                         case 'address-form':
                                             this.saveAddress();
-                                            document.body.style.cursor = 'default';
                                             break;
 
                                         case 'shipping-form':
                                             if (this.showShippingSection) {
-                                                document.body.style.cursor = 'wait';
+                                                this.$root.showLoader();
                                                 this.saveShipping();
                                                 break;
                                             }
 
                                         case 'payment-form':
-                                            document.body.style.cursor = 'wait';
+                                            this.$root.showLoader();
                                             this.savePayment();
 
                                             this.isPlaceOrderEnabled = ! this.validateAddressForm();
@@ -301,7 +300,7 @@
                                 console.log(this.is_customer_exist);
 
                                 if (response.data)
-                                    document.body.style.cursor = 'default';
+                                    this.$root.hideLoader();
                             })
                             .catch(function (error) {})
                         })
@@ -396,9 +395,12 @@
                                 shippingMethods = response.data.shippingMethods;
 
                                 this.getOrderSummary();
+
+                                this.$root.hideLoader();
                             })
                             .catch(error => {
                                 this.disable_button = false;
+                                this.$root.hideLoader();
 
                                 this.handleErrorResponse(error.response, 'address-form')
                             })
@@ -409,11 +411,9 @@
 
                         this.$http.post("{{ route('shop.checkout.save-shipping') }}", {'shipping_method': this.selected_shipping_method})
                             .then(response => {
+                                this.$root.hideLoader();
                                 this.disable_button = false;
-
                                 this.showPaymentSection = true;
-
-                                document.body.style.cursor = 'default';
 
                                 paymentHtml = Vue.compile(response.data.html)
 
@@ -431,7 +431,7 @@
                             })
                             .catch(error => {
                                 this.disable_button = false;
-
+                                this.$root.hideLoader();
                                 this.handleErrorResponse(error.response, 'shipping-form')
                             })
                     },
@@ -448,7 +448,7 @@
                                 this.disable_button = false;
 
                                 this.showSummarySection = true;
-                                document.body.style.cursor = 'default';
+                                this.$root.hideLoader();
 
                                 reviewHtml = Vue.compile(response.data.html)
                                 this.completed_step = this.step_numbers[response.data.jump_to_section] + 1;
@@ -460,6 +460,7 @@
                             })
                             .catch(error => {
                                 this.disable_button = false;
+                                this.$root.hideLoader();
                                 this.handleErrorResponse(error.response, 'payment-form')
                             });
                         }
@@ -470,18 +471,23 @@
                             this.disable_button = false;
                             this.isPlaceOrderEnabled = false;
 
+                            this.$root.showLoader();
+
                             this.$http.post("{{ route('shop.checkout.save-order') }}", {'_token': "{{ csrf_token() }}"})
-                            .then(function(response) {
+                            .then(response => {
                                 if (response.data.success) {
                                     if (response.data.redirect_url) {
+                                        this.$root.hideLoader();
                                         window.location.href = response.data.redirect_url;
                                     } else {
+                                        this.$root.hideLoader();
                                         window.location.href = "{{ route('shop.checkout.success') }}";
                                     }
                                 }
                             })
                             .catch(error => {
                                 this.disable_button = true;
+                                this.$root.hideLoader();
 
                                 window.showAlert(`alert-danger`, this.__('shop.general.alert.danger'), "{{ __('shop::app.common.error') }}");
                             })

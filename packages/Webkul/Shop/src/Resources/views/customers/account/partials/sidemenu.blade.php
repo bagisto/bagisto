@@ -9,6 +9,16 @@
 
             <div class="menu-block-content">
                 <ul class="menubar">
+                    @php
+                        $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false;
+                    @endphp
+
+                    @if (! $showCompare)
+                        @php
+                            unset($menuItem['children']['compare']);
+                        @endphp
+                    @endif
+
                     @foreach ($menuItem['children'] as $subMenuItem)
                         <li class="menu-item {{ $menu->getActive($subMenuItem) }}">
                             <a href="{{ $subMenuItem['url'] }}">

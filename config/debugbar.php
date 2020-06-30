@@ -111,7 +111,7 @@ return [
         'views'           => true,  // Views with their data
         'route'           => true,  // Current route information
         'auth'            => false, // Display Laravel authentication status
-        'gate'            => true, // Display Laravel Gate checks
+        'gate'            => true,  // Display Laravel Gate checks
         'session'         => true,  // Display session data
         'symfony_request' => true,  // Only one can be enabled..
         'mail'            => true,  // Catch mail messages
@@ -122,7 +122,7 @@ return [
         'files'           => false, // Show the included files
         'config'          => false, // Display config settings
         'cache'           => false, // Display cache events
-        'models'          => false, // Display models
+        'models'          => true,  // Display models
     ],
 
     /*

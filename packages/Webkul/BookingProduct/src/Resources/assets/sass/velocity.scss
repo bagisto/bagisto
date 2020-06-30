@@ -132,6 +132,19 @@
                         top: 14px;
                         right: 10px;
                     }
+
+                    .cross-icon {
+                        margin-left: -48px;
+                        top: 20px;
+                    }
+                }
+
+                &.has-error {
+                    &.date {
+                        &::after {
+                            margin-top: 0px;
+                        }
+                    }
                 }
 
                 &.slots {

@@ -15,7 +15,7 @@ class DataMocker extends Module
     /**
      * Get an instance of the faker
      *
-     * @return Generator
+     * @return \Faker\Generator
      *
      * @author florianbosdorff
      */

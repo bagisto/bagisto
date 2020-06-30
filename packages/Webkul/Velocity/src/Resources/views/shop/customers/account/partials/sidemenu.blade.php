@@ -13,12 +13,18 @@
             @php
                 $subMenuCollection = [];
 
+                $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false;
+
                 try {
                     $subMenuCollection['profile'] = $menuItem['children']['profile'];
                     $subMenuCollection['orders'] = $menuItem['children']['orders'];
                     $subMenuCollection['downloadables'] = $menuItem['children']['downloadables'];
                     $subMenuCollection['wishlist'] = $menuItem['children']['wishlist'];
-                    $subMenuCollection['compare'] = $menuItem['children']['compare'];
+
+                    if ($showCompare) {
+                        $subMenuCollection['compare'] = $menuItem['children']['compare'];
+                    }
+
                     $subMenuCollection['reviews'] = $menuItem['children']['reviews'];
                     $subMenuCollection['address'] = $menuItem['children']['address'];
 

@@ -281,10 +281,8 @@
         }
     }
 
-    .product-price {
-        .sticker {
-            display: block;
-        }
+    .sticker {
+        display: block;
     }
 
     .card-body {
@@ -368,10 +366,8 @@
         display: block;
     }
 
-    .product-price {
-        .sticker {
-            display: none;
-        }
+    .sticker {
+        display: none;
     }
 }
 
@@ -920,7 +916,10 @@
             }
 
             #datagrid-filters {
+                width: 100%;
                 margin-bottom: 20px;
+                display: inline-flex;
+                justify-content: space-between;
 
                 > * {
                     display: inline-block;
@@ -952,12 +951,9 @@
                     }
                 }
 
-                .filter-tag {
-                    font-size: 18px;
-                    font-weight: 600;
-                }
-
                 .dropdown-filters {
+                    font-size: 16px;
+
                     .grid-dropdown-header {
                         display: inline-block;
                     }
@@ -1045,10 +1041,29 @@
                         }
                     }
                 }
+
+                .filter-left {
+                    @extend .pull-left;
+                }
+
+                .filter-right {
+                    top: -25px;
+                    width: 70%;
+                    float: right;
+                    position: relative;
+
+                    .per-page {
+                        right: 0;
+                        position: absolute;
+                    }
+                }
             }
 
-            .filter-row-two {
+            .filtered-tags {
                 .filter-tag {
+                    font-size: 16px;
+                    margin-right: 20px;
+
                     .cross-icon {
                         @extend .rango-default;
 
@@ -1062,6 +1077,14 @@
                         &:hover {
                             cursor: pointer;
                         }
+                    }
+
+                    .wrapper {
+                        color: #000311;
+                        margin-left: 10px;
+                        padding: 5px 10px;
+                        background: #e7e7e7;
+                        letter-spacing: -.22px;
                     }
                 }
             }
@@ -1626,23 +1649,6 @@
         margin-right: 6px;
     }
 
-    .sticker {
-        top: 8px;
-        left: 8px;
-        border: none;
-        color: white;
-        display: none;
-        font-size: 14px;
-        font-weight: 600;
-        padding: 2px 10px;
-        position: absolute;
-        border-radius: 12px;
-
-        &.sale {
-            background-color: $theme-color;
-        }
-    }
-
     .regular-price {
         font-weight: 500;
         margin-right: 10px;
@@ -1657,6 +1663,28 @@
         &.final-price {
             font-size: 24px;
         }
+    }
+}
+
+.sticker {
+    top: 8px;
+    left: 8px;
+    border: none;
+    color: white;
+    display: none;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 2px 10px;
+    position: absolute;
+    border-radius: 12px;
+
+    &.sale {
+        padding: 2px 14px;
+        background-color: $color-danger;
+    }
+
+    &.new {
+        background-color: $theme-color;
     }
 }
 
@@ -2278,69 +2306,67 @@
     @extend .remove-padding-margin;
 }
 
-.bottom-toolbar {
+.pagination {
     width: 100%;
     display: block;
 
-    .pagination {
-        .page-item {
-            padding: 0 10px;
+    .page-item {
+        padding: 0 10px;
 
-            &.active {
-                font-weight: 600;
-                color: $theme-color !important;
-                border-bottom: 2px solid $theme-color;
-            }
+        &.active {
+            font-weight: 600;
+            color: $theme-color !important;
+            border-bottom: 2px solid $theme-color;
+        }
 
-            &.next,
-            &.previous {
-                .angle-right-icon,
-                .angle-left-icon {
-                    @extend .rango-default;
+        &.next,
+        &.previous {
+            .angle-right-icon,
+            .angle-left-icon {
+                @extend .rango-default;
 
-                    margin: 0;
-                    font-size: 24px;
-                    background: unset;
-                    text-align: center;
-                }
-            }
-
-            &.next {
-                .angle-right-icon::before {
-                    content: "\E908";
-                }
-            }
-
-            &.previous {
-                .angle-left-icon::before {
-                    content: "\E907";
-                }
+                margin: 0;
+                font-size: 24px;
+                background: unset;
+                text-align: center;
             }
         }
 
-        a {
-            color: unset !important;
-            text-decoration: none !important;
-
-            i {
-                top: 2px;
-                font-size: 18px;
-                position: relative;
+        &.next {
+            .angle-right-icon::before {
+                content: "\E908";
             }
         }
 
-        .angle-left-icon,
-        .angle-right-icon {
-            @include rango-default;
+        &.previous {
+            .angle-left-icon::before {
+                content: "\E907";
+            }
+        }
+    }
 
-            background: unset;
+    a {
+        color: unset !important;
+        text-decoration: none !important;
+
+        i {
+            top: 2px;
+            font-size: 18px;
+            position: relative;
         }
-        .angle-right-icon::before {
-            content: "\E908";
-        }
-        .angle-left-icon::before {
-            content: "\E907";
-        }
+    }
+
+    .angle-left-icon,
+    .angle-right-icon {
+        @include rango-default;
+
+        background: unset;
+    }
+    .angle-right-icon::before {
+        content: "\E908";
+    }
+    .angle-left-icon::before {
+        content: "\E907";
     }
 }
 
@@ -2444,4 +2470,122 @@
         position: absolute;
         display: inline-block;
     }
+}
+
+//CSS for loader
+.cp-spinner {
+    width: 48px;
+    height: 48px;
+    position: absolute;
+    display: inline-block;
+    box-sizing: border-box;
+    left: calc(50% - 24px);
+    margin-top: calc(40% - 24px);
+}
+
+.overlay-loader {
+    top: 50%;
+    left: 50%;
+    z-index: 11;
+    position: fixed;
+    margin-top: -24px;
+    margin-left: -24px;
+}
+
+@media only screen and (max-width: 720px) {
+    .cp-spinner {
+        left: 50%;
+        margin-left: -24px;
+        top: 50%;
+        margin-top: -24px;
+    }
+}
+
+//Spinner style
+.cp-round:before {
+    border-radius: 50%;
+    content: " ";
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+    box-sizing: border-box;
+    border-top: solid 6px grey;
+    border-right: solid 6px grey;
+    border-bottom: solid 6px grey;
+    border-left: solid 6px grey;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.cp-round:after {
+    border-radius: 50%;
+    content: " ";
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+    box-sizing: border-box;
+    border-top: solid 6px $theme-color;
+    border-right: solid 6px transparent;
+    border-bottom: solid 6px transparent;
+    border-left: solid 6px transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: spin 1s ease-in-out infinite;
+}
+
+
+.image-search-container {
+    top: 9px;
+    right: 45px;
+    z-index: 10;
+    cursor: pointer;
+    position: absolute;
+    background: #fff;
+    height: 24px !important;
+}
+
+.camera-icon {
+    width: 24px;
+    display: inline-block;
+    background-size: cover;
+    background-image: url(/vendor/webkul/ui/assets/images/Camera.svg);
+}
+
+.image-search-result {
+    width: 100%;
+    padding: 20px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+    display: inline-block;
+    border: 1px solid #0041ff;
+    background-color: rgba(0,65,255,.1);
+
+    .searched-image {
+        float: left;
+
+        img {
+            width: 150px;
+            height: auto;
+            box-shadow: 1px 1px 3px 0 rgba(0,0,0,.32);
+        }
+    }
+
+    .searched-terms {
+        margin-left: 20px;
+        display: inline-block;
+
+        .term-list a {
+            padding: 5px 8px;
+            margin-top: 10px;
+            background: #fff;
+            margin-right: 10px;
+        }
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

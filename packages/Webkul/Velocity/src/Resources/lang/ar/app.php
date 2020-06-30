@@ -264,6 +264,7 @@ return [
             'update' => 'تحديث',
             'addresses' => 'عناوين',
             'orders' => 'الطلب #٪ s',
+            'currencies' => 'Currencies',
             'reviews' => 'التعليقات',
             'top-brands' => 'ارقى الماركات',
             'new-password' => 'كلمة مرور جديدة',

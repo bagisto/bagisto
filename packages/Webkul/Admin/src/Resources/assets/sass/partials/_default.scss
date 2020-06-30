@@ -76,7 +76,7 @@ body {
 
             .dropdown-list {
                 top: 63px;
-                right: 0px !important;
+                right: 0px;
                 bottom: inherit !important;
             }
 
@@ -318,5 +318,40 @@ body {
     .mce-tinymce {
         margin-top: 10px;
         margin-bottom: 5px;
+    }
+}
+
+.ticket-list {
+    .control-group {
+        &.date {
+            &::after {
+                left: unset;
+                right: 10px;
+                top: 34px;
+            }
+        }
+
+        &.has-error {
+            &.date {
+                &::after {
+                    top: 47px;
+                }
+            }
+        }
+    }
+}
+
+.rtl {
+    .ticket-list {
+        .control-group {
+            &.has-error {
+                &.date {
+                    &::after {
+                        top: 47px;
+                        right: 100% !important;
+                    }
+                }
+            }
+        }
     }
 }

@@ -118,7 +118,7 @@
                 height: 200,
                 width: "100%",
                 plugins: 'image imagetools media wordcount save fullscreen code table lists link hr',
-                toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor alignleft aligncenter alignright alignjustif| link hr |numlist bullist outdent indent  | removeformat | code | table',
+                toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor alignleft aligncenter alignright alignjustify | link hr |numlist bullist outdent indent  | removeformat | code | table',
                 image_advtab: true,
                 valid_elements : '*[*]'
             });

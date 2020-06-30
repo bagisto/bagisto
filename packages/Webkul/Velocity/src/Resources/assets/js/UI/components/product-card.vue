@@ -18,6 +18,10 @@
                     </a>
                 </div>
 
+                <div class="sticker new" v-if="product.new">
+                    {{ product.new }}
+                </div>
+
                 <div class="product-price" v-html="product.priceHTML"></div>
 
                 <div class="product-rating" v-if="product.totalReviews && product.totalReviews > 0">
@@ -57,6 +61,10 @@
 
                     <span class="fs16">{{ product.name }}</span>
                 </a>
+            </div>
+
+            <div class="sticker new" v-if="product.new">
+                {{ product.new }}
             </div>
 
             <div class="product-price fs16" v-html="product.priceHTML"></div>

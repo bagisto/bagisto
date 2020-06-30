@@ -53,7 +53,7 @@
                             <div class="control-group" :class="[errors.has('inventory_sources[]') ? 'has-error' : '']">
                                 <label for="inventory_sources" class="required">{{ __('admin::app.settings.channels.inventory_sources') }}</label>
                                 <select v-validate="'required'" class="control" id="inventory_sources" name="inventory_sources[]" data-vv-as="&quot;{{ __('admin::app.settings.channels.inventory_sources') }}&quot;" multiple>
-                                    @foreach (app('Webkul\Inventory\Repositories\InventorySourceRepository')->all() as $inventorySource)
+                                    @foreach (app('Webkul\Inventory\Repositories\InventorySourceRepository')->findWhere(['status' => 1]) as $inventorySource)
                                         <option value="{{ $inventorySource->id }}" {{ old('inventory_sources') && in_array($inventorySource->id, old('inventory_sources')) ? 'selected' : '' }}>
                                             {{ $inventorySource->name }}
                                         </option>
