@@ -264,6 +264,7 @@ return [
             'orders'                 => 'Orders',
             'update'                 => 'Update',
             'reviews'                => 'Reviews',
+            'currencies'             => 'Currencies',
             'addresses'              => 'Addresses',
             'top-brands'             => 'Top Brands',
             'new-password'           => 'New password',

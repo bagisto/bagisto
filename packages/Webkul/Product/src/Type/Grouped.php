@@ -20,7 +20,7 @@ class Grouped extends AbstractType
      * @var \Webkul\Product\Repositories\ProductGroupedProductRepository
      */
     protected $productGroupedProductRepository;
-    
+
     /**
      * Skip attribute for downloadable product type
      *
@@ -30,7 +30,7 @@ class Grouped extends AbstractType
 
     /**
      * These blade files will be included in product edit page
-     * 
+     *
      * @var array
      */
     protected $additionalViews = [
@@ -124,7 +124,7 @@ class Grouped extends AbstractType
      *
      * @return float
      */
-    public function getMinimalPrice()
+    public function getMinimalPrice($qty = null)
     {
         $minPrices = [];
 
@@ -180,7 +180,7 @@ class Grouped extends AbstractType
             if (is_string($cartProducts)) {
                 return $cartProducts;
             }
-                
+
             $products = array_merge($products, $cartProducts);
         }
 

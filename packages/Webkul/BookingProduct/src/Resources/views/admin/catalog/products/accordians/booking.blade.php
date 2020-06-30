@@ -1,10 +1,5 @@
 @section('css')
     <style>
-        .slot-list .control-group.date::after {
-            margin-top: -13px;
-            left: 100%;
-        }
-        
         .has-control-group .control-group {
             width: 50%;
             float: left;
@@ -43,7 +38,9 @@
             <div class="control-group" :class="[errors.has('booking[type]') ? 'has-error' : '']">
                 <label class="required">{{ __('bookingproduct::app.admin.catalog.products.booking-type') }}</label>
 
-                <select v-validate="'required'" name="booking[type]" v-model="booking.type" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.booking-type') }}&quot;">
+                <input type="hidden" name="booking[type]" :value="booking.type"/>
+
+                <select v-validate="'required'" name="booking[type]" v-model="booking.type" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.booking-type') }}&quot;" :disabled="! is_new">
                     <option value="default">{{ __('bookingproduct::app.admin.catalog.products.default') }}</option>
                     <option value="appointment">{{ __('bookingproduct::app.admin.catalog.products.appointment-booking') }}</option>
                     <option value="event">{{ __('bookingproduct::app.admin.catalog.products.event-booking') }}</option>
@@ -134,6 +131,8 @@
 
             data: function() {
                 return {
+                    is_new: bookingProduct ? false : true,
+
                     booking: bookingProduct ? bookingProduct : {
 
                         type: 'default',
@@ -149,6 +148,13 @@
                         available_to: ''
                     }
                 }
+            },
+
+            created: function() {
+                this.booking.available_from = "{{ $bookingProduct && $bookingProduct->available_from ? $bookingProduct->available_from->format('Y-m-d H:i:s') : '' }}";
+
+
+                this.booking.available_to = "{{ $bookingProduct && $bookingProduct->available_to ? $bookingProduct->available_to->format('Y-m-d H:i:s') : '' }}";
             }
         });
     </script>

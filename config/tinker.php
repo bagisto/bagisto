@@ -19,6 +19,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Alias Whitelist
+    |--------------------------------------------------------------------------
+    |
+    | Tinker will not automatically alias classes in your vendor namespaces
+    | but you may explicitly allow a subset of classes to get aliased by
+    | adding the names of each of those classes to the following list.
+    |
+    */
+
+    'alias' => [
+        //
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Alias Blacklist
     |--------------------------------------------------------------------------
     |

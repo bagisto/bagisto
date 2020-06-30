@@ -1,3 +1,10 @@
+@php
+    $velocityHelper = app('Webkul\Velocity\Helpers\Helper');
+    $velocityMetaData = $velocityHelper->getVelocityMetaData();
+    
+    view()->share('velocityMetaData', $velocityMetaData);
+@endphp
+
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 
@@ -122,6 +129,10 @@
                     {!! view_render_event('bagisto.shop.layout.full-content.after') !!}
 
                 </div>
+            </div>
+
+            <div class="modal-parent" id="loader" style="top: 0" v-show="showPageLoader">
+                <overlay-loader :is-open="true"></overlay-loader>
             </div>
         </div>
 

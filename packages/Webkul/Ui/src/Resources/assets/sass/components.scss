@@ -5,31 +5,45 @@
     width: 100%;
 }
 
-.filter-row-one {
+.datagrid-filters {
     display: inline-flex;
     width: 100%;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
 
-    .dropdown-filters {
-        position: absolute;
-        right: 25px;
+    .filter-left {
+        float: left;
     }
 
-    .per-page {
-        right: 250px;
+    .filter-right {
+        float: right;
+    }
 
-        .per-page-label {
-            position: absolute;
-            right: 120px;
-            width: 100%;
-            top: 8px;
+    .dropdown-filters {
+        display: inline-block;
+        
+        &.per-page {
+            margin-right: 10px;
+            
+            .control-group {
+                label {
+                    width: auto;
+                    float: left;
+                    margin-top: 7px;
+                    margin-right: 10px;
+                }
+
+                .control {
+                    width: auto;
+                    margin: 0;
+                }
+            }
         }
     }
 }
 
-.filter-row-two {
+.filtered-tags {
     display: inline-flex;
     align-items: flex-start;
     flex-wrap: wrap;
@@ -37,15 +51,12 @@
 }
 
 .search-filter {
-    display: inline-flex;
-
     .control {
         font-size: 15px;
         border: 2px solid $control-border-color;
         border-right: none;
-        border-top-right-radius: 0px;
-        border-bottom-right-radius: 0px;
-        border-radius: 3px;
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
         height: 36px;
         width: 280px;
         padding-left: 10px;
@@ -63,12 +74,8 @@
         border-bottom-left-radius: 0px;
         height: 36px;
         width: 36px;
-        margin-left: -1px;
-
-        .search-icon {
-            margin-top: 3px;
-            margin-left: 3px;
-        }
+        padding: 3px;
+        float: right;
     }
 }
 
@@ -133,6 +140,46 @@
         .icon.cross-icon {
             margin-left: 10px;
             cursor: pointer;
+        }
+    }
+}
+
+.rtl {
+    .search-filter {
+        .control {
+            padding-right: 10px;
+            border-left: 0;
+            border-right: 2px solid #C7C7C7;
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+        .icon-wrapper {
+            float: left;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+        }
+    }
+
+    .dropdown-filters {
+        display: inline-block;
+        
+        &.per-page {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    }
+
+    .filtered-tags {
+        .filter-tag {
+            .wrapper,
+            .cross-icon {
+                margin-right: 10px;
+                margin-left: 0;
+            }
         }
     }
 }

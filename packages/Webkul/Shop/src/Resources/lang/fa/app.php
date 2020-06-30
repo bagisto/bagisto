@@ -71,7 +71,8 @@ return [
         'no-results' => 'نتیجه ای پیدا نشد',
         'page-title' => 'فروشگاه - جستجو',
         'found-results' => 'نتایج جستجو یافت شد',
-        'found-result' => 'نتیجه جستجو یافت شد'
+        'found-result' => 'نتیجه جستجو یافت شد',
+        'analysed-keywords' => 'Analysed Keywords'
     ],
 
     'reviews' => [
@@ -416,6 +417,8 @@ return [
         'total-amount' => 'مقدار کل',
         'none' => 'هیچ یک',
         'available-for-order' => 'Available for Order',
+        'settings' => 'Settings',
+        'compare_options' => 'Compare Options',
     ],
 
     // 'reviews' => [

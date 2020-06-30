@@ -68,7 +68,8 @@ return [
         'no-results' => 'No hay resultados',
         'page-title' => 'Búsqueda',
         'found-results' => 'No hay resultados de búsqueda',
-        'found-result' => 'Resultados de la búsqueda'
+        'found-result' => 'Resultados de la búsqueda',
+        'analysed-keywords' => 'Analysed Keywords'
     ],
 
     'reviews' => [
@@ -387,6 +388,8 @@ return [
         'select-above-options' => 'Primero selecciona las opciones de arriba.',
         'less-quantity' => 'La cantidad no debe ser inferior a uno.',
         'available-for-order' => 'Disponible para ordenar',
+        'settings' => 'Settings',
+        'compare_options' => 'Compare Options',
     ],
 
     // 'reviews' => [
