@@ -6,7 +6,7 @@ namespace Webkul\Shop\Generators;
 
 use Webkul\Sales\Models\Order;
 
-class OrderIncrementIdGenerator implements OrderIncrementGenerator
+class OrderNumberIdSequencer implements Sequencer
 {
     /**
      * @inheritDoc

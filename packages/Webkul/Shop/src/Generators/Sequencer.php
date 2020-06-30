@@ -4,10 +4,10 @@
 namespace Webkul\Shop\Generators;
 
 
-interface OrderIncrementGenerator
+interface Sequencer
 {
     /**
-     * create and return the next increment id for an order
+     * create and return the next sequence number for e.g. an order
      *
      * @return string
      */

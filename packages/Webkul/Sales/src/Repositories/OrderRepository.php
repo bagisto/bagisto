@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Sales\Contracts\Order;
 use Webkul\Sales\Models\Order as OrderModel;
-use Webkul\Shop\Generators\OrderIncrementGenerator;
-use Webkul\Shop\Generators\OrderIncrementIdGenerator;
+use Webkul\Shop\Generators\Sequencer;
+use Webkul\Shop\Generators\OrderNumberIdSequencer;
 
 class OrderRepository extends Repository
 {
@@ -191,13 +191,13 @@ class OrderRepository extends Repository
 
         if ($generatorClass !== false
             && class_exists($generatorClass)
-            && in_array(OrderIncrementGenerator::class, class_implements($generatorClass), true)
+            && in_array(Sequencer::class, class_implements($generatorClass), true)
         ) {
-            /** @var $generatorClass OrderIncrementGenerator */
+            /** @var $generatorClass Sequencer */
             return $generatorClass::generate();
         }
 
-        return OrderIncrementIdGenerator::generate();
+        return OrderNumberIdSequencer::generate();
     }
 
     /**
