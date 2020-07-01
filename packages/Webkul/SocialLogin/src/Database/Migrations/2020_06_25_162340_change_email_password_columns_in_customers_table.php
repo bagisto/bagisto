@@ -14,7 +14,7 @@ class ChangeEmailPasswordColumnsInCustomersTable extends Migration
     public function up()
     {
         Schema::table('customers', function (Blueprint $table) {
-            $table->string('email')->unique()->nullable()->change();
+            $table->string('email')->nullable()->change();
             $table->string('password')->nullable()->change();
         });
     }
@@ -27,7 +27,7 @@ class ChangeEmailPasswordColumnsInCustomersTable extends Migration
     public function down()
     {
         Schema::table('customers', function (Blueprint $table) {
-            $table->string('email')->unique()->nullable(false)->change();
+            $table->string('email')->nullable(false)->change();
             $table->string('password')->nullable(false)->change();
         });
     }

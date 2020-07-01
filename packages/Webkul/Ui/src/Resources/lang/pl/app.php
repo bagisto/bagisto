@@ -31,7 +31,7 @@ return [
         'true' => 'Prawda / Aktywy',
         'false' => 'Fałsz / Nie aktywny',
         'between' => 'Jest pomiędzy',
-        'apply' => Zastosuj',
+        'apply' => 'Zastosuj',
         'items-per-page' => 'Przedmioty na stronę',
         'value-here' => 'Wartość tutaj',
         'numeric-value-here' => 'wartość liczbowa tutaj',
