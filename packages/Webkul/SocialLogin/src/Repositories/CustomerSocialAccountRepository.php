@@ -5,6 +5,7 @@ namespace Webkul\SocialLogin\Repositories;
 use Illuminate\Container\Container as App;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Customer\Repositories\CustomerGroupRepository;
 
 class CustomerSocialAccountRepository extends Repository
 {
@@ -16,18 +17,29 @@ class CustomerSocialAccountRepository extends Repository
     protected $customerRepository;
 
     /**
+     * CustomerGroupRepository object
+     *
+     * @var \Webkul\Customer\Repositories\CustomerGroupRepository
+     */
+    protected $customerGroupRepository;
+
+    /**
      * Create a new reposotory instance.
      *
-     * @param  \Webkul\Attribute\Repositories\CustomerRepository  $customerRepository
+     * @param  \Webkul\Customer\Repositories\CustomerRepository       $customerRepository
+     * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository
      * @param  \Illuminate\Container\Container  $app
      * @return void
      */
     public function __construct(
         CustomerRepository $customerRepository,
+        CustomerGroupRepository $customerGroupRepository,
         App $app
     )
     {
         $this->customerRepository = $customerRepository;
+
+        $this->customerGroupRepository = $customerGroupRepository;
 
         $this->_config = request('_config');
 
@@ -55,7 +67,7 @@ class CustomerSocialAccountRepository extends Repository
             'provider_name' => $provider,
             'provider_id'   => $providerUser->getId(),
         ]);
-        
+  
         if ($account) {
             return $account->customer;
         } else {
@@ -65,11 +77,12 @@ class CustomerSocialAccountRepository extends Repository
                 $names = $this->getFirstLastName($providerUser->getName());
 
                 $customer = $this->customerRepository->create([
-                    'email'       => $providerUser->getEmail(),
-                    'first_name'  => $names['first_name'],
-                    'last_name'   => $names['last_name'],
-                    'status'      => 1,
-                    'is_verified' => 1,
+                    'email'             => $providerUser->getEmail(),
+                    'first_name'        => $names['first_name'],
+                    'last_name'         => $names['last_name'],
+                    'status'            => 1,
+                    'is_verified'       => core()->getConfigData('customer.settings.email.verification') ? 0 : 1,
+                    'customer_group_id' => $this->customerGroupRepository->findOneWhere(['code' => 'general'])->id
                 ]);
             }
  
