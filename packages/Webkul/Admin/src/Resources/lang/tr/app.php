@@ -1299,6 +1299,7 @@ return [
             'order-number-prefix' => 'Numara Ön Eki',
             'order-number-length' => 'Numara Uzunluğu',
             'order-number-suffix' => 'Numara Son Eki',
+            'order-number-generator-class' => 'Sipariş Numarası Üreticisi',
             'default' => 'Varsayılan',
             'sandbox' => 'Havuz',
             'all-channels' => 'Tümü',

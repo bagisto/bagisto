@@ -1318,6 +1318,7 @@ return array (
                     'order-number-prefix' => 'Auftragsnummer Präfix',
                     'order-number-length' => 'Auftragsnummer Länge',
                     'order-number-suffix' => 'Auftragsnummer Suffix',
+                    'order-number-generator-class' => 'Bestell nummern generator',
                     'default' => 'Standard',
                     'sandbox' => 'Sandbox',
                     'all-channels' => 'Alle',
