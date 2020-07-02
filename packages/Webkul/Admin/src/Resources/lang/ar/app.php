@@ -1304,6 +1304,7 @@ return [
             'order-number-prefix' => 'بادئة رقم الطلب',
             'order-number-length' => 'طول رقم الطلب',
             'order-number-suffix' => 'لاحقة رقم الطلب',
+            'order-number-generator-class' => 'مولد رقم الطلب',
             'default' => 'إفتراضي',
             'sandbox' => 'صندوق الرمل',
             'all-channels' => 'الكل',
