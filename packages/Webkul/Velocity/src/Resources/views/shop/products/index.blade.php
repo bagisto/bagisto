@@ -91,7 +91,7 @@
 
                 @if ($isProductsDisplayMode)
                     <div class="filters-container">
-                        <template v-if="products.length > 0">
+                        <template v-if="products.length >= 0">
                             @include ('shop::products.list.toolbar')
                         </template>
                     </div>
