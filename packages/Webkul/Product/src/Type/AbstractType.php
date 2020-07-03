@@ -542,7 +542,7 @@ abstract class AbstractType
             $this->product->special_price = $customerGroupPrice;
         }
 
-        return true;
+        return $haveSpecialPrice;
     }
 
     /**
