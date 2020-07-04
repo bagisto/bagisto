@@ -3,9 +3,11 @@
 namespace Webkul\Product\Type;
 
 use Webkul\Customer\Contracts\CartItem;
+use Webkul\Product\Datatypes\CartItemValidationResult;
 use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Models\ProductFlat;
 use Illuminate\Support\Str;
+use Webkul\Checkout\Models\CartItem;
 
 class Configurable extends AbstractType
 {
@@ -539,18 +541,28 @@ class Configurable extends AbstractType
     /**
      * Validate cart item product price
      *
-     * @param  \Webkul\Checkout\Contracts\CartItem  $item
+     * @param \Webkul\Product\Type\CartItem $item
+     *
+     * @return \Webkul\Product\Datatypes\CartItemValidationResult
      */
-    public function validateCartItem($item)
+    public function validateCartItem(CartItem $item): CartItemValidationResult
     {
-        if (! $item || ! $item->child) {
-            return;
+        $result = new CartItemValidationResult();
+
+        if ($this->isCartItemInactive($item)) {
+            $result->itemIsInactive();
+
+            return $result;
         }
+
+//        if (! $item || ! $item->child) {
+//            return;
+//        }
 
         $price = $item->child->product->getTypeInstance()->getFinalPrice($item->quantity);
 
         if ($price == $item->base_price) {
-            return;
+            return $result;
         }
 
         $item->base_price = $price;
@@ -560,6 +572,9 @@ class Configurable extends AbstractType
         $item->total = core()->convertPrice($price * $item->quantity);
 
         $item->save();
+        $result->cartIsDirty();
+
+        return $result;
     }
 
     /**

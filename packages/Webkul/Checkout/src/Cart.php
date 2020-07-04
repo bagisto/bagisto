@@ -571,16 +571,14 @@ class Cart
      *
      * @return void
      */
-    public function collectTotals()
+    public function collectTotals(): void
     {
-        $validated = $this->validateItems();
-
-        if (! $validated) {
-            return false;
+        if (! $this->validateItems()) {
+            return;
         }
 
         if (! $cart = $this->getCart()) {
-            return false;
+            return;
         }
 
         Event::dispatch('checkout.cart.collect.totals.before', $cart);
@@ -637,37 +635,42 @@ class Cart
      *
      * @return bool
      */
-    public function validateItems()
+    public function validateItems(): bool
     {
+        $result = false;
+
         if (! $cart = $this->getCart()) {
-            return;
+            return false;
         }
 
         if (count($cart->items) == 0) {
             $this->cartRepository->delete($cart->id);
 
             return false;
-        } else {
-            foreach ($cart->items as $item) {
-                $response = $item->product->getTypeInstance()->validateCartItem($item);
-                // ToDo: refactoring of all validateCartItem functions, at the moment they return nothing
 
-                if ($response) {
-                    return;
-                }
+        }
 
-                $price = ! is_null($item->custom_price) ? $item->custom_price : $item->base_price;
+        foreach ($cart->items as $item) {
+            $validationResult = $item->product->getTypeInstance()->validateCartItem($item);
 
-                $this->cartItemRepository->update([
-                    'price'      => core()->convertPrice($price),
-                    'base_price' => $price,
-                    'total'      => core()->convertPrice($price * $item->quantity),
-                    'base_total' => $price * $item->quantity,
-                ], $item->id);
+            if ($validationResult->isItemInactive()) {
+                $this->removeItem($item->id);
+                session()->flash('info', __('shop::app.checkout.cart.item.inactive'));
             }
 
-            return true;
+            $price = ! is_null($item->custom_price) ? $item->custom_price : $item->base_price;
+
+            $this->cartItemRepository->update([
+                'price'      => core()->convertPrice($price),
+                'base_price' => $price,
+                'total'      => core()->convertPrice($price * $item->quantity),
+                'base_total' => $price * $item->quantity,
+            ], $item->id);
+
+            $result |= $validationResult->isCartDirty();
         }
+
+        return $result;
     }
 
     /**
@@ -1131,15 +1134,7 @@ class Cart
      * @return bool
      */
     private function isCartItemInactive(\Webkul\Checkout\Contracts\CartItem $item): bool {
-        if ($item->product->status === 0) {
-            return true;
-        }
-
-        if ($item->product->type === 'configurable' && $item->child && $item->child->product->status === 0) {
-            return true;
-        }
-
-        return false;
+        return $item->product->getTypeInstance()->isCartItemInactive($item);
     }
 
     /**

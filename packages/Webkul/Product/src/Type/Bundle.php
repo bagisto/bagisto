@@ -3,6 +3,7 @@
 namespace Webkul\Product\Type;
 
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Product\Datatypes\CartItemValidationResult;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
@@ -11,6 +12,7 @@ use Webkul\Product\Repositories\ProductBundleOptionRepository;
 use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
 use Webkul\Product\Helpers\ProductImage;
 use Webkul\Product\Helpers\BundleOption;
+use Webkul\Checkout\Models\CartItem;
 
 class Bundle extends AbstractType
 {
@@ -278,7 +280,7 @@ class Bundle extends AbstractType
                 if (! $bundleOptionProduct->product->getTypeInstance()->isSaleable()) {
                     continue;
                 }
-                
+
                 if (in_array($option->type, ['multiselect', 'checkbox'])) {
                     if (! isset($optionPrices[$option->id][0])) {
                         $optionPrices[$option->id][0] = 0;
@@ -315,7 +317,7 @@ class Bundle extends AbstractType
                 if (! $bundleOptionProduct->product->getTypeInstance()->isSaleable()) {
                     continue;
                 }
-                
+
                 if (in_array($option->type, ['multiselect', 'checkbox'])) {
                     if (! isset($optionPrices[$option->id][0])) {
                         $optionPrices[$option->id][0] = 0;
@@ -634,14 +636,22 @@ class Bundle extends AbstractType
     }
 
     /**
-     * Validate cart item product price
+     * Validate cart item product price and other things
      *
-     * @param  \Webkul\Checkout\Contracts\CartItem  $item
-     * @return void
+     * @param \Webkul\Checkout\Models\CartItem $item
+     *
+     * @return \Webkul\Product\Datatypes\CartItemValidationResult
      */
-    public function validateCartItem($item)
+    public function validateCartItem(CartItem $item): CartItemValidationResult
     {
+        $result = new CartItemValidationResult();
         $price = 0;
+
+        if (parent::isCartItemInactive($item)) {
+            $result->itemIsInactive();
+
+            return $result;
+        }
 
         foreach ($item->children as $childItem) {
             $childItem->product->getTypeInstance()->validateCartItem($childItem);
@@ -650,7 +660,7 @@ class Bundle extends AbstractType
         }
 
         if ($price == $item->base_price) {
-            return;
+            return $result;
         }
 
         $item->base_price = $price;
@@ -662,6 +672,9 @@ class Bundle extends AbstractType
         $item->additional = $this->getAdditionalOptions($item->additional);
 
         $item->save();
+        $result->cartIsDirty();
+
+        return $result;
     }
 
     /**
@@ -674,4 +687,5 @@ class Bundle extends AbstractType
 
         return $options;
     }
+
 }

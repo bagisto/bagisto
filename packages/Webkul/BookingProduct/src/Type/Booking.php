@@ -4,6 +4,7 @@ namespace Webkul\BookingProduct\Type;
 
 use Illuminate\Support\Arr;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Product\Datatypes\CartItemValidationResult;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
@@ -13,6 +14,7 @@ use Webkul\BookingProduct\Repositories\BookingProductRepository;
 use Webkul\BookingProduct\Helpers\Booking as BookingHelper;
 use Webkul\Product\Type\Virtual;
 use Carbon\Carbon;
+use Webkul\Checkout\Models\CartItem;
 
 class Booking extends Virtual
 {
@@ -133,7 +135,7 @@ class Booking extends Virtual
         if (! $bookingProduct) {
             return false;
         }
-        
+
         if (in_array($bookingProduct->type, ['default', 'rental', 'table'])) {
             return true;
         }
@@ -149,7 +151,7 @@ class Booking extends Virtual
     {
         $bookingProduct = $this->getBookingProduct($this->product->id);
 
-        return app($this->bookingHelper->getTypeHepler($bookingProduct->type))->isItemHaveQuantity($cartItem);
+        return app($this->bookingHelper->getTypeHelper($bookingProduct->type))->isItemHaveQuantity($cartItem);
     }
 
     /**
@@ -171,7 +173,7 @@ class Booking extends Virtual
         if ($bookingProduct->type == 'event') {
             if (Carbon::now() > $bookingProduct->available_from && Carbon::now() > $bookingProduct->available_to) {
                 return trans('shop::app.checkout.cart.event.expired');
-            } 
+            }
 
             $filtered = Arr::where($data['booking']['qty'], function ($qty, $key) {
                 return $qty != 0;
@@ -197,14 +199,14 @@ class Booking extends Virtual
                 if (is_string($cartProducts)) {
                     return $cartProducts;
                 }
-                    
+
                 $products = array_merge($products, $cartProducts);
             }
         } else {
             $products = parent::prepareForCart($data);
         }
 
-        $typeHelper = app($this->bookingHelper->getTypeHepler($bookingProduct->type));
+        $typeHelper = app($this->bookingHelper->getTypeHelper($bookingProduct->type));
 
         if (! $typeHelper->isSlotAvailable($products)) {
             return trans('shop::app.checkout.cart.quantity.inventory_warning');
@@ -250,17 +252,26 @@ class Booking extends Virtual
     /**
      * Validate cart item product price
      *
-     * @param  \Webkul\Checkout\Contracts\CartItem  $item
-     * @return float
+     * @param \Webkul\Checkout\Models\CartItem $item
+     *
+     * @return \Webkul\Product\Datatypes\CartItemValidationResult
      */
-    public function validateCartItem($item)
+    public function validateCartItem(CartItem $item): CartItemValidationResult
     {
+        $result = new CartItemValidationResult();
+
+        if (parent::isCartItemInactive($item)) {
+            $result->itemIsInactive();
+
+            return $result;
+        }
+
         $bookingProduct = $this->getBookingProduct($item->product_id);
 
         if (! $bookingProduct) {
-            return;
+            return $result;
         }
 
-        return app($this->bookingHelper->getTypeHepler($bookingProduct->type))->validateCartItem($item);
+        return app($this->bookingHelper->getTypeHelper($bookingProduct->type))->validateCartItem($item);
     }
 }

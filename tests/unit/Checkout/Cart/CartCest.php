@@ -75,6 +75,8 @@ class CartCest
 
         $I->assertFalse(cart()->hasError());
         $I->comment('sP2 is inactive');
+
+        cart()->validateItems();
         $I->assertEquals(3, count(cart()->getCart()->items));
 
         $I->comment('add dP2 to cart');
@@ -106,6 +108,7 @@ class CartCest
             'links'      => $this->downloadableProduct1->downloadable_links->pluck('id')->all(),
         ]);
 
+        cart()->validateItems();
         $I->assertEquals(4, count(cart()->getCart()->items));
 
         $I->comment('deactivate vP2');
@@ -125,6 +128,8 @@ class CartCest
                 $cartItemId => 5
             ],
         ]);
+
+        // now lets check without validating cart before
         $I->assertEquals(3, count(cart()->getCart()->items));
 
         $I->assertEquals(5, cart()->getCart()->items()->find($cartItemId)->quantity);

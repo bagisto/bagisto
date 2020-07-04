@@ -5,6 +5,8 @@ namespace Webkul\BookingProduct\Helpers;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Webkul\Checkout\Facades\Cart;
+use Webkul\Checkout\Models\CartItem;
+use Webkul\Product\Datatypes\CartItemValidationResult;
 
 class RentalSlot extends Booking
 {
@@ -159,7 +161,7 @@ class RentalSlot extends Booking
             return $isExpired;
         } else {
             $currentTime = Carbon::now();
-            
+
             $requestedFromDate = Carbon::createFromTimeString($cartItem['additional']['booking']['date_from'] . " 00:00:00");
 
             $requestedToDate = Carbon::createFromTimeString($cartItem['additional']['booking']['date_to'] . " 23:59:59");
@@ -222,8 +224,16 @@ class RentalSlot extends Booking
      * @param  \Webkul\Checkout\Contracts\CartItem  $item
      * @return void|null
      */
-    public function validateCartItem($item)
+    public function validateCartItem(CartItem $item): CartItemValidationResult
     {
+        $result = new CartItemValidationResult();
+
+        if (parent::isCartItemInactive($item)) {
+            $result->itemIsInactive();
+
+            return $result;
+        }
+
         $price = $item->product->getTypeInstance()->getFinalPrice($item->quantity);
 
         $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $item->product_id);
@@ -234,11 +244,11 @@ class RentalSlot extends Booking
             if (! isset($item->additional['booking']['date_from'])
                 || ! isset($item->additional['booking']['date_to'])
             ) {
-                Cart::removeItem($item->id);
+                $result->itemIsInactive();
 
-                return true;
+                return $result;
             }
-            
+
             $from = Carbon::createFromTimeString($item->additional['booking']['date_from'] . " 00:00:00");
             $to = Carbon::createFromTimeString($item->additional['booking']['date_to'] . " 24:00:00");
 
@@ -247,9 +257,9 @@ class RentalSlot extends Booking
             if (! isset($item->additional['booking']['slot']['from'])
                 || ! isset($item->additional['booking']['slot']['to'])
             ) {
-                Cart::removeItem($item->id);
+                $result->itemIsInactive();
 
-                return true;
+                return $result;
             }
 
             $from = Carbon::createFromTimestamp($item->additional['booking']['slot']['from']);
@@ -259,7 +269,7 @@ class RentalSlot extends Booking
         }
 
         if ($price == $item->base_price) {
-            return;
+            return $result;
         }
 
         $item->base_price = $price;
@@ -269,5 +279,8 @@ class RentalSlot extends Booking
         $item->total = core()->convertPrice($price * $item->quantity);
 
         $item->save();
+        $result->cartIsDirty();
+
+        return $result;
     }
 }
