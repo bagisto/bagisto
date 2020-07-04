@@ -11,6 +11,9 @@ class CartItemValidationResult
     private $itemIsInactive = false;
 
     /**
+     * Function to check if cart is dirty
+     * (price has been changed, product was disabled and so on)
+     *
      * @return bool
      */
     public function isCartDirty(): bool
@@ -19,6 +22,8 @@ class CartItemValidationResult
     }
 
     /**
+     * Function to check if item is inactive
+     *
      * @return bool
      */
     public function isItemInactive(): bool
@@ -26,12 +31,18 @@ class CartItemValidationResult
         return $this->itemIsInactive;
     }
 
+    /**
+     * Function to set if item is inactive
+     */
     public function itemIsInactive(): void
     {
         $this->itemIsInactive = true;
         $this->cartIsDirty = true;
     }
 
+    /**
+     * Function to set if cart is dirty
+     */
     public function cartIsDirty(): void
     {
         $this->cartIsDirty = true;
