@@ -7,7 +7,7 @@ use Webkul\Product\Datatypes\CartItemValidationResult;
 use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Models\ProductFlat;
 use Illuminate\Support\Str;
-use Webkul\Checkout\Models\CartItem;
+use Webkul\Checkout\Models\CartItem as CartItemModel;
 
 class Configurable extends AbstractType
 {
@@ -545,7 +545,7 @@ class Configurable extends AbstractType
      *
      * @return \Webkul\Product\Datatypes\CartItemValidationResult
      */
-    public function validateCartItem(CartItem $item): CartItemValidationResult
+    public function validateCartItem(CartItemModel $item): CartItemValidationResult
     {
         $result = new CartItemValidationResult();
 
