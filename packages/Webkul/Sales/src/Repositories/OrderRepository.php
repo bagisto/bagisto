@@ -65,7 +65,7 @@ class OrderRepository extends Repository
         DB::beginTransaction();
 
         try {
-            Event::dispatch('checkout.order.save.before', $data);
+            Event::dispatch('checkout.order.save.before', [$data]);
 
             if (isset($data['customer']) && $data['customer']) {
                 $data['customer_id'] = $data['customer']->id;
