@@ -741,8 +741,8 @@ class Cart
 
                     if ($haveTaxRate) {
                         $item->tax_percent = $rate->tax_rate;
-                        $item->tax_amount = ($item->total * $rate->tax_rate) / 100;
-                        $item->base_tax_amount = ($item->base_total * $rate->tax_rate) / 100;
+                        $item->tax_amount = round(($item->total * $rate->tax_rate) / 100, 4);
+                        $item->base_tax_amount = round(($item->base_total * $rate->tax_rate) / 100, 4);
 
                         break;
                     }
