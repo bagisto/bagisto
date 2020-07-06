@@ -50,9 +50,6 @@
 
         }
 
-        /*.table-design{
-
-        }*/
         table{
             border-style: solid;
 
@@ -85,7 +82,7 @@
 
             {!! view_render_event('bagisto.shop.customers.account.compare.view.before') !!}
 
-            <table class="compare-products table-design">
+            <table class="compare-products">
                 <template v-if="isProductListLoaded && products.length > 0">
                     @php
                         $comparableAttributes = $comparableAttributes->toArray();
