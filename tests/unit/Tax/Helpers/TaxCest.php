@@ -20,7 +20,7 @@ class TaxCest
 
     public function _before(UnitTester $I)
     {
-        $country = strtoupper(Config::get('app.default_country') ?? 'DE');
+        $country = strtoupper(Config::get('app.default_country')) ?? 'DE';
 
         $tax1 = $I->have(TaxRate::class, [
             'country' => $country,
