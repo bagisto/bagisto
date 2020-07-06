@@ -20,7 +20,7 @@ class TaxCest
 
     public function _before(UnitTester $I)
     {
-        $country = strtoupper(Config::get('app.default_country')) ?? 'DE';
+        $country = strtoupper(Config::get('app.default_country') ?? 'DE');
 
         $tax1 = $I->have(TaxRate::class, [
             'country' => $country,
@@ -104,9 +104,9 @@ class TaxCest
             [$this->scenario['cart'], false]
         );
 
-        foreach ($result as $taxRate => $taxAmount) {
+        foreach ($this->scenario['expectedTaxRates'] as $taxRate => $taxAmount) {
             $I->assertTrue(array_key_exists($taxRate, $result));
-            $I->assertEquals($this->scenario['expectedTaxRates'][$taxRate], $taxAmount);
+            $I->assertEquals($taxAmount, $result[$taxRate]);
         }
     }
 

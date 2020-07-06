@@ -637,8 +637,6 @@ class Cart
      */
     public function validateItems(): bool
     {
-        $result = false;
-
         if (! $cart = $this->getCart()) {
             return false;
         }
@@ -647,9 +645,9 @@ class Cart
             $this->cartRepository->delete($cart->id);
 
             return false;
-
         }
 
+        $isDirty = false;
         foreach ($cart->items as $item) {
             $validationResult = $item->product->getTypeInstance()->validateCartItem($item);
 
@@ -667,10 +665,10 @@ class Cart
                 'base_total' => $price * $item->quantity,
             ], $item->id);
 
-            $result |= $validationResult->isCartDirty();
+            $isDirty |= $validationResult->isCartDirty();
         }
 
-        return $result;
+        return !$isDirty;
     }
 
     /**
