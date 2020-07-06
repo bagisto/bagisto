@@ -555,10 +555,6 @@ class Configurable extends AbstractType
             return $result;
         }
 
-//        if (! $item || ! $item->child) {
-//            return;
-//        }
-
         $price = $item->child->product->getTypeInstance()->getFinalPrice($item->quantity);
 
         if ($price == $item->base_price) {
