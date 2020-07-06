@@ -28,7 +28,7 @@
         }
 
         .icon.remove-product {
-            top: 15px;
+            top: 5px;
             float: right;
             cursor: pointer;
             position: relative;
@@ -37,6 +37,19 @@
 
         .action > div {
             display: inline-block;
+        }
+        .cart-wish-wrap .btn.btn-lg {
+            padding: 5px 10px;
+        }
+        .cart-wish-wrap {
+            display: flex;
+        }
+        .white-cross-sm-icon {
+            width: 24px;
+            height:24px;
+        }
+        .add-to-wishlist {
+            margin-left: 15px;
         }
     </style>
 @endpush
