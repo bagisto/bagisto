@@ -18,6 +18,10 @@
             display: inline-block;
         }
 
+        .cart-wish-wrap{
+            position: relative;
+        }
+
         td {
             padding: 15px;
             min-width: 250px;
@@ -38,6 +42,30 @@
         .action > div {
             display: inline-block;
         }
+
+        .wishlist-icon {
+            margin-left: 183px;
+            position: absolute;
+            margin-top: -39px;
+
+        }
+
+        /*.table-design{
+
+        }*/
+        table{
+            border-style: solid;
+
+        }
+
+        td{
+            vertical-align: top;
+            padding: 5px 20px;
+        }
+       
+        tr:nth-child(odd){
+            background: #f2f2f2;
+        }
     </style>
 @endpush
 
@@ -57,7 +85,7 @@
 
             {!! view_render_event('bagisto.shop.customers.account.compare.view.before') !!}
 
-            <table class="compare-products">
+            <table class="compare-products table-design">
                 <template v-if="isProductListLoaded && products.length > 0">
                     @php
                         $comparableAttributes = $comparableAttributes->toArray();
