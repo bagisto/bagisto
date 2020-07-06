@@ -387,6 +387,7 @@ class Helper extends Review
                     $productMetaDetails['slug'] = $product->url_key;
                     $productMetaDetails['image'] = $formattedProduct['image'];
                     $productMetaDetails['priceHTML'] = $formattedProduct['priceHTML'];
+                    $productMetaDetails['new'] = $formattedProduct['new'];
                     $productMetaDetails['addToCartHtml'] = $formattedProduct['addToCartHtml'];
                     $productMetaDetails['galleryImages'] = $formattedProduct['galleryImages'];
                     $productMetaDetails['defaultAddToCart'] = $formattedProduct['defaultAddToCart'];
@@ -397,7 +398,7 @@ class Helper extends Review
                 }
             }
         }
-
+    
         return $productCollection;
     }
 }
