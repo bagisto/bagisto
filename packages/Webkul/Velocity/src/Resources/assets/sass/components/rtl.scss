@@ -40,6 +40,18 @@ body {
                     float: right;
                 }
             }
+
+            .mini-cart-container {
+                ~ .compare-btn,
+                ~ .wishlist-btn {
+                    .badge-container {
+                        .badge {
+                            top: -28px;
+                            left: -2px;
+                        }
+                    }   
+                }
+            }
         }
 
         .main-content-wrapper {
