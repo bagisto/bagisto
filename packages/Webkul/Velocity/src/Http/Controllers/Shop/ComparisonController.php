@@ -17,7 +17,7 @@ class ComparisonController extends Controller
     {
         if (request()->get('data')) {
             $productSlugs = null;
-            
+
             $productCollection = [];
 
             if (auth()->guard('customer')->user()) {
@@ -69,6 +69,18 @@ class ComparisonController extends Controller
 
         $customerId = auth()->guard('customer')->user()->id;
 
+        $productFlatRepository = app('\Webkul\Product\Models\ProductFlat');
+
+        $productFlat = $productFlatRepository
+            ->where('product_id', $productId)
+            ->orWhere('parent_id', $productId)
+            ->get()
+            ->first();
+
+        if ($productFlat) {
+            $productId = $productFlat->id;
+        }
+
         $compareProduct = $this->compareProductsRepository->findOneByField([
             'customer_id'     => $customerId,
             'product_flat_id' => $productId,
@@ -77,22 +89,10 @@ class ComparisonController extends Controller
         if (! $compareProduct) {
             // insert new row
 
-            $productFlatRepository = app('\Webkul\Product\Models\ProductFlat');
-
-            $productFlat = $productFlatRepository
-                            ->where('product_id', $productId)
-                            ->orWhere('parent_id', $productId)
-                            ->get()
-                            ->first();
-
-            if ($productFlat) {
-                $productId = $productFlat->id;
-                
-                $this->compareProductsRepository->create([
-                    'customer_id'     => $customerId,
-                    'product_flat_id' => $productId,
-                ]);
-            }
+            $this->compareProductsRepository->create([
+                'customer_id'     => $customerId,
+                'product_flat_id' => $productId,
+            ]);
 
             return response()->json([
                 'status'  => 'success',
