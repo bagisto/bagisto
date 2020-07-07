@@ -174,3 +174,16 @@
         margin-top: 30px;
     }
 }
+
+.rtl {
+    .dashboard {
+        .page-header {
+            .control-group {
+                &.date::after {
+                    margin-top: -13px !important;
+                    right: 100%;
+                }
+            }
+        }
+    }
+}

@@ -418,6 +418,8 @@ return [
         'total-amount' => 'المبلغ الإجمالي',
         'none' => 'لا شيء',
         'available-for-order' => 'متوفر لطلب الشراء',
+        'settings' => 'Settings',
+        'compare_options' => 'Compare Options',
     ],
 
     // 'reviews' => [

@@ -265,6 +265,7 @@ return [
             'update' => 'Bijwerken',
             'reviews' => 'Reviews',
             'addresses' => 'Adressen',
+            'currencies' => 'Currencies',
             'top-brands' => 'Top merken',
             'new-password' => 'Nieuw wachtwoord',
             'downloadables' => 'Downloadable Products',

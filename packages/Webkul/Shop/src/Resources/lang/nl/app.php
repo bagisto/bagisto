@@ -421,7 +421,9 @@ return [
         'your-customization' => 'Uw maatwerk',
         'total-amount' => 'Totale hoeveelheid',
         'none' => 'Geen',
-        'available-for-order' => 'Beschikbaar voor bestelling'
+        'available-for-order' => 'Beschikbaar voor bestelling',
+        'settings' => 'Settings',
+        'compare_options' => 'Compare Options',
     ],
 
     // 'reviews' => [

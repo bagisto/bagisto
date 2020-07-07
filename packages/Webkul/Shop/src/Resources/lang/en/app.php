@@ -191,7 +191,7 @@ return [
 
                 'edit-profile' => [
                     'title' => 'Edit Profile',
-                    'page-title' => 'Edit Profile Form'
+                    'page-title' => 'Edit Profile'
                 ]
             ],
 
@@ -213,7 +213,7 @@ return [
                 ],
 
                 'create' => [
-                    'page-title' => 'Add Address Form',
+                    'page-title' => 'Add Address',
                     'company_name' => 'Company name',
                     'first_name' => 'First name',
                     'last_name' => 'Last name',
@@ -417,7 +417,9 @@ return [
         'your-customization' => 'Your Customization',
         'total-amount' => 'Total Amount',
         'none' => 'None',
-        'available-for-order' => 'Available for Order'
+        'available-for-order' => 'Available for Order',
+        'settings' => 'Settings',
+        'compare_options' => 'Compare Options',
     ],
 
     // 'reviews' => [

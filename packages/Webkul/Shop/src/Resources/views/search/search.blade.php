@@ -79,9 +79,9 @@
             },
 
             created: function() {
-                this.searched_terms = localStorage.searched_terms.split('_');
-
-                console.log(this.searched_terms)
+                if (localStorage.searched_terms && localStorage.searched_terms != '') {
+                    this.searched_terms = localStorage.searched_terms.split('_');
+                }
             }
         });
     </script>

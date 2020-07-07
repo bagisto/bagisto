@@ -5,7 +5,13 @@
         $searchQuery = implode('&', array_map(
             function ($v, $k) {
                 if (is_array($v)) {
-                    return $k. '[]=' . implode('&' . $k . '[]=', $v);
+                    if (is_array($v)) {
+                        $key = array_keys($v)[0];
+
+                        return $k. "[$key]=" . implode('&' . $k . '[]=', $v);
+                    } else {
+                        return $k. '[]=' . implode('&' . $k . '[]=', $v);
+                    }
                 } else {
                     return $k . '=' . $v;
                 }

@@ -416,7 +416,9 @@ return [
         'your-customization' => 'La tua Personalizzazione',
         'total-amount' => 'Totale',
         'none' => 'Nessuno',
-        'available-for-order' => 'Disponibile per lordine'
+        'available-for-order' => 'Disponibile per lordine',
+        'settings' => 'Settings',
+        'compare_options' => 'Compare Options',
     ],
 
     // 'reviews' => [

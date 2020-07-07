@@ -265,6 +265,7 @@ return [
             'update' => 'به روز رسانی',
             'reviews' => 'بررسی ها',
             'addresses' => 'آدرس ها',
+            'currencies' => 'Currencies',
             'top-brands' => 'برندهای برتر',
             'new-password' => 'رمز عبور جدید',
             'downloadables' => 'محصولات دانلودی',

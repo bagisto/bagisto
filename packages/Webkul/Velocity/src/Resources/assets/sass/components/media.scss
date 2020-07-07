@@ -126,7 +126,7 @@
                     .badge-wrapper,
                     .badge-container {
                         top: -2px;
-                        left: -7px;
+                        left: -12px;
                         position: relative;
 
                         .badge {
@@ -938,5 +938,18 @@
     .compare-icon,
     .wishlist-icon {
         margin-left: 0;
+    }
+
+    .image-search-result {
+        .searched-terms {
+            margin-left: 0;
+            margin-top: 20px;
+
+            .term-list {
+                a {
+                    line-height: 40px;
+                }
+            }
+        }
     }
 }

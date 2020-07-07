@@ -1310,6 +1310,7 @@ return [
             'order-number-prefix' => 'پیش شماره شماره سفارش',
             'order-number-length' => 'طول شماره سفارش',
             'order-number-suffix' => 'تعداد کافی شماره سفارش',
+            'order-number-generator-class' => 'تولید کننده شماره سفارش',
             'default' => 'پیش فرض',
             'sandbox' => 'Sandbox',
             'all-channels' => 'همه',

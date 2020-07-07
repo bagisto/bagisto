@@ -47,24 +47,6 @@
             .control-group {
                 margin-right: 20px;
                 margin-left: 0px;
-                
-                &.has-error.date, &.has-error.date {
-                    &::after {
-                        margin-top: -12px;
-                    }
-                }
-            }
-
-            .control-group.date {
-                &::after {
-                    margin-top: 6px;
-                    position: absolute;
-                    margin-right: -35px;
-                }
-
-                &:last-child {
-                    margin-left: 0px;
-                }
             }
         }
 
@@ -120,56 +102,6 @@
         float: left;
     }
 
-    // ui
-    .grid-container {
-        .filter-row-one .search-filter {
-            border: 2px solid #c7c7c7;
-            border-radius: 2px;
-
-            .control {
-                border: none;
-                padding-right: 10px;
-            }
-
-            .icon-wrapper {
-                border: none;
-                padding-top: 2px;
-                padding-right: 5px;
-                border-right: 2px solid #c7c7c7;
-                border-radius: 0px;
-            }
-        }
-
-        .filter-row-two .filter-tag {
-            .wrapper,
-            .icon.cross-icon {
-                margin-right: 10px;
-                margin-left: 0px;
-            }
-        }
-
-        .filter-row-one .dropdown-filters {
-            right: unset;
-            position: static !important;
-            left: 25px;
-
-            .per-page-label {
-                position: static !important;
-            }
-        }
-    }
-
-    .grid-container
-        .filter-wrapper
-        .filter-row-one
-        .dropdown-filters
-        .more-filters
-        .dropdown-toggle
-        .dropdown-header
-        span {
-        padding-right: 5px;
-    }
-
     .grid-container .table tbody td.action a:first-child {
         margin-left: 10px;
         margin-right: 0px;
@@ -190,7 +122,7 @@
 
     .dropdown-list.bottom-right {
         left: 0px;
-        right: auto;
+        right: auto !important;
     }
 
     .dropdown-list .dropdown-container {
@@ -242,21 +174,7 @@
         float: left;
     }
 
-    .control-group.date {
-        &::after {
-            position: absolute;
-            right: calc(70% - 40px);
-        }
-    }
-
     .pagination .page-item .icon {
         transform: rotate(180deg);
-    }
-
-    .slot-list {
-        .control-group.date::after {
-            top: 18px;
-            right: calc(100% - 40px);
-        }
     }
 }
