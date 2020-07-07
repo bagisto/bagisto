@@ -526,7 +526,7 @@ return [
 
         'total' => [
             'order-summary' => 'Podsumowanie zamówienia',
-            'sub-total' => 'Produkty,
+            'sub-total' => 'Produkty',
             'grand-total' => 'Suma łączna',
             'delivery-charges' => 'Koszty dostawy',
             'tax' => 'Podatek',
@@ -592,7 +592,7 @@ return [
                 'discount' => 'Rabat',
                 'grand-total' => 'Suma łączna',
                 'final-summary' => 'Dziękujemy za zakupy w naszym sklepie',
-                'help' => ''Jeśli potrzebujesz jakiejkolwiek pomocy, skontaktuj się z nami pod adresem :support_email',
+                'help' => 'Jeśli potrzebujesz jakiejkolwiek pomocy, skontaktuj się z nami pod adresem :support_email',
                 'thanks' => 'Dzięki!',
             ]
         ],
