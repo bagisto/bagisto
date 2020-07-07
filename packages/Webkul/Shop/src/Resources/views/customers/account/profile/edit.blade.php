@@ -87,7 +87,7 @@
                     <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
                         <label for="password">{{ __('shop::app.customer.account.profile.password') }}</label>
 
-                        <input type="password" id="password" class="control" name="password" data-vv-as="&quot;{{ __('shop::app.customer.account.profile.password') }}&quot;" v-validate="'min:6'" ref="password">
+                        <input type="password" id="password" class="control" name="password" ref="password" data-vv-as="&quot;{{ __('shop::app.customer.account.profile.password') }}&quot;" v-validate="'min:6'">
                         <span class="control-error" v-if="errors.has('password')">@{{ errors.first('password') }}</span>
                     </div>
 
