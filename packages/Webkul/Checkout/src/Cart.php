@@ -653,6 +653,7 @@ class Cart
 
             if ($validationResult->isItemInactive()) {
                 $this->removeItem($item->id);
+                $isDirty = true;
                 session()->flash('info', __('shop::app.checkout.cart.item.inactive'));
             }
 
@@ -668,7 +669,7 @@ class Cart
             $isDirty |= $validationResult->isCartDirty();
         }
 
-        return !$isDirty;
+        return ! $isDirty;
     }
 
     /**
