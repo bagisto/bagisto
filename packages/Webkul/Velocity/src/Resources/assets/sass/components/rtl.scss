@@ -40,6 +40,20 @@ body {
                     float: right;
                 }
             }
+
+            .mini-cart-container {
+                #mini-cart {
+                    .badge {
+                        top: -6px;
+                        left: 90%;
+                    }
+    
+                    .cart-text {
+                        left: 24px;
+                        vertical-align: top;
+                    }
+                }
+            }
         }
 
         .main-content-wrapper {
@@ -167,6 +181,10 @@ body {
                 .rango-close {
                     left: unset;
                     right: -10px;
+                }
+
+                .card-total-price {
+                    float: left;
                 }
             }
         }

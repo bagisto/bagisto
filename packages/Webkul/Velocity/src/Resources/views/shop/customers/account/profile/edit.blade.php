@@ -155,6 +155,7 @@
                         <input
                             value=""
                             name="password"
+                            ref="password"
                             type="password"
                             v-validate="'min:6|max:18'" />
 
