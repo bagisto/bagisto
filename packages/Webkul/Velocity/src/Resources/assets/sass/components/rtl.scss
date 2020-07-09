@@ -53,6 +53,14 @@ body {
                         vertical-align: top;
                     }
                 }
+
+                ~ .wishlist-btn , ~ .compare-btn {
+                    .badge-container {
+                        .badge {
+                            left: 20px;
+                        }
+                    }
+                }
             }
         }
 
