@@ -138,14 +138,14 @@
 
                                         {!! view_render_event('sales.order.customer_email.after', ['order' => $order]) !!}
 
-                                        @if (! is_null($order->customer))
+                                        @if (! is_null($order->customer) && ! is_null($order->customer->group))
                                             <div class="row">
                                                 <span class="title">
                                                     {{ __('admin::app.customers.customers.customer_group') }}
                                                 </span>
 
                                                 <span class="value">
-                                                    {{ $order->customer->group['name'] }}
+                                                    {{ $order->customer->group->name }}
                                                 </span>
                                             </div>
                                         @endif
