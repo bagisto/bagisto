@@ -3,57 +3,6 @@
     $comparableAttributes = $attributeRepository->findByField('is_comparable', 1);
 @endphp
 
-@push('css')
-    <style>
-        body {
-            overflow-x: hidden;
-        }
-
-        .comparison-component {
-            width: 100%;
-            padding-top: 20px;
-        }
-
-        .comparison-component > h1 {
-            display: inline-block;
-        }
-
-        td {
-            padding: 15px;
-            min-width: 250px;
-            max-width: 250px;
-            line-height: 30px;
-            vertical-align: top;
-            word-break: break-word;
-        }
-
-        .icon.remove-product {
-            top: 5px;
-            float: right;
-            cursor: pointer;
-            position: relative;
-            background-color: black;
-        }
-
-        .action > div {
-            display: inline-block;
-        }
-        .cart-wish-wrap .btn.btn-lg {
-            padding: 5px 10px;
-        }
-        .cart-wish-wrap {
-            display: flex;
-        }
-        .white-cross-sm-icon {
-            width: 24px;
-            height:24px;
-        }
-        .add-to-wishlist {
-            margin-left: 15px;
-        }
-    </style>
-@endpush
-
 @push('scripts')
     <script type="text/x-template" id="compare-product-template">
         <section class="comparison-component">
