@@ -569,7 +569,7 @@
                     //make the filter array from url after being redirected
                     arrayFromUrl: function() {
                         var obj = {};
-                        processedUrl = this.url.search.slice(1, this.url.length);
+                        processedUrl = decodeURI(this.url.search.slice(1, this.url.length));
                         splitted = [];
                         moreSplitted = [];
 
