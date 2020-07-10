@@ -562,8 +562,6 @@ class CartRule
     }
 
     /**
-     * hb fallback
-     *
      * @param $customerGroupId
      * @param $channelId
      *
