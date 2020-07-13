@@ -10,6 +10,7 @@
         <div class="sign-up-text">
             {{ __('shop::app.customer.login-text.no_account') }} - <a href="{{ route('customer.register.index') }}">{{ __('shop::app.customer.login-text.title') }}</a>
         </div>
+        
 
         {!! view_render_event('bagisto.shop.customers.login.before') !!}
 

@@ -27,7 +27,7 @@
                 @endif
                 <div class="horizontal-rule"></div>
             </div>
-
+            
             {!! view_render_event('bagisto.shop.customers.account.address.list.before', ['addresses' => $addresses]) !!}
 
             <div class="account-table-content">
