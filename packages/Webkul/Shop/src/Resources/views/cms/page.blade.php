@@ -10,7 +10,7 @@
     <meta name="description" content="{{ $page->meta_description }}" />
 
     <meta name="keywords" content="{{ $page->meta_keywords }}" />
-    <h1>Hello</h1>
+   
 @endsection
 
 @section('content-wrapper')
