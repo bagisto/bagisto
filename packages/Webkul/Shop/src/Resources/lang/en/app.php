@@ -201,7 +201,7 @@ return [
                     'title' => 'Address',
                     'add' => 'Add Address',
                     'edit' => 'Edit',
-                    'empty' => 'You do not have any saved addresses here, please try to create it by clicking the link below',
+                    'empty' => 'You do not have any saved addresses here, please try to create it by clicking the add button.',
                     'create' => 'Create Address',
                     'delete' => 'Delete',
                     'make-default' => 'Make Default',
