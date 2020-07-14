@@ -269,7 +269,7 @@
                         <div class="wrapper" v-else-if="currencies">
                             <div class="drawer-section">
                                 <i class="rango-arrow-left fs24 text-down-4" @click="toggleMetaInfo('currencies')"></i>
-                                <h4 class="display-inbl">Currencies</h4>
+                                <h4 class="display-inbl">{{ __('velocity::app.shop.general.currencies') }}</h4>
                                 <i class="material-icons pull-right text-dark" @click="closeDrawer()">cancel</i>
                             </div>
 
@@ -285,7 +285,7 @@
                                         @else
                                             <a
                                                 class="unset"
-                                                href="?locale={{ $currency->code }}">
+                                                href="?currency={{ $currency->code }}">
                                                 <span>{{ $currency->code }}</span>
                                             </a>
                                         @endif

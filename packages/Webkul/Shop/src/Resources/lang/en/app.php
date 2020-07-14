@@ -191,7 +191,7 @@ return [
 
                 'edit-profile' => [
                     'title' => 'Edit Profile',
-                    'page-title' => 'Edit Profile Form'
+                    'page-title' => 'Edit Profile'
                 ]
             ],
 
@@ -201,7 +201,7 @@ return [
                     'title' => 'Address',
                     'add' => 'Add Address',
                     'edit' => 'Edit',
-                    'empty' => 'You do not have any saved addresses here, please try to create it by clicking the link below',
+                    'empty' => 'You do not have any saved addresses here, please try to create it by clicking the add button.',
                     'create' => 'Create Address',
                     'delete' => 'Delete',
                     'make-default' => 'Make Default',
@@ -213,7 +213,7 @@ return [
                 ],
 
                 'create' => [
-                    'page-title' => 'Add Address Form',
+                    'page-title' => 'Add Address',
                     'company_name' => 'Company name',
                     'first_name' => 'First name',
                     'last_name' => 'Last name',

@@ -110,7 +110,7 @@
                                 type="search"
                                 class="form-control"
                                 placeholder="{{ __('velocity::app.header.search-text') }}"
-                                :value="unescape(searchedQuery.term) ? unescape(searchedQuery.term.split('+').join(' ')) : ''" />
+                                :value="searchedQuery.term ? searchedQuery.term.split('+').join(' ') : ''" />
 
                             <image-search-component></image-search-component>
 
@@ -361,59 +361,86 @@
 
             methods: {
                 uploadImage: function() {
-                    this.$root.showLoader();
-                    var formData = new FormData();
+                    var imageInput = this.$refs.image_search_input;
 
-                    formData.append('image', this.$refs.image_search_input.files[0]);
+                    if (imageInput.files && imageInput.files[0]) {
+                        if (imageInput.files[0].type.includes('image/')) {
+                            this.$root.showLoader();
 
-                    axios.post(
-                        "{{ route('shop.image.search.upload') }}",
-                        formData,
-                        {
-                            headers: {
-                                'Content-Type': 'multipart/form-data'
-                            }
-                        }
-                    ).then(response => {
-                        var net;
-                        var self = this;
-                        this.uploadedImageUrl = response.data;
+                            var formData = new FormData();
 
+                            formData.append('image', imageInput.files[0]);
 
-                        async function app() {
-                            var analysedResult = [];
-
-                            var queryString = '';
-
-                            net = await mobilenet.load();
-
-                            const imgElement = document.getElementById('uploaded-image-url');
-
-                            const result = await net.classify(imgElement);
-
-                            result.forEach(function(value) {
-                                queryString = value.className.split(',');
-
-                                if (queryString.length > 1) {
-                                    analysedResult = analysedResult.concat(queryString)
-                                } else {
-                                    analysedResult.push(queryString[0])
+                            axios.post(
+                                "{{ route('shop.image.search.upload') }}",
+                                formData,
+                                {
+                                    headers: {
+                                        'Content-Type': 'multipart/form-data'
+                                    }
                                 }
-                            })
+                            ).then(response => {
+                                var net;
+                                var self = this;
+                                this.uploadedImageUrl = response.data;
 
-                            localStorage.searchedImageUrl = self.uploadedImageUrl;
 
-                            queryString = localStorage.searched_terms = analysedResult.join('_');
-                            
-                            self.$root.hideLoader();
+                                async function app() {
+                                    var analysedResult = [];
 
-                            window.location.href = "{{ route('shop.search.index') }}" + '?term=' + queryString + '&image-search=1';
+                                    var queryString = '';
+
+                                    net = await mobilenet.load();
+
+                                    const imgElement = document.getElementById('uploaded-image-url');
+
+                                    try {
+                                        const result = await net.classify(imgElement);
+
+                                        result.forEach(function(value) {
+                                            queryString = value.className.split(',');
+
+                                            if (queryString.length > 1) {
+                                                analysedResult = analysedResult.concat(queryString)
+                                            } else {
+                                                analysedResult.push(queryString[0])
+                                            }
+                                        });
+                                    } catch (error) {
+                                        self.$root.hideLoader();
+
+                                        window.showAlert(
+                                            `alert-danger`,
+                                            this.__('shop.general.alert.error'),
+                                            "{{ __('shop::app.common.error') }}"
+                                        );
+                                    }
+
+                                    localStorage.searchedImageUrl = self.uploadedImageUrl;
+
+                                    queryString = localStorage.searched_terms = analysedResult.join('_');
+
+                                    self.$root.hideLoader();
+
+                                    window.location.href = "{{ route('shop.search.index') }}" + '?term=' + queryString + '&image-search=1';
+                                }
+
+                                app();
+                            }).catch(() => {
+                                this.$root.hideLoader();
+
+                                window.showAlert(
+                                    `alert-danger`,
+                                    this.__('shop.general.alert.error'),
+                                    "{{ __('shop::app.common.error') }}"
+                                );
+                            });
+                        } else {
+                            imageInput.value = '';
+
+                            alert('Only images (.jpeg, .jpg, .png, ..) are allowed.');
                         }
-
-                        app();
-                    }).catch(() => {
-                        this.$root.hideLoader();
-                    });
+                    }
                 }
             }
         });

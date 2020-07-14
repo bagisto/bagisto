@@ -1309,6 +1309,7 @@ return [
             'order-number-prefix' => 'Order Number Prefix',
             'order-number-length' => 'Order Number Length',
             'order-number-suffix' => 'Order Number Suffix',
+            'order-number-generator-class' => 'Order Number Generator',
             'default' => 'Default',
             'sandbox' => 'Sandbox',
             'all-channels' => 'All Channels',

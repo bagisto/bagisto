@@ -1310,6 +1310,7 @@ return [
             'order-number-prefix' => 'Bestelnummer prefix',
             'order-number-length' => 'Bestelnummer Lengte',
             'order-number-suffix' => 'Achtervoegsel bestelnummer',
+            'order-number-generator-class' => 'Ordernummer Generator',
             'default' => 'Standaard',
             'sandbox' => 'Sandbox',
             'all-channels' => 'Alles',

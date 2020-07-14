@@ -17,7 +17,9 @@
         "ext-pdo": "*",
         "ext-pdo_mysql": "*",
         "ext-tokenizer": "*",
+        "algolia/algoliasearch-client-php": "^2.2",
         "astrotomic/laravel-translatable": "^11.0.0",
+        "babenkoivan/elastic-scout-driver": "^1.1",
         "barryvdh/laravel-debugbar": "^3.1",
         "barryvdh/laravel-dompdf": "0.8.6",
         "doctrine/dbal": "2.9.2",
@@ -30,6 +32,8 @@
         "kalnoy/nestedset": "5.0.1",
         "konekt/concord": "^1.2",
         "laravel/framework": "^7.0",
+        "laravel/scout": "^8.0",
+        "laravel/socialite": "^4.4",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "maatwebsite/excel": "3.1.19",
@@ -103,7 +107,8 @@
         "Webkul\\Rule\\": "packages/Webkul/Rule/src",
         "Webkul\\CMS\\": "packages/Webkul/CMS/src",
         "Webkul\\Velocity\\": "packages/Webkul/Velocity/src",
-        "Webkul\\BookingProduct\\": "packages/Webkul/BookingProduct/src"
+        "Webkul\\BookingProduct\\": "packages/Webkul/BookingProduct/src",
+        "Webkul\\SocialLogin\\": "packages/Webkul/SocialLogin/src"
       }
     },
 

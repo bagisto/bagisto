@@ -4,12 +4,18 @@
 @extends('shop::layouts.master')
 
 @section('page_title')
-    {{ $category->meta_title ?? $category->name }}
+    {{ trim($category->meta_title) != "" ? $category->meta_title : $category->name }}
 @stop
 
 @section('seo')
     <meta name="description" content="{{ $category->meta_description }}" />
     <meta name="keywords" content="{{ $category->meta_keywords }}" />
+
+    @if (core()->getConfigData('catalog.rich_snippets.categories.enable'))
+        <script type="application/ld+json">
+            {!! app('Webkul\Product\Helpers\SEO')->getCategoryJsonLd($category) !!}
+        </script>
+    @endif
 @stop
 
 @push('css')
@@ -28,10 +34,18 @@
 @endpush
 
 @php
-    $isDisplayMode = in_array(
+    $isProductsDisplayMode = in_array(
         $category->display_mode, [
             null,
             'products_only',
+            'products_and_description'
+        ]
+    );
+
+    $isDescriptionDisplayMode = in_array(
+        $category->display_mode, [
+            null,
+            'description_only',
             'products_and_description'
         ]
     );
@@ -57,14 +71,12 @@
                     <div class="pl0 col-12">
                         <h1 class="fw6 mb10">{{ $category->name }}</h1>
     
-                        @if ($isDisplayMode)
-                            <template v-if="products.length > 0">
-                                @if ($category->description)
-                                    <div class="category-description">
-                                        {!! $category->description !!}
-                                    </div>
-                                @endif
-                            </template>
+                        @if ($isDescriptionDisplayMode)
+                            @if ($category->description)
+                                <div class="category-description">
+                                    {!! $category->description !!}
+                                </div>
+                            @endif
                         @endif
                     </div>
     
@@ -76,18 +88,20 @@
                         </div>
                     </div>
                 </div>
-    
-                <div class="filters-container">
-                    @include ('shop::products.list.toolbar')
-                </div>
-    
-                <div
-                    class="category-block"
-                    @if ($category->display_mode == 'description_only')
-                        style="width: 100%"
-                    @endif>
 
-                    @if ($isDisplayMode)
+                @if ($isProductsDisplayMode)
+                    <div class="filters-container">
+                        <template v-if="products.length >= 0">
+                            @include ('shop::products.list.toolbar')
+                        </template>
+                    </div>
+        
+                    <div
+                        class="category-block"
+                        @if ($category->display_mode == 'description_only')
+                            style="width: 100%"
+                        @endif>
+
                         <shimmer-component v-if="isLoading && !isMobile()" shimmer-count="4"></shimmer-component>
 
                         <template v-else-if="products.length > 0">
@@ -109,22 +123,22 @@
                                     </product-card>
                                 </div>
                             @endif
-    
+
                             {!! view_render_event('bagisto.shop.productOrCategory.index.pagination.before', ['category' => $category]) !!}
-    
+
                             <div class="bottom-toolbar">
                                 {{ $products->appends(request()->input())->links() }}
                             </div>
-    
+
                             {!! view_render_event('bagisto.shop.productOrCategory.index.pagination.after', ['category' => $category]) !!}
                         </template>
-    
+
                         <div class="product-list empty" v-else>
                             <h2>{{ __('shop::app.products.whoops') }}</h2>
                             <p>{{ __('shop::app.products.empty') }}</p>
                         </div>
-                    @endif
-                </div>
+                    </div>
+                @endif
             </div>
     
             {!! view_render_event('bagisto.shop.productOrCategory.index.after', ['category' => $category]) !!}

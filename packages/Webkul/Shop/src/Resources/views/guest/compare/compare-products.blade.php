@@ -218,8 +218,6 @@
                             } else {
                                 this.$set(this, 'products', this.products.filter(product => product.id != productId));
                             }
-
-                            // window.showAlert(`alert-${response.data.status}`, response.data.label, response.data.message);
                         })
                         .catch(error => {
                             console.log("{{ __('velocity::app.error.something_went_wrong') }}");
@@ -236,12 +234,6 @@
                         }
 
                         this.setStorageValue('compared_product', updatedItems);
-
-                        // window.showAlert(
-                        //     `alert-success`,
-                        //     "{{ __('velocity::app.shop.general.alert.success') }}",
-                        //     `${this.__('customer.compare.removed')}`
-                        // );
                     }
                 },
 

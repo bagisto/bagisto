@@ -31,6 +31,7 @@
         > div {
             &.row {
                 padding-bottom: 30px;
+                display: inline-block;
             }
         }
     }
@@ -281,10 +282,8 @@
         }
     }
 
-    .product-price {
-        .sticker {
-            display: block;
-        }
+    .sticker {
+        display: block;
     }
 
     .card-body {
@@ -368,10 +367,8 @@
         display: block;
     }
 
-    .product-price {
-        .sticker {
-            display: none;
-        }
+    .sticker {
+        display: none;
     }
 }
 
@@ -920,7 +917,10 @@
             }
 
             #datagrid-filters {
+                width: 100%;
                 margin-bottom: 20px;
+                display: inline-flex;
+                justify-content: space-between;
 
                 > * {
                     display: inline-block;
@@ -952,12 +952,9 @@
                     }
                 }
 
-                .filter-tag {
-                    font-size: 18px;
-                    font-weight: 600;
-                }
-
                 .dropdown-filters {
+                    font-size: 16px;
+
                     .grid-dropdown-header {
                         display: inline-block;
                     }
@@ -1045,10 +1042,29 @@
                         }
                     }
                 }
+
+                .filter-left {
+                    @extend .pull-left;
+                }
+
+                .filter-right {
+                    top: -25px;
+                    width: 70%;
+                    float: right;
+                    position: relative;
+
+                    .per-page {
+                        right: 0;
+                        position: absolute;
+                    }
+                }
             }
 
-            .filter-row-two {
+            .filtered-tags {
                 .filter-tag {
+                    font-size: 16px;
+                    margin-right: 20px;
+
                     .cross-icon {
                         @extend .rango-default;
 
@@ -1062,6 +1078,14 @@
                         &:hover {
                             cursor: pointer;
                         }
+                    }
+
+                    .wrapper {
+                        color: #000311;
+                        margin-left: 10px;
+                        padding: 5px 10px;
+                        background: #e7e7e7;
+                        letter-spacing: -.22px;
                     }
                 }
             }
@@ -1626,23 +1650,6 @@
         margin-right: 6px;
     }
 
-    .sticker {
-        top: 8px;
-        left: 8px;
-        border: none;
-        color: white;
-        display: none;
-        font-size: 14px;
-        font-weight: 600;
-        padding: 2px 10px;
-        position: absolute;
-        border-radius: 12px;
-
-        &.sale {
-            background-color: $theme-color;
-        }
-    }
-
     .regular-price {
         font-weight: 500;
         margin-right: 10px;
@@ -1657,6 +1664,28 @@
         &.final-price {
             font-size: 24px;
         }
+    }
+}
+
+.sticker {
+    top: 8px;
+    left: 8px;
+    border: none;
+    color: white;
+    display: none;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 2px 10px;
+    position: absolute;
+    border-radius: 12px;
+
+    &.sale {
+        padding: 2px 14px;
+        background-color: $color-danger;
+    }
+
+    &.new {
+        background-color: $theme-color;
     }
 }
 
@@ -2278,69 +2307,67 @@
     @extend .remove-padding-margin;
 }
 
-.bottom-toolbar {
+.pagination {
     width: 100%;
     display: block;
 
-    .pagination {
-        .page-item {
-            padding: 0 10px;
+    .page-item {
+        padding: 0 10px;
 
-            &.active {
-                font-weight: 600;
-                color: $theme-color !important;
-                border-bottom: 2px solid $theme-color;
-            }
+        &.active {
+            font-weight: 600;
+            color: $theme-color !important;
+            border-bottom: 2px solid $theme-color;
+        }
 
-            &.next,
-            &.previous {
-                .angle-right-icon,
-                .angle-left-icon {
-                    @extend .rango-default;
+        &.next,
+        &.previous {
+            .angle-right-icon,
+            .angle-left-icon {
+                @extend .rango-default;
 
-                    margin: 0;
-                    font-size: 24px;
-                    background: unset;
-                    text-align: center;
-                }
-            }
-
-            &.next {
-                .angle-right-icon::before {
-                    content: "\E908";
-                }
-            }
-
-            &.previous {
-                .angle-left-icon::before {
-                    content: "\E907";
-                }
+                margin: 0;
+                font-size: 24px;
+                background: unset;
+                text-align: center;
             }
         }
 
-        a {
-            color: unset !important;
-            text-decoration: none !important;
-
-            i {
-                top: 2px;
-                font-size: 18px;
-                position: relative;
+        &.next {
+            .angle-right-icon::before {
+                content: "\E908";
             }
         }
 
-        .angle-left-icon,
-        .angle-right-icon {
-            @include rango-default;
+        &.previous {
+            .angle-left-icon::before {
+                content: "\E907";
+            }
+        }
+    }
 
-            background: unset;
+    a {
+        color: unset !important;
+        text-decoration: none !important;
+
+        i {
+            top: 2px;
+            font-size: 18px;
+            position: relative;
         }
-        .angle-right-icon::before {
-            content: "\E908";
-        }
-        .angle-left-icon::before {
-            content: "\E907";
-        }
+    }
+
+    .angle-left-icon,
+    .angle-right-icon {
+        @include rango-default;
+
+        background: unset;
+    }
+    .angle-right-icon::before {
+        content: "\E908";
+    }
+    .angle-left-icon::before {
+        content: "\E907";
     }
 }
 

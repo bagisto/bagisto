@@ -1,3 +1,11 @@
+<?php
+    $term = request()->input('term');
+
+    if (! is_null($term)) {
+        $serachQuery = 'term='.request()->input('term');
+    }
+?>
+
 <div class="header" id="header">
     <div class="header-top">
         <div class="left-content">
@@ -16,7 +24,14 @@
             <ul class="search-container">
                 <li class="search-group">
                     <form role="search" action="{{ route('shop.search.index') }}" method="GET" style="display: inherit;">
-                        <input type="search" name="term" class="search-field" placeholder="{{ __('shop::app.header.search-text') }}" required>
+                        <input
+                            required
+                            name="term"
+                            type="search"
+                            value="{{ $term }}"
+                            class="search-field"
+                            placeholder="{{ __('shop::app.header.search-text') }}"
+                        >
 
                         <image-search-component></image-search-component>
 
@@ -30,14 +45,6 @@
                 </li>
             </ul>
         </div>
-
-        <?php
-            $term = request()->input('term');
-
-            if (! is_null($term)) {
-                $serachQuery = 'term='.request()->input('term');
-            }
-        ?>
 
         <div class="right-content">
 
@@ -195,6 +202,9 @@
                 <button style="background: none; border: none; padding: 0px;">
                     <i class="icon icon-search"></i>
                 </button>
+                
+                <image-search-component></image-search-component>
+
                 <input type="search" name="term" class="search">
                 <i class="icon icon-menu-back right"></i>
             </div>
@@ -232,55 +242,87 @@
 
             methods: {
                 uploadImage: function() {
-                    var self = this;
+                    var imageInput = this.$refs.image_search_input;
 
-                    self.$root.showLoader();
+                    if (imageInput.files && imageInput.files[0]) {
+                        if (imageInput.files[0].type.includes('image/')) {
+                            var self = this;
 
-                    var formData = new FormData();
+                            self.$root.showLoader();
 
-                    formData.append('image', this.$refs.image_search_input.files[0]);
+                            var formData = new FormData();
 
-                    axios.post("{{ route('shop.image.search.upload') }}", formData, {headers: {'Content-Type': 'multipart/form-data'}})
-                        .then(function(response) {
-                            self.uploaded_image_url = response.data;
+                            formData.append('image', imageInput.files[0]);
 
-                            var net;
+                            axios.post("{{ route('shop.image.search.upload') }}", formData, {headers: {'Content-Type': 'multipart/form-data'}})
+                                .then(function(response) {
+                                    self.uploaded_image_url = response.data;
 
-                            async function app() {
-                                var analysedResult = [];
+                                    var net;
 
-                                var queryString = '';
+                                    async function app() {
+                                        var analysedResult = [];
 
-                                net = await mobilenet.load();
+                                        var queryString = '';
 
-                                const imgElement = document.getElementById('uploaded-image-url');
+                                        net = await mobilenet.load();
 
-                                const result = await net.classify(imgElement);
+                                        const imgElement = document.getElementById('uploaded-image-url');
 
-                                result.forEach(function(value) {
-                                    queryString = value.className.split(',');
+                                        try {
+                                            const result = await net.classify(imgElement);
 
-                                    if (queryString.length > 1) {
-                                        analysedResult = analysedResult.concat(queryString)
-                                    } else {
-                                        analysedResult.push(queryString[0])
+                                            result.forEach(function(value) {
+                                                queryString = value.className.split(',');
+
+                                                if (queryString.length > 1) {
+                                                    analysedResult = analysedResult.concat(queryString)
+                                                } else {
+                                                    analysedResult.push(queryString[0])
+                                                }
+                                            });
+                                        } catch (error) {
+                                            self.$root.hideLoader();
+
+                                            window.flashMessages = [
+                                                {
+                                                    'type': 'alert-error',
+                                                    'message': "{{ __('shop::app.common.error') }}"
+                                                }
+                                            ];
+
+                                            self.$root.addFlashMessages();
+                                        };
+
+                                        localStorage.searched_image_url = self.uploaded_image_url;
+
+                                        queryString = localStorage.searched_terms = analysedResult.join('_');
+                                        
+                                        self.$root.hideLoader();
+
+                                        window.location.href = "{{ route('shop.search.index') }}" + '?term=' + queryString + '&image-search=1';
                                     }
+
+                                    app();
                                 })
+                                .catch(function(error) {
+                                    self.$root.hideLoader();
 
-                                localStorage.searched_image_url = self.uploaded_image_url;
+                                    window.flashMessages = [
+                                        {
+                                            'type': 'alert-error',
+                                            'message': "{{ __('shop::app.common.error') }}"
+                                        }
+                                    ];
 
-                                queryString = localStorage.searched_terms = analysedResult.join('_');
-                                
-                                self.$root.hideLoader();
+                                    self.$root.addFlashMessages();
+                                });
+                        } else {
+                            imageInput.value = '';
 
-                                window.location.href = "{{ route('shop.search.index') }}" + '?term=' + queryString + '&image-search=1';
-                            }
-
-                            app();
-                        })
-                        .catch(function() {
-                            self.$root.hideLoader();
-                        });
+                            alert('Only images (.jpeg, .jpg, .png, ..) are allowed.');
+                        }
+                    }
                 }
             }
         });
