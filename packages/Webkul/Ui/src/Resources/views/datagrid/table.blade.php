@@ -8,6 +8,8 @@
     @push('scripts')
         <script type="text/x-template" id="datagrid-filters">
             <div class="grid-container">
+
+                <h1>Hello Hwllo</h1>
                 <div class="datagrid-filters" id="datagrid-filters">
 
                     <div class="filter-left">
@@ -20,8 +22,8 @@
                         </div>
                     </div>
 
-                    <div class="filter-right">
-                        <div class="dropdown-filters per-page">
+                    <div class="filter-right" id="filter_right">
+                        <div class="dropdown-filters per-page" id="item_per_page">
                             <div class="control-group">
                                 <label class="per-page-label" for="perPage">
                                     {{ __('ui::app.datagrid.items-per-page') }}
@@ -37,7 +39,7 @@
                             </div>
                         </div>
 
-                        <div class="dropdown-filters">
+                        <div class="dropdown-filters" id="fiter_for_order">
                             <div class="dropdown-toggle">
                                 <div class="grid-dropdown-header">
                                     <span class="name">{{ __('ui::app.datagrid.filter') }}</span>
