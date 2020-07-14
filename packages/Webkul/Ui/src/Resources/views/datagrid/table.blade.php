@@ -8,8 +8,6 @@
     @push('scripts')
         <script type="text/x-template" id="datagrid-filters">
             <div class="grid-container">
-
-
                 <div class="datagrid-filters" id="datagrid-filters">
 
                     <div class="filter-left">
