@@ -9,7 +9,7 @@
         <script type="text/x-template" id="datagrid-filters">
             <div class="grid-container">
 
-                <h1>Hello Hwllo</h1>
+
                 <div class="datagrid-filters" id="datagrid-filters">
 
                     <div class="filter-left">
