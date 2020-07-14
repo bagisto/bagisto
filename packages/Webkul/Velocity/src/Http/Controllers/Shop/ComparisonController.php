@@ -80,7 +80,7 @@ class ComparisonController extends Controller
             $productFlatRepository = app('\Webkul\Product\Models\ProductFlat');
 
             $productFlat = $productFlatRepository
-                            ->where('product_id', $productId)
+                            ->where('id', $productId)
                             ->orWhere('parent_id', $productId)
                             ->orWhere('id', $productId)
                             ->get()

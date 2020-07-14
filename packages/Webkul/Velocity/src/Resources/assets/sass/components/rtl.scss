@@ -51,6 +51,14 @@ body {
                         }
                     }   
                 }
+
+                ~ .wishlist-btn , ~ .compare-btn {
+                    .badge-container {
+                        .badge {
+                            left: 20px;
+                        }
+                    }
+                }
             }
         }
 

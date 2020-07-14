@@ -85,6 +85,19 @@ class ThemeViewFinder extends FileViewFinder
     }
 
     /**
+     * Get the string contents of the view.
+     *
+     * @param  callable|null  $callback
+     * @return array|string
+     *
+     * @throws \Throwable
+     */
+    public function render(callable $callback = null)
+    {
+        dd(111);
+    }
+
+    /**
      * Set the array of paths where the views are being searched.
      *
      * @param  array  $paths
