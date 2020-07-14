@@ -692,7 +692,7 @@ class Bundle extends AbstractType
      * @param  int  $qty
      * @return bool
      */
-    public function haveSufficientQuantity($qty): bool
+    public function haveSufficientQuantity(int $qty): bool
     {
         # to consider a bundle in stock we need to check that at least one product from each required group is available for the given quantity
         foreach ($this->product->bundle_options as $option) {
