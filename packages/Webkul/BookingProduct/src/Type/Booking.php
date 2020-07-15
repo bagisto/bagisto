@@ -153,6 +153,15 @@ class Booking extends Virtual
     }
 
     /**
+     * @param  int  $qty
+     * @return bool
+     */
+    public function haveSufficientQuantity($qty)
+    {
+        return true;
+    }
+
+    /**
      * Add product. Returns error message if can't prepare product.
      *
      * @param  array  $data
@@ -186,13 +195,13 @@ class Booking extends Virtual
                     continue;
                 }
 
-                $cartProducts = parent::prepareForCart([
+                $cartProducts = parent::prepareForCart(array_merge($data, [
                     'product_id' => $data['product_id'],
                     'quantity'   => $qty,
                     'booking'    => [
                         'ticket_id' => $ticketId,
                     ],
-                ]);
+                ]));
 
                 if (is_string($cartProducts)) {
                     return $cartProducts;

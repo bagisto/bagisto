@@ -158,7 +158,11 @@
 
                                             @if ($order->base_discount_amount > 0)
                                                 <tr>
-                                                    <td>{{ __('shop::app.customer.account.order.view.discount') }}</td>
+                                                    <td>{{ __('shop::app.customer.account.order.view.discount') }}
+                                                        @if ($order->coupon_code)
+                                                            ({{ $order->coupon_code }})
+                                                        @endif
+                                                    </td>
                                                     <td>-</td>
                                                     <td>{{ core()->formatPrice($order->discount_amount, $order->order_currency_code) }}</td>
                                                 </tr>
