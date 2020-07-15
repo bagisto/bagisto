@@ -2,13 +2,11 @@
 
 namespace Webkul\CartRule\Models;
 
-// use Webkul\Core\Eloquent\TranslatableModel;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\CartRule\Contracts\CartRule as CartRuleContract;
 use Webkul\Core\Models\ChannelProxy;
 use Webkul\Customer\Models\CustomerGroupProxy;
 
-// class CartRule extends TranslatableModel implements CartRuleContract
 class CartRule extends Model implements CartRuleContract
 {
     protected $fillable = [
@@ -40,42 +38,80 @@ class CartRule extends Model implements CartRuleContract
         'conditions' => 'array',
     ];
 
-    // public $translatedAttributes = ['name'];
-
     /**
      * Get the channels that owns the cart rule.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function channels()
+    public function cart_rule_channels(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(ChannelProxy::modelClass(), 'cart_rule_channels');
     }
 
     /**
-     * Get the customer groups that owns the cart rule.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     *
+     * @deprecated laravel standard should be used
      */
-    public function customer_groups()
+    public function channels(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->cart_rule_channels();
+    }
+
+    /**
+     * Get the customer groups that owns the cart rule.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function cart_rule_customer_groups(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(CustomerGroupProxy::modelClass(), 'cart_rule_customer_groups');
     }
 
     /**
-     * Get the coupons that owns the cart rule.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     *
+     * @deprecated laravel standard should be used
      */
-    public function coupons()
+    public function customer_groups(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->cart_rule_customer_groups();
+    }
+
+    /**
+     * Get the coupons that owns the cart rule.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function cart_rule_coupon(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(CartRuleCouponProxy::modelClass());
     }
 
     /**
-     * Get primary coupon code for cart rule.
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     *
+     * @deprecated laravel standard should be used
      */
-    public function coupon_code()
+    public function coupons(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
-        return $this->coupons()->where('is_primary', 1);
+        return $this->cart_rule_coupon();
     }
 
     /**
      * Get primary coupon code for cart rule.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function coupon_code(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->cart_rule_coupon()->where('is_primary', 1);
+    }
+
+    /**
+     * Get primary coupon code for cart rule.
+     *
+     * @return string|void
      */
     public function getCouponCodeAttribute()
     {

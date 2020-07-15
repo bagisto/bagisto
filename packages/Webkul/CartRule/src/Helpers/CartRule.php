@@ -3,6 +3,7 @@
 namespace Webkul\CartRule\Helpers;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Webkul\CartRule\Repositories\CartRuleRepository;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 use Webkul\CartRule\Repositories\CartRuleCouponUsageRepository;
@@ -166,21 +167,22 @@ class CartRule
     /**
      * Check if cart rule can be applied
      *
-     * @param  \Webkul\CartRule\Contracts\CartRule  $rule
+     * @param                                     $cart
+     * @param \Webkul\CartRule\Contracts\CartRule $rule
+     *
      * @return bool
      */
-    public function canProcessRule($rule): bool
+    public function canProcessRule($cart, $rule): bool
     {
-        $cart = Cart::getCart();
-
         if ($rule->coupon_type) {
             if (strlen($cart->coupon_code)) {
-                $coupon = $this->cartRuleCouponRepository->findOneWhere([
-                    'cart_rule_id' => $rule->id,
-                    'code'         => $cart->coupon_code,
-                ]);
+                /** @var \Webkul\CartRule\Models\CartRule $rule */
 
-                if ($coupon) {
+                // Laravel relation is used instead of repository for performance
+                // reasons (cart_rule_coupon-relation is pre-loaded by self::getCartRuleQuery())
+                $coupon = $rule->cart_rule_coupon;
+
+                if ($coupon && $coupon->code === $cart->coupon_code) {
                     if ($coupon->usage_limit && $coupon->times_used >= $coupon->usage_limit) {
                         return false;
                     }
@@ -231,8 +233,10 @@ class CartRule
 
         $appliedRuleIds = [];
 
-        foreach ($this->getCartRules() as $rule) {
-            if (! $this->canProcessRule($rule)) {
+        $cart = Cart::getCart();
+
+        foreach ($rules = $this->getCartRules() as $rule) {
+            if (! $this->canProcessRule($cart, $rule)) {
                 continue;
             }
 
@@ -354,8 +358,10 @@ class CartRule
 
         $appliedRuleIds = [];
 
+        $cart = Cart::getCart();
+
         foreach ($this->getCartRules() as $rule) {
-            if (! $this->canProcessRule($rule)) {
+            if (! $this->canProcessRule($cart, $rule)) {
                 continue;
             }
 
@@ -436,8 +442,10 @@ class CartRule
 
         $appliedRuleIds = [];
 
+        $cart = Cart::getCart();
+
         foreach ($this->getCartRules() as $rule) {
-            if (! $this->canProcessRule($rule)) {
+            if (! $this->canProcessRule($cart, $rule)) {
                 continue;
             }
 
@@ -481,12 +489,14 @@ class CartRule
      */
     public function calculateCartItemTotals($items)
     {
+        $cart = Cart::getCart();
+
         foreach ($this->getCartRules() as $rule) {
             if ($rule->action_type == 'cart_fixed') {
                 $totalPrice = $totalBasePrice = $validCount = 0;
 
                 foreach ($items as $item) {
-                    if (! $this->canProcessRule($rule, $item)) {
+                    if (! $this->canProcessRule($cart, $rule)) {
                         continue;
                     }
 
@@ -559,23 +569,30 @@ class CartRule
      */
     public function getCartRuleQuery($customerGroupId, $channelId): \Illuminate\Database\Eloquent\Collection
     {
-        $cartRules = $this->cartRuleRepository->scopeQuery(function ($query) use ($customerGroupId, $channelId) {
+        return $this->cartRuleRepository->scopeQuery(function ($query) use ($customerGroupId, $channelId) {
+            /** @var Builder $query */
             return $query->leftJoin('cart_rule_customer_groups', 'cart_rules.id', '=',
                 'cart_rule_customer_groups.cart_rule_id')
                 ->leftJoin('cart_rule_channels', 'cart_rules.id', '=', 'cart_rule_channels.cart_rule_id')
                 ->where('cart_rule_customer_groups.customer_group_id', $customerGroupId)
                 ->where('cart_rule_channels.channel_id', $channelId)
                 ->where(function ($query1) {
+                    /** @var Builder $query1 */
                     $query1->where('cart_rules.starts_from', '<=', Carbon::now()->format('Y-m-d'))
                         ->orWhereNull('cart_rules.starts_from');
                 })
                 ->where(function ($query2) {
+                    /** @var Builder $query2 */
                     $query2->where('cart_rules.ends_till', '>=', Carbon::now()->format('Y-m-d'))
                         ->orWhereNull('cart_rules.ends_till');
                 })
+                ->with([
+                    'cart_rule_customer_groups',
+                    'cart_rule_channels',
+                    'cart_rule_coupon'
+                ])
                 ->orderBy('sort_order', 'asc');
         })->findWhere(['status' => 1]);
-        return $cartRules;
     }
 
 }
