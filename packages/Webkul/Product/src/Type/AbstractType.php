@@ -539,10 +539,11 @@ abstract class AbstractType
         if ($haveSpecialPrice) {
             $this->product->special_price = min($this->product->special_price, $customerGroupPrice);
         } else {
+            $haveSpecialPrice = true; 
             $this->product->special_price = $customerGroupPrice;
         }
 
-        return true;
+        return $haveSpecialPrice;
     }
 
     /**

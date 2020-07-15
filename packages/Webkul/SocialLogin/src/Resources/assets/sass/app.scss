@@ -18,7 +18,7 @@
         color: #FFFFFF;
         text-decoration: none;
         float: left;
-
+    
         &.facebook-link {
             background-color: #5272B3;
         }
@@ -55,5 +55,17 @@
         top: -12px;
         padding: 0px 15px;
         text-align: center;
+    }
+}
+
+
+/// rtl css start here
+.rtl {
+    direction: rtl; 
+
+    .social-login-links {
+        .link {
+            float: right;
+        }
     }
 }

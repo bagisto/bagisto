@@ -34,6 +34,14 @@ return [
                 'channel_based' => true,
                 'locale_based'  => true,
             ],
+            [
+                'name'          => 'order_number_generator-class',
+                'title'         => 'admin::app.admin.system.order-number-generator-class',
+                'type'          => 'text',
+                'validation'    => false,
+                'channel_based' => true,
+                'locale_based'  => true,
+            ],
         ]
     ], [
         'key'    => 'sales.orderSettings.invoice_slip_design',

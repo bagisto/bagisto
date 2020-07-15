@@ -37,7 +37,7 @@ class VelocityMetaDataSeeder extends Seeder
                 'code'         => 'general.content.shop.compare_option',
                 'value'        => '1',
                 'channel_code' => 'default',
-                'locale_code'  => 'ar',
+                'locale_code'  => 'en',
                 'created_at'   => $now,
                 'updated_at'   => $now,
             ],

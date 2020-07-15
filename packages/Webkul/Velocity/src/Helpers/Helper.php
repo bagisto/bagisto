@@ -322,18 +322,22 @@ class Helper extends Review
             }
         }
 
+        $priceHTML = view('shop::products.price', ['product' => $product])->render();
+
+        $isProductNew = ($product->new && ! strpos($priceHTML, 'sticker sale') > 0) ? __('shop::app.products.new') : false;
+
         return [
+            'priceHTML'         => $priceHTML,
             'avgRating'         => $avgRatings,
             'totalReviews'      => $totalReviews,
             'image'             => $productImage,
+            'new'               => $isProductNew,
             'galleryImages'     => $galleryImages,
             'name'              => $product->name,
             'slug'              => $product->url_key,
             'description'       => $product->description,
             'shortDescription'  => $product->short_description,
             'firstReviewText'   => trans('velocity::app.products.be-first-review'),
-            'new'               => $product->new ? __('shop::app.products.new') : false,
-            'priceHTML'         => view('shop::products.price', ['product' => $product])->render(),
             'defaultAddToCart'  => view('shop::products.add-buttons', ['product' => $product])->render(),
             'addToCartHtml'     => view('shop::products.add-to-cart', [
                 'product'           => $product,
@@ -383,6 +387,7 @@ class Helper extends Review
                     $productMetaDetails['slug'] = $product->url_key;
                     $productMetaDetails['image'] = $formattedProduct['image'];
                     $productMetaDetails['priceHTML'] = $formattedProduct['priceHTML'];
+                    $productMetaDetails['new'] = $formattedProduct['new'];
                     $productMetaDetails['addToCartHtml'] = $formattedProduct['addToCartHtml'];
                     $productMetaDetails['galleryImages'] = $formattedProduct['galleryImages'];
                     $productMetaDetails['defaultAddToCart'] = $formattedProduct['defaultAddToCart'];
@@ -393,7 +398,7 @@ class Helper extends Review
                 }
             }
         }
-
+    
         return $productCollection;
     }
 }

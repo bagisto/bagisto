@@ -1313,6 +1313,7 @@ return [
             'order-number-prefix' => 'Prefixo do Número do Pedido',
             'order-number-length' => 'Tamanho do Número do Pedido',
             'order-number-suffix' => 'Sufixo do Número de Pedido',
+            'order-number-generator-class' => 'Gerador de número de pedido',
             'default' => 'Padrão',
             'sandbox' => 'Sandbox',
             'all-channels' => 'Todos',
