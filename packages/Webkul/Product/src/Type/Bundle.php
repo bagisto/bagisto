@@ -278,7 +278,7 @@ class Bundle extends AbstractType
                 if (! $bundleOptionProduct->product->getTypeInstance()->isSaleable()) {
                     continue;
                 }
-                
+
                 if (in_array($option->type, ['multiselect', 'checkbox'])) {
                     if (! isset($optionPrices[$option->id][0])) {
                         $optionPrices[$option->id][0] = 0;
@@ -315,7 +315,7 @@ class Bundle extends AbstractType
                 if (! $bundleOptionProduct->product->getTypeInstance()->isSaleable()) {
                     continue;
                 }
-                
+
                 if (in_array($option->type, ['multiselect', 'checkbox'])) {
                     if (! isset($optionPrices[$option->id][0])) {
                         $optionPrices[$option->id][0] = 0;
@@ -382,6 +382,25 @@ class Bundle extends AbstractType
     }
 
     /**
+     * Get bundle product special price
+     *
+     * @return boolean
+     */
+    private function checkBundleProductHaveSpecialPrice()
+    {
+        $haveSpecialPrice = false;
+        foreach ($this->product->bundle_options as $option) {
+            foreach ($option->bundle_option_products as $index => $bundleOptionProduct) {
+                if ($bundleOptionProduct->product->getTypeInstance()->haveSpecialPrice()) {
+                    $haveSpecialPrice = true;
+                    break;
+                }
+            }
+        }
+        return $haveSpecialPrice;
+    }
+
+    /**
      * Get product minimal price
      *
      * @return string
@@ -390,7 +409,12 @@ class Bundle extends AbstractType
     {
         $prices = $this->getProductPrices();
 
-        $priceHtml = '<div class="price-from">';
+        $priceHtml = '';
+
+        if ($this->checkBundleProductHaveSpecialPrice())
+            $priceHtml .= '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>';
+
+        $priceHtml .= '<div class="price-from">';
 
         if ($prices['from']['regular_price']['price'] != $prices['from']['final_price']['price']) {
             $priceHtml .= '<span class="regular-price">' . $prices['from']['regular_price']['formated_price'] . '</span>'
