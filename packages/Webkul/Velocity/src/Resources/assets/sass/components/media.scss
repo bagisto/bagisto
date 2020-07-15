@@ -1,3 +1,4 @@
+
 .vc-small-screen {
     display: none !important;
 }
@@ -30,6 +31,7 @@
     }
 }
 
+
 @media only screen and (max-width: 992px) {
 
 }
@@ -47,6 +49,46 @@
     .footer .currency {
         display: block !important;
     }
+
+
+        .table {
+                    width: 90%;
+                    margin-bottom: 1rem;
+                    color: #212529;
+                }
+
+
+.mobile-table  {
+                    margin-top: 68px;
+                }
+
+
+.item_per_page {
+                    position: absolute;
+                    margin-top: 66px;
+                    margin-right: -1px;
+                    margin-left: 17px;
+                    width: 151px;
+                }
+
+.filter-left-mobile {
+                        position: relative;
+                        margin-right: -6px!important;
+                    }
+
+.filter_for_order    {
+                           margin-left: 15px;
+                    }
+
+
+
+
+button.btn.btn-sm.btn-primary.apply-filter {
+                                                 margin-top: 10px;
+                                                 margin-left: -158px;
+                                            }
+
+
 }
 
 @media only screen and (max-width: 992px) {
