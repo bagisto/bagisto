@@ -620,7 +620,11 @@
 
                         for (let i = 0; i < moreSplitted.length; i++) {
                             const key = decodeURI(moreSplitted[i][0]);
-                            const value = decodeURI(moreSplitted[i][1]);
+                            let value = decodeURI(moreSplitted[i][1]);
+
+                            if (value.includes('+')) {
+                                value = value.replace('+', ' ');
+                            }
 
                             obj.column = key.replace(']', '').split('[')[0];
                             obj.cond = key.replace(']', '').split('[')[1]
@@ -632,7 +636,9 @@
                                     break;
                                 case "channel":
                                     obj.label = "Channel";
-                                    console.log(obj.column, obj.label, obj.cond, obj.val);
+                                    break;
+                                case "locale":
+                                    obj.label = "Locale";
                                     break;
                                 case "customer_group":
                                     obj.label = "Customer Group";
@@ -651,7 +657,8 @@
                                             obj.label = this.columns[colIndex].label;
 
                                             if (this.columns[colIndex].type === 'boolean') {
-                                                if (obj.val === 1) {
+                                                console.log('obj.val',obj.val);
+                                                if (obj.val === '1') {
                                                     obj.val = '{{ __('ui::app.datagrid.true') }}';
                                                 } else {
                                                     obj.val = '{{ __('ui::app.datagrid.false') }}';
