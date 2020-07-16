@@ -115,7 +115,8 @@ class OnepageController extends Controller
         } else {
             $cart = Cart::getCart();
 
-            Cart::collectTotals();
+            /* on commenting solve the problem but need clarity on this as well */
+//            Cart::collectTotals();
 
             if ($cart->haveStockableItems()) {
                 if (! $rates = Shipping::collectRates()) {
