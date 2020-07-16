@@ -113,7 +113,7 @@ class ProductRepository extends Repository
 
             $perPage = isset($params['limit']) ? $params['limit'] : current($pages);
         } else {
-            $perPage = isset($params['limit']) && !empty($params['limit']) ? $params['limit'] : 9;
+            $perPage = isset($params['limit']) ? $params['limit'] : 9;
         }
 
         $page = Paginator::resolveCurrentPage('page');
