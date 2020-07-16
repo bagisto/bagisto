@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'driver' => env('SCOUT_DRIVER', 'null'),
+    'driver' => env('SCOUT_DRIVER', null),
 
     /*
     |--------------------------------------------------------------------------

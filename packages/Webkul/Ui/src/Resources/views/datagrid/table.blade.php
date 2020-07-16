@@ -1,4 +1,3 @@
-
 <div class="table">
     <datagrid-filters></datagrid-filters>
 
@@ -11,7 +10,7 @@
             <div class="grid-container">
                 <div class="datagrid-filters" id="datagrid-filters">
 
-                    <div class="filter-left filter-left-mobile">
+                    <div class="filter-left">
                         <div class="search-filter">
                             <input type="search" id="search-field" class="control" placeholder="{{ __('ui::app.datagrid.search') }}" v-model="searchValue" v-on:keyup.enter="searchCollection(searchValue)" />
 
@@ -21,8 +20,8 @@
                         </div>
                     </div>
 
-                    <div class="filter-right filter_right_mobile">
-                        <div class="dropdown-filters per-page item_per_page">
+                    <div class="filter-right">
+                        <div class="dropdown-filters per-page">
                             <div class="control-group">
                                 <label class="per-page-label" for="perPage">
                                     {{ __('ui::app.datagrid.items-per-page') }}
@@ -38,7 +37,7 @@
                             </div>
                         </div>
 
-                        <div class="dropdown-filters filter_for_order">
+                        <div class="dropdown-filters">
                             <div class="dropdown-toggle">
                                 <div class="grid-dropdown-header">
                                     <span class="name">{{ __('ui::app.datagrid.filter') }}</span>
@@ -168,7 +167,7 @@
                     </span>
                 </div>
 
-                <table class="table mobile-table">
+                <table class="table">
                     @include('ui::datagrid.partials.mass-action-header')
 
                     @include('ui::datagrid.partials.default-header')
@@ -738,8 +737,4 @@
             });
         </script>
     @endpush
-
 </div>
-
-
-
