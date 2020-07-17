@@ -5,7 +5,7 @@
 @stop
 
 
-@section('content-wrapper')
+@section('content')
 
     <div class="content full-page">
         {!! view_render_event('admin.customer.addresses.edit.before', ['address' => $address]) !!}
