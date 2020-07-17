@@ -5,9 +5,9 @@
 @stop
 
 
-@section('content-wrapper')
+@section('content')
 
-    <div class="content full-page">
+    <div class="content">
         {!! view_render_event('admin.customer.addresses.edit.before', ['address' => $address]) !!}
 
             <form method="post" action="{{ route('admin.customer.addresses.update', $address->id) }}" @submit.prevent="onSubmit">
