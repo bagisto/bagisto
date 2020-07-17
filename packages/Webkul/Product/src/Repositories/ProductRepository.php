@@ -113,7 +113,7 @@ class ProductRepository extends Repository
 
             $perPage = isset($params['limit']) ? $params['limit'] : current($pages);
         } else {
-            $perPage = isset($params['limit']) ? $params['limit'] : 9;
+            $perPage = isset($params['limit']) && !empty($params['limit']) ? $params['limit'] : 9;
         }
 
         $page = Paginator::resolveCurrentPage('page');
@@ -388,7 +388,7 @@ class ProductRepository extends Repository
                             ->where('product_flat.channel', $channel)
                             ->where('product_flat.locale', $locale)
                             ->whereNotNull('product_flat.url_key')
-                            ->where(function($subQuery) use ($term) {  
+                            ->where(function($subQuery) use ($term) {
                                 $queries = explode('_', $term);
 
                                 foreach (array_map('trim', $queries) as $value) {
@@ -399,7 +399,7 @@ class ProductRepository extends Repository
                             ->orderBy('product_id', 'desc');
             })->paginate(16);
         }
-        
+
         return $results;
     }
 
