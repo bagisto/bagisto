@@ -256,9 +256,8 @@ class CartRule
                 case 'by_percent':
                     $rulePercent = min(100, $rule->discount_amount);
 
-                    $discountAmount = ($quantity * $item->price + $item->tax_amount - $item->discount_amount) * ($rulePercent / 100);
-
-                    $baseDiscountAmount = ($quantity * $item->base_price + $item->base_tax_amount - $item->base_discount_amount) * ($rulePercent / 100);
+                    $discountAmount = ($quantity * $item->price - $item->discount_amount) * ($rulePercent / 100);
+                    $baseDiscountAmount = ($quantity * $item->base_price - $item->base_discount_amount) * ($rulePercent / 100);
 
                     if (! $rule->discount_quantity || $rule->discount_quantity > $quantity) {
                         $discountPercent = min(100, $item->discount_percent + $rulePercent);
