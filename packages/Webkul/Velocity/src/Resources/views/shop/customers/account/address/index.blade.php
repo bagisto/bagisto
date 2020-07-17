@@ -84,8 +84,8 @@
 @if ($addresses->isEmpty())
 <style>
     .address-button {
-    position: absolute;
-    margin-top: 92px;
-}
+        position: absolute;
+        margin-top: 92px;
+    }
 </style>
 @endif
