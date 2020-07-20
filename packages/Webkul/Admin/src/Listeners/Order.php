@@ -9,6 +9,7 @@ use Webkul\Admin\Mail\NewInvoiceNotification;
 use Webkul\Admin\Mail\NewShipmentNotification;
 use Webkul\Admin\Mail\NewInventorySourceNotification;
 use Webkul\Admin\Mail\CancelOrderNotification;
+use Webkul\Admin\Mail\CancelOrderAdminNotification;
 use Webkul\Admin\Mail\NewRefundNotification;
 use Webkul\Admin\Mail\OrderCommentNotification;
 
@@ -16,7 +17,7 @@ class Order
 {
     /**
      * Send new order Mail to the customer and admin
-     * 
+     *
      * @param  \Webkul\Sales\Contracts\Order  $order
      * @return void
      */
@@ -41,7 +42,7 @@ class Order
 
     /**
      * Send new invoice mail to the customer
-     * 
+     *
      * @param  \Webkul\Sales\Contracts\Invoice  $invoice
      * @return void
      */
@@ -64,7 +65,7 @@ class Order
 
     /**
      * Send new refund mail to the customer
-     * 
+     *
      * @param  \Webkul\Sales\Contracts\Refund  $refund
      * @return void
      */
@@ -83,7 +84,7 @@ class Order
 
     /**
      * Send new shipment mail to the customer
-     * 
+     *
      * @param  \Webkul\Sales\Contracts\Shipment  $shipment
      * @return void
      */
@@ -121,6 +122,12 @@ class Order
             if (core()->getConfigData($configKey)) {
                 Mail::queue(new CancelOrderNotification($order));
             }
+
+            $configKey = 'emails.general.notifications.emails.general.notifications.new-admin';
+            if (core()->getConfigData($configKey)) {
+                Mail::queue(new CancelOrderAdminNotification($order));
+            }
+
         } catch (\Exception $e) {
             report($e);
         }
