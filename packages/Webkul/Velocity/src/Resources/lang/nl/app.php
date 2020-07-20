@@ -197,6 +197,7 @@ return [
             'added' => 'Item successfully added to compare list',
             'already_added' => 'Item already added to compare list',
             'removed' => 'Item successfully removed from compare list',
+            'all-removed' => 'All The Items From Your Compare list Have Been Removed',
             'empty-text' => "You don't have any items in your compare list",
             'product_image' => 'Product Image',
             'actions' => 'Actions',

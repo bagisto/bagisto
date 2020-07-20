@@ -17,7 +17,7 @@ class ComparisonController extends Controller
     {
         if (request()->get('data')) {
             $productSlugs = null;
-            
+
             $productCollection = [];
 
             if (auth()->guard('customer')->user()) {
@@ -87,7 +87,7 @@ class ComparisonController extends Controller
 
             if ($productFlat) {
                 $productId = $productFlat->id;
-                
+
                 $this->compareProductsRepository->create([
                     'customer_id'     => $customerId,
                     'product_flat_id' => $productId,
@@ -132,7 +132,7 @@ class ComparisonController extends Controller
 
         return [
             'status'  => 'success',
-            'message' => trans('velocity::app.customer.compare.removed'),
+            'message' => trans('velocity::app.customer.compare.all-removed'),
             'label'   => trans('velocity::app.shop.general.alert.success'),
         ];
     }
