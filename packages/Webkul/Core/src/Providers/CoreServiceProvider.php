@@ -58,7 +58,7 @@ class CoreServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'core');
 
-        Event::listen('bagisto.shop.layout.head', static function(ViewRenderEventManager $viewRenderEventManager) {
+        Event::listen('bagisto.shop.layout.body.after', static function(ViewRenderEventManager $viewRenderEventManager) {
             $viewRenderEventManager->addTemplate('core::blade.tracer.style');
         });
 
