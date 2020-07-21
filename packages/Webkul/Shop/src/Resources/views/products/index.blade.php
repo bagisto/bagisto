@@ -46,9 +46,9 @@
                 @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description']))
                     <?php $products = $productRepository->getAll($category->id); ?>
 
-                    @if ($products->count())
+                    @include ('shop::products.list.toolbar')
 
-                        @include ('shop::products.list.toolbar')
+                    @if ($products->count())
 
                         @inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar')
 
