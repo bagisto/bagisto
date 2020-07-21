@@ -54,7 +54,7 @@
             }
 
             $(this).remove();
-        })
+        });
 
         $('.path-hint').on('mouseover', function(e) {
             e.stopPropagation();

@@ -62,6 +62,6 @@ class Virtual extends AbstractType
      */
     public function haveSufficientQuantity($qty)
     {
-        return true;
+        return $qty <= $this->totalQuantity() ? true : false;
     }
 }

@@ -173,7 +173,7 @@ class Bundle extends AbstractType
             if (count($optionProductsPrices)) {
                 $selectionMinPrice = min($optionProductsPrices);
 
-                if($option->is_required) {
+                if ($option->is_required) {
                     $minPrice += $selectionMinPrice;
                 } elseif (! $haveRequiredOptions) {
                     $minPrices[] = $selectionMinPrice;
@@ -207,7 +207,7 @@ class Bundle extends AbstractType
             if (count($optionProductsPrices)) {
                 $selectionMinPrice = min($optionProductsPrices);
 
-                if($option->is_required) {
+                if ($option->is_required) {
                     $minPrice += $selectionMinPrice;
                 } elseif (! $haveRequiredOptions) {
                     $minPrices[] = $selectionMinPrice;
@@ -585,7 +585,14 @@ class Bundle extends AbstractType
                     $bundleOptionQuantities[$option->id] = $qty;
                 }
 
-                $labels[] = $qty . ' x ' . $optionProduct->product->name . ' ' . core()->currency($optionProduct->product->getTypeInstance()->getMinimalPrice());
+                $label = $qty . ' x ' . $optionProduct->product->name;
+
+                $price = $optionProduct->product->getTypeInstance()->getMinimalPrice();
+                if($price != 0){
+                    $label .= ' ' . core()->currency($price);
+                }
+
+                $labels[] = $label;
             }
 
             if (count($labels)) {
@@ -673,5 +680,28 @@ class Bundle extends AbstractType
         $options = $bundleOption->getProductOptions($product);
 
         return $options;
+    }
+
+    /**
+     * @param  int  $qty
+     * @return bool
+     */
+    public function haveSufficientQuantity($qty)
+    {
+        # to consider a bundle in stock we need to check that at least one product from each required group is available for the given quantity
+        foreach ($this->product->bundle_options as $option) {
+            if ($option->is_required) {
+                foreach ($option->bundle_option_products as $bundleOptionProduct) {
+                    # as long as at least one product in the required group is available we can continue checking other groups
+                    if($bundleOptionProduct->product->haveSufficientQuantity($bundleOptionProduct->qty * $qty)) {
+                        continue 2;
+                    }
+                }
+                # if any required option does not have any in-stock product option we will get here.
+                return false;
+            }
+        }
+
+        return true;
     }
 }

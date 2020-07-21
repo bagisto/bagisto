@@ -3,69 +3,6 @@
     $comparableAttributes = $attributeRepository->findByField('is_comparable', 1);
 @endphp
 
-@push('css')
-    <style>
-        body {
-            overflow-x: hidden;
-        }
-
-        .comparison-component {
-            width: 100%;
-            padding-top: 20px;
-        }
-
-        .comparison-component > h1 {
-            display: inline-block;
-        }
-
-        .cart-wish-wrap{
-            position: relative;
-        }
-
-        td {
-            padding: 15px;
-            min-width: 250px;
-            max-width: 250px;
-            line-height: 30px;
-            vertical-align: top;
-            word-break: break-word;
-        }
-
-        .icon.remove-product {
-            top: 15px;
-            float: right;
-            cursor: pointer;
-            position: relative;
-            background-color: black;
-        }
-
-        .action > div {
-            display: inline-block;
-        }
-
-        .wishlist-icon {
-            margin-left: 183px;
-            position: absolute;
-            margin-top: -39px;
-
-        }
-
-        table{
-            border-style: solid;
-
-        }
-
-        td{
-            vertical-align: top;
-            padding: 5px 20px;
-        }
-       
-        tr:nth-child(odd){
-            background: #f2f2f2;
-        }
-    </style>
-@endpush
-
 @push('scripts')
     <script type="text/x-template" id="compare-product-template">
         <section class="comparison-component">
@@ -243,6 +180,10 @@
                             } else {
                                 this.$set(this, 'products', this.products.filter(product => product.id != productId));
                             }
+
+                            window.flashMessages = [{'type': 'alert-success', 'message': response.data.message }];
+
+                            this.$root.addFlashMessages();
                         })
                         .catch(error => {
                             console.log("{{ __('velocity::app.error.something_went_wrong') }}");
@@ -259,6 +200,10 @@
                         }
 
                         this.setStorageValue('compared_product', updatedItems);
+
+                        window.flashMessages = [{'type': 'alert-success', 'message': response.data.message }];
+
+                        this.$root.addFlashMessages();
                     }
                 },
 

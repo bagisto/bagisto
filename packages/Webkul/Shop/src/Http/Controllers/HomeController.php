@@ -48,7 +48,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-
         $currentChannel = core()->getCurrentChannel();
 
         $currentLocale = core()->getCurrentLocale();
@@ -58,7 +57,6 @@ class HomeController extends Controller
             ->where('locale', $currentLocale->code)
             ->get()
             ->toArray();
-
 
         return view($this->_config['view'], compact('sliderData'));
     }
