@@ -239,6 +239,28 @@ class ProductRepository extends Repository
             $items = [];
         }
 
+        /*
+            nullable value coming from the grouped, bundle, and configurable product which cause issue in sorting
+            added this case to add minimal value from the group and sort whole array
+        */
+        if (isset($params['sort'])) {
+
+            $orderDirection = 'asc';
+            if (isset($params['order']) && in_array($params['order'], ['desc', 'asc'])) {
+
+                foreach($items as $item) {
+                    $item->price = $item->getTypeInstance()->getMinimalPrice();
+                }
+
+                $orderDirection = $params['order'];
+                if ($orderDirection === 'asc') {
+                    $items = $items->sortBy('price');
+                } else {
+                    $items = $items->sortByDesc('price');
+                }
+            }
+        }
+
         $results = new \Illuminate\Pagination\LengthAwarePaginator($items, $count, $perPage, $page, [
             'path'  => request()->url(),
             'query' => request()->query()
