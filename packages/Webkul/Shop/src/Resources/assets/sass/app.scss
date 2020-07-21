@@ -3648,6 +3648,8 @@ section.review {
             height: 130px;
             float: right;
             border-collapse: collapse;
+            left: 3px;
+            position: relative;
 
             tr {
 
@@ -4584,7 +4586,7 @@ body {
 
 td {
     padding: 15px;
-    min-width: 250px;
+    min-width: 25px;
     max-width: 250px;
     line-height: 30px;
     vertical-align: top;
