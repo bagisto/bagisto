@@ -36,3 +36,5 @@ return [
         'value-here' => 'Wartość tutaj',
         'numeric-value-here' => 'wartość liczbowa tutaj',
         'submit' => 'Prześlij'
+    ]
+];
