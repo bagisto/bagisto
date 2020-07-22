@@ -24,15 +24,15 @@ class Order
     public function sendNewOrderMail($order)
     {
         try {
+            /* email to customer */
             $configKey = 'emails.general.notifications.emails.general.notifications.new-order';
-
-            if (core()->getConfigData($configKey)) {
+            if (core()->getConfigData($configKey))
                 Mail::queue(new NewOrderNotification($order));
-            }
 
+            /* email to admin */
             $configKey = 'emails.general.notifications.emails.general.notifications.new-admin';
-
             if (core()->getConfigData($configKey)) {
+                app()->setLocale(env('APP_LOCALE'));
                 Mail::queue(new NewAdminNotification($order));
             }
         } catch (\Exception $e) {
