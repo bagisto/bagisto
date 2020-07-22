@@ -151,18 +151,14 @@ class ProductRepository extends Repository
             $orderDirection = 'asc';
             if( isset($params['order']) && in_array($params['order'], ['desc', 'asc']) ){
                 $orderDirection = $params['order'];
+            } else {
+                $orderDirection = $this->getDefaultSortByOption()[1];
             }
 
             if (isset($params['sort'])) {
-                $attribute = $this->attributeRepository->findOneByField('code', $params['sort']);
-
-                if ($attribute) {
-                    if ($attribute->code == 'price') {
-                        $qb->orderBy('min_price', $orderDirection);
-                    } else {
-                        $qb->orderBy($params['sort'] == 'created_at' ? 'product_flat.created_at' : $attribute->code, $orderDirection);
-                    }
-                }
+                $this->checkSortAttributeAndGenerateQuery($qb, $params['sort'], $orderDirection);
+            } else {
+                $this->checkSortAttributeAndGenerateQuery($qb, $this->getDefaultSortByOption()[0], $orderDirection);
             }
 
             if ( $priceFilter = request('price') ){
@@ -237,28 +233,6 @@ class ProductRepository extends Repository
             $items = $repository->get();
         } else {
             $items = [];
-        }
-
-        /*
-            nullable value coming from the grouped, bundle, and configurable product which cause issue in sorting
-            added this case to add minimal value from the group and sort whole array
-        */
-        if (isset($params['sort'])) {
-
-            $orderDirection = 'asc';
-            if (isset($params['order']) && in_array($params['order'], ['desc', 'asc'])) {
-
-                foreach($items as $item) {
-                    $item->price = $item->getTypeInstance()->getMinimalPrice();
-                }
-
-                $orderDirection = $params['order'];
-                if ($orderDirection === 'asc') {
-                    $items = $items->sortBy('price');
-                } else {
-                    $items = $items->sortByDesc('price');
-                }
-            }
         }
 
         $results = new \Illuminate\Pagination\LengthAwarePaginator($items, $count, $perPage, $page, [
@@ -474,5 +448,39 @@ class ProductRepository extends Repository
                          ->where('product_flat.name', 'like', '%' . urldecode($term) . '%')
                          ->orderBy('product_id', 'desc');
         })->get();
+    }
+
+    /**
+     * Get default sort by option
+     *
+     * @return array
+     */
+    private function getDefaultSortByOption()
+    {
+        $config = core()->getConfigData('catalog.products.storefront.sort_by');
+        return explode('-', $config);
+    }
+
+    /**
+     * Check sort attribute and generate query
+     *
+     * @param  object  $query
+     * @param  string  $sort
+     * @param  string  $direction
+     * @return object
+     */
+    private function checkSortAttributeAndGenerateQuery($query, $sort, $direction)
+    {
+        $attribute = $this->attributeRepository->findOneByField('code', $sort);
+
+        if ($attribute) {
+            if ($attribute->code == 'price') {
+                $query->orderBy('min_price', $direction);
+            } else {
+                $query->orderBy($sort == 'created_at' ? 'product_flat.created_at' : $attribute->code, $direction);
+            }
+        }
+
+        return $query;
     }
 }
