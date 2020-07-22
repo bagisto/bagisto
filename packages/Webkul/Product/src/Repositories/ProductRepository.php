@@ -111,7 +111,7 @@ class ProductRepository extends Repository
         if (core()->getConfigData('catalog.products.storefront.products_per_page')) {
             $pages = explode(',', core()->getConfigData('catalog.products.storefront.products_per_page'));
 
-            $perPage = isset($params['limit']) ? $params['limit'] : current($pages);
+            $perPage = isset($params['limit']) ? (!empty($params['limit']) ? $params['limit'] : 9) : current($pages);
         } else {
             $perPage = isset($params['limit']) && !empty($params['limit']) ? $params['limit'] : 9;
         }
