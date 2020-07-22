@@ -180,6 +180,10 @@
                             } else {
                                 this.$set(this, 'products', this.products.filter(product => product.id != productId));
                             }
+
+                            window.flashMessages = [{'type': 'alert-success', 'message': response.data.message }];
+
+                            this.$root.addFlashMessages();
                         })
                         .catch(error => {
                             console.log("{{ __('velocity::app.error.something_went_wrong') }}");
@@ -196,6 +200,10 @@
                         }
 
                         this.setStorageValue('compared_product', updatedItems);
+
+                        window.flashMessages = [{'type': 'alert-success', 'message': response.data.message }];
+
+                        this.$root.addFlashMessages();
                     }
                 },
 

@@ -199,20 +199,14 @@
                                         </span>
                                     </div>
 
-                                    <div class="control-group" :class="[errors.has('shipment[carrier_title]') ? 'has-error' : '']" style="margin-top: 40px">
-                                        <label for="shipment[carrier_title]" class="required">{{ __('admin::app.sales.shipments.carrier-title') }}</label>
-                                        <input type="text" v-validate="'required'" class="control" id="shipment[carrier_title]" name="shipment[carrier_title]" data-vv-as="&quot;{{ __('admin::app.sales.shipments.carrier-title') }}&quot;"/>
-                                        <span class="control-error" v-if="errors.has('shipment[carrier_title]')">
-                                            @{{ errors.first('shipment[carrier_title]') }}
-                                        </span>
+                                    <div class="control-group" style="margin-top: 40px">
+                                        <label for="shipment[carrier_title]">{{ __('admin::app.sales.shipments.carrier-title') }}</label>
+                                        <input type="text" class="control" id="shipment[carrier_title]" name="shipment[carrier_title]"/>
                                     </div>
 
-                                    <div class="control-group" :class="[errors.has('shipment[track_number]') ? 'has-error' : '']">
-                                        <label for="shipment[track_number]" class="required">{{ __('admin::app.sales.shipments.tracking-number') }}</label>
-                                        <input type="text" v-validate="'required'" class="control" id="shipment[track_number]" name="shipment[track_number]" data-vv-as="&quot;{{ __('admin::app.sales.shipments.tracking-number') }}&quot;"/>
-                                        <span class="control-error" v-if="errors.has('shipment[track_number]')">
-                                            @{{ errors.first('shipment[track_number]') }}
-                                        </span>
+                                    <div class="control-group">
+                                        <label for="shipment[track_number]">{{ __('admin::app.sales.shipments.tracking-number') }}</label>
+                                        <input type="text" class="control" id="shipment[track_number]" name="shipment[track_number]"/>
                                     </div>
                                 </div>
                             </div>
