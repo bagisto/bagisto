@@ -12,4 +12,16 @@ class Country extends TranslatableModel implements CountryContract
     public $translatedAttributes = ['name'];
 
     protected $with = ['translations'];
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        $array = parent::toArray();
+
+        $array['name'] = $this->name;
+
+        return $array;
+    }
 }
