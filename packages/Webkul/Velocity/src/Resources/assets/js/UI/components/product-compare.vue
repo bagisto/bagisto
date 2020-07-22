@@ -1,5 +1,6 @@
 <template>
-    <a class="unset compare-icon text-right" @click="addProductToCompare">
+    <a class="unset compare-icon text-right" @click="addProductToCompare"
+    title ="Add product to comparelist">
         <i class="material-icons">compare_arrows</i>
     </a>
 </template>
