@@ -5,9 +5,9 @@
 @stop
 
 
-@section('content-wrapper')
+@section('content')
 
-    <div class="content full-page">
+    <div class="content">
         {!! view_render_event('admin.customer.addresses.create.before') !!}
 
         <form method="POST" action="{{ route('admin.customer.addresses.store', ['id' => $customer->id]) }}" @submit.prevent="onSubmit">
