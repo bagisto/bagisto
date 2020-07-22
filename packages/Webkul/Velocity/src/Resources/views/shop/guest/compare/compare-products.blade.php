@@ -1,6 +1,6 @@
 @php
-    $attributeRepository = app('\Webkul\Attribute\Repositories\AttributeRepository');
-    $comparableAttributes = $attributeRepository->findByField('is_comparable', 1);
+    $attributeRepository = app('\Webkul\Attribute\Repositories\AttributeFamilyRepository');
+    $comparableAttributes = $attributeRepository->getComparableAttributesBelongsToFamily();
 @endphp
 
 @push('css')
