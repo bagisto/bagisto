@@ -81,7 +81,7 @@
                 class="product-image-container">
 
                 <img
-					loading="lazy"
+                    loading="lazy"
                     class="card-img-top"
                     alt="{{ $product->name }}"
                     src="{{ $productBaseImage['large_image_url'] }}"
@@ -89,12 +89,6 @@
 
                     {{-- <product-quick-view-btn :quick-view-details="product"></product-quick-view-btn> --}}
             </a>
-
-            @if ($product->new)
-                <div class="sticker new">
-                    {{ __('shop::app.products.new') }}
-                </div>
-            @endif
 
             <div class="card-body">
                 <div class="product-name col-12 no-padding">

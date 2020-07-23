@@ -20,8 +20,8 @@
                         </div>
                     </div>
 
-                    <div class="filter-right" id="filter_right">
-                        <div class="dropdown-filters per-page" id="item_per_page">
+                    <div class="filter-right">
+                        <div class="dropdown-filters per-page">
                             <div class="control-group">
                                 <label class="per-page-label" for="perPage">
                                     {{ __('ui::app.datagrid.items-per-page') }}
@@ -37,7 +37,7 @@
                             </div>
                         </div>
 
-                        <div class="dropdown-filters" id="fiter_for_order">
+                        <div class="dropdown-filters">
                             <div class="dropdown-toggle">
                                 <div class="grid-dropdown-header">
                                     <span class="name">{{ __('ui::app.datagrid.filter') }}</span>
