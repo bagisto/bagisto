@@ -152,13 +152,16 @@ class ProductRepository extends Repository
             if( isset($params['order']) && in_array($params['order'], ['desc', 'asc']) ){
                 $orderDirection = $params['order'];
             } else {
-                $orderDirection = $this->getDefaultSortByOption()[1];
+                $sortOptions = $this->getDefaultSortByOption();
+                $orderDirection = !empty($sortOptions) ? $sortOptions[1] : 'asc';
             }
 
             if (isset($params['sort'])) {
                 $this->checkSortAttributeAndGenerateQuery($qb, $params['sort'], $orderDirection);
             } else {
-                $this->checkSortAttributeAndGenerateQuery($qb, $this->getDefaultSortByOption()[0], $orderDirection);
+                $sortOptions = $this->getDefaultSortByOption();
+                if (!empty($sortOptions))
+                    $this->checkSortAttributeAndGenerateQuery($qb, $sortOptions[0], $orderDirection);
             }
 
             if ( $priceFilter = request('price') ){
@@ -458,7 +461,12 @@ class ProductRepository extends Repository
     private function getDefaultSortByOption()
     {
         $config = core()->getConfigData('catalog.products.storefront.sort_by');
-        return explode('-', $config);
+
+        $sortByOptions = [];
+        if (!empty($config))
+            $sortByOptions = explode('-', $config);
+
+        return $sortByOptions;
     }
 
     /**
