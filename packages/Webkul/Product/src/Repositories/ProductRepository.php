@@ -113,7 +113,7 @@ class ProductRepository extends Repository
 
             $perPage = isset($params['limit']) ? $params['limit'] : current($pages);
         } else {
-            $perPage = isset($params['limit']) ? $params['limit'] : 9;
+            $perPage = isset($params['limit']) && !empty($params['limit']) ? $params['limit'] : 9;
         }
 
         $page = Paginator::resolveCurrentPage('page');
@@ -151,18 +151,14 @@ class ProductRepository extends Repository
             $orderDirection = 'asc';
             if( isset($params['order']) && in_array($params['order'], ['desc', 'asc']) ){
                 $orderDirection = $params['order'];
+            } else {
+                $orderDirection = $this->getDefaultSortByOption()[1];
             }
 
             if (isset($params['sort'])) {
-                $attribute = $this->attributeRepository->findOneByField('code', $params['sort']);
-
-                if ($attribute) {
-                    if ($attribute->code == 'price') {
-                        $qb->orderBy('min_price', $orderDirection);
-                    } else {
-                        $qb->orderBy($params['sort'] == 'created_at' ? 'product_flat.created_at' : $attribute->code, $orderDirection);
-                    }
-                }
+                $this->checkSortAttributeAndGenerateQuery($qb, $params['sort'], $orderDirection);
+            } else {
+                $this->checkSortAttributeAndGenerateQuery($qb, $this->getDefaultSortByOption()[0], $orderDirection);
             }
 
             if ( $priceFilter = request('price') ){
@@ -388,7 +384,7 @@ class ProductRepository extends Repository
                             ->where('product_flat.channel', $channel)
                             ->where('product_flat.locale', $locale)
                             ->whereNotNull('product_flat.url_key')
-                            ->where(function($subQuery) use ($term) {  
+                            ->where(function($subQuery) use ($term) {
                                 $queries = explode('_', $term);
 
                                 foreach (array_map('trim', $queries) as $value) {
@@ -399,7 +395,7 @@ class ProductRepository extends Repository
                             ->orderBy('product_id', 'desc');
             })->paginate(16);
         }
-        
+
         return $results;
     }
 
@@ -452,5 +448,39 @@ class ProductRepository extends Repository
                          ->where('product_flat.name', 'like', '%' . urldecode($term) . '%')
                          ->orderBy('product_id', 'desc');
         })->get();
+    }
+
+    /**
+     * Get default sort by option
+     *
+     * @return array
+     */
+    private function getDefaultSortByOption()
+    {
+        $config = core()->getConfigData('catalog.products.storefront.sort_by');
+        return explode('-', $config);
+    }
+
+    /**
+     * Check sort attribute and generate query
+     *
+     * @param  object  $query
+     * @param  string  $sort
+     * @param  string  $direction
+     * @return object
+     */
+    private function checkSortAttributeAndGenerateQuery($query, $sort, $direction)
+    {
+        $attribute = $this->attributeRepository->findOneByField('code', $sort);
+
+        if ($attribute) {
+            if ($attribute->code == 'price') {
+                $query->orderBy('min_price', $direction);
+            } else {
+                $query->orderBy($sort == 'created_at' ? 'product_flat.created_at' : $attribute->code, $direction);
+            }
+        }
+
+        return $query;
     }
 }
