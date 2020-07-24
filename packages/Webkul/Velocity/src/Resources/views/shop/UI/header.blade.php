@@ -251,11 +251,20 @@
                                                 href="?locale={{ $locale->code }}"
                                             @endif>
 
+                                            @if( $locale->code == 'en')
+                                            <div class="category-logo">
+                                                <img
+                                                    class="category-icon"
+                                                    src="{{ asset('/themes/velocity/assets/images/flags/en.png') }}" />
+                                            </div>
+                                            @else
+
                                             <div class="category-logo">
                                                 <img
                                                     class="category-icon"
                                                     src="{{ asset('/storage/' . $locale->locale_image) }}" />
                                             </div>
+                                            @endif
 
                                             <span>
                                                 {{ isset($serachQuery) ? $locale->title : $locale->name }}
