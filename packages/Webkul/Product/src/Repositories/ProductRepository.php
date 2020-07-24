@@ -160,8 +160,9 @@ class ProductRepository extends Repository
                 $this->checkSortAttributeAndGenerateQuery($qb, $params['sort'], $orderDirection);
             } else {
                 $sortOptions = $this->getDefaultSortByOption();
-                if (!empty($sortOptions))
+                if (!empty($sortOptions)) {
                     $this->checkSortAttributeAndGenerateQuery($qb, $sortOptions[0], $orderDirection);
+                }
             }
 
             if ( $priceFilter = request('price') ){
@@ -463,8 +464,9 @@ class ProductRepository extends Repository
         $config = core()->getConfigData('catalog.products.storefront.sort_by');
 
         $sortByOptions = [];
-        if (!empty($config))
+        if (!empty($config)) {
             $sortByOptions = explode('-', $config);
+        }
 
         return $sortByOptions;
     }
