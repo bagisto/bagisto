@@ -136,7 +136,17 @@
                                 3 => [],
                                 2 => [],
                             ];
-                            $advertisement = json_decode($metaData->get('advertisement')->all()[0]->advertisement, true);
+
+                            $index = 0;
+                            $currentLocale = request()->get('locale') ?: core()->getCurrentLocale();
+                            
+                            foreach ($metaData->get('locale')->all() as $key => $value) {
+                                if ($value->locale == $currentLocale) {
+                                    $index = $key;
+                                }
+                            }
+
+                            $advertisement = json_decode($metaData->get('advertisement')->all()[$index]->advertisement, true);
                         @endphp
 
                         @if(! isset($advertisement[4]))
