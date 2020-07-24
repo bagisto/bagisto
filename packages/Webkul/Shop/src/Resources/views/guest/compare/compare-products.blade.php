@@ -38,7 +38,7 @@
                     @foreach ($comparableAttributes as $attribute)
                         <tr>
                             <td>
-                                <span class="fs16">{{ $attribute['admin_name'] }}</span>
+                                <span class="fs16">{{ isset($attribute['name']) ? $attribute['name'] ? $attribute['name'] : $attribute['admin_name'] : $attribute['admin_name'] }}</span>
                             </td>
 
                             <td :key="`title-${index}`" v-for="(product, index) in products">
