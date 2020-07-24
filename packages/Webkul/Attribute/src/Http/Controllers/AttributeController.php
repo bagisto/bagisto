@@ -62,12 +62,16 @@ class AttributeController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'code'       => ['required', 'not_in:image', 'unique:attributes,code', new \Webkul\Core\Contracts\Validations\Code],
+            'code'       => ['required', 'unique:attributes,code', new \Webkul\Core\Contracts\Validations\Code],
             'admin_name' => 'required',
             'type'       => 'required',
         ]);
 
         $data = request()->all();
+
+        if ($data['code'] == 'image') {
+            $data['code'] = 'Image';
+        }
 
         $data['is_user_defined'] = 1;
 
