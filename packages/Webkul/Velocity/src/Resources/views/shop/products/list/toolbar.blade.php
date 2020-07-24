@@ -8,40 +8,22 @@
     <script type="text/x-template" id="toolbar-template">
         <div class="toolbar-wrapper" v-if='!isMobile()'>
             <div class="view-mode">
-                @if (
-                    ! ($toolbarHelper->isModeActive('grid')
-                    || $toolbarHelper->isModeActive('list'))
-                )
-                    <div class="rango-view-grid-container active">
-                        <span class="rango-view-grid fs24"></span>
-                    </div>
-                @else
-                    @if ($toolbarHelper->isModeActive('grid'))
-                        <div class="rango-view-grid-container active">
-                            <span class="rango-view-grid fs24"></span>
-                        </div>
-                    @else
-                        <div class="rango-view-grid-container">
-                            <a href="{{ $toolbarHelper->getModeUrl('grid') }}" class="grid-view unset">
-                                <span class="rango-view-grid fs24"></span>
-                            </a>
-                        </div>
-                    @endif
-                @endif
+                @php
+                  $viewOption = $toolbarHelper->getViewOption();
+                @endphp
 
-                @if ($toolbarHelper->isModeActive('list'))
-                    <div class="rango-view-list-container active">
+                <div class="rango-view-grid-container {{ $viewOption === 'grid' ? 'active' : '' }}">
+                    <a href="{{ $toolbarHelper->getModeUrl('grid') }}" class="grid-view unset">
+                        <span class="rango-view-grid fs24"></span>
+                    </a>
+                </div>
+                <div class="rango-view-list-container {{ $viewOption === 'list' ? 'active' : '' }}">
+                    <a
+                        href="{{ $toolbarHelper->getModeUrl('list') }}"
+                        class="list-view unset">
                         <span class="rango-view-list fs24"></span>
-                    </div>
-                @else
-                    <div class="rango-view-list-container">
-                        <a
-                            href="{{ $toolbarHelper->getModeUrl('list') }}"
-                            class="list-view unset">
-                            <span class="rango-view-list fs24"></span>
-                        </a>
-                    </div>
-                @endif
+                    </a>
+                </div>
             </div>
 
             <div class="sorter">

@@ -95,7 +95,7 @@ class Toolbar extends AbstractProduct
             $sortBy = core()->getConfigData('catalog.products.storefront.sort_by')
                    ? core()->getConfigData('catalog.products.storefront.sort_by')
                    : 'created_at-asc';
-            
+
             if ($key == $sortBy) {
                 return true;
             }
@@ -154,5 +154,28 @@ class Toolbar extends AbstractProduct
         return core()->getConfigData('catalog.products.storefront.mode')
                ? core()->getConfigData('catalog.products.storefront.mode')
                : 'grid';
+    }
+
+    /**
+     * Returns the view option if mode is set by param then it will overwrite default one and return new mode
+     *
+     * @return string
+     */
+    public function getViewOption()
+    {
+        /* checking default option first */
+        $viewOption = core()->getConfigData('catalog.products.storefront.mode');
+
+        /* checking mode param if exist then overwrite the default option */
+        if ($this->isModeActive('grid')) {
+            $viewOption = 'grid';
+        }
+
+        /* checking mode param if exist then overwrite the default option */
+        if ($this->isModeActive('list')) {
+            $viewOption = 'list';
+        }
+
+        return $viewOption;
     }
 }
