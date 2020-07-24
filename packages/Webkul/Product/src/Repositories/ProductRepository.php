@@ -456,8 +456,11 @@ class ProductRepository extends Repository
      * @return array
      */
     private function getDefaultSortByOption()
-    {
-        $config = core()->getConfigData('catalog.products.storefront.sort_by');
+    {   
+        $value = core()->getConfigData('catalog.products.storefront.sort_by');
+
+        $config = $value ? $value : 'name-desc';
+
         return explode('-', $config);
     }
 
