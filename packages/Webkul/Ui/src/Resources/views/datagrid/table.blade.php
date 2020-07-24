@@ -24,6 +24,65 @@
                     </div>
 
                     <div class="filter-right">
+                        @if (isset($results['extraFilters']['channels']))
+                        <div class="dropdown-filters per-page">
+                            <div class="control-group">
+                                <select class="control" id="channel-switcher" name="channel"
+                                        onchange="reloadPage('channel', this.value)">
+                                    <option value="all" {{ ! isset($channel) ? 'selected' : '' }}>
+                                        {{ __('admin::app.admin.system.all-channels') }}
+                                    </option>
+                                    @foreach ($results['extraFilters']['channels'] as $channelModel)
+                                        <option
+                                            value="{{ $channelModel->code }}"
+                                            {{ (isset($channel) && ($channelModel->code) == $channel) ? 'selected' : '' }}>
+                                            {{ $channelModel->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        @endif
+
+                        @if (isset($results['extraFilters']['locales']))
+                        <div class="dropdown-filters per-page">
+                            <div class="control-group">
+                                <select class="control" id="locale-switcher" name="locale"
+                                        onchange="reloadPage('locale', this.value)">
+                                    <option value="all" {{ ! isset($locale) ? 'selected' : '' }}>
+                                        {{ __('admin::app.admin.system.all-locales') }}
+                                    </option>
+                                    @foreach ($results['extraFilters']['locales'] as $localeModel)
+                                        <option
+                                            value="{{ $localeModel->code }}" {{ (isset($locale) && ($localeModel->code) == $locale) ? 'selected' : '' }}>
+                                            {{ $localeModel->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        @endif
+
+                        @if (isset($results['extraFilters']['customer_groups']))
+                        <div class="dropdown-filters per-page">
+                            <div class="control-group">
+                                <select class="control" id="customer-group-switcher" name="customer_group"
+                                        onchange="reloadPage('customer_group', this.value)">
+                                    <option value="all" {{ ! isset($customer_group) ? 'selected' : '' }}>
+                                        {{ __('admin::app.admin.system.all-customer-groups') }}
+                                    </option>
+                                    @foreach ($results['extraFilters']['customer_groups'] as $customerGroupModel)
+                                        <option
+                                            value="{{ $customerGroupModel->id }}"
+                                            {{ (isset($customer_group) && ($customerGroupModel->id) == $customer_group) ? 'selected' : '' }}>
+                                            {{ $customerGroupModel->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        @endif
+
                         <div class="dropdown-filters per-page">
                             <div class="control-group">
                                 <label class="per-page-label" for="perPage">
@@ -170,12 +229,14 @@
                 <div class="filtered-tags">
                     <span class="filter-tag" v-if="filters.length > 0" v-for="filter in filters"
                           style="text-transform: capitalize;">
-                        <span v-if="filter.column == 'sort'">@{{ filter.label }}</span>
-                        <span v-else-if="filter.column == 'search'">Search</span>
-                        <span v-else-if="filter.column == 'perPage'">perPage</span>
+                        <span v-if="filter.column == 'perPage'">perPage</span>
                         <span v-else>@{{ filter.label }}</span>
 
-                        <span class="wrapper">
+                        <span class="wrapper" v-if="filter.prettyValue">
+                            @{{ filter.prettyValue }}
+                            <span class="icon cross-icon" v-on:click="removeFilter(filter)"></span>
+                        </span>
+                        <span class="wrapper" v-else>
                             @{{ decodeURIComponent(filter.val) }}
                             <span class="icon cross-icon" v-on:click="removeFilter(filter)"></span>
                         </span>
@@ -237,6 +298,7 @@
                         numberConditionSelect: false,
                         datetimeConditionSelect: false,
                         perPage: 10,
+                        extraFilters: @json($results['extraFilters']),
                     }
                 },
 
@@ -332,7 +394,7 @@
 
                         if (this.type === 'string' && this.stringValue !== null) {
                             this.formURL(this.columnOrAlias, this.stringCondition, encodeURIComponent(this.stringValue), label)
-                        } else if (this.type == 'number') {
+                        } else if (this.type === 'number') {
                             indexConditions = true;
 
                             if (this.filterIndex === this.columnOrAlias
@@ -636,12 +698,21 @@
                                     break;
                                 case "channel":
                                     obj.label = "Channel";
+                                    if ('channels' in this.extraFilters) {
+                                        obj.prettyValue = this.extraFilters['channels'].find(channel => channel.code === obj.val).name
+                                    }
                                     break;
                                 case "locale":
                                     obj.label = "Locale";
+                                    if ('locales' in this.extraFilters) {
+                                        obj.prettyValue = this.extraFilters['locales'].find(locale => locale.code === obj.val).name
+                                    }
                                     break;
                                 case "customer_group":
                                     obj.label = "Customer Group";
+                                    if ('customer_groups' in this.extraFilters) {
+                                        obj.prettyValue = this.extraFilters['customer_groups'].find(customer_group => customer_group.id === parseInt(obj.val, 10)).name
+                                    }
                                     break;
                                 case "sort":
                                     for (let colIndex in this.columns) {
@@ -657,7 +728,7 @@
                                             obj.label = this.columns[colIndex].label;
 
                                             if (this.columns[colIndex].type === 'boolean') {
-                                                console.log('obj.val',obj.val);
+                                                console.log('obj.val', obj.val);
                                                 if (obj.val === '1') {
                                                     obj.val = '{{ __('ui::app.datagrid.true') }}';
                                                 } else {
@@ -671,6 +742,7 @@
 
                             if (obj.column !== undefined && obj.val !== undefined) {
                                 this.filters.push(obj);
+                                console.log('pushed');
                             }
 
                             obj = {};

@@ -11,7 +11,7 @@ abstract class DataGrid
      *
      * @var int
      */
-    protected $index = null;
+    protected $index;
 
     /**
      * Default sort order of datagrid
@@ -164,6 +164,9 @@ abstract class DataGrid
         10 => "lock",
     ];
 
+    /** @var string[] contains the keys for which extra filters to show */
+    protected $extraFilters = [];
+
     abstract public function prepareQueryBuilder();
 
     abstract public function addColumns();
@@ -230,7 +233,7 @@ abstract class DataGrid
     {
         $this->fireEvent('add.column.before.' . $column['index']);
 
-        array_push($this->columns, $column);
+        $this->columns[] = $column;
 
         $this->setCompleteColumnDetails($column);
 
@@ -244,7 +247,7 @@ abstract class DataGrid
      */
     public function setCompleteColumnDetails($column)
     {
-        array_push($this->completeColumnDetails, $column);
+        $this->completeColumnDetails[] = $column;
     }
 
     /**
@@ -298,7 +301,7 @@ abstract class DataGrid
 
         $this->fireEvent('mass.action.before.' . $eventName);
 
-        array_push($this->massActions, $massAction);
+        $this->massActions[] = $massAction;
 
         $this->enableMassAction = true;
 
@@ -313,7 +316,7 @@ abstract class DataGrid
         $parsedUrl = $this->parseUrl();
 
         foreach ($parsedUrl as $key => $value) {
-            if ($key == 'locale') {
+            if ($key === 'locale') {
                 if (! is_array($value)) {
                     unset($parsedUrl[$key]);
                 }
@@ -376,7 +379,7 @@ abstract class DataGrid
             $columnType = $this->findColumnType($key)[0] ?? null;
             $columnName = $this->findColumnType($key)[1] ?? null;
 
-            if ($key == "sort") {
+            if ($key === "sort") {
                 $count_keys = count(array_keys($info));
 
                 if ($count_keys > 1) {
@@ -389,7 +392,7 @@ abstract class DataGrid
                     $columnName[1],
                     array_values($info)[0]
                 );
-            } elseif ($key == "search") {
+            } elseif ($key === "search") {
                 $count_keys = count(array_keys($info));
 
                 if ($count_keys > 1) {
@@ -544,6 +547,17 @@ abstract class DataGrid
 
         $this->prepareQueryBuilder();
 
+        $necessaryExtraFilters = [];
+        if (in_array('channels', $this->extraFilters)) {
+            $necessaryExtraFilters['channels'] = core()->getAllChannels();
+        }
+        if (in_array('locales', $this->extraFilters)) {
+            $necessaryExtraFilters['locales'] = core()->getAllLocales();
+        }
+        if (in_array('customer_groups', $this->extraFilters)) {
+            $necessaryExtraFilters['customer_groups'] = core()->getAllCustomerGroups();
+        }
+
         return view('ui::datagrid.table')->with('results', [
             'records'           => $this->getCollection(),
             'columns'           => $this->completeColumnDetails,
@@ -553,7 +567,8 @@ abstract class DataGrid
             'enableMassActions' => $this->enableMassAction,
             'enableActions'     => $this->enableAction,
             'paginated'         => $this->paginate,
-            'norecords'         => trans('ui::app.datagrid.no-records'),
+            'norecords'         => __('ui::app.datagrid.no-records'),
+            'extraFilters'      => $necessaryExtraFilters
         ]);
     }
 

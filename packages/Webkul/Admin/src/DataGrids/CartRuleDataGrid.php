@@ -15,6 +15,12 @@ class CartRuleDataGrid extends DataGrid
 
     protected $channel = 'all';
 
+    /** @var string[] contains the keys for which extra filters to show */
+    protected $extraFilters = [
+        'channels',
+        'customer_groups',
+    ];
+
     public function __construct()
     {
         parent::__construct();
