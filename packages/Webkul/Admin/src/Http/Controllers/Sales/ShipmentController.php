@@ -108,8 +108,6 @@ class ShipmentController extends Controller
         }
 
         $this->validate(request(), [
-            'shipment.carrier_title' => 'required',
-            'shipment.track_number'  => 'required',
             'shipment.source'        => 'required',
             'shipment.items.*.*'     => 'required|numeric|min:0',
         ]);
