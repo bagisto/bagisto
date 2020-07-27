@@ -685,7 +685,15 @@ class Bundle extends AbstractType
         }
 
         foreach ($item->children as $childItem) {
-            $childItem->product->getTypeInstance()->validateCartItem($childItem);
+            $childResult = $childItem->product->getTypeInstance()->validateCartItem($childItem);
+
+            if ($childResult->isItemInactive()) {
+                $result->itemIsInactive();
+            }
+
+            if ($childResult->isCartDirty()) {
+                $result->cartIsDirty();
+            }
 
             $price += $childItem->base_price * $childItem->quantity;
         }

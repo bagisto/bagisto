@@ -158,7 +158,7 @@ class Booking extends Virtual
      * @param  int  $qty
      * @return bool
      */
-    public function haveSufficientQuantity($qty)
+    public function haveSufficientQuantity(int $qty): bool
     {
         return true;
     }

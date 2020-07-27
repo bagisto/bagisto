@@ -795,7 +795,13 @@ class Cart
      */
     public function isItemsHaveSufficientQuantity(): bool
     {
-        foreach ($this->getCart()->items as $item) {
+        $cart = cart()->getCart();
+
+        if (! $cart) {
+            return false;
+        }
+
+        foreach ($cart->items as $item) {
             if (! $this->isItemHaveQuantity($item)) {
                 return false;
             }

@@ -592,7 +592,7 @@ class Configurable extends AbstractType
      * @param  int  $qty
      * @return bool
      */
-    public function haveSufficientQuantity($qty)
+    public function haveSufficientQuantity(int $qty): bool
     {
         $backorders = core()->getConfigData('catalog.inventory.stock_options.backorders');
 

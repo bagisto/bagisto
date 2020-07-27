@@ -261,11 +261,11 @@ class Product extends Model implements ProductContract
     }
 
     /**
-     * @param integer $qty
+     * @param int $qty
      *
      * @return bool
      */
-    public function haveSufficientQuantity($qty)
+    public function haveSufficientQuantity(int $qty): bool
     {
         return $this->getTypeInstance()->haveSufficientQuantity($qty);
     }

@@ -350,7 +350,7 @@ abstract class AbstractType
      *
      * @return bool
      */
-    public function haveSufficientQuantity($qty)
+    public function haveSufficientQuantity(int $qty): bool
     {
         return $this->haveSufficientQuantity;
     }
@@ -555,7 +555,7 @@ abstract class AbstractType
         if ($haveSpecialPrice) {
             $this->product->special_price = min($this->product->special_price, $customerGroupPrice);
         } else {
-            $haveSpecialPrice = true; 
+            $haveSpecialPrice = true;
             $this->product->special_price = $customerGroupPrice;
         }
 
