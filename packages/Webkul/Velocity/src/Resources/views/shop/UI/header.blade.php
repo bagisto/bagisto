@@ -252,18 +252,18 @@
                                             @endif>
 
                                             @if( $locale->code == 'en')
-                                            <div class="category-logo">
-                                                <img
+                                                <div class="category-logo">
+                                                    <img
                                                     class="category-icon"
                                                     src="{{ asset('/themes/velocity/assets/images/flags/en.png') }}" />
-                                            </div>
+                                                </div>
                                             @else
 
-                                            <div class="category-logo">
-                                                <img
+                                                <div class="category-logo">
+                                                    <img
                                                     class="category-icon"
                                                     src="{{ asset('/storage/' . $locale->locale_image) }}" />
-                                            </div>
+                                                </div>
                                             @endif
 
                                             <span>
