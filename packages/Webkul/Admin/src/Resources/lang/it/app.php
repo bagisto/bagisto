@@ -1314,6 +1314,7 @@ return [
             'order-number-prefix' => 'Prefisso Numero Ordine',
             'order-number-length' => 'Lunghezza Numero Ordine',
             'order-number-suffix' => 'Suffisso Numero Ordine',
+            'order-number-generator-class' => 'Generatore di numeri dordine',
             'default' => 'Default',
             'sandbox' => 'Sandbox',
             'all-channels' => 'Tutti',

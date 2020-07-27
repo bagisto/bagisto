@@ -23,6 +23,13 @@ import TimeComponent from './components/time';
 import SwatchPicker from './components/swatch-picker';
 import Debounce from './directives/debounce';
 import OverlayLoader from './components/overlay-loader';
+import VTooltip from 'v-tooltip';
+
+VTooltip.options.defaultDelay = 0;
+
+Vue.directive('tooltip', VTooltip.VTooltip)
+
+Vue.config.productionTip = false;
 
 Vue.component('flash-wrapper', FlashWrapper);
 Vue.component('flash', Flash);
