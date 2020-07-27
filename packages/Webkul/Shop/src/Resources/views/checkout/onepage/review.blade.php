@@ -19,7 +19,7 @@
                             <b>{{ $billingAddress->first_name }} {{ $billingAddress->last_name }}</b>
                         </li>
                         <li class="mb-10">
-                            {{ $billingAddress->address1 }}, {{ $billingAddress->city }}<br/> {{ $billingAddress->state }}
+                            {{ $billingAddress->address1 }},<br/> {{ $billingAddress->state }}
                         </li>
                         <li class="mb-10">
                             {{ core()->country_name($billingAddress->country) }} {{ $billingAddress->postcode }}
@@ -50,7 +50,7 @@
                             <b>{{ $shippingAddress->first_name }} {{ $shippingAddress->last_name }}</b>
                         </li>
                         <li class="mb-10">
-                            {{ $shippingAddress->address1 }}, {{ $shippingAddress->city }}<br/> {{ $shippingAddress->state }}
+                            {{ $shippingAddress->address1 }},<br/> {{ $shippingAddress->state }}
                         </li>
                         <li class="mb-10">
                             {{ core()->country_name($shippingAddress->country) }} {{ $shippingAddress->postcode }}
