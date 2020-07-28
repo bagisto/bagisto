@@ -125,7 +125,7 @@ class ProductRepository extends Repository
 
             $qb = $query->distinct()
                 ->select('product_flat.*')
-                ->join('product_flat as variants', 'product_flat.id', '=', DB::raw('COALESCE(variants.parent_id, variants.id)'))
+                ->join('product_flat as variants', 'product_flat.id', '=', DB::raw('COALESCE('.env('DB_PREFIX').'variants.parent_id, '.env('DB_PREFIX').'variants.id)'))
                 ->leftJoin('product_categories', 'product_categories.product_id', '=', 'product_flat.product_id')
                 ->leftJoin('product_attribute_values', 'product_attribute_values.product_id', '=', 'variants.product_id')
                 ->where('product_flat.channel', $channel)
