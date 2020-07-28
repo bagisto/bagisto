@@ -637,8 +637,8 @@
                     makeURL: function () {
                         newParams = '';
 
-                        for (let i = 0; i < this.filters.length; i++) {
-                            if (this.filters[i].column == 'status') {
+                        for(let i = 0; i < this.filters.length; i++) {
+                            if (this.filters[i].column == 'status' || this.filters[i].column == 'value_per_locale' || this.filters[i].column == 'value_per_channel' || this.filters[i].column == 'is_unique') {
                                 if (this.filters[i].val.includes("True")) {
                                     this.filters[i].val = 1;
                                 } else if (this.filters[i].val.includes("False")) {
