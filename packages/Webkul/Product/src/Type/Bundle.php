@@ -450,6 +450,8 @@ class Bundle extends AbstractType
      */
     public function prepareForCart($data)
     {
+        $bundleQuantity = $data['quantity'];
+
         if (isset($data['bundle_options'])) {
             $data['bundle_options'] = array_filter($this->validateBundleOptionForCart($data['bundle_options']));
         }
@@ -461,7 +463,13 @@ class Bundle extends AbstractType
         $products = parent::prepareForCart($data);
 
         foreach ($this->getCartChildProducts($data) as $productId => $data) {
+
             $product = $this->productRepository->find($productId);
+
+            /* need to check each individual quantity as well if don't have then show error */
+            if (! $product->getTypeInstance()->haveSufficientQuantity($data['quantity'] * $bundleQuantity)) {
+                return trans('shop::app.checkout.cart.quantity.inventory_warning');
+            }
 
             if (! $product->getTypeInstance()->isSaleable()) {
                 continue;
