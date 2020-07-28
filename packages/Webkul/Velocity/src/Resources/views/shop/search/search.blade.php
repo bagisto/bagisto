@@ -35,6 +35,32 @@
         style="padding-left: 50px !important;"
         class="container category-page-wrapper"
     >
+        <search-component></search-component>
+    </div>
+@endsection
+
+@push('scripts')
+    <script type="text/x-template" id="image-search-result-component-template">
+        <div class="image-search-result">
+            <div class="searched-image">
+                <img :src="searchedImageUrl"/>
+            </div>
+
+            <div class="searched-terms">
+                <h3 class="fw6 fs20 mb-4">
+                    {{ __('shop::app.search.analysed-keywords') }}
+                </h3>
+
+                <div class="term-list">
+                    <a v-for="term in searched_terms" :href="'{{ route('shop.search.index') }}?term=' + term.slug">
+                        @{{ term.name }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/x-template" id="seach-component-template">
         <section class="search-container row category-container">
             @if (request('image-search'))
                 <image-search-result-component></image-search-result-component>
@@ -82,31 +108,13 @@
                 @endif
             @endif
         </section>
-    </div>
-@endsection
-
-@push('scripts')
-    <script type="text/x-template" id="image-search-result-component-template">
-        <div class="image-search-result">
-            <div class="searched-image">
-                <img :src="searchedImageUrl"/>
-            </div>
-
-            <div class="searched-terms">
-                <h3 class="fw6 fs20 mb-4">
-                    {{ __('shop::app.search.analysed-keywords') }}
-                </h3>
-
-                <div class="term-list">
-                    <a v-for="term in searched_terms" :href="'{{ route('shop.search.index') }}?term=' + term.slug">
-                        @{{ term.name }}
-                    </a>
-                </div>
-            </div>
-        </div>
     </script>
 
     <script>
+        Vue.component('search-component', {
+            template: '#seach-component-template',
+        });
+
         Vue.component('image-search-result-component', {
             template: '#image-search-result-component-template',
 
