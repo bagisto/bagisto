@@ -460,6 +460,10 @@ class Bundle extends AbstractType
 
         $products = parent::prepareForCart($data);
 
+        if (is_string($products)) {
+            return trans('shop::app.checkout.cart.quantity.inventory_warning');
+        }
+
         foreach ($this->getCartChildProducts($data) as $productId => $data) {
             $product = $this->productRepository->find($productId);
 
