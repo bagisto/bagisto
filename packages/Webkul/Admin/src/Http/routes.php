@@ -211,6 +211,10 @@ Route::group(['middleware' => ['web']], function () {
                     'view' => 'admin::sales.invoices.print',
                 ])->name('admin.sales.invoices.print');
 
+                Route::post('/invoices/update/state/{order_id}', 'Webkul\Admin\Http\Controllers\Sales\InvoiceController@updateState')->defaults('_config', [
+                    'redirect' => 'admin.sales.orders.view',
+                ])->name('admin.sales.invoices.update.state');
+
 
                 // Sales Shipments Routes
                 Route::get('/shipments', 'Webkul\Admin\Http\Controllers\Sales\ShipmentController@index')->defaults('_config', [

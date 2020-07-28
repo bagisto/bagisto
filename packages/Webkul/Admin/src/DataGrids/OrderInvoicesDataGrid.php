@@ -48,10 +48,14 @@ class OrderInvoicesDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'created_at',
             'label'      => trans('admin::app.datagrid.invoice-date'),
-            'type'       => 'datetime',
+            'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
             'filterable' => true,
+            'closure'    => true,
+            'wrapper'    => function ($value) {
+                return \Carbon\Carbon::parse($value->created_at)->format('d-m-Y');
+            }
         ]);
 
         $this->addColumn([

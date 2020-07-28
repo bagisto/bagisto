@@ -1,10 +1,10 @@
-@extends('admin::layouts.master')
+@extends('admin::layouts.content')
 
 @section('page_title')
     {{ __('admin::app.sales.invoices.view-title', ['invoice_id' => $invoice->id]) }}
 @stop
 
-@section('content-wrapper')
+@section('content')
 
     <?php $order = $invoice->order; ?>
 
@@ -260,7 +260,7 @@
 
 @push('scripts')
     <script type="text/x-template" id="options-template">
-    <form method="POST" action="#" @submit.prevent="onSubmit">
+    <form method="POST" action="{{ route('admin.sales.invoices.update.state', $invoice->id) }}">
         <div class="page-content">
             <p>Please select the new invoice state:</p>
 
@@ -284,7 +284,7 @@
 
             <br />
 
-            <button type="submit" class="btn btn-md btn-primary">Update status</button>
+            <button type="submit" class="btn btn-md btn-primary">{{ __('admin::app.sales.orders.invoice-status-update')}}</button>
         </div>
     </form>
 </script>
