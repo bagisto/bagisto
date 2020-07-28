@@ -81,7 +81,7 @@
                 class="product-image-container">
 
                 <img
-					loading="lazy"
+                    loading="lazy"
                     class="card-img-top"
                     alt="{{ $product->name }}"
                     src="{{ $productBaseImage['large_image_url'] }}"
