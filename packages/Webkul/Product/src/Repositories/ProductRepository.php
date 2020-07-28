@@ -111,7 +111,7 @@ class ProductRepository extends Repository
         if (core()->getConfigData('catalog.products.storefront.products_per_page')) {
             $pages = explode(',', core()->getConfigData('catalog.products.storefront.products_per_page'));
 
-            $perPage = isset($params['limit']) ? $params['limit'] : current($pages);
+            $perPage = isset($params['limit']) ? (!empty($params['limit']) ? $params['limit'] : 9) : current($pages);
         } else {
             $perPage = isset($params['limit']) && !empty($params['limit']) ? $params['limit'] : 9;
         }
@@ -152,13 +152,17 @@ class ProductRepository extends Repository
             if( isset($params['order']) && in_array($params['order'], ['desc', 'asc']) ){
                 $orderDirection = $params['order'];
             } else {
-                $orderDirection = $this->getDefaultSortByOption()[1];
+                $sortOptions = $this->getDefaultSortByOption();
+                $orderDirection = !empty($sortOptions) ? $sortOptions[1] : 'asc';
             }
 
             if (isset($params['sort'])) {
                 $this->checkSortAttributeAndGenerateQuery($qb, $params['sort'], $orderDirection);
             } else {
-                $this->checkSortAttributeAndGenerateQuery($qb, $this->getDefaultSortByOption()[0], $orderDirection);
+                $sortOptions = $this->getDefaultSortByOption();
+                if (!empty($sortOptions)) {
+                    $this->checkSortAttributeAndGenerateQuery($qb, $sortOptions[0], $orderDirection);
+                }
             }
 
             if ( $priceFilter = request('price') ){
@@ -456,8 +460,11 @@ class ProductRepository extends Repository
      * @return array
      */
     private function getDefaultSortByOption()
-    {
-        $config = core()->getConfigData('catalog.products.storefront.sort_by');
+    {   
+        $value = core()->getConfigData('catalog.products.storefront.sort_by');
+
+        $config = $value ? $value : 'name-desc';
+
         return explode('-', $config);
     }
 

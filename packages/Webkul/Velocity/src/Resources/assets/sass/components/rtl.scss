@@ -42,16 +42,14 @@ body {
             }
 
             .mini-cart-container {
-                #mini-cart {
-                    .badge {
-                        top: -6px;
-                        left: 90%;
-                    }
-    
-                    .cart-text {
-                        left: 24px;
-                        vertical-align: top;
-                    }
+                ~ .compare-btn,
+                ~ .wishlist-btn {
+                    .badge-container {
+                        .badge {
+                            top: -28px;
+                            left: -2px;
+                        }
+                    }   
                 }
 
                 ~ .wishlist-btn , ~ .compare-btn {
