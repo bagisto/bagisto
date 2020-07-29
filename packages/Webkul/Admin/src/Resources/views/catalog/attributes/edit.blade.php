@@ -418,7 +418,7 @@
                     optionRowCount: 0,
                     optionRows: [],
                     show_swatch: "{{ $attribute->type == 'select' ? true : false  }}",
-                    swatch_type: "{{ $attribute->swatch_type }}",
+                    swatch_type: "{{ $attribute->swatch_type == '' ? 'dropdown' : $attribute->swatch_type }}",
                     isNullOptionChecked: false,
                     idNullOption: null
                 }

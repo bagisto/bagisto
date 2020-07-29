@@ -21,7 +21,8 @@
                 <div class="page-header">
                     <div class="page-title">
                         <h1>
-                            <i class="icon angle-left-icon back-link" @click="redirectBack('{{ url('/admin/dashboard') }}')"></i>
+                        <i class="icon angle-left-icon back-link"
+                            onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
 
                             {{ __('admin::app.promotions.catalog-rules.edit-title') }}
                         </h1>

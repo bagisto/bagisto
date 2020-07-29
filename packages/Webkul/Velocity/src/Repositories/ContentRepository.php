@@ -153,7 +153,7 @@ class ContentRepository extends Repository
                 'content_type' => $content->content_type,
             ]);
         }
-
+        
         return $formattedContent;
     }
 }

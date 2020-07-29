@@ -16,22 +16,22 @@ class Order
 {
     /**
      * Send new order Mail to the customer and admin
-     * 
+     *
      * @param  \Webkul\Sales\Contracts\Order  $order
      * @return void
      */
     public function sendNewOrderMail($order)
     {
         try {
+            /* email to customer */
             $configKey = 'emails.general.notifications.emails.general.notifications.new-order';
-
-            if (core()->getConfigData($configKey)) {
+            if (core()->getConfigData($configKey))
                 Mail::queue(new NewOrderNotification($order));
-            }
 
+            /* email to admin */
             $configKey = 'emails.general.notifications.emails.general.notifications.new-admin';
-
             if (core()->getConfigData($configKey)) {
+                app()->setLocale(env('APP_LOCALE'));
                 Mail::queue(new NewAdminNotification($order));
             }
         } catch (\Exception $e) {
@@ -41,7 +41,7 @@ class Order
 
     /**
      * Send new invoice mail to the customer
-     * 
+     *
      * @param  \Webkul\Sales\Contracts\Invoice  $invoice
      * @return void
      */
@@ -64,7 +64,7 @@ class Order
 
     /**
      * Send new refund mail to the customer
-     * 
+     *
      * @param  \Webkul\Sales\Contracts\Refund  $refund
      * @return void
      */
@@ -83,7 +83,7 @@ class Order
 
     /**
      * Send new shipment mail to the customer
-     * 
+     *
      * @param  \Webkul\Sales\Contracts\Shipment  $shipment
      * @return void
      */
