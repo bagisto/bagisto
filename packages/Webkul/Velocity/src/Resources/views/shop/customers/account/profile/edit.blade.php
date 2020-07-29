@@ -15,16 +15,17 @@
         </h1>
     </div>
 
-    {!! view_render_event('bagisto.shop.customers.account.profile.view.before', ['customer' => $customer]) !!}
+    {!! view_render_event('bagisto.shop.customers.account.profile.edit.before', ['customer' => $customer]) !!}
 
         <div class="profile-update-form">
             <form
                 method="POST"
                 @submit.prevent="onSubmit"
                 class="account-table-content"
-                action="{{ route('customer.profile.edit') }}">
-
+                action="{{ route('customer.profile.store') }}">
                 @csrf
+
+                {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.before', ['customer' => $customer]) !!}
 
                 <div :class="`row ${errors.has('first_name') ? 'has-error' : ''}`">
                     <label class="col-12 mandatory">
@@ -37,6 +38,8 @@
                     </div>
                 </div>
 
+                {!! view_render_event('bagisto.shop.customers.account.profile.edit.first_name.after', ['customer' => $customer]) !!}
+
                 <div class="row">
                     <label class="col-12">
                         {{ __('shop::app.customer.account.profile.lname') }}
@@ -46,6 +49,8 @@
                         <input value="{{ $customer->last_name }}" name="last_name" type="text" />
                     </div>
                 </div>
+
+                {!! view_render_event('bagisto.shop.customers.account.profile.edit.last_name.after', ['customer' => $customer]) !!}
 
                 <div :class="`row ${errors.has('gender') ? 'has-error' : ''}`">
                     <label class="col-12 mandatory">
@@ -93,6 +98,8 @@
                     </div>
                 </div>
 
+                {!! view_render_event('bagisto.shop.customers.account.profile.edit.gender.after', ['customer' => $customer]) !!}
+
                 <div :class="`row ${errors.has('date_of_birth') ? 'has-error' : ''}`">
                     <label class="col-12">
                         {{ __('shop::app.customer.account.profile.dob') }}
@@ -112,6 +119,8 @@
                     </div>
                 </div>
 
+                {!! view_render_event('bagisto.shop.customers.account.profile.edit.date_of_birth.after', ['customer' => $customer]) !!}
+
                 <div class="row">
                     <label class="col-12 mandatory">
                         {{ __('shop::app.customer.account.profile.email') }}
@@ -123,6 +132,8 @@
                     </div>
                 </div>
 
+                {!! view_render_event('bagisto.shop.customers.account.profile.edit.email.after', ['customer' => $customer]) !!}
+
                 <div class="row">
                     <label class="col-12">
                         {{ __('velocity::app.shop.general.enter-current-password') }}
@@ -133,6 +144,8 @@
                     </div>
                 </div>
 
+                {!! view_render_event('bagisto.shop.customers.account.profile.edit.oldpassword.after', ['customer' => $customer]) !!}
+
                 <div class="row">
                     <label class="col-12">
                         {{ __('velocity::app.shop.general.new-password') }}
@@ -142,6 +155,7 @@
                         <input
                             value=""
                             name="password"
+                            ref="password"
                             type="password"
                             v-validate="'min:6|max:18'" />
 
@@ -150,6 +164,8 @@
                         </span>
                     </div>
                 </div>
+
+                {!! view_render_event('bagisto.shop.customers.account.profile.edit.password.after', ['customer' => $customer]) !!}
 
                 <div class="row">
                     <label class="col-12">
@@ -166,6 +182,8 @@
                     </div>
                 </div>
 
+                {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.after', ['customer' => $customer]) !!}
+
                 <button
                     type="submit"
                     class="theme-btn mb20">
@@ -174,5 +192,5 @@
             </form>
         </div>
 
-    {!! view_render_event('bagisto.shop.customers.account.profile.view.after', ['customer' => $customer]) !!}
+    {!! view_render_event('bagisto.shop.customers.account.profile.edit.after', ['customer' => $customer]) !!}
 @endsection

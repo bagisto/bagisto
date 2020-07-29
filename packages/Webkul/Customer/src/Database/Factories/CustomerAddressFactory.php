@@ -4,11 +4,10 @@
 
 use Faker\Generator as Faker;
 use Webkul\Customer\Models\Customer;
+use Illuminate\Support\Arr;
 use Webkul\Customer\Models\CustomerAddress;
 
 $factory->define(CustomerAddress::class, function (Faker $faker) {
-    $now = date("Y-m-d H:i:s");
-
     // use an locale from a country in europe so the vat id can be generated
     $fakerIt = \Faker\Factory::create('it_IT');
 
@@ -26,9 +25,8 @@ $factory->define(CustomerAddress::class, function (Faker $faker) {
         'city'            => $faker->city,
         'postcode'        => $faker->postcode,
         'phone'           => $faker->e164PhoneNumber,
-        'default_address' => array_random([0, 1]),
-        'created_at'      => $now,
-        'updated_at'      => $now,
+        'default_address' => Arr::random([0, 1]),
+        'address_type'    => CustomerAddress::ADDRESS_TYPE,
     ];
 });
 

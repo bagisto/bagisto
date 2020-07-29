@@ -1,4 +1,4 @@
-@extends('address::admin.layouts.content')
+@extends('admin::layouts.content')
 
 @section('page_title')
     {{ __('address::app.admin.addresses.title-orders', ['customer_name' => $customer->first_name . ' ' . $customer->last_name]) }}
@@ -10,7 +10,7 @@
         <div class="page-header">
             <div class="page-title">
                 <h1>
-                    <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                    <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ route('admin.dashboard.index') }}';"></i>
 
                     {{ __('address::app.admin.addresses.title-orders', ['customer_name' => $customer->first_name . ' ' . $customer->last_name]) }}
                 </h1>

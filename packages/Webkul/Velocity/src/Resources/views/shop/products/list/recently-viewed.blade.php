@@ -2,8 +2,12 @@
 @inject ('productRatingHelper', 'Webkul\Product\Helpers\Review')
 @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
+@php
+    $direction = core()->getCurrentLocale()->direction;
+@endphp
+
 <recently-viewed
-    add-class="{{ isset($addClass) ? $addClass : '' }}"
+    add-class="{{ isset($addClass) ? $addClass . " $direction": '' }}"
     quantity="{{ isset($quantity) ? $quantity : null }}"
     add-class-wrapper="{{ isset($addClassWrapper) ? $addClassWrapper : '' }}">
 </recently-viewed>

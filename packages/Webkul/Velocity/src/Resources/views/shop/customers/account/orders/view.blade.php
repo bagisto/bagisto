@@ -25,6 +25,14 @@
                     {{ __('shop::app.customer.account.order.view.page-tile', ['order_id' => $order->increment_id]) }}
                 </span>
                 <span></span>
+
+                @if ($order->canCancel())
+                    <span class="account-action">
+                        <a href="{{ route('customer.orders.cancel', $order->id) }}" class="theme-btn light unset pull-right" v-alert:message="'{{ __('shop::app.customer.account.order.view.cancel-confirm-msg') }}'" style="float: right">
+                            {{ __('shop::app.customer.account.order.view.cancel-btn-title') }}
+                        </a>
+                    </span>
+                @endif
             </div>
 
             {!! view_render_event('bagisto.shop.customers.account.orders.view.before', ['order' => $order]) !!}
@@ -159,6 +167,9 @@
                                             @if ($order->base_discount_amount > 0)
                                                 <tr>
                                                     <td>{{ __('shop::app.customer.account.order.view.discount') }}
+                                                        @if ($order->coupon_code)
+                                                            ({{ $order->coupon_code }})
+                                                        @endif
                                                         <span class="dash-icon">-</span>
                                                     </td>
                                                     <td>{{ core()->formatPrice($order->discount_amount, $order->order_currency_code) }}</td>
@@ -326,6 +337,20 @@
                             @foreach ($order->shipments as $shipment)
 
                                 <div class="sale-section">
+                                    <div class="section-content">
+                                        <div class="row col-12">
+                                            <label class="mr20">
+                                            {{ __('shop::app.customer.account.order.view.tracking-number') }}
+                                            </label>
+
+                                            <span class="value">
+                                                {{  $shipment->track_number }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="sale-section">
                                     <div class="section-title">
                                         <span>{{ __('shop::app.customer.account.order.view.individual-shipment', ['shipment_id' => $shipment->id]) }}</span>
                                     </div>
@@ -406,7 +431,7 @@
 
                                                     @if (! $refund->items->count())
                                                         <tr>
-                                                            <td class="empty" colspan="7">{{ __('admin::app.common.no-result-found') }}</td>
+                                                            <td class="empty" colspan="7">{{ __('shop::app.common.no-result-found') }}</td>
                                                         <tr>
                                                     @endif
                                                 </tbody>
@@ -489,9 +514,9 @@
                                 </div>
 
                                 <div class="box-content">
-
                                     @include ('admin::sales.address', ['address' => $order->billing_address])
 
+                                    {!! view_render_event('bagisto.shop.customers.account.orders.view.billing-address.after', ['order' => $order]) !!}
                                 </div>
                             </div>
 
@@ -502,9 +527,9 @@
                                     </div>
 
                                     <div class="box-content">
-
                                         @include ('admin::sales.address', ['address' => $order->shipping_address])
 
+                                        {!! view_render_event('bagisto.shop.customers.account.orders.view.shipping-address.after', ['order' => $order]) !!}
                                     </div>
                                 </div>
 
@@ -514,9 +539,9 @@
                                     </div>
 
                                     <div class="box-content">
-
                                         {{ $order->shipping_title }}
 
+                                        {!! view_render_event('bagisto.shop.customers.account.orders.view.shipping-method.after', ['order' => $order]) !!}
                                     </div>
                                 </div>
                             @endif
@@ -528,6 +553,8 @@
 
                                 <div class="box-content">
                                     {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
+
+                                    {!! view_render_event('bagisto.shop.customers.account.orders.view.payment-method.after', ['order' => $order]) !!}
                                 </div>
                             </div>
                         </div>

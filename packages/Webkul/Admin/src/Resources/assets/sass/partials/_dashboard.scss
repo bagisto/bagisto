@@ -3,6 +3,17 @@
         margin-bottom: 0 !important;
         padding-bottom: 15px;
         border-bottom: 1px solid $border-color;
+
+        .control-group {
+            span {
+                width: 100%;
+            }
+
+            &.date::after {
+                margin-top: -13px;
+                left: 100%;
+            }
+        }
     }
 
     .page-content {
@@ -161,5 +172,18 @@
         grid-column-gap: 30px;
         grid-row-gap: 15px;
         margin-top: 30px;
+    }
+}
+
+.rtl {
+    .dashboard {
+        .page-header {
+            .control-group {
+                &.date::after {
+                    margin-top: -13px !important;
+                    right: 100%;
+                }
+            }
+        }
     }
 }

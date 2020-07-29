@@ -1,3 +1,11 @@
+<?php
+    $term = request()->input('term');
+
+    if (! is_null($term)) {
+        $serachQuery = 'term='.request()->input('term');
+    }
+?>
+
 <div class="header" id="header">
     <div class="header-top">
         <div class="left-content">
@@ -16,9 +24,19 @@
             <ul class="search-container">
                 <li class="search-group">
                     <form role="search" action="{{ route('shop.search.index') }}" method="GET" style="display: inherit;">
-                        <input type="search" name="term" class="search-field" placeholder="{{ __('shop::app.header.search-text') }}" required>
+                        <input
+                            required
+                            name="term"
+                            type="search"
+                            value="{{ $term }}"
+                            class="search-field"
+                            placeholder="{{ __('shop::app.header.search-text') }}"
+                        >
+
+                        <image-search-component></image-search-component>
 
                         <div class="search-icon-wrapper">
+
                             <button class="" class="background: none;">
                                 <i class="icon icon-search"></i>
                             </button>
@@ -28,19 +46,37 @@
             </ul>
         </div>
 
-        <?php
-            $term = request()->input('term');
-
-            if (! is_null($term)) {
-                $serachQuery = 'term='.request()->input('term');
-            }
-        ?>
-
         <div class="right-content">
 
             <span class="search-box"><span class="icon icon-search" id="search"></span></span>
 
             <ul class="right-content-menu">
+
+                {!! view_render_event('bagisto.shop.layout.header.comppare-item.before') !!}
+
+                @php
+                    $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false    
+                @endphp
+
+                @if ($showCompare)
+                    <li class="compare-dropdown-container">
+                        <a
+                            @auth('customer')
+                                href="{{ route('velocity.customer.product.compare') }}"
+                            @endauth
+
+                            @guest('customer')
+                                href="{{ route('velocity.product.compare') }}"
+                            @endguest
+                            style="color: #242424;"
+                            >
+                            <span class="name">{{ __('velocity::app.customer.compare.text') }}</span>
+
+                        </a>
+                    </li>
+                @endif
+
+                {!! view_render_event('bagisto.shop.layout.header.compare-item.after') !!}
 
                 {!! view_render_event('bagisto.shop.layout.header.currency-item.before') !!}
 
@@ -166,6 +202,9 @@
                 <button style="background: none; border: none; padding: 0px;">
                     <i class="icon icon-search"></i>
                 </button>
+                
+                <image-search-component></image-search-component>
+
                 <input type="search" name="term" class="search">
                 <i class="icon icon-menu-back right"></i>
             </div>
@@ -174,6 +213,122 @@
 </div>
 
 @push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
+
+    <script type="text/x-template" id="image-search-component-template">
+        <div>
+            <label class="image-search-container" for="image-search-container">
+                <i class="icon camera-icon"></i>
+
+                <input type="file" id="image-search-container" ref="image_search_input" v-on:change="uploadImage()"/>
+
+                <img id="uploaded-image-url" :src="uploaded_image_url"/>
+            </label>
+        </div>
+    </script>
+
+    <script>
+
+        Vue.component('image-search-component', {
+
+            template: '#image-search-component-template',
+
+            data: function() {
+                return {
+                    uploaded_image_url: ''
+                }
+            },
+
+            methods: {
+                uploadImage: function() {
+                    var imageInput = this.$refs.image_search_input;
+
+                    if (imageInput.files && imageInput.files[0]) {
+                        if (imageInput.files[0].type.includes('image/')) {
+                            var self = this;
+
+                            self.$root.showLoader();
+
+                            var formData = new FormData();
+
+                            formData.append('image', imageInput.files[0]);
+
+                            axios.post("{{ route('shop.image.search.upload') }}", formData, {headers: {'Content-Type': 'multipart/form-data'}})
+                                .then(function(response) {
+                                    self.uploaded_image_url = response.data;
+
+                                    var net;
+
+                                    async function app() {
+                                        var analysedResult = [];
+
+                                        var queryString = '';
+
+                                        net = await mobilenet.load();
+
+                                        const imgElement = document.getElementById('uploaded-image-url');
+
+                                        try {
+                                            const result = await net.classify(imgElement);
+
+                                            result.forEach(function(value) {
+                                                queryString = value.className.split(',');
+
+                                                if (queryString.length > 1) {
+                                                    analysedResult = analysedResult.concat(queryString)
+                                                } else {
+                                                    analysedResult.push(queryString[0])
+                                                }
+                                            });
+                                        } catch (error) {
+                                            self.$root.hideLoader();
+
+                                            window.flashMessages = [
+                                                {
+                                                    'type': 'alert-error',
+                                                    'message': "{{ __('shop::app.common.error') }}"
+                                                }
+                                            ];
+
+                                            self.$root.addFlashMessages();
+                                        };
+
+                                        localStorage.searched_image_url = self.uploaded_image_url;
+
+                                        queryString = localStorage.searched_terms = analysedResult.join('_');
+                                        
+                                        self.$root.hideLoader();
+
+                                        window.location.href = "{{ route('shop.search.index') }}" + '?term=' + queryString + '&image-search=1';
+                                    }
+
+                                    app();
+                                })
+                                .catch(function(error) {
+                                    self.$root.hideLoader();
+
+                                    window.flashMessages = [
+                                        {
+                                            'type': 'alert-error',
+                                            'message': "{{ __('shop::app.common.error') }}"
+                                        }
+                                    ];
+
+                                    self.$root.addFlashMessages();
+                                });
+                        } else {
+                            imageInput.value = '';
+
+                            alert('Only images (.jpeg, .jpg, .png, ..) are allowed.');
+                        }
+                    }
+                }
+            }
+        });
+
+    </script>
+
     <script>
         $(document).ready(function() {
 

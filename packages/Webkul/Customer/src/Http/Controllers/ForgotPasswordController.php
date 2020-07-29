@@ -7,9 +7,8 @@ use Illuminate\Support\Facades\Password;
 
 class ForgotPasswordController extends Controller
 {
-
     use SendsPasswordResetEmails;
-
+    
     /**
      * Contains route related configuration
      *
@@ -64,6 +63,10 @@ class ForgotPasswordController extends Controller
                 ->withErrors([
                     'email' => trans($response),
                 ]);
+        } catch (\Swift_RfcComplianceException $e) {
+            session()->flash('success', trans('customer::app.forget_password.reset_link_sent'));
+
+            return redirect()->back();
         } catch (\Exception $e) {
             report($e);
             session()->flash('error', trans($e->getMessage()));

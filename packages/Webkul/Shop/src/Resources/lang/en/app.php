@@ -71,7 +71,8 @@ return [
         'no-results' => 'No Results Found',
         'page-title' => config('app.name') . ' - Search',
         'found-results' => 'Search Results Found',
-        'found-result' => 'Search Result Found'
+        'found-result' => 'Search Result Found',
+        'analysed-keywords' => 'Analysed Keywords'
     ],
 
     'reviews' => [
@@ -190,7 +191,7 @@ return [
 
                 'edit-profile' => [
                     'title' => 'Edit Profile',
-                    'page-title' => 'Edit Profile Form'
+                    'page-title' => 'Edit Profile'
                 ]
             ],
 
@@ -200,7 +201,7 @@ return [
                     'title' => 'Address',
                     'add' => 'Add Address',
                     'edit' => 'Edit',
-                    'empty' => 'You do not have any saved addresses here, please try to create it by clicking the link below',
+                    'empty' => 'You do not have any saved addresses here, please try to create it by clicking the add button.',
                     'create' => 'Create Address',
                     'delete' => 'Delete',
                     'make-default' => 'Make Default',
@@ -212,7 +213,7 @@ return [
                 ],
 
                 'create' => [
-                    'page-title' => 'Add Address Form',
+                    'page-title' => 'Add Address',
                     'company_name' => 'Company name',
                     'first_name' => 'First name',
                     'last_name' => 'Last name',
@@ -313,6 +314,9 @@ return [
                     'individual-refund' => 'Refund #:refund_id',
                     'adjustment-refund' => 'Adjustment Refund',
                     'adjustment-fee' => 'Adjustment Fee',
+                    'cancel-btn-title' => 'Cancel',
+                    'tracking-number' => 'Tracking Number',
+                    'cancel-confirm-msg' => 'Are you sure you want to cancel this order ?'
                 ]
             ],
 
@@ -368,6 +372,7 @@ return [
         'layered-nav-title' => 'Shop By',
         'price-label' => 'As low as',
         'remove-filter-link-title' => 'Clear All',
+        'filter-to' => 'to',
         'sort-by' => 'Sort By',
         'from-a-z' => 'From A-Z',
         'from-z-a' => 'From Z-A',
@@ -392,6 +397,7 @@ return [
         'new' => 'New',
         'empty' => 'No products available in this category',
         'add-to-cart' => 'Add To Cart',
+        'book-now' => 'Book Now',
         'buy-now' => 'Buy Now',
         'whoops' => 'Whoops!',
         'quantity' => 'Quantity',
@@ -410,7 +416,10 @@ return [
         'choose-selection' => 'Choose a selection',
         'your-customization' => 'Your Customization',
         'total-amount' => 'Total Amount',
-        'none' => 'None'
+        'none' => 'None',
+        'available-for-order' => 'Available for Order',
+        'settings' => 'Settings',
+        'compare_options' => 'Compare Options',
     ],
 
     // 'reviews' => [
@@ -460,7 +469,10 @@ return [
             'cart-subtotal' => 'Cart Subtotal',
             'cart-remove-action' => 'Do you really want to do this ?',
             'partial-cart-update' => 'Only some of the product(s) were updated',
-            'link-missing' => ''
+            'link-missing' => '',
+            'event' => [
+                'expired' => 'This event has been expired.'
+            ]
         ],
 
         'onepage' => [
@@ -469,6 +481,7 @@ return [
             'shipping' => 'Shipping',
             'payment' => 'Payment',
             'complete' => 'Complete',
+            'review' => 'Review',
             'billing-address' => 'Billing Address',
             'sign-in' => 'Sign In',
             'company-name' => 'Company Name',
@@ -566,6 +579,15 @@ return [
             'final-summary' => 'Thanks for showing your interest in our store we will send you tracking number once it shipped',
             'help' => 'If you need any kind of help please contact us at :support_email',
             'thanks' => 'Thanks!',
+
+            'comment' => [
+                'subject' => 'New comment added to your order',
+                'dear' => 'Dear :customer_name',
+                'final-summary' => 'Thanks for showing your interest in our store',
+                'help' => 'If you need any kind of help please contact us at :support_email',
+                'thanks' => 'Thanks!',
+            ],
+
             'cancel' => [
                 'subject' => 'Order Cancel Confirmation',
                 'heading' => 'Order Cancelled',
@@ -596,9 +618,9 @@ return [
 
         'shipment' => [
             'heading' => 'Shipment #:shipment_id  has been generated for Order #:order_id',
-            'inventory-heading' => 'New shipment #:shipment_id had been generated for Order #:order_id',
+            'inventory-heading' => 'New shipment #:shipment_id has been generated for Order #:order_id',
             'subject' => 'Shipment for your order #:order_id',
-            'inventory-subject' => 'New shipment had been generated for Order #:order_id',
+            'inventory-subject' => 'New shipment has been generated for Order #:order_id',
             'summary' => 'Summary of Shipment',
             'carrier' => 'Carrier',
             'tracking-number' => 'Tracking Number',

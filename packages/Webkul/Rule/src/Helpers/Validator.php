@@ -29,7 +29,7 @@ class Validator
             if ($entity instanceof \Webkul\Checkout\Contracts\Cart && strpos($condition['attribute'], 'cart|') === false) {
                 continue;
             }
-            
+
             $totalConditionCount++;
 
             if ($rule->condition_type == 1) {
@@ -99,7 +99,7 @@ class Validator
                     $value = $entity->product
                              ? $entity->product->categories()->pluck('id')->toArray()
                              : $entity->categories()->pluck('id')->toArray();
-                    
+
                     return $value;
                 } else {
                     $value = $entity->product
@@ -109,7 +109,7 @@ class Validator
                     if (! in_array($condition['attribute_type'], ['multiselect', 'checkbox'])) {
                         return $value;
                     }
-    
+
                     return $value ? explode(',', $value) : [];
                 }
         }
@@ -236,9 +236,9 @@ class Validator
                     $result = ! empty(array_intersect($condition['value'], $attributeValue));
                 } else {
                     if (is_array($attributeValue)) {
-                        $result = in_array($condition['value'], $attributeValue);
+                        $result = self::validateArrayValues($attributeValue, $condition['value']);
                     } else {
-                        $result = (strpos($attributeValue, $condition['value']) !== false) ? true : false;
+                        $result = strpos($attributeValue, $condition['value']) !== false;
                     }
                 }
 
@@ -250,5 +250,29 @@ class Validator
         }
 
         return $result;
+    }
+
+    /**
+     * Validate the condition value against a multi dimensional array recursively
+     *
+     * @param array  $attributeValue
+     * @param string $conditionValue
+     *
+     * @return bool
+     */
+    private static function validateArrayValues(array $attributeValue, string $conditionValue): bool
+    {
+        if (in_array($conditionValue, $attributeValue, true) === true) {
+            return true;
+        }
+        
+        foreach ($attributeValue as $subValue) {
+            if (is_array($subValue)) {
+                if (self::validateArrayValues($subValue, $conditionValue) === true) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

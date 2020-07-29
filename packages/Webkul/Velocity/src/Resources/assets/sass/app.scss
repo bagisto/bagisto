@@ -26,6 +26,7 @@
 
 ::-webkit-scrollbar {
     width: 3px;
+    height: 5px;
 }
 /* Track */
 ::-webkit-scrollbar-track {
@@ -196,6 +197,8 @@ body {
             min-width: 150px;
             cursor: pointer;
             text-align: right;
+            padding-top: 5px;
+
 
             * {
                 display: table-cell;
@@ -246,9 +249,12 @@ body {
 
     > div:last-child {
         height: 32px;
+    }
 
-        * {
-            height: 100%;
+    > div {
+        .default {
+            padding: 5px;
+            font-size: 14px;
         }
     }
 
@@ -277,7 +283,6 @@ body {
         }
     }
 }
-
 
 .dropdown-menu {
     border-top: 3px solid $border-primary;
@@ -971,3 +976,5 @@ i.within-circle {
     border: 1px #E5E5E5;
     margin: 0 auto;
 }
+
+.row:before, .row:after {display: none !important;}

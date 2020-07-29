@@ -4,7 +4,6 @@ namespace Webkul\Category\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
 use Webkul\Category\Repositories\CategoryRepository;
-use Webkul\Category\Models\CategoryTranslation;
 use Webkul\Attribute\Repositories\AttributeRepository;
 
 class CategoryController extends Controller
@@ -86,18 +85,6 @@ class CategoryController extends Controller
             'image.*'     => 'mimes:jpeg,jpg,bmp,png',
             'description' => 'required_if:display_mode,==,description_only,products_and_description',
         ]);
-
-        if (strtolower(request()->input('name')) == 'root') {
-            $categoryTransalation = new CategoryTranslation();
-
-            $result = $categoryTransalation->where('name', request()->input('name'))->get();
-
-            if(count($result) > 0) {
-                session()->flash('error', trans('admin::app.response.create-root-failure'));
-
-                return redirect()->back();
-            }
-        }
 
         $category = $this->categoryRepository->create(request()->all());
 

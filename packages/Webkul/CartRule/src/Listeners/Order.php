@@ -19,14 +19,14 @@ class Order
     /**
      * CartRuleCustomerRepository object
      *
-     * @var Webkul\CartRule\Repositories\\CartRuleCustomerRepository
+     * @var \Webkul\CartRule\Repositories\CartRuleCustomerRepository
      */
     protected $cartRuleCustomerRepository;
 
     /**
      * CartRuleCouponRepository object
      *
-     * @var Webkul\CartRule\Repositories\\CartRuleCouponRepository
+     * @var \Webkul\CartRule\Repositories\CartRuleCouponRepository
      */
     protected $cartRuleCouponRepository;
 
@@ -64,7 +64,7 @@ class Order
 
     /**
      * Save cart rule and cart rule coupon properties after place order
-     * 
+     *
      * @param  \Webkul\Sales\Contracts\Order  $order
      * @return void
      */
@@ -112,7 +112,7 @@ class Order
         }
 
         $coupon = $this->cartRuleCouponRepository->findOneByField('code', $order->coupon_code);
-        
+
         if ($coupon) {
             $this->cartRuleCouponRepository->update(['times_used' => $coupon->times_used + 1], $coupon->id);
 

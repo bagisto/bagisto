@@ -22,7 +22,7 @@ class ProductDataGrid extends DataGrid
         parent::__construct();
 
         $this->locale = request()->get('locale') ?? 'all';
-        
+
         $this->channel = request()->get('channel') ?? 'all';
     }
 
@@ -45,12 +45,14 @@ class ProductDataGrid extends DataGrid
 
         if ($this->locale !== 'all') {
             $queryBuilder->where('locale', $this->locale);
-        } else {
-            $queryBuilder->whereNotNull('product_flat.name');
         }
 
         if ($this->channel !== 'all') {
             $queryBuilder->where('channel', $this->channel);
+        }
+
+        if ($currentLocale = app()->getLocale()) {
+            $queryBuilder->where('product_flat.locale', $currentLocale);
         }
 
         $queryBuilder->groupBy('product_flat.product_id');
@@ -119,7 +121,7 @@ class ProductDataGrid extends DataGrid
             'sortable'   => true,
             'searchable' => false,
             'filterable' => true,
-            'wrapper'    => function($value) {
+            'wrapper'    => function ($value) {
                 if ($value->status == 1) {
                     return trans('admin::app.datagrid.active');
                 } else {
@@ -144,7 +146,7 @@ class ProductDataGrid extends DataGrid
             'sortable'   => true,
             'searchable' => false,
             'filterable' => false,
-            'wrapper'    => function($value) {
+            'wrapper'    => function ($value) {
                 if (is_null($value->quantity)) {
                     return 0;
                 } else {
@@ -161,7 +163,7 @@ class ProductDataGrid extends DataGrid
             'method'    => 'GET',
             'route'     => 'admin.catalog.products.edit',
             'icon'      => 'icon pencil-lg-icon',
-            'condition' => function() {
+            'condition' => function () {
                 return true;
             },
         ]);

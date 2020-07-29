@@ -20,6 +20,7 @@
             'isEnable',
             'csrfToken',
             'productId',
+            'reloadPage',
             'moveToCart',
             'showCartIcon',
             'addClassToBtn',
@@ -40,8 +41,8 @@
 
                 this.$http.post(url, {
                     'quantity': 1,
-                    '_token': this.csrfToken,
                     'product_id': this.productId,
+                    '_token': this.csrfToken.split("&#039;").join(""),
                 })
                 .then(response => {
                     this.isButtonEnable = true;
@@ -59,8 +60,12 @@
                         }
 
                         window.showAlert(`alert-success`, this.__('shop.general.alert.success'), response.data.message);
+
+                        if (this.reloadPage == "1") {
+                            window.location.reload();
+                        }
                     } else {
-                        window.showAlert(`alert-${response.data.status}`, response.data.label ? response.data.label : this.__('shop.general.alert.error'), response.data.message);
+                        window.showAlert(`alert-warning`, response.data.label ? response.data.label : this.__('shop.general.alert.warning'), response.data.message);
 
                         if (response.data.redirectionRoute) {
                             window.location.href = response.data.redirectionRoute;

@@ -31,14 +31,15 @@ class ComparisonController extends Controller
                     ->get()
                     ->toArray();
 
-                foreach ($productCollection as $index => $customerCompare) {
-                    $product = $this->productRepository->find($customerCompare['product_id']);
-                    $formattedProduct = $this->velocityHelper->formatProduct($product);
+                $items = [];
 
-                    $productCollection[$index]['image'] = $formattedProduct['image'];
-                    $productCollection[$index]['priceHTML'] = $formattedProduct['priceHTML'];
-                    $productCollection[$index]['addToCartHtml'] = $formattedProduct['addToCartHtml'];
+                foreach ($productCollection as $index => $customerCompare) {
+                    array_push($items, $customerCompare['id']);
                 }
+
+                $items = implode('&', $items);
+                $productCollection = $this->velocityHelper->fetchProductCollection($items);
+
             } else {
                 // for product details
                 if ($items = request()->get('items')) {
@@ -75,10 +76,24 @@ class ComparisonController extends Controller
 
         if (! $compareProduct) {
             // insert new row
-            $this->compareProductsRepository->create([
-                'customer_id'     => $customerId,
-                'product_flat_id' => $productId,
-            ]);
+
+            $productFlatRepository = app('\Webkul\Product\Models\ProductFlat');
+
+            $productFlat = $productFlatRepository
+                            ->where('id', $productId)
+                            ->orWhere('parent_id', $productId)
+                            ->orWhere('id', $productId)
+                            ->get()
+                            ->first();
+
+            if ($productFlat) {
+                $productId = $productFlat->id;
+                
+                $this->compareProductsRepository->create([
+                    'customer_id'     => $customerId,
+                    'product_flat_id' => $productId,
+                ]);
+            }
 
             return response()->json([
                 'status'  => 'success',

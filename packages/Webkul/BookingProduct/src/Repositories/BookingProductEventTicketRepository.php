@@ -28,6 +28,31 @@ class BookingProductEventTicketRepository extends Repository
 
         if (isset($data['tickets'])) {
             foreach ($data['tickets'] as $ticketId => $ticketInputs) {
+
+                if (
+                    ! array_key_exists('special_price', $ticketInputs)
+                    || empty($ticketInputs['special_price'])
+                    || $ticketInputs['special_price'] === '0.0000'
+                ) {
+                    $ticketInputs['special_price'] = null;
+                }
+
+                if (
+                    ! array_key_exists('special_price_from', $ticketInputs)
+                    || empty($ticketInputs['special_price_from'])
+                    || $ticketInputs['special_price_from'] === '0000-00-00 00:00:00'
+                ) {
+                    $ticketInputs['special_price_from'] = null;
+                }
+
+                if (
+                    ! array_key_exists('special_price_to', $ticketInputs)
+                    || empty($ticketInputs['special_price_to'])
+                    || $ticketInputs['special_price_to'] === '0000-00-00 00:00:00'
+                ) {
+                    $ticketInputs['special_price_to'] = null;
+                }
+
                 if (Str::contains($ticketId, 'ticket_')) {
                     $this->create(array_merge([
                         'booking_product_id' => $bookingProduct->id,

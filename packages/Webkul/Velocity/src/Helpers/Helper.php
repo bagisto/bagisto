@@ -110,12 +110,14 @@ class Helper extends Review
         foreach ($orderItems as $key => $orderItem) {
             $products[] = $orderItem->product;
 
-            $this->orderBrandsRepository->create([
-                'order_item_id' => $orderItem->id,
-                'order_id'      => $orderItem->order_id,
-                'product_id'    => $orderItem->product_id,
-                'brand'         => $products[$key]->brand,
-            ]);
+            try {
+                $this->orderBrandsRepository->create([
+                    'order_item_id' => $orderItem->id,
+                    'order_id'      => $orderItem->order_id,
+                    'product_id'    => $orderItem->product_id,
+                    'brand'         => $products[$key]->brand,
+                ]);
+            } catch(\Exception $exception) {}
         }
     }
 
@@ -212,13 +214,21 @@ class Helper extends Review
      *
      * @return array
      */
-    public function getVelocityMetaData()
+    public function getVelocityMetaData($locale = null, $default = true)
     {
-        try {
-            $metaData = $this->velocityMetadataRepository->get();
+        if (! $locale) {
+            $locale = request()->get('locale') ?: app()->getLocale();
+        }
 
-            if (! ($metaData && isset($metaData[0]) && $metaData = $metaData[0])) {
-                $metaData = null;
+        try {
+            $metaData = $this->velocityMetadataRepository->findOneWhere([
+                'locale' => $locale
+            ]);
+
+            if (! $metaData && $default) {
+                $metaData = $this->velocityMetadataRepository->findOneWhere([
+                    'locale' => 'en'
+                ]);
             }
 
             return $metaData;
@@ -252,9 +262,13 @@ class Helper extends Review
 
         if (is_string($path) && is_readable($path)) {
             return include $path;
-        }
+        } else {
+            $currentLocale = "en";
 
-        return [];
+            $path = __DIR__ . "/../Resources/lang/$currentLocale/app.php";
+
+            return include $path;
+        }
     }
 
     /**
@@ -279,7 +293,9 @@ class Helper extends Review
 
     /**
      * @param  \Webkul\Product\Contracts\Product  $product
-     * @param  bool  $list
+     * @param  bool                               $list
+     * @param  array                              $metaInformation
+     * 
      * @return array
      */
     public function formatProduct($product, $list = false, $metaInformation = [])
@@ -306,27 +322,36 @@ class Helper extends Review
             }
         }
 
+        $priceHTML = view('shop::products.price', ['product' => $product])->render();
+
+        $isProductNew = ($product->new && ! strpos($priceHTML, 'sticker sale') > 0) ? __('shop::app.products.new') : false;
+
         return [
+            'priceHTML'         => $priceHTML,
             'avgRating'         => $avgRatings,
             'totalReviews'      => $totalReviews,
             'image'             => $productImage,
+            'new'               => $isProductNew,
             'galleryImages'     => $galleryImages,
             'name'              => $product->name,
             'slug'              => $product->url_key,
             'description'       => $product->description,
             'shortDescription'  => $product->short_description,
             'firstReviewText'   => trans('velocity::app.products.be-first-review'),
-            'priceHTML'         => view('shop::products.price', ['product' => $product])->render(),
+            'defaultAddToCart'  => view('shop::products.add-buttons', ['product' => $product])->render(),
             'addToCartHtml'     => view('shop::products.add-to-cart', [
-                'showCompare'       => true,
                 'product'           => $product,
                 'addWishlistClass'  => ! (isset($list) && $list) ? '' : '',
+
+                'showCompare'       => core()->getConfigData('general.content.shop.compare_option') == "1"
+                                       ? true : false,
+
                 'btnText'           => (isset($metaInformation['btnText']) && $metaInformation['btnText'])
-                                       ? $metaInformation['btnText']
-                                       : null,
-                'moveToCart'           => (isset($metaInformation['moveToCart']) && $metaInformation['moveToCart'])
-                                       ? $metaInformation['moveToCart']
-                                       : null,
+                                       ? $metaInformation['btnText'] : null,
+
+                'moveToCart'        => (isset($metaInformation['moveToCart']) && $metaInformation['moveToCart'])
+                                       ? $metaInformation['moveToCart'] : null,
+
                 'addToCartBtnClass' => ! (isset($list) && $list) ? 'small-padding' : '',
             ])->render(),
         ];
@@ -362,8 +387,10 @@ class Helper extends Review
                     $productMetaDetails['slug'] = $product->url_key;
                     $productMetaDetails['image'] = $formattedProduct['image'];
                     $productMetaDetails['priceHTML'] = $formattedProduct['priceHTML'];
+                    $productMetaDetails['new'] = $formattedProduct['new'];
                     $productMetaDetails['addToCartHtml'] = $formattedProduct['addToCartHtml'];
                     $productMetaDetails['galleryImages'] = $formattedProduct['galleryImages'];
+                    $productMetaDetails['defaultAddToCart'] = $formattedProduct['defaultAddToCart'];
 
                     $product = array_merge($productFlat->toArray(), $productMetaDetails);
 
@@ -371,7 +398,7 @@ class Helper extends Review
                 }
             }
         }
-
+    
         return $productCollection;
     }
 }

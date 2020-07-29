@@ -34,11 +34,13 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
                 'view' => 'shop::guest.compare.index'
             ]);
 
-        Route::get('/customer/account/comparison', 'ComparisonController@getComparisonList')
-            ->name('velocity.customer.product.compare')
-            ->defaults('_config', [
-                'view' => 'shop::customers.account.compare.index'
-            ]);
+        Route::group(['middleware' => ['customer']], function () {
+            Route::get('/customer/account/comparison', 'ComparisonController@getComparisonList')
+                ->name('velocity.customer.product.compare')
+                ->defaults('_config', [
+                    'view' => 'shop::customers.account.compare.index'
+                ]);
+        });
 
         Route::put('/comparison', 'ComparisonController@addCompareProduct')
             ->name('customer.product.add.compare');
@@ -53,9 +55,12 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
             ]);
 
         Route::get('/items-count', 'ShopController@getItemsCount')
-            ->name('velocity.product.details');
+            ->name('velocity.product.item-count');
 
         Route::get('/detailed-products', 'ShopController@getDetailedProducts')
             ->name('velocity.product.details');
+
+        Route::get('/category-products/{categoryId}', 'ShopController@getCategoryProducts')
+            ->name('velocity.category.products');
     });
 });

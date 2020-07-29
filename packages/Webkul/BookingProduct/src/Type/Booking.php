@@ -2,6 +2,7 @@
 
 namespace Webkul\BookingProduct\Type;
 
+use Illuminate\Support\Arr;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
@@ -11,6 +12,7 @@ use Webkul\Product\Helpers\ProductImage;
 use Webkul\BookingProduct\Repositories\BookingProductRepository;
 use Webkul\BookingProduct\Helpers\Booking as BookingHelper;
 use Webkul\Product\Type\Virtual;
+use Carbon\Carbon;
 
 class Booking extends Virtual
 {
@@ -128,6 +130,10 @@ class Booking extends Virtual
     {
         $bookingProduct = $this->getBookingProduct($this->product->id);
 
+        if (! $bookingProduct) {
+            return false;
+        }
+        
         if (in_array($bookingProduct->type, ['default', 'rental', 'table'])) {
             return true;
         }
@@ -147,6 +153,15 @@ class Booking extends Virtual
     }
 
     /**
+     * @param  int  $qty
+     * @return bool
+     */
+    public function haveSufficientQuantity($qty)
+    {
+        return true;
+    }
+
+    /**
      * Add product. Returns error message if can't prepare product.
      *
      * @param  array  $data
@@ -163,18 +178,30 @@ class Booking extends Virtual
         $bookingProduct = $this->getBookingProduct($data['product_id']);
 
         if ($bookingProduct->type == 'event') {
+            if (Carbon::now() > $bookingProduct->available_from && Carbon::now() > $bookingProduct->available_to) {
+                return trans('shop::app.checkout.cart.event.expired');
+            } 
+
+            $filtered = Arr::where($data['booking']['qty'], function ($qty, $key) {
+                return $qty != 0;
+            });
+
+            if (! count($filtered)) {
+                return trans('shop::app.checkout.cart.integrity.missing_options');
+            }
+
             foreach ($data['booking']['qty'] as $ticketId => $qty) {
                 if (! $qty) {
                     continue;
                 }
 
-                $cartProducts = parent::prepareForCart([
+                $cartProducts = parent::prepareForCart(array_merge($data, [
                     'product_id' => $data['product_id'],
                     'quantity'   => $qty,
                     'booking'    => [
                         'ticket_id' => $ticketId,
                     ],
-                ]);
+                ]));
 
                 if (is_string($cartProducts)) {
                     return $cartProducts;
@@ -210,7 +237,7 @@ class Booking extends Virtual
         }
 
         if (isset($options1['booking']) && isset($options2['booking'])) {
-            return $options1['booking'] === $options2['booking'];
+            return $options1['booking'] == $options2['booking'];
         } elseif (! isset($options1['booking'])) {
             return false;
         } elseif (! isset($options2['booking'])) {

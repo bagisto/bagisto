@@ -12,7 +12,7 @@
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ route('admin.dashboard.index') }}';"></i>
 
                         {{ __('admin::app.sales.shipments.add-title') }}
                     </h1>
@@ -199,20 +199,14 @@
                                         </span>
                                     </div>
 
-                                    <div class="control-group" :class="[errors.has('shipment[carrier_title]') ? 'has-error' : '']" style="margin-top: 40px">
-                                        <label for="shipment[carrier_title]" class="required">{{ __('admin::app.sales.shipments.carrier-title') }}</label>
-                                        <input type="text" v-validate="'required'" class="control" id="shipment[carrier_title]" name="shipment[carrier_title]" data-vv-as="&quot;{{ __('admin::app.sales.shipments.carrier-title') }}&quot;"/>
-                                        <span class="control-error" v-if="errors.has('shipment[carrier_title]')">
-                                            @{{ errors.first('shipment[carrier_title]') }}
-                                        </span>
+                                    <div class="control-group" style="margin-top: 40px">
+                                        <label for="shipment[carrier_title]">{{ __('admin::app.sales.shipments.carrier-title') }}</label>
+                                        <input type="text" class="control" id="shipment[carrier_title]" name="shipment[carrier_title]"/>
                                     </div>
 
-                                    <div class="control-group" :class="[errors.has('shipment[track_number]') ? 'has-error' : '']">
-                                        <label for="shipment[track_number]" class="required">{{ __('admin::app.sales.shipments.tracking-number') }}</label>
-                                        <input type="text" v-validate="'required'" class="control" id="shipment[track_number]" name="shipment[track_number]" data-vv-as="&quot;{{ __('admin::app.sales.shipments.tracking-number') }}&quot;"/>
-                                        <span class="control-error" v-if="errors.has('shipment[track_number]')">
-                                            @{{ errors.first('shipment[track_number]') }}
-                                        </span>
+                                    <div class="control-group">
+                                        <label for="shipment[track_number]">{{ __('admin::app.sales.shipments.tracking-number') }}</label>
+                                        <input type="text" class="control" id="shipment[track_number]" name="shipment[track_number]"/>
                                     </div>
                                 </div>
                             </div>
@@ -263,6 +257,7 @@
                         <th>{{ __('admin::app.sales.orders.SKU') }}</th>
                         <th>{{ __('admin::app.sales.orders.product-name') }}</th>
                         <th>{{ __('admin::app.sales.shipments.qty-ordered') }}</th>
+                        <th>{{ __('admin::app.sales.shipments.qty-invoiced') }}</th>
                         <th>{{ __('admin::app.sales.shipments.qty-to-ship') }}</th>
                         <th>{{ __('admin::app.sales.shipments.available-sources') }}</th>
                     </tr>
@@ -279,7 +274,7 @@
 
                                     @if (isset($item->additional['attributes']))
                                         <div class="item-options">
-                                            
+
                                             @foreach ($item->additional['attributes'] as $attribute)
                                                 <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
                                             @endforeach
@@ -288,6 +283,7 @@
                                     @endif
                                 </td>
                                 <td>{{ $item->qty_ordered }}</td>
+                                <td>{{ $item->qty_invoiced }}</td>
                                 <td>{{ $item->qty_to_ship }}</td>
                                 <td>
 
@@ -324,7 +320,7 @@
 
                                                         <div class="control-group" :class="[errors.has('{{ $inputName }}') ? 'has-error' : '']">
 
-                                                            <input type="text" v-validate="'required|numeric|min_value:0|max_value:{{$sourceQty}}'" class="control" id="{{ $inputName }}" name="{{ $inputName }}" value="0" data-vv-as="&quot;{{ __('admin::app.sales.shipments.qty-to-ship') }}&quot;" :disabled="source != '{{ $inventorySource->id }}'"/>
+                                                            <input type="text" v-validate="'required|numeric|min_value:0|max_value:{{$sourceQty}}'" class="control" id="{{ $inputName }}" name="{{ $inputName }}" value="{{ $item->qty_invoiced }}" data-vv-as="&quot;{{ __('admin::app.sales.shipments.qty-to-ship') }}&quot;" :disabled="source != '{{ $inventorySource->id }}'"/>
 
                                                             <span class="control-error" v-if="errors.has('{{ $inputName }}')">
                                                                 @verbatim

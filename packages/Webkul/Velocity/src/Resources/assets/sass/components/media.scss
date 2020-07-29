@@ -1,3 +1,4 @@
+
 .vc-small-screen {
     display: none !important;
 }
@@ -30,6 +31,7 @@
     }
 }
 
+
 @media only screen and (max-width: 992px) {
 
 }
@@ -46,6 +48,36 @@
     }
     .footer .currency {
         display: block !important;
+    }
+
+
+    .table {
+        width: 90%;
+        margin-bottom: 1rem;
+        margin-top: 68px;
+        color: #212529;
+    }
+
+    .per-page {
+        position: absolute;
+        margin-top: 66px;
+        margin-right: -1px;
+        margin-left: 17px;
+        width: 151px;
+    }
+
+     .filter-left {
+        position: relative;
+        margin-right: -6px!important;
+    }
+
+     .dropdown-filters {
+        margin-left: 15px;
+    }
+
+      button.btn.btn-sm.btn-primary.apply-filter {
+        margin-top: 10px;
+        margin-left: -158px;
     }
 }
 
@@ -112,6 +144,8 @@
                 }
 
                 .right-vc-header {
+                    position: relative;
+                    z-index: 2;
                     display: table;
                     text-align: right;
                     height: $header-height;
@@ -124,7 +158,7 @@
                     .badge-wrapper,
                     .badge-container {
                         top: -2px;
-                        left: -7px;
+                        left: -12px;
                         position: relative;
 
                         .badge {
@@ -532,6 +566,21 @@
                 }
             }
         }
+
+        .arrow {
+            &.left,
+            &.right {
+                display: none
+            }
+        }
+
+        .thumb-list {
+            .thumb-frame {
+                > .bg-image {
+                    background-size: contain;
+                }
+            }
+        }
     }
 
     .review-page-container {
@@ -717,6 +766,8 @@
 
                     .rango-arrow-right {
                         float: right;
+                        font-size: 20px;
+                        padding-top: 5px;
                         padding-right: 15px;
                     }
 
@@ -864,6 +915,11 @@
         .actions {
             margin-top: 7px !important;
         }
+
+        .continue-shopping,
+        .empty-cart-message {
+            padding: 0;
+        }
     }
 
     .checkout-process {
@@ -914,5 +970,18 @@
     .compare-icon,
     .wishlist-icon {
         margin-left: 0;
+    }
+
+    .image-search-result {
+        .searched-terms {
+            margin-left: 0;
+            margin-top: 20px;
+
+            .term-list {
+                a {
+                    line-height: 40px;
+                }
+            }
+        }
     }
 }

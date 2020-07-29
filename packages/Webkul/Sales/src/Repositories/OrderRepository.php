@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Sales\Contracts\Order;
 use Webkul\Sales\Models\Order as OrderModel;
+use Webkul\Shop\Generators\Sequencer;
+use Webkul\Shop\Generators\OrderNumberIdSequencer;
 
 class OrderRepository extends Repository
 {
@@ -63,7 +65,7 @@ class OrderRepository extends Repository
         DB::beginTransaction();
 
         try {
-            Event::dispatch('checkout.order.save.before', $data);
+            Event::dispatch('checkout.order.save.before', [$data]);
 
             if (isset($data['customer']) && $data['customer']) {
                 $data['customer_id'] = $data['customer']->id;
@@ -185,25 +187,17 @@ class OrderRepository extends Repository
      */
     public function generateIncrementId()
     {
-        foreach ([  'Prefix'   => 'prefix',
-                    'Length'   => 'length',
-                    'Suffix'   => 'suffix', ] as
-                    $varSuffix => $confKey)
-        {
-            $var = "invoiceNumber{$varSuffix}";
-            $$var = core()->getConfigData('sales.orderSettings.order_number.order_number_'.$confKey) ?: false;
+        $generatorClass = core()->getConfigData('sales.orderSettings.order_number.order_number_generator-class') ?: false;
+
+        if ($generatorClass !== false
+            && class_exists($generatorClass)
+            && in_array(Sequencer::class, class_implements($generatorClass), true)
+        ) {
+            /** @var $generatorClass Sequencer */
+            return $generatorClass::generate();
         }
 
-        $lastOrder = $this->model->orderBy('id', 'desc')->limit(1)->first();
-        $lastId = $lastOrder ? $lastOrder->id : 0;
-
-        if ($invoiceNumberLength && ($invoiceNumberPrefix || $invoiceNumberSuffix)) {
-            $invoiceNumber = ($invoiceNumberPrefix) . sprintf("%0{$invoiceNumberLength}d", 0) . ($lastId + 1) . ($invoiceNumberSuffix);
-        } else {
-            $invoiceNumber = $lastId + 1;
-        }
-
-        return $invoiceNumber;
+        return OrderNumberIdSequencer::generate();
     }
 
     /**

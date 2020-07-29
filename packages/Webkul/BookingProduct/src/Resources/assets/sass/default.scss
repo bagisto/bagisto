@@ -130,9 +130,21 @@
                     padding-right: 5px;
 
                     &::after {
-                        position: absolute;
-                        top: 14px;
-                        right: 10px;
+                        top: 16px;
+                        left: 100%; 
+                    }
+
+                    .cross-icon {
+                        margin-left: -48px;
+                        top: 20px;
+                    }
+                }
+
+                &.has-error {
+                    &.date {
+                        &::after {
+                            margin-top: 0px;
+                        }
                     }
                 }
 

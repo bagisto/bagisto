@@ -13,18 +13,34 @@
             @php
                 $subMenuCollection = [];
 
+                $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false;
+
                 try {
                     $subMenuCollection['profile'] = $menuItem['children']['profile'];
                     $subMenuCollection['orders'] = $menuItem['children']['orders'];
                     $subMenuCollection['downloadables'] = $menuItem['children']['downloadables'];
                     $subMenuCollection['wishlist'] = $menuItem['children']['wishlist'];
-                    $subMenuCollection['compare'] = [
-                        'key'   => 'account.compare',
-                        'url'   => route('velocity.customer.product.compare'),
-                        'name'  => 'velocity::app.customer.compare.text',
-                    ];
+
+                    if ($showCompare) {
+                        $subMenuCollection['compare'] = $menuItem['children']['compare'];
+                    }
+
                     $subMenuCollection['reviews'] = $menuItem['children']['reviews'];
                     $subMenuCollection['address'] = $menuItem['children']['address'];
+
+                    unset(
+                        $menuItem['children']['profile'],
+                        $menuItem['children']['orders'],
+                        $menuItem['children']['downloadables'],
+                        $menuItem['children']['wishlist'],
+                        $menuItem['children']['compare'],
+                        $menuItem['children']['reviews'],
+                        $menuItem['children']['address']
+                    );
+
+                    foreach ($menuItem['children'] as $key => $remainingChildren) {
+                        $subMenuCollection[$key] = $remainingChildren;
+                    }
                 } catch (\Exception $exception) {
                     $subMenuCollection = $menuItem['children'];
                 }

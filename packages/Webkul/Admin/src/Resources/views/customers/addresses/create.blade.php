@@ -5,16 +5,16 @@
 @stop
 
 
-@section('content-wrapper')
+@section('content')
 
-    <div class="content full-page">
+    <div class="content">
         {!! view_render_event('admin.customer.addresses.create.before') !!}
 
         <form method="POST" action="{{ route('admin.customer.addresses.store', ['id' => $customer->id]) }}" @submit.prevent="onSubmit">
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ route('admin.dashboard.index') }}';"></i>
 
                         {{ __('admin::app.customers.addresses.create-title') }}
                     </h1>
@@ -76,7 +76,7 @@
 
                             <div class="control-group" :class="[errors.has('city') ? 'has-error' : '']">
                                 <label for="city" class="required">{{ __('shop::app.customer.account.address.create.city') }}</label>
-                                <input type="text" class="control" name="city" v-validate="'required|alpha_spaces'" value="{{ old('city') }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.city') }}&quot;">
+                                <input type="text" class="control" name="city" v-validate="'required|regex:^[a-zA-Z \-]*$'" value="{{ old('city') }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.city') }}&quot;">
                                 <span class="control-error" v-if="errors.has('city')">@{{ errors.first('city') }}</span>
                             </div>
 

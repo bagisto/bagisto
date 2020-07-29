@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Shop;
+namespace Tests\Trigger\Shop;
 
 use UnitTester;
 use Webkul\Category\Models\Category;
@@ -17,7 +17,7 @@ class DatabaseLogicCest
     private $localeEn;
     /** @var Locale $localeDe */
     private $localeDe;
-    
+
     public function _before(UnitTester $I)
     {
         $this->faker = Factory::create();
@@ -45,7 +45,7 @@ class DatabaseLogicCest
         ]);
 
         $parentCategoryName = $this->faker->word;
-        
+
         $parentCategoryAttributes = [
             'parent_id'           => $rootCategory->id,
             'position'            => 1,
@@ -68,7 +68,7 @@ class DatabaseLogicCest
         $rootCategory->prependNode($parentCategory);
         $I->assertNotNull($parentCategory);
 
-        $categoryName = $this->faker->word; 
+        $categoryName = $this->faker->word;
         $categoryAttributes = [
             'position'            => 1,
             'status'              => 1,

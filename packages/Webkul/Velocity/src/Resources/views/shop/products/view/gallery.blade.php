@@ -28,47 +28,38 @@
 
 <script type="text/x-template" id="product-gallery-template">
     <ul class="thumb-list col-12 row ltr" type="none">
-        @if (sizeof($images) > 4)
-            <li class="arrow left" @click="scroll('prev')">
-                <i class="rango-arrow-left fs24"></i>
-            </li>
-        @endif
+        <li class="arrow left" @click="scroll('prev')" v-if="thumbs.length > 4">
+            <i class="rango-arrow-left fs24"></i>
+        </li>
 
         <carousel-component
             slides-per-page="4"
             :id="galleryCarouselId"
             pagination-enabled="hide"
             navigation-enabled="hide"
-            add-class="product-gallary"
-            :slides-count="{{ sizeof($images) }}">
+            add-class="product-gallery"
+            :slides-count="thumbs.length">
 
-            @foreach ($images as $index => $thumb)
-                <slide slot="slide-{{ $index }}">
-                    <li
-                        @click="changeImage({
-                            largeImageUrl: '{{ $thumb['large_image_url'] }}',
-                            originalImageUrl: '{{ $thumb['original_image_url'] }}',
-                        })"
-                        :class="[
-                            'thumb-frame',
-                            '{{ $index + 1 == 4  ? "" : "mr5"}}',
-                            '{{ $thumb['large_image_url'] }}' == currentLargeImageUrl ? 'active' : '',
-                        ]">
+            <slide :slot="`slide-${index}`" v-for="(thumb, index) in thumbs">
+                <li
+                    @click="changeImage({
+                        largeImageUrl: thumb.large_image_url,
+                        originalImageUrl: thumb.original_image_url,
+                    })"
+                    :class="`thumb-frame ${index + 1 == 4 ? '' : 'mr5'} ${thumb.large_image_url == currentLargeImageUrl ? 'active' : ''}`"
+                    >
 
-                        <div
-                            class="bg-image"
-                            style="background-image: url( {{ $thumb['small_image_url'] }} )">
-                        </div>
-                    </li>
-                </slide>
-            @endforeach
+                    <div
+                        class="bg-image"
+                        :style="`background-image: url(${thumb.small_image_url})`">
+                    </div>
+                </li>
+            </slide>
         </carousel-component>
 
-        @if (sizeof($images) > 4)
-            <li class="arrow right" @click="scroll('next')">
-                <i class="rango-arrow-right fs24"></i>
-            </li>
-        @endif
+        <li class="arrow right" @click="scroll('next')" v-if="thumbs.length > 4">
+            <i class="rango-arrow-right fs24"></i>
+        </li>
     </ul>
 </script>
 
@@ -95,10 +86,12 @@
 
                 watch: {
                     'images': function(newVal, oldVal) {
-                        this.changeImage({
-                            largeImageUrl: this.images[0]['large_image_url'],
-                            originalImageUrl: this.images[0]['original_image_url'],
-                        })
+                        if (this.images[0]) {
+                            this.changeImage({
+                                largeImageUrl: this.images[0]['large_image_url'],
+                                originalImageUrl: this.images[0]['original_image_url'],
+                            })
+                        }
 
                         this.prepareThumbs()
                     }
@@ -108,12 +101,18 @@
                     this.changeImage({
                         largeImageUrl: this.images[0]['large_image_url'],
                         originalImageUrl: this.images[0]['original_image_url'],
-                    })
+                    });
+
+                    eventBus.$on('configurable-variant-update-images-event', this.updateImages);
 
                     this.prepareThumbs()
                 },
 
                 methods: {
+                    updateImages: function (galleryImages) {
+                        this.images = galleryImages;
+                    },
+
                     prepareThumbs: function() {
                         this.thumbs = [];
 
@@ -149,5 +148,27 @@
                 }
             });
         })()
+    </script>
+
+    <script>
+        $(document).ready(() => {
+
+            /* waiting for the window to appear */
+            let waitForEl = function(selector, callback) {
+                if (jQuery(selector).length) {
+                    callback();
+                } else {
+                    setTimeout(function() {waitForEl(selector, callback);}, 100);
+                }
+            };
+
+            /* positioning when .zoomWindow div available */
+            waitForEl('.zoomWindow', function() {
+                if ($('body').hasClass("rtl")) {
+                    let widthOfImage = $('.zoomContainer').width();
+                    $('.zoomWindow').css('right', `${widthOfImage}px`);
+                }
+            });
+        });
     </script>
 @endpush

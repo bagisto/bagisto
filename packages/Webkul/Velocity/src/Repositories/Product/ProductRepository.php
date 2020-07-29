@@ -4,6 +4,7 @@ namespace Webkul\Velocity\Repositories\Product;
 
 use Webkul\Core\Eloquent\Repository;
 use Illuminate\Container\Container as App;
+use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 
@@ -104,8 +105,8 @@ class ProductRepository extends Repository
      */
     public function searchProductsFromCategory($params)
     {
-        $term = $params['term'];
-        $categoryId = $params['category'];
+        $term = $params['term'] ?? '';
+        $categoryId = $params['category'] ?? '';
 
         $results = app(ProductFlatRepository::class)->scopeQuery(function($query) use($term, $categoryId, $params) {
             $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Password;
 class ForgetPasswordController extends Controller
 {
     use SendsPasswordResetEmails;
-
+    
     /**
      * Contains route related configuration
      *
@@ -32,8 +32,20 @@ class ForgetPasswordController extends Controller
      * @return \Illuminate\View\View
      */
     public function create()
-    {
-        return view($this->_config['view']);
+    {        
+        if (auth()->guard('admin')->check()) {
+            return redirect()->route('admin.dashboard.index');
+        } else {
+            if (strpos(url()->previous(), 'admin') !== false) {
+                $intendedUrl = url()->previous();
+            } else {
+                $intendedUrl = route('admin.dashboard.index');
+            }
+
+            session()->put('url.intended', $intendedUrl);
+
+            return view($this->_config['view']);
+        }
     }
 
     /**
