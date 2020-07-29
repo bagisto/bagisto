@@ -37,7 +37,7 @@
                 </a>
 
                 @if($invoice->state == "pending" || $invoice->state == "overdue")
-            <a href="#" id="ChangeStatus" class="btn btn-lg btn-primary" @click="showModal('changeInvoiceState')">{{ __('admin::app.sales.orders.invoices-change-title') }}</a>
+                    <a href="#" id="ChangeStatus" class="btn btn-lg btn-primary" @click="showModal('changeInvoiceState')">{{ __('admin::app.sales.orders.invoices-change-title') }}</a>
                 @endif
 
                 {!! view_render_event('sales.invoice.page_action.after', ['order' => $order]) !!}
@@ -272,12 +272,12 @@
                 </div>
 
                 <div>
-                    <input type="radio" name="state" id="pending" value="pending">
+                    <input type="radio" name="state" id="pending" value="pending" @if($invoice->state == "pending") checked @endif>
                     <label for="pending">{{ __('admin::app.sales.orders.invoice-status-pending') }}</label>
                 </div>
 
                 <div>
-                    <input type="radio" name="state" id="overdue" value="overdue">
+                    <input type="radio" name="state" id="overdue" value="overdue" @if($invoice->state == "overdue") checked @endif>
                     <label for="overdue">{{ __('admin::app.sales.orders.invoice-status-overdue') }}</label>
                 </div>
             </div>
