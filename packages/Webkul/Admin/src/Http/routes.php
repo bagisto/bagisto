@@ -673,7 +673,7 @@ Route::group(['middleware' => ['web']], function () {
             //tax rate ends
 
             //DataGrid Export
-            Route::post('admin/export', 'Webkul\Admin\Http\Controllers\ExportController@export')->name('admin.datagrid.export');
+            Route::post(config('app.admin_url') . '/export', 'Webkul\Admin\Http\Controllers\ExportController@export')->name('admin.datagrid.export');
 
             Route::prefix('promotions')->group(function () {
                 Route::get('cart-rules', 'Webkul\CartRule\Http\Controllers\CartRuleController@index')->defaults('_config', [
