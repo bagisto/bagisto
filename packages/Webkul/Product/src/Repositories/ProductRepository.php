@@ -184,7 +184,7 @@ class ProductRepository extends Repository
                     foreach ($attributeFilters as $attribute) {
                         $filterQuery->orWhere(function ($attributeQuery) use ($attribute) {
 
-                            $column = 'product_attribute_values.' . ProductAttributeValueProxy::modelClass()::$attributeTypeFields[$attribute->type];
+                            $column = DB::getTablePrefix() . 'product_attribute_values.' . ProductAttributeValueProxy::modelClass()::$attributeTypeFields[$attribute->type];
 
                             $filterInputValues = explode(',', request()->get($attribute->code));
 
@@ -460,7 +460,7 @@ class ProductRepository extends Repository
      * @return array
      */
     private function getDefaultSortByOption()
-    {   
+    {
         $value = core()->getConfigData('catalog.products.storefront.sort_by');
 
         $config = $value ? $value : 'name-desc';
