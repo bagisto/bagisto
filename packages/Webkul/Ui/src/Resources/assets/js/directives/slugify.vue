@@ -6,7 +6,7 @@
                     e.target.value = e.target.value
                         .toString()
                         .toLowerCase()
-                        .replace(/[^\w- ]+/g, '')
+                        // .replace(/[^\w- ]+/g, '')
 
                         // replace whitespaces with dashes
                         .replace(/ +/g, '-')
