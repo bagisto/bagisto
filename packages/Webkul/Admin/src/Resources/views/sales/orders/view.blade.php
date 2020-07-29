@@ -14,7 +14,7 @@
                 <h1>
                     {!! view_render_event('sales.order.title.before', ['order' => $order]) !!}
 
-                    <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                    <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ route('admin.dashboard.index') }}';"></i>
 
                     {{ __('admin::app.sales.orders.view-title', ['order_id' => $order->increment_id]) }}
 

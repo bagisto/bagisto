@@ -14,7 +14,7 @@
                 <h1>
                     {!! view_render_event('sales.invoice.title.before', ['order' => $order]) !!}
 
-                    <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                    <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ route('admin.dashboard.index') }}';"></i>
                     {{ __('admin::app.sales.invoices.view-title', ['invoice_id' => $invoice->id]) }}
 
                     {!! view_render_event('sales.invoice.title.after', ['order' => $order]) !!}
