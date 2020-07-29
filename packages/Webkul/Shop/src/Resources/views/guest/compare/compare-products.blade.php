@@ -25,7 +25,7 @@
                         $comparableAttributes = $comparableAttributes->toArray();
 
                         array_splice($comparableAttributes, 1, 0, [[
-                            'code' => 'productImage',
+                            'code' => 'image',
                             'admin_name' => 'Product Image'
                         ]]);
 
@@ -49,11 +49,11 @@
                                         </a>
                                         @break
 
-                                    @case('productImage')
+                                    @case('image')
                                         <a :href="`${baseUrl}/${product.url_key}`" class="unset">
                                             <img
                                                 class="image-wrapper"
-                                                :src="product['image']"
+                                                :src="product['{{ $attribute['code'] }}']"
                                                 :onerror="`this.src='${baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
                                         </a>
                                         @break
@@ -91,14 +91,6 @@
                                                             : '{{ __('velocity::app.shop.general.no') }}'"
                                                 ></span>
                                                 @break;
-
-                                            @case('image')
-                                                <img
-                                                class="image-wrapper"
-                                                :src="'/storage/' + product['{{ $attribute['code'] }}']"
-                                                :onerror="`this.src='${baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
-                                                @break;  
-
                                             @default
                                                 <span v-html="product['{{ $attribute['code'] }}'] ? product['{{ $attribute['code'] }}'] : product.product['{{ $attribute['code'] }}'] ? product.product['{{ $attribute['code'] }}'] : '__'" class="fs16"></span>
                                                 @break;

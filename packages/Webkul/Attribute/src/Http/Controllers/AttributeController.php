@@ -69,10 +69,6 @@ class AttributeController extends Controller
 
         $data = request()->all();
 
-        if ($data['code'] == 'image') {
-            $data['code'] = 'Image';
-        }
-
         $data['is_user_defined'] = 1;
 
         $attribute = $this->attributeRepository->create($data);
