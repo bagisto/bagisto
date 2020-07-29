@@ -85,6 +85,17 @@
                                 </div>
 
                                 {!! view_render_event('sales.invoice.channel_name.after', ['order' => $order]) !!}
+
+                                <div class="row">
+                                    <span class="title">{{ __('admin::app.sales.orders.payment-method') }}</span>
+                                    <span class="value">{{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}</span>
+                                </div>
+
+                                <div class="row">
+                                    <span class="title">{{ __('admin::app.sales.orders.shipping-method') }}</span>
+                                    <span class="value">{{ $order->shipping_title }}</span>
+                                </div>
+                                {!! view_render_event('sales.invoice.shipping-method.after', ['order' => $order]) !!}
                             </div>
                         </div>
 
@@ -228,20 +239,6 @@
                                 <td>-</td>
                                 <td>{{ core()->formatBasePrice($invoice->base_grand_total) }}</td>
                             </tr>
-
-                            <tr>
-                                <td>{{ __('admin::app.sales.orders.shipping-method') }}</td>
-                                <td>{{ $order->shipping_title }}</td>
-                                <td>{{ core()->formatBasePrice($order->base_shipping_amount) }}</td>
-                            </tr>
-                            {!! view_render_event('sales.invoice.shipping-method.after', ['order' => $order]) !!}
-
-                            <tr>
-                                <td>{{ __('admin::app.sales.orders.payment-method') }}</td>
-                                <td>-</td>
-                                <td>{{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}</td>
-                            </tr>
-
                         </table>
                     </div>
                 </accordian>
