@@ -458,6 +458,10 @@ class Bundle extends AbstractType
             return trans('shop::app.checkout.cart.integrity.missing_options');
         }
 
+        if (! $this->haveSufficientQuantity($data['quantity'])) {
+            return trans('shop::app.checkout.cart.quantity.inventory_warning');
+        }
+
         $products = parent::prepareForCart($data);
 
         foreach ($this->getCartChildProducts($data) as $productId => $data) {
@@ -717,7 +721,7 @@ class Bundle extends AbstractType
             if ($option->is_required) {
                 foreach ($option->bundle_option_products as $bundleOptionProduct) {
                     # as long as at least one product in the required group is available we can continue checking other groups
-                    if($bundleOptionProduct->product->haveSufficientQuantity($bundleOptionProduct->qty * $qty)) {
+                    if ($bundleOptionProduct->product->haveSufficientQuantity($bundleOptionProduct->qty * $qty)) {
                         continue 2;
                     }
                 }
