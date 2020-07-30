@@ -272,6 +272,8 @@ return [
             'downloadables' => 'Produtos para download',
             'confirm-new-password' => 'Confirme a nova senha',
             'enter-current-password' => 'Digite sua senha atual',
+            'download' => 'Baixar',
+            'no-file-available' => 'Nenhum arquivo disponível!',
 
             'alert' => [
                 'info' => 'Informações',

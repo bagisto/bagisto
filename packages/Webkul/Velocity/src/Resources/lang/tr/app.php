@@ -268,6 +268,8 @@ return [
             'downloadables'          => 'İndirilebilir Ürünler',
             'confirm-new-password'   => 'Parola Doğrula',
             'enter-current-password' => 'Mevcut Parolanızı Girin',
+            'download'               => 'İndir',
+            'no-file-available'      => 'Dosya Yok!',
 
             'alert' => [
                 'info'      => 'Bilgi',
