@@ -45,7 +45,7 @@
                                 @switch ($attribute['code'])
                                     @case('name')
                                         <a :href="`${baseUrl}/${product.url_key}`" class="unset remove-decoration active-hover">
-                                            <h3 class="fw6 fs18" v-text="product['{{ $attribute['code'] }}']"></h3>
+                                            <h3 class="fw6 fs18" v-text="product.product['{{ $attribute['code'] }}']"></h3>
                                         </a>
                                         @break
 
@@ -79,7 +79,7 @@
                                         @break
 
                                     @case('description')
-                                        <span v-html="product.description"></span>
+                                        <span v-html="product.product['description']"></span>
                                         @break
 
                                     @default
@@ -92,7 +92,7 @@
                                                 ></span>
                                                 @break;
                                             @default
-                                                <span v-html="product['{{ $attribute['code'] }}'] ? product['{{ $attribute['code'] }}'] : product.product['{{ $attribute['code'] }}'] ? product.product['{{ $attribute['code'] }}'] : '__'" class="fs16"></span>
+                                                <span v-html="product.product['{{ $attribute['code'] }}']" class="fs16"></span>
                                                 @break;
                                         @endswitch
 
