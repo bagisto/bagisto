@@ -165,7 +165,8 @@
             /* positioning when .zoomWindow div available */
             waitForEl('.zoomWindow', function() {
                 if ($('body').hasClass("rtl")) {
-                    $('.zoomWindow').css('right', '522px');
+                    let widthOfImage = $('.zoomContainer').width();
+                    $('.zoomWindow').css('right', `${widthOfImage}px`);
                 }
             });
         });
