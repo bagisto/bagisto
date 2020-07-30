@@ -1228,6 +1228,9 @@
   .pager .previous > span {
     float: right;
   }
+  .mini-cart-content > .badge {
+    left:75% !important;
+  }
   .nav-pills > li > a > .badge {
     margin-left: 0px;
     margin-right: 3px;
