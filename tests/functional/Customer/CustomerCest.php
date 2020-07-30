@@ -2,6 +2,7 @@
 
 namespace Tests\Functional\Customer;
 
+use Faker\Factory;
 use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Models\CustomerAddress;
 use FunctionalTester;
@@ -9,6 +10,11 @@ use FunctionalTester;
 class CustomerCest
 {
     public $fields = [];
+
+    public function _before(FunctionalTester $I): void
+    {
+        $I->useDefaultTheme();
+    }
 
     public function updateCustomerProfile(FunctionalTester $I): void
     {
@@ -32,8 +38,8 @@ class CustomerCest
 
     public function updateCustomerAddress(FunctionalTester $I): void
     {
-        $I->wantTo('Instantiate a european faker factory to have the vat provider available');
-        $faker = \Faker\Factory::create('at_AT');
+        // Instantiate a european faker factory to have the vat provider available
+        $faker = Factory::create('at_AT');
 
         $formCssSelector = '#customer-address-form';
 
