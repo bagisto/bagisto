@@ -16,4 +16,17 @@ class CustomerRepository extends Repository
     {
         return 'Webkul\Customer\Contracts\Customer';
     }
+
+    /**
+     * Check if customer has order pending or processing.
+     *
+     * @param Webkul\Customer\Models\Customer
+     * @return boolean
+     */
+    public function checkIfCustomerHasOrderPendingOrProcessing($customer)
+    {
+        return $customer->all_orders->pluck('status')->contains(function ($val) {
+            return $val === 'pending' || $val === 'processing';
+        });
+    }
 }

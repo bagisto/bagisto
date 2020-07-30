@@ -64,12 +64,12 @@ class CustomerController extends Controller
         CustomerGroupRepository $customerGroupRepository,
         ChannelRepository $channelRepository
         )
-        
+
         {
             $this->_config = request('_config');
             $this->middleware('admin');
             $this->customerRepository = $customerRepository;
-            
+
             $this->customerAddressRepository = $customerAddressRepository;
             $this->customerGroupRepository = $customerGroupRepository;
             $this->channelRepository = $channelRepository;
@@ -200,12 +200,20 @@ class CustomerController extends Controller
         $customer = $this->customerRepository->findorFail($id);
 
         try {
-            $this->customerRepository->delete($id);
+
+            if (!$this->customerRepository->checkIfCustomerHasOrderPendingOrProcessing($customer)) {
+
+                $this->customerRepository->delete($id);
+            } else {
+
+                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Customer']));
+                return response()->json(['message' => false], 400);
+            }
 
             session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
-
             return response()->json(['message' => true], 200);
         } catch (\Exception $e) {
+
             session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Customer']));
         }
 
