@@ -112,8 +112,8 @@
                                                 ></span>
                                                 @break;
                                             @case('file')
-                                                <a v-if="product.product['{{ $attribute['code'] }}']" :href="`${$root.baseUrl}/storage/${product.product['{{ $attribute['code'] }}']}`" class="fs16">Download</a>
-                                                <a v-else class="fs16">No File Available!</span>
+                                                <a v-if="product.product['{{ $attribute['code'] }}']" :href="`${$root.baseUrl}/storage/${product.product['{{ $attribute['code'] }}']}`" class="fs16">{{ __('velocity::app.shop.general.download') }}</a>
+                                                <a v-else class="fs16">{{ __('velocity::app.shop.general.no-file-available') }}</span>
                                                 @break;
                                             @default
                                                 <span v-html="product['{{ $attribute['code'] }}'] ? product['{{ $attribute['code'] }}'] : product.product['{{ $attribute['code'] }}'] ? product.product['{{ $attribute['code'] }}'] : '__'" class="fs16"></span>
