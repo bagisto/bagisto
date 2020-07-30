@@ -206,7 +206,7 @@ class CustomerController extends Controller
                 $this->customerRepository->delete($id);
             } else {
 
-                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Customer']));
+                session()->flash('error', trans('admin::app.response.order-pending', ['name' => 'Customer']));
                 return response()->json(['message' => false], 400);
             }
 
