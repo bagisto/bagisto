@@ -3,10 +3,12 @@
 namespace Webkul\Product\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Webkul\Attribute\Models\AttributeFamilyProxy;
 use Webkul\Category\Models\CategoryProxy;
 use Webkul\Attribute\Models\AttributeProxy;
+use Webkul\Product\Database\Eloquent\Builder;
+use Webkul\Attribute\Models\AttributeFamilyProxy;
 use Webkul\Inventory\Models\InventorySourceProxy;
+use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Contracts\Product as ProductContract;
 
 class Product extends Model implements ProductContract
@@ -220,8 +222,8 @@ class Product extends Model implements ProductContract
     public function inventory_source_qty($inventorySourceId)
     {
         return $this->inventories()
-                    ->where('inventory_source_id', $inventorySourceId)
-                    ->sum('qty');
+            ->where('inventory_source_id', $inventorySourceId)
+            ->sum('qty');
     }
 
     /**
@@ -283,6 +285,7 @@ class Product extends Model implements ProductContract
      *
      * @param Group $group
      * @param bool  $skipSuperAttribute
+     *
      * @return Collection
      */
     public function getEditableAttributes($group = null, $skipSuperAttribute = true)
@@ -293,7 +296,8 @@ class Product extends Model implements ProductContract
     /**
      * Get an attribute from the model.
      *
-     * @param  string  $key
+     * @param string $key
+     *
      * @return mixed
      */
     public function getAttribute($key)
@@ -305,8 +309,8 @@ class Product extends Model implements ProductContract
             if (isset($this->id)) {
                 $this->attributes[$key] = '';
 
-                $attribute = core()->getSingletonInstance(\Webkul\Attribute\Repositories\AttributeRepository::class)
-                                   ->getAttributeByCode($key);
+                $attribute = core()->getSingletonInstance(AttributeRepository::class)
+                    ->getAttributeByCode($key);
 
                 $this->attributes[$key] = $this->getCustomAttributeValue($attribute);
 
@@ -327,8 +331,9 @@ class Product extends Model implements ProductContract
         $hiddenAttributes = $this->getHidden();
 
         if (isset($this->id)) {
-            $familyAttributes = core()->getSingletonInstance(\Webkul\Attribute\Repositories\AttributeRepository::class)
-                                      ->getFamilyAttributes($this->attribute_family);
+            $familyAttributes = core()
+                ->getSingletonInstance(AttributeRepository::class)
+                ->getFamilyAttributes($this->attribute_family);
 
             foreach ($familyAttributes as $attribute) {
                 if (in_array($attribute->code, $hiddenAttributes)) {
@@ -377,12 +382,13 @@ class Product extends Model implements ProductContract
     /**
      * Overrides the default Eloquent query builder
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function newEloquentBuilder($query)
     {
-        return new \Webkul\Product\Database\Eloquent\Builder($query);
+        return new Builder($query);
     }
 
     /**

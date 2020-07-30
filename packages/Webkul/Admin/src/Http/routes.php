@@ -269,6 +269,10 @@ Route::group(['middleware' => ['web']], function () {
                     'redirect' => 'admin.catalog.products.edit',
                 ])->name('admin.catalog.products.store');
 
+                Route::get('products/copy/{id}', 'Webkul\Product\Http\Controllers\ProductController@copy')->defaults('_config', [
+                    'view' => 'admin::catalog.products.edit',
+                ])->name('admin.catalog.products.copy');
+
                 Route::get('/products/edit/{id}', 'Webkul\Product\Http\Controllers\ProductController@edit')->defaults('_config', [
                     'view' => 'admin::catalog.products.edit',
                 ])->name('admin.catalog.products.edit');

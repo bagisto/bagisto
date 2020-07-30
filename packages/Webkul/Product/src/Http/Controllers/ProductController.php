@@ -2,16 +2,20 @@
 
 namespace Webkul\Product\Http\Controllers;
 
+use Exception;
 use Illuminate\Support\Facades\Event;
-use Webkul\Product\Http\Requests\ProductForm;
+use Webkul\Attribute\Models\Attribute;
+use Webkul\Product\Models\ProductFlat;
 use Webkul\Product\Helpers\ProductType;
-use Webkul\Category\Repositories\CategoryRepository;
+use Illuminate\Support\Facades\Storage;
+use Webkul\Core\Contracts\Validations\Slug;
+use Webkul\Product\Http\Requests\ProductForm;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
-use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
+use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
-use Illuminate\Support\Facades\Storage;
+use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
+use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
 
 class ProductController extends Controller
 {
@@ -67,12 +71,13 @@ class ProductController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
-     * @param  \Webkul\Product\Repositories\ProductDownloadableLinkRepository  $productDownloadableLinkRepository
-     * @param  \Webkul\Product\Repositories\ProductDownloadableSampleRepository  $productDownloadableSampleRepository
-     * @param  \Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamilyRepository
-     * @param  \Webkul\Inventory\Repositories\InventorySourceRepository  $inventorySourceRepository
+     * @param \Webkul\Category\Repositories\CategoryRepository                 $categoryRepository
+     * @param \Webkul\Product\Repositories\ProductRepository                   $productRepository
+     * @param \Webkul\Product\Repositories\ProductDownloadableLinkRepository   $productDownloadableLinkRepository
+     * @param \Webkul\Product\Repositories\ProductDownloadableSampleRepository $productDownloadableSampleRepository
+     * @param \Webkul\Attribute\Repositories\AttributeFamilyRepository         $attributeFamilyRepository
+     * @param \Webkul\Inventory\Repositories\InventorySourceRepository         $inventorySourceRepository
+     *
      * @return void
      */
     public function __construct(
@@ -143,7 +148,7 @@ class ProductController extends Controller
 
         if (ProductType::hasVariants(request()->input('type'))
             && (! request()->has('super_attributes')
-            || ! count(request()->get('super_attributes')))
+                || ! count(request()->get('super_attributes')))
         ) {
             session()->flash('error', trans('admin::app.catalog.products.configurable-error'));
 
@@ -153,7 +158,7 @@ class ProductController extends Controller
         $this->validate(request(), [
             'type'                => 'required',
             'attribute_family_id' => 'required',
-            'sku'                 => ['required', 'unique:products,sku', new \Webkul\Core\Contracts\Validations\Slug],
+            'sku'                 => ['required', 'unique:products,sku', new Slug],
         ]);
 
         $product = $this->productRepository->create(request()->all());
@@ -166,7 +171,8 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\View\View
      */
     public function edit($id)
@@ -183,8 +189,9 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Webkul\Product\Http\Requests\ProductForm  $request
-     * @param  int  $id
+     * @param \Webkul\Product\Http\Requests\ProductForm $request
+     * @param int                                       $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(ProductForm $request, $id)
@@ -201,20 +208,20 @@ class ProductController extends Controller
             if (count($customAttributes)) {
                 foreach ($customAttributes as $attribute) {
                     if ($attribute->type == 'multiselect') {
-                        array_push($multiselectAttributeCodes,$attribute->code);
-                    }                    
+                        array_push($multiselectAttributeCodes, $attribute->code);
+                    }
                 }
             }
         }
 
         if (count($multiselectAttributeCodes)) {
             foreach ($multiselectAttributeCodes as $multiselectAttributeCode) {
-                if(! isset($data[$multiselectAttributeCode])){
+                if (! isset($data[$multiselectAttributeCode])) {
                     $data[$multiselectAttributeCode] = array();
                 }
-            }  
+            }
         }
-       
+
         $product = $this->productRepository->update($data, $id);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Product']));
@@ -225,7 +232,8 @@ class ProductController extends Controller
     /**
      * Uploads downloadable file
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function uploadLink($id)
@@ -236,9 +244,91 @@ class ProductController extends Controller
     }
 
     /**
+     * Copy a given Product. Do not copy the images.
+     * Always make the copy is inactive so the admin is able to configure it before setting it live.
+     */
+    public function copy(int $productId)
+    {
+        $originalProduct = $this->productRepository
+            ->findOrFail($productId)
+            ->load('attribute_family')
+            ->load('categories')
+            ->load('customer_group_prices')
+            ->load('inventories')
+            ->load('inventory_sources');
+
+        $copiedProduct = $originalProduct
+            ->replicate()
+            ->fill([
+                // the sku and url_key needs to be unique and should be entered again newly by the admin:
+                'sku' => 'temporary-sku-' . substr(md5(microtime()), 0, 6),
+            ]);
+
+        $copiedProduct->save();
+
+        $attributeName = Attribute::query()->where(['code' => 'name'])->firstOrFail();
+        $attributeSku = Attribute::query()->where(['code' => 'sku'])->firstOrFail();
+        $attributeStatus = Attribute::query()->where(['code' => 'status'])->firstOrFail();
+        $attributeUrlKey = Attribute::query()->where(['code' => 'url_key'])->firstOrFail();
+
+        $newProductFlat = new ProductFlat();
+
+        // only obey copied locale and channel:
+        if (isset($originalProduct->product_flats[0])) {
+            $newProductFlat = $originalProduct->product_flats[0]->replicate();
+        }
+
+        $newProductFlat->product_id = $copiedProduct->id;
+
+        foreach ($originalProduct->attribute_values as $oldValue) {
+            $newValue = $oldValue->replicate();
+
+            if ($oldValue->attribute_id === $attributeName->id) {
+                $newValue->text_value = __('admin::app.copy-of') . ' ' . $originalProduct->name;
+                $newProductFlat->name = __('admin::app.copy-of') . ' ' . $originalProduct->name;
+            }
+
+            if ($oldValue->attribute_id === $attributeUrlKey->id) {
+                $newValue->text_value = __('admin::app.copy-of-slug') . '-' . $originalProduct->url_key;
+                $newProductFlat->url_key = __('admin::app.copy-of-slug') . '-' . $originalProduct->url_key;
+            }
+
+            if ($oldValue->attribute_id === $attributeSku->id) {
+                $newValue->text_value = $copiedProduct->sku;
+                $newProductFlat->sku = $copiedProduct->sku;
+            }
+
+            if ($oldValue->attribute_id === $attributeStatus->id) {
+                $newValue->boolean_value = 0;
+                $newProductFlat->status = 0;
+            }
+
+            $copiedProduct->attribute_values()->save($newValue);
+
+        }
+
+        $newProductFlat->save();
+
+        foreach ($originalProduct->categories as $category) {
+            $copiedProduct->categories()->save($category);
+        }
+
+        foreach ($originalProduct->inventories as $inventory) {
+            $copiedProduct->inventories()->save($inventory);
+        }
+
+        foreach ($originalProduct->customer_group_prices as $customer_group_price) {
+            $copiedProduct->customer_group_prices()->save($customer_group_price);
+        }
+
+        return redirect()->to(route('admin.catalog.products.edit', ['id' => $copiedProduct->id]));
+    }
+
+    /**
      * Uploads downloadable sample file
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function uploadSample($id)
@@ -251,7 +341,8 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -264,7 +355,7 @@ class ProductController extends Controller
             session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Product']));
 
             return response()->json(['message' => true], 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             report($e);
 
             session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Product']));
@@ -363,11 +454,12 @@ class ProductController extends Controller
         }
     }
 
-     /**
+    /**
      * Download image or file
      *
-     * @param  int  $productId
-     * @param  int  $attributeId
+     * @param int $productId
+     * @param int $attributeId
+     *
      * @return \Illuminate\Http\Response
      */
     public function download($productId, $attributeId)
