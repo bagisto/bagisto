@@ -10,16 +10,16 @@ use Webkul\Core\Helpers\Laravel5Helper;
 
 class GuestCheckoutCest
 {
-    private $faker,
-        $productNoGuestCheckout, $productGuestCheckout;
+    private $productNoGuestCheckout, $productGuestCheckout;
 
     function _before(FunctionalTester $I)
     {
+        $I->useDefaultTheme();
 
-        $this->faker = Factory::create();
+        $faker = Factory::create();
 
         $pConfigDefault = [
-            'productInventory' => ['qty' => $this->faker->numberBetween(1, 1000)],
+            'productInventory' => ['qty' => $faker->numberBetween(1, 1000)],
             'attributeValues'  => [
                 'status'         => true,
                 'new'            => 1,
@@ -27,7 +27,7 @@ class GuestCheckoutCest
             ],
         ];
         $pConfigGuestCheckout = [
-            'productInventory' => ['qty' => $this->faker->numberBetween(1, 1000)],
+            'productInventory' => ['qty' => $faker->numberBetween(1, 1000)],
             'attributeValues'  => [
                 'status'         => true,
                 'new'            => 1,
@@ -72,8 +72,8 @@ class GuestCheckoutCest
         $I->click(__('shop::app.checkout.cart.proceed-to-checkout'),
             '//a[@href="' . route('shop.checkout.onepage.index') . '"]');
         $I->seeCurrentRouteIs($example['expectedRoute']);
-        $cart = Cart::getCart();
-        $I->assertTrue(Cart::removeItem($cart->items[0]->id));
+        $cart = cart()->getCart();
+        $I->assertTrue(cart()->removeItem($cart->items[0]->id));
     }
 
     protected function guestCheckoutProvider(): array
