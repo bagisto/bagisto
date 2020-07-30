@@ -199,6 +199,10 @@ abstract class DataGrid
             unset($parsedUrl['page']);
         }
 
+        if (isset($parsedUrl['grand_total'])) {
+            $parsedUrl['grand_total']['eq'] = str_replace(',', '.', $parsedUrl['grand_total']['eq']);
+        }
+
         $this->itemsPerPage = isset($parsedUrl['perPage']) ? $parsedUrl['perPage']['eq'] : $this->itemsPerPage;
 
         unset($parsedUrl['perPage']);
