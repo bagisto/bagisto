@@ -27,7 +27,7 @@
                     <div class="page-title">
                         <h1>
                             <i class="icon angle-left-icon back-link"
-                            onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                            onclick="history.length > 1 ? history.go(-1) : window.location = '{{ route('admin.dashboard.index') }}';"></i>
 
                             {{ __('admin::app.promotions.cart-rules.edit-title') }}
                         </h1>

@@ -3,22 +3,20 @@
 namespace Webkul\Checkout;
 
 use Exception;
-use Illuminate\Support\Facades\Log;
-use Webkul\Checkout\Models\Cart as CartModel;
-use Webkul\Checkout\Models\CartAddress;
-use Webkul\Checkout\Repositories\CartRepository;
-use Webkul\Checkout\Repositories\CartItemRepository;
-use Webkul\Checkout\Repositories\CartAddressRepository;
-use Webkul\Customer\Models\CustomerAddress;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Tax\Helpers\Tax;
-use Webkul\Tax\Repositories\TaxCategoryRepository;
-use Webkul\Checkout\Models\CartItem;
-use Webkul\Checkout\Models\CartPayment;
-use Webkul\Customer\Repositories\WishlistRepository;
-use Webkul\Customer\Repositories\CustomerAddressRepository;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Arr;
+use Webkul\Tax\Helpers\Tax;
+use Illuminate\Support\Facades\Event;
+use Webkul\Shipping\Facades\Shipping;
+use Webkul\Checkout\Models\CartAddress;
+use Webkul\Checkout\Models\CartPayment;
+use Webkul\Checkout\Models\Cart as CartModel;
+use Webkul\Checkout\Repositories\CartRepository;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Tax\Repositories\TaxCategoryRepository;
+use Webkul\Checkout\Repositories\CartItemRepository;
+use Webkul\Customer\Repositories\WishlistRepository;
+use Webkul\Checkout\Repositories\CartAddressRepository;
+use Webkul\Customer\Repositories\CustomerAddressRepository;
 
 class Cart
 {
@@ -324,6 +322,8 @@ class Cart
                 session()->forget('cart');
             }
         }
+
+        Shipping::collectRates();
 
         Event::dispatch('checkout.cart.delete.after', $itemId);
 
