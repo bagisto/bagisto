@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fdf74de7a5b3178ce60852ca512a6f21",
+    "content-hash": "4075d2748ab71dfcd4c62655894bcc25",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -301,6 +301,46 @@
                 "scout"
             ],
             "time": "2020-06-22T14:14:32+00:00"
+        },
+        {
+            "name": "bagistobrasil/bagisto-product-social-share",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bagistobrasil/bagisto-product-social-share.git",
+                "reference": "eee1fba2cedc363c84485ebd1e6e8af61038170b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bagistobrasil/bagisto-product-social-share/zipball/eee1fba2cedc363c84485ebd1e6e8af61038170b",
+                "reference": "eee1fba2cedc363c84485ebd1e6e8af61038170b",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "BagistoBrasil\\ProductSocialShare\\Providers\\ProductSocialShareProvider"
+                    ],
+                    "aliases": []
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "BagistoBrasil\\ProductSocialShare\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Carlos Gartner",
+                    "email": "contato@carlosgartner.com.br"
+                }
+            ],
+            "time": "2020-05-02T00:25:57+00:00"
         },
         {
             "name": "barryvdh/laravel-debugbar",
