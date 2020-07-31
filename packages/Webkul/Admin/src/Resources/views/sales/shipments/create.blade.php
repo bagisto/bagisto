@@ -12,7 +12,7 @@
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ route('admin.dashboard.index') }}';"></i>
 
                         {{ __('admin::app.sales.shipments.add-title') }}
                     </h1>
@@ -274,7 +274,7 @@
 
                                     @if (isset($item->additional['attributes']))
                                         <div class="item-options">
-                                            
+
                                             @foreach ($item->additional['attributes'] as $attribute)
                                                 <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
                                             @endforeach
@@ -321,7 +321,7 @@
                                                         <div class="control-group" :class="[errors.has('{{ $inputName }}') ? 'has-error' : '']">
 
                                                             <input type="text" v-validate="'required|numeric|min_value:0|max_value:{{$sourceQty}}'" class="control" id="{{ $inputName }}" name="{{ $inputName }}" value="{{ $item->qty_invoiced }}" data-vv-as="&quot;{{ __('admin::app.sales.shipments.qty-to-ship') }}&quot;" :disabled="source != '{{ $inventorySource->id }}'"/>
-                                                            
+
                                                             <span class="control-error" v-if="errors.has('{{ $inputName }}')">
                                                                 @verbatim
                                                                     {{ errors.first('<?php echo $inputName; ?>') }}

@@ -691,7 +691,7 @@
         .product-quantity {
             .quantity {
                 float: left;
-                
+
                 label {
                     display: none !important;
                 }
@@ -1152,7 +1152,7 @@
                     input {
                         display: none;
                     }
-                    
+
                     img.preview {
                         width: 100%;
                         height: 100%;
@@ -2265,6 +2265,7 @@
 }
 
 .selective-div {
+    width: 150px;
     -webkit-appearance: none;
 }
 

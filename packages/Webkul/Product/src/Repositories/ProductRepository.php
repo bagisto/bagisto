@@ -125,7 +125,7 @@ class ProductRepository extends Repository
 
             $qb = $query->distinct()
                 ->select('product_flat.*')
-                ->join('product_flat as variants', 'product_flat.id', '=', DB::raw('COALESCE(variants.parent_id, variants.id)'))
+                ->join('product_flat as variants', 'product_flat.id', '=', DB::raw('COALESCE('.DB::getTablePrefix().'variants.parent_id, '.DB::getTablePrefix().'variants.id)'))
                 ->leftJoin('product_categories', 'product_categories.product_id', '=', 'product_flat.product_id')
                 ->leftJoin('product_attribute_values', 'product_attribute_values.product_id', '=', 'variants.product_id')
                 ->where('product_flat.channel', $channel)
@@ -152,13 +152,17 @@ class ProductRepository extends Repository
             if( isset($params['order']) && in_array($params['order'], ['desc', 'asc']) ){
                 $orderDirection = $params['order'];
             } else {
-                $orderDirection = $this->getDefaultSortByOption()[1];
+                $sortOptions = $this->getDefaultSortByOption();
+                $orderDirection = !empty($sortOptions) ? $sortOptions[1] : 'asc';
             }
 
             if (isset($params['sort'])) {
                 $this->checkSortAttributeAndGenerateQuery($qb, $params['sort'], $orderDirection);
             } else {
-                $this->checkSortAttributeAndGenerateQuery($qb, $this->getDefaultSortByOption()[0], $orderDirection);
+                $sortOptions = $this->getDefaultSortByOption();
+                if (!empty($sortOptions)) {
+                    $this->checkSortAttributeAndGenerateQuery($qb, $sortOptions[0], $orderDirection);
+                }
             }
 
             if ( $priceFilter = request('price') ){
@@ -180,7 +184,7 @@ class ProductRepository extends Repository
                     foreach ($attributeFilters as $attribute) {
                         $filterQuery->orWhere(function ($attributeQuery) use ($attribute) {
 
-                            $column = 'product_attribute_values.' . ProductAttributeValueProxy::modelClass()::$attributeTypeFields[$attribute->type];
+                            $column = DB::getTablePrefix() . 'product_attribute_values.' . ProductAttributeValueProxy::modelClass()::$attributeTypeFields[$attribute->type];
 
                             $filterInputValues = explode(',', request()->get($attribute->code));
 
