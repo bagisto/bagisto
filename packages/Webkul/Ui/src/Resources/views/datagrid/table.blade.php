@@ -167,9 +167,7 @@
 
                                     <li v-if='numberCondition != null'>
                                         <div class="control-group">
-                                            <input type="number" class="control response-number"
-                                                   placeholder="{{ __('ui::app.datagrid.numeric-value-here') }}"
-                                                   v-model="numberValue"/>
+                                            <input type="text" class="control response-number" v-on:input="filterNumberInput" placeholder="{{ __('ui::app.datagrid.numeric-value-here') }}"  v-model="numberValue"/>
                                         </div>
                                     </li>
 
@@ -382,7 +380,11 @@
                         this.numberCondition = null;
                     },
 
-                    getResponse: function () {
+                    filterNumberInput: function(e){
+                        this.numberValue = e.target.value.replace(/[^0-9\,\.]+/g, '');                            
+                    },
+
+                    getResponse: function() {
                         label = '';
 
                         for (let colIndex in this.columns) {
