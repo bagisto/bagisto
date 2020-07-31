@@ -287,12 +287,18 @@ class CustomerController extends Controller
     {
         $customerIds = explode(',', request()->input('indexes'));
 
-        foreach ($customerIds as $customerId) {
-            $this->customerRepository->deleteWhere(['id' => $customerId]);
+        if (!$this->customerRepository->checkBulkCustomerIfTheyHaveOrderPendingOrProcessing($customerIds)) {
+
+            foreach ($customerIds as $customerId) {
+                $this->customerRepository->deleteWhere(['id' => $customerId]);
+            }
+
+            session()->flash('success', trans('admin::app.customers.customers.mass-destroy-success'));
+
+            return redirect()->back();
         }
 
-        session()->flash('success', trans('admin::app.customers.customers.mass-destroy-success'));
-
+        session()->flash('error', trans('admin::app.response.order-pending', ['name' => 'Customers']));
         return redirect()->back();
     }
 }

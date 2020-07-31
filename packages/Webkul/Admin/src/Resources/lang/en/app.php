@@ -1219,7 +1219,7 @@ return [
         'cancel-success' => ':name canceled successfully.',
         'cancel-error' => ':name can not be canceled.',
         'already-taken' => 'The :name has already been taken.',
-        'order-pending' => 'Cannot delete account because some Order(s) are pending or processing state.'
+        'order-pending' => 'Cannot delete :name account because some Order(s) are pending or processing state.'
     ],
 
     'footer' => [

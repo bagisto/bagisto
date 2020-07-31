@@ -29,4 +29,23 @@ class CustomerRepository extends Repository
             return $val === 'pending' || $val === 'processing';
         });
     }
+
+    /**
+     * Check if bulk customers, if they have order pending or processing.
+     *
+     * @param array
+     * @return boolean
+     */
+    public function checkBulkCustomerIfTheyHaveOrderPendingOrProcessing($customerIds)
+    {
+        foreach ($customerIds as $customerId) {
+
+            $customer = $this->findorFail($customerId);
+
+            if ($this->checkIfCustomerHasOrderPendingOrProcessing($customer)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
