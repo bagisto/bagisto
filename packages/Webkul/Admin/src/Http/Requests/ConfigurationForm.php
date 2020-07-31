@@ -46,7 +46,16 @@ class ConfigurationForm extends FormRequest
     {
         return [
             'general.design.admin_logo.logo_image.mimes' => 'Invalid file format. Use only jpeg, bmp, png, jpg.',
-            'general.design.admin_logo.logo_image.max' => ' Image failed to upload.'
+        ];
+    }
+
+    /**
+     * Set the attribute name.
+     */
+    public function attributes()
+    {
+        return [
+            'general.design.admin_logo.logo_image' => 'Logo Image',
         ];
     }
 }
