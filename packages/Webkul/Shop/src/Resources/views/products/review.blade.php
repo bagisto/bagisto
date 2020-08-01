@@ -13,7 +13,7 @@
         <div class="total-reviews">
             {{ 
                 __('shop::app.products.total-rating', [
-                        'total_rating' => $reviewHelper->getTotalRating($product),
+                        'total_rating' => $reviewHelper->getAverageRating($product),
                         'total_reviews' => $total,
                     ]) 
             }}

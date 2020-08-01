@@ -55,7 +55,7 @@
                         </span>
 
                         <span class="stars">
-                            @for ($i = 1; $i <= $reviewHelper->getAverageRating($product); $i++)
+                            @for ($i = 1; $i <= round($reviewHelper->getAverageRating($product)); $i++)
 
                                 <span class="icon star-icon"></span>
 
@@ -64,7 +64,7 @@
 
                         <div class="total-reviews mt-5">
                             {{ __('shop::app.reviews.ratingreviews', [
-                                'rating' => $reviewHelper->getTotalRating($product),
+                                'rating' => $reviewHelper->getAverageRating($product),
                                 'review' => $reviewHelper->getTotalReviews($product)])
                             }}
                         </div>
