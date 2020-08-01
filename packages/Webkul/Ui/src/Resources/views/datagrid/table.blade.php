@@ -34,8 +34,8 @@
                                     </option>
                                     @foreach ($results['extraFilters']['channels'] as $channelModel)
                                         <option
-                                            value="{{ $channelModel->code }}"
-                                            {{ (isset($channel) && ($channelModel->code) == $channel) ? 'selected' : '' }}>
+                                            value="{{ $channelModel->id }}"
+                                            {{ (isset($channel) && ($channelModel->id) == $channel) ? 'selected' : '' }}>
                                             {{ $channelModel->name }}
                                         </option>
                                     @endforeach
@@ -701,7 +701,7 @@
                                 case "channel":
                                     obj.label = "Channel";
                                     if ('channels' in this.extraFilters) {
-                                        obj.prettyValue = this.extraFilters['channels'].find(channel => channel.code === obj.val).name
+                                        obj.prettyValue = this.extraFilters['channels'].find(channel => channel.id == obj.val).name
                                     }
                                     break;
                                 case "locale":
