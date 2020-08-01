@@ -12,7 +12,7 @@
         <div class="page-header">
             <div class="page-title">
                 <h1>
-                    <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                    <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ route('admin.dashboard.index') }}';"></i>
 
                     {{ __('admin::app.sales.refunds.view-title', ['refund_id' => $refund->id]) }}
                 </h1>
@@ -229,7 +229,7 @@
 
                                                 @if (isset($item->additional['attributes']))
                                                     <div class="item-options">
-                                                        
+
                                                         @foreach ($item->additional['attributes'] as $attribute)
                                                             <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
                                                         @endforeach

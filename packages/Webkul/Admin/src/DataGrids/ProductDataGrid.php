@@ -17,6 +17,12 @@ class ProductDataGrid extends DataGrid
 
     protected $channel = 'all';
 
+    /** @var string[] contains the keys for which extra filters to render */
+    protected $extraFilters = [
+        'channels',
+        'locales',
+    ];
+
     public function __construct()
     {
         parent::__construct();
@@ -44,7 +50,7 @@ class ProductDataGrid extends DataGrid
             );
 
         if ($this->locale !== 'all') {
-            $queryBuilder->where('locale', $this->locale);
+            $queryBuilder->where('product_flat.locale', $this->locale);
         }
 
         if ($this->channel !== 'all') {

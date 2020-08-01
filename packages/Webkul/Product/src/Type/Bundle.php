@@ -278,7 +278,7 @@ class Bundle extends AbstractType
                 if (! $bundleOptionProduct->product->getTypeInstance()->isSaleable()) {
                     continue;
                 }
-                
+
                 if (in_array($option->type, ['multiselect', 'checkbox'])) {
                     if (! isset($optionPrices[$option->id][0])) {
                         $optionPrices[$option->id][0] = 0;
@@ -315,7 +315,7 @@ class Bundle extends AbstractType
                 if (! $bundleOptionProduct->product->getTypeInstance()->isSaleable()) {
                     continue;
                 }
-                
+
                 if (in_array($option->type, ['multiselect', 'checkbox'])) {
                     if (! isset($optionPrices[$option->id][0])) {
                         $optionPrices[$option->id][0] = 0;
@@ -382,6 +382,25 @@ class Bundle extends AbstractType
     }
 
     /**
+     * Get bundle product special price
+     *
+     * @return boolean
+     */
+    private function checkBundleProductHaveSpecialPrice()
+    {
+        $haveSpecialPrice = false;
+        foreach ($this->product->bundle_options as $option) {
+            foreach ($option->bundle_option_products as $index => $bundleOptionProduct) {
+                if ($bundleOptionProduct->product->getTypeInstance()->haveSpecialPrice()) {
+                    $haveSpecialPrice = true;
+                    break;
+                }
+            }
+        }
+        return $haveSpecialPrice;
+    }
+
+    /**
      * Get product minimal price
      *
      * @return string
@@ -390,7 +409,12 @@ class Bundle extends AbstractType
     {
         $prices = $this->getProductPrices();
 
-        $priceHtml = '<div class="price-from">';
+        $priceHtml = '';
+
+        if ($this->checkBundleProductHaveSpecialPrice())
+            $priceHtml .= '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>';
+
+        $priceHtml .= '<div class="price-from">';
 
         if ($prices['from']['regular_price']['price'] != $prices['from']['final_price']['price']) {
             $priceHtml .= '<span class="regular-price">' . $prices['from']['regular_price']['formated_price'] . '</span>'
@@ -426,6 +450,8 @@ class Bundle extends AbstractType
      */
     public function prepareForCart($data)
     {
+        $bundleQuantity = $data['quantity'];
+
         if (isset($data['bundle_options'])) {
             $data['bundle_options'] = array_filter($this->validateBundleOptionForCart($data['bundle_options']));
         }
@@ -434,10 +460,20 @@ class Bundle extends AbstractType
             return trans('shop::app.checkout.cart.integrity.missing_options');
         }
 
+        if (! $this->haveSufficientQuantity($data['quantity'])) {
+            return trans('shop::app.checkout.cart.quantity.inventory_warning');
+        }
+
         $products = parent::prepareForCart($data);
 
         foreach ($this->getCartChildProducts($data) as $productId => $data) {
+
             $product = $this->productRepository->find($productId);
+
+            /* need to check each individual quantity as well if don't have then show error */
+            if (! $product->getTypeInstance()->haveSufficientQuantity($data['quantity'] * $bundleQuantity)) {
+                return trans('shop::app.checkout.cart.quantity.inventory_warning');
+            }
 
             if (! $product->getTypeInstance()->isSaleable()) {
                 continue;
@@ -693,7 +729,7 @@ class Bundle extends AbstractType
             if ($option->is_required) {
                 foreach ($option->bundle_option_products as $bundleOptionProduct) {
                     # as long as at least one product in the required group is available we can continue checking other groups
-                    if($bundleOptionProduct->product->haveSufficientQuantity($bundleOptionProduct->qty * $qty)) {
+                    if ($bundleOptionProduct->product->haveSufficientQuantity($bundleOptionProduct->qty * $qty)) {
                         continue 2;
                     }
                 }

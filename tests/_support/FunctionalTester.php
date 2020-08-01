@@ -126,4 +126,13 @@ class FunctionalTester extends \Codeception\Actor
             }
         }
     }
+
+    public function useDefaultTheme(): void
+    {
+        $channel = core()->getCurrentChannel();
+
+        if ($channel->theme !== 'default') {
+            $channel->update(['theme' => 'default']);
+        }
+    }
 }
