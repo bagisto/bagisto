@@ -577,6 +577,15 @@ return [
             'final-summary' => 'TDziękujemy za zainteresowanie naszym sklepem, a po podsumowaniu wyślemy ci numer śledzenia',
             'help' => 'Jeśli potrzebujesz jakiejkolwiek pomocy, skontaktuj się z nami pod adresem :support_email',
             'thanks' => 'Dzięki!',
+
+            'comment' => [
+                'subject' => 'Dodano nowy komentarz do Twojego zamówienia #:order_id',
+                'dear' => 'Drogi :customer_name',
+                'final-summary' => 'Dziękujemy za zainteresowanie naszym sklepem',
+                'help' => 'Jeśli potrzebujesz pomocy, skontaktuj się z nami pod adresem :support_email',
+                'thanks' => 'Dzięki!',
+            ],
+
             'cancel' => [
                 'subject' => 'Potwierdź anulowanie zamówienia',
                 'heading' => 'Zamówienie anulowane',

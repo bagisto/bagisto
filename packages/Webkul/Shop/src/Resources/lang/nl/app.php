@@ -582,7 +582,16 @@ return [
             'grand-total' => 'Eindtotaal',
             'final-summary' => 'Bedankt voor het tonen van uw interesse in onze winkel.We sturen u een trackingnummer zodra het is verzonden',
             'help' => 'Als u hulp nodig heeft, neem dan contact met ons op via :support_email',
-            'thanks' => 'Thanks!',
+            'thanks' => 'Bedankt!',
+
+            'comment' => [
+                'subject' => 'Nieuwe opmerking toegevoegd aan uw bestelling #:order_id',
+                'dear' => 'Lieve :customer_name',
+                'final-summary' => 'Bedankt voor het tonen van uw interesse in onze winkel',
+                'help' => 'Als u hulp nodig heeft, neem dan contact met ons op via :support_email',
+                'thanks' => 'Bedankt!',
+            ],
+
             'cancel' => [
                 'subject' => 'Order Annuleren Bevestiging',
                 'heading' => 'Bestelling geannuleerd',
