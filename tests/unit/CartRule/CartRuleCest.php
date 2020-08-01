@@ -669,14 +669,14 @@ class CartRuleCest
         $I->assertEquals(23.92, $cartItem['price']);
         $I->assertEquals(19.0, $cartItem['tax_percent']);
         $I->assertEquals(4.5448, $cartItem['tax_amount']);
-        $I->assertEquals(28.4648, $cartItem['discount_amount']);
+        $I->assertEquals(23.92, $cartItem['discount_amount']);
 
         $I->assertEquals('AWESOME', $cart->coupon_code);
         $I->assertEquals(23.92, $cart->sub_total);
         $I->assertEquals(4.54, $cart->tax_total);
-        $I->assertEquals(28.46, $cart->discount_amount);
-        // 23.92 + 4.54 - 28.46 = 0.00
-        $I->assertEquals(0.00, $cart->grand_total);
+        $I->assertEquals(23.92, $cart->discount_amount);
+        // 23.92 - 23.92 + 4.54 = 0.00
+        $I->assertEquals(4.54, $cart->grand_total);
     }
 
     /**
