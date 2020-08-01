@@ -581,7 +581,7 @@ return [
             'thanks' => 'Thanks!',
 
             'comment' => [
-                'subject' => 'New comment added to your order',
+                'subject' => 'New comment added to your order #:order_id',
                 'dear' => 'Dear :customer_name',
                 'final-summary' => 'Thanks for showing your interest in our store',
                 'help' => 'If you need any kind of help please contact us at :support_email',

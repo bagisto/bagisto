@@ -574,9 +574,9 @@ return [
             'final-summary' => 'Bizi tercih ettiğiniz için teşekkür ederiz. Ürün kargoya teslim edildikten sonra takip numarası iletilecektir.',
             'help' => 'Soru ve görüşleriniz için lütfen bizimle iletişime geçiniz: :support_email',
             'thanks' => 'Teşekkürler!',
-            
+
             'comment' => [
-                'subject' => 'Siparişinize yeni yorum yapıldı.',
+                'subject' => 'Siparişinize #:order_id yeni yorum yapıldı.',
                 'dear' => 'Sayın :customer_name',
                 'final-summary' => 'Bizi tercih ettiğiniz için teşekkür ederiz.',
                 'help' => 'Soru ve görüşleriniz için lütfen bizimle iletişime geçiniz: :support_email',
