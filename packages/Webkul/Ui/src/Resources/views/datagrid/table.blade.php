@@ -658,7 +658,6 @@
                             } else {
                                 newParams = newParams + '&' + this.filters[i].column + condition + '=' + this.filters[i].val;
                             }
-                            console.log('newParams', newParams);
                         }
 
                         var uri = window.location.href.toString();
@@ -730,7 +729,6 @@
                                             obj.label = this.columns[colIndex].label;
 
                                             if (this.columns[colIndex].type === 'boolean') {
-                                                console.log('obj.val', obj.val);
                                                 if (obj.val === '1') {
                                                     obj.val = '{{ __('ui::app.datagrid.true') }}';
                                                 } else {
@@ -744,7 +742,6 @@
 
                             if (obj.column !== undefined && obj.val !== undefined) {
                                 this.filters.push(obj);
-                                console.log('pushed');
                             }
 
                             obj = {};
@@ -753,7 +750,7 @@
 
                     removeFilter: function (filter) {
                         for (let i in this.filters) {
-                            if (this.filters[i].col === filter.col
+                            if (this.filters[i].column === filter.column
                                 && this.filters[i].cond === filter.cond
                                 && this.filters[i].val === filter.val) {
                                 this.filters.splice(i, 1);
@@ -836,8 +833,6 @@
 
                     captureColumn: function (id) {
                         element = document.getElementById(id);
-
-                        console.log(element.innerHTML);
                     },
 
                     removeMassActions: function () {
