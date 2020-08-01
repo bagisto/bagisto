@@ -91,11 +91,11 @@ class expectedCartItem
     {
         $this->discount_percent = $discount;
         $this->discount_amount = round(
-            ($this->total + $this->tax_amount) * $this->discount_percent / 100,
+            ($this->total) * $this->discount_percent / 100,
             self::ITEM_DISCOUNT_AMOUNT_PRECISION
         );
         $this->base_discount_amount = round(
-            ($this->base_total + $this->base_tax_amount) * $this->discount_percent / 100,
+            ($this->base_total) * $this->discount_percent / 100,
             self::ITEM_DISCOUNT_AMOUNT_PRECISION
         );
         $this->coupon_code = $code;
