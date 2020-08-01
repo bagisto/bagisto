@@ -675,7 +675,7 @@ class CartRuleCest
         $I->assertEquals(23.92, $cart->sub_total);
         $I->assertEquals(4.54, $cart->tax_total);
         $I->assertEquals(23.92, $cart->discount_amount);
-        // 23.92 - 23.92 + 4.54 = 0.00
+        // 23.92 - 23.92 + 4.54 = 4.54
         $I->assertEquals(4.54, $cart->grand_total);
     }
 
