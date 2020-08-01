@@ -607,6 +607,13 @@ return [
             'thanks' => 'Obrigado!'
         ],
 
+        'update-password' => [
+            'subject' => 'Senha atualizada',
+            'dear' => 'Caro :name',
+            'info' => 'Você está recebendo este e-mail porque atualizou sua senha.',
+            'thanks' => 'Obrigado!'
+        ],
+
         'customer' => [
             'new' => [
                 'dear' => 'Caro :customer_name',

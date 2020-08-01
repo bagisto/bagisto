@@ -643,6 +643,13 @@ return [
             'thanks' => 'Grazie!'
         ],
 
+        'update-password' => [
+            'subject' => 'Password aggiornata',
+            'dear' => 'Cara :name',
+            'info' => 'Ricevi questa email perché hai aggiornato la password.',
+            'thanks' => 'Grazie!'
+        ],
+
         'customer' => [
             'new' => [
                 'dear' => 'Gentile :customer_name',
@@ -675,7 +682,7 @@ return [
                 'subject' => 'Email Iscrizione',
                 'greeting' => ' Benvenuto ' . config('app.name') . ' - Email Iscrizione',
                 'unsubscribe' => 'Cancellati',
-                'summary' => 'Grazie per avere scelto di ricevere le nostre email. È passato un po\' di tempo da quando hai letto le email di ' . config('app.name') . '. Non è un nostro desidero inondare la tua casella email con le nostre comunicazioni. Se desideri comunque 
+                'summary' => 'Grazie per avere scelto di ricevere le nostre email. È passato un po\' di tempo da quando hai letto le email di ' . config('app.name') . '. Non è un nostro desidero inondare la tua casella email con le nostre comunicazioni. Se desideri comunque
                 non ricevere più le nostre news clicca il bottone qui sotto.'
             ]
         ]

@@ -633,6 +633,13 @@ return [
             'thanks' => 'Dzięki!'
         ],
 
+        'update-password' => [
+            'subject' => 'Hasło zaktualizowane',
+            'dear' => 'Drogi/a :name',
+            'info' => 'Otrzymujesz tę wiadomość e-mail, ponieważ zaktualizowałeś swoje hasło.',
+            'thanks' => 'Dzięki!'
+        ],
+
         'customer' => [
             'new' => [
                 'dear' => 'Drogi/a :customer_name',

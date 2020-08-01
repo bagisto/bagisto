@@ -634,6 +634,13 @@ return [
             'thanks' => 'با تشکر'
         ],
 
+        'update-password' => [
+            'subject' => 'پسورد آپدیت شد',
+            'dear' => ':name عزیز',
+            'info' => 'شما این ایمیل را دریافت می کنید زیرا رمز خود را به روز کرده اید.',
+            'thanks' => 'با تشکر'
+        ],
+
         'customer' => [
             'new' => [
                 'dear' => ':customer_name عزیز',

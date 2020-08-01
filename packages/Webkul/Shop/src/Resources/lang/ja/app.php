@@ -574,6 +574,12 @@ return [
             'final-summary' => 'Si no has solicitado cambiar de contraseña, ninguna acción es requerida por tu parte.',
             'thanks' => 'ありがとうございます。'
         ],
+        'update-password' => [
+            'subject' => 'パスワードが更新されました',
+            'dear' => '様 :name',
+            'info' => 'パスワードを更新したため、このメールをお送りしています。',
+            'thanks' => 'ありがとうございます。'
+        ],
         'customer' => [
             'new' => [
                 'dear' => '様 :customer_name',

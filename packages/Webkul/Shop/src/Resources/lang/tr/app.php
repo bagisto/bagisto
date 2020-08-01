@@ -574,7 +574,7 @@ return [
             'final-summary' => 'Bizi tercih ettiğiniz için teşekkür ederiz. Ürün kargoya teslim edildikten sonra takip numarası iletilecektir.',
             'help' => 'Soru ve görüşleriniz için lütfen bizimle iletişime geçiniz: :support_email',
             'thanks' => 'Teşekkürler!',
-            
+
             'comment' => [
                 'subject' => 'Siparişinize yeni yorum yapıldı.',
                 'dear' => 'Sayın :customer_name',
@@ -636,6 +636,13 @@ return [
             'info' => 'Parola sıfırlama talebinde bulunduğunuz için bu maili hesabınıza kayıtlı mail adresinize gönderdik.',
             'reset-password' => 'Parola Yenile',
             'final-summary' => 'Eğer parola yenileme talebinde bulunmadıysanız bu maili silebilirsiniz.',
+            'thanks' => 'Teşekkürler!'
+        ],
+
+        'update-password' => [
+            'subject' => 'Şifre güncellendi',
+            'dear' => 'Sayın :name',
+            'info' => 'Bu e-postayı, şifrenizi güncellediğiniz için alıyorsunuz.',
             'thanks' => 'Teşekkürler!'
         ],
 
