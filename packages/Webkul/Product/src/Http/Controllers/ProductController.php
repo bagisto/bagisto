@@ -4,8 +4,6 @@ namespace Webkul\Product\Http\Controllers;
 
 use Exception;
 use Illuminate\Support\Facades\Event;
-use Webkul\Attribute\Models\Attribute;
-use Webkul\Product\Models\ProductFlat;
 use Webkul\Product\Helpers\ProductType;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Contracts\Validations\Slug;
@@ -249,77 +247,7 @@ class ProductController extends Controller
      */
     public function copy(int $productId)
     {
-        $originalProduct = $this->productRepository
-            ->findOrFail($productId)
-            ->load('attribute_family')
-            ->load('categories')
-            ->load('customer_group_prices')
-            ->load('inventories')
-            ->load('inventory_sources');
-
-        $copiedProduct = $originalProduct
-            ->replicate()
-            ->fill([
-                // the sku and url_key needs to be unique and should be entered again newly by the admin:
-                'sku' => 'temporary-sku-' . substr(md5(microtime()), 0, 6),
-            ]);
-
-        $copiedProduct->save();
-
-        $attributeName = Attribute::query()->where(['code' => 'name'])->firstOrFail();
-        $attributeSku = Attribute::query()->where(['code' => 'sku'])->firstOrFail();
-        $attributeStatus = Attribute::query()->where(['code' => 'status'])->firstOrFail();
-        $attributeUrlKey = Attribute::query()->where(['code' => 'url_key'])->firstOrFail();
-
-        $newProductFlat = new ProductFlat();
-
-        // only obey copied locale and channel:
-        if (isset($originalProduct->product_flats[0])) {
-            $newProductFlat = $originalProduct->product_flats[0]->replicate();
-        }
-
-        $newProductFlat->product_id = $copiedProduct->id;
-
-        foreach ($originalProduct->attribute_values as $oldValue) {
-            $newValue = $oldValue->replicate();
-
-            if ($oldValue->attribute_id === $attributeName->id) {
-                $newValue->text_value = __('admin::app.copy-of') . ' ' . $originalProduct->name;
-                $newProductFlat->name = __('admin::app.copy-of') . ' ' . $originalProduct->name;
-            }
-
-            if ($oldValue->attribute_id === $attributeUrlKey->id) {
-                $newValue->text_value = __('admin::app.copy-of-slug') . '-' . $originalProduct->url_key;
-                $newProductFlat->url_key = __('admin::app.copy-of-slug') . '-' . $originalProduct->url_key;
-            }
-
-            if ($oldValue->attribute_id === $attributeSku->id) {
-                $newValue->text_value = $copiedProduct->sku;
-                $newProductFlat->sku = $copiedProduct->sku;
-            }
-
-            if ($oldValue->attribute_id === $attributeStatus->id) {
-                $newValue->boolean_value = 0;
-                $newProductFlat->status = 0;
-            }
-
-            $copiedProduct->attribute_values()->save($newValue);
-
-        }
-
-        $newProductFlat->save();
-
-        foreach ($originalProduct->categories as $category) {
-            $copiedProduct->categories()->save($category);
-        }
-
-        foreach ($originalProduct->inventories as $inventory) {
-            $copiedProduct->inventories()->save($inventory);
-        }
-
-        foreach ($originalProduct->customer_group_prices as $customer_group_price) {
-            $copiedProduct->customer_group_prices()->save($customer_group_price);
-        }
+        $copiedProduct = $this->productRepository->copy($productId);
 
         return redirect()->to(route('admin.catalog.products.edit', ['id' => $copiedProduct->id]));
     }
