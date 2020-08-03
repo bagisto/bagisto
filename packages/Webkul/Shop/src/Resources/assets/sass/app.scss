@@ -3308,6 +3308,10 @@ section.review {
     margin-top: 5.5%;
     margin-bottom: 5.5%;
 
+    a.btn.btn-lg.btn-primary {
+             float: right;
+    }
+
     .sidebar {
         display: flex;
         flex-direction: column;
@@ -3563,6 +3567,7 @@ section.review {
                 }
             }
         }
+
 
         .account-items-list , .edit-form {
             margin-top: 20px;
@@ -4330,6 +4335,10 @@ section.review {
     }
 
     .account-head .account-action {
+        float: left;
+    }
+
+    a.btn.btn-lg.btn-primary {
         float: left;
     }
 

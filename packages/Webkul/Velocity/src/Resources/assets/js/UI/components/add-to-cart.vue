@@ -41,8 +41,8 @@
 
                 this.$http.post(url, {
                     'quantity': 1,
-                    '_token': this.csrfToken,
                     'product_id': this.productId,
+                    '_token': this.csrfToken.split("&#039;").join(""),
                 })
                 .then(response => {
                     this.isButtonEnable = true;

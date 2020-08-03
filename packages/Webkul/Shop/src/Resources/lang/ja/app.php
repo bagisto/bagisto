@@ -529,7 +529,16 @@ return [
             'grand-total' => '合計',
             'final-summary' => '発送手続き完了後、お知らせメールを配信いたしますので、今しばらくお待ちください。',
             'help' => 'お問合せなどは下記メールアドレスへご連絡ください。:support_email',
-            'thanks' => 'Gracias!',
+            'thanks' => 'ありがとう！',
+
+            'comment' => [
+                'subject' => '注文に新しいコメントが追加されました #:order_id',
+                'dear' => '親愛な :customer_name',
+                'final-summary' => '当店へのご関心をお寄せいただきありがとうございます',
+                'help' => '何か助けが必要な場合は、私たちに連絡してください :support_email',
+                'thanks' => 'ありがとう！',
+            ],
+
             'cancel' => [
                 'subject' => '注文がキャンセルされました',
                 'heading' => '注文がキャンセルされました',
@@ -548,7 +557,7 @@ return [
                 'grand-total' => '合計',
                 'final-summary' => '私たちのお店にお越しいただき、ありがとうございます。',
                 'help' => 'お問合せなどは下記メールアドレスへご連絡ください。 :support_email',
-                'thanks' => 'Gracias!',
+                'thanks' => 'ありがとう！',
             ]
         ],
         'invoice' => [

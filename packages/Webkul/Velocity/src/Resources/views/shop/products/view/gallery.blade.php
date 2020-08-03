@@ -149,4 +149,26 @@
             });
         })()
     </script>
+
+    <script>
+        $(document).ready(() => {
+
+            /* waiting for the window to appear */
+            let waitForEl = function(selector, callback) {
+                if (jQuery(selector).length) {
+                    callback();
+                } else {
+                    setTimeout(function() {waitForEl(selector, callback);}, 100);
+                }
+            };
+
+            /* positioning when .zoomWindow div available */
+            waitForEl('.zoomWindow', function() {
+                if ($('body').hasClass("rtl")) {
+                    let widthOfImage = $('.zoomContainer').width();
+                    $('.zoomWindow').css('right', `${widthOfImage}px`);
+                }
+            });
+        });
+    </script>
 @endpush

@@ -554,6 +554,15 @@ return [
             'final-summary' => 'Obrigado por mostrar o seu interesse em nossa loja nós lhe enviaremos o número de rastreamento assim que for despachado',
             'help' => 'Se você precisar de algum tipo de ajuda, por favor entre em contato conosco :support_email',
             'thanks' => 'Muito Obrigado!',
+
+            'comment' => [
+                'subject' => 'Novo comentário adicionado ao seu pedido #: order_id',
+                'dear' => 'Prezado :customer_name',
+                'final-summary' => 'Obrigado por mostrar seu interesse em nossa loja',
+                'help' => 'Se você precisar de algum tipo de ajuda, entre em contato conosco :support_email',
+                'thanks' => 'Obrigada!',
+            ],
+
             'cancel' => [
                 'subject' => 'Confirmação de Cancelamento de Pedido',
                 'heading' => 'Pedido Cancelado',
