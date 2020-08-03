@@ -2,8 +2,8 @@
 
 namespace Webkul\Product\Repositories;
 
-use Webkul\Product\Models\Product;
 use Illuminate\Support\Facades\DB;
+use Webkul\Product\Models\Product;
 use Illuminate\Pagination\Paginator;
 use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Facades\Event;
@@ -529,7 +529,7 @@ class ProductRepository extends Repository
      *
      * @return mixed
      */
-    private function loadOriginalProduct(int $sourceProductId)
+    private function loadOriginalProduct(int $sourceProductId): Product
     {
         $originalProduct = $this
             ->findOrFail($sourceProductId)
@@ -546,7 +546,7 @@ class ProductRepository extends Repository
      *
      * @return mixed
      */
-    private function persistCopiedProduct($originalProduct)
+    private function persistCopiedProduct($originalProduct): Product
     {
         $copiedProduct = $originalProduct
             ->replicate()
@@ -631,16 +631,30 @@ class ProductRepository extends Repository
      */
     private function persistRelations($originalProduct, $copiedProduct): void
     {
-        foreach ($originalProduct->categories as $category) {
-            $copiedProduct->categories()->save($category);
+        $attributesToSkip = config('products.skipAttributesOnCopy') ?? [];
+
+        if (! isset($attributesToSkip['categories'])) {
+            foreach ($originalProduct->categories as $category) {
+                $copiedProduct->categories()->save($category);
+            }
         }
 
-        foreach ($originalProduct->inventories as $inventory) {
-            $copiedProduct->inventories()->save($inventory);
+        if (! isset($attributesToSkip['inventories'])) {
+            foreach ($originalProduct->inventories as $inventory) {
+                $copiedProduct->inventories()->save($inventory);
+            }
         }
 
-        foreach ($originalProduct->customer_group_prices as $customer_group_price) {
-            $copiedProduct->customer_group_prices()->save($customer_group_price);
+        if (! isset($attributesToSkip['customer_group_prices'])) {
+            foreach ($originalProduct->customer_group_prices as $customer_group_price) {
+                $copiedProduct->customer_group_prices()->save($customer_group_price);
+            }
+        }
+
+        if (! isset($attributesToSkip['images'])) {
+            foreach ($originalProduct->images as $image) {
+                $copiedProduct->images()->save($image);
+            }
         }
     }
 }
