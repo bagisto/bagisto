@@ -2,6 +2,7 @@
 
 namespace Webkul\Product\Repositories;
 
+use Exception;
 use Illuminate\Support\Facades\DB;
 use Webkul\Product\Models\Product;
 use Illuminate\Pagination\Paginator;
@@ -477,6 +478,10 @@ class ProductRepository extends Repository
     {
         $originalProduct = $this->loadOriginalProduct($sourceProductId);
 
+        if ($originalProduct->type === 'booking') {
+            throw new Exception(trans('admin::app.response.booking-can-not-be-copied'));
+        }
+
         $copiedProduct = $this->persistCopiedProduct($originalProduct);
 
         $this->persistAttributeValues($originalProduct, $copiedProduct);
@@ -654,6 +659,12 @@ class ProductRepository extends Repository
         if (! isset($attributesToSkip['images'])) {
             foreach ($originalProduct->images as $image) {
                 $copiedProduct->images()->save($image);
+            }
+        }
+
+        if (! isset($attributesToSkip['variants'])) {
+            foreach ($originalProduct->variants as $variant) {
+                $this->copy($variant);
             }
         }
     }

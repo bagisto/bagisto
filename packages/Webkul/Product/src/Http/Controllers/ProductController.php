@@ -249,6 +249,8 @@ class ProductController extends Controller
     {
         $copiedProduct = $this->productRepository->copy($productId);
 
+        session()->flash('success', trans('admin::app.response.product-copied'));
+
         return redirect()->to(route('admin.catalog.products.edit', ['id' => $copiedProduct->id]));
     }
 

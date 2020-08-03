@@ -61,7 +61,8 @@ class Product extends Model implements ProductContract
     }
 
     /**
-     * Get the product variants that owns the product.
+     * Get the product flat entries that are associated with product.
+     * May be one for each locale and each channel.
      */
     public function product_flats()
     {
