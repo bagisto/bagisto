@@ -589,7 +589,13 @@ class ProductRepository extends Repository
 
         $newProductFlat->product_id = $copiedProduct->id;
 
+        $attributesToSkip = config('products.skipAttributesOnCopy') ?? [];
+
         foreach ($originalProduct->attribute_values as $oldValue) {
+            if (in_array($oldValue->attribute->code, $attributesToSkip)) {
+                continue;
+            }
+
             $newValue = $oldValue->replicate();
 
             if ($oldValue->attribute_id === $attributeIds['name']) {
