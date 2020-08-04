@@ -592,7 +592,7 @@ return [
                 'subject' => 'Order Cancel Confirmation',
                 'heading' => 'Order Cancelled',
                 'dear' => 'Dear :customer_name',
-                'greeting' => 'You Order with order id #:order_id placed on :created_at has been cancelled',
+                'greeting' => 'Your Order with order id :order_id placed on :created_at has been cancelled',
                 'summary' => 'Summary of Order',
                 'shipping-address' => 'Shipping Address',
                 'billing-address' => 'Billing Address',
