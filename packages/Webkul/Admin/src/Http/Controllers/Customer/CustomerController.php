@@ -201,11 +201,11 @@ class CustomerController extends Controller
 
         try {
 
-            if (!$this->customerRepository->checkIfCustomerHasOrderPendingOrProcessing($customer)) {
+            if (! $this->customerRepository->checkIfCustomerHasOrderPendingOrProcessing($customer)) {
 
                 $this->customerRepository->delete($id);
             } else {
-                
+
                 return response()->json(['message' => false], 400);
             }
 
