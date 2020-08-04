@@ -3,17 +3,35 @@
 namespace Webkul\Admin\Listeners;
 
 use Illuminate\Support\Facades\Mail;
-use Webkul\Admin\Mail\NewOrderNotification;
 use Webkul\Admin\Mail\NewAdminNotification;
-use Webkul\Admin\Mail\NewInvoiceNotification;
-use Webkul\Admin\Mail\NewShipmentNotification;
-use Webkul\Admin\Mail\NewInventorySourceNotification;
-use Webkul\Admin\Mail\CancelOrderNotification;
+use Webkul\Admin\Mail\NewOrderNotification;
 use Webkul\Admin\Mail\NewRefundNotification;
+use Webkul\Admin\Mail\NewInvoiceNotification;
+use Webkul\Admin\Mail\CancelOrderNotification;
+use Webkul\Admin\Mail\NewShipmentNotification;
 use Webkul\Admin\Mail\OrderCommentNotification;
+use Webkul\Sales\Repositories\InvoiceRepository;
+use Webkul\Admin\Mail\NewInventorySourceNotification;
 
 class Order
 {
+    /**
+     * InvoiceRepository object
+     *
+     * @var \Webkul\Sales\Repositories\InvoiceRepository
+     */
+    protected $invoiceRepository;
+
+    /**
+     * Create a new repository instance using reflection api.
+     *
+     * @param  \Webkul\Sales\Repositories\InvoiceRepository
+     */
+    public function __construct(InvoiceRepository $invoiceRepository)
+    {
+        $this->invoiceRepository = $invoiceRepository;
+    }
+
     /**
      * Send new order Mail to the customer and admin
      *
@@ -47,6 +65,8 @@ class Order
      */
     public function sendNewInvoiceMail($invoice)
     {
+        $invoiceLocale = $this->invoiceRepository->getLocaleOfTheInvoice($invoice);
+
         try {
             if ($invoice->email_sent) {
                 return;
@@ -55,6 +75,7 @@ class Order
             $configKey = 'emails.general.notifications.emails.general.notifications.new-invoice';
 
             if (core()->getConfigData($configKey)) {
+                app()->setLocale($invoiceLocale);
                 Mail::queue(new NewInvoiceNotification($invoice));
             }
         } catch (\Exception $e) {
