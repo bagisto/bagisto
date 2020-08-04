@@ -39,13 +39,13 @@ class CustomerRepository extends Repository
     public function checkBulkCustomerIfTheyHaveOrderPendingOrProcessing($customerIds)
     {
         foreach ($customerIds as $customerId) {
-
             $customer = $this->findorFail($customerId);
 
             if ($this->checkIfCustomerHasOrderPendingOrProcessing($customer)) {
                 return true;
             }
         }
+
         return false;
     }
 }
