@@ -29,9 +29,17 @@ class ConfigurationForm extends FormRequest
         if (request()->has('general.design.admin_logo.logo_image')
             && ! request()->input('general.design.admin_logo.logo_image.delete')
         ) {
-            $this->rules = [
-                'general.design.admin_logo.logo_image'  => 'required|mimes:jpeg,bmp,png,jpg',
-            ];
+            $this->rules = array_merge($this->rules, [
+                'general.design.admin_logo.logo_image'  => 'required|mimes:jpeg,bmp,png,jpg|max:5000',
+            ]);
+        }
+
+        if (request()->has('general.design.admin_logo.favicon')
+            && ! request()->input('general.design.admin_logo.favicon.delete')
+        ) {
+            $this->rules = array_merge($this->rules, [
+                'general.design.admin_logo.favicon'  => 'required|mimes:jpeg,bmp,png,jpg|max:5000',
+            ]);
         }
 
         return $this->rules;
@@ -56,6 +64,7 @@ class ConfigurationForm extends FormRequest
     {
         return [
             'general.design.admin_logo.logo_image' => 'Logo Image',
+            'general.design.admin_logo.favicon' => 'Favicon Image'
         ];
     }
 }
