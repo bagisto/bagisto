@@ -97,6 +97,7 @@ return [
             'footer-left-content' => 'Zawartość lewejstrony stopki',
             'subscription-content' => 'Treść paska subskrypcji',
             'sidebar-categories' => 'kategorie paska bocznego',
+            'header_content_count' => 'Header Content Count',
             'footer-left-raw-content' => '<p>Uwielbiamy tworzyć oprogramowanie i rozwiązywać rzeczywiste problemy z plikami binarnymi. Jesteśmy bardzo zaangażowani w realizację naszych celów. Inwestujemy olbrzymie zasoby w tworzenie światowej klasy łatwego w użyciu oprogramowania oraz aplikacji dla firm oraz użytkowników prywatnych , w oparciu o najnowszą wiedzę technologiczną</p>',
             'slider-path' => 'Ścieżka Slidera (suwaka)',
             'category-logo' => 'Logo kategorii',

@@ -79,6 +79,17 @@
                     </div>
 
                     <div class="control-group">
+                        <label>{{ __('velocity::app.admin.meta-data.header_content_count') }}</label>
+
+                        <input
+                            type="text"
+                            class="control"
+                            id="header_content_count"
+                            name="header_content_count"
+                            value="{{ $metaData ? $metaData->header_content_count : '5' }}" />
+                    </div>
+
+                    <div class="control-group">
                         <label>{{ __('shop::app.home.featured-products') }}</label>
 
                         <input
