@@ -150,7 +150,7 @@ class CustomerController extends Controller
                 $orders = $customerRepository->all_orders->whereIn('status', ['pending', 'processing'])->first();
 
                 if ($orders) {
-                    session()->flash('error', trans('admin::app.response.order-pending'));
+                    session()->flash('error', trans('admin::app.response.order-pending', ['name' => 'Customer']));
 
                     return redirect()->route($this->_config['redirect']);
                 } else {
