@@ -82,6 +82,7 @@ class CustomerController extends Controller
      */
     public function update()
     {
+        $isPasswordChanged = false;
         $id = auth()->guard('customer')->user()->id;
 
         $this->validate(request(), [
@@ -104,6 +105,7 @@ class CustomerController extends Controller
         if (isset ($data['oldpassword'])) {
             if ($data['oldpassword'] != "" || $data['oldpassword'] != null) {
                 if (Hash::check($data['oldpassword'], auth()->guard('customer')->user()->password)) {
+                    $isPasswordChanged = true;
                     $data['password'] = bcrypt($data['password']);
                 } else {
                     session()->flash('warning', trans('shop::app.customer.account.profile.unmatch'));
@@ -118,6 +120,10 @@ class CustomerController extends Controller
         Event::dispatch('customer.update.before');
 
         if ($customer = $this->customerRepository->update($data, $id)) {
+
+            if ($isPasswordChanged) {
+                Event::dispatch('user.admin.update-password', $customer);
+            }
 
             Event::dispatch('customer.update.after', $customer);
 

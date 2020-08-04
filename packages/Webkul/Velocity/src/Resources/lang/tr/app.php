@@ -97,6 +97,7 @@ return [
             'footer-left-content' => 'Alt Sol İçeriği',
             'subscription-content' => 'Abonelik Çubuğu İçeriği',
             'sidebar-categories' => 'Yan Kategoriler',
+            'header_content_count' => 'Header Content Count',
             'footer-left-raw-content' => '<p>Yazılımlar üretmeyi ve dünyada karşılaştığımız sorunları bu şekilde çözmeyi çok seviyoruz. Hedeflerimize büyük önem veriyor, en iyi olduğumuz teknoloji uzmanlığı ile kurumsal işleriniz için birin sınıf kullanıcı dostu yazılım ve uygulamalar oluşturmak için kaynaklarımıza yatırım yapıyoruz.</p>',
             'slider-path' => 'Slider Yolu',
             'category-logo' => 'Kategori Logosu',

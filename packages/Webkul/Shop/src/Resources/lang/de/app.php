@@ -573,6 +573,15 @@ return [
             'final-summary' => 'Vielen Dank für Ihr Interesse an unserem Shop. Nach dem Versand senden wir Ihnen die Sendungsverfolgungsnummer',
             'help' => 'Wenn Sie Hilfe benötigen, kontaktieren Sie uns bitte unter :support_email',
             'thanks' => 'Vielen Dank!',
+
+            'comment' => [
+                'subject' => 'Neuer Kommentar zu Ihrer Bestellung hinzugefügt #:order_id',
+                'dear' => 'sehr geehrter :customer_name',
+                'final-summary' => 'Vielen Dank für Ihr Interesse an unserem Shop',
+                'help' => 'Wenn Sie Hilfe benötigen, kontaktieren Sie uns bitte unter :support_email',
+                'thanks' => 'Vielen Dank!',
+            ],
+
             'cancel' => [
                 'subject' => 'Bestätigung der Bestellungsstornierung',
                 'heading' => 'Bestellung storniert',
@@ -626,6 +635,13 @@ return [
             'info' => 'Sie erhalten diese E-Mail, weil wir eine Anfrage zum Zurücksetzen des Passworts für Ihr Konto erhalten haben',
             'reset-password' => 'Passwort zurücksetzen',
             'final-summary' => 'Wenn Sie kein Zurücksetzen des Kennworts angefordert haben, sind keine weiteren Maßnahmen erforderlich',
+            'thanks' => 'Vielen Dank!'
+        ],
+
+        'update-password' => [
+            'subject' => 'Passwort aktualisiert',
+            'dear' => 'Sehr geehrte/r :name',
+            'info' => 'Sie erhalten diese E-Mail, weil Sie Ihr Passwort aktualisiert haben.',
             'thanks' => 'Vielen Dank!'
         ],
 

@@ -581,7 +581,7 @@ return [
             'thanks' => 'Thanks!',
 
             'comment' => [
-                'subject' => 'New comment added to your order',
+                'subject' => 'New comment added to your order #:order_id',
                 'dear' => 'Dear :customer_name',
                 'final-summary' => 'Thanks for showing your interest in our store',
                 'help' => 'If you need any kind of help please contact us at :support_email',
@@ -641,6 +641,13 @@ return [
             'info' => 'You are receiving this email because we received a password reset request for your account',
             'reset-password' => 'Reset Password',
             'final-summary' => 'If you did not request a password reset, no further action is required',
+            'thanks' => 'Thanks!'
+        ],
+
+        'update-password' => [
+            'subject' => 'Password Updated',
+            'dear' => 'Dear :name',
+            'info' => 'You are receiving this email because you have updated your password.',
             'thanks' => 'Thanks!'
         ],
 
