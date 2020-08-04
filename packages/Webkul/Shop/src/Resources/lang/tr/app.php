@@ -639,6 +639,13 @@ return [
             'thanks' => 'Teşekkürler!'
         ],
 
+        'update-password' => [
+            'subject' => 'Şifre güncellendi',
+            'dear' => 'Sayın :name',
+            'info' => 'Bu e-postayı, şifrenizi güncellediğiniz için alıyorsunuz.',
+            'thanks' => 'Teşekkürler!'
+        ],
+
         'customer' => [
             'new' => [
                 'dear' => 'Sayın :customer_name',

@@ -591,6 +591,12 @@ return [
             'final-summary' => 'Si no has solicitado cambiar de contraseña, ninguna acción es requerida por tu parte.',
             'thanks' => '¡Gracias!'
         ],
+        'update-password' => [
+            'subject' => 'Contraseña actualiza',
+            'dear' => 'Estimado/a :name',
+            'info' => 'Está recibiendo este correo electrónico porque ha actualizado su contraseña.',
+            'thanks' => '¡Gracias!'
+        ],
         'customer' => [
             'new' => [
                 'dear' => 'Estimado/a :customer_name',

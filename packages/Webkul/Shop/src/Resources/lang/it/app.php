@@ -643,6 +643,13 @@ return [
             'thanks' => 'Grazie!'
         ],
 
+        'update-password' => [
+            'subject' => 'Password aggiornata',
+            'dear' => 'Cara :name',
+            'info' => 'Ricevi questa email perché hai aggiornato la password.',
+            'thanks' => 'Grazie!'
+        ],
+
         'customer' => [
             'new' => [
                 'dear' => 'Gentile :customer_name',
