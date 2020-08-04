@@ -79,6 +79,21 @@
         margin-top: 10px;
         margin-left: -158px;
     }
+
+      .lg-card-container.list-card .product-image {
+        max-height: 85px;
+    }
+
+      .quick-view-btn-container {
+        left: -26px;
+        width: 109px;
+    }  
+
+      .quick-view-btn-container span {
+        left: 24%;
+        top: -24px;
+        font-size: 13px;
+    }  
 }
 
 @media only screen and (max-width: 992px) {
@@ -394,6 +409,13 @@
                                 margin-top: 30px;
                                 margin-bottom: 10px;
                             }
+                        }
+                    }
+
+                    .dropdown-filters {
+                        &.per-page {
+                            margin-top: 0;
+                            position: relative;
                         }
                     }
                 }
@@ -983,5 +1005,13 @@
                 }
             }
         }
+    }
+
+    #sort-by.sorter select {
+        top: 2px;
+        left: 25px;
+        padding: 0 10px;
+        position: absolute;
+        display: inline-block;
     }
 }
