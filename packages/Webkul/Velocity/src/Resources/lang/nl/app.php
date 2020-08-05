@@ -97,6 +97,7 @@ return [
             'footer-left-content' => 'Inhoud voettekst links',
             'subscription-content' => 'Abonnementsbalk Inhoud',
             'sidebar-categories' => 'Sidebar categorieën',
+            'header_content_count' => 'Header Content Count',
             'footer-left-raw-content' => '<p>We houden ervan om software te maken en de echte wereldproblemen met de binaire bestanden op te lossen. We zijn zeer toegewijd aan onze doelen. We investeren onze middelen om gebruiksvriendelijke software en applicaties van wereldklasse te creëren met de allerbeste, geavanceerde technologie-expertise.</p>',
             'slider-path' => 'Schuifpad',
             'category-logo' => 'Category logo',
@@ -265,12 +266,14 @@ return [
             'update' => 'Bijwerken',
             'reviews' => 'Reviews',
             'addresses' => 'Adressen',
+            'download' => 'Downloaden',
             'currencies' => 'Currencies',
             'top-brands' => 'Top merken',
             'new-password' => 'Nieuw wachtwoord',
             'downloadables' => 'Downloadable Products',
-            'confirm-new-password' => 'Bevestig uw nieuw wachtwoord',
             'enter-current-password' => 'Huidig wachtwoord',
+            'no-file-available' => 'Geen bestand beschikbaar!',
+            'confirm-new-password' => 'Bevestig uw nieuw wachtwoord',
 
             'alert' => [
                 'info' => 'Info',

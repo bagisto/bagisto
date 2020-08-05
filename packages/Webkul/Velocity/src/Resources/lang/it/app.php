@@ -98,6 +98,7 @@ return [
             'footer-left-content' => 'Contenuti Footer Sinistra',
             'subscription-content' => 'Conenuti Subscription bar',
             'sidebar-categories' => 'Categorie Sidebar',
+            'header_content_count' => 'Header Content Count',
             'footer-left-raw-content' => '<p>Ci piace personalizzare software e risolvere problemi del mondo reale. Siamo fortemente  to our goals. We invest our resources to create world class easy to use softwares and applications for the enterprise business with the top notch, on the edge technology expertise.</p>',
             'slider-path' => 'Percorso Slider',
             'category-logo' => 'Logo Categoria',
@@ -273,6 +274,8 @@ return [
             'downloadables' => 'Prodotti Scaricabili',
             'confirm-new-password' => 'Conferma nuova password',
             'enter-current-password' => 'Inserisci la password attuale',
+            'download' => 'Scarica',
+            'no-file-available' => 'Nessun file disponibile!',
 
             'alert' => [
                 'info' => 'Info',

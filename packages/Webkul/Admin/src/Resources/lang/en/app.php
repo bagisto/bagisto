@@ -320,6 +320,14 @@ return [
             'invoice-btn-title' => 'Invoice',
             'info' => 'Information',
             'invoices' => 'Invoices',
+            'invoices-change-title' => 'Change invoice state',
+            'invoices-change-state-desc' => 'Please select the new invoice state:',
+            'invoice-status-paid'    => 'Paid',
+            'invoice-status-pending' => 'Pending',
+            'invoice-status-overdue' => 'Overdue',
+            'invoice-status-update' => 'Save changes',
+            'invoice-status-confirmed' => 'The invoice state has been changed.',
+            'invoice-status-error' => 'Could not update the invoice state. ',
             'shipments' => 'Shipments',
             'order-and-account' => 'Order and Account',
             'order-info' => 'Order Information',
@@ -1222,7 +1230,7 @@ return [
         'cancel-success' => ':name canceled successfully.',
         'cancel-error' => ':name can not be canceled.',
         'already-taken' => 'The :name has already been taken.',
-        'order-pending' => 'Cannot delete account because some Order(s) are pending or processing state.'
+        'order-pending' => 'Cannot delete :name account because some Order(s) are pending or processing state.'
     ],
 
     'footer' => [

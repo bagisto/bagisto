@@ -582,7 +582,16 @@ return [
             'grand-total' => 'Eindtotaal',
             'final-summary' => 'Bedankt voor het tonen van uw interesse in onze winkel.We sturen u een trackingnummer zodra het is verzonden',
             'help' => 'Als u hulp nodig heeft, neem dan contact met ons op via :support_email',
-            'thanks' => 'Thanks!',
+            'thanks' => 'Bedankt!',
+
+            'comment' => [
+                'subject' => 'Nieuwe opmerking toegevoegd aan uw bestelling #:order_id',
+                'dear' => 'Lieve :customer_name',
+                'final-summary' => 'Bedankt voor het tonen van uw interesse in onze winkel',
+                'help' => 'Als u hulp nodig heeft, neem dan contact met ons op via :support_email',
+                'thanks' => 'Bedankt!',
+            ],
+
             'cancel' => [
                 'subject' => 'Order Annuleren Bevestiging',
                 'heading' => 'Bestelling geannuleerd',
@@ -636,6 +645,13 @@ return [
             'info' => 'U ontvangt deze e-mail omdat we een verzoek voor het opnieuw instellen van uw wachtwoord voor uw account hebben ontvangen',
             'reset-password' => 'Wachtwoord opnieuw instellen',
             'final-summary' => 'Als u geen wachtwoordherstel hebt aangevraagd, is er geen verdere actie vereist',
+            'thanks' => 'Bedankt!'
+        ],
+
+        'update-password' => [
+            'subject' => 'Wachtwoord bijgewerkt',
+            'dear' => 'Lieve :name',
+            'info' => 'Je ontvangt deze e-mail omdat je je wachtwoord hebt bijgewerkt.',
             'thanks' => 'Bedankt!'
         ],
 
