@@ -147,6 +147,15 @@ class ProductRepository extends Repository
             if (isset($params['search']))
                 $qb->where('product_flat.name', 'like', '%' . urldecode($params['search']) . '%');
 
+            if (isset($params['name']))
+                   $qb->where('product_flat.name', 'like', '%' . urldecode($params['name']) . '%');
+
+            if (isset($params['sku']))
+                   $qb->where('product_flat.sku', 'like', '%' . urldecode($params['sku']) . '%');
+
+            if (isset($params['url_key']))
+                   $qb->where('product_flat.url_key', 'like', '%' . urldecode($params['url_key']) . '%');
+
             # sort direction
             $orderDirection = 'asc';
             if( isset($params['order']) && in_array($params['order'], ['desc', 'asc']) ){
@@ -175,7 +184,7 @@ class ProductRepository extends Repository
 
             $attributeFilters = $this->attributeRepository
                 ->getProductDefaultAttributes(array_keys(
-                    request()->except(['price'])
+                    request()->except(['price','name','url_key'])
                 ));
 
             if ( count($attributeFilters) > 0 ) {
@@ -460,7 +469,7 @@ class ProductRepository extends Repository
      * @return array
      */
     private function getDefaultSortByOption()
-    {   
+    {
         $value = core()->getConfigData('catalog.products.storefront.sort_by');
 
         $config = $value ? $value : 'name-desc';
