@@ -201,7 +201,7 @@
 
                         this.setStorageValue('compared_product', updatedItems);
 
-                        window.flashMessages = [{'type': 'alert-success', 'message': response.data.message }];
+                        window.flashMessages = [{'type': 'alert-success', 'message': '{{ __('velocity::app.customer.compare.removed') }}' }];
 
                         this.$root.addFlashMessages();
                     }
