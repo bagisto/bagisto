@@ -271,6 +271,8 @@ return [
             'downloadables'          => 'Produkty do pobrania',
             'confirm-new-password'   => 'Potwierdź nowe hasło',
             'enter-current-password' => 'Wpisz swoje aktualne hasło',
+            'download'               => 'Pobieranie',
+            'no-file-available'      => 'Brak dostępnego pliku!',
 
             'alert' => [
                 'info'      => 'Info',
