@@ -1,5 +1,5 @@
 <tbody>
-    @if (count($records))
+    @if ($records instanceof \Illuminate\Pagination\LengthAwarePaginator && count($records))
         @foreach ($records as $key => $record)
             <tr>
                 @if ($enableMassActions)
