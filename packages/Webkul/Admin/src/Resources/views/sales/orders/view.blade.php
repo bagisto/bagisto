@@ -470,7 +470,15 @@
                                         <td>{{ $invoice->created_at }}</td>
                                         <td>#{{ $invoice->order->increment_id }}</td>
                                         <td>{{ $invoice->address->name }}</td>
-                                        <td>{{ $invoice->status_label }}</td>
+                                        <td>
+                                            @if($invoice->state == "paid")
+                                                {{ __('admin::app.sales.orders.invoice-status-paid') }}
+                                            @elseif($invoice->state == "overdue")
+                                                {{ __('admin::app.sales.orders.invoice-status-overdue') }}
+                                            @else
+                                                {{ __('admin::app.sales.orders.invoice-status-pending') }}
+                                            @endif
+                                        </td>
                                         <td>{{ core()->formatBasePrice($invoice->base_grand_total) }}</td>
                                         <td class="action">
                                             <a href="{{ route('admin.sales.invoices.view', $invoice->id) }}">
