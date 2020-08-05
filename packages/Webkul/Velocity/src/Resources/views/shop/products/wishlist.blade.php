@@ -39,7 +39,7 @@
             added-text="{{ __('shop::app.customer.account.wishlist.add') }}"
             remove-text="{{ __('shop::app.customer.account.wishlist.remove') }}"
             add-tooltip="{{ __('velocity::app.shop.wishlist.add-wishlist-text') }}"
-            remove-tooltip="Remove from wish list">
+            remove-tooltip="{{ __('velocity::app.shop.wishlist.remove-wishlist-text') }}">
         </wishlist-component>
     @endauth
 {!! view_render_event('bagisto.shop.products.wishlist.after') !!}
