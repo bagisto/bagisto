@@ -195,6 +195,7 @@ return [
         'compare' => [
             'text' => 'Compare',
             'compare_similar_items' => 'Compare Similar Items',
+            'add-tooltip' => 'Voeg product toe aan vergelijkingslijst',
             'added' => 'Item successfully added to compare list',
             'already_added' => 'Item already added to compare list',
             'removed' => 'Item successfully removed from compare list',

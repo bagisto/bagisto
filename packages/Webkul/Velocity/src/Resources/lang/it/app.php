@@ -199,6 +199,7 @@ return [
         'compare' => [
             'text'                  => 'Compara',
             'compare_similar_items' => 'Compara articoli simili',
+            'add-tooltip'           => 'Aggiungi prodotto per confrontare l\'elenco',
             'added'                 => 'Articolo aggiunto alla lista di comparazione',
             'already_added'         => 'Articolo già aggiunto alla lista di comparazione',
             'removed'               => 'Articolo rimosso dalla lista di comparazione',
