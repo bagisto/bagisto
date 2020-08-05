@@ -92,6 +92,18 @@ return [
     ],
 
     'customer' => [
+        'compare' => [
+            'text' => 'Comparar',
+            'compare_similar_items' => 'Comparar itens semelhantes',
+            'add-tooltip' => 'Adicionar produto à lista de comparação',
+            'already_added' => 'Item já adicionado à lista de comparação',
+            'added' => 'Item adicionado com sucesso à lista de comparação',
+            'removed' => 'Item removido com sucesso da lista de comparação',
+            'empty-text' => "Você não possui nenhum item na sua lista de comparação",
+            'product_image' => 'Imagem do Produto',
+            'actions' => 'Ações',
+        ],
+
         'signup-text' => [
             'account_exists' => 'Já tem uma conta',
             'title' => 'Entrar'
@@ -321,6 +333,8 @@ return [
                 'error' => 'Não é possível adicionar o produto a lista de Desejos devido a problemas desconhecidos, por favor tente mais tarde',
                 'add' => 'Item adicionado com sucesso a Lista de Desejos',
                 'remove' => 'Item removido com sucesso da Lista de Desejos',
+                'add-wishlist-text' => 'Adicionar produto à lista de desejos',
+                'remove-wishlist-text' => 'Remover produto da lista de desejos',
                 'moved' => 'Item movido com sucesso para Lista de Desejos',
                 'option-missing' => 'As opções do produto estão ausentes, portanto, o item não pode ser movido para a lista de desejos.',
                 'move-error' => 'Item não pode ser movido para Lista de Desejos, por favor, tente novamente mais tarde',

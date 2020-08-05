@@ -89,6 +89,18 @@ return [
     ],
 
     'customer' => [
+        'compare'           => [
+            'text'                  => 'Karşılaştır',
+            'compare_similar_items' => 'Benzer Ürünleri Karşılaştır',
+            'add-tooltip'           => 'Karşılaştırma listesine ürün ekle',
+            'added'                 => 'Ürün karşılaştırma listesine başarıyla eklendi.',
+            'already_added'         => 'Ürün zaten karşılaştırma listesinde yer alıyor.',
+            'removed'               => 'Ürün karşılaştırma listesinden başarıyla kaldırıldı.',
+            'empty-text'            => "Karşılaştırma listenizde henüz ürün bulunmuyor.",
+            'product_image'         => 'Ürün Görseli',
+            'actions'               => 'Eylemler',
+        ],
+
         'signup-text' => [
             'account_exists' => 'Hesabınız var mı?',
             'title' => 'Giriş Yapın'
@@ -326,6 +338,8 @@ return [
                 'error' => 'Ürün dilek listesine eklenemiyor, lütfen daha sonra tekrar deneyin.',
                 'add' => 'Ürün dilek listesine başarıyla eklendi.',
                 'remove' => 'Ürün dilek listesinden başarıyla kaldırıldı.',
+                'add-wishlist-text'     => 'Ürünü dilek listenize ekleyin',
+                'remove-wishlist-text'  => 'Ürünü dilek listenizden kaldırın',
                 'moved' => 'Ürün alışveriş sepetine başarıyla taşındı.',
                 'option-missing' => 'Ürün seçenekleri bulunamadı; bu yüzden dilek listesine taşınamadı.',
                 'move-error' => 'Ürün dilek listesine taşınamadı, lütfen tekrar deneyin.',
