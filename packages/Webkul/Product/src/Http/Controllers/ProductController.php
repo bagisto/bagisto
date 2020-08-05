@@ -242,12 +242,19 @@ class ProductController extends Controller
     }
 
     /**
-     * Copy a given Product. Do not copy the images.
-     * Always make the copy is inactive so the admin is able to configure it before setting it live.
+     * Copy a given Product.
      */
     public function copy(int $productId)
     {
-        $copiedProduct = $this->productRepository->copy($productId);
+        $originalProduct = $this->productRepository->findOrFail($productId);
+
+        if ($originalProduct->type === 'booking') {
+            session()->flash('error', trans('admin::app.response.booking-can-not-be-copied'));
+
+            return redirect()->to(route('admin.catalog.products.index'));
+        }
+
+        $copiedProduct = $this->productRepository->copy($originalProduct);
 
         session()->flash('success', trans('admin::app.response.product-copied'));
 

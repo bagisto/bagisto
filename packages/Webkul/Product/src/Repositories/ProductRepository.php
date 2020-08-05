@@ -472,11 +472,13 @@ class ProductRepository extends Repository
     /**
      * Copy a product. Is usually called by the copy() function of the ProductController.
      *
+     * Always make the copy is inactive so the admin is able to configure it before setting it live.
+     *
      * @param int $sourceProductId the id of the product that should be copied
      */
-    public function copy(int $sourceProductId): Product
+    public function copy(Product $originalProduct): Product
     {
-        $originalProduct = $this->loadOriginalProduct($sourceProductId);
+        $this->fillOriginalProduct($originalProduct);
 
         if ($originalProduct->type === 'booking') {
             throw new Exception(trans('admin::app.response.booking-can-not-be-copied'));
@@ -529,21 +531,14 @@ class ProductRepository extends Repository
         return $query;
     }
 
-    /**
-     * @param int $sourceProductId
-     *
-     * @return mixed
-     */
-    private function loadOriginalProduct(int $sourceProductId): Product
+    private function fillOriginalProduct(Product &$sourceProduct): void
     {
-        $originalProduct = $this
-            ->findOrFail($sourceProductId)
+        $sourceProduct
             ->load('attribute_family')
             ->load('categories')
             ->load('customer_group_prices')
             ->load('inventories')
             ->load('inventory_sources');
-        return $originalProduct;
     }
 
     /**
