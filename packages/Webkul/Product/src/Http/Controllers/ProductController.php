@@ -3,9 +3,10 @@
 namespace Webkul\Product\Http\Controllers;
 
 use Exception;
+use Webkul\Product\Models\Product;
 use Illuminate\Support\Facades\Event;
-use Webkul\Product\Helpers\ProductType;
 use Illuminate\Support\Facades\Storage;
+use Webkul\Product\Helpers\ProductType;
 use Webkul\Core\Contracts\Validations\Slug;
 use Webkul\Product\Http\Requests\ProductForm;
 use Webkul\Product\Repositories\ProductRepository;
