@@ -194,14 +194,14 @@
                         if (productId == "all") {
                             updatedItems = [];
                             this.$set(this, 'products', []);
+                            window.flashMessages = [{'type': 'alert-success', 'message': '{{ __('velocity::app.customer.compare.removed-all') }}' }];
                         } else {
                             updatedItems = existingItems.filter(item => item != productId);
                             this.$set(this, 'products', this.products.filter(product => product.id != productId));
+                            window.flashMessages = [{'type': 'alert-success', 'message': '{{ __('velocity::app.customer.compare.removed') }}' }];
                         }
 
                         this.setStorageValue('compared_product', updatedItems);
-
-                        window.flashMessages = [{'type': 'alert-success', 'message': '{{ __('velocity::app.customer.compare.removed') }}' }];
 
                         this.$root.addFlashMessages();
                     }
