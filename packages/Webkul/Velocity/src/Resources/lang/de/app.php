@@ -272,6 +272,8 @@ return [
             'downloadables'          => 'Herunterladbare Produkte',
             'confirm-new-password'   => 'Bestätigen Sie Ihr neues Passwort',
             'enter-current-password' => 'Geben Sie Ihr aktuelles Passwort ein',
+            'download'               => 'Downloaden',
+            'no-file-available'      => 'Geen bestand beschikbaar!',
 
             'alert' => [
                 'info'      => 'Information',

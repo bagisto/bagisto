@@ -266,12 +266,14 @@ return [
             'update' => 'Bijwerken',
             'reviews' => 'Reviews',
             'addresses' => 'Adressen',
+            'download' => 'Downloaden',
             'currencies' => 'Currencies',
             'top-brands' => 'Top merken',
             'new-password' => 'Nieuw wachtwoord',
             'downloadables' => 'Downloadable Products',
-            'confirm-new-password' => 'Bevestig uw nieuw wachtwoord',
             'enter-current-password' => 'Huidig wachtwoord',
+            'no-file-available' => 'Geen bestand beschikbaar!',
+            'confirm-new-password' => 'Bevestig uw nieuw wachtwoord',
 
             'alert' => [
                 'info' => 'Info',
