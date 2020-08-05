@@ -16,7 +16,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Webkul\\Paypal\\Providers\\PaymentServiceProvider"
+                "Webkul\\Paypal\\Providers\\PaypalServiceProvider"
             ],
             "aliases": {}
         }
