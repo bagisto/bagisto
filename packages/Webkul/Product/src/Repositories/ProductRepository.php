@@ -657,9 +657,23 @@ class ProductRepository extends Repository
             }
         }
 
+        if (! isset($attributesToSkip['super_attributes'])) {
+            foreach ($originalProduct->super_attributes as $super_attribute) {
+                $copiedProduct->super_attributes()->save($super_attribute);
+            }
+        }
+
+        if (! isset($attributesToSkip['bundle_options'])) {
+            foreach ($originalProduct->bundle_options as $bundle_option) {
+                $copiedProduct->bundle_options()->save($bundle_option);
+            }
+        }
+
         if (! isset($attributesToSkip['variants'])) {
             foreach ($originalProduct->variants as $variant) {
-                $this->copy($variant);
+                $variant = $this->copy($variant);
+                $variant->parent_id = $copiedProduct->id;
+                $variant->save();
             }
         }
     }

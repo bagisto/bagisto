@@ -2,6 +2,8 @@
 
 namespace Webkul\Product\Models;
 
+use Exception;
+use Webkul\Product\Type\AbstractType;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Category\Models\CategoryProxy;
 use Webkul\Attribute\Models\AttributeProxy;
@@ -239,6 +241,12 @@ class Product extends Model implements ProductContract
         }
 
         $this->typeInstance = app(config('product_types.' . $this->type . '.class'));
+
+        if (! $this->typeInstance instanceof AbstractType) {
+            throw new Exception(
+                "Please ensure the product type '{$this->type}' is configured in your application."
+            );
+        }
 
         $this->typeInstance->setProduct($this);
 
