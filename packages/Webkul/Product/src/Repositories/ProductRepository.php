@@ -484,11 +484,23 @@ class ProductRepository extends Repository
             throw new Exception(trans('admin::app.response.booking-can-not-be-copied'));
         }
 
-        $copiedProduct = $this->persistCopiedProduct($originalProduct);
+        DB::beginTransaction();
 
-        $this->persistAttributeValues($originalProduct, $copiedProduct);
+        try {
+            $copiedProduct = $this->persistCopiedProduct($originalProduct);
 
-        $this->persistRelations($originalProduct, $copiedProduct);
+            $this->persistAttributeValues($originalProduct, $copiedProduct);
+
+            $this->persistRelations($originalProduct, $copiedProduct);
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            report($e);
+
+            throw $e;
+        }
+
+        DB::commit();
 
         return $copiedProduct;
     }

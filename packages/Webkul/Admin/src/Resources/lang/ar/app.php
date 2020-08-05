@@ -1206,6 +1206,7 @@ return [
     'response' => [
         'being-used'                => ':source في :name يتم استخدام هذا المورد',
         'product-copied'            => 'تم نسخ المنتج',
+        'error-while-copying'       => 'خطأ في نسخ المنتج',
         'booking-can-not-be-copied' => 'لا يمكن نسخ منتجات الحجز',
         'cannot-delete-default'     => 'لا يمكن حذف القناة الافتراضية',
         'create-success'            => 'إنشاء الاسم بنجاح:name',

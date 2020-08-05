@@ -256,7 +256,11 @@ class ProductController extends Controller
 
         $copiedProduct = $this->productRepository->copy($originalProduct);
 
-        session()->flash('success', trans('admin::app.response.product-copied'));
+        if ($copiedProduct instanceof Product && $copiedProduct->id) {
+            session()->flash('success', trans('admin::app.response.product-copied'));
+        } else {
+            session()->flash('error', trans('admin::app.response.error-while-copying'));
+        }
 
         return redirect()->to(route('admin.catalog.products.edit', ['id' => $copiedProduct->id]));
     }

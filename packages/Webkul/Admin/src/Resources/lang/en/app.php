@@ -1212,6 +1212,7 @@ return [
     'response' => [
         'being-used'                => 'This resource :name is getting used in :source',
         'product-copied'            => 'The Product has been copied',
+        'error-while-copying'       => 'Something went wrong while trying to copy the product',
         'booking-can-not-be-copied' => 'Booking Products can not be copied .',
         'cannot-delete-default'     => 'Cannot delete the default channel',
         'create-success'            => ':name created successfully.',
