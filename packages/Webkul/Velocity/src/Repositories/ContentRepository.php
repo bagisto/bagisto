@@ -129,6 +129,11 @@ class ContentRepository extends Repository
     {
         $query = $this->model::orderBy('position', 'ASC');
 
+        $velocityMetaData = app('Webkul\Velocity\Helpers\Helper')->getVelocityMetaData();
+        $headerContentCount = $velocityMetaData->header_content_count;
+
+        $headerContentCount = $headerContentCount != '' ? $headerContentCount : 5;
+
         $contentCollection = $query
             ->select(
                 'velocity_contents.content_type',
@@ -140,7 +145,7 @@ class ContentRepository extends Repository
             ->leftJoin('velocity_contents_translations', 'velocity_contents.id', 'velocity_contents_translations.content_id')
             ->distinct('velocity_contents_translations.id')
             ->where('velocity_contents_translations.locale', app()->getLocale())
-            ->limit(5)
+            ->limit($headerContentCount)
             ->get();
 
         $formattedContent = [];

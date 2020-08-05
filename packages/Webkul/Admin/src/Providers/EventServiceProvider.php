@@ -14,6 +14,8 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Event::listen('user.admin.update-password', 'Webkul\Admin\Listeners\PasswordChange@sendUpdatePasswordMail');
+
         Event::listen('checkout.order.save.after', 'Webkul\Admin\Listeners\Order@sendNewOrderMail');
 
         Event::listen('sales.invoice.save.after', 'Webkul\Admin\Listeners\Order@sendNewInvoiceMail');

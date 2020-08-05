@@ -96,6 +96,7 @@ return [
             'home-page-content' => 'Inhalt der Startseite',
             'footer-left-content' => 'Fußzeile Linker Inhalt',
             'subscription-content' => 'Abonnementleiste Inhalt',
+            'header_content_count' => 'Header Content Count',
             'sidebar-categories' => 'Seitenleisten-Kategorien',
             'footer-left-raw-content' => '<p>Wir lieben es, Software zu erstellen und die Probleme der realen Welt mit den Binärdateien zu lösen. Wir fühlen uns unseren Zielen sehr verpflichtet. Wir investieren unsere Ressourcen, um benutzerfreundliche Software und Anwendungen von Weltklasse für das Unternehmensgeschäft mit erstklassiger Technologie zu entwickeln.</p>',
             'slider-path' => 'Slider Pfad',

@@ -3,6 +3,7 @@
 namespace Webkul\User\Http\Controllers;
 
 use Hash;
+use Illuminate\Support\Facades\Event;
 
 class AccountController extends Controller
 {
@@ -26,7 +27,7 @@ class AccountController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\View\View 
+     * @return \Illuminate\View\View
      */
     public function edit()
     {
@@ -42,6 +43,7 @@ class AccountController extends Controller
      */
     public function update()
     {
+        $isPasswordChanged = false;
         $user = auth()->guard('admin')->user();
 
         $this->validate(request(), [
@@ -62,10 +64,15 @@ class AccountController extends Controller
         if (! $data['password']) {
             unset($data['password']);
         } else {
+            $isPasswordChanged = true;
             $data['password'] = bcrypt($data['password']);
         }
 
         $user->update($data);
+
+        if ($isPasswordChanged) {
+            Event::dispatch('user.admin.update-password', $user);
+        }
 
         session()->flash('success', trans('admin::app.users.users.account-save'));
 
