@@ -6,7 +6,7 @@
         $total = $reviewHelper->getTotalReviews($product);
 
         $avgRatings = $reviewHelper->getAverageRating($product);
-        $avgStarRating = ceil($avgRatings);
+        $avgStarRating = round($avgRatings);
     }
 
     $percentageRatings = $reviewHelper->getPercentageRating($product);
