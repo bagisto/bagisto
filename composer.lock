@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4075d2748ab71dfcd4c62655894bcc25",
+    "content-hash": "3332479a65fc6c67057c2946a27fe95e",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -304,16 +304,16 @@
         },
         {
             "name": "bagistobrasil/bagisto-product-social-share",
-            "version": "0.1.1",
+            "version": "0.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bagistobrasil/bagisto-product-social-share.git",
-                "reference": "eee1fba2cedc363c84485ebd1e6e8af61038170b"
+                "reference": "a81c4f29a3e79ce911a9e419cc83ccf513c0ab38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bagistobrasil/bagisto-product-social-share/zipball/eee1fba2cedc363c84485ebd1e6e8af61038170b",
-                "reference": "eee1fba2cedc363c84485ebd1e6e8af61038170b",
+                "url": "https://api.github.com/repos/bagistobrasil/bagisto-product-social-share/zipball/a81c4f29a3e79ce911a9e419cc83ccf513c0ab38",
+                "reference": "a81c4f29a3e79ce911a9e419cc83ccf513c0ab38",
                 "shasum": ""
             },
             "type": "library",
@@ -340,7 +340,7 @@
                     "email": "contato@carlosgartner.com.br"
                 }
             ],
-            "time": "2020-05-02T00:25:57+00:00"
+            "time": "2020-08-04T12:36:28+00:00"
         },
         {
             "name": "barryvdh/laravel-debugbar",

@@ -20,7 +20,7 @@
         "algolia/algoliasearch-client-php": "^2.2",
         "astrotomic/laravel-translatable": "^11.0.0",
         "babenkoivan/elastic-scout-driver": "^1.1",
-        "bagistobrasil/bagisto-product-social-share": "^0.1.1",
+        "bagistobrasil/bagisto-product-social-share": "^0.1.2",
         "barryvdh/laravel-debugbar": "^3.1",
         "barryvdh/laravel-dompdf": "0.8.6",
         "doctrine/dbal": "2.9.2",
