@@ -8,22 +8,9 @@
     @push('scripts')
         <script type="text/x-template" id="datagrid-filters">
             <div class="grid-container">
-                <div class="datagrid-filters" id="datagrid-filters">
 
+                <div class="datagrid-filters">
                     <div class="filter-left">
-                        <div class="search-filter">
-                            <input type="search" id="search-field" class="control"
-                                   placeholder="{{ __('ui::app.datagrid.search') }}" v-model="searchValue"
-                                   v-on:keyup.enter="searchCollection(searchValue)"/>
-
-                            <div class="icon-wrapper">
-                                <span class="icon search-icon search-btn"
-                                      v-on:click="searchCollection(searchValue)"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="filter-right">
                         @if (isset($results['extraFilters']['channels']))
                         <div class="dropdown-filters per-page">
                             <div class="control-group">
@@ -82,7 +69,24 @@
                             </div>
                         </div>
                         @endif
+                    </div>
+                </div>
 
+                <div class="datagrid-filters" id="datagrid-filters">
+                    <div class="filter-left">
+                        <div class="search-filter">
+                            <input type="search" id="search-field" class="control"
+                                   placeholder="{{ __('ui::app.datagrid.search') }}" v-model="searchValue"
+                                   v-on:keyup.enter="searchCollection(searchValue)"/>
+
+                            <div class="icon-wrapper">
+                                <span class="icon search-icon search-btn"
+                                      v-on:click="searchCollection(searchValue)"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-right">
                         <div class="dropdown-filters per-page">
                             <div class="control-group">
                                 <label class="per-page-label" for="perPage">
