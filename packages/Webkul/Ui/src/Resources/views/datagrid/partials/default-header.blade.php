@@ -1,6 +1,6 @@
 <thead v-if="massActionsToggle == false">
     <tr style="height: 65px;">
-        @if (count($results['records']) && $results['enableMassActions'])
+        @if ($results['records'] instanceof \Illuminate\Pagination\LengthAwarePaginator && count($results['records']) && $results['enableMassActions'])
             <th class="grid_head" id="mastercheckbox" style="width: 50px;">
                 <span class="checkbox">
                     <input type="checkbox" v-model="allSelected" v-on:change="selectAll">

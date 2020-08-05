@@ -96,17 +96,17 @@
             </div>
 
             <div class="col-4">
-                <a
-                    class="unset"
-                    href="{{
-                        $toolbarHelper->isOrderCurrent('name-asc')
-                        ? $toolbarHelper->getOrderUrl('name-asc')
-                        : $toolbarHelper->getOrderUrl('name-desc')
-                    }}">
-
+                <div class="sorter" id="sort-by">
                     <i class="material-icons">sort_by_alpha</i>
-                    <span>{{ __('shop::app.products.sort-by') }}</span>
-                </a>
+
+                    <select class="selective-div no-border" onchange="window.location.href = this.value">
+                        @foreach ($toolbarHelper->getAvailableOrders() as $key => $order)
+                            <option value="{{ $toolbarHelper->getOrderUrl($key) }}" {{ $toolbarHelper->isOrderCurrent($key) ? 'selected' : '' }}>
+                                {{ __('shop::app.products.' . $order) }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
 
             <div class="col-4">
@@ -154,7 +154,7 @@
                 methods: {
                     toggleLayeredNavigation: function ({event, actionType}) {
                         this.layeredNavigation = !this.layeredNavigation;
-                    }
+                    },
                 }
             })
         })()

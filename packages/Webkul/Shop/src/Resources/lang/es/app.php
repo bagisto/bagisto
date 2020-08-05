@@ -538,6 +538,15 @@ return [
             'final-summary' => 'Gracias por tu pedido, te enviaremos el número de seguimiento una vez enviado',
             'help' => 'Si necesitas ayuda contacta con nosotros a través de :support_email',
             'thanks' => '¡Gracias!',
+
+            'comment' => [
+                'subject' => 'Nuevo comentario agregado a su pedido #:order_id',
+                'dear' => 'Querida :customer_name',
+                'final-summary' => 'Gracias por mostrar su interés en nuestra tienda.',
+                'help' => 'Si necesita algún tipo de ayuda, contáctenos en :support_email',
+                'thanks' => '¡Gracias!',
+            ],
+
             'cancel' => [
                 'subject' => 'Confirmación de pedido cancelado',
                 'heading' => 'Pedido cancelado',
@@ -580,6 +589,12 @@ return [
             'info' => 'Te hemos enviado este correo porque hemos recibido una solicitud para restablecer la contraseña de tu cuenta',
             'reset-password' => 'Restablecer contraseña',
             'final-summary' => 'Si no has solicitado cambiar de contraseña, ninguna acción es requerida por tu parte.',
+            'thanks' => '¡Gracias!'
+        ],
+        'update-password' => [
+            'subject' => 'Contraseña actualiza',
+            'dear' => 'Estimado/a :name',
+            'info' => 'Está recibiendo este correo electrónico porque ha actualizado su contraseña.',
             'thanks' => '¡Gracias!'
         ],
         'customer' => [

@@ -96,6 +96,7 @@ return [
             'home-page-content' => 'Inhalt der Startseite',
             'footer-left-content' => 'Fußzeile Linker Inhalt',
             'subscription-content' => 'Abonnementleiste Inhalt',
+            'header_content_count' => 'Header Content Count',
             'sidebar-categories' => 'Seitenleisten-Kategorien',
             'footer-left-raw-content' => '<p>Wir lieben es, Software zu erstellen und die Probleme der realen Welt mit den Binärdateien zu lösen. Wir fühlen uns unseren Zielen sehr verpflichtet. Wir investieren unsere Ressourcen, um benutzerfreundliche Software und Anwendungen von Weltklasse für das Unternehmensgeschäft mit erstklassiger Technologie zu entwickeln.</p>',
             'slider-path' => 'Slider Pfad',
@@ -271,6 +272,8 @@ return [
             'downloadables'          => 'Herunterladbare Produkte',
             'confirm-new-password'   => 'Bestätigen Sie Ihr neues Passwort',
             'enter-current-password' => 'Geben Sie Ihr aktuelles Passwort ein',
+            'download'               => 'Downloaden',
+            'no-file-available'      => 'Geen bestand beschikbaar!',
 
             'alert' => [
                 'info'      => 'Information',

@@ -577,6 +577,15 @@ return [
             'final-summary' => 'TDziękujemy za zainteresowanie naszym sklepem, a po podsumowaniu wyślemy ci numer śledzenia',
             'help' => 'Jeśli potrzebujesz jakiejkolwiek pomocy, skontaktuj się z nami pod adresem :support_email',
             'thanks' => 'Dzięki!',
+
+            'comment' => [
+                'subject' => 'Dodano nowy komentarz do Twojego zamówienia #:order_id',
+                'dear' => 'Drogi :customer_name',
+                'final-summary' => 'Dziękujemy za zainteresowanie naszym sklepem',
+                'help' => 'Jeśli potrzebujesz pomocy, skontaktuj się z nami pod adresem :support_email',
+                'thanks' => 'Dzięki!',
+            ],
+
             'cancel' => [
                 'subject' => 'Potwierdź anulowanie zamówienia',
                 'heading' => 'Zamówienie anulowane',
@@ -630,6 +639,13 @@ return [
             'info' => 'Otrzymujesz tego e-maila, ponieważ otrzymaliśmy prośbę o zresetowanie hasła do Twojego konta',
             'reset-password' => 'Zresetuj hasło',
             'final-summary' => 'Jeśli nie zażądałeś resetowania hasła, nie musisz podejmować żadnych dalszych działań',
+            'thanks' => 'Dzięki!'
+        ],
+
+        'update-password' => [
+            'subject' => 'Hasło zaktualizowane',
+            'dear' => 'Drogi/a :name',
+            'info' => 'Otrzymujesz tę wiadomość e-mail, ponieważ zaktualizowałeś swoje hasło.',
             'thanks' => 'Dzięki!'
         ],
 

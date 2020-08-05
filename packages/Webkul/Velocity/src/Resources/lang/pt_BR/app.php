@@ -97,6 +97,7 @@ return [
             'footer-left-content' => 'Conteúdo Rodapé Esquerdo',
             'subscription-content' => 'Conteúdo da Barra de Inscrição',
             'sidebar-categories' => 'Sidebar Categories',
+            'header_content_count' => 'Header Content Count',
             'footer-left-raw-content' => '<p>We love to craft softwares and solve the real world problems with the binaries. We are highly committed to our goals. We invest our resources to create world class easy to use softwares and applications for the enterprise business with the top notch, on the edge technology expertise.</p>',
             'slider-path' => 'Caminho do Slider',
             'category-logo' => 'Logo da Categoria',
@@ -272,6 +273,8 @@ return [
             'downloadables' => 'Produtos para download',
             'confirm-new-password' => 'Confirme a nova senha',
             'enter-current-password' => 'Digite sua senha atual',
+            'download' => 'Baixar',
+            'no-file-available' => 'Nenhum arquivo disponível!',
 
             'alert' => [
                 'info' => 'Informações',
