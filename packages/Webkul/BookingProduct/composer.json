@@ -1,5 +1,5 @@
 {
-    "name": "bagisto/laravel-inventory",
+    "name": "bagisto/laravel-booking-product",
     "license": "MIT",
     "authors": [
         {
@@ -8,17 +8,20 @@
         }
     ],
     "require": {
-        "propaganistas/laravel-intl": "^2.0"
+        "bagisto/laravel-core": "dev-master",
+        "bagisto/laravel-rule": "dev-master",
+        "bagisto/laravel-sales": "dev-master",
+        "bagisto/laravel-product": "dev-master"
     },
     "autoload": {
         "psr-4": {
-            "Webkul\\Inventory\\": "src/"
+            "Webkul\\BookingProduct\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Webkul\\Inventory\\Providers\\InventoryServiceProvider"
+                "Webkul\\BookingProduct\\Providers\\BookingProductServiceProvider"
             ],
             "aliases": {}
         }
