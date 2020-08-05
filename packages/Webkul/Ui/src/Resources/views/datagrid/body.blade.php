@@ -59,7 +59,7 @@
                                     data-method="{{ $action['method'] }}"
                                     data-action="{{ route($action['route'], $record->{$index}) }}"
                                     data-token="{{ csrf_token() }}"
-                                    
+
                                     @if (isset($action['target']))
                                         target="{{ $action['target'] }}"
                                     @endif
@@ -78,7 +78,9 @@
         @endforeach
     @else
         <tr>
-            <td colspan="10" style="text-align: center;">{{ $norecords }}</td>
+            <td colspan="10">
+                <p style="text-align: center;">{{ $norecords }}</p>
+            </td>
         </tr>
     @endif
 </tbody>
