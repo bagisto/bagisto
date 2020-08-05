@@ -274,6 +274,8 @@ return [
             'downloadables' => 'Prodotti Scaricabili',
             'confirm-new-password' => 'Conferma nuova password',
             'enter-current-password' => 'Inserisci la password attuale',
+            'download' => 'Scarica',
+            'no-file-available' => 'Nessun file disponibile!',
 
             'alert' => [
                 'info' => 'Info',
