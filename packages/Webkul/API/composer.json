@@ -25,7 +25,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Webkul\\API\\Providers\\AdminServiceProvider"
+                "Webkul\\API\\Providers\\APIServiceProvider"
             ],
             "aliases": {}
         }
