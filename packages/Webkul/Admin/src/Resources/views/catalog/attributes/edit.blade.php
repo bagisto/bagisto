@@ -364,9 +364,11 @@
                                 <swatch-picker :input-name="'options[' + row.id + '][swatch_value]'" :color="row.swatch_value" colors="text-advanced" show-fallback />
                             </td>
 
-                            <td style="white-space: nowrap;" v-if="show_swatch && swatch_type == 'image'">
-                                <img style="width: 36px;height: 36px;vertical-align: middle;background: #F2F2F2;border-radius: 2px;margin-right: 10px;" v-if="row.swatch_value_url" :src="row.swatch_value_url"/>
-                                <input type="file" accept="image/*" :name="'options[' + row.id + '][swatch_value]'"/>
+                            <td>
+                                <div class="control-group" :class="[errors.has(adminName(row)) ? 'has-error' : '']">
+                                    <input type="text" v-validate="'required'" v-model="row['admin_name']" :name="adminName(row)" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.attributes.admin_name') }}&quot;"/>
+                                    <span class="control-error" v-if="errors.has(adminName(row))">@{{ errors.first(adminName(row)) }}</span>
+                                </div>
                             </td>
 
                             <td>
