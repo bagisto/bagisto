@@ -7,8 +7,11 @@ namespace Webkul\Core\Helpers;
 
 use Faker\Factory;
 use Codeception\Module\Laravel5;
+use Webkul\BookingProduct\Models\BookingProduct;
+use Webkul\BookingProduct\Models\BookingProductEventTicket;
 use Webkul\Checkout\Models\Cart;
 use Webkul\Checkout\Models\CartItem;
+use Webkul\Customer\Models\Customer;
 use Webkul\Product\Models\Product;
 use Webkul\Attribute\Models\Attribute;
 use Webkul\Checkout\Models\CartAddress;
@@ -31,21 +34,19 @@ class Laravel5Helper extends Laravel5
     public const SIMPLE_PRODUCT = 1;
     public const VIRTUAL_PRODUCT = 2;
     public const DOWNLOADABLE_PRODUCT = 3;
+    public const BOOKING_EVENT_PRODUCT = 4;
 
     /**
      * Returns the field name of the given attribute in which a value should be saved inside
      * the 'product_attribute_values' table. Depends on the type.
      *
-     * @param string $attribute
+     * @param string $type
      *
      * @return string|null
      * @part ORM
      */
     public static function getAttributeFieldName(string $type): ?string
     {
-
-        $attributes = [];
-
         $possibleTypes = [
             'text'     => 'text_value',
             'select'   => 'integer_value',
@@ -60,7 +61,7 @@ class Laravel5Helper extends Laravel5
 
     public function prepareCart(array $options = []): array
     {
-        $faker = \Faker\Factory::create();
+        $faker = Factory::create();
 
         $I = $this;
 
@@ -108,7 +109,7 @@ class Laravel5Helper extends Laravel5
 
         $cartItems = [];
 
-        $generatedCartItems = rand(3, 10);
+        $generatedCartItems = random_int(3, 10);
 
         for ($i = 2; $i <= $generatedCartItems; $i++) {
             $quantity = random_int(1, 10);
@@ -178,6 +179,10 @@ class Laravel5Helper extends Laravel5
         $I = $this;
 
         switch ($productType) {
+            case self::BOOKING_EVENT_PRODUCT:
+                $product = $I->haveBookingEventProduct($configs, $productStates);
+                break;
+
             case self::DOWNLOADABLE_PRODUCT:
                 $product = $I->haveDownloadableProduct($configs, $productStates);
                 break;
@@ -205,7 +210,6 @@ class Laravel5Helper extends Laravel5
             $productStates = array_merge($productStates, ['simple']);
         }
 
-        /** @var Product $product */
         $product = $I->createProduct($configs['productAttributes'] ?? [], $productStates);
 
         $I->createAttributeValues($product->id, $configs['attributeValues'] ?? []);
@@ -222,7 +226,6 @@ class Laravel5Helper extends Laravel5
             $productStates = array_merge($productStates, ['virtual']);
         }
 
-        /** @var Product $product */
         $product = $I->createProduct($configs['productAttributes'] ?? [], $productStates);
 
         $I->createAttributeValues($product->id, $configs['attributeValues'] ?? []);
@@ -239,12 +242,27 @@ class Laravel5Helper extends Laravel5
             $productStates = array_merge($productStates, ['downloadable']);
         }
 
-        /** @var Product $product */
         $product = $I->createProduct($configs['productAttributes'] ?? [], $productStates);
 
         $I->createAttributeValues($product->id, $configs['attributeValues'] ?? []);
 
         $I->createDownloadableLink($product->id);
+
+        return $product->refresh();
+    }
+
+    private function haveBookingEventProduct(array $configs = [], array $productStates = []): Product
+    {
+        $I = $this;
+        if (! in_array('booking', $productStates)) {
+            $productStates = array_merge($productStates, ['booking']);
+        }
+
+        $product = $I->createProduct($configs['productAttributes'] ?? [], $productStates);
+
+        $I->createAttributeValues($product->id, $configs['attributeValues'] ?? []);
+
+        $I->createBookingEventProduct($product->id);
 
         return $product->refresh();
     }
@@ -275,6 +293,18 @@ class Laravel5Helper extends Laravel5
         ]);
     }
 
+    private function createBookingEventProduct(int $productId): void
+    {
+        $I = $this;
+        $bookingProduct = $I->have(BookingProduct::class, [
+            'product_id' => $productId,
+        ]);
+
+        $I->have(BookingProductEventTicket::class, [
+            'booking_product_id' => $bookingProduct->id,
+        ]);
+    }
+
     private function createAttributeValues(int $productId, array $attributeValues = []): void
     {
         $I = $this;
@@ -295,7 +325,7 @@ class Laravel5Helper extends Laravel5
 
         }
 
-        /** @var array $defaultAttributeValues
+        /**
          * Some defaults that should apply to all generated products.
          * By defaults products will be generated as saleable.
          * If you do not want this, this defaults can be overriden by $attributeValues.
@@ -314,7 +344,7 @@ class Laravel5Helper extends Laravel5
             'special_price'        => null,
             'price'                => $faker->randomFloat(2, 1, 1000),
             'weight'               => '1.00', // necessary for shipping
-            'brand'                => AttributeOption::firstWhere('attribute_id', $brand->id)->id,
+            'brand'                => AttributeOption::query()->firstWhere('attribute_id', $brand->id)->id,
         ];
 
         $attributeValues = array_merge($defaultAttributeValues, $attributeValues);
