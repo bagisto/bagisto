@@ -1,6 +1,5 @@
-
-
 <?php
+
 return [
     'save' => 'حفظ',
     'create' => 'خلق',
@@ -1017,6 +1016,7 @@ return [
             'choose-condition-to-add' => 'اختر شرط لإضافته',
             'cart-attribute' => 'سمة سلة التسوق',
             'subtotal' => 'المجموع الفرعي',
+            'additional' => 'Additional Information',
             'total-items-qty' => 'إجمالي كمية العناصر',
             'total-weight' => 'الوزن الكلي',
             'payment-method' => 'طريقة الدفع او السداد',
@@ -1307,6 +1307,7 @@ return [
             'order-number-prefix' => 'بادئة رقم الطلب',
             'order-number-length' => 'طول رقم الطلب',
             'order-number-suffix' => 'لاحقة رقم الطلب',
+            'order-number-generator-class' => 'مولد رقم الطلب',
             'default' => 'إفتراضي',
             'sandbox' => 'صندوق الرمل',
             'all-channels' => 'الكل',

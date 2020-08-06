@@ -20,9 +20,27 @@ class Product extends Model implements ProductContract
 
     protected $typeInstance;
 
-    // protected $with = ['attribute_family', 'inventories'];
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        parent::boot();
 
-    // protected $table = 'products';
+        static::deleting(function ($product) {
+            foreach ($product->product_flats as $productFlat) {
+                $productFlat->unsearchable();
+            }
+
+            foreach ($product->variants as $variant) {
+                foreach ($variant->product_flats as $productFlat) {
+                    $productFlat->unsearchable();
+                }
+            }
+        });
+    }
 
     /**
      * Get the product attribute family that owns the product.
@@ -38,6 +56,14 @@ class Product extends Model implements ProductContract
     public function attribute_values()
     {
         return $this->hasMany(ProductAttributeValueProxy::modelClass());
+    }
+
+    /**
+     * Get the product variants that owns the product.
+     */
+    public function product_flats()
+    {
+        return $this->hasMany(ProductFlatProxy::modelClass(), 'product_id');
     }
 
     /**
@@ -176,6 +202,14 @@ class Product extends Model implements ProductContract
     public function bundle_options()
     {
         return $this->hasMany(ProductBundleOptionProxy::modelClass());
+    }
+
+    /**
+     * Get the product customer group prices that owns the product.
+     */
+    public function customer_group_prices()
+    {
+        return $this->hasMany(ProductCustomerGroupPriceProxy::modelClass());
     }
 
     /**

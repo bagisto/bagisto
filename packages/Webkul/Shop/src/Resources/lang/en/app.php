@@ -71,7 +71,8 @@ return [
         'no-results' => 'No Results Found',
         'page-title' => config('app.name') . ' - Search',
         'found-results' => 'Search Results Found',
-        'found-result' => 'Search Result Found'
+        'found-result' => 'Search Result Found',
+        'analysed-keywords' => 'Analysed Keywords'
     ],
 
     'reviews' => [
@@ -190,7 +191,7 @@ return [
 
                 'edit-profile' => [
                     'title' => 'Edit Profile',
-                    'page-title' => 'Edit Profile Form'
+                    'page-title' => 'Edit Profile'
                 ]
             ],
 
@@ -200,7 +201,7 @@ return [
                     'title' => 'Address',
                     'add' => 'Add Address',
                     'edit' => 'Edit',
-                    'empty' => 'You do not have any saved addresses here, please try to create it by clicking the link below',
+                    'empty' => 'You do not have any saved addresses here, please try to create it by clicking the add button.',
                     'create' => 'Create Address',
                     'delete' => 'Delete',
                     'make-default' => 'Make Default',
@@ -212,7 +213,7 @@ return [
                 ],
 
                 'create' => [
-                    'page-title' => 'Add Address Form',
+                    'page-title' => 'Add Address',
                     'company_name' => 'Company name',
                     'first_name' => 'First name',
                     'last_name' => 'Last name',
@@ -417,7 +418,9 @@ return [
         'your-customization' => 'Your Customization',
         'total-amount' => 'Total Amount',
         'none' => 'None',
-        'available-for-order' => 'Available for Order'
+        'available-for-order' => 'Available for Order',
+        'settings' => 'Settings',
+        'compare_options' => 'Compare Options',
     ],
 
     // 'reviews' => [
@@ -577,9 +580,9 @@ return [
             'final-summary' => 'Thanks for showing your interest in our store we will send you tracking number once it shipped',
             'help' => 'If you need any kind of help please contact us at :support_email',
             'thanks' => 'Thanks!',
-            
+
             'comment' => [
-                'subject' => 'New comment added to your order',
+                'subject' => 'New comment added to your order #:order_id',
                 'dear' => 'Dear :customer_name',
                 'final-summary' => 'Thanks for showing your interest in our store',
                 'help' => 'If you need any kind of help please contact us at :support_email',
@@ -590,7 +593,7 @@ return [
                 'subject' => 'Order Cancel Confirmation',
                 'heading' => 'Order Cancelled',
                 'dear' => 'Dear :customer_name',
-                'greeting' => 'You Order with order id #:order_id placed on :created_at has been cancelled',
+                'greeting' => 'Your Order with order id :order_id placed on :created_at has been cancelled',
                 'summary' => 'Summary of Order',
                 'shipping-address' => 'Shipping Address',
                 'billing-address' => 'Billing Address',
@@ -616,9 +619,9 @@ return [
 
         'shipment' => [
             'heading' => 'Shipment #:shipment_id  has been generated for Order #:order_id',
-            'inventory-heading' => 'New shipment #:shipment_id had been generated for Order #:order_id',
+            'inventory-heading' => 'New shipment #:shipment_id has been generated for Order #:order_id',
             'subject' => 'Shipment for your order #:order_id',
-            'inventory-subject' => 'New shipment had been generated for Order #:order_id',
+            'inventory-subject' => 'New shipment has been generated for Order #:order_id',
             'summary' => 'Summary of Shipment',
             'carrier' => 'Carrier',
             'tracking-number' => 'Tracking Number',
@@ -639,6 +642,13 @@ return [
             'info' => 'You are receiving this email because we received a password reset request for your account',
             'reset-password' => 'Reset Password',
             'final-summary' => 'If you did not request a password reset, no further action is required',
+            'thanks' => 'Thanks!'
+        ],
+
+        'update-password' => [
+            'subject' => 'Password Updated',
+            'dear' => 'Dear :name',
+            'info' => 'You are receiving this email because you have updated your password.',
             'thanks' => 'Thanks!'
         ],
 

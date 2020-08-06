@@ -71,7 +71,8 @@ return [
         'no-results' => 'لا توجد نتائج',
         'page-title' => 'بحث',
         'found-results' => 'تم العثور على نتائج البحث',
-        'found-result' => 'تم العثور على نتيجة البحث'
+        'found-result' => 'تم العثور على نتيجة البحث',
+        'analysed-keywords' => 'Analysed Keywords'
     ],
 
     'reviews' => [
@@ -418,6 +419,8 @@ return [
         'total-amount' => 'المبلغ الإجمالي',
         'none' => 'لا شيء',
         'available-for-order' => 'متوفر لطلب الشراء',
+        'settings' => 'Settings',
+        'compare_options' => 'Compare Options',
     ],
 
     // 'reviews' => [
@@ -577,6 +580,15 @@ return [
             'final-summary' => 'شكرا لإظهارك إهتمامك بمتجرنا سنرسل لك رقم التتبع بمجرد شحنه',
             'help' => ': support_email إذا كنت بحاجة إلى أي نوع من المساعدة يرجى الاتصال بنا على',
             'thanks' => 'شكرا!',
+
+            'comment' => [
+                'subject' => '#:order_id تمت إضافة تعليق جديد إلى طلبك',
+                'dear' => ':customer_name العزيز',
+                'final-summary' => 'شكرا لإظهار اهتمامك بمتجرنا',
+                'help' => ':support_email إذا كنت بحاجة إلى أي نوع من المساعدة يرجى الاتصال بنا على',
+                'thanks' => 'شكر!',
+            ],
+
             'cancel' => [
                 'subject' => 'تأكيد إلغاء الأمر',
                 'heading' => 'تم الغاء الأمر او الطلب',
@@ -630,6 +642,13 @@ return [
             'info' => 'أنت تستلم هذا البريد الإلكتروني لأننا تلقينا طلب إعادة ضبط كلمة الدخول لحسابك',
             'reset-password' => 'أعد ضبط كلمة الدخول',
             'final-summary' => 'إذا لم تطلب إعادة تعيين كلمة الدخول ، لا إجراء آخر مطلوب',
+            'thanks' => 'شكرا!'
+        ],
+
+        'update-password' => [
+            'subject' => 'تم تحديث كلمة السر',
+            'dear' => ':name عزيزي',
+            'info' => 'أنت تتلقى هذا البريد الإلكتروني لأنك قمت بتحديث كلمة المرور الخاصة بك.',
             'thanks' => 'شكرا!'
         ],
 

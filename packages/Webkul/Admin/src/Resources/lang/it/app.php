@@ -32,7 +32,7 @@ return [
     'status' => 'Stato',
     'select-option' => 'Seleziona opzione',
     'category' => 'Categoria',
-	
+
     'common' => [
         'no-result-found' => 'Non è stato trovato nessun record.',
         'country' => 'Paese',
@@ -318,6 +318,14 @@ return [
             'invoice-btn-title' => 'Fattura',
             'info' => 'Informazoni',
             'invoices' => 'Fatture',
+            'invoices-change-title' => 'Change invoice state',
+            'invoices-change-state-desc' => 'Please select the new invoice state:',
+            'invoice-status-paid'    => 'Paid',
+            'invoice-status-pending' => 'Pending',
+            'invoice-status-overdue' => 'Overdue',
+            'invoice-status-update' => 'Save changes',
+            'invoice-status-confirmed' => 'The invoice state has been changed.',
+            'invoice-status-error' => 'Could not update the invoice state. ',
             'shipments' => 'Spedizioni',
             'order-and-account' => 'Ordine e Account',
             'order-info' => 'informazioni Ordine',
@@ -1021,6 +1029,7 @@ return [
             'choose-condition-to-add' => 'Scegli una condizione da aggiungere',
             'cart-attribute' => 'Attributi Carrello',
             'subtotal' => 'Subtotale',
+            'additional' => 'Additional Information',
             'total-items-qty' => 'Totale articoli Qtà',
             'total-weight' => 'Totale Peso',
             'payment-method' => 'Metodo di Pagamento',
@@ -1154,8 +1163,8 @@ return [
     ],
 
     'export' => [
-        'export' => 'Esporta
-        'import' => 'Importa,
+        'export' => 'Esporta',
+        'import' => 'Importa',
         'format' => 'Seleziona formato',
         'download' => 'Download',
         'upload' => 'Upload',
@@ -1316,6 +1325,7 @@ return [
             'order-number-prefix' => 'Prefisso Numero Ordine',
             'order-number-length' => 'Lunghezza Numero Ordine',
             'order-number-suffix' => 'Suffisso Numero Ordine',
+            'order-number-generator-class' => 'Generatore di numeri dordine',
             'default' => 'Default',
             'sandbox' => 'Sandbox',
             'all-channels' => 'Tutti',

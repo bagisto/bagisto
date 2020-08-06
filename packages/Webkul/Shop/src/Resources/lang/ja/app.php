@@ -68,7 +68,8 @@ return [
         'no-results' => 'お探しの条件に合う検索結果が見つかりませんでした。',
         'page-title' => '検索',
         'found-results' => '検索結果',
-        'found-result' => '検索結果'
+        'found-result' => '検索結果',
+        'analysed-keywords' => 'Analysed Keywords'
     ],
 
     'reviews' => [
@@ -384,6 +385,8 @@ return [
         'select-above-options' => '最初に上記のオプションを選択してください.',
         'less-quantity' => '数量１未満は選択できません.',
         'available-for-order' => '注文可能',
+        'settings' => 'Settings',
+        'compare_options' => 'Compare Options',
     ],
 
     'buynow' => [
@@ -527,7 +530,16 @@ return [
             'grand-total' => '合計',
             'final-summary' => '発送手続き完了後、お知らせメールを配信いたしますので、今しばらくお待ちください。',
             'help' => 'お問合せなどは下記メールアドレスへご連絡ください。:support_email',
-            'thanks' => 'Gracias!',
+            'thanks' => 'ありがとう！',
+
+            'comment' => [
+                'subject' => '注文に新しいコメントが追加されました #:order_id',
+                'dear' => '親愛な :customer_name',
+                'final-summary' => '当店へのご関心をお寄せいただきありがとうございます',
+                'help' => '何か助けが必要な場合は、私たちに連絡してください :support_email',
+                'thanks' => 'ありがとう！',
+            ],
+
             'cancel' => [
                 'subject' => '注文がキャンセルされました',
                 'heading' => '注文がキャンセルされました',
@@ -546,7 +558,7 @@ return [
                 'grand-total' => '合計',
                 'final-summary' => '私たちのお店にお越しいただき、ありがとうございます。',
                 'help' => 'お問合せなどは下記メールアドレスへご連絡ください。 :support_email',
-                'thanks' => 'Gracias!',
+                'thanks' => 'ありがとう！',
             ]
         ],
         'invoice' => [
@@ -570,6 +582,12 @@ return [
             'info' => 'お客様のパスワードリセットのリクエストがあったため、ご連絡致します。',
             'reset-password' => 'パスワードのリセット',
             'final-summary' => 'Si no has solicitado cambiar de contraseña, ninguna acción es requerida por tu parte.',
+            'thanks' => 'ありがとうございます。'
+        ],
+        'update-password' => [
+            'subject' => 'パスワードが更新されました',
+            'dear' => '様 :name',
+            'info' => 'パスワードを更新したため、このメールをお送りしています。',
             'thanks' => 'ありがとうございます。'
         ],
         'customer' => [

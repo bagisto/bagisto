@@ -3,7 +3,7 @@
 @inject ('productFlatRepository', 'Webkul\Product\Repositories\ProductFlatRepository')
 
 <?php
-    $filterAttributes = [];
+    $filterAttributes = $attributes = [];
     $maxPrice = 0;
 
     if (isset($category)) {

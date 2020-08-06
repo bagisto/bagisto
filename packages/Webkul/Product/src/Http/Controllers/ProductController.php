@@ -175,7 +175,7 @@ class ProductController extends Controller
 
         $categories = $this->categoryRepository->getCategoryTree();
 
-        $inventorySources = $this->inventorySourceRepository->all();
+        $inventorySources = $this->inventorySourceRepository->findWhere(['status' => 1]);
 
         return view($this->_config['view'], compact('product', 'categories', 'inventorySources'));
     }
@@ -189,7 +189,33 @@ class ProductController extends Controller
      */
     public function update(ProductForm $request, $id)
     {
-        $product = $this->productRepository->update(request()->all(), $id);
+        $data = request()->all();
+
+        $multiselectAttributeCodes = array();
+
+        $productAttributes = $this->productRepository->findOrFail($id);
+
+        foreach ($productAttributes->attribute_family->attribute_groups as $attributeGroup) {
+            $customAttributes = $productAttributes->getEditableAttributes($attributeGroup);
+
+            if (count($customAttributes)) {
+                foreach ($customAttributes as $attribute) {
+                    if ($attribute->type == 'multiselect') {
+                        array_push($multiselectAttributeCodes,$attribute->code);
+                    }                    
+                }
+            }
+        }
+
+        if (count($multiselectAttributeCodes)) {
+            foreach ($multiselectAttributeCodes as $multiselectAttributeCode) {
+                if(! isset($data[$multiselectAttributeCode])){
+                    $data[$multiselectAttributeCode] = array();
+                }
+            }  
+        }
+       
+        $product = $this->productRepository->update($data, $id);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Product']));
 
@@ -303,7 +329,7 @@ class ProductController extends Controller
 
     /**
      * To be manually invoked when data is seeded into products
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function sync()

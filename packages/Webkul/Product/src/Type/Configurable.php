@@ -2,9 +2,10 @@
 
 namespace Webkul\Product\Type;
 
-use Webkul\Product\Models\ProductAttributeValue;
-use Webkul\Product\Models\ProductFlat;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+use Webkul\Product\Models\ProductFlat;
+use Webkul\Product\Models\ProductAttributeValue;
 
 class Configurable extends AbstractType
 {
@@ -344,20 +345,23 @@ class Configurable extends AbstractType
     /**
      * Get product minimal price
      *
+     * @param  int  $qty
      * @return float
      */
-    public function getMinimalPrice()
+    public function getMinimalPrice($qty = null)
     {
         $minPrices = [];
+
+        /* method is calling many time so using variable */
+        $tablePrefix = DB::getTablePrefix();
 
         $result = ProductFlat::join('products', 'product_flat.product_id', '=', 'products.id')
             ->distinct()
             ->where('products.parent_id', $this->product->id)
-            ->selectRaw('IF( product_flat.special_price_from IS NOT NULL
-            AND product_flat.special_price_to IS NOT NULL , IF( NOW( ) >= product_flat.special_price_from
-            AND NOW( ) <= product_flat.special_price_to, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) , IF( product_flat.special_price_from IS NULL , IF( product_flat.special_price_to IS NULL , IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , IF( NOW( ) <= product_flat.special_price_to, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) ) , IF( product_flat.special_price_to IS NULL , IF( NOW( ) >= product_flat.special_price_from, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) , product_flat.price ) ) ) AS min_price')
+            ->selectRaw("IF( {$tablePrefix}product_flat.special_price_from IS NOT NULL
+            AND {$tablePrefix}product_flat.special_price_to IS NOT NULL , IF( NOW( ) >= {$tablePrefix}product_flat.special_price_from
+            AND NOW( ) <= {$tablePrefix}product_flat.special_price_to, IF( {$tablePrefix}product_flat.special_price IS NULL OR {$tablePrefix}product_flat.special_price = 0 , {$tablePrefix}product_flat.price, LEAST( {$tablePrefix}product_flat.special_price, {$tablePrefix}product_flat.price ) ) , {$tablePrefix}product_flat.price ) , IF( {$tablePrefix}product_flat.special_price_from IS NULL , IF( {$tablePrefix}product_flat.special_price_to IS NULL , IF( {$tablePrefix}product_flat.special_price IS NULL OR {$tablePrefix}product_flat.special_price = 0 , {$tablePrefix}product_flat.price, LEAST( {$tablePrefix}product_flat.special_price, {$tablePrefix}product_flat.price ) ) , IF( NOW( ) <= {$tablePrefix}product_flat.special_price_to, IF( {$tablePrefix}product_flat.special_price IS NULL OR {$tablePrefix}product_flat.special_price = 0 , {$tablePrefix}product_flat.price, LEAST( {$tablePrefix}product_flat.special_price, {$tablePrefix}product_flat.price ) ) , {$tablePrefix}product_flat.price ) ) , IF( {$tablePrefix}product_flat.special_price_to IS NULL , IF( NOW( ) >= {$tablePrefix}product_flat.special_price_from, IF( {$tablePrefix}product_flat.special_price IS NULL OR {$tablePrefix}product_flat.special_price = 0 , {$tablePrefix}product_flat.price, LEAST( {$tablePrefix}product_flat.special_price, {$tablePrefix}product_flat.price ) ) , {$tablePrefix}product_flat.price ) , {$tablePrefix}product_flat.price ) ) ) AS min_price")
             ->where('product_flat.channel', core()->getCurrentChannelCode())
-            ->where('product_flat.locale', app()->getLocale())
             ->get();
 
         foreach ($result as $price) {
@@ -381,7 +385,7 @@ class Configurable extends AbstractType
         $productFlat = ProductFlat::join('products', 'product_flat.product_id', '=', 'products.id')
             ->distinct()
             ->where('products.parent_id', $this->product->id)
-            ->selectRaw('MAX(product_flat.price) AS max_price')
+            ->selectRaw('MAX('.DB::getTablePrefix().'product_flat.price) AS max_price')
             ->where('product_flat.channel', core()->getCurrentChannelCode())
             ->where('product_flat.locale', app()->getLocale())
             ->first();
@@ -542,7 +546,7 @@ class Configurable extends AbstractType
      */
     public function validateCartItem($item)
     {
-        $price = $item->child->product->getTypeInstance()->getFinalPrice();
+        $price = $item->child->product->getTypeInstance()->getFinalPrice($item->quantity);
 
         if ($price == $item->base_price) {
             return;
@@ -575,16 +579,16 @@ class Configurable extends AbstractType
         $backorders = core()->getConfigData('catalog.inventory.stock_options.backorders');
 
         $backorders = ! is_null ($backorders) ? $backorders : false;
-     
+
         foreach ($this->product->variants as $variant) {
             if ($variant->haveSufficientQuantity($qty)) {
                 return true;
             }
-        }    
+        }
 
         return $backorders;
     }
-     
+
     /**
      * Return true if this product type is saleable
      *
@@ -597,7 +601,7 @@ class Configurable extends AbstractType
                 return true;
             }
         }
-            
+
         return false;
     }
 

@@ -2,21 +2,21 @@
 
 namespace Webkul\Checkout;
 
-use Webkul\Checkout\Models\Cart as CartModel;
-use Webkul\Checkout\Models\CartAddress;
-use Webkul\Checkout\Repositories\CartRepository;
-use Webkul\Checkout\Repositories\CartItemRepository;
-use Webkul\Checkout\Repositories\CartAddressRepository;
-use Webkul\Customer\Models\CustomerAddress;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Tax\Helpers\Tax;
-use Webkul\Tax\Repositories\TaxCategoryRepository;
-use Webkul\Checkout\Models\CartItem;
-use Webkul\Checkout\Models\CartPayment;
-use Webkul\Customer\Repositories\WishlistRepository;
-use Webkul\Customer\Repositories\CustomerAddressRepository;
-use Illuminate\Support\Facades\Event;
+use Exception;
 use Illuminate\Support\Arr;
+use Webkul\Tax\Helpers\Tax;
+use Illuminate\Support\Facades\Event;
+use Webkul\Shipping\Facades\Shipping;
+use Webkul\Checkout\Models\CartAddress;
+use Webkul\Checkout\Models\CartPayment;
+use Webkul\Checkout\Models\Cart as CartModel;
+use Webkul\Checkout\Repositories\CartRepository;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Tax\Repositories\TaxCategoryRepository;
+use Webkul\Checkout\Repositories\CartItemRepository;
+use Webkul\Customer\Repositories\WishlistRepository;
+use Webkul\Checkout\Repositories\CartAddressRepository;
+use Webkul\Customer\Repositories\CustomerAddressRepository;
 
 class Cart
 {
@@ -122,9 +122,11 @@ class Cart
     /**
      * Add Items in a cart with some cart and item details.
      *
-     * @param  int  $productId
-     * @param  array  $data
-     * @return \Webkul\Checkout\Contracts\Cart|\Exception|array
+     * @param int   $productId
+     * @param array $data
+     *
+     * @return \Webkul\Checkout\Contracts\Cart|string|array
+     * @throws Exception
      */
     public function addProduct($productId, $data)
     {
@@ -147,7 +149,7 @@ class Cart
                 session()->forget('cart');
             }
 
-            throw new \Exception($cartProducts);
+            throw new Exception($cartProducts);
         } else {
             $parentCartItem = null;
 
@@ -161,7 +163,7 @@ class Cart
                 if (! $cartItem) {
                     $cartItem = $this->cartItemRepository->create(array_merge($cartProduct, ['cart_id' => $cart->id]));
                 } else {
-                    if (isset($cartProduct['parent_id']) && $cartItem->parent_id != $parentCartItem->id) {
+                    if (isset($cartProduct['parent_id']) && $cartItem->parent_id !== $parentCartItem->id) {
                         $cartItem = $this->cartItemRepository->create(array_merge($cartProduct, [
                             'cart_id' => $cart->id
                         ]));
@@ -218,7 +220,7 @@ class Cart
         $cart = $this->cartRepository->create($cartData);
 
         if (! $cart) {
-            session()->flash('error', trans('shop::app.checkout.cart.create-error'));
+            session()->flash('error', __('shop::app.checkout.cart.create-error'));
 
             return;
         }
@@ -232,7 +234,8 @@ class Cart
      * Update cart items information
      *
      * @param  array  $data
-     * @return bool|void|\Exception
+     *
+     * @return bool|void|Exception
      */
     public function updateItems($data)
     {
@@ -246,13 +249,13 @@ class Cart
             if ($quantity <= 0) {
                 $this->removeItem($itemId);
 
-                throw new \Exception(trans('shop::app.checkout.cart.quantity.illegal'));
+                throw new Exception(__('shop::app.checkout.cart.quantity.illegal'));
             }
 
             $item->quantity = $quantity;
 
             if (! $this->isItemHaveQuantity($item)) {
-                throw new \Exception(trans('shop::app.checkout.cart.quantity.inventory_warning'));
+                throw new Exception(__('shop::app.checkout.cart.quantity.inventory_warning'));
             }
 
             Event::dispatch('checkout.cart.update.before', $item);
@@ -325,6 +328,8 @@ class Cart
                 session()->forget('cart');
             }
         }
+
+        Shipping::collectRates();
 
         Event::dispatch('checkout.cart.delete.after', $itemId);
 
@@ -505,7 +510,7 @@ class Cart
         $this->saveAddressesWhenRequested($data, $billingAddressData, $shippingAddressData);
 
         $this->linkAddresses($cart, $billingAddressData, $shippingAddressData);
-        
+
         $this->assignCustomerFields($cart);
 
         $cart->save();

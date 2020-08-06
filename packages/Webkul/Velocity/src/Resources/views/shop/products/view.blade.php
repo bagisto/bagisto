@@ -8,7 +8,7 @@
     $total = $reviewHelper->getTotalReviews($product);
 
     $avgRatings = $reviewHelper->getAverageRating($product);
-    $avgStarRating = ceil($avgRatings);
+    $avgStarRating = round($avgRatings);
 
     $productImages = [];
     $images = $productImageHelper->getGalleryImages($product);
@@ -23,7 +23,7 @@
 @stop
 
 @section('seo')
-    <meta name="description" content="{{ trim($product->meta_description) != "" ? $product->meta_description : str_limit(strip_tags($product->description), 120, '') }}"/>
+    <meta name="description" content="{{ trim($product->meta_description) != "" ? $product->meta_description : \Illuminate\Support\Str::limit(strip_tags($product->description), 120, '') }}"/>
 
     <meta name="keywords" content="{{ $product->meta_keywords }}"/>
 
@@ -126,8 +126,9 @@
                                         @include ('shop::products.add-to-cart', [
                                             'form' => false,
                                             'product' => $product,
-                                            'showCompare' => true,
                                             'showCartIcon' => false,
+                                            'showCompare' => core()->getConfigData('general.content.shop.compare_option') == "1"
+                                                             ? true : false,
                                         ])
                                     </div>
                                 </div>
@@ -234,8 +235,6 @@
             },
 
             mounted: function () {
-                // this.open360View();
-
                 let currentProductId = '{{ $product->url_key }}';
                 let existingViewed = window.localStorage.getItem('recentlyViewed');
 
@@ -284,44 +283,6 @@
                         }
                     });
                 },
-
-                open360View: function () {
-                    this.slot = false;
-
-                    setTimeout(() => {
-                        $('.spritespin').spritespin({
-                            source: SpriteSpin.sourceArray('http://shubham.webkul.com/3d-image/sample-{lane}-{frame}.jpg', {
-                                lane: [0,5],
-                                frame: [0,5],
-                                digits: 2
-                            }),
-                            // width and height of the display
-                            width: 400,
-                            height: 225,
-                            // the number of lanes (vertical angles)
-                            lanes: 12,
-                            // the number of frames per lane (per vertical angle)
-                            frames: 24,
-                            // interaction sensitivity (and direction) modifier for horizontal movement
-                            sense: 1,
-                            // interaction sensitivity (and direction) modifier for vertical movement
-                            senseLane: -2,
-
-                            // the initial lane number
-                            lane: 6,
-                            // the initial frame number (within the lane)
-                            frame: 0,
-                            // disable autostart of the animation
-                            animate: false,
-
-                            plugins: [
-                                'progress',
-                                '360',
-                                'drag'
-                            ]
-                        });
-                    }, 0);
-                }
             }
         });
 

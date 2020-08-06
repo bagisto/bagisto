@@ -97,7 +97,7 @@ class InvoiceRepository extends Repository
             $invoice = $this->model->create([
                 'order_id'              => $order->id,
                 'total_qty'             => $totalQty,
-                'state'                 => 'paid',
+                'state'                 => 'pending',
                 'base_currency_code'    => $order->base_currency_code,
                 'channel_currency_code' => $order->channel_currency_code,
                 'order_currency_code'   => $order->order_currency_code,
@@ -106,7 +106,7 @@ class InvoiceRepository extends Repository
 
             foreach ($data['invoice']['items'] as $itemId => $qty) {
                 if (! $qty) {
-                    continue; 
+                    continue;
                 }
 
                 $orderItem = $this->orderItemRepository->find($itemId);
@@ -192,10 +192,7 @@ class InvoiceRepository extends Repository
             }
 
             $this->collectTotals($invoice);
-
             $this->orderRepository->collectTotals($order);
-
-            $this->orderRepository->updateOrderStatus($order);
 
             Event::dispatch('sales.invoice.save.after', $invoice);
         } catch (\Exception $e) {
@@ -255,5 +252,17 @@ class InvoiceRepository extends Repository
         $invoice->save();
 
         return $invoice;
+    }
+
+    /**
+     * @param \Webkul\Sales\Contracts\Invoice $invoice
+     * @return void
+     */
+    public function updateInvoiceState($invoice, $status)
+    {
+        $invoice->state = $status;
+        $invoice->save();
+
+        return true;
     }
 }

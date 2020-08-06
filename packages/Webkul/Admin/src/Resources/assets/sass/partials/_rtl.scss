@@ -1,6 +1,10 @@
 .rtl {
     direction: rtl;
 
+    .form-container {
+        text-align: right !important;
+    }
+
     .navbar-top {
         .navbar-top-right {
             text-align: left;
@@ -43,18 +47,6 @@
             .control-group {
                 margin-right: 20px;
                 margin-left: 0px;
-            }
-
-            .control-group.date {
-                &::after {
-                    margin-top: 6px;
-                    position: absolute;
-                    margin-right: -35px;
-                }
-
-                &:last-child {
-                    margin-left: 0px;
-                }
             }
         }
 
@@ -110,56 +102,6 @@
         float: left;
     }
 
-    // ui
-    .grid-container {
-        .filter-row-one .search-filter {
-            border: 2px solid #c7c7c7;
-            border-radius: 2px;
-
-            .control {
-                border: none;
-                padding-right: 10px;
-            }
-
-            .icon-wrapper {
-                border: none;
-                padding-top: 2px;
-                padding-right: 5px;
-                border-right: 2px solid #c7c7c7;
-                border-radius: 0px;
-            }
-        }
-
-        .filter-row-two .filter-tag {
-            .wrapper,
-            .icon.cross-icon {
-                margin-right: 10px;
-                margin-left: 0px;
-            }
-        }
-
-        .filter-row-one .dropdown-filters {
-            right: unset;
-            position: static !important;
-            left: 25px;
-
-            .per-page-label {
-                position: static !important;
-            }
-        }
-    }
-
-    .grid-container
-        .filter-wrapper
-        .filter-row-one
-        .dropdown-filters
-        .more-filters
-        .dropdown-toggle
-        .dropdown-header
-        span {
-        padding-right: 5px;
-    }
-
     .grid-container .table tbody td.action a:first-child {
         margin-left: 10px;
         margin-right: 0px;
@@ -180,7 +122,7 @@
 
     .dropdown-list.bottom-right {
         left: 0px;
-        right: auto;
+        right: auto !important;
     }
 
     .dropdown-list .dropdown-container {
@@ -230,14 +172,6 @@
 
     .control-group label .locale {
         float: left;
-    }
-
-    .control-group.date {
-        &::after {
-            margin-top: 15px;
-            position: absolute;
-            margin-right: -35px;
-        }
     }
 
     .pagination .page-item .icon {

@@ -71,7 +71,8 @@ return [
         'no-results' => 'نتیجه ای پیدا نشد',
         'page-title' => 'فروشگاه - جستجو',
         'found-results' => 'نتایج جستجو یافت شد',
-        'found-result' => 'نتیجه جستجو یافت شد'
+        'found-result' => 'نتیجه جستجو یافت شد',
+        'analysed-keywords' => 'Analysed Keywords'
     ],
 
     'reviews' => [
@@ -417,6 +418,8 @@ return [
         'total-amount' => 'مقدار کل',
         'none' => 'هیچ یک',
         'available-for-order' => 'Available for Order',
+        'settings' => 'Settings',
+        'compare_options' => 'Compare Options',
     ],
 
     // 'reviews' => [
@@ -576,6 +579,15 @@ return [
             'final-summary' => 'با تشکر از علاقه شما به فروشگاه ما ، شماره حمل و نقل را برای شما ارسال می کنیم',
             'help' => 'در صورت نیاز به هر نوع کمک ، لطفا با ما تماس بگیرید :support_email',
             'thanks' => 'با تشکر!',
+
+            'comment' => [
+                'subject' => '#:order_id نظر جدیدی به سفارش شما اضافه شد',
+                'dear' => ':customer_name عزیز',
+                'final-summary' => 'با تشکر از علاقه شما به فروشگاه ما',
+                'help' => ':support_email در صورت نیاز به هر نوع کمک ، لطفا با ما تماس بگیرید',
+                'thanks' => 'با تشکر!',
+            ],
+
             'cancel' => [
                 'subject' => 'تأیید سفارش را لغو کنید',
                 'heading' => 'سفارش لغو شد',
@@ -629,6 +641,13 @@ return [
             'info' => 'شما این ایمیل را دریافت می کنید زیرا ما درخواست بازنشانی رمزعبور را برای حساب شما دریافت کردیم',
             'reset-password' => 'بازنشانی گذرواژه',
             'final-summary' => 'اگر درخواست بازنشانی گذرواژه را نکردید ، دیگر نیازی به اقدامات لازم نیست',
+            'thanks' => 'با تشکر'
+        ],
+
+        'update-password' => [
+            'subject' => 'پسورد آپدیت شد',
+            'dear' => ':name عزیز',
+            'info' => 'شما این ایمیل را دریافت می کنید زیرا رمز خود را به روز کرده اید.',
             'thanks' => 'با تشکر'
         ],
 

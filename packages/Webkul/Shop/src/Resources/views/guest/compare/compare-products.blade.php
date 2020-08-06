@@ -3,44 +3,6 @@
     $comparableAttributes = $attributeRepository->findByField('is_comparable', 1);
 @endphp
 
-@push('css')
-    <style>
-        body {
-            overflow-x: hidden;
-        }
-
-        .comparison-component {
-            width: 100%;
-            padding-top: 20px;
-        }
-
-        .comparison-component > h1 {
-            display: inline-block;
-        }
-
-        td {
-            padding: 15px;
-            min-width: 250px;
-            max-width: 250px;
-            line-height: 30px;
-            vertical-align: top;
-            word-break: break-word;
-        }
-
-        .icon.remove-product {
-            top: 15px;
-            float: right;
-            cursor: pointer;
-            position: relative;
-            background-color: black;
-        }
-
-        .action > div {
-            display: inline-block;
-        }
-    </style>
-@endpush
-
 @push('scripts')
     <script type="text/x-template" id="compare-product-template">
         <section class="comparison-component">
@@ -128,6 +90,13 @@
                                                             ? '{{ __('velocity::app.shop.general.yes') }}'
                                                             : '{{ __('velocity::app.shop.general.no') }}'"
                                                 ></span>
+                                                @break;
+                                            @case('file')
+                                                <a v-if="product.product['{{ $attribute['code'] }}']" :href="`${baseUrl}/storage/${product.product['{{ $attribute['code'] }}']}`">
+                                                    <span v-text="product.product['{{ $attribute['code'] }}'].substr(product.product['{{ $attribute['code'] }}'].lastIndexOf('/') + 1)"  class="fs16"></span>
+                                                    <i class='icon sort-down-icon download'></i>
+                                                </a>
+                                                <a v-else class="fs16">__</span>
                                                 @break;
                                             @default
                                                 <span v-html="product['{{ $attribute['code'] }}'] ? product['{{ $attribute['code'] }}'] : product.product['{{ $attribute['code'] }}'] ? product.product['{{ $attribute['code'] }}'] : '__'" class="fs16"></span>
@@ -219,7 +188,9 @@
                                 this.$set(this, 'products', this.products.filter(product => product.id != productId));
                             }
 
-                            // window.showAlert(`alert-${response.data.status}`, response.data.label, response.data.message);
+                            window.flashMessages = [{'type': 'alert-success', 'message': response.data.message }];
+
+                            this.$root.addFlashMessages();
                         })
                         .catch(error => {
                             console.log("{{ __('velocity::app.error.something_went_wrong') }}");
@@ -237,11 +208,9 @@
 
                         this.setStorageValue('compared_product', updatedItems);
 
-                        // window.showAlert(
-                        //     `alert-success`,
-                        //     "{{ __('velocity::app.shop.general.alert.success') }}",
-                        //     `${this.__('customer.compare.removed')}`
-                        // );
+                        window.flashMessages = [{'type': 'alert-success', 'message': response.data.message }];
+
+                        this.$root.addFlashMessages();
                     }
                 },
 

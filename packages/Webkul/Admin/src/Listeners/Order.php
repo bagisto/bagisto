@@ -3,35 +3,36 @@
 namespace Webkul\Admin\Listeners;
 
 use Illuminate\Support\Facades\Mail;
-use Webkul\Admin\Mail\NewOrderNotification;
 use Webkul\Admin\Mail\NewAdminNotification;
-use Webkul\Admin\Mail\NewInvoiceNotification;
-use Webkul\Admin\Mail\NewShipmentNotification;
-use Webkul\Admin\Mail\NewInventorySourceNotification;
-use Webkul\Admin\Mail\CancelOrderNotification;
+use Webkul\Admin\Mail\NewOrderNotification;
 use Webkul\Admin\Mail\NewRefundNotification;
+use Webkul\Admin\Mail\NewInvoiceNotification;
+use Webkul\Admin\Mail\CancelOrderNotification;
+use Webkul\Admin\Mail\NewShipmentNotification;
 use Webkul\Admin\Mail\OrderCommentNotification;
+use Webkul\Admin\Mail\CancelOrderAdminNotification;
+use Webkul\Admin\Mail\NewInventorySourceNotification;
 
 class Order
 {
     /**
      * Send new order Mail to the customer and admin
-     * 
+     *
      * @param  \Webkul\Sales\Contracts\Order  $order
      * @return void
      */
     public function sendNewOrderMail($order)
     {
         try {
+            /* email to customer */
             $configKey = 'emails.general.notifications.emails.general.notifications.new-order';
-
-            if (core()->getConfigData($configKey)) {
+            if (core()->getConfigData($configKey))
                 Mail::queue(new NewOrderNotification($order));
-            }
 
+            /* email to admin */
             $configKey = 'emails.general.notifications.emails.general.notifications.new-admin';
-
             if (core()->getConfigData($configKey)) {
+                app()->setLocale(env('APP_LOCALE'));
                 Mail::queue(new NewAdminNotification($order));
             }
         } catch (\Exception $e) {
@@ -41,7 +42,7 @@ class Order
 
     /**
      * Send new invoice mail to the customer
-     * 
+     *
      * @param  \Webkul\Sales\Contracts\Invoice  $invoice
      * @return void
      */
@@ -64,7 +65,7 @@ class Order
 
     /**
      * Send new refund mail to the customer
-     * 
+     *
      * @param  \Webkul\Sales\Contracts\Refund  $refund
      * @return void
      */
@@ -83,7 +84,7 @@ class Order
 
     /**
      * Send new shipment mail to the customer
-     * 
+     *
      * @param  \Webkul\Sales\Contracts\Shipment  $shipment
      * @return void
      */
@@ -117,9 +118,17 @@ class Order
     public function sendCancelOrderMail($order)
     {
         try {
+            /* email to customer */
             $configKey = 'emails.general.notifications.emails.general.notifications.cancel-order';
             if (core()->getConfigData($configKey)) {
                 Mail::queue(new CancelOrderNotification($order));
+            }
+
+            /* email to admin */
+            $configKey = 'emails.general.notifications.emails.general.notifications.new-admin';
+            if (core()->getConfigData($configKey)) {
+                app()->setLocale(env('APP_LOCALE'));
+                Mail::queue(new CancelOrderAdminNotification($order));
             }
         } catch (\Exception $e) {
             report($e);

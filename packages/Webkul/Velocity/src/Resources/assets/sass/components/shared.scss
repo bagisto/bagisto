@@ -728,7 +728,9 @@ select:focus,
 .control-error {
     color: $color-danger;
 }
-.mandatory {
+
+.mandatory,
+.required {
     width: 100%;
 
     &::after {
@@ -774,7 +776,7 @@ a {
 }
 
 .scrollable {
-    max-height: 100vh;
+    max-height: 100%;
     overflow-y: scroll;
     scrollbar-width: none;
     -ms-overflow-style: none;

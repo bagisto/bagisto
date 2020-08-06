@@ -71,7 +71,8 @@ return [
         'no-results' => 'Nie znaleziono wyników',
         'page-title' => config('app.name') . ' - Szukaj',
         'found-results' => 'Dostępne wyniki wyszukiwania',
-        'found-result' => 'Dostępny wynik wyszukiwania'
+        'found-result' => 'Dostępny wynik wyszukiwania',
+        'analysed-keywords' => 'Analysed Keywords'
     ],
 
     'reviews' => [
@@ -79,7 +80,7 @@ return [
         'add-review-page-title' => 'Dodaj recenzję',
         'write-review' => 'Napisz recenzję',
         'review-title' => 'Nadaj opinii tytuł',
-        'product-review-page-title' => ''Opinia o produkcie',
+        'product-review-page-title' => 'Opinia o produkcie',
         'rating-reviews' => 'Oceny i recenzje',
         'submit' => 'WYŚLIJ',
         'delete-all' => 'Wszystkie recenzje zostały pomyślnie usunięte',
@@ -113,7 +114,8 @@ return [
             'success' => 'Konto utworzone pomyślnie.',
             'success-verify' => 'Konto zostało utworzone pomyślnie, wysłano wiadomość e-mail w celu weryfikacji.',
             'success-verify-email-unsent' => 'Konto zostało utworzone pomyślnie, lecz e-mail weryfikacyjny nie został wysłany.',
-            'failed' => 'Błąd! Nie można utworzyć konta, spróbuj ponownie później.' => 'Twoje konto jest już zweryfikowane lub spróbuj ponownie wysłać nowy e-mail weryfikacyjny.',
+            'failed' => 'Błąd! Nie można utworzyć konta, spróbuj ponownie później.',
+            'success-verify-email-unsent' => 'Twoje konto jest już zweryfikowane lub spróbuj ponownie wysłać nowy e-mail weryfikacyjny.',
             'verification-not-sent' => 'Błąd! Problem z wysłaniem e-maila weryfikacyjnego, spróbuj ponownie później.',
             'verification-sent' => 'Wysłano e-mail weryfikacyjny',
             'verified' => 'Twoje konto zostało zweryfikowane, spróbuj się teraz zalogować.',
@@ -205,7 +207,7 @@ return [
                     'make-default' => 'Ustaw jako domyślny',
                     'default' => 'Domyślny',
                     'contact' => 'Kontakt',
-                    'confirm-delete' =>  ''Czy na pewno chcesz usunąć ten adres?',
+                    'confirm-delete' =>  'Czy na pewno chcesz usunąć ten adres?',
                     'default-delete' => 'Nie można zmienić domyślnego adresu .',
                     'enter-password' => 'Wprowadź hasło.',
                 ],
@@ -415,7 +417,9 @@ return [
         'your-customization' => 'Twoja personalizacja',
         'total-amount' => 'Całkowita kwota',
         'none' => 'Żaden',
-        'available-for-order' => 'Dostępne na zamówienie'
+        'available-for-order' => 'Dostępne na zamówienie',
+        'settings' => 'Settings',
+        'compare_options' => 'Compare Options',
     ],
 
     // 'reviews' => [
@@ -464,7 +468,7 @@ return [
             'quantity-error' => 'Żądana ilość nie jest dostępna.',
             'cart-subtotal' => 'Suma częściowa koszyka',
             'cart-remove-action' => 'Czy na pewno chcesz to zrobić ?',
-            'partial-cart-update' => 'Tylko niektóre produkty zostały zaktualizowane' => '',
+            'partial-cart-update' => 'Tylko niektóre produkty zostały zaktualizowane',
             'event' => [
                 'expired' => 'To wydarzenie wygasło.'
             ]
@@ -525,7 +529,7 @@ return [
 
         'total' => [
             'order-summary' => 'Podsumowanie zamówienia',
-            'sub-total' => 'Produkty,
+            'sub-total' => 'Produkty',
             'grand-total' => 'Suma łączna',
             'delivery-charges' => 'Koszty dostawy',
             'tax' => 'Podatek',
@@ -574,6 +578,15 @@ return [
             'final-summary' => 'TDziękujemy za zainteresowanie naszym sklepem, a po podsumowaniu wyślemy ci numer śledzenia',
             'help' => 'Jeśli potrzebujesz jakiejkolwiek pomocy, skontaktuj się z nami pod adresem :support_email',
             'thanks' => 'Dzięki!',
+
+            'comment' => [
+                'subject' => 'Dodano nowy komentarz do Twojego zamówienia #:order_id',
+                'dear' => 'Drogi :customer_name',
+                'final-summary' => 'Dziękujemy za zainteresowanie naszym sklepem',
+                'help' => 'Jeśli potrzebujesz pomocy, skontaktuj się z nami pod adresem :support_email',
+                'thanks' => 'Dzięki!',
+            ],
+
             'cancel' => [
                 'subject' => 'Potwierdź anulowanie zamówienia',
                 'heading' => 'Zamówienie anulowane',
@@ -591,7 +604,7 @@ return [
                 'discount' => 'Rabat',
                 'grand-total' => 'Suma łączna',
                 'final-summary' => 'Dziękujemy za zakupy w naszym sklepie',
-                'help' => ''Jeśli potrzebujesz jakiejkolwiek pomocy, skontaktuj się z nami pod adresem :support_email',
+                'help' => 'Jeśli potrzebujesz jakiejkolwiek pomocy, skontaktuj się z nami pod adresem :support_email',
                 'thanks' => 'Dzięki!',
             ]
         ],
@@ -627,6 +640,13 @@ return [
             'info' => 'Otrzymujesz tego e-maila, ponieważ otrzymaliśmy prośbę o zresetowanie hasła do Twojego konta',
             'reset-password' => 'Zresetuj hasło',
             'final-summary' => 'Jeśli nie zażądałeś resetowania hasła, nie musisz podejmować żadnych dalszych działań',
+            'thanks' => 'Dzięki!'
+        ],
+
+        'update-password' => [
+            'subject' => 'Hasło zaktualizowane',
+            'dear' => 'Drogi/a :name',
+            'info' => 'Otrzymujesz tę wiadomość e-mail, ponieważ zaktualizowałeś swoje hasło.',
             'thanks' => 'Dzięki!'
         ],
 

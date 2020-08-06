@@ -71,7 +71,8 @@ return [
         'no-results' => 'Nenhum resultado encontrado',
         'page-title' => 'Buscar',
         'found-results' => 'Resultados da pesquisa encontrados',
-        'found-result' => 'Resultado da pesquisa encontrado'
+        'found-result' => 'Resultado da pesquisa encontrado',
+        'analysed-keywords' => 'Analysed Keywords'
     ],
 
     'reviews' => [
@@ -404,7 +405,9 @@ return [
         'your-customization' => 'Sua personalização',
         'total-amount' => 'Valor total',
         'none' => 'Nenhum',
-        'available-for-order' => 'Disponível para encomenda'
+        'available-for-order' => 'Disponível para encomenda',
+        'settings' => 'Settings',
+        'compare_options' => 'Compare Options',
     ],
 
     // 'reviews' => [
@@ -552,6 +555,15 @@ return [
             'final-summary' => 'Obrigado por mostrar o seu interesse em nossa loja nós lhe enviaremos o número de rastreamento assim que for despachado',
             'help' => 'Se você precisar de algum tipo de ajuda, por favor entre em contato conosco :support_email',
             'thanks' => 'Muito Obrigado!',
+
+            'comment' => [
+                'subject' => 'Novo comentário adicionado ao seu pedido #: order_id',
+                'dear' => 'Prezado :customer_name',
+                'final-summary' => 'Obrigado por mostrar seu interesse em nossa loja',
+                'help' => 'Se você precisar de algum tipo de ajuda, entre em contato conosco :support_email',
+                'thanks' => 'Obrigada!',
+            ],
+
             'cancel' => [
                 'subject' => 'Confirmação de Cancelamento de Pedido',
                 'heading' => 'Pedido Cancelado',
@@ -602,6 +614,13 @@ return [
             'info' => 'Você está recebendo este e-mail porque recebemos uma solicitação de redefinição de senha para sua conta',
             'reset-password' => 'Redefinir Senha',
             'final-summary' => 'Se você não solicitou uma redefinição de senha, nenhuma ação adicional é necessária',
+            'thanks' => 'Obrigado!'
+        ],
+
+        'update-password' => [
+            'subject' => 'Senha atualizada',
+            'dear' => 'Caro :name',
+            'info' => 'Você está recebendo este e-mail porque atualizou sua senha.',
             'thanks' => 'Obrigado!'
         ],
 

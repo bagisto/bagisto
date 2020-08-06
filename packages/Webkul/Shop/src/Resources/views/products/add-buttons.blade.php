@@ -1,3 +1,7 @@
+@php
+    $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false    
+@endphp
+
 <div class="cart-wish-wrap">
     <form action="{{ route('cart.add', $product->product_id) }}" method="POST">
         @csrf
@@ -7,8 +11,10 @@
     </form>
 
     @include('shop::products.wishlist')
-
-    @include('shop::products.compare', [
-        'productId' => $product->id
-    ])
+    
+    @if ($showCompare)
+        @include('shop::products.compare', [
+            'productId' => $product->id
+        ])
+    @endif
 </div>

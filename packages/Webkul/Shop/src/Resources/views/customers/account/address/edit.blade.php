@@ -19,7 +19,7 @@
 
             {!! view_render_event('bagisto.shop.customers.account.address.edit.before', ['address' => $address]) !!}
 
-            <form id="customer-address-form" method="post" action="{{ route('customer.address.edit', $address->id) }}" @submit.prevent="onSubmit">
+            <form id="customer-address-form" method="post" action="{{ route('customer.address.update', $address->id) }}" @submit.prevent="onSubmit">
 
                 <div class="account-table-content">
                     @method('PUT')
@@ -86,7 +86,7 @@
 
                     <div class="control-group" :class="[errors.has('city') ? 'has-error' : '']">
                         <label for="city" class="required">{{ __('shop::app.customer.account.address.create.city') }}</label>
-                        <input type="text" class="control" name="city" v-validate="'required|alpha_spaces'" value="{{ old('city') ?: $address->city }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.city') }}&quot;">
+                        <input type="text" class="control" name="city" v-validate="'required|regex:^[a-zA-Z \-]*$'" value="{{ old('city') ?: $address->city }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.city') }}&quot;">
                         <span class="control-error" v-if="errors.has('city')">@{{ errors.first('city') }}</span>
                     </div>
 

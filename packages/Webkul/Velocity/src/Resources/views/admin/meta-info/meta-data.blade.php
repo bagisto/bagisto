@@ -4,6 +4,10 @@
     {{ __('velocity::app.admin.meta-data.title') }}
 @stop
 
+@php
+    $locale = request()->get('locale') ?: app()->getLocale();
+@endphp
+
 @section('content')
     <div class="content">
         <form
@@ -23,6 +27,21 @@
                 <div class="page-title">
                     <h1>{{ __('velocity::app.admin.meta-data.title') }}</h1>
                 </div>
+
+                <input type="hidden" name="locale" value="{{ $locale }}" />
+
+                <div class="control-group">
+                    <select class="control" id="locale-switcher" onChange="window.location.href = this.value">
+                        @foreach (core()->getAllLocales() as $localeModel)
+
+                            <option value="{{ route('velocity.admin.meta-data') . '?locale=' . $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
+                                {{ $localeModel->name }}
+                            </option>
+
+                        @endforeach
+                    </select>
+                </div>
+
                 <div class="page-action">
                     <button type="submit" class="btn btn-lg btn-primary">
                         {{ __('velocity::app.admin.meta-data.update-meta-data') }}
@@ -60,6 +79,17 @@
                     </div>
 
                     <div class="control-group">
+                        <label>{{ __('velocity::app.admin.meta-data.header_content_count') }}</label>
+
+                        <input
+                            type="text"
+                            class="control"
+                            id="header_content_count"
+                            name="header_content_count"
+                            value="{{ $metaData ? $metaData->header_content_count : '5' }}" />
+                    </div>
+
+                    <div class="control-group">
                         <label>{{ __('shop::app.home.featured-products') }}</label>
 
                         <input
@@ -82,7 +112,7 @@
                     </div>
 
                     <div class="control-group">
-                        <label>{{ __('velocity::app.admin.meta-data.home-page-content') }}</label>
+                        <label style="width:100%;">{{ __('velocity::app.admin.meta-data.home-page-content') }} <span class="locale">[{{ $metaData ? $metaData->locale : 'en' }}]</span></label>
 
                         <textarea
                             class="control"
@@ -93,7 +123,7 @@
                     </div>
 
                     <div class="control-group">
-                        <label>{{ __('velocity::app.admin.meta-data.product-policy') }}</label>
+                        <label style="width:100%;">{{ __('velocity::app.admin.meta-data.product-policy') }} <span class="locale">[{{ $metaData ? $metaData->locale : 'en' }}]</span></label>                        
 
                         <textarea
                             class="control"
@@ -117,7 +147,17 @@
                                 3 => [],
                                 2 => [],
                             ];
-                            $advertisement = json_decode($metaData->get('advertisement')->all()[0]->advertisement, true);
+
+                            $index = 0;
+                            $currentLocale = request()->get('locale') ?: core()->getCurrentLocale();
+                            
+                            foreach ($metaData->get('locale')->all() as $key => $value) {
+                                if ($value->locale == $currentLocale) {
+                                    $index = $key;
+                                }
+                            }
+
+                            $advertisement = json_decode($metaData->get('advertisement')->all()[$index]->advertisement, true);
                         @endphp
 
                         @if(! isset($advertisement[4]))
@@ -200,7 +240,7 @@
             <accordian :title="'{{ __('velocity::app.admin.meta-data.footer') }}'" :active="false">
                 <div slot="body">
                     <div class="control-group">
-                        <label>{{ __('velocity::app.admin.meta-data.subscription-content') }}</label>
+                        <label style="width:100%;">{{ __('velocity::app.admin.meta-data.subscription-content') }} <span class="locale">[{{ $metaData ? $metaData->locale : 'en' }}]</span></label>
 
                         <textarea
                             class="control"
@@ -211,7 +251,7 @@
                     </div>
 
                     <div class="control-group">
-                        <label>{{ __('velocity::app.admin.meta-data.footer-left-content') }}</label>
+                        <label style="width:100%;">{{ __('velocity::app.admin.meta-data.footer-left-content') }} <span class="locale">[{{ $metaData ? $metaData->locale : 'en' }}]</span></label>
 
                         <textarea
                             class="control"
@@ -222,7 +262,7 @@
                     </div>
 
                     <div class="control-group">
-                        <label>{{ __('velocity::app.admin.meta-data.footer-middle-content') }}</label>
+                        <label style="width:100%;">{{ __('velocity::app.admin.meta-data.footer-middle-content') }} <span class="locale">[{{ $metaData ? $metaData->locale : 'en' }}]</span></label>
 
                         <textarea
                             class="control"
