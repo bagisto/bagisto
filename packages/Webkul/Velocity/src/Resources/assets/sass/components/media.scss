@@ -416,6 +416,7 @@
                     .dropdown-filters {
                         &.per-page {
                             margin-top: 0;
+                            margin-bottom: 10px;
                             position: relative;
                         }
                     }
@@ -1009,6 +1010,10 @@
                 }
             }
         }
+    }
+
+    #datagrid-filters.datagrid-filters {
+        padding-top: 20px;
     }
 
     #sort-by.sorter select {
