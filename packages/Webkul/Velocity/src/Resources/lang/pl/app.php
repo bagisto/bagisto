@@ -198,6 +198,7 @@ return [
             'added'                 => 'Produkt został pomyślnie dodany do listy porównania',
             'already_added'         => 'Produkt został już dodany do listy porównawczej',
             'removed'               => 'Produkt został pomyślnie usunięty z listy porównawcze',
+            'removed-all'           => 'Wszystkie pozycje zostały pomyślnie usunięte z listy porównawczej',
             'empty-text'            => 'Nie masz żadnych pozycji na liście porównawczej',
         ],
         'login-form'        => [
