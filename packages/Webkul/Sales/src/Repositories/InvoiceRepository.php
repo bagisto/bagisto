@@ -256,17 +256,4 @@ class InvoiceRepository extends Repository
 
         return $invoice;
     }
-
-    /**
-     * Get the locale of the invoice if somehow item name changes then the english locale will pe provided.
-     *
-     * @param \Webkul\Sales\Contracts\Invoice  $invoice
-     * @return string
-     */
-    public function getLocaleOfTheInvoice($invoice)
-    {
-        $invoiceFirstItem = $invoice->items->first();
-        $invoiceFlatProduct = $invoiceFirstItem->product->product_flats->where('name', $invoiceFirstItem->name)->first();
-        return $invoiceFlatProduct ? $invoiceFlatProduct->locale : 'en';
-    }
 }
