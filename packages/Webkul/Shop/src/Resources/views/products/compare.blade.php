@@ -3,7 +3,11 @@
 @push('scripts')
 
     <script type="text/x-template" id="compare-component-template">
-        <a class="unset compare-icon text-right" @click="addProductToCompare" style="cursor: pointer">
+        <a
+            class="unset compare-icon text-right"
+            title="{{  __('shop::app.customer.compare.add-tooltip') }}"
+            @click="addProductToCompare"
+            style="cursor: pointer">
             <img src="{{ asset('themes/default/assets/images/compare_arrows.png') }}" />
         </a>
     </script>

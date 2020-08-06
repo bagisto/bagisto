@@ -111,6 +111,13 @@
                                                             : '{{ __('velocity::app.shop.general.no') }}'"
                                                 ></span>
                                                 @break;
+                                            @case('file')
+                                                <a v-if="product.product['{{ $attribute['code'] }}']" :href="`${$root.baseUrl}/storage/${product.product['{{ $attribute['code'] }}']}`">
+                                                    <span v-text="product.product['{{ $attribute['code'] }}'].substr(product.product['{{ $attribute['code'] }}'].lastIndexOf('/') + 1)"  class="fs16"></span>
+                                                    <i class='material-icons'>arrow_downward</i>
+                                                </a>
+                                                <a v-else class="fs16">__</span>
+                                                @break;
                                             @default
                                                 <span v-html="product['{{ $attribute['code'] }}'] ? product['{{ $attribute['code'] }}'] : product.product['{{ $attribute['code'] }}'] ? product.product['{{ $attribute['code'] }}'] : '__'" class="fs16"></span>
                                                 @break;
@@ -211,18 +218,22 @@
                         if (productId == "all") {
                             updatedItems = [];
                             this.$set(this, 'products', []);
+                            window.showAlert(
+                                `alert-success`,
+                                this.__('shop.general.alert.success'),
+                                `${this.__('customer.compare.removed-all')}`
+                            );
                         } else {
                             updatedItems = existingItems.filter(item => item != productId);
                             this.$set(this, 'products', this.products.filter(product => product.id != productId));
+                            window.showAlert(
+                                `alert-success`,
+                                this.__('shop.general.alert.success'),
+                                `${this.__('customer.compare.removed')}`
+                            );
                         }
 
                         this.setStorageValue('compared_product', updatedItems);
-
-                        window.showAlert(
-                            `alert-success`,
-                            this.__('shop.general.alert.success'),
-                            `${this.__('customer.compare.removed')}`
-                        );
                     }
 
                     this.$root.headerItemsCount++;

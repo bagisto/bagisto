@@ -177,10 +177,9 @@ class CartRule
         if ($rule->coupon_type) {
             if (strlen($cart->coupon_code)) {
                 /** @var \Webkul\CartRule\Models\CartRule $rule */
-
                 // Laravel relation is used instead of repository for performance
                 // reasons (cart_rule_coupon-relation is pre-loaded by self::getCartRuleQuery())
-                $coupon = $rule->cart_rule_coupon;
+                $coupon = $rule->cart_rule_coupon->where('code', $cart->coupon_code)->first();
 
                 if ($coupon && $coupon->code === $cart->coupon_code) {
                     if ($coupon->usage_limit && $coupon->times_used >= $coupon->usage_limit) {
@@ -444,29 +443,34 @@ class CartRule
 
         $cart = Cart::getCart();
 
-        foreach ($this->getCartRules() as $rule) {
-            if (! $this->canProcessRule($cart, $rule)) {
-                continue;
-            }
+        foreach ($cart->items->all() as $item) {
 
-            if (! $this->validator->validate($rule, $cart)) {
-                continue;
-            }
+            foreach ($this->getCartRules() as $rule) {
 
-            if (! $rule || ! $rule->free_shipping) {
-                continue;
-            }
+                if (! $this->canProcessRule($cart, $rule)) {
+                    continue;
+                }
 
-            $selectedShipping->price = 0;
+                /* given CartItem instance to the validator */
+                if (! $this->validator->validate($rule, $item)) {
+                    continue;
+                }
 
-            $selectedShipping->base_price = 0;
+                if (! $rule || ! $rule->free_shipping) {
+                    continue;
+                }
 
-            $selectedShipping->save();
+                $selectedShipping->price = 0;
 
-            $appliedRuleIds[$rule->id] = $rule->id;
+                $selectedShipping->base_price = 0;
 
-            if ($rule->end_other_rules) {
-                break;
+                $selectedShipping->save();
+
+                $appliedRuleIds[$rule->id] = $rule->id;
+
+                if ($rule->end_other_rules) {
+                    break;
+                }
             }
         }
 

@@ -92,6 +92,18 @@ return [
     ],
 
     'customer' => [
+        'compare'           => [
+            'text'                  => 'Vergleichen',
+            'compare_similar_items' => 'Ähnliche Artikel vergleichen',
+            'add-tooltip'           => 'Produkt zur Vergleichsliste hinzufügen',
+            'added'                 => 'Element erfolgreich zur Vergleichsliste hinzugefügt',
+            'already_added'         => 'Artikel bereits zur Vergleichsliste hinzugefügt',
+            'removed'               => 'Element erfolgreich aus Vergleichsliste entfernt',
+            'empty-text'            => "Sie haben keine Elemente in Ihrer Vergleichsliste",
+            'product_image'         => 'Produktbild',
+            'actions'               => 'Aktionen',
+        ],
+
         'signup-text' => [
             'account_exists' => 'Sie haben bereits ein Konto',
             'title' => 'Anmelden'
@@ -326,6 +338,8 @@ return [
                 'error' => 'Das Produkt kann aufgrund unbekannter Probleme nicht zur Wunschliste hinzugefügt werden. Bitte versuchen Sie es später erneut',
                 'add' => 'Artikel erfolgreich zur Wunschliste hinzugefügt',
                 'remove' => 'Artikel erfolgreich von der Wunschliste entfernt',
+                'add-wishlist-text'     => 'Produkt zur Wunschliste hinzufügen',
+                'remove-wishlist-text'  => 'Produkt von der Wunschliste entfernen',
                 'moved' => 'Artikel erfolgreich in den Warenkorb verschoben',
                 'option-missing' => 'Produktoptionen fehlen, sodass Artikel nicht auf die Wunschliste verschoben werden können.',
                 'move-error' => 'Artikel kann nicht auf die Wunschliste verschoben werden. Bitte versuchen Sie es später erneut',
@@ -575,6 +589,15 @@ return [
             'final-summary' => 'Vielen Dank für Ihr Interesse an unserem Shop. Nach dem Versand senden wir Ihnen die Sendungsverfolgungsnummer',
             'help' => 'Wenn Sie Hilfe benötigen, kontaktieren Sie uns bitte unter :support_email',
             'thanks' => 'Vielen Dank!',
+
+            'comment' => [
+                'subject' => 'Neuer Kommentar zu Ihrer Bestellung hinzugefügt #:order_id',
+                'dear' => 'sehr geehrter :customer_name',
+                'final-summary' => 'Vielen Dank für Ihr Interesse an unserem Shop',
+                'help' => 'Wenn Sie Hilfe benötigen, kontaktieren Sie uns bitte unter :support_email',
+                'thanks' => 'Vielen Dank!',
+            ],
+
             'cancel' => [
                 'subject' => 'Bestätigung der Bestellungsstornierung',
                 'heading' => 'Bestellung storniert',
@@ -628,6 +651,13 @@ return [
             'info' => 'Sie erhalten diese E-Mail, weil wir eine Anfrage zum Zurücksetzen des Passworts für Ihr Konto erhalten haben',
             'reset-password' => 'Passwort zurücksetzen',
             'final-summary' => 'Wenn Sie kein Zurücksetzen des Kennworts angefordert haben, sind keine weiteren Maßnahmen erforderlich',
+            'thanks' => 'Vielen Dank!'
+        ],
+
+        'update-password' => [
+            'subject' => 'Passwort aktualisiert',
+            'dear' => 'Sehr geehrte/r :name',
+            'info' => 'Sie erhalten diese E-Mail, weil Sie Ihr Passwort aktualisiert haben.',
             'thanks' => 'Vielen Dank!'
         ],
 
