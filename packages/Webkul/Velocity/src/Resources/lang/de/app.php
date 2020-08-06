@@ -195,6 +195,7 @@ return [
         'compare'           => [
             'text'                  => 'Vergleichen',
             'compare_similar_items' => 'Ähnliche Artikel vergleichen',
+            'add-tooltip'           => 'Produkt zur Vergleichsliste hinzufügen',
             'added'                 => 'Element erfolgreich zur Vergleichsliste hinzugefügt',
             'already_added'         => 'Artikel bereits zur Vergleichsliste hinzugefügt',
             'removed'               => 'Element erfolgreich aus Vergleichsliste entfernt',

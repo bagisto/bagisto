@@ -92,6 +92,16 @@ return [
     ],
 
     'customer' => [
+        'compare'           => [
+            'text'                  => 'Porównaj',
+            'compare_similar_items' => 'Porównaj podobne przedmioty',
+            'add-tooltip'           => 'Dodaj produkt do listy porównawczej',
+            'added'                 => 'Produkt został pomyślnie dodany do listy porównania',
+            'already_added'         => 'Produkt został już dodany do listy porównawczej',
+            'removed'               => 'Produkt został pomyślnie usunięty z listy porównawcze',
+            'empty-text'            => 'Nie masz żadnych pozycji na liście porównawczej',
+        ],
+
         'signup-text' => [
             'account_exists' => 'Posiadasz już konto',
             'title' => 'Zaloguj się'
@@ -329,6 +339,8 @@ return [
                 'error' => 'Nie można dodać produktu do listy wyboru z powodu nieznanych problemów, sprawdź później',
                 'add' => 'Produkt został pomyślnie dodany do listy wyboru',
                 'remove' => 'Produkt został pomyślnie usunięty z listy wyboru',
+                'add-wishlist-text'     => 'Dodaj produkt do listy wyboru',
+                'remove-wishlist-text'  => 'Usuń produkt z listy wyboru',
                 'moved' => 'Produkt pomyślnie przeniesiono do koszyka',
                 'option-missing' => 'Brak opcji produktu, więc produktu nie można dodać na listę wyboru.',
                 'move-error' => ' „Nie można dodać produktu do listy wyboru. Spróbuj ponownie później',

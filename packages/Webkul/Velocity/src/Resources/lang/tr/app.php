@@ -193,6 +193,7 @@ return [
         'compare'           => [
             'text'                  => 'Karşılaştır',
             'compare_similar_items' => 'Benzer Ürünleri Karşılaştır',
+            'add-tooltip'           => 'Karşılaştırma listesine ürün ekle',
             'added'                 => 'Ürün karşılaştırma listesine başarıyla eklendi.',
             'already_added'         => 'Ürün zaten karşılaştırma listesinde yer alıyor.',
             'removed'               => 'Ürün karşılaştırma listesinden başarıyla kaldırıldı.',

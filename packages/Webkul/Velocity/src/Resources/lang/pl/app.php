@@ -195,6 +195,7 @@ return [
         'compare'           => [
             'text'                  => 'Porównaj',
             'compare_similar_items' => 'Porównaj podobne przedmioty',
+            'add-tooltip'           => 'Dodaj produkt do listy porównawczej',
             'added'                 => 'Produkt został pomyślnie dodany do listy porównania',
             'already_added'         => 'Produkt został już dodany do listy porównawczej',
             'removed'               => 'Produkt został pomyślnie usunięty z listy porównawcze',

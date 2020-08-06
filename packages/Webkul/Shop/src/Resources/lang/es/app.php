@@ -89,6 +89,18 @@ return [
     ],
 
     'customer' => [
+        'compare'           => [
+            'text'                  => 'Comparar',
+            'compare_similar_items' => 'Comparar artículos similares',
+            'add-tooltip'           => 'Agregar producto para comparar lista',
+            'added'                 => 'Elemento agregado con éxito a la lista de comparación',
+            'already_added'         => 'Elemento ya agregado a la lista de comparación',
+            'removed'               => 'Elemento eliminado con éxito de la lista de comparación',
+            'empty-text'            => "No tienes ningún artículo en tu lista de comparación",
+            'product_image'         => 'Product Image',
+            'actions'               => 'Actions',
+        ],
+
         'signup-text' => [
             'account_exists' => 'Ya tienes una cuenta',
             'title' => 'Entrar'
@@ -311,6 +323,8 @@ return [
                 'error' => 'No se puede agregar el producto a la lista de deseos por problemas desconocidos, inténtelo más tarde.',
                 'add' => 'Artículo añadido a la lista de deseos',
                 'remove' => 'Artículo eliminado de la lista de deseos',
+                'add-wishlist-text'     => 'Añadir producto a la lista de deseos',
+                'remove-wishlist-text'  => 'Eliminar producto de la lista de deseos',
                 'moved' => 'Artículo movido a la cesta exitosamente',
                 'move-error' => 'El artículo no se puede añadir a la lista de deseos, por favor inténtalo más tarde',
                 'success' => 'Artículo añadido a la lista de deseos',

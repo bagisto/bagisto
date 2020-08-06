@@ -193,14 +193,13 @@ return [
 
     'customer'      => [
         'compare'           => [
-            'text'                  => 'Compare',
-            'compare_similar_items' => 'Compare Similar Items',
-            'add-tooltip'           => 'Add product to compare list',
-            'added'                 => 'Item successfully added to compare list',
-            'already_added'         => 'Item already added to compare list',
-            'removed'               => 'Item successfully removed from compare list',
-            'removed-all'           => 'All Items successfully removed from compare list',
-            'empty-text'            => "You don't have any items in your compare list",
+            'text'                  => '比較する',
+            'compare_similar_items' => '類似アイテムを比較する',
+            'add-tooltip'           => '製品を追加して比較リスト',
+            'added'                 => 'アイテムを比較リストに追加しました',
+            'already_added'         => 'アイテムは比較リストに既に追加されています',
+            'removed'               => '比較リストからアイテムを削除しました',
+            'empty-text'            => "比較リストにアイテムがありません",
             'product_image'         => 'Product Image',
             'actions'               => 'Actions',
         ],
@@ -267,12 +266,10 @@ return [
             'orders'                 => 'Orders',
             'update'                 => 'Update',
             'reviews'                => 'Reviews',
-            'download'               => 'Download',
             'currencies'             => 'Currencies',
             'addresses'              => 'Addresses',
             'top-brands'             => 'Top Brands',
             'new-password'           => 'New password',
-            'no-file-available'      => 'No File Available!',
             'downloadables'          => 'Downloadable Products',
             'confirm-new-password'   => 'Confirm new password',
             'enter-current-password' => 'Enter your current password',
@@ -285,8 +282,8 @@ return [
             ],
         ],
         'wishlist'  => [
-            'add-wishlist-text'     => 'Add product to wishlist',
-            'remove-wishlist-text'  => 'Remove product from wishlist'
+            'add-wishlist-text'     => '製品をウィッシュリストに追加',
+            'remove-wishlist-text'  => 'ウィッシュリストから商品を削除',
         ]
     ],
 
