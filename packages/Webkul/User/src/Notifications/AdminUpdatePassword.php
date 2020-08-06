@@ -18,7 +18,7 @@ class AdminUpdatePassword extends Mailable
     public $admin;
 
     /**
-     * Create a new message instance.
+     * Create a new admin instance.
      *
      * @param  \Webkul\User\Contracts\Admin  $admin
      * @return void

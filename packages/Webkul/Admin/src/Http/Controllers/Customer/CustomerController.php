@@ -64,12 +64,12 @@ class CustomerController extends Controller
         CustomerGroupRepository $customerGroupRepository,
         ChannelRepository $channelRepository
         )
-        
+
         {
             $this->_config = request('_config');
             $this->middleware('admin');
             $this->customerRepository = $customerRepository;
-            
+
             $this->customerAddressRepository = $customerAddressRepository;
             $this->customerGroupRepository = $customerGroupRepository;
             $this->channelRepository = $channelRepository;
@@ -200,12 +200,19 @@ class CustomerController extends Controller
         $customer = $this->customerRepository->findorFail($id);
 
         try {
-            $this->customerRepository->delete($id);
+
+            if (! $this->customerRepository->checkIfCustomerHasOrderPendingOrProcessing($customer)) {
+
+                $this->customerRepository->delete($id);
+            } else {
+
+                return response()->json(['message' => false], 400);
+            }
 
             session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
-
             return response()->json(['message' => true], 200);
         } catch (\Exception $e) {
+
             session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Customer']));
         }
 
@@ -279,12 +286,18 @@ class CustomerController extends Controller
     {
         $customerIds = explode(',', request()->input('indexes'));
 
-        foreach ($customerIds as $customerId) {
-            $this->customerRepository->deleteWhere(['id' => $customerId]);
+        if (!$this->customerRepository->checkBulkCustomerIfTheyHaveOrderPendingOrProcessing($customerIds)) {
+
+            foreach ($customerIds as $customerId) {
+                $this->customerRepository->deleteWhere(['id' => $customerId]);
+            }
+
+            session()->flash('success', trans('admin::app.customers.customers.mass-destroy-success'));
+
+            return redirect()->back();
         }
 
-        session()->flash('success', trans('admin::app.customers.customers.mass-destroy-success'));
-
+        session()->flash('error', trans('admin::app.response.order-pending', ['name' => 'Customers']));
         return redirect()->back();
     }
 }

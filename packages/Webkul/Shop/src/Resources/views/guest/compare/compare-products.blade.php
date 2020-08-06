@@ -91,6 +91,13 @@
                                                             : '{{ __('velocity::app.shop.general.no') }}'"
                                                 ></span>
                                                 @break;
+                                            @case('file')
+                                                <a v-if="product.product['{{ $attribute['code'] }}']" :href="`${baseUrl}/storage/${product.product['{{ $attribute['code'] }}']}`">
+                                                    <span v-text="product.product['{{ $attribute['code'] }}'].substr(product.product['{{ $attribute['code'] }}'].lastIndexOf('/') + 1)"  class="fs16"></span>
+                                                    <i class='icon sort-down-icon download'></i>
+                                                </a>
+                                                <a v-else class="fs16">__</span>
+                                                @break;
                                             @default
                                                 <span v-html="product['{{ $attribute['code'] }}'] ? product['{{ $attribute['code'] }}'] : product.product['{{ $attribute['code'] }}'] ? product.product['{{ $attribute['code'] }}'] : '__'" class="fs16"></span>
                                                 @break;
@@ -194,14 +201,14 @@
                         if (productId == "all") {
                             updatedItems = [];
                             this.$set(this, 'products', []);
+                            window.flashMessages = [{'type': 'alert-success', 'message': '{{ __('velocity::app.customer.compare.removed-all') }}' }];
                         } else {
                             updatedItems = existingItems.filter(item => item != productId);
                             this.$set(this, 'products', this.products.filter(product => product.id != productId));
+                            window.flashMessages = [{'type': 'alert-success', 'message': '{{ __('velocity::app.customer.compare.removed') }}' }];
                         }
 
                         this.setStorageValue('compared_product', updatedItems);
-
-                        window.flashMessages = [{'type': 'alert-success', 'message': response.data.message }];
 
                         this.$root.addFlashMessages();
                     }

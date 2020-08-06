@@ -198,6 +198,7 @@ return [
             'added' => 'Item successfully added to compare list',
             'already_added' => 'Item already added to compare list',
             'removed' => 'Item successfully removed from compare list',
+            'removed-all' => 'Alle items zijn met succes verwijderd uit de vergelijkingslijst',
             'empty-text' => "You don't have any items in your compare list",
             'product_image' => 'Product Image',
             'actions' => 'Actions',
@@ -266,12 +267,14 @@ return [
             'update' => 'Bijwerken',
             'reviews' => 'Reviews',
             'addresses' => 'Adressen',
+            'download' => 'Downloaden',
             'currencies' => 'Currencies',
             'top-brands' => 'Top merken',
             'new-password' => 'Nieuw wachtwoord',
             'downloadables' => 'Downloadable Products',
-            'confirm-new-password' => 'Bevestig uw nieuw wachtwoord',
             'enter-current-password' => 'Huidig wachtwoord',
+            'no-file-available' => 'Geen bestand beschikbaar!',
+            'confirm-new-password' => 'Bevestig uw nieuw wachtwoord',
 
             'alert' => [
                 'info' => 'Info',
