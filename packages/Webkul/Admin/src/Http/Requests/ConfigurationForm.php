@@ -3,10 +3,30 @@
 namespace Webkul\Admin\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
+use Illuminate\Validation\Factory as ValidationFactory;
 
 class ConfigurationForm extends FormRequest
 {
+    /*
+        Added custom validator.
+     */
+    public function __construct(ValidationFactory $validationFactory)
+    {
+        /* added custom comma seperated integer validator */
+        $validationFactory->extend(
+            'comma_seperated_integer',
+            function ($attribute, $value, $parameters) {
+                $pages = explode(',', $value);
+                foreach($pages as $page){
+                    if (! is_numeric($page)) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        );
+    }
+
     /**
      * Determine if the Configuraion is authorized to make this request.
      *
@@ -25,6 +45,14 @@ class ConfigurationForm extends FormRequest
     public function rules()
     {
         $this->rules = [];
+
+        if (request()->has('catalog.products.storefront.products_per_page')
+            && ! empty(request()->input('catalog.products.storefront.products_per_page'))
+        ) {
+            $this->rules = [
+                'catalog.products.storefront.products_per_page'  => 'comma_seperated_integer',
+            ];
+        }
 
         if (request()->has('general.design.admin_logo.logo_image')
             && ! request()->input('general.design.admin_logo.logo_image.delete')
@@ -54,6 +82,7 @@ class ConfigurationForm extends FormRequest
     {
         return [
             'general.design.admin_logo.logo_image.mimes' => 'Invalid file format. Use only jpeg, bmp, png, jpg.',
+            'catalog.products.storefront.products_per_page.comma_seperated_integer' => 'Products Per Page are not comma seperated integer.'
         ];
     }
 
