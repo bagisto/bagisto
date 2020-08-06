@@ -82,7 +82,7 @@ class ConfigurationForm extends FormRequest
     {
         return [
             'general.design.admin_logo.logo_image.mimes' => 'Invalid file format. Use only jpeg, bmp, png, jpg.',
-            'catalog.products.storefront.products_per_page.comma_seperated_integer' => 'Products Per Page are not comma seperated integer.'
+            'catalog.products.storefront.products_per_page.comma_seperated_integer' => 'The "Product Per Page" field must be numeric and may contain comma.'
         ];
     }
 
