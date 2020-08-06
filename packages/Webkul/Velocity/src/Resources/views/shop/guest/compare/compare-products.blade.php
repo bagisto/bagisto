@@ -218,18 +218,22 @@
                         if (productId == "all") {
                             updatedItems = [];
                             this.$set(this, 'products', []);
+                            window.showAlert(
+                                `alert-success`,
+                                this.__('shop.general.alert.success'),
+                                `${this.__('customer.compare.removed-all')}`
+                            );
                         } else {
                             updatedItems = existingItems.filter(item => item != productId);
                             this.$set(this, 'products', this.products.filter(product => product.id != productId));
+                            window.showAlert(
+                                `alert-success`,
+                                this.__('shop.general.alert.success'),
+                                `${this.__('customer.compare.removed')}`
+                            );
                         }
 
                         this.setStorageValue('compared_product', updatedItems);
-
-                        window.showAlert(
-                            `alert-success`,
-                            this.__('shop.general.alert.success'),
-                            `${this.__('customer.compare.removed')}`
-                        );
                     }
 
                     this.$root.headerItemsCount++;
