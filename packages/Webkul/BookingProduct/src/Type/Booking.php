@@ -133,7 +133,7 @@ class Booking extends Virtual
         if (! $bookingProduct) {
             return false;
         }
-        
+
         if (in_array($bookingProduct->type, ['default', 'rental', 'table'])) {
             return true;
         }
@@ -180,7 +180,7 @@ class Booking extends Virtual
         if ($bookingProduct->type == 'event') {
             if (Carbon::now() > $bookingProduct->available_from && Carbon::now() > $bookingProduct->available_to) {
                 return trans('shop::app.checkout.cart.event.expired');
-            } 
+            }
 
             $filtered = Arr::where($data['booking']['qty'], function ($qty, $key) {
                 return $qty != 0;
@@ -195,18 +195,13 @@ class Booking extends Virtual
                     continue;
                 }
 
-                $cartProducts = parent::prepareForCart(array_merge($data, [
-                    'product_id' => $data['product_id'],
-                    'quantity'   => $qty,
-                    'booking'    => [
-                        'ticket_id' => $ticketId,
-                    ],
-                ]));
+                $data['booking']['ticket_id'] = $ticketId;
+                $cartProducts = parent::prepareForCart($data);
 
                 if (is_string($cartProducts)) {
                     return $cartProducts;
                 }
-                    
+
                 $products = array_merge($products, $cartProducts);
             }
         } else {
