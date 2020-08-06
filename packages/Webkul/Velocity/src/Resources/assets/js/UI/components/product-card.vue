@@ -1,12 +1,12 @@
 <template>
     <div class="col-12 lg-card-container list-card product-card row" v-if="list">
-        <div class="product-image">
+        <div class="product-image" style="margin: auto;">
             <a :title="product.name" :href="`${baseUrl}/${product.slug}`">
                 <img
                     :src="product.image"
                     :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
 
-                <product-quick-view-btn :quick-view-details="product"></product-quick-view-btn>
+                <product-quick-view-btn :quick-view-details="product" v-if="!isMobile()"></product-quick-view-btn>
             </a>
         </div>
 
@@ -101,5 +101,15 @@
                 'addToCartHtml': '',
             }
         },
+
+        methods: {
+            'isMobile': function () {
+                if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
     }
 </script>

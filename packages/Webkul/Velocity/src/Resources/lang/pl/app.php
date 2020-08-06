@@ -198,6 +198,7 @@ return [
             'added'                 => 'Produkt został pomyślnie dodany do listy porównania',
             'already_added'         => 'Produkt został już dodany do listy porównawczej',
             'removed'               => 'Produkt został pomyślnie usunięty z listy porównawcze',
+            'removed-all'           => 'Wszystkie pozycje zostały pomyślnie usunięte z listy porównawczej',
             'empty-text'            => 'Nie masz żadnych pozycji na liście porównawczej',
         ],
         'login-form'        => [
@@ -270,6 +271,8 @@ return [
             'downloadables'          => 'Produkty do pobrania',
             'confirm-new-password'   => 'Potwierdź nowe hasło',
             'enter-current-password' => 'Wpisz swoje aktualne hasło',
+            'download'               => 'Pobieranie',
+            'no-file-available'      => 'Brak dostępnego pliku!',
 
             'alert' => [
                 'info'      => 'Info',

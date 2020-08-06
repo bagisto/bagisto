@@ -198,6 +198,7 @@ return [
             'added'                 => 'Element erfolgreich zur Vergleichsliste hinzugefügt',
             'already_added'         => 'Artikel bereits zur Vergleichsliste hinzugefügt',
             'removed'               => 'Element erfolgreich aus Vergleichsliste entfernt',
+            'removed-all'           => 'Alle Elemente erfolgreich aus der Vergleichsliste entfernt',
             'empty-text'            => "Sie haben keine Elemente in Ihrer Vergleichsliste",
             'product_image'         => 'Produktbild',
             'actions'               => 'Aktionen',
@@ -272,6 +273,8 @@ return [
             'downloadables'          => 'Herunterladbare Produkte',
             'confirm-new-password'   => 'Bestätigen Sie Ihr neues Passwort',
             'enter-current-password' => 'Geben Sie Ihr aktuelles Passwort ein',
+            'download'               => 'Downloaden',
+            'no-file-available'      => 'Geen bestand beschikbaar!',
 
             'alert' => [
                 'info'      => 'Information',

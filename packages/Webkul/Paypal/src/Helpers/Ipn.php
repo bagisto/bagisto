@@ -105,7 +105,9 @@ class Ipn
                 $this->orderRepository->update(['status' => 'processing'], $this->order->id);
 
                 if ($this->order->canInvoice()) {
-                    $this->invoiceRepository->create($this->prepareInvoiceData());
+                    $invoice = $this->invoiceRepository->create($this->prepareInvoiceData());
+                    
+                    $this->invoiceRepository->updateInvoiceState($invoice, "paid");
                 }
             }
         }
