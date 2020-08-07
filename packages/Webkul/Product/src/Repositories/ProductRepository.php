@@ -3,6 +3,7 @@
 namespace Webkul\Product\Repositories;
 
 use Exception;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Webkul\Product\Models\Product;
 use Illuminate\Pagination\Paginator;
@@ -613,8 +614,9 @@ class ProductRepository extends Repository
             $newValue = $oldValue->replicate();
 
             if ($oldValue->attribute_id === $attributeIds['name']) {
-                $copiedName = sprintf('%s %s (%s)',
-                    trans('admin::app.copy-of'),
+                $copyOf = trans('admin::app.copy-of');
+                $copiedName = sprintf('%s%s (%s)',
+                    Str::startsWith($originalProduct->name, $copyOf) ? '' : $copyOf,
                     $originalProduct->name,
                     $randomSuffix
                 );
@@ -623,13 +625,14 @@ class ProductRepository extends Repository
             }
 
             if ($oldValue->attribute_id === $attributeIds['url_key']) {
-                $copiedSlug = sprintf('%s-%s-%s',
-                    trans('admin::app.copy-of'),
+                $copyOfSlug = trans('admin::app.copy-of-slug');
+                $copiedSlug = sprintf('%s%s-%s',
+                    Str::startsWith($originalProduct->url_key, $copyOfSlug) ? '' : $copyOfSlug,
                     $originalProduct->url_key,
                     $randomSuffix
                 );
-                $newValue->text_value = __('admin::app.copy-of-slug') . '-' . $originalProduct->url_key . '-' . $randomSuffix;
-                $newProductFlat->url_key = __('admin::app.copy-of-slug') . '-' . $originalProduct->url_key . '-' . $randomSuffix;
+                $newValue->text_value = $copiedSlug;
+                $newProductFlat->url_key = $copiedSlug;
             }
 
             if ($oldValue->attribute_id === $attributeIds['sku']) {
