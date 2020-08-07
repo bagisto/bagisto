@@ -177,8 +177,7 @@ class Order
         }
 
         $objectFirstItem = $object->items->first();
-        $objectFlatProduct = $objectFirstItem->product->product_flats->where('name', $objectFirstItem->name)->first();
-        return $objectFlatProduct ? $objectFlatProduct->locale : 'en';
+        return isset($objectFirstItem->additional['locale']) ? $objectFirstItem->additional['locale'] : 'en';
     }
 
     /**

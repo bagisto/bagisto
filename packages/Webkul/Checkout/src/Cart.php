@@ -904,7 +904,7 @@ class Cart
             'discount_percent'     => $data['discount_percent'],
             'discount_amount'      => $data['discount_amount'],
             'base_discount_amount' => $data['base_discount_amount'],
-            'additional'           => $data['additional'],
+            'additional'           => array_merge($data['additional'], ['locale' => core()->getCurrentLocale()->code]),
         ];
 
         if (isset($data['children']) && $data['children']) {
