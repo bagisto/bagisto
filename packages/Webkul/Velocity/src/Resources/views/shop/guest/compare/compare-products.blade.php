@@ -115,7 +115,7 @@
                                             @case('image')
                                                     <img
                                                     class="image-wrapper"
-                                                    :src="'/storage/' + product.product['{{ $attribute['code'] }}']"
+                                                    :src="'storage/' + product.product['{{ $attribute['code'] }}']"
                                                     onload="window.updateHeight ? window.updateHeight() : ''"
                                                     :onerror="`this.src='${$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
                                                     @break;
