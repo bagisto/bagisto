@@ -3,6 +3,7 @@
 namespace Webkul\API\Http\Controllers\Shop;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ResourceController extends Controller
 {
@@ -12,7 +13,7 @@ class ResourceController extends Controller
      * @var array
      */
     protected $guard;
-    
+
     /**
      * Contains route related configuration
      *
@@ -86,9 +87,15 @@ class ResourceController extends Controller
      */
     public function get($id)
     {
-        return new $this->_config['resource'](
-            $this->repository->findOrFail($id)
-        );
+        if (Auth::user($this->guard)->id === (int) $id) {
+            return new $this->_config['resource'](
+                $this->repository->findOrFail($id)
+            );
+        }
+
+        return response()->json([
+            'message' => 'Invalid Request.',
+        ], 403);
     }
 
     /**
@@ -102,7 +109,7 @@ class ResourceController extends Controller
         $wishlistProduct = $this->repository->findOrFail($id);
 
         $this->repository->delete($id);
-        
+
         return response()->json([
             'message' => 'Item removed successfully.',
         ]);
