@@ -534,10 +534,10 @@ class ProductRepository extends Repository
         $attribute = $this->attributeRepository->findOneByField('code', $sort);
 
         if ($attribute) {
-            if ($attribute->code == 'price') {
+            if ($attribute->code === 'price') {
                 $query->orderBy('min_price', $direction);
             } else {
-                $query->orderBy($sort == 'created_at' ? 'product_flat.created_at' : $attribute->code, $direction);
+                $query->orderBy($sort === 'created_at' ? 'product_flat.created_at' : $attribute->code, $direction);
             }
         }
 
@@ -662,37 +662,37 @@ class ProductRepository extends Repository
 
         if (! isset($attributesToSkip['categories'])) {
             foreach ($originalProduct->categories as $category) {
-                $copiedProduct->categories()->save($category);
+                $copiedProduct->categories()->save($category->replicate());
             }
         }
 
         if (! isset($attributesToSkip['inventories'])) {
             foreach ($originalProduct->inventories as $inventory) {
-                $copiedProduct->inventories()->save($inventory);
+                $copiedProduct->inventories()->save($inventory->replicate());
             }
         }
 
         if (! isset($attributesToSkip['customer_group_prices'])) {
             foreach ($originalProduct->customer_group_prices as $customer_group_price) {
-                $copiedProduct->customer_group_prices()->save($customer_group_price);
+                $copiedProduct->customer_group_prices()->save($customer_group_price->replicate());
             }
         }
 
         if (! isset($attributesToSkip['images'])) {
             foreach ($originalProduct->images as $image) {
-                $copiedProduct->images()->save($image);
+                $copiedProduct->images()->save($image->replicate());
             }
         }
 
         if (! isset($attributesToSkip['super_attributes'])) {
             foreach ($originalProduct->super_attributes as $super_attribute) {
-                $copiedProduct->super_attributes()->save($super_attribute);
+                $copiedProduct->super_attributes()->save($super_attribute->replicate());
             }
         }
 
         if (! isset($attributesToSkip['bundle_options'])) {
             foreach ($originalProduct->bundle_options as $bundle_option) {
-                $copiedProduct->bundle_options()->save($bundle_option);
+                $copiedProduct->bundle_options()->save($bundle_option->replicate());
             }
         }
 
