@@ -603,6 +603,8 @@ class ProductRepository extends Repository
 
         $attributesToSkip = config('products.skipAttributesOnCopy') ?? [];
 
+        $randomSuffix = substr(md5(microtime()), 0, 6);
+
         foreach ($originalProduct->attribute_values as $oldValue) {
             if (in_array($oldValue->attribute->code, $attributesToSkip)) {
                 continue;
@@ -611,13 +613,23 @@ class ProductRepository extends Repository
             $newValue = $oldValue->replicate();
 
             if ($oldValue->attribute_id === $attributeIds['name']) {
-                $newValue->text_value = __('admin::app.copy-of') . ' ' . $originalProduct->name;
-                $newProductFlat->name = __('admin::app.copy-of') . ' ' . $originalProduct->name;
+                $copiedName = sprintf('%s %s (%s)',
+                    trans('admin::app.copy-of'),
+                    $originalProduct->name,
+                    $randomSuffix
+                );
+                $newValue->text_value = $copiedName;
+                $newProductFlat->name = $copiedName;
             }
 
             if ($oldValue->attribute_id === $attributeIds['url_key']) {
-                $newValue->text_value = __('admin::app.copy-of-slug') . '-' . $originalProduct->url_key;
-                $newProductFlat->url_key = __('admin::app.copy-of-slug') . '-' . $originalProduct->url_key;
+                $copiedSlug = sprintf('%s-%s-%s',
+                    trans('admin::app.copy-of'),
+                    $originalProduct->url_key,
+                    $randomSuffix
+                );
+                $newValue->text_value = __('admin::app.copy-of-slug') . '-' . $originalProduct->url_key . '-' . $randomSuffix;
+                $newProductFlat->url_key = __('admin::app.copy-of-slug') . '-' . $originalProduct->url_key . '-' . $randomSuffix;
             }
 
             if ($oldValue->attribute_id === $attributeIds['sku']) {

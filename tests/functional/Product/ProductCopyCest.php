@@ -37,18 +37,18 @@ class ProductCopyCest
             'attribute_family_id' => $original->attribute_family_id,
         ]);
 
-        $I->seeRecord(ProductAttributeValue::class, [
+        $attr = $I->grabRecord(ProductAttributeValue::class, [
             'attribute_id' => 2,
             'product_id'   => $copiedProduct->id,
-            'text_value'   => 'Copy of ' . $originalName,
         ]);
+        $I->assertStringStartsWith('Copy of ' . $originalName, $attr->text_value);
 
         // url_key
-        $I->seeRecord(ProductAttributeValue::class, [
+        $attr = $I->grabRecord(ProductAttributeValue::class, [
             'attribute_id' => 3,
             'product_id'   => $copiedProduct->id,
-            'text_value'   => 'copy-of-' . $original->url_key,
         ]);
+        $I->assertStringStartsWith('copy-of-' . $original->url_key, $attr->text_value);
 
         // sku
         $I->seeRecord(ProductAttributeValue::class, [
@@ -74,10 +74,10 @@ class ProductCopyCest
             'qty'        => 10,
         ]);
 
-        $I->seeRecord(ProductFlat::class, [
+        $flat = $I->grabRecord(ProductFlat::class, [
             'product_id' => $copiedProduct->id,
-            'name'       => 'Copy of ' . $originalName,
         ]);
+        $I->assertStringStartsWith('Copy of ' . $originalName, $flat->name);
 
         $I->assertCount($count + 1, Product::all());
 
