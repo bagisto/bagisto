@@ -91,8 +91,8 @@
         }
 
         .address-button {
-            z-index: 1;
             position: absolute;
+            z-index: 1 !important;
             margin-top: 110px !important;
         }
     </style>
