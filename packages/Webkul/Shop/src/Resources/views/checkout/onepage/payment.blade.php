@@ -14,15 +14,14 @@
 
                     <div class="checkout-method-group mb-20">
                         <div class="line-one">
-                            <label class="radio-container" style="width:120%">
+                            <label class="radio-container">
                                 <input v-validate="'required'" type="radio" id="{{ $payment['method'] }}" name="payment[method]" value="{{ $payment['method'] }}" v-model="payment.method" @change="methodSelected()" data-vv-as="&quot;{{ __('shop::app.checkout.onepage.payment-method') }}&quot;">
 
-                                <span class="checkmark payment"></span>
-
-                                <span class="payment-method method-label">
-                                    <b>{{ $payment['method_title'] }}</b>
-                                </span>
+                                <span class="checkmark"></span>
                             </label>
+                            <span class="payment-method method-label">
+                                <b>{{ $payment['method_title'] }}</b>
+                            </span>
                         </div>
 
                         <div class="line-two mt-5">
