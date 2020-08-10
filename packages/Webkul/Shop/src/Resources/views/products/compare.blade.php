@@ -82,6 +82,9 @@
                                 this.$root.addFlashMessages()
                         }
                     }
+
+                    let comparedItems = JSON.parse(localStorage.getItem('compared_product'));
+                    $('#compare-items-count').html(comparedItems ? comparedItems.length : 0);
                 },
 
                 'getStorageValue': function (key) {

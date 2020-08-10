@@ -337,7 +337,7 @@
             });
 
             let comparedItems = JSON.parse(localStorage.getItem('compared_product'));
-            $('#compare-items-count').append(comparedItems.length);
+            $('#compare-items-count').html(comparedItems ? comparedItems.length : 0);
 
             function toggleDropdown(e) {
                 var currentElement = $(e.currentTarget);
