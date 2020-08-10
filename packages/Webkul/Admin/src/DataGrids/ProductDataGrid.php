@@ -31,10 +31,14 @@ class ProductDataGrid extends DataGrid
         /* locale */
         $this->locale = request()->get('locale') ?? 'all';
 
-        /* finding channel name */
+        /* channel */
         $this->channel = request()->get('channel') ?? 'all';
-        $this->channel = Channel::find($this->channel);
-        $this->channel = $this->channel ? $this->channel->code : 'all';
+
+        /* finding channel name */
+        if ($this->channel !== 'all') {
+            $this->channel = Channel::find($this->channel);
+            $this->channel = $this->channel ? $this->channel->code : 'all';
+        }
     }
 
     public function prepareQueryBuilder()
