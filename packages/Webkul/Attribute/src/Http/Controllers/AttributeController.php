@@ -159,8 +159,6 @@ class AttributeController extends Controller
                         $suppressFlash = true;
 
                         $this->attributeRepository->delete($value);
-                    } else {
-                        session()->flash('error', trans('admin::app.response.user-define-error', ['name' => 'Attribute']));
                     }
                 } catch (\Exception $e) {
                     report($e);
