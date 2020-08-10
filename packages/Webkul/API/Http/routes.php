@@ -75,7 +75,7 @@ Route::group(['prefix' => 'api'], function ($router) {
             'resource' => 'Webkul\API\Http\Resources\Catalog\ProductReview',
             'authorization_required' => true
         ]);
-        
+
 
         //Channel routes
         Route::get('channels', 'ResourceController@index')->defaults('_config', [
@@ -246,7 +246,6 @@ Route::group(['prefix' => 'api'], function ($router) {
 
         Route::get('wishlist/add/{id}', 'WishlistController@create');
 
-
         //Checkout routes
         Route::group(['prefix' => 'checkout'], function ($router) {
             Route::post('cart/add/{id}', 'CartController@store');
@@ -258,6 +257,10 @@ Route::group(['prefix' => 'api'], function ($router) {
             Route::put('cart/update', 'CartController@update');
 
             Route::get('cart/remove-item/{id}', 'CartController@destroyItem');
+
+            Route::post('cart/coupon', 'CartController@applyCoupon');
+
+            Route::delete('cart/coupon', 'CartController@removeCoupon');
 
             Route::get('cart/move-to-wishlist/{id}', 'CartController@moveToWishlist');
 
