@@ -662,7 +662,10 @@ class ProductRepository extends Repository
 
         if (! in_array('categories', $attributesToSkip)) {
             foreach ($originalProduct->categories as $category) {
-                $copiedProduct->categories()->save($category->replicate());
+                DB::table('product_categories')->insert([
+                    'product_id'  => $copiedProduct->id,
+                    'category_id' => $category->id,
+                ]);
             }
         }
 
