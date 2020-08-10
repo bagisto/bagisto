@@ -613,6 +613,7 @@ class ProductRepository extends Repository
 
             $newValue = $oldValue->replicate();
 
+            // change name of copied product
             if ($oldValue->attribute_id === $attributeIds['name']) {
                 $copyOf = trans('admin::app.copy-of');
                 $copiedName = sprintf('%s%s (%s)',
@@ -624,6 +625,7 @@ class ProductRepository extends Repository
                 $newProductFlat->name = $copiedName;
             }
 
+            // change url_key of copied product
             if ($oldValue->attribute_id === $attributeIds['url_key']) {
                 $copyOfSlug = trans('admin::app.copy-of-slug');
                 $copiedSlug = sprintf('%s%s-%s',
@@ -635,11 +637,13 @@ class ProductRepository extends Repository
                 $newProductFlat->url_key = $copiedSlug;
             }
 
+            // change sku of copied product
             if ($oldValue->attribute_id === $attributeIds['sku']) {
                 $newValue->text_value = $copiedProduct->sku;
                 $newProductFlat->sku = $copiedProduct->sku;
             }
 
+            // force the copied product to be inactive so the admin can adjust it before release
             if ($oldValue->attribute_id === $attributeIds['status']) {
                 $newValue->boolean_value = 0;
                 $newProductFlat->status = 0;
@@ -689,19 +693,13 @@ class ProductRepository extends Repository
 
         if (! in_array('super_attributes', $attributesToSkip)) {
             foreach ($originalProduct->super_attributes as $super_attribute) {
-                $copiedProduct->super_attributes()->save($super_attribute->replicate());
+                $copiedProduct->super_attributes()->save($super_attribute);
             }
         }
 
         if (! in_array('bundle_options', $attributesToSkip)) {
             foreach ($originalProduct->bundle_options as $bundle_option) {
                 $copiedProduct->bundle_options()->save($bundle_option->replicate());
-            }
-        }
-
-        if (! in_array('related_products', $attributesToSkip)) {
-            foreach ($originalProduct->related_products() as $related_product) {
-                $copiedProduct->related_products()->save($related_product->replicate());
             }
         }
 
