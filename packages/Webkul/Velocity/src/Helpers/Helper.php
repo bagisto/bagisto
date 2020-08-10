@@ -385,7 +385,7 @@ class Helper extends Review
 
                     $productMetaDetails = [];
                     $productMetaDetails['slug'] = $product->url_key;
-                    $productMetaDetails['image'] = $formattedProduct['image'];
+                    $productMetaDetails['product_image'] = $formattedProduct['image'];
                     $productMetaDetails['priceHTML'] = $formattedProduct['priceHTML'];
                     $productMetaDetails['new'] = $formattedProduct['new'];
                     $productMetaDetails['addToCartHtml'] = $formattedProduct['addToCartHtml'];
