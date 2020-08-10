@@ -4,7 +4,7 @@
 
     $locale = request()->get('locale') ?: app()->getLocale();
     
-    $attributeOptionTranslations = DB::table(DB::getTablePrefix() . 'attribute_option_translations')->where('locale', $locale)->get()->toJson();
+    $attributeOptionTranslations = DB::table('attribute_option_translations')->where('locale', $locale)->get()->toJson();
 @endphp
 
 @push('scripts')
