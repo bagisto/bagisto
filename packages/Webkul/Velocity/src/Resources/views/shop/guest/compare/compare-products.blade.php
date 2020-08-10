@@ -1,6 +1,10 @@
 @php
     $attributeRepository = app('\Webkul\Attribute\Repositories\AttributeRepository');
     $comparableAttributes = $attributeRepository->findByField('is_comparable', 1);
+
+    $locale = request()->get('locale') ?: app()->getLocale();
+    
+    $attributeOptionTranslations = DB::table(DB::getTablePrefix() . 'attribute_option_translations')->where('locale', $locale)->get()->toJson();
 @endphp
 
 @push('css')
@@ -116,7 +120,17 @@
                                                     <span v-text="product.product['{{ $attribute['code'] }}'].substr(product.product['{{ $attribute['code'] }}'].lastIndexOf('/') + 1)"  class="fs16"></span>
                                                     <i class='material-icons'>arrow_downward</i>
                                                 </a>
-                                                <a v-else class="fs16">__</span>
+                                                <span v-else class="fs16">__</span>
+                                                @break;
+
+                                            @case('checkbox')
+                                                <span v-if="product.product['{{ $attribute['code'] }}']" v-html="getAttributeOptions(product['{{ $attribute['code'] }}'] ? product : product.product['{{ $attribute['code'] }}'] ? product.product : null, '{{ $attribute['code'] }}', 'multiple')" class="fs16"></span>
+                                                <span v-else class="fs16">__</span>
+                                                @break;
+
+                                            @case('select')
+                                                <span v-if="product.product['{{ $attribute['code'] }}']" v-html="getAttributeOptions(product['{{ $attribute['code'] }}'] ? product : product.product['{{ $attribute['code'] }}'] ? product.product : null, '{{ $attribute['code'] }}', 'single')" class="fs16"></span>
+                                                <span v-else class="fs16">__</span>
                                                 @break;
                                             @default
                                                 <span v-html="product['{{ $attribute['code'] }}'] ? product['{{ $attribute['code'] }}'] : product.product['{{ $attribute['code'] }}'] ? product.product['{{ $attribute['code'] }}'] : '__'" class="fs16"></span>
@@ -148,6 +162,7 @@
                 return {
                     'products': [],
                     'isProductListLoaded': false,
+                    'attributeOptions': JSON.parse(@json($attributeOptionTranslations)),
                     'isCustomer': '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == "true",
                 }
             },
@@ -238,6 +253,42 @@
 
                     this.$root.headerItemsCount++;
                 },
+
+                'getAttributeOptions': function (productDetails, attributeValues, type) {
+                    var attributeOptions = '__';
+
+                    if (productDetails && attributeValues) {
+                        var attributeItems;
+
+                        if (type == "multiple") {
+                            attributeItems = productDetails[attributeValues].split(',');
+                        } else if (type == "single") {
+                            attributeItems = productDetails[attributeValues];
+                        }
+
+                        attributeOptions = this.attributeOptions.filter(option => {
+                            if (type == "multiple") {
+                                if (attributeItems.indexOf(option.attribute_option_id.toString()) > -1) {
+                                    return true;
+                                }
+                            } else if (type == "single") {
+                                if (attributeItems == option.attribute_option_id.toString()) {
+                                    return true;
+                                }
+                            }
+
+                            return false;
+                        });
+
+                        attributeOptions = attributeOptions.map(option => {
+                            return option.label;
+                        });
+
+                        attributeOptions = attributeOptions.join(', ');
+                    }
+
+                    return attributeOptions;
+                }
             }
         });
     </script>
