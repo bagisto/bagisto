@@ -74,6 +74,11 @@ class ProductCopyCest
             'qty'        => 10,
         ]);
 
+        $I->seeRecord('product_relations', [
+            'parent_id' => $original->id,
+            'child_id'  => $copiedProduct->id,
+        ]);
+
         $flat = $I->grabRecord(ProductFlat::class, [
             'product_id' => $copiedProduct->id,
         ]);

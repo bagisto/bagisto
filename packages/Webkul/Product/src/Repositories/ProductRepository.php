@@ -703,5 +703,12 @@ class ProductRepository extends Repository
                 $variant->save();
             }
         }
+
+        if (config('products.linkProductsOnCopy')) {
+            DB::table('product_relations')->insert([
+                'parent_id' => $originalProduct->id,
+                'child_id'  => $copiedProduct->id,
+            ]);
+        }
     }
 }
