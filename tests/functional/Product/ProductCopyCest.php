@@ -12,6 +12,36 @@ use Webkul\Product\Models\ProductAttributeValue;
 class ProductCopyCest
 {
 
+    public function testSkipAttributes(FunctionalTester $I)
+    {
+        $I->loginAsAdmin();
+
+        config(['products.skipAttributesOnCopy' => ['name', 'inventories']]);
+
+        $original = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT, [
+            'productInventory' => [
+                'qty' => 10,
+            ],
+            'attributeValues'  => [
+                'name' => 'Original',
+            ],
+        ]);
+
+        $I->amOnAdminRoute('admin.catalog.products.copy', ['id' => $original->id], false);
+
+        // test attribute is skipped:
+        $attr = $I->dontSeeRecord(ProductAttributeValue::class, [
+            'attribute_id' => 2, // name
+            'product_id'   => $original->id + 1,
+        ]);
+
+        // test relation is skipped:
+        $I->dontSeeRecord(ProductInventory::class, [
+            'product_id' => $original->id + 1,
+            'qty'        => 10,
+        ]);
+    }
+
     public function testProductCopy(FunctionalTester $I)
     {
         $I->loginAsAdmin();

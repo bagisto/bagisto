@@ -660,43 +660,43 @@ class ProductRepository extends Repository
     {
         $attributesToSkip = config('products.skipAttributesOnCopy') ?? [];
 
-        if (! isset($attributesToSkip['categories'])) {
+        if (! in_array('categories', $attributesToSkip)) {
             foreach ($originalProduct->categories as $category) {
                 $copiedProduct->categories()->save($category->replicate());
             }
         }
 
-        if (! isset($attributesToSkip['inventories'])) {
+        if (! in_array('inventories', $attributesToSkip)) {
             foreach ($originalProduct->inventories as $inventory) {
                 $copiedProduct->inventories()->save($inventory->replicate());
             }
         }
 
-        if (! isset($attributesToSkip['customer_group_prices'])) {
+        if (! in_array('customer_group_pricces', $attributesToSkip)) {
             foreach ($originalProduct->customer_group_prices as $customer_group_price) {
                 $copiedProduct->customer_group_prices()->save($customer_group_price->replicate());
             }
         }
 
-        if (! isset($attributesToSkip['images'])) {
+        if (! in_array('images', $attributesToSkip)) {
             foreach ($originalProduct->images as $image) {
                 $copiedProduct->images()->save($image->replicate());
             }
         }
 
-        if (! isset($attributesToSkip['super_attributes'])) {
+        if (! in_array('super_attributes', $attributesToSkip)) {
             foreach ($originalProduct->super_attributes as $super_attribute) {
                 $copiedProduct->super_attributes()->save($super_attribute->replicate());
             }
         }
 
-        if (! isset($attributesToSkip['bundle_options'])) {
+        if (! in_array('bundle_options', $attributesToSkip)) {
             foreach ($originalProduct->bundle_options as $bundle_option) {
                 $copiedProduct->bundle_options()->save($bundle_option->replicate());
             }
         }
 
-        if (! isset($attributesToSkip['variants'])) {
+        if (! in_array('variants', $attributesToSkip)) {
             foreach ($originalProduct->variants as $variant) {
                 $variant = $this->copy($variant);
                 $variant->parent_id = $copiedProduct->id;
