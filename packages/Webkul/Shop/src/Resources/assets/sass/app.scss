@@ -815,7 +815,7 @@ section.slider-block {
                         img {
                             display: none;
                         }
-
+                        
                         input {
                             display: none;
                         }
@@ -3648,8 +3648,6 @@ section.review {
             height: 130px;
             float: right;
             border-collapse: collapse;
-            left: 3px;
-            position: relative;
 
             tr {
 
@@ -4282,15 +4280,11 @@ section.review {
     }
 
     .checkbox {
-            margin: 10px 0 0px 0px;
+        margin: 10px 0px 5px 5px;
+    }
 
-        .checkbox-view {
-                height: 16px !important;
-                width: 16px !important;
-                float: left;
-                margin-right: 135px!important;
-                position: absolute;
-        }
+    span.checkmark.payment {
+        left: 163px;
     }
 
     .radio {
@@ -4305,10 +4299,6 @@ section.review {
             right: 0;
             left: auto;
         }
-    }
-
-    span.checkmark.checkbox-icon {
-        right: 150px;
     }
 
     @media only screen and (max-width: 770px) {
@@ -4580,52 +4570,4 @@ section.review {
             }
         }
     }
-}
-
-//compare page
-body {
-    overflow-x: hidden;
-}
-
-.comparison-component {
-    width: 100%;
-    padding-top: 20px;
-}
-
-.comparison-component > h1 {
-    display: inline-block;
-}
-
-td {
-    padding: 15px;
-    min-width: 25px;
-    max-width: 250px;
-    line-height: 30px;
-    vertical-align: top;
-    word-break: break-word;
-}
-
-.icon.remove-product {
-    top: 5px;
-    float: right;
-    cursor: pointer;
-    position: relative;
-    background-color: black;
-}
-
-.action > div {
-    display: inline-block;
-}
-.cart-wish-wrap .btn.btn-lg {
-    padding: 5px 10px;
-}
-.cart-wish-wrap {
-    display: flex;
-}
-.white-cross-sm-icon {
-    width: 24px;
-    height:24px;
-}
-.add-to-wishlist {
-    margin-left: 15px;
 }
