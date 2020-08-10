@@ -699,6 +699,12 @@ class ProductRepository extends Repository
             }
         }
 
+        if (! in_array('related_products', $attributesToSkip)) {
+            foreach ($originalProduct->related_products() as $related_product) {
+                $copiedProduct->related_products()->save($related_product->replicate());
+            }
+        }
+
         if (! in_array('variants', $attributesToSkip)) {
             foreach ($originalProduct->variants as $variant) {
                 $variant = $this->copy($variant);
