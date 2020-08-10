@@ -4281,8 +4281,18 @@ section.review {
         }
     }
 
+   
+
     .checkbox {
-        margin: 10px 0px 5px 5px;
+            margin: 10px 0 0px 0px;
+
+        .checkbox-view {
+                height: 16px !important;
+                width: 16px !important;
+                float: left;
+                margin-right: 135px!important;
+                position: absolute;
+        }
     }
 
     .radio {
@@ -4298,6 +4308,13 @@ section.review {
             left: auto;
         }
     }
+
+   
+    span.checkmark.checkbox-icon {
+        right: 150px;
+    }
+
+
 
     @media only screen and (max-width: 770px) {
         .checkout-process .col-main {
