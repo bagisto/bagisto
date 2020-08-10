@@ -1672,7 +1672,7 @@
     left: 8px;
     border: none;
     color: white;
-    display: block;
+    display: none;
     font-size: 14px;
     font-weight: 600;
     padding: 2px 10px;
@@ -1686,6 +1686,7 @@
 
     &.new {
         background-color: $theme-color;
+        display: block;
     }
 }
 

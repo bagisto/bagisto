@@ -25,13 +25,13 @@
                         $comparableAttributes = $comparableAttributes->toArray();
 
                         array_splice($comparableAttributes, 1, 0, [[
-                            'code' => 'image',
-                            'admin_name' => 'Product Image'
+                            'admin_name' => 'Product Image',
+                            'type' => 'product_image'
                         ]]);
 
                         array_splice($comparableAttributes, 2, 0, [[
-                            'code' => 'addToCartHtml',
-                            'admin_name' => 'Actions'
+                            'admin_name' => 'Actions',
+                            'type' => 'action'
                         ]]);
                     @endphp
 
@@ -42,27 +42,59 @@
                             </td>
 
                             <td :key="`title-${index}`" v-for="(product, index) in products">
-                                @switch ($attribute['code'])
-                                    @case('name')
+                                @switch ($attribute['type'])
+                                    @case('text')
                                         <a :href="`${baseUrl}/${product.url_key}`" class="unset remove-decoration active-hover">
                                             <h3 class="fw6 fs18" v-text="product['{{ $attribute['code'] }}']"></h3>
                                         </a>
+                                        @break;
+
+                                    @case('textarea')
+                                        <span v-html="product.product['{{ $attribute['code'] }}']"></span>
+                                        @break;
+    
+                                    @case('price')
+                                        <span v-html="product.product['{{ $attribute['code'] }}']"></span>
+                                        @break;
+
+                                    @case('boolean')
+                                        <span
+                                            v-text="product.product['{{ $attribute['code'] }}']
+                                                    ? '{{ __('velocity::app.shop.general.yes') }}'
+                                                    : '{{ __('velocity::app.shop.general.no') }}'"
+                                        ></span>
+                                        @break;
+                                    
+                                    @case('select')
+                                        <span v-html="product.product['{{ $attribute['code'] }}']" class="fs16"></span>
+                                        @break;
+
+                                    @case('multiselect')
+                                        <span v-html="product.product['{{ $attribute['code'] }}']" class="fs16"></span>
                                         @break
 
+                                    @case('file')
+                                        <a v-if="product.product['{{ $attribute['code'] }}']" :href="`${baseUrl}/storage/${product.product['{{ $attribute['code'] }}']}`">
+                                            <span v-text="product.product['{{ $attribute['code'] }}'].substr(product.product['{{ $attribute['code'] }}'].lastIndexOf('/') + 1)"  class="fs16"></span>
+                                            <i class='icon sort-down-icon download'></i>
+                                        </a>
+                                        <span v-else class="fs16">__</span>
+                                        @break;
+                                        
                                     @case('image')
+                                        <img v-if="product.product['{{ $attribute['code'] }}']" :src="`${baseUrl}/storage/${product.product['{{ $attribute['code'] }}']}`">
+                                        @break;
+                                    
+                                    @case('product_image')
                                         <a :href="`${baseUrl}/${product.url_key}`" class="unset">
                                             <img
                                                 class="image-wrapper"
-                                                :src="product['{{ $attribute['code'] }}']"
+                                                :src="product['product_image']"
                                                 :onerror="`this.src='${baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
                                         </a>
-                                        @break
+                                    @break
 
-                                    @case('price')
-                                        <span v-html="product['priceHTML']"></span>
-                                        @break
-
-                                    @case('addToCartHtml')
+                                    @case('action')
                                         <div class="action">
                                             <div v-html="product.defaultAddToCart"></div>
 
@@ -105,7 +137,7 @@
 
                                         @break
 
-                                @endswitch
+                                @endswitch   
                             </td>
                         </tr>
                     @endforeach

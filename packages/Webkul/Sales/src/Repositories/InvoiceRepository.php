@@ -254,7 +254,7 @@ class InvoiceRepository extends Repository
         return $invoice;
     }
 
-    /**
+    /*
      * @param \Webkul\Sales\Contracts\Invoice $invoice
      * @return void
      */
