@@ -28,17 +28,17 @@ class ProductDataGrid extends DataGrid
     {
         parent::__construct();
 
+        /* locale */
         $this->locale = request()->get('locale') ?? 'all';
 
+        /* finding channel name */
         $this->channel = request()->get('channel') ?? 'all';
+        $this->channel = Channel::find($this->channel);
+        $this->channel = $this->channel ? $this->channel->code : 'all';
     }
 
     public function prepareQueryBuilder()
     {
-        /* finding channel name */
-        $this->channel = Channel::find($this->channel);
-        $this->channel = $this->channel ? $this->channel->code : 'all';
-
         /* query builder */
         $queryBuilder = DB::table('product_flat')
             ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
