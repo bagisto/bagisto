@@ -23,5 +23,15 @@ return [
             'name' => 'Velocity',
             'parent' => 'default'
         ],
+    ],
+
+    'admin-default' => 'default',
+
+    'admin-themes' => [
+        'default' => [
+            'views_path' => 'resources/admin-themes/default/views',
+            'assets_path' => 'public/admin-themes/default/assets',
+            'name' => 'Default'
+        ]
     ]
 ];
