@@ -51,7 +51,7 @@ class ProductDataGrid extends DataGrid
             ->select(
                 'product_flat.locale',
                 'product_flat.channel',
-                'product_flat.product_id',
+                'product_flat.product_id as product_id',
                 'products.sku as product_sku',
                 'product_flat.name as product_name',
                 'products.type as product_type',
@@ -61,9 +61,17 @@ class ProductDataGrid extends DataGrid
                 DB::raw('SUM(DISTINCT ' . DB::getTablePrefix() . 'product_inventories.qty) as quantity')
             );
 
-        $queryBuilder->groupBy('product_flat.product_id', 'product_flat.locale', 'product_flat.channel');
-        $queryBuilder->where('locale', $this->locale !== 'all' ? $this->locale : 'en');
-        $queryBuilder->where('channel', $this->channel !== 'all' ? $this->channel : 'default');
+        if ($this->locale !== 'all') {
+            $queryBuilder->where('product_flat.locale', $this->locale);
+        }
+
+        if ($this->channel !== 'all') {
+            $queryBuilder->where('product_flat.channel', $this->channel);
+        }
+
+        $queryBuilder->groupBy('product_flat.product_id');
+        $queryBuilder->having('locale', $this->locale !== 'all' ? $this->locale : 'en');
+        $queryBuilder->having('channel', $this->channel !== 'all' ? $this->channel : 'default');
 
         $this->addFilter('product_id', 'product_flat.product_id');
         $this->addFilter('product_name', 'product_flat.name');
