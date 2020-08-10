@@ -92,6 +92,16 @@ return [
     ],
 
     'customer' => [
+        'compare'           => [
+            'text'                  => 'Porównaj',
+            'compare_similar_items' => 'Porównaj podobne przedmioty',
+            'add-tooltip'           => 'Dodaj produkt do listy porównawczej',
+            'added'                 => 'Produkt został pomyślnie dodany do listy porównania',
+            'already_added'         => 'Produkt został już dodany do listy porównawczej',
+            'removed'               => 'Produkt został pomyślnie usunięty z listy porównawcze',
+            'empty-text'            => 'Nie masz żadnych pozycji na liście porównawczej',
+        ],
+
         'signup-text' => [
             'account_exists' => 'Posiadasz już konto',
             'title' => 'Zaloguj się'
@@ -329,6 +339,8 @@ return [
                 'error' => 'Nie można dodać produktu do listy wyboru z powodu nieznanych problemów, sprawdź później',
                 'add' => 'Produkt został pomyślnie dodany do listy wyboru',
                 'remove' => 'Produkt został pomyślnie usunięty z listy wyboru',
+                'add-wishlist-text'     => 'Dodaj produkt do listy wyboru',
+                'remove-wishlist-text'  => 'Usuń produkt z listy wyboru',
                 'moved' => 'Produkt pomyślnie przeniesiono do koszyka',
                 'option-missing' => 'Brak opcji produktu, więc produktu nie można dodać na listę wyboru.',
                 'move-error' => ' „Nie można dodać produktu do listy wyboru. Spróbuj ponownie później',
@@ -577,6 +589,15 @@ return [
             'final-summary' => 'TDziękujemy za zainteresowanie naszym sklepem, a po podsumowaniu wyślemy ci numer śledzenia',
             'help' => 'Jeśli potrzebujesz jakiejkolwiek pomocy, skontaktuj się z nami pod adresem :support_email',
             'thanks' => 'Dzięki!',
+
+            'comment' => [
+                'subject' => 'Dodano nowy komentarz do Twojego zamówienia #:order_id',
+                'dear' => 'Drogi :customer_name',
+                'final-summary' => 'Dziękujemy za zainteresowanie naszym sklepem',
+                'help' => 'Jeśli potrzebujesz pomocy, skontaktuj się z nami pod adresem :support_email',
+                'thanks' => 'Dzięki!',
+            ],
+
             'cancel' => [
                 'subject' => 'Potwierdź anulowanie zamówienia',
                 'heading' => 'Zamówienie anulowane',
@@ -630,6 +651,13 @@ return [
             'info' => 'Otrzymujesz tego e-maila, ponieważ otrzymaliśmy prośbę o zresetowanie hasła do Twojego konta',
             'reset-password' => 'Zresetuj hasło',
             'final-summary' => 'Jeśli nie zażądałeś resetowania hasła, nie musisz podejmować żadnych dalszych działań',
+            'thanks' => 'Dzięki!'
+        ],
+
+        'update-password' => [
+            'subject' => 'Hasło zaktualizowane',
+            'dear' => 'Drogi/a :name',
+            'info' => 'Otrzymujesz tę wiadomość e-mail, ponieważ zaktualizowałeś swoje hasło.',
             'thanks' => 'Dzięki!'
         ],
 

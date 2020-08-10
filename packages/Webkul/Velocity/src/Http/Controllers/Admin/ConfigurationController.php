@@ -116,7 +116,7 @@ class ConfigurationController extends Controller
         // update row
         $product = $this->velocityMetaDataRepository->update($params, $id);
 
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Velocity Theme']));
+        session()->flash('success', trans('admin::app.response.update-success', ['name' => trans('velocity::app.admin.meta-data.title')]));
 
         return redirect()->route($this->_config['redirect'], ['locale' => $this->locale]);
     }

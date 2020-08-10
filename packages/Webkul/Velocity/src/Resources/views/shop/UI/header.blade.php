@@ -19,7 +19,7 @@
                                             {{ __('velocity::app.responsive.header.greeting', ['customer' => auth()->guard('customer')->user()->first_name]) }}
                                         </a>
                                     @endauth
-                                    
+
                                     <i
                                         @click="closeDrawer()"
                                         class="material-icons pull-right text-dark">
@@ -175,6 +175,16 @@
                                         </a>
                                     @endguest
                                 </li>
+                                
+                                <li>
+                                    @guest('customer')
+                                        <a
+                                            class="unset"
+                                            href="{{ route('customer.register.index') }}">
+                                            <span>{{ __('shop::app.header.sign-up') }}</span>
+                                        </a>
+                                    @endguest
+                                </li>
                             </ul>
                         </div>
 
@@ -251,11 +261,20 @@
                                                 href="?locale={{ $locale->code }}"
                                             @endif>
 
-                                            <div class="category-logo">
-                                                <img
+                                            @if( $locale->code == 'en')
+                                                <div class="category-logo">
+                                                    <img
+                                                    class="category-icon"
+                                                    src="{{ asset('/themes/velocity/assets/images/flags/en.png') }}" />
+                                                </div>
+                                            @else
+
+                                                <div class="category-logo">
+                                                    <img
                                                     class="category-icon"
                                                     src="{{ asset('/storage/' . $locale->locale_image) }}" />
-                                            </div>
+                                                </div>
+                                            @endif
 
                                             <span>
                                                 {{ isset($serachQuery) ? $locale->title : $locale->name }}
@@ -484,7 +503,7 @@
 
                 toggleMetaInfo: function (metaKey) {
                     this.rootCategories = ! this.rootCategories;
-                    
+
                     this[metaKey] = !this[metaKey];
                 },
 
@@ -523,7 +542,7 @@
                         console.log(this.__('error.something_went_wrong'));
                     });
                 },
-                
+
                 formatCategories: function (categories) {
                     let slicedCategories = categories;
                     let categoryCount = this.categoryCount ? this.categoryCount : 9;

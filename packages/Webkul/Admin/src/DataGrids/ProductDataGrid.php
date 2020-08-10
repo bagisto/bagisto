@@ -4,6 +4,7 @@ namespace Webkul\Admin\DataGrids;
 
 use Webkul\Ui\DataGrid\DataGrid;
 use Illuminate\Support\Facades\DB;
+use Webkul\Core\Models\Channel;
 
 class ProductDataGrid extends DataGrid
 {
@@ -17,23 +18,40 @@ class ProductDataGrid extends DataGrid
 
     protected $channel = 'all';
 
+    /** @var string[] contains the keys for which extra filters to render */
+    protected $extraFilters = [
+        'channels',
+        'locales',
+    ];
+
     public function __construct()
     {
         parent::__construct();
 
+        /* locale */
         $this->locale = request()->get('locale') ?? 'all';
 
+        /* channel */
         $this->channel = request()->get('channel') ?? 'all';
+
+        /* finding channel name */
+        if ($this->channel !== 'all') {
+            $this->channel = Channel::find($this->channel);
+            $this->channel = $this->channel ? $this->channel->code : 'all';
+        }
     }
 
     public function prepareQueryBuilder()
     {
+        /* query builder */
         $queryBuilder = DB::table('product_flat')
             ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
             ->leftJoin('attribute_families', 'products.attribute_family_id', '=', 'attribute_families.id')
             ->leftJoin('product_inventories', 'product_flat.product_id', '=', 'product_inventories.product_id')
             ->select(
-                'product_flat.product_id as product_id',
+                'product_flat.locale',
+                'product_flat.channel',
+                'product_flat.product_id',
                 'products.sku as product_sku',
                 'product_flat.name as product_name',
                 'products.type as product_type',
@@ -43,19 +61,9 @@ class ProductDataGrid extends DataGrid
                 DB::raw('SUM(DISTINCT ' . DB::getTablePrefix() . 'product_inventories.qty) as quantity')
             );
 
-        if ($this->locale !== 'all') {
-            $queryBuilder->where('locale', $this->locale);
-        }
-
-        if ($this->channel !== 'all') {
-            $queryBuilder->where('channel', $this->channel);
-        }
-
-        if ($currentLocale = app()->getLocale()) {
-            $queryBuilder->where('product_flat.locale', $currentLocale);
-        }
-
-        $queryBuilder->groupBy('product_flat.product_id');
+        $queryBuilder->groupBy('product_flat.product_id', 'product_flat.locale', 'product_flat.channel');
+        $queryBuilder->where('locale', $this->locale !== 'all' ? $this->locale : 'en');
+        $queryBuilder->where('channel', $this->channel !== 'all' ? $this->channel : 'default');
 
         $this->addFilter('product_id', 'product_flat.product_id');
         $this->addFilter('product_name', 'product_flat.name');

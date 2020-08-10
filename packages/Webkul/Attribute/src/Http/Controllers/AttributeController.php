@@ -159,8 +159,6 @@ class AttributeController extends Controller
                         $suppressFlash = true;
 
                         $this->attributeRepository->delete($value);
-                    } else {
-                        session()->flash('error', trans('admin::app.response.user-define-error', ['name' => 'Attribute']));
                     }
                 } catch (\Exception $e) {
                     report($e);
@@ -174,7 +172,7 @@ class AttributeController extends Controller
             if ($suppressFlash) {
                 session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'attributes']));
             } else {
-                session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'attributes']));
+                session()->flash('error', trans('admin::app.response.user-define-error', ['name' => 'Attribute']));
             }
 
             return redirect()->back();
