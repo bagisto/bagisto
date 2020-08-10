@@ -25,25 +25,25 @@
             <div class="page-action">
                 {!! view_render_event('sales.order.page_action.before', ['order' => $order]) !!}
 
-                @if ($order->canCancel())
+                @if ($order->canCancel() && $order->customer)
                     <a href="{{ route('admin.sales.orders.cancel', $order->id) }}" class="btn btn-lg btn-primary" v-alert:message="'{{ __('admin::app.sales.orders.cancel-confirm-msg') }}'">
                         {{ __('admin::app.sales.orders.cancel-btn-title') }}
                     </a>
                 @endif
 
-                @if ($order->canInvoice())
+                @if ($order->canInvoice() && $order->customer)
                     <a href="{{ route('admin.sales.invoices.create', $order->id) }}" class="btn btn-lg btn-primary">
                         {{ __('admin::app.sales.orders.invoice-btn-title') }}
                     </a>
                 @endif
 
-                @if ($order->canRefund())
+                @if ($order->canRefund() && $order->customer)
                     <a href="{{ route('admin.sales.refunds.create', $order->id) }}" class="btn btn-lg btn-primary">
                         {{ __('admin::app.sales.orders.refund-btn-title') }}
                     </a>
                 @endif
 
-                @if ($order->canShip())
+                @if ($order->canShip() && $order->customer)
                     <a href="{{ route('admin.sales.shipments.create', $order->id) }}" class="btn btn-lg btn-primary">
                         {{ __('admin::app.sales.orders.shipment-btn-title') }}
                     </a>
