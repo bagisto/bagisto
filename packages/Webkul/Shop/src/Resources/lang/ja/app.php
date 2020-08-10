@@ -89,6 +89,18 @@ return [
     ],
 
     'customer' => [
+        'compare'           => [
+            'text'                  => '比較する',
+            'compare_similar_items' => '類似アイテムを比較する',
+            'add-tooltip'           => '製品を追加して比較リスト',
+            'added'                 => 'アイテムを比較リストに追加しました',
+            'already_added'         => 'アイテムは比較リストに既に追加されています',
+            'removed'               => '比較リストからアイテムを削除しました',
+            'empty-text'            => "比較リストにアイテムがありません",
+            'product_image'         => 'Product Image',
+            'actions'               => 'Actions',
+        ],
+
         'signup-text' => [
             'account_exists' => '既に登録されております',
             'title' => 'アカウント登録'
@@ -308,6 +320,8 @@ return [
                 'error' => 'アイテムのお気に入り追加に失敗しました。しばらくしてから再度お試し下さい。',
                 'add' => 'アイテムをお気に入りに追加',
                 'remove' => 'アイテムをお気に入りから削除',
+                'add-wishlist-text'     => '製品をウィッシュリストに追加',
+                'remove-wishlist-text'  => 'ウィッシュリストから商品を削除',
                 'moved' => 'アイテムをカートへ移動しました',
                 'move-error' => 'アイテムのお気に入り追加に失敗しました。しばらくしてから再度お試し下さい。',
                 'success' => 'アイテムをお気に入りに追加しました',

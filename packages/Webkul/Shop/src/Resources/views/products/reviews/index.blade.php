@@ -55,16 +55,20 @@
                         </span>
 
                         <span class="stars">
-                            @for ($i = 1; $i <= $reviewHelper->getAverageRating($product); $i++)
+                            @for ($i = 1; $i <= 5; $i++)
 
+                              @if($i <= round($reviewHelper->getAverageRating($product)))
                                 <span class="icon star-icon"></span>
+                              @else
+                                <span class="icon star-icon-blank"></span>
+                              @endif
 
                             @endfor
                         </span>
 
                         <div class="total-reviews mt-5">
                             {{ __('shop::app.reviews.ratingreviews', [
-                                'rating' => $reviewHelper->getTotalRating($product),
+                                'rating' => $reviewHelper->getAverageRating($product),
                                 'review' => $reviewHelper->getTotalReviews($product)])
                             }}
                         </div>
@@ -101,9 +105,13 @@
                                 </div>
 
                                 <span class="stars">
-                                    @for ($i = 1; $i <= $review->rating; $i++)
+                                    @for ($i = 1; $i <= 5; $i++)
 
+                                      @if($i <= $review->rating)
                                         <span class="icon star-icon"></span>
+                                      @else
+                                        <span class="icon star-icon-blank"></span>
+                                      @endif
 
                                     @endfor
                                 </span>

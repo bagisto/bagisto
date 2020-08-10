@@ -23,7 +23,7 @@
             navigation-enabled="hide"
             pagination-enabled="hide"
             id="upsell-products-carousel"
-            :slides-count="{{ sizeof($products) }}">
+            :slides-count="{{ $product->cross_sells()->count() }}">
             
             @foreach($products as $product)
                 @foreach ($product->cross_sells()->paginate(2) as $index => $crossSellProduct)
@@ -40,7 +40,7 @@
 
     <div class="carousel-products vc-small-screen">
         <carousel-component
-            :slides-count="{{ sizeof($products) }}"
+            :slides-count="{{ $product->cross_sells()->count() }}"
             slides-per-page="2"
             id="upsell-products-carousel"
             navigation-enabled="hide"

@@ -91,6 +91,18 @@ return [
     ],
 
     'customer' => [
+        'compare' => [
+            'text' => 'Compare',
+            'compare_similar_items' => 'Compare Similar Items',
+            'add-tooltip' => 'Voeg product toe aan vergelijkingslijst',
+            'added' => 'Item successfully added to compare list',
+            'already_added' => 'Item already added to compare list',
+            'removed' => 'Item successfully removed from compare list',
+            'empty-text' => "You don't have any items in your compare list",
+            'product_image' => 'Product Image',
+            'actions' => 'Actions',
+        ],
+
         'signup-text' => [
             'account_exists' => 'Heb je al een account?',
             'title' => 'Aanmelden'
@@ -333,6 +345,8 @@ return [
                 'error' => 'Kan product niet toevoegen aan verlanglijstje vanwege onbekende problemen, kom later terug',
                 'add' => 'Item succesvol toegevoegd aan verlanglijstje',
                 'remove' => 'Item succesvol verwijderd van verlanglijstje',
+                'add-wishlist-text' => 'Toevoegen aan verlanglijst',
+                'remove-wishlist-text' => 'Remove product from wishlist',
                 'moved' => 'Artikel succesvol verplaatst naar winkelwagen',
                 'option-missing' => 'Productopties ontbreken, dus item kan niet naar de verlanglijst worden verplaatst.',
                 'move-error' => 'Item kan niet naar de verlanglijst worden verplaatst. Probeer het later opnieuw',

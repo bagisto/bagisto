@@ -1,4 +1,4 @@
-@if (gettype($results) == 'object')
+@if ($results instanceof \Illuminate\Pagination\LengthAwarePaginator)
     <div class="pagination">
         {{ $results->links() }}
     </div>

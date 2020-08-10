@@ -4,6 +4,7 @@ namespace Webkul\Admin\DataGrids;
 
 use Webkul\Ui\DataGrid\DataGrid;
 use Illuminate\Support\Facades\DB;
+use Webkul\Core\Models\Channel;
 
 class ProductDataGrid extends DataGrid
 {
@@ -27,18 +28,29 @@ class ProductDataGrid extends DataGrid
     {
         parent::__construct();
 
+        /* locale */
         $this->locale = request()->get('locale') ?? 'all';
 
+        /* channel */
         $this->channel = request()->get('channel') ?? 'all';
+
+        /* finding channel name */
+        if ($this->channel !== 'all') {
+            $this->channel = Channel::find($this->channel);
+            $this->channel = $this->channel ? $this->channel->code : 'all';
+        }
     }
 
     public function prepareQueryBuilder()
     {
+        /* query builder */
         $queryBuilder = DB::table('product_flat')
             ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
             ->leftJoin('attribute_families', 'products.attribute_family_id', '=', 'attribute_families.id')
             ->leftJoin('product_inventories', 'product_flat.product_id', '=', 'product_inventories.product_id')
             ->select(
+                'product_flat.locale',
+                'product_flat.channel',
                 'product_flat.product_id as product_id',
                 'products.sku as product_sku',
                 'product_flat.name as product_name',
@@ -58,6 +70,8 @@ class ProductDataGrid extends DataGrid
         }
 
         $queryBuilder->groupBy('product_flat.product_id');
+        $queryBuilder->having('locale', $this->locale !== 'all' ? $this->locale : 'en');
+        $queryBuilder->having('channel', $this->channel !== 'all' ? $this->channel : 'default');
 
         $this->addFilter('product_id', 'product_flat.product_id');
         $this->addFilter('product_name', 'product_flat.name');
