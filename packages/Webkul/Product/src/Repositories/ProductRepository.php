@@ -481,8 +481,8 @@ class ProductRepository extends Repository
     {
         $this->fillOriginalProduct($originalProduct);
 
-        if ($originalProduct->type === 'booking') {
-            throw new Exception(trans('admin::app.response.booking-can-not-be-copied'));
+        if (! $originalProduct->getTypeInstance()->canBeCopied() === 'booking') {
+            throw new Exception(trans('admin::app.response.product-can-not-be-copied', ['type' => $originalProduct->type]));
         }
 
         DB::beginTransaction();

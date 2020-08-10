@@ -1218,7 +1218,7 @@ return [
             'being-used'                => 'Diese Ressource :name wird verwendet in :source',
             'product-copied'            => 'Das Produkt wurde kopiert',
             'error-while-copying'       => 'Fehler beim Kopieren des Produkts',
-            'booking-can-not-be-copied' => 'Booking Produkte können nicht kopiert werden.',
+            'product-can-not-be-copied' => 'Produkte vom Typ :type können nicht kopiert werden.',
             'cannot-delete-default'     => 'Der Standardkanal kann nicht gelöscht werden',
             'create-success'            => ':name erfolgreich erstellt.',
             'update-success'            => ':name erfolgreich aktualisiert.',

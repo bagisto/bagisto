@@ -10,5 +10,5 @@ return [
     ],
 
     // Make the original and source product 'related' via the 'product_relations' table
-    'linkProductsOnCopy'   => true,
+    'linkProductsOnCopy'   => false,
 ];

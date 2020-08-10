@@ -46,6 +46,9 @@ class ProductCopyCest
     {
         $I->loginAsAdmin();
 
+        // set this config value to true to make it testable. It defaults to false.
+        config(['products.linkProductsOnCopy' => true]);
+
         $originalName = $I->fake()->name;
 
         $original = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT, [
