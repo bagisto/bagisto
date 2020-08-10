@@ -21,7 +21,8 @@
                 <div class="page-header">
                     <div class="page-title">
                         <h1>
-                            <i class="icon angle-left-icon back-link" @click="redirectBack('{{ url('/admin/dashboard') }}')"></i>
+                        <i class="icon angle-left-icon back-link"
+                            onclick="history.length > 1 ? history.go(-1) : window.location = '{{ route('admin.dashboard.index') }}';"></i>
 
                             {{ __('admin::app.promotions.catalog-rules.add-title') }}
                         </h1>
@@ -56,7 +57,7 @@
 
                                 <div class="control-group">
                                     <label for="status">{{ __('admin::app.promotions.catalog-rules.status') }}</label>
-                                    
+
                                     <label class="switch">
                                         <input type="checkbox" id="status" name="status" value="1" {{ old('status') ? 'checked' : '' }}>
                                         <span class="slider round"></span>
@@ -345,7 +346,7 @@
 
                     attribute_type_indexes: {
                         'product': 0
-                    }, 
+                    },
 
                     condition_operators: {
                         'price': [{

@@ -12,12 +12,12 @@
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ route('admin.dashboard.index') }}';"></i>
 
                         {{ __('velocity::app.admin.category.add-title') }}
                     </h1>
                 </div>
-                
+
                 <div class="page-action">
                     <button type="submit" class="btn btn-lg btn-primary">
                         {{ __('velocity::app.admin.category.save-btn-title') }}
@@ -39,14 +39,14 @@
                                 <label for="category_id" class="required">
                                     {{ __('velocity::app.admin.category.select-category') }}
                                 </label>
-                                
+
                                 <select v-validate="'required'" class="control" id="category_id" name="category_id" data-vv-as="&quot;{{ __('velocity::app.admin.category.select-category') }}&quot;">
                                     <option value="">{{ __('velocity::app.admin.category.select') }}</option>
                                     @foreach ($categories as $category)
-                                        <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>    
+                                        <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
                                     @endforeach
                                 </select>
-                                
+
                                 <span class="control-error" v-if="errors.has('category_id')">@{{ errors.first('category_id') }}</span>
                             </div>
 
@@ -54,9 +54,9 @@
                                 <label for="icon" class="required">
                                     {{ __('velocity::app.admin.category.icon-class') }}
                                 </label>
-                                
+
                                 <input type="text" v-validate="'required'" class="control" id="icon" name="icon" data-vv-as="&quot;{{ __('velocity::app.admin.category.icon-class') }}&quot;" />
-                                
+
                                 <span class="control-error" v-if="errors.has('icon')">@{{ errors.first('icon') }}</span>
                             </div>
 
@@ -64,9 +64,9 @@
                                 <label for="tooltip">
                                     {{ __('velocity::app.admin.category.tooltip-content') }}
                                 </label>
-                                
+
                                 <textarea v-validate="'max:250'" class="control" id="tooltip" name="tooltip" data-vv-as="&quot;{{ __('velocity::app.admin.category.tooltip-content') }}&quot;"></textarea>
-                                
+
                                 <span class="control-error" v-if="errors.has('tooltip')">@{{ errors.first('tooltip') }}</span>
                             </div>
 
@@ -95,4 +95,3 @@
         </form>
     </div>
 @stop
-                        

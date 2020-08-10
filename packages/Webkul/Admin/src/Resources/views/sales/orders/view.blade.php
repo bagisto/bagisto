@@ -14,7 +14,7 @@
                 <h1>
                     {!! view_render_event('sales.order.title.before', ['order' => $order]) !!}
 
-                    <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                    <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ route('admin.dashboard.index') }}';"></i>
 
                     {{ __('admin::app.sales.orders.view-title', ['order_id' => $order->increment_id]) }}
 
@@ -157,37 +157,41 @@
                             </div>
                         </accordian>
 
-                        <accordian :title="'{{ __('admin::app.sales.orders.address') }}'" :active="true">
-                            <div slot="body">
+                        @if ($order->billing_address || $order->shipping_address)
+                            <accordian :title="'{{ __('admin::app.sales.orders.address') }}'" :active="true">
+                                <div slot="body">
 
-                                <div class="sale-section">
-                                    <div class="secton-title">
-                                        <span>{{ __('admin::app.sales.orders.billing-address') }}</span>
-                                    </div>
+                                    @if($order->billing_address)
+                                        <div class="sale-section">
+                                            <div class="secton-title">
+                                                <span>{{ __('admin::app.sales.orders.billing-address') }}</span>
+                                            </div>
 
-                                    <div class="section-content">
-                                        @include ('admin::sales.address', ['address' => $order->billing_address])
+                                            <div class="section-content">
+                                                @include ('admin::sales.address', ['address' => $order->billing_address])
 
-                                        {!! view_render_event('sales.order.billing_address.after', ['order' => $order]) !!}
-                                    </div>
+                                                {!! view_render_event('sales.order.billing_address.after', ['order' => $order]) !!}
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    @if ($order->shipping_address)
+                                        <div class="sale-section">
+                                            <div class="secton-title">
+                                                <span>{{ __('admin::app.sales.orders.shipping-address') }}</span>
+                                            </div>
+
+                                            <div class="section-content">
+                                                @include ('admin::sales.address', ['address' => $order->shipping_address])
+
+                                                {!! view_render_event('sales.order.shipping_address.after', ['order' => $order]) !!}
+                                            </div>
+                                        </div>
+                                    @endif
+
                                 </div>
-
-                                @if ($order->shipping_address)
-                                    <div class="sale-section">
-                                        <div class="secton-title">
-                                            <span>{{ __('admin::app.sales.orders.shipping-address') }}</span>
-                                        </div>
-
-                                        <div class="section-content">
-                                            @include ('admin::sales.address', ['address' => $order->shipping_address])
-
-                                            {!! view_render_event('sales.order.shipping_address.after', ['order' => $order]) !!}
-                                        </div>
-                                    </div>
-                                @endif
-
-                            </div>
-                        </accordian>
+                            </accordian>
+                        @endif
 
                         <accordian :title="'{{ __('admin::app.sales.orders.payment-and-shipping') }}'" :active="true">
                             <div slot="body">
@@ -470,7 +474,15 @@
                                         <td>{{ $invoice->created_at }}</td>
                                         <td>#{{ $invoice->order->increment_id }}</td>
                                         <td>{{ $invoice->address->name }}</td>
-                                        <td>{{ $invoice->status_label }}</td>
+                                        <td>
+                                            @if($invoice->state == "paid")
+                                                {{ __('admin::app.sales.orders.invoice-status-paid') }}
+                                            @elseif($invoice->state == "overdue")
+                                                {{ __('admin::app.sales.orders.invoice-status-overdue') }}
+                                            @else
+                                                {{ __('admin::app.sales.orders.invoice-status-pending') }}
+                                            @endif
+                                        </td>
                                         <td>{{ core()->formatBasePrice($invoice->base_grand_total) }}</td>
                                         <td class="action">
                                             <a href="{{ route('admin.sales.invoices.view', $invoice->id) }}">

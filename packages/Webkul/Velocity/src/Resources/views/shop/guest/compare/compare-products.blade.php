@@ -39,13 +39,13 @@
                         $comparableAttributes = $comparableAttributes->toArray();
 
                         array_splice($comparableAttributes, 1, 0, [[
-                            'code' => 'image',
-                            'admin_name' => __('velocity::app.customer.compare.product_image')
+                            'admin_name' => 'Product Image',
+                            'type' => 'product_image'
                         ]]);
 
                         array_splice($comparableAttributes, 2, 0, [[
-                            'code' => 'addToCartHtml',
-                            'admin_name' => __('velocity::app.customer.compare.actions')
+                            'admin_name' => 'Actions',
+                            'type' => 'action'
                         ]]);
                     @endphp
 
@@ -56,69 +56,67 @@
                             </td>
 
                             <td :key="`title-${index}`" v-for="(product, index) in products">
-                                @switch ($attribute['code'])
-                                    @case('name')
-                                        <a :href="`${$root.baseUrl}/${product.url_key}`" class="unset remove-decoration active-hover">
-                                            <h1 class="fw6 fs18" v-text="product['{{ $attribute['code'] }}']"></h1>
+                                @switch ($attribute['type'])
+                                    @case('text')
+                                        <a :href="`${baseUrl}/${product.url_key}`" class="unset remove-decoration active-hover">
+                                            <h3 class="fw6 fs18" v-text="product['{{ $attribute['code'] }}']"></h3>
                                         </a>
+                                        @break;
+
+                                    @case('textarea')
+                                        <span v-html="product.product['{{ $attribute['code'] }}']"></span>
+                                        @break;
+    
+                                    @case('price')
+                                        <span v-html="product.product['{{ $attribute['code'] }}']"></span>
+                                        @break;
+
+                                    @case('boolean')
+                                        <span
+                                            v-text="product.product['{{ $attribute['code'] }}']
+                                                    ? '{{ __('velocity::app.shop.general.yes') }}'
+                                                    : '{{ __('velocity::app.shop.general.no') }}'"
+                                        ></span>
+                                        @break;
+                                    
+                                    @case('select')
+                                        <span v-html="product.product['{{ $attribute['code'] }}']" class="fs16"></span>
+                                        @break;
+
+                                    @case('multiselect')
+                                        <span v-html="product.product['{{ $attribute['code'] }}']" class="fs16"></span>
                                         @break
 
+                                    @case('file')
+                                        <a v-if="product.product['{{ $attribute['code'] }}']" :href="`${baseUrl}/storage/${product.product['{{ $attribute['code'] }}']}`">
+                                            <span v-text="product.product['{{ $attribute['code'] }}'].substr(product.product['{{ $attribute['code'] }}'].lastIndexOf('/') + 1)"  class="fs16"></span>
+                                            <i class='icon sort-down-icon download'></i>
+                                        </a>
+                                        <span v-else class="fs16">__</span>
+                                        @break;
+                                        
                                     @case('image')
-                                        <a :href="`${$root.baseUrl}/${product.url_key}`" class="unset">
+                                        <img v-if="product.product['{{ $attribute['code'] }}']" :src="`${baseUrl}/storage/${product.product['{{ $attribute['code'] }}']}`">
+                                        @break;
+                                    
+                                    @case('product_image')
+                                        <a :href="`${baseUrl}/${product.url_key}`" class="unset">
                                             <img
                                                 class="image-wrapper"
-                                                :src="product['{{ $attribute['code'] }}']"
-                                                onload="window.updateHeight ? window.updateHeight() : ''"
-                                                :onerror="`this.src='${$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
+                                                :src="product['product_image']"
+                                                :onerror="`this.src='${baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
                                         </a>
-                                        @break
+                                    @break
 
-                                    @case('price')
-                                        <span v-html="product['priceHTML']"></span>
-                                        @break
-
-                                    @case('addToCartHtml')
+                                    @case('action')
                                         <div class="action">
-                                            <vnode-injector :nodes="getDynamicHTML(product.addToCartHtml)"></vnode-injector>
+                                            <div v-html="product.defaultAddToCart"></div>
 
-                                            <i
-                                                class="material-icons cross fs16"
-                                                @click="removeProductCompare(product.id)">
-
-                                                close
-                                            </i>
+                                            <span class="icon white-cross-sm-icon remove-product" @click="removeProductCompare(product.id)"></span>
                                         </div>
-                                        @break
+                                        @break;
 
-                                    @case('color')
-                                        <span v-html="product.color_label" class="fs16"></span>
-                                        @break
-
-                                    @case('size')
-                                        <span v-html="product.size_label" class="fs16"></span>
-                                        @break
-
-                                    @case('description')
-                                        <span v-html="product.description"></span>
-                                        @break
-
-                                    @default
-                                        @switch ($attribute['type'])
-                                            @case('boolean')
-                                                <span
-                                                    v-text="product.product['{{ $attribute['code'] }}']
-                                                            ? '{{ __('velocity::app.shop.general.yes') }}'
-                                                            : '{{ __('velocity::app.shop.general.no') }}'"
-                                                ></span>
-                                                @break;
-                                            @default
-                                                <span v-html="product['{{ $attribute['code'] }}'] ? product['{{ $attribute['code'] }}'] : product.product['{{ $attribute['code'] }}'] ? product.product['{{ $attribute['code'] }}'] : '__'" class="fs16"></span>
-                                                @break;
-                                        @endswitch
-
-                                        @break
-
-                                @endswitch
+                                @endswitch 
                             </td>
                         </tr>
                     @endforeach
@@ -211,18 +209,24 @@
                         if (productId == "all") {
                             updatedItems = [];
                             this.$set(this, 'products', []);
+
+                            window.showAlert(
+                                `alert-success`,
+                                this.__('shop.general.alert.success'),
+                                `${this.__('customer.compare.removed-all')}`
+                            );
                         } else {
                             updatedItems = existingItems.filter(item => item != productId);
                             this.$set(this, 'products', this.products.filter(product => product.id != productId));
+
+                            window.showAlert(
+                                `alert-success`,
+                                this.__('shop.general.alert.success'),
+                                `${this.__('customer.compare.removed')}`
+                            );
                         }
 
                         this.setStorageValue('compared_product', updatedItems);
-
-                        window.showAlert(
-                            `alert-success`,
-                            this.__('shop.general.alert.success'),
-                            `${this.__('customer.compare.removed')}`
-                        );
                     }
 
                     this.$root.headerItemsCount++;

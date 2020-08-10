@@ -97,6 +97,7 @@ return [
             'footer-left-content' => 'Zawartość lewejstrony stopki',
             'subscription-content' => 'Treść paska subskrypcji',
             'sidebar-categories' => 'kategorie paska bocznego',
+            'header_content_count' => 'Header Content Count',
             'footer-left-raw-content' => '<p>Uwielbiamy tworzyć oprogramowanie i rozwiązywać rzeczywiste problemy z plikami binarnymi. Jesteśmy bardzo zaangażowani w realizację naszych celów. Inwestujemy olbrzymie zasoby w tworzenie światowej klasy łatwego w użyciu oprogramowania oraz aplikacji dla firm oraz użytkowników prywatnych , w oparciu o najnowszą wiedzę technologiczną</p>',
             'slider-path' => 'Ścieżka Slidera (suwaka)',
             'category-logo' => 'Logo kategorii',
@@ -194,9 +195,11 @@ return [
         'compare'           => [
             'text'                  => 'Porównaj',
             'compare_similar_items' => 'Porównaj podobne przedmioty',
+            'add-tooltip'           => 'Dodaj produkt do listy porównawczej',
             'added'                 => 'Produkt został pomyślnie dodany do listy porównania',
             'already_added'         => 'Produkt został już dodany do listy porównawczej',
             'removed'               => 'Produkt został pomyślnie usunięty z listy porównawcze',
+            'removed-all'           => 'Wszystkie pozycje zostały pomyślnie usunięte z listy porównawczej',
             'empty-text'            => 'Nie masz żadnych pozycji na liście porównawczej',
         ],
         'login-form'        => [
@@ -269,6 +272,8 @@ return [
             'downloadables'          => 'Produkty do pobrania',
             'confirm-new-password'   => 'Potwierdź nowe hasło',
             'enter-current-password' => 'Wpisz swoje aktualne hasło',
+            'download'               => 'Pobieranie',
+            'no-file-available'      => 'Brak dostępnego pliku!',
 
             'alert' => [
                 'info'      => 'Info',
