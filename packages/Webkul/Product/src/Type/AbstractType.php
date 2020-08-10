@@ -190,7 +190,7 @@ abstract class AbstractType
         foreach ($product->attribute_family->custom_attributes as $attribute) {
             $route = request()->route() ? request()->route()->getName() : "";
 
-            if ($attribute->type == 'boolean' && $route != 'admin.catalog.products.massupdate') {
+            if ($attribute->type === 'boolean' && $route !== 'admin.catalog.products.massupdate') {
                 $data[$attribute->code] = isset($data[$attribute->code]) && $data[$attribute->code] ? 1 : 0;
             }
 
@@ -245,8 +245,8 @@ abstract class AbstractType
 
         $route = request()->route() ? request()->route()->getName() : "";
 
-        if ($route != 'admin.catalog.products.massupdate') {
-            if  (! isset($data['categories'])) {
+        if ($route !== 'admin.catalog.products.massupdate') {
+            if (! isset($data['categories'])) {
                 $data['categories'] = [];
             }
 
