@@ -70,8 +70,8 @@
                             @endguest
                             style="color: #242424;"
                             >
-                            <span class="name">{{ __('velocity::app.customer.compare.text') }}</span>
-
+                            <span class="name">{{ __('velocity::app.customer.compare.text') }}</span> 
+                            (<span id="compare-items-count"></span>)
                         </a>
                     </li>
                 @endif
@@ -335,6 +335,9 @@
             $('body').delegate('#search, .icon-menu-close, .icon.icon-menu', 'click', function(e) {
                 toggleDropdown(e);
             });
+
+            let comparedItems = JSON.parse(localStorage.getItem('compared_product'));
+            $('#compare-items-count').append(comparedItems.length);
 
             function toggleDropdown(e) {
                 var currentElement = $(e.currentTarget);
