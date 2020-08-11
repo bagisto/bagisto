@@ -12,10 +12,13 @@ use Webkul\Product\Models\ProductAttributeValue;
 class ProductCopyCest
 {
 
-    public function testSkipAttributes(FunctionalTester $I)
+    public function _before(FunctionalTester $I)
     {
         $I->loginAsAdmin();
+    }
 
+    public function testSkipAttributes(FunctionalTester $I)
+    {
         config(['products.skipAttributesOnCopy' => ['name', 'inventories']]);
 
         $original = $I->haveProduct(Laravel5Helper::SIMPLE_PRODUCT, [
@@ -42,10 +45,17 @@ class ProductCopyCest
         ]);
     }
 
+    public function testBlockProductCopy(FunctionalTester $I)
+    {
+        $original = $I->haveProduct(Laravel5Helper::BOOKING_EVENT_PRODUCT, []);
+
+        $I->amOnAdminRoute('admin.catalog.products.copy', ['id' => $original->id], false);
+
+        $I->seeInSource('Products of type booking can not be copied');
+    }
+
     public function testProductCopy(FunctionalTester $I)
     {
-        $I->loginAsAdmin();
-
         // set this config value to true to make it testable. It defaults to false.
         config(['products.linkProductsOnCopy' => true]);
 
