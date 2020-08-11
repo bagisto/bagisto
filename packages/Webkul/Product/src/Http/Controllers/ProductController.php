@@ -250,7 +250,10 @@ class ProductController extends Controller
         $originalProduct = $this->productRepository->findOrFail($productId);
 
         if (! $originalProduct->getTypeInstance()->canBeCopied()) {
-            session()->flash('error', trans('admin::app.response.product-can-not-be-copied', ['type' => $originalProduct->type]));
+            session()->flash('error',
+                trans('admin::app.response.product-can-not-be-copied', [
+                    'type' => $originalProduct->type,
+                ]));
 
             return redirect()->to(route('admin.catalog.products.index'));
         }
