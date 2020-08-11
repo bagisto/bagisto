@@ -257,6 +257,11 @@ class Order extends Model implements OrderContract
             return false;
         }
 
+        $pendingInvoice = $this->invoices->where('state', 'pending')->first();
+        if ($pendingInvoice) {
+            return true;
+        }
+
         foreach ($this->items as $item) {
             if ($item->canCancel() && $item->order->status !== self::STATUS_CLOSED) {
                 return true;
@@ -278,7 +283,7 @@ class Order extends Model implements OrderContract
         }
 
         foreach ($this->invoices as $item) {
-            if ($item->state == self::STATUS_PENDING || $item->state == "overdue") {
+            if ($item->state == 'pending' || $item->state == 'overdue') {
                 return false;
             }
         }
