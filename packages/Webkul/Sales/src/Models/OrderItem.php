@@ -59,7 +59,7 @@ class OrderItem extends Model implements OrderItemContract
             return false;
         }
 
-        if ($this->qty_to_ship > 0) {
+        if ($this->qty_to_ship > 0 && $this->order->status !== 'closed') {
             return true;
         }
 
@@ -83,7 +83,7 @@ class OrderItem extends Model implements OrderItemContract
      */
     public function canInvoice()
     {
-        if ($this->qty_to_invoice > 0) {
+        if ($this->qty_to_invoice > 0 && $this->order->status !== 'closed') {
             return true;
         }
 
@@ -103,7 +103,7 @@ class OrderItem extends Model implements OrderItemContract
      */
     public function canCancel()
     {
-        if ($this->qty_to_cancel > 0) {
+        if ($this->qty_to_cancel > 0 && $this->order->status !== 'closed') {
             return true;
         }
 

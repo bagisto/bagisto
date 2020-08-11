@@ -284,7 +284,7 @@ class Order extends Model implements OrderContract
         }
 
         foreach ($this->items as $item) {
-            if ($item->qty_to_refund > 0) {
+            if ($item->qty_to_refund > 0 && $item->order->status !== 'closed') {
                 return true;
             }
         }
