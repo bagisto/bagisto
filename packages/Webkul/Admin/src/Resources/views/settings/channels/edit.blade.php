@@ -154,7 +154,7 @@
                                 <?php $selectedOption = old('theme') ?: $channel->theme ?>
 
                                 <select class="control" id="theme" name="theme">
-                                    @foreach (themes()->all() as $theme)
+                                    @foreach (themes()->getChannelThemes() as $theme)
                                         <option value="{{ $theme->code }}" {{ $selectedOption == $theme->code ? 'selected' : '' }}>
                                             {{ $theme->name }}
                                         </option>
