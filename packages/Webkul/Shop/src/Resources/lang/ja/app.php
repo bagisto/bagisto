@@ -173,6 +173,11 @@ return [
             'dashboard' => 'プロフィールを編集',
             'menu' => 'メニュー',
 
+            'general' => [
+                'no' => '番号',
+                'yes' => 'はい',
+            ],
+
             'profile' => [
                 'index' => [
                     'page-title' => 'プロフィール',

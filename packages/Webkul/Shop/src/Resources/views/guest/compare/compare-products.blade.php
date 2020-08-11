@@ -4,14 +4,14 @@
 
     $locale = request()->get('locale') ?: app()->getLocale();
     
-    $attributeOptionTranslations = DB::table(DB::getTablePrefix() . 'attribute_option_translations')->where('locale', $locale)->get()->toJson();
+    $attributeOptionTranslations = DB::table('attribute_option_translations')->where('locale', $locale)->get()->toJson();
 @endphp
 
 @push('scripts')
     <script type="text/x-template" id="compare-product-template">
         <section class="comparison-component">
             <h1>
-                {{ __('velocity::app.customer.compare.compare_similar_items') }}
+                {{ __('shop::app.customer.compare.compare_similar_items') }}
             </h1>
 
             <button
@@ -91,6 +91,41 @@
                                             @case('boolean')
                                                 <span
                                                     v-text="product.product['{{ $attribute['code'] }}']
+                                                            ? '{{ __('shop::app.customer.account.general.yes') }}'
+                                                            : '{{ __('shop::app.customer.account.general.no') }}'"
+                                                ></span>
+                                                @break;
+                                            @case('file')
+                                                <a v-if="product.product['{{ $attribute['code'] }}']" :href="`${baseUrl}/storage/${product.product['{{ $attribute['code'] }}']}`">
+                                                    <span v-text="product.product['{{ $attribute['code'] }}'].substr(product.product['{{ $attribute['code'] }}'].lastIndexOf('/') + 1)"  class="fs16"></span>
+                                                    <i class='icon sort-down-icon download'></i>
+                                                </a>
+                                                <a v-else class="fs16">__</span>
+                                                @break;
+                                            @default
+                                                <span v-html="product['{{ $attribute['code'] }}'] ? product['{{ $attribute['code'] }}'] : product.product['{{ $attribute['code'] }}'] ? product.product['{{ $attribute['code'] }}'] : '__'" class="fs16"></span>
+                                                @break;
+                                        @endswitch
+
+                                        @break
+
+                                    @case('color')
+                                        <span v-html="product.color_label" class="fs16"></span>
+                                        @break
+
+                                    @case('size')
+                                        <span v-html="product.size_label" class="fs16"></span>
+                                        @break
+
+                                    @case('description')
+                                        <span v-html="product.description"></span>
+                                        @break
+
+                                    @default
+                                        @switch ($attribute['type'])
+                                            @case('boolean')
+                                                <span
+                                                    v-text="product.product['{{ $attribute['code'] }}']
                                                             ? '{{ __('velocity::app.shop.general.yes') }}'
                                                             : '{{ __('velocity::app.shop.general.no') }}'"
                                                 ></span>
@@ -129,7 +164,7 @@
                 </template>
 
                 <span v-else-if="isProductListLoaded && products.length == 0">
-                    {{ __('velocity::app.customer.compare.empty-text') }}
+                    {{ __('shop::app.customer.compare.empty-text') }}
                 </span>
             </table>
 
@@ -188,7 +223,7 @@
                         })
                         .catch(error => {
                             this.isProductListLoaded = true;
-                            console.log("{{ __('velocity::app.error.something_went_wrong') }}");
+                            console.log("{{ __('shop::app.common.error') }}");
                         });
                     } else {
                         this.isProductListLoaded = true;
@@ -211,7 +246,7 @@
                             this.$root.addFlashMessages();
                         })
                         .catch(error => {
-                            console.log("{{ __('velocity::app.error.something_went_wrong') }}");
+                            console.log("{{ __('shop::app.common.error') }}");
                         });
                     } else {
                         let existingItems = this.getStorageValue('compared_product');
@@ -219,17 +254,19 @@
                         if (productId == "all") {
                             updatedItems = [];
                             this.$set(this, 'products', []);
-                            window.flashMessages = [{'type': 'alert-success', 'message': '{{ __('velocity::app.customer.compare.removed-all') }}' }];
+                            window.flashMessages = [{'type': 'alert-success', 'message': '{{ __('shop::app.customer.compare.removed-all') }}' }];
                         } else {
                             updatedItems = existingItems.filter(item => item != productId);
                             this.$set(this, 'products', this.products.filter(product => product.id != productId));
-                            window.flashMessages = [{'type': 'alert-success', 'message': '{{ __('velocity::app.customer.compare.removed') }}' }];
+                            window.flashMessages = [{'type': 'alert-success', 'message': '{{ __('shop::app.customer.compare.removed') }}' }];
                         }
 
                         this.setStorageValue('compared_product', updatedItems);
 
                         this.$root.addFlashMessages();
                     }
+
+                    this.updateCompareCount();
                 },
 
                 'getDynamicHTML': function (input) {
@@ -311,6 +348,28 @@
                     }
 
                     return attributeOptions;
+                },
+
+                'updateCompareCount': function () {
+                    if (this.isCustomer == "true" || this.isCustomer == true) {
+                        this.$http.get(`${this.baseUrl}/items-count`)
+                        .then(response => {
+                            $('#compare-items-count').html(response.data.compareProductsCount);
+                        })
+                        .catch(exception => {
+                            window.flashMessages = [{
+                                'type': `alert-error`,
+                                'message': "{{ __('shop::app.common.error') }}"
+                            }];
+                            
+                            this.$root.addFlashMessages();
+                        });
+                    } else {
+                        let comparedItems = JSON.parse(localStorage.getItem('compared_product'));
+                        comparedItemsCount = comparedItems ? comparedItems.length : 0;
+
+                        $('#compare-items-count').html(comparedItemsCount);
+                    }
                 }
             }
         });

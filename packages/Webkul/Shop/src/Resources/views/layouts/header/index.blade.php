@@ -55,7 +55,7 @@
                 {!! view_render_event('bagisto.shop.layout.header.comppare-item.before') !!}
 
                 @php
-                    $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false    
+                    $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false
                 @endphp
 
                 @if ($showCompare)
@@ -70,7 +70,7 @@
                             @endguest
                             style="color: #242424;"
                             >
-                            <span class="name">{{ __('velocity::app.customer.compare.text') }}</span> 
+                            <span class="name">{{ __('shop::app.customer.compare.text') }}</span> 
                             (<span id="compare-items-count"></span>)
                         </a>
                     </li>
@@ -202,7 +202,7 @@
                 <button style="background: none; border: none; padding: 0px;">
                     <i class="icon icon-search"></i>
                 </button>
-                
+
                 <image-search-component></image-search-component>
 
                 <input type="search" name="term" class="search">
@@ -297,7 +297,7 @@
                                         localStorage.searched_image_url = self.uploaded_image_url;
 
                                         queryString = localStorage.searched_terms = analysedResult.join('_');
-                                        
+
                                         self.$root.hideLoader();
 
                                         window.location.href = "{{ route('shop.search.index') }}" + '?term=' + queryString + '&image-search=1';
@@ -336,8 +336,22 @@
                 toggleDropdown(e);
             });
 
-            let comparedItems = JSON.parse(localStorage.getItem('compared_product'));
-            $('#compare-items-count').append(comparedItems.length);
+            @auth('customer')
+                @php
+                    $compareCount = app('Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository')
+                        ->count([
+                            'customer_id' => auth()->guard('customer')->user()->id,
+                        ]);
+                @endphp
+
+                let comparedItems = JSON.parse(localStorage.getItem('compared_product'));
+                $('#compare-items-count').html({{ $compareCount }});
+            @endauth
+
+            @guest('customer')
+                let comparedItems = JSON.parse(localStorage.getItem('compared_product'));
+                $('#compare-items-count').html(comparedItems ? comparedItems.length : 0);
+            @endguest
 
             function toggleDropdown(e) {
                 var currentElement = $(e.currentTarget);
