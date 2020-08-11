@@ -16,10 +16,9 @@ class DownloadableProductDataGrid extends DataGrid
         $queryBuilder = DB::table('downloadable_link_purchased')
             ->leftJoin('orders', 'downloadable_link_purchased.order_id', '=', 'orders.id')
             ->leftJoin('invoices', 'downloadable_link_purchased.order_id', '=', 'invoices.order_id')
-            ->addSelect('downloadable_link_purchased.*', 'invoices.state', 'orders.increment_id')
+            ->addSelect('downloadable_link_purchased.*', 'invoices.state as invoice_state', 'orders.increment_id')
             ->addSelect(DB::raw('(' . DB::getTablePrefix() . 'downloadable_link_purchased.download_bought - ' . DB::getTablePrefix() . 'downloadable_link_purchased.download_used) as remaining_downloads'))
-            ->where('downloadable_link_purchased.customer_id', auth()->guard('customer')->user()->id)
-            ->where('invoices.state', 'paid');
+            ->where('downloadable_link_purchased.customer_id', auth()->guard('customer')->user()->id);
 
         $this->addFilter('status', 'downloadable_link_purchased.status');
         $this->addFilter('created_at', 'downloadable_link_purchased.created_at');
@@ -47,7 +46,7 @@ class DownloadableProductDataGrid extends DataGrid
             'filterable' => true,
             'closure'    => true,
             'wrapper'    => function ($value) {
-                if ($value->status == 'pending' || $value->status == 'expired') {
+                if ($value->status == 'pending' || $value->status == 'expired' || $value->invoice_state !== 'paid') {
                     return $value->product_name;
                 } else {
                     return $value->product_name . ' ' . '<a href="' . route('customer.downloadable_products.download', $value->id) . '" target="_blank">' . $value->name . '</a>';
