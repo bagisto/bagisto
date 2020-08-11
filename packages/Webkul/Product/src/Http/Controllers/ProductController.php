@@ -11,6 +11,7 @@ use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
 use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
+use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -65,6 +66,13 @@ class ProductController extends Controller
     protected $inventorySourceRepository;
 
     /**
+     * ProductAttributeValueRepository object
+     *
+     * @var \Webkul\Product\Repositories\ProductAttributeValueRepository
+     */
+    protected $productAttributeValueRepository;
+
+    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
@@ -73,6 +81,7 @@ class ProductController extends Controller
      * @param  \Webkul\Product\Repositories\ProductDownloadableSampleRepository  $productDownloadableSampleRepository
      * @param  \Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamilyRepository
      * @param  \Webkul\Inventory\Repositories\InventorySourceRepository  $inventorySourceRepository
+     * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository $productAttributeValueRepository
      * @return void
      */
     public function __construct(
@@ -81,7 +90,8 @@ class ProductController extends Controller
         ProductDownloadableLinkRepository $productDownloadableLinkRepository,
         ProductDownloadableSampleRepository $productDownloadableSampleRepository,
         AttributeFamilyRepository $attributeFamilyRepository,
-        InventorySourceRepository $inventorySourceRepository
+        InventorySourceRepository $inventorySourceRepository,
+        ProductAttributeValueRepository $productAttributeValueRepository
     )
     {
         $this->_config = request('_config');
@@ -97,6 +107,8 @@ class ProductController extends Controller
         $this->attributeFamilyRepository = $attributeFamilyRepository;
 
         $this->inventorySourceRepository = $inventorySourceRepository;
+
+        $this->productAttributeValueRepository = $productAttributeValueRepository;
     }
 
     /**
@@ -372,7 +384,7 @@ class ProductController extends Controller
      */
     public function download($productId, $attributeId)
     {
-        $productAttribute = $this->productAttributeValue->findOneWhere([
+        $productAttribute = $this->productAttributeValueRepository->findOneWhere([
             'product_id'   => $productId,
             'attribute_id' => $attributeId,
         ]);
