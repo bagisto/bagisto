@@ -24,6 +24,16 @@ class AttributeFamily extends Model implements AttributeFamilyContract
             ->select('attributes.*');
     }
 
+
+    /**
+     * Get all of the comparable attributes which belongs to attribute family.
+     */
+    public function getComparableAttributesBelongsToFamily()
+    {
+        return (AttributeProxy::modelClass())::join('attribute_group_mappings', 'attribute_group_mappings.attribute_id', '=', 'attributes.id')
+            ->select('attributes.*')->where('attributes.is_comparable', 1)->get();
+    }
+
     /**
      * Get all of the attributes for the attribute groups.
      */

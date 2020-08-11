@@ -18,7 +18,7 @@
 
             template: '#compare-component-template',
 
-            data: function () {
+            data: function () {                
                 return {
                     'baseUrl': "{{ url()->to('/') }}",
                     'customer': '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == "true",
@@ -37,7 +37,7 @@
                                 'type': `alert-${response.data.status}`,
                                 'message': response.data.message
                             }];
-
+                            
                             this.$root.addFlashMessages()
                         }).catch(error => {
                             window.flashMessages = [{
@@ -82,6 +82,8 @@
                                 this.$root.addFlashMessages()
                         }
                     }
+
+                    this.updateCompareCount();
                 },
 
                 'getStorageValue': function (key) {
@@ -99,6 +101,28 @@
 
                     return true;
                 },
+
+                'updateCompareCount': function () {
+                    if (this.customer == "true" || this.customer == true) {
+                        this.$http.get(`${this.baseUrl}/items-count`)
+                        .then(response => {
+                            $('#compare-items-count').html(response.data.compareProductsCount);
+                        })
+                        .catch(exception => {
+                            window.flashMessages = [{
+                                'type': `alert-error`,
+                                'message': "{{ __('shop::app.common.error') }}"
+                            }];
+                            
+                            this.$root.addFlashMessages();
+                        });
+                    } else {
+                        let comparedItems = JSON.parse(localStorage.getItem('compared_product'));
+                        comparedItemsCount = comparedItems ? comparedItems.length : 0;
+
+                        $('#compare-items-count').html(comparedItemsCount);
+                    }
+                }
             }
         });
     </script>
