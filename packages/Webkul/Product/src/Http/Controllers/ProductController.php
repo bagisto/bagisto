@@ -258,6 +258,13 @@ class ProductController extends Controller
             return redirect()->to(route('admin.catalog.products.index'));
         }
 
+        if ($originalProduct->parent_id) {
+            session()->flash('error',
+                trans('admin::app.catalog.products.variant-already-exist-message'));
+
+            return redirect()->to(route('admin.catalog.products.index'));
+        }
+
         $copiedProduct = $this->productRepository->copy($originalProduct);
 
         if ($copiedProduct instanceof Product && $copiedProduct->id) {
