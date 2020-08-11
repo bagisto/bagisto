@@ -336,8 +336,22 @@
                 toggleDropdown(e);
             });
 
-            let comparedItems = JSON.parse(localStorage.getItem('compared_product'));
-            $('#compare-items-count').html(comparedItems ? comparedItems.length : 0);
+            @auth('customer')
+                @php
+                    $compareCount = app('Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository')
+                        ->count([
+                            'customer_id' => auth()->guard('customer')->user()->id,
+                        ]);
+                @endphp
+
+                let comparedItems = JSON.parse(localStorage.getItem('compared_product'));
+                $('#compare-items-count').html({{ $compareCount }});
+            @endauth
+
+            @guest('customer')
+                let comparedItems = JSON.parse(localStorage.getItem('compared_product'));
+                $('#compare-items-count').html(comparedItems ? comparedItems.length : 0);
+            @endguest
 
             function toggleDropdown(e) {
                 var currentElement = $(e.currentTarget);

@@ -230,6 +230,8 @@
 
                         this.$root.addFlashMessages();
                     }
+
+                    this.updateCompareCount();
                 },
 
                 'getDynamicHTML': function (input) {
@@ -311,6 +313,28 @@
                     }
 
                     return attributeOptions;
+                },
+
+                'updateCompareCount': function () {
+                    if (this.isCustomer == "true" || this.isCustomer == true) {
+                        this.$http.get(`${this.baseUrl}/items-count`)
+                        .then(response => {
+                            $('#compare-items-count').html(response.data.compareProductsCount);
+                        })
+                        .catch(exception => {
+                            window.flashMessages = [{
+                                'type': `alert-error`,
+                                'message': "{{ __('shop::app.common.error') }}"
+                            }];
+                            
+                            this.$root.addFlashMessages();
+                        });
+                    } else {
+                        let comparedItems = JSON.parse(localStorage.getItem('compared_product'));
+                        comparedItemsCount = comparedItems ? comparedItems.length : 0;
+
+                        $('#compare-items-count').html(comparedItemsCount);
+                    }
                 }
             }
         });
