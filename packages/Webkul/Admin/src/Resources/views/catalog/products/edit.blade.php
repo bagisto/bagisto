@@ -91,6 +91,14 @@
                                             array_push($validations, 'decimal');
                                         }
 
+                                        if ($attribute->type == 'file') {
+                                            array_push($validations, 'size:2048');
+                                        }
+
+                                        if ($attribute->type == 'image') {
+                                            array_push($validations, 'size:2048');
+                                        }
+
                                         array_push($validations, $attribute->validation);
 
                                         $validations = implode('|', array_filter($validations));
