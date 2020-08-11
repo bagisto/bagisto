@@ -267,11 +267,6 @@ SQL;
                         ->where('order_address_id', $row->additional['old_order_address_id'])
                         ->update(['order_address_id' => $row->id]);
                 });
-
-            $table->foreign(['order_address_id'])
-                ->references('id')
-                ->on('addresses')
-                ->onDelete('cascade');
         });
 
         Schema::table('shipments', static function (Blueprint $table) {
@@ -284,11 +279,6 @@ SQL;
                         ->where('order_address_id', $row->additional['old_order_address_id'])
                         ->update(['order_address_id' => $row->id]);
                 });
-
-            $table->foreign(['order_address_id'])
-                ->references('id')
-                ->on('addresses')
-                ->onDelete('cascade');
         });
     }
 }
