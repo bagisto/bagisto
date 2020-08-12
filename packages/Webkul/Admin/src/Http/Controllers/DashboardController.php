@@ -236,9 +236,10 @@ class DashboardController extends Controller
     public function getCustomerWithMostSales()
     {
         return $this->orderRepository->getModel()
-                    ->select(DB::raw('SUM(base_grand_total) as total_base_grand_total'))
-                    ->addSelect(DB::raw('COUNT(id) as total_orders'))
-                    ->addSelect('id', 'customer_id', 'customer_email', 'customer_first_name', 'customer_last_name')
+                    ->leftJoin('refunds', 'orders.id', 'refunds.order_id')
+                    ->select(DB::raw('(SUM(orders.base_grand_total) - SUM(IFNULL(refunds.base_grand_total, 0))) as total_base_grand_total'))
+                    ->addSelect(DB::raw('COUNT(orders.id) as total_orders'))
+                    ->addSelect('orders.id', 'customer_id', 'customer_email', 'customer_first_name', 'customer_last_name')
                     ->where('orders.created_at', '>=', $this->startDate)
                     ->where('orders.created_at', '<=', $this->endDate)
                     ->where('orders.status', '<>', 'closed')
