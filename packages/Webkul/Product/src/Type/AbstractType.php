@@ -2,16 +2,15 @@
 
 namespace Webkul\Product\Type;
 
-use Illuminate\Support\Facades\Storage;
-use phpDocumentor\Reflection\Types\Boolean;
-use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Repositories\ProductAttributeValueRepository;
-use Webkul\Product\Repositories\ProductInventoryRepository;
-use Webkul\Product\Repositories\ProductImageRepository;
-use Webkul\Product\Models\ProductAttributeValue;
-use Webkul\Product\Helpers\ProductImage;
 use Webkul\Checkout\Facades\Cart;
+use Illuminate\Support\Facades\Storage;
+use Webkul\Product\Helpers\ProductImage;
+use Webkul\Product\Models\ProductAttributeValue;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Product\Repositories\ProductImageRepository;
+use Webkul\Product\Repositories\ProductInventoryRepository;
+use Webkul\Product\Repositories\ProductAttributeValueRepository;
 
 abstract class AbstractType
 {
@@ -54,7 +53,7 @@ abstract class AbstractType
      * Product Image helper instance
      *
      * @var \Webkul\Product\Helpers\ProductImage
-    */
+     */
     protected $productImageHelper;
 
     /**
@@ -98,6 +97,13 @@ abstract class AbstractType
      * @var bool
      */
     protected $canBeMovedFromWishlistToCart = true;
+
+    /**
+     * Products of this type can be copied in the admin backend?
+     *
+     * @var bool
+     */
+    protected $canBeCopied = true;
 
     /**
      * Has child products aka variants
@@ -152,7 +158,16 @@ abstract class AbstractType
     }
 
     /**
-     * @param  array  $data
+     * Is the administrator able to copy products of this type in the admin backend?
+     */
+    public function canBeCopied(): bool
+    {
+        return $this->canBeCopied;
+    }
+
+    /**
+     * @param array $data
+     *
      * @return \Webkul\Product\Contracts\Product
      */
     public function create(array $data)
@@ -162,8 +177,8 @@ abstract class AbstractType
 
     /**
      * @param  array  $data
-     * @param  int  $id
-     * @param  string  $attribute
+     * @param  int    $id
+     * @param  string $attribute
      * @return \Webkul\Product\Contracts\Product
      */
     public function update(array $data, $id, $attribute = "id")
@@ -175,7 +190,7 @@ abstract class AbstractType
         foreach ($product->attribute_family->custom_attributes as $attribute) {
             $route = request()->route() ? request()->route()->getName() : "";
 
-            if ($attribute->type == 'boolean' && $route != 'admin.catalog.products.massupdate') {
+            if ($attribute->type === 'boolean' && $route !== 'admin.catalog.products.massupdate') {
                 $data[$attribute->code] = isset($data[$attribute->code]) && $data[$attribute->code] ? 1 : 0;
             }
 
@@ -197,8 +212,8 @@ abstract class AbstractType
 
             if ($attribute->type == 'image' || $attribute->type == 'file') {
                 $data[$attribute->code] = gettype($data[$attribute->code]) == 'object'
-                        ? request()->file($attribute->code)->store('product/' . $product->id)
-                        : NULL;
+                    ? request()->file($attribute->code)->store('product/' . $product->id)
+                    : NULL;
             }
 
             $attributeValue = $this->attributeValueRepository->findOneWhere([
@@ -219,7 +234,7 @@ abstract class AbstractType
             } else {
                 $this->attributeValueRepository->update([
                     ProductAttributeValue::$attributeTypeFields[$attribute->type] => $data[$attribute->code]
-                    ], $attributeValue->id
+                ], $attributeValue->id
                 );
 
                 if ($attribute->type == 'image' || $attribute->type == 'file') {
@@ -230,8 +245,8 @@ abstract class AbstractType
 
         $route = request()->route() ? request()->route()->getName() : "";
 
-        if ($route != 'admin.catalog.products.massupdate') {
-            if  (! isset($data['categories'])) {
+        if ($route !== 'admin.catalog.products.massupdate') {
+            if (! isset($data['categories'])) {
                 $data['categories'] = [];
             }
 
@@ -376,9 +391,9 @@ abstract class AbstractType
         $total = 0;
 
         $channelInventorySourceIds = core()->getCurrentChannel()
-                                           ->inventory_sources()
-                                           ->where('status', 1)
-                                           ->pluck('id');
+            ->inventory_sources()
+            ->where('status', 1)
+            ->pluck('id');
 
         foreach ($this->product->inventories as $inventory) {
             if (is_numeric($index = $channelInventorySourceIds->search($inventory->inventory_source_id))) {
@@ -387,8 +402,8 @@ abstract class AbstractType
         }
 
         $orderedInventory = $this->product->ordered_inventories()
-                                          ->where('channel_id', core()->getCurrentChannel()->id)
-                                          ->first();
+            ->where('channel_id', core()->getCurrentChannel()->id)
+            ->first();
 
         if ($orderedInventory) {
             $total -= $orderedInventory->qty;
@@ -542,7 +557,7 @@ abstract class AbstractType
             if ($customerGroupPrice != $this->product->price) {
                 $haveSpecialPrice = true;
                 $this->product->special_price = $customerGroupPrice;
-            }     
+            }
         }
 
         return $haveSpecialPrice;
@@ -573,8 +588,8 @@ abstract class AbstractType
 
         $customerGroupPrices = $product->customer_group_prices()->where(function ($query) use ($customerGroupId) {
             $query->where('customer_group_id', $customerGroupId)
-                  ->orWhereNull('customer_group_id');
-            }
+                ->orWhereNull('customer_group_id');
+        }
         )->get();
 
         if (! $customerGroupPrices->count()) {
