@@ -96,9 +96,10 @@
                                             array_push($validations, 'size:'.$retVal);
                                         }
 
-                                        if ($attribute->type == 'image') {
+                                        if ($attribute->type == 'image') { 
                                             $retVal = (core()->getConfigData('catalog.products.attribute.image_attribute_upload_size')) ? core()->getConfigData('catalog.products.attribute.image_attribute_upload_size') : '2048' ;
-                                            array_push($validations, 'size:'.$retVal);
+                                            array_push($validations, 'size:'.$retVal.'|mimes:jpeg,bmp,png,jpg');
+                                            
                                         }
 
                                         array_push($validations, $attribute->validation);
