@@ -92,11 +92,13 @@
                                         }
 
                                         if ($attribute->type == 'file') {
-                                            array_push($validations, 'size:2048');
+                                            $retVal = (core()->getConfigData('catalog.products.attribute.file_attribute_upload_size')) ? core()->getConfigData('catalog.products.attribute.file_attribute_upload_size') : '2048' ;
+                                            array_push($validations, 'size:'.$retVal);
                                         }
 
                                         if ($attribute->type == 'image') {
-                                            array_push($validations, 'size:2048');
+                                            $retVal = (core()->getConfigData('catalog.products.attribute.image_attribute_upload_size')) ? core()->getConfigData('catalog.products.attribute.image_attribute_upload_size') : '2048' ;
+                                            array_push($validations, 'size:'.$retVal);
                                         }
 
                                         array_push($validations, $attribute->validation);
