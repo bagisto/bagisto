@@ -143,9 +143,9 @@
                             <div class="control-group">
                                 <label for="theme">{{ __('admin::app.settings.channels.theme') }}</label>
                                 <select class="control" id="theme" name="theme">
-                                    @foreach (themes()->all() as $theme)
-                                        <option value="{{ $theme->code }}" {{ old('theme') == $theme->code ? 'selected' : '' }}>
-                                            {{ $theme->name }}
+                                    @foreach (config('themes.themes') as $themeCode => $theme)
+                                        <option value="{{ $themeCode }}" {{ old('theme') == $themeCode ? 'selected' : '' }}>
+                                            {{ $theme['name'] }}
                                         </option>
                                     @endforeach
                                 </select>

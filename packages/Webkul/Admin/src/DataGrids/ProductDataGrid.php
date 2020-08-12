@@ -187,6 +187,13 @@ class ProductDataGrid extends DataGrid
 
     public function prepareMassActions()
     {
+        $this->addAction([
+            'title'  => trans('admin::app.datagrid.copy'),
+            'method' => 'GET',
+            'route'  => 'admin.catalog.products.copy',
+            'icon'   => 'icon note-icon',
+        ]);
+
         $this->addMassAction([
             'type'   => 'delete',
             'label'  => trans('admin::app.datagrid.delete'),

@@ -173,6 +173,11 @@ return [
             'dashboard' => 'Cliente - Editar perfil',
             'menu' => 'Menu',
 
+            'general' => [
+                'no' => 'No',
+                'yes' => 'si',
+            ],
+
             'profile' => [
                 'index' => [
                     'page-title' => 'Cliente - Perfil',

@@ -1,10 +1,10 @@
 @php
-    $attributeRepository = app('\Webkul\Attribute\Repositories\AttributeRepository');
-    $comparableAttributes = $attributeRepository->findByField('is_comparable', 1);
+    $attributeRepository = app('\Webkul\Attribute\Repositories\AttributeFamilyRepository');
+    $comparableAttributes = $attributeRepository->getComparableAttributesBelongsToFamily();
 
     $locale = request()->get('locale') ?: app()->getLocale();
     
-    $attributeOptionTranslations = DB::table(DB::getTablePrefix() . 'attribute_option_translations')->where('locale', $locale)->get()->toJson();
+    $attributeOptionTranslations = DB::table('attribute_option_translations')->where('locale', $locale)->get()->toJson();
 @endphp
 
 @push('css')
@@ -43,13 +43,13 @@
                         $comparableAttributes = $comparableAttributes->toArray();
 
                         array_splice($comparableAttributes, 1, 0, [[
-                            'admin_name' => 'Product Image',
-                            'type' => 'product_image'
+                            'code' => 'product_image',
+                            'admin_name' => __('velocity::app.customer.compare.product_image'),
                         ]]);
 
                         array_splice($comparableAttributes, 2, 0, [[
-                            'admin_name' => 'Actions',
-                            'type' => 'action'
+                            'code' => 'addToCartHtml',
+                            'admin_name' => __('velocity::app.customer.compare.actions'),
                         ]]);
                     @endphp
 
@@ -60,65 +60,51 @@
                             </td>
 
                             <td :key="`title-${index}`" v-for="(product, index) in products">
-                                @switch ($attribute['type'])
-                                    @case('text')
-                                        <a :href="`${baseUrl}/${product.url_key}`" class="unset remove-decoration active-hover">
-                                            <h3 class="fw6 fs18" v-text="product['{{ $attribute['code'] }}']"></h3>
+                                @switch ($attribute['code'])
+                                    @case('name')
+                                        <a :href="`${$root.baseUrl}/${product.url_key}`" class="unset remove-decoration active-hover">
+                                            <h1 class="fw6 fs18" v-text="product['{{ $attribute['code'] }}']"></h1>
                                         </a>
-                                        @break;
-
-                                    @case('textarea')
-                                        <span v-html="product.product['{{ $attribute['code'] }}']"></span>
-                                        @break;
-    
-                                    @case('price')
-                                        <span v-html="product.product['{{ $attribute['code'] }}']"></span>
-                                        @break;
-
-                                    @case('boolean')
-                                        <span
-                                            v-text="product.product['{{ $attribute['code'] }}']
-                                                    ? '{{ __('velocity::app.shop.general.yes') }}'
-                                                    : '{{ __('velocity::app.shop.general.no') }}'"
-                                        ></span>
-                                        @break;
-                                    
-                                    @case('select')
-                                        <span v-html="product.product['{{ $attribute['code'] }}']" class="fs16"></span>
-                                        @break;
-
-                                    @case('multiselect')
-                                        <span v-html="product.product['{{ $attribute['code'] }}']" class="fs16"></span>
                                         @break
 
-                                    @case('file')
-                                        <a v-if="product.product['{{ $attribute['code'] }}']" :href="`${baseUrl}/storage/${product.product['{{ $attribute['code'] }}']}`">
-                                            <span v-text="product.product['{{ $attribute['code'] }}'].substr(product.product['{{ $attribute['code'] }}'].lastIndexOf('/') + 1)"  class="fs16"></span>
-                                            <i class='icon sort-down-icon download'></i>
-                                        </a>
-                                        <span v-else class="fs16">__</span>
-                                        @break;
-                                        
-                                    @case('image')
-                                        <img v-if="product.product['{{ $attribute['code'] }}']" :src="`${baseUrl}/storage/${product.product['{{ $attribute['code'] }}']}`">
-                                        @break;
-                                    
                                     @case('product_image')
-                                        <a :href="`${baseUrl}/${product.url_key}`" class="unset">
+                                        <a :href="`${$root.baseUrl}/${product.url_key}`" class="unset">
                                             <img
                                                 class="image-wrapper"
-                                                :src="product['product_image']"
-                                                :onerror="`this.src='${baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
+                                                :src="product['{{ $attribute['code'] }}']"
+                                                onload="window.updateHeight ? window.updateHeight() : ''"
+                                                :onerror="`this.src='${$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
                                         </a>
-                                    @break
+                                        @break
 
-                                    @case('action')
+                                    @case('price')
+                                        <span v-html="product['priceHTML']"></span>
+                                        @break
+
+                                    @case('addToCartHtml')
                                         <div class="action">
-                                            <div v-html="product.defaultAddToCart"></div>
+                                            <vnode-injector :nodes="getDynamicHTML(product.addToCartHtml)"></vnode-injector>
 
-                                            <span class="icon white-cross-sm-icon remove-product" @click="removeProductCompare(product.id)"></span>
+                                            <i
+                                                class="material-icons cross fs16"
+                                                @click="removeProductCompare(product.id)">
+
+                                                close
+                                            </i>
                                         </div>
-                                        @break;
+                                        @break
+
+                                    @case('color')
+                                        <span v-html="product.color_label" class="fs16"></span>
+                                        @break
+
+                                    @case('size')
+                                        <span v-html="product.size_label" class="fs16"></span>
+                                        @break
+
+                                    @case('description')
+                                        <span v-html="product.description"></span>
+                                        @break
 
                                     @default
                                         @switch ($attribute['type'])
@@ -128,13 +114,6 @@
                                                             ? '{{ __('velocity::app.shop.general.yes') }}'
                                                             : '{{ __('velocity::app.shop.general.no') }}'"
                                                 ></span>
-                                                @break;
-                                            @case('file')
-                                                <a v-if="product.product['{{ $attribute['code'] }}']" :href="`${$root.baseUrl}/storage/${product.product['{{ $attribute['code'] }}']}`">
-                                                    <span v-text="product.product['{{ $attribute['code'] }}'].substr(product.product['{{ $attribute['code'] }}'].lastIndexOf('/') + 1)"  class="fs16"></span>
-                                                    <i class='material-icons'>arrow_downward</i>
-                                                </a>
-                                                <span v-else class="fs16">__</span>
                                                 @break;
 
                                             @case('checkbox')
@@ -146,6 +125,18 @@
                                                 <span v-if="product.product['{{ $attribute['code'] }}']" v-html="getAttributeOptions(product['{{ $attribute['code'] }}'] ? product : product.product['{{ $attribute['code'] }}'] ? product.product : null, '{{ $attribute['code'] }}', 'single')" class="fs16"></span>
                                                 <span v-else class="fs16">__</span>
                                                 @break;
+
+                                            @case ('file')
+                                            @case ('image')
+                                                <a :href="`${$root.baseUrl}/${product.url_key}`" class="unset">
+                                                    <img
+                                                        class="image-wrapper"
+                                                        onload="window.updateHeight ? window.updateHeight() : ''"
+                                                        :src="'storage/' + product.product['{{ $attribute['code'] }}']"
+                                                        :onerror="`this.src='${$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
+                                                </a>
+                                                @break;
+
                                             @default
                                                 <span v-html="product['{{ $attribute['code'] }}'] ? product['{{ $attribute['code'] }}'] : product.product['{{ $attribute['code'] }}'] ? product.product['{{ $attribute['code'] }}'] : '__'" class="fs16"></span>
                                                 @break;
