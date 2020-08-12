@@ -1,7 +1,7 @@
 <?php
 
 Route::group(['middleware' => ['web']], function () {
-    Route::prefix('admin')->group(function () {
+    Route::prefix(config('app.admin_url'))->group(function () {
 
         Route::get('/', 'Webkul\Admin\Http\Controllers\Controller@redirectToLogin');
 
@@ -272,6 +272,10 @@ Route::group(['middleware' => ['web']], function () {
                 Route::post('/products/create', 'Webkul\Product\Http\Controllers\ProductController@store')->defaults('_config', [
                     'redirect' => 'admin.catalog.products.edit',
                 ])->name('admin.catalog.products.store');
+
+                Route::get('products/copy/{id}', 'Webkul\Product\Http\Controllers\ProductController@copy')->defaults('_config', [
+                    'view' => 'admin::catalog.products.edit',
+                ])->name('admin.catalog.products.copy');
 
                 Route::get('/products/edit/{id}', 'Webkul\Product\Http\Controllers\ProductController@edit')->defaults('_config', [
                     'view' => 'admin::catalog.products.edit',
@@ -677,7 +681,7 @@ Route::group(['middleware' => ['web']], function () {
             //tax rate ends
 
             //DataGrid Export
-            Route::post('admin/export', 'Webkul\Admin\Http\Controllers\ExportController@export')->name('admin.datagrid.export');
+            Route::post(config('app.admin_url') . '/export', 'Webkul\Admin\Http\Controllers\ExportController@export')->name('admin.datagrid.export');
 
             Route::prefix('promotions')->group(function () {
                 Route::get('cart-rules', 'Webkul\CartRule\Http\Controllers\CartRuleController@index')->defaults('_config', [

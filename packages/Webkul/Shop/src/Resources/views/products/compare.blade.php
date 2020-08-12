@@ -3,7 +3,11 @@
 @push('scripts')
 
     <script type="text/x-template" id="compare-component-template">
-        <a class="unset compare-icon text-right" @click="addProductToCompare" style="cursor: pointer">
+        <a
+            class="unset compare-icon text-right"
+            title="{{  __('shop::app.customer.compare.add-tooltip') }}"
+            @click="addProductToCompare"
+            style="cursor: pointer">
             <img src="{{ asset('themes/default/assets/images/compare_arrows.png') }}" />
         </a>
     </script>
@@ -14,7 +18,7 @@
 
             template: '#compare-component-template',
 
-            data: function () {
+            data: function () {                
                 return {
                     'baseUrl': "{{ url()->to('/') }}",
                     'customer': '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == "true",
@@ -33,12 +37,12 @@
                                 'type': `alert-${response.data.status}`,
                                 'message': response.data.message
                             }];
-
+                            
                             this.$root.addFlashMessages()
                         }).catch(error => {
                             window.flashMessages = [{
                                 'type': `alert-danger`,
-                                'message': "{{ __('velocity::app.error.something_went_wrong') }}"
+                                'message': "{{ __('shop::app.common.error') }}"
                             }];
 
                             this.$root.addFlashMessages()
@@ -55,14 +59,14 @@
 
                                 window.flashMessages = [{
                                     'type': `alert-success`,
-                                    'message': "{{ __('velocity::app.customer.compare.added') }}"
+                                    'message': "{{ __('shop::app.customer.compare.added') }}"
                                 }];
 
                                 this.$root.addFlashMessages()
                             } else {
                                 window.flashMessages = [{
                                     'type': `alert-success`,
-                                    'message': "{{ __('velocity::app.customer.compare.already_added') }}"
+                                    'message': "{{ __('shop::app.customer.compare.already_added') }}"
                                 }];
 
                                 this.$root.addFlashMessages()
@@ -72,12 +76,14 @@
 
                             window.flashMessages = [{
                                 'type': `alert-success`,
-                                'message': "{{ __('velocity::app.customer.compare.added') }}"
+                                'message': "{{ __('shop::app.customer.compare.added') }}"
                             }];
 
                                 this.$root.addFlashMessages()
                         }
                     }
+
+                    this.updateCompareCount();
                 },
 
                 'getStorageValue': function (key) {
@@ -95,6 +101,28 @@
 
                     return true;
                 },
+
+                'updateCompareCount': function () {
+                    if (this.customer == "true" || this.customer == true) {
+                        this.$http.get(`${this.baseUrl}/items-count`)
+                        .then(response => {
+                            $('#compare-items-count').html(response.data.compareProductsCount);
+                        })
+                        .catch(exception => {
+                            window.flashMessages = [{
+                                'type': `alert-error`,
+                                'message': "{{ __('shop::app.common.error') }}"
+                            }];
+                            
+                            this.$root.addFlashMessages();
+                        });
+                    } else {
+                        let comparedItems = JSON.parse(localStorage.getItem('compared_product'));
+                        comparedItemsCount = comparedItems ? comparedItems.length : 0;
+
+                        $('#compare-items-count').html(comparedItemsCount);
+                    }
+                }
             }
         });
     </script>

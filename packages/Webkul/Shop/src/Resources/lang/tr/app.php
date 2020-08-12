@@ -89,6 +89,18 @@ return [
     ],
 
     'customer' => [
+        'compare'           => [
+            'text'                  => 'Karşılaştır',
+            'compare_similar_items' => 'Benzer Ürünleri Karşılaştır',
+            'add-tooltip'           => 'Karşılaştırma listesine ürün ekle',
+            'added'                 => 'Ürün karşılaştırma listesine başarıyla eklendi.',
+            'already_added'         => 'Ürün zaten karşılaştırma listesinde yer alıyor.',
+            'removed'               => 'Ürün karşılaştırma listesinden başarıyla kaldırıldı.',
+            'empty-text'            => "Karşılaştırma listenizde henüz ürün bulunmuyor.",
+            'product_image'         => 'Ürün Görseli',
+            'actions'               => 'Eylemler',
+        ],
+
         'signup-text' => [
             'account_exists' => 'Hesabınız var mı?',
             'title' => 'Giriş Yapın'
@@ -160,6 +172,11 @@ return [
         'account' => [
             'dashboard' => 'Profil Düzenle',
             'menu' => 'Menü',
+
+            'general' => [
+                'no' => 'Hayır',
+                'yes' => 'Evet',
+            ],
 
             'profile' => [
                 'index' => [
@@ -326,6 +343,8 @@ return [
                 'error' => 'Ürün dilek listesine eklenemiyor, lütfen daha sonra tekrar deneyin.',
                 'add' => 'Ürün dilek listesine başarıyla eklendi.',
                 'remove' => 'Ürün dilek listesinden başarıyla kaldırıldı.',
+                'add-wishlist-text'     => 'Ürünü dilek listenize ekleyin',
+                'remove-wishlist-text'  => 'Ürünü dilek listenizden kaldırın',
                 'moved' => 'Ürün alışveriş sepetine başarıyla taşındı.',
                 'option-missing' => 'Ürün seçenekleri bulunamadı; bu yüzden dilek listesine taşınamadı.',
                 'move-error' => 'Ürün dilek listesine taşınamadı, lütfen tekrar deneyin.',
@@ -574,9 +593,9 @@ return [
             'final-summary' => 'Bizi tercih ettiğiniz için teşekkür ederiz. Ürün kargoya teslim edildikten sonra takip numarası iletilecektir.',
             'help' => 'Soru ve görüşleriniz için lütfen bizimle iletişime geçiniz: :support_email',
             'thanks' => 'Teşekkürler!',
-            
+
             'comment' => [
-                'subject' => 'Siparişinize yeni yorum yapıldı.',
+                'subject' => 'Siparişinize #:order_id yeni yorum yapıldı.',
                 'dear' => 'Sayın :customer_name',
                 'final-summary' => 'Bizi tercih ettiğiniz için teşekkür ederiz.',
                 'help' => 'Soru ve görüşleriniz için lütfen bizimle iletişime geçiniz: :support_email',
@@ -636,6 +655,13 @@ return [
             'info' => 'Parola sıfırlama talebinde bulunduğunuz için bu maili hesabınıza kayıtlı mail adresinize gönderdik.',
             'reset-password' => 'Parola Yenile',
             'final-summary' => 'Eğer parola yenileme talebinde bulunmadıysanız bu maili silebilirsiniz.',
+            'thanks' => 'Teşekkürler!'
+        ],
+
+        'update-password' => [
+            'subject' => 'Şifre güncellendi',
+            'dear' => 'Sayın :name',
+            'info' => 'Bu e-postayı, şifrenizi güncellediğiniz için alıyorsunuz.',
             'thanks' => 'Teşekkürler!'
         ],
 

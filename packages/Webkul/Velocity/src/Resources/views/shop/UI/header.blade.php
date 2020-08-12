@@ -19,7 +19,7 @@
                                             {{ __('velocity::app.responsive.header.greeting', ['customer' => auth()->guard('customer')->user()->first_name]) }}
                                         </a>
                                     @endauth
-                                    
+
                                     <i
                                         @click="closeDrawer()"
                                         class="material-icons pull-right text-dark">
@@ -172,6 +172,16 @@
                                             class="unset"
                                             href="{{ route('customer.session.create') }}">
                                             <span>{{ __('shop::app.customer.login-form.title') }}</span>
+                                        </a>
+                                    @endguest
+                                </li>
+                                
+                                <li>
+                                    @guest('customer')
+                                        <a
+                                            class="unset"
+                                            href="{{ route('customer.register.index') }}">
+                                            <span>{{ __('shop::app.header.sign-up') }}</span>
                                         </a>
                                     @endguest
                                 </li>
@@ -493,7 +503,7 @@
 
                 toggleMetaInfo: function (metaKey) {
                     this.rootCategories = ! this.rootCategories;
-                    
+
                     this[metaKey] = !this[metaKey];
                 },
 
@@ -532,7 +542,7 @@
                         console.log(this.__('error.something_went_wrong'));
                     });
                 },
-                
+
                 formatCategories: function (categories) {
                     let slicedCategories = categories;
                     let categoryCount = this.categoryCount ? this.categoryCount : 9;
