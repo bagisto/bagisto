@@ -4286,10 +4286,6 @@ section.review {
         }
     }
 
-    .checkbox {
-        margin: 10px 0px 5px 5px;
-    }
-
     .radio {
         margin: 10px 0px 5px 5px;
 
@@ -4304,11 +4300,22 @@ section.review {
         }
     }
 
+    .radio-container .checkmark {
+        top: 2px;
+        left: 4px;
+    }
+
+    .mt-5 {
+        margin-top: 5px;
+        margin-right: 28px;
+    }
+
     @media only screen and (max-width: 770px) {
         .checkout-process .col-main {
             padding-left: 0px;
         }
     }
+    
     //checkout process page end here
 
     //customer page start here

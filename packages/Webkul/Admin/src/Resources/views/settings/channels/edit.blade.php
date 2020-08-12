@@ -154,9 +154,9 @@
                                 <?php $selectedOption = old('theme') ?: $channel->theme ?>
 
                                 <select class="control" id="theme" name="theme">
-                                    @foreach (themes()->all() as $theme)
-                                        <option value="{{ $theme->code }}" {{ $selectedOption == $theme->code ? 'selected' : '' }}>
-                                            {{ $theme->name }}
+                                    @foreach (config('themes.themes') as $themeCode => $theme)
+                                        <option value="{{ $themeCode }}" {{ $selectedOption == $themeCode ? 'selected' : '' }}>
+                                            {{ $theme['name'] }}
                                         </option>
                                     @endforeach
                                 </select>

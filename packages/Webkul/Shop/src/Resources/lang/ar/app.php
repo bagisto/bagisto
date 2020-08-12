@@ -176,6 +176,11 @@ return [
             'dashboard' => 'الملف الشخصي',
             'menu' => 'القائمة',
 
+            'general' => [
+                'no' => 'لا',
+                'yes' => 'نعم',
+            ],
+
             'profile' => [
                 'index' => [
                     'page-title' => 'الملف الشخصي',

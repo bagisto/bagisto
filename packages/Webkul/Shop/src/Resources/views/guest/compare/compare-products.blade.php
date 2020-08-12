@@ -1,13 +1,17 @@
 @php
-    $attributeRepository = app('\Webkul\Attribute\Repositories\AttributeRepository');
-    $comparableAttributes = $attributeRepository->findByField('is_comparable', 1);
+    $attributeRepository = app('\Webkul\Attribute\Repositories\AttributeFamilyRepository');
+    $comparableAttributes = $attributeRepository->getComparableAttributesBelongsToFamily();
+
+    $locale = request()->get('locale') ?: app()->getLocale();
+    
+    $attributeOptionTranslations = DB::table('attribute_option_translations')->where('locale', $locale)->get()->toJson();
 @endphp
 
 @push('scripts')
     <script type="text/x-template" id="compare-product-template">
         <section class="comparison-component">
             <h1>
-                {{ __('velocity::app.customer.compare.compare_similar_items') }}
+                {{ __('shop::app.customer.compare.compare_similar_items') }}
             </h1>
 
             <button
@@ -25,13 +29,13 @@
                         $comparableAttributes = $comparableAttributes->toArray();
 
                         array_splice($comparableAttributes, 1, 0, [[
-                            'code' => 'image',
-                            'admin_name' => 'Product Image'
+                            'code' => 'product_image',
+                            'admin_name' => __('velocity::app.customer.compare.product_image'),
                         ]]);
 
                         array_splice($comparableAttributes, 2, 0, [[
                             'code' => 'addToCartHtml',
-                            'admin_name' => 'Actions'
+                            'admin_name' => __('velocity::app.customer.compare.actions'),
                         ]]);
                     @endphp
 
@@ -49,7 +53,7 @@
                                         </a>
                                         @break
 
-                                    @case('image')
+                                    @case('product_image')
                                         <a :href="`${baseUrl}/${product.url_key}`" class="unset">
                                             <img
                                                 class="image-wrapper"
@@ -91,12 +95,25 @@
                                                             : '{{ __('velocity::app.shop.general.no') }}'"
                                                 ></span>
                                                 @break;
-                                            @case('file')
-                                                <a v-if="product.product['{{ $attribute['code'] }}']" :href="`${baseUrl}/storage/${product.product['{{ $attribute['code'] }}']}`">
-                                                    <span v-text="product.product['{{ $attribute['code'] }}'].substr(product.product['{{ $attribute['code'] }}'].lastIndexOf('/') + 1)"  class="fs16"></span>
-                                                    <i class='icon sort-down-icon download'></i>
+
+                                            @case('checkbox')
+                                                <span v-if="product.product['{{ $attribute['code'] }}']" v-html="getAttributeOptions(product['{{ $attribute['code'] }}'] ? product : product.product['{{ $attribute['code'] }}'] ? product.product : null, '{{ $attribute['code'] }}', 'multiple')" class="fs16"></span>
+                                                <span v-else class="fs16">__</span>
+                                                @break;
+
+                                            @case('select')
+                                                <span v-if="product.product['{{ $attribute['code'] }}']" v-html="getAttributeOptions(product['{{ $attribute['code'] }}'] ? product : product.product['{{ $attribute['code'] }}'] ? product.product : null, '{{ $attribute['code'] }}', 'single')" class="fs16"></span>
+                                                <span v-else class="fs16">__</span>
+                                                @break;
+
+                                            @case ('file')
+                                            @case ('image')
+                                                <a :href="`${baseUrl}/${product.url_key}`" class="unset">
+                                                    <img
+                                                        class="image-wrapper"
+                                                        :src="'storage/' + product.product['{{ $attribute['code'] }}']"
+                                                        :onerror="`this.src='${baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
                                                 </a>
-                                                <a v-else class="fs16">__</span>
                                                 @break;
                                             @default
                                                 <span v-html="product['{{ $attribute['code'] }}'] ? product['{{ $attribute['code'] }}'] : product.product['{{ $attribute['code'] }}'] ? product.product['{{ $attribute['code'] }}'] : '__'" class="fs16"></span>
@@ -105,14 +122,14 @@
 
                                         @break
 
-                                @endswitch
+                                @endswitch 
                             </td>
                         </tr>
                     @endforeach
                 </template>
 
                 <span v-else-if="isProductListLoaded && products.length == 0">
-                    {{ __('velocity::app.customer.compare.empty-text') }}
+                    {{ __('shop::app.customer.compare.empty-text') }}
                 </span>
             </table>
 
@@ -129,6 +146,7 @@
                     'products': [],
                     'isProductListLoaded': false,
                     'baseUrl': "{{ url()->to('/') }}",
+                    'attributeOptions': JSON.parse(@json($attributeOptionTranslations)),
                     'isCustomer': '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == "true",
                 }
             },
@@ -170,7 +188,7 @@
                         })
                         .catch(error => {
                             this.isProductListLoaded = true;
-                            console.log("{{ __('velocity::app.error.something_went_wrong') }}");
+                            console.log("{{ __('shop::app.common.error') }}");
                         });
                     } else {
                         this.isProductListLoaded = true;
@@ -193,7 +211,7 @@
                             this.$root.addFlashMessages();
                         })
                         .catch(error => {
-                            console.log("{{ __('velocity::app.error.something_went_wrong') }}");
+                            console.log("{{ __('shop::app.common.error') }}");
                         });
                     } else {
                         let existingItems = this.getStorageValue('compared_product');
@@ -201,17 +219,19 @@
                         if (productId == "all") {
                             updatedItems = [];
                             this.$set(this, 'products', []);
-                            window.flashMessages = [{'type': 'alert-success', 'message': '{{ __('velocity::app.customer.compare.removed-all') }}' }];
+                            window.flashMessages = [{'type': 'alert-success', 'message': '{{ __('shop::app.customer.compare.removed-all') }}' }];
                         } else {
                             updatedItems = existingItems.filter(item => item != productId);
                             this.$set(this, 'products', this.products.filter(product => product.id != productId));
-                            window.flashMessages = [{'type': 'alert-success', 'message': '{{ __('velocity::app.customer.compare.removed') }}' }];
+                            window.flashMessages = [{'type': 'alert-success', 'message': '{{ __('shop::app.customer.compare.removed') }}' }];
                         }
 
                         this.setStorageValue('compared_product', updatedItems);
 
                         this.$root.addFlashMessages();
                     }
+
+                    this.updateCompareCount();
                 },
 
                 'getDynamicHTML': function (input) {
@@ -258,6 +278,64 @@
 
                     return true;
                 },
+
+                'getAttributeOptions': function (productDetails, attributeValues, type) {
+                    var attributeOptions = '__';
+
+                    if (productDetails && attributeValues) {
+                        var attributeItems;
+
+                        if (type == "multiple") {
+                            attributeItems = productDetails[attributeValues].split(',');
+                        } else if (type == "single") {
+                            attributeItems = productDetails[attributeValues];
+                        }
+
+                        attributeOptions = this.attributeOptions.filter(option => {
+                            if (type == "multiple") {
+                                if (attributeItems.indexOf(option.attribute_option_id.toString()) > -1) {
+                                    return true;
+                                }
+                            } else if (type == "single") {
+                                if (attributeItems == option.attribute_option_id.toString()) {
+                                    return true;
+                                }
+                            }
+
+                            return false;
+                        });
+
+                        attributeOptions = attributeOptions.map(option => {
+                            return option.label;
+                        });
+
+                        attributeOptions = attributeOptions.join(', ');
+                    }
+
+                    return attributeOptions;
+                },
+
+                'updateCompareCount': function () {
+                    if (this.isCustomer == "true" || this.isCustomer == true) {
+                        this.$http.get(`${this.baseUrl}/items-count`)
+                        .then(response => {
+                            $('#compare-items-count').html(response.data.compareProductsCount);
+                        })
+                        .catch(exception => {
+                            window.flashMessages = [{
+                                'type': `alert-error`,
+                                'message': "{{ __('shop::app.common.error') }}"
+                            }];
+                            
+                            this.$root.addFlashMessages();
+                        });
+                    } else {
+                        let comparedItems = JSON.parse(localStorage.getItem('compared_product'));
+                        comparedItemsCount = comparedItems ? comparedItems.length : 0;
+
+                        $('#compare-items-count').html(comparedItemsCount);
+                    }
+                }
             }
         });
     </script>

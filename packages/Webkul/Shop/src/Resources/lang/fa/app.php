@@ -176,6 +176,11 @@ return [
             'dashboard' => 'مشتری - ویرایش نمایه',
             'menu' => 'فهرست',
 
+            'general' => [
+                'no' => 'نه',
+                'yes' => 'آره',
+            ],
+
             'profile' => [
                 'index' => [
                     'page-title' => 'مشتری - پروفایل',
