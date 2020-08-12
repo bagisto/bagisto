@@ -195,9 +195,11 @@ return [
         'compare' => [
             'text' => 'Compare',
             'compare_similar_items' => 'Compare Similar Items',
+            'add-tooltip' => 'Voeg product toe aan vergelijkingslijst',
             'added' => 'Item successfully added to compare list',
             'already_added' => 'Item already added to compare list',
             'removed' => 'Item successfully removed from compare list',
+            'removed-all' => 'Alle items zijn met succes verwijderd uit de vergelijkingslijst',
             'empty-text' => "You don't have any items in your compare list",
             'product_image' => 'Product Image',
             'actions' => 'Actions',

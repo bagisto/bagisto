@@ -28,7 +28,7 @@ return [
         'sort'  => 4,
     ], [
         'key'   => 'account.compare',
-        'name'  => 'velocity::app.customer.compare.text',
+        'name'  => 'shop::app.customer.compare.text',
         'route' =>'velocity.customer.product.compare',
         'sort'  => 5,
     ], [
