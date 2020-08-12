@@ -284,6 +284,7 @@
                                         <tbody>
 
                                             @foreach ($order->items as $item)
+
                                                 <tr>
                                                     <td>
                                                         {{ $item->getTypeInstance()->getOrderedItem($item)->sku }}
@@ -467,13 +468,12 @@
                             </thead>
 
                             <tbody>
-
                                 @foreach ($order->invoices as $invoice)
                                     <tr>
                                         <td>#{{ $invoice->id }}</td>
                                         <td>{{ $invoice->created_at }}</td>
                                         <td>#{{ $invoice->order->increment_id }}</td>
-                                        <td>{{ $invoice->address->name }}</td>
+                                        <td>{{ $invoice->order->customer_full_name }}</td>
                                         <td>
                                             @if($invoice->state == "paid")
                                                 {{ __('admin::app.sales.orders.invoice-status-paid') }}
