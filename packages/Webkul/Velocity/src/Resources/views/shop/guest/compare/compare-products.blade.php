@@ -131,6 +131,7 @@
                                                 <a :href="`${$root.baseUrl}/${product.url_key}`" class="unset">
                                                     <img
                                                         class="image-wrapper"
+                                                        onload="window.updateHeight ? window.updateHeight() : ''"
                                                         :src="'storage/' + product.product['{{ $attribute['code'] }}']"
                                                         :onerror="`this.src='${$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
                                                 </a>

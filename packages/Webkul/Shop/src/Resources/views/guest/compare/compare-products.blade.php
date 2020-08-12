@@ -91,41 +91,6 @@
                                             @case('boolean')
                                                 <span
                                                     v-text="product.product['{{ $attribute['code'] }}']
-                                                            ? '{{ __('shop::app.customer.account.general.yes') }}'
-                                                            : '{{ __('shop::app.customer.account.general.no') }}'"
-                                                ></span>
-                                                @break;
-                                            @case('file')
-                                                <a v-if="product.product['{{ $attribute['code'] }}']" :href="`${baseUrl}/storage/${product.product['{{ $attribute['code'] }}']}`">
-                                                    <span v-text="product.product['{{ $attribute['code'] }}'].substr(product.product['{{ $attribute['code'] }}'].lastIndexOf('/') + 1)"  class="fs16"></span>
-                                                    <i class='icon sort-down-icon download'></i>
-                                                </a>
-                                                <a v-else class="fs16">__</span>
-                                                @break;
-                                            @default
-                                                <span v-html="product['{{ $attribute['code'] }}'] ? product['{{ $attribute['code'] }}'] : product.product['{{ $attribute['code'] }}'] ? product.product['{{ $attribute['code'] }}'] : '__'" class="fs16"></span>
-                                                @break;
-                                        @endswitch
-
-                                        @break
-
-                                    @case('color')
-                                        <span v-html="product.color_label" class="fs16"></span>
-                                        @break
-
-                                    @case('size')
-                                        <span v-html="product.size_label" class="fs16"></span>
-                                        @break
-
-                                    @case('description')
-                                        <span v-html="product.description"></span>
-                                        @break
-
-                                    @default
-                                        @switch ($attribute['type'])
-                                            @case('boolean')
-                                                <span
-                                                    v-text="product.product['{{ $attribute['code'] }}']
                                                             ? '{{ __('velocity::app.shop.general.yes') }}'
                                                             : '{{ __('velocity::app.shop.general.no') }}'"
                                                 ></span>
