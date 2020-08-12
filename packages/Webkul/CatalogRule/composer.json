@@ -1,5 +1,5 @@
 {
-    "name": "bagisto/laravel-inventory",
+    "name": "bagisto/laravel-catalog-rule",
     "license": "MIT",
     "authors": [
         {
@@ -8,17 +8,18 @@
         }
     ],
     "require": {
-        "propaganistas/laravel-intl": "^2.0"
+        "bagisto/laravel-core": "dev-master",
+        "bagisto/laravel-rule": "dev-master"
     },
     "autoload": {
         "psr-4": {
-            "Webkul\\Inventory\\": "src/"
+            "Webkul\\CatalogRule\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Webkul\\Inventory\\Providers\\InventoryServiceProvider"
+                "Webkul\\CatalogRule\\Providers\\CatalogRuleServiceProvider"
             ],
             "aliases": {}
         }

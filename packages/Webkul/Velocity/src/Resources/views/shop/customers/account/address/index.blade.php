@@ -84,17 +84,16 @@
 @endpush
 
 @if ($addresses->isEmpty())
-<style>
+    <style>
+        a#add-address-button {
+            position: absolute;
+            margin-top: 92px;
+        }
 
-    a#add-address-button {
-        position: absolute;
-        margin-top: 92px;
-    }
-
-    .address-button {
-        position: absolute;
-        margin-top: 92px;
-    }
-
-</style>
+        .address-button {
+            position: absolute;
+            z-index: 1 !important;
+            margin-top: 110px !important;
+        }
+    </style>
 @endif

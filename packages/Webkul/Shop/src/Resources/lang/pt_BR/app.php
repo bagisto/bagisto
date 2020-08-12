@@ -174,6 +174,11 @@ return [
             'dashboard' => 'Cliente - Perfil',
             'menu' => 'Menu',
 
+            'general' => [
+                'no' => 'Não',
+                'yes' => 'sim',
+            ],
+
             'profile' => [
                 'index' => [
                     'page-title' => 'Cliente - Perfil',

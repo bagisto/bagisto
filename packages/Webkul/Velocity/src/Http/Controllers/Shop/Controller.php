@@ -93,7 +93,6 @@ class Controller extends BaseController
      * @param  \Webkul\Category\Repositories\CategoryRepository                        $categoryRepository
      * @param  \Webkul\Velocity\Repositories\Product\ProductRepository                 $velocityProductRepository
      * @param  \Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository  $compareProductsRepository
-     * @param  \Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository  $compareProductsRepository
      *  
      * @return void
      */

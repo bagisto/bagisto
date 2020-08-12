@@ -173,6 +173,11 @@ return [
             'dashboard' => 'Profil Düzenle',
             'menu' => 'Menü',
 
+            'general' => [
+                'no' => 'Hayır',
+                'yes' => 'Evet',
+            ],
+
             'profile' => [
                 'index' => [
                     'page-title' => 'Profil',
