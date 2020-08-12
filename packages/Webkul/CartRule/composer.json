@@ -1,0 +1,28 @@
+{
+    "name": "bagisto/laravel-cart-rule",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jitendra Singh",
+            "email": "jitendra@webkul.com"
+        }
+    ],
+    "require": {
+        "bagisto/laravel-core": "dev-master",
+        "bagisto/laravel-rule": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Webkul\\CartRule\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Webkul\\CartRule\\Providers\\CartRuleServiceProvider"
+            ],
+            "aliases": {}
+        }
+    },
+    "minimum-stability": "dev"
+}

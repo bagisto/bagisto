@@ -16,7 +16,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Webkul\\Checkout\\CheckoutServiceProvider"
+                "Webkul\\Checkout\\Providers\\CheckoutServiceProvider"
             ]
         }
     },
