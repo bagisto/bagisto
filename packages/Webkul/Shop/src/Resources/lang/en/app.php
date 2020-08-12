@@ -176,6 +176,11 @@ return [
             'dashboard' => 'Edit Profile',
             'menu' => 'Menu',
 
+            'general' => [
+                'no' => 'No',
+                'yes' => 'Yes',
+            ],
+
             'profile' => [
                 'index' => [
                     'page-title' => 'Profile',
