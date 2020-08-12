@@ -11,7 +11,7 @@
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ route('admin.dashboard.index') }}';"></i>
 
                         {{ __('admin::app.settings.channels.add-title') }}
                     </h1>
@@ -143,9 +143,9 @@
                             <div class="control-group">
                                 <label for="theme">{{ __('admin::app.settings.channels.theme') }}</label>
                                 <select class="control" id="theme" name="theme">
-                                    @foreach (themes()->all() as $theme)
-                                        <option value="{{ $theme->code }}" {{ old('theme') == $theme->code ? 'selected' : '' }}>
-                                            {{ $theme->name }}
+                                    @foreach (config('themes.themes') as $themeCode => $theme)
+                                        <option value="{{ $themeCode }}" {{ old('theme') == $themeCode ? 'selected' : '' }}>
+                                            {{ $theme['name'] }}
                                         </option>
                                     @endforeach
                                 </select>

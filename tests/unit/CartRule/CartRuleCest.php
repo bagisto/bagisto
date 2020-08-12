@@ -243,21 +243,21 @@ class CartRuleCest
     protected function getCartWithCouponScenarios(): array
     {
         return [
-            [
-                'name'            => 'check cart coupon',
-                'productSequence' => [
-                    self::PRODUCT_NOT_FREE,
-                    self::PRODUCT_NOT_FREE_REDUCED_TAX,
-                    self::PRODUCT_NOT_FREE,
-                ],
-                'withCoupon'      => true,
-                'couponScenario'  => [
-                    'scenario' => self::COUPON_FIXED_CART,
-                    'products' => [
-                    ],
-                ],
-                'checkOrder'      => true,
-            ],
+            // [
+            //     'name'            => 'check cart coupon',
+            //     'productSequence' => [
+            //         self::PRODUCT_NOT_FREE,
+            //         self::PRODUCT_NOT_FREE_REDUCED_TAX,
+            //         self::PRODUCT_NOT_FREE,
+            //     ],
+            //     'withCoupon'      => true,
+            //     'couponScenario'  => [
+            //         'scenario' => self::COUPON_FIXED_CART,
+            //         'products' => [
+            //         ],
+            //     ],
+            //     'checkOrder'      => true,
+            // ],
             //  ohne coupon
             [
                 'name'            => 'PRODUCT_FREE no coupon',
@@ -306,23 +306,23 @@ class CartRuleCest
                 ],
                 'checkOrder'      => false,
             ],
-            [
-                'name'            => 'check fix coupon applied to two products',
-                'productSequence' => [
-                    self::PRODUCT_NOT_FREE,
-                    self::PRODUCT_NOT_FREE_REDUCED_TAX,
-                    self::PRODUCT_NOT_FREE,
-                ],
-                'withCoupon'      => true,
-                'couponScenario'  => [
-                    'scenario' => self::COUPON_FIXED,
-                    'products' => [
-                        self::PRODUCT_NOT_FREE,
-                        self::PRODUCT_NOT_FREE_REDUCED_TAX,
-                    ],
-                ],
-                'checkOrder'      => true,
-            ],
+            // [
+            //     'name'            => 'check fix coupon applied to two products',
+            //     'productSequence' => [
+            //         self::PRODUCT_NOT_FREE,
+            //         self::PRODUCT_NOT_FREE_REDUCED_TAX,
+            //         self::PRODUCT_NOT_FREE,
+            //     ],
+            //     'withCoupon'      => true,
+            //     'couponScenario'  => [
+            //         'scenario' => self::COUPON_FIXED,
+            //         'products' => [
+            //             self::PRODUCT_NOT_FREE,
+            //             self::PRODUCT_NOT_FREE_REDUCED_TAX,
+            //         ],
+            //     ],
+            //     'checkOrder'      => true,
+            // ],
             // prozenturaler Coupon für ein Produkt (Warenkorb wird nicht 0)
             [
                 'name'            => 'PRODUCT_NOT_FREE percentage coupon',
@@ -354,23 +354,23 @@ class CartRuleCest
                 ],
                 'checkOrder'      => false,
             ],
-            [
-                'name'            => 'check percentage coupon applied to two products',
-                'productSequence' => [
-                    self::PRODUCT_NOT_FREE,
-                    self::PRODUCT_NOT_FREE_REDUCED_TAX,
-                    self::PRODUCT_NOT_FREE,
-                ],
-                'withCoupon'      => true,
-                'couponScenario'  => [
-                    'scenario' => self::COUPON_PERCENTAGE,
-                    'products' => [
-                        self::PRODUCT_NOT_FREE,
-                        self::PRODUCT_NOT_FREE_REDUCED_TAX,
-                    ],
-                ],
-                'checkOrder'      => true,
-            ],
+            // [
+            //     'name'            => 'check percentage coupon applied to two products',
+            //     'productSequence' => [
+            //         self::PRODUCT_NOT_FREE,
+            //         self::PRODUCT_NOT_FREE_REDUCED_TAX,
+            //         self::PRODUCT_NOT_FREE,
+            //     ],
+            //     'withCoupon'      => true,
+            //     'couponScenario'  => [
+            //         'scenario' => self::COUPON_PERCENTAGE,
+            //         'products' => [
+            //             self::PRODUCT_NOT_FREE,
+            //             self::PRODUCT_NOT_FREE_REDUCED_TAX,
+            //         ],
+            //     ],
+            //     'checkOrder'      => true,
+            // ],
             // fixer Coupon für ein Produkt (Warenkorb wird 0)
             [
                 'name'            => 'PRODUCT_NON_SUB_NOT_FREE fix coupon to zero',
@@ -402,23 +402,23 @@ class CartRuleCest
                 ],
                 'checkOrder'      => false,
             ],
-            [
-                'name'            => 'check fix coupon to zero applied to two products',
-                'productSequence' => [
-                    self::PRODUCT_NOT_FREE,
-                    self::PRODUCT_NOT_FREE_REDUCED_TAX,
-                    self::PRODUCT_NOT_FREE,
-                ],
-                'withCoupon'      => true,
-                'couponScenario'  => [
-                    'scenario' => self::COUPON_FIXED_FULL,
-                    'products' => [
-                        self::PRODUCT_NOT_FREE,
-                        self::PRODUCT_NOT_FREE_REDUCED_TAX,
-                    ],
-                ],
-                'checkOrder'      => true,
-            ],
+            // [
+            //     'name'            => 'check fix coupon to zero applied to two products',
+            //     'productSequence' => [
+            //         self::PRODUCT_NOT_FREE,
+            //         self::PRODUCT_NOT_FREE_REDUCED_TAX,
+            //         self::PRODUCT_NOT_FREE,
+            //     ],
+            //     'withCoupon'      => true,
+            //     'couponScenario'  => [
+            //         'scenario' => self::COUPON_FIXED_FULL,
+            //         'products' => [
+            //             self::PRODUCT_NOT_FREE,
+            //             self::PRODUCT_NOT_FREE_REDUCED_TAX,
+            //         ],
+            //     ],
+            //     'checkOrder'      => true,
+            // ],
             // prozenturaler Coupon für ein Produkt (Warenkorb wird 0)
             [
                 'name'            => 'PRODUCT_NOT_FREE percentage coupon to zero',
@@ -450,23 +450,23 @@ class CartRuleCest
                 ],
                 'checkOrder'      => false,
             ],
-            [
-                'name'            => 'check percentage coupon to zero applied to two products',
-                'productSequence' => [
-                    self::PRODUCT_NOT_FREE,
-                    self::PRODUCT_NOT_FREE_REDUCED_TAX,
-                    self::PRODUCT_NOT_FREE,
-                ],
-                'withCoupon'      => true,
-                'couponScenario'  => [
-                    'scenario' => self::COUPON_PERCENTAGE_FULL,
-                    'products' => [
-                        self::PRODUCT_NOT_FREE,
-                        self::PRODUCT_NOT_FREE_REDUCED_TAX,
-                    ],
-                ],
-                'checkOrder'      => true,
-            ],
+            // [
+            //     'name'            => 'check percentage coupon to zero applied to two products',
+            //     'productSequence' => [
+            //         self::PRODUCT_NOT_FREE,
+            //         self::PRODUCT_NOT_FREE_REDUCED_TAX,
+            //         self::PRODUCT_NOT_FREE,
+            //     ],
+            //     'withCoupon'      => true,
+            //     'couponScenario'  => [
+            //         'scenario' => self::COUPON_PERCENTAGE_FULL,
+            //         'products' => [
+            //             self::PRODUCT_NOT_FREE,
+            //             self::PRODUCT_NOT_FREE_REDUCED_TAX,
+            //         ],
+            //     ],
+            //     'checkOrder'      => true,
+            // ],
         ];
     }
 

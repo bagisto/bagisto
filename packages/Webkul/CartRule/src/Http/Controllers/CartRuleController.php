@@ -2,6 +2,7 @@
 
 namespace Webkul\CartRule\Http\Controllers;
 
+use Exception;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
@@ -87,7 +88,7 @@ class CartRuleController extends Controller
             ->replicate()
             ->fill([
                 'status' => 0,
-                'name'   => __('admin::app.copy-of') . ' ' . $originalCartRule->name,
+                'name'   => __('admin::app.copy-of') . $originalCartRule->name,
             ]);
 
         $copiedCartRule->save();
@@ -209,7 +210,7 @@ class CartRuleController extends Controller
             session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Cart Rule']));
 
             return response()->json(['message' => true], 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Cart Rule']));
         }
 

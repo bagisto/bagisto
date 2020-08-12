@@ -16,7 +16,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Webkul\\Theme\\ThemeServiceProvider"
+                "Webkul\\Theme\\Providers\\ThemeServiceProvider"
             ],
             "aliases": {}
         }

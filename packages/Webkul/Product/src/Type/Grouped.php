@@ -140,15 +140,39 @@ class Grouped extends AbstractType
     }
 
     /**
+     * Get group product special price
+     *
+     * @return boolean
+     */
+    private function checkGroupProductHaveSpecialPrice()
+    {
+        $haveSpecialPrice = false;
+        foreach ($this->product->grouped_products as $groupOptionProduct) {
+            if ($groupOptionProduct->associated_product->getTypeInstance()->haveSpecialPrice()) {
+                $haveSpecialPrice = true;
+                break;
+            }
+        }
+        return $haveSpecialPrice;
+    }
+
+    /**
      * Get product minimal price
      *
      * @return string
      */
     public function getPriceHtml()
     {
-        return '<span class="price-label">' . trans('shop::app.products.starting-at') . '</span>'
-            . ' '
-            . '<span class="final-price">' . core()->currency($this->getMinimalPrice()) . '</span>';
+        $html = '';
+
+        if ($this->checkGroupProductHaveSpecialPrice())
+            $html .= '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>';
+
+        $html .= '<span class="price-label">' . trans('shop::app.products.starting-at') . '</span>'
+        . ' '
+        . '<span class="final-price">' . core()->currency($this->getMinimalPrice()) . '</span>';
+
+        return $html;
     }
 
     /**
