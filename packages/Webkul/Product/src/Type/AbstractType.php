@@ -735,10 +735,10 @@ abstract class AbstractType
             $specilaOffers = $this->getCustomerGroupPriceOffers();
             foreach ($specilaOffers as $specialOffer) {
                 if ($this->haveSpecialPrice()) {
-                    $offerDiscount = round((($specialOffer->price * $specialOffer->qty) / ($this->getSpecialPrice() * $specialOffer->qty)) * 100);
+                    $offerDiscount = round(100 - ((($specialOffer->price * $specialOffer->qty) / ($this->getSpecialPrice() * $specialOffer->qty)) * 100));
                 }
                 else {
-                    $offerDiscount = round((($specialOffer->price * $specialOffer->qty) / ($this->product->price * $specialOffer->qty)) * 100);
+                    $offerDiscount = round(100 - ((($specialOffer->price * $specialOffer->qty) / ($this->product->price * $specialOffer->qty)) * 100));
                 }
                 
                 $html .= '<div class="offer"> Buy ' . $specialOffer->qty . ' for ' . core()->currency($specialOffer->price) . ' each and <b>save ' . $offerDiscount .'% </b></div>';
