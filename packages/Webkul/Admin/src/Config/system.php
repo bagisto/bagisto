@@ -195,6 +195,21 @@ return [
             ],
         ],
     ], [
+        'key'    => 'catalog.products.attribute',
+        'name'   => 'admin::app.admin.system.attribute',
+        'sort'   => 4,
+        'fields' => [
+            [
+                'name'  => 'image_attribute_upload_size',
+                'title' => 'admin::app.admin.system.image-upload-size',
+                'type'  => 'text',
+            ], [
+                'name'  => 'file_attribute_upload_size',
+                'title' => 'admin::app.admin.system.file-upload-size',
+                'type'  => 'text',
+            ]
+        ],
+    ], [
         'key'  => 'catalog.inventory',
         'name' => 'admin::app.admin.system.inventory',
         'sort' => 1,

@@ -91,6 +91,16 @@
                                             array_push($validations, 'decimal');
                                         }
 
+                                        if ($attribute->type == 'file') {
+                                            $retVal = (core()->getConfigData('catalog.products.attribute.file_attribute_upload_size')) ? core()->getConfigData('catalog.products.attribute.file_attribute_upload_size') : '2048' ;
+                                            array_push($validations, 'size:' . $retVal);
+                                        }
+
+                                        if ($attribute->type == 'image') { 
+                                            $retVal = (core()->getConfigData('catalog.products.attribute.image_attribute_upload_size')) ? core()->getConfigData('catalog.products.attribute.image_attribute_upload_size') : '2048' ;
+                                            array_push($validations, 'size:' . $retVal . '|mimes:jpeg, bmp, png, jpg');      
+                                        }
+
                                         array_push($validations, $attribute->validation);
 
                                         $validations = implode('|', array_filter($validations));

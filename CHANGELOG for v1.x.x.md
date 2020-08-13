@@ -2,7 +2,7 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
-## **v1.1.3 (19th of June 2020)** - *Release*
+## **v1.1.3 (14th of August 2020)** - *Release*
 
 * [feature] - Customer group price for products implemented
 
@@ -12,6 +12,16 @@
 
 * [feature] - Search engine optimization with rich snippet
 
+* [feature] - Blade file tracer
+
+* [feature] - Search with Elastic and Algolia
+
+* [feature] - Support for admin multi theme
+
+* [feature] - One click upgrade
+
+* [feature] - Social login
+
 
 * #343 [fixed] - Translation strings are missing from awful amount of controllers when returning responses with flash. And optimise translation strings for faster static translations.
 
@@ -20,6 +30,8 @@
 * #838 [fixed] - Packages as composer dependency
 
 * #985 [fixed] - Dynamically insert products
+
+* #1246 [fixed] - Implement a feature to import product through csv file.
 
 * #1258 [fixed] - If payment is done through paypal then invoice should generate automatically and status of Order should be processing.
 
@@ -36,6 +48,8 @@
 * #2009 [fixed] - Using AWS S3 for storage
 
 * #2060 [fixed] - auto generate coupon accordion not getting hidden while selecting no specific coupons
+
+* #2141 [fixed] - SQLSTATE[42S02]: Base table or view not found: 1146 Table '[DB_PREFIX].category_translations' doesn't exist
 
 * #2159 [fixed] - Taking more time to load product details in shopping cart.
 
@@ -81,6 +95,8 @@
 
 * #2936 [fixed] - change the admin route for another
 
+* #2937 [fixed] - Checkout old theme
+
 * #2942 [fixed] - Randomize New and Featured Products
 
 * #2949 [fixed] - failed to migrate with new database using installer
@@ -91,9 +107,15 @@
 
 * #2969 [fixed] - Cancel icon is not visible in velocity theme for customer order detail
 
+* #2971 [fixed] - Need to add the possibility to translate velocity metadata
+
 * #2972 [fixed] - can add to homescreen on mobile device in velocity theme
 
+* #2973 [fixed] - force the execution of the shipping methods trigger
+
 * #2974 [fixed] - Thumbnails are not generating on mobile ifproduct has more than 4 photos
+
+* #2981 [fixed] - When paying with Paypal the user can change the amounts of the products
 
 * #2886 [fixed] - Configuration option for Compare
 
@@ -205,6 +227,8 @@
 
 * #3120 [fixed] - admin panel multi locale
 
+* #3131 [fixed] - Velocity theme responsiveness issue after changing the language to Arabic RTL
+
 * #3135 [fixed] - How can I cad comment box in checkout form.
 
 * #3136 [fixed] - configurable product variant name gets removed from the catalog list
@@ -267,6 +291,8 @@
 
 * #3222 [fixed] - UI issue in event ticket booking special price date field
 
+* #3231 [fixed] - "error!options are missing alert" on home page shouldn't be shown
+
 * #3232 [fixed] - homepage is showing 404 error page in both theme
 
 * #3234 [fixed] - UI Issue for cart, wishlist, compare icon number indicator in RTL
@@ -282,6 +308,8 @@
 * #3240 [fixed] - Payment methods in onepage checkout are not visible completely in RTL
 
 * #3241 [fixed] - login fields(email,passwords) are in the center when in RTL
+
+* #3243 [fixed] - Email settings are empty in backend
 
 * #3246 [fixed] - fix icon layout in edit booking product page for RTL
 
@@ -312,6 +340,294 @@
 * #3297 [fixed] - getting exception when save booking product from edit page
 
 * #3298 [fixed] - Header content category always redirect to 404 error page
+
+* #3301 [fixed] - fix search keys in search bar for analysed keywords in velocity
+
+* #3303 [fixed] - Getting exception on changing locale when customer has opened downloadable products grid from his account
+
+* #3304 [fixed] - Getting incorrect message on delete all from wishlist in case of guest user only
+
+* #3307 [fixed] - Getting exception on changing locale when customer has opened order grid from his account
+
+* #3309 [fixed] - 500 error when loading /search with "term" in query string
+
+* #3310 [fixed] - Editing product title should not change URL if it has already been set
+
+* #3311 [fixed] - Mobile Bug - Filters disappear when no products match filters
+
+* #3313 [fixed] - In cart, in place of only qty, quantity and price both are coming in ar.
+
+* #3314 [fixed] - admin back to sign in link always redirects to same page after admin login
+
+* #3315 [fixed] - compare option should be remove from customer profile options list if the compare is disable
+
+* #3316 [fixed] - layout issues in checkout page while placing order of booking product
+
+* #3317 [fixed] - Pagination layout should be implemented at customer end
+
+* #3319 [fixed] - Issue in validation message while placing order of booking type product if customer did not fill select rent time
+
+* #3320 [fixed] - Getting exception on frontend when opening a category in which brand is selected as filterable attribute.
+
+* #3321 [fixed] - Comapre button should come between wishlist and cart in arabic also.
+
+* #3322 [fixed] - Title and url both are coming same on layered navigation page in velocity theme
+
+* #3323 [fixed] - text written in search page(for invalid search) should be properly aligned
+
+* #3328 [fixed] - velocity logo and shop by category override
+
+* #3330 [fixed] - Layout issue while adding configurable product to cart in velocity theme
+
+* #3331 [fixed] - layout issue while using filter at any grid(admin end) in ar locale
+
+* #3335 [fixed] - New Label is missing in VelocityTheme
+
+* #3338 [fixed] - bundle option should be marked as mandatory if it's required
+
+* #3339 [fixed] - category display mode options are not working
+
+* #3340 [fixed] - mobile view not able to updated currency
+
+* #3341 [fixed] - filter option should be remove from the search page in mobile view
+
+* #3354 [fixed] - error when upload invalid image/file type in search
+
+* #3356 [fixed] - search term removed from the search bar in default theme
+
+* #3357 [fixed] - Image search feature is not available in mobile view default theme 
+
+* #3358 [fixed] - New and sale icon lable on product issue in RTL
+
+* #3360 [fixed] - filter and items per page is getting collapsed in ar
+
+* #3363 [fixed] - null value accepted in filter option at customer end
+
+* #3365 [fixed] - On mobile responsive on ios sign up button is missing
+
+* #3369 [fixed] - getting exception when clicking on any social login icon
+
+* #3371 [fixed] - Easy bug: incorrect PL lang file
+
+* #3373 [fixed] - New Error migration Bagisto Install MySQL/MariaDB
+
+* #3374 [fixed] - Social Login Error
+
+* #3377 [fixed] - error when click to twitter social login
+
+* #3379 [fixed] - Getting error on migration command.
+
+* #3380 [fixed] - Layout issues on mobile view in ar locale
+
+* #3381 [fixed] - Customer city name does not allow hyphen
+
+* #3392 [fixed] - Translation key is not added in order settings
+
+* #3393 [fixed] - Getting broken image link for locales in mobile view.
+
+* #3394 [fixed] - Not able to open menu in mobile view having locale arabic.
+
+* #3395 [fixed] - default group should be set for the social login customer
+
+* #3396 [fixed] - getting error when admin view order placed by social customers
+
+* #3399 [fixed] - Remove from wishlist button is displaying as 1 when mouse not hover on product, this occur in all locale except English.
+
+* #3400 [fixed] - fix UI for the compare page in default theme
+
+* #3409 [fixed] - Wrong validation when remove variant(s) of configurable product
+
+* #3411 [fixed] - Sale level is displaying even if special price date has been already expired
+
+* #3417 [fixed] - social login icons in RTL
+
+* #3422 [fixed] - getting exception when view order of deleted customer
+
+* #3423 [fixed] - Cannot change account password
+
+* #3425 [fixed] - Impossible to connect, please check your Algolia Application Id.
+
+* #3443 [fixed] - customer group price functionality is not working
+
+* #3444 [fixed] - Layout issue on review page
+
+* #3445 [fixed] - filter tag is out of box in search key term for long product name
+
+* #3447 [fixed] - By default social login should be enabled
+
+* #3451 [fixed] - Change request regarding shipments
+
+* #3453 [fixed] - Invoice state is always set to paid
+
+* #3457 [fixed] - number indicator are hidden on wishlist or compare icon RTL format
+
+* #3458 [fixed] - not able to add (virtual,booking etc.) product to compare list by logged in user
+
+* #3460 [fixed] - Add address option should come below in velocity theme
+
+* #3465 [fixed] - When I update the folder name from bagisto to new name, the logo image doesn't appear, why?
+
+* #3467 [fixed] - layout issue at shop end in ar
+
+* #3469 [fixed] - Cannot remove a layered navigation attribute from product
+
+* #3472 [fixed] - layout issue in order and downloadable grid at customer end in mobile view
+
+* #3478 [fixed] - Getting exception on putting limit =0 in url
+
+* #3484 [fixed] - missing product quick view icon on search page
+
+* #3485 [fixed] - layout issue on category page for filterable attributes
+
+* #3486 [fixed] - Compare feature shows wrong attribute value
+
+* #3487 [fixed] - Velocity RTL product image zoom floats right - not showing
+
+* #3488 [fixed] - color attribute default swatch value should be selected as dropdown swatch
+
+* #3489 [fixed] - Sale icon is not showing even if catalog rule is applied for grouped and bundle type products
+
+* #3490 [fixed] - Back icon is not working in catalog and cart rule grid
+
+* #3491 [fixed] - broken image for color image swatch type
+
+* #3494 [fixed] - compare feature is not working properly if admin creates a image type attribute and give attribute code and name "image"
+
+* #3495 [fixed] - image is not coming in compare list for any image type attribute
+
+* #3496 [fixed] - showing values in compare list of those attribute which has been removed from attribute family
+
+* #3498 [fixed] - No.of items in compare should be displayed with compare tab in default theme
+
+* #3501 [fixed] - unable to download files while comparing products
+
+* #3502 [fixed] - Side bar menu is getting removed while editing/adding customer address at admin end
+
+* #3505 [fixed] - No message on removing products or deleting all from compare list in default theme
+
+* #3506 [fixed] - Uploaded image is not showing while editing Advertisement 4,3,2 Images for arabic locale
+
+* #3507 [fixed] - locale filter is not working properly in product grid
+
+* #3508 [fixed] - Error on PL lang file
+
+* #3514 [fixed] - Use "has been" in place of "had been" in mail to warehouse
+
+* #3515 [fixed] - Order id is missing in mail which customer get when admin add any comment in order
+
+* #3519 [fixed] - Customer is getting mails in Arabic for order information and rest mails in English for same order which was placed in ar locale.
+
+* #3520 [fixed] - Admin should get mail according to admin's default locale not customer's locale
+
+* #3521 [fixed] - layout issue in order information in default theme at customer end
+
+* #3522 [fixed] - Admin is not getting mail when customer cancels order
+
+* #3526 [fixed] - On changing current password admin/customer should get mail
+
+* #3530 [fixed] - mobile view sortBy functionality in category page is not working
+
+* #3531 [fixed] - In price filter, allow comma(,) for price in filter as in french locale float values used to be separated by , in stead of .
+
+* #3532 [fixed] - (Mobile view) getting product image issue when set grid as List type in category page
+
+* #3533 [fixed] - Products Per Page configuration is not working properly
+
+* #3534 [fixed] - Add validation for products per page field otherwise if admin entered string value then customer gets exception on category page
+
+* #3535 [fixed] - Sort By configuration from admin end is not working properly
+
+* #3546 [fixed] - Shipping charge is not getting calculated properly in case customer removes the product just before clicking on place order
+
+* #3547 [fixed] - checkout country null issue
+
+* #3548 [fixed] - filter is not working properly in attribute grid at admin end
+
+* #3550 [fixed] - there should be tooltip text on mouse hover on compare icon on product
+
+* #3554 [fixed] - Cart Rule Issue
+
+* #3558 [fixed] - Incorrect price showing for configurable product on front end
+
+* #3561 [fixed] - Customer Revenue is not getting minus after refund
+
+* #3562 [fixed] - getting exception when view category page in frontend
+
+* #3570 [fixed] - Translation issue on uploading high size image
+
+* #3574 [fixed] - One page Checkout loader hits on adding single digit in phone number
+
+* #3575 [fixed] - Inactive child product shouldn't visible in grouped product
+
+* #3577 [fixed] - Customer is able to place order of more than available qty of any bundle option product
+
+* #3580 [fixed] - Incorrect error message while adding bundle product in cart if no.of bundles contains more qty than available qty
+
+* #3591 [fixed] - Getting exception while using layered navigation filters on category page
+
+* #3595 [fixed] - I would like like to change the admin route or url
+
+* #3604 [fixed] - show percentage in place count number in review in velocity theme
+
+* #3606 [fixed] - showing different number of star in velocity and default theme for same rating
+
+* #3615 [fixed] - Getting exception while uploading favicon image if image is of high size
+
+* #3617 [fixed] - Add feature to set the category header content limit in velocity
+
+* #3621 [fixed] - Ui issue when applying filter in mobile view
+
+* #3622 [fixed] - channel filter is not working in cart rule
+
+* #3628 [fixed] - Correct the Success message after updating content in velocity meta data.
+
+* #3629 [fixed] - Filter is not working properly in content list grid for content type column
+
+* #3631 [fixed] - Category slug should not accept values in capital letters while adding content for Header content
+
+* #3636 [fixed] - Correct the Ui of profile in mobile view,there is no difference in field name test and field data.
+
+* #3637 [fixed] - No records founds text in downloadable product section of customer should display in centre, in mobile view.
+
+* #3638 [fixed] - Promotion, combine "percentage" & "fixed amount to whole cart" cart rules get wrong discount amount
+
+* #3642 [fixed] - getting exception when creating configurable product in case of DB_Prefix
+
+* #3649 [fixed] - product datagrid filter layout issue
+
+* #3648 [fixed] - custom file type attribute is not visible in PDP
+
+* #3656 [fixed] - Product name gets blank each time we refresh the product page.
+
+* #3674 [fixed] - Bugs on category page for list mode
+
+* #3675 [fixed] - Address icon is overlapping on side bar menu in mobile view
+
+* #3676 [fixed] - all cross selling products are not visible in cart page of velocity theme
+
+* #3688 [fixed] - Select icons should be in right side in RTL on payment page in default theme
+
+* #3689 [fixed] - There should not be sale icon in shopping cart in velocity theme
+
+* #3692 [fixed] - Channel filter is not working properly in product grid
+
+* #3693 [fixed] - There should not be any success message while trying to delete system attributes
+
+* #3700 [fixed] - getting exception while creating refund of order placed by deleted customer
+
+* #3702 [fixed] - On deleting customer their invoice and shipment records are getting disappeared.
+
+* #3704 [fixed] - No alert message while deleting customer with pending or processing order from admin end.
+
+* #3717 [fixed] - Layout issue in order grid at customer end
+
+* #3720 [fixed] - Velocity theme option is missing in channel
+
+* #3723 [fixed] - getting exception when download uploaded file from backend
+
+* #3725 [fixed] - getting exception on comparison page of default theme
+
+* #3727 [fixed] - compare page layout issue for logged in user
 
 
 

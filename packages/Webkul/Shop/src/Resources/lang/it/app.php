@@ -99,6 +99,7 @@ return [
             'added'                 => 'Articolo aggiunto alla lista di comparazione',
             'already_added'         => 'Articolo già aggiunto alla lista di comparazione',
             'removed'               => 'Articolo rimosso dalla lista di comparazione',
+            'removed-all'           => 'Tutti gli elementi rimossi dall\'elenco di confronto',
             'empty-text'            => "Non hai articoli nella tua lista di comparazione",
         ],
 
