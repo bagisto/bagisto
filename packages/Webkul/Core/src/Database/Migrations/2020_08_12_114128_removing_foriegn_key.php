@@ -1,8 +1,5 @@
 <?php
 
-use Webkul\Sales\Models\Invoice;
-use Webkul\Sales\Models\Shipment;
-use Webkul\Sales\Models\OrderAddress;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
