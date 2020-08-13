@@ -639,6 +639,54 @@ abstract class AbstractType
     }
 
     /**
+     * Get product group price offers
+     *
+     * @return float
+     */
+    public function getCustomerGroupPriceOffers()
+    {
+        $customerGroupId = null;
+
+        if (Cart::getCurrentCustomer()->check()) {
+            $customerGroupId = Cart::getCurrentCustomer()->user()->customer_group_id;
+        } else {
+            $customerGroupRepository = app('Webkul\Customer\Repositories\CustomerGroupRepository');
+
+            if ($customerGuestGroup = $customerGroupRepository->findOneByField('code', 'guest')) {
+                $customerGroupId = $customerGuestGroup->id;
+            }
+        }
+
+        $customerGroupPrices = $this->product->customer_group_prices()->where(function ($query) use ($customerGroupId) {
+            $query->where('customer_group_id', $customerGroupId)
+                  ->orWhereNull('customer_group_id');
+            }
+        )->get();
+
+        if ($customerGroupPrices->count()) {
+
+            $offerPrices = [];
+
+            foreach ($customerGroupPrices as $price) {
+
+                if($price->qty != 1) {
+                    if ($price->value_type == 'discount') {
+                        $result = $this->product->price - ($this->product->price * $price->value) / 100;
+                        $offerPrices[] = (object) array('qty' => $price->qty, 'price' => $result);
+                    } else {
+                        $offerPrices[] = (object) array('qty' => $price->qty, 'price' => $price->value);
+                    }
+                }              
+
+            }
+            return $offerPrices;
+        }
+        else {
+            return false;
+        }
+    }
+
+    /**
      * Returns product prices
      *
      * @return array
@@ -670,6 +718,34 @@ abstract class AbstractType
                 . '<span class="special-price">' . core()->currency($this->getSpecialPrice()) . '</span>';
         } else {
             $html = '<span>' . core()->currency($this->product->price) . '</span>';
+        }
+
+        return $html;
+    }
+
+    /**
+     * Get product offer
+     *
+     * @return string
+     */
+    public function getOffersHtml()
+    {
+        if ($this->getCustomerGroupPriceOffers()) {
+            $html = '';
+            $specilaOffers = $this->getCustomerGroupPriceOffers();
+            foreach ($specilaOffers as $specialOffer) {
+                if ($this->haveSpecialPrice()) {
+                    $offerDiscount = round((($specialOffer->price * $specialOffer->qty) / ($this->getSpecialPrice() * $specialOffer->qty)) * 100);
+                }
+                else {
+                    $offerDiscount = round((($specialOffer->price * $specialOffer->qty) / ($this->product->price * $specialOffer->qty)) * 100);
+                }
+                
+                $html .= '<div class="offer"> Buy ' . $specialOffer->qty . ' for ' . core()->currency($specialOffer->price) . ' each and <b>save ' . $offerDiscount .'% </b></div>';
+            }
+            
+        } else {
+            $html = '';
         }
 
         return $html;
