@@ -2,7 +2,7 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
-## **v1.1.3 (13th of August 2020)** - *Release*
+## **v1.1.3 (14th of August 2020)** - *Release*
 
 * [feature] - Customer group price for products implemented
 
@@ -11,6 +11,16 @@
 * [feature] - Migrated to Laravel 7
 
 * [feature] - Search engine optimization with rich snippet
+
+* [feature] - Blade file tracer
+
+* [feature] - Search with Elastic and Algolia
+
+* [feature] - Support for admin multi theme
+
+* [feature] - One click upgrade
+
+* [feature] - Social login
 
 
 * #343 [fixed] - Translation strings are missing from awful amount of controllers when returning responses with flash. And optimise translation strings for faster static translations.
