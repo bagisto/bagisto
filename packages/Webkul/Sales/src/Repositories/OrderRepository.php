@@ -210,7 +210,15 @@ class OrderRepository extends Repository
 
         foreach ($order->items()->get() as $item) {
             $totalQtyOrdered += $item->qty_ordered;
-            $totalQtyInvoiced += $item->qty_invoiced;
+
+            /*
+                checking invoice item from order item for status check
+                because qty_invoiced column got incremented on pending also
+            */
+            $invoiceItem = $item->invoice_items->first();
+            if ($invoiceItem && $invoiceItem->invoice->state !== 'pending') {
+                $totalQtyInvoiced += $item->qty_invoiced;
+            }
 
             if (! $item->isStockable()) {
                 $totalQtyShipped += $item->qty_ordered;
@@ -266,12 +274,38 @@ class OrderRepository extends Repository
     }
 
     /**
+     * @param mixed $order
+     *
+     * @return boolean
+     */
+    public function isInProcessingState($order)
+    {
+        $totalQtyOrdered = $totalQtyShipped = 0;
+
+        foreach ($order->items()->get() as $item) {
+            $totalQtyOrdered += $item->qty_ordered;
+
+            if (! $item->isStockable()) {
+                $totalQtyShipped += $item->qty_ordered;
+            } else {
+                $totalQtyShipped += $item->qty_shipped;
+            }
+        }
+
+        return $totalQtyOrdered === $totalQtyShipped;
+    }
+
+    /**
      * @param  \Webkul\Sales\Contracts\Order  $order
      * @return void
      */
     public function updateOrderStatus($order)
     {
-        $status = 'processing';
+        $status = 'pending';
+
+        if ($this->isInProcessingState($order)) {
+            $status = 'processing';
+        }
 
         if ($this->isInCompletedState($order)) {
             $status = 'completed';
