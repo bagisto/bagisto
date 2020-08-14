@@ -164,7 +164,7 @@ class InvoiceController extends Controller
             $order = $this->orderRepository->findOrFail($invoice->order->id);
             $this->orderRepository->updateOrderStatus($order);
         }
-
+      
         if ($task){
             session()->flash('success', trans('admin::app.sales.orders.invoice-status-confirmed'));
         } else {

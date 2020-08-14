@@ -2,15 +2,15 @@
 
 namespace Webkul\API\Http\Controllers\Shop;
 
+use Cart;
 use Exception;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Event;
 use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Checkout\Repositories\CartItemRepository;
-use Webkul\API\Http\Resources\Checkout\Cart as CartResource;
-use Cart;
 use Webkul\Customer\Repositories\WishlistRepository;
+use Webkul\API\Http\Resources\Checkout\Cart as CartResource;
 
 class CartController extends Controller
 {
@@ -70,7 +70,7 @@ class CartController extends Controller
     }
 
     /**
-     * Get customer cart
+     * Get customer cart.
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -240,6 +240,57 @@ class CartController extends Controller
         return response()->json([
             'message' => __('shop::app.checkout.cart.move-to-wishlist-success'),
             'data'    => $cart ? new CartResource($cart) : null,
+        ]);
+    }
+
+    /**
+     * Apply coupon code.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function applyCoupon()
+    {
+        $couponCode = request()->get('code');
+
+        try {
+            if (strlen($couponCode)) {
+                Cart::setCouponCode($couponCode)->collectTotals();
+
+                if (Cart::getCart()->coupon_code == $couponCode) {
+                    return response()->json([
+                        'success' => true,
+                        'message' => trans('shop::app.checkout.total.success-coupon'),
+                    ]);
+                }
+            }
+
+            return response()->json([
+                'success' => false,
+                'message' => trans('shop::app.checkout.total.invalid-coupon'),
+            ]);
+        } catch (\Exception $e) {
+            report($e);
+
+            return response()->json([
+                'success' => false,
+                'message' => trans('shop::app.checkout.total.coupon-apply-issue'),
+            ]);
+        }
+
+    }
+
+    /**
+     * Remove coupon code.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function removeCoupon()
+    {
+        Cart::removeCouponCode()->collectTotals();
+
+        return response()->json([
+            'success' => true,
+            'message' => trans('shop::app.checkout.total.remove-coupon'),
         ]);
     }
 }
