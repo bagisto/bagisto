@@ -75,7 +75,7 @@ Route::group(['prefix' => 'api'], function ($router) {
             'resource' => 'Webkul\API\Http\Resources\Catalog\ProductReview',
             'authorization_required' => true
         ]);
-        
+
 
         //Channel routes
         Route::get('channels', 'ResourceController@index')->defaults('_config', [
@@ -154,7 +154,7 @@ Route::group(['prefix' => 'api'], function ($router) {
 
         Route::post('customer/register', 'CustomerController@create');
 
-        Route::get('customers/{id}', 'ResourceController@get')->defaults('_config', [
+        Route::get('customers/{id}', 'CustomerController@get')->defaults('_config', [
             'repository' => 'Webkul\Customer\Repositories\CustomerRepository',
             'resource' => 'Webkul\API\Http\Resources\Customer\Customer',
             'authorization_required' => true
