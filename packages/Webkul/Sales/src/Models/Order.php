@@ -258,7 +258,7 @@ class Order extends Model implements OrderContract
         }
 
         $pendingInvoice = $this->invoices->where('state', 'pending')->first();
-        if ($pendingInvoice) {
+        if ($pendingInvoice && $this->status !== self::STATUS_CANCELED) {
             return true;
         }
 

@@ -105,6 +105,7 @@ class InvoiceRepository extends Repository
             ]);
 
             foreach ($data['invoice']['items'] as $itemId => $qty) {
+
                 if (! $qty) {
                     continue;
                 }
@@ -113,6 +114,8 @@ class InvoiceRepository extends Repository
 
                 if ($qty > $orderItem->qty_to_invoice) {
                     $qty = $orderItem->qty_to_invoice;
+                } else {
+                    $qty = 0;
                 }
 
                 $invoiceItem = $this->invoiceItemRepository->create([
