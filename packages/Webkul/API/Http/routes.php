@@ -75,7 +75,7 @@ Route::group(['prefix' => 'api'], function ($router) {
             'resource' => 'Webkul\API\Http\Resources\Catalog\ProductReview',
             'authorization_required' => true
         ]);
-        
+
 
         //Channel routes
         Route::get('channels', 'ResourceController@index')->defaults('_config', [
@@ -154,7 +154,7 @@ Route::group(['prefix' => 'api'], function ($router) {
 
         Route::post('customer/register', 'CustomerController@create');
 
-        Route::get('customers/{id}', 'ResourceController@get')->defaults('_config', [
+        Route::get('customers/{id}', 'CustomerController@get')->defaults('_config', [
             'repository' => 'Webkul\Customer\Repositories\CustomerRepository',
             'resource' => 'Webkul\API\Http\Resources\Customer\Customer',
             'authorization_required' => true
@@ -246,7 +246,6 @@ Route::group(['prefix' => 'api'], function ($router) {
 
         Route::get('wishlist/add/{id}', 'WishlistController@create');
 
-
         //Checkout routes
         Route::group(['prefix' => 'checkout'], function ($router) {
             Route::post('cart/add/{id}', 'CartController@store');
@@ -258,6 +257,10 @@ Route::group(['prefix' => 'api'], function ($router) {
             Route::put('cart/update', 'CartController@update');
 
             Route::get('cart/remove-item/{id}', 'CartController@destroyItem');
+
+            Route::post('cart/coupon', 'CartController@applyCoupon');
+
+            Route::delete('cart/coupon', 'CartController@removeCoupon');
 
             Route::get('cart/move-to-wishlist/{id}', 'CartController@moveToWishlist');
 
