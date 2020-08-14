@@ -3,7 +3,7 @@
         <div class="product-image">
             <a :title="product.name" :href="`${baseUrl}/${product.slug}`">
                 <img
-                    :src="product.image"
+                    :src="product.image || product.product_image"
                     :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
 
                 <product-quick-view-btn :quick-view-details="product" v-if="!isMobile()"></product-quick-view-btn>
@@ -43,8 +43,8 @@
             <img
                 loading="lazy"
                 :alt="product.name"
-                :src="product.image"
-                :data-src="product.image"
+                :src="product.image || product.product_image"
+                :data-src="product.image || product.product_image"
                 class="card-img-top lzy_img"
                 :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
                 <!-- :src="`${$root.baseUrl}/vendor/webkul/ui/assets/images/product/meduim-product-placeholder.png`" /> -->
