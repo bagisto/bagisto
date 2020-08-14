@@ -96,6 +96,7 @@ return [
             'added'                 => 'Ürün karşılaştırma listesine başarıyla eklendi.',
             'already_added'         => 'Ürün zaten karşılaştırma listesinde yer alıyor.',
             'removed'               => 'Ürün karşılaştırma listesinden başarıyla kaldırıldı.',
+            'removed-all'           => 'Tüm ürünler, karşılaştırma listesinden başarıyla çıkarıldı.',
             'empty-text'            => "Karşılaştırma listenizde henüz ürün bulunmuyor.",
             'product_image'         => 'Ürün Görseli',
             'actions'               => 'Eylemler',
