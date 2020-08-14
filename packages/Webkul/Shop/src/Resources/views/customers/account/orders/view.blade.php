@@ -101,7 +101,7 @@
                                                         </span>
 
                                                         <span class="qty-row">
-                                                            {{ $item->qty_invoiced ? __('shop::app.customer.account.order.view.item-invoice', ['qty_invoiced' => $item->qty_invoiced]) : '' }}
+                                                            {{ $item->invoice_items->first() && $item->invoice_items->first()->qty ? __('shop::app.customer.account.order.view.item-invoice', ['qty_invoiced' => $item->invoice_items->first()->qty]) : '' }}
                                                         </span>
 
                                                         <span class="qty-row">
