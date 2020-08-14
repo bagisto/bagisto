@@ -91,6 +91,19 @@ return [
     ],
 
     'customer' => [
+        'compare' => [
+            'text' => 'Compare',
+            'compare_similar_items' => 'Compare Similar Items',
+            'add-tooltip' => 'Voeg product toe aan vergelijkingslijst',
+            'added' => 'Item successfully added to compare list',
+            'already_added' => 'Item already added to compare list',
+            'removed' => 'Item successfully removed from compare list',
+            'removed-all' => 'All items successfully removed from compare list',
+            'empty-text' => "You don't have any items in your compare list",
+            'product_image' => 'Product Image',
+            'actions' => 'Actions',
+        ],
+
         'signup-text' => [
             'account_exists' => 'Heb je al een account?',
             'title' => 'Aanmelden'
@@ -168,6 +181,11 @@ return [
         'account' => [
             'dashboard' => 'Edit Profile',
             'menu' => 'Menu',
+
+            'general' => [
+                'no' => 'Nee',
+                'yes' => 'Ja',
+            ],
 
             'profile' => [
                 'index' => [
@@ -333,6 +351,8 @@ return [
                 'error' => 'Kan product niet toevoegen aan verlanglijstje vanwege onbekende problemen, kom later terug',
                 'add' => 'Item succesvol toegevoegd aan verlanglijstje',
                 'remove' => 'Item succesvol verwijderd van verlanglijstje',
+                'add-wishlist-text' => 'Toevoegen aan verlanglijst',
+                'remove-wishlist-text' => 'Remove product from wishlist',
                 'moved' => 'Artikel succesvol verplaatst naar winkelwagen',
                 'option-missing' => 'Productopties ontbreken, dus item kan niet naar de verlanglijst worden verplaatst.',
                 'move-error' => 'Item kan niet naar de verlanglijst worden verplaatst. Probeer het later opnieuw',
@@ -582,7 +602,16 @@ return [
             'grand-total' => 'Eindtotaal',
             'final-summary' => 'Bedankt voor het tonen van uw interesse in onze winkel.We sturen u een trackingnummer zodra het is verzonden',
             'help' => 'Als u hulp nodig heeft, neem dan contact met ons op via :support_email',
-            'thanks' => 'Thanks!',
+            'thanks' => 'Bedankt!',
+
+            'comment' => [
+                'subject' => 'Nieuwe opmerking toegevoegd aan uw bestelling #:order_id',
+                'dear' => 'Lieve :customer_name',
+                'final-summary' => 'Bedankt voor het tonen van uw interesse in onze winkel',
+                'help' => 'Als u hulp nodig heeft, neem dan contact met ons op via :support_email',
+                'thanks' => 'Bedankt!',
+            ],
+
             'cancel' => [
                 'subject' => 'Order Annuleren Bevestiging',
                 'heading' => 'Bestelling geannuleerd',
@@ -636,6 +665,13 @@ return [
             'info' => 'U ontvangt deze e-mail omdat we een verzoek voor het opnieuw instellen van uw wachtwoord voor uw account hebben ontvangen',
             'reset-password' => 'Wachtwoord opnieuw instellen',
             'final-summary' => 'Als u geen wachtwoordherstel hebt aangevraagd, is er geen verdere actie vereist',
+            'thanks' => 'Bedankt!'
+        ],
+
+        'update-password' => [
+            'subject' => 'Wachtwoord bijgewerkt',
+            'dear' => 'Lieve :name',
+            'info' => 'Je ontvangt deze e-mail omdat je je wachtwoord hebt bijgewerkt.',
             'thanks' => 'Bedankt!'
         ],
 

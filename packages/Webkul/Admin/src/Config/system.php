@@ -27,7 +27,7 @@ return [
                         'value' => 'kgs',
                     ],
                 ],
-                'channel_based' => true,
+                'channel_based' => true
             ],
         ],
     ], [
@@ -41,24 +41,28 @@ return [
                 'type'          => 'text',
                 'validation'    => 'required|max:50',
                 'channel_based' => true,
+                'default_value' => config('mail.from.name'),
             ],  [
                 'name'          => 'shop_email_from',
                 'title'         => 'admin::app.admin.system.shop-email-from',
                 'type'          => 'text',
                 'validation'    => 'required|email',
                 'channel_based' => true,
+                'default_value' => config('mail.from.address'),
             ],  [
                 'name'          => 'admin_name',
                 'title'         => 'admin::app.admin.system.admin-name',
                 'type'          => 'text',
                 'validation'    => 'required|max:50',
                 'channel_based' => true,
+                'default_value' => config('mail.admin.name'),
             ],  [
                 'name'          => 'admin_email',
                 'title'         => 'admin::app.admin.system.admin-email',
                 'type'          => 'text',
                 'validation'    => 'required|email',
                 'channel_based' => true,
+                'default_value' => config('mail.admin.address'),
             ],
         ],
     ], [
@@ -189,6 +193,21 @@ return [
                 'title' => 'admin::app.admin.system.allow-guest-review',
                 'type'  => 'boolean',
             ],
+        ],
+    ], [
+        'key'    => 'catalog.products.attribute',
+        'name'   => 'admin::app.admin.system.attribute',
+        'sort'   => 4,
+        'fields' => [
+            [
+                'name'  => 'image_attribute_upload_size',
+                'title' => 'admin::app.admin.system.image-upload-size',
+                'type'  => 'text',
+            ], [
+                'name'  => 'file_attribute_upload_size',
+                'title' => 'admin::app.admin.system.file-upload-size',
+                'type'  => 'text',
+            ]
         ],
     ], [
         'key'  => 'catalog.inventory',

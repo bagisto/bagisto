@@ -8,22 +8,9 @@
     @push('scripts')
         <script type="text/x-template" id="datagrid-filters">
             <div class="grid-container">
-                <div class="datagrid-filters" id="datagrid-filters">
 
+                <div class="datagrid-filters">
                     <div class="filter-left">
-                        <div class="search-filter">
-                            <input type="search" id="search-field" class="control"
-                                   placeholder="{{ __('ui::app.datagrid.search') }}" v-model="searchValue"
-                                   v-on:keyup.enter="searchCollection(searchValue)"/>
-
-                            <div class="icon-wrapper">
-                                <span class="icon search-icon search-btn"
-                                      v-on:click="searchCollection(searchValue)"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="filter-right">
                         @if (isset($results['extraFilters']['channels']))
                         <div class="dropdown-filters per-page">
                             <div class="control-group">
@@ -34,8 +21,8 @@
                                     </option>
                                     @foreach ($results['extraFilters']['channels'] as $channelModel)
                                         <option
-                                            value="{{ $channelModel->code }}"
-                                            {{ (isset($channel) && ($channelModel->code) == $channel) ? 'selected' : '' }}>
+                                            value="{{ $channelModel->id }}"
+                                            {{ (isset($channel) && ($channelModel->id) == $channel) ? 'selected' : '' }}>
                                             {{ $channelModel->name }}
                                         </option>
                                     @endforeach
@@ -82,7 +69,24 @@
                             </div>
                         </div>
                         @endif
+                    </div>
+                </div>
 
+                <div class="datagrid-filters" id="datagrid-filters">
+                    <div class="filter-left">
+                        <div class="search-filter">
+                            <input type="search" id="search-field" class="control"
+                                   placeholder="{{ __('ui::app.datagrid.search') }}" v-model="searchValue"
+                                   v-on:keyup.enter="searchCollection(searchValue)"/>
+
+                            <div class="icon-wrapper">
+                                <span class="icon search-icon search-btn"
+                                      v-on:click="searchCollection(searchValue)"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-right">
                         <div class="dropdown-filters per-page">
                             <div class="control-group">
                                 <label class="per-page-label" for="perPage">
@@ -167,9 +171,7 @@
 
                                     <li v-if='numberCondition != null'>
                                         <div class="control-group">
-                                            <input type="number" class="control response-number"
-                                                   placeholder="{{ __('ui::app.datagrid.numeric-value-here') }}"
-                                                   v-model="numberValue"/>
+                                            <input type="text" class="control response-number" v-on:input="filterNumberInput" placeholder="{{ __('ui::app.datagrid.numeric-value-here') }}"  v-model="numberValue"/>
                                         </div>
                                     </li>
 
@@ -382,7 +384,11 @@
                         this.numberCondition = null;
                     },
 
-                    getResponse: function () {
+                    filterNumberInput: function(e){
+                        this.numberValue = e.target.value.replace(/[^0-9\,\.]+/g, '');                            
+                    },
+
+                    getResponse: function() {
                         label = '';
 
                         for (let colIndex in this.columns) {
@@ -656,7 +662,6 @@
                             } else {
                                 newParams = newParams + '&' + this.filters[i].column + condition + '=' + this.filters[i].val;
                             }
-                            console.log('newParams', newParams);
                         }
 
                         var uri = window.location.href.toString();
@@ -699,7 +704,7 @@
                                 case "channel":
                                     obj.label = "Channel";
                                     if ('channels' in this.extraFilters) {
-                                        obj.prettyValue = this.extraFilters['channels'].find(channel => channel.code === obj.val).name
+                                        obj.prettyValue = this.extraFilters['channels'].find(channel => channel.id == obj.val).name
                                     }
                                     break;
                                 case "locale":
@@ -728,7 +733,6 @@
                                             obj.label = this.columns[colIndex].label;
 
                                             if (this.columns[colIndex].type === 'boolean') {
-                                                console.log('obj.val', obj.val);
                                                 if (obj.val === '1') {
                                                     obj.val = '{{ __('ui::app.datagrid.true') }}';
                                                 } else {
@@ -742,7 +746,6 @@
 
                             if (obj.column !== undefined && obj.val !== undefined) {
                                 this.filters.push(obj);
-                                console.log('pushed');
                             }
 
                             obj = {};
@@ -751,7 +754,7 @@
 
                     removeFilter: function (filter) {
                         for (let i in this.filters) {
-                            if (this.filters[i].col === filter.col
+                            if (this.filters[i].column === filter.column
                                 && this.filters[i].cond === filter.cond
                                 && this.filters[i].val === filter.val) {
                                 this.filters.splice(i, 1);
@@ -835,7 +838,6 @@
                     captureColumn: function (id) {
                         element = document.getElementById(id);
 
-                        console.log(element.innerHTML);
                     },
 
                     removeMassActions: function () {
