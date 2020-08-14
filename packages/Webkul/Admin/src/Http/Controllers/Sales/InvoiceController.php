@@ -160,7 +160,7 @@ class InvoiceController extends Controller
         $invoice = $this->invoiceRepository->findOrFail($id);
         $task = $this->invoiceRepository->updateInvoiceState($invoice, $request->state);
 
-        if($request->state == 'paid'){
+        if ($request->state == 'paid') {
             $order = $this->orderRepository->findOrFail($invoice->order->id);
             $this->orderRepository->updateOrderStatus($order);
         }

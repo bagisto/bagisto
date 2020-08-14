@@ -193,6 +193,7 @@ class InvoiceRepository extends Repository
 
             $this->collectTotals($invoice);
             $this->orderRepository->collectTotals($order);
+            $this->orderRepository->updateOrderStatus($order);
 
             Event::dispatch('sales.invoice.save.after', $invoice);
         } catch (\Exception $e) {

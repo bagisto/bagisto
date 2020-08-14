@@ -301,7 +301,7 @@ class OrderRepository extends Repository
      */
     public function updateOrderStatus($order)
     {
-        $status = 'pending';
+        $status = 'pending_payment';
 
         if ($this->isInProcessingState($order)) {
             $status = 'processing';
