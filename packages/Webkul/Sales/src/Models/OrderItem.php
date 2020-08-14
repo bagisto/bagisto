@@ -95,7 +95,7 @@ class OrderItem extends Model implements OrderItemContract
      */
     public function getQtyToInvoiceAttribute()
     {
-        if (empty($this->qty_invoiced)) {
+        if (empty($this->qty_invoiced) && $this->invoice_items->first()) {
             return 0;
         }
         return $this->qty_ordered - $this->qty_invoiced - $this->qty_canceled;
