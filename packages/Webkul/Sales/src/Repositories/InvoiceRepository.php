@@ -262,9 +262,14 @@ class InvoiceRepository extends Repository
      * @return void
      */
     public function updateInvoiceState($invoice, $status)
-    {
+    {  
         $invoice->state = $status;
         $invoice->save();
+
+        if ($status == 'paid'){
+            $order = $this->orderRepository->findOrFail($invoice->order->id);
+            $this->orderRepository->updateOrderStatus($order);
+        }
 
         return true;
     }

@@ -164,7 +164,7 @@ $(document).ready(function () {
             },
 
             isMobile: function () {
-                if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i|/mobi/i.test(navigator.userAgent)) {
                   return true
                 } else {
                   return false
@@ -339,7 +339,7 @@ $(document).ready(function () {
             showLoader: function () {
                 $('#loader').show();
                 $('.overlay-loader').show();
-                
+
                 document.body.classList.add("modal-open");
             },
 

@@ -7,7 +7,7 @@
     </label>
 
     @php
-       $pageTarget = isset($locale) ? (old($locale)['page_link'] ?? (isset($content) ? $content->translate($locale)['page_link'] : '')) : '';
+       $pageTarget = isset($locale) ? (old($locale)['page_link'] ?? (isset($content) ? $content->translate($locale) ? $content->translate($locale)['page_link'] : '' : '')) : '';
     @endphp
 
     <input
@@ -31,7 +31,7 @@
     </label>
 
     @php
-       $linkTarget = isset($locale) ? (old($locale)['link_target'] ?? (isset($content) ? $content->translate($locale)['link_target'] : '')) : '';
+       $linkTarget = isset($locale) ? (old($locale)['link_target'] ?? (isset($content) ? $content->translate($locale) ? $content->translate($locale)['link_target'] : '' : '')) : '';
     @endphp
 
     <select class="control" id="link_target" name="{{$locale}}[link_target]" value="">

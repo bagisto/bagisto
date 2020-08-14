@@ -2,12 +2,20 @@
 
 namespace Webkul\API\Http\Controllers\Shop;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 
 class CustomerController extends Controller
 {
+    /**
+     * Contains current guard
+     *
+     * @var array
+     */
+    protected $guard;
+
     /**
      * Contains route related configuration
      *
@@ -40,7 +48,16 @@ class CustomerController extends Controller
         CustomerRepository $customerRepository,
         CustomerGroupRepository $customerGroupRepository
     )   {
+        $this->guard = request()->has('token') ? 'api' : 'customer';
+
         $this->_config = request('_config');
+
+        if (isset($this->_config['authorization_required']) && $this->_config['authorization_required']) {
+
+            auth()->setDefaultDriver($this->guard);
+
+            $this->middleware('auth:' . $this->guard);
+        }
 
         $this->customerRepository = $customerRepository;
 
@@ -80,5 +97,24 @@ class CustomerController extends Controller
         return response()->json([
             'message' => 'Your account has been created successfully.',
         ]);
+    }
+
+    /**
+     * Returns a current user data.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function get($id)
+    {
+        if (Auth::user($this->guard)->id === (int) $id) {
+            return new $this->_config['resource'](
+                $this->customerRepository->findOrFail($id)
+            );
+        }
+
+        return response()->json([
+            'message' => 'Invalid Request.',
+        ], 403);
     }
 }
