@@ -98,90 +98,90 @@ class CartCest
     private function getMergeCartScenarios(): array
     {
         return [
-            [
-                'product_type' => 'simple',
-                'products'     => [
-                    [
-                        'product' => $this->simple1,
-                        'data'    => [],
-                    ],
-                    [
-                        'product' => $this->simple2,
-                        'data'    => [],
-                    ],
-                ],
-                'results'      => [
-                    'cart_items_count'    => 2,
-                    'cart_items_quantity' => 4,
-                ],
-            ],
-            [
-                'product_type' => 'virtual',
-                'products'     => [
-                    [
-                        'product' => $this->virtual1,
-                        'data'    => [],
-                    ],
-                    [
-                        'product' => $this->virtual2,
-                        'data'    => [],
-                    ],
-                ],
-                'results'      => [
-                    'cart_items_count'    => 2,
-                    'cart_items_quantity' => 4,
-                ],
-            ],
-            [
-                'product_type' => 'downloadable',
-                'products'     => [
-                    [
-                        'product' => $this->downloadable1,
-                        'data'    => [
-                            'links' => [$this->downloadableLinkId1],
-                        ],
-                    ],
-                    [
-                        'product' => $this->downloadable2,
-                        'data'    => [
-                            'links' => [$this->downloadableLinkId2],
-                        ],
-                    ],
-                ],
-                'results'      => [
-                    'cart_items_count'    => 2,
-                    'cart_items_quantity' => 4,
-                ],
-            ],
-            [
-                'product_type' => 'booking',
-                'products'     => [
-                    [
-                        'product' => $this->booking1,
-                        'data'    => [
-                            'booking' => [
-                                'qty' => [
-                                    $this->bookingTicket1->id => 1,
-                                ],
-                            ],
-                        ],
-                    ],
-                    [
-                        'product' => $this->booking2,
-                        'data'    => [
-                            'booking'   => [
-                                'qty' => [
-                                    $this->bookingTicket2->id => 1,
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                'results'      => [
-                    'cart_items_count'    => 2,
-                    'cart_items_quantity' => 4,
-                ],
-            ],
+            // [
+            //     'product_type' => 'simple',
+            //     'products'     => [
+            //         [
+            //             'product' => $this->simple1,
+            //             'data'    => [],
+            //         ],
+            //         [
+            //             'product' => $this->simple2,
+            //             'data'    => [],
+            //         ],
+            //     ],
+            //     'results'      => [
+            //         'cart_items_count'    => 2,
+            //         'cart_items_quantity' => 4,
+            //     ],
+            // ],
+            // [
+            //     'product_type' => 'virtual',
+            //     'products'     => [
+            //         [
+            //             'product' => $this->virtual1,
+            //             'data'    => [],
+            //         ],
+            //         [
+            //             'product' => $this->virtual2,
+            //             'data'    => [],
+            //         ],
+            //     ],
+            //     'results'      => [
+            //         'cart_items_count'    => 2,
+            //         'cart_items_quantity' => 4,
+            //     ],
+            // ],
+            // [
+            //     'product_type' => 'downloadable',
+            //     'products'     => [
+            //         [
+            //             'product' => $this->downloadable1,
+            //             'data'    => [
+            //                 'links' => [$this->downloadableLinkId1],
+            //             ],
+            //         ],
+            //         [
+            //             'product' => $this->downloadable2,
+            //             'data'    => [
+            //                 'links' => [$this->downloadableLinkId2],
+            //             ],
+            //         ],
+            //     ],
+            //     'results'      => [
+            //         'cart_items_count'    => 2,
+            //         'cart_items_quantity' => 4,
+            //     ],
+            // ],
+            // [
+            //     'product_type' => 'booking',
+            //     'products'     => [
+            //         [
+            //             'product' => $this->booking1,
+            //             'data'    => [
+            //                 'booking' => [
+            //                     'qty' => [
+            //                         $this->bookingTicket1->id => 1,
+            //                     ],
+            //                 ],
+            //             ],
+            //         ],
+            //         [
+            //             'product' => $this->booking2,
+            //             'data'    => [
+            //                 'booking'   => [
+            //                     'qty' => [
+            //                         $this->bookingTicket2->id => 1,
+            //                     ],
+            //                 ],
+            //             ],
+            //         ],
+            //     ],
+            //     'results'      => [
+            //         'cart_items_count'    => 2,
+            //         'cart_items_quantity' => 4,
+            //     ],
+            // ],
         ];
     }
 
