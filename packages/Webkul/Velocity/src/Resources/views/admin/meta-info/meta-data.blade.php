@@ -5,7 +5,7 @@
 @stop
 
 @php
-    $locale = request()->get('locale') ?: app()->getLocale();
+    $locale = request()->get('locale') ?: 'en';
 @endphp
 
 @section('content')
@@ -62,7 +62,7 @@
                                 class="control"
                                 data-vv-as="&quot;slides&quot;"
                                 {{ $metaData && $metaData->slider ? 'checked' : ''}} />
-                                
+
                             <span class="slider round"></span>
                         </label>
                     </div>
@@ -123,7 +123,7 @@
                     </div>
 
                     <div class="control-group">
-                        <label style="width:100%;">{{ __('velocity::app.admin.meta-data.product-policy') }} <span class="locale">[{{ $metaData ? $metaData->locale : 'en' }}]</span></label>                        
+                        <label style="width:100%;">{{ __('velocity::app.admin.meta-data.product-policy') }} <span class="locale">[{{ $metaData ? $metaData->locale : 'en' }}]</span></label>
 
                         <textarea
                             class="control"
@@ -149,10 +149,9 @@
                             ];
 
                             $index = 0;
-                            $currentLocale = request()->get('locale') ?: core()->getCurrentLocale();
-                            
+
                             foreach ($metaData->get('locale')->all() as $key => $value) {
-                                if ($value->locale == $currentLocale) {
+                                if ($value->locale == $locale) {
                                     $index = $key;
                                 }
                             }
