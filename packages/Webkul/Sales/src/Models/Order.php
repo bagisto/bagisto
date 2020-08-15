@@ -257,9 +257,17 @@ class Order extends Model implements OrderContract
             return false;
         }
 
-        $pendingInvoice = $this->invoices->where('state', 'pending')->first();
-        if ($pendingInvoice) {
-            return true;
+        $invoice = $this->invoices->first();
+
+        if ($invoice) {
+
+            if ($invoice->state === 'pending' && $this->status !== self::STATUS_CANCELED) {
+                return true;
+            }
+
+            if ($invoice->state === 'paid' && $this->status === self::STATUS_PROCESSING) {
+                return false;
+            }
         }
 
         foreach ($this->items as $item) {
