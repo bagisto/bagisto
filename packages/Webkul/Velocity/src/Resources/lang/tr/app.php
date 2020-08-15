@@ -97,6 +97,7 @@ return [
             'footer-left-content' => 'Alt Sol İçeriği',
             'subscription-content' => 'Abonelik Çubuğu İçeriği',
             'sidebar-categories' => 'Yan Kategoriler',
+            'header_content_count' => 'Header Content Count',
             'footer-left-raw-content' => '<p>Yazılımlar üretmeyi ve dünyada karşılaştığımız sorunları bu şekilde çözmeyi çok seviyoruz. Hedeflerimize büyük önem veriyor, en iyi olduğumuz teknoloji uzmanlığı ile kurumsal işleriniz için birin sınıf kullanıcı dostu yazılım ve uygulamalar oluşturmak için kaynaklarımıza yatırım yapıyoruz.</p>',
             'slider-path' => 'Slider Yolu',
             'category-logo' => 'Kategori Logosu',
@@ -192,9 +193,11 @@ return [
         'compare'           => [
             'text'                  => 'Karşılaştır',
             'compare_similar_items' => 'Benzer Ürünleri Karşılaştır',
+            'add-tooltip'           => 'Karşılaştırma listesine ürün ekle',
             'added'                 => 'Ürün karşılaştırma listesine başarıyla eklendi.',
             'already_added'         => 'Ürün zaten karşılaştırma listesinde yer alıyor.',
             'removed'               => 'Ürün karşılaştırma listesinden başarıyla kaldırıldı.',
+            'removed-all'           => 'Tüm Öğeler karşılaştırma listesinden başarıyla kaldırıldı',
             'empty-text'            => "Karşılaştırma listenizde henüz ürün bulunmuyor.",
             'product_image'         => 'Ürün Görseli',
             'actions'               => 'Eylemler',
@@ -268,6 +271,8 @@ return [
             'downloadables'          => 'İndirilebilir Ürünler',
             'confirm-new-password'   => 'Parola Doğrula',
             'enter-current-password' => 'Mevcut Parolanızı Girin',
+            'download'               => 'İndir',
+            'no-file-available'      => 'Dosya Yok!',
 
             'alert' => [
                 'info'      => 'Bilgi',

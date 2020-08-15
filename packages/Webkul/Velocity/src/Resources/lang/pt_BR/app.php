@@ -97,6 +97,7 @@ return [
             'footer-left-content' => 'Conteúdo Rodapé Esquerdo',
             'subscription-content' => 'Conteúdo da Barra de Inscrição',
             'sidebar-categories' => 'Sidebar Categories',
+            'header_content_count' => 'Header Content Count',
             'footer-left-raw-content' => '<p>We love to craft softwares and solve the real world problems with the binaries. We are highly committed to our goals. We invest our resources to create world class easy to use softwares and applications for the enterprise business with the top notch, on the edge technology expertise.</p>',
             'slider-path' => 'Caminho do Slider',
             'category-logo' => 'Logo da Categoria',
@@ -196,9 +197,11 @@ return [
         'compare' => [
             'text' => 'Comparar',
             'compare_similar_items' => 'Comparar itens semelhantes',
+            'add-tooltip' => 'Adicionar produto à lista de comparação',
             'already_added' => 'Item já adicionado à lista de comparação',
             'added' => 'Item adicionado com sucesso à lista de comparação',
             'removed' => 'Item removido com sucesso da lista de comparação',
+            'removed-all' => 'Todos os itens removidos com sucesso da lista de comparação',
             'empty-text' => "Você não possui nenhum item na sua lista de comparação",
             'product_image' => 'Imagem do Produto',
             'actions' => 'Ações',
@@ -272,6 +275,8 @@ return [
             'downloadables' => 'Produtos para download',
             'confirm-new-password' => 'Confirme a nova senha',
             'enter-current-password' => 'Digite sua senha atual',
+            'download' => 'Baixar',
+            'no-file-available' => 'Nenhum arquivo disponível!',
 
             'alert' => [
                 'info' => 'Informações',

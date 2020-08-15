@@ -56,6 +56,7 @@
         margin-bottom: 1rem;
         margin-top: 68px;
         color: #212529;
+        overflow-x: auto;
     }
 
     .per-page {
@@ -78,6 +79,21 @@
       button.btn.btn-sm.btn-primary.apply-filter {
         margin-top: 10px;
         margin-left: -158px;
+    }
+
+      .lg-card-container.list-card .product-image {
+        max-height: 85px;
+    }
+
+      .quick-view-btn-container {
+        left: -26px;
+        width: 109px;
+    }
+
+      .quick-view-btn-container span {
+        left: 24%;
+        top: -24px;
+        font-size: 13px;
     }
 }
 
@@ -396,6 +412,14 @@
                             }
                         }
                     }
+
+                    .dropdown-filters {
+                        &.per-page {
+                            margin-top: 0;
+                            margin-bottom: 10px;
+                            position: relative;
+                        }
+                    }
                 }
             }
 
@@ -445,19 +469,22 @@
 
                         td {
                             width: 100%;
-                            display: block;
                             border-top: none;
+                            border-right: 1px solid $border-common !important;
 
                             &:before {
                                 content: attr(data-value);
                                 font-size: 15px;
                                 font-weight: 600;
                                 display: inline-block;
-                                width: 120px;
                             }
 
                             .action {
                                 display: inline-block;
+                            }
+
+                            &:first-child {
+                                font-weight: bold;
                             }
                         }
                     }
@@ -983,5 +1010,17 @@
                 }
             }
         }
+    }
+
+    #datagrid-filters.datagrid-filters {
+        padding-top: 20px;
+    }
+
+    #sort-by.sorter select {
+        top: 2px;
+        left: 25px;
+        padding: 0 10px;
+        position: absolute;
+        display: inline-block;
     }
 }

@@ -13,6 +13,7 @@
 
                 slug="{{ $product->url_key }}"
                 product-id="{{ $product->id }}"
+                add-tooltip="{{ __('velocity::app.customer.compare.add-tooltip') }}"
             ></compare-component>
         @endif
 
