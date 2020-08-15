@@ -115,9 +115,11 @@ class OrderItem extends Model implements OrderItemContract
      */
     public function getQtyToCancelAttribute()
     {
+        /* not assigning to any property only returning */
         if ($this->order->status === 'pending') {
-            $this->qty_invoiced = 0;
+            return $this->qty_ordered - $this->qty_canceled;
         }
+
         return $this->qty_ordered - $this->qty_canceled - $this->qty_invoiced;
     }
 
