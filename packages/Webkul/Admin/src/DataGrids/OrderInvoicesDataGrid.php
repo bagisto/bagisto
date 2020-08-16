@@ -29,7 +29,7 @@ class OrderInvoicesDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'id',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.sales.invoices.invoice-id'),
             'type'       => 'number',
             'searchable' => false,
             'sortable'   => true,

@@ -39,26 +39,8 @@ class OrderDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'increment_id',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.datagrid.order_number'),
             'type'       => 'string',
-            'searchable' => false,
-            'sortable'   => true,
-            'filterable' => true,
-        ]);
-
-        $this->addColumn([
-            'index'      => 'base_sub_total',
-            'label'      => trans('admin::app.datagrid.sub-total'),
-            'type'       => 'price',
-            'searchable' => false,
-            'sortable'   => true,
-            'filterable' => true,
-        ]);
-
-        $this->addColumn([
-            'index'      => 'base_grand_total',
-            'label'      => trans('admin::app.datagrid.grand-total'),
-            'type'       => 'price',
             'searchable' => false,
             'sortable'   => true,
             'filterable' => true,
@@ -82,6 +64,42 @@ class OrderDataGrid extends DataGrid
             'filterable' => true,
         ]);
 
+        $this->addColumn([
+            'index'      => 'base_sub_total',
+            'label'      => trans('admin::app.datagrid.sub-total'),
+            'type'       => 'price',
+            'searchable' => false,
+            'sortable'   => true,
+            'filterable' => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'base_grand_total',
+            'label'      => trans('admin::app.datagrid.grand-total'),
+            'type'       => 'price',
+            'searchable' => false,
+            'sortable'   => true,
+            'filterable' => true,
+        ]);        
+
+        $this->addColumn([
+            'index'      => 'billed_to',
+            'label'      => trans('admin::app.datagrid.billed-to'),
+            'type'       => 'string',
+            'searchable' => true,
+            'sortable'   => true,
+            'filterable' => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'shipped_to',
+            'label'      => trans('admin::app.datagrid.shipped-to'),
+            'type'       => 'string',
+            'searchable' => true,
+            'sortable'   => true,
+            'filterable' => true,
+        ]);
+                
         $this->addColumn([
             'index'      => 'status',
             'label'      => trans('admin::app.datagrid.status'),
@@ -107,24 +125,6 @@ class OrderDataGrid extends DataGrid
                     return '<span class="badge badge-md badge-danger">'. trans('admin::app.sales.orders.order-status-fraud') . '</span>';
                 }
             },
-        ]);
-
-        $this->addColumn([
-            'index'      => 'billed_to',
-            'label'      => trans('admin::app.datagrid.billed-to'),
-            'type'       => 'string',
-            'searchable' => true,
-            'sortable'   => true,
-            'filterable' => true,
-        ]);
-
-        $this->addColumn([
-            'index'      => 'shipped_to',
-            'label'      => trans('admin::app.datagrid.shipped-to'),
-            'type'       => 'string',
-            'searchable' => true,
-            'sortable'   => true,
-            'filterable' => true,
         ]);
     }
 
