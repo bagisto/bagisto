@@ -71,6 +71,7 @@ $data = array();
         // inserting form data to empty array
         $keyValueData['MAIL_DRIVER']     = $_POST["mail_driver"];
         $keyValueData['MAIL_HOST']       = $_POST["mail_host"];
+        $keyValueData['MAIL_PORT']       = $_POST["mail_port"];
         $keyValueData['MAIL_ENCRYPTION'] = $_POST["mail_encryption"];
 
         $keyValueData['MAIL_USERNAME']   = $_POST["mail_username"];
