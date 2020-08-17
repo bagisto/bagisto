@@ -1,5 +1,6 @@
 <template>
     <carousel
+        :rtl="localeDirection == 'rtl' ? true : false"
         :dir="localeDirection"
         :id="id"
         :navigationEnabled="true"
