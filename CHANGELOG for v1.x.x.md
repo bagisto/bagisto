@@ -2,7 +2,7 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
-## **v1.1.3 (17th of August 2020)** - *Release*
+## **v1.2.0-BETA1 (17th of August 2020)** - *Release*
 
 * [feature] - Customer group price for products implemented
 
@@ -20,7 +20,17 @@
 
 * [feature] - One click upgrade
 
-* [feature] - Social login
+* [feature] - Social login (Facebook, Twitter, Google, Linkedin, Github)
+
+* [feature] - Social share
+
+* [feature] - Store configuration added
+
+* [feature] - Feature to disable compare option
+
+* [feature] - Store configuration added for product listing
+
+
 
 
 * #343 [fixed] - Translation strings are missing from awful amount of controllers when returning responses with flash. And optimise translation strings for faster static translations.
@@ -164,6 +174,8 @@
 * #3026 [fixed] - Date validation error when editing Booking Products
 
 * #3029 [fixed] - velocity theme not fully responsive
+
+* #3030 [fixed] - Api for coupons..
 
 * #3032 [fixed] - [Critical] Onecheckout preventing to continue to shipping method after selecting address
 
@@ -553,6 +565,8 @@
 
 * #3562 [fixed] - getting exception when view category page in frontend
 
+* #3564 [fixed] - getting exception if admin uploads higher size image in image swatch while editing/adding attribute
+
 * #3570 [fixed] - Translation issue on uploading high size image
 
 * #3574 [fixed] - One page Checkout loader hits on adding single digit in phone number
@@ -570,6 +584,8 @@
 * #3604 [fixed] - show percentage in place count number in review in velocity theme
 
 * #3606 [fixed] - showing different number of star in velocity and default theme for same rating
+
+* #3611 [fixed] - The content of CMS page is cropped
 
 * #3615 [fixed] - Getting exception while uploading favicon image if image is of high size
 
@@ -599,11 +615,15 @@
 
 * #3656 [fixed] - Product name gets blank each time we refresh the product page.
 
+* #3657 [fixed] - Auth user can see all users info by id
+
 * #3674 [fixed] - Bugs on category page for list mode
 
 * #3675 [fixed] - Address icon is overlapping on side bar menu in mobile view
 
 * #3676 [fixed] - all cross selling products are not visible in cart page of velocity theme
+
+* #3678 [fixed] - Customer is able to access downloadable products even when invoice state is pending
 
 * #3688 [fixed] - Select icons should be in right side in RTL on payment page in default theme
 
@@ -628,6 +648,46 @@
 * #3725 [fixed] - getting exception on comparison page of default theme
 
 * #3727 [fixed] - compare page layout issue for logged in user
+
+* #3740 [fixed] - translation of alert when remove compare item in default theme
+
+* #3742 [fixed] - Invoice, ship and cancel buttons are missing in order placed by guest user
+
+* #3745 [fixed] - getting exception in backend when having DB_PREFIX
+
+* #3751 [fixed] - shipping tab is missing in order details for deleted customer
+
+* #3755 [fixed] - Webinstall - SMTP port is not set
+
+* #3757 [fixed] - broken image on guest wishlist
+
+* #3727 [fixed] - 
+
+* #3727 [fixed] - 
+
+* #3727 [fixed] - 
+
+* #3727 [fixed] - 
+
+* #3727 [fixed] - 
+
+* #3727 [fixed] - 
+
+* #3727 [fixed] - 
+
+* #3727 [fixed] - 
+
+* #3727 [fixed] - 
+
+* #3727 [fixed] - 
+
+* #3727 [fixed] - 
+
+* #3727 [fixed] - 
+
+* #3727 [fixed] - 
+
+* #3727 [fixed] - 
 
 
 
