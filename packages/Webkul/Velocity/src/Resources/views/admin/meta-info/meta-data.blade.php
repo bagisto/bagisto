@@ -5,8 +5,8 @@
 @stop
 
 @php
-    $locale = request()->get('locale') ?: 'en';
-    $channel = request()->get('channel') ?: 'default';
+    $locale = request()->get('locale') ?: app()->getLocale();
+    $channel = request()->get('channel') ?: core()->getCurrentChannelCode();
 @endphp
 
 @section('content')
@@ -128,7 +128,7 @@
                     <div class="control-group">
                         <label style="width:100%;">
                             {{ __('velocity::app.admin.meta-data.home-page-content') }}
-                            <span class="locale">[{{ $metaData ? $metaData->channel : 'default' }} - {{ $metaData ? $metaData->locale : 'en' }}]</span>
+                            <span class="locale">[{{ $metaData ? $metaData->channel : $channel }} - {{ $metaData ? $metaData->locale : $locale }}]</span>
                         </label>
 
                         <textarea
@@ -142,7 +142,7 @@
                     <div class="control-group">
                         <label style="width:100%;">
                             {{ __('velocity::app.admin.meta-data.product-policy') }}
-                            <span class="locale">[{{ $metaData ? $metaData->channel : 'default' }} - {{ $metaData ? $metaData->locale : 'en' }}]</span>
+                            <span class="locale">[{{ $metaData ? $metaData->channel : $channel }} - {{ $metaData ? $metaData->locale : $locale }}]</span>
                         </label>
 
                         <textarea
@@ -261,7 +261,7 @@
                     <div class="control-group">
                         <label style="width:100%;">
                             {{ __('velocity::app.admin.meta-data.subscription-content') }}
-                            <span class="locale">[{{ $metaData ? $metaData->channel : 'default' }} - {{ $metaData ? $metaData->locale : 'en' }}]</span>
+                            <span class="locale">[{{ $metaData ? $metaData->channel : $channel }} - {{ $metaData ? $metaData->locale : $locale }}]</span>
                         </label>
 
                         <textarea
@@ -275,7 +275,7 @@
                     <div class="control-group">
                         <label style="width:100%;">
                             {{ __('velocity::app.admin.meta-data.footer-left-content') }}
-                            <span class="locale">[{{ $metaData ? $metaData->channel : 'default' }} - {{ $metaData ? $metaData->locale : 'en' }}]</span>
+                            <span class="locale">[{{ $metaData ? $metaData->channel : $channel }} - {{ $metaData ? $metaData->locale : $locale }}]</span>
                         </label>
 
                         <textarea
@@ -289,7 +289,7 @@
                     <div class="control-group">
                         <label style="width:100%;">
                             {{ __('velocity::app.admin.meta-data.footer-middle-content') }}
-                            <span class="locale">[{{ $metaData ? $metaData->channel : 'default' }} - {{ $metaData ? $metaData->locale : 'en' }}]</span>
+                            <span class="locale">[{{ $metaData ? $metaData->channel : $channel }} - {{ $metaData ? $metaData->locale : $locale }}]</span>
                         </label>
 
                         <textarea
