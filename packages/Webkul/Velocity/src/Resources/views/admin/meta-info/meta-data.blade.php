@@ -6,6 +6,7 @@
 
 @php
     $locale = request()->get('locale') ?: 'en';
+    $channel = request()->get('channel') ?: 'default';
 @endphp
 
 @section('content')
@@ -29,13 +30,26 @@
                 </div>
 
                 <input type="hidden" name="locale" value="{{ $locale }}" />
+                <input type="hidden" name="channel" value="{{ $channel }}" />
 
                 <div class="control-group">
                     <select class="control" id="locale-switcher" onChange="window.location.href = this.value">
                         @foreach (core()->getAllLocales() as $localeModel)
 
-                            <option value="{{ route('velocity.admin.meta-data') . '?locale=' . $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
+                            <option value="{{ route('velocity.admin.meta-data') . '?locale=' . $localeModel->code . '&channel=' . $channel }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
                                 {{ $localeModel->name }}
+                            </option>
+
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <select class="control" id="channel-switcher" onChange="window.location.href = this.value">
+                        @foreach (core()->getAllChannels() as $ch)
+
+                            <option value="{{ route('velocity.admin.meta-data') . '?channel=' . $ch->code . '&locale=' . $locale }}" {{ ($ch->code) == $channel ? 'selected' : '' }}>
+                                {{ $ch->name }}
                             </option>
 
                         @endforeach
