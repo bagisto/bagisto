@@ -193,7 +193,7 @@ class InvoiceRepository extends Repository
 
             $this->collectTotals($invoice);
             $this->orderRepository->collectTotals($order);
-            $this->orderRepository->updateOrderStatus($order);
+            $this->orderRepository->updateOrderStatus($order, 'pending');
 
             Event::dispatch('sales.invoice.save.after', $invoice);
         } catch (\Exception $e) {
@@ -260,13 +260,13 @@ class InvoiceRepository extends Repository
      * @return void
      */
     public function updateInvoiceState($invoice, $status)
-    {  
+    {
         $invoice->state = $status;
         $invoice->save();
 
         if ($status == 'paid'){
             $order = $this->orderRepository->findOrFail($invoice->order->id);
-            $this->orderRepository->updateOrderStatus($order);
+            $this->orderRepository->updateOrderStatus($order, 'paid');
         }
 
         return true;

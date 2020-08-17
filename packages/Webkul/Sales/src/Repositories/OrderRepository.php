@@ -299,11 +299,15 @@ class OrderRepository extends Repository
      * @param  \Webkul\Sales\Contracts\Order  $order
      * @return void
      */
-    public function updateOrderStatus($order)
+    public function updateOrderStatus($order, $invoice_state = null)
     {
-        $status = 'pending_payment';
+        $status = 'pending';
 
-        if ($this->isInProcessingState($order)) {
+        if ($invoice_state && $invoice_state === 'pending') {
+            $status = 'pending_payment';
+        }
+
+        if ($this->isInProcessingState($order) || ($invoice_state && $invoice_state === 'paid')) {
             $status = 'processing';
         }
 
