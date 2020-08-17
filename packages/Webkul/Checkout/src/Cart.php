@@ -335,9 +335,9 @@ class Cart
     /**
      * This function handles when guest has some of cart products and then logs in.
      *
-     * @return bool
+     * @return void
      */
-    public function mergeCart()
+    public function mergeCart(): void
     {
         if (session()->has('cart')) {
             $cart = $this->cartRepository->findOneWhere([
@@ -359,59 +359,11 @@ class Cart
 
                 session()->forget('cart');
 
-                return true;
+                return;
             }
 
-            foreach ($guestCart->items as $key => $guestCartItem) {
-                $found = false;
-
-                foreach ($cart->items as $cartItem) {
-                    if (! $cartItem
-                        ->product
-                        ->getTypeInstance()
-                        ->compareOptions($cartItem->additional, $guestCartItem->additional)
-                    ) {
-                        continue;
-                    }
-
-                    $found = true;
-
-                    $cartItem->quantity = $newQuantity = $cartItem->quantity + $guestCartItem->quantity;
-
-                    if ($cartItem->quantity > $cartItem->product->getTypeInstance()->totalQuantity()) {
-                        $cartItem->quantity = $newQuantity = $cartItem->product->getTypeInstance()->totalQuantity();
-                    }
-
-                    if (! $this->isItemHaveQuantity($cartItem)) {
-                        $this->cartItemRepository->delete($guestCartItem->id);
-
-                        continue;
-                    }
-
-                    $this->cartItemRepository->update([
-                        'quantity'          => $newQuantity,
-                        'total'             => core()->convertPrice($cartItem->price * $newQuantity),
-                        'base_total'        => $cartItem->price * $newQuantity,
-                        'total_weight'      => $cartItem->weight * $newQuantity,
-                        'base_total_weight' => $cartItem->weight * $newQuantity,
-                    ], $cartItem->id);
-
-                    $guestCart->items->forget($key);
-
-                    $this->cartItemRepository->delete($guestCartItem->id);
-                }
-
-                if (! $found) {
-                    $this->cartItemRepository->update([
-                        'cart_id' => $cart->id,
-                    ], $guestCartItem->id);
-
-                    foreach ($guestCartItem->children as $child) {
-                        $this->cartItemRepository->update([
-                            'cart_id' => $cart->id,
-                        ], $child->id);
-                    }
-                }
+            foreach ($guestCart->items as $guestCartItem) {
+                $this->addProduct($guestCartItem->product_id, $guestCartItem->additional);
             }
 
             $this->collectTotals();
@@ -420,8 +372,6 @@ class Cart
 
             session()->forget('cart');
         }
-
-        return true;
     }
 
     /**

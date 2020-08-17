@@ -1,5 +1,5 @@
 {
-    "name": "webkul/laravel-api",
+    "name": "bagisto/laravel-api",
     "license": "MIT",
     "authors": [
         {
@@ -8,14 +8,14 @@
         }
     ],
     "require": {
-        "webkul/laravel-user": "dev-master",
-        "webkul/laravel-core": "dev-master",
-        "webkul/laravel-product": "dev-master",
-        "webkul/laravel-shop": "dev-master",
-        "webkul/laravel-category": "dev-master",
-        "webkul/laravel-tax": "dev-master",
-        "webkul/laravel-inventory": "dev-master",
-        "webkul/laravel-checkout": "dev-master"
+        "bagisto/laravel-user": "dev-master",
+        "bagisto/laravel-core": "dev-master",
+        "bagisto/laravel-product": "dev-master",
+        "bagisto/laravel-shop": "dev-master",
+        "bagisto/laravel-category": "dev-master",
+        "bagisto/laravel-tax": "dev-master",
+        "bagisto/laravel-inventory": "dev-master",
+        "bagisto/laravel-checkout": "dev-master"
     },
     "autoload": {
         "psr-4": {

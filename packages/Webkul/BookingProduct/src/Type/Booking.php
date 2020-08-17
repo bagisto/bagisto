@@ -198,13 +198,8 @@ class Booking extends Virtual
                     continue;
                 }
 
-                $cartProducts = parent::prepareForCart(array_merge($data, [
-                    'product_id' => $data['product_id'],
-                    'quantity'   => $qty,
-                    'booking'    => [
-                        'ticket_id' => $ticketId,
-                    ],
-                ]));
+                $data['booking']['ticket_id'] = $ticketId;
+                $cartProducts = parent::prepareForCart($data);
 
                 if (is_string($cartProducts)) {
                     return $cartProducts;

@@ -2,7 +2,7 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
-## **v1.1.3 (14th of August 2020)** - *Release*
+## **v1.2.0-BETA1 (17th of August 2020)** - *Release*
 
 * [feature] - Customer group price for products implemented
 
@@ -20,7 +20,7 @@
 
 * [feature] - One click upgrade
 
-* [feature] - Social login
+* [feature] - Social login (Facebook, Twitter, Google, Linkedin, Github)
 
 * [feature] - Social share
 
