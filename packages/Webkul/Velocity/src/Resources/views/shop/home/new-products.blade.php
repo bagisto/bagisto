@@ -1,5 +1,6 @@
 @php
     $count = $velocityMetaData ? $velocityMetaData->new_products_count : 10;
+    $direction = core()->getCurrentLocale()->direction == 'rtl' ?: 'ltr';
 @endphp
 
 <new-products></new-products>
@@ -74,12 +75,13 @@
                             ])
                         </div>
                     @else
-                        <div class="carousel-products vc-full-screen" v-if="!isMobileView">
+                        <div class="carousel-products vc-full-screen {{ $direction }}" v-if="!isMobileView">
                             <carousel-component
                                 slides-per-page="6"
                                 navigation-enabled="hide"
                                 pagination-enabled="hide"
                                 id="new-products-carousel"
+                                locale-direction="{{ $direction }}"
                                 :slides-count="newProducts.length">
 
                                 <slide
@@ -94,12 +96,13 @@
                             </carousel-component>
                         </div>
 
-                        <div class="carousel-products vc-small-screen" v-else>
+                        <div class="carousel-products vc-small-screen {{ $direction }}" v-else>
                             <carousel-component
                                 slides-per-page="2"
                                 navigation-enabled="hide"
                                 pagination-enabled="hide"
                                 id="new-products-carousel"
+                                locale-direction="{{ $direction }}"
                                 :slides-count="newProducts.length">
 
                                 <slide
