@@ -15,6 +15,7 @@ class UpdateVelocityMetaData extends Migration
     {
         Schema::table('velocity_meta_data', function (Blueprint $table) {
             $table->json('product_view_images')->nullable();
+            $table->integer('bundle_product_count')->nullable();
         });
     }
 
@@ -27,6 +28,7 @@ class UpdateVelocityMetaData extends Migration
     {
         Schema::table('velocity_meta_data', function (Blueprint $table) {
             $table->dropColumn('product_view_images');
+            $table->dropColumn('bundle_product_count');
         });
     }
 }

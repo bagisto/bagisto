@@ -125,6 +125,18 @@
                             value="{{ $metaData ? $metaData->new_products_count : 10 }}" />
                     </div>
 
+
+                    <div class="control-group">
+                        <label>{{ __('velocity::app.admin.meta-data.bundle_product_count') }}</label>
+
+                        <input
+                            type="text"
+                            class="control"
+                            id="bundle_product_count"
+                            name="bundle_product_count"
+                            value="{{$metaData->bundle_product_count}}" />
+                    </div>
+
                     <div class="control-group">
                         <label style="width:100%;">
                             {{ __('velocity::app.admin.meta-data.home-page-content') }}

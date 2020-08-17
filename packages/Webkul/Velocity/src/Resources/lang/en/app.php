@@ -98,6 +98,7 @@ return [
             'subscription-content'      => 'Subscription bar Content',
             'sidebar-categories'        => 'Sidebar Categories',
             'header_content_count'      => 'Header Content Count',
+            'bundle_product_count'      => 'Bundle Product Count',
             'footer-left-raw-content'   => '<p>We love to craft softwares and solve the real world problems with the binaries. We are highly committed to our goals. We invest our resources to create world class easy to use softwares and applications for the enterprise business with the top notch, on the edge technology expertise.</p>',
             'slider-path'               => 'Slider Path',
             'category-logo'             => 'Category logo',
