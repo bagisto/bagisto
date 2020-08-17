@@ -36,7 +36,9 @@
                 position: relative;
             }
 
-            .quick-view-btn-container, .rango-zoom-plus , .quick-view-in-list {
+            .quick-view-btn-container,
+            .rango-zoom-plus, 
+            .quick-view-in-list {
                 display: none;
             }
             
