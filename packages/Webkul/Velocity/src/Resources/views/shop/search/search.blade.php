@@ -35,6 +35,14 @@
                 left: 35px;
                 position: relative;
             }
+
+            .quick-view-btn-container {
+                display: none;
+            }
+
+            .rango-zoom-plus {
+                display: none;
+            }
         }
     </style>
 @endpush
