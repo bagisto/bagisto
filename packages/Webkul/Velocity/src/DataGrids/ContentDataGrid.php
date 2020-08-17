@@ -17,7 +17,7 @@ class ContentDataGrid extends DataGrid
             ->select('con.id as content_id', 'con_trans.title', 'con.position', 'con.content_type', 'con.status')
             ->leftJoin('velocity_contents_translations as con_trans', function($leftJoin) {
                 $leftJoin->on('con.id', '=', 'con_trans.content_id')
-                         ->where('con_trans.locale', 'en');
+                         ->where('con_trans.locale', app()->getLocale());
             })
             ->groupBy('con.id');
 
