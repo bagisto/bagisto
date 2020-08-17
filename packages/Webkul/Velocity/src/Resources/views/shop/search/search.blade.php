@@ -36,17 +36,10 @@
                 position: relative;
             }
 
-            .quick-view-btn-container {
+            .quick-view-btn-container, .rango-zoom-plus , .quick-view-in-list {
                 display: none;
             }
-
-            .rango-zoom-plus {
-                display: none;
-            }
-
-            .quick-view-in-list {
-                display: none;
-            }
+            
         }
     </style>
 @endpush
