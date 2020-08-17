@@ -33,11 +33,11 @@
                 <input type="hidden" name="channel" value="{{ $channel }}" />
 
                 <div class="control-group">
-                    <select class="control" id="locale-switcher" onChange="window.location.href = this.value">
-                        @foreach (core()->getAllLocales() as $localeModel)
+                    <select class="control" id="channel-switcher" onChange="window.location.href = this.value">
+                        @foreach (core()->getAllChannels() as $ch)
 
-                            <option value="{{ route('velocity.admin.meta-data') . '?locale=' . $localeModel->code . '&channel=' . $channel }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
-                                {{ $localeModel->name }}
+                            <option value="{{ route('velocity.admin.meta-data') . '?channel=' . $ch->code . '&locale=' . $locale }}" {{ ($ch->code) == $channel ? 'selected' : '' }}>
+                                {{ $ch->name }}
                             </option>
 
                         @endforeach
@@ -45,11 +45,11 @@
                 </div>
 
                 <div class="control-group">
-                    <select class="control" id="channel-switcher" onChange="window.location.href = this.value">
-                        @foreach (core()->getAllChannels() as $ch)
+                    <select class="control" id="locale-switcher" onChange="window.location.href = this.value">
+                        @foreach (core()->getAllLocales() as $localeModel)
 
-                            <option value="{{ route('velocity.admin.meta-data') . '?channel=' . $ch->code . '&locale=' . $locale }}" {{ ($ch->code) == $channel ? 'selected' : '' }}>
-                                {{ $ch->name }}
+                            <option value="{{ route('velocity.admin.meta-data') . '?locale=' . $localeModel->code . '&channel=' . $channel }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
+                                {{ $localeModel->name }}
                             </option>
 
                         @endforeach
@@ -126,7 +126,11 @@
                     </div>
 
                     <div class="control-group">
-                        <label style="width:100%;">{{ __('velocity::app.admin.meta-data.home-page-content') }} <span class="locale">[{{ $metaData ? $metaData->locale : 'en' }}]</span></label>
+                        <label style="width:100%;">
+                            {{ __('velocity::app.admin.meta-data.home-page-content') }}
+                            <span class="locale">[{{ $metaData ? $metaData->locale : 'en' }}]</span>
+                            <span class="locale">[{{ $metaData ? $metaData->channel : 'defualt' }}]</span>
+                        </label>
 
                         <textarea
                             class="control"
@@ -137,7 +141,11 @@
                     </div>
 
                     <div class="control-group">
-                        <label style="width:100%;">{{ __('velocity::app.admin.meta-data.product-policy') }} <span class="locale">[{{ $metaData ? $metaData->locale : 'en' }}]</span></label>
+                        <label style="width:100%;">
+                            {{ __('velocity::app.admin.meta-data.product-policy') }}
+                            <span class="locale">[{{ $metaData ? $metaData->locale : 'en' }}]</span>
+                            <span class="locale">[{{ $metaData ? $metaData->channel : 'defualt' }}]</span>
+                        </label>
 
                         <textarea
                             class="control"
@@ -253,7 +261,11 @@
             <accordian :title="'{{ __('velocity::app.admin.meta-data.footer') }}'" :active="false">
                 <div slot="body">
                     <div class="control-group">
-                        <label style="width:100%;">{{ __('velocity::app.admin.meta-data.subscription-content') }} <span class="locale">[{{ $metaData ? $metaData->locale : 'en' }}]</span></label>
+                        <label style="width:100%;">
+                            {{ __('velocity::app.admin.meta-data.subscription-content') }}
+                            <span class="locale">[{{ $metaData ? $metaData->locale : 'en' }}]</span>
+                            <span class="locale">[{{ $metaData ? $metaData->channel : 'defualt' }}]</span>
+                        </label>
 
                         <textarea
                             class="control"
@@ -264,7 +276,11 @@
                     </div>
 
                     <div class="control-group">
-                        <label style="width:100%;">{{ __('velocity::app.admin.meta-data.footer-left-content') }} <span class="locale">[{{ $metaData ? $metaData->locale : 'en' }}]</span></label>
+                        <label style="width:100%;">
+                            {{ __('velocity::app.admin.meta-data.footer-left-content') }}
+                            <span class="locale">[{{ $metaData ? $metaData->locale : 'en' }}]</span>
+                            <span class="locale">[{{ $metaData ? $metaData->channel : 'defualt' }}]</span>
+                        </label>
 
                         <textarea
                             class="control"
@@ -275,7 +291,11 @@
                     </div>
 
                     <div class="control-group">
-                        <label style="width:100%;">{{ __('velocity::app.admin.meta-data.footer-middle-content') }} <span class="locale">[{{ $metaData ? $metaData->locale : 'en' }}]</span></label>
+                        <label style="width:100%;">
+                            {{ __('velocity::app.admin.meta-data.footer-middle-content') }}
+                            <span class="locale">[{{ $metaData ? $metaData->locale : 'en' }}]</span>
+                            <span class="locale">[{{ $metaData ? $metaData->channel : 'defualt' }}]</span>
+                        </label>
 
                         <textarea
                             class="control"
