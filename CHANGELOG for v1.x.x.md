@@ -30,9 +30,6 @@
 
 * [feature] - Store configuration added for product listing
 
-
-
-
 * #343 [fixed] - Translation strings are missing from awful amount of controllers when returning responses with flash. And optimise translation strings for faster static translations.
 
 * #824 [fixed] - Framework is not supporting I.E 11 browser.
@@ -660,36 +657,6 @@
 * #3755 [fixed] - Webinstall - SMTP port is not set
 
 * #3757 [fixed] - broken image on guest wishlist
-
-* #3727 [fixed] - 
-
-* #3727 [fixed] - 
-
-* #3727 [fixed] - 
-
-* #3727 [fixed] - 
-
-* #3727 [fixed] - 
-
-* #3727 [fixed] - 
-
-* #3727 [fixed] - 
-
-* #3727 [fixed] - 
-
-* #3727 [fixed] - 
-
-* #3727 [fixed] - 
-
-* #3727 [fixed] - 
-
-* #3727 [fixed] - 
-
-* #3727 [fixed] - 
-
-* #3727 [fixed] - 
-
-
 
 ## **v1.1.2 (24th of March 2020)** - *Release*
 
