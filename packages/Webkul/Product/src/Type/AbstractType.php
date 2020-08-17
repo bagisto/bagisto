@@ -669,12 +669,30 @@ abstract class AbstractType
 
             foreach ($customerGroupPrices as $price) {
 
+                $newOffer = true;
+
                 if($price->qty != 1) {
                     if ($price->value_type == 'discount') {
                         $result = $this->product->price - ($this->product->price * $price->value) / 100;
-                        $offerPrices[] = (object) array('qty' => $price->qty, 'price' => $result);
+                        foreach ($offerPrices as $offerPrice) {
+                            if (($offerPrice->qty == $price->qty) && ($offerPrice->price >= $result)) {
+                                $offerPrice->price = $result;
+                                $newOffer = false;
+                            }
+                        }
+                        if ($newOffer) {
+                            $offerPrices[] = (object) array('qty' => $price->qty, 'price' => $result);
+                        }                        
                     } else {
-                        $offerPrices[] = (object) array('qty' => $price->qty, 'price' => $price->value);
+                        foreach ($offerPrices as $offerPrice) {
+                            if (($offerPrice->qty == $price->qty) && ($offerPrice->price >= $price->value)) {
+                                $offerPrice->price = $price->value;
+                                $newOffer = false;
+                            }
+                        }
+                        if ($newOffer) {
+                            $offerPrices[] = (object) array('qty' => $price->qty, 'price' => $price->value);
+                        }    
                     }
                 }              
 
