@@ -43,6 +43,10 @@
             .rango-zoom-plus {
                 display: none;
             }
+
+            .quick-view-in-list {
+                display: none;
+            }
         }
     </style>
 @endpush
