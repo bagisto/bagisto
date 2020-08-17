@@ -41,6 +41,7 @@
                         navigation-enabled="hide"
                         pagination-enabled="hide"
                         id="fearured-products-carousel"
+                        locale-direction="{{ $direction }}"
                         :slides-count="featuredProducts.length">
 
                         <slide
