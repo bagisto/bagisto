@@ -10,7 +10,7 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "Webkul\\Payment\\": "src/"
+            "Webkul\\Paypal\\": "src/"
         }
     },
     "extra": {

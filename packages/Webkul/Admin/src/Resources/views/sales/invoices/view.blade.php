@@ -107,14 +107,14 @@
                             <div class="section-content">
                                 <div class="row">
                                     <span class="title">{{ __('admin::app.sales.orders.customer-name') }}</span>
-                                    <span class="value">{{ $invoice->address->name }}</span>
+                                    <span class="value">{{ $invoice->order->customer_full_name }}</span>
                                 </div>
 
                                 {!! view_render_event('sales.invoice.customer_name.after', ['order' => $order]) !!}
 
                                 <div class="row">
                                     <span class="title">{{ __('admin::app.sales.orders.email') }}</span>
-                                    <span class="value">{{ $invoice->address->email }}</span>
+                                    <span class="value">{{ $invoice->order->customer_email }}</span>
                                 </div>
 
                                 {!! view_render_event('sales.invoice.customer_email.after', ['order' => $order]) !!}
@@ -124,36 +124,40 @@
                     </div>
                 </accordian>
 
-                <accordian :title="'{{ __('admin::app.sales.orders.address') }}'" :active="true">
-                    <div slot="body" style="display: flex; overflow:auto;">
+                @if ($order->billing_address || $order->shipping_address)
+                    <accordian :title="'{{ __('admin::app.sales.orders.address') }}'" :active="true">
+                        <div slot="body" style="display: flex; overflow:auto;">
 
-                        <div class="sale-section">
-                            <div class="secton-title" style="width: 380px;">
-                                <span>{{ __('admin::app.sales.orders.billing-address') }}</span>
-                            </div>
+                            @if ($order->billing_address)
+                                <div class="sale-section">
+                                    <div class="secton-title" style="width: 380px;">
+                                        <span>{{ __('admin::app.sales.orders.billing-address') }}</span>
+                                    </div>
 
-                            <div class="section-content" style="width: 380px;">
-                                @include ('admin::sales.address', ['address' => $order->billing_address])
+                                    <div class="section-content" style="width: 380px;">
+                                        @include ('admin::sales.address', ['address' => $order->billing_address])
 
-                                {!! view_render_event('sales.invoice.billing_address.after', ['order' => $order]) !!}
-                            </div>
+                                        {!! view_render_event('sales.invoice.billing_address.after', ['order' => $order]) !!}
+                                    </div>
+                                </div>
+                            @endif
+
+                            @if ($order->shipping_address)
+                                <div class="sale-section" style="margin: 0 0 0 300px;">
+                                    <div class="secton-title" style="width: 400px;">
+                                        <span>{{ __('admin::app.sales.orders.shipping-address') }}</span>
+                                    </div>
+
+                                    <div class="section-content" style="width: 400px;">
+                                        @include ('admin::sales.address', ['address' => $order->shipping_address])
+
+                                        {!! view_render_event('sales.invoice.shipping_address.after', ['order' => $order]) !!}
+                                    </div>
+                                </div>
+                            @endif
                         </div>
-
-                        @if ($order->shipping_address)
-                            <div class="sale-section" style="margin: 0 0 0 300px;">
-                                <div class="secton-title" style="width: 400px;">
-                                    <span>{{ __('admin::app.sales.orders.shipping-address') }}</span>
-                                </div>
-
-                                <div class="section-content" style="width: 400px;">
-                                    @include ('admin::sales.address', ['address' => $order->shipping_address])
-
-                                    {!! view_render_event('sales.invoice.shipping_address.after', ['order' => $order]) !!}
-                                </div>
-                            </div>
-                        @endif
-                    </div>
-                </accordian>
+                    </accordian>
+                @endif
 
                 <accordian :title="'{{ __('admin::app.sales.orders.products-ordered') }}'" :active="true">
                     <div slot="body">

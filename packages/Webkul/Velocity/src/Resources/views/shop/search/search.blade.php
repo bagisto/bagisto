@@ -26,6 +26,22 @@
             .main-content-wrapper .vc-header {
                 box-shadow: unset;
             }
+
+             .toolbar-wrapper .col-4:last-child {
+                left: 175px;
+            }
+
+            .toolbar-wrapper .sorter {
+                left: 35px;
+                position: relative;
+            }
+
+            .quick-view-btn-container,
+            .rango-zoom-plus, 
+            .quick-view-in-list {
+                display: none;
+            }
+            
         }
     </style>
 @endpush
