@@ -6,6 +6,10 @@
             $products[] = $product;
             $products = array_unique($products);
         }
+
+        $data = app('Webkul\Product\Repositories\ProductRepository')
+                    ->getMetaData();
+        $product_count = $data->cross_selling_product_count;
     ?>
 @endforeach
 
@@ -26,7 +30,7 @@
             :slides-count="{{ $product->cross_sells()->count() }}">
             
             @foreach($products as $product)
-                @foreach ($product->cross_sells()->paginate(2) as $index => $crossSellProduct)
+                @foreach ($product->cross_sells()->paginate($product_count) as $index => $crossSellProduct)
                     <slide slot="slide-{{ $index }}">
                         @include ('shop::products.list.card', [
                             'product' => $crossSellProduct,

@@ -6,6 +6,10 @@
             $products[] = $product;
             $products = array_unique($products);
         }
+
+        $data = app('Webkul\Product\Repositories\ProductRepository')
+                    ->getMetaData();
+        $product_count = $data->cross_selling_product_count;
     ?>
 @endforeach
 
@@ -21,7 +25,7 @@
         <div class="product-grid-4">
             @foreach($products as $product)
 
-                @foreach ($product->cross_sells()->paginate(2) as $cross_sell_product)
+                @foreach ($product->cross_sells()->paginate($product_count) as $cross_sell_product)
 
                     @include ('shop::products.list.card', ['product' => $cross_sell_product])
 

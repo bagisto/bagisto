@@ -5,8 +5,8 @@
 @stop
 
 @php
-    $locale = request()->get('locale') ?: 'en';
-    $channel = request()->get('channel') ?: 'default';
+    $locale = request()->get('locale') ?: app()->getLocale();
+    $channel = request()->get('channel') ?: core()->getCurrentChannelCode();
 @endphp
 
 @section('content')
@@ -125,22 +125,43 @@
                             value="{{ $metaData ? $metaData->new_products_count : 10 }}" />
                     </div>
 
-
                     <div class="control-group">
-                        <label>{{ __('velocity::app.admin.meta-data.bundle_product_count') }}</label>
+                        <label>{{ __('velocity::app.admin.meta-data.up_selling_product_count') }}</label>
 
                         <input
                             type="text"
                             class="control"
-                            id="bundle_product_count"
-                            name="bundle_product_count"
-                            value="{{$metaData->bundle_product_count}}" />
+                            id="up_selling_product_count"
+                            name="up_selling_product_count"
+                            value="{{$metaData->up_selling_product_count}}" />
+                    </div>
+
+                    <div class="control-group">
+                        <label>{{ __('velocity::app.admin.meta-data.cross_selling_product_count') }}</label>
+
+                        <input
+                            type="text"
+                            class="control"
+                            id="cross_selling_product_count"
+                            name="cross_selling_product_count"
+                            value="{{$metaData->cross_selling_product_count}}" />
+                    </div>
+
+                    <div class="control-group">
+                        <label>{{ __('velocity::app.admin.meta-data.related_product_count') }}</label>
+
+                        <input
+                            type="text"
+                            class="control"
+                            id="related_product_count"
+                            name="related_product_count"
+                            value="{{$metaData->related_product_count}}" />
                     </div>
 
                     <div class="control-group">
                         <label style="width:100%;">
                             {{ __('velocity::app.admin.meta-data.home-page-content') }}
-                            <span class="locale">[{{ $metaData ? $metaData->channel : 'default' }} - {{ $metaData ? $metaData->locale : 'en' }}]</span>
+                            <span class="locale">[{{ $metaData ? $metaData->channel : $channel }} - {{ $metaData ? $metaData->locale : $locale }}]</span>
                         </label>
 
                         <textarea
@@ -154,7 +175,7 @@
                     <div class="control-group">
                         <label style="width:100%;">
                             {{ __('velocity::app.admin.meta-data.product-policy') }}
-                            <span class="locale">[{{ $metaData ? $metaData->channel : 'default' }} - {{ $metaData ? $metaData->locale : 'en' }}]</span>
+                            <span class="locale">[{{ $metaData ? $metaData->channel : $channel }} - {{ $metaData ? $metaData->locale : $locale }}]</span>
                         </label>
 
                         <textarea
@@ -179,15 +200,12 @@
                                 3 => [],
                                 2 => [],
                             ];
-
                             $index = 0;
-
                             foreach ($metaData->get('locale')->all() as $key => $value) {
                                 if ($value->locale == $locale) {
                                     $index = $key;
                                 }
                             }
-
                             $advertisement = json_decode($metaData->get('advertisement')->all()[$index]->advertisement, true);
                         @endphp
 
@@ -273,7 +291,7 @@
                     <div class="control-group">
                         <label style="width:100%;">
                             {{ __('velocity::app.admin.meta-data.subscription-content') }}
-                            <span class="locale">[{{ $metaData ? $metaData->channel : 'default' }} - {{ $metaData ? $metaData->locale : 'en' }}]</span>
+                            <span class="locale">[{{ $metaData ? $metaData->channel : $channel }} - {{ $metaData ? $metaData->locale : $locale }}]</span>
                         </label>
 
                         <textarea
@@ -287,7 +305,7 @@
                     <div class="control-group">
                         <label style="width:100%;">
                             {{ __('velocity::app.admin.meta-data.footer-left-content') }}
-                            <span class="locale">[{{ $metaData ? $metaData->channel : 'default' }} - {{ $metaData ? $metaData->locale : 'en' }}]</span>
+                            <span class="locale">[{{ $metaData ? $metaData->channel : $channel }} - {{ $metaData ? $metaData->locale : $locale }}]</span>
                         </label>
 
                         <textarea
@@ -301,7 +319,7 @@
                     <div class="control-group">
                         <label style="width:100%;">
                             {{ __('velocity::app.admin.meta-data.footer-middle-content') }}
-                            <span class="locale">[{{ $metaData ? $metaData->channel : 'default' }} - {{ $metaData ? $metaData->locale : 'en' }}]</span>
+                            <span class="locale">[{{ $metaData ? $metaData->channel : $channel }} - {{ $metaData ? $metaData->locale : $locale }}]</span>
                         </label>
 
                         <textarea

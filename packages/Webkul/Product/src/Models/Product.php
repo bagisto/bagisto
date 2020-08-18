@@ -11,8 +11,8 @@ use Webkul\Product\Database\Eloquent\Builder;
 use Webkul\Attribute\Models\AttributeFamilyProxy;
 use Webkul\Inventory\Models\InventorySourceProxy;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Velocity\Repositories\VelocityMetadataRepository;
 use Webkul\Product\Contracts\Product as ProductContract;
-use DB;
 
 class Product extends Model implements ProductContract
 {
@@ -159,7 +159,8 @@ class Product extends Model implements ProductContract
      */
     public function related_products()
     {
-        return $this->belongsToMany(static::class, 'product_relations', 'parent_id', 'child_id')->limit(4);
+        $count = $this->getMetaData()->related_product_count;
+        return $this->belongsToMany(static::class, 'product_relations', 'parent_id', 'child_id')->limit($count);
     }
 
     /**
@@ -167,9 +168,8 @@ class Product extends Model implements ProductContract
      */
     public function up_sells()
     {
-        $data = DB::table('velocity_meta_data')
-                ->select('bundle_product_count')->get();
-        return $this->belongsToMany(static::class, 'product_up_sells', 'parent_id', 'child_id')->limit($data['0']->bundle_product_count);
+        $count = $this->getMetaData()->up_selling_product_count;
+        return $this->belongsToMany(static::class, 'product_up_sells', 'parent_id', 'child_id')->limit($count);
     }
 
     /**
@@ -177,7 +177,20 @@ class Product extends Model implements ProductContract
      */
     public function cross_sells()
     {
-        return $this->belongsToMany(static::class, 'product_cross_sells', 'parent_id', 'child_id')->limit(4);
+        $count = $this->getMetaData()->cross_selling_product_count;
+        return $this->belongsToMany(static::class, 'product_cross_sells', 'parent_id', 'child_id')->limit($count);
+    }
+
+    public function getMetaData()
+    {   
+        $locale = app()->getLocale();
+        $channel = core()->getCurrentChannelCode();
+        $data = app(VelocityMetadataRepository::class)
+                    ->where('locale',$locale)
+                    ->where('channel',$channel)
+                    ->get();
+                    
+        return $data['0'];
     }
 
     /**
