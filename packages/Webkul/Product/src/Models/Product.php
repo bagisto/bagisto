@@ -181,6 +181,9 @@ class Product extends Model implements ProductContract
         return $this->belongsToMany(static::class, 'product_cross_sells', 'parent_id', 'child_id')->limit($count);
     }
 
+    /**
+     * GetMetaData belongs to the Velocity Meta Data
+     */
     public function getMetaData()
     {   
         $locale = app()->getLocale();
