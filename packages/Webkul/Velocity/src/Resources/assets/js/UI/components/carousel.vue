@@ -1,5 +1,7 @@
 <template>
     <carousel
+        :rtl="localeDirection == 'rtl'"
+        :dir="localeDirection"
         :id="id"
         :navigationEnabled="true"
         :paginationEnabled="true"
@@ -7,9 +9,9 @@
         :loop="loop == 'true' ? true : false"
         :autoplay="autoplay == 'true' ? true : false"
         :autoplayTimeout="timeout ? parseInt(timeout) : 2000"
-        :autoplayDirection="sliderDirection ? sliderDirection : 'forward'"
+        :autoplayDirection="'forward'"
         :class="[
-            'ltr',
+            localeDirection,
             (navigationEnabled == 'hide') ? 'navigation-hide' : '',
             (paginationEnabled == 'hide') ? 'pagination-hide' : '',
             addClass
@@ -30,9 +32,10 @@
             'timeout',
             'autoplay',
             'addClass',
+            'direction',
             'slidesCount',
             'slidesPerPage',
-            'sliderDirection',
+            'localeDirection',
             'navigationEnabled',
             'paginationEnabled',
         ],

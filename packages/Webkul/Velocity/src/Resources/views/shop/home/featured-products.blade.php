@@ -1,5 +1,6 @@
 @php
     $count = $velocityMetaData ? $velocityMetaData->featured_product_count : 10;
+    $direction = core()->getCurrentLocale()->direction == 'rtl' ? 'rtl' : 'ltr';
 @endphp
 
 <featured-products></featured-products>
@@ -13,12 +14,14 @@
                 <card-list-header heading="{{ __('shop::app.home.featured-products') }}">
                 </card-list-header>
 
-                <div class="carousel-products vc-full-screen ltr" v-if="!isMobileView">
+                <div class="carousel-products vc-full-screen {{ $direction }}" v-if="!isMobileView">
                     <carousel-component
                         slides-per-page="6"
                         navigation-enabled="hide"
                         pagination-enabled="hide"
                         id="fearured-products-carousel"
+                        locale-direction="{{ $direction }}"
+                        :autoplay="false"
                         :slides-count="featuredProducts.length">
 
                         <slide
@@ -33,12 +36,13 @@
                     </carousel-component>
                 </div>
 
-                <div class="carousel-products vc-small-screen" v-else>
+                <div class="carousel-products vc-small-screen {{ $direction }}" v-else>
                     <carousel-component
                         slides-per-page="2"
                         navigation-enabled="hide"
                         pagination-enabled="hide"
                         id="fearured-products-carousel"
+                        locale-direction="{{ $direction }}"
                         :slides-count="featuredProducts.length">
 
                         <slide
