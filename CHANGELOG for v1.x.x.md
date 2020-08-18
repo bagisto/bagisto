@@ -2,7 +2,7 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
-## **v1.2.0-BETA1 (17th of August 2020)** - *Release*
+## **v1.2.0-BETA1 (18th of August 2020)** - *Release*
 
 * [feature] - Customer group price for products implemented
 
@@ -649,11 +649,15 @@
 
 * #3727 [fixed] - compare page layout issue for logged in user
 
+* #3735 [fixed] - Make Velocity Meta Data section Channel wise.
+
 * #3740 [fixed] - translation of alert when remove compare item in default theme
 
 * #3742 [fixed] - Invoice, ship and cancel buttons are missing in order placed by guest user
 
 * #3745 [fixed] - getting exception in backend when having DB_PREFIX
+
+* #3747 [fixed] - velocity content header route throwing an exception in spanish locale
 
 * #3751 [fixed] - shipping tab is missing in order details for deleted customer
 
@@ -661,33 +665,7 @@
 
 * #3757 [fixed] - broken image on guest wishlist
 
-* #3727 [fixed] - 
-
-* #3727 [fixed] - 
-
-* #3727 [fixed] - 
-
-* #3727 [fixed] - 
-
-* #3727 [fixed] - 
-
-* #3727 [fixed] - 
-
-* #3727 [fixed] - 
-
-* #3727 [fixed] - 
-
-* #3727 [fixed] - 
-
-* #3727 [fixed] - 
-
-* #3727 [fixed] - 
-
-* #3727 [fixed] - 
-
-* #3727 [fixed] - 
-
-* #3727 [fixed] - 
+* #3767 [fixed] - Header-nav on mobile view seem buggy on search item
 
 
 
