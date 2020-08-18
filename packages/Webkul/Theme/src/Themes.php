@@ -43,9 +43,7 @@ class Themes
      */
     public function __construct()
     {
-        $routeURI = request()->route()->uri;
-
-        if (Str::contains(request()->route()->uri, 'admin/')) {
+        if (request()->route() !== null && Str::contains(request()->route()->uri, 'admin/')) {
             $this->defaultThemeCode = Config::get('themes.admin-default', null);
         } else {
             $this->defaultThemeCode = Config::get('themes.default', null);
@@ -105,7 +103,7 @@ class Themes
                 return true;
             }
         }
-        
+
         return false;
     }
 
@@ -117,8 +115,8 @@ class Themes
     public function loadThemes()
     {
         $parentThemes = [];
-        
-        if (Str::contains(request()->route()->uri, 'admin/')) {
+
+        if (request()->route() !== null && Str::contains(request()->route()->uri, 'admin/')) {
             $themes = config('themes.admin-themes', []);
         } else {
             $themes = config('themes.themes', []);

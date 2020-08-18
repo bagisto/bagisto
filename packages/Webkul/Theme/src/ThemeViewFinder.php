@@ -20,13 +20,13 @@ class ThemeViewFinder extends FileViewFinder
         // Extract the $view and the $namespace parts
         list($namespace, $view) = $this->parseNamespaceSegments($name);
 
-        if (! Str::contains(request()->route()->uri, 'admin/')) {
+        if (request()->route() !== null && ! Str::contains(request()->route()->uri, 'admin/')) {
             $paths = $this->addThemeNamespacePaths($namespace);
 
             try {
                 return $this->findInPaths($view, $paths);
             } catch(\Exception $e) {
-                if ($namespace != 'shop') {
+                if ($namespace !== 'shop') {
                     if (strpos($view, 'shop.') !== false) {
                         $view = str_replace('shop.', 'shop.' . Themes::current()->code . '.', $view);
                     }
