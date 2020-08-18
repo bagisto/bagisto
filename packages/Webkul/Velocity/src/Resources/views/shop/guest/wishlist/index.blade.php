@@ -44,7 +44,7 @@
                         navigation-enabled="hide"
                         pagination-enabled="hide"
                         id="wishlist-products-carousel"
-                        locale-direction="{{ core()->getCurrentLocale()->direction == 'rtl' ?: 'ltr' }}"
+                        locale-direction="{{ core()->getCurrentLocale()->direction == 'rtl' ? 'rtl' : 'ltr' }}"
                         :slides-count="products.length">
 
                         <slide

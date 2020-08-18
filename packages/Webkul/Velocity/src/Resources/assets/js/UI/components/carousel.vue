@@ -1,6 +1,6 @@
 <template>
     <carousel
-        :rtl="localeDirection == 'rtl' ? true : false"
+        :rtl="localeDirection == 'rtl'"
         :dir="localeDirection"
         :id="id"
         :navigationEnabled="true"
@@ -9,7 +9,7 @@
         :loop="loop == 'true' ? true : false"
         :autoplay="autoplay == 'true' ? true : false"
         :autoplayTimeout="timeout ? parseInt(timeout) : 2000"
-        :autoplayDirection="localeDirection == 'rtl' ? 'backward' : 'forward'"
+        :autoplayDirection="'forward'"
         :class="[
             localeDirection,
             (navigationEnabled == 'hide') ? 'navigation-hide' : '',

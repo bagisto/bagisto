@@ -21,7 +21,7 @@
                         navigation-enabled="hide"
                         pagination-enabled="hide"
                         :slides-count="categoryProducts.length"
-                        locale-direction="{{ core()->getCurrentLocale()->direction == 'rtl' ?: 'ltr' }}"
+                        locale-direction="{{ core()->getCurrentLocale()->direction == 'rtl' ? 'rtl' : 'ltr' }}"
                         :id="`${categoryDetails.name}-carousel`">
 
                             <slide
@@ -42,7 +42,7 @@
                         navigation-enabled="hide"
                         pagination-enabled="hide"
                         :slides-count="categoryProducts.length"
-                        locale-direction="{{ core()->getCurrentLocale()->direction == 'rtl' ?: 'ltr' }}"
+                        locale-direction="{{ core()->getCurrentLocale()->direction == 'rtl' ? 'rtl' : 'ltr' }}"
                         :id="`${categoryDetails.name}-carousel`">
 
                         <slide

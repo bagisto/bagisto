@@ -1,6 +1,6 @@
 @php
     $count = $velocityMetaData ? $velocityMetaData->featured_product_count : 10;
-    $direction = core()->getCurrentLocale()->direction == 'rtl' ?: 'ltr';
+    $direction = core()->getCurrentLocale()->direction == 'rtl' ? 'rtl' : 'ltr';
 @endphp
 
 <featured-products></featured-products>
@@ -21,6 +21,7 @@
                         pagination-enabled="hide"
                         id="fearured-products-carousel"
                         locale-direction="{{ $direction }}"
+                        :autoplay="false"
                         :slides-count="featuredProducts.length">
 
                         <slide
