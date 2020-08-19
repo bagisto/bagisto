@@ -130,8 +130,16 @@ class ContentRepository extends Repository
         $query = $this->model::orderBy('position', 'ASC');
 
         $velocityMetaData = app('Webkul\Velocity\Helpers\Helper')->getVelocityMetaData();
-        $headerContentCount = $velocityMetaData->header_content_count;
-
+    
+        /*check if the $velocityMetaData return null
+        * this check is done because i may case $velocityMetaData return null
+        */ 
+        if($velocityMetaData){
+            $headerContentCount = $velocityMetaData->header_content_count;
+        }else{
+            $headerContentCount = '';
+        }
+       
         $headerContentCount = $headerContentCount != '' ? $headerContentCount : 5;
 
         $contentCollection = $query
