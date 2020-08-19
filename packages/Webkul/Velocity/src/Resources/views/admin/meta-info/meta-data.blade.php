@@ -179,9 +179,30 @@
                             $advertisement = json_decode($metaData->get('advertisement')->all()[$index]->advertisement, true);
                         @endphp
 
-                        @if(! isset($advertisement[4]))
+                        @if(! isset($advertisement[4]) || ! count($advertisement[4]))
+                            @php
+                                $images[4][] = [
+                                    'id' => 'image_1',
+                                    'url' => asset('/themes/velocity/assets/images/big-sale-banner.png'),
+                                ];
+                                $images[4][] = [
+                                    'id' => 'image_2',
+                                    'url' => asset('/themes/velocity/assets/images/seasons.png'),
+                                ];
+                                $images[4][] = [
+                                    'id' => 'image_3',
+                                    'url' => asset('/themes/velocity/assets/images/deals.png'),
+                                ];
+                                $images[4][] = [
+                                    'id' => 'image_4',
+                                    'url' => asset('/themes/velocity/assets/images/kids.png'),
+                                ];
+                            @endphp
+                        
                             <image-wrapper
+                                :multiple="true"
                                 input-name="images[4]"
+                                :images='@json($images[4])'
                                 :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'">
                             </image-wrapper>
                         @else
@@ -205,10 +226,26 @@
 
                     <div class="control-group">
                         <label>{{ __('velocity::app.admin.meta-data.advertisement-three') }}</label>
-                        @if(! isset($advertisement[3]))
+                        @if(! isset($advertisement[3]) || ! count($advertisement[3]))
+                            @php
+                                $images[3][] = [
+                                    'id' => 'image_1',
+                                    'url' => asset('/themes/velocity/assets/images/headphones.png'),
+                                ];
+                                $images[3][] = [
+                                    'id' => 'image_2',
+                                    'url' => asset('/themes/velocity/assets/images/watch.png'),
+                                ];
+                                $images[3][] = [
+                                    'id' => 'image_3',
+                                    'url' => asset('/themes/velocity/assets/images/kids-2.png'),
+                                ];
+                            @endphp
+
                             <image-wrapper
-                                :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'"
-                                input-name="images[3]">
+                                input-name="images[3]"
+                                :images='@json($images[3])'
+                                :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'">
                             </image-wrapper>
                         @else
                             @foreach ($advertisement[3] as $index => $image)
@@ -231,10 +268,22 @@
                     <div class="control-group">
                         <label>{{ __('velocity::app.admin.meta-data.advertisement-two') }}</label>
 
-                        @if(! isset($advertisement[2]))
+                        @if(! isset($advertisement[2]) || ! count($advertisement[2]))
+                            @php
+                                $images[2][] = [
+                                    'id' => 'image_1',
+                                    'url' => asset('/themes/velocity/assets/images/toster.png'),
+                                ];
+                                $images[2][] = [
+                                    'id' => 'image_2',
+                                    'url' => asset('/themes/velocity/assets/images/trimmer.png'),
+                                ];
+                            @endphp
+
                             <image-wrapper
-                                :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'"
-                                input-name="images[2]">
+                                input-name="images[2]"
+                                :images='@json($images[2])'
+                                :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'">
                             </image-wrapper>
                         @else
                             @foreach ($advertisement[2] as $index => $image)
