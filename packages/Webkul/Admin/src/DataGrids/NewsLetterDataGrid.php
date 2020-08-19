@@ -32,7 +32,7 @@ class NewsLetterDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'is_subscribed',
             'label'      => trans('admin::app.datagrid.subscribed'),
-            'type'       => 'string',
+            'type'       => 'boolean',
             'searchable' => false,
             'sortable'   => true,
             'filterable' => true,
@@ -43,6 +43,10 @@ class NewsLetterDataGrid extends DataGrid
                     return trans('admin::app.datagrid.false');
                 }
             },
+            'options' => [
+                'True'   => 1,
+                'False' => 0,
+            ],
         ]);
 
         $this->addColumn([
