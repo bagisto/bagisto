@@ -96,7 +96,7 @@
                         <label>{{ __('velocity::app.admin.meta-data.header_content_count') }}</label>
 
                         <input
-                            type="text"
+                            type="number"
                             class="control"
                             id="header_content_count"
                             name="header_content_count"
