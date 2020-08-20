@@ -83,7 +83,7 @@
                                         @break
 
                                     @case('description')
-                                        <span v-html="product.description"></span>
+                                        <span v-html="product.description" class="desc"></span>
                                         @break
 
                                     @default
