@@ -97,6 +97,7 @@
 
                         <input
                             type="number"
+                            min="0"
                             class="control"
                             id="header_content_count"
                             name="header_content_count"
