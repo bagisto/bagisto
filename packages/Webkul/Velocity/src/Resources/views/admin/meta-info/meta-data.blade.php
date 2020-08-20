@@ -85,7 +85,8 @@
                         <label>{{ __('velocity::app.admin.meta-data.sidebar-categories') }}</label>
 
                         <input
-                            type="text"
+                            type="number"
+                            min="0"
                             class="control"
                             id="sidebar_category_count"
                             name="sidebar_category_count"
@@ -108,7 +109,8 @@
                         <label>{{ __('shop::app.home.featured-products') }}</label>
 
                         <input
-                            type="text"
+                            type="number"
+                            min="0"
                             class="control"
                             id="featured_product_count"
                             name="featured_product_count"
@@ -119,7 +121,8 @@
                         <label>{{ __('shop::app.home.new-products') }}</label>
 
                         <input
-                            type="text"
+                            type="number"
+                            min="0"
                             class="control"
                             id="new_products_count"
                             name="new_products_count"
