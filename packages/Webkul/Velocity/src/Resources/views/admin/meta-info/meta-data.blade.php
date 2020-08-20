@@ -126,42 +126,6 @@
                     </div>
 
                     <div class="control-group">
-                        <label>{{ __('velocity::app.admin.meta-data.up_selling_product_count') }}</label>
-
-                        <input
-                            type="number"
-                            min="0"
-                            class="control"
-                            id="up_selling_product_count"
-                            name="up_selling_product_count"
-                            value="{{$metaData->up_selling_product_count}}" />
-                    </div>
-
-                    <div class="control-group">
-                        <label>{{ __('velocity::app.admin.meta-data.cross_selling_product_count') }}</label>
-
-                        <input
-                            type="number"
-                            min="0"
-                            class="control"
-                            id="cross_selling_product_count"
-                            name="cross_selling_product_count"
-                            value="{{$metaData->cross_selling_product_count}}" />
-                    </div>
-
-                    <div class="control-group">
-                        <label>{{ __('velocity::app.admin.meta-data.related_product_count') }}</label>
-
-                        <input
-                            type="number"
-                            min="0"
-                            class="control"
-                            id="related_product_count"
-                            name="related_product_count"
-                            value="{{$metaData->related_product_count}}" />
-                    </div>
-
-                    <div class="control-group">
                         <label style="width:100%;">
                             {{ __('velocity::app.admin.meta-data.home-page-content') }}
                             <span class="locale">[{{ $metaData ? $metaData->channel : $channel }} - {{ $metaData ? $metaData->locale : $locale }}]</span>
@@ -203,12 +167,15 @@
                                 3 => [],
                                 2 => [],
                             ];
+
                             $index = 0;
+
                             foreach ($metaData->get('locale')->all() as $key => $value) {
                                 if ($value->locale == $locale) {
                                     $index = $key;
                                 }
                             }
+
                             $advertisement = json_decode($metaData->get('advertisement')->all()[$index]->advertisement, true);
                         @endphp
 
