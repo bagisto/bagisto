@@ -146,8 +146,12 @@
                     'getNewProducts': function () {
                         this.$http.get(`${this.baseUrl}/category-details?category-slug=new-products&count={{ $count }}`)
                         .then(response => {
-                            if (response.data.status)
+                            var count = '{{$count}}';
+                            if (response.data.status && count != 0){
                                 this.newProducts = response.data.products;
+                            }else{
+                                this.newProducts = 0;
+                            }
 
                             this.isLoading = false;
                         })
