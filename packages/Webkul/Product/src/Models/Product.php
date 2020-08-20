@@ -196,6 +196,7 @@ class Product extends Model implements ProductContract
         foreach ($data as $value) {
             $metaData = $value;
         }        
+        
         return $metaData;
     }
 
