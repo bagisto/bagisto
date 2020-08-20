@@ -5,6 +5,8 @@ namespace Webkul\Product\Type;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Checkout\Facades\Cart;
+use Webkul\Checkout\Models\CartItem;
+use Webkul\Product\Datatypes\CartItemValidationResult;
 use Webkul\Product\Helpers\ProductImage;
 use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Repositories\ProductRepository;
@@ -158,8 +160,6 @@ abstract class AbstractType
     }
 
     /**
-<<<<<<< HEAD
-=======
      * Is the administrator able to copy products of this type in the admin backend?
      */
     public function canBeCopied(): bool
@@ -168,7 +168,6 @@ abstract class AbstractType
     }
 
     /**
->>>>>>> bagisto/master
      * @param array $data
      *
      * @return \Webkul\Product\Contracts\Product
@@ -179,16 +178,9 @@ abstract class AbstractType
     }
 
     /**
-<<<<<<< HEAD
-     * @param array  $data
-     * @param int    $id
-     * @param string $attribute
-     *
-=======
      * @param  array  $data
      * @param  int    $id
      * @param  string $attribute
->>>>>>> bagisto/master
      * @return \Webkul\Product\Contracts\Product
      */
     public function update(array $data, $id, $attribute = "id")
@@ -223,11 +215,7 @@ abstract class AbstractType
             if ($attribute->type == 'image' || $attribute->type == 'file') {
                 $data[$attribute->code] = gettype($data[$attribute->code]) == 'object'
                     ? request()->file($attribute->code)->store('product/' . $product->id)
-<<<<<<< HEAD
                     : null;
-=======
-                    : NULL;
->>>>>>> bagisto/master
             }
 
             $attributeValue = $this->attributeValueRepository->findOneWhere([
@@ -247,11 +235,7 @@ abstract class AbstractType
                 ]);
             } else {
                 $this->attributeValueRepository->update([
-<<<<<<< HEAD
                     ProductAttributeValue::$attributeTypeFields[$attribute->type] => $data[$attribute->code],
-=======
-                    ProductAttributeValue::$attributeTypeFields[$attribute->type] => $data[$attribute->code]
->>>>>>> bagisto/master
                 ], $attributeValue->id
                 );
 
@@ -263,13 +247,8 @@ abstract class AbstractType
 
         $route = request()->route() ? request()->route()->getName() : "";
 
-<<<<<<< HEAD
-        if ($route != 'admin.catalog.products.massupdate') {
-            if (!isset($data['categories'])) {
-=======
         if ($route !== 'admin.catalog.products.massupdate') {
             if (! isset($data['categories'])) {
->>>>>>> bagisto/master
                 $data['categories'] = [];
             }
 
@@ -593,11 +572,7 @@ abstract class AbstractType
             if ($customerGroupPrice !== $this->product->price) {
                 $haveSpecialPrice = true;
                 $this->product->special_price = $customerGroupPrice;
-<<<<<<< HEAD
             }
-=======
-            }
->>>>>>> bagisto/master
         }
 
         return $haveSpecialPrice;
@@ -838,9 +813,9 @@ abstract class AbstractType
     /**
      * Validate cart item product price and other things
      *
-     * @param \Webkul\Checkout\Models\CartItem $item
+     * @param CartItem $item
      *
-     * @return \Webkul\Product\Datatypes\CartItemValidationResult
+     * @return CartItemValidationResult
      */
     public function validateCartItem(CartItem $item): CartItemValidationResult
     {
