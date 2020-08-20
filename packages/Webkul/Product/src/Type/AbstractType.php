@@ -4,15 +4,13 @@ namespace Webkul\Product\Type;
 
 use Illuminate\Support\Facades\Storage;
 use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Product\Datatypes\CartItemValidationResult;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Repositories\ProductAttributeValueRepository;
-use Webkul\Product\Repositories\ProductInventoryRepository;
-use Webkul\Product\Repositories\ProductImageRepository;
-use Webkul\Product\Models\ProductAttributeValue;
-use Webkul\Product\Helpers\ProductImage;
 use Webkul\Checkout\Facades\Cart;
-use Webkul\Checkout\Models\CartItem;
+use Webkul\Product\Helpers\ProductImage;
+use Webkul\Product\Models\ProductAttributeValue;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductImageRepository;
+use Webkul\Product\Repositories\ProductInventoryRepository;
+use Webkul\Product\Repositories\ProductAttributeValueRepository;
 
 abstract class AbstractType
 {
@@ -101,6 +99,13 @@ abstract class AbstractType
     protected $canBeMovedFromWishlistToCart = true;
 
     /**
+     * Products of this type can be copied in the admin backend?
+     *
+     * @var bool
+     */
+    protected $canBeCopied = true;
+
+    /**
      * Has child products aka variants
      *
      * @var bool
@@ -153,6 +158,17 @@ abstract class AbstractType
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * Is the administrator able to copy products of this type in the admin backend?
+     */
+    public function canBeCopied(): bool
+    {
+        return $this->canBeCopied;
+    }
+
+    /**
+>>>>>>> bagisto/master
      * @param array $data
      *
      * @return \Webkul\Product\Contracts\Product
@@ -163,10 +179,16 @@ abstract class AbstractType
     }
 
     /**
+<<<<<<< HEAD
      * @param array  $data
      * @param int    $id
      * @param string $attribute
      *
+=======
+     * @param  array  $data
+     * @param  int    $id
+     * @param  string $attribute
+>>>>>>> bagisto/master
      * @return \Webkul\Product\Contracts\Product
      */
     public function update(array $data, $id, $attribute = "id")
@@ -178,7 +200,7 @@ abstract class AbstractType
         foreach ($product->attribute_family->custom_attributes as $attribute) {
             $route = request()->route() ? request()->route()->getName() : "";
 
-            if ($attribute->type == 'boolean' && $route != 'admin.catalog.products.massupdate') {
+            if ($attribute->type === 'boolean' && $route !== 'admin.catalog.products.massupdate') {
                 $data[$attribute->code] = isset($data[$attribute->code]) && $data[$attribute->code] ? 1 : 0;
             }
 
@@ -201,7 +223,11 @@ abstract class AbstractType
             if ($attribute->type == 'image' || $attribute->type == 'file') {
                 $data[$attribute->code] = gettype($data[$attribute->code]) == 'object'
                     ? request()->file($attribute->code)->store('product/' . $product->id)
+<<<<<<< HEAD
                     : null;
+=======
+                    : NULL;
+>>>>>>> bagisto/master
             }
 
             $attributeValue = $this->attributeValueRepository->findOneWhere([
@@ -221,7 +247,11 @@ abstract class AbstractType
                 ]);
             } else {
                 $this->attributeValueRepository->update([
+<<<<<<< HEAD
                     ProductAttributeValue::$attributeTypeFields[$attribute->type] => $data[$attribute->code],
+=======
+                    ProductAttributeValue::$attributeTypeFields[$attribute->type] => $data[$attribute->code]
+>>>>>>> bagisto/master
                 ], $attributeValue->id
                 );
 
@@ -233,8 +263,13 @@ abstract class AbstractType
 
         $route = request()->route() ? request()->route()->getName() : "";
 
+<<<<<<< HEAD
         if ($route != 'admin.catalog.products.massupdate') {
             if (!isset($data['categories'])) {
+=======
+        if ($route !== 'admin.catalog.products.massupdate') {
+            if (! isset($data['categories'])) {
+>>>>>>> bagisto/master
                 $data['categories'] = [];
             }
 
@@ -558,7 +593,11 @@ abstract class AbstractType
             if ($customerGroupPrice !== $this->product->price) {
                 $haveSpecialPrice = true;
                 $this->product->special_price = $customerGroupPrice;
-            }    
+<<<<<<< HEAD
+            }
+=======
+            }
+>>>>>>> bagisto/master
         }
 
         return $haveSpecialPrice;

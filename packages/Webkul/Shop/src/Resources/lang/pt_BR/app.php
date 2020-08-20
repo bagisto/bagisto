@@ -99,6 +99,7 @@ return [
             'already_added' => 'Item já adicionado à lista de comparação',
             'added' => 'Item adicionado com sucesso à lista de comparação',
             'removed' => 'Item removido com sucesso da lista de comparação',
+            'removed-all' => 'Todos os itens removidos com sucesso da lista de comparação',
             'empty-text' => "Você não possui nenhum item na sua lista de comparação",
             'product_image' => 'Imagem do Produto',
             'actions' => 'Ações',
@@ -173,6 +174,11 @@ return [
         'account' => [
             'dashboard' => 'Cliente - Perfil',
             'menu' => 'Menu',
+
+            'general' => [
+                'no' => 'Não',
+                'yes' => 'sim',
+            ],
 
             'profile' => [
                 'index' => [

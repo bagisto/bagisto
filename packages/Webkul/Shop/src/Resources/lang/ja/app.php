@@ -96,6 +96,7 @@ return [
             'added'                 => 'アイテムを比較リストに追加しました',
             'already_added'         => 'アイテムは比較リストに既に追加されています',
             'removed'               => '比較リストからアイテムを削除しました',
+            'removed-all'           => '比較リストからすべてのアイテムを削除しました',
             'empty-text'            => "比較リストにアイテムがありません",
             'product_image'         => 'Product Image',
             'actions'               => 'Actions',
@@ -172,6 +173,11 @@ return [
         'account' => [
             'dashboard' => 'プロフィールを編集',
             'menu' => 'メニュー',
+
+            'general' => [
+                'no' => '番号',
+                'yes' => 'はい',
+            ],
 
             'profile' => [
                 'index' => [

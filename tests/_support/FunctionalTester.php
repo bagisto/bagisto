@@ -1,5 +1,6 @@
 <?php
 
+use Codeception\Actor;
 use Webkul\User\Models\Admin;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +23,7 @@ use Illuminate\Routing\RouteCollection;
  *
  * @SuppressWarnings(PHPMD)
  */
-class FunctionalTester extends \Codeception\Actor
+class FunctionalTester extends Actor
 {
     use _generated\FunctionalTesterActions;
 
@@ -47,7 +48,7 @@ class FunctionalTester extends \Codeception\Actor
         }
 
         if (! $admin) {
-            throw new \Exception(
+            throw new Exception(
                 'Admin user not found in database. Please ensure Seeders are executed');
         }
 
@@ -85,12 +86,17 @@ class FunctionalTester extends \Codeception\Actor
 
     /**
      * @param string $name
+     * @param array  $params
+     * @param bool   $routeCheck set this to false if the action is doing a redirection
      */
-    public function amOnAdminRoute(string $name, array $params = [])
+    public function amOnAdminRoute(string $name, array $params = [], bool $routeCheck = true)
     {
         $I = $this;
         $I->amOnRoute($name, $params);
-        $I->seeCurrentRouteIs($name);
+
+        if ($routeCheck) {
+            $I->seeCurrentRouteIs($name);
+        }
 
         /** @var RouteCollection $routes */
         $routes = Route::getRoutes();

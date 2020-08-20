@@ -2,19 +2,19 @@
 
 namespace Webkul\BookingProduct\Type;
 
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Product\Datatypes\CartItemValidationResult;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Repositories\ProductAttributeValueRepository;
-use Webkul\Product\Repositories\ProductInventoryRepository;
-use Webkul\Product\Repositories\ProductImageRepository;
-use Webkul\Product\Helpers\ProductImage;
-use Webkul\BookingProduct\Repositories\BookingProductRepository;
 use Webkul\BookingProduct\Helpers\Booking as BookingHelper;
-use Webkul\Product\Type\Virtual;
-use Carbon\Carbon;
+use Webkul\BookingProduct\Repositories\BookingProductRepository;
 use Webkul\Checkout\Models\CartItem;
+use Webkul\Product\Datatypes\CartItemValidationResult;
+use Webkul\Product\Helpers\ProductImage;
+use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Repositories\ProductImageRepository;
+use Webkul\Product\Repositories\ProductInventoryRepository;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Type\Virtual;
 
 class Booking extends Virtual
 {
@@ -32,6 +32,9 @@ class Booking extends Virtual
      */
     protected $bookingHelper;
 
+    /** @var bool do not allow booking products to be copied, it would be too complicated. */
+    protected $canBeCopied = false;
+
     /**
      * @var array
      */
@@ -46,11 +49,11 @@ class Booking extends Virtual
     /**
      * Create a new product type instance.
      *
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
-     * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $attributeValueRepository
-     * @param  \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
-     * @param  \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository           $attributeRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository               $productRepository
+     * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository $attributeValueRepository
+     * @param  \Webkul\Product\Repositories\ProductInventoryRepository      $productInventoryRepository
+     * @param  \Webkul\Product\Repositories\ProductImageRepository          $productImageRepository
      * @param  \Webkul\Product\Helpers\ProductImage $productImageHelper
      * @param  \Webkul\BookingProduct\Repositories\BookingProductRepository  $bookingProductRepository
      * @param  \Webkul\BookingProduct\Helpers\BookingHelper  $bookingHelper
@@ -197,13 +200,8 @@ class Booking extends Virtual
                     continue;
                 }
 
-                $cartProducts = parent::prepareForCart(array_merge($data, [
-                    'product_id' => $data['product_id'],
-                    'quantity'   => $qty,
-                    'booking'    => [
-                        'ticket_id' => $ticketId,
-                    ],
-                ]));
+                $data['booking']['ticket_id'] = $ticketId;
+                $cartProducts = parent::prepareForCart($data);
 
                 if (is_string($cartProducts)) {
                     return $cartProducts;

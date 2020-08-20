@@ -99,6 +99,7 @@ return [
             'added'                 => 'Item successfully added to compare list',
             'already_added'         => 'Item already added to compare list',
             'removed'               => 'Item successfully removed from compare list',
+            'removed-all'           => 'All items successfully removed from compare list',
             'empty-text'            => "You don't have any items in your compare list",
             'product_image'         => 'Product Image',
             'actions'               => 'Actions',
@@ -175,6 +176,11 @@ return [
         'account' => [
             'dashboard' => 'Edit Profile',
             'menu' => 'Menu',
+
+            'general' => [
+                'no' => 'No',
+                'yes' => 'Yes',
+            ],
 
             'profile' => [
                 'index' => [

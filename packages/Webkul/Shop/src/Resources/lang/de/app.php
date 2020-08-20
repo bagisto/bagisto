@@ -99,6 +99,7 @@ return [
             'added'                 => 'Element erfolgreich zur Vergleichsliste hinzugefügt',
             'already_added'         => 'Artikel bereits zur Vergleichsliste hinzugefügt',
             'removed'               => 'Element erfolgreich aus Vergleichsliste entfernt',
+            'removed-all'           => 'Alle Elemente wurden erfolgreich aus der Vergleichsliste entfernt',
             'empty-text'            => "Sie haben keine Elemente in Ihrer Vergleichsliste",
             'product_image'         => 'Produktbild',
             'actions'               => 'Aktionen',
@@ -175,6 +176,11 @@ return [
         'account' => [
             'dashboard' => 'Profil bearbeiten',
             'menu' => 'Menu',
+
+            'general' => [
+                'no' => 'Nein',
+                'yes' => 'Ja',
+            ],
 
             'profile' => [
                 'index' => [

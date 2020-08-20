@@ -7,9 +7,7 @@
             "email": "jitendra@webkul.com"
         }
     ],
-    "require": {
-        "konekt/concord": "^1.2"
-    },
+    "require": {},
     "autoload": {
         "psr-4": {
             "Webkul\\Sales\\": "src/"

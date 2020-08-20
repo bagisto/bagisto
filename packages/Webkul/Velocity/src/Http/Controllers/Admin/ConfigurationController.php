@@ -15,7 +15,15 @@ class ConfigurationController extends Controller
      */
     protected $velocityMetaDataRepository;
 
+    /**
+     * Locale
+     */
     protected $locale;
+
+    /**
+     * Channel
+     */
+    protected $channel;
 
     /**
      * Create a new controller instance.
@@ -28,10 +36,10 @@ class ConfigurationController extends Controller
         $this->_config = request('_config');
 
         $this->velocityHelper = app('Webkul\Velocity\Helpers\Helper');
-
         $this->velocityMetaDataRepository = $velocityMetadataRepository;
 
         $this->locale = request()->get('locale') ?: app()->getLocale();
+        $this->channel = request()->get('channel') ?: 'default';
     }
 
     /**
@@ -39,12 +47,12 @@ class ConfigurationController extends Controller
      */
     public function renderMetaData()
     {
-        $velocityMetaData = $this->velocityHelper->getVelocityMetaData($this->locale, false);
+        $velocityMetaData = $this->velocityHelper->getVelocityMetaData($this->locale, $this->channel, false);
 
         if (! $velocityMetaData) {
-            $this->createMetaData($this->locale);
+            $this->createMetaData($this->locale, $this->channel);
 
-            $velocityMetaData = $this->velocityHelper->getVelocityMetaData($this->locale);
+            $velocityMetaData = $this->velocityHelper->getVelocityMetaData($this->locale, $this->channel);
         }
 
         $velocityMetaData->advertisement = $this->manageAddImages(json_decode($velocityMetaData->advertisement, true) ?: []);
@@ -112,7 +120,7 @@ class ConfigurationController extends Controller
         unset($params['slides']);
 
         $params['locale'] = $this->locale;
-        
+
         // update row
         $product = $this->velocityMetaDataRepository->update($params, $id);
 
@@ -125,7 +133,7 @@ class ConfigurationController extends Controller
      * @param  array    $data
      * @param  int      $index
      * @param  array    $advertisement
-     * 
+     *
      * @return array
      */
     public function uploadAdvertisementImages($data, $index, $advertisement)
@@ -138,13 +146,13 @@ class ConfigurationController extends Controller
             if ($image != "") {
                 $file = 'images.' . $index . '.' . $imageId;
                 $dir = 'velocity/images';
-    
+
                 if (Str::contains($imageId, 'image_')) {
                     if (request()->hasFile($file) && $image) {
                         $filter_index = substr($imageId, 6, 1);
                         if ( isset($data[$filter_index]) ) {
                             $size = array_key_last($saveData[$index]);
-                            
+
                             $saveImage[$size + 1] = request()->file($file)->store($dir);
                         } else {
                             $saveImage[substr($imageId, 6, 1)] = request()->file($file)->store($dir);
@@ -153,13 +161,13 @@ class ConfigurationController extends Controller
                 } else {
                     if ( isset($advertisement[$index][$imageId]) && $advertisement[$index][$imageId] && !request()->hasFile($file)) {
                         $saveImage[$imageId] = $advertisement[$index][$imageId];
-    
+
                         unset($advertisement[$index][$imageId]);
                     }
-    
+
                     if (request()->hasFile($file) && isset($advertisement[$index][$imageId])) {
                         Storage::delete($advertisement[$index][$imageId]);
-    
+
                         $saveImage[$imageId] = request()->file($file)->store($dir);
                     }
                 }
@@ -192,7 +200,7 @@ class ConfigurationController extends Controller
     /**
      * @param  array    $data
      * @param  int      $index
-     * 
+     *
      * @return mixed
      */
     public function uploadImage($data, $index)
@@ -215,7 +223,7 @@ class ConfigurationController extends Controller
 
     /**
      * @param  array  $addImages
-     * 
+     *
      * @return array
      */
     public function manageAddImages($addImages)
@@ -236,14 +244,15 @@ class ConfigurationController extends Controller
                 ];
             }
         }
-        
+
         return $imagePaths;
     }
 
-    private function createMetaData($locale)
+    private function createMetaData($locale, $channel)
     {
         \DB::table('velocity_meta_data')->insert([
             'locale'                   => $locale,
+            'channel'                  => $channel,
 
             'home_page_content'        => "<p>@include('shop::home.advertisements.advertisement-four')@include('shop::home.featured-products') @include('shop::home.product-policy') @include('shop::home.advertisements.advertisement-three') @include('shop::home.new-products') @include('shop::home.advertisements.advertisement-two')</p>",
             'footer_left_content'      => __('velocity::app.admin.meta-data.footer-left-raw-content'),

@@ -96,6 +96,7 @@ return [
             'added'                 => 'Elemento agregado con éxito a la lista de comparación',
             'already_added'         => 'Elemento ya agregado a la lista de comparación',
             'removed'               => 'Elemento eliminado con éxito de la lista de comparación',
+            'removed-all'           => 'Todos los elementos eliminados correctamente de la lista de comparación',
             'empty-text'            => "No tienes ningún artículo en tu lista de comparación",
             'product_image'         => 'Product Image',
             'actions'               => 'Actions',
@@ -172,6 +173,11 @@ return [
         'account' => [
             'dashboard' => 'Cliente - Editar perfil',
             'menu' => 'Menu',
+
+            'general' => [
+                'no' => 'No',
+                'yes' => 'si',
+            ],
 
             'profile' => [
                 'index' => [
