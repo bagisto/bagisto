@@ -96,7 +96,52 @@ class CMSPagesTableSeeder extends Seeder
                 'meta_title'       => 'Contact Us',
                 'meta_description' => '',
                 'meta_keywords'    => 'contact, us',
-            ]
+            ], [
+                'locale'           => 'en',
+                'cms_page_id'      => 7,
+                'url_key'          => 'cutomer-service',
+                'html_content'     => '<div class="static-container"><div class="mb-5">Customer service  page content</div></div>',
+                'page_title'       => 'Customer Service',
+                'meta_title'       => 'Customer Service',
+                'meta_description' => '',
+                'meta_keywords'    => 'customer, service',
+            ], [
+                'locale'           => 'en',
+                'cms_page_id'      => 8,
+                'url_key'          => 'whats-new',
+                'html_content'     => '<div class="static-container"><div class="mb-5">What\'s New page content</div></div>',
+                'page_title'       => 'What\'s New',
+                'meta_title'       => 'What\'s New',
+                'meta_description' => '',
+                'meta_keywords'    => 'new',
+            ], [
+                'locale'           => 'en',
+                'cms_page_id'      => 9,
+                'url_key'          => 'payment-policy',
+                'html_content'     => '<div class="static-container"><div class="mb-5">Payment Policy page content</div></div>',
+                'page_title'       => 'Payment Policy',
+                'meta_title'       => 'Payment Policy',
+                'meta_description' => '',
+                'meta_keywords'    => 'payment, policy',
+            ], [
+                'locale'           => 'en',
+                'cms_page_id'      => 10,
+                'url_key'          => 'shipping-policy',
+                'html_content'     => '<div class="static-container"><div class="mb-5">Shipping Policy  page content</div></div>',
+                'page_title'       => 'Shipping Policy',
+                'meta_title'       => 'Shipping Policy',
+                'meta_description' => '',
+                'meta_keywords'    => 'shipping, policy',
+            ], [
+                'locale'           => 'en',
+                'cms_page_id'      => 11,
+                'url_key'          => 'privacy-policy',
+                'html_content'     => '<div class="static-container"><div class="mb-5">Privacy Policy  page content</div></div>',
+                'page_title'       => 'Privacy Policy',
+                'meta_title'       => 'Privacy Policy',
+                'meta_description' => '',
+                'meta_keywords'    => 'privacy, policy',
+            ] 
         ]);
     }
 }
