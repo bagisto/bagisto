@@ -192,8 +192,11 @@ class Product extends Model implements ProductContract
                     ->where('locale',$locale)
                     ->where('channel',$channel)
                     ->get();
-                    
-        return $data['0'];
+
+        foreach ($data as $value) {
+            $metaData = $value;
+        }        
+        return $metaData;
     }
 
     /**

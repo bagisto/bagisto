@@ -129,7 +129,8 @@
                         <label>{{ __('velocity::app.admin.meta-data.up_selling_product_count') }}</label>
 
                         <input
-                            type="text"
+                            type="number"
+                            min="0"
                             class="control"
                             id="up_selling_product_count"
                             name="up_selling_product_count"
@@ -140,7 +141,8 @@
                         <label>{{ __('velocity::app.admin.meta-data.cross_selling_product_count') }}</label>
 
                         <input
-                            type="text"
+                            type="number"
+                            min="0"
                             class="control"
                             id="cross_selling_product_count"
                             name="cross_selling_product_count"
@@ -151,7 +153,8 @@
                         <label>{{ __('velocity::app.admin.meta-data.related_product_count') }}</label>
 
                         <input
-                            type="text"
+                            type="number"
+                            min="0"
                             class="control"
                             id="related_product_count"
                             name="related_product_count"
