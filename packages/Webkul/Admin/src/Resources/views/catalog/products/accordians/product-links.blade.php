@@ -50,8 +50,8 @@
 
             <input type="hidden" name="related_products[]" v-for='(product, index) in addedProducts.related_products' v-if="(key == 'related_products') && addedProducts.related_products.length" :value="product.id"/>
 
-            <span class="filter-tag" style="text-transform: capitalize; margin-top: 10px; margin-right: 0px; justify-content: flex-start" v-if="addedProducts[key].length">
-                <span class="wrapper" style="margin-left: 0px; margin-right: 10px;" v-for='(product, index) in addedProducts[key]'>
+            <span class="filter-tag" style="text-transform: capitalize; margin-top: 10px; margin-right: 0px; justify-content: flex-start; height: 100%;" v-if="addedProducts[key].length">
+                <span class="wrapper" style="margin-left: 0px; margin-right: 10px; height: 100%;" v-for='(product, index) in addedProducts[key]'>
                     @{{ product.name }}
                 <span class="icon cross-icon" @click="removeProduct(product, key)"></span>
                 </span>
