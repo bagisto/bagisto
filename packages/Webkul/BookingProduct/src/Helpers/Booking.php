@@ -556,7 +556,6 @@ class Booking
         $item->total = core()->convertPrice($price * $item->quantity);
 
         $item->save();
-        $result->cartIsDirty();
 
         return $result;
     }

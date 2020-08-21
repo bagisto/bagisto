@@ -703,8 +703,8 @@ class Bundle extends AbstractType
                 $result->itemIsInactive();
             }
 
-            if ($childResult->isCartDirty()) {
-                $result->cartIsDirty();
+            if ($childResult->isCartInvalid()) {
+                $result->cartIsInvalid();
             }
 
             $price += $childItem->base_price * $childItem->quantity;
@@ -723,7 +723,6 @@ class Bundle extends AbstractType
         $item->additional = $this->getAdditionalOptions($item->additional);
 
         $item->save();
-        $result->cartIsDirty();
 
         return $result;
     }

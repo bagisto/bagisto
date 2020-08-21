@@ -592,20 +592,20 @@ class Cart
         if (! $cart = $this->getCart()) {
             return false;
         }
-
-        if (count($cart->items) == 0) {
+        if (count($cart->items) === 0) {
             $this->cartRepository->delete($cart->id);
 
             return false;
         }
 
-        $isDirty = false;
+        $isInvalid = false;
+
         foreach ($cart->items as $item) {
             $validationResult = $item->product->getTypeInstance()->validateCartItem($item);
 
             if ($validationResult->isItemInactive()) {
                 $this->removeItem($item->id);
-                $isDirty = true;
+                $isInvalid = true;
                 session()->flash('info', __('shop::app.checkout.cart.item.inactive'));
             }
 
@@ -618,10 +618,10 @@ class Cart
                 'base_total' => $price * $item->quantity,
             ], $item->id);
 
-            $isDirty |= $validationResult->isCartDirty();
+            $isInvalid |= $validationResult->isCartInvalid();
         }
 
-        return ! $isDirty;
+        return ! $isInvalid;
     }
 
     /**

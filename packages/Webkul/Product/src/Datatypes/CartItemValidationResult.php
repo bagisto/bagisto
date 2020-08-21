@@ -4,21 +4,20 @@ namespace Webkul\Product\Datatypes;
 
 class CartItemValidationResult
 {
-    /** @var bool $cartIsDirty */
-    private $cartIsDirty = false;
+    /** @var bool $cartIsInvalid */
+    private $cartIsInvalid = false;
 
     /** @var bool $itemIsInactive */
     private $itemIsInactive = false;
 
     /**
-     * Function to check if cart is dirty
-     * (price has been changed, product was disabled and so on)
+     * Function to check if cart is invalid
      *
      * @return bool
      */
-    public function isCartDirty(): bool
+    public function isCartInvalid(): bool
     {
-        return $this->cartIsDirty;
+        return $this->cartIsInvalid;
     }
 
     /**
@@ -37,14 +36,13 @@ class CartItemValidationResult
     public function itemIsInactive(): void
     {
         $this->itemIsInactive = true;
-        $this->cartIsDirty = true;
     }
 
     /**
-     * Function to set if cart is dirty
+     * Function to set if cart is invalid
      */
-    public function cartIsDirty(): void
+    public function cartIsInvalid(): void
     {
-        $this->cartIsDirty = true;
+        $this->cartIsInvalid = true;
     }
 }

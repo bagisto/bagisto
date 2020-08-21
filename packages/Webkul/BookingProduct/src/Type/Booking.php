@@ -276,6 +276,7 @@ class Booking extends Virtual
         $bookingProduct = $this->getBookingProduct($item->product_id);
 
         if (! $bookingProduct) {
+            $result->cartIsInvalid();
             return $result;
         }
 

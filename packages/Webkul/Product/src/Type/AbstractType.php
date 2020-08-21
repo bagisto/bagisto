@@ -5,7 +5,6 @@ namespace Webkul\Product\Type;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Checkout\Facades\Cart;
-use Webkul\Checkout\Models\CartItem;
 use Webkul\Product\Datatypes\CartItemValidationResult;
 use Webkul\Product\Helpers\ProductImage;
 use Webkul\Product\Models\ProductAttributeValue;
@@ -703,7 +702,7 @@ abstract class AbstractType
 
         $data = $this->getQtyRequest($data);
 
-        if (!$this->haveSufficientQuantity($data['quantity'])) {
+        if (! $this->haveSufficientQuantity($data['quantity'])) {
             return trans('shop::app.checkout.cart.quantity.inventory_warning');
         }
 
@@ -813,11 +812,11 @@ abstract class AbstractType
     /**
      * Validate cart item product price and other things
      *
-     * @param CartItem $item
+     * @param \Webkul\Checkout\Models\CartItem $item
      *
-     * @return CartItemValidationResult
+     * @return \Webkul\Product\Datatypes\CartItemValidationResult
      */
-    public function validateCartItem(CartItem $item): CartItemValidationResult
+    public function validateCartItem(\Webkul\Checkout\Models\CartItem $item): CartItemValidationResult
     {
         $result = new CartItemValidationResult();
 
@@ -840,7 +839,6 @@ abstract class AbstractType
         $item->total = core()->convertPrice($price * $item->quantity);
 
         $item->save();
-        $result->cartIsDirty();
 
         return $result;
     }
