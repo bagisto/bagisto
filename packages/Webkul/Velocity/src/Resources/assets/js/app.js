@@ -67,7 +67,7 @@ $(document).ready(function () {
                 'sharedRootCategories': [],
                 'responsiveSidebarTemplate': '',
                 'responsiveSidebarKey': Math.random(),
-                'baseUrl': document.querySelector("script[src$='velocity.js']").getAttribute('baseUrl'),
+                'baseUrl': document.querySelector("script[src$='velocity.js']").getAttribute('baseUrl')
             }
         },
 
@@ -165,10 +165,17 @@ $(document).ready(function () {
 
             isMobile: function () {
                 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i|/mobi/i.test(navigator.userAgent)) {
-                  return true
+                    if (this.isMaxWidthCrossInLandScape()) {
+                        return false;
+                    }
+                    return true
                 } else {
-                  return false
+                    return false
                 }
+            },
+
+            isMaxWidthCrossInLandScape: function() {
+                return window.innerWidth > 900;
             },
 
             getDynamicHTML: function (input) {
