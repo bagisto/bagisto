@@ -5,6 +5,8 @@ namespace Webkul\BookingProduct\Helpers;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Webkul\Checkout\Facades\Cart;
+use Webkul\Product\Datatypes\CartItemValidationResult;
+use Webkul\Checkout\Models\CartItem;
 
 class EventTicket extends Booking
 {
@@ -128,11 +130,20 @@ class EventTicket extends Booking
     /**
      * Validate cart item product price
      *
-     * @param  \Webkul\Checkout\Contracts\CartItem  $item
-     * @return float
+     * @param \Webkul\Checkout\Models\CartItem $item
+     *
+     * @return \Webkul\Product\Datatypes\CartItemValidationResult
      */
-    public function validateCartItem($item)
+    public function validateCartItem(CartItem $item): CartItemValidationResult
     {
+        $result = new CartItemValidationResult();
+
+        if (parent::isCartItemInactive($item)) {
+            $result->itemIsInactive();
+
+            return $result;
+        }
+
         $price = $item->product->getTypeInstance()->getFinalPrice($item->quantity);
 
         $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $item->product_id);
@@ -140,9 +151,9 @@ class EventTicket extends Booking
         $ticket = $bookingProduct->event_tickets()->find($item->additional['booking']['ticket_id']);
 
         if (! $ticket) {
-            Cart::removeItem($item->id);
+            $result->itemIsInactive();
 
-            return true;
+            return $result;
         }
 
         if ($this->isInSale($ticket)) {
@@ -152,7 +163,7 @@ class EventTicket extends Booking
         }
 
         if ($price === $item->base_price) {
-            return;
+            return $result;
         }
 
         $item->base_price = $price;
@@ -162,6 +173,8 @@ class EventTicket extends Booking
         $item->total = core()->convertPrice($price * $item->quantity);
 
         $item->save();
+
+        return $result;
     }
 
     /**
