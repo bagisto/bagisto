@@ -64,7 +64,7 @@
 
 <script type="text/x-template" id="searchbar-template">
     <div class="row no-margin right searchbar">
-        <div class="col-lg-6 col-md-12 no-padding input-group">
+        <div class="col-lg-5 col-md-12 no-padding input-group">
             <form
                 method="GET"
                 role="search"
@@ -124,7 +124,7 @@
             </form>
         </div>
 
-        <div class="col-6">
+        <div class="col-lg-7 col-md-12">
             {!! view_render_event('bagisto.shop.layout.header.cart-item.before') !!}
                 @include('shop::checkout.cart.mini-cart')
             {!! view_render_event('bagisto.shop.layout.header.cart-item.after') !!}
