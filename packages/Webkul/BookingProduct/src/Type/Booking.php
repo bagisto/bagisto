@@ -4,15 +4,17 @@ namespace Webkul\BookingProduct\Type;
 
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
-use Webkul\Product\Type\Virtual;
-use Webkul\Product\Helpers\ProductImage;
-use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\BookingProduct\Helpers\Booking as BookingHelper;
-use Webkul\Product\Repositories\ProductInventoryRepository;
-use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\BookingProduct\Repositories\BookingProductRepository;
+use Webkul\Checkout\Models\CartItem;
+use Webkul\Product\Datatypes\CartItemValidationResult;
+use Webkul\Product\Helpers\ProductImage;
+use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Repositories\ProductImageRepository;
+use Webkul\Product\Repositories\ProductInventoryRepository;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Type\Virtual;
 
 class Booking extends Virtual
 {
@@ -152,14 +154,14 @@ class Booking extends Virtual
     {
         $bookingProduct = $this->getBookingProduct($this->product->id);
 
-        return app($this->bookingHelper->getTypeHepler($bookingProduct->type))->isItemHaveQuantity($cartItem);
+        return app($this->bookingHelper->getTypeHelper($bookingProduct->type))->isItemHaveQuantity($cartItem);
     }
 
     /**
      * @param  int  $qty
      * @return bool
      */
-    public function haveSufficientQuantity($qty)
+    public function haveSufficientQuantity(int $qty): bool
     {
         return true;
     }
@@ -211,7 +213,7 @@ class Booking extends Virtual
             $products = parent::prepareForCart($data);
         }
 
-        $typeHelper = app($this->bookingHelper->getTypeHepler($bookingProduct->type));
+        $typeHelper = app($this->bookingHelper->getTypeHelper($bookingProduct->type));
 
         if (! $typeHelper->isSlotAvailable($products)) {
             return trans('shop::app.checkout.cart.quantity.inventory_warning');
@@ -257,17 +259,27 @@ class Booking extends Virtual
     /**
      * Validate cart item product price
      *
-     * @param  \Webkul\Checkout\Contracts\CartItem  $item
-     * @return float
+     * @param \Webkul\Checkout\Models\CartItem $item
+     *
+     * @return \Webkul\Product\Datatypes\CartItemValidationResult
      */
-    public function validateCartItem($item)
+    public function validateCartItem(CartItem $item): CartItemValidationResult
     {
+        $result = new CartItemValidationResult();
+
+        if (parent::isCartItemInactive($item)) {
+            $result->itemIsInactive();
+
+            return $result;
+        }
+
         $bookingProduct = $this->getBookingProduct($item->product_id);
 
         if (! $bookingProduct) {
-            return;
+            $result->cartIsInvalid();
+            return $result;
         }
 
-        return app($this->bookingHelper->getTypeHepler($bookingProduct->type))->validateCartItem($item);
+        return app($this->bookingHelper->getTypeHelper($bookingProduct->type))->validateCartItem($item);
     }
 }

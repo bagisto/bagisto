@@ -488,6 +488,8 @@ return [
                 'success' => 'Artikel is succesvol toegevoegd aan winkelwagen.',
                 'success-remove' => 'Item is met succes uit de winkelwagen verwijderd.',
                 'error-add' => 'Item kan niet aan winkelwagen worden toegevoegd. Probeer het later opnieuw.',
+                'inactive' => 'An item is inactive and was removed from cart.',
+                'inactive-add' => 'Inactive item cannot be added to cart.',
             ],
             'quantity-error' => 'Gevraagde hoeveelheid is niet beschikbaar.',
             'cart-subtotal' => 'Subtotaal',

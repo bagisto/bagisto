@@ -484,6 +484,8 @@ return [
                 'success' => 'تم بنجاح إضافة العنصر إلى العربة',
                 'success-remove' => 'تم إزالة العنصر بنجاح من العربة',
                 'error-add' => 'لا يمكن إضافة العنصر إلى العربة ، رجاء حاول مرة أخرى ',
+                'inactive' => 'An item is inactive and was removed from cart',
+                'inactive-add' => 'Inactive item cannot be added to cart',
             ],
             'quantity-error' => 'الكمية المطلوبة غير متوفرة',
             'cart-subtotal' => 'المجموع الفرعي للمشتريات',

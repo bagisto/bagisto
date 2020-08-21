@@ -60,6 +60,7 @@ class CartCest
 
         $I->comment("Check, I'm a guest");
         $I->assertFalse(auth()->guard('customer')->check());
+        $I->assertNull(cart()->getCart());
 
         $data = [
             '_token'     => session('_token'),
@@ -120,6 +121,7 @@ class CartCest
         }
 
         $I->comment('Again, guest is adding another product of type ' . $product1->type . '.');
+        $I->assertNull(cart()->getCart());
         cart()->addProduct($product1->id, $data);
         $I->assertEquals(1, cart()->getCart()->items->count());
         $I->assertEquals(2, cart()->getCart()->items_qty);

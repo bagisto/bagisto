@@ -99,11 +99,11 @@ class ProductFlat extends Model implements ProductFlatContract
     }
 
     /**
-     * @param integer $qty
+     * @param int $qty
      *
      * @return bool
      */
-    public function haveSufficientQuantity($qty)
+    public function haveSufficientQuantity(int $qty): bool
     {
         return $this->product->haveSufficientQuantity($qty);
     }
