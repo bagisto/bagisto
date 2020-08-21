@@ -51,6 +51,6 @@ class SearchRepository extends Repository
     {
         $path = request()->file('image')->store('product-search');
 
-        return Storage::url($path);
+        return asset('storage/' . $path);
     }
 }
