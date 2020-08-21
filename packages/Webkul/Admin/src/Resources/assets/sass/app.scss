@@ -14,3 +14,13 @@
 @import "partials/rtl";
 
 @import "partials/ui/components";
+
+.ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.do-not-cross-arrow {
+    width: 85%;
+}
