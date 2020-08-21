@@ -140,6 +140,10 @@ class Cart
 
         $product = $this->productRepository->findOneByField('id', $productId);
 
+        if ($product->status === 0) {
+            return ['info' => __('shop::app.checkout.cart.item.inactive-add')];
+        }
+
         $cartProducts = $product->getTypeInstance()->prepareForCart($data);
 
         if (is_string($cartProducts)) {
@@ -244,6 +248,10 @@ class Cart
 
             if (! $item) {
                 continue;
+            }
+
+            if ($item->product && $item->product->status === 0) {
+                throw new Exception(__('shop::app.checkout.cart.item.inactive'));
             }
 
             if ($quantity <= 0) {
@@ -394,17 +402,20 @@ class Cart
      */
     public function getCart(): ?\Webkul\Checkout\Contracts\Cart
     {
+        $cart = null;
         if ($this->getCurrentCustomer()->check()) {
-            return $this->cartRepository->findOneWhere([
+            $cart = $this->cartRepository->findOneWhere([
                 'customer_id' => $this->getCurrentCustomer()->user()->id,
                 'is_active'   => 1,
             ]);
 
         } elseif (session()->has('cart')) {
-            return $this->cartRepository->find(session()->get('cart')->id);
+            $cart = $this->cartRepository->find(session()->get('cart')->id);
         }
 
-        return null;
+        $this->removeInactiveItems($cart);
+
+        return $cart;
     }
 
     /**
@@ -512,16 +523,14 @@ class Cart
      *
      * @return void
      */
-    public function collectTotals()
+    public function collectTotals(): void
     {
-        $validated = $this->validateItems();
-
-        if (! $validated) {
-            return false;
+        if (! $this->validateItems()) {
+            return;
         }
 
         if (! $cart = $this->getCart()) {
-            return false;
+            return;
         }
 
         Event::dispatch('checkout.cart.collect.totals.before', $cart);
@@ -578,37 +587,41 @@ class Cart
      *
      * @return bool
      */
-    public function validateItems()
+    public function validateItems(): bool
     {
         if (! $cart = $this->getCart()) {
-            return;
+            return false;
         }
-
-        if (count($cart->items) == 0) {
+        if (count($cart->items) === 0) {
             $this->cartRepository->delete($cart->id);
 
             return false;
-        } else {
-            foreach ($cart->items as $item) {
-                $response = $item->product->getTypeInstance()->validateCartItem($item);
-                // ToDo: refactoring of all validateCartItem functions, at the moment they return nothing
+        }
 
-                if ($response) {
-                    return;
-                }
+        $isInvalid = false;
 
-                $price = ! is_null($item->custom_price) ? $item->custom_price : $item->base_price;
+        foreach ($cart->items as $item) {
+            $validationResult = $item->product->getTypeInstance()->validateCartItem($item);
 
-                $this->cartItemRepository->update([
-                    'price'      => core()->convertPrice($price),
-                    'base_price' => $price,
-                    'total'      => core()->convertPrice($price * $item->quantity),
-                    'base_total' => $price * $item->quantity,
-                ], $item->id);
+            if ($validationResult->isItemInactive()) {
+                $this->removeItem($item->id);
+                $isInvalid = true;
+                session()->flash('info', __('shop::app.checkout.cart.item.inactive'));
             }
 
-            return true;
+            $price = ! is_null($item->custom_price) ? $item->custom_price : $item->base_price;
+
+            $this->cartItemRepository->update([
+                'price'      => core()->convertPrice($price),
+                'base_price' => $price,
+                'total'      => core()->convertPrice($price * $item->quantity),
+                'base_total' => $price * $item->quantity,
+            ], $item->id);
+
+            $isInvalid |= $validationResult->isCartInvalid();
         }
+
+        return ! $isInvalid;
     }
 
     /**
@@ -681,8 +694,8 @@ class Cart
 
                     if ($haveTaxRate) {
                         $item->tax_percent = $rate->tax_rate;
-                        $item->tax_amount = ($item->total * $rate->tax_rate) / 100;
-                        $item->base_tax_amount = ($item->base_total * $rate->tax_rate) / 100;
+                        $item->tax_amount = round(($item->total * $rate->tax_rate) / 100, 4);
+                        $item->base_tax_amount = round(($item->base_total * $rate->tax_rate) / 100, 4);
 
                         break;
                     }
@@ -734,13 +747,54 @@ class Cart
      */
     public function isItemsHaveSufficientQuantity(): bool
     {
-        foreach ($this->getCart()->items as $item) {
+        $cart = cart()->getCart();
+
+        if (! $cart) {
+            return false;
+        }
+
+        foreach ($cart->items as $item) {
             if (! $this->isItemHaveQuantity($item)) {
                 return false;
             }
         }
 
         return true;
+    }
+
+    /**
+     * Remove cart items, whose product is inactive
+     *
+     * @param \Webkul\Checkout\Models\Cart|null $cart
+     *
+     * @return \Webkul\Checkout\Models\Cart|null
+     */
+    public function removeInactiveItems(CartModel $cart = null): ?CartModel
+    {
+        if (! $cart) {
+            return $cart;
+        }
+
+        foreach ($cart->items as $item) {
+            if ($this->isCartItemInactive($item)) {
+
+                $this->cartItemRepository->delete($item->id);
+
+                if ($cart->items()->get()->count() == 0) {
+                    $this->cartRepository->delete($cart->id);
+
+                    if (session()->has('cart')) {
+                        session()->forget('cart');
+                    }
+                }
+
+                session()->flash('info', __('shop::app.checkout.cart.item.inactive'));
+            }
+        }
+
+        $cart->save();
+
+        return $cart;
     }
 
     /**
@@ -1029,6 +1083,17 @@ class Cart
         $cart->base_grand_total = round($cart->base_grand_total, 2);
 
         return $cart;
+    }
+
+    /**
+     * Returns true, if cart item is inactive
+     *
+     * @param \Webkul\Checkout\Contracts\CartItem $item
+     *
+     * @return bool
+     */
+    private function isCartItemInactive(\Webkul\Checkout\Contracts\CartItem $item): bool {
+        return $item->product->getTypeInstance()->isCartItemInactive($item);
     }
 
     /**

@@ -484,6 +484,8 @@ return [
                 'success' => 'Item was successfully added to cart.',
                 'success-remove' => 'Item was removed successfully from the cart.',
                 'error-add' => 'Item cannot be added to cart, please try again later.',
+                'inactive' => 'An item is inactive and was removed from cart.',
+                'inactive-add' => 'Inactive item cannot be added to cart.',
             ],
             'quantity-error' => 'Requested quantity is not available.',
             'cart-subtotal' => 'Cart Subtotal',

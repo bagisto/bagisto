@@ -481,6 +481,8 @@ return [
                 'success' => 'Artikel wurde erfolgreich zum Warenkorb hinzugefügt',
                 'success-remove' => 'Artikel wurde erfolgreich aus dem Warenkorb entfernt',
                 'error-add' => 'Artikel kann nicht zum Warenkorb hinzugefügt werden. Bitte versuchen Sie es später erneut',
+                'inactive' => 'Ein Artikel ist inaktiv und wurde aus dem Warenkorb entfernt.',
+                'inactive-add' => 'Ein inaktiver Artikel kann nicht zum Warenkorb hinzugefügt werde.',
             ],
             'quantity-error' => 'Die angeforderte Menge ist nicht verfügbar',
             'cart-subtotal' => 'Warenkorb Zwischensumme',
