@@ -15,24 +15,28 @@ class CartControllerCest
      * @param \Example    $scenario
      *
      * @throws \Exception
-     * @dataProvider getOnWarningAddingToCartScenarios
+     * @dataProvider getOnFailureAddingToCartScenarios
      */
-    public function testOnWarningAddingToCart(UnitTester $I, Example $scenario): void
+    public function testOnFailureAddingToCart(UnitTester $I, Example $scenario): void
     {
         $I->assertEquals($scenario['expected'],
             $I->executeFunction(
                 CartController::class,
-                'onWarningAddingToCart',
+                'onFailureAddingToCart',
                 [$scenario['result']]
             )
         );
     }
 
-    protected function getOnWarningAddingToCartScenarios(): array
+    protected function getOnFailureAddingToCartScenarios(): array
     {
         return [
             [
                 'result'   => ['key' => 'value', 'warning' => 'Hello World. Something went wrong.'],
+                'expected' => true,
+            ],
+            [
+                'result'   => ['key' => 'value', 'info' => 'This is only a test.'],
                 'expected' => true,
             ],
             [

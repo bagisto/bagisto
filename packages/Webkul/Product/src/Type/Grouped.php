@@ -106,7 +106,7 @@ class Grouped extends AbstractType
      */
     public function getChildrenIds()
     {
-        return array_unique($this->product->grouped_products()->pluck('product_id')->toArray());
+        return array_unique($this->product->grouped_products()->pluck('associated_product_id')->toArray());
     }
 
     /**
@@ -137,6 +137,22 @@ class Grouped extends AbstractType
         }
 
         return min($minPrices);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSaleable()
+    {
+        if (!$this->product->status) {
+            return false;
+        }
+
+        if (ProductFlat::query()->select('id')->whereIn('product_id', $this->getChildrenIds())->where('status', 0)->first()) {
+            return false;
+        }
+
+        return true;
     }
 
     /**

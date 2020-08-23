@@ -33,7 +33,7 @@
                         </a>
                     </div>
 
-                    <div class="col-8 no-padding card-body align-vertical-top" v-if="product.name">
+                    <div class="col-8 no-padding card-body align-vertical-top" v-if="product.urlKey">
                         <a :href="`${baseUrl}/${product.urlKey}`" class="unset no-padding">
                             <div class="product-name">
                                 <span class="fs16 text-nowrap">@{{ product.name }}</span>

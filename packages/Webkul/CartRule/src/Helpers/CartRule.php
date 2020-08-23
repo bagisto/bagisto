@@ -577,13 +577,13 @@ class CartRule
      */
     public function getCartRuleQuery($customerGroupId, $channelId): \Illuminate\Database\Eloquent\Collection
     {
-        return $this->cartRuleRepository->scopeQuery(function ($query) use ($customerGroupId) {
+        return $this->cartRuleRepository->scopeQuery(function ($query) use ($customerGroupId, $channelId) {
             /** @var Builder $query */
             return $query->leftJoin('cart_rule_customer_groups', 'cart_rules.id', '=',
                 'cart_rule_customer_groups.cart_rule_id')
                 ->leftJoin('cart_rule_channels', 'cart_rules.id', '=', 'cart_rule_channels.cart_rule_id')
                 ->where('cart_rule_customer_groups.customer_group_id', $customerGroupId)
-                ->where('cart_rule_channels.channel_id', core()->getCurrentChannel()->id)
+                ->where('cart_rule_channels.channel_id', $channelId)
                 ->where(function ($query1) {
                     /** @var Builder $query1 */
                     $query1->where('cart_rules.starts_from', '<=', Carbon::now()->format('Y-m-d'))
@@ -602,4 +602,5 @@ class CartRule
                 ->orderBy('sort_order', 'asc');
         })->findWhere(['status' => 1]);
     }
+
 }

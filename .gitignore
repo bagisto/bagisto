@@ -1,4 +1,5 @@
 /docker-compose-collection
+/storage/dcc-data/
 /node_modules
 /public/hot
 /public/storage
