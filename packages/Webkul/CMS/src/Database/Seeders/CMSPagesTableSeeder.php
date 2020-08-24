@@ -38,7 +38,27 @@ class CMSPagesTableSeeder extends Seeder
                 'id'         => 6,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-            ]
+            ], [
+                'id'         => 7,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ], [
+                'id'         => 8,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ], [
+                'id'         => 9,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ], [
+                'id'         => 10,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ], [
+                'id'         => 11,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ] 
         ]);
 
         DB::table('cms_page_translations')->insert([
