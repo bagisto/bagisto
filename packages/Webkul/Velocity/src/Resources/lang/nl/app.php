@@ -223,7 +223,10 @@ return [
             'forgot-password' => 'Forgot Password',
             'recover-password' => 'Recover Password',
             'recover-password-text' => 'Als u uw wachtwoord bent vergeten, kan u dit herstellen door uw e-mailadres in te voeren..',
-        ]
+        ],
+        'wishlist' => [
+            'remove-all-success' => 'Alle items van je verlanglijst zijn verwijderd',
+        ],
     ],
 
     'error' => [

@@ -224,7 +224,10 @@ return [
             'forgot-password'       => 'パスワードをお忘れですか',
             'recover-password'      => 'パスワードを回復',
             'recover-password-text' => 'パスワードを忘れた場合は、メールアドレスを入力してパスワードを回復してください。',
-        ]
+        ],
+        'wishlist' => [
+            'remove-all-success' => 'ウィッシュリストからすべてのアイテムが削除されました',
+        ],
     ],
 
     'error'       => [

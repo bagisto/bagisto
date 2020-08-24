@@ -225,7 +225,10 @@ return [
             'forgot-password' => 'Esqueceu a senha',
             'recover-password' => 'Recuperar Senha',
             'recover-password-text' => 'Se você esqueceu sua senha, recupere-a digitando seu endereço de e-mail.',
-        ]
+        ],
+        'wishlist' => [
+            'remove-all-success' => 'Todos os itens da sua lista de desejos foram removidos',
+        ],
     ],
 
     'error' => [
