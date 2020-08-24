@@ -51,9 +51,11 @@
             <input type="hidden" name="related_products[]" v-for='(product, index) in addedProducts.related_products' v-if="(key == 'related_products') && addedProducts.related_products.length" :value="product.id"/>
 
             <span class="filter-tag linked-product-filter-tag" v-if="addedProducts[key].length">
-                <span class="wrapper linked-product-wrapper" v-for='(product, index) in addedProducts[key]'>
-                    @{{ product.name }}
-                <span class="icon cross-icon" @click="removeProduct(product, key)"></span>
+                <span class="wrapper linked-product-wrapper " v-for='(product, index) in addedProducts[key]'>
+                    <span class="do-not-cross-linked-product-arrow">
+                        @{{ product.name }}
+                    </span>
+                    <span class="icon cross-icon" @click="removeProduct(product, key)"></span>
                 </span>
             </span>
         </div>
