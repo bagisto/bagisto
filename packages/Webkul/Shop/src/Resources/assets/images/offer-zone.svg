@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>icon-offer</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="icon-offer" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <polygon id="Star" fill="#FF6472" points="12 21.8341033 8.29179607 23.8299999 6.46471607 20.0352146 2.29179607 19.4698579 3.04372246 15.325663 0 12.415 3.04372246 9.50433697 2.29179607 5.360142 6.46471607 4.79478531 8.29179607 1 12 2.99589665 15.7082039 1 17.5352839 4.79478531 21.7082039 5.360142 20.9562775 9.50433697 24 12.415 20.9562775 15.325663 21.7082039 19.4698579 17.5352839 20.0352146 15.7082039 23.8299999"></polygon>
+        <text id="%" font-family="Montserrat-Regular, Montserrat" font-size="12" font-weight="normal" letter-spacing="-0.2879999" fill="#FFFFFF">
+            <tspan x="7.8559999" y="17">%</tspan>
+        </text>
+    </g>
+</svg>

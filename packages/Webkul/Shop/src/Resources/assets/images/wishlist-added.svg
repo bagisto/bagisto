@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Wishlist-Add</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Wishlist-Add" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <path d="M15.9962711,26 C15.9962711,26 3.82641602,21.6804199 5.05062701,11.3846154 C5.38182072,8.59922485 8.45774362,6 11.3052808,6 C13.3974625,6 15.1753096,7.5626878 15.9962711,9.07692308 C16.9857769,7.57771184 18.5950798,6 20.6872614,6 C23.5347986,6 26.6121993,8.59909844 26.9419152,11.3846154 C28.2089844,22.0891113 15.9962711,26 15.9962711,26 Z" id="heart" stroke="#FF6472" stroke-width="3" fill="#FF6472" fill-rule="nonzero"></path>
+    </g>
+</svg>

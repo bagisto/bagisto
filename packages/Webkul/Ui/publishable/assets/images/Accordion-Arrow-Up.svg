@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Accordion-Arrow-Up</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Accordion-Arrow-Up" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle-2" fill="#0041FF" x="0" y="0" width="24" height="24" rx="12"></rect>
+        <polyline id="Path-3" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" transform="translate(12.000000, 11.000000) scale(-1, 1) rotate(-90.000000) translate(-12.000000, -11.000000) " points="10 7 14 11 10 15"></polyline>
+    </g>
+</svg>

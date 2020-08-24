@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Icon-Sort-Down</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icon-Sort-Down" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g transform="translate(9.000000, 9.000000) rotate(90.000000) translate(-9.000000, -9.000000) translate(3.000000, 5.000000)" stroke="#979797" stroke-width="2">
+            <path d="M1.13686838e-12,4 L10.068125,4" id="Path-3"></path>
+            <polyline id="Path-4" points="8 0 12 4.08548298 8 8"></polyline>
+        </g>
+    </g>
+</svg>

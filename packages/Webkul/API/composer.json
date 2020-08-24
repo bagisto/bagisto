@@ -1,0 +1,34 @@
+{
+    "name": "bagisto/laravel-api",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Prashant Singh",
+            "email": "prashant.singh852@webkul.com"
+        }
+    ],
+    "require": {
+        "bagisto/laravel-user": "dev-master",
+        "bagisto/laravel-core": "dev-master",
+        "bagisto/laravel-product": "dev-master",
+        "bagisto/laravel-shop": "dev-master",
+        "bagisto/laravel-category": "dev-master",
+        "bagisto/laravel-tax": "dev-master",
+        "bagisto/laravel-inventory": "dev-master",
+        "bagisto/laravel-checkout": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Webkul\\API\\": "/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Webkul\\API\\Providers\\APIServiceProvider"
+            ],
+            "aliases": {}
+        }
+    },
+    "minimum-stability": "dev"
+}
