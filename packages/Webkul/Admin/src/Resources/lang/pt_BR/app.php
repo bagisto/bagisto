@@ -1356,7 +1356,11 @@ return [
             'show-sku' => 'Show SKU',
             'categories' => 'Categories',
             'show-sku' => 'Show SKU',
-            'show-search-input-field' => 'Show Search Input Field'
+            'show-search-input-field' => 'Show Search Input Field',
+            'store-name' => 'Nome da loja',
+            'vat-number' => 'Número de IVA',
+            'contact-number' => 'Número de contato',
+            'bank-details' => 'Detalhes bancários'
         ]
     ]
 ];

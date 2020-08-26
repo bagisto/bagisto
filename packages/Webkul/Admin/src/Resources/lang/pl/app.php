@@ -1342,7 +1342,11 @@ return [
             'show-sku' => 'Show SKU',
             'categories' => 'Categories',
             'show-sku' => 'Show SKU',
-            'show-search-input-field' => 'Show Search Input Field'
+            'show-search-input-field' => 'Show Search Input Field',
+            'store-name' => 'Nazwa sklepu',
+            'vat-number' => 'Numer VAT',
+            'contact-number' => 'Numer kontaktowy',
+            'bank-details' => 'Dane bankowe'
        ]
     ]
 ];

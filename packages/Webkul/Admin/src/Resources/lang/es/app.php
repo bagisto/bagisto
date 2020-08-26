@@ -1309,7 +1309,11 @@ return [
             'all-channels' => 'Todos',
             'all-locales' => 'Todos',
             'invoice-slip-design' => 'Diseño parte trasera factura',
-            'logo' => 'logo'
+            'logo' => 'logo',
+            'store-name' => 'Nombre de la tienda',
+            'vat-number' => 'Número de valor agregado',
+            'contact-number' => 'Número de contacto',
+            'bank-details' => 'Detalles del banco'
        ]
     ]
 ];

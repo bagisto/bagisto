@@ -1335,6 +1335,10 @@ return [
                     'all-locales'                  => 'Alle',
                     'invoice-slip-design'          => 'Rechnungsdesign',
                     'logo'                         => 'Logo',
+                    'store-name'                   => 'Geschäftsname',
+                    'vat-number'                   => 'Umsatzsteuer-Identifikationsnummer',
+                    'contact-number'               => 'Kontakt Nummer',
+                    'bank-details'                 => 'Bankdaten'
                 ],
         ],
 ];

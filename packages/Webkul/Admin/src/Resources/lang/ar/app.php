@@ -1344,7 +1344,11 @@ return [
             'show-sku' => 'Show SKU',
             'categories' => 'Categories',
             'show-sku' => 'Show SKU',
-            'show-search-input-field' => 'Show Search Input Field'
+            'show-search-input-field' => 'Show Search Input Field',
+            'store-name' => 'اسم المتجر',
+            'vat-number' => 'ظريبه الشراء',
+            'contact-number' => 'رقم الاتصال',
+            'bank-details' => 'التفاصيل المصرفية'
         ]
     ]
 ];

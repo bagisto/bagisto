@@ -1353,7 +1353,11 @@ return [
             'show-sku' => 'Show SKU',
             'categories' => 'Categories',
             'show-sku' => 'Show SKU',
-            'show-search-input-field' => 'Show Search Input Field'
+            'show-search-input-field' => 'Show Search Input Field',
+            'store-name' => 'نام فروشگاه',
+            'vat-number' => 'شماره Vat',
+            'contact-number' => 'شماره تماس',
+            'bank-details' => 'اطلاعات دقیق بانکی'
         ]
     ]
 ];
