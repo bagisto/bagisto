@@ -84,6 +84,13 @@
                 width: 70px;
             }
 
+            .merchant-details {
+                margin-bottom: 5px;
+            }
+
+            .merchant-details-title {
+                font-weight: bold;
+            }
         </style>
     </head>
 
@@ -96,11 +103,22 @@
                         <img class="logo" src="{{ Storage::url(core()->getConfigData('sales.orderSettings.invoice_slip_design.logo')) }}"/>
                     </div>
                 @endif
-
-                <div class="address">
-                    <p>
-                      <b> {{ core()->getConfigData('sales.orderSettings.invoice_slip_design.address') }} </b>
-                    </p>
+                <div class="merchant-details">
+                    @if (core()->getConfigData('sales.orderSettings.invoice_slip_design.store_name'))
+                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.store-name') }}:</span> {{ core()->getConfigData('sales.orderSettings.invoice_slip_design.store_name') }}</div>
+                    @endif
+                    @if (core()->getConfigData('sales.orderSettings.invoice_slip_design.address'))
+                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.address') }}:</span> {{ core()->getConfigData('sales.orderSettings.invoice_slip_design.address') }}</div>
+                    @endif
+                    @if (core()->getConfigData('sales.orderSettings.invoice_slip_design.contact'))
+                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.contact-number') }}:</span> {{ core()->getConfigData('sales.orderSettings.invoice_slip_design.contact') }}</div>
+                    @endif
+                    @if (core()->getConfigData('sales.orderSettings.invoice_slip_design.vat_number'))
+                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.vat-number') }}:</span> {{ core()->getConfigData('sales.orderSettings.invoice_slip_design.vat_number') }}</div>
+                    @endif
+                    @if (core()->getConfigData('sales.orderSettings.invoice_slip_design.bank_details'))
+                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.bank-details') }}:</span> {{ core()->getConfigData('sales.orderSettings.invoice_slip_design.bank_details') }}</div>
+                    @endif
                 </div>
             </div>
 
