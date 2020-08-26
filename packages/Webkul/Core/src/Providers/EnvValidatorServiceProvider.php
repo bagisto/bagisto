@@ -4,6 +4,8 @@ namespace Webkul\Core\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use Dotenv\Exception\InvalidFileException;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 class EnvValidatorServiceProvider extends ServiceProvider
 {
@@ -28,20 +30,56 @@ class EnvValidatorServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->validateEnvVariables();
+    }
+
+    /**
+     * Validate environment variables.
+     */
+    private function validateEnvVariables()
+    {
         $validator = Validator::make($_ENV, $this->rules, $this->messages);
 
         if ($validator->fails()) {
-            abort(500, $validator->errors()->first());
+            $errorKey = collect($validator->errors()->keys())->first();
+            $errorValue = env($errorKey);
+
+            $this->writeErrorAndDie(new InvalidFileException(
+                $this->getErrorMessage('some invalid values', $errorValue)
+            ));
         }
     }
 
     /**
-     * Register services.
+     * Generate a friendly error message.
      *
+     * @param string $cause
+     * @param string $subject
+     *
+     * @return string
+     */
+    private function getErrorMessage($cause, $subject)
+    {
+        return sprintf(
+            'Failed to parse dotenv file due to %s. Failed at [%s].',
+            $cause,
+            strtok($subject, "\n")
+        );
+    }
+
+    /**
+     * Write the error information to the screen and exit.
+     *
+     * @param  \Dotenv\Exception\InvalidFileException  $e
      * @return void
      */
-    public function register()
+    private function writeErrorAndDie(InvalidFileException $e)
     {
-        //
+        $output = (new ConsoleOutput)->getErrorOutput();
+
+        $output->writeln('The environment file is invalid!');
+        $output->writeln($e->getMessage());
+
+        die(1);
     }
 }
