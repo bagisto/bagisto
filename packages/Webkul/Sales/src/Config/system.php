@@ -55,36 +55,6 @@ return [
                 'validation'    => 'mimes:jpeg,bmp,png,jpg',
                 'channel_based' => true,
             ],
-            [
-                'name'          => 'store_name',
-                'title'         => 'admin::app.admin.system.store-name',
-                'type'          => 'text',
-                'channel_based' => true,
-            ],
-            [
-                'name'          => 'vat_number',
-                'title'         => 'admin::app.admin.system.vat-number',
-                'type'          => 'text',
-                'channel_based' => true,
-            ],
-            [
-                'name'          => 'address',
-                'title'         => 'admin::app.admin.system.address',
-                'type'          => 'textarea',
-                'channel_based' => true,
-            ],
-            [
-                'name'          => 'contact',
-                'title'         => 'admin::app.admin.system.contact-number',
-                'type'          => 'text',
-                'channel_based' => true,
-            ],
-            [
-                'name'          => 'bank_details',
-                'title'         => 'admin::app.admin.system.bank-details',
-                'type'          => 'textarea',
-                'channel_based' => true,
-            ]
         ]
     ]
 ];

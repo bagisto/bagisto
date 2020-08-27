@@ -100,20 +100,32 @@
                     </div>
                 @endif
                 <div class="merchant-details">
-                    @if (core()->getConfigData('sales.orderSettings.invoice_slip_design.store_name'))
-                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.store-name') }}:</span> {{ core()->getConfigData('sales.orderSettings.invoice_slip_design.store_name') }}</div>
+                    @if (core()->getConfigData('sales.shipping.origin.store_name'))
+                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.store-name') }}:</span> {{ core()->getConfigData('sales.shipping.origin.store_name') }}</div>
                     @endif
-                    @if (core()->getConfigData('sales.orderSettings.invoice_slip_design.address'))
-                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.address') }}:</span> {{ core()->getConfigData('sales.orderSettings.invoice_slip_design.address') }}</div>
+                    @if (core()->getConfigData('sales.shipping.origin.address1'))
+                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.address') }}:</span> {{ core()->getConfigData('sales.shipping.origin.address1') }}</div>
                     @endif
-                    @if (core()->getConfigData('sales.orderSettings.invoice_slip_design.contact'))
-                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.contact-number') }}:</span> {{ core()->getConfigData('sales.orderSettings.invoice_slip_design.contact') }}</div>
+                    @if (core()->getConfigData('sales.shipping.origin.city'))
+                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.city') }}:</span> {{ core()->getConfigData('sales.shipping.origin.city') }}</div>
                     @endif
-                    @if (core()->getConfigData('sales.orderSettings.invoice_slip_design.vat_number'))
-                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.vat-number') }}:</span> {{ core()->getConfigData('sales.orderSettings.invoice_slip_design.vat_number') }}</div>
+                    @if (core()->getConfigData('sales.shipping.origin.state'))
+                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.state') }}:</span> {{ core()->getConfigData('sales.shipping.origin.state') }}</div>
                     @endif
-                    @if (core()->getConfigData('sales.orderSettings.invoice_slip_design.bank_details'))
-                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.bank-details') }}:</span> {{ core()->getConfigData('sales.orderSettings.invoice_slip_design.bank_details') }}</div>
+                    @if (core()->getConfigData('sales.shipping.origin.country'))
+                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.country') }}:</span> {{ core()->getConfigData('sales.shipping.origin.country') }}</div>
+                    @endif
+                    @if (core()->getConfigData('sales.shipping.origin.zipcode'))
+                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.zip') }}:</span> {{ core()->getConfigData('sales.shipping.origin.zipcode') }}</div>
+                    @endif
+                    @if (core()->getConfigData('sales.shipping.origin.contact'))
+                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.contact-number') }}:</span> {{ core()->getConfigData('sales.shipping.origin.contact') }}</div>
+                    @endif
+                    @if (core()->getConfigData('sales.shipping.origin.vat_number'))
+                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.vat-number') }}:</span> {{ core()->getConfigData('sales.shipping.origin.vat_number') }}</div>
+                    @endif
+                    @if (core()->getConfigData('sales.shipping.origin.bank_details'))
+                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.bank-details') }}:</span> {{ core()->getConfigData('sales.shipping.origin.bank_details') }}</div>
                     @endif
                 </div>
             </div>
@@ -286,3 +298,4 @@
         </div>
     </body>
 </html>
+{{ dd('here') }}
