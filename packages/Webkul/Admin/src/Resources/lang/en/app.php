@@ -392,6 +392,7 @@ return [
         'invoices' => [
             'title' => 'Invoices',
             'id' => 'Id',
+            'invoice' => 'Invoice',
             'invoice-id' => 'Invoice Id',
             'date' => 'Invoice Date',
             'order-id' => 'Order Id',

@@ -98,6 +98,11 @@
         <div class="container">
 
             <div class="header">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 style="text-align: center;">{{ __('admin::app.sales.invoices.invoice') }}</h1>
+                    </div>
+                </div>
                 @if (core()->getConfigData('sales.orderSettings.invoice_slip_design.logo'))
                     <div class="image">
                         <img class="logo" src="{{ Storage::url(core()->getConfigData('sales.orderSettings.invoice_slip_design.logo')) }}"/>
@@ -105,23 +110,25 @@
                 @endif
                 <div class="merchant-details">
                     @if (core()->getConfigData('sales.shipping.origin.store_name'))
-                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.store-name') }}:</span> {{ core()->getConfigData('sales.shipping.origin.store_name') }}</div>
+                        <div><span class="merchant-details-title">{{ core()->getConfigData('sales.shipping.origin.store_name') }}</span></div>
                     @endif
                     @if (core()->getConfigData('sales.shipping.origin.address1'))
-                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.address') }}:</span> {{ core()->getConfigData('sales.shipping.origin.address1') }}</div>
+                        <div>{{ core()->getConfigData('sales.shipping.origin.address1') }}</div>
                     @endif
                     @if (core()->getConfigData('sales.shipping.origin.city'))
-                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.city') }}:</span> {{ core()->getConfigData('sales.shipping.origin.city') }}</div>
+                        <div>{{ core()->getConfigData('sales.shipping.origin.city') }}</div>
                     @endif
                     @if (core()->getConfigData('sales.shipping.origin.state'))
-                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.state') }}:</span> {{ core()->getConfigData('sales.shipping.origin.state') }}</div>
+                        <div>{{ core()->getConfigData('sales.shipping.origin.state') }}</div>
                     @endif
                     @if (core()->getConfigData('sales.shipping.origin.country'))
-                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.country') }}:</span> {{ core()->getConfigData('sales.shipping.origin.country') }}</div>
+                        <div>{{ core()->getConfigData('sales.shipping.origin.country') }}</div>
                     @endif
                     @if (core()->getConfigData('sales.shipping.origin.zipcode'))
-                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.zip') }}:</span> {{ core()->getConfigData('sales.shipping.origin.zipcode') }}</div>
+                        <div>{{ core()->getConfigData('sales.shipping.origin.zipcode') }}</div>
                     @endif
+                </div>
+                <div class="merchant-details">
                     @if (core()->getConfigData('sales.shipping.origin.contact'))
                         <div><span class="merchant-details-title">{{ __('admin::app.admin.system.contact-number') }}:</span> {{ core()->getConfigData('sales.shipping.origin.contact') }}</div>
                     @endif
