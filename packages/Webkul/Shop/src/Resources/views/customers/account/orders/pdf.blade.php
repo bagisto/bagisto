@@ -109,24 +109,13 @@
                     </div>
                 @endif
                 <div class="merchant-details">
-                    @if (core()->getConfigData('sales.shipping.origin.store_name'))
-                        <div><span class="merchant-details-title">{{ core()->getConfigData('sales.shipping.origin.store_name') }}</span></div>
-                    @endif
-                    @if (core()->getConfigData('sales.shipping.origin.address1'))
-                        <div>{{ core()->getConfigData('sales.shipping.origin.address1') }}</div>
-                    @endif
-                    @if (core()->getConfigData('sales.shipping.origin.city'))
-                        <div>{{ core()->getConfigData('sales.shipping.origin.city') }}</div>
-                    @endif
-                    @if (core()->getConfigData('sales.shipping.origin.state'))
-                        <div>{{ core()->getConfigData('sales.shipping.origin.state') }}</div>
-                    @endif
-                    @if (core()->getConfigData('sales.shipping.origin.country'))
-                        <div>{{ core()->getConfigData('sales.shipping.origin.country') }}</div>
-                    @endif
-                    @if (core()->getConfigData('sales.shipping.origin.zipcode'))
-                        <div>{{ core()->getConfigData('sales.shipping.origin.zipcode') }}</div>
-                    @endif
+                    <div><span class="merchant-details-title">{{ core()->getConfigData('sales.shipping.origin.store_name') ? core()->getConfigData('sales.shipping.origin.store_name') : '' }}</span></div>
+                    <div>{{ core()->getConfigData('sales.shipping.origin.address1') ? core()->getConfigData('sales.shipping.origin.address1') : '' }}</div>
+                    <div>
+                        <span>{{ core()->getConfigData('sales.shipping.origin.zipcode') ? core()->getConfigData('sales.shipping.origin.zipcode') : '' }}</span>
+                        <span>{{ core()->getConfigData('sales.shipping.origin.city') ? core()->getConfigData('sales.shipping.origin.city') : '' }}</span></div>
+                    <div>{{ core()->getConfigData('sales.shipping.origin.state') ? core()->getConfigData('sales.shipping.origin.state') : '' }}</div>
+                    <div>{{ core()->getConfigData('sales.shipping.origin.country') ? core()->getConfigData('sales.shipping.origin.country') : '' }}</div>
                 </div>
                 <div class="merchant-details">
                     @if (core()->getConfigData('sales.shipping.origin.contact'))
