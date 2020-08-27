@@ -155,8 +155,19 @@ class ProductRepository extends Repository
                 $qb->where('product_flat.visible_individually', 1);
             }
 
-            if (isset($params['search']))
+            if (isset($params['search'])) {
                 $qb->where('product_flat.name', 'like', '%' . urldecode($params['search']) . '%');
+            }
+
+            /* added for api as per the documentation */
+            if (isset($params['name'])) {
+                $qb->where('product_flat.name', 'like', '%' . urldecode($params['name']) . '%');
+            }
+
+            /* added for api as per the documentation */
+            if (isset($params['url_key'])) {
+                $qb->where('product_flat.url_key', 'like', '%' . urldecode($params['url_key']) . '%');
+            }
 
             # sort direction
             $orderDirection = 'asc';
