@@ -391,6 +391,7 @@ return [
             'title' => 'Facturen',
             'id' => 'Id',
             'invoice-id' => 'Factuurnummer',
+            'invoice' => 'Factuur',
             'date' => 'Factuur datum',
             'order-id' => 'Bestelnummer',
             'customer-name' => 'Klantnaam',

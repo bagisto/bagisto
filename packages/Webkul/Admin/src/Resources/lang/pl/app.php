@@ -391,6 +391,7 @@ return [
             'title' => 'Faktury',
             'id' => 'Id',
             'invoice-id' => 'Identyfikator faktury',
+            'invoice' => 'Faktura',
             'date' => 'Data faktury',
             'order-id' => 'Identyfikator zamówienia',
             'customer-name' => 'Nazwa klienta',

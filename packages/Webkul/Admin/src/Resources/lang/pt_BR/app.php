@@ -390,6 +390,7 @@ return [
             'title' => 'Faturas',
             'id' => 'Id',
             'invoice-id' => 'Fatura Id',
+            'invoice' => 'Fatura',
             'date' => 'Data da Fatura',
             'order-id' => 'Pedido Id',
             'customer-name' => 'Nome do Cliente',

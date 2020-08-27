@@ -384,6 +384,7 @@ return [
             'title' => 'الفواتير',
             'id' => 'Id',
             'invoice-id' => 'هوية صوتية',
+            'invoice' => 'فاتورة',
             'date' => 'تاريخ الفاتورة',
             'order-id' => 'Id طلب',
             'customer-name' => 'اسم الزبون',

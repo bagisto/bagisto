@@ -377,6 +377,7 @@ return [
             'title' => 'Facturas',
             'id' => 'Id',
             'invoice-id' => 'Factura #',
+            'invoice' => 'Factura',
             'date' => 'Fecha de factura',
             'order-id' => 'Pedido #',
             'customer-name' => 'Nombre del cliente',

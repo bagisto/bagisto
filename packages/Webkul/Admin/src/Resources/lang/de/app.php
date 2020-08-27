@@ -386,6 +386,7 @@ return [
                 'title'          => 'Rechnungen',
                 'id'             => 'Id',
                 'invoice-id'     => 'Rechnungsnummer',
+                'invoice'        => 'Rechnung',
                 'date'           => 'Rechnungsdatum',
                 'order-id'       => 'Auftragsnummer',
                 'customer-name'  => 'Name des Kunden',

@@ -393,6 +393,7 @@ return [
             'title' => 'Fatture',
             'id' => 'Id',
             'invoice-id' => 'Id Fattura',
+            'invoice' => 'Fattura',
             'date' => 'Data Fattura',
             'order-id' => 'Id Ordine',
             'customer-name' => 'Nome Cliente',

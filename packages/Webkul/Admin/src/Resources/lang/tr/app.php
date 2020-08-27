@@ -389,6 +389,7 @@ return [
             'title' => 'Faturalar',
             'id' => 'ID',
             'invoice-id' => 'Fatura No',
+            'invoice' => 'Fatura',
             'date' => 'Fatura Tarihi',
             'order-id' => 'Sipariş No',
             'customer-name' => 'Müşteri Adı',
