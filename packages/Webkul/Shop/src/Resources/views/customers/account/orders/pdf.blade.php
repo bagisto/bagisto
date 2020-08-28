@@ -2,9 +2,11 @@
 <html>
     <head>
         <meta http-equiv="Cache-control" content="no-cache">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
         <style type="text/css">
             body, th, td, h5 {
+                font-family: DejaVu Sans;
                 font-size: 12px;
                 color: #000;
             }
@@ -75,8 +77,9 @@
             }
 
             .label {
+                font-family: DejaVu Sans;
                 color: #000;
-                font-weight: 600;
+                font-weight: bold;
             }
 
             .logo {
@@ -115,7 +118,7 @@
                         <span>{{ core()->getConfigData('sales.shipping.origin.zipcode') ? core()->getConfigData('sales.shipping.origin.zipcode') : '' }}</span>
                         <span>{{ core()->getConfigData('sales.shipping.origin.city') ? core()->getConfigData('sales.shipping.origin.city') : '' }}</span></div>
                     <div>{{ core()->getConfigData('sales.shipping.origin.state') ? core()->getConfigData('sales.shipping.origin.state') : '' }}</div>
-                    <div>{{ core()->getConfigData('sales.shipping.origin.country') ? core()->getConfigData('sales.shipping.origin.country') : '' }}</div>
+                    <div>{{ core()->getConfigData('sales.shipping.origin.country') ?  core()->country_name(core()->getConfigData('sales.shipping.origin.country')) : '' }}</div>
                 </div>
                 <div class="merchant-details">
                     @if (core()->getConfigData('sales.shipping.origin.contact'))
@@ -134,17 +137,17 @@
 
                 <div class="row">
                     <span class="label">{{ __('shop::app.customer.account.order.view.invoice-id') }} -</span>
-                    <span class="value">{{ $invoice->id }}</span>
+                    <span class="value">#{{ $invoice->id }}</span>
                 </div>
 
                 <div class="row">
                     <span class="label">{{ __('shop::app.customer.account.order.view.order-id') }} -</span>
-                    <span class="value">{{ $invoice->order->increment_id }}</span>
+                    <span class="value">#{{ $invoice->order->increment_id }}</span>
                 </div>
 
                 <div class="row">
                     <span class="label">{{ __('shop::app.customer.account.order.view.order-date') }} -</span>
-                    <span class="value">{{ core()->formatDate($invoice->order->created_at, 'M d, Y') }}</span>
+                    <span class="value">{{ core()->formatDate($invoice->order->created_at, 'd-m-Y') }}</span>
                 </div>
 
                 <div class="table address">
