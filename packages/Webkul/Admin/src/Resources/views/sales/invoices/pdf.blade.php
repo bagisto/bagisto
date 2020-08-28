@@ -87,12 +87,15 @@
             .merchant-details-title {
                 font-weight: bold;
             }
+
+            .text-center {
+                text-align: center;
+            }
         </style>
     </head>
 
     <body style="background-image: none; background-color: #fff;">
         <div class="container">
-
             <div class="header">
                 <div class="row">
                     <div class="col-12">
@@ -127,7 +130,6 @@
             </div>
 
             <div class="invoice-summary">
-
                 <div class="row">
                     <span class="label">{{ __('admin::app.sales.invoices.invoice-id') }} -</span>
                     <span class="value">#{{ $invoice->id }}</span>
@@ -139,8 +141,8 @@
                 </div>
 
                 <div class="row">
-                    <span class="label">{{ __('admin::app.sales.invoices.order-date') }} -</span>
-                    <span class="value">{{ $invoice->created_at->format('M d, Y') }}</span>
+                    <span class="label">{{ __('admin::app.sales.invoices.order-date') }} </span>
+                    <span class="value">{{ $invoice->created_at->format('d-m-Y') }}</span>
                 </div>
 
                 <div class="table address">
@@ -161,9 +163,9 @@
                                         <p>{{ $invoice->order->billing_address->company_name ?? '' }}</p>
                                         <p>{{ $invoice->order->billing_address->name }}</p>
                                         <p>{{ $invoice->order->billing_address->address1 }}</p>
-                                        <p>{{ $invoice->order->billing_address->city }}</p>
+                                        <p>{{ $invoice->order->billing_address->postcode . ' ' .$invoice->order->billing_address->city }} </p>
                                         <p>{{ $invoice->order->billing_address->state }}</p>
-                                        <p>{{ core()->country_name($invoice->order->billing_address->country) }} {{ $invoice->order->billing_address->postcode }}</p>
+                                        <p>{{ core()->country_name($invoice->order->billing_address->country) }}</p>
                                         {{ __('shop::app.checkout.onepage.contact') }} : {{ $invoice->order->billing_address->phone }}
                                     </td>
                                 @endif
@@ -173,9 +175,9 @@
                                         <p>{{ $invoice->order->shipping_address->company_name ?? '' }}</p>
                                         <p>{{ $invoice->order->shipping_address->name }}</p>
                                         <p>{{ $invoice->order->shipping_address->address1 }}</p>
-                                        <p>{{ $invoice->order->shipping_address->city }}</p>
+                                        <p>{{ $invoice->order->shipping_address->postcode . ' ' . $invoice->order->shipping_address->city }}</p>
                                         <p>{{ $invoice->order->shipping_address->state }}</p>
-                                        <p>{{ core()->country_name($invoice->order->shipping_address->country) }} {{ $invoice->order->shipping_address->postcode }}</p>
+                                        <p>{{ core()->country_name($invoice->order->shipping_address->country) }}</p>
                                         {{ __('shop::app.checkout.onepage.contact') }} : {{ $invoice->order->shipping_address->phone }}
                                     </td>
                                 @endif
@@ -218,11 +220,11 @@
                             <tr>
                                 <th>{{ __('admin::app.sales.orders.SKU') }}</th>
                                 <th>{{ __('admin::app.sales.orders.product-name') }}</th>
-                                <th>{{ __('admin::app.sales.orders.price') }}</th>
-                                <th>{{ __('admin::app.sales.orders.qty') }}</th>
-                                <th>{{ __('admin::app.sales.orders.subtotal') }}</th>
-                                <th>{{ __('admin::app.sales.orders.tax-amount') }}</th>
-                                <th>{{ __('admin::app.sales.orders.grand-total') }}</th>
+                                <th class="text-center">{{ __('admin::app.sales.orders.price') }}</th>
+                                <th class="text-center">{{ __('admin::app.sales.orders.qty') }}</th>
+                                <th class="text-center">{{ __('admin::app.sales.orders.subtotal') }}</th>
+                                <th class="text-center">{{ __('admin::app.sales.orders.tax-amount') }}</th>
+                                <th class="text-center">{{ __('admin::app.sales.orders.grand-total') }}</th>
                             </tr>
                         </thead>
 
@@ -245,10 +247,10 @@
                                         @endif
                                     </td>
                                     <td>{{ core()->formatBasePrice($item->base_price) }}</td>
-                                    <td>{{ $item->qty }}</td>
-                                    <td>{{ core()->formatBasePrice($item->base_total) }}</td>
-                                    <td>{{ core()->formatBasePrice($item->base_tax_amount) }}</td>
-                                    <td>{{ core()->formatBasePrice($item->base_total + $item->base_tax_amount) }}</td>
+                                    <td class="text-center">{{ $item->qty }}</td>
+                                    <td class="text-center">{{ core()->formatBasePrice($item->base_total) }}</td>
+                                    <td class="text-center">{{ core()->formatBasePrice($item->base_tax_amount) }}</td>
+                                    <td class="text-center">{{ core()->formatBasePrice($item->base_total + $item->base_tax_amount) }}</td>
                                 </tr>
                             @endforeach
 
