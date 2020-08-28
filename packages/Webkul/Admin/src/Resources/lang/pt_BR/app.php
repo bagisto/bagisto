@@ -390,6 +390,7 @@ return [
             'title' => 'Faturas',
             'id' => 'Id',
             'invoice-id' => 'Fatura Id',
+            'invoice' => 'Fatura',
             'date' => 'Data da Fatura',
             'order-id' => 'Pedido Id',
             'customer-name' => 'Nome do Cliente',
@@ -1356,7 +1357,11 @@ return [
             'show-sku' => 'Show SKU',
             'categories' => 'Categories',
             'show-sku' => 'Show SKU',
-            'show-search-input-field' => 'Show Search Input Field'
+            'show-search-input-field' => 'Show Search Input Field',
+            'store-name' => 'Nome da loja',
+            'vat-number' => 'Número de IVA',
+            'contact-number' => 'Número de contato',
+            'bank-details' => 'Detalhes bancários'
         ]
     ]
 ];

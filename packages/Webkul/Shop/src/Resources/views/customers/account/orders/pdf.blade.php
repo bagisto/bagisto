@@ -84,6 +84,13 @@
                 width: 70px;
             }
 
+            .merchant-details {
+                margin-bottom: 5px;
+            }
+
+            .merchant-details-title {
+                font-weight: bold;
+            }
         </style>
     </head>
 
@@ -91,16 +98,35 @@
         <div class="container">
 
             <div class="header">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 style="text-align: center;">{{ __('admin::app.sales.invoices.invoice') }}</h1>
+                    </div>
+                </div>
                 @if (core()->getConfigData('sales.orderSettings.invoice_slip_design.logo'))
                     <div class="image">
                         <img class="logo" src="{{ Storage::url(core()->getConfigData('sales.orderSettings.invoice_slip_design.logo')) }}"/>
                     </div>
                 @endif
-
-                <div class="address">
-                    <p>
-                      <b> {{ core()->getConfigData('sales.orderSettings.invoice_slip_design.address') }} </b>
-                    </p>
+                <div class="merchant-details">
+                    <div><span class="merchant-details-title">{{ core()->getConfigData('sales.shipping.origin.store_name') ? core()->getConfigData('sales.shipping.origin.store_name') : '' }}</span></div>
+                    <div>{{ core()->getConfigData('sales.shipping.origin.address1') ? core()->getConfigData('sales.shipping.origin.address1') : '' }}</div>
+                    <div>
+                        <span>{{ core()->getConfigData('sales.shipping.origin.zipcode') ? core()->getConfigData('sales.shipping.origin.zipcode') : '' }}</span>
+                        <span>{{ core()->getConfigData('sales.shipping.origin.city') ? core()->getConfigData('sales.shipping.origin.city') : '' }}</span></div>
+                    <div>{{ core()->getConfigData('sales.shipping.origin.state') ? core()->getConfigData('sales.shipping.origin.state') : '' }}</div>
+                    <div>{{ core()->getConfigData('sales.shipping.origin.country') ? core()->getConfigData('sales.shipping.origin.country') : '' }}</div>
+                </div>
+                <div class="merchant-details">
+                    @if (core()->getConfigData('sales.shipping.origin.contact'))
+                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.contact-number') }}:</span> {{ core()->getConfigData('sales.shipping.origin.contact') }}</div>
+                    @endif
+                    @if (core()->getConfigData('sales.shipping.origin.vat_number'))
+                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.vat-number') }}:</span> {{ core()->getConfigData('sales.shipping.origin.vat_number') }}</div>
+                    @endif
+                    @if (core()->getConfigData('sales.shipping.origin.bank_details'))
+                        <div><span class="merchant-details-title">{{ __('admin::app.admin.system.bank-details') }}:</span> {{ core()->getConfigData('sales.shipping.origin.bank_details') }}</div>
+                    @endif
                 </div>
             </div>
 

@@ -392,6 +392,7 @@ return [
         'invoices' => [
             'title' => 'Invoices',
             'id' => 'Id',
+            'invoice' => 'Invoice',
             'invoice-id' => 'Invoice Id',
             'date' => 'Invoice Date',
             'order-id' => 'Order Id',
@@ -1357,7 +1358,11 @@ return [
             'show-offers' => 'Show Offers',
             'show-sku' => 'Show SKU',
             'categories' => 'Categories',
-            'show-search-input-field' => 'Show Search Input Field'
+            'show-search-input-field' => 'Show Search Input Field',
+            'store-name' => 'Store Name',
+            'vat-number' => 'Vat Number',
+            'contact-number' => 'Contact Number',
+            'bank-details' => 'Bank Details'
        ]
     ]
 ];

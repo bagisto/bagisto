@@ -391,6 +391,7 @@ return [
             'title' => 'Facturen',
             'id' => 'Id',
             'invoice-id' => 'Factuurnummer',
+            'invoice' => 'Factuur',
             'date' => 'Factuur datum',
             'order-id' => 'Bestelnummer',
             'customer-name' => 'Klantnaam',
@@ -1353,7 +1354,11 @@ return [
             'show-sku' => 'Show SKU',
             'categories' => 'Categories',
             'show-sku' => 'Show SKU',
-            'show-search-input-field' => 'Show Search Input Field'
+            'show-search-input-field' => 'Show Search Input Field',
+            'store-name' => 'Winkel naam',
+            'vat-number' => 'Btw-nummer',
+            'contact-number' => 'Contact nummer',
+            'bank-details' => 'Bankgegevens'
         ]
     ]
 ];

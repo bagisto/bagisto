@@ -377,6 +377,7 @@ return [
             'title' => 'Facturas',
             'id' => 'Id',
             'invoice-id' => 'Factura #',
+            'invoice' => 'Factura',
             'date' => 'Fecha de factura',
             'order-id' => 'Pedido #',
             'customer-name' => 'Nombre del cliente',
@@ -1309,7 +1310,11 @@ return [
             'all-channels' => 'Todos',
             'all-locales' => 'Todos',
             'invoice-slip-design' => 'Diseño parte trasera factura',
-            'logo' => 'logo'
+            'logo' => 'logo',
+            'store-name' => 'Nombre de la tienda',
+            'vat-number' => 'Número de valor agregado',
+            'contact-number' => 'Número de contacto',
+            'bank-details' => 'Detalles del banco'
        ]
     ]
 ];
