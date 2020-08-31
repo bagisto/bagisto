@@ -5,8 +5,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
         <style type="text/css">
-            body, th, td, h5 {
+            * {
                 font-family: DejaVu Sans;
+            }
+
+            body, th, td, h5 {
                 font-size: 12px;
                 color: #000;
             }
@@ -50,7 +53,6 @@
                 border-left: solid 1px #d3d3d3;
                 color: #3A3A3A;
                 vertical-align: middle;
-                font-family: DejaVu Sans; sans-serif;
             }
 
             .table tbody td p {
@@ -68,16 +70,13 @@
 
             .sale-summary tr td {
                 padding: 3px 5px;
-                font-family: DejaVu Sans; sans-serif;
             }
 
             .sale-summary tr.bold {
-                font-family: DejaVu Sans; sans-serif;
                 font-weight: 700;
             }
 
             .label {
-                font-family: DejaVu Sans;
                 color: #000;
                 font-weight: bold;
             }
@@ -94,6 +93,10 @@
             .merchant-details-title {
                 font-weight: bold;
             }
+
+            .text-center {
+                text-align: center;
+            }
         </style>
     </head>
 
@@ -103,7 +106,7 @@
             <div class="header">
                 <div class="row">
                     <div class="col-12">
-                        <h1 style="text-align: center;">{{ __('admin::app.sales.invoices.invoice') }}</h1>
+                        <h1 class="text-center">{{ __('admin::app.sales.invoices.invoice') }}</h1>
                     </div>
                 </div>
                 @if (core()->getConfigData('sales.orderSettings.invoice_slip_design.logo'))
