@@ -2,12 +2,9 @@
 
 namespace Webkul\Admin\Http\Controllers\Sales;
 
-use Illuminate\Http\Request;
-
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
-
 use PDF;
 
 class InvoiceController extends Controller
@@ -147,25 +144,5 @@ class InvoiceController extends Controller
         $pdf = PDF::loadView('admin::sales.invoices.pdf', compact('invoice'))->setPaper('a4');
 
         return $pdf->download('invoice-' . $invoice->created_at->format('d-m-Y') . '.pdf');
-    }
-
-    /**
-     * Update the invoice state.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function updateState($id, Request $request)
-    {
-        $invoice = $this->invoiceRepository->findOrFail($id);
-        $task = $this->invoiceRepository->updateInvoiceState($invoice, $request->state);
-
-        if ($task){
-            session()->flash('success', trans('admin::app.sales.orders.invoice-status-confirmed'));
-        } else {
-            session()->flash('success', trans('admin::app.sales.orders.invoice-status-error'));
-        }
-
-        return back();
     }
 }
