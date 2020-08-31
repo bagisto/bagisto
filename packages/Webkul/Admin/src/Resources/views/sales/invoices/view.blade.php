@@ -1,10 +1,10 @@
-@extends('admin::layouts.content')
+@extends('admin::layouts.master')
 
 @section('page_title')
     {{ __('admin::app.sales.invoices.view-title', ['invoice_id' => $invoice->id]) }}
 @stop
 
-@section('content')
+@section('content-wrapper')
 
     <?php $order = $invoice->order; ?>
 
@@ -15,18 +15,11 @@
                     {!! view_render_event('sales.invoice.title.before', ['order' => $order]) !!}
 
                     <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ route('admin.dashboard.index') }}';"></i>
+
                     {{ __('admin::app.sales.invoices.view-title', ['invoice_id' => $invoice->id]) }}
 
                     {!! view_render_event('sales.invoice.title.after', ['order' => $order]) !!}
                 </h1>
-
-                @if($invoice->state == 'paid')
-                        <small><span class="badge badge-md badge-success">{{ __('admin::app.sales.orders.invoice-status-paid') }}</span></small>
-                    @elseif($invoice->state == 'pending')
-                        <span class="badge badge-md badge-warning">{{ __('admin::app.sales.orders.invoice-status-pending') }}</span>
-                    @else
-                        <span class="badge badge-md badge-danger">{{ __('admin::app.sales.orders.invoice-status-overdue') }}</span>
-                @endif
             </div>
 
             <div class="page-action">
@@ -36,10 +29,6 @@
                     {{ __('admin::app.sales.invoices.print') }}
                 </a>
 
-                @if($invoice->state == "pending" || $invoice->state == "overdue")
-                    <a href="#" id="ChangeStatus" class="btn btn-lg btn-primary" @click="showModal('changeInvoiceState')">{{ __('admin::app.sales.orders.invoices-change-title') }}</a>
-                @endif
-
                 {!! view_render_event('sales.invoice.page_action.after', ['order' => $order]) !!}
             </div>
         </div>
@@ -48,7 +37,7 @@
             <div class="sale-container">
 
                 <accordian :title="'{{ __('admin::app.sales.orders.order-and-account') }}'" :active="true">
-                    <div slot="body" style="display: flex; overflow:auto;">
+                    <div slot="body">
 
                         <div class="sale-section">
                             <div class="secton-title">
@@ -57,7 +46,10 @@
 
                             <div class="section-content">
                                 <div class="row">
-                                    <span class="title">{{ __('admin::app.sales.invoices.order-id') }}</span>
+                                    <span class="title">
+                                        {{ __('admin::app.sales.invoices.order-id') }}
+                                    </span>
+
                                     <span class="value">
                                         <a href="{{ route('admin.sales.orders.view', $order->id) }}">#{{ $order->increment_id }}</a>
                                     </span>
@@ -66,40 +58,44 @@
                                 {!! view_render_event('sales.invoice.increment_id.after', ['order' => $order]) !!}
 
                                 <div class="row">
-                                    <span class="title">{{ __('admin::app.sales.orders.order-date') }}</span>
-                                    <span class="value">{{ $order->created_at }}</span>
+                                    <span class="title">
+                                        {{ __('admin::app.sales.orders.order-date') }}
+                                    </span>
+
+                                    <span class="value">
+                                        {{ $order->created_at }}
+                                    </span>
                                 </div>
 
                                 {!! view_render_event('sales.invoice.created_at.after', ['order' => $order]) !!}
 
                                 <div class="row">
-                                    <span class="title">{{ __('admin::app.sales.orders.order-status') }}</span>
-                                    <span class="value">{{ $order->status_label }}</span>
+                                    <span class="title">
+                                        {{ __('admin::app.sales.orders.order-status') }}
+                                    </span>
+
+                                    <span class="value">
+                                        {{ $order->status_label }}
+                                    </span>
                                 </div>
 
                                 {!! view_render_event('sales.invoice.status_label.after', ['order' => $order]) !!}
 
                                 <div class="row">
-                                    <span class="title">{{ __('admin::app.sales.orders.channel') }}</span>
-                                    <span class="value">{{ $order->channel_name }}</span>
+                                    <span class="title">
+                                        {{ __('admin::app.sales.orders.channel') }}
+                                    </span>
+
+                                    <span class="value">
+                                        {{ $order->channel_name }}
+                                    </span>
                                 </div>
 
                                 {!! view_render_event('sales.invoice.channel_name.after', ['order' => $order]) !!}
-
-                                <div class="row">
-                                    <span class="title">{{ __('admin::app.sales.orders.payment-method') }}</span>
-                                    <span class="value">{{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}</span>
-                                </div>
-
-                                <div class="row">
-                                    <span class="title">{{ __('admin::app.sales.orders.shipping-method') }}</span>
-                                    <span class="value">{{ $order->shipping_title }}</span>
-                                </div>
-                                {!! view_render_event('sales.invoice.shipping-method.after', ['order' => $order]) !!}
                             </div>
                         </div>
 
-                        <div class="sale-section" style="margin: 0 0 0 300px;">
+                        <div class="sale-section">
                             <div class="secton-title">
                                 <span>{{ __('admin::app.sales.orders.account-info') }}</span>
                             </div>
@@ -184,7 +180,9 @@
                                     @foreach ($invoice->items as $item)
                                         <tr>
                                             <td>{{ $item->getTypeInstance()->getOrderedItem($item)->sku }}</td>
-                                            <td>{{ $item->name }}
+
+                                            <td>
+                                                {{ $item->name }}
 
                                                 @if (isset($item->additional['attributes']))
                                                     <div class="item-options">
@@ -192,14 +190,19 @@
                                                         @foreach ($item->additional['attributes'] as $attribute)
                                                             <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
                                                         @endforeach
+
                                                     </div>
                                                 @endif
                                             </td>
 
                                             <td>{{ core()->formatBasePrice($item->base_price) }}</td>
+
                                             <td>{{ $item->qty }}</td>
+
                                             <td>{{ core()->formatBasePrice($item->base_total) }}</td>
+
                                             <td>{{ core()->formatBasePrice($item->base_tax_amount) }}</td>
+
                                             @if ($invoice->base_discount_amount > 0)
                                                 <td>{{ core()->formatBasePrice($item->base_discount_amount) }}</td>
                                             @endif
@@ -207,6 +210,7 @@
                                             <td>{{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount) }}</td>
                                         </tr>
                                     @endforeach
+
                                 </tbody>
                             </table>
                         </div>
@@ -244,61 +248,12 @@
                                 <td>{{ core()->formatBasePrice($invoice->base_grand_total) }}</td>
                             </tr>
                         </table>
+
                     </div>
                 </accordian>
+
             </div>
         </div>
+
     </div>
- </div>
-
- <modal id="changeInvoiceState" :is-open="modalIds.changeInvoiceState">
-     <h3 slot="header">{{ __('admin::app.sales.orders.invoices-change-title') }}</h3>
-        <div slot="body">
-            <option-wrapper></option-wrapper>
-        </div>
-</modal>
 @stop
-
-@push('scripts')
-    <script type="text/x-template" id="options-template">
-    <form method="POST" action="{{ route('admin.sales.invoices.update.state', $invoice->id) }}">
-        <div class="page-content">
-            <p>Please select the new invoice state:</p>
-
-            <div class="form-container">
-                @csrf()
-                <div>
-                    <input type="radio" name="state" id="paid" value="paid">
-                    <label for="paid">{{ __('admin::app.sales.orders.invoice-status-paid') }}</label>
-                </div>
-
-                <div>
-                    <input type="radio" name="state" id="pending" value="pending" @if($invoice->state == "pending") checked @endif>
-                    <label for="pending">{{ __('admin::app.sales.orders.invoice-status-pending') }}</label>
-                </div>
-
-                <div>
-                    <input type="radio" name="state" id="overdue" value="overdue" @if($invoice->state == "overdue") checked @endif>
-                    <label for="overdue">{{ __('admin::app.sales.orders.invoice-status-overdue') }}</label>
-                </div>
-            </div>
-
-            <br />
-
-            <button type="submit" class="btn btn-md btn-primary">{{ __('admin::app.sales.orders.invoice-status-update')}}</button>
-        </div>
-    </form>
-</script>
-
-<script>
-    Vue.component('option-wrapper', {
-        template: '#options-template',
-
-        methods: {
-            onSubmit: function(e) {
-                // e.target.submit();
-            }
-        }
-    });
-</script>
-@endpush
