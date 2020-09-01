@@ -1361,7 +1361,9 @@ return [
             'store-name' => 'Nome da loja',
             'vat-number' => 'Número de IVA',
             'contact-number' => 'Número de contato',
-            'bank-details' => 'Detalhes bancários'
+            'bank-details' => 'Detalhes bancários',
+            'mailing-address' => 'Send Check to',
+            'instructions' => 'Instructions'
         ]
     ]
 ];

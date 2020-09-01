@@ -1362,7 +1362,9 @@ return [
             'store-name' => 'Store Name',
             'vat-number' => 'Vat Number',
             'contact-number' => 'Contact Number',
-            'bank-details' => 'Bank Details'
+            'bank-details' => 'Bank Details',
+            'mailing-address' => 'Send Check to',
+            'instructions' => 'Instructions'
        ]
     ]
 ];

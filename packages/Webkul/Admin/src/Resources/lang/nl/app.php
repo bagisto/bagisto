@@ -1358,7 +1358,9 @@ return [
             'store-name' => 'Winkel naam',
             'vat-number' => 'Btw-nummer',
             'contact-number' => 'Contact nummer',
-            'bank-details' => 'Bankgegevens'
+            'bank-details' => 'Bankgegevens',
+            'mailing-address' => 'Send Check to',
+            'instructions' => 'Instructions'
         ]
     ]
 ];
