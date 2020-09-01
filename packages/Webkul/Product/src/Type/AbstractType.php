@@ -177,9 +177,10 @@ abstract class AbstractType
     }
 
     /**
-     * @param  array  $data
-     * @param  int    $id
-     * @param  string $attribute
+     * @param array  $data
+     * @param int    $id
+     * @param string $attribute
+     *
      * @return \Webkul\Product\Contracts\Product
      */
     public function update(array $data, $id, $attribute = "id")
@@ -199,20 +200,20 @@ abstract class AbstractType
                 continue;
             }
 
-            if ($attribute->type == 'price' && isset($data[$attribute->code]) && $data[$attribute->code] == '') {
+            if ($attribute->type === 'price' && isset($data[$attribute->code]) && $data[$attribute->code] === '') {
                 $data[$attribute->code] = null;
             }
 
-            if ($attribute->type == 'date' && $data[$attribute->code] == '' && $route != 'admin.catalog.products.massupdate') {
+            if ($attribute->type === 'date' && $data[$attribute->code] === '' && $route !== 'admin.catalog.products.massupdate') {
                 $data[$attribute->code] = null;
             }
 
-            if ($attribute->type == 'multiselect' || $attribute->type == 'checkbox') {
+            if ($attribute->type === 'multiselect' || $attribute->type === 'checkbox') {
                 $data[$attribute->code] = implode(",", $data[$attribute->code]);
             }
 
-            if ($attribute->type == 'image' || $attribute->type == 'file') {
-                $data[$attribute->code] = gettype($data[$attribute->code]) == 'object'
+            if ($attribute->type === 'image' || $attribute->type === 'file') {
+                $data[$attribute->code] = gettype($data[$attribute->code]) === 'object'
                     ? request()->file($attribute->code)->store('product/' . $product->id)
                     : null;
             }
@@ -312,6 +313,11 @@ abstract class AbstractType
     public function isSaleable()
     {
         if (!$this->product->status) {
+            return false;
+        }
+
+        if (is_callable(config('products.isSaleable')) &&
+            call_user_func(config('products.isSaleable'), $this->product) === false) {
             return false;
         }
 
@@ -533,8 +539,8 @@ abstract class AbstractType
 
         $rulePrice = app('Webkul\CatalogRule\Helpers\CatalogRuleProductPrice')->getRulePrice($this->product);
 
-        if ((is_null($this->product->special_price) || !(float)$this->product->special_price)
-            && !$rulePrice
+        if ((is_null($this->product->special_price) || ! (float)$this->product->special_price)
+            && ! $rulePrice
             && $customerGroupPrice == $this->product->price
         ) {
             return false;
@@ -542,7 +548,7 @@ abstract class AbstractType
 
         $haveSpecialPrice = false;
 
-        if (!(float)$this->product->special_price) {
+        if (! (float)$this->product->special_price) {
             if ($rulePrice && $rulePrice->price < $this->product->price) {
                 $this->product->special_price = $rulePrice->price;
 
