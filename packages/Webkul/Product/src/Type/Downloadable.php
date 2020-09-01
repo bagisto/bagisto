@@ -2,10 +2,11 @@
 
 namespace Webkul\Product\Type;
 
-use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Product\Datatypes\CartItemValidationResult;
+use Webkul\Checkout\Models\CartItem;
 use Webkul\Product\Helpers\ProductImage;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Product\Datatypes\CartItemValidationResult;
 use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;

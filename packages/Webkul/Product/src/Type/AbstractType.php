@@ -2,13 +2,14 @@
 
 namespace Webkul\Product\Type;
 
-use Illuminate\Support\Facades\Storage;
-use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Checkout\Facades\Cart;
-use Webkul\Product\Datatypes\CartItemValidationResult;
+use Webkul\Checkout\Models\CartItem;
+use Illuminate\Support\Facades\Storage;
 use Webkul\Product\Helpers\ProductImage;
 use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Product\Datatypes\CartItemValidationResult;
 use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
@@ -822,7 +823,7 @@ abstract class AbstractType
      *
      * @return \Webkul\Product\Datatypes\CartItemValidationResult
      */
-    public function validateCartItem(\Webkul\Checkout\Models\CartItem $item): CartItemValidationResult
+    public function validateCartItem(CartItem $item): CartItemValidationResult
     {
         $result = new CartItemValidationResult();
 
