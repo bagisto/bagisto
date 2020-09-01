@@ -1339,7 +1339,9 @@ return [
             'store-name' => 'Nazwa sklepu',
             'vat-number' => 'Numer VAT',
             'contact-number' => 'Numer kontaktowy',
-            'bank-details' => 'Dane bankowe'
+            'bank-details' => 'Dane bankowe',
+            'mailing-address' => 'Send Check to',
+            'instructions' => 'Instructions'
        ]
     ]
 ];

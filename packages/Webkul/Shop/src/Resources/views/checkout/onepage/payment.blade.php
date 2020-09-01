@@ -26,6 +26,15 @@
                         <div class="line-two mt-5">
                             <span class="method-summary">{{ __($payment['description']) }}</span>
                         </div>
+
+                        <?php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($payment['method']); ?>
+
+                        @if (! empty($additionalDetails))
+                            <div class="instructions" v-show="payment.method == '{{$payment['method']}}'">
+                                <label>{{ $additionalDetails['title'] }}</label>
+                                <p>{{ $additionalDetails['value'] }}</p>
+                            </div>
+                        @endif
                     </div>
 
                     {!! view_render_event('bagisto.shop.checkout.payment-method.after', ['payment' => $payment]) !!}
