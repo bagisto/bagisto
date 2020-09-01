@@ -200,6 +200,7 @@ class Booking extends Virtual
                     continue;
                 }
 
+                $data['quantity'] = $qty;
                 $data['booking']['ticket_id'] = $ticketId;
                 $cartProducts = parent::prepareForCart($data);
 
@@ -232,17 +233,15 @@ class Booking extends Virtual
      */
     public function compareOptions($options1, $options2)
     {
-        if ($this->product->id != $options2['product_id']) {
+        if ($this->product->id !== $options2['product_id']) {
             return false;
         }
 
-        if (isset($options1['booking']) && isset($options2['booking'])) {
-            return $options1['booking'] == $options2['booking'];
-        } elseif (! isset($options1['booking'])) {
-            return false;
-        } elseif (! isset($options2['booking'])) {
-            return false;
+        if (isset($options1['booking'], $options2['booking'])) {
+            return true;
         }
+
+        return false;
     }
 
     /**
