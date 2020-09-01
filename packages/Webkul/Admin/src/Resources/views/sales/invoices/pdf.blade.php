@@ -5,8 +5,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
         <style type="text/css">
-            body, th, td, h5 {
+            * {
                 font-family: DejaVu Sans;
+            }
+
+            body, th, td, h5 {
                 font-size: 12px;
                 color: #000;
             }
@@ -73,7 +76,6 @@
             }
 
             .label {
-                font-family: DejaVu Sans;
                 color: #000;
                 font-weight: bold;
             }
@@ -102,7 +104,7 @@
             <div class="header">
                 <div class="row">
                     <div class="col-12">
-                        <h1 style="text-align: center;">{{ __('admin::app.sales.invoices.invoice') }}</h1>
+                        <h1 class="text-center">{{ __('admin::app.sales.invoices.invoice') }}</h1>
                     </div>
                 </div>
                 @if (core()->getConfigData('sales.orderSettings.invoice_slip_design.logo'))
@@ -287,10 +289,10 @@
                         <td>{{ core()->formatBasePrice($invoice->base_discount_amount) }}</td>
                     </tr>
 
-                    <tr class="bold">
-                        <td>{{ __('admin::app.sales.orders.grand-total') }}</td>
-                        <td>-</td>
-                        <td>{{ core()->formatBasePrice($invoice->base_grand_total) }}</td>
+                    <tr>
+                        <td><strong>{{ __('admin::app.sales.orders.grand-total') }}</strong></td>
+                        <td><strong>-</strong></td>
+                        <td><strong>{{ core()->formatBasePrice($invoice->base_grand_total) }}</strong></td>
                     </tr>
                 </table>
 
