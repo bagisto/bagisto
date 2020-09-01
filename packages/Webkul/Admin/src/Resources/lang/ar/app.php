@@ -1349,7 +1349,9 @@ return [
             'store-name' => 'اسم المتجر',
             'vat-number' => 'ظريبه الشراء',
             'contact-number' => 'رقم الاتصال',
-            'bank-details' => 'التفاصيل المصرفية'
+            'bank-details' => 'التفاصيل المصرفية',
+            'mailing-address' => 'Send Check to',
+            'instructions' => 'Instructions'
         ]
     ]
 ];

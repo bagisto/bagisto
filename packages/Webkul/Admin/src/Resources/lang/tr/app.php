@@ -1336,7 +1336,9 @@ return [
             'store-name' => 'Dükkan adı',
             'vat-number' => 'KDV Numarası',
             'contact-number' => 'İletişim numarası',
-            'bank-details' => 'Banka detayları'
+            'bank-details' => 'Banka detayları',
+            'mailing-address' => 'Send Check to',
+            'instructions' => 'Instructions'
         ]
     ]
 ];

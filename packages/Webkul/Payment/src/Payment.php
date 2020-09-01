@@ -68,4 +68,17 @@ class Payment
 
         return $payment->getRedirectUrl();
     }
+
+    /**
+     * Returns payment method additional information
+     *
+     * @param  string  $code
+     * @return array
+     */
+    public static function getAdditionalDetails($code)
+    {
+        $paymentMethodClass =  app(Config::get('paymentmethods.' . $code . '.class'));
+        
+        return $paymentMethodClass->getAdditionalDetails();
+    }
 }

@@ -1314,7 +1314,9 @@ return [
             'store-name' => 'Nombre de la tienda',
             'vat-number' => 'Número de valor agregado',
             'contact-number' => 'Número de contacto',
-            'bank-details' => 'Detalles del banco'
+            'bank-details' => 'Detalles del banco',
+            'mailing-address' => 'Send Check to',
+            'instructions' => 'Instructions'
        ]
     ]
 ];

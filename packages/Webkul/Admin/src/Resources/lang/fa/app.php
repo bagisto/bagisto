@@ -1350,7 +1350,9 @@ return [
             'store-name' => 'نام فروشگاه',
             'vat-number' => 'شماره Vat',
             'contact-number' => 'شماره تماس',
-            'bank-details' => 'اطلاعات دقیق بانکی'
+            'bank-details' => 'اطلاعات دقیق بانکی',
+            'mailing-address' => 'Send Check to',
+            'instructions' => 'Instructions'
         ]
     ]
 ];
