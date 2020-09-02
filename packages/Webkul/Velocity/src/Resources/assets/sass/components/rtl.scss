@@ -11,6 +11,12 @@ body {
 
         header {
             #search-form {
+
+                #header-search-icon {
+                    float: right;
+                    border-radius: 2px 0px 0px 2px;
+                }
+
                 .btn-group {
                     select {
                         border-left: 0;
