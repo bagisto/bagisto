@@ -68,11 +68,11 @@
                     </div>
 
                     <div style="margin-top: 5px;">
-                        <span style="font-weight: bold;">{{ __('shop::app.mail.shipment.carrier') }} </span>{{ $shipment->carrier_title }}
+                        <span style="font-weight: bold;">{{ __('shop::app.mail.shipment.carrier') }} : </span>{{ $shipment->carrier_title }}
                     </div>
 
                     <div style="margin-top: 5px;">
-                        <span style="font-weight: bold;">{{ __('shop::app.mail.shipment.tracking-number') }} </span>{{ $shipment->track_number }}
+                        <span style="font-weight: bold;">{{ __('shop::app.mail.shipment.tracking-number') }} : </span>{{ $shipment->track_number }}
                     </div>
                 </div>
             </div>
