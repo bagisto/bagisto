@@ -65,7 +65,7 @@ class ForgetPasswordController extends Controller
             );
 
             if ($response == Password::RESET_LINK_SENT) {
-                session()->flash('success', trans($response));
+                session()->flash('success', trans('customer::app.forget_password.reset_link_sent'));
 
                 return back();
             }
@@ -73,7 +73,7 @@ class ForgetPasswordController extends Controller
             return back()
                 ->withInput(request(['email']))
                 ->withErrors([
-                    'email' => trans($response),
+                    'email' => trans('customer::app.forget_password.email_not_exist'),
                 ]);
         } catch(\Exception $e) {
             session()->flash('error', trans($e->getMessage()));
