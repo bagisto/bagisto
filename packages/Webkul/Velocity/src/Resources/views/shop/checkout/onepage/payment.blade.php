@@ -42,6 +42,15 @@
                             <div class="row">
                                 <span class="method-summary">{{ __($payment['description']) }}</span>
                             </div>
+
+                            <?php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($payment['method']); ?>
+
+                            @if (! empty($additionalDetails))
+                                <div class="instructions" v-show="payment.method == '{{$payment['method']}}'">
+                                    <label>{{ $additionalDetails['title'] }}</label>
+                                    <p>{{ $additionalDetails['value'] }}</p>
+                                </div>
+                            @endif
                         </div>
                     </div>
 
