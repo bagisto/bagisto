@@ -233,12 +233,13 @@ class Booking extends Virtual
      */
     public function compareOptions($options1, $options2)
     {
-        if ($this->product->id !== $options2['product_id']) {
+        if ($this->product->id !== (int) $options2['product_id']) {
             return false;
         }
 
-        if (isset($options1['booking'], $options2['booking'])) {
-            return true;
+        if (isset($options1['booking'], $options2['booking'])
+            && $options1['booking']['ticket_id'] === $options2['booking']['ticket_id']) {
+                return true;
         }
 
         return false;
