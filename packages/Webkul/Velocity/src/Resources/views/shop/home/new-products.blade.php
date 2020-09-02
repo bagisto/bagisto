@@ -11,10 +11,7 @@
             <shimmer-component v-if="isLoading && !isMobileView"></shimmer-component>
 
             <template v-else-if="newProducts.length > 0">
-                <card-list-header
-                    row-class="pl-26"
-                    heading="{{ __('shop::app.home.new-products') }}"
-                >
+                <card-list-header heading="{{ __('shop::app.home.new-products') }}">
                 </card-list-header>
 
                 {!! view_render_event('bagisto.shop.new-products.before') !!}
@@ -125,7 +122,7 @@
 
             @if($count==0)
                 <template>
-                    
+
                         @if ($showRecentlyViewed)
                             @push('css')
                                 <style>
@@ -142,7 +139,7 @@
                                     'quantity'          => 3,
                                     'addClass'          => 'col-lg-3 col-md-12',
                                 ])
-                            </div>     
+                            </div>
                         @endif
                 </template>
             @endif
