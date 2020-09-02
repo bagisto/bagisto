@@ -1527,6 +1527,23 @@
         > .row {
             margin-bottom: 20px;
         }
+
+        .instructions {    
+            margin-top: 5px;
+            margin-left: -13px;
+
+            label {
+                font-weight: 600;
+                font-size: 14px;
+            }
+
+            p {
+                margin: 0;
+                font-size: 14px;
+                color: #777777;
+                font-style: italic;
+            }
+        }
     }
 
     .address-summary {
