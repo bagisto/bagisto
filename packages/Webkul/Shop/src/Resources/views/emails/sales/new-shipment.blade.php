@@ -68,11 +68,11 @@
                     </div>
 
                     <div style="margin-top: 5px;">
-                        <span style="font-weight: bold;">{{ __('shop::app.mail.shipment.carrier') }} : </span>{{ $shipment->carrier_title }}
+                        <span style="font-weight: bold;">{{ __('shop::app.mail.shipment.carrier') }} </span>{{ $shipment->carrier_title }}
                     </div>
 
                     <div style="margin-top: 5px;">
-                        <span style="font-weight: bold;">{{ __('shop::app.mail.shipment.tracking-number') }} : </span>{{ $shipment->track_number }}
+                        <span style="font-weight: bold;">{{ __('shop::app.mail.shipment.tracking-number') }} </span>{{ $shipment->track_number }}
                     </div>
                 </div>
             </div>
@@ -104,11 +104,11 @@
                     {{ __('shop::app.mail.order.contact') }} : {{ $order->billing_address->phone }}
                 </div>
 
-                <div style="font-weight: bold;font-size: 16px; color: #242424;">
+                <div style="font-weight: bold; font-size: 16px; color: #242424;">
                     {{ __('shop::app.mail.order.payment') }}
                 </div>
 
-                <div style="font-weight: bold;font-size: 16px; color: #242424;">
+                <div style="font-weight: bold; font-size: 16px; color: #242424;">
                     {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
                 </div>
             </div>
