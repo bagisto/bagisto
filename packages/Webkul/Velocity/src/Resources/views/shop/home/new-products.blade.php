@@ -120,9 +120,8 @@
                 {!! view_render_event('bagisto.shop.new-products.after') !!}
             </template>
 
-            @if($count==0)
+            @if ($count==0)
                 <template>
-
                         @if ($showRecentlyViewed)
                             @push('css')
                                 <style>
