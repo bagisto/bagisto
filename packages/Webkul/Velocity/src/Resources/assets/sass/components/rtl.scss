@@ -11,6 +11,12 @@ body {
 
         header {
             #search-form {
+
+                #header-search-icon {
+                    float: right;
+                    border-radius: 2px 0px 0px 2px;
+                }
+
                 .btn-group {
                     select {
                         border-left: 0;
@@ -44,6 +50,8 @@ body {
             .mini-cart-container {
                 ~ .compare-btn,
                 ~ .wishlist-btn {
+                    float: left;
+
                     .badge-container {
                         .badge {
                             top: -28px;
@@ -478,6 +486,39 @@ body {
         }
         .ml5 {
             margin-right: 5px;
+        }
+    }
+}
+
+@media only screen and (max-width: 1192px) {
+    body {
+        &.rtl {
+
+            #search-form {
+
+                #header-search-icon {
+                    float: right;
+                    border-radius: 2px 0px 0px 2px;
+                }
+
+                .btn-group {
+                    .selectdiv {
+                        width: 190px;
+                    }
+                }
+
+                .selectdiv {
+                    + div {
+                        input {
+                            width: 220px;
+                        }
+                    }
+                }
+            }
+
+            .image-search-container {
+                left: 70px;
+            }
         }
     }
 }
