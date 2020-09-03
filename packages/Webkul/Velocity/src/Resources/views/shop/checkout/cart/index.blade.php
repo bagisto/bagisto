@@ -205,7 +205,9 @@
                                                 @endif
 
                                                 <div class="col-12 no-padding">
-                                                    @include ('shop::products.price', ['product' => $product])
+                                                    <div class="product-price">
+                                                        <span>{{ core()->currency($item->base_price) }}</span>
+                                                    </div>
                                                 </div>
 
                                                 <div class="row col-12 remove-padding-margin actions">

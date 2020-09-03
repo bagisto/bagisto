@@ -290,11 +290,14 @@
 
                             var priceLabelElement = document.querySelector('.price-label');
                             var priceElement = document.querySelector('.final-price');
+                            var offerElement = document.querySelector('.product-offers');
 
                             if (this.childAttributes.length == selectedOptionCount) {
                                 priceLabelElement.style.display = 'none';
 
                                 priceElement.innerHTML = this.config.variant_prices[this.simpleProduct].final_price.formated_price;
+
+                                offerElement.innerHTML = this.config.variant_offers[this.simpleProduct];
 
                                 eventBus.$emit('configurable-variant-selected-event', this.simpleProduct)
                             } else {

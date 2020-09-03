@@ -66,6 +66,7 @@ class ConfigurableOption extends AbstractProduct
                 'price'          => $product->getTypeInstance()->getMinimalPrice(),
             ],
             'variant_prices' => $this->getVariantPrices($product),
+            'variant_offers' => $this->getVariantOffers($product),
             'variant_images' => $this->getVariantImages($product),
             'chooseText'     => trans('shop::app.products.choose-option'),
         ];
@@ -204,6 +205,29 @@ class ConfigurableOption extends AbstractProduct
         }
 
         return $prices;
+    }
+
+    /**
+     * Get product offers for configurable variations
+     *
+     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @return array
+     */
+    protected function getVariantOffers($product)
+    {
+        $offers = [];
+
+        foreach ($this->getAllowedProducts($product) as $variant) {
+            if ($variant instanceof \Webkul\Product\Models\ProductFlat) {
+                $variantId = $variant->product_id;
+            } else {
+                $variantId = $variant->id;
+            }
+
+            $offers[$variantId] = $variant->getTypeInstance()->getOffersHtml();
+        }
+
+        return $offers;
     }
 
     /**

@@ -96,6 +96,7 @@ class BundleOption extends AbstractProduct
                 'id'         => $bundleOptionProduct->id,
                 'qty'        => $bundleOptionProduct->qty,
                 'price'      => $bundleOptionProduct->product->getTypeInstance()->getProductPrices(),
+                'offers'      => $bundleOptionProduct->product->getTypeInstance()->getOffersHtml(),
                 'name'       => $bundleOptionProduct->product->name,
                 'product_id' => $bundleOptionProduct->product_id,
                 'is_default' => $bundleOptionProduct->is_default,

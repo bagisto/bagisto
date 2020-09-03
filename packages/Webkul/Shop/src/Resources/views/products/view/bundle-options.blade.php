@@ -80,6 +80,9 @@
                             <span class="price">
                                 + @{{ product.price.final_price.formated_price }}
                             </span>
+
+                            <span v-html="product.offers"></span>
+
                         </span>
                     </div>
 
@@ -93,6 +96,9 @@
                             <span class="price">
                                 + @{{ product.price.final_price.formated_price }}
                             </span>
+
+                            <span v-html="product.offers"></span>
+                            
                         </span>
                     </div>
 

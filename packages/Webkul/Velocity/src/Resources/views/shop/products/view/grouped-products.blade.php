@@ -16,6 +16,7 @@
                                     {{ $groupedProduct->associated_product->name }}
 
                                     @include ('shop::products.price', ['product' => $groupedProduct->associated_product])
+                                    @include ('shop::products.offers', ['product' => $groupedProduct->associated_product])
                                 </span>
 
                                 <span class="qty">

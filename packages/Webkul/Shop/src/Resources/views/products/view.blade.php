@@ -63,6 +63,8 @@
 
                         @include ('shop::products.price', ['product' => $product])
 
+                        @include ('shop::products.offers', ['product' => $product])
+
                         @include ('shop::products.view.stock', ['product' => $product])
 
                         {!! view_render_event('bagisto.shop.products.view.short_description.before', ['product' => $product]) !!}

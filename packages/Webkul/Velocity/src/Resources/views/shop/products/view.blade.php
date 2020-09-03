@@ -120,6 +120,7 @@
 
                                     <div class="col-12 price">
                                         @include ('shop::products.price', ['product' => $product])
+                                        @include ('shop::products.offers', ['product' => $product])
                                     </div>
 
                                     <div class="product-actions">
