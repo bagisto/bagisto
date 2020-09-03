@@ -145,7 +145,7 @@ class CustomerDataGrid extends DataGrid
         $this->addAction([
             'method' => 'GET',
             'route'  => 'admin.customer.note.create',
-            'icon'   => 'icon note-icon',
+            'icon'   => 'icon copy-icon',
             'title'  => trans('admin::app.customers.note.help-title'),
         ]);
     }
