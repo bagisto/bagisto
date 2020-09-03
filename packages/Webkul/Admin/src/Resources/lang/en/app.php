@@ -1356,7 +1356,10 @@ return [
             'contact-number' => 'Contact Number',
             'bank-details' => 'Bank Details',
             'mailing-address' => 'Send Check to',
-            'instructions' => 'Instructions'
+            'instructions' => 'Instructions',
+            'custom-scripts' => 'Custom Scripts',
+            'custom-css' => 'Custom CSS',
+            'custom-javascript' => 'Custom Javascript'
        ]
     ]
 ];

@@ -57,6 +57,10 @@
 
         {!! view_render_event('bagisto.shop.layout.head') !!}
 
+        <style>
+            {!! core()->getConfigData('general.content.custom_scripts.custom_css') !!}
+        </style>
+
     </head>
 
     <body @if (core()->getCurrentLocale()->direction == 'rtl') class="rtl" @endif>
@@ -206,5 +210,9 @@
         </script>
 
         @stack('scripts')
+
+        <script>
+            {!! core()->getConfigData('general.content.custom_scripts.custom_javascript') !!}
+        </script>
     </body>
 </html>
