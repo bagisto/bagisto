@@ -1,4 +1,5 @@
 @inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar')
+@inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
 @extends('shop::customers.account.index')
 
@@ -27,26 +28,52 @@
 
         @if ($items->count())
             @foreach ($items as $item)
-                @php
-                    $currentMode = $toolbarHelper->getCurrentMode();
-                    $moveToCartText = __('shop::app.customer.account.wishlist.move-to-cart');
-                @endphp
+                <div class="col-12 lg-card-container list-card product-card row">
+                    <div class="product-image">
+                        <a
+                            title="{{ $item->product->name }}"
+                            href="{{ route('shop.productOrCategory.index', $item->product->url_key) }}">
 
-                @include ('shop::products.list.card', [
-                    'checkmode'         => true,
-                    'moveToCart'        => true,
-                    'addToCartForm'     => true,
-                    'removeWishlist'    => true,
-                    'reloadPage'        => true,
-                    'itemId'            => $item->id,
-                    'product'           => $item->product,
-                    'btnText'           => $moveToCartText,
-                    'addToCartBtnClass' => 'small-padding',
-                ])
+                            <img
+                                src="{{ $productImageHelper->getProductBaseImage($item->product)['medium_image_url'] }}"
+                                :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
+                            <div class="quick-view-in-list">
+                                <product-quick-view-btn :quick-view-details="{{ json_encode($item->product) }}"></product-quick-view-btn>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="product-information">
+                        <div>
+                            <div class="product-name">
+                                <a
+                                    href="{{ route('shop.productOrCategory.index', $item->product->url_key) }}"
+                                    title="{{ $item->product->name }}" class="unset">
+
+                                    <span class="fs16">{{ $item->product->name }}</span>
+
+                                    @if (isset($item->additional['attributes']))
+                                        <div class="item-options">
+
+                                            @foreach ($item->additional['attributes'] as $attribute)
+                                                <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
+                                            @endforeach
+
+                                        </div>
+                                    @endif
+                                </a>
+                            </div>
+
+                            <div class="product-price">
+                                @include ('shop::products.price', ['product' => $item->product])
+                            </div>
+                        </div>
+                    </div>
+                </div>
             @endforeach
 
             <div class="bottom-toolbar">
-                {{ $items->links()  }}
+                {{ $items->links() }}
             </div>
         @else
             <div class="empty">
