@@ -37,15 +37,12 @@
                             <img
                                 src="{{ $productImageHelper->getProductBaseImage($item->product)['medium_image_url'] }}"
                                 :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
-                            <div class="quick-view-in-list">
-                                <product-quick-view-btn :quick-view-details="{{ json_encode($item->product) }}"></product-quick-view-btn>
-                            </div>
                         </a>
                     </div>
 
                     <div class="product-information">
                         <div>
-                            <div class="product-name">
+                            <div class="product-name mt10">
                                 <a
                                     href="{{ route('shop.productOrCategory.index', $item->product->url_key) }}"
                                     title="{{ $item->product->name }}" class="unset">
@@ -66,6 +63,16 @@
 
                             <div class="product-price">
                                 @include ('shop::products.price', ['product' => $item->product])
+                            </div>
+
+                            <div class="operations">
+                                <a href="{{ route('customer.wishlist.move', $item->id) }}" class="btn btn-add-to-cart">
+                                    {{ __('shop::app.customer.account.wishlist.move-to-cart') }}
+                                </a>
+
+                                <a href="{{ route('customer.wishlist.remove', $item->id) }}" class="btn btn-warning">
+                                    {{ __('shop::app.customer.account.address.index.delete') }}
+                                </a>
                             </div>
                         </div>
                     </div>
