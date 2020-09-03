@@ -12,7 +12,7 @@
         <div class="account-layout">
 
             <div class="account-head mb-10">
-                <span class="back-icon"><a href="{{ url()->previous() }}"><i class="icon icon-menu-back"></i></a></span>
+                <span class="back-icon"><a href="{{ route('customer.profile.index') }}"><i class="icon icon-menu-back"></i></a></span>
 
                 <span class="account-heading">{{ __('shop::app.customer.account.profile.edit-profile.title') }}</span>
 
