@@ -206,7 +206,7 @@ class ProductDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.copy'),
             'method' => 'GET',
             'route'  => 'admin.catalog.products.copy',
-            'icon'   => 'icon note-icon',
+            'icon'   => 'icon copy-icon',
         ]);
 
         $this->addMassAction([
