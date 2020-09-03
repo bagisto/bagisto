@@ -1,3 +1,13 @@
+@section('custom-css')
+    <style>
+        .payment-method {
+            font-weight: bold;
+            font-size: 16px;
+            color: #242424;
+        }
+    </style>
+@endsection
+
 @component('shop::emails.layouts.master')
     <div style="text-align: center;">
         <a href="{{ config('app.url') }}">
