@@ -89,6 +89,25 @@ return [
             ],
         ],
     ], [
+        'key'    => 'general.content.custom_scripts',
+        'name'   => 'admin::app.admin.system.custom-scripts',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'custom_css',
+                'title'         => 'admin::app.admin.system.custom-css',
+                'type'          => 'textarea',
+                'channel_based' => true,
+                'locale_based'  => false,
+            ], [
+                'name'          => 'custom_javascript',
+                'title'         => 'admin::app.admin.system.custom-javascript',
+                'type'          => 'textarea',
+                'channel_based' => true,
+                'locale_based'  => false,
+            ]
+        ],
+    ], [
         'key'  => 'general.design',
         'name' => 'admin::app.admin.system.design',
         'sort' => 3,

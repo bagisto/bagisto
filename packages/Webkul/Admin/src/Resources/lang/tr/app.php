@@ -1338,7 +1338,10 @@ return [
             'contact-number' => 'İletişim numarası',
             'bank-details' => 'Banka detayları',
             'mailing-address' => 'Send Check to',
-            'instructions' => 'Instructions'
+            'instructions' => 'Instructions',
+            'custom-scripts' => 'Custom Scripts',
+            'custom-css' => 'Custom CSS',
+            'custom-javascript' => 'Custom Javascript'
         ]
     ]
 ];
