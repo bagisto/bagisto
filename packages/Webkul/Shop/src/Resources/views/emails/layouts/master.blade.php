@@ -4,6 +4,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500" rel="stylesheet" type="text/css">
+        <style>
+            .payment-method {
+                font-weight: bold;
+                font-size: 16px;
+                color: #242424;
+            }
+        </style>
     </head>
 
     <body style="font-family: montserrat, sans-serif;">

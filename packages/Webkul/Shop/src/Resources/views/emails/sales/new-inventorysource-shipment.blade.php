@@ -107,11 +107,11 @@
                     {{ __('shop::app.mail.order.contact') }} : {{ $order->billing_address->phone }}
                 </div>
 
-                <div style="font-weight: bold; font-size: 16px; color: #242424;">
+                <div class="payment-method">
                     {{ __('shop::app.mail.order.payment') }}
                 </div>
 
-                <div style="font-weight: bold; font-size: 16px; color: #242424;">
+                <div class="payment-method">
                     {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
                 </div>
             </div>
