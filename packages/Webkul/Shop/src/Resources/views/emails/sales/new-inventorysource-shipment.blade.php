@@ -1,13 +1,3 @@
-@section('custom-css')
-    <style>
-        .payment-method {
-            font-weight: bold;
-            font-size: 16px;
-            color: #242424;
-        }
-    </style>
-@endsection
-
 @component('shop::emails.layouts.master')
     <div style="text-align: center;">
         <a href="{{ config('app.url') }}">
@@ -117,11 +107,11 @@
                     {{ __('shop::app.mail.order.contact') }} : {{ $order->billing_address->phone }}
                 </div>
 
-                <div class="payment-method">
+                <div style="font-weight: bold; font-size: 16px; color: #242424;">
                     {{ __('shop::app.mail.order.payment') }}
                 </div>
 
-                <div class="payment-method">
+                <div style="font-weight: bold; font-size: 16px; color: #242424;">
                     {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
                 </div>
             </div>
