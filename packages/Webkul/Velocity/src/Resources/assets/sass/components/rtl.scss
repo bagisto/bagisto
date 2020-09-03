@@ -432,17 +432,9 @@ body {
             }
         }
 
-        .downloadable-container {
-            .link-list {
-                ul {
-                    li {
-                        a {
-                            float: left;
-                            margin-top: 3px;
-                        }
-                    }
-                }
-            }
+        .downloadable-container .link-list ul li a {
+            float: left;
+            margin-top: 3px;
         }
 
         // Shared
