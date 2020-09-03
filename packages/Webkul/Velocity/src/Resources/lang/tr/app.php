@@ -221,7 +221,10 @@ return [
             'forgot-password'       => 'Parolamı Unuttum',
             'recover-password'      => 'Parolamı Yenile',
             'recover-password-text' => 'Parolanızı unuttuysanız, mail adresinizi girerek yeni parola talebinde bulunun.',
-        ]
+        ],
+        'wishlist' => [
+            'remove-all-success' => 'İstek listenizdeki tüm öğeler kaldırıldı',
+        ],
     ],
 
     'error'         => [

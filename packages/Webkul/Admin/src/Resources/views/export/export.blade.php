@@ -33,9 +33,12 @@
 
         methods: {
             onSubmit: function(e) {
+                var this_this = this;
                 e.target.submit();
 
-                this.$root.$set(this.$root.modalIds, 'downloadDataGrid', false);
+                setTimeout(function() { 
+                    this_this.$root.$set(this_this.$root.modalIds, 'downloadDataGrid', false); 
+                }, 0);
             }
         }
     });

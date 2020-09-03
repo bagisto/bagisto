@@ -282,12 +282,6 @@ class Order extends Model implements OrderContract
             return false;
         }
 
-        foreach ($this->invoices as $item) {
-            if ($item->state == 'pending' || $item->state == 'overdue') {
-                return false;
-            }
-        }
-
         foreach ($this->items as $item) {
             if ($item->qty_to_refund > 0 && $item->order->status !== self::STATUS_CLOSED) {
                 return true;

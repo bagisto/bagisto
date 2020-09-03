@@ -481,6 +481,8 @@ return [
                 'success' => 'Prodotto aggiunto al carrello.',
                 'success-remove' => 'Prodotto rimosso dal carrello.',
                 'error-add' => 'Il prodotto non può essere aggiunto al carrello, prova ancora.',
+                'inactive' => 'An item is inactive and was removed from cart.',
+                'inactive-add' => 'Inactive item cannot be added to cart.',
             ],
             'quantity-error' => 'La quantità richiesta non è disponibile.',
             'cart-subtotal' => 'Subtotale Carrello',

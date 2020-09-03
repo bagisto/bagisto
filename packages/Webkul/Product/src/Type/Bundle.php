@@ -3,6 +3,7 @@
 namespace Webkul\Product\Type;
 
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Product\Datatypes\CartItemValidationResult;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
@@ -11,6 +12,7 @@ use Webkul\Product\Repositories\ProductBundleOptionRepository;
 use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
 use Webkul\Product\Helpers\ProductImage;
 use Webkul\Product\Helpers\BundleOption;
+use Webkul\Checkout\Models\CartItem;
 
 class Bundle extends AbstractType
 {
@@ -677,23 +679,39 @@ class Bundle extends AbstractType
     }
 
     /**
-     * Validate cart item product price
+     * Validate cart item product price and other things
      *
-     * @param  \Webkul\Checkout\Contracts\CartItem  $item
-     * @return void
+     * @param \Webkul\Checkout\Models\CartItem $item
+     *
+     * @return \Webkul\Product\Datatypes\CartItemValidationResult
      */
-    public function validateCartItem($item)
+    public function validateCartItem(CartItem $item): CartItemValidationResult
     {
+        $result = new CartItemValidationResult();
         $price = 0;
 
+        if (parent::isCartItemInactive($item)) {
+            $result->itemIsInactive();
+
+            return $result;
+        }
+
         foreach ($item->children as $childItem) {
-            $childItem->product->getTypeInstance()->validateCartItem($childItem);
+            $childResult = $childItem->product->getTypeInstance()->validateCartItem($childItem);
+
+            if ($childResult->isItemInactive()) {
+                $result->itemIsInactive();
+            }
+
+            if ($childResult->isCartInvalid()) {
+                $result->cartIsInvalid();
+            }
 
             $price += $childItem->base_price * $childItem->quantity;
         }
 
         if ($price == $item->base_price) {
-            return;
+            return $result;
         }
 
         $item->base_price = $price;
@@ -705,6 +723,8 @@ class Bundle extends AbstractType
         $item->additional = $this->getAdditionalOptions($item->additional);
 
         $item->save();
+
+        return $result;
     }
 
     /**
@@ -722,7 +742,7 @@ class Bundle extends AbstractType
      * @param  int  $qty
      * @return bool
      */
-    public function haveSufficientQuantity($qty)
+    public function haveSufficientQuantity(int $qty): bool
     {
         # to consider a bundle in stock we need to check that at least one product from each required group is available for the given quantity
         foreach ($this->product->bundle_options as $option) {

@@ -318,14 +318,6 @@ return [
             'invoice-btn-title' => 'Faturar',
             'info' => 'Informação',
             'invoices' => 'Faturas',
-            'invoices-change-title' => 'Change invoice state',
-            'invoices-change-state-desc' => 'Please select the new invoice state:',
-            'invoice-status-paid'    => 'Paid',
-            'invoice-status-pending' => 'Pending',
-            'invoice-status-overdue' => 'Overdue',
-            'invoice-status-update' => 'Save changes',
-            'invoice-status-confirmed' => 'The invoice state has been changed.',
-            'invoice-status-error' => 'Could not update the invoice state. ',
             'shipments' => 'Envios',
             'order-and-account' => 'Pedido e Conta',
             'order-info' => 'Informação do Pedido',
@@ -390,6 +382,7 @@ return [
             'title' => 'Faturas',
             'id' => 'Id',
             'invoice-id' => 'Fatura Id',
+            'invoice' => 'Fatura',
             'date' => 'Data da Fatura',
             'order-id' => 'Pedido Id',
             'customer-name' => 'Nome do Cliente',
@@ -1356,7 +1349,16 @@ return [
             'show-sku' => 'Show SKU',
             'categories' => 'Categories',
             'show-sku' => 'Show SKU',
-            'show-search-input-field' => 'Show Search Input Field'
+            'show-search-input-field' => 'Show Search Input Field',
+            'store-name' => 'Nome da loja',
+            'vat-number' => 'Número de IVA',
+            'contact-number' => 'Número de contato',
+            'bank-details' => 'Detalhes bancários',
+            'mailing-address' => 'Send Check to',
+            'instructions' => 'Instructions',
+            'custom-scripts' => 'Custom Scripts',
+            'custom-css' => 'Custom CSS',
+            'custom-javascript' => 'Custom Javascript'
         ]
     ]
 ];

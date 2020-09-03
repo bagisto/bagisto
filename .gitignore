@@ -1,4 +1,5 @@
 /docker-compose-collection
+/storage/dcc-data/
 /node_modules
 /public/hot
 /public/storage
@@ -24,3 +25,4 @@ yarn.lock
 storage/*.key
 /docker-compose-collection/
 /resources/themes/velocity/*
+/resources/lang/vendor/webkul/admin/*

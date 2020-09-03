@@ -8,6 +8,7 @@
     <div class="content">
         @php
             $locale = request()->get('locale') ?: app()->getLocale();
+            $translation = $content->translations->where('locale', $locale)->first();
         @endphp
 
         <form
@@ -61,7 +62,7 @@
                                 {{ __('velocity::app.admin.contents.page.title') }}
                                 <span class="locale">[{{ $locale }}]</span>
                             </label>
-                            <input type="text" v-validate="'required|max:100'" class="control" id="title" name="{{$locale}}[title]" value="{{ old($locale)['title'] ?? '' }}" data-vv-as="&quot;{{ __('velocity::app.admin.contents.page.title') }}&quot;"/>
+                            <input type="text" v-validate="'required|max:100'" class="control" id="title" name="{{$locale}}[title]" value="{{ old($locale)['title'] ?? isset($translation->title) ? $translation->title : '' }}" data-vv-as="&quot;{{ __('velocity::app.admin.contents.page.title') }}&quot;"/>
 
                             <span class="control-error" v-if="errors.has('{{$locale}}[title]')">@{{ errors.first('{!!$locale!!}[title]') }}</span>
                         </div>

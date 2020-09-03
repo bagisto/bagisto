@@ -213,8 +213,8 @@
                                             <img class="item-image" src="{{ $productBaseImage['small_image_url'] }}" />
                                         </div>
 
-                                        <div class="description">
-                                            <div class="name">
+                                        <div class="description do-not-cross-arrow">
+                                            <div class="name ellipsis">
                                                 @if (isset($item->name))
                                                     {{ $item->name }}
                                                 @endif
@@ -265,8 +265,8 @@
                                             <span class="icon profile-pic-icon"></span>
                                         </div>
 
-                                        <div class="description">
-                                            <div class="name">
+                                        <div class="description do-not-cross-arrow">
+                                            <div class="name ellipsis">
                                                 {{ $item->customer_full_name }}
                                             </div>
 
@@ -323,8 +323,8 @@
                                             <img class="item-image" src="{{ $productBaseImage['small_image_url'] }}" />
                                         </div>
 
-                                        <div class="description">
-                                            <div class="name">
+                                        <div class="description do-not-cross-arrow">
+                                            <div class="name ellipsis">
                                                 @if (isset($item->product->name))
                                                     {{ $item->product->name }}
                                                 @endif

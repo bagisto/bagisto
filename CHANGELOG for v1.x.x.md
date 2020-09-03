@@ -2,7 +2,57 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
-## **v1.1.3 (14th of August 2020)** - *Release*
+## **v1.2.0 (7th of September 2020)** - *Release*
+
+* #1257 [fixed] - Getting issue in install of v0.1.6
+
+* #3643 [fixed] - Invoices should contain the company/store data
+
+* #3772 [fixed] - Unable to add more than 4 products in related products
+
+* #3781 [fixed] - Getting exception on frontend after installation.
+
+* #3782 [fixed] - Getting error on running php artisan migrate if db_prefix contains decimal value
+
+* #3783 [fixed] - Correct the product name alignment in compare list of default theme.
+
+* #3784 [fixed] - Responsive issue on iPad
+
+* #3786 [fixed] - Default advertisement images should display in images section.
+
+* #3789 [fixed] - Filter conditions need to be change according to Boolean in newsletter subscription grid for subscribed column
+
+* #3791 [fixed] - validation message showing for wrong field while editing user from admin end
+
+* #3792 [fixed] - Recently viewed product is not working for Locales other than default.
+
+* #3799 [fixed] - Featured Products and New Products should not display on front end if admin has set 0 in velocity meta data
+
+* #3800 [fixed] - Header Content Count field should convert the value into 0 if given anything apart from valid data(numeric value)
+
+* #3802 [fixed] - Layout issue while adding linked products
+
+* #3804 [fixed] - uploading image on search is not resulting in any keywords
+
+* #3811 [fixed] - Velocity cms page url should be added by default
+
+* #3819 [fixed] - Export Function not working in Firefox/Linux
+
+* #3822 [fixed] - Publish translations from Webkul\Admin
+
+* #3828 [fixed] - success alert is not visible while removing product from wishlist as guest
+
+* #3831 [fixed] - social icons are not visible in footer
+
+* #3852 [fixed] - Product copy functionality is not working properly for configurable products
+
+* #3854 [fixed] - Fix reset password alert message
+
+* #3861 [fixed] - Payment Instruction is not implemented for velocity theme
+
+
+
+## **v1.2.0-BETA1 (18th of August 2020)** - *Release*
 
 * [feature] - Customer group price for products implemented
 
@@ -20,8 +70,15 @@
 
 * [feature] - One click upgrade
 
-* [feature] - Social login
+* [feature] - Social login (Facebook, Twitter, Google, Linkedin, Github)
 
+* [feature] - Social share
+
+* [feature] - Store configuration added
+
+* [feature] - Feature to disable compare option
+
+* [feature] - Store configuration added for product listing
 
 * #343 [fixed] - Translation strings are missing from awful amount of controllers when returning responses with flash. And optimise translation strings for faster static translations.
 
@@ -164,6 +221,8 @@
 * #3026 [fixed] - Date validation error when editing Booking Products
 
 * #3029 [fixed] - velocity theme not fully responsive
+
+* #3030 [fixed] - Api for coupons..
 
 * #3032 [fixed] - [Critical] Onecheckout preventing to continue to shipping method after selecting address
 
@@ -553,6 +612,8 @@
 
 * #3562 [fixed] - getting exception when view category page in frontend
 
+* #3564 [fixed] - getting exception if admin uploads higher size image in image swatch while editing/adding attribute
+
 * #3570 [fixed] - Translation issue on uploading high size image
 
 * #3574 [fixed] - One page Checkout loader hits on adding single digit in phone number
@@ -570,6 +631,8 @@
 * #3604 [fixed] - show percentage in place count number in review in velocity theme
 
 * #3606 [fixed] - showing different number of star in velocity and default theme for same rating
+
+* #3611 [fixed] - The content of CMS page is cropped
 
 * #3615 [fixed] - Getting exception while uploading favicon image if image is of high size
 
@@ -599,11 +662,15 @@
 
 * #3656 [fixed] - Product name gets blank each time we refresh the product page.
 
+* #3657 [fixed] - Auth user can see all users info by id
+
 * #3674 [fixed] - Bugs on category page for list mode
 
 * #3675 [fixed] - Address icon is overlapping on side bar menu in mobile view
 
 * #3676 [fixed] - all cross selling products are not visible in cart page of velocity theme
+
+* #3678 [fixed] - Customer is able to access downloadable products even when invoice state is pending
 
 * #3688 [fixed] - Select icons should be in right side in RTL on payment page in default theme
 
@@ -628,6 +695,24 @@
 * #3725 [fixed] - getting exception on comparison page of default theme
 
 * #3727 [fixed] - compare page layout issue for logged in user
+
+* #3735 [fixed] - Make Velocity Meta Data section Channel wise.
+
+* #3740 [fixed] - translation of alert when remove compare item in default theme
+
+* #3742 [fixed] - Invoice, ship and cancel buttons are missing in order placed by guest user
+
+* #3745 [fixed] - getting exception in backend when having DB_PREFIX
+
+* #3747 [fixed] - velocity content header route throwing an exception in spanish locale
+
+* #3751 [fixed] - shipping tab is missing in order details for deleted customer
+
+* #3755 [fixed] - Webinstall - SMTP port is not set
+
+* #3757 [fixed] - broken image on guest wishlist
+
+* #3767 [fixed] - Header-nav on mobile view seem buggy on search item
 
 
 

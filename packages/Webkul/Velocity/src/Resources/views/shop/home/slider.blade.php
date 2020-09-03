@@ -8,14 +8,14 @@
 
 @push('scripts')
     <script type="text/x-template" id="slider-template">
-        <div class="slides-container ltr">
+        <div class="slides-container {{ $direction }}">
             <carousel-component
                 loop="true"
                 timeout="5000"
                 autoplay="true"
                 slides-per-page="1"
                 navigation-enabled="hide"
-                :slider-direction="direction == 'rtl' ? 'backward' : 'forward'"
+                locale-direction="direction"
                 :slides-count="{{ ! empty($sliderData) ? sizeof($sliderData) : 1 }}">
 
                 @if (! empty($sliderData))

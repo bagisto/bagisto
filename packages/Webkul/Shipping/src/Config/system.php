@@ -107,6 +107,13 @@ return [
                 'validation'    => 'required',
                 'channel_based' => true,
                 'locale_based'  => true,
+            ],  [
+                'name'          => 'city',
+                'title'         => 'admin::app.admin.system.city',
+                'type'          => 'text',
+                'validation'    => 'required',
+                'channel_based' => true,
+                'locale_based'  => false,
             ], [
                 'name'          => 'address1',
                 'title'         => 'admin::app.admin.system.street-address',
@@ -122,12 +129,25 @@ return [
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
-                'name'          => 'city',
-                'title'         => 'admin::app.admin.system.city',
+                'name'          => 'store_name',
+                'title'         => 'admin::app.admin.system.store-name',
                 'type'          => 'text',
-                'validation'    => 'required',
                 'channel_based' => true,
-                'locale_based'  => false,
+            ], [
+                'name'          => 'vat_number',
+                'title'         => 'admin::app.admin.system.vat-number',
+                'type'          => 'text',
+                'channel_based' => true,
+            ], [
+                'name'          => 'contact',
+                'title'         => 'admin::app.admin.system.contact-number',
+                'type'          => 'text',
+                'channel_based' => true,
+            ], [
+                'name'          => 'bank_details',
+                'title'         => 'admin::app.admin.system.bank-details',
+                'type'          => 'textarea',
+                'channel_based' => true,
             ]
         ]
     ]

@@ -318,14 +318,6 @@ return [
             'invoice-btn-title' => 'صورت حساب',
             'info' => 'اطلاعات',
             'invoices' => 'صورت حساب ها',
-            'invoices-change-title' => 'Change invoice state',
-            'invoices-change-state-desc' => 'Please select the new invoice state:',
-            'invoice-status-paid'    => 'Paid',
-            'invoice-status-pending' => 'Pending',
-            'invoice-status-overdue' => 'Overdue',
-            'invoice-status-update' => 'Save changes',
-            'invoice-status-confirmed' => 'The invoice state has been changed.',
-            'invoice-status-error' => 'Could not update the invoice state. ',
             'shipments' => 'حمل و نقل ها',
             'order-and-account' => 'سفارش و حساب',
             'order-info' => 'اطلاعات سفارش',
@@ -390,6 +382,7 @@ return [
             'title' => 'صورت حساب',
             'id' => 'شناسه',
             'invoice-id' => 'شناسه صورت حساب',
+            'invoice' => 'صورتحساب',
             'date' => 'تاریخ صورت حساب',
             'order-id' => 'شناسه سفارش',
             'customer-name' => 'نام مشتیر',
@@ -1353,7 +1346,16 @@ return [
             'show-sku' => 'Show SKU',
             'categories' => 'Categories',
             'show-sku' => 'Show SKU',
-            'show-search-input-field' => 'Show Search Input Field'
+            'show-search-input-field' => 'Show Search Input Field',
+            'store-name' => 'نام فروشگاه',
+            'vat-number' => 'شماره Vat',
+            'contact-number' => 'شماره تماس',
+            'bank-details' => 'اطلاعات دقیق بانکی',
+            'mailing-address' => 'Send Check to',
+            'instructions' => 'Instructions',
+            'custom-scripts' => 'Custom Scripts',
+            'custom-css' => 'Custom CSS',
+            'custom-javascript' => 'Custom Javascript'
         ]
     ]
 ];

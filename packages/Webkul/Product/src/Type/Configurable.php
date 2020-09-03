@@ -2,10 +2,13 @@
 
 namespace Webkul\Product\Type;
 
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\DB;
-use Webkul\Product\Models\ProductFlat;
+use Webkul\Customer\Contracts\CartItem;
+use Webkul\Product\Datatypes\CartItemValidationResult;
 use Webkul\Product\Models\ProductAttributeValue;
+use Webkul\Product\Models\ProductFlat;
+use Illuminate\Support\Str;
+use Webkul\Checkout\Models\CartItem as CartItemModel;
+use Illuminate\Support\Facades\DB;
 
 class Configurable extends AbstractType
 {
@@ -541,15 +544,24 @@ class Configurable extends AbstractType
     /**
      * Validate cart item product price
      *
-     * @param  \Webkul\Checkout\Contracts\CartItem  $item
-     * @return float
+     * @param \Webkul\Product\Type\CartItem $item
+     *
+     * @return \Webkul\Product\Datatypes\CartItemValidationResult
      */
-    public function validateCartItem($item)
+    public function validateCartItem(CartItemModel $item): CartItemValidationResult
     {
+        $result = new CartItemValidationResult();
+
+        if ($this->isCartItemInactive($item)) {
+            $result->itemIsInactive();
+
+            return $result;
+        }
+
         $price = $item->child->product->getTypeInstance()->getFinalPrice($item->quantity);
 
         if ($price == $item->base_price) {
-            return;
+            return $result;
         }
 
         $item->base_price = $price;
@@ -559,9 +571,17 @@ class Configurable extends AbstractType
         $item->total = core()->convertPrice($price * $item->quantity);
 
         $item->save();
+
+        return $result;
     }
 
-    //product options
+    /**
+     * Get product options.
+     *
+     * @param string $product
+     *
+     * @return array
+     */
     public function getProductOptions($product = "")
     {
         $configurableOption = app('Webkul\Product\Helpers\ConfigurableOption');
@@ -574,7 +594,7 @@ class Configurable extends AbstractType
      * @param  int  $qty
      * @return bool
      */
-    public function haveSufficientQuantity($qty)
+    public function haveSufficientQuantity(int $qty): bool
     {
         $backorders = core()->getConfigData('catalog.inventory.stock_options.backorders');
 

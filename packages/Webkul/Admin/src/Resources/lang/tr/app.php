@@ -316,14 +316,6 @@ return [
             'invoice-btn-title' => 'Fatura',
             'info' => 'Bilgi',
             'invoices' => 'Faturalar',
-            'invoices-change-title' => 'Change invoice state',
-            'invoices-change-state-desc' => 'Please select the new invoice state:',
-            'invoice-status-paid'    => 'Paid',
-            'invoice-status-pending' => 'Pending',
-            'invoice-status-overdue' => 'Overdue',
-            'invoice-status-update' => 'Save changes',
-            'invoice-status-confirmed' => 'The invoice state has been changed.',
-            'invoice-status-error' => 'Could not update the invoice state. ',
             'shipments' => 'Kargo',
             'order-and-account' => 'Sipariş ve Hesap',
             'order-info' => 'Sipariş Bilgisi',
@@ -389,6 +381,7 @@ return [
             'title' => 'Faturalar',
             'id' => 'ID',
             'invoice-id' => 'Fatura No',
+            'invoice' => 'Fatura',
             'date' => 'Fatura Tarihi',
             'order-id' => 'Sipariş No',
             'customer-name' => 'Müşteri Adı',
@@ -1339,7 +1332,16 @@ return [
             'show-offers' => 'Teklifleri Göster',
             'show-sku' => 'Barkod Göster',
             'categories' => 'Kategoriler',
-            'show-search-input-field' => 'Arama Giriş Kutusu Göster'
+            'show-search-input-field' => 'Arama Giriş Kutusu Göster',
+            'store-name' => 'Dükkan adı',
+            'vat-number' => 'KDV Numarası',
+            'contact-number' => 'İletişim numarası',
+            'bank-details' => 'Banka detayları',
+            'mailing-address' => 'Send Check to',
+            'instructions' => 'Instructions',
+            'custom-scripts' => 'Custom Scripts',
+            'custom-css' => 'Custom CSS',
+            'custom-javascript' => 'Custom Javascript'
         ]
     ]
 ];

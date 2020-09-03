@@ -6,6 +6,7 @@
 
 @php
     $locale = request()->get('locale') ?: app()->getLocale();
+    $channel = request()->get('channel') ?: core()->getCurrentChannelCode();
 @endphp
 
 @section('content')
@@ -29,12 +30,25 @@
                 </div>
 
                 <input type="hidden" name="locale" value="{{ $locale }}" />
+                <input type="hidden" name="channel" value="{{ $channel }}" />
+
+                <div class="control-group">
+                    <select class="control" id="channel-switcher" onChange="window.location.href = this.value">
+                        @foreach (core()->getAllChannels() as $ch)
+
+                            <option value="{{ route('velocity.admin.meta-data') . '?channel=' . $ch->code . '&locale=' . $locale }}" {{ ($ch->code) == $channel ? 'selected' : '' }}>
+                                {{ $ch->name }}
+                            </option>
+
+                        @endforeach
+                    </select>
+                </div>
 
                 <div class="control-group">
                     <select class="control" id="locale-switcher" onChange="window.location.href = this.value">
                         @foreach (core()->getAllLocales() as $localeModel)
 
-                            <option value="{{ route('velocity.admin.meta-data') . '?locale=' . $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
+                            <option value="{{ route('velocity.admin.meta-data') . '?locale=' . $localeModel->code . '&channel=' . $channel }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
                                 {{ $localeModel->name }}
                             </option>
 
@@ -62,7 +76,7 @@
                                 class="control"
                                 data-vv-as="&quot;slides&quot;"
                                 {{ $metaData && $metaData->slider ? 'checked' : ''}} />
-                                
+
                             <span class="slider round"></span>
                         </label>
                     </div>
@@ -71,7 +85,8 @@
                         <label>{{ __('velocity::app.admin.meta-data.sidebar-categories') }}</label>
 
                         <input
-                            type="text"
+                            type="number"
+                            min="0"
                             class="control"
                             id="sidebar_category_count"
                             name="sidebar_category_count"
@@ -82,7 +97,8 @@
                         <label>{{ __('velocity::app.admin.meta-data.header_content_count') }}</label>
 
                         <input
-                            type="text"
+                            type="number"
+                            min="0"
                             class="control"
                             id="header_content_count"
                             name="header_content_count"
@@ -93,7 +109,8 @@
                         <label>{{ __('shop::app.home.featured-products') }}</label>
 
                         <input
-                            type="text"
+                            type="number"
+                            min="0"
                             class="control"
                             id="featured_product_count"
                             name="featured_product_count"
@@ -104,7 +121,8 @@
                         <label>{{ __('shop::app.home.new-products') }}</label>
 
                         <input
-                            type="text"
+                            type="number"
+                            min="0"
                             class="control"
                             id="new_products_count"
                             name="new_products_count"
@@ -112,7 +130,10 @@
                     </div>
 
                     <div class="control-group">
-                        <label style="width:100%;">{{ __('velocity::app.admin.meta-data.home-page-content') }} <span class="locale">[{{ $metaData ? $metaData->locale : 'en' }}]</span></label>
+                        <label style="width:100%;">
+                            {{ __('velocity::app.admin.meta-data.home-page-content') }}
+                            <span class="locale">[{{ $metaData ? $metaData->channel : $channel }} - {{ $metaData ? $metaData->locale : $locale }}]</span>
+                        </label>
 
                         <textarea
                             class="control"
@@ -123,7 +144,10 @@
                     </div>
 
                     <div class="control-group">
-                        <label style="width:100%;">{{ __('velocity::app.admin.meta-data.product-policy') }} <span class="locale">[{{ $metaData ? $metaData->locale : 'en' }}]</span></label>                        
+                        <label style="width:100%;">
+                            {{ __('velocity::app.admin.meta-data.product-policy') }}
+                            <span class="locale">[{{ $metaData ? $metaData->channel : $channel }} - {{ $metaData ? $metaData->locale : $locale }}]</span>
+                        </label>
 
                         <textarea
                             class="control"
@@ -149,10 +173,9 @@
                             ];
 
                             $index = 0;
-                            $currentLocale = request()->get('locale') ?: core()->getCurrentLocale();
-                            
+
                             foreach ($metaData->get('locale')->all() as $key => $value) {
-                                if ($value->locale == $currentLocale) {
+                                if ($value->locale == $locale) {
                                     $index = $key;
                                 }
                             }
@@ -160,9 +183,30 @@
                             $advertisement = json_decode($metaData->get('advertisement')->all()[$index]->advertisement, true);
                         @endphp
 
-                        @if(! isset($advertisement[4]))
+                        @if(! isset($advertisement[4]) || ! count($advertisement[4]))
+                            @php
+                                $images[4][] = [
+                                    'id' => 'image_1',
+                                    'url' => asset('/themes/velocity/assets/images/big-sale-banner.png'),
+                                ];
+                                $images[4][] = [
+                                    'id' => 'image_2',
+                                    'url' => asset('/themes/velocity/assets/images/seasons.png'),
+                                ];
+                                $images[4][] = [
+                                    'id' => 'image_3',
+                                    'url' => asset('/themes/velocity/assets/images/deals.png'),
+                                ];
+                                $images[4][] = [
+                                    'id' => 'image_4',
+                                    'url' => asset('/themes/velocity/assets/images/kids.png'),
+                                ];
+                            @endphp
+                        
                             <image-wrapper
+                                :multiple="true"
                                 input-name="images[4]"
+                                :images='@json($images[4])'
                                 :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'">
                             </image-wrapper>
                         @else
@@ -186,10 +230,26 @@
 
                     <div class="control-group">
                         <label>{{ __('velocity::app.admin.meta-data.advertisement-three') }}</label>
-                        @if(! isset($advertisement[3]))
+                        @if(! isset($advertisement[3]) || ! count($advertisement[3]))
+                            @php
+                                $images[3][] = [
+                                    'id' => 'image_1',
+                                    'url' => asset('/themes/velocity/assets/images/headphones.png'),
+                                ];
+                                $images[3][] = [
+                                    'id' => 'image_2',
+                                    'url' => asset('/themes/velocity/assets/images/watch.png'),
+                                ];
+                                $images[3][] = [
+                                    'id' => 'image_3',
+                                    'url' => asset('/themes/velocity/assets/images/kids-2.png'),
+                                ];
+                            @endphp
+
                             <image-wrapper
-                                :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'"
-                                input-name="images[3]">
+                                input-name="images[3]"
+                                :images='@json($images[3])'
+                                :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'">
                             </image-wrapper>
                         @else
                             @foreach ($advertisement[3] as $index => $image)
@@ -212,10 +272,22 @@
                     <div class="control-group">
                         <label>{{ __('velocity::app.admin.meta-data.advertisement-two') }}</label>
 
-                        @if(! isset($advertisement[2]))
+                        @if(! isset($advertisement[2]) || ! count($advertisement[2]))
+                            @php
+                                $images[2][] = [
+                                    'id' => 'image_1',
+                                    'url' => asset('/themes/velocity/assets/images/toster.png'),
+                                ];
+                                $images[2][] = [
+                                    'id' => 'image_2',
+                                    'url' => asset('/themes/velocity/assets/images/trimmer.png'),
+                                ];
+                            @endphp
+
                             <image-wrapper
-                                :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'"
-                                input-name="images[2]">
+                                input-name="images[2]"
+                                :images='@json($images[2])'
+                                :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'">
                             </image-wrapper>
                         @else
                             @foreach ($advertisement[2] as $index => $image)
@@ -240,7 +312,10 @@
             <accordian :title="'{{ __('velocity::app.admin.meta-data.footer') }}'" :active="false">
                 <div slot="body">
                     <div class="control-group">
-                        <label style="width:100%;">{{ __('velocity::app.admin.meta-data.subscription-content') }} <span class="locale">[{{ $metaData ? $metaData->locale : 'en' }}]</span></label>
+                        <label style="width:100%;">
+                            {{ __('velocity::app.admin.meta-data.subscription-content') }}
+                            <span class="locale">[{{ $metaData ? $metaData->channel : $channel }} - {{ $metaData ? $metaData->locale : $locale }}]</span>
+                        </label>
 
                         <textarea
                             class="control"
@@ -251,7 +326,10 @@
                     </div>
 
                     <div class="control-group">
-                        <label style="width:100%;">{{ __('velocity::app.admin.meta-data.footer-left-content') }} <span class="locale">[{{ $metaData ? $metaData->locale : 'en' }}]</span></label>
+                        <label style="width:100%;">
+                            {{ __('velocity::app.admin.meta-data.footer-left-content') }}
+                            <span class="locale">[{{ $metaData ? $metaData->channel : $channel }} - {{ $metaData ? $metaData->locale : $locale }}]</span>
+                        </label>
 
                         <textarea
                             class="control"
@@ -262,7 +340,10 @@
                     </div>
 
                     <div class="control-group">
-                        <label style="width:100%;">{{ __('velocity::app.admin.meta-data.footer-middle-content') }} <span class="locale">[{{ $metaData ? $metaData->locale : 'en' }}]</span></label>
+                        <label style="width:100%;">
+                            {{ __('velocity::app.admin.meta-data.footer-middle-content') }}
+                            <span class="locale">[{{ $metaData ? $metaData->channel : $channel }} - {{ $metaData ? $metaData->locale : $locale }}]</span>
+                        </label>
 
                         <textarea
                             class="control"
