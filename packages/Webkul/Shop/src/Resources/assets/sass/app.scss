@@ -2438,6 +2438,7 @@ section.cart {
             flex-direction: column;
             justify-content: flex-start;
             width: 100%;
+            overflow-x: auto;
 
             .item-title {
                 font-size: 18px;
@@ -4332,7 +4333,7 @@ section.review {
             padding-left: 0px;
         }
     }
-    
+
     //checkout process page end here
 
     //customer page start here
@@ -4631,7 +4632,6 @@ td {
     max-width: 250px;
     line-height: 30px;
     vertical-align: top;
-    word-break: break-word;
 }
 
 .icon.remove-product {
