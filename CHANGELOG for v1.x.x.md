@@ -2,7 +2,11 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
-## **v1.2.0 (7th of September 2020)** - *Release*
+## **v1.2.0 (8th of September 2020)** - *Release*
+
+* [feature] - Config to add custom css and javascript (Eg. google anlytics) 
+
+* [feature] - Added some config for payment method additional information
 
 * #1257 [fixed] - Getting issue in install of v0.1.6
 
@@ -44,11 +48,19 @@
 
 * #3831 [fixed] - social icons are not visible in footer
 
+* #3847 [fixed] - QTY not returned to inventory when canceling an order after shipping
+
 * #3852 [fixed] - Product copy functionality is not working properly for configurable products
 
 * #3854 [fixed] - Fix reset password alert message
 
+* #3860 [fixed] - Icon used for the customer note or copy item should not be same
+
 * #3861 [fixed] - Payment Instruction is not implemented for velocity theme
+
+* #3871 [fixed] - downloadable sample link issue in RTL
+
+* #3872 [fixed] - customer profile section having bug in mobile view for default theme
 
 
 
