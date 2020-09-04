@@ -320,14 +320,6 @@ return [
             'invoice-btn-title' => 'Invoice',
             'info' => 'Information',
             'invoices' => 'Invoices',
-            'invoices-change-title' => 'Change invoice state',
-            'invoices-change-state-desc' => 'Please select the new invoice state:',
-            'invoice-status-paid'    => 'Paid',
-            'invoice-status-pending' => 'Pending',
-            'invoice-status-overdue' => 'Overdue',
-            'invoice-status-update' => 'Save changes',
-            'invoice-status-confirmed' => 'The invoice state has been changed.',
-            'invoice-status-error' => 'Could not update the invoice state. ',
             'shipments' => 'Shipments',
             'order-and-account' => 'Order and Account',
             'order-info' => 'Order Information',
@@ -392,6 +384,7 @@ return [
         'invoices' => [
             'title' => 'Invoices',
             'id' => 'Id',
+            'invoice' => 'Invoice',
             'invoice-id' => 'Invoice Id',
             'date' => 'Invoice Date',
             'order-id' => 'Order Id',
@@ -1357,7 +1350,16 @@ return [
             'show-offers' => 'Show Offers',
             'show-sku' => 'Show SKU',
             'categories' => 'Categories',
-            'show-search-input-field' => 'Show Search Input Field'
+            'show-search-input-field' => 'Show Search Input Field',
+            'store-name' => 'Store Name',
+            'vat-number' => 'Vat Number',
+            'contact-number' => 'Contact Number',
+            'bank-details' => 'Bank Details',
+            'mailing-address' => 'Send Check to',
+            'instructions' => 'Instructions',
+            'custom-scripts' => 'Custom Scripts',
+            'custom-css' => 'Custom CSS',
+            'custom-javascript' => 'Custom Javascript'
        ]
     ]
 ];

@@ -55,12 +55,6 @@ return [
                 'validation'    => 'mimes:jpeg,bmp,png,jpg',
                 'channel_based' => true,
             ],
-            [
-                'name'          => 'address',
-                'title'         => 'admin::app.admin.system.address',
-                'type'          => 'textarea',
-                'channel_based' => true,
-            ]
         ]
     ]
 ];

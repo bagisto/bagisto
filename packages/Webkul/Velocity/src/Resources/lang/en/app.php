@@ -223,7 +223,10 @@ return [
             'forgot-password'       => 'Forgot Password',
             'recover-password'      => 'Recover Password',
             'recover-password-text' => 'If you forgot your password, recover it by entering your email address.',
-        ]
+        ],
+        'wishlist' => [
+            'remove-all-success' => 'All the items from your wishlist have been removed',
+        ],
     ],
 
     'error'         => [

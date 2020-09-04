@@ -2830,6 +2830,23 @@ section.cart {
                 .control-info {
                     margin-left: 28px;
                 }
+
+                .instructions {
+                    margin-top: 10px;
+                    margin-left: 30px;
+
+                    label {
+                        font-weight: 600;
+                        font-size: 14px;
+                    }
+
+                    p {
+                        margin: 0;
+                        font-size: 14px;
+                        color: #777777;
+                        font-style: italic;
+                    }
+                }
             }
 
             .address-summary {
@@ -4101,6 +4118,11 @@ section.review {
                 margin-left: 0px;
                 margin-right: 15px;
             }
+
+            .downloadable-container .link-list ul li a {
+                float: left;
+                margin-top: 3px;
+            }
         }
     }
 
@@ -4594,6 +4616,14 @@ body {
 .comparison-component {
     width: 100%;
     padding-top: 20px;
+}
+
+.mt-0 {
+    margin-top: 0px;
+}
+
+.desc > p {
+    margin-top: 0px;
 }
 
 .comparison-component > h1 {

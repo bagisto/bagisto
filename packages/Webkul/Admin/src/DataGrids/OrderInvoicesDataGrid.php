@@ -46,19 +46,6 @@ class OrderInvoicesDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'created_at',
-            'label'      => trans('admin::app.datagrid.invoice-date'),
-            'type'       => 'string',
-            'searchable' => true,
-            'sortable'   => true,
-            'filterable' => true,
-            'closure'    => true,
-            'wrapper'    => function ($value) {
-                return \Carbon\Carbon::parse($value->created_at)->format('d-m-Y');
-            }
-        ]);
-
-        $this->addColumn([
             'index'      => 'base_grand_total',
             'label'      => trans('admin::app.datagrid.grand-total'),
             'type'       => 'price',
@@ -68,22 +55,12 @@ class OrderInvoicesDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'state',
-            'label'      => trans('admin::app.datagrid.state'),
-            'type'       => 'string',
-            'closure'    => true,
+            'index'      => 'created_at',
+            'label'      => trans('admin::app.datagrid.invoice-date'),
+            'type'       => 'datetime',
             'searchable' => true,
             'sortable'   => true,
             'filterable' => true,
-            'wrapper' => function ($value) {
-                if ($value->state == 'paid') {
-                    return '<span class="badge badge-md badge-success">'. trans('admin::app.sales.orders.invoice-status-paid') .'</span>';
-                } elseif ($value->state == "pending") {
-                    return '<span class="badge badge-md badge-warning">'. trans('admin::app.sales.orders.invoice-status-pending') .'</span>';
-                } elseif ($value->state == "overdue") {
-                    return '<span class="badge badge-md badge-danger">'. trans('admin::app.sales.orders.invoice-status-overdue') . '</span>';
-                }
-            }
         ]);
     }
 

@@ -17,6 +17,7 @@ class AdminServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../Http/routes.php');
 
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'admin');
+        $this->publishes([__DIR__.'/../Resources/lang' => resource_path('lang/vendor/webkul/admin')]);
 
         $this->publishes([
             __DIR__ . '/../../publishable/assets' => public_path('vendor/webkul/admin/assets'),

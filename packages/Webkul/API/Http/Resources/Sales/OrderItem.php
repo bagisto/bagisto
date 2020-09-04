@@ -10,7 +10,8 @@ class OrderItem extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request
+     * @param \Illuminate\Http\Request
+     *
      * @return array
      */
     public function toArray($request)
@@ -75,6 +76,7 @@ class OrderItem extends JsonResource
             'formated_grant_total'              => core()->formatPrice($this->total + $this->tax_amount, $this->order->order_currency_code),
             'base_grant_total'                  => $this->base_total + $this->base_tax_amount,
             'formated_base_grant_total'         => core()->formatPrice($this->base_total + $this->base_tax_amount, $this->order->order_currency_code),
+            'downloadable_links'                => $this->downloadable_link_purchased,
             'additional'                        => is_array($this->resource->additional)
                                                     ? $this->resource->additional
                                                     : json_decode($this->resource->additional, true),

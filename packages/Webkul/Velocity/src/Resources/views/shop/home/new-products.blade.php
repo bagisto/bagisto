@@ -11,10 +11,7 @@
             <shimmer-component v-if="isLoading && !isMobileView"></shimmer-component>
 
             <template v-else-if="newProducts.length > 0">
-                <card-list-header
-                    row-class="pl-26"
-                    heading="{{ __('shop::app.home.new-products') }}"
-                >
+                <card-list-header heading="{{ __('shop::app.home.new-products') }}">
                 </card-list-header>
 
                 {!! view_render_event('bagisto.shop.new-products.before') !!}
@@ -122,6 +119,29 @@
 
                 {!! view_render_event('bagisto.shop.new-products.after') !!}
             </template>
+
+            @if ($count==0)
+                <template>
+                        @if ($showRecentlyViewed)
+                            @push('css')
+                                <style>
+                                    .recently-viewed {
+                                        padding-right: 0px;
+                                    }
+                                </style>
+                            @endpush
+
+                            <div class="row {{ $direction }}">
+                                <div class="col-9 no-padding carousel-products vc-full-screen with-recent-viewed" v-if="!isMobileView"></div>
+
+                                @include ('shop::products.list.recently-viewed', [
+                                    'quantity'          => 3,
+                                    'addClass'          => 'col-lg-3 col-md-12',
+                                ])
+                            </div>
+                        @endif
+                </template>
+            @endif
         </div>
     </script>
 
@@ -146,8 +166,12 @@
                     'getNewProducts': function () {
                         this.$http.get(`${this.baseUrl}/category-details?category-slug=new-products&count={{ $count }}`)
                         .then(response => {
-                            if (response.data.status)
+                             var count = '{{$count}}';
+                            if (response.data.status && count != 0){
                                 this.newProducts = response.data.products;
+                            }else{
+                                this.newProducts = 0;
+                            }
 
                             this.isLoading = false;
                         })

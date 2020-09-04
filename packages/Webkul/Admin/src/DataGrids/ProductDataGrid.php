@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\DataGrids;
 
+use Webkul\Core\Models\Locale;
 use Webkul\Ui\DataGrid\DataGrid;
 use Illuminate\Support\Facades\DB;
 use Webkul\Core\Models\Channel;
@@ -34,15 +35,27 @@ class ProductDataGrid extends DataGrid
         /* channel */
         $this->channel = request()->get('channel') ?? 'all';
 
-        /* finding channel name */
+        /* finding channel code */
         if ($this->channel !== 'all') {
-            $this->channel = Channel::find($this->channel);
+            $this->channel = Channel::query()->find($this->channel);
             $this->channel = $this->channel ? $this->channel->code : 'all';
         }
     }
 
     public function prepareQueryBuilder()
     {
+        if ($this->channel === 'all') {
+            $whereInChannels = Channel::query()->pluck('code')->toArray();
+        } else {
+            $whereInChannels = [$this->channel];
+        }
+
+        if ($this->locale === 'all') {
+            $whereInLocales = Locale::query()->pluck('code')->toArray();
+        } else {
+            $whereInLocales = [$this->locale];
+        }
+
         /* query builder */
         $queryBuilder = DB::table('product_flat')
             ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
@@ -61,9 +74,11 @@ class ProductDataGrid extends DataGrid
                 DB::raw('SUM(DISTINCT ' . DB::getTablePrefix() . 'product_inventories.qty) as quantity')
             );
 
-        $queryBuilder->groupBy('product_flat.product_id', 'product_flat.locale', 'product_flat.channel');
-        $queryBuilder->where('locale', $this->locale !== 'all' ? $this->locale : 'en');
-        $queryBuilder->where('channel', $this->channel !== 'all' ? $this->channel : 'default');
+        $queryBuilder->groupBy('product_flat.product_id', 'product_flat.channel');
+
+        $queryBuilder->whereIn('product_flat.locale', $whereInLocales);
+        $queryBuilder->whereIn('product_flat.channel', $whereInChannels);
+        $queryBuilder->whereNotNull('product_flat.name');
 
         $this->addFilter('product_id', 'product_flat.product_id');
         $this->addFilter('product_name', 'product_flat.name');
@@ -191,7 +206,7 @@ class ProductDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.copy'),
             'method' => 'GET',
             'route'  => 'admin.catalog.products.copy',
-            'icon'   => 'icon note-icon',
+            'icon'   => 'icon copy-icon',
         ]);
 
         $this->addMassAction([

@@ -11,6 +11,12 @@ body {
 
         header {
             #search-form {
+
+                #header-search-icon {
+                    float: right;
+                    border-radius: 2px 0px 0px 2px;
+                }
+
                 .btn-group {
                     select {
                         border-left: 0;
@@ -44,12 +50,14 @@ body {
             .mini-cart-container {
                 ~ .compare-btn,
                 ~ .wishlist-btn {
+                    float: left;
+
                     .badge-container {
                         .badge {
                             top: -28px;
                             left: -2px;
                         }
-                    }   
+                    }
                 }
 
                 ~ .wishlist-btn , ~ .compare-btn {
@@ -327,7 +335,7 @@ body {
         .modal-footer>:not(:last-child) {
             margin-left: .25rem;
         }
-        
+
         .compare-products {
             .wishlist-icon {
                 left: 60px;
@@ -366,7 +374,7 @@ body {
                         left: 40px;
                         right: unset;
                     }
-                }     
+                }
             }
         }
 
@@ -424,6 +432,11 @@ body {
             }
         }
 
+        .downloadable-container .link-list ul li a {
+            float: left;
+            margin-top: 3px;
+        }
+
         // Shared
         .text-right {
             text-align: left !important;
@@ -469,6 +482,39 @@ body {
     }
 }
 
+@media only screen and (max-width: 1192px) {
+    body {
+        &.rtl {
+
+            #search-form {
+
+                #header-search-icon {
+                    float: right;
+                    border-radius: 2px 0px 0px 2px;
+                }
+
+                .btn-group {
+                    .selectdiv {
+                        width: 190px;
+                    }
+                }
+
+                .selectdiv {
+                    + div {
+                        input {
+                            width: 220px;
+                        }
+                    }
+                }
+            }
+
+            .image-search-container {
+                left: 70px;
+            }
+        }
+    }
+}
+
 @media only screen and (max-width: 992px) {
     body {
         &.rtl {
@@ -483,7 +529,7 @@ body {
                         }
                     }
                 }
-                
+
                 .wrapper {
                     .vc-customer-options {
                         li {

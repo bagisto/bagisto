@@ -82,8 +82,13 @@
                     'getFeaturedProducts': function () {
                         this.$http.get(`${this.baseUrl}/category-details?category-slug=featured-products&count={{ $count }}`)
                         .then(response => {
-                            if (response.data.status)
+                            var count = '{{$count}}';
+                            if (response.data.status && count != 0 )
+                            {
                                 this.featuredProducts = response.data.products;
+                            }else{
+                                this.featuredProducts = 0;   
+                            }
 
                             this.isLoading = false;
                         })

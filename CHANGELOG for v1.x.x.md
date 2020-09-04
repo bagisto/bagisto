@@ -2,6 +2,56 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
+## **v1.2.0 (7th of September 2020)** - *Release*
+
+* #1257 [fixed] - Getting issue in install of v0.1.6
+
+* #3643 [fixed] - Invoices should contain the company/store data
+
+* #3772 [fixed] - Unable to add more than 4 products in related products
+
+* #3781 [fixed] - Getting exception on frontend after installation.
+
+* #3782 [fixed] - Getting error on running php artisan migrate if db_prefix contains decimal value
+
+* #3783 [fixed] - Correct the product name alignment in compare list of default theme.
+
+* #3784 [fixed] - Responsive issue on iPad
+
+* #3786 [fixed] - Default advertisement images should display in images section.
+
+* #3789 [fixed] - Filter conditions need to be change according to Boolean in newsletter subscription grid for subscribed column
+
+* #3791 [fixed] - validation message showing for wrong field while editing user from admin end
+
+* #3792 [fixed] - Recently viewed product is not working for Locales other than default.
+
+* #3799 [fixed] - Featured Products and New Products should not display on front end if admin has set 0 in velocity meta data
+
+* #3800 [fixed] - Header Content Count field should convert the value into 0 if given anything apart from valid data(numeric value)
+
+* #3802 [fixed] - Layout issue while adding linked products
+
+* #3804 [fixed] - uploading image on search is not resulting in any keywords
+
+* #3811 [fixed] - Velocity cms page url should be added by default
+
+* #3819 [fixed] - Export Function not working in Firefox/Linux
+
+* #3822 [fixed] - Publish translations from Webkul\Admin
+
+* #3828 [fixed] - success alert is not visible while removing product from wishlist as guest
+
+* #3831 [fixed] - social icons are not visible in footer
+
+* #3852 [fixed] - Product copy functionality is not working properly for configurable products
+
+* #3854 [fixed] - Fix reset password alert message
+
+* #3861 [fixed] - Payment Instruction is not implemented for velocity theme
+
+
+
 ## **v1.2.0-BETA1 (18th of August 2020)** - *Release*
 
 * [feature] - Customer group price for products implemented

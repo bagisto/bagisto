@@ -106,8 +106,6 @@ class Ipn
 
                 if ($this->order->canInvoice()) {
                     $invoice = $this->invoiceRepository->create($this->prepareInvoiceData());
-                    
-                    $this->invoiceRepository->updateInvoiceState($invoice, "paid");
                 }
             }
         }

@@ -92,6 +92,9 @@ class CartController extends Controller
                 }
             }
         } catch(\Exception $exception) {
+
+            session()->flash('warning', __($exception->getMessage()));
+
             $product = $this->productRepository->find($id);
 
             Log::error('Velocity CartController: ' . $exception->getMessage(),
