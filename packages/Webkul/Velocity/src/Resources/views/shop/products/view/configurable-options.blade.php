@@ -291,9 +291,20 @@
                             var priceLabelElement = document.querySelector('.price-label');
                             var priceElement = document.querySelector('.final-price');
                             var offerElement = document.querySelector('.product-offers');
+                            var productPriceElement = document.querySelector('.product-price');
 
                             if (this.childAttributes.length == selectedOptionCount) {
                                 priceLabelElement.style.display = 'none';
+
+                                if (this.config.variant_prices[this.simpleProduct].final_price.price < this.config.variant_prices[this.simpleProduct].regular_price.price) {
+                                    var regularPrice = document.createElement('span');
+
+                                    regularPrice.className = "regular-price";
+                                    
+                                    regularPrice.innerHTML= this.config.variant_prices[this.simpleProduct].regular_price.formated_price;
+                                    
+                                    productPriceElement.prepend(regularPrice);
+                                }
 
                                 priceElement.innerHTML = this.config.variant_prices[this.simpleProduct].final_price.formated_price;
 
