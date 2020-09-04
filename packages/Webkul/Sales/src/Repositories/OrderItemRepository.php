@@ -156,5 +156,28 @@ class OrderItemRepository extends Repository
         }
 
         $orderedInventory->update(['qty' => $qty]);
+
+        if ($orderItem->getTypeInstance()->isStockable()) {
+            $shipmentItems = $orderItem->parent ? $orderItem->parent->shipment_items : $orderItem->shipment_items;
+
+            if ($shipmentItems) {
+                foreach ($shipmentItems as $shipmentItem) {
+                    if ($orderItem->parent) {
+                        $shippedQty = $orderItem->qty_ordered
+                                      ? ($orderItem->qty_ordered / $orderItem->parent->qty_ordered) * $shipmentItem->qty
+                                      : $orderItem->parent->qty_ordered;
+                    } else {
+                        $shippedQty = $shipmentItem->qty;
+                    }
+    
+                    $inventory = $orderItem->product->inventories()
+                    //  ->where('vendor_id', $data['vendor_id'])
+                     ->where('inventory_source_id', $shipmentItem->shipment->inventory_source_id)
+                     ->first();
+    
+                    $inventory->update(['qty' => $inventory->qty + $shippedQty]);                  
+                }
+            }
+        }
     }
 }

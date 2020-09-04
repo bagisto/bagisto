@@ -293,7 +293,6 @@ class Cart
     public function getItemByProduct($data)
     {
         $items = $this->getCart()->all_items;
-
         foreach ($items as $item) {
             if ($item->product->getTypeInstance()->compareOptions($item->additional, $data['additional'])) {
                 if (isset($data['additional']['parent_id'])) {
