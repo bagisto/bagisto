@@ -60,6 +60,14 @@ body {
                     }
                 }
 
+                ~ .wishlist-btn , ~ .compare-btn {
+                    .badge-container {
+                        .badge {
+                            left: 20px;
+                        }
+                    }
+                }
+
                 #mini-cart {
                     .badge {
                         top: -8px;
@@ -422,6 +430,11 @@ body {
                     padding-right: 15px !important;
                 }
             }
+        }
+
+        .downloadable-container .link-list ul li a {
+            float: left;
+            margin-top: 3px;
         }
 
         // Shared
