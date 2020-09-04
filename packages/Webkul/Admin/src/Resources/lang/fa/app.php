@@ -1352,7 +1352,10 @@ return [
             'contact-number' => 'شماره تماس',
             'bank-details' => 'اطلاعات دقیق بانکی',
             'mailing-address' => 'Send Check to',
-            'instructions' => 'Instructions'
+            'instructions' => 'Instructions',
+            'custom-scripts' => 'Custom Scripts',
+            'custom-css' => 'Custom CSS',
+            'custom-javascript' => 'Custom Javascript'
         ]
     ]
 ];

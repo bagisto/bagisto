@@ -1355,7 +1355,10 @@ return [
             'contact-number' => 'Número de contato',
             'bank-details' => 'Detalhes bancários',
             'mailing-address' => 'Send Check to',
-            'instructions' => 'Instructions'
+            'instructions' => 'Instructions',
+            'custom-scripts' => 'Custom Scripts',
+            'custom-css' => 'Custom CSS',
+            'custom-javascript' => 'Custom Javascript'
         ]
     ]
 ];

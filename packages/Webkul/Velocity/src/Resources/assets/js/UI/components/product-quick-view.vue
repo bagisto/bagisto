@@ -95,6 +95,7 @@
         },
 
         mounted: function () {
+            $('.cd-quick-view').fadeIn(500);
             $('.compare-icon').click(this.closeQuickView);
             $('.wishlist-icon').click(this.closeQuickView);
             $('.add-to-cart-btn').click(() => setTimeout(this.closeQuickView, 0));
