@@ -75,13 +75,12 @@
 
                                         {!! view_render_event('bagisto.shop.checkout.cart.item.quantity.before', ['item' => $item]) !!}
 
-                                        <div class="misc">
-                                            @if ($item->product->getTypeInstance()->showQuantityBox() === true)
-                                                <quantity-changer
-                                                    :control-name="'qty[{{$item->id}}]'"
-                                                    quantity="{{$item->quantity}}">
-                                                </quantity-changer>
-                                            @endif
+                                        <div class="misc">   
+
+                                            <quantity-changer
+                                                :control-name="'qty[{{$item->id}}]'"
+                                                quantity="{{$item->quantity}}">
+                                             </quantity-changer>
 
                                             <span class="remove">
                                                 <a href="{{ route('shop.checkout.cart.remove', $item->id) }}" onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">{{ __('shop::app.checkout.cart.remove-link') }}</a></span>
