@@ -1352,7 +1352,10 @@ return [
             'contact-number' => 'Contact nummer',
             'bank-details' => 'Bankgegevens',
             'mailing-address' => 'Send Check to',
-            'instructions' => 'Instructions'
+            'instructions' => 'Instructions',
+            'custom-scripts' => 'Custom Scripts',
+            'custom-css' => 'Custom CSS',
+            'custom-javascript' => 'Custom Javascript'
         ]
     ]
 ];
