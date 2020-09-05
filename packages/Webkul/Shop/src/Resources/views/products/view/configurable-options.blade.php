@@ -281,6 +281,10 @@
                         if (this.childAttributes.length == selectedOptionCount) {
                             priceLabelElement.style.display = 'none';
 
+                            if ($('.regular-price').length) {
+                                $('.regular-price').remove();
+                            }
+
                             if (this.config.variant_prices[this.simpleProduct].final_price.price < this.config.variant_prices[this.simpleProduct].regular_price.price) {
                                 var regularPrice = document.createElement('span');
 
