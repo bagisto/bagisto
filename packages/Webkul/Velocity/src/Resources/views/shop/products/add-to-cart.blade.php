@@ -67,6 +67,7 @@
                     product-id="{{ $product->product_id }}"
                     reload-page="{{ $reloadPage ?? false }}"
                     move-to-cart="{{ $moveToCart ?? false }}"
+                    wishlist-move-route="{{ $wishlistMoveRoute ?? false }}"
                     add-class-to-btn="{{ $addToCartBtnClass ?? '' }}"
                     is-enable={{ ! $product->isSaleable() ? 'false' : 'true' }}
                     show-cart-icon={{ !(isset($showCartIcon) && !$showCartIcon) }}

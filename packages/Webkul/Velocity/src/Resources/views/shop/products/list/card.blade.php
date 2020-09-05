@@ -167,6 +167,7 @@
                         'product'           => $product,
                         'btnText'           => $btnText ?? null,
                         'moveToCart'        => $moveToCart ?? null,
+                        'wishlistMoveRoute' => $wishlistMoveRoute ?? null,
                         'reloadPage'        => $reloadPage ?? null,
                         'addToCartForm'     => $addToCartForm ?? false,
                         'addToCartBtnClass' => $addToCartBtnClass ?? '',

@@ -35,6 +35,7 @@
                 @include ('shop::products.list.card', [
                     'checkmode'            => true,
                     'moveToCart'           => true,
+                    'wishlistMoveRoute'    => route('customer.wishlist.move', $item->id),
                     'addToCartForm'        => true,
                     'removeWishlist'       => true,
                     'reloadPage'           => true,
