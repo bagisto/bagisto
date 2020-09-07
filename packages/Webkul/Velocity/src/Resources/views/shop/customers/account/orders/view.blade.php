@@ -554,6 +554,15 @@
                                 <div class="box-content">
                                     {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
 
+                                    @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($order->payment->method); @endphp
+
+                                    @if (! empty($additionalDetails))
+                                        <div class="instructions">
+                                            <label>{{ $additionalDetails['title'] }}</label>
+                                            <p>{{ $additionalDetails['value'] }}</p>
+                                        </div>
+                                    @endif
+
                                     {!! view_render_event('bagisto.shop.customers.account.orders.view.payment-method.after', ['order' => $order]) !!}
                                 </div>
                             </div>
