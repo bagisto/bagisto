@@ -16,8 +16,7 @@ return [
 
     'enabled' => env('DEBUGBAR_ENABLED', null),
     'except' => [
-        'telescope*',
-        'horizon*'
+        'telescope*'
     ],
 
     /*
@@ -124,7 +123,6 @@ return [
         'config'          => false, // Display config settings
         'cache'           => false, // Display cache events
         'models'          => true,  // Display models
-        'livewire'        => true,  // Display Livewire (when available)
     ],
 
     /*
@@ -143,13 +141,12 @@ return [
         'db' => [
             'with_params'       => true,   // Render SQL with the parameters substituted
             'backtrace'         => true,   // Use a backtrace to find the origin of the query in your files.
-            'backtrace_exclude_paths' => [],   // Paths to exclude from backtrace. (in addition to defaults)
             'timeline'          => false,  // Add the queries to the timeline
             'explain' => [                 // Show EXPLAIN output on queries
                 'enabled' => false,
                 'types' => ['SELECT'],     // // workaround ['SELECT'] only. https://github.com/barryvdh/laravel-debugbar/issues/888 ['SELECT', 'INSERT', 'UPDATE', 'DELETE']; for MySQL 5.6.3+
             ],
-            'hints'             => false,    // Show hints for common mistakes
+            'hints'             => true,    // Show hints for common mistakes
         ],
         'mail' => [
             'full_log' => false
@@ -202,14 +199,4 @@ return [
      | To override default domain, specify it as a non-empty value.
      */
     'route_domain' => null,
-
-    /*
-     |--------------------------------------------------------------------------
-     | DebugBar theme
-     |--------------------------------------------------------------------------
-     |
-     | Switches between light and dark theme. If set to auto it will respect system preferences
-     | Possible values: auto, light, dark
-     */
-    'theme' => 'auto',
 ];
