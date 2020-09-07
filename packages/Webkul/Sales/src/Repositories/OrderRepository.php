@@ -223,13 +223,18 @@ class OrderRepository extends Repository
         }
 
         if ($totalQtyOrdered != ($totalQtyRefunded + $totalQtyCanceled)
-            && $totalQtyOrdered == $totalQtyInvoiced + $totalQtyCanceled) {
+            && $totalQtyOrdered == $totalQtyInvoiced + $totalQtyCanceled
+            && $totalQtyOrdered == $totalQtyShipped + $totalQtyRefunded) {
 
             /*
+                This case is removed:
                 `&& $totalQtyOrdered == $totalQtyShipped + $totalQtyRefunded + $totalQtyCanceled`
-                
-                This case is removed as earlier quantity that shipped cannot be cancelled.
-                But now if order is shipped it also get cancelled.
+
+                This case is added:
+                `&& $totalQtyOrdered == $totalQtyShipped + $totalQtyRefunded`
+
+                Reason: As earlier quantity that shipped cannot be cancelled.
+                        But now if order is shipped it also get cancelled.
              */
             return true;
         }
