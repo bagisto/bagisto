@@ -17,7 +17,7 @@
 
                     <div class="row col-12">
                         <div>
-                            <label class="radio-container">
+                            <label class="radio-container" style="position: absolute;">
                                 <input
                                     type="radio"
                                     name="payment[method]"
@@ -32,7 +32,7 @@
                             </label>
                         </div>
 
-                        <div class="pl30">
+                        <div class="pl40">
                             <div class="row">
                                 <span class="payment-method method-label">
                                     <b>{{ $payment['method_title'] }}</b>
