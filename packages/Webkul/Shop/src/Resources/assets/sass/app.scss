@@ -271,7 +271,6 @@ input {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 125px;
 
     .media-info {
         display: flex;
@@ -284,6 +283,7 @@ input {
 
         .info {
             margin-left: 20px;
+            margin-right: 20px;
             display: flex;
             flex-direction: column;
             justify-content: space-evenly;
@@ -296,7 +296,6 @@ input {
     }
 
     .operations {
-        height: 120px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -2438,6 +2437,7 @@ section.cart {
             flex-direction: column;
             justify-content: flex-start;
             width: 100%;
+            overflow-x: auto;
 
             .item-title {
                 font-size: 18px;
@@ -4338,7 +4338,7 @@ section.review {
             padding-left: 0px;
         }
     }
-    
+
     //checkout process page end here
 
     //customer page start here
@@ -4638,7 +4638,6 @@ td {
     max-width: 250px;
     line-height: 30px;
     vertical-align: top;
-    word-break: break-word;
 }
 
 .icon.remove-product {
