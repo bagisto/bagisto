@@ -102,16 +102,16 @@
 
                 <div style="font-size: 16px; color: #242424;">
                     {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
-
-                    @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($order->payment->method); @endphp
-
-                    @if (! empty($additionalDetails))
-                        <div>
-                            <label>{{ $additionalDetails['title'] }}</label>
-                            <p>{{ $additionalDetails['value'] }}</p>
-                        </div>
-                    @endif
                 </div>
+
+                @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($order->payment->method); @endphp
+
+                @if (! empty($additionalDetails))
+                    <div style="font-size: 16px; color: #242424;">
+                        <div>{{ $additionalDetails['title'] }}</div>
+                        <div>{{ $additionalDetails['value'] }}</div>
+                    </div>
+                @endif
             </div>
         </div>
 
