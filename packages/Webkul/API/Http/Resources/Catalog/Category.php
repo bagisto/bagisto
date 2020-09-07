@@ -26,6 +26,9 @@ class Category extends JsonResource
             'meta_keywords'    => $this->meta_keywords,
             'status'           => $this->status,
             'image_url'        => $this->image_url,
+            'additional'       => is_array($this->resource->additional)
+                                    ? $this->resource->additional
+                                    : json_decode($this->resource->additional, true),
             'created_at'       => $this->created_at,
             'updated_at'       => $this->updated_at,
         ];
