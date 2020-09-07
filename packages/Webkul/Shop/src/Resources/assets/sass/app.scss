@@ -4068,6 +4068,7 @@ section.review {
     .main-container-wrapper .product-card .sticker {
         left: auto;
         right: 20px;
+        min-width: 52px;
     }
 
     .main-container-wrapper .product-card .cart-wish-wrap .addtocart {
@@ -4369,6 +4370,7 @@ section.review {
 
     a.btn.btn-lg.btn-primary {
         float: left;
+        margin-right: 15px;
     }
 
     .account-item-card {
