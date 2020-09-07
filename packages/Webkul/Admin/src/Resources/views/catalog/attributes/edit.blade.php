@@ -428,7 +428,14 @@
             },
 
             created: function () {
-                @foreach ($attribute->options as $option)
+                @php
+                    $sortAttributeOptions = [];
+                    foreach ($attribute->options as $option) {
+                        $sortAttributeOptions[$option->id] = $option;   
+                    }
+                    ksort($sortAttributeOptions);
+                @endphp
+                @foreach ($sortAttributeOptions as $option)
                     this.optionRowCount++;
 
                     var row = {
