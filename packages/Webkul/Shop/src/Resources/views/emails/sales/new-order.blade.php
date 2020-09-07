@@ -100,18 +100,16 @@
 
                 <div style="font-weight: bold;font-size: 16px; color: #242424;">
                     {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
+
+                    @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($order->payment->method); @endphp
+
+                    @if (! empty($additionalDetails))
+                        <div>
+                            <label>{{ $additionalDetails['title'] }}</label>
+                            <p>{{ $additionalDetails['value'] }}</p>
+                        </div>
+                    @endif
                 </div>
-
-                @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($order->payment->method); @endphp
-
-                @if (! empty($additionalDetails))
-                    <div style="font-size: 16px; color: #242424;">
-                        {{ $additionalDetails['title'] }}
-                    </div>
-                    <div style="font-size: 16px; color: #242424;">
-                        <p>{{ $additionalDetails['value'] }}</p>
-                    </div>
-                @endif
             </div>
         </div>
 
@@ -176,12 +174,12 @@
             @endif
 
             @foreach (Webkul\Tax\Helpers\Tax::getTaxRatesWithAmount($order, false) as $taxRate => $taxAmount )
-            <div>
-                <span id="taxrate-{{ core()->taxRateAsIdentifier($taxRate) }}">{{ __('shop::app.mail.order.tax') }} {{ $taxRate }} %</span>
-                <span id="taxamount-{{ core()->taxRateAsIdentifier($taxRate) }}" style="float: right;">
-                    {{ core()->formatPrice($taxAmount, $order->order_currency_code) }}
-                </span>
-            </div>
+                <div>
+                    <span id="taxrate-{{ core()->taxRateAsIdentifier($taxRate) }}">{{ __('shop::app.mail.order.tax') }} {{ $taxRate }} %</span>
+                    <span id="taxamount-{{ core()->taxRateAsIdentifier($taxRate) }}" style="float: right;">
+                        {{ core()->formatPrice($taxAmount, $order->order_currency_code) }}
+                    </span>
+                </div>
             @endforeach
 
             @if ($order->discount_amount > 0)
