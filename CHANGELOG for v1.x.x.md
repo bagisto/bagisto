@@ -58,9 +58,23 @@
 
 * #3861 [fixed] - Payment Instruction is not implemented for velocity theme
 
+* #3862 [fixed] - Fix Payment Instruction view in checkout page
+
+* #3866 [fixed] - Compare icon is not coming in mobile view as well as layout issue on compare page in mobile view(default theme)
+
 * #3871 [fixed] - downloadable sample link issue in RTL
 
 * #3872 [fixed] - customer profile section having bug in mobile view for default theme
+
+* #3878 [fixed] - Search by name doesn't work when sending a request via API
+
+* #3889 [fixed] - default compare icon should be enabled in french also
+
+* #3890 [fixed] - Add validation at admin end for bundle items qty
+
+* #3894 [fixed] - Customer is not able to increase or decrease the qty of downloadable product from cart in default theme
+
+* #3900 [fixed] - layout issue on cart page in ar (Default theme)
 
 
 
