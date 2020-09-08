@@ -9,6 +9,7 @@
 /public/themes
 /public/fonts
 /vendor
+/data
 /.idea
 /.vscode
 /.vagrant
@@ -23,6 +24,5 @@ package-lock.json
 yarn.lock
 .php_cs.cache
 storage/*.key
-/docker-compose-collection/
 /resources/themes/velocity/*
 /resources/lang/vendor/webkul/admin/*
