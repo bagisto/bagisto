@@ -70,8 +70,12 @@
                             @endguest
                             style="color: #242424;"
                             >
-                            <span class="name">{{ __('shop::app.customer.compare.text') }}</span> 
-                            (<span id="compare-items-count"></span>)
+
+                            <i class="icon compare-icon"></i>
+                            <span class="name">
+                                {{ __('shop::app.customer.compare.text') }}
+                                <span class="count">(<span id="compare-items-count"></span>)<span class="count">
+                            </span>
                         </a>
                     </li>
                 @endif

@@ -78,7 +78,7 @@ class ProductDataGrid extends DataGrid
 
         $queryBuilder->whereIn('product_flat.locale', $whereInLocales);
         $queryBuilder->whereIn('product_flat.channel', $whereInChannels);
-        $queryBuilder->whereNotNull('product_flat.name');
+        // $queryBuilder->whereNotNull('product_flat.name');
 
         $this->addFilter('product_id', 'product_flat.product_id');
         $this->addFilter('product_name', 'product_flat.name');
