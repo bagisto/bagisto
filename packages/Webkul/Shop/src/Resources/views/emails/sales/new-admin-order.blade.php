@@ -108,10 +108,8 @@
 
                 @if (! empty($additionalDetails))
                     <div style="font-size: 16px; color: #242424;">
-                        {{ $additionalDetails['title'] }}
-                    </div>
-                    <div style="font-size: 16px; color: #242424;">
-                        <p>{{ $additionalDetails['value'] }}</p>
+                        <div>{{ $additionalDetails['title'] }}</div>
+                        <div>{{ $additionalDetails['value'] }}</div>
                     </div>
                 @endif
             </div>
