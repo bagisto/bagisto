@@ -4,9 +4,12 @@ namespace Webkul\Core\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Facades\Storage;
+use Prettus\Repository\Traits\CacheableRepository;
 
 class CoreConfigRepository extends Repository
 {
+    use CacheableRepository;
+
     /**
      * Specify Model class name
      *
@@ -111,7 +114,7 @@ class CoreConfigRepository extends Repository
      */
     public function recuressiveArray(array $formData, $method) {
         static $data = [];
-        
+
         static $recuressiveArrayData = [];
 
         foreach ($formData as $form => $formValue) {
@@ -119,7 +122,7 @@ class CoreConfigRepository extends Repository
 
             if (is_array($formValue)) {
                 $dim = $this->countDim($formValue);
-                
+
                 if ($dim > 1) {
                     $this->recuressiveArray($formValue, $value);
                 } elseif ($dim == 1) {
@@ -145,7 +148,7 @@ class CoreConfigRepository extends Repository
 
     /**
      * Return dimension of array
-     * 
+     *
      * @param  array  $array
      * @return int
     */
