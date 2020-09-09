@@ -138,8 +138,8 @@ return [
        | 'except'  =>['find'],
        */
         'allowed'    => [
-            'only'   => null,
-            'except' => null
+            'only'   => [],
+            'except' => ['findWhere']
         ]
     ],
 
