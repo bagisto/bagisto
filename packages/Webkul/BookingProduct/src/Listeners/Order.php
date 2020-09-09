@@ -3,6 +3,7 @@
 namespace Webkul\BookingProduct\Listeners;
 
 use Webkul\BookingProduct\Repositories\BookingRepository;
+use Webkul\BookingProduct\Models\BookingProductEventTicket;
 
 class Order
 {
@@ -32,5 +33,15 @@ class Order
     public function afterPlaceOrder($order)
     {
         $this->bookingRepository->create(['order' => $order]);
+
+        foreach($order->items as $item) {
+            if($item->type !== 'booking') {
+                continue;
+            }
+
+            $eventTicketId = $item->additional['booking']['ticket_id'];
+            $eventTicket = BookingProductEventTicket::query()->findOrFail($eventTicketId);
+            $eventTicket->update(['qty' => $eventTicket->qty - $item->qty_ordered]);
+        }
     }
 }
