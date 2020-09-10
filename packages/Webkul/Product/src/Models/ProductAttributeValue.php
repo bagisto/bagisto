@@ -26,6 +26,7 @@ class ProductAttributeValue extends Model implements ProductAttributeValueContra
         'file'        => 'text_value',
         'image'       => 'text_value',
         'checkbox'    => 'text_value',
+        'color'       => 'text_value',
     ];
 
     protected $fillable = [

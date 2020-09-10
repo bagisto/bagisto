@@ -53,6 +53,7 @@ class Laravel5Helper extends Laravel5
             'textarea' => 'text_value',
             'price'    => 'float_value',
             'date'     => 'date_value',
+            'color'    => 'text_value',
         ];
 
         return $possibleTypes[$type];

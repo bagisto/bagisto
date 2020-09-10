@@ -63,6 +63,7 @@ class ProductFlat
         'file'        => 'text',
         'image'       => 'text',
         'checkbox'    => 'text',
+        'color'       => 'text',
     ];
 
     /**
