@@ -1,6 +1,9 @@
 <?php
 
 return [
+
+    'convention' => Webkul\Core\CoreConvention::class,
+
     'modules' => [
         /**
          * Example:
