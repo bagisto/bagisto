@@ -22,5 +22,5 @@ package-lock.json
 yarn.lock
 .php_cs.cache
 storage/*.key
-/resources/themes/velocity/*
+/resources/themes/velocity
 /resources/lang/vendor/webkul/admin/*
