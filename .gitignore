@@ -24,4 +24,3 @@ yarn.lock
 storage/*.key
 /docker-compose-collection/
 /resources/themes/velocity/*
-/package/Webkul/Shop/node_modules
