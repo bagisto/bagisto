@@ -1,6 +1,7 @@
 @php
     $count = $velocityMetaData ? $velocityMetaData->featured_product_count : 10;
     $direction = core()->getCurrentLocale()->direction == 'rtl' ? 'rtl' : 'ltr';
+  
 @endphp
 
 <featured-products></featured-products>
