@@ -481,6 +481,8 @@ return [
                 'success' => 'Ürün başarıyla sepete eklendi.',
                 'success-remove' => 'Ürün sepetten başarıyla kaldırıldı.',
                 'error-add' => 'Ürün sepete eklenirken hata oluştu, lütfen tekrar deneyin.',
+                'inactive' => 'An item is inactive and was removed from cart.',
+                'inactive-add' => 'Inactive item cannot be added to cart.',
             ],
             'quantity-error' => 'Girilen miktar mevcut değil.',
             'cart-subtotal' => 'Sepet Ara Toplam',

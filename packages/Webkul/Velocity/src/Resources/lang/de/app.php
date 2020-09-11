@@ -223,7 +223,10 @@ return [
             'forgot-password'       => 'Passwort vergessen',
             'recover-password'      => 'Passwort wiederherstellen',
             'recover-password-text' => 'Wenn Sie Ihr Passwort vergessen haben, stellen Sie es durch Eingabe Ihrer E-Mail-Adresse wieder her.',
-        ]
+        ],
+        'wishlist' => [
+            'remove-all-success' => 'Alle Artikel von Ihrer Wunschliste wurden entfernt',
+        ],
     ],
 
     'error'         => [

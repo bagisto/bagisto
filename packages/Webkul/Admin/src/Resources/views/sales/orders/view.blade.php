@@ -222,6 +222,20 @@
                                             </span>
                                         </div>
 
+                                        @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($order->payment->method); @endphp
+
+                                        @if (! empty($additionalDetails))
+                                            <div class="row">
+                                                <span class="title">
+                                                    {{ $additionalDetails['title'] }}
+                                                </span>
+
+                                                <span class="value">
+                                                    {{ $additionalDetails['value'] }}
+                                                </span>
+                                            </div>
+                                        @endif
+
                                         {!! view_render_event('sales.order.payment-method.after', ['order' => $order]) !!}
                                     </div>
                                 </div>
@@ -473,16 +487,8 @@
                                         <td>#{{ $invoice->id }}</td>
                                         <td>{{ $invoice->created_at }}</td>
                                         <td>#{{ $invoice->order->increment_id }}</td>
-                                        <td>{{ $invoice->order->customer_full_name }}</td>
-                                        <td>
-                                            @if($invoice->state == "paid")
-                                                {{ __('admin::app.sales.orders.invoice-status-paid') }}
-                                            @elseif($invoice->state == "overdue")
-                                                {{ __('admin::app.sales.orders.invoice-status-overdue') }}
-                                            @else
-                                                {{ __('admin::app.sales.orders.invoice-status-pending') }}
-                                            @endif
-                                        </td>
+                                        <td>{{ $invoice->address->name }}</td>
+                                        <td>{{ $invoice->status_label }}</td>
                                         <td>{{ core()->formatBasePrice($invoice->base_grand_total) }}</td>
                                         <td class="action">
                                             <a href="{{ route('admin.sales.invoices.view', $invoice->id) }}">

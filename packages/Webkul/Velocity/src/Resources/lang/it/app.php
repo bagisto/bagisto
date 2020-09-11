@@ -225,7 +225,10 @@ return [
             'forgot-password' => 'Password dimenticata',
             'recover-password' => 'Recupera Password',
             'recover-password-text' => 'Se hai dimenticato la password, recuperala inserendo il tuo indirizzo email.',
-        ]
+        ],
+        'wishlist' => [
+            'remove-all-success' => 'Tutti gli articoli dalla tua lista dei desideri sono stati rimossi',
+        ],
     ],
 
     'error' => [

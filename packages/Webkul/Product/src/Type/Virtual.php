@@ -13,7 +13,7 @@ class Virtual extends AbstractType
 
     /**
      * These blade files will be included in product edit page
-     * 
+     *
      * @var array
      */
     protected $additionalViews = [
@@ -60,7 +60,7 @@ class Virtual extends AbstractType
      * @param  int  $qty
      * @return bool
      */
-    public function haveSufficientQuantity($qty)
+    public function haveSufficientQuantity(int $qty): bool
     {
         return $qty <= $this->totalQuantity() ? true : false;
     }

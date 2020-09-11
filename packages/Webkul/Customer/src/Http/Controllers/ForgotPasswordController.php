@@ -53,7 +53,7 @@ class ForgotPasswordController extends Controller
             );
 
             if ($response == Password::RESET_LINK_SENT) {
-                session()->flash('success', trans($response));
+                session()->flash('success', trans('customer::app.forget_password.reset_link_sent'));
 
                 return back();
             }
@@ -61,7 +61,7 @@ class ForgotPasswordController extends Controller
             return back()
                 ->withInput(request(['email']))
                 ->withErrors([
-                    'email' => trans($response),
+                    'email' => trans('customer::app.forget_password.email_not_exist'),
                 ]);
         } catch (\Swift_RfcComplianceException $e) {
             session()->flash('success', trans('customer::app.forget_password.reset_link_sent'));

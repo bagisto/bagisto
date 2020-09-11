@@ -221,7 +221,10 @@ return [
             'forgot-password'       => 'Zapomniałeś hasła',
             'recover-password'      => 'Odzyskaj hasło',
             'recover-password-text' => 'Jeśli zapomniałeś hasła, odzyskaj je, wprowadzając adres e-mail rejestracji',
-        ]
+        ],
+        'wishlist' => [
+            'remove-all-success' => 'Wszystkie pozycje z Twojej listy życzeń zostały usunięte',
+        ],
     ],
 
     'error'         => [

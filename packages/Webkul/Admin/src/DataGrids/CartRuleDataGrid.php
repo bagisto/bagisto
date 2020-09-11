@@ -151,7 +151,7 @@ class CartRuleDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.copy'),
             'method' => 'GET',
             'route'  => 'admin.cart-rules.copy',
-            'icon'   => 'icon note-icon',
+            'icon'   => 'icon copy-icon',
         ]);
 
         $this->addAction([
