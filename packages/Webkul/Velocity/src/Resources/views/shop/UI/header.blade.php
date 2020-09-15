@@ -1,6 +1,6 @@
 <script type="text/x-template" id="content-header-template">
     <header class="row velocity-divide-page vc-header header-shadow active">
-        <div class="vc-small-screen container" v-if="isMobile()">
+        <div d="smallscreen" class="vc-small-screen container" >
             <div class="row">
                 <div class="col-6">
                     <div v-if="hamburger" class="nav-container scrollable">

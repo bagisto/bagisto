@@ -1,9 +1,16 @@
-
 .vc-small-screen {
     display: none !important;
 }
 
 @media only screen and (max-width: 1192px) {
+    .sticky-header {
+        display: block !important;
+    }
+
+    .vc-small-screen {
+        display: none !important;
+    }
+
     .footer {
         .footer-content {
             .newsletter-subscription {
@@ -120,6 +127,12 @@
             opacity: 0.8;
             overflow: hidden;
         }
+    }
+
+    #webheader{
+        display: none !important;
+        position: fixed;
+        background-color: #fff;
     }
 
     .main-container-wrapper {
