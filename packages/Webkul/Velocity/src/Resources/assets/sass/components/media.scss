@@ -11,6 +11,10 @@
         display: none !important;
     }
 
+    #main-category {
+        display: block !important;
+    }
+
     .footer {
         .footer-content {
             .newsletter-subscription {
@@ -133,6 +137,10 @@
         display: none !important;
         position: fixed;
         background-color: #fff;
+    }
+
+    #main-category {
+        display: none !important;
     }
 
     .main-container-wrapper {
