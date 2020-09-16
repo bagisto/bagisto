@@ -222,6 +222,20 @@
                                             </span>
                                         </div>
 
+                                        @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($order->payment->method); @endphp
+
+                                        @if (! empty($additionalDetails))
+                                            <div class="row">
+                                                <span class="title">
+                                                    {{ $additionalDetails['title'] }}
+                                                </span>
+
+                                                <span class="value">
+                                                    {{ $additionalDetails['value'] }}
+                                                </span>
+                                            </div>
+                                        @endif
+
                                         {!! view_render_event('sales.order.payment-method.after', ['order' => $order]) !!}
                                     </div>
                                 </div>

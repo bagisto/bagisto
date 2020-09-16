@@ -170,6 +170,20 @@
                                             {{ $order->order_currency_code }}
                                         </span>
                                     </div>
+
+                                    @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($order->payment->method); @endphp
+
+                                    @if (! empty($additionalDetails))
+                                        <div class="row">
+                                            <span class="title">
+                                                {{ $additionalDetails['title'] }}
+                                            </span>
+
+                                            <span class="value">
+                                                {{ $additionalDetails['value'] }}
+                                            </span>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
 
