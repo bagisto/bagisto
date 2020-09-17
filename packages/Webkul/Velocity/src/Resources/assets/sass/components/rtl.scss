@@ -570,3 +570,10 @@ body {
         }
     }
 }
+
+body.rtl .payment-methods {
+    .pl40 {
+        padding-right: 40px !important;
+        padding-left: 0 !important;
+    }
+}

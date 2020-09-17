@@ -207,6 +207,15 @@
                             <tr>
                                 <td>
                                     {{ core()->getConfigData('sales.paymentmethods.' . $invoice->order->payment->method . '.title') }}
+
+                                    @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($invoice->order->payment->method); @endphp
+
+                                    @if (! empty($additionalDetails))
+                                        <div>
+                                            <label class="label">{{ $additionalDetails['title'] }}:</label>
+                                            <p class="value">{{ $additionalDetails['value'] }}</p>
+                                        </div>
+                                    @endif
                                 </td>
 
                                 @if ($invoice->order->shipping_address)
