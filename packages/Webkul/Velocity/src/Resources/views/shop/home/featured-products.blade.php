@@ -1,5 +1,8 @@
 @php
-    $count = $velocityMetaData ? $velocityMetaData->featured_product_count : 10;
+    $count = core()->getConfigData('catalog.products.homepage.no_of_featured_product_homepage');
+
+    $count = $count ? $count : 10;
+
     $direction = core()->getCurrentLocale()->direction == 'rtl' ? 'rtl' : 'ltr';
   
 @endphp
@@ -83,8 +86,8 @@
                     'getFeaturedProducts': function () {
                         this.$http.get(`${this.baseUrl}/category-details?category-slug=featured-products&count={{ $count }}`)
                         .then(response => {
-                            var count = '{{$count}}';
-                            if (response.data.status && count != 0 )
+                          
+                            if (response.data.status && response.data.products)
                             {
                                 this.featuredProducts = response.data.products;
                             }else{
@@ -100,6 +103,3 @@
                     }
                 }
             })
-        })()
-    </script>
-@endpush
