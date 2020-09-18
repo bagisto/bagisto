@@ -1,7 +1,7 @@
 @php
     $velocityHelper = app('Webkul\Velocity\Helpers\Helper');
     $velocityMetaData = $velocityHelper->getVelocityMetaData();
-    
+
     view()->share('velocityMetaData', $velocityMetaData);
 @endphp
 
@@ -30,22 +30,6 @@
         @else
             <link rel="icon" sizes="16x16" href="{{ asset('/themes/velocity/assets/images/static/v-icon.png') }}" />
         @endif
-
-        <script
-            type="text/javascript"
-            src="{{ asset('themes/velocity/assets/js/jquery.min.js') }}">
-        </script>
-
-        <script
-            type="text/javascript"
-            baseUrl="{{ url()->to('/') }}"
-            src="{{ asset('themes/velocity/assets/js/velocity.js') }}">
-        </script>
-
-        <script
-            type="text/javascript"
-            src="{{ asset('themes/velocity/assets/js/jquery.ez-plus.js') }}">
-        </script>
 
         @yield('head')
 
@@ -202,6 +186,22 @@
 
                 window._translations = @json(app('Webkul\Velocity\Helpers\Helper')->jsonTranslations());
             })();
+        </script>
+
+        <script
+            type="text/javascript"
+            src="{{ asset('themes/velocity/assets/js/jquery.min.js') }}">
+        </script>
+
+        <script
+            type="text/javascript"
+            src="{{ asset('themes/velocity/assets/js/jquery.ez-plus.js') }}">
+        </script>
+
+        <script
+            type="text/javascript"
+            baseUrl="{{ url()->to('/') }}"
+            src="{{ asset('themes/velocity/assets/js/velocity.js') }}">
         </script>
 
         <script
