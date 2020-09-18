@@ -81,7 +81,7 @@ class Install extends Command
             $this->info('Creating the environment configuration file.');
             $this->createEnvFile();
         } else {
-            $this->info('Great! your environment configuration file aready exists.');
+            $this->info('Great! your environment configuration file already exists.');
         }
     }
 
