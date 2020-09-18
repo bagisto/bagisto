@@ -93,7 +93,9 @@ class Install extends Command
         try {
             File::copy('.env.example', '.env');
             Artisan::call('key:generate');
-            $this->envUpdate('APP_URL=', 'http://localhost:8000');
+            $default_app_url =  'http://localhost:8000';
+            $input_app_url = $this->ask('Please Enter the APP URL : ');
+            $this->envUpdate('APP_URL=', $input_app_url ? $input_app_url : $default_app_url );
 
             $locale = $this->choice('Please select the default locale or press enter to continue', ['ar', 'en', 'fa', 'nl', 'pt_BR'], 1);
             $this->envUpdate('APP_LOCALE=', $locale);
