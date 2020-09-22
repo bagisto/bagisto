@@ -17,7 +17,7 @@
 
                 <div class="carousel-products vc-full-screen {{ $direction }}" v-if="!isMobileView">
                     <carousel-component
-                        slides-per-page="6"
+                        slides-per-page="{{$count}}"
                         navigation-enabled="hide"
                         pagination-enabled="hide"
                         id="fearured-products-carousel"
