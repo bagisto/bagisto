@@ -332,7 +332,7 @@ class ProductRepository extends Repository
                 ->where('product_flat.channel', $channel)
                 ->where('product_flat.locale', $locale)
                 ->inRandomOrder();
-        })->paginate($count);
+        })->paginate(isset($count) ? $count : 4);
 
         return $results;
     }
@@ -359,7 +359,7 @@ class ProductRepository extends Repository
                 ->where('product_flat.channel', $channel)
                 ->where('product_flat.locale', $locale)
                 ->inRandomOrder();
-        })->paginate($count);
+        })->paginate(isset($count) ? $count : 4);
 
         return $results;
     }
