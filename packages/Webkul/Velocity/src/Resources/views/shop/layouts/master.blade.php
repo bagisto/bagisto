@@ -19,7 +19,6 @@
 
         <link rel="stylesheet" href="{{ asset('themes/velocity/assets/css/velocity.css') }}" />
         <link rel="stylesheet" href="{{ asset('themes/velocity/assets/css/bootstrap.min.css') }}" />
-        <link rel="stylesheet" href="{{ asset('themes/velocity/assets/css/google-font.css') }}" />
 
         @if (core()->getCurrentLocale()->direction == 'rtl')
             <link href="{{ asset('themes/velocity/assets/css/bootstrap-flipped.css') }}" rel="stylesheet">
@@ -138,23 +137,18 @@
 
         <script
             type="text/javascript"
-            src="{{ asset('themes/velocity/assets/js/jquery.min.js') }}">
-        </script>
-
-        <script
-            type="text/javascript"
             baseUrl="{{ url()->to('/') }}"
             src="{{ asset('themes/velocity/assets/js/velocity.js') }}">
         </script>
 
         <script
             type="text/javascript"
-            src="{{ asset('themes/velocity/assets/js/jquery.ez-plus.js') }}">
+            src="{{ asset('themes/velocity/assets/js/jquery.ez-plus.js') }}" async>
         </script>
 
         <script
             type="text/javascript"
-            src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}">
+            src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}" async>
         </script>
 
         <script type="text/javascript">

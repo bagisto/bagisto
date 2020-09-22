@@ -165,8 +165,8 @@
         </div>
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet" async></script>
 
     <script type="text/x-template" id="image-search-component-template">
         <div class="d-inline-block">
