@@ -157,12 +157,14 @@ return [
             [
                 'name'  => 'no_of_new_product_homepage',
                 'title' => 'admin::app.admin.system.allow-no-of-new-product-homepage',
-                'type'  => 'text',
+                'type'  => 'number',
+                'validation'    => 'required|min:0',
             ],
             [
                 'name'  => 'no_of_featured_product_homepage',
                 'title' => 'admin::app.admin.system.allow-no-of-featured-product-homepage',
-                'type'  => 'text',
+                'type'  => 'number',
+                'validation'    => 'required|min:0',
             ],
         ],
     ], [
