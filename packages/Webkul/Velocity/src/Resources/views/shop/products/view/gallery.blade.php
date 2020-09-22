@@ -26,44 +26,44 @@
 
 {!! view_render_event('bagisto.shop.products.view.gallery.after', ['product' => $product]) !!}
 
-<script type="text/x-template" id="product-gallery-template">
-    <ul class="thumb-list col-12 row ltr" type="none">
-        <li class="arrow left" @click="scroll('prev')" v-if="thumbs.length > 4">
-            <i class="rango-arrow-left fs24"></i>
-        </li>
-
-        <carousel-component
-            slides-per-page="4"
-            :id="galleryCarouselId"
-            pagination-enabled="hide"
-            navigation-enabled="hide"
-            add-class="product-gallery"
-            :slides-count="thumbs.length">
-
-            <slide :slot="`slide-${index}`" v-for="(thumb, index) in thumbs">
-                <li
-                    @click="changeImage({
-                        largeImageUrl: thumb.large_image_url,
-                        originalImageUrl: thumb.original_image_url,
-                    })"
-                    :class="`thumb-frame ${index + 1 == 4 ? '' : 'mr5'} ${thumb.large_image_url == currentLargeImageUrl ? 'active' : ''}`"
-                    >
-
-                    <div
-                        class="bg-image"
-                        :style="`background-image: url(${thumb.small_image_url})`">
-                    </div>
-                </li>
-            </slide>
-        </carousel-component>
-
-        <li class="arrow right" @click="scroll('next')" v-if="thumbs.length > 4">
-            <i class="rango-arrow-right fs24"></i>
-        </li>
-    </ul>
-</script>
-
 @push('scripts')
+    <script type="text/x-template" id="product-gallery-template">
+        <ul class="thumb-list col-12 row ltr" type="none">
+            <li class="arrow left" @click="scroll('prev')" v-if="thumbs.length > 4">
+                <i class="rango-arrow-left fs24"></i>
+            </li>
+
+            <carousel-component
+                slides-per-page="4"
+                :id="galleryCarouselId"
+                pagination-enabled="hide"
+                navigation-enabled="hide"
+                add-class="product-gallery"
+                :slides-count="thumbs.length">
+
+                <slide :slot="`slide-${index}`" v-for="(thumb, index) in thumbs">
+                    <li
+                        @click="changeImage({
+                            largeImageUrl: thumb.large_image_url,
+                            originalImageUrl: thumb.original_image_url,
+                        })"
+                        :class="`thumb-frame ${index + 1 == 4 ? '' : 'mr5'} ${thumb.large_image_url == currentLargeImageUrl ? 'active' : ''}`"
+                        >
+
+                        <div
+                            class="bg-image"
+                            :style="`background-image: url(${thumb.small_image_url})`">
+                        </div>
+                    </li>
+                </slide>
+            </carousel-component>
+
+            <li class="arrow right" @click="scroll('next')" v-if="thumbs.length > 4">
+                <i class="rango-arrow-right fs24"></i>
+            </li>
+        </ul>
+    </script>
+
     <script type="text/javascript">
         (() => {
             var galleryImages = @json($images);
