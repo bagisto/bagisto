@@ -1252,8 +1252,8 @@ return [
         'system' => [
             'catalog' => 'Catalog',
             'homepage' => 'Homepage configuration',
-            'allow-no-of-new-product-homepage' => 'Allowed No of New Product in homepage',
-            'allow-no-of-featured-product-homepage' => 'Allowed No of Featured in Product homepage',
+            'allow-no-of-new-product-homepage' => 'Allowed No of New Product in Homepage',
+            'allow-no-of-featured-product-homepage' => 'Allowed No of Featured in Product Homepage',
             'products' => 'Products',
             'guest-checkout' => 'Guest Checkout',
             'allow-guest-checkout' => 'Allow Guest Checkout',
