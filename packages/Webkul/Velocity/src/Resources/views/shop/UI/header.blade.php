@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <script type="text/x-template" id="content-header-template">
     <header class="row velocity-divide-page vc-header header-shadow active">
         <div class="vc-small-screen container" >
@@ -13,6 +14,24 @@
                                         {{ __('velocity::app.responsive.header.greeting', ['customer' => 'Guest']) }}
                                         </a>
                                     @endguest
+=======
+@push('scripts')
+    <script type="text/x-template" id="content-header-template">
+        <header class="row velocity-divide-page vc-header header-shadow active">
+            <div class="vc-small-screen container" v-if="isMobile()">
+                <div class="row">
+                    <div class="col-6">
+                        <div v-if="hamburger" class="nav-container scrollable">
+                            <div class="wrapper" v-if="this.rootCategories">
+                                <div class="greeting drawer-section fw6">
+                                    <i class="material-icons">perm_identity</i>
+                                    <span>
+                                        @guest('customer')
+                                            <a class="unset" href="{{ route('customer.session.index') }}">
+                                            {{ __('velocity::app.responsive.header.greeting', ['customer' => 'Guest']) }}
+                                            </a>
+                                        @endguest
+>>>>>>> master
 
                                         @auth('customer')
                                             <a class="unset" href="{{ route('customer.profile.index') }}">
@@ -79,6 +98,7 @@
                                         <i class="rango-arrow-right" @click="toggleSubcategories(index, $event)"></i>
                                     </li>
                                 </ul>
+<<<<<<< HEAD
 
                                 @auth('customer')
                                     <ul type="none" class="vc-customer-options">
@@ -110,6 +130,39 @@
                                             </a>
                                         </li>
 
+=======
+
+                                @auth('customer')
+                                    <ul type="none" class="vc-customer-options">
+                                        <li>
+                                            <a href="{{ route('customer.profile.index') }}" class="unset">
+                                                <i class="icon profile text-down-3"></i>
+                                                <span>{{ __('shop::app.header.profile') }}</span>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="{{ route('customer.address.index') }}" class="unset">
+                                                <i class="icon address text-down-3"></i>
+                                                <span>{{ __('velocity::app.shop.general.addresses') }}</span>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="{{ route('customer.reviews.index') }}" class="unset">
+                                                <i class="icon reviews text-down-3"></i>
+                                                <span>{{ __('velocity::app.shop.general.reviews') }}</span>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="{{ route('customer.wishlist.index') }}" class="unset">
+                                                <i class="icon wishlist text-down-3"></i>
+                                                <span>{{ __('shop::app.header.wishlist') }}</span>
+                                            </a>
+                                        </li>
+
+>>>>>>> master
                                         <li>
                                             <a href="{{ route('customer.orders.index') }}" class="unset">
                                                 <i class="icon orders text-down-3"></i>
@@ -382,6 +435,7 @@
                     @mouseover="toggleSidebar('0', $event, 'mouseover')">
                 </span>
             </div>
+<<<<<<< HEAD
         </div>
 
         <div
@@ -413,6 +467,24 @@
         </div>
     </header>
 </script>
+=======
+
+            <div class="content-list right">
+                <ul type="none" class="no-margin">
+                    <li v-for="(content, index) in headerContent" :key="index">
+                        <a
+                            v-text="content.title"
+                            :href="`${$root.baseUrl}/${content['page_link']}`"
+                            v-if="(content['content_type'] == 'link' || content['content_type'] == 'category')"
+                            :target="content['link_target'] ? '_blank' : '_self'">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+    </script>
+@endpush
+>>>>>>> master
 
 @php
     $cart = cart()->getCart();
