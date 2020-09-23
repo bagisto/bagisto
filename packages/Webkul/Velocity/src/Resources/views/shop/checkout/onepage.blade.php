@@ -67,6 +67,7 @@
                                         class="theme-btn"
                                         @click="placeOrder()"
                                         :disabled="!isPlaceOrderEnabled"
+                                        v-if="selected_payment_method.method != 'paypal_smart_button'"
                                         id="checkout-place-order-button">
                                         {{ __('shop::app.checkout.onepage.place-order') }}
                                     </button>
@@ -78,6 +79,8 @@
 
                 <div class="col-lg-4 col-md-12 offset-lg-1 order-summary-container top pt0">
                     <summary-section :key="summeryComponentKey"></summary-section>
+
+                    <div class="paypal-button-container mt10"></div>
                 </div>
             </div>
         </div>
@@ -584,7 +587,7 @@
 
                         this.$emit('onShippingMethodSelected', this.selected_shipping_method)
 
-                        eventBus.$emit('after-shipping-method-selected');
+                        eventBus.$emit('after-shipping-method-selected', this.selected_shipping_method);
                     }
                 }
             })
@@ -630,7 +633,7 @@
 
                         this.$emit('onPaymentMethodSelected', this.payment)
 
-                        eventBus.$emit('after-payment-method-selected');
+                        eventBus.$emit('after-payment-method-selected', this.payment);
                     }
                 }
             })

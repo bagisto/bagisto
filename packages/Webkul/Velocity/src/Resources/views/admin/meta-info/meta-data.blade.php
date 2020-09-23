@@ -105,30 +105,9 @@
                             value="{{ $metaData ? $metaData->header_content_count : '5' }}" />
                     </div>
 
-                    <div class="control-group">
-                        <label>{{ __('shop::app.home.featured-products') }}</label>
+                  
 
-                        <input
-                            type="number"
-                            min="0"
-                            class="control"
-                            id="featured_product_count"
-                            name="featured_product_count"
-                            value="{{ $metaData ? $metaData->featured_product_count : 10 }}" />
-                    </div>
-
-                    <div class="control-group">
-                        <label>{{ __('shop::app.home.new-products') }}</label>
-
-                        <input
-                            type="number"
-                            min="0"
-                            class="control"
-                            id="new_products_count"
-                            name="new_products_count"
-                            value="{{ $metaData ? $metaData->new_products_count : 10 }}" />
-                    </div>
-
+                  
                     <div class="control-group">
                         <label style="width:100%;">
                             {{ __('velocity::app.admin.meta-data.home-page-content') }}

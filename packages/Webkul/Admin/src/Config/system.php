@@ -150,6 +150,24 @@ return [
             ],
         ],
     ], [
+        'key'    => 'catalog.products.homepage',
+        'name'   => 'admin::app.admin.system.homepage',
+        'sort'   => 2,
+        'fields' => [
+            [
+                'name'  => 'no_of_new_product_homepage',
+                'title' => 'admin::app.admin.system.allow-no-of-new-product-homepage',
+                'type'  => 'number',
+                'validation'    => 'required|min:0',
+            ],
+            [
+                'name'  => 'no_of_featured_product_homepage',
+                'title' => 'admin::app.admin.system.allow-no-of-featured-product-homepage',
+                'type'  => 'number',
+                'validation'    => 'required|min:0',
+            ],
+        ],
+    ], [
         'key'    => 'catalog.products.storefront',
         'name'   => 'admin::app.admin.system.storefront',
         'sort'   => 2,

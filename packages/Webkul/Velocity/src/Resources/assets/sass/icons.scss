@@ -6,6 +6,13 @@
     background-image: url("../images/Icon-Velocity.svg");
 }
 
+.camera-icon {
+    background-image: url("../images/Camera.svg");
+    width: 24px;
+    display: inline-block;
+    background-size: cover;
+}
+
 .router-link-active,
 .active {
     .velocity-icon {

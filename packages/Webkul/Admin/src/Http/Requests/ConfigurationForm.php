@@ -70,6 +70,14 @@ class ConfigurationForm extends FormRequest
             ]);
         }
 
+        if (request()->has('sales.orderSettings.invoice_slip_design.logo')
+            && ! request()->input('sales.orderSettings.invoice_slip_design.logo.delete')
+        ) {
+            $this->rules = array_merge($this->rules, [
+                'sales.orderSettings.invoice_slip_design.logo'  => 'required|mimes:jpeg,bmp,png,jpg|max:5000',
+            ]);
+        }
+
         return $this->rules;
     }
 
@@ -93,7 +101,8 @@ class ConfigurationForm extends FormRequest
     {
         return [
             'general.design.admin_logo.logo_image' => 'Logo Image',
-            'general.design.admin_logo.favicon' => 'Favicon Image'
+            'general.design.admin_logo.favicon' => 'Favicon Image',
+            'sales.orderSettings.invoice_slip_design.logo' => 'Invoice Logo'
         ];
     }
 }
