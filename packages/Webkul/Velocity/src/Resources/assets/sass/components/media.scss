@@ -7,6 +7,10 @@
         display: block !important;
     }
 
+    .vc-full-screen{
+        display: block !important;
+    }
+
     .vc-small-screen {
         display: none !important;
     }
@@ -141,6 +145,10 @@
 
     .main-container-wrapper {
         // position: relative;
+    }
+
+    .vc-full-screen{
+        display: none !important;
     }
 
     .vc-small-screen {
