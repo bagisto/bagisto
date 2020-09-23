@@ -1251,6 +1251,9 @@ return [
         ],
         'system' => [
             'catalog' => 'Catalog',
+            'homepage' => 'Homepage configuration',
+            'allow-no-of-new-product-homepage' => 'Allowed No of New Product in Homepage',
+            'allow-no-of-featured-product-homepage' => 'Allowed No of Featured Product in Homepage',
             'products' => 'Products',
             'guest-checkout' => 'Guest Checkout',
             'allow-guest-checkout' => 'Allow Guest Checkout',
@@ -1359,7 +1362,10 @@ return [
             'instructions' => 'Instructions',
             'custom-scripts' => 'Custom Scripts',
             'custom-css' => 'Custom CSS',
-            'custom-javascript' => 'Custom Javascript'
+            'custom-javascript' => 'Custom Javascript',
+            'paypal-smart-button' => 'Paypal Smart Button',
+            'client-id' => 'Client Id',
+            'client-id-info' => 'Use "sb" for testing.'
        ]
     ]
 ];

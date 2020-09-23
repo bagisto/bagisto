@@ -3,6 +3,10 @@
 
 @php
     $images = $productImageHelper->getGalleryImages($product);
+
+    if (! count($images)) {
+        $images[0] = $productImageHelper->getProductBaseImage($product);
+    }
 @endphp
 
 {!! view_render_event('bagisto.shop.products.view.gallery.before', ['product' => $product]) !!}
