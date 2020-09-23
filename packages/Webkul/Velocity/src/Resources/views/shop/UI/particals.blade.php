@@ -107,7 +107,7 @@
                                     type="search"
                                     class="form-control"
                                     placeholder="{{ __('velocity::app.header.search-text') }}"
-                                    value="" />
+                                    :value="" />
 
                                 <image-search-component></image-search-component>
 
