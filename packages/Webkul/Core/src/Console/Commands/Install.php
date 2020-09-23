@@ -38,7 +38,7 @@ class Install extends Command
     public function handle()
     {
         $this->checkForEnvFile();
-
+        sleep(3);
         // running `php artisan migrate`
         $this->warn('Step: Migrating all tables into database...');
         $migrate = $this->call('migrate:fresh');
