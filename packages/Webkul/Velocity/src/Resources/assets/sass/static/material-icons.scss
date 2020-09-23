@@ -3,38 +3,47 @@
     font-family: 'Material Icons';
     font-style: normal;
     font-weight: 400;
+    font-display: swap;
     src: url(https://fonts.gstatic.com/s/materialicons/v48/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
-  }
-  /* fallback */
-  @font-face {
+}
+
+/* fallback */
+@font-face {
     font-family: 'Material Icons Outlined';
     font-style: normal;
     font-weight: 400;
+    font-display: swap;
     src: url(https://fonts.gstatic.com/s/materialiconsoutlined/v14/gok-H7zzDkdnRel8-DQ6KAXJ69wP1tGnf4ZGhUce.woff2) format('woff2');
-  }
-  /* fallback */
-  @font-face {
+}
+
+/* fallback */
+@font-face {
     font-family: 'Material Icons Round';
     font-style: normal;
     font-weight: 400;
+    font-display: swap;
     src: url(https://fonts.gstatic.com/s/materialiconsround/v14/LDItaoyNOAY6Uewc665JcIzCKsKc_M9flwmP.woff2) format('woff2');
-  }
-  /* fallback */
-  @font-face {
+}
+
+/* fallback */
+@font-face {
     font-family: 'Material Icons Sharp';
     font-style: normal;
     font-weight: 400;
+    font-display: swap;
     src: url(https://fonts.gstatic.com/s/materialiconssharp/v15/oPWQ_lt5nv4pWNJpghLP75WiFR4kLh3kvmvR.woff2) format('woff2');
-  }
-  /* fallback */
-  @font-face {
+}
+
+/* fallback */
+@font-face {
     font-family: 'Material Icons Two Tone';
     font-style: normal;
     font-weight: 400;
+    font-display: swap;
     src: url(https://fonts.gstatic.com/s/materialiconstwotone/v13/hESh6WRmNCxEqUmNyh3JDeGxjVVyMg4tHGctNCu0.woff2) format('woff2');
-  }
+}
 
-  .material-icons {
+.material-icons {
     font-family: 'Material Icons';
     font-weight: normal;
     font-style: normal;
@@ -48,9 +57,9 @@
     direction: ltr;
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
-  }
+}
 
-  .material-icons-outlined {
+.material-icons-outlined {
     font-family: 'Material Icons Outlined';
     font-weight: normal;
     font-style: normal;
@@ -64,9 +73,9 @@
     direction: ltr;
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
-  }
+}
 
-  .material-icons-round {
+.material-icons-round {
     font-family: 'Material Icons Round';
     font-weight: normal;
     font-style: normal;
@@ -80,9 +89,9 @@
     direction: ltr;
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
-  }
+}
 
-  .material-icons-sharp {
+.material-icons-sharp {
     font-family: 'Material Icons Sharp';
     font-weight: normal;
     font-style: normal;
@@ -96,9 +105,9 @@
     direction: ltr;
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
-  }
+}
 
-  .material-icons-two-tone {
+.material-icons-two-tone {
     font-family: 'Material Icons Two Tone';
     font-weight: normal;
     font-style: normal;
@@ -112,4 +121,4 @@
     direction: ltr;
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
-  }
+}
