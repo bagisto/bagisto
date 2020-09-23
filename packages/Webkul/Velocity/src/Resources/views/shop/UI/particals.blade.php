@@ -17,8 +17,6 @@
         </button>
     </script>
 
-    
-
     <script type="text/x-template" id="close-btn-template">
         <button type="button" class="close disable-box-shadow">
             <span class="white-text fs20" @click="togglePopup">×</span>
@@ -110,7 +108,6 @@
                                 class="form-control"
                                 placeholder="{{ __('velocity::app.header.search-text') }}"
                                 value="" />
-
 
                                 <image-search-component></image-search-component>
 
