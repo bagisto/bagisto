@@ -5,11 +5,14 @@ namespace Webkul\Velocity\Repositories\Product;
 use Webkul\Core\Eloquent\Repository;
 use Illuminate\Container\Container as App;
 use Webkul\Product\Models\ProductAttributeValue;
+use Prettus\Repository\Traits\CacheableRepository;
 use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 
 class ProductRepository extends Repository
 {
+    use CacheableRepository;
+
      /**
      * AttributeRepository object
      *
