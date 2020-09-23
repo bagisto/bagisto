@@ -17,6 +17,8 @@
         </button>
     </script>
 
+    
+
     <script type="text/x-template" id="close-btn-template">
         <button type="button" class="close disable-box-shadow">
             <span class="white-text fs20" @click="togglePopup">×</span>
