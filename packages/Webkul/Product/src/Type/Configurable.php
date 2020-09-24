@@ -531,15 +531,11 @@ class Configurable extends AbstractType
                 $product = $item->product;
             }
         } else {
-            if ($item instanceof \Webkul\Customer\Contracts\CartItem) {
+            if (count($item->child->product->images)) {
                 $product = $item->child->product;
-            } else {
-                if (count($item->child->product->images)) {
-                    $product = $item->child->product;
-                }
-                else {
-                    $product = $item->product;
-                } 
+            }
+            else {
+                $product = $item->product;
             }
         }
 
