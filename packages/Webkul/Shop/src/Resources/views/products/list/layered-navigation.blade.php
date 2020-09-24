@@ -20,9 +20,28 @@
         $filterAttributes = $attributeRepository->getFilterAttributes();
     }
 
+    $allProductAttributeOptionsCode = [];
+
+    foreach ($products as $key => $product) {
+        foreach ($filterAttributes as $attribute) {
+            if ($attribute->code <> 'price') {
+                if (isset($product[$attribute->code])) {
+                    if (! in_array($product[$attribute->code], $allProductAttributeOptionsCode)) {
+                        array_push($allProductAttributeOptionsCode, $product[$attribute->code]);
+                    }
+                }
+            }
+        }
+    }
+
     foreach ($filterAttributes as $attribute) {
         if ($attribute->code <> 'price') {
             if (! $attribute->options->isEmpty()) {
+                foreach ($attribute->options as $key => $option) {
+                    if (! in_array($option->id, $allProductAttributeOptionsCode)) {
+                        unset($attribute->options[$key]);
+                    }
+                }
                 $attributes[] = $attribute;
             }
         } else {
