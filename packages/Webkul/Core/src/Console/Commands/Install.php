@@ -38,25 +38,25 @@ class Install extends Command
     public function handle()
     {
         $this->checkForEnvFile();
-
+        sleep(3);
         // running `php artisan migrate`
         $this->warn('Step: Migrating all tables into database...');
-        $migrate = shell_exec('php artisan migrate:fresh');
+        $migrate = $this->call('migrate:fresh');
         $this->info($migrate);
 
         // running `php artisan db:seed`
         $this->warn('Step: seeding basic data for bagisto kickstart...');
-        $result = shell_exec('php artisan db:seed');
+        $result = $this->call('db:seed');
         $this->info($result);
 
         // running `php artisan vendor:publish --all`
         $this->warn('Step: Publishing Assets and Configurations...');
-        $result = shell_exec('php artisan vendor:publish --all');
+        $result = $this->call('vendor:publish', ['--all']);
         $this->info($result);
 
         // running `php artisan storage:link`
         $this->warn('Step: Linking Storage directory...');
-        $result = shell_exec('php artisan storage:link');
+        $result = $this->call('storage:link');
         $this->info($result);
 
         // running `composer dump-autoload`
@@ -66,11 +66,15 @@ class Install extends Command
 
         // cached new changes
         $this->warn('Step: Caching new changes...');
-        $cached = shell_exec('php artisan config:cache');
+        $cached = $this->call('config:cache');
         $this->info($cached);
 
         $this->info('-----------------------------');
-        $this->info('Now, run `php artisan serve` to start using Bagisto');
+        $this->info('Congratulations!');
+        $this->info('The installation has been finished and you can now use Bagisto.');
+        $this->info('Go to https://your-site/admin and authenticate with:');
+        $this->info('Email: admin@example.com');
+        $this->info('Password: admin123');
         $this->info('Cheers!');
     }
 
