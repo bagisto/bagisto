@@ -34,7 +34,7 @@
             }
 
             a {
-                background-color: #fff;
+                background-color: transparent;
                 -webkit-text-decoration-skip: objects;
             }
 
