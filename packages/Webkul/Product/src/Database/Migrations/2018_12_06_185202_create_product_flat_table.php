@@ -33,6 +33,8 @@ class CreateProductFlatTable extends Migration
             $table->decimal('weight', 12, 4)->nullable();
             $table->integer('color')->nullable();
             $table->string('color_label')->nullable();
+            $table->integer('brand')->nullable();
+            $table->string('brand_label')->nullable();
             $table->integer('size')->nullable();
             $table->integer('size_label')->nullable();
 
