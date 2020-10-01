@@ -95,7 +95,7 @@ class CustomerController extends Controller
         Event::dispatch('customer.registration.after', $customer);
 
         return response()->json([
-            'message' => 'Your account has been created successfully.',
+            'message' => __('api_customer.create_success'),
         ]);
     }
 
@@ -114,7 +114,7 @@ class CustomerController extends Controller
         }
 
         return response()->json([
-            'message' => 'Invalid Request.',
+            'message' => __('api_customer.error_invalid_request'),
         ], 403);
     }
 }
