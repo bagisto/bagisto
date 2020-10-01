@@ -118,7 +118,7 @@ class SessionController extends Controller
         $this->customerRepository->update($data, $customer->id);
 
         return response()->json([
-            'message' => 'Your account has been created successfully.',
+            'message' => 'Your account has been updated successfully.',
             'data'    => new CustomerResource($this->customerRepository->find($customer->id)),
         ]);
     }
