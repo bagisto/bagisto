@@ -38,25 +38,25 @@ class Install extends Command
     public function handle()
     {
         $this->checkForEnvFile();
-
+        sleep(3);
         // running `php artisan migrate`
         $this->warn('Step: Migrating all tables into database...');
-        $migrate = shell_exec('php artisan migrate:fresh');
+        $migrate = $this->call('migrate:fresh');
         $this->info($migrate);
 
         // running `php artisan db:seed`
         $this->warn('Step: seeding basic data for bagisto kickstart...');
-        $result = shell_exec('php artisan db:seed');
+        $result = $this->call('db:seed');
         $this->info($result);
 
         // running `php artisan vendor:publish --all`
         $this->warn('Step: Publishing Assets and Configurations...');
-        $result = shell_exec('php artisan vendor:publish --all');
+        $result = $this->call('vendor:publish', ['--all']);
         $this->info($result);
 
         // running `php artisan storage:link`
         $this->warn('Step: Linking Storage directory...');
-        $result = shell_exec('php artisan storage:link');
+        $result = $this->call('storage:link');
         $this->info($result);
 
         // running `composer dump-autoload`
@@ -64,8 +64,17 @@ class Install extends Command
         $result = shell_exec('composer dump-autoload');
         $this->info($result);
 
+        // cached new changes
+        $this->warn('Step: Caching new changes...');
+        $cached = $this->call('config:cache');
+        $this->info($cached);
+
         $this->info('-----------------------------');
-        $this->info('Now, run `php artisan serve` to start using Bagisto');
+        $this->info('Congratulations!');
+        $this->info('The installation has been finished and you can now use Bagisto.');
+        $this->info('Go to https://your-site/admin and authenticate with:');
+        $this->info('Email: admin@example.com');
+        $this->info('Password: admin123');
         $this->info('Cheers!');
     }
 
@@ -81,7 +90,7 @@ class Install extends Command
             $this->info('Creating the environment configuration file.');
             $this->createEnvFile();
         } else {
-            $this->info('Great! your environment configuration file aready exists.');
+            $this->info('Great! your environment configuration file already exists.');
         }
     }
 
@@ -93,11 +102,13 @@ class Install extends Command
         try {
             File::copy('.env.example', '.env');
             Artisan::call('key:generate');
-            $this->envUpdate('APP_URL=', 'http://localhost:8000');
+            $default_app_url =  'http://localhost:8000';
+            $input_app_url = $this->ask('Please Enter the APP URL : ');
+            $this->envUpdate('APP_URL=', $input_app_url ? $input_app_url : $default_app_url );
 
             $locale = $this->choice('Please select the default locale or press enter to continue', ['ar', 'en', 'fa', 'nl', 'pt_BR'], 1);
             $this->envUpdate('APP_LOCALE=', $locale);
-    
+
             $TimeZones = timezone_identifiers_list();
             $timezone = $this->anticipate('Please enter the default timezone', $TimeZones, date_default_timezone_get());
             $this->envUpdate('APP_TIMEZONE=', $timezone);
@@ -134,7 +145,7 @@ class Install extends Command
         $path = base_path() . '/.env';
         $data = file($path);
         $keyValueData = $changedData = [];
-         
+
         if ($data) {
             foreach ($data as $line) {
                 $line = preg_replace('/\s+/', '', $line);
@@ -146,7 +157,7 @@ class Install extends Command
                     if (strpos($key, $rowValues[0]) !== false) {
                         $keyValueData[$rowValues[0]] = $value;
                     }
-                }               
+                }
             }
         }
 

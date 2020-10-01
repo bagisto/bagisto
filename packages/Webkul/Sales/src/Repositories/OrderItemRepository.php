@@ -4,6 +4,7 @@ namespace Webkul\Sales\Repositories;
 
 use Illuminate\Container\Container as App;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Log;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Sales\Contracts\OrderItem;
 
@@ -115,22 +116,39 @@ class OrderItemRepository extends Repository
                 continue;
             }
 
-            $orderedInventory = $item->product->ordered_inventories()
-                                              ->where('channel_id', $orderItem->order->channel_id)
-                                              ->first();
+            if ($item->product->inventories->count() > 0) {
 
-            $qty = $item->qty_ordered ?: $item->parent->qty_ordered;
+                $orderedInventory = $item->product->ordered_inventories()
+                    ->where('channel_id', $orderItem->order->channel_id)
+                    ->first();
 
-            if ($orderedInventory) {
-                $orderedInventory->update([
-                    'qty' => $orderedInventory->qty + $qty,
-                ]);
-            } else {
-                $item->product->ordered_inventories()->create([
-                    'qty'        => $qty,
-                    'product_id' => $item->product_id,
-                    'channel_id' => $orderItem->order->channel->id,
-                ]);
+                if (isset($item->qty_ordered)) {
+                    $qty = $item->qty_ordered;
+                } else {
+                    Log::info('OrderItem has no qty_ordered', ['orderItem' => $item, 'product' => $item->product]);
+                    if (isset($item->parent->qty_ordered)) {
+                        $qty = $item->parent->qty_ordered;
+                    } else {
+                        Log::info('OrderItem has no parent with qty_ordered', [
+                            'orderItem' => $item,
+                            'parent' => $item->parent,
+                            'product' => $item->product
+                        ]);
+                        $qty = 1;
+                    }
+                }
+
+                if ($orderedInventory) {
+                    $orderedInventory->update([
+                        'qty' => $orderedInventory->qty + $qty,
+                    ]);
+                } else {
+                    $item->product->ordered_inventories()->create([
+                        'qty'        => $qty,
+                        'product_id' => $item->product_id,
+                        'channel_id' => $orderItem->order->channel->id,
+                    ]);
+                }
             }
         }
     }

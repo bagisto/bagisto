@@ -88,9 +88,11 @@
                     </review-section>
 
                     <div class="button-group">
-                        <button type="button" class="btn btn-lg btn-primary" @click="placeOrder()" :disabled="disable_button" id="checkout-place-order-button">
+                        <button type="button" class="btn btn-lg btn-primary" @click="placeOrder()" :disabled="disable_button" id="checkout-place-order-button" v-if="selected_payment_method.method != 'paypal_smart_button'">
                             {{ __('shop::app.checkout.onepage.place-order') }}
                         </button>
+
+                        <div class="paypal-button-container"></div>
                     </div>
                 </div>
             </div>
@@ -482,7 +484,7 @@
                 methodSelected: function() {
                     this.$emit('onShippingMethodSelected', this.selected_shipping_method)
 
-                    eventBus.$emit('after-shipping-method-selected');
+                    eventBus.$emit('after-shipping-method-selected', this.selected_shipping_method);
                 }
             }
         })
@@ -535,7 +537,7 @@
                 methodSelected: function() {
                     this.$emit('onPaymentMethodSelected', this.payment)
 
-                    eventBus.$emit('after-payment-method-selected');
+                    eventBus.$emit('after-payment-method-selected', this.payment);
                 }
             }
         })
