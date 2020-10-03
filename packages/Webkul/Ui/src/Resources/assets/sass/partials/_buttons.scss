@@ -1,0 +1,79 @@
+.btn {
+    @include box-shadow(
+        0 1px 4px 0 rgba(0, 0, 0, 0.2),
+        0 0 8px 0 rgba(0, 0, 0, 0.1)
+    );
+    @include border-radius(3px);
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font: inherit;
+    display: inline-block;
+
+    &:hover,
+    &:active,
+    &:focus {
+        opacity: 0.75;
+        border: none;
+    }
+
+    &.btn-sm {
+        padding: 6px 12px;
+    }
+    &.btn-md {
+        padding: 8px 16px;
+    }
+    &.btn-lg {
+        padding: 10px 20px;
+    }
+    &.btn-xl {
+        padding: 12px 24px;
+        font-size: 16px;
+    }
+
+    &.btn-red {
+        background: $color-red !important;
+        color: $color-white;
+    }
+
+    &.btn-primary {
+        background: $brand-color;
+        color: $color-white;
+    }
+
+    &.btn-secondary {
+        background: #E7E7E7;
+        color: #000;        
+    }
+
+    &.btn-yellow {
+        background: $warning-color !important;
+        color: $color-white;
+    }
+
+    &.btn-black {
+        background: #000;
+        color: $color-white;
+    }
+
+    &.btn-green {
+        background: $success-color;
+        color: $color-white;
+    }
+
+    &.btn-white {
+        background: $color-white;
+        color: #000;
+    }
+
+    &:disabled,
+    &[disabled="disabled"],
+    &[disabled="disabled"]:hover,
+    &[disabled="disabled"]:active {
+        cursor: not-allowed;
+        background: #b1b1ae;
+        box-shadow: none;
+        opacity: 1;
+    }
+}

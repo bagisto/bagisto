@@ -1,9 +1,14 @@
 // Icon scss
-@import "icons";
 @import "variables";
-@import "components";
-@import "mixins";
-@import "animations";
+
+@import "partials/icons";
+@import "partials/components";
+@import "partials/mixins";
+@import "partials/animations";
+
+@import "partials/buttons";
+@import "partials/table";
+@import "partials/pagination";
 
 * {
     box-sizing: border-box;
@@ -191,70 +196,11 @@ h5 {
     align-items: center;
 }
 
-.btn {
-    @include box-shadow(
-        0 1px 4px 0 rgba(0, 0, 0, 0.2),
-        0 0 8px 0 rgba(0, 0, 0, 0.1)
-    );
-    @include border-radius(3px);
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    font: inherit;
-    display: inline-block;
-
-    &:hover,
-    &:active,
-    &:focus {
-        opacity: 0.75;
-        border: none;
-    }
-
-    &.btn-sm {
-        padding: 6px 12px;
-    }
-    &.btn-md {
-        padding: 8px 16px;
-    }
-    &.btn-lg {
-        padding: 10px 20px;
-    }
-    &.btn-xl {
-        padding: 12px 24px;
-        font-size: 16px;
-    }
-
-    &.btn-primary {
-        background: $brand-color;
-        color: #ffffff;
-    }
-
-    &.btn-black {
-        background: #000;
-        color: #ffffff;
-    }
-
-    &.btn-white {
-        background: #ffffff;
-        color: #000;
-    }
-
-    &:disabled,
-    &[disabled="disabled"],
-    &[disabled="disabled"]:hover,
-    &[disabled="disabled"]:active {
-        cursor: not-allowed;
-        background: #b1b1ae;
-        box-shadow: none;
-        opacity: 1;
-    }
-}
 
 .dropdown-btn {
     min-width: 150px;
     text-align: left;
-    background: #ffffff;
+    background: $color-white;
     border: 2px solid $control-border-color;
     @include border-radius(3px);
     font-size: 14px;
@@ -293,7 +239,7 @@ h5 {
         0 0 9px 0 rgba(0, 0, 0, 0.16)
     );
     @include border-radius(3px);
-    background-color: #ffffff;
+    background-color: $color-white;
     position: absolute;
     display: none;
     z-index: 10;
@@ -425,96 +371,11 @@ h5 {
     }
 }
 
-.table {
-    width: 100%;
-    // overflow-x: auto !important;
-
-    table {
-        border-collapse: collapse;
-        text-align: left;
-        width: 100%;
-
-        thead th {
-            font-weight: 700;
-            padding: 12px 10px;
-            background: #f8f9fa;
-            color: $font-color;
-        }
-
-        tbody td {
-            padding: 10px;
-            border-bottom: solid 1px #d3d3d3;
-            color: $font-color;
-            vertical-align: top;
-
-            &.actions {
-
-                .action {
-                    display: inline-flex;
-                }
-
-                .icon {
-                    cursor: pointer;
-                    vertical-align: middle;
-                }
-            }
-
-            &.empty {
-                text-align: center;
-            }
-        }
-
-        tbody tr:last-child td {
-            border-bottom: none;
-        }
-    }
-
-    .control-group {
-        width: 100%;
-        margin-bottom: 0;
-        min-width: 140px;
-
-        .control {
-            width: 100%;
-            margin: 0;
-        }
-    }
-}
-
-.pagination {
-    .page-item {
-        background: #ffffff;
-        border: 2px solid $control-border-color;
-        @include border-radius(3px);
-        padding: 7px 14px;
-        margin-right: 5px;
-        font-size: 16px;
-        display: inline-block;
-        color: #8e8e8e;
-        vertical-align: middle;
-        text-decoration: none;
-
-        &.previous,
-        &.next {
-            padding: 6px 9px;
-        }
-
-        &.active {
-            background: #0041ff;
-            color: #fff;
-            border-color: #0041ff;
-        }
-
-        .icon {
-            vertical-align: middle;
-            margin-bottom: 3px;
-        }
-    }
-}
 
 .checkbox {
     position: relative;
     display: block;
+    padding-bottom: 10px;
     // vertical-align: middle;
 
     input {
@@ -700,21 +561,6 @@ h5 {
     }
 }
 
-.table {
-    .control-group {
-        &.date, &.datetime {
-            &::after {
-                top: 6px;
-                left: unset;
-            }
-
-            .cross-icon {
-                top: 10px;
-            }
-        }
-    }
-}
-
 .rtl {
     .control-group {
         &.date, &.datetime {
@@ -866,7 +712,7 @@ h5 {
         }
 
         p {
-            color: #ffffff;
+            color: $color-white;
             margin: 0px;
             padding: 0px;
             font-size: 15px;
@@ -1044,7 +890,7 @@ modal {
 }
 
 .modal-container {
-    background: #ffffff;
+    background: $color-white;
     top: 100px;
     width: 600px;
     max-width: 80%;

@@ -1,0 +1,30 @@
+.pagination {
+    .page-item {
+        background: $color-white;
+        border: 2px solid $control-border-color;
+        @include border-radius(3px);
+        padding: 7px 14px;
+        margin-right: 5px;
+        font-size: 16px;
+        display: inline-block;
+        color: #8e8e8e;
+        vertical-align: middle;
+        text-decoration: none;
+
+        &.previous,
+        &.next {
+            padding: 6px 9px;
+        }
+
+        &.active {
+            background: #0041ff;
+            color: #fff;
+            border-color: #0041ff;
+        }
+
+        .icon {
+            vertical-align: middle;
+            margin-bottom: 3px;
+        }
+    }
+}

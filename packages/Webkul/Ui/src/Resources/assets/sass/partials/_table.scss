@@ -1,0 +1,70 @@
+.table {
+    width: 100%;
+    // overflow-x: auto !important;
+
+    table {
+        border-collapse: collapse;
+        text-align: left;
+        width: 100%;
+
+        thead th {
+            font-weight: 700;
+            padding: 12px 10px;
+            background: #f8f9fa;
+            color: $font-color;
+        }
+
+        tbody td {
+            padding: 10px;
+            border-bottom: solid 1px #d3d3d3;
+            color: $font-color;
+            vertical-align: top;
+
+            &.actions {
+
+                .action {
+                    display: inline-flex;
+                }
+
+                .icon {
+                    cursor: pointer;
+                    vertical-align: middle;
+                }
+            }
+
+            &.empty {
+                text-align: center;
+            }
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+    }
+
+    .control-group {
+        width: 100%;
+        margin-bottom: 0;
+        min-width: 140px;
+
+        .control {
+            width: 100%;
+            margin: 0;
+        }
+    }
+}
+
+.table {
+    .control-group {
+        &.date, &.datetime {
+            &::after {
+                top: 6px;
+                left: unset;
+            }
+
+            .cross-icon {
+                top: 10px;
+            }
+        }
+    }
+}
