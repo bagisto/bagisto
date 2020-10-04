@@ -4,8 +4,10 @@
 
         <ul class="slider-images">
             <li v-for="(image, index) in images" :key="index" v-bind:class="{'show': index==currentIndex}">
-                <img class="slider-item" :src="image" />
-                <div class="show-content" v-bind:class="{'show': index==currentIndex}" :key="index" v-html="content[index]"></div>
+                <a :href="image['path']">
+                    <img class="slider-item" :src="image['image']" />
+                    <div class="show-content" v-bind:class="{'show': index==currentIndex}" :key="index" v-html="content[index]"></div>
+                </a>
             </li>
         </ul>
 
@@ -59,7 +61,7 @@ export default {
             var this_this = this;
 
             this.slides.forEach(function(slider) {
-                this_this.images.push(this_this.public_path+'/storage/'+slider.path);
+                this_this.images.push({'image': this_this.public_path+'/storage/'+slider.path, 'path': slider.slider_path ? this_this.public_path+'/'+slider.slider_path : null});
 
                 this_this.content.push(slider.content);
             });
