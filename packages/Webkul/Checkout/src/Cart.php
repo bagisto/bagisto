@@ -120,6 +120,44 @@ class Cart
     }
 
     /**
+     * Return cart amount is under limit or not
+     *
+     * @return boolean
+     */
+    public function isCartAmountUnderLimit($productId, $qty)
+    {
+        if (core()->getConfigData('general.general.locale_options.cart_max_limit')) {
+            $maxCartLimit =  core()->getConfigData('general.general.locale_options.cart_max_limit');
+        } else {
+            $maxCartLimit =  100000000;
+        }
+        
+        $cart = $this->getCart();
+
+        $cartGrandTotal;
+        
+        $addProductPrice;
+        
+        if ($cart) {
+            $baseGrandTotal = $cart->base_grand_total;
+        } else {
+            $baseGrandTotal = 0;
+        }
+
+        $product = $this->productRepository->findOneByField('id', $productId);
+
+        $addProductPrice = $qty * $product->price;
+
+        $cartGrandTotal = $baseGrandTotal + $addProductPrice;
+
+        if ($cartGrandTotal >= $maxCartLimit) {
+            return false;
+        }
+
+        return true;        
+    }
+
+    /**
      * Add Items in a cart with some cart and item details.
      *
      * @param int   $productId
@@ -133,6 +171,10 @@ class Cart
         Event::dispatch('checkout.cart.add.before', $productId);
 
         $cart = $this->getCart();
+
+        if (! $this->isCartAmountUnderLimit($productId, $data['quantity'])) {
+            throw new Exception(__('shop::app.checkout.cart.amount-limit'));
+        }
 
         if (! $cart && ! $cart = $this->create($data)) {
             return ['warning' => __('shop::app.checkout.cart.item.error-add')];
@@ -258,6 +300,10 @@ class Cart
                 $this->removeItem($itemId);
 
                 throw new Exception(__('shop::app.checkout.cart.quantity.illegal'));
+            }
+
+            if (! $this->isCartAmountUnderLimit($item->product->id, $quantity)) {
+                throw new Exception(__('shop::app.checkout.cart.amount-limit'));
             }
 
             $item->quantity = $quantity;

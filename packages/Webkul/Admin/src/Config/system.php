@@ -28,6 +28,14 @@ return [
                     ],
                 ],
                 'channel_based' => true
+            ], [
+                'name'          => 'cart_max_limit',
+                'title'         => 'admin::app.admin.system.cart-limit',
+                'type'          => 'text',
+                'validation'    => 'required',
+                'info'          => 'admin::app.admin.system.cart-limit-info',
+                'channel_based' => true,
+                'default_value' => '100000000',
             ],
         ],
     ], [

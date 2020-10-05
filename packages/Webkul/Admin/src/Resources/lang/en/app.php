@@ -1303,6 +1303,8 @@ return [
             'footer-toggle' => 'Toggle footer',
             'locale-options' => 'Unit Options',
             'weight-unit' => 'Weight Unit',
+            'cart-limit' => 'Maximum Cart Amount Limit',
+            'cart-limit-info' => 'Default maximum limit is 100000000',
             'email-settings'    => 'Email Settings',
             'email-sender-name' => 'Email Sender Name',
             'shop-email-from'   => 'Shop Email Address [For sending emails]',
