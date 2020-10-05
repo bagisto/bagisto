@@ -24,6 +24,7 @@ class ShopServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../Http/routes.php');
 
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'shop');
+        $this->publishes([__DIR__.'/../Resources/lang' => resource_path('lang/vendor/shop')]);
 
         $this->publishes([
             __DIR__ . '/../../publishable/assets' => public_path('themes/default/assets'),
