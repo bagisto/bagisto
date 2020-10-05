@@ -537,6 +537,7 @@ class CartRule
         }
 
         $coupons = $this->cartRuleCouponRepository->where(['code' => $cart->coupon_code])->get();
+        
         foreach ($coupons as $coupon) {
             if (in_array($coupon->cart_rule_id, explode(',', $cart->applied_cart_rule_ids))) {
                 return true;

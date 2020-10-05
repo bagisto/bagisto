@@ -1,3 +1,4 @@
+@if (request()->route()->getName() == 'shop.checkout.onepage.index')
 <script src="https://www.paypal.com/sdk/js?client-id={{core()->getConfigData('sales.paymentmethods.paypal_smart_button.client_id')}}"></script>
 
 <script>
@@ -52,3 +53,4 @@
         });
     });
 </script>
+@endif

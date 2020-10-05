@@ -293,6 +293,7 @@ class Cart
     public function getItemByProduct($data)
     {
         $items = $this->getCart()->all_items;
+        
         foreach ($items as $item) {
             if ($item->product->getTypeInstance()->compareOptions($item->additional, $data['additional'])) {
                 if (isset($data['additional']['parent_id'])) {
@@ -402,6 +403,7 @@ class Cart
     public function getCart(): ?\Webkul\Checkout\Contracts\Cart
     {
         $cart = null;
+
         if ($this->getCurrentCustomer()->check()) {
             $cart = $this->cartRepository->findOneWhere([
                 'customer_id' => $this->getCurrentCustomer()->user()->id,
@@ -591,6 +593,7 @@ class Cart
         if (! $cart = $this->getCart()) {
             return false;
         }
+
         if (count($cart->items) === 0) {
             $this->cartRepository->delete($cart->id);
 
@@ -604,7 +607,9 @@ class Cart
 
             if ($validationResult->isItemInactive()) {
                 $this->removeItem($item->id);
+                
                 $isInvalid = true;
+
                 session()->flash('info', __('shop::app.checkout.cart.item.inactive'));
             }
 
