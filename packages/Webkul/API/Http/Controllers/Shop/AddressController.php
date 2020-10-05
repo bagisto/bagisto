@@ -2,6 +2,9 @@
 
 namespace Webkul\API\Http\Controllers\Shop;
 
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
 use Webkul\API\Http\Resources\Customer\CustomerAddress as CustomerAddressResource;
 
@@ -65,16 +68,24 @@ class AddressController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
         $customer = auth($this->guard)->user();
 
-        request()->merge([
-            'address1'    => implode(PHP_EOL, array_filter(request()->input('address1'))),
-            'customer_id' => $customer->id,
-        ]);
+        if (request()->input('address1') && ! is_array(json_decode(request()->input('address1')))) {
+            return response()->json([
+                'message' => 'address1 must be an array.',
+            ]);
+        }
 
-        $this->validate(request(), [
+        if (request()->input('address1')) {
+            request()->merge([
+                'address1'    => implode(PHP_EOL, array_filter(json_decode(request()->input('address1')))),
+                'customer_id' => $customer->id,
+            ]);
+        }        
+
+        $validator = Validator::make($request->all(), [
             'address1' => 'string|required',
             'country'  => 'string|required',
             'state'    => 'string|required',
@@ -82,6 +93,10 @@ class AddressController extends Controller
             'postcode' => 'required',
             'phone'    => 'required',
         ]);
+
+        if ($validator->fails()) {
+            return response($validator->errors(), Response::HTTP_BAD_REQUEST);
+        }
 
         $customerAddress = $this->customerAddressRepository->create(request()->all());
 
