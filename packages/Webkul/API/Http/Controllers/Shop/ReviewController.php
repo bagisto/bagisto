@@ -3,27 +3,29 @@
 namespace Webkul\API\Http\Controllers\Shop;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
 use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\API\Http\Resources\Catalog\ProductReview as ProductReviewResource;
 
 class ReviewController extends Controller
 {
     /**
-     * Contains current guard
+     * Contains current guard.
      *
      * @var array
      */
     protected $guard;
 
     /**
-     * ProductReviewRepository object
+     * ProductReviewRepository $reviewRepository
      *
      * @var \Webkul\Product\Repositories\ProductReviewRepository
      */
     protected $reviewRepository;
 
     /**
-     * Controller instance
+     * Controller instance.
      *
      * @param  Webkul\Product\Repositories\ProductReviewRepository  $reviewRepository
      */
@@ -47,20 +49,25 @@ class ReviewController extends Controller
     {
         $customer = auth($this->guard)->user();
 
-        $this->validate(request(), [
+        $validator = Validator::make($request->all(), [
             'comment' => 'required',
             'rating'  => 'required|numeric|min:1|max:5',
             'title'   => 'required',
         ]);
 
-        $data = array_merge(request()->all(), [
+        if ($validator->fails()) {
+            return response($validator->errors(), Response::HTTP_BAD_REQUEST);
+        }
+
+        $productReview = $this->reviewRepository->create([
             'customer_id' => $customer ? $customer->id : null,
-            'name'        => $customer ? $customer->name : request()->input('name'),
+            'name'        => $customer ? $customer->name : $request->get('name'),
             'status'      => 'pending',
             'product_id'  => $id,
+            'comment'     => $request->comment,
+            'rating'      => $request->rating,
+            'title'       => $request->title
         ]);
-
-        $productReview = $this->reviewRepository->create($data);
 
         return response()->json([
             'message' => 'Your review submitted successfully.',
