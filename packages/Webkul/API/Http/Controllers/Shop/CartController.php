@@ -4,9 +4,12 @@ namespace Webkul\API\Http\Controllers\Shop;
 
 use Cart;
 use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Validator;
 use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Checkout\Repositories\CartItemRepository;
 use Webkul\Customer\Repositories\WishlistRepository;
@@ -142,22 +145,30 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update()
+    public function update(Request $request)
     {
-        foreach (request()->get('qty') as $qty) {
+        $validator = Validator::make($request->all(), [
+            'qty' => 'required|array',
+        ]);
+
+        if ($validator->fails()) {
+            return response($validator->errors(), Response::HTTP_BAD_REQUEST);
+        }
+
+        foreach ($request->qty as $qty) {
             if ($qty <= 0) {
                 return response()->json([
                     'message' => trans('shop::app.checkout.cart.quantity.illegal'),
-                ], 401);
+                ], Response::HTTP_UNAUTHORIZED);
             }
         }
 
-        foreach (request()->get('qty') as $itemId => $qty) {
+        foreach ($request->qty as $itemId => $qty) {
             $item = $this->cartItemRepository->findOneByField('id', $itemId);
 
             Event::dispatch('checkout.cart.item.update.before', $itemId);
 
-            Cart::updateItems(request()->all());
+            Cart::updateItems($request->all());
 
             Event::dispatch('checkout.cart.item.update.after', $item);
         }

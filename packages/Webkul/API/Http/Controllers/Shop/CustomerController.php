@@ -2,8 +2,11 @@
 
 namespace Webkul\API\Http\Controllers\Shop;
 
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Validator;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 
@@ -69,24 +72,29 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        request()->validate([
+        $validator = Validator::make($request->all(), [
             'first_name' => 'required',
             'last_name'  => 'required',
             'email'      => 'email|required|unique:customers,email',
             'password'   => 'confirmed|min:6|required',
         ]);
 
-        $data = request()->input();
+        if ($validator->fails()) {
+            return response($validator->errors(), Response::HTTP_BAD_REQUEST);
+        }
 
-        $data = array_merge($data, [
-                'password'    => bcrypt($data['password']),
-                'channel_id'  => core()->getCurrentChannel()->id,
-                'is_verified' => 1,
-            ]);
-
-        $data['customer_group_id'] = $this->customerGroupRepository->findOneWhere(['code' => 'general'])->id;
+        $data = [
+            'first_name'  => $request->first_name,
+            'last_name'   => $request->last_name,
+            'email'       => $request->email,
+            'password'    => $request->password,
+            'password'    => bcrypt($request->password),
+            'channel_id'  => core()->getCurrentChannel()->id,
+            'is_verified' => 1,
+            'customer_group_id' => $this->customerGroupRepository->findOneWhere(['code' => 'general'])->id
+        ];
 
         Event::dispatch('customer.registration.before');
 
