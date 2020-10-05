@@ -477,6 +477,165 @@ abstract class DataGrid
                                     $filter_value
                                 );
                             }
+                        } elseif ($columnType === 'boolean') {
+
+                            if ($this->enableFilterMap && isset($this->filterMap[$columnName])) {
+
+                                if ($this->operators[$condition] == '=') {
+
+                                    if ($filter_value == 1) {
+                                        $collection->Where(function($query) use($columnName, $condition, $filter_value) {
+                                            $query->where(
+                                            $this->filterMap[$columnName],
+                                            $this->operators[$condition],
+                                            $filter_value
+                                            )->orWhereNotNull($this->filterMap[$columnName]);
+                                        });
+                                    } else {
+                                        $collection->Where(function($query) use($columnName, $condition, $filter_value) {
+                                            $query->where(
+                                            $this->filterMap[$columnName],
+                                            $this->operators[$condition],
+                                            $filter_value
+                                            )->orWhereNull($this->filterMap[$columnName]);
+                                        });
+                                    }
+
+                                } elseif ($this->operators[$condition] == '<>') {
+
+                                    if ($filter_value == 1) {
+                                        $collection->Where(function($query) use($columnName, $condition, $filter_value) {
+                                            $query->where(
+                                            $this->filterMap[$columnName],
+                                            $this->operators[$condition],
+                                            $filter_value
+                                            )->orWhereNull($this->filterMap[$columnName]);
+                                        });
+                                    } else {
+                                        $collection->Where(function($query) use($columnName, $condition, $filter_value) {
+                                            $query->where(
+                                            $this->filterMap[$columnName],
+                                            $this->operators[$condition],
+                                            $filter_value
+                                            )->orWhereNotNull($this->filterMap[$columnName]);
+                                        });
+                                    }
+
+                                } else {
+                                    $collection->Where(function($query) use($columnName, $condition, $filter_value) {
+                                        $query->where(
+                                        $this->filterMap[$columnName],
+                                        $this->operators[$condition],
+                                        $filter_value
+                                        );
+                                    });
+                                }
+
+                            } elseif ($this->enableFilterMap && ! isset($this->filterMap[$columnName])) {
+                                
+                                if ($this->operators[$condition] == '=') {
+
+                                    if ($filter_value == 1) {
+                                        $collection->Where(function($query) use($columnName, $condition, $filter_value) {
+                                            $query->where(
+                                            $columnName,
+                                            $this->operators[$condition],
+                                            $filter_value
+                                            )->orWhereNotNull($this->filterMap[$columnName]);
+                                        });
+                                    } else {
+                                        $collection->Where(function($query) use($columnName, $condition, $filter_value) {
+                                            $query->where(
+                                            $columnName,
+                                            $this->operators[$condition],
+                                            $filter_value
+                                            )->orWhereNull($this->filterMap[$columnName]);
+                                        });
+                                    }
+
+                                } elseif ($this->operators[$condition] == '<>') {
+
+                                    if ($filter_value == 1) {
+                                        $collection->Where(function($query) use($columnName, $condition, $filter_value) {
+                                            $query->where(
+                                            $columnName,
+                                            $this->operators[$condition],
+                                            $filter_value
+                                            )->orWhereNull($this->filterMap[$columnName]);
+                                        });
+                                    } else {
+                                        $collection->Where(function($query) use($columnName, $condition, $filter_value) {
+                                            $query->where(
+                                            $columnName,
+                                            $this->operators[$condition],
+                                            $filter_value
+                                            )->orWhereNotNull($this->filterMap[$columnName]);
+                                        });
+                                    }
+
+                                } else {
+                                    $collection->Where(function($query) use($columnName, $condition, $filter_value) {
+                                        $query->where(
+                                        $columnName,
+                                        $this->operators[$condition],
+                                        $filter_value
+                                        );
+                                    });
+                                }
+
+                            } else {
+
+                                if ($this->operators[$condition] == '=') {
+
+                                    if ($filter_value == 1) {
+                                        $collection->Where(function($query) use($columnName, $condition, $filter_value) {
+                                            $query->where(
+                                            $columnName,
+                                            $this->operators[$condition],
+                                            $filter_value
+                                            )->orWhereNotNull($this->filterMap[$columnName]);
+                                        });
+                                    } else {
+                                        $collection->Where(function($query) use($columnName, $condition, $filter_value) {
+                                            $query->where(
+                                            $columnName,
+                                            $this->operators[$condition],
+                                            $filter_value
+                                            )->orWhereNull($this->filterMap[$columnName]);
+                                        });
+                                    }
+
+                                } elseif ($this->operators[$condition] == '<>') {
+
+                                    if ($filter_value == 1) {
+                                        $collection->Where(function($query) use($columnName, $condition, $filter_value) {
+                                            $query->where(
+                                            $columnName,
+                                            $this->operators[$condition],
+                                            $filter_value
+                                            )->orWhereNull($this->filterMap[$columnName]);
+                                        });
+                                    } else {
+                                        $collection->Where(function($query) use($columnName, $condition, $filter_value) {
+                                            $query->where(
+                                            $columnName,
+                                            $this->operators[$condition],
+                                            $filter_value
+                                            )->orWhereNotNull($this->filterMap[$columnName]);
+                                        });
+                                    }
+
+                                } else {
+                                    $collection->Where(function($query) use($columnName, $condition, $filter_value) {
+                                        $query->where(
+                                        $columnName,
+                                        $this->operators[$condition],
+                                        $filter_value
+                                        );
+                                    });
+                                }
+
+                            }
                         } else {
                             if ($this->enableFilterMap && isset($this->filterMap[$columnName])) {
                                 $collection->where(
