@@ -1355,7 +1355,10 @@ return [
             'instructions' => 'Instructions',
             'custom-scripts' => 'Custom Scripts',
             'custom-css' => 'Custom CSS',
-            'custom-javascript' => 'Custom Javascript'
+            'custom-javascript' => 'Custom Javascript',
+            'paypal-smart-button' => 'Paypal Smart Button',
+            'client-id' => 'Client Id',
+            'client-id-info' => 'Use "sb" for testing.'
         ]
     ]
 ];

@@ -3,9 +3,9 @@
 namespace Webkul\Admin\DataGrids;
 
 use Webkul\Core\Models\Locale;
+use Webkul\Core\Models\Channel;
 use Webkul\Ui\DataGrid\DataGrid;
 use Illuminate\Support\Facades\DB;
-use Webkul\Core\Models\Channel;
 
 class ProductDataGrid extends DataGrid
 {
@@ -30,10 +30,10 @@ class ProductDataGrid extends DataGrid
         parent::__construct();
 
         /* locale */
-        $this->locale = request()->get('locale') ?? 'all';
+        $this->locale = request()->get('locale') ?? app()->getLocale();
 
         /* channel */
-        $this->channel = request()->get('channel') ?? 'all';
+        $this->channel = request()->get('channel') ?? (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
         /* finding channel code */
         if ($this->channel !== 'all') {
@@ -74,11 +74,10 @@ class ProductDataGrid extends DataGrid
                 DB::raw('SUM(DISTINCT ' . DB::getTablePrefix() . 'product_inventories.qty) as quantity')
             );
 
-        $queryBuilder->groupBy('product_flat.product_id', 'product_flat.channel');
+        $queryBuilder->groupBy('product_flat.product_id', 'product_flat.locale', 'product_flat.channel');
 
         $queryBuilder->whereIn('product_flat.locale', $whereInLocales);
         $queryBuilder->whereIn('product_flat.channel', $whereInChannels);
-        // $queryBuilder->whereNotNull('product_flat.name');
 
         $this->addFilter('product_id', 'product_flat.product_id');
         $this->addFilter('product_name', 'product_flat.name');

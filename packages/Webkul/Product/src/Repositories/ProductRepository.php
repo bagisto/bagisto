@@ -317,6 +317,8 @@ class ProductRepository extends Repository
      */
     public function getNewProducts()
     {
+        $count = core()->getConfigData('catalog.products.homepage.no_of_new_product_homepage'); 
+
         $results = app(ProductFlatRepository::class)->scopeQuery(function ($query) {
             $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
@@ -330,7 +332,7 @@ class ProductRepository extends Repository
                 ->where('product_flat.channel', $channel)
                 ->where('product_flat.locale', $locale)
                 ->inRandomOrder();
-        })->paginate(4);
+        })->paginate($count ? $count : 4);
 
         return $results;
     }
@@ -342,6 +344,8 @@ class ProductRepository extends Repository
      */
     public function getFeaturedProducts()
     {
+        $count = core()->getConfigData('catalog.products.homepage.no_of_featured_product_homepage');
+
         $results = app(ProductFlatRepository::class)->scopeQuery(function ($query) {
             $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
@@ -355,7 +359,7 @@ class ProductRepository extends Repository
                 ->where('product_flat.channel', $channel)
                 ->where('product_flat.locale', $locale)
                 ->inRandomOrder();
-        })->paginate(4);
+        })->paginate($count ? $count : 4);
 
         return $results;
     }

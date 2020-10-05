@@ -1,3 +1,8 @@
+@php
+    $locale = request()->get('locale') ?: app()->getLocale();
+    $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
+@endphp
+
 <div class="table">
     <datagrid-filters></datagrid-filters>
 
@@ -22,7 +27,7 @@
                                     @foreach ($results['extraFilters']['channels'] as $channelModel)
                                         <option
                                             value="{{ $channelModel->id }}"
-                                            {{ (isset($channel) && ($channelModel->id) == $channel) ? 'selected' : '' }}>
+                                            {{ (isset($channel) && ($channelModel->code) == $channel) ? 'selected' : '' }}>
                                             {{ $channelModel->name }}
                                         </option>
                                     @endforeach
@@ -385,7 +390,7 @@
                     },
 
                     filterNumberInput: function(e){
-                        this.numberValue = e.target.value.replace(/[^0-9\,\.]+/g, '');                            
+                        this.numberValue = e.target.value.replace(/[^0-9\,\.]+/g, '');
                     },
 
                     getResponse: function() {
