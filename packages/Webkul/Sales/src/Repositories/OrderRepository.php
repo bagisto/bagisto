@@ -213,7 +213,7 @@ class OrderRepository extends Repository
             $totalQtyInvoiced += $item->qty_invoiced;
 
             if (! $item->isStockable()) {
-                $totalQtyShipped += $item->qty_ordered;
+                $totalQtyShipped += $item->qty_invoiced;
             } else {
                 $totalQtyShipped += $item->qty_shipped;
             }

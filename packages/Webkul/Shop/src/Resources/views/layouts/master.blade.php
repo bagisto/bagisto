@@ -97,15 +97,14 @@
         @elseif ($warning = session('warning'))
             window.flashMessages = [{'type': 'alert-warning', 'message': "{{ $warning }}" }];
         @elseif ($error = session('error'))
-            window.flashMessages = [{'type': 'alert-error', 'message': "{{ $error }}" }
-            ];
+            window.flashMessages = [{'type': 'alert-error', 'message': "{{ $error }}" }];
         @elseif ($info = session('info'))
-            window.flashMessages = [{'type': 'alert-info', 'message': "{{ $info }}" }
-            ];
+            window.flashMessages = [{'type': 'alert-info', 'message': "{{ $info }}" }];
         @endif
 
         window.serverErrors = [];
-        @if(isset($errors))
+        
+        @if (isset($errors))
             @if (count($errors))
                 window.serverErrors = @json($errors->getMessages());
             @endif

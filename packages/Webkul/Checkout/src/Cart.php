@@ -172,7 +172,7 @@ class Cart
                             'cart_id' => $cart->id
                         ]));
                     } else {
-                        // if ($cartItem->product->getTypeInstance()->showQuantityBox() === false) {
+                        // if ($cartItem->product->getTypeInstance()->isMultipleQtyAllowed() === false) {
                         //     return ['warning' => __('shop::app.checkout.cart.integrity.qty_impossible')];
                         // }
 

@@ -5,24 +5,25 @@ namespace Webkul\Core\Helpers;
 // here you can define custom actions
 // all public methods declared in helper class will be available in $I
 
+use StdClass;
 use Faker\Factory;
 use Codeception\Module\Laravel5;
-use Webkul\Attribute\Models\Attribute;
-use Webkul\Attribute\Models\AttributeOption;
-use Webkul\BookingProduct\Models\BookingProduct;
-use Webkul\BookingProduct\Models\BookingProductEventTicket;
 use Webkul\Checkout\Models\Cart;
-use Webkul\Checkout\Models\CartAddress;
+use Webkul\Product\Models\Product;
+use Illuminate\Support\Facades\DB;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Customer\Models\Customer;
+use Illuminate\Support\Facades\Event;
+use Webkul\Attribute\Models\Attribute;
+use Webkul\Checkout\Models\CartAddress;
 use Webkul\Customer\Models\CustomerAddress;
-use Webkul\Product\Models\Product;
+use Webkul\Product\Models\ProductInventory;
+use Webkul\Attribute\Models\AttributeOption;
+use Webkul\BookingProduct\Models\BookingProduct;
 use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Models\ProductDownloadableLink;
+use Webkul\BookingProduct\Models\BookingProductEventTicket;
 use Webkul\Product\Models\ProductDownloadableLinkTranslation;
-use Webkul\Product\Models\ProductInventory;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Event;
 
 /**
  * Class Laravel5Helper
@@ -54,6 +55,7 @@ class Laravel5Helper extends Laravel5
             'textarea' => 'text_value',
             'price'    => 'float_value',
             'date'     => 'date_value',
+            'checkbox' => 'text_value',
         ];
 
         return $possibleTypes[$type];
@@ -127,7 +129,7 @@ class Laravel5Helper extends Laravel5
 
         // actually set the cart to the user's session
         // when in an functional test:
-        $stub = new \StdClass();
+        $stub = new StdClass();
         $stub->id = $cart->id;
         $I->setSession(['cart' => $stub]);
 

@@ -14,7 +14,7 @@
                 <h1>
                     {!! view_render_event('sales.order.title.before', ['order' => $order]) !!}
 
-                    <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ route('admin.dashboard.index') }}';"></i>
+                    <i class="icon angle-left-icon back-link" onclick="window.location = history.length > 1 ? document.referrer : '{{ route('admin.dashboard.index') }}'"></i>
 
                     {{ __('admin::app.sales.orders.view-title', ['order_id' => $order->increment_id]) }}
 
@@ -221,6 +221,20 @@
                                                 {{ $order->order_currency_code }}
                                             </span>
                                         </div>
+
+                                        @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($order->payment->method); @endphp
+
+                                        @if (! empty($additionalDetails))
+                                            <div class="row">
+                                                <span class="title">
+                                                    {{ $additionalDetails['title'] }}
+                                                </span>
+
+                                                <span class="value">
+                                                    {{ $additionalDetails['value'] }}
+                                                </span>
+                                            </div>
+                                        @endif
 
                                         {!! view_render_event('sales.order.payment-method.after', ['order' => $order]) !!}
                                     </div>

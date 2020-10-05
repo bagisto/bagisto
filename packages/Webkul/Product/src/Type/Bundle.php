@@ -729,7 +729,7 @@ class Bundle extends AbstractType
 
     /**
      * get product options
-    */
+     */
     public function getProductOptions($product = "")
     {
         $bundleOption = app('Webkul\Product\Helpers\BundleOption');

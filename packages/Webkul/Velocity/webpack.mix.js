@@ -16,6 +16,8 @@ mix
         "js/velocity.js"
     )
 
+    .copy(__dirname + "/src/Resources/assets/images", publicPath + "/images")
+
     .sass(
         __dirname + '/src/Resources/assets/sass/admin.scss',
         __dirname + '/' + publicPath + '/css/velocity-admin.css'
