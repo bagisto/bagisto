@@ -3,10 +3,8 @@
 namespace Webkul\API\Http\Controllers\Shop;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Validator;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 
@@ -74,16 +72,12 @@ class CustomerController extends Controller
      */
     public function create(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $this->validate($request, [
             'first_name' => 'required',
             'last_name'  => 'required',
             'email'      => 'email|required|unique:customers,email',
             'password'   => 'confirmed|min:6|required',
         ]);
-
-        if ($validator->fails()) {
-            return response($validator->errors(), Response::HTTP_BAD_REQUEST);
-        }
 
         $data = [
             'first_name'  => $request->get('first_name'),

@@ -9,7 +9,6 @@ use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Validator;
 use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Checkout\Repositories\CartItemRepository;
 use Webkul\Customer\Repositories\WishlistRepository;
@@ -147,13 +146,9 @@ class CartController extends Controller
      */
     public function update(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $this->validate($request, [
             'qty' => 'required|array',
         ]);
-
-        if ($validator->fails()) {
-            return response($validator->errors(), Response::HTTP_BAD_REQUEST);
-        }
 
         $requestedQuantity = $request->get('qty');
 
