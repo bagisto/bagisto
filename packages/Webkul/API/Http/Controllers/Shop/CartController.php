@@ -155,7 +155,9 @@ class CartController extends Controller
             return response($validator->errors(), Response::HTTP_BAD_REQUEST);
         }
 
-        foreach ($request->get('qty') as $qty) {
+        $requestedQuantity = $request->get('qty');
+
+        foreach ($requestedQuantity as $qty) {
             if ($qty <= 0) {
                 return response()->json([
                     'message' => trans('shop::app.checkout.cart.quantity.illegal'),
@@ -163,12 +165,12 @@ class CartController extends Controller
             }
         }
 
-        foreach ($request->get('qty') as $itemId => $qty) {
+        foreach ($requestedQuantity as $itemId => $qty) {
             $item = $this->cartItemRepository->findOneByField('id', $itemId);
 
             Event::dispatch('checkout.cart.item.update.before', $itemId);
 
-            Cart::updateItems(['qty' => $request->get('qty')]);
+            Cart::updateItems(['qty' => $requestedQuantity]);
 
             Event::dispatch('checkout.cart.item.update.after', $item);
         }
