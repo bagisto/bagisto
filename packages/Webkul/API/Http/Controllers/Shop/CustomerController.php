@@ -86,11 +86,11 @@ class CustomerController extends Controller
         }
 
         $data = [
-            'first_name'  => $request->first_name,
-            'last_name'   => $request->last_name,
-            'email'       => $request->email,
-            'password'    => $request->password,
-            'password'    => bcrypt($request->password),
+            'first_name'  => $request->get('first_name'),
+            'last_name'   => $request->get('last_name'),
+            'email'       => $request->get('email'),
+            'password'    => $request->get('password'),
+            'password'    => bcrypt($request->get('password')),
             'channel_id'  => core()->getCurrentChannel()->id,
             'is_verified' => 1,
             'customer_group_id' => $this->customerGroupRepository->findOneWhere(['code' => 'general'])->id
