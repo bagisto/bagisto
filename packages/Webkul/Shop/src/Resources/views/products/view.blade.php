@@ -19,21 +19,21 @@
 
     <meta name="twitter:card" content="summary_large_image" />
 
-    <meta name="twitter:title" content="{{ $product->name }}" />
+    <meta name="twitter:title" content="{!! $product->name !!}" />
 
-    <meta name="twitter:description" content="{{ $product->description }}" />
+    <meta name="twitter:description" content="{!! $product->description !!}" />
 
     <meta name="twitter:image:alt" content="" />
 
-    <meta name="twitter:image" content="{{ $productBaseImage['medium_image_url'] }}" />
+    <meta name="twitter:image" content="{!! $productBaseImage['medium_image_url'] !!}" />
 
     <meta property="og:type" content="og:product" />
 
-    <meta property="og:title" content="{{ $product->name }}" />
+    <meta property="og:title" content="{!! $product->name !!}" />
 
-    <meta property="og:image" content="{{ $productBaseImage['medium_image_url'] }}" />
+    <meta property="og:image" content="{!! $productBaseImage['medium_image_url'] !!}" />
 
-    <meta property="og:description" content="{{ $product->description }}" />
+    <meta property="og:description" content="{!! $product->description !!}" />
 
     <meta property="og:url" content="{{ route('shop.productOrCategory.index', $product->url_key) }}" />
 @stop
