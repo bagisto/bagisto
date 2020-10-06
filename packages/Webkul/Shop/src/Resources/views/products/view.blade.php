@@ -1,17 +1,17 @@
 @extends('shop::layouts.master')
 
 @section('page_title')
-    {!! trim($product->meta_title) != "" ? $product->meta_title : $product->name !!}
+    {{ trim($product->meta_title) != "" ? $product->meta_title : $product->name }}
 @stop
 
 @section('seo')
     <meta name="description" content="{{ trim($product->meta_description) != "" ? $product->meta_description : \Illuminate\Support\Str::limit(strip_tags($product->description), 120, '') }}"/>
 
-    <meta name="keywords" content="{!! $product->meta_keywords !!}"/>
+    <meta name="keywords" content="{{ $product->meta_keywords }}"/>
 
     @if (core()->getConfigData('catalog.rich_snippets.products.enable'))
         <script type="application/ld+json">
-            {!! app('Webkul\Product\Helpers\SEO')->getProductJsonLd($product) !!}
+            {{ app('Webkul\Product\Helpers\SEO')->getProductJsonLd($product) }}
         </script>
     @endif
 
@@ -19,19 +19,19 @@
 
     <meta name="twitter:card" content="summary_large_image" />
 
-    <meta name="twitter:title" content="{!! $product->name !!}" />
+    <meta name="twitter:title" content="{{ $product->name }}" />
 
     <meta name="twitter:description" content="{!! $product->description !!}" />
 
     <meta name="twitter:image:alt" content="" />
 
-    <meta name="twitter:image" content="{!! $productBaseImage['medium_image_url'] !!}" />
+    <meta name="twitter:image" content="{{ $productBaseImage['medium_image_url'] }}" />
 
     <meta property="og:type" content="og:product" />
 
-    <meta property="og:title" content="{!! $product->name !!}" />
+    <meta property="og:title" content="{{ $product->name }}" />
 
-    <meta property="og:image" content="{!! $productBaseImage['medium_image_url'] !!}" />
+    <meta property="og:image" content="{{ $productBaseImage['medium_image_url'] }}" />
 
     <meta property="og:description" content="{!! $product->description !!}" />
 
