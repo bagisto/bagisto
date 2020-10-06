@@ -2,9 +2,6 @@
 
 namespace Webkul\API\Http\Controllers\Shop;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Validator;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
 use Webkul\API\Http\Resources\Customer\CustomerAddress as CustomerAddressResource;
 
@@ -68,7 +65,7 @@ class AddressController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
         $customer = auth($this->guard)->user();
 
@@ -85,7 +82,7 @@ class AddressController extends Controller
             ]);
         }        
 
-        $validator = Validator::make($request->all(), [
+        $this->validate(request(), [
             'address1' => 'string|required',
             'country'  => 'string|required',
             'state'    => 'string|required',
@@ -93,10 +90,6 @@ class AddressController extends Controller
             'postcode' => 'required',
             'phone'    => 'required',
         ]);
-
-        if ($validator->fails()) {
-            return response($validator->errors(), Response::HTTP_BAD_REQUEST);
-        }
 
         $customerAddress = $this->customerAddressRepository->create(request()->all());
 
