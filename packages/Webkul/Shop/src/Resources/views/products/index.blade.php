@@ -31,7 +31,7 @@
             <div class="category-block" @if ($category->display_mode == 'description_only') style="width: 100%" @endif>
                 <div class="hero-image mb-35">
                     @if (!is_null($category->image))
-                        <img class="logo" src="{{ $category->image_url }}" />
+                        <img class="logo" src="{{ $category->image_url }}" alt="" />
                     @endif
                 </div>
 

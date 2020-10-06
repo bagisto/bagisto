@@ -217,7 +217,7 @@ $(document).ready(function () {
         }
     });
 
-    new Vue({
+    const app = new Vue({
         el: "#app",
         VueToast,
 
@@ -358,6 +358,8 @@ $(document).ready(function () {
             }
         }
     });
+
+    window.app = app;
 
     // for compilation of html coming from server
     Vue.component('vnode-injector', {
