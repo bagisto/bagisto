@@ -111,7 +111,7 @@
                 </div>
                 @if (core()->getConfigData('sales.orderSettings.invoice_slip_design.logo'))
                     <div class="image">
-                        <img class="logo" src="{{ Storage::url(core()->getConfigData('sales.orderSettings.invoice_slip_design.logo')) }}"/>
+                        <img class="logo" src="{{ Storage::url(core()->getConfigData('sales.orderSettings.invoice_slip_design.logo')) }}" alt=""/>
                     </div>
                 @endif
                 <div class="merchant-details">

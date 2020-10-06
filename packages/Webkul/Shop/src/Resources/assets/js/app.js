@@ -7,11 +7,13 @@ import axios from 'axios';
 import VueSlider from 'vue-slider-component';
 import accounting from 'accounting';
 import ImageSlider from './components/image-slider';
+import 'lazysizes';
 
 window.jQuery = window.$ = $;
 window.Vue = Vue;
 window.VeeValidate = VeeValidate;
 window.axios = axios;
+
 require("./bootstrap");
 require("ez-plus/src/jquery.ez-plus.js");
 
@@ -127,4 +129,6 @@ $(document).ready(function () {
             }
         }
     });
+
+    window.app = app;
 });
