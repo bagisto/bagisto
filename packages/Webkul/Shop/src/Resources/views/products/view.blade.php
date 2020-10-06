@@ -1,13 +1,13 @@
 @extends('shop::layouts.master')
 
 @section('page_title')
-    {{ trim($product->meta_title) != "" ? $product->meta_title : $product->name }}
+    {!! trim($product->meta_title) != "" ? $product->meta_title : $product->name !!}
 @stop
 
 @section('seo')
     <meta name="description" content="{{ trim($product->meta_description) != "" ? $product->meta_description : \Illuminate\Support\Str::limit(strip_tags($product->description), 120, '') }}"/>
 
-    <meta name="keywords" content="{{ $product->meta_keywords }}"/>
+    <meta name="keywords" content="{!! $product->meta_keywords !!}"/>
 
     @if (core()->getConfigData('catalog.rich_snippets.products.enable'))
         <script type="application/ld+json">
