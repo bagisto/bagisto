@@ -3,8 +3,6 @@
 namespace Webkul\API\Http\Controllers\Shop;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Validator;
 use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\API\Http\Resources\Catalog\ProductReview as ProductReviewResource;
 
@@ -49,15 +47,11 @@ class ReviewController extends Controller
     {
         $customer = auth($this->guard)->user();
 
-        $validator = Validator::make($request->all(), [
+        $this->validate($request, [
             'comment' => 'required',
             'rating'  => 'required|numeric|min:1|max:5',
             'title'   => 'required',
         ]);
-
-        if ($validator->fails()) {
-            return response($validator->errors(), Response::HTTP_BAD_REQUEST);
-        }
 
         $productReview = $this->reviewRepository->create([
             'customer_id' => $customer ? $customer->id : null,
