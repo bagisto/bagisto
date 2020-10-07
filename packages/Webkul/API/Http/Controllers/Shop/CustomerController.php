@@ -2,6 +2,7 @@
 
 namespace Webkul\API\Http\Controllers\Shop;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 use Webkul\Customer\Repositories\CustomerRepository;
@@ -69,24 +70,25 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        request()->validate([
+        $this->validate($request, [
             'first_name' => 'required',
             'last_name'  => 'required',
             'email'      => 'email|required|unique:customers,email',
             'password'   => 'confirmed|min:6|required',
         ]);
 
-        $data = request()->input();
-
-        $data = array_merge($data, [
-                'password'    => bcrypt($data['password']),
-                'channel_id'  => core()->getCurrentChannel()->id,
-                'is_verified' => 1,
-            ]);
-
-        $data['customer_group_id'] = $this->customerGroupRepository->findOneWhere(['code' => 'general'])->id;
+        $data = [
+            'first_name'  => $request->get('first_name'),
+            'last_name'   => $request->get('last_name'),
+            'email'       => $request->get('email'),
+            'password'    => $request->get('password'),
+            'password'    => bcrypt($request->get('password')),
+            'channel_id'  => core()->getCurrentChannel()->id,
+            'is_verified' => 1,
+            'customer_group_id' => $this->customerGroupRepository->findOneWhere(['code' => 'general'])->id
+        ];
 
         Event::dispatch('customer.registration.before');
 

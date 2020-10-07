@@ -8,7 +8,7 @@
             title="{{  __('shop::app.customer.compare.add-tooltip') }}"
             @click="addProductToCompare"
             style="cursor: pointer">
-            <img src="{{ asset('themes/default/assets/images/compare_arrows.png') }}" />
+            <img src="{{ asset('themes/default/assets/images/compare_arrows.png') }}" alt="" />
         </a>
     </script>
 

@@ -50,7 +50,7 @@
     <script type="text/x-template" id="image-search-result-component-template">
         <div class="image-search-result">
             <div class="searched-image">
-                <img :src="searched_image_url"/>
+                <img :src="searched_image_url" alt=""/>
             </div>
 
             <div class="searched-terms">

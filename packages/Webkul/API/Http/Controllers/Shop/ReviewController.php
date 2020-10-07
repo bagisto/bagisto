@@ -9,21 +9,21 @@ use Webkul\API\Http\Resources\Catalog\ProductReview as ProductReviewResource;
 class ReviewController extends Controller
 {
     /**
-     * Contains current guard
+     * Contains current guard.
      *
      * @var array
      */
     protected $guard;
 
     /**
-     * ProductReviewRepository object
+     * ProductReviewRepository $reviewRepository
      *
      * @var \Webkul\Product\Repositories\ProductReviewRepository
      */
     protected $reviewRepository;
 
     /**
-     * Controller instance
+     * Controller instance.
      *
      * @param  Webkul\Product\Repositories\ProductReviewRepository  $reviewRepository
      */
@@ -47,24 +47,25 @@ class ReviewController extends Controller
     {
         $customer = auth($this->guard)->user();
 
-        $this->validate(request(), [
+        $this->validate($request, [
             'comment' => 'required',
             'rating'  => 'required|numeric|min:1|max:5',
             'title'   => 'required',
         ]);
 
-        $data = array_merge(request()->all(), [
+        $productReview = $this->reviewRepository->create([
             'customer_id' => $customer ? $customer->id : null,
-            'name'        => $customer ? $customer->name : request()->input('name'),
+            'name'        => $customer ? $customer->name : $request->get('name'),
             'status'      => 'pending',
             'product_id'  => $id,
+            'comment'     => $request->comment,
+            'rating'      => $request->rating,
+            'title'       => $request->title
         ]);
-
-        $productReview = $this->reviewRepository->create($data);
 
         return response()->json([
             'message' => 'Your review submitted successfully.',
-            'data'    => new ProductReviewResource($this->reviewRepository->find($productReview->id)),
+            'data'    => new ProductReviewResource($productReview),
         ]);
     }
 }

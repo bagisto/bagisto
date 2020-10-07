@@ -41,7 +41,7 @@
                                 @php
                                     $images = $item->product->getTypeInstance()->getBaseImage($item);
                                 @endphp
-                                <img src="{{ $images['small_image_url'] }}" />
+                                <img src="{{ $images['small_image_url'] }}"  alt=""/>
                             </div>
 
                             <div class="item-details">

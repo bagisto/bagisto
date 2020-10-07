@@ -29,11 +29,11 @@
 
             <div class="list-container">
                 @if(core()->getConfigData('customer.settings.newsletter.subscription'))
-                    <span class="list-heading">{{ __('shop::app.footer.subscribe-newsletter') }}</span>
+                    <label class="list-heading" for="subscribe-field">{{ __('shop::app.footer.subscribe-newsletter') }}</label>
                     <div class="form-container">
                         <form action="{{ route('shop.subscribe') }}">
                             <div class="control-group" :class="[errors.has('subscriber_email') ? 'has-error' : '']">
-                                <input type="email" class="control subscribe-field" name="subscriber_email" placeholder="Email Address" required><br/>
+                                <input type="email" id="subscribe-field" class="control subscribe-field" name="subscriber_email" placeholder="Email Address" required><br/>
 
                                 <button class="btn btn-md btn-primary">{{ __('shop::app.subscription.subscribe') }}</button>
                             </div>
@@ -49,10 +49,10 @@
                     }
                 ?>
 
-                <span class="list-heading">{{ __('shop::app.footer.locale') }}</span>
+                <label class="list-heading" for="locale-switcher">{{ __('shop::app.footer.locale') }}</label>
                 <div class="form-container">
                     <div class="control-group">
-                        <select class="control locale-switcher" onchange="window.location.href = this.value" @if (count(core()->getCurrentChannel()->locales) == 1) disabled="disabled" @endif>
+                        <select class="control locale-switcher" id="locale-switcher" onchange="window.location.href = this.value" @if (count(core()->getCurrentChannel()->locales) == 1) disabled="disabled" @endif>
 
                             @foreach (core()->getCurrentChannel()->locales as $locale)
                                 @if (isset($serachQuery))
@@ -67,10 +67,10 @@
                 </div>
 
                 <div class="currency">
-                    <span class="list-heading">{{ __('shop::app.footer.currency') }}</span>
+                    <label class="list-heading" for="currency-switcher">{{ __('shop::app.footer.currency') }}</label>
                     <div class="form-container">
                         <div class="control-group">
-                            <select class="control locale-switcher" onchange="window.location.href = this.value">
+                            <select class="control locale-switcher" id="currency-switcher" onchange="window.location.href = this.value">
 
                                 @foreach (core()->getCurrentChannel()->currencies as $currency)
                                     @if (isset($serachQuery))
