@@ -186,7 +186,7 @@ class Cart
             }
         }
 
-        Event::dispatch('checkout.cart.add.after', $cart);
+        Event::dispatch('checkout.cart.add.after', $parentCartItem);
 
         $this->collectTotals();
 
@@ -293,7 +293,7 @@ class Cart
     public function getItemByProduct($data)
     {
         $items = $this->getCart()->all_items;
-        
+
         foreach ($items as $item) {
             if ($item->product->getTypeInstance()->compareOptions($item->additional, $data['additional'])) {
                 if (isset($data['additional']['parent_id'])) {
@@ -607,7 +607,7 @@ class Cart
 
             if ($validationResult->isItemInactive()) {
                 $this->removeItem($item->id);
-                
+
                 $isInvalid = true;
 
                 session()->flash('info', __('shop::app.checkout.cart.item.inactive'));
