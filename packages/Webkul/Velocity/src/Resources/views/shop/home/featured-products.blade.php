@@ -73,6 +73,7 @@
                         'isMobileView': this.$root.isMobile(),
                     }
                 },
+                
 
                 mounted: function () {
                     this.getFeaturedProducts();
