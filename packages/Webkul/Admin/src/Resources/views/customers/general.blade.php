@@ -1,5 +1,3 @@
-{!! view_render_event('bagisto.admin.customer.edit.before', ['customer' => $customer]) !!}
-
 <form method="POST" action="{{ route('admin.customer.update', $customer->id) }}">
     <div class="page-content">
         <div class="form-container">
@@ -95,6 +93,9 @@
                                     @endforeach
                                 </select>
                             </div>
+
+                            {!! view_render_event('bagisto.admin.customer.edit.form.after', ['customer' => $customer]) !!}
+
                         </div>
                         <button type="submit" class="btn btn-lg btn-primary">
                             {{ __('admin::app.customers.customers.save-btn-title') }}
@@ -102,4 +103,3 @@
                 </div>
             </div>
         </form>
-        {!! view_render_event('bagisto.admin.customer.edit.form.after', ['customer' => $customer]) !!}
