@@ -110,6 +110,23 @@ class ProductRepository extends Repository
         Event::dispatch('catalog.product.delete.after', $id);
     }
 
+     /**
+     * @param int $categoryId
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getProductsRelatedToCategory($categoryId = null)
+    {
+        $qb = $this->model
+            ->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id');
+
+        if ($categoryId) {
+            $qb->where('product_categories.category_id', $categoryId);
+        }    
+        
+        return $qb->get();
+    }
+
     /**
      * @param int $categoryId
      *

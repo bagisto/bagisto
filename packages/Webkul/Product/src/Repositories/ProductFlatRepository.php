@@ -88,13 +88,16 @@ class ProductFlatRepository extends Repository
     }
 
     /**
-     * filter attribute option according to products
+     * filter attributes according to products
      * 
-     * @param  array  $filterAttributes
-     * @param  array  $products
+     * @param  array  $category
      * @return \Illuminate\Support\Collection
      */
-    public function productsRelatedAttributes($filterAttributes, $products) {
+    public function getProductsRelatedFilterableAttributes($category) {
+        $products = app('Webkul\Product\Repositories\ProductRepository')->getProductsRelatedToCategory($category->id);
+
+        $filterAttributes = $this->getFilterableAttributes($category, $products);
+
         $allProductAttributeOptionsCode = [];
 
         foreach ($products as $key => $product) {
