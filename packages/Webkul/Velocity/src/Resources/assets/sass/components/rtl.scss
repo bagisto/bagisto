@@ -2,6 +2,11 @@ body {
     &.rtl {
         text-align: right;
 
+        .order-summary-container {
+            margin-left: 0px;
+            margin-right: 130px;
+        }
+
         .velocity-divide-page {
             .right {
                 padding-left: 0 !important;
@@ -446,6 +451,7 @@ body {
         }
         .pr0 {
             padding-left: 0 !important;
+            padding-right: 15px !important;
         }
         .pl0 {
             padding-right: 0px !important;
@@ -518,6 +524,10 @@ body {
 @media only screen and (max-width: 992px) {
     body {
         &.rtl {
+            .order-summary-container {
+                margin-right: 0px;
+            }
+            
             .nav-container {
                 ul {
                     li {
@@ -566,6 +576,16 @@ body {
                     width: 150px;
                     top: 4px;
                 }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 425px) {
+    body {
+        &.rtl {
+            .fs16 {
+                font-size: 14px !important;
             }
         }
     }
