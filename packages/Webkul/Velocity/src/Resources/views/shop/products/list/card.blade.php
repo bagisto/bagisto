@@ -73,6 +73,18 @@
 
                             <span class="fs16">{{ $product->name }}</span>
                         </a>
+
+                        @if (isset($additionalAttributes) && $additionalAttributes)
+                            @if (isset($item->additional['attributes']))
+                                <div class="item-options">
+
+                                    @foreach ($item->additional['attributes'] as $attribute)
+                                        <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
+                                    @endforeach
+
+                                </div>
+                            @endif
+                        @endif
                     </div>
 
                     <div class="product-price">

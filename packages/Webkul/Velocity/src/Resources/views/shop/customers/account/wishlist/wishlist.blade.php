@@ -33,6 +33,7 @@
                 @endphp
 
                 @include ('shop::products.list.card', [
+                    'list'                 => true,
                     'checkmode'            => true,
                     'moveToCart'           => true,
                     'wishlistMoveRoute'    => route('customer.wishlist.move', $item->id),
