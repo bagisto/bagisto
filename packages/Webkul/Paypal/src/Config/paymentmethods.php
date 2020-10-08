@@ -15,6 +15,7 @@ return [
         'code'             => 'paypal_smart_button',
         'title'            => 'Paypal Smart Button',
         'description'      => 'Paypal Smart Button',
+        'client_id'        => 'sb',
         'class'            => 'Webkul\Paypal\Payment\SmartButton',
         'sandbox'          => true,
         'active'           => true,
