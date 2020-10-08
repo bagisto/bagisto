@@ -478,11 +478,8 @@ abstract class DataGrid
                                 );
                             }
                         } elseif ($columnType === 'boolean') {
-
                             if ($this->enableFilterMap && isset($this->filterMap[$columnName])) {
-
                                 if ($this->operators[$condition] == '=') {
-
                                     if ($filter_value == 1) {
                                         $collection->Where(function($query) use($columnName, $condition, $filter_value) {
                                             $query->where(
@@ -500,9 +497,7 @@ abstract class DataGrid
                                             )->orWhereNull($this->filterMap[$columnName]);
                                         });
                                     }
-
                                 } elseif ($this->operators[$condition] == '<>') {
-
                                     if ($filter_value == 1) {
                                         $collection->Where(function($query) use($columnName, $condition, $filter_value) {
                                             $query->where(
@@ -520,7 +515,6 @@ abstract class DataGrid
                                             )->orWhereNotNull($this->filterMap[$columnName]);
                                         });
                                     }
-
                                 } else {
                                     $collection->Where(function($query) use($columnName, $condition, $filter_value) {
                                         $query->where(
@@ -530,11 +524,8 @@ abstract class DataGrid
                                         );
                                     });
                                 }
-
-                            } elseif ($this->enableFilterMap && ! isset($this->filterMap[$columnName])) {
-                                
+                            } elseif ($this->enableFilterMap && ! isset($this->filterMap[$columnName])) {                           
                                 if ($this->operators[$condition] == '=') {
-
                                     if ($filter_value == 1) {
                                         $collection->Where(function($query) use($columnName, $condition, $filter_value) {
                                             $query->where(
@@ -552,9 +543,7 @@ abstract class DataGrid
                                             )->orWhereNull($this->filterMap[$columnName]);
                                         });
                                     }
-
                                 } elseif ($this->operators[$condition] == '<>') {
-
                                     if ($filter_value == 1) {
                                         $collection->Where(function($query) use($columnName, $condition, $filter_value) {
                                             $query->where(
@@ -572,7 +561,6 @@ abstract class DataGrid
                                             )->orWhereNotNull($this->filterMap[$columnName]);
                                         });
                                     }
-
                                 } else {
                                     $collection->Where(function($query) use($columnName, $condition, $filter_value) {
                                         $query->where(
@@ -582,11 +570,8 @@ abstract class DataGrid
                                         );
                                     });
                                 }
-
                             } else {
-
                                 if ($this->operators[$condition] == '=') {
-
                                     if ($filter_value == 1) {
                                         $collection->Where(function($query) use($columnName, $condition, $filter_value) {
                                             $query->where(
@@ -604,9 +589,7 @@ abstract class DataGrid
                                             )->orWhereNull($this->filterMap[$columnName]);
                                         });
                                     }
-
                                 } elseif ($this->operators[$condition] == '<>') {
-
                                     if ($filter_value == 1) {
                                         $collection->Where(function($query) use($columnName, $condition, $filter_value) {
                                             $query->where(
@@ -624,7 +607,6 @@ abstract class DataGrid
                                             )->orWhereNotNull($this->filterMap[$columnName]);
                                         });
                                     }
-
                                 } else {
                                     $collection->Where(function($query) use($columnName, $condition, $filter_value) {
                                         $query->where(
@@ -634,7 +616,6 @@ abstract class DataGrid
                                         );
                                     });
                                 }
-
                             }
                         } else {
                             if ($this->enableFilterMap && isset($this->filterMap[$columnName])) {
