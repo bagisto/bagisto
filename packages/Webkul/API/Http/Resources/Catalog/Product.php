@@ -56,7 +56,7 @@ class Product extends JsonResource
                     $product->getTypeInstance()->haveSpecialPrice(),
                     core()->currency($product->getTypeInstance()->getSpecialPrice())
                 ),
-            $product->getTypeInstance()->getProductPrices(),
+            'prices'                 => $product->getTypeInstance()->getProductPrices(),
             'reviews'                => [
                 'total'          => $total = $this->productReviewHelper->getTotalReviews($product),
                 'total_rating'   => $total ? $this->productReviewHelper->getTotalRating($product) : 0,
