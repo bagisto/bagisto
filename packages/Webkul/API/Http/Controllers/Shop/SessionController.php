@@ -115,11 +115,11 @@ class SessionController extends Controller
             $data['password'] = bcrypt($data['password']);
         }
 
-        $customerRepository->update($data, $customer->id);
+        $this->customerRepository->update($data, $customer->id);
 
         return response()->json([
             'message' => 'Your account has been updated successfully.',
-            'data'    => new CustomerResource($customerRepository->find($customer->id)),
+            'data'    => new CustomerResource($this->customerRepository->find($customer->id)),
         ]);
     }
 
