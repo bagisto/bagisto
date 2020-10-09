@@ -25,7 +25,7 @@
 
     <script type="text/x-template" id="quantity-changer-template">
         <div :class="`quantity control-group ${errors.has(controlName) ? 'has-error' : ''}`">
-            <label class="required">{{ __('shop::app.products.quantity') }}</label>
+            <label class="required" for="quantity-changer">{{ __('shop::app.products.quantity') }}</label>
             <button type="button" class="decrease" @click="decreaseQty()">-</button>
 
             <input
@@ -33,6 +33,7 @@
                 class="control"
                 :name="controlName"
                 :v-validate="validations"
+                id="quantity-changer"
                 data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;"
                 readonly />
 
@@ -49,12 +50,13 @@
     <script type="text/x-template" id="logo-template">
         <a
             :class="`left ${addClass}`"
-            href="{{ route('shop.home.index') }}">
+            href="{{ route('shop.home.index') }}"
+            aria-label="Logo">
 
             @if ($logo = core()->getCurrentChannel()->logo_url)
-                <img class="logo" src="{{ $logo }}" />
+                <img class="logo" src="{{ $logo }}" alt="" />
             @else
-                <img class="logo" src="{{ asset('themes/velocity/assets/images/logo-text.png') }}" />
+                <img class="logo" src="{{ asset('themes/velocity/assets/images/logo-text.png') }}" alt="" />
             @endif
         </a>
     </script>
@@ -74,7 +76,7 @@
 
                         <div class="btn-group full-width">
                             <div class="selectdiv">
-                                <select class="form-control fs13 styled-select" name="category" @change="focusInput($event)">
+                                <select class="form-control fs13 styled-select" name="category" @change="focusInput($event)" aria-label="Category">
                                     <option value="">
                                         {{ __('velocity::app.header.all-categories') }}
                                     </option>
@@ -107,11 +109,12 @@
                                     type="search"
                                     class="form-control"
                                     placeholder="{{ __('velocity::app.header.search-text') }}"
+                                    aria-label="Search"
                                     :value="searchedQuery.term ? searchedQuery.term.split('+').join(' ') : ''" />
 
                                 <image-search-component></image-search-component>
 
-                                <button class="btn" type="submit" id="header-search-icon">
+                                <button class="btn" type="submit" id="header-search-icon" aria-label="Search">
                                     <i class="fs16 fw6 rango-search"></i>
                                 </button>
                             </div>
@@ -165,8 +168,8 @@
         </div>
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
 
     <script type="text/x-template" id="image-search-component-template">
         <div class="d-inline-block">
@@ -183,7 +186,7 @@
                 <img
                     class="d-none"
                     id="uploaded-image-url"
-                    :src="uploadedImageUrl" />
+                    :src="uploadedImageUrl" alt="" />
             </label>
         </div>
     </script>

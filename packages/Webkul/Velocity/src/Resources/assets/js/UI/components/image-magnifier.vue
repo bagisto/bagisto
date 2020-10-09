@@ -6,6 +6,7 @@
             ref="activeProductImage"
             id="active-product-image"
             class="main-product-image"
+            alt=""
         />
     </div>
 </template>
