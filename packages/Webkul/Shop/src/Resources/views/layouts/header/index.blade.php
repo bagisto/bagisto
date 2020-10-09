@@ -30,7 +30,7 @@
                             required
                             name="term"
                             type="search"
-                            value="@if(! $image_search ) {{ $term }} @endif"
+                            value="@if(! $image_search ){{ $term }}@endif"
                             class="search-field"
                             id="search-bar"
                             placeholder="{{ __('shop::app.header.search-text') }}"
