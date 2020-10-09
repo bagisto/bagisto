@@ -30,6 +30,8 @@ class Product extends JsonResource
     public function toArray($request)
     {
         $product = $this->product ? $this->product : $this;
+        
+        $prices = $product->getTypeInstance()->getProductPrices();
 
         return [
             'id'                     => $product->id,
@@ -56,7 +58,8 @@ class Product extends JsonResource
                     $product->getTypeInstance()->haveSpecialPrice(),
                     core()->currency($product->getTypeInstance()->getSpecialPrice())
                 ),
-            'prices'                 => $product->getTypeInstance()->getProductPrices(),
+            'regular_price'           => data_get($prices, 'regular_price.price'),
+            'formatted_regular_price' => data_get($prices, 'regular_price.formated_price'),
             'reviews'                => [
                 'total'          => $total = $this->productReviewHelper->getTotalReviews($product),
                 'total_rating'   => $total ? $this->productReviewHelper->getTotalRating($product) : 0,
