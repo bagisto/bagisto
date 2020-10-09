@@ -307,7 +307,7 @@
 
                                         self.$root.hideLoader();
 
-                                        window.location.href = "{{ route('shop.search.index') }}";
+                                        window.location.href = "{{ route('shop.search.index') }}" + '?term=' + queryString + '&image-search=1';
                                     }
 
                                     app();
