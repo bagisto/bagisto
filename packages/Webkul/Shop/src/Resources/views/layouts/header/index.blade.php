@@ -248,6 +248,7 @@
 
             methods: {
                 uploadImage: function() {
+                    
                     var imageInput = this.$refs.image_search_input;
 
                     if (imageInput.files && imageInput.files[0]) {
@@ -306,7 +307,7 @@
 
                                         self.$root.hideLoader();
 
-                                        window.location.href = "{{ route('shop.search.index') }}" + '?term=' + queryString + '&image-search=1';
+                                        window.location.href = "{{ route('shop.search.index') }}";
                                     }
 
                                     app();
