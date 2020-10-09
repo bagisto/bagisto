@@ -67,7 +67,7 @@ export default {
                 self.images.push({
                     'path': self.public_path + '/storage/' + slider.path,
                     'title' : slider.title,
-                    'slider_path': slider.slider_path ? self.public_path+'/'+slider.slider_path : null
+                    'slider_path': slider.slider_path ? slider.slider_path : null
                 });
 
                 self.content.push(slider.content);
