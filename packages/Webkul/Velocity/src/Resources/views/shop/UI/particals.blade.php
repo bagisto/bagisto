@@ -107,7 +107,7 @@
                                     type="search"
                                     class="form-control"
                                     placeholder="{{ __('velocity::app.header.search-text') }}"
-                                    :value="searchedQuery.term ? searchedQuery.term.split('+').join(' ') : ''" />
+                                    :value="searchedQuery.term ? decodeURIComponent(searchedQuery.term.split('+').join(' ')) : ''" />
 
                                 <image-search-component></image-search-component>
 

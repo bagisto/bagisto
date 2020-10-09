@@ -23,7 +23,7 @@
 
     {!! view_render_event('bagisto.shop.customers.account.wishlist.list.before', ['wishlist' => $items]) !!}
 
-    <div class="account-items-list row wishlist-container">
+    <div class="wishlist-container">
 
         @if ($items->count())
             @foreach ($items as $item)
@@ -33,19 +33,22 @@
                 @endphp
 
                 @include ('shop::products.list.card', [
-                    'checkmode'         => true,
-                    'moveToCart'        => true,
-                    'addToCartForm'     => true,
-                    'removeWishlist'    => true,
-                    'reloadPage'        => true,
-                    'itemId'            => $item->id,
-                    'product'           => $item->product,
-                    'btnText'           => $moveToCartText,
-                    'addToCartBtnClass' => 'small-padding',
+                    'list'                 => true,
+                    'checkmode'            => true,
+                    'moveToCart'           => true,
+                    'wishlistMoveRoute'    => route('customer.wishlist.move', $item->id),
+                    'addToCartForm'        => true,
+                    'removeWishlist'       => true,
+                    'reloadPage'           => true,
+                    'itemId'               => $item->id,
+                    'product'              => $item->product,
+                    'additionalAttributes' => true,
+                    'btnText'              => $moveToCartText,
+                    'addToCartBtnClass'    => 'small-padding',
                 ])
             @endforeach
 
-            <div class="bottom-toolbar">
+            <div>
                 {{ $items->links()  }}
             </div>
         @else
