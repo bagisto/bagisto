@@ -1,9 +1,24 @@
-
 .vc-small-screen {
     display: none !important;
 }
 
 @media only screen and (max-width: 1192px) {
+    .sticky-header {
+        display: block !important;
+    }
+
+    .vc-full-screen{
+        display: block !important;
+    }
+
+    .vc-small-screen {
+        display: none !important;
+    }
+
+    #main-category {
+        display: block !important;
+    }
+
     .footer {
         .footer-content {
             .newsletter-subscription {
@@ -45,10 +60,6 @@
     }
 }
 
-
-@media only screen and (max-width: 992px) {
-
-}
 
 @media only screen and (max-width: 768px) {
     .modal-container {
@@ -122,8 +133,22 @@
         }
     }
 
+    #webheader {
+        display: none !important;
+        position: fixed;
+        background-color: #fff;
+    }
+
+    #main-category {
+        display: none !important;
+    }
+
     .main-container-wrapper {
         // position: relative;
+    }
+
+    .vc-full-screen{
+        display: none !important;
     }
 
     .vc-small-screen {
