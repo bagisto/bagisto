@@ -65,12 +65,14 @@ class Category extends TranslatableModel implements CategoryContract
      */
     public function filterableAttributes()
     {
-        return $this->belongsToMany(AttributeProxy::modelClass(), 'category_filterable_attributes')->with('options');
+        return $this->belongsToMany(AttributeProxy::modelClass(), 'category_filterable_attributes')->with(['options' => function($query) {
+            $query->orderBy('sort_order');
+        }]);
     }
 
     /**
      * Getting the root category of a category
-     * 
+     *
      * @return Category
      */
     public function getRootCategory(): Category
@@ -124,7 +126,7 @@ class Category extends TranslatableModel implements CategoryContract
         if ($category->id === $this->id) {
             return $category;
         }
-        
+
         return $this->findInTree($category->children);
     }
 }

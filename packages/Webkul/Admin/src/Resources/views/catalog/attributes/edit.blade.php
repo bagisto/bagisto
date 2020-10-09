@@ -359,7 +359,7 @@
 
                     <tbody>
 
-                        <tr v-for="(row, index) in optionRows">
+                        <tr v-for="(row, index) in optionRows" :key="row.id">
                             <td v-if="show_swatch && swatch_type == 'color'">
                                 <swatch-picker :input-name="'options[' + row.id + '][swatch_value]'" :color="row.swatch_value" colors="text-advanced" show-fallback />
                             </td>

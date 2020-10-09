@@ -87,6 +87,42 @@ class ProductFlatRepository extends Repository
         return $filterAttributes;
     }
 
+    /**
+     * filter attributes according to products
+     * 
+     * @param  array  $category
+     * @return \Illuminate\Support\Collection
+     */
+    public function getProductsRelatedFilterableAttributes($category) {
+        $products = app('Webkul\Product\Repositories\ProductRepository')->getProductsRelatedToCategory($category->id);
+
+        $filterAttributes = $this->getFilterableAttributes($category, $products);
+
+        $allProductAttributeOptionsCode = [];
+
+        foreach ($products as $key => $product) {
+            foreach ($filterAttributes as $attribute) {
+                if ($attribute->code <> 'price') {
+                    if (isset($product[$attribute->code])) {
+                        if (! in_array($product[$attribute->code], $allProductAttributeOptionsCode)) {
+                            array_push($allProductAttributeOptionsCode, $product[$attribute->code]);
+                        }
+                    }
+                }
+            }
+        }
+
+        foreach ($filterAttributes as $attribute) {
+            foreach ($attribute->options as $key => $option) {
+                if (! in_array($option->id, $allProductAttributeOptionsCode)) {
+                    unset($attribute->options[$key]);
+                }
+            }         
+        }   
+        
+        return $filterAttributes;
+
+    }
 
     /**
      * update product_flat custom column

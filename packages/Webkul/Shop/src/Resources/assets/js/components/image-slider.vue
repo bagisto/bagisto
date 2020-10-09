@@ -4,8 +4,10 @@
 
             <ul class="slider-images">
                 <li v-for="(image, index) in images" :key="index" v-bind:class="{'show': index==currentIndex}">
-                    <img class="slider-item" :alt="image.title" :src="image.path"/>
-                    <div class="show-content" v-bind:class="{'show': index==currentIndex}" :key="index" v-html="content[index]"></div>
+                    <a :href="image.slider_path">
+                        <img class="slider-item" :alt="image.title" :src="image.path" />
+                        <div class="show-content" v-bind:class="{'show': index==currentIndex}" :key="index" v-html="content[index]"></div>
+                    </a>
                 </li>
             </ul>
 
@@ -13,7 +15,6 @@
                 <span class="icon dark-left-icon slider-left" @click="changeIndexLeft"></span>
                 <span class="icon light-right-icon slider-right" @click="changeIndexRight"></span>
             </div>
-
         </div>
     </transition>
 </template>
@@ -65,7 +66,8 @@ export default {
             this.slides.forEach(function(slider) {
                 self.images.push({
                     'path': self.public_path + '/storage/' + slider.path,
-                    'title' : slider.title
+                    'title' : slider.title,
+                    'slider_path': slider.slider_path ? slider.slider_path : null
                 });
 
                 self.content.push(slider.content);
