@@ -698,14 +698,7 @@ class ProductRepository extends Repository
         if (!in_array('images', $attributesToSkip)) {
             foreach ($originalProduct->images as $image) {
                
-                $imagePath = $image['path'];
-                $imagename = explode('/', $imagePath);
-                $dir = 'product/' . $copiedProduct['id'];
-
-                Storage::copy($imagePath, $dir . '/' . $imagename[2]);
-                
-                $image['product_id'] =  $copiedProduct['id'];
-                $image['path'] = $dir . '/' . $imagename[2];
+                $image = $this->copyImage($image,$copiedProduct);
                 
                 $copiedProduct->images()->save($image->replicate());
 
@@ -738,5 +731,20 @@ class ProductRepository extends Repository
                 'child_id'  => $copiedProduct->id,
             ]);
         }
+    }
+
+
+    public function copyImage($image,$copiedProduct) {
+         
+        $imagePath = $image['path'];
+        $imagename = explode('/', $imagePath);
+        $dir = 'product/' . $copiedProduct['id'];
+
+        Storage::copy($imagePath, $dir . '/' . $imagename[2]);
+        
+        $image['product_id'] =  $copiedProduct['id'];
+        $image['path'] = $dir . '/' . $imagename[2];
+
+        return $image;
     }
 }
