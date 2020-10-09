@@ -103,7 +103,7 @@ class SessionController extends Controller
             'password'      => 'confirmed|min:6',
         ]);
 
-        $data = request()->all();
+        $data = request()->only('first_name','last_name','gender','date_of_birth','email','password');
 
         if (! $data['date_of_birth']) {
             unset($data['date_of_birth']);
