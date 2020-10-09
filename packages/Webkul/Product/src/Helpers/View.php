@@ -27,7 +27,7 @@ class View extends AbstractProduct
 
             if ($attribute->type == 'boolean') {
                 $value = $value ? 'Yes' : 'No';
-            } elseif ($value) {
+            } elseif($value) {
                 if ($attribute->type == 'select') {
                     $attributeOption = $attributeOptionReposotory->find($value);
 
@@ -37,8 +37,6 @@ class View extends AbstractProduct
                         if (! $value) {
                             continue;
                         }
-                    } else {
-                        continue;
                     }
                 } elseif ($attribute->type == 'multiselect' || $attribute->type == 'checkbox') {
                     $lables = [];
