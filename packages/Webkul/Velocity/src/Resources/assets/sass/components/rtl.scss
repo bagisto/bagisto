@@ -2,6 +2,10 @@ body {
     &.rtl {
         text-align: right;
 
+        .fs16 {
+            font-size: 14px !important;
+        }
+
         .order-summary-container {
             margin-left: 0px;
             margin-right: 130px;
@@ -585,7 +589,27 @@ body {
     body {
         &.rtl {
             .fs16 {
-                font-size: 14px !important;
+                font-size: 12px !important;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 375px) {
+    body {
+        &.rtl {
+            .fs16 {
+                font-size: 10px !important;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    body {
+        &.rtl {
+            .fs16 {
+                font-size: 8px !important;
             }
         }
     }
