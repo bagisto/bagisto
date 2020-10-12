@@ -17,7 +17,5 @@ return [
     // Return neither true nor false but null by default to not interrupt the default chain that
     // defines if a product is saleable. It depends on the isSaleable() method of the product
     // type if this callable is obeyed.
-    'isSaleable'           => function (Product $product): ?bool {
-        return null;
-    },
+    'isSaleable'           => null,
 ];

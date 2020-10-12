@@ -20,6 +20,7 @@
                                         name="subscriber_email"
                                         class="control subscribe-field"
                                         placeholder="{{ __('velocity::app.customer.login-form.your-email-address') }}"
+                                        aria-label="Newsletter"
                                         required />
 
                                     <button class="theme-btn subscribe-btn fw6">
