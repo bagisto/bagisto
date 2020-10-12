@@ -27,4 +27,13 @@
         </a>
     @endauth
 
+    @guest('customer')
+        <a
+            class="unset wishlist-icon {{ $addWishlistClass ?? '' }} text-right"
+            href="{{ route('customer.wishlist.add', $product->product_id) }}"
+            title="{{ __('velocity::app.shop.wishlist.add-wishlist-text') }}">
+            <wishlist-component active="false"></wishlist-component>
+        </a>
+    @endauth
+
 {!! view_render_event('bagisto.shop.products.wishlist.after') !!}
