@@ -29,7 +29,7 @@
                             required
                             name="term"
                             type="search"
-                            value="{{ $term }}"
+                            value="{{ ! $image_search ? $term : '' }}"
                             class="search-field"
                             id="search-bar"
                             placeholder="{{ __('shop::app.header.search-text') }}"
