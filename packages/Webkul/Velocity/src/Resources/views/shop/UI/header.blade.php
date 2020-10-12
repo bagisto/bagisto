@@ -72,7 +72,7 @@
                                                 <img
                                                     class="category-icon"
                                                     v-if="category.category_icon_path"
-                                                    :src="`${$root.baseUrl}/storage/${category.category_icon_path}`" />
+                                                    :src="`${$root.baseUrl}/storage/${category.category_icon_path}`" alt="" />
                                             </div>
                                             <span v-text="category.name"></span>
                                         </a>
@@ -134,11 +134,11 @@
                                                 @if ($locale->locale_image)
                                                     <img
                                                         class="language-logo"
-                                                        src="{{ asset('/storage/' . $locale->locale_image) }}" />
+                                                        src="{{ asset('/storage/' . $locale->locale_image) }}" alt="" />
                                                 @elseif ($locale->code == "en")
                                                     <img
                                                         class="language-logo"
-                                                        src="{{ asset('/themes/velocity/assets/images/flags/en.png') }}" />
+                                                        src="{{ asset('/themes/velocity/assets/images/flags/en.png') }}" alt="" />
                                                 @endif
                                             </div>
                                             <span>{{ $locale->name }}</span>
@@ -213,7 +213,7 @@
                                                 <img
                                                     class="category-icon"
                                                     v-if="nestedSubCategory.category_icon_path"
-                                                    :src="`${$root.baseUrl}/storage/${nestedSubCategory.category_icon_path}`" />
+                                                    :src="`${$root.baseUrl}/storage/${nestedSubCategory.category_icon_path}`" alt="" />
                                             </div>
                                             <span>@{{ nestedSubCategory.name }}</span>
                                         </a>
@@ -234,7 +234,7 @@
                                                         <img
                                                             class="category-icon"
                                                             v-if="thirdLevelCategory.category_icon_path"
-                                                            :src="`${$root.baseUrl}/storage/${thirdLevelCategory.category_icon_path}`" />
+                                                            :src="`${$root.baseUrl}/storage/${thirdLevelCategory.category_icon_path}`" alt="" />
                                                     </div>
                                                     <span>@{{ thirdLevelCategory.name }}</span>
                                                 </a>
@@ -266,14 +266,14 @@
                                                     <div class="category-logo">
                                                         <img
                                                         class="category-icon"
-                                                        src="{{ asset('/themes/velocity/assets/images/flags/en.png') }}" />
+                                                        src="{{ asset('/themes/velocity/assets/images/flags/en.png') }}" alt="" />
                                                     </div>
                                                 @else
 
                                                     <div class="category-logo">
                                                         <img
                                                         class="category-icon"
-                                                        src="{{ asset('/storage/' . $locale->locale_image) }}" />
+                                                        src="{{ asset('/storage/' . $locale->locale_image) }}" alt="" />
                                                     </div>
                                                 @endif
 

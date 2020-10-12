@@ -19,7 +19,7 @@
             <img
                 v-else
                 class="vc-small-product-image"
-                src="{{ $images[0]['large_image_url'] }}" />
+                src="{{ $images[0]['large_image_url'] }}" alt="" />
         </div>
 
         <div class="row col-12">

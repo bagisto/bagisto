@@ -21,13 +21,13 @@
             <div class="row">
                 @if ( isset($advertisementTwo[0]))
                     <a class="col-lg-9 col-md-12 no-padding">
-                        <img src="{{ asset('/storage/' . $advertisementTwo[0]) }}" />
+                        <img src="{{ asset('/storage/' . $advertisementTwo[0]) }}" alt="" />
                     </a>
                 @endif
                 
                 @if ( isset($advertisementTwo[1]))
                     <a class="col-lg-3 col-md-12 pr0">
-                        <img src="{{ asset('/storage/' . $advertisementTwo[1]) }}" />
+                        <img src="{{ asset('/storage/' . $advertisementTwo[1]) }}" alt="" />
                     </a>
                 @endif
             </div>
@@ -39,11 +39,11 @@
     <div class="container-fluid advertisement-two-container">
         <div class="row">
             <a class="col-lg-9 col-md-12 no-padding">
-                <img src="{{ asset('/themes/velocity/assets/images/toster.png') }}" />
+                <img src="{{ asset('/themes/velocity/assets/images/toster.webp') }}" alt="" />
             </a>
 
             <a class="col-lg-3 col-md-12 pr0">
-                <img src="{{ asset('/themes/velocity/assets/images/trimmer.png') }}" />
+                <img src="{{ asset('/themes/velocity/assets/images/trimmer.webp') }}" alt="" />
             </a>
         </div>
     </div>
