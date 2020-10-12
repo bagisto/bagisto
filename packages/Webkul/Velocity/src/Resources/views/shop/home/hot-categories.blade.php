@@ -15,7 +15,7 @@
             <div class="card">
                 <div class="row velocity-divide-page">
                     <div class="left">
-                        <img :src="`${$root.baseUrl}/storage/${hotCategoryDetails.category_icon_path}`" />
+                        <img :src="`${$root.baseUrl}/storage/${hotCategoryDetails.category_icon_path}`" alt="" />
                     </div>
 
                     <div class="right">
