@@ -1,5 +1,6 @@
 <?php
     $term = request()->input('term');
+    $image_search = request()->input('image-search');
 
     if (! is_null($term)) {
         $serachQuery = 'term='.request()->input('term');
@@ -29,7 +30,7 @@
                             required
                             name="term"
                             type="search"
-                            value="{{ $term }}"
+                            value="{{ ! $image_search ? $term : '' }}"
                             class="search-field"
                             id="search-bar"
                             placeholder="{{ __('shop::app.header.search-text') }}"
