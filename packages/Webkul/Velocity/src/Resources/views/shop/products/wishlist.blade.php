@@ -19,7 +19,7 @@
                 title="{{ __('velocity::app.shop.wishlist.remove-wishlist-text') }}"
             @endif>
 
-            <wishlist-component active="{{ !$isWished }}"></wishlist-component>
+            <wishlist-component active="{{ ! $isWished }}"></wishlist-component>
 
             @if (isset($text))
                 {!! $text !!}
