@@ -28,7 +28,8 @@
                             <a @if($slider['slider_path']) href="{{ $slider['slider_path'] }}" @endif>
                                 <img
                                     class="col-12 no-padding banner-icon"
-                                    src="{{ url()->to('/') . '/storage/' . $slider['path'] }}" />
+                                    src="{{ url()->to('/') . '/storage/' . $slider['path'] }}"
+                                    alt=""/>
 
                                 <div class="show-content" v-html="'{{ $textContent }}'">
                                 </div>
@@ -41,7 +42,8 @@
                         <img
                             loading="lazy"
                             class="col-12 no-padding banner-icon"
-                            src="{{ asset('/themes/velocity/assets/images/banner.png') }}" />
+                            src="{{ asset('/themes/velocity/assets/images/banner.webp') }}"
+                            alt=""/>
                     </slide>
                 @endif
 

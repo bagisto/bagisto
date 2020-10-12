@@ -708,6 +708,7 @@ class Cart
 
             $item->save();
         }
+        
         Event::dispatch('checkout.cart.calculate.items.tax.after', $cart);
     }
 

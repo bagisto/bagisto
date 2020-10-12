@@ -26,7 +26,7 @@
 
     $galleryImages = $productImageHelper->getGalleryImages($product);
     $priceHTML = view('shop::products.price', ['product' => $product])->render();
-    
+
     $product->__set('priceHTML', $priceHTML);
     $product->__set('avgRating', $avgRatings);
     $product->__set('totalReviews', $totalReviews);
@@ -57,7 +57,7 @@
 
                     <img
                         src="{{ $productBaseImage['medium_image_url'] }}"
-                        :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
+                        :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" alt="" />
                     <div class="quick-view-in-list">
                         <product-quick-view-btn :quick-view-details="{{ json_encode($product) }}"></product-quick-view-btn>
                     </div>
@@ -73,6 +73,18 @@
 
                             <span class="fs16">{{ $product->name }}</span>
                         </a>
+
+                        @if (isset($additionalAttributes) && $additionalAttributes)
+                            @if (isset($item->additional['attributes']))
+                                <div class="item-options">
+
+                                    @foreach ($item->additional['attributes'] as $attribute)
+                                        <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
+                                    @endforeach
+
+                                </div>
+                            @endif
+                        @endif
                     </div>
 
                     <div class="product-price">
@@ -115,7 +127,7 @@
                     {{-- <product-quick-view-btn :quick-view-details="product"></product-quick-view-btn> --}}
                     <product-quick-view-btn :quick-view-details="{{ json_encode($product) }}"></product-quick-view-btn>
             </a>
-            
+
             @if ($product->new)
                 <div class="sticker new">
                    {{ __('shop::app.products.new') }}
@@ -130,6 +142,18 @@
                         class="unset">
 
                         <span class="fs16">{{ $product->name }}</span>
+
+                        @if (isset($additionalAttributes) && $additionalAttributes)
+                            @if (isset($item->additional['attributes']))
+                                <div class="item-options">
+
+                                    @foreach ($item->additional['attributes'] as $attribute)
+                                        <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
+                                    @endforeach
+
+                                </div>
+                            @endif
+                        @endif
                     </a>
                 </div>
 
@@ -155,6 +179,7 @@
                         'product'           => $product,
                         'btnText'           => $btnText ?? null,
                         'moveToCart'        => $moveToCart ?? null,
+                        'wishlistMoveRoute' => $wishlistMoveRoute ?? null,
                         'reloadPage'        => $reloadPage ?? null,
                         'addToCartForm'     => $addToCartForm ?? false,
                         'addToCartBtnClass' => $addToCartBtnClass ?? '',
