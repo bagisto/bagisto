@@ -1,5 +1,5 @@
 @if (request()->route()->getName() == 'shop.checkout.onepage.index')
-<script src="https://www.paypal.com/sdk/js?client-id={{core()->getConfigData('sales.paymentmethods.paypal_smart_button.client_id')}}"></script>
+<script src="https://www.paypal.com/sdk/js?client-id={{core()->getConfigData('sales.paymentmethods.paypal_smart_button.client_id')}}" data-partner-attribution-id="Bagisto_Cart"></script>
 
 <style>
     .component-frame.visible {
