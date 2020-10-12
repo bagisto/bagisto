@@ -22,9 +22,9 @@
                                 </div>
 
                                 <div>
-                                    <h4 class="fs20 fw6 no-margin display-block">
+                                    <h3 class="fs20 fw6 no-margin display-block">
                                         {{ $review['name'] }}
-                                    </h4>
+                                    </h3>
 
                                     <div class="product-info fs16">
                                         <span>{{ __('velocity::app.products.reviewed') }}- <a class="remove-decoration link-color" href="{{ route('shop.productOrCategory.index', $review->product->url_key) }}">{{$review->product->name}}</a></span>

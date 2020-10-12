@@ -166,19 +166,19 @@
                             @php
                                 $images[4][] = [
                                     'id' => 'image_1',
-                                    'url' => asset('/themes/velocity/assets/images/big-sale-banner.png'),
+                                    'url' => asset('/themes/velocity/assets/images/big-sale-banner.webp'),
                                 ];
                                 $images[4][] = [
                                     'id' => 'image_2',
-                                    'url' => asset('/themes/velocity/assets/images/seasons.png'),
+                                    'url' => asset('/themes/velocity/assets/images/seasons.webp'),
                                 ];
                                 $images[4][] = [
                                     'id' => 'image_3',
-                                    'url' => asset('/themes/velocity/assets/images/deals.png'),
+                                    'url' => asset('/themes/velocity/assets/images/deals.webp'),
                                 ];
                                 $images[4][] = [
                                     'id' => 'image_4',
-                                    'url' => asset('/themes/velocity/assets/images/kids.png'),
+                                    'url' => asset('/themes/velocity/assets/images/kids.webp'),
                                 ];
                             @endphp
                         
@@ -213,15 +213,15 @@
                             @php
                                 $images[3][] = [
                                     'id' => 'image_1',
-                                    'url' => asset('/themes/velocity/assets/images/headphones.png'),
+                                    'url' => asset('/themes/velocity/assets/images/headphones.webp'),
                                 ];
                                 $images[3][] = [
                                     'id' => 'image_2',
-                                    'url' => asset('/themes/velocity/assets/images/watch.png'),
+                                    'url' => asset('/themes/velocity/assets/images/watch.webp'),
                                 ];
                                 $images[3][] = [
                                     'id' => 'image_3',
-                                    'url' => asset('/themes/velocity/assets/images/kids-2.png'),
+                                    'url' => asset('/themes/velocity/assets/images/kids-2.webp'),
                                 ];
                             @endphp
 
@@ -255,11 +255,11 @@
                             @php
                                 $images[2][] = [
                                     'id' => 'image_1',
-                                    'url' => asset('/themes/velocity/assets/images/toster.png'),
+                                    'url' => asset('/themes/velocity/assets/images/toster.webp'),
                                 ];
                                 $images[2][] = [
                                     'id' => 'image_2',
-                                    'url' => asset('/themes/velocity/assets/images/trimmer.png'),
+                                    'url' => asset('/themes/velocity/assets/images/trimmer.webp'),
                                 ];
                             @endphp
 
