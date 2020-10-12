@@ -20,7 +20,7 @@
         $list = true;
     }
 
-    $productBaseImage = $productImageHelper->getProductBaseImage($product);
+    $productBaseImage = $productImageHelper->getProductImage($item);
     $totalReviews = $reviewHelper->getTotalReviews($product);
     $avgRatings = ceil($reviewHelper->getAverageRating($product));
 

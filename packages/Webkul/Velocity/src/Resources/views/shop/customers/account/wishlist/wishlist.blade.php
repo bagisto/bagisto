@@ -41,6 +41,7 @@
                     'removeWishlist'       => true,
                     'reloadPage'           => true,
                     'itemId'               => $item->id,
+                    'item'                 => $item,
                     'product'              => $item->product,
                     'additionalAttributes' => true,
                     'btnText'              => $moveToCartText,
