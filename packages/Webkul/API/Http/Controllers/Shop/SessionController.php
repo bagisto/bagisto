@@ -39,8 +39,6 @@ class SessionController extends Controller
 
         $this->customerRepository = $customerRepository;
         
-        $this->updatedCustomer = $customerRepository;
-        
     }
 
     /**
@@ -114,11 +112,11 @@ class SessionController extends Controller
             $data['password'] = bcrypt($data['password']);
         }
 
-        $this->updatedCustomer->update($data, $customer->id);
+        $updatedCustomer = $this->customerRepository->update($data, $customer->id);
 
         return response()->json([
             'message' => 'Your account has been updated successfully.',
-            'data'    => new CustomerResource($this->updatedCustomer->find($customer->id)),
+            'data'    => new CustomerResource($updatedCustomer),
         ]);
     }
 
