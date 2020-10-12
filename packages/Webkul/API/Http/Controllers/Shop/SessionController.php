@@ -38,7 +38,6 @@ class SessionController extends Controller
         $this->_config = request('_config');
 
         $this->customerRepository = $customerRepository;
-        
     }
 
     /**
@@ -106,7 +105,7 @@ class SessionController extends Controller
 
         $data = request()->only('first_name', 'last_name', 'gender', 'date_of_birth', 'email', 'password');
 
-        if (!isset($data['password']) || ! $data['password']) {
+        if (! isset($data['password']) || ! $data['password']) {
             unset($data['password']);
         } else {
             $data['password'] = bcrypt($data['password']);
