@@ -1,6 +1,5 @@
 <template>
     <i
-        v-if="isCustomer == 'true'"
         :class="`material-icons ${addClass ? addClass : ''}`"
         @mouseover="isActive ? isActive = !isActive : ''"
         @mouseout="active !== '' && !isActive ? isActive = !isActive : ''">
@@ -18,7 +17,6 @@
 
         data: function () {
             return {
-                isStateChanged: false,
                 isActive: this.active,
             }
         }
