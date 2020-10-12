@@ -38,6 +38,9 @@ class SessionController extends Controller
         $this->_config = request('_config');
 
         $this->customerRepository = $customerRepository;
+        
+        $this->updatedCustomer = $customerRepository;
+        
     }
 
     /**
@@ -103,11 +106,7 @@ class SessionController extends Controller
             'password'      => 'confirmed|min:6',
         ]);
 
-        $data = request()->only('first_name','last_name','gender','date_of_birth','email','password');
-
-        if (! $data['date_of_birth']) {
-            unset($data['date_of_birth']);
-        }
+        $data = request()->only('first_name', 'last_name', 'gender', 'date_of_birth', 'email', 'password');
 
         if (!isset($data['password']) || ! $data['password']) {
             unset($data['password']);
@@ -115,11 +114,11 @@ class SessionController extends Controller
             $data['password'] = bcrypt($data['password']);
         }
 
-        $this->customerRepository->update($data, $customer->id);
+        $this->updatedCustomer->update($data, $customer->id);
 
         return response()->json([
             'message' => 'Your account has been updated successfully.',
-            'data'    => new CustomerResource($this->customerRepository->find($customer->id)),
+            'data'    => new CustomerResource($this->updatedCustomer->find($customer->id)),
         ]);
     }
 
