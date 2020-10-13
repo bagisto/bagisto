@@ -110,11 +110,11 @@
                                         class="form-control"
                                         placeholder="{{ __('velocity::app.header.search-text') }}"
                                         aria-label="Search"
-                                        :value="searchedQuery.term ? decodeURIComponent(searchedQuery.term.split('+').join(' ')) : ''" />
+                                        v-model:value="inputVal" />
 
                                     <image-search-component></image-search-component>
 
-                                    <button class="btn" type="submit" id="header-search-icon" aria-label="Search">
+                                    <button class="btn" type="button" id="header-search-icon" aria-label="Search" @click="submitForm">
                                         <i class="fs16 fw6 rango-search"></i>
                                     </button>
                                 </div>
@@ -286,8 +286,10 @@
 
             Vue.component('searchbar-component', {
                 template: '#searchbar-template',
+
                 data: function () {
                     return {
+                        inputVal: '',
                         compareCount: 0,
                         wishlistCount: 0,
                         searchedQuery: [],
@@ -318,12 +320,22 @@
 
                     this.searchedQuery = updatedSearchedCollection;
 
+                    if (this.searchedQuery.term) {
+                        this.inputVal = decodeURIComponent(this.searchedQuery.term.split('+').join(' '));
+                    }
+
                     this.updateHeaderItemsCount();
                 },
 
                 methods: {
                     'focusInput': function (event) {
                         $(event.target.parentElement.parentElement).find('input').focus();
+                    },
+
+                    'submitForm': function () {
+                        if (this.inputVal !== '') {
+                            $('#search-form').submit();
+                        }
                     },
 
                     'updateHeaderItemsCount': function () {
