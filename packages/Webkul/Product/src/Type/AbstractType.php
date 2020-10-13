@@ -660,13 +660,15 @@ abstract class AbstractType
             }
 
             if ($price->value_type == 'discount') {
-                $lastPrice = $product->price - ($product->price * $price->value) / 100;
+                if ($price->value >= 0 && $price->value <= 100) {
+                    $lastPrice = $product->price - ($product->price * $price->value) / 100;
 
-                $lastQty = $price->qty;
+                    $lastQty = $price->qty;
 
-                $lastCustomerGroupId = $price->customer_group_id;
+                    $lastCustomerGroupId = $price->customer_group_id;
+                }
             } else {
-                if ($price->value < $lastPrice) {
+                if ($price->value >= 0 && $price->value < $lastPrice) {
                     $lastPrice = $price->value;
 
                     $lastQty = $price->qty;
