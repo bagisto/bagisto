@@ -72,7 +72,8 @@ return [
         'page-title' => config('app.name') . ' - Search',
         'found-results' => 'Search Results Found',
         'found-result' => 'Search Result Found',
-        'analysed-keywords' => 'Analysed Keywords'
+        'analysed-keywords' => 'Analysed Keywords',
+        'image-search-option' => 'Image Search Option'
     ],
 
     'reviews' => [
