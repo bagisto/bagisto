@@ -62,108 +62,109 @@
     </script>
 
     <script type="text/x-template" id="searchbar-template">
-        <div class="row no-margin right searchbar">
-            <div class="col-lg-5 col-md-12 no-padding input-group">
-                <form
-                    method="GET"
-                    role="search"
-                    id="search-form"
-                    action="{{ route('velocity.search.index') }}">
+        <div class="right searchbar">
+            <div class="row">
+                <div class="col-5">
+                    <div class="input-group">
+                        <form
+                            method="GET"
+                            role="search"
+                            id="search-form"
+                            action="{{ route('velocity.search.index') }}">
 
-                    <div
-                        class="btn-toolbar full-width"
-                        role="toolbar">
+                            <div
+                                class="btn-toolbar full-width"
+                                role="toolbar">
 
-                        <div class="btn-group full-width">
-                            <div class="selectdiv">
-                                <select class="form-control fs13 styled-select" name="category" @change="focusInput($event)" aria-label="Category">
-                                    <option value="">
-                                        {{ __('velocity::app.header.all-categories') }}
-                                    </option>
+                                <div class="btn-group full-width">
+                                    <div class="selectdiv">
+                                        <select class="form-control fs13 styled-select" name="category" @change="focusInput($event)" aria-label="Category">
+                                            <option value="">
+                                                {{ __('velocity::app.header.all-categories') }}
+                                            </option>
 
-                                    <template v-for="(category, index) in $root.sharedRootCategories">
-                                        <option
-                                            :key="index"
-                                            selected="selected"
-                                            :value="category.id"
-                                            v-if="(category.id == searchedQuery.category)">
-                                            @{{ category.name }}
-                                        </option>
+                                            <template v-for="(category, index) in $root.sharedRootCategories">
+                                                <option
+                                                    :key="index"
+                                                    selected="selected"
+                                                    :value="category.id"
+                                                    v-if="(category.id == searchedQuery.category)">
+                                                    @{{ category.name }}
+                                                </option>
 
-                                        <option :key="index" :value="category.id" v-else>
-                                            @{{ category.name }}
-                                        </option>
-                                    </template>
-                                </select>
+                                                <option :key="index" :value="category.id" v-else>
+                                                    @{{ category.name }}
+                                                </option>
+                                            </template>
+                                        </select>
 
-                                <div class="select-icon-container">
-                                    <span class="select-icon rango-arrow-down"></span>
+                                        <div class="select-icon-container">
+                                            <span class="select-icon rango-arrow-down"></span>
+                                        </div>
+                                    </div>
+
+                                    <input
+                                        required
+                                        name="term"
+                                        type="search"
+                                        class="form-control"
+                                        placeholder="{{ __('velocity::app.header.search-text') }}"
+                                        aria-label="Search"
+                                        :value="searchedQuery.term ? decodeURIComponent(searchedQuery.term.split('+').join(' ')) : ''" />
+
+                                    <image-search-component></image-search-component>
+
+                                    <button class="btn" type="submit" id="header-search-icon" aria-label="Search">
+                                        <i class="fs16 fw6 rango-search"></i>
+                                    </button>
                                 </div>
                             </div>
 
-                            <div class="full-width">
-
-                                <input
-                                    required
-                                    name="term"
-                                    type="search"
-                                    class="form-control"
-                                    placeholder="{{ __('velocity::app.header.search-text') }}"
-                                    aria-label="Search"
-                                    :value="searchedQuery.term ? decodeURIComponent(searchedQuery.term.split('+').join(' ')) : ''" />
-
-                                <image-search-component></image-search-component>
-
-                                <button class="btn" type="submit" id="header-search-icon" aria-label="Search">
-                                    <i class="fs16 fw6 rango-search"></i>
-                                </button>
-                            </div>
-                        </div>
+                        </form>
                     </div>
+                </div>
 
-                </form>
-            </div>
+                <div class="col-7">
+                    {!! view_render_event('bagisto.shop.layout.header.cart-item.before') !!}
+                        @include('shop::checkout.cart.mini-cart')
+                    {!! view_render_event('bagisto.shop.layout.header.cart-item.after') !!}
 
-            <div class="col-lg-7 col-md-12">
-                {!! view_render_event('bagisto.shop.layout.header.cart-item.before') !!}
-                    @include('shop::checkout.cart.mini-cart')
-                {!! view_render_event('bagisto.shop.layout.header.cart-item.after') !!}
+                    @php
+                        $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false
+                    @endphp
 
-                @php
-                    $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false
-                @endphp
+                    {!! view_render_event('bagisto.shop.layout.header.compare.before') !!}
+                        @if ($showCompare)
+                            <a
+                                class="compare-btn unset"
+                                @auth('customer')
+                                    href="{{ route('velocity.customer.product.compare') }}"
+                                @endauth
 
-                {!! view_render_event('bagisto.shop.layout.header.compare.before') !!}
-                    @if ($showCompare)
-                        <a
-                            class="compare-btn unset"
-                            @auth('customer')
-                                href="{{ route('velocity.customer.product.compare') }}"
-                            @endauth
+                                @guest('customer')
+                                    href="{{ route('velocity.product.compare') }}"
+                                @endguest
+                                >
 
-                            @guest('customer')
-                                href="{{ route('velocity.product.compare') }}"
-                            @endguest
-                            >
+                                <i class="material-icons">compare_arrows</i>
+                                <div class="badge-container" v-if="compareCount > 0">
+                                    <span class="badge" v-text="compareCount"></span>
+                                </div>
+                                <span>{{ __('velocity::app.customer.compare.text') }}</span>
+                            </a>
+                        @endif
+                    {!! view_render_event('bagisto.shop.layout.header.compare.after') !!}
 
-                            <i class="material-icons">compare_arrows</i>
-                            <div class="badge-container" v-if="compareCount > 0">
-                                <span class="badge" v-text="compareCount"></span>
+                    {!! view_render_event('bagisto.shop.layout.header.wishlist.before') !!}
+                        <a class="wishlist-btn unset" :href="`${isCustomer ? '{{ route('customer.wishlist.index') }}' : '{{ route('velocity.product.guest-wishlist') }}'}`">
+                            <i class="material-icons">favorite_border</i>
+                            <div class="badge-container" v-if="wishlistCount > 0">
+                                <span class="badge" v-text="wishlistCount"></span>
                             </div>
-                            <span>{{ __('velocity::app.customer.compare.text') }}</span>
+                            <span>{{ __('shop::app.layouts.wishlist') }}</span>
                         </a>
-                    @endif
-                {!! view_render_event('bagisto.shop.layout.header.compare.after') !!}
-
-                {!! view_render_event('bagisto.shop.layout.header.wishlist.before') !!}
-                    <a class="wishlist-btn unset" :href="`${isCustomer ? '{{ route('customer.wishlist.index') }}' : '{{ route('velocity.product.guest-wishlist') }}'}`">
-                        <i class="material-icons">favorite_border</i>
-                        <div class="badge-container" v-if="wishlistCount > 0">
-                            <span class="badge" v-text="wishlistCount"></span>
-                        </div>
-                        <span>{{ __('shop::app.layouts.wishlist') }}</span>
-                    </a>
-                {!! view_render_event('bagisto.shop.layout.header.wishlist.after') !!}
+                    {!! view_render_event('bagisto.shop.layout.header.wishlist.after') !!}
+                </div>
             </div>
         </div>
     </script>
