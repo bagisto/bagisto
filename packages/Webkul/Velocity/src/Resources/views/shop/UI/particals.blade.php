@@ -172,7 +172,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
 
     <script type="text/x-template" id="image-search-component-template">
-        <div class="d-inline-block">
+        <div class="d-inline-block" v-if="image_search_status">
             <label class="image-search-container" for="image-search-container">
                 <i class="icon camera-icon"></i>
 
@@ -355,7 +355,8 @@
                 template: '#image-search-component-template',
                 data: function() {
                     return {
-                        uploadedImageUrl: ''
+                        uploadedImageUrl: '',
+                        image_search_status: "{{core()->getConfigData('general.content.shop.image_search') == '1' ? true : false}}"
                     }
                 },
 
