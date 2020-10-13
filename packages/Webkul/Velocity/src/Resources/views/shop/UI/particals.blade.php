@@ -173,8 +173,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
 
     <script type="text/x-template" id="image-search-component-template">
-        <div class="d-inline-block">
-            <label class="image-search-container" for="image-search-container">
+        <div class="d-inline-block image-search-container">
+            <label for="image-search-container">
                 <i class="icon camera-icon"></i>
 
                 <input

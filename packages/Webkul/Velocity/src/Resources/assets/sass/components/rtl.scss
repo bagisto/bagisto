@@ -493,36 +493,7 @@ body {
 }
 
 @media only screen and (max-width: 1192px) {
-    body {
-        &.rtl {
-
-            #search-form {
-
-                #header-search-icon {
-                    float: right;
-                    border-radius: 2px 0px 0px 2px;
-                }
-
-                .btn-group {
-                    .selectdiv {
-                        width: 190px;
-                    }
-                }
-
-                .selectdiv {
-                    + div {
-                        input {
-                            width: 220px;
-                        }
-                    }
-                }
-            }
-
-            .image-search-container {
-                left: 70px;
-            }
-        }
-    }
+    
 }
 
 @media only screen and (max-width: 992px) {
@@ -531,7 +502,7 @@ body {
             .order-summary-container {
                 margin-right: 0px;
             }
-            
+
             .nav-container {
                 ul {
                     li {
