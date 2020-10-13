@@ -7,6 +7,7 @@ import de from 'vee-validate/dist/locale/de';
 import ar from 'vee-validate/dist/locale/ar';
 import VeeValidate, { Validator } from 'vee-validate';
 import axios from 'axios';
+import 'lazysizes';
 
 window.axios = axios;
 window.VeeValidate = VeeValidate;
