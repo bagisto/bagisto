@@ -20,7 +20,12 @@
         $list = true;
     }
 
-    $productBaseImage = $productImageHelper->getProductImage($item);
+    if (isset($item)) {
+        $productBaseImage = $productImageHelper->getProductImage($item);
+    } else {
+        $productBaseImage = $productImageHelper->getProductBaseImage($product);
+    }
+
     $totalReviews = $reviewHelper->getTotalReviews($product);
     $avgRatings = ceil($reviewHelper->getAverageRating($product));
 
