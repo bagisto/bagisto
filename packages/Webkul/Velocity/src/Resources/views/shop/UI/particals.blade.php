@@ -368,7 +368,8 @@
                 template: '#image-search-component-template',
                 data: function() {
                     return {
-                        uploadedImageUrl: ''
+                        uploadedImageUrl: '',
+                        image_search_status: "{{core()->getConfigData('general.content.shop.image_search') == '1' ? true : false}}"
                     }
                 },
 

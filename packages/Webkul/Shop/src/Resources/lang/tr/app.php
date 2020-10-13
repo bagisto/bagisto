@@ -69,7 +69,8 @@ return [
         'no-results' => 'Sonuç Bulunamadı',
         'page-title' => config('app.name') . ' - Arama',
         'found-results' => 'Arama Sonuçları',
-        'found-result' => 'Arama Sonuçları'
+        'found-result' => 'Arama Sonuçları',
+        'image-search-option' => 'Image Search Option'
     ],
 
     'reviews' => [
