@@ -38,7 +38,7 @@ class Install extends Command
     public function handle()
     {
         $this->checkForEnvFile();
-        sleep(3);
+        
         // running `php artisan migrate`
         $this->warn('Step: Migrating all tables into database...');
         $migrate = $this->call('migrate:fresh');
@@ -90,6 +90,7 @@ class Install extends Command
             $this->info('Creating the environment configuration file.');
             $this->createEnvFile();
         } else {
+            $this->call('key:generate');
             $this->info('Great! your environment configuration file already exists.');
         }
     }

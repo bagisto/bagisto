@@ -1,16 +1,14 @@
-{!! view_render_event('bagisto.admin.customer.edit.before', ['customer' => $customer]) !!}
-
 <form method="POST" action="{{ route('admin.customer.update', $customer->id) }}">
     <div class="page-content">
         <div class="form-container">
             @csrf()
-            
+
             <input name="_method" type="hidden" value="PUT">
             <div class="style:overflow: auto;">&nbsp;</div>
-            
+
             <div slot="body">
                 {!! view_render_event('bagisto.admin.customer.edit.form.before', ['customer' => $customer]) !!}
-                    
+
                 <div class="control-group" :class="[errors.has('first_name') ? 'has-error' : '']">
                     <label for="first_name" class="required"> {{ __('admin::app.customers.customers.first_name') }}</label>
                     <input type="text"  class="control" name="first_name" v-validate="'required'" value="{{old('first_name') ?:$customer->first_name}}"
@@ -19,7 +17,7 @@
                 </div>
 
                 {!! view_render_event('bagisto.admin.customer.edit.first_name.after', ['customer' => $customer]) !!}
-                    
+
                     <div class="control-group" :class="[errors.has('last_name') ? 'has-error' : '']">
                         <label for="last_name" class="required"> {{ __('admin::app.customers.customers.last_name') }}</label>
                         <input type="text"  class="control"  name="last_name"   v-validate="'required'" value="{{old('last_name') ?:$customer->last_name}}" data-vv-as="&quot;{{ __('shop::app.customer.signup-form.lastname') }}&quot;">
@@ -95,6 +93,9 @@
                                     @endforeach
                                 </select>
                             </div>
+
+                            {!! view_render_event('bagisto.admin.customer.edit.form.after', ['customer' => $customer]) !!}
+
                         </div>
                         <button type="submit" class="btn btn-lg btn-primary">
                             {{ __('admin::app.customers.customers.save-btn-title') }}
@@ -102,4 +103,3 @@
                 </div>
             </div>
         </form>
-        {!! view_render_event('bagisto.admin.customer.edit.after', ['customer' => $customer]) !!}

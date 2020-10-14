@@ -12,7 +12,7 @@
                 <div class="col-lg-3 col-md-12 popular-category-wrapper">
                     <div class="card col-12 no-padding">
                         <div class="category-image">
-                            <img src="{{ asset('/storage/' . $categoryDetails->image) }}" />
+                            <img data-src="{{ asset('/storage/' . $categoryDetails->image) }}" class="lazyload" alt="" />
                         </div>
 
                         <div class="card-description">

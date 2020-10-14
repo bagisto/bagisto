@@ -1,5 +1,6 @@
 <?php
     $term = request()->input('term');
+    $image_search = request()->input('image-search');
 
     if (! is_null($term)) {
         $serachQuery = 'term='.request()->input('term');
@@ -11,11 +12,11 @@
         <div class="left-content">
             <ul class="logo-container">
                 <li>
-                    <a href="{{ route('shop.home.index') }}">
+                    <a href="{{ route('shop.home.index') }}" aria-label="Logo">
                         @if ($logo = core()->getCurrentChannel()->logo_url)
-                            <img class="logo" src="{{ $logo }}" />
+                            <img class="logo" src="{{ $logo }}" alt="" />
                         @else
-                            <img class="logo" src="{{ bagisto_asset('images/logo.svg') }}" />
+                            <img class="logo" src="{{ bagisto_asset('images/logo.svg') }}" alt="" />
                         @endif
                     </a>
                 </li>
@@ -24,12 +25,14 @@
             <ul class="search-container">
                 <li class="search-group">
                     <form role="search" action="{{ route('shop.search.index') }}" method="GET" style="display: inherit;">
+                        <label for="search-bar" style="position: absolute; z-index: -1;">Search</label>
                         <input
                             required
                             name="term"
                             type="search"
-                            value="{{ $term }}"
+                            value="{{ ! $image_search ? $term : '' }}"
                             class="search-field"
+                            id="search-bar"
                             placeholder="{{ __('shop::app.header.search-text') }}"
                         >
 
@@ -37,7 +40,7 @@
 
                         <div class="search-icon-wrapper">
 
-                            <button class="" class="background: none;">
+                            <button class="" class="background: none;" aria-label="Search">
                                 <i class="icon icon-search"></i>
                             </button>
                         </div>
@@ -217,17 +220,17 @@
 </div>
 
 @push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet" defer></script>
 
     <script type="text/x-template" id="image-search-component-template">
-        <div>
-            <label class="image-search-container" for="image-search-container">
+        <div v-if="image_search_status">
+            <label class="image-search-container" :for="'image-search-container-' + _uid">
                 <i class="icon camera-icon"></i>
 
-                <input type="file" id="image-search-container" ref="image_search_input" v-on:change="uploadImage()"/>
+                <input type="file" :id="'image-search-container-' + _uid" ref="image_search_input" v-on:change="uploadImage()"/>
 
-                <img id="uploaded-image-url" :src="uploaded_image_url"/>
+                <img :id="'uploaded-image-url-' +  + _uid" :src="uploaded_image_url" alt=""/>
             </label>
         </div>
     </script>
@@ -240,7 +243,8 @@
 
             data: function() {
                 return {
-                    uploaded_image_url: ''
+                    uploaded_image_url: '',
+                    image_search_status: "{{core()->getConfigData('general.content.shop.image_search') == '1' ? true : false}}"
                 }
             },
 
@@ -271,7 +275,7 @@
 
                                         net = await mobilenet.load();
 
-                                        const imgElement = document.getElementById('uploaded-image-url');
+                                        const imgElement = document.getElementById('uploaded-image-url-' +  + self._uid);
 
                                         try {
                                             const result = await net.classify(imgElement);

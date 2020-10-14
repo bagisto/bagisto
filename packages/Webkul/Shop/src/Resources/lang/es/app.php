@@ -69,7 +69,8 @@ return [
         'page-title' => 'Búsqueda',
         'found-results' => 'No hay resultados de búsqueda',
         'found-result' => 'Resultados de la búsqueda',
-        'analysed-keywords' => 'Analysed Keywords'
+        'analysed-keywords' => 'Analysed Keywords',
+        'image-search-option' => 'Image Search Option'
     ],
 
     'reviews' => [

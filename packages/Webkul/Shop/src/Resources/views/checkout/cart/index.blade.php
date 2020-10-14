@@ -33,7 +33,7 @@
 
                                 <div class="item mt-5">
                                     <div class="item-image" style="margin-right: 15px;">
-                                        <a href="{{ route('shop.productOrCategory.index', $url_key) }}"><img src="{{ $productBaseImage['medium_image_url'] }}" /></a>
+                                        <a href="{{ route('shop.productOrCategory.index', $url_key) }}"><img src="{{ $productBaseImage['medium_image_url'] }}" alt="" /></a>
                                     </div>
 
                                     <div class="item-details">

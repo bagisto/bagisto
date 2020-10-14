@@ -13,6 +13,13 @@ return [
                 'locale_based'  => true,
                 'channel_based' => true,
             ],
+            [
+                'name'          => 'image_search',
+                'title'         => 'shop::app.search.image-search-option',
+                'type'          => 'boolean',
+                'locale_based'  => true,
+                'channel_based' => true,
+            ],
         ],
     ]
 ];

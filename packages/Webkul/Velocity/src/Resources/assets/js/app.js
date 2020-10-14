@@ -7,6 +7,7 @@ import de from 'vee-validate/dist/locale/de';
 import ar from 'vee-validate/dist/locale/ar';
 import VeeValidate, { Validator } from 'vee-validate';
 import axios from 'axios';
+import 'lazysizes';
 
 window.axios = axios;
 window.VeeValidate = VeeValidate;
@@ -217,7 +218,7 @@ $(document).ready(function () {
         }
     });
 
-    new Vue({
+    const app = new Vue({
         el: "#app",
         VueToast,
 
@@ -358,6 +359,8 @@ $(document).ready(function () {
             }
         }
     });
+
+    window.app = app;
 
     // for compilation of html coming from server
     Vue.component('vnode-injector', {
