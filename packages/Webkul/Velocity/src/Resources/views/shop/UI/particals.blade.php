@@ -62,7 +62,7 @@
     </script>
 
     <script type="text/x-template" id="searchbar-template">
-        <div class="no-padding right searchbar">
+        <div class="right searchbar">
             <div class="row">
                 <div class="col-lg-5 col-md-12">
                     <div class="input-group">
