@@ -346,7 +346,7 @@
                             </a>
                         @endif
 
-                        <a class="wishlist-btn unset" :href="`${isCustomer ? '{{ route('customer.wishlist.index') }}' : '{{ route('velocity.product.guest-wishlist') }}'}`">
+                        <a class="wishlist-btn unset" :href="`{{ route('customer.wishlist.index') }}`">
                             <div class="badge-container" v-if="wishlistCount > 0">
                                 <span class="badge" v-text="wishlistCount"></span>
                             </div>
@@ -513,11 +513,6 @@
                     updateHeaderItemsCount: function () {
                         if (! this.isCustomer) {
                             let comparedItems = this.getStorageValue('compared_product');
-                            let wishlistedItems = this.getStorageValue('wishlist_product');
-
-                            if (wishlistedItems) {
-                                this.wishlistCount = wishlistedItems.length;
-                            }
 
                             if (comparedItems) {
                                 this.compareCount = comparedItems.length;
