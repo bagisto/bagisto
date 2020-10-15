@@ -37,7 +37,7 @@ class CartCest
         ]);
 
         $I->amOnPage('/checkout/cart');
-        $I->seeElement('.btn-primary"');
+        $I->seeElement('.btn-primary');
     }
 
     public function checkCartWithoutQuantityBox(FunctionalTester $I): void
