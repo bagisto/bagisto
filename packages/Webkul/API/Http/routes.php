@@ -202,13 +202,13 @@ Route::group(['prefix' => 'api'], function ($router) {
 
 
         //Invoice routes
-        Route::get('invoices', 'ResourceController@index')->defaults('_config', [
+        Route::get('invoices', 'InvoiceController@index')->defaults('_config', [
             'repository' => 'Webkul\Sales\Repositories\InvoiceRepository',
             'resource' => 'Webkul\API\Http\Resources\Sales\Invoice',
             'authorization_required' => true
         ]);
 
-        Route::get('invoices/{id}', 'ResourceController@get')->defaults('_config', [
+        Route::get('invoices/{id}', 'InvoiceController@get')->defaults('_config', [
             'repository' => 'Webkul\Sales\Repositories\InvoiceRepository',
             'resource' => 'Webkul\API\Http\Resources\Sales\Invoice',
             'authorization_required' => true
