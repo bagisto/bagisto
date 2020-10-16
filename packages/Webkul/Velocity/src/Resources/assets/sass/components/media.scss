@@ -577,26 +577,17 @@
         margin-bottom: 10px;
     }
 
-    .main-product-image {
-        display: none;
-    }
-
     .product-detail {
         #product-form {
             .form-container {
                 .left {
                     top: 0px;
-                    padding: 0px;
                     position: relative;
                     margin-bottom: 20px;
 
                     .vc-small-product-image {
                         width: 100%;
                     }
-                }
-
-                .right {
-                    padding: 0px;
                 }
             }
         }

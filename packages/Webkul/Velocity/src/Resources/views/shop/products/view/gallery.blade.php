@@ -12,20 +12,22 @@
 {!! view_render_event('bagisto.shop.products.view.gallery.before', ['product' => $product]) !!}
 
     <div class="product-image-group">
-        <div class="row col-12">
-            <magnify-image src="{{ $images[0]['large_image_url'] }}" v-if="!isMobile()">
-            </magnify-image>
+        <div class="row">
+            <div class="col-12">
+                <magnify-image src="{{ $images[0]['large_image_url'] }}" v-if="!isMobile()">
+                </magnify-image>
 
-            <img
-                v-else
-                class="vc-small-product-image"
-                src="{{ $images[0]['large_image_url'] }}" alt="" />
+                <img
+                    v-else
+                    class="vc-small-product-image"
+                    src="{{ $images[0]['large_image_url'] }}" alt="" />
+            </div>
         </div>
-
-        <div class="row col-12">
-            <product-gallery></product-gallery>
+        <div class="row">
+            <div class="col-12">
+                <product-gallery></product-gallery>
+            </div>
         </div>
-
     </div>
 
 {!! view_render_event('bagisto.shop.products.view.gallery.after', ['product' => $product]) !!}
