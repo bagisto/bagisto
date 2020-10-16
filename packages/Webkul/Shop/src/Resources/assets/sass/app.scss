@@ -117,6 +117,22 @@ input {
    }
 }
 
+/* Product Page Description */
+.details {
+    .description {
+        overflow: auto;
+    }
+
+    .accordian {
+        .accordian-content {
+            div {
+                overflow: auto;
+            }
+        }
+
+    }
+}
+
 /* Show the indicator (dot/circle) when checked */
 .radio-container input:checked ~ .checkmark:after {
     display: block;

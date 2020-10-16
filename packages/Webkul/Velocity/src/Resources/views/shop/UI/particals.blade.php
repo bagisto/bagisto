@@ -163,8 +163,18 @@
                             </div>
                             <span>{{ __('shop::app.layouts.wishlist') }}</span>
                         </a>
-                    {!! view_render_event('bagisto.shop.layout.header.wishlist.after') !!}
-                </div>
+                    @endif
+                {!! view_render_event('bagisto.shop.layout.header.compare.after') !!}
+
+                {!! view_render_event('bagisto.shop.layout.header.wishlist.before') !!}
+                    <a class="wishlist-btn unset" :href="`{{ route('customer.wishlist.index') }}`">
+                        <i class="material-icons">favorite_border</i>
+                        <div class="badge-container" v-if="wishlistCount > 0">
+                            <span class="badge" v-text="wishlistCount"></span>
+                        </div>
+                        <span>{{ __('shop::app.layouts.wishlist') }}</span>
+                    </a>
+                {!! view_render_event('bagisto.shop.layout.header.wishlist.after') !!}
             </div>
         </div>
     </script>
@@ -341,11 +351,6 @@
                     'updateHeaderItemsCount': function () {
                         if (! this.isCustomer) {
                             let comparedItems = this.getStorageValue('compared_product');
-                            let wishlistedItems = this.getStorageValue('wishlist_product');
-
-                            if (wishlistedItems) {
-                                this.wishlistCount = wishlistedItems.length;
-                            }
 
                             if (comparedItems) {
                                 this.compareCount = comparedItems.length;
