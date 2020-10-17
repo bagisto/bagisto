@@ -24,7 +24,7 @@ class CreateCatalogRulesTable extends Migration
             $table->json('conditions')->nullable();
             $table->boolean('end_other_rules')->default(0);
             $table->string('action_type')->nullable();
-            $table->decimal('discount_amount', 12, 4)->default(0);
+            $table->decimal('discount_amount', 13, 4)->default(0);
             $table->integer('sort_order')->unsigned()->default(0);
             $table->timestamps();
         });

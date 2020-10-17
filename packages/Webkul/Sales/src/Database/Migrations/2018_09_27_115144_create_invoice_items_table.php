@@ -20,14 +20,14 @@ class CreateInvoiceItemsTable extends Migration
             $table->string('sku')->nullable();
             $table->integer('qty')->nullable();
 
-            $table->decimal('price', 12,4)->default(0);
-            $table->decimal('base_price', 12,4)->default(0);
+            $table->decimal('price', 13,4)->default(0);
+            $table->decimal('base_price', 13,4)->default(0);
 
-            $table->decimal('total', 12,4)->default(0);
-            $table->decimal('base_total', 12,4)->default(0);
+            $table->decimal('total', 13,4)->default(0);
+            $table->decimal('base_total', 13,4)->default(0);
 
-            $table->decimal('tax_amount', 12,4)->default(0)->nullable();
-            $table->decimal('base_tax_amount', 12,4)->default(0)->nullable();
+            $table->decimal('tax_amount', 13,4)->default(0)->nullable();
+            $table->decimal('base_tax_amount', 13,4)->default(0)->nullable();
 
             $table->integer('product_id')->unsigned()->nullable();
             $table->string('product_type')->nullable();

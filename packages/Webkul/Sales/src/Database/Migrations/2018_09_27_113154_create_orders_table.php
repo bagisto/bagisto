@@ -37,27 +37,27 @@ class CreateOrdersTable extends Migration
             $table->string('channel_currency_code')->nullable();
             $table->string('order_currency_code')->nullable();
 
-            $table->decimal('grand_total', 12, 4)->default(0)->nullable();
-            $table->decimal('base_grand_total', 12, 4)->default(0)->nullable();
-            $table->decimal('grand_total_invoiced', 12, 4)->default(0)->nullable();
-            $table->decimal('base_grand_total_invoiced', 12, 4)->default(0)->nullable();
-            $table->decimal('grand_total_refunded', 12, 4)->default(0)->nullable();
-            $table->decimal('base_grand_total_refunded', 12, 4)->default(0)->nullable();
+            $table->decimal('grand_total', 13, 4)->default(0)->nullable();
+            $table->decimal('base_grand_total', 13, 4)->default(0)->nullable();
+            $table->decimal('grand_total_invoiced', 13, 4)->default(0)->nullable();
+            $table->decimal('base_grand_total_invoiced', 13, 4)->default(0)->nullable();
+            $table->decimal('grand_total_refunded', 13, 4)->default(0)->nullable();
+            $table->decimal('base_grand_total_refunded', 13, 4)->default(0)->nullable();
 
-            $table->decimal('sub_total', 12, 4)->default(0)->nullable();
-            $table->decimal('base_sub_total', 12, 4)->default(0)->nullable();
-            $table->decimal('sub_total_invoiced', 12, 4)->default(0)->nullable();
-            $table->decimal('base_sub_total_invoiced', 12, 4)->default(0)->nullable();
-            $table->decimal('sub_total_refunded', 12, 4)->default(0)->nullable();
-            $table->decimal('base_sub_total_refunded', 12, 4)->default(0)->nullable();
+            $table->decimal('sub_total', 13, 4)->default(0)->nullable();
+            $table->decimal('base_sub_total', 13, 4)->default(0)->nullable();
+            $table->decimal('sub_total_invoiced', 13, 4)->default(0)->nullable();
+            $table->decimal('base_sub_total_invoiced', 13, 4)->default(0)->nullable();
+            $table->decimal('sub_total_refunded', 13, 4)->default(0)->nullable();
+            $table->decimal('base_sub_total_refunded', 13, 4)->default(0)->nullable();
 
             $table->decimal('discount_percent', 12, 4)->default(0)->nullable();
-            $table->decimal('discount_amount', 12, 4)->default(0)->nullable();
-            $table->decimal('base_discount_amount', 12, 4)->default(0)->nullable();
-            $table->decimal('discount_invoiced', 12, 4)->default(0)->nullable();
-            $table->decimal('base_discount_invoiced', 12, 4)->default(0)->nullable();
-            $table->decimal('discount_refunded', 12, 4)->default(0)->nullable();
-            $table->decimal('base_discount_refunded', 12, 4)->default(0)->nullable();
+            $table->decimal('discount_amount', 13, 4)->default(0)->nullable();
+            $table->decimal('base_discount_amount', 13, 4)->default(0)->nullable();
+            $table->decimal('discount_invoiced', 13, 4)->default(0)->nullable();
+            $table->decimal('base_discount_invoiced', 13, 4)->default(0)->nullable();
+            $table->decimal('discount_refunded', 13, 4)->default(0)->nullable();
+            $table->decimal('base_discount_refunded', 13, 4)->default(0)->nullable();
 
             $table->decimal('tax_amount', 12, 4)->default(0)->nullable();
             $table->decimal('base_tax_amount', 12, 4)->default(0)->nullable();

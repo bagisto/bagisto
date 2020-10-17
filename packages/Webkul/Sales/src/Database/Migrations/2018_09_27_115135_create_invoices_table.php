@@ -25,21 +25,21 @@ class CreateInvoicesTable extends Migration
             $table->string('channel_currency_code')->nullable();
             $table->string('order_currency_code')->nullable();
 
-            $table->decimal('sub_total', 12, 4)->default(0)->nullable();
-            $table->decimal('base_sub_total', 12, 4)->default(0)->nullable();
+            $table->decimal('sub_total', 13, 4)->default(0)->nullable();
+            $table->decimal('base_sub_total', 13, 4)->default(0)->nullable();
 
-            $table->decimal('grand_total', 12, 4)->default(0)->nullable();
-            $table->decimal('base_grand_total', 12, 4)->default(0)->nullable();
+            $table->decimal('grand_total', 13, 4)->default(0)->nullable();
+            $table->decimal('base_grand_total', 13, 4)->default(0)->nullable();
 
-            $table->decimal('shipping_amount', 12, 4)->default(0)->nullable();
-            $table->decimal('base_shipping_amount', 12, 4)->default(0)->nullable();
+            $table->decimal('shipping_amount', 13, 4)->default(0)->nullable();
+            $table->decimal('base_shipping_amount', 13, 4)->default(0)->nullable();
 
-            $table->decimal('tax_amount', 12, 4)->default(0)->nullable();
-            $table->decimal('base_tax_amount', 12, 4)->default(0)->nullable();
+            $table->decimal('tax_amount', 13, 4)->default(0)->nullable();
+            $table->decimal('base_tax_amount', 13, 4)->default(0)->nullable();
 
-            $table->decimal('discount_amount', 12, 4)->default(0)->nullable();
-            $table->decimal('base_discount_amount', 12, 4)->default(0)->nullable();
-            
+            $table->decimal('discount_amount', 13, 4)->default(0)->nullable();
+            $table->decimal('base_discount_amount', 13, 4)->default(0)->nullable();
+
             $table->integer('order_id')->unsigned()->nullable();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->integer('order_address_id')->unsigned()->nullable();

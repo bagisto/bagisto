@@ -29,12 +29,12 @@ class CreateOrderItemsTable extends Migration
             $table->integer('qty_canceled')->default(0)->nullable();
             $table->integer('qty_refunded')->default(0)->nullable();
 
-            $table->decimal('price', 12,4)->default(0);
-            $table->decimal('base_price', 12,4)->default(0);
+            $table->decimal('price', 13,4)->default(0);
+            $table->decimal('base_price', 13,4)->default(0);
 
-            $table->decimal('total', 12,4)->default(0);
-            $table->decimal('base_total', 12,4)->default(0);
-            $table->decimal('total_invoiced', 12,4)->default(0);
+            $table->decimal('total', 13,4)->default(0);
+            $table->decimal('base_total', 13,4)->default(0);
+            $table->decimal('total_invoiced', 13,4)->default(0);
             $table->decimal('base_total_invoiced', 12,4)->default(0);
             $table->decimal('amount_refunded', 12,4)->default(0);
             $table->decimal('base_amount_refunded', 12,4)->default(0);
@@ -54,7 +54,7 @@ class CreateOrderItemsTable extends Migration
             $table->decimal('base_tax_amount_invoiced', 12, 4)->default(0)->nullable();
             $table->decimal('tax_amount_refunded', 12, 4)->default(0)->nullable();
             $table->decimal('base_tax_amount_refunded', 12, 4)->default(0)->nullable();
-            
+
             $table->integer('product_id')->unsigned()->nullable();
             $table->string('product_type')->nullable();
             $table->integer('order_id')->unsigned()->nullable();

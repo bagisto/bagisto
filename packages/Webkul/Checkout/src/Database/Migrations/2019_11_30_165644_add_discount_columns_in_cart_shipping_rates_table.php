@@ -14,8 +14,8 @@ class AddDiscountColumnsInCartShippingRatesTable extends Migration
     public function up()
     {
         Schema::table('cart_shipping_rates', function (Blueprint $table) {
-            $table->decimal('discount_amount', 12, 4)->default(0);
-            $table->decimal('base_discount_amount', 12, 4)->default(0);
+            $table->decimal('discount_amount', 13, 4)->default(0);
+            $table->decimal('base_discount_amount', 13, 4)->default(0);
         });
     }
 

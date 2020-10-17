@@ -19,15 +19,15 @@ class CreateCatalogRuleProductsTable extends Migration
             $table->datetime('ends_till')->nullable();
             $table->boolean('end_other_rules')->default(0);
             $table->string('action_type')->nullable();
-            $table->decimal('discount_amount', 12, 4)->default(0);
+            $table->decimal('discount_amount', 13, 4)->default(0);
             $table->integer('sort_order')->unsigned()->default(0);
-            
+
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            
+
             $table->integer('customer_group_id')->unsigned();
             $table->foreign('customer_group_id')->references('id')->on('customer_groups')->onDelete('cascade');
-            
+
             $table->integer('catalog_rule_id')->unsigned();
             $table->foreign('catalog_rule_id')->references('id')->on('catalog_rules')->onDelete('cascade');
 

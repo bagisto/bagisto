@@ -18,7 +18,7 @@ class UpdateCustomPriceToNullableInCartItems extends Migration
         });
 
         Schema::table('cart_items', function (Blueprint $table) {
-            $table->decimal('custom_price', 12,4)->nullable();
+            $table->decimal('custom_price', 13,4)->nullable();
         });
     }
 
@@ -34,7 +34,7 @@ class UpdateCustomPriceToNullableInCartItems extends Migration
         });
 
         Schema::table('cart_items', function (Blueprint $table) {
-            $table->decimal('custom_price', 12,4)->default(0);
+            $table->decimal('custom_price', 13,4)->default(0);
         });
     }
 }

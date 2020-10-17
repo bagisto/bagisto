@@ -14,9 +14,9 @@ class AddMinPriceAndMaxPriceColumnInProductFlatTable extends Migration
     public function up()
     {
         Schema::table('product_flat', function (Blueprint $table) {
-            $table->decimal('min_price', 12, 4)->nullable();
-            $table->decimal('max_price', 12, 4)->nullable();
-            $table->decimal('special_price', 12, 4)->nullable()->change();
+            $table->decimal('min_price', 13, 4)->nullable();
+            $table->decimal('max_price', 13, 4)->nullable();
+            $table->decimal('special_price', 13, 4)->nullable()->change();
         });
     }
 

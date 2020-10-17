@@ -32,17 +32,17 @@ class CreateCartTable extends Migration
             $table->string('channel_currency_code')->nullable();
             $table->string('cart_currency_code')->nullable();
 
-            $table->decimal('grand_total', 12, 4)->default(0)->nullable();
-            $table->decimal('base_grand_total', 12, 4)->default(0)->nullable();
+            $table->decimal('grand_total', 13, 4)->default(0)->nullable();
+            $table->decimal('base_grand_total', 13, 4)->default(0)->nullable();
 
-            $table->decimal('sub_total', 12, 4)->default(0)->nullable();
-            $table->decimal('base_sub_total', 12, 4)->default(0)->nullable();
+            $table->decimal('sub_total', 13, 4)->default(0)->nullable();
+            $table->decimal('base_sub_total', 13, 4)->default(0)->nullable();
 
-            $table->decimal('tax_total', 12, 4)->default(0)->nullable();
-            $table->decimal('base_tax_total', 12, 4)->default(0)->nullable();
+            $table->decimal('tax_total', 13, 4)->default(0)->nullable();
+            $table->decimal('base_tax_total', 13, 4)->default(0)->nullable();
 
-            $table->decimal('discount', 12, 4)->default(0)->nullable();
-            $table->decimal('base_discount', 12, 4)->default(0)->nullable();
+            $table->decimal('discount', 13, 4)->default(0)->nullable();
+            $table->decimal('base_discount', 13, 4)->default(0)->nullable();
 
             $table->string('checkout_method')->nullable();
             $table->boolean('is_guest')->nullable();

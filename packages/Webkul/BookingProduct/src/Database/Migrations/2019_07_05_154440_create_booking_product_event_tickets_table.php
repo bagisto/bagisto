@@ -15,7 +15,7 @@ class CreateBookingProductEventTicketsTable extends Migration
     {
         Schema::create('booking_product_event_tickets', function (Blueprint $table) {
             $table->increments('id');
-            $table->decimal('price', 12, 4)->default(0)->nullable();
+            $table->decimal('price', 13, 4)->default(0)->nullable();
             $table->integer('qty')->default(0)->nullable();
 
             $table->integer('booking_product_id')->unsigned();

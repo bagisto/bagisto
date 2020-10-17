@@ -21,10 +21,10 @@ class CreateShipmentItemsTable extends Migration
             $table->integer('qty')->nullable();
             $table->integer('weight')->nullable();
 
-            $table->decimal('price', 12, 4)->default(0)->nullable();
-            $table->decimal('base_price', 12, 4)->default(0)->nullable();
-            $table->decimal('total', 12, 4)->default(0)->nullable();
-            $table->decimal('base_total', 12, 4)->default(0)->nullable();
+            $table->decimal('price', 13, 4)->default(0)->nullable();
+            $table->decimal('base_price', 13, 4)->default(0)->nullable();
+            $table->decimal('total', 13, 4)->default(0)->nullable();
+            $table->decimal('base_total', 13, 4)->default(0)->nullable();
 
             $table->integer('product_id')->unsigned()->nullable();
             $table->string('product_type')->nullable();
