@@ -107,7 +107,7 @@ class CustomerCest
             'company_name' => $oldcompany,
         ]);
 
-        $this->assertCustomerAddress($I);
+        // $this->assertCustomerAddress($I);
     }
 
     /**
@@ -115,17 +115,17 @@ class CustomerCest
      */
     private function assertCustomerAddress(FunctionalTester $I): void
     {
-        // $I->seeRecord(CustomerAddress::class, [
-        //     'company_name' => $this->fields['company_name'],
-        //     'first_name'   => $this->fields['first_name'],
-        //     'last_name'    => $this->fields['last_name'],
-        //     // 'vat_id'       => $this->fields['vat_id'],
-        //     'address1'     => $this->fields['address1[]'],
-        //     'country'      => $this->fields['country'],
-        //     'state'        => $this->fields['state'],
-        //     'city'         => $this->fields['city'],
-        //     'phone'        => $this->fields['phone'],
-        //     'postcode'     => $this->fields['postcode'],
-        // ]);
+        $I->seeRecord(CustomerAddress::class, [
+            'company_name' => $this->fields['company_name'],
+            'first_name'   => $this->fields['first_name'],
+            'last_name'    => $this->fields['last_name'],
+            'vat_id'       => $this->fields['vat_id'],
+            'address1'     => $this->fields['address1[]'],
+            'country'      => $this->fields['country'],
+            'state'        => $this->fields['state'],
+            'city'         => $this->fields['city'],
+            'phone'        => $this->fields['phone'],
+            'postcode'     => $this->fields['postcode'],
+        ]);
     }
 }
