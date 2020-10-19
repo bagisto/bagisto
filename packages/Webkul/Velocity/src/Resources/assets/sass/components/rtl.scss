@@ -493,7 +493,7 @@ body {
 }
 
 @media only screen and (max-width: 1192px) {
-    
+
 }
 
 @media only screen and (max-width: 992px) {
@@ -571,6 +571,12 @@ body {
         &.rtl {
             .fs16 {
                 font-size: 10px !important;
+            }
+
+            .velocity-divide-page {
+                .right {
+                    padding: 0 20px !important;
+                }
             }
         }
     }
