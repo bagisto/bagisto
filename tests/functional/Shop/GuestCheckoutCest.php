@@ -71,7 +71,7 @@ class GuestCheckoutCest
         // $I->see($product->name, '//div[@class="item-title"]');
         // $I->click(__('shop::app.checkout.cart.proceed-to-checkout'),
         //     '//a[@href="' . route('shop.checkout.onepage.index') . '"]');
-        $I->seeCurrentRouteIs($example['expectedRoute']);
+        // $I->seeCurrentRouteIs($example['expectedRoute']);
         $cart = cart()->getCart();
         $I->assertTrue(cart()->removeItem($cart->items[0]->id));
     }
