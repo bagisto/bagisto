@@ -94,7 +94,7 @@ class CustomerCest
 
         $I->wantTo('Update the created customer address again');
 
-        $I->click('Edit');
+        // $I->click('Edit');
 
         $oldcompany = $this->fields['company_name'];
         $this->fields['company_name'] = $faker->company;
