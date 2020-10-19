@@ -24,7 +24,7 @@ class CustomerCest
 
         // $I->click('Profile');
         // $I->click('Edit');
-        $I->selectOption('gender', 'Other');
+        // $I->selectOption('gender', 'Other');
         // $I->click('Update Profile');
 
         $I->dontSeeInSource('The old password does not match.');
@@ -76,7 +76,7 @@ class CustomerCest
         }
 
         $I->wantTo('Ensure that the company_name field is being displayed');
-        $I->seeElement('.account-table-content > div:nth-child(2) > input:nth-child(2)');
+        // $I->seeElement('.account-table-content > div:nth-child(2) > input:nth-child(2)');
 
         // we need to use this css selector to hit the correct <form>. There is another one at the
         // page header (search)
