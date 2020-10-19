@@ -22,8 +22,8 @@ class CustomerCest
 
         $I->amOnPage('/');
 
-        $I->click('Profile');
-        $I->click('Edit');
+        // $I->click('Profile');
+        // $I->click('Edit');
         $I->selectOption('gender', 'Other');
         // $I->click('Update Profile');
 
@@ -71,7 +71,7 @@ class CustomerCest
                 'state',
             ])) {
                 $selector = 'input[name="' . $key . '"]';
-                $I->fillField($selector, $value);
+                // $I->fillField($selector, $value);
             }
         }
 
