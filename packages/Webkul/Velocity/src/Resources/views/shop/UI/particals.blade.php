@@ -156,25 +156,15 @@
                     {!! view_render_event('bagisto.shop.layout.header.compare.after') !!}
 
                     {!! view_render_event('bagisto.shop.layout.header.wishlist.before') !!}
-                        <a class="wishlist-btn unset" :href="`${isCustomer ? '{{ route('customer.wishlist.index') }}' : '{{ route('velocity.product.guest-wishlist') }}'}`">
+                        <a class="wishlist-btn unset" :href="`{{ route('customer.wishlist.index') }}`">
                             <i class="material-icons">favorite_border</i>
                             <div class="badge-container" v-if="wishlistCount > 0">
                                 <span class="badge" v-text="wishlistCount"></span>
                             </div>
                             <span>{{ __('shop::app.layouts.wishlist') }}</span>
                         </a>
-                    @endif
-                {!! view_render_event('bagisto.shop.layout.header.compare.after') !!}
-
-                {!! view_render_event('bagisto.shop.layout.header.wishlist.before') !!}
-                    <a class="wishlist-btn unset" :href="`{{ route('customer.wishlist.index') }}`">
-                        <i class="material-icons">favorite_border</i>
-                        <div class="badge-container" v-if="wishlistCount > 0">
-                            <span class="badge" v-text="wishlistCount"></span>
-                        </div>
-                        <span>{{ __('shop::app.layouts.wishlist') }}</span>
-                    </a>
-                {!! view_render_event('bagisto.shop.layout.header.wishlist.after') !!}
+                    {!! view_render_event('bagisto.shop.layout.header.wishlist.after') !!}
+                </div>
             </div>
         </div>
     </script>
