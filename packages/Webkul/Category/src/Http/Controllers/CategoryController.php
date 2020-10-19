@@ -82,7 +82,7 @@ class CategoryController extends Controller
         $this->validate(request(), [
             'slug'        => ['required', 'unique:category_translations,slug', new \Webkul\Core\Contracts\Validations\Slug],
             'name'        => 'required',
-            'image.*'     => 'mimes:jpeg,jpg,bmp,png',
+            'image.*'     => 'mimes:bmp,jpeg,jpg,png,webp',
             'description' => 'required_if:display_mode,==,description_only,products_and_description',
         ]);
 
@@ -127,7 +127,7 @@ class CategoryController extends Controller
                 }
             }],
             $locale . '.name' => 'required',
-            'image.*'         => 'mimes:jpeg,jpg,bmp,png',
+            'image.*'         => 'mimes:bmp,jpeg,jpg,png,webp',
         ]);
 
         $this->categoryRepository->update(request()->all(), $id);
