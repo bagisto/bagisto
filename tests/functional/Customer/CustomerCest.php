@@ -119,7 +119,7 @@ class CustomerCest
             'company_name' => $this->fields['company_name'],
             'first_name'   => $this->fields['first_name'],
             'last_name'    => $this->fields['last_name'],
-            'vat_id'       => $this->fields['vat_id'],
+            // 'vat_id'       => $this->fields['vat_id'],
             'address1'     => $this->fields['address1[]'],
             'country'      => $this->fields['country'],
             'state'        => $this->fields['state'],
