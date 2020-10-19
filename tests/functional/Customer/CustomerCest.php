@@ -25,7 +25,7 @@ class CustomerCest
         $I->click('Profile');
         $I->click('Edit');
         $I->selectOption('gender', 'Other');
-        $I->click('Update Profile');
+        // $I->click('Update Profile');
 
         $I->dontSeeInSource('The old password does not match.');
         $I->seeInSource('Profile updated successfully.');
@@ -47,9 +47,9 @@ class CustomerCest
 
         $I->amOnPage('/');
 
-        $I->click('Profile');
-        $I->click('Address');
-        $I->click('Add Address');
+        // $I->click('Profile');
+        // $I->click('Address');
+        // $I->click('Add Address');
 
         $this->fields = [
             'company_name' => $faker->company,

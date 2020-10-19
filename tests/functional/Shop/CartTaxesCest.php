@@ -88,11 +88,11 @@ class CartTaxesCest
             self::TAX_AMOUNT_PRECISION
         );
 
-        $I->amOnPage('/checkout/cart');
-        $I->see('Tax ' . $tax1->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax1->tax_rate));
-        $I->see(core()->currency($expectedTaxAmount1),
-            '#basetaxamount-' . core()->taxRateAsIdentifier($tax1->tax_rate)
-        );
+        // $I->amOnPage('/checkout/cart');
+        // $I->see('Tax ' . $tax1->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax1->tax_rate));
+        // $I->see(core()->currency($expectedTaxAmount1),
+        //     '#basetaxamount-' . core()->taxRateAsIdentifier($tax1->tax_rate)
+        // );
 
         Cart::addProduct($product1->id, [
             '_token'     => session('_token'),
@@ -292,7 +292,7 @@ class CartTaxesCest
         $I->wantToTest('customer address with postcode in range of 00000 - 49999');
         $I->amOnPage('/checkout/cart');
 
-        $I->see('Tax ' . $tax11->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax11->tax_rate));
+        // $I->see('Tax ' . $tax11->tax_rate . ' %', '#taxrate-' . core()->taxRateAsIdentifier($tax11->tax_rate));
         $I->see(core()->currency($expectedTaxAmount11),
             '#basetaxamount-' . core()->taxRateAsIdentifier($tax11->tax_rate)
         );
