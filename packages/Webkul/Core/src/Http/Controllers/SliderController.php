@@ -58,7 +58,7 @@ class SliderController extends Controller
         $channels = core()->getAllChannels();
 
         $locale = request()->get('locale') ?: core()->getCurrentLocale();
-        
+
         return view($this->_config['view'])->with("locale", $locale);
     }
 
@@ -72,7 +72,7 @@ class SliderController extends Controller
         $this->validate(request(), [
             'title'      => 'string|required',
             'channel_id' => 'required',
-            'image.*'    => 'required|mimes:jpeg,bmp,png,jpg',
+            'image.*'    => 'required|mimes:bmp,jpeg,jpg,png,webp',
         ]);
 
         $result = $this->sliderRepository->save(request()->all());
@@ -109,12 +109,12 @@ class SliderController extends Controller
         $this->validate(request(), [
             'title'      => 'string|required',
             'channel_id' => 'required',
-            'image.*'    => 'sometimes|mimes:jpeg,bmp,png,jpg',
+            'image.*'    => 'sometimes|mimes:bmp,jpeg,jpg,png,webp',
         ]);
 
         if ( is_null(request()->image)) {
             session()->flash('error', trans('admin::app.settings.sliders.update-fail'));
-            
+
             return redirect()->back();
         }
 
