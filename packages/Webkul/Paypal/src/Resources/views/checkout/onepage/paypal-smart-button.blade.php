@@ -19,6 +19,8 @@
             if (typeof paypal == 'undefined') {
                 window.flashMessages = [{'type': 'alert-error', 'message': "SDK Validation error: 'client-id not recognized for either production or sandbox: {{core()->getConfigData('sales.paymentmethods.paypal_smart_button.client_id')}}'" }];
 
+                window.flashMessages.alertMessage = "SDK Validation error: 'client-id not recognized for either production or sandbox: {{core()->getConfigData('sales.paymentmethods.paypal_smart_button.client_id')}}'";
+
                 app.addFlashMessages();
 
                 return;
