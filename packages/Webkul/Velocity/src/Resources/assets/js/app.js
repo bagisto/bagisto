@@ -53,7 +53,7 @@ Vue.component('responsive-sidebar', require('./UI/components/responsive-sidebar'
 Vue.component('product-quick-view', require('./UI/components/product-quick-view'));
 Vue.component('product-quick-view-btn', require('./UI/components/product-quick-view-btn'));
 Vue.component('category-products', require('./UI/components/category-products'));
-Vue.component('hot-categories', require('./UI/components/hot-categories'));
+Vue.component('hot-category', require('./UI/components/hot-category'));
 
 window.eventBus = new Vue();
 
