@@ -3,20 +3,9 @@
     $comparableAttributes = $attributeRepository->getComparableAttributesBelongsToFamily();
 
     $locale = request()->get('locale') ?: app()->getLocale();
-    
+
     $attributeOptionTranslations = DB::table('attribute_option_translations')->where('locale', $locale)->get()->toJson();
 @endphp
-
-@push('css')
-    <style>
-        .btn-add-to-cart {
-            max-width: 130px;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-        }
-    </style>
-@endpush
 
 @push('scripts')
     <script type="text/x-template" id="compare-product-template">

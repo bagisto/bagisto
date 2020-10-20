@@ -3,9 +3,30 @@
 namespace Webkul\Product\Helpers;
 
 use Illuminate\Support\Facades\Storage;
+use Webkul\Product\Repositories\ProductRepository;
 
 class ProductImage extends AbstractProduct
 {
+     /**
+     * ProductRepository instance
+     *
+     * @var \Webkul\Product\Repositories\ProductRepository
+     */
+    protected $productRepository;
+
+    /**
+     * Create a new helper instance.
+     *
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @return void
+     */
+    public function __construct(
+        ProductRepository $productRepository
+    )
+    {
+        $this->productRepository = $productRepository;
+    }
+
     /**
      * Retrieve collection of gallery images
      *
@@ -72,5 +93,26 @@ class ProductImage extends AbstractProduct
         }
 
         return $image;
+    }
+
+    /**
+     * Get product varient image if available otherwise product base image
+     *
+     * @param  \Webkul\Customer\Contracts\Wishlist  $item
+     * @return array
+     */
+    public function getProductImage($item)
+    {
+        if ($item instanceof \Webkul\Customer\Contracts\Wishlist) {
+            if (isset($item->additional['selected_configurable_option'])) {
+                $product = $this->productRepository->find($item->additional['selected_configurable_option']);
+            } else {
+                $product = $item->product;
+            }
+        } else {
+            $product = $item->product;
+        }
+
+        return $this->getProductBaseImage($product);
     }
 }

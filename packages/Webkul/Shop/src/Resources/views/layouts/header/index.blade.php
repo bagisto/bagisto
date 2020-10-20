@@ -1,5 +1,6 @@
 <?php
     $term = request()->input('term');
+    $image_search = request()->input('image-search');
 
     if (! is_null($term)) {
         $serachQuery = 'term='.request()->input('term');
@@ -29,7 +30,7 @@
                             required
                             name="term"
                             type="search"
-                            value="{{ $term }}"
+                            value="{{ ! $image_search ? $term : '' }}"
                             class="search-field"
                             id="search-bar"
                             placeholder="{{ __('shop::app.header.search-text') }}"
@@ -223,7 +224,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet" defer></script>
 
     <script type="text/x-template" id="image-search-component-template">
-        <div>
+        <div v-if="image_search_status">
             <label class="image-search-container" :for="'image-search-container-' + _uid">
                 <i class="icon camera-icon"></i>
 
@@ -242,7 +243,8 @@
 
             data: function() {
                 return {
-                    uploaded_image_url: ''
+                    uploaded_image_url: '',
+                    image_search_status: "{{core()->getConfigData('general.content.shop.image_search') == '1' ? true : false}}"
                 }
             },
 

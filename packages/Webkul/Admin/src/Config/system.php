@@ -121,13 +121,13 @@ return [
                 'title'         => 'admin::app.admin.system.logo-image',
                 'type'          => 'image',
                 'channel_based' => true,
-                'validation'    => 'mimes:jpeg,bmp,png,jpg',
+                'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
             ], [
                 'name'          => 'favicon',
                 'title'         => 'admin::app.admin.system.favicon',
                 'type'          => 'image',
                 'channel_based' => true,
-                'validation'    => 'mimes:jpeg,bmp,png,jpg',
+                'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
             ],
         ],
     ], [
