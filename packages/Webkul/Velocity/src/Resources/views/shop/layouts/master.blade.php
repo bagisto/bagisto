@@ -49,7 +49,7 @@
         {!! view_render_event('bagisto.shop.layout.body.before') !!}
 
         {{-- lighthouse work: in progress --}}
-        {{-- @include('shop::UI.particals') --}}
+        @include('shop::UI.particals')
 
         <div id="app">
             <product-quick-view v-if="$root.quickView"></product-quick-view>
