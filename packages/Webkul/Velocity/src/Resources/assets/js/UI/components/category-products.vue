@@ -55,7 +55,6 @@
 
 <script>
     export default {
-        template: '#category-products-template',
         props: [
             'categorySlug',
             'localeDirection'
