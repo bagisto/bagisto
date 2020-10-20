@@ -48,7 +48,6 @@
     <body @if (core()->getCurrentLocale()->direction == 'rtl') class="rtl" @endif>
         {!! view_render_event('bagisto.shop.layout.body.before') !!}
 
-        {{-- lighthouse work: in progress --}}
         @include('shop::UI.particals')
 
         <div id="app">
