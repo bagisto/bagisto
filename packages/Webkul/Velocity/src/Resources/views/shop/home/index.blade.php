@@ -58,7 +58,23 @@
     <div class="full-content-wrapper">
         {!! view_render_event('bagisto.shop.home.content.before') !!}
 
-            @if ($velocityMetaData)
+            @include('shop::home.category', ['category' => 'mens-collection'])
+            @include('shop::home.category', ['category' => 'women'])
+            @include('shop::home.category', ['category' => 'men-category'])
+            @include('shop::home.category', ['category' => 'furniture'])
+            @include('shop::home.category', ['category' => 'plants'])
+            {{-- @include('shop::home.hot-categories', ['category' => ['luggage', 'video-games', 'furniture', 'plants']])
+            @include('shop::home.popular-categories', ['category' => ['men-category', 'women', 'arts', 'echo']])
+            @include('shop::home.category-with-custom-option', ['category' => ['men-collection', 'kids-new', 'women-apparel', 'electronics-new']])
+            @include('shop::home.new-products')
+            @include('shop::home.featured-products')
+            @include('shop::home.product-policy')
+            @include('shop::home.customer-reviews')
+            @include('shop::home.advertisements.advertisement-four', ['one' => 'women','four' => 'kids'])
+            @include('shop::home.advertisements.advertisement-three')
+            @include('shop::home.advertisements.advertisement-two') --}}
+
+            {{-- @if ($velocityMetaData)
                 {!! DbView::make($velocityMetaData)->field('home_page_content')->render() !!}
             @else
                 @include('shop::home.advertisements.advertisement-four')
@@ -66,7 +82,7 @@
                 @include('shop::home.advertisements.advertisement-three')
                 @include('shop::home.new-products')
                 @include('shop::home.advertisements.advertisement-two')
-            @endif
+            @endif --}}
 
         {{ view_render_event('bagisto.shop.home.content.after') }}
     </div>

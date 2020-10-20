@@ -48,7 +48,7 @@
     <body @if (core()->getCurrentLocale()->direction == 'rtl') class="rtl" @endif>
         {!! view_render_event('bagisto.shop.layout.body.before') !!}
 
-        @include('shop::UI.particals')
+        {{-- @include('shop::UI.particals') --}}
 
         <div id="app">
             {{-- <responsive-sidebar v-html="responsiveSidebarTemplate"></responsive-sidebar> --}}

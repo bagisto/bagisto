@@ -1,8 +1,4 @@
-@inject ('productRepository', 'Webkul\Product\Repositories\ProductRepository')
-
-<category-products
-    category-slug="{{ $category }}"
-></category-products>
+<category-products category-slug="{{ $category }}"></category-products>
 
 @push('scripts')
     <script type="text/x-template" id="category-products-template">
@@ -57,7 +53,6 @@
                     </carousel-component>
                 </div>
             </template>
-
         </div>
     </script>
 
