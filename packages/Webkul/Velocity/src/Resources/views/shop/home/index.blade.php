@@ -59,12 +59,12 @@
         {!! view_render_event('bagisto.shop.home.content.before') !!}
 
             {{-- lighthouse work: in progress --}}
-            {{-- @include('shop::home.category', ['category' => 'mens-collection'])
+            @include('shop::home.category', ['category' => 'mens-collection'])
             @include('shop::home.category', ['category' => 'women'])
             @include('shop::home.category', ['category' => 'men-category'])
             @include('shop::home.category', ['category' => 'furniture'])
             @include('shop::home.category', ['category' => 'plants'])
-            @include('shop::home.hot-categories', ['category' => ['luggage', 'video-games', 'furniture', 'plants']])
+            {{-- @include('shop::home.hot-categories', ['category' => ['luggage', 'video-games', 'furniture', 'plants']])
             @include('shop::home.popular-categories', ['category' => ['men-category', 'women', 'arts', 'echo']])
             @include('shop::home.category-with-custom-option', ['category' => ['men-collection', 'kids-new', 'women-apparel', 'electronics-new']])
             @include('shop::home.new-products')
