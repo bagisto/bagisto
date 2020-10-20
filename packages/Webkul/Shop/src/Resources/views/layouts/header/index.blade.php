@@ -230,7 +230,7 @@
 
                 <input type="file" :id="'image-search-container-' + _uid" ref="image_search_input" v-on:change="uploadImage()"/>
 
-                <img :id="'uploaded-image-url-' +  + _uid" :src="uploaded_image_url" alt=""/>
+                <img :id="'uploaded-image-url-' +  + _uid" :src="uploaded_image_url" alt="" width="20" height="20" />
             </label>
         </div>
     </script>
