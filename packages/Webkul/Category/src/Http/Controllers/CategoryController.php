@@ -175,36 +175,36 @@ class CategoryController extends Controller
      */
     public function massDestroy()
     {
-        $suppressFlash = false;
+        $suppressFlash = true;
+        $categoryIds = explode(',', request()->input('indexes'));
 
-        if (request()->isMethod('delete') || request()->isMethod('post')) {
-            $indexes = explode(',', request()->input('indexes'));
+        foreach ($categoryIds as $categoryId) {
+            $category = $this->categoryRepository->find($categoryId);
 
-            foreach ($indexes as $key => $value) {
-                try {
-                    Event::dispatch('catalog.category.delete.before', $value);
+            if (isset($category)) {
+                if(strtolower($category->name) == "root") {
+                    $suppressFlash = false;
+                    session()->flash('warning', trans('admin::app.response.delete-category-root', ['name' => 'Category']));
+                } else {
+                    try {
+                        $suppressFlash = true;
+                        Event::dispatch('catalog.category.delete.before', $categoryId);
 
-                    $this->categoryRepository->delete($value);
+                        $this->categoryRepository->delete($categoryId);
 
-                    Event::dispatch('catalog.category.delete.after', $value);
-                } catch(\Exception $e) {
-                    $suppressFlash = true;
-
-                    continue;
+                        Event::dispatch('catalog.category.delete.after', $categoryId);
+        
+                    } catch(\Exception $e) {
+                        session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Category']));
+                    }
                 }
             }
-
-            if (! $suppressFlash) {
-                session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success'));
-            } else {
-                session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'Attribute Family']));
-            }
-
-            return redirect()->back();
-        } else {
-            session()->flash('error', trans('admin::app.datagrid.mass-ops.method-error'));
-
-            return redirect()->back();
         }
+
+        if (count($categoryIds) != 1 || $suppressFlash == true) {
+            session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'Category']));
+        }
+
+        return redirect()->route($this->_config['redirect']);
     }
 }
