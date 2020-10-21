@@ -72,7 +72,7 @@
                                                 <img
                                                     class="category-icon"
                                                     v-if="category.category_icon_path"
-                                                    :src="`${$root.baseUrl}/storage/${category.category_icon_path}`" alt="" />
+                                                    :src="`${$root.baseUrl}/storage/${category.category_icon_path}`" alt="" width="20" height="20" />
                                             </div>
                                             <span v-text="category.name"></span>
                                         </a>
@@ -213,7 +213,7 @@
                                                 <img
                                                     class="category-icon"
                                                     v-if="nestedSubCategory.category_icon_path"
-                                                    :src="`${$root.baseUrl}/storage/${nestedSubCategory.category_icon_path}`" alt="" />
+                                                    :src="`${$root.baseUrl}/storage/${nestedSubCategory.category_icon_path}`" alt="" width="20" height="20" />
                                             </div>
                                             <span>@{{ nestedSubCategory.name }}</span>
                                         </a>
@@ -234,7 +234,7 @@
                                                         <img
                                                             class="category-icon"
                                                             v-if="thirdLevelCategory.category_icon_path"
-                                                            :src="`${$root.baseUrl}/storage/${thirdLevelCategory.category_icon_path}`" alt="" />
+                                                            :src="`${$root.baseUrl}/storage/${thirdLevelCategory.category_icon_path}`" alt="" width="20" height="20" />
                                                     </div>
                                                     <span>@{{ thirdLevelCategory.name }}</span>
                                                 </a>
@@ -266,14 +266,14 @@
                                                     <div class="category-logo">
                                                         <img
                                                         class="category-icon"
-                                                        src="{{ asset('/themes/velocity/assets/images/flags/en.png') }}" alt="" />
+                                                        src="{{ asset('/themes/velocity/assets/images/flags/en.png') }}" alt="" width="20" height="20" />
                                                     </div>
                                                 @else
 
                                                     <div class="category-logo">
                                                         <img
                                                         class="category-icon"
-                                                        src="{{ asset('/storage/' . $locale->locale_image) }}" alt="" />
+                                                        src="{{ asset('/storage/' . $locale->locale_image) }}" alt="" width="20" height="20" />
                                                     </div>
                                                 @endif
 
@@ -346,7 +346,7 @@
                             </a>
                         @endif
 
-                        <a class="wishlist-btn unset" :href="`${isCustomer ? '{{ route('customer.wishlist.index') }}' : '{{ route('velocity.product.guest-wishlist') }}'}`">
+                        <a class="wishlist-btn unset" :href="`{{ route('customer.wishlist.index') }}`">
                             <div class="badge-container" v-if="wishlistCount > 0">
                                 <span class="badge" v-text="wishlistCount"></span>
                             </div>
@@ -513,11 +513,6 @@
                     updateHeaderItemsCount: function () {
                         if (! this.isCustomer) {
                             let comparedItems = this.getStorageValue('compared_product');
-                            let wishlistedItems = this.getStorageValue('wishlist_product');
-
-                            if (wishlistedItems) {
-                                this.wishlistCount = wishlistedItems.length;
-                            }
 
                             if (comparedItems) {
                                 this.compareCount = comparedItems.length;

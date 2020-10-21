@@ -659,16 +659,22 @@ abstract class AbstractType
                 continue;
             }
 
-            if ($price->value < $lastPrice) {
-                if ($price->value_type == 'discount') {
+            if ($price->value_type == 'discount') {
+                if ($price->value >= 0 && $price->value <= 100) {
                     $lastPrice = $product->price - ($product->price * $price->value) / 100;
-                } else {
-                    $lastPrice = $price->value;
+
+                    $lastQty = $price->qty;
+
+                    $lastCustomerGroupId = $price->customer_group_id;
                 }
+            } else {
+                if ($price->value >= 0 && $price->value < $lastPrice) {
+                    $lastPrice = $price->value;
 
-                $lastQty = $price->qty;
+                    $lastQty = $price->qty;
 
-                $lastCustomerGroupId = $price->customer_group_id;
+                    $lastCustomerGroupId = $price->customer_group_id;
+                }
             }
         }
 
