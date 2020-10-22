@@ -64,7 +64,7 @@
             <td>
                 <div class="control-group" :class="[errors.has(controlName + '[price]') ? 'has-error' : '']">
                     <label class="ticket-label">{{ __('bookingproduct::app.admin.catalog.products.price') }}</label>
-                    <input type="text" v-validate="'required'" :name="controlName + '[price]'" v-model="ticketItem.price" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.price') }}&quot;">
+                    <input type="text" v-validate="'required|decimal|min_value:0'" :name="controlName + '[price]'" v-model="ticketItem.price" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.price') }}&quot;">
 
                     <span class="control-error" v-if="errors.has(controlName + '[price]')">
                         @{{ errors.first(controlName + '[price]') }}
