@@ -1646,6 +1646,9 @@
 }
 
 .product-price {
+
+    height: 72px;
+
     span:nth-child(1),
     .special-price,
     .price-from > span:not(:nth-child(2)) {
