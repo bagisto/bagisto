@@ -1650,25 +1650,6 @@
 
     height: 72px;
 
-    span:nth-child(1),
-    .special-price,
-    .price-from > span:not(:nth-child(2)) {
-        font-size: 20px !important;
-        font-weight: 600;
-    }
-
-    .price-from {
-        span:nth-child(2) {
-            margin-left: 6px;
-            text-transform: lowercase;
-            display: inline-block !important;
-        }
-
-        span:nth-child(3) {
-            display: block !important;
-        }
-    }
-
     .price-label {
         margin-right: 6px;
     }
@@ -1678,6 +1659,32 @@
         margin-right: 10px;
         text-decoration: line-through;
         display: block;
+    }
+
+    /*
+       for bundle product content is more so adjusting in particular div
+       by using default behaviour i.e. inline
+    */
+    .price-from {
+        .bundle-regular-price {
+            font-size: 14px !important;
+            font-weight: 500;
+            margin-right: 10px;
+            text-decoration: line-through;
+        }
+
+        .bundle-special-price {
+            font-size: 14px !important;
+            font-weight: 600;
+        }
+
+        .bundle-to {
+            font-size: 14px !important;
+            font-weight: 500;
+            margin-top: 1px;
+            margin-bottom: 1px;
+            display: block;
+        }
     }
 
     span {
@@ -2469,18 +2476,6 @@
 
         .compare-icon {
             display: none;
-        }
-    }
-
-    .product-price {
-        span {
-            font-size: 24px !important
-        }
-
-        .price-from {
-            span:nth-child(2) {
-                font-size: 20px !important;
-            }
         }
     }
 
