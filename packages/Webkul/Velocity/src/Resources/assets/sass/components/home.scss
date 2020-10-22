@@ -721,6 +721,7 @@ body::after {
 
     .description-text {
         word-break: break-word;
+        overflow: auto;
     }
 }
 

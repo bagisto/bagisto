@@ -1,6 +1,7 @@
 @php
     $locale = request()->get('locale') ?: app()->getLocale();
     $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
+    $customer_group = request()->get('customer_group');
 @endphp
 
 <div class="table">
@@ -27,7 +28,7 @@
                                     @foreach ($results['extraFilters']['channels'] as $channelModel)
                                         <option
                                             value="{{ $channelModel->id }}"
-                                            {{ (isset($channel) && ($channelModel->code) == $channel) ? 'selected' : '' }}>
+                                            {{ (isset($channel) && ($channelModel->id) == $channel) ? 'selected' : '' }}>
                                             {{ $channelModel->name }}
                                         </option>
                                     @endforeach

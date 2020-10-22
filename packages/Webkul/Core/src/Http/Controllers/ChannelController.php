@@ -69,8 +69,8 @@ class ChannelController extends Controller
             'currencies'        => 'required|array|min:1',
             'base_currency_id'  => 'required|in_array:currencies.*',
             'root_category_id'  => 'required',
-            'logo.*'            => 'mimes:jpeg,jpg,bmp,png',
-            'favicon.*'         => 'mimes:jpeg,jpg,bmp,png',
+            'logo.*'            => 'mimes:bmp,jpeg,jpg,png,webp',
+            'favicon.*'         => 'mimes:bmp,jpeg,jpg,png,webp',
             'seo_title'         => 'required|string',
             'seo_description'   => 'required|string',
             'seo_keywords'      => 'required|string',
@@ -132,8 +132,8 @@ class ChannelController extends Controller
             'currencies'        => 'required|array|min:1',
             'base_currency_id'  => 'required|in_array:currencies.*',
             'root_category_id'  => 'required',
-            'logo.*'            => 'mimes:jpeg,jpg,bmp,png',
-            'favicon.*'         => 'mimes:jpeg,jpg,bmp,png',
+            'logo.*'            => 'mimes:bmp,jpeg,jpg,png,webp',
+            'favicon.*'         => 'mimes:bmp,jpeg,jpg,png,webp',
             'hostname'          => 'unique:channels,hostname,' . $id,
         ]);
 
@@ -152,6 +152,10 @@ class ChannelController extends Controller
         Event::dispatch('core.channel.update.before', $id);
 
         $channel = $this->channelRepository->update($data, $id);
+
+        if ($channel->base_currency->code !== session()->get('currency')) {
+            session()->put('currency', $channel->base_currency->code);
+        }
 
         Event::dispatch('core.channel.update.after', $channel);
 

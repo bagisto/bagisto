@@ -50,7 +50,7 @@
 
                             <span v-if="attribute.swatch_type == 'color'" :style="{ background: option.swatch_value }"></span>
 
-                            <img v-if="attribute.swatch_type == 'image'" :src="option.swatch_value" />
+                            <img v-if="attribute.swatch_type == 'image'" :src="option.swatch_value" alt="" />
 
                             <span v-if="attribute.swatch_type == 'text'">
                                 @{{ option.label }}

@@ -69,10 +69,18 @@ class AddressController extends Controller
     {
         $customer = auth($this->guard)->user();
 
-        request()->merge([
-            'address1'    => implode(PHP_EOL, array_filter(request()->input('address1'))),
-            'customer_id' => $customer->id,
-        ]);
+        if (request()->input('address1') && ! is_array(json_decode(request()->input('address1')))) {
+            return response()->json([
+                'message' => 'address1 must be an array.',
+            ]);
+        }
+
+        if (request()->input('address1')) {
+            request()->merge([
+                'address1'    => implode(PHP_EOL, array_filter(json_decode(request()->input('address1')))),
+                'customer_id' => $customer->id,
+            ]);
+        }        
 
         $this->validate(request(), [
             'address1' => 'string|required',

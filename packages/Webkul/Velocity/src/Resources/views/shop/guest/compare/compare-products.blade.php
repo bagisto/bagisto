@@ -3,20 +3,9 @@
     $comparableAttributes = $attributeRepository->getComparableAttributesBelongsToFamily();
 
     $locale = request()->get('locale') ?: app()->getLocale();
-    
+
     $attributeOptionTranslations = DB::table('attribute_option_translations')->where('locale', $locale)->get()->toJson();
 @endphp
-
-@push('css')
-    <style>
-        .btn-add-to-cart {
-            max-width: 130px;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-        }
-    </style>
-@endpush
 
 @push('scripts')
     <script type="text/x-template" id="compare-product-template">
@@ -73,7 +62,8 @@
                                                 class="image-wrapper"
                                                 :src="product['{{ $attribute['code'] }}']"
                                                 onload="window.updateHeight ? window.updateHeight() : ''"
-                                                :onerror="`this.src='${$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
+                                                :onerror="`this.src='${$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`"
+                                                alt=""/>
                                         </a>
                                         @break
 
@@ -133,7 +123,8 @@
                                                         class="image-wrapper"
                                                         onload="window.updateHeight ? window.updateHeight() : ''"
                                                         :src="'storage/' + product.product['{{ $attribute['code'] }}']"
-                                                        :onerror="`this.src='${$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
+                                                        :onerror="`this.src='${$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`"
+                                                        alt=""/>
                                                 </a>
                                                 @break;
 

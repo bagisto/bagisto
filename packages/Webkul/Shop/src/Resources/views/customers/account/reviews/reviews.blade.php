@@ -22,7 +22,7 @@
                     <div class="account-item-card mt-15 mb-15">
                         <div class="media-info">
                             <?php $image = $productImageHelper->getGalleryImages($review->product); ?>
-                            <img class="media" src="{{ $image[0]['small_image_url'] }}" />
+                            <img class="media" src="{{ $image[0]['small_image_url'] }}" alt="" />
 
                             <div class="info mt-20">
                                 <div class="product-name">{{$review->product->name}}</div>

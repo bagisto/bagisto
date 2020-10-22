@@ -938,6 +938,7 @@ return [
             'gender' => 'Gender',
             'email' => 'Email',
             'date_of_birth' => 'Date of Birth',
+            'date_of_birth_placeholder' => 'yyyy-mm-dd',
             'phone' => 'Phone',
             'customer_group' => 'Customer Group',
             'save-btn-title' => 'Save Customer',

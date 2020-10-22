@@ -356,6 +356,16 @@
         }
     }
 
+    .description {
+        overflow: auto;
+    }
+
+    .accordian-content {
+        div {
+            overflow: auto;
+        }
+    }
+
     .full-description {
         font-size: 14px;
     }

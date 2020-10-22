@@ -48,12 +48,6 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
         Route::delete('/comparison', 'ComparisonController@deleteComparisonProduct')
             ->name('customer.product.delete.compare');
 
-        Route::get('/guest-wishlist', 'ShopController@getWishlistList')
-            ->name('velocity.product.guest-wishlist')
-            ->defaults('_config', [
-                'view' => 'shop::guest.wishlist.index'
-            ]);
-
         Route::get('/items-count', 'ShopController@getItemsCount')
             ->name('velocity.product.item-count');
 

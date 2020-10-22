@@ -7,6 +7,7 @@ import de from 'vee-validate/dist/locale/de';
 import ar from 'vee-validate/dist/locale/ar';
 import VeeValidate, { Validator } from 'vee-validate';
 import axios from 'axios';
+import 'lazysizes';
 
 window.axios = axios;
 window.VeeValidate = VeeValidate;
@@ -51,6 +52,9 @@ Vue.component("shimmer-component", require("./UI/components/shimmer-component"))
 Vue.component('responsive-sidebar', require('./UI/components/responsive-sidebar'));
 Vue.component('product-quick-view', require('./UI/components/product-quick-view'));
 Vue.component('product-quick-view-btn', require('./UI/components/product-quick-view-btn'));
+Vue.component('category-products', require('./UI/components/category-products'));
+Vue.component('hot-category', require('./UI/components/hot-category'));
+Vue.component('popular-category', require('./UI/components/popular-category'));
 
 window.eventBus = new Vue();
 
@@ -217,7 +221,7 @@ $(document).ready(function () {
         }
     });
 
-    new Vue({
+    const app = new Vue({
         el: "#app",
         VueToast,
 
@@ -358,6 +362,8 @@ $(document).ready(function () {
             }
         }
     });
+
+    window.app = app;
 
     // for compilation of html coming from server
     Vue.component('vnode-injector', {

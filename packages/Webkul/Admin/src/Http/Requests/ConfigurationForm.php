@@ -58,7 +58,7 @@ class ConfigurationForm extends FormRequest
             && ! request()->input('general.design.admin_logo.logo_image.delete')
         ) {
             $this->rules = array_merge($this->rules, [
-                'general.design.admin_logo.logo_image'  => 'required|mimes:jpeg,bmp,png,jpg|max:5000',
+                'general.design.admin_logo.logo_image'  => 'required|mimes:bmp,jpeg,jpg,png,webp|max:5000',
             ]);
         }
 
@@ -66,7 +66,7 @@ class ConfigurationForm extends FormRequest
             && ! request()->input('general.design.admin_logo.favicon.delete')
         ) {
             $this->rules = array_merge($this->rules, [
-                'general.design.admin_logo.favicon'  => 'required|mimes:jpeg,bmp,png,jpg|max:5000',
+                'general.design.admin_logo.favicon'  => 'required|mimes:bmp,jpeg,jpg,png,webp|max:5000',
             ]);
         }
 
@@ -74,7 +74,7 @@ class ConfigurationForm extends FormRequest
             && ! request()->input('sales.orderSettings.invoice_slip_design.logo.delete')
         ) {
             $this->rules = array_merge($this->rules, [
-                'sales.orderSettings.invoice_slip_design.logo'  => 'required|mimes:jpeg,bmp,png,jpg|max:5000',
+                'sales.orderSettings.invoice_slip_design.logo'  => 'required|mimes:bmp,jpeg,jpg,png,webp|max:5000',
             ]);
         }
 
@@ -89,7 +89,7 @@ class ConfigurationForm extends FormRequest
     public function messages()
     {
         return [
-            'general.design.admin_logo.logo_image.mimes' => 'Invalid file format. Use only jpeg, bmp, png, jpg.',
+            'general.design.admin_logo.logo_image.mimes' => 'Invalid file format. Use only bmp, jpeg, jpg, png and webp.',
             'catalog.products.storefront.products_per_page.comma_seperated_integer' => 'The "Product Per Page" field must be numeric and may contain comma.'
         ];
     }

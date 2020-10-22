@@ -1672,6 +1672,7 @@
         font-weight: 500;
         margin-right: 10px;
         text-decoration: line-through;
+        display: block;
     }
 
     span {
@@ -1860,6 +1861,7 @@
         background: $light-color;
         border-left: 1px solid $border-common;
         box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+        overflow-y: auto;
 
         li:nth-last-of-type(1) {
             margin-bottom: 10px;
