@@ -230,19 +230,18 @@
 }
 
 .product-card-new {
-
     width: 19rem;
+    height: 385px;
     border: none !important;
     margin: 0 5px 10px 10px;
 
     .product-image-container {
-        max-height: 225px;
+        max-height: 190px;
         position: relative;
 
         img {
             width: 100%;
-            height: 100%;
-            max-height: 225px;
+            max-height: 190px;
         }
     }
 
@@ -321,7 +320,7 @@
 }
 
 .quick-view-btn-container {
-    left: -12px;
+    left: -20px;
     width: 100%;
     bottom: 10px;
     display: none;
@@ -1646,24 +1645,8 @@
 }
 
 .product-price {
-    span:nth-child(1),
-    .special-price,
-    .price-from > span:not(:nth-child(2)) {
-        font-size: 20px !important;
-        font-weight: 600;
-    }
 
-    .price-from {
-        span:nth-child(2) {
-            margin-left: 6px;
-            text-transform: lowercase;
-            display: inline-block !important;
-        }
-
-        span:nth-child(3) {
-            display: block !important;
-        }
-    }
+    height: 72px;
 
     .price-label {
         margin-right: 6px;
@@ -1674,6 +1657,33 @@
         margin-right: 10px;
         text-decoration: line-through;
         display: block;
+    }
+
+    /*
+       for bundle product content is more so adjusting in particular div
+       by using default behaviour i.e. inline
+    */
+    .price-from {
+        .bundle-regular-price {
+            font-size: 12px !important;
+            font-weight: 500;
+            margin-right: 10px;
+            text-decoration: line-through;
+        }
+
+        .bundle-special-price {
+            font-size: 15px !important;
+            font-weight: 600;
+        }
+
+        .bundle-to {
+            text-align: center;
+            font-size: 15px !important;
+            font-weight: 500;
+            margin-top: 1px;
+            margin-bottom: 1px;
+            display: block;
+        }
     }
 
     span {
@@ -2465,18 +2475,6 @@
 
         .compare-icon {
             display: none;
-        }
-    }
-
-    .product-price {
-        span {
-            font-size: 24px !important
-        }
-
-        .price-from {
-            span:nth-child(2) {
-                font-size: 20px !important;
-            }
         }
     }
 
