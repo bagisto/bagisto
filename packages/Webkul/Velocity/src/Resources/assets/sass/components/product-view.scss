@@ -166,8 +166,29 @@
         }
 
         .product-price {
-            .sticker {
-                display: none;
+            height: unset;
+
+            .price-from {
+                .bundle-regular-price {
+                    font-size: 20px !important;
+                    font-weight: 500;
+                    margin-right: 10px;
+                    text-decoration: line-through;
+                }
+
+                .bundle-special-price {
+                    font-size: 20px !important;
+                    font-weight: 600;
+                }
+
+                .bundle-to {
+                    text-align: unset;
+                    font-size: 20px !important;
+                    font-weight: 500;
+                    margin-top: 1px;
+                    margin-bottom: 1px;
+                    display: block;
+                }
             }
         }
 
