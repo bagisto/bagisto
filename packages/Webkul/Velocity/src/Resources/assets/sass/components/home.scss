@@ -661,22 +661,6 @@ body::after {
         }
     }
 
-    .product-price {
-        span:nth-child(1),
-        .special-price,
-        .price-from > span:not(:nth-child(2)) {
-            font-size: 20px;
-            font-weight: 600;
-        }
-
-        .price-from {
-            span:nth-child(3) {
-                margin-left: 6px;
-                display: inline-block !important;
-            }
-        }
-    }
-
     .quick-view-name {
         font-size: 24px;
         line-height: 25px;
