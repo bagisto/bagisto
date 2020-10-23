@@ -419,8 +419,8 @@ class Bundle extends AbstractType
         $priceHtml .= '<div class="price-from">';
 
         if ($prices['from']['regular_price']['price'] != $prices['from']['final_price']['price']) {
-            $priceHtml .= '<span class="regular-price">' . $prices['from']['regular_price']['formated_price'] . '</span>'
-                        . '<span class="special-price">' . $prices['from']['final_price']['formated_price'] . '</span>';
+            $priceHtml .= '<span class="bundle-regular-price">' . $prices['from']['regular_price']['formated_price'] . '</span>'
+                        . '<span class="bundle-special-price">' . $prices['from']['final_price']['formated_price'] . '</span>';
         } else {
             $priceHtml .= '<span>' . $prices['from']['regular_price']['formated_price'] . '</span>';
         }
@@ -429,11 +429,11 @@ class Bundle extends AbstractType
         if ($prices['from']['regular_price']['price'] != $prices['to']['regular_price']['price']
             || $prices['from']['final_price']['price'] != $prices['to']['final_price']['price']
         ) {
-            $priceHtml .= '<span style="font-weight: 500;margin-top: 1px;margin-bottom: 1px;display: block;">To</span>';
+            $priceHtml .= '<span class="bundle-to">To</span>';
 
             if ($prices['to']['regular_price']['price'] != $prices['to']['final_price']['price']) {
-                $priceHtml .= '<span class="regular-price">' . $prices['to']['regular_price']['formated_price'] . '</span>'
-                            . '<span class="special-price">' . $prices['to']['final_price']['formated_price'] . '</span>';
+                $priceHtml .= '<span class="bundle-regular-price">' . $prices['to']['regular_price']['formated_price'] . '</span>'
+                            . '<span class="bundle-special-price">' . $prices['to']['final_price']['formated_price'] . '</span>';
             } else {
                 $priceHtml .= '<span>' . $prices['to']['regular_price']['formated_price'] . '</span>';
             }
