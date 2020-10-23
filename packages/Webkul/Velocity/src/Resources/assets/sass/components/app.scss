@@ -2335,6 +2335,27 @@
 
 .recetly-viewed-products-wrapper {
     padding: 2px;
+
+    .price-from {
+        .bundle-regular-price {
+            display: none;
+        }
+
+        .bundle-special-price {
+            font-size: 15px !important;
+            font-weight: 600;
+        }
+
+        .bundle-to {
+            text-align: center;
+            font-size: 15px !important;
+            font-weight: 500;
+            margin-top: 1px;
+            margin-bottom: 1px;
+            margin: 0 2px;
+            display: unset;
+        }
+    }
 }
 
 .category-page-wrapper {

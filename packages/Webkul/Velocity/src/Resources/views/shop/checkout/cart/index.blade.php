@@ -131,13 +131,6 @@
                                                         @endif
                                                     @endauth
 
-                                                    @guest('customer')
-                                                        @include('shop::products.wishlist', [
-                                                            'isMoveToWishlist' => route('shop.checkout.cart.remove', ['id' => $item->id]),
-                                                            'text' => "<span class='align-vertical-top'>$moveToWishlist</span>"
-                                                        ])
-                                                    @endguest
-
                                                     <a
                                                         class="unset
                                                             @auth('customer')

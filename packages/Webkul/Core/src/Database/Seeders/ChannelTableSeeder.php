@@ -16,6 +16,7 @@ class ChannelTableSeeder extends Seeder
             'code'              => 'default',
             'name'              => 'Default',
             'theme'             => 'velocity',
+            'hostname'          => config('app.url'),
             'root_category_id'  => 1,
             'home_page_content' => '<p>@include("shop::home.slider") @include("shop::home.featured-products") @include("shop::home.new-products")</p>
             <div class="banner-container">
