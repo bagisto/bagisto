@@ -1235,7 +1235,7 @@ return [
 
     'admin' => [
         'emails' => [
-            'email' => 'Email',
+            'email' => 'البريد الإلكتروني',
             'notification_label' => 'إشعارات',
             'notifications' => [
                 'verification' => 'ارسل ايميل التفعيل',
