@@ -753,7 +753,6 @@ class ProductRepository extends Repository
     }
 
     public function copyImage($image,$copiedProduct) {
-
         $imagePath = $image['path'];
         $imagename = explode('/', $imagePath);
         $dir = 'product/' . $copiedProduct['id'];
