@@ -55,9 +55,13 @@
                     </span>
                 </div>
 
-                <div class="control-group">
-                    <label class="ticket-label">{{ __('bookingproduct::app.admin.catalog.products.special-price') }}</label>
-                    <input type="text" :name="controlName + '[special_price]'" v-model="ticketItem.special_price" class="control">
+                <div class="control-group" :class="[errors.has(controlName + '[special_price]') ? 'has-error' : '']">
+                    <label class="ticket-label">{{ __('bookingproduct::app.admin.catalog.products.special-price') }} X</label>
+                    <input type="text" v-validate="{decimal: true, min_value:0, ...(ticketItem.price ? {max_value: ticketItem.price} : {})}" :name="controlName + '[special_price]'" v-model="ticketItem.special_price" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.price') }}&quot;">
+
+                    <span class="control-error" v-if="errors.has(controlName + '[special_price]')">
+                        @{{ errors.first(controlName + '[special_price]') }}
+                    </span>
                 </div>
             </td>
 
