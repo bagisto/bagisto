@@ -9,6 +9,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Webkul\Category\Contracts\Category as CategoryContract;
 use Webkul\Attribute\Models\AttributeProxy;
 use Webkul\Category\Repositories\CategoryRepository;
+use Webkul\Product\Models\ProductProxy;
 
 /**
  * Class Category
@@ -128,5 +129,13 @@ class Category extends TranslatableModel implements CategoryContract
         }
 
         return $this->findInTree($category->children);
+    }
+
+    /**
+     * The products that belong to the category.
+     */
+    public function products()
+    {
+        return $this->belongsToMany(ProductProxy::modelClass(), 'product_categories');
     }
 }

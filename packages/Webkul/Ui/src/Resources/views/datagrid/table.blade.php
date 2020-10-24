@@ -272,6 +272,7 @@
                         massActions: @json($results['massactions']),
                         massActionsToggle: false,
                         massActionTarget: null,
+                        massActionConfirmText: '{{ __('ui::app.datagrid.click_on_action') }}',
                         massActionType: null,
                         massActionValues: [],
                         massActionTargets: [],
@@ -457,7 +458,8 @@
                         for (let id in this.massActions) {
                             targetObj = {
                                 'type': this.massActions[id].type,
-                                'action': this.massActions[id].action
+                                'action': this.massActions[id].action,
+                                'confirm_text': this.massActions[id].confirm_text
                             };
 
                             this.massActionTargets.push(targetObj);
@@ -483,6 +485,7 @@
                             for (let i in this.massActionTargets) {
                                 if (this.massActionTargets[i].type === 'delete') {
                                     this.massActionTarget = this.massActionTargets[i].action;
+                                    this.massActionConfirmText = this.massActionTargets[i].confirm_text ? this.massActionTargets[i].confirm_text : this.massActionConfirmText;
 
                                     break;
                                 }
@@ -493,6 +496,7 @@
                             for (let i in this.massActionTargets) {
                                 if (this.massActionTargets[i].type === 'update') {
                                     this.massActionTarget = this.massActionTargets[i].action;
+                                    this.massActionConfirmText = this.massActionTargets[i].confirm_text ? this.massActionTargets[i].confirm_text : this.massActionConfirmText;
 
                                     break;
                                 }

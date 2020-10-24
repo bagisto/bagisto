@@ -190,7 +190,10 @@ class CategoryController extends Controller
                         $suppressFlash = true;
                         Event::dispatch('catalog.category.delete.before', $categoryId);
 
-                        $this->categoryRepository->delete($categoryId);
+                        if($category->products->count() > 0) {
+                            $category->products()->delete();
+                        }
+                        $category->delete();
 
                         Event::dispatch('catalog.category.delete.after', $categoryId);
         
@@ -206,5 +209,18 @@ class CategoryController extends Controller
         }
 
         return redirect()->route($this->_config['redirect']);
+    }
+
+
+    public function categoryProductCount() {
+        $indexes = explode(",", request()->input('indexes'));
+        $product_count = 0;
+
+        foreach($indexes as $index) {
+            $category = $this->categoryRepository->find($index);
+            $product_count += $category->products->count();
+        }
+
+        return response()->json(['product_count' => $product_count], 200);
     }
 }
