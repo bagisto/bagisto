@@ -131,7 +131,11 @@ class Toolbar extends AbstractProduct
     {
         $params = request()->input();
 
-        if (isset($params['mode']) && $key == $params['mode']) {
+        $defaultMode = 'grid';
+
+        if (request()->input() == null && $key == $defaultMode) {
+            return true;
+        } else if (isset($params['mode']) && $key == $params['mode']) {
             return true;
         }
 
