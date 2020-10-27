@@ -2483,6 +2483,11 @@
     .action {
         position: relative;
 
+        .btn-add-to-cart {
+            width: 125px !important;
+            white-space: pre-wrap;
+        }
+
         .close-btn {
             right: 0;
             top: 6px;
