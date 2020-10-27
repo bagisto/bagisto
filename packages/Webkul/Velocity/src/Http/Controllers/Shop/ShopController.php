@@ -168,6 +168,7 @@ class ShopController extends Controller
             'name'               => $category->name,
             'children'           => $formattedChildCategory,
             'category_icon_path' => $category->category_icon_path,
+            'image'              => $category->image
         ];
     }
 
