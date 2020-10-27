@@ -57,6 +57,8 @@ body {
             }
 
             .mini-cart-container {
+                width: unset;
+
                 ~ .compare-btn,
                 ~ .wishlist-btn {
                     float: left;
