@@ -44,6 +44,10 @@ class Install extends Command
         $cached = $this->call('config:cache');
         $this->info($cached);
 
+        // waiting for 2 seconds
+        $this->warn('Please wait...');
+        sleep(2);
+
         // running `php artisan migrate`
         $this->warn('Step: Migrating all tables into database...');
         $migrate = $this->call('migrate:fresh');
