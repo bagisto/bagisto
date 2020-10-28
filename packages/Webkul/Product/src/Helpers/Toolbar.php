@@ -131,7 +131,9 @@ class Toolbar extends AbstractProduct
     {
         $params = request()->input();
 
-        $defaultMode = 'grid';
+        $defaultMode = core()->getConfigData('catalog.products.storefront.mode')
+        ? core()->getConfigData('catalog.products.storefront.mode')
+        : 'grid';
 
         if (request()->input() == null && $key == $defaultMode) {
             return true;
