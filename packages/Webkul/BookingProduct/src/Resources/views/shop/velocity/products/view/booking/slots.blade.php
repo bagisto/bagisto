@@ -8,7 +8,7 @@
 
             <div class="control-group-container">
                 <div class="form-group date" :class="[errors.has('booking[date]') ? 'has-error' : '']">
-                    <date @onChange="dateSelected($event)">
+                    <date @onChange="dateSelected($event)" :minDate="'{{$bookingProduct->available_from}}'" :maxDate="'{{$bookingProduct->available_to}}'">
                         <input type="text" v-validate="'required'" name="booking[date]" class="form-style" data-vv-as="&quot;{{ __('bookingproduct::app.shop.products.date') }}&quot;"/>
                     </date>
 
@@ -24,7 +24,7 @@
                 </div>
             </div>
         </div>
-        
+
     </script>
 
     <script>
@@ -54,6 +54,6 @@
                 }
             }
         });
-        
+
     </script>
 @endpush
