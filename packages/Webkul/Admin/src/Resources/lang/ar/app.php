@@ -2,7 +2,7 @@
 
 return [
     'save'         => 'حفظ',
-    'create'       => 'خلق',
+    'create'       => 'إنشاء',
     'update'       => 'تحديث',
     'delete'       => 'حذف',
     'copy-of'      => 'نسخة من ',
@@ -47,20 +47,20 @@ return [
         'my-account' => 'حسابي',
         'logout' => 'خروج',
         'visit-shop' => 'قم بزيارة المتجر',
-        'dashboard' => 'لوحة العدادات',
+        'dashboard' => 'لوحة التحكم',
         'sales' => 'المبيعات',
-        'orders' => 'الأوامر',
+        'orders' => 'الطلبات',
         'shipments' => 'الشحنات',
         'invoices' => 'الفواتير',
         'catalog' => 'فهرس',
         'products' => 'المنتجات',
         'categories' => 'الفئات',
-        'attributes' => 'الصفات',
+        'attributes' => 'الخصائص',
         'attribute-families' => 'وصف الأسر',
         'customers' => 'زبائن',
         'groups' => 'المجموعات',
-        'reviews' => 'باء-الاستعراضات',
-        'newsletter-subscriptions' => 'الاشتراك في الرسالة الإخبارية',
+        'reviews' => 'التقييمات',
+        'newsletter-subscriptions' => 'الاشتراك في النشرة البريدية',
         'configure' => 'اضبط',
         'settings' => 'إعدادات',
         'locales' => 'لغات',
@@ -81,9 +81,9 @@ return [
     ],
 
     'acl' => [
-        'dashboard' => 'لوحة العدادات',
+        'dashboard' => 'لوحة التحكم',
         'sales' => 'المبيعات',
-        'orders' => 'الأوامر',
+        'orders' => 'الطلبات',
         'shipments' => 'الشحنات',
         'invoices' => 'الفواتير',
         'catalog' => 'فهرس',
@@ -117,7 +117,7 @@ return [
     ],
 
     'dashboard' => [
-        'title' => 'لوحة العدادات',
+        'title' => 'لوحة التحكم',
         'from' => 'من',
         'to' => 'إلى',
         'total-customers' => 'مجموع الزبائن',
@@ -140,10 +140,10 @@ return [
 
     'datagrid' => [
         'mass-ops' => [
-            'method-error'   => 'خطأ! تم اكتشاف طريقة خاطئة ، الرجاء التحقق من تشكيل حركة الكتلة',
-            'delete-success' => "تم حذف المورد بنجاح :Selected",
+            'method-error'   => 'خطأ! تم اكتشاف طريقة خاطئة، الرجاء التحقق من تشكيل حركة الكتلة',
+            'delete-success' => "تم الحذف بنجاح :Selected",
             'partial-action' => 'ولم تنفذ بعض الإجراءات بسبب القيود المفروضة على النظام :resource',
-            'update-success' => "تم تحديث المورد بنجاح :Selected",
+            'update-success' => "تم التحديث بنجاح :Selected",
             'no-resource'    => 'المورد المقدم غير كاف للعمل',
         ],
 
@@ -154,7 +154,7 @@ return [
         'copy'         => 'نسخ',
         'name'         => 'اسم',
         'direction'    => 'اتجاه',
-        'fullname'     => 'الاسم الكامل',
+        'fullname'     => 'الاسم بالكامل',
         'type'         => 'النوع',
         'required'     => 'مطلوب',
         'unique'       => 'فريد',
@@ -171,10 +171,10 @@ return [
         'layout' => 'نسق',
         'url-key' => 'مفتاح URL',
         'comment' => 'تعليق',
-        'product-name' => 'المنتج',
+        'product-name' => 'إسم المنتج',
         'currency-name' => 'اسم العملة',
         'exch-rate' => 'باء-سعر الصرف',
-        'priority' => 'Priority',
+        'priority' => 'الأولوية',
         'subscribed' => 'مشترك',
         'base-total' => 'المجموع الأساسي',
         'grand-total' => 'المجموع الكلي',
@@ -232,10 +232,10 @@ return [
     'account' => [
         'title' => 'حسابي',
         'save-btn-title' => 'احفظ',
-        'general' => 'ألف-لمحة عامة',
+        'general' => 'عام',
         'name' => 'اسم',
         'email' => 'البريد الإلكتروني',
-        'password' => 'كلمه السر',
+        'password' => 'كلمه المرور',
         'confirm-password' => 'تأكيد كلمة المرور',
         'change-password' => 'غير كلمة سر الحساب',
         'current-password' => 'كلمة المرور الحالية'
@@ -243,22 +243,22 @@ return [
 
     'users' => [
         'forget-password' => [
-            'title' => 'انس كلمة السر',
-            'header-title' => 'استرجع كلمة السر',
+            'title' => 'نسيت كلمة المرور',
+            'header-title' => 'استرجع كلمة المرور',
             'email' => 'البريد الإلكتروني المسجل',
-            'password' => 'كلمه السر',
+            'password' => 'كلمه المرور',
             'confirm-password' => 'تأكيد كلمة المرور',
             'back-link-title' => 'العودة للتوقيع',
             'submit-btn-title' => 'بريد إلكتروني كلمة مرور إعادة تعيين وصلة'
         ],
 
         'reset-password' => [
-            'title' => 'أعد ضبط كلمة السر',
+            'title' => 'أعد ضبط كلمة المرور',
             'email' => 'البريد الإلكتروني المسجل',
-            'password' => 'كلمه السر',
+            'password' => 'كلمه المرور',
             'confirm-password' => 'تأكيد كلمة المرور',
             'back-link-title' => 'العودة للتوقيع',
-            'submit-btn-title' => 'أعد ضبط كلمة السر'
+            'submit-btn-title' => 'أعد ضبط كلمة المرور'
         ],
 
         'roles' => [
@@ -266,10 +266,10 @@ return [
             'add-role-title' => 'أضف الدور',
             'edit-role-title' => 'حرر الدور',
             'save-btn-title' => 'احفظ الدور',
-            'general' => 'ألف-لمحة عامة',
+            'general' => 'عام',
             'name' => 'اسم',
             'description' => 'الوصف',
-            'access-control' => 'مراقبة الدخول',
+            'access-control' => 'صلاحيات الوصول',
             'permissions' => 'الأذون',
             'custom' => 'مخصص',
             'all' => 'الكل'
@@ -280,33 +280,33 @@ return [
             'add-user-title' => 'إضافة مستخدم',
             'edit-user-title' => 'حرر المستخدم',
             'save-btn-title' => 'احفظ المستخدم',
-            'general' => 'ألف-لمحة عامة',
+            'general' => 'عام',
             'email' => 'البريد الإلكتروني',
             'name' => 'اسم',
-            'password' => 'كلمه الس',
+            'password' => 'كلمه المرور',
             'confirm-password' => 'تأكيد كلمة المرور',
             'status-and-role' => 'المركز والدور',
             'role' => 'الدور',
             'status' => 'الحالة',
             'account-is-active' => 'الحساب نشط',
-            'current-password' => 'أدخل كلمة السر الحالية',
+            'current-password' => 'أدخل كلمة المرور الحالية',
             'confirm-delete' => 'تأكيد حذف هذا الحساب',
-            'confirm-delete-title' => 'تأكيد كلمة السر قبل حذف',
+            'confirm-delete-title' => 'تأكيد كلمة المرور قبل حذف',
             'delete-last' => 'على الأقل مدير واحد مطلوب.',
             'delete-success' => 'نجاح! حذف المستخدم',
-            'incorrect-password' => 'كلمة السر التي أدخلتها غير صحيحة',
-            'password-match' => 'كلمة السر الحالية لا تطابق.',
+            'incorrect-password' => 'كلمة المرور التي أدخلتها غير صحيحة',
+            'password-match' => 'كلمة المرور الحالية لا تطابق.',
             'account-save' => 'الحساب التغييرات و الموفرة بنجاح.',
             'login-error' => 'الرجاء التحقق من أوراق اعتمادك ومحاولة مرة أخرى.',
-            'activate-warning' => 'حسابك لم يتم تفعيله بعد ، الرجاء الاتصال بالمدير.'
+            'activate-warning' => 'حسابك لم يتم تفعيله بعد، الرجاء الاتصال بالمدير.'
         ],
 
         'sessions' => [
             'title' => 'وقع هنا',
             'email' => 'البريد الإلكتروني',
-            'password' => 'كلمه السر',
-            'forget-password-link-title' => 'نسيت كلمة السر ؟',
-            'remember-me' => 'تذكريني',
+            'password' => 'كلمه المرور',
+            'forget-password-link-title' => 'نسيت كلمة المرور؟',
+            'remember-me' => 'تذكرني',
             'submit-btn-title' => 'وقع هنا'
         ]
     ],
