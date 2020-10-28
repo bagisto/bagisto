@@ -441,6 +441,7 @@ return [
         'available-for-order' => 'متوفر لطلب الشراء',
         'settings' => 'Settings',
         'compare_options' => 'Compare Options',
+        'wishlist-options' => 'Wishlist Options'
     ],
 
     // 'reviews' => [

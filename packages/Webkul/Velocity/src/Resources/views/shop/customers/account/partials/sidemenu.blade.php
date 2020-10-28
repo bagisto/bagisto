@@ -15,6 +15,8 @@
 
                 $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false;
 
+                $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
+
                 try {
                     $subMenuCollection['profile'] = $menuItem['children']['profile'];
                     $subMenuCollection['orders'] = $menuItem['children']['orders'];
@@ -23,6 +25,10 @@
 
                     if ($showCompare) {
                         $subMenuCollection['compare'] = $menuItem['children']['compare'];
+                    }
+
+                    if ($showWishlist) {
+                        $subMenuCollection['compare'] = $menuItem['children']['wishlist'];
                     }
 
                     $subMenuCollection['reviews'] = $menuItem['children']['reviews'];

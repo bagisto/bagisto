@@ -39,12 +39,20 @@
                 </li>
             </ul>
 
+
+
             <div class="product-hero-image" id="product-hero-image">
                 <img :src="currentLargeImageUrl" id="pro-img" :data-image="currentOriginalImageUrl" alt=""/>
 
                 @auth('customer')
-                    <a @if ($wishListHelper->getWishlistProduct($product)) class="add-to-wishlist already" @else class="add-to-wishlist" @endif href="{{ route('customer.wishlist.add', $product->product_id) }}">
-                    </a>
+                    @php
+                        $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
+                    @endphp
+
+                    @if ($showWishlist)
+                        <a @if ($wishListHelper->getWishlistProduct($product)) class="add-to-wishlist already" @else class="add-to-wishlist" @endif href="{{ route('customer.wishlist.add', $product->product_id) }}">
+                        </a>
+                    @endif
                 @endauth
             </div>
 
