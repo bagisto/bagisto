@@ -40,9 +40,9 @@ return [
             ]
         ],
         'layouts' => [
-            'velocity' => 'Velocity',
+            'velocity' => '● السرعة',
             'cms-pages' => 'CMS الصفحات',
-            'meta-data' => 'Meta Data',
+            'meta-data' => 'البيانات الوصفية',
             'category-menu' => 'قائمة الفئة',
             'header-content' => 'محتوى الرأس',
         ],
@@ -91,7 +91,7 @@ return [
         ],
         'meta-data' => [
             'footer' => 'تذييل',
-            'title' => 'Velocity meta data',
+            'title' => 'البيانات الوصفية السرعة',
             'activate-slider' => 'تنشيط شريط التمرير',
             'home-page-content' => 'محتوى الصفحة الرئيسية',
             'footer-left-content' => 'تذييل يسار المحتوى',

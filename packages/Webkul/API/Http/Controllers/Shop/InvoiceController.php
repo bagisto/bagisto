@@ -43,7 +43,9 @@ class InvoiceController extends Controller
             $this->middleware('auth:' . $this->guard);
         }
 
-        $this->repository = app($this->_config['repository']);
+        if ($this->_config) {
+            $this->repository = app($this->_config['repository']);
+        }
     }
 
     /**
