@@ -1,7 +1,7 @@
 @push('scripts')
     <script type="text/x-template" id="content-header-template">
         <header class="row velocity-divide-page vc-header header-shadow active">
-            <div class="vc-small-screen container" v-if="isMobile()">
+            <div class="vc-small-screen container">
                 <div class="row">
                     <div class="col-6">
                         <div v-if="hamburger" class="nav-container scrollable">
@@ -370,7 +370,7 @@
             </div>
 
             <div
-                v-else
+               id="main-category"
                 @mouseout="toggleSidebar('0', $event, 'mouseout')"
                 @mouseover="toggleSidebar('0', $event, 'mouseover')"
                 :class="`main-category fs16 unselectable fw6 ${($root.sharedRootCategories.length > 0) ? 'cursor-pointer' : 'cursor-not-allowed'} left`">
