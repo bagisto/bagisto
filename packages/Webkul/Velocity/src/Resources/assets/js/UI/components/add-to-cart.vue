@@ -11,7 +11,7 @@
 
             <i class="material-icons text-down-3" v-if="showCartIcon">shopping_cart</i>
 
-            <span class="fs10 fw6 text-uppercase text-up-4" v-text="btnText"></span>
+            <span class="fs14 fw6 text-uppercase text-up-4" v-text="btnText"></span>
         </a>
 
         <!-- for add to cart -->
@@ -24,7 +24,7 @@
 
             <i class="material-icons text-down-3" v-if="showCartIcon">shopping_cart</i>
 
-            <span class="fs10 fw6 text-uppercase text-up-4" v-text="btnText"></span>
+            <span class="fs14 fw6 text-uppercase text-up-4" v-text="btnText"></span>
         </button>
 
     </form>

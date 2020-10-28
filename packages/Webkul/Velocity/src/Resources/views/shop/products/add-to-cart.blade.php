@@ -54,7 +54,7 @@
                             <i class="material-icons text-down-3">shopping_cart</i>
                         @endif
 
-                        <span class="fs10 fw6 text-uppercase text-up-4">
+                        <span class="fs14 fw6 text-uppercase text-up-4">
                             {{ ($product->type == 'booking') ?  __('shop::app.products.book-now') : $btnText ?? __('shop::app.products.add-to-cart') }}
                         </span>
                     </button>
