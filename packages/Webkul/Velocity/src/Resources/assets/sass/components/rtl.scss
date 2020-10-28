@@ -233,6 +233,14 @@ body {
                 a {
                     padding: 7px 15px 5px 15px;
                 }
+
+                ul.nested {
+                    li {
+                        a {
+                            padding-right: 25px;
+                        }
+                    }
+                }
             }
         }
 
