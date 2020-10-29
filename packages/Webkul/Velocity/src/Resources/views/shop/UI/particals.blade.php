@@ -62,7 +62,7 @@
     </script>
 
     <script type="text/x-template" id="searchbar-template">
-        <div class="right searchbar vc-full-screen">
+        <div class="right searchbar">
             <div class="row">
                 <div class="col-lg-5 col-md-12">
                     <div class="input-group">
@@ -76,7 +76,7 @@
                                 class="btn-toolbar full-width"
                                 role="toolbar">
 
-                                <div class="btn-group full-width">
+                                <div class="btn-group full-width force-center">
                                     <div class="selectdiv">
                                         <select class="form-control fs13 styled-select" name="category" @change="focusInput($event)" aria-label="Category">
                                             <option value="">
@@ -124,7 +124,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-7 col-md-12">
+                <div class="col-lg-7 col-md-12 vc-full-screen">
                     {!! view_render_event('bagisto.shop.layout.header.cart-item.before') !!}
                         @include('shop::checkout.cart.mini-cart')
                     {!! view_render_event('bagisto.shop.layout.header.cart-item.after') !!}

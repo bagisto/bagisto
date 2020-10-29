@@ -68,12 +68,21 @@
         display: none !important;
     }
 
+    #home-right-bar-container {
+        position: relative;
+        top: -48px;
+    }
+
     .vc-full-screen {
         display: none !important;
     }
 
     .vc-small-screen {
         display: block !important;
+    }
+
+    .force-center {
+        margin: 0 auto !important;
     }
 
     .main-content-wrapper {
@@ -471,6 +480,7 @@
             }
 
             #search-form {
+                background: transparent;
                 width: 100%;
 
                 .selectdiv {
@@ -1039,5 +1049,12 @@
 
     .quick-view-in-list {
         display: none;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    #home-right-bar-container {
+        position: unset;
+        top: unset;
     }
 }
