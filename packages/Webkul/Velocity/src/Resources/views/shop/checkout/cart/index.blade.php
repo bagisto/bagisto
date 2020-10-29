@@ -17,6 +17,10 @@
             width: unset;
             float: right;
         }
+
+        .alert-wishlist {
+            display: inline-block;
+        }
     </style>
 @endpush
 
@@ -119,15 +123,19 @@
                                                 <div class="no-padding col-12 cursor-pointer fs16">
                                                     @auth('customer')
                                                         @if ($item->parent_id != 'null' ||$item->parent_id != null)
-                                                            @include('shop::products.wishlist', [
-                                                                'route' => route('shop.movetowishlist', $item->id),
-                                                                'text' => "<span class='align-vertical-super'>$moveToWishlist</span>"
-                                                            ])
+                                                            <div @click="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')" class="alert-wishlist">
+                                                                @include('shop::products.wishlist', [
+                                                                    'route' => route('shop.movetowishlist', $item->id),
+                                                                    'text' => "<span class='align-vertical-super'>$moveToWishlist</span>"
+                                                                ])
+                                                            </div>
                                                         @else
-                                                            @include('shop::products.wishlist', [
-                                                                'route' => route('shop.movetowishlist', $item->child->id),
-                                                                'text' => "<span class='align-vertical-super'>$moveToWishlist</span>"
-                                                            ])
+                                                            <div @click="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')" class="alert-wishlist">
+                                                                @include('shop::products.wishlist', [
+                                                                    'route' => route('shop.movetowishlist', $item->child->id),
+                                                                    'text' => "<span class='align-vertical-super'>$moveToWishlist</span>"
+                                                                ])
+                                                            </div>
                                                         @endif
                                                     @endauth
 
