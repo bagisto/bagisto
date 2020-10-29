@@ -2,6 +2,7 @@
     display: none !important;
 }
 
+/* large devices */
 @media only screen and (max-width: 1192px) {
 
     .sticky-header {
@@ -47,6 +48,7 @@
     }
 }
 
+/* medium devices */
 @media only screen and (max-width: 992px) {
     $header-height: 50px;
 
@@ -987,7 +989,17 @@
     }
 }
 
+/* small devices */
 @media only screen and (max-width: 768px) {
+    .sticky-header {
+        display: none !important;
+    }
+
+    #home-right-bar-container {
+        position: unset;
+        top: unset;
+    }
+
     .modal-container {
         left: 10%;
         max-width: 80%;
@@ -1052,7 +1064,12 @@
     }
 }
 
+/* very small devices */
 @media only screen and (max-width: 320px) {
+    .sticky-header {
+        display: none !important;
+    }
+
     #home-right-bar-container {
         position: unset;
         top: unset;
