@@ -18,39 +18,10 @@
                 {!! view_render_event('bagisto.shop.new-products.before') !!}
 
                     @if ($showRecentlyViewed)
-                        @push('css')
-                            <style>
-                                .recently-viewed {
-                                    padding-right: 0px;
-                                }
-                            </style>
-                        @endpush
-
                         <div class="row {{ $direction }}">
-                            <div class="col-9 no-padding carousel-products vc-full-screen with-recent-viewed">
+                            <div class="col-lg-9 col-md-12 no-padding carousel-products with-recent-viewed">
                                 <carousel-component
-                                    slides-per-page="5"
-                                    navigation-enabled="hide"
-                                    pagination-enabled="hide"
-                                    id="new-products-carousel"
-                                    locale-direction="{{ $direction }}"
-                                    :slides-count="newProducts.length">
-
-                                    <slide
-                                        :key="index"
-                                        :slot="`slide-${index}`"
-                                        v-for="(product, index) in newProducts">
-                                        <product-card
-                                            :list="list"
-                                            :product="product">
-                                        </product-card>
-                                    </slide>
-                                </carousel-component>
-                            </div>
-
-                            <div class="col-12 no-padding carousel-products vc-small-screen">
-                                <carousel-component
-                                    slides-per-page="2"
+                                    :slides-per-page="slidesPerPage"
                                     navigation-enabled="hide"
                                     pagination-enabled="hide"
                                     id="new-products-carousel"
@@ -75,30 +46,9 @@
                             ])
                         </div>
                     @else
-                        <div class="carousel-products vc-full-screen {{ $direction }}">
+                        <div class="carousel-products {{ $direction }}">
                             <carousel-component
-                                slides-per-page="6"
-                                navigation-enabled="hide"
-                                pagination-enabled="hide"
-                                id="new-products-carousel"
-                                locale-direction="{{ $direction }}"
-                                :slides-count="newProducts.length">
-
-                                <slide
-                                    :key="index"
-                                    :slot="`slide-${index}`"
-                                    v-for="(product, index) in newProducts">
-                                    <product-card
-                                        :list="list"
-                                        :product="product">
-                                    </product-card>
-                                </slide>
-                            </carousel-component>
-                        </div>
-
-                        <div class="carousel-products vc-small-screen {{ $direction }}">
-                            <carousel-component
-                                slides-per-page="2"
+                                :slides-per-page="6"
                                 navigation-enabled="hide"
                                 pagination-enabled="hide"
                                 id="new-products-carousel"
@@ -124,16 +74,8 @@
             @if ($count==0)
                 <template>
                         @if ($showRecentlyViewed)
-                            @push('css')
-                                <style>
-                                    .recently-viewed {
-                                        padding-right: 0px;
-                                    }
-                                </style>
-                            @endpush
-
                             <div class="row {{ $direction }}">
-                                <div class="col-9 no-padding carousel-products vc-full-screen with-recent-viewed" v-if="!isMobileView"></div>
+                                <div class="col-lg-9 col-md-12 no-padding carousel-products with-recent-viewed"></div>
 
                                 @include ('shop::products.list.recently-viewed', [
                                     'quantity'          => 3,
@@ -150,17 +92,31 @@
         (() => {
             Vue.component('new-products', {
                 'template': '#new-products-template',
+
                 data: function () {
                     return {
-                        'list': false,
-                        'isLoading': true,
-                        'newProducts': [],
-                        'isMobileView': this.$root.isMobile(),
+                        list: false,
+                        isLoading: true,
+                        newProducts: [],
+                        slidesPerPage: 6,
+                        windowWidth: window.innerWidth,
                     }
                 },
 
                 mounted: function () {
+                    this.$nextTick(() => {
+                        window.addEventListener('resize', this.onResize);
+                    });
+
                     this.getNewProducts();
+                    this.setSlidesPerPage(this.windowWidth);
+                },
+
+                watch: {
+                    /* checking the window width */
+                    windowWidth(newWidth, oldWidth) {
+                        this.setSlidesPerPage(newWidth);
+                    }
                 },
 
                 methods: {
@@ -180,8 +136,28 @@
                             this.isLoading = false;
                             console.log(this.__('error.something_went_wrong'));
                         })
+                    },
+
+                    onResize: function () {
+                        this.windowWidth = window.innerWidth;
+                    },
+
+                    /* setting slides on the basis of window width */
+                    setSlidesPerPage: function (width) {
+                        if (width >= 992) {
+                            this.slidesPerPage = 5;
+                        } else if (width < 992 && width >= 420) {
+                            this.slidesPerPage = 4;
+                        } else {
+                            this.slidesPerPage = 2;
+                        }
                     }
-                }
+                },
+
+                /* removing event */
+                beforeDestroy: function () {
+                    window.removeEventListener('resize', this.onResize);
+                },
             })
         })()
     </script>
