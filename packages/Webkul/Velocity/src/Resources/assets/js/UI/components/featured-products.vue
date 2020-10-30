@@ -98,7 +98,6 @@
                 } else {
                     this.slidesPerPage = 2;
                 }
-                console.log(width);
             }
         },
 
