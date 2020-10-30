@@ -16,6 +16,7 @@ class ExportController extends Controller
         'TaxRateDataGrid',
         'ProductDataGrid',
         'CMSPageDataGrid',
+        'CartRuleCouponDataGrid'
     ];
 
     /**
