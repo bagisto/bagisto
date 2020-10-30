@@ -1,4 +1,3 @@
-
 .vc-small-screen {
     display: none !important;
 }
@@ -28,72 +27,6 @@
                 }
             }
         }
-    }
-}
-
-
-@media only screen and (max-width: 992px) {
-
-}
-
-@media only screen and (max-width: 768px) {
-    .modal-container {
-        left: 10%;
-        max-width: 80%;
-        margin-left: 0px;
-    }
-
-    .footer .footer-list-container {
-        padding-left: 0px !important;
-    }
-    .footer .currency {
-        display: block !important;
-    }
-
-
-    .table {
-        width: 90%;
-        margin-bottom: 1rem;
-        margin-top: 68px;
-        color: #212529;
-        overflow-x: auto;
-    }
-
-    .per-page {
-        position: absolute;
-        margin-top: 66px;
-        margin-right: -1px;
-        margin-left: 17px;
-        width: 151px;
-    }
-
-     .filter-left {
-        position: relative;
-        margin-right: -6px!important;
-    }
-
-     .dropdown-filters {
-        margin-left: 15px;
-    }
-
-      button.btn.btn-sm.btn-primary.apply-filter {
-        margin-top: 10px;
-        margin-left: -158px;
-    }
-
-      .lg-card-container.list-card .product-image {
-        max-height: 85px;
-    }
-
-      .quick-view-btn-container {
-        left: -26px;
-        width: 109px;
-    }
-
-      .quick-view-btn-container span {
-        left: 24%;
-        top: -24px;
-        font-size: 13px;
     }
 }
 
@@ -1023,5 +956,70 @@
         padding: 0 10px;
         position: absolute;
         display: inline-block;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .modal-container {
+        left: 10%;
+        max-width: 80%;
+        margin-left: 0px;
+    }
+
+    .footer .footer-list-container {
+        padding-left: 0px !important;
+    }
+
+    .footer .currency {
+        display: block !important;
+    }
+
+    .table {
+        width: 90%;
+        margin-bottom: 1rem;
+        margin-top: 68px;
+        color: #212529;
+        overflow-x: auto;
+    }
+
+    .per-page {
+        position: absolute;
+        margin-top: 66px;
+        margin-right: -1px;
+        margin-left: 17px;
+        width: 151px;
+    }
+
+    .filter-left {
+        position: relative;
+        margin-right: -6px!important;
+    }
+
+    .dropdown-filters {
+        margin-left: 15px;
+    }
+
+    button.btn.btn-sm.btn-primary.apply-filter {
+        margin-top: 10px;
+        margin-left: -158px;
+    }
+
+    .lg-card-container.list-card .product-image {
+        max-height: 85px;
+    }
+
+    .quick-view-btn-container {
+        left: -26px;
+        width: 109px;
+    }
+
+    .quick-view-btn-container span {
+        left: 24%;
+        top: -24px;
+        font-size: 13px;
+    }
+
+    .quick-view-in-list {
+        display: none;
     }
 }
