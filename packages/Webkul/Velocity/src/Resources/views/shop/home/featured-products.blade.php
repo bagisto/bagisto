@@ -6,5 +6,6 @@
 
 <featured-products
     card-title="{{ __('shop::app.home.featured-products') }}"
-    locale-direction="{{ $direction }}">
+    locale-direction="{{ $direction }}"
+    count="{{ $count }}">
 </featured-products>

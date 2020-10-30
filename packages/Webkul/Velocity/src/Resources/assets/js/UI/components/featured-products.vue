@@ -35,7 +35,8 @@
     export default {
         props: [
             'cardTitle',
-            'localeDirection'
+            'localeDirection',
+            'count'
         ],
 
         data: function () {
@@ -58,6 +59,7 @@
         },
 
         watch: {
+            /* checking the window width */
             windowWidth(newWidth, oldWidth) {
                 this.setSlidesPerPage(newWidth);
             }
@@ -65,9 +67,9 @@
 
         methods: {
             getFeaturedProducts: function () {
-                this.$http.get(`${this.baseUrl}/category-details?category-slug=featured-products&count={{ $count }}`)
+                this.$http.get(`${this.baseUrl}/category-details?category-slug=featured-products&count=${this.count}`)
                 .then(response => {
-                    var count = '{{$count}}';
+                    var count = this.count;
                     if (response.data.status && count != 0 )
                     {
                         this.featuredProducts = response.data.products;
@@ -87,6 +89,7 @@
                 this.windowWidth = window.innerWidth;
             },
 
+            /* setting slides on the basis of window width */
             setSlidesPerPage: function (width) {
                 if (width >= 992) {
                     this.slidesPerPage = 6;
@@ -99,6 +102,7 @@
             }
         },
 
+        /* removing event */
         beforeDestroy: function () {
             window.removeEventListener('resize', this.onResize);
         },
