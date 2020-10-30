@@ -241,7 +241,7 @@
 
         img {
             width: 100%;
-            height: 190px;
+            height: auto;
             max-height: 190px;
         }
     }
@@ -2285,6 +2285,7 @@
     @extend .scrollable;
 
     max-height: 670px;
+    overflow-x: hidden;
     margin-bottom: 42px;
     padding: 42px 10px 0 10px;
 
@@ -2479,6 +2480,11 @@
 
     .action {
         position: relative;
+
+        .btn-add-to-cart {
+            width: 125px !important;
+            white-space: pre-wrap;
+        }
 
         .close-btn {
             right: 0;

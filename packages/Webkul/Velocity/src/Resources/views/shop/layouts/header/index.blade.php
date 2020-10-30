@@ -1,4 +1,4 @@
-<header class="sticky-header" v-if="!isMobile()">
+<header class="sticky-header">
     <div class="row remove-padding-margin velocity-divide-page">
         <logo-component add-class="navbar-brand"></logo-component>
         <searchbar-component></searchbar-component>
