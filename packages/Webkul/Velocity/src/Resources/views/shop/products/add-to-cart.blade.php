@@ -17,7 +17,7 @@
             ></compare-component>
         @endif
 
-        @if (! (isset($showWishlist) && !$showWishlist))
+        @if (! (isset($showWishlist) && !$showWishlist) && core()->getConfigData('general.content.shop.wishlist_option'))
             @include('shop::products.wishlist', [
                 'addClass' => $addWishlistClass ?? ''
             ])
