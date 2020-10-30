@@ -16,6 +16,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Webkul\Product\Models\ProductAttributeValueProxy;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Storage;
 
 class ProductRepository extends Repository
 {
