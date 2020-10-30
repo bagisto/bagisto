@@ -1,5 +1,7 @@
 @php
-    $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false    
+    $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false;
+
+    $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
 @endphp
 
 <div class="cart-wish-wrap">
@@ -10,8 +12,10 @@
         <button class="btn btn-lg btn-primary addtocart" {{ $product->isSaleable() ? '' : 'disabled' }}>{{ ($product->type == 'booking') ?  __('shop::app.products.book-now') :  __('shop::app.products.add-to-cart') }}</button>
     </form>
 
-    @include('shop::products.wishlist')
-    
+    @if ($showWishlist)
+        @include('shop::products.wishlist')
+    @endif
+
     @if ($showCompare)
         @include('shop::products.compare', [
             'productId' => $product->id

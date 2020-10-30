@@ -2,7 +2,25 @@
     display: none !important;
 }
 
+/* large devices */
 @media only screen and (max-width: 1192px) {
+
+    .sticky-header {
+        display: block !important;
+    }
+
+    .vc-full-screen {
+        display: block !important;
+    }
+
+    .vc-small-screen {
+        display: none !important;
+    }
+
+    #main-category {
+        display: block !important;
+    }
+
     .footer {
         .footer-content {
             .newsletter-subscription {
@@ -30,6 +48,7 @@
     }
 }
 
+/* medium devices */
 @media only screen and (max-width: 992px) {
     $header-height: 50px;
 
@@ -41,12 +60,31 @@
         }
     }
 
-    .main-container-wrapper {
-        // position: relative;
+    #webheader {
+        display: none !important;
+        position: fixed;
+        background-color: $white-color;
+    }
+
+    #main-category {
+        display: none !important;
+    }
+
+    #home-right-bar-container {
+        position: relative;
+        top: -48px;
+    }
+
+    .vc-full-screen {
+        display: none !important;
     }
 
     .vc-small-screen {
         display: block !important;
+    }
+
+    .force-center {
+        margin: 0 auto !important;
     }
 
     .main-content-wrapper {
@@ -444,6 +482,7 @@
             }
 
             #search-form {
+                background: transparent;
                 width: 100%;
 
                 .selectdiv {
@@ -496,26 +535,17 @@
         margin-bottom: 10px;
     }
 
-    .main-product-image {
-        display: none;
-    }
-
     .product-detail {
         #product-form {
             .form-container {
                 .left {
                     top: 0px;
-                    padding: 0px;
                     position: relative;
                     margin-bottom: 20px;
 
                     .vc-small-product-image {
                         width: 100%;
                     }
-                }
-
-                .right {
-                    padding: 0px;
                 }
             }
         }
@@ -959,7 +989,17 @@
     }
 }
 
+/* small devices */
 @media only screen and (max-width: 768px) {
+    .sticky-header {
+        display: none !important;
+    }
+
+    #home-right-bar-container {
+        position: unset;
+        top: unset;
+    }
+
     .modal-container {
         left: 10%;
         max-width: 80%;
@@ -1017,5 +1057,17 @@
 
     .quick-view-in-list {
         display: none;
+    }
+}
+
+/* very small devices */
+@media only screen and (max-width: 320px) {
+    .sticky-header {
+        display: none !important;
+    }
+
+    #home-right-bar-container {
+        position: unset;
+        top: unset;
     }
 }
