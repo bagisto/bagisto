@@ -445,6 +445,7 @@ return [
         'available-for-order' => 'Beschikbaar voor bestelling',
         'settings' => 'Settings',
         'compare_options' => 'Compare Options',
+        'wishlist-options' => 'Wishlist Options'
     ],
 
     // 'reviews' => [

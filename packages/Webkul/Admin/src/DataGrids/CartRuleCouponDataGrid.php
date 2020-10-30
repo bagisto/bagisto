@@ -12,11 +12,15 @@ class CartRuleCouponDataGrid extends DataGrid
     protected $sortOrder = 'desc';
 
     public function prepareQueryBuilder()
-    {
-        $queryBuilder = DB::table('cart_rule_coupons')
-            ->addSelect('id', 'code', 'created_at', 'expired_at', 'times_used')
-            ->where('cart_rule_coupons.cart_rule_id', collect(request()->segments())->last());
+    {   
+        $route = request()->route() ? request()->route()->getName() : "" ;
 
+        $cartRuleId = $route == 'admin.cart-rules.edit' ? collect(request()->segments())->last() : last(explode("/", url()->previous()));
+
+        $queryBuilder = DB::table('cart_rule_coupons')
+                ->addSelect('id', 'code', 'created_at', 'expired_at', 'times_used')
+                ->where('cart_rule_coupons.cart_rule_id', $cartRuleId);
+        
         $this->setQueryBuilder($queryBuilder);
     }
 

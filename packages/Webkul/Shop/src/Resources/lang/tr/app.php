@@ -438,6 +438,7 @@ return [
         'available-for-order' => 'Sipariş İçin Uygun',
         'settings' => 'Settings',
         'compare_options' => 'Compare Options',
+        'wishlist-options' => 'Wishlist Options'
     ],
 
     // 'reviews' => [

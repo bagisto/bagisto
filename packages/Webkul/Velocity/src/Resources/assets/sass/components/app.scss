@@ -241,6 +241,7 @@
 
         img {
             width: 100%;
+            height: auto;
             max-height: 190px;
         }
     }
@@ -1677,12 +1678,11 @@
         }
 
         .bundle-to {
-            text-align: center;
+            display: block;
             font-size: 15px !important;
             font-weight: 500;
             margin-top: 1px;
             margin-bottom: 1px;
-            display: block;
         }
     }
 
@@ -2336,6 +2336,24 @@
 
 .recetly-viewed-products-wrapper {
     padding: 2px;
+
+    .price-from {
+        .bundle-regular-price {
+            display: none;
+        }
+
+        .bundle-special-price {
+            font-size: 15px !important;
+            font-weight: 600;
+        }
+
+        .bundle-to {
+            display: unset;
+            margin: 0 2px;
+            font-size: 15px !important;
+            font-weight: 500;
+        }
+    }
 }
 
 .category-page-wrapper {
@@ -2462,6 +2480,11 @@
 
     .action {
         position: relative;
+
+        .btn-add-to-cart {
+            width: 125px !important;
+            white-space: pre-wrap;
+        }
 
         .close-btn {
             right: 0;

@@ -9,13 +9,13 @@
 @push('scripts')
     <script type="text/x-template" id="featured-products-template">
         <div class="container-fluid featured-products">
-            <shimmer-component v-if="isLoading && !isMobileView"></shimmer-component>
+            <shimmer-component v-if="isLoading"></shimmer-component>
 
             <template v-else-if="featuredProducts.length > 0">
                 <card-list-header heading="{{ __('shop::app.home.featured-products') }}">
                 </card-list-header>
 
-                <div class="carousel-products vc-full-screen {{ $direction }}" v-if="!isMobileView">
+                <div class="carousel-products vc-full-screen {{ $direction }}">
                     <carousel-component
                         slides-per-page="6"
                         navigation-enabled="hide"
@@ -37,7 +37,7 @@
                     </carousel-component>
                 </div>
 
-                <div class="carousel-products vc-small-screen {{ $direction }}" v-else>
+                <div class="carousel-products vc-small-screen {{ $direction }}">
                     <carousel-component
                         slides-per-page="2"
                         navigation-enabled="hide"

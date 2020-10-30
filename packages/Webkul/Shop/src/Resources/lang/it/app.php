@@ -438,6 +438,7 @@ return [
         'available-for-order' => 'Disponibile per lordine',
         'settings' => 'Settings',
         'compare_options' => 'Compare Options',
+        'wishlist-options' => 'Wishlist Options'
     ],
 
     // 'reviews' => [
