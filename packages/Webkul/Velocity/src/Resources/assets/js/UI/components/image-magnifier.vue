@@ -1,5 +1,5 @@
 <template>
-    <div class="magnifier col-12 text-center no-padding">
+    <div class="magnifier">
         <img
             :src="src"
             :data-zoom-image="src"
