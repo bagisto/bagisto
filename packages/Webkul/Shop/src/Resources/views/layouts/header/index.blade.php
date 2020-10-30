@@ -150,6 +150,10 @@
                     @endguest
 
                     @auth('customer')
+                        @php
+                           $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
+                        @endphp
+
                         <ul class="dropdown-list account customer">
                             <li>
                                 <div>
@@ -163,9 +167,11 @@
                                         <a href="{{ route('customer.profile.index') }}">{{ __('shop::app.header.profile') }}</a>
                                     </li>
 
-                                    <li>
-                                        <a href="{{ route('customer.wishlist.index') }}">{{ __('shop::app.header.wishlist') }}</a>
-                                    </li>
+                                    @if ($showWishlist)
+                                        <li>
+                                            <a href="{{ route('customer.wishlist.index') }}">{{ __('shop::app.header.wishlist') }}</a>
+                                        </li>
+                                    @endif
 
                                     <li>
                                         <a href="{{ route('shop.checkout.cart.index') }}">{{ __('shop::app.header.cart') }}</a>

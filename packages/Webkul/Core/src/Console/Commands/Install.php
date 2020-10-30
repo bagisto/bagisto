@@ -39,6 +39,15 @@ class Install extends Command
     {
         $this->checkForEnvFile();
 
+        // cached new changes
+        $this->warn('Step: Caching new changes...');
+        $cached = $this->call('config:cache');
+        $this->info($cached);
+
+        // waiting for 2 seconds
+        $this->warn('Please wait...');
+        sleep(2);
+
         // running `php artisan migrate`
         $this->warn('Step: Migrating all tables into database...');
         $migrate = $this->call('migrate:fresh');
@@ -63,11 +72,6 @@ class Install extends Command
         $this->warn('Step: Composer Autoload...');
         $result = shell_exec('composer dump-autoload');
         $this->info($result);
-
-        // cached new changes
-        $this->warn('Step: Caching new changes...');
-        $cached = $this->call('config:cache');
-        $this->info($cached);
 
         $this->info('-----------------------------');
         $this->info('Congratulations!');

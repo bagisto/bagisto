@@ -241,7 +241,7 @@
 
         img {
             width: 100%;
-            height: 190px;
+            height: auto;
             max-height: 190px;
         }
     }
@@ -2286,6 +2286,7 @@
     @extend .scrollable;
 
     max-height: 670px;
+    overflow-x: hidden;
     margin-bottom: 42px;
     padding: 42px 10px 0 10px;
 

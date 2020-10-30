@@ -76,7 +76,7 @@
                                 class="btn-toolbar full-width"
                                 role="toolbar">
 
-                                <div class="btn-group full-width">
+                                <div class="btn-group full-width force-center">
                                     <div class="selectdiv">
                                         <select class="form-control fs13 styled-select" name="category" @change="focusInput($event)" aria-label="Category">
                                             <option value="">
@@ -124,13 +124,16 @@
                     </div>
                 </div>
 
-                <div class="col-lg-7 col-md-12">
+                <div class="col-lg-7 col-md-12 vc-full-screen">
                     {!! view_render_event('bagisto.shop.layout.header.cart-item.before') !!}
                         @include('shop::checkout.cart.mini-cart')
                     {!! view_render_event('bagisto.shop.layout.header.cart-item.after') !!}
 
                     @php
-                        $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false
+                        $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false;
+
+                        $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
+
                     @endphp
 
                     {!! view_render_event('bagisto.shop.layout.header.compare.before') !!}
@@ -156,13 +159,15 @@
                     {!! view_render_event('bagisto.shop.layout.header.compare.after') !!}
 
                     {!! view_render_event('bagisto.shop.layout.header.wishlist.before') !!}
-                        <a class="wishlist-btn unset" :href="`{{ route('customer.wishlist.index') }}`">
-                            <i class="material-icons">favorite_border</i>
-                            <div class="badge-container" v-if="wishlistCount > 0">
-                                <span class="badge" v-text="wishlistCount"></span>
-                            </div>
-                            <span>{{ __('shop::app.layouts.wishlist') }}</span>
-                        </a>
+                        @if($showWishlist)
+                            <a class="wishlist-btn unset" :href="`{{ route('customer.wishlist.index') }}`">
+                                <i class="material-icons">favorite_border</i>
+                                <div class="badge-container" v-if="wishlistCount > 0">
+                                    <span class="badge" v-text="wishlistCount"></span>
+                                </div>
+                                <span>{{ __('shop::app.layouts.wishlist') }}</span>
+                            </a>
+                        @endif
                     {!! view_render_event('bagisto.shop.layout.header.wishlist.after') !!}
                 </div>
             </div>

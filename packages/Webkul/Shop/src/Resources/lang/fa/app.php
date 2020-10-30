@@ -440,6 +440,7 @@ return [
         'available-for-order' => 'Available for Order',
         'settings' => 'Settings',
         'compare_options' => 'Compare Options',
+        'wishlist-options' => 'Wishlist Options'
     ],
 
     // 'reviews' => [

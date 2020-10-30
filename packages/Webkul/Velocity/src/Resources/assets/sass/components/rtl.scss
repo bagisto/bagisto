@@ -207,6 +207,14 @@ body {
                     right: 20px;
                 }
             }
+
+            #account {
+                + .account-modal {
+                    .modal-content {
+                        float: left;
+                    }
+                }
+            }
         }
 
         #cart-modal-content {
