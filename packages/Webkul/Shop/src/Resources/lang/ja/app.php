@@ -407,6 +407,7 @@ return [
         'available-for-order' => '注文可能',
         'settings' => 'Settings',
         'compare_options' => 'Compare Options',
+        'wishlist-options' => 'Wishlist Options'
     ],
 
     'buynow' => [

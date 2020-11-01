@@ -12,6 +12,7 @@
                                 <slide
                                     :key="index"
                                     :slot="`slide-${index}`"
+                                    title=" "
                                     v-for="(image, index) in product.galleryImages">
 
                                     <li class="selected" @click="showProductDetails = false">

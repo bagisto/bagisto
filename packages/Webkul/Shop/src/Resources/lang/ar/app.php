@@ -72,8 +72,8 @@ return [
         'page-title' => 'بحث',
         'found-results' => 'تم العثور على نتائج البحث',
         'found-result' => 'تم العثور على نتيجة البحث',
-        'analysed-keywords' => 'Analysed Keywords',
-        'image-search-option' => 'Image Search Option'
+        'analysed-keywords' => 'الكلمات الأساسية التي تم تحليلها',
+        'image-search-option' => 'خيار البحث عن الصور'
     ],
 
     'reviews' => [
@@ -440,7 +440,8 @@ return [
         'none' => 'لا شيء',
         'available-for-order' => 'متوفر لطلب الشراء',
         'settings' => 'Settings',
-        'compare_options' => 'Compare Options',
+        'compare_options' => 'قارن الخيارات',
+        'wishlist-options' => 'Wishlist Options'
     ],
 
     // 'reviews' => [

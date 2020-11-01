@@ -39,12 +39,20 @@
                 </li>
             </ul>
 
+
+
             <div class="product-hero-image" id="product-hero-image">
                 <img :src="currentLargeImageUrl" id="pro-img" :data-image="currentOriginalImageUrl" alt=""/>
 
                 @auth('customer')
-                    <a @if ($wishListHelper->getWishlistProduct($product)) class="add-to-wishlist already" @else class="add-to-wishlist" @endif href="{{ route('customer.wishlist.add', $product->product_id) }}">
-                    </a>
+                    @php
+                        $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
+                    @endphp
+
+                    @if ($showWishlist)
+                        <a @if ($wishListHelper->getWishlistProduct($product)) class="add-to-wishlist already" @else class="add-to-wishlist" @endif href="{{ route('customer.wishlist.add', $product->product_id) }}">
+                        </a>
+                    @endif
                 @endauth
             </div>
 
@@ -163,7 +171,7 @@
             var wishlist = " <?php echo $wishListHelper->getWishlistProduct($product);  ?> ";
 
             $(document).mousemove(function(event) {
-                if ($('.add-to-wishlist').length || wishlist != 1) {
+                if ($('.add-to-wishlist').length || wishlist != 0) {
                     if (event.pageX > $('.add-to-wishlist').offset().left && event.pageX < $('.add-to-wishlist').offset().left+32 && event.pageY > $('.add-to-wishlist').offset().top && event.pageY < $('.add-to-wishlist').offset().top+32) {
 
                         $(".zoomContainer").addClass("show-wishlist");

@@ -238,6 +238,7 @@ class Booking extends Virtual
         }
 
         if (isset($options1['booking'], $options2['booking'])
+            && isset($options1['booking']['ticket_id'], $options2['booking']['ticket_id'])
             && $options1['booking']['ticket_id'] === $options2['booking']['ticket_id']) {
                 return true;
         }
