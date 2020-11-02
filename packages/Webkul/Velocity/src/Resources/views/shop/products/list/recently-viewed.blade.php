@@ -1,12 +1,10 @@
-@inject ('velocityHelper', 'Webkul\Velocity\Helpers\Helper')
-@inject ('productRatingHelper', 'Webkul\Product\Helpers\Review')
-@inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
-
 @php
     $direction = core()->getCurrentLocale()->direction;
 @endphp
 
 <recently-viewed
+    title="{{ __('velocity::app.products.recently-viewed') }}"
+    no-data-text="{{ __('velocity::app.products.not-available') }}"
     add-class="{{ isset($addClass) ? $addClass . " $direction": '' }}"
     quantity="{{ isset($quantity) ? $quantity : null }}"
     add-class-wrapper="{{ isset($addClassWrapper) ? $addClassWrapper : '' }}">
@@ -17,7 +15,7 @@
         <div :class="`${addClass} recently-viewed`">
             <div class="row remove-padding-margin">
                 <div class="col-12 no-padding">
-                    <h2 class="fs20 fw6 mb15">{{ __('velocity::app.products.recently-viewed') }}</h2>
+                    <h2 class="fs20 fw6 mb15" v-text="title"></h2>
                 </div>
             </div>
 
@@ -55,7 +53,7 @@
                 <span
                     class="fs16"
                     v-if="!recentlyViewed ||(recentlyViewed && Object.keys(recentlyViewed).length == 0)"
-                    v-text="'{{ __('velocity::app.products.not-available') }}'">
+                    v-text="noDataText">
                 </span>
             </div>
         </div>
@@ -65,7 +63,14 @@
         (() => {
             Vue.component('recently-viewed', {
                 template: '#recently-viewed-template',
-                props: ['quantity', 'addClass', 'addClassWrapper'],
+
+                props: [
+                    'title',
+                    'noDataText',
+                    'quantity',
+                    'addClass',
+                    'addClassWrapper'
+                ],
 
                 data: function () {
                     return {
