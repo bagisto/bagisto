@@ -272,6 +272,7 @@
                         massActions: @json($results['massactions']),
                         massActionsToggle: false,
                         massActionTarget: null,
+                        massActionConfirmText: '{{ __('ui::app.datagrid.click_on_action') }}',
                         massActionType: null,
                         massActionValues: [],
                         massActionTargets: [],
@@ -457,7 +458,8 @@
                         for (let id in this.massActions) {
                             targetObj = {
                                 'type': this.massActions[id].type,
-                                'action': this.massActions[id].action
+                                'action': this.massActions[id].action,
+                                'confirm_text': this.massActions[id].confirm_text
                             };
 
                             this.massActionTargets.push(targetObj);
@@ -483,6 +485,7 @@
                             for (let i in this.massActionTargets) {
                                 if (this.massActionTargets[i].type === 'delete') {
                                     this.massActionTarget = this.massActionTargets[i].action;
+                                    this.massActionConfirmText = this.massActionTargets[i].confirm_text ? this.massActionTargets[i].confirm_text : this.massActionConfirmText;
 
                                     break;
                                 }
@@ -493,6 +496,7 @@
                             for (let i in this.massActionTargets) {
                                 if (this.massActionTargets[i].type === 'update') {
                                     this.massActionTarget = this.massActionTargets[i].action;
+                                    this.massActionConfirmText = this.massActionTargets[i].confirm_text ? this.massActionTargets[i].confirm_text : this.massActionConfirmText;
 
                                     break;
                                 }
@@ -816,31 +820,6 @@
                         }
                     },
 
-                    doAction: function (e) {
-                        var element = e.currentTarget;
-
-                        if (confirm('{{__('ui::app.datagrid.massaction.delete') }}')) {
-                            axios.post(element.getAttribute('data-action'), {
-                                _token: element.getAttribute('data-token'),
-                                _method: element.getAttribute('data-method')
-                            }).then(function (response) {
-                                this.result = response;
-
-                                if (response.data.redirect) {
-                                    window.location.href = response.data.redirect;
-                                } else {
-                                    location.reload();
-                                }
-                            }).catch(function (error) {
-                                location.reload();
-                            });
-
-                            e.preventDefault();
-                        } else {
-                            e.preventDefault();
-                        }
-                    },
-
                     captureColumn: function (id) {
                         element = document.getElementById(id);
 
@@ -869,6 +848,37 @@
                     }
                 }
             });
+
+
+            function doAction(e, message, type) {
+                var element = e.currentTarget;
+                if (message) {
+                    element = e.target.parentElement;
+                }
+
+                message = message || '{{__('ui::app.datagrid.massaction.delete') }}';
+
+                if (confirm(message)) {
+                    axios.post(element.getAttribute('data-action'), {
+                        _token: element.getAttribute('data-token'),
+                        _method: element.getAttribute('data-method')
+                    }).then(function (response) {
+                        this.result = response;
+
+                        if (response.data.redirect) {
+                            window.location.href = response.data.redirect;
+                        } else {
+                            location.reload();
+                        }
+                    }).catch(function (error) {
+                        location.reload();
+                    });
+
+                    e.preventDefault();
+                } else {
+                    e.preventDefault();
+                }
+            }
         </script>
     @endpush
 </div>
