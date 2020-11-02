@@ -201,23 +201,23 @@ class SmartButtonController extends Controller
         }
 
         try {
-            // Cart::collectTotals();
+            Cart::collectTotals();
 
-            // $this->validateOrder();
+            $this->validateOrder();
 
-            // $cart = Cart::getCart();
+            $cart = Cart::getCart();
 
-            // $order = $this->orderRepository->create(Cart::prepareDataForOrder());
+            $order = $this->orderRepository->create(Cart::prepareDataForOrder());
 
-            // $this->orderRepository->update(['status' => 'processing'], $order->id);
+            $this->orderRepository->update(['status' => 'processing'], $order->id);
 
-            // if ($order->canInvoice()) {
-            //     $invoice = $this->invoiceRepository->create($this->prepareInvoiceData($order));
-            // }
+            if ($order->canInvoice()) {
+                $invoice = $this->invoiceRepository->create($this->prepareInvoiceData($order));
+            }
 
-            // Cart::deActivateCart();
+            Cart::deActivateCart();
 
-            // session()->flash('order', $order);
+            session()->flash('order', $order);
 
             return response()->json([
                 'success' => true,
