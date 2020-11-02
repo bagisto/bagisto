@@ -29,7 +29,6 @@
     }
 
     .main-container-wrapper .product-card .product-image img {
-        height: auto;
         max-width: 100%;
     }
 </style>
@@ -102,7 +101,7 @@
             }
 
             $('.path-hint-tooltip').css('left', left - minus)
-            
+
             $('.path-hint-tooltip').css('top', currentElement.offset().top + 20)
         })
 
