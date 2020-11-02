@@ -153,7 +153,10 @@ class CategoryController extends Controller
             try {
                 Event::dispatch('catalog.category.delete.before', $id);
 
-                $this->categoryRepository->delete($id);
+                if($category->products->count() > 0) {
+                    $category->products()->delete();
+                }
+                $category->delete();
 
                 Event::dispatch('catalog.category.delete.after', $id);
 

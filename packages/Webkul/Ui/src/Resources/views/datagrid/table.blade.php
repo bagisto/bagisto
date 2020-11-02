@@ -820,31 +820,6 @@
                         }
                     },
 
-                    doAction: function (e) {
-                        var element = e.currentTarget;
-
-                        if (confirm('{{__('ui::app.datagrid.massaction.delete') }}')) {
-                            axios.post(element.getAttribute('data-action'), {
-                                _token: element.getAttribute('data-token'),
-                                _method: element.getAttribute('data-method')
-                            }).then(function (response) {
-                                this.result = response;
-
-                                if (response.data.redirect) {
-                                    window.location.href = response.data.redirect;
-                                } else {
-                                    location.reload();
-                                }
-                            }).catch(function (error) {
-                                location.reload();
-                            });
-
-                            e.preventDefault();
-                        } else {
-                            e.preventDefault();
-                        }
-                    },
-
                     captureColumn: function (id) {
                         element = document.getElementById(id);
 
@@ -873,6 +848,37 @@
                     }
                 }
             });
+
+
+            function doAction(e, message, type) {
+                var element = e.currentTarget;
+                if (message) {
+                    element = e.target.parentElement;
+                }
+
+                message = message || '{{__('ui::app.datagrid.massaction.delete') }}';
+
+                if (confirm(message)) {
+                    axios.post(element.getAttribute('data-action'), {
+                        _token: element.getAttribute('data-token'),
+                        _method: element.getAttribute('data-method')
+                    }).then(function (response) {
+                        this.result = response;
+
+                        if (response.data.redirect) {
+                            window.location.href = response.data.redirect;
+                        } else {
+                            location.reload();
+                        }
+                    }).catch(function (error) {
+                        location.reload();
+                    });
+
+                    e.preventDefault();
+                } else {
+                    e.preventDefault();
+                }
+            }
         </script>
     @endpush
 </div>
