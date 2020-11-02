@@ -46,26 +46,46 @@
                 onApprove: function(data, actions) {
                     app.showLoader();
 
-                    return actions.order.capture().then(function(details) {
-                        return window.axios.post("{{ route('paypal.smart_button.save_order') }}", {
-                                '_token': "{{ csrf_token() }}",
-                                'data' : details
-                            })
-                            .then(function(response) {
-                                if (response.data.success) {
-                                    if (response.data.redirect_url) {
-                                        window.location.href = response.data.redirect_url;
-                                    } else {
-                                        window.location.href = "{{ route('shop.checkout.success') }}";
+                    return actions.order.capture()
+                        .then(function(response) {
+                            if (response.error == 'INSTRUMENT_DECLINED') {
+                                return actions.restart();
+                            } else {
+                                return response;
+                            }
+                        })
+                        .then(function(details) {
+                            return window.axios.post("{{ route('paypal.smart_button.save_order') }}", {
+                                    '_token': "{{ csrf_token() }}",
+                                    'data' : details
+                                })
+                                .then(function(response) {
+                                    if (response.data.success) {
+                                        if (response.data.redirect_url) {
+                                            window.location.href = response.data.redirect_url;
+                                        } else {
+                                            window.location.href = "{{ route('shop.checkout.success') }}";
+                                        }
                                     }
-                                }
 
-                                app.hideLoader()
-                            })
-                            .catch(function (error) {
-                                window.location.href = "{{ route('shop.checkout.cart.index') }}";
-                            })
-                    });
+                                    app.hideLoader()
+                                })
+                                .catch(function (error) {
+                                    window.location.href = "{{ route('shop.checkout.cart.index') }}";
+                                })
+                        });
+                },
+
+                onCancel: function (data) {
+                    console.log('Canceled payment')
+                },
+
+                onError: function (err) {
+                    window.flashMessages = [{'type': 'alert-error', 'message': err }];
+
+                    window.flashMessages.alertMessage = err;
+
+                    app.addFlashMessages();
                 }
             };
 
