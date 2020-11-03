@@ -1,5 +1,5 @@
 <template>
-    <div :class="`${addClass} recently-viewed`">
+    <div :class="addClass">
         <div class="row remove-padding-margin">
             <div class="col-12 no-padding">
                 <h2 class="fs20 fw6 mb15" v-text="title"></h2>
