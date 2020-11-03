@@ -7,18 +7,6 @@ use Excel;
 
 class ExportController extends Controller
 {
-    protected $exportableGrids = [
-        'OrderDataGrid',
-        'OrderInvoicesDataGrid',
-        'OrderShipmentsDataGrid',
-        'OrderRefundDataGrid',
-        'CustomerDataGrid',
-        'TaxRateDataGrid',
-        'ProductDataGrid',
-        'CMSPageDataGrid',
-        'CartRuleCouponDataGrid'
-    ];
-
     /**
      * Create a new controller instance.
      *
@@ -43,18 +31,6 @@ class ExportController extends Controller
         $gridName = explode('\\', $criteria['gridName']);
 
         $path = '\Webkul\Admin\DataGrids'.'\\'.last($gridName);
-
-        $proceed = false;
-
-        foreach ($this->exportableGrids as $exportableGrid) {
-            if (last($gridName) == $exportableGrid) {
-                $proceed = true;
-            }
-        }
-
-        if (! $proceed) {
-            return redirect()->back();
-        }
 
         $gridInstance = new $path;
         

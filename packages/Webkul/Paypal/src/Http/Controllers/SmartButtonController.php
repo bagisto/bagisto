@@ -80,7 +80,12 @@ class SmartButtonController extends Controller
             ],
 
             'application_context' => [
-                'shipping_preference' => 'NO_SHIPPING'
+                'user_action'         => 'PAY_NOW',
+                'shipping_preference' => 'SET_PROVIDED_ADDRESS',
+
+                'payment_method'      => [
+                    'payee_preferred' => 'IMMEDIATE_PAYMENT_REQUIRED',
+                ]
             ],
 
             'purchase_units' => [
@@ -156,6 +161,7 @@ class SmartButtonController extends Controller
                 'quantity'    => $item->quantity,
                 'name'        => $item->name,
                 'sku'         => $item->sku,
+                'category'    => $item->product->getTypeInstance()->isStockable() ? 'PHYSICAL_GOODS' : 'DIGITAL_GOODS',
             ];
         }
 
