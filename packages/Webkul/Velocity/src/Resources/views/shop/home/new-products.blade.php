@@ -40,10 +40,13 @@
                                 </carousel-component>
                             </div>
 
-                            @include ('shop::products.list.recently-viewed', [
-                                'quantity'          => 3,
-                                'addClass'          => 'col-lg-3 col-md-12',
-                            ])
+                            <recently-viewed
+                                title="{{ __('velocity::app.products.recently-viewed') }}"
+                                no-data-text="{{ __('velocity::app.products.not-available') }}"
+                                add-class="col-lg-3 col-md-12 {{ $direction }}"
+                                quantity="3"
+                                add-class-wrapper="">
+                            </recently-viewed>
                         </div>
                     @else
                         <div class="carousel-products {{ $direction }}">
@@ -77,10 +80,13 @@
                             <div class="row {{ $direction }}">
                                 <div class="col-lg-9 col-md-12 no-padding carousel-products with-recent-viewed"></div>
 
-                                @include ('shop::products.list.recently-viewed', [
-                                    'quantity'          => 3,
-                                    'addClass'          => 'col-lg-3 col-md-12',
-                                ])
+                                <recently-viewed
+                                    title="{{ __('velocity::app.products.recently-viewed') }}"
+                                    no-data-text="{{ __('velocity::app.products.not-available') }}"
+                                    add-class="col-lg-3 col-md-12 {{ $direction }}"
+                                    quantity="3"
+                                    add-class-wrapper="">
+                                </recently-viewed>
                             </div>
                         @endif
                 </template>

@@ -52,6 +52,7 @@ Vue.component("shimmer-component", require("./UI/components/shimmer-component"))
 Vue.component('responsive-sidebar', require('./UI/components/responsive-sidebar'));
 Vue.component('product-quick-view', require('./UI/components/product-quick-view'));
 Vue.component('product-quick-view-btn', require('./UI/components/product-quick-view-btn'));
+Vue.component('recently-viewed', require('./UI/components/recently-viewed'));
 Vue.component('category-products', require('./UI/components/category-products'));
 Vue.component('featured-products', require('./UI/components/featured-products'));
 Vue.component('hot-category', require('./UI/components/hot-category'));
