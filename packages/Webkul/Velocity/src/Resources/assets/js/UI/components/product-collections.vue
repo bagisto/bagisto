@@ -3,7 +3,9 @@
         <shimmer-component v-if="isLoading"></shimmer-component>
 
         <template v-else-if="productCollections.length > 0">
-            <card-list-header :heading="productTitle">
+            <card-list-header
+                :heading="isCategory ? categoryDetails.name : productTitle"
+                :view-all="isCategory ? `${this.baseUrl}/${categoryDetails.slug}` : ''">
             </card-list-header>
 
             <div class="row" :class="localeDirection">
@@ -14,7 +16,7 @@
                         :slides-per-page="slidesPerPage"
                         navigation-enabled="hide"
                         pagination-enabled="hide"
-                        id="new-products-carousel"
+                        :id="isCategory ? `${categoryDetails.name}-carousel` : productId"
                         :locale-direction="localeDirection"
                         :slides-count="productCollections.length"
                         v-if="count != 0">
@@ -48,22 +50,30 @@
 <script>
     export default {
         props: {
-            'count': Number,
-            'productTitle': String,
-            'productRoute': String,
-            'localeDirection': String,
-            'showRecentlyViewed': {
+            count: {
+                type: Number,
+                default: 10
+            },
+            productId: {
+                type: String,
+                default: ''
+            },
+            productTitle: String,
+            productRoute: String,
+            localeDirection: String,
+            showRecentlyViewed: {
                 type: Boolean,
                 default: false
             },
-            'recentlyViewedTitle': String,
-            'noDataText': String,
+            recentlyViewedTitle: String,
+            noDataText: String,
         },
 
         data: function () {
             return {
                 list: false,
                 isLoading: true,
+                isCategory: false,
                 productCollections: [],
                 slidesPerPage: 6,
                 windowWidth: window.innerWidth,
@@ -77,8 +87,6 @@
 
             this.getProducts();
             this.setSlidesPerPage(this.windowWidth);
-
-            console.log(this.productRoute, this.showRecentlyViewed);
         },
 
         watch: {
@@ -96,7 +104,13 @@
                     let count = this.count;
 
                     if (response.data.status && count != 0) {
-                        this.productCollections = response.data.products;
+                        if (response.data.categoryProducts !== undefined) {
+                            this.isCategory = true;
+                            this.categoryDetails = response.data.categoryDetails;
+                            this.productCollections = response.data.categoryProducts;
+                        } else {
+                            this.productCollections = response.data.products;
+                        }
                     } else {
                         this.productCollections = 0;
                     }
