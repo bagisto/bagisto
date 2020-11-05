@@ -19,4 +19,25 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
         \Webkul\Core\Models\Slider::class,
         \Webkul\Core\Models\SubscribersList::class,
     ];
+
+    public function boot()
+    {
+        if ($this->areMigrationsEnabled()) {
+            $this->registerMigrations();
+        }
+
+        if ($this->areModelsEnabled()) {
+            $this->registerModels();
+            $this->registerEnums();
+            $this->registerRequestTypes();
+        }
+
+        if ($this->areViewsEnabled()) {
+            $this->registerViews();
+        }
+
+        if ($routes = $this->config('routes', true)) {
+            $this->registerRoutes($routes);
+        }
+    }
 }
