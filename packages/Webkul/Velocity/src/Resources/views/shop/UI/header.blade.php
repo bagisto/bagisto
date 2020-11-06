@@ -323,7 +323,8 @@
                     </div>
 
                     @php
-                        $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false
+                        $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false;
+                        $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
                     @endphp
 
                     <div class="right-vc-header col-6">
@@ -346,12 +347,14 @@
                             </a>
                         @endif
 
-                        <a class="wishlist-btn unset" :href="`{{ route('customer.wishlist.index') }}`">
-                            <div class="badge-container" v-if="wishlistCount > 0">
-                                <span class="badge" v-text="wishlistCount"></span>
-                            </div>
-                            <i class="material-icons">favorite_border</i>
-                        </a>
+                        @if ($showWishlist)
+                            <a class="wishlist-btn unset" :href="`{{ route('customer.wishlist.index') }}`">
+                                <div class="badge-container" v-if="wishlistCount > 0">
+                                    <span class="badge" v-text="wishlistCount"></span>
+                                </div>
+                                <i class="material-icons">favorite_border</i>
+                            </a>
+                        @endif
 
                         <a class="unset cursor-pointer" @click="openSearchBar">
                             <i class="material-icons">search</i>
