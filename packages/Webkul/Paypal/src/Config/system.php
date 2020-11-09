@@ -63,7 +63,7 @@ return [
     ], [
         'key'    => 'sales.paymentmethods.paypal_smart_button',
         'name'   => 'admin::app.admin.system.paypal-smart-button',
-        'sort'   => 3,
+        'sort'   => 0,
         'fields' => [
             [
                 'name'          => 'title',

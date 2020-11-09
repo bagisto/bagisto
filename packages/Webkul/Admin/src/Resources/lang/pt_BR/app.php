@@ -1281,7 +1281,7 @@ return [
             'payment-methods' => 'Métodos de Pagamento',
             'cash-on-delivery' => 'Dinheiro na entrega',
             'money-transfer' => 'Transferência de dinheiro',
-            'paypal-standard' => 'Padrão Paypal',
+            'paypal-standard' => 'Padrão PayPal',
             'business-account' => 'Conta de negócios',
             'newsletter' => 'Assinatura de Newsletter',
             'newsletter-subscription' => 'Permitir assinatura do NewsLetter',
@@ -1359,7 +1359,7 @@ return [
             'custom-scripts' => 'Custom Scripts',
             'custom-css' => 'Custom CSS',
             'custom-javascript' => 'Custom Javascript',
-            'paypal-smart-button' => 'Paypal Smart Button',
+            'paypal-smart-button' => 'PayPal',
             'client-id' => 'Client Id',
             'client-id-info' => 'Use "sb" for testing.'
         ]
