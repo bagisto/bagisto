@@ -65,18 +65,33 @@
             }
 
             $selectedOption = core()->getConfigData($name) ?? '';
+            $dependSelectedOption = core()->getConfigData(implode('.', [$firstField, $secondField, $thirdField, $dependField])) ?? '';
         ?>
 
-        <depends
-            :options = '@json($field['options'])'
-            :name = "'{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]'"
-            :validations = "'{{ $validations }}'"
-            :depend = "'{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $dependField }}]'"
-            :value = "'{{ $dependValue }}'"
-            :field_name = "'{{ trans($field['title']) }}'"
-            :channel_locale = "'{{ $channel_locale }}'"
-            :result = "'{{ $selectedOption }}'"
-        ></depends>
+        @if (strpos($field['validation'], 'required_if') !== false)
+            <required-if
+                :name = "'{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]'"
+                :label = "'{{ trans($field['title']) }}'"
+                :options = '@json($field['options'])'
+                :result = "'{{ $selectedOption }}'"
+                :validations = "'{{ $validations }}'"
+                :depend = "'{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $dependField }}]'"
+                :depend-result= "'{{ $dependSelectedOption }}'"
+                :channel_locale = "'{{ $channel_locale }}'"
+            ></required-if>
+        @else
+            <depends
+                :options = '@json($field['options'])'
+                :name = "'{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]'"
+                :validations = "'{{ $validations }}'"
+                :depend = "'{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $dependField }}]'"
+                :value = "'{{ $dependValue }}'"
+                :field_name = "'{{ trans($field['title']) }}'"
+                :channel_locale = "'{{ $channel_locale }}'"
+                :result = "'{{ $selectedOption }}'"
+                :depend-saved-value= "'{{ $dependSelectedOption }}'"
+            ></depends>
+        @endif
 
     @else
 
@@ -99,7 +114,7 @@
             @elseif ($field['type'] == 'password')
 
                 <input type="password" v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" value="{{ old($name) ?: core()->getConfigData($name) }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">
-            
+
             @elseif ($field['type'] == 'number')
 
                 <input type="number" min="0" v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" value="{{ old($name) ?: core()->getConfigData($name) }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">
