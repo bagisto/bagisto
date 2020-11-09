@@ -9,8 +9,9 @@ return [
             [
                 'name'          => 'title',
                 'title'         => 'admin::app.admin.system.title',
-                'type'          => 'text',
-                'validation'    => 'required',
+                'type'          => 'depends',
+                'depend'        => 'active:1',
+                'validation'    => 'required_if:active,1',
                 'channel_based' => false,
                 'locale_based'  => true,
             ], [
@@ -20,11 +21,11 @@ return [
                 'channel_based' => false,
                 'locale_based'  => true,
             ],  [
-                'name'       => 'business_account',
-                'title'      => 'admin::app.admin.system.business-account',
-                'type'       => 'select',
-                'type'       => 'text',
-                'validation' => 'required',
+                'name'          => 'business_account',
+                'title'         => 'admin::app.admin.system.business-account',
+                'type'          => 'depends',
+                'depend'        => 'active:1',
+                'validation'    => 'required_if:active,1',
             ],  [
                 'name'          => 'active',
                 'title'         => 'admin::app.admin.system.status',
@@ -36,7 +37,6 @@ return [
                 'name'          => 'sandbox',
                 'title'         => 'admin::app.admin.system.sandbox',
                 'type'          => 'boolean',
-                'validation'    => 'required',
                 'channel_based' => false,
                 'locale_based'  => true,
             ], [
@@ -68,8 +68,9 @@ return [
             [
                 'name'          => 'title',
                 'title'         => 'admin::app.admin.system.title',
-                'type'          => 'text',
-                'validation'    => 'required',
+                'type'          => 'depends',
+                'depend'        => 'active:1',
+                'validation'    => 'required_if:active,1',
                 'channel_based' => false,
                 'locale_based'  => true,
             ], [
@@ -82,9 +83,9 @@ return [
                 'name'       => 'client_id',
                 'title'      => 'admin::app.admin.system.client-id',
                 'info'          => 'admin::app.admin.system.client-id-info',
-                'type'       => 'select',
-                'type'       => 'text',
-                'validation' => 'required',
+                'type'          => 'depends',
+                'depend'        => 'active:1',
+                'validation'    => 'required_if:active,1',
             ],  [
                 'name'          => 'active',
                 'title'         => 'admin::app.admin.system.status',
