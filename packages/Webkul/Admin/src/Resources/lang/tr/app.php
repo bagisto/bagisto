@@ -1269,7 +1269,7 @@ return [
             'payment-methods' => 'Ödeme Türleri',
             'cash-on-delivery' => 'Kapıda Ödeme',
             'money-transfer' => 'Havale/EFT',
-            'paypal-standard' => 'Paypal',
+            'paypal-standard' => 'PayPal',
             'business-account' => 'İş Hesabı',
             'newsletter' => 'Bülten Aboneliği',
             'newsletter-subscription' => 'Bülten Aboneliğine İzin Ver',
@@ -1342,7 +1342,7 @@ return [
             'custom-scripts' => 'Custom Scripts',
             'custom-css' => 'Custom CSS',
             'custom-javascript' => 'Custom Javascript',
-            'paypal-smart-button' => 'Paypal Smart Button',
+            'paypal-smart-button' => 'PayPal',
             'client-id' => 'Client Id',
             'client-id-info' => 'Use "sb" for testing.'
         ]

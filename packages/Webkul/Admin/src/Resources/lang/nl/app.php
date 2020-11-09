@@ -1281,7 +1281,7 @@ return [
             'payment-methods' => 'Betaalmethodes',
             'cash-on-delivery' => 'Rembours',
             'money-transfer' => 'Overschrijving',
-            'paypal-standard' => 'Paypal Standard',
+            'paypal-standard' => 'PayPal Standard',
             'business-account' => 'Zakelijk account',
             'newsletter' => 'Nieuwsbrief',
             'newsletter-subscription' => 'Abonnement op Nieuwsbrief toestaan',
@@ -1356,7 +1356,7 @@ return [
             'custom-scripts' => 'Custom Scripts',
             'custom-css' => 'Custom CSS',
             'custom-javascript' => 'Custom Javascript',
-            'paypal-smart-button' => 'Paypal Smart Button',
+            'paypal-smart-button' => 'PayPal',
             'client-id' => 'Client Id',
             'client-id-info' => 'Use "sb" for testing.'
         ]
