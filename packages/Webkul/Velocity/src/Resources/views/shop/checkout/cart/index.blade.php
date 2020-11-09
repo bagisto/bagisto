@@ -303,10 +303,10 @@
                 ],
 
                 mounted: function () {
-                    let cartDetails = JSON.parse(this.cartDetails);
+                    let cartDetails = this.getCartDetails();
 
                     $('#proceed-to-checkout').on('click', (e) => {
-                        if (! (cartDetails.base_grand_total > this.minimumOrderAmount)) {
+                        if (! (cartDetails.base_sub_total > this.minimumOrderAmount)) {
                             e.preventDefault();
                             window.showAlert(`alert-warning`, 'Warning', this.minimumOrderMessage);
                         }
@@ -323,6 +323,10 @@
                     removeLink(message) {
                         if (! confirm(message))
                             event.preventDefault();
+                    },
+
+                    getCartDetails: function () {
+                        return JSON.parse(this.cartDetails);
                     }
                 }
             })
