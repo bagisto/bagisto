@@ -8,7 +8,15 @@
 @stop
 
 @section('content-wrapper')
-    <cart-component></cart-component>
+    @php
+        $minimumOrderAmount = (int) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
+    @endphp
+
+    <cart-component
+        cart-details="{{ $cart }}"
+        minimum-order-amount="{{ $minimumOrderAmount }}"
+        minimum-order-message="{{ __('shop::app.checkout.cart.minimum-order-message', ['amount' => $minimumOrderAmount]) }}"
+    ></cart-component>
 @endsection
 
 @push('css')
@@ -279,7 +287,6 @@
                     @endif
 
                 {!! view_render_event('bagisto.shop.checkout.cart.summary.after', ['cart' => $cart]) !!}
-
             </section>
         </div>
     </script>
@@ -288,6 +295,24 @@
         (() => {
             Vue.component('cart-component', {
                 template: '#cart-template',
+
+                props: [
+                    'cartDetails',
+                    'minimumOrderAmount',
+                    'minimumOrderMessage'
+                ],
+
+                mounted: function () {
+                    let cartDetails = JSON.parse(this.cartDetails);
+
+                    $('#proceed-to-checkout').on('click', (e) => {
+                        if (! (cartDetails.base_grand_total > this.minimumOrderAmount)) {
+                            e.preventDefault();
+                            window.showAlert(`alert-warning`, 'Warning', this.minimumOrderMessage);
+                        }
+                    });
+                },
+
                 data: function () {
                     return {
                         isMobileDevice: this.isMobile(),

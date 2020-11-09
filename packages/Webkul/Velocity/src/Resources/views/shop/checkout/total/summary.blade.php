@@ -47,7 +47,8 @@
     <div class="row">
         <a
             href="{{ route('shop.checkout.onepage.index') }}"
-            class="theme-btn text-uppercase col-12 remove-decoration fw6 text-center">
+            class="theme-btn text-uppercase col-12 remove-decoration fw6 text-center"
+            id="proceed-to-checkout">
             {{ __('velocity::app.checkout.proceed') }}
         </a>
     </div>
