@@ -72,8 +72,6 @@ export default {
             }
 
             this.checkValidations = this.checkValidations.join('|');
-
-            console.log(this.checkValidations);
         }
     }
 }
