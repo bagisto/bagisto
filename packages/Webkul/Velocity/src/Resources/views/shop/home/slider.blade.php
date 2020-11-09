@@ -15,7 +15,7 @@
                 autoplay="true"
                 slides-per-page="1"
                 navigation-enabled="hide"
-                locale-direction="{{ $direction }}"
+                :locale-direction="direction"
                 :slides-count="{{ ! empty($sliderData) ? sizeof($sliderData) : 1 }}">
 
                 @if (! empty($sliderData))
