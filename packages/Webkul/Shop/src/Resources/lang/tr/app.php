@@ -493,7 +493,8 @@ return [
             'link-missing' => '',
             'event' => [
                 'expired' => 'Bu eylemin geçerliliği sona erdi.'
-            ]
+            ],
+            'minimum-order-message' => 'Your order should be greater than :amount'
         ],
 
         'onepage' => [

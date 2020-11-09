@@ -1313,6 +1313,8 @@ return [
             'order-number-length' => 'Bestelnummer Lengte',
             'order-number-suffix' => 'Achtervoegsel bestelnummer',
             'order-number-generator-class' => 'Ordernummer Generator',
+            'minimum-order' => 'Minimum Order Settings',
+            'minimum-order-amount' => 'Minimum Order Amount',
             'default' => 'Standaard',
             'sandbox' => 'Sandbox',
             'all-channels' => 'Alles',

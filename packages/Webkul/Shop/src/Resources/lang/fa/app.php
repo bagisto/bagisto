@@ -495,7 +495,8 @@ return [
             'partial-cart-update' => 'فقط برخی از محصولات (های) به روز شده اند',
             'event' => [
                 'expired' => 'This event has been expired.'
-            ]
+            ],
+            'minimum-order-message' => 'Your order should be greater than :amount'
         ],
 
         'onepage' => [

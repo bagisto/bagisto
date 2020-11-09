@@ -454,7 +454,8 @@ return [
             'cart-subtotal' => '小計',
             'cart-remove-action' => '手続きを進めますか。',
             'partial-cart-update' => 'Only some of the product(s) were updated',
-            'link-missing' => ''
+            'link-missing' => '',
+            'minimum-order-message' => 'Your order should be greater than :amount'
         ],
 
         'onepage' => [

@@ -500,7 +500,8 @@ return [
             'link-missing' => '',
             'event' => [
                 'expired' => 'This event has been expired.'
-            ]
+            ],
+            'minimum-order-message' => 'Your order should be greater than :amount'
         ],
 
         'onepage' => [

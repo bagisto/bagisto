@@ -1315,6 +1315,8 @@ return [
             'order-number-length' => 'Tamanho do Número do Pedido',
             'order-number-suffix' => 'Sufixo do Número de Pedido',
             'order-number-generator-class' => 'Gerador de número de pedido',
+            'minimum-order' => 'Minimum Order Settings',
+            'minimum-order-amount' => 'Minimum Order Amount',
             'default' => 'Padrão',
             'sandbox' => 'Sandbox',
             'all-channels' => 'Todos',

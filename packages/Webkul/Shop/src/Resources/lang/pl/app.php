@@ -492,7 +492,8 @@ return [
             'partial-cart-update' => 'Tylko niektóre produkty zostały zaktualizowane',
             'event' => [
                 'expired' => 'To wydarzenie wygasło.'
-            ]
+            ],
+            'minimum-order-message' => 'Your order should be greater than :amount'
         ],
 
         'onepage' => [

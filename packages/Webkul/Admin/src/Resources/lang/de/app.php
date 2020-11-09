@@ -1323,6 +1323,8 @@ return [
             'order-number-length'          => 'Auftragsnummer Länge',
             'order-number-suffix'          => 'Auftragsnummer Suffix',
             'order-number-generator-class' => 'Bestell nummern generator',
+            'minimum-order'                => 'Minimum Order Settings',
+            'minimum-order-amount'         => 'Minimum Order Amount',
             'default'                      => 'Standard',
             'sandbox'                      => 'Sandbox',
             'all-channels'                 => 'Alle',

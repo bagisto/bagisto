@@ -1317,6 +1317,8 @@ return [
             'order-number-length' => 'طول رقم الطلب',
             'order-number-suffix' => 'لاحقة رقم الطلب',
             'order-number-generator-class' => 'مولد رقم الطلب',
+            'minimum-order' => 'Minimum Order Settings',
+            'minimum-order-amount' => 'Minimum Order Amount',
             'default' => 'إفتراضي',
             'sandbox' => 'صندوق الرمل',
             'all-channels' => 'الكل',

@@ -493,7 +493,8 @@ return [
             'link-missing' => '',
             'event' => [
                 'expired' => 'Questo evento è terminato.'
-            ]
+            ],
+            'minimum-order-message' => 'Your order should be greater than :amount'
         ],
 
         'onepage' => [

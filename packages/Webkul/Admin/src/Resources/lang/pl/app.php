@@ -1314,6 +1314,8 @@ return [
             'order-number-length' => 'Długość numeru zamówienia',
             'order-number-suffix' => 'Sufiks numeru zamówienia”',
             'order-number-generator-class' => 'Generator numeru zamówienia',
+            'minimum-order' => 'Minimum Order Settings',
+            'minimum-order-amount' => 'Minimum Order Amount',
             'default' => 'Domyślna',
             'sandbox' => 'Piaskownica',
             'all-channels' => 'Wszystkie kanały',
