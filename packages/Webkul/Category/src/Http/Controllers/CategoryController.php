@@ -82,7 +82,7 @@ class CategoryController extends Controller
         $this->validate(request(), [
             'slug'        => ['required', 'unique:category_translations,slug', new \Webkul\Core\Contracts\Validations\Slug],
             'name'        => 'required',
-            'image.*'     => 'mimes:jpeg,jpg,bmp,png',
+            'image.*'     => 'mimes:bmp,jpeg,jpg,png,webp',
             'description' => 'required_if:display_mode,==,description_only,products_and_description',
         ]);
 
@@ -127,7 +127,7 @@ class CategoryController extends Controller
                 }
             }],
             $locale . '.name' => 'required',
-            'image.*'         => 'mimes:jpeg,jpg,bmp,png',
+            'image.*'         => 'mimes:bmp,jpeg,jpg,png,webp',
         ]);
 
         $this->categoryRepository->update(request()->all(), $id);
@@ -153,7 +153,10 @@ class CategoryController extends Controller
             try {
                 Event::dispatch('catalog.category.delete.before', $id);
 
-                $this->categoryRepository->delete($id);
+                if($category->products->count() > 0) {
+                    $category->products()->delete();
+                }
+                $category->delete();
 
                 Event::dispatch('catalog.category.delete.after', $id);
 
@@ -175,36 +178,52 @@ class CategoryController extends Controller
      */
     public function massDestroy()
     {
-        $suppressFlash = false;
+        $suppressFlash = true;
+        $categoryIds = explode(',', request()->input('indexes'));
 
-        if (request()->isMethod('delete') || request()->isMethod('post')) {
-            $indexes = explode(',', request()->input('indexes'));
+        foreach ($categoryIds as $categoryId) {
+            $category = $this->categoryRepository->find($categoryId);
 
-            foreach ($indexes as $key => $value) {
-                try {
-                    Event::dispatch('catalog.category.delete.before', $value);
+            if (isset($category)) {
+                if(strtolower($category->name) == "root") {
+                    $suppressFlash = false;
+                    session()->flash('warning', trans('admin::app.response.delete-category-root', ['name' => 'Category']));
+                } else {
+                    try {
+                        $suppressFlash = true;
+                        Event::dispatch('catalog.category.delete.before', $categoryId);
 
-                    $this->categoryRepository->delete($value);
+                        if($category->products->count() > 0) {
+                            $category->products()->delete();
+                        }
+                        $category->delete();
 
-                    Event::dispatch('catalog.category.delete.after', $value);
-                } catch(\Exception $e) {
-                    $suppressFlash = true;
-
-                    continue;
+                        Event::dispatch('catalog.category.delete.after', $categoryId);
+        
+                    } catch(\Exception $e) {
+                        session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Category']));
+                    }
                 }
             }
-
-            if (! $suppressFlash) {
-                session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success'));
-            } else {
-                session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'Attribute Family']));
-            }
-
-            return redirect()->back();
-        } else {
-            session()->flash('error', trans('admin::app.datagrid.mass-ops.method-error'));
-
-            return redirect()->back();
         }
+
+        if (count($categoryIds) != 1 || $suppressFlash == true) {
+            session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'Category']));
+        }
+
+        return redirect()->route($this->_config['redirect']);
+    }
+
+
+    public function categoryProductCount() {
+        $indexes = explode(",", request()->input('indexes'));
+        $product_count = 0;
+
+        foreach($indexes as $index) {
+            $category = $this->categoryRepository->find($index);
+            $product_count += $category->products->count();
+        }
+
+        return response()->json(['product_count' => $product_count], 200);
     }
 }

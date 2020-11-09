@@ -64,10 +64,10 @@ class ProductForm extends FormRequest
     public function rules()
     {
         $product = $this->productRepository->find($this->id);
-        
+
         $this->rules = array_merge($product->getTypeInstance()->getTypeValidationRules(), [
             'sku'                => ['required', 'unique:products,sku,' . $this->id, new \Webkul\Core\Contracts\Validations\Slug],
-            'images.*'           => 'nullable|mimes:jpeg,jpg,bmp,png',
+            'images.*'           => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
             'special_price_from' => 'nullable|date',
             'special_price_to'   => 'nullable|date|after_or_equal:special_price_from',
             'special_price'      => ['nullable', new \Webkul\Core\Contracts\Validations\Decimal, 'lt:price'],
@@ -87,7 +87,7 @@ class ProductForm extends FormRequest
             }
 
             if ($attribute->type == 'text' && $attribute->validation) {
-                array_push($validations, 
+                array_push($validations,
                     $attribute->validation == 'decimal'
                     ? new \Webkul\Core\Contracts\Validations\Decimal
                     : $attribute->validation

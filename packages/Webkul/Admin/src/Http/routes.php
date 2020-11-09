@@ -335,6 +335,13 @@ Route::group(['middleware' => ['web']], function () {
 
                 Route::post('/categories/delete/{id}', 'Webkul\Category\Http\Controllers\CategoryController@destroy')->name('admin.catalog.categories.delete');
 
+                //category massdelete
+                Route::post('categories/massdelete', 'Webkul\Category\Http\Controllers\CategoryController@massDestroy')->defaults('_config', [
+                    'redirect' => 'admin.catalog.categories.index',
+                ])->name('admin.catalog.categories.massdelete');
+
+                Route::post('/categories/product/count', 'Webkul\Category\Http\Controllers\CategoryController@categoryProductCount')->name('admin.catalog.categories.product.count');
+                
 
                 // Catalog Attribute Routes
                 Route::get('/attributes', 'Webkul\Attribute\Http\Controllers\AttributeController@index')->defaults('_config', [

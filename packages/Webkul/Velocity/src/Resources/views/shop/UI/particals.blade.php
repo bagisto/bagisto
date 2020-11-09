@@ -54,116 +54,122 @@
             aria-label="Logo">
 
             @if ($logo = core()->getCurrentChannel()->logo_url)
-                <img class="logo" src="{{ $logo }}" alt="" />
+                <img class="logo" src="{{ $logo }}" alt="" width="200" height="50" />
             @else
-                <img class="logo" src="{{ asset('themes/velocity/assets/images/logo-text.png') }}" alt="" />
+                <img class="logo" src="{{ asset('themes/velocity/assets/images/logo-text.png') }}" alt="" width="200" height="50" />
             @endif
         </a>
     </script>
 
     <script type="text/x-template" id="searchbar-template">
-        <div class="row no-margin right searchbar">
-            <div class="col-lg-5 col-md-12 no-padding input-group">
-                <form
-                    method="GET"
-                    role="search"
-                    id="search-form"
-                    action="{{ route('velocity.search.index') }}">
+        <div class="right searchbar">
+            <div class="row">
+                <div class="col-lg-5 col-md-12">
+                    <div class="input-group">
+                        <form
+                            method="GET"
+                            role="search"
+                            id="search-form"
+                            action="{{ route('velocity.search.index') }}">
 
-                    <div
-                        class="btn-toolbar full-width"
-                        role="toolbar">
+                            <div
+                                class="btn-toolbar full-width"
+                                role="toolbar">
 
-                        <div class="btn-group full-width">
-                            <div class="selectdiv">
-                                <select class="form-control fs13 styled-select" name="category" @change="focusInput($event)" aria-label="Category">
-                                    <option value="">
-                                        {{ __('velocity::app.header.all-categories') }}
-                                    </option>
+                                <div class="btn-group full-width force-center">
+                                    <div class="selectdiv">
+                                        <select class="form-control fs13 styled-select" name="category" @change="focusInput($event)" aria-label="Category">
+                                            <option value="">
+                                                {{ __('velocity::app.header.all-categories') }}
+                                            </option>
 
-                                    <template v-for="(category, index) in $root.sharedRootCategories">
-                                        <option
-                                            :key="index"
-                                            selected="selected"
-                                            :value="category.id"
-                                            v-if="(category.id == searchedQuery.category)">
-                                            @{{ category.name }}
-                                        </option>
+                                            <template v-for="(category, index) in $root.sharedRootCategories">
+                                                <option
+                                                    :key="index"
+                                                    selected="selected"
+                                                    :value="category.id"
+                                                    v-if="(category.id == searchedQuery.category)">
+                                                    @{{ category.name }}
+                                                </option>
 
-                                        <option :key="index" :value="category.id" v-else>
-                                            @{{ category.name }}
-                                        </option>
-                                    </template>
-                                </select>
+                                                <option :key="index" :value="category.id" v-else>
+                                                    @{{ category.name }}
+                                                </option>
+                                            </template>
+                                        </select>
 
-                                <div class="select-icon-container">
-                                    <span class="select-icon rango-arrow-down"></span>
+                                        <div class="select-icon-container">
+                                            <span class="select-icon rango-arrow-down"></span>
+                                        </div>
+                                    </div>
+
+                                    <input
+                                        required
+                                        name="term"
+                                        type="search"
+                                        class="form-control"
+                                        placeholder="{{ __('velocity::app.header.search-text') }}"
+                                        aria-label="Search"
+                                        v-model:value="inputVal" />
+
+                                    <image-search-component></image-search-component>
+
+                                    <button class="btn" type="button" id="header-search-icon" aria-label="Search" @click="submitForm">
+                                        <i class="fs16 fw6 rango-search"></i>
+                                    </button>
                                 </div>
                             </div>
 
-                            <div class="full-width">
-
-                                <input
-                                    required
-                                    name="term"
-                                    type="search"
-                                    class="form-control"
-                                    placeholder="{{ __('velocity::app.header.search-text') }}"
-                                    aria-label="Search"
-                                    :value="searchedQuery.term ? decodeURIComponent(searchedQuery.term.split('+').join(' ')) : ''" />
-
-                                <image-search-component></image-search-component>
-
-                                <button class="btn" type="submit" id="header-search-icon" aria-label="Search">
-                                    <i class="fs16 fw6 rango-search"></i>
-                                </button>
-                            </div>
-                        </div>
+                        </form>
                     </div>
+                </div>
 
-                </form>
-            </div>
+                <div class="col-lg-7 col-md-12 vc-full-screen">
+                    {!! view_render_event('bagisto.shop.layout.header.cart-item.before') !!}
+                        @include('shop::checkout.cart.mini-cart')
+                    {!! view_render_event('bagisto.shop.layout.header.cart-item.after') !!}
 
-            <div class="col-lg-7 col-md-12">
-                {!! view_render_event('bagisto.shop.layout.header.cart-item.before') !!}
-                    @include('shop::checkout.cart.mini-cart')
-                {!! view_render_event('bagisto.shop.layout.header.cart-item.after') !!}
+                    @php
+                        $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false;
 
-                @php
-                    $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false
-                @endphp
+                        $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
 
-                {!! view_render_event('bagisto.shop.layout.header.compare.before') !!}
-                    @if ($showCompare)
-                        <a
-                            class="compare-btn unset"
-                            @auth('customer')
-                                href="{{ route('velocity.customer.product.compare') }}"
-                            @endauth
+                    @endphp
 
-                            @guest('customer')
-                                href="{{ route('velocity.product.compare') }}"
-                            @endguest
-                            >
+                    {!! view_render_event('bagisto.shop.layout.header.compare.before') !!}
+                        @if ($showCompare)
+                            <a
+                                class="compare-btn unset"
+                                @auth('customer')
+                                    href="{{ route('velocity.customer.product.compare') }}"
+                                @endauth
 
-                            <i class="material-icons">compare_arrows</i>
-                            <div class="badge-container" v-if="compareCount > 0">
-                                <span class="badge" v-text="compareCount"></span>
-                            </div>
-                            <span>{{ __('velocity::app.customer.compare.text') }}</span>
-                        </a>
-                    @endif
-                {!! view_render_event('bagisto.shop.layout.header.compare.after') !!}
+                                @guest('customer')
+                                    href="{{ route('velocity.product.compare') }}"
+                                @endguest
+                                >
 
-                {!! view_render_event('bagisto.shop.layout.header.wishlist.before') !!}
-                    <a class="wishlist-btn unset" :href="`${isCustomer ? '{{ route('customer.wishlist.index') }}' : '{{ route('velocity.product.guest-wishlist') }}'}`">
-                        <i class="material-icons">favorite_border</i>
-                        <div class="badge-container" v-if="wishlistCount > 0">
-                            <span class="badge" v-text="wishlistCount"></span>
-                        </div>
-                        <span>{{ __('shop::app.layouts.wishlist') }}</span>
-                    </a>
-                {!! view_render_event('bagisto.shop.layout.header.wishlist.after') !!}
+                                <i class="material-icons">compare_arrows</i>
+                                <div class="badge-container" v-if="compareCount > 0">
+                                    <span class="badge" v-text="compareCount"></span>
+                                </div>
+                                <span>{{ __('velocity::app.customer.compare.text') }}</span>
+                            </a>
+                        @endif
+                    {!! view_render_event('bagisto.shop.layout.header.compare.after') !!}
+
+                    {!! view_render_event('bagisto.shop.layout.header.wishlist.before') !!}
+                        @if($showWishlist)
+                            <a class="wishlist-btn unset" :href="`{{ route('customer.wishlist.index') }}`">
+                                <i class="material-icons">favorite_border</i>
+                                <div class="badge-container" v-if="wishlistCount > 0">
+                                    <span class="badge" v-text="wishlistCount"></span>
+                                </div>
+                                <span>{{ __('shop::app.layouts.wishlist') }}</span>
+                            </a>
+                        @endif
+                    {!! view_render_event('bagisto.shop.layout.header.wishlist.after') !!}
+                </div>
             </div>
         </div>
     </script>
@@ -172,8 +178,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
 
     <script type="text/x-template" id="image-search-component-template">
-        <div class="d-inline-block" v-if="image_search_status">
-            <label class="image-search-container" for="image-search-container">
+        <div class="d-inline-block image-search-container">
+            <label for="image-search-container">
                 <i class="icon camera-icon"></i>
 
                 <input
@@ -186,7 +192,7 @@
                 <img
                     class="d-none"
                     id="uploaded-image-url"
-                    :src="uploadedImageUrl" alt="" />
+                    :src="uploadedImageUrl" alt="" width="20" height="20" />
             </label>
         </div>
     </script>
@@ -285,8 +291,10 @@
 
             Vue.component('searchbar-component', {
                 template: '#searchbar-template',
+
                 data: function () {
                     return {
+                        inputVal: '',
                         compareCount: 0,
                         wishlistCount: 0,
                         searchedQuery: [],
@@ -317,6 +325,10 @@
 
                     this.searchedQuery = updatedSearchedCollection;
 
+                    if (this.searchedQuery.term) {
+                        this.inputVal = decodeURIComponent(this.searchedQuery.term.split('+').join(' '));
+                    }
+
                     this.updateHeaderItemsCount();
                 },
 
@@ -325,14 +337,15 @@
                         $(event.target.parentElement.parentElement).find('input').focus();
                     },
 
+                    'submitForm': function () {
+                        if (this.inputVal !== '') {
+                            $('#search-form').submit();
+                        }
+                    },
+
                     'updateHeaderItemsCount': function () {
                         if (! this.isCustomer) {
                             let comparedItems = this.getStorageValue('compared_product');
-                            let wishlistedItems = this.getStorageValue('wishlist_product');
-
-                            if (wishlistedItems) {
-                                this.wishlistCount = wishlistedItems.length;
-                            }
 
                             if (comparedItems) {
                                 this.compareCount = comparedItems.length;

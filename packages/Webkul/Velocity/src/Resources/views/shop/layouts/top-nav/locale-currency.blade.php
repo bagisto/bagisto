@@ -41,9 +41,9 @@
 
             <div class="locale-icon">
                 @if ($localeImage)
-                    <img src="{{ asset('/storage/' . $localeImage) }}" onerror="this.src = '{{ asset($localeImage) }}'" alt="" />
+                    <img src="{{ asset('/storage/' . $localeImage) }}" onerror="this.src = '{{ asset($localeImage) }}'" alt="" width="20" height="20" />
                 @elseif (app()->getLocale() == 'en')
-                    <img src="{{ asset('/themes/velocity/assets/images/flags/en.png') }}" alt="" />
+                    <img src="{{ asset('/themes/velocity/assets/images/flags/en.png') }}" alt="" width="20" height="20" />
                 @endif
             </div>
 

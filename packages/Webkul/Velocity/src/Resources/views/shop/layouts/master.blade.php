@@ -20,7 +20,7 @@
         <link rel="stylesheet" href="{{ asset('themes/velocity/assets/css/velocity.css') }}" />
         <link rel="stylesheet" href="{{ asset('themes/velocity/assets/css/bootstrap.min.css') }}" />
 
-        @if (core()->getCurrentLocale()->direction == 'rtl')
+        @if (core()->getCurrentLocale() && core()->getCurrentLocale()->direction == 'rtl')
             <link href="{{ asset('themes/velocity/assets/css/bootstrap-flipped.css') }}" rel="stylesheet">
         @endif
 
@@ -45,14 +45,12 @@
         </style>
     </head>
 
-    <body @if (core()->getCurrentLocale()->direction == 'rtl') class="rtl" @endif>
+    <body @if (core()->getCurrentLocale() && core()->getCurrentLocale()->direction == 'rtl') class="rtl" @endif>
         {!! view_render_event('bagisto.shop.layout.body.before') !!}
 
         @include('shop::UI.particals')
 
         <div id="app">
-            {{-- <responsive-sidebar v-html="responsiveSidebarTemplate"></responsive-sidebar> --}}
-
             <product-quick-view v-if="$root.quickView"></product-quick-view>
 
             <div class="main-container-wrapper">

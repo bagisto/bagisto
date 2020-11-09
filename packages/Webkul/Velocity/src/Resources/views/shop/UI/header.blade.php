@@ -1,7 +1,7 @@
 @push('scripts')
     <script type="text/x-template" id="content-header-template">
         <header class="row velocity-divide-page vc-header header-shadow active">
-            <div class="vc-small-screen container" v-if="isMobile()">
+            <div class="vc-small-screen container">
                 <div class="row">
                     <div class="col-6">
                         <div v-if="hamburger" class="nav-container scrollable">
@@ -72,7 +72,7 @@
                                                 <img
                                                     class="category-icon"
                                                     v-if="category.category_icon_path"
-                                                    :src="`${$root.baseUrl}/storage/${category.category_icon_path}`" alt="" />
+                                                    :src="`${$root.baseUrl}/storage/${category.category_icon_path}`" alt="" width="20" height="20" />
                                             </div>
                                             <span v-text="category.name"></span>
                                         </a>
@@ -213,7 +213,7 @@
                                                 <img
                                                     class="category-icon"
                                                     v-if="nestedSubCategory.category_icon_path"
-                                                    :src="`${$root.baseUrl}/storage/${nestedSubCategory.category_icon_path}`" alt="" />
+                                                    :src="`${$root.baseUrl}/storage/${nestedSubCategory.category_icon_path}`" alt="" width="20" height="20" />
                                             </div>
                                             <span>@{{ nestedSubCategory.name }}</span>
                                         </a>
@@ -234,7 +234,7 @@
                                                         <img
                                                             class="category-icon"
                                                             v-if="thirdLevelCategory.category_icon_path"
-                                                            :src="`${$root.baseUrl}/storage/${thirdLevelCategory.category_icon_path}`" alt="" />
+                                                            :src="`${$root.baseUrl}/storage/${thirdLevelCategory.category_icon_path}`" alt="" width="20" height="20" />
                                                     </div>
                                                     <span>@{{ thirdLevelCategory.name }}</span>
                                                 </a>
@@ -266,14 +266,14 @@
                                                     <div class="category-logo">
                                                         <img
                                                         class="category-icon"
-                                                        src="{{ asset('/themes/velocity/assets/images/flags/en.png') }}" alt="" />
+                                                        src="{{ asset('/themes/velocity/assets/images/flags/en.png') }}" alt="" width="20" height="20" />
                                                     </div>
                                                 @else
 
                                                     <div class="category-logo">
                                                         <img
                                                         class="category-icon"
-                                                        src="{{ asset('/storage/' . $locale->locale_image) }}" alt="" />
+                                                        src="{{ asset('/storage/' . $locale->locale_image) }}" alt="" width="20" height="20" />
                                                     </div>
                                                 @endif
 
@@ -323,7 +323,8 @@
                     </div>
 
                     @php
-                        $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false
+                        $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false;
+                        $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
                     @endphp
 
                     <div class="right-vc-header col-6">
@@ -346,12 +347,14 @@
                             </a>
                         @endif
 
-                        <a class="wishlist-btn unset" :href="`${isCustomer ? '{{ route('customer.wishlist.index') }}' : '{{ route('velocity.product.guest-wishlist') }}'}`">
-                            <div class="badge-container" v-if="wishlistCount > 0">
-                                <span class="badge" v-text="wishlistCount"></span>
-                            </div>
-                            <i class="material-icons">favorite_border</i>
-                        </a>
+                        @if ($showWishlist)
+                            <a class="wishlist-btn unset" :href="`{{ route('customer.wishlist.index') }}`">
+                                <div class="badge-container" v-if="wishlistCount > 0">
+                                    <span class="badge" v-text="wishlistCount"></span>
+                                </div>
+                                <i class="material-icons">favorite_border</i>
+                            </a>
+                        @endif
 
                         <a class="unset cursor-pointer" @click="openSearchBar">
                             <i class="material-icons">search</i>
@@ -370,7 +373,7 @@
             </div>
 
             <div
-                v-else
+               id="main-category"
                 @mouseout="toggleSidebar('0', $event, 'mouseout')"
                 @mouseover="toggleSidebar('0', $event, 'mouseover')"
                 :class="`main-category fs16 unselectable fw6 ${($root.sharedRootCategories.length > 0) ? 'cursor-pointer' : 'cursor-not-allowed'} left`">
@@ -513,11 +516,6 @@
                     updateHeaderItemsCount: function () {
                         if (! this.isCustomer) {
                             let comparedItems = this.getStorageValue('compared_product');
-                            let wishlistedItems = this.getStorageValue('wishlist_product');
-
-                            if (wishlistedItems) {
-                                this.wishlistCount = wishlistedItems.length;
-                            }
 
                             if (comparedItems) {
                                 this.compareCount = comparedItems.length;

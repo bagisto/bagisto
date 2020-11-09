@@ -2,26 +2,24 @@
 
 namespace Webkul\API\Http\Controllers\Shop;
 
-use Illuminate\Http\Request;
-
-class ResourceController extends Controller
+class InvoiceController extends Controller
 {
     /**
-     * Contains current guard
+     * Contains current guard.
      *
      * @var array
      */
     protected $guard;
 
     /**
-     * Contains route related configuration
+     * Contains route related configuration.
      *
      * @var array
      */
     protected $_config;
 
     /**
-     * Repository object
+     * Repository object.
      *
      * @var \Webkul\Core\Eloquent\Repository
      */
@@ -51,15 +49,17 @@ class ResourceController extends Controller
     }
 
     /**
-     * Returns a listing of the resource.
+     * Returns a listing of the invoices.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $query = $this->repository->scopeQuery(function($query) {
+            $query = $query->leftJoin('orders', 'invoices.order_id', '=', 'orders.id')->select('invoices.*', 'orders.customer_id');
+
             if (isset($this->_config['authorization_required']) && $this->_config['authorization_required']) {
-                $query = $query->where('customer_id', auth()->user()->id );
+                $query = $query->where('customer_id', auth()->user()->id);
             }
 
             foreach (request()->except(['page', 'limit', 'pagination', 'sort', 'order', 'token']) as $input => $value) {
@@ -85,34 +85,22 @@ class ResourceController extends Controller
     }
 
     /**
-     * Returns a individual resource.
+     * Returns an individual invoice.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function get($id)
     {
-        $query = isset($this->_config['authorization_required']) && $this->_config['authorization_required'] ?
-                $this->repository->where('customer_id', auth()->user()->id)->findOrFail($id) :
-                $this->repository->findOrFail($id);
+        if (isset($this->_config['authorization_required']) && $this->_config['authorization_required']) {
+            $query = $this->repository->leftJoin('orders', 'invoices.order_id', '=', 'orders.id')
+                          ->select('invoices.*', 'orders.customer_id')
+                          ->where('customer_id', auth()->user()->id)
+                          ->findOrFail($id);
+        } else {
+            $query = $this->repository->findOrFail($id);
+        }
 
         return new $this->_config['resource']($query);
-    }
-
-    /**
-     * Delete's a individual resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $wishlistProduct = $this->repository->findOrFail($id);
-
-        $this->repository->delete($id);
-
-        return response()->json([
-            'message' => 'Item removed successfully.',
-        ]);
     }
 }

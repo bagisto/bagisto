@@ -3,7 +3,7 @@
     $comparableAttributes = $attributeRepository->getComparableAttributesBelongsToFamily();
 
     $locale = request()->get('locale') ?: app()->getLocale();
-    
+
     $attributeOptionTranslations = DB::table('attribute_option_translations')->where('locale', $locale)->get()->toJson();
 @endphp
 
@@ -16,7 +16,7 @@
 
             <button
                 v-if="products.length > 0"
-                class="btn btn-primary btn-md pull-right"
+                class="btn btn-primary btn-md {{ core()->getCurrentLocale()->direction == 'rtl' ? 'pull-left' : 'pull-right' }}"
                 @click="removeProductCompare('all')">
                 {{ __('shop::app.customer.account.wishlist.deleteall') }}
             </button>
@@ -122,7 +122,7 @@
 
                                         @break
 
-                                @endswitch 
+                                @endswitch
                             </td>
                         </tr>
                     @endforeach
@@ -326,7 +326,7 @@
                                 'type': `alert-error`,
                                 'message': "{{ __('shop::app.common.error') }}"
                             }];
-                            
+
                             this.$root.addFlashMessages();
                         });
                     } else {

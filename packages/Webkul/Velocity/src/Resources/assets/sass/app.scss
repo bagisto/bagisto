@@ -411,7 +411,7 @@ header {
             max-width: 550px;
 
             .selectdiv {
-                width: 170px;
+                width: 210px;
 
                 .select-icon {
                     top: 9px;
@@ -445,7 +445,6 @@ header {
         input {
             @include border-radius(0px);
 
-            width: 380px;
             height: 100%;
             font-size: 14px;
             padding: 0 10px;
@@ -482,6 +481,7 @@ header {
         }
     }
 
+    /* To Do: To avoid CLS reserve width for all locale */
     .mini-cart-container {
         height: 50px;
         padding: 5px 17px;

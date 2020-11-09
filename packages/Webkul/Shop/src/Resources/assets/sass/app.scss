@@ -117,6 +117,22 @@ input {
    }
 }
 
+/* Product Page Description */
+.details {
+    .description {
+        overflow: auto;
+    }
+
+    .accordian {
+        .accordian-content {
+            div {
+                overflow: auto;
+            }
+        }
+
+    }
+}
+
 /* Show the indicator (dot/circle) when checked */
 .radio-container input:checked ~ .checkmark:after {
     display: block;
@@ -188,9 +204,15 @@ input {
     }
 }
 
+/* if not very important use bootstrap 4 float-left and float-right class */
 .pull-right {
-    float:right;
+    float: right !important;
 }
+
+.pull-left {
+    float: left !important;
+}
+/* if not very important use bootstrap 4 float-left and float-right class */
 
 //wishlist icon hover properties
 .add-to-wishlist {
@@ -228,6 +250,28 @@ input {
 
     .special-price {
         color: $disc-price;
+    }
+
+    /*
+       To Do: Start adjusting if equal height needed in default theme as well.
+    */
+    .price-from {
+        .bundle-regular-price {
+            color: $font-light;
+            text-decoration: line-through;
+            margin-right: 10px;
+        }
+
+        .bundle-special-price {
+            color: $disc-price;
+        }
+
+        .bundle-to {
+            display: block;
+            font-weight: 500;
+            margin-top: 1px;
+            margin-bottom: 1px;
+        }
     }
 }
 
@@ -4642,7 +4686,6 @@ td {
 
 .icon.remove-product {
     top: 5px;
-    float: right;
     cursor: pointer;
     position: relative;
     background-color: black;

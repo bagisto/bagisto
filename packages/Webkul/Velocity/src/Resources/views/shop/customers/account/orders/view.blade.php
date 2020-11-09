@@ -208,7 +208,12 @@
                                                 <td>{{ __('shop::app.customer.account.order.view.total-due') }}
                                                     <span class="dash-icon">-</span>
                                                 </td>
-                                                <td>{{ core()->formatPrice($order->total_due, $order->order_currency_code) }}</td>
+                                                
+                                                @if($order->status !== 'canceled')
+                                                    <td>{{ core()->formatPrice($order->total_due, $order->order_currency_code) }}</td>
+                                                @else
+                                                    <td>{{ core()->formatPrice(0.00, $order->order_currency_code) }}</td>
+                                                @endif
                                             </tr>
                                         <tbody>
                                     </table>

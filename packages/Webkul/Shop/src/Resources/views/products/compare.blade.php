@@ -4,7 +4,7 @@
 
     <script type="text/x-template" id="compare-component-template">
         <a
-            class="unset compare-icon text-right"
+            class="unset text-right"
             title="{{  __('shop::app.customer.compare.add-tooltip') }}"
             @click="addProductToCompare"
             style="cursor: pointer">
@@ -18,7 +18,7 @@
 
             template: '#compare-component-template',
 
-            data: function () {                
+            data: function () {
                 return {
                     'baseUrl': "{{ url()->to('/') }}",
                     'customer': '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == "true",
@@ -37,7 +37,7 @@
                                 'type': `alert-${response.data.status}`,
                                 'message': response.data.message
                             }];
-                            
+
                             this.$root.addFlashMessages()
                         }).catch(error => {
                             window.flashMessages = [{
@@ -113,7 +113,7 @@
                                 'type': `alert-error`,
                                 'message': "{{ __('shop::app.common.error') }}"
                             }];
-                            
+
                             this.$root.addFlashMessages();
                         });
                     } else {

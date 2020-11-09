@@ -454,8 +454,14 @@
 
                                         <tr class="bold">
                                             <td>{{ __('admin::app.sales.orders.total-due') }}</td>
+
                                             <td>-</td>
-                                            <td>{{ core()->formatBasePrice($order->base_total_due) }}</td>
+
+                                            @if($order->status !== 'canceled')
+                                                <td>{{ core()->formatBasePrice($order->base_total_due) }}</td>
+                                            @else
+                                                <td id="due-amount-on-cancelled">{{ core()->formatBasePrice(0.00) }}</td>
+                                            @endif
                                         </tr>
                                     </table>
                                 </div>
