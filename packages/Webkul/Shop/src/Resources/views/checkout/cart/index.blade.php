@@ -6,6 +6,11 @@
 
 @section('content-wrapper')
     @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
+
+    @php
+        $minimumOrderAmount = (int) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
+    @endphp
+
     <section class="cart">
         @if ($cart)
             <div class="title">
@@ -129,7 +134,7 @@
                                 @endif
 
                                 @if (! cart()->hasError())
-                                    <a href="{{ route('shop.checkout.onepage.index') }}" class="btn btn-lg btn-primary">
+                                    <a href="{{ route('shop.checkout.onepage.index') }}" class="btn btn-lg btn-primary" id="proceed-to-checkout">
                                         {{ __('shop::app.checkout.cart.proceed-to-checkout') }}
                                     </a>
                                 @endif
@@ -261,5 +266,23 @@
             document.getElementById('cart-quantity'+index).value = quantity;
             event.preventDefault();
         }
+    </script>
+
+    <script>
+        $(document).ready(() => {
+            /*
+                didn't found any component so added here
+                will improve once get clarity
+            */
+            $('#proceed-to-checkout').on('click', (e) => {
+                let cartDetails = @json($cart);
+                let minimumOrderAmount = '{{ $minimumOrderAmount }}';
+
+                if (! (cartDetails.base_sub_total > minimumOrderAmount)) {
+                    e.preventDefault();
+                    window.alert('{{ __('shop::app.checkout.cart.minimum-order-message', ['amount' => $minimumOrderAmount]) }}');
+                }
+            });
+        });
     </script>
 @endpush
