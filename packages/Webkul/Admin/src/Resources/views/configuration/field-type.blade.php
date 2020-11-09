@@ -126,7 +126,7 @@
 
             @elseif ($field['type'] == 'textarea')
 
-                <textarea v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">{{ old($name) ?: core()->getConfigData($name) }}</textarea>
+                <textarea v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">{{ old($name) ? core()->getConfigData($name) : (isset($field['default_value']) ? $field['default_value'] : '') }}</textarea>
 
             @elseif ($field['type'] == 'select')
 
@@ -230,7 +230,7 @@
 
             @elseif ($field['type'] == 'boolean')
 
-                <?php $selectedOption = core()->getConfigData($name) ?? ''; ?>
+                <?php $selectedOption = core()->getConfigData($name) ?? (isset($field['default_value']) ? $field['default_value'] : ''); ?>
 
                 <label class="switch">
                     <input type="hidden" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" value="0" />
