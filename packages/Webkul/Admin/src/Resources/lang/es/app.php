@@ -1274,7 +1274,7 @@ return [
             'payment-methods' => 'Métodos de pago',
             'cash-on-delivery' => 'Pago contraentrega',
             'money-transfer' => 'Transferencia',
-            'paypal-standard' => 'Paypal',
+            'paypal-standard' => 'PayPal',
             'business-account' => 'Cuenta de negocio',
             'newsletter' => 'Suscripción a newsletter',
             'newsletter-subscription' => 'Permitir suscripciones a newsletter',
@@ -1320,7 +1320,7 @@ return [
             'custom-scripts' => 'Custom Scripts',
             'custom-css' => 'Custom CSS',
             'custom-javascript' => 'Custom Javascript',
-            'paypal-smart-button' => 'Paypal Smart Button',
+            'paypal-smart-button' => 'PayPal',
             'client-id' => 'Client Id',
             'client-id-info' => 'Use "sb" for testing.'
        ]
