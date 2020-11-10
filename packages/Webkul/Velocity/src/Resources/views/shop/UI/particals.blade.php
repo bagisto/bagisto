@@ -379,76 +379,86 @@
 
                         if (imageInput.files && imageInput.files[0]) {
                             if (imageInput.files[0].type.includes('image/')) {
-                                this.$root.showLoader();
+                                if (imageInput.files[0].size <= 2000000) {
+                                    this.$root.showLoader();
 
-                                var formData = new FormData();
+                                    var formData = new FormData();
 
-                                formData.append('image', imageInput.files[0]);
+                                    formData.append('image', imageInput.files[0]);
 
-                                axios.post(
-                                    "{{ route('shop.image.search.upload') }}",
-                                    formData,
-                                    {
-                                        headers: {
-                                            'Content-Type': 'multipart/form-data'
+                                    axios.post(
+                                        "{{ route('shop.image.search.upload') }}",
+                                        formData,
+                                        {
+                                            headers: {
+                                                'Content-Type': 'multipart/form-data'
+                                            }
                                         }
-                                    }
-                                ).then(response => {
-                                    var net;
-                                    var self = this;
-                                    this.uploadedImageUrl = response.data;
+                                    ).then(response => {
+                                        var net;
+                                        var self = this;
+                                        this.uploadedImageUrl = response.data;
 
 
-                                    async function app() {
-                                        var analysedResult = [];
+                                        async function app() {
+                                            var analysedResult = [];
 
-                                        var queryString = '';
+                                            var queryString = '';
 
-                                        net = await mobilenet.load();
+                                            net = await mobilenet.load();
 
-                                        const imgElement = document.getElementById('uploaded-image-url');
+                                            const imgElement = document.getElementById('uploaded-image-url');
 
-                                        try {
-                                            const result = await net.classify(imgElement);
+                                            try {
+                                                const result = await net.classify(imgElement);
 
-                                            result.forEach(function(value) {
-                                                queryString = value.className.split(',');
+                                                result.forEach(function(value) {
+                                                    queryString = value.className.split(',');
 
-                                                if (queryString.length > 1) {
-                                                    analysedResult = analysedResult.concat(queryString)
-                                                } else {
-                                                    analysedResult.push(queryString[0])
-                                                }
-                                            });
-                                        } catch (error) {
+                                                    if (queryString.length > 1) {
+                                                        analysedResult = analysedResult.concat(queryString)
+                                                    } else {
+                                                        analysedResult.push(queryString[0])
+                                                    }
+                                                });
+                                            } catch (error) {
+                                                self.$root.hideLoader();
+
+                                                window.showAlert(
+                                                    `alert-danger`,
+                                                    this.__('shop.general.alert.error'),
+                                                    "{{ __('shop::app.common.error') }}"
+                                                );
+                                            }
+
+                                            localStorage.searchedImageUrl = self.uploadedImageUrl;
+
+                                            queryString = localStorage.searched_terms = analysedResult.join('_');
+
                                             self.$root.hideLoader();
 
-                                            window.showAlert(
-                                                `alert-danger`,
-                                                this.__('shop.general.alert.error'),
-                                                "{{ __('shop::app.common.error') }}"
-                                            );
+                                            window.location.href = "{{ route('shop.search.index') }}" + '?term=' + queryString + '&image-search=1';
                                         }
 
-                                        localStorage.searchedImageUrl = self.uploadedImageUrl;
+                                        app();
+                                    }).catch(() => {
+                                        this.$root.hideLoader();
 
-                                        queryString = localStorage.searched_terms = analysedResult.join('_');
-
-                                        self.$root.hideLoader();
-
-                                        window.location.href = "{{ route('shop.search.index') }}" + '?term=' + queryString + '&image-search=1';
-                                    }
-
-                                    app();
-                                }).catch(() => {
-                                    this.$root.hideLoader();
-
-                                    window.showAlert(
-                                        `alert-danger`,
-                                        this.__('shop.general.alert.error'),
-                                        "{{ __('shop::app.common.error') }}"
-                                    );
-                                });
+                                        window.showAlert(
+                                            `alert-danger`,
+                                            this.__('shop.general.alert.error'),
+                                            "{{ __('shop::app.common.error') }}"
+                                        );
+                                    });                                    
+                                } else {
+                                        imageInput.value = '';
+                                        
+                                        window.showAlert(
+                                            `alert-danger`,
+                                            this.__('shop.general.alert.error'),
+                                            "{{ __('shop::app.common.image-upload-limit') }}"
+                                        );
+                                }
                             } else {
                                 imageInput.value = '';
 
