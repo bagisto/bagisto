@@ -9,6 +9,7 @@ return [
             'mass-update-status' => 'آیا واقعاً می خواهید وضعیت انتخاب شده را به روز کنید :resource?',
             'delete' => 'آیا واقعاً می خواهید این عمل را انجام دهید؟',
             'edit' => 'آیا واقعاً می خواهید این را ویرایش کنید :resource?',
+            'delete-category-product' => 'The selected categories contains products. Performing this action will remove the related products. Do you really want to perform this action?'
         ],
 
         'zero-index' => 'ستون های فهرست می توانند مقادیری بیشتر از صفر داشته باشند',
