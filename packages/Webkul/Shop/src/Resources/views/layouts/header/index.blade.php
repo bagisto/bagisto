@@ -262,7 +262,7 @@
                         if (imageInput.files[0].type.includes('image/')) {
                             var self = this;
 
-                            if (false) {
+                            if (imageInput.files[0].size <= 2000000) { 
                                 self.$root.showLoader();
 
                                 var formData = new FormData();
