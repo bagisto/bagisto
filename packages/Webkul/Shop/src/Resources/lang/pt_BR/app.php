@@ -17,6 +17,7 @@ return [
 
     'common' => [
         'error' => 'Algo deu errado, por favor, tente novamente mais tarde.',
+        'image-upload-limit' => 'O tamanho máximo de upload da imagem é 2 MB',
         'no-result-found' => 'We could not find any records.'
     ],
 

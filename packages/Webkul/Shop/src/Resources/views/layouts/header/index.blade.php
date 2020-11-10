@@ -262,75 +262,90 @@
                         if (imageInput.files[0].type.includes('image/')) {
                             var self = this;
 
-                            self.$root.showLoader();
+                            if (false) {
+                                self.$root.showLoader();
 
-                            var formData = new FormData();
+                                var formData = new FormData();
 
-                            formData.append('image', imageInput.files[0]);
+                                formData.append('image', imageInput.files[0]);
 
-                            axios.post("{{ route('shop.image.search.upload') }}", formData, {headers: {'Content-Type': 'multipart/form-data'}})
-                                .then(function(response) {
-                                    self.uploaded_image_url = response.data;
+                                axios.post("{{ route('shop.image.search.upload') }}", formData, {headers: {'Content-Type': 'multipart/form-data'}})
+                                    .then(function(response) {
+                                        self.uploaded_image_url = response.data;
 
-                                    var net;
+                                        var net;
 
-                                    async function app() {
-                                        var analysedResult = [];
+                                        async function app() {
+                                            var analysedResult = [];
 
-                                        var queryString = '';
+                                            var queryString = '';
 
-                                        net = await mobilenet.load();
+                                            net = await mobilenet.load();
 
-                                        const imgElement = document.getElementById('uploaded-image-url-' +  + self._uid);
+                                            const imgElement = document.getElementById('uploaded-image-url-' +  + self._uid);
 
-                                        try {
-                                            const result = await net.classify(imgElement);
+                                            try {
+                                                const result = await net.classify(imgElement);
 
-                                            result.forEach(function(value) {
-                                                queryString = value.className.split(',');
+                                                result.forEach(function(value) {
+                                                    queryString = value.className.split(',');
 
-                                                if (queryString.length > 1) {
-                                                    analysedResult = analysedResult.concat(queryString)
-                                                } else {
-                                                    analysedResult.push(queryString[0])
-                                                }
-                                            });
-                                        } catch (error) {
+                                                    if (queryString.length > 1) {
+                                                        analysedResult = analysedResult.concat(queryString)
+                                                    } else {
+                                                        analysedResult.push(queryString[0])
+                                                    }
+                                                });
+                                            } catch (error) {
+                                                self.$root.hideLoader();
+
+                                                window.flashMessages = [
+                                                    {
+                                                        'type': 'alert-error',
+                                                        'message': "{{ __('shop::app.common.error') }}"
+                                                    }
+                                                ];
+
+                                                self.$root.addFlashMessages();
+                                            };
+
+                                            localStorage.searched_image_url = self.uploaded_image_url;
+
+                                            queryString = localStorage.searched_terms = analysedResult.join('_');
+
                                             self.$root.hideLoader();
 
-                                            window.flashMessages = [
-                                                {
-                                                    'type': 'alert-error',
-                                                    'message': "{{ __('shop::app.common.error') }}"
-                                                }
-                                            ];
+                                            window.location.href = "{{ route('shop.search.index') }}" + '?term=' + queryString + '&image-search=1';
+                                        }
 
-                                            self.$root.addFlashMessages();
-                                        };
-
-                                        localStorage.searched_image_url = self.uploaded_image_url;
-
-                                        queryString = localStorage.searched_terms = analysedResult.join('_');
-
+                                        app();
+                                    })
+                                    .catch(function(error) {
                                         self.$root.hideLoader();
 
-                                        window.location.href = "{{ route('shop.search.index') }}" + '?term=' + queryString + '&image-search=1';
-                                    }
+                                        window.flashMessages = [
+                                            {
+                                                'type': 'alert-error',
+                                                'message': "{{ __('shop::app.common.error') }}"
+                                            }
+                                        ];
 
-                                    app();
-                                })
-                                .catch(function(error) {
-                                    self.$root.hideLoader();
+                                        self.$root.addFlashMessages();
+                                    });
+                            } else {
 
-                                    window.flashMessages = [
-                                        {
-                                            'type': 'alert-error',
-                                            'message': "{{ __('shop::app.common.error') }}"
-                                        }
-                                    ];
+                                self.$root.hideLoader();
 
-                                    self.$root.addFlashMessages();
-                                });
+                                        window.flashMessages = [
+                                            {
+                                                'type': 'alert-error',
+                                                'message': "{{ __('shop::app.common.image-upload-limit') }}"
+                                            }
+                                        ];
+
+                                self.$root.addFlashMessages();
+                                
+                            }        
                         } else {
                             imageInput.value = '';
 
