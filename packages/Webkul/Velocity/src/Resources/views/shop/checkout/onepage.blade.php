@@ -5,15 +5,7 @@
 @stop
 
 @section('content-wrapper')
-    @php
-        $minimumOrderAmount = (int) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
-    @endphp
-
-    <checkout
-        cart-details="{{ $cart }}"
-        minimum-order-amount="{{ $minimumOrderAmount }}"
-        minimum-order-message="{{ __('shop::app.checkout.cart.minimum-order-message', ['amount' => $minimumOrderAmount]) }}">
-    </checkout>
+    <checkout></checkout>
 @endsection
 
 @push('scripts')
@@ -120,14 +112,7 @@
 
             Vue.component('checkout', {
                 template: '#checkout-template',
-
                 inject: ['$validator'],
-
-                props: [
-                    'cartDetails',
-                    'minimumOrderAmount',
-                    'minimumOrderMessage'
-                ],
 
                 data: function () {
                     return {
@@ -173,10 +158,6 @@
 
                 created: function () {
                     this.getOrderSummary();
-
-                    if (! (this.getCartDetails().base_sub_total > this.minimumOrderAmount)) {
-                        window.showAlert(`alert-warning`, 'Warning', this.minimumOrderMessage);
-                    }
 
                     if (! customerAddress) {
                         this.new_shipping_address = true;
@@ -563,10 +544,6 @@
                         setTimeout(() => {
                             this.validateForm('address-form');
                         }, 0);
-                    },
-
-                    getCartDetails: function () {
-                        return JSON.parse(this.cartDetails);
                     }
                 }
             });
