@@ -17,6 +17,8 @@ Vue.use(VeeValidate, {
 });
 Vue.prototype.$http = axios
 
+Vue.component('required-if', require('./components/validators/required-if').default);
+
 window.eventBus = new Vue();
 
 $(document).ready(function () {
