@@ -279,6 +279,7 @@
                     @endif
 
                 {!! view_render_event('bagisto.shop.checkout.cart.summary.after', ['cart' => $cart]) !!}
+
             </section>
         </div>
     </script>
@@ -287,7 +288,6 @@
         (() => {
             Vue.component('cart-component', {
                 template: '#cart-template',
-
                 data: function () {
                     return {
                         isMobileDevice: this.isMobile(),
