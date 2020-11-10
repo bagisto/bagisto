@@ -29,8 +29,8 @@ Vue.prototype.$http = axios
 
 window.eventBus = new Vue();
 
-Vue.component("image-slider", ImageSlider);
-Vue.component("vue-slider", VueSlider);
+Vue.component('image-slider', ImageSlider);
+Vue.component('vue-slider', VueSlider);
 Vue.component('proceed-to-checkout', require('./components/checkout/proceed-to-checkout').default);
 
 Vue.filter('currency', function (value, argument) {

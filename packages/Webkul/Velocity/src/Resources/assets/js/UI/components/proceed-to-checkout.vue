@@ -17,8 +17,7 @@ export default {
         checkMinimumOrder: function (e) {
             if (! (this.getCartDetails().base_sub_total > this.minimumOrderAmount)) {
                 e.preventDefault();
-                window.flashMessages = [{'type': 'alert-warning', 'message': this.minimumOrderMessage}];
-                this.$root.addFlashMessages();
+                window.showAlert(`alert-warning`, 'Warning', this.minimumOrderMessage);
             }
         },
 

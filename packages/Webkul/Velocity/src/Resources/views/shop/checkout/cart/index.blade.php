@@ -8,15 +8,7 @@
 @stop
 
 @section('content-wrapper')
-    @php
-        $minimumOrderAmount = (int) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
-    @endphp
-
-    <cart-component
-        cart-details="{{ $cart }}"
-        minimum-order-amount="{{ $minimumOrderAmount }}"
-        minimum-order-message="{{ __('shop::app.checkout.cart.minimum-order-message', ['amount' => $minimumOrderAmount]) }}"
-    ></cart-component>
+    <cart-component></cart-component>
 @endsection
 
 @push('css')
@@ -296,23 +288,6 @@
             Vue.component('cart-component', {
                 template: '#cart-template',
 
-                props: [
-                    'cartDetails',
-                    'minimumOrderAmount',
-                    'minimumOrderMessage'
-                ],
-
-                mounted: function () {
-                    let cartDetails = this.getCartDetails();
-
-                    $('#proceed-to-checkout').on('click', (e) => {
-                        if (! (cartDetails.base_sub_total > this.minimumOrderAmount)) {
-                            e.preventDefault();
-                            window.showAlert(`alert-warning`, 'Warning', this.minimumOrderMessage);
-                        }
-                    });
-                },
-
                 data: function () {
                     return {
                         isMobileDevice: this.isMobile(),
@@ -323,10 +298,6 @@
                     removeLink(message) {
                         if (! confirm(message))
                             event.preventDefault();
-                    },
-
-                    getCartDetails: function () {
-                        return JSON.parse(this.cartDetails);
                     }
                 }
             })

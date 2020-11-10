@@ -7,10 +7,6 @@
 @section('content-wrapper')
     @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
-    @php
-        $minimumOrderAmount = (int) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
-    @endphp
-
     <section class="cart">
         @if ($cart)
             <div class="title">
@@ -134,13 +130,17 @@
                                 @endif
 
                                 @if (! cart()->hasError())
+                                    @php
+                                        $minimumOrderAmount = (int) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
+                                    @endphp
+
                                     <proceed-to-checkout
                                         href="{{ route('shop.checkout.onepage.index') }}"
+                                        add-class="btn btn-lg btn-primary"
                                         text="{{ __('shop::app.checkout.cart.proceed-to-checkout') }}"
                                         cart-details="{{ $cart }}"
                                         minimum-order-amount="{{ $minimumOrderAmount }}"
-                                        minimum-order-message="{{ __('shop::app.checkout.cart.minimum-order-message', ['amount' => $minimumOrderAmount]) }}"
-                                    >
+                                        minimum-order-message="{{ __('shop::app.checkout.cart.minimum-order-message', ['amount' => $minimumOrderAmount]) }}">
                                     </proceed-to-checkout>
                                 @endif
                             </div>
