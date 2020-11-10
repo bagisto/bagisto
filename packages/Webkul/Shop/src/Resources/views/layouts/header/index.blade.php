@@ -334,7 +334,7 @@
                                     });
                             } else {
 
-                                self.$root.hideLoader();
+                                imageInput.value = '';
 
                                         window.flashMessages = [
                                             {

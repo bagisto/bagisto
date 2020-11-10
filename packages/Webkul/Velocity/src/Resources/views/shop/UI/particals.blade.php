@@ -451,7 +451,8 @@
                                         );
                                     });                                    
                                 } else {
-
+                                        imageInput.value = '';
+                                        
                                         window.showAlert(
                                             `alert-danger`,
                                             this.__('shop.general.alert.error'),
