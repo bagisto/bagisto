@@ -53,7 +53,7 @@
                 <a class="col text-left fs16 link-color remove-decoration" :href="viewCart">{{ cartText }}</a>
 
                 <div class="col text-right no-padding">
-                    <a :href="checkoutUrl">
+                    <a :href="checkoutUrl" @click="checkMinimumOrder($event)">
                         <button
                             type="button"
                             class="theme-btn fs16 fw6">
@@ -74,6 +74,8 @@
             'checkoutUrl',
             'checkoutText',
             'subtotalText',
+            'minimumOrderAmount',
+            'minimumOrderMessage'
         ],
 
         data: function () {
@@ -117,6 +119,13 @@
                 .catch(exception => {
                     console.log(this.__('error.something_went_wrong'));
                 });
+            },
+
+            checkMinimumOrder: function (e) {
+                if (! (this.cartInformation.raw.base_sub_total > this.minimumOrderAmount)) {
+                    e.preventDefault();
+                    window.showAlert(`alert-warning`, 'Warning', this.minimumOrderMessage);
+                }
             }
         }
     }
