@@ -134,9 +134,14 @@
                                 @endif
 
                                 @if (! cart()->hasError())
-                                    <a href="{{ route('shop.checkout.onepage.index') }}" class="btn btn-lg btn-primary" id="proceed-to-checkout">
-                                        {{ __('shop::app.checkout.cart.proceed-to-checkout') }}
-                                    </a>
+                                    <proceed-to-checkout
+                                        href="{{ route('shop.checkout.onepage.index') }}"
+                                        text="{{ __('shop::app.checkout.cart.proceed-to-checkout') }}"
+                                        cart-details="{{ $cart }}"
+                                        minimum-order-amount="{{ $minimumOrderAmount }}"
+                                        minimum-order-message="{{ __('shop::app.checkout.cart.minimum-order-message', ['amount' => $minimumOrderAmount]) }}"
+                                    >
+                                    </proceed-to-checkout>
                                 @endif
                             </div>
                         </div>
@@ -266,23 +271,5 @@
             document.getElementById('cart-quantity'+index).value = quantity;
             event.preventDefault();
         }
-    </script>
-
-    <script>
-        $(document).ready(() => {
-            /*
-                didn't found any component so added here
-                will improve once get clarity
-            */
-            $('#proceed-to-checkout').on('click', (e) => {
-                let cartDetails = @json($cart);
-                let minimumOrderAmount = '{{ $minimumOrderAmount }}';
-
-                if (! (cartDetails.base_sub_total > minimumOrderAmount)) {
-                    e.preventDefault();
-                    window.alert('{{ __('shop::app.checkout.cart.minimum-order-message', ['amount' => $minimumOrderAmount]) }}');
-                }
-            });
-        });
     </script>
 @endpush
