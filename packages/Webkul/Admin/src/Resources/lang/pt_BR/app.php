@@ -187,6 +187,7 @@ return [
         'shipment-date' => 'Data de Envio',
         'shipment-to' => 'Enviado para',
         'sku' => 'SKU',
+        'product-number' => 'Número de produto',
         'price' => 'Preço',
         'qty' => 'Quantidade',
         'permission-type' => 'Tipo de Permissão',
