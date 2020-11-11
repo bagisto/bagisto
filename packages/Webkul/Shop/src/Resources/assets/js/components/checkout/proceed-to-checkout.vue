@@ -15,7 +15,10 @@ export default {
 
     methods: {
         checkMinimumOrder: function (e) {
-            if (! (this.getCartDetails().base_sub_total > this.minimumOrderAmount)) {
+            let base_sub_total = parseFloat(this.getCartDetails().base_sub_total);
+            let minimumOrderAmount = parseFloat(this.minimumOrderAmount);
+
+            if (! (base_sub_total > minimumOrderAmount)) {
                 e.preventDefault();
                 window.flashMessages = [{'type': 'alert-warning', 'message': this.minimumOrderMessage}];
                 this.$root.addFlashMessages();

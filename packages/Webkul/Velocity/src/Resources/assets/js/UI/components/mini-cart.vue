@@ -122,7 +122,10 @@
             },
 
             checkMinimumOrder: function (e) {
-                if (! (this.cartInformation.raw.base_sub_total > this.minimumOrderAmount)) {
+                let base_sub_total = parseFloat(this.cartInformation.raw.base_sub_total);
+                let minimumOrderAmount = parseFloat(this.minimumOrderAmount);
+
+                if (! (base_sub_total > minimumOrderAmount)) {
                     e.preventDefault();
                     window.showAlert(`alert-warning`, 'Warning', this.minimumOrderMessage);
                 }
