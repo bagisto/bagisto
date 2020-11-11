@@ -188,6 +188,7 @@ return [
         'shipment-date' => 'Verzenddatum',
         'shipment-to' => 'Shipping To',
         'sku' => 'SKU',
+        'product-number' => 'Productnummer',
         'price' => 'Prijs',
         'qty' => 'Aantal',
         'permission-type' => 'Permission Type',

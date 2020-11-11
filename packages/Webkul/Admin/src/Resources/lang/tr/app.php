@@ -185,6 +185,7 @@ return [
         'shipment-date' => 'Kargo Tarihi',
         'shipment-to' => 'Kargo Bilgileri',
         'sku' => 'Barkod',
+        'product-number' => 'Ürün numarası',
         'price' => 'Fiyat',
         'qty' => 'Miktar',
         'permission-type' => 'İzin Tipi',
