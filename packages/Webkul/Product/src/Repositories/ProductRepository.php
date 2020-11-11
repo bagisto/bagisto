@@ -684,7 +684,7 @@ class ProductRepository extends Repository
                     $randomSuffix
                 );
                 $newValue->text_value = $copiedProductNumber;
-                $newProductFlat->name = $copiedProductNumber;
+                $newProductFlat->product_number = $copiedProductNumber;
             }
 
             // force the copied product to be inactive so the admin can adjust it before release
