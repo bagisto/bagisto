@@ -17,6 +17,7 @@ return [
 
     'common' => [
         'error' => 'Qualcosa è andato storto, per favore prova ancora più tardi.',
+        'image-upload-limit' => 'La dimensione massima di caricamento dell\'immagine è 2 MB', 
         'no-result-found' => 'Non abbiamo trovato risultati.'
     ],
 

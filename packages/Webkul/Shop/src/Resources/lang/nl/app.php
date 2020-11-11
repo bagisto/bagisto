@@ -17,6 +17,7 @@ return [
 
     'common' => [
         'error' => 'Something went wrong, please try again later.',
+        'image-upload-limit' => 'De maximale uploadgrootte van de afbeelding is 2 MB', 
         'no-result-found' => 'We could not find any records.'
     ],
 

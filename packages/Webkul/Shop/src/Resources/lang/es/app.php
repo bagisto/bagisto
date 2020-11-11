@@ -15,7 +15,8 @@ return [
     ],
 
     'common' => [
-        'error' => 'Algo ha ido mal, por favor prueba más tarde.'
+        'error' => 'Algo ha ido mal, por favor prueba más tarde.',
+        'image-upload-limit' => 'El tamaño máximo de carga de la imagen es de 2 MB'
     ],
 
     'home' => [

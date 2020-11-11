@@ -17,6 +17,7 @@ return [
 
     'common' => [
         'error' => 'Bir şeyler ters gitti, lütfen tekrar deneyin.',
+        'image-upload-limit' => 'Maksimum resim yükleme boyutu 2 MB',
         'no-result-found' => 'Kayıt bulunamadı.'
     ],
 
