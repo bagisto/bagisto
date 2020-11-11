@@ -187,6 +187,7 @@ return [
         'shipment-date' => 'تاریخ ارسال',
         'shipment-to' => 'حمل و نقل به',
         'sku' => 'واحد نگهداری موجودی',
+        'product-number' => 'شماره محصول',
         'price' => 'قیمت',
         'qty' => 'مقدار',
         'permission-type' => 'نوع مجوز',

@@ -189,6 +189,7 @@ return [
         'shipment-date' => 'Shipment Date',
         'shipment-to' => 'Shipping To',
         'sku' => 'SKU',
+        'product-number' => 'Product Number',
         'price' => 'Price',
         'qty' => 'Quantity',
         'permission-type' => 'Permission Type',

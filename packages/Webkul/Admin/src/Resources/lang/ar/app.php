@@ -189,6 +189,7 @@ return [
         'shipment-date' => 'تاريخ الشحن',
         'shipment-to' => 'الشحن إلى',
         'sku' => 'SKU',
+        'product-number' => 'رقم المنتج',
         'price' => 'السعر',
         'qty' => 'كمية',
         'permission-type' => 'نوع الإذن',
