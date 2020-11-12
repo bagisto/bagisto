@@ -1323,6 +1323,8 @@ return [
             'order-number-length' => 'Order Number Length',
             'order-number-suffix' => 'Order Number Suffix',
             'order-number-generator-class' => 'Order Number Generator',
+            'minimum-order' => 'Minimum Order Settings',
+            'minimum-order-amount' => 'Minimum Order Amount',
             'default' => 'Default',
             'sandbox' => 'Sandbox',
             'all-channels' => 'All Channels',
