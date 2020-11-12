@@ -9,6 +9,7 @@ return [
             'mass-update-status' => 'Czy naprawdę chcesz zaktualizować status tych wybranych :resource?',
             'delete' => 'Czy naprawdę chcesz wykonać tę akcję?',
             'edit' => 'Czy naprawdę chcesz edytować :resource?',
+            'delete-category-product' => 'The selected categories contains products. Performing this action will remove the related products. Do you really want to perform this action?'
         ],
 
         'zero-index' => 'Kolumny indeksu mogą mieć wartości większe niż tylko zero',

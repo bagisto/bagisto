@@ -1,7 +1,7 @@
 @push('scripts')
     <script type="text/x-template" id="content-header-template">
         <header class="row velocity-divide-page vc-header header-shadow active">
-            <div class="vc-small-screen container" v-if="isMobile()">
+            <div class="vc-small-screen container">
                 <div class="row">
                     <div class="col-6">
                         <div v-if="hamburger" class="nav-container scrollable">
@@ -323,7 +323,8 @@
                     </div>
 
                     @php
-                        $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false
+                        $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false;
+                        $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
                     @endphp
 
                     <div class="right-vc-header col-6">
@@ -346,12 +347,14 @@
                             </a>
                         @endif
 
-                        <a class="wishlist-btn unset" :href="`{{ route('customer.wishlist.index') }}`">
-                            <div class="badge-container" v-if="wishlistCount > 0">
-                                <span class="badge" v-text="wishlistCount"></span>
-                            </div>
-                            <i class="material-icons">favorite_border</i>
-                        </a>
+                        @if ($showWishlist)
+                            <a class="wishlist-btn unset" :href="`{{ route('customer.wishlist.index') }}`">
+                                <div class="badge-container" v-if="wishlistCount > 0">
+                                    <span class="badge" v-text="wishlistCount"></span>
+                                </div>
+                                <i class="material-icons">favorite_border</i>
+                            </a>
+                        @endif
 
                         <a class="unset cursor-pointer" @click="openSearchBar">
                             <i class="material-icons">search</i>
@@ -370,7 +373,7 @@
             </div>
 
             <div
-                v-else
+               id="main-category"
                 @mouseout="toggleSidebar('0', $event, 'mouseout')"
                 @mouseover="toggleSidebar('0', $event, 'mouseover')"
                 :class="`main-category fs16 unselectable fw6 ${($root.sharedRootCategories.length > 0) ? 'cursor-pointer' : 'cursor-not-allowed'} left`">

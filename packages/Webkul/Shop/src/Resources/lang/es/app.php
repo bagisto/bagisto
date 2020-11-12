@@ -15,7 +15,8 @@ return [
     ],
 
     'common' => [
-        'error' => 'Algo ha ido mal, por favor prueba más tarde.'
+        'error' => 'Algo ha ido mal, por favor prueba más tarde.',
+        'image-upload-limit' => 'El tamaño máximo de carga de la imagen es de 2 MB'
     ],
 
     'home' => [
@@ -411,6 +412,7 @@ return [
         'available-for-order' => 'Disponible para ordenar',
         'settings' => 'Settings',
         'compare_options' => 'Compare Options',
+        'wishlist-options' => 'Wishlist Options'
     ],
 
     // 'reviews' => [
@@ -461,7 +463,8 @@ return [
             'partial-cart-update' => 'Solo algunos de los productos se han actualizado',
             'event' => [
                 'expired' => 'This event has been expired.'
-            ]
+            ],
+            'minimum-order-message' => 'Your order should be greater than :amount'
         ],
 
         'onepage' => [

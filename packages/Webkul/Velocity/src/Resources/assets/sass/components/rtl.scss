@@ -207,6 +207,14 @@ body {
                     right: 20px;
                 }
             }
+
+            #account {
+                + .account-modal {
+                    .modal-content {
+                        float: left;
+                    }
+                }
+            }
         }
 
         #cart-modal-content {
@@ -232,6 +240,14 @@ body {
             li {
                 a {
                     padding: 7px 15px 5px 15px;
+                }
+
+                ul.nested {
+                    li {
+                        a {
+                            padding-right: 25px;
+                        }
+                    }
                 }
             }
         }
@@ -344,6 +360,10 @@ body {
             .wishlist-icon {
                 padding-right: 10px;
             }
+        }
+
+        .zoomWindow {
+            right: 100% !important;
         }
 
         .modal-footer>:not(:last-child) {

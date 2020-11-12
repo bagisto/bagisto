@@ -99,6 +99,14 @@ class CategoryDataGrid extends DataGrid
             'route'        => 'admin.catalog.categories.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
             'icon'         => 'icon trash-icon',
+            'function'     => 'deleteFunction($event, "delete")'
+        ]);
+
+        $this->addMassAction([
+            'type'   => 'delete',
+            'label'  => trans('admin::app.datagrid.delete'),
+            'action' => route('admin.catalog.categories.massdelete'),
+            'method' => 'DELETE',
         ]);
     }
 }

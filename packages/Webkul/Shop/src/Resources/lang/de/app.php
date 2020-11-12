@@ -17,6 +17,7 @@ return [
 
     'common' => [
         'error' => 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.',
+        'image-upload-limit' => 'Die maximale Upload-Größe des Bildes beträgt 2 MB',
         'no-result-found' => 'Wir konnten keine Aufzeichnungen finden.'
     ],
 
@@ -438,6 +439,7 @@ return [
         'available' => 'Verfügbar',
         'settings' => 'Settings',
         'compare_options' => 'Compare Options',
+        'wishlist-options' => 'Wishlist Options'
     ],
 
     // 'reviews' => [
@@ -489,7 +491,8 @@ return [
             'cart-subtotal' => 'Warenkorb Zwischensumme',
             'cart-remove-action' => 'Wollen Sie dies wirklich tun?',
             'partial-cart-update' => 'Nur einige der Produkte wurden aktualisiert',
-            'link-missing' => ''
+            'link-missing' => '',
+            'minimum-order-message' => 'Your order should be greater than :amount'
         ],
 
         'onepage' => [

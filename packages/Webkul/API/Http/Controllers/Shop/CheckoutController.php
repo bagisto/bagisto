@@ -2,20 +2,19 @@
 
 namespace Webkul\API\Http\Controllers\Shop;
 
-use Illuminate\Support\Facades\Event;
-use Webkul\Checkout\Repositories\CartRepository;
-use Webkul\Checkout\Repositories\CartItemRepository;
-use Webkul\Shipping\Facades\Shipping;
-use Webkul\Payment\Facades\Payment;
-use Webkul\API\Http\Resources\Checkout\Cart as CartResource;
-use Webkul\API\Http\Resources\Checkout\CartShippingRate as CartShippingRateResource;
-use Webkul\API\Http\Resources\Sales\Order as OrderResource;
-use Webkul\Checkout\Http\Requests\CustomerAddressForm;
-use Webkul\Sales\Repositories\OrderRepository;
-use Illuminate\Support\Str;
 use Cart;
 use Exception;
+use Illuminate\Support\Str;
+use Webkul\Payment\Facades\Payment;
+use Webkul\Shipping\Facades\Shipping;
+use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Shop\Http\Controllers\OnepageController;
+use Webkul\Checkout\Repositories\CartItemRepository;
+use Webkul\Checkout\Http\Requests\CustomerAddressForm;
+use Webkul\API\Http\Resources\Sales\Order as OrderResource;
+use Webkul\API\Http\Resources\Checkout\Cart as CartResource;
+use Webkul\API\Http\Resources\Checkout\CartShippingRate as CartShippingRateResource;
 
 class CheckoutController extends Controller
 {
@@ -158,6 +157,30 @@ class CheckoutController extends Controller
         return response()->json([
             'data' => [
                 'cart' => new CartResource(Cart::getCart()),
+            ]
+        ]);
+    }
+
+    /**
+     * Check for minimum order.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function checkMinimumOrder()
+    {
+        $cart = Cart::getCart();
+
+        $cartBaseSubTotal = (float) $cart->base_sub_total;
+
+        $minimumOrderAmount = (float) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
+
+        $status = $cartBaseSubTotal > $minimumOrderAmount;
+
+        return response()->json([
+            'status' => ! $status ? false : true,
+            'message' => ! $status ? trans('shop::app.checkout.cart.minimum-order-message', ['amount' => $minimumOrderAmount]) : 'Success',
+            'data' => [
+                'cart'   => new CartResource($cart),
             ]
         ]);
     }
