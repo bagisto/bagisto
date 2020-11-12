@@ -2,21 +2,19 @@
 
 namespace Webkul\API\Http\Controllers\Shop;
 
-use Illuminate\Support\Facades\Event;
-use Webkul\Checkout\Repositories\CartRepository;
-use Webkul\Checkout\Repositories\CartItemRepository;
-use Webkul\Shipping\Facades\Shipping;
-use Webkul\Payment\Facades\Payment;
-use Webkul\API\Http\Resources\Checkout\Cart as CartResource;
-use Webkul\API\Http\Resources\Checkout\CartShippingRate as CartShippingRateResource;
-use Webkul\API\Http\Resources\Sales\Order as OrderResource;
-use Webkul\Checkout\Http\Requests\CustomerAddressForm;
-use Webkul\Sales\Repositories\OrderRepository;
-use Illuminate\Support\Str;
 use Cart;
 use Exception;
-use phpDocumentor\Reflection\Types\Float_;
+use Illuminate\Support\Str;
+use Webkul\Payment\Facades\Payment;
+use Webkul\Shipping\Facades\Shipping;
+use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Shop\Http\Controllers\OnepageController;
+use Webkul\Checkout\Repositories\CartItemRepository;
+use Webkul\Checkout\Http\Requests\CustomerAddressForm;
+use Webkul\API\Http\Resources\Sales\Order as OrderResource;
+use Webkul\API\Http\Resources\Checkout\Cart as CartResource;
+use Webkul\API\Http\Resources\Checkout\CartShippingRate as CartShippingRateResource;
 
 class CheckoutController extends Controller
 {
