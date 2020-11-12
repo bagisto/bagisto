@@ -1306,6 +1306,8 @@ return [
             'order-number-prefix' => 'Prefijo para Pedido #',
             'order-number-length' => 'Largo para Pedido #',
             'order-number-suffix' => 'Sufijo para Pedido #',
+            'minimum-order' => 'Minimum Order Settings',
+            'minimum-order-amount' => 'Minimum Order Amount',
             'default' => 'Predeterminado',
             'sandbox' => 'Sandbox',
             'all-channels' => 'Todos',

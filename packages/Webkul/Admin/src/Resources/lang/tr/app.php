@@ -1302,6 +1302,8 @@ return [
             'order-number-length' => 'Numara Uzunluğu',
             'order-number-suffix' => 'Numara Son Eki',
             'order-number-generator-class' => 'Sipariş Numarası Üreticisi',
+            'minimum-order' => 'Minimum Order Settings',
+            'minimum-order-amount' => 'Minimum Order Amount',
             'default' => 'Varsayılan',
             'sandbox' => 'Havuz',
             'all-channels' => 'Tümü',

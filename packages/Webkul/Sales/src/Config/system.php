@@ -5,7 +5,7 @@ return [
         'key'  => 'sales.orderSettings',
         'name' => 'admin::app.admin.system.order-settings',
         'sort' => 3,
-    ],[
+    ], [
         'key'    => 'sales.orderSettings.order_number',
         'name'   => 'admin::app.admin.system.orderNumber',
         'sort'   => 0,
@@ -44,9 +44,23 @@ return [
             ],
         ]
     ], [
+        'key'    => 'sales.orderSettings.minimum-order',
+        'name'   => 'admin::app.admin.system.minimum-order',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'minimum_order_amount',
+                'title'         => 'admin::app.admin.system.minimum-order-amount',
+                'type'          => 'text',
+                'validation'    => 'numeric',
+                'channel_based' => true,
+                'locale_based'  => true,
+            ],
+        ]
+    ], [
         'key'    => 'sales.orderSettings.invoice_slip_design',
         'name'   => 'admin::app.admin.system.invoice-slip-design',
-        'sort'   => 1,
+        'sort'   => 2,
         'fields' => [
             [
                 'name'          => 'logo',
