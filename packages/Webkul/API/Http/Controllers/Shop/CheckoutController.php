@@ -15,6 +15,7 @@ use Webkul\Sales\Repositories\OrderRepository;
 use Illuminate\Support\Str;
 use Cart;
 use Exception;
+use phpDocumentor\Reflection\Types\Float_;
 use Webkul\Shop\Http\Controllers\OnepageController;
 
 class CheckoutController extends Controller
@@ -158,6 +159,30 @@ class CheckoutController extends Controller
         return response()->json([
             'data' => [
                 'cart' => new CartResource(Cart::getCart()),
+            ]
+        ]);
+    }
+
+    /**
+     * Check for minimum order.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function checkMinimumOrder()
+    {
+        $cart = Cart::getCart();
+
+        $cartBaseSubTotal = (float) $cart->base_sub_total;
+
+        $minimumOrderAmount = (float) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
+
+        $status = $cartBaseSubTotal > $minimumOrderAmount;
+
+        return response()->json([
+            'status' => ! $status ? false : true,
+            'message' => ! $status ? trans('shop::app.checkout.cart.minimum-order-message', ['amount' => $minimumOrderAmount]) : 'Success',
+            'data' => [
+                'cart'   => new CartResource($cart),
             ]
         ]);
     }

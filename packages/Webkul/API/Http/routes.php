@@ -270,6 +270,8 @@ Route::group(['prefix' => 'api'], function ($router) {
 
             Route::post('save-payment', 'CheckoutController@savePayment');
 
+            Route::post('check-minimum-order', 'CheckoutController@checkMinimumOrder');
+
             Route::post('save-order', 'CheckoutController@saveOrder');
         });
     });
