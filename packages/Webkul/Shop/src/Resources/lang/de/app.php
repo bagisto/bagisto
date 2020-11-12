@@ -491,7 +491,8 @@ return [
             'cart-subtotal' => 'Warenkorb Zwischensumme',
             'cart-remove-action' => 'Wollen Sie dies wirklich tun?',
             'partial-cart-update' => 'Nur einige der Produkte wurden aktualisiert',
-            'link-missing' => ''
+            'link-missing' => '',
+            'minimum-order-message' => 'Your order should be greater than :amount'
         ],
 
         'onepage' => [

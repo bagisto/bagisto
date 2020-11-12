@@ -1313,6 +1313,8 @@ return [
             'order-number-length' => 'طول شماره سفارش',
             'order-number-suffix' => 'تعداد کافی شماره سفارش',
             'order-number-generator-class' => 'تولید کننده شماره سفارش',
+            'minimum-order' => 'Minimum Order Settings',
+            'minimum-order-amount' => 'Minimum Order Amount',
             'default' => 'پیش فرض',
             'sandbox' => 'Sandbox',
             'all-channels' => 'همه',

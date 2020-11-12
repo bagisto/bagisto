@@ -228,6 +228,12 @@ class OnepageController extends Controller
     {
         $cart = Cart::getCart();
 
+        $minimumOrderAmount = (int) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
+
+        if (! ($cart->base_sub_total > $minimumOrderAmount)) {
+            throw new \Exception(trans('shop::app.checkout.cart.minimum-order-message', ['amount' => $minimumOrderAmount]));
+        }
+
         if ($cart->haveStockableItems() && ! $cart->shipping_address) {
             throw new \Exception(trans('Please check shipping address.'));
         }
