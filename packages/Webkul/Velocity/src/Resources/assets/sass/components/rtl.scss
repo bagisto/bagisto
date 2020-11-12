@@ -362,6 +362,10 @@ body {
             }
         }
 
+        .zoomWindow {
+            right: 100% !important;
+        }
+
         .modal-footer>:not(:last-child) {
             margin-left: .25rem;
         }
