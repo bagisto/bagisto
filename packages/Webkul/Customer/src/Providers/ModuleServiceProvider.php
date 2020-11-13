@@ -2,9 +2,9 @@
 
 namespace Webkul\Customer\Providers;
 
-use Konekt\Concord\BaseModuleServiceProvider;
+use Webkul\Core\Providers\CoreModuleServiceProvider;
 
-class ModuleServiceProvider extends BaseModuleServiceProvider
+class ModuleServiceProvider extends CoreModuleServiceProvider
 {
     protected $models = [
         \Webkul\Customer\Models\Customer::class,
@@ -12,25 +12,4 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
         \Webkul\Customer\Models\CustomerGroup::class,
         \Webkul\Customer\Models\Wishlist::class,
     ];
-
-    public function boot()
-    {
-        if ($this->areMigrationsEnabled()) {
-            $this->registerMigrations();
-        }
-
-        if ($this->areModelsEnabled()) {
-            $this->registerModels();
-            $this->registerEnums();
-            $this->registerRequestTypes();
-        }
-
-        if ($this->areViewsEnabled()) {
-            $this->registerViews();
-        }
-
-        if ($routes = $this->config('routes', true)) {
-            $this->registerRoutes($routes);
-        }
-    }
 }

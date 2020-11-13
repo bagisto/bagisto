@@ -2,9 +2,9 @@
 
 namespace Webkul\Velocity\Providers;
 
-use Konekt\Concord\BaseModuleServiceProvider;
+use Webkul\Core\Providers\CoreModuleServiceProvider;
 
-class ModuleServiceProvider extends BaseModuleServiceProvider
+class ModuleServiceProvider extends CoreModuleServiceProvider
 {
     protected $models = [
         \Webkul\Velocity\Models\Category::class,
@@ -14,25 +14,4 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
         \Webkul\Velocity\Models\VelocityCustomerCompareProduct::class,
         \Webkul\Velocity\Models\VelocityMetadata::class,
     ];
-
-    public function boot()
-    {
-        if ($this->areMigrationsEnabled()) {
-            $this->registerMigrations();
-        }
-
-        if ($this->areModelsEnabled()) {
-            $this->registerModels();
-            $this->registerEnums();
-            $this->registerRequestTypes();
-        }
-
-        if ($this->areViewsEnabled()) {
-            $this->registerViews();
-        }
-
-        if ($routes = $this->config('routes', true)) {
-            $this->registerRoutes($routes);
-        }
-    }
 }

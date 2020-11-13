@@ -2,9 +2,9 @@
 
 namespace Webkul\CartRule\Providers;
 
-use Konekt\Concord\BaseModuleServiceProvider;
+use Webkul\Core\Providers\CoreModuleServiceProvider;
 
-class ModuleServiceProvider extends BaseModuleServiceProvider
+class ModuleServiceProvider extends CoreModuleServiceProvider
 {
     protected $models = [
         \Webkul\CartRule\Models\CartRule::class,
@@ -13,25 +13,4 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
         \Webkul\CartRule\Models\CartRuleCoupon::class,
         \Webkul\CartRule\Models\CartRuleCouponUsage::class
     ];
-
-    public function boot()
-    {
-        if ($this->areMigrationsEnabled()) {
-            $this->registerMigrations();
-        }
-
-        if ($this->areModelsEnabled()) {
-            $this->registerModels();
-            $this->registerEnums();
-            $this->registerRequestTypes();
-        }
-
-        if ($this->areViewsEnabled()) {
-            $this->registerViews();
-        }
-
-        if ($routes = $this->config('routes', true)) {
-            $this->registerRoutes($routes);
-        }
-    }
 }
