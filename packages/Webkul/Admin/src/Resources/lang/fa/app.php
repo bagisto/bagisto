@@ -187,6 +187,7 @@ return [
         'shipment-date' => 'تاریخ ارسال',
         'shipment-to' => 'حمل و نقل به',
         'sku' => 'واحد نگهداری موجودی',
+        'product-number' => 'شماره محصول',
         'price' => 'قیمت',
         'qty' => 'مقدار',
         'permission-type' => 'نوع مجوز',
@@ -1312,6 +1313,8 @@ return [
             'order-number-length' => 'طول شماره سفارش',
             'order-number-suffix' => 'تعداد کافی شماره سفارش',
             'order-number-generator-class' => 'تولید کننده شماره سفارش',
+            'minimum-order' => 'Minimum Order Settings',
+            'minimum-order-amount' => 'Minimum Order Amount',
             'default' => 'پیش فرض',
             'sandbox' => 'Sandbox',
             'all-channels' => 'همه',
@@ -1356,7 +1359,7 @@ return [
             'custom-scripts' => 'Custom Scripts',
             'custom-css' => 'Custom CSS',
             'custom-javascript' => 'Custom Javascript',
-            'paypal-smart-button' => 'Paypal Smart Button',
+            'paypal-smart-button' => 'PayPal',
             'client-id' => 'Client Id',
             'client-id-info' => 'Use "sb" for testing.'
         ]

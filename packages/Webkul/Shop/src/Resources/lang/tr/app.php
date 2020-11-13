@@ -17,6 +17,7 @@ return [
 
     'common' => [
         'error' => 'Bir şeyler ters gitti, lütfen tekrar deneyin.',
+        'image-upload-limit' => 'Maksimum resim yükleme boyutu 2 MB',
         'no-result-found' => 'Kayıt bulunamadı.'
     ],
 
@@ -493,7 +494,8 @@ return [
             'link-missing' => '',
             'event' => [
                 'expired' => 'Bu eylemin geçerliliği sona erdi.'
-            ]
+            ],
+            'minimum-order-message' => 'Your order should be greater than :amount'
         ],
 
         'onepage' => [
