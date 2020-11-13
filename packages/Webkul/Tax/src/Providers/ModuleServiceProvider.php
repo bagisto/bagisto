@@ -2,9 +2,9 @@
 
 namespace Webkul\Tax\Providers;
 
-use Konekt\Concord\BaseModuleServiceProvider;
+use Webkul\Core\Providers\CoreModuleServiceProvider;
 
-class ModuleServiceProvider extends BaseModuleServiceProvider
+class ModuleServiceProvider extends CoreModuleServiceProvider
 {
     protected $models = [
         \Webkul\Tax\Models\TaxCategory::class,

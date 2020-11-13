@@ -2,9 +2,9 @@
 
 namespace Webkul\SocialLogin\Providers;
 
-use Konekt\Concord\BaseModuleServiceProvider;
+use Webkul\Core\Providers\CoreModuleServiceProvider;
 
-class ModuleServiceProvider extends BaseModuleServiceProvider
+class ModuleServiceProvider extends CoreModuleServiceProvider
 {
     protected $models = [
         \Webkul\SocialLogin\Models\CustomerSocialAccount::class,
