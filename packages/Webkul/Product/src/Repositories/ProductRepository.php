@@ -122,8 +122,8 @@ class ProductRepository extends Repository
 
         if ($categoryId) {
             $qb->where('product_categories.category_id', $categoryId);
-        }    
-        
+        }
+
         return $qb->get();
     }
 
@@ -334,7 +334,7 @@ class ProductRepository extends Repository
      */
     public function getNewProducts()
     {
-        $count = core()->getConfigData('catalog.products.homepage.no_of_new_product_homepage'); 
+        $count = core()->getConfigData('catalog.products.homepage.no_of_new_product_homepage');
 
         $results = app(ProductFlatRepository::class)->scopeQuery(function ($query) {
             $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
@@ -614,7 +614,7 @@ class ProductRepository extends Repository
     {
         $ids = [];
 
-        foreach (['name', 'sku', 'status', 'url_key'] as $code) {
+        foreach (['name', 'sku', 'product_number', 'status', 'url_key'] as $code) {
             $ids[$code] = Attribute::query()->where(['code' => $code])->firstOrFail()->id;
         }
 
@@ -673,6 +673,18 @@ class ProductRepository extends Repository
             if ($oldValue->attribute_id === $attributeIds['sku']) {
                 $newValue->text_value = $copiedProduct->sku;
                 $newProductFlat->sku = $copiedProduct->sku;
+            }
+
+            // change product number
+            if ($oldValue->attribute_id === $attributeIds['product_number']) {
+                $copyProductNumber = trans('admin::app.copy-of-slug');
+                $copiedProductNumber = sprintf('%s%s-%s',
+                    Str::startsWith($originalProduct->product_number, $copyProductNumber) ? '' : $copyProductNumber,
+                    $originalProduct->product_number,
+                    $randomSuffix
+                );
+                $newValue->text_value = $copiedProductNumber;
+                $newProductFlat->product_number = $copiedProductNumber;
             }
 
             // force the copied product to be inactive so the admin can adjust it before release
