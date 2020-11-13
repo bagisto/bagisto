@@ -2,26 +2,44 @@
 
 namespace Tests\Functional\Admin\Catalog;
 
-use FunctionalTester;
 use Faker\Factory;
-use Webkul\Attribute\Models\Attribute;
-use Webkul\Attribute\Models\AttributeFamily;
-use Webkul\Attribute\Models\AttributeOption;
-use Webkul\Core\Helpers\Laravel5Helper;
+use FunctionalTester;
 use Webkul\Core\Models\Locale;
 use Webkul\Product\Models\Product;
+use Webkul\Attribute\Models\Attribute;
+use Webkul\Core\Helpers\Laravel5Helper;
+use Webkul\Attribute\Models\AttributeFamily;
+use Webkul\Attribute\Models\AttributeOption;
 use Webkul\Product\Models\ProductAttributeValue;
 
 class ProductCest
 {
-    /** @var Factory $faker */
+    /**
+     * Factory $faker
+     *
+     * @var Faker\Factory
+     */
     private $faker;
 
-    /** @var Attribute $attributeBrand */
+    /**
+     * Attribute $attributeBrand
+     *
+     * @var Webkul\Attribute\Models\Attribute
+     */
     private $attributeBrand;
-    /** @var AttributeOption $attributeBrandDefaultOption */
+
+    /**
+     * AttributeOption $attributeBrandDefaultOption
+     *
+     * @var Webkul\Attribute\Models\AttributeOption
+     */
     private $attributeBrandDefaultOption;
-    /** @var AttributeOption $attributeBrandOption */
+
+    /**
+     * AttributeOption $attributeBrandOption
+     *
+     * @var Webkul\Attribute\Models\AttributeOption
+     */
     private $attributeBrandOption;
 
     public function _before(FunctionalTester $I): void
@@ -47,12 +65,10 @@ class ProductCest
             ];
         }
 
-        $this->attributeBrandDefaultOption = $I->have(AttributeOption::class,
-            $defaultAttributeOptionAttributes);
+        $this->attributeBrandDefaultOption = $I->have(AttributeOption::class, $defaultAttributeOptionAttributes);
         $this->attributeBrandOption = $I->have(AttributeOption::class, [
             'attribute_id' => $this->attributeBrand->id,
         ]);
-
     }
 
     public function testIndex(FunctionalTester $I): void
@@ -90,9 +106,7 @@ class ProductCest
 
         $I->fillField('sku', $sku);
         $I->click(__('admin::app.catalog.products.save-btn-title'));
-
         $I->seeInSource('Product created successfully.');
-
         $I->seeCurrentRouteIs('admin.catalog.products.edit');
 
         $productTitle = $this->faker->word;
@@ -100,11 +114,9 @@ class ProductCest
 
         $I->fillField('name', $productTitle);
         $I->fillField('url_key', $productUrlKey);
-        $I->selectOption($this->attributeBrand->code,
-            $this->attributeBrandDefaultOption->id);
+        $I->selectOption($this->attributeBrand->code, $this->attributeBrandDefaultOption->id);
         $I->fillField('price', $this->faker->randomFloat(2));
         $I->fillField('weight', $this->faker->randomDigit);
-
         $I->fillField('short_description', $this->faker->paragraph(1, true));
         $I->fillField('description', $this->faker->paragraph(5, true));
 
@@ -119,11 +131,18 @@ class ProductCest
             'attribute_family_id' => $attributeFamily->id,
         ]);
 
+        $productAttribute = $I->grabRecord(ProductAttributeValue::class, [
+            'product_id'    => $product->id,
+            'attribute_id'  => $this->attributeBrand->id,
+            'integer_value' => $this->attributeBrandDefaultOption->id
+        ]);
+
         $I->seeRecord(ProductAttributeValue::class, [
             'product_id'    => $product->id,
             'attribute_id'  => $this->attributeBrand->id,
-            'integer_value' => $this->attributeBrandDefaultOption->id,
-            'text_value'    => null,
+            'integer_value' => $this->attributeBrandDefaultOption->id
         ]);
+
+        $I->assertNull($productAttribute->text_value);
     }
 }
