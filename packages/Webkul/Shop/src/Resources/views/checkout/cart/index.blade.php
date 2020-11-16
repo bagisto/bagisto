@@ -138,8 +138,7 @@
                                         href="{{ route('shop.checkout.onepage.index') }}"
                                         add-class="btn btn-lg btn-primary"
                                         text="{{ __('shop::app.checkout.cart.proceed-to-checkout') }}"
-                                        cart-details="{{ $cart }}"
-                                        minimum-order-amount="{{ $minimumOrderAmount }}"
+                                        is-minimum-order-completed="{{ $cart->checkMinimumOrder() }}"
                                         minimum-order-message="{{ __('shop::app.checkout.cart.minimum-order-message', ['amount' => $minimumOrderAmount]) }}">
                                     </proceed-to-checkout>
                                 @endif

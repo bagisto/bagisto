@@ -9,23 +9,16 @@ export default {
         'addClass',
         'text',
         'cartDetails',
-        'minimumOrderAmount',
+        'isMinimumOrderCompleted',
         'minimumOrderMessage'
     ],
 
     methods: {
         checkMinimumOrder: function (e) {
-            let base_sub_total = parseFloat(this.getCartDetails().base_sub_total);
-            let minimumOrderAmount = parseFloat(this.minimumOrderAmount);
-
-            if (! (base_sub_total >= minimumOrderAmount)) {
+            if (! this.isMinimumOrderCompleted) {
                 e.preventDefault();
                 window.showAlert(`alert-warning`, 'Warning', this.minimumOrderMessage);
             }
-        },
-
-        getCartDetails: function () {
-            return JSON.parse(this.cartDetails);
         }
     }
 }

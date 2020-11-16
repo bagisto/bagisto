@@ -74,7 +74,7 @@
             'checkoutUrl',
             'checkoutText',
             'subtotalText',
-            'minimumOrderAmount',
+            'isMinimumOrderCompleted',
             'minimumOrderMessage'
         ],
 
@@ -122,10 +122,7 @@
             },
 
             checkMinimumOrder: function (e) {
-                let base_sub_total = parseFloat(this.cartInformation.raw.base_sub_total);
-                let minimumOrderAmount = parseFloat(this.minimumOrderAmount);
-
-                if (! (base_sub_total >= minimumOrderAmount)) {
+                if (! this.isMinimumOrderCompleted) {
                     e.preventDefault();
                     window.showAlert(`alert-warning`, 'Warning', this.minimumOrderMessage);
                 }

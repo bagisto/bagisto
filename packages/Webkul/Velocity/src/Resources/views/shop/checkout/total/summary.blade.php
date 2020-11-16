@@ -53,8 +53,7 @@
             href="{{ route('shop.checkout.onepage.index') }}"
             add-class="theme-btn text-uppercase col-12 remove-decoration fw6 text-center"
             text="{{ __('velocity::app.checkout.proceed') }}"
-            cart-details="{{ $cart }}"
-            minimum-order-amount="{{ $minimumOrderAmount }}"
+            is-minimum-order-completed="{{ $cart->checkMinimumOrder() }}"
             minimum-order-message="{{ __('shop::app.checkout.cart.minimum-order-message', ['amount' => $minimumOrderAmount]) }}">
         </proceed-to-checkout>
     </div>
