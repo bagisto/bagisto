@@ -17,7 +17,7 @@ return [
 
     'common' => [
         'error' => 'Something went wrong, please try again later.',
-        'image-upload-limit' => 'De maximale uploadgrootte van de afbeelding is 2 MB', 
+        'image-upload-limit' => 'De maximale uploadgrootte van de afbeelding is 2 MB',
         'no-result-found' => 'We could not find any records.'
     ],
 
@@ -502,7 +502,7 @@ return [
             'event' => [
                 'expired' => 'This event has been expired.'
             ],
-            'minimum-order-message' => 'Your order should be greater than :amount'
+            'minimum-order-message' => 'Minimum order amount is :amount'
         ],
 
         'onepage' => [
