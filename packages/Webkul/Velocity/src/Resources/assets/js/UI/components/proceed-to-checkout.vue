@@ -18,7 +18,7 @@ export default {
             let base_sub_total = parseFloat(this.getCartDetails().base_sub_total);
             let minimumOrderAmount = parseFloat(this.minimumOrderAmount);
 
-            if (! (base_sub_total > minimumOrderAmount)) {
+            if (! (base_sub_total >= minimumOrderAmount)) {
                 e.preventDefault();
                 window.showAlert(`alert-warning`, 'Warning', this.minimumOrderMessage);
             }

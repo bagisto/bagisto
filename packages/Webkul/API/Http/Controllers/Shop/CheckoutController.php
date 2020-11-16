@@ -174,7 +174,7 @@ class CheckoutController extends Controller
 
         $minimumOrderAmount = (float) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
 
-        $status = $cartBaseSubTotal > $minimumOrderAmount;
+        $status = $cartBaseSubTotal >= $minimumOrderAmount;
 
         return response()->json([
             'status' => ! $status ? false : true,

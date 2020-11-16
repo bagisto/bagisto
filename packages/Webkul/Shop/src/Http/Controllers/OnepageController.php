@@ -230,7 +230,7 @@ class OnepageController extends Controller
 
         $minimumOrderAmount = (int) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
 
-        if (! ($cart->base_sub_total > $minimumOrderAmount)) {
+        if (! ($cart->base_sub_total >= $minimumOrderAmount)) {
             throw new \Exception(trans('shop::app.checkout.cart.minimum-order-message', ['amount' => $minimumOrderAmount]));
         }
 
