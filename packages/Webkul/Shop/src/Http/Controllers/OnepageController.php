@@ -231,7 +231,7 @@ class OnepageController extends Controller
         $minimumOrderAmount = (int) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
 
         if (! $cart->checkMinimumOrder()) {
-            throw new \Exception(trans('shop::app.checkout.cart.minimum-order-message', ['amount' => $minimumOrderAmount]));
+            throw new \Exception(trans('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]));
         }
 
         if ($cart->haveStockableItems() && ! $cart->shipping_address) {

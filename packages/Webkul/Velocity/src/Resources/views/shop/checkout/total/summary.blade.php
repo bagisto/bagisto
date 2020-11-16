@@ -54,7 +54,7 @@
             add-class="theme-btn text-uppercase col-12 remove-decoration fw6 text-center"
             text="{{ __('velocity::app.checkout.proceed') }}"
             is-minimum-order-completed="{{ $cart->checkMinimumOrder() }}"
-            minimum-order-message="{{ __('shop::app.checkout.cart.minimum-order-message', ['amount' => $minimumOrderAmount]) }}">
+            minimum-order-message="{{ __('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]) }}">
         </proceed-to-checkout>
     </div>
 </div>

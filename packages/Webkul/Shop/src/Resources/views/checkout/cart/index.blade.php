@@ -139,7 +139,7 @@
                                         add-class="btn btn-lg btn-primary"
                                         text="{{ __('shop::app.checkout.cart.proceed-to-checkout') }}"
                                         is-minimum-order-completed="{{ $cart->checkMinimumOrder() }}"
-                                        minimum-order-message="{{ __('shop::app.checkout.cart.minimum-order-message', ['amount' => $minimumOrderAmount]) }}">
+                                        minimum-order-message="{{ __('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]) }}">
                                     </proceed-to-checkout>
                                 @endif
                             </div>

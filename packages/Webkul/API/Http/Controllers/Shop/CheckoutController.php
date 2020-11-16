@@ -174,7 +174,7 @@ class CheckoutController extends Controller
 
         return response()->json([
             'status' => ! $status ? false : true,
-            'message' => ! $status ? trans('shop::app.checkout.cart.minimum-order-message', ['amount' => $minimumOrderAmount]) : 'Success',
+            'message' => ! $status ? trans('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]) : 'Success',
             'data' => [
                 'cart'   => new CartResource($cart),
             ]
