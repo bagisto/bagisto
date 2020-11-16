@@ -17,6 +17,7 @@ return [
 
     'common' => [
         'error' => 'حدث خطأ. الرجاء المحاولة لاحقاً.',
+        'image-upload-limit' => 'أقصى حجم لتحميل الصورة هو 2 ميغا بايت',
         'no-result-found' => 'لا توجد نتائج.'
     ],
 
@@ -496,7 +497,8 @@ return [
             'link-missing' => '',
             'event' => [
                 'expired' => 'This event has been expired.'
-            ]
+            ],
+            'minimum-order-message' => 'Your order should be greater than :amount'
         ],
 
         'onepage' => [

@@ -17,6 +17,7 @@ return [
 
     'common' => [
         'error' => 'مشکلی رخ داده است. لطفا بعدا دوباره امتحان کنید.',
+        'image-upload-limit' => 'حداکثر اندازه بارگذاری تصویر 2 مگابایت است',
         'no-result-found' => 'ما هیچ سابقه ای پیدا نکردیم.'
     ],
 
@@ -495,7 +496,8 @@ return [
             'partial-cart-update' => 'فقط برخی از محصولات (های) به روز شده اند',
             'event' => [
                 'expired' => 'This event has been expired.'
-            ]
+            ],
+            'minimum-order-message' => 'Your order should be greater than :amount'
         ],
 
         'onepage' => [

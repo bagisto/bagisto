@@ -17,8 +17,9 @@ return [
             [
                 'name'          => 'title',
                 'title'         => 'admin::app.admin.system.title',
-                'type'          => 'text',
-                'validation'    => 'required',
+                'type'          => 'depends',
+                'depend'        => 'active:1',
+                'validation'    => 'required_if:active,1',
                 'channel_based' => false,
                 'locale_based'  => true,
             ], [
@@ -69,8 +70,9 @@ return [
             [
                 'name'          => 'title',
                 'title'         => 'admin::app.admin.system.title',
-                'type'          => 'text',
-                'validation'    => 'required',
+                'type'          => 'depends',
+                'depend'        => 'active:1',
+                'validation'    => 'required_if:active,1',
                 'channel_based' => false,
                 'locale_based'  => true,
             ], [

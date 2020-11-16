@@ -31,6 +31,8 @@ class Product extends JsonResource
     {
         $product = $this->product ? $this->product : $this;
 
+        $prices = $product->getTypeInstance()->getProductPrices();
+
         return [
             'id'                     => $product->id,
             'type'                   => $product->type,
@@ -49,13 +51,21 @@ class Product extends JsonResource
                 'super_attributes' => Attribute::collection($product->super_attributes),
             ]),
             'special_price'          => $this->when(
-                    $product->getTypeInstance()->haveSpecialPrice(),
-                    $product->getTypeInstance()->getSpecialPrice()
-                ),
+                $product->getTypeInstance()->haveSpecialPrice(),
+                $product->getTypeInstance()->getSpecialPrice()
+            ),
             'formated_special_price' => $this->when(
-                    $product->getTypeInstance()->haveSpecialPrice(),
-                    core()->currency($product->getTypeInstance()->getSpecialPrice())
-                ),
+                $product->getTypeInstance()->haveSpecialPrice(),
+                core()->currency($product->getTypeInstance()->getSpecialPrice())
+            ),
+            'regular_price'          => $this->when(
+                $product->getTypeInstance()->haveSpecialPrice(),
+                data_get($prices, 'regular_price.price')
+            ),
+            'formated_regular_price' => $this->when(
+                $product->getTypeInstance()->haveSpecialPrice(),
+                data_get($prices, 'regular_price.formated_price')
+            ),
             'reviews'                => [
                 'total'          => $total = $this->productReviewHelper->getTotalReviews($product),
                 'total_rating'   => $total ? $this->productReviewHelper->getTotalRating($product) : 0,
