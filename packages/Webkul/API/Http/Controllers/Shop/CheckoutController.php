@@ -168,17 +168,13 @@ class CheckoutController extends Controller
      */
     public function checkMinimumOrder()
     {
-        $cart = Cart::getCart();
-
-        $cartBaseSubTotal = (float) $cart->base_sub_total;
-
         $minimumOrderAmount = (float) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
 
-        $status = $cartBaseSubTotal > $minimumOrderAmount;
+        $status = Cart::checkMinimumOrder();
 
         return response()->json([
             'status' => ! $status ? false : true,
-            'message' => ! $status ? trans('shop::app.checkout.cart.minimum-order-message', ['amount' => $minimumOrderAmount]) : 'Success',
+            'message' => ! $status ? trans('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]) : 'Success',
             'data' => [
                 'cart'   => new CartResource($cart),
             ]

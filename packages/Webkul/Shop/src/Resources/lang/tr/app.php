@@ -495,7 +495,7 @@ return [
             'event' => [
                 'expired' => 'Bu eylemin geçerliliği sona erdi.'
             ],
-            'minimum-order-message' => 'Your order should be greater than :amount'
+            'minimum-order-message' => 'Minimum order amount is :amount'
         ],
 
         'onepage' => [

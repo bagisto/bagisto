@@ -17,7 +17,7 @@ return [
 
     'common' => [
         'error' => 'Coś poszło nie tak. Proszę spróbować później.',
-        'image-upload-limit' => 'Maksymalny rozmiar przesyłanego obrazu to 2 MB', 
+        'image-upload-limit' => 'Maksymalny rozmiar przesyłanego obrazu to 2 MB',
         'no-result-found' => 'Nie znaleźliśmy żadnych zapisów.'
     ],
 
@@ -494,7 +494,7 @@ return [
             'event' => [
                 'expired' => 'To wydarzenie wygasło.'
             ],
-            'minimum-order-message' => 'Your order should be greater than :amount'
+            'minimum-order-message' => 'Minimum order amount is :amount'
         ],
 
         'onepage' => [

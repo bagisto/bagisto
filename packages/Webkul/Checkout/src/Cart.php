@@ -293,7 +293,7 @@ class Cart
     public function getItemByProduct($data)
     {
         $items = $this->getCart()->all_items;
-        
+
         foreach ($items as $item) {
             if ($item->product->getTypeInstance()->compareOptions($item->additional, $data['additional'])) {
                 if (isset($data['additional']['parent_id'])) {
@@ -607,7 +607,7 @@ class Cart
 
             if ($validationResult->isItemInactive()) {
                 $this->removeItem($item->id);
-                
+
                 $isInvalid = true;
 
                 session()->flash('info', __('shop::app.checkout.cart.item.inactive'));
@@ -708,7 +708,7 @@ class Cart
 
             $item->save();
         }
-        
+
         Event::dispatch('checkout.cart.calculate.items.tax.after', $cart);
     }
 
@@ -1274,5 +1274,21 @@ class Cart
                 }
             }
         }
+    }
+
+    /**
+     * Check minimum order.
+     *
+     * @return boolean
+     */
+    public function checkMinimumOrder(): bool
+    {
+        $cart = $this->getCart();
+
+        if (! $cart) {
+            return false;
+        }
+
+        return $cart->checkMinimumOrder();
     }
 }

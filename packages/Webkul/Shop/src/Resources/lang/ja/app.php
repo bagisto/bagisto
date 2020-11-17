@@ -16,7 +16,7 @@ return [
 
     'common' => [
         'error' => 'エラーが発生しました。しばらく待ってから、再度アクセスしてください。',
-        'image-upload-limit' => '画像の最大アップロードサイズは2MBです', 
+        'image-upload-limit' => '画像の最大アップロードサイズは2MBです',
     ],
 
     'home' => [
@@ -456,7 +456,7 @@ return [
             'cart-remove-action' => '手続きを進めますか。',
             'partial-cart-update' => 'Only some of the product(s) were updated',
             'link-missing' => '',
-            'minimum-order-message' => 'Your order should be greater than :amount'
+            'minimum-order-message' => 'Minimum order amount is :amount'
         ],
 
         'onepage' => [
