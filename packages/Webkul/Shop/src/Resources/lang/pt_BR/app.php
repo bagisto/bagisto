@@ -487,7 +487,7 @@ return [
             'event' => [
                 'expired' => 'This event has been expired.'
             ],
-            'minimum-order-message' => 'Your order should be greater than :amount'
+            'minimum-order-message' => 'Minimum order amount is :amount'
         ],
 
         'onepage' => [

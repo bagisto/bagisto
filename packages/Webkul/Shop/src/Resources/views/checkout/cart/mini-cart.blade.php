@@ -96,9 +96,8 @@
                         href="{{ route('shop.checkout.onepage.index') }}"
                         add-class="btn btn-primary btn-lg"
                         text="{{ __('shop::app.minicart.checkout') }}"
-                        cart-details="{{ $cart }}"
-                        minimum-order-amount="{{ $minimumOrderAmount }}"
-                        minimum-order-message="{{ __('shop::app.checkout.cart.minimum-order-message', ['amount' => $minimumOrderAmount]) }}"
+                        is-minimum-order-completed="{{ $cart->checkMinimumOrder() }}"
+                        minimum-order-message="{{ __('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]) }}"
                         style="color: white;">
                     </proceed-to-checkout>
                 </div>

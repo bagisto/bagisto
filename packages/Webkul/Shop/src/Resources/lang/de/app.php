@@ -492,7 +492,7 @@ return [
             'cart-remove-action' => 'Wollen Sie dies wirklich tun?',
             'partial-cart-update' => 'Nur einige der Produkte wurden aktualisiert',
             'link-missing' => '',
-            'minimum-order-message' => 'Your order should be greater than :amount'
+            'minimum-order-message' => 'Minimum order amount is :amount'
         ],
 
         'onepage' => [
