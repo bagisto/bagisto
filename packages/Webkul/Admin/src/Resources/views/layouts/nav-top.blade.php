@@ -16,7 +16,7 @@
             <span class="avatar">
             </span>
 
-            <?php $locale = request()->get('locale') ?: app()->getLocale();?>
+            <?php $locale = request()->get('admin_locale') ?: app()->getLocale();?>
 
             <div class="profile-info">
                 <div class="dropdown-toggle">
