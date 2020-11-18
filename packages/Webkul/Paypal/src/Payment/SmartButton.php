@@ -62,7 +62,7 @@ class SmartButton extends Paypal
      */
     protected function environment()
     {
-        $isSandbox = core()->getConfigData('sales.paymentmethods.paypal_smart_button.sandbox') ?: false;
+        $isSandbox = $this->getConfigData('sandbox') ?: false;
 
         if ($isSandbox) {
             return new SandboxEnvironment($this->clientId, $this->clientSecret);
@@ -76,8 +76,8 @@ class SmartButton extends Paypal
      */
     protected function initialize()
     {
-        $this->clientId = core()->getConfigData('sales.paymentmethods.paypal_smart_button.client_id') ?: '';
+        $this->clientId = $this->getConfigData('client_id') ?: '';
 
-        $this->clientSecret = core()->getConfigData('sales.paymentmethods.paypal_smart_button.client_secret') ?: '';
+        $this->clientSecret = $this->getConfigData('client_secret') ?: '';
     }
 }
