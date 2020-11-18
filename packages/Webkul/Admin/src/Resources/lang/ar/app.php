@@ -1362,9 +1362,6 @@ return [
             'custom-scripts' => 'Custom Scripts',
             'custom-css' => 'Custom CSS',
             'custom-javascript' => 'Custom Javascript',
-            'paypal-smart-button' => 'PayPal',
-            'client-id' => 'Client Id',
-            'client-id-info' => 'Use "sb" for testing.',
             'mailing-address' => 'أرسل الشيك إلى',
             'instructions' => 'تعليمات',
             'custom-scripts' => 'البرامج النصية المخصصة',
@@ -1372,7 +1369,11 @@ return [
             'custom-javascript' => 'جافا سكريبت مخصص',
             'paypal-smart-button' => 'زر PayPal الذكي',
             'client-id' => 'معرف العميل',
-            'client-id-info' => 'استخدم "sb" للاختبار.'
+            'client-id-info' => 'استخدم "sb" للاختبار.',
+            'client-secret' => 'Client Secret',
+            'client-secret-info' => 'Add your secret key here',
+            'accepted-currencies' => 'Accepted currencies',
+            'accepted-currencies-info' => 'Add currency code comma seperated e.g. USD,INR,...'
         ]
     ]
 ];
