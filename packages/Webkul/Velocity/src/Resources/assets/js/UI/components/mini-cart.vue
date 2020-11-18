@@ -122,7 +122,7 @@
             },
 
             checkMinimumOrder: function (e) {
-                if (! this.isMinimumOrderCompleted) {
+                if (! Boolean(this.isMinimumOrderCompleted)) {
                     e.preventDefault();
                     window.showAlert(`alert-warning`, 'Warning', this.minimumOrderMessage);
                 }

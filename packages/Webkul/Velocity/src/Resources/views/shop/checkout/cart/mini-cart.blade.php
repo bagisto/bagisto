@@ -9,7 +9,7 @@
         checkout-text="{{ __('shop::app.minicart.checkout') }}"
         checkout-url="{{ route('shop.checkout.onepage.index') }}"
         subtotal-text="{{ __('shop::app.checkout.cart.cart-subtotal') }}"
-        is-minimum-order-completed="{{ Cart::checkMinimumOrder() }}"
+        is-minimum-order-completed="{{ (bool) Cart::checkMinimumOrder() }}"
         minimum-order-message="{{ __('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]) }}">
     </mini-cart>
 </div>
