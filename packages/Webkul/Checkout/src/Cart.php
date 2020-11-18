@@ -577,6 +577,8 @@ class Cart
         $cart->items_count = $cart->items->count();
 
         $cart->items_qty = $quantities;
+ 
+        $cart->cart_currency_code = core()->getCurrentCurrencyCode();
 
         $cart->save();
 
