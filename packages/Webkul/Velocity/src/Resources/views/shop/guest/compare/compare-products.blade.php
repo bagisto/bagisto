@@ -165,6 +165,8 @@
 
             mounted: function () {
                 this.getComparedProducts();
+
+                this.activateSlider();
             },
 
             methods: {
@@ -191,10 +193,6 @@
                         this.$http.get(url, data)
                         .then(response => {
                             this.isProductListLoaded = true;
-
-                            if (response.data.products.length > 3) {
-                                $('.compare-products').css('overflow-x', 'scroll');
-                            }
 
                             this.products = response.data.products;
                         })
@@ -286,6 +284,47 @@
                     }
 
                     return attributeOptions;
+                },
+
+                activateSlider: function () {
+                    /* main slider */
+                    const slider = document.querySelector('.compare-products');
+
+                    let startX;
+                    let scrollLeft;
+
+                    /* check for mouse down */
+                    let isMouseDown = false;
+
+                    slider.addEventListener('mousedown', (e) => {
+                        isMouseDown = true;
+                        slider.classList.add('active');
+
+                        startX = e.pageX - slider.offsetLeft;
+                        scrollLeft = slider.scrollLeft;
+                    });
+
+                    slider.addEventListener('mouseleave', () => {
+                        isMouseDown = false;
+                        slider.classList.remove('active');
+                    });
+
+                    slider.addEventListener('mouseup', () => {
+                        isMouseDown = false;
+                        slider.classList.remove('active');
+                    });
+
+                    slider.addEventListener('mousemove', (e) => {
+                        if (! isMouseDown) {
+                            return;
+                        }
+
+                        e.preventDefault();
+
+                        const x = e.pageX - slider.offsetLeft;
+                        const walk = (x - startX) * 3;
+                        slider.scrollLeft = scrollLeft - walk;
+                    });
                 }
             }
         });
