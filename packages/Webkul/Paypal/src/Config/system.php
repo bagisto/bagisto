@@ -96,7 +96,7 @@ return [
             ],  [
                 'name'       => 'accepted_currencies',
                 'title'      => 'admin::app.admin.system.accepted-currencies',
-                'info'          => 'admin::app.admin.system.accepted-currencies',
+                'info'          => 'admin::app.admin.system.accepted-currencies-info',
                 'type'          => 'depends',
                 'depend'        => 'active:1',
                 'validation'    => 'required_if:active,1',
