@@ -29,7 +29,8 @@ class Configurable extends AbstractType
         'admin::catalog.products.accordians.categories',
         'admin::catalog.products.accordians.variations',
         'admin::catalog.products.accordians.channels',
-        'admin::catalog.products.accordians.product-links'
+        'admin::catalog.products.accordians.product-links',
+        'admin::catalog.products.accordians.videos',
     ];
 
     /**

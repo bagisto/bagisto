@@ -47,6 +47,7 @@ class Downloadable extends AbstractType
         'admin::catalog.products.accordians.downloadable',
         'admin::catalog.products.accordians.channels',
         'admin::catalog.products.accordians.product-links',
+        'admin::catalog.products.accordians.videos',
     ];
 
     /**
