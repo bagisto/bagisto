@@ -529,7 +529,13 @@ return [
             'checkbox' => 'خانة اختيار',
             'multiselect' => 'تحديد متعدد',
             'new-option' => 'خيار جديد',
-            'is-default' => 'افتراضي'
+            'is-default' => 'افتراضي',
+            'remove-image-btn-title' => 'Remove Image',
+            'videos' => 'Videos',
+            'video' => 'Video',
+            'add-video-btn-title' => 'Add Video',
+            'remove-video-btn-title' => 'Remove Video',
+            'not-support-video' => 'Your browser does not support the video tag.',
         ],
 
         'attributes' => [

@@ -144,6 +144,14 @@ class Product extends Model implements ProductContract
     }
 
     /**
+     * The videos that belong to the product.
+     */
+    public function videos()
+    {
+        return $this->hasMany(ProductVideoProxy::modelClass(), 'product_id');
+    }
+
+    /**
      * The images that belong to the product.
      */
     public function getBaseImageUrlAttribute()
