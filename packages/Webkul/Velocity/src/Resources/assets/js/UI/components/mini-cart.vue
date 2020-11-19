@@ -113,6 +113,7 @@
                 this.$http.delete(`${this.$root.baseUrl}/cart/remove/${productId}`)
                 .then(response => {
                     this.cartItems = this.cartItems.filter(item => item.id != productId);
+                    this.$root.miniCartKey++;
 
                     window.showAlert(`alert-${response.data.status}`, response.data.label, response.data.message);
                 })
