@@ -148,8 +148,8 @@ abstract class AbstractType
      * @param \Webkul\Product\Repositories\ProductAttributeValueRepository $attributeValueRepository
      * @param \Webkul\Product\Repositories\ProductInventoryRepository      $productInventoryRepository
      * @param \Webkul\Product\Repositories\ProductImageRepository          $productImageRepository
-     * @param \Webkul\Product\Repositories\ProductVideoRepository          $productVideoRepository
      * @param \Webkul\Product\Helpers\ProductImage                         $productImageHelper
+     * @param \Webkul\Product\Repositories\ProductVideoRepository          $productVideoRepository
      *
      * @return void
      */
@@ -159,8 +159,8 @@ abstract class AbstractType
         ProductAttributeValueRepository $attributeValueRepository,
         ProductInventoryRepository $productInventoryRepository,
         ProductImageRepository $productImageRepository,
-        ProductVideoRepository $productVideoRepository,
-        ProductImage $productImageHelper
+        ProductImage $productImageHelper,
+        ProductVideoRepository $productVideoRepository
     ) {
         $this->attributeRepository = $attributeRepository;
 
@@ -172,9 +172,9 @@ abstract class AbstractType
 
         $this->productImageRepository = $productImageRepository;
 
-        $this->productVideoRepository = $productVideoRepository;
-
         $this->productImageHelper = $productImageHelper;
+
+        $this->productVideoRepository = $productVideoRepository;
     }
 
     /**
