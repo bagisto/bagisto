@@ -5,7 +5,7 @@
         <template v-else-if="productCollections.length > 0">
             <card-list-header
                 :heading="isCategory ? categoryDetails.name : productTitle"
-                :view-all="isCategory ? `${this.baseUrl}/${categoryDetails.slug}` : ''">
+                :view-all="isCategory ? `${this.baseUrl}/${categoryDetails.url_path}` : ''">
             </card-list-header>
 
             <div class="row" :class="localeDirection">
