@@ -50,7 +50,7 @@
         <label class="image-item" v-bind:class="{ 'has-image': videoData.length > 0 }">
             <input type="hidden" :name="'videos[' + video.id + ']'" v-if="! new_video"/>
 
-            <input type="file"  accept="video/*" :name="'videos[]'" ref="videoInput" :id="_uid" @change="addVideoView($event)" multiple="multiple"/>
+            <input type="file" v-validate="'mimes:video/*'"  accept="video/*" :name="'videos[]'" ref="videoInput" :id="_uid" @change="addVideoView($event)" multiple="multiple"/>
 
             <video class="preview" v-if="videoData.length > 0" width="200" height="160" controls>
                 <source :src="videoData"  type="video/mp4">
