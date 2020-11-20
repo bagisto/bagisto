@@ -1,7 +1,13 @@
 <template>
     <div class="magnifier">
-        <img
-            :src="src"
+        <video :key=this.activeImageVideoURL v-if="currentType == 'video'" width="500" height="450" controls>
+            <source :src=this.activeImageVideoURL ref="activeProductImage"
+            id="active-product-image"
+            class="main-product-image" type="video/mp4">
+        </video>
+
+        <img v-else
+            :src=this.activeImageVideoURL
             :data-zoom-image="src"
             ref="activeProductImage"
             id="active-product-image"
@@ -13,12 +19,14 @@
 
 <script type="text/javascript">
     export default {
-        props: ['src'],
+        props: ['src', 'type'],
 
         data: function () {
             return {
                 'activeImage': null,
                 'activeImageElement': null,
+                activeImageVideoURL: '',
+                currentType: '',
             }
         },
 
@@ -26,16 +34,23 @@
             /* store image related info in global variables */
             this.activeImageElement = this.$refs.activeProductImage;
 
+            this.currentType = this.type;
+            this.activeImageVideoURL = this.src;
+
             /* convert into jQuery object */
             this.activeImage = new jQuery.fn.init(this.activeImageElement);
 
             /* initialise zoom */
             this.elevateZoom();
 
-            this.$root.$on('changeMagnifiedImage', ({smallImageUrl, largeImageUrl}) => {
+            this.$root.$on('changeMagnifiedImage', ({smallImageUrl, largeImageUrl, currentType}) => {
                 /* removed old instance */
                 $('.zoomContainer').remove();
                 this.activeImage.removeData('elevateZoom');
+
+                this.currentType = currentType;
+
+                this.activeImageVideoURL = largeImageUrl;
 
                 /* update source for images */
                 this.activeImageElement.src = smallImageUrl;
