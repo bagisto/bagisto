@@ -61,7 +61,7 @@
 
             <slide :slot="`slide-${index}`" v-for="(thumb, index) in thumbs">
                 <li
-                    @click="changeImage({
+                    @click="mouseover({
                         largeImageUrl: thumb.large_image_url,
                         originalImageUrl: thumb.original_image_url,
                         currentType: thumb.type
