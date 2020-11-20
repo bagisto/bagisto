@@ -2450,13 +2450,21 @@
     width: 800px;
 }
 
-
+/* compare products */
 .compare-products {
     width: 100%;
+    cursor: pointer;
+    overflow-x: auto;
     padding-bottom: 20px;
     word-break: break-word;
     margin-left: 0 !important;
     margin-right: 10px !important;
+
+    .active {
+        cursor: grabbing;
+        cursor: -webkit-grabbing;
+        transform: scale(1);
+    }
 
     tr {
         width: 100%;
@@ -2518,6 +2526,20 @@
         position: absolute;
         display: inline-block;
     }
+}
+
+/* hide scrollbar for chrome, safari and opera */
+.compare-products::-webkit-scrollbar {
+    display: none;
+}
+
+/* hide scrollbar for ie, edge and firefox */
+.compare-products {
+    /* ie and edge */
+    -ms-overflow-style: none;
+
+    /* firefox */
+    scrollbar-width: none;
 }
 
 //CSS for loader
