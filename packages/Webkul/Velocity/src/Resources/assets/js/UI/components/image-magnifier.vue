@@ -42,10 +42,9 @@
             this.elevateZoom();
 
             this.$root.$on('changeMagnifiedImage', ({smallImageUrl, largeImageUrl}) => {
-                console.log({smallImageUrl, largeImageUrl});
                 /* removed old instance */
                 $('.zoomContainer').remove();
-                this.activeImage.remove('elevateZoom');
+                this.activeImage.removeData('elevateZoom');
 
                 /* update source for images */
                 this.activeImageElement.src = smallImageUrl;
