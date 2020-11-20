@@ -3,13 +3,22 @@
         <img
             :src="src"
             :data-zoom-image="src"
-            ref="activeProductImage"
             id="active-product-image"
             class="main-product-image"
-            alt=""
+            ref="activeProductImage"
         />
     </div>
 </template>
+
+<style lang="scss">
+    .magnifier {
+        > img {
+            max-width: 100%;
+            min-height: 450px;
+            max-height: 530px;
+        }
+    }
+</style>
 
 <script type="text/javascript">
     export default {
@@ -33,9 +42,10 @@
             this.elevateZoom();
 
             this.$root.$on('changeMagnifiedImage', ({smallImageUrl, largeImageUrl}) => {
+                console.log({smallImageUrl, largeImageUrl});
                 /* removed old instance */
                 $('.zoomContainer').remove();
-                this.activeImage.removeData('elevateZoom');
+                this.activeImage.remove('elevateZoom');
 
                 /* update source for images */
                 this.activeImageElement.src = smallImageUrl;
@@ -51,8 +61,8 @@
                 this.activeImage.ezPlus({
                     cursor: 'pointer',
                     scrollZoom: true,
-                    zoomWindowWidth: 400,
-                    zoomWindowHeight: 400,
+                    zoomWindowWidth: 250,
+                    zoomWindowHeight: 250,
                 });
             },
         }
