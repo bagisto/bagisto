@@ -3,7 +3,6 @@
 namespace Webkul\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Webkul\Product\Models\ProductProxy;
 use Webkul\Checkout\Contracts\Cart as CartContract;
 
 class Cart extends Model implements CartContract
@@ -168,5 +167,19 @@ class Cart extends Model implements CartContract
         }
 
         return true;
+    }
+
+    /**
+     * Check minimum order.
+     *
+     * @return boolean
+     */
+    public function checkMinimumOrder(): bool
+    {
+        $minimumOrderAmount = (float) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
+
+        $cartBaseSubTotal = (float) $this->base_sub_total;
+
+        return $cartBaseSubTotal >= $minimumOrderAmount;
     }
 }
