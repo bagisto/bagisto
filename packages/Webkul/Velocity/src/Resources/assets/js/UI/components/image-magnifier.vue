@@ -12,8 +12,8 @@
     .magnifier {
         > img {
             max-width: 100%;
-            min-height: 450px;
-            max-height: 450px;
+            min-height: 530px;
+            max-height: 530px;
         }
     }
 </style>
