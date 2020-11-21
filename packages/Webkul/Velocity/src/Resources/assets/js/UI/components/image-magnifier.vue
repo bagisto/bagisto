@@ -3,9 +3,7 @@
         <img
             :src="src"
             :data-zoom-image="src"
-            id="active-product-image"
             class="main-product-image"
-            ref="activeProductImage"
         />
     </div>
 </template>
@@ -15,7 +13,7 @@
         > img {
             max-width: 100%;
             min-height: 450px;
-            max-height: 530px;
+            max-height: 450px;
         }
     }
 </style>
@@ -26,17 +24,13 @@
 
         data: function () {
             return {
-                'activeImage': null,
-                'activeImageElement': null,
+                'activeImage': null
             }
         },
 
         mounted: function () {
-            /* store image related info in global variables */
-            this.activeImageElement = this.$refs.activeProductImage;
-
-            /* convert into jQuery object */
-            this.activeImage = new jQuery.fn.init(this.activeImageElement);
+            /* jQuery object */
+            this.activeImage = $('.main-product-image');
 
             /* initialise zoom */
             this.elevateZoom();
@@ -47,8 +41,8 @@
                 this.activeImage.removeData('elevateZoom');
 
                 /* update source for images */
-                this.activeImageElement.src = smallImageUrl;
-                this.activeImage.data('zoom-image', (largeImageUrl ? largeImageUrl : smallImageUrl));
+                this.activeImage.attr('src', smallImageUrl);
+                this.activeImage.data('zoom-image', largeImageUrl);
 
                 /* reinitialize zoom */
                 this.elevateZoom();
@@ -58,6 +52,7 @@
         methods: {
             'elevateZoom': function () {
                 this.activeImage.ezPlus({
+                    zoomLevel: 0.5,
                     cursor: 'pointer',
                     scrollZoom: true,
                     zoomWindowWidth: 250,
