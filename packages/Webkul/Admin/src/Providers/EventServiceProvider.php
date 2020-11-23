@@ -27,5 +27,7 @@ class EventServiceProvider extends ServiceProvider
         Event::listen('sales.refund.save.after','Webkul\Admin\Listeners\Order@sendNewRefundMail');
 
         Event::listen('sales.order.comment.create.after','Webkul\Admin\Listeners\Order@sendOrderCommentMail');
+
+        Event::listen('core.channel.update.after','Webkul\Admin\Listeners\ChannelSettingsChange@checkForMaintenaceMode');
     }
 }

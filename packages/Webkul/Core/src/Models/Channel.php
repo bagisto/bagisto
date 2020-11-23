@@ -22,7 +22,8 @@ class Channel extends Model implements ChannelContract
         'base_currency_id',
         'root_category_id',
         'home_seo',
-        'is_maintenance_on'
+        'is_maintenance_on',
+        'allowed_ips'
     ];
 
     /**

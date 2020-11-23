@@ -232,6 +232,11 @@
                                     <span class="slider round"></span>
                                 </label>
                             </div>
+
+                            <div class="control-group">
+                                <label for="allowed-ips" class="required">{{ __('admin::app.settings.channels.allowed-ips') }}</label>
+                                <input class="control" id="allowed-ips" name="allowed_ips" value="{{ old('allowed_ips') ?: $channel->allowed_ips }}"/>
+                            </div>
                         </div>
                     </accordian>
 

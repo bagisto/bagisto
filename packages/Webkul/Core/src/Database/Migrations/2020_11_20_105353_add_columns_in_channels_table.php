@@ -15,6 +15,7 @@ class AddColumnsInChannelsTable extends Migration
     {
         Schema::table('channels', function (Blueprint $table) {
             $table->boolean('is_maintenance_on')->after('footer_content')->default(0);
+            $table->text('allowed_ips')->after('is_maintenance_on')->nullable();
         });
     }
 
@@ -26,7 +27,8 @@ class AddColumnsInChannelsTable extends Migration
     public function down()
     {
         Schema::table('channels', function (Blueprint $table) {
-            //
+            $table->removeColumn('is_maintenance_on');
+            $table->removeColumn('allowed_ips');
         });
     }
 }

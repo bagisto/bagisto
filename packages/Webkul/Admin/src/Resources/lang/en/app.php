@@ -805,7 +805,8 @@ return [
             'seo-title' => 'Meta title',
             'seo-description' => 'Meta description',
             'seo-keywords' => 'Meta keywords',
-            'maintenance-mode' => 'Maintenance Mode'
+            'maintenance-mode' => 'Maintenance Mode',
+            'allowed-ips' => 'Allowed IPs'
         ],
 
         'sliders' => [
