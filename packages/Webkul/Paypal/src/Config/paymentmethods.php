@@ -2,7 +2,7 @@
 return [
     'paypal_smart_button' => [
         'code'             => 'paypal_smart_button',
-        'title'            => 'PayPal',
+        'title'            => 'PayPal Smart Button',
         'description'      => 'PayPal',
         'client_id'        => 'sb',
         'class'            => 'Webkul\Paypal\Payment\SmartButton',
