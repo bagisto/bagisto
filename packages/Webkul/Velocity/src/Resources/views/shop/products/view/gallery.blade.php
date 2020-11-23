@@ -28,13 +28,8 @@
 
     <div class="product-image-group">
         <div class="row col-12">
-            <magnify-image src="{{ $images[0]['large_image_url'] }}" type="{{ $images[0]['type'] }}" v-if="!isMobile()">
+            <magnify-image src="{{ $images[0]['large_image_url'] }}" type="{{ $images[0]['type'] }}">
             </magnify-image>
-
-            <img
-                v-else
-                class="vc-small-product-image"
-                src="{{ $images[0]['large_image_url'] }}" />
         </div>
 
         <div class="row col-12">
@@ -69,7 +64,7 @@
                     :class="`thumb-frame ${index + 1 == 4 ? '' : 'mr5'} ${thumb.large_image_url == currentLargeImageUrl ? 'active' : ''}`"
                     >
 
-                    <video v-if="thumb.type == 'video'" width="100%" height="100%" onclick="this.paused ? this.play() : this.pause();">
+                    <video v-if="thumb.type == 'video'" width="110" height="110" controls>
                         <source :src="thumb.small_image_url" type="video/mp4">
                         {{ __('admin::app.catalog.products.not-support-video') }}
                     </video>
