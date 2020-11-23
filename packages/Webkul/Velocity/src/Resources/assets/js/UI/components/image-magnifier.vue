@@ -3,13 +3,20 @@
         <img
             :src="src"
             :data-zoom-image="src"
-            ref="activeProductImage"
-            id="active-product-image"
             class="main-product-image"
-            alt=""
         />
     </div>
 </template>
+
+<style lang="scss">
+    .magnifier {
+        > img {
+            max-width: 100%;
+            min-height: 530px;
+            max-height: 530px;
+        }
+    }
+</style>
 
 <script type="text/javascript">
     export default {
@@ -17,17 +24,13 @@
 
         data: function () {
             return {
-                'activeImage': null,
-                'activeImageElement': null,
+                'activeImage': null
             }
         },
 
         mounted: function () {
-            /* store image related info in global variables */
-            this.activeImageElement = this.$refs.activeProductImage;
-
-            /* convert into jQuery object */
-            this.activeImage = new jQuery.fn.init(this.activeImageElement);
+            /* jQuery object */
+            this.activeImage = $('.main-product-image');
 
             /* initialise zoom */
             this.elevateZoom();
@@ -38,8 +41,8 @@
                 this.activeImage.removeData('elevateZoom');
 
                 /* update source for images */
-                this.activeImageElement.src = smallImageUrl;
-                this.activeImage.data('zoom-image', (largeImageUrl ? largeImageUrl : smallImageUrl));
+                this.activeImage.attr('src', smallImageUrl);
+                this.activeImage.data('zoom-image', largeImageUrl);
 
                 /* reinitialize zoom */
                 this.elevateZoom();
@@ -49,10 +52,11 @@
         methods: {
             'elevateZoom': function () {
                 this.activeImage.ezPlus({
+                    zoomLevel: 0.5,
                     cursor: 'pointer',
                     scrollZoom: true,
-                    zoomWindowWidth: 400,
-                    zoomWindowHeight: 400,
+                    zoomWindowWidth: 250,
+                    zoomWindowHeight: 250,
                 });
             },
         }

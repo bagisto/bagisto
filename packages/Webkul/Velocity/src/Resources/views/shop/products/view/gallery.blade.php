@@ -47,7 +47,7 @@
                 add-class="product-gallery"
                 :slides-count="thumbs.length">
 
-                <slide :slot="`slide-${index}`" v-for="(thumb, index) in thumbs">
+                <slide :slot="`slide-${index}`" v-for="(thumb, index) in thumbs" :key="index">
                     <li
                         @mouseover="changeImage({
                             largeImageUrl: thumb.large_image_url,
@@ -133,7 +133,8 @@
                         this.currentOriginalImageUrl = originalImageUrl;
 
                         this.$root.$emit('changeMagnifiedImage', {
-                            smallImageUrl: this.currentOriginalImageUrl
+                            smallImageUrl: this.currentOriginalImageUrl,
+                            largeImageUrl: this.currentLargeImageUrl
                         });
 
                         let productImage = $('.vc-small-product-image');
