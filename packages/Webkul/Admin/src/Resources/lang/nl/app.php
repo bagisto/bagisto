@@ -804,7 +804,9 @@ return [
             'seo-title' => 'Meta titel',
             'seo-description' => 'Meta omschrijving',
             'seo-keywords' => 'Meta trefwoorden',
-
+            'maintenance-mode' => 'Maintenance Mode',
+            'maintenance-mode-text' => 'Message',
+            'allowed-ips' => 'Allowed IPs'
         ],
 
         'sliders' => [

@@ -806,6 +806,7 @@ return [
             'seo-description' => 'Meta description',
             'seo-keywords' => 'Meta keywords',
             'maintenance-mode' => 'Maintenance Mode',
+            'maintenance-mode-text' => 'Message',
             'allowed-ips' => 'Allowed IPs'
         ],
 

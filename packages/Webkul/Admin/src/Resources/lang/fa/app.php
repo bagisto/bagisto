@@ -803,7 +803,9 @@ return [
             'seo-title' => 'عنوان Meta',
             'seo-description' => 'شرح Meta',
             'seo-keywords' => 'کلید واژه ها Meta',
-
+            'maintenance-mode' => 'Maintenance Mode',
+            'maintenance-mode-text' => 'Message',
+            'allowed-ips' => 'Allowed IPs'
         ],
 
         'sliders' => [

@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class AddColumnsInChannelsTable extends Migration
 {
@@ -15,7 +15,8 @@ class AddColumnsInChannelsTable extends Migration
     {
         Schema::table('channels', function (Blueprint $table) {
             $table->boolean('is_maintenance_on')->after('footer_content')->default(0);
-            $table->text('allowed_ips')->after('is_maintenance_on')->nullable();
+            $table->text('maintenance_mode_text')->after('is_maintenance_on')->nullable();
+            $table->text('allowed_ips')->after('maintenance_mode_text')->nullable();
         });
     }
 
@@ -27,8 +28,9 @@ class AddColumnsInChannelsTable extends Migration
     public function down()
     {
         Schema::table('channels', function (Blueprint $table) {
-            $table->removeColumn('is_maintenance_on');
-            $table->removeColumn('allowed_ips');
+            $table->dropColumn('is_maintenance_on');
+            $table->dropColumn('maintenance_mode_text');
+            $table->dropColumn('allowed_ips');
         });
     }
 }
