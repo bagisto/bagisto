@@ -108,7 +108,8 @@
         "Webkul\\CMS\\": "packages/Webkul/CMS/src",
         "Webkul\\Velocity\\": "packages/Webkul/Velocity/src",
         "Webkul\\BookingProduct\\": "packages/Webkul/BookingProduct/src",
-        "Webkul\\SocialLogin\\": "packages/Webkul/SocialLogin/src"
+        "Webkul\\SocialLogin\\": "packages/Webkul/SocialLogin/src",
+        "Webkul\\DebugBar\\": "packages/Webkul/DebugBar/src"
       }
     },
 
