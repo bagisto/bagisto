@@ -1,6 +1,6 @@
 <template>
     <div class="magnifier">
-        <video :key=this.activeImageVideoURL v-if="currentType == 'video'" width="500" height="450" controls>
+        <video :key=this.activeImageVideoURL v-if="currentType == 'video'" width="100%" height="100%" controls>
             <source :src=this.activeImageVideoURL ref="activeProductImage"
             id="active-product-image"
             class="main-product-image" type="video/mp4">

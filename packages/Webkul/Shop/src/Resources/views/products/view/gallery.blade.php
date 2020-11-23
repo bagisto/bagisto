@@ -38,7 +38,7 @@
                 </li>
 
                 <li class="thumb-frame" v-for='(thumb, index) in thumbs' @mouseover="changeImage(thumb)" :class="[thumb.large_image_url == currentLargeImageUrl ? 'active' : '']" id="thumb-frame">
-                    <video v-if="thumb.type == 'video'" width="100" height="100" controls>
+                    <video v-if="thumb.type == 'video'" width="100%" height="100%" onclick="this.paused ? this.play() : this.pause();">
                         <source :src="thumb.video_url" type="video/mp4">
                         {{ __('admin::app.catalog.products.not-support-video') }}
                     </video>
@@ -53,7 +53,7 @@
             </ul>
 
             <div class="product-hero-image" id="product-hero-image">
-                <video :key="currentVideoUrl" v-if="currentType == 'video'" width="500" height="450" controls>
+                <video :key="currentVideoUrl" v-if="currentType == 'video'" width="100%" height="100%" controls>
                     <source :src="currentVideoUrl" :data-image="currentOriginalImageUrl"  type="video/mp4">
                         {{ __('admin::app.catalog.products.not-support-video') }}
                 </video>
