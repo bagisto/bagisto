@@ -1,10 +1,15 @@
 <template>
-    <div class="magnifier">
-        <img
-            :src="src"
-            :data-zoom-image="src"
-            class="main-product-image"
-        />
+    <div :class="[!isMobile() ? 'magnifier' : '']">
+        <video :key=this.activeImageVideoURL v-if="currentType == 'video'" width="100%" height="100%" controls>
+            <source :src=this.activeImageVideoURL ref="activeProductImage"
+            id="active-product-image"
+            class="main-product-image" type="video/mp4">
+        </video>
+
+        <img v-else
+            :src=this.activeImageVideoURL
+            :data-zoom-image="[!isMobile() ? 'src' : '']"
+            :class="[!isMobile() ? 'main-product-image' : 'vc-small-product-image']"/>
     </div>
 </template>
 
@@ -20,25 +25,38 @@
 
 <script type="text/javascript">
     export default {
-        props: ['src'],
+        props: ['src', 'type'],
 
         data: function () {
             return {
-                'activeImage': null
+                'activeImage': null,
+                'activeImageElement': null,
+                activeImageVideoURL: '',
+                currentType: '',
             }
         },
 
         mounted: function () {
-            /* jQuery object */
-            this.activeImage = $('.main-product-image');
+            /* store image related info in global variables */
+            this.activeImageElement = this.$refs.activeProductImage;
+
+            this.currentType = this.type;
+            this.activeImageVideoURL = this.src;
+
+            /* convert into jQuery object */
+            this.activeImage = new jQuery.fn.init(this.activeImageElement);
 
             /* initialise zoom */
             this.elevateZoom();
 
-            this.$root.$on('changeMagnifiedImage', ({smallImageUrl, largeImageUrl}) => {
+            this.$root.$on('changeMagnifiedImage', ({smallImageUrl, largeImageUrl, currentType}) => {
                 /* removed old instance */
                 $('.zoomContainer').remove();
                 this.activeImage.removeData('elevateZoom');
+
+                this.currentType = currentType;
+
+                this.activeImageVideoURL = largeImageUrl;
 
                 /* update source for images */
                 this.activeImage.attr('src', smallImageUrl);
@@ -47,6 +65,8 @@
                 /* reinitialize zoom */
                 this.elevateZoom();
             });
+
+
         },
 
         methods: {

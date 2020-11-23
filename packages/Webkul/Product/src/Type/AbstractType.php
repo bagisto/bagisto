@@ -11,6 +11,7 @@ use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Datatypes\CartItemValidationResult;
 use Webkul\Product\Repositories\ProductImageRepository;
+use Webkul\Product\Repositories\ProductVideoRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 
@@ -47,9 +48,16 @@ abstract class AbstractType
     /**
      * ProductImageRepository instance
      *
-     * @var \Webkul\Product\Repositories\ProductInventoryRepository
+     * @var \Webkul\Product\Repositories\productImageRepository
      */
     protected $productImageRepository;
+
+    /**
+     * ProductVideoRepository instance
+     *
+     * @var \Webkul\Product\Repositories\productVideoRepository
+     */
+    protected $productVideoRepository;
 
     /**
      * Product Image helper instance
@@ -141,6 +149,7 @@ abstract class AbstractType
      * @param \Webkul\Product\Repositories\ProductInventoryRepository      $productInventoryRepository
      * @param \Webkul\Product\Repositories\ProductImageRepository          $productImageRepository
      * @param \Webkul\Product\Helpers\ProductImage                         $productImageHelper
+     * @param \Webkul\Product\Repositories\ProductVideoRepository          $productVideoRepository
      *
      * @return void
      */
@@ -150,7 +159,8 @@ abstract class AbstractType
         ProductAttributeValueRepository $attributeValueRepository,
         ProductInventoryRepository $productInventoryRepository,
         ProductImageRepository $productImageRepository,
-        ProductImage $productImageHelper
+        ProductImage $productImageHelper,
+        ProductVideoRepository $productVideoRepository
     ) {
         $this->attributeRepository = $attributeRepository;
 
@@ -163,6 +173,8 @@ abstract class AbstractType
         $this->productImageRepository = $productImageRepository;
 
         $this->productImageHelper = $productImageHelper;
+
+        $this->productVideoRepository = $productVideoRepository;
     }
 
     /**
@@ -270,6 +282,8 @@ abstract class AbstractType
             $this->productInventoryRepository->saveInventories($data, $product);
 
             $this->productImageRepository->uploadImages($data, $product);
+
+            $this->productVideoRepository->uploadVideos($data, $product);
 
             app('Webkul\Product\Repositories\ProductCustomerGroupPriceRepository')->saveCustomerGroupPrices($data,
                 $product);

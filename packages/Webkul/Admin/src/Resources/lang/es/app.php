@@ -522,7 +522,13 @@ return [
             'checkbox' => 'Opción múltiple',
             'multiselect' => 'Lista de selección múltiple',
             'new-option' => 'Nueva opción',
-            'is-default' => 'Es predeterminada'
+            'is-default' => 'Es predeterminada',
+            'remove-image-btn-title' => 'Remove Image',
+            'videos' => 'Videos',
+            'video' => 'Video',
+            'add-video-btn-title' => 'Add Video',
+            'remove-video-btn-title' => 'Remove Video',
+            'not-support-video' => 'Your browser does not support the video tag.',
         ],
 
         'attributes' => [

@@ -527,7 +527,13 @@ return [
             'checkbox' => 'Checkbox',
             'multiselect' => 'Multiselect',
             'new-option' => 'New Option',
-            'is-default' => 'Is Default'
+            'is-default' => 'Is Default',
+            'remove-image-btn-title' => 'Remove Image',
+            'videos' => 'Videos',
+            'video' => 'Video',
+            'add-video-btn-title' => 'Add Video',
+            'remove-video-btn-title' => 'Remove Video',
+            'not-support-video' => 'Your browser does not support the video tag.',
         ],
 
         'attributes' => [

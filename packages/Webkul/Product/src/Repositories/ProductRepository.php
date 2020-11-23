@@ -735,6 +735,12 @@ class ProductRepository extends Repository
             }
         }
 
+        if (! in_array('videos', $attributesToSkip)) {
+            foreach ($originalProduct->videos as $video) {
+                $copiedProduct->videos()->save($video->replicate());
+            }
+        }
+
         if (! in_array('super_attributes', $attributesToSkip)) {
             foreach ($originalProduct->super_attributes as $super_attribute) {
                 $copiedProduct->super_attributes()->save($super_attribute);
