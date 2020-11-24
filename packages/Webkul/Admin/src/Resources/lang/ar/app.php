@@ -811,7 +811,9 @@ return [
             'seo-title' => 'عنوان Meta',
             'seo-description' => 'وصف Meta',
             'seo-keywords' => 'الكلمات الدالة Meta',
-
+            'maintenance-mode' => 'Maintenance Mode',
+            'maintenance-mode-text' => 'Message',
+            'allowed-ips' => 'Allowed IPs'
         ],
 
         'sliders' => [

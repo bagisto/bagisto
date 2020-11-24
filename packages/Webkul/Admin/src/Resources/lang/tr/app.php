@@ -802,7 +802,9 @@ return [
             'seo-title' => 'Meta Başlık',
             'seo-description' => 'Meta Açıklama',
             'seo-keywords' => 'Meta Anahtar Kelimeler',
-
+            'maintenance-mode' => 'Maintenance Mode',
+            'maintenance-mode-text' => 'Message',
+            'allowed-ips' => 'Allowed IPs'
         ],
 
         'sliders' => [

@@ -811,7 +811,9 @@ return [
             'seo-title' => 'Meta tytuł',
             'seo-description' => 'Meta opis',
             'seo-keywords' => 'Meta słowa kluczowe',
-
+            'maintenance-mode' => 'Maintenance Mode',
+            'maintenance-mode-text' => 'Message',
+            'allowed-ips' => 'Allowed IPs'
         ],
 
         'sliders' => [

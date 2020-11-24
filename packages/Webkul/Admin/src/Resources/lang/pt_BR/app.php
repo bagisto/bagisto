@@ -810,7 +810,9 @@ return [
             'seo-title' => 'Meta título',
             'seo-description' => 'Meta Descrição',
             'seo-keywords' => 'Meta palavras-chave',
-
+            'maintenance-mode' => 'Maintenance Mode',
+            'maintenance-mode-text' => 'Message',
+            'allowed-ips' => 'Allowed IPs'
         ],
 
         'sliders' => [

@@ -217,6 +217,16 @@
                                     <span class="slider round"></span>
                                 </label>
                             </div>
+
+                            <div class="control-group">
+                                <label for="maintenance-mode-text">{{ __('admin::app.settings.channels.maintenance-mode-text') }}</label>
+                                <input class="control" id="maintenance-mode-text" name="maintenance_mode_text" value=""/>
+                            </div>
+
+                            <div class="control-group">
+                                <label for="allowed-ips">{{ __('admin::app.settings.channels.allowed-ips') }}</label>
+                                <input class="control" id="allowed-ips" name="allowed_ips" value=""/>
+                            </div>
                         </div>
                     </accordian>
 
