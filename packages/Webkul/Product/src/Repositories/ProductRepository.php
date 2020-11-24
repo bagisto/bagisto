@@ -16,6 +16,8 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Webkul\Product\Models\ProductAttributeValueProxy;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Storage;
+use File;
 
 class ProductRepository extends Repository
 {
@@ -731,13 +733,17 @@ class ProductRepository extends Repository
 
         if (! in_array('images', $attributesToSkip)) {
             foreach ($originalProduct->images as $image) {
-                $copiedProduct->images()->save($image->replicate());
+                $copiedProductImage = $copiedProduct->images()->save($image->replicate());
+
+                $this->copyProductImageVideo($image, $copiedProduct, $copiedProductImage);
             }
         }
 
         if (! in_array('videos', $attributesToSkip)) {
             foreach ($originalProduct->videos as $video) {
-                $copiedProduct->videos()->save($video->replicate());
+                $copiedProductVideo = $copiedProduct->videos()->save($video->replicate());
+
+                $this->copyProductImageVideo($video, $copiedProduct, $copiedProductVideo);
             }
         }
 
@@ -767,5 +773,25 @@ class ProductRepository extends Repository
                 'child_id'  => $copiedProduct->id,
             ]);
         }
+    }
+    
+    /**
+     * @object $data
+     * @object $copiedProduct
+     * @object $copiedProductImageVideo
+     */
+    private function copyProductImageVideo($data, $copiedProduct, $copiedProductImageVideo): void
+    {  
+        $path = explode("/", $data->path);
+
+        $path = 'product/' . $copiedProduct->id .'/'. end($path);
+
+        $copiedProductImageVideo->path = $path;
+
+        $copiedProductImageVideo->save();
+
+        Storage::makeDirectory('product/' . $copiedProduct->id);
+
+        Storage::copy($data->path, $copiedProductImageVideo->path);
     }
 }
