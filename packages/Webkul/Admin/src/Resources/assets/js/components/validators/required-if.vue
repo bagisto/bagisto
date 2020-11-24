@@ -2,7 +2,7 @@
     <div class="control-group"  :class="[errors.has(name) ? 'has-error' : '']">
         <label :for="name" :class="checkValidations">
             {{ label }}
-            <span class="locale"> [{{ channel_locale }}] </span>
+            <span class="locale"> {{ channel_locale ? `[${channel_locale}]` : '' }} </span>
         </label>
 
         <select v-if="this.options.length" v-validate="checkValidations" class="control" :id = "name" :name = "name" v-model="savedValue"
@@ -10,8 +10,15 @@
             <option v-for='(option, index) in this.options' :value="option.value"> {{ option.title }} </option>
         </select>
 
-        <input v-else type="text"  class="control" v-validate="checkValidations" :id = "name" :name = "name" v-model="savedValue"
-        :data-vv-as="label">
+        <input v-else
+            type="text"
+            class="control"
+            :id="name"
+            :name="name"
+            :placeholder="info"
+            v-validate="checkValidations"
+            v-model="savedValue"
+            :data-vv-as="label">
 
         <span class="control-error" v-if="errors.has(name)">
             {{ errors.first(name) }}
@@ -24,6 +31,7 @@ export default {
     props: [
         'name',
         'label',
+        'info',
         'options',
         'result',
         'validations',
