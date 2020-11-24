@@ -1,13 +1,13 @@
 <template>
-    <div class="magnifier">
+    <div :class="currentType == 'video' ? '' : 'magnifier'">
         <video :key="activeImageVideoURL" v-if="currentType == 'video'" width="100%" height="100%" controls>
-            <source :src="activeImageVideoURL" class="main-product-image" type="video/mp4">
+            <source :src="activeImageVideoURL" type="video/mp4">
         </video>
 
         <img v-else
             :src="activeImageVideoURL"
             :data-zoom-image="activeImageVideoURL"
-            class="main-product-image"/>
+            class="main-product-image">
     </div>
 </template>
 
@@ -40,8 +40,10 @@
             /* getting url */
             this.activeImageVideoURL = this.src;
 
-            /* binding should be with class as ezplus is creating multiple containers */
+            /* binding should be with class as ezplus is having bug of creating multiple containers */
             this.activeImage = $('.main-product-image');
+            this.activeImage.attr('src', this.activeImageVideoURL);
+            this.activeImage.data('zoom-image', this.activeImageVideoURL);
 
             /* initialise zoom */
             this.elevateZoom();
@@ -64,12 +66,10 @@
                 /* reinitialize zoom */
                 this.elevateZoom();
             });
-
-
         },
 
         methods: {
-            'elevateZoom': function () {
+            elevateZoom: function () {
                 this.activeImage.ezPlus({
                     zoomLevel: 0.5,
                     cursor: 'pointer',
