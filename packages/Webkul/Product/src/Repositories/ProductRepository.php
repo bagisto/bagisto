@@ -17,7 +17,6 @@ use Webkul\Product\Models\ProductAttributeValueProxy;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Storage;
-use File;
 
 class ProductRepository extends Repository
 {
