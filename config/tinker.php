@@ -19,7 +19,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Auto Aliased Classes
+    | Alias Whitelist
     |--------------------------------------------------------------------------
     |
     | Tinker will not automatically alias classes in your vendor namespaces
@@ -34,7 +34,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Classes That Should Not Be Aliased
+    | Alias Blacklist
     |--------------------------------------------------------------------------
     |
     | Typically, Tinker automatically aliases classes as you require them in
