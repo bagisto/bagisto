@@ -1,15 +1,13 @@
 <template>
-    <div :class="[!isMobile() ? 'magnifier' : '']">
-        <video :key=this.activeImageVideoURL v-if="currentType == 'video'" width="100%" height="100%" controls>
-            <source :src=this.activeImageVideoURL ref="activeProductImage"
-            id="active-product-image"
-            class="main-product-image" type="video/mp4">
+    <div class="magnifier">
+        <video :key="activeImageVideoURL" v-if="currentType == 'video'" width="100%" height="100%" controls>
+            <source :src="activeImageVideoURL" class="main-product-image" type="video/mp4">
         </video>
 
         <img v-else
-            :src=this.activeImageVideoURL
-            :data-zoom-image="[!isMobile() ? 'src' : '']"
-            :class="[!isMobile() ? 'main-product-image' : 'vc-small-product-image']"/>
+            :src="activeImageVideoURL"
+            :data-zoom-image="activeImageVideoURL"
+            class="main-product-image"/>
     </div>
 </template>
 
@@ -29,22 +27,21 @@
 
         data: function () {
             return {
-                'activeImage': null,
-                'activeImageElement': null,
+                activeImage: null,
                 activeImageVideoURL: '',
                 currentType: '',
             }
         },
 
         mounted: function () {
-            /* store image related info in global variables */
-            this.activeImageElement = this.$refs.activeProductImage;
-
+            /* type checking for media type */
             this.currentType = this.type;
+
+            /* getting url */
             this.activeImageVideoURL = this.src;
 
-            /* convert into jQuery object */
-            this.activeImage = new jQuery.fn.init(this.activeImageElement);
+            /* binding should be with class as ezplus is creating multiple containers */
+            this.activeImage = $('.main-product-image');
 
             /* initialise zoom */
             this.elevateZoom();
@@ -54,8 +51,10 @@
                 $('.zoomContainer').remove();
                 this.activeImage.removeData('elevateZoom');
 
+                /* type checking for media type */
                 this.currentType = currentType;
 
+                /* getting url */
                 this.activeImageVideoURL = largeImageUrl;
 
                 /* update source for images */
