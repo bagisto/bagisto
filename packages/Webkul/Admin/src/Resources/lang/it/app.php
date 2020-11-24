@@ -530,7 +530,13 @@ return [
             'multiselect' => 'Multiselect',
             'new-option' => 'Nuova Opzione',
             'is-default' => 'È Predefinita',
-            'actions' => 'Azioni'
+            'actions' => 'Azioni',
+            'remove-image-btn-title' => 'Remove Image',
+            'videos' => 'Videos',
+            'video' => 'Video',
+            'add-video-btn-title' => 'Add Video',
+            'remove-video-btn-title' => 'Remove Video',
+            'not-support-video' => 'Your browser does not support the video tag.',
         ],
 
         'attributes' => [
@@ -1366,7 +1372,11 @@ return [
             'custom-javascript' => 'Custom Javascript',
             'paypal-smart-button' => 'PayPal',
             'client-id' => 'Client Id',
-            'client-id-info' => 'Use "sb" for testing.'
+            'client-id-info' => 'Use "sb" for testing.',
+            'client-secret' => 'Client Secret',
+            'client-secret-info' => 'Add your secret key here',
+            'accepted-currencies' => 'Accepted currencies',
+            'accepted-currencies-info' => 'Add currency code comma seperated e.g. USD,INR,...'
         ]
     ]
 ];

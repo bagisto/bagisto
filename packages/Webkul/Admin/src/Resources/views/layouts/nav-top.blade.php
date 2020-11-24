@@ -39,7 +39,7 @@
 
                 <div class="dropdown-list bottom-right">
                     <div class="control-group">
-                        <select class="control" id="locale-switcher" onChange="window.location.href = this.value" style="margin-left: 30px;">
+                        <select class="control" onChange="window.location.href = this.value" style="margin-left: 30px;">
                             @foreach (core()->getAllLocales() as $localeModel)
 
                                 <option value="{{ '?admin_locale=' . $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>

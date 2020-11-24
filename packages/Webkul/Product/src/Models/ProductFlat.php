@@ -127,6 +127,14 @@ class ProductFlat extends Model implements ProductFlatContract
     }
 
     /**
+     * The videos that belong to the product.
+     */
+    public function videos()
+    {   
+        return $this->product->videos();
+    }
+
+    /**
      * Get all of the attributes for the attribute groups.
      */
     public function getImagesAttribute()

@@ -68,6 +68,7 @@ class ProductForm extends FormRequest
         $this->rules = array_merge($product->getTypeInstance()->getTypeValidationRules(), [
             'sku'                => ['required', 'unique:products,sku,' . $this->id, new \Webkul\Core\Contracts\Validations\Slug],
             'images.*'           => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
+            'videos.*'           => 'nullable|mimes:mov,mp4|max:2048',
             'special_price_from' => 'nullable|date',
             'special_price_to'   => 'nullable|date|after_or_equal:special_price_from',
             'special_price'      => ['nullable', new \Webkul\Core\Contracts\Validations\Decimal, 'lt:price'],
