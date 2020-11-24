@@ -3,6 +3,7 @@
 namespace Webkul\DebugBar\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Webkul\DebugBar\DataCollector\ModuleCollector;
 use Debugbar;
 
 class DebugBarServiceProvider extends ServiceProvider
@@ -18,6 +19,6 @@ class DebugBarServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        Debugbar::addCollector(app(\Webkul\DebugBar\DataCollector\ModuleCollector::class));
+        Debugbar::addCollector(app(ModuleCollector::class));
     }
 }

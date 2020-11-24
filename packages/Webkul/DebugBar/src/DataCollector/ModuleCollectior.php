@@ -38,7 +38,6 @@ class ModuleCollector extends DataCollector implements DataCollectorInterface, R
         $events->listen('eloquent.*', function ($event, $models) {
             if (Str::contains($event, 'eloquent.retrieved')) {
                 foreach (array_filter($models) as $model) {
-                    // dd($model, $model->getTable());
                     $class = get_class($model);
                     $this->models[$class] = ($this->models[$class] ?? 0) + 1;
                     $this->count++;
@@ -47,24 +46,65 @@ class ModuleCollector extends DataCollector implements DataCollectorInterface, R
         });
 
         $events->listen('composing:*', function ($view, $data = []) {
-            if ($data) {
-                $view = $data[0];
-            }
+            $view = $data ? $data[0] : $view;
 
             $this->views[] = $this->trimViewName($view->getName(), $view->getPath());
         });
 
-
         app()['db']->listen(
             function ($query, $bindings = null, $time = null, $connectionName = null) use ($pdoCollector) {
                 $this->queries[] = [
-                    'sql'          => $query->sql,
+                    'sql'          => $this->addQueryBindings($query),
                     'duration'     => $query->time,
                     "duration_str" => $pdoCollector->formatDuration($query->time),
                     "connection"   => $query->connection->getDatabaseName()
                 ];
             }
         );
+    }
+    
+    /**
+     * @param  \Illuminate\Database\Events\QueryExecuted  $query
+     * @return string
+     */
+    public function addQueryBindings($query)
+    {
+        $sql = $query->sql;
+
+        $bindings = $this->checkBindings($query->connection->prepareBindings($query->bindings));
+
+        if (! empty($bindings)) {
+            foreach ($bindings as $key => $binding) {
+                $regex = is_numeric($key)
+                    ? "/\?(?=(?:[^'\\\']*'[^'\\\']*')*[^'\\\']*$)/"
+                    : "/:{$key}(?=(?:[^'\\\']*'[^'\\\']*')*[^'\\\']*$)/";
+
+                if (! is_int($binding) && ! is_float($binding)) {
+                    $binding = $query->connection->getPdo()->quote($binding);
+                }
+
+                $sql = preg_replace($regex, $binding, $sql, 1);
+            }
+        }
+
+        return $sql;
+    }
+
+    /**
+     * Check bindings for illegal (non UTF-8) strings, like Binary data.
+     *
+     * @param array  $bindings
+     * @return mixed
+     */
+    public function checkBindings($bindings)
+    {
+        foreach ($bindings as &$binding) {
+            if (is_string($binding) && ! mb_check_encoding($binding, 'UTF-8')) {
+                $binding = '[BINARY DATA]';
+            }
+        }
+
+        return $bindings;
     }
     
     /**
@@ -89,16 +129,22 @@ class ModuleCollector extends DataCollector implements DataCollectorInterface, R
         $modules = [];
         
         foreach (Concord::getModules() as $moduleId => $module) {
-            $modules[] = [
-                'name'     => $module->getNamespaceRoot(),
-                'models'   => $this->getModels($module->getNamespaceRoot()),
-                'views'    => $this->getTemplates($module->getNamespaceRoot()),
-                'queries'  => $this->getQueries($module->getNamespaceRoot()),
-            ];
+            $models = $this->getModels($module->getNamespaceRoot());
+
+            $views = $this->getTemplates($module->getNamespaceRoot());
+
+            $queries = $this->getQueries($module->getNamespaceRoot());
+
+            if (count($models) || count($views) || count($queries)) {
+                $modules[] = [
+                    'name'    => $module->getNamespaceRoot(),
+                    'models'  => $models,
+                    'views'   => $views,
+                    'queries' => $queries,
+                ];
+            }
         }
 
-        // dd($modules);
-        
         $data = [
             'count'   => count($modules),
             'modules' => $modules,
