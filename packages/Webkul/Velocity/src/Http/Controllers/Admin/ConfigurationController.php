@@ -46,7 +46,9 @@ class ConfigurationController extends Controller
      * @return \Illuminate\View\View
      */
     public function renderMetaData()
-    {
+    {   
+        $this->locale = request()->get('locale') ? request()->get('locale') : app()->getLocale();
+         
         $velocityMetaData = $this->velocityHelper->getVelocityMetaData($this->locale, $this->channel, false);
 
         if (! $velocityMetaData) {
