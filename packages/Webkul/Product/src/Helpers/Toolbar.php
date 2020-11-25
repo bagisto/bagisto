@@ -182,6 +182,7 @@ class Toolbar extends AbstractProduct
             $viewOption = 'list';
         }
 
-        return $viewOption;
+        /* if still default config is not set from the admin then in last needed hardcoded value */
+        return $viewOption ?? 'grid';
     }
 }
