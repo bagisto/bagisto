@@ -12,8 +12,10 @@ use Webkul\Theme\ViewRenderEventManager;
 use Illuminate\Support\Facades\Validator;
 use Webkul\Core\Console\Commands\Install;
 use Webkul\Core\Observers\SliderObserver;
+use Webkul\Core\Console\Commands\UpCommand;
 use Webkul\Core\Facades\Core as CoreFacade;
 use Webkul\Core\Console\Commands\BookingCron;
+use Webkul\Core\Console\Commands\DownCommand;
 use Webkul\Core\View\Compilers\BladeCompiler;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Webkul\Core\Console\Commands\BagistoVersion;
@@ -64,6 +66,14 @@ class CoreServiceProvider extends ServiceProvider
 
         Event::listen('bagisto.admin.layout.head', static function(ViewRenderEventManager $viewRenderEventManager) {
             $viewRenderEventManager->addTemplate('core::blade.tracer.style');
+        });
+
+        $this->app->extend('command.down', function () {
+            return new DownCommand;
+        });
+
+        $this->app->extend('command.up', function () {
+            return new UpCommand;
         });
     }
 
