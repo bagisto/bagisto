@@ -569,10 +569,12 @@ class ProductRepository extends Repository
         if ($attribute) {
             if ($attribute->code === 'price') {
                 $query->orderBy('min_price', $direction);
+            } else {
+                $query->orderBy($attribute->code, $direction);
             }
         } else {
-            /* created_at is not an attribute so it will be in else case */
-            $query->orderBy($sort === 'created_at' ? 'product_flat.created_at' : $attribute->code, $direction);
+            /* `created_at` is not an attribute so it will be in else case */
+            $query->orderBy('product_flat.created_at', $direction);
         }
 
         return $query;
