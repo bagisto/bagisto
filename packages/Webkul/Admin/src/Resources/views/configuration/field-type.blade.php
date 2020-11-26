@@ -72,6 +72,7 @@
             <required-if
                 :name = "'{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]'"
                 :label = "'{{ trans($field['title']) }}'"
+                :info = "'{{ trans(isset($field['info']) ? $field['info'] : '') }}'"
                 :options = '@json($field['options'])'
                 :result = "'{{ $selectedOption }}'"
                 :validations = "'{{ $validations }}'"

@@ -113,6 +113,7 @@
                 this.$http.delete(`${this.$root.baseUrl}/cart/remove/${productId}`)
                 .then(response => {
                     this.cartItems = this.cartItems.filter(item => item.id != productId);
+                    this.$root.miniCartKey++;
 
                     window.showAlert(`alert-${response.data.status}`, response.data.label, response.data.message);
                 })
@@ -122,7 +123,7 @@
             },
 
             checkMinimumOrder: function (e) {
-                if (! this.isMinimumOrderCompleted) {
+                if (! Boolean(this.isMinimumOrderCompleted)) {
                     e.preventDefault();
                     window.showAlert(`alert-warning`, 'Warning', this.minimumOrderMessage);
                 }

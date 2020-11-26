@@ -65,9 +65,12 @@ class ProductForm extends FormRequest
     {
         $product = $this->productRepository->find($this->id);
 
+        $maxVideoFileSize = (core()->getConfigData('catalog.products.attribute.file_attribute_upload_size')) ? core()->getConfigData('catalog.products.attribute.file_attribute_upload_size') : '2048' ;
+
         $this->rules = array_merge($product->getTypeInstance()->getTypeValidationRules(), [
             'sku'                => ['required', 'unique:products,sku,' . $this->id, new \Webkul\Core\Contracts\Validations\Slug],
             'images.*'           => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
+            'videos.*'           => "nullable|mimes:mov,mp4|max:$maxVideoFileSize",
             'special_price_from' => 'nullable|date',
             'special_price_to'   => 'nullable|date|after_or_equal:special_price_from',
             'special_price'      => ['nullable', new \Webkul\Core\Contracts\Validations\Decimal, 'lt:price'],

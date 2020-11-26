@@ -37,6 +37,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "maatwebsite/excel": "3.1.19",
+        "paypal/paypal-checkout-sdk": "1.0.1",
         "prettus/l5-repository": "^2.6",
         "tymon/jwt-auth": "^1.0.0"
     },
@@ -107,7 +108,8 @@
         "Webkul\\CMS\\": "packages/Webkul/CMS/src",
         "Webkul\\Velocity\\": "packages/Webkul/Velocity/src",
         "Webkul\\BookingProduct\\": "packages/Webkul/BookingProduct/src",
-        "Webkul\\SocialLogin\\": "packages/Webkul/SocialLogin/src"
+        "Webkul\\SocialLogin\\": "packages/Webkul/SocialLogin/src",
+        "Webkul\\DebugBar\\": "packages/Webkul/DebugBar/src"
       }
     },
 
