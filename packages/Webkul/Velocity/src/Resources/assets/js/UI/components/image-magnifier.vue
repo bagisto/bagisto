@@ -1,22 +1,36 @@
 <template>
-    <div :class="currentType == 'video' ? '' : 'magnifier'">
-        <video :key="activeImageVideoURL" v-if="currentType == 'video'" width="100%" height="100%" controls>
+    <div class="video-container" v-if="currentType == 'video'">
+        <video :key="activeImageVideoURL" width="100%" controls>
             <source :src="activeImageVideoURL" type="video/mp4">
         </video>
-
-        <img v-else
-            :src="activeImageVideoURL"
-            :data-zoom-image="activeImageVideoURL"
-            class="main-product-image">
+    </div>
+    <div class="image-container" v-else>
+        <div class="magnifier">
+            <img :src="activeImageVideoURL" :data-zoom-image="activeImageVideoURL"
+                class="main-product-image">
+        </div>
     </div>
 </template>
 
 <style lang="scss">
-    .magnifier {
-        > img {
-            max-width: 100%;
-            min-height: 530px;
-            max-height: 530px;
+    .image-container {
+        .magnifier {
+            > img {
+                max-width: 100%;
+                min-height: 530px;
+                max-height: 530px;
+            }
+        }
+    }
+
+    .video-container {
+        min-height: 530px;
+        max-height: 530px;
+
+        video {
+            top: 50%;
+            position: relative;
+            transform: translateY(-50%);
         }
     }
 </style>
@@ -28,18 +42,12 @@
         data: function () {
             return {
                 activeImage: null,
-                activeImageVideoURL: '',
-                currentType: '',
+                activeImageVideoURL: this.src,
+                currentType: this.type,
             }
         },
 
         mounted: function () {
-            /* type checking for media type */
-            this.currentType = this.type;
-
-            /* getting url */
-            this.activeImageVideoURL = this.src;
-
             /* binding should be with class as ezplus is having bug of creating multiple containers */
             this.activeImage = $('.main-product-image');
             this.activeImage.attr('src', this.activeImageVideoURL);
@@ -53,18 +61,22 @@
                 $('.zoomContainer').remove();
                 this.activeImage.removeData('elevateZoom');
 
+                /* getting url */
+                this.activeImageVideoURL = largeImageUrl;
+                
                 /* type checking for media type */
                 this.currentType = currentType;
 
-                /* getting url */
-                this.activeImageVideoURL = largeImageUrl;
+                /* waiting added for image because image element takes time load when switching from video  */
+                this.waitForElement('.main-product-image', () => {
+                    /* update source for images */
+                    this.activeImage = $('.main-product-image');
+                    this.activeImage.attr('src', smallImageUrl);
+                    this.activeImage.data('zoom-image', largeImageUrl);
 
-                /* update source for images */
-                this.activeImage.attr('src', smallImageUrl);
-                this.activeImage.data('zoom-image', largeImageUrl);
-
-                /* reinitialize zoom */
-                this.elevateZoom();
+                    /* reinitialize zoom */
+                    this.elevateZoom();
+                });
             });
         },
 
@@ -77,6 +89,16 @@
                     zoomWindowWidth: 250,
                     zoomWindowHeight: 250,
                 });
+            },
+
+            waitForElement: function (selector, callback) {
+                if (jQuery(selector).length) {
+                    callback();
+                } else {
+                    setTimeout(() => {
+                        this.waitForElement(selector, callback);
+                    }, 100);
+                }
             },
         }
     }
