@@ -94,7 +94,7 @@ class Toolbar extends AbstractProduct
         } elseif (! isset($params['sort'])) {
             $sortBy = core()->getConfigData('catalog.products.storefront.sort_by')
                    ? core()->getConfigData('catalog.products.storefront.sort_by')
-                   : 'created_at-asc';
+                   : 'name-desc';
 
             if ($key == $sortBy) {
                 return true;
