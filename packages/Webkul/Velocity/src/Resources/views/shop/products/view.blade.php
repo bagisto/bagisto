@@ -124,6 +124,10 @@
                                         </div>
 
                                         <div class="product-actions">
+                                            @include ('shop::products.buy-now', [
+                                                'product' => $product,
+                                            ])
+
                                             @include ('shop::products.add-to-cart', [
                                                 'form' => false,
                                                 'product' => $product,
