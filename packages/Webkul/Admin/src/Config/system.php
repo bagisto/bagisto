@@ -218,6 +218,10 @@ return [
                     ],
                 ],
                 'channel_based' => true,
+            ], [
+                'name'  => 'buy_now_button_display',
+                'title' => 'admin::app.admin.system.buy-now-button-display',
+                'type'  => 'boolean',
             ]
         ],
     ], [
