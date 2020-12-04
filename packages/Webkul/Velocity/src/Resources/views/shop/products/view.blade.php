@@ -124,6 +124,12 @@
                                         </div>
 
                                         <div class="product-actions">
+                                            @if (core()->getConfigData('catalog.products.storefront.buy_now_button_display'))
+                                                @include ('shop::products.buy-now', [
+                                                    'product' => $product,
+                                                ])
+                                            @endif
+
                                             @include ('shop::products.add-to-cart', [
                                                 'form' => false,
                                                 'product' => $product,

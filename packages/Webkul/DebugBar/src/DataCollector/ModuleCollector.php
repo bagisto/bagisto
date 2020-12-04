@@ -271,8 +271,8 @@ class ModuleCollector extends DataCollector implements DataCollectorInterface, R
     public function getAssets()
     {
         return [
-            'base_path' => '/home/jitendra/www/html/laravel/bagisto/packages/Webkul/DebugBar/src/Resources/',
-            'base_url'  => '/home/jitendra/www/html/laravel/bagisto/packages/Webkul/DebugBar/src/Resources/',
+            'base_path' => __DIR__ . '/../Resources/',
+            'base_url'  => __DIR__ . '/../Resources/',
             'css'       => 'widgets/modules/widget.css',
             'js'        => 'widgets/modules/widget.js'
         ];
