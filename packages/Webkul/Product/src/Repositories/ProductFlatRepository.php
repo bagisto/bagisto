@@ -102,11 +102,9 @@ class ProductFlatRepository extends Repository
 
         foreach ($products as $key => $product) {
             foreach ($filterAttributes as $attribute) {
-                if ($attribute->code <> 'price') {
-                    if (isset($product[$attribute->code])) {
-                        if (! in_array($product[$attribute->code], $allProductAttributeOptionsCode)) {
-                            array_push($allProductAttributeOptionsCode, $product[$attribute->code]);
-                        }
+                if ($attribute->code <> 'price' && isset($product[$attribute->code])) {
+                    if (! in_array($product[$attribute->code], $allProductAttributeOptionsCode)) {
+                        array_push($allProductAttributeOptionsCode, $product[$attribute->code]);
                     }
                 }
             }

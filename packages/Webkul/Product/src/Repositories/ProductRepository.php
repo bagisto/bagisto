@@ -570,8 +570,11 @@ class ProductRepository extends Repository
             if ($attribute->code === 'price') {
                 $query->orderBy('min_price', $direction);
             } else {
-                $query->orderBy($sort === 'created_at' ? 'product_flat.created_at' : $attribute->code, $direction);
+                $query->orderBy($attribute->code, $direction);
             }
+        } else {
+            /* `created_at` is not an attribute so it will be in else case */
+            $query->orderBy('product_flat.created_at', $direction);
         }
 
         return $query;
@@ -773,14 +776,14 @@ class ProductRepository extends Repository
             ]);
         }
     }
-    
+
     /**
      * @object $data
      * @object $copiedProduct
      * @object $copiedProductImageVideo
      */
     private function copyProductImageVideo($data, $copiedProduct, $copiedProductImageVideo): void
-    {  
+    {
         $path = explode("/", $data->path);
 
         $path = 'product/' . $copiedProduct->id .'/'. end($path);

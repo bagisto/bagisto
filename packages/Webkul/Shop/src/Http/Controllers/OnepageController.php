@@ -350,4 +350,21 @@ class OnepageController extends Controller
             ], 422);
         }
     }
+
+    /**
+     * Check for minimum order.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function checkMinimumOrder()
+    {
+        $minimumOrderAmount = (float) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
+
+        $status = Cart::checkMinimumOrder();
+
+        return response()->json([
+            'status' => ! $status ? false : true,
+            'message' => ! $status ? trans('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]) : 'Success',
+        ]);
+    }
 }
