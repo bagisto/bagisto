@@ -1380,7 +1380,7 @@ return [
             'client-secret-info' => 'Add your secret key here',
             'accepted-currencies' => 'Accepted currencies',
             'accepted-currencies-info' => 'Add currency code comma seperated e.g. USD,INR,...',
-            'buy-now-button-display' => 'Buy now button display'
+            'buy-now-button-display' => 'Allow customers to directly buy products'
        ]
     ]
 ];
