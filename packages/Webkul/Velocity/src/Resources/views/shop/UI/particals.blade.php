@@ -178,7 +178,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
 
     <script type="text/x-template" id="image-search-component-template">
-        <div class="d-inline-block image-search-container">
+        <div class="d-inline-block image-search-container" v-if="image_search_status">
             <label for="image-search-container">
                 <i class="icon camera-icon"></i>
 
@@ -369,7 +369,7 @@
                 data: function() {
                     return {
                         uploadedImageUrl: '',
-                        image_search_status: "{{core()->getConfigData('general.content.shop.image_search') == '1' ? true : false}}"
+                        image_search_status: "{{core()->getConfigData('general.content.shop.image_search') == '1' ? 'true' : 'false'}}" == 'true'
                     }
                 },
 
