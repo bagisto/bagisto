@@ -250,7 +250,7 @@
             data: function() {
                 return {
                     uploaded_image_url: '',
-                    image_search_status: "{{core()->getConfigData('general.content.shop.image_search') == '1' ? true : false}}"
+                    image_search_status: "{{core()->getConfigData('general.content.shop.image_search') == '1' ? 'true' : 'false'}}" == 'true'
                 }
             },
 
