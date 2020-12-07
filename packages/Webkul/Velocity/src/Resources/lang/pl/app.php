@@ -111,7 +111,17 @@ return [
             'advertisement-three' => 'Trzy obrazy reklamy',
             'images' => 'Obrazy',
             'general' => 'Ogólne',
-            'add-image-btn-title' => 'Dodaj obraz'
+            'add-image-btn-title' => 'Dodaj obraz',
+            'footer-middle' => [
+                'about-us'  => 'About Us',
+                'customer-service' => 'Customer Service',
+                'whats-new' => 'What\'s New',
+                'contact-us' => 'Contact Us',
+                'order-and-returns' => 'Order and Returns',
+                'payment-policy' => 'Payment Policy',
+                'shipping-policy' => 'Shipping Policy',
+                'privacy-and-cookies-policy' => 'Privacy and Cookies Policy'
+            ]
         ],
         'category'  => [
             'save-btn-title' => 'Zapisz menu',

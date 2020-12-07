@@ -111,7 +111,17 @@ return [
             'advertisement-three' => 'Advertisement Three Images',
             'images' => 'Images',
             'general' => 'General',
-            'add-image-btn-title' => 'Add Image'
+            'add-image-btn-title' => 'Add Image',
+            'footer-middle' => [
+                'about-us'  => 'About Us',
+                'customer-service' => 'Customer Service',
+                'whats-new' => 'What\'s New',
+                'contact-us' => 'Contact Us',
+                'order-and-returns' => 'Order and Returns',
+                'payment-policy' => 'Payment Policy',
+                'shipping-policy' => 'Shipping Policy',
+                'privacy-and-cookies-policy' => 'Privacy and Cookies Policy'
+            ]
         ],
         'category' => [
             'save-btn-title' => 'Save Menu',
