@@ -4,7 +4,7 @@
 
     $locale = request()->get('locale') ?: app()->getLocale();
 
-    $attributeOptionTranslations = DB::table('attribute_option_translations')->where('locale', $locale)->get()->toJson();
+    $attributeOptionTranslations = app('\Webkul\Attribute\Repositories\AttributeOptionTranslationRepository')->where('locale', $locale)->get()->toJson();
 @endphp
 
 @push('scripts')
