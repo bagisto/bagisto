@@ -540,7 +540,5 @@
                     </span>
                 </span>
             </div>
-            @php
-            @endphp
         @endauth
     @endif
