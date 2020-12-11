@@ -31,6 +31,7 @@
 
                     {!! view_render_event('bagisto.admin.settings.channel.edit.before') !!}
 
+                    {{-- general --}}
                     <accordian :title="'{{ __('admin::app.settings.channels.general') }}'" :active="true">
                         <div slot="body">
 
@@ -88,6 +89,7 @@
                         </div>
                     </accordian>
 
+                    {{-- currencies and locales --}}
                     <accordian :title="'{{ __('admin::app.settings.channels.currencies-and-locales') }}'" :active="true">
                         <div slot="body">
 
@@ -146,6 +148,7 @@
                         </div>
                     </accordian>
 
+                    {{-- design --}}
                     <accordian :title="'{{ __('admin::app.settings.channels.design') }}'" :active="true">
                         <div slot="body">
                             <div class="control-group">
@@ -191,6 +194,7 @@
                         $seo = json_decode($channel->home_seo);
                     @endphp
 
+                    {{-- home page seo --}}
                     <accordian :title="'{{ __('admin::app.settings.channels.seo') }}'" :active="true">
                         <div slot="body">
                             <div class="control-group" :class="[errors.has('seo_title') ? 'has-error' : '']">
@@ -213,6 +217,30 @@
                                 <textarea v-validate="'required'" class="control" id="seo_keywords" name="seo_keywords" data-vv-as="&quot;{{ __('admin::app.settings.channels.seo-keywords') }}&quot;">{{ $seo->meta_keywords ?? old('seo_keywords') }}</textarea>
 
                                 <span class="control-error" v-if="errors.has('seo_keywords')">@{{ errors.first('seo_keywords') }}</span>
+                            </div>
+                        </div>
+                    </accordian>
+
+                    {{-- maintenance mode --}}
+                    <accordian title="{{ __('admin::app.settings.channels.maintenance-mode') }}" :active="true">
+                        <div slot="body">
+                            <div class="control-group">
+                                <label for="maintenance-mode-status">{{ __('admin::app.status') }}</label>
+                                <label class="switch">
+                                    <input type="hidden" name="is_maintenance_on" value="0" />
+                                    <input type="checkbox" id="maintenance-mode-status" name="is_maintenance_on" value="1" {{ $channel->is_maintenance_on ? 'checked' : '' }}>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+
+                            <div class="control-group">
+                                <label for="maintenance-mode-text">{{ __('admin::app.settings.channels.maintenance-mode-text') }}</label>
+                                <input class="control" id="maintenance-mode-text" name="maintenance_mode_text" value="{{ old('maintenance_mode_text') ?: $channel->maintenance_mode_text }}"/>
+                            </div>
+
+                            <div class="control-group">
+                                <label for="allowed-ips">{{ __('admin::app.settings.channels.allowed-ips') }}</label>
+                                <input class="control" id="allowed-ips" name="allowed_ips" value="{{ old('allowed_ips') ?: $channel->allowed_ips }}"/>
                             </div>
                         </div>
                     </accordian>

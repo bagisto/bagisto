@@ -75,6 +75,7 @@ class ChannelController extends Controller
             'seo_description'   => 'required|string',
             'seo_keywords'      => 'required|string',
             'hostname'          => 'unique:channels,hostname',
+            'is_maintenance_on' => 'boolean'
         ]);
 
         $data = request()->all();
@@ -135,6 +136,7 @@ class ChannelController extends Controller
             'logo.*'            => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
             'favicon.*'         => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
             'hostname'          => 'unique:channels,hostname,' . $id,
+            'is_maintenance_on' => 'boolean'
         ]);
 
         $data = request()->all();
