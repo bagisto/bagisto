@@ -101,13 +101,13 @@ return [
         'key'        => 'configuration',
         'name'       => 'admin::app.layouts.configure',
         'route'      => 'admin.configuration.index',
-        'sort'       => 7,
+        'sort'       => 10,
         'icon-class' => 'configuration-icon',
     ], [
         'key'        => 'settings',
         'name'       => 'admin::app.layouts.settings',
         'route'      => 'admin.locales.index',
-        'sort'       => 6,
+        'sort'       => 9,
         'icon-class' => 'settings-icon',
     ], [
         'key'        => 'settings.locales',
@@ -185,7 +185,7 @@ return [
         'key'        => 'promotions',
         'name'       => 'admin::app.layouts.promotions',
         'route'      => 'admin.catalog-rules.index',
-        'sort'       => 5,
+        'sort'       => 6,
         'icon-class' => 'promotion-icon',
     ], [
         'key'        => 'promotions.catalog-rules',
@@ -203,7 +203,7 @@ return [
         'key'        => 'cms',
         'name'       => 'admin::app.layouts.cms',
         'route'      => 'admin.cms.index',
-        'sort'       => 5,
+        'sort'       => 8,
         'icon-class' => 'cms-icon',
     ], [
         'key'        => 'cms.pages',
@@ -211,5 +211,5 @@ return [
         'route'      => 'admin.cms.index',
         'sort'       => 1,
         'icon-class' => '',
-    ]
+    ],
 ];
