@@ -28,6 +28,7 @@ return [
         \Webkul\Paypal\Providers\ModuleServiceProvider::class,
         \Webkul\Product\Providers\ModuleServiceProvider::class,
         \Webkul\Rule\Providers\ModuleServiceProvider::class,
+        \Webkul\Communication\Providers\ModuleServiceProvider::class,
         \Webkul\Sales\Providers\ModuleServiceProvider::class,
         \Webkul\Shipping\Providers\ModuleServiceProvider::class,
         \Webkul\Shop\Providers\ModuleServiceProvider::class,

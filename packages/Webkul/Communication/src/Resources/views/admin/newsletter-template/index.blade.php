@@ -20,6 +20,9 @@
         </div>
 
         <div class="page-content">
+            @inject('newsletterTemplateDataGrid','Webkul\Communication\Datagrids\NewsletterTemplateDataGrid')
+
+            {!! $newsletterTemplateDataGrid->render() !!}
         </div>
     </div>
 
