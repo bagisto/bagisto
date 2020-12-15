@@ -10,4 +10,8 @@ Route::group([
         'view' => 'communication::admin.newsletter-template.index',
     ])->name('communication.newsletter-templates.index');
 
+    Route::get('newsletter-templates/create', 'NewsletterTemplateController@create')->defaults('_config', [
+        'view' => 'communication::admin.newsletter-template.create',
+    ])->name('communication.newsletter-templates.create');
+
 });
