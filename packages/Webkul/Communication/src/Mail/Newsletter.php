@@ -5,30 +5,41 @@ namespace Webkul\Communication\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Webkul\Communication\Contracts\NewsletterTemplate;
+use Webkul\Core\Contracts\SubscribersList;
+use Webkul\Communication\Contracts\NewsletterQueue;
 
 class Newsletter extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
-     * Newsletter template.
+     * Newsletter.
      *
-     * @var Webkul\Communication\Contracts\NewsletterTemplate
+     * @var Webkul\Communication\Contracts\NewsletterQueue
      */
-    protected $newsletterTemplate;
+    protected $newsletter;
+
+    /**
+     * Subscriber email.
+     *
+     * @var Webkul\Core\Contracts\SubscribersList
+     */
+    protected $subscriber;
 
     /**
      * Constructor.
      *
-     * @param  Webkul\Communication\Contracts\NewsletterTemplate $newsletterTemplate
+     * @param  Webkul\Communication\Contracts\NewsletterQueue
+     * @param  Webkul\Core\Contracts\SubscribersList
      * @return void
      */
     public function __construct(
-        NewsletterTemplate $newsletterTemplate
+        NewsletterQueue $newsletter,
+        SubscribersList $subscriber
     )
     {
-        $this->newsletterTemplate = $newsletterTemplate;
+        $this->newsletter = $newsletter;
+        $this->subscriber = $subscriber;
     }
 
     /**
@@ -38,9 +49,9 @@ class Newsletter extends Mailable
      */
     public function build()
     {
-        return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
-                    ->to(core()->getAdminEmailDetails()['email'])
-                    ->subject(trans('shop::app.mail.order.subject'))
-                    ->view('shop::emails.sales.new-admin-order');
+        return $this->from($this->newsletter->sender_email, $this->newsletter->sender_name)
+                    ->to($this->subscriber->email)
+                    ->subject($this->newsletter->subject)
+                    ->html($this->newsletter->content);
     }
 }

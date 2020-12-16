@@ -20,6 +20,10 @@ class CommunicationServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'communication');
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'communication');
+
+        $this->commands([
+            \Webkul\Communication\Console\Commands\SendNewsletter::class,
+        ]);
     }
 
     /**

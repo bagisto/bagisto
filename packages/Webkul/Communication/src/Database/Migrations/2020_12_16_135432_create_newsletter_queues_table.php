@@ -20,6 +20,7 @@ class CreateNewsletterQueuesTable extends Migration
             $table->string('sender_email');
             $table->text('content');
             $table->timestamp('queue_datetime');
+            $table->boolean('is_delivered')->default(0);
             $table->timestamps();
         });
     }
