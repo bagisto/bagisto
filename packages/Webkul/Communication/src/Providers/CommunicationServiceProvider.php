@@ -3,6 +3,7 @@
 namespace Webkul\Communication\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Console\Scheduling\Schedule;
 
 class CommunicationServiceProvider extends ServiceProvider
 {
@@ -21,9 +22,9 @@ class CommunicationServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'communication');
 
-        $this->commands([
-            \Webkul\Communication\Console\Commands\SendNewsletter::class,
-        ]);
+        $this->registerCommand();
+
+        $this->setupScheduler();
     }
 
     /**
@@ -50,5 +51,29 @@ class CommunicationServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             dirname(__DIR__) . '/Config/acl.php', 'acl'
         );
+    }
+
+    /**
+     * Register package commands.
+     *
+     * @return void
+     */
+    protected function registerCommand()
+    {
+        $this->commands([
+            \Webkul\Communication\Console\Commands\SendNewsletter::class,
+        ]);
+    }
+
+    /**
+     * Setup your scheduler.
+     *
+     * @return void
+     */
+    protected function setupScheduler()
+    {
+        $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
+            $schedule->command('newsletter:send')->everyMinute();
+        });
     }
 }
