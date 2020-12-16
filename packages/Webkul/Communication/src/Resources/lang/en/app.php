@@ -24,5 +24,14 @@ return [
             'delete-template' => 'Delete Template',
             'confirm-text' => 'Are you sure?'
         ],
+    ],
+
+    'newsletter-queue' => [
+        'queue-information' => 'Queue Information',
+        'queue-newsletter' => 'Queue Newsletter',
+        'queue-form' => [
+            'queue-date' => 'Queue Date',
+            'save-queue' => 'Save Queue'
+        ]
     ]
 ];

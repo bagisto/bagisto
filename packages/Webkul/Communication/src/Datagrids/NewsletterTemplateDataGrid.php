@@ -105,6 +105,13 @@ class NewsletterTemplateDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
+            'title'  => trans('communication::app.newsletter-queue.queue-newsletter'),
+            'method' => 'GET',
+            'route'  => 'communication.newsletter-queue.create',
+            'icon'   => 'icon list-icon',
+        ]);
+
+        $this->addAction([
             'title'  => trans('communication::app.newsletter-templates.template-form.edit-template'),
             'method' => 'GET',
             'route'  => 'communication.newsletter-templates.edit',

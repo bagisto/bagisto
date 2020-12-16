@@ -6,6 +6,7 @@ Route::group([
     'namespace' => 'Webkul\Communication\Http\Controllers\Admin'
 ], function () {
 
+    /* newsletter templates */
     Route::get('newsletter-templates', 'NewsletterTemplateController@index')->defaults('_config', [
         'view' => 'communication::admin.newsletter-template.index',
     ])->name('communication.newsletter-templates.index');
@@ -25,4 +26,11 @@ Route::group([
     ])->name('communication.newsletter-templates.update');
 
     Route::delete('newsletter-templates/delete/{id}', 'NewsletterTemplateController@destroy')->name('communication.newsletter-templates.delete');
+
+    /* newsletter queue */
+    Route::get('newsletter-queue/{newsletterTemplateId}/create', 'NewsletterQueueController@create')->defaults('_config', [
+        'view' => 'communication::admin.newsletter-queue.create',
+    ])->name('communication.newsletter-queue.create');
+
+    Route::post('newsletter-templates/{newsletterTemplateId}/store', 'NewsletterQueueController@store')->name('communication.newsletter-queue.store');
 });
