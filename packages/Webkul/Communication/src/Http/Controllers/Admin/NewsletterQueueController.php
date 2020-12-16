@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Webkul\Communication\Repositories\NewsletterQueueRepository;
 use Webkul\Communication\Repositories\NewsletterTemplateRepository;
 
 class NewsletterQueueController extends Controller
@@ -21,11 +22,18 @@ class NewsletterQueueController extends Controller
     protected $_config;
 
     /**
-     * Newsletter Template Repository.
+     * Newsletter template repository.
      *
      * @var Webkul\Communication\Repositories\NewsletterTemplateRepository
      */
     protected $newsletterTemplateRepository;
+
+    /**
+     * Newsletter queue repository.
+     *
+     * @var Webkul\Communication\Repositories\NewsletterQueueRepository
+     */
+    protected $newsletterQueueRepository;
 
     /**
      * Create a new controller instance.
@@ -34,7 +42,8 @@ class NewsletterQueueController extends Controller
      * @return void
      */
     public function __construct(
-        NewsletterTemplateRepository $newsletterTemplateRepository
+        NewsletterTemplateRepository $newsletterTemplateRepository,
+        NewsletterQueueRepository $newsletterQueueRepository
     )
     {
         $this->middleware('admin');
@@ -42,6 +51,7 @@ class NewsletterQueueController extends Controller
         $this->_config = request('_config');
 
         $this->newsletterTemplateRepository = $newsletterTemplateRepository;
+        $this->newsletterQueueRepository = $newsletterQueueRepository;
     }
 
     /**
@@ -75,19 +85,21 @@ class NewsletterQueueController extends Controller
      */
     public function store(Request $request, $newsletterTemplateId)
     {
-        // $inputs = $request->validate([
-        //     'template_name' => 'required',
-        //     'template_subject' => 'required',
-        //     'sender_name' => 'required',
-        //     'sender_email' => 'required',
-        //     'template_content' => 'required'
-        // ]);
+        $inputs = $request->validate([
+            'subject' => 'required',
+            'sender_name' => 'required',
+            'sender_email' => 'required',
+            'content' => 'required',
+            'queue_datetime' => 'required|date'
+        ]);
 
-        // $this->newsletterTemplateRepository->create($inputs);
+        $inputs['queue_datetime'] .= ' ' . now()->toTimeString();
 
-        // session()->flash('success', trans('communication::app.newsletter-templates.template-form.response.store-success'));
+        $this->newsletterQueueRepository->create($inputs);
 
-        // return redirect()->back();
+        session()->flash('success', trans('communication::app.newsletter-queue.queue-form.response.store-success'));
+
+        return redirect()->route('communication.newsletter-queue.index');
     }
 
     /**
@@ -98,9 +110,6 @@ class NewsletterQueueController extends Controller
      */
     public function edit($id)
     {
-        // $newsletterTemplate = $this->newsletterTemplateRepository->findOrFail($id);
-
-        // return view($this->_config['view'], compact('newsletterTemplate'));
     }
 
     /**
@@ -111,19 +120,6 @@ class NewsletterQueueController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $inputs = $request->validate([
-        //     'template_name' => 'required',
-        //     'template_subject' => 'required',
-        //     'sender_name' => 'required',
-        //     'sender_email' => 'required',
-        //     'template_content' => 'required'
-        // ]);
-
-        // $this->newsletterTemplateRepository->update($inputs, $id);
-
-        // session()->flash('success', trans('communication::app.newsletter-templates.template-form.response.update-success'));
-
-        // return redirect()->route($this->_config['redirect']);
     }
 
     /**
@@ -134,12 +130,5 @@ class NewsletterQueueController extends Controller
      */
     public function destroy($id)
     {
-        // $newsletterTemplate = $this->newsletterTemplateRepository->findOrFail($id);
-
-        // $newsletterTemplate->delete();
-
-        // session()->flash('success', trans('communication::app.newsletter-templates.template-form.response.destroy-success'));
-
-        // return response()->json(['message' => true], 200);
     }
 }

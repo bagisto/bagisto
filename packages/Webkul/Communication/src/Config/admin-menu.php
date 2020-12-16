@@ -15,4 +15,11 @@ return [
         'sort' => 1,
         'icon-class' => '',
     ],
+    [
+        'key' => 'communication.newsletter-queue',
+        'name' => 'communication::app.newsletter-queue.newsletter-queue',
+        'route' => 'communication.newsletter-queue.index',
+        'sort' => 1,
+        'icon-class' => '',
+    ],
 ];

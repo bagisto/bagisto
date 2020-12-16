@@ -8,7 +8,7 @@ use Webkul\Communication\Repositories\NewsletterTemplateRepository;
 class NewsletterTemplateDataGrid extends DataGrid
 {
     /**
-     * Newsletter Template Repository.
+     * Newsletter queue repository.
      *
      * @var Webkul\Communication\Repositories\NewsletterTemplateRepository
      */
@@ -29,7 +29,7 @@ class NewsletterTemplateDataGrid extends DataGrid
     protected $sortOrder = 'desc';
 
     /**
-     * Create a new controller instance.
+     * Constructor.
      *
      * @param  Webkul\Communication\Repositories\NewsletterTemplateRepository $newsletterTemplateRepository
      * @return void
@@ -48,8 +48,6 @@ class NewsletterTemplateDataGrid extends DataGrid
             ->addSelect([
                 'id', 'template_name', 'template_subject', 'sender_name', 'sender_email'
             ]);
-
-        $this->addFilter('template_name', 'template_subject', 'sender_name', 'sender_email');
 
         $this->setQueryBuilder($queryBuilder);
     }
