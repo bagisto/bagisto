@@ -7,11 +7,13 @@ import axios from 'axios';
 import VueSlider from 'vue-slider-component';
 import accounting from 'accounting';
 import ImageSlider from './components/image-slider';
+import 'lazysizes';
 
 window.jQuery = window.$ = $;
 window.Vue = Vue;
 window.VeeValidate = VeeValidate;
 window.axios = axios;
+
 require("./bootstrap");
 require("ez-plus/src/jquery.ez-plus.js");
 
@@ -27,8 +29,10 @@ Vue.prototype.$http = axios
 
 window.eventBus = new Vue();
 
-Vue.component("image-slider", ImageSlider);
-Vue.component("vue-slider", VueSlider);
+Vue.component('image-slider', ImageSlider);
+Vue.component('vue-slider', VueSlider);
+Vue.component('proceed-to-checkout', require('./components/checkout/proceed-to-checkout').default);
+
 Vue.filter('currency', function (value, argument) {
     return accounting.formatMoney(value, argument);
 })
@@ -127,4 +131,6 @@ $(document).ready(function () {
             }
         }
     });
+
+    window.app = app;
 });

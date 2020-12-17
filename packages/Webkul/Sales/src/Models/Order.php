@@ -218,7 +218,7 @@ class Order extends Model implements OrderContract
         }
 
         foreach ($this->items as $item) {
-            if ($item->canShip()) {
+            if ($item->canShip() && $item->order->status !== self::STATUS_CLOSED) {
                 return true;
             }
         }
@@ -238,7 +238,7 @@ class Order extends Model implements OrderContract
         }
 
         foreach ($this->items as $item) {
-            if ($item->canInvoice()) {
+            if ($item->canInvoice() && $item->order->status !== self::STATUS_CLOSED) {
                 return true;
             }
         }
@@ -257,8 +257,13 @@ class Order extends Model implements OrderContract
             return false;
         }
 
+        $pendingInvoice = $this->invoices->where('state', 'pending')->first();
+        if ($pendingInvoice) {
+            return true;
+        }
+
         foreach ($this->items as $item) {
-            if ($item->canCancel()) {
+            if ($item->canCancel() && $item->order->status !== self::STATUS_CLOSED) {
                 return true;
             }
         }
@@ -278,7 +283,7 @@ class Order extends Model implements OrderContract
         }
 
         foreach ($this->items as $item) {
-            if ($item->qty_to_refund > 0) {
+            if ($item->qty_to_refund > 0 && $item->order->status !== self::STATUS_CLOSED) {
                 return true;
             }
         }

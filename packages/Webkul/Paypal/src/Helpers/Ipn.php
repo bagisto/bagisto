@@ -105,7 +105,7 @@ class Ipn
                 $this->orderRepository->update(['status' => 'processing'], $this->order->id);
 
                 if ($this->order->canInvoice()) {
-                    $this->invoiceRepository->create($this->prepareInvoiceData());
+                    $invoice = $this->invoiceRepository->create($this->prepareInvoiceData());
                 }
             }
         }
@@ -118,9 +118,7 @@ class Ipn
      */
     protected function prepareInvoiceData()
     {
-        $invoiceData = [
-            "order_id" => $this->order->id,
-        ];
+        $invoiceData = ["order_id" => $this->order->id,];
 
         foreach ($this->order->items as $item) {
             $invoiceData['invoice']['items'][$item->id] = $item->qty_to_invoice;

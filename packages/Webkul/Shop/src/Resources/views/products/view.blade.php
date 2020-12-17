@@ -11,7 +11,7 @@
 
     @if (core()->getConfigData('catalog.rich_snippets.products.enable'))
         <script type="application/ld+json">
-            {!! app('Webkul\Product\Helpers\SEO')->getProductJsonLd($product) !!}
+            {{ app('Webkul\Product\Helpers\SEO')->getProductJsonLd($product) }}
         </script>
     @endif
 
@@ -21,7 +21,7 @@
 
     <meta name="twitter:title" content="{{ $product->name }}" />
 
-    <meta name="twitter:description" content="{{ $product->description }}" />
+    <meta name="twitter:description" content="{!! htmlspecialchars(trim(strip_tags($product->description))) !!}" />
 
     <meta name="twitter:image:alt" content="" />
 
@@ -33,7 +33,7 @@
 
     <meta property="og:image" content="{{ $productBaseImage['medium_image_url'] }}" />
 
-    <meta property="og:description" content="{{ $product->description }}" />
+    <meta property="og:description" content="{!! htmlspecialchars(trim(strip_tags($product->description))) !!}" />
 
     <meta property="og:url" content="{{ route('shop.productOrCategory.index', $product->url_key) }}" />
 @stop

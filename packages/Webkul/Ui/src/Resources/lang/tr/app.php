@@ -9,6 +9,7 @@ return [
             'mass-update-status' => 'Seçili :resource kayıtlarının durumunu güncellemek istediğinizden emin misiniz?',
             'delete' => 'Bu işlemi gerçekleştirmek istediğinizden emin misiniz?',
             'edit' => ':resource kaydını düzenlemek istediğinizden emin misiniz?',
+            'delete-category-product' => 'The selected categories contains products. Performing this action will remove the related products. Do you really want to perform this action?'
         ],
 
         'zero-index' => 'Index sütunları sadece sıfırdan büyük değere sahip olmalı',

@@ -103,23 +103,19 @@ class SessionController extends Controller
             'password'      => 'confirmed|min:6',
         ]);
 
-        $data = request()->all();
+        $data = request()->only('first_name', 'last_name', 'gender', 'date_of_birth', 'email', 'password');
 
-        if (! $data['date_of_birth']) {
-            unset($data['date_of_birth']);
-        }
-
-        if (!isset($data['password']) || ! $data['password']) {
+        if (! isset($data['password']) || ! $data['password']) {
             unset($data['password']);
         } else {
             $data['password'] = bcrypt($data['password']);
         }
 
-        $this->customerRepository->update($data, $customer->id);
+        $updatedCustomer = $this->customerRepository->update($data, $customer->id);
 
         return response()->json([
-            'message' => 'Your account has been created successfully.',
-            'data'    => new CustomerResource($this->customerRepository->find($customer->id)),
+            'message' => 'Your account has been updated successfully.',
+            'data'    => new CustomerResource($updatedCustomer),
         ]);
     }
 

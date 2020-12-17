@@ -96,6 +96,7 @@ return [
             'home-page-content' => 'Inhalt der Startseite',
             'footer-left-content' => 'Fußzeile Linker Inhalt',
             'subscription-content' => 'Abonnementleiste Inhalt',
+            'header_content_count' => 'Header Content Count',
             'sidebar-categories' => 'Seitenleisten-Kategorien',
             'footer-left-raw-content' => '<p>Wir lieben es, Software zu erstellen und die Probleme der realen Welt mit den Binärdateien zu lösen. Wir fühlen uns unseren Zielen sehr verpflichtet. Wir investieren unsere Ressourcen, um benutzerfreundliche Software und Anwendungen von Weltklasse für das Unternehmensgeschäft mit erstklassiger Technologie zu entwickeln.</p>',
             'slider-path' => 'Slider Pfad',
@@ -110,7 +111,17 @@ return [
             'advertisement-three' => 'Werbung Drei Bilder',
             'images' => 'Bilder',
             'general' => 'Allgemein',
-            'add-image-btn-title' => 'Bild hinzufügen'
+            'add-image-btn-title' => 'Bild hinzufügen',
+            'footer-middle' => [
+                'about-us'  => 'About Us',
+                'customer-service' => 'Customer Service',
+                'whats-new' => 'What\'s New',
+                'contact-us' => 'Contact Us',
+                'order-and-returns' => 'Order and Returns',
+                'payment-policy' => 'Payment Policy',
+                'shipping-policy' => 'Shipping Policy',
+                'privacy-and-cookies-policy' => 'Privacy and Cookies Policy'
+            ]
         ],
         'category'  => [
             'save-btn-title' => 'Menü speichern',
@@ -194,9 +205,11 @@ return [
         'compare'           => [
             'text'                  => 'Vergleichen',
             'compare_similar_items' => 'Ähnliche Artikel vergleichen',
+            'add-tooltip'           => 'Produkt zur Vergleichsliste hinzufügen',
             'added'                 => 'Element erfolgreich zur Vergleichsliste hinzugefügt',
             'already_added'         => 'Artikel bereits zur Vergleichsliste hinzugefügt',
             'removed'               => 'Element erfolgreich aus Vergleichsliste entfernt',
+            'removed-all'           => 'Alle Elemente erfolgreich aus der Vergleichsliste entfernt',
             'empty-text'            => "Sie haben keine Elemente in Ihrer Vergleichsliste",
             'product_image'         => 'Produktbild',
             'actions'               => 'Aktionen',
@@ -220,7 +233,10 @@ return [
             'forgot-password'       => 'Passwort vergessen',
             'recover-password'      => 'Passwort wiederherstellen',
             'recover-password-text' => 'Wenn Sie Ihr Passwort vergessen haben, stellen Sie es durch Eingabe Ihrer E-Mail-Adresse wieder her.',
-        ]
+        ],
+        'wishlist' => [
+            'remove-all-success' => 'Alle Artikel von Ihrer Wunschliste wurden entfernt',
+        ],
     ],
 
     'error'         => [
@@ -271,6 +287,8 @@ return [
             'downloadables'          => 'Herunterladbare Produkte',
             'confirm-new-password'   => 'Bestätigen Sie Ihr neues Passwort',
             'enter-current-password' => 'Geben Sie Ihr aktuelles Passwort ein',
+            'download'               => 'Downloaden',
+            'no-file-available'      => 'Geen bestand beschikbaar!',
 
             'alert' => [
                 'info'      => 'Information',

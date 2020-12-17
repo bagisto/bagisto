@@ -3,6 +3,7 @@
 namespace Webkul\Theme;
 
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Str;
 use Webkul\Theme\Theme;
 
 class Themes
@@ -42,9 +43,13 @@ class Themes
      */
     public function __construct()
     {
-        $this->laravelViewsPath = Config::get('view.paths');
+        if (request()->route() !== null && Str::contains(request()->route()->uri, 'admin/')) {
+            $this->defaultThemeCode = Config::get('themes.admin-default', null);
+        } else {
+            $this->defaultThemeCode = Config::get('themes.default', null);
+        }
 
-        $this->defaultThemeCode = Config::get('themes.default', null);
+        $this->laravelViewsPath = Config::get('view.paths');
 
         $this->loadThemes();
     }
@@ -60,6 +65,32 @@ class Themes
     }
 
     /**
+     * Return list of registered themes
+     *
+     * @return array
+     */
+    public function getChannelThemes()
+    {
+        $themes = config('themes.themes', []);
+        $channelThemes = [];
+
+        foreach ($themes as $code => $data) {
+            $channelThemes[] = new Theme(
+                $code,
+                isset($data['name']) ? $data['name'] : '',
+                isset($data['assets_path']) ? $data['assets_path'] : '',
+                isset($data['views_path']) ? $data['views_path'] : ''
+            );
+
+            if (isset($data['parent']) && $data['parent']) {
+                $parentThemes[$code] = $data['parent'];
+            }
+        }
+
+        return $channelThemes;
+    }
+
+    /**
      * Check if specified exists
      *
      * @param  string  $themeName
@@ -72,7 +103,7 @@ class Themes
                 return true;
             }
         }
-        
+
         return false;
     }
 
@@ -84,8 +115,12 @@ class Themes
     public function loadThemes()
     {
         $parentThemes = [];
-        
-        $themes = config('themes.themes', []);
+
+        if (request()->route() !== null && Str::contains(request()->route()->uri, 'admin/')) {
+            $themes = config('themes.admin-themes', []);
+        } else {
+            $themes = config('themes.themes', []);
+        }
 
         foreach ($themes as $code => $data) {
             $this->themes[] = new Theme(
@@ -140,6 +175,7 @@ class Themes
         Config::set('view.paths', $paths);
 
         $themeViewFinder = app('view.finder');
+
         $themeViewFinder->setPaths($paths);
 
         return $theme;

@@ -21,19 +21,19 @@
             <div class="row">
                 @if ( isset($advertisementThree[0]))
                     <a @if (isset($one)) href="{{ $one }}" @endif class="col-lg-6 col-md-12 no-padding">
-                        <img src="{{ asset('/storage/' . $advertisementThree[0]) }}" class="full-width" />
+                        <img data-src="{{ asset('/storage/' . $advertisementThree[0]) }}" class="full-width lazyload" alt="" />
                     </a>
                 @endif
 
                 <div class="col-lg-6 col-md-12 second-panel">
                     @if ( isset($advertisementThree[1]))
                         <a @if (isset($two)) href="{{ $two }}" @endif class="row top-container">
-                            <img src="{{ asset('/storage/' . $advertisementThree[1]) }}" class="col-12 pr0" />
+                            <img data-src="{{ asset('/storage/' . $advertisementThree[1]) }}" class="col-12 pr0 lazyload" alt="" />
                         </a>
                     @endif
                     @if ( isset($advertisementThree[2]))
                         <a @if (isset($three)) href="{{ $three }}" @endif class="row bottom-container">
-                            <img src="{{ asset('/storage/' . $advertisementThree[2]) }}" class="col-12 pr0" />
+                            <img data-src="{{ asset('/storage/' . $advertisementThree[2]) }}" class="col-12 pr0 lazyload" alt="" />
                         </a>
                     @endif
                 </div>
@@ -46,15 +46,15 @@
     <div class="container-fluid advertisement-three-container">
         <div class="row">
             <a @if (isset($one)) href="{{ $one }}" @endif class="col-lg-6 col-md-12 no-padding">
-                <img src="{{ asset('/themes/velocity/assets/images/headphones.png') }}" class="full-width" />
+                <img data-src="{{ asset('/themes/velocity/assets/images/headphones.webp') }}" class="full-width lazyload" alt="" />
             </a>
 
             <div class="col-lg-6 col-md-12 second-panel">
                 <a @if (isset($two)) href="{{ $two }}" @endif class="row top-container">
-                    <img src="{{ asset('/themes/velocity/assets/images/watch.png') }}" class="col-12 pr0" />
+                    <img data-src="{{ asset('/themes/velocity/assets/images/watch.webp') }}" class="col-12 pr0 lazyload" alt="" />
                 </a>
                 <a @if (isset($three)) href="{{ $three }}" @endif class="row bottom-container">
-                    <img src="{{ asset('/themes/velocity/assets/images/kids-2.png') }}" class="col-12 pr0" />
+                    <img data-src="{{ asset('/themes/velocity/assets/images/kids-2.webp') }}" class="col-12 pr0 lazyload" alt="" />
                 </a>
             </div>
         </div>

@@ -27,7 +27,7 @@
                     <div class="page-title">
                         <h1>
                             <i class="icon angle-left-icon back-link"
-                            onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                            onclick="window.location = history.length > 1 ? document.referrer : '{{ route('admin.dashboard.index') }}'"></i>
 
                             {{ __('admin::app.promotions.cart-rules.edit-title') }}
                         </h1>
@@ -457,11 +457,37 @@
 
             </form>
 
+
+            <div class="content">
+                <div class="page-header">
+                    <div class="page-action">
+                        <div class="export-import" @click="showModal('downloadDataGrid')">
+                            <i class="export-icon"></i>
+                            <span >
+                                {{ __('admin::app.export.export') }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <modal id="downloadDataGrid" :is-open="this.$root.modalIds.downloadDataGrid">
+                <h3 slot="header">{{ __('admin::app.export.download') }}</h3>
+                <div slot="body">
+                    <export-form></export-form>
+                </div>
+            </modal>
+
             @inject('cartRuleCouponGrid','Webkul\Admin\DataGrids\CartRuleCouponDataGrid')
 
             {!! $cartRuleCouponGrid->render() !!}
         </div>
     </script>
+
+    @push('scripts')
+       @include('admin::export.export', ['gridName' => $cartRuleCouponGrid])
+@endpush
 
     <script>
         Vue.component('cart-rule', {
@@ -754,7 +780,11 @@
                                 })
                         }
                     });
-                }
+                },
+
+                showModal(id) {
+                    this.$root.$set(this.$root.modalIds, id, true); 
+                },
             }
         });
     </script>

@@ -86,4 +86,56 @@ class ProductFlatRepository extends Repository
 
         return $filterAttributes;
     }
+
+    /**
+     * filter attributes according to products
+     * 
+     * @param  array  $category
+     * @return \Illuminate\Support\Collection
+     */
+    public function getProductsRelatedFilterableAttributes($category) {
+        $products = app('Webkul\Product\Repositories\ProductRepository')->getProductsRelatedToCategory($category->id);
+
+        $filterAttributes = $this->getFilterableAttributes($category, $products);
+
+        $allProductAttributeOptionsCode = [];
+
+        foreach ($products as $key => $product) {
+            foreach ($filterAttributes as $attribute) {
+                if ($attribute->code <> 'price' && isset($product[$attribute->code])) {
+                    if (! in_array($product[$attribute->code], $allProductAttributeOptionsCode)) {
+                        array_push($allProductAttributeOptionsCode, $product[$attribute->code]);
+                    }
+                }
+            }
+        }
+
+        foreach ($filterAttributes as $attribute) {
+            foreach ($attribute->options as $key => $option) {
+                if (! in_array($option->id, $allProductAttributeOptionsCode)) {
+                    unset($attribute->options[$key]);
+                }
+            }         
+        }   
+        
+        return $filterAttributes;
+
+    }
+
+    /**
+     * update product_flat custom column
+     * 
+     * @param \Webkul\Attribute\Models\Attribute $attribute
+     * @param \Webkul\Product\Listeners\ProductFlat $listener
+     */
+    public function updateAttributeColumn(
+        \Webkul\Attribute\Models\Attribute $attribute ,
+        \Webkul\Product\Listeners\ProductFlat $listener ) {
+        return $this->model
+            ->leftJoin('product_attribute_values as v', function($join) use ($attribute) {
+                $join->on('product_flat.id', '=', 'v.product_id')
+                    ->on('v.attribute_id', '=', \DB::raw($attribute->id));
+            })->update(['product_flat.'.$attribute->code => \DB::raw($listener->attributeTypeFields[$attribute->type] .'_value')]);
+    }
+
 }

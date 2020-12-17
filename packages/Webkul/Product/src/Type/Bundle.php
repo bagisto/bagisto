@@ -3,14 +3,17 @@
 namespace Webkul\Product\Type;
 
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Product\Datatypes\CartItemValidationResult;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
+use Webkul\Product\Repositories\ProductVideoRepository;
 use Webkul\Product\Repositories\ProductBundleOptionRepository;
 use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
 use Webkul\Product\Helpers\ProductImage;
 use Webkul\Product\Helpers\BundleOption;
+use Webkul\Checkout\Models\CartItem;
 
 class Bundle extends AbstractType
 {
@@ -52,7 +55,8 @@ class Bundle extends AbstractType
         'admin::catalog.products.accordians.categories',
         'admin::catalog.products.accordians.bundle-items',
         'admin::catalog.products.accordians.channels',
-        'admin::catalog.products.accordians.product-links'
+        'admin::catalog.products.accordians.product-links',
+        'admin::catalog.products.accordians.videos',
     ];
 
     /**
@@ -86,6 +90,7 @@ class Bundle extends AbstractType
      * @param  \Webkul\Product\Repositories\ProductBundleOptionProductRepository  $productBundleOptionProductRepository
      * @param  \Webkul\Product\Helpers\ProductImage  $productImageHelper
      * @param  \Webkul\Product\Helpers\BundleOption  $bundleOptionHelper
+     * @param \Webkul\Product\Repositories\ProductVideoRepository  $productVideoRepository
      * @return void
      */
     public function __construct(
@@ -97,7 +102,8 @@ class Bundle extends AbstractType
         ProductBundleOptionRepository $productBundleOptionRepository,
         ProductBundleOptionProductRepository $productBundleOptionProductRepository,
         ProductImage $productImageHelper,
-        BundleOption $bundleOptionHelper
+        BundleOption $bundleOptionHelper,
+        ProductVideoRepository $productVideoRepository
     )
     {
         parent::__construct(
@@ -106,7 +112,8 @@ class Bundle extends AbstractType
             $attributeValueRepository,
             $productInventoryRepository,
             $productImageRepository,
-            $productImageHelper
+            $productImageHelper,
+            $productVideoRepository
         );
 
         $this->productBundleOptionRepository = $productBundleOptionRepository;
@@ -417,8 +424,8 @@ class Bundle extends AbstractType
         $priceHtml .= '<div class="price-from">';
 
         if ($prices['from']['regular_price']['price'] != $prices['from']['final_price']['price']) {
-            $priceHtml .= '<span class="regular-price">' . $prices['from']['regular_price']['formated_price'] . '</span>'
-                        . '<span class="special-price">' . $prices['from']['final_price']['formated_price'] . '</span>';
+            $priceHtml .= '<span class="bundle-regular-price">' . $prices['from']['regular_price']['formated_price'] . '</span>'
+                        . '<span class="bundle-special-price">' . $prices['from']['final_price']['formated_price'] . '</span>';
         } else {
             $priceHtml .= '<span>' . $prices['from']['regular_price']['formated_price'] . '</span>';
         }
@@ -427,11 +434,11 @@ class Bundle extends AbstractType
         if ($prices['from']['regular_price']['price'] != $prices['to']['regular_price']['price']
             || $prices['from']['final_price']['price'] != $prices['to']['final_price']['price']
         ) {
-            $priceHtml .= '<span style="font-weight: 500;margin-top: 1px;margin-bottom: 1px;display: block;">To</span>';
+            $priceHtml .= '<span class="bundle-to">To</span>';
 
             if ($prices['to']['regular_price']['price'] != $prices['to']['final_price']['price']) {
-                $priceHtml .= '<span class="regular-price">' . $prices['to']['regular_price']['formated_price'] . '</span>'
-                            . '<span class="special-price">' . $prices['to']['final_price']['formated_price'] . '</span>';
+                $priceHtml .= '<span class="bundle-regular-price">' . $prices['to']['regular_price']['formated_price'] . '</span>'
+                            . '<span class="bundle-special-price">' . $prices['to']['final_price']['formated_price'] . '</span>';
             } else {
                 $priceHtml .= '<span>' . $prices['to']['regular_price']['formated_price'] . '</span>';
             }
@@ -450,6 +457,8 @@ class Bundle extends AbstractType
      */
     public function prepareForCart($data)
     {
+        $bundleQuantity = $data['quantity'];
+
         if (isset($data['bundle_options'])) {
             $data['bundle_options'] = array_filter($this->validateBundleOptionForCart($data['bundle_options']));
         }
@@ -458,10 +467,20 @@ class Bundle extends AbstractType
             return trans('shop::app.checkout.cart.integrity.missing_options');
         }
 
+        if (! $this->haveSufficientQuantity($data['quantity'])) {
+            return trans('shop::app.checkout.cart.quantity.inventory_warning');
+        }
+
         $products = parent::prepareForCart($data);
 
         foreach ($this->getCartChildProducts($data) as $productId => $data) {
+
             $product = $this->productRepository->find($productId);
+
+            /* need to check each individual quantity as well if don't have then show error */
+            if (! $product->getTypeInstance()->haveSufficientQuantity($data['quantity'] * $bundleQuantity)) {
+                return trans('shop::app.checkout.cart.quantity.inventory_warning');
+            }
 
             if (! $product->getTypeInstance()->isSaleable()) {
                 continue;
@@ -665,23 +684,39 @@ class Bundle extends AbstractType
     }
 
     /**
-     * Validate cart item product price
+     * Validate cart item product price and other things
      *
-     * @param  \Webkul\Checkout\Contracts\CartItem  $item
-     * @return void
+     * @param \Webkul\Checkout\Models\CartItem $item
+     *
+     * @return \Webkul\Product\Datatypes\CartItemValidationResult
      */
-    public function validateCartItem($item)
+    public function validateCartItem(CartItem $item): CartItemValidationResult
     {
+        $result = new CartItemValidationResult();
         $price = 0;
 
+        if (parent::isCartItemInactive($item)) {
+            $result->itemIsInactive();
+
+            return $result;
+        }
+
         foreach ($item->children as $childItem) {
-            $childItem->product->getTypeInstance()->validateCartItem($childItem);
+            $childResult = $childItem->product->getTypeInstance()->validateCartItem($childItem);
+
+            if ($childResult->isItemInactive()) {
+                $result->itemIsInactive();
+            }
+
+            if ($childResult->isCartInvalid()) {
+                $result->cartIsInvalid();
+            }
 
             $price += $childItem->base_price * $childItem->quantity;
         }
 
         if ($price == $item->base_price) {
-            return;
+            return $result;
         }
 
         $item->base_price = $price;
@@ -693,11 +728,13 @@ class Bundle extends AbstractType
         $item->additional = $this->getAdditionalOptions($item->additional);
 
         $item->save();
+
+        return $result;
     }
 
     /**
      * get product options
-    */
+     */
     public function getProductOptions($product = "")
     {
         $bundleOption = app('Webkul\Product\Helpers\BundleOption');
@@ -710,14 +747,14 @@ class Bundle extends AbstractType
      * @param  int  $qty
      * @return bool
      */
-    public function haveSufficientQuantity($qty)
+    public function haveSufficientQuantity(int $qty): bool
     {
         # to consider a bundle in stock we need to check that at least one product from each required group is available for the given quantity
         foreach ($this->product->bundle_options as $option) {
             if ($option->is_required) {
                 foreach ($option->bundle_option_products as $bundleOptionProduct) {
                     # as long as at least one product in the required group is available we can continue checking other groups
-                    if($bundleOptionProduct->product->haveSufficientQuantity($bundleOptionProduct->qty * $qty)) {
+                    if ($bundleOptionProduct->product->haveSufficientQuantity($bundleOptionProduct->qty * $qty)) {
                         continue 2;
                     }
                 }

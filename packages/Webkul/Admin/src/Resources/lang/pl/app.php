@@ -186,6 +186,7 @@ return [
         'shipment-date' => 'Data wysyłki',
         'shipment-to' => 'Wysyłka do',
         'sku' => 'SKU',
+        'product-number' => 'Numer produktu',
         'price' => 'Cena',
         'qty' => 'Ilość',
         'permission-type' => 'Rodzaj zezwolenia',
@@ -383,6 +384,7 @@ return [
             'title' => 'Faktury',
             'id' => 'Id',
             'invoice-id' => 'Identyfikator faktury',
+            'invoice' => 'Faktura',
             'date' => 'Data faktury',
             'order-id' => 'Identyfikator zamówienia',
             'customer-name' => 'Nazwa klienta',
@@ -526,7 +528,13 @@ return [
             'checkbox' => 'Pole wyboru',
             'multiselect' => 'Wielokrotny wybór',
             'new-option' => 'Nowa opcja',
-            'is-default' => 'Jest domyślny'
+            'is-default' => 'Jest domyślny',
+            'remove-image-btn-title' => 'Remove Image',
+            'videos' => 'Videos',
+            'video' => 'Video',
+            'add-video-btn-title' => 'Add Video',
+            'remove-video-btn-title' => 'Remove Video',
+            'not-support-video' => 'Your browser does not support the video tag.',
         ],
 
         'attributes' => [
@@ -803,7 +811,9 @@ return [
             'seo-title' => 'Meta tytuł',
             'seo-description' => 'Meta opis',
             'seo-keywords' => 'Meta słowa kluczowe',
-
+            'maintenance-mode' => 'Maintenance Mode',
+            'maintenance-mode-text' => 'Message',
+            'allowed-ips' => 'Allowed IPs'
         ],
 
         'sliders' => [
@@ -1281,7 +1291,7 @@ return [
             'payment-methods' => 'Metody płatności',
             'cash-on-delivery' => 'Za pobraniem',
             'money-transfer' => 'Przekaz pieniężny',
-            'paypal-standard' => 'Paypal Standard',
+            'paypal-standard' => 'PayPal Standard',
             'business-account' => 'Konto biznesowe',
             'newsletter' => 'Subskrypcja newslettera',
             'newsletter-subscription' => 'Zezwól na subskrypcję newslettera',
@@ -1313,6 +1323,8 @@ return [
             'order-number-length' => 'Długość numeru zamówienia',
             'order-number-suffix' => 'Sufiks numeru zamówienia”',
             'order-number-generator-class' => 'Generator numeru zamówienia',
+            'minimum-order' => 'Minimum Order Settings',
+            'minimum-order-amount' => 'Minimum Order Amount',
             'default' => 'Domyślna',
             'sandbox' => 'Piaskownica',
             'all-channels' => 'Wszystkie kanały',
@@ -1334,7 +1346,24 @@ return [
             'show-sku' => 'Show SKU',
             'categories' => 'Categories',
             'show-sku' => 'Show SKU',
-            'show-search-input-field' => 'Show Search Input Field'
+            'show-search-input-field' => 'Show Search Input Field',
+            'store-name' => 'Nazwa sklepu',
+            'vat-number' => 'Numer VAT',
+            'contact-number' => 'Numer kontaktowy',
+            'bank-details' => 'Dane bankowe',
+            'mailing-address' => 'Send Check to',
+            'instructions' => 'Instructions',
+            'custom-scripts' => 'Custom Scripts',
+            'custom-css' => 'Custom CSS',
+            'custom-javascript' => 'Custom Javascript',
+            'paypal-smart-button' => 'PayPal',
+            'client-id' => 'Client Id',
+            'client-id-info' => 'Use "sb" for testing.',
+            'client-secret' => 'Client Secret',
+            'client-secret-info' => 'Add your secret key here',
+            'accepted-currencies' => 'Accepted currencies',
+            'accepted-currencies-info' => 'Add currency code comma seperated e.g. USD,INR,...',
+            'buy-now-button-display' => 'Allow customers to directly buy products'
        ]
     ]
 ];

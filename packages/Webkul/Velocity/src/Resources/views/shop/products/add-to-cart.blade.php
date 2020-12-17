@@ -13,10 +13,11 @@
 
                 slug="{{ $product->url_key }}"
                 product-id="{{ $product->id }}"
+                add-tooltip="{{ __('velocity::app.customer.compare.add-tooltip') }}"
             ></compare-component>
         @endif
 
-        @if (! (isset($showWishlist) && !$showWishlist))
+        @if (! (isset($showWishlist) && !$showWishlist) && core()->getConfigData('general.content.shop.wishlist_option'))
             @include('shop::products.wishlist', [
                 'addClass' => $addWishlistClass ?? ''
             ])
@@ -66,10 +67,11 @@
                     product-id="{{ $product->product_id }}"
                     reload-page="{{ $reloadPage ?? false }}"
                     move-to-cart="{{ $moveToCart ?? false }}"
+                    wishlist-move-route="{{ $wishlistMoveRoute ?? false }}"
                     add-class-to-btn="{{ $addToCartBtnClass ?? '' }}"
                     is-enable={{ ! $product->isSaleable() ? 'false' : 'true' }}
-                    show-cart-icon={{ !(isset($showCartIcon) && !$showCartIcon) }}
-                    btn-text="{{ ($product->type == 'booking') ?  __('shop::app.products.book-now') : $btnText ?? __('shop::app.products.add-to-cart') }}">
+                    show-cart-icon={{ ! (isset($showCartIcon) && ! $showCartIcon) }}
+                    btn-text="{{ (! isset($moveToCart) && $product->type == 'booking') ?  __('shop::app.products.book-now') : $btnText ?? __('shop::app.products.add-to-cart') }}">
                 </add-to-cart>
             @endif
         </div>

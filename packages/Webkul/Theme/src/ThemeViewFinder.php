@@ -4,6 +4,7 @@ namespace Webkul\Theme;
 
 use Webkul\Theme\Facades\Themes;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\View\FileViewFinder;
 
 class ThemeViewFinder extends FileViewFinder
@@ -19,13 +20,13 @@ class ThemeViewFinder extends FileViewFinder
         // Extract the $view and the $namespace parts
         list($namespace, $view) = $this->parseNamespaceSegments($name);
 
-        if ($namespace != 'admin') {
+        if (request()->route() !== null && ! Str::contains(request()->route()->uri, 'admin/')) {
             $paths = $this->addThemeNamespacePaths($namespace);
 
             try {
                 return $this->findInPaths($view, $paths);
             } catch(\Exception $e) {
-                if ($namespace != 'shop') {
+                if ($namespace !== 'shop') {
                     if (strpos($view, 'shop.') !== false) {
                         $view = str_replace('shop.', 'shop.' . Themes::current()->code . '.', $view);
                     }
@@ -34,7 +35,23 @@ class ThemeViewFinder extends FileViewFinder
                 return $this->findInPaths($view, $paths);
             }
         } else {
-            return $this->findInPaths($view, $this->hints[$namespace]);
+            $themes = app('themes');
+
+            $themes->set(config('themes.admin-default'));
+
+            $paths = $this->addThemeNamespacePaths($namespace);
+
+            try {
+                return $this->findInPaths($view, $paths);
+            } catch(\Exception $e) {
+                if ($namespace != 'admin') {
+                    if (strpos($view, 'admin.') !== false) {
+                        $view = str_replace('admin.', 'admin.' . Themes::current()->code . '.', $view);
+                    }
+                }
+
+                return $this->findInPaths($view, $paths);
+            }
         }
     }
 
@@ -82,19 +99,6 @@ class ThemeViewFinder extends FileViewFinder
 
             $this->prependNamespace($namespace, $addPaths);
         }
-    }
-
-    /**
-     * Get the string contents of the view.
-     *
-     * @param  callable|null  $callback
-     * @return array|string
-     *
-     * @throws \Throwable
-     */
-    public function render(callable $callback = null)
-    {
-        dd(111);
     }
 
     /**

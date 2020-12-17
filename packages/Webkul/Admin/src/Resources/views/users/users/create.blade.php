@@ -10,7 +10,7 @@
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                        <i class="icon angle-left-icon back-link" onclick="window.location = history.length > 1 ? document.referrer : '{{ route('admin.dashboard.index') }}'"></i>
 
                         {{ __('admin::app.users.users.add-user-title') }}
                     </h1>
@@ -73,7 +73,7 @@
 
                             <div class="control-group">
                                 <label for="status">{{ __('admin::app.users.users.status') }}</label>
-                               
+
                                 <label class="switch">
                                     <input type="checkbox" id="status" name="status" value="1" {{ old('status') ? 'checked' : '' }}>
                                     <span class="slider round"></span>

@@ -106,7 +106,7 @@ class InvoiceRepository extends Repository
 
             foreach ($data['invoice']['items'] as $itemId => $qty) {
                 if (! $qty) {
-                    continue; 
+                    continue;
                 }
 
                 $orderItem = $this->orderItemRepository->find($itemId);

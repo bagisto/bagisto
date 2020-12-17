@@ -17,6 +17,10 @@
             width: unset;
             float: right;
         }
+
+        .alert-wishlist {
+            display: inline-block;
+        }
     </style>
 @endpush
 
@@ -114,29 +118,30 @@
 
                                                 @php
                                                     $moveToWishlist = trans('shop::app.checkout.cart.move-to-wishlist');
+
+                                                    $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
                                                 @endphp
 
                                                 <div class="no-padding col-12 cursor-pointer fs16">
                                                     @auth('customer')
-                                                        @if ($item->parent_id != 'null' ||$item->parent_id != null)
-                                                            @include('shop::products.wishlist', [
-                                                                'route' => route('shop.movetowishlist', $item->id),
-                                                                'text' => "<span class='align-vertical-super'>$moveToWishlist</span>"
-                                                            ])
-                                                        @else
-                                                            @include('shop::products.wishlist', [
-                                                                'route' => route('shop.movetowishlist', $item->child->id),
-                                                                'text' => "<span class='align-vertical-super'>$moveToWishlist</span>"
-                                                            ])
+                                                        @if ($showWishlist)
+                                                            @if ($item->parent_id != 'null' ||$item->parent_id != null)
+                                                                <div @click="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')" class="alert-wishlist">
+                                                                    @include('shop::products.wishlist', [
+                                                                        'route' => route('shop.movetowishlist', $item->id),
+                                                                        'text' => "<span class='align-vertical-super'>$moveToWishlist</span>"
+                                                                    ])
+                                                                </div>
+                                                            @else
+                                                                <div @click="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')" class="alert-wishlist">
+                                                                    @include('shop::products.wishlist', [
+                                                                        'route' => route('shop.movetowishlist', $item->child->id),
+                                                                        'text' => "<span class='align-vertical-super'>$moveToWishlist</span>"
+                                                                    ])
+                                                                </div>
+                                                            @endif
                                                         @endif
                                                     @endauth
-
-                                                    @guest('customer')
-                                                        @include('shop::products.wishlist', [
-                                                            'isMoveToWishlist' => route('shop.checkout.cart.remove', ['id' => $item->id]),
-                                                            'text' => "<span class='align-vertical-top'>$moveToWishlist</span>"
-                                                        ])
-                                                    @endguest
 
                                                     <a
                                                         class="unset

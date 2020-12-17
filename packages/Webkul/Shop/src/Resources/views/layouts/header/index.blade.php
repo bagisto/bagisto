@@ -1,5 +1,6 @@
 <?php
     $term = request()->input('term');
+    $image_search = request()->input('image-search');
 
     if (! is_null($term)) {
         $serachQuery = 'term='.request()->input('term');
@@ -11,11 +12,11 @@
         <div class="left-content">
             <ul class="logo-container">
                 <li>
-                    <a href="{{ route('shop.home.index') }}">
+                    <a href="{{ route('shop.home.index') }}" aria-label="Logo">
                         @if ($logo = core()->getCurrentChannel()->logo_url)
-                            <img class="logo" src="{{ $logo }}" />
+                            <img class="logo" src="{{ $logo }}" alt="" />
                         @else
-                            <img class="logo" src="{{ bagisto_asset('images/logo.svg') }}" />
+                            <img class="logo" src="{{ bagisto_asset('images/logo.svg') }}" alt="" />
                         @endif
                     </a>
                 </li>
@@ -24,12 +25,14 @@
             <ul class="search-container">
                 <li class="search-group">
                     <form role="search" action="{{ route('shop.search.index') }}" method="GET" style="display: inherit;">
+                        <label for="search-bar" style="position: absolute; z-index: -1;">Search</label>
                         <input
                             required
                             name="term"
                             type="search"
-                            value="{{ $term }}"
+                            value="{{ ! $image_search ? $term : '' }}"
                             class="search-field"
+                            id="search-bar"
                             placeholder="{{ __('shop::app.header.search-text') }}"
                         >
 
@@ -37,7 +40,7 @@
 
                         <div class="search-icon-wrapper">
 
-                            <button class="" class="background: none;">
+                            <button class="" class="background: none;" aria-label="Search">
                                 <i class="icon icon-search"></i>
                             </button>
                         </div>
@@ -55,7 +58,7 @@
                 {!! view_render_event('bagisto.shop.layout.header.comppare-item.before') !!}
 
                 @php
-                    $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false    
+                    $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false
                 @endphp
 
                 @if ($showCompare)
@@ -70,8 +73,12 @@
                             @endguest
                             style="color: #242424;"
                             >
-                            <span class="name">{{ __('velocity::app.customer.compare.text') }}</span>
 
+                            <i class="icon compare-icon"></i>
+                            <span class="name">
+                                {{ __('shop::app.customer.compare.text') }}
+                                <span class="count">(<span id="compare-items-count"></span>)<span class="count">
+                            </span>
                         </a>
                     </li>
                 @endif
@@ -143,6 +150,10 @@
                     @endguest
 
                     @auth('customer')
+                        @php
+                           $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
+                        @endphp
+
                         <ul class="dropdown-list account customer">
                             <li>
                                 <div>
@@ -156,9 +167,11 @@
                                         <a href="{{ route('customer.profile.index') }}">{{ __('shop::app.header.profile') }}</a>
                                     </li>
 
-                                    <li>
-                                        <a href="{{ route('customer.wishlist.index') }}">{{ __('shop::app.header.wishlist') }}</a>
-                                    </li>
+                                    @if ($showWishlist)
+                                        <li>
+                                            <a href="{{ route('customer.wishlist.index') }}">{{ __('shop::app.header.wishlist') }}</a>
+                                        </li>
+                                    @endif
 
                                     <li>
                                         <a href="{{ route('shop.checkout.cart.index') }}">{{ __('shop::app.header.cart') }}</a>
@@ -202,7 +215,7 @@
                 <button style="background: none; border: none; padding: 0px;">
                     <i class="icon icon-search"></i>
                 </button>
-                
+
                 <image-search-component></image-search-component>
 
                 <input type="search" name="term" class="search">
@@ -213,17 +226,17 @@
 </div>
 
 @push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet" defer></script>
 
     <script type="text/x-template" id="image-search-component-template">
-        <div>
-            <label class="image-search-container" for="image-search-container">
+        <div v-if="image_search_status">
+            <label class="image-search-container" :for="'image-search-container-' + _uid">
                 <i class="icon camera-icon"></i>
 
-                <input type="file" id="image-search-container" ref="image_search_input" v-on:change="uploadImage()"/>
+                <input type="file" :id="'image-search-container-' + _uid" ref="image_search_input" v-on:change="uploadImage()"/>
 
-                <img id="uploaded-image-url" :src="uploaded_image_url"/>
+                <img :id="'uploaded-image-url-' +  + _uid" :src="uploaded_image_url" alt="" width="20" height="20" />
             </label>
         </div>
     </script>
@@ -236,7 +249,8 @@
 
             data: function() {
                 return {
-                    uploaded_image_url: ''
+                    uploaded_image_url: '',
+                    image_search_status: "{{core()->getConfigData('general.content.shop.image_search') == '1' ? 'true' : 'false'}}" == 'true'
                 }
             },
 
@@ -248,75 +262,90 @@
                         if (imageInput.files[0].type.includes('image/')) {
                             var self = this;
 
-                            self.$root.showLoader();
+                            if (imageInput.files[0].size <= 2000000) { 
+                                self.$root.showLoader();
 
-                            var formData = new FormData();
+                                var formData = new FormData();
 
-                            formData.append('image', imageInput.files[0]);
+                                formData.append('image', imageInput.files[0]);
 
-                            axios.post("{{ route('shop.image.search.upload') }}", formData, {headers: {'Content-Type': 'multipart/form-data'}})
-                                .then(function(response) {
-                                    self.uploaded_image_url = response.data;
+                                axios.post("{{ route('shop.image.search.upload') }}", formData, {headers: {'Content-Type': 'multipart/form-data'}})
+                                    .then(function(response) {
+                                        self.uploaded_image_url = response.data;
 
-                                    var net;
+                                        var net;
 
-                                    async function app() {
-                                        var analysedResult = [];
+                                        async function app() {
+                                            var analysedResult = [];
 
-                                        var queryString = '';
+                                            var queryString = '';
 
-                                        net = await mobilenet.load();
+                                            net = await mobilenet.load();
 
-                                        const imgElement = document.getElementById('uploaded-image-url');
+                                            const imgElement = document.getElementById('uploaded-image-url-' +  + self._uid);
 
-                                        try {
-                                            const result = await net.classify(imgElement);
+                                            try {
+                                                const result = await net.classify(imgElement);
 
-                                            result.forEach(function(value) {
-                                                queryString = value.className.split(',');
+                                                result.forEach(function(value) {
+                                                    queryString = value.className.split(',');
 
-                                                if (queryString.length > 1) {
-                                                    analysedResult = analysedResult.concat(queryString)
-                                                } else {
-                                                    analysedResult.push(queryString[0])
-                                                }
-                                            });
-                                        } catch (error) {
+                                                    if (queryString.length > 1) {
+                                                        analysedResult = analysedResult.concat(queryString)
+                                                    } else {
+                                                        analysedResult.push(queryString[0])
+                                                    }
+                                                });
+                                            } catch (error) {
+                                                self.$root.hideLoader();
+
+                                                window.flashMessages = [
+                                                    {
+                                                        'type': 'alert-error',
+                                                        'message': "{{ __('shop::app.common.error') }}"
+                                                    }
+                                                ];
+
+                                                self.$root.addFlashMessages();
+                                            };
+
+                                            localStorage.searched_image_url = self.uploaded_image_url;
+
+                                            queryString = localStorage.searched_terms = analysedResult.join('_');
+
                                             self.$root.hideLoader();
 
-                                            window.flashMessages = [
-                                                {
-                                                    'type': 'alert-error',
-                                                    'message': "{{ __('shop::app.common.error') }}"
-                                                }
-                                            ];
+                                            window.location.href = "{{ route('shop.search.index') }}" + '?term=' + queryString + '&image-search=1';
+                                        }
 
-                                            self.$root.addFlashMessages();
-                                        };
-
-                                        localStorage.searched_image_url = self.uploaded_image_url;
-
-                                        queryString = localStorage.searched_terms = analysedResult.join('_');
-                                        
+                                        app();
+                                    })
+                                    .catch(function(error) {
                                         self.$root.hideLoader();
 
-                                        window.location.href = "{{ route('shop.search.index') }}" + '?term=' + queryString + '&image-search=1';
-                                    }
+                                        window.flashMessages = [
+                                            {
+                                                'type': 'alert-error',
+                                                'message': "{{ __('shop::app.common.error') }}"
+                                            }
+                                        ];
 
-                                    app();
-                                })
-                                .catch(function(error) {
-                                    self.$root.hideLoader();
+                                        self.$root.addFlashMessages();
+                                    });
+                            } else {
 
-                                    window.flashMessages = [
-                                        {
-                                            'type': 'alert-error',
-                                            'message': "{{ __('shop::app.common.error') }}"
-                                        }
-                                    ];
+                                imageInput.value = '';
 
-                                    self.$root.addFlashMessages();
-                                });
+                                        window.flashMessages = [
+                                            {
+                                                'type': 'alert-error',
+                                                'message': "{{ __('shop::app.common.image-upload-limit') }}"
+                                            }
+                                        ];
+
+                                self.$root.addFlashMessages();
+                                
+                            }        
                         } else {
                             imageInput.value = '';
 
@@ -335,6 +364,23 @@
             $('body').delegate('#search, .icon-menu-close, .icon.icon-menu', 'click', function(e) {
                 toggleDropdown(e);
             });
+
+            @auth('customer')
+                @php
+                    $compareCount = app('Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository')
+                        ->count([
+                            'customer_id' => auth()->guard('customer')->user()->id,
+                        ]);
+                @endphp
+
+                let comparedItems = JSON.parse(localStorage.getItem('compared_product'));
+                $('#compare-items-count').html({{ $compareCount }});
+            @endauth
+
+            @guest('customer')
+                let comparedItems = JSON.parse(localStorage.getItem('compared_product'));
+                $('#compare-items-count').html(comparedItems ? comparedItems.length : 0);
+            @endguest
 
             function toggleDropdown(e) {
                 var currentElement = $(e.currentTarget);

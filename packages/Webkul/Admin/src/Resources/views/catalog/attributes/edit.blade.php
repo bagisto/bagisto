@@ -11,7 +11,7 @@
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                        <i class="icon angle-left-icon back-link" onclick="window.location = history.length > 1 ? document.referrer : '{{ route('admin.dashboard.index') }}'"></i>
 
                         {{ __('admin::app.catalog.attributes.edit-title') }}
                     </h1>
@@ -359,14 +359,17 @@
 
                     <tbody>
 
-                        <tr v-for="(row, index) in optionRows">
+                        <tr v-for="(row, index) in optionRows" :key="row.id">
                             <td v-if="show_swatch && swatch_type == 'color'">
                                 <swatch-picker :input-name="'options[' + row.id + '][swatch_value]'" :color="row.swatch_value" colors="text-advanced" show-fallback />
                             </td>
 
                             <td style="white-space: nowrap;" v-if="show_swatch && swatch_type == 'image'">
-                                <img style="width: 36px;height: 36px;vertical-align: middle;background: #F2F2F2;border-radius: 2px;margin-right: 10px;" v-if="row.swatch_value_url" :src="row.swatch_value_url"/>
-                                <input type="file" accept="image/*" :name="'options[' + row.id + '][swatch_value]'"/>
+                                <div class="control-group" :class="[errors.has('options[' + row.id + '][swatch_value]') ? 'has-error' : '']">
+                                    <img style="width: 36px;height: 36px;vertical-align: middle;background: #F2F2F2;border-radius: 2px;margin-right: 10px;" v-if="row.swatch_value_url" :src="row.swatch_value_url"/>
+                                    <input type="file" v-validate="'size:600'" accept="image/*" :name="'options[' + row.id + '][swatch_value]'"/>
+                                    <span class="control-error" v-if="errors.has('options[' + row.id + '][swatch_value]')">The image size must be less than 600 KB</span>
+                                </div>
                             </td>
 
                             <td>
@@ -418,7 +421,7 @@
                     optionRowCount: 0,
                     optionRows: [],
                     show_swatch: "{{ $attribute->type == 'select' ? true : false  }}",
-                    swatch_type: "{{ $attribute->swatch_type }}",
+                    swatch_type: "{{ $attribute->swatch_type == '' ? 'dropdown' : $attribute->swatch_type }}",
                     isNullOptionChecked: false,
                     idNullOption: null
                 }

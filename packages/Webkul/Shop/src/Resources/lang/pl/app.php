@@ -17,6 +17,7 @@ return [
 
     'common' => [
         'error' => 'Coś poszło nie tak. Proszę spróbować później.',
+        'image-upload-limit' => 'Maksymalny rozmiar przesyłanego obrazu to 2 MB',
         'no-result-found' => 'Nie znaleźliśmy żadnych zapisów.'
     ],
 
@@ -72,7 +73,8 @@ return [
         'page-title' => config('app.name') . ' - Szukaj',
         'found-results' => 'Dostępne wyniki wyszukiwania',
         'found-result' => 'Dostępny wynik wyszukiwania',
-        'analysed-keywords' => 'Analysed Keywords'
+        'analysed-keywords' => 'Analysed Keywords',
+        'image-search-option' => 'Image Search Option'
     ],
 
     'reviews' => [
@@ -92,6 +94,17 @@ return [
     ],
 
     'customer' => [
+        'compare'           => [
+            'text'                  => 'Porównaj',
+            'compare_similar_items' => 'Porównaj podobne przedmioty',
+            'add-tooltip'           => 'Dodaj produkt do listy porównawczej',
+            'added'                 => 'Produkt został pomyślnie dodany do listy porównania',
+            'already_added'         => 'Produkt został już dodany do listy porównawczej',
+            'removed'               => 'Produkt został pomyślnie usunięty z listy porównawcze',
+            'removed-all'           => 'Wszystkie produkty zostały pomyślnie usunięte z listy porównawczej',
+            'empty-text'            => 'Nie masz żadnych pozycji na liście porównawczej',
+        ],
+
         'signup-text' => [
             'account_exists' => 'Posiadasz już konto',
             'title' => 'Zaloguj się'
@@ -163,6 +176,11 @@ return [
         'account' => [
             'dashboard' => 'Edytuj profil',
             'menu' => 'Menu',
+
+            'general' => [
+                'no' => 'Nie',
+                'yes' => 'tak',
+            ],
 
             'profile' => [
                 'index' => [
@@ -329,6 +347,8 @@ return [
                 'error' => 'Nie można dodać produktu do listy wyboru z powodu nieznanych problemów, sprawdź później',
                 'add' => 'Produkt został pomyślnie dodany do listy wyboru',
                 'remove' => 'Produkt został pomyślnie usunięty z listy wyboru',
+                'add-wishlist-text'     => 'Dodaj produkt do listy wyboru',
+                'remove-wishlist-text'  => 'Usuń produkt z listy wyboru',
                 'moved' => 'Produkt pomyślnie przeniesiono do koszyka',
                 'option-missing' => 'Brak opcji produktu, więc produktu nie można dodać na listę wyboru.',
                 'move-error' => ' „Nie można dodać produktu do listy wyboru. Spróbuj ponownie później',
@@ -419,6 +439,7 @@ return [
         'available-for-order' => 'Dostępne na zamówienie',
         'settings' => 'Settings',
         'compare_options' => 'Compare Options',
+        'wishlist-options' => 'Wishlist Options'
     ],
 
     // 'reviews' => [
@@ -463,6 +484,8 @@ return [
                 'success' => 'Produkt został pomyślnie dodany do koszyka.',
                 'success-remove' => 'Produkt został pomyślnie usunięty z koszyka.',
                 'error-add' => 'Nie można dodać produktu do koszyka, spróbuj ponownie później.',
+                'inactive' => 'An item is inactive and was removed from cart.',
+                'inactive-add' => 'Inactive item cannot be added to cart.',
             ],
             'quantity-error' => 'Żądana ilość nie jest dostępna.',
             'cart-subtotal' => 'Suma częściowa koszyka',
@@ -470,7 +493,8 @@ return [
             'partial-cart-update' => 'Tylko niektóre produkty zostały zaktualizowane',
             'event' => [
                 'expired' => 'To wydarzenie wygasło.'
-            ]
+            ],
+            'minimum-order-message' => 'Minimum order amount is :amount'
         ],
 
         'onepage' => [
@@ -577,6 +601,15 @@ return [
             'final-summary' => 'TDziękujemy za zainteresowanie naszym sklepem, a po podsumowaniu wyślemy ci numer śledzenia',
             'help' => 'Jeśli potrzebujesz jakiejkolwiek pomocy, skontaktuj się z nami pod adresem :support_email',
             'thanks' => 'Dzięki!',
+
+            'comment' => [
+                'subject' => 'Dodano nowy komentarz do Twojego zamówienia #:order_id',
+                'dear' => 'Drogi :customer_name',
+                'final-summary' => 'Dziękujemy za zainteresowanie naszym sklepem',
+                'help' => 'Jeśli potrzebujesz pomocy, skontaktuj się z nami pod adresem :support_email',
+                'thanks' => 'Dzięki!',
+            ],
+
             'cancel' => [
                 'subject' => 'Potwierdź anulowanie zamówienia',
                 'heading' => 'Zamówienie anulowane',
@@ -630,6 +663,13 @@ return [
             'info' => 'Otrzymujesz tego e-maila, ponieważ otrzymaliśmy prośbę o zresetowanie hasła do Twojego konta',
             'reset-password' => 'Zresetuj hasło',
             'final-summary' => 'Jeśli nie zażądałeś resetowania hasła, nie musisz podejmować żadnych dalszych działań',
+            'thanks' => 'Dzięki!'
+        ],
+
+        'update-password' => [
+            'subject' => 'Hasło zaktualizowane',
+            'dear' => 'Drogi/a :name',
+            'info' => 'Otrzymujesz tę wiadomość e-mail, ponieważ zaktualizowałeś swoje hasło.',
             'thanks' => 'Dzięki!'
         ],
 

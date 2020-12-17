@@ -99,11 +99,11 @@ class ProductFlat extends Model implements ProductFlatContract
     }
 
     /**
-     * @param integer $qty
+     * @param int $qty
      *
      * @return bool
      */
-    public function haveSufficientQuantity($qty)
+    public function haveSufficientQuantity(int $qty): bool
     {
         return $this->product->haveSufficientQuantity($qty);
     }
@@ -124,6 +124,14 @@ class ProductFlat extends Model implements ProductFlatContract
         return (ProductImageProxy::modelClass())
             ::where('product_images.product_id', $this->product_id)
             ->select('product_images.*');
+    }
+
+    /**
+     * The videos that belong to the product.
+     */
+    public function videos()
+    {   
+        return $this->product->videos();
     }
 
     /**

@@ -214,20 +214,26 @@ class Helper extends Review
      *
      * @return array
      */
-    public function getVelocityMetaData($locale = null, $default = true)
+    public function getVelocityMetaData($locale = null, $channel = null, $default = true)
     {
         if (! $locale) {
             $locale = request()->get('locale') ?: app()->getLocale();
         }
 
+        if (! $channel) {
+            $channel = request()->get('channel') ?: 'default';
+        }
+
         try {
             $metaData = $this->velocityMetadataRepository->findOneWhere([
-                'locale' => $locale
+                'locale' => $locale,
+                'channel' => $channel
             ]);
 
             if (! $metaData && $default) {
                 $metaData = $this->velocityMetadataRepository->findOneWhere([
-                    'locale' => 'en'
+                    'locale' => 'en',
+                    'channel' => 'default'
                 ]);
             }
 
@@ -295,7 +301,7 @@ class Helper extends Review
      * @param  \Webkul\Product\Contracts\Product  $product
      * @param  bool                               $list
      * @param  array                              $metaInformation
-     * 
+     *
      * @return array
      */
     public function formatProduct($product, $list = false, $metaInformation = [])
@@ -385,7 +391,7 @@ class Helper extends Review
 
                     $productMetaDetails = [];
                     $productMetaDetails['slug'] = $product->url_key;
-                    $productMetaDetails['image'] = $formattedProduct['image'];
+                    $productMetaDetails['product_image'] = $formattedProduct['image'];
                     $productMetaDetails['priceHTML'] = $formattedProduct['priceHTML'];
                     $productMetaDetails['new'] = $formattedProduct['new'];
                     $productMetaDetails['addToCartHtml'] = $formattedProduct['addToCartHtml'];
@@ -398,7 +404,7 @@ class Helper extends Review
                 }
             }
         }
-    
+
         return $productCollection;
     }
 }

@@ -7,7 +7,6 @@
             v-if="cartItems.length > 0"
             class="modal-content sensitive-modal cart-modal-content hide">
 
-            <!--Body-->
             <div class="mini-cart-container">
                 <div class="row small-card-container" :key="index" v-for="(item, index) in cartItems">
                     <div class="col-3 product-image-container mr15">
@@ -40,7 +39,6 @@
                 </div>
             </div>
 
-            <!--Footer-->
             <div class="modal-footer">
                 <h2 class="col-6 text-left fw6">
                     {{ subtotalText }}
@@ -53,7 +51,7 @@
                 <a class="col text-left fs16 link-color remove-decoration" :href="viewCart">{{ cartText }}</a>
 
                 <div class="col text-right no-padding">
-                    <a :href="checkoutUrl">
+                    <a :href="checkoutUrl" @click="checkMinimumOrder($event)">
                         <button
                             type="button"
                             class="theme-btn fs16 fw6">
@@ -74,6 +72,7 @@
             'checkoutUrl',
             'checkoutText',
             'subtotalText',
+            'checkMinimumOrderUrl'
         ],
 
         data: function () {
@@ -111,12 +110,26 @@
                 this.$http.delete(`${this.$root.baseUrl}/cart/remove/${productId}`)
                 .then(response => {
                     this.cartItems = this.cartItems.filter(item => item.id != productId);
+                    this.$root.miniCartKey++;
 
                     window.showAlert(`alert-${response.data.status}`, response.data.label, response.data.message);
                 })
                 .catch(exception => {
                     console.log(this.__('error.something_went_wrong'));
                 });
+            },
+
+            checkMinimumOrder: function (e) {
+                e.preventDefault();
+
+                this.$http.post(this.checkMinimumOrderUrl)
+                    .then(({ data }) => {
+                        if (! data.status) {
+                            window.showAlert(`alert-warning`, 'Warning', data.message);
+                        } else {
+                            window.location.href = this.checkoutUrl;
+                        }
+                    });
             }
         }
     }

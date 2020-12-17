@@ -17,6 +17,7 @@ return [
 
     'common' => [
         'error' => 'Qualcosa è andato storto, per favore prova ancora più tardi.',
+        'image-upload-limit' => 'La dimensione massima di caricamento dell\'immagine è 2 MB',
         'no-result-found' => 'Non abbiamo trovato risultati.'
     ],
 
@@ -72,7 +73,8 @@ return [
         'page-title' => config('app.name') . ' - Cerca',
         'found-results' => 'Risultati trovati',
         'found-result' => 'Risultato trovato',
-        'analysed-keywords' => 'Analysed Keywords'
+        'analysed-keywords' => 'Analysed Keywords',
+        'image-search-option' => 'Image Search Option'
     ],
 
     'reviews' => [
@@ -92,6 +94,17 @@ return [
     ],
 
     'customer' => [
+        'compare' => [
+            'text'                  => 'Compara',
+            'compare_similar_items' => 'Compara articoli simili',
+            'add-tooltip'           => 'Aggiungi prodotto per confrontare l\'elenco',
+            'added'                 => 'Articolo aggiunto alla lista di comparazione',
+            'already_added'         => 'Articolo già aggiunto alla lista di comparazione',
+            'removed'               => 'Articolo rimosso dalla lista di comparazione',
+            'removed-all'           => 'Tutti gli elementi rimossi dall\'elenco di confronto',
+            'empty-text'            => "Non hai articoli nella tua lista di comparazione",
+        ],
+
         'signup-text' => [
             'account_exists' => 'Sei già registrato?',
             'title' => 'Login'
@@ -163,6 +176,11 @@ return [
         'account' => [
             'dashboard' => 'Modifica Profilo',
             'menu' => 'Menu',
+
+            'general' => [
+                'no' => 'No',
+                'yes' => 'sì',
+            ],
 
             'profile' => [
                 'index' => [
@@ -329,6 +347,8 @@ return [
                 'error' => 'Non è possibile aggiungere il prodotto ai preferiti per un problema sconosciuto, provare nuovamente più tardi',
                 'add' => 'Il prodotto è stato aggiunto ai preferiti',
                 'remove' => 'Articolo rimosso dai preferiti',
+                'add-wishlist-text' => 'Aggiungi prodotto a wishlist',
+                'remove-wishlist-text' => 'Rimuovi prodotti da wishlist',
                 'moved' => 'Articolo aggiunto al carrello',
                 'option-missing' => 'Le opzioni del prodotto mancano, per questo il prodotto non può essere aggiunto ai preferiti.',
                 'move-error' => 'Il prodotto non può essere aggiunto ai preferiti, prova nuovamente più tardi',
@@ -419,6 +439,7 @@ return [
         'available-for-order' => 'Disponibile per lordine',
         'settings' => 'Settings',
         'compare_options' => 'Compare Options',
+        'wishlist-options' => 'Wishlist Options'
     ],
 
     // 'reviews' => [
@@ -463,6 +484,8 @@ return [
                 'success' => 'Prodotto aggiunto al carrello.',
                 'success-remove' => 'Prodotto rimosso dal carrello.',
                 'error-add' => 'Il prodotto non può essere aggiunto al carrello, prova ancora.',
+                'inactive' => 'An item is inactive and was removed from cart.',
+                'inactive-add' => 'Inactive item cannot be added to cart.',
             ],
             'quantity-error' => 'La quantità richiesta non è disponibile.',
             'cart-subtotal' => 'Subtotale Carrello',
@@ -471,7 +494,8 @@ return [
             'link-missing' => '',
             'event' => [
                 'expired' => 'Questo evento è terminato.'
-            ]
+            ],
+            'minimum-order-message' => 'Minimum order amount is :amount'
         ],
 
         'onepage' => [
@@ -580,7 +604,7 @@ return [
             'thanks' => 'Grazie!',
 
             'comment' => [
-                'subject' => 'Nuovo commento aggiunto al tuo ordine',
+                'subject' => 'Nuovo commento aggiunto al tuo ordine #:order_id',
                 'dear' => ':customer_name',
                 'final-summary' => 'Grazie per aver mostrato interesse per il nostro store',
                 'help' => 'Se hai bisogno di aiuto contattaci all\'indirizzo :support_email',
@@ -643,6 +667,13 @@ return [
             'thanks' => 'Grazie!'
         ],
 
+        'update-password' => [
+            'subject' => 'Password aggiornata',
+            'dear' => 'Cara :name',
+            'info' => 'Ricevi questa email perché hai aggiornato la password.',
+            'thanks' => 'Grazie!'
+        ],
+
         'customer' => [
             'new' => [
                 'dear' => 'Gentile :customer_name',
@@ -675,7 +706,7 @@ return [
                 'subject' => 'Email Iscrizione',
                 'greeting' => ' Benvenuto ' . config('app.name') . ' - Email Iscrizione',
                 'unsubscribe' => 'Cancellati',
-                'summary' => 'Grazie per avere scelto di ricevere le nostre email. È passato un po\' di tempo da quando hai letto le email di ' . config('app.name') . '. Non è un nostro desidero inondare la tua casella email con le nostre comunicazioni. Se desideri comunque 
+                'summary' => 'Grazie per avere scelto di ricevere le nostre email. È passato un po\' di tempo da quando hai letto le email di ' . config('app.name') . '. Non è un nostro desidero inondare la tua casella email con le nostre comunicazioni. Se desideri comunque
                 non ricevere più le nostre news clicca il bottone qui sotto.'
             ]
         ]

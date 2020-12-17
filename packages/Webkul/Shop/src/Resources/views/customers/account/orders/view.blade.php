@@ -12,7 +12,7 @@
         <div class="account-layout">
 
             <div class="account-head">
-                <span class="back-icon"><a href="{{ route('customer.account.index') }}"><i class="icon icon-menu-back"></i></a></span>
+                <span class="back-icon"><a href="{{ route('customer.orders.index') }}"><i class="icon icon-menu-back"></i></a></span>
 
                 <span class="account-heading">
                     {{ __('shop::app.customer.account.order.view.page-tile', ['order_id' => $order->increment_id]) }}
@@ -21,7 +21,7 @@
 
 
                 @if ($order->canCancel())
-                    <a href="{{ route('customer.orders.cancel', $order->id) }}" class="btn btn-lg btn-primary" v-alert:message="'{{ __('shop::app.customer.account.order.view.cancel-confirm-msg') }}'" style="float: right">
+                    <a href="{{ route('customer.orders.cancel', $order->id) }}" class="btn btn-lg btn-primary" v-alert:message="'{{ __('shop::app.customer.account.order.view.cancel-confirm-msg') }}'" style="float: right;">
                         {{ __('shop::app.customer.account.order.view.cancel-btn-title') }}
                     </a>
                 @endif
@@ -194,8 +194,14 @@
 
                                             <tr class="bold">
                                                 <td>{{ __('shop::app.customer.account.order.view.total-due') }}</td>
+                                                
                                                 <td>-</td>
-                                                <td>{{ core()->formatPrice($order->total_due, $order->order_currency_code) }}</td>
+
+                                                @if($order->status !== 'canceled')
+                                                    <td>{{ core()->formatPrice($order->total_due, $order->order_currency_code) }}</td>
+                                                @else
+                                                    <td>{{ core()->formatPrice(0.00, $order->order_currency_code) }}</td>
+                                                @endif
                                             </tr>
                                         <tbody>
                                     </table>
@@ -528,6 +534,15 @@
 
                                 <div class="box-content">
                                     {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
+
+                                    @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($order->payment->method); @endphp
+
+                                    @if (! empty($additionalDetails))
+                                        <div class="instructions">
+                                            <label>{{ $additionalDetails['title'] }}</label>
+                                            <p>{{ $additionalDetails['value'] }}</p>
+                                        </div>
+                                    @endif
 
                                     {!! view_render_event('bagisto.shop.customers.account.orders.view.payment-method.after', ['order' => $order]) !!}
                                 </div>

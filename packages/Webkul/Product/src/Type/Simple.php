@@ -22,6 +22,7 @@ class Simple extends AbstractType
         'admin::catalog.products.accordians.categories',
         'admin::catalog.products.accordians.channels',
         'admin::catalog.products.accordians.product-links',
+        'admin::catalog.products.accordians.videos',
     ];
 
     /**
@@ -42,6 +43,11 @@ class Simple extends AbstractType
             return false;
         }
 
+        if (is_callable(config('products.isSaleable')) &&
+            call_user_func(config('products.isSaleable'), $this->product) === false) {
+            return false;
+        }
+
         if ($this->haveSufficientQuantity(1)) {
             return true;
         }
@@ -53,12 +59,12 @@ class Simple extends AbstractType
      * @param  int  $qty
      * @return bool
      */
-    public function haveSufficientQuantity($qty)
+    public function haveSufficientQuantity(int $qty): bool
     {
         $backorders = core()->getConfigData('catalog.inventory.stock_options.backorders');
 
         $backorders = ! is_null ($backorders) ? $backorders : false;
-  
+
         return $qty <= $this->totalQuantity() ? true : $backorders;
     }
 }

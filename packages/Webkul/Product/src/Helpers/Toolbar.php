@@ -94,8 +94,8 @@ class Toolbar extends AbstractProduct
         } elseif (! isset($params['sort'])) {
             $sortBy = core()->getConfigData('catalog.products.storefront.sort_by')
                    ? core()->getConfigData('catalog.products.storefront.sort_by')
-                   : 'created_at-asc';
-            
+                   : 'name-desc';
+
             if ($key == $sortBy) {
                 return true;
             }
@@ -131,7 +131,13 @@ class Toolbar extends AbstractProduct
     {
         $params = request()->input();
 
-        if (isset($params['mode']) && $key == $params['mode']) {
+        $defaultMode = core()->getConfigData('catalog.products.storefront.mode')
+        ? core()->getConfigData('catalog.products.storefront.mode')
+        : 'grid';
+
+        if (request()->input() == null && $key == $defaultMode) {
+            return true;
+        } else if (isset($params['mode']) && $key == $params['mode']) {
             return true;
         }
 
@@ -154,5 +160,29 @@ class Toolbar extends AbstractProduct
         return core()->getConfigData('catalog.products.storefront.mode')
                ? core()->getConfigData('catalog.products.storefront.mode')
                : 'grid';
+    }
+
+    /**
+     * Returns the view option if mode is set by param then it will overwrite default one and return new mode
+     *
+     * @return string
+     */
+    public function getViewOption()
+    {
+        /* checking default option first */
+        $viewOption = core()->getConfigData('catalog.products.storefront.mode');
+
+        /* checking mode param if exist then overwrite the default option */
+        if ($this->isModeActive('grid')) {
+            $viewOption = 'grid';
+        }
+
+        /* checking mode param if exist then overwrite the default option */
+        if ($this->isModeActive('list')) {
+            $viewOption = 'list';
+        }
+
+        /* if still default config is not set from the admin then in last needed hardcoded value */
+        return $viewOption ?? 'grid';
     }
 }

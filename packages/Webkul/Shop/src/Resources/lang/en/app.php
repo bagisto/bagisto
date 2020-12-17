@@ -17,6 +17,7 @@ return [
 
     'common' => [
         'error' => 'Something went wrong, please try again later.',
+        'image-upload-limit' => 'Image max upload size is 2MB',
         'no-result-found' => 'We could not find any records.'
     ],
 
@@ -72,7 +73,8 @@ return [
         'page-title' => config('app.name') . ' - Search',
         'found-results' => 'Search Results Found',
         'found-result' => 'Search Result Found',
-        'analysed-keywords' => 'Analysed Keywords'
+        'analysed-keywords' => 'Analysed Keywords',
+        'image-search-option' => 'Image Search Option'
     ],
 
     'reviews' => [
@@ -92,6 +94,19 @@ return [
     ],
 
     'customer' => [
+        'compare'           => [
+            'text'                  => 'Compare',
+            'compare_similar_items' => 'Compare Similar Items',
+            'add-tooltip'           => 'Add product to compare list',
+            'added'                 => 'Item successfully added to compare list',
+            'already_added'         => 'Item already added to compare list',
+            'removed'               => 'Item successfully removed from compare list',
+            'removed-all'           => 'All items successfully removed from compare list',
+            'empty-text'            => "You don't have any items in your compare list",
+            'product_image'         => 'Product Image',
+            'actions'               => 'Actions',
+        ],
+
         'signup-text' => [
             'account_exists' => 'Already have an account',
             'title' => 'Sign In'
@@ -163,6 +178,11 @@ return [
         'account' => [
             'dashboard' => 'Edit Profile',
             'menu' => 'Menu',
+
+            'general' => [
+                'no' => 'No',
+                'yes' => 'Yes',
+            ],
 
             'profile' => [
                 'index' => [
@@ -329,6 +349,8 @@ return [
                 'error' => 'Cannot add product to wishlist due to unknown problems, please checkback later',
                 'add' => 'Item successfully added to wishlist',
                 'remove' => 'Item successfully removed from wishlist',
+                'add-wishlist-text'     => 'Add product to wishlist',
+                'remove-wishlist-text'  => 'Remove product from wishlist',
                 'moved' => 'Item successfully moved To cart',
                 'option-missing' => 'Product options are missing, so item can not be moved to the wishlist.',
                 'move-error' => 'Item cannot be moved to wishlist, Please try again later',
@@ -420,6 +442,7 @@ return [
         'available-for-order' => 'Available for Order',
         'settings' => 'Settings',
         'compare_options' => 'Compare Options',
+        'wishlist-options' => 'Wishlist Options'
     ],
 
     // 'reviews' => [
@@ -464,6 +487,8 @@ return [
                 'success' => 'Item was successfully added to cart.',
                 'success-remove' => 'Item was removed successfully from the cart.',
                 'error-add' => 'Item cannot be added to cart, please try again later.',
+                'inactive' => 'An item is inactive and was removed from cart.',
+                'inactive-add' => 'Inactive item cannot be added to cart.',
             ],
             'quantity-error' => 'Requested quantity is not available.',
             'cart-subtotal' => 'Cart Subtotal',
@@ -472,7 +497,8 @@ return [
             'link-missing' => '',
             'event' => [
                 'expired' => 'This event has been expired.'
-            ]
+            ],
+            'minimum-order-message' => 'Minimum order amount is :amount'
         ],
 
         'onepage' => [
@@ -581,7 +607,7 @@ return [
             'thanks' => 'Thanks!',
 
             'comment' => [
-                'subject' => 'New comment added to your order',
+                'subject' => 'New comment added to your order #:order_id',
                 'dear' => 'Dear :customer_name',
                 'final-summary' => 'Thanks for showing your interest in our store',
                 'help' => 'If you need any kind of help please contact us at :support_email',
@@ -592,7 +618,7 @@ return [
                 'subject' => 'Order Cancel Confirmation',
                 'heading' => 'Order Cancelled',
                 'dear' => 'Dear :customer_name',
-                'greeting' => 'You Order with order id #:order_id placed on :created_at has been cancelled',
+                'greeting' => 'Your Order with order id :order_id placed on :created_at has been cancelled',
                 'summary' => 'Summary of Order',
                 'shipping-address' => 'Shipping Address',
                 'billing-address' => 'Billing Address',
@@ -641,6 +667,13 @@ return [
             'info' => 'You are receiving this email because we received a password reset request for your account',
             'reset-password' => 'Reset Password',
             'final-summary' => 'If you did not request a password reset, no further action is required',
+            'thanks' => 'Thanks!'
+        ],
+
+        'update-password' => [
+            'subject' => 'Password Updated',
+            'dear' => 'Dear :name',
+            'info' => 'You are receiving this email because you have updated your password.',
             'thanks' => 'Thanks!'
         ],
 

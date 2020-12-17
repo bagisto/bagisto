@@ -17,7 +17,7 @@ class ComparisonController extends Controller
     {
         if (request()->get('data')) {
             $productSlugs = null;
-            
+
             $productCollection = [];
 
             if (auth()->guard('customer')->user()) {
@@ -82,12 +82,13 @@ class ComparisonController extends Controller
             $productFlat = $productFlatRepository
                             ->where('id', $productId)
                             ->orWhere('parent_id', $productId)
+                            ->orWhere('id', $productId)
                             ->get()
                             ->first();
 
             if ($productFlat) {
                 $productId = $productFlat->id;
-                
+
                 $this->compareProductsRepository->create([
                     'customer_id'     => $customerId,
                     'product_flat_id' => $productId,
@@ -122,17 +123,19 @@ class ComparisonController extends Controller
             $this->compareProductsRepository->deleteWhere([
                 'customer_id' => auth()->guard('customer')->user()->id,
             ]);
+            $message = trans('velocity::app.customer.compare.removed-all');
         } else {
             // delete individual
             $this->compareProductsRepository->deleteWhere([
                 'product_flat_id' => request()->get('productId'),
                 'customer_id'     => auth()->guard('customer')->user()->id,
             ]);
+            $message = trans('velocity::app.customer.compare.removed');
         }
 
         return [
             'status'  => 'success',
-            'message' => trans('velocity::app.customer.compare.removed'),
+            'message' => $message,
             'label'   => trans('velocity::app.shop.general.alert.success'),
         ];
     }

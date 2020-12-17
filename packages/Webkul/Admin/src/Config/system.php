@@ -27,7 +27,7 @@ return [
                         'value' => 'kgs',
                     ],
                 ],
-                'channel_based' => true,
+                'channel_based' => true
             ],
         ],
     ], [
@@ -41,24 +41,28 @@ return [
                 'type'          => 'text',
                 'validation'    => 'required|max:50',
                 'channel_based' => true,
+                'default_value' => config('mail.from.name'),
             ],  [
                 'name'          => 'shop_email_from',
                 'title'         => 'admin::app.admin.system.shop-email-from',
                 'type'          => 'text',
                 'validation'    => 'required|email',
                 'channel_based' => true,
+                'default_value' => config('mail.from.address'),
             ],  [
                 'name'          => 'admin_name',
                 'title'         => 'admin::app.admin.system.admin-name',
                 'type'          => 'text',
                 'validation'    => 'required|max:50',
                 'channel_based' => true,
+                'default_value' => config('mail.admin.name'),
             ],  [
                 'name'          => 'admin_email',
                 'title'         => 'admin::app.admin.system.admin-email',
                 'type'          => 'text',
                 'validation'    => 'required|email',
                 'channel_based' => true,
+                'default_value' => config('mail.admin.address'),
             ],
         ],
     ], [
@@ -85,6 +89,25 @@ return [
             ],
         ],
     ], [
+        'key'    => 'general.content.custom_scripts',
+        'name'   => 'admin::app.admin.system.custom-scripts',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'custom_css',
+                'title'         => 'admin::app.admin.system.custom-css',
+                'type'          => 'textarea',
+                'channel_based' => true,
+                'locale_based'  => false,
+            ], [
+                'name'          => 'custom_javascript',
+                'title'         => 'admin::app.admin.system.custom-javascript',
+                'type'          => 'textarea',
+                'channel_based' => true,
+                'locale_based'  => false,
+            ]
+        ],
+    ], [
         'key'  => 'general.design',
         'name' => 'admin::app.admin.system.design',
         'sort' => 3,
@@ -98,13 +121,13 @@ return [
                 'title'         => 'admin::app.admin.system.logo-image',
                 'type'          => 'image',
                 'channel_based' => true,
-                'validation'    => 'mimes:jpeg,bmp,png,jpg',
+                'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
             ], [
                 'name'          => 'favicon',
                 'title'         => 'admin::app.admin.system.favicon',
                 'type'          => 'image',
                 'channel_based' => true,
-                'validation'    => 'mimes:jpeg,bmp,png,jpg',
+                'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
             ],
         ],
     ], [
@@ -124,6 +147,24 @@ return [
                 'name'  => 'allow-guest-checkout',
                 'title' => 'admin::app.admin.system.allow-guest-checkout',
                 'type'  => 'boolean',
+            ],
+        ],
+    ], [
+        'key'    => 'catalog.products.homepage',
+        'name'   => 'admin::app.admin.system.homepage',
+        'sort'   => 2,
+        'fields' => [
+            [
+                'name'  => 'no_of_new_product_homepage',
+                'title' => 'admin::app.admin.system.allow-no-of-new-product-homepage',
+                'type'  => 'number',
+                'validation'    => 'min:0',
+            ],
+            [
+                'name'  => 'no_of_featured_product_homepage',
+                'title' => 'admin::app.admin.system.allow-no-of-featured-product-homepage',
+                'type'  => 'number',
+                'validation'    => 'min:0',
             ],
         ],
     ], [
@@ -177,6 +218,10 @@ return [
                     ],
                 ],
                 'channel_based' => true,
+            ], [
+                'name'  => 'buy_now_button_display',
+                'title' => 'admin::app.admin.system.buy-now-button-display',
+                'type'  => 'boolean',
             ]
         ],
     ], [
@@ -189,6 +234,21 @@ return [
                 'title' => 'admin::app.admin.system.allow-guest-review',
                 'type'  => 'boolean',
             ],
+        ],
+    ], [
+        'key'    => 'catalog.products.attribute',
+        'name'   => 'admin::app.admin.system.attribute',
+        'sort'   => 4,
+        'fields' => [
+            [
+                'name'  => 'image_attribute_upload_size',
+                'title' => 'admin::app.admin.system.image-upload-size',
+                'type'  => 'text',
+            ], [
+                'name'  => 'file_attribute_upload_size',
+                'title' => 'admin::app.admin.system.file-upload-size',
+                'type'  => 'text',
+            ]
         ],
     ], [
         'key'  => 'catalog.inventory',

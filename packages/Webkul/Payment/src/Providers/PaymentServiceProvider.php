@@ -44,6 +44,7 @@ class PaymentServiceProvider extends ServiceProvider
             return new Payment();
         });
     }
+    
     /**
      * Register package config.
      *

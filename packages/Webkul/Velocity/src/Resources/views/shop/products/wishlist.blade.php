@@ -1,6 +1,7 @@
 @inject ('wishListHelper', 'Webkul\Customer\Helpers\Wishlist')
 
 {!! view_render_event('bagisto.shop.products.wishlist.before') !!}
+
     @auth('customer')
         @php
             $isWished = $wishListHelper->getWishlistProduct($product);
@@ -18,7 +19,7 @@
                 title="{{ __('velocity::app.shop.wishlist.remove-wishlist-text') }}"
             @endif>
 
-            <wishlist-component active="{{ !$isWished }}" is-customer="true"></wishlist-component>
+            <wishlist-component active="{{ ! $isWished }}"></wishlist-component>
 
             @if (isset($text))
                 {!! $text !!}
@@ -27,17 +28,12 @@
     @endauth
 
     @guest('customer')
-        <wishlist-component
-            active="false"
-            is-customer="false"
-            text="{{ $text ?? null }}"
-            product-id="{{ $product->id }}"
-            item-id="{{ $item->id ?? null}}"
-            product-slug="{{ $product->url_key }}"
-            add-class="{{ $addWishlistClass ?? '' }}"
-            move-to-wishlist="{{ $isMoveToWishlist ?? null}}"
-            added-text="{{ __('shop::app.customer.account.wishlist.add') }}"
-            remove-text="{{ __('shop::app.customer.account.wishlist.remove') }}">
-        </wishlist-component>
+        <a
+            class="unset wishlist-icon {{ $addWishlistClass ?? '' }} text-right"
+            href="{{ route('customer.wishlist.add', $product->product_id) }}"
+            title="{{ __('velocity::app.shop.wishlist.add-wishlist-text') }}">
+            <wishlist-component active="false"></wishlist-component>
+        </a>
     @endauth
+
 {!! view_render_event('bagisto.shop.products.wishlist.after') !!}

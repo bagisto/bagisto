@@ -18,7 +18,7 @@
                 <div class="page-title">
                     <h1>
                         <i class="icon angle-left-icon back-link"
-                           onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+                           onclick="window.location = history.length > 1 ? document.referrer : '{{ route('admin.dashboard.index') }}'"></i>
 
                         {{ __('admin::app.catalog.products.edit-title') }}
                     </h1>
@@ -89,6 +89,16 @@
 
                                         if ($attribute->type == 'price') {
                                             array_push($validations, 'decimal');
+                                        }
+
+                                        if ($attribute->type == 'file') {
+                                            $retVal = (core()->getConfigData('catalog.products.attribute.file_attribute_upload_size')) ? core()->getConfigData('catalog.products.attribute.file_attribute_upload_size') : '2048' ;
+                                            array_push($validations, 'size:' . $retVal);
+                                        }
+
+                                        if ($attribute->type == 'image') {
+                                            $retVal = (core()->getConfigData('catalog.products.attribute.image_attribute_upload_size')) ? core()->getConfigData('catalog.products.attribute.image_attribute_upload_size') : '2048' ;
+                                            array_push($validations, 'size:' . $retVal . '|mimes:bmp,jpeg,jpg,png,webp');
                                         }
 
                                         array_push($validations, $attribute->validation);

@@ -12,6 +12,7 @@
                                 <slide
                                     :key="index"
                                     :slot="`slide-${index}`"
+                                    title=" "
                                     v-for="(image, index) in product.galleryImages">
 
                                     <li class="selected" @click="showProductDetails = false">
@@ -95,6 +96,7 @@
         },
 
         mounted: function () {
+            $('.cd-quick-view').fadeIn(500);
             $('.compare-icon').click(this.closeQuickView);
             $('.wishlist-icon').click(this.closeQuickView);
             $('.add-to-cart-btn').click(() => setTimeout(this.closeQuickView, 0));

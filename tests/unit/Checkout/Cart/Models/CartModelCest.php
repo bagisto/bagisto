@@ -57,7 +57,12 @@ class CartModelCest
         $I->assertTrue(Cart::getCart()->hasProductsWithQuantityBox());
 
         $I->wantTo('check function with cart, that contains a product with QuantityBox() == true');
-        Cart::removeItem($cartItemIdOfProductWithoutQuantityBox);
+        // Cart::removeItem($cartItemIdOfProductWithoutQuantityBox);
+        Cart::addProduct($this->productWithQuantityBox->id, [
+            '_token'     => session('_token'),
+            'product_id' => $this->productWithQuantityBox->id,
+            'quantity'   => 1,
+        ]);
         $I->assertTrue(Cart::getCart()->hasProductsWithQuantityBox());
     }
 }

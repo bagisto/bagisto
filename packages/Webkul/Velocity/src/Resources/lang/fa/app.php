@@ -97,6 +97,7 @@ return [
             'footer-left-content' => 'بالا و پایین صفحه',
             'subscription-content' => 'نوار اشتراک محتوا',
             'sidebar-categories' => 'دسته بندی های نوار کناری',
+            'header_content_count' => 'Header Content Count',
             'footer-left-raw-content' => '<p>ما دوست داریم که نرم افزارهایی را تهیه کرده و مشکلات دنیای واقعی را با باینری حل کنیم. ما به اهداف خود بسیار متعهد هستیم. ما منابع خود را برای ایجاد کلاس های نرم افزاری و برنامه های کاربردی برای تجارت سازمانی با درجه برتر ، در لبه تخصص فناوری سرمایه گذاری می کنیم..</p>',
             'slider-path' => 'مسیر کشویی',
             'category-logo' => 'آرم دسته',
@@ -110,7 +111,17 @@ return [
             'advertisement-three' => 'تبلیغات سه تصویر',
             'images' => 'تصاویر',
             'general' => 'عمومی',
-            'add-image-btn-title' => 'تصویر اضافه کن'
+            'add-image-btn-title' => 'تصویر اضافه کن',
+            'footer-middle' => [
+                'about-us'  => 'About Us',
+                'customer-service' => 'Customer Service',
+                'whats-new' => 'What\'s New',
+                'contact-us' => 'Contact Us',
+                'order-and-returns' => 'Order and Returns',
+                'payment-policy' => 'Payment Policy',
+                'shipping-policy' => 'Shipping Policy',
+                'privacy-and-cookies-policy' => 'Privacy and Cookies Policy'
+            ]
         ],
         'category' => [
             'save-btn-title' => 'ذخیره منو',
@@ -194,9 +205,11 @@ return [
         'compare' => [
             'text' => 'مقایسه کنید',
             'compare_similar_items' => 'موارد مشابه را مقایسه کنید',
+            'add-tooltip' => 'اضافه کردن محصول برای مقایسه لیست',
             'added' => 'مورد با موفقیت برای مقایسه لیست اضافه شد',
             'already_added' => 'مورد در حال حاضر برای مقایسه لیست اضافه شده است',
             'removed' => 'مورد با موفقیت از لیست مقایسه حذف شد',
+            'removed-all' => 'همه موارد با موفقیت از لیست مقایسه حذف شدند',
             'empty-text' => "شما هیچ موردی را در لیست مقایسه خود ندارید",
             'product_image' => 'Product Image',
             'actions' => 'Actions',
@@ -220,7 +233,10 @@ return [
             'forgot-password' => 'رمز عبور را فراموش کرده اید',
             'recover-password' => 'بازیابی رمز عبور',
             'recover-password-text' => 'اگر رمز عبور خود را فراموش کرده اید ، با وارد کردن آدرس ایمیل خود آن را بازیابی کنید.',
-        ]
+        ],
+        'wishlist' => [
+            'remove-all-success' => 'همه موارد لیست دلخواه شما حذف شده است',
+        ],
     ],
 
     'error' => [
@@ -259,16 +275,18 @@ return [
         'general' => [
             'no' => 'No',
             'yes' => 'Yes',
-            'view' => 'چشم انداز',
             'filter' => 'فیلتر',
+            'view' => 'چشم انداز',
             'orders' => 'سفارشات',
-            'update' => 'به روز رسانی',
+            'download' => 'دانلود',
             'reviews' => 'بررسی ها',
             'addresses' => 'آدرس ها',
+            'update' => 'به روز رسانی',
             'currencies' => 'Currencies',
             'top-brands' => 'برندهای برتر',
             'new-password' => 'رمز عبور جدید',
             'downloadables' => 'محصولات دانلودی',
+            'no-file-available' => 'هیچ پرونده ای موجود نیست',
             'confirm-new-password' => 'رمزعبور جدید را تأیید کنید',
             'enter-current-password' => 'رمز عبور فعلی خود را وارد کنید',
 

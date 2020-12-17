@@ -97,6 +97,7 @@ return [
             'footer-left-content' => 'Alt Sol İçeriği',
             'subscription-content' => 'Abonelik Çubuğu İçeriği',
             'sidebar-categories' => 'Yan Kategoriler',
+            'header_content_count' => 'Header Content Count',
             'footer-left-raw-content' => '<p>Yazılımlar üretmeyi ve dünyada karşılaştığımız sorunları bu şekilde çözmeyi çok seviyoruz. Hedeflerimize büyük önem veriyor, en iyi olduğumuz teknoloji uzmanlığı ile kurumsal işleriniz için birin sınıf kullanıcı dostu yazılım ve uygulamalar oluşturmak için kaynaklarımıza yatırım yapıyoruz.</p>',
             'slider-path' => 'Slider Yolu',
             'category-logo' => 'Kategori Logosu',
@@ -110,7 +111,17 @@ return [
             'advertisement-three' => 'Üç Görselli Reklam',
             'images' => 'Görseller',
             'general' => 'Genel',
-            'add-image-btn-title' => 'Görsel Ekle'
+            'add-image-btn-title' => 'Görsel Ekle',
+            'footer-middle' => [
+                'about-us'  => 'About Us',
+                'customer-service' => 'Customer Service',
+                'whats-new' => 'What\'s New',
+                'contact-us' => 'Contact Us',
+                'order-and-returns' => 'Order and Returns',
+                'payment-policy' => 'Payment Policy',
+                'shipping-policy' => 'Shipping Policy',
+                'privacy-and-cookies-policy' => 'Privacy and Cookies Policy'
+            ]
         ],
         'category'  => [
             'save-btn-title' => 'Menü Kaydet',
@@ -192,9 +203,11 @@ return [
         'compare'           => [
             'text'                  => 'Karşılaştır',
             'compare_similar_items' => 'Benzer Ürünleri Karşılaştır',
+            'add-tooltip'           => 'Karşılaştırma listesine ürün ekle',
             'added'                 => 'Ürün karşılaştırma listesine başarıyla eklendi.',
             'already_added'         => 'Ürün zaten karşılaştırma listesinde yer alıyor.',
             'removed'               => 'Ürün karşılaştırma listesinden başarıyla kaldırıldı.',
+            'removed-all'           => 'Tüm Öğeler karşılaştırma listesinden başarıyla kaldırıldı',
             'empty-text'            => "Karşılaştırma listenizde henüz ürün bulunmuyor.",
             'product_image'         => 'Ürün Görseli',
             'actions'               => 'Eylemler',
@@ -218,7 +231,10 @@ return [
             'forgot-password'       => 'Parolamı Unuttum',
             'recover-password'      => 'Parolamı Yenile',
             'recover-password-text' => 'Parolanızı unuttuysanız, mail adresinizi girerek yeni parola talebinde bulunun.',
-        ]
+        ],
+        'wishlist' => [
+            'remove-all-success' => 'İstek listenizdeki tüm öğeler kaldırıldı',
+        ],
     ],
 
     'error'         => [
@@ -268,6 +284,8 @@ return [
             'downloadables'          => 'İndirilebilir Ürünler',
             'confirm-new-password'   => 'Parola Doğrula',
             'enter-current-password' => 'Mevcut Parolanızı Girin',
+            'download'               => 'İndir',
+            'no-file-available'      => 'Dosya Yok!',
 
             'alert' => [
                 'info'      => 'Bilgi',

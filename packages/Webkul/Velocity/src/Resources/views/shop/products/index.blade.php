@@ -61,16 +61,16 @@
     <script type="text/x-template" id="category-template">
         <section class="row col-12 velocity-divide-page category-page-wrapper">
             {!! view_render_event('bagisto.shop.productOrCategory.index.before', ['category' => $category]) !!}
-    
+
             @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description']))
                 @include ('shop::products.list.layered-navigation')
             @endif
-    
+
             <div class="category-container right">
                 <div class="row remove-padding-margin">
                     <div class="pl0 col-12">
                         <h1 class="fw6 mb10">{{ $category->name }}</h1>
-    
+
                         @if ($isDescriptionDisplayMode)
                             @if ($category->description)
                                 <div class="category-description">
@@ -79,11 +79,11 @@
                             @endif
                         @endif
                     </div>
-    
+
                     <div class="col-12 no-padding">
                         <div class="hero-image">
                             @if (!is_null($category->image))
-                                <img class="logo" src="{{ $category->image_url }}" />
+                                <img class="logo" src="{{ $category->image_url }}" alt="" width="20" height="20" />
                             @endif
                         </div>
                     </div>
@@ -95,14 +95,14 @@
                             @include ('shop::products.list.toolbar')
                         </template>
                     </div>
-        
+
                     <div
                         class="category-block"
                         @if ($category->display_mode == 'description_only')
                             style="width: 100%"
                         @endif>
 
-                        <shimmer-component v-if="isLoading && !isMobile()" shimmer-count="4"></shimmer-component>
+                        <shimmer-component v-if="isLoading" shimmer-count="4"></shimmer-component>
 
                         <template v-else-if="products.length > 0">
                             @if ($toolbarHelper->getCurrentMode() == 'grid')
@@ -140,7 +140,7 @@
                     </div>
                 @endif
             </div>
-    
+
             {!! view_render_event('bagisto.shop.productOrCategory.index.after', ['category' => $category]) !!}
         </section>
     </script>

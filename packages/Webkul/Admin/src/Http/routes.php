@@ -1,7 +1,7 @@
 <?php
 
-Route::group(['middleware' => ['web']], function () {
-    Route::prefix('admin')->group(function () {
+Route::group(['middleware' => ['web', 'admin_locale']], function () {
+    Route::prefix(config('app.admin_url'))->group(function () {
 
         Route::get('/', 'Webkul\Admin\Http\Controllers\Controller@redirectToLogin');
 
@@ -269,6 +269,10 @@ Route::group(['middleware' => ['web']], function () {
                     'redirect' => 'admin.catalog.products.edit',
                 ])->name('admin.catalog.products.store');
 
+                Route::get('products/copy/{id}', 'Webkul\Product\Http\Controllers\ProductController@copy')->defaults('_config', [
+                    'view' => 'admin::catalog.products.edit',
+                ])->name('admin.catalog.products.copy');
+
                 Route::get('/products/edit/{id}', 'Webkul\Product\Http\Controllers\ProductController@edit')->defaults('_config', [
                     'view' => 'admin::catalog.products.edit',
                 ])->name('admin.catalog.products.edit');
@@ -331,6 +335,13 @@ Route::group(['middleware' => ['web']], function () {
 
                 Route::post('/categories/delete/{id}', 'Webkul\Category\Http\Controllers\CategoryController@destroy')->name('admin.catalog.categories.delete');
 
+                //category massdelete
+                Route::post('categories/massdelete', 'Webkul\Category\Http\Controllers\CategoryController@massDestroy')->defaults('_config', [
+                    'redirect' => 'admin.catalog.categories.index',
+                ])->name('admin.catalog.categories.massdelete');
+
+                Route::post('/categories/product/count', 'Webkul\Category\Http\Controllers\CategoryController@categoryProductCount')->name('admin.catalog.categories.product.count');
+                
 
                 // Catalog Attribute Routes
                 Route::get('/attributes', 'Webkul\Attribute\Http\Controllers\AttributeController@index')->defaults('_config', [
@@ -673,7 +684,7 @@ Route::group(['middleware' => ['web']], function () {
             //tax rate ends
 
             //DataGrid Export
-            Route::post('admin/export', 'Webkul\Admin\Http\Controllers\ExportController@export')->name('admin.datagrid.export');
+            Route::post(config('app.admin_url') . '/export', 'Webkul\Admin\Http\Controllers\ExportController@export')->name('admin.datagrid.export');
 
             Route::prefix('promotions')->group(function () {
                 Route::get('cart-rules', 'Webkul\CartRule\Http\Controllers\CartRuleController@index')->defaults('_config', [

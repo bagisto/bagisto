@@ -3,10 +3,10 @@
         <div class="product-image">
             <a :title="product.name" :href="`${baseUrl}/${product.slug}`">
                 <img
-                    :src="product.image"
+                    :src="product.image || product.product_image"
                     :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
 
-                <product-quick-view-btn :quick-view-details="product"></product-quick-view-btn>
+                <product-quick-view-btn :quick-view-details="product" v-if="!isMobile()"></product-quick-view-btn>
             </a>
         </div>
 
@@ -43,8 +43,8 @@
             <img
                 loading="lazy"
                 :alt="product.name"
-                :src="product.image"
-                :data-src="product.image"
+                :src="product.image || product.product_image"
+                :data-src="product.image || product.product_image"
                 class="card-img-top lzy_img"
                 :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
                 <!-- :src="`${$root.baseUrl}/vendor/webkul/ui/assets/images/product/meduim-product-placeholder.png`" /> -->
@@ -59,7 +59,7 @@
                     :title="product.name"
                     :href="`${baseUrl}/${product.slug}`">
 
-                    <span class="fs16">{{ product.name }}</span>
+                    <span class="fs16">{{ product.name | truncate }}</span>
                 </a>
             </div>
 
@@ -101,5 +101,15 @@
                 'addToCartHtml': '',
             }
         },
+
+        methods: {
+            'isMobile': function () {
+                if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
     }
 </script>

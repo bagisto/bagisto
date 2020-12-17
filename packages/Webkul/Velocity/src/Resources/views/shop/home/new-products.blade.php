@@ -1,158 +1,20 @@
 @php
-    $count = $velocityMetaData ? $velocityMetaData->new_products_count : 10;
+    $count = core()->getConfigData('catalog.products.homepage.no_of_new_product_homepage');
+    $count = $count ? $count : 10;
+    $direction = core()->getCurrentLocale()->direction == 'rtl' ? 'rtl' : 'ltr';
 @endphp
 
-<new-products></new-products>
+{!! view_render_event('bagisto.shop.new-products.before') !!}
 
-@push('scripts')
-    <script type="text/x-template" id="new-products-template">
-        <div class="container-fluid">
-            <shimmer-component v-if="isLoading && !isMobileView"></shimmer-component>
+<product-collections
+    count="{{ (int) $count }}"
+    product-id="new-products-carousel"
+    product-title="{{ __('shop::app.home.new-products') }}"
+    product-route="{{ route('velocity.category.details', ['category-slug' => 'new-products', 'count' => $count]) }}"
+    locale-direction="{{ $direction }}"
+    show-recently-viewed="{{ (Boolean) $showRecentlyViewed }}"
+    recently-viewed-title="{{ __('velocity::app.products.recently-viewed') }}"
+    no-data-text="{{ __('velocity::app.products.not-available') }}">
+</product-collections>
 
-            <template v-else-if="newProducts.length > 0">
-                <card-list-header
-                    row-class="pl-26"
-                    heading="{{ __('shop::app.home.new-products') }}"
-                >
-                </card-list-header>
-
-                {!! view_render_event('bagisto.shop.new-products.before') !!}
-
-                    @if ($showRecentlyViewed)
-                        @push('css')
-                            <style>
-                                .recently-viewed {
-                                    padding-right: 0px;
-                                }
-                            </style>
-                        @endpush
-
-                        <div class="row ltr">
-                            <div class="col-9 no-padding carousel-products vc-full-screen with-recent-viewed" v-if="!isMobileView">
-                                <carousel-component
-                                    slides-per-page="5"
-                                    navigation-enabled="hide"
-                                    pagination-enabled="hide"
-                                    id="new-products-carousel"
-                                    :slides-count="newProducts.length">
-
-                                    <slide
-                                        :key="index"
-                                        :slot="`slide-${index}`"
-                                        v-for="(product, index) in newProducts">
-                                        <product-card
-                                            :list="list"
-                                            :product="product">
-                                        </product-card>
-                                    </slide>
-                                </carousel-component>
-                            </div>
-
-                            <div class="col-12 no-padding carousel-products vc-small-screen" v-else>
-                                <carousel-component
-                                    slides-per-page="2"
-                                    navigation-enabled="hide"
-                                    pagination-enabled="hide"
-                                    id="new-products-carousel"
-                                    :slides-count="newProducts.length">
-
-                                    <slide
-                                        :key="index"
-                                        :slot="`slide-${index}`"
-                                        v-for="(product, index) in newProducts">
-                                        <product-card
-                                            :list="list"
-                                            :product="product">
-                                        </product-card>
-                                    </slide>
-                                </carousel-component>
-                            </div>
-
-                            @include ('shop::products.list.recently-viewed', [
-                                'quantity'          => 3,
-                                'addClass'          => 'col-lg-3 col-md-12',
-                            ])
-                        </div>
-                    @else
-                        <div class="carousel-products vc-full-screen" v-if="!isMobileView">
-                            <carousel-component
-                                slides-per-page="6"
-                                navigation-enabled="hide"
-                                pagination-enabled="hide"
-                                id="new-products-carousel"
-                                :slides-count="newProducts.length">
-
-                                <slide
-                                    :key="index"
-                                    :slot="`slide-${index}`"
-                                    v-for="(product, index) in newProducts">
-                                    <product-card
-                                        :list="list"
-                                        :product="product">
-                                    </product-card>
-                                </slide>
-                            </carousel-component>
-                        </div>
-
-                        <div class="carousel-products vc-small-screen" v-else>
-                            <carousel-component
-                                slides-per-page="2"
-                                navigation-enabled="hide"
-                                pagination-enabled="hide"
-                                id="new-products-carousel"
-                                :slides-count="newProducts.length">
-
-                                <slide
-                                    :key="index"
-                                    :slot="`slide-${index}`"
-                                    v-for="(product, index) in newProducts">
-                                    <product-card
-                                        :list="list"
-                                        :product="product">
-                                    </product-card>
-                                </slide>
-                            </carousel-component>
-                        </div>
-                    @endif
-
-                {!! view_render_event('bagisto.shop.new-products.after') !!}
-            </template>
-        </div>
-    </script>
-
-    <script type="text/javascript">
-        (() => {
-            Vue.component('new-products', {
-                'template': '#new-products-template',
-                data: function () {
-                    return {
-                        'list': false,
-                        'isLoading': true,
-                        'newProducts': [],
-                        'isMobileView': this.$root.isMobile(),
-                    }
-                },
-
-                mounted: function () {
-                    this.getNewProducts();
-                },
-
-                methods: {
-                    'getNewProducts': function () {
-                        this.$http.get(`${this.baseUrl}/category-details?category-slug=new-products&count={{ $count }}`)
-                        .then(response => {
-                            if (response.data.status)
-                                this.newProducts = response.data.products;
-
-                            this.isLoading = false;
-                        })
-                        .catch(error => {
-                            this.isLoading = false;
-                            console.log(this.__('error.something_went_wrong'));
-                        })
-                    }
-                }
-            })
-        })()
-    </script>
-@endpush
+{!! view_render_event('bagisto.shop.new-products.after') !!}

@@ -17,6 +17,7 @@ return [
 
     'common' => [
         'error' => 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.',
+        'image-upload-limit' => 'Die maximale Upload-Größe des Bildes beträgt 2 MB',
         'no-result-found' => 'Wir konnten keine Aufzeichnungen finden.'
     ],
 
@@ -72,7 +73,8 @@ return [
         'page-title' => config('app.name') . ' - Suchen',
         'found-results' => 'Suchergebnisse gefunden',
         'found-result' => 'Suchergebnis gefunden',
-        'analysed-keywords' => 'Analysed Keywords'
+        'analysed-keywords' => 'Analysed Keywords',
+        'image-search-option' => 'Image Search Option'
     ],
 
     'reviews' => [
@@ -92,6 +94,19 @@ return [
     ],
 
     'customer' => [
+        'compare'           => [
+            'text'                  => 'Vergleichen',
+            'compare_similar_items' => 'Ähnliche Artikel vergleichen',
+            'add-tooltip'           => 'Produkt zur Vergleichsliste hinzufügen',
+            'added'                 => 'Element erfolgreich zur Vergleichsliste hinzugefügt',
+            'already_added'         => 'Artikel bereits zur Vergleichsliste hinzugefügt',
+            'removed'               => 'Element erfolgreich aus Vergleichsliste entfernt',
+            'removed-all'           => 'Alle Elemente wurden erfolgreich aus der Vergleichsliste entfernt',
+            'empty-text'            => "Sie haben keine Elemente in Ihrer Vergleichsliste",
+            'product_image'         => 'Produktbild',
+            'actions'               => 'Aktionen',
+        ],
+
         'signup-text' => [
             'account_exists' => 'Sie haben bereits ein Konto',
             'title' => 'Anmelden'
@@ -163,6 +178,11 @@ return [
         'account' => [
             'dashboard' => 'Profil bearbeiten',
             'menu' => 'Menu',
+
+            'general' => [
+                'no' => 'Nein',
+                'yes' => 'Ja',
+            ],
 
             'profile' => [
                 'index' => [
@@ -326,6 +346,8 @@ return [
                 'error' => 'Das Produkt kann aufgrund unbekannter Probleme nicht zur Wunschliste hinzugefügt werden. Bitte versuchen Sie es später erneut',
                 'add' => 'Artikel erfolgreich zur Wunschliste hinzugefügt',
                 'remove' => 'Artikel erfolgreich von der Wunschliste entfernt',
+                'add-wishlist-text'     => 'Produkt zur Wunschliste hinzufügen',
+                'remove-wishlist-text'  => 'Produkt von der Wunschliste entfernen',
                 'moved' => 'Artikel erfolgreich in den Warenkorb verschoben',
                 'option-missing' => 'Produktoptionen fehlen, sodass Artikel nicht auf die Wunschliste verschoben werden können.',
                 'move-error' => 'Artikel kann nicht auf die Wunschliste verschoben werden. Bitte versuchen Sie es später erneut',
@@ -366,14 +388,14 @@ return [
     ],
 
     'products' => [
-        'layered-nav-title' => 'Einkaufen bei',
+        'layered-nav-title' => 'Filtern nach',
         'price-label' => 'Angebotspreis von',
         'remove-filter-link-title' => 'Alles löschen',
         'filter-to' => 'bis',
         'sort-by' => 'Sortieren',
         'from-a-z' => 'Von A-Z',
         'from-z-a' => 'Von Z-A',
-        'newest-first' => 'Neuste zuerst',
+        'newest-first' => 'Neueste zuerst',
         'oldest-first' => 'Älteste zuerst',
         'cheapest-first' => 'Günstigste zuerst',
         'expensive-first' => 'Teuerste zuerst',
@@ -417,6 +439,7 @@ return [
         'available' => 'Verfügbar',
         'settings' => 'Settings',
         'compare_options' => 'Compare Options',
+        'wishlist-options' => 'Wishlist Options'
     ],
 
     // 'reviews' => [
@@ -461,12 +484,15 @@ return [
                 'success' => 'Artikel wurde erfolgreich zum Warenkorb hinzugefügt',
                 'success-remove' => 'Artikel wurde erfolgreich aus dem Warenkorb entfernt',
                 'error-add' => 'Artikel kann nicht zum Warenkorb hinzugefügt werden. Bitte versuchen Sie es später erneut',
+                'inactive' => 'Ein Artikel ist inaktiv und wurde aus dem Warenkorb entfernt.',
+                'inactive-add' => 'Ein inaktiver Artikel kann nicht zum Warenkorb hinzugefügt werde.',
             ],
             'quantity-error' => 'Die angeforderte Menge ist nicht verfügbar',
             'cart-subtotal' => 'Warenkorb Zwischensumme',
             'cart-remove-action' => 'Wollen Sie dies wirklich tun?',
             'partial-cart-update' => 'Nur einige der Produkte wurden aktualisiert',
-            'link-missing' => ''
+            'link-missing' => '',
+            'minimum-order-message' => 'Minimum order amount is :amount'
         ],
 
         'onepage' => [
@@ -496,7 +522,7 @@ return [
             'shipping-method' => 'Versandart wählen',
             'payment-methods' => 'Zahlungsmethode wählen',
             'payment-method' => 'Zahlungsmethode',
-            'summary' => 'Bestellübersichty',
+            'summary' => 'Bestellübersicht',
             'price' => 'Preis',
             'quantity' => 'Menge',
             'billing-address' => 'Rechnungsadresse',
@@ -573,6 +599,15 @@ return [
             'final-summary' => 'Vielen Dank für Ihr Interesse an unserem Shop. Nach dem Versand senden wir Ihnen die Sendungsverfolgungsnummer',
             'help' => 'Wenn Sie Hilfe benötigen, kontaktieren Sie uns bitte unter :support_email',
             'thanks' => 'Vielen Dank!',
+
+            'comment' => [
+                'subject' => 'Neuer Kommentar zu Ihrer Bestellung hinzugefügt #:order_id',
+                'dear' => 'sehr geehrter :customer_name',
+                'final-summary' => 'Vielen Dank für Ihr Interesse an unserem Shop',
+                'help' => 'Wenn Sie Hilfe benötigen, kontaktieren Sie uns bitte unter :support_email',
+                'thanks' => 'Vielen Dank!',
+            ],
+
             'cancel' => [
                 'subject' => 'Bestätigung der Bestellungsstornierung',
                 'heading' => 'Bestellung storniert',
@@ -626,6 +661,13 @@ return [
             'info' => 'Sie erhalten diese E-Mail, weil wir eine Anfrage zum Zurücksetzen des Passworts für Ihr Konto erhalten haben',
             'reset-password' => 'Passwort zurücksetzen',
             'final-summary' => 'Wenn Sie kein Zurücksetzen des Kennworts angefordert haben, sind keine weiteren Maßnahmen erforderlich',
+            'thanks' => 'Vielen Dank!'
+        ],
+
+        'update-password' => [
+            'subject' => 'Passwort aktualisiert',
+            'dear' => 'Sehr geehrte/r :name',
+            'info' => 'Sie erhalten diese E-Mail, weil Sie Ihr Passwort aktualisiert haben.',
             'thanks' => 'Vielen Dank!'
         ],
 
