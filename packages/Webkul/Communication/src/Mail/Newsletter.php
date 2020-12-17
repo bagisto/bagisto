@@ -52,6 +52,10 @@ class Newsletter extends Mailable
         return $this->from($this->newsletter->sender_email, $this->newsletter->sender_name)
                     ->to($this->subscriber->email)
                     ->subject($this->newsletter->subject)
-                    ->html($this->newsletter->content);
+                    ->view('communication::admin.newsletter-emails.default-email')
+                    ->with([
+                        'newsletter' => $this->newsletter,
+                        'subscriber' => $this->subscriber
+                    ]);
     }
 }

@@ -73,7 +73,9 @@ class CommunicationServiceProvider extends ServiceProvider
     protected function setupScheduler()
     {
         $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
-            $schedule->command('newsletter:send')->everyMinute();
+            $schedule->command('newsletter:send')
+                ->everyMinute()
+                ->between(env('NEWSLETTER_START_TIME', '9:30'), env('NEWSLETTER_END_TIME', '19:00'));
         });
     }
 }

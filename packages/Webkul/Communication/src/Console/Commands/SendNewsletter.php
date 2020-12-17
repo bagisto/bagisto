@@ -53,7 +53,12 @@ class SendNewsletter extends Command
      */
     public function handle()
     {
-        $now = now()->toDateTimeString();
+        /*
+            just given time field in advance so that in future
+            if time requirement is needed for specific newsletter
+            then static value can be dynamic
+        */
+        $now = now()->toDateString() . ' ' . '00:00:00';
 
         $newsletters = $this->newsletterQueueRepository->where('queue_datetime', $now)->get();
 
@@ -65,7 +70,7 @@ class SendNewsletter extends Command
                     $subscribers->each(function ($subscriber) use ($newsletter) {
                         Mail::queue(new Newsletter($newsletter, $subscriber));
                     });
-
+                    
                     $newsletter->is_delivered = 1;
                     $newsletter->save();
                 }

@@ -93,8 +93,6 @@ class NewsletterQueueController extends Controller
             'queue_datetime' => 'required|date'
         ]);
 
-        $inputs['queue_datetime'] .= ' ' . now()->toTimeString();
-
         $this->newsletterQueueRepository->create($inputs);
 
         session()->flash('success', trans('communication::app.newsletter-queue.queue-form.response.store-success'));

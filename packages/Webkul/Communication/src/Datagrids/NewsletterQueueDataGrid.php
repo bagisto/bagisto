@@ -46,7 +46,7 @@ class NewsletterQueueDataGrid extends DataGrid
     {
         $queryBuilder = $this->newsletterQueueRepository->query()
             ->addSelect([
-                'id', 'subject', 'sender_name', 'sender_email', 'queue_datetime'
+                'id', 'subject', 'sender_name', 'sender_email', 'queue_datetime', 'is_delivered'
             ]);
 
         $this->setQueryBuilder($queryBuilder);
@@ -97,6 +97,23 @@ class NewsletterQueueDataGrid extends DataGrid
             'searchable' => true,
             'sortable'   => true,
             'filterable' => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'is_delivered',
+            'label'      => trans('communication::app.newsletter-queue.queue-form.status'),
+            'type'       => 'string',
+            'searchable' => true,
+            'sortable'   => true,
+            'filterable' => true,
+            'closure'    => true,
+            'wrapper'    => function($row) {
+                if ($row->is_delivered == 1) {
+                    return '<span class="badge badge-md badge-success"">' . trans('communication::app.newsletter-queue.delivered') . '</span>';
+                } else {
+                    return '<span class="badge badge-md badge-info"">' . trans('communication::app.newsletter-queue.processing') . '</span>';
+                }
+            },
         ]);
     }
 
