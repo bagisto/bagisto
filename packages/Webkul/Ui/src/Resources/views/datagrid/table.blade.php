@@ -306,7 +306,7 @@
                         booleanConditionSelect: false,
                         numberConditionSelect: false,
                         datetimeConditionSelect: false,
-                        perPage: 10,
+                        perPage: {{ $results['itemsPerPage'] ?: 10 }},
                         extraFilters: @json($results['extraFilters']),
                     }
                 },
