@@ -1285,6 +1285,7 @@ return [
             'description' => 'توضیحات',
             'rate' => 'نرخ',
             'status' => 'وضعیت',
+            'calculate-tax' => 'محاسبه مالیات',
             'type' => 'نوع',
             'payment-methods' => 'روش های پرداخت',
             'cash-on-delivery' => 'پرداخت در محل',

@@ -1279,6 +1279,7 @@ return [
             'description' => 'Descripción',
             'rate' => 'Tasa',
             'status' => 'Estado',
+            'calculate-tax' => 'Calcular impuestos',
             'type' => 'Tipo',
             'payment-methods' => 'Métodos de pago',
             'cash-on-delivery' => 'Pago contraentrega',

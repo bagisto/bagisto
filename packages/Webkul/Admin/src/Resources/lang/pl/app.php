@@ -1287,6 +1287,7 @@ return [
             'description' => 'Opis',
             'rate' => 'Stawka',
             'status' => 'Status',
+            'calculate-tax' => 'Oblicz podatek',
             'type' => 'Rodzaj',
             'payment-methods' => 'Metody płatności',
             'cash-on-delivery' => 'Za pobraniem',

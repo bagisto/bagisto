@@ -1290,6 +1290,7 @@ return [
             'description' => 'Descrizione',
             'rate' => 'Tasso',
             'status' => 'Stato',
+            'calculate-tax' => 'Calcola le tasse',
             'type' => 'Tipo',
             'payment-methods' => 'Metodi di Pagamento',
             'cash-on-delivery' => 'Contrassegno',

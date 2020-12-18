@@ -1286,6 +1286,7 @@ return [
             'description' => 'Descrição',
             'rate' => 'Taxa',
             'status' => 'Status',
+            'calculate-tax' => 'Calcular o imposto',
             'type' => 'Tipo',
             'payment-methods' => 'Métodos de Pagamento',
             'cash-on-delivery' => 'Dinheiro na entrega',

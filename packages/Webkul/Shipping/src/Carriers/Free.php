@@ -37,6 +37,7 @@ class Free extends AbstractShipping
         $object->method = 'free_free';
         $object->method_title = $this->getConfigData('title');
         $object->method_description = $this->getConfigData('description');
+        $object->is_calculate_tax = $this->getConfigData('is_calculate_tax');
         $object->price = 0;
         $object->base_price = 0;
 

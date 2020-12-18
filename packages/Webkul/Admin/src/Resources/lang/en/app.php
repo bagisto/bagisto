@@ -1295,6 +1295,7 @@ return [
             'description' => 'Description',
             'rate' => 'Rate',
             'status' => 'Status',
+            'calculate-tax' => 'Calculate Tax',
             'type' => 'Type',
             'payment-methods' => 'Payment Methods',
             'cash-on-delivery' => 'Cash On Delivery',
