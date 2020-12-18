@@ -697,8 +697,10 @@ class Cart
                         $shippingPrice = $shippingBasePrice = 0;
 
                         if ($shipping = $cart->selected_shipping_rate) {
-                            $shippingPrice = $shipping->price - $shipping->discount_amount;
-                            $shippingBasePrice = $shipping->base_price - $shipping->base_discount_amount;
+                            if ($shipping->is_calculate_tax) {
+                                $shippingPrice = $shipping->price - $shipping->discount_amount;
+                                $shippingBasePrice = $shipping->base_price - $shipping->base_discount_amount;
+                            }
                         }
 
                         /* now assigning shipping prices for tax calculation */

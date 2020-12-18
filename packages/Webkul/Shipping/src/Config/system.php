@@ -35,6 +35,13 @@ return [
                 'validation'    => 'required',
                 'channel_based' => false,
                 'locale_based'  => true,
+            ], [
+                'name'          => 'is_calculate_tax',
+                'title'         => 'Calculate Tax',
+                'type'          => 'boolean',
+                'validation'    => 'required',
+                'channel_based' => false,
+                'locale_based'  => false,
             ]
         ]
     ], [
@@ -86,6 +93,13 @@ return [
                 'validation'    => 'required',
                 'channel_based' => false,
                 'locale_based'  => true,
+            ], [
+                'name'          => 'is_calculate_tax',
+                'title'         => 'Calculate Tax',
+                'type'          => 'boolean',
+                'validation'    => 'required',
+                'channel_based' => false,
+                'locale_based'  => false,
             ]
         ]
     ], [
