@@ -1297,6 +1297,7 @@ return [
             'description'                  => 'Beschreibung',
             'rate'                         => 'Rate',
             'status'                       => 'Status',
+            'calculate-tax'                => 'Steuern berechnen',
             'type'                         => 'Typ',
             'payment-methods'              => 'Zahlungsmethoden',
             'cash-on-delivery'             => 'Nachnahme',

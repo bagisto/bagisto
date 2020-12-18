@@ -37,7 +37,7 @@ return [
                 'locale_based'  => true,
             ], [
                 'name'          => 'is_calculate_tax',
-                'title'         => 'Calculate Tax',
+                'title'         => 'admin::app.admin.system.calculate-tax',
                 'type'          => 'boolean',
                 'validation'    => 'required',
                 'channel_based' => false,
@@ -95,7 +95,7 @@ return [
                 'locale_based'  => true,
             ], [
                 'name'          => 'is_calculate_tax',
-                'title'         => 'Calculate Tax',
+                'title'         => 'admin::app.admin.system.calculate-tax',
                 'type'          => 'boolean',
                 'validation'    => 'required',
                 'channel_based' => false,

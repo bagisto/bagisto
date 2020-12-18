@@ -1290,6 +1290,7 @@ return [
             'description' => 'وصف',
             'rate' => 'معدل',
             'status' => 'الحالة',
+            'calculate-tax' => 'احسب الضريبة',
             'type' => 'اكتب',
             'payment-methods' => 'طرق الدفع',
             'cash-on-delivery' => 'الدفع عند الاستلام',
