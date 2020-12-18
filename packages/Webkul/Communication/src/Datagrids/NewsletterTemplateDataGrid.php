@@ -106,7 +106,7 @@ class NewsletterTemplateDataGrid extends DataGrid
             'title'  => trans('communication::app.newsletter-queue.queue-newsletter'),
             'method' => 'GET',
             'route'  => 'communication.newsletter-queue.create',
-            'icon'   => 'icon list-icon',
+            'icon'   => 'icon sent-icon',
         ]);
 
         $this->addAction([

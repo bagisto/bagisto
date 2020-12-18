@@ -22,6 +22,10 @@ class CommunicationServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'communication');
 
+        $this->publishes([
+            __DIR__ . '/../../publishable/assets' => public_path('vendor/webkul/admin/assets'),
+        ], 'public');
+
         $this->registerCommand();
 
         $this->setupScheduler();

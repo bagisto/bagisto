@@ -1,4 +1,4 @@
-@extends('admin::layouts.content')
+@extends('communication::admin.layouts.master')
 
 @section('page_title')
     {{ __('communication::app.newsletter-templates.newsletter-templates') }}

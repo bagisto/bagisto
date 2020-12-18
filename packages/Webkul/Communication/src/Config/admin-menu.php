@@ -6,7 +6,7 @@ return [
         'name' => 'communication::app.communication',
         'route' => 'communication.newsletter-templates.index',
         'sort' => 7,
-        'icon-class' => '',
+        'icon-class' => 'newsletter-icon',
     ],
     [
         'key' => 'communication.newsletter-templates',
