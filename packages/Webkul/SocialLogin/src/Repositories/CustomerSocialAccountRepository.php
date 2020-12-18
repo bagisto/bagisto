@@ -71,7 +71,7 @@ class CustomerSocialAccountRepository extends Repository
         if ($account) {
             return $account->customer;
         } else {
-            $customer = $this->customerRepository->findOneByField('email', $providerUser->getEmail());
+            $customer = $providerUser->getEmail()?$this->customerRepository->findOneByField('email', $providerUser->getEmail()):null;
  
             if (! $customer) {
                 $names = $this->getFirstLastName($providerUser->getName());
