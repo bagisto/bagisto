@@ -1,0 +1,34 @@
+/**
+ * Menu item icons extensions for newsletter.
+ */
+%menu-properties {
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+    background-size: cover;
+}
+
+.icon {
+    display: inline-block;
+    background-size: cover;
+}
+
+.newsletter-icon {
+    @extend %menu-properties;
+    background-image: url('../images/icon-newsletter.svg');
+}
+
+.router-link-active, .active {
+    &.newsletter-icon {
+        background-image: url('../images/icon-newsletter-active.svg');
+    }
+}
+
+/**
+ * Normal icons.
+ */
+.sent-icon {
+    background-image: url('../images/icon-sent.svg');
+    width: 24px;
+    height: 24px;
+}
