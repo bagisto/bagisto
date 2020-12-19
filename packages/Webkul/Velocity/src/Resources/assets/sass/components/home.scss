@@ -246,7 +246,7 @@ header #search-form > *:focus {
             padding: 0;
             background-repeat: no-repeat;
 
-            &:first-child() {
+            &:first-child {
                 max-height: 345px;
             }
 
@@ -430,12 +430,12 @@ header #search-form > *:focus {
                 display: inline-block;
             }
 
-            > div:first-child() {
+            > div:first-child {
                 width: 60px;
                 margin-right: 10px;
             }
 
-            > div:last-child() {
+            > div:last-child {
                 width: calc(100% - 75px);
             }
         }
@@ -536,7 +536,7 @@ header #search-form > *:focus {
     width: 100%;
     display: inline-block;
 
-    >:first-child() {
+    >:first-child {
         width: 100%;
     }
 }
