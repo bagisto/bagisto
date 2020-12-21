@@ -18,6 +18,11 @@ class ChannelDataGrid extends DataGrid
     protected $sortOrder = 'desc';
 
     /**
+     * Filter Locale.
+     */
+    protected $locale = 'all';
+
+    /**
      * ChannelRepository $channelRepository
      *
      * @var \Webkul\Core\Repositories\ChannelRepository
@@ -36,13 +41,16 @@ class ChannelDataGrid extends DataGrid
     {
         parent::__construct();
 
+        $this->locale = request()->get('locale') ?? app()->getLocale();
+
         $this->channelRepository = $channelRepository;
     }
 
     public function prepareQueryBuilder()
     {
         $queryBuilder = $this->channelRepository->query()
-            ->addSelect('id', 'code', 'name', 'hostname');
+            ->leftJoin('channel_translations', 'channel_translations.channel_id', '=', 'channels.id')
+            ->addSelect('channels.id', 'channels.code', 'channel_translations.name', 'channels.hostname');
 
         $this->setQueryBuilder($queryBuilder);
     }
