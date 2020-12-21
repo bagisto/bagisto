@@ -57,13 +57,19 @@
                             </div>
 
                             <div class="control-group" :class="[errors.has('{{$locale}}[name]') ? 'has-error' : '']">
-                                <label for="name" class="required">{{ __('admin::app.settings.channels.name') }}</label>
+                                <label for="name" class="required">
+                                    {{ __('admin::app.settings.channels.name') }}
+                                    <span class="locale">[{{ $locale }}]</span>
+                                </label>
                                 <input v-validate="'required'" class="control" id="name" name="{{$locale}}[name]" data-vv-as="&quot;{{ __('admin::app.settings.channels.name') }}&quot;" value="{{ old($locale)['name'] ?? ($channel->translate($locale)['name'] ?? '') }}"/>
                                 <span class="control-error" v-if="errors.has('{{$locale}}[name]')">@{{ errors.first('{!!$locale!!}[page_title]') }}</span>
                             </div>
 
                             <div class="control-group">
-                                <label for="description">{{ __('admin::app.settings.channels.description') }}</label>
+                                <label for="description">
+                                    {{ __('admin::app.settings.channels.description') }}
+                                    <span class="locale">[{{ $locale }}]</span>
+                                </label>
                                 <textarea class="control" id="description" name="{{$locale}}[description]">{{ old($locale)['description'] ?? ($channel->translate($locale)['description'] ?? '') }}</textarea>
                             </div>
 
@@ -180,12 +186,18 @@
                             </div>
 
                             <div class="control-group">
-                                <label for="home_page_content">{{ __('admin::app.settings.channels.home_page_content') }}</label>
+                                <label for="home_page_content">
+                                    {{ __('admin::app.settings.channels.home_page_content') }}
+                                    <span class="locale">[{{ $locale }}]</span>
+                                </label>
                                 <textarea class="control" id="home_page_content" name="{{$locale}}[home_page_content]">{{ old($locale)['home_page_content'] ?? ($channel->translate($locale)['home_page_content'] ?? '') }}</textarea>
                             </div>
 
                             <div class="control-group">
-                                <label for="footer_content">{{ __('admin::app.settings.channels.footer_content') }}</label>
+                                <label for="footer_content">
+                                    {{ __('admin::app.settings.channels.footer_content') }}
+                                    <span class="locale">[{{ $locale }}]</span>
+                                </label>
                                 <textarea class="control" id="footer_content" name="{{$locale}}[footer_content]">{{ old($locale)['footer_content'] ?? ($channel->translate($locale)['footer_content'] ?? '') }}</textarea>
                             </div>
 
@@ -205,32 +217,42 @@
                     </accordian>
 
                     @php
-                        $seo = json_decode($channel->translate($locale)['home_seo']);
+                        $home_seo = $channel->translate($locale)['home_seo'] ?? '{}';
+                        $seo = json_decode($home_seo);
                     @endphp
 
                     {{-- home page seo --}}
                     <accordian :title="'{{ __('admin::app.settings.channels.seo') }}'" :active="true">
                         <div slot="body">
                             <div class="control-group" :class="[errors.has('{{$locale}}[seo_title]') ? 'has-error' : '']">
-                                <label for="seo_title" class="required">{{ __('admin::app.settings.channels.seo-title') }}</label>
+                                <label for="seo_title" class="required">
+                                    {{ __('admin::app.settings.channels.seo-title') }}
+                                    <span class="locale">[{{ $locale }}]</span>
+                                </label>
 
-                                <input v-validate="'required'" class="control" id="seo_title" name="{{$locale}}[seo_title]" data-vv-as="&quot;{{ __('admin::app.settings.channels.seo-title') }}&quot;" value="{{ $seo->meta_title ?? old($locale)['seo_title'] }}"/>
+                                <input v-validate="'required'" class="control" id="seo_title" name="{{$locale}}[seo_title]" data-vv-as="&quot;{{ __('admin::app.settings.channels.seo-title') }}&quot;" value="{{ $seo->meta_title ?? (old($locale)['seo_title'] ?? '') }}"/>
 
                                 <span class="control-error" v-if="errors.has('{{$locale}}[seo_title]')">@{{ errors.first('{!!$locale!!}[page_title]') }}</span>
                             </div>
 
                             <div class="control-group" :class="[errors.has('{{$locale}}[seo_description]') ? 'has-error' : '']">
-                                <label for="seo_description" class="required">{{ __('admin::app.settings.channels.seo-description') }}</label>
+                                <label for="seo_description" class="required">
+                                    {{ __('admin::app.settings.channels.seo-description') }}
+                                    <span class="locale">[{{ $locale }}]</span>
+                                </label>
 
-                                <textarea v-validate="'required'" class="control" id="seo_description" name="{{$locale}}[seo_description]" data-vv-as="&quot;{{ __('admin::app.settings.channels.seo-description') }}&quot;">{{ $seo->meta_description ?? old($locale)['seo_description'] }}</textarea>
+                                <textarea v-validate="'required'" class="control" id="seo_description" name="{{$locale}}[seo_description]" data-vv-as="&quot;{{ __('admin::app.settings.channels.seo-description') }}&quot;">{{ $seo->meta_description ?? (old($locale)['seo_description'] ?? '') }}</textarea>
 
                                 <span class="control-error" v-if="errors.has('{{$locale}}[seo_description]')">@{{ errors.first('{!!$locale!!}[page_title]') }}</span>
                             </div>
 
                             <div class="control-group" :class="[errors.has('{{$locale}}[seo_keywords]') ? 'has-error' : '']">
-                                <label for="seo_keywords" class="required">{{ __('admin::app.settings.channels.seo-keywords') }}</label>
+                                <label for="seo_keywords" class="required">
+                                    {{ __('admin::app.settings.channels.seo-keywords') }}
+                                    <span class="locale">[{{ $locale }}]</span>
+                                </label>
 
-                                <textarea v-validate="'required'" class="control" id="seo_keywords" name="{{$locale}}[seo_keywords]" data-vv-as="&quot;{{ __('admin::app.settings.channels.seo-keywords') }}&quot;">{{ $seo->meta_keywords ?? old($locale)['seo_keywords'] }}</textarea>
+                                <textarea v-validate="'required'" class="control" id="seo_keywords" name="{{$locale}}[seo_keywords]" data-vv-as="&quot;{{ __('admin::app.settings.channels.seo-keywords') }}&quot;">{{ $seo->meta_keywords ?? (old($locale)['seo_keywords'] ?? '') }}</textarea>
 
                                 <span class="control-error" v-if="errors.has('{{$locale}}[seo_keywords]')">@{{ errors.first('{!!$locale!!}[page_title]') }}</span>
                             </div>
@@ -250,7 +272,10 @@
                             </div>
 
                             <div class="control-group">
-                                <label for="maintenance-mode-text">{{ __('admin::app.settings.channels.maintenance-mode-text') }}</label>
+                                <label for="maintenance-mode-text">
+                                    {{ __('admin::app.settings.channels.maintenance-mode-text') }}
+                                    <span class="locale">[{{ $locale }}]</span>
+                                </label>
                                 <input class="control" id="maintenance-mode-text" name="{{$locale}}[maintenance_mode_text]" value="{{ old('maintenance_mode_text') ?? ($channel->translate($locale)['maintenance_mode_text'] ?? '') }}"/>
                             </div>
 
