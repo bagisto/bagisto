@@ -2,18 +2,47 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\Support\Facades\DB;
 use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\Core\Repositories\ChannelRepository;
 
 class ChannelDataGrid extends DataGrid
 {
+    /**
+     * Assign primary key.
+     */
     protected $index = 'id';
 
+    /**
+     * Sort order.
+     */
     protected $sortOrder = 'desc';
+
+    /**
+     * ChannelRepository $channelRepository
+     *
+     * @var \Webkul\Core\Repositories\ChannelRepository
+     */
+    protected $channelRepository;
+
+    /**
+     * Create a new datagrid instance.
+     *
+     * @param  \Webkul\Core\Repositories\ChannelRepository  $channelRepository
+     * @return void
+     */
+    public function __construct(
+        ChannelRepository $channelRepository
+    )
+    {
+        parent::__construct();
+
+        $this->channelRepository = $channelRepository;
+    }
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('channels')->addSelect('id', 'code', 'name', 'hostname');
+        $queryBuilder = $this->channelRepository->query()
+            ->addSelect('id', 'code', 'name', 'hostname');
 
         $this->setQueryBuilder($queryBuilder);
     }
