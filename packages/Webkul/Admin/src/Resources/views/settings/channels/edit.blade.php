@@ -6,6 +6,7 @@
 
 @section('content')
     <div class="content">
+        @php $locale = request()->get('locale') ?: app()->getLocale(); @endphp
 
         <form method="POST" action="{{ route('admin.channels.update', $channel->id) }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
             <div class="page-header">
@@ -15,6 +16,18 @@
 
                         {{ __('admin::app.settings.channels.edit-title') }}
                     </h1>
+
+                    <div class="control-group">
+                        <select class="control" id="locale-switcher" onChange="window.location.href = this.value">
+                            @foreach (core()->getAllLocales() as $localeModel)
+
+                                <option value="{{ route('admin.channels.edit', $channel->id) . '?locale=' . $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
+                                    {{ $localeModel->name }}
+                                </option>
+
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
 
                 <div class="page-action">
@@ -25,6 +38,7 @@
             </div>
 
             <div class="page-content">
+
                 <div class="form-container">
                     @csrf()
                     <input name="_method" type="hidden" value="PUT">
@@ -42,15 +56,15 @@
                                 <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
                             </div>
 
-                            <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
+                            <div class="control-group" :class="[errors.has('{{$locale}}[name]') ? 'has-error' : '']">
                                 <label for="name" class="required">{{ __('admin::app.settings.channels.name') }}</label>
-                                <input v-validate="'required'" class="control" id="name" name="name" data-vv-as="&quot;{{ __('admin::app.settings.channels.name') }}&quot;" value="{{ old('name') ?: $channel->name }}"/>
-                                <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
+                                <input v-validate="'required'" class="control" id="name" name="{{$locale}}[name]" data-vv-as="&quot;{{ __('admin::app.settings.channels.name') }}&quot;" value="{{ old($locale)['name'] ?? ($channel->translate($locale)['name'] ?? '') }}"/>
+                                <span class="control-error" v-if="errors.has('{{$locale}}[name]')">@{{ errors.first('{!!$locale!!}[page_title]') }}</span>
                             </div>
 
                             <div class="control-group">
                                 <label for="description">{{ __('admin::app.settings.channels.description') }}</label>
-                                <textarea class="control" id="description" name="description">{{ old('description') ?: $channel->description }}</textarea>
+                                <textarea class="control" id="description" name="{{$locale}}[description]">{{ old($locale)['description'] ?? ($channel->translate($locale)['description'] ?? '') }}</textarea>
                             </div>
 
                             <div class="control-group" :class="[errors.has('inventory_sources[]') ? 'has-error' : '']">
@@ -97,9 +111,9 @@
                                 <label for="locales" class="required">{{ __('admin::app.settings.channels.locales') }}</label>
                                 <?php $selectedOptionIds = old('locales') ?: $channel->locales->pluck('id')->toArray() ?>
                                 <select v-validate="'required'" class="control" id="locales" name="locales[]" data-vv-as="&quot;{{ __('admin::app.settings.channels.locales') }}&quot;" multiple>
-                                    @foreach (core()->getAllLocales() as $locale)
-                                        <option value="{{ $locale->id }}" {{ in_array($locale->id, $selectedOptionIds) ? 'selected' : '' }}>
-                                            {{ $locale->name }}
+                                    @foreach (core()->getAllLocales() as $localeModel)
+                                        <option value="{{ $localeModel->id }}" {{ in_array($localeModel->id, $selectedOptionIds) ? 'selected' : '' }}>
+                                            {{ $localeModel->name }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -110,9 +124,9 @@
                                 <label for="default_locale_id" class="required">{{ __('admin::app.settings.channels.default-locale') }}</label>
                                 <?php $selectedOption = old('default_locale_id') ?: $channel->default_locale_id ?>
                                 <select v-validate="'required'" class="control" id="default_locale_id" name="default_locale_id" data-vv-as="&quot;{{ __('admin::app.settings.channels.default-locale') }}&quot;">
-                                    @foreach (core()->getAllLocales() as $locale)
-                                        <option value="{{ $locale->id }}" {{ $selectedOption == $locale->id ? 'selected' : '' }}>
-                                            {{ $locale->name }}
+                                    @foreach (core()->getAllLocales() as $localeModel)
+                                        <option value="{{ $localeModel->id }}" {{ $selectedOption == $localeModel->id ? 'selected' : '' }}>
+                                            {{ $localeModel->name }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -167,12 +181,12 @@
 
                             <div class="control-group">
                                 <label for="home_page_content">{{ __('admin::app.settings.channels.home_page_content') }}</label>
-                                <textarea class="control" id="home_page_content" name="home_page_content">{{ old('home_page_content') ?: $channel->home_page_content }}</textarea>
+                                <textarea class="control" id="home_page_content" name="{{$locale}}[home_page_content]">{{ old($locale)['home_page_content'] ?? ($channel->translate($locale)['home_page_content'] ?? '') }}</textarea>
                             </div>
 
                             <div class="control-group">
                                 <label for="footer_content">{{ __('admin::app.settings.channels.footer_content') }}</label>
-                                <textarea class="control" id="footer_content" name="footer_content">{{ old('footer_content') ?: $channel->footer_content }}</textarea>
+                                <textarea class="control" id="footer_content" name="{{$locale}}[footer_content]">{{ old($locale)['footer_content'] ?? ($channel->translate($locale)['footer_content'] ?? '') }}</textarea>
                             </div>
 
                             <div class="control-group">
@@ -191,32 +205,34 @@
                     </accordian>
 
                     @php
-                        $seo = json_decode($channel->home_seo);
+                        $seo = json_decode($channel->translate($locale)['home_seo']);
                     @endphp
 
                     {{-- home page seo --}}
                     <accordian :title="'{{ __('admin::app.settings.channels.seo') }}'" :active="true">
                         <div slot="body">
-                            <div class="control-group" :class="[errors.has('seo_title') ? 'has-error' : '']">
+                            <div class="control-group" :class="[errors.has('{{$locale}}[seo_title]') ? 'has-error' : '']">
                                 <label for="seo_title" class="required">{{ __('admin::app.settings.channels.seo-title') }}</label>
-                                <input v-validate="'required'" class="control" id="seo_title" name="seo_title" data-vv-as="&quot;{{ __('admin::app.settings.channels.seo-title') }}&quot;" value="{{ $seo->meta_title ?? old('seo_title') }}"/>
-                                <span class="control-error" v-if="errors.has('seo_title')">@{{ errors.first('seo_title') }}</span>
+
+                                <input v-validate="'required'" class="control" id="seo_title" name="{{$locale}}[seo_title]" data-vv-as="&quot;{{ __('admin::app.settings.channels.seo-title') }}&quot;" value="{{ $seo->meta_title ?? old($locale)['seo_title'] }}"/>
+
+                                <span class="control-error" v-if="errors.has('{{$locale}}[seo_title]')">@{{ errors.first('{!!$locale!!}[page_title]') }}</span>
                             </div>
 
-                            <div class="control-group" :class="[errors.has('seo_description') ? 'has-error' : '']">
+                            <div class="control-group" :class="[errors.has('{{$locale}}[seo_description]') ? 'has-error' : '']">
                                 <label for="seo_description" class="required">{{ __('admin::app.settings.channels.seo-description') }}</label>
 
-                                <textarea v-validate="'required'" class="control" id="seo_description" name="seo_description" data-vv-as="&quot;{{ __('admin::app.settings.channels.seo-description') }}&quot;">{{ $seo->meta_description ?? old('seo_description') }}</textarea>
+                                <textarea v-validate="'required'" class="control" id="seo_description" name="{{$locale}}[seo_description]" data-vv-as="&quot;{{ __('admin::app.settings.channels.seo-description') }}&quot;">{{ $seo->meta_description ?? old($locale)['seo_description'] }}</textarea>
 
-                                <span class="control-error" v-if="errors.has('seo_description')">@{{ errors.first('seo_description') }}</span>
+                                <span class="control-error" v-if="errors.has('{{$locale}}[seo_description]')">@{{ errors.first('{!!$locale!!}[page_title]') }}</span>
                             </div>
 
-                            <div class="control-group" :class="[errors.has('seo_keywords') ? 'has-error' : '']">
+                            <div class="control-group" :class="[errors.has('{{$locale}}[seo_keywords]') ? 'has-error' : '']">
                                 <label for="seo_keywords" class="required">{{ __('admin::app.settings.channels.seo-keywords') }}</label>
 
-                                <textarea v-validate="'required'" class="control" id="seo_keywords" name="seo_keywords" data-vv-as="&quot;{{ __('admin::app.settings.channels.seo-keywords') }}&quot;">{{ $seo->meta_keywords ?? old('seo_keywords') }}</textarea>
+                                <textarea v-validate="'required'" class="control" id="seo_keywords" name="{{$locale}}[seo_keywords]" data-vv-as="&quot;{{ __('admin::app.settings.channels.seo-keywords') }}&quot;">{{ $seo->meta_keywords ?? old($locale)['seo_keywords'] }}</textarea>
 
-                                <span class="control-error" v-if="errors.has('seo_keywords')">@{{ errors.first('seo_keywords') }}</span>
+                                <span class="control-error" v-if="errors.has('{{$locale}}[seo_keywords]')">@{{ errors.first('{!!$locale!!}[page_title]') }}</span>
                             </div>
                         </div>
                     </accordian>
@@ -235,7 +251,7 @@
 
                             <div class="control-group">
                                 <label for="maintenance-mode-text">{{ __('admin::app.settings.channels.maintenance-mode-text') }}</label>
-                                <input class="control" id="maintenance-mode-text" name="maintenance_mode_text" value="{{ old('maintenance_mode_text') ?: $channel->maintenance_mode_text }}"/>
+                                <input class="control" id="maintenance-mode-text" name="{{$locale}}[maintenance_mode_text]" value="{{ old('maintenance_mode_text') ?? ($channel->translate($locale)['maintenance_mode_text'] ?? '') }}"/>
                             </div>
 
                             <div class="control-group">

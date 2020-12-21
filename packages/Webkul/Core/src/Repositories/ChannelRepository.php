@@ -26,7 +26,17 @@ class ChannelRepository extends Repository
      */
     public function create(array $data)
     {
-        $channel = $this->model->create($data);
+        $model = $this->getModel();
+
+        foreach (core()->getAllLocales() as $locale) {
+            foreach ($model->translatedAttributes as $attribute) {
+                if (isset($data[$attribute])) {
+                    $data[$locale->code][$attribute] = $data[$attribute];
+                }
+            }
+        }
+
+        $channel = parent::create($data);
 
         $channel->locales()->sync($data['locales']);
 
