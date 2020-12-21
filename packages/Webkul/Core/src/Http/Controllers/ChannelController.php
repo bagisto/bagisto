@@ -220,29 +220,38 @@ class ChannelController extends Controller
      */
     private function setSEOContent(array $data, $locale = null)
     {
+        $editedData = $data;
+
         if ($locale) {
-            $data[$locale]['home_seo']['meta_title'] = $data[$locale]['seo_title'];
-            $data[$locale]['home_seo']['meta_description'] = $data[$locale]['seo_description'];
-            $data[$locale]['home_seo']['meta_keywords'] = $data[$locale]['seo_keywords'];
-
-            unset($data[$locale]['seo_title']);
-            unset($data[$locale]['seo_description']);
-            unset($data[$locale]['seo_keywords']);
-
-            $data[$locale]['home_seo'] = json_encode($data[$locale]['home_seo']);
-
-            return $data;
+            $editedData = $data[$locale];
         }
 
-        $data['home_seo']['meta_title'] = $data['seo_title'];
-        $data['home_seo']['meta_description'] = $data['seo_description'];
-        $data['home_seo']['meta_keywords'] = $data['seo_keywords'];
+        $editedData['home_seo']['meta_title'] = $editedData['seo_title'];
+        $editedData['home_seo']['meta_description'] = $editedData['seo_description'];
+        $editedData['home_seo']['meta_keywords'] = $editedData['seo_keywords'];
+        $editedData['home_seo'] = json_encode($editedData['home_seo']);
 
-        unset($data['seo_title']);
-        unset($data['seo_description']);
-        unset($data['seo_keywords']);
+        $editedData = $this->unsetKeys($editedData, ['seo_title', 'seo_description', 'seo_keywords']);
 
-        $data['home_seo'] = json_encode($data['home_seo']);
+        if ($locale) {
+            $data[$locale] = $editedData;
+            $editedData = $data;
+        }
+
+        return $editedData;
+    }
+
+    /**
+     * Unset keys.
+     *
+     * @param  array  $keys
+     * @return array
+     */
+    private function unsetKeys($data, $keys)
+    {
+        foreach ($keys as $key) {
+            unset($data[$key]);
+        }
 
         return $data;
     }

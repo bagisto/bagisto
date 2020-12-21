@@ -20,7 +20,7 @@ class ChannelDataGrid extends DataGrid
     /**
      * Filter Locale.
      */
-    protected $locale = 'all';
+    protected $locale;
 
     /**
      * ChannelRepository $channelRepository
@@ -50,7 +50,8 @@ class ChannelDataGrid extends DataGrid
     {
         $queryBuilder = $this->channelRepository->query()
             ->leftJoin('channel_translations', 'channel_translations.channel_id', '=', 'channels.id')
-            ->addSelect('channels.id', 'channels.code', 'channel_translations.name', 'channels.hostname');
+            ->addSelect('channels.id', 'channels.code', 'channel_translations.locale', 'channel_translations.name as translated_name', 'channels.hostname')
+            ->where('channel_translations.locale', '=', $this->locale);
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -76,7 +77,7 @@ class ChannelDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'name',
+            'index'      => 'translated_name',
             'label'      => trans('admin::app.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
