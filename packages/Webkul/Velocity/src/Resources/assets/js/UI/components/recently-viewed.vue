@@ -6,7 +6,7 @@
             </div>
         </div>
 
-        <div :class="`recetly-viewed-products-wrapper ${addClassWrapper}`">
+        <div :class="`recently-viewed-products-wrapper ${addClassWrapper}`">
             <div
                 :key="Math.random()"
                 class="row small-card-container"
