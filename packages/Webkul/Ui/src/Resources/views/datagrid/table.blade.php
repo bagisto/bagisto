@@ -101,11 +101,7 @@
 
                                 <select id="perPage" name="perPage" class="control" v-model="perPage"
                                         v-on:change="paginate">
-                                    <option value="10"> 10</option>
-                                    <option value="20"> 20</option>
-                                    <option value="30"> 30</option>
-                                    <option value="40"> 40</option>
-                                    <option value="50"> 50</option>
+                                    <option v-for="index in this.perPageProduct" :key="index" :value="index"> @{{ index }} </option>
                                 </select>
                             </div>
                         </div>
@@ -307,6 +303,7 @@
                         numberConditionSelect: false,
                         datetimeConditionSelect: false,
                         perPage: {{ $results['itemsPerPage'] ?: 10 }},
+                        perPageProduct: [10, 20, 30, 40, 50],
                         extraFilters: @json($results['extraFilters']),
                     }
                 },
@@ -320,6 +317,10 @@
                                 this.perPage = this.filters[i].val;
                             }
                         }
+                    }
+
+                    if (this.perPageProduct.indexOf(parseInt(this.perPage)) === -1) {
+                        this.perPageProduct.unshift(this.perPage);
                     }
                 },
 
