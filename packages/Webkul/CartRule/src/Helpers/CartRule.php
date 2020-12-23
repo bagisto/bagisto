@@ -275,25 +275,19 @@ class CartRule
                     break;
 
                 case 'cart_fixed':
-                    // if ($this->itemTotals[$rule->id]['total_items'] <= 1) {
-                    //     $discountAmount = core()->convertPrice($rule->discount_amount);
+                    if ($this->itemTotals[$rule->id]['total_items'] <= 1) {
+                        $discountAmount = core()->convertPrice($rule->discount_amount);
 
-                    //     $baseDiscountAmount = min($item->base_price * $quantity, $rule->discount_amount);
-                    // } else {
-                    //     $discountRate = $item->base_price * $quantity / $this->itemTotals[$rule->id]['base_total_price'];
+                        $baseDiscountAmount = min($item->base_price * $quantity, $rule->discount_amount);
+                    } else {
+                        $discountRate = $item->base_price * $quantity / $this->itemTotals[$rule->id]['base_total_price'];
 
-                    //     $maxDiscount = $rule->discount_amount * $discountRate;
+                        $maxDiscount = $rule->discount_amount * $discountRate;
 
-                    //     $discountAmount = core()->convertPrice($maxDiscount);
+                        $discountAmount = core()->convertPrice($maxDiscount);
 
-                    //     $baseDiscountAmount = min($item->base_price * $quantity, $maxDiscount);
-                    // }
-
-                    $discountAmount = core()->convertPrice($rule->discount_amount);
-
-                    $baseDiscountAmount = min($item->base_price * $quantity, $rule->discount_amount);
-
-                    $discountAmount = min($item->price * $quantity, $discountAmount);
+                        $baseDiscountAmount = min($item->base_price * $quantity, $maxDiscount);
+                    }
 
                     break;
 
@@ -537,7 +531,7 @@ class CartRule
         }
 
         $coupons = $this->cartRuleCouponRepository->where(['code' => $cart->coupon_code])->get();
-        
+
         foreach ($coupons as $coupon) {
             if (in_array($coupon->cart_rule_id, explode(',', $cart->applied_cart_rule_ids))) {
                 return true;
