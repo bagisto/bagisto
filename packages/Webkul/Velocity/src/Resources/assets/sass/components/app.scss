@@ -1046,7 +1046,7 @@
                 }
 
                 .filter-left {
-                    @extend .pull-left;
+                    float: left;
                 }
 
                 .filter-right {

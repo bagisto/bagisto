@@ -7,7 +7,7 @@
         <div class="dropdown">
             <div id="account">
 
-                <div class="welcome-content pull-right" @click="togglePopup">
+                <div class="welcome-content float-right" @click="togglePopup">
                     <i class="material-icons align-vertical-top">perm_identity</i>
                     <span class="text-center">
                         @guest('customer')

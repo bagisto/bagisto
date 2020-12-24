@@ -12,7 +12,6 @@
 @import "components/rtl";
 
 @import "static/material-icons";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 * {
     margin: 0;
@@ -207,8 +206,6 @@ body {
         }
 
         + .account-modal {
-            @extend .modal-dialog;
-
             top: 40px;
             right: 10px;
             z-index: 101;
@@ -414,7 +411,7 @@ header {
                 width: 210px;
 
                 .select-icon {
-                    top: 9px;
+                    top: -30px;
                     right: 8px;
                     z-index: 10;
                     font-size: 18px;

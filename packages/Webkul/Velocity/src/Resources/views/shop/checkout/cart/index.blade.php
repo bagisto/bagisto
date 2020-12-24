@@ -243,7 +243,7 @@
 
                                     <button
                                         type="submit"
-                                        class="theme-btn light mr15 pull-right unset">
+                                        class="theme-btn light mr15 float-right unset">
 
                                         {{ __('shop::app.checkout.cart.update-cart') }}
                                     </button>

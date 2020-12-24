@@ -12,7 +12,7 @@
         $filterAttributes = $productFlatRepository->getProductsRelatedFilterableAttributes($category);
 
         $maxPrice = core()->convertPrice($productFlatRepository->getCategoryProductMaximumPrice($category));
-    } 
+    }
 
     if (! count($filterAttributes) > 0) {
         $filterAttributes = $attributeRepository->getFilterAttributes();
@@ -70,7 +70,7 @@
             <div class="filter-attributes-title" @click="active = !active">
                 <h4 class="fw6 display-inbl">@{{ attribute.name ? attribute.name : attribute.admin_name }}</h4>
 
-                <div class="pull-right display-table">
+                <div class="float-right display-table">
                     <span class="link-color cursor-pointer" v-if="appliedFilters.length" @click.stop="clearFilters()">
                         {{ __('shop::app.products.remove-filter-link-title') }}
                     </span>

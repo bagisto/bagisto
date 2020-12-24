@@ -16,7 +16,7 @@
 
             <div class="col-6" v-if="products.length > 0">
                 <button
-                    class="theme-btn light pull-right"
+                    class="theme-btn light float-right"
                     @click="removeProductCompare('all')">
                     {{ __('shop::app.customer.account.wishlist.deleteall') }}
                 </button>

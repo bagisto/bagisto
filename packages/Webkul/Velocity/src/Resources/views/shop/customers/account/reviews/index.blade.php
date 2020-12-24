@@ -17,7 +17,7 @@
         <span class="account-heading">{{ __('shop::app.customer.account.review.index.title') }}</span>
 
         @if (count($reviews) > 1)
-            <div class="account-action pull-right">
+            <div class="account-action float-right">
                 <a href="{{ route('customer.review.deleteall') }}" class="theme-btn light unset">
                     {{ __('shop::app.customer.account.wishlist.deleteall') }}
                 </a>
