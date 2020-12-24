@@ -53,6 +53,11 @@ class ChannelDataGrid extends DataGrid
             ->addSelect('channels.id', 'channels.code', 'channel_translations.locale', 'channel_translations.name as translated_name', 'channels.hostname')
             ->where('channel_translations.locale', '=', $this->locale);
 
+        $this->addFilter('id', 'channels.id');
+        $this->addFilter('code', 'channels.code');
+        $this->addFilter('hostname', 'channels.hostname');
+        $this->addFilter('translated_name', 'channel_translations.name');
+
         $this->setQueryBuilder($queryBuilder);
     }
 
