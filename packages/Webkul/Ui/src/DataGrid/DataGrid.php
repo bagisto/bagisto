@@ -715,6 +715,7 @@ abstract class DataGrid
             'enableMassActions' => $this->enableMassAction,
             'enableActions'     => $this->enableAction,
             'paginated'         => $this->paginate,
+            'itemsPerPage'      => $this->itemsPerPage,
             'norecords'         => __('ui::app.datagrid.no-records'),
             'extraFilters'      => $necessaryExtraFilters
         ]);
