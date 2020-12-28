@@ -9,6 +9,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Webkul\Category\Contracts\Category as CategoryContract;
 use Webkul\Attribute\Models\AttributeProxy;
 use Webkul\Category\Repositories\CategoryRepository;
+use Webkul\Product\Models\ProductAttributeValueProxy;
 use Webkul\Product\Models\ProductProxy;
 
 /**
@@ -66,11 +67,9 @@ class Category extends TranslatableModel implements CategoryContract
      */
     public function filterableAttributes()
     {
-
-
         return $this->belongsToMany(AttributeProxy::modelClass(), 'category_filterable_attributes')->with(['options' => function($query) {
             $product_ids = $this->products()->pluck('id');
-            $values = ProductAttributeValue::whereNotNull('integer_value')
+            $values = ProductAttributeValueProxy::whereNotNull('integer_value')
                 ->whereIn('product_id', $product_ids);
             $query->whereIn('id', $values->pluck('integer_value'));
             $query->orderBy('sort_order');

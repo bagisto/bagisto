@@ -89,21 +89,17 @@ class ProductFlatRepository extends Repository
 
     /**
      * filter attributes according to products
-     * 
+     *
      * @param  array  $category
      * @return \Illuminate\Support\Collection
      */
     public function getProductsRelatedFilterableAttributes($category) {
-
-        $filterAttributes = $this->getFilterableAttributes($category, []);
-        
-        return $filterAttributes;
-
+        return $this->getFilterableAttributes($category, []);
     }
 
     /**
      * update product_flat custom column
-     * 
+     *
      * @param \Webkul\Attribute\Models\Attribute $attribute
      * @param \Webkul\Product\Listeners\ProductFlat $listener
      */
