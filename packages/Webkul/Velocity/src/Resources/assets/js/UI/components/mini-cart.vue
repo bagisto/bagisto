@@ -40,11 +40,11 @@
             </div>
 
             <div class="modal-footer">
-                <h2 class="col-6 text-left fw6">
+                <h5 class="col-6 text-left fw6">
                     {{ subtotalText }}
-                </h2>
+                </h5>
 
-                <h2 class="col-6 text-right fw6 no-padding">{{ cartInformation.base_sub_total }}</h2>
+                <h5 class="col-6 text-right fw6 no-padding">{{ cartInformation.base_sub_total }}</h5>
             </div>
 
             <div class="modal-footer">
@@ -63,6 +63,12 @@
         </div>
     </div>
 </template>
+
+<style lang="scss">
+    .hide {
+        display: none !important;
+    }
+</style>
 
 <script>
     export default {

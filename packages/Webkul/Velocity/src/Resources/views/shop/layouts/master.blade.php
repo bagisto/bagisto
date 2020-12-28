@@ -9,8 +9,10 @@
 <html lang="{{ app()->getLocale() }}">
 
     <head>
+        {{-- title --}}
         <title>@yield('page_title')</title>
 
+        {{-- meta data --}}
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -19,12 +21,22 @@
 
         {!! view_render_event('bagisto.shop.layout.head') !!}
 
+        {{-- for extra head data --}}
         @yield('head')
 
+        {{-- seo meta data --}}
         @section('seo')
             <meta name="description" content="{{ core()->getCurrentChannel()->description }}"/>
         @show
 
+        {{-- fav icon --}}
+        @if ($favicon = core()->getCurrentChannel()->favicon_url)
+            <link rel="icon" sizes="16x16" href="{{ $favicon }}" />
+        @else
+            <link rel="icon" sizes="16x16" href="{{ asset('/themes/velocity/assets/images/static/v-icon.png') }}" />
+        @endif
+
+        {{-- all styles --}}
         @include('shop::layouts.styles')
     </head>
 

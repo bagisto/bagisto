@@ -541,6 +541,7 @@ header {
                     padding: 4px;
                     min-width: 20px;
                     position: absolute;
+                    color: $font-color-light;
                     background: $button-primary-bg;
                 }
             }
@@ -885,7 +886,7 @@ header {
     text-align: center;
     vertical-align: middle;
     border-radius: 50%;
-    background: #21a179;
+    background: $button-primary-bg;
     color: #fff;
     padding: 16px;
     font: 18px "josefin sans", arial;

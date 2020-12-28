@@ -10,9 +10,9 @@
 @push('scripts')
     <script type="text/x-template" id="compare-product-template">
         <section class="cart-details row no-margin col-12">
-            <h1 class="fw6 col-6">
+            <h2 class="fw6 col-6">
                 {{ __('velocity::app.customer.compare.compare_similar_items') }}
-            </h1>
+            </h2>
 
             <div class="col-6" v-if="products.length > 0">
                 <button
@@ -52,7 +52,7 @@
                                 @switch ($attribute['code'])
                                     @case('name')
                                         <a :href="`${$root.baseUrl}/${product.url_key}`" class="unset remove-decoration active-hover">
-                                            <h1 class="fw6 fs18" v-text="product['{{ $attribute['code'] }}']"></h1>
+                                            <h2 class="fw6 fs18" v-text="product['{{ $attribute['code'] }}']"></h2>
                                         </a>
                                         @break
 
