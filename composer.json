@@ -21,6 +21,7 @@
         "astrotomic/laravel-translatable": "^11.0.0",
         "babenkoivan/elastic-scout-driver": "^1.1",
         "bagistobrasil/bagisto-product-social-share": "^0.1.2",
+        "barryvdh/laravel-debugbar": "^3.1",
         "barryvdh/laravel-dompdf": "0.8.6",
         "doctrine/dbal": "2.9.2",
         "fideloper/proxy": "^4.2",
@@ -43,7 +44,6 @@
     },
 
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.1",
         "codeception/codeception": "4.1.1",
         "codeception/module-asserts": "^1.1",
         "codeception/module-filesystem": "^1.0",
