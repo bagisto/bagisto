@@ -151,7 +151,7 @@
             "vendor/bin/codecept run functional",
             "vendor/bin/codecept run trigger"
         ],
-        "test-win": [
+         "test-win": [
             "@set -e",
             "@php artisan migrate:fresh --env=testing",
             "vendor\\bin\\codecept.bat run unit",
