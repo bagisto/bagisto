@@ -242,7 +242,7 @@ class ProductRepository extends Repository
                                     //     $attributeValueQuery->orWhereRaw("find_in_set(?, {$column})", [$filterValue]);
                                     // }
 
-                                    $attributeValueQuery->whereIn($column, $filterInputValues);
+                                    $attributeValueQuery->orWhereRaw("find_in_set(?, {$column})", [$filterInputValues]);
                                 });
 
                             } else {
