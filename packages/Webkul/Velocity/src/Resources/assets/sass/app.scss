@@ -195,6 +195,7 @@ body {
             display: table;
             min-width: 150px;
             cursor: pointer;
+            float: right;
             text-align: right;
             padding-top: 5px;
 
@@ -482,6 +483,7 @@ header {
     .mini-cart-container {
         height: 50px;
         padding: 5px 17px;
+        display: inline-block;
 
         #mini-cart {
             .mini-cart-content {
@@ -511,15 +513,14 @@ header {
                     }
                 }
             }
-
-            // transform: scale(1) rotateZ(-180deg);
-            // transition: transform .15s,opacity .15s;
         }
+    }
 
-        ~ .compare-btn,
-        ~ .wishlist-btn {
+    .left-wrapper {
+        float: right;
+
+        .compare-btn, .wishlist-btn {
             height: 50px;
-            float: right;
             font-size: 18px;
             font-weight: 600;
             padding: 10px 16px 6px 16px;
