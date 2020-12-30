@@ -67,12 +67,12 @@ class VelocityServiceProvider extends ServiceProvider
     protected function registerFacades()
     {
         $loader = AliasLoader::getInstance();
-        
+
         $loader->alias('velocity', VelocityFacade::class);
     }
 
     /**
-     * this function will provide global variables shared by view (blade files)
+     * This method will load all publishables.
      *
      * @return boolean
      */
@@ -85,24 +85,26 @@ class VelocityServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../Resources/views/shop' => resource_path('themes/velocity/views'),
         ]);
-        
+
         $this->publishes([__DIR__.'/../Resources/lang' => resource_path('lang/vendor/velocity')]);
 
         return true;
     }
 
     /**
-     * this function will provide global variables shared by view (blade files)
+     * This method will provide global variables shared by view (blade files).
      *
      * @return boolean
      */
     private function loadGloableVariables()
     {
-        $velocityHelper = app('Webkul\Velocity\Helpers\Helper');
-        $velocityMetaData = $velocityHelper->getVelocityMetaData();
+        view()->composer('*', function ($view) {
+            $velocityHelper = app('Webkul\Velocity\Helpers\Helper');
+            $velocityMetaData = $velocityHelper->getVelocityMetaData();
 
-        view()->share('showRecentlyViewed', true);
-        view()->share('velocityMetaData', $velocityMetaData);
+            $view->with('showRecentlyViewed', true);
+            $view->with('velocityMetaData', $velocityMetaData);
+        });
 
         return true;
     }

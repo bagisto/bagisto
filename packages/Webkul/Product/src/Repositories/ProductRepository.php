@@ -235,14 +235,12 @@ class ProductRepository extends Repository
                             if ($attribute->type != 'price') {
 
                                 $attributeQuery->where(function ($attributeValueQuery) use ($column, $filterInputValues) {
-                                    // foreach ($filterInputValues as $filterValue) {
-                                    //     if (! is_numeric($filterValue)) {
-                                    //         continue;
-                                    //     }
-                                    //     $attributeValueQuery->orWhereRaw("find_in_set(?, {$column})", [$filterValue]);
-                                    // }
-
-                                    $attributeValueQuery->whereIn($column, $filterInputValues);
+                                    foreach ($filterInputValues as $filterValue) {
+                                        if (! is_numeric($filterValue)) {
+                                            continue;
+                                        }
+                                        $attributeValueQuery->orWhereRaw("find_in_set(?, {$column})", [$filterValue]);
+                                    }
                                 });
 
                             } else {
