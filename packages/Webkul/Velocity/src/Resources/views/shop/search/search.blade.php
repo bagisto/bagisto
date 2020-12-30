@@ -100,9 +100,9 @@
                     <span class="col-12">{{ __('shop::app.search.no-results') }}</span>
                 @else
                     @if ($results->total() == 1)
-                        <h2 class="fw6 col-12 mb20">
+                        <h5 class="fw6 col-12 mb20">
                             {{ $results->total() }} {{ __('shop::app.search.found-result') }}
-                        </h2>
+                        </h5>
                     @else
                         <h2 class="fw6 col-12 mb20">
                             {{ $results->total() }} {{ __('shop::app.search.found-results') }}

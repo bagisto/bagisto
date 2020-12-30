@@ -143,18 +143,20 @@
                                                         @endif
                                                     @endauth
 
-                                                    <a
-                                                        class="unset
-                                                            @auth('customer')
-                                                                ml10
-                                                            @endauth
-                                                        "
-                                                        href="{{ route('shop.checkout.cart.remove', ['id' => $item->id]) }}"
-                                                        @click="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">
+                                                    <div class="d-inline-block">
+                                                        <a
+                                                            class="unset
+                                                                @auth('customer')
+                                                                    ml10
+                                                                @endauth
+                                                            "
+                                                            href="{{ route('shop.checkout.cart.remove', ['id' => $item->id]) }}"
+                                                            @click="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">
 
-                                                        <span class="rango-delete fs24"></span>
-                                                        <span class="align-vertical-top">{{ __('shop::app.checkout.cart.remove') }}</span>
-                                                    </a>
+                                                            <span class="rango-delete fs24"></span>
+                                                            <span class="align-vertical-super">{{ __('shop::app.checkout.cart.remove') }}</span>
+                                                        </a>
+                                                    </div>
                                                 </div>
                                             </div>
 

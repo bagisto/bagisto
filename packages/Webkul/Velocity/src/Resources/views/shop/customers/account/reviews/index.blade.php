@@ -55,7 +55,7 @@
 
                             <star-ratings ratings="{{ $review->rating }}"></star-ratings>
 
-                            <h2 class="fw6">{{ $review->title }}</h2>
+                            <h5 class="fw6">{{ $review->title }}</h5>
 
                             <p>{{ $review->comment }}</p>
                         </div>
