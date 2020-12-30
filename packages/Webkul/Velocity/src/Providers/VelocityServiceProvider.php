@@ -72,7 +72,7 @@ class VelocityServiceProvider extends ServiceProvider
     }
 
     /**
-     * this function will provide global variables shared by view (blade files)
+     * This method will load all publishables.
      *
      * @return boolean
      */
@@ -92,7 +92,7 @@ class VelocityServiceProvider extends ServiceProvider
     }
 
     /**
-     * this function will provide global variables shared by view (blade files)
+     * This method will provide global variables shared by view (blade files).
      *
      * @return boolean
      */
