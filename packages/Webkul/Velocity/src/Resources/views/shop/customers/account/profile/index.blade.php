@@ -25,7 +25,7 @@
         </span>
 
         <span class="account-action">
-            <a href="{{ route('customer.profile.edit') }}" class="theme-btn light unset pull-right">
+            <a href="{{ route('customer.profile.edit') }}" class="theme-btn light unset float-right">
                 {{ __('shop::app.customer.account.profile.index.edit') }}
             </a>
         </span>

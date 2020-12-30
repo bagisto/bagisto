@@ -31,9 +31,9 @@
     <script type="text/x-template" id="layered-navigation-template">
         <div v-if="attributes.length > 0">
 
-            <h3 class="filter-title fw6 mb20">
+            <h5 class="filter-title fw6 mb20">
                 {{ __('shop::app.products.layered-nav-title') }}
-            </h3>
+            </h5>
 
             <div class="filter-content">
                 <div class="filter-attributes">
@@ -54,9 +54,9 @@
     <script type="text/x-template" id="filter-attribute-item-template">
         <div :class="`cursor-pointer filter-attributes-item ${active ? 'active' : ''}`">
             <div class="filter-attributes-title" @click="active = !active">
-                <h4 class="fw6 display-inbl">@{{ attribute.name ? attribute.name : attribute.admin_name }}</h4>
+                <h6 class="fw6 display-inbl">@{{ attribute.name ? attribute.name : attribute.admin_name }}</h6>
 
-                <div class="pull-right display-table">
+                <div class="float-right display-table">
                     <span class="link-color cursor-pointer" v-if="appliedFilters.length" @click.stop="clearFilters()">
                         {{ __('shop::app.products.remove-filter-link-title') }}
                     </span>

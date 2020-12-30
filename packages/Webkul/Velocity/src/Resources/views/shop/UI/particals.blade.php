@@ -125,50 +125,51 @@
                 </div>
 
                 <div class="col-lg-7 col-md-12 vc-full-screen">
-                    {!! view_render_event('bagisto.shop.layout.header.cart-item.before') !!}
-                        @include('shop::checkout.cart.mini-cart')
-                    {!! view_render_event('bagisto.shop.layout.header.cart-item.after') !!}
+                    <div class="left-wrapper">
+                        @php
+                            $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
 
-                    @php
-                        $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false;
+                            $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false;
+                        @endphp
 
-                        $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
+                        {!! view_render_event('bagisto.shop.layout.header.wishlist.before') !!}
+                            @if($showWishlist)
+                                <a class="wishlist-btn unset" :href="`{{ route('customer.wishlist.index') }}`">
+                                    <i class="material-icons">favorite_border</i>
+                                    <div class="badge-container" v-if="wishlistCount > 0">
+                                        <span class="badge" v-text="wishlistCount"></span>
+                                    </div>
+                                    <span>{{ __('shop::app.layouts.wishlist') }}</span>
+                                </a>
+                            @endif
+                        {!! view_render_event('bagisto.shop.layout.header.wishlist.after') !!}
 
-                    @endphp
+                        {!! view_render_event('bagisto.shop.layout.header.compare.before') !!}
+                            @if ($showCompare)
+                                <a
+                                    class="compare-btn unset"
+                                    @auth('customer')
+                                        href="{{ route('velocity.customer.product.compare') }}"
+                                    @endauth
 
-                    {!! view_render_event('bagisto.shop.layout.header.compare.before') !!}
-                        @if ($showCompare)
-                            <a
-                                class="compare-btn unset"
-                                @auth('customer')
-                                    href="{{ route('velocity.customer.product.compare') }}"
-                                @endauth
+                                    @guest('customer')
+                                        href="{{ route('velocity.product.compare') }}"
+                                    @endguest
+                                    >
 
-                                @guest('customer')
-                                    href="{{ route('velocity.product.compare') }}"
-                                @endguest
-                                >
+                                    <i class="material-icons">compare_arrows</i>
+                                    <div class="badge-container" v-if="compareCount > 0">
+                                        <span class="badge" v-text="compareCount"></span>
+                                    </div>
+                                    <span>{{ __('velocity::app.customer.compare.text') }}</span>
+                                </a>
+                            @endif
+                        {!! view_render_event('bagisto.shop.layout.header.compare.after') !!}
 
-                                <i class="material-icons">compare_arrows</i>
-                                <div class="badge-container" v-if="compareCount > 0">
-                                    <span class="badge" v-text="compareCount"></span>
-                                </div>
-                                <span>{{ __('velocity::app.customer.compare.text') }}</span>
-                            </a>
-                        @endif
-                    {!! view_render_event('bagisto.shop.layout.header.compare.after') !!}
-
-                    {!! view_render_event('bagisto.shop.layout.header.wishlist.before') !!}
-                        @if($showWishlist)
-                            <a class="wishlist-btn unset" :href="`{{ route('customer.wishlist.index') }}`">
-                                <i class="material-icons">favorite_border</i>
-                                <div class="badge-container" v-if="wishlistCount > 0">
-                                    <span class="badge" v-text="wishlistCount"></span>
-                                </div>
-                                <span>{{ __('shop::app.layouts.wishlist') }}</span>
-                            </a>
-                        @endif
-                    {!! view_render_event('bagisto.shop.layout.header.wishlist.after') !!}
+                        {!! view_render_event('bagisto.shop.layout.header.cart-item.before') !!}
+                            @include('shop::checkout.cart.mini-cart')
+                        {!! view_render_event('bagisto.shop.layout.header.cart-item.after') !!}
+                    </div>
                 </div>
             </div>
         </div>
@@ -449,10 +450,10 @@
                                             this.__('shop.general.alert.error'),
                                             "{{ __('shop::app.common.error') }}"
                                         );
-                                    });                                    
+                                    });
                                 } else {
                                         imageInput.value = '';
-                                        
+
                                         window.showAlert(
                                             `alert-danger`,
                                             this.__('shop.general.alert.error'),

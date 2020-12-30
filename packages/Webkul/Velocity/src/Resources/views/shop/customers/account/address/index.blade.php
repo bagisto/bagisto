@@ -19,7 +19,7 @@
 
         @if (! $addresses->isEmpty())
             <span class="account-action">
-                <a href="{{ route('customer.address.create') }}" class="theme-btn light unset pull-right">
+                <a href="{{ route('customer.address.create') }}" class="theme-btn light unset float-right">
                     {{ __('shop::app.customer.account.address.index.add') }}
                 </a>
             </span>
