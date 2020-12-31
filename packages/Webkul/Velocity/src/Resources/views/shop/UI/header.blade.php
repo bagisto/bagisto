@@ -23,7 +23,7 @@
 
                                         <i
                                             @click="closeDrawer()"
-                                            class="material-icons pull-right text-dark">
+                                            class="material-icons float-right text-dark">
                                             cancel
                                         </i>
                                     </span>
@@ -195,7 +195,7 @@
 
                                     <h4 class="display-inbl">@{{ subCategory.name }}</h4>
 
-                                    <i class="material-icons pull-right text-dark" @click="closeDrawer()">
+                                    <i class="material-icons float-right text-dark" @click="closeDrawer()">
                                         cancel
                                     </i>
                                 </div>
@@ -248,7 +248,7 @@
                                 <div class="drawer-section">
                                     <i class="rango-arrow-left fs24 text-down-4" @click="toggleMetaInfo('languages')"></i>
                                     <h4 class="display-inbl">{{ __('velocity::app.responsive.header.languages') }}</h4>
-                                    <i class="material-icons pull-right text-dark" @click="closeDrawer()">cancel</i>
+                                    <i class="material-icons float-right text-dark" @click="closeDrawer()">cancel</i>
                                 </div>
 
                                 <ul type="none">
@@ -290,7 +290,7 @@
                                 <div class="drawer-section">
                                     <i class="rango-arrow-left fs24 text-down-4" @click="toggleMetaInfo('currencies')"></i>
                                     <h4 class="display-inbl">{{ __('velocity::app.shop.general.currencies') }}</h4>
-                                    <i class="material-icons pull-right text-dark" @click="closeDrawer()">cancel</i>
+                                    <i class="material-icons float-right text-dark" @click="closeDrawer()">cancel</i>
                                 </div>
 
                                 <ul type="none">
