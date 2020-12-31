@@ -11,7 +11,7 @@
         <span class="account-heading">{{ __('shop::app.customer.account.wishlist.title') }}</span>
 
         @if (count($items))
-            <div class="account-action pull-right">
+            <div class="account-action float-right">
                 <a
                     class="remove-decoration theme-btn light"
                     href="{{ route('customer.wishlist.removeall') }}">

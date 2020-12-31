@@ -25,7 +25,7 @@
 @endphp
 
 {!! view_render_event('bagisto.shop.layout.header.locale.before') !!}
-    <div class="pull-left">
+    <div class="d-inline-block">
         <div class="dropdown">
             @php
                 $localeImage = null;
@@ -79,7 +79,7 @@
 {!! view_render_event('bagisto.shop.layout.header.currency-item.before') !!}
 
     @if (core()->getCurrentChannel()->currencies->count() > 1)
-        <div class="pull-left">
+        <div class="d-inline-block">
             <div class="dropdown">
                <select
                     class="btn btn-link dropdown-toggle control locale-switcher styled-select"

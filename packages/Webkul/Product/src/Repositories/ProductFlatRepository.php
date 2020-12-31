@@ -43,88 +43,64 @@ class ProductFlatRepository extends Repository
                    ->where('product_flat.channel', core()->getCurrentChannelCode())
                    ->where('product_flat.locale', app()->getLocale());
 
-        $productArrributes = $qb->leftJoin('product_attribute_values as pa', 'product_flat.product_id', 'pa.product_id')
-                                ->pluck('pa.attribute_id')
-                                ->toArray();
+        $productArrributes = $qb->distinct()
+                            ->leftJoin('product_attribute_values as pa', 'product_flat.product_id', 'pa.product_id')
+                            ->leftJoin('attributes as at', 'pa.attribute_id', 'at.id')
+                            ->where('is_filterable', 1);
 
-        $productSuperArrributes = $qb->leftJoin('product_super_attributes as ps', 'product_flat.product_id', 'ps.product_id')
+        $productArrributesIds = $productArrributes->pluck('pa.attribute_id')->toArray();
+
+        $productSelectArrributes = $productArrributes
+                            ->pluck('integer_value')
+                            ->toArray();
+
+        $productmultiSelectArrributes = $productArrributes
+                            ->pluck('text_value')
+                            ->toArray();
+
+        $multiSelectArrributes = [];
+        foreach ($productmultiSelectArrributes as $multi) {
+            if ($multi) {
+                $multiSelectArrributes = explode(",", $multi);
+            }
+        }
+
+        $productSuperArrributesIds = $qb->leftJoin('product_super_attributes as ps', 'product_flat.product_id', 'ps.product_id')
                                      ->pluck('ps.attribute_id')
                                      ->toArray();
 
-        $productCategoryArrributes = array_unique(array_merge($productArrributes, $productSuperArrributes));
+        $productCategoryArrributes['attributeOptions'] = array_filter(array_unique(array_merge($productSelectArrributes, $multiSelectArrributes)));
+
+        $productCategoryArrributes['attributes'] = array_filter(array_unique(array_merge($productArrributesIds, $productSuperArrributesIds)));
 
         return $productCategoryArrributes;
     }
 
     /**
-     * get Filterable Attributes.
+     * filter attributes according to products
      *
      * @param  array  $category
-     * @param  array  $products
      * @return \Illuminate\Support\Collection
      */
-    public function getFilterableAttributes($category, $products) {
-        $filterAttributes = [];
+    public function getProductsRelatedFilterableAttributes($category)
+    {
+        $categoryFilterableAttributes = $category->filterableAttributes->pluck('id')->toArray();
 
-        if (count($category->filterableAttributes) > 0 ) {
-            $filterAttributes = $category->filterableAttributes;
-        } else {
-            $categoryProductAttributes = $this->getCategoryProductAttribute($category->id);
+        $productCategoryArrributes = $this->getCategoryProductAttribute($category->id);
 
-            if ($categoryProductAttributes) {
-                foreach (app('Webkul\Attribute\Repositories\AttributeRepository')->getFilterAttributes() as $filterAttribute) {
-                    if (in_array($filterAttribute->id, $categoryProductAttributes)) {
-                        $filterAttributes[] = $filterAttribute;
-                    } else  if ($filterAttribute ['code'] == 'price') {
-                        $filterAttributes[] = $filterAttribute;
-                    }
-                }
+        $allFilterableAttributes = array_filter(array_unique(array_merge($categoryFilterableAttributes, $productCategoryArrributes['attributes'])));
 
-                $filterAttributes = collect($filterAttributes);
+        $attributes = app('Webkul\Attribute\Repositories\AttributeRepository')->getModel()::with(['options' => function($query) use ($productCategoryArrributes) {
+                return $query->whereIn('id', $productCategoryArrributes['attributeOptions']);
             }
-        }
+        ])->whereIn('id', $allFilterableAttributes)->get();
 
-        return $filterAttributes;
-    }
-
-    /**
-     * filter attributes according to products
-     * 
-     * @param  array  $category
-     * @return \Illuminate\Support\Collection
-     */
-    public function getProductsRelatedFilterableAttributes($category) {
-        $products = app('Webkul\Product\Repositories\ProductRepository')->getProductsRelatedToCategory($category->id);
-
-        $filterAttributes = $this->getFilterableAttributes($category, $products);
-
-        $allProductAttributeOptionsCode = [];
-
-        foreach ($products as $key => $product) {
-            foreach ($filterAttributes as $attribute) {
-                if ($attribute->code <> 'price' && isset($product[$attribute->code])) {
-                    if (! in_array($product[$attribute->code], $allProductAttributeOptionsCode)) {
-                        array_push($allProductAttributeOptionsCode, $product[$attribute->code]);
-                    }
-                }
-            }
-        }
-
-        foreach ($filterAttributes as $attribute) {
-            foreach ($attribute->options as $key => $option) {
-                if (! in_array($option->id, $allProductAttributeOptionsCode)) {
-                    unset($attribute->options[$key]);
-                }
-            }         
-        }   
-        
-        return $filterAttributes;
-
+        return $attributes;
     }
 
     /**
      * update product_flat custom column
-     * 
+     *
      * @param \Webkul\Attribute\Models\Attribute $attribute
      * @param \Webkul\Product\Listeners\ProductFlat $listener
      */
@@ -137,5 +113,4 @@ class ProductFlatRepository extends Repository
                     ->on('v.attribute_id', '=', \DB::raw($attribute->id));
             })->update(['product_flat.'.$attribute->code => \DB::raw($listener->attributeTypeFields[$attribute->type] .'_value')]);
     }
-
 }

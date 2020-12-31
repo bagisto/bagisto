@@ -113,7 +113,7 @@
                 @auth('customer')
                     @if(count(auth('customer')->user()->addresses))
                         <a
-                            class="theme-btn light pull-right text-up-14"
+                            class="theme-btn light float-right text-up-14"
                             @click="backToSavedBillingAddress()">
 
                             {{ __('shop::app.checkout.onepage.back') }}
@@ -226,7 +226,7 @@
                     @auth('customer')
                         @if(count(auth('customer')->user()->addresses))
                             <a
-                                class="theme-btn light pull-right text-up-14"
+                                class="theme-btn light float-right text-up-14"
                                 @click="backToSavedShippingAddress()">
 
                                 {{ __('shop::app.checkout.onepage.back') }}
