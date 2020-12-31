@@ -1,7 +1,7 @@
 @push('scripts')
     <script type="text/x-template" id="content-header-template">
         <header class="row velocity-divide-page vc-header header-shadow active">
-            <div class="vc-small-screen container" v-if="isMobile()">
+            <div class="vc-small-screen container">
                 <div class="row">
                     <div class="col-6">
                         <div v-if="hamburger" class="nav-container scrollable">
@@ -23,7 +23,7 @@
 
                                         <i
                                             @click="closeDrawer()"
-                                            class="material-icons pull-right text-dark">
+                                            class="material-icons float-right text-dark">
                                             cancel
                                         </i>
                                     </span>
@@ -195,7 +195,7 @@
 
                                     <h4 class="display-inbl">@{{ subCategory.name }}</h4>
 
-                                    <i class="material-icons pull-right text-dark" @click="closeDrawer()">
+                                    <i class="material-icons float-right text-dark" @click="closeDrawer()">
                                         cancel
                                     </i>
                                 </div>
@@ -248,7 +248,7 @@
                                 <div class="drawer-section">
                                     <i class="rango-arrow-left fs24 text-down-4" @click="toggleMetaInfo('languages')"></i>
                                     <h4 class="display-inbl">{{ __('velocity::app.responsive.header.languages') }}</h4>
-                                    <i class="material-icons pull-right text-dark" @click="closeDrawer()">cancel</i>
+                                    <i class="material-icons float-right text-dark" @click="closeDrawer()">cancel</i>
                                 </div>
 
                                 <ul type="none">
@@ -290,7 +290,7 @@
                                 <div class="drawer-section">
                                     <i class="rango-arrow-left fs24 text-down-4" @click="toggleMetaInfo('currencies')"></i>
                                     <h4 class="display-inbl">{{ __('velocity::app.shop.general.currencies') }}</h4>
-                                    <i class="material-icons pull-right text-dark" @click="closeDrawer()">cancel</i>
+                                    <i class="material-icons float-right text-dark" @click="closeDrawer()">cancel</i>
                                 </div>
 
                                 <ul type="none">
@@ -323,7 +323,8 @@
                     </div>
 
                     @php
-                        $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false
+                        $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false;
+                        $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
                     @endphp
 
                     <div class="right-vc-header col-6">
@@ -346,12 +347,14 @@
                             </a>
                         @endif
 
-                        <a class="wishlist-btn unset" :href="`{{ route('customer.wishlist.index') }}`">
-                            <div class="badge-container" v-if="wishlistCount > 0">
-                                <span class="badge" v-text="wishlistCount"></span>
-                            </div>
-                            <i class="material-icons">favorite_border</i>
-                        </a>
+                        @if ($showWishlist)
+                            <a class="wishlist-btn unset" :href="`{{ route('customer.wishlist.index') }}`">
+                                <div class="badge-container" v-if="wishlistCount > 0">
+                                    <span class="badge" v-text="wishlistCount"></span>
+                                </div>
+                                <i class="material-icons">favorite_border</i>
+                            </a>
+                        @endif
 
                         <a class="unset cursor-pointer" @click="openSearchBar">
                             <i class="material-icons">search</i>
@@ -370,7 +373,7 @@
             </div>
 
             <div
-                v-else
+               id="main-category"
                 @mouseout="toggleSidebar('0', $event, 'mouseout')"
                 @mouseover="toggleSidebar('0', $event, 'mouseover')"
                 :class="`main-category fs16 unselectable fw6 ${($root.sharedRootCategories.length > 0) ? 'cursor-pointer' : 'cursor-not-allowed'} left`">

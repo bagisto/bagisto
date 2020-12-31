@@ -15,7 +15,7 @@
                 autoplay="true"
                 slides-per-page="1"
                 navigation-enabled="hide"
-                locale-direction="direction"
+                :locale-direction="direction"
                 :slides-count="{{ ! empty($sliderData) ? sizeof($sliderData) : 1 }}">
 
                 @if (! empty($sliderData))
@@ -24,7 +24,7 @@
                     @php
                         $textContent = str_replace("\r\n", '', $slider['content']);
                     @endphp
-                        <slide slot="slide-{{ $index }}">
+                        <slide slot="slide-{{ $index }}" title=" ">
                             <a @if($slider['slider_path']) href="{{ $slider['slider_path'] }}" @endif>
                                 <img
                                     class="col-12 no-padding banner-icon"

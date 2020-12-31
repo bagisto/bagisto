@@ -40,9 +40,9 @@ return [
             ]
         ],
         'layouts' => [
-            'velocity' => 'Velocity',
+            'velocity' => '● السرعة',
             'cms-pages' => 'CMS الصفحات',
-            'meta-data' => 'Meta Data',
+            'meta-data' => 'البيانات الوصفية',
             'category-menu' => 'قائمة الفئة',
             'header-content' => 'محتوى الرأس',
         ],
@@ -91,7 +91,7 @@ return [
         ],
         'meta-data' => [
             'footer' => 'تذييل',
-            'title' => 'Velocity meta data',
+            'title' => 'البيانات الوصفية السرعة',
             'activate-slider' => 'تنشيط شريط التمرير',
             'home-page-content' => 'محتوى الصفحة الرئيسية',
             'footer-left-content' => 'تذييل يسار المحتوى',
@@ -111,7 +111,17 @@ return [
             'advertisement-three' => 'إعلان ثلاث صور',
             'images' => 'صور',
             'general' => 'جنرال لواء',
-            'add-image-btn-title' => 'إضافة صورة'
+            'add-image-btn-title' => 'إضافة صورة',
+            'footer-middle' => [
+                'about-us'  => 'About Us',
+                'customer-service' => 'Customer Service',
+                'whats-new' => 'What\'s New',
+                'contact-us' => 'Contact Us',
+                'order-and-returns' => 'Order and Returns',
+                'payment-policy' => 'Payment Policy',
+                'shipping-policy' => 'Shipping Policy',
+                'privacy-and-cookies-policy' => 'Privacy and Cookies Policy'
+            ]
         ],
         'category' => [
             'save-btn-title' => 'قائمة الحفظ',

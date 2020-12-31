@@ -76,7 +76,7 @@
                                 class="btn-toolbar full-width"
                                 role="toolbar">
 
-                                <div class="btn-group full-width">
+                                <div class="btn-group full-width force-center">
                                     <div class="selectdiv">
                                         <select class="form-control fs13 styled-select" name="category" @change="focusInput($event)" aria-label="Category">
                                             <option value="">
@@ -124,46 +124,52 @@
                     </div>
                 </div>
 
-                <div class="col-lg-7 col-md-12">
-                    {!! view_render_event('bagisto.shop.layout.header.cart-item.before') !!}
-                        @include('shop::checkout.cart.mini-cart')
-                    {!! view_render_event('bagisto.shop.layout.header.cart-item.after') !!}
+                <div class="col-lg-7 col-md-12 vc-full-screen">
+                    <div class="left-wrapper">
+                        @php
+                            $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
 
-                    @php
-                        $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false
-                    @endphp
+                            $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false;
+                        @endphp
 
-                    {!! view_render_event('bagisto.shop.layout.header.compare.before') !!}
-                        @if ($showCompare)
-                            <a
-                                class="compare-btn unset"
-                                @auth('customer')
-                                    href="{{ route('velocity.customer.product.compare') }}"
-                                @endauth
+                        {!! view_render_event('bagisto.shop.layout.header.wishlist.before') !!}
+                            @if($showWishlist)
+                                <a class="wishlist-btn unset" :href="`{{ route('customer.wishlist.index') }}`">
+                                    <i class="material-icons">favorite_border</i>
+                                    <div class="badge-container" v-if="wishlistCount > 0">
+                                        <span class="badge" v-text="wishlistCount"></span>
+                                    </div>
+                                    <span>{{ __('shop::app.layouts.wishlist') }}</span>
+                                </a>
+                            @endif
+                        {!! view_render_event('bagisto.shop.layout.header.wishlist.after') !!}
 
-                                @guest('customer')
-                                    href="{{ route('velocity.product.compare') }}"
-                                @endguest
-                                >
+                        {!! view_render_event('bagisto.shop.layout.header.compare.before') !!}
+                            @if ($showCompare)
+                                <a
+                                    class="compare-btn unset"
+                                    @auth('customer')
+                                        href="{{ route('velocity.customer.product.compare') }}"
+                                    @endauth
 
-                                <i class="material-icons">compare_arrows</i>
-                                <div class="badge-container" v-if="compareCount > 0">
-                                    <span class="badge" v-text="compareCount"></span>
-                                </div>
-                                <span>{{ __('velocity::app.customer.compare.text') }}</span>
-                            </a>
-                        @endif
-                    {!! view_render_event('bagisto.shop.layout.header.compare.after') !!}
+                                    @guest('customer')
+                                        href="{{ route('velocity.product.compare') }}"
+                                    @endguest
+                                    >
 
-                    {!! view_render_event('bagisto.shop.layout.header.wishlist.before') !!}
-                        <a class="wishlist-btn unset" :href="`{{ route('customer.wishlist.index') }}`">
-                            <i class="material-icons">favorite_border</i>
-                            <div class="badge-container" v-if="wishlistCount > 0">
-                                <span class="badge" v-text="wishlistCount"></span>
-                            </div>
-                            <span>{{ __('shop::app.layouts.wishlist') }}</span>
-                        </a>
-                    {!! view_render_event('bagisto.shop.layout.header.wishlist.after') !!}
+                                    <i class="material-icons">compare_arrows</i>
+                                    <div class="badge-container" v-if="compareCount > 0">
+                                        <span class="badge" v-text="compareCount"></span>
+                                    </div>
+                                    <span>{{ __('velocity::app.customer.compare.text') }}</span>
+                                </a>
+                            @endif
+                        {!! view_render_event('bagisto.shop.layout.header.compare.after') !!}
+
+                        {!! view_render_event('bagisto.shop.layout.header.cart-item.before') !!}
+                            @include('shop::checkout.cart.mini-cart')
+                        {!! view_render_event('bagisto.shop.layout.header.cart-item.after') !!}
+                    </div>
                 </div>
             </div>
         </div>
@@ -173,7 +179,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
 
     <script type="text/x-template" id="image-search-component-template">
-        <div class="d-inline-block image-search-container">
+        <div class="d-inline-block image-search-container" v-if="image_search_status">
             <label for="image-search-container">
                 <i class="icon camera-icon"></i>
 
@@ -364,7 +370,7 @@
                 data: function() {
                     return {
                         uploadedImageUrl: '',
-                        image_search_status: "{{core()->getConfigData('general.content.shop.image_search') == '1' ? true : false}}"
+                        image_search_status: "{{core()->getConfigData('general.content.shop.image_search') == '1' ? 'true' : 'false'}}" == 'true'
                     }
                 },
 
@@ -374,76 +380,86 @@
 
                         if (imageInput.files && imageInput.files[0]) {
                             if (imageInput.files[0].type.includes('image/')) {
-                                this.$root.showLoader();
+                                if (imageInput.files[0].size <= 2000000) {
+                                    this.$root.showLoader();
 
-                                var formData = new FormData();
+                                    var formData = new FormData();
 
-                                formData.append('image', imageInput.files[0]);
+                                    formData.append('image', imageInput.files[0]);
 
-                                axios.post(
-                                    "{{ route('shop.image.search.upload') }}",
-                                    formData,
-                                    {
-                                        headers: {
-                                            'Content-Type': 'multipart/form-data'
+                                    axios.post(
+                                        "{{ route('shop.image.search.upload') }}",
+                                        formData,
+                                        {
+                                            headers: {
+                                                'Content-Type': 'multipart/form-data'
+                                            }
                                         }
-                                    }
-                                ).then(response => {
-                                    var net;
-                                    var self = this;
-                                    this.uploadedImageUrl = response.data;
+                                    ).then(response => {
+                                        var net;
+                                        var self = this;
+                                        this.uploadedImageUrl = response.data;
 
 
-                                    async function app() {
-                                        var analysedResult = [];
+                                        async function app() {
+                                            var analysedResult = [];
 
-                                        var queryString = '';
+                                            var queryString = '';
 
-                                        net = await mobilenet.load();
+                                            net = await mobilenet.load();
 
-                                        const imgElement = document.getElementById('uploaded-image-url');
+                                            const imgElement = document.getElementById('uploaded-image-url');
 
-                                        try {
-                                            const result = await net.classify(imgElement);
+                                            try {
+                                                const result = await net.classify(imgElement);
 
-                                            result.forEach(function(value) {
-                                                queryString = value.className.split(',');
+                                                result.forEach(function(value) {
+                                                    queryString = value.className.split(',');
 
-                                                if (queryString.length > 1) {
-                                                    analysedResult = analysedResult.concat(queryString)
-                                                } else {
-                                                    analysedResult.push(queryString[0])
-                                                }
-                                            });
-                                        } catch (error) {
+                                                    if (queryString.length > 1) {
+                                                        analysedResult = analysedResult.concat(queryString)
+                                                    } else {
+                                                        analysedResult.push(queryString[0])
+                                                    }
+                                                });
+                                            } catch (error) {
+                                                self.$root.hideLoader();
+
+                                                window.showAlert(
+                                                    `alert-danger`,
+                                                    this.__('shop.general.alert.error'),
+                                                    "{{ __('shop::app.common.error') }}"
+                                                );
+                                            }
+
+                                            localStorage.searchedImageUrl = self.uploadedImageUrl;
+
+                                            queryString = localStorage.searched_terms = analysedResult.join('_');
+
                                             self.$root.hideLoader();
 
-                                            window.showAlert(
-                                                `alert-danger`,
-                                                this.__('shop.general.alert.error'),
-                                                "{{ __('shop::app.common.error') }}"
-                                            );
+                                            window.location.href = "{{ route('shop.search.index') }}" + '?term=' + queryString + '&image-search=1';
                                         }
 
-                                        localStorage.searchedImageUrl = self.uploadedImageUrl;
+                                        app();
+                                    }).catch(() => {
+                                        this.$root.hideLoader();
 
-                                        queryString = localStorage.searched_terms = analysedResult.join('_');
+                                        window.showAlert(
+                                            `alert-danger`,
+                                            this.__('shop.general.alert.error'),
+                                            "{{ __('shop::app.common.error') }}"
+                                        );
+                                    });
+                                } else {
+                                        imageInput.value = '';
 
-                                        self.$root.hideLoader();
-
-                                        window.location.href = "{{ route('shop.search.index') }}" + '?term=' + queryString + '&image-search=1';
-                                    }
-
-                                    app();
-                                }).catch(() => {
-                                    this.$root.hideLoader();
-
-                                    window.showAlert(
-                                        `alert-danger`,
-                                        this.__('shop.general.alert.error'),
-                                        "{{ __('shop::app.common.error') }}"
-                                    );
-                                });
+                                        window.showAlert(
+                                            `alert-danger`,
+                                            this.__('shop.general.alert.error'),
+                                            "{{ __('shop::app.common.image-upload-limit') }}"
+                                        );
+                                }
                             } else {
                                 imageInput.value = '';
 

@@ -4,19 +4,19 @@
 
     $locale = request()->get('locale') ?: app()->getLocale();
 
-    $attributeOptionTranslations = DB::table('attribute_option_translations')->where('locale', $locale)->get()->toJson();
+    $attributeOptionTranslations = app('\Webkul\Attribute\Repositories\AttributeOptionTranslationRepository')->where('locale', $locale)->get()->toJson();
 @endphp
 
 @push('scripts')
     <script type="text/x-template" id="compare-product-template">
         <section class="cart-details row no-margin col-12">
-            <h1 class="fw6 col-6">
+            <h2 class="fw6 col-6">
                 {{ __('velocity::app.customer.compare.compare_similar_items') }}
-            </h1>
+            </h2>
 
             <div class="col-6" v-if="products.length > 0">
                 <button
-                    class="theme-btn light pull-right"
+                    class="theme-btn light float-right"
                     @click="removeProductCompare('all')">
                     {{ __('shop::app.customer.account.wishlist.deleteall') }}
                 </button>
@@ -52,7 +52,7 @@
                                 @switch ($attribute['code'])
                                     @case('name')
                                         <a :href="`${$root.baseUrl}/${product.url_key}`" class="unset remove-decoration active-hover">
-                                            <h1 class="fw6 fs18" v-text="product['{{ $attribute['code'] }}']"></h1>
+                                            <h2 class="fw6 fs18" v-text="product['{{ $attribute['code'] }}']"></h2>
                                         </a>
                                         @break
 
@@ -165,6 +165,8 @@
 
             mounted: function () {
                 this.getComparedProducts();
+
+                this.activateSlider();
             },
 
             methods: {
@@ -191,10 +193,6 @@
                         this.$http.get(url, data)
                         .then(response => {
                             this.isProductListLoaded = true;
-
-                            if (response.data.products.length > 3) {
-                                $('.compare-products').css('overflow-x', 'scroll');
-                            }
 
                             this.products = response.data.products;
                         })
@@ -286,6 +284,47 @@
                     }
 
                     return attributeOptions;
+                },
+
+                activateSlider: function () {
+                    /* main slider */
+                    const slider = document.querySelector('.compare-products');
+
+                    let startX;
+                    let scrollLeft;
+
+                    /* check for mouse down */
+                    let isMouseDown = false;
+
+                    slider.addEventListener('mousedown', (e) => {
+                        isMouseDown = true;
+                        slider.classList.add('active');
+
+                        startX = e.pageX - slider.offsetLeft;
+                        scrollLeft = slider.scrollLeft;
+                    });
+
+                    slider.addEventListener('mouseleave', () => {
+                        isMouseDown = false;
+                        slider.classList.remove('active');
+                    });
+
+                    slider.addEventListener('mouseup', () => {
+                        isMouseDown = false;
+                        slider.classList.remove('active');
+                    });
+
+                    slider.addEventListener('mousemove', (e) => {
+                        if (! isMouseDown) {
+                            return;
+                        }
+
+                        e.preventDefault();
+
+                        const x = e.pageX - slider.offsetLeft;
+                        const walk = (x - startX) * 3;
+                        slider.scrollLeft = scrollLeft - walk;
+                    });
                 }
             }
         });

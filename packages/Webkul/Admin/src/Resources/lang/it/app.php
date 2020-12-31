@@ -188,6 +188,7 @@ return [
         'shipment-date' => 'Data Spedizione',
         'shipment-to' => 'Spedizione A',
         'sku' => 'SKU',
+        'product-number' => 'Numero del prodotto',
         'price' => 'Prezzo',
         'qty' => 'Quantità',
         'permission-type' => 'Tipo Permessi',
@@ -529,7 +530,13 @@ return [
             'multiselect' => 'Multiselect',
             'new-option' => 'Nuova Opzione',
             'is-default' => 'È Predefinita',
-            'actions' => 'Azioni'
+            'actions' => 'Azioni',
+            'remove-image-btn-title' => 'Remove Image',
+            'videos' => 'Videos',
+            'video' => 'Video',
+            'add-video-btn-title' => 'Add Video',
+            'remove-video-btn-title' => 'Remove Video',
+            'not-support-video' => 'Your browser does not support the video tag.',
         ],
 
         'attributes' => [
@@ -806,7 +813,9 @@ return [
             'seo-title' => 'Meta title',
             'seo-description' => 'Meta description',
             'seo-keywords' => 'Meta keywords',
-
+            'maintenance-mode' => 'Maintenance Mode',
+            'maintenance-mode-text' => 'Message',
+            'allowed-ips' => 'Allowed IPs'
         ],
 
         'sliders' => [
@@ -1281,11 +1290,12 @@ return [
             'description' => 'Descrizione',
             'rate' => 'Tasso',
             'status' => 'Stato',
+            'calculate-tax' => 'Calcola le tasse',
             'type' => 'Tipo',
             'payment-methods' => 'Metodi di Pagamento',
             'cash-on-delivery' => 'Contrassegno',
             'money-transfer' => 'Bonifico',
-            'paypal-standard' => 'Paypal Standard',
+            'paypal-standard' => 'PayPal Standard',
             'business-account' => 'Account Business',
             'newsletter' => 'Iscrizione a NewsLetter',
             'newsletter-subscription' => 'Consenti Iscrizione a NewsLetter',
@@ -1317,6 +1327,8 @@ return [
             'order-number-length' => 'Lunghezza Numero Ordine',
             'order-number-suffix' => 'Suffisso Numero Ordine',
             'order-number-generator-class' => 'Generatore di numeri dordine',
+            'minimum-order' => 'Minimum Order Settings',
+            'minimum-order-amount' => 'Minimum Order Amount',
             'default' => 'Default',
             'sandbox' => 'Sandbox',
             'all-channels' => 'Tutti',
@@ -1361,9 +1373,14 @@ return [
             'custom-scripts' => 'Custom Scripts',
             'custom-css' => 'Custom CSS',
             'custom-javascript' => 'Custom Javascript',
-            'paypal-smart-button' => 'Paypal Smart Button',
+            'paypal-smart-button' => 'PayPal',
             'client-id' => 'Client Id',
-            'client-id-info' => 'Use "sb" for testing.'
+            'client-id-info' => 'Use "sb" for testing.',
+            'client-secret' => 'Client Secret',
+            'client-secret-info' => 'Add your secret key here',
+            'accepted-currencies' => 'Accepted currencies',
+            'accepted-currencies-info' => 'Add currency code comma seperated e.g. USD,INR,...',
+            'buy-now-button-display' => 'Allow customers to directly buy products'
         ]
     ]
 ];

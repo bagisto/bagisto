@@ -17,6 +17,7 @@ return [
 
     'common' => [
         'error' => 'Qualcosa è andato storto, per favore prova ancora più tardi.',
+        'image-upload-limit' => 'La dimensione massima di caricamento dell\'immagine è 2 MB',
         'no-result-found' => 'Non abbiamo trovato risultati.'
     ],
 
@@ -438,6 +439,7 @@ return [
         'available-for-order' => 'Disponibile per lordine',
         'settings' => 'Settings',
         'compare_options' => 'Compare Options',
+        'wishlist-options' => 'Wishlist Options'
     ],
 
     // 'reviews' => [
@@ -492,7 +494,8 @@ return [
             'link-missing' => '',
             'event' => [
                 'expired' => 'Questo evento è terminato.'
-            ]
+            ],
+            'minimum-order-message' => 'Minimum order amount is :amount'
         ],
 
         'onepage' => [

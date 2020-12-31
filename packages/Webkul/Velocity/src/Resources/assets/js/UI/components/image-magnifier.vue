@@ -1,54 +1,104 @@
 <template>
-    <div class="magnifier col-12 text-center no-padding">
-        <img
-            :src="src"
-            :data-zoom-image="src"
-            ref="activeProductImage"
-            id="active-product-image"
-            class="main-product-image"
-            alt=""
-        />
+    <div class="video-container" v-if="currentType == 'video'">
+        <video :key="activeImageVideoURL" width="100%" controls>
+            <source :src="activeImageVideoURL" type="video/mp4">
+        </video>
+    </div>
+    <div class="image-container" v-else>
+        <div class="magnifier">
+            <img :src="activeImageVideoURL" :data-zoom-image="activeImageVideoURL"
+                class="main-product-image">
+        </div>
     </div>
 </template>
 
-<script type="text/javascript">
+<style lang="scss">
+    .image-container {
+        .magnifier {
+            > img {
+                max-width: 100%;
+                min-height: 530px;
+                max-height: 530px;
+            }
+        }
+    }
 
+    .video-container {
+        min-height: 530px;
+        max-height: 530px;
+
+        video {
+            top: 50%;
+            position: relative;
+            transform: translateY(-50%);
+        }
+    }
+</style>
+
+<script type="text/javascript">
     export default {
-        props: ['src'],
+        props: ['src', 'type'],
 
         data: function () {
             return {
-                'activeImage': null,
-                'activeImageElement': null,
+                activeImage: null,
+                activeImageVideoURL: this.src,
+                currentType: this.type,
             }
         },
 
         mounted: function () {
-            // store image related info in global variables
-            this.activeImageElement = this.$refs.activeProductImage;
+            /* binding should be with class as ezplus is having bug of creating multiple containers */
+            this.activeImage = $('.main-product-image');
+            this.activeImage.attr('src', this.activeImageVideoURL);
+            this.activeImage.data('zoom-image', this.activeImageVideoURL);
 
-            // convert into jQuery object
-            this.activeImage = new jQuery.fn.init(this.activeImageElement);
-
+            /* initialise zoom */
             this.elevateZoom();
 
-            this.$root.$on('changeMagnifiedImage', ({smallImageUrl, largeImageUrl}) => {
-                this.activeImageElement.src = smallImageUrl;
+            this.$root.$on('changeMagnifiedImage', ({smallImageUrl, largeImageUrl, currentType}) => {
+                /* removed old instance */
+                $('.zoomContainer').remove();
+                this.activeImage.removeData('elevateZoom');
 
-                this.activeImage.data('zoom-image', (largeImageUrl ? largeImageUrl : smallImageUrl));
+                /* getting url */
+                this.activeImageVideoURL = largeImageUrl;
+                
+                /* type checking for media type */
+                this.currentType = currentType;
 
-                this.elevateZoom();
+                /* waiting added for image because image element takes time load when switching from video  */
+                this.waitForElement('.main-product-image', () => {
+                    /* update source for images */
+                    this.activeImage = $('.main-product-image');
+                    this.activeImage.attr('src', smallImageUrl);
+                    this.activeImage.data('zoom-image', largeImageUrl);
+
+                    /* reinitialize zoom */
+                    this.elevateZoom();
+                });
             });
         },
 
         methods: {
-            'elevateZoom': function () {
+            elevateZoom: function () {
                 this.activeImage.ezPlus({
+                    zoomLevel: 0.5,
                     cursor: 'pointer',
                     scrollZoom: true,
-                    zoomWindowWidth: 400,
-                    zoomWindowHeight: 400,
+                    zoomWindowWidth: 250,
+                    zoomWindowHeight: 250,
                 });
+            },
+
+            waitForElement: function (selector, callback) {
+                if (jQuery(selector).length) {
+                    callback();
+                } else {
+                    setTimeout(() => {
+                        this.waitForElement(selector, callback);
+                    }, 100);
+                }
             },
         }
     }

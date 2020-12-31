@@ -188,6 +188,7 @@ return [
         'shipment-date' => 'Verzenddatum',
         'shipment-to' => 'Shipping To',
         'sku' => 'SKU',
+        'product-number' => 'Productnummer',
         'price' => 'Prijs',
         'qty' => 'Aantal',
         'permission-type' => 'Permission Type',
@@ -528,6 +529,12 @@ return [
             'multiselect' => 'Multiselect',
             'new-option' => 'Nieuwe optie',
             'is-default' => 'is standaard',
+            'remove-image-btn-title' => 'Remove Image',
+            'videos' => 'Videos',
+            'video' => 'Video',
+            'add-video-btn-title' => 'Add Video',
+            'remove-video-btn-title' => 'Remove Video',
+            'not-support-video' => 'Your browser does not support the video tag.',
         ],
 
         'attributes' => [
@@ -803,7 +810,9 @@ return [
             'seo-title' => 'Meta titel',
             'seo-description' => 'Meta omschrijving',
             'seo-keywords' => 'Meta trefwoorden',
-
+            'maintenance-mode' => 'Maintenance Mode',
+            'maintenance-mode-text' => 'Message',
+            'allowed-ips' => 'Allowed IPs'
         ],
 
         'sliders' => [
@@ -1277,11 +1286,12 @@ return [
             'description' => 'Omschrijving',
             'rate' => 'Tarief',
             'status' => 'Toestand',
+            'calculate-tax' => 'Beregn skat',
             'type' => 'Type',
             'payment-methods' => 'Betaalmethodes',
             'cash-on-delivery' => 'Rembours',
             'money-transfer' => 'Overschrijving',
-            'paypal-standard' => 'Paypal Standard',
+            'paypal-standard' => 'PayPal Standard',
             'business-account' => 'Zakelijk account',
             'newsletter' => 'Nieuwsbrief',
             'newsletter-subscription' => 'Abonnement op Nieuwsbrief toestaan',
@@ -1313,6 +1323,8 @@ return [
             'order-number-length' => 'Bestelnummer Lengte',
             'order-number-suffix' => 'Achtervoegsel bestelnummer',
             'order-number-generator-class' => 'Ordernummer Generator',
+            'minimum-order' => 'Minimum Order Settings',
+            'minimum-order-amount' => 'Minimum Order Amount',
             'default' => 'Standaard',
             'sandbox' => 'Sandbox',
             'all-channels' => 'Alles',
@@ -1356,9 +1368,14 @@ return [
             'custom-scripts' => 'Custom Scripts',
             'custom-css' => 'Custom CSS',
             'custom-javascript' => 'Custom Javascript',
-            'paypal-smart-button' => 'Paypal Smart Button',
+            'paypal-smart-button' => 'PayPal',
             'client-id' => 'Client Id',
-            'client-id-info' => 'Use "sb" for testing.'
+            'client-id-info' => 'Use "sb" for testing.',
+            'client-secret' => 'Client Secret',
+            'client-secret-info' => 'Add your secret key here',
+            'accepted-currencies' => 'Accepted currencies',
+            'accepted-currencies-info' => 'Add currency code comma seperated e.g. USD,INR,...',
+            'buy-now-button-display' => 'Allow customers to directly buy products'
         ]
     ]
 ];

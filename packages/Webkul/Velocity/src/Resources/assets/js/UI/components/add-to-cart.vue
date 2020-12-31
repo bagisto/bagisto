@@ -1,6 +1,6 @@
 <template>
     <form method="POST" @submit.prevent="addToCart">
-        
+
         <!-- for move to cart from wishlist -->
         <a
             :href="wishlistMoveRoute"

@@ -15,7 +15,7 @@ class EventServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot()
-    {
+    {   
         Event::listen('bagisto.shop.layout.body.after', static function(ViewRenderEventManager $viewRenderEventManager) {
             $viewRenderEventManager->addTemplate('paypal::checkout.onepage.paypal-smart-button');
         });

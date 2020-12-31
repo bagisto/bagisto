@@ -12,7 +12,6 @@
 @import "components/rtl";
 
 @import "static/material-icons";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 * {
     margin: 0;
@@ -196,6 +195,7 @@ body {
             display: table;
             min-width: 150px;
             cursor: pointer;
+            float: right;
             text-align: right;
             padding-top: 5px;
 
@@ -207,8 +207,6 @@ body {
         }
 
         + .account-modal {
-            @extend .modal-dialog;
-
             top: 40px;
             right: 10px;
             z-index: 101;
@@ -414,7 +412,7 @@ header {
                 width: 210px;
 
                 .select-icon {
-                    top: 9px;
+                    top: -30px;
                     right: 8px;
                     z-index: 10;
                     font-size: 18px;
@@ -481,10 +479,11 @@ header {
         }
     }
 
+    /* To Do: To avoid CLS reserve width for all locale */
     .mini-cart-container {
-        width: 125px;
         height: 50px;
         padding: 5px 17px;
+        display: inline-block;
 
         #mini-cart {
             .mini-cart-content {
@@ -514,15 +513,14 @@ header {
                     }
                 }
             }
-
-            // transform: scale(1) rotateZ(-180deg);
-            // transition: transform .15s,opacity .15s;
         }
+    }
 
-        ~ .compare-btn,
-        ~ .wishlist-btn {
+    .left-wrapper {
+        float: right;
+
+        .compare-btn, .wishlist-btn {
             height: 50px;
-            float: right;
             font-size: 18px;
             font-weight: 600;
             padding: 10px 16px 6px 16px;
@@ -544,6 +542,7 @@ header {
                     padding: 4px;
                     min-width: 20px;
                     position: absolute;
+                    color: $font-color-light;
                     background: $button-primary-bg;
                 }
             }
@@ -888,7 +887,7 @@ header {
     text-align: center;
     vertical-align: middle;
     border-radius: 50%;
-    background: #21a179;
+    background: $button-primary-bg;
     color: #fff;
     padding: 16px;
     font: 18px "josefin sans", arial;

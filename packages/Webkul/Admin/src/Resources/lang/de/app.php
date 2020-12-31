@@ -188,6 +188,7 @@ return [
         'shipment-date'    => 'Versand Datum',
         'shipment-to'      => 'Versand',
         'sku'              => 'SKU',
+        'product-number'   => 'Produktnummer',
         'price'            => 'Preis',
         'qty'              => 'Menge',
         'permission-type'  => 'Berechtigungsart',
@@ -520,6 +521,12 @@ return [
             'multiselect'                   => 'Multiselect',
             'new-option'                    => 'Neue Option',
             'is-default'                    => 'Ist Standard',
+            'remove-image-btn-title' => 'Remove Image',
+            'videos' => 'Videos',
+            'video' => 'Video',
+            'add-video-btn-title' => 'Add Video',
+            'remove-video-btn-title' => 'Remove Video',
+            'not-support-video' => 'Your browser does not support the video tag.',
         ],
         'attributes' =>
         [
@@ -803,6 +810,9 @@ return [
             'seo-title'              => 'Meta Titel',
             'seo-description'        => 'Meta-Beschreibung',
             'seo-keywords'           => 'Meta-keywords',
+            'maintenance-mode'       => 'Maintenance Mode',
+            'maintenance-mode-text'  => 'Message',
+            'allowed-ips'            => 'Allowed IPs'
         ],
         'sliders'           =>
         [
@@ -1287,6 +1297,7 @@ return [
             'description'                  => 'Beschreibung',
             'rate'                         => 'Rate',
             'status'                       => 'Status',
+            'calculate-tax'                => 'Steuern berechnen',
             'type'                         => 'Typ',
             'payment-methods'              => 'Zahlungsmethoden',
             'cash-on-delivery'             => 'Nachnahme',
@@ -1323,6 +1334,8 @@ return [
             'order-number-length'          => 'Auftragsnummer Länge',
             'order-number-suffix'          => 'Auftragsnummer Suffix',
             'order-number-generator-class' => 'Bestell nummern generator',
+            'minimum-order'                => 'Minimum Order Settings',
+            'minimum-order-amount'         => 'Minimum Order Amount',
             'default'                      => 'Standard',
             'sandbox'                      => 'Sandbox',
             'all-channels'                 => 'Alle',
@@ -1338,9 +1351,14 @@ return [
             'custom-scripts' => 'Custom Scripts',
             'custom-css' => 'Custom CSS',
             'custom-javascript' => 'Custom Javascript',
-            'paypal-smart-button' => 'Paypal Smart Button',
+            'paypal-smart-button' => 'PayPal',
             'client-id' => 'Client Id',
-            'client-id-info' => 'Use "sb" for testing.'
+            'client-id-info' => 'Use "sb" for testing.',
+            'client-secret' => 'Client Secret',
+            'client-secret-info' => 'Add your secret key here',
+            'accepted-currencies' => 'Accepted currencies',
+            'accepted-currencies-info' => 'Add currency code comma seperated e.g. USD,INR,...',
+            'buy-now-button-display' => 'Allow customers to directly buy products'
         ],
     ],
 ];

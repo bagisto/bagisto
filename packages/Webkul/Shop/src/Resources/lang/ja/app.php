@@ -15,7 +15,8 @@ return [
     ],
 
     'common' => [
-        'error' => 'エラーが発生しました。しばらく待ってから、再度アクセスしてください。'
+        'error' => 'エラーが発生しました。しばらく待ってから、再度アクセスしてください。',
+        'image-upload-limit' => '画像の最大アップロードサイズは2MBです',
     ],
 
     'home' => [
@@ -407,6 +408,7 @@ return [
         'available-for-order' => '注文可能',
         'settings' => 'Settings',
         'compare_options' => 'Compare Options',
+        'wishlist-options' => 'Wishlist Options'
     ],
 
     'buynow' => [
@@ -453,7 +455,8 @@ return [
             'cart-subtotal' => '小計',
             'cart-remove-action' => '手続きを進めますか。',
             'partial-cart-update' => 'Only some of the product(s) were updated',
-            'link-missing' => ''
+            'link-missing' => '',
+            'minimum-order-message' => 'Minimum order amount is :amount'
         ],
 
         'onepage' => [

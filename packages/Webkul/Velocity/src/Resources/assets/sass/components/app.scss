@@ -230,19 +230,19 @@
 }
 
 .product-card-new {
-
-    width: 19rem;
+    width: 12rem;
+    height: 385px;
     border: none !important;
     margin: 0 5px 10px 10px;
 
     .product-image-container {
-        max-height: 225px;
+        max-height: 190px;
         position: relative;
 
         img {
             width: 100%;
-            height: 100%;
-            max-height: 225px;
+            min-height: 190px;
+            max-height: 190px;
         }
     }
 
@@ -321,7 +321,7 @@
 }
 
 .quick-view-btn-container {
-    left: -12px;
+    left: -20px;
     width: 100%;
     bottom: 10px;
     display: none;
@@ -555,7 +555,8 @@
             min-width: 20px;
             border-radius: 50%;
             position: relative;
-            background: #21A179;
+            color: $white-color;
+            background: $button-primary-bg;
         }
     }
 }
@@ -574,6 +575,7 @@
             padding: 4px;
             min-width: 20px;
             position: absolute;
+            color: $white-color;
             background: $button-primary-bg;
         }
     }
@@ -610,6 +612,7 @@
 
     .mini-cart-container {
         height: 100%;
+        width: 100%;
         font-size: 14px;
         max-height: 200px;
         overflow-y: scroll;
@@ -640,7 +643,7 @@
         .rango-close {
             top: -10px;
             left: -10px;
-            padding: 3px 4px 3px 3px;
+            padding: 0px 4px 3px 3px;
             font-size: 10px;
             max-height: 17px;
             line-height: 1.3rem;
@@ -834,6 +837,7 @@
                     }
 
                     a {
+                        display: block;
                         padding: 10px 15px;
                     }
                 }
@@ -1045,7 +1049,7 @@
                 }
 
                 .filter-left {
-                    @extend .pull-left;
+                    float: left;
                 }
 
                 .filter-right {
@@ -1645,24 +1649,8 @@
 }
 
 .product-price {
-    span:nth-child(1),
-    .special-price,
-    .price-from > span:not(:nth-child(2)) {
-        font-size: 20px !important;
-        font-weight: 600;
-    }
 
-    .price-from {
-        span:nth-child(2) {
-            margin-left: 6px;
-            text-transform: lowercase;
-            display: inline-block !important;
-        }
-
-        span:nth-child(3) {
-            display: block !important;
-        }
-    }
+    height: 72px;
 
     .price-label {
         margin-right: 6px;
@@ -1673,6 +1661,32 @@
         margin-right: 10px;
         text-decoration: line-through;
         display: block;
+    }
+
+    /*
+       for bundle product content is more so adjusting in particular div
+       by using default behaviour i.e. inline
+    */
+    .price-from {
+        .bundle-regular-price {
+            font-size: 12px !important;
+            font-weight: 500;
+            margin-right: 10px;
+            text-decoration: line-through;
+        }
+
+        .bundle-special-price {
+            font-size: 15px !important;
+            font-weight: 600;
+        }
+
+        .bundle-to {
+            display: block;
+            font-size: 15px !important;
+            font-weight: 500;
+            margin-top: 1px;
+            margin-bottom: 1px;
+        }
     }
 
     span {
@@ -1855,6 +1869,7 @@
         top: -1px;
         left: 100%;
         height: 100%;
+        min-height: 330px;
         z-index: 100;
         padding-top: 10px;
         position: absolute;
@@ -2039,7 +2054,7 @@
 .category-container,
 .search-container {
     .grid-card {
-        width: 22rem;
+        width: 15rem;
     }
 }
 
@@ -2274,6 +2289,7 @@
     @extend .scrollable;
 
     max-height: 670px;
+    overflow-x: hidden;
     margin-bottom: 42px;
     padding: 42px 10px 0 10px;
 
@@ -2322,8 +2338,26 @@
     position: relative;
 }
 
-.recetly-viewed-products-wrapper {
+.recently-viewed-products-wrapper {
     padding: 2px;
+
+    .price-from {
+        .bundle-regular-price {
+            display: none;
+        }
+
+        .bundle-special-price {
+            font-size: 15px !important;
+            font-weight: 600;
+        }
+
+        .bundle-to {
+            display: unset;
+            margin: 0 2px;
+            font-size: 15px !important;
+            font-weight: 500;
+        }
+    }
 }
 
 .category-page-wrapper {
@@ -2419,13 +2453,21 @@
     width: 800px;
 }
 
-
+/* compare products */
 .compare-products {
     width: 100%;
+    cursor: pointer;
+    overflow-x: auto;
     padding-bottom: 20px;
     word-break: break-word;
     margin-left: 0 !important;
     margin-right: 10px !important;
+
+    .active {
+        cursor: grabbing;
+        cursor: -webkit-grabbing;
+        transform: scale(1);
+    }
 
     tr {
         width: 100%;
@@ -2451,6 +2493,11 @@
     .action {
         position: relative;
 
+        .btn-add-to-cart {
+            width: 125px !important;
+            white-space: pre-wrap;
+        }
+
         .close-btn {
             right: 0;
             top: 6px;
@@ -2464,18 +2511,6 @@
 
         .compare-icon {
             display: none;
-        }
-    }
-
-    .product-price {
-        span {
-            font-size: 24px !important
-        }
-
-        .price-from {
-            span:nth-child(2) {
-                font-size: 20px !important;
-            }
         }
     }
 
@@ -2494,6 +2529,20 @@
         position: absolute;
         display: inline-block;
     }
+}
+
+/* hide scrollbar for chrome, safari and opera */
+.compare-products::-webkit-scrollbar {
+    display: none;
+}
+
+/* hide scrollbar for ie, edge and firefox */
+.compare-products {
+    /* ie and edge */
+    -ms-overflow-style: none;
+
+    /* firefox */
+    scrollbar-width: none;
 }
 
 //CSS for loader

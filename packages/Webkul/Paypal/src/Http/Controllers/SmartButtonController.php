@@ -3,11 +3,20 @@
 namespace Webkul\Paypal\Http\Controllers;
 
 use Webkul\Checkout\Facades\Cart;
+use Webkul\Paypal\Payment\SmartButton;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
+use PayPalCheckoutSdk\Orders\OrdersCreateRequest;
 
 class SmartButtonController extends Controller
 {
+    /**
+     * SmartButton object
+     *
+     * @var \Webkul\Paypal\Payment\SmartButton
+     */
+    protected $smartButtonClient;
+
     /**
      * OrderRepository object
      *
@@ -30,6 +39,7 @@ class SmartButtonController extends Controller
      * @return void
      */
     public function __construct(
+        SmartButton $smartButtonClient,
         OrderRepository $orderRepository,
         InvoiceRepository $invoiceRepository
     )
@@ -37,14 +47,67 @@ class SmartButtonController extends Controller
         $this->orderRepository = $orderRepository;
 
         $this->invoiceRepository = $invoiceRepository;
+
+        $this->smartButtonClient = $smartButtonClient->client();
     }
 
     /**
-     * Success payment
+     * Success payment.
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function details()
+    public function details(OrdersCreateRequest $request)
+    {
+        $request->prefer('return=representation');
+        $request->body = $this->buildRequestBody();
+        $response = $this->smartButtonClient->execute($request);
+        return response()->json($response);
+    }
+
+    /**
+     * Save order.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function saveOrder()
+    {
+        if (Cart::hasError()) {
+            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
+        }
+
+        try {
+            Cart::collectTotals();
+
+            $this->validateOrder();
+
+            $order = $this->orderRepository->create(Cart::prepareDataForOrder());
+
+            $this->orderRepository->update(['status' => 'processing'], $order->id);
+
+            if ($order->canInvoice()) {
+                $this->invoiceRepository->create($this->prepareInvoiceData($order));
+            }
+
+            Cart::deActivateCart();
+
+            session()->flash('order', $order);
+
+            return response()->json([
+                'success' => true,
+            ]);
+        } catch (\Exception $e) {
+            session()->flash('error', trans('shop::app.common.error'));
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Build request body.
+     *
+     * @return array
+     */
+    protected function buildRequestBody()
     {
         $cart = Cart::getCart();
 
@@ -80,7 +143,12 @@ class SmartButtonController extends Controller
             ],
 
             'application_context' => [
-                'shipping_preference' => 'NO_SHIPPING'
+                'user_action'         => 'PAY_NOW',
+                'shipping_preference' => 'SET_PROVIDED_ADDRESS',
+
+                'payment_method'      => [
+                    'payee_preferred' => 'IMMEDIATE_PAYMENT_REQUIRED',
+                ]
             ],
 
             'purchase_units' => [
@@ -138,12 +206,12 @@ class SmartButtonController extends Controller
     }
 
     /**
-     * Return cart items
+     * Return cart items.
      *
      * @param  string  $cart
      * @return array
      */
-    public function getLineItems($cart)
+    protected function getLineItems($cart)
     {
         $lineItems = [];
 
@@ -156,6 +224,7 @@ class SmartButtonController extends Controller
                 'quantity'    => $item->quantity,
                 'name'        => $item->name,
                 'sku'         => $item->sku,
+                'category'    => $item->product->getTypeInstance()->isStockable() ? 'PHYSICAL_GOODS' : 'DIGITAL_GOODS',
             ];
         }
 
@@ -163,12 +232,12 @@ class SmartButtonController extends Controller
     }
 
     /**
-     * Return convert multiple address lines into 2 address lines
+     * Return convert multiple address lines into 2 address lines.
      *
      * @param  string  $address
      * @return array
      */
-    public function getAddressLines($address)
+    protected function getAddressLines($address)
     {
         $address = explode(PHP_EOL, $address, 2);
 
@@ -184,47 +253,7 @@ class SmartButtonController extends Controller
     }
 
     /**
-     * Save order
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function saveOrder()
-    {
-        if (Cart::hasError()) {
-            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
-        }
-
-        try {
-            Cart::collectTotals();
-
-            $this->validateOrder();
-
-            $cart = Cart::getCart();
-
-            $order = $this->orderRepository->create(Cart::prepareDataForOrder());
-
-            $this->orderRepository->update(['status' => 'processing'], $order->id);
-
-            if ($order->canInvoice()) {
-                $invoice = $this->invoiceRepository->create($this->prepareInvoiceData($order));
-            }
-
-            Cart::deActivateCart();
-
-            session()->flash('order', $order);
-
-            return response()->json([
-                'success' => true,
-            ]);
-        } catch (\Exception $e) {
-            session()->flash('error', trans('shop::app.common.error'));
-
-            throw $e;
-        }
-    }
-
-    /**
-     * Prepares order's invoice data for creation
+     * Prepares order's invoice data for creation.
      *
      * @param  \Webkul\Sales\Models\Order  $order
      * @return array
@@ -241,13 +270,19 @@ class SmartButtonController extends Controller
     }
 
     /**
-     * Validate order before creation
+     * Validate order before creation.
      *
      * @return void|\Exception
      */
-    public function validateOrder()
+    protected function validateOrder()
     {
         $cart = Cart::getCart();
+
+        $minimumOrderAmount = (int) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
+
+        if (! $cart->checkMinimumOrder()) {
+            throw new \Exception(trans('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]));
+        }
 
         if ($cart->haveStockableItems() && ! $cart->shipping_address) {
             throw new \Exception(trans('Please check shipping address.'));

@@ -8,6 +8,7 @@ use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Datatypes\CartItemValidationResult;
 use Webkul\Product\Repositories\ProductImageRepository;
+use Webkul\Product\Repositories\ProductVideoRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
@@ -47,6 +48,7 @@ class Downloadable extends AbstractType
         'admin::catalog.products.accordians.downloadable',
         'admin::catalog.products.accordians.channels',
         'admin::catalog.products.accordians.product-links',
+        'admin::catalog.products.accordians.videos',
     ];
 
     /**
@@ -79,6 +81,7 @@ class Downloadable extends AbstractType
      * @param \Webkul\Product\Repositories\ProductDownloadableLinkRepository   $productDownloadableLinkRepository
      * @param \Webkul\Product\Repositories\ProductDownloadableSampleRepository $productDownloadableSampleRepository
      * @param \Webkul\Product\Helpers\ProductImage                             $productImageHelper
+     * @param \Webkul\Product\Repositories\ProductVideoRepository              $productVideoRepository
      *
      * @return void
      */
@@ -90,7 +93,8 @@ class Downloadable extends AbstractType
         productImageRepository $productImageRepository,
         ProductDownloadableLinkRepository $productDownloadableLinkRepository,
         ProductDownloadableSampleRepository $productDownloadableSampleRepository,
-        ProductImage $productImageHelper
+        ProductImage $productImageHelper,
+        ProductVideoRepository $productVideoRepository
     )
     {
         parent::__construct(
@@ -99,7 +103,8 @@ class Downloadable extends AbstractType
             $attributeValueRepository,
             $productInventoryRepository,
             $productImageRepository,
-            $productImageHelper
+            $productImageHelper,
+            $productVideoRepository
         );
 
         $this->productDownloadableLinkRepository = $productDownloadableLinkRepository;

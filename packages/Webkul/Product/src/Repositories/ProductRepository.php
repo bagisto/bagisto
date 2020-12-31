@@ -16,6 +16,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Webkul\Product\Models\ProductAttributeValueProxy;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Storage;
 
 class ProductRepository extends Repository
 {
@@ -122,8 +123,8 @@ class ProductRepository extends Repository
 
         if ($categoryId) {
             $qb->where('product_categories.category_id', $categoryId);
-        }    
-        
+        }
+
         return $qb->get();
     }
 
@@ -334,7 +335,7 @@ class ProductRepository extends Repository
      */
     public function getNewProducts()
     {
-        $count = core()->getConfigData('catalog.products.homepage.no_of_new_product_homepage'); 
+        $count = core()->getConfigData('catalog.products.homepage.no_of_new_product_homepage');
 
         $results = app(ProductFlatRepository::class)->scopeQuery(function ($query) {
             $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
@@ -569,8 +570,11 @@ class ProductRepository extends Repository
             if ($attribute->code === 'price') {
                 $query->orderBy('min_price', $direction);
             } else {
-                $query->orderBy($sort === 'created_at' ? 'product_flat.created_at' : $attribute->code, $direction);
+                $query->orderBy($attribute->code, $direction);
             }
+        } else {
+            /* `created_at` is not an attribute so it will be in else case */
+            $query->orderBy('product_flat.created_at', $direction);
         }
 
         return $query;
@@ -614,7 +618,7 @@ class ProductRepository extends Repository
     {
         $ids = [];
 
-        foreach (['name', 'sku', 'status', 'url_key'] as $code) {
+        foreach (['name', 'sku', 'product_number', 'status', 'url_key'] as $code) {
             $ids[$code] = Attribute::query()->where(['code' => $code])->firstOrFail()->id;
         }
 
@@ -675,6 +679,18 @@ class ProductRepository extends Repository
                 $newProductFlat->sku = $copiedProduct->sku;
             }
 
+            // change product number
+            if ($oldValue->attribute_id === $attributeIds['product_number']) {
+                $copyProductNumber = trans('admin::app.copy-of-slug');
+                $copiedProductNumber = sprintf('%s%s-%s',
+                    Str::startsWith($originalProduct->product_number, $copyProductNumber) ? '' : $copyProductNumber,
+                    $originalProduct->product_number,
+                    $randomSuffix
+                );
+                $newValue->text_value = $copiedProductNumber;
+                $newProductFlat->product_number = $copiedProductNumber;
+            }
+
             // force the copied product to be inactive so the admin can adjust it before release
             if ($oldValue->attribute_id === $attributeIds['status']) {
                 $newValue->boolean_value = 0;
@@ -719,7 +735,17 @@ class ProductRepository extends Repository
 
         if (! in_array('images', $attributesToSkip)) {
             foreach ($originalProduct->images as $image) {
-                $copiedProduct->images()->save($image->replicate());
+                $copiedProductImage = $copiedProduct->images()->save($image->replicate());
+
+                $this->copyProductImageVideo($image, $copiedProduct, $copiedProductImage);
+            }
+        }
+
+        if (! in_array('videos', $attributesToSkip)) {
+            foreach ($originalProduct->videos as $video) {
+                $copiedProductVideo = $copiedProduct->videos()->save($video->replicate());
+
+                $this->copyProductImageVideo($video, $copiedProduct, $copiedProductVideo);
             }
         }
 
@@ -749,5 +775,25 @@ class ProductRepository extends Repository
                 'child_id'  => $copiedProduct->id,
             ]);
         }
+    }
+
+    /**
+     * @object $data
+     * @object $copiedProduct
+     * @object $copiedProductImageVideo
+     */
+    private function copyProductImageVideo($data, $copiedProduct, $copiedProductImageVideo): void
+    {
+        $path = explode("/", $data->path);
+
+        $path = 'product/' . $copiedProduct->id .'/'. end($path);
+
+        $copiedProductImageVideo->path = $path;
+
+        $copiedProductImageVideo->save();
+
+        Storage::makeDirectory('product/' . $copiedProduct->id);
+
+        Storage::copy($data->path, $copiedProductImageVideo->path);
     }
 }

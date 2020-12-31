@@ -7,6 +7,7 @@ use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
+use Webkul\Product\Repositories\ProductVideoRepository;
 use Webkul\Product\Repositories\ProductGroupedProductRepository;
 use Webkul\Product\Helpers\ProductImage;
 use Webkul\Product\Models\ProductAttributeValue;
@@ -38,7 +39,8 @@ class Grouped extends AbstractType
         'admin::catalog.products.accordians.categories',
         'admin::catalog.products.accordians.grouped-products',
         'admin::catalog.products.accordians.channels',
-        'admin::catalog.products.accordians.product-links'
+        'admin::catalog.products.accordians.product-links',
+        'admin::catalog.products.accordians.videos',
     ];
 
     /**
@@ -51,13 +53,14 @@ class Grouped extends AbstractType
     /**
      * Create a new product type instance.
      *
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository            $attributeRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository                $productRepository
      * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $attributeValueRepository
-     * @param  \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
-     * @param  \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
+     * @param  \Webkul\Product\Repositories\ProductInventoryRepository       $productInventoryRepository
+     * @param  \Webkul\Product\Repositories\ProductImageRepository           $productImageRepository
      * @param  \Webkul\Product\Repositories\ProductGroupedProductRepository  $productGroupedProductRepository
-     * @param  \Webkul\Product\Helpers\ProductImage  $productImageHelper
+     * @param  \Webkul\Product\Helpers\ProductImage                          $productImageHelper
+     * @param  \Webkul\Product\Repositories\ProductVideoRepository           $productVideoRepository
      * @return void
      */
     public function __construct(
@@ -67,7 +70,8 @@ class Grouped extends AbstractType
         ProductInventoryRepository $productInventoryRepository,
         ProductImageRepository $productImageRepository,
         ProductGroupedProductRepository $productGroupedProductRepository,
-        ProductImage $productImageHelper
+        ProductImage $productImageHelper,
+        ProductVideoRepository $productVideoRepository
     )
     {
         parent::__construct(
@@ -76,7 +80,8 @@ class Grouped extends AbstractType
             $attributeValueRepository,
             $productInventoryRepository,
             $productImageRepository,
-            $productImageHelper
+            $productImageHelper,
+            $productVideoRepository
         );
 
         $this->productGroupedProductRepository = $productGroupedProductRepository;

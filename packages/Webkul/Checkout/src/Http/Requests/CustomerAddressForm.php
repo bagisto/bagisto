@@ -3,18 +3,20 @@
 namespace Webkul\Checkout\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class CustomerAddressForm extends FormRequest
 {
-    protected $rules;
+    /**
+     * Rules.
+     */
+    protected $rules = [];
 
     /**
      * Determine if the product is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -24,14 +26,22 @@ class CustomerAddressForm extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
+        $customerAddressIds = $this->getCustomerAddressIds();
+
         if (isset($this->get('billing')['address_id'])) {
-            $this->rules = [
+            $billingAddressRules = [
                 'billing.address_id' => ['required'],
             ];
+
+            if (! empty($customerAddressIds)) {
+                $billingAddressRules['billing.address_id'][] = "in:{$customerAddressIds}";
+            }
+
+            $this->mergeWithRules($billingAddressRules);
         } else {
-            $this->rules = [
+            $this->mergeWithRules([
                 'billing.first_name' => ['required'],
                 'billing.last_name'  => ['required'],
                 'billing.email'      => ['required'],
@@ -41,16 +51,22 @@ class CustomerAddressForm extends FormRequest
                 'billing.postcode'   => ['required'],
                 'billing.phone'      => ['required'],
                 'billing.country'    => ['required'],
-            ];
+            ]);
         }
 
-        if (isset($this->get('billing')['use_for_shipping']) && !$this->get('billing')['use_for_shipping']) {
+        if (isset($this->get('billing')['use_for_shipping']) && ! $this->get('billing')['use_for_shipping']) {
             if (isset($this->get('shipping')['address_id'])) {
-                $this->rules = array_merge($this->rules, [
+                $shippingAddressRules = [
                     'shipping.address_id' => ['required'],
-                ]);
+                ];
+
+                if (! empty($customerAddressIds)) {
+                    $shippingAddressRules['shipping.address_id'][] = "in:{$customerAddressIds}";
+                }
+
+                $this->mergeWithRules($shippingAddressRules);
             } else {
-                $this->rules = array_merge($this->rules, [
+                $this->mergeWithRules([
                     'shipping.first_name' => ['required'],
                     'shipping.last_name'  => ['required'],
                     'shipping.email'      => ['required'],
@@ -65,5 +81,29 @@ class CustomerAddressForm extends FormRequest
         }
 
         return $this->rules;
+    }
+
+    /**
+     * Merge additional rules.
+     *
+     * @return string
+     */
+    private function mergeWithRules($additionalRules): void
+    {
+        $this->rules = array_merge($this->rules, $additionalRules);
+    }
+
+    /**
+     * If customer is placing order then fetching all address ids to check with the request ids.
+     *
+     * @return string
+     */
+    private function getCustomerAddressIds(): string
+    {
+        if ($customer = auth('customer')->user()) {
+            return $customer->addresses->pluck('id')->join(',');
+        }
+
+        return '';
     }
 }

@@ -187,6 +187,7 @@ return [
         'shipment-date' => 'تاریخ ارسال',
         'shipment-to' => 'حمل و نقل به',
         'sku' => 'واحد نگهداری موجودی',
+        'product-number' => 'شماره محصول',
         'price' => 'قیمت',
         'qty' => 'مقدار',
         'permission-type' => 'نوع مجوز',
@@ -526,7 +527,13 @@ return [
             'checkbox' => 'Checkbox',
             'multiselect' => 'Multiselect',
             'new-option' => 'New Option',
-            'is-default' => 'Is Default'
+            'is-default' => 'Is Default',
+            'remove-image-btn-title' => 'Remove Image',
+            'videos' => 'Videos',
+            'video' => 'Video',
+            'add-video-btn-title' => 'Add Video',
+            'remove-video-btn-title' => 'Remove Video',
+            'not-support-video' => 'Your browser does not support the video tag.',
         ],
 
         'attributes' => [
@@ -802,7 +809,9 @@ return [
             'seo-title' => 'عنوان Meta',
             'seo-description' => 'شرح Meta',
             'seo-keywords' => 'کلید واژه ها Meta',
-
+            'maintenance-mode' => 'Maintenance Mode',
+            'maintenance-mode-text' => 'Message',
+            'allowed-ips' => 'Allowed IPs'
         ],
 
         'sliders' => [
@@ -1276,6 +1285,7 @@ return [
             'description' => 'توضیحات',
             'rate' => 'نرخ',
             'status' => 'وضعیت',
+            'calculate-tax' => 'محاسبه مالیات',
             'type' => 'نوع',
             'payment-methods' => 'روش های پرداخت',
             'cash-on-delivery' => 'پرداخت در محل',
@@ -1312,6 +1322,8 @@ return [
             'order-number-length' => 'طول شماره سفارش',
             'order-number-suffix' => 'تعداد کافی شماره سفارش',
             'order-number-generator-class' => 'تولید کننده شماره سفارش',
+            'minimum-order' => 'Minimum Order Settings',
+            'minimum-order-amount' => 'Minimum Order Amount',
             'default' => 'پیش فرض',
             'sandbox' => 'Sandbox',
             'all-channels' => 'همه',
@@ -1356,9 +1368,14 @@ return [
             'custom-scripts' => 'Custom Scripts',
             'custom-css' => 'Custom CSS',
             'custom-javascript' => 'Custom Javascript',
-            'paypal-smart-button' => 'Paypal Smart Button',
+            'paypal-smart-button' => 'PayPal',
             'client-id' => 'Client Id',
-            'client-id-info' => 'Use "sb" for testing.'
+            'client-id-info' => 'Use "sb" for testing.',
+            'client-secret' => 'Client Secret',
+            'client-secret-info' => 'Add your secret key here',
+            'accepted-currencies' => 'Accepted currencies',
+            'accepted-currencies-info' => 'Add currency code comma seperated e.g. USD,INR,...',
+            'buy-now-button-display' => 'Allow customers to directly buy products'
         ]
     ]
 ];

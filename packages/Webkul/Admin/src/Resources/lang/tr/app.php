@@ -185,6 +185,7 @@ return [
         'shipment-date' => 'Kargo Tarihi',
         'shipment-to' => 'Kargo Bilgileri',
         'sku' => 'Barkod',
+        'product-number' => 'Ürün numarası',
         'price' => 'Fiyat',
         'qty' => 'Miktar',
         'permission-type' => 'İzin Tipi',
@@ -522,7 +523,13 @@ return [
             'checkbox' => 'Onay Kutusu',
             'multiselect' => 'Çoklu Seçim',
             'new-option' => 'Yeni Seçenek',
-            'is-default' => 'Varsayılan'
+            'is-default' => 'Varsayılan',
+            'remove-image-btn-title' => 'Remove Image',
+            'videos' => 'Videos',
+            'video' => 'Video',
+            'add-video-btn-title' => 'Add Video',
+            'remove-video-btn-title' => 'Remove Video',
+            'not-support-video' => 'Your browser does not support the video tag.',
         ],
 
         'attributes' => [
@@ -795,7 +802,9 @@ return [
             'seo-title' => 'Meta Başlık',
             'seo-description' => 'Meta Açıklama',
             'seo-keywords' => 'Meta Anahtar Kelimeler',
-
+            'maintenance-mode' => 'Maintenance Mode',
+            'maintenance-mode-text' => 'Message',
+            'allowed-ips' => 'Allowed IPs'
         ],
 
         'sliders' => [
@@ -1265,11 +1274,12 @@ return [
             'description' => 'Açıklama',
             'rate' => 'Oran',
             'status' => 'Durum',
+            'calculate-tax' => 'Vergiyi Hesapla',
             'type' => 'Tipi',
             'payment-methods' => 'Ödeme Türleri',
             'cash-on-delivery' => 'Kapıda Ödeme',
             'money-transfer' => 'Havale/EFT',
-            'paypal-standard' => 'Paypal',
+            'paypal-standard' => 'PayPal',
             'business-account' => 'İş Hesabı',
             'newsletter' => 'Bülten Aboneliği',
             'newsletter-subscription' => 'Bülten Aboneliğine İzin Ver',
@@ -1301,6 +1311,8 @@ return [
             'order-number-length' => 'Numara Uzunluğu',
             'order-number-suffix' => 'Numara Son Eki',
             'order-number-generator-class' => 'Sipariş Numarası Üreticisi',
+            'minimum-order' => 'Minimum Order Settings',
+            'minimum-order-amount' => 'Minimum Order Amount',
             'default' => 'Varsayılan',
             'sandbox' => 'Havuz',
             'all-channels' => 'Tümü',
@@ -1342,9 +1354,14 @@ return [
             'custom-scripts' => 'Custom Scripts',
             'custom-css' => 'Custom CSS',
             'custom-javascript' => 'Custom Javascript',
-            'paypal-smart-button' => 'Paypal Smart Button',
+            'paypal-smart-button' => 'PayPal',
             'client-id' => 'Client Id',
-            'client-id-info' => 'Use "sb" for testing.'
+            'client-id-info' => 'Use "sb" for testing.',
+            'client-secret' => 'Client Secret',
+            'client-secret-info' => 'Add your secret key here',
+            'accepted-currencies' => 'Accepted currencies',
+            'accepted-currencies-info' => 'Add currency code comma seperated e.g. USD,INR,...',
+            'buy-now-button-display' => 'Allow customers to directly buy products'
         ]
     ]
 ];

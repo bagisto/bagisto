@@ -17,6 +17,7 @@ return [
 
     'common' => [
         'error' => 'Bir şeyler ters gitti, lütfen tekrar deneyin.',
+        'image-upload-limit' => 'Maksimum resim yükleme boyutu 2 MB',
         'no-result-found' => 'Kayıt bulunamadı.'
     ],
 
@@ -438,6 +439,7 @@ return [
         'available-for-order' => 'Sipariş İçin Uygun',
         'settings' => 'Settings',
         'compare_options' => 'Compare Options',
+        'wishlist-options' => 'Wishlist Options'
     ],
 
     // 'reviews' => [
@@ -492,7 +494,8 @@ return [
             'link-missing' => '',
             'event' => [
                 'expired' => 'Bu eylemin geçerliliği sona erdi.'
-            ]
+            ],
+            'minimum-order-message' => 'Minimum order amount is :amount'
         ],
 
         'onepage' => [

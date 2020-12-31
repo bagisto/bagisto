@@ -69,7 +69,7 @@
             <div class="category-container right">
                 <div class="row remove-padding-margin">
                     <div class="pl0 col-12">
-                        <h1 class="fw6 mb10">{{ $category->name }}</h1>
+                        <h2 class="fw6 mb10">{{ $category->name }}</h2>
 
                         @if ($isDescriptionDisplayMode)
                             @if ($category->description)
@@ -102,7 +102,7 @@
                             style="width: 100%"
                         @endif>
 
-                        <shimmer-component v-if="isLoading && !isMobile()" shimmer-count="4"></shimmer-component>
+                        <shimmer-component v-if="isLoading" shimmer-count="4"></shimmer-component>
 
                         <template v-else-if="products.length > 0">
                             @if ($toolbarHelper->getCurrentMode() == 'grid')

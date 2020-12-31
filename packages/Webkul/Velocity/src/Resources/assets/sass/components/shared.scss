@@ -233,7 +233,6 @@
 
 .full-width {
     width: 100%;
-    display: block;
 }
 
 .full-image {
@@ -509,7 +508,6 @@
 
         .add-to-cart-btn {
             float: left;
-            max-width: 150px;
             display: inline-block;
         }
     }
@@ -599,7 +597,7 @@
         padding: 10px 0 !important;
 
         .product-name {
-            width: 17rem;
+            width: 100%;
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
