@@ -1286,6 +1286,7 @@ return [
             'description' => 'Omschrijving',
             'rate' => 'Tarief',
             'status' => 'Toestand',
+            'calculate-tax' => 'Beregn skat',
             'type' => 'Type',
             'payment-methods' => 'Betaalmethodes',
             'cash-on-delivery' => 'Rembours',

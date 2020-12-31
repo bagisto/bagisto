@@ -1274,6 +1274,7 @@ return [
             'description' => 'Açıklama',
             'rate' => 'Oran',
             'status' => 'Durum',
+            'calculate-tax' => 'Vergiyi Hesapla',
             'type' => 'Tipi',
             'payment-methods' => 'Ödeme Türleri',
             'cash-on-delivery' => 'Kapıda Ödeme',
