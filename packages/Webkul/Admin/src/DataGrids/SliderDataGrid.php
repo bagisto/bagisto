@@ -2,12 +2,13 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\Support\Facades\DB;
+use Webkul\Core\Models\Channel;
 use Webkul\Ui\DataGrid\DataGrid;
+use Illuminate\Support\Facades\DB;
 
 class SliderDataGrid extends DataGrid
 {
-    protected $index = 'slider_id';
+    protected $index = 'id';
 
     protected $sortOrder = 'desc';
 
@@ -15,7 +16,11 @@ class SliderDataGrid extends DataGrid
 
     protected $channel = 'all';
 
-    /** @var string[] contains the keys for which extra filters to render */
+    /**
+     * Contains the keys for which extra filters to render.
+     *
+     * @var string[]
+     **/
     protected $extraFilters = [
         'channels',
         'locales',
@@ -26,25 +31,32 @@ class SliderDataGrid extends DataGrid
         parent::__construct();
 
         $this->locale = request()->get('locale') ?? 'all';
-        $this->channel = request()->get('channel') ?? 'all';
+        $this->channel = request()->get('channel')
+            ? Channel::find(request()->get('channel'))->code
+            : 'all';
     }
 
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('sliders as sl')
-          ->addSelect('sl.id as slider_id', 'sl.title', 'sl.locale', 'ch.name', 'ch.code')
-          ->leftJoin('channels as ch', 'sl.channel_id', '=', 'ch.id');
+          ->select('sl.id', 'sl.title', 'sl.locale', 'ct.channel_id', 'ct.name', 'ch.code')
+          ->leftJoin('channels as ch', 'sl.channel_id', '=', 'ch.id')
+          ->leftJoin('channel_translations as ct', 'ch.id', '=', 'ct.channel_id')
+          ->where('ct.locale', app()->getLocale());
 
         if ($this->locale !== 'all') {
-            $queryBuilder->where('locale', $this->locale);
+            $queryBuilder->where('sl.locale', $this->locale);
         }
 
         if ($this->channel !== 'all') {
             $queryBuilder->where('ch.code', $this->channel);
         }
 
-        $this->addFilter('slider_id', 'sl.id');
-        $this->addFilter('channel_name', 'ch.name');
+        $this->addFilter('id', 'sl.id');
+        $this->addFilter('title', 'sl.title');
+        $this->addFilter('locale', 'sl.locale');
+        $this->addFilter('channel_name', 'ct.name');
+        $this->addFilter('code', 'ch.code');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -52,7 +64,7 @@ class SliderDataGrid extends DataGrid
     public function addColumns()
     {
         $this->addColumn([
-            'index'      => 'slider_id',
+            'index'      => 'id',
             'label'      => trans('admin::app.datagrid.id'),
             'type'       => 'number',
             'searchable' => false,
