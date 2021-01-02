@@ -13,7 +13,7 @@
 
             @if (count($categories))
                 <div class="list-container">
-                    <span class="list-heading">Categories</span>
+                    <span class="list-heading">{{ __('shop::app.footer.categories') }}</span>
 
                     <ul class="list-group">
                         @foreach ($categories as $key => $category)

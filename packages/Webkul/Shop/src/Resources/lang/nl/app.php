@@ -50,6 +50,7 @@ return [
     ],
 
     'footer' => [
+        'categories' => 'Categories',
         'subscribe-newsletter' => 'Inschrijven nieuwsbrief',
         'subscribe' => 'Inschrijven',
         'locale' => 'Taal',

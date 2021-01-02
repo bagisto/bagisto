@@ -50,6 +50,7 @@ return [
     ],
 
     'footer' => [
+        'categories' => 'Categories',
         'subscribe-newsletter' => 'Bültene Kaydol',
         'subscribe' => 'Abone Ol',
         'locale' => 'Dil',

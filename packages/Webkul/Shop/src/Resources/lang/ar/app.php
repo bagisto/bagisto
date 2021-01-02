@@ -51,6 +51,7 @@ return [
     ],
 
     'footer' => [
+        'categories' => 'Categories',
         'subscribe-newsletter' => 'اشترك في الرسائل الدورية.',
         'subscribe' => 'اشترك',
         'locale' => 'اللغة',

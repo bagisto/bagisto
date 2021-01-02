@@ -51,6 +51,7 @@ return [
     ],
 
     'footer' => [
+        'categories' => 'Categorias',
         'subscribe-newsletter' => 'Assinar Newsletter',
         'subscribe' => 'Assinar',
         'locale' => 'Idioma',

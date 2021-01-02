@@ -51,6 +51,7 @@ return [
     ],
 
     'footer' => [
+        'categories' => 'Categories',
         'subscribe-newsletter' => 'عضویت در خبرنامه',
         'subscribe' => 'اشتراک در',
         'locale' => 'محل',
