@@ -35,7 +35,7 @@ class Order
             /* email to admin */
             $configKey = 'emails.general.notifications.emails.general.notifications.new-admin';
             if (core()->getConfigData($configKey)) {
-                $this->prepareMail(env('APP_LOCALE'), new NewAdminNotification($order));
+                $this->prepareMail(config('app.locale'), new NewAdminNotification($order));
             }
         } catch (\Exception $e) {
             report($e);
@@ -112,7 +112,7 @@ class Order
             /* email to admin */
             $configKey = 'emails.general.notifications.emails.general.notifications.new-inventory-source';
             if (core()->getConfigData($configKey)) {
-                $this->prepareMail(env('APP_LOCALE'), new NewInventorySourceNotification($shipment));
+                $this->prepareMail(config('app.locale'), new NewInventorySourceNotification($shipment));
             }
         } catch (\Exception $e) {
             report($e);
@@ -137,7 +137,7 @@ class Order
             /* email to admin */
             $configKey = 'emails.general.notifications.emails.general.notifications.new-admin';
             if (core()->getConfigData($configKey)) {
-                $this->prepareMail(env('APP_LOCALE'), new CancelOrderAdminNotification($order));
+                $this->prepareMail(config('app.locale'), new CancelOrderAdminNotification($order));
             }
         } catch (\Exception $e) {
             report($e);
