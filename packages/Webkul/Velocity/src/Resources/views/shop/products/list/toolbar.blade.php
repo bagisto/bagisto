@@ -78,7 +78,7 @@
                     <span class="fs24 fw6">
                         {{ __('velocity::app.shop.general.filter') }}
                     </span>
-                    <span class="pull-right link-color" @click="toggleLayeredNavigation">
+                    <span class="float-right link-color" @click="toggleLayeredNavigation">
                         {{ __('velocity::app.responsive.header.done') }}
                     </span>
                 </div>

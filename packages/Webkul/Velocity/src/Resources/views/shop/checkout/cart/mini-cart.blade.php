@@ -1,4 +1,4 @@
-<div class="mini-cart-container pull-right">
+<div class="mini-cart-container">
     <mini-cart
         view-cart="{{ route('shop.checkout.cart.index') }}"
         cart-text="{{ __('shop::app.minicart.view-cart') }}"
