@@ -140,9 +140,8 @@
 
     <script type="text/x-template" id="quantity-changer-template">
         <div class="quantity control-group" :class="[errors.has(controlName) ? 'has-error' : '']">
-            <span :class="floatClassName">
-                <label class="required">{{ __('shop::app.products.quantity') }}</label>
-
+            <label class="required">{{ __('shop::app.products.quantity') }}</label>
+            <span class="quantity-container">
                 <button type="button" class="decrease" @click="decreaseQty()">-</button>
 
                 <input :name="controlName" class="control" :value="qty" :v-validate="validations" data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;" readonly>
@@ -219,8 +218,7 @@
 
             data: function() {
                 return {
-                    qty: this.quantity,
-                    floatClassName: $('body').hasClass('rtl') ? 'pull-right' : 'pull-left'
+                    qty: this.quantity
                 }
             },
 
