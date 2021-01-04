@@ -28,11 +28,6 @@ class ProductImage extends AbstractProduct
         $this->productRepository = $productRepository;
     }
 
-    public function sampleText()
-    {
-        echo "Sample Text";
-    }
-
     /**
      * Retrieve collection of gallery images
      *

@@ -10,7 +10,9 @@ use Webkul\Product\Console\Commands\PriceUpdate;
 use Webkul\Product\Console\Commands\GenerateProducts;
 use Illuminate\Foundation\AliasLoader;
 use Webkul\Product\Facades\ProductImage as ProductImageFacade;
+use Webkul\Product\Facades\ProductVideo as ProductVideoFacade;
 use Webkul\Product\ProductImage;
+use Webkul\Product\ProductVideo;
 
 class ProductServiceProvider extends ServiceProvider
 {
@@ -93,11 +95,20 @@ class ProductServiceProvider extends ServiceProvider
      */
     protected function registerFacades()
     {
+        // Product image
         $loader = AliasLoader::getInstance();
         $loader->alias('productimage', ProductImageFacade::class);
 
         $this->app->singleton('productimage', function () {
             return app()->make(ProductImage::class);
+        });
+
+        // Product video
+        $loader = AliasLoader::getInstance();
+        $loader->alias('productvideo', ProductVideoFacade::class);
+
+        $this->app->singleton('productvideo', function () {
+            return app()->make(ProductVideo::class);
         });
     }
 
