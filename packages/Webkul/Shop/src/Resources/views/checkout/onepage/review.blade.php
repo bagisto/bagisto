@@ -68,8 +68,6 @@
 
     </div>
 
-    @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
-
     <div class="cart-item-list mt-20">
         @foreach ($cart->items as $item)
             @php

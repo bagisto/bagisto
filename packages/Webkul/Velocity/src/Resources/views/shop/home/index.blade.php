@@ -1,6 +1,5 @@
 @extends('shop::layouts.master')
 
-@inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 @inject ('productRatingHelper', 'Webkul\Product\Helpers\Review')
 
 @php

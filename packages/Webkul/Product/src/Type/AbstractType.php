@@ -849,7 +849,7 @@ abstract class AbstractType
      */
     public function getBaseImage($item)
     {
-        return $this->productImageHelper->getProductBaseImage($item->product);
+        return ProductImage::getProductBaseImage($item->product);
     }
 
     /**

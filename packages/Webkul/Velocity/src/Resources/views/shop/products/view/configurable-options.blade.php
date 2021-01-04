@@ -1,11 +1,10 @@
 @if (Webkul\Product\Helpers\ProductType::hasVariants($product->type))
 
     @inject ('configurableOptionHelper', 'Webkul\Product\Helpers\ConfigurableOption')
-    @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
     @php
         $config = $configurableOptionHelper->getConfigurationConfig($product);
-        $galleryImages = $productImageHelper->getGalleryImages($product);
+        $galleryImages = ProductImage::getGalleryImages($product);
     @endphp
 
     {!! view_render_event('bagisto.shop.products.view.configurable-options.before', ['product' => $product]) !!}
