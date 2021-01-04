@@ -5,7 +5,7 @@
             type="number"
             :value="showFilled"
             name="rating"
-            class="hidden" />
+            class="d-none" />
 
         <i
             :class="`material-icons ${editable ? 'cursor-pointer' : ''}`"

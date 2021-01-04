@@ -807,7 +807,9 @@ return [
             'seo-title' => 'Meta Başlık',
             'seo-description' => 'Meta Açıklama',
             'seo-keywords' => 'Meta Anahtar Kelimeler',
-
+            'maintenance-mode' => 'Maintenance Mode',
+            'maintenance-mode-text' => 'Message',
+            'allowed-ips' => 'Allowed IPs'
         ],
 
         'sliders' => [
@@ -1339,6 +1341,7 @@ return [
             'description' => 'Açıklama',
             'rate' => 'Oran',
             'status' => 'Durum',
+            'calculate-tax' => 'Vergiyi Hesapla',
             'type' => 'Tipi',
             'payment-methods' => 'Ödeme Türleri',
             'cash-on-delivery' => 'Kapıda Ödeme',
@@ -1424,7 +1427,8 @@ return [
             'client-secret' => 'Client Secret',
             'client-secret-info' => 'Add your secret key here',
             'accepted-currencies' => 'Accepted currencies',
-            'accepted-currencies-info' => 'Add currency code comma seperated e.g. USD,INR,...'
+            'accepted-currencies-info' => 'Add currency code comma seperated e.g. USD,INR,...',
+            'buy-now-button-display' => 'Allow customers to directly buy products'
         ]
     ]
 ];

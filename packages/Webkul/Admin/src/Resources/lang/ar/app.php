@@ -816,7 +816,9 @@ return [
             'seo-title' => 'عنوان Meta',
             'seo-description' => 'وصف Meta',
             'seo-keywords' => 'الكلمات الدالة Meta',
-
+            'maintenance-mode' => 'Maintenance Mode',
+            'maintenance-mode-text' => 'Message',
+            'allowed-ips' => 'Allowed IPs'
         ],
 
         'sliders' => [
@@ -1355,6 +1357,7 @@ return [
             'description' => 'وصف',
             'rate' => 'معدل',
             'status' => 'الحالة',
+            'calculate-tax' => 'احسب الضريبة',
             'type' => 'اكتب',
             'payment-methods' => 'طرق الدفع',
             'cash-on-delivery' => 'الدفع عند الاستلام',
@@ -1446,7 +1449,8 @@ return [
             'client-secret' => 'Client Secret',
             'client-secret-info' => 'Add your secret key here',
             'accepted-currencies' => 'Accepted currencies',
-            'accepted-currencies-info' => 'Add currency code comma seperated e.g. USD,INR,...'
+            'accepted-currencies-info' => 'Add currency code comma seperated e.g. USD,INR,...',
+            'buy-now-button-display' => 'Allow customers to directly buy products'
         ]
     ]
 ];

@@ -20,7 +20,7 @@
                 </div>
 
                 <div class="error-messgae" style="font-size: 24px;color: #5E5E5E">
-                    {{ __('admin::app.error.right-back') }}
+                    {{ core()->getCurrentChannel()->maintenance_mode_text ?: __('admin::app.error.right-back') }}
                 </div>
             </div>
 

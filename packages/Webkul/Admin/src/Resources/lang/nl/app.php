@@ -815,7 +815,9 @@ return [
             'seo-title' => 'Meta titel',
             'seo-description' => 'Meta omschrijving',
             'seo-keywords' => 'Meta trefwoorden',
-
+            'maintenance-mode' => 'Maintenance Mode',
+            'maintenance-mode-text' => 'Message',
+            'allowed-ips' => 'Allowed IPs'
         ],
 
         'sliders' => [
@@ -1351,6 +1353,7 @@ return [
             'description' => 'Omschrijving',
             'rate' => 'Tarief',
             'status' => 'Toestand',
+            'calculate-tax' => 'Beregn skat',
             'type' => 'Type',
             'payment-methods' => 'Betaalmethodes',
             'cash-on-delivery' => 'Rembours',
@@ -1438,7 +1441,8 @@ return [
             'client-secret' => 'Client Secret',
             'client-secret-info' => 'Add your secret key here',
             'accepted-currencies' => 'Accepted currencies',
-            'accepted-currencies-info' => 'Add currency code comma seperated e.g. USD,INR,...'
+            'accepted-currencies-info' => 'Add currency code comma seperated e.g. USD,INR,...',
+            'buy-now-button-display' => 'Allow customers to directly buy products'
         ]
     ]
 ];

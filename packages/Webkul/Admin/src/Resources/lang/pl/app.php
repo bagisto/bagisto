@@ -816,7 +816,9 @@ return [
             'seo-title' => 'Meta tytuł',
             'seo-description' => 'Meta opis',
             'seo-keywords' => 'Meta słowa kluczowe',
-
+            'maintenance-mode' => 'Maintenance Mode',
+            'maintenance-mode-text' => 'Message',
+            'allowed-ips' => 'Allowed IPs'
         ],
 
         'sliders' => [
@@ -1352,6 +1354,7 @@ return [
             'description' => 'Opis',
             'rate' => 'Stawka',
             'status' => 'Status',
+            'calculate-tax' => 'Oblicz podatek',
             'type' => 'Rodzaj',
             'payment-methods' => 'Metody płatności',
             'cash-on-delivery' => 'Za pobraniem',
@@ -1427,7 +1430,8 @@ return [
             'client-secret' => 'Client Secret',
             'client-secret-info' => 'Add your secret key here',
             'accepted-currencies' => 'Accepted currencies',
-            'accepted-currencies-info' => 'Add currency code comma seperated e.g. USD,INR,...'
+            'accepted-currencies-info' => 'Add currency code comma seperated e.g. USD,INR,...',
+            'buy-now-button-display' => 'Allow customers to directly buy products'
        ]
     ]
 ];

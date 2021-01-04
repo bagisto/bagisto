@@ -76,6 +76,9 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
     //Checkout Save Payment Method Form
     Route::post('/checkout/save-payment', 'Webkul\Shop\Http\Controllers\OnepageController@savePayment')->name('shop.checkout.save-payment');
 
+    /* check minimum order */
+    Route::post('/checkout/check-minimum-order', 'Webkul\Shop\Http\Controllers\OnepageController@checkMinimumOrder')->name('shop.checkout.check-minimum-order');
+
     //Checkout Save Order
     Route::post('/checkout/save-order', 'Webkul\Shop\Http\Controllers\OnepageController@saveOrder')->name('shop.checkout.save-order');
 

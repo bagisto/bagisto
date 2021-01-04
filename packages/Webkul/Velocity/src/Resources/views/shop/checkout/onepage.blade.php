@@ -145,7 +145,7 @@
                         address: {
                             billing: {
                                 address1: [''],
-
+                                save_as_address: false,
                                 use_for_shipping: true,
                             },
 
@@ -212,10 +212,15 @@
                             this.$validator.validateAll(scope)
                             .then(result => {
                                 if (result) {
-                                    this.$root.showLoader();
-
                                     switch (scope) {
                                         case 'address-form':
+                                            /* loader will activate only when save as address is clicked */
+                                            if (this.address.billing.save_as_address) {
+                                                this.$root.showLoader();
+                                            }
+
+                                            /* this is outside because save as address also calling for
+                                               saving the address in the order only */
                                             this.saveAddress();
                                             break;
 

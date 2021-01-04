@@ -487,7 +487,7 @@ class AttributeTableSeeder extends Seeder
                 'value_per_channel'   => '0',
                 'is_filterable'       => '1',
                 'is_configurable'     => '0',
-                'is_user_defined'     => '0',
+                'is_user_defined'     => '1',
                 'is_visible_on_front' => '1',
                 'use_in_flat'         => '1',
                 'created_at'          => $now,

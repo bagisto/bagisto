@@ -825,7 +825,9 @@ return [
             'seo-title' => 'Meta title',
             'seo-description' => 'Meta description',
             'seo-keywords' => 'Meta keywords',
-
+            'maintenance-mode' => 'Maintenance Mode',
+            'maintenance-mode-text' => 'Message',
+            'allowed-ips' => 'Allowed IPs'
         ],
 
         'sliders' => [
@@ -1369,6 +1371,7 @@ return [
             'description' => 'Description',
             'rate' => 'Rate',
             'status' => 'Status',
+            'calculate-tax' => 'Calculate Tax',
             'type' => 'Type',
             'payment-methods' => 'Payment Methods',
             'cash-on-delivery' => 'Cash On Delivery',
@@ -1455,7 +1458,8 @@ return [
             'client-secret' => 'Client Secret',
             'client-secret-info' => 'Add your secret key here',
             'accepted-currencies' => 'Accepted currencies',
-            'accepted-currencies-info' => 'Add currency code comma seperated e.g. USD,INR,...'
+            'accepted-currencies-info' => 'Add currency code comma seperated e.g. USD,INR,...',
+            'buy-now-button-display' => 'Allow customers to directly buy products'
        ]
     ]
 ];
