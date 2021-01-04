@@ -140,15 +140,17 @@
 
     <script type="text/x-template" id="quantity-changer-template">
         <div class="quantity control-group" :class="[errors.has(controlName) ? 'has-error' : '']">
-            <label class="required">{{ __('shop::app.products.quantity') }}</label>
+            <span :class="floatClassName">
+                <label class="required">{{ __('shop::app.products.quantity') }}</label>
 
-            <button type="button" class="decrease" @click="decreaseQty()">-</button>
+                <button type="button" class="decrease" @click="decreaseQty()">-</button>
 
-            <input :name="controlName" class="control" :value="qty" :v-validate="validations" data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;" readonly>
+                <input :name="controlName" class="control" :value="qty" :v-validate="validations" data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;" readonly>
 
-            <button type="button" class="increase" @click="increaseQty()">+</button>
+                <button type="button" class="increase" @click="increaseQty()">+</button>
 
-            <span class="control-error" v-if="errors.has(controlName)">@{{ errors.first(controlName) }}</span>
+                <span class="control-error" v-if="errors.has(controlName)">@{{ errors.first(controlName) }}</span>
+            </span>
         </div>
     </script>
 
@@ -217,7 +219,8 @@
 
             data: function() {
                 return {
-                    qty: this.quantity
+                    qty: this.quantity,
+                    floatClassName: $('body').hasClass('rtl') ? 'pull-right' : 'pull-left'
                 }
             },
 
