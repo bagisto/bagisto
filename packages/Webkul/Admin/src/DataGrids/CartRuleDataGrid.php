@@ -120,10 +120,12 @@ class CartRuleDataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => true,
             'wrapper'    => function ($value) {
-                if ($value->status == 1) {
+                if ($value->status == 'active') {
                     return trans('admin::app.datagrid.active');
-                } else {
+                } else if ($value->status == 'inactive') {
                     return trans('admin::app.datagrid.inactive');
+                } else {
+                    return trans('admin::app.datagrid.draft');
                 }
             },
         ]);

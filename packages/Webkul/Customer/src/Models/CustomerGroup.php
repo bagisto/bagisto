@@ -11,9 +11,9 @@ class CustomerGroup extends Model implements CustomerGroupContract
     protected $fillable = ['name', 'code', 'is_user_defined'];
 
     /**
-     * Get the customer for this group.
+     * Get the customers for this group.
     */
-    public function customer()
+    public function customers()
     {
         return $this->hasMany(CustomerProxy::modelClass());
     }
