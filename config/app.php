@@ -340,5 +340,6 @@ return [
         'Concord' => Konekt\Concord\Facades\Concord::class,
         'Helper'  => Konekt\Concord\Facades\Helper::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'ProductImage' => Webkul\Product\Facades\ProductImage::class
     ],
 ];

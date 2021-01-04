@@ -8,6 +8,9 @@ use Webkul\Product\Models\ProductProxy;
 use Webkul\Product\Observers\ProductObserver;
 use Webkul\Product\Console\Commands\PriceUpdate;
 use Webkul\Product\Console\Commands\GenerateProducts;
+use Illuminate\Foundation\AliasLoader;
+use Webkul\Product\Facades\ProductImage as ProductImageFacade;
+use Webkul\Product\ProductImage;
 
 class ProductServiceProvider extends ServiceProvider
 {
@@ -41,6 +44,8 @@ class ProductServiceProvider extends ServiceProvider
         $this->registerConfig();
 
         $this->registerCommands();
+
+        $this->registerFacades();
 
         $this->registerEloquentFactoriesFrom(__DIR__ . '/../Database/Factories');
     }
@@ -78,5 +83,57 @@ class ProductServiceProvider extends ServiceProvider
     protected function registerEloquentFactoriesFrom($path): void
     {
         $this->app->make(EloquentFactory::class)->load($path);
+    }
+
+
+    /**
+     * Register Bouncer as a singleton.
+     *
+     * @return void
+     */
+    protected function registerFacades()
+    {
+        $loader = AliasLoader::getInstance();
+        $loader->alias('productimage', ProductImageFacade::class);
+
+        $this->app->singleton('productimage', function () {
+            return app()->make(ProductImage::class);
+        });
+    }
+
+    /**
+     * Register facade
+     *
+     */
+    public function registerFacadesd()
+    {
+        //to make the cart facade and bind the
+        //alias to the class needed to be called.
+        // $loader = AliasLoader::getInstance();
+
+        // $loader->alias('productimage', ProductImageFacade::class);
+
+        // $this->app->singleton('productimage', function () {
+        //     return new cart();
+        // });
+
+        // $this->app->bind('productimage', 'Webkul\Checkout\Cart');
+
+
+        // \App::bind('mysiteclass', function()
+        // {
+        //     return new \Webkul\Product\Helpers\ProductImage;
+        // });
+
+        $this->app->bind('ProductImage', function() {
+            return new ProductImage;
+        });
+
+        // $loader = AliasLoader::getInstance();
+        // $loader->alias('productimage', ProductImageFacade::class);
+
+        // $this->app->singleton('productimage', function () {
+        //     return app()->make(ProductImage::class);
+        // });
     }
 }
