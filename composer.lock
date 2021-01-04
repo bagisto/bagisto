@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "35194c542c75bb48f7c73bcc0197ab2b",
+    "content-hash": "8c9e174a92fc1924daca20c89f718a0e",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -1056,16 +1056,16 @@
         },
         {
             "name": "egulias/email-validator",
-            "version": "2.1.24",
+            "version": "2.1.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "ca90a3291eee1538cd48ff25163240695bd95448"
+                "reference": "0dbf5d78455d4d6a41d186da50adc1122ec066f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/ca90a3291eee1538cd48ff25163240695bd95448",
-                "reference": "ca90a3291eee1538cd48ff25163240695bd95448",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/0dbf5d78455d4d6a41d186da50adc1122ec066f4",
+                "reference": "0dbf5d78455d4d6a41d186da50adc1122ec066f4",
                 "shasum": ""
             },
             "require": {
@@ -1110,7 +1110,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2020-11-14T15:56:27+00:00"
+            "time": "2020-12-29T14:50:06+00:00"
         },
         {
             "name": "elasticsearch/elasticsearch",
@@ -1277,6 +1277,56 @@
             ],
             "description": "Fork of guzzle/RingPHP (abandoned) to be used with elasticsearch-php",
             "time": "2020-02-14T23:51:21+00:00"
+        },
+        {
+            "name": "ezyang/htmlpurifier",
+            "version": "v4.13.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ezyang/htmlpurifier.git",
+                "reference": "08e27c97e4c6ed02f37c5b2b20488046c8d90d75"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/08e27c97e4c6ed02f37c5b2b20488046c8d90d75",
+                "reference": "08e27c97e4c6ed02f37c5b2b20488046c8d90d75",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "require-dev": {
+                "simpletest/simpletest": "dev-master#72de02a7b80c6bb8864ef9bf66d41d2f58f826bd"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "HTMLPurifier": "library/"
+                },
+                "files": [
+                    "library/HTMLPurifier.composer.php"
+                ],
+                "exclude-from-classmap": [
+                    "/library/HTMLPurifier/Language/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Edward Z. Yang",
+                    "email": "admin@htmlpurifier.org",
+                    "homepage": "http://ezyang.com"
+                }
+            ],
+            "description": "Standards compliant HTML filter written in PHP",
+            "homepage": "http://htmlpurifier.org/",
+            "keywords": [
+                "html"
+            ],
+            "time": "2020-06-29T00:56:53+00:00"
         },
         {
             "name": "fideloper/proxy",
@@ -2138,16 +2188,16 @@
         },
         {
             "name": "laravel/scout",
-            "version": "v8.5.1",
+            "version": "v8.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/scout.git",
-                "reference": "b8b8a35cc3ac82cbc07dfa83955492d2ef6e237b"
+                "reference": "ece6758b82c51ff7f5e011f243a7c6b33711a847"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/scout/zipball/b8b8a35cc3ac82cbc07dfa83955492d2ef6e237b",
-                "reference": "b8b8a35cc3ac82cbc07dfa83955492d2ef6e237b",
+                "url": "https://api.github.com/repos/laravel/scout/zipball/ece6758b82c51ff7f5e011f243a7c6b33711a847",
+                "reference": "ece6758b82c51ff7f5e011f243a7c6b33711a847",
                 "shasum": ""
             },
             "require": {
@@ -2199,7 +2249,7 @@
                 "laravel",
                 "search"
             ],
-            "time": "2020-12-22T17:29:20+00:00"
+            "time": "2020-12-30T15:52:14+00:00"
         },
         {
             "name": "laravel/socialite",
@@ -2704,29 +2754,26 @@
         },
         {
             "name": "maatwebsite/excel",
-            "version": "3.1.19",
+            "version": "3.1.26",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Maatwebsite/Laravel-Excel.git",
-                "reference": "96527a9ebc2e79e9a5fa7eaef7e23c9e9bcc587c"
+                "reference": "66f7c9584304ad0b6a267a5d8ffbfa2ff4272e85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/96527a9ebc2e79e9a5fa7eaef7e23c9e9bcc587c",
-                "reference": "96527a9ebc2e79e9a5fa7eaef7e23c9e9bcc587c",
+                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/66f7c9584304ad0b6a267a5d8ffbfa2ff4272e85",
+                "reference": "66f7c9584304ad0b6a267a5d8ffbfa2ff4272e85",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "illuminate/support": "5.5.*|5.6.*|5.7.*|5.8.*|^6.0|^7.0",
-                "php": "^7.0",
-                "phpoffice/phpspreadsheet": "^1.10"
+                "illuminate/support": "5.8.*|^6.0|^7.0|^8.0",
+                "php": "^7.0|^8.0",
+                "phpoffice/phpspreadsheet": "^1.15"
             },
             "require-dev": {
-                "mockery/mockery": "^1.1",
-                "orchestra/database": "^4.0",
-                "orchestra/testbench": "^4.0",
-                "phpunit/phpunit": "^8.0",
+                "orchestra/testbench": "^6.0",
                 "predis/predis": "^1.1"
             },
             "type": "library",
@@ -2767,7 +2814,7 @@
                 "php",
                 "phpspreadsheet"
             ],
-            "time": "2020-02-28T15:47:45+00:00"
+            "time": "2020-11-27T16:17:38+00:00"
         },
         {
             "name": "maennchen/zipstream-php",
@@ -3607,16 +3654,16 @@
         },
         {
             "name": "phpoffice/phpspreadsheet",
-            "version": "1.15.0",
+            "version": "1.16.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPOffice/PhpSpreadsheet.git",
-                "reference": "a8e8068b31b8119e1daa5b1eb5715a3a8ea8305f"
+                "reference": "76d4323b85129d0c368149c831a07a3e258b2b50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/a8e8068b31b8119e1daa5b1eb5715a3a8ea8305f",
-                "reference": "a8e8068b31b8119e1daa5b1eb5715a3a8ea8305f",
+                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/76d4323b85129d0c368149c831a07a3e258b2b50",
+                "reference": "76d4323b85129d0c368149c831a07a3e258b2b50",
                 "shasum": ""
             },
             "require": {
@@ -3633,10 +3680,11 @@
                 "ext-xmlwriter": "*",
                 "ext-zip": "*",
                 "ext-zlib": "*",
+                "ezyang/htmlpurifier": "^4.13",
                 "maennchen/zipstream-php": "^2.1",
-                "markbaker/complex": "^1.5|^2.0",
-                "markbaker/matrix": "^1.2|^2.0",
-                "php": "^7.2|^8.0",
+                "markbaker/complex": "^1.5||^2.0",
+                "markbaker/matrix": "^1.2||^2.0",
+                "php": "^7.2||^8.0",
                 "psr/http-client": "^1.0",
                 "psr/http-factory": "^1.0",
                 "psr/simple-cache": "^1.0"
@@ -3647,7 +3695,7 @@
                 "jpgraph/jpgraph": "^4.0",
                 "mpdf/mpdf": "^8.0",
                 "phpcompatibility/php-compatibility": "^9.3",
-                "phpunit/phpunit": "^8.5|^9.3",
+                "phpunit/phpunit": "^8.5||^9.3",
                 "squizlabs/php_codesniffer": "^3.5",
                 "tecnickcom/tcpdf": "^6.3"
             },
@@ -3699,7 +3747,7 @@
                 "xls",
                 "xlsx"
             ],
-            "time": "2020-10-11T13:20:59+00:00"
+            "time": "2020-12-31T18:03:49+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -6860,16 +6908,16 @@
         },
         {
             "name": "codeception/lib-innerbrowser",
-            "version": "1.3.4",
+            "version": "1.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/lib-innerbrowser.git",
-                "reference": "fd921e089147057b456ca3660de72112167e40a4"
+                "reference": "956101b060a0d898a1ed8c106fd4d81adf25fd87"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/lib-innerbrowser/zipball/fd921e089147057b456ca3660de72112167e40a4",
-                "reference": "fd921e089147057b456ca3660de72112167e40a4",
+                "url": "https://api.github.com/repos/Codeception/lib-innerbrowser/zipball/956101b060a0d898a1ed8c106fd4d81adf25fd87",
+                "reference": "956101b060a0d898a1ed8c106fd4d81adf25fd87",
                 "shasum": ""
             },
             "require": {
@@ -6912,7 +6960,7 @@
             "keywords": [
                 "codeception"
             ],
-            "time": "2020-10-22T05:45:03+00:00"
+            "time": "2021-01-02T18:59:34+00:00"
         },
         {
             "name": "codeception/module-asserts",
@@ -7118,16 +7166,16 @@
         },
         {
             "name": "codeception/phpunit-wrapper",
-            "version": "8.1.3",
+            "version": "8.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/phpunit-wrapper.git",
-                "reference": "8c2c9b49d20b6e2d61e926a16b1bf2cee5f4db9c"
+                "reference": "f41335f0b4dd17cf7bbc63e87943b3ae72a8bbc3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/phpunit-wrapper/zipball/8c2c9b49d20b6e2d61e926a16b1bf2cee5f4db9c",
-                "reference": "8c2c9b49d20b6e2d61e926a16b1bf2cee5f4db9c",
+                "url": "https://api.github.com/repos/Codeception/phpunit-wrapper/zipball/f41335f0b4dd17cf7bbc63e87943b3ae72a8bbc3",
+                "reference": "f41335f0b4dd17cf7bbc63e87943b3ae72a8bbc3",
                 "shasum": ""
             },
             "require": {
@@ -7158,7 +7206,7 @@
                 }
             ],
             "description": "PHPUnit classes used by Codeception",
-            "time": "2020-10-11T18:16:48+00:00"
+            "time": "2020-12-28T14:00:08+00:00"
         },
         {
             "name": "codeception/stub",

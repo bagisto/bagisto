@@ -1,13 +1,12 @@
 {
     "name": "bagisto/bagisto",
-    "description": "Bagisto Laravel ECommerce",
+    "description": "Bagisto Laravel E-Commerce",
     "keywords": [
         "framework",
         "laravel"
     ],
     "license": "MIT",
     "type": "project",
-
     "require": {
         "php": "^7.2.5",
         "ext-curl": "*",
@@ -37,12 +36,11 @@
         "laravel/socialite": "^4.4",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
-        "maatwebsite/excel": "3.1.19",
+        "maatwebsite/excel": "^3.1.26",
         "paypal/paypal-checkout-sdk": "1.0.1",
         "prettus/l5-repository": "^2.6",
         "tymon/jwt-auth": "^1.0.0"
     },
-
     "require-dev": {
         "codeception/codeception": "4.1.1",
         "codeception/module-asserts": "^1.1",
@@ -54,7 +52,6 @@
         "nunomaduro/collision": "^4.1",
         "phpunit/phpunit": "^8.5"
     },
-
     "replace": {
         "bagisto/laravel-user": "v0.1.0",
         "bagisto/laravel-admin": "v0.1.0",
@@ -76,43 +73,41 @@
         "bagisto/laravel-paypal": "v0.1.0",
         "bagisto/laravel-discount": "v0.1.0"
     },
-
     "autoload": {
-      "classmap": [
-        "database/seeds",
-        "database/factories"
-      ],
-      "psr-4": {
-        "App\\": "app/",
-        "Webkul\\User\\": "packages/Webkul/User/src",
-        "Webkul\\Admin\\": "packages/Webkul/Admin/src",
-        "Webkul\\Ui\\": "packages/Webkul/Ui/src",
-        "Webkul\\Category\\": "packages/Webkul/Category/src",
-        "Webkul\\Checkout\\": "packages/Webkul/Checkout/src",
-        "Webkul\\Attribute\\": "packages/Webkul/Attribute/src",
-        "Webkul\\Shop\\": "packages/Webkul/Shop/src",
-        "Webkul\\Core\\": "packages/Webkul/Core/src",
-        "Webkul\\Customer\\": "packages/Webkul/Customer/src",
-        "Webkul\\Inventory\\": "packages/Webkul/Inventory/src",
-        "Webkul\\Product\\": "packages/Webkul/Product/src",
-        "Webkul\\Theme\\": "packages/Webkul/Theme/src",
-        "Webkul\\Shipping\\": "packages/Webkul/Shipping/src",
-        "Webkul\\Payment\\": "packages/Webkul/Payment/src",
-        "Webkul\\Paypal\\": "packages/Webkul/Paypal/src",
-        "Webkul\\Sales\\": "packages/Webkul/Sales/src",
-        "Webkul\\Tax\\": "packages/Webkul/Tax/src",
-        "Webkul\\API\\": "packages/Webkul/API",
-        "Webkul\\CatalogRule\\": "packages/Webkul/CatalogRule/src",
-        "Webkul\\CartRule\\": "packages/Webkul/CartRule/src",
-        "Webkul\\Rule\\": "packages/Webkul/Rule/src",
-        "Webkul\\CMS\\": "packages/Webkul/CMS/src",
-        "Webkul\\Velocity\\": "packages/Webkul/Velocity/src",
-        "Webkul\\BookingProduct\\": "packages/Webkul/BookingProduct/src",
-        "Webkul\\SocialLogin\\": "packages/Webkul/SocialLogin/src",
-        "Webkul\\DebugBar\\": "packages/Webkul/DebugBar/src"
-      }
+        "classmap": [
+            "database/seeds",
+            "database/factories"
+        ],
+        "psr-4": {
+            "App\\": "app/",
+            "Webkul\\User\\": "packages/Webkul/User/src",
+            "Webkul\\Admin\\": "packages/Webkul/Admin/src",
+            "Webkul\\Ui\\": "packages/Webkul/Ui/src",
+            "Webkul\\Category\\": "packages/Webkul/Category/src",
+            "Webkul\\Checkout\\": "packages/Webkul/Checkout/src",
+            "Webkul\\Attribute\\": "packages/Webkul/Attribute/src",
+            "Webkul\\Shop\\": "packages/Webkul/Shop/src",
+            "Webkul\\Core\\": "packages/Webkul/Core/src",
+            "Webkul\\Customer\\": "packages/Webkul/Customer/src",
+            "Webkul\\Inventory\\": "packages/Webkul/Inventory/src",
+            "Webkul\\Product\\": "packages/Webkul/Product/src",
+            "Webkul\\Theme\\": "packages/Webkul/Theme/src",
+            "Webkul\\Shipping\\": "packages/Webkul/Shipping/src",
+            "Webkul\\Payment\\": "packages/Webkul/Payment/src",
+            "Webkul\\Paypal\\": "packages/Webkul/Paypal/src",
+            "Webkul\\Sales\\": "packages/Webkul/Sales/src",
+            "Webkul\\Tax\\": "packages/Webkul/Tax/src",
+            "Webkul\\API\\": "packages/Webkul/API",
+            "Webkul\\CatalogRule\\": "packages/Webkul/CatalogRule/src",
+            "Webkul\\CartRule\\": "packages/Webkul/CartRule/src",
+            "Webkul\\Rule\\": "packages/Webkul/Rule/src",
+            "Webkul\\CMS\\": "packages/Webkul/CMS/src",
+            "Webkul\\Velocity\\": "packages/Webkul/Velocity/src",
+            "Webkul\\BookingProduct\\": "packages/Webkul/BookingProduct/src",
+            "Webkul\\SocialLogin\\": "packages/Webkul/SocialLogin/src",
+            "Webkul\\DebugBar\\": "packages/Webkul/DebugBar/src"
+        }
     },
-
     "autoload-dev": {
         "psr-4": {
             "Tests\\Acceptance\\": "tests/acceptance/",
@@ -121,7 +116,6 @@
             "Tests\\Trigger\\": "tests/trigger/"
         }
     },
-
     "extra": {
         "laravel": {
             "dont-discover": [
@@ -129,22 +123,18 @@
             ]
         }
     },
-
     "scripts": {
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
-
         "post-create-project-cmd": [
             "@php artisan key:generate",
             "Webkul\\Core\\Events\\ComposerEvents::postCreateProject"
         ],
-
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
         ],
-
         "test": [
             "set -e",
             "@php artisan migrate:fresh --env=testing",
@@ -152,7 +142,7 @@
             "vendor/bin/codecept run functional",
             "vendor/bin/codecept run trigger"
         ],
-         "test-win": [
+        "test-win": [
             "@set -e",
             "@php artisan migrate:fresh --env=testing",
             "vendor\\bin\\codecept.bat run unit",
@@ -167,4 +157,4 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true
-  }
+}
