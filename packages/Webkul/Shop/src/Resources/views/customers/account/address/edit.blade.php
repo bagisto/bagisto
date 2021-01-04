@@ -78,7 +78,7 @@
                         </div>
                     @endif
 
-                    {!! view_render_event('bagisto.shop.customers.account.address.edit_form_controls.street-address.after', ['address' => $address]) !!}
+                    {!! view_render_event('bagisto.shop.customers.account.address.edit_form_controls.street-addres.after', ['address' => $address]) !!}
 
                     @include ('shop::customers.account.address.country-state', ['countryCode' => old('country') ?? $address->country, 'stateCode' => old('state') ?? $address->state])
 
