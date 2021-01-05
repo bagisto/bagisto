@@ -126,6 +126,7 @@ return [
             'conditions' => 'Conditions',
             'using' => 'by using this website',
             'agreement' => 'Agreement',
+            'subscribe-to-newsletter' => 'Subscribe to newsletter',
             'success' => 'Account created successfully.',
             'success-verify' => 'Account created successfully, an e-mail has been sent for verification.',
             'success-verify-email-unsent' => 'Account created successfully, but verification e-mail unsent.',
