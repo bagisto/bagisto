@@ -14,6 +14,9 @@ $data    = array();
     
     if (empty($_POST['app_url']))
         $errors['app_url'] = 'App Url is required.';
+    
+    if (empty($_POST['app_admin_url']))
+        $errors['app_admin'] = 'The admin suffix is required.';
 
     if (empty($_POST['app_currency']))
         $errors['app_currency'] = 'The application currency is required.';
@@ -38,6 +41,9 @@ $data    = array();
 
     if (preg_match('/\s/', $_POST['app_url']))
         $errors['app_url_space'] = 'There should be no space in App URL ';
+    
+        if (preg_match('/\s/', $_POST['app_admin_url']))
+        $errors['app_admin_space'] = 'There should be no space in the admin suffix.';
 
     if (preg_match('/\s/', $_POST['app_name']))
         $errors['app_name_space'] = 'There should be no space in App Name.';
@@ -110,6 +116,7 @@ $data    = array();
         $keyValueData['DB_PASSWORD'] = $_POST["user_password"];
         $keyValueData['APP_NAME'] = $_POST["app_name"];
         $keyValueData['APP_URL'] = $_POST["app_url"];
+        $keyValueData['APP_ADMIN_URL'] = $_POST["app_admin_url"];
         $keyValueData['APP_CURRENCY'] = $_POST["app_currency"];
         $keyValueData['APP_LOCALE'] = $_POST["app_locale"];
         $keyValueData['APP_TIMEZONE'] = $_POST["app_timezone"];
