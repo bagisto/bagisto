@@ -52,7 +52,7 @@
 
 <div class="container migration" id="migration">
     <div class="initial-display">
-        <p>Ready for installation</p>
+        <p>Database Configuration</p>
     </div>
 
     <div class="row justify-content-center">
@@ -68,32 +68,33 @@
 
                     <div class="instructions" style="padding-top: 40px;" id="instructions">
                         <div style="text-align: center;">
-                            <h4>Click the button below to:</h4>
+                            <h4> Click the button below to run following :</h4>
                         </div>
 
                         <div class="message">
-                            <span>Create the database tables</span>
+                            <span>Create the database tables </span>
                         </div>
 
                         <div class="message">
-                            <span>Populate the database tables </span>
+                            <span> Populate the database tables </span>
                         </div>
 
                         <div class="message">
-                            <span>Publishing the vendor files</span>
+                            <span> Publishing Vendor </span>
                         </div>
                     </div>
+
 
                     <div class="row">
                         <div class="col-md-12 text-center">
-                            <p class="composer" id="comp">Checking Composer dependencies</p>
-                            <p class="composer" id="composer-migrate">Creating the database tables, this can take a few moments.</p>
-                            <p class="composer" id="composer-seed">Populating the database tables</p>
+                        <p class="composer" id="comp">Checking Composer Dependency</p>
+                        <p class="composer" id="composer-migrate">Migrating Database</p>
+                        <p class="composer" id="composer-seed">Seeding Data</p>
                         </div>
                     </div>
-                    
+
                     <div class="clearfix">&nbsp;</div>
-                    
+
                     <form method="POST" id="migration-form">
                         <div style="text-align: center;">
                             <button class="btn btn-primary" id="migrate-seed">Start installation</button>
