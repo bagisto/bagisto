@@ -81,14 +81,13 @@
                     <div class="mt10 mb10" v-if="address.billing.address_id">
                         <span class="checkbox fs16 display-inbl">
                             <input
-                                class="ml0"
                                 type="checkbox"
                                 id="billing[use_for_shipping]"
                                 name="billing[use_for_shipping]"
                                 @change="validateFormAfterAction"
                                 v-model="address.billing.use_for_shipping" />
 
-                            <span class="ml-5">
+                            <span>
                                 {{ __('shop::app.checkout.onepage.use_for_shipping') }}
                             </span>
                         </span>
