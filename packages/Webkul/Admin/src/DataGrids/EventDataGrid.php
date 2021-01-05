@@ -41,7 +41,7 @@ class EventDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'date',
             'label'      => trans('admin::app.datagrid.date'),
-            'type'       => 'date',
+            'type'       => 'datetime',
             'searchable' => true,
             'sortable'   => true,
             'filterable' => true,
