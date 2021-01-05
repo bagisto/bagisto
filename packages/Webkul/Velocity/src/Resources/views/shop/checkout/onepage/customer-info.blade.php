@@ -166,7 +166,7 @@
 
                                 <div class="col-10">
                                     <h5 class="card-title fw6">
-                                        @{{ allAddress.first_name }} @{{ allAddress.last_name }},
+                                        @{{ addresses.first_name }} @{{ addresses.last_name }},
                                     </h5>
 
                                     <ul type="none">
