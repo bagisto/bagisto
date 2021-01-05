@@ -1448,8 +1448,6 @@
 }
 
 .address-container {
-    display: none;
-
     .address-holder {
         margin-top: 15px;
 
@@ -1510,6 +1508,11 @@
         border-radius: 1px;
         background: $btn-text-color;
         border: 1px solid $border-common;
+    }
+
+    input[type=checkbox] {
+        position: relative;
+        top: 3px;
     }
 
     input:active,
