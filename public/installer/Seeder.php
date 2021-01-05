@@ -2,12 +2,12 @@
 
 // array to pass back data
 $data = array();
-$phpbin=PHP_BINDIR .'/php';
+$phpbin = PHP_BINDIR . '/php';
 
 // run command on terminal
-$key = 'cd ../.. && '.$phpbin.' artisan key:generate 2>&1';
-$seeder = 'cd ../.. && '.$phpbin.' artisan db:seed 2>&1';
-$publish = 'cd ../.. && '.$phpbin.' artisan vendor:publish --all --force 2>&1';
+$key = 'cd ../.. && '. $phpbin .' artisan key:generate 2>&1';
+$seeder = 'cd ../.. && '. $phpbin .' artisan db:seed 2>&1';
+$publish = 'cd ../.. && '. $phpbin .' artisan vendor:publish --all --force 2>&1';
 
 $key_output = exec($key, $data['key'], $data['key_results']);
 $seeder_output = exec($seeder, $data['seeder'], $data['seeder_results']);
