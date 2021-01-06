@@ -7,7 +7,6 @@ use Webkul\Category\Models\CategoryProxy;
 use Webkul\Core\Eloquent\TranslatableModel;
 use Webkul\Inventory\Models\InventorySourceProxy;
 use Webkul\Core\Contracts\Channel as ChannelContract;
-use Webkul\Product\Models\ProductOrderedInventoryProxy;
 
 class Channel extends TranslatableModel implements ChannelContract
 {
