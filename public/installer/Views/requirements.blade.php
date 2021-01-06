@@ -57,7 +57,7 @@
                     <?php if(!isset($requirements['errors']) && ($phpVersion['supported'] && $composerInstall['composer_install'] == 0)): ?>
                         <div class="text-center"><button type="button" class="btn btn-primary" id="requirement-check">Continue</button></div>
                     <?php elseif(!($phpVersion['supported'] && $composerInstall['composer_install'] == 0)): ?>
-                        <div><button type="button" class="prepare-btn" id="requirements-refresh">Refresh</button></div>
+                        <div class="text-center"><button type="button" class="btn btn-primary" id="requirements-refresh">Refresh</button></div>
                     <?php endif; ?>
                 </div>
             </div>
