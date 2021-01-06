@@ -19,11 +19,17 @@ class ProductFlatRepository extends Repository
      */
     public function getCategoryProductMaximumPrice($category = null)
     {
+        static $loadedCategoryMaxPrice = [];
+
         if (! $category) {
             return $this->model->max('max_price');
         }
 
-        return $this->model
+        if (array_key_exists($category->id, $loadedCategoryMaxPrice)) {
+            return $loadedCategoryMaxPrice[$category->id];
+        }
+
+        return $loadedCategoryMaxPrice[$category->id] = $this->model
                     ->leftJoin('product_categories', 'product_flat.product_id', 'product_categories.product_id')
                     ->where('product_categories.category_id', $category->id)
                     ->max('max_price');
@@ -84,6 +90,12 @@ class ProductFlatRepository extends Repository
      */
     public function getProductsRelatedFilterableAttributes($category)
     {
+        static $loadedCategoryAttributes = [];
+
+        if (array_key_exists($category->id, $loadedCategoryAttributes)) {
+            return $loadedCategoryAttributes[$category->id];
+        }
+
         $categoryFilterableAttributes = $category->filterableAttributes->pluck('id')->toArray();
 
         $productCategoryArrributes = $this->getCategoryProductAttribute($category->id);
@@ -95,7 +107,7 @@ class ProductFlatRepository extends Repository
             }
         ])->whereIn('id', $allFilterableAttributes)->get();
 
-        return $attributes;
+        return $loadedCategoryAttributes[$category->id] = $attributes;
     }
 
     /**

@@ -68,7 +68,7 @@
 
                                     @case('addToCartHtml')
                                         <div class="action">
-                                            <div v-html="product.defaultAddToCart"></div>
+                                            <div v-html="addToCartHtml"></div>
 
                                             <span class="icon white-cross-sm-icon remove-product" @click="removeProductCompare(product.id)"></span>
                                         </div>

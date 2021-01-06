@@ -111,7 +111,7 @@ class Grouped extends AbstractType
      */
     public function getChildrenIds()
     {
-        return array_unique($this->product->grouped_products()->pluck('associated_product_id')->toArray());
+        return array_unique($this->product->grouped_products->pluck('associated_product_id')->toArray());
     }
 
     /**

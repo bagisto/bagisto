@@ -5,14 +5,14 @@ namespace Webkul\Product\Type;
 class Simple extends AbstractType
 {
     /**
-     * Skip attribute for simple product type
+     * Skip attribute for simple product type.
      *
      * @var array
      */
     protected $skipAttributes = [];
 
     /**
-     * These blade files will be included in product edit page
+     * These blade files will be included in product edit page.
      *
      * @var array
      */
@@ -26,33 +26,36 @@ class Simple extends AbstractType
     ];
 
     /**
-     * Show quantity box
+     * Show quantity box.
      *
      * @var bool
      */
     protected $showQuantityBox = true;
 
     /**
-     * Return true if this product type is saleable
+     * Return true if this product type is saleable. Saleable check added because
+     * this is the point where all parent product will recall this.
      *
      * @return bool
      */
     public function isSaleable()
     {
-        if (! $this->product->status) {
+        return $this->checkInLoadedSaleableChecks($this->product, function ($product) {
+            if (! $product->status) {
+                return false;
+            }
+
+            if (is_callable(config('products.isSaleable')) &&
+                call_user_func(config('products.isSaleable'), $product) === false) {
+                return false;
+            }
+
+            if ($this->haveSufficientQuantity(1)) {
+                return true;
+            }
+
             return false;
-        }
-
-        if (is_callable(config('products.isSaleable')) &&
-            call_user_func(config('products.isSaleable'), $this->product) === false) {
-            return false;
-        }
-
-        if ($this->haveSufficientQuantity(1)) {
-            return true;
-        }
-
-        return false;
+        });
     }
 
     /**

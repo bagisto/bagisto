@@ -3,15 +3,15 @@
 namespace Webkul\CartRule\Helpers;
 
 use Carbon\Carbon;
+use Webkul\Checkout\Facades\Cart;
+use Webkul\Rule\Helpers\Validator;
+use Webkul\Checkout\Models\CartItem;
 use Illuminate\Database\Eloquent\Builder;
 use Webkul\CartRule\Repositories\CartRuleRepository;
-use Webkul\CartRule\Repositories\CartRuleCouponRepository;
-use Webkul\CartRule\Repositories\CartRuleCouponUsageRepository;
-use Webkul\CartRule\Repositories\CartRuleCustomerRepository;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
-use Webkul\Checkout\Models\CartItem;
-use Webkul\Rule\Helpers\Validator;
-use Webkul\Checkout\Facades\Cart;
+use Webkul\CartRule\Repositories\CartRuleCouponRepository;
+use Webkul\CartRule\Repositories\CartRuleCustomerRepository;
+use Webkul\CartRule\Repositories\CartRuleCouponUsageRepository;
 
 class CartRule
 {
@@ -153,7 +153,9 @@ class CartRule
         if (Cart::getCurrentCustomer()->check()) {
             $customerGroupId = Cart::getCurrentCustomer()->user()->customer_group_id;
         } else {
-            if ($customerGuestGroup = $this->customerGroupRepository->findOneByField('code', 'guest')) {
+            $customerGuestGroup = $this->customerGroupRepository->getCustomerGuestGroup();
+
+            if ($customerGuestGroup) {
                 $customerGroupId = $customerGuestGroup->id;
             }
         }

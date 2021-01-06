@@ -61,7 +61,6 @@ class ShopController extends Controller
         switch ($slug) {
             case 'new-products':
             case 'featured-products':
-                $formattedProducts = [];
                 $count = request()->get('count');
 
                 if ($slug == "new-products") {
@@ -70,13 +69,11 @@ class ShopController extends Controller
                     $products = $this->velocityProductRepository->getFeaturedProducts($count);
                 }
 
-                foreach ($products as $product) {
-                    array_push($formattedProducts, $this->velocityHelper->formatProduct($product));
-                }
-
                 $response = [
                     'status'   => true,
-                    'products' => $formattedProducts,
+                    'products' => $products->map(function ($product) {
+                        return $this->velocityHelper->formatProduct($product);
+                    }),
                 ];
 
                 break;

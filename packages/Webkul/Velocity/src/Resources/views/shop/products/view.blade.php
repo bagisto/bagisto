@@ -33,7 +33,7 @@
         </script>
     @endif
 
-    <?php $productBaseImage = app('Webkul\Product\Helpers\ProductImage')->getProductBaseImage($product); ?>
+    <?php $productBaseImage = app('Webkul\Product\Helpers\ProductImage')->getProductBaseImage($product, $images); ?>
 
     <meta name="twitter:card" content="summary_large_image" />
 

@@ -539,7 +539,7 @@ class Configurable extends AbstractType
                     $product = $item->child->product;
                 } else {
                     $product = $item->product;
-                } 
+                }
             }
         }
 
