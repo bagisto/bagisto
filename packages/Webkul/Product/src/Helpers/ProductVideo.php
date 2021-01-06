@@ -5,7 +5,7 @@ namespace Webkul\Product\Helpers;
 use Illuminate\Support\Facades\Storage;
 
 class ProductVideo extends AbstractProduct
-{ 
+{
     /**
      * Retrieve collection of videos
      *

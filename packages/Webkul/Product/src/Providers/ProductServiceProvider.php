@@ -111,40 +111,4 @@ class ProductServiceProvider extends ServiceProvider
             return app()->make(ProductVideo::class);
         });
     }
-
-    /**
-     * Register facade
-     *
-     */
-    public function registerFacadesd()
-    {
-        //to make the cart facade and bind the
-        //alias to the class needed to be called.
-        // $loader = AliasLoader::getInstance();
-
-        // $loader->alias('productimage', ProductImageFacade::class);
-
-        // $this->app->singleton('productimage', function () {
-        //     return new cart();
-        // });
-
-        // $this->app->bind('productimage', 'Webkul\Checkout\Cart');
-
-
-        // \App::bind('mysiteclass', function()
-        // {
-        //     return new \Webkul\Product\Helpers\ProductImage;
-        // });
-
-        $this->app->bind('ProductImage', function() {
-            return new ProductImage;
-        });
-
-        // $loader = AliasLoader::getInstance();
-        // $loader->alias('productimage', ProductImageFacade::class);
-
-        // $this->app->singleton('productimage', function () {
-        //     return app()->make(ProductImage::class);
-        // });
-    }
 }
