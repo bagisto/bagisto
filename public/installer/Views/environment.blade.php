@@ -18,12 +18,7 @@
                             <div class="form-group" id="app_url">
                                 <label for="application_url" class="required">Default URL</label>
                                 <input type="text" name="app_url" id="application_url" class="form-control" value="https://<?php echo $_SERVER['HTTP_HOST']; ?>" 
-                                    data-validation="required">
-                            </div>
-
-                            <div class="form-group" id="app_url">
-                                <label for="application_admin" class="required">Default admin suffix</label>
-                                <input type="text" name="app_admin_url" id="application_admin" class="form-control" value="admin" data-validation="required">
+                                    data-validation="required length" data-validation-length="max50">
                             </div>
                             
                             <div class="form-group" id="app_currency">

@@ -74,7 +74,11 @@ return [
         'taxes' => 'Impostos',
         'tax-categories' => 'Categorias de Impostos',
         'tax-rates' => 'Impostos de Impostos',
-        'promotion' => 'Promoções',
+        'marketing' => 'Marketing',
+        'promotions' => 'Promoções',
+        'email-marketing' => 'Email Marketing',
+        'campaigns' => 'Campaigns',
+        'email-templates' => 'Email Templates',
         'discount' => 'Desconto',
         'cms' => 'CMS'
     ],
@@ -110,6 +114,7 @@ return [
         'edit' => 'Edit',
         'create' => 'Add',
         'delete' => 'Delete',
+        'marketing' => 'Marketing',
         'promotions' => 'Promoções',
         'cart-rules' => 'Regras do Carrinho',
         'catalog-rules' => 'Regras do Catálogo',
@@ -993,7 +998,7 @@ return [
         ]
     ],
 
-    'promotion' => [
+    'promotions' => [
         'cart-rules' => [
             'title' => 'Regras do carrinho',
             'add-title' => 'Adicionar regra de carrinho',
@@ -1126,6 +1131,68 @@ return [
             'end-other-rules' => 'Terminar outras regras',
             'categories' => 'Categorias',
             'attribute_family' => 'Família de Atributos'
+        ]
+    ],
+
+    'marketing' => [
+        'templates' => [
+            'title' => 'Email Templates',
+            'add-title' => 'Add Email Template',
+            'edit-title' => 'Edit Email Template',
+            'save-btn-title' => 'Save',
+            'general' => 'General',
+            'name' => 'Name',
+            'status' => 'Status',
+            'active' => 'Active',
+            'inactive' => 'Inactive',
+            'draft' => 'Draft',
+            'content' => 'Content',
+            'create-success' => 'Email template created successfully.',
+            'update-success' => 'Email template updated successfully.',
+            'delete-success' => 'Email template deleted successfully',
+        ],
+
+        'campaigns' => [
+            'title' => 'Campaigns',
+            'add-title' => 'Add Campaign',
+            'edit-title' => 'Edit Campaign',
+            'save-btn-title' => 'Save',
+            'general' => 'General',
+            'name' => 'Name',
+            'status' => 'Status',
+            'active' => 'Active',
+            'inactive' => 'Inactive',
+            'subject' => 'Subject',
+            'email-template' => 'Email Template',
+            'audience' => 'Audience',
+            'channel' => 'Channel',
+            'customer-group' => 'Customer Group',
+            'schedule' => 'Schedule',
+            'schedule-type' => 'Schedule Type',
+            'once' => 'Once',
+            'events' => 'Events',
+            'schedule-date' => 'Schedule Date',
+            'spooling' => 'Spooling',
+            'event' => 'Event',
+            'birthday' => 'Birthday',
+            'create-success' => 'Campaign created successfully.',
+            'update-success' => 'Campaign updated successfully.',
+            'delete-success' => 'Campaign deleted successfully',
+        ],
+
+        'events' => [
+            'title' => 'Events',
+            'add-title' => 'Add Event',
+            'edit-title' => 'Edit Event',
+            'save-btn-title' => 'Save',
+            'general' => 'General',
+            'name' => 'Name',
+            'description' => 'Description',
+            'date' => 'Date',
+            'create-success' => 'Event created successfully.',
+            'update-success' => 'Event updated successfully.',
+            'delete-success' => 'Event deleted successfully.',
+            'edit-error' => 'Can not edit this event.'
         ]
     ],
 

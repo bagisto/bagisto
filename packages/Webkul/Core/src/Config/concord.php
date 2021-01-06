@@ -24,6 +24,7 @@ return [
         \Webkul\CMS\Providers\ModuleServiceProvider::class,
         \Webkul\Customer\Providers\ModuleServiceProvider::class,
         \Webkul\Inventory\Providers\ModuleServiceProvider::class,
+        \Webkul\Marketing\Providers\ModuleServiceProvider::class,
         \Webkul\Payment\Providers\ModuleServiceProvider::class,
         \Webkul\Paypal\Providers\ModuleServiceProvider::class,
         \Webkul\Product\Providers\ModuleServiceProvider::class,
