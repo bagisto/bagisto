@@ -2,16 +2,15 @@
 
 namespace Webkul\Product\Type;
 
-use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Product\Models\ProductFlat;
+use Webkul\Product\Helpers\ProductImage;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Repositories\ProductAttributeValueRepository;
-use Webkul\Product\Repositories\ProductInventoryRepository;
+use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductVideoRepository;
+use Webkul\Product\Repositories\ProductInventoryRepository;
+use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductGroupedProductRepository;
-use Webkul\Product\Helpers\ProductImage;
-use Webkul\Product\Models\ProductAttributeValue;
-use Webkul\Product\Models\ProductFlat;
 
 class Grouped extends AbstractType
 {
@@ -111,7 +110,7 @@ class Grouped extends AbstractType
      */
     public function getChildrenIds()
     {
-        return array_unique($this->product->grouped_products->pluck('associated_product_id')->toArray());
+        return array_unique($this->product->grouped_products()->pluck('associated_product_id')->toArray());
     }
 
     /**
