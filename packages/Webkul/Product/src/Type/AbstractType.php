@@ -837,7 +837,7 @@ abstract class AbstractType
      */
     public function getBaseImage($item)
     {
-        return ProductImage::getProductBaseImage($item->product);
+        return app('Webkul\Product\ProductImage')->getProductBaseImage($item->product);
     }
 
     /**
