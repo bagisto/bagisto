@@ -401,9 +401,9 @@
         @extend .btn;
 
         height: 35px;
-        border-radius: 0px;
+        border-radius: 2px;
         vertical-align: top;
-        padding: 0 6px !important;
+        padding: 0 10px !important;
         font-size: 24px !important;
         font-weight: 600 !important;
         color: $dark-color !important;
@@ -411,26 +411,17 @@
         border: 1px solid $border-common !important;
     }
 
-    button:nth-of-type(1) {
-        border-right: 0px !important;
-    }
-
     input {
-        max-width: 40px;
+        max-width: 50px;
         cursor: default;
         font-size: 16px !important;
-        border-left: 0px !important;
-        border-right: 0px !important;
         text-align: center;
+        margin-left: -5px;
+        margin-right: -5px;
     }
 
     button:hover {
         background-color: #f5f5f5 !important;
-    }
-
-    button:nth-last-of-type(1) {
-        border-radius: 0px;
-        border-left: 0px !important;
     }
 
     button:active,
@@ -1448,8 +1439,6 @@
 }
 
 .address-container {
-    display: none;
-
     .address-holder {
         margin-top: 15px;
 
@@ -1510,6 +1499,11 @@
         border-radius: 1px;
         background: $btn-text-color;
         border: 1px solid $border-common;
+    }
+
+    input[type=checkbox] {
+        position: relative;
+        top: 3px;
     }
 
     input:active,

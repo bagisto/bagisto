@@ -583,23 +583,6 @@ Route::group(['middleware' => ['web', 'admin_locale']], function () {
 
             Route::put('/account', 'Webkul\User\Http\Controllers\AccountController@update')->name('admin.account.update');
 
-
-            // Admin Store Front Settings Route
-            Route::get('/subscribers', 'Webkul\Core\Http\Controllers\SubscriptionController@index')->defaults('_config', [
-                'view' => 'admin::customers.subscribers.index',
-            ])->name('admin.customers.subscribers.index');
-
-            //destroy a newsletter subscription item
-            Route::post('subscribers/delete/{id}', 'Webkul\Core\Http\Controllers\SubscriptionController@destroy')->name('admin.customers.subscribers.delete');
-
-            Route::get('subscribers/edit/{id}', 'Webkul\Core\Http\Controllers\SubscriptionController@edit')->defaults('_config', [
-                'view' => 'admin::customers.subscribers.edit',
-            ])->name('admin.customers.subscribers.edit');
-
-            Route::put('subscribers/update/{id}', 'Webkul\Core\Http\Controllers\SubscriptionController@update')->defaults('_config', [
-                'redirect' => 'admin.customers.subscribers.index',
-            ])->name('admin.customers.subscribers.update');
-
             //slider index
             Route::get('/slider', 'Webkul\Core\Http\Controllers\SliderController@index')->defaults('_config', [
                 'view' => 'admin::settings.sliders.index',
@@ -688,11 +671,11 @@ Route::group(['middleware' => ['web', 'admin_locale']], function () {
 
             Route::prefix('promotions')->group(function () {
                 Route::get('cart-rules', 'Webkul\CartRule\Http\Controllers\CartRuleController@index')->defaults('_config', [
-                    'view' => 'admin::promotions.cart-rules.index',
+                    'view' => 'admin::marketing.promotions.cart-rules.index',
                 ])->name('admin.cart-rules.index');
 
                 Route::get('cart-rules/create', 'Webkul\CartRule\Http\Controllers\CartRuleController@create')->defaults('_config', [
-                    'view' => 'admin::promotions.cart-rules.create',
+                    'view' => 'admin::marketing.promotions.cart-rules.create',
                 ])->name('admin.cart-rules.create');
 
                 Route::post('cart-rules/create', 'Webkul\CartRule\Http\Controllers\CartRuleController@store')->defaults('_config', [
@@ -700,11 +683,11 @@ Route::group(['middleware' => ['web', 'admin_locale']], function () {
                 ])->name('admin.cart-rules.store');
 
                 Route::get('cart-rules/copy/{id}', 'Webkul\CartRule\Http\Controllers\CartRuleController@copy')->defaults('_config', [
-                    'view' => 'admin::promotions.cart-rules.edit',
+                    'view' => 'admin::marketing.promotions.cart-rules.edit',
                 ])->name('admin.cart-rules.copy');
 
                 Route::get('cart-rules/edit/{id}', 'Webkul\CartRule\Http\Controllers\CartRuleController@edit')->defaults('_config', [
-                    'view' => 'admin::promotions.cart-rules.edit',
+                    'view' => 'admin::marketing.promotions.cart-rules.edit',
                 ])->name('admin.cart-rules.edit');
 
                 Route::post('cart-rules/edit/{id}', 'Webkul\CartRule\Http\Controllers\CartRuleController@update')->defaults('_config', [
@@ -720,11 +703,11 @@ Route::group(['middleware' => ['web', 'admin_locale']], function () {
 
                 //Catalog rules
                 Route::get('catalog-rules', 'Webkul\CatalogRule\Http\Controllers\CatalogRuleController@index')->defaults('_config', [
-                    'view' => 'admin::promotions.catalog-rules.index',
+                    'view' => 'admin::marketing.promotions.catalog-rules.index',
                 ])->name('admin.catalog-rules.index');
 
                 Route::get('catalog-rules/create', 'Webkul\CatalogRule\Http\Controllers\CatalogRuleController@create')->defaults('_config', [
-                    'view' => 'admin::promotions.catalog-rules.create',
+                    'view' => 'admin::marketing.promotions.catalog-rules.create',
                 ])->name('admin.catalog-rules.create');
 
                 Route::post('catalog-rules/create', 'Webkul\CatalogRule\Http\Controllers\CatalogRuleController@store')->defaults('_config', [
@@ -732,7 +715,7 @@ Route::group(['middleware' => ['web', 'admin_locale']], function () {
                 ])->name('admin.catalog-rules.store');
 
                 Route::get('catalog-rules/edit/{id}', 'Webkul\CatalogRule\Http\Controllers\CatalogRuleController@edit')->defaults('_config', [
-                    'view' => 'admin::promotions.catalog-rules.edit',
+                    'view' => 'admin::marketing.promotions.catalog-rules.edit',
                 ])->name('admin.catalog-rules.edit');
 
                 Route::post('catalog-rules/edit/{id}', 'Webkul\CatalogRule\Http\Controllers\CatalogRuleController@update')->defaults('_config', [
@@ -740,6 +723,95 @@ Route::group(['middleware' => ['web', 'admin_locale']], function () {
                 ])->name('admin.catalog-rules.update');
 
                 Route::post('catalog-rules/delete/{id}', 'Webkul\CatalogRule\Http\Controllers\CatalogRuleController@destroy')->name('admin.catalog-rules.delete');
+
+
+                //Marketing campaigns routes
+                Route::get('campaigns', 'Webkul\Marketing\Http\Controllers\CampaignController@index')->defaults('_config', [
+                    'view' => 'admin::marketing.email-marketing.campaigns.index',
+                ])->name('admin.campaigns.index');
+
+                Route::get('campaigns/create', 'Webkul\Marketing\Http\Controllers\CampaignController@create')->defaults('_config', [
+                    'view' => 'admin::marketing.email-marketing.campaigns.create',
+                ])->name('admin.campaigns.create');
+
+                Route::post('campaigns/create', 'Webkul\Marketing\Http\Controllers\CampaignController@store')->defaults('_config', [
+                    'redirect' => 'admin.campaigns.index',
+                ])->name('admin.campaigns.store');
+
+                Route::get('campaigns/edit/{id}', 'Webkul\Marketing\Http\Controllers\CampaignController@edit')->defaults('_config', [
+                    'view' => 'admin::marketing.email-marketing.campaigns.edit',
+                ])->name('admin.campaigns.edit');
+
+                Route::post('campaigns/edit/{id}', 'Webkul\Marketing\Http\Controllers\CampaignController@update')->defaults('_config', [
+                    'redirect' => 'admin.campaigns.index',
+                ])->name('admin.campaigns.update');
+
+                Route::post('campaigns/delete/{id}', 'Webkul\Marketing\Http\Controllers\CampaignController@destroy')->name('admin.campaigns.delete');
+
+
+                //Marketing emails templates routes
+                Route::get('email-templates', 'Webkul\Marketing\Http\Controllers\TemplateController@index')->defaults('_config', [
+                    'view' => 'admin::marketing.email-marketing.templates.index',
+                ])->name('admin.email-templates.index');
+
+                Route::get('email-templates/create', 'Webkul\Marketing\Http\Controllers\TemplateController@create')->defaults('_config', [
+                    'view' => 'admin::marketing.email-marketing.templates.create',
+                ])->name('admin.email-templates.create');
+
+                Route::post('email-templates/create', 'Webkul\Marketing\Http\Controllers\TemplateController@store')->defaults('_config', [
+                    'redirect' => 'admin.email-templates.index',
+                ])->name('admin.email-templates.store');
+
+                Route::get('email-templates/edit/{id}', 'Webkul\Marketing\Http\Controllers\TemplateController@edit')->defaults('_config', [
+                    'view' => 'admin::marketing.email-marketing.templates.edit',
+                ])->name('admin.email-templates.edit');
+
+                Route::post('email-templates/edit/{id}', 'Webkul\Marketing\Http\Controllers\TemplateController@update')->defaults('_config', [
+                    'redirect' => 'admin.email-templates.index',
+                ])->name('admin.email-templates.update');
+
+                Route::post('email-templates/delete/{id}', 'Webkul\Marketing\Http\Controllers\TemplateController@destroy')->name('admin.email-templates.delete');
+
+
+                //Marketing events routes
+                Route::get('events', 'Webkul\Marketing\Http\Controllers\EventController@index')->defaults('_config', [
+                    'view' => 'admin::marketing.email-marketing.events.index',
+                ])->name('admin.events.index');
+
+                Route::get('events/create', 'Webkul\Marketing\Http\Controllers\EventController@create')->defaults('_config', [
+                    'view' => 'admin::marketing.email-marketing.events.create',
+                ])->name('admin.events.create');
+
+                Route::post('events/create', 'Webkul\Marketing\Http\Controllers\EventController@store')->defaults('_config', [
+                    'redirect' => 'admin.events.index',
+                ])->name('admin.events.store');
+
+                Route::get('events/edit/{id}', 'Webkul\Marketing\Http\Controllers\EventController@edit')->defaults('_config', [
+                    'view' => 'admin::marketing.email-marketing.events.edit',
+                ])->name('admin.events.edit');
+
+                Route::post('events/edit/{id}', 'Webkul\Marketing\Http\Controllers\EventController@update')->defaults('_config', [
+                    'redirect' => 'admin.events.index',
+                ])->name('admin.events.update');
+
+                Route::post('events/delete/{id}', 'Webkul\Marketing\Http\Controllers\EventController@destroy')->name('admin.events.delete');
+
+
+                // Admin Store Front Settings Route
+                Route::get('/subscribers', 'Webkul\Core\Http\Controllers\SubscriptionController@index')->defaults('_config', [
+                    'view' => 'admin::marketing.email-marketing.subscribers.index',
+                ])->name('admin.customers.subscribers.index');
+
+                //destroy a newsletter subscription item
+                Route::post('subscribers/delete/{id}', 'Webkul\Core\Http\Controllers\SubscriptionController@destroy')->name('admin.customers.subscribers.delete');
+
+                Route::get('subscribers/edit/{id}', 'Webkul\Core\Http\Controllers\SubscriptionController@edit')->defaults('_config', [
+                    'view' => 'admin::marketing.email-marketing.subscribers.edit',
+                ])->name('admin.customers.subscribers.edit');
+
+                Route::put('subscribers/update/{id}', 'Webkul\Core\Http\Controllers\SubscriptionController@update')->defaults('_config', [
+                    'redirect' => 'admin.customers.subscribers.index',
+                ])->name('admin.customers.subscribers.update');
             });
 
             Route::prefix('cms')->group(function () {

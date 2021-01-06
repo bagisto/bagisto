@@ -160,10 +160,12 @@
                                             </div>
 
                                             <div class="product-quantity col-2 no-padding">
-                                                <quantity-changer
-                                                    :control-name="'qty[{{$item->id}}]'"
-                                                    quantity="{{ $item->quantity }}">
-                                                </quantity-changer>
+                                                <div class="row">
+                                                    <quantity-changer
+                                                        :control-name="'qty[{{$item->id}}]'"
+                                                        quantity="{{ $item->quantity }}">
+                                                    </quantity-changer>
+                                                </div>
                                             </div>
 
                                             <div class="product-price fs18 col-1">
