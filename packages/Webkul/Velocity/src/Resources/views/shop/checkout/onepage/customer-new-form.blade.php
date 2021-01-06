@@ -238,14 +238,13 @@
             <div class="mb10">
                 <span class="checkbox fs16 display-inbl no-margin">
                     <input
-                        class="ml0"
                         type="checkbox"
                         id="shipping[save_as_address]"
                         name="shipping[save_as_address]"
                         @change="validateForm('address-form')"
                         v-model="address.shipping.save_as_address"/>
 
-                    <span class="ml-5">
+                    <span>
                         {{ __('shop::app.checkout.onepage.save_as_address') }}
                     </span>
                 </span>
@@ -510,14 +509,13 @@
             <div class="mb10">
                 <span class="checkbox fs16 display-inbl no-margin">
                     <input
-                        class="ml0"
                         type="checkbox"
                         id="billing[use_for_shipping]"
                         name="billing[use_for_shipping]"
                         v-model="address.billing.use_for_shipping"
                         @change="setTimeout(() => validateForm('address-form'), 0)" />
 
-                    <span class="ml-5">
+                    <span>
                         {{ __('shop::app.checkout.onepage.use_for_shipping') }}
                     </span>
                 </span>
@@ -528,14 +526,13 @@
             <div class="mb10">
                 <span class="checkbox fs16 display-inbl no-margin">
                     <input
-                        class="ml0"
                         type="checkbox"
                         id="billing[save_as_address]"
                         name="billing[save_as_address]"
                         @change="validateForm('address-form')"
                         v-model="address.billing.save_as_address"/>
 
-                    <span class="ml-5">
+                    <span>
                         {{ __('shop::app.checkout.onepage.save_as_address') }}
                     </span>
                 </span>

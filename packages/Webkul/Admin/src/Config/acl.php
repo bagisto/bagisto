@@ -392,51 +392,136 @@ return [
         'route' => 'admin.tax-rates.delete',
         'sort'  => 3,
     ], [
-        'key'   => 'promotions',
+        'key'   => 'marketing',
+        'name'  => 'admin::app.acl.marketing',
+        'route' => 'admin.cart-rules.index',
+        'sort'  => 7,
+    ], [
+        'key'   => 'marketing.promotions',
         'name'  => 'admin::app.acl.promotions',
         'route' => 'admin.cart-rules.index',
         'sort'  => 7,
     ], [
-        'key'   => 'promotions.cart-rules',
+        'key'   => 'marketing.promotions.cart-rules',
         'name'  => 'admin::app.acl.cart-rules',
         'route' => 'admin.cart-rules.index',
         'sort'  => 1,
     ], [
-        'key'   => 'promotions.cart-rules.create',
+        'key'   => 'marketing.promotions.cart-rules.create',
         'name'  => 'admin::app.acl.create',
         'route' => 'admin.cart-rules.create',
         'sort'  => 1,
     ], [
-        'key'   => 'promotions.cart-rules.edit',
+        'key'   => 'marketing.promotions.cart-rules.edit',
         'name'  => 'admin::app.acl.edit',
         'route' => 'admin.cart-rules.edit',
         'sort'  => 2,
     ], [
-        'key'   => 'promotions.cart-rules.delete',
+        'key'   => 'marketing.promotions.cart-rules.delete',
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.cart-rules.delete',
         'sort'  => 3,
     ], [
-        'key'   => 'promotions.catalog-rules',
+        'key'   => 'marketing.promotions.catalog-rules',
         'name'  => 'admin::app.acl.catalog-rules',
         'route' => 'admin.catalog-rules.index',
         'sort'  => 1,
     ], [
-        'key'   => 'promotions.catalog-rules.create',
+        'key'   => 'marketing.promotions.catalog-rules.create',
         'name'  => 'admin::app.acl.create',
         'route' => 'admin.catalog-rules.index',
         'sort'  => 1,
     ], [
-        'key'   => 'promotions.catalog-rules.edit',
+        'key'   => 'marketing.promotions.catalog-rules.edit',
         'name'  => 'admin::app.acl.edit',
         'route' => 'admin.catalog-rules.edit',
         'sort'  => 2,
     ], [
-        'key'   => 'promotions.catalog-rules.delete',
+        'key'   => 'marketing.promotions.catalog-rules.delete',
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.catalog-rules.delete',
         'sort'  => 3,
-    ],
+    ], [
+        'key'   => 'marketing.email-marketing',
+        'name'  => 'admin::app.acl.email-marketing',
+        'route' => 'admin.email-templates.index',
+        'sort'  => 7,
+    ], [
+        'key'   => 'marketing.email-marketing.email-templates',
+        'name'  => 'admin::app.acl.email-templates',
+        'route' => 'admin.email-templates.index',
+        'sort'  => 1,
+    ], [
+        'key'   => 'marketing.email-marketing.email-templates.create',
+        'name'  => 'admin::app.acl.create',
+        'route' => 'admin.email-templates.create',
+        'sort'  => 1,
+    ], [
+        'key'   => 'marketing.email-marketing.email-templates.edit',
+        'name'  => 'admin::app.acl.edit',
+        'route' => 'admin.email-templates.edit',
+        'sort'  => 2,
+    ], [
+        'key'   => 'marketing.email-marketing.email-templates.delete',
+        'name'  => 'admin::app.acl.delete',
+        'route' => 'admin.email-templates.delete',
+        'sort'  => 3,
+    ], [
+        'key'   => 'marketing.email-marketing.events',
+        'name'  => 'admin::app.acl.events',
+        'route' => 'admin.events.index',
+        'sort'  => 1,
+    ], [
+        'key'   => 'marketing.email-marketing.events.create',
+        'name'  => 'admin::app.acl.create',
+        'route' => 'admin.events.create',
+        'sort'  => 1,
+    ], [
+        'key'   => 'marketing.email-marketing.events.edit',
+        'name'  => 'admin::app.acl.edit',
+        'route' => 'admin.events.edit',
+        'sort'  => 2,
+    ], [
+        'key'   => 'marketing.email-marketing.events.delete',
+        'name'  => 'admin::app.acl.delete',
+        'route' => 'admin.events.delete',
+        'sort'  => 3,
+    ], [
+        'key'   => 'marketing.email-marketing.campaigns',
+        'name'  => 'admin::app.acl.campaigns',
+        'route' => 'admin.campaigns.index',
+        'sort'  => 1,
+    ], [
+        'key'   => 'marketing.email-marketing.campaigns.create',
+        'name'  => 'admin::app.acl.create',
+        'route' => 'admin.campaigns.create',
+        'sort'  => 1,
+    ], [
+        'key'   => 'marketing.email-marketing.campaigns.edit',
+        'name'  => 'admin::app.acl.edit',
+        'route' => 'admin.campaigns.edit',
+        'sort'  => 2,
+    ], [
+        'key'   => 'marketing.email-marketing.campaigns.delete',
+        'name'  => 'admin::app.acl.delete',
+        'route' => 'admin.campaigns.delete',
+        'sort'  => 3,
+    ], [
+        'key'   => 'marketing.email-marketing.subscribers',
+        'name'  => 'admin::app.acl.subscribers',
+        'route' => 'admin.subscribers.index',
+        'sort'  => 1,
+    ], [
+        'key'   => 'marketing.email-marketing.subscribers.edit',
+        'name'  => 'admin::app.acl.edit',
+        'route' => 'admin.subscribers.edit',
+        'sort'  => 2,
+    ], [
+        'key'   => 'marketing.email-marketing.subscribers.delete',
+        'name'  => 'admin::app.acl.delete',
+        'route' => 'admin.subscribers.delete',
+        'sort'  => 3,
+    ]
 ];
 
 ?>
