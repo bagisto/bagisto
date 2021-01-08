@@ -21,15 +21,17 @@
                     <span>{{ __('shop::app.search.no-results') }}</span>
                 </div>
             @else
-                @if ($results->total() == 1)
-                    <div class="search-result-status mb-20">
-                        <span><b>{{ $results->total() }} </b>{{ __('shop::app.search.found-result') }}</span>
-                    </div>
-                @else
-                    <div class="search-result-status mb-20">
-                        <span><b>{{ $results->total() }} </b>{{ __('shop::app.search.found-results') }}</span>
-                    </div>
-                @endif
+                <div class="search-result-status mb-20">
+                    <span>
+                        <b>{{ $results->total() }} </b>
+
+                        @if ($results->total() == 1)
+                            {{ __('shop::app.search.found-result') }}
+                        @else
+                            {{ __('shop::app.search.found-results') }}
+                        @endif
+                    </span>
+                </div>
 
                 <div class="product-grid-4">
                     @foreach ($results as $productFlat)
