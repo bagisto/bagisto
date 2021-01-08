@@ -705,11 +705,15 @@ h5 {
         &.date, &.datetime {
             &::after {
                 top: 6px;
-                left: unset;
+                left: 100%;
             }
+        }
 
-            .cross-icon {
-                top: 10px;
+        &.has-error.date, &.has-error.date {
+            &.date, &.datetime {
+                &::after {
+                    top: 18px;
+                }
             }
         }
     }
@@ -1240,14 +1244,14 @@ modal {
 .tooltip {
     display: block !important;
     z-index: 10000;
-  
+
     .tooltip-inner {
         background: black;
         color: white;
         border-radius: 4px;
         padding: 5px 10px 4px;
     }
-  
+
     .tooltip-arrow {
         width: 0;
         height: 0;
@@ -1257,10 +1261,10 @@ modal {
         border-color: black;
         z-index: 1;
     }
-  
+
     &[x-placement^="top"] {
         margin-bottom: 5px;
-    
+
         .tooltip-arrow {
             border-width: 5px 5px 0 5px;
             border-left-color: transparent !important;
@@ -1272,10 +1276,10 @@ modal {
             margin-bottom: 0;
         }
     }
-  
+
     &[x-placement^="bottom"] {
         margin-top: 5px;
-    
+
         .tooltip-arrow {
             border-width: 0 5px 5px 5px;
             border-left-color: transparent !important;
@@ -1287,10 +1291,10 @@ modal {
             margin-bottom: 0;
         }
     }
-  
+
     &[x-placement^="right"] {
         margin-left: 5px;
-    
+
         .tooltip-arrow {
             border-width: 5px 5px 5px 0;
             border-left-color: transparent !important;
@@ -1302,10 +1306,10 @@ modal {
             margin-right: 0;
         }
     }
-  
+
     &[x-placement^="left"] {
         margin-right: 5px;
-    
+
         .tooltip-arrow {
             border-width: 5px 0 5px 5px;
             border-top-color: transparent !important;
