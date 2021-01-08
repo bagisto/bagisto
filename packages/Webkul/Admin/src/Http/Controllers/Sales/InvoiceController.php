@@ -160,7 +160,7 @@ class InvoiceController extends Controller
 
         $p = $arabic->arIdentify($html);
 
-        for ($i = count($p)-1; $i >= 0; $i-=2) {
+        for ($i = count($p)-1; $i >= 0; $i -= 2) {
             $utf8ar = $arabic->utf8Glyphs(substr($html, $p[$i-1], $p[$i] - $p[$i-1]));
             $html   = substr_replace($html, $utf8ar, $p[$i-1], $p[$i] - $p[$i-1]);
         }
