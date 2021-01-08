@@ -25,11 +25,7 @@
                     <span>
                         <b>{{ $results->total() }} </b>
 
-                        @if ($results->total() == 1)
-                            {{ __('shop::app.search.found-result') }}
-                        @else
-                            {{ __('shop::app.search.found-results') }}
-                        @endif
+                        {{ ($results->total() == 1) ? __('shop::app.search.found-result') : __('shop::app.search.found-results') }}
                     </span>
                 </div>
 
