@@ -78,7 +78,7 @@
                                     @{{ errors.first('password') }}
                                 </span>
 
-                                <a href="{{ route('customer.forgot-password.create') }}" class="pull-right">
+                                <a href="{{ route('customer.forgot-password.create') }}" class="float-right">
                                     {{ __('shop::app.customer.login-form.forgot_pass') }}
                                 </a>
 

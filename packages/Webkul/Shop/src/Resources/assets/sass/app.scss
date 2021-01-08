@@ -2553,21 +2553,24 @@ section.cart {
         margin-bottom: 10px;
     }
 
+    .quantity-container {
+        display: flex !important;
+    }
+
     button {
         width: 40px;
         height: 38px;
         font-size: 16px;
         background: #ffffff;
         border: 1px solid #C7C7C7;
-        float: left;
         cursor: pointer;
 
         &.decrease {
-            border-radius: 3px 0px 0px 3px;
+            border-radius: 3px;
         }
 
         &.increase {
-            border-radius: 0px 3px 3px 0px;
+            border-radius: 3px;
         }
     }
 

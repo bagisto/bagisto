@@ -19,8 +19,11 @@
         "ext-tokenizer": "*",
         "algolia/algoliasearch-client-php": "^2.2",
         "astrotomic/laravel-translatable": "^11.0.0",
+        "aws/aws-sdk-php": "^3.171",
         "babenkoivan/elastic-scout-driver": "^1.1",
+        "bagisto/bagisto-package-generator": "9999999-dev",
         "bagistobrasil/bagisto-product-social-share": "^0.1.2",
+        "barryvdh/laravel-debugbar": "^3.1",
         "barryvdh/laravel-dompdf": "0.8.6",
         "doctrine/dbal": "2.9.2",
         "fideloper/proxy": "^4.2",
@@ -43,7 +46,6 @@
     },
 
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.1",
         "codeception/codeception": "4.1.1",
         "codeception/module-asserts": "^1.1",
         "codeception/module-filesystem": "^1.0",
@@ -109,7 +111,8 @@
         "Webkul\\Velocity\\": "packages/Webkul/Velocity/src",
         "Webkul\\BookingProduct\\": "packages/Webkul/BookingProduct/src",
         "Webkul\\SocialLogin\\": "packages/Webkul/SocialLogin/src",
-        "Webkul\\DebugBar\\": "packages/Webkul/DebugBar/src"
+        "Webkul\\DebugBar\\": "packages/Webkul/DebugBar/src",
+        "Webkul\\Marketing\\": "packages/Webkul/Marketing/src"
       }
     },
 
@@ -151,6 +154,13 @@
             "vendor/bin/codecept run unit",
             "vendor/bin/codecept run functional",
             "vendor/bin/codecept run trigger"
+        ],
+         "test-win": [
+            "@set -e",
+            "@php artisan migrate:fresh --env=testing",
+            "vendor\\bin\\codecept.bat run unit",
+            "vendor\\bin\\codecept.bat run functional",
+            "vendor\\bin\\codecept.bat run trigger"
         ]
     },
     "config": {

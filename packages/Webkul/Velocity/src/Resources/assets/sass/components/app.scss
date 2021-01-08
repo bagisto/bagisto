@@ -230,7 +230,7 @@
 }
 
 .product-card-new {
-    width: 19rem;
+    width: 12rem;
     height: 385px;
     border: none !important;
     margin: 0 5px 10px 10px;
@@ -401,9 +401,9 @@
         @extend .btn;
 
         height: 35px;
-        border-radius: 0px;
+        border-radius: 2px;
         vertical-align: top;
-        padding: 0 6px !important;
+        padding: 0 10px !important;
         font-size: 24px !important;
         font-weight: 600 !important;
         color: $dark-color !important;
@@ -411,26 +411,17 @@
         border: 1px solid $border-common !important;
     }
 
-    button:nth-of-type(1) {
-        border-right: 0px !important;
-    }
-
     input {
-        max-width: 40px;
+        max-width: 50px;
         cursor: default;
         font-size: 16px !important;
-        border-left: 0px !important;
-        border-right: 0px !important;
         text-align: center;
+        margin-left: -5px;
+        margin-right: -5px;
     }
 
     button:hover {
         background-color: #f5f5f5 !important;
-    }
-
-    button:nth-last-of-type(1) {
-        border-radius: 0px;
-        border-left: 0px !important;
     }
 
     button:active,
@@ -555,7 +546,8 @@
             min-width: 20px;
             border-radius: 50%;
             position: relative;
-            background: #21A179;
+            color: $white-color;
+            background: $button-primary-bg;
         }
     }
 }
@@ -574,6 +566,7 @@
             padding: 4px;
             min-width: 20px;
             position: absolute;
+            color: $white-color;
             background: $button-primary-bg;
         }
     }
@@ -641,7 +634,7 @@
         .rango-close {
             top: -10px;
             left: -10px;
-            padding: 3px 4px 3px 3px;
+            padding: 0px 4px 3px 3px;
             font-size: 10px;
             max-height: 17px;
             line-height: 1.3rem;
@@ -835,6 +828,7 @@
                     }
 
                     a {
+                        display: block;
                         padding: 10px 15px;
                     }
                 }
@@ -1046,7 +1040,7 @@
                 }
 
                 .filter-left {
-                    @extend .pull-left;
+                    float: left;
                 }
 
                 .filter-right {
@@ -1445,8 +1439,6 @@
 }
 
 .address-container {
-    display: none;
-
     .address-holder {
         margin-top: 15px;
 
@@ -1507,6 +1499,11 @@
         border-radius: 1px;
         background: $btn-text-color;
         border: 1px solid $border-common;
+    }
+
+    input[type=checkbox] {
+        position: relative;
+        top: 3px;
     }
 
     input:active,
@@ -2051,7 +2048,7 @@
 .category-container,
 .search-container {
     .grid-card {
-        width: 22rem;
+        width: 15rem;
     }
 }
 
@@ -2335,7 +2332,7 @@
     position: relative;
 }
 
-.recetly-viewed-products-wrapper {
+.recently-viewed-products-wrapper {
     padding: 2px;
 
     .price-from {

@@ -75,7 +75,12 @@ return [
         'taxes' => 'Taxes',
         'tax-categories' => 'Tax Categories',
         'tax-rates' => 'Tax Rates',
+        'marketing' => 'Marketing',
         'promotions' => 'Promotions',
+        'email-marketing' => 'Email Marketing',
+        'campaigns' => 'Campaigns',
+        'email-templates' => 'Email Templates',
+        'events' => 'Events',
         'discount' => 'Discount',
         'cms' => 'CMS'
     ],
@@ -111,9 +116,15 @@ return [
         'edit' => 'Edit',
         'create' => 'Add',
         'delete' => 'Delete',
+        'marketing' => 'Marketing',
         'promotions' => 'Promotions',
         'cart-rules' => 'Cart Rules',
         'catalog-rules' => 'Catalog Rules',
+        'email-marketing' => 'Email Marketing',
+        'email-templates' => 'Email Templates',
+        'campaigns' => 'Campaigns',
+        'subscribers' => 'Newsletter Subscribers',
+        'events' => 'Events'
     ],
 
     'dashboard' => [
@@ -213,6 +224,7 @@ return [
         'end' => 'End',
         'active' => 'Active',
         'inactive' => 'Inactive',
+        'draft' => 'Draft',
         'true' => 'True',
         'false' => 'False',
         'approved' => 'Approved',
@@ -227,7 +239,9 @@ return [
         'view' => 'View',
         'rtl' => 'RTL',
         'ltr' => 'LTR',
-        'update-status' => 'Update Status'
+        'update-status' => 'Update Status',
+        'subject' => 'Subject',
+        'date' => 'Date'
     ],
 
     'account' => [
@@ -981,8 +995,8 @@ return [
         ],
 
         'subscribers' => [
-            'title' => 'News Letter Subscribers',
-            'title-edit' => 'Edit News Letter Subscriber',
+            'title' => 'Newsletter Subscribers',
+            'title-edit' => 'Edit Newsletter Subscriber',
             'email' => 'Email',
             'is_subscribed' => 'Subscribed',
             'edit-btn-title' => 'Update Subscriber',
@@ -1126,6 +1140,68 @@ return [
             'end-other-rules' => 'End Other Rules',
             'categories' => 'Categories',
             'attribute_family' => 'Attribute Family'
+        ]
+    ],
+
+    'marketing' => [
+        'templates' => [
+            'title' => 'Email Templates',
+            'add-title' => 'Add Email Template',
+            'edit-title' => 'Edit Email Template',
+            'save-btn-title' => 'Save',
+            'general' => 'General',
+            'name' => 'Name',
+            'status' => 'Status',
+            'active' => 'Active',
+            'inactive' => 'Inactive',
+            'draft' => 'Draft',
+            'content' => 'Content',
+            'create-success' => 'Email template created successfully.',
+            'update-success' => 'Email template updated successfully.',
+            'delete-success' => 'Email template deleted successfully',
+        ],
+
+        'campaigns' => [
+            'title' => 'Campaigns',
+            'add-title' => 'Add Campaign',
+            'edit-title' => 'Edit Campaign',
+            'save-btn-title' => 'Save',
+            'general' => 'General',
+            'name' => 'Name',
+            'status' => 'Status',
+            'active' => 'Active',
+            'inactive' => 'Inactive',
+            'subject' => 'Subject',
+            'email-template' => 'Email Template',
+            'audience' => 'Audience',
+            'channel' => 'Channel',
+            'customer-group' => 'Customer Group',
+            'schedule' => 'Schedule',
+            'schedule-type' => 'Schedule Type',
+            'once' => 'Once',
+            'events' => 'Events',
+            'schedule-date' => 'Schedule Date',
+            'spooling' => 'Spooling',
+            'event' => 'Event',
+            'birthday' => 'Birthday',
+            'create-success' => 'Campaign created successfully.',
+            'update-success' => 'Campaign updated successfully.',
+            'delete-success' => 'Campaign deleted successfully',
+        ],
+
+        'events' => [
+            'title' => 'Events',
+            'add-title' => 'Add Event',
+            'edit-title' => 'Edit Event',
+            'save-btn-title' => 'Save',
+            'general' => 'General',
+            'name' => 'Name',
+            'description' => 'Description',
+            'date' => 'Date',
+            'create-success' => 'Event created successfully.',
+            'update-success' => 'Event updated successfully.',
+            'delete-success' => 'Event deleted successfully.',
+            'edit-error' => 'Can not edit this event.'
         ]
     ],
 
@@ -1295,14 +1371,15 @@ return [
             'description' => 'Description',
             'rate' => 'Rate',
             'status' => 'Status',
+            'calculate-tax' => 'Calculate Tax',
             'type' => 'Type',
             'payment-methods' => 'Payment Methods',
             'cash-on-delivery' => 'Cash On Delivery',
             'money-transfer' => 'Money Transfer',
             'paypal-standard' => 'PayPal Standard',
             'business-account' => 'Business Account',
-            'newsletter' => 'NewsLetter Subscription',
-            'newsletter-subscription' => 'Allow NewsLetter Subscription',
+            'newsletter' => 'Newsletter Subscription',
+            'newsletter-subscription' => 'Allow Newsletter Subscription',
             'email' => 'Email Verification',
             'email-verification' => 'Allow Email Verification',
             'sort_order' => 'Sort Order',

@@ -30,7 +30,7 @@
     <script type="text/x-template" id="cart-template">
         <div class="container">
             <section class="cart-details row no-margin col-12">
-                <h1 class="fw6 col-12">{{ __('shop::app.checkout.cart.title') }}</h1>
+                <h2 class="fw6 col-12">{{ __('shop::app.checkout.cart.title') }}</h2>
 
                 @if ($cart)
                     <div class="cart-details-header col-lg-6 col-md-12">
@@ -143,26 +143,30 @@
                                                         @endif
                                                     @endauth
 
-                                                    <a
-                                                        class="unset
-                                                            @auth('customer')
-                                                                ml10
-                                                            @endauth
-                                                        "
-                                                        href="{{ route('shop.checkout.cart.remove', ['id' => $item->id]) }}"
-                                                        @click="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">
+                                                    <div class="d-inline-block">
+                                                        <a
+                                                            class="unset
+                                                                @auth('customer')
+                                                                    ml10
+                                                                @endauth
+                                                            "
+                                                            href="{{ route('shop.checkout.cart.remove', ['id' => $item->id]) }}"
+                                                            @click="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">
 
-                                                        <span class="rango-delete fs24"></span>
-                                                        <span class="align-vertical-top">{{ __('shop::app.checkout.cart.remove') }}</span>
-                                                    </a>
+                                                            <span class="rango-delete fs24"></span>
+                                                            <span class="align-vertical-super">{{ __('shop::app.checkout.cart.remove') }}</span>
+                                                        </a>
+                                                    </div>
                                                 </div>
                                             </div>
 
                                             <div class="product-quantity col-2 no-padding">
-                                                <quantity-changer
-                                                    :control-name="'qty[{{$item->id}}]'"
-                                                    quantity="{{ $item->quantity }}">
-                                                </quantity-changer>
+                                                <div class="row">
+                                                    <quantity-changer
+                                                        :control-name="'qty[{{$item->id}}]'"
+                                                        quantity="{{ $item->quantity }}">
+                                                    </quantity-changer>
+                                                </div>
                                             </div>
 
                                             <div class="product-price fs18 col-1">
@@ -243,7 +247,7 @@
 
                                     <button
                                         type="submit"
-                                        class="theme-btn light mr15 pull-right unset">
+                                        class="theme-btn light mr15 float-right unset">
 
                                         {{ __('shop::app.checkout.cart.update-cart') }}
                                     </button>
