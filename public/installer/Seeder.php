@@ -1,5 +1,7 @@
 <?php
 
+ini_set('max_execution_time', 900);
+
 // array to pass back data
 $data = array();
 $phpbin = PHP_BINDIR . '/php';
