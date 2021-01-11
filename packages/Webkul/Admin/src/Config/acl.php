@@ -52,6 +52,11 @@ return [
         'route' => 'admin.catalog.products.delete',
         'sort'  => 3,
     ], [
+        'key'   => 'catalog.products.mass-delete',
+        'name'  => 'admin::app.acl.mass-delete',
+        'route' => 'admin.catalog.products.massdelete',
+        'sort'  => 4,
+    ], [
         'key'   => 'catalog.categories',
         'name'  => 'admin::app.acl.categories',
         'route' => 'admin.catalog.categories.index',
