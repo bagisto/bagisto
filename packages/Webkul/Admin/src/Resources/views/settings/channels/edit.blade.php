@@ -61,7 +61,7 @@
                                     {{ __('admin::app.settings.channels.name') }}
                                     <span class="locale">[{{ $locale }}]</span>
                                 </label>
-                                <input v-validate="'required'" class="control" id="name" name="{{$locale}}[name]" data-vv-as="&quot;{{ __('admin::app.settings.channels.name') }}&quot;" value="{{ old($locale)['name'] ?? ($channel->translate($locale)['name'] ?? '') }}"/>
+                                <input v-validate="'required'" class="control" id="name" name="{{$locale}}[name]" data-vv-as="&quot;{{ __('admin::app.settings.channels.name') }}&quot;" value="{{ old($locale)['name'] ?? ($channel->translate($locale)['name'] ?? $channel->name) }}"/>
                                 <span class="control-error" v-if="errors.has('{{$locale}}[name]')">@{{ errors.first('{!!$locale!!}[page_title]') }}</span>
                             </div>
 
@@ -70,7 +70,7 @@
                                     {{ __('admin::app.settings.channels.description') }}
                                     <span class="locale">[{{ $locale }}]</span>
                                 </label>
-                                <textarea class="control" id="description" name="{{$locale}}[description]">{{ old($locale)['description'] ?? ($channel->translate($locale)['description'] ?? '') }}</textarea>
+                                <textarea class="control" id="description" name="{{$locale}}[description]">{{ old($locale)['description'] ?? ($channel->translate($locale)['description'] ?? $channel->description) }}</textarea>
                             </div>
 
                             <div class="control-group" :class="[errors.has('inventory_sources[]') ? 'has-error' : '']">
@@ -190,7 +190,7 @@
                                     {{ __('admin::app.settings.channels.home_page_content') }}
                                     <span class="locale">[{{ $locale }}]</span>
                                 </label>
-                                <textarea class="control" id="home_page_content" name="{{$locale}}[home_page_content]">{{ old($locale)['home_page_content'] ?? ($channel->translate($locale)['home_page_content'] ?? '') }}</textarea>
+                                <textarea class="control" id="home_page_content" name="{{$locale}}[home_page_content]">{{ old($locale)['home_page_content'] ?? ($channel->translate($locale)['home_page_content'] ?? $channel->home_page_content) }}</textarea>
                             </div>
 
                             <div class="control-group">
@@ -198,7 +198,7 @@
                                     {{ __('admin::app.settings.channels.footer_content') }}
                                     <span class="locale">[{{ $locale }}]</span>
                                 </label>
-                                <textarea class="control" id="footer_content" name="{{$locale}}[footer_content]">{{ old($locale)['footer_content'] ?? ($channel->translate($locale)['footer_content'] ?? '') }}</textarea>
+                                <textarea class="control" id="footer_content" name="{{$locale}}[footer_content]">{{ old($locale)['footer_content'] ?? ($channel->translate($locale)['footer_content'] ?? $channel->footer_content) }}</textarea>
                             </div>
 
                             <div class="control-group">
@@ -217,7 +217,7 @@
                     </accordian>
 
                     @php
-                        $home_seo = $channel->translate($locale)['home_seo'] ?? '{}';
+                        $home_seo = $channel->translate($locale)['home_seo'] ?? $channel->home_seo;
                         $seo = json_decode($home_seo);
                     @endphp
 
@@ -276,7 +276,7 @@
                                     {{ __('admin::app.settings.channels.maintenance-mode-text') }}
                                     <span class="locale">[{{ $locale }}]</span>
                                 </label>
-                                <input class="control" id="maintenance-mode-text" name="{{$locale}}[maintenance_mode_text]" value="{{ old('maintenance_mode_text') ?? ($channel->translate($locale)['maintenance_mode_text'] ?? '') }}"/>
+                                <input class="control" id="maintenance-mode-text" name="{{$locale}}[maintenance_mode_text]" value="{{ old('maintenance_mode_text') ?? ($channel->translate($locale)['maintenance_mode_text'] ?? $channel->maintenance_mode_text) }}"/>
                             </div>
 
                             <div class="control-group">
