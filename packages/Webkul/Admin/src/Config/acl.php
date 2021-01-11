@@ -52,10 +52,15 @@ return [
         'route' => 'admin.catalog.products.delete',
         'sort'  => 3,
     ], [
+        'key'   => 'catalog.products.mass-update',
+        'name'  => 'admin::app.acl.mass-update',
+        'route' => 'admin.catalog.products.massupdate',
+        'sort'  => 4,
+    ], [
         'key'   => 'catalog.products.mass-delete',
         'name'  => 'admin::app.acl.mass-delete',
         'route' => 'admin.catalog.products.massdelete',
-        'sort'  => 4,
+        'sort'  => 5,
     ], [
         'key'   => 'catalog.categories',
         'name'  => 'admin::app.acl.categories',
@@ -77,6 +82,11 @@ return [
         'route' => 'admin.catalog.categories.delete',
         'sort'  => 3,
     ], [
+        'key'   => 'catalog.categories.mass-delete',
+        'name'  => 'admin::app.acl.mass-delete',
+        'route' => 'admin.catalog.categories.massdelete',
+        'sort'  => 4,
+    ], [
         'key'   => 'catalog.attributes',
         'name'  => 'admin::app.acl.attributes',
         'route' => 'admin.catalog.attributes.index',
@@ -96,6 +106,11 @@ return [
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.catalog.attributes.delete',
         'sort'  => 3,
+    ], [
+        'key'   => 'catalog.attributes.mass-delete',
+        'name'  => 'admin::app.acl.mass-delete',
+        'route' => 'admin.catalog.attributes.massdelete',
+        'sort'  => 4,
     ], [
         'key'   => 'catalog.families',
         'name'  => 'admin::app.acl.attribute-families',
@@ -142,6 +157,16 @@ return [
         'route' => 'admin.customer.delete',
         'sort'  => 3,
     ], [
+        'key'   => 'customers.customers.mass-update',
+        'name'  => 'admin::app.acl.mass-update',
+        'route' => 'admin.customer.mass-update',
+        'sort'  => 4,
+    ], [
+        'key'   => 'customers.customers.mass-delete',
+        'name'  => 'admin::app.acl.mass-delete',
+        'route' => 'admin.customer.mass-delete',
+        'sort'  => 5,
+    ], [
         'key'   => 'customers.groups',
         'name'  => 'admin::app.acl.groups',
         'route' => 'admin.groups.index',
@@ -176,6 +201,16 @@ return [
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.customer.review.delete',
         'sort'  => 2,
+    ], [
+        'key'   => 'customers.reviews.mass-update',
+        'name'  => 'admin::app.acl.mass-update',
+        'route' => 'admin.customer.review.massupdate',
+        'sort'  => 3,
+    ], [
+        'key'   => 'customers.reviews.mass-delete',
+        'name'  => 'admin::app.acl.mass-delete',
+        'route' => 'admin.customer.review.massdelete',
+        'sort'  => 4,
     ], [
         'key'   => 'marketing',
         'name'  => 'admin::app.acl.marketing',
@@ -332,6 +367,11 @@ return [
         'route' => 'admin.cms.delete',
         'sort'  => 3,
     ], [
+        'key'   => 'cms.pages.mass-delete',
+        'name'  => 'admin::app.acl.mass-delete',
+        'route' => 'admin.cms.mass-delete',
+        'sort'  => 4,
+    ], [
         'key'   => 'settings',
         'name'  => 'admin::app.acl.settings',
         'route' => 'admin.users.index',
@@ -376,6 +416,11 @@ return [
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.currencies.delete',
         'sort'  => 3,
+    ], [
+        'key'   => 'settings.currencies.mass-delete',
+        'name'  => 'admin::app.acl.mass-delete',
+        'route' => 'admin.currencies.massdelete',
+        'sort'  => 4,
     ], [
         'key'   => 'settings.exchange_rates',
         'name'  => 'admin::app.acl.exchange-rates',
