@@ -114,6 +114,8 @@ return [
         'edit' => 'Modifica',
         'create' => 'Aggiungi',
         'delete' => 'Elimina',
+        'mass-delete' => 'Mass Delete',
+        'mass-update' => 'Mass Update',
         'marketing' => 'Marketing',
         'promotions' => 'Promozioni',
         'cart-rules' => 'Regole Carrello',

@@ -114,6 +114,8 @@ return [
         'edit' => 'ویاریش',
         'create' => 'افزودن',
         'delete' => 'حذف',
+        'mass-delete' => 'Mass Delete',
+        'mass-update' => 'Mass Update',
         'marketing' => 'Marketing',
         'promotions' => 'تبلیغات',
         'cart-rules' => 'قوانین سبد خرید',

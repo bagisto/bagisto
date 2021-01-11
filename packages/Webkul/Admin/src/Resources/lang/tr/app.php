@@ -112,6 +112,8 @@ return [
         'edit' => 'Düzenle',
         'create' => 'Oluştur',
         'delete' => 'Sil',
+        'mass-delete' => 'Mass Delete',
+        'mass-update' => 'Mass Update',
         'marketing' => 'Marketing',
         'promotions' => 'Promosyonlar',
         'cart-rules' => 'Alışveriş Sepeti Kuralları',

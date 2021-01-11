@@ -116,6 +116,8 @@ return [
         'edit' => 'Edit',
         'create' => 'Add',
         'delete' => 'Delete',
+        'mass-delete' => 'Mass Delete',
+        'mass-update' => 'Mass Update',
         'marketing' => 'Marketing',
         'promotions' => 'Promotions',
         'cart-rules' => 'Cart Rules',

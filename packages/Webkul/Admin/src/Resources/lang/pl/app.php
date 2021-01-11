@@ -113,6 +113,8 @@ return [
         'edit' => 'Edytuj',
         'create' => 'Dodaj',
         'delete' => 'Usuń',
+        'mass-delete' => 'Mass Delete',
+        'mass-update' => 'Mass Update',
         'marketing' => 'Marketing',
         'promotions' => 'Promocje',
         'cart-rules' => 'Zasady koszyka',

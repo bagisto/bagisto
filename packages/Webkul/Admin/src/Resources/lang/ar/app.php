@@ -115,6 +115,8 @@ return [
         'edit' => 'تعديل',
         'create' => 'أضف',
         'delete' => 'حذف',
+        'mass-delete' => 'Mass Delete',
+        'mass-update' => 'Mass Update',
         'marketing' => 'Marketing',
         'promotions' => 'الترقيات',
         'cart-rules' => 'قواعد سلة التسوق',

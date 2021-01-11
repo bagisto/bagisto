@@ -114,7 +114,9 @@ return [
         'edit'                     => 'Bearbeiten',
         'create'                   => 'Hinzufügen',
         'delete'                   => 'Löschen',
-        'marketing' => 'Marketing',
+        'mass-delete'              => 'Mass Delete',
+        'mass-update'              => 'Mass Update',
+        'marketing'                => 'Marketing',
         'promotions'               => 'Promotions',
         'cart-rules'               => 'Warenkorbregeln',
         'catalog-rules'            => 'Katalogregeln',
@@ -1197,7 +1199,7 @@ return [
             'edit-error' => 'Can not edit this event.'
         ]
     ],
-    
+
     'error'         =>
     [
         'go-to-home'    => 'HOME ÖFFNEN',
