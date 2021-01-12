@@ -15,8 +15,8 @@ class CreateCoreConfigTable extends Migration
     {
         Schema::create('core_config', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('code');
-            $table->string('value');
+            $table->string('code', 20000);
+            $table->string('value', 20000);
             $table->integer('channel_id')->unsigned();
             $table->foreign('channel_id')->references('id')->on('channels')->onDelete('cascade');
         });

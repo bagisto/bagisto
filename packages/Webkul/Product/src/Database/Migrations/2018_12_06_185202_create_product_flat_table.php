@@ -26,7 +26,7 @@ class CreateProductFlatTable extends Migration
 
             $table->decimal('price', 12, 4)->nullable();
             $table->decimal('cost', 12, 4)->nullable();
-            $table->boolean('special_price')->nullable();
+            $table->decimal('special_price', 12, 4)->nullable();
             $table->date('special_price_from')->nullable();
             $table->date('special_price_to')->nullable();
 

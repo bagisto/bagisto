@@ -93,7 +93,7 @@ class Channel extends TranslatableModel implements ChannelContract
             return;
         }
 
-        return Storage::url($this->logo);
+        return Storage::url('app/public/' . $this->logo);
     }
 
     /**
