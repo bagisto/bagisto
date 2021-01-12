@@ -260,11 +260,11 @@
                                             </div>
                                         @endif
                                     </td>
-                                    <td>{{ core()->formatBasePrice($item->base_price) }}</td>
+                                    <td>{!! core()->formatBasePrice($item->base_price, true) !!}</td>
                                     <td class="text-center">{{ $item->qty }}</td>
-                                    <td class="text-center">{{ core()->formatBasePrice($item->base_total) }}</td>
-                                    <td class="text-center">{{ core()->formatBasePrice($item->base_tax_amount) }}</td>
-                                    <td class="text-center">{{ core()->formatBasePrice($item->base_total + $item->base_tax_amount) }}</td>
+                                    <td class="text-center">{!! core()->formatBasePrice($item->base_total, true) !!}</td>
+                                    <td class="text-center">{!! core()->formatBasePrice($item->base_tax_amount, true) !!}</td>
+                                    <td class="text-center">{!! core()->formatBasePrice($item->base_total + $item->base_tax_amount, true) !!}</td>
                                 </tr>
                             @endforeach
 
@@ -277,31 +277,31 @@
                     <tr>
                         <td>{{ __('admin::app.sales.orders.subtotal') }}</td>
                         <td>-</td>
-                        <td>{{ core()->formatBasePrice($invoice->base_sub_total) }}</td>
+                        <td>{!! core()->formatBasePrice($invoice->base_sub_total, true) !!}</td>
                     </tr>
 
                     <tr>
                         <td>{{ __('admin::app.sales.orders.shipping-handling') }}</td>
                         <td>-</td>
-                        <td>{{ core()->formatBasePrice($invoice->base_shipping_amount) }}</td>
+                        <td>{!! core()->formatBasePrice($invoice->base_shipping_amount, true) !!}</td>
                     </tr>
 
                     <tr>
                         <td>{{ __('admin::app.sales.orders.tax') }}</td>
                         <td>-</td>
-                        <td>{{ core()->formatBasePrice($invoice->base_tax_amount) }}</td>
+                        <td>{!! core()->formatBasePrice($invoice->base_tax_amount, true) !!}</td>
                     </tr>
 
                     <tr>
                         <td>{{ __('admin::app.sales.orders.discount') }}</td>
                         <td>-</td>
-                        <td>{{ core()->formatBasePrice($invoice->base_discount_amount) }}</td>
+                        <td>{!! core()->formatBasePrice($invoice->base_discount_amount, true) !!}</td>
                     </tr>
 
                     <tr>
                         <td><strong>{{ __('admin::app.sales.orders.grand-total') }}</strong></td>
                         <td><strong>-</strong></td>
-                        <td><strong>{{ core()->formatBasePrice($invoice->base_grand_total) }}</strong></td>
+                        <td><strong>{!! core()->formatBasePrice($invoice->base_grand_total, true) !!}</strong></td>
                     </tr>
                 </table>
 
