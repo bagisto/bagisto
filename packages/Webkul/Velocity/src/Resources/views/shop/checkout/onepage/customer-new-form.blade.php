@@ -137,9 +137,9 @@
 
                 <option value=""></option>
 
-                @foreach (core()->countries() as $country)
-                    <option value="{{ $country->code }}">{{ $country->name }}</option>
-                @endforeach
+                <option v-for='(country, index) in countries' :value="country.code">
+                    @{{ country.name }}
+                </option>
             </select>
 
             <div class="select-icon-container">
@@ -410,9 +410,9 @@
 
                 <option value=""></option>
 
-                @foreach (core()->countries() as $country)
-                    <option value="{{ $country->code }}">{{ $country->name }}</option>
-                @endforeach
+                <option v-for='(country, index) in countries' :value="country.code">
+                    @{{ country.name }}
+                </option>
             </select>
 
             <div class="select-icon-container">
