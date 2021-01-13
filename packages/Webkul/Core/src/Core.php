@@ -583,13 +583,15 @@ class Core
     }
 
     /**
-     * Format price with base currency symbol.
+     * Format price with base currency symbol. This method also give ability to encode
+     * the base currency symbol and its optional.
      *
-     * @param float $price
+     * @param  float $price
+     * @param  bool  $isEncoded
      *
      * @return string
      */
-    public function formatBasePrice($price)
+    public function formatBasePrice($price, $isEncoded = false)
     {
         if (is_null($price)) {
             $price = 0;
@@ -599,15 +601,17 @@ class Core
 
         if ($symbol = $this->getBaseCurrency()->symbol) {
             if ($this->currencySymbol($this->getBaseCurrencyCode()) == $symbol) {
-                return $formater->formatCurrency($price, $this->getBaseCurrencyCode());
+                $content = $formater->formatCurrency($price, $this->getBaseCurrencyCode());
             } else {
                 $formater->setSymbol(\NumberFormatter::CURRENCY_SYMBOL, $symbol);
 
-                return $formater->format($this->convertPrice($price));
+                $content = $formater->format($this->convertPrice($price));
             }
         } else {
-            return $formater->formatCurrency($price, $this->getBaseCurrencyCode());
+            $content = $formater->formatCurrency($price, $this->getBaseCurrencyCode());
         }
+
+        return ! $isEncoded ? $content : htmlentities($content);
     }
 
     /**

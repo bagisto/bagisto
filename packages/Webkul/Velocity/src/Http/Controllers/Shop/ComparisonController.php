@@ -11,42 +11,46 @@ class ComparisonController extends Controller
      */
     public function getComparisonList()
     {
-        if (request()->get('data')) {
-            $productCollection = [];
+        if (! core()->getConfigData('general.content.shop.compare_option')) {
+            abort(404);
+        } else {
+            if (request()->get('data')) {
+                $productCollection = [];
 
-            if (auth()->guard('customer')->user()) {
-                $productCollection = $this->compareProductsRepository
-                    ->leftJoin(
-                        'product_flat',
-                        'velocity_customer_compare_products.product_flat_id',
-                        'product_flat.id'
-                    )
-                    ->where('customer_id', auth()->guard('customer')->user()->id)
-                    ->get();
+                if (auth()->guard('customer')->user()) {
+                    $productCollection = $this->compareProductsRepository
+                        ->leftJoin(
+                            'product_flat',
+                            'velocity_customer_compare_products.product_flat_id',
+                            'product_flat.id'
+                        )
+                        ->where('customer_id', auth()->guard('customer')->user()->id)
+                        ->get();
 
-                $items = $productCollection->map(function ($product) {
-                    return $product->id;
-                })->join('&');
+                    $items = $productCollection->map(function ($product) {
+                        return $product->id;
+                    })->join('&');
 
-                $productCollection = ! empty($items)
-                    ? $this->velocityHelper->fetchProductCollection($items)
-                    : [];
-            } else {
-                /* for product details */
-                if ($items = request()->get('items')) {
-                    $productCollection = $this->velocityHelper->fetchProductCollection($items);
+                    $productCollection = ! empty($items)
+                        ? $this->velocityHelper->fetchProductCollection($items)
+                        : [];
+                } else {
+                    /* for product details */
+                    if ($items = request()->get('items')) {
+                        $productCollection = $this->velocityHelper->fetchProductCollection($items);
+                    }
                 }
+
+                $response = [
+                    'status'   => 'success',
+                    'products' => $productCollection,
+                ];
+            } else {
+                $response = view($this->_config['view']);
             }
 
-            $response = [
-                'status'   => 'success',
-                'products' => $productCollection,
-            ];
-        } else {
-            $response = view($this->_config['view']);
+            return $response;
         }
-
-        return $response;
     }
 
     /**
