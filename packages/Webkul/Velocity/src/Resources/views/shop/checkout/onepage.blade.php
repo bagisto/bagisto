@@ -132,8 +132,8 @@
                         new_shipping_address: false,
                         selected_payment_method: '',
                         selected_shipping_method: '',
-                        country: @json(core()->countries()),
-                        countryStates: @json(core()->groupedStatesByCountries()),
+                        countries: [],
+                        countryStates: [],
 
                         step_numbers: {
                             'information': 1,
@@ -157,6 +157,10 @@
                 },
 
                 created: function () {
+                    this.fetchCountries();
+
+                    this.fetchCountryStates();
+
                     this.getOrderSummary();
 
                     if (! customerAddress) {
@@ -173,11 +177,11 @@
                         } else {
                             this.allAddress = customerAddress;
 
-                            for (var country in this.country) {
-                                for (var code in this.allAddress) {
+                            for (let country in this.countries) {
+                                for (let code in this.allAddress) {
                                     if (this.allAddress[code].country) {
-                                        if (this.allAddress[code].country == this.country[country].code) {
-                                            this.allAddress[code]['country'] = this.country[country].name;
+                                        if (this.allAddress[code].country == this.countries[country].code) {
+                                            this.allAddress[code]['country'] = this.countries[country].name;
                                         }
                                     }
                                 }
@@ -192,6 +196,26 @@
                             this.current_step = step
                             this.completed_step = step - 1;
                         }
+                    },
+
+                    fetchCountries: function () {
+                        let countriesEndPoint = `${this.$root.baseUrl}/api/countries?pagination=0`;
+
+                        this.$http.get(countriesEndPoint)
+                            .then(response => {
+                                this.countries = response.data.data;
+                            })
+                            .catch(function (error) {});
+                    },
+
+                    fetchCountryStates: function () {
+                        let countryStateEndPoint = `${this.$root.baseUrl}/api/country-states?pagination=0`;
+
+                        this.$http.get(countryStateEndPoint)
+                            .then(response => {
+                                this.countryStates = response.data.data;
+                            })
+                            .catch(function (error) {});
                     },
 
                     haveStates: function (addressType) {
