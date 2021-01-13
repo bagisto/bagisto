@@ -219,10 +219,10 @@
                     return false;
                 },
 
-                validateForm: function(scope) {
+                validateForm: async function(scope) {
                     var this_this = this;
 
-                    this.$validator.validateAll(scope).then(function (result) {
+                    await this.$validator.validateAll(scope).then(function (result) {
                         if (result) {
                             if (scope == 'address-form') {
                                 this_this.saveAddress();
@@ -286,7 +286,7 @@
                         .catch(function (error) {})
                 },
 
-                saveAddress: function() {
+                saveAddress: async function() {
                     var this_this = this;
 
                     this.disable_button = true;
@@ -327,7 +327,7 @@
                         })
                 },
 
-                saveShipping: function() {
+                saveShipping: async function() {
                     var this_this = this;
 
                     this.disable_button = true;
@@ -351,7 +351,7 @@
                         })
                 },
 
-                savePayment: function() {
+                savePayment: async function() {
                     var this_this = this;
 
                     this.disable_button = true;
@@ -373,7 +373,7 @@
                     });
                 },
 
-                placeOrder: function() {
+                placeOrder: async function() {
                     var this_this = this;
 
                     this.disable_button = true;
