@@ -24,6 +24,7 @@ class CategoryDataGrid extends DataGrid
             ->groupBy('cat.id');
 
 
+        $this->addFilter('status', 'cat.status');
         $this->addFilter('category_id', 'cat.id');
 
         $this->setQueryBuilder($queryBuilder);
