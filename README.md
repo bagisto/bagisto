@@ -15,14 +15,11 @@
 1. [Introduction](#introduction)
 2. [Documentation](#documentation)
 3. [Community](#community)
-4. [Requirements](#requirements)
-5. [Installation & Configuration](#installation-and-configuration)
-6. [License](#license)
-7. [Security Vulnerabilities](#security-vulnerabilities)
-8. [Miscellaneous](#miscellaneous)
+4. [License](#license)
+5. [Security Vulnerabilities](#security-vulnerabilities)
+6. [Miscellaneous](#miscellaneous)
 
 ## Introduction
-
 [Bagisto](https://www.bagisto.com) is a hand tailored E-Commerce framework built on some of the hottest opensource technologies
 such as [Laravel](https://laravel.com) (a [PHP](https://secure.php.net/) framework) and [Vue.js](https://vuejs.org)
 a progressive Javascript framework.
@@ -55,7 +52,8 @@ It packs in lots of features that will allow your E-Commerce business to scale i
 Take advantage of two of the hottest frameworks used in this project -- Laravel and Vue.js -- both of which have been used in Bagisto.
 
 ## Documentation
-Installation and Developers Documentation for Bagisto can be found on [https://devdocs.bagisto.com](https://devdocs.bagisto.com). 
+Do you want to know how to install Bagisto or do you like to know how you can develop your own extensions?  
+Please visit our documentation site on [https://devdocs.bagisto.com](https://devdocs.bagisto.com). 
 
 ## Community
 We also have a forum for any type of concerns, feature requests, or discussions, please visit: [Bagisto Forums](https://forums.bagisto.com/).
@@ -69,15 +67,11 @@ Please don't disclose security vulnerabilities publicly. If you find any securit
 ## Miscellaneous
 
 #### Contributors
-
 This project is on [Open Collective](https://opencollective.com/bagisto) and it exists thanks to the people who contribute.
-
 <a href="https://github.com/bagisto/bagisto/graphs/contributors"><img src="https://opencollective.com/bagisto/contributors.svg?width=890&button=false"/></a>
 
 #### Backers
-
 Thank you to all our backers! 🙏
-
 <a href="https://opencollective.com/bagisto#contributors" target="_blank"><img src="https://opencollective.com/bagisto/backers.svg?width=890"></a>
 
 #### Sponsors
