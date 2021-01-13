@@ -116,7 +116,7 @@ class ContentDataGrid extends DataGrid
             'type'   => 'delete',
             'action' => route('velocity.admin.content.mass-delete'),
             'label'  => trans('admin::app.datagrid.delete'),
-            'method' => 'DELETE',
+            'method' => 'POST',
         ]);
     }
 }
