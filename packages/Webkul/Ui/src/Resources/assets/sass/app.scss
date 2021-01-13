@@ -744,11 +744,8 @@ h5 {
             &.date, &.datetime {
                 &::after {
                     right: unset !important;
+                    left: auto;
                 }
-            }
-
-            .cross-icon {
-                top: 10px;
             }
         }
     }
