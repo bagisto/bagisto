@@ -62,6 +62,8 @@ class CartRuleDataGrid extends DataGrid
             $queryBuilder->where('cart_rule_channels.channel_id', $this->channel);
         }
 
+        $this->addFilter('status', 'status');
+
         $this->setQueryBuilder($queryBuilder);
     }
 

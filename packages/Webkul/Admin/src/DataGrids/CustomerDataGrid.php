@@ -24,6 +24,7 @@ class CustomerDataGrid extends DataGrid
         $this->addFilter('full_name', DB::raw('CONCAT(' . DB::getTablePrefix() . 'customers.first_name, " ", ' . DB::getTablePrefix() . 'customers.last_name)'));
         $this->addFilter('phone', 'customers.phone');
         $this->addFilter('gender', 'customers.gender');
+        $this->addFilter('status', 'status');
 
         $this->setQueryBuilder($queryBuilder);
     }

@@ -22,6 +22,7 @@ class ContentDataGrid extends DataGrid
             ->groupBy('con.id');
 
         $this->addFilter('content_id', 'con.id');
+        $this->addFilter('status', 'con.status');
 
         $this->setQueryBuilder($queryBuilder);
     }
