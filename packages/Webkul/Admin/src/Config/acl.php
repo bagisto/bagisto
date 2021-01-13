@@ -1,12 +1,31 @@
 <?php
 
 return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Dashboard
+    |--------------------------------------------------------------------------
+    |
+    | All ACLs related to dashboard will be placed here.
+    |
+    */
     [
         'key'   => 'dashboard',
         'name'  => 'admin::app.acl.dashboard',
         'route' => 'admin.dashboard.index',
         'sort'  => 1,
-    ], [
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Sales
+    |--------------------------------------------------------------------------
+    |
+    | All ACLs related to sales will be placed here.
+    |
+    */
+    [
         'key'   => 'sales',
         'name'  => 'admin::app.acl.sales',
         'route' => 'admin.sales.orders.index',
@@ -17,9 +36,24 @@ return [
         'route' => 'admin.sales.orders.index',
         'sort'  => 1,
     ], [
+        'key'   => 'sales.orders.view',
+        'name'  => 'admin::app.acl.view',
+        'route' => 'admin.sales.orders.view',
+        'sort'  => 1,
+    ], [
         'key'   => 'sales.invoices',
         'name'  => 'admin::app.acl.invoices',
         'route' => 'admin.sales.invoices.index',
+        'sort'  => 2,
+    ], [
+        'key'   => 'sales.invoices.view',
+        'name'  => 'admin::app.acl.view',
+        'route' => 'admin.sales.invoices.view',
+        'sort'  => 1,
+    ], [
+        'key'   => 'sales.invoices.create',
+        'name'  => 'admin::app.acl.create',
+        'route' => 'admin.sales.invoices.create',
         'sort'  => 2,
     ], [
         'key'   => 'sales.shipments',
@@ -27,6 +61,41 @@ return [
         'route' => 'admin.sales.shipments.index',
         'sort'  => 3,
     ], [
+        'key'   => 'sales.shipments.view',
+        'name'  => 'admin::app.acl.view',
+        'route' => 'admin.sales.shipments.view',
+        'sort'  => 1,
+    ], [
+        'key'   => 'sales.shipments.create',
+        'name'  => 'admin::app.acl.create',
+        'route' => 'admin.sales.shipments.create',
+        'sort'  => 2,
+    ], [
+        'key'   => 'sales.refunds',
+        'name'  => 'admin::app.acl.refunds',
+        'route' => 'admin.sales.refunds.index',
+        'sort'  => 4,
+    ], [
+        'key'   => 'sales.refunds.view',
+        'name'  => 'admin::app.acl.view',
+        'route' => 'admin.sales.refunds.view',
+        'sort'  => 1,
+    ], [
+        'key'   => 'sales.refunds.create',
+        'name'  => 'admin::app.acl.create',
+        'route' => 'admin.sales.refunds.create',
+        'sort'  => 2,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Catalog
+    |--------------------------------------------------------------------------
+    |
+    | All ACLs related to catalog will be placed here.
+    |
+    */
+    [
         'key'   => 'catalog',
         'name'  => 'admin::app.acl.catalog',
         'route' => 'admin.catalog.index',
@@ -131,7 +200,17 @@ return [
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.catalog.families.delete',
         'sort'  => 3,
-    ], [
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Customers
+    |--------------------------------------------------------------------------
+    |
+    | All ACLs related to customers will be placed here.
+    |
+    */
+    [
         'key'   => 'customers',
         'name'  => 'admin::app.acl.customers',
         'route' => 'admin.customer.index',
@@ -211,7 +290,17 @@ return [
         'name'  => 'admin::app.acl.mass-delete',
         'route' => 'admin.customer.review.massdelete',
         'sort'  => 4,
-    ], [
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Marketing
+    |--------------------------------------------------------------------------
+    |
+    | All ACLs related to marketing will be placed here.
+    |
+    */
+    [
         'key'   => 'marketing',
         'name'  => 'admin::app.acl.marketing',
         'route' => 'admin.cart-rules.index',
@@ -329,19 +418,29 @@ return [
     ], [
         'key'   => 'marketing.email-marketing.subscribers',
         'name'  => 'admin::app.acl.subscribers',
-        'route' => 'admin.subscribers.index',
+        'route' => 'admin.customers.subscribers.index',
         'sort'  => 1,
     ], [
         'key'   => 'marketing.email-marketing.subscribers.edit',
         'name'  => 'admin::app.acl.edit',
-        'route' => 'admin.subscribers.edit',
+        'route' => 'admin.customers.subscribers.edit',
         'sort'  => 2,
     ], [
         'key'   => 'marketing.email-marketing.subscribers.delete',
         'name'  => 'admin::app.acl.delete',
-        'route' => 'admin.subscribers.delete',
+        'route' => 'admin.customers.subscribers.delete',
         'sort'  => 3,
-    ], [
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | CMS
+    |--------------------------------------------------------------------------
+    |
+    | All ACLs related to cms will be placed here.
+    |
+    */
+    [
         'key'   => 'cms',
         'name'  => 'admin::app.layouts.cms',
         'route' => 'admin.cms.index',
@@ -371,7 +470,17 @@ return [
         'name'  => 'admin::app.acl.mass-delete',
         'route' => 'admin.cms.mass-delete',
         'sort'  => 4,
-    ], [
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Settings
+    |--------------------------------------------------------------------------
+    |
+    | All ACLs related to settings will be placed here.
+    |
+    */
+    [
         'key'   => 'settings',
         'name'  => 'admin::app.acl.settings',
         'route' => 'admin.users.index',
@@ -591,7 +700,17 @@ return [
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.tax-rates.delete',
         'sort'  => 3,
-    ],[
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Configuration
+    |--------------------------------------------------------------------------
+    |
+    | All ACLs related to configuration will be placed here.
+    |
+    */
+    [
         'key'   => 'configuration',
         'name'  => 'admin::app.acl.configure',
         'route' => 'admin.configuration.index',
