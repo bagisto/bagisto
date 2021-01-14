@@ -98,7 +98,7 @@ http(s)://example.com/public
 ##### Execute these commands below, in order
 
 ~~~
-1. composer create-project bagisto/bagisto-standard
+1. composer create-project bagisto/bagisto
 ~~~
 
 ~~~
