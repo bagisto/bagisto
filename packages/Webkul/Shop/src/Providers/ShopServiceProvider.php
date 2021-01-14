@@ -31,6 +31,9 @@ class ShopServiceProvider extends ServiceProvider
         ], 'public');
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'shop');
+        $this->publishes([
+            __DIR__ . '/../Resources/views' => resource_path('themes/shop/views'),
+        ]);
 
         $router->aliasMiddleware('locale', Locale::class);
         $router->aliasMiddleware('theme', Theme::class);
