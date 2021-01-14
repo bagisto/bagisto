@@ -445,9 +445,7 @@
                 return {
                     templateRender: null,
 
-                    selected_shipping_method: '',
-
-                    first_iteration : true,
+                    selected_shipping_method: ''
                 }
             },
 
@@ -458,7 +456,7 @@
                     for (rate in shippingMethods[method]['rates']) {
                         if (shippingMethods[method].default) {                            
                             this.selected_shipping_method = shippingMethods[method]['rates'][rate]['method'];
-                            this.methodSelected();
+                            this.methodSelected();                           
                         }
                     }
                 }
