@@ -462,7 +462,7 @@ return [
             'refunded' => 'Teruggestort',
             'date' => 'Refund Date',
             'customer-name' => 'klantnaam',
-            'status' => 'Toestand',
+            'status' => 'Status',
             'action' => 'Actie',
             'view-title' => 'Terugbetaling #:refund_id',
             'invalid-refund-amount-error' => 'Het restitutiebedrag mag niet nul zijn.'
@@ -703,7 +703,7 @@ return [
                 'save-btn-title' => 'Opslaan',
                 'description' => 'Description',
                 'active' => 'Actief',
-                'status' => 'Toestand'
+                'status' => 'Status'
             ]
         ]
     ],
@@ -977,7 +977,7 @@ return [
             'addresses' => 'Addresses',
             'mass-destroy-success' => 'Klanten zijn succesvol verwijderd',
             'mass-update-success' => 'Klanten succesvol bijgewerkt',
-            'status' => 'Toestand',
+            'status' => 'Status',
             'active' => 'Actief',
             'inactive' => 'Niet geactiveerd'
         ],
@@ -986,7 +986,7 @@ return [
             'title' => 'Recensies',
             'edit-title' => 'Review bewerken',
             'rating' => 'Beoordeling',
-            'status' => 'Toestand',
+            'status' => 'Status',
             'comment' => 'Commentaar',
             'pending' => 'In afwachting',
             'approved' => 'Goedkeuren',
@@ -1015,7 +1015,7 @@ return [
             'rule-information' => 'Regelinformatie',
             'name' => 'Naam',
             'description' => 'Beschrijving',
-            'status' => 'Toestand',
+            'status' => 'Status',
             'is-active' => 'Winkelwagenregel is actief',
             'channels' => 'Kanalen',
             'customer-groups' => 'Klantengroepen',
@@ -1101,7 +1101,7 @@ return [
             'rule-information' => 'Regelinformatie',
             'name' => 'Naam',
             'description' => 'Beschrijving',
-            'status' => 'Toestand',
+            'status' => 'Status',
             'is-active' => 'Catalogusregel is actief',
             'channels' => 'Kanalen',
             'customer-groups' => 'Klantengroepen',
@@ -1360,8 +1360,8 @@ return [
             'title' => 'Titel',
             'description' => 'Omschrijving',
             'rate' => 'Tarief',
-            'status' => 'Toestand',
-            'calculate-tax' => 'Beregn skat',
+            'status' => 'Status',
+            'calculate-tax' => 'BTW berekenen',
             'type' => 'Type',
             'payment-methods' => 'Betaalmethodes',
             'cash-on-delivery' => 'Rembours',
