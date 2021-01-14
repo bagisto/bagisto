@@ -59,6 +59,10 @@ class WishlistController extends Controller
     {
         $wishlistItems = $this->wishlistRepository->getCustomerWhishlist();
 
+        if (! core()->getConfigData('general.content.shop.wishlist_option')) {
+            abort(404);
+        }
+
         return view($this->_config['view'])->with('items', $wishlistItems);
     }
 

@@ -19,6 +19,7 @@ class SubscribersList extends Model implements SubscribersListContract
         'email',
         'is_subscribed',
         'token',
+        'customer_id',
         'channel_id',
     ];
 

@@ -7,7 +7,7 @@
     <div class="image-container" v-else>
         <div class="magnifier">
             <img :src="activeImageVideoURL" :data-zoom-image="activeImageVideoURL"
-                class="main-product-image">
+                :class="[!isMobile() ? 'main-product-image' : 'vc-small-product-image']">
         </div>
     </div>
 </template>
@@ -19,6 +19,18 @@
                 max-width: 100%;
                 min-height: 530px;
                 max-height: 530px;
+            }
+        }
+    }
+
+    @media only screen and (max-width: 992px) {
+        .image-container {
+            .magnifier {
+                > img {
+                    height: 100%;
+                    min-height: unset;
+                    max-height: unset;
+                }
             }
         }
     }
@@ -63,7 +75,7 @@
 
                 /* getting url */
                 this.activeImageVideoURL = largeImageUrl;
-                
+
                 /* type checking for media type */
                 this.currentType = currentType;
 
