@@ -455,10 +455,9 @@
 
             mounted: function() {
                 for (method in shippingMethods) {
-                    if (this.first_iteration) {
-                        for (rate in shippingMethods[method]['rates']) {
+                    for (rate in shippingMethods[method]['rates']) {
+                        if (shippingMethods[method].default == '1' || shippingMethods[method].default) {                            
                             this.selected_shipping_method = shippingMethods[method]['rates'][rate]['method'];
-                            this.first_iteration = false;
                             this.methodSelected();
                         }
                     }
