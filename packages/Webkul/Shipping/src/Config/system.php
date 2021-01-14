@@ -42,6 +42,13 @@ return [
                 'validation'    => 'required',
                 'channel_based' => false,
                 'locale_based'  => false,
+            ], [
+                'name' => 'default',
+                'title' => 'admin::app.admin.system.default',
+                'type' => 'boolean',
+                'validation' => 'required',
+                'channel_based' => false,
+                'locale_based' => true
             ]
         ]
     ], [
@@ -100,6 +107,13 @@ return [
                 'validation'    => 'required',
                 'channel_based' => false,
                 'locale_based'  => false,
+            ], [
+                'name' => 'default',
+                'title' => 'admin::app.admin.system.default',
+                'type' => 'boolean',
+                'validation' => 'required',
+                'channel_based' => false,
+                'locale_based' => true
             ]
         ]
     ], [
