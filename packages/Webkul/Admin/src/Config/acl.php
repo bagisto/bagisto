@@ -41,6 +41,11 @@ return [
         'route' => 'admin.sales.orders.view',
         'sort'  => 1,
     ], [
+        'key'   => 'sales.orders.cancel',
+        'name'  => 'admin::app.acl.cancel',
+        'route' => 'admin.sales.orders.cancel',
+        'sort'  => 2,
+    ], [
         'key'   => 'sales.invoices',
         'name'  => 'admin::app.acl.invoices',
         'route' => 'admin.sales.invoices.index',
@@ -111,25 +116,30 @@ return [
         'route' => 'admin.catalog.products.create',
         'sort'  => 1,
     ], [
+        'key'   => 'catalog.products.copy',
+        'name'  => 'admin::app.acl.copy',
+        'route' => 'admin.catalog.products.copy',
+        'sort'  => 2,
+    ], [
         'key'   => 'catalog.products.edit',
         'name'  => 'admin::app.acl.edit',
         'route' => 'admin.catalog.products.edit',
-        'sort'  => 2,
+        'sort'  => 3,
     ], [
         'key'   => 'catalog.products.delete',
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.catalog.products.delete',
-        'sort'  => 3,
+        'sort'  => 4,
     ], [
         'key'   => 'catalog.products.mass-update',
         'name'  => 'admin::app.acl.mass-update',
         'route' => 'admin.catalog.products.massupdate',
-        'sort'  => 4,
+        'sort'  => 5,
     ], [
         'key'   => 'catalog.products.mass-delete',
         'name'  => 'admin::app.acl.mass-delete',
         'route' => 'admin.catalog.products.massdelete',
-        'sort'  => 5,
+        'sort'  => 6,
     ], [
         'key'   => 'catalog.categories',
         'name'  => 'admin::app.acl.categories',
@@ -246,10 +256,35 @@ return [
         'route' => 'admin.customer.mass-delete',
         'sort'  => 5,
     ], [
+        'key'   => 'customers.addresses',
+        'name'  => 'admin::app.acl.addresses',
+        'route' => 'admin.customer.addresses.index',
+        'sort'  => 2,
+    ], [
+        'key'   => 'customers.addresses.create',
+        'name'  => 'admin::app.acl.create',
+        'route' => 'admin.customer.addresses.create',
+        'sort'  => 1,
+    ], [
+        'key'   => 'customers.addresses.edit',
+        'name'  => 'admin::app.acl.edit',
+        'route' => 'admin.customer.addresses.edit',
+        'sort'  => 2,
+    ], [
+        'key'   => 'customers.addresses.delete',
+        'name'  => 'admin::app.acl.delete',
+        'route' => 'admin.customer.addresses.delete',
+        'sort'  => 3,
+    ], [
+        'key'   => 'customers.note',
+        'name'  => 'admin::app.acl.note',
+        'route' => 'admin.customer.note.create',
+        'sort'  => 3,
+    ], [
         'key'   => 'customers.groups',
         'name'  => 'admin::app.acl.groups',
         'route' => 'admin.groups.index',
-        'sort'  => 2,
+        'sort'  => 4,
     ], [
         'key'   => 'customers.groups.create',
         'name'  => 'admin::app.acl.create',
@@ -269,7 +304,7 @@ return [
         'key'   => 'customers.reviews',
         'name'  => 'admin::app.acl.reviews',
         'route' => 'admin.customer.review.index',
-        'sort'  => 3,
+        'sort'  => 5,
     ], [
         'key'   => 'customers.reviews.edit',
         'name'  => 'admin::app.acl.edit',
@@ -319,6 +354,11 @@ return [
         'key'   => 'marketing.promotions.cart-rules.create',
         'name'  => 'admin::app.acl.create',
         'route' => 'admin.cart-rules.create',
+        'sort'  => 1,
+    ], [
+        'key'   => 'marketing.promotions.cart-rules.copy',
+        'name'  => 'admin::app.acl.copy',
+        'route' => 'admin.cart-rules.copy',
         'sort'  => 1,
     ], [
         'key'   => 'marketing.promotions.cart-rules.edit',
@@ -525,11 +565,6 @@ return [
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.currencies.delete',
         'sort'  => 3,
-    ], [
-        'key'   => 'settings.currencies.mass-delete',
-        'name'  => 'admin::app.acl.mass-delete',
-        'route' => 'admin.currencies.massdelete',
-        'sort'  => 4,
     ], [
         'key'   => 'settings.exchange_rates',
         'name'  => 'admin::app.acl.exchange-rates',
