@@ -601,7 +601,7 @@
                     
                     for (method in shippingMethods) {
                         for (rate in shippingMethods[method]['rates']) {
-                            if (shippingMethods[method].default == '1' || shippingMethods[method].default) {                            
+                            if (shippingMethods[method].default) {                            
                                 this.selected_shipping_method = shippingMethods[method]['rates'][rate]['method'];
                                 this.methodSelected();
                             }
