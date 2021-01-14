@@ -425,7 +425,7 @@
                                 }
 
                                 shippingMethods = response.data.shippingMethods;
-
+                                   
                                 this.getOrderSummary();
 
                                 this.$root.hideLoader();
@@ -597,6 +597,15 @@
 
                     for (var i in shippingHtml.staticRenderFns) {
                         shippingTemplateRenderFns.push(shippingHtml.staticRenderFns[i]);
+                    }
+                    
+                    for (method in shippingMethods) {
+                        for (rate in shippingMethods[method]['rates']) {
+                            if (shippingMethods[method].default == '1' || shippingMethods[method].default) {                            
+                                this.selected_shipping_method = shippingMethods[method]['rates'][rate]['method'];
+                                this.methodSelected();
+                            }
+                        }
                     }
 
                     eventBus.$emit('after-checkout-shipping-section-added');
