@@ -1348,6 +1348,7 @@ return [
             'homepage' => 'Homepage configuration',
             'allow-no-of-new-product-homepage' => 'Allowed No of New Product in Homepage',
             'allow-no-of-featured-product-homepage' => 'Allowed No of Featured Product in Homepage',
+            'allow-out-of-stock-items' => 'Allow out of stock items',
             'products' => 'Products',
             'guest-checkout' => 'Guest Checkout',
             'allow-guest-checkout' => 'Allow Guest Checkout',

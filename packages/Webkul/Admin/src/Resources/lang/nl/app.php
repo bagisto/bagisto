@@ -1333,6 +1333,10 @@ return [
         ],
         'system' => [
             'catalog' => 'Catalogus',
+            'homepage' => 'Homepage configuration',
+            'allow-no-of-new-product-homepage' => 'Allowed No of New Product in Homepage',
+            'allow-no-of-featured-product-homepage' => 'Allowed No of Featured Product in Homepage',
+            'allow-out-of-stock-items' => 'Allow out of stock items',
             'products' => 'Producten',
             'guest-checkout' => 'Gast afrekenen',
             'allow-guest-checkout' => 'Gast afrekenen toestaan',

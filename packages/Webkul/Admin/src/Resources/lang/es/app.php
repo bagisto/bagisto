@@ -1326,6 +1326,10 @@ return [
         ],
         'system' => [
             'catalog' => 'Catálogo',
+            'homepage' => 'Homepage configuration',
+            'allow-no-of-new-product-homepage' => 'Allowed No of New Product in Homepage',
+            'allow-no-of-featured-product-homepage' => 'Allowed No of Featured Product in Homepage',
+            'allow-out-of-stock-items' => 'Allow out of stock items',
             'products' => 'Productos',
             'guest-checkout' => 'Compras como invitado',
             'allow-guest-checkout' => 'Permitir compras como invitado',
