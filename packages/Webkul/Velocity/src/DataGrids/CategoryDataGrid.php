@@ -104,7 +104,7 @@ class CategoryDataGrid extends DataGrid
             'type'   => 'delete',
             'action' => route('velocity.admin.category.mass-delete'),
             'label'  => trans('admin::app.datagrid.delete'),
-            'method' => 'DELETE',
+            'method' => 'POST',
         ]);
     }
 }

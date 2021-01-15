@@ -7,14 +7,14 @@ use Illuminate\Support\Facades\Event;
 abstract class DataGrid
 {
     /**
-     * set index columns, ex: id.
+     * Set index columns, ex: id.
      *
      * @var int
      */
     protected $index;
 
     /**
-     * Default sort order of datagrid
+     * Default sort order of datagrid.
      *
      * @var string
      */
@@ -29,14 +29,14 @@ abstract class DataGrid
     protected $enableFilterMap = false;
 
     /**
-     * This is array where aliases and custom column's name are passed
+     * This is array where aliases and custom column's name are passed.
      *
      * @var array
      */
     protected $filterMap = [];
 
     /**
-     * array to hold all the columns which will be displayed on frontend.
+     * Array to hold all the columns which will be displayed on frontend.
      *
      * @var array
      */
@@ -44,13 +44,15 @@ abstract class DataGrid
 
 
     /**
+     * Complete column details.
+     *
      * @var array
      */
     protected $completeColumnDetails = [];
 
     /**
      * Hold query builder instance of the query prepared by executing datagrid
-     * class method setQueryBuilder
+     * class method `setQueryBuilder`.
      *
      * @var array
      */
@@ -80,7 +82,7 @@ abstract class DataGrid
     protected $massActions = [];
 
     /**
-     * Parsed value of the url parameters
+     * Parsed value of the url parameters.
      *
      * @var array
      */
@@ -99,7 +101,7 @@ abstract class DataGrid
     protected $enableAction = false;
 
     /**
-     * paginate the collection or not
+     * Paginate the collection or not.
      *
      * @var bool
      */
@@ -113,70 +115,91 @@ abstract class DataGrid
     protected $itemsPerPage = 10;
 
     /**
+     * Operators mapping.
+     *
      * @var array
      */
     protected $operators = [
-        'eq'       => "=",
-        'lt'       => "<",
-        'gt'       => ">",
-        'lte'      => "<=",
-        'gte'      => ">=",
-        'neqs'     => "<>",
-        'neqn'     => "!=",
-        'eqo'      => "<=>",
-        'like'     => "like",
-        'blike'    => "like binary",
-        'nlike'    => "not like",
-        'ilike'    => "ilike",
-        'and'      => "&",
-        'bor'      => "|",
-        'regex'    => "regexp",
-        'notregex' => "not regexp",
+        'eq'       => '=',
+        'lt'       => '<',
+        'gt'       => '>',
+        'lte'      => '<=',
+        'gte'      => '>=',
+        'neqs'     => '<>',
+        'neqn'     => '!=',
+        'eqo'      => '<=>',
+        'like'     => 'like',
+        'blike'    => 'like binary',
+        'nlike'    => 'not like',
+        'ilike'    => 'ilike',
+        'and'      => '&',
+        'bor'      => '|',
+        'regex'    => 'regexp',
+        'notregex' => 'not regexp',
     ];
 
     /**
+     * Bindings.
+     *
      * @var array
      */
     protected $bindings = [
-        0 => "select",
-        1 => "from",
-        2 => "join",
-        3 => "where",
-        4 => "having",
-        5 => "order",
-        6 => "union",
+        0 => 'select',
+        1 => 'from',
+        2 => 'join',
+        3 => 'where',
+        4 => 'having',
+        5 => 'order',
+        6 => 'union',
     ];
 
     /**
+     * Select components.
+     *
      * @var array
      */
     protected $selectcomponents = [
-        0  => "aggregate",
-        1  => "columns",
-        2  => "from",
-        3  => "joins",
-        4  => "wheres",
-        5  => "groups",
-        6  => "havings",
-        7  => "orders",
-        8  => "limit",
-        9  => "offset",
-        10 => "lock",
+        0  => 'aggregate',
+        1  => 'columns',
+        2  => 'from',
+        3  => 'joins',
+        4  => 'wheres',
+        5  => 'groups',
+        6  => 'havings',
+        7  => 'orders',
+        8  => 'limit',
+        9  => 'offset',
+        10 => 'lock',
     ];
 
-    /** @var string[] contains the keys for which extra filters to show */
+    /**
+     * Contains the keys for which extra filters to show.
+     *
+     * @var string[]
+     */
     protected $extraFilters = [];
+
+    /**
+     * The current admin user.
+     *
+     * @var object
+     */
+    protected $currentUser;
 
     abstract public function prepareQueryBuilder();
 
     abstract public function addColumns();
 
     /**
+     * Create datagrid instance.
+     *
      * @return void
      */
     public function __construct()
     {
         $this->invoker = $this;
+
+        $this->currentUser = auth()->guard('admin')->user();
     }
 
     /**
@@ -189,7 +212,7 @@ abstract class DataGrid
         $parsedUrl = [];
         $unparsed = url()->full();
 
-        $route = request()->route() ? request()->route()->getName() : "";
+        $route = request()->route() ? request()->route()->getName() : '';
 
         if ($route == 'admin.datagrid.export') {
             $unparsed = url()->previous();
@@ -218,7 +241,7 @@ abstract class DataGrid
     }
 
     /**
-     * Add the index as alias of the column and use the column to make things happen
+     * Add the index as alias of the column and use the column to make things happen.
      *
      * @param string $alias
      * @param string $column
@@ -233,6 +256,8 @@ abstract class DataGrid
     }
 
     /**
+     * Add column.
+     *
      * @param string $column
      *
      * @return void
@@ -249,6 +274,8 @@ abstract class DataGrid
     }
 
     /**
+     * Set complete column details.
+     *
      * @param string $column
      *
      * @return void
@@ -259,6 +286,8 @@ abstract class DataGrid
     }
 
     /**
+     * Set query builder.
+     *
      * @param \Illuminate\Database\Query\Builder $queryBuilder
      *
      * @return void
@@ -269,12 +298,16 @@ abstract class DataGrid
     }
 
     /**
+     * Add action.
+     *
      * @param array $action
      *
      * @return void
      */
     public function addAction($action)
     {
+        $currentRouteACL = $this->fetchCurrentRouteACL($action);
+
         if (isset($action['title'])) {
             $eventName = strtolower($action['title']);
             $eventName = explode(' ', $eventName);
@@ -283,22 +316,29 @@ abstract class DataGrid
             $eventName = null;
         }
 
-        $this->fireEvent('action.before.' . $eventName);
+        if (bouncer()->hasPermission($currentRouteACL['key'] ?? null)) {
+            $this->fireEvent('action.before.' . $eventName);
 
-        array_push($this->actions, $action);
+            array_push($this->actions, $action);
+            $this->enableAction = true;
 
-        $this->enableAction = true;
-
-        $this->fireEvent('action.after.' . $eventName);
+            $this->fireEvent('action.after.' . $eventName);
+        }
     }
 
     /**
+     * Add mass action.
+     *
      * @param array $massAction
      *
      * @return void
      */
     public function addMassAction($massAction)
     {
+        $massAction['route'] = $this->getRouteNameFromUrl($massAction['action'], $massAction['method']);
+
+        $currentRouteACL = $this->fetchCurrentRouteACL($massAction);
+
         if (isset($massAction['label'])) {
             $eventName = strtolower($massAction['label']);
             $eventName = explode(' ', $eventName);
@@ -307,16 +347,19 @@ abstract class DataGrid
             $eventName = null;
         }
 
-        $this->fireEvent('mass.action.before.' . $eventName);
+        if (bouncer()->hasPermission($currentRouteACL['key'] ?? null)) {
+            $this->fireEvent('mass.action.before.' . $eventName);
 
-        $this->massActions[] = $massAction;
+            $this->massActions[] = $massAction;
+            $this->enableMassAction = true;
 
-        $this->enableMassAction = true;
-
-        $this->fireEvent('mass.action.after.' . $eventName);
+            $this->fireEvent('mass.action.after.' . $eventName);
+        }
     }
 
     /**
+     * Get collections.
+     *
      * @return \Illuminate\Support\Collection
      */
     public function getCollection()
@@ -376,6 +419,8 @@ abstract class DataGrid
     }
 
     /**
+     * Sort or filter collection.
+     *
      * @param \Illuminate\Support\Collection $collection
      * @param array                          $parseInfo
      *
@@ -387,7 +432,7 @@ abstract class DataGrid
             $columnType = $this->findColumnType($key)[0] ?? null;
             $columnName = $this->findColumnType($key)[1] ?? null;
 
-            if ($key === "sort") {
+            if ($key === 'sort') {
                 $count_keys = count(array_keys($info));
 
                 if ($count_keys > 1) {
@@ -400,7 +445,7 @@ abstract class DataGrid
                     $columnName[1],
                     array_values($info)[0]
                 );
-            } elseif ($key === "search") {
+            } elseif ($key === 'search') {
                 $count_keys = count(array_keys($info));
 
                 if ($count_keys > 1) {
@@ -430,7 +475,7 @@ abstract class DataGrid
                     }
                 }
 
-                if (array_keys($info)[0] === "like" || array_keys($info)[0] === "nlike") {
+                if (array_keys($info)[0] === 'like' || array_keys($info)[0] === 'nlike') {
                     foreach ($info as $condition => $filter_value) {
                         if ($this->enableFilterMap && isset($this->filterMap[$columnName])) {
                             $collection->where(
@@ -526,7 +571,7 @@ abstract class DataGrid
                                         );
                                     });
                                 }
-                            } elseif ($this->enableFilterMap && ! isset($this->filterMap[$columnName])) {                           
+                            } elseif ($this->enableFilterMap && ! isset($this->filterMap[$columnName])) {
                                 if ($this->operators[$condition] == '=') {
                                     if ($filter_value == 1) {
                                         $collection->Where(function($query) use($columnName, $condition, $filter_value) {
@@ -649,6 +694,8 @@ abstract class DataGrid
     }
 
     /**
+     * Trigger event.
+     *
      * @param string $name
      *
      * @return void
@@ -658,7 +705,7 @@ abstract class DataGrid
         if (isset($name)) {
             $className = get_class($this->invoker);
 
-            $className = last(explode("\\", $className));
+            $className = last(explode('\\', $className));
 
             $className = strtolower($className);
 
@@ -669,6 +716,8 @@ abstract class DataGrid
     }
 
     /**
+     * Preprare mass actions.
+     *
      * @return void
      */
     public function prepareMassActions()
@@ -676,6 +725,8 @@ abstract class DataGrid
     }
 
     /**
+     * Prepare actions.
+     *
      * @return void
      */
     public function prepareActions()
@@ -683,6 +734,8 @@ abstract class DataGrid
     }
 
     /**
+     * Render view.
+     *
      * @return \Illuminate\View\View
      */
     public function render()
@@ -722,6 +775,8 @@ abstract class DataGrid
     }
 
     /**
+     * Export.
+     *
      * @return \Illuminate\Support\Collection
      */
     public function export()
@@ -737,5 +792,34 @@ abstract class DataGrid
         $this->prepareQueryBuilder();
 
         return $this->getCollection();
+    }
+
+    /**
+     * Fetch current route acl. As no access to acl key, this will fetch acl by route name.
+     *
+     * @param  $action
+     *
+     * @return array
+     */
+    private function fetchCurrentRouteACL($action)
+    {
+        return collect(config('acl'))->filter(function ($acl) use ($action) {
+            return $acl['route'] === $action['route'];
+        })->first();
+    }
+
+    /**
+     * Fetch route name from full url, not the current one.
+     *
+     * @param  $action
+     *
+     * @return array
+     */
+    private function getRouteNameFromUrl($action, $method)
+    {
+        return app('router')->getRoutes()
+                            ->match(app('request')
+                            ->create(str_replace(config('app.url'), '', $action), $method))
+                            ->getName();
     }
 }

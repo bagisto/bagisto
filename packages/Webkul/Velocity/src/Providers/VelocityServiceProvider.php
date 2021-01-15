@@ -57,6 +57,10 @@ class VelocityServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             dirname(__DIR__) . '/Config/admin-menu.php', 'menu.admin'
         );
+
+        $this->mergeConfigFrom(
+            dirname(__DIR__) . '/Config/acl.php', 'acl'
+        );
     }
 
     /**
