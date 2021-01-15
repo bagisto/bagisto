@@ -225,7 +225,7 @@
                         return false;
                     },
 
-                    validateForm: function (scope) {
+                    validateForm: async function (scope) {
                         var isManualValidationFail = false;
 
                         if (scope == 'address-form') {
@@ -233,7 +233,7 @@
                         }
 
                         if (! isManualValidationFail) {
-                            this.$validator.validateAll(scope)
+                            await this.$validator.validateAll(scope)
                             .then(result => {
                                 if (result) {
                                     switch (scope) {
@@ -365,7 +365,7 @@
                             .catch(function (error) {})
                     },
 
-                    saveAddress: function () {
+                    saveAddress: async function () {
                         this.disable_button = true;
 
                         if (this.allAddress.length > 0) {
@@ -438,7 +438,7 @@
                             })
                     },
 
-                    saveShipping: function () {
+                    saveShipping: async function () {
                         this.disable_button = true;
 
                         this.$http.post("{{ route('shop.checkout.save-shipping') }}", {'shipping_method': this.selected_shipping_method})
@@ -468,7 +468,7 @@
                             })
                     },
 
-                    savePayment: function () {
+                    savePayment: async function () {
                         this.disable_button = true;
 
                         if (this.isCheckPayment) {
@@ -498,7 +498,7 @@
                         }
                     },
 
-                    placeOrder: function () {
+                    placeOrder: async function () {
                         if (this.isPlaceOrderEnabled) {
                             this.disable_button = false;
                             this.isPlaceOrderEnabled = false;
