@@ -86,15 +86,20 @@ return [
     [
         'dashboard'                => 'Dashboard',
         'sales'                    => 'Vertrieb',
+        'cancel'                   => 'Cancel',
         'orders'                   => 'Bestellungen',
         'shipments'                => 'Sendungen',
         'invoices'                 => 'Rechnungen',
+        'refunds'                  => 'Refunds',
         'catalog'                  => 'Katalog',
         'products'                 => 'Produkte',
+        'copy'                     => 'Copy',
         'categories'               => 'Kategorien',
         'attributes'               => 'Attribute',
         'attribute-families'       => 'Attributgruppen',
         'customers'                => 'Kunden',
+        'addresses'                => 'Addresses',
+        'note'                     => 'Note',
         'groups'                   => 'Gruppen',
         'reviews'                  => 'Bewertungen',
         'newsletter-subscriptions' => 'Newsletter-Abonnements',
@@ -111,10 +116,13 @@ return [
         'taxes'                    => 'Steuern',
         'tax-categories'           => 'Steuerkategorien',
         'tax-rates'                => 'Steuersätze',
+        'view'                     => 'View',
         'edit'                     => 'Bearbeiten',
         'create'                   => 'Hinzufügen',
         'delete'                   => 'Löschen',
-        'marketing' => 'Marketing',
+        'mass-delete'              => 'Mass Delete',
+        'mass-update'              => 'Mass Update',
+        'marketing'                => 'Marketing',
         'promotions'               => 'Promotions',
         'cart-rules'               => 'Warenkorbregeln',
         'catalog-rules'            => 'Katalogregeln',
@@ -1197,7 +1205,7 @@ return [
             'edit-error' => 'Can not edit this event.'
         ]
     ],
-    
+
     'error'         =>
     [
         'go-to-home'    => 'HOME ÖFFNEN',

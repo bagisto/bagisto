@@ -150,7 +150,7 @@ class AttributeDataGrid extends DataGrid
             'action' => route('admin.catalog.attributes.massdelete'),
             'label'  => trans('admin::app.datagrid.delete'),
             'index'  => 'admin_name',
-            'method' => 'DELETE',
+            'method' => 'POST',
         ]);
     }
 }
