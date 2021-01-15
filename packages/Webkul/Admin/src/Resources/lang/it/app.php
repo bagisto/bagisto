@@ -1329,6 +1329,10 @@ return [
         ],
         'system' => [
             'catalog' => 'Catalogo',
+            'homepage' => 'Homepage configuration',
+            'allow-no-of-new-product-homepage' => 'Allowed No of New Product in Homepage',
+            'allow-no-of-featured-product-homepage' => 'Allowed No of Featured Product in Homepage',
+            'allow-out-of-stock-items' => 'Allow out of stock items',
             'products' => 'Prodotti',
             'guest-checkout' => 'Checkout come Ospite',
             'allow-guest-checkout' => 'Consenti Checkout come Ospite',

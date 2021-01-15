@@ -1197,7 +1197,7 @@ return [
             'edit-error' => 'Can not edit this event.'
         ]
     ],
-    
+
     'error'         =>
     [
         'go-to-home'    => 'HOME ÖFFNEN',
@@ -1337,6 +1337,10 @@ return [
         'system' =>
         [
             'catalog'                      => 'Katalog',
+            'homepage' => 'Homepage configuration',
+            'allow-no-of-new-product-homepage' => 'Allowed No of New Product in Homepage',
+            'allow-no-of-featured-product-homepage' => 'Allowed No of Featured Product in Homepage',
+            'allow-out-of-stock-items' => 'Allow out of stock items',
             'products'                     => 'Produkte',
             'guest-checkout'               => 'Gastbestellungen',
             'allow-guest-checkout'         => 'Gastbestellungen erlauben',

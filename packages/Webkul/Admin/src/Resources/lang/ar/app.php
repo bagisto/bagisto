@@ -1329,6 +1329,10 @@ return [
         ],
         'system' => [
             'catalog' => 'فهرس',
+            'homepage' => 'Homepage configuration',
+            'allow-no-of-new-product-homepage' => 'Allowed No of New Product in Homepage',
+            'allow-no-of-featured-product-homepage' => 'Allowed No of Featured Product in Homepage',
+            'allow-out-of-stock-items' => 'Allow out of stock items',
             'products' => 'منتجات',
             'guest-checkout' => 'ضيف المحاسبة',
             'allow-guest-checkout' => 'السماح للضيف بالخروج',

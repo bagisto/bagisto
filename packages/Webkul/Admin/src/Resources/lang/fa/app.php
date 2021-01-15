@@ -1326,6 +1326,10 @@ return [
         ],
         'system' => [
             'catalog' => 'کاتالوگ',
+            'homepage' => 'Homepage configuration',
+            'allow-no-of-new-product-homepage' => 'Allowed No of New Product in Homepage',
+            'allow-no-of-featured-product-homepage' => 'Allowed No of Featured Product in Homepage',
+            'allow-out-of-stock-items' => 'Allow out of stock items',
             'products' => 'محصولات',
             'guest-checkout' => 'وارسی میهمان',
             'allow-guest-checkout' => 'مجاز به پرداخت مهمان',
