@@ -97,7 +97,6 @@ class RegistrationController extends Controller
             'is_verified'       => core()->getConfigData('customer.settings.email.verification') ? 0 : 1,
             'customer_group_id' => $this->customerGroupRepository->findOneWhere(['code' => 'general'])->id,
             'token'             => md5(uniqid(rand(), true)),
-            'subscribed_to_news_letter' => isset(request()->input()['is_subscribed']) ? 1 : 0,
         ]);
 
         Event::dispatch('customer.registration.before');
