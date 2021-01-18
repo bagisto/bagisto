@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="content">
-        <form method="POST" action="{{ route('admin.tax-rates.create') }}" @submit.prevent="onSubmit">
+        <form method="POST" action="{{ route('admin.tax-rates.store') }}" @submit.prevent="onSubmit">
             <div class="page-header">
                 <div class="page-title">
                     <h1>
