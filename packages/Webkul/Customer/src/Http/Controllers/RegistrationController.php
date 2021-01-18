@@ -49,7 +49,7 @@ class RegistrationController extends Controller
      * @param  \Webkul\Customer\Repositories\CustomerRepository  $customer
      * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository
      * @param  \Webkul\Core\Repositories\SubscribersListRepository  $subscriptionRepository
-     * 
+     *
      * @return void
      */
     public function __construct(
@@ -220,7 +220,7 @@ class RegistrationController extends Controller
 
             return redirect()->back();
         }
-        
+
         session()->flash('success', trans('shop::app.customer.signup-form.verification-sent'));
 
         return redirect()->back();

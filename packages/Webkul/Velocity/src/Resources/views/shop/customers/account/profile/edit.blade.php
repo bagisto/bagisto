@@ -179,7 +179,7 @@
             </div>
 
             <div class="control-group">
-                <input type="checkbox" id="checkbox2" name="subscribed_to_news_letter" value="{{ $customer->subscribed_to_news_letter }}" {{ $customer->subscribed_to_news_letter ? 'checked' : ''}} style="width: auto;">
+                <input type="checkbox" id="checkbox2" name="subscribed_to_news_letter"@if (isset($customer->subscription)) value="{{ $customer->subscription->is_subscribed }}" {{ $customer->subscription->is_subscribed ? 'checked' : ''}} @endif  style="width: auto;">
                 <span>{{ __('shop::app.customer.signup-form.subscribe-to-newsletter') }}</span>
             </div>
 
