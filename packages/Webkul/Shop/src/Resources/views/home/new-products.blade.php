@@ -11,7 +11,13 @@
 
             @foreach (app('Webkul\Product\Repositories\ProductRepository')->getNewProducts() as $productFlat)
 
-                @include ('shop::products.list.card', ['product' => $productFlat])
+                @if (core()->getConfigData('catalog.products.homepage.out_of_stock_items'))
+                    @include ('shop::products.list.card', ['product' => $productFlat])
+                @else
+                    @if ($productFlat->isSaleable())
+                        @include ('shop::products.list.card', ['product' => $productFlat])
+                    @endif
+                @endif
 
             @endforeach
 
