@@ -147,7 +147,8 @@ class CategoryController extends Controller
     {
         $category = $this->categoryRepository->findOrFail($id);
 
-        if(strtolower($category->name) == "root") {
+        /* the very first category which comes with db seeder can't be deleted */
+        if ($category->id === 1) {
             session()->flash('warning', trans('admin::app.response.delete-category-root', ['name' => 'Category']));
         } else {
             try {
@@ -199,7 +200,7 @@ class CategoryController extends Controller
                         $category->delete();
 
                         Event::dispatch('catalog.category.delete.after', $categoryId);
-        
+
                     } catch(\Exception $e) {
                         session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Category']));
                     }
