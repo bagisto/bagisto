@@ -71,7 +71,13 @@ class ShopController extends Controller
                 }
 
                 foreach ($products as $product) {
-                    array_push($formattedProducts, $this->velocityHelper->formatProduct($product));
+                    if (core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
+                        array_push($formattedProducts, $this->velocityHelper->formatProduct($product));
+                    } else {
+                        if ($product->isSaleable()) {
+                            array_push($formattedProducts, $this->velocityHelper->formatProduct($product));
+                        }
+                    }
                 }
 
                 $response = [
