@@ -924,4 +924,32 @@ abstract class AbstractType
         return false;
     }
 
+    /**
+     * Get more offers for customer group pricing.
+     *
+     * @return array
+     */
+    public function getCustomerGroupPricingOffers() {
+        $offerLines = [];
+
+        if ($this->haveSpecialPrice()) {
+            $customerGroupPrices = $this->product->customer_group_prices()->get()->sortBy('qty')->values()->all();
+
+            $rulePrice = app('Webkul\CatalogRule\Helpers\CatalogRuleProductPrice')->getRulePrice($this->product);
+
+            if ($rulePrice && $rulePrice->price > $this->product->special_price) {
+                foreach ($customerGroupPrices as $key => $customerGroupPrice) {
+                    if ($key > 0) {
+                        $price = $this->getCustomerGroupPrice($this->product, $customerGroupPrice->qty);
+
+                        $save = (($this->product->price - $price)*100)/($this->product->price);
+
+                        $offerLines[] = 'Buy' .' '. $customerGroupPrice->qty .' '.'for'.' '. core()->currency($price).' '. 'each and save'.'  '.$save.'%';
+                    }
+                }
+            }
+        }
+
+        return $offerLines;
+    }
 }
