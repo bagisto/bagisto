@@ -5,11 +5,10 @@
     direction: rtl;
 }
 
-.padding-15 {
+.padding-10 {
     padding: 15px;
 }
-
-.padding-10 {
+.padding-15 {
     padding: 15px;
 }
 
@@ -72,6 +71,7 @@
 .pt20 {
     padding-top: 20px !important;
 }
+
 .pl0 {
     padding-left: 0px !important;
 }
@@ -93,6 +93,7 @@
 .pl40 {
     padding-left: 40px !important;
 }
+
 .pr0 {
     padding-right: 0px !important;
 }
@@ -105,6 +106,7 @@
 .pr40 {
     padding-right: 40px !important;
 }
+
 .pb0 {
     padding-bottom: 0px !important;
 }
@@ -117,6 +119,7 @@
 .pb30 {
     padding-bottom: 30px !important;
 }
+
 .mt5 {
     margin-top: 5px !important;
 }
@@ -126,6 +129,7 @@
 .mt15 {
     margin-top: 15px !important;
 }
+
 .mr5 {
     margin-right: 5px;
 }
@@ -141,6 +145,7 @@
 .mr20 {
     margin-right: 20px;
 }
+
 .mb5 {
     margin-bottom: 5px !important;
 }
@@ -159,14 +164,12 @@
 .mb30 {
     margin-bottom: 30px;
 }
+
 .ml0 {
     margin-left: 0px !important;
 }
 .ml5 {
     margin-left: 5px;
-}
-.ml0 {
-    margin-left: 0px;
 }
 .ml10 {
     margin-left: 10px !important;
@@ -177,6 +180,7 @@
 .ml30 {
     margin-left: 30px !important;
 }
+
 .body-blur {
     filter: blur(4px);
     -webkit-filter: blur(4px);
@@ -627,6 +631,7 @@
     top: 6px;
     position: relative;
 }
+
 .text-up-1 {
     top: -1px;
     position: relative;

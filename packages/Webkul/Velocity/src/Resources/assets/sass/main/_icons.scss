@@ -3,11 +3,11 @@
     height: 55px;
     display: inline-block;
     background-size: cover;
-    background-image: url("../../images/Icon-Velocity.svg");
+    background-image: url("../images/Icon-Velocity.svg");
 }
 
 .camera-icon {
-    background-image: url("../../images/Camera.svg");
+    background-image: url("../images/Camera.svg");
     width: 24px;
     display: inline-block;
     background-size: cover;
@@ -16,10 +16,10 @@
 .router-link-active,
 .active {
     .velocity-icon {
-        background-image: url("../../images/Icon-Velocity-Active.svg");
+        background-image: url("../images/Icon-Velocity-Active.svg");
     }
 
     &.velocity-icon {
-        background-image: url("../../images/Icon-Velocity-Active.svg");
+        background-image: url("../images/Icon-Velocity-Active.svg");
     }
 }
