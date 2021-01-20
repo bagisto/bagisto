@@ -264,7 +264,7 @@
     padding: 10px 20px;
     vertical-align: top;
     border: 1px solid transparent;
-    color: $light-color !important;
+    color: $white-color !important;
     background-color: $theme-color !important;
 
     &:hover,
@@ -277,7 +277,7 @@
 
     &.light {
         color: $theme-color !important;
-        background-color: $light-color !important;
+        background-color: $white-color !important;
         box-shadow: 0 1px 0 0 #CFCFCF;
         border: 1px solid rgba(0,0,0,0.12);
 
@@ -307,8 +307,8 @@
     padding: 9px 20px;
     border-radius: 2px;
     vertical-align: top;
-    color: $dark-color !important;
-    background-color: $light-color !important;
+    color: $black-color !important;
+    background-color: $white-color !important;
 }
 
 .sale-btn {
@@ -723,7 +723,7 @@ select:focus,
 }
 
 .control-error {
-    color: $color-danger;
+    color: $danger-color;
 }
 
 .mandatory,
@@ -734,7 +734,7 @@ select:focus,
         content: "*";
         font-size: 16px;
         margin-left: -1px;
-        color: $color-danger;
+        color: $danger-color;
     }
 }
 
