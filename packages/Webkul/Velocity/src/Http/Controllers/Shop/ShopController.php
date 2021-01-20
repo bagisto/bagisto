@@ -72,7 +72,13 @@ class ShopController extends Controller
                 $response = [
                     'status'   => true,
                     'products' => $products->map(function ($product) {
-                        return $this->velocityHelper->formatProduct($product);
+                        if (core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
+                            return $this->velocityHelper->formatProduct($product);
+                        } else {
+                            if ($product->isSaleable()) {
+                                return $this->velocityHelper->formatProduct($product);
+                            }
+                        }
                     }),
                 ];
 
