@@ -18,10 +18,6 @@ class MarketingServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
         $this->loadRoutesFrom(__DIR__ . '/../Http/routes.php');
-
-        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'marketing');
-
-        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'marketing');
     }
 
     /**
@@ -31,7 +27,7 @@ class MarketingServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        
+
         if ($this->app->runningInConsole()) {
             $this->commands([EmailsCommand::class]);
         }
