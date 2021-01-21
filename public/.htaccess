@@ -1,3 +1,4 @@
+# Rewrite Module
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
@@ -20,12 +21,21 @@
     RewriteRule ^ index.php [L]
 </IfModule>
 
-<IfModule mod_expires.c>
-    <filesMatch ".(css|jpg|jpeg|png|gif|js|svg|ico|webp|ttf)$">
-        Header set Cache-Control "max-age=31536000, public"
-    </filesMatch>
-</IfModule>
+# Media Files Cache-Control
+<FilesMatch ".(jpg|jpeg|gif|png|svg|swf|webp)$">
+    <IfModule mod_headers.c>
+        Header set Cache-Control "max-age=604800, public"
+    </IfModule>
+</FilesMatch>
 
+# Text Files Cache-Control
+<FilesMatch ".(xml|txt|css|js)$">
+    <IfModule mod_headers.c>
+        Header set Cache-Control "max-age=604800, proxy-revalidate"
+    </IfModule>
+</FilesMatch>
+
+# Text Compression
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE application/json
   AddOutputFilterByType DEFLATE application/javascript
