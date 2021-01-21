@@ -942,9 +942,10 @@ abstract class AbstractType
                     if ($key > 0) {
                         $price = $this->getCustomerGroupPrice($this->product, $customerGroupPrice->qty);
 
-                        $save = (($this->product->price - $price)*100)/($this->product->price);
+                        $discount = (($this->product->price - $price) * 100) / ($this->product->price);
 
-                        $offerLines[] = 'Buy' .' '. $customerGroupPrice->qty .' '.'for'.' '. core()->currency($price).' '. 'each and save'.'  '.$save.'%';
+                        $offerLines[] = trans('shop::app.products.offers', ['qty'  => $customerGroupPrice->qty,
+                            'price' =>  core()->currency($price), 'discount' => $discount]);
                     }
                 }
             }
