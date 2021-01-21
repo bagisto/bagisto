@@ -85,7 +85,7 @@
 
                 <div class="control-group">
                     <div class="control-group" :class="[errors.has(inputName + '[value]') ? 'has-error' : '']">
-                        <input type="number" v-validate="{required: true, min_value: 0, ...(customerGroupPrice.value_type === 'discount' ? {max_value: 100} : {})}" :name="[inputName + '[value]']" v-model="customerGroupPrice.value" class="control" data-vv-as="&quot;{{ __('admin::app.datagrid.price') }}&quot;"/>
+                        <input type="number" step=".01" v-validate="{required: true, min_value: 0, ...(customerGroupPrice.value_type === 'discount' ? {max_value: 100} : {})}" :name="[inputName + '[value]']" v-model="customerGroupPrice.value" class="control" data-vv-as="&quot;{{ __('admin::app.datagrid.price') }}&quot;"/>
                         <span class="control-error" v-if="errors.has(inputName + '[value]')">@{{ errors.first(inputName + '[value]') }}</span>
                     </div>
                 </div>
