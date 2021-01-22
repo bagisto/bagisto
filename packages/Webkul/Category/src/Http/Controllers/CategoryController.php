@@ -146,7 +146,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        /* grabbing root category ids for all associated channles */
+        /* grabbing root category ids for all associated channels */
         $rootIdInChannels = Channel::pluck('root_category_id');
 
         /* fetching category by id */
