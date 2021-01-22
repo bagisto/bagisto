@@ -219,7 +219,7 @@ class CategoryController extends Controller
     /**
      * Get category product count.
      *
-     * @return json
+     * @return \Illuminate\Http\Response
      */
     public function categoryProductCount() {
         $indexes = explode(",", request()->input('indexes'));
@@ -239,8 +239,7 @@ class CategoryController extends Controller
      * This method will fetch all root category ids from the channel. If `id` is present,
      * then it is not deletable.
      *
-     * @param $category
-     *
+     * @param  \Webkul\Category\Models\Category $category
      * @return bool
      */
     private function isCategoryDeletable($category)
