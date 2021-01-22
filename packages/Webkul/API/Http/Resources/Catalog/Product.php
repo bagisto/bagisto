@@ -3,7 +3,6 @@
 namespace Webkul\API\Http\Resources\Catalog;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use Webkul\Product\Helpers\ProductType;
 
 class Product extends JsonResource
 {
@@ -14,11 +13,13 @@ class Product extends JsonResource
      */
     public function __construct($resource)
     {
+        parent::__construct($resource);
+
         $this->productImageHelper = app('Webkul\Product\Helpers\ProductImage');
 
         $this->productReviewHelper = app('Webkul\Product\Helpers\Review');
 
-        parent::__construct($resource);
+        $this->wishlistHelper = app('Webkul\Customer\Helpers\Wishlist');
     }
 
     /**
@@ -29,52 +30,66 @@ class Product extends JsonResource
      */
     public function toArray($request)
     {
+        /* assign product */
         $product = $this->product ? $this->product : $this;
 
-        $prices = $product->getTypeInstance()->getProductPrices();
+        /* get type instance */
+        $productTypeInstance = $product->getTypeInstance();
 
+        /* generating resource */
         return [
+            /* product information */
             'id'                     => $product->id,
+            'sku'                    => $product->sku,
             'type'                   => $product->type,
-            'name'                   => $this->name,
-            'url_key'                => $this->url_key,
-            'price'                  => $product->getTypeInstance()->getMinimalPrice(),
-            'formated_price'         => core()->currency($product->getTypeInstance()->getMinimalPrice()),
-            'short_description'      => $this->short_description,
-            'description'            => $this->description,
-            'sku'                    => $this->sku,
+            'name'                   => $product->name,
+            'url_key'                => $product->url_key,
+            'price'                  => $productTypeInstance->getMinimalPrice(),
+            'formated_price'         => core()->currency($productTypeInstance->getMinimalPrice()),
+            'short_description'      => $product->short_description,
+            'description'            => $product->description,
             'images'                 => ProductImage::collection($product->images),
             'base_image'             => $this->productImageHelper->getProductBaseImage($product),
-            'variants'               => Self::collection($this->variants),
-            'in_stock'               => $product->haveSufficientQuantity(1),
-            $this->mergeWhen($product->getTypeInstance()->isComposite(), [
+            'variants'               => Self::collection($product->variants),
+            'created_at'             => $product->created_at,
+            'updated_at'             => $product->updated_at,
+
+            /* super attributes */
+            $this->mergeWhen($productTypeInstance->isComposite(), [
                 'super_attributes' => Attribute::collection($product->super_attributes),
             ]),
+
+            /* special price cases */
             'special_price'          => $this->when(
-                $product->getTypeInstance()->haveSpecialPrice(),
-                $product->getTypeInstance()->getSpecialPrice()
+                $productTypeInstance->haveSpecialPrice(),
+                $productTypeInstance->getSpecialPrice()
             ),
             'formated_special_price' => $this->when(
-                $product->getTypeInstance()->haveSpecialPrice(),
-                core()->currency($product->getTypeInstance()->getSpecialPrice())
+                $productTypeInstance->haveSpecialPrice(),
+                core()->currency($productTypeInstance->getSpecialPrice())
             ),
             'regular_price'          => $this->when(
-                $product->getTypeInstance()->haveSpecialPrice(),
-                data_get($prices, 'regular_price.price')
+                $productTypeInstance->haveSpecialPrice(),
+                data_get($productTypeInstance->getProductPrices(), 'regular_price.price')
             ),
             'formated_regular_price' => $this->when(
-                $product->getTypeInstance()->haveSpecialPrice(),
-                data_get($prices, 'regular_price.formated_price')
+                $productTypeInstance->haveSpecialPrice(),
+                data_get($productTypeInstance->getProductPrices(), 'regular_price.formated_price')
             ),
+
+            /* reviews */
             'reviews'                => [
                 'total'          => $total = $this->productReviewHelper->getTotalReviews($product),
                 'total_rating'   => $total ? $this->productReviewHelper->getTotalRating($product) : 0,
                 'average_rating' => $total ? $this->productReviewHelper->getAverageRating($product) : 0,
                 'percentage'     => $total ? json_encode($this->productReviewHelper->getPercentageRating($product)) : [],
             ],
+
+            /* product checks */
+            'in_stock'               => $product->haveSufficientQuantity(1),
             'is_saved'               => false,
-            'created_at'             => $this->created_at,
-            'updated_at'             => $this->updated_at,
+            'is_wishlisted'          => $this->wishlistHelper->getWishlistProduct($product),
+            'is_item_in_cart'        => \Cart::hasProduct($product)
         ];
     }
 }
