@@ -2,6 +2,7 @@
 
 namespace Webkul\Category\Http\Controllers;
 
+use Webkul\Core\Models\Channel;
 use Illuminate\Support\Facades\Event;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
@@ -9,7 +10,7 @@ use Webkul\Attribute\Repositories\AttributeRepository;
 class CategoryController extends Controller
 {
     /**
-     * Contains route related configuration
+     * Contains route related configuration.
      *
      * @var array
      */
@@ -147,15 +148,16 @@ class CategoryController extends Controller
     {
         $category = $this->categoryRepository->findOrFail($id);
 
-        if(strtolower($category->name) == "root") {
+        if ($this->isCategoryDeletable($category)) {
             session()->flash('warning', trans('admin::app.response.delete-category-root', ['name' => 'Category']));
         } else {
             try {
                 Event::dispatch('catalog.category.delete.before', $id);
 
-                if($category->products->count() > 0) {
+                if ($category->products->count() > 0) {
                     $category->products()->delete();
                 }
+
                 $category->delete();
 
                 Event::dispatch('catalog.category.delete.after', $id);
@@ -163,7 +165,7 @@ class CategoryController extends Controller
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Category']));
 
                 return response()->json(['message' => true], 200);
-            } catch(\Exception $e) {
+            } catch (\Exception $e) {
                 session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Category']));
             }
         }
@@ -172,7 +174,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Remove the specified resources from database
+     * Remove the specified resources from database.
      *
      * @return \Illuminate\Http\Response
      */
@@ -185,7 +187,7 @@ class CategoryController extends Controller
             $category = $this->categoryRepository->find($categoryId);
 
             if (isset($category)) {
-                if(strtolower($category->name) == "root") {
+                if ($this->isCategoryDeletable($category)) {
                     $suppressFlash = false;
                     session()->flash('warning', trans('admin::app.response.delete-category-root', ['name' => 'Category']));
                 } else {
@@ -193,14 +195,14 @@ class CategoryController extends Controller
                         $suppressFlash = true;
                         Event::dispatch('catalog.category.delete.before', $categoryId);
 
-                        if($category->products->count() > 0) {
+                        if ($category->products->count() > 0) {
                             $category->products()->delete();
                         }
+
                         $category->delete();
 
                         Event::dispatch('catalog.category.delete.after', $categoryId);
-        
-                    } catch(\Exception $e) {
+                    } catch (\Exception $e) {
                         session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Category']));
                     }
                 }
@@ -214,7 +216,11 @@ class CategoryController extends Controller
         return redirect()->route($this->_config['redirect']);
     }
 
-
+    /**
+     * Get category product count.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function categoryProductCount() {
         $indexes = explode(",", request()->input('indexes'));
         $product_count = 0;
@@ -225,5 +231,25 @@ class CategoryController extends Controller
         }
 
         return response()->json(['product_count' => $product_count], 200);
+    }
+
+    /**
+     * Check whether the current category is deletable or not.
+     *
+     * This method will fetch all root category ids from the channel. If `id` is present,
+     * then it is not deletable.
+     *
+     * @param  \Webkul\Category\Models\Category $category
+     * @return bool
+     */
+    private function isCategoryDeletable($category)
+    {
+        static $rootIdInChannels;
+
+        if (! $rootIdInChannels) {
+            $rootIdInChannels = Channel::pluck('root_category_id');
+        }
+
+        return $category->id === 1 || $rootIdInChannels->contains($category->id);
     }
 }
