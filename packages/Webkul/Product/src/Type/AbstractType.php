@@ -931,25 +931,49 @@ abstract class AbstractType
      */
     public function getCustomerGroupPricingOffers() {
         $offerLines = [];
+        $haveOffers = true;
+
+        $customerGroupPrices = $this->product->customer_group_prices()->get()->sortBy('qty')->values()->all();
 
         if ($this->haveSpecialPrice()) {
-            $customerGroupPrices = $this->product->customer_group_prices()->get()->sortBy('qty')->values()->all();
-
             $rulePrice = app('Webkul\CatalogRule\Helpers\CatalogRuleProductPrice')->getRulePrice($this->product);
 
-            if ($rulePrice && $rulePrice->price > $this->product->special_price) {
+            if ($rulePrice && $rulePrice->price < $this->product->special_price) {
+                $haveOffers = false;
+            }
+
+            if ($haveOffers) {
                 foreach ($customerGroupPrices as $key => $customerGroupPrice) {
                     if ($key > 0) {
-                        $price = $this->getCustomerGroupPrice($this->product, $customerGroupPrice->qty);
-
-                        $discount = (($this->product->price - $price) * 100) / ($this->product->price);
-
-                        $offerLines[] = trans('shop::app.products.offers', ['qty'  => $customerGroupPrice->qty,
-                            'price' =>  core()->currency($price), 'discount' => $discount]);
+                        array_push($offerLines, $this->getOfferLines($customerGroupPrice));
                     }
                 }
             }
+        } else {
+            if (count($customerGroupPrices) > 0) {
+                foreach ($customerGroupPrices as $key => $customerGroupPrice) {
+                    array_push($offerLines, $this->getOfferLines($customerGroupPrice));
+                }
+            }
         }
+
+        return $offerLines;
+    }
+
+    /**
+     * Get offers lines.
+     *
+     * @param array $customerGroupPrice
+     *
+     * @return array
+     */
+    public function getOfferLines($customerGroupPrice) {
+        $price = $this->getCustomerGroupPrice($this->product, $customerGroupPrice->qty);
+
+        $discount = (($this->product->price - $price) * 100) / ($this->product->price);
+
+        $offerLines = trans('shop::app.products.offers', ['qty'  => $customerGroupPrice->qty,
+            'price' =>  core()->currency($price), 'discount' => $discount]);
 
         return $offerLines;
     }
