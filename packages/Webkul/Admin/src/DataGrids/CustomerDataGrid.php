@@ -2,8 +2,8 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\Support\Facades\DB;
 use Webkul\Ui\DataGrid\DataGrid;
+use Illuminate\Support\Facades\DB;
 
 class CustomerDataGrid extends DataGrid
 {
@@ -17,11 +17,12 @@ class CustomerDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('customers')
             ->leftJoin('customer_groups', 'customers.customer_group_id', '=', 'customer_groups.id')
-            ->addSelect('customers.id as customer_id', 'customers.email', 'customer_groups.name', 'customers.phone', 'customers.gender', 'status')
+            ->addSelect('customers.id as customer_id', 'customers.email', 'customer_groups.name as group', 'customers.phone', 'customers.gender', 'status')
             ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'customers.first_name, " ", ' . DB::getTablePrefix() . 'customers.last_name) as full_name'));
 
         $this->addFilter('customer_id', 'customers.id');
         $this->addFilter('full_name', DB::raw('CONCAT(' . DB::getTablePrefix() . 'customers.first_name, " ", ' . DB::getTablePrefix() . 'customers.last_name)'));
+        $this->addFilter('group', 'customer_groups.name');
         $this->addFilter('phone', 'customers.phone');
         $this->addFilter('gender', 'customers.gender');
         $this->addFilter('status', 'status');
@@ -59,7 +60,7 @@ class CustomerDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'name',
+            'index'      => 'group',
             'label'      => trans('admin::app.datagrid.group'),
             'type'       => 'string',
             'searchable' => false,
