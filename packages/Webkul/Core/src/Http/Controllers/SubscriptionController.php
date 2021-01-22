@@ -70,6 +70,12 @@ class SubscriptionController extends Controller
 
         $subscriber = $this->subscribersListRepository->findOrFail($id);
 
+        $customer = $subscriber->customer;
+
+        $customer->subscribed_to_news_letter = $data['is_subscribed'];
+
+        $customer->save();
+
         $result = $subscriber->update($data);
 
         if ($result) {
@@ -99,7 +105,7 @@ class SubscriptionController extends Controller
             return response()->json(['message' => true], 200);
         } catch (\Exception $e) {
             report($e);
-            
+
             session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Subscriber']));
         }
 

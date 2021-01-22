@@ -98,7 +98,7 @@ class AddressDataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => true,
         ]);
-        
+
         $this->addColumn([
             'index'      => 'city',
             'label'      => trans('admin::app.customers.addresses.city'),
@@ -167,7 +167,7 @@ class AddressDataGrid extends DataGrid
             'type'   => 'delete',
             'label'  => trans('admin::app.customers.addresses.delete'),
             'action' => route('admin.customer.addresses.massdelete', request('id')),
-            'method' => 'DELETE',
+            'method' => 'POST',
         ]);
     }
 }
