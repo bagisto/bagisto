@@ -2,6 +2,7 @@
 
 namespace Webkul\Category\Http\Controllers;
 
+use Webkul\Core\Models\Channel;
 use Illuminate\Support\Facades\Event;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
@@ -145,10 +146,14 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+        /* grabbing root category ids for all associated channles */
+        $rootIdInChannels = Channel::pluck('root_category_id');
+
+        /* fetching category by id */
         $category = $this->categoryRepository->findOrFail($id);
 
-        /* the very first category which comes with db seeder can't be deleted */
-        if ($category->id === 1) {
+        /* root category and first category which comes with db seeder can't be deleted */
+        if ($category->id === 1 || $rootIdInChannels->contains($category->id)) {
             session()->flash('warning', trans('admin::app.response.delete-category-root', ['name' => 'Category']));
         } else {
             try {
