@@ -9,7 +9,7 @@ return [
         'is_calculate_tax' => true,
         'default_rate'     => '10',
         'type'             => 'per_unit',
-        'default'          => 1,
+        'default'          => 0,
         'class'            => 'Webkul\Shipping\Carriers\FlatRate',
     ],
 
