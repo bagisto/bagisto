@@ -96,7 +96,7 @@ class Configurable extends AbstractType
     {
         $product = parent::update($data, $id, $attribute);
 
-        if (app()->runningInConsole() || request()->route()->getName() != 'admin.catalog.products.massupdate') {
+        if (request()->route() && request()->route()->getName() != 'admin.catalog.products.massupdate') {
             $previousVariantIds = $product->variants->pluck('id');
 
             if (isset($data['variants'])) {
