@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Webkul\Checkout\Models\CartProxy;
 use Webkul\Sales\Models\OrderProxy;
+use Webkul\Core\Models\SubscribersListProxy;
 use Webkul\Product\Models\ProductReviewProxy;
 use Webkul\Customer\Notifications\CustomerResetPassword;
 use Webkul\Customer\Contracts\Customer as CustomerContract;
@@ -159,5 +160,13 @@ class Customer extends Authenticatable implements CustomerContract, JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    /**
+     * Get the customer's subscription.
+     */
+    public function subscription()
+    {
+        return $this->hasOne(SubscribersListProxy::modelClass(), 'customer_id');
     }
 }
