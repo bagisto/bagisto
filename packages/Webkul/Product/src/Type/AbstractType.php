@@ -932,8 +932,23 @@ abstract class AbstractType
     public function getCustomerGroupPricingOffers() {
         $offerLines = [];
         $haveOffers = true;
+        $customerGroupId = null;
 
-        $customerGroupPrices = $this->product->customer_group_prices()->get()->sortBy('qty')->values()->all();
+        if (Cart::getCurrentCustomer()->check()) {
+            $customerGroupId = Cart::getCurrentCustomer()->user()->customer_group_id;
+        } else {
+            $customerGroupRepository = app('Webkul\Customer\Repositories\CustomerGroupRepository');
+
+            if ($customerGuestGroup = $customerGroupRepository->findOneByField('code', 'guest')) {
+                $customerGroupId = $customerGuestGroup->id;
+            }
+        }
+
+        $customerGroupPrices = $this->product->customer_group_prices()->where(function ($query) use ($customerGroupId) {
+            $query->where('customer_group_id', $customerGroupId)
+                ->orWhereNull('customer_group_id');
+        }
+        )->groupBy('qty')->get()->sortBy('qty')->values()->all();
 
         if ($this->haveSpecialPrice()) {
             $rulePrice = app('Webkul\CatalogRule\Helpers\CatalogRuleProductPrice')->getRulePrice($this->product);
