@@ -24,6 +24,7 @@ class CategoryDataGrid extends DataGrid
             ->groupBy('cat.id');
 
 
+        $this->addFilter('status', 'cat.status');
         $this->addFilter('category_id', 'cat.id');
 
         $this->setQueryBuilder($queryBuilder);
@@ -106,7 +107,7 @@ class CategoryDataGrid extends DataGrid
             'type'   => 'delete',
             'label'  => trans('admin::app.datagrid.delete'),
             'action' => route('admin.catalog.categories.massdelete'),
-            'method' => 'DELETE',
+            'method' => 'POST',
         ]);
     }
 }

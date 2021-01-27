@@ -1,13 +1,12 @@
 {
     "name": "bagisto/bagisto",
-    "description": "Bagisto Laravel ECommerce",
+    "description": "Bagisto Laravel E-Commerce",
     "keywords": [
         "framework",
         "laravel"
     ],
     "license": "MIT",
     "type": "project",
-
     "require": {
         "php": "^7.2.5",
         "ext-curl": "*",
@@ -19,7 +18,9 @@
         "ext-tokenizer": "*",
         "algolia/algoliasearch-client-php": "^2.2",
         "astrotomic/laravel-translatable": "^11.0.0",
+        "aws/aws-sdk-php": "^3.171",
         "babenkoivan/elastic-scout-driver": "^1.1",
+        "bagisto/bagisto-package-generator": "9999999-dev",
         "bagistobrasil/bagisto-product-social-share": "^0.1.2",
         "barryvdh/laravel-debugbar": "^3.1",
         "barryvdh/laravel-dompdf": "0.8.6",
@@ -31,18 +32,18 @@
         "intervention/image": "^2.4",
         "intervention/imagecache": "^2.3",
         "kalnoy/nestedset": "5.0.1",
+        "khaled.alshamaa/ar-php": "^5.5.2",
         "konekt/concord": "^1.2",
         "laravel/framework": "^7.0",
         "laravel/scout": "^8.0",
         "laravel/socialite": "^4.4",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
-        "maatwebsite/excel": "3.1.19",
+        "maatwebsite/excel": "^3.1.26",
         "paypal/paypal-checkout-sdk": "1.0.1",
         "prettus/l5-repository": "^2.6",
         "tymon/jwt-auth": "^1.0.0"
     },
-
     "require-dev": {
         "codeception/codeception": "4.1.1",
         "codeception/module-asserts": "^1.1",
@@ -54,7 +55,6 @@
         "nunomaduro/collision": "^4.1",
         "phpunit/phpunit": "^8.5"
     },
-
     "replace": {
         "bagisto/laravel-user": "v0.1.0",
         "bagisto/laravel-admin": "v0.1.0",
@@ -76,7 +76,6 @@
         "bagisto/laravel-paypal": "v0.1.0",
         "bagisto/laravel-discount": "v0.1.0"
     },
-
     "autoload": {
       "classmap": [
         "database/seeds",
@@ -109,10 +108,10 @@
         "Webkul\\Velocity\\": "packages/Webkul/Velocity/src",
         "Webkul\\BookingProduct\\": "packages/Webkul/BookingProduct/src",
         "Webkul\\SocialLogin\\": "packages/Webkul/SocialLogin/src",
-        "Webkul\\DebugBar\\": "packages/Webkul/DebugBar/src"
+        "Webkul\\DebugBar\\": "packages/Webkul/DebugBar/src",
+        "Webkul\\Marketing\\": "packages/Webkul/Marketing/src"
       }
     },
-
     "autoload-dev": {
         "psr-4": {
             "Tests\\Acceptance\\": "tests/acceptance/",
@@ -121,7 +120,6 @@
             "Tests\\Trigger\\": "tests/trigger/"
         }
     },
-
     "extra": {
         "laravel": {
             "dont-discover": [
@@ -129,22 +127,18 @@
             ]
         }
     },
-
     "scripts": {
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
-
         "post-create-project-cmd": [
             "@php artisan key:generate",
             "Webkul\\Core\\Events\\ComposerEvents::postCreateProject"
         ],
-
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
         ],
-
         "test": [
             "set -e",
             "@php artisan migrate:fresh --env=testing",
@@ -152,7 +146,7 @@
             "vendor/bin/codecept run functional",
             "vendor/bin/codecept run trigger"
         ],
-         "test-win": [
+        "test-win": [
             "@set -e",
             "@php artisan migrate:fresh --env=testing",
             "vendor\\bin\\codecept.bat run unit",
@@ -167,4 +161,4 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true
-  }
+}

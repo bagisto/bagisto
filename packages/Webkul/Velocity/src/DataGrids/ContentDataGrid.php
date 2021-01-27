@@ -22,6 +22,7 @@ class ContentDataGrid extends DataGrid
             ->groupBy('con.id');
 
         $this->addFilter('content_id', 'con.id');
+        $this->addFilter('status', 'con.status');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -115,7 +116,7 @@ class ContentDataGrid extends DataGrid
             'type'   => 'delete',
             'action' => route('velocity.admin.content.mass-delete'),
             'label'  => trans('admin::app.datagrid.delete'),
-            'method' => 'DELETE',
+            'method' => 'POST',
         ]);
     }
 }

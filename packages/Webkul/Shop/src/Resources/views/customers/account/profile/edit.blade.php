@@ -100,6 +100,11 @@
                         <span class="control-error" v-if="errors.has('password_confirmation')">@{{ errors.first('password_confirmation') }}</span>
                     </div>
 
+                    <div class="control-group">
+                        <input type="checkbox" id="checkbox2" name="subscribed_to_news_letter"@if (isset($customer->subscription)) value="{{ $customer->subscription->is_subscribed }}" {{ $customer->subscription->is_subscribed ? 'checked' : ''}} @endif>
+                        <span>{{ __('shop::app.customer.signup-form.subscribe-to-newsletter') }}</span>
+                    </div>
+
                     {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.after', ['customer' => $customer]) !!}
 
                     <div class="button-group">

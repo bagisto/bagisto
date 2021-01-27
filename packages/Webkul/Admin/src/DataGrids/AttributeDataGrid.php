@@ -17,6 +17,10 @@ class AttributeDataGrid extends DataGrid
             ->select('id')
             ->addSelect('id', 'code', 'admin_name', 'type', 'is_required', 'is_unique', 'value_per_locale', 'value_per_channel');
 
+        $this->addFilter('is_unique', 'is_unique');
+        $this->addFilter('value_per_locale', 'value_per_locale');
+        $this->addFilter('value_per_channel', 'value_per_channel');
+
         $this->setQueryBuilder($queryBuilder);
     }
 
@@ -146,7 +150,7 @@ class AttributeDataGrid extends DataGrid
             'action' => route('admin.catalog.attributes.massdelete'),
             'label'  => trans('admin::app.datagrid.delete'),
             'index'  => 'admin_name',
-            'method' => 'DELETE',
+            'method' => 'POST',
         ]);
     }
 }

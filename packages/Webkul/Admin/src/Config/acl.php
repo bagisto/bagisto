@@ -1,12 +1,31 @@
 <?php
 
 return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Dashboard
+    |--------------------------------------------------------------------------
+    |
+    | All ACLs related to dashboard will be placed here.
+    |
+    */
     [
         'key'   => 'dashboard',
         'name'  => 'admin::app.acl.dashboard',
         'route' => 'admin.dashboard.index',
         'sort'  => 1,
-    ], [
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Sales
+    |--------------------------------------------------------------------------
+    |
+    | All ACLs related to sales will be placed here.
+    |
+    */
+    [
         'key'   => 'sales',
         'name'  => 'admin::app.acl.sales',
         'route' => 'admin.sales.orders.index',
@@ -17,9 +36,29 @@ return [
         'route' => 'admin.sales.orders.index',
         'sort'  => 1,
     ], [
+        'key'   => 'sales.orders.view',
+        'name'  => 'admin::app.acl.view',
+        'route' => 'admin.sales.orders.view',
+        'sort'  => 1,
+    ], [
+        'key'   => 'sales.orders.cancel',
+        'name'  => 'admin::app.acl.cancel',
+        'route' => 'admin.sales.orders.cancel',
+        'sort'  => 2,
+    ], [
         'key'   => 'sales.invoices',
         'name'  => 'admin::app.acl.invoices',
         'route' => 'admin.sales.invoices.index',
+        'sort'  => 2,
+    ], [
+        'key'   => 'sales.invoices.view',
+        'name'  => 'admin::app.acl.view',
+        'route' => 'admin.sales.invoices.view',
+        'sort'  => 1,
+    ], [
+        'key'   => 'sales.invoices.create',
+        'name'  => 'admin::app.acl.create',
+        'route' => 'admin.sales.invoices.create',
         'sort'  => 2,
     ], [
         'key'   => 'sales.shipments',
@@ -27,6 +66,41 @@ return [
         'route' => 'admin.sales.shipments.index',
         'sort'  => 3,
     ], [
+        'key'   => 'sales.shipments.view',
+        'name'  => 'admin::app.acl.view',
+        'route' => 'admin.sales.shipments.view',
+        'sort'  => 1,
+    ], [
+        'key'   => 'sales.shipments.create',
+        'name'  => 'admin::app.acl.create',
+        'route' => 'admin.sales.shipments.create',
+        'sort'  => 2,
+    ], [
+        'key'   => 'sales.refunds',
+        'name'  => 'admin::app.acl.refunds',
+        'route' => 'admin.sales.refunds.index',
+        'sort'  => 4,
+    ], [
+        'key'   => 'sales.refunds.view',
+        'name'  => 'admin::app.acl.view',
+        'route' => 'admin.sales.refunds.view',
+        'sort'  => 1,
+    ], [
+        'key'   => 'sales.refunds.create',
+        'name'  => 'admin::app.acl.create',
+        'route' => 'admin.sales.refunds.create',
+        'sort'  => 2,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Catalog
+    |--------------------------------------------------------------------------
+    |
+    | All ACLs related to catalog will be placed here.
+    |
+    */
+    [
         'key'   => 'catalog',
         'name'  => 'admin::app.acl.catalog',
         'route' => 'admin.catalog.index',
@@ -42,15 +116,30 @@ return [
         'route' => 'admin.catalog.products.create',
         'sort'  => 1,
     ], [
+        'key'   => 'catalog.products.copy',
+        'name'  => 'admin::app.acl.copy',
+        'route' => 'admin.catalog.products.copy',
+        'sort'  => 2,
+    ], [
         'key'   => 'catalog.products.edit',
         'name'  => 'admin::app.acl.edit',
         'route' => 'admin.catalog.products.edit',
-        'sort'  => 2,
+        'sort'  => 3,
     ], [
         'key'   => 'catalog.products.delete',
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.catalog.products.delete',
-        'sort'  => 3,
+        'sort'  => 4,
+    ], [
+        'key'   => 'catalog.products.mass-update',
+        'name'  => 'admin::app.acl.mass-update',
+        'route' => 'admin.catalog.products.massupdate',
+        'sort'  => 5,
+    ], [
+        'key'   => 'catalog.products.mass-delete',
+        'name'  => 'admin::app.acl.mass-delete',
+        'route' => 'admin.catalog.products.massdelete',
+        'sort'  => 6,
     ], [
         'key'   => 'catalog.categories',
         'name'  => 'admin::app.acl.categories',
@@ -72,6 +161,11 @@ return [
         'route' => 'admin.catalog.categories.delete',
         'sort'  => 3,
     ], [
+        'key'   => 'catalog.categories.mass-delete',
+        'name'  => 'admin::app.acl.mass-delete',
+        'route' => 'admin.catalog.categories.massdelete',
+        'sort'  => 4,
+    ], [
         'key'   => 'catalog.attributes',
         'name'  => 'admin::app.acl.attributes',
         'route' => 'admin.catalog.attributes.index',
@@ -92,6 +186,11 @@ return [
         'route' => 'admin.catalog.attributes.delete',
         'sort'  => 3,
     ], [
+        'key'   => 'catalog.attributes.mass-delete',
+        'name'  => 'admin::app.acl.mass-delete',
+        'route' => 'admin.catalog.attributes.massdelete',
+        'sort'  => 4,
+    ], [
         'key'   => 'catalog.families',
         'name'  => 'admin::app.acl.attribute-families',
         'route' => 'admin.catalog.families.index',
@@ -111,7 +210,17 @@ return [
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.catalog.families.delete',
         'sort'  => 3,
-    ], [
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Customers
+    |--------------------------------------------------------------------------
+    |
+    | All ACLs related to customers will be placed here.
+    |
+    */
+    [
         'key'   => 'customers',
         'name'  => 'admin::app.acl.customers',
         'route' => 'admin.customer.index',
@@ -137,10 +246,45 @@ return [
         'route' => 'admin.customer.delete',
         'sort'  => 3,
     ], [
+        'key'   => 'customers.customers.mass-update',
+        'name'  => 'admin::app.acl.mass-update',
+        'route' => 'admin.customer.mass-update',
+        'sort'  => 4,
+    ], [
+        'key'   => 'customers.customers.mass-delete',
+        'name'  => 'admin::app.acl.mass-delete',
+        'route' => 'admin.customer.mass-delete',
+        'sort'  => 5,
+    ], [
+        'key'   => 'customers.addresses',
+        'name'  => 'admin::app.acl.addresses',
+        'route' => 'admin.customer.addresses.index',
+        'sort'  => 2,
+    ], [
+        'key'   => 'customers.addresses.create',
+        'name'  => 'admin::app.acl.create',
+        'route' => 'admin.customer.addresses.create',
+        'sort'  => 1,
+    ], [
+        'key'   => 'customers.addresses.edit',
+        'name'  => 'admin::app.acl.edit',
+        'route' => 'admin.customer.addresses.edit',
+        'sort'  => 2,
+    ], [
+        'key'   => 'customers.addresses.delete',
+        'name'  => 'admin::app.acl.delete',
+        'route' => 'admin.customer.addresses.delete',
+        'sort'  => 3,
+    ], [
+        'key'   => 'customers.note',
+        'name'  => 'admin::app.acl.note',
+        'route' => 'admin.customer.note.create',
+        'sort'  => 3,
+    ], [
         'key'   => 'customers.groups',
         'name'  => 'admin::app.acl.groups',
         'route' => 'admin.groups.index',
-        'sort'  => 2,
+        'sort'  => 4,
     ], [
         'key'   => 'customers.groups.create',
         'name'  => 'admin::app.acl.create',
@@ -160,7 +304,7 @@ return [
         'key'   => 'customers.reviews',
         'name'  => 'admin::app.acl.reviews',
         'route' => 'admin.customer.review.index',
-        'sort'  => 3,
+        'sort'  => 5,
     ], [
         'key'   => 'customers.reviews.edit',
         'name'  => 'admin::app.acl.edit',
@@ -172,15 +316,215 @@ return [
         'route' => 'admin.customer.review.delete',
         'sort'  => 2,
     ], [
-        'key'   => 'configuration',
-        'name'  => 'admin::app.acl.configure',
-        'route' => 'admin.configuration.index',
-        'sort'  => 5,
+        'key'   => 'customers.reviews.mass-update',
+        'name'  => 'admin::app.acl.mass-update',
+        'route' => 'admin.customer.review.massupdate',
+        'sort'  => 3,
     ], [
+        'key'   => 'customers.reviews.mass-delete',
+        'name'  => 'admin::app.acl.mass-delete',
+        'route' => 'admin.customer.review.massdelete',
+        'sort'  => 4,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Marketing
+    |--------------------------------------------------------------------------
+    |
+    | All ACLs related to marketing will be placed here.
+    |
+    */
+    [
+        'key'   => 'marketing',
+        'name'  => 'admin::app.acl.marketing',
+        'route' => 'admin.cart-rules.index',
+        'sort'  => 6,
+    ], [
+        'key'   => 'marketing.promotions',
+        'name'  => 'admin::app.acl.promotions',
+        'route' => 'admin.cart-rules.index',
+        'sort'  => 6,
+    ], [
+        'key'   => 'marketing.promotions.cart-rules',
+        'name'  => 'admin::app.acl.cart-rules',
+        'route' => 'admin.cart-rules.index',
+        'sort'  => 1,
+    ], [
+        'key'   => 'marketing.promotions.cart-rules.create',
+        'name'  => 'admin::app.acl.create',
+        'route' => 'admin.cart-rules.create',
+        'sort'  => 1,
+    ], [
+        'key'   => 'marketing.promotions.cart-rules.copy',
+        'name'  => 'admin::app.acl.copy',
+        'route' => 'admin.cart-rules.copy',
+        'sort'  => 1,
+    ], [
+        'key'   => 'marketing.promotions.cart-rules.edit',
+        'name'  => 'admin::app.acl.edit',
+        'route' => 'admin.cart-rules.edit',
+        'sort'  => 2,
+    ], [
+        'key'   => 'marketing.promotions.cart-rules.delete',
+        'name'  => 'admin::app.acl.delete',
+        'route' => 'admin.cart-rules.delete',
+        'sort'  => 3,
+    ], [
+        'key'   => 'marketing.promotions.catalog-rules',
+        'name'  => 'admin::app.acl.catalog-rules',
+        'route' => 'admin.catalog-rules.index',
+        'sort'  => 1,
+    ], [
+        'key'   => 'marketing.promotions.catalog-rules.create',
+        'name'  => 'admin::app.acl.create',
+        'route' => 'admin.catalog-rules.index',
+        'sort'  => 1,
+    ], [
+        'key'   => 'marketing.promotions.catalog-rules.edit',
+        'name'  => 'admin::app.acl.edit',
+        'route' => 'admin.catalog-rules.edit',
+        'sort'  => 2,
+    ], [
+        'key'   => 'marketing.promotions.catalog-rules.delete',
+        'name'  => 'admin::app.acl.delete',
+        'route' => 'admin.catalog-rules.delete',
+        'sort'  => 3,
+    ], [
+        'key'   => 'marketing.email-marketing',
+        'name'  => 'admin::app.acl.email-marketing',
+        'route' => 'admin.email-templates.index',
+        'sort'  => 7,
+    ], [
+        'key'   => 'marketing.email-marketing.email-templates',
+        'name'  => 'admin::app.acl.email-templates',
+        'route' => 'admin.email-templates.index',
+        'sort'  => 1,
+    ], [
+        'key'   => 'marketing.email-marketing.email-templates.create',
+        'name'  => 'admin::app.acl.create',
+        'route' => 'admin.email-templates.create',
+        'sort'  => 1,
+    ], [
+        'key'   => 'marketing.email-marketing.email-templates.edit',
+        'name'  => 'admin::app.acl.edit',
+        'route' => 'admin.email-templates.edit',
+        'sort'  => 2,
+    ], [
+        'key'   => 'marketing.email-marketing.email-templates.delete',
+        'name'  => 'admin::app.acl.delete',
+        'route' => 'admin.email-templates.delete',
+        'sort'  => 3,
+    ], [
+        'key'   => 'marketing.email-marketing.events',
+        'name'  => 'admin::app.acl.events',
+        'route' => 'admin.events.index',
+        'sort'  => 1,
+    ], [
+        'key'   => 'marketing.email-marketing.events.create',
+        'name'  => 'admin::app.acl.create',
+        'route' => 'admin.events.create',
+        'sort'  => 1,
+    ], [
+        'key'   => 'marketing.email-marketing.events.edit',
+        'name'  => 'admin::app.acl.edit',
+        'route' => 'admin.events.edit',
+        'sort'  => 2,
+    ], [
+        'key'   => 'marketing.email-marketing.events.delete',
+        'name'  => 'admin::app.acl.delete',
+        'route' => 'admin.events.delete',
+        'sort'  => 3,
+    ], [
+        'key'   => 'marketing.email-marketing.campaigns',
+        'name'  => 'admin::app.acl.campaigns',
+        'route' => 'admin.campaigns.index',
+        'sort'  => 1,
+    ], [
+        'key'   => 'marketing.email-marketing.campaigns.create',
+        'name'  => 'admin::app.acl.create',
+        'route' => 'admin.campaigns.create',
+        'sort'  => 1,
+    ], [
+        'key'   => 'marketing.email-marketing.campaigns.edit',
+        'name'  => 'admin::app.acl.edit',
+        'route' => 'admin.campaigns.edit',
+        'sort'  => 2,
+    ], [
+        'key'   => 'marketing.email-marketing.campaigns.delete',
+        'name'  => 'admin::app.acl.delete',
+        'route' => 'admin.campaigns.delete',
+        'sort'  => 3,
+    ], [
+        'key'   => 'marketing.email-marketing.subscribers',
+        'name'  => 'admin::app.acl.subscribers',
+        'route' => 'admin.customers.subscribers.index',
+        'sort'  => 1,
+    ], [
+        'key'   => 'marketing.email-marketing.subscribers.edit',
+        'name'  => 'admin::app.acl.edit',
+        'route' => 'admin.customers.subscribers.edit',
+        'sort'  => 2,
+    ], [
+        'key'   => 'marketing.email-marketing.subscribers.delete',
+        'name'  => 'admin::app.acl.delete',
+        'route' => 'admin.customers.subscribers.delete',
+        'sort'  => 3,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | CMS
+    |--------------------------------------------------------------------------
+    |
+    | All ACLs related to cms will be placed here.
+    |
+    */
+    [
+        'key'   => 'cms',
+        'name'  => 'admin::app.layouts.cms',
+        'route' => 'admin.cms.index',
+        'sort'  => 7,
+    ], [
+        'key'   => 'cms.pages',
+        'name'  => 'admin::app.cms.pages.pages',
+        'route' => 'admin.cms.index',
+        'sort'  => 7,
+    ], [
+        'key'   => 'cms.pages.create',
+        'name'  => 'admin::app.acl.create',
+        'route' => 'admin.cms.create',
+        'sort'  => 1,
+    ], [
+        'key'   => 'cms.pages.edit',
+        'name'  => 'admin::app.acl.edit',
+        'route' => 'admin.cms.edit',
+        'sort'  => 2,
+    ], [
+        'key'   => 'cms.pages.delete',
+        'name'  => 'admin::app.acl.delete',
+        'route' => 'admin.cms.delete',
+        'sort'  => 3,
+    ], [
+        'key'   => 'cms.pages.mass-delete',
+        'name'  => 'admin::app.acl.mass-delete',
+        'route' => 'admin.cms.mass-delete',
+        'sort'  => 4,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Settings
+    |--------------------------------------------------------------------------
+    |
+    | All ACLs related to settings will be placed here.
+    |
+    */
+    [
         'key'   => 'settings',
         'name'  => 'admin::app.acl.settings',
         'route' => 'admin.users.index',
-        'sort'  => 6,
+        'sort'  => 8,
     ], [
         'key'   => 'settings.locales',
         'name'  => 'admin::app.acl.locales',
@@ -391,52 +735,20 @@ return [
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.tax-rates.delete',
         'sort'  => 3,
-    ], [
-        'key'   => 'promotions',
-        'name'  => 'admin::app.acl.promotions',
-        'route' => 'admin.cart-rules.index',
-        'sort'  => 7,
-    ], [
-        'key'   => 'promotions.cart-rules',
-        'name'  => 'admin::app.acl.cart-rules',
-        'route' => 'admin.cart-rules.index',
-        'sort'  => 1,
-    ], [
-        'key'   => 'promotions.cart-rules.create',
-        'name'  => 'admin::app.acl.create',
-        'route' => 'admin.cart-rules.create',
-        'sort'  => 1,
-    ], [
-        'key'   => 'promotions.cart-rules.edit',
-        'name'  => 'admin::app.acl.edit',
-        'route' => 'admin.cart-rules.edit',
-        'sort'  => 2,
-    ], [
-        'key'   => 'promotions.cart-rules.delete',
-        'name'  => 'admin::app.acl.delete',
-        'route' => 'admin.cart-rules.delete',
-        'sort'  => 3,
-    ], [
-        'key'   => 'promotions.catalog-rules',
-        'name'  => 'admin::app.acl.catalog-rules',
-        'route' => 'admin.catalog-rules.index',
-        'sort'  => 1,
-    ], [
-        'key'   => 'promotions.catalog-rules.create',
-        'name'  => 'admin::app.acl.create',
-        'route' => 'admin.catalog-rules.index',
-        'sort'  => 1,
-    ], [
-        'key'   => 'promotions.catalog-rules.edit',
-        'name'  => 'admin::app.acl.edit',
-        'route' => 'admin.catalog-rules.edit',
-        'sort'  => 2,
-    ], [
-        'key'   => 'promotions.catalog-rules.delete',
-        'name'  => 'admin::app.acl.delete',
-        'route' => 'admin.catalog-rules.delete',
-        'sort'  => 3,
     ],
-];
 
-?>
+    /*
+    |--------------------------------------------------------------------------
+    | Configuration
+    |--------------------------------------------------------------------------
+    |
+    | All ACLs related to configuration will be placed here.
+    |
+    */
+    [
+        'key'   => 'configuration',
+        'name'  => 'admin::app.acl.configure',
+        'route' => 'admin.configuration.index',
+        'sort'  => 9,
+    ]
+];
