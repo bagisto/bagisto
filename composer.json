@@ -32,7 +32,7 @@
         "intervention/image": "^2.4",
         "intervention/imagecache": "^2.3",
         "kalnoy/nestedset": "5.0.1",
-        "khaled.alshamaa/ar-php": "^5.5",
+        "khaled.alshamaa/ar-php": "^5.5.2",
         "konekt/concord": "^1.2",
         "laravel/framework": "^7.0",
         "laravel/scout": "^8.0",
