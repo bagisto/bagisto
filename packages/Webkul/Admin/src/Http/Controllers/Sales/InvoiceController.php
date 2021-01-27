@@ -156,10 +156,7 @@ class InvoiceController extends Controller
      */
     private function adjustArabicAndPersianContent($html)
     {
-        /* temporary require */
-        require_once base_path('vendor/khaled.alshamaa/ar-php/src/arabic.php');
-
-        $arabic = new \ArPHP\I18N\arabic();
+        $arabic = new \ArPHP\I18N\Arabic();
 
         $p = $arabic->arIdentify($html);
 
