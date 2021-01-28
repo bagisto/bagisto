@@ -355,7 +355,7 @@ class Configurable extends AbstractType
      */
     public function getMinimalPrice($qty = null)
     {
-        $minPrices = $rulePrices = [];
+        $minPrices = $rulePrices = $customerGroupPrices = [];
 
         /* method is calling many time so using variable */
         $tablePrefix = DB::getTablePrefix();
@@ -379,13 +379,15 @@ class Configurable extends AbstractType
             if ($rulePrice) {
                 $rulePrices[] = $rulePrice->price;
             }
+
+            $customerGroupPrices[] = $this->getCustomerGroupPrice($variant, 1);
         }
 
         if (empty($minPrices)) {
             return 0;
         }
 
-        return min(array_merge($minPrices, $rulePrices));
+        return min(array_merge(array_merge($minPrices, $rulePrices), $customerGroupPrices));
     }
 
     /**
