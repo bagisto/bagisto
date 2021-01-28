@@ -96,7 +96,7 @@ class Configurable extends AbstractType
     {
         $product = parent::update($data, $id, $attribute);
         $route = request()->route() ? request()->route()->getName() : '';
-        
+
         if ($route != 'admin.catalog.products.massupdate') {
             $previousVariantIds = $product->variants->pluck('id');
 
@@ -355,7 +355,7 @@ class Configurable extends AbstractType
      */
     public function getMinimalPrice($qty = null)
     {
-        $minPrices = [];
+        $minPrices = $rulePrices = [];
 
         /* method is calling many time so using variable */
         $tablePrefix = DB::getTablePrefix();
@@ -373,11 +373,19 @@ class Configurable extends AbstractType
             $minPrices[] = $price->min_price;
         }
 
+        foreach ($this->product->variants as $variant) {
+            $rulePrice = app('Webkul\CatalogRule\Helpers\CatalogRuleProductPrice')->getRulePrice($variant);
+
+            if ($rulePrice) {
+                $rulePrices[] = $rulePrice->price;
+            }
+        }
+
         if (empty($minPrices)) {
             return 0;
         }
 
-        return min($minPrices);
+        return min(array_merge($minPrices, $rulePrices));
     }
 
     /**
@@ -540,7 +548,7 @@ class Configurable extends AbstractType
                     $product = $item->child->product;
                 } else {
                     $product = $item->product;
-                } 
+                }
             }
         }
 
