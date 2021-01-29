@@ -33,11 +33,12 @@
                 <input type="hidden" name="channel" value="{{ $channel }}" />
 
                 <div class="control-group">
-                    <select class="control" id="channel-switcher" onChange="window.location.href = this.value">
-                        @foreach (core()->getAllChannels() as $ch)
+                    <select class="control" id="channel-switcher" name="channel">
+                        @foreach (core()->getAllChannels() as $channelModel)
 
-                            <option value="{{ route('velocity.admin.meta-data') . '?channel=' . $ch->code . '&locale=' . $locale }}" {{ ($ch->code) == $channel ? 'selected' : '' }}>
-                                {{ $ch->name }}
+                            <option
+                                value="{{ $channelModel->code }}" {{ ($channelModel->code) == $channel ? 'selected' : '' }}>
+                                {{ $channelModel->name }}
                             </option>
 
                         @endforeach
@@ -45,10 +46,11 @@
                 </div>
 
                 <div class="control-group">
-                    <select class="control" id="locale-switcher" onChange="window.location.href = this.value">
-                        @foreach (core()->getAllLocales() as $localeModel)
+                    <select class="control" id="locale-switcher" name="locale">
+                        @foreach (app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales as $localeModel)
 
-                            <option value="{{ route('velocity.admin.meta-data') . '?locale=' . $localeModel->code . '&channel=' . $channel }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
+                            <option
+                                value="{{ $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
                                 {{ $localeModel->name }}
                             </option>
 
@@ -105,9 +107,9 @@
                             value="{{ $metaData ? $metaData->header_content_count : '5' }}" />
                     </div>
 
-                  
 
-                  
+
+
                     <div class="control-group">
                         <label style="width:100%;">
                             {{ __('velocity::app.admin.meta-data.home-page-content') }}
@@ -181,7 +183,7 @@
                                     'url' => asset('/themes/velocity/assets/images/kids.webp'),
                                 ];
                             @endphp
-                        
+
                             <image-wrapper
                                 :multiple="true"
                                 input-name="images[4]"
@@ -351,6 +353,20 @@
                 plugins: 'image imagetools media wordcount save fullscreen code',
                 toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | code',
             });
+
+            $('#channel-switcher, #locale-switcher').on('change', function (e) {
+                $('#channel-switcher').val()
+
+                if (event.target.id == 'channel-switcher') {
+                    let locale = "{{ app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales->first()->code }}";
+
+                    $('#locale-switcher').val(locale);
+                }
+
+                var query = '?channel=' + $('#channel-switcher').val() + '&locale=' + $('#locale-switcher').val();
+
+                window.location.href = "{{ route('velocity.admin.meta-data')  }}" + query;
+            })
         });
     </script>
 @endpush

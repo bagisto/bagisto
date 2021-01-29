@@ -30,10 +30,17 @@ class SliderDataGrid extends DataGrid
     {
         parent::__construct();
 
-        $this->locale = request()->get('locale') ?? 'all';
-        $this->channel = request()->get('channel')
-            ? Channel::find(request()->get('channel'))->code
-            : 'all';
+        /* locale */
+        $this->locale = request()->get('locale') ?? app()->getLocale();
+
+        /* channel */
+        $this->channel = request()->get('channel') ?? (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
+
+        /* finding channel code */
+        if ($this->channel !== 'all') {
+            $this->channel = Channel::query()->find($this->channel);
+            $this->channel = $this->channel ? $this->channel->code : 'all';
+        }
     }
 
     public function prepareQueryBuilder()
