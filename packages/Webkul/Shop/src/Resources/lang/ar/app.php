@@ -442,7 +442,8 @@ return [
         'available-for-order' => 'متوفر لطلب الشراء',
         'settings' => 'Settings',
         'compare_options' => 'قارن الخيارات',
-        'wishlist-options' => 'Wishlist Options'
+        'wishlist-options' => 'Wishlist Options',
+        'offers' => 'Buy :qty for :price each and save :discount%',
     ],
 
     // 'reviews' => [
