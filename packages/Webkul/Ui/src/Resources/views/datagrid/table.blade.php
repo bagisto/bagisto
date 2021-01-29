@@ -2,6 +2,12 @@
     $locale = request()->get('locale') ?: app()->getLocale();
     $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
     $customer_group = request()->get('customer_group');
+
+    if ($channel == 'all') {
+        $locales = core()->getAllLocales();
+    } else {
+        $locales = app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales;
+    }
 @endphp
 
 <div class="table">
@@ -27,8 +33,8 @@
                                     </option>
                                     @foreach ($results['extraFilters']['channels'] as $channelModel)
                                         <option
-                                            value="{{ $channelModel->id }}"
-                                            {{ (isset($channel) && ($channelModel->id) == $channel) ? 'selected' : '' }}>
+                                            value="{{ $channelModel->code }}"
+                                            {{ (isset($channel) && ($channelModel->code) == $channel) ? 'selected' : '' }}>
                                             {{ $channelModel->name }}
                                         </option>
                                     @endforeach
@@ -45,7 +51,7 @@
                                     <option value="all" {{ ! isset($locale) ? 'selected' : '' }}>
                                         {{ __('admin::app.admin.system.all-locales') }}
                                     </option>
-                                    @foreach ($results['extraFilters']['locales'] as $localeModel)
+                                    @foreach ($locales as $localeModel)
                                         <option
                                             value="{{ $localeModel->code }}" {{ (isset($locale) && ($localeModel->code) == $locale) ? 'selected' : '' }}>
                                             {{ $localeModel->name }}
@@ -715,7 +721,7 @@
                                 case "channel":
                                     obj.label = "Channel";
                                     if ('channels' in this.extraFilters) {
-                                        obj.prettyValue = this.extraFilters['channels'].find(channel => channel.id == obj.val).name
+                                        obj.prettyValue = this.extraFilters['channels'].find(channel => channel.code == obj.val).name
                                     }
                                     break;
                                 case "locale":

@@ -818,8 +818,7 @@ abstract class DataGrid
     private function getRouteNameFromUrl($action, $method)
     {
         return app('router')->getRoutes()
-                            ->match(app('request')
-                            ->create(str_replace(config('app.url'), '', $action), $method))
+                            ->match(app('request')->create(str_replace(url('/'), '', $action), $method))
                             ->getName();
     }
 }

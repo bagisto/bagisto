@@ -63,6 +63,14 @@
 
                         @include ('shop::products.price', ['product' => $product])
 
+                        @if (count($product->getTypeInstance()->getCustomerGroupPricingOffers()) > 0)
+                            <div class="regular-price">
+                                @foreach ($product->getTypeInstance()->getCustomerGroupPricingOffers() as $offers)
+                                    <p> {{ $offers }} </p>
+                                @endforeach
+                            </div>
+                        @endif
+
                         @include ('shop::products.view.stock', ['product' => $product])
 
                         {!! view_render_event('bagisto.shop.products.view.short_description.before', ['product' => $product]) !!}
