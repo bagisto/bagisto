@@ -38,7 +38,7 @@
 
                     <div class="control-group">
                         <select class="control" id="locale-switcher" name="locale">
-                            @foreach (core()->getAllLocales() as $localeModel)
+                            @foreach (app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales as $localeModel)
 
                                 <option
                                     value="{{ $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
@@ -199,6 +199,13 @@
         $(document).ready(function () {
             $('#channel-switcher, #locale-switcher').on('change', function (e) {
                 $('#channel-switcher').val()
+
+                if (event.target.id == 'channel-switcher') {
+                    let locale = "{{ app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales->first()->code }}";
+
+                    $('#locale-switcher').val(locale);
+                }
+
                 var query = '?channel=' + $('#channel-switcher').val() + '&locale=' + $('#locale-switcher').val();
 
                 window.location.href = "{{ route('admin.catalog.products.edit', $product->id)  }}" + query;
