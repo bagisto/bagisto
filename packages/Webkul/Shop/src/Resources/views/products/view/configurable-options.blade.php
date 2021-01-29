@@ -275,15 +275,18 @@
 
                         var priceLabelElement = document.querySelector('.price-label');
                         var priceElement = document.querySelector('.final-price');
+                        var regularPriceElement = document.querySelector('.regular-price');
 
                         if (this.childAttributes.length == selectedOptionCount) {
                             priceLabelElement.style.display = 'none';
+                            regularPriceElement.style.display = 'none';
 
                             priceElement.innerHTML = this.config.variant_prices[this.simpleProduct].final_price.formated_price;
 
                             eventBus.$emit('configurable-variant-selected-event', this.simpleProduct)
                         } else {
                             priceLabelElement.style.display = 'inline-block';
+                            regularPriceElement.style.display = 'inline-block';
 
                             priceElement.innerHTML = this.config.regular_price.formated_price;
 
