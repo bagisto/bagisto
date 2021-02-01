@@ -20,7 +20,7 @@ class MarketingServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../Http/routes.php');
 
         $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
-            $schedule->command('comain:process')->daily();
+            $schedule->command('campaign:process')->daily();
         });
     }
 
