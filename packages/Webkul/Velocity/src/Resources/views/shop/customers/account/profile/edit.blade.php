@@ -132,6 +132,19 @@
 
             <div class="row">
                 <label class="col-12">
+                    {{ __('shop::app.customer.account.profile.phone') }}
+                </label>
+
+                <div class="col-12">
+                    <input value="{{ old('phone') ?? $customer->phone }}" name="phone" type="text"/>
+                    <span class="control-error" v-if="errors.has('phone')">@{{ errors.first('phone') }}</span>
+                </div>
+            </div>
+
+            {!! view_render_event('bagisto.shop.customers.account.profile.edit.phone.after', ['customer' => $customer]) !!}
+
+            <div class="row">
+                <label class="col-12">
                     {{ __('velocity::app.shop.general.enter-current-password') }}
                 </label>
 

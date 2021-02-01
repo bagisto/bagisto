@@ -355,7 +355,7 @@ class Configurable extends AbstractType
      */
     public function getMinimalPrice($qty = null)
     {
-        $minPrices = $rulePrices = $customerGroupPrices = [];
+        $minPrices = [];
 
         /* method is calling many time so using variable */
         $tablePrefix = DB::getTablePrefix();
@@ -373,6 +373,21 @@ class Configurable extends AbstractType
             $minPrices[] = $price->min_price;
         }
 
+        if (empty($minPrices)) {
+            return 0;
+        }
+
+        return min($minPrices);
+    }
+
+    /**
+     * Get product offer price
+     *
+     * @return float
+     */
+    public function getOfferPrice() {
+        $rulePrices = $customerGroupPrices = [];
+
         foreach ($this->product->variants as $variant) {
             $rulePrice = app('Webkul\CatalogRule\Helpers\CatalogRuleProductPrice')->getRulePrice($variant);
 
@@ -383,11 +398,29 @@ class Configurable extends AbstractType
             $customerGroupPrices[] = $this->getCustomerGroupPrice($variant, 1);
         }
 
-        if (empty($minPrices)) {
-            return 0;
+        if ($rulePrices || $customerGroupPrices) {
+            return min(array_merge($rulePrices, $customerGroupPrices));
         }
 
-        return min(array_merge(array_merge($minPrices, $rulePrices), $customerGroupPrices));
+        return [];
+    }
+
+     /**
+     * Check for offer
+     *
+     * @return bool
+     */
+    public function haveOffer() {
+        $haveOffer = false;
+
+        $offerPrice = $this->getOfferPrice();
+        $minPrice   = $this->getMinimalPrice();
+
+        if ($offerPrice < $minPrice) {
+            $haveOffer = true;
+        }
+
+        return $haveOffer;
     }
 
     /**
@@ -415,9 +448,16 @@ class Configurable extends AbstractType
      */
     public function getPriceHtml()
     {
-        return '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
+        if ($this->haveOffer()) {
+            return '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
+            . '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
+            . '<span class="regular-price">' . core()->currency($this->getMinimalPrice()) . '</span>'
+            . '<span class="final-price">' . core()->currency($this->getOfferPrice()) . '</span>';
+        } else {
+            return '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
             . ' '
             . '<span class="final-price">' . core()->currency($this->getMinimalPrice()) . '</span>';
+        }
     }
 
     /**
