@@ -4,6 +4,7 @@ namespace Webkul\Marketing\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Webkul\Marketing\Console\Commands\EmailsCommand;
+use Illuminate\Console\Scheduling\Schedule;
 
 class MarketingServiceProvider extends ServiceProvider
 {
@@ -17,6 +18,10 @@ class MarketingServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
         $this->loadRoutesFrom(__DIR__ . '/../Http/routes.php');
+
+        $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
+            $schedule->command('campaign:process')->daily();
+        });
     }
 
     /**
