@@ -959,7 +959,7 @@ abstract class AbstractType
 
             if ($haveOffers) {
                 foreach ($customerGroupPrices as $key => $customerGroupPrice) {
-                    if ($key > 0) {
+                    if ($customerGroupPrice && $customerGroupPrice->qty > 1) {
                         array_push($offerLines, $this->getOfferLines($customerGroupPrice));
                     }
                 }
@@ -985,7 +985,7 @@ abstract class AbstractType
     public function getOfferLines($customerGroupPrice) {
         $price = $this->getCustomerGroupPrice($this->product, $customerGroupPrice->qty);
 
-        $discount = (($this->product->price - $price) * 100) / ($this->product->price);
+        $discount = number_format((($this->product->price - $price) * 100) / ($this->product->price), 2);
 
         $offerLines = trans('shop::app.products.offers', ['qty'  => $customerGroupPrice->qty,
             'price' =>  core()->currency($price), 'discount' => $discount]);
