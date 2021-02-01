@@ -25,8 +25,6 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('booking:cron')->dailyAt('3:00');
-
-        $schedule->command('campaign:process')->daily();
     }
 
     /**
@@ -38,7 +36,6 @@ class Kernel extends ConsoleKernel
     {
         $this->load(__DIR__.'/Commands');
         $this->load(__DIR__.'/../../packages/Webkul/Core/src/Console/Commands');
-        $this->load(__DIR__.'/../../packages/Webkul/Marketing/src/Console/Commands');
 
         require base_path('routes/console.php');
     }
