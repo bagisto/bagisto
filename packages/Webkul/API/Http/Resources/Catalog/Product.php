@@ -53,7 +53,7 @@ class Product extends JsonResource
             'created_at'             => $product->created_at,
             'updated_at'             => $product->updated_at,
 
-            /* child informations */
+            /* child information */
             'grouped_products'       => $this->when(
                 $productTypeInstance instanceof \Webkul\Product\Type\Grouped,
                 $product->grouped_products
