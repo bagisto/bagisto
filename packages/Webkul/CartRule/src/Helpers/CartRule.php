@@ -581,12 +581,12 @@ class CartRule
                 ->where('cart_rule_channels.channel_id', $channelId)
                 ->where(function ($query1) {
                     /** @var Builder $query1 */
-                    $query1->where('cart_rules.starts_from', '<=', Carbon::now()->format('Y-m-d'))
+                    $query1->where('cart_rules.starts_from', '<=', Carbon::now()->format('Y-m-d H:m:s'))
                         ->orWhereNull('cart_rules.starts_from');
                 })
                 ->where(function ($query2) {
                     /** @var Builder $query2 */
-                    $query2->where('cart_rules.ends_till', '>=', Carbon::now()->format('Y-m-d'))
+                    $query2->where('cart_rules.ends_till', '>=', Carbon::now()->format('Y-m-d H:m:s'))
                         ->orWhereNull('cart_rules.ends_till');
                 })
                 ->with([
