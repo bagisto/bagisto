@@ -4,9 +4,12 @@ namespace Webkul\Core\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Facades\Storage;
+use Prettus\Repository\Traits\CacheableRepository;
 
 class ChannelRepository extends Repository
 {
+    use CacheableRepository;
+
     /**
      * Specify Model class name
      *
@@ -23,7 +26,17 @@ class ChannelRepository extends Repository
      */
     public function create(array $data)
     {
-        $channel = $this->model->create($data);
+        $model = $this->getModel();
+
+        foreach (core()->getAllLocales() as $locale) {
+            foreach ($model->translatedAttributes as $attribute) {
+                if (isset($data[$attribute])) {
+                    $data[$locale->code][$attribute] = $data[$attribute];
+                }
+            }
+        }
+
+        $channel = parent::create($data);
 
         $channel->locales()->sync($data['locales']);
 
@@ -48,7 +61,7 @@ class ChannelRepository extends Repository
     {
         $channel = $this->find($id);
 
-        $channel->update($data);
+        $channel = parent::update($data, $id, $attribute);
 
         $channel->locales()->sync($data['locales']);
 

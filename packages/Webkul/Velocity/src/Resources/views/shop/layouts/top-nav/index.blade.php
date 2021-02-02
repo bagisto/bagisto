@@ -1,4 +1,4 @@
-<nav id="top">
+<nav class="row" id="top">
     <div class="col-sm-6">
         @include('velocity::layouts.top-nav.locale-currency')
     </div>

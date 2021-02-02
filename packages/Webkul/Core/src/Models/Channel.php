@@ -2,13 +2,13 @@
 
 namespace Webkul\Core\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Category\Models\CategoryProxy;
+use Webkul\Core\Eloquent\TranslatableModel;
 use Webkul\Inventory\Models\InventorySourceProxy;
 use Webkul\Core\Contracts\Channel as ChannelContract;
 
-class Channel extends Model implements ChannelContract
+class Channel extends TranslatableModel implements ChannelContract
 {
     protected $fillable = [
         'code',
@@ -21,6 +21,18 @@ class Channel extends Model implements ChannelContract
         'default_locale_id',
         'base_currency_id',
         'root_category_id',
+        'home_seo',
+        'is_maintenance_on',
+        'maintenance_mode_text',
+        'allowed_ips'
+    ];
+
+    public $translatedAttributes = [
+        'name',
+        'description',
+        'home_page_content',
+        'footer_content',
+        'maintenance_mode_text',
         'home_seo',
     ];
 

@@ -159,7 +159,11 @@ class CatalogRuleRepository extends Repository
             if ($attribute->code == 'tax_category_id') {
                 $options = $this->getTaxCategories();
             } else {
-                $options = $attribute->options;
+                if ($attribute->type === 'select') {
+                    $options = $attribute->options()->orderBy('sort_order')->get();
+                } else {
+                    $options = $attribute->options;
+                }
             }
 
             if ($attribute->validation == 'decimal')

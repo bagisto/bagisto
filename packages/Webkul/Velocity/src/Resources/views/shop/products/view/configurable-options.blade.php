@@ -77,7 +77,7 @@
 
                             <span v-if="attribute.swatch_type == 'color'" :style="{ background: option.swatch_value }"></span>
 
-                            <img v-if="attribute.swatch_type == 'image'" :src="option.swatch_value" />
+                            <img v-if="attribute.swatch_type == 'image'" :src="option.swatch_value" alt="" />
 
                             <span v-if="attribute.swatch_type == 'text'">
                                 @{{ option.label }}
@@ -290,11 +290,14 @@
 
                             var priceLabelElement = document.querySelector('.price-label');
                             var priceElement = document.querySelector('.final-price');
+                            var regularPriceElement = document.querySelector('.regular-price');
 
                             if (this.childAttributes.length == selectedOptionCount) {
                                 priceLabelElement.style.display = 'none';
 
                                 priceElement.innerHTML = this.config.variant_prices[this.simpleProduct].final_price.formated_price;
+
+                                regularPriceElement.innerHTML = this.config.variant_prices[this.simpleProduct].regular_price.formated_price;
 
                                 eventBus.$emit('configurable-variant-selected-event', this.simpleProduct)
                             } else {

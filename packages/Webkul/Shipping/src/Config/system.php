@@ -17,8 +17,9 @@ return [
             [
                 'name'          => 'title',
                 'title'         => 'admin::app.admin.system.title',
-                'type'          => 'text',
-                'validation'    => 'required',
+                'type'          => 'depends',
+                'depend'        => 'active:1',
+                'validation'    => 'required_if:active,1',
                 'channel_based' => false,
                 'locale_based'  => true,
             ], [
@@ -34,6 +35,13 @@ return [
                 'validation'    => 'required',
                 'channel_based' => false,
                 'locale_based'  => true,
+            ], [
+                'name'          => 'is_calculate_tax',
+                'title'         => 'admin::app.admin.system.calculate-tax',
+                'type'          => 'boolean',
+                'validation'    => 'required',
+                'channel_based' => false,
+                'locale_based'  => false,
             ]
         ]
     ], [
@@ -44,8 +52,9 @@ return [
             [
                 'name'          => 'title',
                 'title'         => 'admin::app.admin.system.title',
-                'type'          => 'text',
-                'validation'    => 'required',
+                'type'          => 'depends',
+                'depend'        => 'active:1',
+                'validation'    => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based'  => true,
             ], [
@@ -57,14 +66,16 @@ return [
             ], [
                 'name'          => 'default_rate',
                 'title'         => 'admin::app.admin.system.rate',
-                'type'          => 'text',
-                'validation'    => 'required',
+                'type'          => 'depends',
+                'depend'        => 'active:1',
+                'validation'    => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
                 'name'       => 'type',
                 'title'      => 'admin::app.admin.system.type',
-                'type'       => 'select',
+                'type'       => 'depends',
+                'depend'     => 'active:1',
                 'options'    => [
                     [
                         'title' => 'Per Unit',
@@ -74,7 +85,7 @@ return [
                         'value' => 'per_order',
                     ]
                 ],
-                'validation' => 'required'
+                'validation' => 'required_if:active,1'
             ], [
                 'name'          => 'active',
                 'title'         => 'admin::app.admin.system.status',
@@ -82,6 +93,13 @@ return [
                 'validation'    => 'required',
                 'channel_based' => false,
                 'locale_based'  => true,
+            ], [
+                'name'          => 'is_calculate_tax',
+                'title'         => 'admin::app.admin.system.calculate-tax',
+                'type'          => 'boolean',
+                'validation'    => 'required',
+                'channel_based' => false,
+                'locale_based'  => false,
             ]
         ]
     ], [

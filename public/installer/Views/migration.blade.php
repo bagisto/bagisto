@@ -52,7 +52,7 @@
 
 <div class="container migration" id="migration">
     <div class="initial-display">
-        <p>Database Configuration</p>
+        <p>Ready for installation</p>
     </div>
 
     <div class="row justify-content-center">
@@ -65,42 +65,41 @@
                         <label for="install-details">Installation log</label>
                         <textarea rows="15" id="install-details" class="form-control"></textarea>
                     </div>
-                    
+
                     <div class="instructions" style="padding-top: 40px;" id="instructions">
                         <div style="text-align: center;">
-                            <h4> Click the button below to run following :</h4>
+                            <h4>Click the button below to:</h4>
                         </div>
-                        
+
                         <div class="message">
-                            <span>Create the database tables </span>
+                            <span>Create the database tables</span>
                         </div>
-                        
+
                         <div class="message">
-                            <span> Populate the database tables </span>
+                            <span>Populate the database tables </span>
                         </div>
-                        
+
                         <div class="message">
-                            <span> Publishing Vendor </span>
+                            <span>Publishing the vendor files</span>
                         </div>
                     </div>
-                   
-                    
+
                     <div class="row">
                         <div class="col-md-12 text-center">
-                        <p class="composer" id="comp">Checking Composer Dependency</p>
-                        <p class="composer" id="composer-migrate">Migrating Database</p>
-                        <p class="composer" id="composer-seed">Seeding Data</p>
+                            <p class="composer" id="comp">Checking Composer dependencies</p>
+                            <p class="composer" id="composer-migrate">Creating the database tables, this can take a few moments.</p>
+                            <p class="composer" id="composer-seed">Populating the database tables</p>
                         </div>
                     </div>
-
+                    
                     <div class="clearfix">&nbsp;</div>
-
+                    
                     <form method="POST" id="migration-form">
                         <div style="text-align: center;">
                             <button class="btn btn-primary" id="migrate-seed">Start installation</button>
                             <button class="btn btn-primary" id="continue">Continue</button>
                         </div>
-                        
+
                         <div style="cursor: pointer; margin-top:10px">
                             <span id="migration-back">back</span>
                         </div>
@@ -164,7 +163,7 @@
                         })
                             // using the done promise callback
                         .done(function(data) {
-                            if(data) {
+                            if (data) {
                                 $('#composer-migrate').hide();
 
                                 if (data['results'] == 0) {
@@ -205,8 +204,10 @@
                                     $('#loader').hide();
                                     $('#migrate-seed').hide();
                                     $('#migration-back').hide();
+
                                     if (data['migrate']) {
                                         $('#install-details').append(data['migrate']);
+                                        $('#install-log').show();
                                     }
                                 }
                             }

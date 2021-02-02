@@ -7,6 +7,7 @@ import de from 'vee-validate/dist/locale/de';
 import ar from 'vee-validate/dist/locale/ar';
 import VeeValidate, { Validator } from 'vee-validate';
 import axios from 'axios';
+import 'lazysizes';
 
 window.axios = axios;
 window.VeeValidate = VeeValidate;
@@ -39,6 +40,7 @@ Vue.component('modal-component', require('./UI/components/modal'));
 Vue.component("add-to-cart", require("./UI/components/add-to-cart"));
 Vue.component('star-ratings', require('./UI/components/star-rating'));
 Vue.component('quantity-btn', require('./UI/components/quantity-btn'));
+Vue.component('proceed-to-checkout', require('./UI/components/proceed-to-checkout'));
 Vue.component('sidebar-component', require('./UI/components/sidebar'));
 Vue.component("product-card", require("./UI/components/product-card"));
 Vue.component("wishlist-component", require("./UI/components/wishlist"));
@@ -51,6 +53,10 @@ Vue.component("shimmer-component", require("./UI/components/shimmer-component"))
 Vue.component('responsive-sidebar', require('./UI/components/responsive-sidebar'));
 Vue.component('product-quick-view', require('./UI/components/product-quick-view'));
 Vue.component('product-quick-view-btn', require('./UI/components/product-quick-view-btn'));
+Vue.component('recently-viewed', require('./UI/components/recently-viewed'));
+Vue.component('product-collections', require('./UI/components/product-collections'));
+Vue.component('hot-category', require('./UI/components/hot-category'));
+Vue.component('popular-category', require('./UI/components/popular-category'));
 
 window.eventBus = new Vue();
 
@@ -217,7 +223,7 @@ $(document).ready(function () {
         }
     });
 
-    new Vue({
+    const app = new Vue({
         el: "#app",
         VueToast,
 
@@ -358,6 +364,8 @@ $(document).ready(function () {
             }
         }
     });
+
+    window.app = app;
 
     // for compilation of html coming from server
     Vue.component('vnode-injector', {

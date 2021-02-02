@@ -17,6 +17,7 @@ return [
 
     'common' => [
         'error' => 'مشکلی رخ داده است. لطفا بعدا دوباره امتحان کنید.',
+        'image-upload-limit' => 'حداکثر اندازه بارگذاری تصویر 2 مگابایت است',
         'no-result-found' => 'ما هیچ سابقه ای پیدا نکردیم.'
     ],
 
@@ -72,7 +73,8 @@ return [
         'page-title' => 'فروشگاه - جستجو',
         'found-results' => 'نتایج جستجو یافت شد',
         'found-result' => 'نتیجه جستجو یافت شد',
-        'analysed-keywords' => 'Analysed Keywords'
+        'analysed-keywords' => 'Analysed Keywords',
+        'image-search-option' => 'Image Search Option'
     ],
 
     'reviews' => [
@@ -439,6 +441,8 @@ return [
         'available-for-order' => 'Available for Order',
         'settings' => 'Settings',
         'compare_options' => 'Compare Options',
+        'wishlist-options' => 'Wishlist Options',
+        'offers' => 'Buy :qty for :price each and save :discount%',
     ],
 
     // 'reviews' => [
@@ -493,7 +497,8 @@ return [
             'partial-cart-update' => 'فقط برخی از محصولات (های) به روز شده اند',
             'event' => [
                 'expired' => 'This event has been expired.'
-            ]
+            ],
+            'minimum-order-message' => 'Minimum order amount is :amount'
         ],
 
         'onepage' => [

@@ -46,7 +46,9 @@ class ConfigurationController extends Controller
      * @return \Illuminate\View\View
      */
     public function renderMetaData()
-    {
+    {   
+        $this->locale = request()->get('locale') ? request()->get('locale') : app()->getLocale();
+         
         $velocityMetaData = $this->velocityHelper->getVelocityMetaData($this->locale, $this->channel, false);
 
         if (! $velocityMetaData) {
@@ -253,6 +255,7 @@ class ConfigurationController extends Controller
         \DB::table('velocity_meta_data')->insert([
             'locale'                   => $locale,
             'channel'                  => $channel,
+            'header_content_count'     => '5',
 
             'home_page_content'        => "<p>@include('shop::home.advertisements.advertisement-four')@include('shop::home.featured-products') @include('shop::home.product-policy') @include('shop::home.advertisements.advertisement-three') @include('shop::home.new-products') @include('shop::home.advertisements.advertisement-two')</p>",
             'footer_left_content'      => __('velocity::app.admin.meta-data.footer-left-raw-content'),

@@ -3,14 +3,17 @@
 namespace Webkul\Velocity\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
+use Prettus\Repository\Traits\CacheableRepository;
 
 /**
- * OrderBrands Reposotory
+ * OrderBrands Repository
  *
  * @copyright 2019 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class OrderBrandsRepository extends Repository
-{   
+{
+    use CacheableRepository;
+
     /**
      * Specify Model class name
      *
@@ -20,5 +23,5 @@ class OrderBrandsRepository extends Repository
     {
         return 'Webkul\Velocity\Contracts\OrderBrand';
     }
-    
+
 }

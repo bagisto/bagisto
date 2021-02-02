@@ -74,7 +74,11 @@ return [
         'taxes' => 'Impostos',
         'tax-categories' => 'Categorias de Impostos',
         'tax-rates' => 'Impostos de Impostos',
-        'promotion' => 'Promoções',
+        'marketing' => 'Marketing',
+        'promotions' => 'Promoções',
+        'email-marketing' => 'Email Marketing',
+        'campaigns' => 'Campaigns',
+        'email-templates' => 'Email Templates',
         'discount' => 'Desconto',
         'cms' => 'CMS'
     ],
@@ -82,15 +86,20 @@ return [
     'acl' => [
         'dashboard' => 'Dashboard',
         'sales' => 'Vendas',
+        'cancel' => 'Cancel',
         'orders' => 'Pedidos',
         'shipments' => 'Envios',
         'invoices' => 'Faturas',
+        'refunds' => 'Refunds',
         'catalog' => 'Catálogos',
         'products' => 'Produtos',
+        'copy' => 'Copy',
         'categories' => 'Categorias',
         'attributes' => 'Atributos',
         'attribute-families' => 'Famílias de Atributos',
         'customers' => 'Clientes',
+        'addresses' => 'Addresses',
+        'note' => 'Note',
         'groups' => 'Grupos',
         'reviews' => 'Avaliações',
         'newsletter-subscriptions' => 'Inscrições de Newsletter',
@@ -107,9 +116,13 @@ return [
         'taxes' => 'Impostos',
         'tax-categories' => 'Categorias de Impostos',
         'tax-rates' => 'Impostos de Impostos',
+        'view' => 'View',
         'edit' => 'Edit',
         'create' => 'Add',
         'delete' => 'Delete',
+        'mass-delete' => 'Mass Delete',
+        'mass-update' => 'Mass Update',
+        'marketing' => 'Marketing',
         'promotions' => 'Promoções',
         'cart-rules' => 'Regras do Carrinho',
         'catalog-rules' => 'Regras do Catálogo',
@@ -187,6 +200,7 @@ return [
         'shipment-date' => 'Data de Envio',
         'shipment-to' => 'Enviado para',
         'sku' => 'SKU',
+        'product-number' => 'Número de produto',
         'price' => 'Preço',
         'qty' => 'Quantidade',
         'permission-type' => 'Tipo de Permissão',
@@ -526,7 +540,13 @@ return [
             'checkbox' => 'Checkbox',
             'multiselect' => 'Multiselect',
             'new-option' => 'New Option',
-            'is-default' => 'Is Default'
+            'is-default' => 'Is Default',
+            'remove-image-btn-title' => 'Remove Image',
+            'videos' => 'Videos',
+            'video' => 'Video',
+            'add-video-btn-title' => 'Add Video',
+            'remove-video-btn-title' => 'Remove Video',
+            'not-support-video' => 'Your browser does not support the video tag.',
         ],
 
         'attributes' => [
@@ -803,7 +823,9 @@ return [
             'seo-title' => 'Meta título',
             'seo-description' => 'Meta Descrição',
             'seo-keywords' => 'Meta palavras-chave',
-
+            'maintenance-mode' => 'Maintenance Mode',
+            'maintenance-mode-text' => 'Message',
+            'allowed-ips' => 'Allowed IPs'
         ],
 
         'sliders' => [
@@ -984,7 +1006,7 @@ return [
         ]
     ],
 
-    'promotion' => [
+    'promotions' => [
         'cart-rules' => [
             'title' => 'Regras do carrinho',
             'add-title' => 'Adicionar regra de carrinho',
@@ -1120,6 +1142,68 @@ return [
         ]
     ],
 
+    'marketing' => [
+        'templates' => [
+            'title' => 'Email Templates',
+            'add-title' => 'Add Email Template',
+            'edit-title' => 'Edit Email Template',
+            'save-btn-title' => 'Save',
+            'general' => 'General',
+            'name' => 'Name',
+            'status' => 'Status',
+            'active' => 'Active',
+            'inactive' => 'Inactive',
+            'draft' => 'Draft',
+            'content' => 'Content',
+            'create-success' => 'Email template created successfully.',
+            'update-success' => 'Email template updated successfully.',
+            'delete-success' => 'Email template deleted successfully',
+        ],
+
+        'campaigns' => [
+            'title' => 'Campaigns',
+            'add-title' => 'Add Campaign',
+            'edit-title' => 'Edit Campaign',
+            'save-btn-title' => 'Save',
+            'general' => 'General',
+            'name' => 'Name',
+            'status' => 'Status',
+            'active' => 'Active',
+            'inactive' => 'Inactive',
+            'subject' => 'Subject',
+            'email-template' => 'Email Template',
+            'audience' => 'Audience',
+            'channel' => 'Channel',
+            'customer-group' => 'Customer Group',
+            'schedule' => 'Schedule',
+            'schedule-type' => 'Schedule Type',
+            'once' => 'Once',
+            'events' => 'Events',
+            'schedule-date' => 'Schedule Date',
+            'spooling' => 'Spooling',
+            'event' => 'Event',
+            'birthday' => 'Birthday',
+            'create-success' => 'Campaign created successfully.',
+            'update-success' => 'Campaign updated successfully.',
+            'delete-success' => 'Campaign deleted successfully',
+        ],
+
+        'events' => [
+            'title' => 'Events',
+            'add-title' => 'Add Event',
+            'edit-title' => 'Edit Event',
+            'save-btn-title' => 'Save',
+            'general' => 'General',
+            'name' => 'Name',
+            'description' => 'Description',
+            'date' => 'Date',
+            'create-success' => 'Event created successfully.',
+            'update-success' => 'Event updated successfully.',
+            'delete-success' => 'Event deleted successfully.',
+            'edit-error' => 'Can not edit this event.'
+        ]
+    ],
+
     'error' => [
         'go-to-home' => 'IR PARA PÁGINA INICIAL',
         'in-maitainace' => 'Em manutenção',
@@ -1249,6 +1333,10 @@ return [
         ],
         'system' => [
             'catalog' => 'Catálogo',
+            'homepage' => 'Homepage configuration',
+            'allow-no-of-new-product-homepage' => 'Allowed No of New Product in Homepage',
+            'allow-no-of-featured-product-homepage' => 'Allowed No of Featured Product in Homepage',
+            'allow-out-of-stock-items' => 'Allow out of stock items',
             'products' => 'Produtos',
             'guest-checkout' => 'Compras sem cadastro?',
             'allow-guest-checkout' => 'Permitir compra para clientes sem cadastros?',
@@ -1277,11 +1365,12 @@ return [
             'description' => 'Descrição',
             'rate' => 'Taxa',
             'status' => 'Status',
+            'calculate-tax' => 'Calcular o imposto',
             'type' => 'Tipo',
             'payment-methods' => 'Métodos de Pagamento',
             'cash-on-delivery' => 'Dinheiro na entrega',
             'money-transfer' => 'Transferência de dinheiro',
-            'paypal-standard' => 'Padrão Paypal',
+            'paypal-standard' => 'Padrão PayPal',
             'business-account' => 'Conta de negócios',
             'newsletter' => 'Assinatura de Newsletter',
             'newsletter-subscription' => 'Permitir assinatura do NewsLetter',
@@ -1315,6 +1404,8 @@ return [
             'order-number-length' => 'Tamanho do Número do Pedido',
             'order-number-suffix' => 'Sufixo do Número de Pedido',
             'order-number-generator-class' => 'Gerador de número de pedido',
+            'minimum-order' => 'Minimum Order Settings',
+            'minimum-order-amount' => 'Minimum Order Amount',
             'default' => 'Padrão',
             'sandbox' => 'Sandbox',
             'all-channels' => 'Todos',
@@ -1358,7 +1449,15 @@ return [
             'instructions' => 'Instructions',
             'custom-scripts' => 'Custom Scripts',
             'custom-css' => 'Custom CSS',
-            'custom-javascript' => 'Custom Javascript'
+            'custom-javascript' => 'Custom Javascript',
+            'paypal-smart-button' => 'PayPal',
+            'client-id' => 'Client Id',
+            'client-id-info' => 'Use "sb" for testing.',
+            'client-secret' => 'Client Secret',
+            'client-secret-info' => 'Add your secret key here',
+            'accepted-currencies' => 'Accepted currencies',
+            'accepted-currencies-info' => 'Add currency code comma seperated e.g. USD,INR,...',
+            'buy-now-button-display' => 'Allow customers to directly buy products'
         ]
     ]
 ];

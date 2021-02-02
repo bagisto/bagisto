@@ -117,6 +117,22 @@ input {
    }
 }
 
+/* Product Page Description */
+.details {
+    .description {
+        overflow: auto;
+    }
+
+    .accordian {
+        .accordian-content {
+            div {
+                overflow: auto;
+            }
+        }
+
+    }
+}
+
 /* Show the indicator (dot/circle) when checked */
 .radio-container input:checked ~ .checkmark:after {
     display: block;
@@ -188,9 +204,15 @@ input {
     }
 }
 
+/* if not very important use bootstrap 4 float-left and float-right class */
 .pull-right {
-    float:right;
+    float: right !important;
 }
+
+.pull-left {
+    float: left !important;
+}
+/* if not very important use bootstrap 4 float-left and float-right class */
 
 //wishlist icon hover properties
 .add-to-wishlist {
@@ -228,6 +250,28 @@ input {
 
     .special-price {
         color: $disc-price;
+    }
+
+    /*
+       To Do: Start adjusting if equal height needed in default theme as well.
+    */
+    .price-from {
+        .bundle-regular-price {
+            color: $font-light;
+            text-decoration: line-through;
+            margin-right: 10px;
+        }
+
+        .bundle-special-price {
+            color: $disc-price;
+        }
+
+        .bundle-to {
+            display: block;
+            font-weight: 500;
+            margin-top: 1px;
+            margin-bottom: 1px;
+        }
     }
 }
 
@@ -639,7 +683,6 @@ section.slider-block {
 
     div.slider-content {
         position: relative;
-        height: 500px;
         margin-left: auto;
         margin-right: auto;
 
@@ -687,7 +730,7 @@ section.slider-block {
             }
 
             li img {
-                max-height: 500px;
+                height: 500px;
                 width: 100%;
             }
         }
@@ -720,15 +763,36 @@ section.slider-block {
 }
 
 //responsive css for slider
-@media only screen and (max-width: 770px) {
+@media only screen and (max-width: 720px) {
     section.slider-block {
         div.slider-content {
             div.slider-control {
                 display: flex;
-                justify-content:space-between;
-                bottom: 46%;
+                justify-content: space-between;
+                width: 100%;
+                bottom: 40%;
                 right: 0%;
-                width:100%;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    section.slider-block {
+        div.slider-content {
+            ul.slider-images {
+                li img {
+                    width: 100%;
+                    height: 250px;
+                }
+            }
+
+            div.slider-control {
+                display: flex;
+                justify-content:space-between;
+                width: 100%;
+                bottom: 40%;
+                right: 0%;
             }
         }
     }
@@ -2509,21 +2573,24 @@ section.cart {
         margin-bottom: 10px;
     }
 
+    .quantity-container {
+        display: flex !important;
+    }
+
     button {
         width: 40px;
         height: 38px;
         font-size: 16px;
         background: #ffffff;
         border: 1px solid #C7C7C7;
-        float: left;
         cursor: pointer;
 
         &.decrease {
-            border-radius: 3px 0px 0px 3px;
+            border-radius: 3px;
         }
 
         &.increase {
-            border-radius: 0px 3px 3px 0px;
+            border-radius: 3px;
         }
     }
 
@@ -4642,7 +4709,6 @@ td {
 
 .icon.remove-product {
     top: 5px;
-    float: right;
     cursor: pointer;
     position: relative;
     background-color: black;

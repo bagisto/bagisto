@@ -9,6 +9,12 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::get('/cancel', 'Webkul\Paypal\Http\Controllers\StandardController@cancel')->name('paypal.standard.cancel');
     });
+
+    Route::prefix('paypal/smart-button')->group(function () {
+        Route::get('/details', 'Webkul\Paypal\Http\Controllers\SmartButtonController@details')->name('paypal.smart_button.details');
+
+        Route::post('/save-order', 'Webkul\Paypal\Http\Controllers\SmartButtonController@saveOrder')->name('paypal.smart_button.save_order');
+    });
 });
 
 Route::get('paypal/standard/ipn', 'Webkul\Paypal\Http\Controllers\StandardController@ipn')->name('paypal.standard.ipn');

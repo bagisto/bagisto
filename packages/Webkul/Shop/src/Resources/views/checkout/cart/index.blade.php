@@ -6,6 +6,7 @@
 
 @section('content-wrapper')
     @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
+
     <section class="cart">
         @if ($cart)
             <div class="title">
@@ -33,7 +34,7 @@
 
                                 <div class="item mt-5">
                                     <div class="item-image" style="margin-right: 15px;">
-                                        <a href="{{ route('shop.productOrCategory.index', $url_key) }}"><img src="{{ $productBaseImage['medium_image_url'] }}" /></a>
+                                        <a href="{{ route('shop.productOrCategory.index', $url_key) }}"><img src="{{ $productBaseImage['medium_image_url'] }}" alt="" /></a>
                                     </div>
 
                                     <div class="item-details">
@@ -87,13 +88,19 @@
                                                 <a href="{{ route('shop.checkout.cart.remove', $item->id) }}" onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">{{ __('shop::app.checkout.cart.remove-link') }}</a></span>
 
                                             @auth('customer')
-                                                <span class="towishlist">
-                                                    @if ($item->parent_id != 'null' ||$item->parent_id != null)
-                                                        <a href="{{ route('shop.movetowishlist', $item->id) }}" onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">{{ __('shop::app.checkout.cart.move-to-wishlist') }}</a>
-                                                    @else
-                                                        <a href="{{ route('shop.movetowishlist', $item->child->id) }}" onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">{{ __('shop::app.checkout.cart.move-to-wishlist') }}</a>
+                                                    @php
+                                                        $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
+                                                    @endphp
+
+                                                    @if ($showWishlist)
+                                                        <span class="towishlist">
+                                                            @if ($item->parent_id != 'null' ||$item->parent_id != null)
+                                                                <a href="{{ route('shop.movetowishlist', $item->id) }}" onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">{{ __('shop::app.checkout.cart.move-to-wishlist') }}</a>
+                                                            @else
+                                                                <a href="{{ route('shop.movetowishlist', $item->child->id) }}" onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">{{ __('shop::app.checkout.cart.move-to-wishlist') }}</a>
+                                                            @endif
+                                                        </span>
                                                     @endif
-                                                </span>
                                             @endauth
                                         </div>
 
@@ -123,9 +130,17 @@
                                 @endif
 
                                 @if (! cart()->hasError())
-                                    <a href="{{ route('shop.checkout.onepage.index') }}" class="btn btn-lg btn-primary">
-                                        {{ __('shop::app.checkout.cart.proceed-to-checkout') }}
-                                    </a>
+                                    @php
+                                        $minimumOrderAmount = (int) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
+                                    @endphp
+
+                                    <proceed-to-checkout
+                                        href="{{ route('shop.checkout.onepage.index') }}"
+                                        add-class="btn btn-lg btn-primary"
+                                        text="{{ __('shop::app.checkout.cart.proceed-to-checkout') }}"
+                                        is-minimum-order-completed="{{ $cart->checkMinimumOrder() }}"
+                                        minimum-order-message="{{ __('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]) }}">
+                                    </proceed-to-checkout>
                                 @endif
                             </div>
                         </div>

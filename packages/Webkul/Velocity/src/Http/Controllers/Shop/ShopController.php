@@ -35,7 +35,7 @@ class ShopController extends Controller
                 'details' => [
                     'name'         => $product->name,
                     'urlKey'       => $product->url_key,
-                    'priceHTML'    => $product->getTypeInstance()->getPriceHtml(),
+                    'priceHTML'    => view('shop::products.price', ['product' => $product])->render(),
                     'totalReviews' => $productReviewHelper->getTotalReviews($product),
                     'rating'       => ceil($productReviewHelper->getAverageRating($product)),
                     'image'        => $galleryImages['small_image_url'],
@@ -71,7 +71,13 @@ class ShopController extends Controller
                 }
 
                 foreach ($products as $product) {
-                    array_push($formattedProducts, $this->velocityHelper->formatProduct($product));
+                    if (core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
+                        array_push($formattedProducts, $this->velocityHelper->formatProduct($product));
+                    } else {
+                        if ($product->isSaleable()) {
+                            array_push($formattedProducts, $this->velocityHelper->formatProduct($product));
+                        }
+                    }
                 }
 
                 $response = [
@@ -168,6 +174,7 @@ class ShopController extends Controller
             'name'               => $category->name,
             'children'           => $formattedChildCategory,
             'category_icon_path' => $category->category_icon_path,
+            'image'              => $category->image
         ];
     }
 

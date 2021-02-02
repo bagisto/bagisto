@@ -4,6 +4,8 @@ namespace Webkul\API\Http\Controllers\Shop;
 
 use Cart;
 use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Event;
@@ -142,22 +144,28 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update()
+    public function update(Request $request)
     {
-        foreach (request()->get('qty') as $qty) {
+        $this->validate($request, [
+            'qty' => 'required|array',
+        ]);
+
+        $requestedQuantity = $request->get('qty');
+
+        foreach ($requestedQuantity as $qty) {
             if ($qty <= 0) {
                 return response()->json([
                     'message' => trans('shop::app.checkout.cart.quantity.illegal'),
-                ], 401);
+                ], Response::HTTP_UNAUTHORIZED);
             }
         }
 
-        foreach (request()->get('qty') as $itemId => $qty) {
+        foreach ($requestedQuantity as $itemId => $qty) {
             $item = $this->cartItemRepository->findOneByField('id', $itemId);
 
             Event::dispatch('checkout.cart.item.update.before', $itemId);
 
-            Cart::updateItems(request()->all());
+            Cart::updateItems(['qty' => $requestedQuantity]);
 
             Event::dispatch('checkout.cart.item.update.after', $item);
         }

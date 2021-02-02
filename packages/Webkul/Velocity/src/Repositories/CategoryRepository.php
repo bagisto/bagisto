@@ -2,12 +2,14 @@
 
 namespace Webkul\Velocity\Repositories;
 
-use Illuminate\Container\Container as App;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Category\Repositories\CategoryRepository as Category;
+use Illuminate\Container\Container as App;
+use Prettus\Repository\Traits\CacheableRepository;
 
 class CategoryRepository extends Repository
-{   
+{
+    use CacheableRepository;
+
    /**
     * Category Repository object
     *
@@ -54,12 +56,12 @@ class CategoryRepository extends Repository
         $velocityCategories = $this->model->all(['category_id']);
 
         $categoryMenues = json_decode(json_encode($velocityCategories), true);
-        
+
         $categories = $this->categoryRepository->getVisibleCategoryTree(core()->getCurrentChannel()->root_category_id);
 
         if (isset($categories->first()->id)) {
             foreach ($categories as $category) {
-                
+
                 if (! empty($categoryMenues) && !in_array($category->id, array_column($categoryMenues, 'category_id'))) {
                     $results[] = [
                         'id'   => $category->id,

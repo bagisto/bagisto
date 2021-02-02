@@ -3,14 +3,16 @@
 namespace Webkul\Core\Repositories;
 
 use Storage;
+use Illuminate\Support\Arr;
 use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Container\Container as App;
-use Webkul\Core\Repositories\ChannelRepository;
-use Illuminate\Support\Arr;
+use Prettus\Repository\Traits\CacheableRepository;
 
 class SliderRepository extends Repository
 {
+    use CacheableRepository;
+
     /**
      * ChannelRepository object
      *

@@ -11,11 +11,19 @@
                 <ul class="menubar">
                     @php
                         $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false;
+
+                        $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
                     @endphp
 
                     @if (! $showCompare)
                         @php
                             unset($menuItem['children']['compare']);
+                        @endphp
+                    @endif
+
+                    @if (! $showWishlist)
+                        @php
+                            unset($menuItem['children']['wishlist']);
                         @endphp
                     @endif
 

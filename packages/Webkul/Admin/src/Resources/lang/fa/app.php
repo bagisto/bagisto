@@ -74,7 +74,11 @@ return [
         'taxes' => 'مالیات',
         'tax-categories' => 'دسته بندی مالیات',
         'tax-rates' => 'نرخ مالیات',
-        'promotion' => 'تبلیغات',
+        'marketing' => 'Marketing',
+        'promotions' => 'تبلیغات',
+        'email-marketing' => 'Email Marketing',
+        'campaigns' => 'Campaigns',
+        'email-templates' => 'Email Templates',
         'discount' => 'تخفیف',
         'cms' => 'CMS'
     ],
@@ -82,15 +86,20 @@ return [
     'acl' => [
         'dashboard' => 'داشبورد',
         'sales' => 'فروش',
+        'cancel' => 'Cancel',
         'orders' => 'سفارشات',
         'shipments' => 'حمل و نقل',
         'invoices' => 'صورت حساب',
+        'refunds' => 'Refunds',
         'catalog' => 'کاتالوگ',
         'products' => 'محصولات',
+        'copy' => 'Copy',
         'categories' => 'دسته بندی ها',
         'attributes' => 'ویژگی ها',
         'attribute-families' => 'ویژگی خانواده',
         'customers' => 'مشتریان',
+        'addresses' => 'Addresses',
+        'note' => 'Note',
         'groups' => 'گروه ها',
         'reviews' => 'بررسی ها',
         'newsletter-subscriptions' => 'اشتراک های خبرنامه',
@@ -107,10 +116,14 @@ return [
         'taxes' => 'مالیات',
         'tax-categories' => 'دسته بندی مالیات',
         'tax-rates' => 'نرخ مالیات',
+        'view' => 'View',
         'edit' => 'ویاریش',
         'create' => 'افزودن',
         'delete' => 'حذف',
-        'promotion' => 'تبلیغات',
+        'mass-delete' => 'Mass Delete',
+        'mass-update' => 'Mass Update',
+        'marketing' => 'Marketing',
+        'promotions' => 'تبلیغات',
         'cart-rules' => 'قوانین سبد خرید',
         'catalog-rules' => 'قوانین فهرست',
     ],
@@ -187,6 +200,7 @@ return [
         'shipment-date' => 'تاریخ ارسال',
         'shipment-to' => 'حمل و نقل به',
         'sku' => 'واحد نگهداری موجودی',
+        'product-number' => 'شماره محصول',
         'price' => 'قیمت',
         'qty' => 'مقدار',
         'permission-type' => 'نوع مجوز',
@@ -526,7 +540,13 @@ return [
             'checkbox' => 'Checkbox',
             'multiselect' => 'Multiselect',
             'new-option' => 'New Option',
-            'is-default' => 'Is Default'
+            'is-default' => 'Is Default',
+            'remove-image-btn-title' => 'Remove Image',
+            'videos' => 'Videos',
+            'video' => 'Video',
+            'add-video-btn-title' => 'Add Video',
+            'remove-video-btn-title' => 'Remove Video',
+            'not-support-video' => 'Your browser does not support the video tag.',
         ],
 
         'attributes' => [
@@ -802,7 +822,9 @@ return [
             'seo-title' => 'عنوان Meta',
             'seo-description' => 'شرح Meta',
             'seo-keywords' => 'کلید واژه ها Meta',
-
+            'maintenance-mode' => 'Maintenance Mode',
+            'maintenance-mode-text' => 'Message',
+            'allowed-ips' => 'Allowed IPs'
         ],
 
         'sliders' => [
@@ -983,7 +1005,7 @@ return [
         ]
     ],
 
-    'promotion' => [
+    'promotions' => [
         'cart-rules' => [
             'title' => 'قوانین سبد خرید',
             'add-title' => 'قانون سبد خرید را اضافه کنید',
@@ -1119,6 +1141,70 @@ return [
         ]
     ],
 
+
+
+    'marketing' => [
+        'templates' => [
+            'title' => 'Email Templates',
+            'add-title' => 'Add Email Template',
+            'edit-title' => 'Edit Email Template',
+            'save-btn-title' => 'Save',
+            'general' => 'General',
+            'name' => 'Name',
+            'status' => 'Status',
+            'active' => 'Active',
+            'inactive' => 'Inactive',
+            'draft' => 'Draft',
+            'content' => 'Content',
+            'create-success' => 'Email template created successfully.',
+            'update-success' => 'Email template updated successfully.',
+            'delete-success' => 'Email template deleted successfully',
+        ],
+
+        'campaigns' => [
+            'title' => 'Campaigns',
+            'add-title' => 'Add Campaign',
+            'edit-title' => 'Edit Campaign',
+            'save-btn-title' => 'Save',
+            'general' => 'General',
+            'name' => 'Name',
+            'status' => 'Status',
+            'active' => 'Active',
+            'inactive' => 'Inactive',
+            'subject' => 'Subject',
+            'email-template' => 'Email Template',
+            'audience' => 'Audience',
+            'channel' => 'Channel',
+            'customer-group' => 'Customer Group',
+            'schedule' => 'Schedule',
+            'schedule-type' => 'Schedule Type',
+            'once' => 'Once',
+            'events' => 'Events',
+            'schedule-date' => 'Schedule Date',
+            'spooling' => 'Spooling',
+            'event' => 'Event',
+            'birthday' => 'Birthday',
+            'create-success' => 'Campaign created successfully.',
+            'update-success' => 'Campaign updated successfully.',
+            'delete-success' => 'Campaign deleted successfully',
+        ],
+
+        'events' => [
+            'title' => 'Events',
+            'add-title' => 'Add Event',
+            'edit-title' => 'Edit Event',
+            'save-btn-title' => 'Save',
+            'general' => 'General',
+            'name' => 'Name',
+            'description' => 'Description',
+            'date' => 'Date',
+            'create-success' => 'Event created successfully.',
+            'update-success' => 'Event updated successfully.',
+            'delete-success' => 'Event deleted successfully.',
+            'edit-error' => 'Can not edit this event.'
+        ]
+    ],
+
     'error' => [
         'go-to-home' => 'رفتن به خانه',
         'in-maitainace' => 'در حال تعمیر و نگهداری',
@@ -1248,6 +1334,10 @@ return [
         ],
         'system' => [
             'catalog' => 'کاتالوگ',
+            'homepage' => 'Homepage configuration',
+            'allow-no-of-new-product-homepage' => 'Allowed No of New Product in Homepage',
+            'allow-no-of-featured-product-homepage' => 'Allowed No of Featured Product in Homepage',
+            'allow-out-of-stock-items' => 'Allow out of stock items',
             'products' => 'محصولات',
             'guest-checkout' => 'وارسی میهمان',
             'allow-guest-checkout' => 'مجاز به پرداخت مهمان',
@@ -1276,6 +1366,7 @@ return [
             'description' => 'توضیحات',
             'rate' => 'نرخ',
             'status' => 'وضعیت',
+            'calculate-tax' => 'محاسبه مالیات',
             'type' => 'نوع',
             'payment-methods' => 'روش های پرداخت',
             'cash-on-delivery' => 'پرداخت در محل',
@@ -1312,6 +1403,8 @@ return [
             'order-number-length' => 'طول شماره سفارش',
             'order-number-suffix' => 'تعداد کافی شماره سفارش',
             'order-number-generator-class' => 'تولید کننده شماره سفارش',
+            'minimum-order' => 'Minimum Order Settings',
+            'minimum-order-amount' => 'Minimum Order Amount',
             'default' => 'پیش فرض',
             'sandbox' => 'Sandbox',
             'all-channels' => 'همه',
@@ -1355,7 +1448,15 @@ return [
             'instructions' => 'Instructions',
             'custom-scripts' => 'Custom Scripts',
             'custom-css' => 'Custom CSS',
-            'custom-javascript' => 'Custom Javascript'
+            'custom-javascript' => 'Custom Javascript',
+            'paypal-smart-button' => 'PayPal',
+            'client-id' => 'Client Id',
+            'client-id-info' => 'Use "sb" for testing.',
+            'client-secret' => 'Client Secret',
+            'client-secret-info' => 'Add your secret key here',
+            'accepted-currencies' => 'Accepted currencies',
+            'accepted-currencies-info' => 'Add currency code comma seperated e.g. USD,INR,...',
+            'buy-now-button-display' => 'Allow customers to directly buy products'
         ]
     ]
 ];

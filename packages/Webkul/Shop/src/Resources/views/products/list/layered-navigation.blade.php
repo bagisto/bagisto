@@ -9,9 +9,7 @@
     $maxPrice = 0;
 
     if (isset($category)) {
-        $products = $productRepository->getAll($category->id);
-
-        $filterAttributes = $productFlatRepository->getFilterableAttributes($category, $products);
+        $filterAttributes = $productFlatRepository->getProductsRelatedFilterableAttributes($category);
 
         $maxPrice = core()->convertPrice($productFlatRepository->getCategoryProductMaximumPrice($category));
     }
@@ -19,18 +17,6 @@
     if (! count($filterAttributes) > 0) {
         $filterAttributes = $attributeRepository->getFilterAttributes();
     }
-
-    foreach ($filterAttributes as $attribute) {
-        if ($attribute->code <> 'price') {
-            if (! $attribute->options->isEmpty()) {
-                $attributes[] = $attribute;
-            }
-        } else {
-            $attributes[] = $attribute;
-        }
-    }
-
-    $filterAttributes = collect($attributes);
 ?>
 
 <div class="layered-filter-wrapper">

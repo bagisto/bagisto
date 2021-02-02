@@ -33,11 +33,12 @@
                 <input type="hidden" name="channel" value="{{ $channel }}" />
 
                 <div class="control-group">
-                    <select class="control" id="channel-switcher" onChange="window.location.href = this.value">
-                        @foreach (core()->getAllChannels() as $ch)
+                    <select class="control" id="channel-switcher" name="channel">
+                        @foreach (core()->getAllChannels() as $channelModel)
 
-                            <option value="{{ route('velocity.admin.meta-data') . '?channel=' . $ch->code . '&locale=' . $locale }}" {{ ($ch->code) == $channel ? 'selected' : '' }}>
-                                {{ $ch->name }}
+                            <option
+                                value="{{ $channelModel->code }}" {{ ($channelModel->code) == $channel ? 'selected' : '' }}>
+                                {{ $channelModel->name }}
                             </option>
 
                         @endforeach
@@ -45,10 +46,11 @@
                 </div>
 
                 <div class="control-group">
-                    <select class="control" id="locale-switcher" onChange="window.location.href = this.value">
-                        @foreach (core()->getAllLocales() as $localeModel)
+                    <select class="control" id="locale-switcher" name="locale">
+                        @foreach (app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales as $localeModel)
 
-                            <option value="{{ route('velocity.admin.meta-data') . '?locale=' . $localeModel->code . '&channel=' . $channel }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
+                            <option
+                                value="{{ $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
                                 {{ $localeModel->name }}
                             </option>
 
@@ -105,29 +107,8 @@
                             value="{{ $metaData ? $metaData->header_content_count : '5' }}" />
                     </div>
 
-                    <div class="control-group">
-                        <label>{{ __('shop::app.home.featured-products') }}</label>
 
-                        <input
-                            type="number"
-                            min="0"
-                            class="control"
-                            id="featured_product_count"
-                            name="featured_product_count"
-                            value="{{ $metaData ? $metaData->featured_product_count : 10 }}" />
-                    </div>
 
-                    <div class="control-group">
-                        <label>{{ __('shop::app.home.new-products') }}</label>
-
-                        <input
-                            type="number"
-                            min="0"
-                            class="control"
-                            id="new_products_count"
-                            name="new_products_count"
-                            value="{{ $metaData ? $metaData->new_products_count : 10 }}" />
-                    </div>
 
                     <div class="control-group">
                         <label style="width:100%;">
@@ -187,22 +168,22 @@
                             @php
                                 $images[4][] = [
                                     'id' => 'image_1',
-                                    'url' => asset('/themes/velocity/assets/images/big-sale-banner.png'),
+                                    'url' => asset('/themes/velocity/assets/images/big-sale-banner.webp'),
                                 ];
                                 $images[4][] = [
                                     'id' => 'image_2',
-                                    'url' => asset('/themes/velocity/assets/images/seasons.png'),
+                                    'url' => asset('/themes/velocity/assets/images/seasons.webp'),
                                 ];
                                 $images[4][] = [
                                     'id' => 'image_3',
-                                    'url' => asset('/themes/velocity/assets/images/deals.png'),
+                                    'url' => asset('/themes/velocity/assets/images/deals.webp'),
                                 ];
                                 $images[4][] = [
                                     'id' => 'image_4',
-                                    'url' => asset('/themes/velocity/assets/images/kids.png'),
+                                    'url' => asset('/themes/velocity/assets/images/kids.webp'),
                                 ];
                             @endphp
-                        
+
                             <image-wrapper
                                 :multiple="true"
                                 input-name="images[4]"
@@ -234,15 +215,15 @@
                             @php
                                 $images[3][] = [
                                     'id' => 'image_1',
-                                    'url' => asset('/themes/velocity/assets/images/headphones.png'),
+                                    'url' => asset('/themes/velocity/assets/images/headphones.webp'),
                                 ];
                                 $images[3][] = [
                                     'id' => 'image_2',
-                                    'url' => asset('/themes/velocity/assets/images/watch.png'),
+                                    'url' => asset('/themes/velocity/assets/images/watch.webp'),
                                 ];
                                 $images[3][] = [
                                     'id' => 'image_3',
-                                    'url' => asset('/themes/velocity/assets/images/kids-2.png'),
+                                    'url' => asset('/themes/velocity/assets/images/kids-2.webp'),
                                 ];
                             @endphp
 
@@ -276,11 +257,11 @@
                             @php
                                 $images[2][] = [
                                     'id' => 'image_1',
-                                    'url' => asset('/themes/velocity/assets/images/toster.png'),
+                                    'url' => asset('/themes/velocity/assets/images/toster.webp'),
                                 ];
                                 $images[2][] = [
                                     'id' => 'image_2',
-                                    'url' => asset('/themes/velocity/assets/images/trimmer.png'),
+                                    'url' => asset('/themes/velocity/assets/images/trimmer.webp'),
                                 ];
                             @endphp
 
@@ -372,6 +353,20 @@
                 plugins: 'image imagetools media wordcount save fullscreen code',
                 toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | code',
             });
+
+            $('#channel-switcher, #locale-switcher').on('change', function (e) {
+                $('#channel-switcher').val()
+
+                if (event.target.id == 'channel-switcher') {
+                    let locale = "{{ app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales->first()->code }}";
+
+                    $('#locale-switcher').val(locale);
+                }
+
+                var query = '?channel=' + $('#channel-switcher').val() + '&locale=' + $('#locale-switcher').val();
+
+                window.location.href = "{{ route('velocity.admin.meta-data')  }}" + query;
+            })
         });
     </script>
 @endpush

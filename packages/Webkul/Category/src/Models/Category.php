@@ -9,6 +9,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Webkul\Category\Contracts\Category as CategoryContract;
 use Webkul\Attribute\Models\AttributeProxy;
 use Webkul\Category\Repositories\CategoryRepository;
+use Webkul\Product\Models\ProductProxy;
 
 /**
  * Class Category
@@ -65,12 +66,14 @@ class Category extends TranslatableModel implements CategoryContract
      */
     public function filterableAttributes()
     {
-        return $this->belongsToMany(AttributeProxy::modelClass(), 'category_filterable_attributes')->with('options');
+        return $this->belongsToMany(AttributeProxy::modelClass(), 'category_filterable_attributes')->with(['options' => function($query) {
+            $query->orderBy('sort_order');
+        }]);
     }
 
     /**
      * Getting the root category of a category
-     * 
+     *
      * @return Category
      */
     public function getRootCategory(): Category
@@ -124,7 +127,15 @@ class Category extends TranslatableModel implements CategoryContract
         if ($category->id === $this->id) {
             return $category;
         }
-        
+
         return $this->findInTree($category->children);
+    }
+
+    /**
+     * The products that belong to the category.
+     */
+    public function products()
+    {
+        return $this->belongsToMany(ProductProxy::modelClass(), 'product_categories');
     }
 }

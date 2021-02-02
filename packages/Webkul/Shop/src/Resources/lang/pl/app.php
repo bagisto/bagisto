@@ -17,6 +17,7 @@ return [
 
     'common' => [
         'error' => 'Coś poszło nie tak. Proszę spróbować później.',
+        'image-upload-limit' => 'Maksymalny rozmiar przesyłanego obrazu to 2 MB',
         'no-result-found' => 'Nie znaleźliśmy żadnych zapisów.'
     ],
 
@@ -72,7 +73,8 @@ return [
         'page-title' => config('app.name') . ' - Szukaj',
         'found-results' => 'Dostępne wyniki wyszukiwania',
         'found-result' => 'Dostępny wynik wyszukiwania',
-        'analysed-keywords' => 'Analysed Keywords'
+        'analysed-keywords' => 'Analysed Keywords',
+        'image-search-option' => 'Image Search Option'
     ],
 
     'reviews' => [
@@ -437,6 +439,8 @@ return [
         'available-for-order' => 'Dostępne na zamówienie',
         'settings' => 'Settings',
         'compare_options' => 'Compare Options',
+        'wishlist-options' => 'Wishlist Options',
+        'offers' => 'Buy :qty for :price each and save :discount%',
     ],
 
     // 'reviews' => [
@@ -490,7 +494,8 @@ return [
             'partial-cart-update' => 'Tylko niektóre produkty zostały zaktualizowane',
             'event' => [
                 'expired' => 'To wydarzenie wygasło.'
-            ]
+            ],
+            'minimum-order-message' => 'Minimum order amount is :amount'
         ],
 
         'onepage' => [

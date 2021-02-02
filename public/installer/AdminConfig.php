@@ -1,10 +1,12 @@
 <?php
 
+$phpbin = PHP_BINDIR . '/php';
+
 // array to hold validation errors
-$errors  = array();
+$errors = array();
 
 // array to pass back data
-$data    = array();
+$data = array();
 
 // validate the variables
 // if any of these variables don't exist, add an error to our $errors array
@@ -101,7 +103,7 @@ $data    = array();
             $data['support_error'] = 'Bagisto currently support MySQL only. Press OK to still continue or change you DB connection to MySQL';
         }
 
-        $storage_output = exec('cd ../.. && php artisan storage:link 2>&1');
+        $storage_output = exec('cd ../.. && '. $phpbin .' artisan storage:link 2>&1');
 
         // if there are no errors process our form, then return a message
         // show a message of success and provide a true success variable

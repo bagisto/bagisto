@@ -246,8 +246,6 @@ return [
         //Laravel Maatwebsite
         Maatwebsite\Excel\ExcelServiceProvider::class,
 
-        Barryvdh\Debugbar\ServiceProvider::class,
-
         //Repository
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         Konekt\Concord\ConcordServiceProvider::class,
@@ -282,6 +280,8 @@ return [
         Webkul\Velocity\Providers\VelocityServiceProvider::class,
         Webkul\BookingProduct\Providers\BookingProductServiceProvider::class,
         Webkul\SocialLogin\Providers\SocialLoginServiceProvider::class,
+        Webkul\DebugBar\Providers\DebugBarServiceProvider::class,
+        Webkul\Marketing\Providers\MarketingServiceProvider::class,
     ],
 
     /*
@@ -339,6 +339,7 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Concord' => Konekt\Concord\Facades\Concord::class,
-        'Helper'  => Konekt\Concord\Facades\Helper::class
+        'Helper'  => Konekt\Concord\Facades\Helper::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
     ],
 ];

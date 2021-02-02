@@ -6,11 +6,11 @@
 
 @section('content')
     <div class="content">
-        <form method="POST" action="{{ route('admin.tax-rates.create') }}" @submit.prevent="onSubmit">
+        <form method="POST" action="{{ route('admin.tax-rates.store') }}" @submit.prevent="onSubmit">
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ route('admin.dashboard.index') }}';"></i>
+                        <i class="icon angle-left-icon back-link" onclick="window.location = history.length > 1 ? document.referrer : '{{ route('admin.dashboard.index') }}'"></i>
 
                         {{ __('admin::app.settings.tax-rates.add-title') }}
                     </h1>
@@ -78,7 +78,7 @@
 
             <div class="control-group" :class="[errors.has('tax_rate') ? 'has-error' : '']">
                 <label for="tax_rate" class="required">{{ __('admin::app.configuration.tax-rates.tax_rate') }}</label>
-                <input v-validate="'required|min_value:0.0001'" class="control" id="tax_rate" name="tax_rate" data-vv-as="&quot;{{ __('admin::app.configuration.tax-rates.tax_rate') }}&quot;" value="{{ old('tax_rate') }}"/>
+                <input v-validate="'required|decimal|min_value:0.0001'" class="control" id="tax_rate" name="tax_rate" data-vv-as="&quot;{{ __('admin::app.configuration.tax-rates.tax_rate') }}&quot;" value="{{ old('tax_rate') }}"/>
                 <span class="control-error" v-if="errors.has('tax_rate')">@{{ errors.first('tax_rate') }}</span>
             </div>
         </div>

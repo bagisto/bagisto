@@ -293,6 +293,7 @@ class Cart
     public function getItemByProduct($data)
     {
         $items = $this->getCart()->all_items;
+
         foreach ($items as $item) {
             if ($item->product->getTypeInstance()->compareOptions($item->additional, $data['additional'])) {
                 if (isset($data['additional']['parent_id'])) {
@@ -402,6 +403,7 @@ class Cart
     public function getCart(): ?\Webkul\Checkout\Contracts\Cart
     {
         $cart = null;
+
         if ($this->getCurrentCustomer()->check()) {
             $cart = $this->cartRepository->findOneWhere([
                 'customer_id' => $this->getCurrentCustomer()->user()->id,
@@ -557,8 +559,8 @@ class Cart
         $cart->base_grand_total = $cart->base_sub_total + $cart->base_tax_total - $cart->base_discount_amount;
 
         if ($shipping = $cart->selected_shipping_rate) {
-            $cart->grand_total = (float)$cart->grand_total + $shipping->price - $shipping->discount_amount;
-            $cart->base_grand_total = (float)$cart->base_grand_total + $shipping->base_price - $shipping->base_discount_amount;
+            $cart->grand_total = (float) $cart->grand_total + $shipping->price - $shipping->discount_amount;
+            $cart->base_grand_total = (float) $cart->base_grand_total + $shipping->base_price - $shipping->base_discount_amount;
 
             $cart->discount_amount += $shipping->discount_amount;
             $cart->base_discount_amount += $shipping->base_discount_amount;
@@ -576,6 +578,8 @@ class Cart
 
         $cart->items_qty = $quantities;
 
+        $cart->cart_currency_code = core()->getCurrentCurrencyCode();
+
         $cart->save();
 
         Event::dispatch('checkout.cart.collect.totals.after', $cart);
@@ -591,6 +595,7 @@ class Cart
         if (! $cart = $this->getCart()) {
             return false;
         }
+
         if (count($cart->items) === 0) {
             $this->cartRepository->delete($cart->id);
 
@@ -604,7 +609,9 @@ class Cart
 
             if ($validationResult->isItemInactive()) {
                 $this->removeItem($item->id);
+
                 $isInvalid = true;
+
                 session()->flash('info', __('shop::app.checkout.cart.item.inactive'));
             }
 
@@ -693,8 +700,20 @@ class Cart
 
                     if ($haveTaxRate) {
                         $item->tax_percent = $rate->tax_rate;
-                        $item->tax_amount = round(($item->total * $rate->tax_rate) / 100, 4);
-                        $item->base_tax_amount = round(($item->base_total * $rate->tax_rate) / 100, 4);
+
+                        /* getting shipping rate for tax calculation */
+                        $shippingPrice = $shippingBasePrice = 0;
+
+                        if ($shipping = $cart->selected_shipping_rate) {
+                            if ($shipping->is_calculate_tax) {
+                                $shippingPrice = $shipping->price - $shipping->discount_amount;
+                                $shippingBasePrice = $shipping->base_price - $shipping->base_discount_amount;
+                            }
+                        }
+
+                        /* now assigning shipping prices for tax calculation */
+                        $item->tax_amount = round((($item->total + $shippingPrice) * $rate->tax_rate) / 100, 4);
+                        $item->base_tax_amount = round((($item->base_total + $shippingBasePrice) * $rate->tax_rate) / 100, 4);
 
                         break;
                     }
@@ -703,6 +722,7 @@ class Cart
 
             $item->save();
         }
+
         Event::dispatch('checkout.cart.calculate.items.tax.after', $cart);
     }
 
@@ -1268,5 +1288,21 @@ class Cart
                 }
             }
         }
+    }
+
+    /**
+     * Check minimum order.
+     *
+     * @return boolean
+     */
+    public function checkMinimumOrder(): bool
+    {
+        $cart = $this->getCart();
+
+        if (! $cart) {
+            return false;
+        }
+
+        return $cart->checkMinimumOrder();
     }
 }

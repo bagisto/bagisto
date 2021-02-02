@@ -121,13 +121,13 @@ return [
                 'title'         => 'admin::app.admin.system.logo-image',
                 'type'          => 'image',
                 'channel_based' => true,
-                'validation'    => 'mimes:jpeg,bmp,png,jpg',
+                'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
             ], [
                 'name'          => 'favicon',
                 'title'         => 'admin::app.admin.system.favicon',
                 'type'          => 'image',
                 'channel_based' => true,
-                'validation'    => 'mimes:jpeg,bmp,png,jpg',
+                'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
             ],
         ],
     ], [
@@ -146,6 +146,29 @@ return [
             [
                 'name'  => 'allow-guest-checkout',
                 'title' => 'admin::app.admin.system.allow-guest-checkout',
+                'type'  => 'boolean',
+            ],
+        ],
+    ], [
+        'key'    => 'catalog.products.homepage',
+        'name'   => 'admin::app.admin.system.homepage',
+        'sort'   => 2,
+        'fields' => [
+            [
+                'name'  => 'no_of_new_product_homepage',
+                'title' => 'admin::app.admin.system.allow-no-of-new-product-homepage',
+                'type'  => 'number',
+                'validation'    => 'min:0',
+            ],
+            [
+                'name'  => 'no_of_featured_product_homepage',
+                'title' => 'admin::app.admin.system.allow-no-of-featured-product-homepage',
+                'type'  => 'number',
+                'validation'    => 'min:0',
+            ],
+            [
+                'name'  => 'out_of_stock_items',
+                'title' => 'admin::app.admin.system.allow-out-of-stock-items',
                 'type'  => 'boolean',
             ],
         ],
@@ -200,6 +223,10 @@ return [
                     ],
                 ],
                 'channel_based' => true,
+            ], [
+                'name'  => 'buy_now_button_display',
+                'title' => 'admin::app.admin.system.buy-now-button-display',
+                'type'  => 'boolean',
             ]
         ],
     ], [

@@ -2,18 +2,61 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\Support\Facades\DB;
 use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\Core\Repositories\ChannelRepository;
 
 class ChannelDataGrid extends DataGrid
 {
+    /**
+     * Assign primary key.
+     */
     protected $index = 'id';
 
+    /**
+     * Sort order.
+     */
     protected $sortOrder = 'desc';
+
+    /**
+     * Filter Locale.
+     */
+    protected $locale;
+
+    /**
+     * ChannelRepository $channelRepository
+     *
+     * @var \Webkul\Core\Repositories\ChannelRepository
+     */
+    protected $channelRepository;
+
+    /**
+     * Create a new datagrid instance.
+     *
+     * @param  \Webkul\Core\Repositories\ChannelRepository  $channelRepository
+     * @return void
+     */
+    public function __construct(
+        ChannelRepository $channelRepository
+    )
+    {
+        parent::__construct();
+
+        $this->locale = request()->get('locale') ?? app()->getLocale();
+
+        $this->channelRepository = $channelRepository;
+    }
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('channels')->addSelect('id', 'code', 'name', 'hostname');
+        $queryBuilder = $this->channelRepository->query()
+            ->leftJoin('channel_translations', 'channel_translations.channel_id', '=', 'channels.id')
+            ->addSelect('channels.id', 'channels.code', 'channel_translations.locale', 'channel_translations.name as translated_name', 'channels.hostname')
+            ->where('channel_translations.locale', '=', $this->locale);
+
+        $this->addFilter('id', 'channels.id');
+        $this->addFilter('code', 'channels.code');
+        $this->addFilter('hostname', 'channels.hostname');
+        $this->addFilter('translated_name', 'channel_translations.name');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -39,7 +82,7 @@ class ChannelDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'name',
+            'index'      => 'translated_name',
             'label'      => trans('admin::app.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,

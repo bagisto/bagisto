@@ -11,7 +11,7 @@
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ route('admin.dashboard.index') }}';"></i>
+                        <i class="icon angle-left-icon back-link" onclick="window.location = history.length > 1 ? document.referrer : '{{ route('admin.dashboard.index') }}'"></i>
 
                         {{ __('admin::app.catalog.attributes.edit-title') }}
                     </h1>
@@ -359,7 +359,7 @@
 
                     <tbody>
 
-                        <tr v-for="(row, index) in optionRows">
+                        <tr v-for="(row, index) in optionRows" :key="row.id">
                             <td v-if="show_swatch && swatch_type == 'color'">
                                 <swatch-picker :input-name="'options[' + row.id + '][swatch_value]'" :color="row.swatch_value" colors="text-advanced" show-fallback />
                             </td>

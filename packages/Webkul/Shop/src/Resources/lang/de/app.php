@@ -17,6 +17,7 @@ return [
 
     'common' => [
         'error' => 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.',
+        'image-upload-limit' => 'Die maximale Upload-Größe des Bildes beträgt 2 MB',
         'no-result-found' => 'Wir konnten keine Aufzeichnungen finden.'
     ],
 
@@ -72,7 +73,8 @@ return [
         'page-title' => config('app.name') . ' - Suchen',
         'found-results' => 'Suchergebnisse gefunden',
         'found-result' => 'Suchergebnis gefunden',
-        'analysed-keywords' => 'Analysed Keywords'
+        'analysed-keywords' => 'Analysed Keywords',
+        'image-search-option' => 'Image Search Option'
     ],
 
     'reviews' => [
@@ -386,14 +388,14 @@ return [
     ],
 
     'products' => [
-        'layered-nav-title' => 'Einkaufen bei',
+        'layered-nav-title' => 'Filtern nach',
         'price-label' => 'Angebotspreis von',
         'remove-filter-link-title' => 'Alles löschen',
         'filter-to' => 'bis',
         'sort-by' => 'Sortieren',
         'from-a-z' => 'Von A-Z',
         'from-z-a' => 'Von Z-A',
-        'newest-first' => 'Neuste zuerst',
+        'newest-first' => 'Neueste zuerst',
         'oldest-first' => 'Älteste zuerst',
         'cheapest-first' => 'Günstigste zuerst',
         'expensive-first' => 'Teuerste zuerst',
@@ -437,6 +439,8 @@ return [
         'available' => 'Verfügbar',
         'settings' => 'Settings',
         'compare_options' => 'Compare Options',
+        'wishlist-options' => 'Wishlist Options',
+        'offers' => 'Buy :qty for :price each and save :discount%',
     ],
 
     // 'reviews' => [
@@ -488,7 +492,8 @@ return [
             'cart-subtotal' => 'Warenkorb Zwischensumme',
             'cart-remove-action' => 'Wollen Sie dies wirklich tun?',
             'partial-cart-update' => 'Nur einige der Produkte wurden aktualisiert',
-            'link-missing' => ''
+            'link-missing' => '',
+            'minimum-order-message' => 'Minimum order amount is :amount'
         ],
 
         'onepage' => [
@@ -518,7 +523,7 @@ return [
             'shipping-method' => 'Versandart wählen',
             'payment-methods' => 'Zahlungsmethode wählen',
             'payment-method' => 'Zahlungsmethode',
-            'summary' => 'Bestellübersichty',
+            'summary' => 'Bestellübersicht',
             'price' => 'Preis',
             'quantity' => 'Menge',
             'billing-address' => 'Rechnungsadresse',

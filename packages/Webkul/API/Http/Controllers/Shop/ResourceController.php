@@ -12,7 +12,7 @@ class ResourceController extends Controller
      * @var array
      */
     protected $guard;
-    
+
     /**
      * Contains route related configuration
      *
@@ -45,7 +45,9 @@ class ResourceController extends Controller
             $this->middleware('auth:' . $this->guard);
         }
 
-        $this->repository = app($this->_config['repository']);
+        if ($this->_config) {
+            $this->repository = app($this->_config['repository']);
+        }
     }
 
     /**
@@ -58,8 +60,8 @@ class ResourceController extends Controller
         $query = $this->repository->scopeQuery(function($query) {
             if (isset($this->_config['authorization_required']) && $this->_config['authorization_required']) {
                 $query = $query->where('customer_id', auth()->user()->id );
-            } 
-            
+            }
+
             foreach (request()->except(['page', 'limit', 'pagination', 'sort', 'order', 'token']) as $input => $value) {
                 $query = $query->whereIn($input, array_map('trim', explode(',', $value)));
             }
@@ -89,11 +91,11 @@ class ResourceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function get($id)
-    {    
-        $query = isset($this->_config['authorization_required']) && $this->_config['authorization_required'] ? 
-                $this->repository->where('customer_id', auth()->user()->id)->findOrFail($id) : 
+    {
+        $query = isset($this->_config['authorization_required']) && $this->_config['authorization_required'] ?
+                $this->repository->where('customer_id', auth()->user()->id)->findOrFail($id) :
                 $this->repository->findOrFail($id);
-        
+
         return new $this->_config['resource']($query);
     }
 
@@ -108,7 +110,7 @@ class ResourceController extends Controller
         $wishlistProduct = $this->repository->findOrFail($id);
 
         $this->repository->delete($id);
-        
+
         return response()->json([
             'message' => 'Item removed successfully.',
         ]);

@@ -22,6 +22,7 @@ class Simple extends AbstractType
         'admin::catalog.products.accordians.categories',
         'admin::catalog.products.accordians.channels',
         'admin::catalog.products.accordians.product-links',
+        'admin::catalog.products.accordians.videos',
     ];
 
     /**
@@ -39,6 +40,11 @@ class Simple extends AbstractType
     public function isSaleable()
     {
         if (! $this->product->status) {
+            return false;
+        }
+
+        if (is_callable(config('products.isSaleable')) &&
+            call_user_func(config('products.isSaleable'), $this->product) === false) {
             return false;
         }
 

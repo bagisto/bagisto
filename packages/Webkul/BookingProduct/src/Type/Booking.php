@@ -12,6 +12,7 @@ use Webkul\Product\Datatypes\CartItemValidationResult;
 use Webkul\Product\Helpers\ProductImage;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
+use Webkul\Product\Repositories\ProductVideoRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Type\Virtual;
@@ -44,6 +45,7 @@ class Booking extends Virtual
         'admin::catalog.products.accordians.channels',
         'bookingproduct::admin.catalog.products.accordians.booking',
         'admin::catalog.products.accordians.product-links',
+        'admin::catalog.products.accordians.videos',
     ];
 
     /**
@@ -54,9 +56,10 @@ class Booking extends Virtual
      * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository $attributeValueRepository
      * @param  \Webkul\Product\Repositories\ProductInventoryRepository      $productInventoryRepository
      * @param  \Webkul\Product\Repositories\ProductImageRepository          $productImageRepository
-     * @param  \Webkul\Product\Helpers\ProductImage $productImageHelper
+     * @param  \Webkul\Product\Helpers\ProductImage                          $productImageHelper
      * @param  \Webkul\BookingProduct\Repositories\BookingProductRepository  $bookingProductRepository
-     * @param  \Webkul\BookingProduct\Helpers\BookingHelper  $bookingHelper
+     * @param  \Webkul\BookingProduct\Helpers\BookingHelper                  $bookingHelper
+     * @param \Webkul\Product\Repositories\ProductVideoRepository            $productVideoRepository
      * @return void
      */
     public function __construct(
@@ -67,7 +70,8 @@ class Booking extends Virtual
         ProductImageRepository $productImageRepository,
         ProductImage $productImageHelper,
         BookingProductRepository $bookingProductRepository,
-        BookingHelper $bookingHelper
+        BookingHelper $bookingHelper,
+        ProductVideoRepository $productVideoRepository
     )
     {
         parent::__construct(
@@ -76,7 +80,8 @@ class Booking extends Virtual
             $attributeValueRepository,
             $productInventoryRepository,
             $productImageRepository,
-            $productImageHelper
+            $productImageHelper,
+            $productVideoRepository
         );
 
         $this->bookingProductRepository = $bookingProductRepository;
@@ -238,6 +243,7 @@ class Booking extends Virtual
         }
 
         if (isset($options1['booking'], $options2['booking'])
+            && isset($options1['booking']['ticket_id'], $options2['booking']['ticket_id'])
             && $options1['booking']['ticket_id'] === $options2['booking']['ticket_id']) {
                 return true;
         }

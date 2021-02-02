@@ -40,7 +40,13 @@
 @section('content-wrapper')
     {!! view_render_event('bagisto.shop.home.content.before') !!}
 
-    {!! DbView::make($channel)->field('home_page_content')->with(['sliderData' => $sliderData])->render() !!}
+    @if (! is_null($channel->home_page_content))
+        {!! DbView::make($channel)->field('home_page_content')->with(['sliderData' => $sliderData])->render() !!}
+    @else
+        @include('shop::home.slider', ['sliderData' => $sliderData])
+        @include('shop::home.featured-products')
+        @include('shop::home.new-products')
+    @endif
 
     {{ view_render_event('bagisto.shop.home.content.after') }}
 
