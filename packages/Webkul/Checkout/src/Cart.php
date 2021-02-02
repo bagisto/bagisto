@@ -20,7 +20,6 @@ use Webkul\Customer\Repositories\CustomerAddressRepository;
 
 class Cart
 {
-
     /**
      * CartRepository instance
      *
@@ -1288,6 +1287,25 @@ class Cart
                 }
             }
         }
+    }
+
+    /**
+     * Check whether cart has product.
+     *
+     * @param  \Webkul\Product\Models\Product $product
+     * @return bool
+     */
+    public function hasProduct($product): bool
+    {
+        $cart = \Cart::getCart();
+
+        if (! $cart) {
+            return false;
+        }
+
+        $count = $cart->all_items()->where('product_id', $product->id)->count();
+
+        return $count > 0 ? true : false;
     }
 
     /**
