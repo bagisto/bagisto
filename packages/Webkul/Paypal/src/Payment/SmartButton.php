@@ -5,6 +5,7 @@ namespace Webkul\Paypal\Payment;
 use PayPalCheckoutSdk\Core\PayPalHttpClient;
 use PayPalCheckoutSdk\Core\SandboxEnvironment;
 use PayPalCheckoutSdk\Core\ProductionEnvironment;
+use PayPalCheckoutSdk\Payments\CapturesRefundRequest;
 
 class SmartButton extends Paypal
 {
@@ -54,6 +55,19 @@ class SmartButton extends Paypal
     public function client()
     {
         return new PayPalHttpClient($this->environment());
+    }
+
+    /**
+     * Refund order.
+     */
+    public function refundOrder($captureId, $body = [])
+    {
+        /* generating request */
+        $request = new CapturesRefundRequest($captureId);
+        $request->body = $body;
+
+        /* requesting refund */
+        return $this->client()->execute($request);
     }
 
     /**
