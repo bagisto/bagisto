@@ -897,6 +897,10 @@ class Cart
             $finalData['items'][] = $this->prepareDataForOrderItem($item);
         }
 
+        if ($finalData['payment']['method'] === 'paypal_smart_button') {
+            $finalData['payment']['additional'] = request()->get('data');
+        }
+
         return $finalData;
     }
 
