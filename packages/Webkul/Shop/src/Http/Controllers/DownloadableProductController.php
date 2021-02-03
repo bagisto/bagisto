@@ -58,6 +58,19 @@ class DownloadableProductController extends Controller
             abort(403);
         }
 
+        $totalInvoiceQty = 0;
+        if (isset($downloadableLinkPurchased->order->invoices)) {
+            foreach ($downloadableLinkPurchased->order->invoices as $invoice) {
+                $totalInvoiceQty = $totalInvoiceQty + $invoice->total_qty;
+            }
+        }
+
+        if ($downloadableLinkPurchased->download_used == $totalInvoiceQty || $downloadableLinkPurchased->download_used > $totalInvoiceQty) {
+            session()->flash('warning', trans('shop::app.customer.account.downloadable_products.payment-error'));
+
+            return redirect()->route('customer.downloadable_products.index');
+        }
+
         if ($downloadableLinkPurchased->download_bought
             && ($downloadableLinkPurchased->download_bought - $downloadableLinkPurchased->download_used) <= 0) {
 

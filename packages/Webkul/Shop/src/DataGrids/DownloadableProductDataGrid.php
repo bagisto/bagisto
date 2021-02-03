@@ -14,6 +14,7 @@ class DownloadableProductDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('downloadable_link_purchased')
+            ->distinct()
             ->leftJoin('orders', 'downloadable_link_purchased.order_id', '=', 'orders.id')
             ->leftJoin('invoices', 'downloadable_link_purchased.order_id', '=', 'invoices.order_id')
             ->addSelect('downloadable_link_purchased.*', 'invoices.state as invoice_state', 'orders.increment_id')
