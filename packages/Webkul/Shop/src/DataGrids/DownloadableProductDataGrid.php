@@ -22,6 +22,7 @@ class DownloadableProductDataGrid extends DataGrid
 
         $this->addFilter('status', 'downloadable_link_purchased.status');
         $this->addFilter('created_at', 'downloadable_link_purchased.created_at');
+        $this->addFilter('increment_id', 'orders.increment_id');
 
         $this->setQueryBuilder($queryBuilder);
     }
