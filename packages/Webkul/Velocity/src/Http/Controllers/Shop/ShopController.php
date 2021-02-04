@@ -28,7 +28,7 @@ class ShopController extends Controller
         if ($product) {
             $productReviewHelper = app('Webkul\Product\Helpers\Review');
 
-            $galleryImages = $this->productImageHelper->getProductBaseImage($product);
+            $galleryImages = \ProductImage::getProductBaseImage($product);
 
             $response = [
                 'status'  => true,
