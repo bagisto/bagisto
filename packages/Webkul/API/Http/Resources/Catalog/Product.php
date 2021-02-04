@@ -13,10 +13,6 @@ class Product extends JsonResource
      */
     public function __construct($resource)
     {
-        parent::__construct($resource);
-
-        $this->productImageHelper = app('Webkul\Product\Helpers\ProductImage');
-
         $this->productReviewHelper = app('Webkul\Product\Helpers\Review');
 
         $this->wishlistHelper = app('Webkul\Customer\Helpers\Wishlist');
@@ -49,7 +45,7 @@ class Product extends JsonResource
             'short_description'      => $product->short_description,
             'description'            => $product->description,
             'images'                 => ProductImage::collection($product->images),
-            'base_image'             => $this->productImageHelper->getProductBaseImage($product),
+            'base_image'             => app('Webkul\Product\ProductImage')->getProductBaseImage($product),
             'created_at'             => $product->created_at,
             'updated_at'             => $product->updated_at,
 

@@ -5,7 +5,6 @@ namespace Webkul\Product\Type;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Models\CartItem;
 use Illuminate\Support\Facades\Storage;
-use Webkul\Product\Helpers\ProductImage;
 use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
@@ -58,13 +57,6 @@ abstract class AbstractType
      * @var \Webkul\Product\Repositories\productVideoRepository
      */
     protected $productVideoRepository;
-
-    /**
-     * Product Image helper instance
-     *
-     * @var \Webkul\Product\Helpers\ProductImage
-     */
-    protected $productImageHelper;
 
     /**
      * Product model instance
@@ -148,7 +140,6 @@ abstract class AbstractType
      * @param \Webkul\Product\Repositories\ProductAttributeValueRepository $attributeValueRepository
      * @param \Webkul\Product\Repositories\ProductInventoryRepository      $productInventoryRepository
      * @param \Webkul\Product\Repositories\ProductImageRepository          $productImageRepository
-     * @param \Webkul\Product\Helpers\ProductImage                         $productImageHelper
      * @param \Webkul\Product\Repositories\ProductVideoRepository          $productVideoRepository
      *
      * @return void
@@ -159,7 +150,6 @@ abstract class AbstractType
         ProductAttributeValueRepository $attributeValueRepository,
         ProductInventoryRepository $productInventoryRepository,
         ProductImageRepository $productImageRepository,
-        ProductImage $productImageHelper,
         ProductVideoRepository $productVideoRepository
     ) {
         $this->attributeRepository = $attributeRepository;
@@ -171,8 +161,6 @@ abstract class AbstractType
         $this->productInventoryRepository = $productInventoryRepository;
 
         $this->productImageRepository = $productImageRepository;
-
-        $this->productImageHelper = $productImageHelper;
 
         $this->productVideoRepository = $productVideoRepository;
     }
@@ -849,7 +837,7 @@ abstract class AbstractType
      */
     public function getBaseImage($item)
     {
-        return $this->productImageHelper->getProductBaseImage($item->product);
+        return app('Webkul\Product\ProductImage')->getProductBaseImage($item->product);
     }
 
     /**

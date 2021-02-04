@@ -15,7 +15,7 @@
         </script>
     @endif
 
-    <?php $productBaseImage = app('Webkul\Product\Helpers\ProductImage')->getProductBaseImage($product); ?>
+    <?php $productBaseImage = ProductImage::getProductBaseImage($product); ?>
 
     <meta name="twitter:card" content="summary_large_image" />
 

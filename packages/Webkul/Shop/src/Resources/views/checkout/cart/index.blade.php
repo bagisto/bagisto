@@ -5,8 +5,6 @@
 @stop
 
 @section('content-wrapper')
-    @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
-
     <section class="cart">
         @if ($cart)
             <div class="title">

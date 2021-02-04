@@ -8,24 +8,6 @@ use Webkul\Product\Models\ProductAttributeValue;
 class ConfigurableOption extends AbstractProduct
 {
     /**
-     * ProductImage object
-     *
-     * @var array
-     */
-    protected $productImage;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @param  \Webkul\Product\Helpers\ProductImage  $productImage
-     * @return void
-     */
-    public function __construct(ProductImage $productImage)
-    {
-        $this->productImage = $productImage;
-    }
-
-    /**
      * Returns the allowed variants
      *
      * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
@@ -223,7 +205,7 @@ class ConfigurableOption extends AbstractProduct
                 $variantId = $variant->id;
             }
 
-            $images[$variantId] = $this->productImage->getGalleryImages($variant);
+            $images[$variantId] = ProductImage::getGalleryImages($variant);
         }
 
         return $images;
