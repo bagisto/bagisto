@@ -72,8 +72,7 @@ class SmartButtonController extends Controller
      */
     public function captureOrder()
     {
-        $orderCreationData = request()->get('data');
-        $request = new OrdersCaptureRequest($orderCreationData['orderID']);
+        $request = new OrdersCaptureRequest(request()->input('orderData.orderID'));
         $request->prefer('return=representation');
         $this->smartButtonClient->execute($request);
         return $this->saveOrder();

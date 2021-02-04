@@ -898,7 +898,7 @@ class Cart
         }
 
         if ($finalData['payment']['method'] === 'paypal_smart_button') {
-            $finalData['payment']['additional'] = request()->get('data');
+            $finalData['payment']['additional'] = request()->get('orderData');
         }
 
         return $finalData;

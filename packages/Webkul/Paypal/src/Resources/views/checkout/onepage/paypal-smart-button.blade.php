@@ -55,8 +55,8 @@
                         app.showLoader();
 
                         window.axios.post("{{ route('paypal.smart-button.capture-order') }}", {
-                            '_token': "{{ csrf_token() }}",
-                            'data' : data
+                            _token: "{{ csrf_token() }}",
+                            orderData: data
                         })
                         .then(function(response) {
                             if (response.data.success) {
