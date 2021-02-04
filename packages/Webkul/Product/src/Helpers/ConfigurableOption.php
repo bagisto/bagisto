@@ -4,6 +4,7 @@ namespace Webkul\Product\Helpers;
 
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductAttributeValue;
+use Webkul\Product\Facades\ProductImage;
 
 class ConfigurableOption extends AbstractProduct
 {
