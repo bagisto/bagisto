@@ -107,6 +107,7 @@ class DownloadableLinkPurchasedRepository extends Repository
                     }
 
                     $this->update([
+                        'status' => $purchasedLink->download_used == $totalInvoiceQty ? $status : $purchasedLink->status,
                         'download_canceled' => $purchasedLink->download_bought - $totalInvoiceQty,
                     ], $purchasedLink->id);
                 } else {
