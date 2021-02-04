@@ -20,15 +20,15 @@
     }
 
     if (isset($item)) {
-        $productBaseImage = ProductImage::getProductImage($item);
+        $productBaseImage = productimage()->getProductImage($item);
     } else {
-        $productBaseImage = ProductImage::getProductBaseImage($product);
+        $productBaseImage = productimage()->getProductBaseImage($product);
     }
 
     $totalReviews = $reviewHelper->getTotalReviews($product);
     $avgRatings = ceil($reviewHelper->getAverageRating($product));
 
-    $galleryImages = ProductImage::getGalleryImages($product);
+    $galleryImages = productimage()->getGalleryImages($product);
     $priceHTML = view('shop::products.price', ['product' => $product])->render();
 
     $product->__set('priceHTML', $priceHTML);

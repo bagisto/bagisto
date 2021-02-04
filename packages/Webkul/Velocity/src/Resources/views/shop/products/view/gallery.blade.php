@@ -1,8 +1,8 @@
 @inject ('wishListHelper', 'Webkul\Customer\Helpers\Wishlist')
 
 @php
-    $images = ProductImage::getGalleryImages($product);
-    $videos = ProductVideo::getVideos($product);
+    $images = productimage()->getGalleryImages($product);
+    $videos = productvideo()->getVideos($product);
 
     $videoData = $imageData = [];
 

@@ -206,7 +206,7 @@
                                 <li>
                                     <a href="{{ route('admin.catalog.products.edit', $item->product_id) }}">
                                         <div class="product image">
-                                            <?php $productBaseImage = ProductImage::getProductBaseImage($item->product); ?>
+                                            <?php $productBaseImage = productimage()->getProductBaseImage($item->product); ?>
 
                                             <img class="item-image" src="{{ $productBaseImage['small_image_url'] }}" />
                                         </div>
@@ -316,7 +316,7 @@
                                 <li>
                                     <a href="{{ route('admin.catalog.products.edit', $item->product_id) }}">
                                         <div class="image">
-                                            <?php $productBaseImage = ProductImage::getProductBaseImage($item->product); ?>
+                                            <?php $productBaseImage = productimage()->getProductBaseImage($item->product); ?>
 
                                             <img class="item-image" src="{{ $productBaseImage['small_image_url'] }}" />
                                         </div>

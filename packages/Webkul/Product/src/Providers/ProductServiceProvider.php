@@ -23,6 +23,8 @@ class ProductServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        include __DIR__ . '/../Http/helpers.php';
+
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
         $this->app->make(EloquentFactory::class)->load(__DIR__ . '/../Database/Factories');

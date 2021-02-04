@@ -15,7 +15,7 @@
         </script>
     @endif
 
-    <?php $productBaseImage = ProductImage::getProductBaseImage($product); ?>
+    <?php $productBaseImage = productimage()->getProductBaseImage($product); ?>
 
     <meta name="twitter:card" content="summary_large_image" />
 
