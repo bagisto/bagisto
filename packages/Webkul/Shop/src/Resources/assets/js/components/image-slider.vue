@@ -1,7 +1,6 @@
 <template>
     <transition name="slide">
         <div class="slider-content" v-if="images.length > 0">
-
             <ul class="slider-images">
                 <li v-for="(image, index) in images" :key="index" v-bind:class="{'show': index==currentIndex}">
                     <a :href="image.slider_path">
@@ -19,10 +18,29 @@
     </transition>
 </template>
 
+<style lang="scss">
+    .slider-control {
+        direction: ltr;
+    }
+
+    .slide-enter-active {
+        transition: all 0.2s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    }
+
+    .slide-leave-active {
+        transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .slide-enter, .slide-leave-to {
+        -webkit-transform: scaleY(0) translateZ(0);
+        transform: scaleY(0) translateZ(0);
+        opacity: 0;
+    }
+</style>
+
 <script>
 export default {
-
-    props:{
+    props: {
         slides: {
             type: Array,
             required: true,
@@ -36,16 +54,11 @@ export default {
     },
 
     data() {
-
         return {
             images: [],
-
             currentIndex: -1,
-
             content: [],
-
             current: false,
-
             images_loaded: false,
         };
     },
@@ -55,7 +68,6 @@ export default {
     },
 
     methods: {
-
         getProps() {
             this.setProps();
         },
@@ -85,34 +97,18 @@ export default {
         changeIndexLeft: function() {
             if (this.currentIndex > 0) {
                 this.currentIndex--;
-            } else if(this.currentIndex == 0) {
+            } else if (this.currentIndex == 0) {
                 this.currentIndex = this.images.length-1;
             }
         },
 
         changeIndexRight: function() {
-            if(this.currentIndex < this.images.length-1) {
+            if (this.currentIndex < this.images.length-1) {
                 this.currentIndex++;
-            } else if(this.currentIndex == this.images.length-1) {
+            } else if (this.currentIndex == this.images.length-1) {
                 this.currentIndex = 0;
             }
         }
     }
 };
 </script>
-
-<style>
-    .slide-enter-active {
-        transition: all 0.2s cubic-bezier(0.55, 0.085, 0.68, 0.53);
-    }
-
-    .slide-leave-active {
-        transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-
-    .slide-enter, .slide-leave-to {
-        -webkit-transform: scaleY(0) translateZ(0);
-        transform: scaleY(0) translateZ(0);
-        opacity: 0;
-    }
-</style>

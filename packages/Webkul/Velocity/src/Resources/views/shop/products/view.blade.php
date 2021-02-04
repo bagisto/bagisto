@@ -122,6 +122,14 @@
                                             @include ('shop::products.price', ['product' => $product])
                                         </div>
 
+                                        @if (count($product->getTypeInstance()->getCustomerGroupPricingOffers()) > 0)
+                                            <div class="col-12">
+                                                @foreach ($product->getTypeInstance()->getCustomerGroupPricingOffers() as $offers)
+                                                    {{ $offers }} </br>
+                                                @endforeach
+                                            </div>
+                                        @endif
+
                                         <div class="product-actions">
                                             @if (core()->getConfigData('catalog.products.storefront.buy_now_button_display'))
                                                 @include ('shop::products.buy-now', [

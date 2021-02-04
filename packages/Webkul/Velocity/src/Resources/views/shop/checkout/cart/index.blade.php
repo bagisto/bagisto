@@ -112,7 +112,9 @@
                                                 @endif
 
                                                 <div class="row col-12 no-padding no-margin">
-                                                    @include ('shop::products.price', ['product' => $product])
+                                                    <div class="product-price">
+                                                        <span>{{ core()->currency($item->base_price) }}</span>
+                                                    </div>
                                                 </div>
 
                                                 @php

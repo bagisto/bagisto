@@ -15,6 +15,8 @@ class InventorySourcesDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('inventory_sources')->addSelect('id', 'code', 'name', 'priority', 'status');
 
+        $this->addFilter('status', 'status');
+
         $this->setQueryBuilder($queryBuilder);
     }
 

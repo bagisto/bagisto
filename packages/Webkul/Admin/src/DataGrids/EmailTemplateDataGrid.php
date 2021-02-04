@@ -15,6 +15,8 @@ class EmailTemplateDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('marketing_templates')->addSelect('id', 'name', 'status');
 
+        $this->addFilter('status', 'status');
+
         $this->setQueryBuilder($queryBuilder);
     }
 

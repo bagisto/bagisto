@@ -62,6 +62,8 @@ class CartRuleDataGrid extends DataGrid
             $queryBuilder->where('cart_rule_channels.channel_id', $this->channel);
         }
 
+        $this->addFilter('status', 'status');
+
         $this->setQueryBuilder($queryBuilder);
     }
 
@@ -120,9 +122,9 @@ class CartRuleDataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => true,
             'wrapper'    => function ($value) {
-                if ($value->status == 'active') {
+                if ($value->status == 1) {
                     return trans('admin::app.datagrid.active');
-                } else if ($value->status == 'inactive') {
+                } else if ($value->status == 0) {
                     return trans('admin::app.datagrid.inactive');
                 } else {
                     return trans('admin::app.datagrid.draft');

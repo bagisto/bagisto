@@ -341,7 +341,7 @@ Route::group(['middleware' => ['web', 'admin_locale']], function () {
                 ])->name('admin.catalog.categories.massdelete');
 
                 Route::post('/categories/product/count', 'Webkul\Category\Http\Controllers\CategoryController@categoryProductCount')->name('admin.catalog.categories.product.count');
-                
+
 
                 // Catalog Attribute Routes
                 Route::get('/attributes', 'Webkul\Attribute\Http\Controllers\AttributeController@index')->defaults('_config', [
@@ -620,11 +620,11 @@ Route::group(['middleware' => ['web', 'admin_locale']], function () {
             // tax category routes
             Route::get('/tax-categories/create', 'Webkul\Tax\Http\Controllers\TaxCategoryController@show')->defaults('_config', [
                 'view' => 'admin::tax.tax-categories.create',
-            ])->name('admin.tax-categories.show');
+            ])->name('admin.tax-categories.create');
 
             Route::post('/tax-categories/create', 'Webkul\Tax\Http\Controllers\TaxCategoryController@create')->defaults('_config', [
                 'redirect' => 'admin.tax-categories.index',
-            ])->name('admin.tax-categories.create');
+            ])->name('admin.tax-categories.store');
 
             Route::get('/tax-categories/edit/{id}', 'Webkul\Tax\Http\Controllers\TaxCategoryController@edit')->defaults('_config', [
                 'view' => 'admin::tax.tax-categories.edit',
@@ -645,15 +645,15 @@ Route::group(['middleware' => ['web', 'admin_locale']], function () {
 
             Route::get('tax-rates/create', 'Webkul\Tax\Http\Controllers\TaxRateController@show')->defaults('_config', [
                 'view' => 'admin::tax.tax-rates.create',
-            ])->name('admin.tax-rates.show');
+            ])->name('admin.tax-rates.create');
 
             Route::post('tax-rates/create', 'Webkul\Tax\Http\Controllers\TaxRateController@create')->defaults('_config', [
                 'redirect' => 'admin.tax-rates.index',
-            ])->name('admin.tax-rates.create');
+            ])->name('admin.tax-rates.store');
 
             Route::get('tax-rates/edit/{id}', 'Webkul\Tax\Http\Controllers\TaxRateController@edit')->defaults('_config', [
                 'view' => 'admin::tax.tax-rates.edit',
-            ])->name('admin.tax-rates.store');
+            ])->name('admin.tax-rates.edit');
 
             Route::put('tax-rates/update/{id}', 'Webkul\Tax\Http\Controllers\TaxRateController@update')->defaults('_config', [
                 'redirect' => 'admin.tax-rates.index',

@@ -43,7 +43,7 @@
                         <div class="action">
                             @foreach ($actions as $action)
                                 @php
-                                    $toDisplay = (isset($action['condition']) && gettype($action['condition']) == 'object') ? $action['condition']() : true;
+                                    $toDisplay = (isset($action['condition']) && gettype($action['condition']) == 'object') ? $action['condition']($record) : true;
                                 @endphp
 
                                 @if ($toDisplay)

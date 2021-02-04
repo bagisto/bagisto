@@ -34,10 +34,12 @@ return [
      */
     'storage' => [
         'enabled'    => true,
-        'driver'     => 'file', // redis, file, pdo, custom
+        'driver'     => 'file', // redis, file, pdo, socket, custom
         'path'       => storage_path('debugbar'), // For file driver
         'connection' => null,   // Leave null for default connection (Redis/PDO)
         'provider'   => '', // Instance of StorageInterface for custom driver
+        'hostname'   => '127.0.0.1', // Hostname to use with the "socket" driver
+        'port'       => 2304, // Port to use with the "socket" driver
     ],
 
     /*

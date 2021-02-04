@@ -912,4 +912,72 @@ abstract class AbstractType
         return false;
     }
 
+    /**
+     * Get more offers for customer group pricing.
+     *
+     * @return array
+     */
+    public function getCustomerGroupPricingOffers() {
+        $offerLines = [];
+        $haveOffers = true;
+        $customerGroupId = null;
+
+        if (Cart::getCurrentCustomer()->check()) {
+            $customerGroupId = Cart::getCurrentCustomer()->user()->customer_group_id;
+        } else {
+            $customerGroupRepository = app('Webkul\Customer\Repositories\CustomerGroupRepository');
+
+            if ($customerGuestGroup = $customerGroupRepository->findOneByField('code', 'guest')) {
+                $customerGroupId = $customerGuestGroup->id;
+            }
+        }
+
+        $customerGroupPrices = $this->product->customer_group_prices()->where(function ($query) use ($customerGroupId) {
+            $query->where('customer_group_id', $customerGroupId)
+                ->orWhereNull('customer_group_id');
+        }
+        )->groupBy('qty')->get()->sortBy('qty')->values()->all();
+
+        if ($this->haveSpecialPrice()) {
+            $rulePrice = app('Webkul\CatalogRule\Helpers\CatalogRuleProductPrice')->getRulePrice($this->product);
+
+            if ($rulePrice && $rulePrice->price < $this->product->special_price) {
+                $haveOffers = false;
+            }
+
+            if ($haveOffers) {
+                foreach ($customerGroupPrices as $key => $customerGroupPrice) {
+                    if ($customerGroupPrice && $customerGroupPrice->qty > 1) {
+                        array_push($offerLines, $this->getOfferLines($customerGroupPrice));
+                    }
+                }
+            }
+        } else {
+            if (count($customerGroupPrices) > 0) {
+                foreach ($customerGroupPrices as $key => $customerGroupPrice) {
+                    array_push($offerLines, $this->getOfferLines($customerGroupPrice));
+                }
+            }
+        }
+
+        return $offerLines;
+    }
+
+    /**
+     * Get offers lines.
+     *
+     * @param array $customerGroupPrice
+     *
+     * @return array
+     */
+    public function getOfferLines($customerGroupPrice) {
+        $price = $this->getCustomerGroupPrice($this->product, $customerGroupPrice->qty);
+
+        $discount = number_format((($this->product->price - $price) * 100) / ($this->product->price), 2);
+
+        $offerLines = trans('shop::app.products.offers', ['qty'  => $customerGroupPrice->qty,
+            'price' =>  core()->currency($price), 'discount' => $discount]);
+
+        return $offerLines;
+    }
 }
