@@ -11,7 +11,7 @@
         <div class="review-layouter">
             @inject ('reviewHelper', 'Webkul\Product\Helpers\Review')
 
-            <?php $productBaseImage = ProductImage::getProductBaseImage($product); ?>
+            <?php $productBaseImage = productimage()->getProductBaseImage($product); ?>
 
             <div class="product-info">
                 <div class="product-image">

@@ -19,7 +19,7 @@
                     @foreach ($reviews as $review)
                     <div class="account-item-card mt-15 mb-15">
                         <div class="media-info">
-                            <?php $image = ProductImage::getGalleryImages($review->product); ?>
+                            <?php $image = productimage()->getGalleryImages($review->product); ?>
                             <img class="media" src="{{ $image[0]['small_image_url'] }}" alt="" />
 
                             <div class="info mt-20">

@@ -2,7 +2,7 @@
 
 <div class="product-card">
 
-    <?php $productBaseImage = ProductImage::getProductBaseImage($product); ?>
+    <?php $productBaseImage = productimage()->getProductBaseImage($product); ?>
 
     @if ($product->new)
         <div class="sticker new">

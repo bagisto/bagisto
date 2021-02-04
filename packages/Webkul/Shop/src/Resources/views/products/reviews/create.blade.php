@@ -11,7 +11,7 @@
         <div class="review-layouter mb-20">
             <div class="product-info">
 
-                <?php $productBaseImage = ProductImage::getProductBaseImage($product); ?>
+                <?php $productBaseImage = productimage()->getProductBaseImage($product); ?>
 
                 <div class="product-image">
                     <a href="{{ route('shop.productOrCategory.index', $product->url_key) }}" title="{{ $product->name }}">
