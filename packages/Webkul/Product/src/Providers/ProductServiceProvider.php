@@ -106,7 +106,6 @@ class ProductServiceProvider extends ServiceProvider
         });
 
         // Product video
-        $loader = AliasLoader::getInstance();
         $loader->alias('productvideo', ProductVideoFacade::class);
 
         $this->app->singleton('productvideo', function () {
