@@ -312,8 +312,8 @@ class Helper extends Review
 
         $avgRatings = ceil($reviewHelper->getAverageRating($product));
 
-        $galleryImages = ProductImage::getGalleryImages($product);
-        $productImage = ProductImage::getProductBaseImage($product)['medium_image_url'];
+        $galleryImages = \ProductImage::getGalleryImages($product);
+        $productImage = \ProductImage::getProductBaseImage($product)['medium_image_url'];
 
         $largeProductImageName = "large-product-placeholder.png";
         $mediumProductImageName = "meduim-product-placeholder.png";
