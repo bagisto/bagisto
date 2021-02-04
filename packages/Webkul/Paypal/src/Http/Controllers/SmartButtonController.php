@@ -53,11 +53,11 @@ class SmartButtonController extends Controller
     }
 
     /**
-     * Success payment.
+     * Paypal order creation for approval of client.
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function details(OrdersCreateRequest $request)
+    public function createOrder(OrdersCreateRequest $request)
     {
         $request->prefer('return=representation');
         $request->body = $this->buildRequestBody();
@@ -66,46 +66,17 @@ class SmartButtonController extends Controller
     }
 
     /**
-     * Save order.
+     * Capturing order.
      *
      * @return \Illuminate\Http\Response
      */
-    public function saveOrder()
+    public function captureOrder()
     {
         $orderCreationData = request()->get('data');
         $request = new OrdersCaptureRequest($orderCreationData['orderID']);
         $request->prefer('return=representation');
         $this->smartButtonClient->execute($request);
-
-        if (Cart::hasError()) {
-            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
-        }
-
-        try {
-            Cart::collectTotals();
-
-            $this->validateOrder();
-
-            $order = $this->orderRepository->create(Cart::prepareDataForOrder());
-
-            $this->orderRepository->update(['status' => 'processing'], $order->id);
-
-            if ($order->canInvoice()) {
-                $this->invoiceRepository->create($this->prepareInvoiceData($order));
-            }
-
-            Cart::deActivateCart();
-
-            session()->flash('order', $order);
-
-            return response()->json([
-                'success' => true,
-            ]);
-        } catch (\Exception $e) {
-            session()->flash('error', trans('shop::app.common.error'));
-
-            throw $e;
-        }
+        return $this->saveOrder();
     }
 
     /**
@@ -187,8 +158,6 @@ class SmartButtonController extends Controller
         ];
 
         if ($cart->haveStockableItems() && $cart->shipping_address) {
-            $shippingAddressLines = $this->getAddressLines($cart->shipping_address->address1);
-
             $data['purchase_units'][0] = array_merge($data['purchase_units'][0], [
                 'shipping' => [
                     'address' => [
@@ -251,6 +220,44 @@ class SmartButtonController extends Controller
         }
 
         return $addressLines;
+    }
+
+    /**
+     * Saving order once captured and all formalities done.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    protected function saveOrder()
+    {
+        if (Cart::hasError()) {
+            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
+        }
+
+        try {
+            Cart::collectTotals();
+
+            $this->validateOrder();
+
+            $order = $this->orderRepository->create(Cart::prepareDataForOrder());
+
+            $this->orderRepository->update(['status' => 'processing'], $order->id);
+
+            if ($order->canInvoice()) {
+                $this->invoiceRepository->create($this->prepareInvoiceData($order));
+            }
+
+            Cart::deActivateCart();
+
+            session()->flash('order', $order);
+
+            return response()->json([
+                'success' => true,
+            ]);
+        } catch (\Exception $e) {
+            session()->flash('error', trans('shop::app.common.error'));
+
+            throw $e;
+        }
     }
 
     /**
