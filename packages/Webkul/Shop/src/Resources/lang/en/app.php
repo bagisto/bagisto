@@ -375,7 +375,8 @@ return [
                 'expired' => 'Expired',
                 'remaining-downloads' => 'Remaining Downloads',
                 'unlimited' => 'Unlimited',
-                'download-error' => 'Download link has been expired.'
+                'download-error' => 'Download link has been expired.',
+                'payment-error' => 'Payment has not been done for this download.'
             ],
 
             'review' => [

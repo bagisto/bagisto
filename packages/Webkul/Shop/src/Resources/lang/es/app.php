@@ -355,7 +355,8 @@ return [
                 'expired' => 'Caducado',
                 'remaining-downloads' => 'Descargas restantes',
                 'unlimited' => 'Ilimitado',
-                'download-error' => 'El enlace de descarga ha caducado.'
+                'download-error' => 'El enlace de descarga ha caducado.',
+                'payment-error' => 'Payment has not been done for this download.'
             ],
 
             'review' => [

@@ -373,7 +373,8 @@ return [
                 'expired' => 'منقضی شده',
                 'remaining-downloads' => 'بارگیری های باقی مانده',
                 'unlimited' => 'نامحدود',
-                'download-error' => 'لینک دانلود منقضی شده است'
+                'download-error' => 'لینک دانلود منقضی شده است',
+                'payment-error' => 'Payment has not been done for this download.'
             ],
 
             'review' => [
