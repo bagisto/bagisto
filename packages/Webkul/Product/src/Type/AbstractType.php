@@ -5,6 +5,7 @@ namespace Webkul\Product\Type;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Models\CartItem;
 use Illuminate\Support\Facades\Storage;
+use Webkul\Product\Facades\ProductImage;
 use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
@@ -837,7 +838,7 @@ abstract class AbstractType
      */
     public function getBaseImage($item)
     {
-        return app('Webkul\Product\ProductImage')->getProductBaseImage($item->product);
+        return ProductImage::getProductBaseImage($item->product);
     }
 
     /**
