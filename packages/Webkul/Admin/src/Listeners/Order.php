@@ -5,9 +5,6 @@ namespace Webkul\Admin\Listeners;
 use Webkul\Admin\Traits\Mails;
 use Webkul\Paypal\Payment\SmartButton;
 use PayPalCheckoutSdk\Orders\OrdersGetRequest;
-use PayPalCheckoutSdk\Orders\OrdersCaptureRequest;
-use PayPalCheckoutSdk\Orders\OrdersAuthorizeRequest;
-use PayPalCheckoutSdk\Payments\AuthorizationsCaptureRequest;
 
 class Order
 {
@@ -15,17 +12,29 @@ class Order
 
     public function refundOrder($data)
     {
-        $orderID = $data['order']->payment->additional['orderID'];
-        $payerID = $data['order']->payment->additional['payerID'];
-        // dd($orderID, $payerID, $data['order']->payment->additional);
+        $paymentMethod = $data['order']->payment->method;
 
-        $smartButton = new SmartButton();
-        $client = $smartButton->client();
+        if ($paymentMethod === 'paypal_smart_button') {
 
-        /* get order */
-        // $response = $client->execute(new OrdersGetRequest($orderID));
-        // dd($response);
+            try {
+                $orderID = $data['order']->payment->additional['orderID'];
 
-        // dd($smartButton->refundOrder($orderID, "{}"));
+                $smartButton = new SmartButton();
+                $client = $smartButton->client();
+
+                /* get order */
+                $orderDetails = $client->execute(new OrdersGetRequest($orderID));
+                $captureID = $orderDetails->result->purchase_units[0]->payments->captures[0]->id;
+
+                /* refunding order */
+                $response = $smartButton->refundOrder($captureID, "{}");
+            } catch (\Exception $e) {
+                /* reporting error */
+                report($e);
+
+                /* now aborting whole process */
+                abort(500);
+            }
+        }
     }
 }

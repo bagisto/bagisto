@@ -7,6 +7,7 @@ use Webkul\Paypal\Payment\SmartButton;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use PayPalCheckoutSdk\Orders\OrdersCreateRequest;
+use PayPalCheckoutSdk\Orders\OrdersCaptureRequest;
 
 class SmartButtonController extends Controller
 {
@@ -71,6 +72,11 @@ class SmartButtonController extends Controller
      */
     public function saveOrder()
     {
+        $orderCreationData = request()->get('data');
+        $request = new OrdersCaptureRequest($orderCreationData['orderID']);
+        $request->prefer('return=representation');
+        $this->smartButtonClient->execute($request);
+
         if (Cart::hasError()) {
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
         }
@@ -143,12 +149,7 @@ class SmartButtonController extends Controller
             ],
 
             'application_context' => [
-                'user_action'         => 'PAY_NOW',
                 'shipping_preference' => 'SET_PROVIDED_ADDRESS',
-
-                'payment_method'      => [
-                    'payee_preferred' => 'IMMEDIATE_PAYMENT_REQUIRED',
-                ]
             ],
 
             'purchase_units' => [
