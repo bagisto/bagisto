@@ -58,7 +58,11 @@ class SmartButtonController extends Controller
      */
     public function createOrder()
     {
-        return response()->json($this->smartButton->createOrder($this->buildRequestBody()));
+        try {
+            return response()->json($this->smartButton->createOrder($this->buildRequestBody()));
+        } catch (\Exception $e) {
+            throw $e;
+        }
     }
 
     /**
@@ -68,8 +72,12 @@ class SmartButtonController extends Controller
      */
     public function captureOrder()
     {
-        $this->smartButton->captureOrder(request()->input('orderData.orderID'));
-        return $this->saveOrder();
+        try {
+            $this->smartButton->captureOrder(request()->input('orderData.orderID'));
+            return $this->saveOrder();
+        } catch (\Exception $e) {
+            throw $e;
+        }
     }
 
     /**
