@@ -9,7 +9,6 @@ use Webkul\BookingProduct\Helpers\Booking as BookingHelper;
 use Webkul\BookingProduct\Repositories\BookingProductRepository;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Product\Datatypes\CartItemValidationResult;
-use Webkul\Product\Helpers\ProductImage;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductVideoRepository;
@@ -56,7 +55,6 @@ class Booking extends Virtual
      * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository $attributeValueRepository
      * @param  \Webkul\Product\Repositories\ProductInventoryRepository      $productInventoryRepository
      * @param  \Webkul\Product\Repositories\ProductImageRepository          $productImageRepository
-     * @param  \Webkul\Product\Helpers\ProductImage                          $productImageHelper
      * @param  \Webkul\BookingProduct\Repositories\BookingProductRepository  $bookingProductRepository
      * @param  \Webkul\BookingProduct\Helpers\BookingHelper                  $bookingHelper
      * @param \Webkul\Product\Repositories\ProductVideoRepository            $productVideoRepository
@@ -68,7 +66,6 @@ class Booking extends Virtual
         ProductAttributeValueRepository $attributeValueRepository,
         ProductInventoryRepository $productInventoryRepository,
         ProductImageRepository $productImageRepository,
-        ProductImage $productImageHelper,
         BookingProductRepository $bookingProductRepository,
         BookingHelper $bookingHelper,
         ProductVideoRepository $productVideoRepository
@@ -80,7 +77,6 @@ class Booking extends Virtual
             $attributeValueRepository,
             $productInventoryRepository,
             $productImageRepository,
-            $productImageHelper,
             $productVideoRepository
         );
 
