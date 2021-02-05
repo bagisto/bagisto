@@ -4,6 +4,7 @@ namespace Webkul\Velocity\Helpers;
 
 use Illuminate\Support\Facades\DB;
 use Webkul\Product\Helpers\Review;
+use Webkul\Product\Facades\ProductImage;
 use Webkul\Product\Models\Product as ProductModel;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductFlatRepository;
@@ -276,10 +277,9 @@ class Helper extends Review
     public function formatProduct($product, $list = false, $metaInformation = [])
     {
         $reviewHelper = app('Webkul\Product\Helpers\Review');
-        $productImageHelper = app('Webkul\Product\Helpers\ProductImage');
 
-        $galleryImages = $productImageHelper->getGalleryImages($product);
-        $productImage = $productImageHelper->getProductBaseImage($product, $galleryImages)['medium_image_url'];
+        $galleryImages = ProductImage::getGalleryImages($product);
+        $productImage = ProductImage::getProductBaseImage($product, $galleryImages)['medium_image_url'];
 
         $largeProductImageName = "large-product-placeholder.png";
         $mediumProductImageName = "meduim-product-placeholder.png";

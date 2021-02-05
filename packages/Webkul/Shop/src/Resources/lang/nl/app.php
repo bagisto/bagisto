@@ -378,7 +378,8 @@ return [
                 'expired' => 'Expired',
                 'remaining-downloads' => 'Resterende downloads',
                 'unlimited' => 'Onbeperkt',
-                'download-error' => 'Downloadlink is verlopen.'
+                'download-error' => 'Downloadlink is verlopen.',
+                'payment-error' => 'Payment has not been done for this download.'
             ],
 
             'review' => [

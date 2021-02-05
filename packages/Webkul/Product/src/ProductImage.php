@@ -1,13 +1,14 @@
 <?php
 
-namespace Webkul\Product\Helpers;
+namespace Webkul\Product;
 
 use Illuminate\Support\Facades\Storage;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Helpers\AbstractProduct;
 
 class ProductImage extends AbstractProduct
 {
-     /**
+    /**
      * ProductRepository instance
      *
      * @var \Webkul\Product\Repositories\ProductRepository

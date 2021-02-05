@@ -1,5 +1,3 @@
-@inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
-
 @extends('shop::layouts.master')
 
 @section('page_title')

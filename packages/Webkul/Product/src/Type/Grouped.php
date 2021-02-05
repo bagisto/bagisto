@@ -3,7 +3,6 @@
 namespace Webkul\Product\Type;
 
 use Webkul\Product\Models\ProductFlat;
-use Webkul\Product\Helpers\ProductImage;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
@@ -58,7 +57,6 @@ class Grouped extends AbstractType
      * @param  \Webkul\Product\Repositories\ProductInventoryRepository       $productInventoryRepository
      * @param  \Webkul\Product\Repositories\ProductImageRepository           $productImageRepository
      * @param  \Webkul\Product\Repositories\ProductGroupedProductRepository  $productGroupedProductRepository
-     * @param  \Webkul\Product\Helpers\ProductImage                          $productImageHelper
      * @param  \Webkul\Product\Repositories\ProductVideoRepository           $productVideoRepository
      * @return void
      */
@@ -69,7 +67,6 @@ class Grouped extends AbstractType
         ProductInventoryRepository $productInventoryRepository,
         ProductImageRepository $productImageRepository,
         ProductGroupedProductRepository $productGroupedProductRepository,
-        ProductImage $productImageHelper,
         ProductVideoRepository $productVideoRepository
     )
     {
@@ -79,7 +76,6 @@ class Grouped extends AbstractType
             $attributeValueRepository,
             $productInventoryRepository,
             $productImageRepository,
-            $productImageHelper,
             $productVideoRepository
         );
 

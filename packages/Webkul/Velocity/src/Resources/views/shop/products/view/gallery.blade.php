@@ -1,10 +1,8 @@
-@inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
-@inject ('productVideoHelper', 'Webkul\Product\Helpers\ProductVideo')
 @inject ('wishListHelper', 'Webkul\Customer\Helpers\Wishlist')
 
 @php
-    $images = $productImageHelper->getGalleryImages($product);
-    $videos = $productVideoHelper->getVideos($product);
+    $images = productimage()->getGalleryImages($product);
+    $videos = productvideo()->getVideos($product);
 
     $videoData = $imageData = [];
 

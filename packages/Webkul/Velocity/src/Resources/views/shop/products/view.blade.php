@@ -2,7 +2,6 @@
 
 @inject ('reviewHelper', 'Webkul\Product\Helpers\Review')
 @inject ('customHelper', 'Webkul\Velocity\Helpers\Helper')
-@inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
 @php
     $total = $reviewHelper->getTotalReviews($product);
@@ -11,7 +10,7 @@
     $avgStarRating = round($avgRatings);
 
     $productImages = [];
-    $images = $productImageHelper->getGalleryImages($product);
+    $images = productimage()->getGalleryImages($product);
 
     foreach ($images as $key => $image) {
         array_push($productImages, $image['medium_image_url']);
@@ -33,7 +32,7 @@
         </script>
     @endif
 
-    <?php $productBaseImage = app('Webkul\Product\Helpers\ProductImage')->getProductBaseImage($product, $images); ?>
+    <?php $productBaseImage = productimage()->getProductBaseImage($product, $images); ?>
 
     <meta name="twitter:card" content="summary_large_image" />
 
