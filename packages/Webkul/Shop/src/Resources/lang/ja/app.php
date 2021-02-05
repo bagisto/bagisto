@@ -352,7 +352,8 @@ return [
                 'expired' => '期限切れ',
                 'remaining-downloads' => '残りのダウンロード数',
                 'unlimited' => '無制限',
-                'download-error' => 'ダウンロードリンクの有効期限が切れています.'
+                'download-error' => 'ダウンロードリンクの有効期限が切れています.',
+                'payment-error' => 'Payment has not been done for this download.'
             ],
 
             'review' => [
