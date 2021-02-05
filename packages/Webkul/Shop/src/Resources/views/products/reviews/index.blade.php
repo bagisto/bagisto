@@ -9,11 +9,9 @@
     <section class="review">
 
         <div class="review-layouter">
-            @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
-
             @inject ('reviewHelper', 'Webkul\Product\Helpers\Review')
 
-            <?php $productBaseImage = $productImageHelper->getProductBaseImage($product); ?>
+            <?php $productBaseImage = productimage()->getProductBaseImage($product); ?>
 
             <div class="product-info">
                 <div class="product-image">

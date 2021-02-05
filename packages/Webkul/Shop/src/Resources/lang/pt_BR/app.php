@@ -366,7 +366,8 @@ return [
                 'expired' => 'Expirado',
                 'remaining-downloads' => 'Downloads restantes',
                 'unlimited' => 'Ilimitado',
-                'download-error' => 'O link para download expirou.'
+                'download-error' => 'O link para download expirou.',
+                'payment-error' => 'Payment has not been done for this download.'
             ],
 
             'review' => [

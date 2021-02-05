@@ -1,11 +1,12 @@
 <?php
 
-namespace Webkul\Product\Helpers;
+namespace Webkul\Product;
 
 use Illuminate\Support\Facades\Storage;
+use Webkul\Product\Helpers\AbstractProduct;
 
 class ProductVideo extends AbstractProduct
-{ 
+{
     /**
      * Retrieve collection of videos
      *

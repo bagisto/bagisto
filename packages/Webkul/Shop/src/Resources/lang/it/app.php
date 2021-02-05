@@ -372,7 +372,8 @@ return [
                 'expired' => 'Scaduto',
                 'remaining-downloads' => 'Download rimasti',
                 'unlimited' => 'Illimitati',
-                'download-error' => 'Il link per il Download è scaduto.'
+                'download-error' => 'Il link per il Download è scaduto.',
+                'payment-error' => 'Payment has not been done for this download.'
             ],
 
             'review' => [

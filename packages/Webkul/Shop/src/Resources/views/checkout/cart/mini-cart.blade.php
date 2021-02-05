@@ -1,5 +1,3 @@
-@inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
-
 <?php $cart = cart()->getCart(); ?>
 
 @if ($cart)
