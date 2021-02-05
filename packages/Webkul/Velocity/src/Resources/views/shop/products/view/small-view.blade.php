@@ -1,7 +1,5 @@
-@inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
-
 @php
-    $productBaseImage = $productImageHelper->getProductBaseImage($product);
+    $productBaseImage = productimage()->getProductBaseImage($product);
 @endphp
 
 <div class="col-lg-3 col-md-12">
