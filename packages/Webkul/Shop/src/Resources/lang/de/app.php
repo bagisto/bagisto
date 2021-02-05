@@ -371,7 +371,8 @@ return [
                 'expired' => 'Abgelaufen',
                 'remaining-downloads' => 'Verbleibende Downloads',
                 'unlimited' => 'Unbegrenzt',
-                'download-error' => 'Der Download-Link ist abgelaufen.'
+                'download-error' => 'Der Download-Link ist abgelaufen.',
+                'payment-error' => 'Payment has not been done for this download.'
             ],
 
             'review' => [

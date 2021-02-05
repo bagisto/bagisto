@@ -6,8 +6,6 @@
 
 @section('content-wrapper')
     <div class="account-content">
-        @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
-
         @include('shop::customers.account.partials.sidemenu')
 
         @inject ('reviewHelper', 'Webkul\Product\Helpers\Review')

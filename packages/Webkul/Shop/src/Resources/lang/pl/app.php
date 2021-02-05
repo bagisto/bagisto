@@ -372,7 +372,8 @@ return [
                 'expired' => 'wygasł',
                 'remaining-downloads' => 'Pozostałe pliki do pobrania',
                 'unlimited' => 'Bez limitu',
-                'download-error' => 'Link do pobrania wygasł.'
+                'download-error' => 'Link do pobrania wygasł.',
+                'payment-error' => 'Payment has not been done for this download.'
             ],
 
             'review' => [

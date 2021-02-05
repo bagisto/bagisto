@@ -8,6 +8,11 @@ use Webkul\Product\Models\ProductProxy;
 use Webkul\Product\Observers\ProductObserver;
 use Webkul\Product\Console\Commands\PriceUpdate;
 use Webkul\Product\Console\Commands\GenerateProducts;
+use Illuminate\Foundation\AliasLoader;
+use Webkul\Product\Facades\ProductImage as ProductImageFacade;
+use Webkul\Product\Facades\ProductVideo as ProductVideoFacade;
+use Webkul\Product\ProductImage;
+use Webkul\Product\ProductVideo;
 
 class ProductServiceProvider extends ServiceProvider
 {
@@ -18,6 +23,8 @@ class ProductServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        include __DIR__ . '/../Http/helpers.php';
+
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
         $this->app->make(EloquentFactory::class)->load(__DIR__ . '/../Database/Factories');
@@ -41,6 +48,8 @@ class ProductServiceProvider extends ServiceProvider
         $this->registerConfig();
 
         $this->registerCommands();
+
+        $this->registerFacades();
 
         $this->registerEloquentFactoriesFrom(__DIR__ . '/../Database/Factories');
     }
@@ -78,5 +87,29 @@ class ProductServiceProvider extends ServiceProvider
     protected function registerEloquentFactoriesFrom($path): void
     {
         $this->app->make(EloquentFactory::class)->load($path);
+    }
+
+
+    /**
+     * Register Bouncer as a singleton.
+     *
+     * @return void
+     */
+    protected function registerFacades()
+    {
+        // Product image
+        $loader = AliasLoader::getInstance();
+        $loader->alias('productimage', ProductImageFacade::class);
+
+        $this->app->singleton('productimage', function () {
+            return app()->make(ProductImage::class);
+        });
+
+        // Product video
+        $loader->alias('productvideo', ProductVideoFacade::class);
+
+        $this->app->singleton('productvideo', function () {
+            return app()->make(ProductVideo::class);
+        });
     }
 }
