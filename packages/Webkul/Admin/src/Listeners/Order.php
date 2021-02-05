@@ -4,7 +4,6 @@ namespace Webkul\Admin\Listeners;
 
 use Webkul\Admin\Traits\Mails;
 use Webkul\Paypal\Payment\SmartButton;
-use PayPalCheckoutSdk\Orders\OrdersGetRequest;
 
 class Order
 {
@@ -15,33 +14,23 @@ class Order
         $order = $refund->order;
 
         if ($order->payment->method === 'paypal_smart_button') {
+            /* getting smart button instance */
+            $smartButton = new SmartButton;
 
-            try {
-                $paypalOrderID = $order->payment->additional['orderID'];
+            /* getting paypal oder id */
+            $paypalOrderID = $order->payment->additional['orderID'];
 
-                $smartButton = new SmartButton();
-                $client = $smartButton->client();
+            /* getting capture id by paypal order id */
+            $captureID = $smartButton->getCaptureId($paypalOrderID);
 
-                /* get order */
-                $paypalOrderDetails = $client->execute(new OrdersGetRequest($paypalOrderID));
-                $captureID = $paypalOrderDetails->result->purchase_units[0]->payments->captures[0]->id;
-
-                /* refunding order */
-                $smartButton->refundOrder($captureID, [
-                    'amount' =>
-                      [
-                        'value' => $refund->grand_total,
-                        'currency_code' => $refund->order_currency_code
-                      ]
-                ]);
-            } catch (\Exception $e) {
-                /* reporting error */
-                report($e);
-
-                /* now aborting whole process */
-                abort(500);
-            }
-
+            /* now refunding order on the basis of capture id and refund data */
+            $smartButton->refundOrder($captureID, [
+                'amount' =>
+                  [
+                    'value' => $refund->grand_total,
+                    'currency_code' => $refund->order_currency_code
+                  ]
+            ]);
         }
     }
 }

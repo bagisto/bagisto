@@ -6,27 +6,25 @@ use Webkul\Checkout\Facades\Cart;
 use Webkul\Paypal\Payment\SmartButton;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
-use PayPalCheckoutSdk\Orders\OrdersCreateRequest;
-use PayPalCheckoutSdk\Orders\OrdersCaptureRequest;
 
 class SmartButtonController extends Controller
 {
     /**
-     * SmartButton object
+     * SmartButton $smartButton
      *
      * @var \Webkul\Paypal\Payment\SmartButton
      */
-    protected $smartButtonClient;
+    protected $smartButton;
 
     /**
-     * OrderRepository object
+     * OrderRepository $orderRepository
      *
      * @var \Webkul\Sales\Repositories\OrderRepository
      */
     protected $orderRepository;
 
     /**
-     * InvoiceRepository object
+     * InvoiceRepository $invoiceRepository
      *
      * @var \Webkul\Sales\Repositories\InvoiceRepository
      */
@@ -35,21 +33,22 @@ class SmartButtonController extends Controller
     /**
      * Create a new controller instance.
      *
+     * @param  \Webkul\Paypal\Payment\SmartButton  $smartButton
      * @param  \Webkul\Attribute\Repositories\OrderRepository  $orderRepository
      * @param  \Webkul\Sales\Repositories\InvoiceRepository  $invoiceRepository
      * @return void
      */
     public function __construct(
-        SmartButton $smartButtonClient,
+        SmartButton $smartButton,
         OrderRepository $orderRepository,
         InvoiceRepository $invoiceRepository
     )
     {
+        $this->smartButton = $smartButton;
+
         $this->orderRepository = $orderRepository;
 
         $this->invoiceRepository = $invoiceRepository;
-
-        $this->smartButtonClient = $smartButtonClient->client();
     }
 
     /**
@@ -57,24 +56,19 @@ class SmartButtonController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function createOrder(OrdersCreateRequest $request)
+    public function createOrder()
     {
-        $request->prefer('return=representation');
-        $request->body = $this->buildRequestBody();
-        $response = $this->smartButtonClient->execute($request);
-        return response()->json($response);
+        return response()->json($this->smartButton->createOrder($this->buildRequestBody()));
     }
 
     /**
-     * Capturing order.
+     * Capturing paypal order after approval.
      *
      * @return \Illuminate\Http\Response
      */
     public function captureOrder()
     {
-        $request = new OrdersCaptureRequest(request()->input('orderData.orderID'));
-        $request->prefer('return=representation');
-        $this->smartButtonClient->execute($request);
+        $this->smartButton->captureOrder(request()->input('orderData.orderID'));
         return $this->saveOrder();
     }
 
