@@ -24,7 +24,7 @@ class EventServiceProvider extends ServiceProvider
 
         Event::listen('sales.order.cancel.after', 'Webkul\Admin\Listeners\Order@sendCancelOrderMail');
 
-        Event::listen('sales.refund.save.before', 'Webkul\Admin\Listeners\Order@refundOrder');
+        Event::listen('sales.refund.save.after', 'Webkul\Admin\Listeners\Order@refundOrder');
 
         Event::listen('sales.refund.save.after', 'Webkul\Admin\Listeners\Order@sendNewRefundMail');
 

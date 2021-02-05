@@ -185,7 +185,7 @@ trait Mails
     }
 
     /**
-     * Prepare Mail.
+     * Prepare mail.
      *
      * @return void
      */

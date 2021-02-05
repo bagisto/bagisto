@@ -85,15 +85,9 @@ class RefundRepository extends Repository
         DB::beginTransaction();
 
         try {
-            $order = $this->orderRepository->find($data['order_id']);
+            Event::dispatch('sales.refund.save.before', $data);
 
-            /* listener will check for first element */
-            Event::dispatch('sales.refund.save.before', [
-                [
-                    'order' => $order,
-                    'additional' => $data
-                ]
-            ]);
+            $order = $this->orderRepository->find($data['order_id']);
 
             $totalQty = array_sum($data['refund']['items']);
 

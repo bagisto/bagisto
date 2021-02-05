@@ -10,24 +10,30 @@ class Order
 {
     use Mails;
 
-    public function refundOrder($data)
+    public function refundOrder($refund)
     {
-        $paymentMethod = $data['order']->payment->method;
+        $order = $refund->order;
 
-        if ($paymentMethod === 'paypal_smart_button') {
+        if ($order->payment->method === 'paypal_smart_button') {
 
             try {
-                $orderID = $data['order']->payment->additional['orderID'];
+                $paypalOrderID = $order->payment->additional['orderID'];
 
                 $smartButton = new SmartButton();
                 $client = $smartButton->client();
 
                 /* get order */
-                $orderDetails = $client->execute(new OrdersGetRequest($orderID));
-                $captureID = $orderDetails->result->purchase_units[0]->payments->captures[0]->id;
+                $paypalOrderDetails = $client->execute(new OrdersGetRequest($paypalOrderID));
+                $captureID = $paypalOrderDetails->result->purchase_units[0]->payments->captures[0]->id;
 
                 /* refunding order */
-                $response = $smartButton->refundOrder($captureID, "{}");
+                $smartButton->refundOrder($captureID, [
+                    'amount' =>
+                      [
+                        'value' => $refund->grand_total,
+                        'currency_code' => $refund->order_currency_code
+                      ]
+                ]);
             } catch (\Exception $e) {
                 /* reporting error */
                 report($e);
@@ -35,6 +41,7 @@ class Order
                 /* now aborting whole process */
                 abort(500);
             }
+
         }
     }
 }
