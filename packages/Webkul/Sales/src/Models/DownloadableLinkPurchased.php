@@ -24,6 +24,7 @@ class DownloadableLinkPurchased extends Model implements DownloadableLinkPurchas
         'customer_id',
         'order_id',
         'order_item_id',
+        'download_canceled',
     ];
 
     /**

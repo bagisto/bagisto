@@ -374,7 +374,8 @@ return [
                 'expired' => 'منتهية الصلاحية',
                 'remaining-downloads' => 'التنزيلات المتبقية',
                 'unlimited' => 'غير محدود',
-                'download-error' => 'انتهت صلاحية رابط التنزيل.'
+                'download-error' => 'انتهت صلاحية رابط التنزيل.',
+                'payment-error' => 'Payment has not been done for this download.'
             ],
 
             'review' => [
@@ -442,7 +443,8 @@ return [
         'available-for-order' => 'متوفر لطلب الشراء',
         'settings' => 'Settings',
         'compare_options' => 'قارن الخيارات',
-        'wishlist-options' => 'Wishlist Options'
+        'wishlist-options' => 'Wishlist Options',
+        'offers' => 'Buy :qty for :price each and save :discount%',
     ],
 
     // 'reviews' => [

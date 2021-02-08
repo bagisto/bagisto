@@ -107,7 +107,7 @@ class CategoryDataGrid extends DataGrid
             'type'   => 'delete',
             'label'  => trans('admin::app.datagrid.delete'),
             'action' => route('admin.catalog.categories.massdelete'),
-            'method' => 'DELETE',
+            'method' => 'POST',
         ]);
     }
 }

@@ -355,7 +355,8 @@ return [
                 'expired' => 'Caducado',
                 'remaining-downloads' => 'Descargas restantes',
                 'unlimited' => 'Ilimitado',
-                'download-error' => 'El enlace de descarga ha caducado.'
+                'download-error' => 'El enlace de descarga ha caducado.',
+                'payment-error' => 'Payment has not been done for this download.'
             ],
 
             'review' => [
@@ -412,7 +413,8 @@ return [
         'available-for-order' => 'Disponible para ordenar',
         'settings' => 'Settings',
         'compare_options' => 'Compare Options',
-        'wishlist-options' => 'Wishlist Options'
+        'wishlist-options' => 'Wishlist Options',
+        'offers' => 'Buy :qty for :price each and save :discount%',
     ],
 
     // 'reviews' => [

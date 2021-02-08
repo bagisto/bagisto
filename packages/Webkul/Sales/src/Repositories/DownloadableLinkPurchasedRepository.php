@@ -84,7 +84,7 @@ class DownloadableLinkPurchasedRepository extends Repository
         if (stristr($orderItem->type,'downloadable') !== false && isset($orderItem->additional['links'])) {
             return true;
         }
-        
+
         return false;
     }
 
@@ -98,9 +98,29 @@ class DownloadableLinkPurchasedRepository extends Repository
         $purchasedLinks = $this->findByField('order_item_id', $orderItem->id);
 
         foreach ($purchasedLinks as $purchasedLink) {
-            $this->update([
-                'status' => $status,
-            ], $purchasedLink->id);
+            if ($status == 'expired') {
+                if (count($purchasedLink->order_item->invoice_items) > 0) {
+                    $totalInvoiceQty = 0;
+
+                    foreach ($purchasedLink->order_item->invoice_items as $invoice_item) {
+                        $totalInvoiceQty = $totalInvoiceQty + $invoice_item->qty;
+                    }
+
+                    $this->update([
+                        'status' => $purchasedLink->download_used == $totalInvoiceQty ? $status : $purchasedLink->status,
+                        'download_canceled' => $purchasedLink->download_bought - $totalInvoiceQty,
+                    ], $purchasedLink->id);
+                } else {
+                    $this->update([
+                        'status' => $status,
+                        'download_canceled' => $purchasedLink->download_bought,
+                    ], $purchasedLink->id);
+                }
+            } else {
+                $this->update([
+                    'status' => $status,
+                ], $purchasedLink->id);
+            }
         }
     }
 }

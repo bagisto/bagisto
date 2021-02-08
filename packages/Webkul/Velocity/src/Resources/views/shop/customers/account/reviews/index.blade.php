@@ -1,5 +1,3 @@
-@inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
-
 @extends('shop::customers.account.index')
 
 @section('page_title')
@@ -33,7 +31,7 @@
                 <div class="row col-12 fs16">
                     <div class="col-12 row">
                         @php
-                            $image = $productImageHelper->getProductBaseImage($review->product);
+                            $image = productimage()->getProductBaseImage($review->product);
                         @endphp
 
                         <a

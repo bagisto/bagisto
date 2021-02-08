@@ -2,7 +2,6 @@
 
 @inject ('reviewHelper', 'Webkul\Product\Helpers\Review')
 @inject ('customHelper', 'Webkul\Velocity\Helpers\Helper')
-@inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
 @php
     $total = $reviewHelper->getTotalReviews($product);
@@ -11,7 +10,7 @@
     $avgStarRating = round($avgRatings);
 
     $productImages = [];
-    $images = $productImageHelper->getGalleryImages($product);
+    $images = productimage()->getGalleryImages($product);
 
     foreach ($images as $key => $image) {
         array_push($productImages, $image['medium_image_url']);
@@ -33,7 +32,7 @@
         </script>
     @endif
 
-    <?php $productBaseImage = app('Webkul\Product\Helpers\ProductImage')->getProductBaseImage($product); ?>
+    <?php $productBaseImage = productimage()->getProductBaseImage($product); ?>
 
     <meta name="twitter:card" content="summary_large_image" />
 
@@ -122,6 +121,14 @@
                                         <div class="col-12 price">
                                             @include ('shop::products.price', ['product' => $product])
                                         </div>
+
+                                        @if (count($product->getTypeInstance()->getCustomerGroupPricingOffers()) > 0)
+                                            <div class="col-12">
+                                                @foreach ($product->getTypeInstance()->getCustomerGroupPricingOffers() as $offers)
+                                                    {{ $offers }} </br>
+                                                @endforeach
+                                            </div>
+                                        @endif
 
                                         <div class="product-actions">
                                             @if (core()->getConfigData('catalog.products.storefront.buy_now_button_display'))

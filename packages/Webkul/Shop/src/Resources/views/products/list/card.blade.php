@@ -2,9 +2,7 @@
 
 <div class="product-card">
 
-    @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
-
-    <?php $productBaseImage = $productImageHelper->getProductBaseImage($product); ?>
+    <?php $productBaseImage = productimage()->getProductBaseImage($product); ?>
 
     @if ($product->new)
         <div class="sticker new">

@@ -7,7 +7,6 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
 use Webkul\Velocity\Helpers\Helper;
-use Webkul\Product\Helpers\ProductImage;
 use Webkul\Product\Repositories\SearchRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Customer\Repositories\WishlistRepository;
@@ -25,13 +24,6 @@ class Controller extends BaseController
      * @var array
      */
     protected $_config;
-
-    /**
-     * ProductImage object
-     *
-     * @var \Webkul\Product\Helpers\ProductImage
-     */
-    protected $productImageHelper;
 
     /**
      * SearchRepository object
@@ -87,18 +79,16 @@ class Controller extends BaseController
      * Create a new controller instance.
      *
      * @param  \Webkul\Velocity\Helpers\Helper                                         $velocityHelper
-     * @param  \Webkul\Product\Helpers\ProductImage                                    $productImageHelper
      * @param  \Webkul\Product\Repositories\SearchRepository                           $searchRepository
      * @param  \Webkul\Product\Repositories\ProductRepository                          $productRepository
      * @param  \Webkul\Category\Repositories\CategoryRepository                        $categoryRepository
      * @param  \Webkul\Velocity\Repositories\Product\ProductRepository                 $velocityProductRepository
      * @param  \Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository  $compareProductsRepository
-     *  
+     *
      * @return void
      */
     public function __construct(
         Helper $velocityHelper,
-        ProductImage $productImageHelper,
         SearchRepository $searchRepository,
         ProductRepository $productRepository,
         WishlistRepository $wishlistRepository,
@@ -114,14 +104,12 @@ class Controller extends BaseController
 
         $this->productRepository = $productRepository;
 
-        $this->productImageHelper = $productImageHelper;
-
         $this->categoryRepository = $categoryRepository;
 
         $this->wishlistRepository = $wishlistRepository;
 
         $this->velocityProductRepository = $velocityProductRepository;
-        
+
         $this->compareProductsRepository = $compareProductsRepository;
     }
 }

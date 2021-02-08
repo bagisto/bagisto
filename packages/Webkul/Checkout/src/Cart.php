@@ -20,7 +20,6 @@ use Webkul\Customer\Repositories\CustomerAddressRepository;
 
 class Cart
 {
-
     /**
      * CartRepository instance
      *
@@ -557,6 +556,14 @@ class Cart
 
         $cart->grand_total = $cart->sub_total + $cart->tax_total - $cart->discount_amount;
         $cart->base_grand_total = $cart->base_sub_total + $cart->base_tax_total - $cart->base_discount_amount;
+
+        if ($shipping = $cart->selected_shipping_rate) {
+            $cart->grand_total = (float) $cart->grand_total + $shipping->price - $shipping->discount_amount;
+            $cart->base_grand_total = (float) $cart->base_grand_total + $shipping->base_price - $shipping->base_discount_amount;
+
+            $cart->discount_amount += $shipping->discount_amount;
+            $cart->base_discount_amount += $shipping->base_discount_amount;
+        }
 
         $cart = $this->finalizeCartTotals($cart);
 
@@ -1280,6 +1287,25 @@ class Cart
                 }
             }
         }
+    }
+
+    /**
+     * Check whether cart has product.
+     *
+     * @param  \Webkul\Product\Models\Product $product
+     * @return bool
+     */
+    public function hasProduct($product): bool
+    {
+        $cart = \Cart::getCart();
+
+        if (! $cart) {
+            return false;
+        }
+
+        $count = $cart->all_items()->where('product_id', $product->id)->count();
+
+        return $count > 0 ? true : false;
     }
 
     /**

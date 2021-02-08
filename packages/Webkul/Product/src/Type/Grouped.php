@@ -9,7 +9,6 @@ use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductVideoRepository;
 use Webkul\Product\Repositories\ProductGroupedProductRepository;
-use Webkul\Product\Helpers\ProductImage;
 use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Models\ProductFlat;
 
@@ -59,7 +58,6 @@ class Grouped extends AbstractType
      * @param  \Webkul\Product\Repositories\ProductInventoryRepository       $productInventoryRepository
      * @param  \Webkul\Product\Repositories\ProductImageRepository           $productImageRepository
      * @param  \Webkul\Product\Repositories\ProductGroupedProductRepository  $productGroupedProductRepository
-     * @param  \Webkul\Product\Helpers\ProductImage                          $productImageHelper
      * @param  \Webkul\Product\Repositories\ProductVideoRepository           $productVideoRepository
      * @return void
      */
@@ -70,7 +68,6 @@ class Grouped extends AbstractType
         ProductInventoryRepository $productInventoryRepository,
         ProductImageRepository $productImageRepository,
         ProductGroupedProductRepository $productGroupedProductRepository,
-        ProductImage $productImageHelper,
         ProductVideoRepository $productVideoRepository
     )
     {
@@ -80,7 +77,6 @@ class Grouped extends AbstractType
             $attributeValueRepository,
             $productInventoryRepository,
             $productImageRepository,
-            $productImageHelper,
             $productVideoRepository
         );
 
@@ -96,8 +92,9 @@ class Grouped extends AbstractType
     public function update(array $data, $id, $attribute = "id")
     {
         $product = parent::update($data, $id, $attribute);
+        $route = request()->route() ? request()->route()->getName() : '';
 
-        if (request()->route()->getName() != 'admin.catalog.products.massupdate') {
+        if ($route != 'admin.catalog.products.massupdate') {
             $this->productGroupedProductRepository->saveGroupedProducts($data, $product);
         }
 

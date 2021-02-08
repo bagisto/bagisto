@@ -1,11 +1,10 @@
 @if (Webkul\Product\Helpers\ProductType::hasVariants($product->type))
 
     @inject ('configurableOptionHelper', 'Webkul\Product\Helpers\ConfigurableOption')
-    @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
     @php
         $config = $configurableOptionHelper->getConfigurationConfig($product);
-        $galleryImages = $productImageHelper->getGalleryImages($product);
+        $galleryImages = productimage()->getGalleryImages($product);
     @endphp
 
     {!! view_render_event('bagisto.shop.products.view.configurable-options.before', ['product' => $product]) !!}
@@ -290,11 +289,16 @@
 
                             var priceLabelElement = document.querySelector('.price-label');
                             var priceElement = document.querySelector('.final-price');
+                            var regularPriceElement = document.querySelector('.regular-price');
 
                             if (this.childAttributes.length == selectedOptionCount) {
                                 priceLabelElement.style.display = 'none';
 
                                 priceElement.innerHTML = this.config.variant_prices[this.simpleProduct].final_price.formated_price;
+
+                                if (regularPriceElement) {
+                                    regularPriceElement.innerHTML = this.config.variant_prices[this.simpleProduct].regular_price.formated_price;
+                                }
 
                                 eventBus.$emit('configurable-variant-selected-event', this.simpleProduct)
                             } else {

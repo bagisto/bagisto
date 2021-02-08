@@ -76,6 +76,14 @@
 
                     {!! view_render_event('bagisto.shop.customers.account.profile.edit.email.after') !!}
 
+                    <div class="control-group" :class="[errors.has('phone') ? 'has-error' : '']">
+                        <label for="phone">{{ __('shop::app.customer.account.profile.phone') }}</label>
+                        <input type="text" class="control" name="phone" value="{{ old('phone') ?? $customer->phone }}" data-vv-as="&quot;{{ __('shop::app.customer.account.profile.phone') }}&quot;">
+                        <span class="control-error" v-if="errors.has('phone')">@{{ errors.first('phone') }}</span>
+                    </div>
+
+                    {!! view_render_event('bagisto.shop.customers.account.profile.edit.phone.after') !!}
+
                     <div class="control-group" :class="[errors.has('oldpassword') ? 'has-error' : '']">
                         <label for="password">{{ __('shop::app.customer.account.profile.opassword') }}</label>
                         <input type="password" class="control" name="oldpassword" data-vv-as="&quot;{{ __('shop::app.customer.account.profile.opassword') }}&quot;" v-validate="'min:6'">
@@ -101,7 +109,7 @@
                     </div>
 
                     <div class="control-group">
-                        <input type="checkbox" id="checkbox2" name="subscribed_to_news_letter" value="{{ $customer->subscribed_to_news_letter }}" {{ $customer->subscribed_to_news_letter ? 'checked' : ''}}>
+                        <input type="checkbox" id="checkbox2" name="subscribed_to_news_letter"@if (isset($customer->subscription)) value="{{ $customer->subscription->is_subscribed }}" {{ $customer->subscription->is_subscribed ? 'checked' : ''}} @endif>
                         <span>{{ __('shop::app.customer.signup-form.subscribe-to-newsletter') }}</span>
                     </div>
 
