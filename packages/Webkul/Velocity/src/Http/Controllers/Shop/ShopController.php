@@ -3,6 +3,7 @@
 namespace Webkul\Velocity\Http\Controllers\Shop;
 
 use Illuminate\Http\Request;
+use Webkul\Product\Facades\ProductImage;
 use Webkul\Velocity\Http\Shop\Controllers;
 use Webkul\Checkout\Contracts\Cart as CartModel;
 use Cart;
@@ -28,7 +29,7 @@ class ShopController extends Controller
         if ($product) {
             $productReviewHelper = app('Webkul\Product\Helpers\Review');
 
-            $galleryImages = $this->productImageHelper->getProductBaseImage($product);
+            $galleryImages = ProductImage::getProductBaseImage($product);
 
             $response = [
                 'status'  => true,

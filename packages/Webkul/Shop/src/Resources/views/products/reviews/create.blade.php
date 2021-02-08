@@ -10,9 +10,8 @@
 
         <div class="review-layouter mb-20">
             <div class="product-info">
-                @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
-                <?php $productBaseImage = $productImageHelper->getProductBaseImage($product); ?>
+                <?php $productBaseImage = productimage()->getProductBaseImage($product); ?>
 
                 <div class="product-image">
                     <a href="{{ route('shop.productOrCategory.index', $product->url_key) }}" title="{{ $product->name }}">

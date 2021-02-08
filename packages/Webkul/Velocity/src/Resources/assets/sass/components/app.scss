@@ -685,8 +685,8 @@
 
         .product-quantity {
             .quantity {
-                float: left;
-
+                display: inline-flex;
+                
                 label {
                     display: none !important;
                 }
