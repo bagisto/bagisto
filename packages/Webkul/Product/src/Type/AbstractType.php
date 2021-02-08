@@ -980,4 +980,20 @@ abstract class AbstractType
 
         return $offerLines;
     }
+
+    /**
+     * Check in loaded saleable.
+     *
+     * @return object
+     */
+    public function checkInLoadedSaleableChecks($product, $callback)
+    {
+        static $loadedSaleableChecks = [];
+
+        if (array_key_exists($product->id, $loadedSaleableChecks)) {
+            return $loadedSaleableChecks[$product->id];
+        }
+
+        return $loadedSaleableChecks[$product->id] = $callback($product);
+    }
 }
