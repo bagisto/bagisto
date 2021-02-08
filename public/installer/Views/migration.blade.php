@@ -91,13 +91,13 @@
                             <p class="composer" id="composer-seed">Populating the database tables</p>
                         </div>
                     </div>
-                    
+
                     <div class="clearfix">&nbsp;</div>
-                    
+
                     <form method="POST" id="migration-form">
                         <div style="text-align: center;">
                             <button class="btn btn-primary" id="migrate-seed">Start installation</button>
-                            <button class="btn btn-primary" id="continue">Continue</button>
+                            <button type="button" class="btn btn-primary" id="continue">Continue</button>
                         </div>
 
                         <div style="cursor: pointer; margin-top:10px">
@@ -193,6 +193,8 @@
                                         }
 
                                         if ((data['key_results'] == 0) && (data['seeder_results'] == 0) && (data['publish_results'] == 0)) {
+                                            console.log('here');
+                                            event.preventDefault();
                                             $('#continue').show();
                                             $('#migrate-seed').hide();
                                             $('#loader').hide();
