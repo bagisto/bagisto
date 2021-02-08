@@ -409,6 +409,7 @@ input {
     }
 
     .product-card {
+        height: 480px;
         position: relative;
         padding: 15px;
 
@@ -448,10 +449,8 @@ input {
         }
 
         .cart-wish-wrap {
-            display: inline-flex;
-            justify-content: flex-start;
-            align-items: center;
-            height: 40px;
+            position: absolute;
+            bottom: 5px;
 
             .addtocart {
                 margin-right: 10px;
