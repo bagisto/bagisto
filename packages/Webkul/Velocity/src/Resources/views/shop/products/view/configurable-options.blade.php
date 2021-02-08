@@ -318,6 +318,10 @@
                             });
 
                             if (this.simpleProduct) {
+                                this.config.variant_images[this.simpleProduct].forEach(function(video) {
+                                    galleryImages.unshift(video)
+                                });
+
                                 this.config.variant_images[this.simpleProduct].forEach(function(image) {
                                     galleryImages.unshift(image)
                                 });
