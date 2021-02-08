@@ -468,6 +468,28 @@ input {
             }
         }
 
+        .default-wrap {
+            display: inline-flex;
+            justify-content: flex-start;
+            align-items: center;
+            height: 40px;
+
+            .addtocart {
+                margin-right: 10px;
+                text-transform: uppercase;
+                text-align: left;
+                box-shadow: 1px 1px 0px $shadow-color;
+            }
+
+            .add-to-wishlist {
+                margin-top: 5px;
+                background: transparent;
+                border: 0;
+                cursor: pointer;
+                padding: 0;
+            }
+        }
+
         .sticker {
             border-bottom-right-radius: 15px;
             position: absolute;
