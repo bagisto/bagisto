@@ -450,7 +450,11 @@ input {
 
         .cart-wish-wrap {
             position: absolute;
+            display: inline-flex;
+            justify-content: flex-start;
+            align-items: center;
             bottom: 5px;
+            height: 40px;
 
             .addtocart {
                 margin-right: 10px;
@@ -4745,10 +4749,14 @@ td {
 .cart-wish-wrap {
     display: flex;
 }
+.default-wrap {
+    display: flex;
+}
 .white-cross-sm-icon {
     width: 24px;
     height:24px;
 }
 .add-to-wishlist {
+    margin-top: auto;
     margin-left: 15px;
 }
