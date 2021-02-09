@@ -45,11 +45,11 @@ class ProductFlatRepository extends Repository
         $productFlatIds   = $qb->pluck('id')->toArray();
         $productIds       = $qb->pluck('product_flat.product_id')->toArray();
 
-        $childProductsIds = $this->model->distinct()
+        $childProductIds = $this->model->distinct()
                             ->whereIn('parent_id', $productFlatIds)
                             ->pluck('product_id')->toArray();
 
-        $productIds = array_merge($productIds, $childProductsIds);
+        $productIds = array_merge($productIds, $childProductIds);
 
         $attributeValues = $this->model
                 ->distinct()
