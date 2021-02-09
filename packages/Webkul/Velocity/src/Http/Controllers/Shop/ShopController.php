@@ -59,6 +59,10 @@ class ShopController extends Controller
     {
         $slug = request()->get('category-slug');
 
+        if (! $slug) {
+            abort(404);
+        }
+        
         switch ($slug) {
             case 'new-products':
             case 'featured-products':
