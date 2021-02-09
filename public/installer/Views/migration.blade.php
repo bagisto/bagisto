@@ -193,8 +193,6 @@
                                         }
 
                                         if ((data['key_results'] == 0) && (data['seeder_results'] == 0) && (data['publish_results'] == 0)) {
-                                            console.log('here');
-                                            event.preventDefault();
                                             $('#continue').show();
                                             $('#migrate-seed').hide();
                                             $('#loader').hide();
