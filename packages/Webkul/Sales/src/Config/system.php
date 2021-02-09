@@ -52,7 +52,7 @@ return [
                 'name'          => 'minimum_order_amount',
                 'title'         => 'admin::app.admin.system.minimum-order-amount',
                 'type'          => 'text',
-                'validation'    => 'numeric',
+                'validation'    => 'decimal',
                 'channel_based' => true,
                 'locale_based'  => true,
             ],

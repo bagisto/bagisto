@@ -104,12 +104,14 @@
                                             </a>
                                         </li>
 
-                                        <li>
-                                            <a href="{{ route('customer.wishlist.index') }}" class="unset">
-                                                <i class="icon wishlist text-down-3"></i>
-                                                <span>{{ __('shop::app.header.wishlist') }}</span>
-                                            </a>
-                                        </li>
+                                        @if (core()->getConfigData('general.content.shop.wishlist_option'))
+                                            <li>
+                                                <a href="{{ route('customer.wishlist.index') }}" class="unset">
+                                                    <i class="icon wishlist text-down-3"></i>
+                                                    <span>{{ __('shop::app.header.wishlist') }}</span>
+                                                </a>
+                                            </li>
+                                        @endif
 
                                         <li>
                                             <a href="{{ route('customer.orders.index') }}" class="unset">
