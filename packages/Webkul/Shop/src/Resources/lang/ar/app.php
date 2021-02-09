@@ -374,7 +374,8 @@ return [
                 'expired' => 'منتهية الصلاحية',
                 'remaining-downloads' => 'التنزيلات المتبقية',
                 'unlimited' => 'غير محدود',
-                'download-error' => 'انتهت صلاحية رابط التنزيل.'
+                'download-error' => 'انتهت صلاحية رابط التنزيل.',
+                'payment-error' => 'Payment has not been done for this download.'
             ],
 
             'review' => [

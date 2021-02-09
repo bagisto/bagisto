@@ -371,7 +371,8 @@ return [
                 'expired' => 'Süresi Doldu',
                 'remaining-downloads' => 'Kalan İndirme',
                 'unlimited' => 'Sınırsız',
-                'download-error' => 'İndirme linki süresi doldu.'
+                'download-error' => 'İndirme linki süresi doldu.',
+                'payment-error' => 'Payment has not been done for this download.'
             ],
 
             'review' => [

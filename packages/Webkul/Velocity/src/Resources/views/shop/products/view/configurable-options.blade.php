@@ -296,7 +296,9 @@
 
                                 priceElement.innerHTML = this.config.variant_prices[this.simpleProduct].final_price.formated_price;
 
-                                regularPriceElement.innerHTML = this.config.variant_prices[this.simpleProduct].regular_price.formated_price;
+                                if (regularPriceElement) {
+                                    regularPriceElement.innerHTML = this.config.variant_prices[this.simpleProduct].regular_price.formated_price;
+                                }
 
                                 eventBus.$emit('configurable-variant-selected-event', this.simpleProduct)
                             } else {

@@ -58,15 +58,28 @@ class DownloadableProductController extends Controller
             abort(403);
         }
 
+        $totalInvoiceQty = 0;
+        if (isset($downloadableLinkPurchased->order->invoices)) {
+            foreach ($downloadableLinkPurchased->order->invoices as $invoice) {
+                $totalInvoiceQty = $totalInvoiceQty + $invoice->total_qty;
+            }
+        }
+
+        if ($downloadableLinkPurchased->download_used == $totalInvoiceQty || $downloadableLinkPurchased->download_used > $totalInvoiceQty) {
+            session()->flash('warning', trans('shop::app.customer.account.downloadable_products.payment-error'));
+
+            return redirect()->route('customer.downloadable_products.index');
+        }
+
         if ($downloadableLinkPurchased->download_bought
-            && ($downloadableLinkPurchased->download_bought - $downloadableLinkPurchased->download_used) <= 0) {
+            && ($downloadableLinkPurchased->download_bought - ($downloadableLinkPurchased->download_used + $downloadableLinkPurchased->download_canceled)) <= 0) {
 
             session()->flash('warning', trans('shop::app.customer.account.downloadable_products.download-error'));
 
             return redirect()->route('customer.downloadable_products.index');
         }
 
-        $remainingDownloads = $downloadableLinkPurchased->download_bought - ($downloadableLinkPurchased->download_used + 1);
+        $remainingDownloads = $downloadableLinkPurchased->download_bought - ($downloadableLinkPurchased->download_used + $downloadableLinkPurchased->download_canceled + 1);
 
         if ($downloadableLinkPurchased->download_bought) {
             $this->downloadableLinkPurchasedRepository->update([
