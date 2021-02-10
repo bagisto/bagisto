@@ -318,14 +318,20 @@
                             });
 
                             if (this.simpleProduct) {
-                                this.config.variant_images[this.simpleProduct].forEach(function(video) {
-                                    galleryImages.unshift(video)
-                                });
-
-                                this.config.variant_videos[this.simpleProduct].forEach(function(image) {
+                                this.config.variant_images[this.simpleProduct].forEach(function(image) {
                                     galleryImages.unshift(image)
                                 });
+
+                                this.config.variant_videos[this.simpleProduct].forEach(function(video) {
+                                    galleryImages.unshift(video)
+                                });
                             }
+
+                            galleryImages.forEach(function(image){
+                                if (image.type == 'video') {
+                                    image.small_image_url = image.medium_image_url = image.large_image_url = image.original_image_url= image.video_url;
+                                }
+                            });
 
                             eventBus.$emit('configurable-variant-update-images-event', galleryImages);
                         },
