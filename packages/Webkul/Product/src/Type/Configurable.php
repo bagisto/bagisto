@@ -9,6 +9,7 @@ use Webkul\Product\Models\ProductFlat;
 use Illuminate\Support\Str;
 use Webkul\Checkout\Models\CartItem as CartItemModel;
 use Illuminate\Support\Facades\DB;
+use Webkul\Product\Facades\ProductImage;
 
 class Configurable extends AbstractType
 {
@@ -594,7 +595,7 @@ class Configurable extends AbstractType
             }
         }
 
-        return $this->productImageHelper->getProductBaseImage($product);
+        return ProductImage::getProductBaseImage($product);
     }
 
     /**
