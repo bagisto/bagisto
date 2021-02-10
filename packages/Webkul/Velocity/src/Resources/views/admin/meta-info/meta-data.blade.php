@@ -38,7 +38,7 @@
 
                             <option
                                 value="{{ $channelModel->code }}" {{ ($channelModel->code) == $channel ? 'selected' : '' }}>
-                                {{ $channelModel->name }}
+                                {{ $channelModel->name ?? $channelModel->translate($locale)->name ?? $channelModel->translate('en')->name }}
                             </option>
 
                         @endforeach
