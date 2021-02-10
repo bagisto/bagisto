@@ -113,6 +113,15 @@
                                             </li>
                                         @endif
 
+                                        @if (core()->getConfigData('general.content.shop.compare_option'))
+                                            <li>
+                                                <a href="{{ route('velocity.customer.product.compare') }}" class="unset">
+                                                    <i class="icon wishlist text-down-3"></i>
+                                                    <span>{{ __('shop::app.customer.compare.text') }}</span>
+                                                </a>
+                                            </li>
+                                        @endif
+
                                         <li>
                                             <a href="{{ route('customer.orders.index') }}" class="unset">
                                                 <i class="icon orders text-down-3"></i>
