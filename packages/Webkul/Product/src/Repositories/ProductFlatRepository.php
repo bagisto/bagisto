@@ -37,10 +37,7 @@ class ProductFlatRepository extends Repository
      */
     public function getCategoryProductAttribute($categoryId)
     {
-        $qb = $this->model
-                    ->distinct()
-                    ->leftJoin('product_categories', 'product_flat.product_id', 'product_categories.product_id')
-                    ->where('product_categories.category_id', $categoryId);
+        $qb = $this->categoryProductQuerybuilder($categoryId);
 
         $productFlatIds   = $qb->pluck('id')->toArray();
         $productIds       = $qb->pluck('product_flat.product_id')->toArray();
@@ -89,6 +86,21 @@ class ProductFlatRepository extends Repository
     }
 
     /**
+     * get Category Product Model
+     *
+     * @param  int  $categoryId
+     * @return \Illuminate\Support\Querybuilder
+    */
+    public function categoryProductQuerybuilder($categoryId) {
+
+        return $this->model
+            ->leftJoin('product_categories', 'product_flat.product_id', 'product_categories.product_id')
+            ->where('product_categories.category_id', $categoryId)
+            ->where('product_flat.channel', core()->getCurrentChannelCode())
+            ->where('product_flat.locale', app()->getLocale());
+    }
+
+    /**
      * filter attributes according to products
      *
      * @param  array  $category
@@ -96,18 +108,25 @@ class ProductFlatRepository extends Repository
      */
     public function getProductsRelatedFilterableAttributes($category)
     {
-        $categoryFilterableAttributes = $category->filterableAttributes->pluck('id')->toArray();
+        $productsCount = $this->categoryProductQuerybuilder($category->id)->count();
 
-        $productCategoryArrributes = $this->getCategoryProductAttribute($category->id);
+        if ($productsCount > 0) {
+            $categoryFilterableAttributes = $category->filterableAttributes->pluck('id')->toArray();
 
-        $allFilterableAttributes = array_filter(array_unique(array_intersect($categoryFilterableAttributes, $productCategoryArrributes['attributes'])));
+            $productCategoryArrributes = $this->getCategoryProductAttribute($category->id);
 
-        $attributes = app('Webkul\Attribute\Repositories\AttributeRepository')->getModel()::with(['options' => function($query) use ($productCategoryArrributes) {
-                return $query->whereIn('id', $productCategoryArrributes['attributeOptions']);
-            }
-        ])->whereIn('id', $allFilterableAttributes)->get();
+            $allFilterableAttributes = array_filter(array_unique(array_intersect($categoryFilterableAttributes, $productCategoryArrributes['attributes'])));
 
-        return $attributes;
+            $attributes = app('Webkul\Attribute\Repositories\AttributeRepository')->getModel()::with(['options' => function($query) use ($productCategoryArrributes) {
+                    return $query->whereIn('id', $productCategoryArrributes['attributeOptions']);
+                }
+            ])->whereIn('id', $allFilterableAttributes)->get();
+
+            return $attributes;
+        } else {
+
+            return $category->filterableAttributes;
+        }
     }
 
     /**
