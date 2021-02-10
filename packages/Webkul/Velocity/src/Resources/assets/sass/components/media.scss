@@ -801,6 +801,10 @@
                                 content: "\e93e";
                             }
 
+                            &.compare::before {
+                                content: "\e93b";
+                            }
+
                             &.orders::before {
                                 content: "\e931";
                             }
