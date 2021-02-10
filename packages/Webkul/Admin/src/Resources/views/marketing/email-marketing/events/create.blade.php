@@ -44,7 +44,7 @@
                                 <span class="control-error" v-if="errors.has('description')">@{{ errors.first('description') }}</span>
                             </div>
 
-                            <div class="control-group" :class="[errors.has('date') ? 'has-error' : '']">
+                            <div class="control-group date" :class="[errors.has('date') ? 'has-error' : '']">
                                 <label for="date" class="required">{{ __('admin::app.marketing.events.date') }}</label>
                                 <date>
                                     <input type="text" name="date" class="control" v-validate="'required'" value="{{ old('date') }}" data-vv-as="&quot;{{ __('admin::app.marketing.events.date') }}&quot;">
@@ -54,7 +54,7 @@
 
                         </div>
                     </accordian>
-                            
+
                     {!! view_render_event('bagisto.admin.marketing.events.create.after') !!}
 
                 </div>
