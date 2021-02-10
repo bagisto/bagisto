@@ -34,7 +34,7 @@
                                     @foreach ($results['extraFilters']['channels'] as $channelModel)
                                         <option
                                             value="{{ $channelModel->code }}"
-                                            {{ (isset($channel) && ($channelModel->code) == $channel) ? 'selected' : '' }}>
+                                            {{ $channelModel->code == request()->get('channel') ? 'selected' : '' }}>
                                             {{ $channelModel->name ?? $channelModel->translate($locale)->name ?? $channelModel->translate('en')->name }}
                                         </option>
                                     @endforeach
