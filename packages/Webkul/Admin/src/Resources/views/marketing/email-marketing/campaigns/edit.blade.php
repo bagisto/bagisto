@@ -62,7 +62,7 @@
                                 <label for="marketing_template_id" class="required">{{ __('admin::app.marketing.campaigns.email-template') }}</label>
                                 <?php $selectedOption = old('marketing_template_id') ?: $campaign->marketing_template_id ?>
                                 <select v-validate="'required'" class="control" id="marketing_template_id" name="marketing_template_id" data-vv-as="&quot;{{ __('admin::app.marketing.campaigns.email-template') }}&quot;">
-                                    @foreach (app('Webkul\Marketing\Repositories\TemplateRepository')->findWhere(['status' => 'active']) as $template)
+                                    @foreach (app('Webkul\Marketing\Repositories\TemplateRepository')->all() as $template)
                                         <option value="{{ $template->id }}" {{ $selectedOption == $template->id ? 'selected' : '' }}>
                                             {{ $template->name }}
                                         </option>
