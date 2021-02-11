@@ -44,7 +44,7 @@
                                         <option
                                             value="{{ $channelModel->code }}"
                                             {{ (isset($channel) && ($channelModel->code) == $channel) ? 'selected' : '' }}>
-                                            {{ $channelModel->name ?? $channelModel->translate($locale)->name ?? $channelModel->translate('en')->name }}
+                                            {{ $channelModel->name ?? $channelModel->translate($locale)->name ?? $channelModel->translate(config('app.fallback_locale'))->name }}
                                         </option>
                                     @endforeach
                                 </select>
