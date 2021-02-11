@@ -1,5 +1,4 @@
 <script>
-
     export default {
         name: 'tree-view',
 

@@ -1,5 +1,4 @@
 <script>
-
     export default {
         name: 'tree-view',
 
@@ -62,6 +61,8 @@
         computed: {
             caption () {
                 return this.items[this.captionField]
+                    ? this.items[this.captionField]
+                    : this.items.translations.filter((translation) => translation.locale === 'en')[0][this.captionField];
             },
 
             allChildren () {
@@ -81,7 +82,7 @@
                 }
 
                 searchTree(this.items)
-                
+
                 return leafs;
             },
 
