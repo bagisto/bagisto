@@ -73,7 +73,7 @@
 
                                         @foreach(core()->getAllChannels() as $channel)
                                             <option value="{{ $channel->id }}" {{ in_array($channel->id, $selectedOptionIds) ? 'selected' : '' }}>
-                                                {{ $channel->name }}
+                                                {{ $channel->name ?? $channel->translate(app()->getLocale())->name ?? $channel->translate('en')->name }}
                                             </option>
                                         @endforeach
 
