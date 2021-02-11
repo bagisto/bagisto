@@ -44,7 +44,7 @@
 
                             <option
                                 value="{{ $channelModel->code }}" {{ ($channelModel->code) == $channel ? 'selected' : '' }}>
-                                {{ core()->getChannelName($channel) }}
+                                {{ core()->getChannelName($channelModel) }}
                             </option>
 
                         @endforeach
