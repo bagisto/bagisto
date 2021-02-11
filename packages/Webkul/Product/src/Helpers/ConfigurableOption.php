@@ -5,6 +5,7 @@ namespace Webkul\Product\Helpers;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Facades\ProductImage;
+use Webkul\Product\Facades\ProductVideo;
 
 class ConfigurableOption extends AbstractProduct
 {
@@ -50,6 +51,7 @@ class ConfigurableOption extends AbstractProduct
             ],
             'variant_prices' => $this->getVariantPrices($product),
             'variant_images' => $this->getVariantImages($product),
+            'variant_videos' => $this->getVariantVideos($product),
             'chooseText'     => trans('shop::app.products.choose-option'),
         ];
 
@@ -210,5 +212,28 @@ class ConfigurableOption extends AbstractProduct
         }
 
         return $images;
+    }
+
+    /**
+     * Get product videos for configurable variations
+     *
+     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @return array
+     */
+    protected function getVariantVideos($product)
+    {
+        $videos = [];
+
+        foreach ($this->getAllowedProducts($product) as $variant) {
+            if ($variant instanceof \Webkul\Product\Models\ProductFlat) {
+                $variantId = $variant->product_id;
+            } else {
+                $variantId = $variant->id;
+            }
+
+            $videos[$variantId] = ProductVideo::getVideos($variant);
+        }
+
+        return $videos;
     }
 }
