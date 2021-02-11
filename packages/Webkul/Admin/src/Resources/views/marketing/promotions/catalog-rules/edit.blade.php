@@ -239,7 +239,7 @@
                     <input type="hidden" :name="['conditions[' + index + '][attribute_type]']" v-model="matchedAttribute.type">
 
                     <div v-if="matchedAttribute.key == 'product|category_ids'">
-                        <tree-view value-field="id" id-field="id" :name-field="'conditions[' + index + '][value]'" input-type="checkbox" :items='matchedAttribute.options' :value='condition.value' :behavior="'no'"></tree-view>
+                        <tree-view value-field="id" id-field="id" :name-field="'conditions[' + index + '][value]'" input-type="checkbox" :items='matchedAttribute.options' :value='condition.value' :behavior="'no'" fallback-locale="{{ config('app.fallback_locale') }}"></tree-view>
                     </div>
 
                     <div v-else>
