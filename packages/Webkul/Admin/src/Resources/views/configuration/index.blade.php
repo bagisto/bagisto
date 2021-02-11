@@ -6,8 +6,16 @@
 
 @section('content')
     <div class="content">
-        <?php $locale = request()->get('locale') ?: app()->getLocale(); ?>
-        <?php $channel = request()->get('channel') ?: core()->getDefaultChannelCode(); ?>
+        @php
+            $locale = request()->get('locale') ?: app()->getLocale();
+            $channel = request()->get('channel') ?: core()->getDefaultChannelCode();
+
+            $channelLocales = app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales;
+
+            if (! $channelLocales->contains('code', $locale)) {
+                $locale = config('app.fallback_locale');
+            }
+        @endphp
 
         <form method="POST" action="" @submit.prevent="onSubmit" enctype="multipart/form-data">
 
@@ -32,7 +40,7 @@
 
                     <div class="control-group">
                         <select class="control" id="locale-switcher" name="locale">
-                            @foreach (core()->getAllLocales() as $localeModel)
+                            @foreach ($channelLocales as $localeModel)
 
                                 <option value="{{ $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
                                     {{ $localeModel->name }}
