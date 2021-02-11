@@ -134,6 +134,20 @@ abstract class AbstractType
     protected $productOptions = [];
 
     /**
+     * Skip attribute for simple product type.
+     *
+     * @var array
+     */
+    protected $skipAttributes = [];
+
+    /**
+     * These blade files will be included in product edit page.
+     *
+     * @var array
+     */
+    protected $additionalViews = [];
+
+    /**
      * Create a new product type instance.
      *
      * @param \Webkul\Attribute\Repositories\AttributeRepository           $attributeRepository
