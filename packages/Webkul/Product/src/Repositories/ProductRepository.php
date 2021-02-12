@@ -165,6 +165,10 @@ class ProductRepository extends Repository
                 $qb->where('product_categories.category_id', $categoryId);
             }
 
+            if (! core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
+                $qb = $this->checkOutOfStockItem($qb);
+            }
+
             if (is_null(request()->input('status'))) {
                 $qb->where('product_flat.status', 1);
             }
@@ -428,6 +432,11 @@ class ProductRepository extends Repository
                 ->paginate(16);
         } else {
             $results = app(ProductFlatRepository::class)->scopeQuery(function ($query) use ($term, $channel, $locale) {
+
+                if (! core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
+                    $query = $this->checkOutOfStockItem($query);
+                }
+
                 return $query->distinct()
                     ->addSelect('product_flat.*')
                     ->where('product_flat.status', 1)
@@ -795,5 +804,20 @@ class ProductRepository extends Repository
         Storage::makeDirectory('product/' . $copiedProduct->id);
 
         Storage::copy($data->path, $copiedProductImageVideo->path);
+    }
+
+    /**
+     * @param Webkul\Product\Models\ProductFlat
+     *
+     * @return Model
+    */
+    public function checkOutOfStockItem($query) {
+        return $query->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
+            ->leftJoin('product_inventories', 'product_flat.product_id', '=', 'product_inventories.product_id')
+            ->where(function ($qb) {
+                $qb
+                    ->WhereIn('products.type', ['configurable', 'grouped', 'downloadable', 'bundle', 'booking'])
+                    ->orwhereIn('products.type', ['simple', 'virtual'])->where('product_inventories.qty' , '>' , 0);
+            });
     }
 }
