@@ -71,7 +71,7 @@
             },
 
             valueComparator (a, b) {
-                if (a === b)
+                if (a === b) 
                     return true
 
                 if (a !== Object(a) || b !== Object(b)) {
