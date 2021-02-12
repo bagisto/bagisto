@@ -1,3 +1,8 @@
+RewriteEngine On
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} !^www\.sinuose\.com$ [NC]
+RewriteRule ^(.*)$ https://www.sinuose.com/shop/public/$1 [L,R=301]
+
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
