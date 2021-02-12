@@ -97,7 +97,7 @@
                                 <select v-validate="'required'" class="control" id="channel_id" name="channel_id" data-vv-as="&quot;{{ __('admin::app.marketing.campaigns.channel') }}&quot;">
                                     @foreach (app('Webkul\Core\Repositories\ChannelRepository')->all() as $channel)
                                         <option value="{{ $channel->id }}" {{ $selectedOption == $channel->id ? 'selected' : '' }}>
-                                            {{ $channel->name }}
+                                            {{ core()->getChannelName($channel) }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -119,7 +119,7 @@
 
                         </div>
                     </accordian>
-                            
+
                     {!! view_render_event('bagisto.admin.marketing.templates.create.after') !!}
 
                 </div>

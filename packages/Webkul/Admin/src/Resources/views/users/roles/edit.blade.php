@@ -56,7 +56,7 @@
                             </div>
 
                             <div class="control-group tree-wrapper {{ $role->permission_type == 'all' ? 'hide' : '' }}">
-                                <tree-view value-field="key" id-field="key" items='@json($acl->items)' value='@json($role->permissions)'></tree-view>
+                                <tree-view value-field="key" id-field="key" items='@json($acl->items)' value='@json($role->permissions)' fallback-locale="{{ config('app.fallback_locale') }}"></tree-view>
                             </div>
                         </div>
                     </accordian>

@@ -535,7 +535,9 @@
 
             methods: {
                 methodSelected: function() {
-                    this.$emit('onPaymentMethodSelected', this.payment)
+                    this.$emit('onPaymentMethodSelected', this.payment);
+
+                    $('.paypal-button-container').empty();
 
                     eventBus.$emit('after-payment-method-selected', this.payment);
                 }

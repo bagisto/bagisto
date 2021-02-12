@@ -49,9 +49,11 @@ class ChannelDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = $this->channelRepository->query()
-            ->leftJoin('channel_translations', 'channel_translations.channel_id', '=', 'channels.id')
-            ->addSelect('channels.id', 'channels.code', 'channel_translations.locale', 'channel_translations.name as translated_name', 'channels.hostname')
-            ->where('channel_translations.locale', '=', $this->locale);
+            ->leftJoin('channel_translations', function($leftJoin) {
+                $leftJoin->on('channel_translations.channel_id', '=', 'channels.id')
+                    ->where('channel_translations.locale', $this->locale);
+            })
+            ->addSelect('channels.id', 'channels.code', 'channel_translations.locale', 'channel_translations.name as translated_name', 'channels.hostname');
 
         $this->addFilter('id', 'channels.id');
         $this->addFilter('code', 'channels.code');
