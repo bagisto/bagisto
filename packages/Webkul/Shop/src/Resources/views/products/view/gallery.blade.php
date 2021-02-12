@@ -194,7 +194,7 @@
                 $('img#pro-img').data('zoom-image', $('img#pro-img').data('image')).ezPlus();
             }
 
-            var wishlist = " <?php echo $wishListHelper->getWishlistProduct($product);  ?> ";
+            var wishlist = "{{ $wishListHelper->getWishlistProduct($product) ? 'true' : 'false' }}";
 
             $(document).mousemove(function(event) {
                 if ($('.add-to-wishlist').length || wishlist != 0) {

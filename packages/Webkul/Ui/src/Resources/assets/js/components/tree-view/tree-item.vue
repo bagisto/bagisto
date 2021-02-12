@@ -1,5 +1,4 @@
 <script>
-
     export default {
         name: 'tree-view',
 
@@ -40,7 +39,12 @@
                 type: Array,
                 required: false,
                 default: null
-            }
+            },
+
+            fallbackLocale: {
+                type: String,
+                required: false
+            },
         },
 
         created () {
@@ -62,6 +66,8 @@
         computed: {
             caption () {
                 return this.items[this.captionField]
+                    ? this.items[this.captionField]
+                    : this.items.translations.filter((translation) => translation.locale === this.fallbackLocale)[0][this.captionField];
             },
 
             allChildren () {
@@ -81,7 +87,7 @@
                 }
 
                 searchTree(this.items)
-                
+
                 return leafs;
             },
 
@@ -201,7 +207,8 @@
                         childrenField: this.childrenField,
                         valueField: this.valueField,
                         idField: this.idField,
-                        behavior: this.behavior
+                        behavior: this.behavior,
+                        fallbackLocale: this.fallbackLocale
                     }
                 })
             },

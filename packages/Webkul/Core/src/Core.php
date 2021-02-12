@@ -233,7 +233,25 @@ class Core
     }
 
     /**
-     * Returns all locales.
+     * Returns the channel name.
+     *
+     * @return string
+     */
+    public function getChannelName($channel): string
+    {
+        static $channelName;
+
+        if ($channelName) {
+            return $channelName;
+        }
+
+        return $channelName = $channel->name
+            ?? $channel->translate(app()->getLocale())->name
+            ?? $channel->translate(config('app.fallback_locale'))->name;
+    }
+
+    /**
+     * Returns all locales
      *
      * @return \Illuminate\Support\Collection
      */

@@ -3,8 +3,6 @@
 namespace Webkul\Admin\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Routing\Router;
-use Webkul\Admin\Http\Middleware\Locale;
 use Webkul\Core\Tree;
 
 class AdminServiceProvider extends ServiceProvider
@@ -14,7 +12,7 @@ class AdminServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(Router $router)
+    public function boot()
     {
         $this->loadRoutesFrom(__DIR__ . '/../Http/routes.php');
 
@@ -30,8 +28,6 @@ class AdminServiceProvider extends ServiceProvider
         $this->composeView();
 
         $this->registerACL();
-
-        $router->aliasMiddleware('admin_locale', Locale::class);
 
         $this->app->register(EventServiceProvider::class);
     }
