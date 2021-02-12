@@ -1,3 +1,3 @@
-RewriteCond %{REQUEST_URI} !^/public
-RewriteCond %{DOCUMENT_ROOT}/public%{REQUEST_URI} !-f
-RewriteRule ^(.*[^/])$ /$1/ [L,R=301]
+RewriteEngine on
+RewriteBase /
+RewriteRule ^public/(.*)$ /$1 [R=301,NC,L]
