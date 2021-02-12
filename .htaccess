@@ -1,3 +1,0 @@
-RewriteEngine on
-RewriteBase /
-RewriteRule ^public/(.*)$ /$1 [R=301,NC,L]
