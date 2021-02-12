@@ -66,7 +66,7 @@
                                 <select type="text" class="control" name="channels[]" v-validate="'required'" value="{{ old('channel[]') }}" data-vv-as="&quot;{{ __('admin::app.cms.pages.channel') }}&quot;" multiple="multiple">
                                     @foreach(app('Webkul\Core\Repositories\ChannelRepository')->all() as $channel)
                                         <option value="{{ $channel->id }}" {{ in_array($channel->id, $selectedOptionIds) ? 'selected' : '' }}>
-                                            {{ $channel->name }}
+                                            {{ core()->getChannelName($channel) }}
                                         </option>
                                     @endforeach
                                 </select>
