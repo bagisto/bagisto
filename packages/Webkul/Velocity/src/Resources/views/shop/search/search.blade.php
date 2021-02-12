@@ -47,10 +47,7 @@
 @endpush
 
 @section('content-wrapper')
-    <div
-        style="padding-left: 50px !important;"
-        class="container category-page-wrapper"
-    >
+    <div class="container category-page-wrapper">
         <search-component></search-component>
     </div>
 @endsection

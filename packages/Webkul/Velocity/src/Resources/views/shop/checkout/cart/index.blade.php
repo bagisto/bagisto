@@ -87,7 +87,7 @@
                                                     :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`">
                                             </a>
 
-                                            <div class="product-details-content col-7 pr0">
+                                            <div class="product-details-content col-6 pr0">
                                                 <div class="row item-title no-margin">
                                                     <a
                                                         href="{{ route('shop.productOrCategory.index', $url_key) }}"
@@ -161,13 +161,11 @@
                                                 </div>
                                             </div>
 
-                                            <div class="product-quantity col-2 no-padding">
-                                                <div class="row">
-                                                    <quantity-changer
-                                                        :control-name="'qty[{{$item->id}}]'"
-                                                        quantity="{{ $item->quantity }}">
-                                                    </quantity-changer>
-                                                </div>
+                                            <div class="product-quantity col-3 no-padding">
+                                                <quantity-changer
+                                                    :control-name="'qty[{{$item->id}}]'"
+                                                    quantity="{{ $item->quantity }}">
+                                                </quantity-changer>
                                             </div>
 
                                             <div class="product-price fs18 col-1">
