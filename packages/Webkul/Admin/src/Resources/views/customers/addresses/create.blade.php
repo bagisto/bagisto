@@ -14,7 +14,7 @@
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.customer.index') }}'"></i>
+                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.customer.addresses.index', ['id' => $customer->id]) }}'"></i>
 
                         {{ __('admin::app.customers.addresses.create-title') }}
                     </h1>
