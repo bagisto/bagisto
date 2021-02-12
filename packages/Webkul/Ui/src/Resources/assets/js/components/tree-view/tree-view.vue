@@ -1,5 +1,4 @@
 <script>
-
     export default {
         name: 'tree-view',
 
@@ -58,7 +57,12 @@
                 type: [Array, String, Object],
                 required: false,
                 default: () => ([])
-            }
+            },
+
+            fallbackLocale: {
+                type: String,
+                required: false
+            },
         },
 
         data() {
@@ -105,7 +109,8 @@
                             childrenField: this.childrenField,
                             valueField: this.valueField,
                             idField: this.idField,
-                            behavior: this.behavior
+                            behavior: this.behavior,
+                            fallbackLocale: this.fallbackLocale
                         },
                         on: {
                             input: selection => {

@@ -41,7 +41,7 @@
                     enableStandardCardFields: false,
 
                     createOrder: function(data, actions) {
-                        return window.axios.get("{{ route('paypal.smart_button.details') }}")
+                        return window.axios.get("{{ route('paypal.smart-button.create-order') }}")
                             .then(function(response) {
                                 return response.data.result;
                             })
@@ -54,9 +54,9 @@
                     onApprove: function(data, actions) {
                         app.showLoader();
 
-                        window.axios.post("{{ route('paypal.smart_button.save_order') }}", {
-                            '_token': "{{ csrf_token() }}",
-                            'data' : data
+                        window.axios.post("{{ route('paypal.smart-button.capture-order') }}", {
+                            _token: "{{ csrf_token() }}",
+                            orderData: data
                         })
                         .then(function(response) {
                             if (response.data.success) {
