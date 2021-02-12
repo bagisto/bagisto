@@ -2,8 +2,8 @@
 
 namespace Webkul\Shop\DataGrids;
 
-use Illuminate\Support\Facades\DB;
 use Webkul\Ui\DataGrid\DataGrid;
+use Illuminate\Support\Facades\DB;
 
 class OrderDataGrid extends DataGrid
 {
@@ -80,12 +80,13 @@ class OrderDataGrid extends DataGrid
         ]);
     }
 
-    public function prepareActions() {
+    public function prepareActions()
+    {
         $this->addAction([
             'type'   => 'View',
             'method' => 'GET',
             'route'  => 'customer.orders.view',
             'icon'   => 'icon eye-icon',
-        ]);
+        ], true);
     }
 }
