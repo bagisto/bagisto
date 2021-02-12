@@ -10,7 +10,7 @@
         <div class="page-header">
             <div class="page-title">
                 <h1>
-                    <i class="icon angle-left-icon back-link" onclick="window.location = history.length > 1 ? document.referrer : '{{ route('admin.dashboard.index') }}'"></i>
+                    <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.customer.index') }}'"></i>
 
                     {{ __('address::app.admin.addresses.title-orders', ['customer_name' => $customer->first_name . ' ' . $customer->last_name]) }}
                 </h1>
