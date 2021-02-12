@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['middleware' => ['web', 'admin_locale']], function () {
+Route::group(['middleware' => ['web']], function () {
     Route::prefix(config('app.admin_url') . '/velocity')->group(function () {
         Route::group(['middleware' => ['admin']], function () {
             Route::namespace('Webkul\Velocity\Http\Controllers\Admin')->group(function () {
