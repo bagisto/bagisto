@@ -536,7 +536,7 @@ abstract class AbstractType
      */
     public function getMaximamPrice()
     {
-        return $this->getMinimalPrice();
+        return $this->product->price;
     }
 
     /**
