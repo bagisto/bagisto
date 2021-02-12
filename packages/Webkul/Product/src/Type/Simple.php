@@ -5,14 +5,7 @@ namespace Webkul\Product\Type;
 class Simple extends AbstractType
 {
     /**
-     * Skip attribute for simple product type.
-     *
-     * @var array
-     */
-    protected $skipAttributes = [];
-
-    /**
-     * These blade files will be included in product edit page.
+     * These blade files will be included in product edit page
      *
      * @var array
      */

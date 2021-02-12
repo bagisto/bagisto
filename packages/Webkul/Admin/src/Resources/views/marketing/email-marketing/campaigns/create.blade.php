@@ -114,7 +114,7 @@
 
                         </div>
                     </accordian>
-                            
+
                     {!! view_render_event('bagisto.admin.marketing.templates.create.after') !!}
 
                 </div>

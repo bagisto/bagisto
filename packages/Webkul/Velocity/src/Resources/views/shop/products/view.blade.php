@@ -72,6 +72,11 @@
         .main-content-wrapper {
             margin-bottom: 0px;
         }
+
+        .buynow {
+            height: 40px;
+            text-transform: uppercase;
+        }
     </style>
 @endpush
 

@@ -76,7 +76,7 @@
 
                             <span v-if="attribute.swatch_type == 'color'" :style="{ background: option.swatch_value }"></span>
 
-                            <img v-if="attribute.swatch_type == 'image'" :src="option.swatch_value" alt="" />
+                            <img v-if="attribute.swatch_type == 'image'" :src="option.swatch_value" :title="option.label" alt="" />
 
                             <span v-if="attribute.swatch_type == 'text'">
                                 @{{ option.label }}
@@ -321,7 +321,17 @@
                                 this.config.variant_images[this.simpleProduct].forEach(function(image) {
                                     galleryImages.unshift(image)
                                 });
+
+                                this.config.variant_videos[this.simpleProduct].forEach(function(video) {
+                                    galleryImages.unshift(video)
+                                });
                             }
+
+                            galleryImages.forEach(function(image){
+                                if (image.type == 'video') {
+                                    image.small_image_url = image.medium_image_url = image.large_image_url = image.original_image_url= image.video_url;
+                                }
+                            });
 
                             eventBus.$emit('configurable-variant-update-images-event', galleryImages);
                         },
