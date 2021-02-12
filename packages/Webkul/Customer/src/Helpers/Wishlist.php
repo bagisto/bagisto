@@ -43,9 +43,9 @@ class Wishlist
         }
 
         if ($wishlist) {
-            return true;
+            return $wishlist;
         }
 
-        return false;
+        return null;
     }
 }
