@@ -4,22 +4,22 @@
 
     @auth('customer')
         @php
-            $isWished = $wishListHelper->getWishlistProduct($product);
+            /* search wishlist on the basis of product's id so that wishlist id can be catched */
+            $wishlist = $wishListHelper->getWishlistProduct($product);
+
+            /* link making */
+            $href = isset($route) ? $route : ($wishlist ? route('customer.wishlist.remove', $wishlist->id) : route('customer.wishlist.add', $product->product_id));
+
+            /* title */
+            $title = $wishlist ? __('velocity::app.shop.wishlist.remove-wishlist-text') : __('velocity::app.shop.wishlist.add-wishlist-text');
         @endphp
 
         <a
             class="unset wishlist-icon {{ $addWishlistClass ?? '' }} text-right"
-            @if(isset($route))
-                href="{{ $route }}"
-            @elseif (! $isWished)
-                href="{{ route('customer.wishlist.add', $product->product_id) }}"
-                title="{{ __('velocity::app.shop.wishlist.add-wishlist-text') }}"
-            @elseif (isset($itemId) && $itemId)
-                href="{{ route('customer.wishlist.remove', $itemId) }}"
-                title="{{ __('velocity::app.shop.wishlist.remove-wishlist-text') }}"
-            @endif>
+            href="{{ $href }}"
+            title="{{ $title }}">
 
-            <wishlist-component active="{{ ! $isWished }}"></wishlist-component>
+            <wishlist-component active="{{ $wishlist ? false : true }}"></wishlist-component>
 
             @if (isset($text))
                 {!! $text !!}
