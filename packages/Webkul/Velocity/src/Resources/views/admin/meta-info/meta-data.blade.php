@@ -6,7 +6,13 @@
 
 @php
     $locale = request()->get('locale') ?: app()->getLocale();
-    $channel = request()->get('channel') ?: core()->getCurrentChannelCode();
+    $channel = request()->get('channel') ?: core()->getDefaultChannelCode();
+
+    $channelLocales = app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales;
+
+    if (! $channelLocales->contains('code', $locale)) {
+        $locale = config('app.fallback_locale');
+    }
 @endphp
 
 @section('content')
@@ -38,7 +44,7 @@
 
                             <option
                                 value="{{ $channelModel->code }}" {{ ($channelModel->code) == $channel ? 'selected' : '' }}>
-                                {{ $channelModel->name }}
+                                {{ core()->getChannelName($channelModel) }}
                             </option>
 
                         @endforeach
@@ -47,7 +53,7 @@
 
                 <div class="control-group">
                     <select class="control" id="locale-switcher" name="locale">
-                        @foreach (app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales as $localeModel)
+                        @foreach ($channelLocales as $localeModel)
 
                             <option
                                 value="{{ $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
@@ -113,7 +119,7 @@
                     <div class="control-group">
                         <label style="width:100%;">
                             {{ __('velocity::app.admin.meta-data.home-page-content') }}
-                            <span class="locale">[{{ $metaData ? $metaData->channel : $channel }} - {{ $metaData ? $metaData->locale : $locale }}]</span>
+                            <span class="locale">[{{ $channel }} - {{ $locale }}]</span>
                         </label>
 
                         <textarea
@@ -127,7 +133,7 @@
                     <div class="control-group">
                         <label style="width:100%;">
                             {{ __('velocity::app.admin.meta-data.product-policy') }}
-                            <span class="locale">[{{ $metaData ? $metaData->channel : $channel }} - {{ $metaData ? $metaData->locale : $locale }}]</span>
+                            <span class="locale">[{{ $channel }} - {{ $locale }}]</span>
                         </label>
 
                         <textarea
@@ -295,7 +301,7 @@
                     <div class="control-group">
                         <label style="width:100%;">
                             {{ __('velocity::app.admin.meta-data.subscription-content') }}
-                            <span class="locale">[{{ $metaData ? $metaData->channel : $channel }} - {{ $metaData ? $metaData->locale : $locale }}]</span>
+                            <span class="locale">[{{ $channel }} - {{ $locale }}]</span>
                         </label>
 
                         <textarea
@@ -309,7 +315,7 @@
                     <div class="control-group">
                         <label style="width:100%;">
                             {{ __('velocity::app.admin.meta-data.footer-left-content') }}
-                            <span class="locale">[{{ $metaData ? $metaData->channel : $channel }} - {{ $metaData ? $metaData->locale : $locale }}]</span>
+                            <span class="locale">[{{ $channel }} - {{ $locale }}]</span>
                         </label>
 
                         <textarea
@@ -323,7 +329,7 @@
                     <div class="control-group">
                         <label style="width:100%;">
                             {{ __('velocity::app.admin.meta-data.footer-middle-content') }}
-                            <span class="locale">[{{ $metaData ? $metaData->channel : $channel }} - {{ $metaData ? $metaData->locale : $locale }}]</span>
+                            <span class="locale">[{{ $channel }} - {{ $locale }}]</span>
                         </label>
 
                         <textarea
@@ -358,7 +364,7 @@
                 $('#channel-switcher').val()
 
                 if (event.target.id == 'channel-switcher') {
-                    let locale = "{{ app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales->first()->code }}";
+                    let locale = "{{ $channelLocales->first()->code }}";
 
                     $('#locale-switcher').val(locale);
                 }

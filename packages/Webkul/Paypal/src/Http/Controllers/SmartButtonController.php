@@ -6,26 +6,25 @@ use Webkul\Checkout\Facades\Cart;
 use Webkul\Paypal\Payment\SmartButton;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
-use PayPalCheckoutSdk\Orders\OrdersCreateRequest;
 
 class SmartButtonController extends Controller
 {
     /**
-     * SmartButton object
+     * SmartButton $smartButton
      *
      * @var \Webkul\Paypal\Payment\SmartButton
      */
-    protected $smartButtonClient;
+    protected $smartButton;
 
     /**
-     * OrderRepository object
+     * OrderRepository $orderRepository
      *
      * @var \Webkul\Sales\Repositories\OrderRepository
      */
     protected $orderRepository;
 
     /**
-     * InvoiceRepository object
+     * InvoiceRepository $invoiceRepository
      *
      * @var \Webkul\Sales\Repositories\InvoiceRepository
      */
@@ -34,70 +33,49 @@ class SmartButtonController extends Controller
     /**
      * Create a new controller instance.
      *
+     * @param  \Webkul\Paypal\Payment\SmartButton  $smartButton
      * @param  \Webkul\Attribute\Repositories\OrderRepository  $orderRepository
      * @param  \Webkul\Sales\Repositories\InvoiceRepository  $invoiceRepository
      * @return void
      */
     public function __construct(
-        SmartButton $smartButtonClient,
+        SmartButton $smartButton,
         OrderRepository $orderRepository,
         InvoiceRepository $invoiceRepository
     )
     {
+        $this->smartButton = $smartButton;
+
         $this->orderRepository = $orderRepository;
 
         $this->invoiceRepository = $invoiceRepository;
-
-        $this->smartButtonClient = $smartButtonClient->client();
     }
 
     /**
-     * Success payment.
+     * Paypal order creation for approval of client.
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function details(OrdersCreateRequest $request)
+    public function createOrder()
     {
-        $request->prefer('return=representation');
-        $request->body = $this->buildRequestBody();
-        $response = $this->smartButtonClient->execute($request);
-        return response()->json($response);
+        try {
+            return response()->json($this->smartButton->createOrder($this->buildRequestBody()));
+        } catch (\Exception $e) {
+            throw $e;
+        }
     }
 
     /**
-     * Save order.
+     * Capturing paypal order after approval.
      *
      * @return \Illuminate\Http\Response
      */
-    public function saveOrder()
+    public function captureOrder()
     {
-        if (Cart::hasError()) {
-            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
-        }
-
         try {
-            Cart::collectTotals();
-
-            $this->validateOrder();
-
-            $order = $this->orderRepository->create(Cart::prepareDataForOrder());
-
-            $this->orderRepository->update(['status' => 'processing'], $order->id);
-
-            if ($order->canInvoice()) {
-                $this->invoiceRepository->create($this->prepareInvoiceData($order));
-            }
-
-            Cart::deActivateCart();
-
-            session()->flash('order', $order);
-
-            return response()->json([
-                'success' => true,
-            ]);
+            $this->smartButton->captureOrder(request()->input('orderData.orderID'));
+            return $this->saveOrder();
         } catch (\Exception $e) {
-            session()->flash('error', trans('shop::app.common.error'));
-
             throw $e;
         }
     }
@@ -143,12 +121,7 @@ class SmartButtonController extends Controller
             ],
 
             'application_context' => [
-                'user_action'         => 'PAY_NOW',
                 'shipping_preference' => 'SET_PROVIDED_ADDRESS',
-
-                'payment_method'      => [
-                    'payee_preferred' => 'IMMEDIATE_PAYMENT_REQUIRED',
-                ]
             ],
 
             'purchase_units' => [
@@ -186,8 +159,6 @@ class SmartButtonController extends Controller
         ];
 
         if ($cart->haveStockableItems() && $cart->shipping_address) {
-            $shippingAddressLines = $this->getAddressLines($cart->shipping_address->address1);
-
             $data['purchase_units'][0] = array_merge($data['purchase_units'][0], [
                 'shipping' => [
                     'address' => [
@@ -250,6 +221,44 @@ class SmartButtonController extends Controller
         }
 
         return $addressLines;
+    }
+
+    /**
+     * Saving order once captured and all formalities done.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    protected function saveOrder()
+    {
+        if (Cart::hasError()) {
+            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
+        }
+
+        try {
+            Cart::collectTotals();
+
+            $this->validateOrder();
+
+            $order = $this->orderRepository->create(Cart::prepareDataForOrder());
+
+            $this->orderRepository->update(['status' => 'processing'], $order->id);
+
+            if ($order->canInvoice()) {
+                $this->invoiceRepository->create($this->prepareInvoiceData($order));
+            }
+
+            Cart::deActivateCart();
+
+            session()->flash('order', $order);
+
+            return response()->json([
+                'success' => true,
+            ]);
+        } catch (\Exception $e) {
+            session()->flash('error', trans('shop::app.common.error'));
+
+            throw $e;
+        }
     }
 
     /**

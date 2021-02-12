@@ -48,7 +48,7 @@
 
                                 <select type="text" class="control" name="channels[]" v-validate="'required'" value="{{ old('channel[]') }}" data-vv-as="&quot;{{ __('admin::app.cms.pages.channel') }}&quot;" multiple="multiple">
                                     @foreach($channels->all() as $channel)
-                                        <option value="{{ $channel->id }}">{{ $channel->name }}</option>
+                                        <option value="{{ $channel->id }}">{{ core()->getChannelName($channel) }}</option>
                                     @endforeach
                                 </select>
 

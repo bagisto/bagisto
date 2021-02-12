@@ -16,42 +16,6 @@
             <span class="avatar">
             </span>
 
-            <?php $locale = request()->get('admin_locale') ?: app()->getLocale();?>
-
-            <div class="profile-info">
-                <div class="dropdown-toggle">
-                    <div style="display: inline-block; vertical-align: middle;">
-                        <span class="name">
-                            {{ __('admin::app.datagrid.locale') }}
-                        </span>
-
-                        @foreach (core()->getAllLocales() as $localeModel)
-                            @if ($localeModel->code == $locale)
-                                <span class="role">
-                                    {{ $localeModel->name }}
-                                </span>
-                            @endif
-                        @endforeach
-                        
-                    </div>
-                    <i class="icon arrow-down-icon active"></i>
-                </div>
-
-                <div class="dropdown-list bottom-right">
-                    <div class="control-group">
-                        <select class="control" onChange="window.location.href = this.value" style="margin-left: 30px;">
-                            @foreach (core()->getAllLocales() as $localeModel)
-
-                                <option value="{{ '?admin_locale=' . $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
-                                    {{ $localeModel->name }}
-                                </option>
-
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-            </div>
-
             <div class="profile-info">
                 <div class="dropdown-toggle">
                     <div style="display: inline-block; vertical-align: middle;">

@@ -19,6 +19,8 @@
 
         .alert-wishlist {
             display: inline-block;
+            position: relative;
+            top: -2px;
         }
     </style>
 @endpush

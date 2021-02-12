@@ -6,8 +6,16 @@
 
 @section('content')
     <div class="content">
-        <?php $locale = request()->get('locale') ?: app()->getLocale(); ?>
-        <?php $channel = request()->get('channel') ?: core()->getDefaultChannelCode(); ?>
+        @php
+            $locale = request()->get('locale') ?: app()->getLocale();
+            $channel = request()->get('channel') ?: core()->getDefaultChannelCode();
+
+            $channelLocales = app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales;
+
+            if (! $channelLocales->contains('code', $locale)) {
+                $locale = config('app.fallback_locale');
+            }
+        @endphp
 
         {!! view_render_event('bagisto.admin.catalog.product.edit.before', ['product' => $product]) !!}
 
@@ -29,7 +37,7 @@
 
                                 <option
                                     value="{{ $channelModel->code }}" {{ ($channelModel->code) == $channel ? 'selected' : '' }}>
-                                    {{ $channelModel->name }}
+                                    {{ core()->getChannelName($channelModel) }}
                                 </option>
 
                             @endforeach
@@ -38,7 +46,7 @@
 
                     <div class="control-group">
                         <select class="control" id="locale-switcher" name="locale">
-                            @foreach (app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales as $localeModel)
+                            @foreach ($channelLocales as $localeModel)
 
                                 <option
                                     value="{{ $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
