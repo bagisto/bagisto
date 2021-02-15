@@ -34,7 +34,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return ProductResource::collection($this->productRepository->getAll(request()->input('category_id')));
+        return ProductResource::collection($this->productRepository->getAll(request()->input('categories')));
     }
 
     /**
