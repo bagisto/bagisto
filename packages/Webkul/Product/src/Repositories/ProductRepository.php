@@ -812,12 +812,12 @@ class ProductRepository extends Repository
      * @return Model
     */
     public function checkOutOfStockItem($query) {
-        return $query->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
-            ->leftJoin('product_inventories', 'product_flat.product_id', '=', 'product_inventories.product_id')
+        return $query->leftJoin('products as ps', 'product_flat.product_id', '=', 'ps.id')
+            ->leftJoin('product_inventories as pv', 'product_flat.product_id', '=', 'pv.product_id')
             ->where(function ($qb) {
                 $qb
-                    ->WhereIn('products.type', ['configurable', 'grouped', 'downloadable', 'bundle', 'booking'])
-                    ->orwhereIn('products.type', ['simple', 'virtual'])->where('product_inventories.qty' , '>' , 0);
+                    ->WhereIn('ps.type', ['configurable', 'grouped', 'downloadable', 'bundle', 'booking'])
+                    ->orwhereIn('ps.type', ['simple', 'virtual'])->where('pv.qty' , '>' , 0);
             });
     }
 }

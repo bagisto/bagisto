@@ -380,6 +380,10 @@ class Helper extends Review
             // @TODO:- query only once insted of 2
             $productFlat = $this->productFlatRepository->findOneWhere(['id' => $productId]);
 
+            if (! core()->getConfigData('catalog.products.homepage.out_of_stock_items') && ! $productFlat->isSaleable()) {
+                continue;
+            }
+
             if ($productFlat) {
                 $product = $this->productRepository->findOneWhere(['id' => $productFlat->product_id]);
 
