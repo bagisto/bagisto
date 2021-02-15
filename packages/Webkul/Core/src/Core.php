@@ -709,6 +709,12 @@ class Core
 
         if (null === $locale) {
             $locale = request()->get('locale') ?: app()->getLocale();
+
+            $channelLocales = $this->channelRepository->findOneByField('code', $channel)->locales;
+
+            if (! $channelLocales->contains('code', $locale)) {
+                $locale = config('app.fallback_locale');
+            }
         }
 
         $fields = $this->getConfigField($field);
