@@ -199,10 +199,25 @@ class ShopController extends Controller
     public function getItemsCount()
     {
         if ($customer = auth()->guard('customer')->user()) {
-            $wishlistItemsCount = $this->wishlistRepository->count([
-                'customer_id' => $customer->id,
-                'channel_id'  => core()->getCurrentChannel()->id,
-            ]);
+
+            if (! core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
+                $wishlistItemsCount = $this->wishlistRepository->getModel()
+                    ->leftJoin('products as ps', 'wishlist.product_id', '=', 'ps.id')
+                    ->leftJoin('product_inventories as pv', 'ps.id', '=', 'pv.product_id')
+                    ->where(function ($qb) {
+                        $qb
+                            ->WhereIn('ps.type', ['configurable', 'grouped', 'downloadable', 'bundle', 'booking'])
+                            ->orwhereIn('ps.type', ['simple', 'virtual'])->where('pv.qty' , '>' , 0);
+                    })
+                    ->where('wishlist.customer_id' , $customer->id)
+                    ->where('wishlist.channel_id'  , core()->getCurrentChannel()->id)
+                    ->count('wishlist.id');
+            } else {
+                $wishlistItemsCount = $this->wishlistRepository->count([
+                    'customer_id' => $customer->id,
+                    'channel_id'  => core()->getCurrentChannel()->id,
+                ]);
+            }
 
             $comparedItemsCount = $this->compareProductsRepository->count([
                 'customer_id' => $customer->id,
