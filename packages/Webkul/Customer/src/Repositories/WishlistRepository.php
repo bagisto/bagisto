@@ -64,7 +64,7 @@ class WishlistRepository extends Repository
         $query = $this->model;
 
         if (! core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
-            $query =$this->model
+            $query = $this->model
             ->leftJoin('products as ps', 'wishlist.product_id', '=', 'ps.id')
             ->leftJoin('product_inventories as pv', 'ps.id', '=', 'pv.product_id')
             ->where(function ($qb) {
