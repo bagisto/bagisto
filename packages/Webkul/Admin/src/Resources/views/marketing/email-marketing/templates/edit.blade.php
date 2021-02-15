@@ -11,7 +11,7 @@
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = history.length > 1 ? document.referrer : '{{ route('admin.dashboard.index') }}'"></i>
+                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.email-templates.index') }}'"></i>
 
                         {{ __('admin::app.marketing.templates.edit-title') }}
                     </h1>
@@ -62,7 +62,7 @@
                             </div>
                         </div>
                     </accordian>
-                            
+
                     {!! view_render_event('bagisto.admin.marketing.templates.create.after') !!}
 
                 </div>
