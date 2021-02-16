@@ -74,6 +74,28 @@ class Review extends AbstractProduct
         return $totalRating[$product->id] = $product->reviews()->where('status', 'approved')->sum('rating');
     }
 
+    /**
+     * Returns reviews with ratings.
+     *
+     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     *
+     * @return collection
+     */
+    public function getReviewsWithRatings($product)
+    {
+        static $reviews = [];
+
+        if (array_key_exists($product->id, $reviews)) {
+            return $reviews[$product->id];
+        }
+
+        return $reviews[$product->id] = $product->reviews()->where('status', 'approved')
+                                            ->select('rating', DB::raw('count(*) as total'))
+                                            ->groupBy('rating')
+                                            ->orderBy('rating', 'desc')
+                                            ->get();
+    }
+
      /**
      * Returns the Percentage rating of the product
      *
@@ -82,11 +104,7 @@ class Review extends AbstractProduct
      */
     public function getPercentageRating($product)
     {
-        $reviews = $product->reviews()->where('status', 'approved')
-                           ->select('rating', DB::raw('count(*) as total'))
-                           ->groupBy('rating')
-                           ->orderBy('rating', 'desc')
-                           ->get();
+        $reviews = $this->getReviewsWithRatings($product);
 
         $totalReviews = $this->getTotalReviews($product);
 

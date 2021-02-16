@@ -46,7 +46,7 @@ class Toolbar extends AbstractProduct
     {
         $keys = explode('-', $key);
 
-        return request()->fullUrlWithQuery([
+        return $this->fullUrlWithQuery([
             'sort'  => current($keys),
             'order' => end($keys),
         ]);
@@ -60,7 +60,7 @@ class Toolbar extends AbstractProduct
      */
     public function getLimitUrl($limit)
     {
-        return request()->fullUrlWithQuery([
+        return $this->fullUrlWithQuery([
             'limit' => $limit,
         ]);
     }
@@ -73,7 +73,7 @@ class Toolbar extends AbstractProduct
      */
     public function getModeUrl($mode)
     {
-        return request()->fullUrlWithQuery([
+        return $this->fullUrlWithQuery([
             'mode' => $mode,
         ]);
     }
@@ -184,5 +184,23 @@ class Toolbar extends AbstractProduct
 
         /* if still default config is not set from the admin then in last needed hardcoded value */
         return $viewOption ?? 'grid';
+    }
+
+    /**
+     * Returns the query string. As request built in method does not able to handle the
+     * multiple question marks, this method will check the query string and append the query string.
+     *
+     * @param  array  $additionalQuery
+     * @return string
+     */
+    public function fullUrlWithQuery($additionalQuery)
+    {
+        $queryString = request()->getQueryString();
+
+        $additionalQueryString = http_build_query($additionalQuery);
+
+        return $queryString
+            ? url()->current() . '?' . $queryString . '&' . $additionalQueryString
+            : url()->current() . '?' . $additionalQueryString;
     }
 }

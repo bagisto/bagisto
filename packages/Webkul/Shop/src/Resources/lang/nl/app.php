@@ -378,7 +378,8 @@ return [
                 'expired' => 'Expired',
                 'remaining-downloads' => 'Resterende downloads',
                 'unlimited' => 'Onbeperkt',
-                'download-error' => 'Downloadlink is verlopen.'
+                'download-error' => 'Downloadlink is verlopen.',
+                'payment-error' => 'Payment has not been done for this download.'
             ],
 
             'review' => [
@@ -446,7 +447,8 @@ return [
         'available-for-order' => 'Beschikbaar voor bestelling',
         'settings' => 'Settings',
         'compare_options' => 'Compare Options',
-        'wishlist-options' => 'Wishlist Options'
+        'wishlist-options' => 'Wishlist Options',
+        'offers' => 'Buy :qty for :price each and save :discount%',
     ],
 
     // 'reviews' => [

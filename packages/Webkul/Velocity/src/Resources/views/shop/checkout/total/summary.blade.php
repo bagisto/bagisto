@@ -46,7 +46,7 @@
 
     <div class="row">
         @php
-            $minimumOrderAmount = (int) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
+            $minimumOrderAmount = (float) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
         @endphp
 
         <proceed-to-checkout

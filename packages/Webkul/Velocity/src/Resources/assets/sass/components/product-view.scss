@@ -220,6 +220,8 @@
             position: absolute;
             line-height: 13em;
             background: $border-dark;
+            display: flex;
+            align-items: center;
 
             &.right {
                 right: 0;

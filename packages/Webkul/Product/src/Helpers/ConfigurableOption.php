@@ -4,27 +4,11 @@ namespace Webkul\Product\Helpers;
 
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductAttributeValue;
+use Webkul\Product\Facades\ProductImage;
+use Webkul\Product\Facades\ProductVideo;
 
 class ConfigurableOption extends AbstractProduct
 {
-    /**
-     * ProductImage object
-     *
-     * @var array
-     */
-    protected $productImage;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @param  \Webkul\Product\Helpers\ProductImage  $productImage
-     * @return void
-     */
-    public function __construct(ProductImage $productImage)
-    {
-        $this->productImage = $productImage;
-    }
-
     /**
      * Returns the allowed variants
      *
@@ -62,11 +46,12 @@ class ConfigurableOption extends AbstractProduct
             'attributes'     => $this->getAttributesData($product, $options),
             'index'          => isset($options['index']) ? $options['index'] : [],
             'regular_price'  => [
-                'formated_price' => core()->currency($product->getTypeInstance()->getMinimalPrice()),
-                'price'          => $product->getTypeInstance()->getMinimalPrice(),
+                'formated_price' => $product->getTypeInstance()->haveOffer() ? core()->currency($product->getTypeInstance()->getOfferPrice()) : core()->currency($product->getTypeInstance()->getMinimalPrice()),
+                'price'          => $product->getTypeInstance()->haveOffer() ? $product->getTypeInstance()->getOfferPrice() : $product->getTypeInstance()->getMinimalPrice(),
             ],
             'variant_prices' => $this->getVariantPrices($product),
             'variant_images' => $this->getVariantImages($product),
+            'variant_videos' => $this->getVariantVideos($product),
             'chooseText'     => trans('shop::app.products.choose-option'),
         ];
 
@@ -223,9 +208,32 @@ class ConfigurableOption extends AbstractProduct
                 $variantId = $variant->id;
             }
 
-            $images[$variantId] = $this->productImage->getGalleryImages($variant);
+            $images[$variantId] = ProductImage::getGalleryImages($variant);
         }
 
         return $images;
+    }
+
+    /**
+     * Get product videos for configurable variations
+     *
+     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @return array
+     */
+    protected function getVariantVideos($product)
+    {
+        $videos = [];
+
+        foreach ($this->getAllowedProducts($product) as $variant) {
+            if ($variant instanceof \Webkul\Product\Models\ProductFlat) {
+                $variantId = $variant->product_id;
+            } else {
+                $variantId = $variant->id;
+            }
+
+            $videos[$variantId] = ProductVideo::getVideos($variant);
+        }
+
+        return $videos;
     }
 }

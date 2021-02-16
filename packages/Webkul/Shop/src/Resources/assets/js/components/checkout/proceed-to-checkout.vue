@@ -17,7 +17,7 @@ export default {
         checkMinimumOrder: function (e) {
             if (! this.isMinimumOrderCompleted) {
                 e.preventDefault();
-                window.flashMessages = [{'type': 'alert-warning', 'message': this.minimumOrderMessage}];
+                window.flashMessages = [{'type': 'alert-warning', 'message': this.minimumOrderMessage.replace(/\&nbsp;/g, ' ') }];
                 this.$root.addFlashMessages();
             }
         }

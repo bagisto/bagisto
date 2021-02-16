@@ -11,7 +11,6 @@ use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductVideoRepository;
 use Webkul\Product\Repositories\ProductBundleOptionRepository;
 use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
-use Webkul\Product\Helpers\ProductImage;
 use Webkul\Product\Helpers\BundleOption;
 use Webkul\Checkout\Models\CartItem;
 
@@ -88,7 +87,6 @@ class Bundle extends AbstractType
      * @param  \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
      * @param  \Webkul\Product\Repositories\ProductBundleOptionRepository  $productBundleOptionRepository
      * @param  \Webkul\Product\Repositories\ProductBundleOptionProductRepository  $productBundleOptionProductRepository
-     * @param  \Webkul\Product\Helpers\ProductImage  $productImageHelper
      * @param  \Webkul\Product\Helpers\BundleOption  $bundleOptionHelper
      * @param \Webkul\Product\Repositories\ProductVideoRepository  $productVideoRepository
      * @return void
@@ -101,7 +99,6 @@ class Bundle extends AbstractType
         ProductImageRepository $productImageRepository,
         ProductBundleOptionRepository $productBundleOptionRepository,
         ProductBundleOptionProductRepository $productBundleOptionProductRepository,
-        ProductImage $productImageHelper,
         BundleOption $bundleOptionHelper,
         ProductVideoRepository $productVideoRepository
     )
@@ -112,7 +109,6 @@ class Bundle extends AbstractType
             $attributeValueRepository,
             $productInventoryRepository,
             $productImageRepository,
-            $productImageHelper,
             $productVideoRepository
         );
 
@@ -132,8 +128,9 @@ class Bundle extends AbstractType
     public function update(array $data, $id, $attribute = "id")
     {
         $product = parent::update($data, $id, $attribute);
+        $route = request()->route() ? request()->route()->getName() : '';
 
-        if (request()->route()->getName() != 'admin.catalog.products.massupdate') {
+        if ($route != 'admin.catalog.products.massupdate') {
             $this->productBundleOptionRepository->saveBundleOptons($data, $product);
         }
 

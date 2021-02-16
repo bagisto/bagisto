@@ -352,7 +352,8 @@ return [
                 'expired' => '期限切れ',
                 'remaining-downloads' => '残りのダウンロード数',
                 'unlimited' => '無制限',
-                'download-error' => 'ダウンロードリンクの有効期限が切れています.'
+                'download-error' => 'ダウンロードリンクの有効期限が切れています.',
+                'payment-error' => 'Payment has not been done for this download.'
             ],
 
             'review' => [
@@ -408,7 +409,8 @@ return [
         'available-for-order' => '注文可能',
         'settings' => 'Settings',
         'compare_options' => 'Compare Options',
-        'wishlist-options' => 'Wishlist Options'
+        'wishlist-options' => 'Wishlist Options',
+        'offers' => 'Buy :qty for :price each and save :discount%',
     ],
 
     'buynow' => [

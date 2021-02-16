@@ -49,8 +49,6 @@
             'products_and_description'
         ]
     );
-
-    $products = $productRepository->getAll($category->id);
 @endphp
 
 @section('content-wrapper')
@@ -126,9 +124,7 @@
 
                             {!! view_render_event('bagisto.shop.productOrCategory.index.pagination.before', ['category' => $category]) !!}
 
-                            <div class="bottom-toolbar">
-                                {{ $products->appends(request()->input())->links() }}
-                            </div>
+                            <div class="bottom-toolbar" v-html="paginationHTML"></div>
 
                             {!! view_render_event('bagisto.shop.productOrCategory.index.pagination.after', ['category' => $category]) !!}
                         </template>
@@ -166,7 +162,7 @@
                     this.$http.get(`${this.$root.baseUrl}/category-products/{{ $category->id }}${window.location.search}`)
                     .then(response => {
                         this.isLoading = false;
-                        this.products = response.data.products.data;
+                        this.products = response.data.products;
                         this.paginationHTML = response.data.paginationHTML;
                     })
                     .catch(error => {

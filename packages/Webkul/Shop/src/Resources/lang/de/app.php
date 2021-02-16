@@ -371,7 +371,8 @@ return [
                 'expired' => 'Abgelaufen',
                 'remaining-downloads' => 'Verbleibende Downloads',
                 'unlimited' => 'Unbegrenzt',
-                'download-error' => 'Der Download-Link ist abgelaufen.'
+                'download-error' => 'Der Download-Link ist abgelaufen.',
+                'payment-error' => 'Payment has not been done for this download.'
             ],
 
             'review' => [
@@ -439,7 +440,8 @@ return [
         'available' => 'Verfügbar',
         'settings' => 'Settings',
         'compare_options' => 'Compare Options',
-        'wishlist-options' => 'Wishlist Options'
+        'wishlist-options' => 'Wishlist Options',
+        'offers' => 'Buy :qty for :price each and save :discount%',
     ],
 
     // 'reviews' => [

@@ -3,7 +3,6 @@
 namespace Webkul\Product\Type;
 
 use Webkul\Checkout\Models\CartItem;
-use Webkul\Product\Helpers\ProductImage;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Datatypes\CartItemValidationResult;
@@ -80,7 +79,6 @@ class Downloadable extends AbstractType
      * @param \Webkul\Product\Repositories\ProductImageRepository              $productImageRepository
      * @param \Webkul\Product\Repositories\ProductDownloadableLinkRepository   $productDownloadableLinkRepository
      * @param \Webkul\Product\Repositories\ProductDownloadableSampleRepository $productDownloadableSampleRepository
-     * @param \Webkul\Product\Helpers\ProductImage                             $productImageHelper
      * @param \Webkul\Product\Repositories\ProductVideoRepository              $productVideoRepository
      *
      * @return void
@@ -93,7 +91,6 @@ class Downloadable extends AbstractType
         productImageRepository $productImageRepository,
         ProductDownloadableLinkRepository $productDownloadableLinkRepository,
         ProductDownloadableSampleRepository $productDownloadableSampleRepository,
-        ProductImage $productImageHelper,
         ProductVideoRepository $productVideoRepository
     )
     {
@@ -103,7 +100,6 @@ class Downloadable extends AbstractType
             $attributeValueRepository,
             $productInventoryRepository,
             $productImageRepository,
-            $productImageHelper,
             $productVideoRepository
         );
 
@@ -122,8 +118,9 @@ class Downloadable extends AbstractType
     public function update(array $data, $id, $attribute = "id")
     {
         $product = parent::update($data, $id, $attribute);
+        $route = request()->route() ? request()->route()->getName() : '';
 
-        if (request()->route()->getName() != 'admin.catalog.products.massupdate') {
+        if ($route != 'admin.catalog.products.massupdate') {
             $this->productDownloadableLinkRepository->saveLinks($data, $product);
 
             $this->productDownloadableSampleRepository->saveSamples($data, $product);

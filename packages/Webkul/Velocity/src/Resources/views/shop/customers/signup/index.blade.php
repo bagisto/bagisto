@@ -138,10 +138,12 @@
                             </span>
                         </div>
 
-                        <div class="control-group">
-                            <input type="checkbox" id="checkbox2" name="is_subscribed">
-                            <span>{{ __('shop::app.customer.signup-form.subscribe-to-newsletter') }}</span>
-                        </div>
+                        @if (core()->getConfigData('customer.settings.newsletter.subscription'))
+                            <div class="control-group">
+                                <input type="checkbox" id="checkbox2" name="is_subscribed">
+                                <span>{{ __('shop::app.customer.signup-form.subscribe-to-newsletter') }}</span>
+                            </div>
+                        @endif
 
                         {!! view_render_event('bagisto.shop.customers.signup_form_controls.after') !!}
 

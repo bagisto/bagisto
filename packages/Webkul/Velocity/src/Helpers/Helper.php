@@ -4,12 +4,13 @@ namespace Webkul\Velocity\Helpers;
 
 use Illuminate\Support\Facades\DB;
 use Webkul\Product\Helpers\Review;
+use Webkul\Product\Facades\ProductImage;
 use Webkul\Product\Models\Product as ProductModel;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Velocity\Repositories\OrderBrandsRepository;
-use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
+use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Velocity\Repositories\VelocityMetadataRepository;
 
 class Helper extends Review
@@ -173,49 +174,18 @@ class Helper extends Review
     }
 
     /**
-     * Returns the count rating of the product
-     *
-     * @param  \Webkul\Product\Contracts\Product  $product
-     *
-     * @return int
-     */
-    public function getCountRating($product)
-    {
-        $reviews = $product->reviews()
-                           ->where('status', 'approved')
-                           ->select('rating', DB::raw('count(*) as total'))
-                           ->groupBy('rating')
-                           ->orderBy('rating','desc')
-                           ->get();
-
-        $totalReviews = $this->getTotalReviews($product);
-
-        for ($i = 5; $i >= 1; $i--) {
-            if (! $reviews->isEmpty()) {
-                foreach ($reviews as $review) {
-                    if ($review->rating == $i) {
-                        $percentage[$i] = $review->total;
-
-                        break;
-                    } else {
-                        $percentage[$i]=0;
-                    }
-                }
-            } else {
-                $percentage[$i]=0;
-            }
-        }
-
-        return $percentage;
-    }
-
-    /**
-     * Returns the count rating of the product
+     * Returns the count rating of the product.
      *
      * @return array
      */
     public function getVelocityMetaData($locale = null, $channel = null, $default = true)
     {
+        static $metaData;
+
+        if ($metaData) {
+            return $metaData;
+        }
+
         if (! $locale) {
             $locale = request()->get('locale') ?: app()->getLocale();
         }
@@ -307,14 +277,9 @@ class Helper extends Review
     public function formatProduct($product, $list = false, $metaInformation = [])
     {
         $reviewHelper = app('Webkul\Product\Helpers\Review');
-        $productImageHelper = app('Webkul\Product\Helpers\ProductImage');
 
-        $totalReviews = $reviewHelper->getTotalReviews($product);
-
-        $avgRatings = ceil($reviewHelper->getAverageRating($product));
-
-        $galleryImages = $productImageHelper->getGalleryImages($product);
-        $productImage = $productImageHelper->getProductBaseImage($product)['medium_image_url'];
+        $galleryImages = ProductImage::getGalleryImages($product);
+        $productImage = ProductImage::getProductBaseImage($product, $galleryImages)['medium_image_url'];
 
         $largeProductImageName = "large-product-placeholder.png";
         $mediumProductImageName = "meduim-product-placeholder.png";
@@ -334,8 +299,8 @@ class Helper extends Review
 
         return [
             'priceHTML'         => $priceHTML,
-            'avgRating'         => $avgRatings,
-            'totalReviews'      => $totalReviews,
+            'avgRating'         => ceil($reviewHelper->getAverageRating($product)),
+            'totalReviews'      => $reviewHelper->getTotalReviews($product),
             'image'             => $productImage,
             'new'               => $isProductNew,
             'galleryImages'     => $galleryImages,
@@ -344,7 +309,6 @@ class Helper extends Review
             'description'       => $product->description,
             'shortDescription'  => $product->short_description,
             'firstReviewText'   => trans('velocity::app.products.be-first-review'),
-            'defaultAddToCart'  => view('shop::products.add-buttons', ['product' => $product])->render(),
             'addToCartHtml'     => view('shop::products.add-to-cart', [
                 'product'           => $product,
                 'addWishlistClass'  => ! (isset($list) && $list) ? '' : '',
@@ -373,38 +337,26 @@ class Helper extends Review
      */
     public function fetchProductCollection($items, $moveToCart = false, $separator='&')
     {
-        $productCollection = [];
-        $productIds = explode($separator, $items);
+        $productIds = collect(explode($separator, $items));
 
-        foreach ($productIds as $productId) {
-            // @TODO:- query only once insted of 2
+        return $productIds->map(function ($productId) use ($moveToCart) {
             $productFlat = $this->productFlatRepository->findOneWhere(['id' => $productId]);
 
             if ($productFlat) {
-                $product = $this->productRepository->findOneWhere(['id' => $productFlat->product_id]);
+                $formattedProduct = $this->formatProduct($productFlat, false, [
+                    'moveToCart' => $moveToCart,
+                    'btnText' => $moveToCart ? trans('shop::app.customer.account.wishlist.move-to-cart') : null,
+                ]);
 
-                if ($product) {
-                    $formattedProduct = $this->formatProduct($productFlat, false, [
-                        'moveToCart' => $moveToCart,
-                        'btnText' => $moveToCart ? trans('shop::app.customer.account.wishlist.move-to-cart') : null,
-                    ]);
-
-                    $productMetaDetails = [];
-                    $productMetaDetails['slug'] = $product->url_key;
-                    $productMetaDetails['product_image'] = $formattedProduct['image'];
-                    $productMetaDetails['priceHTML'] = $formattedProduct['priceHTML'];
-                    $productMetaDetails['new'] = $formattedProduct['new'];
-                    $productMetaDetails['addToCartHtml'] = $formattedProduct['addToCartHtml'];
-                    $productMetaDetails['galleryImages'] = $formattedProduct['galleryImages'];
-                    $productMetaDetails['defaultAddToCart'] = $formattedProduct['defaultAddToCart'];
-
-                    $product = array_merge($productFlat->toArray(), $productMetaDetails);
-
-                    array_push($productCollection, $product);
-                }
+                return array_merge($productFlat->toArray(), [
+                    'slug' => $productFlat->url_key,
+                    'product_image' => $formattedProduct['image'],
+                    'priceHTML' => $formattedProduct['priceHTML'],
+                    'new' => $formattedProduct['new'],
+                    'addToCartHtml' => $formattedProduct['addToCartHtml'],
+                    'galleryImages' => $formattedProduct['galleryImages']
+                ]);
             }
-        }
-
-        return $productCollection;
+        })->toArray();
     }
 }

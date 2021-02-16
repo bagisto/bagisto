@@ -11,7 +11,7 @@
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = history.length > 1 ? document.referrer : '{{ route('admin.dashboard.index') }}'"></i>
+                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.roles.index') }}'"></i>
 
                         {{ __('admin::app.users.roles.add-role-title') }}
                     </h1>
@@ -54,7 +54,7 @@
                             </div>
 
                             <div class="control-group">
-                                <tree-view value-field="key" id-field="key" items='@json($acl->items)'></tree-view>
+                                <tree-view value-field="key" id-field="key" items='@json($acl->items)' fallback-locale="{{ config('app.fallback_locale') }}"></tree-view>
                             </div>
                         </div>
                     </accordian>

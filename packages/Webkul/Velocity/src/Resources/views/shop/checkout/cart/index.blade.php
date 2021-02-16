@@ -1,5 +1,4 @@
 @inject ('reviewHelper', 'Webkul\Product\Helpers\Review')
-@inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
 @extends('shop::layouts.master')
 
@@ -20,6 +19,8 @@
 
         .alert-wishlist {
             display: inline-block;
+            position: relative;
+            top: -2px;
         }
     </style>
 @endpush
@@ -88,7 +89,7 @@
                                                     :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`">
                                             </a>
 
-                                            <div class="product-details-content col-7 pr0">
+                                            <div class="product-details-content col-6 pr0">
                                                 <div class="row item-title no-margin">
                                                     <a
                                                         href="{{ route('shop.productOrCategory.index', $url_key) }}"
@@ -113,7 +114,9 @@
                                                 @endif
 
                                                 <div class="row col-12 no-padding no-margin">
-                                                    @include ('shop::products.price', ['product' => $product])
+                                                    <div class="product-price">
+                                                        <span>{{ core()->currency($item->base_price) }}</span>
+                                                    </div>
                                                 </div>
 
                                                 @php
@@ -160,13 +163,11 @@
                                                 </div>
                                             </div>
 
-                                            <div class="product-quantity col-2 no-padding">
-                                                <div class="row">
-                                                    <quantity-changer
-                                                        :control-name="'qty[{{$item->id}}]'"
-                                                        quantity="{{ $item->quantity }}">
-                                                    </quantity-changer>
-                                                </div>
+                                            <div class="product-quantity col-3 no-padding">
+                                                <quantity-changer
+                                                    :control-name="'qty[{{$item->id}}]'"
+                                                    quantity="{{ $item->quantity }}">
+                                                </quantity-changer>
                                             </div>
 
                                             <div class="product-price fs18 col-1">

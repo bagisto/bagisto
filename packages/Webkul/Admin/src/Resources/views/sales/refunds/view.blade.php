@@ -12,7 +12,7 @@
         <div class="page-header">
             <div class="page-title">
                 <h1>
-                    <i class="icon angle-left-icon back-link" onclick="window.location = history.length > 1 ? document.referrer : '{{ route('admin.dashboard.index') }}'"></i>
+                    <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.sales.refunds.index') }}'"></i>
 
                     {{ __('admin::app.sales.refunds.view-title', ['refund_id' => $refund->id]) }}
                 </h1>

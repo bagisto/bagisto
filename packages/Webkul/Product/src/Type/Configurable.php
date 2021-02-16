@@ -6,6 +6,7 @@ use Webkul\Customer\Contracts\CartItem;
 use Webkul\Product\Datatypes\CartItemValidationResult;
 use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Models\ProductFlat;
+use Webkul\Product\Facades\ProductImage;
 use Illuminate\Support\Str;
 use Webkul\Checkout\Models\CartItem as CartItemModel;
 use Illuminate\Support\Facades\DB;
@@ -95,8 +96,9 @@ class Configurable extends AbstractType
     public function update(array $data, $id, $attribute = "id")
     {
         $product = parent::update($data, $id, $attribute);
+        $route = request()->route() ? request()->route()->getName() : '';
 
-        if (request()->route()->getName() != 'admin.catalog.products.massupdate') {
+        if ($route != 'admin.catalog.products.massupdate') {
             $previousVariantIds = $product->variants->pluck('id');
 
             if (isset($data['variants'])) {
@@ -380,6 +382,49 @@ class Configurable extends AbstractType
     }
 
     /**
+     * Get product offer price
+     *
+     * @return float
+     */
+    public function getOfferPrice() {
+        $rulePrices = $customerGroupPrices = [];
+
+        foreach ($this->product->variants as $variant) {
+            $rulePrice = app('Webkul\CatalogRule\Helpers\CatalogRuleProductPrice')->getRulePrice($variant);
+
+            if ($rulePrice) {
+                $rulePrices[] = $rulePrice->price;
+            }
+
+            $customerGroupPrices[] = $this->getCustomerGroupPrice($variant, 1);
+        }
+
+        if ($rulePrices || $customerGroupPrices) {
+            return min(array_merge($rulePrices, $customerGroupPrices));
+        }
+
+        return [];
+    }
+
+     /**
+     * Check for offer
+     *
+     * @return bool
+     */
+    public function haveOffer() {
+        $haveOffer = false;
+
+        $offerPrice = $this->getOfferPrice();
+        $minPrice   = $this->getMinimalPrice();
+
+        if ($offerPrice < $minPrice) {
+            $haveOffer = true;
+        }
+
+        return $haveOffer;
+    }
+
+    /**
      * Get product maximam price
      *
      * @return float
@@ -404,9 +449,16 @@ class Configurable extends AbstractType
      */
     public function getPriceHtml()
     {
-        return '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
+        if ($this->haveOffer()) {
+            return '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
+            . '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
+            . '<span class="regular-price">' . core()->currency($this->getMinimalPrice()) . '</span>'
+            . '<span class="final-price">' . core()->currency($this->getOfferPrice()) . '</span>';
+        } else {
+            return '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
             . ' '
             . '<span class="final-price">' . core()->currency($this->getMinimalPrice()) . '</span>';
+        }
     }
 
     /**
@@ -539,11 +591,11 @@ class Configurable extends AbstractType
                     $product = $item->child->product;
                 } else {
                     $product = $item->product;
-                } 
+                }
             }
         }
 
-        return $this->productImageHelper->getProductBaseImage($product);
+        return ProductImage::getProductBaseImage($product);
     }
 
     /**

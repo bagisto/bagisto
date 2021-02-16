@@ -372,7 +372,8 @@ return [
                 'expired' => 'Scaduto',
                 'remaining-downloads' => 'Download rimasti',
                 'unlimited' => 'Illimitati',
-                'download-error' => 'Il link per il Download è scaduto.'
+                'download-error' => 'Il link per il Download è scaduto.',
+                'payment-error' => 'Payment has not been done for this download.'
             ],
 
             'review' => [
@@ -439,7 +440,8 @@ return [
         'available-for-order' => 'Disponibile per lordine',
         'settings' => 'Settings',
         'compare_options' => 'Compare Options',
-        'wishlist-options' => 'Wishlist Options'
+        'wishlist-options' => 'Wishlist Options',
+        'offers' => 'Buy :qty for :price each and save :discount%',
     ],
 
     // 'reviews' => [

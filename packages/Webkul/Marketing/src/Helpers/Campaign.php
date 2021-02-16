@@ -61,8 +61,10 @@ class Campaign
     {
         $campaigns = $this->campaignRepository->getModel()
             ->leftJoin('marketing_events', 'marketing_campaigns.marketing_event_id', 'marketing_events.id')
+            ->leftJoin('marketing_templates', 'marketing_campaigns.marketing_template_id', 'marketing_templates.id')
             ->select('marketing_campaigns.*')
-            ->where('status', 1)
+            ->where('marketing_campaigns.status', 1)
+            ->where('marketing_templates.status', 'active')
             ->where(function ($query) {
                 $query->where('marketing_events.date', Carbon::now()->format('Y-m-d'))
                     ->orWhereNull('marketing_events.date');
@@ -90,18 +92,9 @@ class Campaign
      */
     public function getEmailAddresses($campaign)
     {
-        $newsletterEmails = app('\Webkul\Core\Repositories\SubscribersListRepository')->getModel()
-            ->where('is_subscribed', 1)
-            ->where('channel_id', $campaign->channel_id)
-            ->get('email');
-
-        $customerGroupEmails = $campaign->customer_group->customers()->where('subscribed_to_news_letter', 1)->get('email');
-
         $emails = [];
 
-        foreach ($newsletterEmails as $row) {
-            $emails[] = $row->email;
-        }
+        $customerGroupEmails = $campaign->customer_group->customers()->where('subscribed_to_news_letter', 1)->get('email');
 
         foreach ($customerGroupEmails as $row) {
             $emails[] = $row->email;

@@ -375,7 +375,8 @@ return [
                 'expired' => 'Expired',
                 'remaining-downloads' => 'Remaining Downloads',
                 'unlimited' => 'Unlimited',
-                'download-error' => 'Download link has been expired.'
+                'download-error' => 'Download link has been expired.',
+                'payment-error' => 'Payment has not been done for this download.'
             ],
 
             'review' => [
@@ -443,7 +444,8 @@ return [
         'available-for-order' => 'Available for Order',
         'settings' => 'Settings',
         'compare_options' => 'Compare Options',
-        'wishlist-options' => 'Wishlist Options'
+        'wishlist-options' => 'Wishlist Options',
+        'offers' => 'Buy :qty for :price each and save :discount%',
     ],
 
     // 'reviews' => [
