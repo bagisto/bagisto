@@ -22,7 +22,33 @@
 
 * [enhancement] - Duplicated queries removed.
 
-* [enhancement] - ability to login with social icons in guest checkout.
+* [enhancement] - Improved lighthouse score.
+
+* [enhancement] - Slider path should also work in default theme.
+
+* [enhancement] - Add configuration to enable/disable the image search feature.
+
+* [enhancement] - Multi product images should be changed on mouse hover.
+
+* [enhancement] - Add configuration to set admin url while install using bagisto:install command.
+
+* [enhancement] - Add confirm box while moving an item to wishlist from the cart page.
+
+* [enhancement] - Add option to export auto generated coupons in cart rule.
+
+* [enhancement] - Add bulk category delete functionality.
+
+* [enhancement] - Default shop content should be localized.
+
+* [enhancement] - Schedule cron job to process newsletter campaigns mails.
+
+* [enhancement] - Showing configurable product base on catalog rule price.
+
+* [enhancement] - Wishlist and Cart key in Product API.
+
+* [enhancement] - Add a option in the channel configuration to enable/disable wishlist.
+
+* [enhancement] - Add product number.
 
 * #3886 [fixed] - Cart item not bound to the account when login with social login.
 
