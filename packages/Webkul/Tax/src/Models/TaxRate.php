@@ -20,7 +20,6 @@ class TaxRate extends Model implements TaxRateContract
         'identifier',
         'is_zip',
         'zip_code',
-        'zip_code',
         'zip_from',
         'zip_to',
         'state',
