@@ -66,7 +66,6 @@ class ShopController extends Controller
         switch ($slug) {
             case 'new-products':
             case 'featured-products':
-                $formattedProducts = [];
                 $count = request()->get('count');
 
                 if ($slug == "new-products") {
@@ -75,19 +74,17 @@ class ShopController extends Controller
                     $products = $this->velocityProductRepository->getFeaturedProducts($count);
                 }
 
-                foreach ($products as $product) {
-                    if (core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
-                        array_push($formattedProducts, $this->velocityHelper->formatProduct($product));
-                    } else {
-                        if ($product->isSaleable()) {
-                            array_push($formattedProducts, $this->velocityHelper->formatProduct($product));
-                        }
-                    }
-                }
-
                 $response = [
                     'status'   => true,
-                    'products' => $formattedProducts,
+                    'products' => $products->map(function ($product) {
+                        if (core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
+                            return $this->velocityHelper->formatProduct($product);
+                        } else {
+                            if ($product->isSaleable()) {
+                                return $this->velocityHelper->formatProduct($product);
+                            }
+                        }
+                    }),
                 ];
 
                 break;
@@ -259,26 +256,36 @@ class ShopController extends Controller
         ]);
     }
 
+    /**
+     * This method will fetch products from category.
+     *
+     * @param  int  $categoryId
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function getCategoryProducts($categoryId)
     {
-        $products = $this->productRepository->getAll($categoryId);
+        /* fetch category details */
+        $categoryDetails = $this->categoryRepository->find($categoryId);
 
-        $productItems = $products->items();
-        $productsArray = $products->toArray();
-
-        if ($productItems) {
-            $formattedProducts = [];
-
-            foreach ($productItems as $product) {
-                array_push($formattedProducts, $this->velocityHelper->formatProduct($product));
-            }
-
-            $productsArray['data'] = $formattedProducts;
+        /* if category not found then return empty response */
+        if (! $categoryDetails) {
+            return response()->json([
+                'products' => [],
+                'paginationHTML' => ''
+            ]);
         }
 
-        return response()->json($response ?? [
-            'products'       => $productsArray,
-            'paginationHTML' => $products->appends(request()->input())->links()->toHtml(),
+        /* fetching products */
+        $products = $this->productRepository->getAll($categoryId);
+        $products->withPath($categoryDetails->slug);
+
+        /* sending response */
+        return response()->json([
+            'products' => collect($products->items())->map(function ($product) {
+                return $this->velocityHelper->formatProduct($product);
+            }),
+            'paginationHTML' => $products->appends(request()->input())->links()->toHtml()
         ]);
     }
 }

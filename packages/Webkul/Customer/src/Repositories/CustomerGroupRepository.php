@@ -42,4 +42,20 @@ class CustomerGroupRepository extends Repository
 
         return $customer;
     }
+
+    /**
+     * Returns guest group.
+     *
+     * @return object
+     */
+    public function getCustomerGuestGroup()
+    {
+        static $customerGuestGroup;
+
+        if ($customerGuestGroup) {
+            return $customerGuestGroup;
+        }
+
+        return $customerGuestGroup = $this->findOneByField('code', 'guest');
+    }
 }

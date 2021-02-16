@@ -12,6 +12,7 @@ use Webkul\Attribute\Models\AttributeFamilyProxy;
 use Webkul\Inventory\Models\InventorySourceProxy;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Contracts\Product as ProductContract;
+use Webkul\CatalogRule\Models\CatalogRuleProductPriceProxy;
 
 class Product extends Model implements ProductContract
 {
@@ -339,6 +340,23 @@ class Product extends Model implements ProductContract
     }
 
     /**
+     * Check in loaded family attributes.
+     *
+     * @return object
+     */
+    public function checkInLoadedFamilyAttributes()
+    {
+        static $loadedFamilyAttributes = [];
+
+        if (array_key_exists($this->attribute_family_id, $loadedFamilyAttributes)) {
+            return $loadedFamilyAttributes[$this->attribute_family_id];
+        }
+
+        return $loadedFamilyAttributes[$this->attribute_family_id] = core()->getSingletonInstance(AttributeRepository::class)
+            ->getFamilyAttributes($this->attribute_family);
+    }
+
+    /**
      * @return array
      */
     public function attributesToArray()
@@ -348,9 +366,7 @@ class Product extends Model implements ProductContract
         $hiddenAttributes = $this->getHidden();
 
         if (isset($this->id)) {
-            $familyAttributes = core()
-                ->getSingletonInstance(AttributeRepository::class)
-                ->getFamilyAttributes($this->attribute_family);
+            $familyAttributes = $this->checkInLoadedFamilyAttributes();
 
             foreach ($familyAttributes as $attribute) {
                 if (in_array($attribute->code, $hiddenAttributes)) {

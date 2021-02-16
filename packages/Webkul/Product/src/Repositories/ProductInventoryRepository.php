@@ -2,13 +2,12 @@
 
 namespace Webkul\Product\Repositories;
 
-use Illuminate\Container\Container as App;
 use Webkul\Core\Eloquent\Repository;
 
 class ProductInventoryRepository extends Repository
 {
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return mixed
      */
@@ -48,5 +47,21 @@ class ProductInventoryRepository extends Repository
                 }
             }
         }
+    }
+
+    /**
+     * Check if product inventories are already loaded. If already loaded then load from it.
+     *
+     * @return object
+     */
+    public function checkInLoadedProductInventories($product)
+    {
+        static $productInventories = [];
+
+        if (array_key_exists($product->id, $productInventories)) {
+            return $productInventories[$product->id];
+        }
+
+        return $productInventories[$product->id] = $product->inventories;
     }
 }
