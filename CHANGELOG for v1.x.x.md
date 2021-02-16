@@ -20,7 +20,7 @@
 
 * [feature] - laravel Debugger Mode, This will help the developer/users to see all the packages they are using inside the Webkul folder.
 
-* [enhancement] - 98 percent of duplicated queries removed.
+* [enhancement] - Duplicated queries removed.
 
 * [enhancement] - ability to login with social icons in guest checkout.
 
