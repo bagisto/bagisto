@@ -262,7 +262,7 @@
                         if (imageInput.files[0].type.includes('image/')) {
                             var self = this;
 
-                            if (imageInput.files[0].size <= 2000000) { 
+                            if (imageInput.files[0].size <= 2000000) {
                                 self.$root.showLoader();
 
                                 var formData = new FormData();
@@ -344,8 +344,8 @@
                                         ];
 
                                 self.$root.addFlashMessages();
-                                
-                            }        
+
+                            }
                         } else {
                             imageInput.value = '';
 
