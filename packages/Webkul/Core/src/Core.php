@@ -239,13 +239,7 @@ class Core
      */
     public function getChannelName($channel): string
     {
-        static $channelName;
-
-        if ($channelName) {
-            return $channelName;
-        }
-
-        return $channelName = $channel->name
+        return $channel->name
             ?? $channel->translate(app()->getLocale())->name
             ?? $channel->translate(config('app.fallback_locale'))->name;
     }
