@@ -17,6 +17,8 @@ class Product extends JsonResource
         $this->productReviewHelper = app('Webkul\Product\Helpers\Review');
 
         $this->wishlistHelper = app('Webkul\Customer\Helpers\Wishlist');
+
+        parent::__construct($resource);
     }
 
     /**
@@ -45,7 +47,8 @@ class Product extends JsonResource
             'formated_price'         => core()->currency($productTypeInstance->getMinimalPrice()),
             'short_description'      => $product->short_description,
             'description'            => $product->description,
-            'images'                 => ProductImageFacade::collection($product->images),
+            'images'                 => ProductImage::collection($product->images),
+            'videos'                 => ProductVideo::collection($product->videos),
             'base_image'             => ProductImageFacade::getProductBaseImage($product),
             'created_at'             => $product->created_at,
             'updated_at'             => $product->updated_at,
