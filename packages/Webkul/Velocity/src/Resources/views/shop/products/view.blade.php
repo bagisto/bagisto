@@ -32,7 +32,7 @@
         </script>
     @endif
 
-    <?php $productBaseImage = productimage()->getProductBaseImage($product); ?>
+    <?php $productBaseImage = productimage()->getProductBaseImage($product, $images); ?>
 
     <meta name="twitter:card" content="summary_large_image" />
 

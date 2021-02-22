@@ -2,9 +2,207 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
+## **v1.3.0 (16th of February 2021)** - *Release*
+
+* [feature] - PayPal Smart Button for quick and fast payment.
+
+* [feature] - Email Marketing-Newsletter to send the newsletter to your valuable customers.
+
+* [feature] - Control on Displaying of out of stock Product.
+
+* [feature] - Minimum Order Amount by which it will necessary to meet their order subtotal to make a successful purchase.
+
+* [feature] - Add Video of Your Product.
+
+* [feature] - Maintenance Mode, let search engines know that your site is currently down.
+
+* [feature] - Buy Now at Product Page, Admin can easily enable/disable the Buy Now Button for both themes.
+
+* [feature] - laravel Debugger Mode, This will help the developer/users to see all the packages they are using inside the Webkul folder.
+
+* [enhancement] - Duplicated queries removed.
+
+* [enhancement] - Improved lighthouse score.
+
+* [enhancement] - Slider path should also work in default theme.
+
+* [enhancement] - Add configuration to enable/disable the image search feature.
+
+* [enhancement] - Multi product images should be changed on mouse hover.
+
+* [enhancement] - Add configuration to set admin url while install using bagisto:install command.
+
+* [enhancement] - Add confirm box while moving an item to wishlist from the cart page.
+
+* [enhancement] - Add option to export auto generated coupons in cart rule.
+
+* [enhancement] - Add bulk category delete functionality.
+
+* [enhancement] - Default shop content should be localized.
+
+* [enhancement] - Schedule cron job to process newsletter campaigns mails.
+
+* [enhancement] - Showing configurable product base on catalog rule price.
+
+* [enhancement] - Wishlist and Cart key in Product API.
+
+* [enhancement] - Add a option in the channel configuration to enable/disable wishlist.
+
+* [enhancement] - Add product number.
+
+* #3886 [fixed] - Cart item not bound to the account when login with social login.
+
+* #3785 [fixed] - Product filter is not working according to channel filter.
+
+* #3879 [fixed] - Getting exception on uploading high size image in Invoice Slip Design logo.
+
+* #3954 [fixed] - Featured New Product Adding Special Price the 2 columns in mobile version is broke.
+
+* #3964 [fixed] - pay with paypal smart button is missing in checkout.
+
+* #3940 [fixed] - bagisto:install defines APP_URL to localhost by default.
+
+* #3957 [fixed] - Configurable product parent image is visible in cart instead of variant image.
+
+* #3981 [fixed] - No validation message on creating addresses without required params.
+
+* #4030 [fixed] - featured or new label should not visible if product is not exist in default theme.
+
+* #4061 [fixed] - variant image is not visible when item added in wishlist.
+
+* #4024 [fixed] - customer group price discount is not applied when product price and discount amount is same.
+
+* #4062 [fixed] - search icon in velocity theme is not clickable.
+
+* #4085 [fixed] - Not able to fetch invoice by API.
+
+* #4094 [fixed] - filter is not working properly in case product name contains any special character.
+
+* #4130 [fixed] - event ticket price field accepts negative values.
+
+* #4117 [fixed] - error in booking product while booking a slot.
+
+* #4124 [fixed] - Client Side validation issue in Special Price for ticket booking Product.
+
+* #4191 [fixed] - back date should be disabled in booking products.
+
+* #4105 [fixed] - Issue with total due in cash on delivery.
+
+* #3975 [fixed] - Filter is not working properly for status column in case product has not been name and other required details.
+
+* #4212 [fixed] - Error uninstall developer dependencies going into production mode.
+
+* #4234 [fixed] - default values are not working in system configuration.
+
+* #4228 [fixed] - add a validation if user trying to upload greater size image in image search.
+
+* #3807 [fixed] - Can't locate path for migrations in bagisto/packages.
+
+* #4248 [fixed] - PayPay scripts are being loaded even if inactive.
+
+* #4277 [fixed] - subtotal is not updating when remove product from the minicart.
+
+* #4287 [fixed] - Product locale not correctly selected since admin language select.
+
+* #4119 [fixed] - Admin should not be able to create multiple cart rule using same coupon code.
+
+* #4299 [fixed] - sort by newest first or oldest first doesn't work in category.
+
+* #3932 [fixed] - When copying a product, replicating the image causes it to be volatile.
+
+* #4335 [fixed] - Image search disable functionality is not working.
+
+* #4325 [fixed] - address is not saving on onepage checkout.
+
+* #4394 [fixed] - maintenance mode status is not working in channel section.
+
+* #4372 [fixed] - The brand attribute should be deletable.
+
+* #4393 [fixed] - composer test in windows.
+
+* #4413 [fixed] - getting error when setup fresh bagisto from master.
+
+* #4408 [fixed] - silder image not work.
+
+* #4401 [fixed] - composer install --no-dev , gives error.
+
+* #4192 [fixed] - db connection failed at first time when setup using bagisto:install.
+
+* #4425 [fixed] - saved billing address details are not showing on onepage checkout.
+
+* #4434 [fixed] - missing date picker option in event filter #4434.
+
+* #3374 [fixed] - Social Login Error.
+
+* #4440 [fixed] - getting exception when allow user role with marketing permission.
+
+* #3002 [fixed] - Buggggggg iOS Safari images are stretched.
+
+* #4456 [fixed] - getting exception when filter category, attribute, customer datagrid based on status.
+
+* #4433 [fixed] - getting exception when filter campaigns/email templates based on status.
+
+* #4452 [fixed] - products are not visible on homepage if filter based on ar locale.
+
+* #4457 [fixed] - cart rule status always set as draft.
+
+* #4428 [fixed] - user roles permission option always save when trying to uncheck selected option.
+
+* #4392 [fixed] - Multiple cart rule is getting applied in case condition matches on applying only one coupon.
+
+* #4459 [fixed] - disabled option should not accessible from routes in frontend.
+
+* #4447 [fixed] - Product URl key not accepting value for Chinese, Japnese, Arabic locale.
+
+* #4481 [fixed] - Shipping costs are not calculated with grand total.
+
+* #4399 [fixed] - Role-based security issue - User with no permission has acces to some admin pages/controls.
+
+* #4369 [fixed] - Product filter [Shop By].
+
+* #4486 [fixed] - getting exception when copy cart rule.
+
+* #4386 [fixed] - Slow Category Query.
+
+* #4432 [fixed] - subscribed checkbox should be mark if customer is already subscribed.
+
+* #4435 [fixed] -  customer group condition doesn't match while sending newsletter email.
+
+* #4506 [fixed] -  customer group pricing fixed discount should accept decimal values.
+
+* #4498 [fixed] -  able to delete root category which is selected in channel.
+
+* #4420 [fixed] -  Invoice PDF breaking.
+
+* #3638 [fixed] -  Promotion, combine "percentage" & "fixed amount to whole cart" cart rules get wrong disco * unt amount.
+
+* #3572 [fixed] -  No info about other discounts in case there is multiple group pricing exist in same product.
+
+* #4577 [fixed] -  error on minicart while adding configurable item.
+
+* #4571 [fixed] -  video is not showing for variant product in product page.
+
+* #4566 [fixed] -  wrong attribute are visible on layered navigation.
+
+* #4567 [fixed] -  configurable product variant attribute options are not visible in layered navigation.
+
+* #4590 [fixed] -  getting exception on cart when remove minimum amount from backend.
+
+* #4583 [fixed] -  inactive template are sending in newsletter mail to subscribed users.
+
+* #4596 [fixed] -  Unable to view order at customer end.
+
+* #4495 [fixed] -  Only load the locales that are enabled on the channel.
+
+* #4597 [fixed] -  Add a product to Wishlist twice issue.
+
+* #4620 [fixed] -  value is not saved in fallback locale in configuration section.
+
+* #4573 [fixed] -  out of stock items are visible on category & search page when configuration is disabled.
+
 ## **v1.2.0 (8th of September 2020)** - *Release*
 
-* [feature] - Config to add custom css and javascript (Eg. google anlytics) 
+* [feature] - Config to add custom css and javascript (Eg. google anlytics)
 
 * [feature] - Added some config for payment method additional information
 
@@ -480,7 +678,7 @@
 
 * #3356 [fixed] - search term removed from the search bar in default theme
 
-* #3357 [fixed] - Image search feature is not available in mobile view default theme 
+* #3357 [fixed] - Image search feature is not available in mobile view default theme
 
 * #3358 [fixed] - New and sale icon lable on product issue in RTL
 

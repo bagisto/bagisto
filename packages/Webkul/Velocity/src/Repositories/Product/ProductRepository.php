@@ -116,6 +116,10 @@ class ProductRepository extends Repository
 
             $locale = request()->get('locale') ?: app()->getLocale();
 
+            if (! core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
+                $query = app('Webkul\Product\Repositories\ProductRepository')->checkOutOfStockItem($query);
+            }
+
             $query = $query->distinct()
                            ->addSelect('product_flat.*')
                            ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')

@@ -26,7 +26,7 @@
                 <div class="page-title">
                     <h1>
                         <i class="icon angle-left-icon back-link"
-                           onclick="window.location = history.length > 1 ? document.referrer : '{{ route('admin.dashboard.index') }}'"></i>
+                           onclick="window.location = '{{ route('admin.catalog.products.index') }}'"></i>
 
                         {{ __('admin::app.catalog.products.edit-title') }}
                     </h1>

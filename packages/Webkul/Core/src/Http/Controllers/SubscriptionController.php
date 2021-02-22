@@ -72,9 +72,10 @@ class SubscriptionController extends Controller
 
         $customer = $subscriber->customer;
 
-        $customer->subscribed_to_news_letter = $data['is_subscribed'];
-
-        $customer->save();
+        if (! is_null($customer)) {
+            $customer->subscribed_to_news_letter = $data['is_subscribed'];
+            $customer->save();
+        }
 
         $result = $subscriber->update($data);
 

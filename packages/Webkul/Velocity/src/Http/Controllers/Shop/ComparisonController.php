@@ -2,26 +2,19 @@
 
 namespace Webkul\Velocity\Http\Controllers\Shop;
 
-use Webkul\Velocity\Helpers\Helper;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository as CustomerCompareProductRepository;
-
 class ComparisonController extends Controller
 {
     /**
-     * function for customers to get products in comparison.
+     * Method for customers to get products in comparison.
      *
      * @return \Illuminate\Http\Response|\Illuminate\View\View
      */
     public function getComparisonList()
     {
         if (! core()->getConfigData('general.content.shop.compare_option')) {
-
             abort(404);
         } else {
             if (request()->get('data')) {
-                $productSlugs = null;
-
                 $productCollection = [];
 
                 if (auth()->guard('customer')->user()) {
@@ -32,20 +25,17 @@ class ComparisonController extends Controller
                             'product_flat.id'
                         )
                         ->where('customer_id', auth()->guard('customer')->user()->id)
-                        ->get()
-                        ->toArray();
+                        ->get();
 
-                    $items = [];
+                    $items = $productCollection->map(function ($product) {
+                        return $product->id;
+                    })->join('&');
 
-                    foreach ($productCollection as $index => $customerCompare) {
-                        array_push($items, $customerCompare['id']);
-                    }
-
-                    $items = implode('&', $items);
-                    $productCollection = $this->velocityHelper->fetchProductCollection($items);
-
+                    $productCollection = ! empty($items)
+                        ? $this->velocityHelper->fetchProductCollection($items)
+                        : [];
                 } else {
-                    // for product details
+                    /* for product details */
                     if ($items = request()->get('items')) {
                         $productCollection = $this->velocityHelper->fetchProductCollection($items);
                     }

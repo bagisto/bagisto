@@ -2,15 +2,13 @@
 
 namespace Webkul\Product\Repositories;
 
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Illuminate\Http\UploadedFile;
 use Webkul\Core\Eloquent\Repository;
 
 class ProductCustomerGroupPriceRepository extends Repository
 {
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return mixed
      */
@@ -49,5 +47,23 @@ class ProductCustomerGroupPriceRepository extends Repository
         foreach ($previousCustomerGroupPriceIds as $customerGroupPriceId) {
             $this->delete($customerGroupPriceId);
         }
+    }
+
+    /**
+     * Check if product customer group prices already loaded then load from it.
+     *
+     * @return object
+     */
+    public function checkInLoadedCustomerGroupPrice($product, $customerGroupId)
+    {
+        static $customerGroupPrices = [];
+
+        if (array_key_exists($product->id, $customerGroupPrices)) {
+            return $customerGroupPrices[$product->id];
+        }
+
+        return $customerGroupPrices[$product->id] = $product->customer_group_prices->filter(function ($customerGroupPrice) use ($customerGroupId) {
+            return $customerGroupPrice->customer_group_id == $customerGroupId || is_null($customerGroupPrice->customer_group_id);
+        });
     }
 }
