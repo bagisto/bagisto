@@ -4,19 +4,21 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## **v1.3.1 (22nd of February 2021)** - *Release*
 
-* #4633 [fixed] - Incorrect validation message at admin end.
-
-* #4641 [fixed] - Getting data in client id "sb" by default.
-
-* #4643 [fixed] - Getting exception when admin change the status of subscribed user to false.
-
-* #4645 [fixed] - `/api/products` returns trying to get property 'product' of non-object.
-
-* #4647 [fixed] - APP_VERSION returns the wrong version number.
+* #4659 [fixed] - Only show defaults option in Shipping.
 
 * #4654 [fixed] - Composer error with `khaled.alshamaa/ar-php` version.
 
-* #4659 [fixed] - Only show defaults option in Shipping.
+* #4647 [fixed] - APP_VERSION returns the wrong version number.
+
+* #4645 [fixed] - `/api/products` returns trying to get property 'product' of non-object.
+
+* #4643 [fixed] - Getting exception when admin change the status of subscribed user to false.
+
+* #4641 [fixed] - Getting data in client id "sb" by default.
+
+* #4633 [fixed] - Incorrect validation message at admin end.
+
+* #4344 [fixed] - Attribute option positioning not working (Front-end).
 
 ## **v1.3.0 (16th of February 2021)** - *Release*
 
