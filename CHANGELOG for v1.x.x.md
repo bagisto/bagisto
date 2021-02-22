@@ -120,17 +120,17 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #4432 [fixed] - subscribed checkbox should be mark if customer is already subscribed.
 
+* #4428 [fixed] - user roles permission option always save when trying to uncheck selected option.
+
 * #4425 [fixed] - saved billing address details are not showing on onepage checkout.
+
+* #4420 [fixed] -  Invoice PDF breaking.
 
 * #4413 [fixed] - getting error when setup fresh bagisto from master.
 
 * #4408 [fixed] - silder image not work.
 
 * #4401 [fixed] - composer install --no-dev , gives error.
-
-* #4428 [fixed] - user roles permission option always save when trying to uncheck selected option.
-
-* #4420 [fixed] -  Invoice PDF breaking.
 
 * #4399 [fixed] - Role-based security issue - User with no permission has acces to some admin pages/controls.
 
