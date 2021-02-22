@@ -14,6 +14,12 @@
     </style>
 
     <script>
+        let messages = {
+            universalError: "Something went wrong!",
+            sdkValidationError: "SDK Validation Error: 'Client ID not recognized for either production or sandbox: {{ core()->getConfigData('sales.paymentmethods.paypal_smart_button.client_id') }}'",
+            authorizationError: "Client ID and Client Secret should be valid!"
+        };
+
         window.onload = (function() {
             eventBus.$on('after-payment-method-selected', function(payment) {
                 if (payment.method != 'paypal_smart_button') {
@@ -23,11 +29,7 @@
                 }
 
                 if (typeof paypal == 'undefined') {
-                    window.flashMessages = [{'type': 'alert-error', 'message': "SDK Validation error: 'client-id not recognized for either production or sandbox: {{core()->getConfigData('sales.paymentmethods.paypal_smart_button.client_id')}}'" }];
-
-                    window.flashMessages.alertMessage = "SDK Validation error: 'client-id not recognized for either production or sandbox: {{core()->getConfigData('sales.paymentmethods.paypal_smart_button.client_id')}}'";
-
-                    app.addFlashMessages();
+                    options.alertBox(messages.sdkValidationError);
 
                     return;
                 }
@@ -40,6 +42,12 @@
 
                     enableStandardCardFields: false,
 
+                    alertBox: function (message) {
+                        window.flashMessages = [{'type': 'alert-error', 'message': message }];
+                        window.flashMessages.alertMessage = message;
+                        app.addFlashMessages();
+                    },
+
                     createOrder: function(data, actions) {
                         return window.axios.get("{{ route('paypal.smart-button.create-order') }}")
                             .then(function(response) {
@@ -48,7 +56,13 @@
                             .then(function(orderData) {
                                 return orderData.id;
                             })
-                            .catch(function (error) {})
+                            .catch(function (error) {
+                                if (error.response.data.error === 'invalid_client') {
+                                    options.alertBox(messages.authorizationError);
+                                }
+
+                                options.alertBox(messages.universalError);
+                            });
                     },
 
                     onApprove: function(data, actions) {
@@ -72,18 +86,6 @@
                         .catch(function (error) {
                             window.location.href = "{{ route('shop.checkout.cart.index') }}";
                         })
-                    },
-
-                    onCancel: function (data) {
-                        console.log('Canceled payment...');
-                    },
-
-                    onError: function (err) {
-                        window.flashMessages = [{'type': 'alert-error', 'message': err }];
-
-                        window.flashMessages.alertMessage = err;
-
-                        app.addFlashMessages();
                     }
                 };
 
