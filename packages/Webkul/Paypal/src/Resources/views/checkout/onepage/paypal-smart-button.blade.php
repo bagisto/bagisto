@@ -15,9 +15,9 @@
 
     <script>
         let messages = {
-            universalError: "Something went wrong!",
-            sdkValidationError: "SDK Validation Error: 'Client ID not recognized for either production or sandbox: {{ core()->getConfigData('sales.paymentmethods.paypal_smart_button.client_id') }}'",
-            authorizationError: "Client ID and Client Secret should be valid!"
+            universalError: "{{ __('paypal::app.error.universal-error') }}",
+            sdkValidationError: "{{ __('paypal::app.error.sdk-validation-error') }}",
+            authorizationError: "{{ __('paypal::app.error.authorization-error') }}"
         };
 
         window.onload = (function() {
