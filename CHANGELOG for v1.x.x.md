@@ -1,6 +1,22 @@
 # CHANGELOG for v1.x.x
 
-#### This changelog consists the bug & security fixes and new features being included in the releases listed below.
+This changelog consists of the bug & security fixes and new features being included in the releases listed below.
+
+## **v1.3.1 (22nd of February 2021)** - *Release*
+
+* #4659 [fixed] - Only show defaults option in Shipping.
+
+* #4654 [fixed] - Composer error with `khaled.alshamaa/ar-php` version.
+
+* #4641 [fixed] - Getting data in client id "sb" by default.
+
+* #4647 [fixed] - APP_VERSION returns the wrong version number.
+
+* #4645 [fixed] - `/api/products` returns trying to get property 'product' of non-object.
+
+* #4643 [fixed] - Getting exception when admin change the status of subscribed user to false.
+
+* #4633 [fixed] - Incorrect validation message at admin end.
 
 ## **v1.3.0 (16th of February 2021)** - *Release*
 
@@ -273,8 +289,6 @@
 * #3894 [fixed] - Customer is not able to increase or decrease the qty of downloadable product from cart in default theme
 
 * #3900 [fixed] - layout issue on cart page in ar (Default theme)
-
-
 
 ## **v1.2.0-BETA1 (18th of August 2020)** - *Release*
 
@@ -938,15 +952,11 @@
 
 * #3767 [fixed] - Header-nav on mobile view seem buggy on search item
 
-
-
-## **v1.1.2 (24th of March 2020)** - *Release*
+## **v1.1.2 (28th of April 2020)** - *Release*
 
 * [feature] - Now customer can cancel order.
 
 * [feature] - Auto and manual currency exchange rates update feature added.
-
-
 
 * #797 [fixed] - Add new module
 
@@ -1006,8 +1016,7 @@
 
 * #2954 [fixed] - The merging cart function does not work when already added all items of product into customer cart
 
-
-## **v1.1.0 (24th of March 2020)** - *Release*
+## **v1.1.1 (14th of April 2020)** - *Release*
 
 * #797 [fixed] - Add new module
 
@@ -1138,10 +1147,6 @@
 * #2871 [fixed] - Refund throws "Undefined index: shipping" error
 
 * #2876 [fixed] - Place order is disable at checkout when select shipping address
-
-
-
-
 
 ## **v1.1.0 (24th of March 2020)** - *Release*
 
@@ -1334,7 +1339,6 @@
 * #2726 [fixed] - is shop.js the vue framework ??
 
 * #2732 [fixed] - missing product's quick view in category page
-
 
 ## **v1.0.0 (24th of February 2020)** - *Release*
 
