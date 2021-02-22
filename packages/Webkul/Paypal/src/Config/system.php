@@ -89,10 +89,7 @@ return [
             ],  [
                 'name'       => 'client_secret',
                 'title'      => 'admin::app.admin.system.client-secret',
-                'info'          => 'admin::app.admin.system.client-secret-info',
-                'type'          => 'depends',
-                'depend'        => 'active:1',
-                'validation'    => 'required_if:active,1',
+                'type'          => 'text'
             ],  [
                 'name'       => 'accepted_currencies',
                 'title'      => 'admin::app.admin.system.accepted-currencies',
