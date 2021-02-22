@@ -15,7 +15,7 @@
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = history.length > 1 ? document.referrer : '{{ route('admin.dashboard.index') }}'"></i>
+                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.sliders.index') }}'"></i>
 
                         {{ __('admin::app.settings.sliders.add-title') }}
                     </h1>
@@ -60,7 +60,7 @@
                         <select class="control" id="channel_id" name="channel_id" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.settings.sliders.channels') }}&quot;">
                             @foreach ($channels as $channel)
                                 <option value="{{ $channel->id }}" @if ($channel->id == old('channel_id')) selected @endif>
-                                    {{ __($channel->name) }}
+                                    {{ __(core()->getChannelName($channel)) }}
                                 </option>
                             @endforeach
                         </select>

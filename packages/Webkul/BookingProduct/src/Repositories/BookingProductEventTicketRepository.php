@@ -73,12 +73,12 @@ class BookingProductEventTicketRepository extends Repository
                 $savedTickets[$ticketId]['ticket'] = $ticket;
                 $savedTickets[$ticketId]['ticketInputs'] = $ticketInputs;
             }
+
+            Event::dispatch('booking_product.booking.event-ticket.save.after', ['tickets' => $savedTickets]);
         }
 
         foreach ($previousTicketIds as $previousTicketId) {
             $this->delete($previousTicketId);
         }
-
-        Event::dispatch('booking_product.booking.event-ticket.save.after', ['tickets' => $savedTickets]);
     }
 }

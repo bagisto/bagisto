@@ -121,16 +121,14 @@ class ProductFlat extends Model implements ProductFlatContract
      */
     public function images()
     {
-        return (ProductImageProxy::modelClass())
-            ::where('product_images.product_id', $this->product_id)
-            ->select('product_images.*');
+        return $this->hasMany(ProductImageProxy::modelClass(), 'product_id', 'product_id');
     }
 
     /**
      * The videos that belong to the product.
      */
     public function videos()
-    {   
+    {
         return $this->product->videos();
     }
 
