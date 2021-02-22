@@ -21,7 +21,7 @@
         };
 
         window.onload = (function() {
-            eventBus.$on('after-payment-method-selected', function(payment) {
+            eventBus.$on('after-payment-method-selected', function (payment) {
                 if (payment.method != 'paypal_smart_button') {
                     $('.paypal-buttons').remove();
 
@@ -39,6 +39,8 @@
                         layout:  'vertical',
                         shape:   'rect',
                     },
+
+                    authorizationFailed: false,
 
                     enableStandardCardFields: false,
 
@@ -58,10 +60,11 @@
                             })
                             .catch(function (error) {
                                 if (error.response.data.error === 'invalid_client') {
+                                    options.authorizationFailed = true;
                                     options.alertBox(messages.authorizationError);
                                 }
 
-                                options.alertBox(messages.universalError);
+                                return error;
                             });
                     },
 
@@ -86,6 +89,12 @@
                         .catch(function (error) {
                             window.location.href = "{{ route('shop.checkout.cart.index') }}";
                         })
+                    },
+
+                    onError: function (error) {
+                        if (! options.authorizationFailed) {
+                            options.alertBox(error);
+                        }
                     }
                 };
 
