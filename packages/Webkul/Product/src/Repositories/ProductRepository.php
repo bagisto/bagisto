@@ -129,11 +129,11 @@ class ProductRepository extends Repository
     }
 
     /**
-     * @param string $categories
+     * @param string $categoryId
      *
      * @return \Illuminate\Support\Collection
      */
-    public function getAll($categories = null)
+    public function getAll($categoryId = null)
     {
         $params = request()->input();
 
@@ -147,7 +147,7 @@ class ProductRepository extends Repository
 
         $page = Paginator::resolveCurrentPage('page');
 
-        $repository = app(ProductFlatRepository::class)->scopeQuery(function ($query) use ($params, $categories) {
+        $repository = app(ProductFlatRepository::class)->scopeQuery(function ($query) use ($params, $categoryId) {
             $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
             $locale = request()->get('locale') ?: app()->getLocale();
@@ -161,8 +161,8 @@ class ProductRepository extends Repository
                 ->where('product_flat.locale', $locale)
                 ->whereNotNull('product_flat.url_key');
 
-            if ($categories) {
-                $qb->whereIn('product_categories.category_id', explode(',', $categories));
+            if ($categoryId) {
+                $qb->whereIn('product_categories.category_id', explode(',', $categoryId));
             }
 
             if (! core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
