@@ -288,4 +288,14 @@ class Downloadable extends AbstractType
 
         return $result;
     }
+
+    /**
+     * Get product maximam price
+     *
+     * @return float
+     */
+    public function getMaximamPrice()
+    {
+        return $this->product->price;
+    }
 }
