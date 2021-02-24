@@ -450,10 +450,6 @@ This changelog consists the bug & security fixes and new features being included
 
 * [feature] - Added translations for Arabic and Brazilian languages(thanks to @cgartner-redstage).
 
-* #633 [fixed] - Fixed database custom port issue in installer issue (thanks to @abdulhamid-alattar)
-
-* #652 [fixed] - Removed black bar in admin panel.
-
 * #676 [fixed] - Can't filter by ID.
 
 * #671 [fixed] - Having these errors Undefined variable: key/value.
@@ -462,13 +458,17 @@ This changelog consists the bug & security fixes and new features being included
 
 * #664 [fixed] - CSS issues
 
-* #646 [fixed] - Warning: array_combine() expects parameter 1 to be array, null given ( install.php on line 32 )
+* #652 [fixed] - Removed black bar in admin panel.
 
-* #639 [fixed] - Broken link of image, on edit page of attribute in case of Swatch Type "Image" when editing first time.
+* #646 [fixed] - Warning: array_combine() expects parameter 1 to be array, null given ( install.php on line 32 )
 
 * #642 [fixed] - Getting exception on search in Products, Categories, Shipments & Product Reviews datagrids.
 
+* #639 [fixed] - Broken link of image, on edit page of attribute in case of Swatch Type "Image" when editing first time.
+
 * #636 [fixed] - Getting exception in shipment grid.
+
+* #633 [fixed] - Fixed database custom port issue in installer issue (thanks to @abdulhamid-alattar)
 
 * #621 [Added] - Add a column in product grid to identify the attribute family used for creating that product.
 
@@ -522,9 +522,9 @@ This changelog consists the bug & security fixes and new features being included
 
 * #551 [Fixed] - Able to delete root category.
 
-* #545 [Fixed] - Installer doesn't launch admin panel of framework.
-
 * #546 [Fixed] - Getting Exception while uploading category image after installing project using installer.
+
+* #545 [Fixed] - Installer doesn't launch admin panel of framework.
 
 * #534 [Fixed] - Product is displaying as out of stock if default Inventory is zero, while other Inventory sources have products.
 
@@ -544,63 +544,63 @@ This changelog consists the bug & security fixes and new features being included
 
 * [feature] - Faster and efficiently refactored datagrids for showing listing data.
 
-* #191 [fixed] - Add a column Shipped to in Order Grid ,to display the name for whom order has been shipped.
-
-* #368 [fixed] - If products are added in shopping cart and those product get deleted from admin section then it still displays in cart.
-
-* #353 [fixed] - Getting exception in deleting currency.
-
-* #143 [fixed] - If user login from checkout page, then it should redirect to checkout page.
-
-* #402 [fixed] - Change the validation message on moving product from wish-list to cart if product added in wish-list is out of stock.
-
-* #530 [fixed] - Unable to delete any of the created attributes.Getting validation message that attribute is used in configurable product while attribute is not used for creating any product.
-
-* #514 [fixed] - Getting Exception on changing the status of Product(On mass update).
-
 * #532 [fixed] - Pagination should not display if there is no product on other page.If 9 products are selected to show on a single page then until the limit reach pagination should not occur.
-
-* #506 [fixed] - While Installing the framework through Installer if at any stage user click on back button and then click on continue to install, then in this case unable to install.
-
-* #513 [fixed] - Getting Exception in deleting categories.
 
 * #531 [fixed] - Do not use short form of any words for notification.
 
+* #530 [fixed] - Unable to delete any of the created attributes.Getting validation message that attribute is used in configurable product while attribute is not used for creating any product.
+
 * #524 [fixed] - Getting Exception when login with user having custom role(ACL issue).
-
-* #453 [fixed] - Installation of Master Branch.
-
-* #426 [fixed] - php artisan down does not work.
-
-* #396 [fixed] - Layout issue on changing locale.
-
-* #334 [fixed] - My Account Grid displays blank after the bagisto 0.1.2 installation.
-
-* #457 [fixed] - Admin add product "Undefined variable: configurableFamily".
-
-* #508 [fixed] - Correct the required php version in installer.
-
-* #519 [fixed] - Status column of Review remains blank if review is in Pending state.
 
 * #523 [fixed] - Status column of review page remains blank if Status is change to disapprove(Mass update).
 
+* #519 [fixed] - Status column of Review remains blank if review is in Pending state.
+
+* #514 [fixed] - Getting Exception on changing the status of Product(On mass update).
+
+* #513 [fixed] - Getting Exception in deleting categories.
+
+* #508 [fixed] - Correct the required php version in installer.
+
+* #506 [fixed] - While Installing the framework through Installer if at any stage user click on back button and then click on continue to install, then in this case unable to install.
+
+* #457 [fixed] - Admin add product "Undefined variable: configurableFamily".
+
+* #453 [fixed] - Installation of Master Branch.
+
 * #438 [fixed] - Simple Select Attribute Issue
 
-* #381 [fixed] - On front-end currency symbol display only for Indian Rupee and USD. If code is selected other than these two in currency then code displays before price.
+* #426 [fixed] - php artisan down does not work.
 
-* #301 [fixed] - Only customer that are on first page get exported.
+* #402 [fixed] - Change the validation message on moving product from wish-list to cart if product added in wish-list is out of stock.
 
 * #399 [fixed] - Accepting future date of birth for customer.
 
-* #369 [fixed] - Displaying incorrect response message on updating the status of products.
+* #396 [fixed] - Layout issue on changing locale.
 
-* #363 [fixed] - Unable to delete last tax rate.
-
-* #347 [fixed] - Pricing Issue.
+* #381 [fixed] - On front-end currency symbol display only for Indian Rupee and USD. If code is selected other than these two in currency then code displays before price.
 
 * #378 [fixed] - Images that are applied on Category doesn't display in Edit Category Page.
 
+* #369 [fixed] - Displaying incorrect response message on updating the status of products.
+
+* #368 [fixed] - If products are added in shopping cart and those product get deleted from admin section then it still displays in cart.
+
+* #363 [fixed] - Unable to delete last tax rate.
+
+* #353 [fixed] - Getting exception in deleting currency.
+
+* #347 [fixed] - Pricing Issue.
+
+* #334 [fixed] - My Account Grid displays blank after the bagisto 0.1.2 installation.
+
 * #304 [fixed] - If a current user want to delete his account then in this case a password verification should be required before deleting the user.
+
+* #301 [fixed] - Only customer that are on first page get exported.
+
+* #191 [fixed] - Add a column Shipped to in Order Grid ,to display the name for whom order has been shipped.
+
+* #143 [fixed] - If user login from checkout page, then it should redirect to checkout page.
 
 ## **v0.1.3 (20th of December, 2018)** - *Release*
 
