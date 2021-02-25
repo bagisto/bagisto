@@ -681,9 +681,15 @@
             ],
             "support": {
                 "issues": "https://github.com/barryvdh/laravel-dompdf/issues",
-                "source": "https://github.com/barryvdh/laravel-dompdf/tree/v0.8.6"
+                "source": "https://github.com/barryvdh/laravel-dompdf/tree/master"
             },
-            "time": "2020-02-25T20:44:34+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/barryvdh",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-09-07T11:50:18+00:00"
         },
         {
             "name": "brick/math",
@@ -987,15 +993,7 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
             "time": "2020-11-14T20:26:58+00:00"
-=======
-            "support": {
-                "issues": "https://github.com/doctrine/dbal/issues",
-                "source": "https://github.com/doctrine/dbal/tree/2.9"
-            },
-            "time": "2018-12-31T03:27:51+00:00"
->>>>>>> upstream/master
         },
         {
             "name": "doctrine/event-manager",
@@ -1389,11 +1387,7 @@
             ],
             "support": {
                 "issues": "https://github.com/dragonmantank/cron-expression/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/dragonmantank/cron-expression/tree/v3.1.0"
-=======
-                "source": "https://github.com/dragonmantank/cron-expression/tree/v2.3.1"
->>>>>>> upstream/master
             },
             "funding": [
                 {
@@ -1764,21 +1758,7 @@
                     "type": "github"
                 }
             ],
-<<<<<<< HEAD
             "time": "2021-02-16T12:42:06+00:00"
-=======
-            "description": "Set trusted proxies for Laravel",
-            "keywords": [
-                "load balancing",
-                "proxy",
-                "trusted proxy"
-            ],
-            "support": {
-                "issues": "https://github.com/fideloper/TrustedProxy/issues",
-                "source": "https://github.com/fideloper/TrustedProxy/tree/4.4.1"
-            },
-            "time": "2020-10-22T13:48:01+00:00"
->>>>>>> upstream/master
         },
         {
             "name": "facade/ignition",
@@ -1850,19 +1830,12 @@
                 "page"
             ],
             "support": {
-<<<<<<< HEAD
                 "docs": "https://flareapp.io/docs/ignition-for-laravel/introduction",
                 "forum": "https://twitter.com/flareappio",
                 "issues": "https://github.com/facade/ignition/issues",
                 "source": "https://github.com/facade/ignition"
             },
             "time": "2021-02-16T12:46:19+00:00"
-=======
-                "issues": "https://github.com/Flynsarmy/laravel-db-blade-compiler/issues",
-                "source": "https://github.com/Flynsarmy/laravel-db-blade-compiler/tree/5.5.0"
-            },
-            "time": "2019-07-28T22:19:29+00:00"
->>>>>>> upstream/master
         },
         {
             "name": "facade/ignition-contracts",
@@ -1912,18 +1885,10 @@
                 "ignition"
             ],
             "support": {
-<<<<<<< HEAD
                 "issues": "https://github.com/facade/ignition-contracts/issues",
                 "source": "https://github.com/facade/ignition-contracts/tree/1.0.2"
             },
             "time": "2020-10-16T08:27:54+00:00"
-=======
-                "issues": "https://github.com/fzaninotto/Faker/issues",
-                "source": "https://github.com/fzaninotto/Faker/tree/v1.9.2"
-            },
-            "abandoned": true,
-            "time": "2020-12-11T09:56:16+00:00"
->>>>>>> upstream/master
         },
         {
             "name": "fideloper/proxy",
@@ -2317,7 +2282,6 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/guzzle/guzzle/tree/7.2.0"
             },
             "funding": [
@@ -2339,11 +2303,6 @@
                 }
             ],
             "time": "2020-10-10T11:47:56+00:00"
-=======
-                "source": "https://github.com/guzzle/guzzle/tree/6.5"
-            },
-            "time": "2020-06-16T21:01:06+00:00"
->>>>>>> upstream/master
         },
         {
             "name": "guzzlehttp/promises",
@@ -2675,15 +2634,9 @@
             ],
             "support": {
                 "issues": "https://github.com/lazychaser/laravel-nestedset/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/lazychaser/laravel-nestedset/tree/v5.0.3"
             },
             "time": "2020-12-07T05:59:45+00:00"
-=======
-                "source": "https://github.com/lazychaser/laravel-nestedset/tree/v5"
-            },
-            "time": "2020-03-04T05:33:20+00:00"
->>>>>>> upstream/master
         },
         {
             "name": "khaled.alshamaa/ar-php",
@@ -3134,26 +3087,13 @@
                     "email": "taylor@laravel.com"
                 }
             ],
-<<<<<<< HEAD
             "description": "The legacy version of the Laravel Eloquent factories.",
             "homepage": "http://laravel.com",
-=======
-            "description": "The Laravel Framework.",
-            "homepage": "https://laravel.com",
-            "keywords": [
-                "framework",
-                "laravel"
-            ],
->>>>>>> upstream/master
             "support": {
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-<<<<<<< HEAD
             "time": "2020-10-27T14:25:32+00:00"
-=======
-            "time": "2021-01-21T14:10:48+00:00"
->>>>>>> upstream/master
         },
         {
             "name": "laravel/scout",
@@ -3291,11 +3231,7 @@
                 "issues": "https://github.com/laravel/socialite/issues",
                 "source": "https://github.com/laravel/socialite"
             },
-<<<<<<< HEAD
             "time": "2021-02-22T14:22:51+00:00"
-=======
-            "time": "2020-06-03T13:30:03+00:00"
->>>>>>> upstream/master
         },
         {
             "name": "laravel/tinker",
@@ -3419,15 +3355,9 @@
             ],
             "support": {
                 "issues": "https://github.com/laravel/ui/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/laravel/ui/tree/v3.2.0"
             },
             "time": "2021-01-06T19:20:22+00:00"
-=======
-                "source": "https://github.com/laravel/ui/tree/v2.5.0"
-            },
-            "time": "2020-11-03T19:45:19+00:00"
->>>>>>> upstream/master
         },
         {
             "name": "lcobucci/jwt",
@@ -8522,11 +8452,7 @@
             ],
             "support": {
                 "issues": "https://github.com/vlucas/phpdotenv/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/vlucas/phpdotenv/tree/v5.3.0"
-=======
-                "source": "https://github.com/vlucas/phpdotenv/tree/v4.2.0"
->>>>>>> upstream/master
             },
             "funding": [
                 {
@@ -9199,15 +9125,9 @@
             "description": "PHPUnit classes used by Codeception",
             "support": {
                 "issues": "https://github.com/Codeception/phpunit-wrapper/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/Codeception/phpunit-wrapper/tree/9.0.6"
             },
             "time": "2020-12-28T13:59:47+00:00"
-=======
-                "source": "https://github.com/Codeception/phpunit-wrapper/tree/8.1.4"
-            },
-            "time": "2020-12-28T14:00:08+00:00"
->>>>>>> upstream/master
         },
         {
             "name": "codeception/stub",
@@ -9221,8 +9141,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/Codeception/Stub/zipball/468dd5fe659f131fc997f5196aad87512f9b1304",
                 "reference": "468dd5fe659f131fc997f5196aad87512f9b1304",
-<<<<<<< HEAD
-=======
                 "shasum": ""
             },
             "require": {
@@ -9297,138 +9215,6 @@
             "support": {
                 "issues": "https://github.com/doctrine/instantiator/issues",
                 "source": "https://github.com/doctrine/instantiator/tree/1.4.0"
-            },
-            "funding": [
-                {
-                    "url": "https://www.doctrine-project.org/sponsorship.html",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://www.patreon.com/phpdoctrine",
-                    "type": "patreon"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/doctrine%2Finstantiator",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2020-11-10T18:47:58+00:00"
-        },
-        {
-            "name": "facade/ignition-contracts",
-            "version": "1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/facade/ignition-contracts.git",
-                "reference": "3c921a1cdba35b68a7f0ccffc6dffc1995b18267"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/facade/ignition-contracts/zipball/3c921a1cdba35b68a7f0ccffc6dffc1995b18267",
-                "reference": "3c921a1cdba35b68a7f0ccffc6dffc1995b18267",
->>>>>>> upstream/master
-                "shasum": ""
-            },
-            "require": {
-                "phpunit/phpunit": "^8.4 | ^9.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Codeception\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-<<<<<<< HEAD
-            "description": "Flexible Stub wrapper for PHPUnit's Mock Builder",
-            "support": {
-                "issues": "https://github.com/Codeception/Stub/issues",
-                "source": "https://github.com/Codeception/Stub/tree/3.7.0"
-            },
-            "time": "2020-07-03T15:54:43+00:00"
-=======
-            "authors": [
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be",
-                    "homepage": "https://flareapp.io",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Solution contracts for Ignition",
-            "homepage": "https://github.com/facade/ignition-contracts",
-            "keywords": [
-                "contracts",
-                "flare",
-                "ignition"
-            ],
-            "support": {
-                "issues": "https://github.com/facade/ignition-contracts/issues",
-                "source": "https://github.com/facade/ignition-contracts/tree/1.0.2"
-            },
-            "time": "2020-10-16T08:27:54+00:00"
->>>>>>> upstream/master
-        },
-        {
-            "name": "doctrine/instantiator",
-            "version": "1.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/doctrine/instantiator.git",
-                "reference": "d56bf6102915de5702778fe20f2de3b2fe570b5b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/d56bf6102915de5702778fe20f2de3b2fe570b5b",
-                "reference": "d56bf6102915de5702778fe20f2de3b2fe570b5b",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1 || ^8.0"
-            },
-            "require-dev": {
-                "doctrine/coding-standard": "^8.0",
-                "ext-pdo": "*",
-                "ext-phar": "*",
-                "phpbench/phpbench": "^0.13 || 1.0.0-alpha2",
-                "phpstan/phpstan": "^0.12",
-                "phpstan/phpstan-phpunit": "^0.12",
-                "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Doctrine\\Instantiator\\": "src/Doctrine/Instantiator/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Marco Pivetta",
-                    "email": "ocramius@gmail.com",
-                    "homepage": "https://ocramius.github.io/"
-                }
-            ],
-            "description": "A small, lightweight utility to instantiate objects in PHP without invoking their constructors",
-            "homepage": "https://www.doctrine-project.org/projects/instantiator.html",
-            "keywords": [
-                "constructor",
-                "instantiate"
-            ],
-            "support": {
-<<<<<<< HEAD
-                "issues": "https://github.com/doctrine/instantiator/issues",
-                "source": "https://github.com/doctrine/instantiator/tree/1.4.0"
-=======
-                "issues": "https://github.com/filp/whoops/issues",
-                "source": "https://github.com/filp/whoops/tree/2.9.2"
->>>>>>> upstream/master
             },
             "funding": [
                 {
@@ -10189,11 +9975,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.5"
-=======
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/7.0.14"
->>>>>>> upstream/master
             },
             "funding": [
                 {
@@ -10253,7 +10035,6 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-file-iterator/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/sebastianbergmann/php-file-iterator/tree/3.0.5"
             },
             "funding": [
@@ -10318,9 +10099,6 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-invoker/issues",
                 "source": "https://github.com/sebastianbergmann/php-invoker/tree/3.1.1"
-=======
-                "source": "https://github.com/sebastianbergmann/php-file-iterator/tree/2.0.3"
->>>>>>> upstream/master
             },
             "funding": [
                 {
@@ -10379,7 +10157,6 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-text-template/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/sebastianbergmann/php-text-template/tree/2.0.4"
             },
             "funding": [
@@ -10389,11 +10166,6 @@
                 }
             ],
             "time": "2020-10-26T05:33:50+00:00"
-=======
-                "source": "https://github.com/sebastianbergmann/php-text-template/tree/1.2.1"
-            },
-            "time": "2015-06-21T13:50:34+00:00"
->>>>>>> upstream/master
         },
         {
             "name": "phpunit/php-timer",
@@ -10444,7 +10216,6 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-timer/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/sebastianbergmann/php-timer/tree/5.0.3"
             },
             "funding": [
@@ -10545,9 +10316,6 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.2"
-=======
-                "source": "https://github.com/sebastianbergmann/php-timer/tree/2.1.3"
->>>>>>> upstream/master
             },
             "funding": [
                 {
@@ -10603,22 +10371,11 @@
                     "role": "lead"
                 }
             ],
-<<<<<<< HEAD
             "description": "Library for parsing CLI options",
             "homepage": "https://github.com/sebastianbergmann/cli-parser",
             "support": {
                 "issues": "https://github.com/sebastianbergmann/cli-parser/issues",
                 "source": "https://github.com/sebastianbergmann/cli-parser/tree/1.0.1"
-=======
-            "description": "Wrapper around PHP's tokenizer extension.",
-            "homepage": "https://github.com/sebastianbergmann/php-token-stream/",
-            "keywords": [
-                "tokenizer"
-            ],
-            "support": {
-                "issues": "https://github.com/sebastianbergmann/php-token-stream/issues",
-                "source": "https://github.com/sebastianbergmann/php-token-stream/tree/master"
->>>>>>> upstream/master
             },
             "funding": [
                 {
@@ -10670,24 +10427,11 @@
                     "role": "lead"
                 }
             ],
-<<<<<<< HEAD
             "description": "Collection of value objects that represent the PHP code units",
             "homepage": "https://github.com/sebastianbergmann/code-unit",
             "support": {
                 "issues": "https://github.com/sebastianbergmann/code-unit/issues",
                 "source": "https://github.com/sebastianbergmann/code-unit/tree/1.0.8"
-=======
-            "description": "The PHP Unit Testing framework.",
-            "homepage": "https://phpunit.de/",
-            "keywords": [
-                "phpunit",
-                "testing",
-                "xunit"
-            ],
-            "support": {
-                "issues": "https://github.com/sebastianbergmann/phpunit/issues",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/8.5.14"
->>>>>>> upstream/master
             },
             "funding": [
                 {
@@ -10742,11 +10486,7 @@
             "homepage": "https://github.com/sebastianbergmann/code-unit-reverse-lookup/",
             "support": {
                 "issues": "https://github.com/sebastianbergmann/code-unit-reverse-lookup/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/sebastianbergmann/code-unit-reverse-lookup/tree/2.0.3"
-=======
-                "source": "https://github.com/sebastianbergmann/code-unit-reverse-lookup/tree/1.0.2"
->>>>>>> upstream/master
             },
             "funding": [
                 {
@@ -10820,7 +10560,6 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/comparator/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/sebastianbergmann/comparator/tree/4.0.6"
             },
             "funding": [
@@ -10879,9 +10618,6 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/complexity/issues",
                 "source": "https://github.com/sebastianbergmann/complexity/tree/2.0.2"
-=======
-                "source": "https://github.com/sebastianbergmann/comparator/tree/3.0.3"
->>>>>>> upstream/master
             },
             "funding": [
                 {
@@ -10947,11 +10683,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/diff/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/sebastianbergmann/diff/tree/4.0.4"
-=======
-                "source": "https://github.com/sebastianbergmann/diff/tree/3.0.3"
->>>>>>> upstream/master
             },
             "funding": [
                 {
@@ -11014,11 +10746,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/environment/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/sebastianbergmann/environment/tree/5.1.3"
-=======
-                "source": "https://github.com/sebastianbergmann/environment/tree/4.2.4"
->>>>>>> upstream/master
             },
             "funding": [
                 {
@@ -11095,11 +10823,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/exporter/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/sebastianbergmann/exporter/tree/4.0.3"
-=======
-                "source": "https://github.com/sebastianbergmann/exporter/tree/3.1.3"
->>>>>>> upstream/master
             },
             "funding": [
                 {
@@ -11163,7 +10887,6 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/global-state/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/sebastianbergmann/global-state/tree/5.0.2"
             },
             "funding": [
@@ -11222,9 +10945,6 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/lines-of-code/issues",
                 "source": "https://github.com/sebastianbergmann/lines-of-code/tree/1.0.3"
-=======
-                "source": "https://github.com/sebastianbergmann/global-state/tree/3.0.1"
->>>>>>> upstream/master
             },
             "funding": [
                 {
@@ -11281,11 +11001,7 @@
             "homepage": "https://github.com/sebastianbergmann/object-enumerator/",
             "support": {
                 "issues": "https://github.com/sebastianbergmann/object-enumerator/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/sebastianbergmann/object-enumerator/tree/4.0.4"
-=======
-                "source": "https://github.com/sebastianbergmann/object-enumerator/tree/3.0.4"
->>>>>>> upstream/master
             },
             "funding": [
                 {
@@ -11340,11 +11056,7 @@
             "homepage": "https://github.com/sebastianbergmann/object-reflector/",
             "support": {
                 "issues": "https://github.com/sebastianbergmann/object-reflector/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/sebastianbergmann/object-reflector/tree/2.0.4"
-=======
-                "source": "https://github.com/sebastianbergmann/object-reflector/tree/1.1.2"
->>>>>>> upstream/master
             },
             "funding": [
                 {
@@ -11407,11 +11119,7 @@
             "homepage": "http://www.github.com/sebastianbergmann/recursion-context",
             "support": {
                 "issues": "https://github.com/sebastianbergmann/recursion-context/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/sebastianbergmann/recursion-context/tree/4.0.4"
-=======
-                "source": "https://github.com/sebastianbergmann/recursion-context/tree/3.0.1"
->>>>>>> upstream/master
             },
             "funding": [
                 {
@@ -11466,11 +11174,7 @@
             "homepage": "https://www.github.com/sebastianbergmann/resource-operations",
             "support": {
                 "issues": "https://github.com/sebastianbergmann/resource-operations/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/sebastianbergmann/resource-operations/tree/3.0.3"
-=======
-                "source": "https://github.com/sebastianbergmann/resource-operations/tree/2.0.2"
->>>>>>> upstream/master
             },
             "funding": [
                 {
@@ -11526,11 +11230,7 @@
             "homepage": "https://github.com/sebastianbergmann/type",
             "support": {
                 "issues": "https://github.com/sebastianbergmann/type/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/sebastianbergmann/type/tree/2.3.1"
-=======
-                "source": "https://github.com/sebastianbergmann/type/tree/1.1.4"
->>>>>>> upstream/master
             },
             "funding": [
                 {
@@ -11583,7 +11283,6 @@
             "homepage": "https://github.com/sebastianbergmann/version",
             "support": {
                 "issues": "https://github.com/sebastianbergmann/version/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/sebastianbergmann/version/tree/3.0.2"
             },
             "funding": [
@@ -11593,11 +11292,6 @@
                 }
             ],
             "time": "2020-09-28T06:39:44+00:00"
-=======
-                "source": "https://github.com/sebastianbergmann/version/tree/master"
-            },
-            "time": "2016-10-03T07:35:21+00:00"
->>>>>>> upstream/master
         },
         {
             "name": "symfony/browser-kit",
@@ -11868,62 +11562,6 @@
                 }
             ],
             "time": "2020-07-12T23:59:07+00:00"
-<<<<<<< HEAD
-=======
-        },
-        {
-            "name": "webmozart/assert",
-            "version": "1.9.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/webmozarts/assert.git",
-                "reference": "bafc69caeb4d49c39fd0779086c03a3738cbb389"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/webmozarts/assert/zipball/bafc69caeb4d49c39fd0779086c03a3738cbb389",
-                "reference": "bafc69caeb4d49c39fd0779086c03a3738cbb389",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.3.3 || ^7.0 || ^8.0",
-                "symfony/polyfill-ctype": "^1.8"
-            },
-            "conflict": {
-                "phpstan/phpstan": "<0.12.20",
-                "vimeo/psalm": "<3.9.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.8.36 || ^7.5.13"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Webmozart\\Assert\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Bernhard Schussek",
-                    "email": "bschussek@gmail.com"
-                }
-            ],
-            "description": "Assertions to validate method input/output with nice error messages.",
-            "keywords": [
-                "assert",
-                "check",
-                "validate"
-            ],
-            "support": {
-                "issues": "https://github.com/webmozarts/assert/issues",
-                "source": "https://github.com/webmozarts/assert/tree/1.9.1"
-            },
-            "time": "2020-07-08T17:02:28+00:00"
->>>>>>> upstream/master
         }
     ],
     "aliases": [],
