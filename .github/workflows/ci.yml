@@ -27,7 +27,7 @@ jobs:
         uses: shivammathur/setup-php@v1
         with:
           php-version: '7.3'
-          extensions: intl, curl, mbstring, openssl, pdo, pdo_mysql, tokenizer
+          extensions: curl, gd, intl, mbstring, openssl, pdo, pdo_mysql, tokenizer
 
       - name: Set environment
         run: |
