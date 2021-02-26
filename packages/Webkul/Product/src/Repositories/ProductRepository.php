@@ -157,6 +157,7 @@ class ProductRepository extends Repository
                 ->join('product_flat as variants', 'product_flat.id', '=', DB::raw('COALESCE(' . DB::getTablePrefix() . 'variants.parent_id, ' . DB::getTablePrefix() . 'variants.id)'))
                 ->leftJoin('product_categories', 'product_categories.product_id', '=', 'product_flat.product_id')
                 ->leftJoin('product_attribute_values', 'product_attribute_values.product_id', '=', 'variants.product_id')
+                ->leftJoin('catalog_rule_product_prices', 'catalog_rule_product_prices.product_id', '=', 'variants.product_id')
                 ->where('product_flat.channel', $channel)
                 ->where('product_flat.locale', $locale)
                 ->whereNotNull('product_flat.url_key');
@@ -212,8 +213,17 @@ class ProductRepository extends Repository
             if ($priceFilter = request('price')) {
                 $priceRange = explode(',', $priceFilter);
                 if (count($priceRange) > 0) {
-                    $qb->where('variants.min_price', '>=', core()->convertToBasePrice($priceRange[0]));
-                    $qb->where('variants.min_price', '<=', core()->convertToBasePrice(end($priceRange)));
+
+                    $qb->where(function ($query) use($priceRange) {
+                        $query->where(function ($query) use($priceRange) {
+                            $query->where('variants.min_price', '>=', core()->convertToBasePrice($priceRange[0]));
+                            $query->where('variants.min_price', '<=', core()->convertToBasePrice(end($priceRange)));
+                        })
+                        ->orWhere(function($query) use($priceRange) {
+                            $query->where('catalog_rule_product_prices.price', '>=', core()->convertToBasePrice($priceRange[0]));
+                            $query->where('catalog_rule_product_prices.price', '<=', core()->convertToBasePrice(end($priceRange)));
+                        });
+                    });
                 }
             }
 
