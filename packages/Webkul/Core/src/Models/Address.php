@@ -72,6 +72,7 @@ abstract class Address extends Model implements AddressContract
 
     protected $casts = [
         'additional' => 'array',
+        'default_address' => 'boolean',
     ];
 
     /**
