@@ -157,10 +157,12 @@ Thank you to all our backers! 🙏
 
 Support this project by becoming a sponsor. Your logo will show up here with a link to your website.
 
+<div>
+    <a href="https://opencollective.com/bagisto/contribute/sponsor-7372/checkout" target="_blank">
+        <img src="https://images.opencollective.com/static/images/become_sponsor.svg">
+    </a>
+</div>
+
 <kbd>
     <img src="https://images.opencollective.com/e-ventures1/7d61db2/logo.png" height="75">
 </kbd>
-
-<a href="https://opencollective.com/bagisto/contribute/sponsor-7372/checkout" target="_blank">
-    <img src="https://images.opencollective.com/static/images/become_sponsor.svg">
-</a>
