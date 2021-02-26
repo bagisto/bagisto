@@ -215,11 +215,11 @@ class ProductRepository extends Repository
                 if (count($priceRange) > 0) {
 
                     $qb->where(function ($query) use($priceRange) {
-                        $query->where(function ($query) use($priceRange) {
+                        $query->where(function ($query) use ($priceRange) {
                             $query->where('variants.min_price', '>=', core()->convertToBasePrice($priceRange[0]));
                             $query->where('variants.min_price', '<=', core()->convertToBasePrice(end($priceRange)));
                         })
-                        ->orWhere(function($query) use($priceRange) {
+                        ->orWhere(function($query) use ($priceRange) {
                             $query->where('catalog_rule_product_prices.price', '>=', core()->convertToBasePrice($priceRange[0]));
                             $query->where('catalog_rule_product_prices.price', '<=', core()->convertToBasePrice(end($priceRange)));
                         });
