@@ -46,6 +46,7 @@ class UnitTester extends \Codeception\Actor
         array $constructParams = [],
         array $mocks = []
     ) {
+        dd('fawfcs');
         $I = $this;
         $I->comment('I execute function "'
             . $functionName
