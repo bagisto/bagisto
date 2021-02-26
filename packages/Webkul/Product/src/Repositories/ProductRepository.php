@@ -129,7 +129,7 @@ class ProductRepository extends Repository
     }
 
     /**
-     * @param int $categoryId
+     * @param string $categoryId
      *
      * @return \Illuminate\Support\Collection
      */
@@ -163,7 +163,7 @@ class ProductRepository extends Repository
                 ->whereNotNull('product_flat.url_key');
 
             if ($categoryId) {
-                $qb->where('product_categories.category_id', $categoryId);
+                $qb->whereIn('product_categories.category_id', explode(',', $categoryId));
             }
 
             if (! core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
