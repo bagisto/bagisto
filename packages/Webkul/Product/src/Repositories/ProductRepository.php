@@ -11,12 +11,12 @@ use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Facades\Event;
 use Webkul\Attribute\Models\Attribute;
 use Webkul\Product\Models\ProductFlat;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Container\Container as App;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Webkul\Product\Models\ProductAttributeValueProxy;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Support\Facades\Storage;
 
 class ProductRepository extends Repository
 {
@@ -819,10 +819,12 @@ class ProductRepository extends Repository
                 $qb
                     ->where('ps.type', 'configurable')
                     ->whereRaw('
-                        (SELECT SUM(product_inventories.qty)
-                        FROM product_flat
-                        LEFT JOIN product_inventories ON product_inventories.product_id = product_flat.product_id
-                        WHERE product_flat.parent_id = ps.id) > 0
+                        (
+                            SELECT SUM(' . DB::getTablePrefix() . 'product_inventories.qty)
+                            FROM ' . DB::getTablePrefix() . 'product_flat
+                            LEFT JOIN ' . DB::getTablePrefix() . 'product_inventories ON ' . DB::getTablePrefix() . 'product_inventories.product_id = ' . DB::getTablePrefix() . 'product_flat.product_id
+                            WHERE ' . DB::getTablePrefix() . 'product_flat.parent_id = ps.id
+                        ) > 0
                     ');
             })
             ->orWhere(function ($qb) {
