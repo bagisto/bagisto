@@ -1,11 +1,10 @@
 @if (Webkul\Product\Helpers\ProductType::hasVariants($product->type))
 
     @inject ('configurableOptionHelper', 'Webkul\Product\Helpers\ConfigurableOption')
-    @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
     @php
         $config = $configurableOptionHelper->getConfigurationConfig($product);
-        $galleryImages = $productImageHelper->getGalleryImages($product);
+        $galleryImages = productimage()->getGalleryImages($product);
     @endphp
 
     {!! view_render_event('bagisto.shop.products.view.configurable-options.before', ['product' => $product]) !!}
@@ -77,7 +76,7 @@
 
                             <span v-if="attribute.swatch_type == 'color'" :style="{ background: option.swatch_value }"></span>
 
-                            <img v-if="attribute.swatch_type == 'image'" :src="option.swatch_value" alt="" />
+                            <img v-if="attribute.swatch_type == 'image'" :src="option.swatch_value" :title="option.label" alt="" />
 
                             <span v-if="attribute.swatch_type == 'text'">
                                 @{{ option.label }}
@@ -290,11 +289,16 @@
 
                             var priceLabelElement = document.querySelector('.price-label');
                             var priceElement = document.querySelector('.final-price');
+                            var regularPriceElement = document.querySelector('.regular-price');
 
                             if (this.childAttributes.length == selectedOptionCount) {
                                 priceLabelElement.style.display = 'none';
 
                                 priceElement.innerHTML = this.config.variant_prices[this.simpleProduct].final_price.formated_price;
+
+                                if (regularPriceElement) {
+                                    regularPriceElement.innerHTML = this.config.variant_prices[this.simpleProduct].regular_price.formated_price;
+                                }
 
                                 eventBus.$emit('configurable-variant-selected-event', this.simpleProduct)
                             } else {
@@ -317,7 +321,17 @@
                                 this.config.variant_images[this.simpleProduct].forEach(function(image) {
                                     galleryImages.unshift(image)
                                 });
+
+                                this.config.variant_videos[this.simpleProduct].forEach(function(video) {
+                                    galleryImages.unshift(video)
+                                });
                             }
+
+                            galleryImages.forEach(function(image){
+                                if (image.type == 'video') {
+                                    image.small_image_url = image.medium_image_url = image.large_image_url = image.original_image_url= image.video_url;
+                                }
+                            });
 
                             eventBus.$emit('configurable-variant-update-images-event', galleryImages);
                         },

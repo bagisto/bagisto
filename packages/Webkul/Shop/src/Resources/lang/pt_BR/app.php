@@ -366,7 +366,8 @@ return [
                 'expired' => 'Expirado',
                 'remaining-downloads' => 'Downloads restantes',
                 'unlimited' => 'Ilimitado',
-                'download-error' => 'O link para download expirou.'
+                'download-error' => 'O link para download expirou.',
+                'payment-error' => 'Payment has not been done for this download.'
             ],
 
             'review' => [
@@ -429,7 +430,8 @@ return [
         'available-for-order' => 'Disponível para encomenda',
         'settings' => 'Settings',
         'compare_options' => 'Compare Options',
-        'wishlist-options' => 'Wishlist Options'
+        'wishlist-options' => 'Wishlist Options',
+        'offers' => 'Buy :qty for :price each and save :discount%',
     ],
 
     // 'reviews' => [

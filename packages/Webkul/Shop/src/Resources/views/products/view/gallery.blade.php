@@ -1,13 +1,11 @@
-@inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
-@inject ('productVideoHelper', 'Webkul\Product\Helpers\ProductVideo')
 @inject ('wishListHelper', 'Webkul\Customer\Helpers\Wishlist')
 
-<?php 
-    $images = $productImageHelper->getGalleryImages($product); 
+<?php
+    $images = productimage()->getGalleryImages($product);
 
-    $videos = $productVideoHelper->getVideos($product);
+    $videos = productvideo()->getVideos($product);
 
-    $images = array_merge($images, $videos); 
+    $images = array_merge($images, $videos);
 ?>
 
 
@@ -196,7 +194,7 @@
                 $('img#pro-img').data('zoom-image', $('img#pro-img').data('image')).ezPlus();
             }
 
-            var wishlist = " <?php echo $wishListHelper->getWishlistProduct($product);  ?> ";
+            var wishlist = "{{ $wishListHelper->getWishlistProduct($product) ? 'true' : 'false' }}";
 
             $(document).mousemove(function(event) {
                 if ($('.add-to-wishlist').length || wishlist != 0) {

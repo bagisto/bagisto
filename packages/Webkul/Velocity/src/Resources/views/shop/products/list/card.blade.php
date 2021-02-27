@@ -1,6 +1,5 @@
 @inject ('reviewHelper', 'Webkul\Product\Helpers\Review')
 @inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar')
-@inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
 @push('css')
     <style type="text/css">
@@ -21,15 +20,15 @@
     }
 
     if (isset($item)) {
-        $productBaseImage = $productImageHelper->getProductImage($item);
+        $productBaseImage = productimage()->getProductImage($item);
     } else {
-        $productBaseImage = $productImageHelper->getProductBaseImage($product);
+        $productBaseImage = productimage()->getProductBaseImage($product);
     }
 
     $totalReviews = $reviewHelper->getTotalReviews($product);
     $avgRatings = ceil($reviewHelper->getAverageRating($product));
 
-    $galleryImages = $productImageHelper->getGalleryImages($product);
+    $galleryImages = productimage()->getGalleryImages($product);
     $priceHTML = view('shop::products.price', ['product' => $product])->render();
 
     $product->__set('priceHTML', $priceHTML);

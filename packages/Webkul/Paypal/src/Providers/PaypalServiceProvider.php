@@ -15,6 +15,8 @@ class PaypalServiceProvider extends ServiceProvider
     {
         include __DIR__ . '/../Http/routes.php';
 
+        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'paypal');
+
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'paypal');
 
         $this->app->register(EventServiceProvider::class);
@@ -29,7 +31,7 @@ class PaypalServiceProvider extends ServiceProvider
     {
         $this->registerConfig();
     }
-    
+
     /**
      * Register package config.
      *

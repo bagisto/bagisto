@@ -6,7 +6,13 @@
 
 @php
     $locale = request()->get('locale') ?: app()->getLocale();
-    $channel = request()->get('channel') ?: core()->getCurrentChannelCode();
+    $channel = request()->get('channel') ?: core()->getDefaultChannelCode();
+
+    $channelLocales = app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales;
+
+    if (! $channelLocales->contains('code', $locale)) {
+        $locale = config('app.fallback_locale');
+    }
 @endphp
 
 @section('content')
@@ -33,11 +39,12 @@
                 <input type="hidden" name="channel" value="{{ $channel }}" />
 
                 <div class="control-group">
-                    <select class="control" id="channel-switcher" onChange="window.location.href = this.value">
-                        @foreach (core()->getAllChannels() as $ch)
+                    <select class="control" id="channel-switcher" name="channel">
+                        @foreach (core()->getAllChannels() as $channelModel)
 
-                            <option value="{{ route('velocity.admin.meta-data') . '?channel=' . $ch->code . '&locale=' . $locale }}" {{ ($ch->code) == $channel ? 'selected' : '' }}>
-                                {{ $ch->name }}
+                            <option
+                                value="{{ $channelModel->code }}" {{ ($channelModel->code) == $channel ? 'selected' : '' }}>
+                                {{ core()->getChannelName($channelModel) }}
                             </option>
 
                         @endforeach
@@ -45,10 +52,11 @@
                 </div>
 
                 <div class="control-group">
-                    <select class="control" id="locale-switcher" onChange="window.location.href = this.value">
-                        @foreach (core()->getAllLocales() as $localeModel)
+                    <select class="control" id="locale-switcher" name="locale">
+                        @foreach ($channelLocales as $localeModel)
 
-                            <option value="{{ route('velocity.admin.meta-data') . '?locale=' . $localeModel->code . '&channel=' . $channel }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
+                            <option
+                                value="{{ $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
                                 {{ $localeModel->name }}
                             </option>
 
@@ -105,13 +113,13 @@
                             value="{{ $metaData ? $metaData->header_content_count : '5' }}" />
                     </div>
 
-                  
 
-                  
+
+
                     <div class="control-group">
                         <label style="width:100%;">
                             {{ __('velocity::app.admin.meta-data.home-page-content') }}
-                            <span class="locale">[{{ $metaData ? $metaData->channel : $channel }} - {{ $metaData ? $metaData->locale : $locale }}]</span>
+                            <span class="locale">[{{ $channel }} - {{ $locale }}]</span>
                         </label>
 
                         <textarea
@@ -125,7 +133,7 @@
                     <div class="control-group">
                         <label style="width:100%;">
                             {{ __('velocity::app.admin.meta-data.product-policy') }}
-                            <span class="locale">[{{ $metaData ? $metaData->channel : $channel }} - {{ $metaData ? $metaData->locale : $locale }}]</span>
+                            <span class="locale">[{{ $channel }} - {{ $locale }}]</span>
                         </label>
 
                         <textarea
@@ -181,7 +189,7 @@
                                     'url' => asset('/themes/velocity/assets/images/kids.webp'),
                                 ];
                             @endphp
-                        
+
                             <image-wrapper
                                 :multiple="true"
                                 input-name="images[4]"
@@ -293,7 +301,7 @@
                     <div class="control-group">
                         <label style="width:100%;">
                             {{ __('velocity::app.admin.meta-data.subscription-content') }}
-                            <span class="locale">[{{ $metaData ? $metaData->channel : $channel }} - {{ $metaData ? $metaData->locale : $locale }}]</span>
+                            <span class="locale">[{{ $channel }} - {{ $locale }}]</span>
                         </label>
 
                         <textarea
@@ -307,7 +315,7 @@
                     <div class="control-group">
                         <label style="width:100%;">
                             {{ __('velocity::app.admin.meta-data.footer-left-content') }}
-                            <span class="locale">[{{ $metaData ? $metaData->channel : $channel }} - {{ $metaData ? $metaData->locale : $locale }}]</span>
+                            <span class="locale">[{{ $channel }} - {{ $locale }}]</span>
                         </label>
 
                         <textarea
@@ -321,7 +329,7 @@
                     <div class="control-group">
                         <label style="width:100%;">
                             {{ __('velocity::app.admin.meta-data.footer-middle-content') }}
-                            <span class="locale">[{{ $metaData ? $metaData->channel : $channel }} - {{ $metaData ? $metaData->locale : $locale }}]</span>
+                            <span class="locale">[{{ $channel }} - {{ $locale }}]</span>
                         </label>
 
                         <textarea
@@ -351,6 +359,20 @@
                 plugins: 'image imagetools media wordcount save fullscreen code',
                 toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | code',
             });
+
+            $('#channel-switcher, #locale-switcher').on('change', function (e) {
+                $('#channel-switcher').val()
+
+                if (event.target.id == 'channel-switcher') {
+                    let locale = "{{ $channelLocales->first()->code }}";
+
+                    $('#locale-switcher').val(locale);
+                }
+
+                var query = '?channel=' + $('#channel-switcher').val() + '&locale=' + $('#locale-switcher').val();
+
+                window.location.href = "{{ route('velocity.admin.meta-data')  }}" + query;
+            })
         });
     </script>
 @endpush

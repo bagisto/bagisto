@@ -123,5 +123,15 @@ class ConfigTableSeeder extends Seeder
             'created_at'   => $now,
             'updated_at'   => $now,
         ]);
+
+        DB::table('core_config')->insert([
+            'id'           => 12,
+            'code'         => 'catalog.products.homepage.out_of_stock_items',
+            'value'        => '1',
+            'channel_code' => null,
+            'locale_code'  => null,
+            'created_at'   => $now,
+            'updated_at'   => $now,
+        ]);
     }
 }

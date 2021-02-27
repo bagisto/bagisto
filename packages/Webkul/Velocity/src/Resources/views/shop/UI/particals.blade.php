@@ -340,6 +340,7 @@
 
                     'submitForm': function () {
                         if (this.inputVal !== '') {
+                            $('input[name=term]').val(this.inputVal);
                             $('#search-form').submit();
                         }
                     },

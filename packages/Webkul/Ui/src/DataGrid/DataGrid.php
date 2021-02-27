@@ -298,13 +298,17 @@ abstract class DataGrid
     }
 
     /**
-     * Add action.
+     * Add action. Some datagrids are used in shops also. So extra
+     * parameters is their. If needs to give an access just pass true
+     * in second param.
      *
-     * @param array $action
+     * @param  array $action
+     *
+     * @param  bool  $specialPermission
      *
      * @return void
      */
-    public function addAction($action)
+    public function addAction($action, $specialPermission = false)
     {
         $currentRouteACL = $this->fetchCurrentRouteACL($action);
 
@@ -316,7 +320,7 @@ abstract class DataGrid
             $eventName = null;
         }
 
-        if (bouncer()->hasPermission($currentRouteACL['key'] ?? null)) {
+        if (bouncer()->hasPermission($currentRouteACL['key'] ?? null) || $specialPermission) {
             $this->fireEvent('action.before.' . $eventName);
 
             array_push($this->actions, $action);
@@ -327,13 +331,17 @@ abstract class DataGrid
     }
 
     /**
-     * Add mass action.
+     * Add mass action. Some datagrids are used in shops also. So extra
+     * parameters is their. If needs to give an access just pass true
+     * in second param.
      *
      * @param array $massAction
      *
+     * @param  bool  $specialPermission
+     *
      * @return void
      */
-    public function addMassAction($massAction)
+    public function addMassAction($massAction, $specialPermission = false)
     {
         $massAction['route'] = $this->getRouteNameFromUrl($massAction['action'], $massAction['method']);
 
@@ -347,7 +355,7 @@ abstract class DataGrid
             $eventName = null;
         }
 
-        if (bouncer()->hasPermission($currentRouteACL['key'] ?? null)) {
+        if (bouncer()->hasPermission($currentRouteACL['key'] ?? null) || $specialPermission) {
             $this->fireEvent('mass.action.before.' . $eventName);
 
             $this->massActions[] = $massAction;
@@ -818,8 +826,7 @@ abstract class DataGrid
     private function getRouteNameFromUrl($action, $method)
     {
         return app('router')->getRoutes()
-                            ->match(app('request')
-                            ->create(str_replace(config('app.url'), '', $action), $method))
+                            ->match(app('request')->create(str_replace(url('/'), '', $action), $method))
                             ->getName();
     }
 }

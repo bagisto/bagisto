@@ -19,11 +19,17 @@ class ProductFlatRepository extends Repository
      */
     public function getCategoryProductMaximumPrice($category = null)
     {
+        static $loadedCategoryMaxPrice = [];
+
         if (! $category) {
             return $this->model->max('max_price');
         }
 
-        return $this->model
+        if (array_key_exists($category->id, $loadedCategoryMaxPrice)) {
+            return $loadedCategoryMaxPrice[$category->id];
+        }
+
+        return $loadedCategoryMaxPrice[$category->id] = $this->model
                     ->leftJoin('product_categories', 'product_flat.product_id', 'product_categories.product_id')
                     ->where('product_categories.category_id', $category->id)
                     ->max('max_price');
@@ -37,43 +43,67 @@ class ProductFlatRepository extends Repository
      */
     public function getCategoryProductAttribute($categoryId)
     {
-        $qb = $this->model
-                   ->leftJoin('product_categories', 'product_flat.product_id', 'product_categories.product_id')
-                   ->where('product_categories.category_id', $categoryId)
-                   ->where('product_flat.channel', core()->getCurrentChannelCode())
-                   ->where('product_flat.locale', app()->getLocale());
+        $qb = $this->categoryProductQuerybuilder($categoryId);
 
-        $productArrributes = $qb->distinct()
-                            ->leftJoin('product_attribute_values as pa', 'product_flat.product_id', 'pa.product_id')
-                            ->leftJoin('attributes as at', 'pa.attribute_id', 'at.id')
-                            ->where('is_filterable', 1);
+        $productFlatIds   = $qb->pluck('id')->toArray();
+        $productIds       = $qb->pluck('product_flat.product_id')->toArray();
 
-        $productArrributesIds = $productArrributes->pluck('pa.attribute_id')->toArray();
+        $childProductIds = $this->model->distinct()
+                            ->whereIn('parent_id', $productFlatIds)
+                            ->pluck('product_id')->toArray();
 
-        $productSelectArrributes = $productArrributes
-                            ->pluck('integer_value')
-                            ->toArray();
+        $productIds = array_merge($productIds, $childProductIds);
 
-        $productmultiSelectArrributes = $productArrributes
-                            ->pluck('text_value')
-                            ->toArray();
+        $attributeValues = $this->model
+                ->distinct()
+                ->leftJoin('product_attribute_values as pa', 'product_flat.product_id', 'pa.product_id')
+                ->leftJoin('attributes as at', 'pa.attribute_id', 'at.id')
+                ->leftJoin('product_super_attributes as ps', 'product_flat.product_id', 'ps.product_id')
+                ->select('pa.integer_value', 'pa.text_value', 'pa.attribute_id', 'ps.attribute_id as attributeId')
+                ->where('is_filterable', 1)
+                ->WhereIn('pa.product_id', $productIds)
+                ->get();
 
-        $multiSelectArrributes = [];
-        foreach ($productmultiSelectArrributes as $multi) {
-            if ($multi) {
-                $multiSelectArrributes = explode(",", $multi);
+        $attributeInfo['attributeOptions'] =  $attributeInfo['attributes'] = [];
+
+        foreach ($attributeValues as $attribute) {
+            $attributeKeys = array_keys($attribute->toArray());
+
+            foreach ($attributeKeys as $key) {
+                if (! is_null($attribute[$key])) {
+                    if ($key == 'integer_value' && ! in_array($attribute[$key], $attributeInfo['attributeOptions'])) {
+                        array_push($attributeInfo['attributeOptions'], $attribute[$key]);
+                    } else if ($key == 'text_value' && ! in_array($attribute[$key], $attributeInfo['attributeOptions'])) {
+                        $multiSelectArrributes = explode(",", $attribute[$key]);
+
+                        foreach ($multiSelectArrributes as $multi) {
+                            if (! in_array($multi, $attributeInfo['attributeOptions'])) {
+                                array_push($attributeInfo['attributeOptions'], $multi);
+                            }
+                        }
+                    } else if (($key == 'attribute_id' || $key == 'attributeId') && ! in_array($attribute[$key], $attributeInfo['attributes'])) {
+                        array_push($attributeInfo['attributes'], $attribute[$key]);
+                    }
+                }
             }
         }
 
-        $productSuperArrributesIds = $qb->leftJoin('product_super_attributes as ps', 'product_flat.product_id', 'ps.product_id')
-                                     ->pluck('ps.attribute_id')
-                                     ->toArray();
+        return $attributeInfo;
+    }
 
-        $productCategoryArrributes['attributeOptions'] = array_filter(array_unique(array_merge($productSelectArrributes, $multiSelectArrributes)));
+    /**
+     * get Category Product Model
+     *
+     * @param  int  $categoryId
+     * @return \Illuminate\Support\Querybuilder
+    */
+    public function categoryProductQuerybuilder($categoryId) {
 
-        $productCategoryArrributes['attributes'] = array_filter(array_unique(array_merge($productArrributesIds, $productSuperArrributesIds)));
-
-        return $productCategoryArrributes;
+        return $this->model
+            ->leftJoin('product_categories', 'product_flat.product_id', 'product_categories.product_id')
+            ->where('product_categories.category_id', $categoryId)
+            ->where('product_flat.channel', core()->getCurrentChannelCode())
+            ->where('product_flat.locale', app()->getLocale());
     }
 
     /**
@@ -84,18 +114,32 @@ class ProductFlatRepository extends Repository
      */
     public function getProductsRelatedFilterableAttributes($category)
     {
-        $categoryFilterableAttributes = $category->filterableAttributes->pluck('id')->toArray();
+        static $loadedCategoryAttributes = [];
 
-        $productCategoryArrributes = $this->getCategoryProductAttribute($category->id);
+        if (array_key_exists($category->id, $loadedCategoryAttributes)) {
+            return $loadedCategoryAttributes[$category->id];
+        }
 
-        $allFilterableAttributes = array_filter(array_unique(array_merge($categoryFilterableAttributes, $productCategoryArrributes['attributes'])));
+        $productsCount = $this->categoryProductQuerybuilder($category->id)->count();
 
-        $attributes = app('Webkul\Attribute\Repositories\AttributeRepository')->getModel()::with(['options' => function($query) use ($productCategoryArrributes) {
-                return $query->whereIn('id', $productCategoryArrributes['attributeOptions']);
-            }
-        ])->whereIn('id', $allFilterableAttributes)->get();
+        if ($productsCount > 0) {
+            $categoryFilterableAttributes = $category->filterableAttributes->pluck('id')->toArray();
 
-        return $attributes;
+            $productCategoryArrributes = $this->getCategoryProductAttribute($category->id);
+
+            $allFilterableAttributes = array_filter(array_unique(array_intersect($categoryFilterableAttributes, $productCategoryArrributes['attributes'])));
+
+            $attributes = app('Webkul\Attribute\Repositories\AttributeRepository')->getModel()::with(['options' => function($query) use ($productCategoryArrributes) {
+                    return $query->whereIn('id', $productCategoryArrributes['attributeOptions'])
+                                ->orderBy('sort_order');
+                }
+            ])->whereIn('id', $allFilterableAttributes)->get();
+
+            return $loadedCategoryAttributes[$category->id] = $attributes;
+        } else {
+
+            return $loadedCategoryAttributes[$category->id] = $category->filterableAttributes;
+        }
     }
 
     /**

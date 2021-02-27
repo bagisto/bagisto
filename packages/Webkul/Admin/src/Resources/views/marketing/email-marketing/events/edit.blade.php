@@ -11,7 +11,7 @@
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = history.length > 1 ? document.referrer : '{{ route('admin.dashboard.index') }}'"></i>
+                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.events.index') }}'"></i>
 
                         {{ __('admin::app.marketing.events.edit-title') }}
                     </h1>
@@ -45,7 +45,7 @@
                                 <span class="control-error" v-if="errors.has('description')">@{{ errors.first('description') }}</span>
                             </div>
 
-                            <div class="control-group" :class="[errors.has('date') ? 'has-error' : '']">
+                            <div class="control-group date" :class="[errors.has('date') ? 'has-error' : '']">
                                 <label for="date" class="required">{{ __('admin::app.marketing.events.date') }}</label>
                                 <date>
                                     <input type="text" name="date" class="control" v-validate="'required'" value="{{ old('date') ?: $event->date }}" data-vv-as="&quot;{{ __('admin::app.marketing.events.date') }}&quot;">
@@ -55,7 +55,7 @@
 
                         </div>
                     </accordian>
-                            
+
                     {!! view_render_event('bagisto.admin.marketing.events.create.after') !!}
 
                 </div>

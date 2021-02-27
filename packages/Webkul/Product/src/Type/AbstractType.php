@@ -5,15 +5,18 @@ namespace Webkul\Product\Type;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Models\CartItem;
 use Illuminate\Support\Facades\Storage;
-use Webkul\Product\Helpers\ProductImage;
+use Webkul\Product\Facades\ProductImage;
 use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Datatypes\CartItemValidationResult;
 use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductVideoRepository;
+use Webkul\Customer\Repositories\CustomerGroupRepository;
+use Webkul\Inventory\Repositories\InventorySourceRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
 
 abstract class AbstractType
 {
@@ -58,13 +61,6 @@ abstract class AbstractType
      * @var \Webkul\Product\Repositories\productVideoRepository
      */
     protected $productVideoRepository;
-
-    /**
-     * Product Image helper instance
-     *
-     * @var \Webkul\Product\Helpers\ProductImage
-     */
-    protected $productImageHelper;
 
     /**
      * Product model instance
@@ -141,6 +137,20 @@ abstract class AbstractType
     protected $productOptions = [];
 
     /**
+     * Skip attribute for simple product type.
+     *
+     * @var array
+     */
+    protected $skipAttributes = [];
+
+    /**
+     * These blade files will be included in product edit page.
+     *
+     * @var array
+     */
+    protected $additionalViews = [];
+
+    /**
      * Create a new product type instance.
      *
      * @param \Webkul\Attribute\Repositories\AttributeRepository           $attributeRepository
@@ -148,7 +158,6 @@ abstract class AbstractType
      * @param \Webkul\Product\Repositories\ProductAttributeValueRepository $attributeValueRepository
      * @param \Webkul\Product\Repositories\ProductInventoryRepository      $productInventoryRepository
      * @param \Webkul\Product\Repositories\ProductImageRepository          $productImageRepository
-     * @param \Webkul\Product\Helpers\ProductImage                         $productImageHelper
      * @param \Webkul\Product\Repositories\ProductVideoRepository          $productVideoRepository
      *
      * @return void
@@ -159,7 +168,6 @@ abstract class AbstractType
         ProductAttributeValueRepository $attributeValueRepository,
         ProductInventoryRepository $productInventoryRepository,
         ProductImageRepository $productImageRepository,
-        ProductImage $productImageHelper,
         ProductVideoRepository $productVideoRepository
     ) {
         $this->attributeRepository = $attributeRepository;
@@ -171,8 +179,6 @@ abstract class AbstractType
         $this->productInventoryRepository = $productInventoryRepository;
 
         $this->productImageRepository = $productImageRepository;
-
-        $this->productImageHelper = $productImageHelper;
 
         $this->productVideoRepository = $productVideoRepository;
     }
@@ -285,7 +291,7 @@ abstract class AbstractType
 
             $this->productVideoRepository->uploadVideos($data, $product);
 
-            app('Webkul\Product\Repositories\ProductCustomerGroupPriceRepository')->saveCustomerGroupPrices($data,
+            app(ProductCustomerGroupPriceRepository::class)->saveCustomerGroupPrices($data,
                 $product);
         }
 
@@ -432,20 +438,18 @@ abstract class AbstractType
     {
         $total = 0;
 
-        $channelInventorySourceIds = core()->getCurrentChannel()
-            ->inventory_sources()
-            ->where('status', 1)
-            ->pluck('id');
+        $channelInventorySourceIds = app(InventorySourceRepository::class)->getChannelInventorySourceIds();
 
-        foreach ($this->product->inventories as $inventory) {
-            if (is_numeric($index = $channelInventorySourceIds->search($inventory->inventory_source_id))) {
+        $productInventories = $this->productInventoryRepository->checkInLoadedProductInventories($this->product);
+
+        foreach ($productInventories as $inventory) {
+            if (is_numeric($channelInventorySourceIds->search($inventory->inventory_source_id))) {
                 $total += $inventory->qty;
             }
         }
 
         $orderedInventory = $this->product->ordered_inventories()
-            ->where('channel_id', core()->getCurrentChannel()->id)
-            ->first();
+            ->where('channel_id', core()->getCurrentChannel()->id)->first();
 
         if ($orderedInventory) {
             $total -= $orderedInventory->qty;
@@ -570,7 +574,9 @@ abstract class AbstractType
 
         $rulePrice = app('Webkul\CatalogRule\Helpers\CatalogRuleProductPrice')->getRulePrice($this->product);
 
-        if ((is_null($this->product->special_price) || ! (float)$this->product->special_price)
+        $specialPrice = $this->product->special_price;
+
+        if ((is_null($specialPrice) || ! (float) $specialPrice)
             && ! $rulePrice
             && $customerGroupPrice == $this->product->price
         ) {
@@ -579,7 +585,7 @@ abstract class AbstractType
 
         $haveSpecialPrice = false;
 
-        if (! (float)$this->product->special_price) {
+        if (! (float) $specialPrice) {
             if ($rulePrice && $rulePrice->price < $this->product->price) {
                 $this->product->special_price = $rulePrice->price;
 
@@ -630,18 +636,14 @@ abstract class AbstractType
         if (Cart::getCurrentCustomer()->check()) {
             $customerGroupId = Cart::getCurrentCustomer()->user()->customer_group_id;
         } else {
-            $customerGroupRepository = app('Webkul\Customer\Repositories\CustomerGroupRepository');
+            $customerGuestGroup = app(CustomerGroupRepository::class)->getCustomerGuestGroup();
 
-            if ($customerGuestGroup = $customerGroupRepository->findOneByField('code', 'guest')) {
+            if ($customerGuestGroup) {
                 $customerGroupId = $customerGuestGroup->id;
             }
         }
 
-        $customerGroupPrices = $product->customer_group_prices()->where(function ($query) use ($customerGroupId) {
-            $query->where('customer_group_id', $customerGroupId)
-                ->orWhereNull('customer_group_id');
-        }
-        )->get();
+        $customerGroupPrices = app(ProductCustomerGroupPriceRepository::class)->checkInLoadedCustomerGroupPrice($product, $customerGroupId);
 
         if (!$customerGroupPrices->count()) {
             return $product->price;
@@ -849,7 +851,7 @@ abstract class AbstractType
      */
     public function getBaseImage($item)
     {
-        return $this->productImageHelper->getProductBaseImage($item->product);
+        return ProductImage::getProductBaseImage($item->product);
     }
 
     /**
@@ -924,4 +926,88 @@ abstract class AbstractType
         return false;
     }
 
+    /**
+     * Get more offers for customer group pricing.
+     *
+     * @return array
+     */
+    public function getCustomerGroupPricingOffers() {
+        $offerLines = [];
+        $haveOffers = true;
+        $customerGroupId = null;
+
+        if (Cart::getCurrentCustomer()->check()) {
+            $customerGroupId = Cart::getCurrentCustomer()->user()->customer_group_id;
+        } else {
+            $customerGroupRepository = app('Webkul\Customer\Repositories\CustomerGroupRepository');
+
+            if ($customerGuestGroup = $customerGroupRepository->findOneByField('code', 'guest')) {
+                $customerGroupId = $customerGuestGroup->id;
+            }
+        }
+
+        $customerGroupPrices = $this->product->customer_group_prices()->where(function ($query) use ($customerGroupId) {
+            $query->where('customer_group_id', $customerGroupId)
+                ->orWhereNull('customer_group_id');
+        }
+        )->groupBy('qty')->get()->sortBy('qty')->values()->all();
+
+        if ($this->haveSpecialPrice()) {
+            $rulePrice = app('Webkul\CatalogRule\Helpers\CatalogRuleProductPrice')->getRulePrice($this->product);
+
+            if ($rulePrice && $rulePrice->price < $this->product->special_price) {
+                $haveOffers = false;
+            }
+
+            if ($haveOffers) {
+                foreach ($customerGroupPrices as $key => $customerGroupPrice) {
+                    if ($customerGroupPrice && $customerGroupPrice->qty > 1) {
+                        array_push($offerLines, $this->getOfferLines($customerGroupPrice));
+                    }
+                }
+            }
+        } else {
+            if (count($customerGroupPrices) > 0) {
+                foreach ($customerGroupPrices as $key => $customerGroupPrice) {
+                    array_push($offerLines, $this->getOfferLines($customerGroupPrice));
+                }
+            }
+        }
+
+        return $offerLines;
+    }
+
+    /**
+     * Get offers lines.
+     *
+     * @param array $customerGroupPrice
+     *
+     * @return array
+     */
+    public function getOfferLines($customerGroupPrice) {
+        $price = $this->getCustomerGroupPrice($this->product, $customerGroupPrice->qty);
+
+        $discount = number_format((($this->product->price - $price) * 100) / ($this->product->price), 2);
+
+        $offerLines = trans('shop::app.products.offers', ['qty'  => $customerGroupPrice->qty,
+            'price' =>  core()->currency($price), 'discount' => $discount]);
+
+        return $offerLines;
+    }
+
+    /**
+     * Check in loaded saleable.
+     *
+     * @return object
+     */
+    public function checkInLoadedSaleableChecks($product, $callback)
+    {
+        static $loadedSaleableChecks = [];
+
+        if (array_key_exists($product->id, $loadedSaleableChecks)) {
+            return $loadedSaleableChecks[$product->id];
+        }
+
+        return $loadedSaleableChecks[$product->id] = $callback($product);
+    }
 }

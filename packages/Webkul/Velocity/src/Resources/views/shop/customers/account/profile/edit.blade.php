@@ -132,6 +132,19 @@
 
             <div class="row">
                 <label class="col-12">
+                    {{ __('shop::app.customer.account.profile.phone') }}
+                </label>
+
+                <div class="col-12">
+                    <input value="{{ old('phone') ?? $customer->phone }}" name="phone" type="text"/>
+                    <span class="control-error" v-if="errors.has('phone')">@{{ errors.first('phone') }}</span>
+                </div>
+            </div>
+
+            {!! view_render_event('bagisto.shop.customers.account.profile.edit.phone.after', ['customer' => $customer]) !!}
+
+            <div class="row">
+                <label class="col-12">
                     {{ __('velocity::app.shop.general.enter-current-password') }}
                 </label>
 
@@ -178,10 +191,12 @@
                 </div>
             </div>
 
-            <div class="control-group">
-                <input type="checkbox" id="checkbox2" name="subscribed_to_news_letter"@if (isset($customer->subscription)) value="{{ $customer->subscription->is_subscribed }}" {{ $customer->subscription->is_subscribed ? 'checked' : ''}} @endif  style="width: auto;">
-                <span>{{ __('shop::app.customer.signup-form.subscribe-to-newsletter') }}</span>
-            </div>
+            @if (core()->getConfigData('customer.settings.newsletter.subscription'))
+                <div class="control-group">
+                    <input type="checkbox" id="checkbox2" name="subscribed_to_news_letter" @if (isset($customer->subscription)) value="{{ $customer->subscription->is_subscribed }}" {{ $customer->subscription->is_subscribed ? 'checked' : ''}} @endif  style="width: auto;">
+                    <span>{{ __('shop::app.customer.signup-form.subscribe-to-newsletter') }}</span>
+                </div>
+            @endif
 
             {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.after', ['customer' => $customer]) !!}
 

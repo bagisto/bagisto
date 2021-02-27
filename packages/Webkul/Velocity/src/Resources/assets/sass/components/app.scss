@@ -215,7 +215,7 @@
                 height: 24px;
                 margin-right: 0;
                 position: absolute;
-                background-image: url(/themes/velocity/assets/images/Icon-remove.svg);
+                background-image: url("../images/Icon-remove.svg");
             }
         }
     }
@@ -685,7 +685,7 @@
 
         .product-quantity {
             .quantity {
-                float: left;
+                display: inline-flex;
 
                 label {
                     display: none !important;

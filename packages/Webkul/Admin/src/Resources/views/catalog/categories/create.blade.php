@@ -12,7 +12,7 @@
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = history.length > 1 ? document.referrer : '{{ route('admin.dashboard.index') }}'"></i>
+                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.catalog.categories.index') }}'"></i>
 
                         {{ __('admin::app.catalog.categories.add-title') }}
                     </h1>
@@ -125,7 +125,7 @@
 
                                 {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.parent_category.controls.before') !!}
 
-                                <tree-view value-field="id" name-field="parent_id" input-type="radio" items='@json($categories)'></tree-view>
+                                <tree-view value-field="id" name-field="parent_id" input-type="radio" items='@json($categories)' fallback-locale="{{ config('app.fallback_locale') }}"></tree-view>
 
                                 {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.parent_category.controls.after') !!}
 

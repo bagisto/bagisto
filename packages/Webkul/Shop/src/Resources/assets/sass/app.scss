@@ -409,6 +409,7 @@ input {
     }
 
     .product-card {
+        height: 480px;
         position: relative;
         padding: 15px;
 
@@ -448,6 +449,30 @@ input {
         }
 
         .cart-wish-wrap {
+            position: absolute;
+            display: inline-flex;
+            justify-content: flex-start;
+            align-items: center;
+            bottom: 5px;
+            height: 40px;
+
+            .addtocart {
+                margin-right: 10px;
+                text-transform: uppercase;
+                text-align: left;
+                box-shadow: 1px 1px 0px $shadow-color;
+            }
+
+            .add-to-wishlist {
+                margin-top: 5px;
+                background: transparent;
+                border: 0;
+                cursor: pointer;
+                padding: 0;
+            }
+        }
+
+        .default-wrap {
             display: inline-flex;
             justify-content: flex-start;
             align-items: center;
@@ -1881,6 +1906,7 @@ section.product-detail {
                     font-size: 24px;
                     color: $font-dark;
                     margin-bottom: 15px;
+                    line-height: normal;
                 }
 
                 .product-price {
@@ -4723,10 +4749,14 @@ td {
 .cart-wish-wrap {
     display: flex;
 }
+.default-wrap {
+    display: flex;
+}
 .white-cross-sm-icon {
     width: 24px;
     height:24px;
 }
 .add-to-wishlist {
+    margin-top: auto;
     margin-left: 15px;
 }

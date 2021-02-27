@@ -371,7 +371,8 @@ return [
                 'expired' => 'Süresi Doldu',
                 'remaining-downloads' => 'Kalan İndirme',
                 'unlimited' => 'Sınırsız',
-                'download-error' => 'İndirme linki süresi doldu.'
+                'download-error' => 'İndirme linki süresi doldu.',
+                'payment-error' => 'Payment has not been done for this download.'
             ],
 
             'review' => [
@@ -439,7 +440,8 @@ return [
         'available-for-order' => 'Sipariş İçin Uygun',
         'settings' => 'Settings',
         'compare_options' => 'Compare Options',
-        'wishlist-options' => 'Wishlist Options'
+        'wishlist-options' => 'Wishlist Options',
+        'offers' => 'Buy :qty for :price each and save :discount%',
     ],
 
     // 'reviews' => [

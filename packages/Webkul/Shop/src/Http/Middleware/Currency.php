@@ -2,8 +2,8 @@
 
 namespace Webkul\Shop\Http\Middleware;
 
-use Webkul\Core\Repositories\CurrencyRepository;
 use Closure;
+use Webkul\Core\Repositories\CurrencyRepository;
 
 class Currency
 {

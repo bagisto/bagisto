@@ -27,7 +27,7 @@
                     <div class="page-title">
                         <h1>
                             <i class="icon angle-left-icon back-link"
-                            onclick="window.location = history.length > 1 ? document.referrer : '{{ route('admin.dashboard.index') }}'"></i>
+                            onclick="window.location = '{{ route('admin.cart-rules.index') }}'"></i>
 
                             {{ __('admin::app.promotions.cart-rules.edit-title') }}
                         </h1>
@@ -78,7 +78,7 @@
 
                                         @foreach(core()->getAllChannels() as $channel)
                                             <option value="{{ $channel->id }}" {{ in_array($channel->id, $selectedOptionIds) ? 'selected' : '' }}>
-                                                {{ $channel->name }}
+                                                {{ core()->getChannelName($channel) }}
                                             </option>
                                         @endforeach
 
@@ -343,7 +343,7 @@
                     <input type="hidden" :name="['conditions[' + index + '][attribute_type]']" v-model="matchedAttribute.type">
 
                     <div v-if="matchedAttribute.key == 'product|children::category_ids' || matchedAttribute.key == 'product|category_ids' || matchedAttribute.key == 'product|parent::category_ids'">
-                        <tree-view value-field="id" id-field="id" :name-field="'conditions[' + index + '][value]'" input-type="checkbox" :items='matchedAttribute.options' :value='condition.value' :behavior="'no'"></tree-view>
+                        <tree-view value-field="id" id-field="id" :name-field="'conditions[' + index + '][value]'" input-type="checkbox" :items='matchedAttribute.options' :value='condition.value' :behavior="'no'" fallback-locale="{{ config('app.fallback_locale') }}"></tree-view>
                     </div>
 
                     <div v-else>
@@ -783,7 +783,7 @@
                 },
 
                 showModal(id) {
-                    this.$root.$set(this.$root.modalIds, id, true); 
+                    this.$root.$set(this.$root.modalIds, id, true);
                 },
             }
         });
