@@ -818,14 +818,13 @@ class ProductRepository extends Repository
             ->where(function ($qb) {
                 $qb
                     ->where('ps.type', 'configurable')
-                    ->whereRaw('
-                        (
-                            SELECT SUM(' . DB::getTablePrefix() . 'product_inventories.qty)
-                            FROM ' . DB::getTablePrefix() . 'product_flat
-                            LEFT JOIN ' . DB::getTablePrefix() . 'product_inventories ON ' . DB::getTablePrefix() . 'product_inventories.product_id = ' . DB::getTablePrefix() . 'product_flat.product_id
-                            WHERE ' . DB::getTablePrefix() . 'product_flat.parent_id = ps.id
-                        ) > 0
-                    ');
+                    ->where(function ($qb) {
+                        $qb
+                            ->selectRaw('SUM(' . DB::getTablePrefix() . 'product_inventories.qty)')
+                            ->from('product_flat')
+                            ->leftJoin('product_inventories', 'product_inventories.product_id', '=', 'product_flat.product_id')
+                            ->whereRaw(DB::getTablePrefix() . 'product_flat.parent_id = ps.id');
+                    }, '>', 0);
             })
             ->orWhere(function ($qb) {
                 $qb
