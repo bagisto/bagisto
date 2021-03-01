@@ -84,7 +84,9 @@ class ShopController extends Controller
                                 return $this->velocityHelper->formatProduct($product);
                             }
                         }
-                    }),
+                    })->reject(function ($product) {
+                        return is_null($product);
+                    })->values(),
                 ];
 
                 break;

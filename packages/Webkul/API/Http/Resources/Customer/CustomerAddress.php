@@ -19,6 +19,7 @@ class CustomerAddress extends JsonResource
             'first_name'   => $this->first_name,
             'last_name'    => $this->last_name,
             'company_name' => $this->company_name,
+            'vat_id'       => $this->vat_id,
             'address1'     => explode(PHP_EOL, $this->address1),
             'country'      => $this->country,
             'country_name' => core()->country_name($this->country),
@@ -26,6 +27,7 @@ class CustomerAddress extends JsonResource
             'city'         => $this->city,
             'postcode'     => $this->postcode,
             'phone'        => $this->phone,
+            'is_default'   => $this->default_address,
             'created_at'   => $this->created_at,
             'updated_at'   => $this->updated_at,
         ];
