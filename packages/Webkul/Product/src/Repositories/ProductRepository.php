@@ -212,8 +212,12 @@ class ProductRepository extends Repository
             if ($priceFilter = request('price')) {
                 $priceRange = explode(',', $priceFilter);
                 if (count($priceRange) > 0) {
-                    $qb->where('variants.min_price', '>=', core()->convertToBasePrice($priceRange[0]));
-                    $qb->where('variants.min_price', '<=', core()->convertToBasePrice(end($priceRange)));
+
+                    $priceQuery = DB::raw('(CASE WHEN ' . DB::getTablePrefix() . 'catalog_rule_product_prices.price > 0 THEN ' . DB::getTablePrefix() . 'catalog_rule_product_prices.price ELSE ' . DB::getTablePrefix() . 'variants.min_price END)');
+
+                    $qb->leftJoin('catalog_rule_product_prices', 'catalog_rule_product_prices.product_id', '=', 'variants.product_id')
+                    ->where($priceQuery, '>=',  core()->convertToBasePrice($priceRange[0]))
+                    ->where($priceQuery, '<=',  core()->convertToBasePrice(end($priceRange)));
                 }
             }
 
