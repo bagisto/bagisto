@@ -3,12 +3,14 @@
 namespace Webkul\Velocity\Http\Controllers\Admin;
 
 use Illuminate\Support\Str;
-use enshrined\svgSanitize\Sanitizer;
+use Webkul\Core\Traits\Sanitizer;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Velocity\Repositories\VelocityMetadataRepository;
 
 class ConfigurationController extends Controller
 {
+    use Sanitizer;
+
     /**
      * Locale
      */
@@ -249,23 +251,5 @@ class ConfigurationController extends Controller
             'subscription_bar_content' => '<div class="social-icons col-lg-6"><a href="https://webkul.com" target="_blank" class="unset" rel="noopener noreferrer"><i class="fs24 within-circle rango-facebook" title="facebook"></i> </a> <a href="https://webkul.com" target="_blank" class="unset" rel="noopener noreferrer"><i class="fs24 within-circle rango-twitter" title="twitter"></i> </a> <a href="https://webkul.com" target="_blank" class="unset" rel="noopener noreferrer"><i class="fs24 within-circle rango-linked-in" title="linkedin"></i> </a> <a href="https://webkul.com" target="_blank" class="unset" rel="noopener noreferrer"><i class="fs24 within-circle rango-pintrest" title="Pinterest"></i> </a> <a href="https://webkul.com" target="_blank" class="unset" rel="noopener noreferrer"><i class="fs24 within-circle rango-youtube" title="Youtube"></i> </a> <a href="https://webkul.com" target="_blank" class="unset" rel="noopener noreferrer"><i class="fs24 within-circle rango-instagram" title="instagram"></i></a></div>',
             'product_policy'           => '<div class="row col-12 remove-padding-margin"><div class="col-lg-4 col-sm-12 product-policy-wrapper"><div class="card"><div class="policy"><div class="left"><i class="rango-van-ship fs40"></i></div> <div class="right"><span class="font-setting fs20">Free Shipping on Order $20 or More</span></div></div></div></div> <div class="col-lg-4 col-sm-12 product-policy-wrapper"><div class="card"><div class="policy"><div class="left"><i class="rango-exchnage fs40"></i></div> <div class="right"><span class="font-setting fs20">Product Replace &amp; Return Available </span></div></div></div></div> <div class="col-lg-4 col-sm-12 product-policy-wrapper"><div class="card"><div class="policy"><div class="left"><i class="rango-exchnage fs40"></i></div> <div class="right"><span class="font-setting fs20">Product Exchange and EMI Available </span></div></div></div></div></div>',
         ]);
-    }
-
-    /**
-     * Sanitize SVG file.
-     *
-     * @param  string  $path
-     * @return void
-     */
-    private function sanitizeSVG($path)
-    {
-        /* sanitizer instance */
-        $sanitizer = new Sanitizer();
-
-        /* grab svg file */
-        $dirtySVG = Storage::get($path);
-
-        /* save sanitized svg */
-        Storage::put($path, $sanitizer->sanitize($dirtySVG));
     }
 }
