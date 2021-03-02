@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cfcd3b1d4b0e1b0cc31f686b8e68b9d8",
+    "content-hash": "3162291c848b6eefe01166e09a723330",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -167,16 +167,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.173.17",
+            "version": "3.173.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "d3657af3d93285f4cb0f59dd94d065f59cf89cf5"
+                "reference": "63c6feca49bf4083f33bf250401c0c286759e101"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d3657af3d93285f4cb0f59dd94d065f59cf89cf5",
-                "reference": "d3657af3d93285f4cb0f59dd94d065f59cf89cf5",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/63c6feca49bf4083f33bf250401c0c286759e101",
+                "reference": "63c6feca49bf4083f33bf250401c0c286759e101",
                 "shasum": ""
             },
             "require": {
@@ -251,9 +251,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.173.17"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.173.19"
             },
-            "time": "2021-02-25T19:13:34+00:00"
+            "time": "2021-03-01T19:15:59+00:00"
         },
         {
             "name": "babenkoivan/elastic-adapter",
@@ -8860,16 +8860,16 @@
         },
         {
             "name": "codeception/lib-innerbrowser",
-            "version": "1.4.0",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/lib-innerbrowser.git",
-                "reference": "b7406c710684c255d9b067d7795269a5585a0406"
+                "reference": "693e116f81ef98eae98c43ef785a726faf87394e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/lib-innerbrowser/zipball/b7406c710684c255d9b067d7795269a5585a0406",
-                "reference": "b7406c710684c255d9b067d7795269a5585a0406",
+                "url": "https://api.github.com/repos/Codeception/lib-innerbrowser/zipball/693e116f81ef98eae98c43ef785a726faf87394e",
+                "reference": "693e116f81ef98eae98c43ef785a726faf87394e",
                 "shasum": ""
             },
             "require": {
@@ -8914,9 +8914,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Codeception/lib-innerbrowser/issues",
-                "source": "https://github.com/Codeception/lib-innerbrowser/tree/1.4.0"
+                "source": "https://github.com/Codeception/lib-innerbrowser/tree/1.4.1"
             },
-            "time": "2021-01-29T18:17:25+00:00"
+            "time": "2021-03-02T08:01:54+00:00"
         },
         {
             "name": "codeception/module-asserts",
