@@ -2,18 +2,14 @@
 
 namespace Webkul\Velocity\Http\Controllers\Admin;
 
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Webkul\Core\Traits\Sanitizer;
+use Illuminate\Support\Facades\Storage;
 use Webkul\Velocity\Repositories\VelocityMetadataRepository;
 
 class ConfigurationController extends Controller
 {
-    /**
-     * VelocityMetadataRepository object
-     *
-     * @var \Webkul\Velocity\Repositories\VelocityMetadataRepository
-     */
-    protected $velocityMetaDataRepository;
+    use Sanitizer;
 
     /**
      * Locale
@@ -24,6 +20,13 @@ class ConfigurationController extends Controller
      * Channel
      */
     protected $channel;
+
+    /**
+     * VelocityMetadataRepository $velocityMetaDataRepository
+     *
+     * @var \Webkul\Velocity\Repositories\VelocityMetadataRepository
+     */
+    protected $velocityMetaDataRepository;
 
     /**
      * Create a new controller instance.
@@ -43,12 +46,14 @@ class ConfigurationController extends Controller
     }
 
     /**
+     * Render meta data.
+     *
      * @return \Illuminate\View\View
      */
     public function renderMetaData()
-    {   
+    {
         $this->locale = request()->get('locale') ? request()->get('locale') : app()->getLocale();
-         
+
         $velocityMetaData = $this->velocityHelper->getVelocityMetaData($this->locale, $this->channel, false);
 
         if (! $velocityMetaData) {
@@ -65,6 +70,8 @@ class ConfigurationController extends Controller
     }
 
     /**
+     * Store meta data.
+     *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -105,16 +112,6 @@ class ConfigurationController extends Controller
             }
         }
 
-        if (isset($params['product_view_images'])) {
-            foreach ($params['product_view_images'] as $index => $productViewImage) {
-                if ($productViewImage !== "") {
-                    $params['product_view_images'][$index] = $this->uploadImage($productViewImage, $index);
-                }
-            }
-
-            $params['product_view_images'] = json_encode($params['product_view_images']);
-        }
-
         $params['advertisement'] = json_encode($params['advertisement']);
         $params['home_page_content'] = str_replace('=&gt;', '=>', $params['home_page_content']);
 
@@ -132,10 +129,11 @@ class ConfigurationController extends Controller
     }
 
     /**
+     * Upload advertisement images.
+     *
      * @param  array    $data
      * @param  int      $index
      * @param  array    $advertisement
-     *
      * @return array
      */
     public function uploadAdvertisementImages($data, $index, $advertisement)
@@ -152,16 +150,20 @@ class ConfigurationController extends Controller
                 if (Str::contains($imageId, 'image_')) {
                     if (request()->hasFile($file) && $image) {
                         $filter_index = substr($imageId, 6, 1);
-                        if ( isset($data[$filter_index]) ) {
+                        if (isset($data[$filter_index])) {
                             $size = array_key_last($saveData[$index]);
 
-                            $saveImage[$size + 1] = request()->file($file)->store($dir);
+                            $saveImage[$size + 1] = $path = request()->file($file)->store($dir);
                         } else {
-                            $saveImage[substr($imageId, 6, 1)] = request()->file($file)->store($dir);
+                            $saveImage[substr($imageId, 6, 1)] = $path = request()->file($file)->store($dir);
+                        }
+
+                        if ($image->getMimeType() === 'image/svg') {
+                            $this->sanitizeSVG($path);
                         }
                     }
                 } else {
-                    if ( isset($advertisement[$index][$imageId]) && $advertisement[$index][$imageId] && !request()->hasFile($file)) {
+                    if (isset($advertisement[$index][$imageId]) && $advertisement[$index][$imageId] && !request()->hasFile($file)) {
                         $saveImage[$imageId] = $advertisement[$index][$imageId];
 
                         unset($advertisement[$index][$imageId]);
@@ -200,30 +202,8 @@ class ConfigurationController extends Controller
     }
 
     /**
-     * @param  array    $data
-     * @param  int      $index
+     * Manage add images.
      *
-     * @return mixed
-     */
-    public function uploadImage($data, $index)
-    {
-        $type = 'product_view_images';
-        $request = request();
-
-        $image = '';
-        $file = $type . '.' . $index;
-        $dir = "velocity/$type";
-
-        if ($request->hasFile($file)) {
-            Storage::delete($dir . $file);
-
-            $image = $request->file($file)->store($dir);
-        }
-
-        return $image;
-    }
-
-    /**
      * @param  array  $addImages
      *
      * @return array
@@ -250,21 +230,25 @@ class ConfigurationController extends Controller
         return $imagePaths;
     }
 
+    /**
+     * Create meta data.
+     *
+     * @param  string  $locale
+     * @param  string  $channel
+     *
+     * @return array
+     */
     private function createMetaData($locale, $channel)
     {
         \DB::table('velocity_meta_data')->insert([
             'locale'                   => $locale,
             'channel'                  => $channel,
             'header_content_count'     => '5',
-
             'home_page_content'        => "<p>@include('shop::home.advertisements.advertisement-four')@include('shop::home.featured-products') @include('shop::home.product-policy') @include('shop::home.advertisements.advertisement-three') @include('shop::home.new-products') @include('shop::home.advertisements.advertisement-two')</p>",
             'footer_left_content'      => __('velocity::app.admin.meta-data.footer-left-raw-content'),
-
             'footer_middle_content'    => '<div class="col-lg-6 col-md-12 col-sm-12 no-padding"><ul type="none"><li><a href="{!! url(\'page/about-us\') !!}">About Us</a></li><li><a href="{!! url(\'page/cutomer-service\') !!}">Customer Service</a></li><li><a href="{!! url(\'page/whats-new\') !!}">What&rsquo;s New</a></li><li><a href="{!! url(\'page/contact-us\') !!}">Contact Us </a></li></ul></div><div class="col-lg-6 col-md-12 col-sm-12 no-padding"><ul type="none"><li><a href="{!! url(\'page/return-policy\') !!}"> Order and Returns </a></li><li><a href="{!! url(\'page/payment-policy\') !!}"> Payment Policy </a></li><li><a href="{!! url(\'page/shipping-policy\') !!}"> Shipping Policy</a></li><li><a href="{!! url(\'page/privacy-policy\') !!}"> Privacy and Cookies Policy </a></li></ul></div>',
             'slider'                   => 1,
-
             'subscription_bar_content' => '<div class="social-icons col-lg-6"><a href="https://webkul.com" target="_blank" class="unset" rel="noopener noreferrer"><i class="fs24 within-circle rango-facebook" title="facebook"></i> </a> <a href="https://webkul.com" target="_blank" class="unset" rel="noopener noreferrer"><i class="fs24 within-circle rango-twitter" title="twitter"></i> </a> <a href="https://webkul.com" target="_blank" class="unset" rel="noopener noreferrer"><i class="fs24 within-circle rango-linked-in" title="linkedin"></i> </a> <a href="https://webkul.com" target="_blank" class="unset" rel="noopener noreferrer"><i class="fs24 within-circle rango-pintrest" title="Pinterest"></i> </a> <a href="https://webkul.com" target="_blank" class="unset" rel="noopener noreferrer"><i class="fs24 within-circle rango-youtube" title="Youtube"></i> </a> <a href="https://webkul.com" target="_blank" class="unset" rel="noopener noreferrer"><i class="fs24 within-circle rango-instagram" title="instagram"></i></a></div>',
-
             'product_policy'           => '<div class="row col-12 remove-padding-margin"><div class="col-lg-4 col-sm-12 product-policy-wrapper"><div class="card"><div class="policy"><div class="left"><i class="rango-van-ship fs40"></i></div> <div class="right"><span class="font-setting fs20">Free Shipping on Order $20 or More</span></div></div></div></div> <div class="col-lg-4 col-sm-12 product-policy-wrapper"><div class="card"><div class="policy"><div class="left"><i class="rango-exchnage fs40"></i></div> <div class="right"><span class="font-setting fs20">Product Replace &amp; Return Available </span></div></div></div></div> <div class="col-lg-4 col-sm-12 product-policy-wrapper"><div class="card"><div class="policy"><div class="left"><i class="rango-exchnage fs40"></i></div> <div class="right"><span class="font-setting fs20">Product Exchange and EMI Available </span></div></div></div></div></div>',
         ]);
     }
