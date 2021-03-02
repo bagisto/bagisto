@@ -2,26 +2,25 @@
 
 namespace Webkul\Sales\Repositories;
 
-use Illuminate\Container\Container as App;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Event;
-use Webkul\Core\Eloquent\Repository;
 use Webkul\Sales\Contracts\Order;
-use Webkul\Sales\Models\Order as OrderModel;
+use Illuminate\Support\Facades\DB;
+use Webkul\Core\Eloquent\Repository;
+use Illuminate\Support\Facades\Event;
 use Webkul\Shop\Generators\Sequencer;
+use Illuminate\Container\Container as App;
 use Webkul\Shop\Generators\OrderNumberIdSequencer;
 
 class OrderRepository extends Repository
 {
     /**
-     * OrderItemRepository object
+     * OrderItemRepository $orderItemRepository
      *
      * @var \Webkul\Sales\Repositories\OrderItemRepository
      */
     protected $orderItemRepository;
 
     /**
-     * DownloadableLinkPurchasedRepository object
+     * DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository
      *
      * @var \Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository
      */
@@ -32,6 +31,7 @@ class OrderRepository extends Repository
      *
      * @param  \Webkul\Sales\Repositories\OrderItemRepository  $orderItemRepository
      * @param  \Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository  $downloadableLinkPurchasedRepository
+     * @param  \Illuminate\Container\Container  $app
      * @return void
      */
     public function __construct(
@@ -47,7 +47,7 @@ class OrderRepository extends Repository
     }
 
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return string
      */
@@ -57,6 +57,8 @@ class OrderRepository extends Repository
     }
 
     /**
+     * Create order.
+     *
      * @param  array  $data
      * @return \Webkul\Sales\Contracts\Order
      */
@@ -125,13 +127,17 @@ class OrderRepository extends Repository
     }
 
     /**
-     * @param  int  $orderId
+     * Cancel order. This method should be independent as admin also can cancel the order.
+     *
+     * @param  \Webkul\Sales\Models\Order|int  $orderOrId
      * @return \Webkul\Sales\Contracts\Order
      */
-    public function cancel($orderId)
+    public function cancel($orderOrId)
     {
-        $order = $this->findOrFail($orderId);
+        /* order */
+        $order = $this->resolveOrderInstance($orderOrId);
 
+        /* check wether order can be cancelled or not */
         if (! $order->canCancel()) {
             return false;
         }
@@ -183,17 +189,21 @@ class OrderRepository extends Repository
     }
 
     /**
+     * Generate increment id.
+     *
      * @return int
      */
     public function generateIncrementId()
     {
+        /**
+         * @var $generatorClass Sequencer
+         */
         $generatorClass = core()->getConfigData('sales.orderSettings.order_number.order_number_generator-class') ?: false;
 
         if ($generatorClass !== false
             && class_exists($generatorClass)
             && in_array(Sequencer::class, class_implements($generatorClass), true)
         ) {
-            /** @var $generatorClass Sequencer */
             return $generatorClass::generate();
         }
 
@@ -201,6 +211,8 @@ class OrderRepository extends Repository
     }
 
     /**
+     * Is order in completed state.
+     *
      * @param  \Webkul\Sales\Contracts\Order  $order
      * @return void
      */
@@ -232,6 +244,8 @@ class OrderRepository extends Repository
     }
 
     /**
+     * Is order in cancelled state.
+     *
      * @param  \Webkul\Sales\Contracts\Order  $order
      * @return void
      */
@@ -248,8 +262,9 @@ class OrderRepository extends Repository
     }
 
     /**
-     * @param mixed $order
+     * Is order in closed state.
      *
+     * @param mixed $order
      * @return void
      */
     public function isInClosedState($order)
@@ -266,6 +281,8 @@ class OrderRepository extends Repository
     }
 
     /**
+     * Update order status.
+     *
      * @param  \Webkul\Sales\Contracts\Order  $order
      * @return void
      */
@@ -288,12 +305,14 @@ class OrderRepository extends Repository
     }
 
     /**
+     * Collect totals.
+     *
      * @param  \Webkul\Sales\Contracts\Order  $order
      * @return mixed
      */
     public function collectTotals($order)
     {
-        //Order invoice total
+        // order invoice total
         $order->sub_total_invoiced = $order->base_sub_total_invoiced = 0;
         $order->shipping_invoiced = $order->base_shipping_invoiced = 0;
         $order->tax_amount_invoiced = $order->base_tax_amount_invoiced = 0;
@@ -316,7 +335,7 @@ class OrderRepository extends Repository
         $order->grand_total_invoiced = $order->sub_total_invoiced + $order->shipping_invoiced + $order->tax_amount_invoiced - $order->discount_invoiced;
         $order->base_grand_total_invoiced = $order->base_sub_total_invoiced + $order->base_shipping_invoiced + $order->base_tax_amount_invoiced - $order->base_discount_invoiced;
 
-        //Order refund total
+        // order refund total
         $order->sub_total_refunded = $order->base_sub_total_refunded = 0;
         $order->shipping_refunded = $order->base_shipping_refunded = 0;
         $order->tax_amount_refunded = $order->base_tax_amount_refunded = 0;
@@ -346,5 +365,18 @@ class OrderRepository extends Repository
         $order->save();
 
         return $order;
+    }
+
+    /**
+     * This method will find order if id is given else pass the order as it is.
+     *
+     * @param  \Webkul\Sales\Models\Order|int  $orderOrId
+     * @return \Webkul\Sales\Contracts\Order
+     */
+    private function resolveOrderInstance($orderOrId)
+    {
+        return $orderOrId instanceof \Webkul\Sales\Models\Order
+            ? $orderOrId
+            : $this->findOrFail($orderOrId);
     }
 }
