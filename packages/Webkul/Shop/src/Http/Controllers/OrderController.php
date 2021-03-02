@@ -2,9 +2,9 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
+use PDF;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
-use PDF;
 
 class OrderController extends Controller
 {
@@ -82,6 +82,10 @@ class OrderController extends Controller
     public function print($id)
     {
         $invoice = $this->invoiceRepository->findOrFail($id);
+
+        if ($invoice->order->customer_id !== auth()->guard('customer')->user()->id) {
+            abort(404);
+        }
 
         $pdf = PDF::loadView('shop::customers.account.orders.pdf', compact('invoice'))->setPaper('a4');
 

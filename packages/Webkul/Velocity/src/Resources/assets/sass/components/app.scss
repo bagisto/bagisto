@@ -406,7 +406,7 @@
         padding: 0 10px !important;
         font-size: 24px !important;
         font-weight: 600 !important;
-        color: $dark-color !important;
+        color: $black-color !important;
         background-color: $white-color;
         border: 1px solid $border-common !important;
     }
@@ -501,7 +501,7 @@
 
         label {
             font-size: 18px;
-            color: $light-grey-clr;
+            color: $grey-color;
             text-transform: uppercase;
         }
     }
@@ -525,12 +525,12 @@
     button[type=button].btn-secondary {
         border: none;
         font-size: 16px;
-        color: $dark-color;
-        background-color: $light-color;
+        color: $black-color;
+        background-color: $white-color;
 
         :hover {
-            color: $dark-color !important;
-            background-color: $light-color !important;
+            color: $black-color !important;
+            background-color: $white-color !important;
         }
 
         :focus,
@@ -641,8 +641,8 @@
             text-align: center;
             position: absolute;
             border-radius: 50%;
-            color: $light-color;
-            background: $dark-color;
+            color: $white-color;
+            background: $black-color;
         }
     }
 
@@ -774,7 +774,7 @@
                 }
 
                 .customer-email {
-                    color: $light-grey-clr;
+                    color: $grey-color;
                 }
             }
 
@@ -876,7 +876,7 @@
                 font-size: 16px;
                 padding: 5px 16px;
                 border-radius: 1px;
-                background: $btn-text-color;
+                background: $button-text-color;
                 border: 1px solid $border-common;
             }
 
@@ -1192,7 +1192,7 @@
                     &.next,
                     &.previous {
                         cursor: not-allowed;
-                        color: $light-grey-clr !important;
+                        color: $grey-color !important;
                     }
                 }
 
@@ -1271,13 +1271,13 @@
                         font-size: 18px;
                         font-weight: 600;
                         padding-bottom: 10px;
-                        color: $light-grey-clr;
+                        color: $grey-color;
                     }
 
                     .section-content {
                         label + span {
                             font-weight: 600;
-                            color: $light-grey-clr;
+                            color: $grey-color;
                         }
 
                         .totals {
@@ -1318,7 +1318,7 @@
                         font-size: 18px;
                         padding: 10px 0;
                         font-weight: 600;
-                        color: $light-grey-clr;
+                        color: $grey-color;
                     }
                 }
             }
@@ -1497,7 +1497,7 @@
         font-size: 16px;
         padding: 5px 16px;
         border-radius: 1px;
-        background: $btn-text-color;
+        background: $button-text-color;
         border: 1px solid $border-common;
     }
 
@@ -1708,7 +1708,7 @@
 
     &.sale {
         padding: 2px 14px;
-        background-color: $color-danger;
+        background-color: $danger-color;
     }
 
     &.new {
@@ -1867,7 +1867,7 @@
         z-index: 100;
         padding-top: 10px;
         position: absolute;
-        background: $light-color;
+        background: $white-color;
         border-left: 1px solid $border-common;
         box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
         overflow-y: auto;
@@ -2131,7 +2131,7 @@
         width: 100%;
         height: 100%;
         border-radius: 50%;
-        background-color: $light-color;
+        background-color: $white-color;
         box-shadow: 0.5px 0.5px 2px 1px rgba(0,0,0,.32);
     }
 
@@ -2148,7 +2148,7 @@
         text-align: center;
         border-radius: 5px;
         white-space: nowrap;
-        color: $light-color;
+        color: $white-color;
         border-color: $theme-color !important;
         background-color: $theme-color !important;
     }
