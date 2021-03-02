@@ -11,12 +11,12 @@ use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Facades\Event;
 use Webkul\Attribute\Models\Attribute;
 use Webkul\Product\Models\ProductFlat;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Container\Container as App;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Webkul\Product\Models\ProductAttributeValueProxy;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Support\Facades\Storage;
 
 class ProductRepository extends Repository
 {
@@ -212,8 +212,12 @@ class ProductRepository extends Repository
             if ($priceFilter = request('price')) {
                 $priceRange = explode(',', $priceFilter);
                 if (count($priceRange) > 0) {
-                    $qb->where('variants.min_price', '>=', core()->convertToBasePrice($priceRange[0]));
-                    $qb->where('variants.min_price', '<=', core()->convertToBasePrice(end($priceRange)));
+
+                    $priceQuery = DB::raw('(CASE WHEN ' . DB::getTablePrefix() . 'catalog_rule_product_prices.price > 0 THEN ' . DB::getTablePrefix() . 'catalog_rule_product_prices.price ELSE ' . DB::getTablePrefix() . 'variants.min_price END)');
+
+                    $qb->leftJoin('catalog_rule_product_prices', 'catalog_rule_product_prices.product_id', '=', 'variants.product_id')
+                    ->where($priceQuery, '>=',  core()->convertToBasePrice($priceRange[0]))
+                    ->where($priceQuery, '<=',  core()->convertToBasePrice(end($priceRange)));
                 }
             }
 
@@ -812,11 +816,23 @@ class ProductRepository extends Repository
      * @return Model
     */
     public function checkOutOfStockItem($query) {
-        return $query->leftJoin('products as ps', 'product_flat.product_id', '=', 'ps.id')
+        return $query
+            ->leftJoin('products as ps', 'product_flat.product_id', '=', 'ps.id')
             ->leftJoin('product_inventories as pv', 'product_flat.product_id', '=', 'pv.product_id')
             ->where(function ($qb) {
                 $qb
-                    ->WhereIn('ps.type', ['configurable', 'grouped', 'downloadable', 'bundle', 'booking'])
+                    ->where('ps.type', 'configurable')
+                    ->where(function ($qb) {
+                        $qb
+                            ->selectRaw('SUM(' . DB::getTablePrefix() . 'product_inventories.qty)')
+                            ->from('product_flat')
+                            ->leftJoin('product_inventories', 'product_inventories.product_id', '=', 'product_flat.product_id')
+                            ->whereRaw(DB::getTablePrefix() . 'product_flat.parent_id = ps.id');
+                    }, '>', 0);
+            })
+            ->orWhere(function ($qb) {
+                $qb
+                    ->WhereIn('ps.type', ['grouped', 'downloadable', 'bundle', 'booking'])
                     ->orwhereIn('ps.type', ['simple', 'virtual'])->where('pv.qty' , '>' , 0);
             });
     }
