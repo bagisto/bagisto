@@ -110,16 +110,6 @@ class ConfigurationController extends Controller
             }
         }
 
-        if (isset($params['product_view_images'])) {
-            foreach ($params['product_view_images'] as $index => $productViewImage) {
-                if ($productViewImage !== "") {
-                    $params['product_view_images'][$index] = $this->uploadImage($productViewImage, $index);
-                }
-            }
-
-            $params['product_view_images'] = json_encode($params['product_view_images']);
-        }
-
         $params['advertisement'] = json_encode($params['advertisement']);
         $params['home_page_content'] = str_replace('=&gt;', '=>', $params['home_page_content']);
 
@@ -207,33 +197,6 @@ class ConfigurationController extends Controller
         }
 
         return $saveImage;
-    }
-
-    /**
-     * Upload image.
-     *
-     * @param  array    $image
-     * @param  int      $index
-     * @return mixed
-     */
-    public function uploadImage($image, $index)
-    {
-        $type = 'product_view_images';
-
-        $file = $type . '.' . $index;
-        $dir = "velocity/$type";
-
-        if (request()->hasFile($file)) {
-            Storage::delete($dir . $file);
-
-            $imagePath = request()->file($file)->store($dir);
-
-            if ($image->getMimeType() === 'image/svg') {
-                $this->sanitizeSVG($imagePath);
-            }
-        }
-
-        return $imagePath ?? '';
     }
 
     /**
