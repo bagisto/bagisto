@@ -39,7 +39,7 @@
                     :add-class="`col-lg-3 col-md-12 ${localeDirection}`"
                     quantity="3"
                     add-class-wrapper=""
-                    v-if="showRecentlyViewed">
+                    v-if="showRecentlyViewed === 'true'">
                 </recently-viewed>
             </div>
         </template>
