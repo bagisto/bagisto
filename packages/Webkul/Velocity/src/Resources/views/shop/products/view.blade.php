@@ -205,19 +205,6 @@
                 @include('shop::products.view.related-products')
                 @include('shop::products.view.up-sells')
             </div>
-
-            <div class="store-meta-images col-3">
-                @if(
-                    isset($velocityMetaData['product_view_images'])
-                    && $velocityMetaData['product_view_images']
-                )
-                    @foreach (json_decode($velocityMetaData['product_view_images'], true) as $image)
-                        @if ($image && $image !== '')
-                            <img src="{{ url()->to('/') }}/storage/{{ $image }}" alt=""/>
-                        @endif
-                    @endforeach
-                @endif
-            </div>
         </div>
     {!! view_render_event('bagisto.shop.products.view.after', ['product' => $product]) !!}
 @endsection

@@ -25,6 +25,7 @@
         "barryvdh/laravel-debugbar": "^3.1",
         "barryvdh/laravel-dompdf": "0.8.6",
         "doctrine/dbal": "2.9.2",
+        "enshrined/svg-sanitize": "^0.14.0",
         "fideloper/proxy": "^4.2",
         "flynsarmy/db-blade-compiler": "^5.5",
         "fzaninotto/faker": "^1.4",
