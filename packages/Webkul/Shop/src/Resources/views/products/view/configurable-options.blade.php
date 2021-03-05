@@ -305,11 +305,11 @@
 
                         if (this.simpleProduct) {
                             this.config.variant_images[this.simpleProduct].forEach(function(image) {
-                                galleryImages.unshift(image)
+                                galleryImages.push(image)
                             });
 
                             this.config.variant_videos[this.simpleProduct].forEach(function(video) {
-                                galleryImages.unshift(video)
+                                galleryImages.push(video)
                             });
                         }
                     },
