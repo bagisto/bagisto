@@ -517,11 +517,11 @@
    },
    {  
       "country_state_id":130,
-      "default_name":"A Coru\u00f1a"
+      "default_name":"La Coru\u00f1a"
    },
    {  
       "country_state_id":131,
-      "default_name":"Alava"
+      "default_name":"\u00c1lava"
    },
    {  
       "country_state_id":132,
@@ -533,7 +533,7 @@
    },
    {  
       "country_state_id":134,
-      "default_name":"Almeria"
+      "default_name":"Almer\u00eda"
    },
    {  
       "country_state_id":135,
@@ -541,7 +541,7 @@
    },
    {  
       "country_state_id":136,
-      "default_name":"Avila"
+      "default_name":"\u00c1vila"
    },
    {  
       "country_state_id":137,
@@ -561,11 +561,11 @@
    },
    {  
       "country_state_id":141,
-      "default_name":"Caceres"
+      "default_name":"C\u00e1ceres"
    },
    {  
       "country_state_id":142,
-      "default_name":"Cadiz"
+      "default_name":"C\u00e1diz"
    },
    {  
       "country_state_id":143,
@@ -573,7 +573,7 @@
    },
    {  
       "country_state_id":144,
-      "default_name":"Castellon"
+      "default_name":"Castell\u00f3n"
    },
    {  
       "country_state_id":145,
@@ -585,7 +585,7 @@
    },
    {  
       "country_state_id":147,
-      "default_name":"Cordoba"
+      "default_name":"C\u00f3rdoba"
    },
    {  
       "country_state_id":148,
@@ -593,7 +593,7 @@
    },
    {  
       "country_state_id":149,
-      "default_name":"Girona"
+      "default_name":"Gerona"
    },
    {  
       "country_state_id":150,
@@ -605,7 +605,7 @@
    },
    {  
       "country_state_id":152,
-      "default_name":"Guipuzcoa"
+      "default_name":"Guip\u00fazcoa"
    },
    {  
       "country_state_id":153,
@@ -617,7 +617,7 @@
    },
    {  
       "country_state_id":155,
-      "default_name":"Jaen"
+      "default_name":"Ja\u00e9n"
    },
    {  
       "country_state_id":156,
@@ -629,11 +629,11 @@
    },
    {  
       "country_state_id":158,
-      "default_name":"Leon"
+      "default_name":"Le\u00f3n"
    },
    {  
       "country_state_id":159,
-      "default_name":"Lleida"
+      "default_name":"L\u00e9rida"
    },
    {  
       "country_state_id":160,
@@ -645,7 +645,7 @@
    },
    {  
       "country_state_id":162,
-      "default_name":"Malaga"
+      "default_name":"M\u00e1laga"
    },
    {  
       "country_state_id":163,
@@ -661,7 +661,7 @@
    },
    {  
       "country_state_id":166,
-      "default_name":"Ourense"
+      "default_name":"Orense"
    },
    {  
       "country_state_id":167,
@@ -1953,7 +1953,7 @@
    },
    {  
       "country_state_id":489,
-      "default_name":"Bahia"
+      "default_name":"Bah\u00eda"
    },
    {  
       "country_state_id":490,
@@ -1961,7 +1961,7 @@
    },
    {  
       "country_state_id":491,
-      "default_name":"Esp\u00edrito Santo"
+      "default_name":"Esp\u00edritu Santo"
    },
    {  
       "country_state_id":492,
@@ -1977,7 +1977,7 @@
    },
    {  
       "country_state_id":495,
-      "default_name":"Mato Grosso do Sul"
+      "default_name":"Mato Grosso del Sur"
    },
    {  
       "country_state_id":496,
@@ -2005,15 +2005,15 @@
    },
    {  
       "country_state_id":502,
-      "default_name":"Rio de Janeiro"
+      "default_name":"R\u00edo de Janeiro"
    },
    {  
       "country_state_id":503,
-      "default_name":"Rio Grande do Norte"
+      "default_name":"R\u00edo Grande del Norte"
    },
    {  
       "country_state_id":504,
-      "default_name":"Rio Grande do Sul"
+      "default_name":"R\u00edo Grande del Sur"
    },
    {  
       "country_state_id":505,
