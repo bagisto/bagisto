@@ -11,16 +11,16 @@
                         <div id="app-settings">
                             <div class="form-group" id="app_name">
                                 <label for="application_name" class="required">Application Name</label>
-                                <input type= "text" name= "app_name" id="application_name" class="form-control" value="Bagisto_" data-validation="required length" 
+                                <input type= "text" name= "app_name" id="application_name" class="form-control" value="Bagisto_" data-validation="required length"
                                 data-validation-length="max20">
                             </div>
-                            
+
                             <div class="form-group" id="app_url">
                                 <label for="application_url" class="required">Default URL</label>
-                                <input type="text" name="app_url" id="application_url" class="form-control" value="https://<?php echo $_SERVER['HTTP_HOST']; ?>" 
+                                <input type="text" name="app_url" id="application_url" class="form-control" value="https://<?php echo $_SERVER['HTTP_HOST']; ?>"
                                     data-validation="required length" data-validation-length="max50">
                             </div>
-                            
+
                             <div class="form-group" id="app_currency">
                                 <label for="application_currency" class="required">Default Currency</label>
                                 <select name="app_currency" id="application_currency" class="form-control" data-validation="required length" data-validation-length="max50">
@@ -28,15 +28,15 @@
                                     <option value="USD" selected>US Dollar</option>
                                 </select>
                             </div>
-                            
+
                             <div class="form-group" id="app_timezone">
                                 <label for="application_timezone" class="required">Default Timezone</label>
                                 <select name="app_timezone" id="application_timezone" class="js-example-basic-single">
-                                    <?php 
+                                    <?php
                                     date_default_timezone_set('UTC');
                                     $tzlist = DateTimeZone::listIdentifiers(DateTimeZone::ALL);
                                     $current = date_default_timezone_get();
-                                    
+
                                     foreach($tzlist as $key => $value) {
                                         if(!$value === $current) {
                                             echo "<option value='$value' selected>" . $value . "</option>";
@@ -47,13 +47,14 @@
                                     ?>
                                 </select>
                             </div>
-                            
+
                             <div class="form-group" id="app_locale">
                                 <label for="application_locale" class="required">Default Locale</label>
                                 <select name="app_locale" id="application_locale" class="form-control" data-validation="required">
                                     <option value="nl">Dutch</option>
                                     <option value="en" selected>English</option>
                                     <option value="fr">French</option>
+                                    <option value="es">Español</option>
                                 </select>
                             </div>
 
@@ -65,7 +66,7 @@
 
                         <div id="database-settings">
                             <div class="databse-error" id="database_error"></div>
-                            
+
                             <div class="form-group" id="database_connection">
                                 <label for="db_connection" class="required">Database Connection</label>
                                 <select name="database_connection" id="db_connection" class="form-control">
@@ -79,26 +80,26 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6" id="host_name">
                                     <label for="db_hostname" class="required">Database Hostname</label>
-                                    <input type="text" name="host_name" id="db_hostname" class="form-control" value="127.0.0.1" 
+                                    <input type="text" name="host_name" id="db_hostname" class="form-control" value="127.0.0.1"
                                     data-validation="required length" data-validation-length="max50">
                                 </div>
-                                
+
                                 <div class="form-group col-md-6" id="port_name">
                                     <label for="db_port" class="required">Database Port</label>
-                                    <input type="text" name="port_name" id="db_port" class="form-control" value="3306" 
+                                    <input type="text" name="port_name" id="db_port" class="form-control" value="3306"
                                     data-validation="required alphanumeric number length" data-validation-length="max5">
                                 </div>
                             </div>
 
                             <div class="form-group" id="database_name">
                                 <label for="db_name" class="required">Database Name</label>
-                                <input type="text" name="database_name" id="db_name" class="form-control" 
+                                <input type="text" name="database_name" id="db_name" class="form-control"
                                 data-validation="length required" data-validation-length="max50">
                             </div>
 
                             <div class="form-group" id="user_name">
                                 <label for="db_username" class="required">Database Username</label>
-                                <input type="text" name="user_name" id="db_username" class="form-control" 
+                                <input type="text" name="user_name" id="db_username" class="form-control"
                                 data-validation="length required" data-validation-length="max50">
                             </div>
 
@@ -129,12 +130,12 @@
         $('#database-settings').hide();
         $('#environment-next').click(function() {
             $('#app-settings').hide();
-            $('#database-settings').show(); 
+            $('#database-settings').show();
         });
 
         $('#environment-first').click(function() {
             $('#app-settings').show();
-            $('#database-settings').hide(); 
+            $('#database-settings').hide();
         });
 
         // process the form
@@ -170,7 +171,7 @@
             // using the done promise callback
             .done(function(data) {
                 if (!data.success) {
-                    // handle errors                    
+                    // handle errors
                     if (data.errors.app_name) {
                         $('#app_name').addClass('has-error');
                         $('#app_name').append('<div class="form-error">' + data.errors.app_name + '</div>');
@@ -182,7 +183,7 @@
                     if (data.errors.app_timezone) {
                         $('#app_timezone').addClass('has-error');
                         $('#app_timezone').append('<div class="form-error">' + data.errors.app_timezone + '</div>');
-                    }                    
+                    }
                     if (data.errors.host_name) {
                         $('#host_name').addClass('has-error');
                         $('#host_name').append('<div class="form-error">' + data.errors.host_name + '</div>');

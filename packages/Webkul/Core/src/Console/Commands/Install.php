@@ -118,7 +118,7 @@ class Install extends Command
             $input_admin_url = $this->ask('Please Enter the Admin URL : ');
             $this->envUpdate('APP_ADMIN_URL=', $input_admin_url ?: $default_admin_url);
 
-            $locale = $this->choice('Please select the default locale or press enter to continue', ['ar', 'en', 'fa', 'nl', 'pt_BR'], 1);
+            $locale = $this->choice('Please select the default locale or press enter to continue', ['ar', 'en', 'es', 'fa', 'nl', 'pt_BR'], 1);
             $this->envUpdate('APP_LOCALE=', $locale);
 
             $TimeZones = timezone_identifiers_list();
