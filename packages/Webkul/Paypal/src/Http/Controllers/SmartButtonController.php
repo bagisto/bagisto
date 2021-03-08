@@ -115,7 +115,7 @@ class SmartButtonController extends Controller
                     'phone_type'   => 'MOBILE',
 
                     'phone_number' => [
-                        'national_number' => $cart->billing_address->phone,
+                        'national_number' => $this->smartButton->formatPhone($cart->billing_address->phone),
                     ],
                 ],
             ],
@@ -127,28 +127,28 @@ class SmartButtonController extends Controller
             'purchase_units' => [
                 [
                     'amount'   => [
-                        'value'         => (float) $cart->sub_total + $cart->tax_total + ($cart->selected_shipping_rate ? $cart->selected_shipping_rate->price : 0) - $cart->discount_amount,
+                        'value'         => $this->smartButton->formatCurrencyValue((float) $cart->sub_total + $cart->tax_total + ($cart->selected_shipping_rate ? $cart->selected_shipping_rate->price : 0) - $cart->discount_amount),
                         'currency_code' => $cart->cart_currency_code,
 
                         'breakdown'     => [
                             'item_total' => [
                                 'currency_code' => $cart->cart_currency_code,
-                                'value'         => (float) $cart->sub_total,
+                                'value'         => $this->smartButton->formatCurrencyValue((float) $cart->sub_total),
                             ],
 
                             'shipping'   => [
                                 'currency_code' => $cart->cart_currency_code,
-                                'value'         => (float) ($cart->selected_shipping_rate ? $cart->selected_shipping_rate->price : 0),
+                                'value'         => $this->smartButton->formatCurrencyValue((float) ($cart->selected_shipping_rate ? $cart->selected_shipping_rate->price : 0)),
                             ],
 
                             'tax_total'  => [
                                 'currency_code' => $cart->cart_currency_code,
-                                'value'         => (float) $cart->tax_total,
+                                'value'         => $this->smartButton->formatCurrencyValue((float) $cart->tax_total),
                             ],
 
                             'discount'   => [
                                 'currency_code' => $cart->cart_currency_code,
-                                'value'         => (float) $cart->discount_amount,
+                                'value'         => $this->smartButton->formatCurrencyValue((float) $cart->discount_amount),
                             ],
                         ],
                     ],
@@ -190,7 +190,7 @@ class SmartButtonController extends Controller
             $lineItems[] = [
                 'unit_amount' => [
                     'currency_code' => $cart->cart_currency_code,
-                    'value'         => (float) $item->price,
+                    'value'         => $this->smartButton->formatCurrencyValue((float) $item->price),
                 ],
                 'quantity'    => $item->quantity,
                 'name'        => $item->name,
