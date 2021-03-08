@@ -148,7 +148,7 @@ class SmartButtonController extends Controller
 
                             'discount'   => [
                                 'currency_code' => $cart->cart_currency_code,
-                                'value'         => $this->smartButton->formatCurrencyValue( (float) $cart->discount_amount),
+                                'value'         => $this->smartButton->formatCurrencyValue((float) $cart->discount_amount),
                             ],
                         ],
                     ],
