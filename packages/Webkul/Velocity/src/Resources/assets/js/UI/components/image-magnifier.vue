@@ -34,7 +34,6 @@
                 .magnifier {
                     > img {
                         height: 100%;
-                        min-height: unset;
                         max-height: unset;
                     }
                 }
@@ -50,6 +49,12 @@
             video {
                 transform: translateY(-50%);
             }
+        }
+    }
+
+    @media only screen and (max-width: 992px) {
+        .outer-assets-container {
+            height: 280px;
         }
     }
 </style>
