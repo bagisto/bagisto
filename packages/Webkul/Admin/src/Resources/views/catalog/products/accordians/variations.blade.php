@@ -19,6 +19,16 @@
     </style>
 @stop
 
+@php
+    $variantImages = [];
+
+    foreach ($product->variants as $variant) {
+        foreach ($variant->images as $image) {
+            $variantImages[$variant->id] = $image;
+        }
+    }
+@endphp
+
 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.variations.before', ['product' => $product]) !!}
 
 <accordian :title="'{{ __('admin::app.catalog.products.variations') }}'" :active="true">
@@ -96,6 +106,7 @@
                 <tr>
                     <th class="sku">{{ __('admin::app.catalog.products.sku') }}</th>
                     <th>{{ __('admin::app.catalog.products.name') }}</th>
+                    <th>{{ __('admin::app.catalog.products.images') }}</th>
 
                     @foreach ($product->super_attributes as $attribute)
                         <th class="{{ $attribute->code }}"
@@ -144,6 +155,29 @@
                     <span class="control-error" v-if="errors.has(variantInputName + '[name]')">@{{ errors.first(variantInputName + '[name]') }}</span>
                 </div>
             </td>
+
+            <td>
+                <div class="control-group" :class="[errors.has(variantInputName + '[images]') ? 'has-error' : '']">
+                    <div v-for='(image, index) in items' class="image-wrapper">
+                        <label class="image-item" v-bind:class="{ 'has-image': imageData[index] }">
+                            <input type="hidden" :name="[variantInputName + '[images][' + image.id + ']']" v-if="! new_image[index]"/>
+
+                            <input type="file" v-validate="'mimes:image/*'" :name="[variantInputName + '[images][' + index + ']']" v-model="images[index]" accept="image/*" ref="imageInput"   multiple="multiple" @change="addImageView($event, index)" :id="image.id"/>
+
+                            <img class="preview" :src="imageData[index]" v-if="imageData[index]">
+
+                            <label class="remove-image" @click="removeImage(image)">
+                                {{ __('admin::app.catalog.products.remove-image-btn-title') }}
+                            </label>
+                        </label>
+                    </div>
+
+                    <label class="btn btn-lg btn-primary" style="display: inline-block; width: auto" @click="createFileType">
+                        {{ __('admin::app.catalog.products.add-image-btn-title') }}
+                    </label>
+                </div>
+            </td>
+
 
             <td v-for='(attribute, index) in superAttributes'>
                 <div class="control-group">
@@ -388,7 +422,13 @@
                     inventorySources: @json($inventorySources),
                     inventories: {},
                     totalQty: 0,
-                    superAttributes: super_attributes
+                    superAttributes: super_attributes,
+
+                    items: [],
+                    imageCount: 0,
+                    images: {},
+                    imageData: [],
+                    new_image: [],
                 }
             },
 
@@ -399,6 +439,21 @@
                     this_this.inventories[inventorySource.id] = this_this.sourceInventoryQty(inventorySource.id)
                     this_this.totalQty += parseInt(this_this.inventories[inventorySource.id]);
                 })
+            },
+
+            mounted () {
+                var this_this = this;
+
+                this_this.variant.images.forEach(function(image) {
+                    this_this.items.push(image)
+                    this_this.imageCount++;
+
+                    if (image.id && image.url) {
+                        this_this.imageData.push(image.url);
+                    } else if (image.id && image.file) {
+                        this_this.readFile(image.file);
+                    }
+                });
             },
 
             computed: {
@@ -449,9 +504,61 @@
                     for (var key in this.inventories) {
                         this.totalQty += parseInt(this.inventories[key]);
                     }
-                }
-            }
+                },
 
+                createFileType: function() {
+                    var this_this = this;
+
+                    this.imageCount++;
+
+                    this.items.push({'id': 'image_' + this.imageCount});
+                },
+
+                removeImage (image) {
+                    let index = this.items.indexOf(image);
+
+                    Vue.delete(this.items, index);
+                },
+
+                addImageView: function($event, index) {
+                    var imageInput = this.$refs.imageInput;
+                    var imageInput = imageInput[imageInput.length - 1];
+
+                    if (imageInput.files && imageInput.files[0]) {
+                        if (imageInput.files[0].type.includes('image/')) {
+                            this.readFile(imageInput.files[0], index)
+
+                            if (imageInput.files.length > 1) {
+                                this.$emit('onImageSelected', imageInput)
+                            }
+                        } else {
+                            imageInput.value = "";
+
+                            alert('Only images (.jpeg, .jpg, .png, ..) are allowed.');
+                        }
+                    }
+                },
+
+                readFile: function(image, index) {
+                    var imageInput = this.$refs.imageInput;
+
+                    var reader = new FileReader();
+
+                    reader.onload = (e) => {
+                        var dataIndex = this.imageData.indexOf(this.imageData[index]);
+
+                        if (dataIndex >= 0) {
+                            this.imageData.splice(dataIndex, 1, e.target.result);
+                        } else {
+                            this.imageData.push(e.target.result);
+                        }
+                    }
+
+                    reader.readAsDataURL(image);
+
+                    this.new_image[imageInput.length-1] = 1;
+                },
+            }
         });
     </script>
 @endpush
