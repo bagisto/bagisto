@@ -423,7 +423,6 @@
                     inventories: {},
                     totalQty: 0,
                     superAttributes: super_attributes,
-
                     items: [],
                     imageCount: 0,
                     images: {},
