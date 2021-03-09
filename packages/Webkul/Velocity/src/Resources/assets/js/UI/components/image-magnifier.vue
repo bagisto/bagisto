@@ -33,8 +33,8 @@
 
                 .magnifier {
                     > img {
-                        height: 100%;
-                        max-height: unset;
+                        width: 100%;
+                        max-height: 300px;
                     }
                 }
             }
@@ -43,8 +43,8 @@
         .video-container {
             top: 50%;
             position: relative;
-            min-height: 530px;
-            max-height: 530px;
+            min-height: 420px;
+            max-height: 420px;
 
             video {
                 transform: translateY(-50%);
@@ -54,7 +54,7 @@
 
     @media only screen and (max-width: 992px) {
         .outer-assets-container {
-            height: 280px;
+            height: 300px;
         }
     }
 </style>
