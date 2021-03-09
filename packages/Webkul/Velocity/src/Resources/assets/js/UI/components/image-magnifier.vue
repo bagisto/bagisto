@@ -25,6 +25,8 @@
 
     @media only screen and (max-width: 992px) {
         .image-container {
+            margin: 0 auto;
+
             .magnifier {
                 > img {
                     height: 100%;
