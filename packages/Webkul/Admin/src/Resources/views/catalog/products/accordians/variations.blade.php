@@ -518,6 +518,8 @@
                     let index = this.items.indexOf(image);
 
                     Vue.delete(this.items, index);
+
+                    Vue.delete(this.imageData, index);
                 },
 
                 addImageView: function($event, index) {
