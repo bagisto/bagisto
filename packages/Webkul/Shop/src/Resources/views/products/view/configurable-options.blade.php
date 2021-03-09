@@ -299,19 +299,19 @@
                     changeProductImages: function () {
                         galleryImages.splice(0, galleryImages.length)
 
-                        this.galleryImages.forEach(function(image) {
-                            galleryImages.push(image)
-                        });
-
                         if (this.simpleProduct) {
                             this.config.variant_images[this.simpleProduct].forEach(function(image) {
-                                galleryImages.unshift(image)
+                                galleryImages.push(image)
                             });
 
                             this.config.variant_videos[this.simpleProduct].forEach(function(video) {
-                                galleryImages.unshift(video)
+                                galleryImages.push(video)
                             });
                         }
+
+                        this.galleryImages.forEach(function(image) {
+                            galleryImages.push(image)
+                        });
                     },
 
                     changeStock: function (productId) {
