@@ -1,50 +1,55 @@
 <template>
-    <div class="video-container" v-if="currentType == 'video'">
-        <video :key="activeImageVideoURL" width="100%" controls>
-            <source :src="activeImageVideoURL" type="video/mp4">
-        </video>
-    </div>
-    <div class="image-container" v-else>
-        <div class="magnifier">
-            <img :src="activeImageVideoURL" :data-zoom-image="activeImageVideoURL"
-                :class="[!isMobile() ? 'main-product-image' : 'vc-small-product-image']">
+    <div class="outer-assets-container">
+        <div class="video-container" v-if="currentType == 'video'">
+            <video :key="activeImageVideoURL" width="100%" controls>
+                <source :src="activeImageVideoURL" type="video/mp4">
+            </video>
+        </div>
+        <div class="image-container" v-else>
+            <div class="magnifier">
+                <img :src="activeImageVideoURL" :data-zoom-image="activeImageVideoURL"
+                    :class="[!isMobile() ? 'main-product-image' : 'vc-small-product-image']">
+            </div>
         </div>
     </div>
 </template>
 
 <style lang="scss">
-    .image-container {
-        .magnifier {
-            > img {
-                max-width: 100%;
-                min-height: 530px;
-                max-height: 530px;
-            }
-        }
-    }
+    .outer-assets-container {
+        height: 420px;
 
-    @media only screen and (max-width: 992px) {
         .image-container {
-            margin: 0 auto;
-
             .magnifier {
                 > img {
-                    height: 100%;
-                    min-height: unset;
-                    max-height: unset;
+                    max-width: 100%;
+                    max-height: 420px;
                 }
             }
         }
-    }
 
-    .video-container {
-        min-height: 530px;
-        max-height: 530px;
+        @media only screen and (max-width: 992px) {
+            .image-container {
+                margin: 0 auto;
 
-        video {
+                .magnifier {
+                    > img {
+                        height: 100%;
+                        min-height: unset;
+                        max-height: unset;
+                    }
+                }
+            }
+        }
+
+        .video-container {
             top: 50%;
             position: relative;
-            transform: translateY(-50%);
+            min-height: 530px;
+            max-height: 530px;
+
+            video {
+                transform: translateY(-50%);
+            }
         }
     }
 </style>
