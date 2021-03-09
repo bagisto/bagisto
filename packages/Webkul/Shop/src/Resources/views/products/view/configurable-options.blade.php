@@ -94,8 +94,6 @@
                 },
 
                 created: function() {
-                    this.galleryImages = galleryImages.slice(0)
-
                     var config = @json($config);
 
                     var childAttributes = this.childAttributes,
