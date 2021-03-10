@@ -240,7 +240,7 @@ class ConfigurationController extends Controller
      */
     private function createMetaData($locale, $channel)
     {
-        \DB::table('velocity_meta_data')->insert([
+        $this->velocityMetaDataRepository->create([
             'locale'                   => $locale,
             'channel'                  => $channel,
             'header_content_count'     => '5',
