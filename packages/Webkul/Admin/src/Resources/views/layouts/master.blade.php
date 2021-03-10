@@ -28,6 +28,7 @@
         {!! view_render_event('bagisto.admin.layout.body.before') !!}
 
         <div id="app">
+            <button type="button" id="randomButton">Random Button</button>
 
             <flash-wrapper ref='flashes'></flash-wrapper>
 
@@ -145,6 +146,24 @@
                             }
                     });
                 }
+            });
+
+            $(document).ready(() => {
+                $('#randomButton').on('click', () => {
+                    if ($('.aside-nav').is(':visible')) {
+                        $('.aside-nav').hide(function () {
+                            $('.content-wrapper').css({
+                                marginLeft: 'unset'
+                            });
+                        });
+                    } else {
+                        $('.aside-nav').show(function () {
+                            $('.content-wrapper').css({
+                                marginLeft: '280px'
+                            });
+                        });
+                    }
+                });
             });
         </script>
         @stack('scripts')
