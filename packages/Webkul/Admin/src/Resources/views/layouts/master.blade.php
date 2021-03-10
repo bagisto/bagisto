@@ -28,8 +28,6 @@
         {!! view_render_event('bagisto.admin.layout.body.before') !!}
 
         <div id="app">
-            <button type="button" id="randomButton">Random Button</button>
-
             <flash-wrapper ref='flashes'></flash-wrapper>
 
             {!! view_render_event('bagisto.admin.layout.nav-top.before') !!}
