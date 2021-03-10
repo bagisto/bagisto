@@ -14,7 +14,7 @@
             <tr>
                 @foreach($record as $column => $value)
                     @php
-                        $value = preg_replace('/[^A-Za-z0-9@#$%^&*()_+!\-]/', '', $value);
+                        $value = preg_replace('/[^A-Za-z0-9@#$%^&*()_!+\-]/', '', $value);
                     @endphp
 
                     <td>{{ $value }} </td>
