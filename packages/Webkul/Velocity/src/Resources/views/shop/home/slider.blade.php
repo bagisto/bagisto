@@ -28,8 +28,7 @@
                             <a @if($slider['slider_path']) href="{{ $slider['slider_path'] }}" @endif>
                                 <img
                                     class="col-12 no-padding banner-icon"
-                                    src="{{ url()->to('/') . '/storage/' . $slider['path'] }}"
-                                    alt="" width="1298" height="450" />
+                                    src="{{ url()->to('/') . '/storage/' . $slider['path'] }}" />
 
                                 <div class="show-content" v-html="'{{ $textContent }}'">
                                 </div>
