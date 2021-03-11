@@ -1,8 +1,6 @@
 <div class="navbar-left">
     {{-- button for toggling aside nav --}}
-    <span class="toggle-aside-nav" id="randomButton" style="position: absolute; left: 78px; top: 50px;">
-        <i class="icon accordian-right-icon"></i>
-    </span>
+    <nav-slide-button></nav-slide-button>
 
     {{-- left menu bar --}}
     <ul class="menubar">
