@@ -1,10 +1,13 @@
-// Icon scss
-@import "icons";
-@import "variables";
-@import "components";
-@import "mixins";
-@import "animations";
+/* main imports */
+@import "main/icons";
+@import "main/variables";
+@import "main/mixins";
 
+/* includes */
+@import "includes/animations";
+@import "includes/components";
+
+/* start from here */
 * {
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
@@ -15,7 +18,7 @@
     outline: none;
 }
 
-//margin bottom classes
+// margin bottom classes
 .mb-10 {
     margin-bottom: 10px;
 }
@@ -68,7 +71,7 @@
     margin-bottom: 90px;
 }
 
-//margin-top
+// margin-top
 .mt-5 {
     margin-top: 5px;
 }
@@ -142,7 +145,7 @@ a:active {
 ::selection {
     background-color: $selection-color;
     color: $color-white;
-  }
+}
 
 textarea {
     resize: none;
@@ -214,12 +217,15 @@ h5 {
     &.btn-sm {
         padding: 6px 12px;
     }
+
     &.btn-md {
         padding: 8px 16px;
     }
+
     &.btn-lg {
         padding: 10px 20px;
     }
+
     &.btn-xl {
         padding: 12px 24px;
         font-size: 16px;
@@ -303,14 +309,17 @@ h5 {
         top: 42px;
         left: 0px;
     }
+
     &.bottom-right {
         top: 42px;
         right: 0px;
     }
+
     &.top-left {
         bottom: 0px;
         left: 42px;
     }
+
     &.top-right {
         bottom: 0px;
         right: 42px;
@@ -366,6 +375,7 @@ h5 {
                     color: #333333;
                     display: block;
                 }
+
                 a:hover {
                     color: $brand-color;
                 }
@@ -392,8 +402,6 @@ h5 {
 }
 
 .section {
-    // font-size: 16px;
-
     .secton-title {
         font-size: 18px;
         color: #8E8E8E;
@@ -427,7 +435,6 @@ h5 {
 
 .table {
     width: 100%;
-    // overflow-x: auto !important;
 
     table {
         border-collapse: collapse;
@@ -515,7 +522,6 @@ h5 {
 .checkbox {
     position: relative;
     display: block;
-    // vertical-align: middle;
 
     input {
         left: 0;
@@ -805,7 +811,7 @@ h5 {
         transform: translateX(26px);
     }
 
-    /* Rounded sliders */
+    /* rounded sliders */
     .slider.round {
         border-radius: 34px;
         }
@@ -1160,7 +1166,7 @@ modal {
     }
 }
 
-//Image wrapper
+// image wrapper
 .image-wrapper {
     margin-bottom: 20px;
     margin-top: 10px;
