@@ -147,15 +147,21 @@
             });
 
             $(document).ready(() => {
-                $('#randomButton').on('click', () => {
+                $('#randomButton').on('click', (e) => {
                     if ($('.aside-nav').is(':visible')) {
                         $('.aside-nav').hide(function () {
+                            $(e.currentTarget.children).removeClass('accordian-left-icon');
+                            $(e.currentTarget.children).addClass('accordian-right-icon');
+
                             $('.content-wrapper').css({
                                 marginLeft: 'unset'
                             });
                         });
                     } else {
                         $('.aside-nav').show(function () {
+                            $(e.currentTarget.children).removeClass('accordian-right-icon');
+                            $(e.currentTarget.children).addClass('accordian-left-icon');
+
                             $('.content-wrapper').css({
                                 marginLeft: '280px'
                             });
