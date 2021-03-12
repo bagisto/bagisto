@@ -38,6 +38,12 @@ return [
         'sort'       => 4,
         'icon-class' => '',
     ], [
+        'key'        => 'sales.transactions',
+        'name'       => 'admin::app.layouts.transactions',
+        'route'      => 'admin.sales.transactions.index',
+        'sort'       => 5,
+        'icon-class' => '',
+    ], [
         'key'        => 'catalog',
         'name'       => 'admin::app.layouts.catalog',
         'route'      => 'admin.catalog.products.index',

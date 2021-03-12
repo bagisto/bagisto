@@ -255,7 +255,7 @@ class SmartButtonController extends Controller
                 'success' => true,
             ]);
         } catch (\Exception $e) {
-            session()->flash('error', trans('shop::app.common.error'));
+            session()->flash('error', trans($e->getMessage()));
 
             throw $e;
         }
