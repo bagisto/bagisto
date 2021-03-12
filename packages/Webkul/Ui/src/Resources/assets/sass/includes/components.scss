@@ -1,4 +1,4 @@
-@import "mixins";
+@import "main/mixins";
 
 .grid-container {
     display: block;
@@ -22,10 +22,10 @@
 
     .dropdown-filters {
         display: inline-block;
-        
+
         &.per-page {
             margin-right: 10px;
-            
+
             .control-group {
                 label {
                     width: auto;
@@ -39,6 +39,29 @@
                     margin: 0;
                 }
             }
+        }
+    }
+}
+
+@media only screen and (max-width: 1192px) {
+    .datagrid-filters {
+        flex-direction: column;
+        margin-bottom: unset;
+
+        .filter-left {
+            margin-bottom: 10px;
+        }
+
+        .filter-right {
+            margin-bottom: 10px;
+        }
+    }
+}
+
+@media only screen and (max-width: 720px) {
+    .datagrid-filters {
+        .dropdown-filters {
+            margin-bottom: 5px;
         }
     }
 }
@@ -77,6 +100,15 @@
         padding: 3px;
         float: right;
     }
+}
+
+@media only screen and (max-width: 720px) {
+    .search-filter {
+        .control {
+            width: 100px;
+        }
+    }
+
 }
 
 .grid-dropdown-header {
@@ -166,7 +198,7 @@
 
     .dropdown-filters {
         display: inline-block;
-        
+
         &.per-page {
             margin-left: 10px;
             margin-right: 10px;

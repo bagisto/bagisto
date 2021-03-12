@@ -2,19 +2,17 @@
 
 namespace Webkul\Category\Repositories;
 
-use Illuminate\Container\Container as App;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\DB;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Category\Models\Category;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Storage;
 use Webkul\Category\Models\CategoryTranslationProxy;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Support\Facades\DB;
 
 class CategoryRepository extends Repository
 {
     /**
-     * Specify Model class name
+     * Specify model class name.
      *
      * @return mixed
      */
@@ -24,6 +22,8 @@ class CategoryRepository extends Repository
     }
 
     /**
+     * Create category.
+     *
      * @param  array  $data
      * @return \Webkul\Category\Contracts\Category
      */
@@ -58,7 +58,7 @@ class CategoryRepository extends Repository
     }
 
     /**
-     * Specify category tree
+     * Specify category tree.
      *
      * @param  int  $id
      * @return \Webkul\Category\Contracts\Category
@@ -66,12 +66,12 @@ class CategoryRepository extends Repository
     public function getCategoryTree($id = null)
     {
         return $id
-               ? $this->model::orderBy('position', 'ASC')->where('id', '!=', $id)->get()->toTree()
-               : $this->model::orderBy('position', 'ASC')->get()->toTree();
+            ? $this->model::orderBy('position', 'ASC')->where('id', '!=', $id)->get()->toTree()
+            : $this->model::orderBy('position', 'ASC')->get()->toTree();
     }
 
     /**
-     * Specify category tree
+     * Specify category tree.
      *
      * @param  int  $id
      * @return \Illuminate\Support\Collection
@@ -84,7 +84,7 @@ class CategoryRepository extends Repository
     }
 
     /**
-     * Get root categories
+     * Get root categories.
      *
      * @return \Illuminate\Support\Collection
      */
@@ -94,7 +94,7 @@ class CategoryRepository extends Repository
     }
 
     /**
-     * get visible category tree
+     * get visible category tree.
      *
      * @param  int  $id
      * @return \Illuminate\Support\Collection
@@ -108,19 +108,19 @@ class CategoryRepository extends Repository
         }
 
         return $categories[$id] = $id
-               ? $this->model::orderBy('position', 'ASC')->where('status', 1)->descendantsAndSelf($id)->toTree($id)
-               : $this->model::orderBy('position', 'ASC')->where('status', 1)->get()->toTree();
+            ? $this->model::orderBy('position', 'ASC')->where('status', 1)->descendantsAndSelf($id)->toTree($id)
+            : $this->model::orderBy('position', 'ASC')->where('status', 1)->get()->toTree();
     }
 
     /**
-     * Checks slug is unique or not based on locale
+     * Checks slug is unique or not based on locale.
      *
      * @param  int  $id
      * @param  string  $slug
      * @return bool
      */
     public function isSlugUnique($id, $slug)
-    {   
+    {
         $exists = CategoryTranslationProxy::modelClass()::where('category_id', '<>', $id)
             ->where('slug', $slug)
             ->limit(1)
@@ -131,7 +131,7 @@ class CategoryRepository extends Repository
     }
 
     /**
-     * Retrive category from slug
+     * Retrive category from slug.
      *
      * @param string $slug
      * @return \Webkul\Category\Contracts\Category
@@ -150,6 +150,8 @@ class CategoryRepository extends Repository
     }
 
     /**
+     * Find by path.
+     *
      * @param  string  $urlPath
      * @return \Webkul\Category\Contracts\Category
      */
@@ -159,6 +161,8 @@ class CategoryRepository extends Repository
     }
 
     /**
+     * Update category.
+     *
      * @param  array  $data
      * @param  int  $id
      * @param  string  $attribute
@@ -169,6 +173,8 @@ class CategoryRepository extends Repository
         $category = $this->find($id);
 
         Event::dispatch('catalog.category.update.before', $id);
+
+        $data = $this->setSameAttributeValueToAllLocale($data, 'slug');
 
         $category->update($data);
 
@@ -184,6 +190,8 @@ class CategoryRepository extends Repository
     }
 
     /**
+     * Delete category.
+     *
      * @param  int  $id
      * @return void
      */
@@ -197,8 +205,11 @@ class CategoryRepository extends Repository
     }
 
     /**
+     * Upload category's images.
+     *
      * @param  array  $data
      * @param  \Webkul\Category\Contracts\Category  $category
+     * @param  string $type
      * @return void
      */
     public function uploadImages($data, $category, $type = "image")
@@ -230,6 +241,8 @@ class CategoryRepository extends Repository
     }
 
     /**
+     * Get partials.
+     *
      * @param  array|null  $columns
      * @return array
      */
@@ -250,5 +263,34 @@ class CategoryRepository extends Repository
         }
 
         return $trimmed;
+    }
+
+    /**
+     * Set same value to all locales in category.
+     *
+     * To Do: Move column from the `category_translations` to `category` table. And remove
+     * this created method.
+     *
+     * @param  array  $data
+     * @param  string $attributeNames
+     * @return array
+     */
+    private function setSameAttributeValueToAllLocale(array $data, ...$attributeNames)
+    {
+        $requestedLocale = request()->get('locale') ?: app()->getLocale();
+
+        $model = app()->make($this->model());
+
+        foreach ($attributeNames as $attributeName) {
+            foreach (core()->getAllLocales() as $locale) {
+                foreach ($model->translatedAttributes as $attribute) {
+                    if ($attribute === $attributeName) {
+                        $data[$locale->code][$attribute] = $data[$requestedLocale][$attribute];
+                    }
+                }
+            }
+        }
+
+        return $data;
     }
 }
