@@ -70,6 +70,15 @@ class ProductImage extends AbstractProduct
             ];
         }
 
+        /*
+         * Product parent checked already above. If the case reached here that means the
+         * parent is available. So recursing the method for getting the parent image if
+         * images of the child are not found.
+         */
+        if (empty($images)) {
+            $images = $this->getGalleryImages($product->parent);
+        }
+
         return $loadedGalleryImages[$product->id] = $images;
     }
 

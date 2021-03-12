@@ -2,13 +2,13 @@
 
 namespace Webkul\Sales\Repositories;
 
-use Illuminate\Container\Container as App;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Event;
-use Webkul\Core\Eloquent\Repository;
 use Webkul\Sales\Contracts\Order;
-use Webkul\Sales\Models\Order as OrderModel;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Webkul\Core\Eloquent\Repository;
+use Illuminate\Support\Facades\Event;
 use Webkul\Shop\Generators\Sequencer;
+use Illuminate\Container\Container as App;
 use Webkul\Shop\Generators\OrderNumberIdSequencer;
 
 class OrderRepository extends Repository
@@ -57,10 +57,11 @@ class OrderRepository extends Repository
     }
 
     /**
-     * @param  array  $data
+     * This method will try attempt to a create order.
+     *
      * @return \Webkul\Sales\Contracts\Order
      */
-    public function create(array $data)
+    public function createOrderIfNotThenRetry(array $data)
     {
         DB::beginTransaction();
 
@@ -114,14 +115,33 @@ class OrderRepository extends Repository
 
             Event::dispatch('checkout.order.save.after', $order);
         } catch (\Exception $e) {
+
+            /* rolling back first */
             DB::rollBack();
 
-            throw $e;
+            /* storing log for errors */
+            Log::error('OrderRepository:createOrderIfNotThenRetry: ' . $e->getMessage(),
+            ['data' => $data]);
+
+            /* recalling */
+            $this->createOrderIfNotThenRetry($data);
+
+        } finally {
+
+            /* commit in each case */
+            DB::commit();
         }
 
-        DB::commit();
-
         return $order;
+    }
+
+    /**
+     * @param  array  $data
+     * @return \Webkul\Sales\Contracts\Order
+     */
+    public function create(array $data)
+    {
+        return $this->createOrderIfNotThenRetry($data);
     }
 
     /**
