@@ -17,6 +17,7 @@ Vue.use(VeeValidate, {
 });
 Vue.prototype.$http = axios
 
+Vue.component('nav-slide-button', require('./components/navigation/nav-slide-button').default);
 Vue.component('required-if', require('./components/validators/required-if').default);
 
 window.eventBus = new Vue();
