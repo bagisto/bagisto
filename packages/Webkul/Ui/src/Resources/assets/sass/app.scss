@@ -144,7 +144,7 @@ a:active {
 
 ::selection {
     background-color: $selection-color;
-    color: $color-white;
+    color: $white-color;
 }
 
 textarea {
@@ -201,7 +201,7 @@ h5 {
     );
     @include border-radius(3px);
     border: none;
-    color: #fff;
+    color: $white-color;
     cursor: pointer;
     transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     font: inherit;
@@ -233,17 +233,17 @@ h5 {
 
     &.btn-primary {
         background: $brand-color;
-        color: #ffffff;
+        color: $white-color;
     }
 
     &.btn-black {
-        background: #000;
-        color: #ffffff;
+        background: $black-color;
+        color: $white-color;
     }
 
     &.btn-white {
-        background: #ffffff;
-        color: #000;
+        background: $white-color;
+        color: $black-color;
     }
 
     &:disabled,
@@ -260,7 +260,7 @@ h5 {
 .dropdown-btn {
     min-width: 150px;
     text-align: left;
-    background: #ffffff;
+    background: $white-color;
     border: 2px solid $control-border-color;
     @include border-radius(3px);
     font-size: 14px;
@@ -299,7 +299,7 @@ h5 {
         0 0 9px 0 rgba(0, 0, 0, 0.16)
     );
     @include border-radius(3px);
-    background-color: #ffffff;
+    background-color: $white-color;
     position: absolute;
     display: none;
     z-index: 10;
@@ -330,7 +330,7 @@ h5 {
         border-bottom: 1px solid $border-color;
 
         .control {
-            background: #fff;
+            background: $white-color;
             border: 2px solid $control-border-color;
             @include border-radius(3px);
             width: 100%;
@@ -372,7 +372,7 @@ h5 {
                 a:active,
                 a:visited,
                 a:focus {
-                    color: #333333;
+                    color: $font-color;
                     display: block;
                 }
 
@@ -404,7 +404,7 @@ h5 {
 .section {
     .secton-title {
         font-size: 18px;
-        color: #8E8E8E;
+        color: $font-color;
         padding: 15px 0;
         border-bottom: 1px solid $border-color;
     }
@@ -490,14 +490,14 @@ h5 {
 
 .pagination {
     .page-item {
-        background: #ffffff;
+        background: $white-color;
         border: 2px solid $control-border-color;
         @include border-radius(3px);
         padding: 7px 14px;
         margin-right: 5px;
         font-size: 16px;
         display: inline-block;
-        color: #8e8e8e;
+        color: $font-color;
         vertical-align: middle;
         text-decoration: none;
 
@@ -507,9 +507,9 @@ h5 {
         }
 
         &.active {
-            background: #0041ff;
-            color: #fff;
-            border-color: #0041ff;
+            background: $brand-color;
+            color: $white-color;
+            border-color: $brand-color;
         }
 
         .icon {
@@ -591,7 +591,7 @@ h5 {
     display: block;
     margin-bottom: 25px;
     font-size: 15px;
-    color: #333333;
+    color: $font-color;
     width: 750px;
     max-width: 100%;
     position: relative;
@@ -614,7 +614,7 @@ h5 {
     }
 
     .control {
-        background: #fff;
+        background: $white-color;
         border: 2px solid $control-border-color;
         @include border-radius(3px);
         width: 70%;
@@ -678,7 +678,7 @@ h5 {
 
     .control-error {
         display: none;
-        color: #ff5656;
+        color: $danger-color;
         margin-top: 5px;
     }
 
@@ -792,7 +792,7 @@ h5 {
         width: 26px;
         left: 4px;
         bottom: 4px;
-        background-color: $color-white;
+        background-color: $white-color;
         -webkit-transition: .2s;
         transition: .2s;
     }
@@ -873,7 +873,7 @@ h5 {
         }
 
         p {
-            color: #ffffff;
+            color: $white-color;
             margin: 0px;
             padding: 0px;
             font-size: 15px;
@@ -893,7 +893,7 @@ h5 {
                 cursor: pointer;
                 margin: 0px 2px;
                 text-align: center;
-                color: #000311;
+                color: $black-color-shade;
                 display: block;
             }
 
@@ -1018,7 +1018,7 @@ h5 {
 .panel {
     @include box-shadow(0 2px 25px 0 rgba(0, 0, 0, 0.15));
     @include border-radius(5px);
-    background: #fff;
+    background: $white-color;
 
     .panel-content {
         padding: 20px;
@@ -1042,7 +1042,7 @@ modal {
     bottom: 0px;
     left: 0px;
     position: fixed;
-    background: #000;
+    background: $black-color;
     opacity: 0.7;
 }
 
@@ -1051,7 +1051,7 @@ modal {
 }
 
 .modal-container {
-    background: #ffffff;
+    background: $white-color;
     top: 100px;
     width: 600px;
     max-width: 80%;
@@ -1107,7 +1107,7 @@ modal {
     background: #E7E7E7;
     @include border-radius(2px);
     padding: 8px;
-    color: #000311;
+    color: $black-color-shade;
     display: inline-block;
 
     &.label-sm {
@@ -1204,7 +1204,7 @@ modal {
             width: 100%;
             padding: 10px;
             text-align: center;
-            color: #fff;
+            color: $white-color;
             text-shadow: 0 1px 2px rgba(0,0,0,0.24);
             margin-right: 20px;
             cursor: pointer;
