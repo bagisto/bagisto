@@ -1,12 +1,32 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
     <head>
+        {{-- meta tags --}}
         <meta http-equiv="Cache-control" content="no-cache">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
+        {{-- lang supports inclusion --}}
+        <style type="text/css">
+            @font-face {
+                font-family: 'Hind';
+                src: url({{ asset('vendor/webkul/ui/assets/fonts/Hind/Hind-Regular.ttf') }}) format('truetype');
+            }
+
+            @font-face {
+                font-family: 'Noto Sans';
+                src: url({{ asset('vendor/webkul/ui/assets/fonts/Noto/NotoSans-Regular.ttf') }}) format('truetype');
+            }
+        </style>
+
+        @php
+            /* main font will be set on locale based */
+            $mainFontFamily = app()->getLocale() === 'ar' ? 'DejaVu Sans' : 'Noto Sans';
+        @endphp
+
+        {{-- main css --}}
         <style type="text/css">
             * {
-                font-family: DejaVu Sans;
+                font-family: '{{ $mainFontFamily }}';
             }
 
             body, th, td, h5 {
