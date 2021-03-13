@@ -82,7 +82,8 @@ return [
         'email-templates' => 'Plantillas de Email',
         'events' => 'Eventos',
         'discount' => 'Descuento',
-        'cms' => 'CMS'
+        'cms' => 'CMS',
+        'transactions' => 'Transacciones'
     ],
 
     'acl' => [
@@ -249,7 +250,9 @@ return [
         'ltr' => 'LTR',
         'update-status' => 'Actualizar Estado',
         'subject' => 'Asunto',
-        'date' => 'Fecha'
+        'date' => 'Fecha',
+        'transaction-id' => 'ID de Transacción',
+        'transaction-date' => 'Fecha de Transacción',
     ],
 
     'account' => [
@@ -401,7 +404,8 @@ return [
             'submit-comment' => 'Enviar Comentario',
             'notify-customer' => 'Notificar al Cliente',
             'customer-notified' => ':date | Cliente <b>Notificado</b>',
-            'customer-not-notified' => ':date | Cliente <b>No Notificado</b>'
+            'customer-not-notified' => ':date | Cliente <b>No Notificado</b>',
+            'transactions' => 'Transacciones'
         ],
 
         'invoices' => [
@@ -478,6 +482,20 @@ return [
             'view-title' => 'Reembolso #:refund_id',
             'invalid-refund-amount-error' => 'El monto del reembolso no debe ser cero.'
 
+        ],
+
+        'transactions' => [
+            'title'               => 'Transacciones',
+            'id'                  => 'Id',
+            'transaction-id'      => 'ID de Transacción',
+            'payment-method'      => 'Método de Pago',
+            'action'              => 'Accción',
+            'view-title'          => 'Transacciónn #:transaction_id',
+            'transaction-data'    => 'Fecha de Transacción',
+            'order-id'            => 'Pedido #',
+            'status'              => 'Estado',
+            'created-at'          => 'Creado En',
+            'transaction-details' => 'Detalles de la Transacción'
         ]
     ],
 
