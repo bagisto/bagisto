@@ -127,6 +127,14 @@ class Order extends Model implements OrderContract
     }
 
     /**
+     * Get the order transactions record associated with the order.
+     */
+    public function transactions()
+    {
+        return $this->hasMany(OrderTransactionProxy::modelClass());
+    }
+
+    /**
      * Get the customer record associated with the order.
      */
     public function customer()
