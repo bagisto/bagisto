@@ -152,11 +152,11 @@ class CategoryController extends Controller
             session()->flash('warning', trans('admin::app.response.delete-category-root', ['name' => 'Category']));
         } else {
             try {
-                Event::dispatch('catalog.category.delete.before', $id);
+                Event::dispatch('catalog.category.delete.before', $category);
 
                 $category->delete();
 
-                Event::dispatch('catalog.category.delete.after', $id);
+                Event::dispatch('catalog.category.delete.after', $category);
 
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Category']));
 
