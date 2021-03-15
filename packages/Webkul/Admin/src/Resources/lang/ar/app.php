@@ -81,7 +81,8 @@ return [
         'campaigns' => 'Campaigns',
         'email-templates' => 'Email Templates',
         'discount' => 'خصم',
-        'cms' => 'CMS'
+        'cms' => 'CMS',
+        'transactions' => 'Transactions'
     ],
 
     'acl' => [
@@ -240,7 +241,9 @@ return [
         'view' => 'رأي',
         'rtl' => 'RTL',
         'ltr' => 'LTR',
-        'update-status' => 'تحديث الحالة'
+        'update-status' => 'تحديث الحالة',
+        'transaction-id' => 'Transaction Id',
+        'transaction-date' => 'Transaction Date',
     ],
 
     'account' => [
@@ -392,6 +395,7 @@ return [
             'comment' => 'Comment',
             'submit-comment' => 'Submit Comment',
             'notify-customer' => 'Notify Customer',
+            'transactions' => 'Transactions'
         ],
 
         'invoices' => [
@@ -468,6 +472,20 @@ return [
             'action' => 'عمل',
             'view-title' => '#:refund_id إعادة مال',
             'invalid-refund-amount-error' => 'يجب ألا يكون المبلغ المسترد صفرًا'
+        ],
+
+        'transactions' => [
+            'title'               => 'Transactions',
+            'id'                  => 'Id',
+            'transaction-id'      => 'Transaction Id',
+            'payment-method'      => 'Payment method',
+            'action'              => 'Action',
+            'view-title'          => 'Transaction #:transaction_id',
+            'transaction-data'    => 'Transaction Data',
+            'order-id'            => 'Order Id',
+            'status'              => 'Status',
+            'created-at'          => 'Created At',
+            'transaction-details' => 'Transaction Details'
         ]
     ],
 

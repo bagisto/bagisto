@@ -68,6 +68,8 @@ class Transaction
                     $this->orderTransactionRepository->create($transactionData);
                 }
             }
+        } else if ($invoice->order->payment->method == 'paypal_standard') {
+
         }
     }
 }

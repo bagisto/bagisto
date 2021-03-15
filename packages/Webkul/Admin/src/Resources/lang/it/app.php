@@ -80,7 +80,8 @@ return [
         'campaigns' => 'Campaigns',
         'email-templates' => 'Email Templates',
         'discount' => 'Sconti',
-        'cms' => 'CMS'
+        'cms' => 'CMS',
+        'transactions' => 'Transactions'
     ],
 
     'acl' => [
@@ -239,7 +240,9 @@ return [
         'view' => 'Vedi',
         'rtl' => 'RTL',
         'ltr' => 'LTR',
-        'update-status' => 'Update Stato'
+        'update-status' => 'Update Stato',
+        'transaction-id' => 'Transaction Id',
+        'transaction-date' => 'Transaction Date',
     ],
 
     'account' => [
@@ -392,7 +395,8 @@ return [
             'submit-comment' => 'Invia Commento',
             'notify-customer' => 'Notifica Cliente',
             'customer-notified' => ':date | Cliente <b>Notificato</b>',
-            'customer-not-notified' => ':date | Cliente <b>Non Notificato</b>'
+            'customer-not-notified' => ':date | Cliente <b>Non Notificato</b>',
+            'transactions' => 'Transactions'
         ],
 
         'invoices' => [
@@ -468,6 +472,20 @@ return [
             'view-title' => 'Rimborso #:refund_id',
             'invalid-refund-amount-error' => 'La somma rimborsata dovrebbe essere diversa da zero.'
 
+        ],
+
+        'transactions' => [
+            'title'               => 'Transactions',
+            'id'                  => 'Id',
+            'transaction-id'      => 'Transaction Id',
+            'payment-method'      => 'Payment method',
+            'action'              => 'Action',
+            'view-title'          => 'Transaction #:transaction_id',
+            'transaction-data'    => 'Transaction Data',
+            'order-id'            => 'Order Id',
+            'status'              => 'Status',
+            'created-at'          => 'Created At',
+            'transaction-details' => 'Transaction Details'
         ]
     ],
 
